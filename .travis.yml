@@ -21,7 +21,7 @@ stages:
   - name: mock tests
     if: branch = master AND type != pull_request
   - name: build a container
-    if: tag IS present AND tag =~ ^container/.+
+    if: (branch = master AND type IN (push)) OR tag =~ ^container/.+
 
 matrix:
   fast_finish: true
@@ -72,11 +72,15 @@ matrix:
     install: skip
     script:
       - source .scripts/set_up_container_build_data.sh
-      - docker build --cache-from resilient/ubi8 -t ${ARTIFACTORY_URL}/resilient/${INTEGRATION_NAME}:latest 
-        -t ${ARTIFACTORY_URL}/resilient/${INTEGRATION_NAME}:${INTEGRATION_VERSION} ./${INTEGRATION_NAME}
-      - echo "$ARTIFACTORY_PASSWORD" | docker login --password-stdin --username "$ARTIFACTORY_USERNAME" https://${ARTIFACTORY_URL}/
-      - docker push ${ARTIFACTORY_URL}/resilient/${INTEGRATION_NAME}:latest
-      - docker push ${ARTIFACTORY_URL}/resilient/${INTEGRATION_NAME}:${INTEGRATION_VERSION}
+      # if there are failed containers send a message with their list
+      - if [[ -n "${FAILED_CONTAINERS[*]}" ]]; then ./send_notification.sh "${FAILED_CONTAINERS[*]}" failure; fi
+
+# These will send status of every build job. For finer control they can be included in each stage instead
+after_success:
+- ./send_notification.sh
+after_failure:
+- ./send_notification.sh "" failure
+
 
 install:
 - pip install --upgrade pip
@@ -87,8 +91,3 @@ install:
 - pip install resilient
 - pip install resilient-circuits
 - pip install pytest-resilient-circuits
-
-notifications:
-  slack:
-    secure: RIoi5pMfKCvSDA1GUZbVKk5dCr2MyGwncvvIUYb495SJxamfQ3fSOp/yGQEqb6mbWl3+4bj5zjxam4kkB4icrxeJxBvjN5xpnK/Xc/OKDIcXg99qrtKudfkWQZEWRpwamHjGSHmPovRiIfxZ5Zh5hKCsTWd/GAaeTK+RmUSo+N0Tsh4LUesMFrsEt0GobvaHB9MTDLzXNyiHZArKO5WIguzwSaF0vWC/1pIAQA2dYnSpe2ijGPJ1NlPsSCedqJZRP2wfOHyxsL/MdAEkQttOP5RuN0ipyWjmzwwN9777A7F8SwenpSzysSLRtCa/ouCjKtHyYX0Ni71bDUvvefK5F009vOgXtujHJz9QiWyDMKNlA3DlGJvwIID271iAYwVJ+gBbf/9icSyXlJxV/asQrDfvX4BUhltclzAo9VGVE4OcHY0m1b8TNpW+c1O9nSwEGKRmYuAlQNZ+13/JqJck/xoEp7ra+9vnN2fsalXnRZfMVuVdXlERWCJpeJgjxHYXcSdj8IizUuaA0nQkfXp9yoOUJ5Dcqb6MYOukpFQxHragrZl4xKjgngUKi4J+W0HPLk0sxsawa1EDnq42SxQIegBIRc01ghfiW+ig2+aehGzirb+qqIuRpVwskjCDeM52JgaPTTQKEMltY54o+29b4LULUt6nWHMaau1OUExIJMw=
-  email: false

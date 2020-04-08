@@ -1,21 +1,105 @@
 #!/bin/bash
-# This script pulls out the name of the integration out of the tag pushed
-# It then pulls out current version of the integration from its setup.py
+# This script either
+# - pulls out the name of the integration out of the tag pushed
+# - or gets a list of all changed integrations based on the TRAVIS_COMMIT_RANGE
+# It then pulls out current version of each integration from its setup.py
+# builds its Dockerfile and pushes it up to the artifactory.
 
-export INTEGRATION_NAME=$(echo $TRAVIS_TAG | cut -d "/" -f 2)
+packages_that_have_been_changed=()
+skipped_packages=()
 
-setup_file="$(dirname $BASH_SOURCE)/../$INTEGRATION_NAME/setup.py"
-
-if [ ! -e "$setup_file" ]
-then
-    echo "Chosen integration $INTEGRATION_NAME doesn't have setup.py"
-    exit 1
+if [ -z $TRAVIS_TAG ]; then
+	echo "Build is triggered with a commit to master - collecting changed packages."
+	# For every file in the PR/commit diff
+	# Replacing ... w/ ..: https://github.com/travis-ci/travis-ci/issues/4596
+	for file in $(git diff --name-only ${TRAVIS_COMMIT_RANGE/.../..}); 
+	do 
+	    # If the file contains either fn_ or rc_ in the path 
+	    if [[ $file =~ (fn_|rc-)+ ]]; then 
+	    	# Strip everything except the first directory in the path (integration name) and append to an array
+	    	packages_that_have_been_changed+=($(echo "$file" | awk -F "/" '{print $1}')); 
+	    fi
+	done
+else
+	echo "Build is triggered with a tag push. Collecting the integration"
+	# required tag format is container/<name>/# - name gets taken out
+	packages_that_have_been_changed+=($(echo $TRAVIS_TAG | cut -d "/" -f 2)); 
 fi
 
-# To get version of the integration we first extract line verion=<version> from setup.py, from where we extract
-# the actual version substring. Doing it in 2 steps to avoid using Perl style regex with lookahead capabilities
-export INTEGRATION_VERSION=$(cat "$setup_file" | grep -o "version=['\"][0-9.]*['\"]" | grep -oE "[0-9.]+")
+INTEGRATIONS=($(for v in "${packages_that_have_been_changed[@]}"; do echo "$v";done| sort| uniq| xargs));
 
-echo "Integration's version is: $INTEGRATION_VERSION"
 
-exit 0
+if [ -z "$INTEGRATIONS" ]; then
+      echo "Did not find any integrations that were modified"
+      # We're using return and not exit, because we are sourcing this script and don't want to kill the job
+      return 0
+else
+      echo "Most recently modified integrations from last commit show as : ${INTEGRATIONS}"
+fi
+
+echo "Logging in to Artifactory"
+echo "$ARTIFACTORY_PASSWORD" | docker login --password-stdin --username "$ARTIFACTORY_USERNAME" https://${ARTIFACTORY_URL}/
+if [ $? -ne 0 ]; then
+	echo "Failed log in to artifactory"
+	set -e
+	return 1
+fi   	
+
+echo "Logging in to Quay"
+echo "$QUAY_PASSWORD" | docker login --password-stdin --username "$QUAY_USERNAME" https://${QUAY_URL}/
+if [ $? -ne 0 ]; then
+	echo "Failed log in to Quay"
+	set -e
+	return 1
+fi   	
+
+for integration in ${INTEGRATIONS[@]};
+do 
+    echo "Building and deploying: $integration" 
+    # get the setup.py file for current integration
+    setup_file="$(dirname $BASH_SOURCE)/../$integration/setup.py"
+    if [ ! -e "$setup_file" ]; then
+        echo "Chosen integration $integration doesn't have setup.py"
+        skipped_packages+=($integration)
+        continue
+    fi
+	# To get version of the integration we first extract line verion=<version> from setup.py, from where we extract
+	# the actual version substring. Doing it in 2 steps to avoid using Perl style regex with lookahead capabilities
+	integration_version=$(cat "$setup_file" | grep -o "version=['\"][0-9.]*['\"]" | grep -oE "[0-9.]+")
+	if [ -z "$integration_version" ]; then
+		echo "Couldn't detect version for package $integration. Make sure it's listed as version=<version>."
+		skipped_packages+=($integration)
+		continue
+	fi
+	echo "$(echo $integration)'s version is: $integration_version"
+
+	ARTIFACTORY_LABEL=${ARTIFACTORY_URL}/resilient/${integration}:${integration_version}
+	QUAY_LABEL=${QUAY_URL}/${QUAY_USERNAME}/${integration}:${integration_version}
+
+	docker build \
+	  -t ${ARTIFACTORY_LABEL} \
+	  -t ${QUAY_LABEL} ./${integration}
+	if [ $? -ne 0 ]; then
+		skipped_packages+=($integration)
+		continue
+	fi
+
+	docker push ${ARTIFACTORY_LABEL}
+	if [ $? -ne 0 ]; then
+		skipped_packages+=($integration)
+		continue
+	fi
+
+	docker push ${QUAY_LABEL}
+	if [ $? -ne 0 ]; then
+		echo "Pushed the version tag, but did not label as the latest."
+		skipped_packages+=($integration)
+		continue
+	fi
+done
+
+if [[ -n "${skipped_packages[*]}" ]]; then
+	echo "Wasn't able to build and push the following integrations: $skipped_packages"
+	echo "Fix the errors and create tags to deploy each individually."
+	export FAILED_CONTAINERS=$skipped_packages
+fi
