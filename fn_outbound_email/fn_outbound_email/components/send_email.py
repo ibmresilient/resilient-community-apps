@@ -62,6 +62,11 @@ class FunctionComponent(ResilientComponent):
             mail_body_text = kwargs.get("mail_body_text")  # text
             mail_incident_id = kwargs.get("mail_incident_id")  # number
 
+            if not mail_from: mail_from = "N/A"
+            if not mail_cc: mail_cc = "N/A"
+            if not mail_bcc: mail_bcc = "N/A"
+            if not mail_subject: mail_subject = "N/A"
+            
             log.info("mail_from: %s", mail_from)
             log.info("mail_to: %s", mail_to)
             log.info("mail_cc: %s", mail_cc)
@@ -93,12 +98,11 @@ class FunctionComponent(ResilientComponent):
             if mail_body_html:
                 log.info("Rendering template")
                 mail_body_html = send_smtp_email.render_template(mail_body_html, self.incident_data, self.mail_data)
-                dummy_text = mail_body_html
+                text = mail_body_html
                 email_message = send_smtp_email.send(body_html=mail_body_html)
             elif mail_body_text:
-                log.info("Rendering template")
-                mail_body_text = send_smtp_email.render_template(mail_body_text, self.incident_data, self.mail_data)
-                dummy_text = mail_body_text
+                log.info("Rendering text")
+                text = mail_body_text
                 email_message = send_smtp_email.send(body_text=mail_body_text)
 
             if not email_message:
@@ -107,9 +111,9 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Done with sending email...")
             
             results = payload.done(success=True, content={
-                "inputs" : [mail_from if mail_from else "N/A", mail_to if mail_to else "N/A", mail_cc if mail_cc else "N/A", mail_bcc if mail_bcc else "N/A", mail_subject if mail_subject else "N/A"],
+                "inputs" : [mail_from, mail_to, mail_cc, mail_bcc, mail_subject],
                 "message": email_message,
-                "text" : dummy_text
+                "text" : text
             })
 
             # Produce a FunctionResult with the results

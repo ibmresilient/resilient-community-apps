@@ -24,14 +24,14 @@
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `mail_bcc` | `text` | No | `-` | - |
-| `mail_body_html` | `text` | No | `-` | - |
-| `mail_body_text` | `text` | No | `-` | - |
-| `mail_cc` | `text` | No | `-` | - |
-| `mail_from` | `text` | No | `-` | - |
-| `mail_incident_id` | `number` | No | `-` | - |
-| `mail_subject` | `text` | No | `-` | - |
-| `mail_to` | `text` | No | `-` | - |
+| `mail_bcc` | `text` | No | `changeme@email.com` | edit in script or app.config (precedence on smtp_user) |
+| `mail_body_html` | `text` | No | `<html>` | template in script |
+| `mail_body_text` | `text` | No | `plain_text` | template in script |
+| `mail_cc` | `text` | No | `changeme@email.com` | user input |
+| `mail_from` | `text` | No | `changeme@email.com` | edit in script or app.config (precedence on smtp_user) |
+| `mail_incident_id` | `number` | No | `2085` | Taken from incident  |
+| `mail_subject` | `text` | No | `[incident type id]` | Taken from incident |
+| `mail_to` | `text` | Yes | `changeme@email.com` | user_input |
 
 </p>
 </details>
@@ -50,7 +50,7 @@
 inputs.mail_to = rule.properties.mail_to
 inputs.mail_cc = rule.properties.mail_cc
 inputs.mail_incident_id = incident.id
-inputs.mail_from = "changeme.resilientsystems.com"
+inputs.mail_from = "changeme@resilientsystems.com"
 inputs.mail_subject = "[{0}] {1}".format(incident.id, incident.name)
 
 inputs.mail_body_html = """
@@ -95,7 +95,6 @@ inputs.mail_body_html = """
 
 ```python
 if results.success:
-  dummy = "N/A"
   noteText = u"Email Sent if mail server is valid/authenticated\n From: {0}\n To: {1}\n CC: {2}\n BCC: {3}\n Subject: {4}\n Body: {5}".format(results.content.inputs[0].strip("u\"[]"), results.content.inputs[1].strip("u\"[]"), results.content.inputs[2].strip("u\"[]"), results.content.inputs[3].strip("u\"[]"), results.content.inputs[4].strip("u\""), results.content.text )   
 else:
   noteText = u"Email NOT Sent\n From: {0}\n To: {1}".format(results.content.inputs[0].strip("u\"[]"), results.content.inputs[1].strip("u\"[]"))
@@ -121,14 +120,15 @@ results = {
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `mail_bcc` | `text` | No | `-` | - |
-| `mail_body_html` | `text` | No | `-` | - |
-| `mail_body_text` | `text` | No | `-` | - |
-| `mail_cc` | `text` | No | `-` | - |
-| `mail_from` | `text` | No | `-` | - |
-| `mail_incident_id` | `number` | No | `-` | - |
-| `mail_subject` | `text` | No | `-` | - |
-| `mail_to` | `text` | No | `-` | - |
+| `mail_bcc` | `text` | No | `changeme@email.com` | edit in script or app.config (precedence on smtp_user) |
+| `mail_body_html` | `text` | No | `<html>` | template in script |
+| `mail_body_text` | `text` | No | `plain_text` | template in script |
+| `mail_cc` | `text` | No | `changeme@email.com` | user input |
+| `mail_from` | `text` | No | `changeme@email.com` | edit in script or app.config (precedence on smtp_user) |
+| `mail_incident_id` | `number` | No | `2085` | Taken from incident  |
+| `mail_subject` | `text` | No | `[incident type id]` | Taken from incident |
+| `mail_to` | `text` | Yes | `changeme@email.com` | user_input |
+
 
 </p>
 </details>
@@ -154,16 +154,22 @@ results = {
 inputs.mail_to = rule.properties.mail_to
 inputs.mail_cc = rule.properties.mail_cc
 inputs.mail_incident_id = incident.id
-inputs.mail_from = "changeme.resilientsystems.com"
+inputs.mail_from = "changeme@resilientsystems.com"
 inputs.mail_subject = "[{0}] {1}".format(incident.id, incident.name)
 
-inputs.mail_body_html = """
+from java.util import Date
+creation_date = Date(incident.create_date)
+type_ids = u",".join(incident.incident_type_ids)
+sev_code = u"{}".format(incident.severity_code)
+current_plan = u"[]".format(incident.plan_status)
+
+inputs.mail_body_text = """
 Incident Summary:
-    Severity Code: {{ incident.severity_code }}
-    Plan Status: {{ incident.plan_status }}
-    Created: {{ template_helper.format_timestamp(incident.create_date) }}
-    Incident Type: {{ incident.incident_type_ids }}
-"""
+    Severity Code: {0}
+    Plan Status: {1}
+    Created: {2}
+    Incident Type: {3}
+""".format(sev_code, current_plan, creation_date, type_ids)
 ```
 
 </p>
@@ -174,7 +180,6 @@ Incident Summary:
 
 ```python
 if results.success:
-  dummy = "N/A"
   noteText = u"Email Sent if mail server is valid/authenticated\n From: {0}\n To: {1}\n CC: {2}\n BCC: {3}\n Subject: {4}\n Body: {5}".format(results.content.inputs[0].strip("u\"[]"), results.content.inputs[1].strip("u\"[]"), results.content.inputs[2].strip("u\"[]"), results.content.inputs[3].strip("u\"[]"), results.content.inputs[4].strip("u\""), results.content.text )   
 else:
   noteText = u"Email NOT Sent\n From: {0}\n To: {1}".format(results.content.inputs[0].strip("u\"[]"), results.content.inputs[1].strip("u\"[]"))
