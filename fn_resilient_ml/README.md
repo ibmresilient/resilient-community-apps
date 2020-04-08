@@ -15,14 +15,7 @@ Please refer to the User Guide for instructions on building the model and runnin
 - The minimum set of Resilient API permissions if using an API key account:
     - Incidents.Read
     - Edit Org Data
-    - Scripts.Edit
-    - Scripts.Create
-    - Workflows.Edit
-    - Workflows.Create
     - Functions.Read
-    - Functions.Edit
-    - Functions.Create
-    - Other.ReadIncidentActionInvocations
 
 ## Package Dependences
 - sklearn 0.19.2
