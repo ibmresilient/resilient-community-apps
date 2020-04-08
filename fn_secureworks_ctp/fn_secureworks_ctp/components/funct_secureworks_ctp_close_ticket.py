@@ -4,7 +4,7 @@
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import validate_fields, ResultPayload, IntegrationError
+from resilient_lib import validate_fields, ResultPayload, IntegrationError, clean_html
 from fn_secureworks_ctp.lib.scwx_ctp_client import SCWXClient
 
 CONFIG_DATA_SECTION = "fn_secureworks_ctp"
@@ -54,16 +54,18 @@ class FunctionComponent(ResilientComponent):
             # Get the incident
             uri = u"/incidents/{}?handle_format=names".format(incident_id)
             incident = self.rest_client().get(uri)
-            resolution_summary = incident.get('resolution_summary')
+
+            # Make sure there is an SecureWorks CTP ticket assocaited with this incident
             ticket_id = incident['properties']['scwx_ctp_ticket_id']
             if not ticket_id:
                 raise IntegrationError("Secureworks CTP close ticket: Incident {0} does not contain a ticketId", incident_id)
 
+            resolution_summary = clean_html(incident.get('resolution_summary'))
             close_code = incident['properties']['scwx_ctp_close_code']
 
             response = self.scwx_client.post_tickets_close(ticket_id, resolution_summary, close_code)
 
-            if response.get('status_code') == 200:
+            if (response.get('code') == 'SUCCESS'):
                 success = True
             else:
                 success = False

@@ -92,10 +92,11 @@ class SCWXClient(object):
         """POST close a ticket"""
 
         url = u"{0}/tickets/{1}/close".format(self.base_url, ticket_id)
+
         payload = {'worklogContent': reason_summary,
                    'closeCode': close_code}
 
-        response = self.rc.execute_call_v2("post", url, headers=self.headers, params=payload, verify=self.bundle,
+        response = self.rc.execute_call_v2("post", url, headers=self.headers, json=payload, verify=self.bundle,
                                            proxies=self.rc.get_proxies())
         LOG.debug(u"Response: %s", response.text)
         response.raise_for_status()

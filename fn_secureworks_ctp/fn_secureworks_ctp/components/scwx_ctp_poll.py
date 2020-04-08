@@ -61,6 +61,9 @@ class SecureworksCTPPollComponent(ResilientComponent):
         env.globals.update({"readable_datetime": readable_datetime})
         env.filters.update({"readable_datetime": readable_datetime})
 
+        if self.close_codes:
+            response = self.init_close_codes(self.close_codes)
+
         LOG.info(u"Secureworks CTP escalation initiated, polling interval %s", self.polling_interval)
         Timer(self.polling_interval, Poll(), persist=False).register(self)
 
@@ -92,7 +95,9 @@ class SecureworksCTPPollComponent(ResilientComponent):
         validate_fields(required_fields, self.options)
 
         self.polling_interval = int(self.options.get("polling_interval", DEFAULT_POLL_SECONDS))
-
+        if self.options.get("close_codes"):
+            close_codes_string = self.options.get("close_codes")
+            self.close_codes = [code.strip() for code in close_codes_string.split(',')]
         # Create Secureworks client
         self.scwx_client = SCWXClient(self.opts, self.options)
 
@@ -121,7 +126,6 @@ class SecureworksCTPPollComponent(ResilientComponent):
                 if not resilient_incident:
                     # Create a new incident for this Secureworks CTP ticket.
                     resilient_incident = self._create_incident(ticket)
-                    self.add_closing_codes(resilient_incident, ticket)
 
                 # Add ticket worklogs to the incident as notes
                 self.add_worklog_notes(resilient_incident, ticket)
@@ -334,9 +338,25 @@ class SecureworksCTPPollComponent(ResilientComponent):
         except Exception as err:
             raise err
 
-    def add_closing_codes(self, incident, ticket):
-        ticket_id = ticket.get('ticketId')
-        incident_id = incident.get('id')
+    def init_close_codes(self, close_codes):
+        """
+        init_close_codes takes a list of string close-codes for Secureworks CTP and places them in the
+        select (swcx_ctp_close_code custom incident field) input type.  There are default codes defined in
+        the Resilient UI but users can override the select list via app.config 'close_codes' parameter.
+        This function will
+        :param close_codes: list of strings (each string will be an entry in the select list) which will appear
+        in the Resilient Close Incident popup 
+        :return:
+        """
+        uri = '/types/incident/fields/scwx_ctp_close_code'
+        get_response = self.rest_client().get(uri)
+        values = []
+        for code in close_codes:
+            entry = {'label': code,
+                     'enabled': True,
+                     'hidden': False}
+            values.append(entry)
+        get_response['values'] = values
+        put_response = self.rest_client().put(uri, payload=get_response)
 
-        #codes = self.scwx_client.get_tickets_close_codes(ticket_id)
-        codes = self.scwx_client.get_tickets_close_codes("IN35579566")
+        return put_response
