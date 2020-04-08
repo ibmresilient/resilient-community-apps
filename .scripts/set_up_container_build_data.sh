@@ -5,6 +5,36 @@
 # It then pulls out current version of each integration from its setup.py
 # builds its Dockerfile and pushes it up to the artifactory.
 
+# Logs in to repository at given URL with username and passowrd
+# Args: URL, username, password
+function repo_login (){
+	echo "$3" | docker login --password-stdin --username "$2" https://${1}/
+}
+
+# Build a container
+# Args: Name and the tags to attach
+function container_build (){
+	argc=$#
+	argv=("$@")
+
+	docker build -t resilient/${integration} ./${integration}
+	if [ $? -ne 0 ]; then
+		return 1
+	fi
+
+	# for tags we will iterate only starting with 2nd argument
+	# and tag built image with the following tag
+	for (( j=2; j<=argc; j++ )); do
+	    docker tag resilient/${integration} "${argv[j]}"
+	done
+}
+
+# Pushes container with a given label
+# Args: label to push
+function container_push (){
+	docker push $1
+}
+
 packages_that_have_been_changed=()
 skipped_packages=()
 
@@ -38,7 +68,7 @@ else
 fi
 
 echo "Logging in to Artifactory"
-echo "$ARTIFACTORY_PASSWORD" | docker login --password-stdin --username "$ARTIFACTORY_USERNAME" https://${ARTIFACTORY_URL}/
+repo_login $ARTIFACTORY_URL $ARTIFACTORY_USERNAME $ARTIFACTORY_PASSWORD
 if [ $? -ne 0 ]; then
 	echo "Failed log in to artifactory"
 	set -e
@@ -46,7 +76,7 @@ if [ $? -ne 0 ]; then
 fi   	
 
 echo "Logging in to Quay"
-echo "$QUAY_PASSWORD" | docker login --password-stdin --username "$QUAY_USERNAME" https://${QUAY_URL}/
+repo_login $QUAY_URL $QUAY_USERNAME $QUAY_PASSWORD
 if [ $? -ne 0 ]; then
 	echo "Failed log in to Quay"
 	set -e
@@ -76,21 +106,19 @@ do
 	ARTIFACTORY_LABEL=${ARTIFACTORY_URL}/resilient/${integration}:${integration_version}
 	QUAY_LABEL=${QUAY_URL}/${QUAY_USERNAME}/${integration}:${integration_version}
 
-	docker build \
-	  -t ${ARTIFACTORY_LABEL} \
-	  -t ${QUAY_LABEL} ./${integration}
+	container_build $integration $ARTIFACTORY_LABEL $QUAY_LABEL
 	if [ $? -ne 0 ]; then
 		skipped_packages+=($integration)
 		continue
 	fi
 
-	docker push ${ARTIFACTORY_LABEL}
+	container_push $ARTIFACTORY_LABEL
 	if [ $? -ne 0 ]; then
 		skipped_packages+=($integration)
 		continue
 	fi
 
-	docker push ${QUAY_LABEL}
+	container_push $QUAY_LABEL
 	if [ $? -ne 0 ]; then
 		echo "Pushed the version tag, but did not label as the latest."
 		skipped_packages+=($integration)
