@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -v
 # This script either
 # - pulls out the name of the integration out of the tag pushed
 # - or gets a list of all changed integrations based on the TRAVIS_COMMIT_RANGE
@@ -104,7 +104,7 @@ do
 	echo "$(echo $integration)'s version is: $integration_version"
 
 	ARTIFACTORY_LABEL=${ARTIFACTORY_URL}/resilient/${integration}:${integration_version}
-	QUAY_LABEL=${QUAY_URL}/${QUAY_USERNAME}/${integration}:${integration_version}
+	QUAY_LABEL=${QUAY_URL}/${QUAY_ORG}/${integration}:${integration_version}
 
 	container_build $integration $ARTIFACTORY_LABEL $QUAY_LABEL
 	if [ $? -ne 0 ]; then
