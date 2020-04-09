@@ -1,4 +1,4 @@
-#!/bin/bash -v
+#!/bin/bash
 # This script either
 # - pulls out the name of the integration out of the tag pushed
 # - or gets a list of all changed integrations based on the TRAVIS_COMMIT_RANGE
