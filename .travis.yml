@@ -17,7 +17,7 @@ branches:
 
 stages:
   - name: latest push
-    if: branch != master AND type=push 
+    if: branch != master AND type=push AND NOT tag =~ ^container/.+ 
   - name: mock tests
     if: branch = master AND type != pull_request
   - name: build a container
