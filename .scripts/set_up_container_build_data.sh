@@ -17,7 +17,7 @@ function container_build (){
 	argc=$#
 	argv=("$@")
 
-	docker build -t resilient/${integration} ./${integration}
+	docker build -t resilient/${1} ./${1}
 	if [ $? -ne 0 ]; then
 		return 1
 	fi
@@ -25,7 +25,8 @@ function container_build (){
 	# for tags we will iterate only starting with 2nd argument
 	# and tag built image with the following tag
 	for (( j=2; j<=argc; j++ )); do
-	    docker tag resilient/${integration} "${argv[j]}"
+		echo "- ${argv[j]}"
+		docker tag resilient/${1} "${argv[j]}"
 	done
 }
 
@@ -116,7 +117,7 @@ do
 	ARTIFACTORY_LABEL=${ARTIFACTORY_URL}/resilient/${integration}:${integration_version}
 	QUAY_LABEL=${QUAY_URL}/${QUAY_ORG}/${integration}:${integration_version}
 
-	container_build $integration $ARTIFACTORY_LABEL $QUAY_LABEL
+	container_build $integration "$ARTIFACTORY_LABEL" "$QUAY_LABEL"
 	if [ $? -ne 0 ]; then
 		skipped_packages+=($integration)
 		continue
