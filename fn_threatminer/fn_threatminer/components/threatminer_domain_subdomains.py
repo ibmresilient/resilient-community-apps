@@ -3,9 +3,8 @@
 """Function implementation"""
 
 import logging
+from fn_threatminer.lib.threatminer_common import ThreatMiner, PACKAGE
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-import fn_threatminer.util.selftest as selftest
-import requests
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'threatminer_domain_subdomains"""
@@ -13,15 +12,16 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get("fn_threatminer", {})
-        selftest.selftest_function(opts)
+        self.options = opts.get(PACKAGE, {})
+        self.threatminer = ThreatMiner(opts, self.options)
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values
 
         """
-        self.options = opts.get("fn_threatminer", {})
+        self.options = opts.get(PACKAGE, {})
+        self.threatminer = ThreatMiner(opts, self.options)
 
     @function("threatminer_domain_subdomains")
     def _threatminer_domain_subdomains_function(self, event, *args, **kwargs):
@@ -35,25 +35,13 @@ class FunctionComponent(ResilientComponent):
 
             # PUT YOUR FUNCTION IMPLEMENTATION CODE HERE
             yield StatusMessage("starting...")
-            url = self.options.get('url', None)
-            if not url:
-                raise ValueError('missing url from [fn_threatminer] in app_config')
 
-            response = requests.get("{}/domain.php?q={}&rt={}".format(url,domain_name,'5'))
+            data, msg = self.threatminer.get(u'/domain.php?q={}&rt={}'.format(domain_name, '5'))
 
-            if response.status_code == 200:
-                yield StatusMessage("Results Returned for {}".format(domain_name))
-            elif response.status_code == 404:
-                yield StatusMessage("No Results Returned for {}".format(domain_name))
-            else:
-                raise Exception("Unexpected return code of {}".format(response.status_code))
-
-            domain_subdomain_data = response.text
-
-
+            yield StatusMessage(u"{} for {}".format(msg, domain_name))
 
             results = {
-                "subdomains": domain_subdomain_data
+                "subdomains": data
             }
             yield StatusMessage("done...")
 

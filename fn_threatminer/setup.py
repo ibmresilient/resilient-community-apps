@@ -2,10 +2,24 @@
 # -*- coding: utf-8 -*-
 
 from setuptools import setup, find_packages
+import glob
+import ntpath
+
+def get_module_name(module_path):
+    """
+    Return the module name of the module path
+    """
+    return ntpath.split(module_path)[1].split(".")[0]
+
+def snake_to_camel(word):
+    """
+    Convert a word from snake_case to CamelCase
+    """
+    return ''.join(x.capitalize() or '_' for x in word.split('_'))
 
 setup(
     name='fn_threatminer',
-    version='1.0.0',
+    version='1.0.1',
     license='MIT License',
     author='Michael Piekarski',
     author_email='mpiekarski@essextec.com',
@@ -15,6 +29,7 @@ setup(
     install_requires=[
         'resilient_circuits>=30.0.0',
         'requests',
+        'resilient_lib'
     ],
     packages=find_packages(),
     include_package_data=True,
@@ -24,11 +39,8 @@ setup(
     ],
     entry_points={
         "resilient.circuits.components": [
-            "ThreatminerDomainWhoisFunctionComponent = fn_threatminer.components.threatminer_domain_whois:FunctionComponent",
-            "ThreatminerEmailReverseFunctionComponent = fn_threatminer.components.threatminer_email_reverse:FunctionComponent",
-            "ThreatminerSamplesMetadataFunctionComponent = fn_threatminer.components.threatminer_samples_metadata:FunctionComponent",
-            "ThreatminerIpWhoisFunctionComponent = fn_threatminer.components.threatminer_ip_whois:FunctionComponent",
-            "ThreatminerDomainSubdomainsFunctionComponent = fn_threatminer.components.threatminer_domain_subdomains:FunctionComponent"
+            # When setup.py is executed, loop through the .py files in the components directory and create the entry points.
+            "{}FunctionComponent = fn_threatminer.components.{}:FunctionComponent".format(snake_to_camel(get_module_name(filename)), get_module_name(filename)) for filename in glob.glob("./fn_threatminer/components/[a-zA-Z]*.py")
         ],
         "resilient.circuits.configsection": ["gen_config = fn_threatminer.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_threatminer.util.customize:customization_data"],

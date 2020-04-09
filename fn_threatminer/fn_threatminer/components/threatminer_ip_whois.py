@@ -3,11 +3,8 @@
 """Function implementation"""
 
 import logging
-import requests
+from fn_threatminer.lib.threatminer_common import ThreatMiner, PACKAGE
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-import fn_threatminer.util.selftest as selftest
-
-
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'threatminer_ip_whois"""
@@ -15,16 +12,16 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get("fn_threatminer", {})
-        selftest.selftest_function(opts)
+        self.options = opts.get(PACKAGE, {})
+        self.threatminer = ThreatMiner(opts, self.options)
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values
 
         """
-
-        self.options = opts.get("fn_threatminer", {})
+        self.options = opts.get(PACKAGE, {})
+        self.threatminer = ThreatMiner(opts, self.options)
 
     @function("threatminer_ip_whois")
     def _threatminer_ip_whois_function(self, event, *args, **kwargs):
@@ -39,29 +36,15 @@ class FunctionComponent(ResilientComponent):
             # PUT YOUR FUNCTION IMPLEMENTATION CODE HERE
             yield StatusMessage("starting...")
 
-            url = self.options.get('url', None)
-            if not url:
-                raise ValueError('missing url from [fn_threatminer] in app_config')
+            data, msg = self.threatminer.get(u'/host.php?q={}&rt={}'.format(ip_address, '1'))
 
-            response = requests.get('{}/host.php?q={}&rt={}'.format(url, ip_address, '1'))
-
-            if response.status_code == 200:
-                yield StatusMessage('Results returned for {}'.format(ip_address))
-            elif response.status_code == 404:
-                yield StatusMessage('No Results Returned for {}'.format(ip_address))
-            else:
-                yield StatusMessage('Unexpected return code of {}'.format(response.status_code))
-
-            ip_whois_data = response.text
+            yield StatusMessage(u"{} for {}".format(msg, ip_address))
 
             yield StatusMessage("done...")
 
             results = {
-                "whois": ip_whois_data
+                "whois": data
             }
-            #  yield StatusMessage("starting...")
-            #  yield StatusMessage("done...")
-
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

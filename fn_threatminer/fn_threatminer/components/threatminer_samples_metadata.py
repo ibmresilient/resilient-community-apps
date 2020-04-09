@@ -3,9 +3,8 @@
 """Function implementation"""
 
 import logging
-import requests
+from fn_threatminer.lib.threatminer_common import ThreatMiner, PACKAGE
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-import fn_threatminer.util.selftest as selftest
 
 
 class FunctionComponent(ResilientComponent):
@@ -14,13 +13,14 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get("fn_threatminer", {})
-        selftest.selftest_function(opts)
+        self.options = opts.get(PACKAGE, {})
+        self.threatminer = ThreatMiner(opts, self.options)
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
-        self.options = opts.get("fn_threatminer", {})
+        self.options = opts.get(PACKAGE, {})
+        self.threatminer = ThreatMiner(opts, self.options)
 
     @function("threatminer_samples_metadata")
     def _threatminer_samples_metadata_function(self, event, *args, **kwargs):
@@ -35,25 +35,14 @@ class FunctionComponent(ResilientComponent):
             # PUT YOUR FUNCTION IMPLEMENTATION CODE HERE
             yield StatusMessage("starting...")
 
-            url = self.options.get('url', None)
-            if not url:
-                raise ValueError('missing url from [fn_threatminer] in app_config')
+            data, msg = self.threatminer.get(u'/sample.php?q={}&rt=1'.format(md5_hash))
 
-            response = requests.get('{}/sample.php?q={}&rt=1'.format(url, md5_hash))
-
-            if response.status_code == 200:
-                yield StatusMessage('Results returned for {}'.format(md5_hash))
-            elif response.status_code == 404:
-                yield StatusMessage('No Results Returned for {}'.format(md5_hash))
-            else:
-                yield StatusMessage('Unexpected return code of {}'.format(response.status_code))
-
-            metadata = response.text
+            yield StatusMessage(u"{} for {}".format(msg, md5_hash))
 
             yield StatusMessage("done...")
 
             results = {
-                "metadata": metadata
+                "metadata": data
             }
 
             # Produce a FunctionResult with the results
