@@ -124,15 +124,16 @@ do
 		continue
 	fi
 
-	# container_push $ARTIFACTORY_LABEL
-	# if [ $? -ne 0 ]; then
-	# 	skipped_packages+=($integration)
-	# 	continue
-	# fi
+	container_push $ARTIFACTORY_LABEL
+	if [ $? -ne 0 ]; then
+		echo "Failed to push to Artifactory."
+		skipped_packages+=($integration)
+		continue
+	fi
 
 	container_push $QUAY_LABEL
 	if [ $? -ne 0 ]; then
-		echo "Pushed the version tag, but did not label as the latest."
+		echo "Failed to push to Quay."
 		skipped_packages+=($integration)
 		continue
 	fi
