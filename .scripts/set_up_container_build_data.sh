@@ -124,11 +124,11 @@ do
 		continue
 	fi
 
-	container_push $ARTIFACTORY_LABEL
-	if [ $? -ne 0 ]; then
-		skipped_packages+=($integration)
-		continue
-	fi
+	# container_push $ARTIFACTORY_LABEL
+	# if [ $? -ne 0 ]; then
+	# 	skipped_packages+=($integration)
+	# 	continue
+	# fi
 
 	container_push $QUAY_LABEL
 	if [ $? -ne 0 ]; then
