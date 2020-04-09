@@ -99,7 +99,7 @@ do
 
     dist_dir="$(dirname $BASH_SOURCE)/../$integration/dist"
     mkdir dist_dir
-    python $setup_file -q sdist --dist-dir $dist_dir
+    (cd $(dirname $setup_file) && python setup.py -q sdist --dist-dir ./dist);
 
     echo "Building container for $integration"
 
