@@ -3,7 +3,7 @@
 """Generate the Resilient customizations required for fn_secureworks_ctp"""
 
 from __future__ import print_function
-from resilient_circuits.util import *
+from resilient import ImportDefinition
 
 def codegen_reload_data():
     """Parameters to codegen used to generate the fn_secureworks_ctp package"""

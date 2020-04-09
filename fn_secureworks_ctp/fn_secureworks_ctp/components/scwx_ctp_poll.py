@@ -343,10 +343,11 @@ class SecureworksCTPPollComponent(ResilientComponent):
         init_close_codes takes a list of string close-codes for Secureworks CTP and places them in the
         select (swcx_ctp_close_code custom incident field) input type.  There are default codes defined in
         the Resilient UI but users can override the select list via app.config 'close_codes' parameter.
-        This function will
+        The close codes are similar to Resilient resolution_id. The select list will appear in the
+        Resilient Close Incident popup when the user closes an incident.
         :param close_codes: list of strings (each string will be an entry in the select list) which will appear
-        in the Resilient Close Incident popup 
-        :return:
+        in the Resilient Close Incident popup
+        :return: response from the 'put' operation
         """
         uri = '/types/incident/fields/scwx_ctp_close_code'
         get_response = self.rest_client().get(uri)

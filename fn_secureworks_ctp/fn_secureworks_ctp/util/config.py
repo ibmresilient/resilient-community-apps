@@ -36,7 +36,7 @@ polling_interval=600
 # Secureworks CTP when the ticket is closed in Secureworks. (scwx_ctp_close_codes incident field in Resilient.)
 # close_codes is a comma separated list of strings.  Each string is an item in the select list.
 #  
-#close_codes=Authorized Activity,Confirmed Security Incident,Duplicate,Incident Misidentified,Inconclusive,Not Actionable,Not Vulnerable,Threat Mitigated
+# close_codes=Authorized Activity,Confirmed Security Incident,Duplicate,Incident Misidentified,Inconclusive,Not Actionable,Not Vulnerable,Threat Mitigated
 
 # Optional - If required by Secureworks CTP
 cafile=
