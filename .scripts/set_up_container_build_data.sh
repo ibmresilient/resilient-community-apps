@@ -87,12 +87,22 @@ for integration in ${INTEGRATIONS[@]};
 do 
     echo "Building and deploying: $integration" 
     # get the setup.py file for current integration
+
     setup_file="$(dirname $BASH_SOURCE)/../$integration/setup.py"
     if [ ! -e "$setup_file" ]; then
         echo "Chosen integration $integration doesn't have setup.py"
         skipped_packages+=($integration)
         continue
     fi
+
+    echo "Building $integration"
+
+    dist_dir="$(dirname $BASH_SOURCE)/../$integration/dist"
+    mkdir dist_dir
+    python $setup_file -q sdist --dist-dir $dist_dir
+
+    echo "Building container for $integration"
+
 	# To get version of the integration we first extract line verion=<version> from setup.py, from where we extract
 	# the actual version substring. Doing it in 2 steps to avoid using Perl style regex with lookahead capabilities
 	integration_version=$(cat "$setup_file" | grep -o "version=['\"][0-9.]*['\"]" | grep -oE "[0-9.]+")
