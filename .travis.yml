@@ -14,6 +14,15 @@ branches:
   except:
     - public
     - /^_.*$/
+
+stages:
+  - name: latest push
+    if: branch != master AND type=push 
+  - name: mock tests
+    if: branch = master AND type != pull_request
+  - name: build a container
+    if: tag =~ ^container/.+ # (branch = master AND type IN (push)) OR  - replacing for a sec
+
 matrix:
   fast_finish: true
   include:
@@ -21,16 +30,15 @@ matrix:
   # ==========	
   # Below jobs are used to run tests against the most recently modified integration. 	
   # We determine the most recent one using git diff and then ensure to only run tests against a package once. 
-  - name: Python 2.7 Build and Run Tests
-    stage: Most Recent Integration
-    if: branch != master AND type=push
+  - stage: latest push
+    name: Python 2.7 Build and Run Tests
     python: 2.7
     env:
     - TOXENV=py27 TEST_RESILIENT_ORG="Resilient Integrations - Test"
     script:
     - echo "2.7 push test" && .scripts/run_most_recent_tests.sh
-  - name: Python 3.6 Build and Run Tests
-    if: branch != master AND type=push
+  - stage: latest push
+    name: Python 3.6 Build and Run Tests
     python: 3.6
     env:
     - TOXENV=py36 TEST_RESILIENT_ORG="Resilient Integrations - Test"
@@ -39,24 +47,41 @@ matrix:
   # Jobs below this line are reserved for master branch 	
   # Master branch is where all the integrations should be tested, its okay if it takes a while 	
   # As we have the push jobs above to handle individual commits
-  - if: branch = master AND type != pull_request
+  - stage: mock tests
     python: 2.7
     name: Py27 Master Build and Run tests
-    stage: Mock Tests
     env:
     - TOXENV=py27 TEST_RESILIENT_ORG="Resilient Integrations - Test"
     script:
     - echo "2.7 Master Build" && .scripts/run_tests.sh
-  - if: branch = master AND type != pull_request
-    stage: Mock Tests
+  - stage: mock tests
     python: 3.6
     name: Py36 Master Build and Run tests
     env:
     - TOXENV=py36 TEST_RESILIENT_ORG="Resilient Integrations - Test"
     script:
     - echo "3.6 Master Build" && .scripts/run_tests.sh
-before_install:
-- echo "About to install"
+  # Next job is started when a tag is pushed of the form container/<name> 
+  # where <name> is a name of an integration directory whose container
+  # will be build and pushed to artifactory with label :latest and :<version>
+  # ARTIFACTORY_URL should be sec-resilient-docker-local.artifactory.swg-devops.com
+  - stage: build a container
+    name: Building containers
+    services:
+      - docker
+    install: skip
+    script:
+      - source .scripts/set_up_container_build_data.sh
+      # if there are failed containers send a message with their list
+      - if [[ -n "${FAILED_CONTAINERS[*]}" ]]; then ./send_notification.sh "${FAILED_CONTAINERS[*]}" failure; fi
+
+# These will send status of every build job. For finer control they can be included in each stage instead
+after_success:
+- ./send_notification.sh
+after_failure:
+- ./send_notification.sh "" failure
+
+
 install:
 - pip install --upgrade pip
 - pip install --upgrade setuptools
@@ -66,13 +91,3 @@ install:
 - pip install resilient
 - pip install resilient-circuits
 - pip install pytest-resilient-circuits
-script:
-- ".scripts/build_packages.sh && .scripts/run_tests.sh"
-after_script:
-- echo "Packages To Deploy"
-- ls -l .scripts/*.tar.gz
-- ls -l .scripts/*.zip
-notifications:
-  slack:
-    secure: RIoi5pMfKCvSDA1GUZbVKk5dCr2MyGwncvvIUYb495SJxamfQ3fSOp/yGQEqb6mbWl3+4bj5zjxam4kkB4icrxeJxBvjN5xpnK/Xc/OKDIcXg99qrtKudfkWQZEWRpwamHjGSHmPovRiIfxZ5Zh5hKCsTWd/GAaeTK+RmUSo+N0Tsh4LUesMFrsEt0GobvaHB9MTDLzXNyiHZArKO5WIguzwSaF0vWC/1pIAQA2dYnSpe2ijGPJ1NlPsSCedqJZRP2wfOHyxsL/MdAEkQttOP5RuN0ipyWjmzwwN9777A7F8SwenpSzysSLRtCa/ouCjKtHyYX0Ni71bDUvvefK5F009vOgXtujHJz9QiWyDMKNlA3DlGJvwIID271iAYwVJ+gBbf/9icSyXlJxV/asQrDfvX4BUhltclzAo9VGVE4OcHY0m1b8TNpW+c1O9nSwEGKRmYuAlQNZ+13/JqJck/xoEp7ra+9vnN2fsalXnRZfMVuVdXlERWCJpeJgjxHYXcSdj8IizUuaA0nQkfXp9yoOUJ5Dcqb6MYOukpFQxHragrZl4xKjgngUKi4J+W0HPLk0sxsawa1EDnq42SxQIegBIRc01ghfiW+ig2+aehGzirb+qqIuRpVwskjCDeM52JgaPTTQKEMltY54o+29b4LULUt6nWHMaau1OUExIJMw=
-  email: false
