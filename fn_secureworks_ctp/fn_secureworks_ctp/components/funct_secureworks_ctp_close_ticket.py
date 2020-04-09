@@ -55,7 +55,7 @@ class FunctionComponent(ResilientComponent):
             uri = u"/incidents/{}?handle_format=names".format(incident_id)
             incident = self.rest_client().get(uri)
 
-            # Make sure there is an SecureWorks CTP ticket assocaited with this incident
+            # Make sure there is an SecureWorks CTP ticket associated with this incident
             ticket_id = incident['properties']['scwx_ctp_ticket_id']
             if not ticket_id:
                 raise IntegrationError("Secureworks CTP close ticket: Incident {0} does not contain a ticketId", incident_id)

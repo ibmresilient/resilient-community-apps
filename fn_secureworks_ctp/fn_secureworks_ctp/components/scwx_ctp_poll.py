@@ -61,6 +61,7 @@ class SecureworksCTPPollComponent(ResilientComponent):
         env.globals.update({"readable_datetime": readable_datetime})
         env.filters.update({"readable_datetime": readable_datetime})
 
+        # If close_codes are defined in the app.config, then load them into the select input list.
         if self.close_codes:
             response = self.init_close_codes(self.close_codes)
 
@@ -95,9 +96,12 @@ class SecureworksCTPPollComponent(ResilientComponent):
         validate_fields(required_fields, self.options)
 
         self.polling_interval = int(self.options.get("polling_interval", DEFAULT_POLL_SECONDS))
+
+        # If close_codes are defined in the app.config, then turn them into a list of string
         if self.options.get("close_codes"):
             close_codes_string = self.options.get("close_codes")
             self.close_codes = [code.strip() for code in close_codes_string.split(',')]
+
         # Create Secureworks client
         self.scwx_client = SCWXClient(self.opts, self.options)
 
@@ -108,8 +112,7 @@ class SecureworksCTPPollComponent(ResilientComponent):
         LOG.info(u"Secureworks CTP escalate.")
         try:
             # Get list of tickets needing updating
-            #response = self.scwx_client.post_tickets_updates()
-            response = self.scwx_client.mock_post_tickets_updates()
+            response = self.scwx_client.post_tickets_updates()
 
             tickets = response.get('tickets')
             ticket_id_list = [ticket.get('ticketId') for ticket in tickets]
@@ -134,8 +137,7 @@ class SecureworksCTPPollComponent(ResilientComponent):
                 self.add_ticket_attachments(resilient_incident, ticket)
 
                 # Acknowledge Secureworks that we have received the tickets.
-                #response_ack = self.scwx_client.post_tickets_acknowledge(ticket)
-                response_ack = [{'code': "SUCCESS", 'ticketId': ticket_id}]
+                response_ack = self.scwx_client.post_tickets_acknowledge(ticket)
 
                 code = response_ack[0].get('code')
                 if code != "SUCCESS":
@@ -246,7 +248,6 @@ class SecureworksCTPPollComponent(ResilientComponent):
     def create_incident_comment(self, incident_id, note):
         """
         Add a comment to the specified Resilient Incident by ID
-
         :param incident_id:  Resilient Incident ID
         :param note: Content to be added as note
         :return: Response from Resilient for debug
@@ -317,9 +318,7 @@ class SecureworksCTPPollComponent(ResilientComponent):
                 attachment_id = attachment.get('id')
 
                 # Get ticket attachment
-                #response = self.scwx_client.get_tickets_attachment(ticket_id, attachment_id)
-                response = {'name': 'Securework-attachment.txt',
-                            'content': 'here is the content '.encode('utf-8')}
+                response = self.scwx_client.get_tickets_attachment(ticket_id, attachment_id)
 
                 content = response.get('content')
                 datastream = BytesIO(content)
@@ -349,14 +348,19 @@ class SecureworksCTPPollComponent(ResilientComponent):
         in the Resilient Close Incident popup
         :return: response from the 'put' operation
         """
+        # Get the current close_code select list.
         uri = '/types/incident/fields/scwx_ctp_close_code'
         get_response = self.rest_client().get(uri)
         values = []
+
+        # Add each close_code as a select list entry.
         for code in close_codes:
             entry = {'label': code,
                      'enabled': True,
                      'hidden': False}
             values.append(entry)
+
+        # Put the new values into the select list to replace the currently values there.
         get_response['values'] = values
         put_response = self.rest_client().put(uri, payload=get_response)
 
