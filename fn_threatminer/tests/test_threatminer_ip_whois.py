@@ -39,6 +39,7 @@ class TestThreatminerIpWhois:
         ("text", {"value": "xyz"}),
         ("text", {"value": "xyz"})
     ])
+    @pytest.mark.livetest
     def test_success(self, circuits_app, ip_address, expected_results):
         """ Test calling with sample values for the parameters """
         function_params = { 
