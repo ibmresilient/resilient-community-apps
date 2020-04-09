@@ -6,6 +6,7 @@
 import tempfile
 import os
 import logging
+import sys
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 
 class FunctionComponent(ResilientComponent):
@@ -27,18 +28,20 @@ class FunctionComponent(ResilientComponent):
         
         try:
             # Check required inputs are defined
-            string_to_convert_to_attachment = kwargs.get('string_to_convert_to_attachment')  # text (required)
+            string_to_convert_to_attachment = kwargs.get('string_to_convert_to_attachment')     # text (required)
             if not string_to_convert_to_attachment:
-              raise ValueError('string_to_convert_to_attachment is required')
+                raise ValueError('string_to_convert_to_attachment is required')
 
             attachment_name = kwargs.get('attachment_name')  # text (required)
             if not attachment_name:
-              raise ValueError('attachment_name is required')
-            attachment_name = '{0}.txt'.format(attachment_name)  # text (required)
+                raise ValueError('attachment_name is required')
+            # Check if the desired attachment_name has a file extension provided, assign .txt if not
+            if "." not in attachment_name:
+                attachment_name = u'{0}.txt'.format(attachment_name)  # text (required)
 
             incident_id = kwargs.get('incident_id')  # number (required)
             if not incident_id:
-              raise ValueError('incident_id is required')
+                raise ValueError('incident_id is required')
 
             # Optional Inputs
             task_id = kwargs.get('task_id')  # number (optional)
@@ -60,7 +63,10 @@ class FunctionComponent(ResilientComponent):
             with tempfile.NamedTemporaryFile(mode="w+t", delete=False) as temp_file:
                 try:
                     # Write and close tempfile
-                    temp_file.write(string_to_convert_to_attachment)
+                    if sys.version_info.major < 3:
+                        temp_file.write(string_to_convert_to_attachment.encode("utf-8"))
+                    else:
+                        temp_file.write(string_to_convert_to_attachment)
                     temp_file.close()
 
                     #  Access Resilient API
