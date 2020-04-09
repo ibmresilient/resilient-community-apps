@@ -73,7 +73,7 @@ matrix:
     script:
       - source .scripts/set_up_container_build_data.sh
       # if there are failed containers send a message with their list
-      - if [[ -n "${FAILED_CONTAINERS[*]}" ]]; then .scripts/send_notification.sh "Containers not built `${FAILED_CONTAINERS[*]}`"; return 1; failure; fi
+      - if [[ -n "${FAILED_CONTAINERS[*]}" ]]; then .scripts/send_notification.sh "Containers not built ${FAILED_CONTAINERS[*]}" failure; return 1; fi
 
 # These will send status of every build job. For finer control they can be included in each stage instead
 after_success:
