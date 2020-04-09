@@ -1,7 +1,15 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import sys
 from setuptools import setup, find_packages
+
+# different dependencies based on Python 2 and 3
+install_requires = ['resilient_circuits>=30.0.0']
+if sys.version_info[0] < 3:
+    install_requires.append("pymisp<=2.4.119.1")
+else:
+    install_requires.append("pymisp>=2.4")
 
 setup(
     name='fn_misp',
@@ -12,10 +20,7 @@ setup(
     url='resilientsystems.com',
     description="Resilient Circuits Components for 'fn_misp'",
     long_description="Resilient Circuits Components for 'fn_misp'",
-    install_requires=[
-        'resilient_circuits>=30.0.0',
-        'pymisp>= 2.4.111'
-    ],
+    install_requires=install_requires,
     packages=find_packages(),
     include_package_data=True,
     platforms='any',
