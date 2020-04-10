@@ -95,9 +95,11 @@ inputs.mail_body_html = """
 
 ```python
 if results.success:
-  noteText = u"Email Sent if mail server is valid/authenticated\n From: {0}\n To: {1}\n CC: {2}\n BCC: {3}\n Subject: {4}\n Body: {5}".format(results.content.inputs[0].strip("u\"[]"), results.content.inputs[1].strip("u\"[]"), results.content.inputs[2].strip("u\"[]"), results.content.inputs[3].strip("u\"[]"), results.content.inputs[4].strip("u\""), results.content.text )   
+  noteText = u"Email Sent if mail server is valid/authenticated\n From: {0}\n To: {1}\n CC: {2}\n BCC: {3}\n Subject: {4} \n Body below in note:".format(results.content.inputs[0].strip("u\"[]"), results.content.inputs[1].strip("u\"[]"), results.content.inputs[2].strip("u\"[]"), results.content.inputs[3].strip("u\"[]"), results.content.inputs[4].strip("u\""))
+  bodyText = u"""{}""".format(results.content.text)
 else:
   noteText = u"Email NOT Sent\n From: {0}\n To: {1}".format(results.content.inputs[0].strip("u\"[]"), results.content.inputs[1].strip("u\"[]"))
+incident.addNote(helper.createRichText(bodyText))
 incident.addNote(noteText)
 ```
 
@@ -159,9 +161,9 @@ inputs.mail_subject = "[{0}] {1}".format(incident.id, incident.name)
 
 from java.util import Date
 creation_date = Date(incident.create_date)
-type_ids = u",".join(incident.incident_type_ids)
+type_ids = u", ".join(incident.incident_type_ids)
 sev_code = u"{}".format(incident.severity_code)
-current_plan = u"[]".format(incident.plan_status)
+current_plan = u"{}".format(incident.plan_status)
 
 inputs.mail_body_text = """
 Incident Summary:
@@ -176,7 +178,7 @@ Incident Summary:
 </details>
 
 <details><summary>Example Post-Process Script:</summary>
-<p>
+<p>op
 
 ```python
 if results.success:
