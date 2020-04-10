@@ -25,8 +25,58 @@ else
 	username="Paul Revere"
 fi
 
+author="$(git log -1 $TRAVIS_COMMIT --pretty="%aN")"
+
 travis_url=https://travis.ibm.com/$TRAVIS_REPO_SLUG/builds/$TRAVIS_BUILD_ID
 
-curl -X POST --data-urlencode "payload={\"username\": \"$username\",
-\"text\": \"$TRAVIS_REPO_SLUG <$travis_url|Build #$TRAVIS_BUILD_NUMBER> \n$1\", 
-\"icon_emoji\": \":$status:\"}" $NOTIFICATION_HOOK
+message="{
+	\"icon_emoji\": \":$status:\",
+	\"username\": \"$username\",
+	\"text\": \"$TRAVIS_REPO_SLUG <$travis_url|Build #$TRAVIS_BUILD_NUMBER> \n$1\", 
+	\"blocks\": [
+		{
+			\"type\": \"divider\"
+		},
+		{
+			\"type\": \"section\",
+			\"fields\": [
+				{
+					\"type\": \"mrkdwn\",
+					\"text\": \"*Buid*\"
+				},
+				{
+					\"type\": \"mrkdwn\",
+					\"text\": \"<$travis_url|#$TRAVIS_BUILD_NUMBER>\"
+				},
+                {
+					\"type\": \"mrkdwn\",
+					\"text\": \"*Repo*\n$TRAVIS_REPO_SLUG\"
+				},
+				{
+					\"type\": \"mrkdwn\",
+					\"text\": \"*Success*\n:$status:\"
+				},
+				{
+					\"type\": \"mrkdwn\",
+					\"text\": \"*Author*\n$author\"
+				},
+				{
+					\"type\": \"mrkdwn\",
+					\"text\": \"*Commit*\n$TRAVIS_COMMIT_MESSAGE\"
+				}
+			]
+		},
+		{
+			\"type\": \"section\",
+			\"text\": {
+				\"type\": \"mrkdwn\",
+				\"text\": \"$1\"
+			}
+		},
+		{
+			\"type\": \"divider\"
+		}
+	]
+}"
+
+curl -X POST --data-urlencode "payload=$message" $NOTIFICATION_HOOK
