@@ -17,15 +17,16 @@ function container_build (){
 	argc=$#
 	argv=("$@")
 
-	docker build -t resilient/${integration} ./${integration}
+	docker build -t resilient/${1} ./${1}
 	if [ $? -ne 0 ]; then
 		return 1
 	fi
 
 	# for tags we will iterate only starting with 2nd argument
 	# and tag built image with the following tag
-	for (( j=2; j<=argc; j++ )); do
-	    docker tag resilient/${integration} "${argv[j]}"
+	# in Travis it works a little different for some reason than locally
+	for (( j=1; j<argc; j++ )); do
+		docker tag resilient/${1} "${argv[j]}"
 	done
 }
 
@@ -87,12 +88,22 @@ for integration in ${INTEGRATIONS[@]};
 do 
     echo "Building and deploying: $integration" 
     # get the setup.py file for current integration
+
     setup_file="$(dirname $BASH_SOURCE)/../$integration/setup.py"
     if [ ! -e "$setup_file" ]; then
         echo "Chosen integration $integration doesn't have setup.py"
         skipped_packages+=($integration)
         continue
     fi
+
+    echo "Building $integration"
+
+    dist_dir="$(dirname $BASH_SOURCE)/../$integration/dist"
+    mkdir dist_dir
+    (cd $(dirname $setup_file) && python setup.py -q sdist --dist-dir ./dist);
+
+    echo "Building container for $integration"
+
 	# To get version of the integration we first extract line verion=<version> from setup.py, from where we extract
 	# the actual version substring. Doing it in 2 steps to avoid using Perl style regex with lookahead capabilities
 	integration_version=$(cat "$setup_file" | grep -o "version=['\"][0-9.]*['\"]" | grep -oE "[0-9.]+")
@@ -106,7 +117,8 @@ do
 	ARTIFACTORY_LABEL=${ARTIFACTORY_URL}/resilient/${integration}:${integration_version}
 	QUAY_LABEL=${QUAY_URL}/${QUAY_ORG}/${integration}:${integration_version}
 
-	container_build $integration $ARTIFACTORY_LABEL $QUAY_LABEL
+	container_build "$integration" "$ARTIFACTORY_LABEL" "$QUAY_LABEL"
+
 	if [ $? -ne 0 ]; then
 		skipped_packages+=($integration)
 		continue
@@ -114,13 +126,14 @@ do
 
 	container_push $ARTIFACTORY_LABEL
 	if [ $? -ne 0 ]; then
+		echo "Failed to push to Artifactory."
 		skipped_packages+=($integration)
 		continue
 	fi
 
 	container_push $QUAY_LABEL
 	if [ $? -ne 0 ]; then
-		echo "Pushed the version tag, but did not label as the latest."
+		echo "Failed to push to Quay."
 		skipped_packages+=($integration)
 		continue
 	fi
