@@ -1,0 +1,74 @@
+# -*- coding: utf-8 -*-
+# pragma pylint: disable=unused-argument, no-self-use
+
+# This function will restart Resilient Circuits or the integrations server.
+# File: utilities_restart_circuits.py
+# Date: 04/26/2019 - Modified: 04/11/2020
+# Author: Jared Fagel
+
+"""Function implementation"""
+#   @function -> utilities_restart_circuits
+#   @params -> string: circuits_service_name, boolean: reboot_server
+#   @return -> boolean: results['was_successful']
+
+
+import os
+import time
+import shutil
+import logging
+import datetime
+from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+import utilities.util.selftest as selftest
+
+
+class FunctionComponent(ResilientComponent):
+    """Component that implements Resilient function 'utility_restart_resilient_circuits"""
+
+    def __init__(self, opts):
+        """constructor provides access to the configuration options"""
+        super(FunctionComponent, self).__init__(opts)
+        self.options = opts.get("fn_utilities", {})
+
+    @handler("reload")
+    def _reload(self, event, opts):
+        """Configuration options have changed, save new values"""
+        self.options = opts.get("fn_utilities", {})
+
+    @function("utility_restart_resilient_circuits")
+    def _utility_restart_resilient_circuits_function(self, event, *args, **kwargs):
+        """Function: Restarts Resilient Circuits or the Integration Server."""
+        results = {}
+
+        try:
+            # Get the function parameters:
+            circuits_service_name = kwargs.get("circuits_service_name")  # string
+            reboot_server = kwargs.get("reboot_server")  # boolean
+            
+            if circuits_service_name is None:
+              circuits_service_name = 'resilient_circuits.service'
+
+            if os.path.exists('/home/integrations/.resilient/rc_restarted.lock') is False:
+                open('/home/integrations/.resilient/rc_restarted.lock', 'w+').close()
+                if os.path.exists('/home/integrations/.resilient/rc_restarted.lock') is False: raise IOError
+                if reboot_server is True:
+                    yield StatusMessage('[INFO] Rebooting the Resilient integrations server...')
+                    os.system('reboot')
+                else:
+                    yield StatusMessage('[INFO] Restarting the Resilient Circuits service...')
+                    os.system("sudo systemctl restart " + circuits_service_name)  # Modify if service not managed via systemctl
+
+            else:
+                os.remove('/home/integrations/.resilient/rc_restarted.lock')
+                if reboot_server is True: yield StatusMessage('[SUCCESS] Reboot completed!')
+                else: yield StatusMessage('[SUCCESS] Restart completed!')
+
+        except Exception as err:  # Catch all exceptions and abort
+            try: os.remove('/home/integrations/.resilient/rc_restarted.lock')
+            except: pass
+            yield StatusMessage('[FATAL ERROR] Encountered: ' + str(err))
+            yield StatusMessage('[FAILURE] Fatal error caused exit!')
+
+            # Produce a FunctionResult with the results
+            yield FunctionResult(results)
+        except Exception:
+            yield FunctionError()
