@@ -13,10 +13,7 @@
 
 
 import os
-import time
-import shutil
 import logging
-import datetime
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 import utilities.util.selftest as selftest
 
@@ -63,12 +60,12 @@ class FunctionComponent(ResilientComponent):
                     os.system("sudo systemctl restart " + circuits_service_name)  # Modify if service not managed via systemctl
 
             else:
-                os.remove('home_dir + r'/.resilient/rc_restarted.lock')
+                os.remove(home_dir + r'/.resilient/rc_restarted.lock')
                 if reboot_server is True: yield StatusMessage('[SUCCESS] Reboot completed!')
                 else: yield StatusMessage('[SUCCESS] Restart completed!')
 
         except Exception as err:  # Catch all exceptions and abort
-            try: os.remove('home_dir + r'/.resilient/rc_restarted.lock')
+            try: os.remove(home_dir + r'/.resilient/rc_restarted.lock')
             except: pass
             yield StatusMessage('[FATAL ERROR] Encountered: ' + str(err))
             yield StatusMessage('[FAILURE] Fatal error caused exit!')
