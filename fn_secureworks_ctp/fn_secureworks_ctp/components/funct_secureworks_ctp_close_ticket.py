@@ -55,13 +55,17 @@ class FunctionComponent(ResilientComponent):
             uri = u"/incidents/{}?handle_format=names".format(incident_id)
             incident = self.rest_client().get(uri)
 
+            if not incident:
+                IntegrationError("Secureworks CTP close ticket: Incident {0} not found", incident_id)
+
             # Make sure there is an SecureWorks CTP ticket associated with this incident
-            ticket_id = incident['properties']['scwx_ctp_ticket_id']
+            ticket_id = incident.get('properties', {}).get('scwx_ctp_ticket_id', None)
+
             if not ticket_id:
                 raise IntegrationError("Secureworks CTP close ticket: Incident {0} does not contain a ticketId", incident_id)
 
             resolution_summary = clean_html(incident.get('resolution_summary'))
-            close_code = incident['properties']['scwx_ctp_close_code']
+            close_code = incident.get('properties', {}).get('scwx_ctp_close_code', None)
 
             response = self.scwx_client.post_tickets_close(ticket_id, resolution_summary, close_code)
 
