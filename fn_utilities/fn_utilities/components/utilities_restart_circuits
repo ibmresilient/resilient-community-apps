@@ -41,29 +41,34 @@ class FunctionComponent(ResilientComponent):
 
         try:
             # Get the function parameters:
+            home_dir = kwargs.get("home_dir")  # string
             circuits_service_name = kwargs.get("circuits_service_name")  # string
             reboot_server = kwargs.get("reboot_server")  # boolean
             
             if circuits_service_name is None:
               circuits_service_name = 'resilient_circuits.service'
 
-            if os.path.exists('/home/integrations/.resilient/rc_restarted.lock') is False:
-                open('/home/integrations/.resilient/rc_restarted.lock', 'w+').close()
-                if os.path.exists('/home/integrations/.resilient/rc_restarted.lock') is False: raise IOError
+            if home_dir is None:
+                home_dir = r'/home/integration'
+
+
+            if os.path.exists(home_dir + r'/.resilient/rc_restarted.lock') is False:
+                open(home_dir + r'/.resilient/rc_restarted.lock', 'w+').close()
+                if os.path.exists(home_dir + r'/.resilient/rc_restarted.lock') is False: raise IOError
                 if reboot_server is True:
-                    yield StatusMessage('[INFO] Rebooting the Resilient integrations server...')
+                    yield StatusMessage('[INFO] Rebooting the Resilient integration server...')
                     os.system('reboot')
                 else:
                     yield StatusMessage('[INFO] Restarting the Resilient Circuits service...')
                     os.system("sudo systemctl restart " + circuits_service_name)  # Modify if service not managed via systemctl
 
             else:
-                os.remove('/home/integrations/.resilient/rc_restarted.lock')
+                os.remove('home_dir + r'/.resilient/rc_restarted.lock')
                 if reboot_server is True: yield StatusMessage('[SUCCESS] Reboot completed!')
                 else: yield StatusMessage('[SUCCESS] Restart completed!')
 
         except Exception as err:  # Catch all exceptions and abort
-            try: os.remove('/home/integrations/.resilient/rc_restarted.lock')
+            try: os.remove('home_dir + r'/.resilient/rc_restarted.lock')
             except: pass
             yield StatusMessage('[FATAL ERROR] Encountered: ' + str(err))
             yield StatusMessage('[FAILURE] Fatal error caused exit!')
