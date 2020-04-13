@@ -41,12 +41,6 @@ class SCWXClient(object):
         self.APIKEY = u"APIKEY {0}:{1}".format(self.username, self.password)
         self.headers = get_headers(self.APIKEY)
 
-    def mock_post_tickets_updates(self):
-        ticket_string = open('/Users/annmarie.meier.norcross@ibm.com/Secureworks.txt', mode="r").read()
-        tickets = json.loads(ticket_string)
-        response = {'tickets': tickets}
-        return response
-
     def post_tickets_updates(self):
         """POST get a list of updated tickets not yet acknowledged """
         url = u"{0}/tickets/updates".format(self.base_url)
