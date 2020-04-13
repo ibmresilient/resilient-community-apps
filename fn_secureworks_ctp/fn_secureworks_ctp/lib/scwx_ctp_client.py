@@ -35,10 +35,17 @@ class SCWXClient(object):
         self.assigned_to_customer = options.get('assigned_to_customer')
         self.cafile = options.get('cafile')
         self.bundle = os.path.expanduser(self.cafile) if self.cafile else False
+        self.close_codes = options.get('close_codes', None)
 
         self.rc = RequestsCommon(opts, options)
         self.APIKEY = u"APIKEY {0}:{1}".format(self.username, self.password)
         self.headers = get_headers(self.APIKEY)
+
+    def mock_post_tickets_updates(self):
+        ticket_string = open('/Users/annmarie.meier.norcross@ibm.com/Secureworks.txt', mode="r").read()
+        tickets = json.loads(ticket_string)
+        response = {'tickets': tickets}
+        return response
 
     def post_tickets_updates(self):
         """POST get a list of updated tickets not yet acknowledged """

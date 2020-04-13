@@ -98,9 +98,11 @@ class SecureworksCTPPollComponent(ResilientComponent):
         self.polling_interval = int(self.options.get("polling_interval", DEFAULT_POLL_SECONDS))
 
         # If close_codes are defined in the app.config, then turn them into a list of string
-        if self.options.get("close_codes"):
+        if self.options.get("close_codes", None):
             close_codes_string = self.options.get("close_codes")
             self.close_codes = [code.strip() for code in close_codes_string.split(',')]
+        else:
+            self.close_codes = None
 
         # Create Secureworks client
         self.scwx_client = SCWXClient(self.opts, self.options)
@@ -138,6 +140,7 @@ class SecureworksCTPPollComponent(ResilientComponent):
 
                 # Acknowledge Secureworks that we have received the tickets.
                 response_ack = self.scwx_client.post_tickets_acknowledge(ticket)
+
 
                 code = response_ack[0].get('code')
                 if code != "SUCCESS":
