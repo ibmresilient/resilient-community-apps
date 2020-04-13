@@ -36,12 +36,12 @@ Unless otherwise specified, contents of this repository are published under the 
 ```
   resilient-circuits config -c
   or
-  resilient-circuits config –u [-l rc-data-feed-plugin-resilient]
+  resilient-circuits config –u [-l rc-data-feed-plugin-resilientfeed]
 ```
 * Import custom fields to retain source organization and incident ids:
 
 ```
-resilient-circuits customize -l rc-data-feed-plugin-resilient
+resilient-circuits customize -l rc-data-feed-plugin-resilientfeed
 ```
 Note: Perform an export and reimport of these customizatons into the target Resilient organization in order to use them. See app.config parameter: `sync_reference_fields`.
 

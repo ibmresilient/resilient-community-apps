@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 
-"""Generate the Resilient customizations required for rc-data-feed-plugin-resilient"""
+"""Generate the Resilient customizations required for rc-data-feed-plugin-resilientfeed"""
 
 from __future__ import print_function
-from resilient_circuits.util import *
+from resilient import ImportDefinition
 
 def codegen_reload_data():
-    """Parameters to codegen used to generate the rc-data-feed-plugin-resilient package"""
-    reload_params = {"package": u"rc-data-feed-plugin-resilient",
+    """Parameters to codegen used to generate the rc-data-feed-plugin-resilientfeed package"""
+    reload_params = {"package": u"rc-data-feed-plugin-resilientfeed",
                      "incident_fields": [u"df_inc_id", u"df_org_id"],
                      "action_fields": [],
                      "functions_params": [],

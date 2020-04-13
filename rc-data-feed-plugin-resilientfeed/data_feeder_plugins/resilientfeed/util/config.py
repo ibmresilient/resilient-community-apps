@@ -32,3 +32,14 @@ exclude_incident_fields=
 sync_reference_fields=True
 """
     return config_data
+
+def apphost_config_section_data():
+    return u"""[feeds]
+# comma separated section names. ex. sqlserver_feed,file_feed
+feed_names=resilient_feed
+reload=False
+# set to true if ElasticSearch errors occur during reload=True
+reload_query_api_method=False
+# feed_data is the default message destination that will be listened to
+queue=feed_data
+"""
