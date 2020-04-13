@@ -35,6 +35,7 @@ class TestSecureworksCtpCloseTicket:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
+    @pytest.mark.livetest
     @pytest.mark.parametrize("incident_id, expected_results", [
         (123, {"value": "xyz"}),
         (123, {"value": "xyz"})
