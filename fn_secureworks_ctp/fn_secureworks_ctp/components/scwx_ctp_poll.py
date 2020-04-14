@@ -98,9 +98,9 @@ class SecureworksCTPPollComponent(ResilientComponent):
         self.polling_interval = int(self.options.get("polling_interval", DEFAULT_POLL_SECONDS))
 
         # If close_codes are defined in the app.config, then turn them into a list of string
-        if self.options.get("close_codes", None):
-            close_codes_string = self.options.get("close_codes")
-            self.close_codes = [code.strip() for code in close_codes_string.split(',')]
+        close_codes = self.options.get("close_codes", None)
+        if close_codes:
+            self.close_codes = [code.strip() for code in close_codes.split(',')]
         else:
             self.close_codes = None
 
