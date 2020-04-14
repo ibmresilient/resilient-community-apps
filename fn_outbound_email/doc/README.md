@@ -99,6 +99,7 @@ if results.success:
   bodyText = u"""{}""".format(results.content.text)
 else:
   noteText = u"Email NOT Sent\n From: {0}\n To: {1}".format(results.content.inputs[0].strip("u\"[]"), results.content.inputs[1].strip("u\"[]"))
+  bodyText = "N/A"
 incident.addNote(helper.createRichText(bodyText))
 incident.addNote(noteText)
 ```
