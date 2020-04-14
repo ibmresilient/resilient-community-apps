@@ -21,7 +21,7 @@ stages:
   - name: mock tests
     if: branch = master AND type != pull_request
   - name: build a container
-    if: tag =~ ^container/.+ # (branch = master AND type IN (push)) OR  - replacing for a sec
+    if: (branch = master AND type IN (push)) OR tag =~ ^container/.+
 
 matrix:
   fast_finish: true
