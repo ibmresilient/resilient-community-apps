@@ -23,7 +23,7 @@ setup(
     license='MIT License',
     author='IBM Resilient',
     author_email='support@resilientsystems.com',
-    url='https://ibm.biz/resilientcommunity',
+    url='https://ibm.com/mysupport',
     description="Resilient Circuits Components for 'fn_resilient_ml'",
     long_description="fn_resilient_ml supports NLP search for finding most similar incidents",
     install_requires=[
