@@ -12,7 +12,7 @@
   ![screenshot: screenshot_1](./doc/screenshots/screenshot_1.png)
 -->
 
-# fn-secureworks-ctp Functions for IBM Resilient
+# Secureworks CTP Functions for IBM Resilient
 
 - [Release Notes](#release-notes)
 - [Overview](#overview)
@@ -39,11 +39,15 @@
   Provide a high-level description of the function itself and its remote software or application.
   The text below is parsed from the "description" and "long_description" attributes in the setup.py file
 -->
-**Resilient Circuits Components for 'fn_secureworks_ctp**
+<p>
+The Secureworks CTP Functions for Resilient includes:
 
- ![screenshot: main](./doc/screenshots/main.png)
+* A poller component that continuously brings Secureworks CTP tickets into Resilient as incidents
+*  Function to close a ticket in Secureworks when the corresponding Resilient incident is closed.
 
-Resilient Circuits Components for 'fn_secureworks_ctp
+
+ ![screenshot: main](./doc/screenshots/scwx_main.png)
+
 
 ---
 
@@ -55,12 +59,7 @@ Resilient Circuits Components for 'fn_secureworks_ctp
 * An Integration Server running `resilient_circuits>=30.0.0`
   * To set up an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
   * If using API Keys, minimum required permissions are:
-    * Prior to v36
-      * Org Data: Edit (edit_data)
-      * Function: Read (read_function)
-    * AppHost (v36.2) Containers
-      * Org Data: Read (read_data)
-      * Function: Read (read_function)
+      * Org Data: Read, Edit
 ---
 
 ## Installation
@@ -88,20 +87,20 @@ Resilient Circuits Components for 'fn_secureworks_ctp
   ```
 * Open the config file, scroll to the bottom and edit your fn_secureworks_ctp configurations:
   ```
-  $ nano ~/.resilient/app.config
+  $ vi ~/.resilient/app.config
   ```
   | Config | Required | Example | Description |
   | ------ | :------: | ------- | ----------- |
-  | **base_url** | Yes | `https://api.secureworks.com/api/ticket/v3` | *Enter a description of the config here* |
-  | **username** | Yes | `` | *Enter a description of the config here* |
-  | **password** | Yes | `` | *Enter a description of the config here* |
-  | **query_ticket_types** | Yes | `INCIDENT` | *Enter a description of the config here* |
-  | **query_grouping_types** | Yes | `SECURITY` | *Enter a description of the config here* |
-  | **query_limit** | Yes | `10` | *Enter a description of the config here* |
-  | **assigned_to_customer** | Yes | `true` | *Enter a description of the config here* |
-  | **polling_interval** | Yes | `600` | *Enter a description of the config here* |
-  | **close_codes** | Yes | `Authorized Activity,Confirmed Security Incident,Duplicate,Incident Misidentified,Inconclusive,Not Actionable,Not Vulnerable,Threat Mitigated` | *Enter a description of the config here* |
-  | **cafile** | Yes | `` | *Enter a description of the config here* |
+  | **base_url** | Yes | `https://api.secureworks.com/api/ticket/v3` | *Secureworks CTP base URL* |
+  | **username** | Yes | `user@example.com` | *email address associated with Secureworks account* |
+  | **password** | Yes | `` | *password accosiated with Secureworks account* |
+  | **query_ticket_types** | Yes | `INCIDENT` | *Secureworks ticketType  to query: SERVICE_REQUEST, INCIDENT, CHANGE* |
+  | **query_grouping_types** | Yes | `SECURITY` | *Secureworks groupingType to query: REQUEST, CHANGE, HEALTH, SECURITY* |
+  | **query_limit** | Yes | `10` | *Maximum number of tickets to be returned from Secureworks API query* |
+  | **assigned_to_customer** | Yes | `true` | *Boolean indicating whether to only return tickets assigned to the client* |
+  | **polling_interval** | Yes | `600` | *Time in seconds between queries to Secureworks endpoint* |
+  | **close_codes** | No | `Authorized Activity,Confirmed Security Incident,Duplicate,Incident Misidentified,Inconclusive,Not Actionable,Not Vulnerable,Threat Mitigated` | *Comma separated list of close codes to override the defaults* |
+  | **cafile** | No | `` | *Path to certificate file* |
 
 * **Save** and **Close** the app.config file.
 * [Optional]: Run selftest to test the Integration you configured:
