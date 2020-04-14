@@ -31,6 +31,17 @@ assigned_to_customer=true
 # To turn the poller off use value 0
 polling_interval=600
 
+# Optional - Define Secureworks CTP close-codes that override the default values that appear in the select list
+# when the Close Incident popup appears when closing an incident. The selected menu item is sent to 
+# Secureworks CTP when the ticket is closed in Secureworks. (scwx_ctp_close_codes incident field in Resilient.)
+# close_codes is a comma separated list of strings.  Each string is an item in the select list.
+#  
+# close_codes=Authorized Activity,Confirmed Security Incident,Duplicate,Incident Misidentified,Inconclusive,Not Actionable,Not Vulnerable,Threat Mitigated
+
+# Optional - Path to a custom template file for the escalated incident.   If not defined, the integration will use
+# the default that comes with the integration.
+# template_file=/usr/integration/scwx_template.jinja
+#
 # Optional - If required by Secureworks CTP
 cafile=
 """

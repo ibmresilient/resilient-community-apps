@@ -61,6 +61,10 @@ class SecureworksCTPPollComponent(ResilientComponent):
         env.globals.update({"readable_datetime": readable_datetime})
         env.filters.update({"readable_datetime": readable_datetime})
 
+        # If close_codes are defined in the app.config, then load them into the select input list.
+        if self.close_codes:
+            response = self.init_close_codes(self.close_codes)
+
         LOG.info(u"Secureworks CTP escalation initiated, polling interval %s", self.polling_interval)
         Timer(self.polling_interval, Poll(), persist=False).register(self)
 
@@ -93,6 +97,13 @@ class SecureworksCTPPollComponent(ResilientComponent):
 
         self.polling_interval = int(self.options.get("polling_interval", DEFAULT_POLL_SECONDS))
 
+        # If close_codes are defined in the app.config, then turn them into a list of string
+        close_codes = self.options.get("close_codes", None)
+        if close_codes:
+            self.close_codes = [code.strip() for code in close_codes.split(',')]
+        else:
+            self.close_codes = None
+
         # Create Secureworks client
         self.scwx_client = SCWXClient(self.opts, self.options)
 
@@ -116,6 +127,7 @@ class SecureworksCTPPollComponent(ResilientComponent):
 
                 # Check if there is already a Resilient incident for this Secureworks ticket.
                 resilient_incident = self._find_resilient_incident_for_req(ticket_id)
+
                 if not resilient_incident:
                     # Create a new incident for this Secureworks CTP ticket.
                     resilient_incident = self._create_incident(ticket)
@@ -128,6 +140,7 @@ class SecureworksCTPPollComponent(ResilientComponent):
 
                 # Acknowledge Secureworks that we have received the tickets.
                 response_ack = self.scwx_client.post_tickets_acknowledge(ticket)
+
 
                 code = response_ack[0].get('code')
                 if code != "SUCCESS":
@@ -238,7 +251,6 @@ class SecureworksCTPPollComponent(ResilientComponent):
     def create_incident_comment(self, incident_id, note):
         """
         Add a comment to the specified Resilient Incident by ID
-
         :param incident_id:  Resilient Incident ID
         :param note: Content to be added as note
         :return: Response from Resilient for debug
@@ -309,7 +321,7 @@ class SecureworksCTPPollComponent(ResilientComponent):
                 attachment_id = attachment.get('id')
 
                 # Get ticket attachment
-                response = self.scwx_client.get_ticket_attachment(ticket_id, attachment_id)
+                response = self.scwx_client.get_tickets_attachment(ticket_id, attachment_id)
 
                 content = response.get('content')
                 datastream = BytesIO(content)
@@ -327,3 +339,32 @@ class SecureworksCTPPollComponent(ResilientComponent):
                 LOG.debug(new_attachment)
         except Exception as err:
             raise err
+
+    def init_close_codes(self, close_codes):
+        """
+        init_close_codes takes a list of string close-codes for Secureworks CTP and places them in the
+        select (swcx_ctp_close_code custom incident field) input type.  There are default codes defined in
+        the Resilient UI but users can override the select list via app.config 'close_codes' parameter.
+        The close codes are similar to Resilient resolution_id. The select list will appear in the
+        Resilient Close Incident popup when the user closes an incident.
+        :param close_codes: list of strings (each string will be an entry in the select list) which will appear
+        in the Resilient Close Incident popup
+        :return: response from the 'put' operation
+        """
+        # Get the current close_code select list.
+        uri = '/types/incident/fields/scwx_ctp_close_code'
+        get_response = self.rest_client().get(uri)
+        values = []
+
+        # Add each close_code as a select list entry.
+        for code in close_codes:
+            entry = {'label': code,
+                     'enabled': True,
+                     'hidden': False}
+            values.append(entry)
+
+        # Put the new values into the select list to replace the currently values there.
+        get_response['values'] = values
+        put_response = self.rest_client().put(uri, payload=get_response)
+
+        return put_response
