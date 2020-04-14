@@ -11,14 +11,29 @@ import base64
 import logging
 from fn_qradar_integration.util.SearchWaitCommand import SearchWaitCommand, SearchFailure, SearchJobFailure
 import fn_qradar_integration.util.function_utils as function_utils
+import six
 
 # handle python2 and 3
 try:
-    from urllib import quote  # Python 2.X
+    from urllib import quote as quote_func  # Python 2.X
 except ImportError:
-    from urllib.parse import quote  # Python 3+
+    from urllib.parse import quote as quote_func  # Python 3+
 
 LOG = logging.getLogger(__name__)
+
+
+def quote(input_v, safe=None):
+    """
+    To make sure that integration on Python 2 works with unicode we will wrap quote
+    to always pass bytes to it.
+    """
+    if not isinstance(input_v, six.binary_type):
+        input_v = input_v.encode('utf-8')
+
+    # No need to re-define the default for safe
+    if safe:
+        return quote_func(input_v, safe)
+    return quote_func(input_v)
 
 
 class RequestError(Exception):
@@ -48,7 +63,7 @@ class AuthInfo(object):
         pass
 
     @staticmethod
-    def get_authInfo():
+    def get_authInfo(): 
         if AuthInfo.__instance is None:
             AuthInfo.__instance = AuthInfo()
         return AuthInfo.__instance
@@ -344,19 +359,15 @@ class QRadarClient(object):
         """
         auth_info = AuthInfo.get_authInfo()
 
-        try:
-            #
-            #   urllib.quote has trouble to handle unicode
-            #
-            ref_set_link = quote(ref_set, '')
-        except:
-            ref_set_link = ref_set
+        ref_set_link = quote(ref_set, '')
 
         url = u"{}{}/{}".format(auth_info.api_url, qradar_constants.REFERENCE_SET_URL, ref_set_link)
 
         ret = None
         try:
             if filter:
+                if not isinstance(filter, six.binary_type):
+                    filter = filter.encode('utf-8')
                 parameter = quote('?filter=value="{}"'.format(filter))
                 url = url + parameter
 
