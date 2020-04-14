@@ -28,16 +28,26 @@ Please refer to the User Guide for instructions on building the model and runnin
 Install this package with 'pip', or run `python setup.py install`
 
 ## Setup
-Create app.config by running `resilient-circuits config -c`.
+Create app.config by running `resilient-circuits config -c` or update app.config with `resilient-circuits config -u`.
 
-The app.config file needs the following configuration values, in addition to those in the appropriate [resilient] section for
-connecting to your Resilient platform:
+The app.config file needs the following configuration values, in addition to those in the appropriate [resilient]
+section for connecting to your Resilient platform:
 
 ```
-[resilient]
+[fn_resilient_ml]
+#
+# Required. The (absolute) path to the folder of the saved NLP model
+#
+model_path=path_of_the_saved_models
+num_top_similar_incidents=5
 
-[resilient_ml]
-
+#
+#   Advanced configuration
+#-------------------------
+# Use the followings to optimize the performance of a NLP model
+#
+# Number of features for NLP word2vec model.
+num_features=50
 ```
 
 ## Customize
