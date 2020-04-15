@@ -64,8 +64,8 @@ class TestSplunkUtils:
         retKey = splnk_utils.session_key
         headers = dict()
         headers["Accept"] = "application/html"
-        post_data = urllib.urlencode({"username": self.fake_username,
-                                      "password": self.fake_password})
+        post_data = urllib.parse.urlencode({"username": self.fake_username,
+                                            "password": self.fake_password})
 
         # Assert that username and password are used as required
         mocked_requests_post.assert_called_with(self.auth_url,
@@ -97,8 +97,8 @@ class TestSplunkUtils:
 
             headers = dict()
             headers["Accept"] = "application/html"
-            post_data = urllib.urlencode({"username": self.fake_username,
-                                          "password": self.fake_password})
+            post_data = urllib.parse.urlencode({"username": self.fake_username,
+                                                "password": self.fake_password})
             mocked_requests_post.assert_called_with(self.auth_url,
                                                     headers=headers,
                                                     data=post_data,

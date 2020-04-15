@@ -203,8 +203,8 @@ class SplunkUtils(object):
         try:
             resp = requests.post(url,
                                  headers=headers,
-                                 data=urllib.urlencode({"username": username,
-                                                        "password": password}),
+                                 data=urllib.parse.urlencode({"username": username,
+                                                              "password": password}),
                                  verify=verify)
             #
             # This one we only allows 200. Otherwise login failed
