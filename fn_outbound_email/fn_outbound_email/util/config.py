@@ -31,8 +31,8 @@ smtp_ssl_mode=None
 # SSL Cert (not supported)
 #smtp_ssl_cafile=None
 
-# Optional - Path to a custom template file for the escalated incident.   If not defined, the integration will use
-# the default that comes with the integration in the html preprocessing script.
+# Optional - Path to a custom template file for formatting HTML email. If not defined,
+# the integration will use the default that comes with the integration in the html pre-processing script.
 # template_file=/usr/integration/html_template.jinja
     """
     return config_data
