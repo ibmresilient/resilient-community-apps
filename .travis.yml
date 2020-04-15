@@ -19,9 +19,11 @@ stages:
   - name: latest push
     if: branch != master AND type=push AND NOT tag =~ ^container/.+ 
   - name: mock tests
-    if: branch = master AND type != pull_request
+    if: branch = master AND type = cron # for now only trigger tests on cron
   - name: build a container
-    if: tag =~ ^container/.+ # (branch = master AND type IN (push)) OR  - replacing for a sec
+    if: (branch = master AND type IN (push)) OR tag =~ ^container/.+
+  - name: successful notification
+    if: type NOT IN (cron) # no need for successful cron notifications
 
 matrix:
   fast_finish: true
@@ -74,10 +76,14 @@ matrix:
       - source .scripts/set_up_container_build_data.sh
       # if there are failed containers send a message with their list
       - if [[ -n "${FAILED_CONTAINERS[*]}" ]]; then .scripts/send_notification.sh "Containers not built ${FAILED_CONTAINERS[*]}" failure; return 1; fi
+  - stage: successful notification
+    name: Successful notification
+    # To make sure that success is sent once per job we create a separate stage for it
+    install: skip
+    script:
+      - .scripts/send_notification.sh
 
-# These will send status of every build job. For finer control they can be included in each stage instead
-after_success:
-- .scripts/send_notification.sh
+# If one job fails the whole build fails, so we can send it here
 after_failure:
 - .scripts/send_notification.sh "" failure
 
