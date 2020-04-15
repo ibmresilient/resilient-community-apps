@@ -9,9 +9,14 @@ import splunklib.client as splunk_client
 import splunklib.results as splunk_results
 import time
 import requests
-import urllib
 from xml.dom import minidom
 import json
+import sys
+
+if sys.version_info.major < 3:
+    import urllib as urlparse
+else:
+    import urllib.parse as urlparse
 
 import logging
 LOG = logging.getLogger(__name__)
@@ -203,7 +208,7 @@ class SplunkUtils(object):
         try:
             resp = requests.post(url,
                                  headers=headers,
-                                 data=urllib.parse.urlencode({"username": username,
+                                 data=urlparse.urlencode({"username": username,
                                                               "password": password}),
                                  verify=verify)
             #

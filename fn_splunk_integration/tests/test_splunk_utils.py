@@ -17,6 +17,11 @@ sys.path.append("fn_splunk_integration/util")
 import splunk_utils
 import splunklib
 
+if sys.version_info.major < 3:
+    import urllib as urlparse
+else:
+    import urllib.parse as urlparse
+
 
 
 class TestSplunkUtils:
@@ -97,7 +102,7 @@ class TestSplunkUtils:
 
             headers = dict()
             headers["Accept"] = "application/html"
-            post_data = urllib.parse.urlencode({"username": self.fake_username,
+            post_data = urlparse.urlencode({"username": self.fake_username,
                                                 "password": self.fake_password})
             mocked_requests_post.assert_called_with(self.auth_url,
                                                     headers=headers,
