@@ -62,6 +62,7 @@ class FunctionComponent(ResilientComponent):
             if self.template_file_path: 
                 with open(self.template_file_path, "r") as definition:
                     mail_body_html = definition.read()
+                    log.info("Using custom jinja template instead of default, path: %s", self.template_file_path)
             else:
                 mail_body_html = kwargs.get("mail_body_html")
             # Get the function parameters:
