@@ -12,7 +12,6 @@ def config_section_data():
        when called by `resilient-circuits config [-c|-u]`
     """ 
     config_data = u"""[fn_outbound_email]
-
 # SMTP SERVER (IP ADDRESS or FQDN)
 smtp_server=xxx.xxx.xxx.xxx
 
@@ -31,6 +30,10 @@ smtp_ssl_mode=None
 
 # SSL Cert (not supported)
 #smtp_ssl_cafile=None
+
+# Optional - Path to a custom template file for the escalated incident.   If not defined, the integration will use
+# the default that comes with the integration in the html preprocessing script.
+# template_file=/usr/integration/html_template.jinja
     """
     return config_data
     

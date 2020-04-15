@@ -72,15 +72,16 @@ inputs.mail_body_html = """
         <hr size="1" width="100%" noshade style="color:#FFDF57" align="center"/>
     </td>
 </tr>
-    {{ get_row('Severity','severity_code') }}
-    {{ get_row('Status','plan_status') }}
-    {{ get_row('Created','create_date') }}
-    {{ get_row('Category','incident_type_ids') }}
+    {{ get_row('Severity'+':','severity_code') }}<br>
+    {{ get_row('Status'+':','plan_status') }}<br>
+    {{ get_row('Created'+':','create_date') }}<br>
+    {{ get_row('Category'+':','incident_type_ids') }}<br>
 <tr>
     <td colspan="2">
         <br><h3 style="color: rgb(68,114,196)">INCIDENT DESCRIPTION</h3>
         <hr size="1" width="100%" noshade style="color:#FFDF57" align="center"/>
     </td>
+    {{ get_row('Description'+':','description') }}<br> 
 </tr>
 </table>
 <br>
@@ -95,13 +96,13 @@ inputs.mail_body_html = """
 
 ```python
 if results.success:
-  noteText = u"Email Sent if mail server is valid/authenticated\n From: {0}\n To: {1}\n CC: {2}\n BCC: {3}\n Subject: {4} \n Body below in note:".format(results.content.inputs[0].strip("u\"[]"), results.content.inputs[1].strip("u\"[]"), results.content.inputs[2].strip("u\"[]"), results.content.inputs[3].strip("u\"[]"), results.content.inputs[4].strip("u\""))
-  bodyText = u"""{}""".format(results.content.text)
+  noteText = u"""Email Sent if mail server is valid/authenticated\n 
+  From: {0}<br> To: {1}<br> CC: {2}<br> BCC: {3}<br> Subject: {4} <br> 
+  Body: {5} <br>""".format(results.content.inputs[0].strip("u\"[]"), results.content.inputs[1].strip("u\"[]"), results.content.inputs[2].strip("u\"[]"), results.content.inputs[3].strip("u\"[]"), results.content.inputs[4].strip("u\"[]"), results.content.text)
 else:
   noteText = u"Email NOT Sent\n From: {0}\n To: {1}".format(results.content.inputs[0].strip("u\"[]"), results.content.inputs[1].strip("u\"[]"))
-  bodyText = "N/A"
-incident.addNote(helper.createRichText(bodyText))
-incident.addNote(noteText)
+incident.addNote(helper.createRichText(noteText))
+
 ```
 
 ```python
