@@ -4,10 +4,12 @@
 # This section builds all the feature packages implemented in
 # python. It searches for all folders that contains setup.py
 #
-
-setup_files=(`find .. -type f -name 'setup.py'`);
 dist_dir=$( cd $(dirname $0) ; pwd -P )
 
+python -m pip install resilient_sdk-1.0.0.tar.gz
+
+
+setup_files=(`find .. -type f -name 'setup.py'`);
 echo "Building these packages:";
 printf '  %s\n' "${setup_files[@]}";
 echo "Storing packages to: $dist_dir";
@@ -16,7 +18,10 @@ do
     # Run the Build
     pkg_dir=$(dirname "${setup}")
     echo "Running build from $pkg_dir";
-    (cd $pkg_dir && python setup.py -q sdist --dist-dir $dist_dir);
+    cd $pkg_dir
+    python setup.py sdist
+    resilient-sdk package -p .
+    mv dist/* $dist_dir
 done;
 
 # Build content packages with resilient-res-package.sh
