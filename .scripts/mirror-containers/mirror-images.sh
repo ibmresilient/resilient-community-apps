@@ -1,0 +1,68 @@
+#!/bin/bash
+
+# Title:         mirror-images.sh
+# Description:   Facilitates the transfer of a number of named images from a source registry to a destination one
+
+# Version:       1.0.0
+set -x
+
+# v1: At a high level; with this script we want to:
+# 1. Take in a named list of image we want to move WITH versions
+# 2. Pull each image from the source registry without only grabbing the tags specified
+# 3. Tag each image with its new destination tag before push
+# 4. Push each image with its new tag to the destination registry
+# 5. Delete all the images we pulled except for those named in the preserved_images.conf file, note only images not in use will be deleted.
+
+# The file from which we will pull configuration files
+readonly IMAGES_TO_TRANSFER="repo_quay.conf"
+
+readonly IMAGES_TO_PRESERVE_LOCALLY="preserved_images.conf"
+# The registry we will pull images from 
+readonly SOURCE_REGISTRY="quay.io/ibmresilient_dev/"
+# The registry we will push images too
+destination_registry=""
+
+# Check if string is empty using -z. For more 'help test'    
+if [[ -z "$1" ]]; then
+   printf '%s\n' "No destination registry provided. Registry must be provided in the form: fqdn.registry.io/ exiting"
+   exit 1
+else # user provided a registry to push to. 
+    destination_registry=$1
+    # Read file to gather each image name, $image represents one imagename with a version
+    while IFS='' read -r image || [[ -n "$image" ]]; do 
+        echo "Now starting to pull image: $image"
+
+        # Pull the given image from the SOURCE_REGISTRY
+        docker pull "$SOURCE_REGISTRY$image"
+
+        echo "Image pulled; Retagging image before pushing"
+
+        # Tag the image with our destination registry
+        docker tag "$SOURCE_REGISTRY$image" "$destination_registry$image"
+
+        # Uncomment this if you are on AWS and want to have repositories created for your newly tagged images
+        # aws ecr describe-repositories  --region us-east-2 --repository-names $image 2>&1 > /dev/null
+        # status=$?
+        # if [[ ! "${status}" -eq 0 ]]; then
+        #     aws ecr create-repository --repository-name $image --region us-east-2
+        # fi
+
+        echo "Image tagged; Pushing now to destination registry: $destination_registry"
+
+        # Push our newly tagged image to the destination
+        docker push "$destination_registry$image"
+
+        # After upload, check the second conf file to determine if this image should be removed
+        if grep -Fxq $image $IMAGES_TO_PRESERVE_LOCALLY
+        then
+            echo "Transfer completed for image $image. The image $image was found in the list of images to be preserved and will not be removed locally"
+        else
+            echo "Transfer completed for image $image. Now cleaning up and removing these local images: $destination_registry$image, $SOURCE_REGISTRY$image"
+        
+            docker rmi -f "$destination_registry$image"
+            
+            docker rmi -f "$SOURCE_REGISTRY$image"
+        fi
+
+    done < "$IMAGES_TO_TRANSFER"
+fi
