@@ -3,12 +3,12 @@
 ## Introduction
 
 Starting with a Beta release in Resilient 36.2, IBM Resilient now supports container-based
-deployment of apps (integrations) using a VMWare image, called App Host, that pairs with your
+deployment of apps (integrations) using an environment called App Host that pairs with your
 Resilient appliance.
 
 In order to deploy to App Host, you will need to create an image of your app using Docker
-(or the container tool of your choice), push that image to a registry, and utilize the
-Resilient SDK to create a `.zip` file for your app in the standard format.
+(or the container tool of your choice), push that image to a registry, and utilize
+`resilient-sdk` to create a `.zip` file for your app in the standard format.
 
 
 ## Files
@@ -25,8 +25,8 @@ environment on top of that. For more information on Red Hat UBI, please see thei
 #### Required Changes
 
 For all apps, you will need to change `ARG APPLICATION=<app_name>` to match the name of your
-app. Note that if the build process is left unchaged, the `dist/` directory will mount into the container as `/tmp/packages`
-and `pip` will attempt to install file matching the format `tmp/packages/${APPLICATION}-*.tar.gz`, where
+app. Note that if the build process is left unchaged, the `dist/` directory will mount into the container as `/tmp/packages`.
+A `pip` command will attempt to install file matching the format `tmp/packages/${APPLICATION}-*.tar.gz`, where
 `${APPLICATION}` is the `<app_name>` you just provided. If your directory structure or naming
 convention for apps is different, you may need to slightly alter this process.
 
@@ -62,12 +62,32 @@ To expose a port, use this section:
 #EXPOSE 9000
 ```
 
+#### Building Your Container
+
+Once the Dockerfile is updated according to the needs of the app, it is now time to build an image.
+To do this, invoke a build command, e.g. `docker build -t resilient/your_custom_app:1.0.0 /path/to/dockerfile/directory`.
+
+In the above command, we use docker (you could use podman) to build the image according to the Dockerfile.
+The `-t` or `--tag` flag assigns the `resilient/your_custom_app` tag to the image with a version tag of `1.0.0`.
+Finally, we specify the path to the directory containing the target Dockerfile with `/path/to/dockerfile/directory`.
+
+Once the image is built, it is relatively easy to spin up a container on your local machine, provided you have access
+to a Resilient instance and a valid `app.config` file for that instance. Run the command below:
+```
+docker run -v /path/to/your/local/app.config:/etc/rescircuits/app.config resilient/your_custom_app
+```
+Here, we have just started the a container running `resilient/your_custom_app` and performed a volume mount
+with a local app config file, so that the container will use the configuration present in that file. Using the
+command as stated above will output the logs from the container so you can verify that `resilient-circuits`
+starts correctly. If you would prefer the logs not be output to the terminal, pass a `-d` flag to run the
+container in detached mode.
+
 ### apikey_permissions.txt
 
 This file contains a list of all API key permissions available to you in Resilient. By default, only
 `read_data` and `read_function` are enabled, which allow for communication over the message destination.
 Some apps, however, may require additional permissions in order to function properly. Uncomment those
-permissions accordingly before invoking the Resilient SDK command to package your app. At the time of
+permissions accordingly before invoking the `resilient-sdk package` command to package your app. At the time of
 packing, the SDK will read in the permissions you enabled so that App Host can generate an API key with
 the appropriate permissions for your app.
 
@@ -77,11 +97,13 @@ In almost all cases, this file can be left unchaged. The `entrypoint.sh` file se
 the `app.config` file utilized by the app container for changes. If changes are detected, the container will be killed.
 This is useful in a Kubernetes environment to enable a new container to start in the Pod using the new configuration.
 
-## Resilient SDK
+## resilient-sdk
 
-Introduced with Resilient 36.2 is the [Resilient SDK](https://pypi.org/project/resilient-sdk/). This
+Introduced with Resilient 36.2 is [resilient-sdk](https://pypi.org/project/resilient-sdk/). This
 tool is needed to produce a `.zip` file that App Host will leverage to install your app. To do this,
 install the SDK from PyPI and run `resilient-sdk package -p /path/to/your/app` in the command line.
+The resulting .zip file is placed in the dist/ folder. Import this file into Resilient. Your accompanying
+docker image will need to be placed in a container repository for use with AppHost.
 
 ## Wrapping Up
 
