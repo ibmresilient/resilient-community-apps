@@ -1,7 +1,7 @@
 include README.md
-include fn_resilient_ml/util/*
-include fn_resilient_ml/lib/*
-include fn_resilient_ml/lib/nlp/*
-include fn_resilient_ml/bin/*
-include fn_resilient_ml/LICENSE
+include fn_machine_learning_nlp/util/*
+include fn_machine_learning_nlp/lib/*
+include fn_machine_learning_nlp/lib/nlp/*
+include fn_machine_learning_nlp/bin/*
+include fn_machine_learning_nlp/LICENSE
 include doc/*

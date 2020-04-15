@@ -73,7 +73,7 @@ each other. This is a two-layer neural network model, which is not so computatio
 Users specify how many features (the number of dimensions of the vector space) to use. By default, 
 the Resilient NLP uses 50 features. Users can change this default value in app.config.
 
-n summary, word2vec can convert words into multidimensional vectors. Similar words stay close to each
+In summary, word2vec can convert words into multidimensional vectors. Similar words stay close to each
 other. Similarity between words can then be defined as dot product of the corresponding vectors.
 
 ### Sentence similarity 
@@ -104,6 +104,6 @@ vectors. It will be saved to a file as well.
     
     This is done in app.config. Put the absolute path to the folder there.
     ```
-    [fn_resilient_ml]
+    [fn_machine_learning_nlp]
      model_path=
     ```
