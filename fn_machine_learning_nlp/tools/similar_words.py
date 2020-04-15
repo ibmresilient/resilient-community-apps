@@ -1,10 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 
 #   Given an input word, find n top similar words using a given model
 #   Usage:
 #       similar_words _input_word -n 5 -m model_file
 #
+
 from fn_machine_learning_nlp.lib.file_manage import FileManage
 from fn_machine_learning_nlp.lib.nlp.nlp_word2vec import NLPWord2Vec
 

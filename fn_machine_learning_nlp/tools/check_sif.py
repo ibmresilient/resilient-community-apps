@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 
 #   Given an input word, find its word count. This determines the contribution to the similarity
 #   calculation. Note that the higher the word count the less important it is

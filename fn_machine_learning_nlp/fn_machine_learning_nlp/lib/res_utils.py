@@ -27,6 +27,7 @@ class ResUtils:
     def connect(self, opt_parser):
         res_opt = opt_parser.opts.get(RESILIENT_SECTION)
         host = res_opt.get("host", None)
+        port = res_opt.get("port", 443)
         email = res_opt.get("email", None)
         password = res_opt.get("password", None)
         org = res_opt.get("org", None)
@@ -34,11 +35,11 @@ class ResUtils:
         api_key_secret = res_opt.get("api_key_secret", None)
 
         if host and org and ((email and password) or (api_key_id and api_key_secret)):
-            url = "https://{}:443".format(host)
+            url = "https://{}:{}".format(host, port)
             verify = True
             try:
                 cafile = opt_parser.getopt(RESILIENT_SECTION, "cafile")
-                if cafile == "false" or cafile == "False":
+                if cafile in ['false', 'False']:
                     #
                     #   This is a security related feature. The user has to explicitly enter false or False to
                     #   turn it off. We don't accept anything else.
