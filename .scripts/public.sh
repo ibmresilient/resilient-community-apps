@@ -30,6 +30,7 @@ fn_alienvault_otx
 fn_ansible
 fn_ansible_tower
 fn_apility
+fn_aws_iam
 fn_aws_utilities
 fn_bigfix
 fn_bluecoat_site_review
