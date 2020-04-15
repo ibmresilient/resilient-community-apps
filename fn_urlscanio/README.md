@@ -100,3 +100,8 @@ To regenerate the customization blob,
 
 - Removed worklfow dependency on fn_utilities
 - Added incident_id parameter to workflow inputs
+
+### 1.1.1
+
+- Pinned version of resilient-lib to work with write_file_attachment
+- Updated customize.py so minimum required version of Resilient is v35.0

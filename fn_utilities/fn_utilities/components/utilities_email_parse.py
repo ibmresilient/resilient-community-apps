@@ -125,7 +125,9 @@ class FunctionComponent(ResilientComponent):
                             yield StatusMessage(u"Attempting to add {0} to Incident: {1}".format(attachment.get("filename"), fn_inputs.get("incident_id")))
 
                             # Write the attachment.payload to a temp file
-                            path_tmp_file, path_tmp_dir = write_to_tmp_file(data=attachment.get("payload"),
+                            payload = attachment.get("payload")
+                            decoded_payload = base64.b64decode(payload)
+                            path_tmp_file, path_tmp_dir = write_to_tmp_file(data=decoded_payload,
                                                                             tmp_file_name=attachment.get("filename"),
                                                                             path_tmp_dir=path_tmp_dir)
 

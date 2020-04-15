@@ -35,6 +35,7 @@ class TestUrlscanio:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
+    @pytest.mark.livetest
     @pytest.mark.parametrize("urlscanio_url, urlscan_incident_id, expected_results", [
         ("text", "text", {"value": "xyz"}),
         ("text", "text", {"value": "xyz"})

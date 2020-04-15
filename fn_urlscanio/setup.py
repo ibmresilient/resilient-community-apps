@@ -19,7 +19,7 @@ def snake_to_camel(word):
 
 setup(
     name='fn_urlscanio',
-    version='1.1.0',
+    version='1.1.1',
     license='MIT',
     author='IBM Resilient',
     url='http://ibm.biz/resilientcommunity',
@@ -27,7 +27,7 @@ setup(
     long_description="Resilient Circuits Components for 'fn_urlscanio'",
     install_requires=[
         'resilient_circuits>=30.0.0',
-        'resilient_lib>32.0.0'
+        'resilient_lib>=33.0.191'
     ],
     packages=find_packages(),
     include_package_data=True,
