@@ -22,6 +22,23 @@ readonly SOURCE_REGISTRY="quay.io/ibmresilient_dev/"
 # The registry we will push images too
 destination_registry=""
 
+function cmd_exists() {
+  command -v $1 > /dev/null 2>&1
+}
+# Default to docker but if its not there use podman
+container_engine=""
+if cmd_exists docker; then
+    # If docker exists, use that as our container engine
+    container_engine=docker
+
+elif cmd_exists podman; then
+    # Or if podman is there and docker isin't use that
+    container_engine=podman
+else # neither of the engines were found, exit with a message
+    echo >&2 "Image mirroring requires either Docker or Podman but neither were found. Aborting."; exit 1;
+fi
+
+
 # Check if string is empty using -z. For more 'help test'    
 if [[ -z "$1" ]]; then
    printf '%s\n' "No destination registry provided. Registry must be provided in the form: fqdn.registry.io/ exiting"
@@ -33,12 +50,12 @@ else # user provided a registry to push to.
         echo "Now starting to pull image: $image"
 
         # Pull the given image from the SOURCE_REGISTRY
-        docker pull "$SOURCE_REGISTRY$image"
+        $container_engine pull "$SOURCE_REGISTRY$image"
 
         echo "Image pulled; Retagging image before pushing"
 
         # Tag the image with our destination registry
-        docker tag "$SOURCE_REGISTRY$image" "$destination_registry$image"
+        $container_engine tag "$SOURCE_REGISTRY$image" "$destination_registry$image"
 
         # Uncomment this if you are on AWS and want to have repositories created for your newly tagged images
         # aws ecr describe-repositories  --region us-east-2 --repository-names $image 2>&1 > /dev/null
@@ -50,7 +67,7 @@ else # user provided a registry to push to.
         echo "Image tagged; Pushing now to destination registry: $destination_registry"
 
         # Push our newly tagged image to the destination
-        docker push "$destination_registry$image"
+        $container_engine push "$destination_registry$image"
 
         # After upload, check the second conf file to determine if this image should be removed
         if grep -Fxq $image $IMAGES_TO_PRESERVE_LOCALLY
@@ -59,9 +76,9 @@ else # user provided a registry to push to.
         else
             echo "Transfer completed for image $image. Now cleaning up and removing these local images: $destination_registry$image, $SOURCE_REGISTRY$image"
         
-            docker rmi -f "$destination_registry$image"
+            $container_engine rmi -f "$destination_registry$image"
             
-            docker rmi -f "$SOURCE_REGISTRY$image"
+            $container_engine rmi -f "$SOURCE_REGISTRY$image"
         fi
 
     done < "$IMAGES_TO_TRANSFER"
