@@ -143,7 +143,7 @@ def test_get_artifact_des():
     assert "QRadar Offense Source: Source IP" in des
     print("Done")
 
-def test_res_utils():
+if __name__=="__main__":
     #
     #   Test 1: Extract des from artifacts
     #   Static function. Test data hard coded
