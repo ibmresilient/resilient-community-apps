@@ -143,15 +143,7 @@ def test_get_artifact_des():
     assert "QRadar Offense Source: Source IP" in des
     print("Done")
 
-
-@pytest.fixture
-def test_get_incident_after(res_utils, min_id):
-    ret = res_utils.get_incidents_after(min_id)
-
-    return ret
-
-
-if __name__ == "__main__":
+def test_res_utils():
     #
     #   Test 1: Extract des from artifacts
     #   Static function. Test data hard coded
@@ -197,6 +189,6 @@ if __name__ == "__main__":
     #
     #   Test 5: get incidents after a given id
     #
-    ret = test_get_incident_after(res_util, min(all_ids))
+    ret = res_util.get_incidents_after(min(all_ids))
     assert (len(ret) == len(all_ids) - 1)
     print("Done")

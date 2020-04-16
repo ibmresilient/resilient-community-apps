@@ -4,25 +4,25 @@
 
 This function package provides the following feature to be used in a workflow:
 
-Search existing incidents and find the top similar ones.
+* Search existing incidents and find the top similar ones.
 
 In addition, this package contains a command line tool used to build a Natural Language Process (NLP) model.
 Please refer to the User Guide for instructions on building the model and running predictions.
 
 ## System Requirements
-- Resilient Server version 32 or later
-- Ability to connect to Resilient server with HTTPS on port 443 and 65001
+- Resilient platform version 32 or later
+- Ability to connect to a Resilient platform with HTTPS on port 443 and 65001
 - The minimum set of Resilient API permissions if using an API key account:
     - Incidents.Read
     - Edit Org Data
     - Functions.Read
 
-## Package Dependences
+## Package Dependencies
 - sklearn 0.19.2
 - pandas 0.23.3
 - numpy 1.12.1
 - scipy 1.1.0
-- resilient_circuits version 32 or later
+- Resilient Circuits version 32 or later
 
 ## Installation
 Install this package with 'pip', or run `python setup.py install`
@@ -51,13 +51,13 @@ num_features=50
 ```
 
 ## Customize
-Run with: `resilient-circuits customize` to install function definitions and sample workflows to the Resilient server.
+Run with: `resilient-circuits customize` to install function definitions and sample workflows to the Resilient platform.
 
 ## Start
-Start this function app with: `resilient-circuits run`
+Start this function with: `resilient-circuits run`
 
 ## Build a new NLP model
-Use the command line tool
+Use the command line tool:
 ```
 res-ml build_nlp
 ```
