@@ -5,6 +5,7 @@
 #
 from stix2 import TAXIICollectionSource, Filter, CompositeDataSource
 from stix2.datastore.taxii import DataSourceError
+# Current code is written to support v20, and importing from taxii2client directly returns v21 now
 from taxii2client.v20 import Server
 import re
 
