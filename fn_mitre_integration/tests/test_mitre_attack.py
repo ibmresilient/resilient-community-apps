@@ -324,24 +324,28 @@ class TestMitre(object):
 
     @pytest.mark.livetest
     def test_get_tech_mitigation(self):
+        """
+        There are some techniques that do not have mitigations.
+        We will test few and if at least one of the first 5 has mitigations we're ok,
+        otherwise we probably need to check if there's an error.
+        """
         techs = MitreAttackTechnique.get_all(self.mitre_conn)
         assert len(techs)
         try:
-            #
-            #   There are more than 200 techs. Try first 5 only
-            #
             count = 0
             for tech in techs:
                 id = tech.id
                 assert(id)
                 mitigation = tech.get_mitigations(self.mitre_conn)
-                assert mitigation
+
                 count += 1
-                if count > 2:
+
+                if len(mitigation):
+                    assert MitreAttackMitigation.get_by_name(self.mitre_conn, mitigation[0].name)
                     break
-                # Test getting mitigation using name
-                mitigation = tech.get_mitigations(self.mitre_conn)
-                assert mitigation
+                
+                if count > 5:
+                    assert False
         except Exception as e:
             assert(False)
 

@@ -5,7 +5,7 @@
 #
 from stix2 import TAXIICollectionSource, Filter, CompositeDataSource
 from stix2.datastore.taxii import DataSourceError
-from taxii2client import Server
+from taxii2client.v20 import Server
 import re
 
 MITRE_TAXII_URL = "https://cti-taxii.mitre.org/taxii/"
