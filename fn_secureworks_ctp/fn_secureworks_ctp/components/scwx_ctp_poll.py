@@ -124,8 +124,9 @@ class SecureworksCTPPollComponent(ResilientComponent):
 
                 tickets = response.get('tickets')
                 ticket_id_list = [ticket.get('ticketId') for ticket in tickets]
-                LOG.info(u"Secureworks CTP tickets to be processed this poll: ticket type: {0} grouping type: {1}:\n %s",
-                         ticket_type, grouping_type, ticket_id_list)
+                message = u"Secureworks CTP tickets to be processed this poll:\nticketType: {0} groupingType: {1}".format(ticket_type, grouping_type)
+                LOG.info(message)
+                LOG.info(u"%s", ticket_id_list)
 
                 for ticket in tickets:
 
