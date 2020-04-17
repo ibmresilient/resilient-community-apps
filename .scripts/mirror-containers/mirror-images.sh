@@ -7,25 +7,34 @@
 set -x
 
 # v1: At a high level; with this script we want to:
+# 0. Determine whether to use docker or podman
 # 1. Take in a named list of image we want to move WITH versions
 # 2. Pull each image from the source registry without only grabbing the tags specified
 # 3. Tag each image with its new destination tag before push
 # 4. Push each image with its new tag to the destination registry
 # 5. Delete all the images we pulled except for those named in the preserved_images.conf file, note only images not in use will be deleted.
 
+# TODO: Should we add a help ? 
+
+# TODO: should we aim to provide the full registry sync as an option from this ? 
+# Pulling all registry images from quay will require an OAuth access token to make requests to the quay api for gathering the list of repos and tags. 
+## Functions
+# Function used to check the existance of a command
+function cmd_exists() {
+  command -v $1 > /dev/null 2>&1
+}
+## Variables
 # The file from which we will pull configuration files
 readonly IMAGES_TO_TRANSFER="repo_quay.conf"
 
 readonly IMAGES_TO_PRESERVE_LOCALLY="preserved_images.conf"
 # The registry we will pull images from 
-readonly SOURCE_REGISTRY="quay.io/ibmresilient_dev/"
+readonly SOURCE_REGISTRY="quay.io/ibmresilient_dev"
+readonly srcreg="quay.io/ibmresilient_dev" 
 # The registry we will push images too
 destination_registry=""
 
-function cmd_exists() {
-  command -v $1 > /dev/null 2>&1
-}
-# Default to docker but if its not there use podman
+# Before trying to pull or push anything, check for the existance of either docker or podman
 container_engine=""
 if cmd_exists docker; then
     # If docker exists, use that as our container engine
@@ -50,12 +59,12 @@ else # user provided a registry to push to.
         echo "Now starting to pull image: $image"
 
         # Pull the given image from the SOURCE_REGISTRY
-        $container_engine pull "$SOURCE_REGISTRY$image"
+        $container_engine pull "$SOURCE_REGISTRY/$image"
 
         echo "Image pulled; Retagging image before pushing"
 
         # Tag the image with our destination registry
-        $container_engine tag "$SOURCE_REGISTRY$image" "$destination_registry$image"
+        $container_engine tag "$SOURCE_REGISTRY/$image" "$destination_registry/$image"
 
         # Uncomment this if you are on AWS and want to have repositories created for your newly tagged images
         # aws ecr describe-repositories  --region us-east-2 --repository-names $image 2>&1 > /dev/null
@@ -67,18 +76,18 @@ else # user provided a registry to push to.
         echo "Image tagged; Pushing now to destination registry: $destination_registry"
 
         # Push our newly tagged image to the destination
-        $container_engine push "$destination_registry$image"
+        $container_engine push "$destination_registry/$image"
 
         # After upload, check the second conf file to determine if this image should be removed
         if grep -Fxq $image $IMAGES_TO_PRESERVE_LOCALLY
         then
             echo "Transfer completed for image $image. The image $image was found in the list of images to be preserved and will not be removed locally"
         else
-            echo "Transfer completed for image $image. Now cleaning up and removing these local images: $destination_registry$image, $SOURCE_REGISTRY$image"
+            echo "Transfer completed for image $image. Now cleaning up and removing these local images: $destination_registry/$image, $SOURCE_REGISTRY/$image"
         
-            $container_engine rmi -f "$destination_registry$image"
+            $container_engine rmi -f "$destination_registry/$image"
             
-            $container_engine rmi -f "$SOURCE_REGISTRY$image"
+            $container_engine rmi -f "$SOURCE_REGISTRY/$image"
         fi
 
     done < "$IMAGES_TO_TRANSFER"
