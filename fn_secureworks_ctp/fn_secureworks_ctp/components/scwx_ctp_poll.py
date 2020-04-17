@@ -118,10 +118,9 @@ class SecureworksCTPPollComponent(ResilientComponent):
             for query in self.scwx_client.query_types:
 
                 # Get list of tickets needing updating
-                #response = self.scwx_client.post_tickets_updates(ticket_type, grouping_type)
                 ticket_type = query.get('ticketType')
                 grouping_type = query.get('groupingType')
-                response = self.scwx_client.mock_post_tickets_updates(ticket_type, grouping_type)
+                response = self.scwx_client.post_tickets_updates(ticket_type, grouping_type)
 
                 tickets = response.get('tickets')
                 ticket_id_list = [ticket.get('ticketId') for ticket in tickets]
@@ -148,7 +147,6 @@ class SecureworksCTPPollComponent(ResilientComponent):
 
                     # Acknowledge Secureworks that we have received and processed the tickets.
                     response_ack = self.scwx_client.post_tickets_acknowledge(ticket)
-                    response_ack = [{'code': "SUCCESS", 'ticketId': ticket_id}]
 
                     code = response_ack[0].get('code')
                     if code != "SUCCESS":
@@ -329,9 +327,7 @@ class SecureworksCTPPollComponent(ResilientComponent):
                 attachment_id = attachment.get('id')
 
                 # Get ticket attachment
-                #response = self.scwx_client.get_tickets_attachment(ticket_id, attachment_id)
-                response = {'name': 'Securework-attachment.txt',
-                            'content': 'here is the content '.encode('utf-8')}
+                response = self.scwx_client.get_tickets_attachment(ticket_id, attachment_id)
 
                 content = response.get('content')
                 datastream = BytesIO(content)
