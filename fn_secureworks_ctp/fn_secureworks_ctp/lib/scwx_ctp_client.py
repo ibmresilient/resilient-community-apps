@@ -17,6 +17,21 @@ def get_headers(apikey):
         'content-type': "application/json"
     }
 
+def get_query_types(query_list):
+    """
+    This function is used to parse the query_ticket_grouping_types string from the app.config
+    :param query_list: the string to parse into ticketType groupingType pairs for querying Securework ticket endpoint
+    :return: List of json objects.  Each json entry is a ticketType, groupingType pair
+    """
+    query_pair_list = query_list.split(',')
+    query_types = []
+    for pair in query_pair_list:
+        entry = {'ticketType': pair.split(':')[0].strip(),
+                 'groupingType': pair.split(':')[1].strip()
+                 }
+        query_types.append(entry)
+    return query_types
+
 class SCWXClient(object):
 
     """A simple client for the Secureworks CTP API.
@@ -30,8 +45,7 @@ class SCWXClient(object):
         self.username = options.get('username')
         self.password = options.get('password')
         self.limit = options.get('query_limit')
-        self.ticket_types = options.get('query_ticket_types', '').split(",")
-        self.grouping_types = options.get('query_grouping_types', '').split(",")
+        self.query_types = get_query_types(options.get('query_ticket_grouping_types'))
         self.assigned_to_customer = options.get('assigned_to_customer')
         self.cafile = options.get('cafile')
         self.bundle = os.path.expanduser(self.cafile) if self.cafile else False
@@ -41,14 +55,28 @@ class SCWXClient(object):
         self.APIKEY = u"APIKEY {0}:{1}".format(self.username, self.password)
         self.headers = get_headers(self.APIKEY)
 
-    def post_tickets_updates(self):
+    def mock_post_tickets_updates(self, ticket_type, grouping_type):
+        ticket_string = open('/Users/annmarie.meier.norcross@ibm.com/Secureworks.txt', mode="r").read()
+        tickets = json.loads(ticket_string)
+        matching_tickets = []
+        for ticket in tickets:
+            if (ticket.get('ticketType') == ticket_type) and (ticket.get('groupingType') == grouping_type):
+                matching_tickets.append(ticket)
+        response = {'tickets': matching_tickets}
+        return response
+
+    def post_tickets_updates(self, ticket_type, grouping_type):
         """POST get a list of updated tickets not yet acknowledged """
         url = u"{0}/tickets/updates".format(self.base_url)
-        payload = {'ticketType': self.ticket_types,
+        payload = {'ticketType': ticket_type,
                    'limit': self.limit,
-                   'groupingType': self.grouping_types,
                    'assignedToCustomer': self.assigned_to_customer,
-                   'worklogs': "UPDATED"}
+                   'worklogs': "UPDATED",
+                   'groupingType': grouping_type}
+
+        # groupingType is optional.  If it is not defined, then Secureworks CTP will return all
+        if grouping_type:
+            payload['groupingType'] = grouping_type
 
         response = self.rc.execute_call_v2("post", url, headers=self.headers, params=payload, verify=self.bundle,
                                            proxies=self.rc.get_proxies())
