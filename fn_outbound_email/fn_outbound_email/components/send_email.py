@@ -8,14 +8,15 @@ from __future__ import print_function
 import logging
 import os
 import tempfile
-from fn_outbound_email.lib.smtp_mailer import SendSMTPEmail
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import ResultPayload, validate_fields
+from fn_outbound_email.lib.smtp_mailer import SendSMTPEmail
+
 
 log = logging.getLogger(__name__)
 
 CONFIG_DATA_SECTION = 'fn_outbound_email'
-SMTP_DEFAULT_CONN_TIMEOUT = 15
+SMTP_DEFAULT_CONN_TIMEOUT = 20
 DEFAULT_TLS_SMTP_PORT = '587'
 
 class FunctionComponent(ResilientComponent):
@@ -29,7 +30,7 @@ class FunctionComponent(ResilientComponent):
         self.opts = opts
         self.smtp_config_section = self.opts.get(CONFIG_DATA_SECTION, {})
         self.template_file_path = self.smtp_config_section.get('template_file')
-        self.smtp_port_choice = self.smtp_config_section.get("smtp_port")
+        self.smtp_port_choice = str(self.smtp_config_section.get("smtp_port"))
         self.smtp_user = self.smtp_config_section.get("smtp_user")
 
         if self.template_file_path and not os.path.exists(self.template_file_path):
@@ -43,7 +44,7 @@ class FunctionComponent(ResilientComponent):
             "mail_bcc": [],
             'mail_subject': '',
             "attachment_list": []
-        }
+        }        
 
     @handler("reload")
     def _reload(self, event, opts):
@@ -53,8 +54,8 @@ class FunctionComponent(ResilientComponent):
     @function("send_email")
     def _send_email_function(self, event, *args, **kwargs):
         """Function: Send Email"""
-        try:
-            # Get the conditional function parameters:
+
+        def conditional_parameters():
             if self.smtp_port_choice == DEFAULT_TLS_SMTP_PORT:
                 mail_from = self.smtp_user
             else:
@@ -63,20 +64,32 @@ class FunctionComponent(ResilientComponent):
                 with open(self.template_file_path, "r") as definition:
                     mail_body_html = definition.read()
                     log.info("Using custom jinja template instead of default, path: %s", self.template_file_path)
+                    jinja = True
             else:
                 mail_body_html = kwargs.get("mail_body_html")
+                jinja = False
+            if self.smtp_user and not kwargs.get("mail_to"):
+                mail_to = self.smtp_user
+            else:
+                mail_to = kwargs.get("mail_to")
+            email_message = None
+            text = "N/A"
+            return mail_from, mail_to, mail_body_html, jinja, email_message, text
+
+        try:
             # Get the function parameters:
-            mail_to = kwargs.get("mail_to")  # text
+            mail_to = kwargs.get("mail_to")
             mail_cc = kwargs.get("mail_cc")  # text
             mail_bcc = kwargs.get("mail_bcc")  # text
             mail_subject = kwargs.get("mail_subject")  # text
             mail_body_text = kwargs.get("mail_body_text")  # text
-            mail_incident_id = kwargs.get("mail_incident_id")  # number
+            mail_incident_id = kwargs.get("mail_incident_id")  # number.            
+            # Get the conditional function parameters:
+            mail_from, mail_to, mail_body_html, jinja, email_message, text = conditional_parameters()
 
-            if not mail_from: mail_from = "N/A"
+            if not mail_from: mail_from = "example@email.com"
             if not mail_cc: mail_cc = "N/A"
             if not mail_bcc: mail_bcc = "N/A"
-            if not mail_subject: mail_subject = "N/A"
             
             log.info("mail_from: %s", mail_from)
             log.info("mail_to: %s", mail_to)
@@ -94,7 +107,7 @@ class FunctionComponent(ResilientComponent):
             self.mail_data['mail_attachments'] = self.process_attachments(inc_id=mail_incident_id)
 
             payload = ResultPayload(CONFIG_DATA_SECTION, **kwargs)
-            validate_fields(["mail_to", "mail_subject", "mail_incident_id"], kwargs)
+            validate_fields(["mail_subject", "mail_incident_id"], kwargs)
 
             yield StatusMessage("Starting to send email...")
 
@@ -105,23 +118,22 @@ class FunctionComponent(ResilientComponent):
 
             self.incident_data = send_smtp_email.get_incident_data(mail_incident_id)
 
-            success = True
-            email_message = None
-            text = "N/A"
-
             if mail_body_html:
                 log.info("Rendering template")
                 mail_body_html = send_smtp_email.render_template(mail_body_html, self.incident_data, self.mail_data)
-                text = mail_body_html
-                email_message = send_smtp_email.send(body_html=mail_body_html)
+                if jinja:
+                    email_message = send_smtp_email.send(body_html=mail_body_html)
+                    text = mail_body_html
+                else:
+                    email_message = send_smtp_email.send(body_html=mail_body_html.replace('---===newline===---', '<div>'))
+                    text = mail_body_html.replace('---===newline===---', '<br>')
             elif mail_body_text:
                 log.info("Rendering text")
                 text = mail_body_text
                 email_message = send_smtp_email.send(body_text=mail_body_text)
 
             if not email_message:
-                success = False
-                log.error("Email was not sent, likely due to jinja template errors")
+                raise Exception("Local jinja template not valid, please retry sending with valid template locallu or remove to use default")
 
             yield StatusMessage("Done with sending email...")
             
@@ -149,7 +161,7 @@ class FunctionComponent(ResilientComponent):
         for incident_attachment in incident_attachment_list:
             file_name = incident_attachment["name"]
             file_contents = self.rest_client().get_content("/incidents/{inc_id}/attachments/{attach_id}/contents".
-                                                           format(inc_id=inc_id,attach_id=incident_attachment["id"]))
+                                                           format(inc_id=inc_id, attach_id=incident_attachment["id"]))
             tempdir = tempfile.mkdtemp()
             file_path = os.path.join(tempdir, file_name)
             with open(file_path, "wb+") as temp_file:

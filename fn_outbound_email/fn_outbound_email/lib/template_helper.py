@@ -23,6 +23,7 @@ class TemplateHelper(object):
         self.field_defs = None
 
     def get_datatable(self, datatable_name, incident_id, html=True):
+        """datatable jinja template"""
         LOG.info(
             'get_datatable: ({datatable_name}) ({inc_id})'.format(datatable_name=datatable_name, inc_id=incident_id))
         try:
@@ -174,8 +175,7 @@ class TemplateHelper(object):
 
     @staticmethod
     def get_timestamp(offset=0):
-        return int(round(time.time() + offset))
-    
+        return int(round(time.time() + offset))    
     # format_timestamp() has changed in version 1.0.7.
     # This function now takes EPOCH time in seconds as an argument. If formatting a Resilient date/time field,
     # divide it by 1000, first, in the JINJA template. 

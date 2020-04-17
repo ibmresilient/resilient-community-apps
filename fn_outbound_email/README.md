@@ -5,6 +5,8 @@
     - [v1.0.7](#v107)
   - [Requirements](#requirements)
   - [Installation](#installation)
+    - [Installation: New users](#installation-new-users)
+    - [Installation: Existing Users](#installation-existing-users)
   - [Common connection issues with TLS](#common-connection-issues-with-tls)
   - [Uninstall](#uninstall)
   - [Troubleshooting](#troubleshooting)
@@ -30,7 +32,7 @@
 <!--
   List any Requirements 
 -->
-* IBM Resilient >= `v35.0.5445`
+* IBM Resilient >= `v33.0.5112`
 * An Integration Server running `resilient_circuits`
 
   * The minimum set of Resilient API permissions for this integration if using an API key account:
@@ -50,6 +52,8 @@
 ---
 
 ## Installation
+
+### Installation: New users
 * Download the `fn_outbound_email.zip`.
 * Copy the `.zip` to your Integration Server and SSH into it.
 * **Unzip** the package:
@@ -83,10 +87,11 @@
   | **smtp_password** | Yes | `` | *Blank on port 25, login password on 587* |
   | **smtp_port** | Yes | `25` | *Defaults to unauthenticated, 587 for TLS* |
   | **smtp_conn_timeout** | Yes | `15` | *Time in seconds* |
-  | **smtp_ssl_mode** | Yes | `None` | *Not supported* |
+  | **smtp_ssl_mode** | No | `None` | *Not supported* |
+  | **template_file** | No | `example.jinja` | *Optional - Path to a custom template file for formatting HTML email. /fn_outbound_email/example.jinja* |
 
 * **Save** and **Close** the app.config file.
-* [Optional]: Run selftest to test the Integration you configured:
+* Run selftest to test the Integration you configured:
   ```
   $ resilient-circuits selftest -l fn-outbound-email
   ```
@@ -95,6 +100,12 @@
   ```
   $ resilient-circuits run
   ```
+
+### Installation: Existing Users
+* Prior to the steps above, if you have a modified jinja template in use in the preprocessing script, save it offline as a .jinja file
+* This file can be specified using the template file parameter and will send via deprecated logic
+* Export the current working state in Adminstrator Settings/ Organization/ Export
+* Install the new version in a seperate virtual python environment so you can easy revert
 
 ## Common connection issues with TLS
 
@@ -153,4 +164,4 @@ There are several ways to verify the successful operation of a function.
 ## Support
 | Name | Version | Author | Support URL |
 | ---- | ------- | ------ | ----------- |
-| fn_outbound_email | 1.0.7 | IBM Resilient | https://www.ibm.com/security/intelligent-orchestration/resilient |
+| fn_outbound_email | 1.0.7 | Sean@IBM Resilient | https://www.ibm.com/security/intelligent-orchestration/resilient |

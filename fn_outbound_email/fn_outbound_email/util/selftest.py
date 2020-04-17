@@ -7,8 +7,8 @@
 
 import smtplib
 import logging
-from fn_outbound_email.lib.smtp_mailer import SendSMTPEmail
 from resilient_lib.components.resilient_common import validate_fields
+from fn_outbound_email.lib.smtp_mailer import SendSMTPEmail
 
 LOG = logging.getLogger(__name__)
 LOG.addHandler(logging.StreamHandler())
@@ -18,6 +18,7 @@ SMTP_DEFAULT_CONN_TIMEOUT = 20
 SMTP_DEFAULT_PORT = 25
 
 def selftest_function(opts):
+    """test if host exists, if using TLS sends an empty email"""
 
     try:
         smtp_config_section = opts.get(CONFIG_DATA_SECTION, {})
@@ -44,21 +45,22 @@ def selftest_function(opts):
             smtp_connection = smtplib.SMTP(host=smtp_server,
                                                     port=smtp_port,
                                                     timeout=smtp_conn_timeout)
-
-            if smtp_config_section.get("smtp_ssl_mode") == "starttls":
+            if smtp_config_section.get("smtp_ssl_mode") == "starttls" and smtp_user is not None:
                 LOG.info("Starting TLS...")
                 smtp_connection.ehlo()
                 smtp_connection.starttls()
                 smtp_connection.ehlo()
+                LOG.info("Logging in to SMTP...")
+                if not smtp_password:
+                    raise Exception('An SMTP user has been set; the SMTP password from app.config cannot be null')
+                else:
+                    smtp_connection.login(user=smtp_user, password=smtp_password)
+                    smtp_connection.sendmail(smtp_user, smtp_user,'this is a test email')
 
-        if smtp_user:
-            LOG.info("Logging in to SMTP...")
-            if not smtp_password:
-                raise Exception('An SMTP user has been set; the SMTP password from app.config cannot be null')
-            else:
-                smtp_connection.login(user=smtp_user, password=smtp_password)
-                smtp_connection.sendmail(smtp_user, smtp_user,'test')
         return {"state": "success"}
     except Exception as err:
         LOG.error(err)
         return {"state": "failure"}
+    finally:
+        if smtp_connection:
+            smtp_connection.quit()
