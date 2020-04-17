@@ -47,11 +47,10 @@ with the incident tab displayed:
 ![screenshot: swcx_close_ticket_incident](./screenshots/scwx_incident.png)
 
 <p> 
-Once a Secureworks incidents is resolved, the incident is closed in Resilient by the user via the Actions menu Close Incident item.  This will trigger the close menu popup to appear as depicted below.  The user will select the Secureworks CTP close code, the Resilient Resolution ID and enter the Resolution Summary.
-Once the user clicks OK on this popup, the Secureworks close code stored in the scwx_ctp_close_code custom incident field.  The Secureworks CTP Close Ticket rule is automatically activated kicking off the Example Secureworks Close Ticket workflow.  The Secureworks CTP close code and the Resolution summary are sent back to Secureworks when the function is activated to close the corresponding Secureworks Ticket in Secureworks. 
+Once a Secureworks incidents is resolved, the incident is closed in Resilient by the user via the Actions menu Close Incident item, triggering the close menu popup to appear as depicted below.  Select the Secureworks CTP close code, the Resilient Resolution ID and enter the Resolution Summary.  Once the user clicks OK, the Secureworks CTP Close Ticket automatic rule is activated, starting the Example Secureworks Close Ticket workflow.  The Secureworks CTP close code and the Resolution summary are sent back to Secureworks when the function is activated to close the corresponding Secureworks Ticket in Secureworks. 
 
 <p>
-NOTE: The integration uses default Secureworks CTP close codes that appear in the Close Incident popup select input field.  The defaults can be overridden in the app.config by setting close_code parameter list.
+NOTE: The integration uses default Secureworks CTP close codes that appear in the Close Incident popup select input field.  The defaults can be overridden in the app.config by setting close_code parameter.
 
 ![screenshot: swcx_close_ticket_popup](./screenshots/scwx_close_ticket_popup.png)
 
@@ -59,7 +58,7 @@ NOTE: The integration uses default Secureworks CTP close codes that appear in th
 
 ---
 ## Poller
-Threaded Poller runs continuously while the integration is running. 
+The integration poller runs continuously while the integration is running. 
 
 * The poller creates a Resilient incident for each Secureworks CTP ticket returned matching the search criteria.
 * The user can specify which of the following Secureworks CTP ticket types to be searched during polling:
