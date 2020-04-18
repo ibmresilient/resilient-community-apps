@@ -1,28 +1,39 @@
-# AppHost Conversion Files
+# App Host Conversion Files
 
 ## Introduction
 
 Starting with Resilient v36.2, IBM Resilient now supports container-based
-deployment of apps (integrations) using an environment called AppHost that pairs with your
-Resilient appliance to run integrations.
+deployment of apps using an environment called App Host that pairs with your
+Resilient organization to run apps.
 
-In order to deploy containers to AppHost, you will need to 
+A Resilient app is a collection of Resilient playbook components, 
+Python-based external code executables or both that represent an 
+end-to-end function that can be easily installed and deployed 
+within the Resilient platform. A Resilient app is the next 
+generation of the Resilient extension or integration. 
+The main difference between a Resilient app and Resilient extension 
+is that apps use containers for improved usability, manageability, 
+and security.
+
+In order to deploy containers to App Host, you will need to 
 
 * create a container image of your app using Docker, Podman
 or the container tool of your choice, 
 * push that image to a container registry, and 
 * utilize
-`resilient-sdk package` to create a `.zip` file to import your integration into Resilient.
+`resilient-sdk package` to create a `.zip` file to import your application into the 
+Resilient organization.
 
 
 ## Files
 
-There are 3 files in this directory that will enable you to successfully package your app to deploy on AppHost.
+This directory contains three files and a directory of icons that will enable you to successfully package your app to deploy on App Host.
 Most of the content can remain the same - you will only need to make a few manual edits.
 
 * [Dockerfile](#Dockerfile)
 * [apikey_permissions.txt](#apikey_permissions.txt)
 * [entrypoint.sh](#entrypoint.sh)
+* [icons](#icons)
 
 
 ### Dockerfile
@@ -72,7 +83,7 @@ To expose a port, use this section:
 #### Building Your Container
 
 Once the Dockerfile is updated according to the needs of the app, it is now time to build an image.
-To do this, invoke a build command in the directory where the Dockerfile is found, e.g. `docker build . -t your_company/your_custom_app:1.0.0`.
+To do this, invoke a build command in the directory where the Dockerfile is found, e.g., `docker build . -t your_company/your_custom_app:1.0.0`.
 
 In the above command, we use docker to build the image according to the Dockerfile. Other tools such as podman can also be used.
 
@@ -80,7 +91,7 @@ The `-t` or `--tag` flag assigns the `your_company/your_custom_app` tag to the i
 Finally, we specify the path to the directory containing the target Dockerfile with current directory (.). The container version must match the version specified in your `setup.py` file.
 
 Once the image is built, it is relatively easy to spin up a container on your local machine for testing, provided you have access
-to a Resilient instance and a valid `app.config` file for that instance. Run the command below:
+to a Resilient organization and a valid `app.config` file for that organization. Run the command below:
 ```
 docker run -v /path/to/your/local/app.config:/etc/rescircuits/app.config your_company/your_custom_app:1.0.0
 ```
@@ -92,11 +103,11 @@ container in detached mode.
 
 ### apikey_permissions.txt
 
-This file contains a list of all API key permissions available to you in Resilient. By default, only
+This file contains a list of all Resilient API key account permissions. By default, only
 `read_data` and `read_function` are enabled, which allow for communication over the message destination.
 Some apps, however, may require additional permissions in order to function properly, such as the use of different Resilient API calls. Uncomment those
 permissions accordingly before invoking the `resilient-sdk package` command to package your app. At the time of
-packing, the SDK will read the permissions you enabled so that AppHost can generate an API key with
+packing, the SDK will read the permissions you enabled so that App Host can generate an API key with
 the appropriate permissions for your app.
 
 ### entrypoint.sh
@@ -104,15 +115,24 @@ the appropriate permissions for your app.
 In almost all cases, this file should be left unchanged. The `entrypoint.sh` file serves as a means to execute resilient-circuits and monitor
 changes to the `app.config` file. If changes are detected, the container will be killed and restarted by Kubernetes.
 
+### icons
+Two icons are provided to allow you to use or modify for your application. 
+Add this directory to your application so that the `resilient-sdk package` process
+can bundle them together for display within the Resilient organization. 
+
+* company_logo.png - this icon must be 100x100px and by default displays the IBM Shield. It can be replaced to represent your companies' logo.
+* app_logo.png - this icon must be 200x72px and by default displays the IBM Shield.  It can be replaced to represent a visual representation of our application. 
+See the [IBM AppExchange](https://exchange.xforce.ibmcloud.com/hub?br=Resilient) for examples. 
+
 ## resilient-sdk
 
-Introduced with Resilient 36.2 is [resilient-sdk](https://pypi.org/project/resilient-sdk/). This
-tool is needed to build and package a `.zip` file that AppHost will leverage to install your app. To do this,
+Introduced with Resilient v36.2 is [resilient-sdk](https://pypi.org/project/resilient-sdk/). This
+tool is needed to build and package a `.zip` file that App Host will leverage to install your app. To do this,
 install the SDK from PyPi and run `resilient-sdk package -p /path/to/your/app` at the command line.
-The resulting .zip file is placed in the integration's dist/ folder. Import this file into Resilient. Your accompanying
-docker image will need to be placed in a container repository to complete the deployment to AppHost.
+The resulting .zip file is placed in the app's `dist/` folder. Import this file into Resilient. Your accompanying
+docker image will need to be placed in a container repository to complete the deployment to App Host.
 
 ## Wrapping Up
 
 Now that you have created a container image and `.zip` file for your app, you are ready
-to install it and deploy to your Resilient appliance through the UI using AppHost.
+to install it and deploy to your Resilient organization through the UI using App Host.
