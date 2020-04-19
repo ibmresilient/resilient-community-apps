@@ -42,7 +42,7 @@
 <p>
 The Secureworks CTP Functions for Resilient includes:
 
-* A poller component that continuously brings Secureworks CTP tickets into Resilient as incidents
+* A poller component that continuously checks the Secureworks CTP endpoint for new tickets and brings ticket into Resilient as incidents. Ticket worklogs and attachments are also created in the Resilient incident as notes and attachments. 
 *  Function to close a ticket in Secureworks when the corresponding Resilient incident is closed.
 
 
@@ -93,9 +93,8 @@ The Secureworks CTP Functions for Resilient includes:
   | ------ | :------: | ------- | ----------- |
   | **base_url** | Yes | `https://api.secureworks.com/api/ticket/v3` | *Secureworks CTP base URL* |
   | **username** | Yes | `user@example.com` | *email address associated with Secureworks account* |
-  | **password** | Yes | `` | *password accosiated with Secureworks account* |
-  | **query_ticket_types** | Yes | `INCIDENT` | *Secureworks ticketType  to query: SERVICE_REQUEST, INCIDENT, CHANGE* |
-  | **query_grouping_types** | Yes | `SECURITY` | *Secureworks groupingType to query: REQUEST, CHANGE, HEALTH, SECURITY* |
+  | **password** | Yes | `` | *password associated with Secureworks account* |
+  | **query_ticket_grouping_types** | Yes | `INCIDENT:SECURITY` | *Comma separated list of ticketType:groupingType pairs indicating ticket and grouping types to query. Secureworks ticketTypes : SERVICE_REQUEST, INCIDENT, CHANGE. Secureworks groupingTypes: REQUEST, CHANGE, HEALTH, SECURITY* |
   | **query_limit** | Yes | `10` | *Maximum number of tickets to be returned from Secureworks API query* |
   | **assigned_to_customer** | Yes | `true` | *Boolean indicating whether to only return tickets assigned to the client* |
   | **polling_interval** | Yes | `600` | *Time in seconds between queries to Secureworks endpoint* |
