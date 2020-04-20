@@ -34,6 +34,12 @@ readonly srcreg="quay.io/ibmresilient_dev"
 # The registry we will push images too
 destination_registry=""
 
+# Check if string is empty using -z. For more 'help test'    
+if [[ -z "$1" ]]; then
+   printf '%s\n' "No destination registry provided. Registry must be provided in the form: fqdn.registry.io/ exiting"
+   exit 1
+fi
+
 # Before trying to pull or push anything, check for the existance of either docker or podman
 container_engine=""
 if cmd_exists docker; then
@@ -48,47 +54,42 @@ else # neither of the engines were found, exit with a message
 fi
 
 
-# Check if string is empty using -z. For more 'help test'    
-if [[ -z "$1" ]]; then
-   printf '%s\n' "No destination registry provided. Registry must be provided in the form: fqdn.registry.io/ exiting"
-   exit 1
-else # user provided a registry to push to. 
-    destination_registry=$1
-    # Read file to gather each image name, $image represents one imagename with a version
-    while IFS='' read -r image || [[ -n "$image" ]]; do 
-        echo "Now starting to pull image: $image"
 
-        # Pull the given image from the SOURCE_REGISTRY
-        $container_engine pull "$SOURCE_REGISTRY/$image"
+destination_registry=$1
+# Read file to gather each image name, $image represents one imagename with a version
+while IFS='' read -r image || [[ -n "$image" ]]; do 
+    echo "Now starting to pull image: $image"
 
-        echo "Image pulled; Retagging image before pushing"
+    # Pull the given image from the SOURCE_REGISTRY
+    $container_engine pull "$SOURCE_REGISTRY/$image"
 
-        # Tag the image with our destination registry
-        $container_engine tag "$SOURCE_REGISTRY/$image" "$destination_registry/$image"
+    echo "Image pulled; Retagging image before pushing"
 
-        # Uncomment this if you are on AWS and want to have repositories created for your newly tagged images
-        # aws ecr describe-repositories  --region us-east-2 --repository-names $image 2>&1 > /dev/null
-        # status=$?
-        # if [[ ! "${status}" -eq 0 ]]; then
-        #     aws ecr create-repository --repository-name $image --region us-east-2
-        # fi
+    # Tag the image with our destination registry
+    $container_engine tag "$SOURCE_REGISTRY/$image" "$destination_registry/$image"
 
-        echo "Image tagged; Pushing now to destination registry: $destination_registry"
+    # Uncomment this if you are on AWS and want to have repositories created for your newly tagged images
+    # aws ecr describe-repositories  --region us-east-2 --repository-names $image 2>&1 > /dev/null
+    # status=$?
+    # if [[ ! "${status}" -eq 0 ]]; then
+    #     aws ecr create-repository --repository-name $image --region us-east-2
+    # fi
 
-        # Push our newly tagged image to the destination
-        $container_engine push "$destination_registry/$image"
+    echo "Image tagged; Pushing now to destination registry: $destination_registry"
 
-        # After upload, check the second conf file to determine if this image should be removed
-        if grep -Fxq $image $IMAGES_TO_PRESERVE_LOCALLY
-        then
-            echo "Transfer completed for image $image. The image $image was found in the list of images to be preserved and will not be removed locally"
-        else
-            echo "Transfer completed for image $image. Now cleaning up and removing these local images: $destination_registry/$image, $SOURCE_REGISTRY/$image"
+    # Push our newly tagged image to the destination
+    $container_engine push "$destination_registry/$image"
+
+    # After upload, check the second conf file to determine if this image should be removed
+    if grep -Fxq $image $IMAGES_TO_PRESERVE_LOCALLY
+    then
+        echo "Transfer completed for image $image. The image $image was found in the list of images to be preserved and will not be removed locally"
+    else
+        echo "Transfer completed for image $image. Now cleaning up and removing these local images: $destination_registry/$image, $SOURCE_REGISTRY/$image"
+    
+        $container_engine rmi -f "$destination_registry/$image"
         
-            $container_engine rmi -f "$destination_registry/$image"
-            
-            $container_engine rmi -f "$SOURCE_REGISTRY/$image"
-        fi
+        $container_engine rmi -f "$SOURCE_REGISTRY/$image"
+    fi
 
-    done < "$IMAGES_TO_TRANSFER"
-fi
+done < "$IMAGES_TO_TRANSFER"
