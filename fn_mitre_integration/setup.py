@@ -15,7 +15,7 @@ setup(
         'resilient_lib',
         'resilient_circuits>=32.0.0',
         'stix2',
-        'taxii2-client'
+        'taxii2-client>=2.0.0'
     ],
     packages=find_packages(),
     include_package_data=True,

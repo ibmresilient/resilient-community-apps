@@ -19,6 +19,9 @@ from mock import patch
 import re
 
 
+MAXIMUM_N_TECHNIQUES_WITHOUT_MITIGATION = 5
+
+
 def url_get(url):
     ret = False
     try:
@@ -344,7 +347,7 @@ class TestMitre(object):
                     assert MitreAttackMitigation.get_by_name(self.mitre_conn, mitigation[0].name)
                     break
                 
-                if count > 5:
+                if count > MAXIMUM_N_TECHNIQUES_WITHOUT_MITIGATION:
                     assert False
         except Exception as e:
             assert(False)
