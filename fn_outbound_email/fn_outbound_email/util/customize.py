@@ -32,7 +32,7 @@ def customization_data(client=None):
     # This import data contains:
     #   Action fields:
     #     mail_cc
-    #     mail_to
+    #     mail_to 
     #   Function inputs:
     #     mail_bcc
     #     mail_body_html
