@@ -35,7 +35,7 @@ The Secureworks CTP integration implements the following functionality in Resili
 
 * Poll Secureworks CTP for tickets and create a corresponding incident in the Resilient platform for each ticket.
 * Get Secureworks CTP ticket workLogs and attachments and add them as notes and attachments in the corresponding Resilient incident.
-* Close the Secureworks CTP ticket when the corresponding Resilient incident is closed in Resilient.
+* Close a Secureworks CTP ticket when the corresponding Resilient incident is closed in Resilient.
 ---
 ## Integration Flow for Ticket Management
 

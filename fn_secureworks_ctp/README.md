@@ -40,10 +40,15 @@
   The text below is parsed from the "description" and "long_description" attributes in the setup.py file
 -->
 <p>
-The Secureworks CTP Functions for Resilient includes:
+The Secureworks Counter Threat Platform (CTP) uses the global visibility gained from gathering and analyzing data from clients all over the world to more accurately identify, contain and eradicate cybersecurity threats. By combining up-to-the-minute threat intelligence with the CTP's machine learning and analytics capabilities, organizations can make faster, more informed decisions about how to predict, prevent, detect, and respond to threat activity.
+<p>
+CTP is used with the Secureworks SOC team when they find an security issue that needs to be communicated to the customer. The issues can be informational, research-based or require proscriptive actions by the customer. Secureworks CTP provides a “ticket-like” interface that allows you acknowledge, add files and notes, and provide ability to close tickets.   
+<p>
+ The Secureworks CTP integration implements the following functionality in Resilient:
 
-* A poller component that continuously checks the Secureworks CTP endpoint for new tickets and brings ticket into Resilient as incidents. Ticket worklogs and attachments are also created in the Resilient incident as notes and attachments. 
-*  Function to close a ticket in Secureworks when the corresponding Resilient incident is closed.
+* Poll Secureworks CTP for tickets and create a corresponding incident in the Resilient platform for each ticket.
+* Get Secureworks CTP ticket workLogs and attachments and add them as notes and attachments in the corresponding Resilient incident.
+* Close a Secureworks CTP ticket when the corresponding Resilient incident is closed in Resilient.
 
 
  ![screenshot: main](./doc/screenshots/scwx_main.png)
@@ -122,6 +127,42 @@ The Secureworks CTP Functions for Resilient includes:
   ```
 * Open the config file, scroll to the [fn_secureworks_ctp] section and remove the section or prefix `#` to comment out the section.
 * **Save** and **Close** the app.config file.
+
+---
+### Custom Layouts
+<!--
+  Use this section to provide guidance on where the user should add any custom fields and data tables.
+  You may wish to recommend a new incident tab.
+  You should save a screenshot "custom_layouts.png" in the doc/screenshots directory and reference it here
+-->
+Customize Secureworks CTP and Close Incident Layouts to provide Secureworks specific information in the Resilient UI.
+ 
+#### Secureworks CTP Layout Tab
+Create a Secureworks CTP custom incident tab so that you can view Secureworks CTP ticket information in one place. 
+
+* Go to the Customizations Settings -> Layouts tab.
+* Click the Incident Tabs menu item on the left. 
+* Click the Add Tab button.  
+* Enter Secureworks CTP in Add a Tab popup and click Add.
+
+   ![screenshot: custom_layouts](./doc/screenshots/scwx_layout_tab_create_scwx.png)
+---
+
+* Next, search for the Secureworks CTP (scwx) custom incident fields in the Fields search bar.
+* Drag Secureworks custom incidents fields on to the layout in the center of the screeen.
+* Click Save.
+
+   ![screenshot: custom_layouts_fields](./doc/screenshots/scwx_layout_tab_fields.png)
+---
+#### Close Incident Layout Tab
+Modify the Close Incident tab so the the Secureworks close code can be selected from the Close Incident popup from Resilient. 
+* Go to the Customizations Settings -> Layouts tab.
+* Click the Close Incident menu item on the left as shown in the screenshot below.
+  ![screenshot: custom_layouts](./doc/screenshots/scwx_layout_tab_create_close.png)
+---
+* Next, search for the Secureworks CTP Close Code custom incident fields in the Fields search bar.
+* Drag the Secureworks CTP Close Code onto the Close Incident layout tab.
+   ![screenshot: custom_layout_close_add](./doc/screenshots/scwx_close_layout_tab_add.png)
 
 ---
 
