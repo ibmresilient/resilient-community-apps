@@ -24,8 +24,8 @@ class FunctionComponent(ResilientComponent):
         self.options = opts.get(CONFIG_DATA_SECTION, {})
 
         # Validate required fields in app.config are set
-        required_fields = ["base_url", "username", "password", "query_limit", "query_ticket_types",
-                           "query_grouping_types", "assigned_to_customer", "polling_interval"]
+        required_fields = ["base_url", "username", "password", "query_limit", "query_ticket_grouping_types",
+                           "assigned_to_customer", "polling_interval"]
         validate_fields(required_fields, self.options)
 
         # Create Secureworks client
