@@ -6,7 +6,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_ldap_utilities',
-    version='1.1.0',
+    version='1.1.1',
     license='MIT',
     author='IBM Resilient',
     author_email='support@resilientsystems.com',
