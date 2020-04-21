@@ -29,25 +29,25 @@
 <p>
 The Secureworks Counter Threat Platform (CTP) uses the global visibility gained from gathering and analyzing data from clients all over the world to more accurately identify, contain and eradicate cybersecurity threats. By combining up-to-the-minute threat intelligence with the CTP's machine learning and analytics capabilities, organizations can make faster, more informed decisions about how to predict, prevent, detect, and respond to threat activity.
 <p>
-CTP is used with the Secureworks SOC team when they find an security issue that needs to be communicated to the customer. The issues can be informational, research-based or require proscriptive actions by the customer. Secureworks CTP provides a “ticket-like” interface that allows you acknowledge, add files and notes, and provide ability to close tickets.   
+CTP is used with the Secureworks SOC team when they find a security issue that needs to be communicated to the customer. The issues can be informational, research-based or require proscriptive actions by the customer. Secureworks CTP provides a “ticket-like” interface that allows you acknowledge, add files and notes, and provide ability to close tickets.   
 <p>
-The Secureworks CTP integration implements the following functionality in Resilient:
+The Secureworks CTP integration implements the following functionality in the Resilient platform:
 
 * Poll Secureworks CTP for tickets and create a corresponding incident in the Resilient platform for each ticket.
 * Get Secureworks CTP ticket workLogs and attachments and add them as notes and attachments in the corresponding Resilient incident.
-* Close a Secureworks CTP ticket when the corresponding Resilient incident is closed in Resilient.
+* Close a Secureworks CTP ticket when the corresponding Resilient incident is closed.
 ---
 ## Integration Flow for Ticket Management
 
 <p>
-The primary use case for the Secureworks CTP integration with Resilient is to
-bring Secureworks CTP tickets of interest into Resilient for further inspection and migitation. Below is a screenshot of a sample Secureworks CTP incident 
+The primary use case for the Secureworks CTP integration with the Resilient platform is to
+bring Secureworks CTP tickets of interest into the Resilient platform for further inspection and migitation. Below is a screenshot of a sample Secureworks CTP incident 
 with the incident tab displayed:
 
 ![screenshot: swcx_close_ticket_incident](./screenshots/scwx_incident.png)
 
 <p> 
-Once a Secureworks incidents is resolved, the incident is closed in Resilient by the user via the Actions menu Close Incident item, triggering the close menu popup to appear as depicted below.  Select the Secureworks CTP close code, the Resilient Resolution ID and enter the Resolution Summary.  Once the user clicks OK, the Secureworks CTP Close Ticket automatic rule is activated, starting the Example Secureworks Close Ticket workflow.  The Secureworks CTP close code and the Resolution summary are sent back to Secureworks when the function is activated to close the corresponding Secureworks Ticket in Secureworks. 
+Once a Secureworks incidents is resolved, the incident is closed in the Resilient platform by the user via the Actions menu Close Incident item, triggering the close menu popup to appear as depicted below.  Select the Secureworks CTP close code, the Resilient Resolution ID and enter the Resolution Summary.  Once the user clicks OK, the Secureworks CTP Close Ticket automatic rule is activated, starting the Example Secureworks Close Ticket workflow.  The Secureworks CTP close code and the Resolution summary are sent back to Secureworks when the function is activated to close the corresponding Secureworks Ticket in Secureworks. 
 
 <p>
 NOTE: The integration uses default Secureworks CTP close codes that appear in the Close Incident popup select input field.  The defaults can be overridden in the app.config by setting close_code parameter.
@@ -162,7 +162,7 @@ incident.addNote(noteText)
 <details><summary>Example Rule:</summary>
 
 <p>
-The example Secureworks CTP Close Ticket rule is an automatic rule which is activated when an incident is closed that has a Secureworks CTP ticket id associated with it via the scwx_ctp_ticket_id custom incident field.  The rule will automatically initiate the example Close Secureworks Ticket workflow under these conditions as shown in the screenshot:
+The example Secureworks CTP Close Ticket rule is an automatic rule which is activated when an incident is closed that has a Secureworks CTP ticket ID associated with it via the scwx_ctp_ticket_id custom incident field.  The rule automatically initiates the example Close Secureworks Ticket workflow under these conditions as shown in the screenshot:
 
 ![screenshot: scwx_close_ticket_rule](./screenshots/scwx_close_ticket_rule.png)
 

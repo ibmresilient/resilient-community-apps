@@ -42,13 +42,13 @@
 <p>
 The Secureworks Counter Threat Platform (CTP) uses the global visibility gained from gathering and analyzing data from clients all over the world to more accurately identify, contain and eradicate cybersecurity threats. By combining up-to-the-minute threat intelligence with the CTP's machine learning and analytics capabilities, organizations can make faster, more informed decisions about how to predict, prevent, detect, and respond to threat activity.
 <p>
-CTP is used with the Secureworks SOC team when they find an security issue that needs to be communicated to the customer. The issues can be informational, research-based or require proscriptive actions by the customer. Secureworks CTP provides a “ticket-like” interface that allows you acknowledge, add files and notes, and provide ability to close tickets.   
+CTP is used with the Secureworks SOC team when they find a security issue that needs to be communicated to the customer. The issues can be informational, research-based or require proscriptive actions by the customer. Secureworks CTP provides a “ticket-like” interface that allows you acknowledge, add files and notes, and provide ability to close tickets.   
 <p>
  The Secureworks CTP integration implements the following functionality in Resilient:
 
 * Poll Secureworks CTP for tickets and create a corresponding incident in the Resilient platform for each ticket.
 * Get Secureworks CTP ticket workLogs and attachments and add them as notes and attachments in the corresponding Resilient incident.
-* Close a Secureworks CTP ticket when the corresponding Resilient incident is closed in Resilient.
+* Close a Secureworks CTP ticket when the corresponding Resilient incident is closed.
 
 
  ![screenshot: main](./doc/screenshots/scwx_main.png)
@@ -136,7 +136,7 @@ CTP is used with the Secureworks SOC team when they find an security issue that 
   You should save a screenshot "custom_layouts.png" in the doc/screenshots directory and reference it here
 -->
 Customize Secureworks CTP and Close Incident Layouts to provide Secureworks specific information in the Resilient UI.
- 
+
 #### Secureworks CTP Layout Tab
 Create a Secureworks CTP custom incident tab so that you can view Secureworks CTP ticket information in one place. 
 
