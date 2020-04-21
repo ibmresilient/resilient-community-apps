@@ -28,9 +28,11 @@ function cmd_exists() {
 readonly IMAGES_TO_TRANSFER="repo_quay.conf"
 
 readonly IMAGES_TO_PRESERVE_LOCALLY="preserved_images.conf"
+
+readonly IMAGE_REGISTRY="quay.io"
+readonly REGISTRY_ORG="ibmresilient"
 # The registry we will pull images from 
-readonly SOURCE_REGISTRY="quay.io/ibmresilient_dev"
-readonly srcreg="quay.io/ibmresilient_dev" 
+readonly SOURCE_REGISTRY="$IMAGE_REGISTRY/$REGISTRY_ORG"
 # The registry we will push images too
 destination_registry=""
 
@@ -42,7 +44,15 @@ fi
 
 # Before trying to pull or push anything, check for the existance of either docker or podman
 container_engine=""
-if cmd_exists docker; then
+# Users may provide a preferred container engine using arg 2, otherwise the script checks whether it can use docker or podman.    
+if [[ ! -z "$2" ]]; then
+    # Ensure the user provided command is available to use 
+    if cmd_exists $2; then
+        container_engine=$2
+    else # the user provided container engine command does not exist, exit with a message.
+        echo >&2 "Script was provided with ${2} command to be used, but this command was not found."; exit 1;
+    fi
+elif cmd_exists docker; then
     # If docker exists, use that as our container engine
     container_engine=docker
 
@@ -52,7 +62,6 @@ elif cmd_exists podman; then
 else # neither of the engines were found, exit with a message
     echo >&2 "Image mirroring requires either Docker or Podman but neither were found. Aborting."; exit 1;
 fi
-
 
 
 destination_registry=$1
