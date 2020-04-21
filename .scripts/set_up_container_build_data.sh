@@ -30,6 +30,13 @@ function container_build (){
 	done
 }
 
+# Function to create a named repository in the ibmresilient org
+# Args: integration name; this will be the name of the repository
+function repo_create(){
+	curl 'https://quay.io/api/v1/repository' \
+  	-H "authorization: Bearer ${REPO_CREATE_TOKEN}" \
+	--data-binary $"{\n  'repo_kind': 'image',\n  'namespace': 'ibmresilient',\n  'visibility': 'public',\n  'repository': "${1}",\n  'description': 'test'\n}"
+}
 # Pushes container with a given label
 # Args: label to push
 function container_push (){
@@ -131,6 +138,10 @@ do
 		continue
 	fi
 
+	# INT-2506 Before we push a container to quay, 
+	# create the repository first using the REST API 
+	# This will ensure all new repos are public.
+	repo_create "$integration"
 	container_push $QUAY_LABEL
 	if [ $? -ne 0 ]; then
 		echo "Failed to push to Quay."
