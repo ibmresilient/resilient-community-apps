@@ -151,7 +151,7 @@ class SecureworksCTPPollComponent(ResilientComponent):
 
                     code = response_ack[0].get('code')
                     if code != "SUCCESS":
-                        LOG.info(u"Secureworks CTP could not acknowledge ticket: %s code: %s", ticket_id, code)
+                        LOG.warning(u"Secureworks CTP could NOT acknowledge ticket: %s code: %s", ticket_id, code)
                     else:
                         LOG.info(u"Secureworks CTP acknowledged ticket: %s code: %s", ticket_id, code)
 
