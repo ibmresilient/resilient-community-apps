@@ -99,7 +99,7 @@ class TestMitreTechnique(object):
             yield
 
     def test_getting_tactic_from_technique_works(self):
-        tech = MitreAttackTechnique.get_by_id(self.mitre_attack, "T1213")[0]
+        tech = MitreAttackTechnique.get_by_id(self.mitre_attack, "T1205")[0]
         assert tech.get_tactic(self.mitre_attack) is not None
 
     def test_tech_of_tactic(self):
@@ -309,6 +309,9 @@ class TestMitreGroup(object):
 
 
 class TestMitre(object):
+    """
+    These tests are mostly livetests to confirm that MITRE's schema stays the same
+    """
     mitre_conn = MitreAttackConnection()
 
     @pytest.mark.livetest
@@ -351,6 +354,21 @@ class TestMitre(object):
                     assert False
         except Exception as e:
             assert(False)
+
+    @pytest.mark.livetest
+    def test_get_representative_techniques(self):
+        t = MitreAttackTechnique.get(self.mitre_conn, id="T1453")  # From Mobile collection
+        assert t
+        assert [x.get_tactic(self.mitre_conn) for x in t]
+
+        t = MitreAttackTechnique.get(self.mitre_conn, id="T1155")  # From Enterprise
+        assert t
+        assert [x.get_tactic(self.mitre_conn) for x in t]
+
+        t = MitreAttackTechnique.get(self.mitre_conn, id="T1245")  # From Pre-Attack
+        assert t
+        assert [x.get_tactic(self.mitre_conn) for x in t]
+
 
     def test_mitre_attack_util(self):
         data_mocker = MitreQueryMocker()
