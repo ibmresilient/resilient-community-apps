@@ -91,8 +91,8 @@ class SecureworksCTPPollComponent(ResilientComponent):
         self.options = opts.get(CONFIG_DATA_SECTION, {})
 
         # Validate required fields in app.config are set
-        required_fields = ["base_url", "username", "password", "query_limit", "query_ticket_types",
-                           "query_grouping_types", "assigned_to_customer", "polling_interval"]
+        required_fields = ["base_url", "username", "password", "query_limit", "query_ticket_grouping_types",
+                           "assigned_to_customer", "polling_interval"]
         validate_fields(required_fields, self.options)
 
         self.polling_interval = int(self.options.get("polling_interval", DEFAULT_POLL_SECONDS))
@@ -113,40 +113,47 @@ class SecureworksCTPPollComponent(ResilientComponent):
         """
         LOG.info(u"Secureworks CTP escalate.")
         try:
-            # Get list of tickets needing updating
-            response = self.scwx_client.post_tickets_updates()
+            # Call Secureworks endpoint for each ticketType groupingType combination the user has
+            # specified in the app.config
+            for query in self.scwx_client.query_types:
 
-            tickets = response.get('tickets')
-            ticket_id_list = [ticket.get('ticketId') for ticket in tickets]
-            LOG.info(u"Secureworks CTP tickets to be processed this poll: %s", ticket_id_list)
+                # Get list of tickets needing updating
+                ticket_type = query.get('ticketType')
+                grouping_type = query.get('groupingType')
+                response = self.scwx_client.post_tickets_updates(ticket_type, grouping_type)
 
-            for ticket in tickets:
+                tickets = response.get('tickets')
+                ticket_id_list = [ticket.get('ticketId') for ticket in tickets]
+                message = u"Secureworks CTP tickets to be processed this poll:\nticketType: {0} groupingType: {1}".format(ticket_type, grouping_type)
+                LOG.info(message)
+                LOG.info(u"%s", ticket_id_list)
 
-                ticket_id = ticket.get('ticketId')
-                LOG.info(u"Processing ticket %s", ticket_id)
+                for ticket in tickets:
 
-                # Check if there is already a Resilient incident for this Secureworks ticket.
-                resilient_incident = self._find_resilient_incident_for_req(ticket_id)
+                    ticket_id = ticket.get('ticketId')
+                    LOG.info(u"Processing ticket %s", ticket_id)
 
-                if not resilient_incident:
-                    # Create a new incident for this Secureworks CTP ticket.
-                    resilient_incident = self._create_incident(ticket)
+                    # Check if there is already a Resilient incident for this Secureworks ticket.
+                    resilient_incident = self._find_resilient_incident_for_req(ticket_id)
 
-                # Add ticket worklogs to the incident as notes
-                self.add_worklog_notes(resilient_incident, ticket)
+                    if not resilient_incident:
+                        # Create a new incident for this Secureworks CTP ticket.
+                        resilient_incident = self._create_incident(ticket)
 
-                # Add ticket attachments to the incident as attachments
-                self.add_ticket_attachments(resilient_incident, ticket)
+                    # Add ticket worklogs to the incident as notes
+                    self.add_worklog_notes(resilient_incident, ticket)
 
-                # Acknowledge Secureworks that we have received the tickets.
-                response_ack = self.scwx_client.post_tickets_acknowledge(ticket)
+                    # Add ticket attachments to the incident as attachments
+                    self.add_ticket_attachments(resilient_incident, ticket)
 
+                    # Acknowledge Secureworks that we have received and processed the tickets.
+                    response_ack = self.scwx_client.post_tickets_acknowledge(ticket)
 
-                code = response_ack[0].get('code')
-                if code != "SUCCESS":
-                    LOG.info(u"Secureworks CTP could not acknowledge ticket: %s code: %s", ticket_id, code)
-                else:
-                    LOG.info(u"Secureworks CTP acknowledged ticket: %s code: %s", ticket_id, code)
+                    code = response_ack[0].get('code')
+                    if code != "SUCCESS":
+                        LOG.warning(u"Secureworks CTP could NOT acknowledge ticket: %s code: %s", ticket_id, code)
+                    else:
+                        LOG.info(u"Secureworks CTP acknowledged ticket: %s code: %s", ticket_id, code)
 
         except Exception as err:
             raise err
