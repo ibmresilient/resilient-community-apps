@@ -9,7 +9,7 @@ set -x
 # v1: At a high level; with this script we want to:
 # 0. Determine whether to use docker or podman
 # 1. Take in a named list of image we want to move WITH versions
-# 2. Pull each image from the source registry without only grabbing the tags specified
+# 2. Pull each image from the source registry only grabbing the tags specified
 # 3. Tag each image with its new destination tag before push
 # 4. Push each image with its new tag to the destination registry
 # 5. Delete all the images we pulled except for those named in the preserved_images.conf file, note only images not in use will be deleted.
