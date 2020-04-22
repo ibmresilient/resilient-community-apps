@@ -74,8 +74,8 @@ There are more advanced options. Please refer to the User Guide.
     pip uninstall fn-machine-learning-nlp
 
 ## Troubleshooting
-If `build_nlp` fails due to SSL certifications errors caused by NLTK, you can run the following in a separate file and
-download everything for NLTK:
+If `build_nlp` fails due to a LookupError caused by NLTK Downloader unable to obtain specific resources, you can
+run the following in a separate Python file and download everything for NLTK:
 ```buildoutcfg
 import nltk
 import ssl
