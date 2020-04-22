@@ -9,7 +9,6 @@ from mock import Mock
 from mock import patch
 import mock
 
-import urllib
 import json
 import sys
 sys.path.append("../fn_splunk_integration/util")
@@ -69,7 +68,7 @@ class TestSplunkUtils:
         retKey = splnk_utils.session_key
         headers = dict()
         headers["Accept"] = "application/html"
-        post_data = urllib.parse.urlencode({"username": self.fake_username,
+        post_data = urlparse.urlencode({"username": self.fake_username,
                                             "password": self.fake_password})
 
         # Assert that username and password are used as required

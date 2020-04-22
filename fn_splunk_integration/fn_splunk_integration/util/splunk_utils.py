@@ -171,7 +171,11 @@ class SplunkClient(object):
                 time.sleep(self.polling_interval)
 
         if splunk_job["dispatchState"] != "DONE" or splunk_job["isFailed"] == True:
-            raise SearchFailure(splunk_job.name, splunk_job["dispatchState"] + u", " + unicode(splunk_job["messages"]))
+            if sys.version_info.major < 3:
+                raise SearchFailure(splunk_job.name, splunk_job["dispatchState"] + u", " + unicode(splunk_job["messages"]))
+            else:
+                # strings in python3 are unicode
+                raise SearchFailure(splunk_job.name, splunk_job["dispatchState"] + u", " + str(splunk_job["messages"]))
 
         reader = splunk_results.ResultsReader(splunk_job.results())
         result = {"events": [row for row in reader]}
