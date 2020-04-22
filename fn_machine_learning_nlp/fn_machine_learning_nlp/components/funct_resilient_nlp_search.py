@@ -9,6 +9,10 @@ import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_machine_learning_nlp.lib import util_functions
 from fn_machine_learning_nlp.lib.res_utils import ResUtils
+from fn_machine_learning_nlp.lib.file_manage import FileManage
+import os
+import json
+
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'resilient_nlp_search"""
 
@@ -44,6 +48,31 @@ class FunctionComponent(ResilientComponent):
             if model_path is None:
                 log.error("No model_path specified in app.config")
                 raise Exception("Need model_path in app.config")
+
+            # Check that the requested number of incidents is less than or equal to the number of incidents in the model
+            vec_file = ""
+            model_files = os.listdir(model_path)
+
+            for file in model_files:
+                # the vec file will always end with -vec.json even if the user inputs a custom name for the model
+                if "-vec.json" in file:
+                    vec_file = file
+                    break
+
+            # Check if sentence vector file exists
+            if not vec_file:
+                log.error("Model vector JSON file is not found")
+                raise Exception("Need to have a built model")
+
+            vec_path = os.path.join(model_path, vec_file)
+            data = json.load(open(vec_path, 'r'))
+
+            # Check that the number of top similar incidents being requested does not exceed the number of incidents
+            # in the model
+            if number_incidents > len(data):
+                log.error("The number of similar incidents requested exceeds the number of incidents in the model. There are only {} incidents in the model.".format(
+                                len(data)))
+                raise Exception("Number of similar incidents to be found should be fewer")
 
             # PUT YOUR FUNCTION IMPLEMENTATION CODE HERE
             yield StatusMessage("starting...")
