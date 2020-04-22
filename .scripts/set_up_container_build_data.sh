@@ -35,7 +35,7 @@ function container_build (){
 function repo_create(){
 	curl 'https://quay.io/api/v1/repository' \
   	-H "authorization: Bearer ${REPO_CREATE_TOKEN}" \
-	--data-binary $"{\n  'repo_kind': 'image',\n  'namespace': 'ibmresilient',\n  'visibility': 'public',\n  'repository': "${1}",\n  'description': 'test'\n}"
+	--data-binary $"{\n  'repo_kind': 'image',\n  'namespace': 'ibmresilient',\n  'visibility': 'public',\n  'repository': "${1}",\n  'description': 'Image containing resilient_circuits and the ${1} app'\n}"
 }
 # Pushes container with a given label
 # Args: label to push
