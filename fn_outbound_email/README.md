@@ -88,7 +88,7 @@
   | **smtp_port** | Yes | `25` | *Defaults to unauthenticated, 587 for TLS* |
   | **smtp_conn_timeout** | Yes | `15` | *Time in seconds* |
   | **smtp_ssl_mode** | No | `None` | *Not supported* |
-  | **template_file** | No | `example.jinja` | *Optional - Path to a custom template file for formatting HTML email. /fn_outbound_email/example.jinja* |
+  | **template_file** | No | `data/example_send_email.jinja` | *Optional - Path to a custom template file for formatting HTML email.* |
 
 * **Save** and **Close** the app.config file.
 * Run selftest to test the Integration you configured:
@@ -103,7 +103,7 @@
 
 ### Installation: Existing Users
 * Prior to the steps above, if you have a modified jinja template in use in the preprocessing script, save it offline as a .jinja file
-* This file can be specified using the template file parameter and will send via deprecated logic
+* This file can be specified using the `template_file` parameter, an example template is provided in the `data/` directory 
 * Export the current working state in Adminstrator Settings/ Organization/ Export
 * Install the new version in a seperate virtual python environment so you can easy revert
 

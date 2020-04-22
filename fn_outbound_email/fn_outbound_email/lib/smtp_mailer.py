@@ -12,8 +12,8 @@ from email.mime.application import MIMEApplication
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from ssl import Purpose
-from resilient_circuits import ResilientComponent
 from jinja2 import Environment, select_autoescape
+from resilient_circuits import ResilientComponent
 from fn_outbound_email.lib.template_helper import TemplateHelper
 
 log = logging.getLogger(__name__)
@@ -139,8 +139,8 @@ class SendSMTPEmail(ResilientComponent):
             smtp_connection.sendmail(self.from_address,
                                      set(list(self.to_address_list) + list(self.cc_address_list) +
                                          list(self.bcc_address_list)), composed)
-        except Exception as e:
-            log.error(e)
+        except Exception as connection_error:
+            log.error(connection_error)
         finally:
             try:
                 if smtp_connection:

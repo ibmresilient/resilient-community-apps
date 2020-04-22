@@ -29,12 +29,11 @@ smtp_conn_timeout=20
 smtp_ssl_mode=None
 
 # SSL Cert (not supported)
-#smtp_ssl_cafile=None
+smtp_ssl_cafile=
 
 # Optional - Path to a custom template file for formatting HTML email. If not defined,
 # the integration will use the default that comes with the integration in the html pre-processing script.
-# template_file=/fn_outbound_email/html_template.jinja
+# template_file=data/example_send_email.jinja
 template_file=
     """
     return config_data
-    

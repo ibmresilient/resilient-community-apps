@@ -72,16 +72,16 @@ inputs.mail_body_html = """
         <hr size="1" width="100%" noshade style="color:#FFDF57" align="center"/>
     </td>
 </tr>
-    {{ get_row('Severity'+':','severity_code') }}<br>
-    {{ get_row('Status'+':','plan_status') }}<br>
-    {{ get_row('Created'+':','create_date') }}<br>
-    {{ get_row('Category'+':','incident_type_ids') }}<br>
+    {{ get_row('Severity:','severity_code') }}
+    {{ get_row('Status:','status') }}<br>
+    {{ get_row('Created:','create_date') }}<br>
+    {{ get_row('Category:','incident_type_ids') }}
 <tr>
     <td colspan="2">
         <br><h3 style="color: rgb(68,114,196)">INCIDENT DESCRIPTION</h3>
         <hr size="1" width="100%" noshade style="color:#FFDF57" align="center"/>
     </td>
-    {{ get_row('Description'+':','description') }}<br> 
+    {{ get_row('Description:','description') }}
 </tr>
 </table>
 <br>

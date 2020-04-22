@@ -55,7 +55,7 @@ def selftest_function(opts):
                     raise Exception('An SMTP user has been set; the SMTP password from app.config cannot be null')
                 else:
                     smtp_connection.login(user=smtp_user, password=smtp_password)
-                    smtp_connection.sendmail(smtp_user, smtp_user,'this is a test email')
+                    smtp_connection.sendmail(smtp_user, smtp_user, 'this is a test email')
 
         return {"state": "success"}
     except Exception as err:

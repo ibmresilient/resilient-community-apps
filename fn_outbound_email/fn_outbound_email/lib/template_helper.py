@@ -62,7 +62,6 @@ class TemplateHelper(object):
         conditions = {"filters": [{"conditions": query_conditons}],
                       "sorts": [{"field_name": "create_date", "type": "desc"}]}
 
-        # todo: handle multiple pages
         query_result = self.component.rest_client().post(
             "/incidents/query_paged?handle_format=objects&text_content_output_format=objects_no_convert", conditions)
 

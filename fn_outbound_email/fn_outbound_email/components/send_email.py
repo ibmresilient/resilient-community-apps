@@ -29,6 +29,8 @@ class FunctionComponent(ResilientComponent):
         self.mail_data = {}
         self.opts = opts
         self.smtp_config_section = self.opts.get(CONFIG_DATA_SECTION, {})
+        validate_fields(["smtp_server","smtp_port"], self.smtp_config_section)
+
         self.template_file_path = self.smtp_config_section.get('template_file')
         self.smtp_port_choice = str(self.smtp_config_section.get("smtp_port"))
         self.smtp_user = self.smtp_config_section.get("smtp_user")
@@ -44,7 +46,7 @@ class FunctionComponent(ResilientComponent):
             "mail_bcc": [],
             'mail_subject': '',
             "attachment_list": []
-        }        
+        }
 
     @handler("reload")
     def _reload(self, event, opts):
@@ -60,11 +62,14 @@ class FunctionComponent(ResilientComponent):
                 mail_from = self.smtp_user
             else:
                 mail_from = kwargs.get("mail_from")  # text
-            if self.template_file_path: 
+            if self.template_file_path:
                 with open(self.template_file_path, "r") as definition:
                     mail_body_html = definition.read()
                     log.info("Using custom jinja template instead of default, path: %s", self.template_file_path)
-                    jinja = True
+                    if definition.name == "example_send_email.jinja":
+                        jinja = True
+                    else:
+                        jinja = False
             else:
                 mail_body_html = kwargs.get("mail_body_html")
                 jinja = False
@@ -78,18 +83,21 @@ class FunctionComponent(ResilientComponent):
 
         try:
             # Get the function parameters:
-            mail_to = kwargs.get("mail_to")
-            mail_cc = kwargs.get("mail_cc")  # text
-            mail_bcc = kwargs.get("mail_bcc")  # text
-            mail_subject = kwargs.get("mail_subject")  # text
-            mail_body_text = kwargs.get("mail_body_text")  # text
-            mail_incident_id = kwargs.get("mail_incident_id")  # number.            
+            mail_to = kwargs.get("mail_to") #text
+            mail_cc = kwargs.get("mail_cc") #text
+            mail_bcc = kwargs.get("mail_bcc") #text
+            mail_subject = kwargs.get("mail_subject") #text
+            mail_body_text = kwargs.get("mail_body_text") #text
+            mail_incident_id = kwargs.get("mail_incident_id") #number            
             # Get the conditional function parameters:
             mail_from, mail_to, mail_body_html, jinja, email_message, text = conditional_parameters()
 
-            if not mail_from: mail_from = "example@email.com"
-            if not mail_cc: mail_cc = "N/A"
-            if not mail_bcc: mail_bcc = "N/A"
+            if not mail_from: 
+                raise Exception("no sender address specified")
+            if not mail_cc: 
+                mail_cc = "N/A"
+            if not mail_bcc: 
+                mail_bcc = "N/A"
             
             log.info("mail_from: %s", mail_from)
             log.info("mail_to: %s", mail_to)
@@ -121,11 +129,12 @@ class FunctionComponent(ResilientComponent):
             if mail_body_html:
                 log.info("Rendering template")
                 mail_body_html = send_smtp_email.render_template(mail_body_html, self.incident_data, self.mail_data)
-                if jinja:
+                if not jinja:
                     email_message = send_smtp_email.send(body_html=mail_body_html)
                     text = mail_body_html
                 else:
-                    email_message = send_smtp_email.send(body_html=mail_body_html.replace('---===newline===---', '<div>'))
+                    mail_body_html = mail_body_html.replace('---===newline===---', '<div>')
+                    email_message = send_smtp_email.send(body_html=mail_body_html)
                     text = mail_body_html.replace('---===newline===---', '<br>')
             elif mail_body_text:
                 log.info("Rendering text")
@@ -133,10 +142,9 @@ class FunctionComponent(ResilientComponent):
                 email_message = send_smtp_email.send(body_text=mail_body_text)
 
             if not email_message:
-                raise Exception("Local jinja template not valid, please retry sending with valid template locallu or remove to use default")
+                raise Exception("Local jinja template not valid, please retry sending with valid template locally or remove file to use default")
 
-            yield StatusMessage("Done with sending email...")
-            
+            yield StatusMessage("Done with sending email...")            
             results = payload.done(success=True, content={
                 "inputs" : [mail_from, mail_to, mail_cc, mail_bcc, mail_subject],
                 "message": email_message,
