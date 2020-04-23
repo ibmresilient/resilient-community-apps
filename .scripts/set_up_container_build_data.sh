@@ -11,13 +11,18 @@ function repo_login (){
 	echo "$3" | docker login --password-stdin --username "$2" https://${1}/
 }
 
+# use latest rircuits if not defined. Allows to change it per job with env
+if [ -z $RES_CIRCUITS_VERSION ]; then
+	RES_CIRCUITS_VERSION="36.2.209.dev"
+fi
+
 # Build a container
 # Args: Name and the tags to attach
 function container_build (){
 	argc=$#
 	argv=("$@")
 
-	docker build -t resilient/${1} ./${1}
+	docker build --build-arg RES_CIRCUITS_VERSION=$RES_CIRCUITS_VERSION -t resilient/${1} ./${1}
 	if [ $? -ne 0 ]; then
 		return 1
 	fi
