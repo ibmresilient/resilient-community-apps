@@ -75,16 +75,4 @@ There are more advanced options. Please refer to the User Guide.
 
 ## Troubleshooting
 If `res-ml build_nlp` fails due to a LookupError caused by SSL errors and NLTK Downloader unable to obtain specific resources,
-you can run the following in a separate Python file and download everything for NLTK:
-```buildoutcfg
-import nltk
-import ssl
-try:
-    _create_unverified_https_context = ssl._create_unverified_context
-except AttributeError:
-    pass
-else:
-    ssl._create_default_https_context = _create_unverified_https_context
-nltk.download()
-```
-This will resolve any future SSL errors when trying to access NLTK resources.
+you can run the file `bin/nltkdownload.py` and download everything for NLTK. This will resolve any future SSL errors when trying to access NLTK resources.

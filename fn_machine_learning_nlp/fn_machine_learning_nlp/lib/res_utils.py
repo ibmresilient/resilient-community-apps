@@ -311,10 +311,7 @@ class ResUtils:
         resp = self.res_client.get(url)
         des = resp.get("description")
 
-        if des is None:
-            des = ""
-
-        return des
+        return des or ""
 
     def get_incidents_after(self, inc_id, max_num=100):
         """
