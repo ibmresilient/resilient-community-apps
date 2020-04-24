@@ -103,10 +103,10 @@ This table will contain the results of the CVE searches.
 |Input Name |Type  |Example|Info|
 |---|---|---|---|---|
 |cve_id|String  |CVE-2008-3949 |Specific vulnerability ID |
-|cve_vendor|String| microsoft|a vendor name to search for cve. Unsupported as of 1.0.2 |
-|cve_product|String|excel|Name of the Product to Search in CVE Database. Unsupported as of 1.0.2|
-|cve_published_date_from|Date Picker|03/01/2019|Select CVE Published Date. Unsupported as of 1.0.2|
-|cve_published_date_to|Date Picker|03/01/2019|End date range to search cve data. Unsupported as of 1.0.2|
+|cve_vendor|String| microsoft|a vendor name to search for cve. Unsupported as of 1.0.1 |
+|cve_product|String|excel|Name of the Product to Search in CVE Database. Unsupported as of 1.0.1|
+|cve_published_date_from|Date Picker|03/01/2019|Select CVE Published Date. Unsupported as of 1.0.1|
+|cve_published_date_to|Date Picker|03/01/2019|End date range to search cve data. Unsupported as of 1.0.1|
 
 ### CVE Browse Function
 
