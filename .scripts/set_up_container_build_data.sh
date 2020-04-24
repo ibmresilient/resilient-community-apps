@@ -120,7 +120,7 @@ do
 	echo "$(echo $integration)'s version is: $integration_version"
 
 	# To get name of the integrations we will extract line name='<name>' from setup.py
-	integration_name=$(grep -o "name[:space:]*=[:space:]*['\"][a-z0-9\-\_]*['\"]" $setup_file| cut -d '=' -f 2 | tr -d "\"'[:space:]")
+	integration_name=$(grep -o "name[[:space:]]*=[[:space:]]*['\"][a-z0-9\-\_]*['\"]" $setup_file| cut -d '=' -f 2 | tr -d "\"'[:space:]")
 	if [ -z "$integration_name" ]; then
 		echo "Couldn't extract package name from $integration. Make sure it's listed in setup.py."
 		skipped_packages+=($integration)
