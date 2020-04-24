@@ -2,7 +2,7 @@
 # Base image using Red Hat's universal base image (rhel 8) for python
 #FROM registry.access.redhat.com/ubi8/python-36:latest
 # rc-data-feeder will build plugins from a base image
-FROM resilient/rc-data-feed
+FROM ibmresilient/rc-data-feed
 
 ARG APPLICATION=rc_data_feed_plugin_odbcfeed
 ARG RES_CIRCUITS_VERSION=34.0.195
