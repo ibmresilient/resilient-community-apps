@@ -35,7 +35,7 @@ function container_build (){
 function repo_create(){
 	curl 'https://quay.io/api/v1/repository' \
   	-H "authorization: Bearer ${REPO_CREATE_TOKEN}" \
-	--data-binary $"{\n  'repo_kind': 'image',\n  'namespace': 'ibmresilient',\n  'visibility': 'public',\n  'repository': "${1}",\n  'description': 'Image containing resilient_circuits and the ${1} app'\n}"
+	--data-binary $"{\n  'repo_kind': 'image',\n  'namespace': "${2}",\n  'visibility': 'public',\n  'repository': "${1}",\n  'description': 'Image containing resilient_circuits and the ${1} app'\n}"
 }
 # Pushes container with a given label
 # Args: label to push
@@ -138,10 +138,10 @@ do
 		continue
 	fi
 
-	# INT-2506 Before we push a container to quay, 
+	# Before we push a container to quay, 
 	# create the repository first using the REST API 
 	# This will ensure all new repos are public.
-	repo_create "$integration"
+	repo_create "$integration" "$QUAY_ORG"
 	container_push $QUAY_LABEL
 	if [ $? -ne 0 ]; then
 		echo "Failed to push to Quay."
