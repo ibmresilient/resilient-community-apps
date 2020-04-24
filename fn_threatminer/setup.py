@@ -19,7 +19,7 @@ def snake_to_camel(word):
 
 setup(
     name='fn_threatminer',
-    version='1.0.1',
+    version='1.0.2',
     license='MIT License',
     author='Michael Piekarski',
     author_email='mpiekarski@essextec.com',
