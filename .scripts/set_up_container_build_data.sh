@@ -114,8 +114,16 @@ do
 	fi
 	echo "$(echo $integration)'s version is: $integration_version"
 
-	ARTIFACTORY_LABEL=${ARTIFACTORY_URL}/resilient/${integration}:${integration_version}
-	QUAY_LABEL=${QUAY_URL}/${QUAY_ORG}/${integration}:${integration_version}
+	# To get name of the integrations we will extract line name='<name>' from setup.py
+	integration_name=$(cat "$setup_file" | grep -o "name=['\"][a-z0-9\-\_]*['\"]" | cut -d '=' -f 2 | tr -d "\"'[:space:]")
+	if [ -z "$integration_name" ]; then
+		echo "Coudlnt' extract package name from $integration. Make sure it's listed in setup.py."
+		skipped_packages+=($integration)
+		continue
+	fi
+
+	ARTIFACTORY_LABEL=${ARTIFACTORY_URL}/resilient/${integration_name}:${integration_version}
+	QUAY_LABEL=${QUAY_URL}/${QUAY_ORG}/${integration_name}:${integration_version}
 
 	container_build "$integration" "$ARTIFACTORY_LABEL" "$QUAY_LABEL"
 
