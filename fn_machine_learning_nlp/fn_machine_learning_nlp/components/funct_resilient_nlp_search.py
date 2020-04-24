@@ -62,7 +62,7 @@ class FunctionComponent(ResilientComponent):
             # Check if sentence vector file exists
             if not vec_file:
                 log.error("Model vector JSON file is not found")
-                raise Exception("Need to have a built model")
+                raise Exception("Model vector JSON file is not found. Need to have a built model")
 
             vec_path = os.path.join(model_path, vec_file)
             data = json.load(open(vec_path, 'r'))
@@ -72,7 +72,7 @@ class FunctionComponent(ResilientComponent):
             if number_incidents > len(data):
                 log.error("The number of similar incidents requested exceeds the number of incidents in the model. There are only {} incidents in the model.".format(
                                 len(data)))
-                raise Exception("Number of similar incidents to be found should be fewer")
+                raise Exception("There are only {} incidents in the model. Number of similar incidents to be found should be fewer".format(len(data)))
 
             # PUT YOUR FUNCTION IMPLEMENTATION CODE HERE
             yield StatusMessage("starting...")

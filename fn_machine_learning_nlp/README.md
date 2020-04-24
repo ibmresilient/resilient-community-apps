@@ -39,7 +39,6 @@ section for connecting to your Resilient platform:
 # Required. The (absolute) path to the folder of the saved NLP model
 #
 model_path=path_of_the_saved_models
-num_top_similar_incidents=5
 
 #
 #   Advanced configuration
