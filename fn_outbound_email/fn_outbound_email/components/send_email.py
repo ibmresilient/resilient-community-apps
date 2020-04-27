@@ -57,12 +57,12 @@ class FunctionComponent(ResilientComponent):
     def _send_email_function(self, event, *args, **kwargs):
         """Function: Send Email"""
 
-        def conditional_parameters():
+        def conditional_parameters(mail_body_text):
             if self.smtp_config_section.get("smtp_ssl_mode") == DEFAULT_TLS_SMTP and self.smtp_user is not None:
                 mail_from = self.smtp_user
             else:
                 mail_from = kwargs.get("mail_from")  # text
-            if self.template_file_path:
+            if self.template_file_path and not mail_body_text:
                 with open(self.template_file_path, "r") as definition:
                     mail_body_html = definition.read()
                     log.info("Using custom jinja template instead of default, path: %s", self.template_file_path)
@@ -91,7 +91,7 @@ class FunctionComponent(ResilientComponent):
             mail_body_text = kwargs.get("mail_body_text") #text
             mail_incident_id = kwargs.get("mail_incident_id") #number            
             # Get the conditional function parameters:
-            mail_from, mail_to, mail_body_html, jinja, email_message, text = conditional_parameters()
+            mail_from, mail_to, mail_body_html, jinja, email_message, text = conditional_parameters(mail_body_text)
 
             if not mail_from: 
                 raise Exception("no sender address specified")
