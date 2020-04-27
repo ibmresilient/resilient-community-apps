@@ -84,8 +84,8 @@
   | ------ | :------: | ------- | ----------- |
   | **smtp_server** | Yes | `xxx.xxx.xxx.xxx` | *server IP or smtp.example.com* |
   | **smtp_user** | Yes | `` | *Blank on port 25, login email on 587* |
-  | **smtp_password** | Yes | `` | *Blank on port 25, login password on 587* |
-  | **smtp_port** | Yes | `25` | *Defaults to unauthenticated, 587 for TLS* |
+  | **smtp_password** | Yes | `` | *Blank on port 25, login password on 587/2525* |
+  | **smtp_port** | Yes | `25` | *Defaults to unauthenticated, 587/2525 for TLS* |
   | **smtp_conn_timeout** | Yes | `15` | *Time in seconds* |
   | **smtp_ssl_mode** | No | `None` | *Not supported* |
   | **template_file** | No | `data/example_send_email.jinja` | *Optional - Path to a custom template file for formatting HTML email.* |
@@ -103,7 +103,7 @@
 
 ### Installation: Existing Users
 * Prior to the steps above, if you have a modified jinja template in use in the preprocessing script, save it offline as a .jinja file
-* This file can be specified using the `template_file` parameter, an example template is provided in the `data/` directory 
+* This file can be specified using the `template_file` parameter, an example template is provided in the `data/` directory, which the integration uses out of the box
 * Export the current working state in Adminstrator Settings/ Organization/ Export
 * Install the new version in a seperate virtual python environment so you can easy revert
 
@@ -120,6 +120,15 @@ Email servers are often restrictive on which applications/users that are authori
 https://hotter.io/docs/email-accounts/app-password-gmail/
 
 https://hotter.io/docs/email-accounts/secure-app-gmail/
+
+The port of TLS handshakes may also differ between mailservers (587/2525), a short history of port allocation can be found at:
+https://pepipost.com/blog/25-465-587-2525-choose-the-right-smtp-port/
+
+More info on smtp protocol:
+
+https://pepipost.com/blog/what-is-smtp
+
+We cannot guarantee that all mailservers will work with this level of authentication/protocal and cannot support specific mailserver issues for that reason.
 
 ---
 

@@ -17,7 +17,7 @@ log = logging.getLogger(__name__)
 
 CONFIG_DATA_SECTION = 'fn_outbound_email'
 SMTP_DEFAULT_CONN_TIMEOUT = 20
-DEFAULT_TLS_SMTP_PORT = '587'
+DEFAULT_TLS_SMTP = 'starttls'
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'send_email"""
@@ -32,7 +32,7 @@ class FunctionComponent(ResilientComponent):
         validate_fields(["smtp_server","smtp_port"], self.smtp_config_section)
 
         self.template_file_path = self.smtp_config_section.get('template_file')
-        self.smtp_port_choice = str(self.smtp_config_section.get("smtp_port"))
+        self.smtp_port_choice = str(self.smtp_config_section.get("smtp_"))
         self.smtp_user = self.smtp_config_section.get("smtp_user")
 
         if self.template_file_path and not os.path.exists(self.template_file_path):
@@ -58,7 +58,7 @@ class FunctionComponent(ResilientComponent):
         """Function: Send Email"""
 
         def conditional_parameters():
-            if self.smtp_port_choice == DEFAULT_TLS_SMTP_PORT:
+            if self.smtp_config_section.get("smtp_ssl_mode") == "starttls" and self.smtp_user is not None:
                 mail_from = self.smtp_user
             else:
                 mail_from = kwargs.get("mail_from")  # text
@@ -66,7 +66,8 @@ class FunctionComponent(ResilientComponent):
                 with open(self.template_file_path, "r") as definition:
                     mail_body_html = definition.read()
                     log.info("Using custom jinja template instead of default, path: %s", self.template_file_path)
-                    if definition.name == "example_send_email.jinja":
+                    log.info(definition.name)
+                    if definition.name == "data/example_send_email.jinja":
                         jinja = True
                     else:
                         jinja = False

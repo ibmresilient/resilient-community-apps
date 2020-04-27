@@ -61,7 +61,7 @@ inputs.mail_body_html = """
     {% if value and value not in NOT_FOUND and not value.startswith('-') %}
     <tr>
         <td width="100" style="{{style}}; font-weight:bold">{{ label }}</td>
-        <td style="{{style}}">{{ value }}</td>
+        <td style="{{style}}">{{ value | striptags}}</td>
     </tr>
     {% endif %}
 {%- endmacro %}
