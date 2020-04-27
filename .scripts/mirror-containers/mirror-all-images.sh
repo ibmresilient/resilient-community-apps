@@ -9,27 +9,20 @@ set -x
 
 # v1: At a high level; with this script we want to:
 # 0. Determine whether to use docker or podman
-# 1. Take in a named list of image we want to move WITH versions
-# 2. Pull each image from the source registry without only grabbing the tags specified
-# 3. Tag each image with its new destination tag before push
-# 4. Push each image with its new tag to the destination registry
-# 5. Delete all the images we pulled except for those named in the preserved_images.conf file, note only images not in use will be deleted.
+# 1. Query the QUAY REST API to gather all repos for the given namespace
+# 2. For each repo:
+# 2.1 Query each repo for tags and for each tag
+# 2.1 Pull the tagged image from the source registry
+# 2.2 Tag the image with its new destination tag before push
+# 2.3 Push the image with its new tag to the destination registry
+# 2.4 Delete both the local image we pushed aswell as the destination retagged image(Local step)
 
-# TODO: Should we add a help ? 
-
-# TODO: should we aim to provide the full registry sync as an option from this ? 
-# Pulling all registry images from quay will require an OAuth access token to make requests to the quay api for gathering the list of repos and tags. 
 ## Functions
 # Function used to check the existance of a command
 function cmd_exists() {
   command -v $1 > /dev/null 2>&1
 }
 ## Variables
-# The file from which we will pull configuration files
-readonly IMAGES_TO_TRANSFER="repo_quay.conf"
-
-readonly IMAGES_TO_PRESERVE_LOCALLY="preserved_images.conf"
-
 readonly IMAGE_REGISTRY="quay.io"
 readonly REGISTRY_ORG="ibmresilient"
 # The registry we will pull images from 
@@ -41,12 +34,9 @@ destination_registry=""
 
 # ========================================
 #
-# Checks for for arguments and the needed unix commands
+# Checks for arguments and the needed unix commands
 #
 # ========================================
-
-
-
 
 # Check if string is empty using -z. For more 'help test'    
 if [[ -z "$1" ]]; then
@@ -65,13 +55,13 @@ if [[ ! -z "$2" ]]; then
     else # the user provided container engine command does not exist, exit with a message.
         echo >&2 "Script was provided with ${2} command to be used, but this command was not found."; exit 1;
     fi
-elif cmd_exists docker; then
-    # If docker exists, use that as our container engine
-    container_engine=docker
-
 elif cmd_exists podman; then
-    # Or if podman is there and docker isin't use that
+    # If podman exists, use that as our container engine
     container_engine=podman
+
+elif cmd_exists docker; then
+    # Or if docker is there and docker isin't use that
+    container_engine=docker
 else # neither of the engines were found, exit with a message
     echo >&2 "Image mirroring requires either Docker or Podman but neither were found. Aborting."; exit 1;
 fi
@@ -85,7 +75,6 @@ fi
 # First get a handle on all the repositories; use jq to parse the json and return only the names
 repos=`curl -s "https://quay.io/api/v1/repository?namespace=${REGISTRY_ORG}" -H "authorization: Bearer ${AUTH_TOKEN}" | jq ".repositories[$count].name" | tr -d '"'`
 
-# for repo in "${repos[@]}";
 while IFS= read -r repo;
 do 
     echo "Starting to process all tags for repository: ${repo}"
@@ -94,7 +83,7 @@ do
     echo "Made an API Call to Registry for repository $repo; Found these tags ${tags[@]}"
     while IFS= read -r tag;
     do
-        # # Pull the given image from the SOURCE_REGISTRY
+        # Pull the given image from the SOURCE_REGISTRY
         $container_engine pull "$SOURCE_REGISTRY/$repo:$tag"
 
         echo "Image pulled; Retagging image before pushing"
@@ -116,9 +105,10 @@ do
 
         echo "Transfer completed for image $image. Now cleaning up and removing these local images: $destination_registry/$repo:$tag, $SOURCE_REGISTRY/$repo:$tag"
     
-        # $container_engine rmi -f "$destination_registry/$repo:$tag"
+        # Delete the images locally to avoid using up all storage during transfer
+        $container_engine rmi -f "$destination_registry/$repo:$tag"
         
-        # $container_engine rmi -f "$SOURCE_REGISTRY/$repo:$tag"
+        $container_engine rmi -f "$SOURCE_REGISTRY/$repo:$tag"
 
     echo "Finished processing all tags for repository: ${repo}"
     # Finish processing the tags for a repository

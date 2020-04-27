@@ -14,11 +14,7 @@ set -x
 # 4. Push each image with its new tag to the destination registry
 # 5. Delete all the images we pulled except for those named in the preserved_images.conf file, note only images not in use will be deleted.
 
-# TODO: Should we add a help ? 
-
-# TODO: should we aim to provide the full registry sync as an option from this ? 
-# Pulling all registry images from quay will require an OAuth access token to make requests to the quay api for gathering the list of repos and tags. 
-## Functions
+# Functions
 # Function used to check the existance of a command
 function cmd_exists() {
   command -v $1 > /dev/null 2>&1
@@ -36,6 +32,11 @@ readonly SOURCE_REGISTRY="$IMAGE_REGISTRY/$REGISTRY_ORG"
 # The registry we will push images too
 destination_registry=""
 
+# ========================================
+#
+# Checks for arguments and the needed unix commands
+#
+# ========================================
 # Check if string is empty using -z. For more 'help test'    
 if [[ -z "$1" ]]; then
    printf '%s\n' "No destination registry provided. Registry must be provided in the form: fqdn.registry.io/ exiting"
@@ -63,6 +64,11 @@ else # neither of the engines were found, exit with a message
     echo >&2 "Image mirroring requires either Docker or Podman but neither were found. Aborting."; exit 1;
 fi
 
+# # ========================================
+# #
+# # Operational Logic to get images tags and transfer them
+# #
+# # ========================================
 
 destination_registry=$1
 # Read file to gather each image name, $image represents one imagename with a version
