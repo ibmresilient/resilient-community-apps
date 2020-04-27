@@ -36,15 +36,15 @@ def selftest_function(opts):
         if smtp_config_section.get("smtp_ssl_mode") == "ssl":
             LOG.info("Building SSL connection object")
             smtp_connection = smtplib.SMTP_SSL(host=smtp_server,
-                                                        port=smtp_port,
-                                                        certfile=smtp_cafile,
-                                                        context=SendSMTPEmail.get_smtp_ssl_context,
-                                                        timeout=smtp_conn_timeout)
+                                               port=smtp_port,
+                                               certfile=smtp_cafile,
+                                               context=SendSMTPEmail.get_smtp_ssl_context,
+                                               timeout=smtp_conn_timeout)
         else:
             LOG.info("Building generic connection object")
             smtp_connection = smtplib.SMTP(host=smtp_server,
-                                                    port=smtp_port,
-                                                    timeout=smtp_conn_timeout)
+                                                port=smtp_port,
+                                                timeout=smtp_conn_timeout)
             if smtp_config_section.get("smtp_ssl_mode") == "starttls" and smtp_user is not None:
                 LOG.info("Starting TLS...")
                 smtp_connection.ehlo()

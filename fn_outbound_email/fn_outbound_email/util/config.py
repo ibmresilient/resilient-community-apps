@@ -19,7 +19,7 @@ smtp_server=xxx.xxx.xxx.xxx
 smtp_user=
 smtp_password=
 
-# SMTP PORT NUMBER, 25 or 587
+# SMTP PORT NUMBER, 25 or 587/2525
 smtp_port=25
 
 # SMTP CONNECTION TIMEOUT IN SECONDS
@@ -31,8 +31,8 @@ smtp_ssl_mode=None
 # SSL Cert (not supported)
 smtp_ssl_cafile=
 
-# Optional - Path to a custom template file for formatting HTML email. If not defined,
-# the integration will use the default that comes with the integration in the html pre-processing script.
+# Optional - Path to a custom template file for formatting HTML email.
+# The integration will use this template out of the box. If removed, it will default to the pre-processing script.
 # template_file=data/example_send_email.jinja
 template_file=
     """
