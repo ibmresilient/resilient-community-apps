@@ -58,7 +58,7 @@ class FunctionComponent(ResilientComponent):
         """Function: Send Email"""
 
         def conditional_parameters():
-            if self.smtp_config_section.get("smtp_ssl_mode") == "starttls" and self.smtp_user is not None:
+            if self.smtp_config_section.get("smtp_ssl_mode") == DEFAULT_TLS_SMTP and self.smtp_user is not None:
                 mail_from = self.smtp_user
             else:
                 mail_from = kwargs.get("mail_from")  # text
