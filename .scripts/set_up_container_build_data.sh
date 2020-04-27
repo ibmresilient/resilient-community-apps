@@ -4,7 +4,7 @@
 # - or gets a list of all changed integrations based on the TRAVIS_COMMIT_RANGE
 # It then pulls out current version of each integration from its setup.py
 # builds its Dockerfile and pushes it up to the artifactory.
-
+readonly REPO_API_URL='https://quay.io/api/v1/repository'
 # Logs in to repository at given URL with username and passowrd
 # Args: URL, username, password
 function repo_login (){
@@ -33,7 +33,7 @@ function container_build (){
 # Function to create a named repository in the ibmresilient org
 # Args: integration name; this will be the name of the repository
 function repo_create(){
-	curl 'https://quay.io/api/v1/repository' \
+	curl $REPO_API_URL \
   	-H "authorization: Bearer ${REPO_CREATE_TOKEN}" \
 	--data-binary $"{\n  'repo_kind': 'image',\n  'namespace': "${2}",\n  'visibility': 'public',\n  'repository': "${1}",\n  'description': 'Image containing resilient_circuits and the ${1} app'\n}"
 }
