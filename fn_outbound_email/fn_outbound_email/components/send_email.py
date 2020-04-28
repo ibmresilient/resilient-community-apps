@@ -66,11 +66,10 @@ class FunctionComponent(ResilientComponent):
                 with open(self.template_file_path, "r") as definition:
                     mail_body_html = definition.read()
                     log.info("Using custom jinja template instead of default, path: %s", self.template_file_path)
-                    log.info(definition.name)
-                    if definition.name == "data/example_send_email.jinja":
-                        jinja = True
-                    else:
+                    if definition.name.find("example_send_email.jinja") == -1:
                         jinja = False
+                    else:
+                        jinja = True
             else:
                 mail_body_html = kwargs.get("mail_body_html")
                 jinja = False
