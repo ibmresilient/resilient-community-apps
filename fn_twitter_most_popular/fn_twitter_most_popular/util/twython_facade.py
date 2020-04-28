@@ -3,9 +3,9 @@
 from twython import Twython
 
 
-class TwythonFacade: 
+class TwythonFacade:
 
-    def __init__(self,api_key, api_secret,log, client_args):
+    def __init__(self, api_key, api_secret, log, client_args):
         """
 
         :param api_key: The API KEY for a Twitter Developer App
@@ -17,13 +17,11 @@ class TwythonFacade:
         self.log = log
         self.twitter_auth = Twython(api_key, api_secret, oauth_version=2, client_args=client_args)
         self.access_token = self.twitter_auth.obtain_access_token()
-        self.twitter = Twython(api_key, access_token=self.access_token,  client_args=client_args)
+        self.twitter = Twython(api_key, access_token=self.access_token, client_args=client_args)
 
         log.debug("Access_Token is {}".format(self.access_token))
         del api_secret, self.twitter_auth
 
-
-        
         log.info("Deleted API Secret")
 
     def search_for_tweets(self, query=None, count=None):
@@ -39,8 +37,7 @@ class TwythonFacade:
         """
 
         if isinstance(tags_to_search, list):
-            if (len(tags_to_search) > 1):
-
+            if len(tags_to_search) > 1:
                 return ",".join(tags_to_search).replace(',', ' OR ')
-        print("Result is "+str(tags_to_search))
+
         return tags_to_search
