@@ -4,11 +4,12 @@
 """Function implementation"""
 
 import logging
-import inspect
 import json
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_twitter_most_popular.util.twython_facade import TwythonFacade
 
+PACKAGE = "fn_twitter_most_popular"
+LOG = logging.getLogger(__name__)
 
 class FunctionPayload:
     """Class that contains the payload sent back to UI and available in the post-processing script"""
@@ -18,8 +19,8 @@ class FunctionPayload:
         self.inputs = {}
         self.tweets = None
 
-        for input in inputs:
-            self.inputs[input] = inputs[input]
+        for item in inputs:
+            self.inputs[item] = inputs[item]
 
     def as_dict(self):
         """Return this class as a Dictionary"""
@@ -31,51 +32,25 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get("fn_twitter_most_popular", {})
+        self.options = opts.get(PACKAGE, {})
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
-        self.options = opts.get("fn_twitter_most_popular", {})
+        self.options = opts.get(PACKAGE, {})
 
     @function("twitter_most_popular_tweets")
     def _twitter_most_popular_tweets_function(self, event, *args, **kwargs):
         """Function: A function with targets the Twitter Search API. Takes in an input of a multiple possible hashtags and a number of Tweets to be returned and contacts the Twitter Search API to return the results. Requires Twitter Access Key and Secret to obtain a OAuth2 read-only token."""
-
-
-        # Inner Function used to get config:
-
-        def get_config_option(option_name, optional=False):
-            """Given option_name, checks if it is in app.config. Raises ValueError if a mandatory option is missing"""
-            option = self.options.get(option_name)
-
-            if not option and optional is False:
-                err = "'{0}' is mandatory and is not set in app.config file. You must set this value to run this function".format(
-                    option_name)
-                raise ValueError(err)
-            else:
-                return option
-
-        def setup_proxies(http_proxy, https_proxy):
-            if http_proxy is None and https_proxy is None:
-                return None
-            else:
-                client_args = {
-                    'proxies': {
-                        'http': http_proxy,
-                        'https': https_proxy,
-                    }
-                }
-                return client_args
 
         try:
             # Get the function parameters:
             twitter_search_tweet_string = self.get_textarea_param(kwargs.get("twitter_search_tweet_string"))  # textarea
             twitter_search_tweet_count = kwargs.get("twitter_search_tweet_count")  # number
             yield StatusMessage("starting...")
-            log = logging.getLogger(__name__)
-            log.info("twitter_search_tweet_string: %s", twitter_search_tweet_string)
-            log.info("twitter_search_tweet_count: %s", twitter_search_tweet_count)
+
+            LOG.info("twitter_search_tweet_string: %s", twitter_search_tweet_string)
+            LOG.info("twitter_search_tweet_count: %s", twitter_search_tweet_count)
 
             query = json.loads(twitter_search_tweet_string)["hashtags"]
             # Create payload dict with inputs
@@ -84,8 +59,8 @@ class FunctionComponent(ResilientComponent):
                 "twitter_search_tweet_count": twitter_search_tweet_count
             })
 
-            log.info("Setting up Twython")
-            twitter = TwythonFacade(api_key=get_config_option(option_name="twitter_api_key"), api_secret=get_config_option(option_name="twitter_api_secret"), log=log, client_args=setup_proxies(get_config_option(option_name="twitter_proxy_http", optional=True),get_config_option(option_name="twitter_proxy_https", optional=True)))
+            LOG.info("Setting up Twython")
+            twitter = get_twitter_handler(self.options)
             yield StatusMessage("Config Inputs Gathered. Sending Search request")
             payload.tweets = twitter.search_for_tweets(query=query, count=twitter_search_tweet_count)
 
@@ -97,8 +72,38 @@ class FunctionComponent(ResilientComponent):
                 payload.success = False
             yield StatusMessage("Complete")
 
-
             # Produce a FunctionResult with the results
             yield FunctionResult(payload.as_dict())
         except Exception:
             yield FunctionError()
+
+def get_twitter_handler(options):
+    # Inner Function used to get config:
+    def get_config_option(option_name, optional=False):
+        """Given option_name, checks if it is in app.config. Raises ValueError if a mandatory option is missing"""
+        option = options.get(option_name)
+
+        if not option and optional is False:
+            err = "'{0}' is mandatory and is not set in app.config file. You must set this value to run this function".format(
+                option_name)
+            raise ValueError(err)
+
+        return option
+
+    def setup_proxies(http_proxy, https_proxy):
+        if http_proxy is None and https_proxy is None:
+            return None
+
+        client_args = {
+            'proxies': {
+                'http': http_proxy,
+                'https': https_proxy
+            }
+        }
+        return client_args
+
+    return TwythonFacade(api_key=get_config_option(option_name="twitter_api_key"),
+                         api_secret=get_config_option(option_name="twitter_api_secret"),
+                         log=LOG,
+                         client_args=setup_proxies(get_config_option(option_name="twitter_proxy_http", optional=True),
+                                                   get_config_option(option_name="twitter_proxy_https", optional=True)))
