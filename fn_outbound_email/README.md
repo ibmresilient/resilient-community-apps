@@ -7,7 +7,7 @@
   - [Installation](#installation)
     - [Installation: New users](#installation-new-users)
     - [Installation: Existing Users](#installation-existing-users)
-  - [Common connection issues with TLS](#common-connection-issues-with-tls)
+  - [Common connection issues with TLS and TroubleShooting](#common-connection-issues-with-tls-and-troubleshooting)
   - [Uninstall](#uninstall)
   - [Troubleshooting](#troubleshooting)
     - [Resilient Action Status](#resilient-action-status)
@@ -24,7 +24,7 @@
   notes of a previous release
 -->
 ### v1.0.7
-* Initial Release after internal development
+* Initial Release after internal development by Professional, no prior release notes
 
 ---
 
@@ -107,7 +107,7 @@
 * Export the current working state in Adminstrator Settings/ Organization/ Export
 * Install the new version in a seperate virtual python environment so you can easy revert
 
-## Common connection issues with TLS
+## Common connection issues with TLS and TroubleShooting
 
 ```
 fn-outbound-email: 
@@ -120,6 +120,8 @@ Email servers are often restrictive on which applications/users that are authori
 https://hotter.io/docs/email-accounts/app-password-gmail/
 
 https://hotter.io/docs/email-accounts/secure-app-gmail/
+
+Occasionally, mailservers may indicate that emails have been sent successfully (including a successful note on the the associated incident) and yet they be blocked by the receiving mailserver due to insecure spam filters. This is a limitation of SMTP authentication mechanism.
 
 The port of TLS handshakes may also differ between mailservers (587/2525), a short history of port allocation can be found at:
 https://pepipost.com/blog/25-465-587-2525-choose-the-right-smtp-port/
