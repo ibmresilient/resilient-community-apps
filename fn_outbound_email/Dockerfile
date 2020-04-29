@@ -1,24 +1,20 @@
-#docker build -t resilient/fn_outbound_email:1.0.0 -t resilient/fn_outbound_email:latest .
+# docker build -t resilient/fn_outbound_email:1.0.0 -t resilient/fn_outbound_email:latest .
 
 # Base image using Red Hat's universal base image (rhel 8) for python
-FROM centos:latest
+FROM registry.access.redhat.com/ubi8/python-36:latest
 
 ARG APPLICATION=fn_outbound_email
 ARG RESILIENT_CIRCUITS_VERSION=36.2
 ARG PATH_RESILIENT_CIRCUITS=rescircuits
 
 # Update to latest packages, user 0 for root privilege
-#USER 0
+USER 0
 
 # Update to latest pip
-RUN dnf module -y install python36
-
-#UN pip3 install --user --upgrade pip3
+RUN pip install --upgrade pip
 
 # install resilient-circuits
-RUN pip3 install --user resilient-circuits>=${RESILIENT_CIRCUITS_VERSION} 
-RUN pip3 install wheel keyring
-
+RUN pip install resilient-circuits>=${RESILIENT_CIRCUITS_VERSION}
 
 ## ---- section for changes ----
 # uncomment and replicate if additional os libraries are needed
@@ -27,7 +23,7 @@ RUN pip3 install wheel keyring
 
 # install the base package
 COPY ./dist /tmp/packages
-RUN pip3 install --user /tmp/packages/${APPLICATION}-*.tar.gz
+RUN pip install /tmp/packages/${APPLICATION}-*.tar.gz
 
 # uncomment and replicate if additional pypi packages are needed
 #RUN pip install <package>
