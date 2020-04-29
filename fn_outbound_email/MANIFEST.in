@@ -2,3 +2,4 @@ include README.md
 include fn_outbound_email/util/*
 include fn_outbound_email/LICENSE
 include fn_outbound_email/doc/*
+include fn_outbound_email/data/*
