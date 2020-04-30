@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_virustotal',
-    version='1.0.2',
+    version='1.0.3',
     license='MIT',
     author='Resilient Labs',
     author_email='resil.labs@gmail.com',
