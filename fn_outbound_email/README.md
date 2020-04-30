@@ -23,7 +23,7 @@
   Specify all changes in this release. Do not remove the release 
   notes of a previous release
 -->
-### v1.0.7
+### v1.0.8
 * Initial Release after internal development by Professional, no prior release notes
 
 ---
