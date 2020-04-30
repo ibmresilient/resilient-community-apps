@@ -21,12 +21,12 @@ function cmd_exists() {
 }
 ## Variables
 # The file from which we will pull configuration files
-readonly IMAGES_TO_TRANSFER="repo_quay.conf"
+readonly IMAGES_TO_TRANSFER="${IMAGES_TO_TRANSFER:-repo_quay.conf}"
 
-readonly IMAGES_TO_PRESERVE_LOCALLY="preserved_images.conf"
+readonly IMAGES_TO_PRESERVE_LOCALLY="${IMAGES_TO_TRANSFER:-preserved_images.conf}"
 
-readonly IMAGE_REGISTRY="quay.io"
-readonly REGISTRY_ORG="ibmresilient"
+readonly IMAGE_REGISTRY="${SOURCE_REGISTRY:-quay.io}"
+readonly REGISTRY_ORG="${SOURCE_REGISTRY_ORG:-ibmresilient}"
 # The registry we will pull images from 
 readonly SOURCE_REGISTRY="$IMAGE_REGISTRY/$REGISTRY_ORG"
 # The registry we will push images too
