@@ -45,6 +45,8 @@ if [[ -z "$1" ]]; then
 fi
 destination_registry=$1
 
+cmd_exists jq || { echo >&2 "Jq is required for parsing the API call responses from Quay and was not found in the envionment."; exit 1; }
+
 # Before trying to pull or push anything, check for the existance of either docker or podman
 container_engine=""
 # Users may provide a preferred container engine using arg 2, otherwise the script checks whether it can use docker or podman.    
