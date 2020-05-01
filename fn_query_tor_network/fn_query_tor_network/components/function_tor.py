@@ -5,7 +5,6 @@
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-import fn_query_tor_network.util.selftest as selftest
 import requests
 
 class FunctionComponent(ResilientComponent):
@@ -15,7 +14,6 @@ class FunctionComponent(ResilientComponent):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         self.options = opts.get("fn_query_tor_network", {})
-        selftest.selftest_function(opts)
 
     @handler("reload")
     def _reload(self, event, opts):

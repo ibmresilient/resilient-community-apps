@@ -65,7 +65,7 @@ class FunctionComponent(ResilientComponent):
                 tech_dict = technique.dict_form()
                 tech_dict.update(
                     {
-                        "tactic": tactics[0].name if tactics else None,  # there should be 1 tactic per technique
+                        "tactic": ",".join(x.name for x in tactics) if tactics else None,  # there should be 1 tactic per technique
                         "mitre_mitigations": [x.dict_form() for x in technique.get_mitigations(mitre_conn)]
                     }
                 )

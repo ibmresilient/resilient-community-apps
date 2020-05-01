@@ -2,10 +2,24 @@
 # -*- coding: utf-8 -*-
 
 from setuptools import setup, find_packages
+import glob
+import ntpath
+
+def get_module_name(module_path):
+    """
+    Return the module name of the module path
+    """
+    return ntpath.split(module_path)[1].split(".")[0]
+
+def snake_to_camel(word):
+    """
+    Convert a word from snake_case to CamelCase
+    """
+    return ''.join(x.capitalize() or '_' for x in word.split('_'))
 
 setup(
     name='fn_email_header_validation',
-    version='1.0.0',
+    version='1.0.1',
     license='MIT',
     author='Resilient Labs',
     author_email='resil.labs@gmail.com',
@@ -23,7 +37,7 @@ setup(
     ],
     entry_points={
         "resilient.circuits.components": [
-            "EmailHeaderValidationUsingDkimarcFunctionComponent = fn_email_header_validation.components.email_header_validation_using_dkimarc:FunctionComponent"
+            "{}FunctionComponent = fn_email_header_validation.components.{}:FunctionComponent".format(snake_to_camel(get_module_name(filename)), get_module_name(filename)) for filename in glob.glob("./fn_email_header_validation/components/[a-zA-Z]*.py")
         ],
         "resilient.circuits.configsection": ["gen_config = fn_email_header_validation.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_email_header_validation.util.customize:customization_data"]
