@@ -21,12 +21,11 @@ do
     cd $pkg_dir
     python setup.py sdist
     resilient-sdk package -p .
-
-    if [ $? -ne 0 ]; then
+    if [ -f dist/app* ]; then
+        mv dist/app-* $dist_dir
+    else
         # if couldn't build app.zip - build tar.gz
         mv dist/*.tar.gz $dist_dir
-    else
-        mv dist/app-* $dist_dir
     fi
     # return to the starting directory
     cd $(dirname $0)
