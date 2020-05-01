@@ -9,7 +9,7 @@ dist_dir=$( cd $(dirname $0) ; pwd -P )
 python -m pip install resilient_sdk-1.0.0.tar.gz
 
 
-setup_files=(`find .. -type f -name 'setup.py' -d 2`);
+setup_files=(`find .. -type f -name 'setup.py' -not -path "../older/*"`);
 echo "Building these packages:";
 printf '  %s\n' "${setup_files[@]}";
 echo "Storing packages to: $dist_dir";
