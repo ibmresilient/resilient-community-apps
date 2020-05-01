@@ -7,7 +7,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_outbound_email',
-    version='1.0.7',
+    version='1.0.8',
     license='MIT',
     author='IBM Resilient',
     url='https://www.ibm.com/security/intelligent-orchestration/resilient',
