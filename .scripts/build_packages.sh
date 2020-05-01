@@ -22,6 +22,8 @@ do
     python setup.py sdist
     resilient-sdk package -p .
     mv dist/app-* $dist_dir
+    # return to the starting directory
+    cd $(dirname $0)
 done;
 
 # Build content packages with resilient-res-package.sh
