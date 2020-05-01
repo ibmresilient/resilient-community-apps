@@ -25,7 +25,7 @@ readonly IMAGES_TO_TRANSFER="${IMAGES_TO_TRANSFER:-repo_quay.conf}"
 
 readonly IMAGES_TO_PRESERVE_LOCALLY="${IMAGES_TO_TRANSFER:-preserved_images.conf}"
 
-readonly IMAGE_REGISTRY="${SOURCE_REGISTRY:-quay.io}"
+readonly IMAGE_REGISTRY="${SOURCE_REGISTRY_DOMAIN:-quay.io}"
 readonly REGISTRY_ORG="${SOURCE_REGISTRY_ORG:-ibmresilient}"
 # The registry we will pull images from 
 readonly SOURCE_REGISTRY="$IMAGE_REGISTRY/$REGISTRY_ORG"

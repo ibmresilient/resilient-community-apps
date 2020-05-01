@@ -23,8 +23,8 @@ function cmd_exists() {
   command -v $1 > /dev/null 2>&1
 }
 ## Variables
-readonly IMAGE_REGISTRY="${SOURCE_REGISTRY:-quay.io}"
-readonly REGISTRY_ORG="${SOURCE_REGISTRY:-ibmresilient}"
+readonly IMAGE_REGISTRY="${SOURCE_REGISTRY_DOMAIN:-quay.io}"
+readonly REGISTRY_ORG="${SOURCE_REGISTRY_ORG:-ibmresilient}"
 # The registry we will pull images from 
 readonly SOURCE_REGISTRY="$IMAGE_REGISTRY/$REGISTRY_ORG"
 # This is an exposed cred; the cred has only the repo:read permission and is used to get a list of all images and tags from the REST API
