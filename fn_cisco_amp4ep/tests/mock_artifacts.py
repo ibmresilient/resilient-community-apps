@@ -5,6 +5,7 @@
 """Generate Mock responses to simulate Cisco AMP for endpoinst for Unit and function tests """
 import time
 import re
+import sys
 
 from requests import HTTPError
 from requests.models import Response
@@ -486,52 +487,89 @@ def mocked_amp_client(*args):
             return True if key in self.__dict__.keys() else False
 
         def get_computers(self, group_guid=None, limit=None, hostname=None, internal_ip=None, external_ip=None):
-            self.r._content = get_computers()
+            if sys.version_info.major < 3:
+                self.r._content = get_computers()
+            else:
+                self.r._content = get_computers().encode('utf-8', 'ignore')
             return self.r.json()
 
         def get_computer(self, connector_guid):
-            self.r._content = get_computer()
+            if sys.version_info.major < 3:
+                self.r._content = get_computer()
+            else:
+                self.r._content = get_computer().encode('utf-8', 'ignore')
             return self.r.json()
 
         def get_computer_trajectory(self, connector_guid, q=None, limit=None):
-            self.r._content = get_computer_trajectory()
+            if sys.version_info.major < 3:
+                self.r._content = get_computer_trajectory()
+            else:
+                self.r._content = get_computer_trajectory().encode('utf-8', 'ignore')
             return self.r.json()
 
         def get_activity(self, q, limit=None, offset=None):
-            self.r._content = get_activity()
+            if sys.version_info.major < 3:
+                self.r._content = get_activity()
+            else:
+                self.r._content = get_activity().encode('utf-8', 'ignore')
             return self.r.json()
 
         def get_file_lists(self, name, limit=None, offset=None):
-            self.r._content = get_file_lists()
+            if sys.version_info.major < 3:
+                self.r._content = get_file_lists()
+            else:
+                self.r._content = get_file_lists().encode('utf-8', 'ignore')
             return self.r.json()
 
         def get_file_list_files(self, file_list_guid, file_sha256, limit=None, offset=None):
-            self.r._content = get_file_list_files(bool(file_sha256))
+            if sys.version_info.major < 3:
+                self.r._content = get_file_list_files(bool(file_sha256))
+            else:
+                self.r._content = get_file_list_files(bool(file_sha256)).encode('utf-8', 'ignore')
             return self.r.json()
 
         def set_file_list_files(self, file_list_guid, file_sha256, description):
-            self.r._content = set_file_list_files()
+            if sys.version_info.major < 3:
+                self.r._content = set_file_list_files()
+            else:
+                self.r._content = set_file_list_files().encode('utf-8', 'ignore')
             return self.r.json()
 
         def delete_file_list_files(self, file_list_guid, file_sha256):
-            self.r._content = delete_file_list_files()
+            if sys.version_info.major < 3:
+                self.r._content = delete_file_list_files()
+            else:
+                self.r._content = delete_file_list_files().encode('utf-8', 'ignore')
+
             return self.r.json()
 
         def get_events(self, detection_sha256, application_sha256, connector_guid, group_guid, start_date, event_type,
                        severity, limit, offset):
-            self.r._content = get_events()
+            if sys.version_info.major < 3:
+                self.r._content = get_events()
+            else:
+                self.r._content = get_events().encode('utf-8', 'ignore')
             return self.r.json()
 
         def get_event_types(self):
-            self.r._content = get_event_types()
+            if sys.version_info.major < 3:
+                self.r._content = get_event_types()
+            else:
+                self.r._content = get_event_types().encode('utf-8', 'ignore')
             return self.r.json()
 
         def get_groups(self, group_guid, name, limit):
-            self.r._content = get_groups(bool(name))
+            if sys.version_info.major < 3:
+                self.r._content = get_groups(bool(name))
+            else:
+                self.r._content = get_groups(bool(name)).encode('utf-8', 'ignore')
             return self.r.json()
 
         def move_computer(self, connector_guid, group_guid):
-            self.r._content = move_computer()
+            if sys.version_info.major < 3:
+                self.r._content = move_computer()
+            else:
+                self.r._content = move_computer().encode('utf-8', 'ignore')
             return self.r.json()
 
         def get_paginated_total(self, get_method, **params):
