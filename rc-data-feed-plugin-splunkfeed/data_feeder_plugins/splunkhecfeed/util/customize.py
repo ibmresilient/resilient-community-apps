@@ -3,7 +3,7 @@
 """Generate the Resilient customizations required for rc-data-feed"""
 
 from __future__ import print_function
-from resilient import ImportDefinition
+from resilient_circuits.util import ImportDefinition
 
 """THIS INFORMATION IS REPLICATED FROM RC-DATA-FEED. IT SHOULD ONLY BE USED FOR APPHOST ENVIRONMENTS"""
 
