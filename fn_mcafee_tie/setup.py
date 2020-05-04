@@ -14,7 +14,8 @@ setup(
     long_description="Resilient Circuits Components for McAfee TIE Functions",
     install_requires=[
         'resilient_circuits>=30.0.0',
-        'dxltieclient'
+        'dxltieclient',
+        'dxlclient'
     ],
     packages=find_packages(),
     include_package_data=True,
