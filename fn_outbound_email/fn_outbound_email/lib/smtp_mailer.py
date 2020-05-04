@@ -139,8 +139,10 @@ class SendSMTPEmail(ResilientComponent):
             smtp_connection.sendmail(self.from_address,
                                      set(list(self.to_address_list) + list(self.cc_address_list) +
                                          list(self.bcc_address_list)), composed)
+            return None
         except Exception as connection_error:
             log.error(connection_error)
+            return str(connection_error)
         finally:
             try:
                 if smtp_connection:
@@ -148,6 +150,8 @@ class SendSMTPEmail(ResilientComponent):
                     return composed
             except Exception:
                 pass
+
+
 
     @staticmethod
     def process_attachments(attachment_list):
