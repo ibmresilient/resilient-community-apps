@@ -20,12 +20,13 @@ RUN pip install resilient-circuits>=${RES_CIRCUITS_VERSION}
 #RUN yum -y update && yum clean all
 #RUN yum -y install <package>
 
+# uncomment and replicate if additional pypi packages are needed
+RUN pip install PySocks==1.6.8
+
 # install the base package
 COPY ./dist /tmp/packages
 RUN pip install /tmp/packages/${APPLICATION}-*.tar.gz
 
-# uncomment and replicate if additional pypi packages are needed
-#RUN pip install <package>
 
 # uncomment and replicate if additional local packages are needed
 #COPY /path/to/extra_package /tmp/packages/.
