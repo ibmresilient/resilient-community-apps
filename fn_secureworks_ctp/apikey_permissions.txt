@@ -10,7 +10,7 @@ read_function
 #
 ## incident permissions
 create_incident
-#read_all_incidents
+read_all_incidents
 #delete_all_incidents
 #edit_all_incidents_members
 #edit_all_incidents_owner
