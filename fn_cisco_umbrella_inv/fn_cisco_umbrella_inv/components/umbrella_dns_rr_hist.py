@@ -98,7 +98,7 @@ class FunctionComponent(ResilientComponent):
                 raise ValueError("Required parameter 'incident_id' not set")
 
             if is_none(artifact_type):
-                raise ValueError("Required parameter 'artifa7ct_type' not set")
+                raise ValueError("Required parameter 'artifact_type' not set")
 
             yield StatusMessage("Starting...")
             res = None
