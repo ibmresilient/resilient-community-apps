@@ -3,7 +3,7 @@
 """Generate the Resilient customizations required for fn_cisco_umbrella_inv"""
 
 from __future__ import print_function
-from resilient import ImportDefinition
+from resilient_circuits.util import *
 
 def codegen_reload_data():
     """Parameters to codegen used to generate the fn_cisco_umbrella_inv package"""
