@@ -25,7 +25,7 @@ smtp_port=25
 # SMTP CONNECTION TIMEOUT IN SECONDS
 smtp_conn_timeout=20
 
-# SMTP SSL MODE = (starttls, None)
+# SMTP SSL MODE = (starttls, ssl, None)
 smtp_ssl_mode=None
 
 # SSL Cert (not supported)
