@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_cisco_umbrella_inv',
-    version='1.0.1',
+    version='1.0.2',
     author='IBM Resilient',
     author_email='support@resilientsystems.com',
     description="Resilient Circuits Components for 'fn_cisco_umbrella_inv'",
@@ -38,6 +38,7 @@ setup(
             "UmbrellaDomainVolumeFunctionComponent = fn_cisco_umbrella_inv.components.umbrella_domain_volume:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_cisco_umbrella_inv.util.config:config_section_data"],
-        "resilient.circuits.customize": ["customize = fn_cisco_umbrella_inv.util.customize:customization_data"]
+        "resilient.circuits.customize": ["customize = fn_cisco_umbrella_inv.util.customize:customization_data"],
+        "resilient.circuits.selftest": ["selftest = fn_cisco_umbrella_inv.util.selftest:selftest_function"]
     }
 )

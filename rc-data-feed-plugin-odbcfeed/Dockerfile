@@ -19,6 +19,9 @@ RUN pip install resilient-circuits>=${RES_CIRCUITS_VERSION}
 # uncomment and replicate if additional os libraries are needed
 RUN yum -y update && yum clean all
 
+# link libnsl2 to libnsl
+RUN ln -s /usr/lib64/libnsl.so.2.0.0 /usr/lib64/libnsl.so.1
+
 # add yum repo with unixODBC and install
 RUN curl https://packages.microsoft.com/config/rhel/8/prod.repo > /etc/yum.repos.d/mssql-release.repo
 RUN yum -y install unixODBC-devel
@@ -51,7 +54,7 @@ RUN yum -y install freetds
 # install Oracle DB driver
 RUN yum -y install /tmp/lib/oracle-instantclient19.6-basic-19.6.0.0.0-1.x86_64.rpm
 RUN yum -y install /tmp/lib/oracle-instantclient-odbc-linuxx64.rpm
-RUN rpm -i /tmp/lib/libnsl-2.28-72.el8_1.1.x86_64.rpm
+#RUN rpm -i /tmp/lib/libnsl-2.28-72.el8_1.1.x86_64.rpm
 
 # install the base package
 COPY ./dist /tmp/packages
@@ -89,4 +92,3 @@ COPY entrypoint.sh /opt/rescircuits/entrypoint.sh
 # Generally a good practice.
 USER 1001
 ENTRYPOINT [ "sh", "/opt/rescircuits/entrypoint.sh" ]
-
