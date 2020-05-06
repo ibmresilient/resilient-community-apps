@@ -35,7 +35,7 @@ class FunctionComponent(ResilientComponent):
             log.info("qradar_reference_set_item_value: %s", qradar_reference_set_item_value)
 
             qradar_verify_cert = True
-            if "verify_cert" in self.options and self.options["verify_cert"] == "false":
+            if "verify_cert" in self.options and self.options["verify_cert"] == "False":
                 qradar_verify_cert = False
 
             log.debug("Connection to {} using {}".format(self.options["host"],

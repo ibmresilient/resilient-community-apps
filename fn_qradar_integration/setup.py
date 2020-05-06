@@ -20,7 +20,6 @@ setup(
     classifiers=[
         'Programming Language :: Python',
     ],
-    url="https://192.168.56.103",
     entry_points={
         "resilient.circuits.components": [
             "QradarFindReferenceSetsFunctionComponent = fn_qradar_integration.components.qradar_find_reference_sets:FunctionComponent",
