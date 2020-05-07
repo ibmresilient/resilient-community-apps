@@ -139,15 +139,18 @@ class SendSMTPEmail(ResilientComponent):
             smtp_connection.sendmail(self.from_address,
                                      set(list(self.to_address_list) + list(self.cc_address_list) +
                                          list(self.bcc_address_list)), composed)
+            err_msg =  None
         except Exception as connection_error:
             log.error(connection_error)
+            err_msg = str(connection_error)
         finally:
             try:
                 if smtp_connection:
                     smtp_connection.quit()
-                    return composed
             except Exception:
                 pass
+
+        return err_msg
 
     @staticmethod
     def process_attachments(attachment_list):

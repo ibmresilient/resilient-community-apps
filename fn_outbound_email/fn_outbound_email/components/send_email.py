@@ -129,26 +129,31 @@ class FunctionComponent(ResilientComponent):
             if mail_body_html:
                 log.info("Rendering template")
                 mail_body_html = send_smtp_email.render_template(mail_body_html, self.incident_data, self.mail_data)
+
+                if not mail_body_html:
+                    raise Exception("Local jinja template not valid, please retry sending with valid template locally or remove file to use default")
+
                 if not jinja:
-                    email_message = send_smtp_email.send(body_html=mail_body_html)
+                    error_msg = send_smtp_email.send(body_html=mail_body_html)
                     text = mail_body_html
                 else:
                     mail_body_html = mail_body_html.replace('---===newline===---', '<div>')
-                    email_message = send_smtp_email.send(body_html=mail_body_html)
+                    error_msg = send_smtp_email.send(body_html=mail_body_html)
                     text = mail_body_html.replace('---===newline===---', '<br>')
             elif mail_body_text:
                 log.info("Rendering text")
                 text = mail_body_text
-                email_message = send_smtp_email.send(body_text=mail_body_text)
+                error_msg = email_message = send_smtp_email.send(body_text=mail_body_text)
 
-            if not email_message:
-                raise Exception("Local jinja template not valid, please retry sending with valid template locally or remove file to use default")
+            if error_msg:
+                yield StatusMessage("An error occurred while sending the email: {}".format(error_msg))
 
             yield StatusMessage("Done with sending email...")            
             results = payload.done(success=True, content={
                 "inputs" : [mail_from, mail_to, mail_cc, mail_bcc, mail_subject],
                 "message": email_message,
-                "text" : text
+                "text" : text,
+                "success": (not error_msg)
             })
 
             # Produce a FunctionResult with the results

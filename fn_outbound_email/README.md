@@ -36,15 +36,9 @@
 * An Integration Server running `resilient_circuits`
 
   * The minimum set of Resilient API permissions for this integration if using an API key account:
-    * Edit Org Data
-    * Incidents.Edit.Fields
-    * Functions.Read
-    * Functions.Edit
-    * Other.ReadIncidentsActionInvocations
-    * Scripts.Create
-    * Scripts.Edit
-    * Workflows.Create
-    * Workflow.Edit
+    * Org Data: Read and Edit
+    * Incident: Read
+    * Functions: Read
 
   * To set up an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
 
