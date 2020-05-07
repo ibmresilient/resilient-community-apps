@@ -50,7 +50,7 @@ query_limit=10
 # Required - Boolean: true: returns only tickets assigned to the client. false: returns all tickets.
 assigned_to_customer=true
 
-# Required - How often, in minutes, to check for new events
+# Required - How often, in seconds, to check for new events
 # To turn the poller off use value 0
 polling_interval=600
 
