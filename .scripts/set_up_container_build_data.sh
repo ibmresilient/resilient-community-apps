@@ -38,9 +38,15 @@ function container_build (){
 # Function to create a named repository in the ibmresilient org
 # Args: integration name; this will be the name of the repository
 function repo_create(){
-	curl $REPO_API_URL \
-  	-H "authorization: Bearer ${REPO_CREATE_TOKEN}" \
-	--data-binary $"{\n  'repo_kind': 'image',\n  'namespace': "${2}",\n  'visibility': 'public',\n  'repository': "${1}",\n  'description': 'Image containing resilient_circuits and the ${1} app'\n}"
+	   request_body="{
+\"repo_kind\": \"image\",
+\"visibility\": \"public\",
+\"repository\": \"$1\",
+\"namespace\": \"$2\",
+\"description\": \"IBM Resilient app for $1\" 
+}"
+	curl -X POST -H 'content-type: application/json' -H "authorization: Bearer ${REPO_CREATE_TOKEN}" --data "$request_body" \
+    $REPO_API_URL
 }
 # Pushes container with a given label
 # Args: label to push
