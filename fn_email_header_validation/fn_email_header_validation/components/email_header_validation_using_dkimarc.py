@@ -34,10 +34,10 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Analyzing email headers")
             # Initialize DKIM object from string or attachment and check for DKIM header
             if email_header_validation_target_email:
-                target_email = email_header_validation_target_email
+                target_email = to_bytes(email_header_validation_target_email)
             else:
                 client = self.rest_client()
-                target_email = get_content(client, incident_id, attachment_id, artifact_id)
+                target_email = to_bytes(get_content(client, incident_id, attachment_id, artifact_id))
 
             dkim_email = dkim.DKIM(target_email)
             dkim_header_exists = b"dkim-signature" in [header[0].lower() for header in dkim_email.headers]
@@ -60,7 +60,7 @@ class FunctionComponent(ResilientComponent):
 
             results = {
                 "dkim_verify": dkim_results,
-                "arc_verify": arc_results[0] == 'pass',
+                "arc_verify": arc_results[0] == b'pass',
                 "dkim_message": dkim_message,
                 "arc_message": arc_results[2]
             }
@@ -69,7 +69,6 @@ class FunctionComponent(ResilientComponent):
             yield FunctionResult(results)
         except Exception:
             yield FunctionError()
-
 
 def get_content(client, incident_id, attachment_id, artifact_id):
     entity = {"incident_id": incident_id, "id": None, "type": "", "meta_data": None, "data": None}
@@ -91,3 +90,9 @@ def get_content(client, incident_id, attachment_id, artifact_id):
 
     else:
         raise ValueError('attachment_id AND artifact_id both None')
+
+def to_bytes(content):
+    try:
+        return content.encode("utf-8")
+    except:
+        return content

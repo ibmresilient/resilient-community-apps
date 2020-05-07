@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -xv
 
 # Build python packages with setup.py
 # This section builds all the feature packages implemented in
@@ -9,7 +9,7 @@ dist_dir=$( cd $(dirname $0) ; pwd -P )
 python -m pip install resilient_sdk-1.0.0.tar.gz
 
 
-setup_files=(`find .. -type f -name 'setup.py'`);
+setup_files=(`find .. -type f -name 'setup.py' -not -path "../older/*"`);
 echo "Building these packages:";
 printf '  %s\n' "${setup_files[@]}";
 echo "Storing packages to: $dist_dir";
@@ -21,7 +21,14 @@ do
     cd $pkg_dir
     python setup.py sdist
     resilient-sdk package -p .
-    mv dist/app-* $dist_dir
+    if [ -f dist/app* ]; then
+        mv dist/app-* $dist_dir
+    else
+        # if couldn't build app.zip - build tar.gz
+        mv dist/*.tar.gz $dist_dir
+    fi
+    # return to the starting directory
+    cd $dist_dir
 done;
 
 # Build content packages with resilient-res-package.sh

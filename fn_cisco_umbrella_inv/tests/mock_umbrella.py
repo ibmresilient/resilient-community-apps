@@ -92,7 +92,7 @@ RESPONSES = dict(dns_rr_hist_ip={u'rrs': [{u'ttl': 3600, u'type': u'A', u'class'
                                                        1791200, 1784312, 1776649, 1830100, 1939211, 2023009, 2075916, 2042269, 2065889,
                                                        2137081, 2442077, 2618018, 2690130, 2726822, 2650116, 0, 0]
                 },
-                umbrella_domain_whois_info_domain = {u'registrantFaxExt': None, u'administrativeContactPostalCode': u'95134',
+                umbrella_domain_whois_info_domain = [{u'registrantFaxExt': None, u'administrativeContactPostalCode': u'95134',
                           u'zoneContactCity': None, u'addresses': [u'170 w. tasman drive', u'170 west tasman drive'],
                           u'billingContactState': None, u'technicalContactStreet': [u'170 w. tasman drive'],
                           u'auditUpdatedDate': u'2018-04-22 20:55:22.000 UTC', u'administrativeContactCity': u'San Jose',
@@ -129,7 +129,7 @@ RESPONSES = dict(dns_rr_hist_ip={u'rrs': [{u'ttl': 3600, u'type': u'A', u'class'
                           u'billingContactTelephoneExt': None, u'zoneContactTelephone': None, u'technicalContactName':
                           u'Network Services', u'zoneContactTelephoneExt': None, u'billingContactOrganization': None,
                           u'registrarIANAID': u'299', u'zoneContactCountry': None, u'hasRawText': True
-                },
+                }],
                 umbrella_domain_whois_info_emails = {u'test@example.com': {u'sortField': u'created',
                                                                        u'limit': 2, u'moreDataAvailable': True,
                                                                        u'offset': 0, u'domains': [{u'current': True, u'domain': u'ev-dragon.com'}],

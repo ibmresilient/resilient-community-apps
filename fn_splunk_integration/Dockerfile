@@ -5,7 +5,11 @@ FROM registry.access.redhat.com/ubi8/python-36:latest
 #FROM resilient/rc-data-feeder-base
 
 ARG APPLICATION=fn_splunk_integration
+<<<<<<< HEAD
 ARG RES_CIRCUITS_VERSION=36.2
+=======
+ARG RES_CIRCUITS_VERSION=34.0.195
+>>>>>>> 87b28702e87784589edb4a5417bf6381723f82ce
 
 # update to latest packages, user 0 for root privilege
 USER 0
@@ -13,7 +17,11 @@ USER 0
 RUN pip install --upgrade pip
 
 # install resilient-circuits
+<<<<<<< HEAD
 RUN pip install "resilient-circuits>=${RES_CIRCUITS_VERSION}"
+=======
+RUN pip install resilient-circuits>=${RES_CIRCUITS_VERSION}
+>>>>>>> 87b28702e87784589edb4a5417bf6381723f82ce
 
 ## ---- section for changes ----
 # uncomment and replicate if additional os libraries are needed

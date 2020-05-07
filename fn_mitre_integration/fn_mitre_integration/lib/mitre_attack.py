@@ -5,7 +5,8 @@
 #
 from stix2 import TAXIICollectionSource, Filter, CompositeDataSource
 from stix2.datastore.taxii import DataSourceError
-from taxii2client import Server
+# Current code is written to support v20, and importing from taxii2client directly returns v21 now
+from taxii2client.v20 import Server
 import re
 
 MITRE_TAXII_URL = "https://cti-taxii.mitre.org/taxii/"
@@ -53,6 +54,7 @@ class MitreAttackBase(object):
     MITRE_TYPE = "replace"
     _cached_obj = None
     SECONDS_IN_A_DAY = 84600
+    MITRE_PHASES = ["mitre-attack", "mitre-pre-attack", "mitre-mobile-attack"]
 
     def __init__(self, doc):
         self._stix = doc
@@ -275,8 +277,13 @@ class MitreAttackTactic(MitreAttackBase):
         :param technique: MitreAttackTechnique instance
         :return:
         """
-        name = technique.tactic_shortname
-        items = cls.get_by_shortname(conn, name)
+        names = technique.tactic_shortnames
+        items = []
+        for name in names:
+            tactic = cls.get_by_shortname(conn, name)
+            if tactic:
+                items.extend(tactic)
+
         if not items:
             return None
         # filter by correct collection otherwise
@@ -288,10 +295,10 @@ class MitreAttackTechnique(MitreAttackBase):
 
     def __init__(self, doc):
         super(MitreAttackTechnique, self).__init__(doc)
-        self.tactic_shortname = self.get_tactic_shortname(doc)
+        self.tactic_shortnames = self.get_tactic_shortnames(doc)
 
     @staticmethod
-    def get_tactic_shortname(doc):
+    def get_tactic_shortnames(doc):
         """
         Extracts the shortname of the Tactic that the technique is a part of.
 
@@ -300,10 +307,11 @@ class MitreAttackTechnique(MitreAttackBase):
         """
         # get the shortname recorded in stix document
         kill_chain_phases = doc.get("kill_chain_phases", {})
+        shortnames = []
         for kill_phase in kill_chain_phases:
-            if kill_phase.get("kill_chain_name", "") == "mitre-attack":
-                return kill_phase.get("phase_name")
-        return None
+            if kill_phase.get("kill_chain_name", "") in MitreAttackTechnique.MITRE_PHASES:
+                shortnames.append(kill_phase.get("phase_name"))
+        return shortnames
 
     def get_mitigations(self, conn):
         return MitreAttackMitigation.get_by_technique(conn, self)

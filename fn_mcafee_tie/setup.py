@@ -3,11 +3,9 @@
 
 from setuptools import setup, find_packages
 
-PUBLISH_VERSION = "1.0.0"
-
 setup(
     name='fn_mcafee_tie',
-    version=PUBLISH_VERSION,
+    version="1.0.1",
     url='https://github.com/ibmresilient/resilient-circuits-packages',
     license='MIT',
     author='IBM Resilient',
@@ -16,7 +14,8 @@ setup(
     long_description="Resilient Circuits Components for McAfee TIE Functions",
     install_requires=[
         'resilient_circuits>=30.0.0',
-        'dxltieclient'
+        'dxltieclient',
+        'dxlclient'
     ],
     packages=find_packages(),
     include_package_data=True,
