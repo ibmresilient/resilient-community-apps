@@ -12,6 +12,7 @@ from mock import patch
 import mock
 import urllib
 import six
+import pytest
 
 # Util function to generate simulated requests response
 def _generateResponse(content, status):
@@ -33,20 +34,18 @@ token = "FakeSecreteToken"
 cafile = True
 search_id = "FakeSearch_id"
 
-def test_quote_return():
-    assert isinstance(qradar_utils.quote("test"), six.string_types)
-    assert isinstance(qradar_utils.quote(u"test"), six.string_types)
-    assert isinstance(qradar_utils.quote("ç"), six.string_types)
-    assert isinstance(qradar_utils.quote(u"ç"), six.string_types)
-
+@pytest.mark.parametrize("val", [ "test", u"test", "ç", u"ç" ])
+def test_quote_return(val):
+    result = qradar_utils.quote(val)
+    assert isinstance(result, six.string_types)
 
 @patch("fn_qradar_integration.util.qradar_utils.quote_func")
-def test_quote_passing_args(func):
+def test_quote_passing_args(mocked_func):
     qradar_utils.quote("test")
-    func.assert_called_with("test".encode("utf-8"))
+    mocked_func.assert_called_with("test".encode("utf-8"))
 
     qradar_utils.quote("test", "test")
-    func.assert_called_with("test".encode("utf-8"), "test")
+    mocked_func.assert_called_with("test".encode("utf-8"), "test")
 
 
 def test_auth_info():
