@@ -43,7 +43,7 @@ function repo_create(){
 \"visibility\": \"public\",
 \"repository\": \"$1\",
 \"namespace\": \"$2\",
-\"description\": \"Image containing resilient_circuits and the $1 app\" 
+\"description\": \"IBM Resilient app for $1\" 
 }"
 	curl -X POST -H 'content-type: application/json' -H "authorization: Bearer ${REPO_CREATE_TOKEN}" --data "$request_body" \
     $REPO_API_URL
