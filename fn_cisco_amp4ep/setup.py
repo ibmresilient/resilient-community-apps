@@ -9,8 +9,13 @@ setup(
     license='Resilient License',
     author='IBM Resilient',
     author_email='support@resilientsystems.com',
-    description="Resilient Circuits Components for 'fn_cisco_amp4ep'",
-    long_description="Resilient Circuits Components for 'fn_cisco_amp4ep'",
+    description="Resilient Circuits Components for Cisco AMP for Endpoints",
+    long_description="The Cisco AMP for Endpoints integration with the Resilient platform allows for the querying and "
+                     "updating of an AMP for Endpoints deployment. The integration includes 12 functions that return "
+                     "results which show security events for endpoints in the deployment. The returned results can be "
+                     "used to make customized updates to the Resilient platform, such as updating incidents, artifacts, "
+                     "data tables and so on. The integration can also be used to make changes to a deployment including "
+                     "adding or removing a hash to a blacklist and moving an endpoint to a different group.",
     install_requires=[
         'resilient_circuits>=30.0.0'
     ],
