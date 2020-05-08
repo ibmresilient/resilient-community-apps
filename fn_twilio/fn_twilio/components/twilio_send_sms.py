@@ -141,7 +141,7 @@ class FunctionComponent(ResilientComponent):
                 self.log.info('Sent to {0}'.format(phone_number))
             else:
                 entry['success'] = False
-                entry["error_message"]: message.error_message
+                entry['error_message'] = message.error_message
                 self.log.error('Failed to send to {0} [{1}]'.format(phone_number, message.error_message))
 
         except TwilioRestException as e:
