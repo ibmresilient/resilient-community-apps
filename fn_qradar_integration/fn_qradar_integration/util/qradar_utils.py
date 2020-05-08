@@ -84,6 +84,7 @@ class ArielSearch(SearchWaitCommand):
     def __init__(self, timeout=600, poll=5):
         self.range_start = 0
         self.range_end = 50
+        self.query_all = False
         super(ArielSearch, self).__init__(timeout, poll)
 
     def set_range_start(self, start):
@@ -108,6 +109,13 @@ class ArielSearch(SearchWaitCommand):
         :return:
         """
         self.search_timeout = timeout
+    def set_query_all(self, query_all):
+        """
+        Set bool to determine if range header is necessary
+        :param query_all:
+        :return:
+        """
+        self.query_all = query_all
 
     def get_search_id(self, query):
         """
@@ -148,7 +156,10 @@ class ArielSearch(SearchWaitCommand):
         headers = auth_info.headers.copy()
         # if the # of returned items is big, this call will take a long time!
         # Need to use Range to limit the #.
-        headers[b"Range"] = "items={}-{}".format(str(self.range_start), str(self.range_end))
+        # Only set headers if query_all is False. If query_all is True, then the return all the results from the
+        # search query
+        if not self.query_all:
+            headers[b"Range"] = "items={}-{}".format(str(self.range_start), str(self.range_end))
 
         response = None
         try:
@@ -231,9 +242,10 @@ class QRadarClient(object):
 
         return response
 
-    def ariel_search(self, query, range_start=None, range_end=None, timeout=None):
+    def ariel_search(self, query, query_all, range_start=None, range_end=None, timeout=None):
         """
         Perform an Ariel search
+        :param query_all: bool used to decide if Range header is included in query
         :param query: query string
         :param range_start:
         :param range_end:
@@ -249,6 +261,8 @@ class QRadarClient(object):
 
         if timeout is not None:
             ariel_search.set_timeout(timeout)
+
+        ariel_search.set_query_all(query_all)
 
         response = ariel_search.perform_search(query)
         return response
