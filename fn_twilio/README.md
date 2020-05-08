@@ -2,6 +2,7 @@
 
 ## Table of Contents
   - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
   - [app.config settings](#appconfig-settings)
   - [Function Inputs](#function-inputs)
   - [Function Output](#function-output)
@@ -21,6 +22,32 @@ Resilient version 33 or later
 resilient_circuits version 32 or later
 twilio version 6.21.0 or later
 ```
+
+## Installation
+After downloading the package from the IBM AppExchange,
+unzip to retrive the tar.gz file:
+
+    unzip fn_twilio-<version>.zip
+    
+Install the package to your python library
+    
+    pip install fn_twilio-<version>.tar.gz
+
+Note: for python 2 environments, following the installation instructions [here](https://github.com/gmd393/twilio/blob/master/lib/python3.5/site-packages/urllib3/contrib/pyopenssl.py)
+regarding additional python libraries to install.
+
+After installation, before running, you must import the customizations into your Resilient platform,
+
+    resilient-circuits customize -l fn-twilio
+
+Add the configuration settings to your app.config file:
+
+    resilient-circuits config -u -l fn-twilio
+
+Edit the app.config file, supplying the `twilio_account_sid1` and `twilio_auth_token` 
+settings as well as your `twilio_src_address`.
+
+After installation, the package will be loaded by `resilient-circuits run`.
 
 ## app.config settings
 This package requires that it is installed on an Integrations server (preferably a RHEL platform) and that the resilient-circuits application is running.
