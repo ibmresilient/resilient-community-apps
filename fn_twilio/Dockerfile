@@ -4,7 +4,7 @@ FROM registry.access.redhat.com/ubi8/python-36:latest
 # rc-data-feeder will build plugins from a base image
 #FROM resilient/rc-data-feeder-base
 
-ARG APPLICATION=fn_twillio
+ARG APPLICATION=fn_twilio
 ARG RES_CIRCUITS_VERSION=36.2
 
 # update to latest packages, user 0 for root privilege
