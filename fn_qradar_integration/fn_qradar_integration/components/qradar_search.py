@@ -49,7 +49,7 @@ class FunctionComponent(ResilientComponent):
             log.info("qradar_query_range_end: %s", qradar_query_range_end)
 
             qradar_verify_cert = True
-            if "verify_cert" in self.options and self.options["verify_cert"] == "False":
+            if "verify_cert" in self.options and self.options["verify_cert"].lower() == "false":
                 qradar_verify_cert = False
 
             timeout = None

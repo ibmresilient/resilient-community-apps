@@ -85,7 +85,7 @@ class AuthInfo(object):
         elif token:
             self.qradar_token = token
             self.headers["SEC"] = self.qradar_token
-        if "http" in host:
+        if host.startswith("http"):
             self.api_url = "{}/api/".format(host)
         else:
             self.api_url = "https://{}/api/".format(host)
