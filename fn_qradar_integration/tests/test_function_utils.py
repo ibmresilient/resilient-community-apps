@@ -1,3 +1,4 @@
+#encoding: utf-8
 #
 #   Unit tests for function_utils.py
 #
@@ -41,12 +42,16 @@ def test_fix_dict():
                   "key2": "string",
                   "key3": ["l1", "l2"],
                   "key4": {"k1": "v1",
-                           "k2": "v2"}}
+                           "k2": "v2"},
+                  "key5": "çø∂",
+                  "key6": u"çø∂",
+                  "key7": [u"çø∂", "çø∂"]}
     ret_dicts = function_utils.fix_dict_value([input_dict])
 
     assert ret_dicts[0]["key1"] == "10"
     assert ret_dicts[0]["key2"] == "string"
     assert ret_dicts[0]["key3"] == str(input_dict["key3"])
     assert ret_dicts[0]["key4"] == str(input_dict["key4"])
-
-
+    assert ret_dicts[0]["key5"] == "çø∂"
+    assert ret_dicts[0]["key6"] == u"çø∂"
+    assert ret_dicts[0]["key7"]

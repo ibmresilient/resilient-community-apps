@@ -11,14 +11,29 @@ import base64
 import logging
 from fn_qradar_integration.util.SearchWaitCommand import SearchWaitCommand, SearchFailure, SearchJobFailure
 import fn_qradar_integration.util.function_utils as function_utils
+import six
 
 # handle python2 and 3
 try:
-    from urllib import quote  # Python 2.X
+    from urllib import quote as quote_func  # Python 2.X
 except ImportError:
-    from urllib.parse import quote  # Python 3+
+    from urllib.parse import quote as quote_func  # Python 3+
 
 LOG = logging.getLogger(__name__)
+
+
+def quote(input_v, safe=None):
+    """
+    To make sure that integration on Python 2 works with unicode we will wrap quote
+    to always pass bytes to it.
+    """
+    if not isinstance(input_v, six.binary_type):
+        input_v = input_v.encode('utf-8')
+
+    # No need to re-define the default for safe
+    if safe:
+        return quote_func(input_v, safe)
+    return quote_func(input_v)
 
 
 class RequestError(Exception):
@@ -48,7 +63,7 @@ class AuthInfo(object):
         pass
 
     @staticmethod
-    def get_authInfo():
+    def get_authInfo(): 
         if AuthInfo.__instance is None:
             AuthInfo.__instance = AuthInfo()
         return AuthInfo.__instance
@@ -70,8 +85,10 @@ class AuthInfo(object):
         elif token:
             self.qradar_token = token
             self.headers["SEC"] = self.qradar_token
-
-        self.api_url = "https://{}/api/".format(host)
+        if host.startswith("http"):
+            self.api_url = "{}/api/".format(host)
+        else:
+            self.api_url = "https://{}/api/".format(host)
         self.cafile = cafile
 
 
@@ -285,7 +302,7 @@ class QRadarClient(object):
         :return: list of reference set names
         """
         auth_info = AuthInfo.get_authInfo()
-        url = "{}{}".format(auth_info.api_url, qradar_constants.REFERENCE_SET_URL)
+        url = u"{}{}".format(auth_info.api_url, qradar_constants.REFERENCE_SET_URL)
         ret = []
         try:
             response = requests.Session().get(url=url,
@@ -329,7 +346,6 @@ class QRadarClient(object):
             LOG.info(u"Looking for {} in reference set {}".format(value, r_set["name"]))
             element = QRadarClient.search_ref_set(r_set["name"], value)
             if element["found"] == "True":
-
                 ret.append(element["content"])
 
         return ret
@@ -344,20 +360,16 @@ class QRadarClient(object):
         """
         auth_info = AuthInfo.get_authInfo()
 
-        try:
-            #
-            #   urllib.quote has trouble to handle unicode
-            #
-            ref_set_link = quote(ref_set, '')
-        except:
-            ref_set_link = ref_set
+        ref_set_link = quote(ref_set, '')
 
         url = u"{}{}/{}".format(auth_info.api_url, qradar_constants.REFERENCE_SET_URL, ref_set_link)
 
         ret = None
         try:
             if filter:
-                parameter = quote('?filter=value="{}"'.format(filter))
+                if not isinstance(filter, six.binary_type):
+                    filter = filter.encode('utf-8')
+                parameter = quote('?value="{}"'.format(filter))
                 url = url + parameter
 
             response = requests.Session().get(url=url,
@@ -370,8 +382,13 @@ class QRadarClient(object):
             found = "False"
             ret_data = response.json().get("data", [])
 
+            # Check if there are elements in the reference set
             if len(ret_data) > 0 and response.status_code == 200:
-                found = "True"
+                # Use dictionary comprehension to determine if `filter` is the "value" of any of the dicts in the list
+                # default will be None if the `filter` is not found in the data
+                item = next((val for val in ret_data if val["value"].encode('utf-8') == filter), None)
+                if item:
+                    found = "True"
 
             ret = {"status_code": response.status_code,
                    "found": found,
@@ -397,7 +414,7 @@ class QRadarClient(object):
 
         ret = None
         try:
-            data = {"value": quote(value)}
+            data = {"value": value}
 
             response = requests.Session().post(url=url,
                                                headers=auth_info.headers,
@@ -424,7 +441,7 @@ class QRadarClient(object):
         auth_info = AuthInfo.get_authInfo()
         ref_set_link = quote(ref_set, '')
         value = quote(value, '')
-        url = "{}{}/{}/{}".format(auth_info.api_url, qradar_constants.REFERENCE_SET_URL,
+        url = u"{}{}/{}/{}".format(auth_info.api_url, qradar_constants.REFERENCE_SET_URL,
                                   ref_set_link, value)
 
         ret = {}

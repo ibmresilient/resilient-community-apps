@@ -1,3 +1,4 @@
+# encoding: utf-8
 #
 # Unit tests for fn_qradar_integration/util/qradar_utils.py
 #
@@ -10,6 +11,8 @@ from mock import Mock
 from mock import patch
 import mock
 import urllib
+import six
+import pytest
 
 # Util function to generate simulated requests response
 def _generateResponse(content, status):
@@ -30,6 +33,20 @@ password = "my_password_fake"
 token = "FakeSecreteToken"
 cafile = True
 search_id = "FakeSearch_id"
+
+@pytest.mark.parametrize("val", [ "test", u"test", "ç", u"ç" ])
+def test_quote_return(val):
+    result = qradar_utils.quote(val)
+    assert isinstance(result, six.string_types)
+
+@patch("fn_qradar_integration.util.qradar_utils.quote_func")
+def test_quote_passing_args(mocked_func):
+    qradar_utils.quote("test")
+    mocked_func.assert_called_with("test".encode("utf-8"))
+
+    qradar_utils.quote("test", "test")
+    mocked_func.assert_called_with("test".encode("utf-8"), "test")
+
 
 def test_auth_info():
     """
