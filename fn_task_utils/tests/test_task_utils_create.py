@@ -26,7 +26,7 @@ def call_task_utils_create_function(circuits, function_params, timeout=10):
     exception_event = circuits.watcher.wait("exception", parent=None)
 
     if exception_event is not False:
-        exception = exception_event.args[1].args[1]
+        exception = exception_event.args[1]
         raise exception
 
         # else return the FunctionComponent's results
