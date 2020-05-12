@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 """Function implementation"""
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_pagerduty.lib.resilient_common import validateFields, clean_html
+from resilient_lib import validate_fields, clean_html
 from .pd_common import update_incident
-
 
 
 class FunctionComponent(ResilientComponent):
@@ -21,7 +20,7 @@ class FunctionComponent(ResilientComponent):
         super(FunctionComponent, self).__init__(opts)
         self.res_options = opts.get("resilient", {})
         self.options = opts.get("pagerduty", {})
-        validateFields(['api_token', 'from_email'], self.options)
+        validate_fields(['api_token', 'from_email'], self.options)
         self.log = logging.getLogger(__name__)
 
     @handler("reload")
@@ -29,13 +28,13 @@ class FunctionComponent(ResilientComponent):
         """Configuration options have changed, save new values"""
         self.res_options = opts.get("resilient", {})
         self.options = opts.get("pagerduty", {})
-        validateFields(['api_token', 'from_email'], self.options)
+        validate_fields(['api_token', 'from_email'], self.options)
 
     @function("pagerduty_transition_incident")
     def _pagerduty_transition_incident_function(self, event, *args, **kwargs):
         """Function: transition an indident"""
         try:
-            validateFields(['pd_incident_id'], kwargs)
+            validate_fields(['pd_incident_id'], kwargs)
 
             # Get the function parameters:
             incident_id = kwargs.get("pd_incident_id")  # text
@@ -44,14 +43,10 @@ class FunctionComponent(ResilientComponent):
             resolution = clean_html(kwargs.get("pd_description"))  # text
 
             yield StatusMessage("starting...")
-            resp = update_incident(self.log, self.options, incident_id, status, priority, resolution, self.callback)
+            resp = update_incident(self.options, incident_id, status, priority, resolution)
             yield StatusMessage("pagerduty incident updated")
 
             # Produce a FunctionResult with the results
             yield FunctionResult(resp)
         except Exception as err:
             yield FunctionError(err)
-
-    def callback(self, resp):
-        """" handle the failure here """
-        StatusMessage("Update failed. The PagerDuty Incident may have already been resolved.")

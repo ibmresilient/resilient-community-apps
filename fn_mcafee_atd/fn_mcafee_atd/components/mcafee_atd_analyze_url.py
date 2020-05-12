@@ -57,7 +57,7 @@ class FunctionComponent(ResilientComponent):
                 inputs["artifact_id"] = artifact_id
             if url_to_analyze is not None:
                 yield StatusMessage("URL value: {}".format(url_to_analyze))
-                log.info("artifact_value: $s", url_to_analyze)
+                log.info("artifact_value: %s", url_to_analyze)
                 inputs["artifact_value"] = url_to_analyze
             if atd_report_type is not None:
                 log.info("macfee_atd_report_type: %s", atd_report_type)

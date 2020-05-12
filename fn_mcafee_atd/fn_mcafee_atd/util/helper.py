@@ -89,8 +89,8 @@ def _get_atd_session_headers(g):
         "VE-SDK-API": base64_login
     }
     r = requests.get(session_url, headers=headers, verify=g.trust_cert)
-    try:
-        check_status_code(r)
+    check_status_code(r)
+
     log.debug("User logged in successfully")
     content = r.json()
     session_string = "{}:{}".format(content["results"]["session"], content["results"]["userId"])

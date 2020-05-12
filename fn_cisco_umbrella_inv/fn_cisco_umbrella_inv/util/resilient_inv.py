@@ -77,6 +77,21 @@ class ResilientInv(Investigate):
 
         return dt
 
+    def test_connectivity(self):
+        """Connectivity Test which is used by resilient_circuits selftest.
+
+        Calls http 'get' request against 'event_types' url.
+
+        :return: Response
+        """
+        uri = self._uris["categories"]
+        return self._session.get(urljoin(Investigate.BASE_URL, uri),
+                                 params=None,
+                                 headers=self._auth_header,
+                                 proxies=self.proxies
+                                 )
+        return r
+
     def categories(self):
         """Get the category map for domain status and categorization.
 

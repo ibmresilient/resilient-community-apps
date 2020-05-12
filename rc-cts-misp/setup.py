@@ -4,12 +4,12 @@ from setuptools import setup, find_packages
 
 setup(
     name='rc-cts-misp',
-    version='1.0.1',
+    version='1.1.0',
     url='https://github.com/ibmresilient/resilient-community-apps',
     license='MIT',
     author='IBM Resilient',
     install_requires=[
-        'pymisp',
+        'pymisp>= 2.4.111',
         'rc-cts'
     ],
     author_email='support@resilientsystems.com',

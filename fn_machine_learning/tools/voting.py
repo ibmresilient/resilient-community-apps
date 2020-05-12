@@ -13,6 +13,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 from sklearn.metrics import accuracy_score
 from sklearn.svm import SVC
+import sys
 
 
 from fn_machine_learning.lib.multi_id_binarizer import MultiIdBinarizer
@@ -59,7 +60,14 @@ y = dataf[field]
 # Transform
 #
 label_encoder = {}
-for col_name, col in X.iteritems():
+
+# check Python version and use appropriate method to return iterable list
+if sys.version_info[0] < 3:
+    items = X.iteritems()
+else:
+    items = X.items()
+
+for col_name, col in items:
     if col.dtype.name == "object":
         #
         # For multi selection, col is a list. Use
@@ -122,7 +130,14 @@ print("Training dataframe: {}".format(counts))
 # Also we assume at this point the first one is the majority
 #
 count_list = []
-for itr in counts.iteritems():
+
+# check Python version and use appropriate method to return iterable list
+if sys.version_info[0] < 3:
+    items = counts.iteritems()
+else:
+    items = counts.items()
+
+for itr in items:
     count = [itr[0], itr[1]]
     count_list.append(count)
 
@@ -190,7 +205,14 @@ for i in range(0, num_test_samples, 1):
 
     predict_vote = None
     predict_max = 0
-    for itr in value_counts.iteritems():
+
+    # check Python version and use appropriate method to return iterable list
+    if sys.version_info[0] < 3:
+        items = value_counts.iteritems()
+    else:
+        items = value_counts.items()
+
+    for itr in items:
         if itr[1] > predict_max:
             predict_vote = itr[0]
             predict_max = itr[1]

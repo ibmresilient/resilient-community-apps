@@ -2,8 +2,16 @@
 
 """Generate the Resilient customizations required for fn_twilio"""
 
-from __future__ import print_function
-from resilient_circuits.util import *
+# This here to support Apps running on resilient-circuits <= v34
+try:
+    import resilient_circuits
+    if int(resilient_circuits.__version__.split(".")[0]) >= 34:
+        raise ImportError
+    ImportDefinition = resilient_circuits.util.ImportDefinition
+
+except ImportError:
+    from resilient import ImportDefinition
+
 
 def codegen_reload_data():
     """Parameters to codegen used to generate the fn_twilio package"""
@@ -25,9 +33,9 @@ def codegen_reload_data():
 
 
 def customization_data(client=None):
-    """Produce any customization definitions (types, fields, message destinations, etc)
-       that should be installed by `resilient-circuits customize`
     """
+    Returns a Generator of ImportDefinitions (Customizations).
+    Install them using `resilient-circuits customize`
 
     # This import data contains:
     #   Action fields:
@@ -57,7 +65,6 @@ def customization_data(client=None):
     #     Example: Send Twilio SMS
     #     Example: Twilio Receive Messages
     #     Twilio: Get Responses
-
 
     yield ImportDefinition(u"""
 eyJhY3Rpb25fb3JkZXIiOiBbXSwgImFjdGlvbnMiOiBbeyJhdXRvbWF0aW9ucyI6IFtdLCAiY29u

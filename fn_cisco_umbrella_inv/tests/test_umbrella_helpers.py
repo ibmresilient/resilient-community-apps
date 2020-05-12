@@ -68,28 +68,28 @@ class TestUmbrellaHelpersProcessParams:
         results = process_result["_regex"]
         assert (expected_results == results)
 
-    @pytest.mark.parametrize("umbinv_emails, expected_results", [
+    @pytest.mark.parametrize("umbinv_resource, expected_results", [
         ("test@example.com", "test@example.com")
     ])
-    def test_process_params_emails(self, umbinv_emails, expected_results):
+    def test_process_params_emails(self, umbinv_resource, expected_results):
         process_result = {}
         params = {
-            "emails": umbinv_emails
+            "resource": umbinv_resource
         }
         process_params(params, process_result)
-        results = process_result["_emails"]
+        results = process_result["_res"]
         assert (expected_results == results)
 
-    @pytest.mark.parametrize("umbinv_nameservers, expected_results", [
+    @pytest.mark.parametrize("umbinv_resource, expected_results", [
         ("ns1.google.com", "ns1.google.com")
     ])
-    def test_process_params_nameservers(self, umbinv_nameservers, expected_results):
+    def test_process_params_nameservers(self, umbinv_resource, expected_results):
         process_result = {}
         params = {
-            "nameservers": umbinv_nameservers
+            "resource": umbinv_resource
         }
         process_params(params, process_result)
-        results = process_result["_nameservers"]
+        results = process_result["_res"]
         assert (expected_results == results)
 
 class TestUmbrellaHelpersValidateParams:
@@ -168,31 +168,17 @@ class TestUmbrellaHelpersValidateParams:
             validate_params(params)
         assert str(e.value) == expected_results
 
-    @pytest.mark.parametrize("umbinv_nameservers, expected_results", [
-        ("domain.com.1", "Invalid value for function parameter 'nameservers'."),
-        ("93.184.216.119", "Invalid value for function parameter 'nameservers'."),
-        ("http://www.hoarafushionline.net/Fhabeys.exe", "Invalid value for function parameter 'nameservers'."),
-        ("test@example.com", "Invalid value for function parameter 'nameservers'.")
+    @pytest.mark.parametrize("umbinv_resource, expected_results", [
+        ("domain.com_", "Invalid value for function parameter 'resource'."),
+        ("domain.com.1", "Invalid value for function parameter 'resource'."),
+        ("93.184.216.119.21", "Invalid value for function parameter 'resource'."),
+        ("http//www.hoarafushionline.net/Fhabeys.exe", "Invalid value for function parameter 'resource'."),
+        ("test@@example.com.1", "Invalid value for function parameter 'resource'.")
 
     ])
-    def test_validate_params_nameservers(self, umbinv_nameservers, expected_results):
+    def test_validate_params_emails(self, umbinv_resource, expected_results):
         params = {
-            "nameservers": umbinv_nameservers
-        }
-        with pytest.raises(ValueError) as e:
-            validate_params(params)
-        assert str(e.value) == expected_results
-
-    @pytest.mark.parametrize("umbinv_emails, expected_results", [
-        ("domain.com", "Invalid value for function parameter 'emails'."),
-        ("93.184.216.119", "Invalid value for function parameter 'emails'."),
-        ("http://www.hoarafushionline.net/Fhabeys.exe", "Invalid value for function parameter 'emails'."),
-        ("test@example.com.1", "Invalid value for function parameter 'emails'.")
-
-    ])
-    def test_validate_params_emails(self, umbinv_emails, expected_results):
-        params = {
-            "emails": umbinv_emails
+            "resource": umbinv_resource
         }
         with pytest.raises(ValueError) as e:
             validate_params(params)
@@ -247,13 +233,14 @@ class TestUmbrellaHelpersValidateOpts:
             validate_opts(func)
         assert str(e.value) == expected_results
 
-    @pytest.mark.parametrize("api_token, base_url, expected_results", [
-        ("abcd1234-a123-123a-123a-123456abcdef", "https:investigate.api.umbrella.com/", "Invalid format for config setting 'base_url'.")
+    @pytest.mark.parametrize("api_token, base_url, results_limit, expected_results", [
+        ("abcd1234-a123-123a-123a-123456abcdef", '', 200, "Invalid value for config setting 'base_url'.")
     ])
-    def test_validate_opts_wrong_token(self, api_token, base_url, expected_results):
+    def test_validate_opts_wrong_token(self, api_token, base_url, results_limit, expected_results):
         func = Func({
             "api_token": api_token,
-            "base_url": base_url
+            "base_url": base_url,
+            "results_limit": results_limit
         })
         with pytest.raises(ValueError) as e:
             validate_opts(func)

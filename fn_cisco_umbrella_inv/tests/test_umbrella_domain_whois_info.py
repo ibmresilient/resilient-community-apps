@@ -43,41 +43,37 @@ class TestUmbrellaDomainWhoisInfo:
         assert func is not None
 
     @patch('investigate.Investigate.get', side_effect=mocked_response)
-    @pytest.mark.parametrize("umbinv_emails, umbinv_nameservers, umbinv_domain, umbinv_limit, umbinv_sort, umbinv_offset", [
-        (None, None, "cisco.com", 2, "created", 0)
+    @pytest.mark.parametrize("umbinv_resource, umbinv_limit, umbinv_sort, umbinv_offset", [
+        ("cisco.com", 2, "created", 0)
     ])
-    def test_umbrella_domain(self, mock_get, circuits_app, umbinv_emails, umbinv_nameservers, umbinv_domain, umbinv_limit, umbinv_sort, umbinv_offset):
+    def test_umbrella_domain(self, mock_get, circuits_app, umbinv_resource, umbinv_limit, umbinv_sort, umbinv_offset):
         """ Test domain using mocked response. """
 
         keys = ["administrativeContactName", "administrativeContactEmail", "technicalContactEmail",
                 "administrativeContactCity", "administrativeContactOrganization", "addresses", "nameServers"]
 
-        function_params = { 
-            "umbinv_emails": umbinv_emails,
-            "umbinv_nameservers": umbinv_nameservers,
-            "umbinv_domain": umbinv_domain,
+        function_params = {
+            "umbinv_resource": umbinv_resource,
             "umbinv_limit": umbinv_limit,
             "umbinv_sort": umbinv_sort,
             "umbinv_offset": umbinv_offset
         }
         results = call_umbrella_domain_whois_info_function(circuits_app, function_params)
         domain_whois = results["domain_whois"]
-        assert_keys_in(domain_whois, *keys)
+        assert_keys_in(domain_whois[0], *keys)
 
     @patch('investigate.Investigate.get', side_effect=mocked_response)
-    @pytest.mark.parametrize("umbinv_emails, umbinv_nameservers, umbinv_domain, umbinv_limit, umbinv_sort, umbinv_offset", [
-        (None, "ns1.google.com", None, 2, "created", 0)
+    @pytest.mark.parametrize("umbinv_resource, umbinv_limit, umbinv_sort, umbinv_offset", [
+        ("ns1.google.com", 2, "created", 0)
     ])
 
-    def test_umbrella_nameservers(self, mock_get, circuits_app, umbinv_emails, umbinv_nameservers, umbinv_domain, umbinv_limit, umbinv_sort, umbinv_offset):
+    def test_umbrella_nameservers(self, mock_get, circuits_app, umbinv_resource, umbinv_limit, umbinv_sort, umbinv_offset):
         """ Test nameservers using mocked response. """
 
         keys = ["sortField", "limit", "moreDataAvailable", "offset", "totalResults"]
 
         function_params = {
-            "umbinv_emails": umbinv_emails,
-            "umbinv_nameservers": umbinv_nameservers,
-            "umbinv_domain": umbinv_domain,
+            "umbinv_resource": umbinv_resource,
             "umbinv_limit": umbinv_limit,
             "umbinv_sort": umbinv_sort,
             "umbinv_offset": umbinv_offset
@@ -87,19 +83,17 @@ class TestUmbrellaDomainWhoisInfo:
         assert_keys_in(ns_whois["ns1.google.com"], *keys)
 
     @patch('investigate.Investigate.get', side_effect=mocked_response)
-    @pytest.mark.parametrize("umbinv_emails, umbinv_nameservers, umbinv_domain, umbinv_limit, umbinv_sort, umbinv_offset", [
-        ("test@example.com", None, None, 2, "created", 0)
+    @pytest.mark.parametrize("umbinv_resource, umbinv_limit, umbinv_sort, umbinv_offset", [
+        ("test@example.com", 2, "created", 0)
     ])
 
-    def test_umbrella_emails(self, mock_get, circuits_app, umbinv_emails, umbinv_nameservers, umbinv_domain, umbinv_limit, umbinv_sort, umbinv_offset):
+    def test_umbrella_emails(self, mock_get, circuits_app, umbinv_resource, umbinv_limit, umbinv_sort, umbinv_offset):
         """ Test emails using mocked response. """
 
         keys = ["sortField", "limit", "moreDataAvailable", "offset", "totalResults"]
 
         function_params = {
-            "umbinv_emails": umbinv_emails,
-            "umbinv_nameservers": umbinv_nameservers,
-            "umbinv_domain": umbinv_domain,
+            "umbinv_resource": umbinv_resource,
             "umbinv_limit": umbinv_limit,
             "umbinv_sort": umbinv_sort,
             "umbinv_offset": umbinv_offset

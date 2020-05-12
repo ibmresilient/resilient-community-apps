@@ -1,3 +1,9 @@
+## Release Notes
+
+### v1.0.1
+* Duplication of incident id bug fix 
+
+
 # Introduction
 This package contains the odbcfeed Plugin to the Data Feed extension.  This Data Feed extension allows one to maintain "replica" data for Resilient incidents, artifacts, tasks, notes, etc.  The updates are performed in near real-time.
 
