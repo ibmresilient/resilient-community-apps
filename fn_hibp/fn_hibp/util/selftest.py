@@ -4,15 +4,12 @@
    test with: resilient-circuits selftest -l fn_hibp
 """
 
-import logging
+from fn_hibp.lib.common import HAVE_I_BEEN_PWNED_BREACH_URL, get_config_option, make_headers, get_proxies
 from resilient_lib.components.resilient_common import validate_fields
 import requests
-from resilient_circuits import StatusMessage
 
-log = logging.getLogger(__name__)
-log.setLevel(logging.INFO)
-log.addHandler(logging.StreamHandler())
 
+TEST_EMAIL = "test&commat;example.com"
 
 def selftest_function(opts):
     """
@@ -20,19 +17,27 @@ def selftest_function(opts):
     Suggested return values are be unimplemented, success, or failure.
     """
     try:
-        options = opts.get("hibp", {})
+        options = opts.get("fn_hibp", {})
         hibp_api_key = options.get("hibp_api_key")
-        validate_fields(["[hibp_api_key]"], options)
-        HAVE_I_BEEN_PWNED_API_KEY_URL: "https://haveibeenpwned.com/api/v3/"
+        validate_fields(["hibp_api_key"], options)
 
-        api_key_url = "{0}/{1}".format(HAVE_I_BEEN_PWNED_API_KEY_URL, hibp_api_key)
-        breaches_response = requests.get(api_key_url)
+        headers= make_headers(hibp_api_key)
+        proxies = get_proxies(options)
+
+        test_url = "{0}/{1}".format(HAVE_I_BEEN_PWNED_BREACH_URL, hibp_api_key)
+        breaches_response = requests.get(test_url, headers=headers, proxies=proxies)
 
         if breaches_response.status_code != 401:
-            yield StatusMessage("Have I Been Pwned API Key has been found")
+            msg = None
         else:
-            yield StatusMessage("Have I Been Pwned API Key has not been found. Please add API Key to app.config")
+            msg = "Have I Been Pwned API Key has not been found. Please add API Key to app.config"
 
-        return {"state": "success"}
-    except Exception:
-        return {"state": "failed"}
+        return {
+            "state": "success" if not msg else msg,
+            "reason": msg
+        }
+    except Exception as err:
+        return {
+            "state": str(err),
+            "reason": str(err)
+        }

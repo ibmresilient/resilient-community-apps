@@ -27,6 +27,7 @@ setup(
             "HaveIBeenPwnedGetPastesFunctionComponent = fn_hibp.components.have_i_been_pwned_get_pastes:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_hibp.util.config:config_section_data"],
-        "resilient.circuits.customize": ["customize = fn_hibp.util.customize:customization_data"]
+        "resilient.circuits.customize": ["customize = fn_hibp.util.customize:customization_data"],
+        "resilient.circuits.selftest": ["selftest = fn_hibp.util.selftest:selftest_function"]
     }
 )
