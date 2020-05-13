@@ -6,9 +6,9 @@
 import logging
 import requests
 import time
-from fn_hibp.lib.common import HAVE_I_BEEN_PWNED_PASTES_URL, get_config_option, make_headers, get_proxies
+from fn_hibp.lib.common import HAVE_I_BEEN_PWNED_PASTES_URL, Hibp
 from resilient_circuits import ResilientComponent, function, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import ResultPayload
+from resilient_lib import ResultPayload, IntegrationError
 
 
 class FunctionComponent(ResilientComponent):
@@ -18,8 +18,7 @@ class FunctionComponent(ResilientComponent):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         self.options = opts.get("fn_hibp", {})
-
-        self.proxies = get_proxies(self.options)
+        self.hibp = Hibp(self.options)
 
     @function("have_i_been_pwned_get_pastes")
     def _have_i_been_pwned_get_pastes_function(self, event, *args, **kwargs):
@@ -38,30 +37,14 @@ class FunctionComponent(ResilientComponent):
             else:
                 raise ValueError("email_address is required to run this function")
 
-            hibp_api_key = get_config_option(self.options, "hibp_api_key")
-            headers= make_headers(hibp_api_key)
-
-            breach_url = "{0}/{1}".format(HAVE_I_BEEN_PWNED_PASTES_URL, email_address)
-            pastes_response = requests.get(breach_url, headers=headers, proxies=self.proxies)
-
-            pastes = None
-            # Good response
-            if pastes_response.status_code == 200:
-                pastes = pastes_response.json()
-            # 404 is returned when an email was not found
-            elif pastes_response.status_code == 404:
-                yield StatusMessage("No pastes found on email address: {}".format(email_address))
-                pastes = None
-            # Rate limit was hit, wait 2 seconds and try again
-            elif pastes_response.status_code == 429:
-                time.sleep(2)
-            else:
-                msg = "Have I Been Pwned returned {} unexpected status code".format(pastes_response.status_code)
-                log.warn(msg)
-                yield FunctionError(msg)
+            paste_url = "{0}/{1}".format(HAVE_I_BEEN_PWNED_PASTES_URL, email_address)
+            try:
+                breach_results = self.hibp.execute_call(paste_url)
+            except IntegrationError as err:
+                yield FunctionError(err)
 
             results = {
-                "Pastes": pastes
+                "Pastes": breach_results
             }
 
             yield StatusMessage("Lookup complete")

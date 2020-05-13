@@ -4,10 +4,8 @@
    test with: resilient-circuits selftest -l fn_hibp
 """
 
-from fn_hibp.lib.common import HAVE_I_BEEN_PWNED_BREACH_URL, get_config_option, make_headers, get_proxies
-from resilient_lib.components.resilient_common import validate_fields
-import requests
-
+from fn_hibp.lib.common import HAVE_I_BEEN_PWNED_BREACH_URL, Hibp
+from resilient_lib import validate_fields, IntegrationError
 
 TEST_EMAIL = "test&commat;example.com"
 
@@ -18,23 +16,19 @@ def selftest_function(opts):
     """
     try:
         options = opts.get("fn_hibp", {})
-        hibp_api_key = options.get("hibp_api_key")
-        validate_fields(["hibp_api_key"], options)
+        hibp = Hibp(options)
 
-        headers= make_headers(hibp_api_key)
-        proxies = get_proxies(options)
+        test_url = "{0}/{1}".format(HAVE_I_BEEN_PWNED_BREACH_URL, TEST_EMAIL)
 
-        test_url = "{0}/{1}".format(HAVE_I_BEEN_PWNED_BREACH_URL, hibp_api_key)
-        breaches_response = requests.get(test_url, headers=headers, proxies=proxies)
-
-        if breaches_response.status_code != 401:
-            msg = None
-        else:
-            msg = "Have I Been Pwned API Key has not been found. Please add API Key to app.config"
+        err_msg = None
+        try:
+            _ = hibp.execute_call(test_url)
+        except IntegrationError as err:
+            err_msg = str(err)
 
         return {
-            "state": "success" if not msg else msg,
-            "reason": msg
+            "state": "success" if not err_msg else "failed",
+            "reason": err_msg
         }
     except Exception as err:
         return {
