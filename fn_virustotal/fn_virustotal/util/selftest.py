@@ -4,7 +4,7 @@
 
 import logging
 from virus_total_apis import PublicApi as VirusTotal
-
+from resilient_lib import RequestsCommon
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
 log.addHandler(logging.StreamHandler())
@@ -19,10 +19,10 @@ def selftest_function(opts):
     TEST_IP = "8.8.8.8"
 
     options = opts.get("fn_virustotal", {})
-
+    rc = RequestsCommon(options)
     reason = ""
     try:
-        vt = VirusTotal(options['api_token'], options['proxies'])
+        vt = VirusTotal(options['api_token'], rc.get_proxies())
         response = vt.get_ip_report(TEST_IP)
 
         if response and type(response) is not dict:
