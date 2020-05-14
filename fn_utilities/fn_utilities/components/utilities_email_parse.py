@@ -76,7 +76,7 @@ class FunctionComponent(ResilientComponent):
                 path_tmp_file, path_tmp_dir = write_to_tmp_file(attachment_contents, tmp_file_name=attachment_metadata.get("name"))
 
                 # Get the file_extension
-                file_extension = os.path.splitext(path_tmp_file)[1]
+                file_extension = os.path.splitext(path_tmp_file)[1].lower()
 
                 if file_extension == ".msg":
                     yield StatusMessage("Processing MSG File")
