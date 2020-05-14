@@ -5,6 +5,7 @@
 import logging
 from virus_total_apis import PublicApi as VirusTotal
 from resilient_lib import RequestsCommon
+from resilient_lib import validate_fields
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
 log.addHandler(logging.StreamHandler())
@@ -19,6 +20,7 @@ def selftest_function(opts):
     TEST_IP = "8.8.8.8"
 
     options = opts.get("fn_virustotal", {})
+    validate_fields(('api_token', 'polling_interval_sec', 'max_polling_wait_sec'), options)
     rc = RequestsCommon(options)
     reason = ""
     try:
