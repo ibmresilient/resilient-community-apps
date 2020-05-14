@@ -11,7 +11,6 @@ def config_section_data():
     """
     config_data = u"""[fn_virustotal]
 api_token=
-proxies=
 polling_interval_sec=60
 max_polling_wait_sec=600
 """

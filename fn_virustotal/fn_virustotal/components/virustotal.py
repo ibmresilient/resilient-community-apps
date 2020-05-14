@@ -11,6 +11,8 @@ from fn_virustotal.lib.resilient_common import validateFields, get_input_entity,
 from fn_virustotal.lib.errors import IntegrationError
 from virus_total_apis import PublicApi as VirusTotal
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from resilient_lib import RequestsCommon
+
 
 RC_NOT_FOUND = 0
 RC_READY     = 1
@@ -53,7 +55,11 @@ class FunctionComponent(ResilientComponent):
         try:
             validateFields(('incident_id', 'vt_type'), kwargs)  # required
 
-            vt = VirusTotal(self.options['api_token'], self.options['proxies'])
+            # Init RequestsCommon with app.config options
+            rc = RequestsCommon(self.options)
+
+            # Create a VirusTotal instance with the API Token and any proxies gathered by RequestsCommon
+            vt = VirusTotal(self.options['api_token'], rc.get_proxies())
 
             # Get the function parameters:
             incident_id = kwargs.get("incident_id")  # number

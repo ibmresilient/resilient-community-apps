@@ -16,6 +16,7 @@ Files and URLs may require additional time to complete their scans, so a link is
                      """,
     install_requires=[
         'resilient_circuits>=30.0.0',
+        'resilient_lib',
         'virustotal_api',
         'bs4'
     ],
