@@ -29,6 +29,9 @@
   Specify all changes in this release. Do not remove the release 
   notes of a previous release
 -->
+### v1.0.14
+* Updated utilties_email_parse function. Parses email attachments that end with '.MSG'.
+
 ### v1.0.13
 * Updated utilities_string_to_attachment function. Added a check for the attachment's file extension and keep it as it is if it exists.
 
@@ -184,4 +187,4 @@ There are several ways to verify the successful operation of a function.
 ## Support
 | Name | Version | Author | Support URL |
 | ---- | ------- | ------ | ----------- |
-| fn_utilities | 1.0.13 | IBM Resilient | http://ibm.biz/resilientcommunity |
+| fn_utilities | 1.0.14 | IBM Resilient | http://ibm.biz/resilientcommunity |
