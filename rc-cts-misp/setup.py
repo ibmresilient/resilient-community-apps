@@ -9,7 +9,9 @@ setup(
     license='MIT',
     author='IBM Resilient',
     install_requires=[
-        'pymisp>= 2.4.111',
+        'zipp==1.2.0; python_version<"3"',
+        'pymisp>=2.4; python_version>="3"',
+        'pymisp<=2.4.119.1; python_version<"3"',
         'rc-cts'
     ],
     author_email='support@resilientsystems.com',
