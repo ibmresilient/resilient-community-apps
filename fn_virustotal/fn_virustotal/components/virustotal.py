@@ -27,6 +27,7 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
+        self.opts = opts
         self.options = opts.get("fn_virustotal", {})
         self.resilient = opts.get("resilient", {})
         self._init_virustotal()
@@ -38,6 +39,7 @@ class FunctionComponent(ResilientComponent):
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
+        self.opts = opts
         self.options = opts.get("fn_virustotal", {})
         self.resilient = opts.get("resilient", {})
         self._init_virustotal()
@@ -56,7 +58,7 @@ class FunctionComponent(ResilientComponent):
             validateFields(('incident_id', 'vt_type'), kwargs)  # required
 
             # Init RequestsCommon with app.config options
-            rc = RequestsCommon(self.options)
+            rc = RequestsCommon(opts=self.opts, function_opts=self.options)
 
             # Create a VirusTotal instance with the API Token and any proxies gathered by RequestsCommon
             vt = VirusTotal(self.options['api_token'], rc.get_proxies())
