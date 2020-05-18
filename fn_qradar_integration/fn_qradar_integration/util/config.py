@@ -15,5 +15,7 @@ username=admin
 qradarpassword=changeme
 #Note, if both qradarpassword and qradartoken are given, password will be used
 qradartoken=changeme
+#verify_cert=[true|false]
+#search_timeout=
 '''
     return config_data

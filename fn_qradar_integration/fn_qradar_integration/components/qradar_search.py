@@ -38,6 +38,10 @@ class FunctionComponent(ResilientComponent):
             qradar_query_range_start = kwargs.get("qradar_query_range_start")  # number
             qradar_query_range_end = kwargs.get("qradar_query_range_end")  # number
 
+            qradar_query_all_results = False
+            if "Yes" in kwargs.get("qradar_query_all_results")["name"]:
+                qradar_query_all_results = True
+
             log = logging.getLogger(__name__)
             log.info("qradar_query: %s", qradar_query)
             log.info("qradar_query_param1: %s", qradar_query_param1)
@@ -47,6 +51,7 @@ class FunctionComponent(ResilientComponent):
             log.info("qradar_query_param5: %s", qradar_query_param5)
             log.info("qradar_query_range_start: %s", qradar_query_range_start)
             log.info("qradar_query_range_end: %s", qradar_query_range_end)
+            log.info("qradar_query_all_results: %s", qradar_query_all_results)
 
             qradar_verify_cert = True
             if "verify_cert" in self.options and self.options["verify_cert"].lower() == "false":
@@ -78,6 +83,7 @@ class FunctionComponent(ResilientComponent):
                                          cafile=qradar_verify_cert)
 
             result = qradar_client.ariel_search(query_string,
+                                                qradar_query_all_results,
                                                 range_start=qradar_query_range_start,
                                                 range_end=qradar_query_range_end,
                                                 timeout=timeout)

@@ -175,6 +175,7 @@ def test_ariel_search_more(mocked_perform_search):
                                               token=None,
                                               cafile=cafile)
     query_string = "SELECT * FROM events"
+    query_all_results = False
     range_start = 1
     range_end = 10
     time_out = 1000
@@ -185,7 +186,7 @@ def test_ariel_search_more(mocked_perform_search):
                             ]
                   }
     mocked_perform_search.return_value = ret_events
-    ret = qradar_client.ariel_search(query_string, range_start, range_end, time_out)
+    ret = qradar_client.ariel_search(query_string, query_all_results, range_start, range_end, time_out)
 
 
     assert ret == ret_events
