@@ -397,10 +397,11 @@ class QRadarClient(object):
 
             # Check if there are elements in the reference set
             if len(ret_data) > 0 and response.status_code == 200:
-                # Use dictionary comprehension to determine if `filter` is the "value" of any of the dicts in the list
-                # default will be None if the `filter` is not found in the data
-                item = next((val for val in ret_data if val["value"].encode('utf-8') == filter), None)
-                if item:
+                # Use dictionary comprehension on ret_data to determine if `filter` is assigned to the "value" in
+                # any of the dictionaries items in the ret_data list
+                # `element_found` will be None if the `filter` is not found in the data
+                element_found = next((item for item in ret_data if item["value"].encode('utf-8') == filter), None)
+                if element_found:
                     found = "True"
 
             ret = {"status_code": response.status_code,
