@@ -155,9 +155,8 @@ class ArielSearch(SearchWaitCommand):
 
         headers = auth_info.headers.copy()
         # if the # of returned items is big, this call will take a long time!
-        # Need to use Range to limit the #.
-        # Only set headers if query_all is False. If query_all is True, then the return all the results from the
-        # search query
+        # Need to use Range to limit the # if query_all is False.
+        # If query_all is True, the Range will not be used and all the results will be returned from the query.
         if not self.query_all:
             headers[b"Range"] = "items={}-{}".format(str(self.range_start), str(self.range_end))
 
