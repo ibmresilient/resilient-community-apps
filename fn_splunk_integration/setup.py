@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_splunk_integration',
-    version='1.0.1',
+    version='1.0.2',
     license='MIT License',
     author='IBM Resilient',
     author_email='support@resilientsystems.com',
@@ -29,6 +29,7 @@ setup(
             "SplunkAddIntelItemFunctionComponent = fn_splunk_integration.components.splunk_add_intel_item:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_splunk_integration.util.config:config_section_data"],
-        "resilient.circuits.customize": ["customize = fn_splunk_integration.util.customize:customization_data"]
+        "resilient.circuits.customize": ["customize = fn_splunk_integration.util.customize:customization_data"],
+        "resilient.circuits.selftest": ["selftest = fn_splunk_integration.util.selftest:selftest_function"]
     }
 )
