@@ -492,11 +492,6 @@ class Ampclient(object):
                     if not filters and not params["limit"] and remaining_count < AMP_LIMIT_REST_MAX:
                         params["limit"] = remaining_count
 
-                    if "offset" in params:
-                        # Certain get methods don't have offset in their parameter signature.
-                        run_offset += items_per_page
-                        params["offset"] = run_offset
-
                     # Re-run request and filter results with new offset set.
                     rtn_sub = self.filter_by(get_method(**params), filters)
                     rtn["data"].extend(rtn_sub["data"])
@@ -507,6 +502,11 @@ class Ampclient(object):
                     # Break out of loop if no more paginated results available.
                     if "next" not in rtn_sub["metadata"]["links"]:
                         break
+
+                    if "offset" in params:
+                        # Certain get methods don't have offset in their parameter signature.
+                        run_offset += items_per_page
+                        params["offset"] = run_offset
 
         if results_total is not None:
             rtn["total"] = results_total
