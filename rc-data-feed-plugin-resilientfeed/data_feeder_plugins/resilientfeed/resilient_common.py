@@ -210,7 +210,7 @@ class Resilient(object):
                 # this happens when creating an incident with incident_type_ids and the tasks show up first in the
                 # message destination
                 if sync_inc_id is None:
-                    self.dbsync.create_retry_row(orig_org_id, orig_inc_id, 'incident', orig_inc_id,
+                    self.dbsync.create_retry_row(orig_org_id, orig_inc_id, 'incident', orig_type_id,
                                                  mapped_type_name, orig_type_id,
                                                  None, payload)
                     LOG.warning('Incident not found. Queued to retry %s:%s->%s to %s', type_name, orig_inc_id, orig_type_id,
