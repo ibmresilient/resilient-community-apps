@@ -49,6 +49,7 @@ CTP is used with the Secureworks SOC team when they find a security issue that n
 * Poll Secureworks CTP for tickets and create a corresponding incident in the Resilient platform for each ticket.
 * Get Secureworks CTP ticket workLogs and attachments and add them as notes and attachments in the corresponding Resilient incident.
 * Close a Secureworks CTP ticket when the corresponding Resilient incident is closed.
+* Close a Resilient incident when the corresponding Secureworks CTP ticket is closed in Secureworks.
 
 
  ![screenshot: main](./doc/screenshots/scwx_main.png)
@@ -104,6 +105,8 @@ CTP is used with the Secureworks SOC team when they find a security issue that n
   | **assigned_to_customer** | Yes | `true` | *Boolean indicating whether to only return tickets assigned to the client* |
   | **polling_interval** | Yes | `600` | *Time in seconds between queries to Secureworks endpoint* |
   | **close_codes** | No | `Authorized Activity,Confirmed Security Incident,Duplicate,Incident Misidentified,Inconclusive,Not Actionable,Not Vulnerable,Threat Mitigated` | *Comma separated list of close codes to override the defaults* |
+  | **template_file_escalate** | No | `` | *Path to a custom jinja template file used to escalate a Secureworks Ticket to Resilient* |
+  | **template_file_close** | No | `` | *Path to a custom jinja template file used to close a Resilient incident when the corresponding ticket is 'Closed' or 'Resolved' in Secureworks* |
   | **cafile** | No | `` | *Path to certificate file* |
 
 * **Save** and **Close** the app.config file.

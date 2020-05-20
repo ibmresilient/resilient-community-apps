@@ -36,6 +36,7 @@ The Secureworks CTP integration implements the following functionality in the Re
 * Poll Secureworks CTP for tickets and create a corresponding incident in the Resilient platform for each ticket.
 * Get Secureworks CTP ticket workLogs and attachments and add them as notes and attachments in the corresponding Resilient incident.
 * Close a Secureworks CTP ticket when the corresponding Resilient incident is closed.
+* Close a Resilient incident when the corresponding Secureworks CTP ticket is closed in Secureworks.
 ---
 ## Integration Flow for Ticket Management
 
@@ -55,6 +56,8 @@ NOTE: The integration uses default Secureworks CTP close codes that appear in th
 ![screenshot: swcx_close_ticket_popup](./screenshots/scwx_close_ticket_popup.png)
 
 <p>
+If the Secureworks ticket is closed in Secureworks portal, the poller detects this in Resilient and closes the corresponding incident.  The poller uses a default jinja template for closing an incident in this case.  The jinja template defines the incident fields and values necessary at incident closure. The user can customize their own template if needed and specify the file location in the template_file_close parameter in the app.config file.  
+<p>
 
 ---
 ## Poller
@@ -71,7 +74,32 @@ The integration poller runs continuously while the integration is running.
   * HEALTH
   * SECURITY
 * The poller adds Secureworks CTP ticket workLogs and attachments as incident notes and attachments in the corresponding Resilient incident.
-* Poller interval can be set in the app.config to specify how often the integration checks for updated tickets from Secureworks CTP. 
+* Poller interval can be set in the app.config to specify how often the integration checks for updated tickets from Secureworks CTP. An interval value of zero will turn off the poller.
+* The poller closes a Resilient incident if the corresponding Secureworks ticket is closed in the Securewokrs portal.
+
+---
+## Custom Incident Fields
+The following custom incident fields are available in the integration and can be viewed on the Secureworks CTP custom layout tab.  The Secureworks CTP Install Guide describes how to create the layout in the Resilient Platform UI.  A jinja template file is used to map the Securework ticket fields to a field in Resilient.  The user can add more fields and customizations using their own jinja template file defined in the app.config template_file_escalate parameter.
+<p>
+
+| Resilient custom incident field | Secureworks CTP Ticket field
+| ----------------------- | ----------------------|
+|scwx_ctp_category | category |
+|scwx_ctp_category_class | categoryClass |
+|scwx_ctp_category_item | categoryItem |
+|scwx_ctp_category_type | categoryType |
+|scwx_ctp_close_code | closeCode |
+|scwx_ctp_contact_id | contact: id |
+|scwx_ctp_contact_name | contact: name |
+|scwx_ctp_date_created | dateCreated |
+|scwx_ctp_grouping_type | groupingType |
+|scwx_ctp_priority | priority |
+|scwx_ctp_request_type | requestType |
+|scwx_ctp_source | source |
+|scwx_ctp_status | status|
+|scwx_ctp_ticket_id | ticketId |
+|scwx_ctp_ticket_type | ticketType |
+
 
 ---
 
@@ -162,7 +190,7 @@ incident.addNote(noteText)
 <details><summary>Example Rule:</summary>
 
 <p>
-The example Secureworks CTP Close Ticket rule is an automatic rule which is activated when an incident is closed that has a Secureworks CTP ticket ID associated with it via the scwx_ctp_ticket_id custom incident field.  The rule automatically initiates the example Close Secureworks Ticket workflow under these conditions as shown in the screenshot:
+The example Secureworks CTP Close Ticket rule is an automatic rule which is activated when an incident is closed that has a Secureworks CTP ticket ID associated with it via the scwx_ctp_ticket_id custom incident field. The automatic rule will not execute if the status of the ticket in Secureworks is Closed or Resolved. The rule automatically initiates the example Close Secureworks Ticket workflow under these conditions as shown in the screenshot:
 
 ![screenshot: scwx_close_ticket_rule](./screenshots/scwx_close_ticket_rule.png)
 
