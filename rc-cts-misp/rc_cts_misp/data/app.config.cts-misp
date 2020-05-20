@@ -4,7 +4,7 @@
 [custom_threat_service_misp]
 
 # URL to access the MISP server
-misp_url=http://misp
+misp_url=https://misp
 
 # URL for links to the MISP server (optional)
 # misp_link_url=http://misp_public_url
