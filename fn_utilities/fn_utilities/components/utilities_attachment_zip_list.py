@@ -65,7 +65,7 @@ class FunctionComponent(ResilientComponent):
                     results["infolist"] = [{"filename": zinfo.filename,
                                             "date_time": epoch_millis(zinfo.date_time),
                                             "compress_type": zinfo.compress_type,
-                                            "comment": zinfo.comment.decode("utf-8")  if isinstance(zinfo.comment, bytes) else zinfo.comment,
+                                            "comment": zinfo.comment,
                                             "create_system": zinfo.create_system,
                                             "create_version": zinfo.create_version,
                                             "extract_version": zinfo.extract_version,
@@ -84,7 +84,6 @@ class FunctionComponent(ResilientComponent):
                 finally:
                     os.unlink(temp_file.name)
             # Produce a FunctionResult with the return value
-            log.debug(results)
             yield FunctionResult(results)
         except Exception:
             yield FunctionError()

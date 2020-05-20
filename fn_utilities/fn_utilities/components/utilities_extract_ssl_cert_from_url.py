@@ -82,8 +82,8 @@ class FunctionComponent(ResilientComponent):
                 context = ssl.SSLContext(ssl.PROTOCOL_SSLv23)
                 sock = context.wrap_socket(conn, server_hostname=url_dict.hostname)
                 certificate = ssl.DER_cert_to_PEM_cert(sock.getpeercert(True))
-            except Exception as parsing_ex:
-                raise KeyError("Problem encountered while parsing the cert. {}".format(parsing_ex))
+            except Exception:
+                raise KeyError("Problem encountered while parsing the cert.")
 
             finally:
                 # Close the connection once we have what we want

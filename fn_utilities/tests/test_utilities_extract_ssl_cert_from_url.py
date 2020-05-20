@@ -9,7 +9,7 @@ import json
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 
-PACKAGE_NAME = "fn_utilities"
+PACKAGE_NAME = "utilities_extract_ssl_cert"
 FUNCTION_NAME = "utilities_extract_ssl_cert_from_url"
 
 # Read the default configuration-data section from the package
@@ -19,26 +19,15 @@ config_data = get_config_data(PACKAGE_NAME)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
 
 
-def call_utilities_extract_ssl_cert_from_url_function(circuits, function_params, timeout=5):
+def call_utilities_extract_ssl_cert_from_url_function(circuits, function_params, timeout=10):
     # Fire a message to the function
     evt = SubmitTestFunction("utilities_extract_ssl_cert_from_url", function_params)
     circuits.manager.fire(evt)
-
-    # circuits will fire an "exception" event if an exception is raised in the FunctionComponent
-    # return this exception if it is raised
-    exception_event = circuits.watcher.wait("exception", parent=None, timeout=2)
-
-    if exception_event is not False:
-        exception = exception_event.args[1]
-        raise exception
-
-        # else return the FunctionComponent's results
-    else:
-        event = circuits.watcher.wait("utilities_extract_ssl_cert_from_url_result", parent=evt, timeout=timeout)
-        assert event
-        assert isinstance(event.kwargs["result"], FunctionResult)
-        pytest.wait_for(event, "complete", True)
-        return event.kwargs["result"].value
+    event = circuits.watcher.wait("utilities_extract_ssl_cert_from_url_result", parent=evt, timeout=timeout)
+    assert event
+    assert isinstance(event.kwargs["result"], FunctionResult)
+    pytest.wait_for(event, "complete", True)
+    return event.kwargs["result"].value
 
 
 class TestUtilitiesExtractSslCertFromUrl:
@@ -55,16 +44,18 @@ class TestUtilitiesExtractSslCertFromUrl:
         ("https://self-signed.badssl.com", {"successful": True}),
         ("https://untrusted-root.badssl.com", {"successful": True}),
         ("https://revoked.badssl.com", {"successful": True}),
-        ("https://10000-sans.badssl.com", {"successful": False}),
+        ("https://10000-sans.badssl.com", {"successful": True}),
         ("notaurl", {"successful": False}),
         ("htp:/www.google.com", {"successful": False}),
         ("https://superfish.badssl.com", {"successful": True}),
-        ("https://dh512.badssl.com", {"successful": False}),
-        ("https://rc4-md5.badssl.com/", {"successful": False}),
-        ("https://rc4.badssl.com/", {"successful": False}),
-        ("https://3des.badssl.com/", {"successful": False}),
-        ("https://null.badssl.com/", {"successful": False}),
-        ("https://tls-v1-0.badssl.com:1010/", {"successful": True})
+        ("https://dh512.badssl.com", {"successful": True}),
+        ("https://rc4-md5.badssl.com/", {"successful": True}),
+        ("https://rc4.badssl.com/", {"successful": True}),
+        ("https://3des.badssl.com/", {"successful": True}),
+        ("https://null.badssl.com/", {"successful": True}),
+        ("https://tls-v1-0.badssl.com:1010/", {"successful": True}),
+        ("https://tls-v1-1.badssl.com:1011/", {"successful": True}),
+        ("www.tls-v1-1.badssl.com:1011/", {"successful": True})
 
     ])
     def test_validate_cert(self, circuits_app, https_url, expected_results):
@@ -99,16 +90,18 @@ class TestUtilitiesExtractSslCertFromUrl:
         ("https://self-signed.badssl.com", {"successful": True}),
         ("https://untrusted-root.badssl.com", {"successful": True}),
         ("https://revoked.badssl.com", {"successful": True}),
-        ("https://10000-sans.badssl.com", {"successful": False}),
+        ("https://10000-sans.badssl.com", {"successful": True}),
         ("notaurl", {"successful": False}),
         ("htp:/www.google.com", {"successful": False}),
         ("https://superfish.badssl.com", {"successful": True}),
-        ("https://dh512.badssl.com", {"successful": False}),
-        ("https://rc4-md5.badssl.com/", {"successful": False}),
-        ("https://rc4.badssl.com/", {"successful": False}),
-        ("https://3des.badssl.com/", {"successful": False}),
-        ("https://null.badssl.com/", {"successful": False}),
-        ("https://tls-v1-0.badssl.com:1010/", {"successful": True})
+        ("https://dh512.badssl.com", {"successful": True}),
+        ("https://rc4-md5.badssl.com/", {"successful": True}),
+        ("https://rc4.badssl.com/", {"successful": True}),
+        ("https://3des.badssl.com/", {"successful": True}),
+        ("https://null.badssl.com/", {"successful": True}),
+        ("https://tls-v1-0.badssl.com:1010/", {"successful": True}),
+        ("https://tls-v1-1.badssl.com:1011/", {"successful": True}),
+        ("www.tls-v1-1.badssl.com:1011", {"successful": True})
 
     ])
     def test_validate_json_result(self, circuits_app, https_url, expected_results):
@@ -139,15 +132,15 @@ class TestUtilitiesExtractSslCertFromUrl:
         ("https://self-signed.badssl.com", {"successful": True}),
         ("https://untrusted-root.badssl.com", {"successful": True}),
         ("https://revoked.badssl.com", {"successful": True}),
-        ("https://10000-sans.badssl.com", {"successful": False}),
+        ("https://10000-sans.badssl.com", {"successful": True}),
         ("notaurl", {"successful": False}),
         ("htp:/www.google.com", {"successful": False}),
         ("https://superfish.badssl.com", {"successful": True}),
-        ("https://dh512.badssl.com", {"successful": False}),
-        ("https://rc4-md5.badssl.com/", {"successful": False}),
-        ("https://rc4.badssl.com/", {"successful": False}),
-        ("https://3des.badssl.com/", {"successful": False}),
-        ("https://null.badssl.com/", {"successful": False}),
+        ("https://dh512.badssl.com", {"successful": True}),
+        ("https://rc4-md5.badssl.com/", {"successful": True}),
+        ("https://rc4.badssl.com/", {"successful": True}),
+        ("https://3des.badssl.com/", {"successful": True}),
+        ("https://null.badssl.com/", {"successful": True}),
         ("https://tls-v1-0.badssl.com:1010/", {"successful": True}),
         ("https://tls-v1-1.badssl.com:1011/", {"successful": True}),
         ("www.tls-v1-1.badssl.com:1011", {"successful": True})

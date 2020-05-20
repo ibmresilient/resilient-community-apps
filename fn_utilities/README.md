@@ -29,13 +29,6 @@
   Specify all changes in this release. Do not remove the release 
   notes of a previous release
 -->
-### v1.0.13
-* Updated utilities_string_to_attachment function. Added a check for the attachment's file extension and keep it as it is if it exists.
-
-### v1.0.12
-* Python3 support for Attachment Hash, Attachment Zip List, Attachment Zip Extract, Base64 to Artifact and Email Parse functions.
-* In setup.py pinned the required version of `openpyxl<=2.5.14` used by Excel Query function.
-
 ### v1.0.10
 * Update utilities_email_parse Function to use `mail-parser>=3.9.3`: https://github.com/SpamScope/mail-parser
 * Remove dependency of `MailtoJson` from utilities_email_parse function.
@@ -184,4 +177,4 @@ There are several ways to verify the successful operation of a function.
 ## Support
 | Name | Version | Author | Support URL |
 | ---- | ------- | ------ | ----------- |
-| fn_utilities | 1.0.13 | IBM Resilient | http://ibm.biz/resilientcommunity |
+| fn_utilities | 1.0.10 | IBM Resilient | http://ibm.biz/resilientcommunity |
