@@ -1,0 +1,15 @@
+{
+  {# JINJA template for closing a Resilient incident containing a Secureworks ticket. #}
+  "plan_status": "C",
+  "resolution_id": {
+    "name": "Resolved"
+  },
+  "resolution_summary": {
+    "format": "text",
+    "content": "Secureworks Ticket closed in Secureworks."
+  },
+  "properties": {
+    {# Add any other custom incident fields needing update on close here. #}
+    "scwx_ctp_close_code": "Work Completed"
+  }
+}

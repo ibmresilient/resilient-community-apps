@@ -4,7 +4,6 @@
 """Secureworks CTP API client"""
 
 import os
-import json
 import logging
 from resilient_lib import RequestsCommon
 
@@ -55,6 +54,7 @@ class SCWXClient(object):
         self.APIKEY = u"APIKEY {0}:{1}".format(self.username, self.password)
         self.headers = get_headers(self.APIKEY)
 
+
     def post_tickets_updates(self, ticket_type, grouping_type):
         """POST get a list of updated tickets not yet acknowledged """
         url = u"{0}/tickets/updates".format(self.base_url)
@@ -78,9 +78,9 @@ class SCWXClient(object):
         """POST acknowledgement to Secureworks CTP that ticket has been received."""
 
         url = u"{0}/tickets/acknowledge".format(self.base_url)
-        ticketId = ticket.get('ticketId')
+        ticket_id = ticket.get('ticketId')
         version = ticket.get('version')
-        payload = {'ticketVersions': [{'ticketId': ticketId, 'version': version}]}
+        payload = {'ticketVersions': [{'ticketId': ticket_id, 'version': version}]}
 
         response = self.rc.execute_call_v2("post", url, headers=self.headers, json=payload, verify=self.bundle,
                                            proxies=self.rc.get_proxies())

@@ -62,9 +62,14 @@ polling_interval=600
 # close_codes=Authorized Activity,Confirmed Security Incident,Duplicate,Incident Misidentified,Inconclusive,Not Actionable,Not Vulnerable,Threat Mitigated
 close_codes=
 
-# Optional - Path to a custom template file for the escalated incident.   If not defined, the integration will use
-# the default that comes with the integration.
-# template_file=/usr/integration/scwx_template.jinja
+# Optional - Path to a custom Jinja template file for the escalated incident.   
+# If not defined, the integration will use the default that comes with the integration.
+template_file_escalate=
+
+# Optional - Path to a custom Jinja template file for the close of the incident.   
+# If not defined, the integration will use the default that comes with the integration.
+template_file_close=
+
 #
 # Optional - If required by Secureworks CTP
 cafile=
