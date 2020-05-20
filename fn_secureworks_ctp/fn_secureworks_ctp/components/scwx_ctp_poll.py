@@ -12,6 +12,7 @@ import logging
 import resilient
 from circuits import Event, Timer
 from pkg_resources import Requirement, resource_filename
+from resilient import SimpleHTTPException
 from resilient_circuits import ResilientComponent, handler
 from resilient_circuits.template_functions import render_json, environment
 from resilient_lib import validate_fields, write_file_attachment, IntegrationError
@@ -120,8 +121,7 @@ class SecureworksCTPPollComponent(ResilientComponent):
                 # Get list of tickets needing updating
                 ticket_type = query.get('ticketType')
                 grouping_type = query.get('groupingType')
-                #response = self.scwx_client.post_tickets_updates(ticket_type, grouping_type)
-                response = self.scwx_client.mock_post_tickets_updates()
+                response = self.scwx_client.post_tickets_updates(ticket_type, grouping_type)
 
                 tickets = response.get('tickets')
                 ticket_id_list = [ticket.get('ticketId') for ticket in tickets]
@@ -155,8 +155,7 @@ class SecureworksCTPPollComponent(ResilientComponent):
                         self.add_ticket_attachments(resilient_incident, ticket)
 
                     # Acknowledge Secureworks that we have received and processed the ticket.
-                    #response_ack = self.scwx_client.post_tickets_acknowledge(ticket)
-                    response_ack = [{'code': "SUCCESS", 'ticketId': ticket.get('ticketId')}]
+                    response_ack = self.scwx_client.post_tickets_acknowledge(ticket)
 
                     code = response_ack[0].get('code')
                     if code != "SUCCESS":
@@ -356,9 +355,8 @@ class SecureworksCTPPollComponent(ResilientComponent):
             comment_response = resilient_client.post(uri=uri, payload=payload)
             return comment_response
 
-        except SimpleHTTPException as ex:
-            LOG.error("Failed to add note for incident %d: %s", incident_id, ex)
-
+        except Exception as err:
+            raise IntegrationError(err)
 
     def add_worklog_notes(self, incident, ticket):
         """
@@ -411,8 +409,7 @@ class SecureworksCTPPollComponent(ResilientComponent):
                 attachment_id = attachment.get('id')
 
                 # Get ticket attachment
-                #response = self.scwx_client.get_tickets_attachment(ticket_id, attachment_id)
-                response = {'content': b'Mock text'}
+                response = self.scwx_client.get_tickets_attachment(ticket_id, attachment_id)
 
                 content = response.get('content')
                 datastream = BytesIO(content)
@@ -476,5 +473,5 @@ class SecureworksCTPPollComponent(ResilientComponent):
                 raise IntegrationError("status code failure: {}".format(resp.status_code))
 
             return resp.json()
-        else:
-            return {}
+
+        return {}
