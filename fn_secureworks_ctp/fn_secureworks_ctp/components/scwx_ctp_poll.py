@@ -12,7 +12,6 @@ import logging
 import resilient
 from circuits import Event, Timer
 from pkg_resources import Requirement, resource_filename
-from resilient import SimpleHTTPException
 from resilient_circuits import ResilientComponent, handler
 from resilient_circuits.template_functions import render_json, environment
 from resilient_lib import validate_fields, write_file_attachment, IntegrationError
@@ -286,7 +285,7 @@ class SecureworksCTPPollComponent(ResilientComponent):
                 if not os.path.exists(template_file_path):
                     raise Exception(u"Template file for close'{}' not found".format(template_file_path))
 
-            LOG.info(u"Secureworks CTP Template Close file: %s", template_file_path)
+            LOG.info(u"Secureworks CTP jinja template file for closing incident: %s", template_file_path)
             with open(template_file_path, "r") as definition:
                 close_template = definition.read()
 
@@ -312,7 +311,7 @@ class SecureworksCTPPollComponent(ResilientComponent):
             raise IntegrationError(err)
 
     def _update_incident(self, incident_id, incident_payload):
-        """ _update incident will
+        """ _update_incident will update an incident with the specified json payload.
         :param incident_id: incident ID of incident to be updated.
         ;param incident_payload: incident fields to be updated.
         :return:
