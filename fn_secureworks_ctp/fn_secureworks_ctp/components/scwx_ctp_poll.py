@@ -9,12 +9,13 @@ import os
 from io import BytesIO
 import datetime
 import logging
+import resilient
 from circuits import Event, Timer
 from pkg_resources import Requirement, resource_filename
 from resilient import SimpleHTTPException
 from resilient_circuits import ResilientComponent, handler
 from resilient_circuits.template_functions import render_json, environment
-from resilient_lib import validate_fields, write_file_attachment
+from resilient_lib import validate_fields, write_file_attachment, IntegrationError
 from fn_secureworks_ctp.lib.scwx_ctp_client import SCWXClient
 
 
@@ -120,7 +121,8 @@ class SecureworksCTPPollComponent(ResilientComponent):
                 # Get list of tickets needing updating
                 ticket_type = query.get('ticketType')
                 grouping_type = query.get('groupingType')
-                response = self.scwx_client.post_tickets_updates(ticket_type, grouping_type)
+                #response = self.scwx_client.post_tickets_updates(ticket_type, grouping_type)
+                response = self.scwx_client.mock_post_tickets_updates()
 
                 tickets = response.get('tickets')
                 ticket_id_list = [ticket.get('ticketId') for ticket in tickets]
@@ -131,23 +133,31 @@ class SecureworksCTPPollComponent(ResilientComponent):
                 for ticket in tickets:
 
                     ticket_id = ticket.get('ticketId')
-                    LOG.info(u"Processing ticket %s", ticket_id)
+                    status = ticket.get('status')
+
+                    LOG.info(u"Processing ticket: %s status: %s", ticket_id, status)
 
                     # Check if there is already a Resilient incident for this Secureworks ticket.
                     resilient_incident = self._find_resilient_incident_for_req(ticket_id)
 
-                    if not resilient_incident:
-                        # Create a new incident for this Secureworks CTP ticket.
-                        resilient_incident = self._create_incident(ticket)
+                    if status in ('Closed', 'Resolved'):
+                        # Ticket was closed in Secureworks, so closed the Resilient incident now.
+                        if resilient_incident:
+                            result = self._close_incident(resilient_incident, ticket_id, status)
+                    else:
+                        if not resilient_incident:
+                            # Create a new incident for this Secureworks CTP ticket.
+                            resilient_incident = self._create_incident(ticket)
 
-                    # Add ticket worklogs to the incident as notes
-                    self.add_worklog_notes(resilient_incident, ticket)
+                        # Add ticket worklogs to the incident as notes
+                        self.add_worklog_notes(resilient_incident, ticket)
 
-                    # Add ticket attachments to the incident as attachments
-                    self.add_ticket_attachments(resilient_incident, ticket)
+                        # Add ticket attachments to the incident as attachments
+                        self.add_ticket_attachments(resilient_incident, ticket)
 
-                    # Acknowledge Secureworks that we have received and processed the tickets.
-                    response_ack = self.scwx_client.post_tickets_acknowledge(ticket)
+                    # Acknowledge Secureworks that we have received and processed the ticket.
+                    #response_ack = self.scwx_client.post_tickets_acknowledge(ticket)
+                    response_ack = [{'code': "SUCCESS", 'ticketId': ticket.get('ticketId')}]
 
                     code = response_ack[0].get('code')
                     if code != "SUCCESS":
@@ -156,7 +166,7 @@ class SecureworksCTPPollComponent(ResilientComponent):
                         LOG.info(u"Secureworks CTP acknowledged ticket: %s code: %s", ticket_id, code)
 
         except Exception as err:
-            raise err
+            raise IntegrationError(err)
         finally:
             # We always want to reset the timer to wake up, no matter failure or success
             self.fire(PollCompleted())
@@ -226,14 +236,14 @@ class SecureworksCTPPollComponent(ResilientComponent):
         try:
             # Create a new Resilient incident from this ticket
             # using a JSON (JINJA2) template file
-            template_file_path = self.options.get('template_file')
+            template_file_path = self.options.get('template_file_escalate')
             if template_file_path and not os.path.exists(template_file_path):
                 LOG.warning(u"Template file '%s' not found.", template_file_path)
                 template_file_path = None
             if not template_file_path:
                 # Use the template file installed by this package
                 template_file_path = resource_filename(Requirement("fn-secureworks-ctp"),
-                                                       "fn_secureworks_ctp/data/scwx_ctp_template.jinja")
+                                                       "fn_secureworks_ctp/data/scwx_ctp_template_escalate.jinja")
                 if not os.path.exists(template_file_path):
                     raise Exception(u"Template file '{}' not found".format(template_file_path))
 
@@ -253,7 +263,81 @@ class SecureworksCTPPollComponent(ResilientComponent):
             return incident
 
         except Exception as err:
-            raise err
+            raise IntegrationError(err)
+
+    def _close_incident(self, incident, ticket_id, status):
+        """
+        Create a new Resilient incident by rendering a jinja2 template
+        :param ticket: Secureworks CTP ticket (json object)
+        :return: Resilient incident
+        """
+
+        try:
+            # Create a new Resilient incident from this ticket
+            # using a JSON (JINJA2) template file
+            template_file_path = self.options.get('template_file_close')
+            if template_file_path and not os.path.exists(template_file_path):
+                LOG.warning(u"Template file '%s' not found.", template_file_path)
+                template_file_path = None
+            if not template_file_path:
+                # Use the template file installed by this package
+                template_file_path = resource_filename(Requirement("fn-secureworks-ctp"),
+                                                       "fn_secureworks_ctp/data/scwx_ctp_template_close.jinja")
+                if not os.path.exists(template_file_path):
+                    raise Exception(u"Template file for close'{}' not found".format(template_file_path))
+
+            LOG.info(u"Secureworks CTP Template Close file: %s", template_file_path)
+            with open(template_file_path, "r") as definition:
+                close_template = definition.read()
+
+            incident_payload = render_json(close_template, incident)
+            # Set the scwx_ctp_status incident field to the ticket status (Closed or Resolved) so that the
+            # automatic rule to close the Securework ticket is not triggered as the ticket is already closed in SCWX.
+            incident_payload['properties']['scwx_ctp_status'] = status
+
+            # Render the template.
+            incident_id = incident.get('id')
+
+            result = self._update_incident(incident_id, incident_payload)
+
+            if result and result.get('success'):
+                message = u"Closed incident {} for Secureworks CTP ticket {}".format(incident_id, ticket_id)
+                LOG.info(message)
+            else:
+                message = u"Unable to update incident {} for closing. Secureworks CTP ticket {}".format(incident_id, ticket_id)
+                LOG.error(message)
+            return result
+
+        except Exception as err:
+            raise IntegrationError(err)
+
+    def _update_incident(self, incident_id, incident_payload):
+        """ _update incident will
+        :param incident_id: incident ID of incident to be updated.
+        ;param incident_payload: incident fields to be updated.
+        :return:
+        """
+        try:
+            # Update incident
+            incident_url = "/incidents/{0}".format(incident_id)
+            incident = self.rest_client().get(incident_url)
+            patch = resilient.Patch(incident)
+
+            # Iterate over payload dict.
+            for name, value in incident_payload.items():
+                if name == 'properties':
+                    for field_name, field_value in incident_payload['properties'].items():
+                        patch.add_value(field_name, field_value)
+                else:
+                    payload_value = incident_payload.get(name)
+                    patch.add_value(name, payload_value)
+
+            patch_result = self.rest_client().patch(incident_url, patch)
+            result = self._chk_status(patch_result)
+            return result if result else {}
+
+        except Exception as err:
+            raise IntegrationError(err)
 
     def create_incident_comment(self, incident_id, note):
         """
@@ -311,7 +395,7 @@ class SecureworksCTPPollComponent(ResilientComponent):
 
                 LOG.debug(response)
         except Exception as err:
-            raise err
+            raise IntegrationError(err)
 
     def add_ticket_attachments(self, incident, ticket):
         """
@@ -328,7 +412,8 @@ class SecureworksCTPPollComponent(ResilientComponent):
                 attachment_id = attachment.get('id')
 
                 # Get ticket attachment
-                response = self.scwx_client.get_tickets_attachment(ticket_id, attachment_id)
+                #response = self.scwx_client.get_tickets_attachment(ticket_id, attachment_id)
+                response = {'content': b'Mock text'}
 
                 content = response.get('content')
                 datastream = BytesIO(content)
@@ -345,7 +430,7 @@ class SecureworksCTPPollComponent(ResilientComponent):
                                                        incident_id, None)
                 LOG.debug(new_attachment)
         except Exception as err:
-            raise err
+            raise IntegrationError(err)
 
     def init_close_codes(self, close_codes):
         """
@@ -375,3 +460,22 @@ class SecureworksCTPPollComponent(ResilientComponent):
         put_response = self.rest_client().put(uri, payload=get_response)
 
         return put_response
+
+    def _chk_status(self, resp, rc=200):
+        """
+        check the return status. If return code is not met, raise IntegrationError,
+        if success, return the json payload
+        :param resp:
+        :param rc:
+        :return:
+        """
+        if hasattr(resp, "status_code"):
+            if isinstance(rc, list):
+                if resp.status_code < rc[0] or resp.status_code > rc[1]:
+                    raise IntegrationError("status code failure: {}".format(resp.status_code))
+            elif resp.status_code != rc:
+                raise IntegrationError("status code failure: {}".format(resp.status_code))
+
+            return resp.json()
+        else:
+            return {}
