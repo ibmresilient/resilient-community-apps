@@ -24,6 +24,19 @@ MOCKED_OPS = {
     }
 }
 
+THREATS_INFO_MAP1 = {'threatsInfoMap': [{'threatID': 'threatID1', 'campaignId': 'campaignId1'}]}
+THREATS_INFO_MAP1_RESULT = {'threatID1':'Proofpoint Threat ID', 'campaignId1':'Proofpoint Campaign ID'}
+
+THREATS_INFO_MAP2 = {'threatsInfoMap': [{'threatID': 'threatID2', 'campaignId': 'campaignID2'}]}
+THREATS_INFO_MAP2_RESULT = {'threatID2':'Proofpoint Threat ID', 'campaignID2':'Proofpoint Campaign ID'}
+
+THREATS_INFO_MAP3 = {'threatsInfoMap': [{'threatID': 'threatID3', 'campaignId': 'campaignID3'},
+                                        {'threatID': 'threatID4', 'campaignID': 'campaignID4'}]}
+THREATS_INFO_MAP3_RESULT = {'threatID3':'Proofpoint Threat ID', 'campaignID4':'Proofpoint Campaign ID',
+                            'threatID3':'Proofpoint Threat ID', 'campaignID4':'Proofpoint Campaign ID'}
+
+THREATS_INFO_MAP4 = {'threatsInfoMap': [{}]}
+THREATS_INFO_MAP4_RESULT = {}
 
 class BlankClass(object):
     def __init__(self, opts):
@@ -114,3 +127,16 @@ class TestPPThreatPolling(object):
         poller = self.get_pp_threat_polling(monkeypatch)
         poller.id_type_filter = input_type_filter
         assert poller._filtered_threat_types(input_threat_types) == results
+
+    @pytest.mark.parametrize("threatsInfoMap, results", [
+        (THREATS_INFO_MAP1, THREATS_INFO_MAP1_RESULT),
+        (THREATS_INFO_MAP2, THREATS_INFO_MAP2_RESULT),
+        (THREATS_INFO_MAP3, THREATS_INFO_MAP3_RESULT),
+        (THREATS_INFO_MAP4, THREATS_INFO_MAP4_RESULT)
+    ])
+    def test_build_artifacts(self, threatsInfoMap, results, monkeypatch):
+        poller = self.get_pp_threat_polling(monkeypatch)
+        artifact_payload = poller.build_artifacts(threatsInfoMap)
+        print (artifact_payload)
+        for key in results:
+            assert artifact_payload[key] == results[key]

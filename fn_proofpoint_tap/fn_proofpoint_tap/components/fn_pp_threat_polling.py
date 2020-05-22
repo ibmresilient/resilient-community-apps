@@ -28,9 +28,9 @@ PROOFPOINT_ID_FIELDS = [
 ]
 
 # do not rename the values in this dict - they match Proofpoint TAP values
-artifact_types = {
-    'Proofpoint Campaign ID': 'campaignId',
-    'Proofpoint Threat ID': 'threatID',
+ARTIFACT_TYPES = {
+    'Proofpoint Campaign ID': ['campaignId', 'campaignID'],
+    'Proofpoint Threat ID': ['threatID'],
 }
 
 ARTIFACT_TYPE_API_NAME = {
@@ -446,6 +446,7 @@ class PP_ThreatPolling(ResilientComponent):
         else:
             self._build_artifact_for_data(data, artifact_payloads)
 
+        log.debug(artifact_payloads)
         return artifact_payloads
 
     @staticmethod
@@ -456,11 +457,12 @@ class PP_ThreatPolling(ResilientComponent):
         :param artifact_payloads:
         :return:
         """
-        for key, value in artifact_types.items():
-            artifact_id = data.get(value)
-            if artifact_id is not None:
-                log.debug(u'artifact type {} ({}) ID {}'.format(key, value, artifact_id))
-                artifact_payloads[artifact_id] = key
+        for artifact_type, pp_keys in ARTIFACT_TYPES.items():
+            for pp_key in pp_keys:
+                artifact_id = data.get(pp_key)
+                if artifact_id is not None:
+                    log.debug(u'artifact type {} ({}) ID {}'.format(artifact_type, pp_key, artifact_id))
+                    artifact_payloads[artifact_id] = artifact_type
 
         return artifact_payloads
 
@@ -546,7 +548,7 @@ class PP_ThreatPolling(ResilientComponent):
         if artifact_results is not None:
             for artifact_result in artifact_results:
                 artifact_type = artifact_result.get('description')
-                if artifact_type in artifact_types:
+                if artifact_type in ARTIFACT_TYPES:
                     r_artifacts[artifact_result['value']] = artifact_type
 
         return r_artifacts
