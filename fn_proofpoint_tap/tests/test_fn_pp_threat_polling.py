@@ -32,8 +32,8 @@ THREATS_INFO_MAP2_RESULT = {'threatID2':'Proofpoint Threat ID', 'campaignID2':'P
 
 THREATS_INFO_MAP3 = {'threatsInfoMap': [{'threatID': 'threatID3', 'campaignId': 'campaignID3'},
                                         {'threatID': 'threatID4', 'campaignID': 'campaignID4'}]}
-THREATS_INFO_MAP3_RESULT = {'threatID3':'Proofpoint Threat ID', 'campaignID4':'Proofpoint Campaign ID',
-                            'threatID3':'Proofpoint Threat ID', 'campaignID4':'Proofpoint Campaign ID'}
+THREATS_INFO_MAP3_RESULT = {'threatID3':'Proofpoint Threat ID', 'campaignID3':'Proofpoint Campaign ID',
+                            'threatID4':'Proofpoint Threat ID', 'campaignID4':'Proofpoint Campaign ID'}
 
 THREATS_INFO_MAP4 = {'threatsInfoMap': [{}]}
 THREATS_INFO_MAP4_RESULT = {}
