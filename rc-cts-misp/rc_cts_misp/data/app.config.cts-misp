@@ -10,7 +10,7 @@ misp_url=https://misp
 # misp_link_url=http://misp_public_url
 
 # API access key (MISP: Event Actions -> Automation)
-misp_key=3PhYSFDeC8xpqjC0ZrFZDwazoSRDUQ1j4IlKbu0G
+misp_key=<MISP API Key>
 
 # Verify the MISP server's TLS certificate
 # misp_verifycert=False
