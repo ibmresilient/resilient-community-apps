@@ -29,6 +29,9 @@
   Specify all changes in this release. Do not remove the release 
   notes of a previous release
 -->
+### v1.0.1
+* Fix url concatenation issue.
+
 ### v1.0.0
 * Initial Release
 
@@ -159,4 +162,4 @@ There are several ways to verify the successful operation of a function.
 ## Support
 | Name | Version | Author | Support URL |
 | ---- | ------- | ------ | ----------- |
-| fn_proofpoint_trap | 1.0.0 | IBM Resilient Support | support@resilientsystems.com |
+| fn_proofpoint_trap | 1.0.1 | IBM Resilient Support | support@resilientsystems.com |
