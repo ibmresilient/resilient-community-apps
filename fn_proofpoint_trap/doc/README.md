@@ -166,7 +166,7 @@ The data table `Proofpoint TRAP List Members` will be updated in the Resilient p
 
 ```python
 results = { 'inputs': {u'trap_list_id': 1, u'trap_members_type': u'members.json'},
-          'metrics': {'package': 'fn-proofpoint-trap', 'timestamp': '2019-08-29 14:02:01', 'package_version': '1.0.1',
+          'metrics': {'package': 'fn-proofpoint-trap', 'timestamp': '2019-08-29 14:02:01', 'package_version': '1.0.0',
                       'host': 'myhost.com', 'version': '1.0', 'execution_time_ms': 27}, 'success': True,
           'content': [{u'user_id': None, u'description': u'IP to block', u'deleted': False, u'created_at': u'2017-01-11T03:47:15Z',
                        u'enabled': True, u'updated_at': u'2017-01-11T03:47:15Z',
@@ -225,7 +225,7 @@ inputs.trap_members_type = "members.json"
 # Example result:
 """
 Result: { 'inputs': {u'trap_list_id': 1, u'trap_members_type': u'members.json'},
-          'metrics': {'package': 'fn-proofpoint-trap', 'timestamp': '2019-08-29 14:02:01', 'package_version': '1.0.1',
+          'metrics': {'package': 'fn-proofpoint-trap', 'timestamp': '2019-08-29 14:02:01', 'package_version': '1.0.0',
                       'host': 'myhost.com', 'version': '1.0', 'execution_time_ms': 27}, 'success': True,
           'content': [{u'user_id': None, u'description': u'IP to block', u'deleted': False, u'created_at': u'2017-01-11T03:47:15Z',
                        u'enabled': True, u'updated_at': u'2017-01-11T03:47:15Z',
@@ -383,7 +383,7 @@ inputs.trap_duration =  rule.properties.trap_duration
 """
 Result: {'inputs': {u'trap_list_id': 1, u'trap_member': u'75.76.13.144', u'trap_description': u'A test',
                     u'trap_expiration': 1567526694000, u'trap_duration': 10},
-         'metrics': {'package': 'fn-proofpoint-trap', 'timestamp': '2019-09-03 17:05:06', 'package_version': '1.0.1',
+         'metrics': {'package': 'fn-proofpoint-trap', 'timestamp': '2019-09-03 17:05:06', 'package_version': '1.0.0',
                      'host': 'myhost.ibm.com', 'version': '1.0', 'execution_time_ms': 3512},
          'success': True,
          'content': {u'user_id': None, u'description': u'IP to block', u'deleted': False,
@@ -527,7 +527,7 @@ inputs.trap_duration =  rule.properties.trap_duration
 """
 Results {'inputs': {u'trap_list_id': 2, u'trap_expiration': 1567527591000, u'trap_description': u'Test',
                     u'trap_member_id': 8, u'trap_duration': 10},
-         'metrics': {'package': 'fn-proofpoint-trap', 'timestamp': '2019-09-03 17:19:57', 'package_version': '1.0.1',
+         'metrics': {'package': 'fn-proofpoint-trap', 'timestamp': '2019-09-03 17:19:57', 'package_version': '1.0.0',
                      'host': 'myhost.ibm.com', 'version': '1.0', 'execution_time_ms': 33
                      }, 'success': True,
          'content': {u'user_id': None, u'description': u'Updated IP to block', u'deleted': False,
@@ -659,7 +659,7 @@ inputs.trap_member_id = row.member_id
 
 """
 Results {'inputs': {u'trap_list_id': 1, u'trap_member_id': 8},
-         'metrics': {'package': 'fn-proofpoint-trap', 'timestamp': '2019-09-04 17:06:02', 'package_version': '1.0.1',
+         'metrics': {'package': 'fn-proofpoint-trap', 'timestamp': '2019-09-04 17:06:02', 'package_version': '1.0.0',
                      'host': 'myhost.ibm.com', 'version': '1.0', 'execution_time_ms': 39
                      },
          'success': True,

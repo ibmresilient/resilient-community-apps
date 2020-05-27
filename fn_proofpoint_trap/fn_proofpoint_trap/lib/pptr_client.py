@@ -11,6 +11,10 @@ import os
 import requests
 from resilient_lib import RequestsCommon
 from resilient_lib.components.integration_errors import IntegrationError
+if version_info.major < 3:
+    from urlparse import urljoin
+else:
+    from urllib.parse import urljoin
 
 try:
     from json.decoder import JSONDecodeError
@@ -80,7 +84,7 @@ class PPTRClient():
         """
         Class constructor
         """
-        self.base_url = function_options['base_url'].rstrip('/')
+        self.base_url = function_options['base_url']
         self.api_key = function_options['api_key']
         cafile = function_options.get('cafile', False)
         self.bundle = os.path.expanduser(cafile) if cafile else False
@@ -102,7 +106,7 @@ class PPTRClient():
         :param lastupdate: - Minutes since last update
         :return Result in json format.
         """
-        url = "{}{}".format(self.base_url, self._endpoints["incidents"])
+        url = urljoin(self.base_url, self._endpoints["incidents"])
         params = {}
         if isinstance(lastupdate, int):
             params['created_after'] = timestamp_minutes_ago(lastupdate)
@@ -135,8 +139,7 @@ class PPTRClient():
         :return Result in json format.
         """
         rtn = {}
-
-        url = "{}{}".format(self.base_url, self._endpoints["incident"].format(incident_id))
+        url = urljoin(self.base_url, self._endpoints["incident"]).format(incident_id)
 
         try:
             res = self._req.execute_call_v2('get', url, callback=incident_details_exception_handler,
@@ -169,10 +172,9 @@ class PPTRClient():
         :return Result in json format.
         """
         if member_id is not None:
-
-            url = "{}{}".format(self.base_url, self._endpoints["list_member"].format(list_id, member_id))
+            url = urljoin(self.base_url, self._endpoints["list_member"]).format(list_id, member_id)
         else:
-            url = "{}{}".format(self.base_url, self._endpoints["list_members"].format(list_id, members_type))
+            url = urljoin(self.base_url, self._endpoints["list_members"]).format(list_id, members_type)
 
         res = self._req.execute_call_v2('get', url, verify=self.bundle, headers=self._headers,
                                         proxies=self._req.get_proxies())
@@ -193,7 +195,7 @@ class PPTRClient():
         :param duration: Number of minutes after which to expire Proofpoint TRAP list membership (integer).
         :return Result in json format.
         """
-        url = "{}{}".format(self.base_url, self._endpoints["add_members"].format(list_id))
+        url = urljoin(self.base_url, self._endpoints["add_members"]).format(list_id)
         # Convert expiration timestamp to UTC format.
         if expiration is not None:
             expiration = datetime.utcfromtimestamp(int(str(expiration)[0:-3])).strftime('%Y-%m-%dT%H:%M:%SZ')
@@ -223,7 +225,7 @@ class PPTRClient():
         :param duration: Number of minutes after which to expire Proofpoint TRAP list membership (integer).
         :return Result in json format.
         """
-        url = "{}{}".format(self.base_url, self._endpoints["list_member"].format(list_id, member_id))
+        url = urljoin(self.base_url, self._endpoints["list_member"]).format(list_id, member_id)
         # Convert expiration timestamp to UTC format.
         if expiration is not None:
             expiration = datetime.utcfromtimestamp(int(str(expiration)[0:-3])).strftime('%Y-%m-%dT%H:%M:%SZ')
@@ -250,7 +252,7 @@ class PPTRClient():
         :param member_id: The id of a member of a list (integer).
         :return Result in json format.
         """
-        url = "{}{}".format(self.base_url, self._endpoints["list_member"].format(list_id, member_id))
+        url = urljoin(self.base_url, self._endpoints["list_member"]).format(list_id, member_id)
 
         res = self._req.execute_call_v2('delete', url, verify=self.bundle, headers=self._headers,
                                         proxies=self._req.get_proxies())
