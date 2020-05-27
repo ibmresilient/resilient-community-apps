@@ -51,7 +51,7 @@ class FunctionComponent(ResilientComponent):
 
             # Replace task_json["name"] if task_name is set and task_json["name"] is not set; otherwise use default name
             # If task_json["name"] is set, do nothing, use that
-            task_utils_payload["name"] = task_name if not task_utils_payload.get("name", False) and task_name else "Default Task Name"
+            task_utils_payload["name"] = task_name
 
             log.debug("New task will be saved with name %s", task_utils_payload["name"])
             yield StatusMessage("Posting to API")
