@@ -73,7 +73,7 @@ class FunctionComponent(ResilientComponent):
                     results["info"] = {"filename": zinfo.filename,
                                        "date_time": epoch_millis(zinfo.date_time),
                                        "compress_type": zinfo.compress_type,
-                                       "comment": zinfo.comment.decode("utf-8")  if isinstance(zinfo.comment, bytes) else zinfo.comment,
+                                       "comment": zinfo.comment,
                                        "create_system": zinfo.create_system,
                                        "create_version": zinfo.create_version,
                                        "extract_version": zinfo.extract_version,
@@ -87,7 +87,7 @@ class FunctionComponent(ResilientComponent):
                                        "file_size": zinfo.file_size}
                     # Extract the file we want
                     b64data = base64.b64encode(zfile.read(file_path, zipfile_password))
-                    results["content"] = b64data.decode("utf-8")  if isinstance(b64data, bytes) else b64data,
+                    results["content"] = b64data
                 except (KeyError, zipfile.LargeZipFile, zipfile.BadZipfile) as exc:
                     # results["error"] = str(exc)
                     # To help debug, list the contents

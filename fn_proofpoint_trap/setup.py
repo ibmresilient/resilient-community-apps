@@ -19,13 +19,19 @@ def snake_to_camel(word):
 
 setup(
     name='fn_proofpoint_trap',
-    version='1.0.1',
+    version='1.0.2',
     license='MIT',
     author='Resilient Labs',
     author_email='resil.labs@gmail.com',
     url='https://ibm.biz/resilientcommunity',
     description="Resilient integration for Proofpoint TRAP",
-    long_description="Resilient integration for Proofpoint TRAP. Pulls information data from Proofpoint TRAP",
+    long_description="The Proofpoint Threat Response Auto-Pull (TRAP) integration with the Resilient platform allows "
+                     "for polling, querying and updating of A Proofpoint TRAP deployment. The integration includes a "
+                     "poller and 5 functions which are used to gather results which show information on security "
+                     "incidents in the deployment. The returned results can be used to make customized updates to the "
+                     "Resilient platform, such as updating incidents, artifacts, data tables and so on. The integration "
+                     "can also be used to make changes to a deployment including adding, updating, or removing a member "
+                     "of a list.",
     install_requires=[
         'resilient_circuits>=33.0.0',
         'resilient>=32.0.0',
