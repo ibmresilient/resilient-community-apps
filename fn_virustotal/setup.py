@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_virustotal',
-    version='1.0.2',
+    version='1.0.4',
     license='MIT',
     author='Resilient Labs',
     author_email='resil.labs@gmail.com',
@@ -16,6 +16,7 @@ Files and URLs may require additional time to complete their scans, so a link is
                      """,
     install_requires=[
         'resilient_circuits>=30.0.0',
+        'resilient_lib',
         'virustotal_api',
         'bs4'
     ],

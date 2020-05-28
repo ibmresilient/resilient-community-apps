@@ -4,12 +4,17 @@
 # - or gets a list of all changed integrations based on the TRAVIS_COMMIT_RANGE
 # It then pulls out current version of each integration from its setup.py
 # builds its Dockerfile and pushes it up to the artifactory.
-
+readonly REPO_API_URL='https://quay.io/api/v1/repository'
 # Logs in to repository at given URL with username and passowrd
 # Args: URL, username, password
 function repo_login (){
 	echo "$3" | docker login --password-stdin --username "$2" https://${1}/
 }
+
+# use latest rircuits if not defined. Allows to change it per job with env
+if [ -z $RES_CIRCUITS_VERSION ]; then
+	RES_CIRCUITS_VERSION="36.2.209.dev"
+fi
 
 # Build a container
 # Args: Name and the tags to attach
@@ -17,7 +22,7 @@ function container_build (){
 	argc=$#
 	argv=("$@")
 
-	docker build -t resilient/${1} ./${1}
+	docker build --build-arg RES_CIRCUITS_VERSION=$RES_CIRCUITS_VERSION -t resilient/${1} ./${1}
 	if [ $? -ne 0 ]; then
 		return 1
 	fi
@@ -30,6 +35,19 @@ function container_build (){
 	done
 }
 
+# Function to create a named repository in the ibmresilient org
+# Args: integration name; this will be the name of the repository
+function repo_create(){
+	   request_body="{
+\"repo_kind\": \"image\",
+\"visibility\": \"public\",
+\"repository\": \"$1\",
+\"namespace\": \"$2\",
+\"description\": \"IBM Resilient app for $1\" 
+}"
+	curl -X POST -H 'content-type: application/json' -H "authorization: Bearer ${REPO_CREATE_TOKEN}" --data "$request_body" \
+    $REPO_API_URL
+}
 # Pushes container with a given label
 # Args: label to push
 function container_push (){
@@ -114,8 +132,16 @@ do
 	fi
 	echo "$(echo $integration)'s version is: $integration_version"
 
-	ARTIFACTORY_LABEL=${ARTIFACTORY_URL}/resilient/${integration}:${integration_version}
-	QUAY_LABEL=${QUAY_URL}/${QUAY_ORG}/${integration}:${integration_version}
+	# To get name of the integrations we will extract line name='<name>' from setup.py
+	integration_name=$(grep -o "name[[:space:]]*=[[:space:]]*['\"][a-z0-9\-\_]*['\"]" $setup_file| cut -d '=' -f 2 | tr -d "\"'[:space:]")
+	if [ -z "$integration_name" ]; then
+		echo "Couldn't extract package name from $integration. Make sure it's listed in setup.py."
+		skipped_packages+=($integration)
+		continue
+	fi
+
+	ARTIFACTORY_LABEL=${ARTIFACTORY_URL}/resilient/${integration_name}:${integration_version}
+	QUAY_LABEL=${QUAY_URL}/${QUAY_ORG}/${integration_name}:${integration_version}
 
 	container_build "$integration" "$ARTIFACTORY_LABEL" "$QUAY_LABEL"
 
@@ -131,6 +157,10 @@ do
 		continue
 	fi
 
+	# Before we push a container to quay, 
+	# create the repository first using the REST API 
+	# This will ensure all new repos are public.
+	repo_create "$integration" "$QUAY_ORG"
 	container_push $QUAY_LABEL
 	if [ $? -ne 0 ]; then
 		echo "Failed to push to Quay."

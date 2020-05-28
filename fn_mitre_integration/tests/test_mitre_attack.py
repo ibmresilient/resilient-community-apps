@@ -19,6 +19,9 @@ from mock import patch
 import re
 
 
+MAXIMUM_N_TECHNIQUES_WITHOUT_MITIGATION = 5
+
+
 def url_get(url):
     ret = False
     try:
@@ -96,7 +99,7 @@ class TestMitreTechnique(object):
             yield
 
     def test_getting_tactic_from_technique_works(self):
-        tech = MitreAttackTechnique.get_by_id(self.mitre_attack, "T1213")[0]
+        tech = MitreAttackTechnique.get_by_id(self.mitre_attack, "T1205")[0]
         assert tech.get_tactic(self.mitre_attack) is not None
 
     def test_tech_of_tactic(self):
@@ -306,6 +309,9 @@ class TestMitreGroup(object):
 
 
 class TestMitre(object):
+    """
+    These tests are mostly livetests to confirm that MITRE's schema stays the same
+    """
     mitre_conn = MitreAttackConnection()
 
     @pytest.mark.livetest
@@ -324,26 +330,45 @@ class TestMitre(object):
 
     @pytest.mark.livetest
     def test_get_tech_mitigation(self):
+        """
+        There are some techniques that do not have mitigations.
+        We will test few and if at least one of the first 5 has mitigations we're ok,
+        otherwise we probably need to check if there's an error.
+        """
         techs = MitreAttackTechnique.get_all(self.mitre_conn)
         assert len(techs)
         try:
-            #
-            #   There are more than 200 techs. Try first 5 only
-            #
             count = 0
             for tech in techs:
                 id = tech.id
                 assert(id)
                 mitigation = tech.get_mitigations(self.mitre_conn)
-                assert mitigation
+
                 count += 1
-                if count > 2:
+
+                if len(mitigation):
+                    assert MitreAttackMitigation.get_by_name(self.mitre_conn, mitigation[0].name)
                     break
-                # Test getting mitigation using name
-                mitigation = tech.get_mitigations(self.mitre_conn)
-                assert mitigation
+                
+                if count > MAXIMUM_N_TECHNIQUES_WITHOUT_MITIGATION:
+                    assert False
         except Exception as e:
             assert(False)
+
+    @pytest.mark.livetest
+    def test_get_representative_techniques(self):
+        t = MitreAttackTechnique.get(self.mitre_conn, id="T1453")  # From Mobile collection
+        assert t
+        assert [x.get_tactic(self.mitre_conn) for x in t]
+
+        t = MitreAttackTechnique.get(self.mitre_conn, id="T1155")  # From Enterprise
+        assert t
+        assert [x.get_tactic(self.mitre_conn) for x in t]
+
+        t = MitreAttackTechnique.get(self.mitre_conn, id="T1245")  # From Pre-Attack
+        assert t
+        assert [x.get_tactic(self.mitre_conn) for x in t]
+
 
     def test_mitre_attack_util(self):
         data_mocker = MitreQueryMocker()

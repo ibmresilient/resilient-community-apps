@@ -20,7 +20,6 @@
 
 * This package implements different ways to search the CVE database such as:  
 	* Browse product and vendor categories
-	* Search CVE's by product and vendor
 	* Search by specific CVE ID  
 	* Retrieve last 30 CVE's  
 	
@@ -104,10 +103,10 @@ This table will contain the results of the CVE searches.
 |Input Name |Type  |Example|Info|
 |---|---|---|---|---|
 |cve_id|String  |CVE-2008-3949 |Specific vulnerability ID |
-|cve_vendor|String| microsoft|a vendor name to search for cve |
-|cve_product|String|excel|Name of the Product to Search in CVE Database|
-|cve_published_date_from|Date Picker|03/01/2019|Select CVE Published Date|
-|cve_published_date_to|Date Picker|03/01/2019|End date range to search cve data|
+|cve_vendor|String| microsoft|a vendor name to search for cve. Unsupported as of 1.0.1 |
+|cve_product|String|excel|Name of the Product to Search in CVE Database. Unsupported as of 1.0.1|
+|cve_published_date_from|Date Picker|03/01/2019|Select CVE Published Date. Unsupported as of 1.0.1|
+|cve_published_date_to|Date Picker|03/01/2019|End date range to search cve data. Unsupported as of 1.0.1|
 
 ### CVE Browse Function
 
@@ -251,7 +250,7 @@ incident.addNote(browse_rich_text_final)
 | Rule Name | Object Type | Workflow Triggered |Activity Fields|  
 | --------- | :---------: | ------------------ |---------------|  
 | Example: CVE Browse | Incident | Example: CVE Browse |CVE Browse Criteria values : Browse, CVE Vendor|
-| Example: CVE Search | Incident | Example: CVE Search |CVE Search Criteria |values : `Search`, `Specific CVE ID`, `Last 30 CVES`, `CVE ID`, `CVE Vendor`, `CVE Product`, `CVE Published Date From`, `CVE Published Date To`|
+| Example: CVE Search | Incident | Example: CVE Search |CVE Search Criteria |values : `Search`, `Specific CVE ID`, `Last 30 CVES`, `CVE ID`|
 
  **CVE functions perform data searches as follows**  
    
@@ -260,14 +259,5 @@ incident.addNote(browse_rich_text_final)
     * If a vendor name is supplied, all the products associated with the vendor are returned.
       
  2. Search: 
-    * If a vendor name is supplied, all the vulnerabilities associated with the  
-        given vendor are returned up to the given date range and   
-        `max_results_display` flag.  
-    * If a product name is supplied, all the vulnerabilities associated with the
-        given product are returned up to the given date range and   
-        `max_results_display` flag.  
-    * If vendor and product name are supplied, all the vulnerabilities associated with the  
-        given vendor's product are returned up to the given date range and   
-        `max_results_display` flag.  
     * If a CVE ID is supplied, data related to specific CVE ID is returned.   
     * If no parameters are supplied, the last 30 latest vulnerabilities from the database are returned up to the `max_results_display` flag.  

@@ -9,9 +9,14 @@ import splunklib.client as splunk_client
 import splunklib.results as splunk_results
 import time
 import requests
-import urllib
 from xml.dom import minidom
 import json
+import sys
+
+if sys.version_info.major < 3:
+    import urllib as urlparse
+else:
+    import urllib.parse as urlparse
 
 import logging
 LOG = logging.getLogger(__name__)
@@ -166,7 +171,11 @@ class SplunkClient(object):
                 time.sleep(self.polling_interval)
 
         if splunk_job["dispatchState"] != "DONE" or splunk_job["isFailed"] == True:
-            raise SearchFailure(splunk_job.name, splunk_job["dispatchState"] + u", " + unicode(splunk_job["messages"]))
+            if sys.version_info.major < 3:
+                raise SearchFailure(splunk_job.name, splunk_job["dispatchState"] + u", " + unicode(splunk_job["messages"]))
+            else:
+                # strings in python3 are unicode
+                raise SearchFailure(splunk_job.name, splunk_job["dispatchState"] + u", " + str(splunk_job["messages"]))
 
         reader = splunk_results.ResultsReader(splunk_job.results())
         result = {"events": [row for row in reader]}
@@ -203,8 +212,8 @@ class SplunkUtils(object):
         try:
             resp = requests.post(url,
                                  headers=headers,
-                                 data=urllib.urlencode({"username": username,
-                                                        "password": password}),
+                                 data=urlparse.urlencode({"username": username,
+                                                              "password": password}),
                                  verify=verify)
             #
             # This one we only allows 200. Otherwise login failed
