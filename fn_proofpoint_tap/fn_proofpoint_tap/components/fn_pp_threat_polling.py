@@ -460,7 +460,7 @@ class PP_ThreatPolling(ResilientComponent):
         for artifact_type, pp_keys in ARTIFACT_TYPES.items():
             for pp_key in pp_keys:
                 artifact_id = data.get(pp_key)
-                if artifact_id is not None:
+                if artifact_id:
                     log.debug(u'artifact type {} ({}) ID {}'.format(artifact_type, pp_key, artifact_id))
                     artifact_payloads[artifact_id] = artifact_type
 

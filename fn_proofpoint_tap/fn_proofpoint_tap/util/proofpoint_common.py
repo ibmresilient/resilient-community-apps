@@ -10,7 +10,7 @@ import os
 import jinja2
 from requests.auth import HTTPBasicAuth
 from requests.exceptions import HTTPError
-from six import string_types
+from six import string_types, text_type
 from resilient_lib.components.integration_errors import IntegrationError
 from pkg_resources import Requirement, resource_filename
 from resilient_circuits import template_functions
@@ -39,7 +39,7 @@ def get_threat_list(rc, options, lastupdate, bundle):
     basic_auth = HTTPBasicAuth(username, password)
     url = '{0}/siem/all?format=JSON'.format(base_url)  # /v2/siem/all Fetch events for all clicks and messages relating to known threats within the specified time period
 
-    if isinstance(lastupdate, string_types):
+    if isinstance(lastupdate, string_types) or isinstance(lastupdate, text_type):
         url += '&sinceTime={}'.format(lastupdate)
     else:
         if lastupdate is None:
