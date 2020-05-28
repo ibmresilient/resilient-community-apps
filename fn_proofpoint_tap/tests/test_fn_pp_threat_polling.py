@@ -38,6 +38,9 @@ THREATS_INFO_MAP3_RESULT = {'threatID3':'Proofpoint Threat ID', 'campaignID3':'P
 THREATS_INFO_MAP4 = {'threatsInfoMap': [{}]}
 THREATS_INFO_MAP4_RESULT = {}
 
+THREATS_INFO_MAP5 = {'threatsInfoMap': [{'campaignID': '', 'threatID': u''}]}
+THREATS_INFO_MAP5_RESULT = {}
+
 class BlankClass(object):
     def __init__(self, opts):
         pass
@@ -132,7 +135,8 @@ class TestPPThreatPolling(object):
         (THREATS_INFO_MAP1, THREATS_INFO_MAP1_RESULT),
         (THREATS_INFO_MAP2, THREATS_INFO_MAP2_RESULT),
         (THREATS_INFO_MAP3, THREATS_INFO_MAP3_RESULT),
-        (THREATS_INFO_MAP4, THREATS_INFO_MAP4_RESULT)
+        (THREATS_INFO_MAP4, THREATS_INFO_MAP4_RESULT),
+        (THREATS_INFO_MAP5, THREATS_INFO_MAP5_RESULT)
     ])
     def test_build_artifacts(self, threatsInfoMap, results, monkeypatch):
         poller = self.get_pp_threat_polling(monkeypatch)
