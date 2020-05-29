@@ -515,15 +515,19 @@ class Resilient(object):
                 LOG.error("Unable to create attachment for file: %s", payload['name'])
                 LOG.error(payload)
                 LOG.exception(err)
-                response = {}
+                response = None
 
         # create sync row
-        new_type_id = response.get('id', None)
-        self.dbsync.create_sync_row(orig_org_id, orig_inc_id, type_name, orig_type_id,
-                                    sync_inc_id, new_type_id, 'active')
+        if response:
+            new_type_id = response.get('id', None)
+            self.dbsync.create_sync_row(orig_org_id, orig_inc_id, type_name, orig_type_id,
+                                        sync_inc_id, new_type_id, 'active')
 
-        LOG.info('added %s:%s->%s to %s:%s->%s', type_name, orig_inc_id, orig_type_id,
-                 self.rest_client.org_id, sync_inc_id, new_type_id)
+            LOG.info('added %s:%s->%s to %s:%s->%s', type_name, orig_inc_id, orig_type_id,
+                     self.rest_client.org_id, sync_inc_id, new_type_id)
+        else:
+            LOG.error('error adding %s:%s->%s to %s:%s', type_name, orig_inc_id, orig_type_id,
+            self.rest_client.org_id, sync_inc_id)
 
     def write_artifact_file(self, file_name, datastream, incident_id, payload):
         """
@@ -548,23 +552,29 @@ class Resilient(object):
                 temp_file.write(attachment)
                 temp_file.close()
 
+                # preserve the actual name of the attachment
+                file_name_link = os.path.join(os.path.dirname(temp_file.name), file_name)
+                os.link(temp_file.name, file_name_link)
+
                 # Create a new artifact attachment by calling resilient REST API
                 uri, _ = get_url(incident_id, "artifact")
                 artifact_uri = "{}/files".format(uri)
 
                 new_attachment = self.rest_client.post_artifact_file(artifact_uri,
                                                                      payload.get("type", None),
-                                                                     temp_file.name,
+                                                                     file_name_link,
                                                                      description=payload.get("description", None),
                                                                      value=file_name,
                                                                      mimetype=content_type)
             except Exception as err:
+                LOG.exception(err)
                 LOG.error("Unable to create attachment for file: %s", file_name)
                 LOG.error(artifact_uri)
                 LOG.error(payload)
-                LOG.exception(err)
             finally:
                 os.unlink(temp_file.name)
+                if os.path.exists(file_name_link):
+                    os.unlink(file_name_link)
 
         if isinstance(new_attachment, list):
             new_attachment = new_attachment[0]
