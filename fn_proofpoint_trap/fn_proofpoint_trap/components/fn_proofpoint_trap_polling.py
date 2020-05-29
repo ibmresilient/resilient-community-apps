@@ -381,15 +381,16 @@ ABUSE_DISPOSITION = {
     'Confirmed': True
 }
 
-# API Field is severity_code @ Resilient
+# API Field is Severity @ Resilient
 # API Field is  incident_field_values where name: Severity @ TRAP
 INCIDENT_SEVERITY = {
-    # Resilient has no informational so temporarily filter down to Low
-    'Informational': 100,
-    'Low': 100,
-    'Medium': 101,
-    'High': 102
-
+    # Resilient has no 'Informational' so temporarily filter down to 'Low'
+    'Informational': 'Low',
+    'Low': 'Low',
+    'Medium': 'Medium',
+    'High': 'High',
+     # Resilient has no 'Critical' so temporarily filter down to 'High'
+    'Critical': 'High'
 }
 
 # Custom Incident Fields
@@ -726,7 +727,7 @@ class PPTRIncidentPolling(ResilientComponent):
                 r_fields['incident_type_ids'].append(CLASS2TYPEID.get(field['value'], 22))
             elif field['name'] == 'Severity':
                 # Get Incident Severity. Default to Low
-                r_fields['severity_code'] = INCIDENT_SEVERITY.get(field['value'], 100)
+                r_fields['severity_code'] = INCIDENT_SEVERITY.get(field['value'], "Low")
             elif field['name'] == 'Abuse Disposition':
                 # Get Disposition, Default to None (unconfirmed)
                 r_fields['confirmed'] = ABUSE_DISPOSITION.get(field['value'], None)
