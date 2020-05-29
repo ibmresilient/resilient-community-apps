@@ -99,7 +99,7 @@ class Resilient(object):
             LOG.warning("Not found to delete: %s:%s->%s", orig_inc_id, mapped_type_name, orig_type_id)
             return
 
-        uri, _ = get_url(sync_task_id or sync_inc_id, mapped_type_name, False)
+        uri, _ = get_url(sync_task_id or sync_inc_id, mapped_type_name, True)
         # fill in object id for delete
         uri = "{}/{}".format(uri, sync_type_id)
 
