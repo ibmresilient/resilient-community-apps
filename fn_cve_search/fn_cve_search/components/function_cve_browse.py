@@ -15,6 +15,7 @@ class FunctionComponent(ResilientComponent):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         self.options = opts.get("fn_cve_search", {})
+        self.opts = opts
 
         # Getting CVE DataBase URL from app.config file
         self.CVE_BASE_URL = self.options.get('cve_base_url') + '/{}'
@@ -30,14 +31,14 @@ class FunctionComponent(ResilientComponent):
             browse_api = '{}/{}'.format(self.CVE_BASE_URL.format('browse'), vendor_name)
         else:
             browse_api = self.CVE_BASE_URL.format('browse')
-        return make_rest_api_get_call(browse_api, api_call='browse')
+        return make_rest_api_get_call(browse_api, self.opts, self.options, api_call='browse')
 
     def _cve_db_information(self):
         """
         :return:more information about the current databases in use and when it was updated
         """
         db_info_url = '{}'.format(self.CVE_BASE_URL.format('dbInfo'))
-        return make_rest_api_get_call(db_info_url, api_call='db')
+        return make_rest_api_get_call(db_info_url, self.opts, self.options, api_call='db')
 
     def _parse_browse_results(self, api_data):
         """
@@ -111,4 +112,3 @@ class FunctionComponent(ResilientComponent):
             yield FunctionResult(result_data_dict)
         except Exception as er:
             yield FunctionError(er)
-        

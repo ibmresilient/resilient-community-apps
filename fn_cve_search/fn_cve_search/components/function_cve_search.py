@@ -15,6 +15,7 @@ class FunctionComponent(ResilientComponent):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         self.options = opts.get("fn_cve_search", {})
+        self.opts = opts
 
         # Getting CVE DataBase URL from app.config file
         self.CVE_BASE_URL = self.options.get('cve_base_url') + '/{}'
@@ -31,7 +32,7 @@ class FunctionComponent(ResilientComponent):
             search_api = '{}/{}'.format(self.CVE_BASE_URL.format('search'), vendor_name)
         elif vendor_name is None and product is not None:
             search_api = '{}/{}'.format(self.CVE_BASE_URL.format('search'), product)
-        return make_rest_api_get_call(search_api, api_call='search')
+        return make_rest_api_get_call(search_api, self.opts, self.options, api_call='search')
 
     def _get_specific_cve_data(self, cve_id=None):
         """
@@ -40,7 +41,7 @@ class FunctionComponent(ResilientComponent):
         """
         if cve_id:
             specific_cve_url = '{}/{}'.format(self.CVE_BASE_URL.format('cve'), cve_id)
-            return make_rest_api_get_call(specific_cve_url, api_call='cve')
+            return make_rest_api_get_call(specific_cve_url, self.opts, self.options, api_call='cve')
         else:
             raise FunctionError("Please Specify the CVE ID to search for Vulnerability")
 
@@ -49,7 +50,7 @@ class FunctionComponent(ResilientComponent):
         :return:a JSON of the last 30 CVEs including CAPEC, CWE and CPE expansions
         """
         last_url = '{}'.format(self.CVE_BASE_URL.format('last'))
-        return make_rest_api_get_call(last_url, api_call='last')
+        return make_rest_api_get_call(last_url, self.opts, self.options, api_call='last')
 
     def _parse_search_results(self, api_data, cve_pub_date_from, cve_pub_date_to, max_res_counter):
         """

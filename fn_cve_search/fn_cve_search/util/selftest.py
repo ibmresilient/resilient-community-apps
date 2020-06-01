@@ -6,11 +6,11 @@
 """
 
 import logging
-import requests
+from fn_cve_search.util.cve import make_rest_api_get_call
+
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
 log.addHandler(logging.StreamHandler())
-
 
 def selftest_function(opts):
     """
@@ -21,13 +21,13 @@ def selftest_function(opts):
     options = opts.get("fn_cve_search", {})
 
     try:
-        _response = requests.get(url=options.get('cve_base_url'))
-        if _response.status_code == 200:
-            log.debug("Common vulnerability exposures URL: {}".format(options.get('cve_base_url')))
-            log.info("Successfully Established connection to CVE Database : {}".format(_response.status_code))
-            return {"state": "Success"}
-        else:
-            raise requests.ConnectionError("The Status code {}".format(_response.status_code))
+        url = "/".join((options.get('cve_base_url'), 'last'))
+        _response = make_rest_api_get_call(url, opts, options)
+
+        return {"state": "Success"}
     except Exception as e:
         log.info("Failed Connection to CVE Database Error - {}".format(e))
-        return {"state": "Failed"}
+        return {
+            "state": "Failed",
+            "reason": str(e)
+        }
