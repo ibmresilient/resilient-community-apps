@@ -15,5 +15,8 @@ def config_section_data():
 max_results_display = 50
 # Base URL of Common Vulnerability Exposures Data Base.
 cve_base_url = https://cve.circl.lu/api
+# add proxies here or use [integrations] (see resilient-lib)
+#http_proxy=
+#https_proxy=
 """
     return config_data

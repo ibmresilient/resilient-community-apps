@@ -20,7 +20,8 @@ setup(
                          """,
 
     install_requires=[
-        'resilient_circuits>=30.0.0'
+        'resilient_circuits>=30.0.0',
+        'resilient_lib'
     ],
     packages=find_packages(),
     include_package_data=True,
