@@ -9,6 +9,7 @@ To update the configuration file with default parameters:
 ```
     resilient-circuits config -u
 ```
+Note: For the `misp_url` parameter in the app.config file, the https protocol should be specified.
 
 To run the service:
 ```
@@ -34,6 +35,7 @@ To delete:
 ```
 sudo resutil threatservicedel -name MISP
 ```
+
 Map of supported Threat Service artifact types to Misp types:
 
   | Resilient artifact types | Misp types |
