@@ -1,7 +1,17 @@
 # MISP Threat Searcher
 
+## Release Notes
+<!--
+  Specify all changes in this release. Do not remove the release 
+  notes of a previous release
+-->
+### v1.1.1
+* Fix url concatenation issue.
+
+## Overview
 This implements a custom threat service for the [MISP](http://www.misp-project.org/) Threat Intelligence Platform.
 
+## Installation
 Install this package with 'pip', or `python setup.py install`.
 
 Update your `app.config` file with parameters for the MISP connection.
@@ -29,13 +39,13 @@ To test the connection:
 ```
 sudo resutil threatservicetest -name MISP
 ```
-
+## Uninstall
 To delete:
 
 ```
 sudo resutil threatservicedel -name MISP
 ```
-
+## Supported artifact types 
 Map of supported Threat Service artifact types to Misp types:
 
   | Resilient artifact types | Misp types |
