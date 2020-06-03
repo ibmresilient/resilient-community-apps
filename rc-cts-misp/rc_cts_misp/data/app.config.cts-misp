@@ -13,7 +13,9 @@ misp_url=https://misp
 misp_key=<MISP API Key>
 
 # Verify the MISP server's TLS certificate
-# misp_verifycert=False
+# Can be True or False (to check ot not the validity of the certificate)
+# or a path to a CA bundle in the case of self-signed certificate.
+# misp_verifycert=True|False|<Path_to_CA_bundle>
 
 # Optional: tags to filter
 # misp_tag=tlp:white,tlp:green
