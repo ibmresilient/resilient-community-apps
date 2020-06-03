@@ -564,9 +564,7 @@ class PPTRIncidentPolling(ResilientComponent):
         :return iname: String for Incident Name to be used in Search / Incident Creation
         """
         # Fill event summary when blank
-        i_summary = incident.get('summary', '')
-        if i_summary == '':
-            i_summary = 'No Summary Provided'
+        i_summary = incident.get('summary', 'No Summary Provided')
 
         iname = "Proofpoint TRAP Incident: ID {} - {}".format(incident['id'], i_summary)
         LOG.debug("Incident Label Assembled: %s", iname)
