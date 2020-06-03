@@ -29,6 +29,9 @@
   Specify all changes in this release. Do not remove the release 
   notes of a previous release
 -->
+### v1.0.4
+* Fixed bug where incident summary is unavailable.
+
 ### v1.0.3
 * Fixed bug with Resilient incident severity codes.
 

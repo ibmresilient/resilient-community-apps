@@ -483,7 +483,8 @@ class PPTRIncidentPolling(ResilientComponent):
             try:
                 ### BEGIN Processing incidents
                 for incident in incident_list:
-                    LOG.info("Proofpoint TRAP Incident ID %d discovered: %s", incident['id'], incident['summary'])
+                    LOG.info("Proofpoint TRAP Incident ID %d discovered: %s", incident['id'],
+                             incident.get('summary', 'No Summary Provided'))
                     if len(self._find_resilient_incident_for_req(incident['id'], CUSTOM_FIELDS[0])) == 0:
                         # Assemble Data table for incident
                         i_table = self.make_data_table(incident['events'])
@@ -563,7 +564,7 @@ class PPTRIncidentPolling(ResilientComponent):
         :return iname: String for Incident Name to be used in Search / Incident Creation
         """
         # Fill event summary when blank
-        i_summary = incident['summary']
+        i_summary = incident.get('summary', '')
         if i_summary == '':
             i_summary = 'No Summary Provided'
 
