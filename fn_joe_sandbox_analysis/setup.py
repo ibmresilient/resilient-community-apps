@@ -13,7 +13,7 @@ setup(
     long_description="Resilient Circuits Joe Sandbox Function",
     install_requires=[
         'resilient_circuits>=30.0.0',
-        'jbxapi'
+        'jbxapi==2.10.1'
     ],
     packages=find_packages(),
     include_package_data=True,
