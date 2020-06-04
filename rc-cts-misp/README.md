@@ -6,7 +6,7 @@
   notes of a previous release
 -->
 ### v1.1.1
-* Fix url concatenation issue.
+* Fix backward compatibility issues.
 
 ## Overview
 This implements a custom threat service for the [MISP](http://www.misp-project.org/) Threat Intelligence Platform.
