@@ -437,6 +437,7 @@ class PPTRIncidentPolling(ResilientComponent):
             startup_interval = int(startup_interval)
         self.lastupdate = startup_interval
         polling_interval = int(options.get("polling_interval", 0))
+        self.state = options.get('state', None)
         # Use a timeout value of polling_interval (in secs) + 10 secs to wait for all threads to end.
         thread_timeout = (polling_interval * 60) + 10
 
@@ -474,7 +475,7 @@ class PPTRIncidentPolling(ResilientComponent):
 
         while not self.stop_thread:
 
-            incident_list = pptr.get_incidents(self.lastupdate)
+            incident_list = pptr.get_incidents(self.lastupdate, self.state)
 
             if 'error' in incident_list:
                 LOG.warning(incident_list.get('error'))

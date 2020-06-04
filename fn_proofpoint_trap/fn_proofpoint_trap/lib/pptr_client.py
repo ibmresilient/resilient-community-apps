@@ -96,10 +96,11 @@ class PPTRClient():
         self._req = RequestsCommon(options, function_options)
         self._headers = {"Authorization": "{0}".format(self.api_key)}
 
-    def get_incidents(self, lastupdate=None):
-        """Get incidents in TRAP. The amount of incidends returned can be filtered by parameter lastupdate.
+    def get_incidents(self, lastupdate=None, state=None):
+        """Get incidents in TRAP. The amount of incidents returned can be filtered by parameter lastupdate.
 
         :param lastupdate: - Minutes since last update
+        :param state: - Filter incidents by state.
         :return Result in json format.
         """
         url = "{}{}".format(self.base_url, self._endpoints["incidents"])
@@ -110,6 +111,11 @@ class PPTRClient():
             if lastupdate is None:
                 # first run, fetch all
                 LOG.info("First Run in progress - this may take a while.")
+
+        if state:
+            # Filter by incident state.
+            params['state'] = state.lower()
+
         try:
             res = self._req.execute_call_v2('get', url, callback=incidents_exception_handler, headers=self._headers,
                                             params=params, verify=self.bundle, proxies=self._req.get_proxies())
