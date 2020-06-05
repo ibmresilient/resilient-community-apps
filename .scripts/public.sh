@@ -21,6 +21,7 @@ done <<EOM
 .github
 .gitignore
 .icons
+.scripts/mirror-containers
 .travis.yml
 CONTRIBUTING.md
 LICENSE
