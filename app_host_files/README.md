@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Starting with Resilient v36.2, IBM Resilient now supports container-based
+Starting with Resilient v37, IBM Resilient now supports container-based
 deployment of apps using an environment called App Host that pairs with your
 Resilient organization to run apps.
 
@@ -48,7 +48,7 @@ For all apps, you will need to change the line `ARG APPLICATION=<app_name>` to m
 app. Note that the build process will use the `dist/<app_name>-<version>.tar.gz` source distribution produced by `python setup.py sdist`.
 
 
-It is also recommended that for all apps, change `ARG RES_CIRCUITS_VERSION=36.2` to match
+It is also recommended that for all apps, change `ARG RES_CIRCUITS_VERSION=37` to match
 the latest version of `resilient-circuits` found on [PyPI](https://pypi.org/project/resilient-circuits/).
 
 
@@ -126,7 +126,7 @@ See the [IBM AppExchange](https://exchange.xforce.ibmcloud.com/hub?br=Resilient)
 
 ## resilient-sdk
 
-Introduced with Resilient v36.2 is [resilient-sdk](https://pypi.org/project/resilient-sdk/). This
+Introduced with Resilient v37 is [resilient-sdk](https://pypi.org/project/resilient-sdk/). This
 tool is needed to build and package a `.zip` file that App Host will leverage to install your app. To do this,
 install the SDK from PyPi and run `resilient-sdk package -p /path/to/your/app` at the command line.
 The resulting .zip file is placed in the app's `dist/` folder. Import this file into Resilient. Your accompanying
