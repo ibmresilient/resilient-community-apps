@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 """Function implementation"""
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_pagerduty.lib.resilient_common import validateFields, clean_html, build_incident_url, build_resilient_url, unescape
+from resilient_lib import validate_fields, clean_html, build_incident_url, build_resilient_url, unescape
 from .pd_common import create_incident
 
 
@@ -17,7 +17,7 @@ class FunctionComponent(ResilientComponent):
         super(FunctionComponent, self).__init__(opts)
         self.res_options = opts.get("resilient", {})
         self.options = opts.get("pagerduty", {})
-        validateFields(['api_token', 'from_email'], self.options)
+        validate_fields(['api_token', 'from_email'], self.options)
         self.log = logging.getLogger(__name__)
 
 
@@ -25,7 +25,7 @@ class FunctionComponent(ResilientComponent):
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
         self.options = opts.get("pagerduty", {})
-        validateFields(['api_token', 'from_email'], self.options)
+        validate_fields(['api_token', 'from_email'], self.options)
         self.res_options = opts.get("resilient", {})
 
     @function("pagerduty_create_incident")
@@ -33,12 +33,12 @@ class FunctionComponent(ResilientComponent):
         """Function: create an incident"""
         try:
             # validate required fields
-            validateFields(['incidentID', 'pd_title', 'pd_service', 'pd_escalation_policy'], kwargs)
+            validate_fields(['incidentID', 'pd_title', 'pd_service', 'pd_escalation_policy'], kwargs)
 
             createDict = self._buildIncidentPayload(kwargs, self.options, self.res_options)
             #
             yield StatusMessage("starting...")
-            resp = create_incident(self.log, createDict)
+            resp = create_incident(createDict)
             yield StatusMessage("pagerduty incident created")
 
             # Produce a FunctionResult with the results

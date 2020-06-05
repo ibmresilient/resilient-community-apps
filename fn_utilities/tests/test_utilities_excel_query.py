@@ -14,7 +14,7 @@ import pytest
 from fn_utilities.components.utilities_excel_query import WorksheetData
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult, FunctionError
-from mock_attachment import AttachmentMock
+from tests.mock_attachment import AttachmentMock
 import json
 import os
 
@@ -27,39 +27,6 @@ config_data = get_config_data(PACKAGE_NAME)
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
 resilient_mock = AttachmentMock
 
-'''
-sort_helper(): Defines how .sort() will compare different data types in obj[elem]
-    - NoneTypes and empty lists will be sorted as ""
-    - Lists contained within obj[elem] will be sorted in obj[elem] based on the first element in the list
-        (if first value is None, "" gets returned)
-    - Floats and ints will be sorted based on value from being converted to strings
-        (Python3 does not accept comparison between float/int and string)
-'''
-def sort_helper(x):
-    # Handle NoneTypes and empty lists and lists with None at index 0
-    if x is None or (isinstance(x, list) and x[0] is None):
-        return ""
-    # Handle nested lists that are not empty and do not have None at index 0
-    elif isinstance(x, list):
-        # floats and ints are returned as strings
-        if isinstance(x[0], float) or isinstance(x[0], int):
-            return str(x[0])
-        # other types are returned as is
-        else:
-            return x[0]
-    # floats and ints returned as strings
-    elif isinstance(x, float) or isinstance(x, int):
-        return str(x)
-    # other types are returned as is
-    return x
-
-
-def sort_json_arrays(obj):
-    for elem in obj:
-        if isinstance(obj[elem], list):
-            obj[elem].sort(key=sort_helper)
-        if isinstance(obj[elem], dict):
-            sort_json_arrays(obj[elem])
 
 def call_utilities_excel_query_function(circuits, function_params, timeout=10):
     # Fire a message to the function
@@ -166,9 +133,7 @@ class TestWorksheetData:
         with open(res_path, 'r') as file:
             expected = file.read()
 
-        expected = sort_json_arrays(json.loads(expected.strip()))
-        actual = sort_json_arrays(json.loads(json.dumps(wb.result, default=WorksheetData.serializer)))
-        assert  expected == actual
+        assert json.loads(expected.strip()) == json.loads(json.dumps(wb.result, default=WorksheetData.serializer))
 
     @pytest.mark.parametrize("path, ranges, defined_names, expected_result_path", [
         ("data/excel_query/budget.xlsx", {}, "test2", "data/excel_query/test_named_ranges.dat"),
@@ -204,9 +169,7 @@ class TestWorksheetData:
             expected = file.read()
         # comparing objects is a work around for the difference in iteration through dictionaries in Python 2 and 3
         # which creates different json dumps
-        expected = sort_json_arrays(json.loads(expected.strip()))
-        actual = sort_json_arrays(json.loads(json.dumps(wb.result, default=WorksheetData.serializer)))
-        assert expected == actual
+        assert json.loads(expected.strip()) == json.loads(json.dumps(wb.result, default=WorksheetData.serializer))
 
     @pytest.mark.parametrize("path, ranges, defined_names, expected_result_path", [
         ("data/excel_query/budget.xlsx", "'JAN 2015'!A3:A3,", "", "data/excel_query/test_cell_empty.dat"),
@@ -227,9 +190,7 @@ class TestWorksheetData:
         with open(res_path, 'r') as file:
             expected = file.read()
 
-        expected = sort_json_arrays(json.loads(expected.strip()))
-        actual = sort_json_arrays(json.loads(json.dumps(wb.result, default=WorksheetData.serializer)))
-        assert expected == actual
+        assert json.loads(expected.strip()) == json.loads(json.dumps(wb.result, default=WorksheetData.serializer))
 
     @pytest.mark.parametrize("path, ranges, defined_names, expected_result_path", [
         ("data/excel_query/budget.xlsx", "'JAN 2015'!A3:A3,", "", "data/excel_query/test_cell_empty.dat"),
@@ -247,9 +208,7 @@ class TestWorksheetData:
         with open(res_path, 'r') as file:
             expected = file.read()
 
-        expected = sort_json_arrays(json.loads(expected.strip()))
-        actual = sort_json_arrays(json.loads(json.dumps(wb.result, default=WorksheetData.serializer)))
-        assert expected == actual
+        assert json.loads(expected.strip()) == json.loads(json.dumps(wb.result, default=WorksheetData.serializer))
 
     @pytest.mark.parametrize("path, ranges, defined_names, expected_result_path", [
         ("data/excel_query/budget.xlsx", "'JAN 2015'!A3, 'Sheet1'!A1:A1",
@@ -271,9 +230,6 @@ class TestWorksheetData:
         # are the same, but in different order
         expected["sheets"]["_keys"].sort()
         actual["sheets"]["_keys"].sort()
-
-        expected = sort_json_arrays(expected)
-        actual = sort_json_arrays(actual)
         assert expected == actual
 
     @pytest.mark.parametrize("path, ranges, defined_names, expected_result_path", [
@@ -292,9 +248,7 @@ class TestWorksheetData:
         with open(res_path, 'r') as file:
             expected = file.read()
 
-        expected = sort_json_arrays(json.loads(expected.strip()))
-        actual = sort_json_arrays(json.loads(json.dumps(wb.result, default=WorksheetData.serializer)))
-        assert expected == actual
+        assert json.loads(expected.strip()) == json.loads(json.dumps(wb.result, default=WorksheetData.serializer))
 
     @pytest.mark.parametrize("path, ranges, defined_names, expected_result_path", [
         ("data/excel_query/budget.xlsx", "'JANUA 2015'!A3:A3,", "", "data/excel_query/test_cell_empty.dat"),

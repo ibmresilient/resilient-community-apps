@@ -42,16 +42,15 @@ class TestUmbrellaIpAsInfo:
         assert func is not None
 
     @patch('investigate.Investigate.get', side_effect=mocked_response)
-    @pytest.mark.parametrize("umbinv_ipaddr, umbinv_asn", [
-        ("93.184.216.119", None)
+    @pytest.mark.parametrize("umbinv_resource", [
+        ("93.184.216.119")
     ])
-    def test_umbrella_ip_as_info_ip(self, mock_get, circuits_app, umbinv_ipaddr, umbinv_asn):
+    def test_umbrella_ip_as_info_ip(self, mock_get, circuits_app, umbinv_resource):
         """ Test ip using mocked response. """
         keys = ["description", "cidr", "ir", "asn", "creation_date"]
 
         function_params = { 
-            "umbinv_ipaddr": umbinv_ipaddr,
-            "umbinv_asn": umbinv_asn
+            "umbinv_resource": umbinv_resource
         }
         results = call_umbrella_ip_as_info_function(circuits_app, function_params)
         as_for_ip = results["as_for_ip"]
@@ -59,17 +58,16 @@ class TestUmbrellaIpAsInfo:
             assert_keys_in(as_ip, *keys)
 
     @patch('investigate.Investigate.get', side_effect=mocked_response)
-    @pytest.mark.parametrize("umbinv_ipaddr, umbinv_asn", [
-        (None, 12345)
+    @pytest.mark.parametrize("umbinv_resource", [
+        ("12345")
     ])
 
-    def test_umbrella_ip_as_info(self, mock_get, circuits_app, umbinv_ipaddr, umbinv_asn):
+    def test_umbrella_ip_as_info(self, mock_get, circuits_app, umbinv_resource):
         """ Test asn using mocked response. """
         keys = ["cidr", "geo"]
 
         function_params = {
-            "umbinv_ipaddr": umbinv_ipaddr,
-            "umbinv_asn": umbinv_asn
+            "umbinv_resource": umbinv_resource
         }
         results = call_umbrella_ip_as_info_function(circuits_app, function_params)
         prefixes_for_asn = results["prefixes_for_asn"]

@@ -19,7 +19,7 @@ def snake_to_camel(word):
 
 setup(
     name='fn_utilities',
-    version='1.0.13',
+    version='1.0.15',
     license='MIT',
     author='IBM Resilient',
     author_email='support@resilientsystems.com',
@@ -33,7 +33,7 @@ setup(
     install_requires=[
         'resilient_circuits>=30.0.0',
         'resilient-lib>=34.0.0',
-        'openpyxl<=2.5.14',
+        'openpyxl>=2.5.3',
         'pyOpenSSL>=18.0.0',
         'cryptography>=2.3',
         'pywinrm>=0.3.0',

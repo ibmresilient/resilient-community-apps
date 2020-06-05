@@ -29,6 +29,10 @@
   Specify all changes in this release. Do not remove the release 
   notes of a previous release
 -->
+
+### v1.0.2
+* Fix bug in workflow 'Proofpoint TRAP Update List Member'.
+
 ### v1.0.1
 * Fix url concatenation issue.
 

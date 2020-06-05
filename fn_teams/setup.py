@@ -19,7 +19,7 @@ def snake_to_camel(word):
 
 setup(
     name='fn_teams',
-    version='1.0.1',
+    version='1.0.2',
     license='MIT License',
     author='Resilient Labs',
     author_email='resil.labs@gmail.com',

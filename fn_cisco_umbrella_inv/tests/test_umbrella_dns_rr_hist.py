@@ -46,20 +46,21 @@ class TestUmbrellaDnsRrHist:
         assert func is not None
 
     @patch('investigate.Investigate.get', side_effect=mocked_response)
-    @pytest.mark.parametrize("umbinv_resource, umbinv_resource_type, umbinv_dns_type", [
-        ("93.184.216.119", 'ip_address', 'A')
+    @pytest.mark.parametrize("umbinv_resource, umbinv_dns_type, incident_id, artifact_type", [
+        ("93.184.216.119", 'A', 1, 'ip_address',)
     ])
-    def test_dns_rr_history_ip(self, mock_get, circuits_app, umbinv_resource, umbinv_resource_type, umbinv_dns_type):
+    def test_dns_rr_history_ip(self, mock_get, circuits_app, umbinv_resource, umbinv_dns_type, incident_id, artifact_type):
         """ Test for ip rr history using mocked data. """
 
         keys_outer = ["features", "rrs"]
         keys_feature = ["rr_count","ld2_count","ld3_count","ld2_1_count","ld2_2_count","div_ld2","div_ld3","div_ld2_1","div_ld2_2"]
         keys_rrs = ["ttl","type","class","rr", "name"]
 
-        function_params = { 
+        function_params = {
             "umbinv_resource": umbinv_resource,
-            "umbinv_resource_type": umbinv_resource_type,
-            "umbinv_dns_type": umbinv_dns_type
+            "umbinv_dns_type": umbinv_dns_type,
+            "incident_id": incident_id,
+            "artifact_type": artifact_type,
         }
         results = call_umbrella_dns_rr_hist_function(circuits_app, function_params)
         dns_rr_history_ip = results["dns_rr_history"]
@@ -70,10 +71,11 @@ class TestUmbrellaDnsRrHist:
             assert_keys_in(rrs, *keys_rrs)
 
     @patch('investigate.Investigate.get', side_effect=mocked_response)
-    @pytest.mark.parametrize("umbinv_resource, umbinv_resource_type, umbinv_dns_type", [
-        ("domain.com", 'domain_name', 'A')
+    @pytest.mark.parametrize("umbinv_resource, umbinv_dns_type, incident_id, artifact_type", [
+        ("domain.com", 'A', 1, 'domain_name',)
     ])
-    def test_dns_rr_history_domain(self, mock_get, circuits_app, umbinv_resource, umbinv_resource_type, umbinv_dns_type):
+    def test_dns_rr_history_domain(self, mock_get, circuits_app, umbinv_resource, umbinv_dns_type, incident_id,
+                                   artifact_type):
         """ Test for domain rr history using mocked data. """
 
         keys_outer = ["features", "rrs_tf"]
@@ -82,8 +84,9 @@ class TestUmbrellaDnsRrHist:
 
         function_params = {
             "umbinv_resource": umbinv_resource,
-            "umbinv_resource_type": umbinv_resource_type,
-            "umbinv_dns_type": umbinv_dns_type
+            "umbinv_dns_type": umbinv_dns_type,
+            "incident_id": incident_id,
+            "artifact_type": artifact_type,
         }
         results = call_umbrella_dns_rr_hist_function(circuits_app, function_params)
         dns_rr_history_domain = results["dns_rr_history"]

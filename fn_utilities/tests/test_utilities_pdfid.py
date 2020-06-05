@@ -30,7 +30,7 @@ def call_pdfid_function(circuits, function_params, timeout=10):
 
 class TestPdfid:
     """ Tests for the pdfid function"""
-    @pytest.mark.livetest
+
     def test_function_definition(self):
         """ Test that the package provides customization_data that defines the function """
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
@@ -39,7 +39,6 @@ class TestPdfid:
     @pytest.mark.parametrize("base64content, expected_results", [
         (AttachmentMock.test_data_b64("sample1.pdf"), {"value": "xyz"})
     ])
-    @pytest.mark.livetest
     def test_success(self, circuits_app, base64content, expected_results):
         """ Test calling with sample values for the parameters """
         function_params = { 

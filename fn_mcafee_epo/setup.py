@@ -3,12 +3,9 @@
 
 from setuptools import setup, find_packages
 
-PUBLISH_VERSION = "1.0.1"
-
-
 setup(
     name='fn_mcafee_epo',
-    version=PUBLISH_VERSION,
+    version="1.0.2",
     license='MIT',
     author='IBM Resilient',
     author_email='support@resilientsystems.com',

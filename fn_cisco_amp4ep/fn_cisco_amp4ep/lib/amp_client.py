@@ -5,7 +5,6 @@
 
 """ Class for Resilient circuits Functions supporting REST API client for Cisco AMP for endpoints  """
 import logging
-import random
 import requests
 import time
 from requests import HTTPError
@@ -23,6 +22,8 @@ LOG = logging.getLogger(__name__)
 AMP_LIMIT_DEFAULT = 1000
 # Define max query limit REST api will allow as a parameter.
 AMP_LIMIT_REST_MAX = 500
+# Default retry (120 secs/2 min) for 'Service Unavailable' responses where no "Retry-After" value in response header.
+RETRY_AFTER_DEFAULT = 120
 
 class Ampclient(object):
     """
@@ -64,7 +65,7 @@ class Ampclient(object):
             "group_by_guid":                "/"+self.api_version+"/groups/{}"
         }
         self._headers = {"content-type": "application/json", "Accept": "application/json",
-                        "Accept-Encoding": "application/gzip", "Authorization": "Basic FILTERED"}
+                         "Accept-Encoding": "application/gzip", "Authorization": "Basic FILTERED"}
         self._auth = HTTPBasicAuth(self.client_id, self.api_token)
         self._s = requests.Session()
 
@@ -89,7 +90,7 @@ class Ampclient(object):
         if not self.rate_limiter.get_limit_update_ts():
             # Get here if this is 1st time rate limiter called (by any function) during this
             # resilient circuits run period.
-           return 0
+            return 0
         else:
             return self.rate_limiter.get_delay()
 
@@ -125,7 +126,7 @@ class Ampclient(object):
                 # Save timestamp of new request to ratelimiter.
                 self.rate_limiter.add_ts(time.time())
                 if method == "GET":
-                    r = self._s.get(url, params=params, headers=self._headers, auth=self._auth, proxies=self.proxies )
+                    r = self._s.get(url, params=params, headers=self._headers, auth=self._auth, proxies=self.proxies)
                 elif method == "POST":
                     r = self._s.post(url, params=params, data=data, headers=self._headers, auth=self._auth, proxies=self.proxies)
                 elif method == "PATCH":
@@ -134,13 +135,22 @@ class Ampclient(object):
                     r = self._s.delete(url, params=params, headers=self._headers, auth=self._auth, proxies=self.proxies)
                 else:
                     raise ValueError("Unsupported request method '{}'.".format(method))
-                # Save rate limit data from response.
-                self._save_rate_limit(r)
+
+                if r.status_code in list(range(200, 203)) + [429]:
+                    # Save rate limit data from response.
+                    self._save_rate_limit(r)
 
                 r.raise_for_status()  # If the request fails throw an error.
 
             except HTTPError as e:
-                if e.response.status_code == 429:
+                if e.response.status_code == 503:
+                    LOG.exception("Got Service Unavailable exception type: %s" % (e.__repr__()))
+                    # Retry request after a delay.
+                    # Set delay to value of r.headers["Retry-After"] else use default.
+                    retry_delay = int(r.headers.get("Retry-After", RETRY_AFTER_DEFAULT))
+                    LOG.info("Retrying in %f seconds..." % (retry_delay))
+                    time.sleep(retry_delay)
+                elif e.response.status_code == 429:
                     LOG.exception("Got Rate Limiting exception type: %s, msg: %s" % (e.__repr__(), getattr(e, 'message', str(e))))
                     # Retry if we get Rate Limiting response.
                     # Set delay to value of r.headers["Retry-After"].
@@ -163,7 +173,7 @@ class Ampclient(object):
 
             if r.status_code in range(200, 203):
                 break
-            elif r.status_code != 429:
+            elif r.status_code not in (429, 503):
                 LOG.error("Unexpected response '%s' received." % r.status_code)
                 raise HTTPError("Unexpected response '{}' received.".format(r.status_code))
 
@@ -200,7 +210,7 @@ class Ampclient(object):
         """
         uri = self._endpoints["computers"]
         params = {"group_guid": group_guid, "limit": limit, "hostname": hostname,
-                  "internal_ip": internal_ip, "external_ip": external_ip }
+                  "internal_ip": internal_ip, "external_ip": external_ip}
         r_json = self._req(uri, params=params)
         return r_json
 
@@ -346,7 +356,7 @@ class Ampclient(object):
 
         params = {"detection_sha256": detection_sha256, "application_sha256": application_sha256,
                   "connector_guid[]": connector_guid, "group_guid[]": group_guid, "start_date": start_date,
-                  "event_type[]": event_type, "severity": severity,"limit": limit, "offset": offset }
+                  "event_type[]": event_type, "severity": severity, "limit": limit, "offset": offset}
         r_json = self._req(uri, params=params)
         return r_json
 
@@ -377,7 +387,7 @@ class Ampclient(object):
             uri = self._endpoints["groups"]
         else:
             uri = self._endpoints["group_by_guid"].format(group_guid)
-        params = {"name": name , "limit": limit}
+        params = {"name": name, "limit": limit}
         r_json = self._req(uri, params=params)
         return r_json
 
@@ -410,7 +420,7 @@ class Ampclient(object):
 
         """
         results_total = None
-        offset=None
+        offset = None
         filters = {}
         filtered_item_count = 0
         filter_limit = 0
@@ -473,18 +483,14 @@ class Ampclient(object):
                 if offset is not None:
                     filter_limit += offset
 
-            if not current_item_count < items_per_page:
+            # If there is a next paginated result available get additional results.
+            if "next" in rtn["metadata"]["links"]:
                 while (filter_limit >= filtered_item_count and  max_count > current_item_count):
 
                     remaining_count = max_count - current_item_count
 
                     if not filters and not params["limit"] and remaining_count < AMP_LIMIT_REST_MAX:
                         params["limit"] = remaining_count
-
-                    if "offset" in params:
-                        # Certain get methods don't have offset in their parameter signature.
-                        run_offset += items_per_page
-                        params["offset"] = run_offset
 
                     # Re-run request and filter results with new offset set.
                     rtn_sub = self.filter_by(get_method(**params), filters)
@@ -493,6 +499,14 @@ class Ampclient(object):
                     current_item_count += rtn["metadata"]["results"]["current_item_count"]
                     if filters:
                         filtered_item_count += rtn["metadata"]["results"]["filtered_item_count"]
+                    # Break out of loop if no more paginated results available.
+                    if "next" not in rtn_sub["metadata"]["links"]:
+                        break
+
+                    if "offset" in params:
+                        # Certain get methods don't have offset in their parameter signature.
+                        run_offset += items_per_page
+                        params["offset"] = run_offset
 
         if results_total is not None:
             rtn["total"] = results_total
@@ -517,7 +531,7 @@ class Ampclient(object):
         """
         if filters:
             # Extract events based on filter(s)
-            d = [i for (k, v) in filters.items() for i in rtn["data"] if k in i and i[k] == v  ]
+            d = [i for (k, v) in filters.items() for i in rtn["data"] if k in i and i[k] == v]
             # Remove duplicate entries and update rtn.
             rtn["data"] = [i for n, i in enumerate(d) if i not in d[n + 1:]]
             if "filtered_item_count" not in rtn["metadata"]["results"]:
