@@ -25,9 +25,8 @@ To prepare a package you will need resilient-sdk. A good practice here would be 
 ### Prepare AppHost package
 
 #### Community/Supported App
-We currently have a branch on the resilient-community-apps repo which more than likely already has a Dockerfile ready for you. The branch for this is `INT-2163/dockerfile_final` 
-
-Alternatively a number of placeholder/starter files are available for the AppHost conversion and these are located on the `INT-2842/apphost_convert` branch.
+A number of integrations in resilient-community-apps already have a Dockerfile ready for you.
+Alternatively a number of placeholder/starter files are available in this directory for the AppHost conversion.
 These files can be used with the `resilient-sdk package` command to prepare an App.
 
 To copy over the changes from the dockerfile branch to whatever branch you want to do the conversion on a script is provided in the `app_host_files` directory. 
@@ -48,7 +47,6 @@ The package command will then modify values as appropriate in these files.
 
 After this, the newly created App is almost ready for AppHost testing. The remaining piece is understanding and building out the required permissions
 
-
 #### API Key Permissions 
 Using the AppHost involves having an App which can make use of API keys and have permissions limited to what is needed for that given App. 
 A convenience given by app host is by providing a `apikey_permissions.txt` file, the provision of API keys with the needed permissions can be handled by the AppHost itself. 
@@ -64,10 +62,6 @@ Most of the testing for a given integration/app will have been done by this stag
 
 To install the App into AppHost head to Administrator Settings > Apps and click the Install button.
 This will present a modal where you can upload the App package.
-
-
-### Upload to AppExchange
-Uploading to the AppExchange should be done with `app_<integration-name>-<version>.zip` this is the file that customers will download and install into their app host
 
 ### Downloaded newly published app from AppExchange and perform final sanity check
 As a final just incase, once the app is approved for AppX a final check of it by downloading and again installing it could be done.
