@@ -72,6 +72,7 @@ fn_joe_sandbox_analysis
 fn_ldap_utilities
 fn_log_capture
 fn_machine_learning
+fn_machine_learning_nlp
 fn_mcafee_atd
 fn_mcafee_epo
 fn_mcafee_esm
@@ -83,6 +84,7 @@ fn_mitre_integration
 fn_mxtoolbox
 fn_netdevice
 fn_odbc_query
+fn_outbound_email
 fn_pa_panorama
 fn_pagerduty
 fn_pastebin
