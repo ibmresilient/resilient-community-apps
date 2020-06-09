@@ -2,8 +2,7 @@
 
 - [IBM Resilient Integration for ServiceNow](#ibm-resilient-integration-for-servicenow)
   - [Release Notes](#release-notes)
-    - [v1.1.1](#v111)
-    - [v1.1.0](#v110)
+    - [v1.0.3](#v103)
     - [v1.0.2](#v102)
     - [v1.0.1](#v101)
     - [v1.0.0](#v100)
@@ -21,12 +20,10 @@
   notes of a previous release
 -->
 
-### v1.1.1
+   
+### v1.0.3
 *   Verified on ServiceNow Orlando release
 *   Support added for Resilient AppHost
-   
-### v1.1.0
-*   Fixed bug in RES_WF_UpdateState Workflow Run Script
 
 ### v1.0.2
 *    Verified on ServiceNow New York release
