@@ -178,6 +178,7 @@ Run the script as part of a rule that includes a condition that helps identify t
 NOTE: If you choose to implement the solution as one script, not two, then be sure that you add the Phishing incident type to the incident at a point in the script when the incident object exists. For example, the following command should occur after the incident is created or found.
 ```python
 incident.incident_type_ids.append("Phishing")
+```
 
 ### Campaign identifier
 Scenario: The email message subject on its own might not be enough to collect related email messages into one incident.
