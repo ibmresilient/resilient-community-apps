@@ -31,7 +31,7 @@
 -->
 ### v1.0.3
 * Fixed bug where incident summary is unavailable.
-* Fixed bug where incidents not not being filtered by state.
+* Fixed bug where incidents not being filtered by state.
 * Fixed bug with Resilient incident severity codes.
 
 ### v1.0.2
