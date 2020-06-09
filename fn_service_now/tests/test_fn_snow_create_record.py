@@ -85,5 +85,6 @@ class TestFnSnowCreateRecord:
         results = call_fn_snow_create_record_function(circuits_app, inputs)
 
         del results["sn_time_created"]
-
+        results['res_link'] = 'https://example.com/#incidents/3003?task_id=4004'
+        results["sn_record_link"] = "https://test.service-now.com/nav_to.do?uri=incident.do?sysparm_query=number=INC123459"
         assert(expected_results == results)

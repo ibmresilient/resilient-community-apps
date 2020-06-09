@@ -151,6 +151,13 @@ A ServiceNow MID Server is needed if your Resilient instance is not directly acc
   * The ServiceNow MID Server must be setup on the same network as your Resilient Appliance.
   * The Resilient Host Address you input in **Step 4** must be relevant to and accessible from your MID Server.
 
+The ports for communication between Resilient, the Integration Server and the Mid Server are:
+
+Mid-Server => Resilient 443
+Integration Server => Mid Server 443
+Resilient => Integration Server 65001
+Integration Server => Resilient 65001, 443
+
 If not already installed:
 * Type **mid server** into your ServiceNow search box and click **Installation Instructions.**
   ![screenshot](./screenshots/16.png)
