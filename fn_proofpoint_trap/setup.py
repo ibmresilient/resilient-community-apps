@@ -19,7 +19,7 @@ def snake_to_camel(word):
 
 setup(
     name='fn_proofpoint_trap',
-    version='1.0.4',
+    version='1.0.3',
     license='MIT',
     author='Resilient Labs',
     author_email='resil.labs@gmail.com',
