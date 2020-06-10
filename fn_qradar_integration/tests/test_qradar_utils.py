@@ -1,3 +1,4 @@
+# encoding: utf-8
 #
 # Unit tests for fn_qradar_integration/util/qradar_utils.py
 #
@@ -10,6 +11,8 @@ from mock import Mock
 from mock import patch
 import mock
 import urllib
+import six
+import pytest
 
 # Util function to generate simulated requests response
 def _generateResponse(content, status):
@@ -30,6 +33,20 @@ password = "my_password_fake"
 token = "FakeSecreteToken"
 cafile = True
 search_id = "FakeSearch_id"
+
+@pytest.mark.parametrize("val", [ "test", u"test", "ç", u"ç" ])
+def test_quote_return(val):
+    result = qradar_utils.quote(val)
+    assert isinstance(result, six.string_types)
+
+@patch("fn_qradar_integration.util.qradar_utils.quote_func")
+def test_quote_passing_args(mocked_func):
+    qradar_utils.quote("test")
+    mocked_func.assert_called_with("test".encode("utf-8"))
+
+    qradar_utils.quote("test", "test")
+    mocked_func.assert_called_with("test".encode("utf-8"), "test")
+
 
 def test_auth_info():
     """
@@ -158,6 +175,7 @@ def test_ariel_search_more(mocked_perform_search):
                                               token=None,
                                               cafile=cafile)
     query_string = "SELECT * FROM events"
+    query_all_results = False
     range_start = 1
     range_end = 10
     time_out = 1000
@@ -168,7 +186,7 @@ def test_ariel_search_more(mocked_perform_search):
                             ]
                   }
     mocked_perform_search.return_value = ret_events
-    ret = qradar_client.ariel_search(query_string, range_start, range_end, time_out)
+    ret = qradar_client.ariel_search(query_string, query_all_results, range_start, range_end, time_out)
 
 
     assert ret == ret_events
