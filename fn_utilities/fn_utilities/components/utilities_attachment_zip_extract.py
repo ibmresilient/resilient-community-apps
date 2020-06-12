@@ -10,6 +10,7 @@ import tempfile
 import zipfile
 import base64
 import datetime
+from fn_utilities.util.utils_common import b_to_s
 from resilient_circuits import ResilientComponent, function, StatusMessage, FunctionResult, FunctionError
 
 
@@ -73,7 +74,7 @@ class FunctionComponent(ResilientComponent):
                     results["info"] = {"filename": zinfo.filename,
                                        "date_time": epoch_millis(zinfo.date_time),
                                        "compress_type": zinfo.compress_type,
-                                       "comment": zinfo.comment,
+                                       "comment": b_to_s(zinfo.comment),
                                        "create_system": zinfo.create_system,
                                        "create_version": zinfo.create_version,
                                        "extract_version": zinfo.extract_version,
@@ -87,7 +88,7 @@ class FunctionComponent(ResilientComponent):
                                        "file_size": zinfo.file_size}
                     # Extract the file we want
                     b64data = base64.b64encode(zfile.read(file_path, zipfile_password))
-                    results["content"] = b64data
+                    results["content"] = b_to_s(b64data)
                 except (KeyError, zipfile.LargeZipFile, zipfile.BadZipfile) as exc:
                     # results["error"] = str(exc)
                     # To help debug, list the contents

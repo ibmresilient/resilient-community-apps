@@ -4,11 +4,12 @@
 
 """Function implementation"""
 
+import datetime
 import logging
+import os
 import tempfile
 import zipfile
-import os
-import datetime
+from fn_utilities.util.utils_common import b_to_s
 from resilient_circuits import ResilientComponent, function, StatusMessage, FunctionResult, FunctionError
 
 
@@ -61,11 +62,12 @@ class FunctionComponent(ResilientComponent):
                     # Examine with zip
                     zfile = zipfile.ZipFile(temp_file.name, "r")
                     results["namelist"] = zfile.namelist()
+
                     # Don't include zinfo.extra since it's not a string
                     results["infolist"] = [{"filename": zinfo.filename,
                                             "date_time": epoch_millis(zinfo.date_time),
                                             "compress_type": zinfo.compress_type,
-                                            "comment": zinfo.comment,
+                                            "comment": b_to_s(zinfo.comment),
                                             "create_system": zinfo.create_system,
                                             "create_version": zinfo.create_version,
                                             "extract_version": zinfo.extract_version,

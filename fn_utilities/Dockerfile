@@ -5,7 +5,7 @@ FROM registry.access.redhat.com/ubi8/python-36:latest
 #FROM resilient/rc-data-feeder-base
 
 ARG APPLICATION=fn_utilities
-ARG RES_CIRCUITS_VERSION=34.0.195
+ARG RES_CIRCUITS_VERSION=37.0
 
 # update to latest packages, user 0 for root privilege
 USER 0
@@ -16,7 +16,7 @@ RUN pip install --upgrade pip
 RUN pip install resilient-circuits>=${RES_CIRCUITS_VERSION}
 
 # install and upgrade six to satisfy fn_utilities requirement
-RUN pip install --upgrade six
+RUN pip install six==1.14.0
 # install and upgrade cryptography to satisfy fn_utilities requirement
 RUN pip install --upgrade cryptography
 
