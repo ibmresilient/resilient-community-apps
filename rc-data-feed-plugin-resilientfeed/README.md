@@ -98,7 +98,7 @@ The following configuration items are supported:
 
 ## Requirements
 * This functionality has been tested with Resilient instances >= v30. 
-There is presently an issue with v37 restricting the live synchronization of a newly deleted artifact. If this capability is critical to your requirements, use Resilient version <v37.0.
+There is presently an issue with v37.0 restricting the live synchronization of a newly deleted artifact. If this capability is critical to your requirements, use Resilient version >=v37.1.
 * The target Resilient platform must be at the same version or greater than the source Resilient platform.
 * The target Resilient organization must have the same set of custom fields, incident types, playbooks (tasks and phases) in order to synchronize incident data. Use the export/import functionality under `Adminstrator Settings`.
 * The target Resilient organization should have the same users and groups defined. For any user or group not found, incident and task ownership as well as member lists will be left empty. 
