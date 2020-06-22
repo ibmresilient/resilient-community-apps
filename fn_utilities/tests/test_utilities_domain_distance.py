@@ -36,6 +36,7 @@ class TestDomainDistance:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
+    @pytest.mark.livetest
     @pytest.mark.parametrize("domain_name, domain_list, expected_result", [
         ("monday", "mOnday, mand0y, mondäy, xn--mondy-dra, tuesday", {
             "domain_name": "monday",
@@ -68,4 +69,5 @@ class TestDomainDistance:
         logging.getLogger(__name__).info(result)
 
         verify_subset(expected_result, result)
-        # assert(expected_result == result)
+        assert(expected_result['closest']['name'] == result['closest']['name'])
+        assert(expected_result['closest']['distance'] == result['closest']['distance'])

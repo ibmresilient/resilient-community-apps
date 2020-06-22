@@ -35,6 +35,7 @@ class TestUtilitiesExpandUrl:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
+    @pytest.mark.livetest
     @pytest.mark.parametrize("resilient_url, expected_results", [
         ("https://tinyurl.com/y8u79w5g", {"urllist": ['https://developer.ibm.com/security/resilient/']}),
         ("tinyurl.com/y8u79w5g", {"urllist": ['https://developer.ibm.com/security/resilient/']}),

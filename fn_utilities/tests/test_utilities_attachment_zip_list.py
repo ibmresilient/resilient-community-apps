@@ -37,7 +37,7 @@ class TestAttachmentZipList:
         assert func is not None
 
     @pytest.mark.parametrize("incident_id, attachment_id, expected_result", [
-        (1234, 201, {"value": "xyz"}),
+        (1234, 201, 'placeholder.txt'),
     ])
     def test_success(self, circuits_app, incident_id, attachment_id, expected_result):
         """ Test calling with sample values for the parameters """
@@ -46,4 +46,4 @@ class TestAttachmentZipList:
             "attachment_id": attachment_id
         }
         result = call_attachment_zip_list_function(circuits_app, function_params)
-        #assert(result == expected_result)
+        assert(result['infolist'][0]['filename'] == expected_result)

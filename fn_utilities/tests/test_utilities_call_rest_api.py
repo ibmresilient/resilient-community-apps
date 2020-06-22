@@ -35,11 +35,12 @@ class TestCallRestApi:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
-    @pytest.mark.parametrize("rest_method, rest_url, rest_headers, rest_body, expected_results", [
-        ('GET', "http://foo", {"type": "text", "content": "line1\nline2"}, {"type": "text", "content": "line1\nline2"}, {"value": "xyz"}),
-        ('OPTIONS', "text", {"type": "text", "content": "line1\nline2"}, {"type": "text", "content": "line1\nline2"}, {"value": "xyz"})
+    @pytest.mark.livetest
+    @pytest.mark.parametrize("rest_method, rest_url, rest_headers, rest_body", [
+        ('GET', "https://postman-echo.com", {"Content-type": "application/json; charset=UTF-8"},
+         {'title': 'foo', 'body': 'bar','userId': 1})
     ])
-    def test_success(self, circuits_app, rest_method, rest_url, rest_headers, rest_body, expected_results):
+    def test_success(self, circuits_app, rest_method, rest_url, rest_headers, rest_body):
         """ Test calling with sample values for the parameters """
         function_params = { 
             "rest_method": rest_method,
@@ -47,5 +48,7 @@ class TestCallRestApi:
             "rest_headers": rest_headers,
             "rest_body": rest_body
         }
-        #results = call_call_rest_api_function(circuits_app, function_params)
-        #assert(expected_results == results)
+        results = call_call_rest_api_function(circuits_app, function_params)
+        assert(rest_body['title'] == results['title'])
+        assert(rest_body['body'] == results['body'])
+        assert(rest_body['userId'] == results['userId'])

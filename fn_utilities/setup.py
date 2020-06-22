@@ -53,6 +53,7 @@ setup(
             "{}FunctionComponent = fn_utilities.components.{}:FunctionComponent".format(snake_to_camel(get_module_name(filename)), get_module_name(filename)) for filename in glob.glob("./fn_utilities/components/[a-zA-Z]*.py")
         ],
         "resilient.circuits.configsection": ["gen_config = fn_utilities.util.config:config_section_data"],
-        "resilient.circuits.customize": ["customize = fn_utilities.util.customize:customization_data"]
+        "resilient.circuits.customize": ["customize = fn_utilities.util.customize:customization_data"],
+        "resilient.circuits.selftest": ["selftest = fn_utilities.util.selftest:selftest_function"]
     }
 )

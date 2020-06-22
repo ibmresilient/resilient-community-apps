@@ -131,7 +131,7 @@ class WorksheetData(object):
         self._file_path = path
         try:
             self.wb = openpyxl.load_workbook(self._file_path, read_only=True)
-        except IOError as e:
+        except (IOError, openpyxl.utils.exceptions.InvalidFileException) as e:
             log = logging.getLogger(__name__)
             log.error(str(e))
             raise FunctionError("Error opening the provided file.")

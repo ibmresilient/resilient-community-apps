@@ -9,7 +9,7 @@ import json
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 
-PACKAGE_NAME = "utilities_extract_ssl_cert"
+PACKAGE_NAME = "fn_utilities"
 FUNCTION_NAME = "utilities_extract_ssl_cert_from_url"
 
 # Read the default configuration-data section from the package

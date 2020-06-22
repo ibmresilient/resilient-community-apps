@@ -5,12 +5,18 @@
 """Function implementation"""
 
 import logging
-import requests
+from resilient_lib import RequestsCommon
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'call_rest_api"""
+
+    def __init__(self, opts):
+        """constructor provides access to the configuration options"""
+        super(FunctionComponent, self).__init__(opts)
+        self.opts = opts
+        self.options = opts.get("fn_utilities", {})
 
     @function("utilities_call_rest_api")
     def _call_rest_api_function(self, event, *args, **kwargs):
@@ -52,11 +58,10 @@ class FunctionComponent(ResilientComponent):
                     if len(keyval) == 2:
                         cookies_dict[keyval[0].strip()] = keyval[1].strip()
 
-            resp = requests.request(rest_method, rest_url,
-                                    headers=headers_dict,
-                                    cookies=cookies_dict,
-                                    data=rest_body,
-                                    verify=rest_verify)
+            rc = RequestsCommon(self.opts, self.options)
+
+            resp = make_rest_call(self.opts, self.options, rest_method, rest_url,
+                                           headers_dict, cookies_dict, rest_body, rest_verify)
 
             try:
                 response_json = resp.json()
@@ -81,3 +86,12 @@ class FunctionComponent(ResilientComponent):
             yield FunctionResult(results)
         except Exception:
             yield FunctionError()
+
+def make_rest_call(opts, options, rest_method, rest_url, headers_dict, cookies_dict, rest_body, rest_verify):
+    rc = RequestsCommon(opts, options)
+
+    return rc.execute_call_v2(rest_method, rest_url,
+                              headers=headers_dict,
+                              cookies=cookies_dict,
+                              data=rest_body,
+                              verify=rest_verify)

@@ -9,7 +9,7 @@ import hashlib
 import json
 import sys
 from resilient_circuits import ResilientComponent, function, StatusMessage, FunctionResult, FunctionError
-
+from resilient_lib import get_file_attachment, get_file_attachment_metadata
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'attachment_hash"""
@@ -34,16 +34,10 @@ class FunctionComponent(ResilientComponent):
                 raise FunctionError("Error: attachment_id must be specified.")
 
             yield StatusMessage("Reading attachment...")
-            if task_id:
-                metadata_uri = "/tasks/{}/attachments/{}".format(task_id, attachment_id)
-                data_uri = "/tasks/{}/attachments/{}/contents".format(task_id, attachment_id)
-            else:
-                metadata_uri = "/incidents/{}/attachments/{}".format(incident_id, attachment_id)
-                data_uri = "/incidents/{}/attachments/{}/contents".format(incident_id, attachment_id)
 
             client = self.rest_client()
-            metadata = client.get(metadata_uri)
-            data = client.get_content(data_uri)
+            data = get_file_attachment(client, incident_id, task_id=task_id, attachment_id=attachment_id)
+            metadata = get_file_attachment_metadata(client, incident_id, task_id=task_id, attachment_id=attachment_id)
 
             results = {
                 "filename": metadata["name"],
