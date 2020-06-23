@@ -1,7 +1,8 @@
 ## Release Notes
 
-### v1.0.1
-* Duplication of incident id bug fix 
+* v1.0.4 Oracle definitions for AppHost
+* v1.0.3 AppHost configurations for Postresql, MS SQL Server, MySql, SQLite
+* v1.0.1 Duplication of incident id bug fix 
 
 
 # Introduction
@@ -117,11 +118,25 @@ MariaDB | Driver={MariaDB ODBC 3.0 Driver};Server=127.0.0.1;Port=3306; DB=<yourD
 
 Your naming of the database drivers (Ex. `MariaDB ODBC 3.0 Driver`) may vary and is specified in your `odbcinst.ini` file. 
 
+### Integration Server
 Oracle has the further requirement of specifying the connection string references in a TNSNAMES.ORA file. Setting up the Oracle client environment will include the following environment variables (and may include others):
 
 ```
 export LD_LIBRARY_PATH=/path/to/oracle/libraries/
 export TNS_ADMIN=/path/to/tnsnames/
+```
+
+### App Host
+For App Host deployments, the tnsnames.ora file should be added to your app in the configuration section specifying the 
+file name as `tnsnames.ora` and path `/etc/rescircuits`. The contents should contain the definitions for your Oracle database.
+
+```
+OracleODBC-12c=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521))
+    (CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=ORCLCDB.localdomain)))
+ORCLCDB=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521))
+    (CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=ORCLCDB.localdomain)))
+ORCLPDB1=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521))
+    (CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=ORCLPDB1.localdomain)))
 ```
 
 ## Integration Server Requirements
