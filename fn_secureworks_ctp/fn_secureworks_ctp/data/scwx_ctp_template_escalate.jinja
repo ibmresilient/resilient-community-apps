@@ -5,7 +5,7 @@
   "discovered_date": {{dateCreated}},
   "description": {
     "format": "html",
-    "content": "<div><p>{{detailedDescription | replace('\n', '<br>')}}</p></div>"
+    "content": "<div><p>{{detailedDescription | e | replace('\n', '<br>')}}</p></div>"
   },
   "properties": {
     "scwx_ctp_ticket_id": "{{ticketId}}",
