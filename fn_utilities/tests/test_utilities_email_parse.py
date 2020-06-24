@@ -5,6 +5,7 @@ from __future__ import print_function
 import pytest
 import logging
 from mock_artifact import ArtifactMock
+from fn_utilities.util.utils_common import b_to_s
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 from pytest_resilient_circuits import verify_subset
@@ -43,7 +44,7 @@ class TestArtifactEmailParse:
     @pytest.mark.parametrize("base64content, expected_result", [
         (ArtifactMock.test_data_b64("email_sample_1.eml"), {
             "from": [["", "foo@example.com"]],
-            "body": u"This is the first part.\n--- mail_boundary ---\n*H\r\x01\x07\x020\u069a+1\x0b0\t\x06\x05+\x0e\x03\x02\x1a\x05\x000\x06\t*J6\x07\x01\x00\x00\x05J0\x05F0\x04.\x02\x02\x04?D0\r\x06\t*\u069a+\r\x01\x01\x05\x05\x00011\x0b0\t\x06\x03U\x04\x06\x13\x02F6\n\x06\x03U\x04\n\x13\x03TDC1\x140\x12\x06\x13\x0bTDC OCES CH\u069a+\r040229115901Z\x17\r060262901Z01\x0b0\t\x06\x03U\x04K1)0'\x06\x03U\x04\n\x13 H\u069a+. organisatorisk tin6nin",
+            "body": u"This is the first part.",
             "subject": "testing"
         }),
         (ArtifactMock.test_data_b64("email_sample_2.eml"), {
@@ -68,7 +69,7 @@ class TestArtifactEmailParse:
     def test_success(self, circuits_app, base64content, expected_result):
         """ Test calling with sample values for the parameters """
         function_params = { 
-            "base64content": base64content,
+            "base64content": b_to_s(base64content),
             "incident_id": 1001
         }
         result = call_email_parse_function(circuits_app, function_params)
