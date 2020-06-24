@@ -53,7 +53,6 @@ class TestArtifactEmailParse:
                 {"from": u'xxx.xxxx.xxx', "by": u'SMS-GTYxxx.xxxx.xxx', "id": u'j4AKR3r23323', "for": u'<xxxxx@Exxx.xxxx.xxx>', "date": u'Tue, 10 May 2005 15:27:03 -0500'},
                 {"from": u'SMS-GTYxxx.xxxx.xxx', "by": u'xxx.xxxx.xxx', "id": u'ca', "for": u'<xxxxx@Exxx.xxxx.xxx>', "date": u'Tue, 10 May 2005 15:27:04 -0500'},
                 {"from": u'xxx.xxxx.xxx', "by": u'xxx.xxxx.xxx', "id": u'C1B953B4CB6', "for": u'<xxxxx@Exxx.xxxx.xxx>', "date": u'Tue, 10 May 2005 15:27:05 -0500'}
-
             ]
         }),
         (ArtifactMock.test_data_b64("email_sample_3.eml"), {

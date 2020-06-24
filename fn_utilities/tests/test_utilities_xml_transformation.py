@@ -39,7 +39,7 @@ class TestUtilitiesXmlTransformation:
         curr_dir = os.path.dirname(os.path.realpath(__file__))
 
         xml_data = open(os.path.join(curr_dir, TestUtilitiesXmlTransformation.DATA_DIR, xml_source), mode="rb").read()
-        expected_results = open(os.path.join(curr_dir, TestUtilitiesXmlTransformation.DATA_DIR, expected_results), mode="r").read().decode('utf8')
+        expected_results = open(os.path.join(curr_dir, TestUtilitiesXmlTransformation.DATA_DIR, expected_results), mode="r").read()
 
         """ Test calling with sample values for the parameters """
         function_params = {

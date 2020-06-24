@@ -37,7 +37,7 @@ class TestCallRestApi:
 
     @pytest.mark.livetest
     @pytest.mark.parametrize("rest_method, rest_url, rest_headers, rest_body", [
-        ('GET', "https://postman-echo.com", {"Content-type": "application/json; charset=UTF-8"},
+        ('POST', "https://httpbin.org/post", {"Content-type": "application/json; charset=UTF-8"},
          {'title': 'foo', 'body': 'bar','userId': 1})
     ])
     def test_success(self, circuits_app, rest_method, rest_url, rest_headers, rest_body):
@@ -45,10 +45,10 @@ class TestCallRestApi:
         function_params = { 
             "rest_method": rest_method,
             "rest_url": rest_url,
-            "rest_headers": rest_headers,
-            "rest_body": rest_body
+            "rest_headers": {'content': rest_headers},
+            "rest_body": {'content': rest_body }
         }
         results = call_call_rest_api_function(circuits_app, function_params)
-        assert(rest_body['title'] == results['title'])
-        assert(rest_body['body'] == results['body'])
-        assert(rest_body['userId'] == results['userId'])
+        assert(rest_body['title'] == results['json']['json']['title'])
+        assert(rest_body['body'] == results['json']['json']['body'])
+        assert(rest_body['userId'] == results['json']['json']['userId'])

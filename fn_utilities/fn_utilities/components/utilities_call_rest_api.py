@@ -8,6 +8,8 @@ import logging
 from resilient_lib import RequestsCommon
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 
+CONTENT_TYPE = "Content-type"
+CONTENT_TYPE_JSON = "application/json"
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'call_rest_api"""
@@ -41,27 +43,31 @@ class FunctionComponent(ResilientComponent):
             log.info("rest_verify: %s", rest_verify)
 
             # Read newline-separated 'rest_headers' into a dictionary
-            headers_dict = {}
-            if rest_headers is not None:
-                lines = rest_headers.split("\n")
-                for line in lines:
-                    keyval = line.strip().split(":", 1)
-                    if len(keyval) == 2:
-                        headers_dict[keyval[0].strip()] = keyval[1].strip()
+            if isinstance(rest_headers, dict):
+                headers_dict = rest_headers
+            else:
+                headers_dict = {}
+                if rest_headers is not None:
+                    lines = rest_headers.split("\n")
+                    for line in lines:
+                        keyval = line.strip().split(":", 1)
+                        if len(keyval) == 2:
+                            headers_dict[keyval[0].strip()] = keyval[1].strip()
 
             # Read newline-separated 'rest_cookies' into a dictionary
-            cookies_dict = {}
-            if rest_cookies is not None:
-                lines = rest_cookies.split("\n")
-                for line in lines:
-                    keyval = line.strip().split(":", 1)
-                    if len(keyval) == 2:
-                        cookies_dict[keyval[0].strip()] = keyval[1].strip()
-
-            rc = RequestsCommon(self.opts, self.options)
+            if isinstance(rest_headers, dict):
+                cookies_dict = rest_cookies
+            else:
+                cookies_dict = {}
+                if rest_cookies is not None:
+                    lines = rest_cookies.split("\n")
+                    for line in lines:
+                        keyval = line.strip().split(":", 1)
+                        if len(keyval) == 2:
+                            cookies_dict[keyval[0].strip()] = keyval[1].strip()
 
             resp = make_rest_call(self.opts, self.options, rest_method, rest_url,
-                                           headers_dict, cookies_dict, rest_body, rest_verify)
+                                  headers_dict, cookies_dict, rest_body, rest_verify)
 
             try:
                 response_json = resp.json()
@@ -73,8 +79,8 @@ class FunctionComponent(ResilientComponent):
                 "url": resp.url,
                 "status_code": resp.status_code,
                 "reason": resp.reason,
-                "cookies": dict(resp.cookies),
-                "headers": dict(resp.headers),
+                "cookies": dedup_dict(resp.cookies),
+                "headers": dedup_dict(resp.headers),
                 "elapsed": int(resp.elapsed.total_seconds() * 1000.0),
                 "apparent_encoding": resp.apparent_encoding,
                 "text": resp.text,
@@ -90,8 +96,23 @@ class FunctionComponent(ResilientComponent):
 def make_rest_call(opts, options, rest_method, rest_url, headers_dict, cookies_dict, rest_body, rest_verify):
     rc = RequestsCommon(opts, options)
 
+    if CONTENT_TYPE in headers_dict and CONTENT_TYPE_JSON in headers_dict[CONTENT_TYPE]:
+        return rc.execute_call_v2(rest_method, rest_url,
+                                  headers=headers_dict,
+                                  cookies=cookies_dict,
+                                  json=rest_body,
+                                  verify=rest_verify)
+
     return rc.execute_call_v2(rest_method, rest_url,
                               headers=headers_dict,
                               cookies=cookies_dict,
                               data=rest_body,
                               verify=rest_verify)
+
+def dedup_dict(item_list):
+    """
+    this is needed to ensure headers or cookies keys are not duplicated
+    :param item_list:
+    :return: dictionary representation
+    """
+    return {k: v for k, v in item_list.items()}
