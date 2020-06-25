@@ -18,9 +18,9 @@ resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
 
 def call_utilities_parse_ssl_certificate_function(circuits, function_params, timeout=10):
     # Fire a message to the function
-    evt = SubmitTestFunction("utilities_parse_ssl_certificate", function_params)
+    evt = SubmitTestFunction(FUNCTION_NAME, function_params)
     circuits.manager.fire(evt)
-    event = circuits.watcher.wait("utilities_parse_ssl_certificate_result", parent=evt, timeout=timeout)
+    event = circuits.watcher.wait("{}_result".format(FUNCTION_NAME), parent=evt, timeout=timeout)
     assert event
     assert isinstance(event.kwargs["result"], FunctionResult)
     pytest.wait_for(event, "complete", True)
@@ -43,8 +43,8 @@ class TestUtilitiesParseSslCertificate:
         """ Test calling with sample values for the parameters """
         function_params = { 
             "artifact_id": artifact_id,
-            "certificate": certificate,
+            "utilities_certificate": certificate,
             "incident_id": incident_id
         }
         results = call_utilities_parse_ssl_certificate_function(circuits_app, function_params)
-        ##assert(expected_results == results)
+        assert(expected_results == results)

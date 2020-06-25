@@ -4,6 +4,7 @@
 from __future__ import print_function
 import os
 import pytest
+from fn_utilities.util.utils_common import b_to_s
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 
@@ -43,7 +44,7 @@ class TestUtilitiesXmlTransformation:
 
         """ Test calling with sample values for the parameters """
         function_params = {
-            "xml_source": xml_data,
+            "xml_source": b_to_s(xml_data),
             "xml_stylesheet": xml_stylesheet
         }
 
