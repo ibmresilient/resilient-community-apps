@@ -43,10 +43,16 @@ class ArtifactMock(BasicResilientMock):
             "id": 3
         },
         "6": {
-            "description": "cert",
+            "description": "valid cert",
             "value": "ssl_certs/ssl_example.cert",
             "type": "X509 Certificate File",
             "id": 6
+        },
+        "7": {
+            "description": "expired cert",
+            "value": "ssl_certs/ssl_expired.cert",
+            "type": "X509 Certificate File",
+            "id": 7
         }
     }
 
