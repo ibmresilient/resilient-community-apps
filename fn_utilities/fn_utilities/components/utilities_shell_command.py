@@ -76,7 +76,7 @@ class FunctionComponent(ResilientComponent):
                             remote = remote[1:-1]
                         else:
                             raise ValueError('Remote computer configurations must be wrapped in parentheses (), '
-                                             "%s was specfied" % remote)
+                                             "%s was specified" % remote)
 
                 # Get remote credentials
                 remote_config = re.split(':|@', remote)

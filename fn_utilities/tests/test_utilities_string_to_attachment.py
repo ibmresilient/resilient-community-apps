@@ -8,6 +8,7 @@ from mock_attachment import AttachmentMock
 from fn_utilities.util.utils_common import b_to_s
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
+from pytest_resilient_circuits import verify_subset
 
 PACKAGE_NAME = "fn_utilities"
 FUNCTION_NAME = "utilities_string_to_attachment"
@@ -40,7 +41,7 @@ class TestUtilitiesStringToAttachment:
         assert func is not None
 
     @pytest.mark.parametrize("string_to_convert_to_attachment, attachment_name, incident_id, expected_results", [
-        ("test string", "test attachment name", 202, {'attachment_id' : 2021})
+        ("test string", "test attachment name", 202, {"attachment_id" : 27})
     ])
 
     def test_success(self, circuits_app, string_to_convert_to_attachment, attachment_name, incident_id, expected_results):
@@ -51,4 +52,4 @@ class TestUtilitiesStringToAttachment:
             "incident_id": incident_id
         }
         results = call_utilities_string_to_attachment_function(circuits_app, function_params)
-        assert(expected_results == results)
+        verify_subset(expected_results, results)
