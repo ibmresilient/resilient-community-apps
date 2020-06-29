@@ -57,18 +57,16 @@ class SCWXClient(object):
 
     def post_tickets_updates(self, ticket_type, grouping_type):
         """POST get a list of updated tickets not yet acknowledged """
+        # Pass the parameters in the URL not in the payload for this endpoint only.
         url = u"{0}/tickets/updates".format(self.base_url)
-        payload = {'ticketType': ticket_type,
-                   'limit': self.limit,
-                   'assignedToCustomer': self.assigned_to_customer,
-                   'worklogs': "UPDATED",
-                   'groupingType': grouping_type}
-
-        # groupingType is optional.  If it is not defined, then Secureworks CTP will return all
+        url = u"{0}?ticketType={1}".format(url, ticket_type)
+        url = u"{0}&limit={1}".format(url, self.limit)
+        url = u"{0}&assignToCustomer={1}".format(url, self.assigned_to_customer)
+        url = u"{0}&worklogs={1}".format(url, "UPDATED")
         if grouping_type:
-            payload['groupingType'] = grouping_type
+            url = u"{0}&groupingType={1}".format(url, grouping_type)
 
-        response = self.rc.execute_call_v2("post", url, headers=self.headers, params=payload, verify=self.bundle,
+        response = self.rc.execute_call_v2("post", url, headers=self.headers, verify=self.bundle,
                                            proxies=self.rc.get_proxies())
         LOG.debug(u"Response: %s", response.text)
         response.raise_for_status()
