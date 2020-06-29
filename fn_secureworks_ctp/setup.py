@@ -20,7 +20,7 @@ def snake_to_camel(word):
 
 setup(
     name='fn_secureworks_ctp',
-    version='0.9.4',
+    version='0.9.5',
     license='MIT',
     author_email='',
     url='https://ibm.com/mysupport',
