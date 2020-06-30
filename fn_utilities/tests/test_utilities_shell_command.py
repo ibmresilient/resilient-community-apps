@@ -29,7 +29,6 @@ nslookup=nslookup "{{shell_param1}}"
 dig=dig "{{shell_param1}}"
 traceroute=(tracepath '{{shell_param1}}')
 traceroute_windows=[traceroute.ps1]
-traceroute_windows_fail=[traceroute.ps2]
 whois=whois "{{shell_param1}}"
 
 # remote shell cmd

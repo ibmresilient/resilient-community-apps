@@ -38,7 +38,7 @@ class TestCallRestApi:
     @pytest.mark.livetest
     @pytest.mark.parametrize("rest_method, rest_url, rest_headers, rest_body", [
         ('POST', "https://httpbin.org/post", {"Content-type": "application/json; charset=UTF-8"},
-         {'title': 'foo', 'body': 'bar','userId': 1})
+         {'title': 'foo', 'body': 'ƱƲ','userId': 1})
     ])
     def test_success(self, circuits_app, rest_method, rest_url, rest_headers, rest_body):
         """ Test calling with sample values for the parameters """

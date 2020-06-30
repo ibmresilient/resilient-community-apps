@@ -12,9 +12,10 @@
   ![screenshot: screenshot_1](./screenshots/screenshot_1.png)
 -->
 
-# **User Guide:** fn_utilities_v1.0.10
+# **User Guide:** fn_utilities_v2.0.0
 
 ## Table of Contents
+- [App Host Setup](App-Host-Setup)
 - [Function - Utilities: Attachment Hash](#function---utilities-attachment-hash)
 - [Function - Utilities: Attachment to Base64](#function---utilities-attachment-to-base64)
 - [Function - Utilities: Attachment Zip Extract](#function---utilities-attachment-zip-extract)
@@ -39,6 +40,20 @@
 - [Rules](#rules)
 
 ---
+
+### Release History
+
+| Version | Date | Notes |
+| ------- | ---- | ----- |
+| 2.0.0   | 7/2020 | Numerous fixes and py3 support ongoing |
+
+### App Host Setup
+This integration is available for use in App Host. There are a few differences to be aware of:
+* When using Shell Command, several utilities have been installed on the container including: 
+dig, nslookup, traceroute and whois. These utilities can be specified within the app.config file directly such as:
+`nslookup=nslookup "{{shell_param1}}"`. 
+Other utilities not loaded within the container can be accessed via remote shell execution
+
 
 ## Function - Utilities: Attachment Hash
 Calculate hashes for a file attachment. Returns `md5`, `sha1`, `sha256` and other hashes of the file content. Those hashes can then be used as artifacts or in other parts of your workflows.
@@ -1732,24 +1747,43 @@ incident.addNote(helper.createRichText(html))
 ## Function - Utilities: Shell Command
 This function allows your workflows to execute shell-scripts locally or remotely, and return the result into the workflow. The results include the `stdout` and `stderr` streams, the return code, and information about the execution time. If the output of the shell script is JSON, it is returned as structured data. Results can then be added to the incident as file attachments, artifacts, data tables, or any other uses.
 
-These functions can be run on any platform. If you install and run the resilient-circuits framework on Windows, this allows you to configure this function to run PowerShell scripts.
+These functions can be run on any platform. Different modes supported:
+* Remote Linux execution
+* Remote Windows command and powershell execution
+* Local command execution of Linux commands such as nslookup, dig, traceroute and whois
+* Local execution of Windows Powershell commands if resilient-circuits is installed on a Windows platform.
 
  ![screenshot: fn-utilities-shell-command ](./screenshots/fn-utilities-shell-command.png)
 
-* Remote commands must specify a target Windows machine that has Windows Remote Management (WinRM) enabled. This can be done by running `winrm qc` in the remote computer’s command prompt.
-* Remote shells have a max memory that may not be sufficient to run your script; to change this value you must set `MaxMemoryPerShellMB`.
 * For security, the list of available shell commands must be **configured explicitly by the administrator**. To do this, edit the [fn_utilities] section of the `app.config` file.
 * **NOTE:** The parameter values `{{shell_param1}}`, `{{shell_param2}}`, `{{shell_param3}}` may contain spaces, dashes and other characters. In your command configuration, they must be surrounded with double-quotes. Failure to properly quote your command parameters creates a security risk, since the parameter values usually come from artifacts and other untrusted data.
-For remote powershell scripts the, `shell_param2`, and `shell_param3` values map `$args[0]`, `$args[1]`, and `$args[2]` respectively in the Powershell script.
+
+For local and remote Windows environments:
+* Remote commands must specify a target Windows machine that has Windows Remote Management (WinRM) enabled. This can be done by running `winrm qc` in the remote computer’s command prompt.
+* Remote shells have a max memory that may not be sufficient to run your script; to change this value you must set `MaxMemoryPerShellMB`.
+* For remote powershell scripts the, `shell_param2`, and `shell_param3` values map `$args[0]`, `$args[1]`, and `$args[2]` respectively in the Powershell script.
 
 ### app.config examples:
-* Unix Operating Systems basic examples:
+* Linux Operating Systems basic examples:
   ```
+  # Remote Linux and Windows servers:
+  remote_computer=(usr1:password@192.168.1.186)
+  remote_computer_windows=(usr2:password@192.168.1.184)
+  
+  # Remote Windows commands:
+  traceroute_windows_ps=[\Users\ms\traceroute.ps1]
+  traceroute_windows_cmd=[tracert.exe -h 10 {{shell_param1}}]
+  
+  # Remote Linux command:
+  tracepath=(tracepath -m 10 '{{shell_param1}}')
+  
+  # Local Linux server commands:
   nslookup=nslookup "{{shell_param1}}"
-  dig=dig "{{shell_param1}}" traceroute=traceroute -m 15 "{{shell_param1}}"
+  dig=dig "{{shell_param1}}" 
+  traceroute=traceroute -m 15 "{{shell_param1}}"
   ```
 
-* In these examples using the Volatility forensics framework, the first parameter is filename of the memory image, assuming $VOLATILITY_LOCATION is set in the environment (such as in the system unit configuration). The second parameter is the Volatility profile ("Win7SP0x64" etc).
+* The following examples use the Volatility forensics framework, the first parameter is filename of the memory image, assuming $VOLATILITY_LOCATION is set in the environment (such as in the system unit configuration). The second parameter is the Volatility profile ("Win7SP0x64" etc).
   ```
   imageinfo=python /path/to/vol.py -f "{{shell_param1}}" imageinfo -- output=json
   kdbgscan=python /path/to/vol.py -f "{{shell_param1}}" -- profile="{{shell_param2}}" kdbgscan --output=json
@@ -1757,10 +1791,10 @@ For remote powershell scripts the, `shell_param2`, and `shell_param3` values map
   dlllist=python /path/to/vol.py -f "{{shell_param1}}" -- profile="{{shell_param2}}" dlllist --output=json
   ```
 
-### Running Scripts Remotely:
+### Running Powershell Scripts Remotely:
 To configure running scripts remotely, the user must make these changes to the config file:
-- Specify acceptable powershell compatible extensions of script files:
-  - `remote_powershell_extensions=ps1`
+- Specify acceptable powershell compatible extensions of script files, comma separated:
+  - `remote_powershell_extensions=ps1,psc1`
 - Specify the transport authentication method
   - `remote_auth_transport=ntlm`
 - Specify remote commands in the config file wrapped in square brackets []
@@ -1828,7 +1862,7 @@ results = {
 # NOTE: The administrator must configure each command before you can run it!
 inputs.shell_command = "traceroute"
 
-# True if running a Remote Powershell, otherwise False
+# True if running a Remote server, otherwise False
 inputs.shell_remote = False
 
 # Parameters to the command.  In this case we run traceroute to the artifact

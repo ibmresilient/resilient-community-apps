@@ -4,6 +4,14 @@
 from setuptools import setup, find_packages
 import glob
 import ntpath
+import sys
+
+PACKAGE='fn_utilities'
+
+# python 3 only support
+if sys.version_info < (3,0,0):
+    print('{} requires Python 3, Python {} was detected. Terminating.'.format(PACKAGE, str(sys.version[0])))
+    sys.exit(1)
 
 def get_module_name(module_path):
     """
@@ -39,7 +47,8 @@ setup(
         'pywinrm>=0.3.0',
         'json2html',
         'lxml',
-        'mail-parser>=3.9.3'
+        'mail-parser>=3.9.3',
+        'paramiko'
     ],
     packages=find_packages(),
     include_package_data=True,
