@@ -15,6 +15,11 @@
  
  ---
  
+## Change Log
+| Date | Version | Change|
+|---|---|---|
+|6/2020 | 1.0.2 | Proxy support added |
+
 ## About This Package:
 **This package contains Resilient functions that allows one to search for Common Vulnerability Exposures (CVE).**
 
@@ -71,6 +76,9 @@ This package requires that it be installed on a RHEL or CentOS platform using th
 	max_results_display = 50
 	# Base URL of Common Vulnerability Exposures Data Base.
 	cve_base_url = https://cve.circl.lu/api
+    # add proxies here or use [integrations] (see resilient-lib)
+    #http_proxy=
+    #https_proxy=
 	```  
 	
 *  To uninstall CVE Function from Resilient, run:

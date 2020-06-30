@@ -4,8 +4,7 @@
 """ A common library functions for CVE"""
 import time
 import calendar
-import requests
-from resilient_circuits import FunctionError
+from resilient_lib import RequestsCommon
 
 
 def get_gm_epoch_time_stamp(date_string):
@@ -20,7 +19,7 @@ def get_gm_epoch_time_stamp(date_string):
     return time_miliseconds
 
 
-def make_rest_api_get_call(rest_url, api_call=None):
+def make_rest_api_get_call(rest_url, app_config_ops, app_config_cve_search, api_call=None):
     """
     :param rest_url: Rest Api URL
     :param api_call: Just reference
@@ -28,14 +27,12 @@ def make_rest_api_get_call(rest_url, api_call=None):
     """
     response_json_object = dict()
     try:
-        response_object = requests.get(url=rest_url)
-        response_code = response_object.status_code
-        if response_code == 200:
-            response_json_object['content'] = response_object.json()
-            response_json_object['api_call'] = api_call
-            return response_json_object
-        else:
-            raise ValueError("CVE API Call Failed with status code : {}".format(response_code))
+        rc = RequestsCommon(app_config_ops, app_config_cve_search)
+        response = rc.execute_call_v2("GET", rest_url)
+
+        response_json_object['content'] = response.json()
+        response_json_object['api_call'] = api_call
+        return response_json_object
 
     except Exception as call_err:
         raise ValueError("CVE API Call Failed : {}".format(call_err))
