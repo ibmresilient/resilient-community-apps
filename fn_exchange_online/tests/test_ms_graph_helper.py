@@ -240,7 +240,7 @@ class TestMSGraphHelper(object):
                 'value': [{'userPrincipalName': 'tester1@example.com'}, {'userPrincipalName': 'tester2@example.com'}]}
             get_mock.return_value = generate_response(content, 200)
 
-            user_list = MS_graph_helper.get_users()
+            user_list = MS_graph_helper.get_users(None)
             assert len(user_list) == 2
             assert user_list[0]['userPrincipalName'] == 'tester1@example.com'
             assert user_list[1]['userPrincipalName'] == 'tester2@example.com'
@@ -325,9 +325,7 @@ class TestMSGraphHelper(object):
             mocked_get.side_effect = [generate_response(content1, 404)]
             result_list = MS_graph_helper.query_messages("tester1@example.com", None, None, None, None, None, "lunch",
                                                          None)
-            assert len(result_list) == 1
-            assert result_list[0]['status_code'] == 404
-            assert len(result_list[0]['email_list']) == 0
+            assert len(result_list) == 0
 
             mocked_get.side_effect = [generate_response(content1, 300)]
             result_list = MS_graph_helper.query_messages("tester1@example.com", None, None, None, None, None, "lunch",
