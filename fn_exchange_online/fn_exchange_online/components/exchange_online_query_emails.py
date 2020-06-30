@@ -75,6 +75,8 @@ class FunctionComponent(ResilientComponent):
                                             self.options.get("client_secret"),
                                             self.options.get("max_messages"),
                                             self.options.get("max_users"),
+                                            self.options.get("max_retries_total"),
+                                            self.options.get("max_retries_backoff_factor"),
                                             RequestsCommon(self.opts, self.options).get_proxies())
 
             email_results = MS_graph_helper.query_messages(email_address, mail_folders, sender, start_date, end_date,
@@ -93,3 +95,4 @@ class FunctionComponent(ResilientComponent):
         except Exception as err:
             LOG.error(err)
             yield FunctionError(err)
+

@@ -35,12 +35,14 @@ def selftest_function(opts):
     client_secret = options['client_secret']
     max_messages = options['max_messages']
     max_users = options['max_users']
-
+    max_retries_total = options['max_retries_total']
+    max_retries_backoff_factor = options['max_retries_backoff_factor']
     try:
         log.info(
             u'Calling MS Graph API with: \n token_url: ' + token_url + u'\n MS Graph API url: ' + graph_url +
             u'\n tenant_id: ' + tenant_id + u'\n client_id: ' + client_id + u'\n max_messages: ' + max_messages +
-            u'\n max_users: ' + max_users)
+            u'\n max_users: ' + max_users + u'\n max_retries_total: ' + max_retries_total +
+            u'\n max_retries_backoff_factor: ' + max_retries_backoff_factor)
 
         state, reason = "", ""
 
@@ -52,6 +54,8 @@ def selftest_function(opts):
                                         client_secret,
                                         max_messages,
                                         max_users,
+                                        max_retries_total,
+                                        max_retries_backoff_factor,
                                         RequestsCommon(opts, options).get_proxies())
 
         # Get a MS Graph session token

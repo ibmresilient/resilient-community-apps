@@ -29,6 +29,11 @@
   Specify all changes in this release. Do not remove the release 
   notes of a previous release
 -->
+### v1.1.0
+* Add "retry" capability to Microsoft Graph API requests when 503 (server unavailable)  or 429 (too many requests) 
+are returned from the server. Parameters max_retries_total and max_retries_backoff_factor are 
+settable in the app.config.
+
 ### v1.0.0
 * Initial Release
 
@@ -141,7 +146,8 @@ The integration contains the following functions:
   | **client_secret** | Yes | `xxx` | *Microsoft Azure Client Secret* |
   | **max_messages** | Yes | `100` | *Maximum number of messages that a query will return* |
   | **max_users** | Yes | `2000` | *Maximum number of users searched in a query* |
-
+  | **max_retries_total** | Yes | `10` | *Maximum number of retries for MS Graph API request* |
+  | **max_retries_backoff_factor** | Yes | `5` | *Backoff factor used to determine time to sleep between requests* |
 * **Save** and **Close** the app.config file.
 * [Optional]: Run selftest to test the Integration you configured:
   ```
