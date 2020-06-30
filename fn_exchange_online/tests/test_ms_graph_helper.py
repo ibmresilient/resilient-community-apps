@@ -242,8 +242,8 @@ class TestMSGraphHelper(object):
 
             user_list = MS_graph_helper.get_users(None)
             assert len(user_list) == 2
-            assert user_list[0]['userPrincipalName'] == 'tester1@example.com'
-            assert user_list[1]['userPrincipalName'] == 'tester2@example.com'
+            assert user_list[0] == 'tester1@example.com'
+            assert user_list[1] == 'tester2@example.com'
         except IntegrationError as err:
             assert True
 
