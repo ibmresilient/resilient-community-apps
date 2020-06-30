@@ -142,7 +142,7 @@ class SecureworksCTPPollComponent(ResilientComponent):
                     if status in ('Closed', 'Resolved'):
                         # Ticket was closed in Secureworks, so closed the Resilient incident now.
                         if resilient_incident:
-                            result = self._close_incident(resilient_incident, ticket_id, status)
+                            result = self._close_incident(resilient_incident, ticket)
                     else:
                         if not resilient_incident:
                             # Create a new incident for this Secureworks CTP ticket.
@@ -263,9 +263,9 @@ class SecureworksCTPPollComponent(ResilientComponent):
         except Exception as err:
             raise IntegrationError(err)
 
-    def _close_incident(self, incident, ticket_id, status):
+    def _close_incident(self, incident, ticket):
         """
-        Create a new Resilient incident by rendering a jinja2 template
+        Close a Resilient incident by rendering a jinja2 template
         :param ticket: Secureworks CTP ticket (json object)
         :return: Resilient incident
         """
@@ -288,16 +288,16 @@ class SecureworksCTPPollComponent(ResilientComponent):
             with open(template_file_path, "r") as definition:
                 close_template = definition.read()
 
-            incident_payload = render_json(close_template, incident)
+            incident_payload = render_json(close_template, ticket)
             # Set the scwx_ctp_status incident field to the ticket status (Closed or Resolved) so that the
             # automatic rule to close the Securework ticket is not triggered as the ticket is already closed in SCWX.
-            incident_payload['properties']['scwx_ctp_status'] = status
+            incident_payload['properties']['scwx_ctp_status'] = ticket.get("status")
 
             # Render the template.
             incident_id = incident.get('id')
-
             result = self._update_incident(incident_id, incident_payload)
 
+            ticket_id = ticket.get('ticketId')
             if result and result.get('success'):
                 message = u"Closed incident {} for Secureworks CTP ticket {}".format(incident_id, ticket_id)
                 LOG.info(message)
