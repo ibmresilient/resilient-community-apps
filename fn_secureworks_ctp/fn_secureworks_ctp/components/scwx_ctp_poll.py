@@ -139,20 +139,19 @@ class SecureworksCTPPollComponent(ResilientComponent):
                     # Check if there is already a Resilient incident for this Secureworks ticket.
                     resilient_incident = self._find_resilient_incident_for_req(ticket_id)
 
+                    if not resilient_incident:
+                        # Create a new incident for this Secureworks CTP ticket.
+                        resilient_incident = self._create_incident(ticket)
+
+                    # Add ticket worklogs to the incident as notes
+                    self.add_worklog_notes(resilient_incident, ticket)
+
+                    # Add ticket attachments to the incident as attachments
+                    self.add_ticket_attachments(resilient_incident, ticket)
+
                     if status in ('Closed', 'Resolved'):
                         # Ticket was closed in Secureworks, so closed the Resilient incident now.
-                        if resilient_incident:
-                            result = self._close_incident(resilient_incident, ticket)
-                    else:
-                        if not resilient_incident:
-                            # Create a new incident for this Secureworks CTP ticket.
-                            resilient_incident = self._create_incident(ticket)
-
-                        # Add ticket worklogs to the incident as notes
-                        self.add_worklog_notes(resilient_incident, ticket)
-
-                        # Add ticket attachments to the incident as attachments
-                        self.add_ticket_attachments(resilient_incident, ticket)
+                        result = self._close_incident(resilient_incident, ticket)
 
                     # Acknowledge Secureworks that we have received and processed the ticket.
                     response_ack = self.scwx_client.post_tickets_acknowledge(ticket)
