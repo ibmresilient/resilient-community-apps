@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_datatable_utils',
-    version='1.0.0',
+    version='1.1.0',
     license='MIT',
     author='Resilient Labs',
     author_email='resil.labs@gmail.com',
@@ -25,8 +25,8 @@ setup(
         "resilient.circuits.components": [
             "DtUtilsGetRowFunctionComponent = fn_datatable_utils.components.dt_utils_get_row:FunctionComponent",
             "DtUtilsUpdateRowFunctionComponent = fn_datatable_utils.components.dt_utils_update_row:FunctionComponent",
-            "DtUtilsDeleteRowFunctionComponent = fn_datatable_utils.components.dt_utils_delete_row:FunctionComponent"
-
+            "DtUtilsDeleteRowFunctionComponent = fn_datatable_utils.components.dt_utils_delete_row:FunctionComponent",
+            "DtUtilsGetRowsFunctionComponent = fn_datatable_utils.components.dt_utils_get_rows:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_datatable_utils.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_datatable_utils.util.customize:customization_data"],

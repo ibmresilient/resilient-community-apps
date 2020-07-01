@@ -2,6 +2,7 @@
 """ This is a helper module for GET, UPDATE and DELETE
     Functions for a Resilient Data Table """
 
+
 class RESDatatable(object):
     """ A helper class for manipulate a Resilient Data Table"""
     def __init__(self, res_client, incident_id, dt_api_name):
@@ -22,6 +23,33 @@ class RESDatatable(object):
             self.rows = self.data["rows"]
         except Exception:
             raise ValueError("Failed to get {0} Datatable".format(self.api_name))
+
+    def get_rows(self, max_rows=0, sort_by=None, sort_direction="ASC", search_column=None, search_value=None):
+        """ Searches and returns rows based on a search/sort criteria, else None """
+
+        if self.rows:
+            rows_to_return = []
+            is_reverse = True if sort_direction == "DESC" else False
+
+            for row in self.rows:
+                cells = row["cells"]
+                if search_column not in cells:
+                    raise ValueError("{0} is not a valid column api name in for the data table {1}".format(search_column, self.api_name))
+                if cells[search_column]["value"] == search_value:
+                    rows_to_return.append(row)
+
+            if sort_by:
+                if sort_by not in cells:
+                    raise ValueError(
+                        "{0} is not a valid column api name in for the data table {1}".format(sort_by, self.api_name))
+                rows_to_return = sorted(rows_to_return, key=lambda item: item['cells'][sort_by]['value'],
+                                        reverse=is_reverse)
+            if max_rows != 0:
+                rows_to_return = rows_to_return[:max_rows]
+
+            return rows_to_return
+        else:
+            return None
 
     def get_row(self, row_id=None, search_column=None, search_value=None):
         """ Searches and returns row if row found, else None """
@@ -131,21 +159,33 @@ def get_function_input(inputs, input_name, optional=False):
         return the_input
 
 
-def validate_search_inputs(row_id, search_column, search_value):
+def validate_search_inputs(**options):
     """Function that determines if row_id, search_column and search_value are defined correctly"""
     return_value = {
         "valid": True,
         "msg": None
     }
 
-    a_search_var_defined = True if search_column or search_value else False
+    is_row_id = True if "row_id" in options else False
+    is_search_column = True if "search_column" in options else False
+    is_search_value = True if "search_value" in options else False
+    is_sort_by_var_defined = True if "sort_by" in options and options["sort_by"] else False
+    is_reverse = True if "sort_direction" in options and options["sort_direction"] == "DESC" else False
+    a_search_var_defined = True if (is_search_column and options["search_column"]) and (is_search_value and options["search_value"]) else False
 
-    if row_id and a_search_var_defined:
-        return_value["valid"] = False
-        return_value["msg"] = "Only 'row_id' or the 'search_column and search_value' pair can be defined"
-
-    elif not row_id and not a_search_var_defined:
-        return_value["valid"] = False
-        return_value["msg"] = "You must define either 'row_id' or the 'search_column and search_value' pair"
+    if is_row_id:
+        if options["row_id"] and a_search_var_defined:
+            return_value["valid"] = False
+            return_value["msg"] = "Only 'row_id' or the 'search_column and search_value' pair can be defined"
+        elif not options["row_id"] and not a_search_var_defined:
+            return_value["valid"] = False
+            return_value["msg"] = "You must define either 'row_id' or the 'search_column and search_value' pair"
+    elif not is_row_id:
+        if not a_search_var_defined:
+            return_value["valid"] = False
+            return_value["msg"] = "You must define the 'search_column and search_value' pair"
+        if is_reverse and not is_sort_by_var_defined:
+            return_value["valid"] = False
+            return_value["msg"] = "You must define 'sort_direction and sort_by' pair"
 
     return return_value
