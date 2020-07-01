@@ -127,46 +127,62 @@ class SecureworksCTPPollComponent(ResilientComponent):
                 ticket_id_list = [ticket.get('ticketId') for ticket in tickets]
                 message = u"Secureworks CTP tickets to be processed this poll:\nticketType: {0} groupingType: {1}".format(ticket_type, grouping_type)
                 LOG.info(message)
-                LOG.info(u"%s", ticket_id_list)
+                LOG.info(u"ticket list: %s", ticket_id_list)
 
                 for ticket in tickets:
-
-                    ticket_id = ticket.get('ticketId')
-                    status = ticket.get('status')
-
-                    LOG.info(u"Processing ticket: %s status: %s", ticket_id, status)
-
-                    # Check if there is already a Resilient incident for this Secureworks ticket.
-                    resilient_incident = self._find_resilient_incident_for_req(ticket_id)
-
-                    if not resilient_incident:
-                        # Create a new incident for this Secureworks CTP ticket.
-                        resilient_incident = self._create_incident(ticket)
-
-                    # Add ticket worklogs to the incident as notes
-                    self.add_worklog_notes(resilient_incident, ticket)
-
-                    # Add ticket attachments to the incident as attachments
-                    self.add_ticket_attachments(resilient_incident, ticket)
-
-                    if status in ('Closed', 'Resolved'):
-                        # Ticket was closed in Secureworks, so closed the Resilient incident now.
-                        result = self._close_incident(resilient_incident, ticket)
-
-                    # Acknowledge Secureworks that we have received and processed the ticket.
-                    response_ack = self.scwx_client.post_tickets_acknowledge(ticket)
-
-                    code = response_ack[0].get('code')
-                    if code != "SUCCESS":
-                        LOG.warning(u"Secureworks CTP could NOT acknowledge ticket: %s code: %s", ticket_id, code)
-                    else:
-                        LOG.info(u"Secureworks CTP acknowledged ticket: %s code: %s", ticket_id, code)
+                    code = self.process_ticket(ticket)
 
         except Exception as err:
             raise IntegrationError(err)
         finally:
             # We always want to reset the timer to wake up, no matter failure or success
             self.fire(PollCompleted())
+
+    def process_ticket(self, ticket):
+        """
+        process_ticket process a Secureworks ticket and create a Resilient incident if one does not already exist.
+        Add new worklogs and attachments if any and close a ticket if the status is Closed or Resolved.
+        :param ticket:
+        :return:
+        """
+        code = "NOT SUCCESS"
+        try:
+            ticket_id = ticket.get('ticketId')
+            status = ticket.get('status')
+
+            LOG.info(u"Processing ticket: %s status: %s", ticket_id, status)
+
+            # Check if there is already a Resilient incident for this Secureworks ticket.
+            resilient_incident = self._find_resilient_incident_for_req(ticket_id)
+
+            if not resilient_incident:
+                # Create a new incident for this Secureworks CTP ticket.
+                resilient_incident = self._create_incident(ticket)
+
+            # Add ticket worklogs to the incident as notes
+            self.add_worklog_notes(resilient_incident, ticket)
+
+            # Add ticket attachments to the incident as attachments
+            self.add_ticket_attachments(resilient_incident, ticket)
+
+            if status in ('Closed', 'Resolved'):
+                # Ticket was closed in Secureworks, so closed the Resilient incident now.
+                LOG.info(u"Secureworks ticket {0} is {1}: Closing incident {2}.", ticket_id, status, resilient_incident)
+                result = self._close_incident(resilient_incident, ticket)
+
+            # Acknowledge Secureworks that we have received and processed the ticket.
+            response_ack = self.scwx_client.post_tickets_acknowledge(ticket)
+
+            code = response_ack[0].get('code')
+            if code != "SUCCESS":
+                LOG.warning(u"Secureworks CTP could NOT acknowledge ticket: %s code: %s", ticket_id, code)
+            else:
+                LOG.info(u"Secureworks CTP acknowledged ticket: %s code: %s", ticket_id, code)
+
+        except Exception as err:
+            LOG.error(err)
+
+        return code
 
     def _find_resilient_incident_for_req(self, ticket_id):
         """
