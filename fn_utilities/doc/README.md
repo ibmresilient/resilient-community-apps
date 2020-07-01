@@ -45,14 +45,15 @@
 
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 2.0.0   | 7/2020 | Numerous fixes and py3 support ongoing |
+| 2.0.0   | 7/2020 | Numerous fixes and Python 3 support ongoing |
+| | | Shell Command support for Remote Linux Execution |
 
 ### App Host Setup
 This integration is available for use in App Host. There are a few differences to be aware of:
-* When using Shell Command, several utilities have been installed on the container including: 
-dig, nslookup, traceroute and whois. These utilities can be specified within the app.config file directly such as:
+* When using Shell Command, several Linux commands have been installed on the container including: 
+dig, nslookup, traceroute and whois. These commands can be specified within the app.config file directly such as:
 `nslookup=nslookup "{{shell_param1}}"`. 
-Other utilities not loaded within the container can be accessed via remote shell execution
+Other commands not loaded within the container can be accessed via remote shell execution. See the section [Function - Utilities: Shell Command](#function---utilities-shell-command) for more information. 
 
 
 ## Function - Utilities: Attachment Hash
@@ -270,7 +271,7 @@ None
 
 ---
 ## Function - Utilities: Attachment Zip List
-Reads a ZIP file and produces a list of the file paths, and a list with detailed information about each file.
+Reads a ZIP file and produces a list of the compressed files, and a list with detailed information about each file.
 
  ![screenshot: fn-utilities-attachment-zip-list ](./screenshots/fn-utilities-attachment-zip-list.png)
 
@@ -378,7 +379,7 @@ incident.addNote(helper.createRichText(html))
 
 ---
 ## Function - Utilities: Base64 to Artifact
-Creates a new artifact from a Base64 string. You can  specify the artifact type and description.
+Creates a new artifact from a Base64 string. You can also specify the artifact type and description.
 
  ![screenshot: fn-utilities-base64-to-artifact ](./screenshots/fn-utilities-base64-to-artifact.png)
 
@@ -484,7 +485,7 @@ None
 
 ---
 ## Function - Utilities: Base64 to Attachment
-Creates a new attachment from a base64 string.
+Creates a new attachment from a base64 string. You can also specify the file name and content type to use.
 
  ![screenshot: fn-utilities-base64-to-attachment ](./screenshots/fn-utilities-base64-to-attachment.png)
 
@@ -562,7 +563,7 @@ None
 ## Function - Utilities: Call REST API
 This function calls a REST web service. It supports the standard REST methods: GET, HEAD, POST, PUT, DELETE and OPTIONS.
 
-The function parameters determine the type of call, the URL, and optionally the headers and body. The results include the text or structured (JSON) result from the web service, and additional information including the elapsed time.
+The function parameters determine the type of call, the URL, and optionally the headers, cookies and body. The results include the text or structured (JSON) result from the web service, and additional information including the elapsed time.
 
  ![screenshot: fn-utilities-call-rest-api ](./screenshots/fn-utilities-call-rest-api.png)
 
@@ -672,7 +673,7 @@ artifact.description = results.text
 
 ---
 ## Function - Utilities: Domain Distance
-Identifies similarity between a suspicious domain name and a list of valid domain names.  Low distance result indicates a possible spoof attempt.
+Identifies similarity between a suspicious domain name and a list of valid domain names.  Low distance result indicates a possible spoof attempt. For example, www.ibm.com and www.1bm.com would have a low distance.
 
  ![screenshot: fn-utilities-domain-distance ](./screenshots/fn-utilities-domain-distance.png)
 
@@ -752,19 +753,20 @@ Any attachments found are added to the incident as artifacts if `utilities_parse
 
 ### Supporting Outlook .msg files
 * This function relies on `mail-parser>=3.9.3`
-* To support parsing of Outlook email files (`.msg`), you need to install the `msgconvert` tool
-* `msgconvert` is a tool written in Perl and can be found in `libemail-outlook-message-perl` (Debian) or `Email::Outlook::Message` (Linux).
-* See https://github.com/SpamScope/mail-parser for more
 
-#### Install `msgconvert` on Debian based systems:
-```
-$ apt-get install libemail-outlook-message-perl
-```
-#### Install `msgconvert` on CentOS/Linux based systems:
+#### For Integrations Servers:
+* To support parsing of Outlook email files (`.msg`), you need to install the `msgconvert` tool
+* `msgconvert` is a tool written in Perl and can be found in `Email::Outlook::Message` (Centos/RHEL).
+* See https://github.com/SpamScope/mail-parser for more information on the packaged used.
+
+##### Install `msgconvert` on CentOS/RHEL based systems:
 ```
 $ sudo yum install cpan
-$ sudo cpan install Email::Outlook::Message
+$ sudo cpan -fTi install Email::Outlook::Message
 ```
+
+#### For App Host Environments:
+* The packages required to parse Outlook .msg  files is built into the container.
 
 <details><summary>Inputs:</summary>
 <p>
@@ -1063,7 +1065,7 @@ for named_range in keys:
 
 ---
 ## Function - Utilities: Expand URL
-Takes a URL (mostly shortened) and follows it through redirects as it expands. The results include each URL, which are added to a new artifact.
+Takes a shortened URL and follows it through redirects as it expands. The results include each URL, which are added to a new artifact.
 
  ![screenshot: fn-utilities-expand-url ](./screenshots/fn-utilities-expand-url.png)
 
@@ -1817,8 +1819,6 @@ remote_computer2=(domain\admin:P@ssw0rd@server2)
 - These remote commands can then be run in the workflow using the syntax `remote_command:remote_computer` as the input for shell_command. Examples:
   - `remote_command1:remote_computer1` runs `remote_command1` remotely on `remote_computer1`
   - `remote_command2:remote_computer1` runs `remote_command2` remotely on `remote_computer1`
-  - `remote_command1:remote_computer2` runs `remote_command1` remotely on `remote_computer2`
-  - `remote_command2:remote_computer2` runs `remote_command2` remotely on `remote_computer2`
 
 <details><summary>Inputs:</summary>
 <p>
@@ -2047,6 +2047,14 @@ None
 Transforms an XML document using a preexisting `xsl` stylesheet. The resulting content is returned.
 
  ![screenshot: fn-utilities-xml-transformation ](./screenshots/fn-utilities-xml-transformation.png)
+
+### For App Host Environments:
+* Set the app.config `xml_stylesheet_dir` setting as follows:
+
+     xml_stylesheet_dir= /var/rescircuits/xmltransformation
+* Add your transformation file to the App Configuration tab to refer to the same directory as used in `xml_stylesheet_dir`.
+
+![screenshot: fn-utilities-apphost-XMTransformations](./screenshots/fn-utilities-apphost-XMTransformations.png)
 
 <details><summary>Inputs:</summary>
 <p>
