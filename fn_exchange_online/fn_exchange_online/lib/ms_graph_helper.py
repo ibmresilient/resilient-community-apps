@@ -122,7 +122,10 @@ class MSGraphHelper(object):
         user_list = []
         user_count = 0
 
+        # The maximum number of users that MS Graph will return in one API is 999.  Use $top to specify
+        # return 999 users and $select to specify return just the userPrincipalName of the user.
         if starts_with:
+            # Use the $filter parameter to get users with email address starting with specific characters.
             ms_graph_users_url = u"{0}/users?$filter=startswith(userPrincipalName,'{1}')&$top=999&$select=userPrincipalName".format(self.ms_graph_url, starts_with)
         else:
             ms_graph_users_url = u"{0}/users?$top=999&$select=userPrincipalName".format(self.ms_graph_url)
