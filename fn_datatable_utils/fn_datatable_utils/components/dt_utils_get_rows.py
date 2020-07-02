@@ -1,3 +1,4 @@
+# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
@@ -63,8 +64,6 @@ class FunctionComponent(ResilientComponent):
             # Create payload dict with inputs
             payload = FunctionPayload(inputs)
 
-            yield StatusMessage("Function Inputs OK")
-
             # Instantiate a new RESDatatable
             datatable = RESDatatable(res_client, payload.inputs["incident_id"], payload.inputs["dt_utils_datatable_api_name"])
 
@@ -83,7 +82,7 @@ class FunctionComponent(ResilientComponent):
 
             # Else, set rows in the payload
             else:
-                yield StatusMessage("Rows found")
+                yield StatusMessage("{0} row/s found".format(len(rows)))
                 payload.success = True
                 payload.rows = rows
 
