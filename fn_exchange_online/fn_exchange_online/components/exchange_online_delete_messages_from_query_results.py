@@ -6,7 +6,7 @@
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import validate_fields, RequestsCommon, ResultPayload
-from fn_exchange_online.lib.ms_graph_helper import MSGraphHelper
+from fn_exchange_online.lib.ms_graph_helper import MSGraphHelper, MAX_RETRIES_TOTAL, MAX_RETRIES_BACKOFF_FACTOR
 
 CONFIG_DATA_SECTION = 'fn_exchange_online'
 LOG = logging.getLogger(__name__)
@@ -60,8 +60,8 @@ class FunctionComponent(ResilientComponent):
                                             self.options.get("client_secret"),
                                             self.options.get("max_messages"),
                                             self.options.get("max_users"),
-                                            self.options.get("max_retries_total"),
-                                            self.options.get("max_retries_backoff_factor"),
+                                            self.options.get("max_retries_total", MAX_RETRIES_TOTAL),
+                                            self.options.get("max_retries_backoff_factor", MAX_RETRIES_BACKOFF_FACTOR),
                                             RequestsCommon(self.opts, self.options).get_proxies())
 
             # Delete messages found in the query.

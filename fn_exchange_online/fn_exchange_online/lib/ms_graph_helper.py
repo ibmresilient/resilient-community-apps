@@ -14,6 +14,8 @@ from resilient_lib.components.integration_errors import IntegrationError
 LOG = logging.getLogger(__name__)
 DEFAULT_SCOPE = 'https://graph.microsoft.com/.default'
 TIME_FORMAT = '%Y-%m-%dT%H:%M:%S'
+MAX_RETRIES_TOTAL = 3
+MAX_RETRIES_BACKOFF_FACTOR = 5
 
 class MSGraphHelper(object):
     """
