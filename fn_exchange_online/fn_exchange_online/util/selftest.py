@@ -8,7 +8,7 @@
 import logging
 from resilient_lib import RequestsCommon, validate_fields
 from resilient_lib.components.integration_errors import IntegrationError
-from fn_exchange_online.lib.ms_graph_helper import MSGraphHelper
+from fn_exchange_online.lib.ms_graph_helper import MSGraphHelper, MAX_RETRIES_TOTAL, MAX_RETRIES_BACKOFF_FACTOR
 
 CONFIG_DATA_SECTION = 'fn_exchange_online'
 log = logging.getLogger(__name__)
@@ -28,21 +28,21 @@ def selftest_function(opts):
                      'client_id', 'client_secret', 'max_messages', 'max_users'], options)
 
     # Read configuration settings:
-    token_url = options['microsoft_graph_token_url']
-    graph_url = options['microsoft_graph_url']
-    tenant_id = options['tenant_id']
-    client_id = options['client_id']
-    client_secret = options['client_secret']
-    max_messages = options['max_messages']
-    max_users = options['max_users']
-    max_retries_total = options['max_retries_total']
-    max_retries_backoff_factor = options['max_retries_backoff_factor']
+    token_url = options.get('microsoft_graph_token_url')
+    graph_url = options.get('microsoft_graph_url')
+    tenant_id = options.get('tenant_id')
+    client_id = options.get('client_id')
+    client_secret = options.get('client_secret')
+    max_messages = options.get('max_messages')
+    max_users = options.get('max_users')
+    max_retries_total = int(options.get('max_retries_total', MAX_RETRIES_TOTAL))
+    max_retries_backoff_factor = int(options.get('max_retries_backoff_factor', MAX_RETRIES_BACKOFF_FACTOR))
     try:
         log.info(
             u'Calling MS Graph API with: \n token_url: ' + token_url + u'\n MS Graph API url: ' + graph_url +
             u'\n tenant_id: ' + tenant_id + u'\n client_id: ' + client_id + u'\n max_messages: ' + max_messages +
-            u'\n max_users: ' + max_users + u'\n max_retries_total: ' + max_retries_total +
-            u'\n max_retries_backoff_factor: ' + max_retries_backoff_factor)
+            u'\n max_users: ' + max_users + u'\n max_retries_total: ' + str(max_retries_total) +
+            u'\n max_retries_backoff_factor: ' + str(max_retries_backoff_factor))
 
         state, reason = "", ""
 
