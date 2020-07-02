@@ -33,15 +33,15 @@ def selftest_function(opts):
     tenant_id = options.get('tenant_id')
     client_id = options.get('client_id')
     client_secret = options.get('client_secret')
-    max_messages = options.get('max_messages')
-    max_users = options.get('max_users')
+    max_messages = int(options.get('max_messages'))
+    max_users = int(options.get('max_users'))
     max_retries_total = int(options.get('max_retries_total', MAX_RETRIES_TOTAL))
     max_retries_backoff_factor = int(options.get('max_retries_backoff_factor', MAX_RETRIES_BACKOFF_FACTOR))
     try:
         log.info(
             u'Calling MS Graph API with: \n token_url: ' + token_url + u'\n MS Graph API url: ' + graph_url +
-            u'\n tenant_id: ' + tenant_id + u'\n client_id: ' + client_id + u'\n max_messages: ' + max_messages +
-            u'\n max_users: ' + max_users + u'\n max_retries_total: ' + str(max_retries_total) +
+            u'\n tenant_id: ' + tenant_id + u'\n client_id: ' + client_id + u'\n max_messages: ' + str(max_messages) +
+            u'\n max_users: ' + str(max_users) + u'\n max_retries_total: ' + str(max_retries_total) +
             u'\n max_retries_backoff_factor: ' + str(max_retries_backoff_factor))
 
         state, reason = "", ""
