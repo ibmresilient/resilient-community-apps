@@ -48,7 +48,8 @@ setup(
         'json2html',
         'lxml',
         'mail-parser>=3.9.3',
-        'paramiko'
+        'paramiko',
+        'six==1.14.0'
     ],
     packages=find_packages(),
     include_package_data=True,
