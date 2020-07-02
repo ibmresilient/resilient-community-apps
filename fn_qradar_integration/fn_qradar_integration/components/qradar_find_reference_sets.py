@@ -20,11 +20,13 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
+        self.opts = opts
         self.options = opts.get("fn_qradar_integration", {})
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
+        self.opts = opts
         self.options = opts.get("fn_qradar_integration", {})
 
     @function("qradar_find_reference_sets")
@@ -49,7 +51,8 @@ class FunctionComponent(ResilientComponent):
                                          username=self.options.get("username", None),
                                          password=self.options.get("qradarpassword", None),
                                          token=self.options.get("qradartoken", None),
-                                         cafile=qradar_verify_cert)
+                                         cafile=qradar_verify_cert,
+                                         opts=self.opts, function_opts=self.options)
 
             r_items = qradar_client.find_all_ref_set_contains(qradar_reference_set_item_value)
 

@@ -4,14 +4,14 @@
 #
 #   Util classes for qradar
 #
-import requests
-import json
+
 import fn_qradar_integration.util.qradar_constants as qradar_constants
 import base64
 import logging
+import six
 from fn_qradar_integration.util.SearchWaitCommand import SearchWaitCommand, SearchFailure, SearchJobFailure
 import fn_qradar_integration.util.function_utils as function_utils
-import six
+from resilient_lib import RequestsCommon
 
 # handle python2 and 3
 try:
@@ -60,6 +60,7 @@ class AuthInfo(object):
         self.qradar_token = None
         self.api_url = None
         self.cafile = True
+        self.rc = None
         pass
 
     @staticmethod
@@ -68,7 +69,8 @@ class AuthInfo(object):
             AuthInfo.__instance = AuthInfo()
         return AuthInfo.__instance
 
-    def create(self, host, username=None, password=None, token=None, cafile=None):
+    def create(self, host, username=None, password=None, token=None, cafile=None,
+               opts=None, function_opts=None):
         """
         Create headers used for REST Api calls
         :param host: qradar host
@@ -76,6 +78,8 @@ class AuthInfo(object):
         :param password: qradar password
         :param token: Use token or username/password to auth
         :param cafile:
+        :param opts: app.config options
+        :param function_opts: function parameters from app.config
         :return:
         """
         self.headers = {'Accept': 'application/json'}
@@ -90,6 +94,12 @@ class AuthInfo(object):
         else:
             self.api_url = "https://{}/api/".format(host)
         self.cafile = cafile
+
+        self.rc = RequestsCommon(opts, function_opts)
+
+    def make_call(self, method, url, headers=None, data=None):
+        my_headers = headers if headers else self.headers
+        return self.rc.execute_call_v2(method, url, data=data, headers=my_headers, verify=self.cafile)
 
 
 class ArielSearch(SearchWaitCommand):
@@ -147,10 +157,7 @@ class ArielSearch(SearchWaitCommand):
 
         search_id = ""
         try:
-            response = requests.Session().post(url=url,
-                                               headers=auth_info.headers,
-                                               data=data,
-                                               verify=auth_info.cafile)
+            response = auth_info.make_call("POST", url, data=data)
 
             json = response.json()
             if "search_id" in json:
@@ -179,9 +186,7 @@ class ArielSearch(SearchWaitCommand):
 
         response = None
         try:
-            response = requests.Session().get(url=url,
-                                              headers=headers,
-                                              verify=auth_info.cafile)
+            response = auth_info.make_call("GET", url, headers=headers)
         except Exception as e:
             LOG.error(str(e))
             raise SearchFailure(search_id, None)
@@ -204,9 +209,8 @@ class ArielSearch(SearchWaitCommand):
         url = "{}{}/{}".format(auth_info.api_url, qradar_constants.ARIEL_SEARCHES, search_id)
         status = SearchWaitCommand.SEARCH_STATUS_ERROR_STOP
         try:
-            response = requests.Session().get(url=url,
-                                              headers=auth_info.headers,
-                                              verify=auth_info.cafile)
+            response = auth_info.make_call("GET", url)
+
             json_dict = response.json()
             if "status" in json_dict:
                 if json_dict["status"] == qradar_constants.SEARCH_STATUS_COMPLETED:
@@ -225,7 +229,8 @@ class ArielSearch(SearchWaitCommand):
 
 class QRadarClient(object):
 
-    def __init__(self, host, username=None, password=None, token=None, cafile=None):
+    def __init__(self, host, username=None, password=None, token=None, cafile=None,
+                 opts=None, function_opts=None):
         """
         Init
         :param host:  QRadar host
@@ -233,9 +238,11 @@ class QRadarClient(object):
         :param password: QRadar password
         :param token: QRadar token
         :param cafile: verify cert or not
+        :param opts: app.config options dictionary
+        :param function_opts: function parameters from app.config
         """
         auth_info = AuthInfo.get_authInfo()
-        auth_info.create(host, username, password, token, cafile)
+        auth_info.create(host, username, password, token, cafile, opts, function_opts)
 
     def check_openssl(self):
         """
@@ -251,10 +258,7 @@ class QRadarClient(object):
         auth_info = AuthInfo.get_authInfo()
 
         url = auth_info.api_url + qradar_constants.HELP_VERSIONS
-        session = requests.Session()
-        response = session.get(url,
-                               headers=auth_info.headers,
-                               verify=auth_info.cafile)
+        response = auth_info.make_call("GET", url)
 
         return response
 
@@ -318,9 +322,7 @@ class QRadarClient(object):
         url = u"{}{}".format(auth_info.api_url, qradar_constants.REFERENCE_SET_URL)
         ret = []
         try:
-            response = requests.Session().get(url=url,
-                                              headers=auth_info.headers,
-                                              verify=auth_info.cafile)
+            response = auth_info.make_call("GET", url)
             #
             # Sample return:
             """
@@ -385,9 +387,8 @@ class QRadarClient(object):
                 parameter = quote('?value="{}"'.format(filter))
                 url = url + parameter
 
-            response = requests.Session().get(url=url,
-                                              headers=auth_info.headers,
-                                              verify=auth_info.cafile)
+            response = auth_info.make_call("GET", url)
+
             # Sample return
             #{"creation_time":1523020929069,"timeout_type":"FIRST_SEEN","number_of_elements":2,
             # "data":[{"last_seen":1523020984874,"first_seen":1523020984874,"source":"admin","value":"8.8.8.8"}],
@@ -429,11 +430,7 @@ class QRadarClient(object):
         ret = None
         try:
             data = {"value": value}
-
-            response = requests.Session().post(url=url,
-                                               headers=auth_info.headers,
-                                               data=data,
-                                               verify=auth_info.cafile)
+            response = auth_info.make_call("POST", url, data=data)
 
             ret = {"status_code": response.status_code,
                    "content": response.json()}
@@ -456,13 +453,11 @@ class QRadarClient(object):
         ref_set_link = quote(ref_set, '')
         value = quote(value, '')
         url = u"{}{}/{}/{}".format(auth_info.api_url, qradar_constants.REFERENCE_SET_URL,
-                                  ref_set_link, value)
+                                   ref_set_link, value)
 
         ret = {}
         try:
-            response = requests.Session().delete(url=url,
-                                       headers=auth_info.headers,
-                                       verify=auth_info.cafile)
+            response = auth_info.make_call("DELETE", url)
 
             ret = {"status_code": response.status_code,
                    "content": response.json()}

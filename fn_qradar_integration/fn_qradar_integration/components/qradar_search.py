@@ -17,11 +17,13 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
+        self.opts = opts
         self.options = opts.get("fn_qradar_integration", {})
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
+        self.opts = opts
         self.options = opts.get("fn_qradar_integration", {})
 
     @function("qradar_search")
@@ -80,7 +82,8 @@ class FunctionComponent(ResilientComponent):
                                          username=self.options.get("username", None),
                                          password=self.options.get("qradarpassword", None),
                                          token=self.options.get("qradartoken", None),
-                                         cafile=qradar_verify_cert)
+                                         cafile=qradar_verify_cert,
+                                         opts=self.opts, function_opts=self.options)
 
             result = qradar_client.ariel_search(query_string,
                                                 qradar_query_all_results,
