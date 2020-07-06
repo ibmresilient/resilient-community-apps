@@ -40,7 +40,7 @@ Additional documentation on Ansible can be found at [the Ansible website](https:
 ## App Host Installation
 All the components for running Ansible in a container already exist when using the App Host container. The remainder of this section details the Ansible configuration file changes.
 
-Under the Configuration Tab for an App, build out the ansible-runner files needed per the [ansible-runner convention](https://ansible-runner.readthedocs.io/en/latest/index.html). The necessary files are the `hosts` file, ssh_key and your yml playbooks. Build these files under `/var/rescircuits/ansible` and ensure that the app.config file contains the same reference:
+Under the Configuration Tab for an App, build out the ansible-runner files needed per the [ansible-runner convention](https://docs.ansible.com/ansible/latest/installation_guide/intro_configuration.html). The necessary files are the `hosts` file, ssh_key and your yml playbooks. Build these files under `/var/rescircuits/ansible` and ensure that the app.config file contains the same reference:
 
 ```
 [fn_ansible]
@@ -61,12 +61,18 @@ This integration relies on the installation of the ansible solution on the integ
 * ansible-runner >= 1.3.4
 * Resilient platform >= v31.0.0
 * Integrations Server Resilient Circuits >= v30.0.0
-* Ansible config directory per the [ansible-runner convention](https://ansible-runner.readthedocs.io/en/latest/index.html)
+* Ansible config directory per the [ansible-runner convention](https://docs.ansible.com/ansible/latest/installation_guide/intro_configuration.html)
 
-* Ansible relies on a system library `sshpass`. Depending on your Integration Server operation system, different procedures are required to install this system library.  
+* Ansible relies on a system library `sshpass`. Depending on your Integration Server operation system, different procedures are required to install this system library.
+
+* For RHEL servers, the [Red Hat Developer Toolset](https://access.redhat.com/documentation/en-us/red_hat_developer_toolset/8/html/user_guide/chap-red_hat_developer_toolset) is needed to build the ansible runtime environment. This may also require a registered subscription manager to install. 
+
 This package requires that it is installed on a RHEL or CentOS platform and uses the Resilient Circuits framework. 
 
 * Unzip the package downloaded from the IBM App Exchange
+```
+    $ unzip fn_ansible-<version>.zip
+```
 * To install the package, run:
 
     ```
@@ -89,6 +95,7 @@ This package requires that it is installed on a RHEL or CentOS platform and uses
     ```
     [fn_ansible]
     runner_dir=</full/path/to/your/ansible/directory>
+    # temporary files collected when running a module or a playbook
     artifact_dir=</full/path/to/artifacts/directory>
     # change this value to trim the collection of previous process runs
     artifact_retention_num=0
