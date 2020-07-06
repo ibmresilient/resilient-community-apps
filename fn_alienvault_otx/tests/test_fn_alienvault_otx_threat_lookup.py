@@ -51,21 +51,16 @@ class TestFnAlienvaultOtxThreatLookup:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
-    mock_inputs = {
-        "alienvault_search_type": "IP Address",
-        "alienvault_search_value": "8.8.8.8",
-        "alienvault_section": "general"
-    }
-
-    expected_results = {"abc": "xyz"}
-
     @pytest.mark.livetest
-    @pytest.mark.parametrize("mock_inputs, expected_results", [
-        (mock_inputs, expected_results)
+    @pytest.mark.parametrize("test_inputs, results", [
+        ({"alienvault_search_type": "IP Address",
+            "alienvault_search_value": "8.8.8.8",
+            "alienvault_section": "general"},
+            {"abc": "xyz"})
     ])
-    def test_success(self, circuits_app, mock_inputs, expected_results):
+    def test_success(self, circuits_app, test_inputs, results):
         """ Test calling with sample values for the parameters """
 
-        results = call_fn_alienvault_otx_threat_lookup_function(circuits_app, mock_inputs)
+        results = call_fn_alienvault_otx_threat_lookup_function(circuits_app, test_inputs)
         """ Ensure that the API returns an 'indicator' field, which contains the IP submitted """
-        assert(results["content"]["indicator"] == mock_inputs["alienvault_search_value"])
+        assert(results["content"]["indicator"] == test_inputs["alienvault_search_value"])
