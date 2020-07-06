@@ -12,6 +12,7 @@
 This package contains functions that integrate with Ansible to run playbooks and modules for remote host execution.
 
 ## History
+1.2 - Support for App Host
 1.1 - change result payload format to JSON returned to Resilient 
  * For customers upgrading from 1.0, the example workflows will use different post-processing script logic, based on the json results returned.
 
@@ -35,7 +36,25 @@ Additional documentation on Ansible can be found at [the Ansible website](https:
   - Example: Ansible - Run a Playbook
   - Example: Ansible - Run a Playbook from an Artifact
 
-## Prerequisites:
+
+## App Host Installation
+All the components for running Ansible in a container already exist when using the App Host container. The remainder of this section details the Ansible configuration file changes.
+
+Under the Configuration Tab for an App, build out the ansible-runner files needed per the [ansible-runner convention](https://ansible-runner.readthedocs.io/en/latest/index.html). The necessary files are the `hosts` file, ssh_key and your yml playbooks. Build these files under `/var/rescircuits/ansible` and ensure that the app.config file contains the same reference:
+
+```
+[fn_ansible]
+runner_dir=/var/rescircuits/ansible
+artifact_dir=/tmp
+```
+
+This screenshot shows the minimum files needed. Your environment may require more file definitions.
+![screenshot](./screenshots/ansible_config_files.png)
+
+If you require additional ansible modules, additional effort is needed to include them as files in the Configuration tab.
+
+## Integration Server Installation
+### Prerequisites:
 This integration relies on the installation of the ansible solution on the integration server. The process of installing ansible can be followed [here](https://docs.ansible.com/ansible/latest/installation_guide/).
 
 * ansible >= 2.8.1
@@ -44,9 +63,7 @@ This integration relies on the installation of the ansible solution on the integ
 * Integrations Server Resilient Circuits >= v30.0.0
 * Ansible config directory per the [ansible-runner convention](https://ansible-runner.readthedocs.io/en/latest/index.html)
 
-* Ansible relies on a system library `sshpass`. Depending on your Integration Server operation system, different procedures are required to install this system library.
-
-## Installation    
+* Ansible relies on a system library `sshpass`. Depending on your Integration Server operation system, different procedures are required to install this system library.  
 This package requires that it is installed on a RHEL or CentOS platform and uses the Resilient Circuits framework. 
 
 * Unzip the package downloaded from the IBM App Exchange
