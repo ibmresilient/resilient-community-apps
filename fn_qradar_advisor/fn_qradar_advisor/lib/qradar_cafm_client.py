@@ -2,7 +2,7 @@
 # pragma pylint: disable=unused-argument, no-self-use
 # (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 
-from .qradar_http_info import HttpInfo
+from qradar_http_info import HttpInfo
 
 
 class TacticsTokenError(Exception):
@@ -56,7 +56,7 @@ class QRadarCafmClient(object):
         except Exception as e:
             self.log.error("Get token failed with exception:")
             self.log.error(str(e))
-            raise TacticsTokenError(url, str(e))
+            raise TacticsTokenError(url, e.message)
 
     def get_all_mapping(self):
         """
@@ -82,7 +82,7 @@ class QRadarCafmClient(object):
         except Exception as e:
             self.log.error("Offense insights failed with exception:")
             self.log.error(str(e))
-            raise GetAllMappingsError(url, str(e))
+            raise GetAllMappingsError(url, e.message)
 
         return response.json()
 
