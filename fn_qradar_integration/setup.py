@@ -30,6 +30,7 @@ setup(
             "QradarSearchFunctionComponent = fn_qradar_integration.components.qradar_search:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_qradar_integration.util.config:config_section_data"],
-        "resilient.circuits.customize": ["customize = fn_qradar_integration.util.customize:customization_data"]
+        "resilient.circuits.customize": ["customize = fn_qradar_integration.util.customize:customization_data"],
+        "resilient.circuits.selftest": ["selftest = fn_qradar_integration.util.selftest:selftest_function"]
     }
 )
