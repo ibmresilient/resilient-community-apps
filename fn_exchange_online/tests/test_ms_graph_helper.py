@@ -19,7 +19,9 @@ MOCKED_OPTS = {
     "client_id": "client_id",
     "client_secret": "client_secret",
     "max_messages": "100",
-    "max_users": "2000"
+    "max_users": "2000",
+    "max_retries_total": "10",
+    "max_retries_backoff_factor": "5"
 }
 
 def generate_response(content, status):
@@ -51,6 +53,8 @@ class TestMSGraphHelper(object):
                                             MOCKED_OPTS.get("client_secret"),
                                             MOCKED_OPTS.get("max_messages"),
                                             MOCKED_OPTS.get("max_users"),
+                                            MOCKED_OPTS.get("max_retries_total"),
+                                            MOCKED_OPTS.get("max_retries_backoff_factor"),
                                             None)
             content = {"displayName": "Tester"}
 
@@ -88,6 +92,8 @@ class TestMSGraphHelper(object):
                                             MOCKED_OPTS.get("client_secret"),
                                             MOCKED_OPTS.get("max_messages"),
                                             MOCKED_OPTS.get("max_users"),
+                                            MOCKED_OPTS.get("max_retries_total"),
+                                            MOCKED_OPTS.get("max_retries_backoff_factor"),
                                             None)
 
             delete_mock.return_value = generate_response(content, 204)
@@ -117,6 +123,8 @@ class TestMSGraphHelper(object):
                                             MOCKED_OPTS.get("client_secret"),
                                             MOCKED_OPTS.get("max_messages"),
                                             MOCKED_OPTS.get("max_users"),
+                                            MOCKED_OPTS.get("max_retries_total"),
+                                            MOCKED_OPTS.get("max_retries_backoff_factor"),
                                             None)
 
             get_mock.return_value = generate_response(content, 200)
@@ -152,6 +160,8 @@ class TestMSGraphHelper(object):
                                             MOCKED_OPTS.get("client_secret"),
                                             MOCKED_OPTS.get("max_messages"),
                                             MOCKED_OPTS.get("max_users"),
+                                            MOCKED_OPTS.get("max_retries_total"),
+                                            MOCKED_OPTS.get("max_retries_backoff_factor"),
                                             None)
 
             get_mock.return_value = generate_response(content, 200)
@@ -187,6 +197,8 @@ class TestMSGraphHelper(object):
                                             MOCKED_OPTS.get("client_secret"),
                                             MOCKED_OPTS.get("max_messages"),
                                             MOCKED_OPTS.get("max_users"),
+                                            MOCKED_OPTS.get("max_retries_total"),
+                                            MOCKED_OPTS.get("max_retries_backoff_factor"),
                                             None)
 
             post_mock.return_value = generate_response(content, 201)
@@ -221,15 +233,17 @@ class TestMSGraphHelper(object):
                                             MOCKED_OPTS.get("client_secret"),
                                             MOCKED_OPTS.get("max_messages"),
                                             MOCKED_OPTS.get("max_users"),
+                                            MOCKED_OPTS.get("max_retries_total"),
+                                            MOCKED_OPTS.get("max_retries_backoff_factor"),
                                             None)
             content = {
                 'value': [{'userPrincipalName': 'tester1@example.com'}, {'userPrincipalName': 'tester2@example.com'}]}
             get_mock.return_value = generate_response(content, 200)
 
-            user_list = MS_graph_helper.get_users()
+            user_list = MS_graph_helper.get_users(None)
             assert len(user_list) == 2
-            assert user_list[0]['userPrincipalName'] == 'tester1@example.com'
-            assert user_list[1]['userPrincipalName'] == 'tester2@example.com'
+            assert user_list[0] == 'tester1@example.com'
+            assert user_list[1] == 'tester2@example.com'
         except IntegrationError as err:
             assert True
 
@@ -247,6 +261,8 @@ class TestMSGraphHelper(object):
                                             MOCKED_OPTS.get("client_secret"),
                                             MOCKED_OPTS.get("max_messages"),
                                             MOCKED_OPTS.get("max_users"),
+                                            MOCKED_OPTS.get("max_retries_total"),
+                                            MOCKED_OPTS.get("max_retries_backoff_factor"),
                                             None)
 
             # Mock the users
@@ -289,6 +305,8 @@ class TestMSGraphHelper(object):
                                             MOCKED_OPTS.get("client_secret"),
                                             MOCKED_OPTS.get("max_messages"),
                                             MOCKED_OPTS.get("max_users"),
+                                            MOCKED_OPTS.get("max_retries_total"),
+                                            MOCKED_OPTS.get("max_retries_backoff_factor"),
                                             None)
 
             # Mock the email lists for user 1
@@ -307,9 +325,7 @@ class TestMSGraphHelper(object):
             mocked_get.side_effect = [generate_response(content1, 404)]
             result_list = MS_graph_helper.query_messages("tester1@example.com", None, None, None, None, None, "lunch",
                                                          None)
-            assert len(result_list) == 1
-            assert result_list[0]['status_code'] == 404
-            assert len(result_list[0]['email_list']) == 0
+            assert len(result_list) == 0
 
             mocked_get.side_effect = [generate_response(content1, 300)]
             result_list = MS_graph_helper.query_messages("tester1@example.com", None, None, None, None, None, "lunch",
@@ -330,6 +346,8 @@ class TestMSGraphHelper(object):
                                             MOCKED_OPTS.get("client_secret"),
                                             MOCKED_OPTS.get("max_messages"),
                                             MOCKED_OPTS.get("max_users"),
+                                            MOCKED_OPTS.get("max_retries_total"),
+                                            MOCKED_OPTS.get("max_retries_backoff_factor"),
                                             None)
 
             # Param list: email_address, mail_folder, sender, start_date, end_date, has_attachments, message_subject,

@@ -7,11 +7,10 @@ import json
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import validate_fields, RequestsCommon, ResultPayload
-from fn_exchange_online.lib.ms_graph_helper import MSGraphHelper
+from fn_exchange_online.lib.ms_graph_helper import MSGraphHelper, MAX_RETRIES_TOTAL, MAX_RETRIES_BACKOFF_FACTOR
 
 CONFIG_DATA_SECTION = 'fn_exchange_online'
 LOG = logging.getLogger(__name__)
-
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'exchange_online_query_emails"""
@@ -75,6 +74,8 @@ class FunctionComponent(ResilientComponent):
                                             self.options.get("client_secret"),
                                             self.options.get("max_messages"),
                                             self.options.get("max_users"),
+                                            self.options.get("max_retries_total", MAX_RETRIES_TOTAL),
+                                            self.options.get("max_retries_backoff_factor", MAX_RETRIES_BACKOFF_FACTOR),
                                             RequestsCommon(self.opts, self.options).get_proxies())
 
             email_results = MS_graph_helper.query_messages(email_address, mail_folders, sender, start_date, end_date,
@@ -93,3 +94,4 @@ class FunctionComponent(ResilientComponent):
         except Exception as err:
             LOG.error(err)
             yield FunctionError(err)
+

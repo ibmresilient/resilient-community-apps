@@ -9,7 +9,7 @@ import datetime
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import validate_fields, RequestsCommon, ResultPayload
 from resilient_lib.components.integration_errors import IntegrationError
-from fn_exchange_online.lib.ms_graph_helper import MSGraphHelper
+from fn_exchange_online.lib.ms_graph_helper import MSGraphHelper, MAX_RETRIES_TOTAL, MAX_RETRIES_BACKOFF_FACTOR
 
 CONFIG_DATA_SECTION = 'fn_exchange_online'
 LOG = logging.getLogger(__name__)
@@ -86,6 +86,8 @@ class FunctionComponent(ResilientComponent):
                                             self.options.get("client_secret"),
                                             self.options.get("max_messages"),
                                             self.options.get("max_users"),
+                                            self.options.get("max_retries_total"),
+                                            self.options.get("max_retries_backoff_factor"),
                                             RequestsCommon(self.opts, self.options).get_proxies())
 
             # Call MS Graph API to get the user profile

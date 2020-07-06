@@ -29,5 +29,12 @@ client_secret=xxx
 # 
 max_messages=100
 max_users=2000
+#
+# The following 2 parameters are used in Requests sessions to define the max_retries that a should 
+# be attempted when sending a MS Graph API request to the server.  If 503 (server unavailable)
+# or 429 (too many requests) are returned by the server, then increasing these parameters so that
+# more retries and more sleep time may allow the request to complete. 
+max_retries_total=10
+max_retries_backoff_factor=5
 """
     return config_data

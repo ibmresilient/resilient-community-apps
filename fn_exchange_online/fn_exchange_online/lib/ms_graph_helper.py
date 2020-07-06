@@ -7,28 +7,34 @@ from pytz import timezone
 import pytz
 from tzlocal.windows_tz import win_tz
 from resilient_lib import OAuth2ClientCredentialsSession
+from requests.packages.urllib3.util import Retry
+from requests.adapters import HTTPAdapter
 from resilient_lib.components.integration_errors import IntegrationError
 
 LOG = logging.getLogger(__name__)
 DEFAULT_SCOPE = 'https://graph.microsoft.com/.default'
 TIME_FORMAT = '%Y-%m-%dT%H:%M:%S'
+MAX_RETRIES_TOTAL = 3
+MAX_RETRIES_BACKOFF_FACTOR = 5
 
 class MSGraphHelper(object):
     """
     Helper object MSGraphHelper.
     """
     def __init__(self, ms_graph_token_url, ms_graph_url, tenant_id, client_id, client_secret, max_messages, max_users,
-                 proxies=None):
+                 max_retries_total, max_retries_backoff_factor, proxies=None):
         self.ms_graph_token_url = ms_graph_token_url.format(tenant=tenant_id)
         self.ms_graph_url = ms_graph_url
         self.tenant_id = tenant_id
         self.client_id = client_id
         self.client_secret = client_secret
         self.proxies = proxies
-        self.ms_graph_session = self.authenticate()
+        self.max_retries_total = int(max_retries_total)
+        self.max_retries_backoff_factor = int(max_retries_backoff_factor)
         self.max_messages = int(max_messages)
         self.current_message_count = 0
         self.max_users = int(max_users)
+        self.ms_graph_session = self.authenticate()
 
     @staticmethod
     def check_ms_graph_response_code(status_code):
@@ -38,17 +44,48 @@ class MSGraphHelper(object):
         :return:
         """
         if status_code >= 300 and status_code != 404:
-            raise IntegrationError("Invalid response from Microsoft Graph API call.")
+            raise IntegrationError("Invalid response from Microsoft Graph API call: status_code = {0}".format(status_code))
 
     def authenticate(self):
         """
         Authenticate and get oauth2 token for the session.
         """
-        return OAuth2ClientCredentialsSession(url=self.ms_graph_token_url,
-                                              client_id=self.client_id,
-                                              client_secret=self.client_secret,
-                                              scope=DEFAULT_SCOPE,
-                                              proxies=self.proxies)
+        session = OAuth2ClientCredentialsSession(url=self.ms_graph_token_url,
+                                                 client_id=self.client_id,
+                                                 client_secret=self.client_secret,
+                                                 scope=DEFAULT_SCOPE,
+                                                 proxies=self.proxies)
+        session.mount('https://', HTTPAdapter(
+            max_retries=Retry(
+                total=self.max_retries_total,
+                status_forcelist=[429, 500, 502, 503],
+                backoff_factor=self.max_retries_backoff_factor,
+                respect_retry_after_header=True
+            )
+        ))
+
+        session.mount('http://', HTTPAdapter(
+            max_retries=Retry(
+                total=self.max_retries_total,
+                status_forcelist=[429, 500, 502, 503],
+                backoff_factor=self.max_retries_backoff_factor,
+                respect_retry_after_header=True
+            )
+        ))
+
+        return session
+
+    def get_user_license_details(self, email_address):
+        """
+        Query MS Graph user profile endpoint using the MS graph session.
+        :param email_address: email address of the user license details requested
+        :return: requests response from the /users/profile endpoint
+        """
+        ms_graph_user_license_url = u'{0}/users/{1}/licenseDetails'.format(self.ms_graph_url, email_address)
+        response = self.ms_graph_session.get(ms_graph_user_license_url)
+
+        self.check_ms_graph_response_code(response.status_code)
+        return response
 
     def get_user_profile(self, email_address):
         """
@@ -76,28 +113,41 @@ class MSGraphHelper(object):
 
         return response
 
-    def get_users(self):
+    def get_users(self, starts_with):
         """
         Query MS Graph for all users endpoint.
         :return: requests response from the /users/ endpoint which is the list of all users.
         """
+
         user_list = []
         user_count = 0
-        ms_graph_users_url = u'{0}/users'.format(self.ms_graph_url)
+
+        # The maximum number of users that MS Graph will return in one API is 999.  Use $top to specify
+        # return 999 users and $select to specify return just the userPrincipalName of the user.
+        if starts_with:
+            # Use the $filter parameter to get users with email address starting with specific characters.
+            ms_graph_users_url = u"{0}/users?$filter=startswith(userPrincipalName,'{1}')&$top=999&$select=userPrincipalName".format(self.ms_graph_url, starts_with)
+        else:
+            ms_graph_users_url = u"{0}/users?$top=999&$select=userPrincipalName".format(self.ms_graph_url)
 
         while ms_graph_users_url and user_count <= self.max_users:
+
             response = self.ms_graph_session.get(ms_graph_users_url)
+            self.check_ms_graph_response_code(response.status_code)
             json_response = response.json()
+
             for user in json_response['value']:
-                # Add these users to the list
-                user_list.append(user)
+                email_address = user['userPrincipalName']
+                user_list.append(email_address)
 
             # Keep track of the total users retrieved so far.
-            user_count = user_count + len(json_response['value'])
+            user_count = len(user_list)
 
             # Get URL for the next batch of results.
             ms_graph_users_url = json_response.get('@odata.nextLink')
 
+        LOG.debug("get_users: Number of Exchange Online users to query: {}".format(user_count))
+        LOG.debug(user_list)
         return user_list
 
     def get_message(self, email_address, message_id):
@@ -332,10 +382,11 @@ class MSGraphHelper(object):
 
         return response
 
-    def query_messages_all_users(self, mail_folder, sender, start_date, end_date, has_attachments, message_subject,
-                                 message_body):
+    def query_messages_all_users(self, starts_with, mail_folder, sender, start_date, end_date, has_attachments,
+                                 message_subject, message_body):
         """
         This function iterates over all users and returns a list of emails that match the search criteria.
+        :param starts_with: get all users starting with this character(s)
         :param mail_folder: mailFolder id of the folder to search
         :param sender: email address of sender to search for
         :param start_date: date/time string of email received dated to start search
@@ -350,16 +401,22 @@ class MSGraphHelper(object):
         results = []
 
         # Get the users
-        user_list = self.get_users()
+        user_list = self.get_users(starts_with)
 
         # Iterate through all users
-        for user in user_list:
-            email_address = user['userPrincipalName']
+        LOG.debug("=====================Query All Users==========================\n")
+        for email_address in user_list:
+
             user_query = self.query_messages_by_address(email_address, mail_folder, sender, start_date, end_date,
                                                         has_attachments, message_subject, message_body)
             # Append results for this user
-            results.append(user_query)
+            status_code = user_query.get('status_code')
+            email_list = user_query.get('email_list')
+            if status_code >= 200 and status_code < 300:
+                results.append(user_query)
+            LOG.debug(u"***************** status = {0} **************************\n".format(status_code))
 
+            LOG.debug(u"email_address = {0} status_code = {1} number email = {2}".format(email_address, status_code, len(email_list)))
         return results
 
     def query_messages_by_list(self, email_address_string, mail_folder, sender, start_date, end_date, has_attachments,
@@ -384,7 +441,10 @@ class MSGraphHelper(object):
         for email_address in email_address_string.split(','):
             user_query = self.query_messages_by_address(email_address.strip(), mail_folder, sender, start_date,
                                                         end_date, has_attachments, message_subject, message_body)
-            results.append(user_query)
+            # Append results for this user
+            status_code = user_query.get('status_code')
+            if status_code >= 200 and status_code < 300:
+                results.append(user_query)
         return results
 
     def query_messages(self, email_address, mail_folder, sender, start_date, end_date, has_attachments, message_subject,
@@ -407,10 +467,14 @@ class MSGraphHelper(object):
         """
         # Initialize message count at the top-level query function.
         self.current_message_count = 0
-
+        user_startswith = None
         input_choices = set(['all', 'all user', 'all users'])
         if email_address.lower() in input_choices:
-            query_results = self.query_messages_all_users(mail_folder, sender, start_date, end_date,
+            query_results = self.query_messages_all_users(user_startswith, mail_folder, sender, start_date, end_date,
+                                                          has_attachments, message_subject, message_body)
+        elif email_address.lower().startswith('all:'):
+            user_startswith = email_address.lstrip('all:')
+            query_results = self.query_messages_all_users(user_startswith, mail_folder, sender, start_date, end_date,
                                                           has_attachments, message_subject, message_body)
         else:
             query_results = self.query_messages_by_list(email_address, mail_folder, sender, start_date, end_date,
@@ -431,27 +495,35 @@ class MSGraphHelper(object):
          :param message_body: search for emails containing this string in the "body" of email
          :return: list of emails in all user email account that match the search criteria.
          """
+
         ms_graph_query_url = self.build_MS_graph_query_url(email_address, mail_folder, sender, start_date, end_date,
                                                            has_attachments, message_subject, message_body)
+        # Append to the request url just the json fields we view in the data table.
+        ms_graph_query_url = u"{0}&$select=id,subject,sender,hasAttachments,receivedDateTime,webLink".format(ms_graph_query_url)
 
         email_list = []
         # MS Graph will return message results back a certain number at a time, so we need to
         # append all of the results to a single list.  Because there can be a huge number of emails
         # returned, keep a count and limit the number returned to a variable set in the app.config.
         # MS Graph sends back the URL for the next batch of results in '@data.nextLink' field.
+        response_status = 404
         while ms_graph_query_url and self.current_message_count <= self.max_messages:
+            LOG.debug("ms_graph_query_url = {0}".format(ms_graph_query_url))
             response = self.ms_graph_session.get(ms_graph_query_url)
 
-            self.check_ms_graph_response_code(response.status_code)
+            response_status = response.status_code
+            self.check_ms_graph_response_code(response_status)
 
             # Return empty list if the email address is not found.
-            if response.status_code == 404:
+            if response_status == 404:
                 email_list = []
+                LOG.debug(u"============== 404 ==================== current_message_count = {0}".format(self.current_message_count))
                 break
 
             json_response = response.json()
             for email in json_response['value']:
                 # Add these emails to the list
+                LOG.debug(u"adding email_address = {0} email subject = {1} id = {2}".format(email_address, email.get('subject'), email.get('id')))
                 email_list.append(email)
 
             # Keep track of the total emails retrieved so far.
@@ -461,7 +533,7 @@ class MSGraphHelper(object):
             ms_graph_query_url = json_response.get('@odata.nextLink')
 
         results = {'email_address': email_address,
-                   'status_code': response.status_code,
+                   'status_code': response_status,
                    'email_list': email_list
                    }
         return results
