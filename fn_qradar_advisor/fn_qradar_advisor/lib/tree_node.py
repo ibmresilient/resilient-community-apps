@@ -2,7 +2,7 @@
 # pragma pylint: disable=unused-argument, no-self-use
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 
-import stix_utils
+from . import stix_utils
 
 
 class TreeNode(object):
