@@ -2,6 +2,7 @@
 from pytest_resilient_circuits import BasicResilientMock, resilient_endpoint
 import requests_mock
 import json
+import six
 
 
 class DTResilientMock(BasicResilientMock):
@@ -40,6 +41,7 @@ class DTResilientMock(BasicResilientMock):
         'title': None
     }
 
+
     @staticmethod
     def format_datatable_row(row, row_id):
         formatted_row = {}
@@ -62,7 +64,7 @@ class DTResilientMock(BasicResilientMock):
             return_rows.append(DTResilientMock.format_datatable_row(row, row_id))
         return return_rows
 
-    @resilient_endpoint("GET", "/incidents/[0-9]+/table_data/mock_data_table\?handle_format=names$")
+    @resilient_endpoint("GET", r"/incidents/[0-9]+/table_data/mock_data_table\?handle_format=names$")
     def mock_datatable_get(self, request):
         """ Handle GET request for mock_data_table """
 
@@ -70,9 +72,9 @@ class DTResilientMock(BasicResilientMock):
 
         return requests_mock.create_response(request,
                                              status_code=200,
-                                             content=json.dumps(data))
+                                             content=six.b(json.dumps(data)))
 
-    @resilient_endpoint("DELETE", "/incidents/[0-9]+/table_data/mock_data_table/row_data/[0-9]\?handle_format=names$")
+    @resilient_endpoint("DELETE", r"/incidents/[0-9]+/table_data/mock_data_table/row_data/[0-9]\?handle_format=names$")
     def mock_datatable_delete_row(self, request):
         """ Handle DELETE request for mock_data_table """
 
@@ -80,9 +82,9 @@ class DTResilientMock(BasicResilientMock):
 
         return requests_mock.create_response(request,
                                              status_code=200,
-                                             content=json.dumps(data))
+                                             content=six.b(json.dumps(data)))
 
-    @resilient_endpoint("PUT", "/incidents/[0-9]+/table_data/mock_data_table/row_data/2\?handle_format=names$")
+    @resilient_endpoint("PUT", r"/incidents/[0-9]+/table_data/mock_data_table/row_data/2\?handle_format=names$")
     def mock_datatable_put(self, request):
         """ Handle PUT request for mock_data_table """
 
@@ -90,7 +92,7 @@ class DTResilientMock(BasicResilientMock):
 
         return requests_mock.create_response(request,
                                              status_code=200,
-                                             content=json.dumps(data))
+                                             content=six.b(json.dumps(data)))
 
 
 # This function is used in the update function pre-process script to help define the inputs

@@ -16,7 +16,7 @@ config_data = get_config_data(PACKAGE_NAME)
 resilient_mock = DTResilientMock
 
 
-def call_dt_utils_get_rows_function(circuits, function_params, timeout=5):
+def call_dt_utils_get_rows_function(circuits, function_params, timeout=10):
     # Create the submitTestFunction event
     evt = SubmitTestFunction("dt_utils_get_rows", function_params)
 
