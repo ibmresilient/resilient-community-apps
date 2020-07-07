@@ -65,6 +65,7 @@ class TestDtUtilsUpdateRow:
 
 
     @pytest.mark.parametrize("inputs, expected_results", [(inputs, output)])
+    @pytest.mark.livetest
     def test_success(self, circuits_app, inputs, expected_results):
         """ Test calling with sample values for the parameters """
 
