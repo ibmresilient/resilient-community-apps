@@ -46,6 +46,7 @@ class FunctionComponent(ResilientComponent):
             validate_fields(['exo_query_messages_results'], kwargs)
 
             # Get the function parameters
+
             query_results = kwargs.get('exo_query_messages_results')  # text
 
             LOG.info(u"exo_query_messages_results: %s", query_results)
