@@ -34,7 +34,7 @@ do
         echo "OS package install script found. About to run"
         sh ${integration}"/.travis_package_setup.sh"
       else
-        echo "Nothing additional to isntall"
+        echo "Nothing additional to install"
     fi
     echo "Running tox tests for this package: $integration"
     toxfile=${integration}"/tox.ini"
