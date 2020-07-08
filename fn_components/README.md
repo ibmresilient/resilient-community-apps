@@ -31,9 +31,15 @@ and each file is added through the Resilient App Configuration tab.
 ## Container Environment
 The container runs resilient-circuits similar to an Integration Server and continues to use the `componentsdir`
 app.config parameter. The following additional Python packages have been added to the container:
+
+* ldap3
+* jinja2 
+* json2html 
+* pytz 
 * requests
 * resilient-lib
 * six
+* tldextract 
 
 If you require additional Python packages, refer to the section below on how to 
 [modify the container build enviornment](#modify-docker-environment).

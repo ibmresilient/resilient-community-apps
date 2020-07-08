@@ -12,8 +12,8 @@ setup(
     author='Resilient Labs',
     author_email='resil.labs@gmail.com',
     url='https://github.com/ibmresilient/resilient-community-apps',
-    description="Resilient Circuits Components for single-file integrations",
-    long_description="""This is a shell container for running single-file integrations which are added to the components/ direrctory""",
+    description="Resilient Circuits components for single-file integrations",
+    long_description="""This is a shell container for running single-file integrations which are added to the components/ directory""",
     install_requires=[
         'resilient_circuits>=37.0.0'
     ],

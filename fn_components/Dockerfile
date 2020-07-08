@@ -13,7 +13,7 @@ USER 0
 RUN pip install --upgrade pip
 
 # install resilient-circuits
-RUN pip install resilient-circuits>=${RES_CIRCUITS_VERSION}
+RUN pip install "resilient-circuits>=${RES_CIRCUITS_VERSION}"
 
 ## ---- section for changes ----
 # uncomment and replicate if additional os libraries are needed
@@ -25,7 +25,7 @@ RUN pip install resilient-circuits>=${RES_CIRCUITS_VERSION}
 #RUN pip install /tmp/packages/${APPLICATION}-*.tar.gz
 
 # uncomment and replicate if additional pypi packages are needed
-RUN pip install requests resilient-lib six
+RUN pip install requests resilient-lib six jinja2 pytz json2html tldextract ldap3
 
 # uncomment and replicate if additional local packages are needed
 #COPY /path/to/extra_package /tmp/packages/.
