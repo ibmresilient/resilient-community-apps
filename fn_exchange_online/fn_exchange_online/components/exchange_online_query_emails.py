@@ -3,18 +3,16 @@
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
-import sys
-from io import BytesIO
-from datetime import datetime
 import json
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import validate_fields, RequestsCommon, ResultPayload, write_file_attachment, IntegrationError
+from resilient_lib import validate_fields, RequestsCommon, ResultPayload
 from fn_exchange_online.lib.ms_graph_helper import MSGraphHelper, MAX_RETRIES_TOTAL, MAX_RETRIES_BACKOFF_FACTOR
+from fn_exchange_online.lib.resilient_helper import create_incident_comment, create_incident_attachment
 
 CONFIG_DATA_SECTION = 'fn_exchange_online'
 LOG = logging.getLogger(__name__)
-TIME_FORMAT = '%Y-%m-%dT%H:%M:%S'
+
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'exchange_online_query_emails"""
@@ -47,7 +45,7 @@ class FunctionComponent(ResilientComponent):
             rp = ResultPayload(CONFIG_DATA_SECTION, **kwargs)
 
             # Validate fields
-            validate_fields(['exo_email_address', 'exo_query_output'], kwargs)
+            validate_fields(['exo_email_address', 'exo_query_output_format'], kwargs)
 
             # Get the function parameters
             incident_id = kwargs.get('incident_id')  # number
@@ -59,7 +57,7 @@ class FunctionComponent(ResilientComponent):
             has_attachments = kwargs.get('exo_has_attachments')  # bool
             message_subject = kwargs.get('exo_message_subject')  # text
             message_body = kwargs.get('exo_message_body')  # text
-            query_output = self.get_select_param(kwargs.get('exo_query_output'))  # select values: "Exchange Online data table", "Incident attachment", "Incident note"
+            query_output_format = self.get_select_param(kwargs.get('exo_query_output_format'))  # select values: "Exchange Online data table", "Incident attachment", "Incident note"
 
             LOG.info(u"incident_id: %s", str(incident_id))
             LOG.info(u"exo_email_address: %s", email_address)
@@ -70,7 +68,7 @@ class FunctionComponent(ResilientComponent):
             LOG.info(u"exo_email_has_attachments: %s", has_attachments)
             LOG.info(u"exo_message_subject: %s", message_subject)
             LOG.info(u"exo_message_body: %s", message_body)
-            LOG.info(u"exo_query_output: %s", query_output)
+            LOG.info(u"exo_query_output_format: %s", query_output_format)
 
             yield StatusMessage(u"Starting message query.")
 
@@ -89,16 +87,17 @@ class FunctionComponent(ResilientComponent):
             email_results = MS_graph_helper.query_messages(email_address, mail_folders, sender, start_date, end_date,
                                                            has_attachments, message_subject, message_body)
 
-            query_results = {"exo_query_output_format": query_output,
+            query_results = {"incident_id": incident_id,
+                             "exo_query_output_format": query_output_format,
                              "email_results": email_results}
 
             # Put query results in the results payload.
             results = rp.done(True, query_results)
 
             # Write the requests to attachment or note if the user requests it.
-            if "Incident attachment" in query_output or "Incident note" in query_output:
+            if "Incident attachment" in query_output_format or "Incident note" in query_output_format:
 
-                note = u"Message Query Criteria:\n\n"
+                note = u"Exchange Online Message Query Criteria:\n\n"
                 note = u"{0}    email address:   {1}\n".format(note, email_address)
                 note = u"{0}    mail folder:     {1}\n".format(note, mail_folders)
                 note = u"{0}    email sender:    {1}\n".format(note, sender)
@@ -118,11 +117,11 @@ class FunctionComponent(ResilientComponent):
 
                 note = "{0}Total messages matching search criteria: {1}\n\n{2}".format(note, total_emails, email_note)
 
-                if "Incident attachment" in query_output:
-                    self.create_incident_attachment(incident_id, note)
-                if "Incident note" in query_output:
+                if "Incident attachment" in query_output_format:
+                    create_incident_attachment(self.rest_client(), incident_id, note, 'exo-query-results')
+                if "Incident note" in query_output_format:
                     note = note.replace('\n', '<br>')
-                    self.create_incident_comment(incident_id, note)
+                    create_incident_comment(self.rest_client(), incident_id, note)
 
             yield StatusMessage(u"Returning results from query.")
 
@@ -135,44 +134,3 @@ class FunctionComponent(ResilientComponent):
             LOG.error(err)
             yield FunctionError(err)
 
-    def create_incident_attachment(self, incident_id, note):
-        """
-        Add an attachment to the specified Resilient Incident by ID
-        :param incident_id:  Resilient Incident ID
-        :param note: Content to be added as attachment
-        :return: Response from Resilient for debug
-        """
-        try:
-            dt = datetime.now()
-            attachment_name = "exo-query-output-{0}.txt".format(dt.strftime(TIME_FORMAT))
-            if sys.version_info.major < 3:
-                datastream = BytesIO(note)
-            else:
-                datastream = BytesIO(note.encode("utf-8"))
-            rest_client = self.rest_client()
-            attachment = write_file_attachment(rest_client, attachment_name, datastream, incident_id, None)
-            return attachment
-
-        except Exception as err:
-            raise IntegrationError(err)
-
-    def create_incident_comment(self, incident_id, note):
-        """
-        Add a comment to the specified Resilient Incident by ID
-        :param incident_id:  Resilient Incident ID
-        :param note: Content to be added as note
-        :return: Response from Resilient for debug
-        """
-        try:
-            uri = '/incidents/{}/comments'.format(incident_id)
-            rest_client = self.rest_client()
-            note_json = {
-                'format': 'html',
-                'content': note
-            }
-            payload = {'text': note_json}
-            comment_response = rest_client.post(uri=uri, payload=payload)
-            return comment_response
-
-        except Exception as err:
-            raise IntegrationError(err)

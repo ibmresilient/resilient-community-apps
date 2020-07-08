@@ -2,11 +2,12 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
-
+import json
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import validate_fields, RequestsCommon, ResultPayload
 from fn_exchange_online.lib.ms_graph_helper import MSGraphHelper, MAX_RETRIES_TOTAL, MAX_RETRIES_BACKOFF_FACTOR
+from fn_exchange_online.lib.resilient_helper import create_incident_comment, create_incident_attachment
 
 CONFIG_DATA_SECTION = 'fn_exchange_online'
 LOG = logging.getLogger(__name__)
@@ -65,10 +66,41 @@ class FunctionComponent(ResilientComponent):
                                             self.options.get("max_retries_backoff_factor", MAX_RETRIES_BACKOFF_FACTOR),
                                             RequestsCommon(self.opts, self.options).get_proxies())
 
-            # Delete messages found in the query.
-            delete_results = MS_graph_helper.delete_messages_from_query_results(query_results)
+            # Convert string to JSON.
+            try:
+                query_results_json = json.loads(query_results)
+                query_message_results = query_results_json.get('email_results')
+                query_output_format = query_results_json.get('exo_query_output_format')
+                incident_id = int(query_results_json.get('incident_id'))
+            except ValueError as err:
+                raise IntegrationError("Invalid JSON string in Delete Message from Query Results.")
 
-            results = rp.done(True, delete_results)
+            # Delete messages found in the query.
+            delete_results = MS_graph_helper.delete_messages_from_query_results(query_message_results)
+
+            delete_message_results = {"exo_query_output_format": query_output_format,
+                                      "delete_results": delete_results}
+
+            # Write the requests to attachment or note if the user requests it.
+            if "Incident attachment" in query_output_format or "Incident note" in query_output_format:
+                note = u""
+                total_deleted = 0
+                for user in delete_results:
+                    email_address = user.get('email_address')
+                    number_deleted = len(user.get('deleted_list'))
+                    total_deleted = total_deleted + number_deleted
+                    number_not_deleted = len(user.get('not_deleted_list'))
+                    note = u"{0} {1}: {2} deleted, {3} not found.\n".format(note, email_address,
+                                                                            number_deleted,
+                                                                            number_not_deleted)
+                note = u"Exchange Online Delete Message from Query Results:\n\nTotal messages deleted: {0}\n\n{1}".format(total_deleted, note)
+                if "Incident attachment" in query_output_format:
+                    create_incident_attachment(self.rest_client(), incident_id, note, 'exo-delete-results')
+                if "Incident note" in query_output_format:
+                    note = note.replace('\n', '<br>')
+                    create_incident_comment(self.rest_client(), incident_id, note)
+
+            results = rp.done(True, delete_message_results)
 
             yield StatusMessage(u"Returning Delete Messages From Query Results results.")
 
