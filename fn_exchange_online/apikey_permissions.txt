@@ -20,7 +20,7 @@ read_function
 edit_all_incidents_fields
 #
 ## notes permissions
-#edit_all_incident_notes
+edit_all_incident_notes
 #
 ## tasks permissions
 #edit_incident_public_task_fields
