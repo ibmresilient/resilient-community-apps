@@ -29,6 +29,10 @@
   Specify all changes in this release. Do not remove the release 
   notes of a previous release
 -->
+### v1.0.3
+* Fixed bug where incident summary is unavailable.
+* Fixed bug where incidents not being filtered by state.
+* Fixed bug with Resilient incident severity codes.
 
 ### v1.0.2
 * Fix bug in workflow 'Proofpoint TRAP Update List Member'.

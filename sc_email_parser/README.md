@@ -175,6 +175,11 @@ if not emailmessage.body.content is None:
 ```
 Run the script as part of a rule that includes a condition that helps identify the email message as a phishing report. The script should run either as part of a multi-script rule that first runs the generic script, or as a separate rule that runs afterwards. It is important that the phishing-specific script should run after the generic script because the generic script causes the `incident` variable to be set, and the phishing-specific script shown above expects this to have been done already.
 
+NOTE: If you choose to implement the solution as one script, not two, then be sure that you add the Phishing incident type to the incident at a point in the script when the incident object exists. For example, the following command should occur after the incident is created or found.
+```python
+incident.incident_type_ids.append("Phishing")
+```
+
 ### Campaign identifier
 Scenario: The email message subject on its own might not be enough to collect related email messages into one incident.
 It may be that the email message subject is not specific or reliable enough to use as the way to collect related emails. In particular, there may be an attack taking place where multiple attack vectors are being employed in a single campaign, which may result in many different kinds of email messages being received for this one campaign.

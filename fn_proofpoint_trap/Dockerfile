@@ -1,4 +1,4 @@
-# docker build -t ibmresilient/fn_proofpoint_trap:1.0.2 -t ibmresilient/fn_proofpoint_trap:latest .
+# docker build -t ibmresilient/fn_proofpoint_trap:1.0.3 -t ibmresilient/fn_proofpoint_trap:latest .
 
 # Base image using Red Hat's universal base image (rhel 8) for python
 FROM registry.access.redhat.com/ubi8/python-36:latest

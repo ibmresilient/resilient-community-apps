@@ -381,15 +381,16 @@ ABUSE_DISPOSITION = {
     'Confirmed': True
 }
 
-# API Field is severity_code @ Resilient
+# API Field is Severity @ Resilient
 # API Field is  incident_field_values where name: Severity @ TRAP
 INCIDENT_SEVERITY = {
-    # Resilient has no informational so temporarily filter down to Low
-    'Informational': 100,
-    'Low': 100,
-    'Medium': 101,
-    'High': 102
-
+    # Resilient has no 'Informational' so temporarily filter down to 'Low'
+    'Informational': 'Low',
+    'Low': 'Low',
+    'Medium': 'Medium',
+    'High': 'High',
+     # Resilient has no 'Critical' so temporarily filter down to 'High'
+    'Critical': 'High'
 }
 
 # Custom Incident Fields
@@ -436,6 +437,7 @@ class PPTRIncidentPolling(ResilientComponent):
             startup_interval = int(startup_interval)
         self.lastupdate = startup_interval
         polling_interval = int(options.get("polling_interval", 0))
+        self.state = options.get('state', None)
         # Use a timeout value of polling_interval (in secs) + 10 secs to wait for all threads to end.
         thread_timeout = (polling_interval * 60) + 10
 
@@ -473,7 +475,7 @@ class PPTRIncidentPolling(ResilientComponent):
 
         while not self.stop_thread:
 
-            incident_list = pptr.get_incidents(self.lastupdate)
+            incident_list = pptr.get_incidents(self.lastupdate, self.state)
 
             if 'error' in incident_list:
                 LOG.warning(incident_list.get('error'))
@@ -482,7 +484,8 @@ class PPTRIncidentPolling(ResilientComponent):
             try:
                 ### BEGIN Processing incidents
                 for incident in incident_list:
-                    LOG.info("Proofpoint TRAP Incident ID %d discovered: %s", incident['id'], incident['summary'])
+                    LOG.info("Proofpoint TRAP Incident ID %d discovered: %s", incident['id'],
+                             incident.get('summary', 'No Summary Provided'))
                     if len(self._find_resilient_incident_for_req(incident['id'], CUSTOM_FIELDS[0])) == 0:
                         # Assemble Data table for incident
                         i_table = self.make_data_table(incident['events'])
@@ -562,9 +565,7 @@ class PPTRIncidentPolling(ResilientComponent):
         :return iname: String for Incident Name to be used in Search / Incident Creation
         """
         # Fill event summary when blank
-        i_summary = incident['summary']
-        if i_summary == '':
-            i_summary = 'No Summary Provided'
+        i_summary = incident.get('summary', 'No Summary Provided')
 
         iname = "Proofpoint TRAP Incident: ID {} - {}".format(incident['id'], i_summary)
         LOG.debug("Incident Label Assembled: %s", iname)
@@ -726,7 +727,7 @@ class PPTRIncidentPolling(ResilientComponent):
                 r_fields['incident_type_ids'].append(CLASS2TYPEID.get(field['value'], 22))
             elif field['name'] == 'Severity':
                 # Get Incident Severity. Default to Low
-                r_fields['severity_code'] = INCIDENT_SEVERITY.get(field['value'], 100)
+                r_fields['severity_code'] = INCIDENT_SEVERITY.get(field['value'], "Low")
             elif field['name'] == 'Abuse Disposition':
                 # Get Disposition, Default to None (unconfirmed)
                 r_fields['confirmed'] = ABUSE_DISPOSITION.get(field['value'], None)
