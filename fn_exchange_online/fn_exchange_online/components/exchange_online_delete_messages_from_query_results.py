@@ -128,7 +128,7 @@ class FunctionComponent(ResilientComponent):
                 note = u"{0} {1}: {2} deleted, {3} not found.\n".format(note, email_address, number_deleted,
                                                                         number_not_deleted)
             # Put the total deleted messages number in the note.
-            note = u"Exchange Online Delete Message from Query Results:\n\nTotal messages deleted: {0}\n\n{1}".format(
+            note = "Exchange Online Delete Message from Query Results:\n\nTotal messages deleted: {0}\n\n{1}".format(
                     total_deleted, note)
 
             if "Incident attachment" in output_format:
