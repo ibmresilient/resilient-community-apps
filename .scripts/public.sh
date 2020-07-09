@@ -134,6 +134,11 @@ rc-cts-shadowserver
 rc-cts-urlscanio
 rc-cts-yeti
 rc-data-feed
+rc-data-feed-plugin-elasticfeed
+rc-data-feed-plugin-filefeed
+rc-data-feed-plugin-kafkafeed
+rc-data-feed-plugin-odbcfeed
+rc-data-feed-plugin-splunkfeed
 res_qraw_mitre
 sc_email_parser
 EOM
