@@ -55,12 +55,12 @@ None
 ### Pre-Processing Script
 ```python
 inputs.exo_query_messages_results = workflow.properties.exo_query_results['raw']
-#inputs.exo_query_output = workflow.properties.exo_query_output
+
 ```
 
 ### Post-Processing Script
 ```python
-ffrom java.util import Date
+from java.util import Date
 
 content = results.get("content")
 output_format = content.get("exo_query_output_format")
@@ -93,15 +93,6 @@ if "Exchange Online data table" in output_format:
       text = u"""<p style= "color:{color}">{status} </p>""".format(color="red", status="Deleted")
       message_row.exo_dt_status = helper.createRichText(text)
 
-
-# Post a note containing the number of emails deleted
-note = u"Exchange Online Delete Messages From Query Results:\n  {0} messages deleted".format(deleted_count)
-
-# Add to the note if any messages from the query were not deleted.
-if not_deleted_count > 0:
-  note2 = u"  {0} messages NOT deleted".format(not_deleted_count)
-  note = u"{0}\n{1}".format(note, note2)
-incident.addNote(note)
 ```
 
 ---
