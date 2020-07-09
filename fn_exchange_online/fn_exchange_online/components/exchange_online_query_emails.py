@@ -6,7 +6,7 @@
 import json
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import validate_fields, RequestsCommon, ResultPayload
+from resilient_lib import validate_fields, RequestsCommon, ResultPayload, IntegrationError
 from fn_exchange_online.lib.ms_graph_helper import MSGraphHelper, MAX_RETRIES_TOTAL, MAX_RETRIES_BACKOFF_FACTOR
 from fn_exchange_online.lib.resilient_helper import create_incident_comment, create_incident_attachment
 
@@ -91,37 +91,13 @@ class FunctionComponent(ResilientComponent):
                              "exo_query_output_format": query_output_format,
                              "email_results": email_results}
 
+            # Write query results to an attachment or note as specified by the user in activity field.
+            # Writing results to the data table takes place in the post processor script.
+            self.write_results_to_note_or_attachment(email_address, mail_folders, sender, start_date, end_date,
+                                                     has_attachments, message_subject, message_body, query_results)
+
             # Put query results in the results payload.
             results = rp.done(True, query_results)
-
-            # Write the requests to attachment or note if the user requests it.
-            if "Incident attachment" in query_output_format or "Incident note" in query_output_format:
-
-                note = u"Exchange Online Message Query Criteria:\n\n"
-                note = u"{0}    email address:   {1}\n".format(note, email_address)
-                note = u"{0}    mail folder:     {1}\n".format(note, mail_folders)
-                note = u"{0}    email sender:    {1}\n".format(note, sender)
-                note = u"{0}    start date:      {1}\n".format(note, start_date)
-                note = u"{0}    end date:        {1}\n".format(note, end_date)
-                note = u"{0}    has attachments: {1}\n".format(note, has_attachments)
-                note = u"{0}    message subject: {1}\n".format(note, message_subject)
-                note = u"{0}    message body:    {1}\n\nResults:\n\n".format(note, message_body)
-
-                total_emails = 0
-                email_note = u""
-                for email in email_results:
-                    num_emails_found = len(email.get('email_list'))
-                    email_note = u"{0} {1} {2} matching messages found.\n".format(email_note, email.get('email_address'),
-                                                                               num_emails_found)
-                    total_emails = total_emails + num_emails_found
-
-                note = "{0}Total messages matching search criteria: {1}\n\n{2}".format(note, total_emails, email_note)
-
-                if "Incident attachment" in query_output_format:
-                    create_incident_attachment(self.rest_client(), incident_id, note, 'exo-query-results')
-                if "Incident note" in query_output_format:
-                    note = note.replace('\n', '<br>')
-                    create_incident_comment(self.rest_client(), incident_id, note)
 
             yield StatusMessage(u"Returning results from query.")
 
@@ -134,3 +110,64 @@ class FunctionComponent(ResilientComponent):
             LOG.error(err)
             yield FunctionError(err)
 
+    def write_results_to_note_or_attachment(self, email_address, mail_folders, sender, start_date, end_date,
+                                            has_attachments, message_subject, message_body, query_results):
+        """
+        Write the output results of a query to an incident note and/or an incident attachment.
+        Results that go to the Exchange Online data table are written in the workflow post-processor script.
+        :param email_address: search criteria emails address
+        :param mail_folders: search criteria mail_folders
+        :param sender:  search criteria sender
+        :param start_date:  search criteria start_data
+        :param end_date:  search criteria end_date
+        :param has_attachments:  search criteria has_attachments
+        :param message_subject:  search criteria message_subject
+        :param message_body:  search criteria  message_body
+        :param query_results: json results containing: incident id, output_format: multiselect field where to
+        send results: "Exchange Online data table", "Incident note" or "Incident attachment";
+        email results of the query
+        :return: return True or False note or attachment is created
+        """
+        try:
+            output_format = query_results.get('exo_query_output_format')
+
+            # Write the requests to attachment or note if the user requests it.
+            if "Incident attachment" not in output_format and "Incident note" not in output_format:
+                return False
+
+            incident_id = query_results.get('incident_id')
+            email_results = query_results.get('email_results')
+
+            note = u"Exchange Online Message Query Criteria:\n\n"
+            note = u"{0}    email address:   {1}\n".format(note, email_address)
+            note = u"{0}    mail folder:     {1}\n".format(note, mail_folders)
+            note = u"{0}    email sender:    {1}\n".format(note, sender)
+            note = u"{0}    start date:      {1}\n".format(note, start_date)
+            note = u"{0}    end date:        {1}\n".format(note, end_date)
+            note = u"{0}    has attachments: {1}\n".format(note, has_attachments)
+            note = u"{0}    message subject: {1}\n".format(note, message_subject)
+            note = u"{0}    message body:    {1}\n\nResults:\n\n".format(note, message_body)
+
+            total_emails = 0
+            email_note = u""
+            for email in email_results:
+                num_emails_found = len(email.get('email_list'))
+                email_note = u"{0} {1} {2} matching messages found.\n".format(email_note, email.get('email_address'),
+                                                                              num_emails_found)
+                total_emails = total_emails + num_emails_found
+
+            # Add total messages found to the note text.
+            note = "{0}Total messages matching search criteria: {1}\n\n{2}".format(note, total_emails, email_note)
+
+            if "Incident attachment" in output_format:
+                LOG.info('Writing query results to attachment.')
+                create_incident_attachment(self.rest_client(), incident_id, note, 'exo-query-results')
+            if "Incident note" in output_format:
+                note = note.replace('\n', '<br>')
+                LOG.info('Writing query results to incident note.')
+                create_incident_comment(self.rest_client(), incident_id, note)
+
+            return True
+
+        except Exception as err:
+            raise IntegrationError(err)
