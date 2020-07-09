@@ -60,36 +60,38 @@ inputs.exo_query_messages_results = workflow.properties.exo_query_results['raw']
 
 ### Post-Processing Script
 ```python
-from java.util import Date
+ffrom java.util import Date
 
-deleted_count = 0
-not_deleted_count = 0
+content = results.get("content")
+output_format = content.get("exo_query_output_format")
 
-# Add each email as a row in the query results data table
-for user in results["content"]:
-    
-  not_deleted_count = not_deleted_count + len(user["not_deleted_list"])
-  for email in user["deleted_list"]:
-    deleted_count = deleted_count + 1
-    message_row = incident.addRow("exo_message_query_results_dt")
-    message_row.exo_dt_query_date = Date()
-    message_row.exo_dt_message_id = email.id
-    message_row.exo_dt_received_date   = email.receivedDateTime
-    message_row.exo_dt_email_address = user["email_address"]
-    if email.sender:
-      message_row.exo_dt_sender_email = email.sender.emailAddress.address
-    else:
-      message_row.exo_dt_sender_email = ""
-    message_row.exo_dt_message_subject = email.subject
-    message_row.exo_dt_has_attachments = email.hasAttachments
-    if email.webLink:
-      ref_html = u"""<a href='{0}'>Link</a>""".format(email.webLink)
-      message_row.exo_dt_web_link = helper.createRichText(ref_html)
-    else:
-      message_row.exo_dt_web_link = ""
+# Write to the data table if the user requested it.
+if "Exchange Online data table" in output_format:
+
+  user_list = content.get("delete_results")
+  # Add each email as a row in the query results data table
+  for user in user_list:
+
+    for email in user.get("deleted_list"):
+      message_row = incident.addRow("exo_message_query_results_dt")
+      message_row.exo_dt_query_date = Date()
+      message_row.exo_dt_message_id = email.id
+      message_row.exo_dt_received_date   = email.receivedDateTime
+      message_row.exo_dt_email_address = user.get("email_address")
+      if email.sender:
+        message_row.exo_dt_sender_email = email.sender.emailAddress.address
+      else:
+        message_row.exo_dt_sender_email = ""
+      message_row.exo_dt_message_subject = email.subject
+      message_row.exo_dt_has_attachments = email.hasAttachments
+      if email.webLink:
+        ref_html = u"""<a href='{0}'>Link</a>""".format(email.webLink)
+        message_row.exo_dt_web_link = helper.createRichText(ref_html)
+      else:
+        message_row.exo_dt_web_link = ""
  
-    text = u"""<p style= "color:{color}">{status} </p>""".format(color="red", status="Deleted")
-    message_row.exo_dt_status = helper.createRichText(text)
+      text = u"""<p style= "color:{color}">{status} </p>""".format(color="red", status="Deleted")
+      message_row.exo_dt_status = helper.createRichText(text)
 
 
 # Post a note containing the number of emails deleted

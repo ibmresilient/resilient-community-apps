@@ -36,39 +36,36 @@ inputs.exo_has_attachments      = inputs.exo_has_attachments      if rule.proper
 ```python
 from java.util import Date
 
-note = u"Exchange Online Query Multiple users:\n"
-note_len = len(note)
+content = results.get("content")
+output_format = content.get("exo_query_output_format")
 
-# Add each email as a row in the query results data table
-for user in results["content"]:
-  # If an email address is not found post to a note.
-  if user["status_code"] == 404:
-    line = u"email address not found: {}\n".format(user["email_address"])
-    note = note + line
+# Write to the data table if the user requested it.
+if "Exchange Online data table" in output_format:
+  user_list = content.get("email_results")
+
+  # Add each email as a row in the query results data table
+  for user in user_list:
     
-  for email in user["email_list"]:
-    message_row = incident.addRow("exo_message_query_results_dt")
-    message_row.exo_dt_query_date = Date()
-    message_row.exo_dt_message_id = email.id
-    message_row.exo_dt_received_date   = email.receivedDateTime
-    message_row.exo_dt_email_address = user["email_address"]
-    if email.sender:
-      message_row.exo_dt_sender_email = email.sender.emailAddress.address
-    else:
-      message_row.exo_dt_sender_email = ""
-    message_row.exo_dt_message_subject = email.subject
-    message_row.exo_dt_has_attachments = email.hasAttachments
-    if email.webLink:
-      ref_html = u"""<a href='{0}'>Link</a>""".format(email.webLink)
-      message_row.exo_dt_web_link = helper.createRichText(ref_html)
-    else:
-      message_row.exo_dt_web_link = ""
+    for email in user["email_list"]:
+      message_row = incident.addRow("exo_message_query_results_dt")
+      message_row.exo_dt_query_date = Date()
+      message_row.exo_dt_message_id = email.id
+      message_row.exo_dt_received_date   = email.receivedDateTime
+      message_row.exo_dt_email_address = user["email_address"]
+      if email.sender:
+        message_row.exo_dt_sender_email = email.sender.emailAddress.address
+      else:
+        message_row.exo_dt_sender_email = ""
+      message_row.exo_dt_message_subject = email.subject
+      message_row.exo_dt_has_attachments = email.hasAttachments
+      if email.webLink:
+        ref_html = u"""<a href='{0}'>Link</a>""".format(email.webLink)
+        message_row.exo_dt_web_link = helper.createRichText(ref_html)
+      else:
+        message_row.exo_dt_web_link = ""
  
-    message_row.exo_dt_status = helper.createRichText("Active")
+      message_row.exo_dt_status = helper.createRichText("Active")
 
-# If any email addresses where not found post a note
-if len(note) > note_len:
-  incident.addNote(note)
 ```
 
 ---
