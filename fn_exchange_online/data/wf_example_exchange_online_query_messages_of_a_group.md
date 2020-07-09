@@ -18,18 +18,20 @@
 
 ### Pre-Processing Script
 ```python
+inputs.incident_id = incident.id
+
 # Get the email address of the user whose mailbox will be queried.
 inputs.exo_email_address = inputs.exo_email_address if rule.properties.exo_email_address_list is None else rule.properties.exo_email_address_list
 
 # Get the search criteria from the activity rules if available. 
-inputs.exo_mail_folders        = inputs.exo_mail_folders          if rule.properties.exo_mail_folders         is None else rule.properties.exo_mail_folders
+inputs.exo_mail_folders         = inputs.exo_mail_folders         if rule.properties.exo_mailfolder_id        is None else rule.properties.exo_mailfolder_id
 inputs.exo_email_address_sender = inputs.exo_email_address_sender if rule.properties.exo_email_address_sender is None else rule.properties.exo_email_address_sender
 inputs.exo_message_subject      = inputs.exo_message_subject      if rule.properties.exo_message_subject      is None else rule.properties.exo_message_subject
 inputs.exo_message_body         = inputs.exo_message_body         if rule.properties.exo_message_body         is None else rule.properties.exo_message_body
 inputs.exo_start_date           = inputs.exo_start_date           if rule.properties.exo_start_date           is None else rule.properties.exo_start_date
 inputs.exo_end_date             = inputs.exo_end_date             if rule.properties.exo_end_date             is None else rule.properties.exo_end_date
 inputs.exo_has_attachments      = inputs.exo_has_attachments      if rule.properties.exo_has_attachments      is None else rule.properties.exo_has_attachments
-
+inputs.exo_query_output_format  = inputs.exo_query_output_format  if rule.properties.exo_query_output_format  is None else rule.properties.exo_query_output_format
 ```
 
 ### Post-Processing Script
