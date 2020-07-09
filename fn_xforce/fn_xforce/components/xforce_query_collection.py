@@ -4,11 +4,10 @@
 """Function implementation"""
 
 import logging
-import json
 from resilient_circuits import ResilientComponent, function, handler, \
                                 StatusMessage, FunctionResult, FunctionError
-import requests
 from fn_xforce.util.helper import XForceHelper
+from resilient_lib import RequestsCommon
 
 
 class FunctionComponent(ResilientComponent):
@@ -17,11 +16,13 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
+        self.opts = opts
         self.options = opts.get("fn_xforce", {})
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
+        self.opts = opts
         self.options = opts.get("fn_xforce", {})
 
     @function("xforce_query_collection")
@@ -31,7 +32,7 @@ class FunctionComponent(ResilientComponent):
         try:
 
             yield StatusMessage("Starting")
-            helper = XForceHelper(self.options)
+            helper = XForceHelper(self.opts, self.options)
             # Get Xforce params
             HTTPS_PROXY, HTTP_PROXY, XFORCE_APIKEY, XFORCE_BASEURL, XFORCE_PASSWORD = helper.setup_config()
             # Get the function parameters:
@@ -42,39 +43,31 @@ class FunctionComponent(ResilientComponent):
             log = logging.getLogger(__name__)
             log.info("xforce_collection_type: %s", xforce_collection_type)
             log.info("xforce_query: %s", xforce_query)
-            log.info("Proxies :HTTP %s and HTTPS %s", HTTP_PROXY, HTTPS_PROXY)
+            log.info("X-Force Proxies: HTTP %s and HTTPS %s", HTTP_PROXY, HTTPS_PROXY)
+
             if xforce_query is None:
                 raise ValueError("No Query provided for XForce search.")
-            if isinstance(str(xforce_query),str) == False:
+            if not isinstance(str(xforce_query), str):
                 raise ValueError("Input must be a string.")
-            # Setup proxies parameter if exist in appconfig file
-            proxies = {}
 
+            # Setup proxies parameter if exists in app.config file
+            proxies = {}
+            # returns None if len(proxies) == 0
             proxies = helper.setup_proxies(proxies, HTTP_PROXY, HTTPS_PROXY)
 
-
-            case_files = None
             try:
-                # Create the session and set the proxies.
-                with requests.Session() as session:
-                    session.proxies = proxies
+                # Initialize RequestsCommon with configs
+                rc = RequestsCommon(self.opts, self.options)
 
-
-                    # Prepare request string
-                    request_string = '{}/casefiles/{}/fulltext?q={}'.format(XFORCE_BASEURL, str(xforce_collection_type), str(xforce_query))
-                    log.info(request_string)
-                    # Make the HTTP request through the session.
-                    res = session.get(
-                        request_string, auth=(XFORCE_APIKEY, XFORCE_PASSWORD))
-                    # Is the status code in the 2XX family?
-                    if int(res.status_code / 100) == 2:
-                        case_files = res.json()
-                    elif res.status_code == 401:
-                        raise FunctionError("401 Status code returned. Retry function with updated credentials")
-                    elif res.status_code == 403:
-                        raise FunctionError("403 Forbidden response received by API")
-                    else:
-                        log.error("Got unexpected result from request.")
+                # Prepare request string
+                request_string = '{}/casefiles/{}/fulltext?q={}'.format(XFORCE_BASEURL, str(xforce_collection_type), str(xforce_query))
+                log.info("Making GET request to the url: %s", request_string)
+                # Make the HTTP request through resilient_lib.
+                res = rc.execute_call_v2(
+                    "get", request_string, proxies=proxies, auth=(XFORCE_APIKEY, XFORCE_PASSWORD))
+                # Is the status code in the 2XX family?
+                # Save returned case files
+                case_files = helper.handle_case_response(res)
             except Exception as error:
                 log.info(error)
                 raise ValueError("Encountered issue when querying X-Force API")
@@ -90,4 +83,3 @@ class FunctionComponent(ResilientComponent):
             yield FunctionResult(results)
         except Exception:
             yield FunctionError()
-
