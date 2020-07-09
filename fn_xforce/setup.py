@@ -7,8 +7,9 @@ setup(
     name='fn_xforce',
     version='1.0.1',
     license='MIT',
-    author='Resilient Labs',
-    author_email='resil.labs@gmail.com',
+    author='IBM Resilient',
+    author_email='support@resilientsystems.com',
+    url="http://ibm.biz/resilientcommunity",
     long_description="Resilient Circuits Components for 'fn_xforce'",
     install_requires=[
         'resilient_circuits>=30.0.0',
