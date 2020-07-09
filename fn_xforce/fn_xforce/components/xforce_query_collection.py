@@ -10,6 +10,8 @@ from fn_xforce.util.helper import XForceHelper
 from resilient_lib import RequestsCommon
 
 
+CONFIG_DATA_SECTION = "fn_xforce"
+
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'xforce_query_collection"""
 
@@ -17,13 +19,13 @@ class FunctionComponent(ResilientComponent):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         self.opts = opts
-        self.options = opts.get("fn_xforce", {})
+        self.options = opts.get(CONFIG_DATA_SECTION, {})
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
         self.opts = opts
-        self.options = opts.get("fn_xforce", {})
+        self.options = opts.get(CONFIG_DATA_SECTION, {})
 
     @function("xforce_query_collection")
     def _xforce_query_collection_function(self, event, *args, **kwargs):
