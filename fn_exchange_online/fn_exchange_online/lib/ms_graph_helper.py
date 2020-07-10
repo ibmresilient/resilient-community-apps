@@ -201,23 +201,18 @@ class MSGraphHelper(object):
 
     def delete_messages_from_query_results(self, query_results):
         """
-        :param query_results: query result list returned from Query Message function JSON object as a string.
+        :param query_results: query result list returned from Query Message function
         :return: list of messages for each email address search: list of deleted messages from the query results
         ;        and list of messages not deleted from query result
         """
-        # Convert string to JSON.
-        try:
-            query_results_json = json.loads(query_results)
-        except ValueError as err:
-            raise IntegrationError("Invalid JSON string in Delete Message from Query Results.")
 
         delete_results = []
 
-        for user in query_results_json:
-            email_address = user["email_address"]
+        for user in query_results:
+            email_address = user.get('email_address')
             deleted_list = []
             not_deleted_list = []
-            for message in user["email_list"]:
+            for message in user.get('email_list'):
 
                 # Call MS Graph API to delete the message
                 response = self.delete_message(email_address, None, message["id"])
