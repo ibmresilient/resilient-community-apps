@@ -31,7 +31,7 @@
 -->
 ### v1.1.0
 * Add "max retry" capability to Microsoft Graph API requests when 503 (server unavailable)  or 429 (too many requests) 
-are returned from the Microsoft server. Parameters max_retries_total and max_retries_backoff_factor are settable in the app.config.
+are returned from the Microsoft server. Parameters max_retries_total and max_retries_backoff_factor are settable in the app.config file.
 * The Example: Exchange Online Query Messages and Example: Exchange Online Delete Messages from Query Results menu item rules allow the user to select where query results are displayed: 
   * Exchange Online data table
   * Incident note
@@ -60,7 +60,14 @@ Resilient Integration with Exchange Online provides the capability to access and
 
 * Send an message: from the specified email address to the specified recipients with specified message subject and body text.
 
-* Query messages of a single user, a list of users, or the whole tenant and return a list of messages matching the criteria: message sender, messages from a specific Well-known folder, a time frame for when the message was received, text contained in the message subject or the message body, whether the message has attachments. Detailed results are returned in the Exchange Online Query Message Results data table.
+* Query messages of a single user, a list of users, or the whole tenant and return a list of messages matching the criteria: 
+  * message sender
+  * messages from a specific Well-known folder
+  * message received date
+  * text contained in the message subject or the message body
+  * whether the message has attachments. 
+  
+  Detailed results are returned in the Exchange Online Query Message Results data table.
 
 * Delete a single specified message from a specified email address.
 
