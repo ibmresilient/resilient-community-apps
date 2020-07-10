@@ -86,8 +86,8 @@ class FunctionComponent(ResilientComponent):
                                             self.options.get("client_secret"),
                                             self.options.get("max_messages"),
                                             self.options.get("max_users"),
-                                            self.options.get("max_retries_total"),
-                                            self.options.get("max_retries_backoff_factor"),
+                                            self.options.get("max_retries_total", MAX_RETRIES_TOTAL),
+                                            self.options.get("max_retries_backoff_factor", MAX_RETRIES_BACKOFF_FACTOR),
                                             RequestsCommon(self.opts, self.options).get_proxies())
 
             # Call MS Graph API to get the user profile
