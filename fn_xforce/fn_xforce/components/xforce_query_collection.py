@@ -58,6 +58,7 @@ class FunctionComponent(ResilientComponent):
             proxies = helper.setup_proxies(proxies, HTTP_PROXY, HTTPS_PROXY)
 
             try:
+                case_files = {}
                 # Initialize RequestsCommon with configs
                 rc = RequestsCommon(self.opts, self.options)
 
@@ -66,10 +67,11 @@ class FunctionComponent(ResilientComponent):
                 log.info("Making GET request to the url: %s", request_string)
                 # Make the HTTP request through resilient_lib.
                 res = rc.execute_call_v2(
-                    "get", request_string, proxies=proxies, auth=(XFORCE_APIKEY, XFORCE_PASSWORD))
+                    "get", request_string, proxies=proxies, auth=(XFORCE_APIKEY, XFORCE_PASSWORD), callback=helper.handle_case_response)
                 # Is the status code in the 2XX family?
                 # Save returned case files
-                case_files = helper.handle_case_response(res)
+                if res.status_code / 100 == 2:
+                    case_files = res.json()
             except Exception as error:
                 log.info(error)
                 raise ValueError("Encountered issue when querying X-Force API")
