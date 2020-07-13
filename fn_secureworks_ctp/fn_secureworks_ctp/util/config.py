@@ -70,6 +70,9 @@ template_file_escalate=
 # If not defined, the integration will use the default that comes with the integration.
 template_file_close=
 
+# Optional - Path to a custom Jinja template file for update custom fields of the incident.   
+# If not defined, the integration will use the default that comes with the integration.
+template_file_update=
 #
 # Optional - If required by Secureworks CTP
 cafile=
