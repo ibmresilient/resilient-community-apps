@@ -5,7 +5,7 @@ FROM registry.access.redhat.com/ubi8/python-36:latest
 #FROM resilient/rc-data-feeder-base
 
 ARG APPLICATION=fn_joe_sandbox_analysis
-ARG RES_CIRCUITS_VERSION=34.0.195
+ARG RES_CIRCUITS_VERSION=37
 
 # update to latest packages, user 0 for root privilege
 USER 0
@@ -13,7 +13,7 @@ USER 0
 RUN pip install --upgrade pip
 
 # install resilient-circuits
-RUN pip install resilient-circuits>=${RES_CIRCUITS_VERSION}
+RUN pip install "resilient-circuits>=${RES_CIRCUITS_VERSION}"
 
 # install and upgrade six to satisfy fn_joe_sandbox_analysis requirement
 RUN pip install --upgrade jbxapi==2.10.1
