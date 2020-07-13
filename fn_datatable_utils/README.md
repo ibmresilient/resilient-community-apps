@@ -2,17 +2,18 @@
 
 ## Table of Contents
   - [Function - Get Row](#function---get-row)
+  - [Function - Get Rows](#function---get-rows)
   - [Function - Update Row](#function---update-row)
   - [Function - Delete Row](#function---delete-row)
   - [Rules](#rules)
   - [Display the Data Table in an Incident](#display-the-datatable-in-an-incident)
 ---
 
-**This package contains 3 functions that help you manipulate IBM Resilient Data Tables**
+**This package contains 4 functions that help you manipulate IBM Resilient Data Tables**
 
- ![screenshot](./screenshots/1.png)
+ ![screenshot](./screenshots/5.png)
 
-The 3 functions allow you to GET, UPDATE and DELETE a row in a Data Table
+The 4 functions allow you to GET, UPDATE and DELETE a row and GET rows in a Data Table
 
 ---
 ## Function - Get Row:
@@ -94,6 +95,111 @@ inputs.dt_utils_search_value = artifact.value
 
 ## Alternatively you can get the row by its ID by defining this input:
 # inputs.dt_utils_row_id = 3
+```
+---
+## Function - Get Rows:
+Gets a rows in a Data Table. Results can be sorted by API column name in ASC or DESC order. Number of rows to return can be trimmed. 
+
+ ![screenshot](./screenshots/6.png)
+
+
+### Inputs:
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `incident_id` | `Number` | Yes | `2095` | ID of the current Incident |
+| `dt_utils_datatable_api_name` | `String` | Yes | `"dt_utils_test_data_table"` | API name of the Data Table to search |
+| `dt_utils_sort_by` | `String` | No | `-` | The name of the API column |
+| `dt_utils_sort_direction` | `Select` | No | `{'name': 'ASC'}` | - |
+| `dt_utils_max_rows` | `Number` | No | `1` | A number of max rows to return |
+| `dt_utils_search_column` | `String` | No | `"dt_col_name"` | API name of the column to search |
+| `dt_utils_search_value` | `String` | No | `"Mary Murphy"` | Cell value to search for |
+
+### Output:
+```python
+results={
+  'inputs': {
+    'incident_id': 2095,
+    'dt_utils_datatable_api_name': 'dt_utils_test_data_table',
+    'dt_utils_sort_by': 'dt_col_status',
+    'dt_utils_sort_direction': 'ASC',
+    'dt_utils_max_rows': 1,
+    'dt_utils_search_column': 'dt_col_name',
+    'dt_utils_search_value': 'Mary Murphy'
+  },
+  'success': True,
+  'rows': [
+    {
+      'type_id': 1000,
+      'cells': {
+        'dt_col_name': {
+          'row_id': 1,
+          'id': 'dt_col_name',
+          'value': 'Mary Murphy'
+        },
+        'dt_col_status': {
+          'row_id': 1,
+          'id': 'dt_col_status',
+          'value': 'Incomplete'
+        },
+        'dt_col_time': {
+          'row_id': 1,
+          'id': 'dt_col_time',
+          'value': '10:45'
+        },
+        'dt_col_id': {
+          'row_id': 1,
+          'id': 'dt_col_id',
+          'value': '635'
+        }
+      },
+      'actions': [
+        
+      ],
+      'inc_owner': 'admin@res.com',
+      'version': 2,
+      'table_name': 'Test Data Table',
+      'inc_name': 'Test DT Utils',
+      'inc_id': 2095,
+      'id': 1
+    }
+  ]
+}
+```
+
+### Pre-Process Script:
+This example uses the Artifact Value as the value to search the data table for
+```python
+# The ID of this incident
+inputs.incident_id = incident.id
+
+# The api name of the Data Table to update
+inputs.dt_utils_datatable_api_name = "dt_utils_test_data_table"
+
+# The number of max rows to return
+if rule.properties.dt_utils_max_rows:
+  inputs.dt_utils_max_rows = rule.properties.dt_utils_max_rows
+else:
+  inputs.dt_utils_max_rows = 0
+  
+# The direction of the sort
+inputs.dt_utils_sort_direction = rule.properties.dt_utils_sort_direction
+
+# The api name of the column to sort by
+if rule.properties.dt_utils_sort_by:
+  inputs.dt_utils_sort_by = rule.properties.dt_utils_sort_by
+else:
+  inputs.dt_utils_sort_by = None
+  
+# The column api name to search for
+inputs.dt_utils_search_column = "dt_col_name"
+
+# The cell value to search for
+inputs.dt_utils_search_value = artifact.value
+```
+### Post-Processing Script
+```python
+noteText = str(results["rows"])
+incident.addNote(noteText)
 ```
 ---
 ## Function - Update Row:
@@ -298,3 +404,4 @@ dt_utils_test_data_table
 3. **Drag** the Data table into the middle and click **Save**
  ![screenshot](./screenshots/dt_3.png)
 4. Create a new Incident and you will now see the **My Test Tab** with the **Test Data Table**
+
