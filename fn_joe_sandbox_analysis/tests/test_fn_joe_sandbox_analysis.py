@@ -30,7 +30,6 @@ def call_fn_joe_sandbox_analysis_function(circuits, function_params, timeout=10)
 class TestFnJoeSandboxAnalysis:
     """ Tests for the fn_joe_sandbox_analysis function"""
 
-    @pytest.mark.livetest
     def test_function_definition(self):
         """ Test that the package provides customization_data that defines the function """
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
