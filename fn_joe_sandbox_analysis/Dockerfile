@@ -15,9 +15,8 @@ RUN pip install --upgrade pip
 # install resilient-circuits
 RUN pip install resilient-circuits>=${RES_CIRCUITS_VERSION}
 
-# install and upgrade six to satisfy fn_utilities requirement
+# install and upgrade six to satisfy fn_joe_sandbox_analysis requirement
 RUN pip install --upgrade jbxapi==2.10.1
-# install and upgrade cryptography to satisfy fn_utilities requirement
 
 ## ---- section for changes ----
 # uncomment and replicate if additional os libraries are needed

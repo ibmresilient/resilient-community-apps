@@ -41,7 +41,7 @@ edit_all_incidents_fields
 #read_users
 #
 ## workflow permissions - needed when using workflow_id
-#read_workflow
+read_workflow
 #
 ## wiki permissions
 #create_wiki
@@ -56,17 +56,17 @@ edit_all_incidents_fields
 #edit_layouts
 #delete_layouts
 #create_function
-#read_function
+read_function
 #edit_function
 #delete_function
 #create_script
-#read_script
+read_script
 #edit_script
 #delete_script
 #create_workflow
-#read_workflow
+read_workflow
 #delete_workflow
 #edit_privacy_data
 #read_stats
-#edit_workflow
-#read_all_action_invocations
+edit_workflow
+read_all_action_invocations
