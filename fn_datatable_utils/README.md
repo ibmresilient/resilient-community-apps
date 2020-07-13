@@ -108,7 +108,7 @@ Gets a rows in a Data Table. Results can be sorted by API column name in ASC or 
 | ---- | :--: | :------: | ------- | ------- |
 | `incident_id` | `Number` | Yes | `2095` | ID of the current Incident |
 | `dt_utils_datatable_api_name` | `String` | Yes | `"dt_utils_test_data_table"` | API name of the Data Table to search |
-| `dt_utils_sort_by` | `String` | No | `-` | The name of the API column |
+| `dt_utils_sort_by` | `String` | No | `"dt_col_status"` | The name of the API column |
 | `dt_utils_sort_direction` | `Select` | No | `{'name': 'ASC'}` | - |
 | `dt_utils_max_rows` | `Number` | No | `1` | A number of max rows to return |
 | `dt_utils_search_column` | `String` | No | `"dt_col_name"` | API name of the column to search |
