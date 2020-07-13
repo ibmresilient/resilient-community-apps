@@ -9,7 +9,7 @@ setup(
     license='MIT',
     author='IBM Resilient',
     author_email='resil.labs@gmail.com',
-    url='http://ibm.biz/resilientcommunity'
+    url='http://ibm.biz/resilientcommunity',
     description="Resilient Circuits Joe Sandbox Function",
     long_description="Resilient Circuits Joe Sandbox Function",
     install_requires=[
