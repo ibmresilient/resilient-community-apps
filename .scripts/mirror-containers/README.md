@@ -1,8 +1,9 @@
 # Repository Mirror Scripts for IBM Resilient App Host
 ## Table of Contents
   - [About this Package](#about-this-package)
-  - [mirror-all-images.sh](#mirror-all-images.sh)
-  - [mirror-images.sh](#mirror-images.sh)
+  - [mirror-all-images.sh](#mirror-all-imagessh)
+  - [mirror-images.sh](#mirror-imagessh)
+  - [App Host Configuration](#app-host-configuration)
 ---
 
 ## History
@@ -10,7 +11,7 @@
 
 ## About this Package:
 This branch contains scripts which can be used to mirror App Host container images
-for local repository use. This is necessary when customers need to maintain their own
+for local registry use. This is necessary when customers need to maintain their own
 apps for use in App Host along with those officially published on the App Exchange 
 or to replicate containers for air-gapped environments.
 
@@ -21,17 +22,17 @@ Two scripts are provided:
 ### Initialization
 * Ensure that the local container tool, docker or podman, is accessible. If root permissions
 are needed to run these commands, use `sudo` or `su` to access that login account in advance.
-* Login to each repository using the `docker login` orr `podman login` commands.
+* Login to each registry using the `docker login` orr `podman login` commands.
 
 ## mirror-all-images.sh
-This script is used to copy all container images from the IBM official repository, quay.io,
-to a customer's private repository. It uses local container tools such as `docker` or `podman` to 
-pull containers down from quay.io and then push them to the private repository.
+This script is used to copy all container images from the IBM official registry, quay.io,
+to a customer's private registry. It uses local container tools such as `docker` or `podman` to 
+pull containers down from quay.io and then push them to the private registry.
 
 ### Usage
 /bin/bash mirror-all-images fqdn.registry.io [docker | podman]
 
-* fqdn.registry.io - name or ip address of the replication repository
+* fqdn.registry.io - name or ip address of the replication registry
 * [docker | podman] - optional reference to the tool to perform the container transfer. 
 If missing, the script will attempt to determine which tool exists.
 
@@ -40,9 +41,9 @@ If missing, the script will attempt to determine which tool exists.
 
 
 ## mirror-images.sh
-This script is used to copy a select number of container images from the IBM official repository, quay.io,
-to a customer's private repository. It uses local container tools such as `docker` or `podman` to 
-pull containers down from quay.io and then push them to the private repository.
+This script is used to copy a select number of container images from the IBM official registry, quay.io,
+to a customer's private registry. It uses local container tools such as `docker` or `podman` to 
+pull containers down from quay.io and then push them to the private registry.
 Two additional files are used to control the behavior of the script:
 * repo_quay.conf - a list of container names and versions, one per line, to replicate. The format of a line is:
    `container_name:x.x.x` where `x.x.x` is the tagged version.
@@ -52,7 +53,7 @@ container environment. Format of a line is the same as used in the `repo_quay.co
 ### Usage
 /bin/bash mirror-all-images fqdn.registry.io [docker | podman]
 
-* fqdn.registry.io - name or ip address of the replication repository
+* fqdn.registry.io - name or ip address of the replication registry
 * [docker | podman] - optional reference to the tool to perform the container transfer. 
 If missing, the script will attempt to determine which tool exists.
 
@@ -70,5 +71,6 @@ preserved_images.conf
 fn_utilities:1.14.0
 ```
 
-
-
+## App Host Configuration
+Refer to the [Private Container Registry](PrivateContainerRegistry.md) document on how to
+develop Apps and configure App Host for your private registry.
