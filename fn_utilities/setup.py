@@ -40,6 +40,7 @@ setup(
     the security incident response activities.""",
     setup_requires=['six==1.14.0'],
     install_requires=[
+        'six==1.14.0',
         'resilient_circuits>=30.0.0',
         'resilient-lib>=34.0.0',
         'openpyxl>=2.5.3',
