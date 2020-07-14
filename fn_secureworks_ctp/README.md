@@ -107,6 +107,7 @@ CTP is used with the Secureworks SOC team when they find a security issue that n
   | **close_codes** | No | `Authorized Activity,Confirmed Security Incident,Duplicate,Incident Misidentified,Inconclusive,Not Actionable,Not Vulnerable,Threat Mitigated` | *Comma separated list of close codes to override the defaults* |
   | **template_file_escalate** | No | `` | *Path to a custom jinja template file used to escalate a Secureworks Ticket to Resilient* |
   | **template_file_close** | No | `` | *Path to a custom jinja template file used to close a Resilient incident when the corresponding ticket is 'Closed' or 'Resolved' in Secureworks* |
+  | **template_file_update** | No | `` | *Path to a custom jinja template file used to update incident fields of a Resilient incident when the corresponding ticket is updated in Secureworks* |
   | **cafile** | No | `` | *Path to certificate file* |
 
 * **Save** and **Close** the app.config file.
