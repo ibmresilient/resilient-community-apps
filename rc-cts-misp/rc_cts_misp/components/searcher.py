@@ -219,10 +219,9 @@ class MISPThreatSearcher(BaseComponent):
             LOG.debug("Search for %s", misp_type)
             LOG.debug(json.dumps(result))
             if result:
-                if misp_api.__class__.__name__ == "PyMISP":
-                    response = result.get("response", {})
-                else:
-                    response = result
+                # The pymisp package returns result in different format for python2 compatible version.
+                # Set response to 'response' sub-dict if key in result else set to full result.
+                response = result.get("response", result)
 
                 if isinstance(response, dict):
                     attributes = response.get("Attribute", [])

@@ -7,7 +7,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_cve_search',
-    version='1.0.1',
+    version='1.0.2',
     license='MIT',
     author='Resilient Labs',
     author_email='resil.labs@gmail.com',
@@ -20,7 +20,8 @@ setup(
                          """,
 
     install_requires=[
-        'resilient_circuits>=30.0.0'
+        'resilient_circuits>=30.0.0',
+        'resilient_lib'
     ],
     packages=find_packages(),
     include_package_data=True,

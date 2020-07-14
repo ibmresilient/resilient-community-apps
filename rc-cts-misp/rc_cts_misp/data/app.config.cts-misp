@@ -4,16 +4,18 @@
 [custom_threat_service_misp]
 
 # URL to access the MISP server
-misp_url=http://misp
+misp_url=https://misp
 
 # URL for links to the MISP server (optional)
 # misp_link_url=http://misp_public_url
 
 # API access key (MISP: Event Actions -> Automation)
-misp_key=3PhYSFDeC8xpqjC0ZrFZDwazoSRDUQ1j4IlKbu0G
+misp_key=<MISP API Key>
 
 # Verify the MISP server's TLS certificate
-# misp_verifycert=False
+# Can be True or False (to check ot not the validity of the certificate)
+# or a path to a CA bundle in the case of self-signed certificate.
+# misp_verifycert=True|False|<Path_to_CA_bundle>
 
 # Optional: tags to filter
 # misp_tag=tlp:white,tlp:green

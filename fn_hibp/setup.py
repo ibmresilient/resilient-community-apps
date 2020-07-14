@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_hibp',
-    version='2.0.1',
+    version='2.0.2',
     license='MIT',
     author='Resilient Labs',
     author_email='resil.labs@gmail.com',
@@ -27,6 +27,7 @@ setup(
             "HaveIBeenPwnedGetPastesFunctionComponent = fn_hibp.components.have_i_been_pwned_get_pastes:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_hibp.util.config:config_section_data"],
-        "resilient.circuits.customize": ["customize = fn_hibp.util.customize:customization_data"]
+        "resilient.circuits.customize": ["customize = fn_hibp.util.customize:customization_data"],
+        "resilient.circuits.selftest": ["selftest = fn_hibp.util.selftest:selftest_function"]
     }
 )
