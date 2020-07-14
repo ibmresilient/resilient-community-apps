@@ -30,7 +30,8 @@ def run_playbook(
         playbook_args=None,
         module_name=None,
         module_args=None,
-        module_hosts=None
+        module_hosts=None,
+        **kwargs
     ):
     """This function is responsible for running a playbook
     and returns the results of the queries that the playbook
@@ -45,7 +46,8 @@ def run_playbook(
                                    private_data_dir=private_data_dir,
                                    artifact_dir=artifact_dir,
                                    playbook=playbook_name,
-                                   extravars=playbook_args
+                                   extravars=playbook_args,
+                                   **kwargs
                                    )
         elif module_name:
             log.info(u"Running module '{}' with ID {}".format(module_name, id))
@@ -54,7 +56,8 @@ def run_playbook(
                                    artifact_dir=artifact_dir,
                                    module=module_name,
                                    module_args=module_args,
-                                   host_pattern=module_hosts
+                                   host_pattern=module_hosts,
+                                   **kwargs
                                    )
 
         for host in r.events:

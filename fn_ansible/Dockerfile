@@ -21,8 +21,6 @@ RUN pip install "resilient-circuits>=${RESILIENT_CIRCUITS_VERSION}"
 RUN wget http://mirror.pit.teraswitch.com/fedora/epel/epel-release-latest-8.noarch.rpm && \
     rpm -ivh epel-release-latest-8.noarch.rpm && \
     yum --enablerepo=epel -y install sshpass
-#RUN yum -y update && yum clean all
-RUN yum -y install sudo
 
 # install the base package
 COPY ./dist /tmp/packages

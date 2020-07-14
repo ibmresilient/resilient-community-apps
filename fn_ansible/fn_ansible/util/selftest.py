@@ -34,7 +34,9 @@ def selftest_function(opts):
             artifact_dir=artifact_dir,
             module_name=ANSIBLE_PING,
             module_args=None,
-            module_hosts=ANSIBLE_HOST
+            module_hosts=ANSIBLE_HOST,
+            inventory=ANSIBLE_HOST,
+            extravars={"ansible_connection": "local"}
         )
 
         if selftest_results['localhost'].get('summary') == "successful":
@@ -48,6 +50,7 @@ def selftest_function(opts):
             }
 
     except Exception as err:
+        print(str(err))
         return {
             "state": "failure",
             "reason": str(err)
