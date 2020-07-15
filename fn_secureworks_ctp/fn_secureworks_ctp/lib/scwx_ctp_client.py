@@ -54,7 +54,6 @@ class SCWXClient(object):
         self.APIKEY = u"APIKEY {0}:{1}".format(self.username, self.password)
         self.headers = get_headers(self.APIKEY)
 
-
     def post_tickets_updates(self, ticket_type, grouping_type):
         """POST get a list of updated tickets not yet acknowledged """
         # Pass the parameters in the URL not in the payload for this endpoint only.

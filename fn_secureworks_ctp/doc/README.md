@@ -79,7 +79,7 @@ The integration poller runs continuously while the integration is running.
 
 ---
 ## Custom Incident Fields
-The following custom incident fields are available in the integration and can be viewed on the Secureworks CTP custom layout tab.  The Secureworks CTP Install Guide describes how to create the layout in the Resilient Platform UI.  A jinja template file is used to map the Securework ticket fields to a field in Resilient.  The user can add more fields and customizations using their own jinja template file defined in the app.config template_file_escalate parameter.
+The following custom incident fields are available in the integration and can be viewed on the Secureworks CTP custom layout tab.  The Secureworks CTP Install Guide describes how to create the layout in the Resilient Platform UI.  A jinja template file is used to map the Securework ticket fields to a field in Resilient.  The user can add more fields and customizations using their own jinja escalate template file defined in the app.config template_file_escalate parameter.
 <p>
 
 | Resilient custom incident field | Secureworks CTP Ticket field
@@ -100,6 +100,21 @@ The following custom incident fields are available in the integration and can be
 |scwx_ctp_ticket_id | ticketId |
 |scwx_ctp_ticket_type | ticketType |
 
+<p>
+The poller will update custom incident fields in Resilient when Secureworks updates a ticket. 
+To update the custom incident fields, the poller renders a default update template that contains the
+following Resilient custom incident fields which are the ones mostly to be changed or updated by Secureworks: 
+<p>
+
+| Resilient custom incident field | Secureworks CTP Ticket field
+| ----------------------- | ----------------------|
+|scwx_ctp_contact_id | contact: id |
+|scwx_ctp_contact_name | contact: name |
+|scwx_ctp_priority | priority |
+|scwx_ctp_status | status|
+
+<p>
+The user can add more fields and customizations using their own jinja update template file defined in the app.config template_file_update parameter. 
 
 ---
 
