@@ -176,7 +176,7 @@ class SecureworksCTPPollComponent(ResilientComponent):
                     self._update_custom_fields(resilient_incident, ticket)
 
                 if status in ('Closed', 'Resolved'):
-                    # Ticket was closed in Secureworks, so closed the Resilient incident now.
+                    # Ticket was closed in Secureworks, so close the Resilient incident now.
                     LOG.info(u"Secureworks ticket {0} is {1}: Closing incident {2}.", ticket_id, status,
                              resilient_incident)
                     result = self._close_incident(resilient_incident, ticket)
