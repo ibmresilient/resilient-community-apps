@@ -18,7 +18,8 @@ setup(
     customers have created a dashboard on their site which shows
     the real-time status of their monitors.""",
     install_requires=[
-        'resilient_circuits>=30.0.0'
+        'resilient_circuits>=30.0.0',
+        'resilient-lib'
     ],
     packages=find_packages(),
     include_package_data=True,
@@ -31,6 +32,7 @@ setup(
             "FnMxtoolboxFunctionComponent = fn_mxtoolbox.components.function_mxtoolbox:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_mxtoolbox.util.config:config_section_data"],
-        "resilient.circuits.customize": ["customize = fn_mxtoolbox.util.customize:customization_data"]
+        "resilient.circuits.customize": ["customize = fn_mxtoolbox.util.customize:customization_data"],
+        "resilient.circuits.selftest": ["selftest = fn_mxtoolbox.util.selftest:selftest_function"]
     }
 )
