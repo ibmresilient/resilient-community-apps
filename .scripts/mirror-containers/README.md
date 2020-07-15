@@ -72,5 +72,5 @@ fn_utilities:1.14.0
 ```
 
 ## App Host Configuration
-Refer to the [Private Container Registry](PrivateContainerRegistry.md) document on how to
+Refer to the [Configuring a private repository](https://www-03preprod.ibm.com/support/knowledgecenter/SSBRUQ_37.0.0/doc/apps/private_repo_config.html) document on how to
 develop Apps and configure App Host for your private registry.
