@@ -14,13 +14,6 @@ config_data = get_config_data(PACKAGE_NAME)
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
 
-class MockedResponse:
-    def __init__(self, json_data):
-        self.json_data = json_data
-
-    def json(self):
-        return self.json_data
-
 
 def call_fn_mxtoolbox_function(circuits, function_params, timeout=5):
     # Create the submitTestFunction event
@@ -77,6 +70,5 @@ class TestFnMxtoolbox:
     ])
     def test_success(self, circuits_app, mock_inputs, expected_results):
         """ Test calling with sample values for the parameters """
-        mocked_api_call.return_value = MockedResponse(inputs)
         results = call_fn_mxtoolbox_function(circuits_app, mock_inputs)
         assert(expected_results == results)
