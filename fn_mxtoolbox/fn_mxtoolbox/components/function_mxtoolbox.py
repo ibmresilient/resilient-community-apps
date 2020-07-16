@@ -19,7 +19,6 @@ class FunctionComponent(ResilientComponent):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         self.options = opts.get("fn_mxtoolbox", {})
-        selftest_function(opts)
 
     @handler("reload")
     def _reload(self, event, opts):
