@@ -1,8 +1,10 @@
 # Ansible Integration Function for IBM Resilient
 ## Table of Contents
   - [About This Package](#about-this-package)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
+  - [Features](#features)
+  - [Package Components](#package-components)
+  - [App Host Installation](#app-host-installation)
+  - [Integration Server Installation](#integration-server-installation)
   - [Function Inputs](#function-inputs)
   - [Function Output](#function-output)
   - [Considerations](#considerations)
@@ -48,10 +50,26 @@ runner_dir=/var/rescircuits/ansible
 artifact_dir=/tmp
 ```
 
-This screenshot shows the minimum files needed. Your environment may require more file definitions.
+### Playbooks
+When adding playbooks through the Configuration tab of an App, ensure the File Path is `/var/rescircuits/ansible/project`. 
+
+Note: Playbooks and modules cannot be run within the container environment. 
+
+The minimum Ansible files needed are: 
+* hosts, and 
+* playbooks
+
+Your environment may require more configuration files, such as ssh_key and envvars. 
+
+This is an example of the configuration files used including 
+several yaml files.
 ![screenshot](./screenshots/ansible_config_files.png)
 
 If you require additional ansible modules, additional effort is needed to include them as files in the Configuration tab.
+
+### Limitations
+Presently, there are limitations in the use of containers when playbook parameters sent from Resilient 
+are used with any file defined in `/var/rescircuits/ansible/env`. 
 
 ## Integration Server Installation
 ### Prerequisites:
@@ -71,7 +89,7 @@ This package requires that it is installed on a RHEL or CentOS platform and uses
 
 * Unzip the package downloaded from the IBM App Exchange
 ```
-    $ unzip fn_ansible-<version>.zip
+    $ unzip app-fn_ansible-<version>.zip
 ```
 * To install the package, run:
 
@@ -182,3 +200,19 @@ For very large data results, it may not be practical to save the results as a No
 * Consider using Rule Activity Field select lists for Ansible module name and parameter restrictions. This ensures that only specific commands are used for ad-hoc executions.
 * Also consider using Rule Activity Field select lists for Ansible playbook names for similar reasons to ensure only specific playbooks are supported through Resilient.
 * The workflow associated with a module or playbook function will remain blocked until all host executions are complete and the results are returned. The ansible-runner `Asynchronous` operation corrects this restriction but remains a future enhancement.
+* Playbooks should use the `debug` statement to return findings back to Resilient. The example below runs the `find` module, returning the file found using the debug statement.
+
+```yaml
+- hosts: "{{host_names}}"
+  tasks:
+  - name: Recursively find files
+    find:
+      paths: "{{path}}"
+      age: "{{age}}"
+      recurse: yes
+      pattern: '*'
+    register: files_matched
+
+  - debug:
+      msg: "{{ files_matched.files }}"
+```
