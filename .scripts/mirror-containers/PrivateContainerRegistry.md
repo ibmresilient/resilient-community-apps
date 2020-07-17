@@ -40,7 +40,6 @@ On-premise Solutions
 ## Mirroring IBM Resilient Containers to Private Registries
 Unfortunately, only one registry can be used at a time with App Host. In order to use
 both the IBM AppExchange published Apps and your own custom integrations, it will be 
-necessary to copy down the published containers from quay.io to your registry.
 Refer to [README](README.pdf) file in this directory for information on
 how to mirror IBM Resilient containers to a private container registry. Unfortunately, 
 only one registry can be used with APP Host at a time, requiring this mirroring process.
