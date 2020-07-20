@@ -48,27 +48,28 @@ class TestFnMxtoolbox:
         assert func is not None
 
     mock_inputs_1 = {
-        "mx_param1": "sample text",
+        "mx_param1": None,
         "mx_command": "mx",
-        "mx_argument": "sample text"
+        "mx_argument": "abc.com"
     }
 
-    expected_results_1 = {"value": "xyz"}
-
-    mock_inputs_2 = {
-        "mx_param1": "sample text",
-        "mx_command": "mx",
-        "mx_argument": "sample text"
-    }
-
-    expected_results_2 = {"value": "xyz"}
+    expected_results_value = {"Information": [{'IP Address': "104.47.44.36",
+                                               'Hostname': "abc-com.mail.protection.outlook.com"}]
+                              }
 
     @pytest.mark.livetest
-    @pytest.mark.parametrize("mock_inputs, expected_results", [
-        (mock_inputs_1, expected_results_1),
-        (mock_inputs_2, expected_results_2)
+    @pytest.mark.parametrize("mock_inputs, expected_results_value", [
+        (mock_inputs_1, expected_results_value)
     ])
-    def test_success(self, circuits_app, mock_inputs, expected_results):
+    def test_success(self, circuits_app, mock_inputs, expected_results_value):
         """ Test calling with sample values for the parameters """
         results = call_fn_mxtoolbox_function(circuits_app, mock_inputs)
-        assert(expected_results == results)
+        results_value = results.get("value")
+        results_information = results_value.get("Information")
+        results_hostname = results_information[0].get("Hostname")
+        results_ip = results_information[0].get("IP Address")
+        expected_results_information = expected_results_value.get("Information")
+        expected_results_hostname = expected_results_information[0].get("Hostname")
+        expected_results_ip = expected_results_information[0].get("IP Address")
+        assert(expected_results_ip == results_ip)
+        assert(expected_results_hostname == results_hostname)
