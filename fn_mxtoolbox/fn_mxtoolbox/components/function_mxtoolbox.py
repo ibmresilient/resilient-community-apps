@@ -5,10 +5,8 @@
 """Function implementation"""
 
 import logging
-import requests
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import validate_fields, RequestsCommon
-from fn_mxtoolbox.util.selftest import selftest_function
 
 CONFIG_DATA_SECTION = 'fn_mxtoolbox'
 HEADERS = {'content-type': 'application/json'}
@@ -18,12 +16,12 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get("fn_mxtoolbox", {})
+        self.options = opts.get(CONFIG_DATA_SECTION, {})
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
-        self.options = opts.get("fn_mxtoolbox", {})
+        self.options = opts.get(CONFIG_DATA_SECTION, {})
         self._init()
 
     def _init(self):
