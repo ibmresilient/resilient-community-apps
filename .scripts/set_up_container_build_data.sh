@@ -22,6 +22,16 @@ function container_build (){
 	argc=$#
 	argv=("$@")
 
+  # ODBC integrations require that the drivers for all supoprted databases are loaded into the container and configured
+  # We check in the working directory contains the substring "odbc" and copy the drivers directory if true
+  # Docker is unable to reference files outside the current directory, so we must bring them into the integration directory
+	workDirName=${PWD##*/}
+	if [[ "$workDirName" == *"odbc"* ]]; then
+	  echo "copying odbc dirvers into the working directory"
+	  mkdir dirvers
+	  cp ../.odbc_drivers ./drivers
+	fi
+
 	docker build --build-arg RES_CIRCUITS_VERSION=$RES_CIRCUITS_VERSION -t resilient/${1} ./${1}
 	if [ $? -ne 0 ]; then
 		return 1
