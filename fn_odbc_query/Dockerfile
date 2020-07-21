@@ -5,7 +5,7 @@ FROM registry.access.redhat.com/ubi8/python-36:latest
 #FROM resilient/rc-data-feeder-base
 
 ARG APPLICATION=fn_odbc_query
-ARG RES_CIRCUITS_VERSION=37
+ARG RES_CIRCUITS_VERSION=37.0
 
 # update to latest packages, user 0 for root privilege
 USER 0
