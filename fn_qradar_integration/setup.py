@@ -9,6 +9,7 @@ setup(
     license='MIT License',
     author='IBM Resilient',
     author_email='support@resilientsystems.com',
+    url='https://github.com/ibmresilient/resilient-community-apps/tree/master/fn_qradar_integration',
     description="Resilient Circuits Components for 'fn_qradar_integration'",
     long_description="fn_qradar_integration supports performing ariel search to retrieve data from QRadar. It also provide functions to find/add/delete reference set items.",
     install_requires=[
