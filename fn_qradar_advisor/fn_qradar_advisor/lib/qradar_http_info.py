@@ -36,6 +36,7 @@ class HttpInfo(object):
         self.session = requests.session()
         self.session.headers["Accept"] = "application/json"
         self.session.headers["Content-Type"] = "application/json"
+        self.session.headers["SEC"] = self.token
         self.session.cookies["SEC"] = self.token
 
     def get_all_mappings(self):
