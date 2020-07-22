@@ -55,6 +55,7 @@ RUN yum -y install freetds
 RUN yum -y install /tmp/lib/oracle-instantclient19.6-basic-19.6.0.0.0-1.x86_64.rpm
 RUN yum -y install /tmp/lib/oracle-instantclient-odbc-linuxx64.rpm
 #RUN rpm -i /tmp/lib/libnsl-2.28-72.el8_1.1.x86_64.rpm
+ENV TNS_ADMIN /var/rescircuits
 
 # install the base package
 COPY ./dist /tmp/packages

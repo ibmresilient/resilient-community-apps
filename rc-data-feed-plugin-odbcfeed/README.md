@@ -1,7 +1,8 @@
 ## Release Notes
 
-### v1.0.1
-* Duplication of incident id bug fix 
+* v1.0.4 Oracle definitions for AppHost
+* v1.0.3 AppHost configurations for Postresql, MS SQL Server, MySql, SQLite
+* v1.0.1 Duplication of incident id bug fix 
 
 
 # Introduction
@@ -117,12 +118,28 @@ MariaDB | Driver={MariaDB ODBC 3.0 Driver};Server=127.0.0.1;Port=3306; DB=<yourD
 
 Your naming of the database drivers (Ex. `MariaDB ODBC 3.0 Driver`) may vary and is specified in your `odbcinst.ini` file. 
 
+### Integration Server
 Oracle has the further requirement of specifying the connection string references in a TNSNAMES.ORA file. Setting up the Oracle client environment will include the following environment variables (and may include others):
 
 ```
 export LD_LIBRARY_PATH=/path/to/oracle/libraries/
 export TNS_ADMIN=/path/to/tnsnames/
 ```
+
+### App Host
+For App Host deployments, the tnsnames.ora file should be added to your app in the configuration section specifying the 
+file name as `tnsnames.ora` and path `/var/rescircuits`. The contents should contain the definitions for your Oracle database. For example:
+
+```
+OracleODBC-12c=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=9.10.11.12)(PORT=1521))
+    (CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=ORCLCDB.localdomain)))
+ORCLCDB=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=9.10.11.12)(PORT=1521))
+    (CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=ORCLCDB.localdomain)))
+ORCLPDB1=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=9.10.11.12)(PORT=1521))
+    (CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=ORCLPDB1.localdomain)))
+```
+
+![tnsnames.ora](screenshots/tnsnames.png)
 
 ## Integration Server Requirements
 All SQL database datastores are accessible via a python library (pyodbc) which further references a system library (unixodbc). Due to the complexity of the pyodbc, you will either need an environment with the `gcc compiler` to install it or, for RHEL environments, you can use a .whl file packaged by IBM and available on the public github (https://github.com/ibmresilient/resilient-community-apps/tree/master/fn_odbc_query/lib). 
