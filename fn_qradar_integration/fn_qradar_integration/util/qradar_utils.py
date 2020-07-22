@@ -99,7 +99,15 @@ class AuthInfo(object):
 
     def make_call(self, method, url, headers=None, data=None):
         my_headers = headers if headers else self.headers
-        return self.rc.execute_call_v2(method, url, data=data, headers=my_headers, verify=self.cafile)
+
+        def make_call_callback(response):
+            # 404 is not found
+            if response.status_code in (200, 404):
+                return response
+            else:
+                response.raise_for_status()
+
+        return self.rc.execute_call_v2(method, url, data=data, headers=my_headers, verify=self.cafile, callback=make_call_callback)
 
 
 class ArielSearch(SearchWaitCommand):
