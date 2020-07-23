@@ -27,8 +27,8 @@ function container_build (){
   # Docker is unable to reference files outside the current directory, so we must bring them into the integration directory
 	workDirName=${PWD##*/}
 	if [[ "$workDirName" == *"odbc"* ]]; then
-	  echo "copying odbc dirvers into the working directory"
-	  mkdir dirvers
+	  echo "copying odbc drivers into the working directory"
+	  mkdir drivers
 	  cp ../.odbc_drivers ./drivers
 	fi
 
