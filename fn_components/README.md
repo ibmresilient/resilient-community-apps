@@ -19,13 +19,12 @@
 | :-------: | :----: | ----- |
 | 1.0.0 | 07/2020 | Initial Release |
  
-## About This Package:
+## About This Package
 This package is used to convert existing, single-file Python integrations to use the App Host framework. 
-Today, these single-file integrations are dropped into a directory and referenced from resilient-circuits
-when the `componentsdir` parameter is added to the app.config file. 
+Today, the `componentsdir` parameter in the app.config file references a directory where these files reside.
 
-To use these files in an App Host environment, a container running only resilient-circuits is used
-and each file is added through the Resilient App Configuration tab.
+To use these files in an App Host environment, install this app using the Apps tab within Administrative Settings and, 
+through the Configuration tab of the app, add each single-file integration.
 
 ![screenshot](./screenshots/file_list.png)
 
@@ -47,14 +46,14 @@ If you require additional Python packages, refer to the section below on how to
 
 ## Requirements
 This App Host package assumes that the message destination, functions, and rules for each single-file integration are 
-already defined in your Resilient server. If you require moving your integrations between Resilient instances,
+already defined in your Resilient platform. If you require moving your integrations between Resilient platform,
 consider converting your single-file integrations to fully packaged Apps using the `resilient-sdk codegen` tool and 
 capability.
 
 For each single-file integration:
 * Each file must be Python 3 compatible.
 * Have no additional Python packages required other than those specified in the [container environment](#container_environment).
-* Message destinations, functions, and rules used must already exist on your Resilient server.
+* Message destinations, functions, and rules used must already exist on your Resilient platform.
 
 # Installation and Configuration
 With the app-fn_components-x.x.x.zip file downloaded from the AppExchange, navigate to the 
