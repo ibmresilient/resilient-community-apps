@@ -28,8 +28,8 @@ RUN curl https://packages.microsoft.com/config/rhel/8/prod.repo > /etc/yum.repos
 RUN yum -y install unixODBC-devel
 
 # copy the driver configurations to the container
-COPY ../.odbc_drivers/drivers.ini /etc/odbc-drivers.ini
-COPY ../.odbc_drivers/drivers /tmp/lib/
+COPY ./drivers/drivers.ini /etc/odbc-drivers.ini
+COPY ./drivers/drivers /tmp/lib/
 
 # configure unixODBC with the driver information in the .ini file
 RUN odbcinst -i -d -f /etc/odbc-drivers.ini
@@ -41,11 +41,19 @@ RUN make
 RUN make install
 
 # install mariadb (mysql) driver
-RUN git clone https://github.com/MariaDB/mariadb-connector-odbc.git
-WORKDIR mariadb-connector-odbc
-RUN cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCONC_WITH_UNIT_TESTS=Off -DCONC_WITH_MSI=OFF -DCMAKE_INSTALL_PREFIX=/usr/local .
-RUN cmake --build . --config RelWithDebInfo
-RUN make install
+RUN mkdir /usr/local/lib64/mariadb
+RUN mkdir /usr/local/lib64/mariadb/plugin
+RUN tar -xvzf /tmp/lib/mariadb-connector-odbc-3.1.9-centos8-amd64.tar.gz
+WORKDIR mariadb-connector-odbc-3.1.9-centos8-amd64
+RUN install lib/mariadb/libmaodbc.so /usr/lib64/
+RUN install -d /usr/lib64/mariadb/
+RUN install -d /usr/lib64/mariadb/plugin/
+RUN install lib64/mariadb/plugin/auth_gssapi_client.so /usr/local/lib64/mariadb/plugin/
+RUN install lib64/mariadb/plugin/caching_sha2_password.so /usr/local/lib64/mariadb/plugin/
+RUN install lib64/mariadb/plugin/client_ed25519.so /usr/local/lib64/mariadb/plugin/
+RUN install lib64/mariadb/plugin/dialog.so /usr/local/lib64/mariadb/plugin/
+RUN install lib64/mariadb/plugin/mysql_clear_password.so /usr/local/lib64/mariadb/plugin/
+RUN install lib64/mariadb/plugin/sha256_password.so /usr/local/lib64/mariadb/plugin/
 WORKDIR /opt/app-root/src
 
 # install MS SQL driver
