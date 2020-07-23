@@ -673,7 +673,8 @@ artifact.description = results.text
 
 ---
 ## Function - Utilities: Domain Distance
-Identifies similarity between a suspicious domain name and a list of valid domain names.  Low distance result indicates a possible spoof attempt. For example, www.ibm.com and www.1bm.com would have a low distance.
+Identifies similarity between a suspicious domain name and a list of valid domain names.  Low distance result indicates a possible spoof attempt. 
+For example, www.ibm.com and www.1bm.com would have a low distance. This can used for urls, dns names and email addresses.
 
  ![screenshot: fn-utilities-domain-distance ](./screenshots/fn-utilities-domain-distance.png)
 
@@ -714,8 +715,16 @@ results = {
 <p>
 
 ```python
-# The domain name being tested
-inputs.domain_name = artifact.value
+# if email address, return only domain portion
+if "email" in artifact.type.lower():
+  split_email = artifact.value.split("@")
+  if len(split_email) > 1:
+    inputs.domain_name = split_email[1]
+  else:
+    inputs.domain_name = artifact.value
+else:
+  # The domain name being tested
+  inputs.domain_name = artifact.value
 
 # The list of domains to test against
 inputs.domain_list = "ibm.com, resilientsystems.com, ibmcloud.com, bluemix.com"
