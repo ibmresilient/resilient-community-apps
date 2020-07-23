@@ -54,7 +54,8 @@ class TestDomainDistance:
         }),
         (u"wikipedi\u0430.com", "wikipedia.com, wikipedia.org", {"closest": {"name": "wikipedia.com", "distance": 0}}),
         ("xn--e1awd7f.com", "epic.com", {"closest": {"name": "epic.com", "distance": 0}}),
-        ("xn--ple-5cd5f.com", "apple.com", {"closest": {"name": "apple.com", "distance": 0}})
+        ("xn--ple-5cd5f.com", "apple.com", {"closest": {"name": "apple.com", "distance": 0}}),
+        ("http://1bm.com", "ibm.com", {"closest": {"name": "ibm.com", "distance": 1}})
     ])
     def test_success(self, circuits_app, domain_name, domain_list, expected_result):
         """ Test calling with sample values for the parameters """
