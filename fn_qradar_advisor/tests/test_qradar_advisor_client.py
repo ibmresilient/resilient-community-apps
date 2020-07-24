@@ -267,7 +267,7 @@ class TestQRadarAdvisorClient(object):
         ret_cookies = {"XSRF-TOKEN": CSRF_TOKEN}
         mocked_cookies.get_dict.return_value = ret_cookies
 
-        url = QRADAR_API_BASE_URL + "/search/quick"
+        url = QRADAR_API_BASE_URL + "/investigations/search/quick"
 
         search_value = "user:jsmith"
 
@@ -349,7 +349,7 @@ class TestQRadarAdvisorClient(object):
 
         offense_id = 12345
 
-        url = QRADAR_API_BASE_URL + "/offense/" + str(offense_id) + "/insights"
+        url = QRADAR_API_BASE_URL + "/investigations/offense/" + str(offense_id) + "/insights"
         ret_json = {"insights": "Sample insights from Watson"}
 
         mocked_session.get.return_value = _generate_response(ret_json, 200)
@@ -465,7 +465,7 @@ class TestQRadarFullSearch(object):
 
         search_value = "user:jsmith"
 
-        url = QRADAR_API_BASE_URL + "/search/full"
+        url = QRADAR_API_BASE_URL + "/investigations/search/full"
 
         data_str = json.dumps({"indicator": search_value})
         search_id = 123
@@ -531,7 +531,7 @@ class TestQRadarFullSearch(object):
         # 2.Test check_status
         #
 
-        url = QRADAR_API_BASE_URL + "/search/full/" + str(search_id)
+        url = QRADAR_API_BASE_URL + "/investigations/search/full/" + str(search_id)
         ret_dict = {
             "search_status": "PROCESSING STAGE3"
         }
@@ -582,7 +582,7 @@ class TestQRadarFullSearch(object):
         full_search.stage3_available = False
 
         # We shall query stage2 data
-        url = QRADAR_API_BASE_URL + "/search/full/" + str(search_id) + "/stix/stage2"
+        url = QRADAR_API_BASE_URL + "/investigations/search/full/" + str(search_id) + "/stix/stage2"
 
         stix_json = {
             "type": "bundle"
@@ -600,7 +600,7 @@ class TestQRadarFullSearch(object):
         full_search.stage3_available = True
 
         # We shall query stage3 data
-        url = QRADAR_API_BASE_URL + "/search/full/" + str(search_id) + "/stix/stage3"
+        url = QRADAR_API_BASE_URL + "/investigations/search/full/" + str(search_id) + "/stix/stage3"
 
         ret = full_search.get_search_result(search_id)
         assert ret == stix_json
@@ -646,7 +646,7 @@ class TestQRadarOffenseAnalysis(object):
 
         offense_id = 1234
 
-        url = QRADAR_API_BASE_URL + "/offense/" + str(offense_id) + "/analysis"
+        url = QRADAR_API_BASE_URL + "/investigations/offense/" + str(offense_id) + "/analysis"
 
         ret_dict = {
             "status": "PROCESSING_LOCAL"
@@ -738,7 +738,7 @@ class TestQRadarOffenseAnalysis(object):
         # 2.Test check_status
         #
 
-        url = QRADAR_API_BASE_URL + "/offense/" + str(offense_id) + "/analysis/status"
+        url = QRADAR_API_BASE_URL + "/investigations/offense/" + str(offense_id) + "/analysis/status"
         ret_dict = {
             "status": "PROCESSING STAGE3"
         }
@@ -789,7 +789,7 @@ class TestQRadarOffenseAnalysis(object):
         offense_analysis.stage3_available = False
 
         # We shall query stage2 data
-        url = QRADAR_API_BASE_URL + "/offense/" + str(offense_id) + "/analysis/stage2/stix"
+        url = QRADAR_API_BASE_URL + "/investigations/offense/" + str(offense_id) + "/analysis/stage2/stix"
 
         stix_json = {
             "type": "bundle"
@@ -807,7 +807,7 @@ class TestQRadarOffenseAnalysis(object):
         offense_analysis.stage3_available = True
 
         # We shall query stage3 data
-        url = QRADAR_API_BASE_URL + "/offense/" + str(offense_id) + "/analysis/stage3/stix"
+        url = QRADAR_API_BASE_URL + "/investigations/offense/" + str(offense_id) + "/analysis/stage3/stix"
 
         ret = offense_analysis.get_search_result(offense_id)
         assert ret == stix_json
