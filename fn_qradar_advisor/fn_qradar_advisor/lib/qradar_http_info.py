@@ -4,7 +4,7 @@
 import requests
 import base64
 
-QRADAR_PULGIN_API_URL = "{host}/console/plugins/{app_id}/app_proxy/api"
+QRADAR_PLUGIN_API_URL = "{host}/console/plugins/{app_id}/app_proxy/api"
 QRADAR_OFFENSE_INSIGHTS_URL="/investigations/offense/{offense_id}/insights"
 QRADAR_QUICK_SEARCH_URL = "/investigations/search/quick"
 QRADAR_FULL_SEARCH_URL = "/investigations/search/full"
@@ -31,7 +31,7 @@ class HttpInfo(object):
         self.token = qradar_token
         self.xsrf_token = None
         self.log = log
-        self.api_base_url = QRADAR_PULGIN_API_URL.format(host=self.host, app_id=self.app_id)
+        self.api_base_url = QRADAR_PLUGIN_API_URL.format(host=self.host, app_id=self.app_id)
 
         self.session = requests.session()
         self.session.headers["Accept"] = "application/json"
