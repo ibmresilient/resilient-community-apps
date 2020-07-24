@@ -5,14 +5,14 @@ import requests
 import base64
 
 QRADAR_PULGIN_API_URL = "{host}/console/plugins/{app_id}/app_proxy/api"
-QRADAR_OFFENSE_INSIGHTS_URL="/offense/{offense_id}/insights"
-QRADAR_QUICK_SEARCH_URL = "/search/quick"
-QRADAR_FULL_SEARCH_URL = "/search/full"
-QRADAR_FULL_SEARCH_RESULT_URL = "/search/full/{search_id}/stix/{stage}"
+QRADAR_OFFENSE_INSIGHTS_URL="/investigations/offense/{offense_id}/insights"
+QRADAR_QUICK_SEARCH_URL = "/investigations/search/quick"
+QRADAR_FULL_SEARCH_URL = "/investigations/search/full"
+QRADAR_FULL_SEARCH_RESULT_URL = "/investigations/search/full/{search_id}/stix/{stage}"
 QRADAR_ABOUT_URL="/about"
-QRADAR_ANALYSIS_URL = "/offense/{offense_id}/analysis"
-QRADAR_ANALYSIS_STATUS_URL = "/offense/{offense_id}/analysis/status"
-QRADAR_ANALYSIS_RESULT_URL = "/offense/{offense_id}/analysis/{stage}/stix"
+QRADAR_ANALYSIS_URL = "/investigations/offense/{offense_id}/analysis"
+QRADAR_ANALYSIS_STATUS_URL = "/investigations/offense/{offense_id}/analysis/status"
+QRADAR_ANALYSIS_RESULT_URL = "/investigations/offense/{offense_id}/analysis/{stage}/stix"
 
 QRADAR_CFMA_MAPPINGS = "/mappings"
 QRADAR_CFMA_TUNING="/config/tuning"
