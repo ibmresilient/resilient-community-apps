@@ -60,10 +60,14 @@ WORKDIR /opt/app-root/src
 RUN yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
 RUN yum -y install freetds
 
-# install Oracle DB driver
-RUN yum -y install /tmp/lib/oracle-instantclient19.6-basic-19.6.0.0.0-1.x86_64.rpm
-RUN yum -y install /tmp/lib/oracle-instantclient-odbc-linuxx64.rpm
-RUN yum -y install /tmp/lib/libnsl-2.28-101.el8.x86_64.rpm
+##########################
+# At the time of writing this integration, oracle DB was not supported
+# If we do decide to support, uncomment the run commands below to enable apphost support
+##########################
+## install Oracle DB driver
+#RUN yum -y install /tmp/lib/oracle-instantclient19.6-basic-19.6.0.0.0-1.x86_64.rpm
+#RUN yum -y install /tmp/lib/oracle-instantclient-odbc-linuxx64.rpm
+#RUN yum -y install /tmp/lib/libnsl-2.28-101.el8.x86_64.rpm
 
 # install the base package
 COPY ./dist /tmp/packages
