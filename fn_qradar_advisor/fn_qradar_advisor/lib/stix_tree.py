@@ -6,7 +6,6 @@ from .visitors import GetNodeVisitor
 from .html_gen_visitor import HtmlGenVisitor
 from .tree_node import TreeNode
 from . import stix_utils
-from .relation_visitor import RelationVisitor
 
 
 class MultiRootTree(object):
@@ -83,6 +82,8 @@ def handle_relations(stix_objects, tree, log):
     :param log:
     :return:
     """
+    # Import class here to avoid circular dependency error at module level.
+    from .relation_visitor import RelationVisitor
     found_relationship = False
     for obj in stix_objects:
         if obj["type"] == "relationship":
@@ -128,6 +129,8 @@ def handle_sightings(stix_objects, tree, log):
     :param log:
     :return:
     """
+    # Import class here to avoid circular dependency error at module level.
+    from .relation_visitor import RelationVisitor
     for obj in stix_objects:
         if obj["type"] == "sighting":
             #
