@@ -11,6 +11,7 @@
  - [API Key Permission Setup](#api_key_permission_setup)
  - [Adding Additional Python Files after Deployment](#adding_additional_python_files_after_deployment)
  - [Adding Additional Python Packages](#adding_additional_python_packages)
+ - [App Host Troubleshooting](#app-host-troubleshooting)
  
  ---
  
@@ -117,3 +118,44 @@ own registry and reference that repository in your App Host. Information on the 
 on the [IBM Knowledge Center](https://www.ibm.com/support/knowledgecenter/SSBRUQ_37.0.0/doc/apps/private_repo.html).
 
 ![screenshot](./screenshots/dockerfile.png)
+
+## App Host Troubleshooting
+If your integration isn't running, there are a few ways to determine the cause and take corrective actions.
+Below are a few common issues and the steps to correct.
+
+### App Restart
+Make sure to restart the App anytime you make additions and changes to component files.
+
+### Message destination
+Check the logs to make sure your message destination is listened to. If not your log will have an entry similar to this:
+```
+2020-07-13 20:07:15,226 ERROR [actions_component] STOMP listener: Error:
+b'java.lang.SecurityException: User a@example.com is not authorized to read from queue://actions.201.fn_ansible
+```
+
+### File names
+Ensure your python files end in `.py`. Otherwise the list of loaded component files will bypass your integration. This log statement shows the files loaded when a container starts:
+```
+2020-07-27 18:35:46,000 INFO [app] Components auto-load directory: /var/rescircuits/components
+2020-07-27 18:35:46,007 INFO [component_loader] Loading 'create_note_from_data_table' from /var/rescircuits/components/create_note_from_data_table.py
+2020-07-27 18:35:46,008 INFO [component_loader] Loading 'utilities_json2html' from /var/rescircuits/components/utilities_json2html.py
+2020-07-27 18:35:46,008 INFO [component_loader] Loading 'utilities_expand_url' from /var/rescircuits/components/utilities_expand_url.py
+2020-07-27 18:35:46,008 INFO [component_loader] Loading 'utilities_call_rest_api' from /var/rescircuits/components/utilities_call_rest_api.py
+2020-07-27 18:35:46,009 INFO [component_loader] Loading 'utilities_attachment_to_base64' from /var/rescircuits/components/utilities_attachment_to_base64.py
+```
+
+### Import statements
+Import statements which are unsupported will cause the container to become unusable and display a stack trace similar to below. Refer to section [Adding Additional Python Packages](#adding_additional_python_packages) 
+on how to build containers for your additional packages. 
+
+```
+2020-07-27 19:15:10,757 ERROR [component_loader] Failed to load component 'task_utils_create'
+2020-07-27 19:15:10,757 DEBUG [component_loader] Name does not exist in modules
+2020-07-27 19:15:10,802 ERROR [component_loader] No module named 'fn_cisco_umbrella_inv'
+Traceback (most recent call last):
+  File "/opt/app-root/lib/python3.6/site-packages/resilient_circuits/component_loader.py", line 40, in safe_but_noisy_import
+    return __import__(name, globals(), locals(), [""])
+  File "/var/rescircuits/components/task_utils_create.py", line 10, in <module>
+    from fn_cisco_umbrella_inv.util.resilient_inv import ResilientInv
+ModuleNotFoundError: No module named 'fn_cisco_umbrella_inv'
+```
