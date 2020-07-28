@@ -2,10 +2,12 @@
 # Base image using Red Hat's universal base image (rhel 8) for python
 #FROM registry.access.redhat.com/ubi8/python-36:latest
 # rc-data-feeder will build plugins from a base image
-FROM resilient/rc-data-feed
+# uncomment before PR
+#FROM quay.io/ibmresilient/rc_data_feed
+FROM ibmresilient/rc-data-feed:2.0.0
 
 ARG APPLICATION=rc_data_feed_plugin_splunkfeed
-ARG RES_CIRCUITS_VERSION=34.0.195
+ARG RES_CIRCUITS_VERSION=37.0
 
 # update to latest packages, user 0 for root privilege
 USER 0
@@ -13,7 +15,7 @@ USER 0
 RUN pip install --upgrade pip
 
 # install resilient-circuits
-RUN pip install resilient-circuits>=${RES_CIRCUITS_VERSION}
+RUN pip install "resilient-circuits>=${RES_CIRCUITS_VERSION}"
 
 ## ---- section for changes ----
 # uncomment and replicate if additional os libraries are needed

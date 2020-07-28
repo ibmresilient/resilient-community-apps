@@ -14,7 +14,8 @@ setup(
     long_description="Resilient Circuits Components for sending data feeds to other (BI) systems",
     install_requires=[
         'rc_data_feed',
-        'resilient'
+        'resilient',
+        'resilient-lib>=34.0.0'
     ],
     packages=find_packages(),
     include_package_data=True,
