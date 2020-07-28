@@ -42,8 +42,8 @@ app.config parameter. The following additional Python packages have been added t
 * six
 * tldextract 
 
-If you require additional Python packages, refer to the section below on how to 
-[modify the container build enviornment](#adding_additional_python_packages).
+If you require additional Python packages, refer to the 
+[Adding Additional Python Packages](#adding_additional_python_packages) section.
 
 ## Requirements
 This App Host package assumes that the message destination, functions, and rules for each single-file integration are 
@@ -54,29 +54,32 @@ capability.
 For each single-file integration:
 * Each file must be Python 3 compatible.
 * Have no additional Python packages required other than those specified in the [container environment](#container_environment).
-* Message destinations, functions, and rules used must already exist on your Resilient platform.
+* Required message destinations, functions and rules must already exist in your Resilient organization.
 
 # Installation and Configuration
-With the app-fn_components-x.x.x.zip file downloaded from the AppExchange, navigate to the 
-Apps tab within the Administrative Settings and install the package.
-
-Navigate to the Configuration tab and click the New File button to specify the file name, file path and file contents
-of your single-file integration.
-Use `/var/rescircuits/components` for the file path and specify the file type as: `Python`.  
-Finally, cut and paste the content of the single-file Python code into the File Content window.
-Repeat these steps for each single-file Python integration.
+Perform the following procedure to install app-fn_components and configure your single file integrations. For details on installing apps, see the System Administrator Guide on the IBM Knowledge Center.
+1. Log in to the Resilient platform, select Administrator Settings from the system menu then go to the Apps tab.
+3. Click the Install button, find the previously downloaded app-fn_components zip file and install the app.
+4. In the Apps tab, click the app-fn_components app and select its Configuration tab.
+5. Click the New File button and enter the following: 
+    1. For File Name, enter the name that is reflective of your single-file integration.
+    2. For File Path, enter: /var/rescircuits/components 
+    3. For File Description, enter a description of your app.
+    4. For File Content, copy the contents of the single-file Python code and paste it here. Optionally change the type type to 'Python'.
+    5. Click Save and Push Changes.
+6. Repeat the previous step for each single-file integration. 
+7. In the app's Configuration tab, select app.config.
+8. In File Content under [Resilient], add: componentsdir=/var/rescircuits/components
+9. If the single-file integration has its own configuration section in the integration server's app.config file, copy and paste it here.
+10. Repeat the previous step for each single-file integration. 
+11. Click Save and Push Changes.
+12. Click the app's Details tab and click Deploy.
 
 ![screenshot](./screenshots/adding_file.png)
 
-Within the app.config file, add the `[resilient]` parameter:
-`componentsdir=/var/rescircuits/components`
-
-Each single-file integration may have additional sections and parameters to include in this file similar the settings
-you have already specified on your Integration Server's app.config file.
 
 ![screenshot](./screenshots/app_config.png)
 
-Once all the single-file integrations and configurations added, return to the Details tab and click on the Deploy button.
 
 Note: Once deployed, your single-file integrations are enabled for rule execution. 
 It is best to remove these files from your Integration Server and restart resilient-circuits as both will be active otherwise.
