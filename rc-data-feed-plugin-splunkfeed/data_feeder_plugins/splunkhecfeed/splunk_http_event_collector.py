@@ -10,9 +10,7 @@
 
 __author__ = "george@georgestarcher.com (George Starcher)"
 
-import requests
-from requests.adapters import HTTPAdapter
-from requests.packages.urllib3.util.retry import Retry
+from resilient_lib import RequestsCommon
 
 import logging
 import json
@@ -60,18 +58,13 @@ class http_event_collector:
     maxByteLength = 100000
     threadCount = 10
 
-    # An improved requests retry method from
-    # https://www.peterbe.com/plog/best-practice-with-retries-with-requests
-    # 503 added for endpoint busy
-    # 408 added in case using HAproxy
-
-    def requests_retry_session(self, retries=3,backoff_factor=0.3,status_forcelist=(408,500,502,503,504),session=None):
-        session = session or requests.Session()
-        retry = Retry(total=retries, read=retries, connect=retries, backoff_factor=backoff_factor, status_forcelist=status_forcelist, method_whitelist=frozenset(['HEAD', 'TRACE', 'GET', 'PUT', 'OPTIONS', 'DELETE', 'POST']))
-        adapter = HTTPAdapter(max_retries=retry)
-        session.mount('http://', adapter)
-        session.mount('https://', adapter)
-        return session
+    def set_proxies(self, http_proxy, https_proxy):
+        if http_proxy:
+            self.proxies["http"] = http_proxy
+        if https_proxy:
+            self.proxies["https"] = https_proxy
+        else:
+            self.proxies = None
 
     def __init__(self, token, http_event_server, input_type='json', host="", http_event_port='8088', http_event_server_ssl=True):
         self.token = token
@@ -80,6 +73,7 @@ class http_event_collector:
         self.http_event_server = http_event_server
         self.http_event_server_ssl = http_event_server_ssl
         self.http_event_port = http_event_port
+        self.proxies = {}
         self.index = ""
         self.sourcetype = ""
         self.source = None
@@ -94,7 +88,8 @@ class http_event_collector:
             t.start()
 
         if self.SSL_verify == False:
-            requests.packages.urllib3.disable_warnings()
+            pass
+        #    requests.packages.urllib3.disable_warnings()
 
         # Set host to specified value or default to localhostname if no value provided
         if host:
@@ -206,21 +201,37 @@ class http_event_collector:
 
     def _batchThread(self):
         """Internal Function: Threads to send batches of events."""
+        # 503 added for endpoint busy
+        # 408 added in case using HAproxy
+        status_forcelist = (408, 500, 502, 503, 504)
+        max_retries = 3
 
         while True:
             if self.debug:
                 LOG.debug("Events received on thread. Sending to Splunk.")
             payload = " ".join(self.flushQueue.get())
             headers = {'Authorization':'Splunk '+self.token}
-            # try to post payload twice then give up and move on
-            try:
-                r = self.requests_retry_session().post(self.server_uri, data=payload, headers=headers, verify=self.SSL_verify)
-            except Exception:
-                pass
+            # Initialize Requests Common object
+            rc = RequestsCommon()
+            i = 1
+            while i != max_retries:
+                # Try to post payload then give up and move on if Exception or we hit max retries
+                try:
+                    res = rc.execute_call_v2("post", self.server_uri, data=payload,
+                                             headers=headers, verify=self.SSL_verify
+                                             )
+                    if res.status_code in status_forcelist:
+                        LOG.debug("Receied unexpected response from the server. Retrying {} more times.".format(max_retries - i))
+                        i = i + 1
+                    else:
+                        LOG.info("POST request to the Splunk server was successful")
+                except Exception:
+                    # Exception is already logged by Requests Common
+                    pass
 
             if self.debug:
                 try:
-                    LOG.debug(r.text)
+                    LOG.debug(res.text)
                 except:
                     pass
             self.flushQueue.task_done()
