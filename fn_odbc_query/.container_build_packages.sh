@@ -6,4 +6,4 @@
 # Create a drivers directory and copy the content from ../.odbc_drivers
 echo "copying odbc drivers into the integration directory"
 mkdir drivers
-cp ./.odbc_drivers ./fn_odbc_query/drivers
+cp -R ./.odbc_drivers ./fn_odbc_query/drivers
