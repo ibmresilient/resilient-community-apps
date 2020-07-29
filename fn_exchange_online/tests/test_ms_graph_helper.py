@@ -21,7 +21,8 @@ MOCKED_OPTS = {
     "max_messages": "100",
     "max_users": "2000",
     "max_retries_total": "10",
-    "max_retries_backoff_factor": "5"
+    "max_retries_backoff_factor": "5",
+    "max_batched_requests": "20"
 }
 
 def generate_response(content, status):
@@ -55,6 +56,7 @@ class TestMSGraphHelper(object):
                                             MOCKED_OPTS.get("max_users"),
                                             MOCKED_OPTS.get("max_retries_total"),
                                             MOCKED_OPTS.get("max_retries_backoff_factor"),
+                                            MOCKED_OPTS.get("max_batched_requests"),
                                             None)
             content = {"displayName": "Tester"}
 
@@ -94,6 +96,7 @@ class TestMSGraphHelper(object):
                                             MOCKED_OPTS.get("max_users"),
                                             MOCKED_OPTS.get("max_retries_total"),
                                             MOCKED_OPTS.get("max_retries_backoff_factor"),
+                                            MOCKED_OPTS.get("max_batched_requests"),
                                             None)
 
             delete_mock.return_value = generate_response(content, 204)
@@ -125,6 +128,7 @@ class TestMSGraphHelper(object):
                                             MOCKED_OPTS.get("max_users"),
                                             MOCKED_OPTS.get("max_retries_total"),
                                             MOCKED_OPTS.get("max_retries_backoff_factor"),
+                                            MOCKED_OPTS.get("max_batched_requests"),
                                             None)
 
             get_mock.return_value = generate_response(content, 200)
@@ -162,6 +166,7 @@ class TestMSGraphHelper(object):
                                             MOCKED_OPTS.get("max_users"),
                                             MOCKED_OPTS.get("max_retries_total"),
                                             MOCKED_OPTS.get("max_retries_backoff_factor"),
+                                            MOCKED_OPTS.get("max_batched_requests"),
                                             None)
 
             get_mock.return_value = generate_response(content, 200)
@@ -199,6 +204,7 @@ class TestMSGraphHelper(object):
                                             MOCKED_OPTS.get("max_users"),
                                             MOCKED_OPTS.get("max_retries_total"),
                                             MOCKED_OPTS.get("max_retries_backoff_factor"),
+                                            MOCKED_OPTS.get("max_batched_requests"),
                                             None)
 
             post_mock.return_value = generate_response(content, 201)
@@ -235,6 +241,7 @@ class TestMSGraphHelper(object):
                                             MOCKED_OPTS.get("max_users"),
                                             MOCKED_OPTS.get("max_retries_total"),
                                             MOCKED_OPTS.get("max_retries_backoff_factor"),
+                                            MOCKED_OPTS.get("max_batched_requests"),
                                             None)
             content = {
                 'value': [{'userPrincipalName': 'tester1@example.com'}, {'userPrincipalName': 'tester2@example.com'}]}
@@ -263,6 +270,7 @@ class TestMSGraphHelper(object):
                                             MOCKED_OPTS.get("max_users"),
                                             MOCKED_OPTS.get("max_retries_total"),
                                             MOCKED_OPTS.get("max_retries_backoff_factor"),
+                                            MOCKED_OPTS.get("max_batched_requests"),
                                             None)
 
             # Mock the users
@@ -307,6 +315,7 @@ class TestMSGraphHelper(object):
                                             MOCKED_OPTS.get("max_users"),
                                             MOCKED_OPTS.get("max_retries_total"),
                                             MOCKED_OPTS.get("max_retries_backoff_factor"),
+                                            MOCKED_OPTS.get("max_batched_requests"),
                                             None)
 
             # Mock the email lists for user 1
@@ -348,6 +357,7 @@ class TestMSGraphHelper(object):
                                             MOCKED_OPTS.get("max_users"),
                                             MOCKED_OPTS.get("max_retries_total"),
                                             MOCKED_OPTS.get("max_retries_backoff_factor"),
+                                            MOCKED_OPTS.get("max_batched_requests"),
                                             None)
 
             # Param list: email_address, mail_folder, sender, start_date, end_date, has_attachments, message_subject,
