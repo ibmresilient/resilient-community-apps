@@ -4,6 +4,6 @@
 # is unable to access files outside of the build process (anything in the filestructure above the working directory).
 
 # Create a drivers directory and copy the content from ../.odbc_drivers
-echo "copying odbc drivers into the working directory"
+echo "copying odbc drivers into the integration directory"
 mkdir drivers
-cp ../.odbc_drivers ./drivers
+cp ./.odbc_drivers ./fn_odbc_query/drivers
