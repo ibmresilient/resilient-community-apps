@@ -12,7 +12,7 @@
   ![screenshot: screenshot_1](./screenshots/screenshot_1.png)
 -->
 
-# **User Guide:** fn_odbc_query_v1.0.3
+# **User Guide:** fn_odbc_query v1.0.3
 
 ## Table of Contents
 - [Key Features](#key-features)
