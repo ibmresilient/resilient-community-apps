@@ -139,11 +139,46 @@ class RESDatatable(object):
             return_value = self.res_client.delete(uri)
 
         except Exception as err:
-            if err.message:
-                return_value = {"error": err.message}
+            if err:
+                return_value = {"error": err}
 
             else:
                 raise ValueError("Could not delete row in {0}. Unknown Error: {1}".format(self.api_name, err))
+
+        return return_value
+
+    def delete_rows(self, rows_ids=None, search_column=None, search_value=None):
+        """ Deletes rows.
+            Returns the response from Resilient API
+            or dict with the entry 'error'. """
+
+        return_value = None
+        rows_ids_list = []
+
+        # Search by rows_ids if defined
+        if rows_ids:
+            # Convert input str to a list of rows ids
+            rows_ids_input = [int(s) for s in rows_ids.strip("][").split(", ")]
+            for row in self.rows:
+                if row["id"] in rows_ids_input:
+                    rows_ids_list.append(row["id"])
+
+        # Else search by column name and cell value
+        elif search_column and search_value:
+            for row in self.rows:
+                cells = row["cells"]
+                if search_column not in cells:
+                    raise ValueError("{0} is not a valid column api name in for the data table {1}".format(search_column, self.api_name))
+                if "value" in cells[search_column] and cells[search_column]["value"] == search_value:
+                    rows_ids_list.append(row["id"])
+
+        if rows_ids_list:
+            for row_id in rows_ids_list:
+                deleted_row = self.delete_row(row_id)
+                if "error" in deleted_row:
+                    return_value = deleted_row
+                else:
+                    return_value = rows_ids_list
 
         return return_value
 
@@ -167,6 +202,7 @@ def validate_search_inputs(**options):
     }
 
     is_row_id = True if "row_id" in options else False
+    is_rows_ids = True if "rows_ids" in options else False
     is_search_column = True if "search_column" in options else False
     is_search_value = True if "search_value" in options else False
     is_sort_by_var_defined = True if "sort_by" in options and options["sort_by"] else False
@@ -180,7 +216,14 @@ def validate_search_inputs(**options):
         elif not options["row_id"] and not a_search_var_defined:
             return_value["valid"] = False
             return_value["msg"] = "You must define either 'row_id' or the 'search_column and search_value' pair"
-    elif not is_row_id:
+    elif not is_row_id and is_rows_ids:
+        if options["rows_ids"] and a_search_var_defined:
+            return_value["valid"] = False
+            return_value["msg"] = "Only 'rows_ids' or the 'search_column and search_value' pair can be defined"
+        elif not options["rows_ids"] and not a_search_var_defined:
+            return_value["valid"] = False
+            return_value["msg"] = "You must define either 'rows_ids' or the 'search_column and search_value' pair"
+    elif not is_row_id and not is_rows_ids:
         if not a_search_var_defined:
             return_value["valid"] = False
             return_value["msg"] = "You must define the 'search_column and search_value' pair"
