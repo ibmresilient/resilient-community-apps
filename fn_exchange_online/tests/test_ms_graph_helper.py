@@ -254,10 +254,11 @@ class TestMSGraphHelper(object):
         except IntegrationError as err:
             assert True
 
+    @patch('fn_exchange_online.lib.ms_graph_helper.OAuth2ClientCredentialsSession.post')
     @patch('fn_exchange_online.lib.ms_graph_helper.OAuth2ClientCredentialsSession.get')
     @patch('fn_exchange_online.lib.ms_graph_helper.OAuth2ClientCredentialsSession.authenticate')
-    def test_query_messages_all_users(self, authenticate_mock, mocked_get):
-        """ Test Get User"""
+    def test_query_messages_all_users(self, authenticate_mock, mocked_get, mocked_post):
+        """ Test Query Messages All Users"""
         print("Test Query Messages All Users\n")
         try:
             authenticate_mock.return_value = True
@@ -277,15 +278,23 @@ class TestMSGraphHelper(object):
             content1 = {
                 'value': [{'userPrincipalName': 'tester1@example.com'}, {'userPrincipalName': 'tester2@example.com'}]}
 
-            # Mock the email lists for user 1
-            content2 = {'value': [{'id': 'AAA'}, {'id': 'BBB'}]}
+            # Mock the responses from the POST to $batch endpoint.
+            content2 = {
+                         'responses': [
+                             {
+                                'id': '1',
+                                'status': 200,
+                                'body': {'value': [{'id': 'AAA'}, {'id': 'BBB'}]}
+                             },
+                             {
+                                 'id': '2',
+                                 'status': 200,
+                                 'body': {'value': [{'id': 'CCC'}]}
+                             }]
+                        }
 
-            # Mock the email lists for user 2
-            content3 = {'value': [{'id': 'CCC'}]}
-
-            mocked_get.side_effect = [generate_response(content1, 200),
-                                      generate_response(content2, 200),
-                                      generate_response(content3, 200)]
+            mocked_get.side_effect = [generate_response(content1, 200)]
+            mocked_post.side_effect = [generate_response(content2, 200)]
 
             email_list = MS_graph_helper.query_messages("all", None, None, None, None, None, "lunch", None)
             assert len(email_list) == 2
@@ -302,7 +311,7 @@ class TestMSGraphHelper(object):
     @patch('fn_exchange_online.lib.ms_graph_helper.OAuth2ClientCredentialsSession.get')
     @patch('fn_exchange_online.lib.ms_graph_helper.OAuth2ClientCredentialsSession.authenticate')
     def test_query_messages(self, authenticate_mock, mocked_get):
-        """ Test Get User"""
+        """ Test Query Message Single User"""
         print("Test Query Messages Single User\n")
         try:
             authenticate_mock.return_value = True
