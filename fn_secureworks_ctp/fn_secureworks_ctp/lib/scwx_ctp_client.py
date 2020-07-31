@@ -3,6 +3,7 @@
 
 """Secureworks CTP API client"""
 
+import json
 import os
 import logging
 from resilient_lib import RequestsCommon
@@ -60,7 +61,7 @@ class SCWXClient(object):
         url = u"{0}/tickets/updates".format(self.base_url)
         url = u"{0}?ticketType={1}".format(url, ticket_type)
         url = u"{0}&limit={1}".format(url, self.limit)
-        url = u"{0}&assignedToCustomer={1}".format(url, self.assigned_to_customer)
+        #url = u"{0}&assignedToCustomer={1}".format(url, self.assigned_to_customer)
         url = u"{0}&worklogs={1}".format(url, "UPDATED")
         if grouping_type:
             url = u"{0}&groupingType={1}".format(url, grouping_type)

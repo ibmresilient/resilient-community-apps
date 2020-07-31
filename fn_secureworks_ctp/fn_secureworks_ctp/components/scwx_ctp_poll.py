@@ -5,6 +5,7 @@
 
 """Function implementation"""
 
+import json
 import os
 from io import BytesIO
 import datetime
@@ -476,6 +477,9 @@ class SecureworksCTPPollComponent(ResilientComponent):
             attachment_info_list = ticket.get('attachmentInfo')
             incident_id = incident.get('id')
             ticket_id = ticket.get('ticketId')
+            uri = u'/incidents/{0}/attachments'.format(incident_id)
+            res_attachments = self.rest_client().get(uri)
+
             for attachment in attachment_info_list:
                 attachment_id = attachment.get('id')
 
@@ -483,17 +487,29 @@ class SecureworksCTPPollComponent(ResilientComponent):
                 response = self.scwx_client.get_tickets_attachment(ticket_id, attachment_id)
 
                 content = response.get('content')
-                datastream = BytesIO(content)
+
                 attachment_name = attachment.get('name')
                 if not attachment_name:
-                    attachment_name = u"TicketId-{0}-AttachmentID-{1}".format(ticket_id, attachment_id)
+                    res_attachment_name = u"attachmentInfo-id-{0}".format(attachment_id)
+                else:
+                    res_attachment_name = u"{0}-attachmentInfo-id-{1}".format(attachment_name, attachment_id)
 
+                attachment_in_incident = False
+                for r_attachment in res_attachments:
+                    if r_attachment.get("name") == res_attachment_name:
+                        attachment_in_incident = True
+
+                if attachment_in_incident:
+                    # Don't create attachment as it is already in Resilient
+                    continue
+
+                datastream = BytesIO(content)
                 # Write the file as attachement: failures will raise an exception
                 message = u"Writing {0} for Secureworks CTP ticket {1} to Resilient incident {2}".format(attachment_name,
                                                                                                          ticket_id,
                                                                                                          incident_id)
                 LOG.info(message)
-                new_attachment = write_file_attachment(self.rest_client(), attachment_name, datastream,
+                new_attachment = write_file_attachment(self.rest_client(), res_attachment_name, datastream,
                                                        incident_id, None)
                 LOG.debug(new_attachment)
         except Exception as err:
