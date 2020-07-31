@@ -5,7 +5,6 @@
 
 """Function implementation"""
 
-import json
 import os
 from io import BytesIO
 import datetime
@@ -178,7 +177,7 @@ class SecureworksCTPPollComponent(ResilientComponent):
 
                 if status in ('Closed', 'Resolved'):
                     # Ticket was closed in Secureworks, so close the Resilient incident now.
-                    LOG.info(u"Secureworks ticket {0} is {1}: Closing incident {2}.", ticket_id, status,
+                    LOG.info(u"Secureworks ticket %s is %s: Closing incident %s.", ticket_id, status,
                              resilient_incident)
                     result = self._close_incident(resilient_incident, ticket)
 
@@ -206,7 +205,7 @@ class SecureworksCTPPollComponent(ResilientComponent):
             'filters': [{
                 'conditions': [
                     {
-                        'field_name': 'properties.{}'.format(TICKET_ID_FIELDNAME),
+                        'field_name': 'properties.{0}'.format(TICKET_ID_FIELDNAME),
                         'method': 'equals',
                         'value': ticket_id
                     },
@@ -227,12 +226,12 @@ class SecureworksCTPPollComponent(ResilientComponent):
         except SimpleHTTPException:
             # Some versions of Resilient 30.2 onward have a bug that prevents query for numeric fields.
             # To work around this issue, let's try a different query, and filter the results. (Expensive!)
-            query_uri = u"/incidents/query?return_level=normal&field_handle={}".format(TICKET_ID_FIELDNAME)
+            query_uri = u"/incidents/query?return_level=normal&field_handle={0}".format(TICKET_ID_FIELDNAME)
             query = {
                 'filters': [{
                     'conditions': [
                         {
-                            'field_name': 'properties.{}'.format(TICKET_ID_FIELDNAME),
+                            'field_name': 'properties.{0}'.format(TICKET_ID_FIELDNAME),
                             'method': 'has_a_value'
                         },
                         {
@@ -270,7 +269,7 @@ class SecureworksCTPPollComponent(ResilientComponent):
                 template_file_path = resource_filename(Requirement("fn-secureworks-ctp"),
                                                        "fn_secureworks_ctp/data/scwx_ctp_template_escalate.jinja")
                 if not os.path.exists(template_file_path):
-                    raise Exception(u"Template file '{}' not found".format(template_file_path))
+                    raise Exception(u"Template file '{0}' not found".format(template_file_path))
 
             LOG.info(u"Secureworks CTP Template file: %s", template_file_path)
             with open(template_file_path, "r") as definition:
@@ -283,7 +282,7 @@ class SecureworksCTPPollComponent(ResilientComponent):
             # Post incident to Resilient
             incident = self.rest_client().post("/incidents", new_incident_payload)
             incident_id = incident.get('id')
-            message = u"Created incident {} for Secureworks CTP ticket {}".format(incident_id, ticket_id)
+            message = u"Created incident {0} for Secureworks CTP ticket {1}".format(incident_id, ticket_id)
             LOG.info(message)
             return incident
 
@@ -309,7 +308,7 @@ class SecureworksCTPPollComponent(ResilientComponent):
                 template_file_path = resource_filename(Requirement("fn-secureworks-ctp"),
                                                        "fn_secureworks_ctp/data/scwx_ctp_template_close.jinja")
                 if not os.path.exists(template_file_path):
-                    raise Exception(u"Template file for close'{}' not found".format(template_file_path))
+                    raise Exception(u"Template file for close'{0}' not found".format(template_file_path))
 
             LOG.info(u"Secureworks CTP jinja template file for closing incident: %s", template_file_path)
             with open(template_file_path, "r") as definition:
@@ -327,10 +326,11 @@ class SecureworksCTPPollComponent(ResilientComponent):
 
             ticket_id = ticket.get('ticketId')
             if result and result.get('success'):
-                message = u"Closed incident {} for Secureworks CTP ticket {}".format(incident_id, ticket_id)
+                message = u"Closed incident {0} for Secureworks CTP ticket {1}".format(incident_id, ticket_id)
                 LOG.info(message)
             else:
-                message = u"Unable to update incident {} for closing. Secureworks CTP ticket {}".format(incident_id, ticket_id)
+                message = u"Unable to update incident {0} for closing. Secureworks CTP ticket {1}".format(incident_id,
+                                                                                                          ticket_id)
                 LOG.error(message)
             return result
 
@@ -356,7 +356,7 @@ class SecureworksCTPPollComponent(ResilientComponent):
                 template_file_path = resource_filename(Requirement("fn-secureworks-ctp"),
                                                        "fn_secureworks_ctp/data/scwx_ctp_template_update.jinja")
                 if not os.path.exists(template_file_path):
-                    raise Exception(u"Template file for updating incident'{}' not found".format(template_file_path))
+                    raise Exception(u"Template file for updating incident'{0}' not found".format(template_file_path))
 
             LOG.info(u"Secureworks CTP jinja template file for updating incident: %s", template_file_path)
             with open(template_file_path, "r") as definition:
@@ -371,10 +371,10 @@ class SecureworksCTPPollComponent(ResilientComponent):
 
             ticket_id = ticket.get('ticketId')
             if result and result.get('success'):
-                message = u"Updated incident {} for Secureworks CTP ticket {}".format(incident_id, ticket_id)
+                message = u"Updated incident {0} for Secureworks CTP ticket {1}".format(incident_id, ticket_id)
                 LOG.info(message)
             else:
-                message = u"Unable to update incident {} for Secureworks CTP ticket {}".format(incident_id, ticket_id)
+                message = u"Unable to update incident {0} for Secureworks CTP ticket {1}".format(incident_id, ticket_id)
                 LOG.error(message)
             return result
 
@@ -417,7 +417,7 @@ class SecureworksCTPPollComponent(ResilientComponent):
         :return: Response from Resilient for debug
         """
         try:
-            uri = '/incidents/{}/comments'.format(incident_id)
+            uri = u'/incidents/{0}/comments'.format(incident_id)
             resilient_client = self.rest_client()
             note_json = {
                 'format': 'html',
@@ -430,45 +430,94 @@ class SecureworksCTPPollComponent(ResilientComponent):
         except Exception as err:
             raise IntegrationError(err)
 
+    def _find_note_in_incident(self, incident_id, worklog_timestamp):
+        """
+        Get the notes of the incident and determine if the note is already contained in the incident by
+        comparing the worklog "dateCreated" timestamp to the timestamp stored in the first line of the
+        Resilient note.
+        :param incident_id: id of the incident to be searched
+        :param worklog_timestamp: worklog "dateCreated" timestamp that appears in the first line of the
+        corresponding Resilient note.
+        :return: return True if the note is already contained in the incident and False if it is not.
+        """
+        try:
+            uri = u'/incidents/{0}/comments'.format(incident_id)
+            res_notes = self.rest_client().get(uri)
+
+            # Loop through the notes of the incident to see if note is already in the incident by comparing
+            # the timestamp stored in the first line of the Resilient note to the "dateCreated" field of
+            # the worklog.  If the 2 timestamps match, the worklogs are probably the same.
+            for note in res_notes:
+                res_note_text = note.get('text')
+                split_note = res_note_text.split("</b>")
+                # Only consider the Securworks worklog notes
+                if split_note[0] == "<b>Secureworks CTP Worklog: ":
+                    if split_note[1]:
+                        timestamp_string = split_note[1].split('<br />')
+                        if timestamp_string[0]:
+                            res_note_timestamp = int(timestamp_string[0])
+                            if res_note_timestamp == worklog_timestamp:
+                                return True
+            return False
+        except Exception as err:
+            raise IntegrationError(err)
+
     def _add_worklog_notes(self, incident, ticket):
         """
-        For each worklog of a Secureworks CTP ticket, post a note in the corresponding Resilient incident
+        For each worklog of a Secureworks CTP ticket, post a note in the corresponding Resilient incident.
+        Only post the worklog note if it has not been posted already.  Check the "dateCreated" timestamp
+        of the worklog and compare to the timestamp stored in the first line of the resilient note to
+        determine of the worklog is already in Resilient.  Seems like Secureworks should only send worklogs
+        that are updated and not ALL as it does.  There is a conflict with calling worklogs=UPDATED as
+        newly created tickets will not be sent to Resilient if we use this parameter.
         :param incident: Resilient incident
         :param ticket: Secureworks ticket
         :return:
         """
         try:
-            worklogs = ticket.get('worklogs')
             incident_id = incident.get('id')
-            # Loop through the list of worklogs  for the ticket and add a Resilient incident.
+
+            # Get worklogs list and reverse the order so that older notes are added first.
+            worklogs = ticket.get('worklogs')
+            worklogs.reverse()
+
+            # Loop through the list of worklogs for the ticket and add a Resilient incident note.
             for worklog in worklogs:
-                # Build the note string
-                note = u"<b>Secureworks CTP Worklog:</b><br>"
-                date = worklog.get('dateCreated')
+                date_timestamp = worklog.get('dateCreated')
+
+                # Determine if the note for this worklog is already in
+                found = self._find_note_in_incident(incident_id, date_timestamp)
+                if not found:
+                    continue
+
+                # Continue on to build the note string and post to Resilient
                 description = worklog.get('description')
                 worklog_type = worklog.get('type')
                 created_by = worklog.get('createdBy')
+                note = u"<b>Secureworks CTP Worklog: </b>{0}<br />".format(date_timestamp)
                 if created_by:
-                    note = u"{}    <b>Created by:</b> {}<br>".format(note, created_by)
-                if date:
-                    created = readable_datetime(date)
-                    note = u"{}    <b>Date Created:</b> {}<br>".format(note, created)
+                    note = u"{0}    <b>Created by:</b> {1}<br />".format(note, created_by)
+                if date_timestamp:
+                    created = readable_datetime(date_timestamp)
+                    note = u"{0}    <b>Date Created:</b> {1}<br />".format(note, created)
                 if worklog_type:
-                    note = u"{}    <b>Type:</b> {}<br>".format(note, worklog_type)
+                    note = u"{0}    <b>Type:</b> {1}<br />".format(note, worklog_type)
                 if description:
-                    description = description.replace("\n", "<br>")
-                    note = u"{}    <b>Description:</b><br> {}".format(note, description)
+                    description = description.replace("\n", "<br />")
+                    note = u"{0}    <b>Description:</b><br /> {1}".format(note, description)
 
                 LOG.info(u"Writing note to incident %d: %s", incident_id, note)
                 response = self._create_incident_comment(incident_id, note)
-
                 LOG.debug(response)
+
         except Exception as err:
             raise IntegrationError(err)
 
     def _add_ticket_attachments(self, incident, ticket):
         """
-        Add the list of Secureworks ticket attachments to the Resilient incident
+        Add the list of Secureworks ticket attachments to the Resilient incident.  Only add attachments that
+        are not already in Resilient.  To make sure this is the case, add the Secureworks attachmentInfo id
+        to the attachment name in Resilient and then check whether this attachment name is already in Resilient.
         :param incident: Resilient incident
         :param ticket:  Secureworks ticket
         :return:
@@ -477,18 +526,19 @@ class SecureworksCTPPollComponent(ResilientComponent):
             attachment_info_list = ticket.get('attachmentInfo')
             incident_id = incident.get('id')
             ticket_id = ticket.get('ticketId')
+
+            # Get the list of attachments in this incident.
             uri = u'/incidents/{0}/attachments'.format(incident_id)
             res_attachments = self.rest_client().get(uri)
 
             for attachment in attachment_info_list:
                 attachment_id = attachment.get('id')
 
-                # Get ticket attachment
+                # Get ticket attachment and name
                 response = self.scwx_client.get_tickets_attachment(ticket_id, attachment_id)
-
-                content = response.get('content')
-
                 attachment_name = attachment.get('name')
+
+                # Use the Secureworks attachmentInfo id in the name to uniquely identify it.
                 if not attachment_name:
                     res_attachment_name = u"attachmentInfo-id-{0}".format(attachment_id)
                 else:
@@ -503,6 +553,7 @@ class SecureworksCTPPollComponent(ResilientComponent):
                     # Don't create attachment as it is already in Resilient
                     continue
 
+                content = response.get('content')
                 datastream = BytesIO(content)
                 # Write the file as attachement: failures will raise an exception
                 message = u"Writing {0} for Secureworks CTP ticket {1} to Resilient incident {2}".format(attachment_name,
@@ -555,9 +606,9 @@ class SecureworksCTPPollComponent(ResilientComponent):
         if hasattr(resp, "status_code"):
             if isinstance(rc, list):
                 if resp.status_code < rc[0] or resp.status_code > rc[1]:
-                    raise IntegrationError("status code failure: {}".format(resp.status_code))
+                    raise IntegrationError(u"status code failure: {0}".format(resp.status_code))
             elif resp.status_code != rc:
-                raise IntegrationError("status code failure: {}".format(resp.status_code))
+                raise IntegrationError(u"status code failure: {0}".format(resp.status_code))
 
             return resp.json()
 
