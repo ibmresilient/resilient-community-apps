@@ -428,14 +428,16 @@ class SecureworksCTPPollComponent(ResilientComponent):
         except Exception as err:
             raise IntegrationError(err)
 
-    def _find_note_in_incident(self, incident_id, worklog_timestamp):
+    def _find_note_in_incident(self, incident_id, worklog_timestamp, worklog_type):
         """
         Get the notes of the incident and determine if the note is already contained in the incident by
         comparing the worklog "dateCreated" timestamp to the timestamp stored in the first line of the
-        Resilient note.
+        Resilient note.  Also compare the worklog type to the type stored in the note.
         :param incident_id: id of the incident to be searched
         :param worklog_timestamp: worklog "dateCreated" timestamp that appears in the first line of the
         corresponding Resilient note.
+        :param worklog_type: worklog "type" that is a field of the Secureworks worklog and tappears in
+        the second line of the Resilient note.
         :return: return True if the note is already contained in the incident and False if it is not.
         """
         try:
@@ -455,7 +457,13 @@ class SecureworksCTPPollComponent(ResilientComponent):
                         if timestamp_string[0]:
                             res_note_timestamp = int(timestamp_string[0])
                             if res_note_timestamp == worklog_timestamp:
-                                return True
+                                # Now compare the worklog type to the Resilient note type.
+                                split_note = res_note_text.split("<b>Type:</b> ")
+                                if split_note[1]:
+                                    res_note_string = split_note[1].split('<br />')
+                                    res_note_type = res_note_string[0]
+                                    if res_note_type == worklog_type:
+                                        return True
             return False
         except Exception as err:
             raise IntegrationError(err)
@@ -482,9 +490,9 @@ class SecureworksCTPPollComponent(ResilientComponent):
             # Loop through the list of worklogs for the ticket and add a Resilient incident note.
             for worklog in worklogs:
                 date_timestamp = worklog.get('dateCreated')
-
+                worklog_type = worklog.get('type')
                 # Determine if the note for this worklog is already in Resilent.
-                found = self._find_note_in_incident(incident_id, date_timestamp)
+                found = self._find_note_in_incident(incident_id, date_timestamp, worklog_type)
                 if found:
                     continue
 
@@ -493,13 +501,13 @@ class SecureworksCTPPollComponent(ResilientComponent):
                 worklog_type = worklog.get('type')
                 created_by = worklog.get('createdBy')
                 note = u"<b>Secureworks CTP Worklog: </b>{0}<br />".format(date_timestamp)
-                if created_by:
-                    note = u"{0}    <b>Created by:</b> {1}<br />".format(note, created_by)
+                if worklog_type:
+                    note = u"{0}    <b>Type:</b> {1}<br />".format(note, worklog_type)
                 if date_timestamp:
                     created = readable_datetime(date_timestamp)
                     note = u"{0}    <b>Date Created:</b> {1}<br />".format(note, created)
-                if worklog_type:
-                    note = u"{0}    <b>Type:</b> {1}<br />".format(note, worklog_type)
+                if created_by:
+                    note = u"{0}    <b>Created by:</b> {1}<br />".format(note, created_by)
                 if description:
                     description = description.replace("\n", "<br />")
                     note = u"{0}    <b>Description:</b><br /> {1}".format(note, description)
