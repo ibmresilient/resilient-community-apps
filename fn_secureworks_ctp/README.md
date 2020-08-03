@@ -102,7 +102,6 @@ CTP is used with the Secureworks SOC team when they find a security issue that n
   | **password** | Yes | `` | *password associated with Secureworks account* |
   | **query_ticket_grouping_types** | Yes | `INCIDENT:SECURITY` | *Comma separated list of ticketType:groupingType pairs indicating ticket and grouping types to query. Secureworks ticketTypes : SERVICE_REQUEST, INCIDENT, CHANGE. Secureworks groupingTypes: REQUEST, CHANGE, HEALTH, SECURITY* |
   | **query_limit** | Yes | `10` | *Maximum number of tickets to be returned from Secureworks API query* |
-  | **assigned_to_customer** | Yes | `true` | *Boolean indicating whether to only return tickets assigned to the client* |
   | **polling_interval** | Yes | `600` | *Time in seconds between queries to Secureworks endpoint* |
   | **close_codes** | No | `Authorized Activity,Confirmed Security Incident,Duplicate,Incident Misidentified,Inconclusive,Not Actionable,Not Vulnerable,Threat Mitigated` | *Comma separated list of close codes to override the defaults* |
   | **template_file_escalate** | No | `` | *Path to a custom jinja template file used to escalate a Secureworks Ticket to Resilient* |
