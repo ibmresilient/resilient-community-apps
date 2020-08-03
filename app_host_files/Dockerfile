@@ -7,6 +7,9 @@ FROM registry.access.redhat.com/ubi8/python-36:latest
 ARG APPLICATION=<app_name>
 ARG RES_CIRCUITS_VERSION=37.0
 
+# Environment varaible for any app to check if running in a container
+ENV APP_HOST_CONTAINER=1
+
 # update to latest packages, user 0 for root privilege
 USER 0
 # Update to latest pip
