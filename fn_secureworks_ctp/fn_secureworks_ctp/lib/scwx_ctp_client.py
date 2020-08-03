@@ -82,7 +82,14 @@ class SCWXClient(object):
                                            proxies=self.rc.get_proxies())
         LOG.debug(u"Response: %s", response.text)
         response.raise_for_status()
-        return response.json()
+
+        response_ack = response.json()
+        code = response_ack[0].get('code')
+        if code != "SUCCESS":
+            LOG.warning(u"Secureworks CTP could NOT acknowledge ticket: %s code: %s", ticket_id, code)
+        else:
+            LOG.info(u"Secureworks CTP acknowledged ticket: %s code: %s", ticket_id, code)
+        return code
 
     def get_tickets_attachment(self, ticket_id, attachment_id):
         """GET get a ticket attachment """

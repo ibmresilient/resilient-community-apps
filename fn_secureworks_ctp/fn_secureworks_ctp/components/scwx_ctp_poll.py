@@ -163,6 +163,9 @@ class SecureworksCTPPollComponent(ResilientComponent):
 
             if not resilient_incident:
                 LOG.info(u"No Resilient incident for Secureworks Ticket: %s, status: %s", ticket_id, status)
+
+                # Acknowledge Secureworks that we have received and processed the ticket.
+                code = self.scwx_client.post_tickets_acknowledge(ticket)
             else:
 
                 # Add ticket worklogs to the incident as notes
@@ -175,20 +178,15 @@ class SecureworksCTPPollComponent(ResilientComponent):
                 if not incident_created:
                     self._update_custom_fields(resilient_incident, ticket)
 
+                # Acknowledge Secureworks that we have received and processed the ticket.
+                # The ticket must be acknowledged before call POST to close the ticket.
+                code = self.scwx_client.post_tickets_acknowledge(ticket)
+
                 if status in ('Closed', 'Resolved'):
                     # Ticket was closed in Secureworks, so close the Resilient incident now.
                     LOG.info(u"Secureworks ticket %s is %s: Closing incident %s.", ticket_id, status,
                              resilient_incident)
                     result = self._close_incident(resilient_incident, ticket)
-
-            # Acknowledge Secureworks that we have received and processed the ticket.
-            response_ack = self.scwx_client.post_tickets_acknowledge(ticket)
-
-            code = response_ack[0].get('code')
-            if code != "SUCCESS":
-                LOG.warning(u"Secureworks CTP could NOT acknowledge ticket: %s code: %s", ticket_id, code)
-            else:
-                LOG.info(u"Secureworks CTP acknowledged ticket: %s code: %s", ticket_id, code)
 
         except Exception as err:
             LOG.error(err)
@@ -485,9 +483,9 @@ class SecureworksCTPPollComponent(ResilientComponent):
             for worklog in worklogs:
                 date_timestamp = worklog.get('dateCreated')
 
-                # Determine if the note for this worklog is already in
+                # Determine if the note for this worklog is already in Resilent.
                 found = self._find_note_in_incident(incident_id, date_timestamp)
-                if not found:
+                if found:
                     continue
 
                 # Continue on to build the note string and post to Resilient
