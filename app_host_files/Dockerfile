@@ -8,7 +8,8 @@ ARG APPLICATION=<app_name>
 ARG RES_CIRCUITS_VERSION=37.0
 
 # Environment variable for any app to check if running in a container
-ENV APP_HOST_CONTAINER=1
+ARG APP_HOST_CONTAINER=1
+ENV APP_HOST_CONTAINER=${APP_HOST_CONTAINER}
 
 # update to latest packages, user 0 for root privilege
 USER 0
