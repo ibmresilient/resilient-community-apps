@@ -6,7 +6,7 @@ import json
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import validate_fields, RequestsCommon, ResultPayload, IntegrationError
-from fn_exchange_online.lib.ms_graph_helper import MSGraphHelper, MAX_RETRIES_TOTAL, MAX_RETRIES_BACKOFF_FACTOR
+from fn_exchange_online.lib.ms_graph_helper import MSGraphHelper, MAX_RETRIES_TOTAL, MAX_RETRIES_BACKOFF_FACTOR, MAX_BATCHED_REQUESTS
 from fn_exchange_online.lib.resilient_helper import create_incident_comment, create_incident_attachment
 
 CONFIG_DATA_SECTION = 'fn_exchange_online'
@@ -64,6 +64,7 @@ class FunctionComponent(ResilientComponent):
                                             self.options.get("max_users"),
                                             self.options.get("max_retries_total", MAX_RETRIES_TOTAL),
                                             self.options.get("max_retries_backoff_factor", MAX_RETRIES_BACKOFF_FACTOR),
+                                            self.options.get("max_batched_requests", MAX_BATCHED_REQUESTS),
                                             RequestsCommon(self.opts, self.options).get_proxies())
 
             # Convert string to JSON.

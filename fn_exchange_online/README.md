@@ -30,13 +30,16 @@
   notes of a previous release
 -->
 ### v1.1.0
-* Add "max retry" capability to Microsoft Graph API requests when 503 (server unavailable)  or 429 (too many requests) 
-are returned from the Microsoft server. Parameters max_retries_total and max_retries_backoff_factor are settable in the app.config file.
-* The Example: Exchange Online Query Messages and Example: Exchange Online Delete Messages from Query Results menu item rules allow the user to select where query results are displayed: 
+The 1.1.0 release addresses performance issues when querying messages of all Exchange Online users of a tenant.
+* Add "max retries" capability to Microsoft Graph API requests. When making many Microsoft Graph API calls, the Microsoft Graph server may throttle the client and return  503 (server unavailable)  or 429 (too many requests) status codes. When this happens the server, may send back a "Retry-After" response header indicating how long to wait and retry sending the request. If this header is not sent to the client, parameters can be set to indicate how long to wait and retry sending the request again.   These parameters are settable in the app.config file:
+  * max_retries_total
+  * max_retries_backoff_factor
+* Add batching of multiple message query requests into a single Microsoft Graph API request call using the batch endpoint.  The maximum number of requests that Microsoft Graph currently supports in the batch endpoint is 20 requests.  Should Microsoft change this value, the <code>max_batch_requests</code>  parameter should be updated in the app.config file.
+* The <code>Example: Exchange Online Query Messages</code> and <code>Example: Exchange Online Delete Messages from Query Results</code> menu item rules and workflows allow the user to multi-select where query results are displayed: 
   * Exchange Online data table
   * Incident note
   * Incident attachment 
-* When querying all users, you can specify a subset of all users mailboxes to search.  Enter "all:r" to specify searching all users starting with the letter "r" in the PrincipalUserName.  Enter "all:mc" to search all users starting with "mc".  
+* When querying all users, the user can specify a subset of all user mailboxes to search.  For example: enter <code>all:r</code> in the <code>Email Address</code> select field of the <code>Example: Exchange Online Query Messages</code> activity popup menu  to specify searching all users with PrincipalUserName starting with the letter "r".  Enter <code>all:mc</code> to search all users starting with "mc".  
 
 ### v1.0.0
 * Initial Release
@@ -86,7 +89,7 @@ The integration contains the following functions:
 <!--
   List any Requirements 
 -->
-* Resilient platform >= `v34.2.47`
+* Resilient platform >= `v36.0.5634`
 * An Integration Server running:
   *  `resilient_circuits>=31.0.0`
   *  `resilient_lib>=35.0.0`
@@ -157,6 +160,7 @@ The integration contains the following functions:
   | **tenant_id** | Yes | `xxx` | *Microsoft Azure Tenant ID* |
   | **client_id** | Yes | `xxx` | *Microsoft Azure Client ID (Application ID)* |
   | **client_secret** | Yes | `xxx` | *Microsoft Azure Client Secret* |
+  | **max_batched_requests** | Yes | `20` | *Maximum number of requests to send MS Graph API $batch endpoint in single call* |
   | **max_messages** | Yes | `100` | *Maximum number of messages that a query will return* |
   | **max_users** | Yes | `2000` | *Maximum number of users searched in a query* |
   | **max_retries_total** | Yes | `10` | *Maximum number of retries for MS Graph API request* |

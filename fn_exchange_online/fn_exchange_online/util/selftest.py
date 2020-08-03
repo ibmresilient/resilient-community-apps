@@ -8,7 +8,7 @@
 import logging
 from resilient_lib import RequestsCommon, validate_fields
 from resilient_lib.components.integration_errors import IntegrationError
-from fn_exchange_online.lib.ms_graph_helper import MSGraphHelper, MAX_RETRIES_TOTAL, MAX_RETRIES_BACKOFF_FACTOR
+from fn_exchange_online.lib.ms_graph_helper import MSGraphHelper, MAX_RETRIES_TOTAL, MAX_RETRIES_BACKOFF_FACTOR, MAX_BATCHED_REQUESTS
 
 CONFIG_DATA_SECTION = 'fn_exchange_online'
 log = logging.getLogger(__name__)
@@ -37,6 +37,7 @@ def selftest_function(opts):
     max_users = int(options.get('max_users'))
     max_retries_total = int(options.get('max_retries_total', MAX_RETRIES_TOTAL))
     max_retries_backoff_factor = int(options.get('max_retries_backoff_factor', MAX_RETRIES_BACKOFF_FACTOR))
+    max_batched_requests = int(options.get("max_batched_requests", MAX_BATCHED_REQUESTS))
     try:
         log.info(u'Calling MS Graph API with: \n token_url: %s', token_url)
         log.info(u'MS Graph API url: %s',graph_url)
@@ -46,6 +47,7 @@ def selftest_function(opts):
         log.info(u'max_users: %s', str(max_users))
         log.info(u'max_retries_total: %s', str(max_retries_total))
         log.info(u'max_retries_backoff_factor: %s', str(max_retries_backoff_factor))
+        log.info(u'max_batched_requests: %s', str(max_batched_requests))
 
         state, reason = "", ""
 
@@ -59,6 +61,7 @@ def selftest_function(opts):
                                         max_users,
                                         max_retries_total,
                                         max_retries_backoff_factor,
+                                        max_batched_requests,
                                         RequestsCommon(opts, options).get_proxies())
 
         # Get a MS Graph session token

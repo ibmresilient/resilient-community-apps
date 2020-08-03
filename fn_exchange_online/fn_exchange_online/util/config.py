@@ -36,5 +36,11 @@ max_users=2000
 # more retries and more sleep time may allow the request to complete. 
 max_retries_total=10
 max_retries_backoff_factor=5
+# 
+# The following parameter is used to define the maximum number of query requests that can be
+# sent to the $batch endpoint.  The current maximum that Microsoft Graph supports is 20 requests.
+# The user should not have to change this value unless Microsoft changes the maximum API requests
+# for the $batch endpoint.
+max_batched_requests=20
 """
     return config_data

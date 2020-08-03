@@ -16,13 +16,14 @@ DEFAULT_SCOPE = 'https://graph.microsoft.com/.default'
 TIME_FORMAT = '%Y-%m-%dT%H:%M:%S'
 MAX_RETRIES_TOTAL = 3
 MAX_RETRIES_BACKOFF_FACTOR = 5
+MAX_BATCHED_REQUESTS = 20
 
 class MSGraphHelper(object):
     """
     Helper object MSGraphHelper.
     """
     def __init__(self, ms_graph_token_url, ms_graph_url, tenant_id, client_id, client_secret, max_messages, max_users,
-                 max_retries_total, max_retries_backoff_factor, proxies=None):
+                 max_retries_total, max_retries_backoff_factor, max_batched_requests, proxies=None):
         self.ms_graph_token_url = ms_graph_token_url.format(tenant=tenant_id)
         self.ms_graph_url = ms_graph_url
         self.tenant_id = tenant_id
@@ -34,6 +35,7 @@ class MSGraphHelper(object):
         self.max_messages = int(max_messages)
         self.current_message_count = 0
         self.max_users = int(max_users)
+        self.max_batched_requests = int(max_batched_requests)
         self.ms_graph_session = self.authenticate()
 
     @staticmethod
@@ -414,6 +416,136 @@ class MSGraphHelper(object):
             LOG.debug(u"email_address = {0} status_code = {1} number email = {2}".format(email_address, status_code, len(email_list)))
         return results
 
+    def query_messages_all_users_batched(self, starts_with, mail_folder, sender, start_date, end_date, has_attachments,
+                                         message_subject, message_body):
+        """
+        This function iterates over all users and returns a list of emails that match the search criteria.
+        The $batch endpoint is used to send a list of query requests in one API call.  A list of requests (queries)
+        is built and then sent to the endpoint when MAX_BATCHED_REQUESTS queries have been queued. After the
+        responses are returned, the messages are appended into a list of email results.
+        :param starts_with: get all users starting with this character(s)
+        :param mail_folder: mailFolder id of the folder to search
+        :param sender: email address of sender to search for
+        :param start_date: date/time string of email received dated to start search
+        :param end_date: date/time string of email received dated to end search
+        :param has_attachments: boolean flag indicating to search for emails with or without attachments
+        :param message_subject: search for emails containing this string in the "subject" of email
+        :param message_body: search for emails containing this string in the "body" of email
+        :return: list of emails in all user email account that match the search criteria.
+        """
+
+        # Start with an empty list of results.
+        results = []
+
+        # Get the users
+        user_list = self.get_users(starts_with)
+
+        # Iterate through all users
+        LOG.debug("===================== Query All Users Batched ==========================\n")
+        index = 1
+        requests_list = []
+        for email_address in user_list:
+            url = self.build_MS_graph_query_url(email_address, mail_folder, sender, start_date, end_date,
+                                                has_attachments, message_subject, message_body)
+            # Append to the request url just the json fields we view in the data table.
+            url = u"{0}&$select=id,subject,sender,hasAttachments,receivedDateTime,webLink".format(url)
+
+            # The batch endpoint is different from single GET message API requests in that it takes
+            # a relative url not the full url, so remove the base url from the string.
+            url_relative = url.replace(self.ms_graph_url, "")
+
+            request = {"id": str(index),
+                       "method": "GET",
+                       "url": url_relative
+                        }
+            requests_list.append(request)
+
+            # When the requests list is equal to the maximum requests MS allows in a $batch request,
+            # then process the batch of query requests.
+            if index >= self.max_batched_requests:
+                query_results = self.process_batched_query_requests(requests_list)
+                for result in query_results:
+                    results.append(result)
+                # Reinitialize the requests list and start filling it again.
+                index = 1
+                requests_list = []
+            else:
+                index = index + 1
+
+        # Send out any requests that are still queued.
+        if len(requests_list):
+            query_results = self.process_batched_query_requests(requests_list)
+            for result in query_results:
+               results.append(result)
+        return results
+
+    def process_batched_query_requests(self, requests_list):
+        """
+        Send a list of requests to the $batch endpoint and then process the responses and place query results
+        into a list of json query result objects.
+        :param requests_list: list of MAX_BATCHED_REQUESTS
+        :return: list of json results with one entry per email address queried. Each json object contains
+        the list of emails found matching the search criteria.  Results are only returned for email addresses have
+        200 status code (not 404: mailbox not found).
+        """
+        results = []
+        ms_graph_batch = u"{0}/$batch".format(self.ms_graph_url)
+        LOG.debug(u"POST these query requests to MS Graph $batch endpoint:")
+        LOG.debug(requests_list)
+        responses = self.ms_graph_session.post(ms_graph_batch,
+                                               headers={'Content-Type': 'application/json'},
+                                               json={'requests': requests_list})
+        json_response = responses.json()
+
+        # Each response is a query result.
+        for response in json_response.get("responses"):
+            status_code = response.get('status')
+            # Only add to the email results list if the query was found.
+            # 404 mailbox not found is status code when the mailbox is not found or it has no license.
+            if status_code >= 200 and status_code < 300:
+                email_list = []
+                # The id is a string starting at 1, so subtract 1 when using as an integer index.
+                response_id = int(response.get('id')) - 1
+                url = requests_list[response_id]['url']
+
+                # Parse out the mailbox being queried the from the url.
+                url_list = url.split('/')
+                email_address = url_list[2]
+
+                # value contains the list of message results and next_link is the url for next set of messages
+                # to retrieve Graph API.  If status is 200, there should be a body and value in the response.
+                # '@odata.nextLink' may not be a defined field.
+                body = response.get("body")
+                value = body.get('value')
+                next_link = body.get('@odata.nextLink', None)
+                while len(value) > 0 and self.current_message_count <= self.max_messages:
+                    for email in value:
+                        # Add these emails to the list
+                        LOG.debug(u"adding email_address = {0} email subject = {1} id = {2}".format(email_address,
+                                                                                                email.get('subject'),
+                                                                                                email.get('id')))
+                        email_list.append(email)
+
+                    # Keep track of the total emails retrieved so far.
+                    self.current_message_count = self.current_message_count + len(value)
+
+                    # Get the pointer to the next set of messages to retrieve from Graph API endpoint.
+                    if next_link:
+                        response_next = self.ms_graph_session.get(next_link)
+                        json_response_next = response_next.json()
+                        next_link = json_response_next.get('@odata.nextLink', None)
+                        value = json_response_next.get('value')
+                    else:
+                        value = []
+
+                # Put this query result in a json object.
+                query_result = {'email_address': email_address,
+                                'status_code': status_code,
+                                'email_list': email_list
+                                }
+                results.append(query_result)
+        return results
+
     def query_messages_by_list(self, email_address_string, mail_folder, sender, start_date, end_date, has_attachments,
                                message_subject, message_body):
         """
@@ -465,12 +597,14 @@ class MSGraphHelper(object):
         user_startswith = None
         input_choices = set(['all', 'all user', 'all users'])
         if email_address.lower() in input_choices:
-            query_results = self.query_messages_all_users(user_startswith, mail_folder, sender, start_date, end_date,
-                                                          has_attachments, message_subject, message_body)
+            query_results = self.query_messages_all_users_batched(user_startswith, mail_folder, sender, start_date,
+                                                                  end_date, has_attachments, message_subject,
+                                                                  message_body)
         elif email_address.lower().startswith('all:'):
             user_startswith = email_address.lstrip('all:')
-            query_results = self.query_messages_all_users(user_startswith, mail_folder, sender, start_date, end_date,
-                                                          has_attachments, message_subject, message_body)
+            query_results = self.query_messages_all_users_batched(user_startswith, mail_folder, sender, start_date,
+                                                                  end_date, has_attachments, message_subject,
+                                                                  message_body)
         else:
             query_results = self.query_messages_by_list(email_address, mail_folder, sender, start_date, end_date,
                                                         has_attachments, message_subject, message_body)
