@@ -6,7 +6,7 @@ from .visitors import GetNodeVisitor
 from .html_gen_visitor import HtmlGenVisitor
 from .tree_node import TreeNode
 from . import stix_utils
-import json
+
 
 class MultiRootTree(object):
     """
