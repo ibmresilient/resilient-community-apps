@@ -25,7 +25,7 @@ setup(
     author='IBM Resilient Labs',
     author_email='resil.labs@gmail.com',
     url='https://github.com/ibmresilient/resilient-community-apps',
-    description="Simple agentless IT automation tool.",
+    description="Run Ansible Paybooks and Modules",
     long_description="This app runs the Ansible environment to allow the running of playbooks and modules against your enterprise. "
                      "Specify the playbooks, hosts and environment variables necessary for execution.",
     install_requires=[
