@@ -3,7 +3,6 @@
 
 """Secureworks CTP API client"""
 
-import json
 import os
 import logging
 from resilient_lib import RequestsCommon
