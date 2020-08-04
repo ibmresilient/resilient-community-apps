@@ -6,7 +6,7 @@ from .visitors import GetNodeVisitor
 from .html_gen_visitor import HtmlGenVisitor
 from .tree_node import TreeNode
 from . import stix_utils
-
+import json
 
 class MultiRootTree(object):
     """
@@ -84,7 +84,10 @@ def handle_relations(stix_objects, tree, log):
     """
     # Import class here to avoid circular dependency error at module level.
     from .relation_visitor import RelationVisitor
+
     found_relationship = False
+    initial_stix_obj_count = len(stix_objects)
+
     for obj in stix_objects:
         if obj["type"] == "relationship":
             found_relationship = True
@@ -98,6 +101,18 @@ def handle_relations(stix_objects, tree, log):
             if visitor.changed:
                 # relationship used. Remove it
                 stix_objects.remove(obj)
+
+    final_stix_obj_count = len(stix_objects)
+
+    if found_relationship and final_stix_obj_count >= initial_stix_obj_count:
+        # A stix relationship object was detected but not accepted in the tree because
+        # either the target and source ids are identical or the relationship could not be determined.
+        found_relationship = False
+        for obj in [o for o in stix_objects if o["type"] == "relationship"]:
+            if obj["source_ref"] == obj["target_ref"]:
+                log.warning("The source and target node ids are identical for relationship object %s", str(obj))
+            else:
+                log.warning("A relationship could not be determined for relationship object %s", str(obj))
 
     return found_relationship
 
