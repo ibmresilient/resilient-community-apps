@@ -47,9 +47,6 @@ query_ticket_grouping_types=INCIDENT:SECURITY
 # Required - Maximum number of tickets to be returned from the /tickets/updates endpoint
 query_limit=10
 
-# Required - Boolean: true: returns only tickets assigned to the client. false: returns all tickets.
-assigned_to_customer=false
-
 # Required - How often, in seconds, to check for new events
 # To turn the poller off use value 0
 polling_interval=600

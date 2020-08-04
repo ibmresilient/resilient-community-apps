@@ -45,7 +45,6 @@ class SCWXClient(object):
         self.password = options.get('password')
         self.limit = options.get('query_limit')
         self.query_types = get_query_types(options.get('query_ticket_grouping_types'))
-        self.assigned_to_customer = options.get('assigned_to_customer')
         self.cafile = options.get('cafile')
         self.bundle = os.path.expanduser(self.cafile) if self.cafile else False
         self.close_codes = options.get('close_codes', None)
@@ -60,8 +59,7 @@ class SCWXClient(object):
         url = u"{0}/tickets/updates".format(self.base_url)
         url = u"{0}?ticketType={1}".format(url, ticket_type)
         url = u"{0}&limit={1}".format(url, self.limit)
-        url = u"{0}&assignedToCustomer={1}".format(url, self.assigned_to_customer)
-        url = u"{0}&worklogs={1}".format(url, "UPDATED")
+        #url = u"{0}&worklogs={1}".format(url, "UPDATED")
         if grouping_type:
             url = u"{0}&groupingType={1}".format(url, grouping_type)
 
@@ -83,7 +81,14 @@ class SCWXClient(object):
                                            proxies=self.rc.get_proxies())
         LOG.debug(u"Response: %s", response.text)
         response.raise_for_status()
-        return response.json()
+
+        response_ack = response.json()
+        code = response_ack[0].get('code')
+        if code != "SUCCESS":
+            LOG.warning(u"Secureworks CTP could NOT acknowledge ticket: %s code: %s", ticket_id, code)
+        else:
+            LOG.info(u"Secureworks CTP acknowledged ticket: %s code: %s", ticket_id, code)
+        return code
 
     def get_tickets_attachment(self, ticket_id, attachment_id):
         """GET get a ticket attachment """
