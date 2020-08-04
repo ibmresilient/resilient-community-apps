@@ -7,13 +7,13 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_ip_void',
-    version='1.0.0',
+    version='1.0.1',
     license='MIT',
     author='IBM Resilient Labs',
     author_email='resil.labs@gmail.com',
     url='https://github.com/ibmresilient/resilient-community-apps',
-    description="A Resilient Function to integrate with the IPVOID API",
-    long_description="Integrates with IPVOID's vast range of IP Address tools to discover details about IP address helping you get enriched information about a Resilient Artifact",
+    description="A Resilient Function to integrate with the IP Void API",
+    long_description="Integrates with IP Void's vast range of IP Address tools to discover details about IP addresses helping you get enriched information about a Resilient Artifact",
     install_requires=[
         'resilient_circuits>=30.0.0'
     ],
