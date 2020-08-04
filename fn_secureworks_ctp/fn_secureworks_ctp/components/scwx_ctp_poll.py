@@ -428,6 +428,24 @@ class SecureworksCTPPollComponent(ResilientComponent):
         except Exception as err:
             raise IntegrationError(err)
 
+    def _get_field_from_note(self, note, field):
+        """
+        Given note text string, get the Secureworksl worklog field from the note.
+        :param note: text string containing Secureworks worklog that is a note in Resilient
+        :param field: Secureworks worklog field that is contained in the note:
+        "Type:" , "Date Created:", "Secureworks CTP Worklog:"
+        :return: return the string field or None if not found
+        """
+
+        if field in note:
+            split_note = note.split(field)
+            res_field_temp = split_note[1].lstrip(" </b>")
+            if res_field_temp:
+                res_field = res_field_temp.split("<br />")
+                if res_field:
+                    return res_field[0]
+        return None
+
     def _find_note_in_incident(self, incident_id, worklog_timestamp, worklog_type):
         """
         Get the notes of the incident and determine if the note is already contained in the incident by
@@ -449,21 +467,16 @@ class SecureworksCTPPollComponent(ResilientComponent):
             # the worklog.  If the 2 timestamps match, the worklogs are probably the same.
             for note in res_notes:
                 res_note_text = note.get('text')
-                split_note = res_note_text.split("</b>")
-                # Only consider the Securworks worklog notes
-                if split_note[0] == "<b>Secureworks CTP Worklog: ":
-                    if split_note[1]:
-                        timestamp_string = split_note[1].split('<br />')
-                        if timestamp_string[0]:
-                            res_note_timestamp = int(timestamp_string[0])
-                            if res_note_timestamp == worklog_timestamp:
-                                # Now compare the worklog type to the Resilient note type.
-                                split_note = res_note_text.split("<b>Type:</b> ")
-                                if split_note[1]:
-                                    res_note_string = split_note[1].split('<br />')
-                                    res_note_type = res_note_string[0]
-                                    if res_note_type == worklog_type:
-                                        return True
+
+                # Only consider the Securworks worklog notes: get the createdDate timestamp and worklog type
+                # to compare and determine if this note is already in Resilient.
+                res_timestamp_string = self._get_field_from_note(res_note_text, "Secureworks CTP Worklog:")
+                res_note_type = self._get_field_from_note(res_note_text, "Type:")
+                if res_timestamp_string and res_note_type:
+                    res_timestamp = int(res_timestamp_string)
+                    if res_timestamp == worklog_timestamp:
+                        if res_note_type == worklog_type:
+                            return True
             return False
         except Exception as err:
             raise IntegrationError(err)
@@ -500,7 +513,7 @@ class SecureworksCTPPollComponent(ResilientComponent):
                 description = worklog.get('description')
                 worklog_type = worklog.get('type')
                 created_by = worklog.get('createdBy')
-                note = u"<b>Secureworks CTP Worklog: </b>{0}<br />".format(date_timestamp)
+                note = u"<b>Secureworks CTP Worklog:</b> {0}<br />".format(date_timestamp)
                 if worklog_type:
                     note = u"{0}    <b>Type:</b> {1}<br />".format(note, worklog_type)
                 if date_timestamp:
