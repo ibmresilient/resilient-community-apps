@@ -5,6 +5,12 @@ This plugin allows this replica data to be maintained in Elasticsearch.
 
 Refer to the documentation on the Data Feed extension for uses cases support and configuration options. Also refer to the other Data Feed plugins which can be used in combination.
 
+# History
+| Version | Date | Notes |
+| ------- | ---- | ----- |
+| 1.0.1   | 08/2020 | App Host support |
+| 1.0.0   | 12/2019 | Initial release |
+
 # License
 
 Unless otherwise specified, contents of this repository are published under the MIT open-source
@@ -14,7 +20,15 @@ Unless otherwise specified, contents of this repository are published under the 
   The integration package contains Python components that are called by the Resilient platform. These components run in the Resilient Circuits integration framework. The package also includes Resilient customizations that will be imported into the platform later.
   You perform these installation procedures at the Resilient integration server.
   
-## Install the Python components
+## App Host Installation
+With App Host, all the run-time components are pre-built. Perform the following steps to install and configure:
+1. Within Resilient, navigate Administrative Settings and then Apps. 
+2. Click on the Install button and select the downloaded app-rc_data_feed_plugin_elasticfeed-x.x.x.zip file.
+3. Once installed, navigate to the Configuration tab and edit the app.config file updating the `[resilient]` 
+section as necessary and updating the `[elastic_feed]` section to reflect the location and authentication settings needed.
+
+## Integration Server Installation
+### Install the Python components
   Complete the following steps to install the Python components:
 * Ensure that the environment is up-to-date, as follows:
 ```
