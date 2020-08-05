@@ -17,15 +17,14 @@ Unless otherwise specified, contents of this repository are published under the 
 [LICENSE](LICENSE).
 
 # Installation
-  The integration package contains Python components that are called by the Resilient platform. These components run in the Resilient Circuits integration framework. The package also includes Resilient customizations that will be imported into the platform later.
-  You perform these installation procedures at the Resilient integration server.
+  The integration package contains Python components that are called by the Resilient platform. These components run in the Resilient Circuits integration framework. The package also includes Resilient customizations that will be imported into the platform.
   
 ## App Host Installation
 With App Host, all the run-time components are pre-built. Perform the following steps to install and configure:
 1. Within Resilient, navigate Administrative Settings and then Apps. 
-2. Click on the Install button and select the downloaded app-rc_data_feed_plugin_elasticfeed-x.x.x.zip file.
-3. Once installed, navigate to the Configuration tab and edit the app.config file updating the `[resilient]` 
-section as necessary and updating the `[elastic_feed]` section to reflect the location and authentication settings needed.
+2. Click on the Install button and select the downloaded app-rc_data_feed_plugin_elasticfeed-x.x.x.zip file. This step will install the associated rules and message destination.
+3. Once installed, navigate to the app's Configuration tab and edit the app.config file updating the `[resilient]` 
+section as necessary and updating the `[elastic_feed]` section to reflect the location and authentication settings for your instance of Elasticsearch.
 
 ## Integration Server Installation
 ### Install the Python components
