@@ -2,6 +2,8 @@
 """ This is a helper module for GET, UPDATE and DELETE
     Functions for a Resilient Data Table """
 
+import json
+
 
 class RESDatatable(object):
     """ A helper class for manipulate a Resilient Data Table"""
@@ -158,7 +160,7 @@ class RESDatatable(object):
         # Search by rows_ids if defined
         if rows_ids:
             # Convert input str to a list of rows ids
-            rows_ids_input = [int(s) for s in rows_ids.strip("][").split(", ")]
+            rows_ids_input = json.loads(rows_ids)
             for row in self.rows:
                 if row["id"] in rows_ids_input:
                     rows_ids_list.append(row["id"])

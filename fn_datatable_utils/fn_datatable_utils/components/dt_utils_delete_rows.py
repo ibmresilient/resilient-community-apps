@@ -1,3 +1,4 @@
+# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
@@ -74,9 +75,9 @@ class FunctionComponent(ResilientComponent):
                 payload.success = False
 
             elif "error" in deleted_rows:
-                yield StatusMessage("Row(s) NOT deleted.")
+                yield StatusMessage("Row(s) NOT deleted. Error: {0}".format(deleted_rows["error"]))
                 payload.success = False
-                raise ValueError(deleted_rows["error"])
+                raise FunctionError("Failed to delete a row.")
 
             else:
                 yield StatusMessage("Row(s) {0} in {1} deleted.".format(deleted_rows, datatable.api_name))
