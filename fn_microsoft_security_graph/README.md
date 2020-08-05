@@ -1,9 +1,4 @@
 # Resilient Functions Integration for Microsoft Graph Security API
-
-### v1.0.1
-* Python 2 to 3 improvements
-* UI version changes
-
 <br/>
 This is just a brief overview of the integration, please review the main doc to see the full length of installation instructions.
 ## Installation
