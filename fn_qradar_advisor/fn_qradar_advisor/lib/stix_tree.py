@@ -106,16 +106,34 @@ def handle_relations(stix_objects, tree, log):
 
     if found_relationship and final_stix_obj_count >= initial_stix_obj_count:
         # A stix relationship object was detected but not accepted in the tree because
-        # either the target and source ids are identical or the relationship could not be determined.
+        # a relationship could not be determined from the existing tree.
         found_relationship = False
-        for obj in [o for o in stix_objects if o["type"] == "relationship"]:
-            if obj["source_ref"] == obj["target_ref"]:
-                log.warning("The source and target node ids are identical for relationship object %s", str(obj))
-            else:
-                log.warning("A relationship could not be determined for relationship object %s", str(obj))
+        handle_missing_relationships(stix_objects, tree, log)
 
     return found_relationship
 
+
+def handle_missing_relationships(stix_objects, tree, log):
+    """
+    Handle denied relationship objects given in the stix_objects input.
+    :param stix_objects: list of stix2 objects
+    :param tree: multi-root tree
+    :param log:
+    :return:
+    """
+    for obj_rel in [o for o in stix_objects if o["type"] == "relationship"]:
+        log.info("A relationship could not be determined for relationship object %s", str(obj_rel))
+        log.info("Adding missing nodes referenced by the relationship object.")
+        for id_type in ["target_ref", "source_ref"]:
+            # Iterate over stix objects referenced by the relationship object.
+            for obj in [o for o in stix_objects if o["id"] == obj_rel[id_type]]:
+                # Create root nodes for any unprocessed stix_objects referenced by the relationship object.
+                existing, target_node = extract_object(stix_objects=stix_objects,
+                                                       multi_root_tree=tree,
+                                                       object_id=obj_rel[id_type],
+                                                       log=log)
+                if not existing:
+                    tree.add_root(target_node)
 
 def get_sight_ref_created_by(stix_objects, obj, log):
     """
