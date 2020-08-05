@@ -14,8 +14,11 @@
 This package contains functions that integrate with Ansible to run playbooks and modules for remote host execution.
 
 ## History
-1.2 - Support for App Host
-1.1 - change result payload format to JSON returned to Resilient 
+
+| Version| Comment |
+| ------- | ------ |
+| 1.2 | Support for App Host |
+| 1.1 | Change result payload format to JSON returned to Resilient |
  * For customers upgrading from 1.0, the example workflows will use different post-processing script logic, based on the json results returned.
 
 ## Features:
@@ -40,7 +43,7 @@ Additional documentation on Ansible can be found at [the Ansible website](https:
 
 
 ## App Host Installation
-All the components for running Ansible in a container already exist when using the App Host container. The remainder of this section details the Ansible configuration file changes.
+All the components for running Ansible in a container already exist when using the App Host app. The remainder of this section details the Ansible configuration file changes.
 
 Under the Configuration Tab for an App, build out the ansible-runner files needed per the [ansible-runner convention](https://docs.ansible.com/ansible/latest/installation_guide/intro_configuration.html). The necessary files are the `hosts` file, ssh_key and your yml playbooks. Build these files under `/var/rescircuits/ansible` and ensure that the app.config file contains the same reference:
 
