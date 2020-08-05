@@ -5,41 +5,56 @@
    test with: resilient-circuits selftest -l fn-ip-void
 """
 
-# TODO: Review
-
 import logging
-import requests
-from fn_ip_void.util.ipvoid_helper import get_config_option, SUB_URL
+from resilient_lib import RequestsCommon, validate_fields
+from fn_ip_void.util.ipvoid_helper import CONFIG_DATA_SECTION, make_api_call, format_dict
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
 log.addHandler(logging.StreamHandler())
 
 
+def print_error(reason, app_configs):
+    err_str = "Test Failure!\nReason:\n\t{0}".format(reason)
+    err_str += "\n\nApp Configs:"
+    err_str += format_dict(app_configs)
+    log.error(err_str)
+
+
 def selftest_function(opts):
-    """
-    Placeholder for selftest function. An example 
-    use would be to test package api connectivity.
-    Suggested return values are be unimplemented, 
-    success, or failure.
-    """
-    options = opts.get("fn_ip_void", {})
-    api_token = get_config_option(app_configs=options, option_name="ipvoid_api_key", placeholder="<your-api-key>")
-    base_url = get_config_option(app_configs=options, option_name="ipvoid_base_url")
-    url = "/".join((base_url, SUB_URL)).format('iprep', api_token, 'stats')
+    app_configs = opts.get(CONFIG_DATA_SECTION, {})
+    rc = RequestsCommon(opts, app_configs)
+    reason = "Test was successful!"
+
     try:
-        res = requests.get(url)
-        if res.status_code == 200:
-            log.info("elapsed_time:  %s", res.json()["elapsed_time"])
-            log.info("credits_remained:  %s", res.json()["credits_remained"])
-            log.info("credits_expiration:  %s", res.json()["credits_expiration"])
-            log.info("estimated_queries:  %s", res.json()["estimated_queries"])
-            log.info("estimated_queries:  %s", res.json()["estimated_queries"])
+        # Get and validate app configs
+        valid_app_configs = validate_fields([{"name": "ipvoid_api_key", "placeholder": "<your-api-key>"}, "ipvoid_base_url"], app_configs)
+
+        # Execute api call
+        res = make_api_call(
+            base_url=valid_app_configs.get("ipvoid_base_url"),
+            sub_url=valid_app_configs.get("ipvoid_sub_url"),
+            query_type="selftest",
+            value=True,
+            api_key=valid_app_configs.get("ipvoid_api_key"),
+            rc=rc
+        )
+
+        res = res.json()
+
+        if res.get("success"):
+            log.info("%s\nCredits Remaining:\t%s\nEstimated Queries:\t%s", reason, res.get("credits_remained", "Unknown"), res.get("estimated_queries", "Unknown"))
             return {"state": "success"}
 
-        else:
-            return {"state": "failure", "reason": res.json()["error"]}
+        elif res.get("error"):
+            reason = res.get("error")
+            print_error(reason, app_configs)
+            return {"state": "failure", "reason": reason}
 
-    except Exception as e:
-        log and log.error(e)
-        return {"state": "failure", "reason": e}
+        reason = "Test was not successful. An unknown error occurred"
+        print_error(reason, app_configs)
+        return {"state": "failure", "reason": reason}
+
+    except Exception as err:
+        print_error(err, app_configs)
+        return {"state": "failure", "reason": err}

@@ -13,9 +13,7 @@ from resilient_circuits import (
     FunctionError,
 )
 from resilient_lib import ResultPayload, RequestsCommon, validate_fields
-from fn_ip_void.util.ipvoid_helper import get_request_info
-
-CONFIG_DATA_SECTION = 'fn_ip_void'
+from fn_ip_void.util.ipvoid_helper import CONFIG_DATA_SECTION, make_api_call
 
 
 class FunctionComponent(ResilientComponent):
@@ -49,23 +47,14 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Getting Intelligence for {}: {}".format(
                 fn_inputs.get("ip_void_artifact_type"), fn_inputs.get("ip_void_artifact_value")))
 
-            # Get url and params
-            request_info = get_request_info(
+            # Execute api call
+            res = make_api_call(
                 base_url=app_configs.get("ipvoid_base_url"),
                 sub_url=app_configs.get("ipvoid_sub_url"),
                 query_type=fn_inputs.get("ip_void_request_type"),
-                value=fn_inputs.get("ip_void_artifact_value")
-            )
-
-            # Combine params
-            params = {"key": app_configs.get("ipvoid_api_key")}
-            params.update(request_info[1])
-
-            # Execute api call
-            res = rc.execute_call_v2(
-                method="get",
-                url=request_info[0],
-                params=params
+                value=fn_inputs.get("ip_void_artifact_value"),
+                api_key=app_configs.get("ipvoid_api_key"),
+                rc=rc
             )
 
             results = rp.done(True, res.json())
