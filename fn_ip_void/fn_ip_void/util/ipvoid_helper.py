@@ -3,7 +3,6 @@
 # pragma pylint: disable=unused-argument, no-self-use
 
 import logging
-from resilient_lib import RequestsCommon
 
 CONFIG_DATA_SECTION = 'fn_ip_void'
 SUB_URL = "v1/pay-as-you-go/"
@@ -134,6 +133,6 @@ def format_dict(dict_to_format):
 
         str_to_rtn += "{0}: {1}\n".format(k, v)
 
-    str_to_rtn += u"-----------------\n"
+    str_to_rtn += "-----------------\n"
 
     return str_to_rtn
