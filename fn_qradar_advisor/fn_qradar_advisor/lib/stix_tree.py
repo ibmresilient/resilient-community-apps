@@ -84,7 +84,10 @@ def handle_relations(stix_objects, tree, log):
     """
     # Import class here to avoid circular dependency error at module level.
     from .relation_visitor import RelationVisitor
+
     found_relationship = False
+    initial_stix_obj_count = len(stix_objects)
+
     for obj in stix_objects:
         if obj["type"] == "relationship":
             found_relationship = True
@@ -99,8 +102,37 @@ def handle_relations(stix_objects, tree, log):
                 # relationship used. Remove it
                 stix_objects.remove(obj)
 
+    final_stix_obj_count = len(stix_objects)
+
+    if found_relationship and final_stix_obj_count >= initial_stix_obj_count:
+        # A stix relationship object was detected but not accepted in the tree because
+        # a relationship could not be determined from the existing tree.
+        handle_missing_relationships(stix_objects, tree, log)
+
     return found_relationship
 
+
+def handle_missing_relationships(stix_objects, tree, log):
+    """
+    Handle denied relationship objects given in the stix_objects input.
+    :param stix_objects: list of stix2 objects
+    :param tree: multi-root tree
+    :param log:
+    :return:
+    """
+    for obj_rel in [o for o in stix_objects if o["type"] == "relationship"]:
+        # Test relationship objects to determine if source reference has a matching target reference.
+        if not any(obj_rel["source_ref"] == o["target_ref"] for o in stix_objects
+                   if obj_rel != o and o["type"] == "relationship"):
+            # The source reference has no matching target reference so assume it is a root node.
+            existing, source_node = extract_object(stix_objects=stix_objects,
+                                                   multi_root_tree=tree,
+                                                   object_id=obj_rel["source_ref"],
+                                                   log=log)
+            if not existing:
+                tree.add_root(source_node)
+                # Return to main relationship handler with new root node.
+                break
 
 def get_sight_ref_created_by(stix_objects, obj, log):
     """
