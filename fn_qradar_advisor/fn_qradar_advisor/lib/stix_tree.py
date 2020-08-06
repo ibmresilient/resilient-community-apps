@@ -262,9 +262,6 @@ def get_html(stix, log):
     :return:
     """
     # Use the json dict directly
-    #import json
-    #with open('stix_json.json', 'r') as json_file:
-    #    objects = json.load(json_file)
     objects = stix["objects"]
     stix_tree = build_tree(objects, log)
     html = ""
