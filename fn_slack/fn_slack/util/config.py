@@ -16,6 +16,10 @@ api_token=xoxp-xxxxxxxxx-xxxxxxxxxxxx-xxxxxxxxxxxxx-xxxxxxxxxxx
 # Username represents the default submission author.
 # Used together with 'as_user=False'.
 # You can also update the username on the Workflow.
-username=Resilient"""
+username=Resilient
+
+# template file override
+#template_file=/var/rescircuits/slack_template.jinja2
+"""
 
     return config_data

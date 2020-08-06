@@ -7,10 +7,11 @@ saves it as an Attachment in Resilient and archives Slack channel.
 """
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from resilient_lib import RequestsCommon
 from fn_slack.lib.slack_common import *
 
 LOG = logging.getLogger(__name__)
-
+SLACK_SECTION_HDR = "fn_slack"
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'slack_close_channel"""
@@ -18,12 +19,14 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get("fn_slack", {})
+        self.opts = opts
+        self.options = opts.get(SLACK_SECTION_HDR, {})
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
-        self.options = opts.get("fn_slack", {})
+        self.opts = opts
+        self.options = opts.get(SLACK_SECTION_HDR, {})
 
     @function("slack_archive_channel")
     def _slack_archive_channel_function(self, event, *args, **kwargs):
@@ -44,8 +47,11 @@ class FunctionComponent(ResilientComponent):
             api_token = self.options['api_token']
             def_username = self.options['username']
 
+            # get proxies if they exist
+            rc = RequestsCommon(opts=self.opts, function_opts=self.options)
+
             # Initialize SlackClient
-            slack_utils = SlackUtils(api_token)
+            slack_utils = SlackUtils(api_token, proxies=rc.get_proxies())
             # Initialize Resilient API object
             res_client = self.rest_client()
 
@@ -80,8 +86,11 @@ class FunctionComponent(ResilientComponent):
             # get the channel history
             messages = slack_utils.get_channel_complete_history()
 
+            template_file = self.options.get('template_file', None)
+
             # Saving conversation history to a text file and post it as attachment
-            new_attachment = slack_utils.save_conversation_history_as_attachment(res_client, messages, incident_id, task_id)
+            new_attachment = slack_utils.save_conversation_history_as_attachment(res_client, messages, incident_id,
+                                                                                 task_id, template=template_file)
             if new_attachment is not None:
                 yield StatusMessage("Channel's chat history was uploaded as an Attachment")
             else:

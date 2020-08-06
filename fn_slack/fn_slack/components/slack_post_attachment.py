@@ -11,10 +11,11 @@ Many of the features of posting a Slack message are under customer control inclu
 """
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from resilient_lib import RequestsCommon
 from fn_slack.lib.slack_common import *
 
 LOG = logging.getLogger(__name__)
-
+SLACK_SECTION_HDR = "fn_slack"
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'slack_post_message"""
@@ -22,13 +23,15 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get("fn_slack", {})
+        self.opts = opts
+        self.options = opts.get(SLACK_SECTION_HDR, {})
         self.resoptions = opts.get("resilient", {})
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
-        self.options = opts.get("fn_slack", {})
+        self.opts = opts
+        self.options = opts.get(SLACK_SECTION_HDR, {})
         self.resoptions = opts.get("resilient", {})
 
     @function("slack_post_attachment")
@@ -60,8 +63,11 @@ class FunctionComponent(ResilientComponent):
             # configuration specific slack parameters
             api_token = self.options['api_token']
 
+            # get proxies if they exist
+            rc = RequestsCommon(opts=self.opts, function_opts=self.options)
+
             # Initialize SlackClient
-            slack_utils = SlackUtils(api_token)
+            slack_utils = SlackUtils(api_token, proxies=rc.get_proxies())
             # Initialize Resilient API object
             res_client = self.rest_client()
 

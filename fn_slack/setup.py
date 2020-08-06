@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_slack',
-    version='1.0.1',
+    version='1.0.2',
     license='MIT',
     author='IBM Resilient',
     author_email='support@resilientsystems.com',
@@ -15,6 +15,7 @@ setup(
                      "text file as an Attachment and archives the Slack channel.",
     install_requires=[
         'resilient_circuits>=30.0.0',
+        'resilient_lib',
         'slackclient<2.0.0',
         'bs4'
     ],
