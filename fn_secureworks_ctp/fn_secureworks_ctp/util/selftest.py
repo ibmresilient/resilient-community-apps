@@ -19,7 +19,7 @@ def selftest_function(opts):
     options = opts.get(CONFIG_DATA_SECTION, {})
 
     validate_fields(['base_url', 'username', 'password', 'query_limit', 'query_ticket_grouping_types',
-                     'assigned_to_customer', 'polling_interval'], options)
+                     'polling_interval'], options)
 
     base_url = options.get('base_url')
     username = options.get('username')

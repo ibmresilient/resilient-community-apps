@@ -59,7 +59,7 @@ class SCWXClient(object):
         url = u"{0}/tickets/updates".format(self.base_url)
         url = u"{0}?ticketType={1}".format(url, ticket_type)
         url = u"{0}&limit={1}".format(url, self.limit)
-        #url = u"{0}&worklogs={1}".format(url, "UPDATED")
+
         if grouping_type:
             url = u"{0}&groupingType={1}".format(url, grouping_type)
 
