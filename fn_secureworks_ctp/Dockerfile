@@ -5,7 +5,7 @@ FROM registry.access.redhat.com/ubi8/python-36:latest
 #FROM resilient/rc-data-feeder-base
 
 ARG APPLICATION=fn_secureworks_ctp
-ARG RES_CIRCUITS_VERSION=36.2
+ARG RES_CIRCUITS_VERSION=37.0
 
 # update to latest packages, user 0 for root privilege
 USER 0

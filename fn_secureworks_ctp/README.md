@@ -61,11 +61,16 @@ CTP is used with the Secureworks SOC team when they find a security issue that n
 <!--
   List any Requirements 
 -->
-* Resilient platform >= `v35.2.32`
+* Resilient platform >= `v35.0.5445`
 * An Integration Server running `resilient_circuits>=30.0.0`
   * To set up an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
   * If using API Keys, minimum required permissions are:
       * Org Data: Read, Edit
+      * Incidents Fields: Edit
+      * Functions: Read, Edit
+      * Layouts: Read
+      * Workflows: Create, Edit
+      * Other: ReadIncidentsActionInvocations
 ---
 
 ## Installation
