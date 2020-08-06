@@ -55,7 +55,7 @@ Integrates with IP Void's vast range of IP Address tools to discover details abo
 <!--
   List any Requirements 
 -->
-* Resilient platform >= `v37.2.38`
+* Resilient platform >= `v35.0.0`
 * An Integration Server running `resilient_circuits>=30.0.0`
   * To set up an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
   * If using API Keys, minimum required permissions are:
