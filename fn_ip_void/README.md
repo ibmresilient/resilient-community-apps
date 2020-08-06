@@ -63,12 +63,20 @@ Integrates with IP Void's vast range of IP Address tools to discover details abo
       * Function: Read
 ---
 
-## Installation
-* Download the `fn_ip_void.zip`.
+## Installation (App Host)
+With App Host, all the run-time components are pre-built. Perform the following steps to install and configure:
+* Download the `app-fn_ip_void-x.x.x.zip`.
+* In Resilient navigate to **Adiminstrator Settings > Apps**
+* Click the Install button and select the downloaded `app-fn_ip_void-x.x.x.zip`. This will install the associated customizations.
+* Once installed, navigate to the app's Configuration tab and edit the app.config file updating the `[resilient]` section as necessary and updating the `[fn_ip_void]` section as necessary.
+---
+
+## Installation (Integration Server)
+* Download the `app-fn_ip_void.zip`.
 * Copy the `.zip` to your Integration Server and SSH into it.
 * **Unzip** the package:
   ```
-  $ unzip fn_ip_void-x.x.x.zip
+  $ unzip app-fn_ip_void-x.x.x.zip
   ```
 * **Change Directory** into the unzipped directory:
   ```
