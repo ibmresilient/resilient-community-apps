@@ -107,7 +107,6 @@ def handle_relations(stix_objects, tree, log):
     if found_relationship and final_stix_obj_count >= initial_stix_obj_count:
         # A stix relationship object was detected but not accepted in the tree because
         # a relationship could not be determined from the existing tree.
-        found_relationship = False
         handle_missing_relationships(stix_objects, tree, log)
 
     return found_relationship
@@ -122,18 +121,18 @@ def handle_missing_relationships(stix_objects, tree, log):
     :return:
     """
     for obj_rel in [o for o in stix_objects if o["type"] == "relationship"]:
-        log.info("A relationship could not be determined for relationship object %s", str(obj_rel))
-        log.info("Adding missing nodes referenced by the relationship object.")
-        for id_type in ["target_ref", "source_ref"]:
-            # Iterate over stix objects referenced by the relationship object.
-            for obj in [o for o in stix_objects if o["id"] == obj_rel[id_type]]:
-                # Create root nodes for any unprocessed stix_objects referenced by the relationship object.
-                existing, target_node = extract_object(stix_objects=stix_objects,
-                                                       multi_root_tree=tree,
-                                                       object_id=obj_rel[id_type],
-                                                       log=log)
-                if not existing:
-                    tree.add_root(target_node)
+        # Test relationship objects to determine if source reference has a matching target reference.
+        if not any(obj_rel["source_ref"] == o["target_ref"] for o in stix_objects
+                   if obj_rel != o and o["type"] == "relationship"):
+            # The source reference has no matching target reference so assume it is a root node.
+            existing, source_node = extract_object(stix_objects=stix_objects,
+                                                   multi_root_tree=tree,
+                                                   object_id=obj_rel["source_ref"],
+                                                   log=log)
+            if not existing:
+                tree.add_root(source_node)
+                # Return to main relationship handler with new root node.
+                break
 
 def get_sight_ref_created_by(stix_objects, obj, log):
     """
@@ -263,6 +262,9 @@ def get_html(stix, log):
     :return:
     """
     # Use the json dict directly
+    #import json
+    #with open('stix_json.json', 'r') as json_file:
+    #    objects = json.load(json_file)
     objects = stix["objects"]
     stix_tree = build_tree(objects, log)
     html = ""
