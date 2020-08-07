@@ -35,6 +35,9 @@ bigfix_polling_interval=30
 bigfix_polling_timeout=1800
 bigfix_endpoints_wait=30
 bigfix_hunt_results_limit=200
+# Settings for access to BigFix via a proxy
+#http_proxy=http://proxy:80
+#https_proxy=http://proxy:80
 ```
 
 Run with: `resilient-circuits run`.
