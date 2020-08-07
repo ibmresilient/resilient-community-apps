@@ -28,16 +28,16 @@
 -->
 * Ability to perform SELECT, INSERT, UPDATE, and DELETE operations on relational databases
 * Support for MySQL/MariaDB, Postgres, and Micorsoft SQL Server
-* AppHost compatibility with preconfigured dirvers
+* App Host compatibility with preconfigured dirvers
 ---
 
 ## Installation
-### AppHost
-For a complete guide on how to configure AppHost for Resilient and install apps, please reference the
+### App Host
+For a complete guide on how to configure App Host for Resilient and install apps, please reference the
 Resilient Apps [Knowledge Center](https://www.ibm.com/support/knowledgecenter/SSBRUQ_37.0.0/doc/container_apps.html).
 
 #### Environment
-The fn_odbc_query AppHost container ships with the various ODBC drivers already installed and configured out of the box.
+The fn_odbc_query App Host container ships with the various ODBC drivers already installed and configured out of the box.
 The only action required is to select the driver that's appropriate for the database you wish to use and include the
 name of that driver in the `sql_connection_string` parameter in your app.config file. Changing the driver parameter
 to another value will result in an error, as the unixODBC driver manager will not recognize the name of the driver that
