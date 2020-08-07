@@ -29,6 +29,11 @@ class BigFixClient(object):
         self.base_url = options.get("bigfix_url") + ":" + options.get("bigfix_port")
         self.bf_user = options.get("bigfix_user")
         self.bf_pass = options.get("bigfix_pass")
+        self.proxies = {}
+        if "https_proxy" in options and options["https_proxy"] is not None:
+            self.proxies.update({"https": options.get("https_proxy")})
+        if "http_proxy" in options and options["http_proxy"] is not None:
+            self.proxies.update({"http": options.get("http_proxy")})
         self.headers = {'content-type': 'application/json'}
         self.retry_interval = int(options.get("bigfix_polling_interval"))
         self.retry_timeout = int(options.get("bigfix_polling_timeout"))
@@ -54,7 +59,7 @@ class BigFixClient(object):
 
         query_url = "{}{}".format(self.base_url, self.computers_endpoint)
 
-        r = requests.get(query_url, auth=(self.bf_user, self.bf_pass), verify=False, timeout=None)
+        r = requests.get(query_url, auth=(self.bf_user, self.bf_pass), verify=False, timeout=None, proxies=self.proxies)
         return r
 
     def get_bf_computer_properties(self, computer_id):
@@ -72,7 +77,8 @@ class BigFixClient(object):
 
         req_str = "{0}/{1}".format(self.base_url, query_str)
 
-        response = requests.get(req_str, auth=(self.bf_user, self.bf_pass), verify=False, timeout=None)
+        response = requests.get(req_str, auth=(self.bf_user, self.bf_pass), verify=False, timeout=None,
+                                proxies=self.proxies)
         if response.status_code == 200:
             try:
                 qr_to_attachment = self._process_bf_computer_query_response_to_attachment(response,
@@ -373,7 +379,7 @@ class BigFixClient(object):
 
         while timeout > 0:
             result = []
-            r = requests.get(req_url, auth=(self.bf_user, self.bf_pass), verify=False)
+            r = requests.get(req_url, auth=(self.bf_user, self.bf_pass), verify=False, proxies=self.proxies)
             if r.status_code == 200:
                 try:
                     response = json.loads(r.text)
@@ -448,7 +454,8 @@ class BigFixClient(object):
         else:
             target_comp_elem = elementTree.SubElement(target_elem, 'CustomRelevance')
             target_comp_elem.text = 'true'
-        r = requests.post(query_url, auth=(self.bf_user, self.bf_pass), verify=False, data=elementTree.tostring(post_xml))
+        r = requests.post(query_url, auth=(self.bf_user, self.bf_pass), verify=False,
+                          data=elementTree.tostring(post_xml), proxies=self.proxies)
         if r.status_code == 200:
             try:
                 # TODO! count the number of Tuples - should only be 1
@@ -497,7 +504,7 @@ class BigFixClient(object):
         target_comp_elem = elementTree.SubElement(target_elem, 'ComputerID')
         target_comp_elem.text = str(computer_id)
         r = requests.post(query_url, auth=(self.bf_user, self.bf_pass), verify=False,
-                          data=elementTree.tostring(post_xml))
+                          data=elementTree.tostring(post_xml), proxies=self.proxies)
         if r.status_code == 200:
             try:
                 # TODO! count the number of Tuples - should only be 1
@@ -571,7 +578,7 @@ class BigFixClient(object):
 
          """
         query_url = u"{0}/api/action/{1}/status".format(self.base_url, action_id)
-        r = requests.get(query_url, auth=(self.bf_user, self.bf_pass), verify=False)
+        r = requests.get(query_url, auth=(self.bf_user, self.bf_pass), verify=False, proxies=self.proxies)
         if r.status_code == 200:
             try:
                 status = None
