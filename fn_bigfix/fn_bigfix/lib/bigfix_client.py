@@ -38,10 +38,24 @@ class BigFixClient(object):
         self.client_query_endpoint = '/api/clientquery'
         self.client_query_results_endpoint = '/api/clientqueryresults/'
         self.client_query_names_computers = '/api/query?relevance=names+of+bes+computers'
+        self.computers_endpoint = '/api/computers'
         self.computer_endpoint = '/api/computer/{id}'
 
         requests.packages.urllib3.disable_warnings()
     # end __init__
+
+    def test_connectivity(self):
+        """Connectivity Test which is used by resilient_circuits selftest.
+
+        Calls http 'get' request against 'api/computers' endpoint.
+
+        :return: Response
+        """
+
+        query_url = "{}{}".format(self.base_url, self.computers_endpoint)
+
+        r = requests.get(query_url, auth=(self.bf_user, self.bf_pass), verify=False, timeout=None)
+        return r
 
     def get_bf_computer_properties(self, computer_id):
         """ Bigfix query - Get endpoint properties.
