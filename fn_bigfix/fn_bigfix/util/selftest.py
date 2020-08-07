@@ -15,7 +15,7 @@ log.addHandler(logging.StreamHandler())
 
 def selftest_function(opts):
     """
-    Simple test to verify AWS IAM connectivity.
+    Simple test to verify Bigfix connectivity.
     """
     options = opts.get("fn_bigfix", {})
     try:
@@ -27,4 +27,4 @@ def selftest_function(opts):
             return {"state": "failure", "status_code": r.status_code }
 
     except Exception as e:
-        return {"state": "failure", "status_code": e}
+        return {"state": "failure", "status_code": str(e)}
