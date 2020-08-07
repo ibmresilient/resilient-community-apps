@@ -107,7 +107,7 @@ def handle_relations(stix_objects, tree, log):
     if found_relationship and final_stix_obj_count >= initial_stix_obj_count:
         # A stix relationship object was detected but not accepted in the tree because
         # a relationship could not be determined from the existing tree.
-        handle_missing_relationships(stix_objects, tree, log)
+        found_relationship = handle_missing_relationships(stix_objects, tree, log)
 
     return found_relationship
 
@@ -120,6 +120,7 @@ def handle_missing_relationships(stix_objects, tree, log):
     :param log:
     :return:
     """
+
     for obj_rel in [o for o in stix_objects if o["type"] == "relationship"]:
         # Test relationship objects to determine if source reference has a matching target reference.
         if not any(obj_rel["source_ref"] == o["target_ref"] for o in stix_objects
@@ -132,7 +133,13 @@ def handle_missing_relationships(stix_objects, tree, log):
             if not existing:
                 tree.add_root(source_node)
                 # Return to main relationship handler with new root node.
-                break
+                return True
+
+    # If we got here some of the relationship objects couldn't be processed.
+    for obj_rel in [o for o in stix_objects if o["type"] == "relationship"]:
+        log.info("Relationship object couldn't be processed %s ." , str(obj_rel))
+
+    return False
 
 def get_sight_ref_created_by(stix_objects, obj, log):
     """
