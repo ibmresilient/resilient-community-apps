@@ -26,23 +26,31 @@
 <!--
   List the Key Features of the Integration
 -->
-* Ability to perform SELECT, INSERT, UPDATE, and DELETE operations on relational databases
-* Support for MySQL/MariaDB, Postgres, and Micorsoft SQL Server
-* App Host compatibility with preconfigured dirvers
+* Ability to perform SELECT, INSERT, UPDATE, and DELETE operations on relational databases.
+* Support for MySQL/MariaDB, Postgres, and Microsoft SQL Server.
+* Compatible with App Host.
+* Contains preconfigured drivers if using the container format.
 ---
 
 ## Installation
+
+### App Format
+
+The app .zip file is in a container format and requires a Resilient platform configured with an App Host. 
+
+The app tar.gz file is an extension format and requires a Resilient platform configured with an integration server.
+
 ### App Host
 For a complete guide on how to configure App Host for Resilient and install apps, please reference the
-Resilient Apps [Knowledge Center](https://www.ibm.com/support/knowledgecenter/SSBRUQ_37.0.0/doc/container_apps.html).
+Resilient Apps [Knowledge Center](https://www.ibm.com/support/knowledgecenter/SSBRUQ).
 
 #### Environment
-The fn_odbc_query App Host container ships with the various ODBC drivers already installed and configured out of the box.
-The only action required is to select the driver that's appropriate for the database you wish to use and include the
-name of that driver in the `sql_connection_string` parameter in your app.config file. Changing the driver parameter
-to another value will result in an error, as the unixODBC driver manager will not recognize the name of the driver that
-you have provided. You may, however, choose to provide the absolute file path to the driver, rather than the name.
-The supported databases, driver names and databases are as follows:
+The fn_odbc_query App Host container ships with the various ODBC drivers already installed and configured out of the box. 
+The only action required is to select the driver that is appropriate for the database you wish to use and include the name 
+of that driver in the sql_connection_string parameter in your app.config file. 
+Changing the driver parameter to another value results in an error, as the unixODBC driver manager does not recognize 
+the name of the driver that you have provided. You may, however, choose to provide the absolute file path to the driver, 
+rather than the name. The supported databases, driver names and databases are as follows:
 
 | Database Type | Driver Name | File Path | Example Connection String |
 | ------------- | ----------- | --------- | ------------------------- |
@@ -71,24 +79,24 @@ If using the wheel file, install the appropriate file as follows:
 * If using Python 3.6:
     `pip install pyodbc-4.0.25-cp36-cp36m-linux_x86_64.whl`
 
-To install in "development mode"
+To install in "development mode," use: 
     `pip install -e ./fn_odbc_query/`
     
-The distribution file can be installed using
+The distribution file can be installed using: 
     `pip install fn_odbc_query-<version>.tar.gz`
     
-Import the package into Resilient by running `resilient-circuits customize`
+Import the package into the Resilient organization by running: `resilient-circuits customize`
 
 To configure the ODBC Query function parameters, run `resilient-circuits config [-u | -c]`. 
 Then edit the `[fn_odbc_query]` template with the connection string and other optional settings.
 
-After installation, the package will be loaded by: `resilient-circuits run`.
+After installation, load the package: `resilient-circuits run`.
 
 To uninstall,
     `pip uninstall fn_odbc_query`
     
 #### ODBC Drivers
-When running `fn_odbc_query` on an integration server, you will need to install and configure an ODBC driver that's
+When running `fn_odbc_query` on an integration server, you need to install and configure an ODBC driver that is
 appropriate for your database.
 In addition to pyodbc module, the ODBC function uses an ODBC driver to connect to a data
 source. The pyodbc package also communicates with a driver manager, which provides the API
@@ -102,7 +110,7 @@ driver manager. If you need to change the driver manager, you have to re-install
 More information on the pyodbc, driver manager and ODBC drivers is available on the {GitHub
 Pyodbc Wiki](https://github.com/mkleehammer/pyodbc/wiki/Drivers-and-Driver-Managers).
 
-Connections to databases are made through the use of connection strings, which are driverspecific. General connection string information for most databases is available at
+Connections to databases are made through the use of connection strings, which are driver specific. General connection string information for most databases is available at
 http://www.connectionstrings.com.
 
 ### Unicode Configuration
@@ -112,17 +120,17 @@ ODBC Function V1.0.1 supports Unicode settings for MariaDB, PostgreSQL and MySQL
 databases using Python 2.7 or 3.6. Recent SQLServer drivers match the pyodbc specification;
 therefore, no additional Unicode configuration is necessary.
 Users may implement additional support by downloading this function and editing it as shown in
-the following figure
+the following figure:
 
 ![screenshot: unicode configuration](./screenshots/unicode.png)
 
 ## Function - fn_odbc_query
 A function that runs ODBC queries. Parameters are passed to the database separately, protecting against SQL injection attacks.
 Inputs:
-sql_query: a SQL query with set parameters using a question mark as a place holder, SQL statements SELECT, INSERT, UPDATE and DELETE are supported
-sql_condition_value1: value for the question mark - condition value 1
-sql_condition_value2: value for the question mark - condition value 2
-sql_condition_value3: value for the question mark - condition value 3
+* sql_query: a SQL query with set parameters using a question mark as a place holder, SQL statements SELECT, INSERT, UPDATE and DELETE are supported
+* sql_condition_value1: value for the question mark - condition value 1
+* sql_condition_value2: value for the question mark - condition value 2
+* sql_condition_value3: value for the question mark - condition value 3
 
  ![screenshot: fn-fn-odbc-query ](./screenshots/function.png)
 
@@ -229,6 +237,11 @@ sql_query_results_dt
 | Example ODBC INSERT PostgreSQL | artifact | `example_odbc_insert_postgresql` |
 | Example ODBC SELECT PostgreSQL | artifact | `example_odbc_select_postgresql` |
 
+<p>
+Each rule will perform the specified operation (UPDATE, INSERT, DELETE, or SELECT) on the database
+given the provided artifact value. Note that in the app.config settings the <code>sql_restricted_sql_statements</code> parameter
+provides the ability to disallow the specified operation(s) from being performed on the database through the integration.
+</p>
 ---
 
 <!--
