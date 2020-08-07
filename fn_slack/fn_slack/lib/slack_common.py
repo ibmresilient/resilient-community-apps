@@ -622,6 +622,7 @@ class SlackUtils(object):
         :param res_client Resilient API
         :param incident_id
         :param task_id
+        :param template_file - optional user specific template file
         :return: new_attachment
         """
         if template_file:
