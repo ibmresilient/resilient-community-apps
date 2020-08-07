@@ -13,7 +13,7 @@ setup(
     author_email='resil.labs@gmail.com',
     url='https://github.com/ibmresilient/resilient-community-apps',
     description="A Resilient Function to integrate with the IP Void API",
-    long_description="Integrates with IP Void's vast range of IP Address tools to discover details about IP addresses helping you get enriched information about a Resilient Artifact",
+    long_description="Integrates with IP Void's vast range of IP address tools to enrich Resilient artifacts with details threat intelligence",
     install_requires=[
         'resilient_circuits>=30.0.0',
         'resilient_lib>=37.2.215'

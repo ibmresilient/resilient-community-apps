@@ -30,9 +30,8 @@
   notes of a previous release
 -->
 ### v1.0.1
-* Added App Host support
-* Added `ipvoid_sub_url` to app.config file. If not specified will use `v1/pay-as-you-go/` by default
-
+* Added App Host support.
+* Added `ipvoid_sub_url` to the app.config file. Default is `v1/pay-as-you-go/` if not specified.
 ### v1.0.0
 * Initial Release
 
@@ -47,7 +46,7 @@
 
  ![screenshot: main](./doc/screenshots/main.png)
 
-Integrates with IP Void's vast range of IP Address tools to discover details about IP addresses helping you get enriched information about a Resilient Artifact
+Integrates with IP Void's vast range of IP address tools to enrich Resilient artifacts with details threat intelligence
 
 ---
 

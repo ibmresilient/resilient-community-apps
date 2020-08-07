@@ -25,13 +25,13 @@
 <!--
   List the Key Features of the Integration
 -->
-* Get threat intelligence of a Domain Name or IP Address
-* Get the SSL Certificate Information of a Domain Name
+* Get the threat intelligence of a domain name or IP address.
+* Get the SSL certificate information of a domain name.
 
 ---
 
 ## Function - IPVOID API Implementation
-Lookup threat intelligence using IP Void API
+Look up the threat intelligence using the IP Void API.
 
  ![screenshot: fn-ipvoid-api-implementation ](./screenshots/main.png)
 
@@ -197,12 +197,12 @@ else:
 ## Rules
 | Rule Name | Object | Workflow Triggered |
 | --------- | ------ | ------------------ |
-| Example: IPVOID Domain Blacklist Check | artifact | `example_ipvoid_domain_blacklist_check` |
+| Example: IPVOID API Email Domain Check | artifact | `example_ipvoid_verify_email_domain` |
+| Example: IPVOID API Check IP Address | artifact | `example_ipvoidip_reputation` |
 | Example: IPVOID API Threat Log Check | artifact | `example_ipvoid_threat_log` |
 | Example: IPVOID API SSL Certificate Information | artifact | `example_ipvoid_get_ssl_certificate_information` |
-| Example: IPVOID API Email Domain Check | artifact | `example_ipvoid_verify_email_domain` |
 | Example: IPVOID API Domain name | artifact | `example_ipvoid_dns_lookup` |
-| Example: IPVOID API Check IP Address | artifact | `example_ipvoidip_reputation` |
+| Example: IPVOID Domain Blacklist Check | artifact | `example_ipvoid_domain_blacklist_check` |
 
 ---
 
