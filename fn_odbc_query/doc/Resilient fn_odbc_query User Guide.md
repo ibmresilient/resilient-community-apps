@@ -242,7 +242,6 @@ Each rule will perform the specified operation (UPDATE, INSERT, DELETE, or SELEC
 given the provided artifact value. Note that in the app.config settings the <code>sql_restricted_sql_statements</code> parameter
 provides the ability to disallow the specified operation(s) from being performed on the database through the integration.
 </p>
----
 
 <!--
 ## Inform Resilient Users
