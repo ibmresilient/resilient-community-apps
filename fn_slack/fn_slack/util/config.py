@@ -20,6 +20,10 @@ username=Resilient
 
 # template file override
 #template_file=/var/rescircuits/slack_template.jinja2
+
+# add proxy support here or use [integrations] for integration wide proxy settings
+#http_proxy=
+#https_proxy=
 """
 
     return config_data
