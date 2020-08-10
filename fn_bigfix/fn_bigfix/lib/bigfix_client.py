@@ -13,6 +13,8 @@ import json
 import time
 from sys import version_info
 
+from resilient_lib import RequestsCommon
+
 LOG = logging.getLogger(__name__)
 
 __author__ = 'Resilient'
@@ -22,18 +24,14 @@ class BigFixClient(object):
     """
     Client class used to expose BigFix Rest API for BigFix Query
     """
-    def __init__(self, options):
+    def __init__(self, opts, options):
         """
         Class constructor
         """
         self.base_url = options.get("bigfix_url") + ":" + options.get("bigfix_port")
         self.bf_user = options.get("bigfix_user")
         self.bf_pass = options.get("bigfix_pass")
-        self.proxies = {}
-        if "https_proxy" in options and options["https_proxy"] is not None:
-            self.proxies.update({"https": options.get("https_proxy")})
-        if "http_proxy" in options and options["http_proxy"] is not None:
-            self.proxies.update({"http": options.get("http_proxy")})
+        self.proxies = RequestsCommon(opts, options).get_proxies()
         self.headers = {'content-type': 'application/json'}
         self.retry_interval = int(options.get("bigfix_polling_interval"))
         self.retry_timeout = int(options.get("bigfix_polling_timeout"))

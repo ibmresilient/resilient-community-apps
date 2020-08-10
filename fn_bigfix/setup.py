@@ -16,7 +16,8 @@ setup(
         to remediate issues or hits, such as a malicious path or filename,  a service or process name, or a registry 
         key. The integration can also be used to query properties of an endpoint.""",
     install_requires=[
-        'resilient_circuits>=31.0.0'
+        'resilient_circuits>=31.0.0',
+        'resilient_lib',
     ],
     packages=find_packages(),
     include_package_data=True,

@@ -43,12 +43,14 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
+        self.opts = opts
         self.options = opts.get("fn_bigfix", {})
         validate_opts(self)
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
+        self.opts = opts
         self.options = opts.get("fn_bigfix", {})
         validate_opts(self)
 
@@ -76,7 +78,7 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage(u"Running BigFix remediation for Artifact '{0}' on endpoint '{1}' ..."
                                 .format(params["artifact_value"], params["asset_id"]))
-            bigfix_client = BigFixClient(self.options)
+            bigfix_client = BigFixClient(self.opts, self.options)
 
             yield StatusMessage("Running BigFix remediation ...")
 
