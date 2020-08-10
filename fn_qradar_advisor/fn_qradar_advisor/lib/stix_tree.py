@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
-
+from collections import Counter
 from .visitors import GetNodeVisitor
 from .html_gen_visitor import HtmlGenVisitor
 from .tree_node import TreeNode
@@ -120,23 +120,35 @@ def handle_missing_relationships(stix_objects, tree, log):
     :param log:
     :return:
     """
+    # Get list of remaining unprocessed relationship objects
+    stix_rel_objects = [o for o in stix_objects if o["type"] == "relationship"]
 
-    for obj_rel in [o for o in stix_objects if o["type"] == "relationship"]:
-        # Test relationship objects to determine if source reference has a matching target reference.
-        if not any(obj_rel["source_ref"] == o["target_ref"] for o in stix_objects
-                   if obj_rel != o and o["type"] == "relationship"):
-            # The source reference has no matching target reference so assume it is a root node.
-            existing, source_node = extract_object(stix_objects=stix_objects,
-                                                   multi_root_tree=tree,
-                                                   object_id=obj_rel["source_ref"],
-                                                   log=log)
-            if not existing:
-                tree.add_root(source_node)
-                # Return to main relationship handler with new root node.
-                return True
+    # Get object reference counts from unprocessed relationships.
+    obj_ref_counts = {}
+    for obj_rel in stix_rel_objects:
+        # Get count of object references for "source_ref" and "target_ref" of unprocessed relationships.
+        for ref in ["source_ref", "target_ref"]:
+            if obj_rel[ref] not in obj_ref_counts:
+                obj_ref_counts[obj_rel[ref]] = 0
+            else:
+                obj_ref_counts[obj_rel[ref]] += 1
+
+    obj_ref_counter = Counter(obj_ref_counts)
+
+    # Iterate over object references starting with object with most references.
+    for obj_ref, _ in obj_ref_counter.most_common(sum(obj_ref_counter.values())):
+        # Test if source object has already been included in the tree.
+        existing, source_node = extract_object(stix_objects=stix_objects,
+                                               multi_root_tree=tree,
+                                               object_id=obj_ref,
+                                               log=log)
+        if not existing and source_node:
+            tree.add_root(source_node)
+            # Return to main relationship handler with new root node.
+            return True
 
     # If we got here some of the relationship objects couldn't be processed.
-    for obj_rel in [o for o in stix_objects if o["type"] == "relationship"]:
+    for obj_rel in stix_rel_objects:
         log.info("Relationship object couldn't be processed %s ." , str(obj_rel))
 
     return False
