@@ -138,12 +138,12 @@ def handle_missing_relationships(stix_objects, tree, log):
     # Iterate over object references starting with object with most references.
     for obj_ref, _ in obj_ref_counter.most_common(sum(obj_ref_counter.values())):
         # Test if source object has already been included in the tree.
-        existing, source_node = extract_object(stix_objects=stix_objects,
+        existing, node = extract_object(stix_objects=stix_objects,
                                                multi_root_tree=tree,
                                                object_id=obj_ref,
                                                log=log)
-        if not existing and source_node:
-            tree.add_root(source_node)
+        if not existing and node:
+            tree.add_root(node)
             # Return to main relationship handler with new root node.
             return True
 
