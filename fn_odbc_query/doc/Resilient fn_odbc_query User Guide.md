@@ -54,7 +54,7 @@ rather than the name. The supported databases, driver names and databases are as
 
 | Database Type | Driver Name | File Path | Example Connection String |
 | ------------- | ----------- | --------- | ------------------------- |
-| MySQL | [MariaDB ODBC 3.0 Driver] | /usr/local/lib64/libmaodbc.so |  `sql_connection_string=Driver={MariaDB ODBC 3.0 Driver};Server=domain.example;Port=3306;sql_dialect=MariaDBDialect;DB=resilient;Uid=<user>;Pwd=<password>;` |
+| MySQL | [MariaDB ODBC 3.0 Driver] | /usr/lib64/libmaodbc.so |  `sql_connection_string=Driver={MariaDB ODBC 3.0 Driver};Server=domain.example;Port=3306;sql_dialect=MariaDBDialect;DB=resilient;Uid=<user>;Pwd=<password>;` |
 | MariaDB | [MariaDB ODBC 3.0 Driver] | /usr/local/lib64/libmaodbc.so |  `sql_connection_string=Driver={MariaDB ODBC 3.0 Driver};Server=domain.example;Port=3306;sql_dialect=MariaDBDialect;DB=resilient;Uid=<user>;Pwd=<password>;` |
 | Microsoft SQL Server | [FreeTDS] | /usr/lib64/libtdsodbc.so.0 |  `sql_connection_string=Driver={FreeTDS};Server=domain.example;Port=1433;Database=master;Uid=SA;Pwd=<password>` |
 | PostgreSQL | [PostgreSQL] | /usr/local/lib/psqlodbcw.la |  `sql_connection_string=Driver={PostgreSQL};Server=host.docker.internal;Port=5432;Database=postgres;Uid=<user>;Pwd=<password>` |
@@ -104,8 +104,8 @@ that conforms to the ODBC standard.
 ODBC drivers are database-specific and are typically written by the manufacturer of the
 database.
 The driver manager that pyodbc uses is determined when pyodbc is installed (through the
-setup.py script). Since version 3.0.8 (April 2015), pyodbc is precompiled to use the unixODBC
-driver manager. If you need to change the driver manager, you have to re-install pyodbc.
+setup.py script). Since version 3.0.8 (April 2015), pyodbc is precompiled to use the [unixODBC
+driver manager](http://www.unixodbc.org/). If you need to change the driver manager, you have to re-install pyodbc.
 
 More information on the pyodbc, driver manager and ODBC drivers is available on the {GitHub
 Pyodbc Wiki](https://github.com/mkleehammer/pyodbc/wiki/Drivers-and-Driver-Managers).
