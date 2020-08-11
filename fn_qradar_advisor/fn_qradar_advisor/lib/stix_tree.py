@@ -128,16 +128,13 @@ def handle_missing_relationships(stix_objects, tree, log):
     for obj_rel in stix_rel_objects:
         # Get count of object references for "source_ref" and "target_ref" of unprocessed relationships.
         for ref in ["source_ref", "target_ref"]:
-            if obj_rel[ref] not in obj_ref_counts:
-                obj_ref_counts[obj_rel[ref]] = 0
-            else:
-                obj_ref_counts[obj_rel[ref]] += 1
+            obj_ref_counts[obj_rel[ref]] = obj_ref_counts.get(obj_rel[ref], 0) + 1
 
     obj_ref_counter = Counter(obj_ref_counts)
 
     # Iterate over object references starting with object with most references.
     for obj_ref, _ in obj_ref_counter.most_common(sum(obj_ref_counter.values())):
-        # Test if source object has already been included in the tree.
+        # Test if stix object has already been included in the tree.
         existing, node = extract_object(stix_objects=stix_objects,
                                                multi_root_tree=tree,
                                                object_id=obj_ref,
