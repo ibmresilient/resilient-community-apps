@@ -77,9 +77,11 @@ editing the API key for VirusTotal and making any additional setting changes.
 ```
 [fn_virustotal]
 api_token = xxxxxxxxx
-proxies =
 polling_interval_sec = 60
 max_polling_wait_sec = 600
+# uncomment for proxy support to VirusTotal
+#https_proxy=
+#http_proxy=
 ```
 
 ## Integration Server Installation
@@ -167,6 +169,7 @@ Each of the rules and workflows are provided as examples of how to parse and pre
 Your use of the VirusTotal function may require different processing with additional 
 workflow components such as scripts, task management and additional functions. 
 It's best to create your own rules and workflows for production operations.  
+
 Refer to the example workflow post-processing scripts for sample script logic and VirusTotal results to use in your own workflows.
 
 ## Troubleshooting
