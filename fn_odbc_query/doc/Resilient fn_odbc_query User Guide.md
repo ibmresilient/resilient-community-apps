@@ -105,7 +105,8 @@ ODBC drivers are database-specific and are typically written by the manufacturer
 database.
 The driver manager that pyodbc uses is determined when pyodbc is installed (through the
 setup.py script). Since version 3.0.8 (April 2015), pyodbc is precompiled to use the [unixODBC
-driver manager](http://www.unixodbc.org/). If you need to change the driver manager, you have to re-install pyodbc.
+driver manager](http://www.unixodbc.org/), which must be installed on the integration server.
+If you need to change the driver manager, you have to re-install pyodbc.
 
 More information on the pyodbc, driver manager and ODBC drivers is available on the {GitHub
 Pyodbc Wiki](https://github.com/mkleehammer/pyodbc/wiki/Drivers-and-Driver-Managers).
