@@ -50,6 +50,12 @@ class FunctionComponent(ResilientComponent):
                 "dt_utils_search_value": get_function_input(kwargs, "dt_utils_search_value", optional=True), # text (optional)
             }
 
+            log.info("incident_id: {0}".format(inputs["incident_id"]))
+            log.info("dt_utils_datatable_api_name: {0}".format(inputs["dt_utils_datatable_api_name"]))
+            log.info("dt_utils_rows_ids: {0}".format(inputs["dt_utils_rows_ids"]))
+            log.info("dt_utils_search_column: {0}".format(inputs["dt_utils_search_column"]))
+            log.info("dt_utils_search_value: {0}".format(inputs["dt_utils_search_value"]))
+
             # Ensure correct search inputs are defined correctly
             valid_search_inputs = validate_search_inputs(rows_ids=inputs["dt_utils_rows_ids"],
                                                          search_column=inputs["dt_utils_search_column"],
