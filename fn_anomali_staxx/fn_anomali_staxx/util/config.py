@@ -9,7 +9,7 @@ def config_section_data():
     """Produce the default configuration section for app.config,
        when called by `resilient-circuits config [-c|-u]`
     """
-    config_data = u"""[staxx]
+    config_data = u"""[fn_anomali_staxx]
 staxx_ip=10.10.10.10
 staxx_port=8080
 staxx_user=someuser

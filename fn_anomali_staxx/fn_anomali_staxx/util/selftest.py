@@ -19,7 +19,7 @@ def selftest_function(opts):
     Placeholder for selftest function. An example use would be to test package api connectivity.
     Suggested return values are be unimplemented, success, or failure.
     """
-    app_configs = opts.get("staxx", {})
+    app_configs = opts.get("fn_anomali_staxx", {})
 
     staxx_ip = app_configs.get('staxx_ip')
     staxx_port = app_configs.get('staxx_port')

@@ -1,9 +1,9 @@
-# docker build -t ibmresilient/fn_send_to_staxx:1.0.0 -t ibmresilient/fn_send_to_staxx:latest .
+# docker build -t ibmresilient/fn_anomali_staxx:1.0.0 -t ibmresilient/fn_anomali_staxx:latest .
 
 # Base image using Red Hat's universal base image (rhel 8) for python
 FROM registry.access.redhat.com/ubi8/python-36:latest
 
-ARG APPLICATION=fn_send_to_staxx
+ARG APPLICATION=fn_anomali_staxx
 ARG RESILIENT_CIRCUITS_VERSION=37.0
 ARG PATH_RESILIENT_CIRCUITS=rescircuits
 

@@ -5,8 +5,8 @@ import pytest
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 
-PACKAGE_NAME = "fn_send_to_staxx"
-FUNCTION_NAME = "query_staxx"
+PACKAGE_NAME = "fn_anomali_staxx"
+FUNCTION_NAME = "staxx_import"
 
 # Read the default configuration-data section from the package
 config_data = get_config_data(PACKAGE_NAME)
@@ -17,7 +17,7 @@ resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
 
 def call_send_to_staxx_function(circuits, function_params, timeout=5):
     # Create the submitTestFunction event
-    evt = SubmitTestFunction(FUNCTION_NAME, function_params)
+    evt = SubmitTestFunction("send_to_staxx", function_params)
 
     # Fire a message to the function
     circuits.manager.fire(evt)
@@ -32,14 +32,14 @@ def call_send_to_staxx_function(circuits, function_params, timeout=5):
 
     # else return the FunctionComponent's results
     else:
-        event = circuits.watcher.wait(FUNCTION_NAME + "_result", parent=evt, timeout=timeout)
+        event = circuits.watcher.wait("send_to_staxx_result", parent=evt, timeout=timeout)
         assert event
         assert isinstance(event.kwargs["result"], FunctionResult)
         pytest.wait_for(event, "complete", True)
         return event.kwargs["result"].value
 
 
-class TestQueryStaxx:
+class TestSendToStaxx:
     """ Tests for the send_to_staxx function"""
 
     def test_function_definition(self):
@@ -48,14 +48,30 @@ class TestQueryStaxx:
         assert func is not None
 
     mock_inputs_1 = {
-        "staxx_indicator": "80.82.65.40"
+        "staxx_severity": "low",
+        "staxx_confidence": "sample text",
+        "staxx_indicator_type": "adware",
+        "staxx_tlp": "RED",
+        "staxx_indicator": "sample text",
+        "staxx_auto_approve": "yes"
     }
 
     expected_results_1 = {"value": "xyz"}
 
+    mock_inputs_2 = {
+        "staxx_severity": "low",
+        "staxx_confidence": "sample text",
+        "staxx_indicator_type": "adware",
+        "staxx_tlp": "RED",
+        "staxx_indicator": "sample text",
+        "staxx_auto_approve": "yes"
+    }
+
+    expected_results_2 = {"value": "xyz"}
 
     @pytest.mark.parametrize("mock_inputs, expected_results", [
-        (mock_inputs_1, expected_results_1)
+        (mock_inputs_1, expected_results_1),
+        (mock_inputs_2, expected_results_2)
     ])
     def test_success(self, circuits_app, mock_inputs, expected_results):
         """ Test calling with sample values for the parameters """

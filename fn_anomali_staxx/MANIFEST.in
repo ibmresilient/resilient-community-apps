@@ -1,0 +1,3 @@
+include README.md
+include fn_anomali_staxx/util/*
+include fn_anomali_staxx/LICENSE

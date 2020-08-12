@@ -4,11 +4,11 @@
 """Function implementation"""
 
 import logging
-from fn_send_to_staxx.lib.staxx_lib import StaxxClient
-from resilient_lib import RequestsCommon, ResultPayload
+from fn_anomali_staxx.lib.staxx_lib import StaxxClient
+from resilient_lib import RequestsCommon, ResultPayload, validate_fields
 from resilient_circuits import ResilientComponent, function, StatusMessage, FunctionResult, FunctionError
 
-STAXX_SECTION = "staxx"
+STAXX_SECTION = "fn_anomali_staxx"
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function(s)"""
@@ -23,7 +23,9 @@ class FunctionComponent(ResilientComponent):
         self.staxx_user = self.options.get('staxx_user')
         self.staxx_password = self.options.get('staxx_password')
 
-    @function("send_to_staxx")
+        validate_fields(['staxx_ip', 'staxx_port', 'staxx_user', 'staxx_password'], self.options)
+
+    @function("staxx_import")
     def _send_to_staxx_function(self, event, *args, **kwargs):
         """Function: """
         try:

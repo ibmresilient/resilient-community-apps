@@ -1,4 +1,4 @@
-# Send to Staxx
+# fn_anomali_staxx
 
 *Craig @ Resilient Labs*
 
