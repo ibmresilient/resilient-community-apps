@@ -70,3 +70,5 @@ edit_all_incident_notes
 #read_stats
 #edit_workflow
 #read_all_action_invocations
+#read_workspace
+edit_data
