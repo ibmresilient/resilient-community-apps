@@ -5,6 +5,7 @@
 """
 
 import logging
+from resilient_lib import RequestsCommon
 from fn_slack.lib.resilient_common import validate_fields
 from fn_slack.lib.slack_common import SlackUtils
 
@@ -28,8 +29,11 @@ def selftest_function(opts):
 
     state, reason = "", ""
     try:
+        # get proxies if they exist
+        rc = RequestsCommon(opts=opts, function_opts=options)
+
         # Initialize SlackClient
-        slack_utils = SlackUtils(api_token)
+        slack_utils = SlackUtils(api_token, proxies=rc.get_proxies())
         api_test_results = slack_utils.api_test()
         if api_test_results.get("ok"):
             state = "success"
