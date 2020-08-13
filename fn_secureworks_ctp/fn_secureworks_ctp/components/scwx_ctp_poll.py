@@ -275,6 +275,14 @@ class SecureworksCTPPollComponent(ResilientComponent):
 
             # Render the template.
             new_incident_payload = render_json(escalate_template, ticket)
+
+            # The detailedDescription field from Secureworks may be a very long escaped string,
+            # which can present problems with jinja template rendering and creating a validate
+            # json payload. Instead of rendering the detailedDescription field to the Resilient
+            # desription field, put it in the payload now if it's not already there.
+            if "description" not in new_incident_payload:
+                new_incident_payload = self._add_description_to_payload(new_incident_payload, ticket)
+
             LOG.debug(new_incident_payload)
 
             # Post incident to Resilient
@@ -284,6 +292,28 @@ class SecureworksCTPPollComponent(ResilientComponent):
             LOG.info(message)
             return incident
 
+        except Exception as err:
+            raise IntegrationError(err)
+
+    def _add_description_to_payload(self, payload, ticket):
+        """
+        Add the Resilient "description" field to the create incident payload using the Secureworks ticket
+        field: detailedDescription
+        :param payload: create incident payload to add the "description" to
+        :param ticket:  Secureworks ticket containing detailedDescription field
+        :return: payload updated with the description field
+        """
+        try:
+            detailed_description = ticket.get('detailedDescription')
+            if detailed_description:
+                html_description = "<div><p>{0}</p></div>".format(detailed_description)
+            else:
+                html_description = "<div><p>No detailedDescription</p></div>"
+            html_description = html_description.replace('\n', '<br>').replace('\\n', '<br>')
+            description_json = {"format": "html",
+                                "content": html_description}
+            payload["description"] = description_json
+            return payload
         except Exception as err:
             raise IntegrationError(err)
 
