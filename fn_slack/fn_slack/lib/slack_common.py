@@ -37,7 +37,7 @@ class SlackUtils(object):
     Helper object SlackUtils.
     """
 
-    def __init__(self, api_token, proxies):
+    def __init__(self, api_token, proxies=None):
         self.slack_client = SlackClient(api_token, proxies=proxies)
         self.channel = None
         self.warnings = []

@@ -53,7 +53,7 @@ class TestSlack(object):
                         "next_cursor": None
                     }
             }]
-        slack_utils = SlackUtils("fake_api_key", None)
+        slack_utils = SlackUtils("fake_api_key")
         slack_utils.find_channel_by_name(slack_test_channel)
 
         assert slack_utils.get_channel_name() == slack_test_channel
@@ -68,7 +68,7 @@ class TestSlack(object):
         }
 
         try:
-            slack_utils = SlackUtils("fake_api_key", None)
+            slack_utils = SlackUtils("fake_api_key")
             slack_utils.find_channel_by_name(slack_test_channel)
             assert False
         except IntegrationError:
@@ -87,7 +87,7 @@ class TestSlack(object):
                     "name": "test-channel"
                 }
         }
-        slack_utils = SlackUtils("fake_api_key", None)
+        slack_utils = SlackUtils("fake_api_key")
         slack_utils.slack_create_channel(slack_test_channel, False)
         mocked_api_call.assert_called_with(
             "conversations.create",
@@ -106,7 +106,7 @@ class TestSlack(object):
         }
 
         try:
-            slack_utils = SlackUtils("fake_api_key", None)
+            slack_utils = SlackUtils("fake_api_key")
             slack_utils.slack_create_channel(slack_test_channel, False)
             assert False
         except IntegrationError:
@@ -120,7 +120,7 @@ class TestSlack(object):
         """ Test get channel id"""
         print("Test get channel id\n")
 
-        slack_utils = SlackUtils("fake_api_key", None)
+        slack_utils = SlackUtils("fake_api_key")
         slack_utils.set_channel(channel)
 
         assert slack_utils.get_channel_id() == expected_channel_id
@@ -133,7 +133,7 @@ class TestSlack(object):
         """ Test get channel id"""
         print("Test get channel id\n")
 
-        slack_utils = SlackUtils("fake_api_key", None)
+        slack_utils = SlackUtils("fake_api_key")
         slack_utils.set_channel(channel)
 
         assert slack_utils.get_channel_name() == expected_channel_name
@@ -153,7 +153,7 @@ class TestSlack(object):
             "is_channel": is_channel,
             "is_private": is_private
         }
-        slack_utils = SlackUtils("fake_api_key", None)
+        slack_utils = SlackUtils("fake_api_key")
         slack_utils.set_channel(mocked_channel)
 
         assert slack_utils.is_channel_private() == expected
@@ -172,7 +172,7 @@ class TestSlack(object):
             "name": "test-channel",
             "is_archived": is_archived
         }
-        slack_utils = SlackUtils("fake_api_key", None)
+        slack_utils = SlackUtils("fake_api_key")
         slack_utils.set_channel(mocked_channel)
 
         assert slack_utils.is_channel_archived() == expected
@@ -192,7 +192,7 @@ class TestSlack(object):
                 "id": "W012A3CDE"
             }
         }
-        slack_utils = SlackUtils("fake_api_key", None)
+        slack_utils = SlackUtils("fake_api_key")
 
         results = slack_utils.find_user_ids_based_on_email(user_email_list)
         assert results == expected_list_ids
@@ -207,7 +207,7 @@ class TestSlack(object):
             "error": "users_not_found"
         }
 
-        slack_utils = SlackUtils("fake_api_key", None)
+        slack_utils = SlackUtils("fake_api_key")
         try:
             slack_utils.find_user_ids_based_on_email("b@b.com")
             assert True
@@ -224,7 +224,7 @@ class TestSlack(object):
             "error": "something_else"
         }
 
-        slack_utils = SlackUtils("fake_api_key", None)
+        slack_utils = SlackUtils("fake_api_key")
         try:
             slack_utils.find_user_ids_based_on_email("b@b.com")
             assert False
@@ -245,7 +245,7 @@ class TestSlack(object):
             "id": "C0EAQDV4Z",
             "name": "test-channel"
         }
-        slack_utils = SlackUtils("fake_api_key", None)
+        slack_utils = SlackUtils("fake_api_key")
         slack_utils.set_channel(mocked_channel)
 
         # Test inviting users to a channel
@@ -278,7 +278,7 @@ class TestSlack(object):
             "id": "C0EAQDV4Z",
             "name": "test-channel"
         }
-        slack_utils = SlackUtils("fake_api_key", None)
+        slack_utils = SlackUtils("fake_api_key")
         slack_utils.set_channel(mocked_channel)
 
         # Test inviting users to a channel error
@@ -302,7 +302,7 @@ class TestSlack(object):
             "id": "C0EAQDV4Z",
             "name": "test-channel"
         }
-        slack_utils = SlackUtils("fake_api_key", None)
+        slack_utils = SlackUtils("fake_api_key")
         slack_utils.set_channel(mocked_channel)
 
         # Test inviting users to a channel error
@@ -359,7 +359,7 @@ class TestSlack(object):
             "id": "C1H9RESGL",
             "name": "test-channel"
         }
-        slack_utils = SlackUtils("fake_api_key", None)
+        slack_utils = SlackUtils("fake_api_key")
         slack_utils.set_channel(mocked_channel)
 
         mocked_api_call.return_value = {
@@ -393,7 +393,7 @@ class TestSlack(object):
             "id": "C1H9RESGL",
             "name": "test-channel"
         }
-        slack_utils = SlackUtils("fake_api_key", None)
+        slack_utils = SlackUtils("fake_api_key")
         slack_utils.set_channel(mocked_channel)
 
         mocked_api_call.return_value = {
@@ -435,7 +435,7 @@ class TestSlack(object):
             "id": "C1H9RESGL",
             "name": "test-channel"
         }
-        slack_utils = SlackUtils("fake_api_key", None)
+        slack_utils = SlackUtils("fake_api_key")
         slack_utils.set_channel(mocked_channel)
 
         # Test inviting users to a channel error
@@ -474,7 +474,7 @@ class TestSlack(object):
             "id": "C0EAQDV4Z",
             "name": "test-channel"
         }
-        slack_utils = SlackUtils("fake_api_key", None)
+        slack_utils = SlackUtils("fake_api_key")
         slack_utils.set_channel(mocked_channel)
 
         mocked_api_call.return_value = {
@@ -495,7 +495,7 @@ class TestSlack(object):
             "id": "C0EAQDV4Z",
             "name": "test-channel"
         }
-        slack_utils = SlackUtils("fake_api_key", None)
+        slack_utils = SlackUtils("fake_api_key")
         slack_utils.set_channel(mocked_channel)
 
         mocked_api_call.return_value = {
@@ -517,7 +517,7 @@ class TestSlack(object):
             "id": "C0EAQDV4Z",
             "name": "test-channel"
         }
-        slack_utils = SlackUtils("fake_api_key", None)
+        slack_utils = SlackUtils("fake_api_key")
         slack_utils.set_channel(mocked_channel)
 
         mocked_api_call.return_value = {
@@ -537,7 +537,7 @@ class TestSlack(object):
             "id": "C0EAQDV4Z",
             "name": "test-channel"
         }
-        slack_utils = SlackUtils("fake_api_key", None)
+        slack_utils = SlackUtils("fake_api_key")
         slack_utils.set_channel(mocked_channel)
 
         mocked_api_call.return_value = {
@@ -562,7 +562,7 @@ class TestSlack(object):
                 }
             }
         }
-        slack_utils = SlackUtils("fake_api_key", None)
+        slack_utils = SlackUtils("fake_api_key")
         display_name = slack_utils.get_user_display_name("W012A3CDE")
         mocked_api_call.assert_called_with(  # checks the last call to a method, check for b@b.com email
             "users.info",
@@ -582,7 +582,7 @@ class TestSlack(object):
                 "name": "spengler"
             }
         }
-        slack_utils = SlackUtils("fake_api_key", None)
+        slack_utils = SlackUtils("fake_api_key")
         display_name = slack_utils.get_user_display_name("W012A3CDE")
         mocked_api_call.assert_called_with(  # checks the last call to a method, check for b@b.com email
             "users.info",
@@ -599,7 +599,7 @@ class TestSlack(object):
             "ok": False
         }
         try:
-            slack_utils = SlackUtils("fake_api_key", None)
+            slack_utils = SlackUtils("fake_api_key")
             slack_utils.get_user_display_name("W012A3CDE")
             assert False
         except IntegrationError:
@@ -614,7 +614,7 @@ class TestSlack(object):
         """ Test get next cursor for next page"""
         print("Test get next cursor for next page\n")
 
-        slack_utils = SlackUtils("fake_api_key", None)
+        slack_utils = SlackUtils("fake_api_key")
         has_more_results, cursor = slack_utils._get_next_cursor_for_next_page(results)
         assert has_more_results == expected_has_more
         assert cursor == expected_cursor
@@ -627,7 +627,7 @@ class TestSlack(object):
             "ok": False
         }
         try:
-            slack_utils = SlackUtils("fake_api_key", None)
+            slack_utils = SlackUtils("fake_api_key")
             slack_utils._get_next_cursor_for_next_page(results)
             assert False
         except IntegrationError:
@@ -669,7 +669,7 @@ class TestSlack(object):
                     "next_cursor": None
                 }
             }]
-        slack_utils = SlackUtils("fake_api_key", None)
+        slack_utils = SlackUtils("fake_api_key")
         message_ts_list = slack_utils._get_channel_parent_message_history()
         assert message_ts_list == [{'text': 'one', "ts": "1"}, {'text': 'two', "ts": "2"}, {'text': 'three', "ts": "3"}, {'text': 'four', "ts": "4"}]
 
@@ -683,7 +683,7 @@ class TestSlack(object):
                 "ok": False
             }]
 
-        slack_utils = SlackUtils("fake_api_key", None)
+        slack_utils = SlackUtils("fake_api_key")
         try:
             slack_utils._get_channel_parent_message_history()
             assert False
@@ -729,7 +729,7 @@ class TestSlack(object):
 
         mocked_msg_history_list.return_value = [{'text': 'parent_one', "replies": [{"mock": "mock"}]}, {'text': 'parent_two'}]
 
-        slack_utils = SlackUtils("fake_api_key", None)
+        slack_utils = SlackUtils("fake_api_key")
         history = slack_utils.get_channel_complete_history()
         assert history == [{'text': 'parent_one', "replies": [{"mock": "mock"}]},
                            {'text': 'reply_one', "thread_ts": "111", "ts": "112"},
@@ -750,7 +750,7 @@ class TestSlack(object):
         mocked_msg_history_list.return_value = [{'text': 'parent_one', "replies": [{"mock": "mock"}]},
                                                 {'text': 'parent_two'}]
 
-        slack_utils = SlackUtils("fake_api_key", None)
+        slack_utils = SlackUtils("fake_api_key")
         try:
             slack_utils.get_channel_complete_history()
             assert False
@@ -772,7 +772,7 @@ class TestSlack(object):
             "is_channel": is_channel,
             "is_private": is_private
         }
-        slack_utils = SlackUtils("fake_api_key", None)
+        slack_utils = SlackUtils("fake_api_key")
         slack_utils.set_channel(mocked_channel)
 
         assert slack_utils.get_channel_type() == expected
@@ -895,7 +895,7 @@ class TestSlack(object):
         """ Test slack create row in datatable"""
         print("Test slack create row in datatable\n")
 
-        slack_utils = SlackUtils("fake_api_key", None)
+        slack_utils = SlackUtils("fake_api_key")
         mocked_res_client = Mock()
         mocked_res_client.post.return_value = True
         mocked_permalink.return_value = "mocked_permalink"
@@ -910,7 +910,7 @@ class TestSlack(object):
         """ Test slack create row in datatable error"""
         print("Test slack create row in datatable error\n")
 
-        slack_utils = SlackUtils("fake_api_key", None)
+        slack_utils = SlackUtils("fake_api_key")
         mocked_res_client = Mock()
         mocked_res_client.post.side_effect = Exception
         mocked_permalink.return_value = "mocked_permalink"
@@ -932,7 +932,7 @@ class TestSlack(object):
         mocked_channel = {
             "name": u"test-channel"
         }
-        slack_utils = SlackUtils("fake_api_key", None)
+        slack_utils = SlackUtils("fake_api_key")
         slack_utils.set_channel(mocked_channel)
 
         mocked_res_client = Mock()
@@ -955,7 +955,7 @@ class TestSlack(object):
         mocked_channel = {
             "name": u"test-channel"
         }
-        slack_utils = SlackUtils("fake_api_key", None)
+        slack_utils = SlackUtils("fake_api_key")
         slack_utils.set_channel(mocked_channel)
 
         mocked_res_client = Mock()
@@ -984,7 +984,7 @@ class TestSlack(object):
             "id": "C0EAQDV4Z",
             "name": "test-channel"
         }
-        slack_utils = SlackUtils("fake_api_key", None)
+        slack_utils = SlackUtils("fake_api_key")
         slack_utils.set_channel(mocked_channel)
 
         file_upload_results = {
@@ -1013,7 +1013,7 @@ class TestSlack(object):
                 "ok": True
             }]
 
-        slack_utils = SlackUtils("fake_api_key", None)
+        slack_utils = SlackUtils("fake_api_key")
         try:
             slack_utils.slack_post_attachment("attachment_content", attachment_data, "text")
             assert True
@@ -1030,7 +1030,7 @@ class TestSlack(object):
                 "ok": False
             }]
 
-        slack_utils = SlackUtils("fake_api_key", None)
+        slack_utils = SlackUtils("fake_api_key")
         try:
             slack_utils.slack_post_attachment("attachment_content", {}, "text")
             assert False
@@ -1040,7 +1040,7 @@ class TestSlack(object):
     def test_get_warnings(self):
         """ Test get warnings"""
         print("Test get warnings\n")
-        slack_utils = SlackUtils("fake_api_key", None)
+        slack_utils = SlackUtils("fake_api_key")
         assert isinstance(slack_utils.get_warnings(), list)
 
     @pytest.mark.parametrize("input_channel_name,channel_name_db_lookup_return,chosen_channel", [
@@ -1053,7 +1053,7 @@ class TestSlack(object):
         """ Test find the proper channel name"""
         print("Test find the proper channel name\n")
 
-        slack_utils = SlackUtils("fake_api_key", None)
+        slack_utils = SlackUtils("fake_api_key")
 
         mocked_channel_name_db_lookup.return_value = channel_name_db_lookup_return
 
@@ -1067,7 +1067,7 @@ class TestSlack(object):
     def test_find_the_proper_channel_name_error(self, mocked_channel_name_db_lookup):
         """ Test find the proper channel name error"""
         print("Test find the proper channel name error\n")
-        slack_utils = SlackUtils("fake_api_key", None)
+        slack_utils = SlackUtils("fake_api_key")
         mocked_channel_name_db_lookup.return_value = None
         try:
             slack_utils._find_the_proper_channel_name(None, "res_client", "incident_id", "task_id")
@@ -1094,7 +1094,7 @@ class TestSlack(object):
             "is_private": is_private,
             "is_archived": is_archived
         }
-        slack_utils = SlackUtils("fake_api_key", None)
+        slack_utils = SlackUtils("fake_api_key")
         slack_utils.set_channel(mocked_channel)
         try:
             slack_utils.find_or_create_channel("test-channel", slack_is_private, "res_client", "incident_id", "task_id")
@@ -1115,7 +1115,7 @@ class TestSlack(object):
         mocked_created_channel.return_value = True  # do nothing
         mocked_returned_channel_name.return_value = "edited-test-channel" # Slack validation can modify the submitted channel name
 
-        slack_utils = SlackUtils("fake_api_key", None)
+        slack_utils = SlackUtils("fake_api_key")
         slack_channel_name, has_association_in_slack_db = slack_utils.find_or_create_channel(
             "test-channel", True, "res_client", "incident_id", "task_id")
 
@@ -1132,7 +1132,7 @@ class TestSlack(object):
         mocked_channel_name.return_value = ("test-channel", "res_associated_channel_name")
         mocked_created_channel.return_value = True  # do nothing
 
-        slack_utils = SlackUtils("fake_api_key", None)
+        slack_utils = SlackUtils("fake_api_key")
         try:
             slack_utils.find_or_create_channel("test-channel", None, "res_client", "incident_id", "task_id")
             assert False
@@ -1157,7 +1157,7 @@ class TestSlack(object):
     def test_parse_message_data(self, mocked_user_display_name, message, expected_output_data):
         """ Test parse message data"""
         print("Test parse message data\n")
-        slack_utils = SlackUtils("fake_api_key", None)
+        slack_utils = SlackUtils("fake_api_key")
         mocked_user_display_name.return_value = "mocked_user_display_name"
         data = slack_utils._parse_message_data(message, "number")
         assert data == expected_output_data
