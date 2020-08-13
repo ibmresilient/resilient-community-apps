@@ -27,7 +27,9 @@ def call_send_to_staxx_function(circuits, function_params, timeout=5):
     exception_event = circuits.watcher.wait("exception", parent=None, timeout=timeout)
 
     if exception_event is not False:
-        exception = exception_event.args[1].args[1]
+        exception = exception_event.args[1]
+        if len(exception.args) > 1:
+            exception = exception.args[1]
         raise exception
 
     # else return the FunctionComponent's results

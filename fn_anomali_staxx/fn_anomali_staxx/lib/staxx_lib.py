@@ -80,7 +80,7 @@ class StaxxClient:
         """
         url = self.host + "/api/v1/import_intel"
         data = {k:kwargs[k] for k in kwargs if k!="file"}
-        data["token"] = self.token
+        data["token"] = self.token.decode("utf-8")
         payload={"import_params":str(data)}
 
         self.log.debug(payload)

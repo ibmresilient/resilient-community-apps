@@ -17,7 +17,7 @@ resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
 
 def call_send_to_staxx_function(circuits, function_params, timeout=5):
     # Create the submitTestFunction event
-    evt = SubmitTestFunction("send_to_staxx", function_params)
+    evt = SubmitTestFunction(FUNCTION_NAME, function_params)
 
     # Fire a message to the function
     circuits.manager.fire(evt)
@@ -27,12 +27,14 @@ def call_send_to_staxx_function(circuits, function_params, timeout=5):
     exception_event = circuits.watcher.wait("exception", parent=None, timeout=timeout)
 
     if exception_event is not False:
-        exception = exception_event.args[1].args[1]
+        exception = exception_event.args[1]
+        if len(exception.args) > 1:
+            exception = exception.args[1]
         raise exception
 
     # else return the FunctionComponent's results
     else:
-        event = circuits.watcher.wait("send_to_staxx_result", parent=evt, timeout=timeout)
+        event = circuits.watcher.wait(FUNCTION_NAME + "_result", parent=evt, timeout=timeout)
         assert event
         assert isinstance(event.kwargs["result"], FunctionResult)
         pytest.wait_for(event, "complete", True)
@@ -49,32 +51,46 @@ class TestSendToStaxx:
 
     mock_inputs_1 = {
         "staxx_severity": "low",
-        "staxx_confidence": "sample text",
+        "staxx_confidence": '34',
         "staxx_indicator_type": "adware",
         "staxx_tlp": "RED",
-        "staxx_indicator": "sample text",
+        "staxx_indicator": "12.32.12.22",
         "staxx_auto_approve": "yes"
     }
-
-    expected_results_1 = {"value": "xyz"}
 
     mock_inputs_2 = {
-        "staxx_severity": "low",
-        "staxx_confidence": "sample text",
-        "staxx_indicator_type": "adware",
-        "staxx_tlp": "RED",
-        "staxx_indicator": "sample text",
+        "staxx_severity": "high",
+        "staxx_confidence": '55',
+        "staxx_indicator_type": "ddos",
+        "staxx_tlp": "GREEN",
+        "staxx_indicator": "abc.com",
         "staxx_auto_approve": "yes"
     }
 
-    expected_results_2 = {"value": "xyz"}
+    failure_inputs = {
+        "staxx_severity": "high",
+        "staxx_confidence": 'bad',
+        "staxx_indicator_type": "ddos",
+        "staxx_tlp": "GREEN",
+        "staxx_indicator": "abc.com",
+        "staxx_auto_approve": "yes"
+    }
 
-    @pytest.mark.parametrize("mock_inputs, expected_results", [
-        (mock_inputs_1, expected_results_1),
-        (mock_inputs_2, expected_results_2)
+
+    @pytest.mark.parametrize("mock_inputs", [
+        (mock_inputs_1),
+        (mock_inputs_2)
     ])
-    def test_success(self, circuits_app, mock_inputs, expected_results):
+    def test_success(self, circuits_app, mock_inputs):
         """ Test calling with sample values for the parameters """
 
         results = call_send_to_staxx_function(circuits_app, mock_inputs)
-        assert(expected_results == results)
+        assert(results.get('content').startswith("Import intelligence job ID"))
+
+    @pytest.mark.parametrize("mock_inputs", [
+        (failure_inputs)
+    ])
+    def test_failure(self, circuits_app, mock_inputs):
+        """ Test calling with sample values for the parameters """
+        with pytest.raises(ValueError):
+            results = call_send_to_staxx_function(circuits_app, mock_inputs)

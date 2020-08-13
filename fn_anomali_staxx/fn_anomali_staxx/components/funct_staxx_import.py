@@ -9,6 +9,7 @@ from resilient_lib import RequestsCommon, ResultPayload, validate_fields
 from resilient_circuits import ResilientComponent, function, StatusMessage, FunctionResult, FunctionError
 
 STAXX_SECTION = "fn_anomali_staxx"
+RESILIENT_TAG = "resilient"
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function(s)"""
@@ -70,7 +71,7 @@ class FunctionComponent(ResilientComponent):
                                                           threat_type=staxx_indicator_type,
                                                           auto_approve=staxx_auto_approve,
                                                           confidence=staxx_confidence,
-                                                          tags="resilient",
+                                                          tags=RESILIENT_TAG,
                                                           intel_str=staxx_indicator
                                                           )
                 yield StatusMessage("Posted Staxx Object Successfully: {}".format(staxx_response))

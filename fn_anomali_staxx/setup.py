@@ -26,7 +26,7 @@ setup(
     description="Resilient Circuits Components for 'fn_anomali_staxx'",
     long_description="Resilient Circuits Components for 'fn_anomali_staxx'",
     install_requires=[
-        'resilient_circuits>=30.0.0',
+        'resilient-circuits>=30.0.0',
         'resilient-lib>=34.0.195'
     ],
     packages=find_packages(),
