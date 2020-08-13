@@ -1,18 +1,25 @@
 # Ansible Integration Function for IBM Resilient
 ## Table of Contents
   - [About This Package](#about-this-package)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
+  - [Features](#features)
+  - [Package Components](#package-components)
+  - [App Host Installation](#app-host-installation)
+  - [Integration Server Installation](#integration-server-installation)
   - [Function Inputs](#function-inputs)
   - [Function Output](#function-output)
   - [Considerations](#considerations)
+  - [App Host sshPass Support](#app-host-sshpass-support)
 ---
 
 ## About This Package:
 This package contains functions that integrate with Ansible to run playbooks and modules for remote host execution.
 
 ## History
-1.1 - change result payload format to JSON returned to Resilient 
+
+| Version| Comment |
+| ------- | ------ |
+| 1.2 | Support for App Host |
+| 1.1 | Change result payload format to JSON returned to Resilient |
  * For customers upgrading from 1.0, the example workflows will use different post-processing script logic, based on the json results returned.
 
 ## Features:
@@ -35,21 +42,59 @@ Additional documentation on Ansible can be found at [the Ansible website](https:
   - Example: Ansible - Run a Playbook
   - Example: Ansible - Run a Playbook from an Artifact
 
-## Prerequisites:
+
+## App Host Installation
+All the components for running Ansible in a container already exist when using the App Host app. The remainder of this section details the Ansible configuration file changes.
+
+Under the Configuration Tab for an App, build out the ansible-runner files needed per the [ansible-runner convention](https://docs.ansible.com/ansible/latest/installation_guide/intro_configuration.html). The necessary files are the `hosts` file, ssh_key and your yml playbooks. Build these files under `/var/rescircuits/ansible` and ensure that the app.config file contains the same reference:
+
+```
+[fn_ansible]
+runner_dir=/var/rescircuits/ansible
+artifact_dir=/tmp
+```
+
+### Playbooks
+When adding playbooks through the Configuration tab of an App, ensure the File Path is `/var/rescircuits/ansible/project`. 
+
+Note: Playbooks and modules cannot be run within the container environment. 
+
+The minimum Ansible files needed are: 
+* hosts, and 
+* playbooks
+
+Your environment may require more configuration files, such as ssh_key and envvars. 
+
+This is an example of the configuration files used including 
+several yaml files.
+![screenshot](./screenshots/ansible_config_files.png)
+
+If you require additional ansible modules, additional effort is needed to include them as files in the Configuration tab.
+
+### Limitations
+Presently, there are limitations in the use of containers when playbook parameters sent from Resilient 
+are used with any file defined in `/var/rescircuits/ansible/env`. 
+
+## Integration Server Installation
+### Prerequisites:
 This integration relies on the installation of the ansible solution on the integration server. The process of installing ansible can be followed [here](https://docs.ansible.com/ansible/latest/installation_guide/).
 
 * ansible >= 2.8.1
 * ansible-runner >= 1.3.4
 * Resilient platform >= v31.0.0
 * Integrations Server Resilient Circuits >= v30.0.0
-* Ansible config directory per the [ansible-runner convention](https://ansible-runner.readthedocs.io/en/latest/index.html)
+* Ansible config directory per the [ansible-runner convention](https://docs.ansible.com/ansible/latest/installation_guide/intro_configuration.html)
 
 * Ansible relies on a system library `sshpass`. Depending on your Integration Server operation system, different procedures are required to install this system library.
 
-## Installation    
+* For RHEL servers, the [Red Hat Developer Toolset](https://access.redhat.com/documentation/en-us/red_hat_developer_toolset/8/html/user_guide/chap-red_hat_developer_toolset) is needed to build the ansible runtime environment. This may also require a registered subscription manager to install. 
+
 This package requires that it is installed on a RHEL or CentOS platform and uses the Resilient Circuits framework. 
 
 * Unzip the package downloaded from the IBM App Exchange
+```
+    $ unzip app-fn_ansible-<version>.zip
+```
 * To install the package, run:
 
     ```
@@ -72,6 +117,7 @@ This package requires that it is installed on a RHEL or CentOS platform and uses
     ```
     [fn_ansible]
     runner_dir=</full/path/to/your/ansible/directory>
+    # temporary files collected when running a module or a playbook
     artifact_dir=</full/path/to/artifacts/directory>
     # change this value to trim the collection of previous process runs
     artifact_retention_num=0
@@ -158,3 +204,35 @@ For very large data results, it may not be practical to save the results as a No
 * Consider using Rule Activity Field select lists for Ansible module name and parameter restrictions. This ensures that only specific commands are used for ad-hoc executions.
 * Also consider using Rule Activity Field select lists for Ansible playbook names for similar reasons to ensure only specific playbooks are supported through Resilient.
 * The workflow associated with a module or playbook function will remain blocked until all host executions are complete and the results are returned. The ansible-runner `Asynchronous` operation corrects this restriction but remains a future enhancement.
+* Playbooks should use the `debug` statement to return findings back to Resilient. The example below runs the `find` module, returning the file found using the debug statement.
+
+```yaml
+- hosts: "{{host_names}}"
+  tasks:
+  - name: Recursively find files
+    find:
+      paths: "{{path}}"
+      age: "{{age}}"
+      recurse: yes
+      pattern: '*'
+    register: files_matched
+
+  - debug:
+      msg: "{{ files_matched.files }}"
+```
+
+## App Host sshPass Support
+You may find that you require the sshPass package for your use of Ansible. This package uses the [GPLv2 license](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html) and 
+this license restricts IBM from building and distributing a container under our [International License Agreement](https://www-03.ibm.com/software/sla/sladb.nsf/pdf/ilan/$file/ilan_en.pdf).
+
+If you require sshPass, you can build your own container by modifying the `Dockerfile` in the fn_ansible-x.x.x.tar.gz archive and uncomment the following
+RUN command. See the documentation on [hosting your own container registry for App Host](https://www.ibm.com/support/knowledgecenter/SSBRUQ_37.0.0/doc/container_apps.html) 
+for the use of a private registry with App Host.
+
+```
+## ---- section for changes ----
+# uncomment to support sshpass in your container
+#RUN wget http://mirror.pit.teraswitch.com/fedora/epel/epel-release-latest-8.noarch.rpm && \
+#    rpm -ivh epel-release-latest-8.noarch.rpm && \
+#    yum --enablerepo=epel -y install sshpass
+```
