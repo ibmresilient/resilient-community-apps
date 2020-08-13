@@ -21,6 +21,7 @@ setup(
     name='fn_anomali_staxx',
     version='1.0.0',
     license='MIT',
+    url='https://ibm.biz/resilientcommunity',
     author='Resilient Labs',
     author_email='resil.labs@gmail.com',
     description="Resilient Circuits Components for 'fn_anomali_staxx'",

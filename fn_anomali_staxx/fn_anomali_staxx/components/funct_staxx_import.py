@@ -32,7 +32,7 @@ class FunctionComponent(ResilientComponent):
         try:
             rc = ResultPayload(STAXX_SECTION, **kwargs)
             # Get the function parameters:
-            staxx_confidence = kwargs.get("staxx_confidence")  # text: 0-100
+            staxx_confidence = kwargs.get("staxx_confidence_lvl")  # num: 0-100
             staxx_tlp = self.get_select_param(kwargs.get("staxx_tlp"))  # multiselect, values: "RED", "AMBER", "GREEN", "WHITE"
             staxx_auto_approve = self.get_select_param(kwargs.get("staxx_auto_approve"))  # select, values: "yes", "no"
             staxx_severity = self.get_select_param(kwargs.get("staxx_severity"))  # select, values: "low", "medium", "high", "very-high"
@@ -43,8 +43,7 @@ class FunctionComponent(ResilientComponent):
 
             # test the value of confidence as values 0-100
             try:
-                confidence = int(staxx_confidence)
-                if confidence < 0 or confidence > 100:
+                if staxx_confidence < 0 or staxx_confidence > 100:
                     raise ValueError("Specify the confidence value between 0-100")
             except ValueError:
                 raise ValueError("Specify the confidence value between 0-100")
