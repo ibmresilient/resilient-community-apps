@@ -17,10 +17,10 @@ RUN pip install --upgrade pip
 RUN pip install "resilient-circuits>=${RESILIENT_CIRCUITS_VERSION}"
 
 ## ---- section for changes ----
-# uncomment and replicate if additional os libraries are needed
-RUN wget http://mirror.pit.teraswitch.com/fedora/epel/epel-release-latest-8.noarch.rpm && \
-    rpm -ivh epel-release-latest-8.noarch.rpm && \
-    yum --enablerepo=epel -y install sshpass
+# uncomment to support sshpass in your container
+#RUN wget http://mirror.pit.teraswitch.com/fedora/epel/epel-release-latest-8.noarch.rpm && \
+#    rpm -ivh epel-release-latest-8.noarch.rpm && \
+#    yum --enablerepo=epel -y install sshpass
 
 # install the base package
 COPY ./dist /tmp/packages

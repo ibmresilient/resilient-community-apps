@@ -8,6 +8,7 @@
   - [Function Inputs](#function-inputs)
   - [Function Output](#function-output)
   - [Considerations](#considerations)
+  - [App Host sshPass Support](#app-host-sshpass-support)
 ---
 
 ## About This Package:
@@ -218,4 +219,20 @@ For very large data results, it may not be practical to save the results as a No
 
   - debug:
       msg: "{{ files_matched.files }}"
+```
+
+## App Host sshPass Support
+You may find that you require the sshPass package for your use of Ansible. This package uses the [GPLv2 license](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html) and 
+this license restricts IBM from building and distributing a container under our [International License Agreement](https://www-03.ibm.com/software/sla/sladb.nsf/pdf/ilan/$file/ilan_en.pdf).
+
+If you require sshPass, you can build your own container by modifying the `Dockerfile` in the fn_ansible-x.x.x.tar.gz archive and uncomment the following
+RUN command. See the documentation on [hosting your own container registry for App Host](https://www.ibm.com/support/knowledgecenter/SSBRUQ_37.0.0/doc/container_apps.html) 
+for the use of a private registry with App Host.
+
+```
+## ---- section for changes ----
+# uncomment to support sshpass in your container
+#RUN wget http://mirror.pit.teraswitch.com/fedora/epel/epel-release-latest-8.noarch.rpm && \
+#    rpm -ivh epel-release-latest-8.noarch.rpm && \
+#    yum --enablerepo=epel -y install sshpass
 ```
