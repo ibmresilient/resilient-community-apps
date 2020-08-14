@@ -5,10 +5,11 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_odbc_query',
-    version='1.0.2',
+    version='1.0.3',
     license='MIT',
     author='IBM Resilient',
     author_email='support@resilientsystems.com',
+    url="http://ibm.biz/resilientcommunity",
     description="Resilient Circuits Components for 'fn_odbc_query'",
     long_description="Resilient Circuits Components for 'fn_odbc_query'",
     install_requires=[

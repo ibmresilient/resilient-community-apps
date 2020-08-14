@@ -1,4 +1,4 @@
-# Resilient Function for Machine Learning v1.1.0
+# Resilient Function for Machine Learning v1.1.1
 
 ## Description
 

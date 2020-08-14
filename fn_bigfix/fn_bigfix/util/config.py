@@ -20,5 +20,8 @@ bigfix_polling_interval=30
 bigfix_polling_timeout=600
 bigfix_endpoints_wait=30
 bigfix_hunt_results_limit=200
+# Settings for access to BigFix via a proxy
+#http_proxy=http://proxy:80
+#https_proxy=https://proxy:80
 """
     return config_data

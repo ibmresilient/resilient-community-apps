@@ -27,15 +27,17 @@ Create app.config by running `resilient-circuits config -u`.
 The app.config needs the following configuration values, in addition to the appropriate [resilient] section for connecting to your Resilient platform:  
 
 ```
-[fn_qradar_integration]  
-host = qradar-server-hostname-or-ip-address    
-username = qradar-login-user-name 
-splunkpassword = qradar-password-keyring-recommended
-verify_cert = False-to-skip-qradar-cert-validation
-qradartoken= xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+[fn_qradar_integration]
+host=localhost
+username=admin
+qradarpassword=changeme
+#Note, if both qradarpassword and qradartoken are given, password will be used
+qradartoken=changeme
+#verify_cert=[true|false]
+#search_timeout=
 ```
 ## Customize
-Run with: `resilient-circuits customize` to install function definitions, message destinations, sample workflows, datatable, and rules to the Resilient server. 
+Run with: `resilient-circuits customize -l fn-qradar-integration` to install function definitions, message destinations, sample workflows, datatable, and rules to the Resilient server. 
 
 This package includes the followings:
 
