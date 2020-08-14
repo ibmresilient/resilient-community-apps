@@ -26,7 +26,8 @@ setup(
             "DtUtilsGetRowFunctionComponent = fn_datatable_utils.components.dt_utils_get_row:FunctionComponent",
             "DtUtilsUpdateRowFunctionComponent = fn_datatable_utils.components.dt_utils_update_row:FunctionComponent",
             "DtUtilsDeleteRowFunctionComponent = fn_datatable_utils.components.dt_utils_delete_row:FunctionComponent",
-            "DtUtilsGetRowsFunctionComponent = fn_datatable_utils.components.dt_utils_get_rows:FunctionComponent"
+            "DtUtilsGetRowsFunctionComponent = fn_datatable_utils.components.dt_utils_get_rows:FunctionComponent",
+            "DtUtilsDeleteRowsFunctionComponent = fn_datatable_utils.components.dt_utils_delete_rows:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_datatable_utils.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_datatable_utils.util.customize:customization_data"],
