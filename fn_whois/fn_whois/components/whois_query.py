@@ -89,6 +89,7 @@ class FunctionComponent(ResilientComponent):
             domain = None
             try:
                 domain = whois.whois(whois_query)
+                log.debug(domain)
             except Exception as e:
                 yield StatusMessage("Encountered exception when sending query. Reason {0}".format(str(e)))
                 payload.success = False
@@ -100,9 +101,9 @@ class FunctionComponent(ResilientComponent):
 
                 yield StatusMessage("Gathered domain details, now normalising dates.")
                 try:
-                    for key,value in zip(domain_details.keys(), domain_details.values()):
+                    for key,value in domain_details.items():
                         # If value is a datetime, convert to a datestring
-                        if isinstance(value,datetime.datetime):
+                        if isinstance(value, datetime.datetime):
 
                             domain_details[key] = value.strftime('%m/%d/%Y')
                         # Possible also to encounter a list of datetimes for updated_date
@@ -114,11 +115,11 @@ class FunctionComponent(ResilientComponent):
                                                            if isinstance(date, datetime.datetime)))
 
                     # Ensure there aren't duplicate domain names
-                    if domain_details.get("domain_name", None):
+                    if isinstance(domain_details.get("domain_name", None), list):
                         domain_details["domain_name"] = list(set(element.lower() for element in domain_details["domain_name"]))
 
                     # Last check if name_servers are provided
-                    if isinstance(domain_details.get("name_servers",None),list):
+                    if isinstance(domain_details.get("name_servers", None), list):
                         # Servers are duplicated with /r char, remove it then convert it from set to list
                         domain_details["name_servers"] = list({
                             element.lower()

@@ -6,12 +6,13 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_whois',
-    version='1.0.1',
+    version='1.0.2',
     license='MIT',
     author='Ryan',
     author_email='ryan@resilientlab.co.uk',
+    url="https://github.com/ibmresilient/resilient-community-apps",
     description="Resilient Circuits Components which provide an interface for searching the WHOIS database",
-    long_description="A Resilient Circuits function which takes in an input of URL/IP and then attempts to gather registrar information by sending a WHOIS query",
+    long_description="A Resilient Circuits function which takes in an input of Domain, URL or IP and then attempts to gather registrar information by sending a WHOIS query",
     install_requires=[
         'resilient_circuits>=30.0.0',
         'python-whois'
