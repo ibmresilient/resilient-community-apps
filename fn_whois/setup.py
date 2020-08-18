@@ -28,6 +28,7 @@ setup(
             "WhoisQueryFunctionComponent = fn_whois.components.whois_query:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_whois.util.config:config_section_data"],
-        "resilient.circuits.customize": ["customize = fn_whois.util.customize:customization_data"]
+        "resilient.circuits.customize": ["customize = fn_whois.util.customize:customization_data"],
+        "resilient.circuits.selftest": ["selftest = fn_whois.util.selftest:selftest_function"]
     }
 )
