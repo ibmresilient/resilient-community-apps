@@ -8,6 +8,10 @@ from resilient_circuits import ResilientComponent, function, handler, \
                                 StatusMessage, FunctionResult, FunctionError
 from fn_xforce.util.helper import XForceHelper
 from resilient_lib import RequestsCommon
+try:
+    from urllib import quote as url_encode  # Python 2.X
+except ImportError:
+    from urllib.parse import quote as url_encode  # Python 3+
 
 
 CONFIG_DATA_SECTION = "fn_xforce"
@@ -49,7 +53,11 @@ class FunctionComponent(ResilientComponent):
 
             if xforce_query is None:
                 raise ValueError("No Query provided for XForce search.")
-            if not isinstance(str(xforce_query), str):
+            # ensure query is a string
+            try:
+                xforce_query = str(xforce_query)
+            except Exception as e:
+                log.error(e)
                 raise ValueError("Input must be a string.")
 
             # Setup proxies parameter if exists in app.config file
@@ -63,8 +71,12 @@ class FunctionComponent(ResilientComponent):
                 rc = RequestsCommon(self.opts, self.options)
 
                 # Prepare request string
-                request_string = '{}/casefiles/{}/fulltext?q={}'.format(XFORCE_BASEURL, str(xforce_collection_type), str(xforce_query))
+                collection_type = url_encode(str(xforce_collection_type))
+                query = url_encode(xforce_query)
+
+                request_string = '{}/casefiles/{}/fulltext?q={}'.format(XFORCE_BASEURL, collection_type, query)
                 log.info("Making GET request to the url: %s", request_string)
+
                 # Make the HTTP request through resilient_lib.
                 res = rc.execute_call_v2(
                     "get", request_string, proxies=proxies, auth=(XFORCE_APIKEY, XFORCE_PASSWORD), callback=helper.handle_case_response)

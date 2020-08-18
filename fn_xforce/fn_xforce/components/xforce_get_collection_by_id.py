@@ -9,6 +9,10 @@ from resilient_circuits import ResilientComponent, function, handler, \
     StatusMessage, FunctionResult, FunctionError
 from fn_xforce.util.helper import XForceHelper
 from resilient_lib import RequestsCommon, ResultPayload
+try:
+    from urllib import quote as url_encode  # Python 2.X
+except ImportError:
+    from urllib.parse import quote as url_encode  # Python 3+
 
 
 CONFIG_DATA_SECTION = 'fn_xforce'
@@ -67,7 +71,8 @@ class FunctionComponent(ResilientComponent):
                 rc = RequestsCommon(self.opts, self.options)
 
                 # Prepare request string
-                request_string = '{}/casefiles/{}'.format(XFORCE_BASEURL, str(xforce_collection_id))
+                id = url_encode(str(xforce_collection_id))
+                request_string = '{}/casefiles/{}'.format(XFORCE_BASEURL, id)
                 log.info("Making GET request to the url: %s", request_string)
                 # Make the HTTP request through resilient_lib.
                 res = rc.execute_call_v2(
