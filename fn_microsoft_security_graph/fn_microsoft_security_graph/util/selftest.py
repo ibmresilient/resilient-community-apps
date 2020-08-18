@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation
-   test with: resilient-circuits selftest -l fn_exchange_online
+   test with: resilient-circuits selftest -l fn_microsoft_security_graph
 """
 
 import logging
