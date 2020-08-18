@@ -5,16 +5,16 @@
 from setuptools import setup, find_packages
 setup(
     name='fn_spamhaus_query',
-    version='1.0.0',
+    version='1.0.1',
     license='MIT',
     author='Resilient Labs',
     author_email='resil.labs@gmail.com',
-    url='https://github.com/ibmresilient/resilient-community-apps',
-    description="Resilient Circuits Components for 'fn_spamhaus_query'",
-    long_description="Resilient Circuits Components for 'fn_spamhaus_query'",
+    url='ibm.biz/resilientcommunity',
+    description="Look up IP Addresses + Domain Name in Spamhaus Datasets",
+    long_description="If a given artifact appears in one of Spamhaus Datasets, then the artifact's description is updated with additional enrichment information.",
     install_requires=[
         'resilient_circuits>=30.0.0',
-        'resilient-lib>=32.0.140',
+        'resilient-lib>=32.0.140'
     ],
     packages=find_packages(),
     include_package_data=True,
