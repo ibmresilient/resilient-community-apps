@@ -2,10 +2,7 @@
 # (c) Copyright IBM Corp. 2019. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 
-import future        # pip install future
-import builtins      # pip install future
-import past          # pip install future
-import six           # pip install six
+
 import socket
 from past.builtins import basestring, unicode
 import tldextract
@@ -14,6 +11,7 @@ import time
 import traceback
 from ipwhois import IPWhois, exceptions
 from datetime import datetime, date
+from urllib import request
 
 ip_from_domain = None
 
@@ -50,7 +48,7 @@ def check_registered_domain(registered_domain):
         return real_domain
 
 # Gather registry information
-def get_whois_registry_info(ip_input):
+def get_whois_registry_info(ip_input, proxies=None):
     """Gather registry information
     Arguments:
         ip_input {string} -- Artifact.value
@@ -58,7 +56,9 @@ def get_whois_registry_info(ip_input):
         {object} -- Contains all registry information
     """
     try:
-        internet_protocol_address_object = IPWhois(ip_input,allow_permutations=True)
+        proxy_opener = make_proxy_opener(proxies) if proxies else None
+
+        internet_protocol_address_object = IPWhois(ip_input,allow_permutations=True, proxy_opener=proxy_opener)
         try:
             whois_response = internet_protocol_address_object.lookup_whois()
             if internet_protocol_address_object.dns_zone:
@@ -69,7 +69,7 @@ def get_whois_registry_info(ip_input):
     except:
         logging.error(traceback.format_exc())
 
-def get_rdap_registry_info(ip_input, rdap_depth):
+def get_rdap_registry_info(ip_input, rdap_depth, proxies=None):
     """Gathers registry info in RDAP protocol
 
     Arguments:
@@ -80,7 +80,8 @@ def get_rdap_registry_info(ip_input, rdap_depth):
         {object} -- Registry info, RDAP Protocol
     """
     try:
-        internet_protocol_address_object = IPWhois(ip_input,allow_permutations=True)
+        proxy_opener = make_proxy_opener(proxies) if proxies else None
+        internet_protocol_address_object = IPWhois(ip_input,allow_permutations=True, proxy_opener=proxy_opener)
         try:
             rdap_response = internet_protocol_address_object.lookup_rdap(rdap_depth)
             if internet_protocol_address_object.dns_zone:
@@ -90,6 +91,13 @@ def get_rdap_registry_info(ip_input, rdap_depth):
             logging.error(traceback.format_exc())
     except:
         logging.error(traceback.format_exc())
+
+def make_proxy_opener(proxies):
+    handler = request.ProxyHandler({
+        'http': 'http://192.168.0.1:80/',
+        'https': 'https://192.168.0.1:443/'
+    })
+    return request.build_opener(handler)
 
 def check_response(response,payload_object):
     if response:
