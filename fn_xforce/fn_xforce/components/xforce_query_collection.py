@@ -7,7 +7,7 @@ import logging
 from resilient_circuits import ResilientComponent, function, handler, \
                                 StatusMessage, FunctionResult, FunctionError
 from fn_xforce.util.helper import XForceHelper
-from resilient_lib import RequestsCommon
+from resilient_lib import RequestsCommon, ResultPayload
 try:
     from urllib import quote as url_encode  # Python 2.X
 except ImportError:
@@ -88,14 +88,22 @@ class FunctionComponent(ResilientComponent):
                 log.info(error)
                 raise ValueError("Encountered issue when querying X-Force API")
 
-            results = {
-                "success": (True if len(case_files["casefiles"]) else False),
-                "case_files": case_files["casefiles"],
-                "num_of_casefiles": len(case_files["casefiles"])
-            }
-            yield StatusMessage("Finished function; Success:"+str(results['success']))
+            # initialize result object
+            result = ResultPayload(CONFIG_DATA_SECTION, **kwargs)
+
+            # assign keys and values from the response
+            if len(case_files["casefiles"]):
+                result.done(True, res.json())
+                # backwards compatibility
+                result["case_files"] = case_files["casefiles"]
+                result["num_of_casefiles"] = len(case_files["casefiles"])
+            else:
+                content = "Search query returned no results."
+                result.done(True, content)
+
+            yield StatusMessage("Finished function; Success:"+str(result['success']))
 
             # Produce a FunctionResult with the results
-            yield FunctionResult(results)
+            yield FunctionResult(result)
         except Exception:
             yield FunctionError()
