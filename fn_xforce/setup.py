@@ -10,7 +10,9 @@ setup(
     author='IBM Resilient',
     author_email='support@resilientsystems.com',
     url="http://ibm.biz/resilientcommunity",
-    long_description="Resilient Circuits Components for 'fn_xforce'",
+    description="Resilient Circuits Components for the IBM XForce Collections API",
+    long_description="The fn_xforce integration provides the ability to query the IBM XForce Collections API."
+                     "Collections can be queried either by matching a provided search term or by Collection ID.",
     install_requires=[
         'resilient_circuits>=30.0.0',
         'resilient-lib>=34.0.0'
