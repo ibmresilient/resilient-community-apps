@@ -41,7 +41,7 @@ class FunctionComponent(ResilientComponent):
 
             ioc_parser_data = attachment_file_name = None
 
-            yield StatusMessage("Extracting IOCs from given Artifact/attachment data")
+            yield StatusMessage("Extracting IOCs from given artifact/attachment data")
 
             if ioc_parser_artifact_id:
 
@@ -58,11 +58,9 @@ class FunctionComponent(ResilientComponent):
                     ioc_parser_data = ioc_parser_artifact_value
 
                 else:
-                    raise ValueError("Failed to get Artifact Value for Artifact: {0}".format(ioc_parser_artifact_id))
+                    raise ValueError("Failed to get artifact value for artifact: {0}".format(ioc_parser_artifact_id))
 
             elif ioc_parser_attachment_id:
-
-                attachment_metadata_uri = attachment_data_uri = None
 
                 if ioc_parser_task_id:
                     attachment_metadata_uri = IOCHelp_obj.TASK_META_DATA_URL.format(ioc_parser_task_id, ioc_parser_attachment_id)
