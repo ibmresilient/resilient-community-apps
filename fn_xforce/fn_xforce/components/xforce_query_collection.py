@@ -82,7 +82,7 @@ class FunctionComponent(ResilientComponent):
                     "get", request_string, proxies=proxies, auth=(XFORCE_APIKEY, XFORCE_PASSWORD), callback=helper.handle_case_response)
                 # Is the status code in the 2XX family?
                 # Save returned case files
-                if res.status_code / 100 == 2:
+                if int(res.status_code / 100) == 2:
                     case_files = res.json()
             except Exception as error:
                 log.info(error)
