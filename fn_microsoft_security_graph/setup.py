@@ -26,6 +26,7 @@ setup(
             "MicrosoftSecurityGraphUpdateAlertsIntegrationComponents = fn_microsoft_security_graph.components.microsoft_security_graph_alerts_integrations:IntegrationComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_microsoft_security_graph.util.config:config_section_data"],
-        "resilient.circuits.customize": ["customize = fn_microsoft_security_graph.util.customize:customization_data"]
+        "resilient.circuits.customize": ["customize = fn_microsoft_security_graph.util.customize:customization_data"],
+        "resilient.circuits.selftest": ["selftest = fn_microsoft_security_graph.util.selftest:selftest_function"]
     }
 )
