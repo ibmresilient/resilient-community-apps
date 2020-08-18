@@ -72,15 +72,33 @@ class FunctionComponent(ResilientComponent):
                                                 return_stage=qradar_advisor_result_stage,
                                                 timeout=offense_analysis_timeout,
                                                 period=offense_analysis_period)
-            #
-            # extract list of observables from this stix bundle
-            #
-            observables = stix_utils.get_observables(stix_json=stix_json,
-                                                     log=log)
-            #
-            # generate a folder-tree like structure in html for this stix bundle
-            #
-            html_str = stix_tree.get_html(stix_json, log)
+
+            if "status_code" in stix_json:
+                #
+                # If no observables found in analysis add an error status as html.
+                #
+                summary_string = ''
+                status_string = "Qradar Advisor returned status code '{}'.".format(stix_json["status_code"])
+                if stix_json["status_code"] == 404:
+                    summary_string = "This Offense ID has no observables."
+
+                html_str = "<p>Watson Offense Analysis result for Offense ID: " + qradar_offense_id + "</p>"
+                html_str += "<br><p><span style=\"font-weight:bold\">" + status_string + "</span></p>"
+                html_str += "<p><span style=\"font-weight:bold\">" + summary_string + "</span></p><br>"
+
+                # Set observables as an empty list
+                observables = []
+
+            else:
+                #
+                # extract list of observables from this stix bundle
+                #
+                observables = stix_utils.get_observables(stix_json=stix_json,
+                                                         log=log)
+                #
+                # generate a folder-tree like structure in html for this stix bundle
+                #
+                html_str = stix_tree.get_html(stix_json, log)
 
             #
             # get the insights for this offense

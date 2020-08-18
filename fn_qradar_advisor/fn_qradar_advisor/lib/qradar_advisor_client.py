@@ -42,6 +42,7 @@ class XFECredentialError(Exception):
 
 
 class QRadarAdvisorClient(object):
+    INSIGHTS_NO_OBSERVABLES = "NO_OBSERVABLES"
 
     def __init__(self, qradar_host, advisor_app_id, qradar_token, cafile, log):
         self.http_info = HttpInfo(qradar_host, advisor_app_id, qradar_token, cafile, log)
@@ -189,6 +190,13 @@ class QRadarAdvisorClient(object):
                                    data=None,
                                    verify=self.http_info.get_cafile())
             if response.status_code != 200:
+                res = response.json()
+                if res["error"] == "NO_ERROR" and res["status"] == self.INSIGHTS_NO_OBSERVABLES:
+                    # Status 404 can be thrown if No observables in found in insights.
+                    return {
+                        "status_code": response.status_code
+                    }
+
                 error_msg = "Offense insights using {} returns error {}".format(url, str(response))
                 self.log.error(error_msg)
                 raise OffenseInsightsError(url, error_msg)
@@ -528,6 +536,14 @@ class QRadarOffenseAnalysis(SearchWaitCommand):
             self.log.error("Offense {} does not exist or no permission to read".format(str(offense_id)))
             raise SearchFailure(search_id, str(response))
         elif response.status_code == 404:
+            res = response.json()
+            if res["error"] == "NO_ERROR" and res["status"] == self.ANALYSIS_NO_OBSERVABLES:
+                # Status 404 can be thrown if No observables in found in analysis.
+                return {
+                    "status_code": response.status_code
+                }
+
+
             self.log.error("Offense {} analysis does not exists".format(str(offense_id)))
             raise SearchFailure(search_id, str(response))
         else:
