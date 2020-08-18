@@ -10,10 +10,8 @@ import logging
 import time
 import traceback
 from ipwhois import IPWhois, exceptions
-from datetime import datetime, date
+from datetime import date
 from urllib import request
-
-ip_from_domain = None
 
 def time_str():
     today = date.fromtimestamp(time.time())
@@ -57,8 +55,7 @@ def get_whois_registry_info(ip_input, proxies=None):
     """
     try:
         proxy_opener = make_proxy_opener(proxies) if proxies else None
-
-        internet_protocol_address_object = IPWhois(ip_input,allow_permutations=True, proxy_opener=proxy_opener)
+        internet_protocol_address_object = IPWhois(ip_input, allow_permutations=True, proxy_opener=proxy_opener)
         try:
             whois_response = internet_protocol_address_object.lookup_whois()
             if internet_protocol_address_object.dns_zone:
@@ -81,7 +78,7 @@ def get_rdap_registry_info(ip_input, rdap_depth, proxies=None):
     """
     try:
         proxy_opener = make_proxy_opener(proxies) if proxies else None
-        internet_protocol_address_object = IPWhois(ip_input,allow_permutations=True, proxy_opener=proxy_opener)
+        internet_protocol_address_object = IPWhois(ip_input, allow_permutations=True, proxy_opener=proxy_opener)
         try:
             rdap_response = internet_protocol_address_object.lookup_rdap(rdap_depth)
             if internet_protocol_address_object.dns_zone:
@@ -93,13 +90,10 @@ def get_rdap_registry_info(ip_input, rdap_depth, proxies=None):
         logging.error(traceback.format_exc())
 
 def make_proxy_opener(proxies):
-    handler = request.ProxyHandler({
-        'http': 'http://192.168.0.1:80/',
-        'https': 'https://192.168.0.1:443/'
-    })
+    handler = request.ProxyHandler(proxies)
     return request.build_opener(handler)
 
-def check_response(response,payload_object):
+def check_response(response, payload_object):
     if response:
         response["display_content"] = dict_to_json_str(response)
         results = payload_object.done(True, response)
@@ -108,45 +102,40 @@ def check_response(response,payload_object):
     return results
 
 def dict_to_json_str(d):
-  """Function that converts a dictionary into a JSON string.
+    """Function that converts a dictionary into a JSON string.
      Supports types: basestring, bool, int and nested dicts.
      Does not support lists.
      If the value is None, it sets it to False."""
 
-  json_entry = u'"{0}":{1}'
-  json_entry_str = u'"{0}":"{1}"'
-  entries = [] 
+    json_entry = u'"{0}":{1}'
+    json_entry_str = u'"{0}":"{1}"'
+    entries = []
 
-  for entry in d:
-    key = entry
-    value = d[entry]
+    for entry in d:
+        key = entry
+        value = d[entry]
 
     if value is None:
-      value = False
+        value = False
 
     if isinstance(value, list):
-      dummy = {}
+        pass
 
     if isinstance(value, basestring):
-      value = value.replace(u'"', u'\\"')
-      entries.append(json_entry_str.format(unicode(key), unicode(value)))
-      
+        value = value.replace(u'"', u'\\"')
+        entries.append(json_entry_str.format(unicode(key), unicode(value)))
+
     elif isinstance(value, unicode):
-      entries.append(json_entry.format(unicode(key), unicode(value)))
-    
+        entries.append(json_entry.format(unicode(key), unicode(value)))
+
     elif isinstance(value, bool):
-      value = 'true' if value == True else 'false'
-      entries.append(json_entry.format(key, value))
+        value = 'true' if value else 'false'
+        entries.append(json_entry.format(key, value))
 
     elif isinstance(value, int):
-      entries.append(json_entry.format(unicode(key), value))
+        entries.append(json_entry.format(unicode(key), value))
 
     elif isinstance(value, dict):
-      entries.append(json_entry.format(key, dict_to_json_str(value)))
+        entries.append(json_entry.format(key, dict_to_json_str(value)))
 
-    else:
-      dummy = {}
-
-  return u'{0} {1} {2}'.format(u'{', ','.join(entries), u'}')
-
-
+    return u'{0} {1} {2}'.format(u'{', ','.join(entries), u'}')

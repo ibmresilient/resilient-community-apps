@@ -7,6 +7,7 @@ Usage: resilient-circuits selftest -l fn_whois_rdap
 
 import logging
 from .helper import get_whois_registry_info
+from resilient_lib import RequestsCommon
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
@@ -19,8 +20,10 @@ def selftest_function(opts):
     Suggested return values are be unimplemented, success, or failure.
     """
 
+    proxies = RequestsCommon(None, opts).get_proxies()
+
     try:
-        result = get_whois_registry_info("8.8.8.8")
+        result = get_whois_registry_info("8.8.8.8", proxies=proxies)
         if result:
             success = True
             reason = None

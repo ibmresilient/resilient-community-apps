@@ -22,7 +22,8 @@
 
 | Version| Comment |
 | ------- | ------ |
-| 1.0.2 | Updated examples |
+| 1.0.3 | Updated examples, proxy support added |
+| 1.0.2 | bug fixes |
 | 1.0.1 | Support for App Host |
 | 1.0.0 | Initial release |
  
@@ -42,7 +43,7 @@ This integration retrieves registry information (via legacy WHOIS or new RDAP pr
 ## Requirements
 
 * IBM Resilient >= `v35.0.5468`
-* An Integration Server running `resilient_circuits>=32.0.0`
+* An App Host environment or an Integration Server running `resilient_circuits>=32.0.0`
   * To setup an Integration Server see [the Integration Server setup documentation](https://www.ibm.com/support/knowledgecenter/SSBRUQ_37.0.0/doc/container_apps.html)
 
 ---
@@ -51,8 +52,8 @@ All the components for running Whois in a container already exist when using the
 ```
 [fn_whois_rdap]
 # uncomment to include proxy support
-#proxy_https=https://some_proxy.com
-#proxy_http=http://some_proxy.com
+#http_proxy=https://some_proxy.com
+#https_proxy=http://some_proxy.com
 ```
 
 ## Integration Server Installation
