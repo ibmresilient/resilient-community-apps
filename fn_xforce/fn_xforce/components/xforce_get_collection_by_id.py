@@ -49,7 +49,11 @@ class FunctionComponent(ResilientComponent):
 
             if xforce_collection_id is None:
                 raise ValueError("No Query provided for XForce search.")
-            if not isinstance(str(xforce_collection_id), str):
+            # ensure query is a string
+            try:
+                xforce_collection_id = str(xforce_collection_id)
+            except Exception as e:
+                log.error(e)
                 raise ValueError("Input must be a string.")
 
             # Setup proxies parameter if exists in app.config file
