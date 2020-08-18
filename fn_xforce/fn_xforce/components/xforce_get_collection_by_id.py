@@ -8,7 +8,7 @@ import json
 from resilient_circuits import ResilientComponent, function, handler, \
     StatusMessage, FunctionResult, FunctionError
 from fn_xforce.util.helper import XForceHelper
-from resilient_lib import RequestsCommon
+from resilient_lib import RequestsCommon, ResultPayload
 
 
 CONFIG_DATA_SECTION = 'fn_xforce'
@@ -79,24 +79,25 @@ class FunctionComponent(ResilientComponent):
             except Exception:
                 raise ValueError("Encountered issue when contacting XForce API")
 
-            # Prepare results object
+            # initialize ResultPayload object
+            result = ResultPayload(CONFIG_DATA_SECTION, **kwargs)
+            # set keys and values from response
             if 'contents' in case_files:
-                results = {
-                    "success": True,
-                    # We json.dump for python 2&3 compat
-                    "plaintext": json.dumps(case_files["contents"]["plainText"], default=lambda o: o.__dict__,
-                                            sort_keys=True, indent=4),
-                    "wiki": case_files["contents"]["wiki"],
-                    "created": case_files["created"],
-                    "title": case_files["title"],
-                    "tags": case_files["tags"]
-                }
-            # If no 'contents' set success to false for other functions
+                result.done(True, res.json())
+                # backwards compatibility with original results keys
+                result["plaintext"] = json.dumps(case_files["contents"]["plainText"], default=lambda o: o.__dict__,
+                                                sort_keys=True, indent=4)
+                result["wiki"] = case_files["contents"]["wiki"]
+                result["created"] = case_files["created"]
+                result["title"] = case_files["title"]
+                result["tags"] = case_files["tags"]
+
+            # If no 'contents' set success to true and notify that no results match the queried ID
             else:
-                results = {
-                    "success": False
-                }
+                content = "No case files match ID: {}".format(xforce_collection_id)
+                result.done(True, content)
+
             # Produce a FunctionResult with the results
-            yield FunctionResult(results)
+            yield FunctionResult(result)
         except Exception:
             yield FunctionError()
