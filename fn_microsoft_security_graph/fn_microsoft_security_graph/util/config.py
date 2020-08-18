@@ -11,11 +11,17 @@ def config_section_data():
        when called by `resilient-circuits config [-c|-u]`
     """
     config_data = u"""[fn_microsoft_security_graph]
-# Graph URL with version number
-microsoft_graph_url=https://graph.microsoft.com/v1.0/
-tenant_id=<Tenant directory id>
-client_id=<App client id>
-client_secret=<App client secret>
+#
+# Note that the microsoft_graph_token_url below contains a placeholder {tenant} for the tenant ID.
+# Do not place the tenant id in the place holder as the integration will do this at run time.
+# Do not place '/' at the end of the url strings.
+# In most cases the only required edits are replacing xxx with the Microsoft App credentials. 
+#
+microsoft_graph_token_url=https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token
+microsoft_graph_url=https://graph.microsoft.com/v1.0
+tenant_id=xxx
+client_id=xxx
+client_secret=xxx
 
 ## Polling options
 # How often polling should happen. Value is in seconds. To disable polling, set this to zero.

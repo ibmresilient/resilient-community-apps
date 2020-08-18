@@ -13,7 +13,7 @@ from resilient_circuits import ResilientComponent, function, handler, StatusMess
 from resilient_circuits.template_functions import environment
 from resilient import SimpleHTTPException
 from fn_microsoft_security_graph.lib.ms_graph_helper import MSGraphHelper
-from resilient_lib import validate_fields
+from resilient_lib import validate_fields, RequestsCommon
 import resilient_circuits.template_functions as template_functions
 
 
@@ -30,12 +30,15 @@ class IntegrationComponent(ResilientComponent):
         self.options = opts.get("fn_microsoft_security_graph", {})
 
         # Validate required fields in app.config are set
-        required_fields = ["microsoft_graph_url", "tenant_id", "client_id", "client_secret"]
+        required_fields = ["microsoft_graph_token_url", "microsoft_graph_url", "tenant_id", "client_id", "client_secret"]
         validate_fields(required_fields, self.options)
 
-        self.Microsoft_security_graph_helper = MSGraphHelper(self.options.get("tenant_id"),
+        self.Microsoft_security_graph_helper = MSGraphHelper(self.options.get("microsoft_graph_token_url"),
+                                                             self.options.get("microsoft_graph_url"),
+                                                             self.options.get("tenant_id"),
                                                              self.options.get("client_id"),
-                                                             self.options.get("client_secret"))
+                                                             self.options.get("client_secret"),
+                                                             RequestsCommon(self.opts, self.options).get_proxies())
         self.polling_main()
 
     @handler("reload")
@@ -276,7 +279,7 @@ def get_alerts(options, ms_graph_helper):
         createdDateTime_start = datetime.utcnow().isoformat() + 'Z'
         createdDateTime_filter = "createdDateTime%20ge%20{}".format(createdDateTime_start)
 
-    url = "{}security/alerts{}".format(options.get("microsoft_graph_url"), create_query(options.get("alert_query"),
+    url = "{}/security/alerts{}".format(options.get("microsoft_graph_url"), create_query(options.get("alert_query"),
                                                                                          createdDateTime_filter))
     #r = ms_graph_helper.microsoft_graph_request("GET", url, headers)
     r = ms_graph_helper.ms_graph_session.get(url)
@@ -312,7 +315,7 @@ def alert_search(url, ms_helper, search_query=None):
     if search_query:
         start_query = "?$"
 
-    url = "{}security/alerts/{}{}".format(url, start_query, search_query)
+    url = "{}/security/alerts/{}{}".format(url, start_query, search_query)
     #r = ms_helper.ms_graph_session("GET", url, headers)
     r = ms_helper.ms_graph_session.get(url)
 
@@ -321,7 +324,7 @@ def alert_search(url, ms_helper, search_query=None):
 
 def get_alert_details(url, ms_helper, alert_id):
 
-    request_url = "{}security/alerts/{}".format(url, alert_id)
+    request_url = "{}/security/alerts/{}".format(url, alert_id)
     r = ms_helper.ms_graph_session.get(request_url)
 
     return r
