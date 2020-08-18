@@ -70,4 +70,4 @@ edit_all_incidents_fields
 #read_stats
 #read_all_action_invocations
 #read_workspace
-#edit_data
+edit_data
