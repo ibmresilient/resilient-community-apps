@@ -8,12 +8,13 @@ setup(
     version='1.0.2',
     license='MIT',
     author='IBM Resilient',
-    author_email='support@resilientsystems.com',
+    author_email='',
+    url = 'https://ibm.com/mysupport',
     description="Resilient Circuits Components for 'fn_microsoft_security_graph'",
     long_description="Resilient Circuits Components for 'fn_microsoft_security_graph'",
     install_requires=[
-        'resilient_circuits>=30.0.0',
-        'resilient-lib>=32.0.0'
+        'resilient_circuits>=35.0.0',
+        'resilient-lib>=35.0.0'
     ],
     packages=find_packages(),
     include_package_data=True,
