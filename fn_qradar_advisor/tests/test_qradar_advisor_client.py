@@ -276,6 +276,13 @@ class TestQRadarAdvisorClient(object):
         quick_search_result = {"suspicious_observables":[],
                                "other_observables":[]}
 
+        err_422_result = {
+            "search": {
+                "search_value": search_value,
+                "status_code": 422
+            }
+        }
+
         mocked_session.post.return_value = _generate_response(quick_search_result, 200)
 
         ret = client.quick_search(search_value)
@@ -288,12 +295,10 @@ class TestQRadarAdvisorClient(object):
         #
         # Verify status_code other than 200 shall result in exception
         #
-        mocked_session.post.return_value = _generate_response(quick_search_result, 422)
-        try:
-            client.quick_search(search_value)
-            assert False
-        except QuickSearchError:
-            assert True
+        mocked_session.post.return_value = _generate_response(err_422_result, 422)
+
+        ret = client.quick_search(search_value)
+        assert ret == err_422_result
 
         #
         # Verify exception of post call
