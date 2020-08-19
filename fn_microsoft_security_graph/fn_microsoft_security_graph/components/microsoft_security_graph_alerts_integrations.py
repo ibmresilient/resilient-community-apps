@@ -281,7 +281,7 @@ def get_alerts(options, ms_graph_helper):
 
     url = "{}/security/alerts{}".format(options.get("microsoft_graph_url"), create_query(options.get("alert_query"),
                                                                                          createdDateTime_filter))
-    #r = ms_graph_helper.microsoft_graph_request("GET", url, headers)
+
     r = ms_graph_helper.ms_graph_session.get(url)
     if not r:
         raise FunctionError("Request failed, please check the log.")
@@ -316,7 +316,7 @@ def alert_search(url, ms_helper, search_query=None):
         start_query = "?$"
 
     url = "{}/security/alerts/{}{}".format(url, start_query, search_query)
-    #r = ms_helper.ms_graph_session("GET", url, headers)
+
     r = ms_helper.ms_graph_session.get(url)
 
     return r
@@ -334,17 +334,17 @@ def update_alert(url, ms_helper, alert_id, alert_data):
     r = None
     headers = {
         "Content-type": "application/json",
-        "Authorization": "Bearer " + ms_helper.get_access_token(),
         "Prefer": "return=representation"
     }
+
     try:
         data = ast.literal_eval(alert_data)
     except ValueError as e:
         raise FunctionError("microsoft_security_graph_alert_data needs to be in dict format; " + e.message)
 
     request_url = "{}/security/alerts/{}".format(url, alert_id)
-    #r = ms_helper.microsoft_graph_request("PATCH", request_url, headers, data)
-    r = ms_helper.ms_graph_session.patch(request_url, headers, data)
+
+    r = ms_helper.ms_graph_session.patch(request_url, headers=headers, json=data)
 
     return r
 
