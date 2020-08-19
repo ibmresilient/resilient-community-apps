@@ -6,7 +6,7 @@ Usage: resilient-circuits selftest -l fn_send_to_staxx
 """
 
 import logging
-from fn_send_to_staxx.lib.staxx_lib import StaxxClient
+from fn_anomali_staxx.lib.staxx_lib import StaxxClient
 from resilient_lib import RequestsCommon
 
 log = logging.getLogger(__name__)
