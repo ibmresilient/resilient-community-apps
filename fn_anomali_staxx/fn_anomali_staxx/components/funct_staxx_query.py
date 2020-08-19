@@ -24,12 +24,13 @@ class FunctionComponent(ResilientComponent):
         self.staxx_user = self.options.get('staxx_user')
         self.staxx_password = self.options.get('staxx_password')
 
-        validate_fields(['staxx_ip', 'staxx_port', 'staxx_user', 'staxx_password'], self.options)
-
     @function("staxx_query")
     def _query_staxx_indicator(self, event, *args, **kwargs):
         """Function: """
         try:
+            validate_fields(['staxx_ip', 'staxx_port', 'staxx_user', 'staxx_password'], self.options)
+            validate_fields(["staxx_indicator"], **kwargs)
+
             rc = ResultPayload(STAXX_SECTION, **kwargs)
             # Get the function parameters:
             staxx_indicator = kwargs.get("staxx_indicator")  # text
@@ -49,14 +50,11 @@ class FunctionComponent(ResilientComponent):
 
             try:
                 staxx_response = staxx.query(query=query, size=staxx_max_results)
-
-                status = True
-                reason = None
             except Exception as err:
                 err = "Error Staxx query: {}".format(str(err))
                 raise FunctionError(err)
 
-            results = rc.done(status, staxx_response, reason=reason)
+            results = rc.done(True, staxx_response, reason=None)
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

@@ -24,8 +24,8 @@ setup(
     url='https://ibm.biz/resilientcommunity',
     author='Resilient Labs',
     author_email='resil.labs@gmail.com',
-    description="Resilient Circuits Components for 'fn_anomali_staxx'",
-    long_description="Resilient Circuits Components for 'fn_anomali_staxx'",
+    description="Create IOCs and query for existing IOCs in Anomali Staxx",
+    long_description="Query and set IOCs specifying severity, confidence level, threat type and TLP information",
     install_requires=[
         'resilient-circuits>=30.0.0',
         'resilient-lib>=34.0.195'

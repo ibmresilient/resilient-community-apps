@@ -24,12 +24,19 @@ class FunctionComponent(ResilientComponent):
         self.staxx_user = self.options.get('staxx_user')
         self.staxx_password = self.options.get('staxx_password')
 
-        validate_fields(['staxx_ip', 'staxx_port', 'staxx_user', 'staxx_password'], self.options)
-
     @function("staxx_import")
     def _send_to_staxx_function(self, event, *args, **kwargs):
         """Function: """
         try:
+            validate_fields(['staxx_ip', 'staxx_port', 'staxx_user', 'staxx_password'], self.options)
+            validate_fields(["staxx_confidence_lvl",
+                             "staxx_tlp",
+                             "staxx_auto_approve",
+                             "staxx_severity",
+                             "staxx_indicator_type",
+                             "staxx_indicator"],
+                            **kwargs)
+
             rc = ResultPayload(STAXX_SECTION, **kwargs)
             # Get the function parameters:
             staxx_confidence = kwargs.get("staxx_confidence_lvl")  # num: 0-100
@@ -42,20 +49,17 @@ class FunctionComponent(ResilientComponent):
             log = logging.getLogger(__name__)
 
             # test the value of confidence as values 0-100
-            try:
-                if staxx_confidence < 0 or staxx_confidence > 100:
-                    raise ValueError("Specify the confidence value between 0-100")
-            except ValueError:
+            if staxx_confidence < 0 or staxx_confidence > 100:
                 raise ValueError("Specify the confidence value between 0-100")
 
             tlp = "TLP:{}".format(staxx_tlp)
 
             yield StatusMessage(u"Creating indicator {} with the following {},{},{},{},{}".format(staxx_indicator,
-                                                                                                 staxx_confidence,
-                                                                                                 staxx_severity,
-                                                                                                 staxx_auto_approve,
-                                                                                                 staxx_tlp,
-                                                                                                 staxx_indicator_type)
+                                                                                                  staxx_confidence,
+                                                                                                  staxx_severity,
+                                                                                                  staxx_auto_approve,
+                                                                                                  staxx_tlp,
+                                                                                                  staxx_indicator_type)
                                 )
 
             staxx = StaxxClient("https://{}:{}".format(self.staxx_ip,self.staxx_port),
@@ -73,7 +77,7 @@ class FunctionComponent(ResilientComponent):
                                                           tags=RESILIENT_TAG,
                                                           intel_str=staxx_indicator
                                                           )
-                yield StatusMessage("Posted Staxx Object Successfully: {}".format(staxx_response))
+                yield StatusMessage("Posted Staxx Object Successfully")
                 status = True
                 reason = None
             except Exception as err:

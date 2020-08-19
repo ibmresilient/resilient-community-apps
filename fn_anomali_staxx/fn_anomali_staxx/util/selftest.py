@@ -2,7 +2,7 @@
 # (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 """
 Function implementation test.
-Usage: resilient-circuits selftest -l fn_send_to_staxx
+Usage: resilient-circuits selftest -l fn-anomali-staxx
 """
 
 import logging

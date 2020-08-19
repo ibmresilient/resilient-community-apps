@@ -2,8 +2,6 @@
 # (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 """Generate a default configuration-file section for fn_send_to_staxx"""
 
-from __future__ import print_function
-
 
 def config_section_data():
     """Produce the default configuration section for app.config,

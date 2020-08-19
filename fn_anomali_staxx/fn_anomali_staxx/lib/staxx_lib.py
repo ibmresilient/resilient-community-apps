@@ -4,6 +4,9 @@
 
 import json
 import logging
+import traceback
+
+API_VERSION = "/api/v1"
 
 class InvalidCredentials(Exception):
     """Raise when user has entered wrong password or username"""
@@ -31,7 +34,7 @@ class StaxxClient:
     def __make_post__(self, url, **kwargs):
         headers = JSON_HEADERS.copy()
         headers.update(kwargs.get("headers",{}))
-        url = self.host + url
+        url = self.make_url(url)
         if "params" in kwargs:
             return self.request_common.execute_call_v2("post",
                                                        url,
@@ -39,15 +42,14 @@ class StaxxClient:
                                                        headers=headers
                                                        )
         try:
-            resp = self.request_common.execute_call_v2("post",
+            return self.request_common.execute_call_v2("post",
                                                        url,
-                                                       data=kwargs.get("payload"),
+                                                       data=kwargs.get("payload", {}),
                                                        headers=headers,
                                                        verify=False
                                                        )
-            return resp
         except Exception as e:
-            print(e)
+            traceback.format_exception(e)
             raise StaxxUnreachable("Staxx appliance is down or is taking too long to respond")
 
 
@@ -61,11 +63,11 @@ class StaxxClient:
 
     def __public_login__(self, username, password):
         payload = {"username": username, "password": password}
-        response_json = self.__make_post__(payload=json.dumps(payload),url="/api/v1/login").json()
+        response_json = self.__make_post__(payload=json.dumps(payload),url="/login").json()
         try:
-            return response_json['token_id'].encode("ascii")
+            return response_json['token_id']
         except Exception as e:
-            raise InvalidCredentials("Your Credentials are incorrect")
+            raise InvalidCredentials("The credentials are incorrect")
 
     def import_staxx_intel(self, **kwargs):
         """
@@ -78,9 +80,9 @@ class StaxxClient:
                     intel_str - indicators
         :return:
         """
-        url = self.host + "/api/v1/import_intel"
+        url = self.make_url("/import_intel")
         data = {k:kwargs[k] for k in kwargs if k!="file"}
-        data["token"] = self.token.decode("utf-8")
+        data["token"] = self.token
         payload={"import_params":json.dumps(data)}
 
         self.log.debug(payload)
@@ -94,11 +96,11 @@ class StaxxClient:
         return resp_json
 
     def query(self, query=None, size=10):
-        url = self.host + "/api/v1/intelligence"
+        url = self.make_url("/intelligence")
 
         # build the entire query string
         payload = {
-            "token": self.token.decode("utf-8"),
+            "token": self.token,
             "size": size,
             "type": "json",
             "query": query
@@ -115,3 +117,6 @@ class StaxxClient:
 
         resp_json = resp.json()
         return resp_json
+
+    def make_url(self, endpoint):
+        return "{}{}{}".format(self.host, API_VERSION, endpoint)
