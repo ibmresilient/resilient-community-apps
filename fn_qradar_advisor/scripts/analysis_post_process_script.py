@@ -1,213 +1,59 @@
 #
-# Return data in this example
-#   results.search_results.suspicious_observables:
-#     Suspicious observables related to this indicator. Used in the post-process script to create artifacts,
-#     if the type of the observable can be mapped to an default artifact type.
+# Result retured by the QRadar Advisor Offense Analysis function:
+#   * results.observables: observables and their details, used here to be output to Data table.
+#   * results.note: html representation of STIX data, used here to generate a Note.
+#   * results.insights: used here to create a Task.
+#   * results.stix: raw stix data, preserved for any customized parsing.
 #
-return_search = results.search
+#   Note: results.insights can have a status code e.g. 404
+#
+# We publish a data table according to the stix
 
-if "status_code" in return_search:
-    status_set = True
+# Check that we didn't get a status of 404 (no observables) for insights.
+if "status_code" in results["insights"] and results["insights"]["status_code"] == 404:
+    process_insights = False
 else:
-    status_set = False
+    process_insights = True
 
-api_version = 2
-try:
-    if return_search.search_results["suspicious_observables"] is None:
-        api_version = 1
-except:
-    api_version = 1
-#
-# Sample return json dict for v2.0
-#
-'''{
-      "search": {
-          "search_value_type": "DomainName", 
-          "other_count": 1, 
-          "search_results": {
-          "suspicious_observables": [
-                  {
-                      "reference_count": 1, 
-                      "timestamp": 1529421998, 
-                      "type": "DomainName", 
-                      "label": "mydomain.com"
-                  }, 
-                  {
-                      "reference_count": 1, 
-                      "timestamp": 1462407300, 
-                      "type": "EmailContent", 
-                      "label": "ccf2d5f4ab37650ccbb582f351aa6fdd:"
-                  }, 
-                  {
-                      "reference_count": 1, 
-                      "timestamp": 1462407300, 
-                      "type": "File", 
-                      "label": "ccf2d5f4ab37650ccbb582f351aa6fdd"
-                  }, 
-                  {
-                      "reference_count": 1, 
-                      "timestamp": 1463566500, 
-                      "type": "IpAddress", 
-                      "label": "190.104.198.116"
-                  },
-                  {
-                      "reference_count": 1, 
-                      "timestamp": 1463072400, 
-                      "type": "Hash", 
-                      "label": "51417677b5e7b17542d383f5b25e2b43"
-                  }
-          ], 
-          "other_observables": [
-              {
-                  "reference_count": 1, 
-                  "timestamp": 1529421998, 
-                  "type": "DomainName", 
-                  "label": "mydomain.com"
-              }
-          ]
-      }, 
-      "suspicious_count": 5, 
-      "search_value": "mydomain.com", 
-      "reference_count": 1, 
-      "is_toxic": false}, 
-      "whois": {
-          "updated_date": "2015-09-15T23:25:25.000Z", 
-          "contact_country": "Canada", 
-          "registrar_name": "Domain.com, LLC", 
-          "contact_email": "noreply@data-protected.net", 
-          "created_date": "2000-06-22T04:00:00.000Z", 
-          "contact_name": "Data Protected Data Protected", 
-          "contact_type": "registrant", "contact_org": "Data Protected"
-      }
-      }
-'''
-#
-# We ONLY create artifacts for those observables that can be mapped to
-# default Resilient artifacts. If customer has custom artifacts, and wants
-# to map them as well, please modify the following mapping dict.
-#
-mapping = {
-    "DomainName": "DNS Name",
-    "EmailContent": "Email Body",
-    "File": "Malware MD5 Hash",  # File type is a hash value. So we map File to Malware MD5 Hash
-    "IpAddress": "IP Address",
-    "Hash": {
-        32: "Malware MD5 Hash",
-        40: "Malware SHA-1 Hash",
-        64: "Malware SHA-256 Hash"
-    }
-}
+for observable in results.observables:
+  qradar_obs = incident.addRow("qradar_advisor_observable")
+  qradar_obs.qradar_advisor_toxicity = observable.toxicity
+  qradar_obs.qradar_advisor_relevance = observable.relevance
+  qradar_obs.qradar_advisor_type = observable.type
+  qradar_obs.qradar_advisor_description = observable.description
 
-#
-# Note that in this example workflow, we only extract the suspicious_observables
-#
-if status_set:
-    # Add an error status note.
-    summary_string = ''
-    status_string = "Qradar Advisor returned status code '{}'.".format(return_search["status_code"])
-    if return_search["status_code"] == 422:
-        summary_string = "This artifact has an unsupported value."
+# Pass insights data (with MITRE ATTACK tactics information) to following function
+# using workflow.properties.qraw_offense_insights. Refer to the Output tab please
 
-    note_string = "<h3>Watson Search Result Summary</h3><hr>"
-    note_string += "<br><p><span style=\"font-weight:bold\">" + status_string + "</span></p>"
-    note_string += "<p><span style=\"font-weight:bold\">" + summary_string + "</span></p><br>"
-    note_string +=  "<p>Search Value: " + return_search.search_value + "</p>"
-    note_string +=  "<p>Search Type:  <span style=\"color:white; border-bottom-left-radius: 2.96667px;background-color:#808080\">&nbsp " + artifact.type + "&nbsp</span></p>"
-    html_note = helper.createRichText(note_string)
-    incident.addNote(html_note)
+# Our STIX tree or error status.
+html = helper.createRichText(results.note)
+incident.addNote(html)
 
-elif api_version == 2:
-    # v2.0
-    suspicious_observables = return_search.search_results.suspicious_observables
+if process_insights:
+    # If we didn't get a 404 (no observables) status process for insights.
+    # Task
+    task_title = "Review QRadar Advisor Analysis for Offense " + str(incident.properties.qradar_id)
+    task_summary = results.insights.insights + "\n\n" + results.insights.stage3_insights
+    incident.addTask(task_title, "Initial", task_summary)
 
-    new_artifact_count = 0
-    summary_string = "This artifact is not a suspicious observable"
+    #
+    # MITRE tactic information
+    #
+    tactics = results.insights["tactics"]
 
-    for observable in suspicious_observables:
+    mitre_tactic_names = []
+    if tactics is not None:
+      for tactic in tactics:
         #
-        # We support only those defined in mapping dict above
+        # Note, even though QRAW calls it tactic_id, it is more a tactic name
         #
-        if observable.type in mapping:
-            #
-            # Note sometimes QRadar Advisor return the artifact itself as a suspicious observable. We don't want to
-            # duplicate here.
-            #
-            if mapping[observable.type] != artifact.type or observable.label != artifact.value:
-                new_artifact_count = new_artifact_count + 1
-                if observable.type == "Hash":
-                    if len(observable.label) in mapping[observable.type] and  observable.label.isalnum():
-                        # Hash is likely MD5, SHA1 or SHA256.
-                        incident.addArtifact(mapping[observable.type][len(observable.label)], observable.label,
-                                             "Watson Search result")
-                else:
-                    incident.addArtifact(mapping[observable.type], observable.label, "Watson Search result")
-            else:
-                #
-                # The artifact itself is a suspicious observable. We don't create new (duplicated) artifact. But we show this info
-                #
-                summary_string = "This artifact is a suspicious observable"
+        mitre_tactic_names.append(tactic["tactic_id"])
+    #
+    # QRadar Advisor might return more than one tactics for a given offense. Include them inputs
+    # a comma separated string
+    #
+    incident.properties.mitre_tactic_name = ", ".join(mitre_tactic_names)
 
-    # Add a note about number of suspicious_observables
-    note_string = "<h3>Watson Search Result Summary</h3><hr>"
-    note_string = note_string + "<br><p><span style=\"font-weight:bold\">" + summary_string + "</span></p><br>"
-    note_string = note_string + "<p>Search Value: " + return_search.search_value + "</p>"
-    note_string = note_string + "<p>Search Type:  <span style=\"color:white; border-bottom-left-radius: 2.96667px;background-color:#808080\">&nbsp " + return_search.search_value_type + "&nbsp</span></p>"
-    note_string = note_string + "<p style=\"color:#FF00FF;\">Suspicious observables: " + str(
-        return_search.suspicious_count) + "</p>"
-    note_string = note_string + "<p style=\"color:red;\">New artifacts mapped from suspicious observables: " + str(
-        new_artifact_count) + "</p>"
-    note_string = note_string + "<p>Other observables: " + str(return_search.other_count) + "</p>"
-    html_note = helper.createRichText(note_string)
-    incident.addNote(html_note)
-
-else:
-    # v1.0?
-    new_artifact_count = 0
-    toxic_count = 0
-    non_toxic_count = 0
-    summary_string = "This artifact is not a toxic observable"
-    for result in return_search.search_results:
-        value_type = result["type"]
-        if value_type in mapping:
-            #
-            # We know what artifact type corresponds to this value type
-            #
-            for val in result["values"]:
-                #
-                # We care about the toxic ones only
-                #
-                if val["is_toxic"]:
-                    toxic_count = toxic_count + 1
-                    #
-                    # Note sometimes QRadar Advisor return the artifact itself as a suspicious observable. We don't want to
-                    # duplicate here.
-                    #
-                    if mapping[value_type] != artifact.type or val.label != artifact.value:
-                        new_artifact_count = new_artifact_count + 1
-                        if value_type == "Hash":
-                            if len(val.label) in mapping[value_type] and  val.label.isalnum():
-                                # Hash is likely MD5, SHA1 or SHA256.
-                                incident.addArtifact(mapping[value_type][len(val.label)], val.label, "Watson Search result")
-                        else:
-                            incident.addArtifact(mapping[value_type], val.label, "Watson Search result")
-                    else:
-                        #
-                        # The artifact itself is a suspicious observable. We don't create new (duplicated) artifact. But we show this info
-                        #
-                        summary_string = "This artifact is a toxic observable"
-                else:
-                    non_toxic_count = non_toxic_count + 1
-
-    # Add a note about number of suspicious_observables
-    note_string = "<h3>Watson Search Result Summary</h3><hr>"
-    note_string = note_string + "<br><p><span style=\"font-weight:bold\">" + summary_string + "</span></p><br>"
-    note_string = note_string + "<p>Search Value: " + return_search.search_value + "</p>"
-    note_string = note_string + "<p>Search Type:  <span style=\"color:white; border-bottom-left-radius: 2.96667px;background-color:#808080\">&nbsp " + return_search.search_value_type + "&nbsp</span></p>"
-    note_string = note_string + "<p style=\"color:#FF00FF;\">Toxic observables: " + str(toxic_count) + "</p>"
-    note_string = note_string + "<p style=\"color:red;\">New artifacts mapped from toxic observables: " + str(
-        new_artifact_count) + "</p>"
-    note_string = note_string + "<p>Non toxic observables: " + str(non_toxic_count) + "</p>"
-    html_note = helper.createRichText(note_string)
-    incident.addNote(html_note)
-
-
+# Note that results.stix is the raw stix return from QRadar Advisor in stix 2 (json) format
+# Users can add their customize codes to handle the stix data here
+#
