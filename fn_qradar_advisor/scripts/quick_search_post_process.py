@@ -4,19 +4,14 @@
 #     Suspicious observables related to this indicator. Used in the post-process script to create artifacts,
 #     if the type of the observable can be mapped to an default artifact type.
 #
+#  Note: results.return_search can have status code e.g. 422
+#
 return_search = results.search
 
-if "status_code" in return_search:
-    status_set = True
-else:
-    status_set = False
+status_set = True if "status_code" in return_search else False
+if not status_set:
+    api_version = 2 if "suspicious_observables" in return_search.search_results else 1
 
-api_version = 2
-try:
-    if return_search.search_results["suspicious_observables"] is None:
-        api_version = 1
-except:
-    api_version = 1
 #
 # Sample return json dict for v2.0
 #
@@ -133,7 +128,7 @@ elif api_version == 2:
             # duplicate here.
             #
             if mapping[observable.type] != artifact.type or observable.label != artifact.value:
-                new_artifact_count = new_artifact_count + 1
+                new_artifact_count += 1
                 if observable.type == "Hash":
                     if len(observable.label) in mapping[observable.type] and  observable.label.isalnum():
                         # Hash is likely MD5, SHA1 or SHA256.
@@ -177,13 +172,13 @@ else:
                 # We care about the toxic ones only
                 #
                 if val["is_toxic"]:
-                    toxic_count = toxic_count + 1
+                    toxic_count += 1
                     #
                     # Note sometimes QRadar Advisor return the artifact itself as a suspicious observable. We don't want to
                     # duplicate here.
                     #
                     if mapping[value_type] != artifact.type or val.label != artifact.value:
-                        new_artifact_count = new_artifact_count + 1
+                        new_artifact_count += 1
                         if value_type == "Hash":
                             if len(val.label) in mapping[value_type] and  val.label.isalnum():
                                 # Hash is likely MD5, SHA1 or SHA256.
@@ -196,7 +191,7 @@ else:
                         #
                         summary_string = "This artifact is a toxic observable"
                 else:
-                    non_toxic_count = non_toxic_count + 1
+                    non_toxic_count += 1
 
     # Add a note about number of suspicious_observables
     note_string = "<h3>Watson Search Result Summary</h3><hr>"
