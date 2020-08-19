@@ -795,6 +795,17 @@ class TestQRadarOffenseAnalysis(object):
             "type": "bundle"
         }
 
+        err_json = {
+            'status': '',
+            'error': 'ERROR'
+        }
+
+        err_404_json = {
+            'status': 'NO_OBSERVABLES',
+            'progress': 'LOCAL_MINING_COMPLETE',
+            'error': 'NO_ERROR'
+        }
+
         mocked_session.get.return_value = _generate_response(stix_json, 200)
 
         mocked_session.get.side_effect = None
@@ -815,7 +826,7 @@ class TestQRadarOffenseAnalysis(object):
                                               verify=True)
 
         # status_doce = 404 handling
-        mocked_session.get.return_value = _generate_response(stix_json, 404)
+        mocked_session.get.return_value = _generate_response(err_json, 404)
 
         try:
             offense_analysis.get_search_result(offense_id)
@@ -823,8 +834,14 @@ class TestQRadarOffenseAnalysis(object):
         except SearchFailure as e:
             assert True
 
+        mocked_session.get.return_value = _generate_response(err_404_json, 404)
+
+
+        ret = offense_analysis.get_search_result(offense_id)
+        assert ret == { "status_code": 404}
+
         # status_doce = 403 handling
-        mocked_session.get.return_value = _generate_response(stix_json, 403)
+        mocked_session.get.return_value = _generate_response(err_json, 403)
 
         try:
             offense_analysis.get_search_result(offense_id)
@@ -833,7 +850,7 @@ class TestQRadarOffenseAnalysis(object):
             assert True
 
         # other status_doce  handling
-        mocked_session.get.return_value = _generate_response(stix_json, 400)
+        mocked_session.get.return_value = _generate_response(err_json, 400)
 
         try:
             offense_analysis.get_search_result(offense_id)
