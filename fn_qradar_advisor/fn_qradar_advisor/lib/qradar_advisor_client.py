@@ -43,6 +43,7 @@ class XFECredentialError(Exception):
 
 class QRadarAdvisorClient(object):
     INSIGHTS_NO_OBSERVABLES = "NO_OBSERVABLES"
+    INSIGHTS_NO_ERROR = "NO_ERROR"
 
     def __init__(self, qradar_host, advisor_app_id, qradar_token, cafile, log):
         self.http_info = HttpInfo(qradar_host, advisor_app_id, qradar_token, cafile, log)
@@ -191,8 +192,8 @@ class QRadarAdvisorClient(object):
                                    verify=self.http_info.get_cafile())
             if response.status_code != 200:
                 res = response.json()
-                if res["error"] == "NO_ERROR" and res["status"] == self.INSIGHTS_NO_OBSERVABLES:
-                    # Status 404 can be thrown if No observables in found in insights.
+                if res["error"] == self.INSIGHTS_NO_ERROR and res["status"] == self.INSIGHTS_NO_OBSERVABLES:
+                    # Status 404 can be thrown if No observables is found in insights.
                     return {
                         "status_code": response.status_code
                     }
@@ -401,6 +402,7 @@ class QRadarOffenseAnalysis(SearchWaitCommand):
     ANALYSIS_DONE_STATUS = "DONE"
     ANALYSIS_DONE_STAGE3 = "DONE_STAGE3"
     ANALYSIS_NO_OBSERVABLES = "NO_OBSERVABLES"
+    ANALYSIS_NO_ERROR = "NO_ERROR"
     ANALYSIS_ERROR = "ERROR"
     ANALYSIS_ERROR_AUTH = "ERROR_AUTH"
 
@@ -537,8 +539,8 @@ class QRadarOffenseAnalysis(SearchWaitCommand):
             raise SearchFailure(search_id, str(response))
         elif response.status_code == 404:
             res = response.json()
-            if res["error"] == "NO_ERROR" and res["status"] == self.ANALYSIS_NO_OBSERVABLES:
-                # Status 404 can be thrown if No observables in found in analysis.
+            if res["error"] == self.ANALYSIS_NO_ERROR and res["status"] == self.ANALYSIS_NO_OBSERVABLES:
+                # Status 404 can be thrown if No observables is found in analysis.
                 return {
                     "status_code": response.status_code
                 }
