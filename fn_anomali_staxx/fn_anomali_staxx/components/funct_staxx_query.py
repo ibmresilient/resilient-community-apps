@@ -37,7 +37,7 @@ class FunctionComponent(ResilientComponent):
 
             log = logging.getLogger(__name__)
 
-            yield StatusMessage("Querying for indicator {}".format(staxx_indicator))
+            yield StatusMessage(u"Querying for indicator {}".format(staxx_indicator))
 
             staxx = StaxxClient("https://{}:{}".format(self.staxx_ip,self.staxx_port),
                                 self.staxx_user,
@@ -45,7 +45,7 @@ class FunctionComponent(ResilientComponent):
                                 RequestsCommon(self.opts, self.options)
                                 )
 
-            query = "value = '{}'".format(staxx_indicator)
+            query = u"value = '{}'".format(staxx_indicator)
 
             try:
                 staxx_response = staxx.query(query=query, size=staxx_max_results)

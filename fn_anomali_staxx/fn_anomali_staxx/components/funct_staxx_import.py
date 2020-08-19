@@ -50,7 +50,7 @@ class FunctionComponent(ResilientComponent):
 
             tlp = "TLP:{}".format(staxx_tlp)
 
-            yield StatusMessage("Creating indicator {} with the following {},{},{},{},{}".format(staxx_indicator,
+            yield StatusMessage(u"Creating indicator {} with the following {},{},{},{},{}".format(staxx_indicator,
                                                                                                  staxx_confidence,
                                                                                                  staxx_severity,
                                                                                                  staxx_auto_approve,
