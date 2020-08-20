@@ -78,7 +78,7 @@ class FunctionComponent(ResilientComponent):
                 # If no observables found in analysis add an error status as html.
                 #
                 summary_string = 'The Offense ID analysis returned an error.'
-                status_string = "Qradar Advisor returned status code '{}'.".format(stix_json["status_code"])
+                status_string = "QRadar Advisor returned status code '{}'.".format(stix_json["status_code"])
                 if stix_json["status_code"] == 404:
                     summary_string = "This Offense ID has no observables."
 
