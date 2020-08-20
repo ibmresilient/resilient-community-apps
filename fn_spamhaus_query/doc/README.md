@@ -32,17 +32,17 @@
 ---
 
 ## Function - Spamhaus Query Submit Artifact
-Function to check IP Address & Domain Names against Spamhaus Database to see whether IP Address or Domain Names appears in Spamhaus block list records or not.
+Function to check IP Addresses & Domain Names against Spamhaus Dataset to see whether it appears in the Dataset or not
 
- ![screenshot: fn-spamhaus-query-submit-artifact ](./screenshots/fn-spamhaus-query-submit-artifact.png)
+ ![screenshot: fn-spamhaus-query-submit-artifact ](./screenshots/main.png)
 
 <details><summary>Inputs:</summary>
 <p>
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `spamhaus_query_string` | `text` | Yes | `IP Address/Domain Name` | IP Adress or Domain Name to be checked against Spamhaus database. |
-| `spamhaus_search_resource` | `text` | Yes | `SBL,XBL,PBL,SBL-XBL,ZEN,MSR,AUTHBL,ZRD (domains only),DBL (domains only).` | resource-name is a required enumerated field that represents which blocklist should be queried. |
+| `spamhaus_query_string` | `text` | Yes | `IP Address/Domain Name` | An IP Address or a Domain Name |
+| `spamhaus_search_resource` | `text` | Yes | `SBL,XBL,PBL,SBL-XBL,ZEN,MSR,AUTHBL,ZRD,DBL` | The name of the Dataset to seach (e.g. SBL) |
 
 </p>
 </details>
@@ -52,9 +52,32 @@ Function to check IP Address & Domain Names against Spamhaus Database to see whe
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+    'inputs': {
+        'spamhaus_search_resource': 'SBL',
+        'spamhaus_query_string': '127.0.0.2'
+    },
+    'metrics': {
+        'package': 'fn-spamhaus-query',
+        'timestamp': '2020-08-20 15:27:44',
+        'package_version': '1.0.1',
+        'host': 'example',
+        'version': '1.0',
+        'execution_time_ms': 412
+    },
+    'success': True,
+    'content': {
+        'status': 200,
+        'resp': [1002],
+        'is_in_blocklist': True,
+        1002: {
+            'URL': 'https://www.spamhaus.org/sbl/',
+            'explanation': 'IP addresses are listed on the SBL because they appear to Spamhaus to be under the control of, used by, or made available for use by spammers and abusers in unsolicited bulk email or other types of Internet-based abuse that threatens networks or users.',
+            'dataset': 'SBL'
+        }
+    },
+    'raw': '{"status": 200, "resp": [1002], "is_in_blocklist": true, "1002": {"URL": "https://www.spamhaus.org/sbl/", "explanation": "IP addresses are listed on the SBL because they appear to Spamhaus to be under the control of, used by, or made available for use by spammers and abusers in unsolicited bulk email or other types of Internet-based abuse that threatens networks or users.", "dataset": "SBL"}}',
+    'reason': None,
+    'version': '1.0'
 }
 ```
 
