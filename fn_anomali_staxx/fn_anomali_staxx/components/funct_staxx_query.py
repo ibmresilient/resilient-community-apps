@@ -29,7 +29,7 @@ class FunctionComponent(ResilientComponent):
         """Function: """
         try:
             validate_fields(['staxx_ip', 'staxx_port', 'staxx_user', 'staxx_password'], self.options)
-            validate_fields(["staxx_indicator"], **kwargs)
+            validate_fields(["staxx_indicator"], kwargs)
 
             rc = ResultPayload(STAXX_SECTION, **kwargs)
             # Get the function parameters:
