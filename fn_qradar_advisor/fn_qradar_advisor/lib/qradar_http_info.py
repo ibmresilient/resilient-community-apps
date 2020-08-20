@@ -5,7 +5,8 @@ import requests
 import base64
 
 QRADAR_PLUGIN_API_URL = "{host}/console/plugins/{app_id}/app_proxy/api"
-QRADAR_OFFENSE_INSIGHTS_URL="/investigations/offense/{offense_id}/insights"
+QRADAR_OFFENSE_INSIGHTS_URL = "/investigations/offense/{offense_id}/insights"
+QRADAR_INVESTIGATIONS = "/investigations"
 QRADAR_QUICK_SEARCH_URL = "/investigations/search/quick"
 QRADAR_FULL_SEARCH_URL = "/investigations/search/full"
 QRADAR_FULL_SEARCH_RESULT_URL = "/investigations/search/full/{search_id}/stix/{stage}"
@@ -59,6 +60,13 @@ class HttpInfo(object):
         :return:
         """
         return self.api_base_url + QRADAR_ABOUT_URL
+
+    def get_investigations_url(self):
+        """
+        Get the url to the api/investigations endpoint
+        :return:
+        """
+        return self.api_base_url + QRADAR_INVESTIGATIONS
 
     def get_quick_search_url(self):
         """

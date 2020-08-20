@@ -74,6 +74,25 @@ class QRadarAdvisorClient(object):
         """
         self.full_search_period = period
 
+    def test_connectivity(self):
+        """Connectivity Test which is used by resilient_circuits selftest.
+
+        Calls http 'get' request the "investigations" endpoint.
+
+        :return: Response
+        """
+        if not self.http_info.xsrf_token:
+            self.get_csrf_token()
+
+        url = self.http_info.get_investigations_url()
+
+        params = {"page": 0, "count": 5}
+
+        session = self.http_info.get_session()
+        r = response = session.get(url=url, params=params,
+                                    verify=self.http_info.get_cafile())
+        return r
+
     def get_csrf_token(self):
         """
         The call to the "about" endpoint serves as the way to fetch a CSRF token
