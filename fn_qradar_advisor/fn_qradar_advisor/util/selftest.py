@@ -26,10 +26,10 @@ def selftest_function(opts):
 
     try:
         qraw_client = QRadarAdvisorClient(qradar_host=options["qradar_host"],
-                                     qradar_token=options["qradar_advisor_token"],
-                                     advisor_app_id=options["qradar_advisor_app_id"],
-                                     cafile=qradar_verify_cert,
-                                     log=log)
+                                          qradar_token=options["qradar_advisor_token"],
+                                          advisor_app_id=options["qradar_advisor_app_id"],
+                                          cafile=qradar_verify_cert, log=log,
+                                          opts=opts, function_opts=options)
         r = qraw_client.test_connectivity()
         if r.status_code == 200:
             return {"state": "success", "status_code": r.status_code}

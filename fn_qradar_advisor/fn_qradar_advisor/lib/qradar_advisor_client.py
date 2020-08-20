@@ -43,8 +43,8 @@ class XFECredentialError(Exception):
 
 class QRadarAdvisorClient(object):
 
-    def __init__(self, qradar_host, advisor_app_id, qradar_token, cafile, log):
-        self.http_info = HttpInfo(qradar_host, advisor_app_id, qradar_token, cafile, log)
+    def __init__(self, qradar_host, advisor_app_id, qradar_token, cafile, log, opts=None, function_opts=None):
+        self.http_info = HttpInfo(qradar_host, advisor_app_id, qradar_token, cafile, log, opts, function_opts)
         self.full_search_stage = "stage3"
         self.full_search_timeout = 1200
         self.full_search_period = 5

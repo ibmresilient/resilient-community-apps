@@ -16,11 +16,13 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
+        self.opts = opts
         self.options = opts.get("fn_qradar_advisor", {})
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
+        self.opts = opts
         self.options = opts.get("fn_qradar_advisor", {})
 
     @function("qradar_advisor_quick_search")
@@ -46,8 +48,8 @@ class FunctionComponent(ResilientComponent):
             client = QRadarAdvisorClient(qradar_host=self.options["qradar_host"],
                                          qradar_token=self.options["qradar_advisor_token"],
                                          advisor_app_id=self.options["qradar_advisor_app_id"],
-                                         cafile=qradar_verify_cert,
-                                         log=log)
+                                         cafile=qradar_verify_cert, log=log,
+                                         opts=self.opts, function_opts=self.options)
 
             ret_json = client.quick_search(qradar_advisor_search_value)
 
