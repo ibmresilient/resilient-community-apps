@@ -98,8 +98,8 @@ mapping = {
 #
 if status_set:
     # Add an error status note.
-    summary_string = ''
-    status_string = "Qradar Advisor returned status code '{}'.".format(return_search["status_code"])
+    summary_string = 'The artifact returned an error.'
+    status_string = "QRadar Advisor returned status code '{}'.".format(return_search["status_code"])
     if return_search["status_code"] == 422:
         summary_string = "This artifact has an unsupported value."
 
@@ -160,7 +160,7 @@ else:
     new_artifact_count = 0
     toxic_count = 0
     non_toxic_count = 0
-    summary_string = "This artifact is not a toxic observable"
+    summary_string = "This artifact is not a suspicious observable"
     for result in return_search.search_results:
         value_type = result["type"]
         if value_type in mapping:
@@ -189,7 +189,7 @@ else:
                         #
                         # The artifact itself is a suspicious observable. We don't create new (duplicated) artifact. But we show this info
                         #
-                        summary_string = "This artifact is a toxic observable"
+                        summary_string = "This artifact is a suspicious observable"
                 else:
                     non_toxic_count += 1
 
