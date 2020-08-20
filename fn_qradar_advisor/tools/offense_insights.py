@@ -21,7 +21,7 @@ class SampleCmd(ToolCommand):
                                      qradar_token=self.system_token,
                                      advisor_app_id=self.opts_dict["app_id"],
                                      cafile=False, log=logging,
-                                     opt=None, function_opts=self.opts_dict)
+                                     opts={}, function_opts=self.opts_dict)
         resp = client.offense_insights(self.opts_dict["offense"])
         print("Return: {}".format(str(resp)))
 

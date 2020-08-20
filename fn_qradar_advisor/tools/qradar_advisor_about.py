@@ -19,7 +19,7 @@ class SampleCmd(ToolCommand):
 									 qradar_token=self.system_token,
 									 advisor_app_id=self.opts_dict["app_id"],
 									 cafile=False, log=logging,
-									 opt=None, function_opts=self.opts_dict)
+									 opts={}, function_opts=self.opts_dict)
 		client.get_csrf_token()
 
 		print("The XSRF_TOKEN is {}".format(client.http_info.xsrf_token))

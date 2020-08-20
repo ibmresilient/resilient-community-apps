@@ -31,7 +31,7 @@ class SampleCmd(ToolCommand):
                                   cafm_token=self.system_token,
                                   cafm_app_id=self.opts_dict["app_id"],
                                   cafile=False,log=logging,
-                                  opt=None, function_opts=self.opts_dict)
+                                  opts={}, function_opts=self.opts_dict)
         mappings = client.get_all_mapping()
 
         print("All mappings: {}".format(mappings))
