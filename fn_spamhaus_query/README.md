@@ -170,4 +170,4 @@ There are several ways to verify the successful operation of a function.
 ## Support
 | Name | Version | Author | Support URL |
 | ---- | ------- | ------ | ----------- |
-| fn_spamhaus_query | 1.0.1 | Resilient Labs | ibm.biz/resilientcommunity |
+| fn_spamhaus_query | 1.0.1 | Resilient Labs | https://ibm.biz/resilientcommunity |

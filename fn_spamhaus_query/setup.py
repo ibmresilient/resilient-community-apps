@@ -9,7 +9,7 @@ setup(
     license='MIT',
     author='Resilient Labs',
     author_email='resil.labs@gmail.com',
-    url='ibm.biz/resilientcommunity',
+    url='https://ibm.biz/resilientcommunity',
     description="Look up IP Addresses + Domain Name in Spamhaus Datasets",
     long_description="If a given artifact appears in one of Spamhaus Datasets, then the artifact's description is updated with additional enrichment information.",
     install_requires=[
