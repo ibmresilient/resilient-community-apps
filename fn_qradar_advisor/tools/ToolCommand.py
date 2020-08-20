@@ -1,7 +1,6 @@
 system_host_env = "QRADAR_ADVISOR_HOST"
 system_token_env = "QRADAR_ADVISOR_TOKEN"
 system_verify_env = "QRADAR_ADVISOR_VERIFY"
-
 system_http_proxy = "QRADAR_HTTP_PROXY"
 system_https_proxy = "QRADAR_HTTPS_PROXY"
 help_basic = "Use env vars QRADAR_ADVISOR_HOST/QRADAR_ADVISOR_TOKEN to specify login info"
