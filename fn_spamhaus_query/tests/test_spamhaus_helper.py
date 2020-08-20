@@ -2,7 +2,8 @@
 # -*- coding: utf-8 -*-
 # (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 
-from fn_spamhaus_query.util.spamhaus_helper import make_api_call
+from collections import OrderedDict
+from fn_spamhaus_query.util.spamhaus_helper import make_api_call, format_dict
 from resilient_lib import RequestsCommon
 from mock import patch
 
@@ -23,3 +24,10 @@ def test_make_api_call():
             url="https://www.example.com/info/123",
             headers={"Authorization": "Bearer ABCDEF"}
         )
+
+
+def test_format_dict():
+    formatted_dict = format_dict(OrderedDict([("key1", "value1"), ("key2", "value2")]))
+    actual_result = """\n-----------------\nkey1: value1\nkey2: value2\n-----------------\n"""
+
+    assert formatted_dict == actual_result
