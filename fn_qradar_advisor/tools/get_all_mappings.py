@@ -28,10 +28,10 @@ arg_list = ["help", "app_id", "rule"]
 class SampleCmd(ToolCommand):
     def do_command(self):
         client = QRadarCafmClient(qradar_host=self.system_host,
-                                     cafm_token=self.system_token,
-                                     cafm_app_id=self.opts_dict["app_id"],
-                                     cafile=False,
-                                     log=logging)
+                                  cafm_token=self.system_token,
+                                  cafm_app_id=self.opts_dict["app_id"],
+                                  cafile=False,log=logging,
+                                  opt=None, function_opts=self.opts_dict)
         mappings = client.get_all_mapping()
 
         print("All mappings: {}".format(mappings))
