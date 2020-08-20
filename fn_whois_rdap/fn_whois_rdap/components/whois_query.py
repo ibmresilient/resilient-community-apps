@@ -27,7 +27,7 @@ class FunctionComponent(ResilientComponent):
         self.opts = opts
         self.options = opts.get(SECTION_HDR, {})
 
-    @function("whois_query")
+    @function("whois_rdap_query")
     def _whois_query_function(self, event, *args, **kwargs):
         """Function: Using ipwhois library to make general queries in WHOIS format"""
         try:
