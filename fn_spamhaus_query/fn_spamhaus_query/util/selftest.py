@@ -6,36 +6,44 @@
 """
 
 import logging
-from resilient_lib import RequestsCommon
-from fn_spamhaus_query.util.spamhaus_helper import *
+from resilient_lib import RequestsCommon, validate_fields
+from fn_spamhaus_query.util.spamhaus_helper import CONFIG_DATA_SECTION, make_api_call, format_dict
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
 log.addHandler(logging.StreamHandler())
 
 
+def print_error(reason, app_configs):
+    err_str = "Test Failure!\nReason:\n\t{0}".format(reason)
+    err_str += "\n\nApp Configs:"
+    err_str += format_dict(app_configs)
+    log.error(err_str)
+
+
 def selftest_function(opts):
-    """
-    Placeholder for selftest function. An example use would be to test package api connectivity.
-    Suggested return values are be unimplemented, success, or failure.
-    """
+    app_configs = opts.get(CONFIG_DATA_SECTION, {})
+    rc = RequestsCommon(opts, app_configs)
+    reason = "Test was successful!"
 
-    # Getting the Config file parameters.
-    options = opts.get("fn_spamhaus_query", {})
-    wqs_url = options.get('spamhaus_wqs_url')+"{}/{}"
-    dqs_key = options.get('spamhaus_dqs_key')
-
-    # Header data
-    header_data = {'Authorization': 'Bearer {}'.format(dqs_key)}
-
-    requestcommon_object = RequestsCommon(function_opts=options)
-
-    proxies_data = requestcommon_object.get_proxies()
     try:
-        response_json = requestcommon_object.execute_call('GET', wqs_url.format('AUTHBL', '127.0.0.2'),
-                                                          headers=header_data, proxies=proxies_data,
-                                                          callback=spamhaus_call_error)
-        return {"state": "Success"}
-    except Exception as err_msg:
-        log.info(err_msg)
-        return {"state": "Failed"}
+
+        # Get and validate app configs
+        valid_app_configs = validate_fields(["spamhaus_wqs_url", "spamhaus_dqs_key"], app_configs)
+
+        # Execute api call
+        res = make_api_call(
+            base_url=valid_app_configs.get("spamhaus_wqs_url"),
+            api_key=valid_app_configs.get("spamhaus_dqs_key"),
+            search_resource="DBL",
+            qry="test",
+            rc=rc
+        )
+
+        if res.status_code == 200:
+            log.info("%s", reason)
+            return {"state": "success"}
+
+    except Exception as err:
+        print_error(err, app_configs)
+        return {"state": "failure", "reason": err}
