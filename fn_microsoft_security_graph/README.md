@@ -1,4 +1,27 @@
 # Resilient Functions Integration for Microsoft Graph Security API
+
+### v1.0.2
+
+* Conversion to AppHost
+* The integration now uses resilient-lib oauth2 package which provides proxy support for the integration 
+
+* NOTE: If you have a prior version of this integration installed, please replace 
+  the the following line in the [fn_microsoft_security_graph] section 
+  of the app.config file:
+
+  microsoft_graph_url=https://graph.microsoft.com/v1.0/
+  
+  with the following 2 lines:
+   
+  microsoft_graph_token_url=https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token
+  microsoft_graph_url=https://graph.microsoft.com/v1.0
+
+
+
+### v1.0.1
+* Python 2 to 3 improvements
+* UI version changes
+
 <br/>
 This is just a brief overview of the integration, please review the main doc to see the full length of installation instructions.
 ## Installation
@@ -38,11 +61,17 @@ The resulting .tar.gz file can be installed using:
 3.	Edit the `app.config` file:
 
 		[fn_microsoft_security_graph]
-		# Graph URL with version number
-		microsoft_graph_url=https://graph.microsoft.com/v1.0/
-		tenant_id=<Tenant directory id>
-		client_id=<App client id>
-		client_secret=<App client secret>
+		##
+        # Note that the microsoft_graph_token_url below contains a placeholder {tenant} for the tenant ID.
+        # Do not place the tenant id in the place holder as the integration will do this at run time.
+        # Do not place '/' at the end of the url strings.
+        # In most cases the only required edits are replacing xxx with the Microsoft App credentials. 
+        # 
+microsoft_graph_token_url=https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token
+microsoft_graph_url=https://graph.microsoft.com/v1.0
+tenant_id=xxx
+client_id=xxx
+client_secret=xxx
 		
 		## Polling options
 		# How often polling should happen. Value is in seconds. To disable polling, set this to zero.

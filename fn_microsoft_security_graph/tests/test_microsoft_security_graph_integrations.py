@@ -8,7 +8,7 @@ import requests_mock
 from mock import patch
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
-from fn_microsoft_security_graph.util.helper import MicrosoftGraphHelper
+from fn_microsoft_security_graph.lib.ms_graph_helper import MSGraphHelper
 from fn_microsoft_security_graph.components.microsoft_security_graph_alerts_integrations import alert_search, \
     update_alert, create_query, get_alert_details, ds_to_millis, build_incident_dto, get_alerts
 from resilient_circuits.template_functions import environment
@@ -89,7 +89,7 @@ class TestMicrosoftSecurityGraphfunctions:
         }
         mocked_requests_post.return_value = generate_response(content, 200)
 
-        ms_helper = MicrosoftGraphHelper("tenant_id1234", "client_id1234", "client_secret1234")
+        ms_helper = MSGraphHelper("ms_token_url", "ms_graph_url", "tenant_id1234", "client_id1234", "client_secret1234")
         token = ms_helper.get_access_token()
         assert token == "fake_access_token"
 
@@ -104,7 +104,7 @@ class TestMicrosoftSecurityGraphfunctions:
         mocked_requests_post.side_effect = [generate_response(content1, 200),
                                             generate_response(content2, 200)]
 
-        ms_helper = MicrosoftGraphHelper("tenant_id1234", "client_id1234", "client_secret1234")
+        ms_helper = MSGraphHelper("ms_token_url", "ms_graph_url", "tenant_id1234", "client_id1234", "client_secret1234")
         ms_helper.clear_cache()
         token = ms_helper.get_access_token()
         assert token == "fake_refreshed_access_token"
@@ -115,7 +115,7 @@ class TestMicrosoftSecurityGraphfunctions:
             "access_token": "fake_access_token"
         }
         mocked_requests_post.return_value = generate_response(content, 200)
-        ms_helper = MicrosoftGraphHelper("tenant_id1234", "client_id1234", "client_secret1234")
+        ms_helper = MSGraphHelper("ms_token_url", "ms_graph_url", "tenant_id1234", "client_id1234", "client_secret1234")
         r = requests_mock.response
         r.status_code = 200
 
@@ -131,7 +131,7 @@ class TestMicrosoftSecurityGraphfunctions:
         }
         mocked_requests_post.side_effect = [generate_response(content1, 200),
                                             generate_response(content2, 200)]
-        ms_helper = MicrosoftGraphHelper("tenant_id1234", "client_id1234", "client_secret1234")
+        ms_helper = MSGraphHelper("ms_token_url", "ms_graph_url", "tenant_id1234", "client_id1234", "client_secret1234")
         r = requests_mock.response
         r.status_code = 401
         r.content = "Fake content"
@@ -147,7 +147,7 @@ class TestMicrosoftSecurityGraphfunctions:
             "access_token": "fake_access_token"
         }
         mocked_requests_post.return_value = generate_response(content, 200)
-        ms_helper = MicrosoftGraphHelper("tenant_id1234", "client_id1234", "client_secret1234")
+        ms_helper = MSGraphHelper("ms_token_url", "ms_graph_url", "tenant_id1234", "client_id1234", "client_secret1234")
         r = requests_mock.response
         r.status_code = 500
 
@@ -170,7 +170,7 @@ class TestMicrosoftSecurityGraphfunctions:
         }
         mocked_requests_post.return_value = generate_response(content, 200)
         mocked_requests_get.return_value = generate_response(content2, 200)
-        ms_helper = MicrosoftGraphHelper("tenant_id1234", "client_id1234", "client_secret1234")
+        ms_helper = MSGraphHelper("ms_token_url", "ms_graph_url", "tenant_id1234", "client_id1234", "client_secret1234")
         ms_helper.clear_cache()
         r = alert_search("ms_graph_url", ms_helper, "filter")
 
@@ -189,7 +189,7 @@ class TestMicrosoftSecurityGraphfunctions:
         }
         mocked_requests_post.return_value = generate_response(content, 200)
         mocked_requests_get.return_value = generate_response(content2, 200)
-        ms_helper = MicrosoftGraphHelper("tenant_id1234", "client_id1234", "client_secret1234")
+        ms_helper = MSGraphHelper("ms_token_url", "ms_graph_url", "tenant_id1234", "client_id1234", "client_secret1234")
         ms_helper.clear_cache()
         r = get_alert_details("ms_graph_url", ms_helper, "1223456788")
 
@@ -208,7 +208,7 @@ class TestMicrosoftSecurityGraphfunctions:
         }
         mocked_requests_post.return_value = generate_response(content, 200)
         mocked_requests_patch.return_value = generate_response(content2, 200)
-        ms_helper = MicrosoftGraphHelper("tenant_id1234", "client_id1234", "client_secret1234")
+        ms_helper = MSGraphHelper("ms_token_url", "ms_graph_url", "tenant_id1234", "client_id1234", "client_secret1234")
         ms_helper.clear_cache()
         r = update_alert("ms_graph_url", ms_helper, "21354657678", '{"update_data": "data"}')
 
@@ -273,7 +273,7 @@ class TestMicrosoftSecurityGraphfunctions:
         mocked_requests_post.return_value = generate_response(content, 200)
         mocked_requests_get.return_value = generate_response(content2, 200)
 
-        ms_helper = MicrosoftGraphHelper("tenant_id1234", "client_id1234", "client_secret1234")
+        ms_helper = MSGraphHelper("ms_token_url", "ms_graph_url", "tenant_id1234", "client_id1234", "client_secret1234")
         alerts = get_alerts(opts, ms_helper)
 
         assert alerts == {"alert_details": {"details": 1234}}
