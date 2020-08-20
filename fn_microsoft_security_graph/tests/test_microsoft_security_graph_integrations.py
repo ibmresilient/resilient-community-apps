@@ -82,102 +82,9 @@ class TestMicrosoftSecurityGraphfunctions:
         func = get_function_definition(PACKAGE_NAME, "microsoft_security_graph_alert_search")
         assert func is not None
 
-    @patch("requests.post")
-    def test_get_access_token(self, mocked_requests_post):
-        content = {
-            "access_token": "fake_access_token"
-        }
-        mocked_requests_post.return_value = generate_response(content, 200)
 
-        ms_helper = MSGraphHelper("ms_token_url", "ms_graph_url", "tenant_id1234", "client_id1234", "client_secret1234")
-        token = ms_helper.get_access_token()
-        assert token == "fake_access_token"
-
-    @patch("requests.post")
-    def test_get_access_token_refresh(self, mocked_requests_post):
-        content1 = {
-            "access_token": ""
-        }
-        content2 = {
-            "access_token": "fake_refreshed_access_token"
-        }
-        mocked_requests_post.side_effect = [generate_response(content1, 200),
-                                            generate_response(content2, 200)]
-
-        ms_helper = MSGraphHelper("ms_token_url", "ms_graph_url", "tenant_id1234", "client_id1234", "client_secret1234")
-        ms_helper.clear_cache()
-        token = ms_helper.get_access_token()
-        assert token == "fake_refreshed_access_token"
-
-    @patch("requests.post")
-    def test_check_stats_code_good(self, mocked_requests_post):
-        content = {
-            "access_token": "fake_access_token"
-        }
-        mocked_requests_post.return_value = generate_response(content, 200)
-        ms_helper = MSGraphHelper("ms_token_url", "ms_graph_url", "tenant_id1234", "client_id1234", "client_secret1234")
-        r = requests_mock.response
-        r.status_code = 200
-
-        assert ms_helper.check_status_code(r)
-
-    @patch("requests.post")
-    def test_check_stats_code_invalid(self, mocked_requests_post):
-        content1 = {
-            "access_token": "fake_access_token"
-        }
-        content2 = {
-            "access_token": "new_fake_access_token"
-        }
-        mocked_requests_post.side_effect = [generate_response(content1, 200),
-                                            generate_response(content2, 200)]
-        ms_helper = MSGraphHelper("ms_token_url", "ms_graph_url", "tenant_id1234", "client_id1234", "client_secret1234")
-        r = requests_mock.response
-        r.status_code = 401
-        r.content = "Fake content"
-
-        assert not ms_helper.check_status_code(r)
-
-        token = ms_helper.get_access_token()
-        assert token == "new_fake_access_token"
-
-    @patch("requests.post")
-    def test_check_stats_code_bad(self, mocked_requests_post):
-        content = {
-            "access_token": "fake_access_token"
-        }
-        mocked_requests_post.return_value = generate_response(content, 200)
-        ms_helper = MSGraphHelper("ms_token_url", "ms_graph_url", "tenant_id1234", "client_id1234", "client_secret1234")
-        r = requests_mock.response
-        r.status_code = 500
-
-        try:
-            ms_helper.check_status_code(r)
-        except ValueError as e:
-            assert e.args[0] == "Invalid response from Microsoft Security Graph"
-
-    @patch("requests.get")
-    @patch("requests.post")
-    def test_search_alert(self, mocked_requests_post, mocked_requests_get):
-        content = {
-            "access_token": "fake_access_token"
-        }
-        content2 = {
-            "alerts": [
-                {"alert1": 1},
-                {"alert2": 2}
-            ]
-        }
-        mocked_requests_post.return_value = generate_response(content, 200)
-        mocked_requests_get.return_value = generate_response(content2, 200)
-        ms_helper = MSGraphHelper("ms_token_url", "ms_graph_url", "tenant_id1234", "client_id1234", "client_secret1234")
-        ms_helper.clear_cache()
-        r = alert_search("ms_graph_url", ms_helper, "filter")
-
-        assert r.json() == content2
-
-    @patch("requests.get")
-    @patch("requests.post")
+    @patch('fn_microsoft_security_graph.lib.ms_graph_helper.OAuth2ClientCredentialsSession.get')
+    @patch('fn_microsoft_security_graph.lib.ms_graph_helper.OAuth2ClientCredentialsSession.authenticate')
     def test_get_alert_details(self, mocked_requests_post, mocked_requests_get):
         content = {
             "access_token": "fake_access_token"
@@ -190,13 +97,12 @@ class TestMicrosoftSecurityGraphfunctions:
         mocked_requests_post.return_value = generate_response(content, 200)
         mocked_requests_get.return_value = generate_response(content2, 200)
         ms_helper = MSGraphHelper("ms_token_url", "ms_graph_url", "tenant_id1234", "client_id1234", "client_secret1234")
-        ms_helper.clear_cache()
         r = get_alert_details("ms_graph_url", ms_helper, "1223456788")
 
         assert r.json() == content2
 
-    @patch("requests.patch")
-    @patch("requests.post")
+    @patch('fn_microsoft_security_graph.lib.ms_graph_helper.OAuth2ClientCredentialsSession.patch')
+    @patch('fn_microsoft_security_graph.lib.ms_graph_helper.OAuth2ClientCredentialsSession.authenticate')
     def test_update_alert(self, mocked_requests_post, mocked_requests_patch):
         content = {
             "access_token": "fake_access_token"
@@ -209,7 +115,6 @@ class TestMicrosoftSecurityGraphfunctions:
         mocked_requests_post.return_value = generate_response(content, 200)
         mocked_requests_patch.return_value = generate_response(content2, 200)
         ms_helper = MSGraphHelper("ms_token_url", "ms_graph_url", "tenant_id1234", "client_id1234", "client_secret1234")
-        ms_helper.clear_cache()
         r = update_alert("ms_graph_url", ms_helper, "21354657678", '{"update_data": "data"}')
 
         assert r.json() == content2
@@ -252,8 +157,8 @@ class TestMicrosoftSecurityGraphfunctions:
         }
         assert json.loads(inc_dto) == expected
 
-    @patch("requests.get")
-    @patch("requests.post")
+    @patch('fn_microsoft_security_graph.lib.ms_graph_helper.OAuth2ClientCredentialsSession.get')
+    @patch('fn_microsoft_security_graph.lib.ms_graph_helper.OAuth2ClientCredentialsSession.authenticate')
     def test_get_alerts(self, mocked_requests_post, mocked_requests_get):
         opts = {
             "alert_time_range_sec": "100",
