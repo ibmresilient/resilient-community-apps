@@ -26,7 +26,8 @@ setup(
     ],
     entry_points={
         "resilient.circuits.components": [
-            "UrlHausFunctionComponent = fn_urlhaus.components.func_urlhaus:FunctionComponent"
+            "UrlHausFunctionComponent = fn_urlhaus.components.funct_fn_urlhaus:FunctionComponent",
+            "UrlHausSubmissionFunctionComponent = fn_urlhaus.components.funct_fn_urlhaus_submission:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_urlhaus.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_urlhaus.util.customize:customization_data"],
