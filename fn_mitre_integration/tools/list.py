@@ -12,8 +12,9 @@
 
 from stix2 import TAXIICollectionSource, Filter
 from taxii2client import Server
+from proxies import get_proxies
 
-server = Server("https://cti-taxii.mitre.org/taxii/")
+server = Server("https://cti-taxii.mitre.org/taxii/", proxies=get_proxies())
 
 api_root = server.api_roots[0]
 

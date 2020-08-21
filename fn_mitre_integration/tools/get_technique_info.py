@@ -11,6 +11,7 @@
 import sys
 from fn_mitre_integration.lib.mitre_attack import MitreAttack
 import json
+from proxies import get_proxies
 
 if len(sys.argv) < 2:
     print("Usage get_technique_info.py tech_id <mitigation>")
@@ -23,7 +24,7 @@ if len(sys.argv) == 3:
     mitigation_only = True
 
 if mitigation_only:
-    mitigations = MitreAttack().get_tech_mitigation(tech_id)
+    mitigations = MitreAttack(opts=None, function_opts=get_proxies()).get_tech_mitigation(tech_id)
     print(str(mitigations))
 else:
     tech = MitreAttack().get_tech(tech_id)
