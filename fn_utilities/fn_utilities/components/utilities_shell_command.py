@@ -119,14 +119,7 @@ class RunCmd():
     def __init__(self, remote, shell_command, rendered_shell_params):
         # Get remote credentials
         if remote:
-            remote_config = re.split(':|@', remote)
-            if len(remote_config) != 3:
-                raise ValueError('Remote machine %s must be of the format username:password@server, '
-                                 "'%s' was specified" % remote)
-            else:
-                self.remote_user = remote_config[0]
-                self.remote_password = remote_config[1]
-                self.remote_server = remote_config[2]
+            self.get_creds(remote)
 
         self.shell_command = shell_command
         self.rendered_shell_params = rendered_shell_params
@@ -135,6 +128,22 @@ class RunCmd():
         self.retcode = None
         self.stdoutdata = None
         self.stderrdata = None
+
+    def get_creds(self, remote):
+        server_splits = remote.rsplit('@', 1) # get last separator to avoid '@' in passwords
+        if len(server_splits) != 2:
+            raise ValueError("Incorrect format for remote. Ex. username:password@server, "
+                             "'%s' was specified", remote)
+
+        self.remote_server = server_splits[1]
+
+        user_pswd_splits = server_splits[0].split(':')
+        if len(user_pswd_splits) != 2:
+            raise ValueError("Incorrect format for remote. Ex. username:password@server, "
+                             "'%s' was specified", remote)
+
+        self.remote_user = user_pswd_splits[0]
+        self.remote_password = user_pswd_splits[1]
 
 
     def run_windows_cmd(self, remote_auth_transport, ps_extensions):
