@@ -163,6 +163,17 @@ class QRadarAdvisorClient(object):
                                     data=data,
                                     verify=self.http_info.get_cafile())
             if response.status_code != 200:
+                if response.status_code == 422:
+                    # Throw 422 for unsupported indicator value e.g private IP addresses
+                    # or where certain qradar ignore tuning parameters are set
+                    # e.g. qadvisor.ip4.ignore or qadvisor.ip6.ignore.
+                    return {
+                        "search": {
+                            "search_value": search_value,
+                            "status_code": 422
+                        }
+                    }
+
                 error_msg = "Quick search using {} returns {}".format(url, str(response))
                 self.log.error(error_msg)
                 raise QuickSearchError(url, error_msg)
