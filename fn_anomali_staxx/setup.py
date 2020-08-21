@@ -19,7 +19,7 @@ def snake_to_camel(word):
 
 setup(
     name='fn_anomali_staxx',
-    version='1.0.0',
+    version='1.0.1',
     license='MIT',
     url='https://ibm.biz/resilientcommunity',
     author='Resilient Labs',
