@@ -71,7 +71,8 @@ class FunctionComponent(ResilientComponent):
 
                     code_information = STATIC_INFO_RESPONSE.get(code)
 
-                    # If information not found in `STATIC_INFO_RESPONSE`, Then trying with Spamhaus info API Call
+                    # If the response is not found in STATIC_INFO_RESPONSE,
+                    # then use an API call again to get the response info
                     if not code_information:
                         code_response_obj = make_api_call(
                             base_url=app_configs.get("spamhaus_wqs_url"),
