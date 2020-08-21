@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 
 import requests
 from .qradar_http_info import HttpInfo
@@ -45,8 +45,8 @@ class QRadarAdvisorClient(object):
     INSIGHTS_NO_OBSERVABLES = "NO_OBSERVABLES"
     INSIGHTS_NO_ERROR = "NO_ERROR"
 
-    def __init__(self, qradar_host, advisor_app_id, qradar_token, cafile, log):
-        self.http_info = HttpInfo(qradar_host, advisor_app_id, qradar_token, cafile, log)
+    def __init__(self, qradar_host, advisor_app_id, qradar_token, cafile, log, opts=None, function_opts=None):
+        self.http_info = HttpInfo(qradar_host, advisor_app_id, qradar_token, cafile, log, opts, function_opts)
         self.full_search_stage = "stage3"
         self.full_search_timeout = 1200
         self.full_search_period = 5
@@ -75,6 +75,25 @@ class QRadarAdvisorClient(object):
         :return:
         """
         self.full_search_period = period
+
+    def test_connectivity(self):
+        """Connectivity Test which is used by resilient_circuits selftest.
+
+        Calls http 'get' request the "investigations" endpoint.
+
+        :return: Response
+        """
+        if not self.http_info.xsrf_token:
+            self.get_csrf_token()
+
+        url = self.http_info.get_investigations_url()
+
+        params = {"page": 0, "count": 5}
+
+        session = self.http_info.get_session()
+        r = response = session.get(url=url, params=params,
+                                    verify=self.http_info.get_cafile())
+        return r
 
     def get_csrf_token(self):
         """

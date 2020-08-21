@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 import requests
 import base64
+from resilient_lib import RequestsCommon
 
 QRADAR_PLUGIN_API_URL = "{host}/console/plugins/{app_id}/app_proxy/api"
-QRADAR_OFFENSE_INSIGHTS_URL="/investigations/offense/{offense_id}/insights"
+QRADAR_OFFENSE_INSIGHTS_URL = "/investigations/offense/{offense_id}/insights"
+QRADAR_INVESTIGATIONS = "/investigations"
 QRADAR_QUICK_SEARCH_URL = "/investigations/search/quick"
 QRADAR_FULL_SEARCH_URL = "/investigations/search/full"
 QRADAR_FULL_SEARCH_RESULT_URL = "/investigations/search/full/{search_id}/stix/{stage}"
@@ -18,7 +20,7 @@ QRADAR_CFMA_MAPPINGS = "/mappings"
 QRADAR_CFMA_TUNING="/config/tuning"
 
 class HttpInfo(object):
-    def __init__(self, qradar_host, advisor_app_id, qradar_token, cafile, log):
+    def __init__(self, qradar_host, advisor_app_id, qradar_token, cafile, log, opts=None, function_opts=None):
         if qradar_host.startswith("http"):
             # User wants to specify http or https
             self.host = qradar_host
@@ -38,6 +40,7 @@ class HttpInfo(object):
         self.session.headers["Content-Type"] = "application/json"
         self.session.headers["SEC"] = self.token
         self.session.cookies["SEC"] = self.token
+        self.session.proxies = RequestsCommon(opts, function_opts).get_proxies()
 
     def get_all_mappings(self):
         """
@@ -59,6 +62,13 @@ class HttpInfo(object):
         :return:
         """
         return self.api_base_url + QRADAR_ABOUT_URL
+
+    def get_investigations_url(self):
+        """
+        Get the url to the api/investigations endpoint
+        :return:
+        """
+        return self.api_base_url + QRADAR_INVESTIGATIONS
 
     def get_quick_search_url(self):
         """

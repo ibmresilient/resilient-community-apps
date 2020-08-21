@@ -16,7 +16,8 @@ setup(
                      "MITRE ATT&CK information from QRadar Advisor. The integration supports QRadar Advisor quick search, "
                      "full search, map a rule, and retrieve offense insights and analysis.",
     install_requires=[
-        'resilient_circuits>=30.0.0'
+        'resilient_circuits>=30.0.0',
+        'resilient_lib'
     ],
     packages=find_packages(),
     include_package_data=True,
@@ -32,6 +33,7 @@ setup(
             "QradarAdvisorFullSearchFunctionComponent = fn_qradar_advisor.components.qradar_advisor_full_search:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_qradar_advisor.util.config:config_section_data"],
-        "resilient.circuits.customize": ["customize = fn_qradar_advisor.util.customize:customization_data"]
+        "resilient.circuits.customize": ["customize = fn_qradar_advisor.util.customize:customization_data"],
+        "resilient.circuits.selftest": ["selftest = fn_qradar_advisor.util.selftest:selftest_function"]
     }
 )

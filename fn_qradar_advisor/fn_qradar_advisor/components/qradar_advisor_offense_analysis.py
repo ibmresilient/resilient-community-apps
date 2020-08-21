@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
+# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+
 """Function implementation"""
 
 import logging
@@ -16,11 +18,13 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
+        self.opts = opts
         self.options = opts.get("fn_qradar_advisor", {})
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
+        self.opts = opts
         self.options = opts.get("fn_qradar_advisor", {})
 
     @function("qradar_advisor_offense_analysis")
@@ -65,8 +69,9 @@ class FunctionComponent(ResilientComponent):
             client = QRadarAdvisorClient(qradar_host=self.options["qradar_host"],
                                          qradar_token=self.options["qradar_advisor_token"],
                                          advisor_app_id=self.options["qradar_advisor_app_id"],
-                                         cafile=qradar_verify_cert,
-                                         log=log)
+                                         cafile=qradar_verify_cert, log=log,
+                                         opts=self.opts, function_opts=self.options)
+
             stix_json = client.offense_analysis(offense_id=qradar_offense_id,
                                                 restart_if_existed=qradar_analysis_restart_if_existed,
                                                 return_stage=qradar_advisor_result_stage,
