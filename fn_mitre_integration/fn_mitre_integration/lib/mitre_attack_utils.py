@@ -46,14 +46,16 @@ def get_multiple_techniques(mitre_conn, mitre_technique_ids=None, mitre_techniqu
     return techniques
 
 
-def get_tactics_and_techniques(tactic_names=None, tactic_ids=None):
+def get_tactics_and_techniques(tactic_names=None, tactic_ids=None, opts=None, function_opts=None):
     """
     Get techniques for all input tactics
     :param tactic_names:    string of tactic names separated by comma
     :param tactic_ids:      string of tactic ids separated by comma
+    :param opts:            Top level configuration options
+    :param function_opts:   Function configuration options.
     :return:                techniques
     """
-    mitre_conn = MitreAttackConnection()
+    mitre_conn = MitreAttackConnection(opts, function_opts)
 
     tactics = []
 

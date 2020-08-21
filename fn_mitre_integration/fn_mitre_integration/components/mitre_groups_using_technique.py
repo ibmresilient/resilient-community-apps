@@ -14,11 +14,13 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
+        self.opts = opts
         self.options = opts.get("fn_mitre_integration", {})
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
+        self.opts = opts
         self.options = opts.get("fn_mitre_integration", {})
 
     @function("mitre_groups_using_technique")
@@ -41,7 +43,7 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("Getting technique information...")
 
-            mitre_conn = mitre_attack.MitreAttackConnection()
+            mitre_conn = mitre_attack.MitreAttackConnection(self.opts, self.options)
 
             techniques = mitre_attack_utils.get_multiple_techniques(mitre_conn, mitre_technique_ids=mitre_technique_id,
                                                                    mitre_technique_names=mitre_technique_name)
