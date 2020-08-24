@@ -273,6 +273,8 @@ None
 ## Function - Utilities: Attachment Zip List
 Reads a ZIP file and produces a list of the compressed files, and a list with detailed information about each file.
 
+**Note**: The contents of password protected Excel spreadsheets are not listable.
+
  ![screenshot: fn-utilities-attachment-zip-list ](./screenshots/fn-utilities-attachment-zip-list.png)
 
 <details><summary>Inputs:</summary>
