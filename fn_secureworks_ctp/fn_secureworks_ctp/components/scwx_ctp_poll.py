@@ -275,14 +275,6 @@ class SecureworksCTPPollComponent(ResilientComponent):
 
             # Render the template.
             new_incident_payload = render_json(escalate_template, ticket)
-
-            # The detailedDescription field from Secureworks may be a very long escaped string,
-            # which can present problems with jinja template rendering and creating a validate
-            # json payload. Instead of rendering the detailedDescription field to the Resilient
-            # desription field, put it in the payload now if it's not already there.
-            if "description" not in new_incident_payload:
-                new_incident_payload = self._add_description_to_payload(new_incident_payload, ticket)
-
             LOG.debug(new_incident_payload)
 
             # Post incident to Resilient

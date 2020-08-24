@@ -3,6 +3,10 @@
   "name": "Secureworks CTP Incident - for Ticket ID {{ticketId}}",
   "start_date": {{dateCreated}},
   "discovered_date": {{dateCreated}},
+  "description": {
+    "format": "html",
+    "content": {{detailedDescription | e | replace('\n','<br>') | tojson}}
+  },
   "properties": {
     "scwx_ctp_ticket_id": "{{ticketId}}",
     "scwx_ctp_category": "{{category}}",
