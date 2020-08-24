@@ -11,11 +11,10 @@ setup(
     author='Resilient Labs',
     author_email='resil.labs@gmail.com',
     url='https://ibm.biz/resilientcommunity',
-    description="Look up artifacts in URLhaus + sumbit malicious URLs",
-    long_description="""Look up supported artifacts in URLhaus to get more enrichment information.
-        Also supports submitting malicious URLs to URLhaus""",
+    description="Look up artifacts in URLhaus and submit malicious URLs",
+    long_description="""Look up supported artifacts in URLhaus to get more enrichment information and submit a malicious URL to the security community""",
     install_requires=[
-        'resilient_circuits>=30.0.0',
+        'resilient_circuits>=33.0.0',
         'resilient-lib>=32.0.140'
     ],
     packages=find_packages(),
