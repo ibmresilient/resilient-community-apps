@@ -38,7 +38,7 @@ def make_api_call(call_type, base_url, artifact_value, rc, artifact_type=None, a
 
         lookup_type = TYPE_MAP.get(artifact_type)
         if not lookup_type:
-            raise KeyError("Unable to lookup: {}".format(artifact_type))
+            raise KeyError("Unable to lookup: '{0}'. Supported keys: {1}".format(artifact_type, TYPE_MAP.keys()))
 
         lookup_type_parts = lookup_type.split(':')
 
