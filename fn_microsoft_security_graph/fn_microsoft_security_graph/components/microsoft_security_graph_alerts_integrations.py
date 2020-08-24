@@ -216,8 +216,8 @@ class IntegrationComponent(ResilientComponent):
             response = resilient_client.post(uri=uri, payload=payload_dict)
             return response
 
-        except SimpleHTTPException:
-            log.info("Something went wrong when attempting to create the Incident")
+        except SimpleHTTPException as err:
+            log.info("Something went wrong when attempting to create the Incident %s", err)
 
     # Returns back list of incidents if there is one with the same case ID, else returns empty list
     def _find_resilient_incident_for_req(self, field_value):
