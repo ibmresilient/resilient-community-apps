@@ -65,15 +65,40 @@ CTP is used with the Secureworks SOC team when they find a security issue that n
 * An Integration Server running `resilient_circuits>=30.0.0`
   * To set up an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
   * If using API Keys, minimum required permissions are:
+      * Incidents: Read, Create
+      * Edit Incidents: Fields, Notes
       * Org Data: Read, Edit
-      * Incidents Fields: Edit
-      * Functions: Read, Edit
-      * Layouts: Read
-      * Workflows: Create, Edit
-      * Other: ReadIncidentsActionInvocations
+      * Functions: Read
+
 ---
 
 ## Installation
+
+### App Host
+All the components for running this integration in a container already exist when using the App Host app.
+
+To install,
+
+* Navigate to Administrative Settings and then the Apps tab.
+* Click the Install button and select the downloaded file: app-fn_secureworks_ctp-x.x.x.zip.
+* Go to the Configuration tab and edit the app.config file, editing the username and password for Secureworks CTP and making any additional setting changes.
+
+  | Config | Required | Example | Description |
+  | ------ | :------: | ------- | ----------- |
+  | **base_url** | Yes | `https://api.secureworks.com/api/ticket/v3` | *Secureworks CTP base URL* |
+  | **username** | Yes | `user@example.com` | *email address associated with Secureworks account* |
+  | **password** | Yes | `` | *password associated with Secureworks account* |
+  | **query_ticket_grouping_types** | Yes | `INCIDENT:SECURITY` | *Comma separated list of ticketType:groupingType pairs indicating ticket and grouping types to query. Secureworks ticketTypes : SERVICE_REQUEST, INCIDENT, CHANGE. Secureworks groupingTypes: REQUEST, CHANGE, HEALTH, SECURITY* |
+  | **query_limit** | Yes | `10` | *Maximum number of tickets to be returned from Secureworks API query* |
+  | **polling_interval** | Yes | `600` | *Time in seconds between queries to Secureworks endpoint* |
+  | **close_codes** | No | `Authorized Activity,Confirmed Security Incident,Duplicate,Incident Misidentified,Inconclusive,Not Actionable,Not Vulnerable,Threat Mitigated` | *Comma separated list of close codes to override the defaults* |
+  | **template_file_escalate** | No | `` | *Path to a custom jinja template file used to escalate a Secureworks Ticket to Resilient* |
+  | **template_file_close** | No | `` | *Path to a custom jinja template file used to close a Resilient incident when the corresponding ticket is 'Closed' or 'Resolved' in Secureworks* |
+  | **template_file_update** | No | `` | *Path to a custom jinja template file used to update incident fields of a Resilient incident when the corresponding ticket is updated in Secureworks* |
+  | **cafile** | No | `` | *Path to certificate file* |
+
+
+### Integration Server 
 * Download the `fn_secureworks_ctp.zip`.
 * Copy the `.zip` to your Integration Server and SSH into it.
 * **Unzip** the package:
@@ -216,4 +241,4 @@ There are several ways to verify the successful operation of a function.
 ## Support
 | Name | Version | Author | Support URL |
 | ---- | ------- | ------ | ----------- |
-| fn_secureworks_ctp | 1.0.0 |  | https://ibm.com/mysupport |
+| fn_secureworks_ctp | 1.0.0 | Resilient Labs | https://ibm.biz/resilientcommunity |
