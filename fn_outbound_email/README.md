@@ -91,7 +91,7 @@
   | **smtp_port** | Yes | `25` | *Defaults to unauthenticated, 587/2525 for TLS* |
   | **smtp_conn_timeout** | Yes | `15` | *Time in seconds* |
   | **smtp_ssl_mode** | No | `None` | *Not supported* |
-  | **template_file** | No | `data/example_send_email.jinja` | *Optional - Path to a custom template file for formatting HTML email.* |
+  | **template_file** | No | `fn_outbound_email/data/example_send_email.jinja` | *Optional - Path to a custom template file for formatting HTML email/ differs in apphost* |
 
 * **Save** and **Close** the app.config file.
 * Run selftest to test the Integration you configured:
@@ -178,4 +178,4 @@ There are several ways to verify the successful operation of a function.
 ## Support
 | Name | Version | Author | Support URL |
 | ---- | ------- | ------ | ----------- |
-| fn_outbound_email | 1.0.7 | Sean@IBM Resilient | https://www.ibm.com/security/intelligent-orchestration/resilient |
+| fn_outbound_email | 1.1.0 | Sean@IBM Resilient | https://www.ibm.com/security/intelligent-orchestration/resilient |
