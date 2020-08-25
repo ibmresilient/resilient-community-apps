@@ -1,50 +1,97 @@
 # Resilient Functions Integration for Microsoft Graph Security API
 
+## Release Notes
+<!--
+  Specify all changes in this release. Do not remove the release 
+  notes of a previous release
+-->
 ### v1.0.2
 
-* Conversion to AppHost
-* The integration now uses resilient-lib oauth2 package which provides proxy support for the integration 
-
-* NOTE: If you have a prior version of this integration installed, please replace 
-  the the following line in the [fn_microsoft_security_graph] section 
-  of the app.config file:
-
-  microsoft_graph_url=https://graph.microsoft.com/v1.0/
-  
-  with the following 2 lines:
-   
-  microsoft_graph_token_url=https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token
-  microsoft_graph_url=https://graph.microsoft.com/v1.0
-
-
+* Support for App Host
+* Proxy support
 
 ### v1.0.1
 * Python 2 to 3 improvements
 * UI version changes
 
-<br/>
-This is just a brief overview of the integration, please review the main doc to see the full length of installation instructions.
 ## Installation
 
-To install in "development mode":
+### App Host
+All the components for running this integration in a container already exist when using the App Host app.
 
-    pip install -e ./fn_microsoft_security_graph/
+To install,
 
-After installation, the package is loaded by `resilient-circuits run`.
+* Navigate to Administrative Settings and then the Apps tab.
+* Click the Install button and select the downloaded file: app-fn_microsoft_security_graph-x.x.x.zip.
+* Go to the Configuration tab and edit the app.config file, editing the tenant_id, client_id and client_secret and making any additional setting changes.
 
+  | Config | Required | Example | Description |
+  | ------ | :------: | ------- | ----------- |
+  | **microsoft_graph_token_url** | Yes | `https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token` | *Microsoft Graph URL endpoint for acquring access token* |
+  | **microsoft_graph_url** | Yes | `https://graph.microsoft.com/v1.0` | *Microsoft Graph base URL * |
+  | **tenant_id** | Yes | `xxx` | *Microsoft Azure Tenant ID* |
+  | **client_id** | Yes | `xxx` | *Microsoft Azure Client ID (Application ID)* |
+  | **client_secret** | Yes | `xxx` | *Microsoft Azure Client Secret* |
+  | **msg_polling_intervals** | Yes | `0` | *Polling interval in seconds. Zero to turn off poller* |
+  | **incident_template** | No | `` | *Path to custom jinja template. If not set, use default template* |
+  | **alert_query** | No | `filter=assignedTo eq 'analyst@m365x594651.onmicrosoft.com' and severity eq 'high'` | *String query to apply to the alert polling component* |
+  | **alert_time_range_sec** | No | `3600` | *Times in seconds to set the start dateTime values for the createdDateTime field when filtering alerts* |
 
-To uninstall:
+### Integration Server
 
-    pip uninstall fn_microsoft_security_graph
+* Download the `app-fn_microsoft_security_graph-x.x.x.zip` file.
+* Copy the `.zip` to your Integration Server and SSH into it.
+* **Unzip** the package:
+  ```
+  $ unzip app-fn_microsoft_security_graph-x.x.x.zip
+  ```
+* **Install** the package:
+  ```
+  $ pip install fn_microsoft_security_graph-x.x.x.tar.gz
+  ```
+* Import the **configurations** into your app.config file:
+  ```
+  $ resilient-circuits config -u -l fn-microsoft-security-graph
+  ```
+* Import the fn_microsoft_security_graph **customizations** into the Resilient platform:
+  ```
+  $ resilient-circuits customize -y -l fn-microsoft-security-graph
+  ```
+* Open the config file, scroll to the bottom and edit your fn_microsoft_security_graph configurations:
+  ```
+  $ nano ~/.resilient/app.config
+  ```
+    | Config | Required | Example | Description |
+  | ------ | :------: | ------- | ----------- |
+  | **microsoft_graph_token_url** | Yes | `https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token` | *Microsoft Graph URL endpoint for acquring access token* |
+  | **microsoft_graph_url** | Yes | `https://graph.microsoft.com/v1.0` | *Microsoft Graph base URL * |
+  | **tenant_id** | Yes | `xxx` | *Microsoft Azure Tenant ID* |
+  | **client_id** | Yes | `xxx` | *Microsoft Azure Client ID (Application ID)* |
+  | **client_secret** | Yes | `xxx` | *Microsoft Azure Client Secret* |
+  | **msg_polling_intervals** | Yes | `0` | *Polling interval in seconds. Zero to turn off poller* |
+  | **incident_template** | No | `` | *Path to custom jinja template. If not set, use default template* |
+  | **alert_query** | No | `filter=assignedTo eq 'analyst@m365x594651.onmicrosoft.com' and severity eq 'high'` | *String query to apply to the alert polling component* |
+  | **alert_time_range_sec** | No | `3600` | *Times in seconds to set the start dateTime values for the createdDateTime field when filtering alerts* |
 
+* **Save** and **Close** the app.config file.
+* [Optional]: Run selftest to test the Integration you configured:
+  ```
+  $ resilient-circuits selftest -l fn-microsoft-security-graph
+  ```
+* **Run** resilient-circuits or restart the Service on Windows/Linux:
+  ```
+  $ resilient-circuits run
+  ```
+---
 
-To package for distribution:
-
-    python ./fn_microsoft_security_graph/setup.py sdist
-
-The resulting .tar.gz file can be installed using:
-
-    pip install <filename>.tar.gz
+## Uninstall
+* SSH into your Integration Server.
+* **Uninstall** the package:
+  ```
+  $ pip uninstall fn-microsoft-security-graph
+  ```
+* Open the config file, scroll to the [fn_microsoft_security_graph] section and remove the section or prefix `#` to comment out the section.
+* **Save** and **Close** the app.config file.
 
 <br/>
 ## Configuration
@@ -60,34 +107,6 @@ The resulting .tar.gz file can be installed using:
 
 3.	Edit the `app.config` file:
 
-		[fn_microsoft_security_graph]
-		##
-        # Note that the microsoft_graph_token_url below contains a placeholder {tenant} for the tenant ID.
-        # Do not place the tenant id in the place holder as the integration will do this at run time.
-        # Do not place '/' at the end of the url strings.
-        # In most cases the only required edits are replacing xxx with the Microsoft App credentials. 
-        # 
-microsoft_graph_token_url=https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token
-microsoft_graph_url=https://graph.microsoft.com/v1.0
-tenant_id=xxx
-client_id=xxx
-client_secret=xxx
-		
-		## Polling options
-		# How often polling should happen. Value is in seconds. To disable polling, set this to zero.
-		msg_polling_interval=0
-		#incident_template=<location_of_template_file>  # If not set uses default template.
-		
-		# String query to apply to the alert polling component. This will be added to the end of the url
-		# when searching for alerts. The example shown below would make the whole search url equal to
-		# https://graph.microsoft.com/v1.0/security/alerts/?$filter=assignedTo eq 'analyst@m365x594651.onmicrosoft.com' and severity eq 'high'
-		# This query string is full OData so alert query can start with 'top=', 'skip=', 'filter=', etc. Do not add a '$' at the start
-        # of the value as that character is reserved for environment variables
-		#alert_query=filter=assignedTo eq 'analyst@m365x594651.onmicrosoft.com' and severity eq 'high'
-		
-		# Alert Time range sec - Optional value in seconds to set the start dateTime values for the createdDateTime field when filtering alerts.
-		# This is calculated by adding to the filter 'createdDateTime ge (current_dateTime - alert_time_range_sec)
-		#alert_time_range_sec=3600
 
 ## Customization
 For each workflow, verify the inputs and the post-process scripts to ensure that they are accurate and appropriate.
