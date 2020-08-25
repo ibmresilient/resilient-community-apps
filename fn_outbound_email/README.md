@@ -2,7 +2,9 @@
 
 - [fn-outbound-email Functions for IBM Resilient](#fn-outbound-email-functions-for-ibm-resilient)
   - [Release Notes](#release-notes)
-    - [v1.0.7](#v107)
+    - [v1.1.0](#v110)
+    - [v1.0.9](#v109)
+    - [v1.0.8](#v108)
   - [Requirements](#requirements)
   - [Installation](#installation)
     - [Installation: New users](#installation-new-users)
@@ -23,8 +25,15 @@
   Specify all changes in this release. Do not remove the release 
   notes of a previous release
 -->
+
+### v1.1.0
+* Bug fixes and send all or specific attachments
+
+### v1.0.9
+* Apphost compatibility
+
 ### v1.0.8
-* Initial Release after internal development by Professional, no prior release notes
+* Initial Release after internal development by Professional Services, no prior release notes
 
 ---
 
