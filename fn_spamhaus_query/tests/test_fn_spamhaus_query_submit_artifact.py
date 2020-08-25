@@ -15,6 +15,10 @@ FUNCTION_NAME = "fn_spamhaus_query_submit_artifact"
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
 
+config_data = """[{0}]
+spamhaus_wqs_url = https://www.example.com/
+spamhaus_dqs_key = ABCDEF""".format(PACKAGE_NAME)
+
 
 class MockedResponse:
     def __init__(self):
@@ -49,40 +53,6 @@ def call_fn_spamhaus_query_submit_artifact_function(circuits, function_params, t
         return event.kwargs["result"].value
 
 
-config_data = """[{0}]
-spamhaus_wqs_url = https://www.example.com/
-spamhaus_dqs_key = ABCDEF""".format(PACKAGE_NAME)
-
-
-class TestBadUrl:
-    def test_bad_url(self, circuits_app):
-
-        function_params = {
-            "spamhaus_query_string": "123",
-            "spamhaus_search_resource": "info"
-        }
-
-        with pytest.raises(IntegrationError, match=r"Not Found for url"):
-            call_fn_spamhaus_query_submit_artifact_function(circuits_app, function_params)
-
-
-config_data = """[{0}]
-spamhaus_wqs_url = https://apibl.spamhaus.net/lookup/v1/
-spamhaus_dqs_key = ABCDEF""".format(PACKAGE_NAME)
-
-
-class TestBadAPIKey:
-    def test_bad_api_key(self, circuits_app):
-
-        function_params = {
-            "spamhaus_query_string": "1002",
-            "spamhaus_search_resource": "info"
-        }
-
-        with pytest.raises(IntegrationError, match=r"Unauthorized"):
-            call_fn_spamhaus_query_submit_artifact_function(circuits_app, function_params)
-
-
 class TestFnSpamhausQuerySubmitArtifact:
     """ Tests for the fn_spamhaus_query_submit_artifact function"""
 
@@ -90,6 +60,28 @@ class TestFnSpamhausQuerySubmitArtifact:
         """ Test that the package provides customization_data that defines the function """
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
+
+    def test_bad_api_key(self, circuits_app):
+        with patch.dict(circuits_app.app.opts[PACKAGE_NAME], {"spamhaus_wqs_url": "https://apibl.spamhaus.net/lookup/v1/"}):
+
+            function_params = {
+                "spamhaus_query_string": "1002",
+                "spamhaus_search_resource": "info"
+            }
+
+            with pytest.raises(IntegrationError, match=r"Unauthorized"):
+                call_fn_spamhaus_query_submit_artifact_function(circuits_app, function_params)
+
+    def test_bad_url(self, circuits_app):
+        with patch.dict(circuits_app.app.opts[PACKAGE_NAME], {"spamhaus_wqs_url": "https://www.example.com/"}):
+
+            function_params = {
+                "spamhaus_query_string": "123",
+                "spamhaus_search_resource": "info"
+            }
+
+            with pytest.raises(IntegrationError, match=r"Not Found for url"):
+                call_fn_spamhaus_query_submit_artifact_function(circuits_app, function_params)
 
     def test_fields_defined(self, circuits_app):
         with patch("fn_spamhaus_query.components.fn_spamhaus_query_submit_artifact.RequestsCommon.execute_call_v2") as mock_get:
@@ -116,6 +108,6 @@ class TestFnSpamhausQuerySubmitArtifact:
 
             mock_get.assert_called_with(
                 method="get",
-                url="https://apibl.spamhaus.net/lookup/v1/info/1002",
+                url="https://www.example.com/info/1002",
                 headers={"Authorization": "Bearer ABCDEF"}
             )
