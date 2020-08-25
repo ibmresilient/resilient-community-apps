@@ -85,10 +85,10 @@ class FunctionComponent(ResilientComponent):
                 raise ValueError("Encountered issue when contacting XForce API")
 
             # initialize ResultPayload object
-            result = ResultPayload(CONFIG_DATA_SECTION, **kwargs)
+            rp = ResultPayload(CONFIG_DATA_SECTION, **kwargs)
             # set keys and values from response
             if 'contents' in case_files:
-                result.done(True, res.json())
+                result = rp.done(True, res.json())
                 # backwards compatibility with original results keys
                 result["plaintext"] = json.dumps(case_files["contents"]["plainText"], default=lambda o: o.__dict__,
                                                 sort_keys=True, indent=4)
@@ -100,7 +100,7 @@ class FunctionComponent(ResilientComponent):
             # If no 'contents' set success to true and notify that no results match the queried ID
             else:
                 content = "No case files match ID: {}".format(xforce_collection_id)
-                result.done(True, content)
+                result = rp.done(True, content)
 
             # Produce a FunctionResult with the results
             yield FunctionResult(result)

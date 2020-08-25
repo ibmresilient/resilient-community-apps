@@ -89,17 +89,17 @@ class FunctionComponent(ResilientComponent):
                 raise ValueError("Encountered issue when querying X-Force API")
 
             # initialize result object
-            result = ResultPayload(CONFIG_DATA_SECTION, **kwargs)
+            rp = ResultPayload(CONFIG_DATA_SECTION, **kwargs)
 
             # assign keys and values from the response
             if len(case_files["casefiles"]):
-                result.done(True, res.json())
+                result = rp.done(True, res.json())
                 # backwards compatibility
                 result["case_files"] = case_files["casefiles"]
                 result["num_of_casefiles"] = len(case_files["casefiles"])
             else:
                 content = "Search query returned no results."
-                result.done(True, content)
+                result = rp.done(True, content)
 
             yield StatusMessage("Finished function; Success:"+str(result['success']))
 
