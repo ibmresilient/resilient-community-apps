@@ -12,12 +12,13 @@
   ![screenshot: screenshot_1](./doc/screenshots/screenshot_1.png)
 -->
 
-# fn-urlhaus Functions for IBM Resilient
+# URLhaus Lookup + Submission
 
 - [Release Notes](#release-notes)
 - [Overview](#overview)
 - [Requirements](#requirements)
-- [Installation](#installation)
+- [Installation (App Host)](#installation-app-host)
+- [Installation (Integration Server)](#installation-integration-server)
 - [Uninstall](#uninstall)
 - [Troubleshooting](#troubleshooting)
 - [Support](#support)
