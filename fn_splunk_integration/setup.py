@@ -9,8 +9,9 @@ setup(
     license='MIT License',
     author='IBM Resilient',
     author_email='support@resilientsystems.com',
-    description="Resilient Circuits Components for 'fn_splunk_integration'",
-    long_description="Update SplunkES notable event; perform Splunk/SplunkES search; add new threat intel item; delete threat intel item",
+    description="Add, Search and Delete artifacts to Splunk ES",
+    long_description="Several functions to operate with Splunk ES intel collections, including updates to SplunkES notable events and add, search and delete operations to intel collections based on artifact type values.",
+    url="https://github.com/ibmresilient/resilient-community-apps",
     install_requires=[
         'resilient_circuits>=30.0.0',
         'resilient_lib',
