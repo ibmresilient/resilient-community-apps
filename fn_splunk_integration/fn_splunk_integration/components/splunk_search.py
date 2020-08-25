@@ -7,9 +7,11 @@
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-
+from resilient_lib import ResultPayload
 from fn_splunk_integration.util.function_utils import make_query_string as make_query_string
 from fn_splunk_integration.util import splunk_utils
+
+SECTION_HDR = "fn_splunk_integration"
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'splunk_search"""
@@ -17,12 +19,12 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get("fn_splunk_integration", {})
+        self.options = opts.get(SECTION_HDR, {})
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
-        self.options = opts.get("fn_splunk_integration", {})
+        self.options = opts.get(SECTION_HDR, {})
 
     @function("splunk_search")
     def _splunk_search_function(self, event, *args, **kwargs):
@@ -46,6 +48,8 @@ class FunctionComponent(ResilientComponent):
             log.info("splunk_query_param5: %s", splunk_query_param5)
             log.info("splunk_max_return: %d", splunk_max_return)
 
+            result_payload = ResultPayload(SECTION_HDR, **kwargs)
+
             splunk_verify_cert = True
             if "verify_cert" in self.options and self.options["verify_cert"] == "false":
                 splunk_verify_cert = False
@@ -67,13 +71,13 @@ class FunctionComponent(ResilientComponent):
             if splunk_max_return:
                 splunk_client.set_max_return(splunk_max_return)
 
-            result = splunk_client.execute_query(query_string)
-            log.info("Splunk search returns: " + str(result))
+            splunk_result = splunk_client.execute_query(query_string)
+            log.debug(splunk_result)
 
             yield StatusMessage("done...")
 
             # Produce a FunctionResult with the return value
-            yield FunctionResult(result)
+            yield FunctionResult(result_payload.done(True, splunk_result.get('events', {})))
         except Exception as e:
             log.error("Function execution throws exception {}".format(str(e)))
             yield FunctionError(str(e))

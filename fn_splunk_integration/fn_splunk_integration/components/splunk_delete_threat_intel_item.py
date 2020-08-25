@@ -7,8 +7,10 @@
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from resilient_lib import ResultPayload
 from fn_splunk_integration.util import splunk_utils
 
+SECTION_HDR = "fn_splunk_integration"
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'splunk_delete_threat_intel_item"""
@@ -16,12 +18,12 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get("fn_splunk_integration", {})
+        self.options = opts.get(SECTION_HDR, {})
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
-        self.options = opts.get("fn_splunk_integration", {})
+        self.options = opts.get(SECTION_HDR, {})
 
     @function("splunk_delete_threat_intel_item")
     def _splunk_delete_threat_intel_item_function(self, event, *args, **kwargs):
@@ -51,18 +53,20 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("starting...")
 
+            result_payload = ResultPayload(SECTION_HDR, **kwargs)
+
             splnk_utils = splunk_utils.SplunkUtils(host=self.options["host"],
                                                    port=self.options["port"],
                                                    username=self.options["username"],
                                                    password=self.options["splunkpassword"],
                                                    verify=splunk_verify_cert)
 
-            result = splnk_utils.delete_threat_intel_item(threat_type=splunk_threat_intel_type,
+            splunk_result = splnk_utils.delete_threat_intel_item(threat_type=splunk_threat_intel_type,
                                                           item_key=splunk_threat_intel_key,
                                                           cafile=splunk_verify_cert)
 
             yield StatusMessage("done...")
-            yield FunctionResult(result)
+            yield FunctionResult(result_payload.done(True, splunk_result.get('content', {})))
         except Exception as e:
             log.error("Function execution throws exception {}".format(str(e)))
             yield FunctionError(str(e))

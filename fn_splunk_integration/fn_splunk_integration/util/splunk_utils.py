@@ -168,6 +168,7 @@ class SplunkClient(object):
                         #
                         splunk_job.cancel()
                         raise SearchTimeout(splunk_job.name, splunk_job["dispatchState"])
+                LOG.debug("Sleeping for %s", self.polling_interval)
                 time.sleep(self.polling_interval)
 
         if splunk_job["dispatchState"] != "DONE" or splunk_job["isFailed"] == True:
@@ -178,7 +179,7 @@ class SplunkClient(object):
                 raise SearchFailure(splunk_job.name, splunk_job["dispatchState"] + u", " + str(splunk_job["messages"]))
 
         reader = splunk_results.ResultsReader(splunk_job.results())
-        result = {"events": [row for row in reader]}
+        result = {"events": list([dict(row) for row in reader])}
 
         return result
 

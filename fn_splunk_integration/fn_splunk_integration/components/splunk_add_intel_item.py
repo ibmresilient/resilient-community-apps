@@ -7,19 +7,22 @@
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from resilient_lib import ResultPayload
 from fn_splunk_integration.util import function_utils, splunk_utils
+
+SECTION_HDR = "fn_splunk_integration"
 
 class FunctionComponent(ResilientComponent):
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get("fn_splunk_integration", {})
+        self.options = opts.get(SECTION_HDR, {})
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
-        self.options = opts.get("fn_splunk_integration", {})
+        self.options = opts.get(SECTION_HDR, {})
 
     @function("splunk_add_intel_item")
     def _splunk_add_intel_item_function(self, event, *args, **kwargs):
@@ -64,6 +67,8 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("starting...")
 
+            result_payload = ResultPayload(SECTION_HDR, **kwargs)
+
             # build the dict used to add threat intel item
             item_dict = function_utils.make_item_dict([splunk_query_param1,
                                                        splunk_query_param2,
@@ -84,14 +89,14 @@ class FunctionComponent(ResilientComponent):
                                                    password=self.options["splunkpassword"],
                                                    verify=splunk_verify_cert)
 
-            result = splnk_utils.add_threat_intel_item(threat_type=splunk_threat_intel_type,
+            splunk_result = splnk_utils.add_threat_intel_item(threat_type=splunk_threat_intel_type,
                                                        threat_dict=item_dict,
                                                        cafile=splunk_verify_cert)
 
             yield StatusMessage("done...")
 
             # Produce a FunctionResult with the results
-            yield FunctionResult(result)
+            yield FunctionResult(result_payload.done(True, splunk_result.get('content', {})))
         except Exception as e:
             log.error("Function execution throws exception {}".format(str(e)))
             yield FunctionError()

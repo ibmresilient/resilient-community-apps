@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_splunk_integration',
-    version='1.0.2',
+    version='1.0.3',
     license='MIT License',
     author='IBM Resilient',
     author_email='support@resilientsystems.com',
@@ -13,6 +13,7 @@ setup(
     long_description="Update SplunkES notable event; perform Splunk/SplunkES search; add new threat intel item; delete threat intel item",
     install_requires=[
         'resilient_circuits>=30.0.0',
+        'resilient_lib',
         'splunk-sdk'
     ],
     packages=find_packages(),
