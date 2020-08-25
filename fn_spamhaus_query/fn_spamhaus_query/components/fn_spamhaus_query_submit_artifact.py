@@ -59,10 +59,9 @@ class FunctionComponent(ResilientComponent):
             if not response_json:
                 raise SpamhausRequestCallError("No Response Returned from Api call")
 
-            if res.status_code == 404:
-                response_json['is_in_blocklist'] = False  # a bool flag to for block list status
+            response_json['is_in_blocklist'] = False  # a bool flag to for block list status
 
-            elif res.status_code == 200:
+            if res.status_code == 200:
                 response_json['is_in_blocklist'] = True
                 resp_code_list = response_json.get('resp')
 
