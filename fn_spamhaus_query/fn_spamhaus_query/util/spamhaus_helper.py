@@ -1,14 +1,8 @@
 # (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 
+from resilient_lib import IntegrationError
+
 CONFIG_DATA_SECTION = 'fn_spamhaus_query'
-
-
-class SpamhausRequestCallError(Exception):
-    def __init__(self, error_msg):
-        self.error_msg = error_msg
-
-    def __str__(self):
-        return repr(self.error_msg)
 
 
 def make_api_call(base_url, api_key, search_resource, qry, rc):
@@ -32,7 +26,8 @@ def make_api_call(base_url, api_key, search_resource, qry, rc):
     return rc.execute_call_v2(
         method="get",
         url=qry_url,
-        headers=auth_header
+        headers=auth_header,
+        callback=spamhaus_call_error
     )
 
 
@@ -58,3 +53,15 @@ def format_dict(dict_to_format):
     str_to_rtn += "-----------------\n"
 
     return str_to_rtn
+
+
+def spamhaus_call_error(res):
+    """
+    :param res: Object returned from ResilientCommon.execute_call_v2 call
+    :return: res or raise an SpamhausRequestCallError with the reason
+    """
+
+    if res.status_code == 200 or res.status_code == 404:
+        return res
+    else:
+        raise IntegrationError("Call to Spamhaus API failed. Reason: {0}".format(res.reason))

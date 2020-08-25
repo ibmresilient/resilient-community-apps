@@ -6,10 +6,10 @@
 import logging
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import ResultPayload, RequestsCommon, validate_fields
+from resilient_lib import ResultPayload, RequestsCommon, validate_fields, IntegrationError
 
 from fn_spamhaus_query.util.info_response import STATIC_INFO_RESPONSE
-from fn_spamhaus_query.util.spamhaus_helper import CONFIG_DATA_SECTION, make_api_call, SpamhausRequestCallError
+from fn_spamhaus_query.util.spamhaus_helper import CONFIG_DATA_SECTION, make_api_call
 
 
 class FunctionComponent(ResilientComponent):
@@ -56,13 +56,19 @@ class FunctionComponent(ResilientComponent):
 
             # Get Received data in JSON format.
             response_json = res.json()
-            if not response_json:
-                raise SpamhausRequestCallError("No Response Returned from Api call")
 
-            response_json['is_in_blocklist'] = False  # a bool flag to for block list status
+            if res.status_code == 404:
+                if "not found" in res.reason.lower():
+                    response_json['is_in_blocklist'] = False  # a bool flag to for block list status
+                    yield StatusMessage("{0} not found in dataset {1}".format(fn_inputs.get("spamhaus_query_string"), fn_inputs.get("spamhaus_search_resource")))
 
-            if res.status_code == 200:
+                else:
+                    raise IntegrationError("Call to Spamhaus API failed. Reason: {0}".format(res.reason))
+
+            elif res.status_code == 200:
                 response_json['is_in_blocklist'] = True
+                yield StatusMessage("{0} found in dataset {1}".format(fn_inputs.get("spamhaus_query_string"), fn_inputs.get("spamhaus_search_resource")))
+
                 resp_code_list = response_json.get('resp')
 
                 # Checking STATIC_INFO_RESPONSE for more information on returned info code.
@@ -91,7 +97,7 @@ class FunctionComponent(ResilientComponent):
                         response_json[code] = code_information
 
             else:
-                raise SpamhausRequestCallError("Unhandled API status code returned: {0}".format(res.status_code))
+                raise IntegrationError("Unhandled API status code returned: {0}".format(res.status_code))
 
             # populating the result output set
             results = rp.done(success=True, content=response_json)
