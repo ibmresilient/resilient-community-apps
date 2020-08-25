@@ -55,7 +55,7 @@ If a given artifact appears in one of Spamhaus Datasets, then the artifact's des
   List any Requirements 
 -->
 * Resilient platform >= `v35.0.0`
-* An Integration Server running `resilient_circuits>=30.0.0`
+* An Integration Server running `resilient_circuits>=33.0.0`
   * To set up an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
   * If using API Keys, minimum required permissions are:
       * Org Data: Read, Edit
@@ -64,9 +64,9 @@ If a given artifact appears in one of Spamhaus Datasets, then the artifact's des
 
 ## Installation (App Host)
 With App Host, all the run-time components are pre-built. Perform the following steps to install and configure:
-* Download the `fn_spamhaus_query-x.x.x.zip`.
+* Download the `app-fn_spamhaus_query-x.x.x.zip`.
 * In Resilient navigate to **Adiminstrator Settings > Apps**
-* Click the Install button and select the downloaded `fn_spamhaus_query-x.x.x.zip`. This will install the associated customizations.
+* Click the Install button and select the downloaded `app-fn_spamhaus_query-x.x.x.zip`. This will install the associated customizations.
 * Once installed, navigate to the app's Configuration tab and edit the app.config file updating the `[resilient]` section as necessary and updating the `[fn_spamhaus_query]` section as necessary.
 ---
 

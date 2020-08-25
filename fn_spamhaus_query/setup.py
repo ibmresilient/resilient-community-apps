@@ -13,7 +13,7 @@ setup(
     description="Look up IP Addresses + Domain Name in Spamhaus Datasets",
     long_description="If a given artifact appears in one of Spamhaus Datasets, then the artifact's description is updated with additional enrichment information.",
     install_requires=[
-        'resilient_circuits>=30.0.0',
+        'resilient_circuits>=33.0.0',
         'resilient-lib>=32.0.140'
     ],
     packages=find_packages(),
