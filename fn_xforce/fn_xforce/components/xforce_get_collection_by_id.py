@@ -8,7 +8,7 @@ import json
 from resilient_circuits import ResilientComponent, function, handler, \
     StatusMessage, FunctionResult, FunctionError
 from fn_xforce.util.helper import XForceHelper
-from resilient_lib import RequestsCommon, ResultPayload
+from resilient_lib import RequestsCommon, ResultPayload, validate_fields
 try:
     from urllib import quote as url_encode  # Python 2.X
 except ImportError:
@@ -45,20 +45,12 @@ class FunctionComponent(ResilientComponent):
             HTTPS_PROXY, HTTP_PROXY, XFORCE_APIKEY, XFORCE_BASEURL, XFORCE_PASSWORD = helper.setup_config()
 
             # Get the function parameters:
+            validate_fields("xforce_collection_id")
             xforce_collection_id = kwargs.get("xforce_collection_id")  # text
 
             log = logging.getLogger(__name__)
             log.info("xforce_collection_id: %s", xforce_collection_id)
             log.info("X-Force Proxies: HTTP %s and HTTPS %s", HTTP_PROXY, HTTPS_PROXY)
-
-            if xforce_collection_id is None:
-                raise ValueError("No Query provided for XForce search.")
-            # ensure query is a string
-            try:
-                xforce_collection_id = str(xforce_collection_id)
-            except Exception as e:
-                log.error(e)
-                raise ValueError("Input must be a string.")
 
             # Setup proxies parameter if exists in app.config file
             proxies = {}

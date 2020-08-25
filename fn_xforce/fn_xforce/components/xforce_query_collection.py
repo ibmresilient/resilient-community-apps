@@ -7,7 +7,7 @@ import logging
 from resilient_circuits import ResilientComponent, function, handler, \
                                 StatusMessage, FunctionResult, FunctionError
 from fn_xforce.util.helper import XForceHelper
-from resilient_lib import RequestsCommon, ResultPayload
+from resilient_lib import RequestsCommon, ResultPayload, validate_fields
 try:
     from urllib import quote as url_encode  # Python 2.X
 except ImportError:
@@ -42,23 +42,14 @@ class FunctionComponent(ResilientComponent):
             # Get Xforce params
             HTTPS_PROXY, HTTP_PROXY, XFORCE_APIKEY, XFORCE_BASEURL, XFORCE_PASSWORD = helper.setup_config()
             # Get the function parameters:
-            xforce_collection_type = self.get_select_param(
-                kwargs.get("xforce_collection_type"))
-            xforce_query = kwargs.get("xforce_query")  # text
+            inputs = validate_fields(["xforce_query"], kwargs)
+            xforce_collection_type = inputs.get("xforce_collection_type")
+            xforce_query = inputs.get("xforce_query")
 
             log = logging.getLogger(__name__)
             log.info("xforce_collection_type: %s", xforce_collection_type)
             log.info("xforce_query: %s", xforce_query)
             log.info("X-Force Proxies: HTTP %s and HTTPS %s", HTTP_PROXY, HTTPS_PROXY)
-
-            if xforce_query is None:
-                raise ValueError("No Query provided for XForce search.")
-            # ensure query is a string
-            try:
-                xforce_query = str(xforce_query)
-            except Exception as e:
-                log.error(e)
-                raise ValueError("Input must be a string.")
 
             # Setup proxies parameter if exists in app.config file
             proxies = {}
