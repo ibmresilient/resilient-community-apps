@@ -45,7 +45,7 @@ class FunctionComponent(ResilientComponent):
             HTTPS_PROXY, HTTP_PROXY, XFORCE_APIKEY, XFORCE_BASEURL, XFORCE_PASSWORD = helper.setup_config()
 
             # Get the function parameters:
-            validate_fields("xforce_collection_id")
+            validate_fields("xforce_collection_id", kwargs)
             xforce_collection_id = kwargs.get("xforce_collection_id")  # text
 
             log = logging.getLogger(__name__)
