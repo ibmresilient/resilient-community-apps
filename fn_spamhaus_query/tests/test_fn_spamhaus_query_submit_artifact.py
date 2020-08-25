@@ -6,8 +6,8 @@ from mock import patch
 from resilient_lib import IntegrationError
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
-from fn_spamhaus_query.util.spamhaus_helper import CONFIG_DATA_SECTION
-
+from fn_spamhaus_query.util.spamhaus_helper import CONFIG_DATA_SECTION, spamhaus_call_error
+from shared_mock_data import MockedResponse
 
 PACKAGE_NAME = CONFIG_DATA_SECTION
 FUNCTION_NAME = "fn_spamhaus_query_submit_artifact"
@@ -18,15 +18,6 @@ resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
 config_data = """[{0}]
 spamhaus_wqs_url = https://www.example.com/
 spamhaus_dqs_key = ABCDEF""".format(PACKAGE_NAME)
-
-
-class MockedResponse:
-    def __init__(self):
-        self.success = True
-        self.status_code = 200
-
-    def json(self):
-        return {"resp": ["1002"]}
 
 
 def call_fn_spamhaus_query_submit_artifact_function(circuits, function_params, timeout=10):
@@ -75,13 +66,15 @@ class TestFnSpamhausQuerySubmitArtifact:
     def test_bad_url(self, circuits_app):
         with patch.dict(circuits_app.app.opts[PACKAGE_NAME], {"spamhaus_wqs_url": "https://www.example.com/"}):
 
-            function_params = {
-                "spamhaus_query_string": "123",
-                "spamhaus_search_resource": "info"
-            }
+            with patch("fn_spamhaus_query.components.fn_spamhaus_query_submit_artifact.RequestsCommon.execute_call_v2") as mock_get:
+                mock_get.return_value = MockedResponse(status_code=404, reason="Bad request")
+                function_params = {
+                    "spamhaus_query_string": "123",
+                    "spamhaus_search_resource": "info"
+                }
 
-            with pytest.raises(IntegrationError, match=r"Not Found for url"):
-                call_fn_spamhaus_query_submit_artifact_function(circuits_app, function_params)
+                with pytest.raises(IntegrationError, match=r"Call to Spamhaus API failed. Reason: Bad request"):
+                    call_fn_spamhaus_query_submit_artifact_function(circuits_app, function_params)
 
     def test_fields_defined(self, circuits_app):
         with patch("fn_spamhaus_query.components.fn_spamhaus_query_submit_artifact.RequestsCommon.execute_call_v2") as mock_get:
@@ -109,5 +102,6 @@ class TestFnSpamhausQuerySubmitArtifact:
             mock_get.assert_called_with(
                 method="get",
                 url="https://www.example.com/info/1002",
-                headers={"Authorization": "Bearer ABCDEF"}
+                headers={"Authorization": "Bearer ABCDEF"},
+                callback=spamhaus_call_error
             )
