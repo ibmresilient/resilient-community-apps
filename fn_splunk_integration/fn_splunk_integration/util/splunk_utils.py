@@ -44,21 +44,21 @@ class SearchTimeout(Exception):
 class SearchJobFailure(Exception):
     """ Search job creation failure"""
     def __init__(self, query):
-        fail_msg = "Failed to create search job for query [{}] ".format(query)
+        fail_msg = u"Failed to create search job for query [{}] ".format(query)
         super(SearchJobFailure, self).__init__(fail_msg)
 
 
 class RequestError(Exception):
     """ Request error"""
     def __init__(self, url, message):
-        fail_msg = "Request to url [{}] throws exception. Error [{}]".format(url, message)
+        fail_msg = u"Request to url [{}] throws exception. Error [{}]".format(url, message)
         super(RequestError, self).__init__(fail_msg)
 
 
 class DeleteError(Exception):
     """ Request error"""
     def __init__(self, url, message):
-        fail_msg = "Delete request to url [{}] throws exception. Error [{}]".format(url, message)
+        fail_msg = u"Delete request to url [{}] throws exception. Error [{}]".format(url, message)
         super(DeleteError, self).__init__(fail_msg)
 
 
@@ -132,7 +132,7 @@ class SplunkClient(object):
         """
         result = dict()
 
-        LOG.debug("Query: {}" .format(query))
+        LOG.debug(u"Query: {}" .format(query))
 
         splunk_job = self.start_search(query)
 
@@ -307,7 +307,7 @@ class SplunkUtils(object):
                    "content": resp.json()}
 
         except Exception as e:
-            raise DeleteError(url, "Failed to delete: {}".format(str(e)))
+            raise DeleteError(url, u"Failed to delete: {}".format(str(e)))
 
         return ret
 
