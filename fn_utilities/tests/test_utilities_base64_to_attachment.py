@@ -37,6 +37,7 @@ class TestBase64ToAttachment:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
+    @pytest.mark.livetest
     @pytest.mark.parametrize("base64content, incident_id, task_id, file_name, content_type, expected_result", [
         (AttachmentMock.test_data_b64("sample1.pdf"), 1234, None, "file.txt", "text/plain", {"id": 27})
     ])
