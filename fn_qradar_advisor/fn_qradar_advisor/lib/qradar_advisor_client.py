@@ -279,6 +279,7 @@ class QRadarFullSearch(SearchWaitCommand):
     SEARCH_RETURN_DONE = "DONE"
     SEARCH_RETURN_NO_OBSERVABLES = "NO_OBSERVABLES"
     SEARCH_RETURN_ERROR = "ERROR"
+    SEARCH_RETURN_NO_ERROR = "NO_ERROR"
     SEARCH_RETURN_ERROR_AUTH = "ERROR_AUTH"
 
     def __init__(self, http_info, log, return_stage="stage3", timeout=1200, period=5):
@@ -415,6 +416,13 @@ class QRadarFullSearch(SearchWaitCommand):
         if response.status_code == 200:
             stix_json = response.json()
         elif response.status_code == 404:
+            res = response.json()
+            if res["error"] == self.SEARCH_RETURN_NO_ERROR and res["status"] == self.SEARCH_RETURN_NO_OBSERVABLES:
+                # Status 404 can be thrown if No observables is found in search.
+                return {
+                    "status_code": response.status_code
+                }
+
             self.log.error("Search result for {} does not exist.".format(str(search_id)))
             raise SearchFailure(str(search_id), "Search result do not exist.")
         else:
