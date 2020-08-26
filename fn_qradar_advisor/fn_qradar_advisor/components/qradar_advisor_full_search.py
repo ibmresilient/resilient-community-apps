@@ -81,17 +81,35 @@ class FunctionComponent(ResilientComponent):
 
             stix_json = client.full_search(qradar_advisor_search_value)
 
-            #
-            # extract list of observables from this stix bundle
-            #
-            observables = stix_utils.get_observables(stix_json=stix_json,
-                                                     log=log)
-            #
-            # generate a folder-tree like structure in html for this stix bundle
-            #
-            html_str = stix_tree.get_html(stix_json, log)
+            if "status_code" in stix_json:
+                #
+                # If no observables found in analysis add an error status as html.
+                #
+                artifact_value = qradar_advisor_search_value.split(':')[1] \
+                    if len(qradar_advisor_search_value.split(':')) == 2 else qradar_advisor_search_value
+                summary_string = 'The search returned an error.'
+                status_string = "QRadar Advisor returned status code '{}'.".format(stix_json["status_code"])
+                if stix_json["status_code"] == 404:
+                    summary_string = "This search result has no observables."
 
-            yield StatusMessage("Returning {} observables".format(str(len(observables))))
+                html_str = "<p>Watson Search with Local Context for artifact value: " + artifact_value + "</p>"
+                html_str += "<br><p><span style=\"font-weight:bold\">" + status_string + "</span></p>"
+                html_str += "<p><span style=\"font-weight:bold\">" + summary_string + "</span></p><br>"
+
+                # Set observables as an empty list
+                observables = []
+            else:
+                #
+                # extract list of observables from this stix bundle
+                #
+                observables = stix_utils.get_observables(stix_json=stix_json,
+                                                         log=log)
+                #
+                # generate a folder-tree like structure in html for this stix bundle
+                #
+                html_str = stix_tree.get_html(stix_json, log)
+
+                yield StatusMessage("Returning {} observables".format(str(len(observables))))
 
             #
             # no insights

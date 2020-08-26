@@ -593,6 +593,16 @@ class TestQRadarFullSearch(object):
             "type": "bundle"
         }
 
+        err_json = {
+            'status': '',
+            'error': 'ERROR'
+        }
+
+        err_404_json = {
+            'status': 'NO_OBSERVABLES',
+            'progress': 'LOCAL_MINING_COMPLETE',
+            'error': 'NO_ERROR'
+        }
         mocked_session.get.return_value = _generate_response(stix_json, 200)
 
         mocked_session.get.side_effect = None
@@ -613,13 +623,18 @@ class TestQRadarFullSearch(object):
                                               verify=True)
 
         # status_doce = 404 handling
-        mocked_session.get.return_value = _generate_response(stix_json, 404)
+        mocked_session.get.return_value = _generate_response(err_json, 404)
 
         try:
             full_search.get_search_result(search_id)
             assert False
         except SearchFailure as e:
             assert True
+
+        mocked_session.get.return_value = _generate_response(err_404_json, 404)
+
+        ret = full_search.get_search_result(search_id)
+        assert ret == { "status_code": 404}
 
         # other status_doce  handling
         mocked_session.get.return_value = _generate_response(stix_json, 400)
