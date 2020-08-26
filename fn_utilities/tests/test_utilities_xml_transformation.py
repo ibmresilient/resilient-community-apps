@@ -33,6 +33,7 @@ class TestUtilitiesXmlTransformation:
     """ Tests for the utilities_xml_transformation function"""
     DATA_DIR = "data/xmltransformation"
 
+    @pytest.mark.livetest
     @pytest.mark.parametrize("xml_source, xml_stylesheet, expected_results", [
         ("cdcatalog.xml", "cdcatalog.xslt", "cdcatalog.html")
     ])

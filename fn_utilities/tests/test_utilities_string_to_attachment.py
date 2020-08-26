@@ -40,10 +40,10 @@ class TestUtilitiesStringToAttachment:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
+    @pytest.mark.livetest
     @pytest.mark.parametrize("string_to_convert_to_attachment, attachment_name, incident_id, expected_results", [
         ("test string", "test attachment name", 202, {"attachment_id" : 27})
     ])
-
     def test_success(self, circuits_app, string_to_convert_to_attachment, attachment_name, incident_id, expected_results):
         """ Test calling with sample values for the parameters """
         function_params = { 
