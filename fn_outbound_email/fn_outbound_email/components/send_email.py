@@ -180,7 +180,7 @@ class FunctionComponent(ResilientComponent):
                 file_path = os.path.join(tempdir, file_name)
                 with open(file_path, "wb+") as temp_file:
                     temp_file.write(file_contents)
-                updated_lists = file_list
+                updated_lists = list(file_list)
                 updated_lists.append(file_path)
         return set(updated_lists)
 
