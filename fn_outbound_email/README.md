@@ -7,8 +7,10 @@
     - [v1.0.8](#v108)
   - [Requirements](#requirements)
   - [Installation](#installation)
-    - [Installation: New users](#installation-new-users)
-    - [Installation: Existing Users](#installation-existing-users)
+    - [Installation (App Host)](#installation-app-host)
+  - [* Once installed, navigate to the app's Configuration tab and edit the app.config file updating the `[resilient]` section as necessary and updating the `[fn_outbound_email]` section as necessary.](#ullionce-installed-navigate-to-the-apps-configuration-tab-and-edit-the-appconfig-file-updating-the-resilient-section-as-necessary-and-updating-the-fn_outbound_email-section-as-necessaryliul)
+      - [Installation: New users](#installation-new-users)
+      - [Installation: Existing Users](#installation-existing-users)
   - [Common connection issues with TLS and TroubleShooting](#common-connection-issues-with-tls-and-troubleshooting)
   - [Uninstall](#uninstall)
   - [Troubleshooting](#troubleshooting)
@@ -56,7 +58,15 @@
 
 ## Installation
 
-### Installation: New users
+### Installation (App Host)
+With App Host, all the run-time components are pre-built. Perform the following steps to install and configure:
+* Download the `app-fn_outbound_email-x.x.x.zip`.
+* In Resilient navigate to **Adiminstrator Settings > Apps**
+* Click the Install button and select the downloaded `app-fn_outbound_email-x.x.x.zip`. This will install the associated customizations.
+* Once installed, navigate to the app's Configuration tab and edit the app.config file updating the `[resilient]` section as necessary and updating the `[fn_outbound_email]` section as necessary.
+---
+
+#### Installation: New users
 * Download the `fn_outbound_email.zip`.
 * Copy the `.zip` to your Integration Server and SSH into it.
 * **Unzip** the package:
@@ -104,7 +114,7 @@
   $ resilient-circuits run
   ```
 
-### Installation: Existing Users
+#### Installation: Existing Users
 * Prior to the steps above, if you have a modified jinja template in use in the preprocessing script, save it offline as a .jinja file
 * This file can be specified using the `template_file` parameter, an example template is provided in the `data/` directory, which the integration uses out of the box
 * Export the current working state in Adminstrator Settings/ Organization/ Export
