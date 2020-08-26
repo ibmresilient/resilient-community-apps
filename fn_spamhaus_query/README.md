@@ -12,7 +12,7 @@
   ![screenshot: screenshot_1](./doc/screenshots/screenshot_1.png)
 -->
 
-# fn-spamhaus-query Functions for IBM Resilient
+# Spamhaus Lookup for IBM Resilient
 
 - [Release Notes](#release-notes)
 - [Overview](#overview)
