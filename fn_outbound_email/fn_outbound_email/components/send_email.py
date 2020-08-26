@@ -169,39 +169,32 @@ class FunctionComponent(ResilientComponent):
             return in_string.split(',')
         return []
 
-    def process_attachments(self, inc_id, attachments):
-        file_list = []
-        incident_attachment_list = self.rest_client().get("/incidents/{inc_id}/attachments?handle_format=objects".
-                                                          format(inc_id=inc_id))
-
-        if attachments == "*": # send all attachments
-            for incident_attachment in incident_attachment_list:
-                file_name = incident_attachment["name"]
+    def temp_attach(self, inc_id, incident_attachment_list, attachments, file_list):
+        for incident_attachment in incident_attachment_list:
+            file_name = incident_attachment["name"]
+            if file_name in attachments:
                 file_contents = self.rest_client().get_content("/incidents/{inc_id}/attachments/{attach_id}/contents".
-                                                               format(inc_id=inc_id,
-                                                                      attach_id=incident_attachment["id"]))
+                                                                format(inc_id=inc_id,
+                                                                        attach_id=incident_attachment["id"]))
                 tempdir = tempfile.mkdtemp()
                 file_path = os.path.join(tempdir, file_name)
                 with open(file_path, "wb+") as temp_file:
                     temp_file.write(file_contents)
 
                 file_list.append(file_path)
-            return set(file_list)
+        return set(file_list)
+
+    def process_attachments(self, inc_id, attachments):
+        file_list = []
+        incident_attachment_list = self.rest_client().get("/incidents/{inc_id}/attachments?handle_format=objects".
+                                                          format(inc_id=inc_id))
+        if attachments == "*": # send all attachments
+            all_attach = temp_attach(self, inc_id, incident_attachment_list, attachments, file_list)
+            return all_attach
         elif attachments: # send selected attachments
             attachments = FunctionComponent.split_string(attachments)
-            for incident_attachment in incident_attachment_list:
-                file_name = incident_attachment["name"]
-                if file_name in attachments:
-                    file_contents = self.rest_client().get_content("/incidents/{inc_id}/attachments/{attach_id}/contents".
-                                                                   format(inc_id=inc_id,
-                                                                          attach_id=incident_attachment["id"]))
-                    tempdir = tempfile.mkdtemp()
-                    file_path = os.path.join(tempdir, file_name)
-                    with open(file_path, "wb+") as temp_file:
-                        temp_file.write(file_contents)
-
-                    file_list.append(file_path)
-            return set(file_list)
+            set_attach = temp_attach(self, inc_id, incident_attachment_list, attachments, file_list)
+            return set_attach
         else: # no attachments
             return set(file_list)
 
