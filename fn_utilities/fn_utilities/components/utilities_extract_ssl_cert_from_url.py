@@ -79,7 +79,7 @@ class FunctionComponent(ResilientComponent):
                     conn = ssl.create_connection((url_dict.hostname, url_dict.port))
                 else:
                     conn = ssl.create_connection((url_dict.hostname, 443))
-                context = ssl.SSLContext(ssl.PROTOCOL_SSLv23)
+                context = ssl.SSLContext(ssl.PROTOCOL_TLS)
                 sock = context.wrap_socket(conn, server_hostname=url_dict.hostname)
                 certificate = ssl.DER_cert_to_PEM_cert(sock.getpeercert(True))
             except Exception:

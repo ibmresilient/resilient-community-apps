@@ -2,7 +2,7 @@
 """Tests using pytest_resilient_circuits"""
 
 from __future__ import print_function
-
+import os
 from resilient_circuits.action_message import FunctionException_, FunctionError_
 
 try:
@@ -14,7 +14,7 @@ import pytest
 from fn_utilities.components.utilities_excel_query import WorksheetData
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult, FunctionError
-from tests.mock_attachment import AttachmentMock
+from mock_attachment import AttachmentMock
 import json
 import os
 
@@ -93,7 +93,7 @@ class TestUtilitiesExcelQuery:
         worksheet.result = expected
         results = call_utilities_excel_query_function(circuits_app, function_params)
 
-        assert expected == results
+        assert expected.replace(' ', '') == results.replace(' ', '')
 
 
 class TestWorksheetData:
@@ -133,6 +133,9 @@ class TestWorksheetData:
         with open(res_path, 'r') as file:
             expected = file.read()
 
+        #fname = os.path.basename(expected_result_path)
+        #with open(fname, "w") as write_file:
+        #    json.dump(wb.result, write_file, default=WorksheetData.serializer)
         assert json.loads(expected.strip()) == json.loads(json.dumps(wb.result, default=WorksheetData.serializer))
 
     @pytest.mark.parametrize("path, ranges, defined_names, expected_result_path", [
@@ -235,7 +238,7 @@ class TestWorksheetData:
     @pytest.mark.parametrize("path, ranges, defined_names, expected_result_path", [
         ("data/excel_query/budget.xlsx", "", "test1", "data/excel_query/test_named_ranges.dat"),
         ("data/excel_query/budget.xlsx", "'JAN 2015'!A3, 'JAN 2015'!A1:D10", "test1",
-            "data/excel_query/test_ranges_and_named.dat")
+         "data/excel_query/test_ranges_and_named.dat")
     ])
     def test_defined_names(self, path, ranges, defined_names, expected_result_path):
         wb_path = os.path.join(os.path.dirname(__file__), path)

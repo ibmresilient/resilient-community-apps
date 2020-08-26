@@ -29,7 +29,8 @@ remote_auth_transport=ntlm
 remote_computer=(username:password@server)
 
 # remote shell commands
-remote_command=[remote path to script]
+remote_command_powershell=[remote path to script]
+remote_command_linux=(remote path to script)
 
 # local shell_command default commands (unix)
 nslookup=nslookup "{{shell_param1}}"
@@ -53,7 +54,7 @@ whois=whois "{{shell_param1}}"
 # (etc)
 
 # directory of xml stylesheets to use for xml transformations
-# xml_stylesheet_dir=
+# xml_stylesheet_dir=/var/rescircuits
 
 # Max Timer sleep timeThe input string is of format “time value” concatenated with a
 # “time unit” character, where character is: ‘s’ for seconds, ‘m’ for minutes, ‘h’ for hours
