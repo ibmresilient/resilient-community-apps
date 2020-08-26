@@ -8,11 +8,6 @@ import sys
 
 PACKAGE='fn_utilities'
 
-# python 3 only support
-if sys.version_info < (3,0,0):
-    print('{} requires Python 3, Python {} was detected. Terminating.'.format(PACKAGE, str(sys.version[0])))
-    sys.exit(1)
-
 def get_module_name(module_path):
     """
     Return the module name of the module path
@@ -53,10 +48,12 @@ setup(
         'paramiko'
     ],
     packages=find_packages(),
+    python_requires='>=3',
     include_package_data=True,
     platforms='any',
     classifiers=[
         'Programming Language :: Python',
+        'Programming Language :: Python :: 3'
     ],
     entry_points={
         "resilient.circuits.components": [
