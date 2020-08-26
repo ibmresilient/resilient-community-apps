@@ -98,7 +98,7 @@ def get_observable_description(stix_obj, log):
             desc = stix_obj[u"pattern"].replace("[domain-name:value='", '').replace("']", '')
         elif stix_obj[u"name"] == u"Hash":
             # Desc is obtained by extracting hash value from stix_obj 'pattern'.
-            # e.g. @file:hashes.'MD5'='abcd1234effe56786543abcd1234effe" -> "abcd1234effe56786543abcd1234effe"
+            # e.g. "file:hashes.'MD5'='abcd1234effe56786543abcd1234effe" -> "abcd1234effe56786543abcd1234effe"
             desc = re.sub(HASH_INDICATOR_REGEX, '', stix_obj[u"pattern"]).replace("']", '')
         else:
             # Don't know how to handle the pattern, just put everything
