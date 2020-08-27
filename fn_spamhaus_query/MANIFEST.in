@@ -1,4 +1,9 @@
 include README.md
+include Dockerfile
+include entrypoint.sh
 include fn_spamhaus_query/util/*
 include fn_spamhaus_query/LICENSE
-include screenshots/*
+include doc/*.md
+include doc/screenshots/*
+
+exclude *.bak
