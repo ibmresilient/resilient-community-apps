@@ -79,7 +79,8 @@ class IntegrationComponent(ResilientComponent):
                     "microsoft_security_graph_alert_search_query": microsoft_security_graph_alert_search_query
                 },
                 "run_time": end_time - start_time,
-                "content": r.json()
+                "content": r.json(),
+                "success": True
             }
 
             # Produce a FunctionResult with the results
@@ -116,7 +117,8 @@ class IntegrationComponent(ResilientComponent):
                     "microsoft_security_graph_alert_id": microsoft_security_graph_alert_id
                 },
                 "run_time": end_time - start_time,
-                "content": r.json()
+                "content": r.json(),
+                "success": True
             }
 
             # Produce a FunctionResult with the results
@@ -160,7 +162,8 @@ class IntegrationComponent(ResilientComponent):
                     "microsoft_security_graph_alert_data": microsoft_security_graph_alert_data
                 },
                 "run_time": end_time - start_time,
-                "content": r.json()
+                "content": r.json(),
+                "success": True
             }
 
             # Produce a FunctionResult with the results
