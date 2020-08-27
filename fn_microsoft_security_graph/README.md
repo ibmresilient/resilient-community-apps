@@ -5,8 +5,10 @@
   Specify all changes in this release. Do not remove the release 
   notes of a previous release
 -->
-### v1.0.2
+### v1.0.3
+* Readable formatting of incident notes containing Alert JSON data
 
+### v1.0.2
 * Support for App Host
 * Proxy support
 
@@ -16,7 +18,15 @@
 
 ## Installation
 
+### App Format
+
+The app .zip file is in a container format and requires a Resilient platform configured with an App Host. 
+
+The app tar.gz file is an extension format and requires a Resilient platform configured with an integration server.
+
 ### App Host
+For a complete guide on how to configure App Host for Resilient and install apps, please reference the Resilient Apps [Knowledge Center](https://www.ibm.com/support/knowledgecenter/SSBRUQ).
+
 All the components for running this integration in a container already exist when using the App Host app.
 
 To install,
@@ -84,7 +94,7 @@ To install,
   ```
 ---
 
-## Uninstall
+#### Uninstall
 * SSH into your Integration Server.
 * **Uninstall** the package:
   ```
@@ -92,37 +102,3 @@ To install,
   ```
 * Open the config file, scroll to the [fn_microsoft_security_graph] section and remove the section or prefix `#` to comment out the section.
 * **Save** and **Close** the app.config file.
-
-<br/>
-## Configuration
-
-1. Import the package's customization data into the Resilient platform using the command:
-
-		resilient-circuits customize
-
-2. Update the `app.config` file by first running:
-
-		resilient-circuits configure -c, to start a new configuration file or
-		resilient-circuits configure -u, to update an existing configuration
-
-3.	Edit the `app.config` file:
-
-
-## Customization
-For each workflow, verify the inputs and the post-process scripts to ensure that they are accurate and appropriate.
-
-## Run Functions
-1. Start Resilient Circuits with:
-
-		resilient-circuits run
-
-2. Trigger one of the rules that will return information on alerts from the Microsoft Graph.
-
-## Run alert poller:
-Based on configurations under the `## Polling options` section in the `app.config`, you can customize the polling interval, which alerts to find, and other settings.
-
-1. Start Resilient Circuits with:
-
-		resilient-circuits run
-
-2. When an alert that does not have a corresponding open incident in the Resilient platform and would be returned by the search query, is generated in the Microsoft Security Graph, a new incident is created.
