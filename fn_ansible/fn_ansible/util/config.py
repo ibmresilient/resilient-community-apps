@@ -12,6 +12,7 @@ def config_section_data():
     """
     config_data = u"""[fn_ansible]
 runner_dir=</full/path/to/your/ansible/directory>
+# temporary files collected when running a module or a playbook
 artifact_dir=</full/path/to/artifacts/directory>
 # change this value to trim the collection of previous process runs
 artifact_retention_num=0

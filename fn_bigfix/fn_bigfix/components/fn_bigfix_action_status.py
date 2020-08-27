@@ -38,12 +38,14 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
+        self.opts = opts
         self.options = opts.get("fn_bigfix", {})
         validate_opts(self)
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
+        self.opts = opts
         self.options = opts.get("fn_bigfix", {})
         validate_opts(self)
 
@@ -61,7 +63,7 @@ class FunctionComponent(ResilientComponent):
                 raise ValueError("Required parameter 'bigfix_action_id' not set.")
 
             yield StatusMessage("Running Query BigFix for BigFix action id '{}' ...".format(bigfix_action_id))
-            bigfix_client = BigFixClient(self.options)
+            bigfix_client = BigFixClient(self.opts, self.options)
             retry_interval = int(self.options.get("bigfix_polling_interval"))
             retry_timeout = int(self.options.get("bigfix_polling_timeout"))
 

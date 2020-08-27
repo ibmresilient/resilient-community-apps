@@ -44,12 +44,14 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
+        self.opts = opts
         self.options = opts.get("fn_bigfix", {})
         validate_opts(self)
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
+        self.opts = opts
         self.options = opts.get("fn_bigfix", {})
         validate_opts(self)
 
@@ -74,7 +76,7 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage(u"Running BigFix Query for Endpoint id {0}, with name {1} ..."
                                 .format(params["asset_id"], params["asset_name"]))
-            bigfix_client = BigFixClient(self.options)
+            bigfix_client = BigFixClient(self.opts, self.options)
 
             try:
                 # Perform the BigFix Query

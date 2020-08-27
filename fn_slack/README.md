@@ -11,11 +11,24 @@ Many of the features of posting a Slack message are under customer control inclu
 - Slack user ID <@U345GHIJKL> and channel ID #C012ABCDE references
 - Exporting conversation history to a text file, saving it as an Attachment in Resilient and archiving Slack channel
 
-## Installation
+## History
+
+| Version| Comment |
+| ------- | ------ |
+| 1.0.2 | Support for App Host, proxy support added |
+
+## App Host Installation
+All the components for running Slack in a container already exist when using the App Host app. The remainder of this section details the Slack configuration file changes.
+
+It's possible to override the template used for archiving a channel. 
+Use the app.config setting: `template_file=/var/rescircuits/slack_template.jinja2` to reference the template file named `slack_template.jinja2` at location
+`/var/rescircuits`. See the default template referenced [in the Template file section](#template_file).
+
+## Integration Server Installation
 
 Prerequisites:
 
-    resilient-circuits >=v30.0.0
+    resilient-circuits >=v35.0.0
 
 To install in "development mode"
 
@@ -43,7 +56,7 @@ To uninstall
     
 See the accompanying documentation for how to install to Resilient and configure the function.
     
-## Configuration
+### Configuration
 
 1. Import the package's customization data into the Resilient Platform through the command:
 
@@ -70,10 +83,48 @@ Then edit the [fn_slack]:
     # Set your bot's name that will appear as the author of the message. 
     # Must be used in conjunction with slack_as_user set to false, otherwise ignored.
     username=Resilient
+
+    # template file override
+    #template_file=/var/rescircuits/slack_template.jinja2
+
+    # add proxy support here or use [integrations] for integration wide proxy settings
+    #http_proxy=
+    #https_proxy=
 ```
 
-## Use
+### Use
 
 1. Start Resilient Circuits with: `resilient-circuits run`
 
 See the accompanying documentation for how to customize and use the function.
+
+## Template file
+{%- if is_msg_parent -%}
+    {{- number }} - {{ username }} POSTED ON {{ msg_time }}:{{ '\n' -}}
+    {%- if msg_pretext -%}
+        {{- msg_pretext }}{{ '\n' -}}
+    {%- endif -%}
+    {%- if msg_text -%}
+        {{- msg_text }}{{ '\n' -}}
+    {%- endif -%}
+    {%- if file_name -%}
+        {{- file_name }}{{ '\n' -}}
+    {%- endif -%}
+    {%- if file_permalink -%}
+        {{- file_permalink }}{{ '\n' -}}
+    {%- endif %}{{ '\n' -}}
+    {%- if reply_count and reply_count > 0 -%}
+        {{- reply_count }} REPLIES:{{ '\n' -}}
+    {% endif -%}
+{%- else -%}
+    {{- '\t' }}{{ number }} - {{ username }} POSTED A REPLY ON {{ msg_time }}:{{ '\n' -}}
+    {%- if msg_text -%}
+        {{- '\t' }}{{ msg_text }}{{ '\n' -}}
+    {%- endif -%}
+    {%- if file_name -%}
+        {{- '\t' }}{{ file_name }}{{ '\n' -}}
+    {%- endif -%}
+    {%- if file_permalink -%}
+        {{- '\t' }}{{ file_permalink }}{{ '\n' -}}
+    {% endif %}{{ '\n' -}}
+{%- endif -%}

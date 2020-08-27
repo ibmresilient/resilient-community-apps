@@ -1,4 +1,4 @@
-# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 
@@ -13,6 +13,7 @@ def config_section_data():
     """
     config_data = u"""[fn_ip_void]
 ipvoid_base_url=https://endpoint.apivoid.com
+ipvoid_sub_url=v1/pay-as-you-go/
 ipvoid_api_key=<your-api-key>
 """
     return config_data
