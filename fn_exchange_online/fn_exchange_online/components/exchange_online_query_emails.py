@@ -4,6 +4,7 @@
 """Function implementation"""
 
 import json
+import datetime
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import validate_fields, RequestsCommon, ResultPayload, IntegrationError
@@ -92,13 +93,18 @@ class FunctionComponent(ResilientComponent):
                              "exo_query_output_format": query_output_format,
                              "email_results": email_results}
 
-            # Write query results to an attachment or note as specified by the user in activity field.
-            # Writing results to the data table takes place in the post processor script.
-            self.write_results_to_note_or_attachment(email_address, mail_folders, sender, start_date, end_date,
-                                                     has_attachments, message_subject, message_body, query_results)
+
 
             # Put query results in the results payload.
             results = rp.done(True, query_results)
+
+            metrics = results.get("metrics")
+            query_time_ms = metrics.get("execution_time_ms")
+            # Write query results to an attachment or note as specified by the user in activity field.
+            # Writing results to the data table takes place in the post processor script.
+            self.write_results_to_note_or_attachment(email_address, mail_folders, sender, start_date, end_date,
+                                                     has_attachments, message_subject, message_body, query_results,
+                                                     query_time_ms)
 
             yield StatusMessage(u"Returning results from query.")
 
@@ -112,7 +118,8 @@ class FunctionComponent(ResilientComponent):
             yield FunctionError(err)
 
     def write_results_to_note_or_attachment(self, email_address, mail_folders, sender, start_date, end_date,
-                                            has_attachments, message_subject, message_body, query_results):
+                                            has_attachments, message_subject, message_body, query_results,
+                                            query_time_ms):
         """
         Write the output results of a query to an incident note and/or an incident attachment.
         Results that go to the Exchange Online data table are written in the workflow post-processor script.
@@ -139,26 +146,39 @@ class FunctionComponent(ResilientComponent):
             incident_id = query_results.get('incident_id')
             email_results = query_results.get('email_results')
 
-            note = u"Exchange Online Message Query Criteria:\n\n"
-            note = u"{0}    email address:   {1}\n".format(note, email_address)
-            note = u"{0}    mail folder:     {1}\n".format(note, mail_folders)
-            note = u"{0}    email sender:    {1}\n".format(note, sender)
-            note = u"{0}    start date:      {1}\n".format(note, start_date)
-            note = u"{0}    end date:        {1}\n".format(note, end_date)
-            note = u"{0}    has attachments: {1}\n".format(note, has_attachments)
-            note = u"{0}    message subject: {1}\n".format(note, message_subject)
-            note = u"{0}    message body:    {1}\n\nResults:\n\n".format(note, message_body)
+            note = u"<b>Exchange Online Message Query Criteria:</b>\n\n"
+            if email_address:
+                note = u"{0}    <b>email address:</b>   {1}\n".format(note, email_address)
+            if mail_folders:
+                note = u"{0}    <b>mail folder:</b>     {1}\n".format(note, mail_folders)
+            if sender:
+                note = u"{0}    <b>email sender:</b>    {1}\n".format(note, sender)
+            if start_date:
+                utc_time = datetime.datetime.fromtimestamp(start_date / 1000).strftime('%Y-%m-%dT%H:%M:%SZ')
+                note = u"{0}    <b>start date:</b>      {1}\n".format(note, utc_time)
+            if end_date:
+                utc_time = datetime.datetime.fromtimestamp(end_date / 1000).strftime('%Y-%m-%dT%H:%M:%SZ')
+                note = u"{0}    <b>end date:</b>  {1}\n".format(note, utc_time)
+            if has_attachments:
+                note = u"{0}    <b>has attachments:</b> {1}\n".format(note, has_attachments)
+            if message_subject:
+                note = u"{0}    <b>message subject:</b> {1}\n".format(note, message_subject)
+            if message_body:
+                note = u"{0}    <b>message body:</b>    {1}\n".format(note, message_body)
 
             total_emails = 0
             email_note = u""
             for email in email_results:
                 num_emails_found = len(email.get('email_list'))
-                email_note = u"{0} {1} {2} matching messages found.\n".format(email_note, email.get('email_address'),
-                                                                              num_emails_found)
-                total_emails = total_emails + num_emails_found
+                if num_emails_found > 0:
+                    email_note = u"{0} {1}:  {2}\n".format(email_note, email.get('email_address'), num_emails_found)
+                    total_emails = total_emails + num_emails_found
+
+            # Add the query execution time
+            email_note = u"{0}\n\n<b>Query excution time:</b>  {1}ms.".format(email_note, query_time_ms)
 
             # Add total messages found to the note text.
-            note = "{0}Total messages matching search criteria: {1}\n\n{2}".format(note, total_emails, email_note)
+            note = u"{0}\n<b>Total messages matching search criteria:</b>  {1}\n\n{2}".format(note, total_emails, email_note)
 
             if "Incident attachment" in output_format:
                 LOG.info('Writing query results to attachment.')
