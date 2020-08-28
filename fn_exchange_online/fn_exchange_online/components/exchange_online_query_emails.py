@@ -175,10 +175,11 @@ class FunctionComponent(ResilientComponent):
                     total_emails = total_emails + num_emails_found
 
             # Add the query execution time
-            email_note = u"{0}\n\n<b>Query excution time:</b>  {1}ms.".format(email_note, query_time_ms)
+            email_note = u"{0}<b>Query execution time:</b>  {1}ms.".format(email_note, query_time_ms)
 
             # Add total messages found to the note text.
-            note = u"{0}\n<b>Total messages matching search criteria:</b>  {1}\n\n{2}".format(note, total_emails, email_note)
+            note = u"{0}\n<b>Total messages matching search criteria:</b>  {1}\n{2}".format(note, total_emails,
+                                                                                              email_note)
 
             if "Incident attachment" in output_format:
                 LOG.info('Writing query results to attachment.')
