@@ -94,9 +94,9 @@ class PP_ThreatPolling(ResilientComponent):
         self.score_threshold = float(self.options.get("score_threshold")) \
             if self.options.get("score_threshold") else None
 
-        # Filter - Set types of incidents to import to Resilient
-        self.id_type_filter = self._get_type_filter(self.options.get("type_filter", None))
-
+        # Type Filters  - Set of types of incidents to import to Resilient by id.
+        #               - Set of incident type filters by name.
+        self.id_type_filter, self.type_filter  = self._get_type_filter(self.options.get("type_filter", None))
         # Create a new Resilient incident from this event
         # using an optional JSON (JINJA2) template file
         threat_path = self.options.get("threat_template", self.default_path)
@@ -122,25 +122,37 @@ class PP_ThreatPolling(ResilientComponent):
 
     def _get_type_filter(self, tp_filter):
         """
-        Get set of type ids for the type_filter options.
-        :return: set of threat ids
+        Get sets of filter types for the type_filter options.
+        Calculate 2 sets:
+        A set of type filters mapped to Resilient incident type ids
+        A set of type filters by name.
+
+        :return: Tuple of type filter sets.
         """
 
         if not tp_filter:
-            return None
+            return (None, None)
 
         type_filter = tp_filter.strip().lower()
         if not type_filter or 'all' in type_filter:
             # none or "all" specified, no filtering
-            return None
+            return (None, None)
 
         filters = set()
+        filters_by_name = set()
+
         for typestring in type_filter.split(','):
-            incident_type_id = self._get_incident_type_id(typestring.strip())
+            t_f = typestring.strip()
+            incident_type_id = self._get_incident_type_id(t_f)
             if incident_type_id:
                 filters.add(incident_type_id)
 
-        return filters
+            if t_f in TYPE_2_TYPE_ID_MAP:
+                filters_by_name.add(t_f)
+            else:
+                log.info(u"Invalid incident type filter option '{}'.".format(t_f))
+
+        return (filters, filters_by_name)
 
     def main(self):
         """main entry point, instantiate polling thread"""
@@ -414,7 +426,7 @@ class PP_ThreatPolling(ResilientComponent):
         incident_type_ids = self.map_to_incident_type_ids(threat_types)
 
         # check to see if filtering is requested
-        if self.id_type_filter is None or self.id_type_filter.intersection(incident_type_ids):
+        if self.type_filter is None or self.type_filter.intersection(threat_types):
             # no filter or incident type in filter, return list
             return list(incident_type_ids)
 
