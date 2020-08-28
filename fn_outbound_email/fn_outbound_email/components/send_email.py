@@ -170,6 +170,7 @@ class FunctionComponent(ResilientComponent):
         return []
 
     def temp_attach(self, inc_id, incident_attachment_list, attachments, file_list):
+        updated_lists = list(file_list)
         for incident_attachment in incident_attachment_list:
             file_name = incident_attachment["name"]
             if file_name in attachments:
@@ -180,7 +181,6 @@ class FunctionComponent(ResilientComponent):
                 file_path = os.path.join(tempdir, file_name)
                 with open(file_path, "wb+") as temp_file:
                     temp_file.write(file_contents)
-                updated_lists = list(file_list)
                 updated_lists.append(file_path)
         return set(updated_lists)
 
