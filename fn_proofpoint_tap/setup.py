@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_proofpoint_tap',
-    version='1.0.2',
+    version='1.0.3',
     license='MIT',
     author='IBM Resilient',
     author_email='support@resilientsystems.com',
