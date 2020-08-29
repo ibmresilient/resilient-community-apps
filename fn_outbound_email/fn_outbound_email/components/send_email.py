@@ -171,13 +171,13 @@ class FunctionComponent(ResilientComponent):
 
     def temp_attach(self, inc_id, incident_attachment_list, attachments, file_list):
         updated_lists = list(file_list)
+        tempdir = tempfile.mkdtemp()
         for incident_attachment in incident_attachment_list:
             file_name = incident_attachment["name"]
             if file_name in attachments:
                 file_contents = self.rest_client().get_content("/incidents/{inc_id}/attachments/{attach_id}/contents".
                                                                 format(inc_id=inc_id,
                                                                 attach_id=incident_attachment["id"]))
-                tempdir = tempfile.mkdtemp()
                 file_path = os.path.join(tempdir, file_name)
                 with open(file_path, "wb+") as temp_file:
                     temp_file.write(file_contents)
