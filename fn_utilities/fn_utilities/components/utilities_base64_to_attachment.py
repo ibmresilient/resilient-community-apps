@@ -5,11 +5,9 @@
 """Function implementation"""
 
 import logging
-import tempfile
-import os
 import json
-import base64
 import mimetypes
+import sys
 from io import BytesIO
 from resilient_circuits import ResilientComponent, function, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import write_file_attachment
@@ -41,13 +39,15 @@ class FunctionComponent(ResilientComponent):
             log.info("file_name: %s", file_name)
             log.info("content_type: %s", content_type)
 
-
             yield StatusMessage("Writing attachment...")
 
-            datastream = BytesIO(base64.b64decode(base64content))
+            if sys.version_info.major < 3:
+                datastream = BytesIO(base64content)
+            else:
+                datastream = BytesIO(base64content.encode("utf-8"))
+
             client = self.rest_client()
             new_attachment  = write_file_attachment(client, file_name, datastream, incident_id, task_id, content_type)
-
 
             log.info(json.dumps(new_attachment))
             yield FunctionResult(new_attachment)

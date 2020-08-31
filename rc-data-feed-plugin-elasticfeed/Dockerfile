@@ -2,10 +2,14 @@
 # Base image using Red Hat's universal base image (rhel 8) for python
 #FROM registry.access.redhat.com/ubi8/python-36:latest
 # rc-data-feeder will build plugins from a base image
-FROM resilient/rc-data-feed
+FROM quay.io/ibmresilient/rc_data_feed:2.0.0
 
 ARG APPLICATION=rc_data_feed_plugin_elasticfeed
-ARG RES_CIRCUITS_VERSION=34.0.195
+ARG RES_CIRCUITS_VERSION=37.2
+
+# Environment variable for any app to check if running in a container
+ARG APP_HOST_CONTAINER=1
+ENV APP_HOST_CONTAINER=${APP_HOST_CONTAINER}
 
 # update to latest packages, user 0 for root privilege
 USER 0

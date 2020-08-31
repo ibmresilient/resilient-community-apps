@@ -37,8 +37,8 @@ class SlackUtils(object):
     Helper object SlackUtils.
     """
 
-    def __init__(self, api_token):
-        self.slack_client = SlackClient(api_token)
+    def __init__(self, api_token, proxies=None):
+        self.slack_client = SlackClient(api_token, proxies=proxies)
         self.channel = None
         self.warnings = []
 
@@ -615,16 +615,24 @@ class SlackUtils(object):
         else:
             raise IntegrationError("Slack error response: " + results.get("error", ""))
 
-    def save_conversation_history_as_attachment(self, res_client, messages, incident_id, task_id):
+    def save_conversation_history_as_attachment(self, res_client, messages, incident_id, task_id, template_file=None):
         """
         Method saves conversation history to a text file and posts it as an attachment.
         :param messages list of message dict
         :param res_client Resilient API
         :param incident_id
         :param task_id
+        :param template_file - optional user specific template file
         :return: new_attachment
         """
-        archive_template = get_template_file_path(ARCHIVE_TEMPLATE_PATH)
+        if template_file:
+            archive_template = template_file
+        else:
+            archive_template = get_template_file_path(template_file if template_file else ARCHIVE_TEMPLATE_PATH)
+
+        # confirm that that the template exists
+        if not os.path.exists(archive_template):
+            raise ValueError("Template file not found: %s", archive_template)
 
         with tempfile.NamedTemporaryFile(mode="w+b", delete=False) as temp_file:
             # "w+b" Binary mode is used so that it behaves consistently on all platforms without

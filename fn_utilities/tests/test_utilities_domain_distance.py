@@ -36,6 +36,7 @@ class TestDomainDistance:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
+    @pytest.mark.livetest
     @pytest.mark.parametrize("domain_name, domain_list, expected_result", [
         ("monday", "mOnday, mand0y, mondäy, xn--mondy-dra, tuesday", {
             "domain_name": "monday",
@@ -53,7 +54,8 @@ class TestDomainDistance:
         }),
         (u"wikipedi\u0430.com", "wikipedia.com, wikipedia.org", {"closest": {"name": "wikipedia.com", "distance": 0}}),
         ("xn--e1awd7f.com", "epic.com", {"closest": {"name": "epic.com", "distance": 0}}),
-        ("xn--ple-5cd5f.com", "apple.com", {"closest": {"name": "apple.com", "distance": 0}})
+        ("xn--ple-5cd5f.com", "apple.com", {"closest": {"name": "apple.com", "distance": 0}}),
+        ("http://1bm.com", "ibm.com", {"closest": {"name": "ibm.com", "distance": 1}})
     ])
     def test_success(self, circuits_app, domain_name, domain_list, expected_result):
         """ Test calling with sample values for the parameters """
@@ -68,4 +70,5 @@ class TestDomainDistance:
         logging.getLogger(__name__).info(result)
 
         verify_subset(expected_result, result)
-        # assert(expected_result == result)
+        assert(expected_result['closest']['name'] == result['closest']['name'])
+        assert(expected_result['closest']['distance'] == result['closest']['distance'])

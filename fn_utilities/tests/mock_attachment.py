@@ -6,6 +6,7 @@ import os
 import io
 import base64
 import requests_mock
+from fn_utilities.util.utils_common import b_to_s
 from pytest_resilient_circuits import BasicResilientMock, resilient_endpoint
 
 
@@ -19,9 +20,21 @@ class AttachmentMock(BasicResilientMock):
             return template_file.read()
 
     @staticmethod
+    def test_data_by_id(id):
+        """Read a test data file"""
+        template_file_path = os.path.join(os.path.dirname(__file__), "data", AttachmentMock.attachments.get(str(id), {}).get("name"))
+        with io.open(template_file_path, 'rb') as template_file:
+            return template_file.read()
+
+    @staticmethod
     def test_data_b64(filename):
         """Read a test data file, return its contents as base64"""
-        return base64.b64encode(AttachmentMock.test_data(filename))
+        return b_to_s(base64.b64encode(AttachmentMock.test_data(filename)))
+
+    @staticmethod
+    def test_data_b64_by_id(id):
+        """Read a test data file, return its contents as base64"""
+        return b_to_s(base64.b64encode(AttachmentMock.test_data_by_id(id)))
 
     attachments = {
         "1": {

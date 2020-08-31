@@ -15,7 +15,7 @@ config_data = get_config_data(PACKAGE_NAME)
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
 
-
+@pytest.mark.livetest
 def call_fn_joe_sandbox_analysis_function(circuits, function_params, timeout=10):
     # Fire a message to the function
     evt = SubmitTestFunction("fn_joe_sandbox_analysis", function_params)
@@ -39,6 +39,7 @@ class TestFnJoeSandboxAnalysis:
         (123, 123, 123, 'json', 123, {"value": "xyz"}),
         (123, 123, 123, 'json', 123, {"value": "xyz"})
     ])
+    @pytest.mark.livetest
     def test_success(self, circuits_app, incident_id, attachment_id, artifact_id, jsb_report_type, ping_delay, expected_results):
         """ Test calling with sample values for the parameters """
         function_params = { 
