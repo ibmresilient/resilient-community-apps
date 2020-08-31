@@ -8,34 +8,35 @@
 # a String type artifact will be created.
 #
 mapping = {
-  "domain-name":"DNS Name",
-  "domain":"DNS Name",
-  "EmailContent":"Email Body",
-  "ipv4-addr":"IP Address",
-  "malware":"Malware Family/Variant",
-  "url":"URL"
+    "domain-name": "DNS Name",
+    "domain": "DNS Name",
+    "EmailContent": "Email Body",
+    "ipv4-addr": "IP Address",
+    "malware": "Malware Family/Variant",
+    "url": "URL",
+    "identity": "User Account"
 }
 
 artifact_description = "QRadar Advisor Analysis observable"
 type = row.qradar_advisor_type
 if type in mapping:
-  incident.addArtifact(mapping[type], row.qradar_advisor_description, artifact_description)
+    incident.addArtifact(mapping[type], row.qradar_advisor_description, artifact_description)
 else:
-  artifact_type = "String"
-  #
-  # if the type is "file", the description could be MD5 hash, SHA-256 hash, SHA-1. 
-  # Distinguish them according to the lengthself.
-  #
-  # Anything else is considered "File Name"
-  #
-  if type == "file":
-    if len(row.qradar_advisor_description) == 32:
-      artifact_type = "Malware MD5 Hash"
-    elif len(row.qradar_advisor_description) == 64:
-      artifact_type = "Malware SHA-256 Hash"
-    elif len(row.qradar_advisor_description) == 40:
-      artifact_type = "Malware SHA-1 Hash"
-    else:
-      artifact_type = "File Name"
-      
-  incident.addArtifact(artifact_type, row.qradar_advisor_description, artifact_description)
+    artifact_type = "String"
+    #
+    # if the type is "file", the description could be MD5 hash, SHA-256 hash, SHA-1.
+    # Distinguish them according to the length.
+    #
+    # Anything else is considered "File Name"
+    #
+    if type == "file":
+        if len(row.qradar_advisor_description) == 32:
+            artifact_type = "Malware MD5 Hash"
+        elif len(row.qradar_advisor_description) == 64:
+            artifact_type = "Malware SHA-256 Hash"
+        elif len(row.qradar_advisor_description) == 40:
+            artifact_type = "Malware SHA-1 Hash"
+        else:
+            artifact_type = "File Name"
+
+    incident.addArtifact(artifact_type, row.qradar_advisor_description, artifact_description)
