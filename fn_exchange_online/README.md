@@ -136,6 +136,7 @@ The integration contains the following functions:
 * **Change Directory** into the unzipped directory:
   ```
   $ cd fn_exchange_online-x.x.x
+ 
   ```
 * **Install** the package:
   ```
