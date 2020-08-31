@@ -12,7 +12,7 @@
   ![screenshot: screenshot_1](./doc/screenshots/screenshot_1.png)
 -->
 
-# URLhaus Lookup + Submission
+# URLhaus Lookup
 
 - [Release Notes](#release-notes)
 - [Overview](#overview)
