@@ -175,7 +175,7 @@ class FunctionComponent(ResilientComponent):
                     total_emails = total_emails + num_emails_found
 
             # Add the query execution time
-            email_note = u"{0}<b>Query execution time:</b>  {1}ms.".format(email_note, query_time_ms)
+            email_note = u"{0}<b>Query execution time:</b>  {1} seconds.".format(email_note, query_time_ms/1000)
 
             # Add total messages found to the note text.
             note = u"{0}<br><b>Total messages matching search criteria:</b>  {1}<br>{2}".format(note, total_emails,
