@@ -146,48 +146,51 @@ class FunctionComponent(ResilientComponent):
             incident_id = query_results.get('incident_id')
             email_results = query_results.get('email_results')
 
-            note = u"<b>Exchange Online Message Query Criteria:</b>\n\n"
+            note = u"<b>Exchange Online Message Query Criteria:</b><br><br>"
             if email_address:
-                note = u"{0}    <b>email address:</b>   {1}\n".format(note, email_address)
+                note = u"{0}    <b>email address:</b>   {1}<br>".format(note, email_address)
             if mail_folders:
-                note = u"{0}    <b>mail folder:</b>     {1}\n".format(note, mail_folders)
+                note = u"{0}    <b>mail folder:</b>     {1}<br>".format(note, mail_folders)
             if sender:
-                note = u"{0}    <b>email sender:</b>    {1}\n".format(note, sender)
+                note = u"{0}    <b>email sender:</b>    {1}<br>".format(note, sender)
             if start_date:
                 utc_time = datetime.datetime.fromtimestamp(start_date / 1000).strftime('%Y-%m-%dT%H:%M:%SZ')
-                note = u"{0}    <b>start date:</b>      {1}\n".format(note, utc_time)
+                note = u"{0}    <b>start date:</b>      {1}<br>".format(note, utc_time)
             if end_date:
                 utc_time = datetime.datetime.fromtimestamp(end_date / 1000).strftime('%Y-%m-%dT%H:%M:%SZ')
-                note = u"{0}    <b>end date:</b>  {1}\n".format(note, utc_time)
+                note = u"{0}    <b>end date:</b>  {1}<br>".format(note, utc_time)
             if has_attachments:
-                note = u"{0}    <b>has attachments:</b> {1}\n".format(note, has_attachments)
+                note = u"{0}    <b>has attachments:</b> {1}<br>".format(note, has_attachments)
             if message_subject:
-                note = u"{0}    <b>message subject:</b> {1}\n".format(note, message_subject)
+                note = u"{0}    <b>message subject:</b> {1}<br>".format(note, message_subject)
             if message_body:
-                note = u"{0}    <b>message body:</b>    {1}\n".format(note, message_body)
+                note = u"{0}    <b>message body:</b>    {1}<br>".format(note, message_body)
 
             total_emails = 0
             email_note = u""
             for email in email_results:
                 num_emails_found = len(email.get('email_list'))
                 if num_emails_found > 0:
-                    email_note = u"{0} {1}:  {2}\n".format(email_note, email.get('email_address'), num_emails_found)
+                    email_note = u"{0} {1}:  {2}<br>".format(email_note, email.get('email_address'), num_emails_found)
                     total_emails = total_emails + num_emails_found
 
             # Add the query execution time
             email_note = u"{0}<b>Query execution time:</b>  {1}ms.".format(email_note, query_time_ms)
 
             # Add total messages found to the note text.
-            note = u"{0}\n<b>Total messages matching search criteria:</b>  {1}\n{2}".format(note, total_emails,
+            note = u"{0}<br><b>Total messages matching search criteria:</b>  {1}<br>{2}".format(note, total_emails,
                                                                                               email_note)
 
-            if "Incident attachment" in output_format:
-                LOG.info('Writing query results to attachment.')
-                create_incident_attachment(self.rest_client(), incident_id, note, 'exo-query-results')
             if "Incident note" in output_format:
-                note = note.replace('\n', '<br>')
                 LOG.info('Writing query results to incident note.')
                 create_incident_comment(self.rest_client(), incident_id, note)
+            if "Incident attachment" in output_format:
+                LOG.info('Writing query results to attachment.')
+                note = note.replace('<br>', '\n')
+                note = note.replace('<b>', '')
+                note = note.replace('</b>', '')
+                create_incident_attachment(self.rest_client(), incident_id, note, 'exo-query-results')
+
 
             return True
 
