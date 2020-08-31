@@ -4,8 +4,10 @@
 from __future__ import print_function
 import pytest
 from mock_artifact import ArtifactMock
+from fn_utilities.util.utils_common import b_to_s
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
+from pytest_resilient_circuits import verify_subset
 
 PACKAGE_NAME = "fn_utilities"
 FUNCTION_NAME = "utilities_base64_to_artifact"
@@ -37,17 +39,17 @@ class TestBase64ToArtifact:
         assert func is not None
 
     @pytest.mark.parametrize("base64content, incident_id, artifact_file_type, file_name, content_type, description, expected_result", [
-        (ArtifactMock.test_data_b64("sample1.pdf"), 123, 'Log File', "file.txt", "text/plain", {"type": "text", "content": ""}, {"value": "xyz"})
+        (ArtifactMock.test_data_b64("sample1.pdf"), 123, 'Log File', "file.txt", "text/plain", {"type": "text", "content": ""}, {"id": 51})
     ])
     def test_success(self, circuits_app, base64content, incident_id, artifact_file_type, file_name, content_type, description, expected_result):
         """ Test calling with sample values for the parameters """
         function_params = { 
-            "base64content": base64content,
+            "base64content": b_to_s(base64content),
             "incident_id": incident_id,
             "artifact_file_type": artifact_file_type,
             "file_name": file_name,
             "content_type": content_type,
             "description": description
         }
-        #result = call_base64_to_artifact_function(circuits_app, function_params)
-        #assert(result == expected_result)
+        result = call_base64_to_artifact_function(circuits_app, function_params)
+        verify_subset(expected_result, result)

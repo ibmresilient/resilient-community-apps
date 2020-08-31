@@ -5,14 +5,16 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_qradar_integration',
-    version='2.0.6',
+    version='2.0.7',
     license='MIT License',
     author='IBM Resilient',
     author_email='support@resilientsystems.com',
+    url='https://github.com/ibmresilient/resilient-community-apps/tree/master/fn_qradar_integration',
     description="Resilient Circuits Components for 'fn_qradar_integration'",
     long_description="fn_qradar_integration supports performing ariel search to retrieve data from QRadar. It also provide functions to find/add/delete reference set items.",
     install_requires=[
-        'resilient_circuits>=30.0.0'
+        'resilient_circuits>=30.0.0',
+        'resilient_lib'
     ],
     packages=find_packages(),
     include_package_data=True,
@@ -29,6 +31,7 @@ setup(
             "QradarSearchFunctionComponent = fn_qradar_integration.components.qradar_search:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_qradar_integration.util.config:config_section_data"],
-        "resilient.circuits.customize": ["customize = fn_qradar_integration.util.customize:customization_data"]
+        "resilient.circuits.customize": ["customize = fn_qradar_integration.util.customize:customization_data"],
+        "resilient.circuits.selftest": ["selftest = fn_qradar_integration.util.selftest:selftest_function"]
     }
 )

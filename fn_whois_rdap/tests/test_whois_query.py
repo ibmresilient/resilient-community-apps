@@ -8,7 +8,7 @@ import pytest
 
 
 PACKAGE_NAME = "fn_whois_rdap"
-FUNCTION_NAME = "whois_query"
+FUNCTION_NAME = "whois_rdap_query"
 
 # Read the default configuration-data section from the package
 #config_data = get_config_data(PACKAGE_NAME)

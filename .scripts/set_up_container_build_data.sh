@@ -103,7 +103,19 @@ if [ $? -ne 0 ]; then
 fi   	
 
 for integration in ${INTEGRATIONS[@]};
-do 
+do
+
+    echo "checking if there is additional setup needed before building the image for $integration"
+    # check for .container_build_packages.sh and run if one is found
+    container_script="${integration}/.container_build_packages.sh"
+    if [ -f "$container_script" ]
+        then
+            echo "${container_script} script found. About to run"
+            sh $container_script;
+        else
+            echo "${container_script} script not found. Nothing else to do before building."
+    fi
+
     echo "Building and deploying: $integration" 
     # get the setup.py file for current integration
 

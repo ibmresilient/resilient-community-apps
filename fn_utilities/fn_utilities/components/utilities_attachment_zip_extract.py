@@ -10,7 +10,9 @@ import tempfile
 import zipfile
 import base64
 import datetime
+from fn_utilities.util.utils_common import b_to_s, s_to_b
 from resilient_circuits import ResilientComponent, function, StatusMessage, FunctionResult, FunctionError
+from resilient_lib import get_file_attachment
 
 
 def epoch_millis(zipdate):
@@ -49,16 +51,9 @@ class FunctionComponent(ResilientComponent):
             log.info("file_path: %s", file_path)
 
             yield StatusMessage("Reading attachment...")
-            if task_id:
-                metadata_uri = "/tasks/{}/attachments/{}".format(task_id, attachment_id)
-                data_uri = "/tasks/{}/attachments/{}/contents".format(task_id, attachment_id)
-            else:
-                metadata_uri = "/incidents/{}/attachments/{}".format(incident_id, attachment_id)
-                data_uri = "/incidents/{}/attachments/{}/contents".format(incident_id, attachment_id)
 
             client = self.rest_client()
-            metadata = client.get(metadata_uri)
-            data = client.get_content(data_uri)
+            data = get_file_attachment(client, incident_id, task_id=task_id, attachment_id=attachment_id)
 
             results = {}
             with tempfile.NamedTemporaryFile(delete=False) as temp_file:
@@ -73,7 +68,7 @@ class FunctionComponent(ResilientComponent):
                     results["info"] = {"filename": zinfo.filename,
                                        "date_time": epoch_millis(zinfo.date_time),
                                        "compress_type": zinfo.compress_type,
-                                       "comment": zinfo.comment,
+                                       "comment": b_to_s(zinfo.comment),
                                        "create_system": zinfo.create_system,
                                        "create_version": zinfo.create_version,
                                        "extract_version": zinfo.extract_version,
@@ -86,8 +81,8 @@ class FunctionComponent(ResilientComponent):
                                        "compress_size": zinfo.compress_size,
                                        "file_size": zinfo.file_size}
                     # Extract the file we want
-                    b64data = base64.b64encode(zfile.read(file_path, zipfile_password))
-                    results["content"] = b64data
+                    b64data = base64.b64encode(zfile.read(file_path, s_to_b(zipfile_password)))
+                    results["content"] = b_to_s(b64data)
                 except (KeyError, zipfile.LargeZipFile, zipfile.BadZipfile) as exc:
                     # results["error"] = str(exc)
                     # To help debug, list the contents

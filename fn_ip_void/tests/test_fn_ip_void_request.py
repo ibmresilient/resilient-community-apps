@@ -1,19 +1,31 @@
 # -*- coding: utf-8 -*-
 """Tests using pytest_resilient_circuits"""
 
-from __future__ import print_function
 import pytest
-from resilient_circuits.util import get_config_data, get_function_definition
+from mock import patch
+from resilient_circuits.util import get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 
 PACKAGE_NAME = "fn_ip_void"
 FUNCTION_NAME = "fn_ip_void_request"
 
 # Read the default configuration-data section from the package
-config_data = get_config_data(PACKAGE_NAME)
+config_data = """[{0}]
+ipvoid_base_url=https://www.example.com
+ipvoid_sub_url=v1/pay-as-you-go/
+ipvoid_api_key=12345ABCDEF
+""".format(PACKAGE_NAME)
 
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
+
+
+class MockedResponse:
+    def __init__(self):
+        self.success = True
+
+    def json(self):
+        return {"content": "mock data"}
 
 
 def call_fn_ip_void_request_function(circuits, function_params, timeout=10):
@@ -35,16 +47,25 @@ class TestFnIpVoidRequest:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
-    @pytest.mark.parametrize("ip_void_request_type, ip_void_artifact_type, ip_void_artifact_value, expected_results", [
-        ('Threat Log', "text", "text", {"value": "xyz"}),
-        ('Domain Blacklist', "text", "text", {"value": "xyz"})
+    @patch("fn_ip_void.components.fn_ip_void_request.RequestsCommon.execute_call_v2")
+    @pytest.mark.parametrize("ip_void_request_type, ip_void_artifact_type, ip_void_artifact_value", [
+        ("selftest", "IP Address", True)
     ])
-    def test_success(self, circuits_app, ip_void_request_type, ip_void_artifact_type, ip_void_artifact_value, expected_results):
+    def test_success(self, mock_get, circuits_app, ip_void_request_type, ip_void_artifact_type, ip_void_artifact_value):
         """ Test calling with sample values for the parameters """
-        function_params = { 
+
+        mock_get.return_value = MockedResponse()
+
+        function_params = {
             "ip_void_request_type": ip_void_request_type,
             "ip_void_artifact_type": ip_void_artifact_type,
             "ip_void_artifact_value": ip_void_artifact_value
         }
-        results = call_fn_ip_void_request_function(circuits_app, function_params)
-        assert(expected_results == results)
+
+        call_fn_ip_void_request_function(circuits_app, function_params)
+
+        mock_get.assert_called_with(
+            method="get",
+            url="https://www.example.com/iprep/v1/pay-as-you-go/",
+            params={"key": "12345ABCDEF", "stats": True}
+        )

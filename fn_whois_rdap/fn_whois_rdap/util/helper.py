@@ -2,10 +2,7 @@
 # (c) Copyright IBM Corp. 2019. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 
-import future        # pip install future
-import builtins      # pip install future
-import past          # pip install future
-import six           # pip install six
+
 import socket
 from past.builtins import basestring, unicode
 import tldextract
@@ -13,9 +10,8 @@ import logging
 import time
 import traceback
 from ipwhois import IPWhois, exceptions
-from datetime import datetime, date
-
-ip_from_domain = None
+from datetime import date
+from urllib import request
 
 def time_str():
     today = date.fromtimestamp(time.time())
@@ -50,7 +46,7 @@ def check_registered_domain(registered_domain):
         return real_domain
 
 # Gather registry information
-def get_whois_registry_info(ip_input):
+def get_whois_registry_info(ip_input, proxies=None):
     """Gather registry information
     Arguments:
         ip_input {string} -- Artifact.value
@@ -58,7 +54,8 @@ def get_whois_registry_info(ip_input):
         {object} -- Contains all registry information
     """
     try:
-        internet_protocol_address_object = IPWhois(ip_input,allow_permutations=True)
+        proxy_opener = make_proxy_opener(proxies) if proxies else None
+        internet_protocol_address_object = IPWhois(ip_input, allow_permutations=True, proxy_opener=proxy_opener)
         try:
             whois_response = internet_protocol_address_object.lookup_whois()
             if internet_protocol_address_object.dns_zone:
@@ -69,7 +66,7 @@ def get_whois_registry_info(ip_input):
     except:
         logging.error(traceback.format_exc())
 
-def get_rdap_registry_info(ip_input, rdap_depth):
+def get_rdap_registry_info(ip_input, rdap_depth, proxies=None):
     """Gathers registry info in RDAP protocol
 
     Arguments:
@@ -80,7 +77,8 @@ def get_rdap_registry_info(ip_input, rdap_depth):
         {object} -- Registry info, RDAP Protocol
     """
     try:
-        internet_protocol_address_object = IPWhois(ip_input,allow_permutations=True)
+        proxy_opener = make_proxy_opener(proxies) if proxies else None
+        internet_protocol_address_object = IPWhois(ip_input, allow_permutations=True, proxy_opener=proxy_opener)
         try:
             rdap_response = internet_protocol_address_object.lookup_rdap(rdap_depth)
             if internet_protocol_address_object.dns_zone:
@@ -91,7 +89,11 @@ def get_rdap_registry_info(ip_input, rdap_depth):
     except:
         logging.error(traceback.format_exc())
 
-def check_response(response,payload_object):
+def make_proxy_opener(proxies):
+    handler = request.ProxyHandler(proxies)
+    return request.build_opener(handler)
+
+def check_response(response, payload_object):
     if response:
         response["display_content"] = dict_to_json_str(response)
         results = payload_object.done(True, response)
@@ -100,45 +102,40 @@ def check_response(response,payload_object):
     return results
 
 def dict_to_json_str(d):
-  """Function that converts a dictionary into a JSON string.
+    """Function that converts a dictionary into a JSON string.
      Supports types: basestring, bool, int and nested dicts.
      Does not support lists.
      If the value is None, it sets it to False."""
 
-  json_entry = u'"{0}":{1}'
-  json_entry_str = u'"{0}":"{1}"'
-  entries = [] 
+    json_entry = u'"{0}":{1}'
+    json_entry_str = u'"{0}":"{1}"'
+    entries = []
 
-  for entry in d:
-    key = entry
-    value = d[entry]
+    for entry in d:
+        key = entry
+        value = d[entry]
 
     if value is None:
-      value = False
+        value = False
 
     if isinstance(value, list):
-      dummy = {}
+        pass
 
     if isinstance(value, basestring):
-      value = value.replace(u'"', u'\\"')
-      entries.append(json_entry_str.format(unicode(key), unicode(value)))
-      
+        value = value.replace(u'"', u'\\"')
+        entries.append(json_entry_str.format(unicode(key), unicode(value)))
+
     elif isinstance(value, unicode):
-      entries.append(json_entry.format(unicode(key), unicode(value)))
-    
+        entries.append(json_entry.format(unicode(key), unicode(value)))
+
     elif isinstance(value, bool):
-      value = 'true' if value == True else 'false'
-      entries.append(json_entry.format(key, value))
+        value = 'true' if value else 'false'
+        entries.append(json_entry.format(key, value))
 
     elif isinstance(value, int):
-      entries.append(json_entry.format(unicode(key), value))
+        entries.append(json_entry.format(unicode(key), value))
 
     elif isinstance(value, dict):
-      entries.append(json_entry.format(key, dict_to_json_str(value)))
+        entries.append(json_entry.format(key, dict_to_json_str(value)))
 
-    else:
-      dummy = {}
-
-  return u'{0} {1} {2}'.format(u'{', ','.join(entries), u'}')
-
-
+    return u'{0} {1} {2}'.format(u'{', ','.join(entries), u'}')

@@ -50,6 +50,7 @@ class TestFnAnsible:
 
     output = {TARGET_HOST: {'ok': 1, 'failures': 0, 'unreachable': 0, 'changed': 0, 'skipped': 0}}
 
+    @pytest.mark.livetest
     @pytest.mark.parametrize("inputs, expected_results", [(inputs, output)])
     def test_success(self, circuits_app, inputs, expected_results):
         """ Test calling with sample values for the parameters """

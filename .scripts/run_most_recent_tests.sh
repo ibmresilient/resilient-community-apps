@@ -28,7 +28,15 @@ fi
       
 for integration in ${INTEGRATIONS[@]};
 do 
-    echo "Running tox tests for this package: $integration" 
+    echo "Checking if additional OS dependencies are required for $integration"
+    if [ -f ${integration}"/.travis_package_setup.sh" ]
+      then
+        echo "OS package install script found. About to run"
+        sh ${integration}"/.travis_package_setup.sh"
+      else
+        echo "Nothing additional to install"
+    fi
+    echo "Running tox tests for this package: $integration"
     toxfile=${integration}"/tox.ini"
     # Run the tests if current TOXENV is applicable for this tox.ini file
     valid_envs=`env -u TOXENV tox -c $toxfile --listenvs;`
