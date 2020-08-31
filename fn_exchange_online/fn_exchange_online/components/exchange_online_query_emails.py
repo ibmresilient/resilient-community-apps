@@ -191,7 +191,6 @@ class FunctionComponent(ResilientComponent):
                 note = note.replace('</b>', '')
                 create_incident_attachment(self.rest_client(), incident_id, note, 'exo-query-results')
 
-
             return True
 
         except Exception as err:
