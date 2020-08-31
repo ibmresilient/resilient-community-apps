@@ -91,6 +91,7 @@ after_failure:
 install:
 - pip install --upgrade pip
 - pip install --upgrade setuptools
+- pip install --upgrade distutils
 - pip install tox
 - pip install pylint
 - pip install pytest
