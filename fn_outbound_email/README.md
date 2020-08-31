@@ -59,6 +59,7 @@
 ## Installation
 
 ### Installation (App Host)
+
 With App Host, all the run-time components are pre-built. Perform the following steps to install and configure:
 * Download the `app-fn_outbound_email-x.x.x.zip`.
 * In Resilient navigate to **Adiminstrator Settings > Apps**
