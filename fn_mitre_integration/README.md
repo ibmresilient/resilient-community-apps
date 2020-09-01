@@ -29,6 +29,13 @@
   Specify all changes in this release. Do not remove the release 
   notes of a previous release
 -->
+### v2.0.2
+- Added proxy support.
+
+### v2.0.1
+- Support added for App Host.
+- Updated integration to stay compatible with schema used by MITRE.
+
 ### v2.0
 - Added customizations that find groups using all of the given techniques.
 - Added customizations that find groups for each of the given techniques.
@@ -90,6 +97,21 @@ It comes with a set of customizations that query MITRE ATT&CK for the following:
   ```
   $ pip install fn_mitre_integration-x.x.x.tar.gz
   ```
+* Import the **configurations** into your app.config file:
+  ```
+  $ resilient-circuits config -u -l fn-mitre-integration
+  ```
+
+* Open the config file, scroll to the bottom and edit the **[fn_mitre_integration]** configuration section:
+  ```
+  $ nano ~/.resilient/app.config
+  ```
+  | Config | Required | Example | Description |
+  | ------ | :------: | ------- | ----------- |
+  | **http_proxy** or **https_proxy** | No | https://proxyhost:8080 | *Optional settings for access to Mitre via a proxy.* |                                   |
+
+* **Save** and **Close** the app.config file.
+
 * Import the fn_mitre_integration **customizations** into the Resilient platform:
   ```
   $ resilient-circuits customize -y -l fn-mitre-integration
@@ -165,4 +187,4 @@ Clicking on an action displays additional information on the progress made or wh
 ## Support
 | Name | Version | Author | Support URL |
 | ---- | ------- | ------ | ----------- |
-| fn_mitre_integration | 2.0.0 | IBM Resilient |  |
+| fn_mitre_integration | 2.0.2 | IBM Resilient |  |
