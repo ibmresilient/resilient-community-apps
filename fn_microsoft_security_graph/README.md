@@ -6,16 +6,34 @@
   notes of a previous release
 -->
 ### v1.0.3
+* Support for App Host
 * Readable formatting of incident notes containing Alert JSON data
 
+**NOTE** Existing users running fn_microsoft_security_graph functions on an integrations server, should save the [fn_microsoft_security_graph] section of their app.config file to another file and delete that section from the app.config file before installing the new version, as this section has changed.  After installation get the new configuration by running:
+```
+  $ resilient-circuits config -u -l fn-microsoft-security-graph
+  ```
+Edit the required configuration setting as described in the [Integration Server](#integration-server) section below.
+
+
 ### v1.0.2
-* Support for App Host
 * Proxy support
 
 ### v1.0.1
 * Python 2 to 3 improvements
 * UI version changes
 
+## Key Features
+<!--
+  List the Key Features of the Integration
+-->
+* Alert Polling Integration that creates new incidents in the Resilient platform from Microsoft Graph Security API alerts.
+* Search function to query alerts across the tenant's data using Microsoft Graph Security API.
+* Function to get details of specific Microsoft Security alerts.
+* Function to update details of specific Microsoft Security alerts.
+* Update Microsoft Security alerts as "Resolved" when the corresponding Resilient incident is closed.
+
+---
 ## Installation
 
 ### App Format
