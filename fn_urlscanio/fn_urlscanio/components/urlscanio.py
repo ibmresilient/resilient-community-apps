@@ -36,7 +36,7 @@ class FunctionComponent(ResilientComponent):
         try:
             log = logging.getLogger(__name__)
 
-            validate_fields(['urlscanio_api_key', 'urlscanio_report_url', 'urlscanio_screenshot_url'], self.options)
+            validate_fields([{'name':'urlscanio_api_key', 'placeholder':'xxx'}, 'urlscanio_report_url', 'urlscanio_screenshot_url'], self.options)
             validate_fields(['urlscanio_url'], kwargs)
 
             # Get the function parameters:
