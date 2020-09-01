@@ -176,6 +176,9 @@ class PP_ThreatPolling(ResilientComponent):
                         for data in datas:
                             incident_id = None
                             threat_id, idtype = self.find_id(data)
+                            if not threat_id:
+                                log.error("Threat ID not found for ProofPoint TAP event '%s' of kind '%s'.", data, kind)
+                                continue
                             existing_incidents = self._find_resilient_incident_for_req(threat_id, idtype)
                             if len(existing_incidents) == 0:
                                 # incident doesn't already exist, create Incident data
@@ -540,8 +543,11 @@ class PP_ThreatPolling(ResilientComponent):
         :return: value for the chosen proofpoint field, idfield
         """
         for idfield in PROOFPOINT_ID_FIELDS:
-            if idfield in threat:
+            if idfield in threat and threat[idfield]:
+                # Return threat id a field name if field found and it has a value.
                 return threat[idfield], idfield
+
+        return None, None
 
     def _find_resilient_artifacts_for_incident(self, incident_id):
         """Return list of artifacts for the given Incident ID, else returns empty list"""
