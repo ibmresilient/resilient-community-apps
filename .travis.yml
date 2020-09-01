@@ -17,7 +17,7 @@ branches:
 
 stages:
   - name: latest push
-    if: branch != master AND type=push AND NOT tag =~ ^container/.+
+    if: branch != master AND type=push AND NOT tag =~ ^container/.+ 
   - name: mock tests
     if: branch = master AND type = cron # for now only trigger tests on cron
   - name: build a container
@@ -29,9 +29,9 @@ matrix:
   fast_finish: true
   include:
   # Jobs below this line are reserved for push contributions i.e when someone pushes changes
-  # ==========
-  # Below jobs are used to run tests against the most recently modified integration.
-  # We determine the most recent one using git diff and then ensure to only run tests against a package once.
+  # ==========  
+  # Below jobs are used to run tests against the most recently modified integration.  
+  # We determine the most recent one using git diff and then ensure to only run tests against a package once. 
   - stage: latest push
     name: Python 2.7 Build and Run Tests
     python: 2.7
@@ -46,8 +46,8 @@ matrix:
     - TOXENV=py36 TEST_RESILIENT_ORG="Resilient Integrations - Test"
     script:
     - echo "3.6 push test" && .scripts/run_most_recent_tests.sh
-  # Jobs below this line are reserved for master branch
-  # Master branch is where all the integrations should be tested, its okay if it takes a while
+  # Jobs below this line are reserved for master branch   
+  # Master branch is where all the integrations should be tested, its okay if it takes a while  
   # As we have the push jobs above to handle individual commits
   - stage: mock tests
     python: 2.7
@@ -63,7 +63,7 @@ matrix:
     - TOXENV=py36 TEST_RESILIENT_ORG="Resilient Integrations - Test"
     script:
     - echo "3.6 Master Build" && .scripts/run_tests.sh
-  # Next job is started when a tag is pushed of the form container/<name>
+  # Next job is started when a tag is pushed of the form container/<name> 
   # where <name> is a name of an integration directory whose container
   # will be build and pushed to artifactory with label :latest and :<version>
   # ARTIFACTORY_URL should be sec-resilient-docker-local.artifactory.swg-devops.com
@@ -73,181 +73,6 @@ matrix:
       - docker
     install: skip
     script:
-      - source .scripts/set_up_container_build_data.sh
-      # if there are failed containers send a message with their list
-      - if [[ -n "${FAILED_CONTAINERS[*]}" ]]; then .scripts/send_notification.sh "Containers not built ${FAILED_CONTAINERS[*]}" failure; return 1; fi
-  - stage: successful notification
-    name: Successful notification
-    # To make sure that success is sent once per job we create a separate stage for it
-    install: skip
-    script:
-      - .scripts/send_notification.sh
-
-# If one job fails the whole build fails, so we can send it here
-after_failure:
-- .scripts/send_notification.sh "" failure
-
-
-install:
-- pip install --upgrade pip
-- pip install --upgrade setuptools
-- pip install tox
-- pip install pylint
-- pip install pytest
-- pip install resilient
-- pip install resilient-circuits
-- pip install pytest-resilient-circuits
-SeanOGormanibmcoms-MacBook-Pro:resilient-community-apps sean.ogormanibm.com$
-
-Session Contents Restored
-
-Last login: Tue Sep  1 08:03:44 on console
-Agent pid 1205
-/Users/sean.ogormanibm.com/.ssh/id_rsa: No such file or directory
-SeanOGormanibmcoms-MacBook-Pro:resilient-community-apps sean.ogormanibm.com$ p;
--bash: p: command not found
-SeanOGormanibmcoms-MacBook-Pro:resilient-community-apps sean.ogormanibm.com$ ls
-CONTRIBUTING.md     fn_hibp       fn_sep
-INTERNAL_CONTRIBUTING.md  fn_html2pdf     fn_service_now
-LICENSE       fn_icdx       fn_slack
-README.md     fn_ioc_parser_v2    fn_spamhaus_query
-app_host_files      fn_ip_void      fn_splunk_integration
-base_input_types    fn_ipinfo     fn_symantec_dlp
-fn_alienvault_otx   fn_isitPhishing     fn_task_utils
-fn_anomali_staxx    fn_jira       fn_teams
-fn_ansible      fn_joe_sandbox_analysis   fn_threatminer
-fn_ansible_tower    fn_ldap_utilities   fn_thug
-fn_apility      fn_log_capture      fn_twilio
-fn_aws_iam      fn_maas360      fn_twitter_most_popular
-fn_aws_utilities    fn_machine_learning   fn_url_void
-fn_bigfix     fn_machine_learning_nlp   fn_urlhaus
-fn_bluecoat_site_review   fn_mcafee_atd     fn_urlscanio
-fn_calendar_invite    fn_mcafee_epo     fn_utilities
-fn_cb_protection    fn_mcafee_esm     fn_utilities_codegen.sh
-fn_cisco_amp4ep     fn_mcafee_opendxl   fn_virustotal
-fn_cisco_enforcement    fn_mcafee_tie     fn_vmray_analyzer
-fn_cisco_umbrella_inv   fn_microsoft_security_graph fn_watson_translate
-fn_clamav     fn_misp       fn_whois
-fn_cloud_foundry    fn_mitre_integration    fn_whois_rdap
-fn_components     fn_mxtoolbox      fn_xforce
-fn_create_webex_meeting   fn_netdevice      older
-fn_create_zoom_meeting    fn_odbc_query     rc-cts-abuseipdb
-fn_crowdstrike_falcon   fn_outbound_email   rc-cts-googlesafebrowsing
-fn_cve_search     fn_pa_panorama      rc-cts-haveibeenpwned
-fn_datatable_utils    fn_pagerduty      rc-cts-mcafeetie
-fn_digital_shadows_search fn_pastebin     rc-cts-misp
-fn_docker     fn_phish_ai     rc-cts-passivetotal
-fn_elasticsearch    fn_phish_tank     rc-cts-shadowserver
-fn_email_header_validation  fn_pipl       rc-cts-urlscanio
-fn_exchange     fn_proofpoint_tap   rc-cts-yeti
-fn_exchange_online    fn_proofpoint_trap    rc-data-feed
-fn_floss      fn_pulsedive      rc-data-feed-plugin-elasticfeed
-fn_geocoding      fn_qradar_advisor   rc-data-feed-plugin-filefeed
-fn_google_cloud_dlp   fn_qradar_integration   rc-data-feed-plugin-kafkafeed
-fn_google_cloud_functions fn_query_tor_network    rc-data-feed-plugin-odbcfeed
-fn_google_maps_directions fn_res_to_icd     rc-data-feed-plugin-splunkfeed
-fn_greynoise      fn_risk_fabric      res_qraw_mitre
-fn_grpc_interface   fn_rsa_netwitness   sc_email_parser
-fn_grr_search     fn_scheduler      workshop-guide
-SeanOGormanibmcoms-MacBook-Pro:resilient-community-apps sean.ogormanibm.com$ git checkout master
-Switched to branch 'master'
-Your branch is up to date with 'origin/master'.
-SeanOGormanibmcoms-MacBook-Pro:resilient-community-apps sean.ogormanibm.com$ git pull
-no such identity: /Users/sean.ogormanibm.com/.ssh/id_rsa: No such file or directory
-X11 forwarding request failed on channel 0
-remote: Enumerating objects: 42, done.
-remote: Counting objects: 100% (42/42), done.
-remote: Compressing objects: 100% (7/7), done.
-remote: Total 61 (delta 36), reused 40 (delta 35), pack-reused 19
-Unpacking objects: 100% (61/61), done.
-From github.ibm.com:Resilient/resilient-community-apps
- + 604b48b2...25847d20 INT-2283/misp        -> origin/INT-2283/misp  (forced update)
-   cf4e650c..e7f28d1b  exchange_online-v1.1 -> origin/exchange_online-v1.1
- * [new branch]        int-2283/misp        -> origin/int-2283/misp
-   e70d3afb..bd25a189  int-2946             -> origin/int-2946
-Already up to date.
-SeanOGormanibmcoms-MacBook-Pro:resilient-community-apps sean.ogormanibm.com$ cat .travis.yml
-language: python
-python: 2.7
-os: linux
-env:
-  global:
-  - TEST_RESILIENT_APPLIANCE=staging2.internal.resilientsystems.com
-  - OCTOKIT_API_ENDPOINT="https://github.ibm.com/api/v3/"
-  - PIP_FIND_LINKS="$TRAVIS_BUILD_DIR/pkgs"
-  - secure: VU1PL2bWOE+E3ieBz/0Oa2hIRXGeSFYubE9SYh3dH541h8V8FWE0kGt8P6xdZOGmf9xNsDL/O+rKqrq5TCKTdUQqFXm7RCD//iQrHUcbu2YU38XPpBQrWxSZs29sR3R6UkUypZahHmn/ghjgZnRxQIWGscYPvvNCiOP9X85ckmVaKLYPwW0HPH7vIKs9zcT8tEyRDANokc0BQDjeVu0s29FeKGyy9JVbuye8/1TmVkQWBvutvcQ/z/mOQ7dOO3fW0wkVwOHPF9FtBc79WzjK5w/Ej30EWHC5zdRG46+2FLcqKSHvkyuV59f0ojxLzRmeR1ueS37pNncmXfVMREwtiIYN/Dd3isLsg14RK1leu/JHiPxfQtz2TV4+yeVO4aZk+Bs/JLf1ZbXAE+A71hIH6rTUpEBq1S8qjKsfTPEWLg1cuq1ujf2WOAumdIf8rSOnQ9EbEfBlm3N8Wo9RjXbEx6hq+UHr7L28tw0u00gcAex6Ky2eRk+USFnXBHs/Kf5i29CWzw4Lcnb2hPa0bup3yNQuss/Yy+cQO5tDW8jJPP8joR5Fvr8fJZVtGlTGp09odHcrDGKvbdlf0gVmVDYawKi0v4m0URCKVy0vYAbzVOgZF46nW+VfcexiLxomwYpKeltigk+L52aV5DIodfuxS9aB6IJtEYSTO8Mf+Yo2x8Q=
-  - secure: kr5Zz5frfrGOeuAylefGbDhY5s/YwyRhktuAly1ovOn/7Q3OJYjTq6h7wvnt1KQ/YeSdA+bxwOhWKbYHPQHAhovyo/5gsII7LruSs7VjdcD9tDoaYEoDBP7nki+NGr+dBVwrooGJ3f7TbuZs+4OSyPWD2FdN4PsOYLof4soDEW7C0cTP2KZ/wNGDjBGB2stOb6a5h4MQSohx+7B795noUoK5ojmygZObIGSDWmahR4kzCm+rEVLlMV0ptDCBXvn4xmJLCz5UOZhR27ckuiW342vNxShlms+rwWcvoxwbj61Qn3MEf9S9D59aJ+n4+u9Kb3VD4HJjlQ3rWZ/DADPfp7h6XOmfrQq3Xj3sQ4K2+8RMSFHdxWPsmhWd/Aty+YmWjoOnewoBfFaDUzFRURqwO3K+oh1H0IALTOTYQSYEeuVfi/+mwJRkKh0+IgvgscL5/bo+nVnQBk4FpWJRHV0x2fWiG8DHCKmInkkFSDHax3dHc9pYZXQTdNdfvsJRtc0rEn6GyVnRMia1TKLpB1joRhb7mkyc7pgDSatvV9W6+v6+evplHFxS7lkm9gqlW/ygJzPVYx7UaFuqo9cOi/c8sR6qf7NUTUi9Aa4aqY6qHNrkxfh7+5ck7wLTWmE0WL+0r3Z09Zg746SIGYqLrFQJZPn+JanFEy0q7kAU2Zr8vgE=
-
-# Exclude these branches from having jobs ran.
-branches:
-  except:
-    - public
-    - /^_.*$/
-
-stages:
-  - name: latest push
-    if: branch != master AND type=push AND NOT tag =~ ^container/.+
-  - name: mock tests
-    if: branch = master AND type = cron # for now only trigger tests on cron
-  - name: build a container
-    if: (branch = master AND type IN (push)) OR tag =~ ^container/.+
-  - name: successful notification
-    if: type NOT IN (cron) # no need for successful cron notifications
-
-matrix:
-  fast_finish: true
-  include:
-  # Jobs below this line are reserved for push contributions i.e when someone pushes changes
-  # ==========
-  # Below jobs are used to run tests against the most recently modified integration.
-  # We determine the most recent one using git diff and then ensure to only run tests against a package once.
-  - stage: latest push
-    name: Python 2.7 Build and Run Tests
-    python: 2.7
-    env:
-    - TOXENV=py27 TEST_RESILIENT_ORG="Resilient Integrations - Test"
-    script:
-    - echo "2.7 push test" && .scripts/run_most_recent_tests.sh
-  - stage: latest push
-    name: Python 3.6 Build and Run Tests
-    python: 3.6
-    env:
-    - TOXENV=py36 TEST_RESILIENT_ORG="Resilient Integrations - Test"
-    script:
-    - echo "3.6 push test" && .scripts/run_most_recent_tests.sh
-  # Jobs below this line are reserved for master branch
-  # Master branch is where all the integrations should be tested, its okay if it takes a while
-  # As we have the push jobs above to handle individual commits
-  - stage: mock tests
-    python: 2.7
-    name: Py27 Master Build and Run tests
-    env:
-    - TOXENV=py27 TEST_RESILIENT_ORG="Resilient Integrations - Test"
-    script:
-    - echo "2.7 Master Build" && .scripts/run_tests.sh
-  - stage: mock tests
-    python: 3.6
-    name: Py36 Master Build and Run tests
-    env:
-    - TOXENV=py36 TEST_RESILIENT_ORG="Resilient Integrations - Test"
-    script:
-    - echo "3.6 Master Build" && .scripts/run_tests.sh
-  # Next job is started when a tag is pushed of the form container/<name>
-  # where <name> is a name of an integration directory whose container
-  # will be build and pushed to artifactory with label :latest and :<version>
-  # ARTIFACTORY_URL should be sec-resilient-docker-local.artifactory.swg-devops.com
-  - stage: build a container
-    name: Building containers
-    services:
-      - docker
-    install: skip
-    script:
-      - source .scripts/set_up_container_build_data.sh
-      # if there are failed containers send a message with their list
-      - if [[ -n "${FAILED_CONTAINERS[*]}" ]]; then .scripts/send_notification.sh "Containers not built ${FAILED_CONTAINERS[*]}" failure; return 1; fi
-  - stage: successful notification
-    name: Successful notification
-    # To make sure that success is sent once per job we create a separate stage for it
       - source .scripts/set_up_container_build_data.sh
       # if there are failed containers send a message with their list
       - if [[ -n "${FAILED_CONTAINERS[*]}" ]]; then .scripts/send_notification.sh "Containers not built ${FAILED_CONTAINERS[*]}" failure; return 1; fi
