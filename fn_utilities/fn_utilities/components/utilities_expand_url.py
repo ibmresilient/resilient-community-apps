@@ -22,15 +22,46 @@ except:
 import logging
 import requests
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from resilient_lib import RequestsCommon
 
 MAX_DEPTH_LIMIT = 10  # number of redirects to follow before giving up
 SOCKET_TIMEOUT = 10 # number of seconds to wait for request to complete - this is socket level timeout, not http timeout
+
+SECTION_HDR = "fn_utilities"
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'utilities_expand_url.
         Given any URL, it will continue to follow it through redirects to it's destinations. This is intended for shortened URLs but
         will work on any URL.
     """
+    def __init__(self, opts):
+        """constructor provides access to the configuration options"""
+        super(FunctionComponent, self).__init__(opts)
+        self.opts = opts
+        self.options = opts.get(SECTION_HDR, {})
+        self.init_proxies()
+
+    @handler("reload")
+    def _reload(self, event, opts):
+        """Configuration options have changed, save new values"""
+        self.opts = opts
+        self.options = opts.get(SECTION_HDR, {})
+        self.init_proxies()
+
+    def init_proxies(self):
+        self.proxy_host = None
+        self.proxy_port = None
+
+        rc = RequestsCommon(self.opts, self.options)
+        proxies = rc.get_proxies()
+
+        if proxies:
+            proxy = proxies.get('https') if proxies.get('https') else proxies.get('http')
+
+            if proxy:
+                proxy_url = urlparse.urlparse(proxy)
+                self.proxy_host = proxy_url.hostname
+                self.proxy_port = proxy_url.port
 
     @function("utilities_expand_url")
     def _utilities_resilient_url_expander_function(self, event, *args, **kwargs):
@@ -70,10 +101,18 @@ class FunctionComponent(ResilientComponent):
 
         self.log.debug("{} depth {}".format(url, depth))
         try:
-            requests.head(url, allow_redirects=True).url
+            #requests.head(url, allow_redirects=True).url
 
             parsed = urlparse.urlparse(url)     # this ensures we have a valid url
-            h = httplib.HTTPConnection(parsed.netloc, timeout=SOCKET_TIMEOUT)
+            # add proxy logic, if specified
+            if self.proxy_host:
+                self.log.debug("Using proxy: %s:%s", self.proxy_host, self.proxy_port)
+                h = httplib.HTTPConnection(self.proxy_host, self.proxy_port, timeout=SOCKET_TIMEOUT)
+                h.set_tunnel(parsed.netloc, parsed.port)
+
+            else:
+                h = httplib.HTTPConnection(parsed.netloc, parsed.port, timeout=SOCKET_TIMEOUT)
+
             h.request('HEAD', parsed.path)
             response = h.getresponse()
         except Exception as err:
