@@ -67,11 +67,11 @@ class TestPPThreatPolling(object):
         return poller
 
     @pytest.mark.parametrize("inputs,results", [
-        (None, (None, None)),
-        ("all", (None, None)),
-        ("spam,, ALL  , phish", (None, None)),
-        ("SpaM, ,", ({18}, {"spam"})),
-        ("SpaM, MALWARE, Phish,", ({18, 19, 22}, {"spam", "malware", "phish"}))
+        (None, None),
+        ("all", None),
+        ("spam,, ALL  , phish", None),
+        ("SpaM, ,", ({"spam"})),
+        ("SpaM, MALWARE, Phish,", ({"spam", "malware", "phish"}))
     ])
     def test_get_type_filter(self, inputs, results, monkeypatch):
         """ Test getting set of type ids for the type_filter string."""
