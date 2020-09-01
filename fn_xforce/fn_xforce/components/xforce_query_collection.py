@@ -4,14 +4,16 @@
 """Function implementation"""
 
 import logging
+import sys
 from resilient_circuits import ResilientComponent, function, handler, \
                                 StatusMessage, FunctionResult, FunctionError
 from fn_xforce.util.helper import XForceHelper
 from resilient_lib import RequestsCommon, ResultPayload, validate_fields
-try:
-    from urllib import quote as url_encode  # Python 2.X
-except ImportError:
+
+if sys.version_info.major >= 3:
     from urllib.parse import quote as url_encode  # Python 3+
+else:
+    from urllib import quote as url_encode  # Python 2.X
 
 
 CONFIG_DATA_SECTION = "fn_xforce"
