@@ -6,7 +6,7 @@ function getJsonVal() {
 }
 
 echo Getting Git Tag...
-latestTag=$(git tag --list | grep "v[0-9]" | tail -n 1)
+latestTag=$(git describe --tags)
 
 echo Creating release...
 echo '{"tag_name": "'$latestTag'","target_commitish": "master","name": "'$latestTag'","body": "Resilient Python API '$latestTag'","draft": false,"prerelease": false}' > json.json

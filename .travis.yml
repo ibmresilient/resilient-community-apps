@@ -90,7 +90,7 @@ after_failure:
 
 install:
 - pip install --upgrade pip
-- pip install --upgrade setuptools
+- pip install 'setuptools<50'
 - pip install tox
 - pip install pylint
 - pip install pytest
