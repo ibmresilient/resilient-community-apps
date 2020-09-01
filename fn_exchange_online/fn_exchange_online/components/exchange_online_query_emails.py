@@ -106,10 +106,6 @@ class FunctionComponent(ResilientComponent):
                                                      has_attachments, message_subject, message_body, query_results,
                                                      query_time_ms)
 
-            yield StatusMessage(u"Returning results from query.")
-
-            LOG.debug(json.dumps(results['content']))
-
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
 
@@ -146,50 +142,57 @@ class FunctionComponent(ResilientComponent):
             incident_id = query_results.get('incident_id')
             email_results = query_results.get('email_results')
 
-            note = u"<b>Exchange Online Message Query Criteria:</b><br><br>"
+            note = []
+            note.append(u"<b>Exchange Online Message Query Criteria:</b><br><br>")
             if email_address:
-                note = u"{0}    <b>email address:</b>   {1}<br>".format(note, email_address)
+                note.append(u"    <b>email address:</b>   {0}<br>".format(email_address))
             if mail_folders:
-                note = u"{0}    <b>mail folder:</b>     {1}<br>".format(note, mail_folders)
+                note.append(u"    <b>mail folder:</b>     {0}<br>".format(mail_folders))
             if sender:
-                note = u"{0}    <b>email sender:</b>    {1}<br>".format(note, sender)
+                note.append(u"    <b>email sender:</b>    {0}<br>".format(sender))
             if start_date:
                 utc_time = datetime.datetime.fromtimestamp(start_date / 1000).strftime('%Y-%m-%dT%H:%M:%SZ')
-                note = u"{0}    <b>start date:</b>      {1}<br>".format(note, utc_time)
+                note.append(u"    <b>start date:</b>      {0}<br>".format(utc_time))
             if end_date:
                 utc_time = datetime.datetime.fromtimestamp(end_date / 1000).strftime('%Y-%m-%dT%H:%M:%SZ')
-                note = u"{0}    <b>end date:</b>  {1}<br>".format(note, utc_time)
+                note.append(u"    <b>end date:</b>        {0}<br>".format(utc_time))
             if has_attachments:
-                note = u"{0}    <b>has attachments:</b> {1}<br>".format(note, has_attachments)
+                note.append(u"    <b>has attachments:</b> {0}<br>".format(has_attachments))
             if message_subject:
-                note = u"{0}    <b>message subject:</b> {1}<br>".format(note, message_subject)
+                note.append(u"    <b>message subject:</b> {0}<br>".format(message_subject))
             if message_body:
-                note = u"{0}    <b>message body:</b>    {1}<br>".format(note, message_body)
+                note.append(u"    <b>message body:</b>    {0}<br>".format(message_body))
 
             total_emails = 0
-            email_note = u""
+            email_note = []
             for email in email_results:
                 num_emails_found = len(email.get('email_list'))
                 if num_emails_found > 0:
-                    email_note = u"{0} {1}:  {2}<br>".format(email_note, email.get('email_address'), num_emails_found)
+                    email_note.append(u"    {0}:  {1}<br>".format(email.get('email_address'), num_emails_found))
                     total_emails = total_emails + num_emails_found
 
-            # Add the query execution time
-            email_note = u"{0}<b>Query execution time:</b>  {1} seconds.".format(email_note, query_time_ms/1000)
+            # Add line with total emails found
+            note.append(u"<br><b>Total messages matching search criteria:</b>  {0}<br>".format(total_emails))
 
-            # Add total messages found to the note text.
-            note = u"{0}<br><b>Total messages matching search criteria:</b>  {1}<br>{2}".format(note, total_emails,
-                                                                                              email_note)
+            # Add one line for each mailbox in which a matching message was found and total matching messages.
+            for line in email_note:
+                note.append(line)
+
+            # Add the query execution time
+            note.append(u"<b>Query execution time:</b>  {0} seconds.".format(query_time_ms/1000))
+
+            # Join all of the note lines together
+            complete_note = ''.join(note)
 
             if "Incident note" in output_format:
                 LOG.info('Writing query results to incident note.')
-                create_incident_comment(self.rest_client(), incident_id, note)
+                create_incident_comment(self.rest_client(), incident_id, complete_note)
             if "Incident attachment" in output_format:
                 LOG.info('Writing query results to attachment.')
-                note = note.replace('<br>', '\n')
-                note = note.replace('<b>', '')
-                note = note.replace('</b>', '')
-                create_incident_attachment(self.rest_client(), incident_id, note, 'exo-query-results')
+                complete_note = complete_note.replace('<br>', '\n')
+                complete_note = complete_note.replace('<b>', '')
+                complete_note = complete_note.replace('</b>', '')
+                create_incident_attachment(self.rest_client(), incident_id, complete_note, 'exo-query-results')
 
             return True
 
