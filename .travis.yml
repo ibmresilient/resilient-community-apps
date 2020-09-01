@@ -1,3 +1,725 @@
+ create mode 100644 fn_mitre_integration/tools/__init__.py
+ create mode 100644 fn_mitre_integration/tools/proxies.py
+ create mode 100644 fn_mitre_integration/tools/setenv
+ create mode 100644 fn_mxtoolbox/Dockerfile
+ create mode 100644 fn_mxtoolbox/apikey_permissions.txt
+ create mode 100644 fn_mxtoolbox/data/wf_example_mxtoolbox_mx_query.md
+ create mode 100644 fn_mxtoolbox/doc/README.md
+ create mode 100644 fn_mxtoolbox/entrypoint.sh
+ delete mode 100644 fn_mxtoolbox/fn_mxtoolbox/lib/resilient_common.py
+ create mode 100644 fn_mxtoolbox/fn_mxtoolbox/util/selftest.py
+ create mode 100644 fn_mxtoolbox/icons/app_logo.png
+ create mode 100644 fn_mxtoolbox/icons/company_logo.png
+ create mode 100644 fn_mxtoolbox/tests/test_funct_fn_mxtoolbox.py
+ create mode 100644 fn_odbc_query/.container_build_packages.sh
+ create mode 100755 fn_odbc_query/.travis_package_setup.sh
+ create mode 100644 fn_odbc_query/Dockerfile
+ create mode 100644 fn_odbc_query/apikey_permissions.txt
+ delete mode 100644 fn_odbc_query/doc/Resilient Integrations ODBC Query Function Guide.docx
+ delete mode 100644 fn_odbc_query/doc/Resilient Integrations ODBC Query Function Guide.pdf
+ create mode 100644 fn_odbc_query/doc/Resilient fn_odbc_query User Guide.md
+ create mode 100644 fn_odbc_query/entrypoint.sh
+ create mode 100644 fn_outbound_email/Dockerfile
+ create mode 100644 fn_outbound_email/MANIFEST.in
+ create mode 100644 fn_outbound_email/README.md
+ create mode 100644 fn_outbound_email/apikey_permissions.txt
+ create mode 100644 fn_outbound_email/data/example_send_email.jinja
+ create mode 100644 fn_outbound_email/doc/README.md
+ create mode 100644 fn_outbound_email/doc/Resilient Outbound Email Integration Guide.docx
+ create mode 100644 fn_outbound_email/doc/Resilient Outbound Email Integration Guide.pdf
+ create mode 100644 fn_outbound_email/entrypoint.sh
+ create mode 100644 fn_outbound_email/fn_outbound_email/LICENSE
+ create mode 100644 fn_outbound_email/fn_outbound_email/__init__.py
+ create mode 100644 fn_outbound_email/fn_outbound_email/components/__init__.py
+ create mode 100644 fn_outbound_email/fn_outbound_email/components/send_email.py
+ create mode 100644 fn_outbound_email/fn_outbound_email/lib/__init__.py
+ create mode 100644 fn_outbound_email/fn_outbound_email/lib/smtp_mailer.py
+ create mode 100644 fn_outbound_email/fn_outbound_email/lib/template_helper.py
+ create mode 100644 fn_outbound_email/fn_outbound_email/util/__init__.py
+ create mode 100644 fn_outbound_email/fn_outbound_email/util/config.py
+ create mode 100644 fn_outbound_email/fn_outbound_email/util/customize.py
+ create mode 100644 fn_outbound_email/fn_outbound_email/util/selftest.py
+ create mode 100644 fn_outbound_email/icons/app_logo.png
+ create mode 100644 fn_outbound_email/icons/company_logo.png
+ create mode 100644 fn_outbound_email/setup.py
+ create mode 100644 fn_outbound_email/tests/test_send_email.py
+ create mode 100644 fn_outbound_email/tox.ini
+ create mode 100644 fn_pagerduty/.python-version
+ create mode 100644 fn_pagerduty/Dockerfile
+ create mode 100644 fn_pagerduty/apikey_permissions.txt
+ create mode 100644 fn_pagerduty/entrypoint.sh
+ create mode 100644 fn_pagerduty/fn_pagerduty/util/selftest.py
+ create mode 100644 fn_pagerduty/icons/app_logo.png
+ create mode 100644 fn_pagerduty/icons/company_logo.png
+ create mode 100644 fn_phish_tank/Dockerfile
+ create mode 100644 fn_phish_tank/apikey_permissions.txt
+ create mode 100644 fn_phish_tank/entrypoint.sh
+ create mode 100644 fn_phish_tank/icons/app_logo.png
+ create mode 100644 fn_phish_tank/icons/company_logo.png
+ create mode 100644 fn_proofpoint_tap/Dockerfile
+ delete mode 100644 fn_proofpoint_tap/README.pdf
+ create mode 100644 fn_proofpoint_tap/apikey_permissions.txt
+ delete mode 100644 fn_proofpoint_tap/doc/README.pdf
+ create mode 100644 fn_proofpoint_tap/entrypoint.sh
+ create mode 100644 fn_proofpoint_tap/icons/app_logo.png
+ create mode 100644 fn_proofpoint_trap/Dockerfile
+ create mode 100644 fn_proofpoint_trap/MANIFEST.in
+ create mode 100644 fn_proofpoint_trap/README.md
+ create mode 100644 fn_proofpoint_trap/README.pdf
+ create mode 100644 fn_proofpoint_trap/apikey_permissions.txt
+ create mode 100644 fn_proofpoint_trap/doc/README.md
+ create mode 100644 fn_proofpoint_trap/doc/README.pdf
+ create mode 100644 fn_proofpoint_trap/doc/Resilient Integrations Function Guide for Proofpoint TRAP.pdf
+ create mode 100644 fn_proofpoint_trap/doc/screenshots/dt-proofpoint-trap-add-member-action.png
+ create mode 100644 fn_proofpoint_trap/doc/screenshots/dt-proofpoint-trap-add-member-datatable.png
+ create mode 100644 fn_proofpoint_trap/doc/screenshots/dt-proofpoint-trap-add-member_2-action.png
+ create mode 100644 fn_proofpoint_trap/doc/screenshots/dt-proofpoint-trap-delete-member-action.png
+ create mode 100644 fn_proofpoint_trap/doc/screenshots/dt-proofpoint-trap-delete-member-datatable.png
+ create mode 100644 fn_proofpoint_trap/doc/screenshots/dt-proofpoint-trap-events.png
+ create mode 100644 fn_proofpoint_trap/doc/screenshots/dt-proofpoint-trap-list-members-action.png
+ create mode 100644 fn_proofpoint_trap/doc/screenshots/dt-proofpoint-trap-list-members-datatable.png
+ create mode 100644 fn_proofpoint_trap/doc/screenshots/dt-proofpoint-trap-list-members_2-action.png
+ create mode 100644 fn_proofpoint_trap/doc/screenshots/dt-proofpoint-trap-update-member-action.png
+ create mode 100644 fn_proofpoint_trap/doc/screenshots/dt-proofpoint-trap-update-member-datatable.png
+ create mode 100644 fn_proofpoint_trap/doc/screenshots/dt-proofpoint-trap-update-member_2-action.png
+ create mode 100644 fn_proofpoint_trap/doc/screenshots/fn-proofpoint-trap-incident-artifacts.png
+ create mode 100644 fn_proofpoint_trap/doc/screenshots/fn-proofpoint-trap-incident-details-action.png
+ create mode 100644 fn_proofpoint_trap/doc/screenshots/fn-proofpoint-trap-incident-details.png
+ create mode 100644 fn_proofpoint_trap/entrypoint.sh
+ create mode 100644 fn_proofpoint_trap/fn_proofpoint_trap/LICENSE
+ create mode 100644 fn_proofpoint_trap/fn_proofpoint_trap/__init__.py
+ create mode 100644 fn_proofpoint_trap/fn_proofpoint_trap/components/__init__.py
+ create mode 100644 fn_proofpoint_trap/fn_proofpoint_trap/components/fn_proofpoint_trap_add_members_to_list.py
+ create mode 100644 fn_proofpoint_trap/fn_proofpoint_trap/components/fn_proofpoint_trap_delete_list_member.py
+ create mode 100644 fn_proofpoint_trap/fn_proofpoint_trap/components/fn_proofpoint_trap_get_incident_details.py
+ create mode 100644 fn_proofpoint_trap/fn_proofpoint_trap/components/fn_proofpoint_trap_get_list_members.py
+ create mode 100644 fn_proofpoint_trap/fn_proofpoint_trap/components/fn_proofpoint_trap_polling.py
+ create mode 100644 fn_proofpoint_trap/fn_proofpoint_trap/components/fn_proofpoint_trap_update_list_member.py
+ create mode 100644 fn_proofpoint_trap/fn_proofpoint_trap/lib/__init__.py
+ create mode 100644 fn_proofpoint_trap/fn_proofpoint_trap/lib/helpers.py
+ create mode 100644 fn_proofpoint_trap/fn_proofpoint_trap/lib/pptr_client.py
+ create mode 100644 fn_proofpoint_trap/fn_proofpoint_trap/util/__init__.py
+ create mode 100644 fn_proofpoint_trap/fn_proofpoint_trap/util/config.py
+ create mode 100644 fn_proofpoint_trap/fn_proofpoint_trap/util/customize.py
+ create mode 100644 fn_proofpoint_trap/fn_proofpoint_trap/util/selftest.py
+ create mode 100644 fn_proofpoint_trap/icons/app_logo.png
+ create mode 100644 fn_proofpoint_trap/icons/company_logo.png
+ create mode 100644 fn_proofpoint_trap/screenshots/custom_layout_datatable.png
+ create mode 100644 fn_proofpoint_trap/screenshots/custom_layout_field.png
+ create mode 100644 fn_proofpoint_trap/screenshots/custom_layouts.png
+ create mode 100644 fn_proofpoint_trap/setup.py
+ create mode 100644 fn_proofpoint_trap/tests/mock_artifacts.py
+ create mode 100644 fn_proofpoint_trap/tests/test_fn_proofpoint_trap_add_members_to_list.py
+ create mode 100644 fn_proofpoint_trap/tests/test_fn_proofpoint_trap_delete_list_member.py
+ create mode 100644 fn_proofpoint_trap/tests/test_fn_proofpoint_trap_get_incident_details.py
+ create mode 100644 fn_proofpoint_trap/tests/test_fn_proofpoint_trap_get_list_members.py
+ create mode 100644 fn_proofpoint_trap/tests/test_fn_proofpoint_trap_update_list_member.py
+ create mode 100644 fn_proofpoint_trap/tests/test_pptr_client.py
+ create mode 100644 fn_proofpoint_trap/tests/test_trap_helpers.py
+ create mode 100644 fn_proofpoint_trap/tox.ini
+ create mode 100644 fn_pulsedive/MANIFEST.in
+ create mode 100644 fn_pulsedive/README.md
+ create mode 100644 fn_pulsedive/doc/README.md
+ create mode 100644 fn_pulsedive/doc/pulsedive_user_guide1.0.0.pdf
+ create mode 100644 fn_pulsedive/doc/screenshots/fn_pulsedive_wf.png
+ create mode 100644 fn_pulsedive/doc/screenshots/fn_query_id.png
+ create mode 100644 fn_pulsedive/doc/screenshots/fn_query_val.png
+ create mode 100644 fn_pulsedive/doc/screenshots/fn_search.png
+ create mode 100644 fn_pulsedive/fn_pulsedive/LICENSE
+ create mode 100644 fn_pulsedive/fn_pulsedive/__init__.py
+ create mode 100644 fn_pulsedive/fn_pulsedive/components/__init__.py
+ create mode 100644 fn_pulsedive/fn_pulsedive/components/funct_pulsedive_query_id.py
+ create mode 100644 fn_pulsedive/fn_pulsedive/components/funct_pulsedive_query_value.py
+ create mode 100644 fn_pulsedive/fn_pulsedive/components/funct_pulsedive_search.py
+ create mode 100644 fn_pulsedive/fn_pulsedive/util/__init__.py
+ create mode 100644 fn_pulsedive/fn_pulsedive/util/config.py
+ create mode 100644 fn_pulsedive/fn_pulsedive/util/customize.py
+ create mode 100644 fn_pulsedive/fn_pulsedive/util/selftest.py
+ create mode 100644 fn_pulsedive/icons/company_logo.png
+ create mode 100644 fn_pulsedive/icons/extension_logo.png
+ create mode 100644 fn_pulsedive/icons/pulsedive_logo.png
+ create mode 100644 fn_pulsedive/setup.py
+ create mode 100644 fn_pulsedive/tests/test_pulsedive_query_id.py
+ create mode 100644 fn_pulsedive/tests/test_pulsedive_query_value.py
+ create mode 100644 fn_pulsedive/tests/test_pulsedive_search.py
+ create mode 100644 fn_pulsedive/tox.ini
+ create mode 100644 fn_qradar_integration/Dockerfile
+ create mode 100644 fn_qradar_integration/apikey_permissions.txt
+ create mode 100644 fn_qradar_integration/doc/Resilient Integrations QRadar Function Guide.pdf
+ create mode 100644 fn_qradar_integration/entrypoint.sh
+ create mode 100644 fn_qradar_integration/fn_qradar_integration/util/selftest.py
+ create mode 100644 fn_qradar_integration/icons/app_logo.png
+ create mode 100644 fn_qradar_integration/icons/company_logo.png
+ create mode 100644 fn_query_tor_network/Dockerfile
+ create mode 100644 fn_query_tor_network/apikey_permissions.txt
+ create mode 100644 fn_query_tor_network/entrypoint.sh
+ create mode 100644 fn_query_tor_network/icons/app_logo.png
+ create mode 100644 fn_query_tor_network/icons/company_logo.png
+ create mode 100644 fn_scheduler/Dockerfile
+ create mode 100644 fn_scheduler/apikey_permissions.txt
+ create mode 100644 fn_scheduler/entrypoint.sh
+ create mode 100644 fn_scheduler/icons/app_logo.png
+ create mode 100644 fn_secureworks_ctp/Dockerfile
+ create mode 100644 fn_secureworks_ctp/MANIFEST.in
+ create mode 100644 fn_secureworks_ctp/README.md
+ create mode 100644 fn_secureworks_ctp/README.pdf
+ create mode 100644 fn_secureworks_ctp/apikey_permissions.txt
+ create mode 100644 fn_secureworks_ctp/data/wf_example_secureworks_close_ticket.md
+ create mode 100644 fn_secureworks_ctp/doc/README.md
+ create mode 100644 fn_secureworks_ctp/doc/README.pdf
+ create mode 100644 fn_secureworks_ctp/doc/screenshots/scwx_close_layout_tab.png
+ create mode 100644 fn_secureworks_ctp/doc/screenshots/scwx_close_layout_tab_add.png
+ create mode 100644 fn_secureworks_ctp/doc/screenshots/scwx_close_ticket_function.png
+ create mode 100644 fn_secureworks_ctp/doc/screenshots/scwx_close_ticket_popup.png
+ create mode 100644 fn_secureworks_ctp/doc/screenshots/scwx_close_ticket_rule.png
+ create mode 100644 fn_secureworks_ctp/doc/screenshots/scwx_close_ticket_workflow.png
+ create mode 100644 fn_secureworks_ctp/doc/screenshots/scwx_incident.png
+ create mode 100644 fn_secureworks_ctp/doc/screenshots/scwx_layout_tab_create_close.png
+ create mode 100644 fn_secureworks_ctp/doc/screenshots/scwx_layout_tab_create_scwx.png
+ create mode 100644 fn_secureworks_ctp/doc/screenshots/scwx_layout_tab_fields.png
+ create mode 100644 fn_secureworks_ctp/doc/screenshots/scwx_main.png
+ create mode 100644 fn_secureworks_ctp/entrypoint.sh
+ create mode 100644 fn_secureworks_ctp/fn_secureworks_ctp/LICENSE
+ create mode 100644 fn_secureworks_ctp/fn_secureworks_ctp/__init__.py
+ create mode 100644 fn_secureworks_ctp/fn_secureworks_ctp/components/__init__.py
+ create mode 100644 fn_secureworks_ctp/fn_secureworks_ctp/components/funct_secureworks_ctp_close_ticket.py
+ create mode 100644 fn_secureworks_ctp/fn_secureworks_ctp/components/scwx_ctp_poll.py
+ create mode 100644 fn_secureworks_ctp/fn_secureworks_ctp/data/scwx_ctp_template_close.jinja
+ create mode 100644 fn_secureworks_ctp/fn_secureworks_ctp/data/scwx_ctp_template_escalate.jinja
+ create mode 100644 fn_secureworks_ctp/fn_secureworks_ctp/data/scwx_ctp_template_update.jinja
+ create mode 100644 fn_secureworks_ctp/fn_secureworks_ctp/lib/__init__.py
+ create mode 100644 fn_secureworks_ctp/fn_secureworks_ctp/lib/scwx_ctp_client.py
+ create mode 100644 fn_secureworks_ctp/fn_secureworks_ctp/util/__init__.py
+ create mode 100644 fn_secureworks_ctp/fn_secureworks_ctp/util/config.py
+ create mode 100644 fn_secureworks_ctp/fn_secureworks_ctp/util/customize.py
+ create mode 100644 fn_secureworks_ctp/fn_secureworks_ctp/util/selftest.py
+ create mode 100644 fn_secureworks_ctp/icons/app_logo.png
+ create mode 100644 fn_secureworks_ctp/icons/company_logo.png
+ create mode 100644 fn_secureworks_ctp/icons/extension_logo.png
+ create mode 100644 fn_secureworks_ctp/setup.py
+ create mode 100644 fn_secureworks_ctp/tests/test_secureworks_ctp_close_ticket.py
+ create mode 100644 fn_secureworks_ctp/tox.ini
+ create mode 100644 fn_service_now/Dockerfile
+ create mode 100644 fn_service_now/apikey_permissions.txt
+ delete mode 100644 fn_service_now/appx_docs/fn_service_now-v1.0.1.pdf
+ rename fn_service_now/appx_docs/{fn_service_now-v1.0.1.docx => fn_service_now-v1.1.1.docx} (78%)
+ create mode 100644 fn_service_now/appx_docs/fn_service_now-v1.1.1.pdf
+ create mode 100644 fn_service_now/entrypoint.sh
+ create mode 100644 fn_service_now/icons/app_logo.png
+ create mode 100644 fn_service_now/icons/company_logo.png
+ create mode 100644 fn_slack/Dockerfile
+ create mode 100644 fn_slack/apikey_permissions.txt
+ delete mode 100644 fn_slack/doc/Resilient Integrations Function Guide for Slack.pdf
+ rename fn_slack/doc/{Resilient Integrations Function Guide for Slack.docx => Resilient_Integrations_Function_Guide_for_Slack.docx} (97%)
+ create mode 100644 fn_slack/doc/Resilient_Integrations_Function_Guide_for_Slack.pdf
+ create mode 100644 fn_slack/entrypoint.sh
+ create mode 100644 fn_slack/icons/app_logo.png
+ create mode 100644 fn_slack/icons/company_logo.png
+ create mode 100644 fn_spamhaus_query/Dockerfile
+ create mode 100644 fn_spamhaus_query/apikey_permissions.txt
+ create mode 100644 fn_spamhaus_query/doc/README.md
+ rename fn_spamhaus_query/{screenshots/1.png => doc/screenshots/main.png} (100%)
+ create mode 100644 fn_spamhaus_query/entrypoint.sh
+ delete mode 100644 fn_spamhaus_query/fn_spamhaus_query-v1.0.0.pdf
+ create mode 100644 fn_spamhaus_query/fn_spamhaus_query_v1.0.1.pdf
+ create mode 100644 fn_spamhaus_query/icons/app_logo.png
+ create mode 100644 fn_spamhaus_query/icons/company_logo.png
+ delete mode 100644 fn_spamhaus_query/screenshots/2.png
+ delete mode 100644 fn_spamhaus_query/screenshots/3.png
+ delete mode 100644 fn_spamhaus_query/screenshots/4.png
+ delete mode 100644 fn_spamhaus_query/screenshots/5.png
+ delete mode 100644 fn_spamhaus_query/screenshots/6.png
+ create mode 100644 fn_spamhaus_query/tests/shared_mock_data.py
+ delete mode 100644 fn_spamhaus_query/tests/test_helper.py
+ create mode 100644 fn_spamhaus_query/tests/test_spamhaus_helper.py
+ create mode 100644 fn_splunk_integration/Dockerfile
+ create mode 100644 fn_splunk_integration/apikey_permissions.txt
+ create mode 100644 fn_splunk_integration/entrypoint.sh
+ create mode 100644 fn_splunk_integration/fn_splunk_integration/util/selftest.py
+ create mode 100644 fn_splunk_integration/icons/app_logo.png
+ create mode 100644 fn_splunk_integration/icons/company_logo.png
+ create mode 100644 fn_task_utils/Dockerfile
+ create mode 100644 fn_task_utils/apikey_permissions.txt
+ create mode 100644 fn_task_utils/entrypoint.sh
+ create mode 100644 fn_teams/Dockerfile
+ create mode 100644 fn_teams/apikey_permissions.txt
+ create mode 100644 fn_teams/entrypoint.sh
+ create mode 100644 fn_teams/icons/app_logo.png
+ create mode 100644 fn_teams/icons/company_logo.png
+ create mode 100644 fn_threatminer/Dockerfile
+ create mode 100644 fn_threatminer/MANIFEST.in
+ create mode 100644 fn_threatminer/README.md
+ create mode 100644 fn_threatminer/apikey_permissions.txt
+ create mode 100644 fn_threatminer/entrypoint.sh
+ create mode 100644 fn_threatminer/fn_threatminer/LICENSE
+ create mode 100644 fn_threatminer/fn_threatminer/__init__.py
+ create mode 100644 fn_threatminer/fn_threatminer/components/__init__.py
+ create mode 100644 fn_threatminer/fn_threatminer/components/threatminer_domain_subdomains.py
+ create mode 100644 fn_threatminer/fn_threatminer/components/threatminer_domain_whois.py
+ create mode 100644 fn_threatminer/fn_threatminer/components/threatminer_email_reverse.py
+ create mode 100644 fn_threatminer/fn_threatminer/components/threatminer_ip_whois.py
+ create mode 100644 fn_threatminer/fn_threatminer/components/threatminer_samples_metadata.py
+ create mode 100644 fn_threatminer/fn_threatminer/lib/__init__.py
+ create mode 100644 fn_threatminer/fn_threatminer/lib/threatminer_common.py
+ create mode 100644 fn_threatminer/fn_threatminer/util/__init__.py
+ create mode 100644 fn_threatminer/fn_threatminer/util/config.py
+ create mode 100644 fn_threatminer/fn_threatminer/util/customize.py
+ create mode 100644 fn_threatminer/fn_threatminer/util/selftest.py
+ create mode 100644 fn_threatminer/icons/app_logo.png
+ create mode 100644 fn_threatminer/icons/company_logo.png
+ create mode 100644 fn_threatminer/setup.py
+ create mode 100644 fn_threatminer/tests/test_threatminer_domain_subdomains.py
+ create mode 100644 fn_threatminer/tests/test_threatminer_domain_whois.py
+ create mode 100644 fn_threatminer/tests/test_threatminer_email_reverse.py
+ create mode 100644 fn_threatminer/tests/test_threatminer_ip_whois.py
+ create mode 100644 fn_threatminer/tests/test_threatminer_samples_metadata.py
+ create mode 100644 fn_threatminer/tox.ini
+ create mode 100644 fn_twilio/Dockerfile
+ create mode 100644 fn_twilio/README.pdf
+ create mode 100644 fn_twilio/apikey_permissions.txt
+ create mode 100644 fn_twilio/entrypoint.sh
+ create mode 100644 fn_twilio/fn_twilio/components/funct_twilio_get_responses.py
+ create mode 100644 fn_twilio/fn_twilio/lib/__init__.py
+ create mode 100644 fn_twilio/fn_twilio/lib/common.py
+ create mode 100644 fn_twilio/icons/app_logo.png
+ create mode 100644 fn_twilio/icons/company_logo.png
+ create mode 100644 fn_twilio/screenshots/sms_activity_log.png
+ create mode 100644 fn_twilio/tests/mock_data/bad_response.json
+ create mode 100644 fn_twilio/tests/mock_data/hello_world.json
+ create mode 100644 fn_twitter_most_popular/Dockerfile
+ create mode 100644 fn_twitter_most_popular/apikey_permissions.txt
+ create mode 100644 fn_twitter_most_popular/entrypoint.sh
+ create mode 100644 fn_twitter_most_popular/fn_twitter_most_popular/util/selftest.py
+ create mode 100644 fn_twitter_most_popular/icons/app_logo.png
+ create mode 100644 fn_twitter_most_popular/icons/company_logo.png
+ create mode 100644 fn_urlhaus/Dockerfile
+ delete mode 100644 fn_urlhaus/README.pdf
+ create mode 100644 fn_urlhaus/apikey_permissions.txt
+ create mode 100644 fn_urlhaus/doc/README.md
+ create mode 100644 fn_urlhaus/doc/screenshots/fn-urlhaus-lookup.png
+ create mode 100644 fn_urlhaus/doc/screenshots/fn-urlhaus-submission.png
+ create mode 100644 fn_urlhaus/doc/screenshots/main.png
+ create mode 100644 fn_urlhaus/entrypoint.sh
+ delete mode 100644 fn_urlhaus/fn_urlhaus/components/func_urlhaus.py
+ create mode 100644 fn_urlhaus/fn_urlhaus/components/funct_fn_urlhaus.py
+ create mode 100644 fn_urlhaus/fn_urlhaus/components/funct_fn_urlhaus_submission.py
+ create mode 100644 fn_urlhaus/fn_urlhaus/util/helper.py
+ create mode 100644 fn_urlhaus/fn_urlhaus_v1.0.2.pdf
+ create mode 100644 fn_urlhaus/icons/app_logo.png
+ create mode 100644 fn_urlhaus/icons/company_logo.png
+ create mode 100644 fn_urlhaus/tests/shared_mock_data.py
+ create mode 100644 fn_urlhaus/tests/test_funct_fn_urlhaus.py
+ create mode 100644 fn_urlhaus/tests/test_funct_fn_urlhaus_submission.py
+ create mode 100644 fn_urlhaus/tests/test_helper.py
+ create mode 100644 fn_urlhaus/tox.ini
+ create mode 100644 fn_urlscanio/Dockerfile
+ create mode 100644 fn_urlscanio/apikey_permissions.txt
+ create mode 100644 fn_urlscanio/doc/README.pdf
+ create mode 100644 fn_urlscanio/entrypoint.sh
+ create mode 100644 fn_urlscanio/fn_urlscanio/util/selftest.py
+ create mode 100644 fn_urlscanio/icons/app_logo.png
+ create mode 100644 fn_urlscanio/icons/company_logo.png
+ create mode 100644 fn_utilities/Dockerfile
+ create mode 100644 fn_utilities/apikey_permissions.txt
+ delete mode 100644 fn_utilities/dist/fn_utilities-1.0.10.zip
+ create mode 100644 fn_utilities/doc/README.pdf
+ create mode 100644 fn_utilities/doc/screenshots/fn-utilities-apphost-XMTransformations.png
+ create mode 100644 fn_utilities/entrypoint.sh
+ create mode 100644 fn_utilities/fn_utilities/util/selftest.py
+ create mode 100644 fn_utilities/fn_utilities/util/utils_common.py
+ create mode 100644 fn_utilities/icons/app_logo.png
+ create mode 100644 fn_utilities/icons/company_logo.png
+ create mode 100644 fn_utilities/tests/data/outlook_unicode.msg
+ create mode 100644 fn_utilities/tests/data/placeholder.txt
+ create mode 100644 fn_utilities/tests/data/ssl_certs/ssl_example.cert
+ create mode 100644 fn_utilities/tests/data/ssl_certs/ssl_expired.cert
+ create mode 100644 fn_virustotal/Dockerfile
+ create mode 100644 fn_virustotal/README.pdf
+ create mode 100644 fn_virustotal/apikey_permissions.txt
+ create mode 100644 fn_virustotal/doc/screenshots/virustotal_notes.png
+ create mode 100644 fn_virustotal/doc/screenshots/workflow.png
+ create mode 100644 fn_virustotal/entrypoint.sh
+ create mode 100644 fn_virustotal/icons/app_logo.png
+ create mode 100644 fn_virustotal/icons/company_logo.png
+ create mode 100644 fn_whois/Dockerfile
+ create mode 100644 fn_whois/apikey_permissions.txt
+ create mode 100644 fn_whois/entrypoint.sh
+ create mode 100644 fn_whois/fn_whois/lib/__init__.py
+ create mode 100644 fn_whois/fn_whois/lib/whois_common.py
+ create mode 100644 fn_whois/fn_whois/util/selftest.py
+ create mode 100644 fn_whois/icons/app_logo.png
+ create mode 100644 fn_whois/icons/company_logo.png
+ create mode 100644 fn_whois_rdap/Dockerfile
+ create mode 100644 fn_whois_rdap/README.pdf
+ create mode 100644 fn_whois_rdap/apikey_permissions.txt
+ create mode 100644 fn_whois_rdap/entrypoint.sh
+ create mode 100644 fn_whois_rdap/fn_whois_rdap/util/selftest.py
+ create mode 100644 fn_whois_rdap/icons/app_logo.png
+ create mode 100644 rc-cts-abuseipdb/rc_cts_abuseipdb/util/__init__.py
+ create mode 100644 rc-cts-abuseipdb/rc_cts_abuseipdb/util/config.py
+ create mode 100644 rc-data-feed-plugin-elasticfeed/Dockerfile
+ create mode 100644 rc-data-feed-plugin-elasticfeed/README.pdf
+ create mode 100644 rc-data-feed-plugin-elasticfeed/apikey_permissions.txt
+ create mode 100644 rc-data-feed-plugin-elasticfeed/data_feeder_plugins/elasticfeed/util/customize.py
+ create mode 100644 rc-data-feed-plugin-elasticfeed/data_feeder_plugins/elasticfeed/util/selftest.py
+ create mode 100644 rc-data-feed-plugin-elasticfeed/entrypoint.sh
+ create mode 100644 rc-data-feed-plugin-elasticfeed/icons/app_logo.png
+ create mode 100644 rc-data-feed-plugin-elasticfeed/icons/company_logo.png
+ create mode 100644 rc-data-feed-plugin-filefeed/Dockerfile
+ create mode 100644 rc-data-feed-plugin-filefeed/apikey_permissions.txt
+ create mode 100644 rc-data-feed-plugin-filefeed/data_feeder_plugins/filefeed/util/customize.py
+ create mode 100644 rc-data-feed-plugin-filefeed/entrypoint.sh
+ create mode 100644 rc-data-feed-plugin-filefeed/icons/app_logo.png
+ create mode 100644 rc-data-feed-plugin-filefeed/icons/company_logo.png
+ create mode 100644 rc-data-feed-plugin-kafkafeed/Dockerfile
+ create mode 100644 rc-data-feed-plugin-kafkafeed/apikey_permissions.txt
+ create mode 100644 rc-data-feed-plugin-kafkafeed/data_feeder_plugins/kafkafeed/util/customize.py
+ create mode 100644 rc-data-feed-plugin-kafkafeed/entrypoint.sh
+ create mode 100644 rc-data-feed-plugin-kafkafeed/icons/app_logo.png
+ create mode 100644 rc-data-feed-plugin-kafkafeed/icons/company_logo.png
+ create mode 100644 rc-data-feed-plugin-odbcfeed/Dockerfile
+ create mode 100644 rc-data-feed-plugin-odbcfeed/apikey_permissions.txt
+ create mode 100644 rc-data-feed-plugin-odbcfeed/data_feeder_plugins/sqllib/util/customize.py
+ create mode 100644 rc-data-feed-plugin-odbcfeed/drivers/drivers.ini
+ create mode 100644 rc-data-feed-plugin-odbcfeed/drivers/drivers/libnsl-2.28-72.el8_1.1.x86_64.rpm
+ create mode 100644 rc-data-feed-plugin-odbcfeed/drivers/drivers/mariadb-connector-c-3.1.7-linux-x86_64.tar.gz
+ create mode 100644 rc-data-feed-plugin-odbcfeed/drivers/drivers/msodbcsql17-17.5.2.1-1.x86_64.rpm
+ create mode 100644 rc-data-feed-plugin-odbcfeed/drivers/drivers/oracle-instantclient-odbc-linuxx64.rpm
+ create mode 100644 rc-data-feed-plugin-odbcfeed/drivers/drivers/oracle-instantclient19.6-basic-19.6.0.0.0-1.x86_64.rpm
+ create mode 100644 rc-data-feed-plugin-odbcfeed/drivers/drivers/psqlodbc-12.01.0000.tar.gz
+ create mode 100644 rc-data-feed-plugin-odbcfeed/entrypoint.sh
+ create mode 100644 rc-data-feed-plugin-odbcfeed/icons/app_logo.png
+ create mode 100644 rc-data-feed-plugin-odbcfeed/icons/company_logo.png
+ create mode 100644 rc-data-feed-plugin-odbcfeed/screenshots/tnsnames.png
+ create mode 100644 rc-data-feed-plugin-splunkfeed/Dockerfile
+ create mode 100644 rc-data-feed-plugin-splunkfeed/apikey_permissions.txt
+ create mode 100644 rc-data-feed-plugin-splunkfeed/data_feeder_plugins/splunkhecfeed/util/customize.py
+ create mode 100644 rc-data-feed-plugin-splunkfeed/entrypoint.sh
+ create mode 100644 rc-data-feed-plugin-splunkfeed/icons/app_logo.png
+ create mode 100644 rc-data-feed-plugin-splunkfeed/icons/company_logo.png
+ create mode 100644 rc-data-feed/Dockerfile
+ create mode 100644 rc-data-feed/apikey_permissions.txt
+ create mode 100644 rc-data-feed/entrypoint.sh
+ create mode 100644 rc-data-feed/icons/app_logo.png
+ create mode 100644 rc-data-feed/icons/company_logo.png
+ create mode 100644 sc_email_parser/ExampleEmailParsingScripts-2.0.2.zip
+SeanOGormanibmcoms-MacBook-Pro:resilient-community-apps sean.ogormanibm.com$ git checkout INT-2868/fn_outbound_email
+Switched to branch 'INT-2868/fn_outbound_email'
+Your branch is up to date with 'origin/INT-2868/fn_outbound_email'.
+SeanOGormanibmcoms-MacBook-Pro:resilient-community-apps sean.ogormanibm.com$ git pull
+X11 forwarding request failed on channel 0
+From github.ibm.com:Resilient/resilient-community-apps
+ + 604b48b2...25847d20 INT-2283/misp -> origin/INT-2283/misp  (forced update)
+ * [new branch]        int-2283/misp -> origin/int-2283/misp
+Already up to date.
+SeanOGormanibmcoms-MacBook-Pro:resilient-community-apps sean.ogormanibm.com$ ls
+CONTRIBUTING.md     fn_mitre_integration
+INTERNAL_CONTRIBUTING.md  fn_mxtoolbox
+LICENSE       fn_netdevice
+README.md     fn_odbc_query
+app_host_files      fn_outbound_email
+base_input_types    fn_pa_panorama
+fn_alienvault_otx   fn_pagerduty
+fn_anomali_staxx    fn_pastebin
+fn_ansible      fn_phish_ai
+fn_ansible_tower    fn_phish_tank
+fn_apility      fn_pipl
+fn_aws_iam      fn_proofpoint_tap
+fn_aws_utilities    fn_proofpoint_trap
+fn_bigfix     fn_pulsedive
+fn_bluecoat_site_review   fn_qradar_advisor
+fn_calendar_invite    fn_qradar_integration
+fn_cb_protection    fn_query_tor_network
+fn_cisco_amp4ep     fn_res_to_icd
+fn_cisco_enforcement    fn_risk_fabric
+fn_cisco_umbrella_inv   fn_rsa_netwitness
+fn_clamav     fn_scheduler
+fn_cloud_foundry    fn_sep
+fn_components     fn_service_now
+fn_create_webex_meeting   fn_slack
+fn_create_zoom_meeting    fn_spamhaus_query
+fn_crowdstrike_falcon   fn_splunk_integration
+fn_cve_search     fn_symantec_dlp
+fn_datatable_utils    fn_task_utils
+fn_digital_shadows_search fn_teams
+fn_docker     fn_threatminer
+fn_elasticsearch    fn_thug
+fn_email_header_validation  fn_twilio
+fn_exchange     fn_twitter_most_popular
+fn_exchange_online    fn_url_void
+fn_floss      fn_urlhaus
+fn_geocoding      fn_urlscanio
+fn_google_cloud_dlp   fn_utilities
+fn_google_cloud_functions fn_utilities_codegen.sh
+fn_google_maps_directions fn_virustotal
+fn_greynoise      fn_vmray_analyzer
+fn_grpc_interface   fn_watson_translate
+fn_grr_search     fn_whois
+fn_hibp       fn_whois_rdap
+fn_html2pdf     fn_xforce
+fn_icdx       older
+fn_ioc_parser_v2    rc-cts-abuseipdb
+fn_ip_void      rc-cts-googlesafebrowsing
+fn_ipinfo     rc-cts-haveibeenpwned
+fn_isitPhishing     rc-cts-mcafeetie
+fn_jira       rc-cts-misp
+fn_joe_sandbox_analysis   rc-cts-passivetotal
+fn_ldap_utilities   rc-cts-shadowserver
+fn_log_capture      rc-cts-urlscanio
+fn_maas360      rc-cts-yeti
+fn_machine_learning   rc-data-feed
+fn_machine_learning_nlp   rc-data-feed-plugin-elasticfeed
+fn_mcafee_atd     rc-data-feed-plugin-filefeed
+fn_mcafee_epo     rc-data-feed-plugin-kafkafeed
+fn_mcafee_esm     rc-data-feed-plugin-odbcfeed
+fn_mcafee_opendxl   rc-data-feed-plugin-splunkfeed
+fn_mcafee_tie     res_qraw_mitre
+fn_microsoft_security_graph sc_email_parser
+fn_misp       workshop-guide
+SeanOGormanibmcoms-MacBook-Pro:resilient-community-apps sean.ogormanibm.com$ cd fn_outbound_email/
+SeanOGormanibmcoms-MacBook-Pro:fn_outbound_email sean.ogormanibm.com$ ls
+Dockerfile    apikey_permissions.txt  icons
+MANIFEST.in   doc     setup.py
+README.md   entrypoint.sh   tests
+README.pdf    fn_outbound_email tox.ini
+SeanOGormanibmcoms-MacBook-Pro:fn_outbound_email sean.ogormanibm.com$ cd doc/
+SeanOGormanibmcoms-MacBook-Pro:doc sean.ogormanibm.com$ ls
+README.md
+README.pdf
+Resilient Outbound Email Integration Guide.docx
+Resilient Outbound Email Integration Guide.pdf
+SeanOGormanibmcoms-MacBook-Pro:doc sean.ogormanibm.com$ rm README.md
+SeanOGormanibmcoms-MacBook-Pro:doc sean.ogormanibm.com$ ls
+README.pdf
+Resilient Outbound Email Integration Guide.docx
+Resilient Outbound Email Integration Guide.pdf
+SeanOGormanibmcoms-MacBook-Pro:doc sean.ogormanibm.com$ cd ..
+SeanOGormanibmcoms-MacBook-Pro:fn_outbound_email sean.ogormanibm.com$ ls
+Dockerfile    apikey_permissions.txt  icons
+MANIFEST.in   doc     setup.py
+README.md   entrypoint.sh   tests
+README.pdf    fn_outbound_email tox.ini
+SeanOGormanibmcoms-MacBook-Pro:fn_outbound_email sean.ogormanibm.com$ rm README.pdf
+SeanOGormanibmcoms-MacBook-Pro:fn_outbound_email sean.ogormanibm.com$ ls
+Dockerfile    doc     setup.py
+MANIFEST.in   entrypoint.sh   tests
+README.md   fn_outbound_email tox.ini
+apikey_permissions.txt  icons
+SeanOGormanibmcoms-MacBook-Pro:fn_outbound_email sean.ogormanibm.com$ git commit -m "INT-2868 removing excess files"
+On branch INT-2868/fn_outbound_email
+Your branch is up to date with 'origin/INT-2868/fn_outbound_email'.
+
+Changes not staged for commit:
+  deleted:    README.pdf
+  deleted:    doc/README.md
+
+Untracked files:
+  ../fn_whois_rdap/README.html
+  ../fn_whois_rdap/README.jpeg
+  ../fn_whois_rdap/README.png
+  ../fn_whois_rdap/doc/README.html
+  ../fn_whois_rdap/doc/README.jpeg
+  ../fn_whois_rdap/doc/README.pdf
+  ../fn_whois_rdap/doc/README.png
+  ../fn_whois_rdap/export.res
+  ../fn_whois_rdap/fn_whois_rdap.zip
+
+no changes added to commit
+SeanOGormanibmcoms-MacBook-Pro:fn_outbound_email sean.ogormanibm.com$ git add .
+SeanOGormanibmcoms-MacBook-Pro:fn_outbound_email sean.ogormanibm.com$ git commit -m "INT-2868 removing excess files"
+[INT-2868/fn_outbound_email b5366ab9] INT-2868 removing excess files
+ 2 files changed, 209 deletions(-)
+ delete mode 100644 fn_outbound_email/README.pdf
+ delete mode 100644 fn_outbound_email/doc/README.md
+SeanOGormanibmcoms-MacBook-Pro:fn_outbound_email sean.ogormanibm.com$ git push
+X11 forwarding request failed on channel 0
+Enumerating objects: 7, done.
+Counting objects: 100% (7/7), done.
+Delta compression using up to 12 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (4/4), 891 bytes | 74.00 KiB/s, done.
+Total 4 (delta 3), reused 0 (delta 0)
+remote: Resolving deltas: 100% (3/3), completed with 3 local objects.
+remote: detect-secrets-stream (beta) ver=164-1ac7e673b9acf31ed1ba86a8422cf59cb8a848be FAQ: https://ibm.biz/detect-secrets-stream-faq
+remote:
+remote: Successfully send push metadata.
+remote: Push info collect pre-receive hook finished within 3 seconds.
+To github.ibm.com:Resilient/resilient-community-apps.git
+   c66a65d6..b5366ab9  INT-2868/fn_outbound_email -> INT-2868/fn_outbound_email
+SeanOGormanibmcoms-MacBook-Pro:fn_outbound_email sean.ogormanibm.com$ git log
+commit b5366ab959d296f882e19ef088d6c3ed2babedf0 (HEAD -> INT-2868/fn_outbound_email, origin/INT-2868/fn_outbound_email)
+Author: Sean O Gorman <Sean.OGorman@ibm.com>
+Date:   Mon Aug 31 17:04:23 2020 +0100
+
+    INT-2868 removing excess files
+
+commit c66a65d6e2bd749c9f923959dbdfd355b59b912b
+Author: Sean O Gorman <Sean.OGorman@ibm.com>
+Date:   Mon Aug 31 16:39:47 2020 +0100
+
+    INT-2868 test build with pdf
+
+commit 2db6cfd7aabfde19c1acfdac678867836e2216fe
+Author: Sean O Gorman <Sean.OGorman@ibm.com>
+Date:   Mon Aug 31 16:18:54 2020 +0100
+
+    INT-2868 finding doccy bits
+
+commit fb0d968d0ac18374345e440c08571c89659e8486
+Author: Sean O Gorman <Sean.OGorman@ibm.com>
+Date:   Sat Aug 29 19:29:19 2020 +0100
+
+    Update send_email.py
+SeanOGormanibmcoms-MacBook-Pro:fn_outbound_email sean.ogormanibm.com$ git checkout master
+Switched to branch 'master'
+Your branch is up to date with 'origin/master'.
+SeanOGormanibmcoms-MacBook-Pro:fn_outbound_email sean.ogormanibm.com$ git pull
+X11 forwarding request failed on channel 0
+From github.ibm.com:Resilient/resilient-community-apps
+ + 604b48b2...25847d20 INT-2283/misp -> origin/INT-2283/misp  (forced update)
+ * [new branch]        int-2283/misp -> origin/int-2283/misp
+Already up to date.
+SeanOGormanibmcoms-MacBook-Pro:fn_outbound_email sean.ogormanibm.com$ git checkout
+Dockerfile              data/                   icons/
+MANIFEST.in             doc/                    setup.py
+README.md               entrypoint.sh           tests/
+apikey_permissions.txt  fn_outbound_email/      tox.ini
+SeanOGormanibmcoms-MacBook-Pro:fn_outbound_email sean.ogormanibm.com$ git checkout INT-2868/fn_outbound_email
+Switched to branch 'INT-2868/fn_outbound_email'
+Your branch is up to date with 'origin/INT-2868/fn_outbound_email'.
+SeanOGormanibmcoms-MacBook-Pro:fn_outbound_email sean.ogormanibm.com$ git pull
+X11 forwarding request failed on channel 0
+From github.ibm.com:Resilient/resilient-community-apps
+ + 604b48b2...25847d20 INT-2283/misp -> origin/INT-2283/misp  (forced update)
+ * [new branch]        int-2283/misp -> origin/int-2283/misp
+Already up to date.
+SeanOGormanibmcoms-MacBook-Pro:fn_outbound_email sean.ogormanibm.com$ git log
+commit b5366ab959d296f882e19ef088d6c3ed2babedf0 (HEAD -> INT-2868/fn_outbound_email, origin/INT-2868/fn_outbound_email)
+Author: Sean O Gorman <Sean.OGorman@ibm.com>
+Date:   Mon Aug 31 17:04:23 2020 +0100
+
+    INT-2868 removing excess files
+
+commit c66a65d6e2bd749c9f923959dbdfd355b59b912b
+Author: Sean O Gorman <Sean.OGorman@ibm.com>
+Date:   Mon Aug 31 16:39:47 2020 +0100
+
+    INT-2868 test build with pdf
+
+commit 2db6cfd7aabfde19c1acfdac678867836e2216fe
+Author: Sean O Gorman <Sean.OGorman@ibm.com>
+Date:   Mon Aug 31 16:18:54 2020 +0100
+
+    INT-2868 finding doccy bits
+
+commit fb0d968d0ac18374345e440c08571c89659e8486
+Author: Sean O Gorman <Sean.OGorman@ibm.com>
+Date:   Sat Aug 29 19:29:19 2020 +0100
+
+    Update send_email.py
+SeanOGormanibmcoms-MacBook-Pro:fn_outbound_email sean.ogormanibm.com$ ls
+Dockerfile    doc     setup.py
+MANIFEST.in   entrypoint.sh   tests
+README.md   fn_outbound_email tox.ini
+apikey_permissions.txt  icons
+SeanOGormanibmcoms-MacBook-Pro:fn_outbound_email sean.ogormanibm.com$ touch test.txt
+SeanOGormanibmcoms-MacBook-Pro:fn_outbound_email sean.ogormanibm.com$ git add test.txt
+SeanOGormanibmcoms-MacBook-Pro:fn_outbound_email sean.ogormanibm.com$ git commit "test 3 build"
+error: pathspec 'test 3 build' did not match any file(s) known to git
+SeanOGormanibmcoms-MacBook-Pro:fn_outbound_email sean.ogormanibm.com$ git commit -m "test 3 build"
+[INT-2868/fn_outbound_email 52b9490e] test 3 build
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 fn_outbound_email/test.txt
+SeanOGormanibmcoms-MacBook-Pro:fn_outbound_email sean.ogormanibm.com$ git push
+X11 forwarding request failed on channel 0
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 12 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 856 bytes | 57.00 KiB/s, done.
+Total 3 (delta 2), reused 0 (delta 0)
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+remote: detect-secrets-stream (beta) ver=164-1ac7e673b9acf31ed1ba86a8422cf59cb8a848be FAQ: https://ibm.biz/detect-secrets-stream-faq
+remote:
+remote: Successfully send push metadata.
+remote: Push info collect pre-receive hook finished within 3 seconds.
+To github.ibm.com:Resilient/resilient-community-apps.git
+   b5366ab9..52b9490e  INT-2868/fn_outbound_email -> INT-2868/fn_outbound_email
+SeanOGormanibmcoms-MacBook-Pro:fn_outbound_email sean.ogormanibm.com$ ls
+Dockerfile    doc     setup.py
+MANIFEST.in   entrypoint.sh   test.txt
+README.md   fn_outbound_email tests
+apikey_permissions.txt  icons     tox.ini
+SeanOGormanibmcoms-MacBook-Pro:fn_outbound_email sean.ogormanibm.com$ cd ..
+SeanOGormanibmcoms-MacBook-Pro:resilient-community-apps sean.ogormanibm.com$ ls
+CONTRIBUTING.md     fn_mitre_integration
+INTERNAL_CONTRIBUTING.md  fn_mxtoolbox
+LICENSE       fn_netdevice
+README.md     fn_odbc_query
+app_host_files      fn_outbound_email
+base_input_types    fn_pa_panorama
+fn_alienvault_otx   fn_pagerduty
+fn_anomali_staxx    fn_pastebin
+fn_ansible      fn_phish_ai
+fn_ansible_tower    fn_phish_tank
+fn_apility      fn_pipl
+fn_aws_iam      fn_proofpoint_tap
+fn_aws_utilities    fn_proofpoint_trap
+fn_bigfix     fn_pulsedive
+fn_bluecoat_site_review   fn_qradar_advisor
+fn_calendar_invite    fn_qradar_integration
+fn_cb_protection    fn_query_tor_network
+fn_cisco_amp4ep     fn_res_to_icd
+fn_cisco_enforcement    fn_risk_fabric
+fn_cisco_umbrella_inv   fn_rsa_netwitness
+fn_clamav     fn_scheduler
+fn_cloud_foundry    fn_sep
+fn_components     fn_service_now
+fn_create_webex_meeting   fn_slack
+fn_create_zoom_meeting    fn_spamhaus_query
+fn_crowdstrike_falcon   fn_splunk_integration
+fn_cve_search     fn_symantec_dlp
+fn_datatable_utils    fn_task_utils
+fn_digital_shadows_search fn_teams
+fn_docker     fn_threatminer
+fn_elasticsearch    fn_thug
+fn_email_header_validation  fn_twilio
+fn_exchange     fn_twitter_most_popular
+fn_exchange_online    fn_url_void
+fn_floss      fn_urlhaus
+fn_geocoding      fn_urlscanio
+fn_google_cloud_dlp   fn_utilities
+fn_google_cloud_functions fn_utilities_codegen.sh
+fn_google_maps_directions fn_virustotal
+fn_greynoise      fn_vmray_analyzer
+fn_grpc_interface   fn_watson_translate
+fn_grr_search     fn_whois
+fn_hibp       fn_whois_rdap
+fn_html2pdf     fn_xforce
+fn_icdx       older
+fn_ioc_parser_v2    rc-cts-abuseipdb
+fn_ip_void      rc-cts-googlesafebrowsing
+fn_ipinfo     rc-cts-haveibeenpwned
+fn_isitPhishing     rc-cts-mcafeetie
+fn_jira       rc-cts-misp
+fn_joe_sandbox_analysis   rc-cts-passivetotal
+fn_ldap_utilities   rc-cts-shadowserver
+fn_log_capture      rc-cts-urlscanio
+fn_maas360      rc-cts-yeti
+fn_machine_learning   rc-data-feed
+fn_machine_learning_nlp   rc-data-feed-plugin-elasticfeed
+fn_mcafee_atd     rc-data-feed-plugin-filefeed
+fn_mcafee_epo     rc-data-feed-plugin-kafkafeed
+fn_mcafee_esm     rc-data-feed-plugin-odbcfeed
+fn_mcafee_opendxl   rc-data-feed-plugin-splunkfeed
+fn_mcafee_tie     res_qraw_mitre
+fn_microsoft_security_graph sc_email_parser
+fn_misp       workshop-guide
+SeanOGormanibmcoms-MacBook-Pro:resilient-community-apps sean.ogormanibm.com$ code .
+./             .environments/ .gitignore     .scripts/
+../            .git/          .icons/        .travis.yml
+.DS_Store      .github/       .odbc_drivers/
+SeanOGormanibmcoms-MacBook-Pro:resilient-community-apps sean.ogormanibm.com$ cat .travis.yml
 language: python
 python: 2.7
 os: linux
@@ -17,7 +739,7 @@ branches:
 
 stages:
   - name: latest push
-    if: branch != master AND type=push AND NOT tag =~ ^container/.+ 
+    if: branch != master AND type=push AND NOT tag =~ ^container/.+
   - name: mock tests
     if: branch = master AND type = cron # for now only trigger tests on cron
   - name: build a container
@@ -29,9 +751,9 @@ matrix:
   fast_finish: true
   include:
   # Jobs below this line are reserved for push contributions i.e when someone pushes changes
-  # ==========	
-  # Below jobs are used to run tests against the most recently modified integration. 	
-  # We determine the most recent one using git diff and then ensure to only run tests against a package once. 
+  # ==========
+  # Below jobs are used to run tests against the most recently modified integration.
+  # We determine the most recent one using git diff and then ensure to only run tests against a package once.
   - stage: latest push
     name: Python 2.7 Build and Run Tests
     python: 2.7
@@ -46,8 +768,8 @@ matrix:
     - TOXENV=py36 TEST_RESILIENT_ORG="Resilient Integrations - Test"
     script:
     - echo "3.6 push test" && .scripts/run_most_recent_tests.sh
-  # Jobs below this line are reserved for master branch 	
-  # Master branch is where all the integrations should be tested, its okay if it takes a while 	
+  # Jobs below this line are reserved for master branch
+  # Master branch is where all the integrations should be tested, its okay if it takes a while
   # As we have the push jobs above to handle individual commits
   - stage: mock tests
     python: 2.7
@@ -63,7 +785,7 @@ matrix:
     - TOXENV=py36 TEST_RESILIENT_ORG="Resilient Integrations - Test"
     script:
     - echo "3.6 Master Build" && .scripts/run_tests.sh
-  # Next job is started when a tag is pushed of the form container/<name> 
+  # Next job is started when a tag is pushed of the form container/<name>
   # where <name> is a name of an integration directory whose container
   # will be build and pushed to artifactory with label :latest and :<version>
   # ARTIFACTORY_URL should be sec-resilient-docker-local.artifactory.swg-devops.com
@@ -73,6 +795,181 @@ matrix:
       - docker
     install: skip
     script:
+      - source .scripts/set_up_container_build_data.sh
+      # if there are failed containers send a message with their list
+      - if [[ -n "${FAILED_CONTAINERS[*]}" ]]; then .scripts/send_notification.sh "Containers not built ${FAILED_CONTAINERS[*]}" failure; return 1; fi
+  - stage: successful notification
+    name: Successful notification
+    # To make sure that success is sent once per job we create a separate stage for it
+    install: skip
+    script:
+      - .scripts/send_notification.sh
+
+# If one job fails the whole build fails, so we can send it here
+after_failure:
+- .scripts/send_notification.sh "" failure
+
+
+install:
+- pip install --upgrade pip
+- pip install --upgrade setuptools
+- pip install tox
+- pip install pylint
+- pip install pytest
+- pip install resilient
+- pip install resilient-circuits
+- pip install pytest-resilient-circuits
+SeanOGormanibmcoms-MacBook-Pro:resilient-community-apps sean.ogormanibm.com$
+
+Session Contents Restored
+
+Last login: Tue Sep  1 08:03:44 on console
+Agent pid 1205
+/Users/sean.ogormanibm.com/.ssh/id_rsa: No such file or directory
+SeanOGormanibmcoms-MacBook-Pro:resilient-community-apps sean.ogormanibm.com$ p;
+-bash: p: command not found
+SeanOGormanibmcoms-MacBook-Pro:resilient-community-apps sean.ogormanibm.com$ ls
+CONTRIBUTING.md     fn_hibp       fn_sep
+INTERNAL_CONTRIBUTING.md  fn_html2pdf     fn_service_now
+LICENSE       fn_icdx       fn_slack
+README.md     fn_ioc_parser_v2    fn_spamhaus_query
+app_host_files      fn_ip_void      fn_splunk_integration
+base_input_types    fn_ipinfo     fn_symantec_dlp
+fn_alienvault_otx   fn_isitPhishing     fn_task_utils
+fn_anomali_staxx    fn_jira       fn_teams
+fn_ansible      fn_joe_sandbox_analysis   fn_threatminer
+fn_ansible_tower    fn_ldap_utilities   fn_thug
+fn_apility      fn_log_capture      fn_twilio
+fn_aws_iam      fn_maas360      fn_twitter_most_popular
+fn_aws_utilities    fn_machine_learning   fn_url_void
+fn_bigfix     fn_machine_learning_nlp   fn_urlhaus
+fn_bluecoat_site_review   fn_mcafee_atd     fn_urlscanio
+fn_calendar_invite    fn_mcafee_epo     fn_utilities
+fn_cb_protection    fn_mcafee_esm     fn_utilities_codegen.sh
+fn_cisco_amp4ep     fn_mcafee_opendxl   fn_virustotal
+fn_cisco_enforcement    fn_mcafee_tie     fn_vmray_analyzer
+fn_cisco_umbrella_inv   fn_microsoft_security_graph fn_watson_translate
+fn_clamav     fn_misp       fn_whois
+fn_cloud_foundry    fn_mitre_integration    fn_whois_rdap
+fn_components     fn_mxtoolbox      fn_xforce
+fn_create_webex_meeting   fn_netdevice      older
+fn_create_zoom_meeting    fn_odbc_query     rc-cts-abuseipdb
+fn_crowdstrike_falcon   fn_outbound_email   rc-cts-googlesafebrowsing
+fn_cve_search     fn_pa_panorama      rc-cts-haveibeenpwned
+fn_datatable_utils    fn_pagerduty      rc-cts-mcafeetie
+fn_digital_shadows_search fn_pastebin     rc-cts-misp
+fn_docker     fn_phish_ai     rc-cts-passivetotal
+fn_elasticsearch    fn_phish_tank     rc-cts-shadowserver
+fn_email_header_validation  fn_pipl       rc-cts-urlscanio
+fn_exchange     fn_proofpoint_tap   rc-cts-yeti
+fn_exchange_online    fn_proofpoint_trap    rc-data-feed
+fn_floss      fn_pulsedive      rc-data-feed-plugin-elasticfeed
+fn_geocoding      fn_qradar_advisor   rc-data-feed-plugin-filefeed
+fn_google_cloud_dlp   fn_qradar_integration   rc-data-feed-plugin-kafkafeed
+fn_google_cloud_functions fn_query_tor_network    rc-data-feed-plugin-odbcfeed
+fn_google_maps_directions fn_res_to_icd     rc-data-feed-plugin-splunkfeed
+fn_greynoise      fn_risk_fabric      res_qraw_mitre
+fn_grpc_interface   fn_rsa_netwitness   sc_email_parser
+fn_grr_search     fn_scheduler      workshop-guide
+SeanOGormanibmcoms-MacBook-Pro:resilient-community-apps sean.ogormanibm.com$ git checkout master
+Switched to branch 'master'
+Your branch is up to date with 'origin/master'.
+SeanOGormanibmcoms-MacBook-Pro:resilient-community-apps sean.ogormanibm.com$ git pull
+no such identity: /Users/sean.ogormanibm.com/.ssh/id_rsa: No such file or directory
+X11 forwarding request failed on channel 0
+remote: Enumerating objects: 42, done.
+remote: Counting objects: 100% (42/42), done.
+remote: Compressing objects: 100% (7/7), done.
+remote: Total 61 (delta 36), reused 40 (delta 35), pack-reused 19
+Unpacking objects: 100% (61/61), done.
+From github.ibm.com:Resilient/resilient-community-apps
+ + 604b48b2...25847d20 INT-2283/misp        -> origin/INT-2283/misp  (forced update)
+   cf4e650c..e7f28d1b  exchange_online-v1.1 -> origin/exchange_online-v1.1
+ * [new branch]        int-2283/misp        -> origin/int-2283/misp
+   e70d3afb..bd25a189  int-2946             -> origin/int-2946
+Already up to date.
+SeanOGormanibmcoms-MacBook-Pro:resilient-community-apps sean.ogormanibm.com$ cat .travis.yml
+language: python
+python: 2.7
+os: linux
+env:
+  global:
+  - TEST_RESILIENT_APPLIANCE=staging2.internal.resilientsystems.com
+  - OCTOKIT_API_ENDPOINT="https://github.ibm.com/api/v3/"
+  - PIP_FIND_LINKS="$TRAVIS_BUILD_DIR/pkgs"
+  - secure: VU1PL2bWOE+E3ieBz/0Oa2hIRXGeSFYubE9SYh3dH541h8V8FWE0kGt8P6xdZOGmf9xNsDL/O+rKqrq5TCKTdUQqFXm7RCD//iQrHUcbu2YU38XPpBQrWxSZs29sR3R6UkUypZahHmn/ghjgZnRxQIWGscYPvvNCiOP9X85ckmVaKLYPwW0HPH7vIKs9zcT8tEyRDANokc0BQDjeVu0s29FeKGyy9JVbuye8/1TmVkQWBvutvcQ/z/mOQ7dOO3fW0wkVwOHPF9FtBc79WzjK5w/Ej30EWHC5zdRG46+2FLcqKSHvkyuV59f0ojxLzRmeR1ueS37pNncmXfVMREwtiIYN/Dd3isLsg14RK1leu/JHiPxfQtz2TV4+yeVO4aZk+Bs/JLf1ZbXAE+A71hIH6rTUpEBq1S8qjKsfTPEWLg1cuq1ujf2WOAumdIf8rSOnQ9EbEfBlm3N8Wo9RjXbEx6hq+UHr7L28tw0u00gcAex6Ky2eRk+USFnXBHs/Kf5i29CWzw4Lcnb2hPa0bup3yNQuss/Yy+cQO5tDW8jJPP8joR5Fvr8fJZVtGlTGp09odHcrDGKvbdlf0gVmVDYawKi0v4m0URCKVy0vYAbzVOgZF46nW+VfcexiLxomwYpKeltigk+L52aV5DIodfuxS9aB6IJtEYSTO8Mf+Yo2x8Q=
+  - secure: kr5Zz5frfrGOeuAylefGbDhY5s/YwyRhktuAly1ovOn/7Q3OJYjTq6h7wvnt1KQ/YeSdA+bxwOhWKbYHPQHAhovyo/5gsII7LruSs7VjdcD9tDoaYEoDBP7nki+NGr+dBVwrooGJ3f7TbuZs+4OSyPWD2FdN4PsOYLof4soDEW7C0cTP2KZ/wNGDjBGB2stOb6a5h4MQSohx+7B795noUoK5ojmygZObIGSDWmahR4kzCm+rEVLlMV0ptDCBXvn4xmJLCz5UOZhR27ckuiW342vNxShlms+rwWcvoxwbj61Qn3MEf9S9D59aJ+n4+u9Kb3VD4HJjlQ3rWZ/DADPfp7h6XOmfrQq3Xj3sQ4K2+8RMSFHdxWPsmhWd/Aty+YmWjoOnewoBfFaDUzFRURqwO3K+oh1H0IALTOTYQSYEeuVfi/+mwJRkKh0+IgvgscL5/bo+nVnQBk4FpWJRHV0x2fWiG8DHCKmInkkFSDHax3dHc9pYZXQTdNdfvsJRtc0rEn6GyVnRMia1TKLpB1joRhb7mkyc7pgDSatvV9W6+v6+evplHFxS7lkm9gqlW/ygJzPVYx7UaFuqo9cOi/c8sR6qf7NUTUi9Aa4aqY6qHNrkxfh7+5ck7wLTWmE0WL+0r3Z09Zg746SIGYqLrFQJZPn+JanFEy0q7kAU2Zr8vgE=
+
+# Exclude these branches from having jobs ran.
+branches:
+  except:
+    - public
+    - /^_.*$/
+
+stages:
+  - name: latest push
+    if: branch != master AND type=push AND NOT tag =~ ^container/.+
+  - name: mock tests
+    if: branch = master AND type = cron # for now only trigger tests on cron
+  - name: build a container
+    if: (branch = master AND type IN (push)) OR tag =~ ^container/.+
+  - name: successful notification
+    if: type NOT IN (cron) # no need for successful cron notifications
+
+matrix:
+  fast_finish: true
+  include:
+  # Jobs below this line are reserved for push contributions i.e when someone pushes changes
+  # ==========
+  # Below jobs are used to run tests against the most recently modified integration.
+  # We determine the most recent one using git diff and then ensure to only run tests against a package once.
+  - stage: latest push
+    name: Python 2.7 Build and Run Tests
+    python: 2.7
+    env:
+    - TOXENV=py27 TEST_RESILIENT_ORG="Resilient Integrations - Test"
+    script:
+    - echo "2.7 push test" && .scripts/run_most_recent_tests.sh
+  - stage: latest push
+    name: Python 3.6 Build and Run Tests
+    python: 3.6
+    env:
+    - TOXENV=py36 TEST_RESILIENT_ORG="Resilient Integrations - Test"
+    script:
+    - echo "3.6 push test" && .scripts/run_most_recent_tests.sh
+  # Jobs below this line are reserved for master branch
+  # Master branch is where all the integrations should be tested, its okay if it takes a while
+  # As we have the push jobs above to handle individual commits
+  - stage: mock tests
+    python: 2.7
+    name: Py27 Master Build and Run tests
+    env:
+    - TOXENV=py27 TEST_RESILIENT_ORG="Resilient Integrations - Test"
+    script:
+    - echo "2.7 Master Build" && .scripts/run_tests.sh
+  - stage: mock tests
+    python: 3.6
+    name: Py36 Master Build and Run tests
+    env:
+    - TOXENV=py36 TEST_RESILIENT_ORG="Resilient Integrations - Test"
+    script:
+    - echo "3.6 Master Build" && .scripts/run_tests.sh
+  # Next job is started when a tag is pushed of the form container/<name>
+  # where <name> is a name of an integration directory whose container
+  # will be build and pushed to artifactory with label :latest and :<version>
+  # ARTIFACTORY_URL should be sec-resilient-docker-local.artifactory.swg-devops.com
+  - stage: build a container
+    name: Building containers
+    services:
+      - docker
+    install: skip
+    script:
+      - source .scripts/set_up_container_build_data.sh
+      # if there are failed containers send a message with their list
+      - if [[ -n "${FAILED_CONTAINERS[*]}" ]]; then .scripts/send_notification.sh "Containers not built ${FAILED_CONTAINERS[*]}" failure; return 1; fi
+  - stage: successful notification
+    name: Successful notification
+    # To make sure that success is sent once per job we create a separate stage for it
       - source .scripts/set_up_container_build_data.sh
       # if there are failed containers send a message with their list
       - if [[ -n "${FAILED_CONTAINERS[*]}" ]]; then .scripts/send_notification.sh "Containers not built ${FAILED_CONTAINERS[*]}" failure; return 1; fi
