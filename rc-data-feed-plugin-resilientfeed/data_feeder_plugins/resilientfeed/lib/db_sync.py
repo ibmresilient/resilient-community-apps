@@ -77,6 +77,9 @@ CREATE TABLE IF NOT EXISTS {table_name} (
     PRIMARY KEY (org1, org1_inc_id, type_name, org1_type_id, org2)
 );""".format(table_name=DBSyncInterface.DBTABLE)
 
+    SYNC_INSERT_OR_REPLACE = """INSERT OR REPLACE INTO {table_name} (org1, org1_inc_id, type_name, org1_type_id, org2, org2_inc_id, org2_type_id, last_sync, status)
+        VALUES(?, ?, ?, ?, ?, ?, ?, datetime('now'), ?)""".format(table_name=DBSyncInterface.DBTABLE)
+
     SYNC_UPSERT = """INSERT INTO {table_name} (org1, org1_inc_id, type_name, org1_type_id, org2, org2_inc_id, org2_type_id, last_sync, status)
         VALUES(?, ?, ?, ?, ?, ?, ?, datetime('now'), ?)
         ON CONFLICT(org1, org1_inc_id, type_name, org1_type_id, org2) DO UPDATE SET
@@ -198,9 +201,13 @@ CREATE TABLE IF NOT EXISTS {table_name} (
 
         try:
             cur = self.sqlite_db.cursor()
+            """
             cur.execute(SQLiteDBSync.SYNC_UPSERT, (orig_org_id, orig_inc_id, type_name, orig_type_id,
                                                    self.org_id, new_inc_id, new_type_id, status,
                                                    new_inc_id, new_type_id, status))
+            """
+            cur.execute(SQLiteDBSync.SYNC_INSERT_OR_REPLACE, (orig_org_id, orig_inc_id, type_name, orig_type_id,
+                                                   self.org_id, new_inc_id, new_type_id, status))
 
             self.sqlite_db.commit()
         except Error as err:
