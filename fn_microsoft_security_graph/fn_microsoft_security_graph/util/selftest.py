@@ -57,7 +57,7 @@ def selftest_function(opts):
             state = "success"
         else:
             state = "failure"
-            reason = "N/A"
+            reason = "authenication failed"
     except IntegrationError as err:
         state = "failure"
         reason = err.value
