@@ -15,6 +15,7 @@ from resilient_lib import RequestsCommon, validate_fields
 
 CONFIG_DATA_SECTION = 'urlscanio'
 
+LOG = logging.getLogger(__name__)
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function(s)"""
@@ -34,8 +35,6 @@ class FunctionComponent(ResilientComponent):
     def _urlscanio_function(self, event, *args, **kwargs):
         """Function: urlscanio"""
         try:
-            log = logging.getLogger(__name__)
-
             validate_fields([{'name':'urlscanio_api_key', 'placeholder':'xxx'}, 'urlscanio_report_url', 'urlscanio_screenshot_url'], self.options)
             validate_fields(['urlscanio_url'], kwargs)
 
@@ -46,7 +45,7 @@ class FunctionComponent(ResilientComponent):
             urlscanio_referer = kwargs.get("urlscanio_referer")      # text, optional
             incident_id = kwargs.get("incident_id")                  # number, optional
 
-            log.info("urlscanio_url: %s", urlscanio_url)
+            LOG.info("urlscanio_url: %s", urlscanio_url)
 
             # Construct the parameters to send to urlscan.io
             urlscanio_headers = {'Content-Type': 'application/json', 'API-Key': self.apikey}
@@ -74,7 +73,7 @@ class FunctionComponent(ResilientComponent):
 
             # The post response contains a UUID that we use to check for the report
             urlscanio_post_json = urlscanio_post.json()
-            log.debug(urlscanio_post_json)
+            LOG.debug(urlscanio_post_json)
 
             # UUID tells me my report ID so I can go grab it after
             uuid = urlscanio_post_json['uuid']
@@ -87,24 +86,11 @@ class FunctionComponent(ResilientComponent):
                 if time.time() > start_time + self.timeout:
                     yield RuntimeError("Timeout: report was not ready after {} seconds".format(self.timeout))
                 urlscanio_result_url = u"{}/result/{}".format(self.urlscanio_report_url, uuid)
-                try:
-                    urlscanio_get = req_common.execute_call_v2("GET", urlscanio_result_url, self.timeout)
-                    if urlscanio_get.status_code == 200:
-                        # Report is done
-                        break
-                    else:
-                        # Some other error condition
-                        urlscanio_get.raise_for_status()
-                    # requests-common will through an IntegrationError if 404 is received
-                except IntegrationError as ie:
-                    # 404 means the report is not yet complete
-                    if ie.value[:3] == '404':
-                        yield StatusMessage("Waiting for report...")
-                    else:
-                        # Some problem other than 404
-                        raise IntegrationError
 
-            yield StatusMessage("Report is ready")
+                urlscanio_get = req_common.execute_call_v2("GET", urlscanio_result_url, self.timeout, callback=report_callback)
+                if urlscanio_get.status_code == 200:
+                    # Report is done
+                    break
 
             # get the full report json - usually a big blob
             urlscanio_report_url = u"{}/result/{}/".format(self.urlscanio_report_url, uuid)
@@ -137,3 +123,16 @@ class FunctionComponent(ResilientComponent):
             yield FunctionResult(results)
         except Exception as err:
             yield FunctionError(err)
+
+def report_callback(response):
+    """
+    callback to review status code, 200 - report ready, 404 - report not ready
+    :param response:
+    :return: response
+    """
+    if response.status_code == 200 or response.status_code == 404:
+        return response
+    else:
+        raise IntegrationError(response.content)
+
+
