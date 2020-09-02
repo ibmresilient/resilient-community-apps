@@ -36,7 +36,8 @@ incident_template=
 # This query string is full OData so alert query can start with 'top=', 'skip=', 'filter=', etc. Do not add a '$' at the start
 # of the value as that character is reserved for environment variables
 # alert_query=filter=assignedTo eq 'analyst@m365x594651.onmicrosoft.com' and severity eq 'high'
-alert_query=
+# Query only alerts that are not resolved by default:
+alert_query=filter=status ne 'resolved'
 
 # Alert Time range sec - Optional value in seconds to set the start dateTime values for the createdDateTime field when filtering alerts.
 # This is calculated by adding to the filter 'createdDateTime ge (current_dateTime - alert_time_range_sec)
