@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 import sys
-from io import BytesIO
+from io import StringIO, BytesIO
 from datetime import datetime
 from resilient_lib import IntegrationError, write_file_attachment
 
@@ -20,7 +20,7 @@ def create_incident_attachment(rest_client, incident_id, note, name_prefix):
         dt = datetime.now()
         attachment_name = "{0}-{1}.txt".format(name_prefix, dt.strftime(TIME_FORMAT))
         if sys.version_info.major < 3:
-            datastream = BytesIO(note)
+            datastream = StringIO(note)
         else:
             datastream = BytesIO(note.encode("utf-8"))
 
