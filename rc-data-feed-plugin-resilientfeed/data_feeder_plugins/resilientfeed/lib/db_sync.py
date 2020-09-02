@@ -106,11 +106,15 @@ CREATE TABLE IF NOT EXISTS {table_name} (
     org2_inc_id int,
     payload text,
     last_attempt timestamp,
+    retry_count int,
     PRIMARY KEY (org1, org1_inc_id, org2, type_name, org1_dep_type_name, org1_dep_type_id)
     );""".format(table_name=DBSyncInterface.RETRY_DBTABLE)
 
-    RETRY_SELECT = """SELECT org1_type_id, org2_inc_id, org1_dep_type_name, org1_dep_type_id, payload FROM {table_name}
+    RETRY_SELECT = """SELECT org1_type_id, org2_inc_id, org1_dep_type_name, org1_dep_type_id, payload, retry_count FROM {table_name}
         WHERE org1=? and org1_inc_id=? and type_name=? and org2=?;""".format(table_name=DBSyncInterface.RETRY_DBTABLE)
+    RETRY_INSERT_OR_REPLACE = """INSERT OR REPLACE INTO {table_name} (org1, org1_inc_id, type_name, org1_type_id,
+        org1_dep_type_name, org1_dep_type_id, org2, org2_inc_id, payload, last_attempt, retry_count)
+        VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, datetime('now'), ?)""".format(table_name=DBSyncInterface.RETRY_DBTABLE)
     RETRY_UPSERT = """INSERT INTO {table_name} (org1, org1_inc_id, type_name, org1_type_id,
         org1_dep_type_name, org1_dep_type_id, org2, org2_inc_id, payload, last_attempt)
         VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, datetime('now'))
@@ -287,7 +291,7 @@ CREATE TABLE IF NOT EXISTS {table_name} (
     # R E T R Y  F U N C T I O N S
     def create_retry_row(self, orig_org_id, orig_inc_id, type_name, orig_type_id,
                          org1_dep_type_name, org1_dep_type_id,
-                         new_inc_id, payload):
+                         new_inc_id, payload, retry_count):
         """
         add a row and update an existing row to the retry db to map the source object with the dependent object
         :param orig_org_id:
@@ -298,6 +302,7 @@ CREATE TABLE IF NOT EXISTS {table_name} (
         :param org1_dep_type_id:
         :param new_inc_id:
         :param payload:
+        :param retry_count:
         :return: None
         """
 
@@ -313,9 +318,9 @@ CREATE TABLE IF NOT EXISTS {table_name} (
             else:
                 new_payload = payload
 
-            cur.execute(SQLiteDBSync.RETRY_UPSERT, (orig_org_id, orig_inc_id, type_name, orig_type_id,
+            cur.execute(SQLiteDBSync.RETRY_INSERT_OR_REPLACE, (orig_org_id, orig_inc_id, type_name, orig_type_id,
                                                     org1_dep_type_name, org1_dep_type_id,
-                                                    self.org_id, new_inc_id, new_payload))
+                                                    self.org_id, new_inc_id, new_payload, retry_count))
 
             self.sqlite_db.commit()
         except Error as err:

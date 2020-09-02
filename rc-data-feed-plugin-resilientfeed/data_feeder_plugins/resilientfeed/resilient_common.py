@@ -13,6 +13,8 @@ from data_feeder_plugins.resilientfeed.lib.db_sync import DBSyncFactory
 from cachetools import cached, TTLCache
 from resilient_lib import IntegrationError, get_file_attachment, write_file_attachment
 
+RETRY_MAX = 5
+
 # URIs for resilient API calls
 URI_LOOKUP_BY_TYPE = {
     "incident": "/incidents",
@@ -144,18 +146,20 @@ class Resilient(object):
                 retry_type_name = retry_item[2]
                 retry_payload = json.loads(retry_item[4]) # deserialize the payload back to json
                 retry_orig_id = retry_item[0]
+                retry_count = retry_item[5]
 
-                LOG.info('retrying %s:%s->%s to %s:%s)', orig_inc_id, retry_type_name, retry_orig_id,
-                         self.rest_client.org_id, new_id)
+                LOG.info('retrying %s:%s->%s to %s:%s (%s))', orig_inc_id, retry_type_name, retry_orig_id,
+                         self.rest_client.org_id, new_id, retry_count)
                 # org1_type_id, org2_inc_id, org1_dep_type_name, org1_dep_type_id, payload
-                new_type_id = self._create_update_type(orig_inc_id, orig_org_id, retry_type_name, retry_payload, retry_orig_id)
+                new_type_id = self._create_update_type(orig_inc_id, orig_org_id, retry_type_name, retry_payload,
+                                                       retry_orig_id, retry_count=retry_count)
 
                 if new_type_id:
                     id_list.append(new_type_id)
 
         return id_list
 
-    def _create_update_type(self, orig_inc_id, orig_org_id, type_name, payload, orig_type_id):
+    def _create_update_type(self, orig_inc_id, orig_org_id, type_name, payload, orig_type_id, retry_count=0):
         """
         create a new object if it doesn't already have a mapping in the target org
         :param orig_inc_id:
@@ -163,6 +167,7 @@ class Resilient(object):
         :param type_name: 'incident', 'task', 'artifact', etc.
         :param payload:
         :param orig_type_id: such as task_id, artifact_id, etc.
+        :param retry_count: for retries, the number we started with
         :return: id of newly created object
         """
 
@@ -191,11 +196,15 @@ class Resilient(object):
             except IntegrationError as err:
                 LOG.warning(str(err))
                 new_type_id = None
-                LOG.warning('queued to retry %s:%s->%s to %s:%s', type_name, orig_inc_id, orig_type_id,
-                            self.rest_client.org_id, sync_inc_id)
-                self.dbsync.create_retry_row(orig_org_id, orig_inc_id, type_name, orig_type_id,
-                                             type_name, None,
-                                             sync_inc_id, payload)
+                if retry_count < RETRY_MAX:
+                    LOG.warning('queued to retry %s:%s->%s to %s:%s', type_name, orig_inc_id, orig_type_id,
+                                self.rest_client.org_id, sync_inc_id)
+                    self.dbsync.create_retry_row(orig_org_id, orig_inc_id, type_name, orig_type_id,
+                                                 type_name, None,
+                                                 sync_inc_id, payload, retry_count+1)
+                else:
+                    LOG.error("Max retry exceeded for type: %s %s->%s:%s to %s payload %s", type_name,
+                              orig_org_id, orig_inc_id, orig_type_id, sync_inc_id, payload)
         else:
             # all types to be created
             # make sure the incident already exists for child objects
@@ -210,11 +219,16 @@ class Resilient(object):
                 # this happens when creating an incident with incident_type_ids and the tasks show up first in the
                 # message destination
                 if sync_inc_id is None:
-                    self.dbsync.create_retry_row(orig_org_id, orig_inc_id, 'incident', orig_type_id,
-                                                 mapped_type_name, orig_type_id,
-                                                 None, payload)
-                    LOG.warning('Incident not found. Queued to retry %s:%s->%s to %s', type_name, orig_inc_id, orig_type_id,
-                                self.rest_client.org_id)
+                    if retry_count < RETRY_MAX:
+                        self.dbsync.create_retry_row(orig_org_id, orig_inc_id, 'incident', orig_type_id,
+                                                     mapped_type_name, orig_type_id,
+                                                     None, payload, retry_count+1)
+                        LOG.warning('Incident not found. Queued to retry %s:%s->%s to %s', type_name, orig_inc_id, orig_type_id,
+                                    self.rest_client.org_id)
+                    else:
+                        LOG.error("Max retry exceeded for type: %s %s->%s:%s to %s payload %s", type_name,
+                                  orig_org_id, orig_inc_id, orig_type_id, sync_inc_id, payload)
+
                     return None
 
                 if sync_inc_id == 0:
@@ -232,7 +246,7 @@ class Resilient(object):
 
                     sync_inc_id, new_type_id = self.create_type(orig_org_id, orig_inc_id, orig_type_id,
                                                                 mapped_type_name, type_name,
-                                                                sync_inc_id, sync_task_id, payload)
+                                                                sync_inc_id, sync_task_id, payload, retry_count)
                 else:
                     LOG.debug('duplicate %s:%s->%s of %s:%s->%s', type_name, orig_inc_id, orig_type_id,
                               self.rest_client.org_id, sync_inc_id, new_type_id)
@@ -247,7 +261,7 @@ class Resilient(object):
                 if payload or sync_inc_id:
                     sync_inc_id, new_type_id = self.create_type(orig_org_id, orig_inc_id, orig_type_id,
                                                                 mapped_type_name, type_name,
-                                                                sync_inc_id, sync_task_id, payload)
+                                                                sync_inc_id, sync_task_id, payload, retry_count)
 
                 else:
                     # filtered objects occur when matching criteria fails
@@ -262,7 +276,7 @@ class Resilient(object):
 
     def create_type(self, orig_org_id, orig_inc_id, orig_type_id,
                     mapped_type_name, type_name,
-                    sync_inc_id, sync_task_id, payload):
+                    sync_inc_id, sync_task_id, payload, retry_count):
         """
         create the object type
         :param orig_org_id:
@@ -273,6 +287,7 @@ class Resilient(object):
         :param sync_inc_id:
         :param sync_task_id:
         :param payload:
+        :param retry_count
         :return: sync_inc_id, new_type_id
         """
         # create object
@@ -290,11 +305,16 @@ class Resilient(object):
                                         sync_inc_id, new_type_id, 'active')
         except (IntegrationError, Exception):
             new_type_id = None
-            LOG.warning('queued to retry %s:%s->%s to %s:%s', type_name, orig_inc_id, orig_type_id,
-                        self.rest_client.org_id, sync_inc_id)
-            self.dbsync.create_retry_row(orig_org_id, orig_inc_id, type_name, orig_type_id,
-                                         type_name, None,
-                                         sync_inc_id, payload)
+            if retry_count < RETRY_MAX:
+                LOG.warning('queued to retry %s:%s->%s to %s:%s', type_name, orig_inc_id, orig_type_id,
+                            self.rest_client.org_id, sync_inc_id)
+                self.dbsync.create_retry_row(orig_org_id, orig_inc_id, type_name, orig_type_id,
+                                             type_name, None,
+                                             sync_inc_id, payload, retry_count+1)
+            else:
+                LOG.error("Max retry exceeded for type: %s %s->%s:%s to %s payload %s", type_name,
+                          orig_org_id, orig_inc_id, orig_type_id, sync_inc_id, payload)
+
 
         return sync_inc_id, new_type_id
 
