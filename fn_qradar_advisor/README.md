@@ -16,10 +16,9 @@
 ### v2.0
 - Supports the V2.0 release.
 
-### v1.0
+### v1.0.1
 - For Watson Search fixed version compatibility with search that returns no data.
 - Fix typo in post-process script.
-
 
 ### v1.0
 - Initial release.
