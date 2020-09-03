@@ -13,7 +13,8 @@ setup(
     description="Resilient Circuits Components for 'fn_datatable_utils'",
     long_description="Resilient Circuits Components for 'fn_datatable_utils'",
     install_requires=[
-        'resilient_circuits>=31.0.0'
+        'resilient_circuits>=33.0.0',
+        'resilient-lib>=32.0.140'
     ],
     packages=find_packages(),
     include_package_data=True,

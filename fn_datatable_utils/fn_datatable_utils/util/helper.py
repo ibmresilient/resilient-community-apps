@@ -1,4 +1,4 @@
-# (c) Copyright IBM Corp. 2019. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 """ This is a helper module for GET, UPDATE and DELETE
     Functions for a Resilient Data Table """
 
