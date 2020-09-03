@@ -5,8 +5,9 @@
   Specify all changes in this release. Do not remove the release 
   notes of a previous release
 -->
-### v1.0.3
+### v1.1.0
 * Support for App Host
+* Proxy support
 * Readable formatting of incident notes containing Alert JSON data
 
 **NOTE** Existing users running fn_microsoft_security_graph functions on an integrations server, should save the [fn_microsoft_security_graph] section of their app.config file to another file and delete that section from the app.config file before installing the new version, as this section has changed.  After installation get the new configuration by running:
@@ -14,10 +15,6 @@
   $ resilient-circuits config -u -l fn-microsoft-security-graph
   ```
 Edit the required configuration setting as described in the [Integration Server](#integration-server) section below.
-
-
-### v1.0.2
-* Proxy support
 
 ### v1.0.1
 * Python 2 to 3 improvements
