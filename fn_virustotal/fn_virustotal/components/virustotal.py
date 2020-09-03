@@ -180,8 +180,8 @@ class FunctionComponent(ResilientComponent):
 
         elif code == RC_IN_QUEUE:
             curr_time = time.time()
-            if int(curr_time - start_time)/1000 >= int(self.options('max_polling_wait_sec')):
-                raise IntegrationError("exceeded max wait time: {}".format(self.options('max_polling_wait_sec')))
+            if int(curr_time - start_time)/1000 >= int(self.options.get('max_polling_wait_sec')):
+                raise IntegrationError("exceeded max wait time: {}".format(self.options.get('max_polling_wait_sec')))
 
             if callback:
                 time.sleep(int(self.options['polling_interval_sec']))

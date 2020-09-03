@@ -10,6 +10,7 @@ import os
 import json
 import base64
 import mimetypes
+from fn_utilities.util.utils_common import s_to_b
 from resilient_circuits import ResilientComponent, function, StatusMessage, FunctionResult, FunctionError
 
 
@@ -54,7 +55,7 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Writing artifact...")
             with tempfile.NamedTemporaryFile(delete=False) as temp_file:
                 try:
-                    temp_file.write(base64.b64encode(base64content))
+                    temp_file.write(base64.b64encode(s_to_b(base64content)))
                     temp_file.close()
                     # Create a new artifact
                     client = self.rest_client()

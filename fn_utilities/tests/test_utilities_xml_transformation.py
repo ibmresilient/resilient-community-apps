@@ -4,6 +4,7 @@
 from __future__ import print_function
 import os
 import pytest
+from fn_utilities.util.utils_common import b_to_s
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 
@@ -32,6 +33,7 @@ class TestUtilitiesXmlTransformation:
     """ Tests for the utilities_xml_transformation function"""
     DATA_DIR = "data/xmltransformation"
 
+    @pytest.mark.livetest
     @pytest.mark.parametrize("xml_source, xml_stylesheet, expected_results", [
         ("cdcatalog.xml", "cdcatalog.xslt", "cdcatalog.html")
     ])
@@ -39,11 +41,11 @@ class TestUtilitiesXmlTransformation:
         curr_dir = os.path.dirname(os.path.realpath(__file__))
 
         xml_data = open(os.path.join(curr_dir, TestUtilitiesXmlTransformation.DATA_DIR, xml_source), mode="rb").read()
-        expected_results = open(os.path.join(curr_dir, TestUtilitiesXmlTransformation.DATA_DIR, expected_results), mode="r").read().decode('utf8')
+        expected_results = open(os.path.join(curr_dir, TestUtilitiesXmlTransformation.DATA_DIR, expected_results), mode="r").read()
 
         """ Test calling with sample values for the parameters """
         function_params = {
-            "xml_source": xml_data,
+            "xml_source": b_to_s(xml_data),
             "xml_stylesheet": xml_stylesheet
         }
 

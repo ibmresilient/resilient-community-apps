@@ -5,7 +5,11 @@ FROM registry.access.redhat.com/ubi8/python-36:latest
 #FROM resilient/rc-data-feeder-base
 
 ARG APPLICATION=fn_virustotal
-ARG RES_CIRCUITS_VERSION=34.0.195
+ARG RES_CIRCUITS_VERSION=37.2
+
+# Environment variable for any app to check if running in a container
+ARG APP_HOST_CONTAINER=1
+ENV APP_HOST_CONTAINER=${APP_HOST_CONTAINER}
 
 # update to latest packages, user 0 for root privilege
 USER 0
@@ -13,7 +17,7 @@ USER 0
 RUN pip install --upgrade pip
 
 # install resilient-circuits
-RUN pip install resilient-circuits>=${RES_CIRCUITS_VERSION}
+RUN pip install "resilient-circuits>=${RES_CIRCUITS_VERSION}"
 
 ## ---- section for changes ----
 # uncomment and replicate if additional os libraries are needed

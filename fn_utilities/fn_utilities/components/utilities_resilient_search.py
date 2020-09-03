@@ -6,6 +6,7 @@
 
 import logging
 import json
+import re
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 
 
@@ -26,6 +27,10 @@ class FunctionComponent(ResilientComponent):
             log.info("resilient_search_template: %s", resilient_search_template)
             log.info("resilient_search_query: %s", resilient_search_query)
 
+            # ensure the input is properly escaped
+            p = re.compile('(\[|\]|\(|\)\||\+|\-|\^|{|}|&|!|:|\?|\\|\\/)')
+            resilient_search_query = p.sub(r'\\\1', resilient_search_query)
+
             # Read the search template as JSON
             template = json.loads(resilient_search_template)
 
@@ -33,6 +38,8 @@ class FunctionComponent(ResilientComponent):
             template["query"] = resilient_search_query
             # Add in the current organization id (don't want results outside this org!)
             template["org_id"] = self.rest_client().org_id
+
+            log.debug(template)
 
             # Run the search and return the results
             yield StatusMessage("Searching...")

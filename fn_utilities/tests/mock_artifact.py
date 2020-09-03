@@ -41,6 +41,18 @@ class ArtifactMock(BasicResilientMock):
             "value": "email_sample_3.eml",
             "type": "RFC 822 Email Message File",
             "id": 3
+        },
+        "6": {
+            "description": "valid cert",
+            "value": "ssl_certs/ssl_example.cert",
+            "type": "X509 Certificate File",
+            "id": 6
+        },
+        "7": {
+            "description": "expired cert",
+            "value": "ssl_certs/ssl_expired.cert",
+            "type": "X509 Certificate File",
+            "id": 7
         }
     }
 
@@ -55,16 +67,33 @@ class ArtifactMock(BasicResilientMock):
     @resilient_endpoint("POST", "/incidents/[0-9]+/artifacts$")
     def artifacts_post(self, request):
         """ POST an attachment """
+        data = [
+            {
+                "id": 50,
+                "type": 29,
+                "value": "test",
+                "description": None
+            }
+        ]
         return requests_mock.create_response(request,
                                              status_code=200,
-                                             json={})
+                                             json=data)
+
 
     @resilient_endpoint("POST", "/incidents/[0-9]+/artifacts/files$")
     def artifacts_files_post(self, request):
         """ POST an artifact file"""
+        data = [
+            {
+                "id": 51,
+                "type": 29,
+                "value": "test",
+                "description": None
+            }
+        ]
         return requests_mock.create_response(request,
                                              status_code=200,
-                                             json={})
+                                             json=data)
 
     @resilient_endpoint("GET", "/types/artifact/fields/type$")
     def artifacts_type_get(self, request):

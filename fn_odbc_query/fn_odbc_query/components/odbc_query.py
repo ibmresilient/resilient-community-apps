@@ -143,7 +143,7 @@ class FunctionComponent(ResilientComponent):
 
                 rows = odbc_connection.execute_select_statement(sql_query, sql_params, sql_number_of_records_returned)
                 results = function_utils.prepare_results(odbc_connection.get_cursor_description(), rows)
-                LOG.info(json.dumps(results))
+                LOG.info(json.dumps(str(results)))
 
                 if results.get("entries") is None:
                     yield StatusMessage("No query results returned...")

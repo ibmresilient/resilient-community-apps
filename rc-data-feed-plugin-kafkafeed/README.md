@@ -5,6 +5,12 @@ This plugin allows this replica data to be pushed to kafka topics for downstream
 
 Refer to the documentation on the Data Feed extension for uses cases, support and configuration options. Also refer to the other Data Feed plugins which can be used in combination.
   
+# History
+| Version | Date | Notes |
+| ------- | ---- | ----- |
+| 1.0.1   | 08/2020 | App Host support |
+| 1.0.0   | 12/2019 | Initial release |
+
 # License
 
 Unless otherwise specified, contents of this repository are published under the MIT open-source

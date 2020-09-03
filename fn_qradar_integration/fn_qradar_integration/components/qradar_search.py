@@ -7,6 +7,7 @@
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from resilient_lib import validate_fields
 from fn_qradar_integration.util.qradar_utils import QRadarClient
 from fn_qradar_integration.util import function_utils
 
@@ -17,17 +18,23 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
+        self.opts = opts
         self.options = opts.get("fn_qradar_integration", {})
+        required_fields = ["host", "verify_cert"]
+        validate_fields(required_fields, self.options)
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
+        self.opts = opts
         self.options = opts.get("fn_qradar_integration", {})
 
     @function("qradar_search")
     def _qradar_search_function(self, event, *args, **kwargs):
         """Function: Search QRadar"""
         try:
+            required_fields = ["qradar_query", "qradar_query_all_results"]
+            validate_fields(required_fields, kwargs)
             # Get the function parameters:
             qradar_query = self.get_textarea_param(kwargs.get("qradar_query"))  # textarea
             qradar_query_param1 = kwargs.get("qradar_query_param1")  # text
@@ -80,7 +87,8 @@ class FunctionComponent(ResilientComponent):
                                          username=self.options.get("username", None),
                                          password=self.options.get("qradarpassword", None),
                                          token=self.options.get("qradartoken", None),
-                                         cafile=qradar_verify_cert)
+                                         cafile=qradar_verify_cert,
+                                         opts=self.opts, function_opts=self.options)
 
             result = qradar_client.ariel_search(query_string,
                                                 qradar_query_all_results,

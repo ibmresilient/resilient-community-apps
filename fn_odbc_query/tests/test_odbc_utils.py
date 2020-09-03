@@ -70,7 +70,7 @@ class TestOdbcUtils:
         mocked_pyodbc_connect.return_value = PostgresODBCConnection()
 
         try:
-            odbc_utils.OdbcConnection(self.fake_sql_connection_string, True, 10, 'HY000')
+            odbc_utils.OdbcConnection(self.fake_sql_connection_string, True, 10)
             assert True
         except Exception:
             assert False
@@ -94,7 +94,7 @@ class TestOdbcUtils:
         mocked_pyodbc_connect.return_value = db_connection
 
         try:
-            odbc_utils.OdbcConnection(self.fake_sql_connection_string, True, 10, 'HY000')
+            odbc_utils.OdbcConnection(self.fake_sql_connection_string, True, 10)
             assert False
         except Exception:
             assert True
@@ -108,7 +108,7 @@ class TestOdbcUtils:
 
         OdbcConnection = None
         try:
-            OdbcConnection = odbc_utils.OdbcConnection(self.fake_sql_connection_string, True, 10, 'HY000')
+            OdbcConnection = odbc_utils.OdbcConnection(self.fake_sql_connection_string, True, 10)
         except Exception:
             assert False
 
@@ -125,7 +125,7 @@ class TestOdbcUtils:
 
         OdbcConnection = None
         try:
-            OdbcConnection = odbc_utils.OdbcConnection(self.fake_sql_connection_string, True, 10, 'HY000')
+            OdbcConnection = odbc_utils.OdbcConnection(self.fake_sql_connection_string, True, 10)
         except Exception:
             assert False
 
@@ -142,7 +142,7 @@ class TestOdbcUtils:
 
         OdbcConnection = None
         try:
-            OdbcConnection = odbc_utils.OdbcConnection(self.fake_sql_connection_string, True, 10, 'HY000')
+            OdbcConnection = odbc_utils.OdbcConnection(self.fake_sql_connection_string, True, 10)
         except Exception:
             assert False
 
@@ -159,7 +159,7 @@ class TestOdbcUtils:
 
         OdbcConnection = None
         try:
-            OdbcConnection = odbc_utils.OdbcConnection(self.fake_sql_connection_string, True, 10, 'HY000')
+            OdbcConnection = odbc_utils.OdbcConnection(self.fake_sql_connection_string, True, 10)
         except Exception:
             assert False
 
@@ -181,7 +181,7 @@ class TestOdbcUtils:
 
         OdbcConnection = None
         try:
-            OdbcConnection = odbc_utils.OdbcConnection(self.fake_sql_connection_string, True, 10, 'HY000')
+            OdbcConnection = odbc_utils.OdbcConnection(self.fake_sql_connection_string, True, 10)
         except Exception:
             assert False
 
@@ -200,7 +200,7 @@ class TestOdbcUtils:
 
         OdbcConnection = None
         try:
-            OdbcConnection = odbc_utils.OdbcConnection(self.fake_sql_connection_string, True, 10, 'HY000')
+            OdbcConnection = odbc_utils.OdbcConnection(self.fake_sql_connection_string, True, 10)
         except Exception:
             assert False
 
@@ -228,7 +228,7 @@ class TestOdbcUtils:
 
         OdbcConnection = None
         try:
-            OdbcConnection = odbc_utils.OdbcConnection(self.fake_sql_connection_string, True, 10, 'HY000')
+            OdbcConnection = odbc_utils.OdbcConnection(self.fake_sql_connection_string, True, 10)
         except Exception:
             assert False            
 

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 #
-# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 #
 """Function implementation"""
 
@@ -22,11 +22,13 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
+        self.opts = opts
         self.options = opts.get("fn_mitre_integration", {})
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
+        self.opts = opts
         self.options = opts.get("fn_mitre_integration", {})
 
     @function("mitre_tactic_information")
@@ -50,7 +52,8 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("query MITRE STIX TAXII server, and it can take several minutes....")
 
             tactics = mitre_attack_utils.get_tactics_and_techniques(tactic_names=mitre_tactic_name,
-                                                                    tactic_ids=mitre_tactic_id)
+                                                                    tactic_ids=mitre_tactic_id, opts=self.opts,
+                                                                    function_opts=self.options)
             yield StatusMessage("done...")
 
             results = {

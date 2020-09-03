@@ -20,7 +20,7 @@ def snake_to_camel(word):
 
 setup(
     name='fn_whois_rdap',
-    version='1.0.1',
+    version='1.0.3',
     license='MIT',
     author='Resilient Labs',
     author_email='resil.labs@gmail.com',
@@ -35,7 +35,8 @@ setup(
         'ipwhois>=1.1.0',
         'tldextract>=2.2.1',
         'future>=0.18.0',
-        'six==1.12.0'
+        'six==1.12.0',
+        'urllib3'
     ],
     packages=find_packages(),
     include_package_data=True,

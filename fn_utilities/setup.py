@@ -4,6 +4,9 @@
 from setuptools import setup, find_packages
 import glob
 import ntpath
+import sys
+
+PACKAGE='fn_utilities'
 
 def get_module_name(module_path):
     """
@@ -19,7 +22,7 @@ def snake_to_camel(word):
 
 setup(
     name='fn_utilities',
-    version='1.0.15',
+    version='2.0.0',
     license='MIT',
     author='IBM Resilient',
     author_email='support@resilientsystems.com',
@@ -30,7 +33,9 @@ setup(
     workflows. The Resilient platform sends data to the function component that performs an activity then returns the results
     to the workflow. The results can be acted upon by scripts, rules, and workflow decision points to dynamically orchestrate
     the security incident response activities.""",
+    setup_requires=['six==1.14.0'],
     install_requires=[
+        'six==1.14.0',
         'resilient_circuits>=30.0.0',
         'resilient-lib>=34.0.0',
         'openpyxl>=2.5.3',
@@ -39,13 +44,16 @@ setup(
         'pywinrm>=0.3.0',
         'json2html',
         'lxml',
-        'mail-parser>=3.9.3'
+        'mail-parser>=3.9.3',
+        'paramiko'
     ],
     packages=find_packages(),
+    python_requires='>=3',
     include_package_data=True,
     platforms='any',
     classifiers=[
         'Programming Language :: Python',
+        'Programming Language :: Python :: 3'
     ],
     entry_points={
         "resilient.circuits.components": [
@@ -53,6 +61,7 @@ setup(
             "{}FunctionComponent = fn_utilities.components.{}:FunctionComponent".format(snake_to_camel(get_module_name(filename)), get_module_name(filename)) for filename in glob.glob("./fn_utilities/components/[a-zA-Z]*.py")
         ],
         "resilient.circuits.configsection": ["gen_config = fn_utilities.util.config:config_section_data"],
-        "resilient.circuits.customize": ["customize = fn_utilities.util.customize:customization_data"]
+        "resilient.circuits.customize": ["customize = fn_utilities.util.customize:customization_data"],
+        "resilient.circuits.selftest": ["selftest = fn_utilities.util.selftest:selftest_function"]
     }
 )
