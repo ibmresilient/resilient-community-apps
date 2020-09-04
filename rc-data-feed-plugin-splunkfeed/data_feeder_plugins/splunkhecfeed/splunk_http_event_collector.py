@@ -220,8 +220,14 @@ class http_event_collector:
             headers = {'Authorization': 'Splunk ' + self.token}
             # try to post payload twice then give up and move on
             try:
-                r = self.requests_retry_session().post(self.server_uri, data=payload, headers=headers,
-                                                       verify=self.SSL_verify, proxies=self.proxies)
+                # initialize the session with our Retry configuration
+                r = self.requests_retry_session()
+                # set the session proxies if they were provided
+                if self.proxies != None:
+                    r.proxies.update(self.proxies)
+                # make the POST request to the server
+                r.post(self.server_uri, data=payload, headers=headers,
+                                                       verify=self.SSL_verify)
             except Exception:
                 pass
 
