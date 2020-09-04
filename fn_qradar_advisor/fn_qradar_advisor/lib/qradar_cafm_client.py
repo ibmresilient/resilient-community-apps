@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 
 from .qradar_http_info import HttpInfo
 
@@ -23,12 +23,12 @@ class QRadarCafmClient(object):
     """
     QRadar Cyber Adversary Framework Mapping Client
     """
-    def __init__(self, qradar_host, cafm_app_id, cafm_token, cafile, log):
+    def __init__(self, qradar_host, cafm_app_id, cafm_token, cafile, log, opts=None, function_opts=None):
         self.http_info = HttpInfo(qradar_host=qradar_host,
                                   advisor_app_id=cafm_app_id,
                                   qradar_token=cafm_token,
-                                  cafile=cafile,
-                                  log=log)
+                                  cafile=cafile, log=log,
+                                  opts=opts, function_opts=function_opts)
         self.log = log
 
     def get_tactics_token(self):

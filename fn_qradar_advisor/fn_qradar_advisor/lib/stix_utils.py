@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
-
+import re
 #
 #   Mapping between x_ibm_security_toxicity and concern we show
 #
@@ -15,12 +15,14 @@ CONCERN_MAPPING={
 INDICATOR_NAME_TYPE={
     u"IpAddress":u"ipv4-addr",
     u"Url":u"url",
-    u"DomainName":u"domain"
+    u"DomainName":u"domain",
+    u"Hash":u"file"
 }
 
 IBM_TOXICITY = u"x_ibm_security_toxicity"
 IBM_RELEVANCE = u"x_ibm_security_relevance"
-
+# Regex for extracting the hash value from an MD5, SHA-1, or SHA-256 hash indicator pattern.
+HASH_INDICATOR_REGEX = "\[file:hashes\.\'(MD5|SHA\-1|SHA\-256])\'=\'"
 
 def get_observables(stix_json, log):
     """
@@ -94,6 +96,10 @@ def get_observable_description(stix_obj, log):
             desc = stix_obj[u"pattern"].replace("[url:value = '", '').replace("']", '')
         elif stix_obj[u"name"] == u"DomainName":
             desc = stix_obj[u"pattern"].replace("[domain-name:value='", '').replace("']", '')
+        elif stix_obj[u"name"] == u"Hash":
+            # Desc is obtained by extracting hash value from stix_obj 'pattern'.
+            # e.g. "file:hashes.'MD5'='abcd1234effe56786543abcd1234effe" -> "abcd1234effe56786543abcd1234effe"
+            desc = re.sub(HASH_INDICATOR_REGEX, '', stix_obj[u"pattern"]).replace("']", '')
         else:
             # Don't know how to handle the pattern, just put everything
             desc = str(stix_obj[u"pattern"])

@@ -12,7 +12,7 @@
   ![screenshot: screenshot_1](./screenshots/screenshot_1.png)
 -->
 
-# **User Guide:** fn_mitre_integration_v2.0.0
+# **User Guide:** fn_mitre_integration_v2.0.2
 
 ## Table of Contents
 - [Key Features](#key-features)

@@ -1,28 +1,30 @@
-#
-# Result retured by the QRadar Advisor Offense Analysis function:
+import java.util.Date as Date
+
+# Return data of function Watson Search with Local Context:
 #   * results.observables: observables and their details, used here to be output to Data table.
 #   * results.note: html representation of STIX data, used here to generate a Note.
-#   * results.insights: used here to create a Task.
-#   * results.stix: raw stix data, preserved for any customized parsing.
-#
-#
-#
-# We publish a data table according to the stix
+#   * results.summary: used here to create a Task.
+#   * results.stix: raw stix data (not used here), for any customized parsing.
+
+# Check that we didn't get a status of 404 (no observables) for insights.
+if "status_code" in results["stix"] and results["stix"]["status_code"] == 404:
+    add_task = False
+else:
+    add_task  = True
+# We publish a data table according to the stix if obserables found.
+date_str = str(Date())
 for observable in results.observables:
-  qradar_obs = incident.addRow("qradar_advisor_observable")
+  qradar_obs = incident.addRow("qradar_advisor_observable_for_artifact")
   qradar_obs.qradar_advisor_toxicity = observable.toxicity 
   qradar_obs.qradar_advisor_relevance = observable.relevance
   qradar_obs.qradar_advisor_type = observable.type 
   qradar_obs.qradar_advisor_description = observable.description 
-# Our STIX tree
+  qradar_obs.artifact_related = artifact.value
+  qradar_obs.full_search_time = date_str
+# Our STIX tree or error message
 html = helper.createRichText(results.note)
 incident.addNote(html)
 
-# Task
-task_title = "Review QRadar Advisor Analysis for Offense " + str(incident.properties.qradar_id)
-task_summary = results.insights.insights + "\n\n" + results.insights.stage3_insights
-incident.addTask(task_title, "Initial", task_summary)
-
-# Note that results.stix is the raw stix return from QRadar Advisor in stix 2 (json) format
-# Users can add their customize codes to handle the stix data here
-#
+if add_task:
+    # Create a task
+    incident.addTask("Review Watson Search with Local Context of artifact: " + artifact.value, "Initial", results.summary)
