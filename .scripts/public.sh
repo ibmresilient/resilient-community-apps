@@ -29,6 +29,7 @@ README.md
 app_host_files
 base_input_types
 fn_alienvault_otx
+fn_anomali_staxx
 fn_ansible
 fn_ansible_tower
 fn_apility
@@ -102,6 +103,7 @@ fn_res_to_icd
 fn_risk_fabric
 fn_rsa_netwitness
 fn_scheduler
+fn_secureworks_ctp
 fn_sep
 fn_service_now
 fn_slack
