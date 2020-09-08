@@ -2,7 +2,7 @@
 VERSION = 1.0
 """
   This script converts a json object into a hierarchical display of rich text and adds the rich text to an incident's rich text (custom) field or an incident note.
-  A workflow property is used to share the json to convert and identify parameters used on how to perform the conversion.
+  A workflow property is used to define the json to convert and identify parameters used on how to perform the conversion.
   Typically, a function will create workflow property and this script will run after that function to perform the conversion.
   Features:
     * Display the hierarchical nature of json, presenting the json keys as bold labels
@@ -68,11 +68,11 @@ class ConvertJson:
               [str]: None|original text if no links|text with html links
         """
         formatted_item = item
-        if item and not isinstance(item, int) and not isinstance(item, bool):
+        if item and not isinstance(item, int) and not isinstance(item, bool) and not isinstance(item, float):
             list = rc.findall(item)
             if list:
                 for link in list:
-                    formatted_item = formatted_item.replace(link, "<a target='blank' href='{0}'>{0}</a>".format(link))
+                    formatted_item = formatted_item.replace(link, u"<a target='blank' href='{0}'>{0}</a>".format(link))
 
         return formatted_item
 
@@ -88,7 +88,7 @@ class ConvertJson:
         if not isinstance(list_value, list):
             return self.format_link(list_value)
         elif not list_value:
-            return "None<br>"
+            return u"None<br>"
 
         try:
             items_list = []  # this will ensure list starts on second line of key label
@@ -96,7 +96,7 @@ class ConvertJson:
                 if isinstance(item, dict):
                     result = self.convert_json_to_rich_text(item)
                     if is_list:
-                        items_list.append("<li>{}</li>".format(result))
+                        items_list.append(u"<li>{}</li>".format(result))
                     else:
                         items_list.append(result)
                 elif isinstance(item, list):
@@ -111,9 +111,9 @@ class ConvertJson:
                                                     is_list=is_list)
 
             if is_list:
-                return "<ul>{}</ul>".format(expand_list_result)
+                return u"<ul>{}</ul>".format(expand_list_result)
             else:
-                return "<div style='padding:5px'>{}</div>".format(expand_list_result)
+                return u"<div style='padding:5px'>{}</div>".format(expand_list_result)
         except Exception as err:
             return str(err)
 
@@ -140,7 +140,7 @@ class ConvertJson:
                         if convert_result:
                             item_list.append(u"<div style='padding:{}px'>{}</div>".format(self.padding, convert_result))
                         else:
-                            item_list.append("None<br>")
+                            item_list.append(u"None<br>")
                     else:
                         item_list.append(self.expand_list(value, is_list=is_list))
                     notes.append(self.add_separator(self.separator, u"".join(unicode(v) for v in item_list), is_list=is_list))
@@ -190,7 +190,7 @@ def get_properties(property_name):
     padding = workflow.properties[property_name].get("padding", 10)
     separator = workflow.properties[property_name].get("separator", u"<br />")
     if isinstance(separator, list) and len(separator) != 2:
-        helper.fail("list of separators should be specified as a pair such as ['<span>', '</span>']: {}".format(separator))
+        helper.fail("list of separators should be specified as a pair such as ['<div>', '</div>']: {}".format(separator))
 
     header = workflow.properties[property_name].get("header")
     json_omit_list = workflow.properties[property_name].get("json_omit_list")
