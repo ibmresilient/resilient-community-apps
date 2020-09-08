@@ -227,7 +227,7 @@ class http_event_collector:
                     r.proxies.update(self.proxies)
                 # make the POST request to the server
                 r.post(self.server_uri, data=payload, headers=headers,
-                                                       verify=self.SSL_verify)
+                                                       verify=self.SSL_verify, proxies=r.proxies)
             except Exception:
                 pass
 
