@@ -19,12 +19,12 @@ index=data_feeder
 event_host=<resilient host>
 event_source=resilient
 use_ssl=true
+# Optional settings for accessing Splunk via a proxy.
+#http_proxy=http://proxy:8088
+#https_proxy=http://proxy:8088
 # these settings are only needed for the unit tests
 #user=
 #password=
-# Optional settings for accessing Splunk via a proxy.
-#http_proxy=http://proxy:80
-#https_proxy=http://proxy:8
 """
 
     return config_data
