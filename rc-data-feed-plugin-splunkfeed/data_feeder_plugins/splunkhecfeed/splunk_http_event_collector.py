@@ -98,8 +98,7 @@ class http_event_collector:
             t.start()
 
         if self.SSL_verify == False:
-            pass
-        #    requests.packages.urllib3.disable_warnings()
+            requests.packages.urllib3.disable_warnings()
 
         # Set host to specified value or default to localhostname if no value provided
         if host:
