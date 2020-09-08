@@ -3,8 +3,7 @@
 #FROM registry.access.redhat.com/ubi8/python-36:latest
 # rc-data-feeder will build plugins from a base image
 # uncomment before PR
-#FROM quay.io/ibmresilient/rc_data_feed
-FROM ibmresilient/rc-data-feed:2.0.0
+FROM quay.io/ibmresilient/rc_data_feed:2.0.0
 
 ARG APPLICATION=rc_data_feed_plugin_splunkfeed
 ARG RES_CIRCUITS_VERSION=37.0
