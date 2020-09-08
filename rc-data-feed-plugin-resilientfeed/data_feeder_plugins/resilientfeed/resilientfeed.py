@@ -37,7 +37,7 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
         self.resilient_target = Resilient(options, None)
 
         # incident fields to exclude
-        self.exclude_fields = options.get("exclude_incident_fields", "").replace(" ", "").split(",")
+        self.exclude_fields = options.get("exclude_incident_fields", "").replace(" ", "").split(";")
         self.sync_references = str_to_bool(options.get("sync_reference_fields", "false"))
         self.delete_incidents = str_to_bool(options.get("delete_incidents", "false"))
 

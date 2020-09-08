@@ -22,7 +22,8 @@ APP_CONFIG = {
     "password": MASTER_ADMIN_PASSWORD,
     "port": 1443,
     "org": TARGET_ORG,
-    "cafile": "false"
+    "cafile": "false",
+    "db_sync_file": "/tmp/proserve1.db"
 }
 
 TS = int(time.time())
@@ -387,9 +388,9 @@ else:
     RESULT_PAYLOAD['test_datetime'] = "2019-02-13T15:55:47.448000+00:00"
 
 def test_incident():
-    resilient_target = Resilient(APP_CONFIG)
+    resilient_target = Resilient(APP_CONFIG, None)
 
-    response = resilient_target.create_update_type(INCIDENT_PAYLOAD['id'], INCIDENT_PAYLOAD['org_id'], "incident", INCIDENT_PAYLOAD)
+    response = resilient_target.create_update_type(INCIDENT_PAYLOAD['id'], INCIDENT_PAYLOAD['org_id'], "incident", INCIDENT_PAYLOAD, INCIDENT_PAYLOAD['id'])
 
 '''
 def test_datafeeder_sync():

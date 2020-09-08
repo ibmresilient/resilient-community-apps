@@ -72,14 +72,16 @@ Note: Perform an export and reimport of these customizatons into the target Resi
   cafile=false
   # identify a sqlite db file to retain mapping between resilient instances.
   db_sync_file=/path/to/file
-  # optional comma separated list of fields to allow incidents to sync. ex. incident_type_ids in ['Phishing']
+  # optional semicolon separated list of fields to allow incidents to sync. ex. incident_type_ids in ['Phishing'];custom_field = "a"
   matching_incident_fields=
   # when using matching_incident_fields, specify whether 'all' or 'any' field needs to match to accept
   matching_operator=all
-  # optional comma separated list of fields to exclude from an incident. Sections of fields can be used: pii,gdpr,hipaa,cm
+  # optional semicolon separated list of fields to exclude from an incident. Sections of fields can be used: pii;gdpr;hipaa;cm
   exclude_incident_fields=
   # optionally include references within the incident to source org_id and incident_id. Values True/False
   sync_reference_fields=True
+  # true|false - specify whether to delete the target incident if the source incident is deleted. Default: false
+  delete_incidents=false
 ```
 
 # ResilientFeed Class
@@ -91,10 +93,11 @@ The following configuration items are supported:
 | class | ResilientFeed | Indicates that the section is for an Resilient synchronization. |
 | host, #proxy_host, api_key_id, api_key_secret, #email,  #password, port, org, cafile | | Specify the connection values similar to the `[resilient]` section for connection to the target resilient |
 | db_sync_file | /path/to/file | Absolute path to a file to retain mapping information between the two Resilient instances |
-| matching_incident_fields | plan_status == 'C', custom_field > 5 | Optional comma separated list of comparison tuples to determine the criteria for synchronizing an incident and it's tasks, artifacts, etc. Use the syntax: \<field\> \<operator\> \<value\>. Operator may be one of: ==, >=, <=, <, >, in, 'not in', is, and 'is not'. `None` can be used for \<value\>. Make sure to separate each \<field\> \<operator\> \<value\> with spaces. |
-| matching_operator | any\|all | When using matching_incident_fields, either `all` fields or `any` field needs to match for incident synchronization | 
-| exclude_incident_fields	| severity_code, date_started, custom_field, etc.| Optional comma separated list of fields and field sections to exclude when synchronizing an incident. | 
-| sync_reference_fields | True\|False | Specify  `True` to add information to the target incident to maintain the orginal org id and incident id. Fields are `df_org_id` and `df_inc_id`, respectively |
+| matching_incident_fields | plan_status == 'C'; custom_field > 5 | Optional semicolon separated list of comparison tuples to determine the criteria for synchronizing an incident and it's tasks, artifacts, etc. Use the syntax: \<field\> \<operator\> \<value\>. Operator may be one of: ==, >=, <=, <, >, in, 'not in', is, and 'is not'. `None` can be used for \<value\>. Make sure to separate each \<field\> \<operator\> \<value\> with spaces. |
+| matching_operator | any\|all | When using matching_incident_fields, either `all` fields or `any` field needs to match for incident synchronization. Default: all | 
+| exclude_incident_fields	| severity_code; date_started; custom_field | Optional semicolon separated list of fields and field sections to exclude when synchronizing an incident. | 
+| sync_reference_fields | true\|false | Specify  `True` to add information to the target incident to maintain the orginal org id and incident id. Fields are `df_org_id` and `df_inc_id`, respectively |
+| delete_incidents | true\|false | Specify 'True' to delete the target incident and it's data when the source incident is deleted |
 
 ## Requirements
 * This functionality has been tested with Resilient instances >= v30. 

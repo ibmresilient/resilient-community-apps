@@ -31,10 +31,10 @@ def test_retry_task_insert_select_delete(db_conn):
     #                          new_inc_id, payload):
     db_conn.create_retry_row(201, 1000, "incident", 1000,
                               "task", 2000,
-                              None, payload_str)
+                              None, payload_str, 1)
     db_conn.create_retry_row(201, 1000, "incident", 1000,
                               "task", 2001,
-                              None, payload_str)
+                              None, payload_str, 1)
 
     row_list = db_conn.find_retry_rows(201, 1000, "incident")
 
@@ -81,7 +81,7 @@ def test_retry_attachment_insert_select_delete(db_conn):
     #                          new_inc_id, payload):
     db_conn.create_retry_row(201, 1000, "task", 2267891,
                               "attachment", 337,
-                             2874, payload_str)
+                             2874, payload_str, 1)
 
     row_list = db_conn.find_retry_rows(201, 1000, "task")
 

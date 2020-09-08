@@ -33,7 +33,7 @@ class Filters:
         # parse the filters and produce a tuple of (field, operator, value)
         self.match_list = {}
         if filters:
-            for filter_str in filters.split(','):
+            for filter_str in filters.split(';'):
                 m = REGEX_OPERATORS.match(filter_str.strip())
                 if not m:
                     raise IntegrationError("Unable to parse filter '{}'".format(filter_str))
