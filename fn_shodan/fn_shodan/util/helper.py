@@ -11,7 +11,7 @@ HANDLED_ERROR_MSGS = (
 )
 
 
-def handle_error(reason: str) -> dict:
+def handle_error(reason):
     """
     Returns a dict containing err and reason
 
@@ -25,7 +25,7 @@ def handle_error(reason: str) -> dict:
     }
 
 
-def get_proxies(app_configs: dict):
+def get_proxies(app_configs):
     """
     Function that checks if 'http_proxy' or 'https_proxy' is
     defined in app_configs and returns a dictionary if they
@@ -49,7 +49,7 @@ def get_proxies(app_configs: dict):
     return proxies
 
 
-def make_api_call(call_type: str, api_key: str, app_configs: dict, qry=None) -> dict:
+def make_api_call(call_type, api_key, app_configs, qry=None):
     """
     Function that makes the api call to Shodan.io
 
