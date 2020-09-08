@@ -13,11 +13,11 @@ VERSION = 1.0
   Workflow properties can be added using a command similar to this:
   workflow.addProperty('convert_json_to_rich_text', { 
     "version": 1.0,
-    "header": "Artifact scan results for 12.34.221.1",
+    "header": "Artifact scan results for".format(artifact.value),
     "padding": 10,
     "separator": u"<br />",
     "sort": True,
-    "json": { "some": "json", "omit": "this", "list": ["a", "b", "c"] },
+    "json": results.content,
     "json_omit_list": ["omit"],
     "incident_field": None
   })
@@ -27,7 +27,7 @@ VERSION = 1.0
     "version": 1.0, [this is for future compatibility]
     "header": str, [header line to add to converted json produced or None. Ex: Results from scanning artifact: xxx. The header may contain rich text tags]
     "padding": 10, [padding for nested json elements, or defaults to 10]
-    "separator": u"<br />"|['<span>','</span>'], [html separator between json keys and lists or defaults to html break: '<br />'. 
+    "separator": u"<br />"|list such as ['<span>','</span>'], [html separator between json keys and lists or defaults to html break: '<br />'. 
                                                 If a list, then the data is brackets by the pair specified]
     "sort": True|False, [sort the json keys at each level when displayed]
     "json": json, [required json to convert]

@@ -1,10 +1,10 @@
 # Resilient Convert JSON to Rich Text Script
 This package consists of the **convert_json_to_rich_text.res** export file. 
 
-It consists of a script to convert a json object into a hierarchical display of rich text 
+The package contains a script to convert a json data structure into a hierarchical display of rich text, 
 and adds the rich text to either an incident's rich text (custom) field or an incident note.
 A workflow property is used to define the json to convert and identify parameters used on how to perform the conversion.
-Typically, a function will create workflow property and this script will run after that function to perform the conversion.
+Typically, a function will create the workflow property and this script will run after that function to perform the conversion.
 
 ## Features:
   * Display the hierarchical nature of json, presenting the json keys as bold labels
@@ -55,7 +55,7 @@ Workflow properties can be added using a command similar to this:
     "version": 1.0, [this is for future compatibility]
     "header": str, [header line to add to converted json produced or None. Ex: Results from scanning artifact: xxx. The header may contain rich text tags]
     "padding": 10, [padding for nested json elements, or defaults to 10]
-    "separator": u"<br />"|['<div>','</div>'], [any html separator between json keys and lists or defaults to html break: '<br />'. 
+    "separator": u"<br />"|list such as ['<div>','</div>'], [any html separator between json keys and lists or defaults to html break: '<br />'. 
                                                 If a list, then the data is brackets by the pair specified]
     "sort": True|False, [sort the json keys at each level when displayed]
     "json": json, [required json to convert]
