@@ -7,9 +7,9 @@ setup(
     name='rc_data_feed_plugin_splunkfeed',
     version='1.0.3',
     license='MIT',
-    author='IBM Resilient Labs',
-    author_email='resil.labs@gmail.com',
-    url='http://ibm.biz/resilientcommunity',
+    author='IBM Resilient',
+    author_email='',
+    url="http://ibm.biz/resilientcommunity",
     description="Resilient Circuits Components for sending data feeds to other (BI) systems",
     long_description="Resilient Circuits Components for sending data feeds to other (BI) systems",
     install_requires=[
