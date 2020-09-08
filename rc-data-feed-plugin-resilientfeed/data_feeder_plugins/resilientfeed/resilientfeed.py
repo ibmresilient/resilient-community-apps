@@ -39,6 +39,7 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
         # incident fields to exclude
         self.exclude_fields = options.get("exclude_incident_fields", "").replace(" ", "").split(",")
         self.sync_references = str_to_bool(options.get("sync_reference_fields", "false"))
+        self.delete_incidents = str_to_bool(options.get("delete_incidents", "false"))
 
 
     def send_data(self, context, payload):
@@ -57,7 +58,7 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
         if context.is_deleted:
             orig_type_id = payload.get('id', None)
             self.resilient_target.delete_type(self.resilient_source.rest_client.org_id, context.inc_id,
-                                              type_name, payload, orig_type_id)
+                                              type_name, payload, orig_type_id, delete= self.delete_incidents)
             return
 
         # set up the criteria to accept incident synchronizing, if any
@@ -103,8 +104,8 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
                 LOG.info("%s on Incident %s", err, context.inc_id)
 
                 # create a sync entry so we know we skipped this incident
-                self.resilient_target.create_update_type(self.resilient_source.rest_client.org_id, context.inc_id,
-                                                         type_name, None, context.inc_id)
+                #self.resilient_target.create_update_type(self.resilient_source.rest_client.org_id, context.inc_id,
+                #                                         type_name, None, context.inc_id)
 
 
     def _is_datatable(self, payload):

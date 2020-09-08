@@ -70,7 +70,7 @@ class Resilient(object):
                 raise IntegrationError("Unable to create DBSync object")
 
 
-    def delete_type(self, orig_org_id, orig_inc_id, type_name, payload, orig_type_id):
+    def delete_type(self, orig_org_id, orig_inc_id, type_name, payload, orig_type_id, delete=True):
         """
         Delete an object and update the sync db to reflect change.
         If deleting an incident, need to also delete db entries for all child objects
@@ -79,6 +79,7 @@ class Resilient(object):
         :param type_name:
         :param payload:
         :param orig_type_id:
+        :param delete: True|False, pertains to incident objects
         :return: None
         """
         # determine if this is a task comment or attachment
@@ -93,8 +94,9 @@ class Resilient(object):
         sync_inc_id, sync_type_id, sync_state = \
             self.dbsync.find_sync_row(orig_org_id, orig_inc_id, type_name, orig_type_id)
 
-        # do nothing if already deleted
-        if sync_state == "deleted":
+        # do nothing if already deleted or bypassed
+        if sync_state in ['deleted', 'bypassed']:
+            LOG.debug("No action on %s: %s:%s->%s", sync_state, orig_inc_id, mapped_type_name, orig_type_id)
             return
 
         if not sync_inc_id:
@@ -106,17 +108,23 @@ class Resilient(object):
         uri = "{}/{}".format(uri, sync_type_id)
 
         try:
-            LOG.debug("Deleting %s:%s->%s", mapped_type_name, sync_inc_id, sync_type_id)
-            self.rest_client.delete(uri)
-            LOG.info("Deleted %s:%s->%s", mapped_type_name, sync_inc_id, sync_type_id)
+            if not delete and type_name == "incident":
+                LOG.info("Bypassing deleting %s:%s->%s", mapped_type_name, sync_inc_id, sync_type_id)
+                # mark record for incident and all child objects as bypassed
+                self.dbsync.delete_type(self.rest_client.org_id, sync_inc_id, type_name, sync_type_id, status='bypassed')
+                self.dbsync.delete_incident_types(self.rest_client.org_id, sync_inc_id, status='bypassed')
+            else:
+                LOG.debug("Deleting %s:%s->%s", mapped_type_name, sync_inc_id, sync_type_id)
+                self.rest_client.delete(uri)
+                LOG.info("Deleted %s:%s->%s", mapped_type_name, sync_inc_id, sync_type_id)
 
-            # remove the sync record
-            self.dbsync.delete_type(self.rest_client.org_id, sync_inc_id, type_name, sync_type_id)
+                # remove the sync record
+                self.dbsync.delete_type(self.rest_client.org_id, sync_inc_id, type_name, sync_type_id)
 
-            if type_name == "incident":
-                # remove record for all child objects
-                self.dbsync.delete_incident_types(self.rest_client.org_id, sync_inc_id)
-
+                if type_name == "incident":
+                    LOG.info("Deleting all associate tasks, notes, artifacts, etc. for %s:%s->%s", mapped_type_name, sync_inc_id, sync_type_id)
+                    # remove record for all child objects
+                    self.dbsync.delete_incident_types(self.rest_client.org_id, sync_inc_id)
         except Exception as err:
             LOG.error(err)
 
@@ -178,8 +186,9 @@ class Resilient(object):
         sync_inc_id, sync_type_id, sync_state = \
             self.dbsync.find_sync_row(orig_org_id, orig_inc_id, mapped_type_name, orig_type_id)
 
-        # do nothing if already deleted
-        if sync_state == "deleted":
+        # do nothing if already deleted or bypassed
+        if sync_state in ['deleted', 'bypassed']:
+            LOG.debug("No action on %s: %s:%s->%s", sync_state, orig_inc_id, mapped_type_name, orig_type_id)
             return None
 
         # update operation?
@@ -211,8 +220,9 @@ class Resilient(object):
             if mapped_type_name != 'incident':
                 sync_inc_id, sync_state = self.dbsync.find_incident(orig_org_id, orig_inc_id)
 
-                # do nothing if already deleted
-                if sync_state == "deleted":
+                # do nothing if already deleted or bypassed
+                if sync_state in ['deleted', 'bypassed']:
+                    LOG.debug("No action on %s: %s:%s->%s", sync_state, orig_inc_id, mapped_type_name, orig_type_id)
                     return None
 
                 # a missing incident means the order of creating the child is incorrect.
@@ -463,8 +473,9 @@ class Resilient(object):
             _, sync_task_id, sync_state = self.dbsync.find_sync_row(orig_org_id, orig_inc_id,
                                                                     "task", payload.get("task_id"))
 
-            # do nothing if already deleted
-            if sync_state == "deleted":
+            # do nothing if already deleted or bypassed
+            if sync_state in ['deleted', 'bypassed']:
+                LOG.debug("No action on %s: %s:%s", sync_state, orig_inc_id, type_name)
                 return None, None
 
             # return a different type name for task notes and attachments
@@ -503,8 +514,9 @@ class Resilient(object):
             # find the incident for this attachment
             sync_inc_id, sync_state = self.dbsync.find_incident(orig_org_id, orig_inc_id)
 
-            # do nothing if incident already deleted or filtered
-            if sync_state != "active":
+            # do nothing if incident already deleted or bypassed
+            if sync_state in ['deleted', 'bypassed']:
+                LOG.debug("No action on %s: %s:%s->%s", sync_state, orig_inc_id, type_name, orig_type_id)
                 return
 
             # get the target attachment, if it exists

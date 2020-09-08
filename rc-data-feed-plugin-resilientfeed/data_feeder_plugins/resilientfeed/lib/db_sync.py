@@ -90,8 +90,8 @@ CREATE TABLE IF NOT EXISTS {table_name} (
     SYNC_UPDATE = """UPDATE {table_name} set last_sync=datetime('now') where org2=? and org2_inc_id=? and type_name=? and org2_type_id=?""".format(table_name=DBSyncInterface.DBTABLE)
     SYNC_SELECT = """SELECT type_name, org1, org1_inc_id, org1_type_id, org2, org2_inc_id, org2_type_id, last_sync, status FROM {table_name} WHERE org1=? and org1_inc_id=? and type_name=? and org1_type_id=? and org2=?""".format(table_name=DBSyncInterface.DBTABLE)
 
-    SYNC_DELETE_TYPE = """UPDATE {table_name} set last_sync=datetime('now'), status='deleted' where org2=? and org2_inc_id=? and type_name=? and org2_type_id=?;""".format(table_name=DBSyncInterface.DBTABLE)
-    SYNC_DELETE_INCIDENT = """UPDATE {table_name} set last_sync=datetime('now'), status='deleted' where org2=? and org2_inc_id=?;""".format(table_name=DBSyncInterface.DBTABLE)
+    SYNC_DELETE_TYPE = """UPDATE {table_name} set last_sync=datetime('now'), status=? where org2=? and org2_inc_id=? and type_name=? and org2_type_id=?;""".format(table_name=DBSyncInterface.DBTABLE)
+    SYNC_DELETE_INCIDENT = """UPDATE {table_name} set last_sync=datetime('now'), status=? where org2=? and org2_inc_id=?;""".format(table_name=DBSyncInterface.DBTABLE)
 
     # R E T R Y  D B
     RETRY_TABLE_DEF = """-- retry table
@@ -199,7 +199,7 @@ CREATE TABLE IF NOT EXISTS {table_name} (
         :param orig_type_id:
         :param new_inc_id:
         :param new_type_id:
-        :param status: active, filtered, deleted
+        :param status: active, filtered, deleted, bypassed
         :return: None
         """
 
@@ -249,19 +249,20 @@ CREATE TABLE IF NOT EXISTS {table_name} (
 
         return sync_inc_id, sync_state
 
-    def delete_type(self, org2_id, org2_inc_id, type_name, org2_type_id):
+    def delete_type(self, org2_id, org2_inc_id, type_name, org2_type_id, status='deleted'):
         """
         delete an entry in the sync table
         :param org2_id:
         :param org2_inc_id:
         :param type_name:
         :param org2_type_id:
+        :param status: status value of deleted|bypassed
         :return:
         """
         try:
             cur = self.sqlite_db.cursor()
 
-            cur.execute(SQLiteDBSync.SYNC_DELETE_TYPE, (org2_id, org2_inc_id, type_name, org2_type_id))
+            cur.execute(SQLiteDBSync.SYNC_DELETE_TYPE, (status, org2_id, org2_inc_id, type_name, org2_type_id))
 
             self.sqlite_db.commit()
         except Error as err:
@@ -269,17 +270,18 @@ CREATE TABLE IF NOT EXISTS {table_name} (
         finally:
             cur and cur.close()
 
-    def delete_incident_types(self, org2_id, org2_inc_id):
+    def delete_incident_types(self, org2_id, org2_inc_id, status='deleted'):
         """
         delete all records associated with an incident
         :param org2_id:
         :param org2_inc_id:
+        :param status: status value of deleted|bypassed
         :return:
         """
         try:
             cur = self.sqlite_db.cursor()
 
-            cur.execute(SQLiteDBSync.SYNC_DELETE_INCIDENT, (org2_id, org2_inc_id))
+            cur.execute(SQLiteDBSync.SYNC_DELETE_INCIDENT, (status, org2_id, org2_inc_id))
 
             self.sqlite_db.commit()
         except Error as err:
