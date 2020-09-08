@@ -10,11 +10,11 @@
   - [Display the Data Table in an Incident](#display-the-datatable-in-an-incident)
 ---
 
-**This package contains 4 functions that help you manipulate IBM Resilient Data Tables**
+**This package contains 5 functions that help you manipulate IBM Resilient Data Tables**
 
  ![screenshot](./screenshots/dt_functions.png)
 
-The 4 functions allow you to GET, UPDATE and DELETE a row and GET rows in a Data Table
+The 4 functions allow you to GET, UPDATE, DELETE a row and GET and DELETE rows in a Data Table
 
 ---
 ## Function - Get Row:
