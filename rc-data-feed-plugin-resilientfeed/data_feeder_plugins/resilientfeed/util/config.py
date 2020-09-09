@@ -23,11 +23,11 @@ cafile=false
 # identify a sqlite db file to retain mapping between resilient instances.
 db_sync_file=/path/to/file
 # semicolon separated list of fields to allow incidents to sync. ex. incident_type_ids in ['Phishing'];custom_field == "a"
-matching_incident_fields=
+#matching_incident_fields=
 # when using matching_incident_fields, specify whether 'all' or 'any' field needs to match to accept. Default: all
-matching_operator=all
+#matching_operator=all
 # semicolon separated list of fields to exclude from an incident. Sections of fields can be used: pii;gdpr;hipaa;cm
-exclude_incident_fields=
+#exclude_incident_fields=
 # include references within the incident to source org_id and incident_id. Values true/false
 sync_reference_fields=true
 # true|false - specify whether to delete the target incident if the source incident is deleted. Default: false

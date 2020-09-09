@@ -16,6 +16,8 @@ LOG = logging.getLogger(__name__)
 USER_REGEX = re.compile(r".*\((.*\@.*)\)")
 # remove xml identifier
 XML_REGEX = re.compile(r"^<\?xml.*\?>(.*)")
+# <field> <operator> <value>. ex: org_id = 201
+REGEX_OPERATORS = re.compile(r"([a-zA-Z0-9_]+)\s*(!=|=<|>=|=>|>=|<|>|==|=|'is not'|' is '|'not in'|' in ')\s*(.+)")
 
 # sync properties for an incident
 DF_INC_ID = "df_inc_id"
@@ -41,6 +43,8 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
         self.sync_references = str_to_bool(options.get("sync_reference_fields", "false"))
         self.delete_incidents = str_to_bool(options.get("delete_incidents", "false"))
 
+        self.match_list, self.match_operator_and = parse_matching_criteria(options.get("matching_incident_fields", None),
+                                                                           options.get("matching_operator", None))
 
     def send_data(self, context, payload):
         """
@@ -58,12 +62,11 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
         if context.is_deleted:
             orig_type_id = payload.get('id', None)
             self.resilient_target.delete_type(self.resilient_source.rest_client.org_id, context.inc_id,
-                                              type_name, payload, orig_type_id, delete= self.delete_incidents)
+                                              type_name, payload, orig_type_id, delete=self.delete_incidents)
             return
 
         # set up the criteria to accept incident synchronizing, if any
-        matching_criteria = Filters(self.options.get("matching_incident_fields", None),
-                                    self.options.get("matching_operator", None))
+        matching_criteria = Filters(self.match_list, self.match_operator_and)
 
         # check for attachments and artifacts with attachments
         if type_name == "attachment" or (type_name == "artifact" and payload.get("attachment", None)):
@@ -347,6 +350,52 @@ def exclude_incident_fields(exclude_fields, payload):
 
     return new_payload
 
+
+def parse_matching_criteria(filters, filter_operator):
+    """
+    build the filter criteria, if present
+    :param filters:field opr value[;]...
+    :param filter_operator: any|all
+    """
+    LOG.debug("%s %s", filters, filter_operator)
+
+    if filter_operator and filter_operator.strip().lower() not in ('all', 'any'):
+        raise ValueError("operator must be 'all' or 'any': {}".format(filter_operator))
+
+    match_operator_and = (filter_operator.strip().lower() == 'all') if filter_operator else True
+
+    # parse the filters and produce a tuple of (field, operator, value)
+    match_list = {}
+    if filters:
+        for filter_str in filters.split(';'):
+            m = REGEX_OPERATORS.match(filter_str.strip())
+            if not m or len(m.groups()) != 3:
+                raise ValueError("Unable to parse filter '{}'".format(filter_str))
+
+            match_field = m.group(1)
+            match_opr = m.group(2)
+            # correct mistyped comparison
+            if match_opr.strip() == '=':
+                match_opr = '=='
+
+            match_value = m.group(3)
+
+            # determine if working with a string, boolean, or int
+            if match_value in ["true", "True", "false", "False"]:
+                match_value = str_to_bool(match_value)
+            elif match_value == 'None':
+                match_value = None
+            else:
+                try:
+                    match_value = int(match_value) # this will fail for numbers, which will be trapped
+                except:
+                    pass
+
+            compare_tuple = (match_field, match_opr, match_value)
+            LOG.debug(compare_tuple)
+            match_list[match_field] = compare_tuple
+
+    return match_list, match_operator_and
 
 class MatchError(Exception):
     """

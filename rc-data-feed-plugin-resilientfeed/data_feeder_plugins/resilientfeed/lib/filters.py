@@ -6,60 +6,24 @@
 import logging
 import re
 import sys
-from resilient_lib import IntegrationError, str_to_bool
 
-# <field> <operator> <value>. ex: org_id = 201
-REGEX_OPERATORS = re.compile(r"([a-zA-Z0-9_]+)\s*(!=|=<|>=|=>|>=|<|>|==|=|is not|is|not in|in)\s*(.+)")
-REGEX_FIND_ST = re.compile(r"['\"]+(.*)['\"]+")
-
-class Filters:
+class Filters():
     """
     this class handles the criteria for determining if an incident (and it's child objects) are synchronized
     """
-    def __init__(self, filters, filter_operator):
+    def __init__(self, match_list, match_operator_and):
         """
-        build the filter criteria, if present
-        :param filters:
+        save the filter criteria, if present
+        :param match_list: list of tuples of (field, operator, value)
         :param filter_operator: any|all
         """
-        if filter_operator and filter_operator.strip().lower() not in ('all', 'any'):
-            raise IntegrationError("operator must be 'all' or 'any': {}".format(filter_operator))
+        # parsed settings to use
+        self.match_list = match_list if match_list else {}
+        self.match_operator_and = match_operator_and
 
-        self.match_operator_and = (filter_operator.strip().lower() == 'all') if filter_operator else True
         self.log = logging.getLogger(__name__)
-        # retain all fields we test
+
         self.match_results = []
-
-        # parse the filters and produce a tuple of (field, operator, value)
-        self.match_list = {}
-        if filters:
-            for filter_str in filters.split(';'):
-                m = REGEX_OPERATORS.match(filter_str.strip())
-                if not m:
-                    raise IntegrationError("Unable to parse filter '{}'".format(filter_str))
-
-                match_field = m.group(1)
-                match_opr = m.group(2)
-                # correct mistyped comparison
-                if match_opr.strip() == '=':
-                    match_opr = '=='
-
-                match_value = m.group(3)
-
-                # determine if working with a string, boolean, or int
-                if match_value in ["true", "True", "false", "False"]:
-                    match_value = str_to_bool(match_value)
-                elif match_value == 'None':
-                    match_value = None
-                else:
-                    try:
-                        match_value = int(match_value) # this will fail for numbers, which will be trapped
-                    except:
-                        pass
-
-                compare_tuple = (match_field, match_opr, match_value)
-                self.log.debug(compare_tuple)
-                self.match_list[match_field] = compare_tuple
 
     def match_payload_value(self, field, value):
         """
