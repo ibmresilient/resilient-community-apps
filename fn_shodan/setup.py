@@ -28,8 +28,11 @@ setup(
     author='Resilient Labs',
     author_email='resil.labs@gmail.com',
     url='https://ibm.biz/resilientcommunity',
-    description="TODO",
-    long_description="""TODO""",
+    description="A function to lookup IP Addresses in Shodan",
+    long_description="""This is a simple function which takes IP Address artifacts and returns the results from https://www.shodan.io/.
+It will update the description of the artifact and add a note to the incident with the Vulnerabilities, Ports and more from Shodan.
+You will need an API key for Shodan - https://developer.shodan.io/billing/signup
+""",
     install_requires=[
         "resilient_circuits>=33.0.0",
         "resilient-lib>=37.2.215",
