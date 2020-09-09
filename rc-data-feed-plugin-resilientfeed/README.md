@@ -93,7 +93,9 @@ The following configuration items are supported:
 | class | ResilientFeed | Indicates that the section is for an Resilient synchronization. |
 | host, #proxy_host, api_key_id, api_key_secret, #email,  #password, port, org, cafile | | Specify the connection values similar to the `[resilient]` section for connection to the target resilient |
 | db_sync_file | /path/to/file | Absolute path to a file to retain mapping information between the two Resilient instances |
-| matching_incident_fields | plan_status == 'C'; custom_field > 5 | Optional semicolon separated list of comparison tuples to determine the criteria for synchronizing an incident and it's tasks, artifacts, etc. Use the syntax: \<field\> \<operator\> \<value\>. Operator may be one of: ==, >=, <=, <, >, in, 'not in', is, and 'is not'. `None` can be used for \<value\>. Make sure to separate each \<field\> \<operator\> \<value\> with spaces. |
+| matching_incident_fields | plan_status == 'C'; custom_field > 5 | Optional semicolon separated list of comparison tuples to determine the criteria for synchronizing an incident and it's tasks, artifacts, etc. Use the syntax: \<field\> \<operator\> \<value\>. Operator may be one of: ~, ==, >=, <=, <, >, in, 'not in', is, and 'is not'. 
+Use `~` for `in` when searching richtext fields.
+`None` can be used for \<value\>. Make sure to separate each \<field\> \<operator\> \<value\> with spaces. |
 | matching_operator | any\|all | When using matching_incident_fields, either `all` fields or `any` field needs to match for incident synchronization. Default: all | 
 | exclude_incident_fields	| severity_code; date_started; custom_field | Optional semicolon separated list of fields and field sections to exclude when synchronizing an incident. | 
 | sync_reference_fields | true\|false | Specify  `True` to add information to the target incident to maintain the orginal org id and incident id. Fields are `df_org_id` and `df_inc_id`, respectively |
@@ -174,7 +176,8 @@ Synchronization could fail for the following reasons:
 * Missing custom fields, custom incident_types, phases, etc. Ensure you have exported and re-imported these customizations into the target Resilient organization. Also check the permissions set on your target Resilient user account or api token associated with incident, artifact, task, etc. creation, including creating wiki pages.
 * Artifacts with custom artifact types cannot be synchronized at this time.
 * Older incident fields missing required fields defined at a later point in time. The only remedy is to modify the definition of the fields from `required` to `optional` and then resync the field using the rule `Data Feed: Sync Incidents`.
-* Matching criteria filtered the incident. Review the values specified in `matching_incident_fields` and the value specified in `matching_operator`.
+* Matching criteria filtered the incident. Review the values specified in `matching_incident_fields` and the value specified in `matching_operator`. 
+If a field is richtext, use the `~` operator to find the value. For example: description ~ warning.
 * Change the log level to debug to receive additional troubleshooting information on synchronization issues.
 * Changes to tasks, artifacts, notes, etc. before the incident is synchronized.
   - If the log displays a message such as:

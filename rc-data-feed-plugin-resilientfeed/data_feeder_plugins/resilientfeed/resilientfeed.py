@@ -17,7 +17,7 @@ USER_REGEX = re.compile(r".*\((.*\@.*)\)")
 # remove xml identifier
 XML_REGEX = re.compile(r"^<\?xml.*\?>(.*)")
 # <field> <operator> <value>. ex: org_id = 201
-REGEX_OPERATORS = re.compile(r"([a-zA-Z0-9_]+)\s*(!=|=<|>=|=>|>=|<|>|==|=|'is not'|' is '|'not in'|' in ')\s*(.+)")
+REGEX_OPERATORS = re.compile(r"([a-zA-Z0-9_]+)\s*(~|!=|=<|>=|=>|>=|<|>|==|=|'is not'|' is '|'not in'|' in ')\s*(.+)")
 
 # sync properties for an incident
 DF_INC_ID = "df_inc_id"
