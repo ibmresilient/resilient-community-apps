@@ -13,7 +13,7 @@ from resilient_lib import ResultPayload, validate_fields
 from fn_outbound_email.lib.smtp_mailer import SendSMTPEmail
 
 
-log = logging.getlogger(__name__)
+log = logging.getLogger(__name__)
 
 CONFIG_DATA_SECTION = 'fn_outbound_email'
 SMTP_DEFAULT_CONN_TIMEOUT = 20
