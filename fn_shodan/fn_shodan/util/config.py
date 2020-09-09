@@ -12,8 +12,6 @@ def config_section_data():
 
     config_data = u"""[fn_shodan]
 shodan_apikey=<your-api-key>
-
-# Proxy Configuration if any by default will be None
 http_proxy=
 https_proxy=
 """
