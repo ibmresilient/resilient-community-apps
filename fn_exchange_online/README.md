@@ -18,7 +18,6 @@
 - [Overview](#overview)
 - [Requirements](#requirements)
 - [Installation](#installation)
-- [Uninstall](#uninstall)
 - [Troubleshooting](#troubleshooting)
 - [Support](#support)
 
@@ -61,7 +60,7 @@ Edit the required configuration setting as described in the [Integration Server]
   Provide a high-level description of the function itself and its remote software or application.
   The text below is parsed from the "description" and "long_description" attributes in the setup.py file
 -->
-Resilient Integration with Exchange Online provides the capability to access and manipulate Microsoft Exchange Online (Office 365 in the cloud) messages from the IBM Resilient Soar Platform.  The integration uses Microsoft Graph API to access the data in Office 365.  Included in the integrations are the following capabilities:
+Resilient Integration with Exchange Online provides the capability to access and manipulate Microsoft Exchange Online (Office 365 in the cloud) messages from the IBM Resilient SOAR Platform.  The app uses Microsoft Graph API to access the data in Office 365.  Included in the integrations are the following capabilities:
 
 * Get the user profile of the specified email address in JSON format.
 
@@ -154,13 +153,13 @@ To install,
 
   | Config | Required | Example | Description |
   | ------ | :------: | ------- | ----------- |
-  | **microsoft_graph_token_url** | Yes | `https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token` | *Microsoft Graph URL endpoint for acquring access token* |
+  | **microsoft_graph_token_url** | Yes | `https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token` | *Microsoft Graph URL endpoint for acquiring access token* |
   | **microsoft_graph_url** | Yes | `https://graph.microsoft.com/v1.0` | *Microsoft Graph base URL * |
   | **tenant_id** | Yes | `xxx` | *Microsoft Azure Tenant ID* |
   | **client_id** | Yes | `xxx` | *Microsoft Azure Client ID (Application ID)* |
   | **client_secret** | Yes | `xxx` | *Microsoft Azure Client Secret* |
   | **max_batched_requests** | Yes | `20` | *Maximum number of requests to send MS Graph API $batch endpoint in single call* |
-  | **max_messages** | Yes | `100` | *Maximum number of messages that a query will return* |
+  | **max_messages** | Yes | `100` | *Maximum number of messages that a query returns* |
   | **max_users** | Yes | `2000` | *Maximum number of users searched in a query* |
   | **max_retries_total** | Yes | `10` | *Maximum number of retries for MS Graph API request* |
   | **max_retries_backoff_factor** | Yes | `5` | *Backoff factor used to determine time to sleep between requests* |
@@ -220,13 +219,13 @@ To install,
   ```
   | Config | Required | Example | Description |
   | ------ | :------: | ------- | ----------- |
-  | **microsoft_graph_token_url** | Yes | `https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token` | *Microsoft Graph URL endpoint for acquring access token* |
+  | **microsoft_graph_token_url** | Yes | `https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token` | *Microsoft Graph URL endpoint for acquiring access token* |
   | **microsoft_graph_url** | Yes | `https://graph.microsoft.com/v1.0` | *Microsoft Graph base URL * |
   | **tenant_id** | Yes | `xxx` | *Microsoft Azure Tenant ID* |
   | **client_id** | Yes | `xxx` | *Microsoft Azure Client ID (Application ID)* |
   | **client_secret** | Yes | `xxx` | *Microsoft Azure Client Secret* |
   | **max_batched_requests** | Yes | `20` | *Maximum number of requests to send MS Graph API $batch endpoint in single call* |
-  | **max_messages** | Yes | `100` | *Maximum number of messages that a query will return* |
+  | **max_messages** | Yes | `100` | *Maximum number of messages that a query returns* |
   | **max_users** | Yes | `2000` | *Maximum number of users searched in a query* |
   | **max_retries_total** | Yes | `10` | *Maximum number of retries for MS Graph API request* |
   | **max_retries_backoff_factor** | Yes | `5` | *Backoff factor used to determine time to sleep between requests* |
@@ -239,6 +238,18 @@ To install,
   ```
   $ resilient-circuits run
   ```
+  ### Uninstall
+  If using an integration server, you can uninstall your app as follows:
+
+* SSH into your Integration Server.
+* **Uninstall** the package:
+  ```
+  $ pip uninstall fn-exchange-online
+  ```
+* Open the config file, scroll to the [fn_exchange_online] section and remove the section or prefix `#` to comment out the section.
+* **Save** and **Close** the app.config file.
+
+---
 
 ### Custom Layouts
 <!--
@@ -246,7 +257,7 @@ To install,
   You may wish to recommend a new incident tab.
   You should save a screenshot "custom_layouts.png" in the doc/screenshots directory and reference it here
 -->
-Create an Exchange Online custom incident tab and drag the Exchange Online Message Query Results data table on to the layout and click Save as shown in the screenshot below:  
+Create an Exchange Online custom incident tab and drag the Exchange Online Message Query Results data table on to the layout as shown in the following screenshot. When done, click Save.
 
    ![screenshot: custom_layouts](./doc/screenshots/EXO-layout-tab.png)
 The results of any Exchange Online message query are displayed in this data table on the Exchange Online custom incident tab. 
@@ -308,17 +319,6 @@ You may need to log in to an admin account to accept the permissions requested o
 
 ---
 
-## Uninstall
-* SSH into your Integration Server.
-* **Uninstall** the package:
-  ```
-  $ pip uninstall fn-exchange-online
-  ```
-* Open the config file, scroll to the [fn_exchange_online] section and remove the section or prefix `#` to comment out the section.
-* **Save** and **Close** the app.config file.
-
----
-
 ## Troubleshooting
 There are several ways to verify the successful operation of a function.
 
@@ -361,4 +361,4 @@ There are several ways to verify the successful operation of a function.
 ## Support
 | Name | Version | Author | Support URL |
 | ---- | ------- | ------ | ----------- |
-| fn_exchange_online | 1.0.0 | IBM Resilient | https://ibm.com/mysupport |
+| fn_exchange_online | 1.1.0 | IBM Resilient | https://ibm.com/mysupport |
