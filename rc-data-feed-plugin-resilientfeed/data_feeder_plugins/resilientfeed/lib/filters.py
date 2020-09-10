@@ -62,7 +62,7 @@ class Filters():
         _, match_opr, match_value = self.match_list[field]
         try:
             if match_opr == "~":
-                eval_result = self._eval_field(match_value, 'in', u"'{}'".format(value))
+                eval_result = self._eval_field(match_value, 'in', u"'''{}'''".format(value))
             else:
                 eval_result = self._eval_field(value, match_opr, match_value)
         except (SyntaxError, TypeError) as err:
@@ -99,7 +99,7 @@ class Filters():
         :return: true/false based on comparison
         """
         if is_string(payload_value):
-            eval_str = u"'{}' {} {}".format(payload_value, match_opr, match_value)
+            eval_str = u"'''{}''' {} {}".format(payload_value, match_opr, match_value)
         else:
             eval_str = u"{} {} {}".format(payload_value, match_opr, match_value)
         self.log.debug(eval_str)

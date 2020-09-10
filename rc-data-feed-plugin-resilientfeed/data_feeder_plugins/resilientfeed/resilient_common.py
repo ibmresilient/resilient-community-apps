@@ -220,8 +220,8 @@ class Resilient(object):
             if mapped_type_name != 'incident':
                 sync_inc_id, sync_state = self.dbsync.find_incident(orig_org_id, orig_inc_id)
 
-                # do nothing if already deleted or bypassed
-                if sync_state in ['deleted', 'bypassed']:
+                # do nothing if already deleted, bypassed or filtered
+                if sync_state in ['deleted', 'bypassed', 'filtered']:
                     LOG.debug("No action on %s: %s:%s->%s", sync_state, orig_inc_id, mapped_type_name, orig_type_id)
                     return None
 
@@ -501,6 +501,14 @@ class Resilient(object):
         else:
             src_attachment_id = orig_type_id
 
+        # find the incident for this attachment
+        sync_inc_id, sync_state = self.dbsync.find_incident(orig_org_id, orig_inc_id)
+
+        # do nothing if incident already deleted, bypassed or filtered
+        if sync_state in ['deleted', 'bypassed', 'filtered']:
+            LOG.debug("No action on %s: %s:%s->%s", sync_state, orig_inc_id, type_name, orig_type_id)
+            return
+
         # is this a task based attachment?
         if payload.get("task_id", None):
             src_task_id = payload.get("task_id")
@@ -508,17 +516,9 @@ class Resilient(object):
                                                                              "task", src_task_id)
             # if the task doesn't exist, the attachment will be requeued
             if not dst_task_id:
-                raise IntegrationError("%s:%s->%s for attachment id {} does not exist".format(type_name, orig_inc_id,
-                                                                                              src_task_id, orig_type_id))
+                raise IntegrationError("{}:{}->{} for attachment id '{}' does not exist".format(type_name, orig_inc_id,
+                                                                                                src_task_id, orig_type_id))
         else:
-            # find the incident for this attachment
-            sync_inc_id, sync_state = self.dbsync.find_incident(orig_org_id, orig_inc_id)
-
-            # do nothing if incident already deleted or bypassed
-            if sync_state in ['deleted', 'bypassed']:
-                LOG.debug("No action on %s: %s:%s->%s", sync_state, orig_inc_id, type_name, orig_type_id)
-                return
-
             # get the target attachment, if it exists
             _, sync_type_id, _ = self.dbsync.find_sync_row(orig_org_id, orig_inc_id,
                                                            type_name, orig_type_id)

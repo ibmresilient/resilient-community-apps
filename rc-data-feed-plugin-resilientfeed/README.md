@@ -43,7 +43,7 @@ Unless otherwise specified, contents of this repository are published under the 
 ```
 resilient-circuits customize -l rc-data-feed-plugin-resilientfeed
 ```
-Note: Perform an export and reimport of these customizatons into the target Resilient organization in order to use them. See app.config parameter: `sync_reference_fields`.
+Note: Perform an export and reimport of these customizations into the target Resilient organization in order to use them. See app.config parameter: `sync_reference_fields`.
 
 *	Edit the resilient-circuits configuration file, as follows:
     
@@ -72,13 +72,13 @@ Note: Perform an export and reimport of these customizatons into the target Resi
   cafile=false
   # identify a sqlite db file to retain mapping between resilient instances.
   db_sync_file=/path/to/file
-  # optional semicolon separated list of fields to allow incidents to sync. ex. incident_type_ids in ['Phishing'];custom_field = "a"
+  # optional semicolon separated list of fields to allow incidents to sync. ex. incident_type_ids in ['Phishing', 'Malware'];custom_field = "a";description ~ malicious
   #matching_incident_fields=
   # when using matching_incident_fields, specify whether 'all' or 'any' field needs to match to accept
   #matching_operator=all
   # optional semicolon separated list of fields to exclude from an incident. Sections of fields can be used: pii;gdpr;hipaa;cm
   #exclude_incident_fields=
-  # optionally include references within the incident to source org_id and incident_id. Values True/False
+  # optionally include references within the incident to source org_id and incident_id. Values true/false
   sync_reference_fields=True
   # true|false - specify whether to delete the target incident if the source incident is deleted. Default: false
   delete_incidents=false
@@ -98,14 +98,14 @@ Use `~` for `in` when searching richtext fields.
 `None` can be used for \<value\>. Make sure to separate each \<field\> \<operator\> \<value\> with spaces. |
 | matching_operator | any\|all | When using matching_incident_fields, either `all` fields or `any` field needs to match for incident synchronization. Default: all | 
 | exclude_incident_fields	| severity_code; date_started; custom_field | Optional semicolon separated list of fields and field sections to exclude when synchronizing an incident. | 
-| sync_reference_fields | true\|false | Specify  `True` to add information to the target incident to maintain the orginal org id and incident id. Fields are `df_org_id` and `df_inc_id`, respectively |
+| sync_reference_fields | true\|false | Specify `True` to add information to the target incident to maintain the original org id and incident id. Fields are `df_org_id` and `df_inc_id`, respectively |
 | delete_incidents | true\|false | Specify 'True' to delete the target incident and it's data when the source incident is deleted |
 
 ## Requirements
-* This functionality has been tested with Resilient instances >= v30. 
+* This functionality has been tested with Resilient instances >= v35. 
 There is presently an issue with v37.0 restricting the live synchronization of a newly deleted artifact. If this capability is critical to your requirements, use Resilient version >=v37.1.
 * The target Resilient platform must be at the same version or greater than the source Resilient platform.
-* The target Resilient organization must have the same set of custom fields, incident types, playbooks (tasks and phases) in order to synchronize incident data. Use the export/import functionality under `Adminstrator Settings`.
+* The target Resilient organization must have the same set of custom fields, incident types, playbooks (tasks and phases) in order to synchronize incident data. Use the export/import functionality under `Administrator Settings`.
 * The target Resilient organization should have the same users and groups defined. For any user or group not found, incident and task ownership as well as member lists will be left empty. 
 * To synchronize datatables in real time, create rules specifying the `feed_data` message destination in order to changes.
 
@@ -113,7 +113,7 @@ There is presently an issue with v37.0 restricting the live synchronization of a
 1. Ensure Resilient version requirements are met for both the source and destination instances.
 2. Perform the manual duplication of custom fields, incident types, phases and tasks, etc. by exporting these configurations from the Resilient source organization and importing them to the target Resilient organization.
 3. Manually recreate the users and groups needed in the target Resilient organization.
-4. Configure the app.config settings with the settings for the target Resilent organization and, optionally, the criteria for the types of incidents to synchronize and fields to exclude.
+4. Configure the app.config settings with the settings for the target Resilient organization and, optionally, the criteria for the types of incidents to synchronize and fields to exclude.
 5. Run `resilient-circuits run` to confirm connectivity to both instances of Resilient (with `reload=False`).
 6. The best way to test is to set `reload=False` under `[feeds]` in your app.config file, and in the source Resilient organization, run the `Data Feeder: Sync Incidents` rule to synchronize a small number of incidents.
 
@@ -136,15 +136,15 @@ There is presently an issue with v37.0 restricting the live synchronization of a
 * It's presently not possible to restrict synchronization of incident elements such as tasks, artifacts, notes, etc.
 when using `reload=all` and the action `Data Feeder: Sync Incidents`.
 
-## Syncrhonization Methods
+## Synchronization Methods
 Three methods exist for synchronizing incident data:
-* reload=True - This app.config setting will syncrhonize all incidents (including those closed) each time resilient-circuits is run. Review performance considerations above in [Considerations].
+* reload=True - This app.config setting will synchronize all incidents (including those closed) each time resilient-circuits is run. Review performance considerations above in [Considerations].
 * real-time changes - If the automatic rules for incident, artifact, tasks, etc. are enabled, then any change to a object will perform the synchronization to the target organization. Note: Datatable rules need to be created in order to synchronize them in real-time.
 * Data Feeder: Sync Incidents function - This function allows one to specify the range of incident data to synchronize. This is useful to limit the range of incidents to transmit.
 
 ## Behavior
 Unexpected behaviors can occur and are detailed here.
-* If an incident is originally filtered via the `matching_incident_fields` setting, all incident data are filtered. If in the future that incident changes so that the matching criteria passes, at the time the incicident is changed, only the incident is synchronized. To include all the other data elements such as tasks, artifact, attachments, etc., use the `Data Feeder: Sync Incidents` function. 
+* If an incident is originally filtered via the `matching_incident_fields` setting, all incident data are filtered. If in the future that incident changes so that the matching criteria passes, at the time the incident is changed, only the incident is synchronized. To include all the other data elements such as tasks, artifact, attachments, etc., use the `Data Feeder: Sync Incidents` function. 
 * Attachments cannot be updated.
 
 ## SQLite Database

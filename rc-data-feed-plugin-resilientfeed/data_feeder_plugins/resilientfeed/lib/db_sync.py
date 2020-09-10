@@ -70,8 +70,8 @@ CREATE TABLE IF NOT EXISTS {table_name} (
     org1_inc_id int not null,
     org1_type_id int not null,
     org2 int not null,
-    org2_inc_id int not null,
-    org2_type_id int not null,
+    org2_inc_id int,
+    org2_type_id int,
     last_sync timestamp,
     status text not null,
     PRIMARY KEY (org1, org1_inc_id, type_name, org1_type_id, org2)
