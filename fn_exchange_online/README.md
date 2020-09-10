@@ -32,22 +32,22 @@
 The 1.1.0 release addresses performance issues when querying messages of all Exchange Online users of a tenant.
 * Added batching of multiple message query requests into a single Microsoft Graph API request call using the /$batch endpoint.  The maximum number of requests that Microsoft Graph currently supports in the batch endpoint is 20 requests.  Should Microsoft change this value, the <code>max_batch_requests</code>  parameter should be updated in the app.config file.
 
-* Added "max retries" capability to Microsoft Graph API requests. When making many Microsoft Graph API calls, the Microsoft Graph server may throttle the client and return  503 (server unavailable)  or 429 (too many requests) status codes. When this happens the server, may send back a "Retry-After" response header indicating to the client how long to wait and retry sending the request. If this header is not sent to the client, parameters can be set to indicate how long to wait and retry sending the request again.   These parameters are settable in the app.config file:
+* Added "max retries" capability to Microsoft Graph API requests. When making many Microsoft Graph API calls, the Microsoft Graph server may throttle the client and return  503 (server unavailable)  or 429 (too many requests) status codes. When this happens, the server may send back a "Retry-After" response header indicating to the client how long to wait and retry sending the request. If this header is not sent to the client, parameters can be set to indicate how long to wait and retry sending the request again.   These parameters are settable in the app.config file:
   * max_retries_total
   * max_retries_backoff_factor
 
-* Added capability to specify a subset of email addresses to search. When querying messages of <code>all</code> tenant email addresses, the user can specify a subset of all user mailboxes to search.  For example: enter <code>all:r</code> in the <code>Email Address</code> select field of the <code>Example: Exchange Online Query Messages</code> activity popup menu  to specify searching all users with PrincipalUserName starting with the letter "r".  Enter <code>all:mc</code> to search all users starting with "mc".  
+* Added capability to specify a subset of email addresses to search. When querying messages of <code>all</code> tenant email addresses, the user can specify a subset of all user mailboxes to search.  For example, enter <code>all:r</code> in the <code>Email Address</code> select field of the <code>Example: Exchange Online Query Messages</code> activity popup menu  to specify searching all users with PrincipalUserName starting with the letter "r".  Enter <code>all:mc</code> to search all users starting with "mc".  
 
 * The <code>Example: Exchange Online Query Messages</code> and <code>Example: Exchange Online Delete Messages from Query Results</code> menu item rules and workflows allow the user to multi-select where query results are displayed: 
   * Exchange Online data table
   * Incident note
   * Incident attachment 
 
-**NOTE** Existing users running Exchange Online functions on an integrations server, should save the [fn_exchange_online] section of their app.config file to another file and delete that section from the app.config file before installing the new version, as this section has changed.  After installation get the new configuration by running:
+**NOTE** Existing users running Exchange Online functions on an integration server, should save the [fn_exchange_online] section of their app.config file to another file and delete that section from the app.config file before installing the new version, as this section has changed.  After installation, run the following command to obtain the new configuration:
 ```
   $ resilient-circuits config -u -l fn-microsoft-exchange-online
   ```
-Edit the required configuration setting as described in the [Integration Server](#integration-server) section below.
+Edit the required configuration setting as described in the [Integration Server](#integration-server) section.
 
 
 ### v1.0.0
@@ -60,17 +60,17 @@ Edit the required configuration setting as described in the [Integration Server]
   Provide a high-level description of the function itself and its remote software or application.
   The text below is parsed from the "description" and "long_description" attributes in the setup.py file
 -->
-Resilient Integration with Exchange Online provides the capability to access and manipulate Microsoft Exchange Online (Office 365 in the cloud) messages from the IBM Resilient SOAR Platform.  The app uses Microsoft Graph API to access the data in Office 365.  Included in the integrations are the following capabilities:
+Microsoft Exchange Online Functions for IBM Resilient provides the capability to access and manipulate Microsoft Exchange Online messages from the IBM Resilient SOAR Platform.  The integration uses Microsoft Graph API to access the data in Microsoft 365.  Included in the integration are the following capabilities:
 
 * Get the user profile of the specified email address in JSON format.
 
-* Get a specified message and and return the results in JSON format.
+* Get a specified message and return the results in JSON format.
 
 * Get a specified message in .eml format and write as an incident attachment.
 
 * Move a message to a specified "Well-known" Outlook folder.
 
-* Send an message: from the specified email address to the specified recipients with specified message subject and body text.
+* Send a message from the specified email address to the specified recipients with specified message subject and body text.
 
 * Query messages of a single user, a list of users, or the whole tenant and return a list of messages matching the criteria: 
   * message sender
@@ -99,7 +99,7 @@ The integration contains the following functions:
   List any Requirements 
 -->
 * Resilient platform >= `v35.0.0`
-* An Integration Server running:
+* If not using an App Host, an integration server running:
   *  `resilient_circuits>=31.0.0`
   *  `resilient_lib>=35.0.0`
 
@@ -128,7 +128,7 @@ The integration contains the following functions:
 
   NOTE: Not all permissions are needed for each function, as explained in the Exchange Online Integration User Guide.
 
-  To set up Microsoft Azure permissions see section: [Microsoft Azure App Configuration](#microsoft-azure-app-configuration)
+  To set up Microsoft Azure permissions see section, [Microsoft Azure App Configuration](#microsoft-azure-app-configuration).
 
 ---
 
@@ -141,7 +141,7 @@ The app .zip file is in a container format and requires a Resilient platform con
 The app tar.gz file is an extension format and requires a Resilient platform configured with an integration server.
 
 ### App Host
-For a complete guide on how to configure App Host for Resilient and install apps, please reference the Resilient Apps [Knowledge Center](https://www.ibm.com/support/knowledgecenter/SSBRUQ).
+For a complete guide on how to configure App Host and install apps in the Resilient platform, please reference the Resilient Apps topic in the Knowledge Center. [Knowledge Center](https://www.ibm.com/support/knowledgecenter/SSBRUQ).
 
 All the components for running this integration in a container already exist when using the App Host app.
 
@@ -154,7 +154,7 @@ To install,
   | Config | Required | Example | Description |
   | ------ | :------: | ------- | ----------- |
   | **microsoft_graph_token_url** | Yes | `https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token` | *Microsoft Graph URL endpoint for acquiring access token* |
-  | **microsoft_graph_url** | Yes | `https://graph.microsoft.com/v1.0` | *Microsoft Graph base URL * |
+  | **microsoft_graph_url** | Yes | `https://graph.microsoft.com/v1.0` | *Microsoft Graph base URL* |
   | **tenant_id** | Yes | `xxx` | *Microsoft Azure Tenant ID* |
   | **client_id** | Yes | `xxx` | *Microsoft Azure Client ID (Application ID)* |
   | **client_secret** | Yes | `xxx` | *Microsoft Azure Client Secret* |
@@ -220,7 +220,7 @@ To install,
   | Config | Required | Example | Description |
   | ------ | :------: | ------- | ----------- |
   | **microsoft_graph_token_url** | Yes | `https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token` | *Microsoft Graph URL endpoint for acquiring access token* |
-  | **microsoft_graph_url** | Yes | `https://graph.microsoft.com/v1.0` | *Microsoft Graph base URL * |
+  | **microsoft_graph_url** | Yes | `https://graph.microsoft.com/v1.0` | *Microsoft Graph base URL* |
   | **tenant_id** | Yes | `xxx` | *Microsoft Azure Tenant ID* |
   | **client_id** | Yes | `xxx` | *Microsoft Azure Client ID (Application ID)* |
   | **client_secret** | Yes | `xxx` | *Microsoft Azure Client Secret* |
@@ -269,7 +269,7 @@ The results of any Exchange Online message query are displayed in this data tabl
 To run the Resilient Exchange Online integration, you must first register the application on Microsoft Azure portal.  The tenant ID, client ID and the client secret that are defined in the fn_exchange_online section of the app.config are assigned by Azure when the application is registered.  
 
 ### App Registration
-To register the Resilient integration application click "App registrations" in Manage section of your Azure Active Directory domain account.  Then click the "New Registration" button as depicted in the image below.
+To register the Resilient integration, click "App registrations" in Manage section of your Azure Active Directory domain account.  Then click the "New Registration" button as depicted in the image below.
 
 ![screenshot: custom_layouts](./doc/screenshots/MS-Azure-Register-New-App.png)
 
