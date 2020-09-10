@@ -1,0 +1,8 @@
+{
+  "binary": "/Users/sean.ogormanibm.com/.pyenv/versions/ssltest/bin/pyre.bin",
+  "source_directories": [
+    "."
+  ],
+  "taint_models_path": "/Users/sean.ogormanibm.com/.pyenv/versions/3.6.9/envs/ssltest/lib/pyre_check/taint/",
+  "typeshed": "/Users/sean.ogormanibm.com/.pyenv/versions/3.6.9/envs/ssltest/lib/pyre_check/typeshed/"
+}
