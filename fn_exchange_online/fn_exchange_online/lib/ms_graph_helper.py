@@ -791,6 +791,8 @@ class MSGraphHelper(object):
             filter_query = self.append_query_to_query_url(filter_query, has_attachments_query)
 
         if message_subject:
+            # OData query requires single quotes be replaced by 2 single quotes
+            message_subject = message_subject.replace("'", "''")
             subject_query = u"(contains(subject,'{0}'))".format(message_subject)
             filter_query = self.append_query_to_query_url(filter_query, subject_query)
 
