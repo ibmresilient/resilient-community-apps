@@ -83,12 +83,15 @@ class FunctionComponent(ResilientComponent):
                                       "exo_query_output_format": query_output_format,
                                       "delete_results": delete_results}
 
+            results = rp.done(True, delete_message_results)
+
+            metrics = results.get("metrics")
+            execution_time_ms = metrics.get("execution_time_ms")
+
             # Write delete messages from query results to an attachment or note as specified by the user
             # in activity field.
             # Writing results to the data table takes place in the post processor script.
-            self.write_results_to_note_or_attachment(delete_message_results)
-
-            results = rp.done(True, delete_message_results)
+            self.write_results_to_note_or_attachment(delete_message_results, execution_time_ms)
 
             yield StatusMessage(u"Returning Delete Messages From Query Results results.")
 
@@ -98,7 +101,7 @@ class FunctionComponent(ResilientComponent):
             LOG.error(err)
             yield FunctionError(err)
 
-    def write_results_to_note_or_attachment(self, delete_message_results):
+    def write_results_to_note_or_attachment(self, delete_message_results, execution_time_ms):
         """
         Write the output results of a delete messages from query results to an incident note and/or an
         incident attachment.  Results that go to the Exchange Online data table are written in the
@@ -118,28 +121,36 @@ class FunctionComponent(ResilientComponent):
             incident_id = delete_message_results.get('incident_id')
             delete_results = delete_message_results.get('delete_results')
 
-            note = u""
+            note = []
             total_deleted = 0
             for user in delete_results:
                 email_address = user.get('email_address')
                 number_deleted = len(user.get('deleted_list'))
 
                 total_deleted = total_deleted + number_deleted
-                number_not_deleted = len(user.get('not_deleted_list'))
-                note = u"{0} {1}: {2} deleted, {3} not found.\n".format(note, email_address, number_deleted,
-                                                                        number_not_deleted)
+                if number_deleted > 0:
+                    note.append(u"    {0}:  {1}<br>".format(email_address, number_deleted))
+
             # Put the total deleted messages number in the note.
-            note = "Exchange Online Delete Message from Query Results:\n\nTotal messages deleted: {0}\n\n{1}".format(
-                    total_deleted, note)
+            note.insert(0, u"<b>Exchange Online Delete Message from Query Results:<br><br>Total messages deleted:</b> {0}<br>".format(
+                        total_deleted))
 
-            if "Incident attachment" in output_format:
-                LOG.info('Writing query results to incident attachment.')
-                create_incident_attachment(self.rest_client(), incident_id, note, 'exo-delete-results')
+            # Add the query execution time
+            note.append(u"<b>Deletion execution time:</b>  {0} seconds.".format(execution_time_ms/1000))
+
+            # Join all of the note lines together
+            complete_note = ''.join(note)
+
             if "Incident note" in output_format:
-                note = note.replace('\n', '<br>')
-                LOG.info('Writing query results to incident note.')
-                create_incident_comment(self.rest_client(), incident_id, note)
+                LOG.info('Writing deletion results to incident note.')
+                create_incident_comment(self.rest_client(), incident_id, complete_note)
+            if "Incident attachment" in output_format:
+                complete_note = complete_note.replace('<br>', '\n')
+                complete_note = complete_note.replace('<b>', '')
+                complete_note = complete_note.replace('</b>', '')
 
+                LOG.info('Writing deletion results to incident attachment.')
+                create_incident_attachment(self.rest_client(), incident_id, complete_note, 'exo-delete-results')
             return True
 
         except Exception as err:
