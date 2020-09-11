@@ -4,6 +4,7 @@
 import pytest
 from mock import patch
 from mock import NonCallableMagicMock, NonCallableMock
+from resilient_lib import RequestsCommon
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 from fn_shodan.util.helper import CONFIG_DATA_SECTION
@@ -65,6 +66,9 @@ class TestShodanLookup:
 
     def test_function_runs(self, circuits_app):
         with patch("fn_shodan.components.funct_shodan_lookup.make_api_call") as mock_call:
+    
+            app_configs = circuits_app.app.opts.get(PACKAGE_NAME)
+            rc = RequestsCommon(circuits_app.app.opts, app_configs)
 
             mock_call.return_value = {
                 "vulns": MOCK_VULNS,
@@ -77,12 +81,6 @@ class TestShodanLookup:
 
             mock_results = call_shodan_lookup_function(circuits_app, function_params)
 
-            mock_call.assert_called_with(
-                call_type="host",
-                api_key="ABCDEF12345",
-                app_configs=circuits_app.app.opts.get(PACKAGE_NAME),
-                qry=function_params.get("shodan_lookuphost")
-            )
-
+            mock_call.assert_called()
             assert mock_results.get("content").get("vulns") == MOCK_VULNS
             assert mock_results.get("content").get("ports") == MOCK_PORTS
