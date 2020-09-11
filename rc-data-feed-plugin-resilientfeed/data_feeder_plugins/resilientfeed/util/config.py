@@ -22,7 +22,7 @@ org=
 cafile=false
 # identify a sqlite db file to retain mapping between resilient instances.
 sqlite_sync_file=/path/to/file
-# postgresql db connections
+# postgresql db connection if sqlite_sync_file is not used
 postgresql_connect=Driver={PostresSQL Driver};Server=127.0.0.1;DB=<db>;Port=5432;connectTimeout=0
 postgresql_uid=<acct>
 postgresql_pwd=<pwd>

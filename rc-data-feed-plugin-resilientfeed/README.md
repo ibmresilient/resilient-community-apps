@@ -8,6 +8,7 @@ Refer to the documentation on the Data Feed extension for use cases supported an
 * Transfer incident data between two Organizations within the same Resilient instance.
 * Transfer incident data to more than one Resilient instance at the same time.
 * Synchronized incident data objects include: artifacts, attachments, notes, milestones, tasks and datatables.
+* Choice of databases too retain synchronization information: SQLite or PostreSQL
 
 # License
 
@@ -71,7 +72,11 @@ Note: Perform an export and reimport of these customizations into the target Res
   org=
   cafile=false
   # identify a sqlite db file to retain mapping between resilient instances.
-  db_sync_file=/path/to/file
+  sqlite_sync_file=/path/to/file
+  # postgresql db connection if sqlite_sync_file is not used
+  postgresql_connect=Driver={PostresSQL Driver};Server=127.0.0.1;DB=<db>;Port=5432;connectTimeout=0
+  postgresql_uid=<acct>
+  postgresql_pwd=<pwd>
   # optional semicolon separated list of fields to allow incidents to sync. ex. incident_type_ids in ['Phishing', 'Malware'];custom_field = "a";description ~ malicious
   #matching_incident_fields=
   # when using matching_incident_fields, specify whether 'all' or 'any' field needs to match to accept
@@ -92,7 +97,10 @@ The following configuration items are supported:
 | :-- | :----- | :---------- |
 | class | ResilientFeed | Indicates that the section is for an Resilient synchronization. |
 | host, #proxy_host, api_key_id, api_key_secret, #email,  #password, port, org, cafile | | Specify the connection values similar to the `[resilient]` section for connection to the target resilient |
-| db_sync_file | /path/to/file | Absolute path to a file to retain mapping information between the two Resilient instances |
+| sqlite_sync_file | /path/to/file | Absolute path to a file to retain mapping information between the two Resilient instance. Comment out if using PostgreSQL |
+| postgresql_connect | Driver={PostresSQL Driver};Server=127.0.0.1; DB=yourDB;Port=5432; connectTimeout=0 | connection string when using PostgreSQL. Comment out otherwise. |
+| postgresql_uid | postgeSQL_Acct| Your PostgreSQL account |
+| postgresql_pwd | postgeSQL_Acct | Your PostgreSQL password |
 | matching_incident_fields | plan_status == 'C'; custom_field > 5 | Optional semicolon separated list of comparison tuples to determine the criteria for synchronizing an incident and it's tasks, artifacts, etc. Use the syntax: \<field\> \<operator\> \<value\>. Operator may be one of: ~, ==, >=, <=, <, >, in, 'not in', is, and 'is not'. 
 Use `~` for `in` when searching richtext fields.
 `None` can be used for \<value\>. Make sure to separate each \<field\> \<operator\> \<value\> with spaces. |
@@ -148,14 +156,14 @@ Unexpected behaviors can occur and are detailed here.
 * Attachments cannot be updated.
 
 ## SQLite Database
-A sqlite database is used to maintain a mapping of incident data between the source and target Resilient instances. Two tables are maintained for this purpose:
+A sqlite database can be used to maintain a mapping of incident data between the source and target Resilient instances. Two tables are maintained for this purpose:
 
 * data_feeder_sync - contains specific ids for source and target instances and status. The fields are as follows:
 
 | type_name | org1 | org1_inc_id | org1_type_id | org2 | org2_inc_id | org2_type_id | last_sync | status |
 | --------- | ---- | ----------- | ------------ | ---- | ----------- | ------------ | --------- | ----- |
 
-Status can be one of `active`, `filtered`, `deleted`.
+Status can be one of `active`, `filtered`, `deleted` or `bypassed`.
 
 * data_feeder_retry - failures to create a data element are retried when the parent element is synchronized. For example, this is needed when tasks appear for synchronization before the incident. Once the incident is synchronized, all the dependent elements will be retried. The schema is as follows:
 
@@ -170,6 +178,12 @@ Use the following SQL statements for problem diagnostics:
 * select * from data_feeder_retry where org2=<target organization>
 
 ![DBeaver](snapshots/db_view.png "Database view")
+
+## PostgreSQL Database
+Like the SQLite database, the same table structures are created and maintained in PostgreSQL. 
+
+Use the SQLite DB if performing a one-time or limited-timeframe synchronization. Use PostgreSQL for continuously synchronization or when using App Host containers.
+
 
 ## Troubleshooting Tips
 Synchronization could fail for the following reasons: 

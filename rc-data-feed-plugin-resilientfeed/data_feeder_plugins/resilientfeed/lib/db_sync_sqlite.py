@@ -19,7 +19,7 @@ class SQLiteDBSync(DBSyncInterface):
         :param org_id:
         :param sqlite_file:
         """
-        super("SQLiteDBSync").__init__("datetime('now')")
+        super(SQLiteDBSync, self).__init__("datetime('now')")
 
         self.org_id = org_id
         self.log = logging.getLogger(__name__)
