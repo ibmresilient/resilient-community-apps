@@ -9,7 +9,8 @@ import mimetypes
 import os
 import resilient
 import tempfile
-from data_feeder_plugins.resilientfeed.lib.db_sync import DBSyncFactory
+from data_feeder_plugins.resilientfeed.lib.db_sync_sqlite import SQLiteDBSync
+from data_feeder_plugins.resilientfeed.lib.db_sync_postgres import PostgresDBSync
 from cachetools import cached, TTLCache
 from resilient_lib import IntegrationError, get_file_attachment, write_file_attachment
 
@@ -28,6 +29,23 @@ URI_LOOKUP_BY_TYPE = {
 }
 
 LOG = logging.getLogger(__name__)
+
+class DBSyncFactory:
+    @staticmethod
+    def get_dbsync(org_id, sqllite_file, db_connection, db_user, db_pwd):
+        """
+        build the object associated the type of sync data source
+        If in the future another type of dbis supported, this factory can be modified
+        :param org_id:
+        :param sqllite_file:
+        :return: object for sync datasource
+        """
+        if sqllite_file:
+            return SQLiteDBSync(org_id, sqllite_file)
+        else:
+            return PostgresDBSync(org_id, db_connection, db_user, db_pwd)
+
+        return None
 
 class Resilient(object):
     """
@@ -65,7 +83,12 @@ class Resilient(object):
         # get the class to maintain the reference map: either datatable or sqlite
         # only needed for target Resilient
         if not rest_client_helper:
-            self.dbsync = DBSyncFactory.get_dbsync(self.rest_client.org_id, self.opts.get("db_sync_file", None))
+            self.dbsync = DBSyncFactory.get_dbsync(self.rest_client.org_id,
+                                                   self.opts.get("sqlite_sync_file", None),
+                                                   self.opts.get("postgresql_connect", None),
+                                                   self.opts.get("postgresql_uid", None),
+                                                   self.opts.get("postgresql_pwd", None)
+                                                   )
             if not self.dbsync:
                 raise IntegrationError("Unable to create DBSync object")
 
@@ -205,15 +228,17 @@ class Resilient(object):
             except IntegrationError as err:
                 LOG.warning(str(err))
                 new_type_id = None
-                if retry_count < RETRY_MAX:
-                    LOG.warning('queued to retry %s:%s->%s to %s:%s', type_name, orig_inc_id, orig_type_id,
-                                self.rest_client.org_id, sync_inc_id)
-                    self.dbsync.create_retry_row(orig_org_id, orig_inc_id, type_name, orig_type_id,
-                                                 type_name, None,
-                                                 sync_inc_id, payload, retry_count+1)
-                else:
-                    LOG.error("Max retry exceeded for type: %s %s->%s:%s to %s payload %s", type_name,
-                              orig_org_id, orig_inc_id, orig_type_id, sync_inc_id, payload)
+                if type_name != "incident":
+                    if retry_count < RETRY_MAX:
+                        LOG.warning('queued to retry %s:%s->%s to %s:%s', type_name, orig_inc_id, orig_type_id,
+                                    self.rest_client.org_id, sync_inc_id)
+                        self.dbsync.create_retry_row(orig_org_id, orig_inc_id, "task" if sync_task_id else "incident",
+                                                     sync_task_id if sync_task_id else orig_inc_id,
+                                                     type_name, orig_type_id,
+                                                     sync_inc_id, payload, retry_count+1)
+                    else:
+                        LOG.error("Max retry exceeded for type: %s %s->%s:%s to %s payload %s",
+                                  type_name, orig_org_id, orig_inc_id, orig_type_id, sync_inc_id, payload)
         else:
             # all types to be created
             # make sure the incident already exists for child objects
@@ -230,14 +255,14 @@ class Resilient(object):
                 # message destination
                 if sync_inc_id is None:
                     if retry_count < RETRY_MAX:
-                        self.dbsync.create_retry_row(orig_org_id, orig_inc_id, 'incident', orig_type_id,
-                                                     mapped_type_name, orig_type_id,
-                                                     None, payload, retry_count+1)
                         LOG.warning('Incident not found. Queued to retry %s:%s->%s to %s', type_name, orig_inc_id, orig_type_id,
                                     self.rest_client.org_id)
+                        self.dbsync.create_retry_row(orig_org_id, orig_inc_id, 'incident', orig_inc_id,
+                                                     mapped_type_name, orig_type_id,
+                                                     None, payload, retry_count+1)
                     else:
-                        LOG.error("Max retry exceeded for type: %s %s->%s:%s to %s payload %s", type_name,
-                                  orig_org_id, orig_inc_id, orig_type_id, sync_inc_id, payload)
+                        LOG.error("Max retry exceeded for type: %s %s->%s:%s to %s payload %s",
+                                  type_name, orig_org_id, orig_inc_id, orig_type_id, sync_inc_id, payload)
 
                     return None
 
@@ -315,15 +340,17 @@ class Resilient(object):
                                         sync_inc_id, new_type_id, 'active')
         except (IntegrationError, Exception):
             new_type_id = None
-            if retry_count < RETRY_MAX:
-                LOG.warning('queued to retry %s:%s->%s to %s:%s', type_name, orig_inc_id, orig_type_id,
-                            self.rest_client.org_id, sync_inc_id)
-                self.dbsync.create_retry_row(orig_org_id, orig_inc_id, type_name, orig_type_id,
-                                             type_name, None,
-                                             sync_inc_id, payload, retry_count+1)
-            else:
-                LOG.error("Max retry exceeded for type: %s %s->%s:%s to %s payload %s", type_name,
-                          orig_org_id, orig_inc_id, orig_type_id, sync_inc_id, payload)
+            # can't requeue incidents as nothing triggers a retry
+            if type_name != "incident":
+                if retry_count < RETRY_MAX:
+                    LOG.warning('queued to retry %s:%s->%s to %s:%s', type_name, orig_inc_id, orig_type_id,
+                                self.rest_client.org_id, sync_inc_id)
+                    self.dbsync.create_retry_row(orig_org_id, orig_inc_id, "incident", orig_inc_id,
+                                                 type_name, orig_type_id,
+                                                 sync_inc_id, payload, retry_count+1)
+                else:
+                    LOG.error("Max retry exceeded for type: %s %s->%s:%s to %s payload %s",
+                              type_name, orig_org_id, orig_inc_id, orig_type_id, sync_inc_id, payload)
 
 
         return sync_inc_id, new_type_id
@@ -512,12 +539,17 @@ class Resilient(object):
         # is this a task based attachment?
         if payload.get("task_id", None):
             src_task_id = payload.get("task_id")
-            sync_inc_id, dst_task_id, sync_state = self.dbsync.find_sync_row(orig_org_id, orig_inc_id,
-                                                                             "task", src_task_id)
+            _, dst_task_id, sync_state = self.dbsync.find_sync_row(orig_org_id, orig_inc_id,
+                                                                   "task", src_task_id)
             # if the task doesn't exist, the attachment will be requeued
             if not dst_task_id:
-                raise IntegrationError("{}:{}->{} for attachment id '{}' does not exist".format(type_name, orig_inc_id,
-                                                                                                src_task_id, orig_type_id))
+                LOG.warning("task:{}->{} for attachment id '{}' does not exist, queuing".format(orig_inc_id,
+                                                                                                src_task_id,
+                                                                                                orig_type_id))
+                self.dbsync.create_retry_row(orig_org_id, orig_inc_id, "task", src_task_id,
+                                             type_name, orig_type_id,
+                                             sync_inc_id, payload, 1)
+                return
         else:
             # get the target attachment, if it exists
             _, sync_type_id, _ = self.dbsync.find_sync_row(orig_org_id, orig_inc_id,
@@ -525,6 +557,14 @@ class Resilient(object):
             # attachments cannot be updated
             if sync_type_id:
                 return
+
+        # incident missing?
+        if not sync_inc_id:
+            self.dbsync.create_retry_row(orig_org_id, orig_inc_id, "task" if src_task_id else "incident",
+                                         src_task_id if src_task_id else orig_inc_id,
+                                         type_name, orig_type_id,
+                                         None, payload, 1)
+            return
 
         # read the attachment from the source Resilient
         attachment_contents = get_file_attachment(src_rest_client, orig_inc_id, attachment_id=src_attachment_id,
@@ -559,7 +599,7 @@ class Resilient(object):
                      self.rest_client.org_id, sync_inc_id, new_type_id)
         else:
             LOG.error('error adding %s:%s->%s to %s:%s', type_name, orig_inc_id, orig_type_id,
-            self.rest_client.org_id, sync_inc_id)
+                      self.rest_client.org_id, sync_inc_id)
 
     def write_artifact_file(self, file_name, datastream, incident_id, payload):
         """

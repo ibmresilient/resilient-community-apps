@@ -34,7 +34,6 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
         super(ResilientFeedDestination, self).__init__()
         self.options = options
 
-        validate_fields(['db_sync_file'], options)
         self.resilient_source = Resilient(options, rest_client_helper)
         self.resilient_target = Resilient(options, None)
 
