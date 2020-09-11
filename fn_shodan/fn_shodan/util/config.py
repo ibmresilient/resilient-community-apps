@@ -12,7 +12,7 @@ def config_section_data():
 
     config_data = u"""[fn_shodan]
 shodan_apikey=<your-api-key>
-http_proxy=
-https_proxy=
+#http_proxy=
+#https_proxy=
 """
     return config_data
