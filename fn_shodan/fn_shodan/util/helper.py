@@ -25,35 +25,12 @@ def handle_error(reason):
     }
 
 
-def get_proxies(app_configs):
-    """
-    Function that checks if 'http_proxy' or 'https_proxy' is
-    defined in app_configs and returns a dictionary if they
-    are defined else returns None
-
-    :param app_configs: The app_configs for fn_shodan
-    :return: A dict with the http and https proxies
-    :rtype: dict
-    """
-
-    proxies = None
-    http_proxy = app_configs.get("http_proxy", None)
-    https_proxy = app_configs.get("https_proxy", None)
-
-    if http_proxy or https_proxy:
-        proxies = {
-            "http": http_proxy,
-            "https": https_proxy
-        }
-
-    return proxies
-
-
-def make_api_call(call_type, api_key, app_configs, qry=None):
+def make_api_call(call_type, rc, api_key, app_configs, qry=None):
     """
     Function that makes the api call to Shodan.io
 
     :param call_type: A string, either 'host', 'search' or 'info'
+    :param rc: resilient_lib.RequestsCommon object
     :param api_key: The API Key to Shodan.io
     :param app_configs: The app_configs for fn_shodan. Used to get proxies
     :param qry: The query to search for. For 'host' it is an IP Address. For 'search' it is a search query identical syntax to the Shodan.io website
@@ -65,7 +42,7 @@ def make_api_call(call_type, api_key, app_configs, qry=None):
 
     api = shodan.Shodan(
         key=api_key,
-        proxies=get_proxies(app_configs)
+        proxies=rc.get_proxies()
     )
 
     try:

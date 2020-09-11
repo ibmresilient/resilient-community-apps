@@ -7,7 +7,7 @@ Usage: resilient-circuits selftest -l fn_shodan
 """
 
 import logging
-from resilient_lib import validate_fields, IntegrationError
+from resilient_lib import validate_fields, IntegrationError, RequestsCommon
 from fn_shodan.util.helper import CONFIG_DATA_SECTION, make_api_call, format_dict
 
 
@@ -29,6 +29,7 @@ def selftest_function(opts):
     Suggested return values are be unimplemented, success, or failure.
     """
     app_configs = opts.get(CONFIG_DATA_SECTION, {})
+    rc = RequestsCommon(opts, app_configs)
 
     try:
         # Get and validate app configs
@@ -37,6 +38,7 @@ def selftest_function(opts):
         # Execute api call
         res = make_api_call(
             call_type="info",
+            rc=rc,
             api_key=valid_app_configs.get("shodan_apikey"),
             app_configs=valid_app_configs
         )

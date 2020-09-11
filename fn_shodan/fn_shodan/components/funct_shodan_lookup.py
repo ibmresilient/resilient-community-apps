@@ -6,7 +6,7 @@
 import logging
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import ResultPayload, validate_fields
+from resilient_lib import ResultPayload, validate_fields, RequestsCommon
 from fn_shodan.util.helper import CONFIG_DATA_SECTION, make_api_call
 
 PACKAGE_NAME = CONFIG_DATA_SECTION
@@ -31,6 +31,7 @@ class FunctionComponent(ResilientComponent):
         try:
 
             log = logging.getLogger(__name__)
+            rc = RequestsCommon(self.opts, self.options)
             rp = ResultPayload(PACKAGE_NAME, **kwargs)
 
             # Get + validate the app.config parameters:
@@ -45,6 +46,7 @@ class FunctionComponent(ResilientComponent):
 
             res = make_api_call(
                 call_type="host",
+                rc=rc,
                 api_key=app_configs.get("shodan_apikey"),
                 app_configs=app_configs,
                 qry=fn_inputs.get("shodan_lookuphost")
