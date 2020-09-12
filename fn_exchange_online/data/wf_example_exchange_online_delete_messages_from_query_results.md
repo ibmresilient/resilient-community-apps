@@ -31,7 +31,7 @@ inputs.exo_message_body         = inputs.exo_message_body         if rule.proper
 inputs.exo_start_date           = inputs.exo_start_date           if rule.properties.exo_start_date           is None else rule.properties.exo_start_date
 inputs.exo_end_date             = inputs.exo_end_date             if rule.properties.exo_end_date             is None else rule.properties.exo_end_date
 inputs.exo_has_attachments      = inputs.exo_has_attachments      if rule.properties.exo_has_attachments      is None else rule.properties.exo_has_attachments
-inputs.exo_query_output         = inputs.exo_query_output         if rule.properties.exo_query_output         is None else rule.properties.exo_query_output
+inputs.exo_query_output_format  = inputs.exo_query_output_format  if rule.properties.exo_query_output_format  is None else rule.properties.exo_query_output_format
 ```
 
 ### Post-Processing Script

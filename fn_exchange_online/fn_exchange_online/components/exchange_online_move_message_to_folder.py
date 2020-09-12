@@ -76,7 +76,9 @@ class FunctionComponent(ResilientComponent):
             if response.status_code == 201:
                 success = True
                 new_message_id = response.json().get('id')
-                response_json = {'new_message_id': new_message_id}
+                new_web_link = response.json().get('webLink')
+                response_json = {'new_message_id': new_message_id,
+                                 'new_web_link': new_web_link}
             else:
                 success = False
                 response_json = response.json()
