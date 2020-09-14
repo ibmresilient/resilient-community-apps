@@ -91,8 +91,10 @@ class FunctionComponent(ResilientComponent):
                 result["case_files"] = case_files["casefiles"]
                 result["num_of_casefiles"] = len(case_files["casefiles"])
             else:
-                content = "Search query returned no results."
+                content = "Search query returned no results matching '{}'".format(xforce_query)
                 result = rp.done(True, content)
+                # backwards compatibility
+                result["num_of_casefiles"] = 0
 
             yield StatusMessage("Finished function; Success:"+str(result['success']))
 
