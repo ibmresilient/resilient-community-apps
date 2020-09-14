@@ -23,7 +23,7 @@ def selftest_function(opts):
     options = opts.get("fn_xforce", {})
 
     # check that an API key, password, and base URL are provided
-    validate_fields([{'name': 'xforce_apikey', 'placeholder': ' <YOUR_API_KEY>'}, {'name': 'xforce_password', 'placeholder': '<YOUR_API_PASSWORD>'}, 'xforce_baseurl'], options)
+    validate_fields([{'name': 'xforce_apikey', 'placeholder': '<YOUR_API_KEY>'}, {'name': 'xforce_password', 'placeholder': '<YOUR_API_PASSWORD>'}, 'xforce_baseurl'], options)
 
     # set API key, password, and base URL
     XFORCE_API_KEY = options['xforce_apikey']
