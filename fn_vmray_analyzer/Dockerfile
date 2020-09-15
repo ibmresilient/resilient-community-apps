@@ -4,8 +4,12 @@ FROM registry.access.redhat.com/ubi8/python-36:latest
 # rc-data-feeder will build plugins from a base image
 #FROM resilient/rc-data-feeder-base
 
-ARG APPLICATION=fn_mxtoolbox
+ARG APPLICATION=fn_vmray_analyzer
 ARG RES_CIRCUITS_VERSION=37.0
+
+# Environment variable for any app to check if running in a container
+ARG APP_HOST_CONTAINER=1
+ENV APP_HOST_CONTAINER=${APP_HOST_CONTAINER}
 
 # update to latest packages, user 0 for root privilege
 USER 0
