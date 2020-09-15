@@ -2,8 +2,10 @@
 
 # Title:         mirror-images.sh
 # Description:   Facilitates the transfer of a number of named images from a source registry to a destination one
-
-# Version:       1.0.0
+# Version:       1.0.1
+# Release notes
+# 1.0.0 Initial Release
+# 1.0.1 Enhancement for local registries with podman using --tls-verify flag
 set -x
 
 # v1: At a high level; with this script we want to:
@@ -93,7 +95,12 @@ while IFS='' read -r image || [[ -n "$image" ]]; do
     echo "Image tagged; Pushing now to destination registry: $destination_registry"
 
     # Push our newly tagged image to the destination
+    if [ $container_engine == podman ]
+    then
+    $container_engine push --tls-verify=false "$destination_registry/$REGISTRY_ORG/$image"
+    else
     $container_engine push "$destination_registry/$REGISTRY_ORG/$image"
+    fi
 
     # After upload, check the second conf file to determine if this image should be removed
     if grep -Fxq $image $IMAGES_TO_PRESERVE_LOCALLY
