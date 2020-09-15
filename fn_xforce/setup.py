@@ -11,8 +11,10 @@ setup(
     author_email='support@resilientsystems.com',
     url="http://ibm.biz/resilientcommunity",
     description="Resilient Circuits Components for the IBM XForce Collections API",
-    long_description="The fn_xforce integration provides the ability to query the IBM XForce Collections API."
-                     "Collections can be queried either by matching a provided search term or by Collection ID.",
+    long_description="The fn_xforce integration provides the ability to query the IBM XForce Collections API. "
+                     "Collections can be queried either by matching a provided search term or by Collection ID. "
+                     "Additionally, it is possible to query both public and private Collections. "
+                     "Information gathered from X-Force can be used for incident and artifact enrichment.",
     install_requires=[
         'resilient_circuits>=30.0.0',
         'resilient-lib>=34.0.0'
