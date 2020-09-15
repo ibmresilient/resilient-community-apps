@@ -40,7 +40,7 @@ def selftest_function(opts):
         rc = RequestsCommon()
         res = rc.execute_call_v2(
                         "get", request_string, auth=(XFORCE_API_KEY, XFORCE_PASSWORD))
-        if (res.status_code / 100) == 2:
+        if int(res.status_code / 100) == 2:
             state = "success"
             reason = "Connected to the X-Force API"
         else:
