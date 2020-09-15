@@ -4,7 +4,10 @@
 # Author:        ryan.gordon1@ibm.com
 # Description:   Facilitates the transfer of a number of named images from a source registry to a destination one
 
-# Version:       1.0.0
+# Version:       1.0.1
+# Release notes
+# 1.0.0 Initial Release
+# 1.0.1 Enhancement for local registries with podman using --tls-verify flag
 set -x
 
 # v1: At a high level; with this script we want to:
@@ -58,11 +61,11 @@ if [[ ! -z "$2" ]]; then
         echo >&2 "Script was provided with ${2} command to be used, but this command was not found."; exit 1;
     fi
 elif cmd_exists podman; then
-    # If podman exists, use that as our container engine
+    # If podman exists, use that as our default container engine
     container_engine=podman
 
 elif cmd_exists docker; then
-    # Or if docker is there and docker isin't use that
+    # Or if docker is there and docker isn't, we use that
     container_engine=docker
 else # neither of the engines were found, exit with a message
     echo >&2 "Image mirroring requires either Docker or Podman but neither were found. Aborting."; exit 1;
@@ -103,8 +106,12 @@ do
         echo "Image tagged; Pushing now to destination registry: $destination_registry"
 
         # Push our newly tagged image to the destination
+        if [ $container_engine == podman ]
+        then
+        $container_engine push --tls-verify=false "$destination_registry/$REGISTRY_ORG/$repo:$tag"
+        else
         $container_engine push "$destination_registry/$REGISTRY_ORG/$repo:$tag"
-
+        fi
         echo "Transfer completed for image $image. Now cleaning up and removing these local images: $destination_registry/$REGISTRY_ORG/$repo:$tag, $SOURCE_REGISTRY/$repo:$tag"
     
         # Delete the images locally to avoid using up all storage during transfer
