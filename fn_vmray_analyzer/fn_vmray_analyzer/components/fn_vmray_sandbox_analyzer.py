@@ -7,8 +7,7 @@ import logging
 import tempfile, time, json
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 
-from resilient_lib import validate_fields, get_file_attachment, get_file_attachment_name, RequestsCommon, build_incident_url, build_resilient_url
-
+from resilient_lib import validate_fields, get_file_attachment, get_file_attachment_name, RequestsCommon
 from fn_vmray_analyzer.util.vmrapi import VMRayAPI
 
 CONFIG_DATA_SECTION = "fn_vmray_analyzer"
@@ -138,5 +137,5 @@ class FunctionComponent(ResilientComponent):
             log.info("results: " + str(results))
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
-        except Exception:
+        except Exception as err:
             yield FunctionError()
