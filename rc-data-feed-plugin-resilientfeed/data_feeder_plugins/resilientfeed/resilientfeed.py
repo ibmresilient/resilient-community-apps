@@ -60,8 +60,9 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
 
         orig_type_id = payload.get('id', None)
         if context.is_deleted:
-            self.resilient_target.delete_type(self.resilient_source.rest_client.org_id, context.inc_id,
-                                              type_name, payload, orig_type_id, delete=self.delete_incidents)
+            type_id = self.resilient_target.delete_type(self.resilient_source.rest_client.org_id, context.inc_id,
+                                                        type_name, payload, orig_type_id, delete=self.delete_incidents)
+
             return
 
         # set up the criteria to accept incident synchronizing, if any
@@ -98,10 +99,24 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
                 LOG.debug(cleaned_payload)
 
                 # perform the creation or update in the new resilient org
-                create_list = self.resilient_target.create_update_type(self.resilient_source.rest_client.org_id, context.inc_id,
+                new_id, opr_type, create_list = self.resilient_target.create_update_type(self.resilient_source.rest_client.org_id, context.inc_id,
                                                                        type_name, cleaned_payload, orig_type_id)
 
-                LOG.debug("Objects created/updated: %s", create_list)
+                # create a note for the downstream incident when created
+                if new_id and opr_type == "created" and type_name == "incident":
+                    note = "Incident created from Org {} Incident {}".format(self.resilient_source.rest_client.org_id,
+                                                                             context.inc_id)
+                    payload = {
+                        "text": {
+                            "format": "text",
+                            "content": note
+                        }
+                    }
+                    sync_inc_id, new_type_id = self.resilient_target._create_type(new_id, None, "note", payload)
+                    if sync_inc_id:
+                        create_list.append("{}:{}".format('note', new_type_id))
+
+                LOG.debug("%s:%s %s, additional list: %s", type_name, new_id, opr_type, create_list)
             except MatchError as err:
                 LOG.info("%s on Incident %s", err, context.inc_id)
 

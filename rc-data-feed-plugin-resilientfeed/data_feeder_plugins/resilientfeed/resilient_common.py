@@ -103,7 +103,7 @@ class Resilient(object):
         :param payload:
         :param orig_type_id:
         :param delete: True|False, pertains to incident objects
-        :return: None
+        :return: type_id deleted
         """
         # determine if this is a task comment or attachment
         sync_task_id, mapped_type_name = self._map_task_note_attachment(orig_org_id, orig_inc_id, type_name, payload)
@@ -111,7 +111,7 @@ class Resilient(object):
         # todo this is current limitation in the platform
         if not sync_task_id and mapped_type_name == "taskattachment":
             LOG.info("Unable to delete task attachments: %s:%s->%s", orig_inc_id, mapped_type_name, orig_type_id)
-            return
+            return None
 
         # find the sync record, based on org, type_id and incident_id
         sync_inc_id, sync_type_id, sync_state = \
@@ -120,11 +120,11 @@ class Resilient(object):
         # do nothing if already deleted or bypassed
         if sync_state in ['deleted', 'bypassed']:
             LOG.debug("No action on %s: %s:%s->%s", sync_state, orig_inc_id, mapped_type_name, orig_type_id)
-            return
+            return None
 
         if not sync_inc_id:
             LOG.warning("Not found to delete: %s:%s->%s", orig_inc_id, mapped_type_name, orig_type_id)
-            return
+            return None
 
         uri, _ = get_url(sync_task_id or sync_inc_id, mapped_type_name, True)
         # fill in object id for delete
@@ -150,6 +150,9 @@ class Resilient(object):
                     self.dbsync.delete_incident_types(self.rest_client.org_id, sync_inc_id)
         except Exception as err:
             LOG.error(err)
+            sync_inc_id = None
+
+        return sync_inc_id
 
 
     def create_update_type(self, orig_org_id, orig_inc_id, type_name, payload, orig_type_id):
@@ -161,13 +164,12 @@ class Resilient(object):
         :param type_name:
         :param payload:
         :param orig_type_id:
-        :return: list of object Ids created
+        :return: list of object Ids created, operation ('created', 'updated'), retrylist (format: 'type_name:type_id')
         """
         id_list = []
-        new_id = self._create_update_type(orig_inc_id, orig_org_id, type_name, payload, orig_type_id)
+        new_id, opr_type = self._create_update_type(orig_inc_id, orig_org_id, type_name, payload, orig_type_id)
 
         if new_id:
-            id_list.append(new_id)      # track ids of objects created or updated
             # determine if there are any retries needed
             retry_list = self.dbsync.find_retry_rows(orig_org_id, orig_inc_id, type_name)
             # retry any object queued for retry based on a dependency
@@ -182,13 +184,13 @@ class Resilient(object):
                 LOG.info('retrying %s:%s->%s to %s:%s (%s))', orig_inc_id, retry_type_name, retry_orig_id,
                          self.rest_client.org_id, new_id, retry_count)
                 # org1_type_id, org2_inc_id, org1_dep_type_name, org1_dep_type_id, payload
-                new_type_id = self._create_update_type(orig_inc_id, orig_org_id, retry_type_name, retry_payload,
+                new_type_id, _ = self._create_update_type(orig_inc_id, orig_org_id, retry_type_name, retry_payload,
                                                        retry_orig_id, retry_count=retry_count)
 
                 if new_type_id:
-                    id_list.append(new_type_id)
+                    id_list.append("{}:{}".format(retry_type_name, new_type_id))
 
-        return id_list
+        return new_id, opr_type, id_list
 
     def _create_update_type(self, orig_inc_id, orig_org_id, type_name, payload, orig_type_id, retry_count=0):
         """
@@ -214,8 +216,10 @@ class Resilient(object):
             LOG.debug("No action on %s: %s:%s->%s", sync_state, orig_inc_id, mapped_type_name, orig_type_id)
             return None
 
+        opr_type = None
         # update operation?
         if sync_type_id and sync_inc_id != 0:
+            opr_type = "updated"
             LOG.info('updating %s:%s->%s to %s:%s->%s)', orig_inc_id, mapped_type_name, orig_type_id,
                      self.rest_client.org_id, sync_inc_id, sync_type_id)
             LOG.debug(payload)
@@ -240,6 +244,7 @@ class Resilient(object):
                         LOG.error("Max retry exceeded for type: %s %s->%s:%s to %s payload %s",
                                   type_name, orig_org_id, orig_inc_id, orig_type_id, sync_inc_id, payload)
         else:
+            opr_type = "created"
             # all types to be created
             # make sure the incident already exists for child objects
             if mapped_type_name != 'incident':
@@ -307,7 +312,7 @@ class Resilient(object):
                     self.dbsync.create_sync_row(orig_org_id, orig_inc_id, type_name, orig_type_id,
                                                 sync_inc_id, new_type_id, 'filtered')
 
-        return new_type_id
+        return new_type_id, opr_type
 
     def create_type(self, orig_org_id, orig_inc_id, orig_type_id,
                     mapped_type_name, type_name,
