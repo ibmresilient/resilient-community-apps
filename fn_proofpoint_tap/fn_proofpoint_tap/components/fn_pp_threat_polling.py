@@ -94,9 +94,8 @@ class PP_ThreatPolling(ResilientComponent):
         self.score_threshold = float(self.options.get("score_threshold")) \
             if self.options.get("score_threshold") else None
 
-        # Filter - Set types of incidents to import to Resilient
-        self.id_type_filter = self._get_type_filter(self.options.get("type_filter", None))
-
+        # Type Filters  - Set of incident type filters by name.
+        self.type_filter  = self._get_type_filter(self.options.get("type_filter", None))
         # Create a new Resilient incident from this event
         # using an optional JSON (JINJA2) template file
         threat_path = self.options.get("threat_template", self.default_path)
@@ -122,8 +121,9 @@ class PP_ThreatPolling(ResilientComponent):
 
     def _get_type_filter(self, tp_filter):
         """
-        Get set of type ids for the type_filter options.
-        :return: set of threat ids
+        Get set of filter types by name for the type_filter option.
+
+        :return: Type filter set.
         """
 
         if not tp_filter:
@@ -134,13 +134,17 @@ class PP_ThreatPolling(ResilientComponent):
             # none or "all" specified, no filtering
             return None
 
-        filters = set()
-        for typestring in type_filter.split(','):
-            incident_type_id = self._get_incident_type_id(typestring.strip())
-            if incident_type_id:
-                filters.add(incident_type_id)
+        filters_by_name = set()
 
-        return filters
+        for typestring in type_filter.split(','):
+            t_f = typestring.strip()
+
+            if t_f in TYPE_2_TYPE_ID_MAP:
+                filters_by_name.add(t_f)
+            else:
+                log.info(u"Invalid incident type filter option '{}'.".format(t_f))
+
+        return filters_by_name
 
     def main(self):
         """main entry point, instantiate polling thread"""
@@ -172,6 +176,9 @@ class PP_ThreatPolling(ResilientComponent):
                         for data in datas:
                             incident_id = None
                             threat_id, idtype = self.find_id(data)
+                            if not threat_id:
+                                log.error("Threat ID not found for ProofPoint TAP event '%s' of kind '%s'.", data, kind)
+                                continue
                             existing_incidents = self._find_resilient_incident_for_req(threat_id, idtype)
                             if len(existing_incidents) == 0:
                                 # incident doesn't already exist, create Incident data
@@ -273,6 +280,7 @@ class PP_ThreatPolling(ResilientComponent):
         """
         # Use set() to automatically avoid duplication and support disjoint filtering
         original_threat_types = set()
+
 
         # pull the threat type data from classification field
         event_classification = data.get('classification')
@@ -414,7 +422,7 @@ class PP_ThreatPolling(ResilientComponent):
         incident_type_ids = self.map_to_incident_type_ids(threat_types)
 
         # check to see if filtering is requested
-        if self.id_type_filter is None or self.id_type_filter.intersection(incident_type_ids):
+        if self.type_filter is None or self.type_filter.intersection(threat_types):
             # no filter or incident type in filter, return list
             return list(incident_type_ids)
 
@@ -535,8 +543,11 @@ class PP_ThreatPolling(ResilientComponent):
         :return: value for the chosen proofpoint field, idfield
         """
         for idfield in PROOFPOINT_ID_FIELDS:
-            if idfield in threat:
+            if idfield in threat and threat[idfield]:
+                # Return threat id a field name if field found and it has a value.
                 return threat[idfield], idfield
+
+        return None, None
 
     def _find_resilient_artifacts_for_incident(self, incident_id):
         """Return list of artifacts for the given Incident ID, else returns empty list"""
