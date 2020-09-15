@@ -78,6 +78,8 @@ class FunctionComponent(ResilientComponent):
             log.info("analysis_report_status: %s", analysis_report_status)
             log.info("sample_ids: %s", sample_ids)
 
+            sample_final_result = []
+
             if not analysis_report_status:
 
                 # VMRay client and Resilient client
@@ -116,7 +118,6 @@ class FunctionComponent(ResilientComponent):
                     time.sleep(CHECK_REPORTS_SLEEP_TIME)
                     is_samples_analysis_finished = all(vmray.check(sample_id) for sample_id in sample_ids)
 
-                sample_final_result = []
                 if is_samples_analysis_finished:
                     for sample_id in sample_ids:
                         sample_final_result.append({"sample_id": sample_id,
