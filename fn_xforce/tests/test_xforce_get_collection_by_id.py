@@ -64,9 +64,10 @@ class TestXforceGetCollectionById:
 
 
     @pytest.mark.parametrize("xforce_collection_id, expected_results", [
-        ("badcaseID", {"success": False}),
-        ("c6856123", {"success": False})
+        ("badcaseID", {"success": True}),
+        ("c6856123", {"success": True})
     ])
+    # Even no results are returned, the function is a success since there was no error code
     def test_failure(self, circuits_app, xforce_collection_id, expected_results):
         """ Test calling with sample values for the parameters """
         function_params = { 
