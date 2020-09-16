@@ -47,8 +47,12 @@ fi
 
 # Before trying to pull or push anything, check for the existance of either docker or podman
 container_engine=""
-#Set to 1 if using an insecure HTTP registry
+#Set to 1 if using an insecure HTTP registry via third argument
 insecure_registry=0
+if [ "$3" == 'insecure_registry' ]; then
+   insecure_registry=1
+fi
+
 # Users may provide a preferred container engine using arg 2, otherwise the script checks whether it can use docker or podman.    
 if [[ ! -z "$2" ]]; then
     # Ensure the user provided command is available to use 
