@@ -42,42 +42,35 @@ destination_registry=""
 # Check if string is empty using -z. For more 'help test'
 if [[ -z "$1" ]]; then
    printf '%s\n' "No destination registry provided. Registry must be provided in the form: fqdn.registry.io/ exiting"
+   printf 'Syntax: mirror-images registry.com:5000 [podman|docker] [insecure_registry]'
    exit 1
 fi
+destination_registry=$1; shift
 
-# Before trying to pull or push anything, check for the existance of either docker or podman
+# Before trying to pull or push anything, check for the existence of either docker or podman
 container_engine=""
-#Set to 1 if using an insecure HTTP registry via third argument
-insecure_registry=0
-if [ "$3" == 'insecure_registry' ]; then
-   insecure_registry=1
-fi
-
-if [ "$2" == 'insecure_registry' ]; then
-   insecure_registry=1
-fi
-
-if [ "$1" == 'insecure_registry' ]; then
-   insecure_registry=1
-fi
 
 # Users may provide a preferred container engine using arg 2, otherwise the script checks whether it can use docker or podman.
-if [[ ! -z "$2" ]]; then
+if [[ "$1" =~ "podman"|"docker" ]]; then
     # Ensure the user provided command is available to use
-    if cmd_exists $2; then
-        container_engine=$2
-    else # the user provided container engine command does not exist, exit with a message.
-        echo >&2 "Script was provided with ${2} command to be used, but this command was not found."; exit 1;
+    if cmd_exists $1; then
+        container_engine=$1; shift
     fi
-elif cmd_exists docker; then
-    # If docker exists, use that as our container engine
-    container_engine=docker
-
 elif cmd_exists podman; then
-    # Or if podman is there and docker isn't, use podman
+    # If podman exists, use that as our container engine
     container_engine=podman
+
+elif cmd_exists docker; then
+    # Or if docker is there and podman isn't, use docker
+    container_engine=docker
 else # neither of the engines were found, exit with a message
     echo >&2 "Image mirroring requires either Docker or Podman but neither were found. Aborting."; exit 1;
+fi
+
+if [[ $container_engine == "podman" && "$1" == "insecure_registry" ]]; then
+    insecure_registry=1
+else
+    insecure_registry=0
 fi
 
 # # ========================================
@@ -86,7 +79,6 @@ fi
 # #
 # # ========================================
 
-destination_registry=$1
 # Read file to gather each image name, $image represents one imagename with a version
 while IFS='' read -r image || [[ -n "$image" ]]; do
     echo "Now starting to pull image: $image"
@@ -111,9 +103,9 @@ while IFS='' read -r image || [[ -n "$image" ]]; do
     # Push our newly tagged image to the destination
     if [[ $container_engine == podman && $insecure_registry == 1 ]];
     then
-    $container_engine push --tls-verify=false "$destination_registry/$REGISTRY_ORG/$image"
+       $container_engine push --tls-verify=false "$destination_registry/$REGISTRY_ORG/$image"
     else
-    $container_engine push "$destination_registry/$REGISTRY_ORG/$image"
+       $container_engine push "$destination_registry/$REGISTRY_ORG/$image"
     fi
 
     # After upload, check the second conf file to determine if this image should be removed

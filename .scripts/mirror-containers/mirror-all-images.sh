@@ -44,34 +44,21 @@ destination_registry=""
 # Check if string is empty using -z. For more 'help test'
 if [[ -z "$1" ]]; then
    printf '%s\n' "No destination registry provided. Registry must be provided in the form: fqdn.registry.io/ exiting"
+   printf 'Syntax: mirror-all-images registry.com:5000 [podman|docker] [insecure_registry]'
    exit 1
 fi
-destination_registry=$1
+destination_registry=$1; shift
 
-cmd_exists jq || { echo >&2 "Jq is required for parsing the API call responses from Quay and was not found in the envionment."; exit 1; }
+cmd_exists jq || { echo >&2 "Jq is required for parsing the API call responses from Quay and was not found in the environment."; exit 1; }
 
 # Before trying to pull or push anything, check for the existance of either docker or podman
 container_engine=""
-#Only specify when using podman in a HTTP registry locally
-insecure_registry=0
-if [ "$3" == 'insecure_registry' ]; then
-   insecure_registry=1
-fi
 
-if [ "$2" == 'insecure_registry' ]; then
-   insecure_registry=1
-fi
-
-if [ "$1" == 'insecure_registry' ]; then
-   insecure_registry=1
-fi
 # Users may provide a preferred container engine using arg 2, otherwise the script checks whether it can use docker or podman.
-if [[ ! -z "$2" ]]; then
+if [[ "$1" =~ "podman"|"docker" ]]; then
     # Ensure the user provided command is available to use
-    if cmd_exists "${2}"; then
-        container_engine=$2
-    else # the user provided container engine command does not exist, exit with a message.
-        echo >&2 "Script was provided with ${2} command to be used, but this command was not found."; exit 1;
+    if cmd_exists "${1}"; then
+        container_engine=$1; shift
     fi
 elif cmd_exists podman; then
     # If podman exists, use that as our default container engine
@@ -82,6 +69,12 @@ elif cmd_exists docker; then
     container_engine=docker
 else # neither of the engines were found, exit with a message
     echo >&2 "Image mirroring requires either Docker or Podman but neither were found. Aborting."; exit 1;
+fi
+
+if [[ $container_engine == "podman" && "$1" == "insecure_registry" ]]; then
+    insecure_registry=1
+else
+    insecure_registry=0
 fi
 
 # # ========================================
@@ -121,9 +114,9 @@ do
         # Push our newly tagged image to the destination
         if [[ $container_engine == podman && $insecure_registry == 1 ]];
         then
-        $container_engine push --tls-verify=false "$destination_registry/$REGISTRY_ORG/$repo:$tag"
+           $container_engine push --tls-verify=false "$destination_registry/$REGISTRY_ORG/$repo:$tag"
         else
-        $container_engine push "$destination_registry/$REGISTRY_ORG/$repo:$tag"
+           $container_engine push "$destination_registry/$REGISTRY_ORG/$repo:$tag"
         fi
         echo "Transfer completed for image $image. Now cleaning up and removing these local images: $destination_registry/$REGISTRY_ORG/$repo:$tag, $SOURCE_REGISTRY/$repo:$tag"
 
