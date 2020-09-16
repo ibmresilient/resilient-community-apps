@@ -97,7 +97,7 @@ while IFS='' read -r image || [[ -n "$image" ]]; do
     echo "Image tagged; Pushing now to destination registry: $destination_registry"
 
     # Push our newly tagged image to the destination
-    if [[ $container_engine == podman && $insecure_registry == 1]];
+    if [[ $container_engine == podman && $insecure_registry == 1 ]];
     then
     $container_engine push --tls-verify=false "$destination_registry/$REGISTRY_ORG/$image"
     else
