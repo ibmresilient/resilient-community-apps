@@ -28,7 +28,7 @@ function cmd_exists() {
 ## Variables
 readonly IMAGE_REGISTRY="${SOURCE_REGISTRY_DOMAIN:-quay.io}"
 readonly REGISTRY_ORG="${SOURCE_REGISTRY_ORG:-ibmresilient}"
-# The registry we will pull images from 
+# The registry we will pull images from
 readonly SOURCE_REGISTRY="$IMAGE_REGISTRY/$REGISTRY_ORG"
 # This is an exposed cred; the cred has only the repo:read permission and is used to get a list of all images and tags from the REST API
 readonly AUTH_TOKEN="j0ZG8Jm3hD3HRmXOaDMFsL0zWrRKjqsFJeswCHDF"
@@ -41,7 +41,7 @@ destination_registry=""
 #
 # ========================================
 
-# Check if string is empty using -z. For more 'help test'    
+# Check if string is empty using -z. For more 'help test'
 if [[ -z "$1" ]]; then
    printf '%s\n' "No destination registry provided. Registry must be provided in the form: fqdn.registry.io/ exiting"
    exit 1
@@ -65,9 +65,9 @@ fi
 if [ "$1" == 'insecure_registry' ]; then
    insecure_registry=1
 fi
-# Users may provide a preferred container engine using arg 2, otherwise the script checks whether it can use docker or podman.    
+# Users may provide a preferred container engine using arg 2, otherwise the script checks whether it can use docker or podman.
 if [[ ! -z "$2" ]]; then
-    # Ensure the user provided command is available to use 
+    # Ensure the user provided command is available to use
     if cmd_exists "${2}"; then
         container_engine=$2
     else # the user provided container engine command does not exist, exit with a message.
@@ -94,9 +94,9 @@ fi
 repos=`curl -s "https://quay.io/api/v1/repository?namespace=${REGISTRY_ORG}" -H "authorization: Bearer ${AUTH_TOKEN}" | jq ".repositories[$count].name" | tr -d '"'`
 
 while IFS= read -r repo;
-do 
+do
     echo "Starting to process all tags for repository: ${repo}"
-    # Get all tags for the repo 
+    # Get all tags for the repo
     tags=`curl -s "https://quay.io/api/v1/repository/${REGISTRY_ORG}/${repo}/tag/" -H "authorization: Bearer ${AUTH_TOKEN}" | jq ".tags[$count].name" | tr -d '"'`
     echo "Made an API Call to Registry for repository $repo; Found these tags ${tags[@]}"
     while IFS= read -r tag;
@@ -126,10 +126,10 @@ do
         $container_engine push "$destination_registry/$REGISTRY_ORG/$repo:$tag"
         fi
         echo "Transfer completed for image $image. Now cleaning up and removing these local images: $destination_registry/$REGISTRY_ORG/$repo:$tag, $SOURCE_REGISTRY/$repo:$tag"
-    
+
         # Delete the images locally to avoid using up all storage during transfer
         $container_engine rmi -f "$destination_registry/$REGISTRY_ORG/$repo:$tag"
-        
+
         $container_engine rmi -f "$SOURCE_REGISTRY/$repo:$tag"
 
     echo "Finished processing all tags for repository: ${repo}"
@@ -137,4 +137,3 @@ do
     done <<< "$tags"
 # Finish processing a repository
 done <<< "$repos"
-
