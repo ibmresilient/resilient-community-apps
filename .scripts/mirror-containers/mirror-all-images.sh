@@ -57,6 +57,14 @@ insecure_registry=0
 if [ "$3" == 'insecure_registry' ]; then
    insecure_registry=1
 fi
+
+if [ "$2" == 'insecure_registry' ]; then
+   insecure_registry=1
+fi
+
+if [ "$1" == 'insecure_registry' ]; then
+   insecure_registry=1
+fi
 # Users may provide a preferred container engine using arg 2, otherwise the script checks whether it can use docker or podman.    
 if [[ ! -z "$2" ]]; then
     # Ensure the user provided command is available to use 
