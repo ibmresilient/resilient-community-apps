@@ -23,7 +23,7 @@ Two scripts are provided:
 * Ensure that the local container tool, docker or podman, is accessible. If root permissions
 are needed to run these commands, use `sudo` or `su` to access that login account in advance.
 * Login to each registry using the `docker login` orr `podman login` commands.
-* Set insecure_registry to 1 if working with HTTP registry with podman, docker may require you edit /.docker/config.json or an environment variable
+* Add insecure_registry as the last argument if working with HTTP registry with podman, docker may require you edit /.docker/config.json or an environment variable
 
 ## mirror-all-images.sh
 This script is used to copy all container images from the IBM official registry, quay.io,
@@ -37,9 +37,10 @@ pull containers down from quay.io and then push them to the private registry.
 * [docker | podman] - optional reference to the tool to perform the container transfer. 
 If missing, the script will attempt to determine which tool exists.
 
-### Example
+### Examples
 /bin/bash mirror-all-images 834299573936.dkr.ecr.us-east-2.amazonaws.com podman
 
+/bin/bash mirror-all-images localhost:5000 podman insecure_registry
 
 ## mirror-images.sh
 This script is used to copy a select number of container images from the IBM official registry, quay.io,
