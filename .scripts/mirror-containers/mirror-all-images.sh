@@ -52,6 +52,8 @@ cmd_exists jq || { echo >&2 "Jq is required for parsing the API call responses f
 
 # Before trying to pull or push anything, check for the existance of either docker or podman
 container_engine=""
+#Only specify when using podman in a HTTP registry locally
+insecure_registry=0
 # Users may provide a preferred container engine using arg 2, otherwise the script checks whether it can use docker or podman.    
 if [[ ! -z "$2" ]]; then
     # Ensure the user provided command is available to use 
@@ -106,7 +108,7 @@ do
         echo "Image tagged; Pushing now to destination registry: $destination_registry"
 
         # Push our newly tagged image to the destination
-        if [ $container_engine == podman ]
+        if [[ $container_engine == podman && $insecure_registry == 1]];
         then
         $container_engine push --tls-verify=false "$destination_registry/$REGISTRY_ORG/$repo:$tag"
         else
