@@ -70,7 +70,7 @@ elif cmd_exists podman; then
     container_engine=podman
 
 elif cmd_exists docker; then
-    # Or if docker is there and docker isn't, we use that
+    # Or if docker is there and podman isn't, we use that
     container_engine=docker
 else # neither of the engines were found, exit with a message
     echo >&2 "Image mirroring requires either Docker or Podman but neither were found. Aborting."; exit 1;
