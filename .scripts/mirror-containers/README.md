@@ -23,6 +23,7 @@ Two scripts are provided:
 * Ensure that the local container tool, docker or podman, is accessible. If root permissions
 are needed to run these commands, use `sudo` or `su` to access that login account in advance.
 * Login to each registry using the `docker login` orr `podman login` commands.
+* Set insecure_registry to 1 if working with HTTP registry with podman, docker may require you edit /.docker/config.json or an environment variable
 
 ## mirror-all-images.sh
 This script is used to copy all container images from the IBM official registry, quay.io,
