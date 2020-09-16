@@ -54,6 +54,9 @@ cmd_exists jq || { echo >&2 "Jq is required for parsing the API call responses f
 container_engine=""
 #Only specify when using podman in a HTTP registry locally
 insecure_registry=0
+if [ "$3" == 'insecure_registry' ]; then
+   insecure_registry=1
+fi
 # Users may provide a preferred container engine using arg 2, otherwise the script checks whether it can use docker or podman.    
 if [[ ! -z "$2" ]]; then
     # Ensure the user provided command is available to use 
