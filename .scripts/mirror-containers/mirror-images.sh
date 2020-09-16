@@ -29,7 +29,7 @@ readonly IMAGES_TO_PRESERVE_LOCALLY="${IMAGES_TO_TRANSFER:-preserved_images.conf
 
 readonly IMAGE_REGISTRY="${SOURCE_REGISTRY_DOMAIN:-quay.io}"
 readonly REGISTRY_ORG="${SOURCE_REGISTRY_ORG:-ibmresilient}"
-# The registry we will pull images from 
+# The registry we will pull images from
 readonly SOURCE_REGISTRY="$IMAGE_REGISTRY/$REGISTRY_ORG"
 # The registry we will push images too
 destination_registry=""
@@ -39,7 +39,7 @@ destination_registry=""
 # Checks for arguments and the needed unix commands
 #
 # ========================================
-# Check if string is empty using -z. For more 'help test'    
+# Check if string is empty using -z. For more 'help test'
 if [[ -z "$1" ]]; then
    printf '%s\n' "No destination registry provided. Registry must be provided in the form: fqdn.registry.io/ exiting"
    exit 1
@@ -61,9 +61,9 @@ if [ "$1" == 'insecure_registry' ]; then
    insecure_registry=1
 fi
 
-# Users may provide a preferred container engine using arg 2, otherwise the script checks whether it can use docker or podman.    
+# Users may provide a preferred container engine using arg 2, otherwise the script checks whether it can use docker or podman.
 if [[ ! -z "$2" ]]; then
-    # Ensure the user provided command is available to use 
+    # Ensure the user provided command is available to use
     if cmd_exists $2; then
         container_engine=$2
     else # the user provided container engine command does not exist, exit with a message.
@@ -88,7 +88,7 @@ fi
 
 destination_registry=$1
 # Read file to gather each image name, $image represents one imagename with a version
-while IFS='' read -r image || [[ -n "$image" ]]; do 
+while IFS='' read -r image || [[ -n "$image" ]]; do
     echo "Now starting to pull image: $image"
 
     # Pull the given image from the SOURCE_REGISTRY
@@ -122,9 +122,9 @@ while IFS='' read -r image || [[ -n "$image" ]]; do
         echo "Transfer completed for image $image. The image $image was found in the list of images to be preserved and will not be removed locally"
     else
         echo "Transfer completed for image $image. Now cleaning up and removing these local images: $destination_registry/$REGISTRY_ORG/$image, $SOURCE_REGISTRY/$image"
-    
+
         $container_engine rmi -f "$destination_registry/$REGISTRY_ORG/$image"
-        
+
         $container_engine rmi -f "$SOURCE_REGISTRY/$image"
     fi
 
