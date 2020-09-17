@@ -30,7 +30,7 @@ def selftest_function(opts):
     try:
         log.info(u"vmray_api_key: {0}\nvmray_analyzer_url: {1}".format(vmray_api_key, vmray_analyzer_url))
         state, reason = "", ""
-        vmray = VMRayAPI(vmray_api_key, url=vmray_analyzer_url, proxies=RequestsCommon().get_proxies())
+        vmray = VMRayAPI(vmray_api_key, url=vmray_analyzer_url, proxies=RequestsCommon(opts, options).get_proxies())
 
         if vmray.is_available():
             state = "success"

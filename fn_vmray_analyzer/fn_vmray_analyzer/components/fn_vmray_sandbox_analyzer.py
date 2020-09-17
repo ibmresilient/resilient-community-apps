@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2019. All Rights Reserved.
+# (c) Copyright IBM Corp. 2020. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
@@ -83,7 +83,8 @@ class FunctionComponent(ResilientComponent):
             if not analysis_report_status:
 
                 # VMRay client and Resilient client
-                vmray = VMRayAPI(VMRAY_API_KEY, url=VMRAY_ANALYZER_URL, proxies=RequestsCommon().get_proxies())
+                vmray = VMRayAPI(VMRAY_API_KEY, url=VMRAY_ANALYZER_URL,
+                                 proxies=RequestsCommon(self.opts, self.options).get_proxies())
                 resilient = self.rest_client()
 
                 # Get attachment entity we are dealing with (either attachment or artifact)
@@ -139,4 +140,4 @@ class FunctionComponent(ResilientComponent):
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception as err:
-            yield FunctionError()
+            yield FunctionError(err)
