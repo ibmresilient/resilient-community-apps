@@ -29,8 +29,8 @@ import logging
 import fn_jira.lib.constants as constants
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from .jira_common import JiraCommon
-from resilient_lib import MarkdownParser, validate_fields, str_to_bool, build_incident_url, build_resilient_url
-from fn_jira.util.helper import CONFIG_DATA_SECTION
+from resilient_lib import MarkdownParser, validate_fields, build_incident_url, build_resilient_url
+from fn_jira.util.helper import CONFIG_DATA_SECTION, validate_app_configs
 
 PACKAGE_NAME = CONFIG_DATA_SECTION
 BROWSE_FRAGMENT = 'browse'
@@ -57,7 +57,16 @@ class FunctionComponent(ResilientComponent):
         try:
             log = logging.getLogger(__name__)
 
-            appDict = self._build_createIssue_appDict(kwargs)
+            # Get + validate the app.config parameters:
+            log.info("Validating app configs")
+            app_configs = validate_app_configs(self.options)
+
+            # Get + validate the function parameters:
+            log.info("Validating function inputs")
+            fn_inputs = validate_fields(["incident_id", "jira_project", "jira_issuetype", "jira_summary"], kwargs)
+            log.info("Validated function inputs: %s", fn_inputs)
+
+            appDict = self._build_createIssue_appDict(app_configs, fn_inputs)
 
             yield StatusMessage("starting...")
             jira_common = JiraCommon(self.opts, self.options)
@@ -73,40 +82,38 @@ class FunctionComponent(ResilientComponent):
             yield FunctionError(err)
 
 
-    def _build_createIssue_appDict(self, kwargs):
+    def _build_createIssue_appDict(self, app_configs, fn_inputs):
         '''
         build the dictionary used for the create api request
         :param kwargs:
         :return: dictionary of values to use
         '''
 
-        validate_fields(['incident_id', 'jira_project', 'jira_issuetype', 'jira_summary'], kwargs)
-
         # build the URL back to Resilient
-        url = build_incident_url(build_resilient_url(self.res_params.get('host'), self.res_params.get('port')), kwargs['incident_id'])
-        if kwargs.get("task_id"):
-            url = "{}?task_id={}".format(url, kwargs.get("task_id"))
+        url = build_incident_url(build_resilient_url(self.res_params.get('host'), self.res_params.get('port')), fn_inputs.get("incident_id"))
+        if fn_inputs.get("task_id"):
+            url = "{}?task_id={}".format(url, fn_inputs.get("task_id"))
 
         html2markdwn = MarkdownParser(strikeout=constants.STRIKEOUT_CHAR, bold=constants.BOLD_CHAR,
                                       underline=constants.UNDERLINE_CHAR, italic=constants.ITALIC_CHAR)
 
         data = {
-            'url': self.options['url'],
-            'user': self.options['user'],
-            'password': self.options['password'],
-            'verifyFlag': str_to_bool(self.options.get('verify_cert', 'True')),
-            'project': self.get_textarea_param(kwargs['jira_project']),
-            'issuetype': self.get_textarea_param(kwargs['jira_issuetype']),
+            'url': app_configs.get("url"),
+            'user': app_configs.get("user"),
+            'password': app_configs.get("password"),
+            'verifyFlag': app_configs.get("verify_cert"),
+            'project': fn_inputs.get("jira_project"),
+            'issuetype': fn_inputs.get("jira_issuetype"),
             'fields': {
-                'summary': self.get_textarea_param(kwargs['jira_summary']),
-                'description': u"{}\n{}".format(url, html2markdwn.convert(kwargs.get('jira_description', '')))
+                'summary': fn_inputs.get("jira_summary"),
+                'description': u"{}\n{}".format(url, html2markdwn.convert(fn_inputs.get('jira_description', '')))
             }
         }
 
-        if kwargs.get('jira_priority'):
-            data['fields']['priority'] = {"id": kwargs['jira_priority']}
+        if fn_inputs.get('jira_priority'):
+            data['fields']['priority'] = {"id": fn_inputs['jira_priority']}
 
-        if kwargs.get('jira_assignee'):
-            data['fields']['assignee'] = {"name": kwargs['jira_assignee']}
+        if fn_inputs.get('jira_assignee'):
+            data['fields']['assignee'] = {"name": fn_inputs['jira_assignee']}
 
         return data

@@ -21,8 +21,8 @@ import logging
 import fn_jira.lib.constants as constants
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from .jira_common import JiraCommon
-from resilient_lib import validate_fields, MarkdownParser, str_to_bool
-from fn_jira.util.helper import CONFIG_DATA_SECTION
+from resilient_lib import validate_fields, MarkdownParser
+from fn_jira.util.helper import CONFIG_DATA_SECTION, validate_app_configs
 
 PACKAGE_NAME = CONFIG_DATA_SECTION
 
@@ -51,7 +51,16 @@ class FunctionComponent(ResilientComponent):
         try:
             log = logging.getLogger(__name__)
 
-            appDict = self._build_transitionIssue_appDict(kwargs)
+            # Get + validate the app.config parameters:
+            log.info("Validating app configs")
+            app_configs = validate_app_configs(self.options)
+
+            # Get + validate the function parameters:
+            log.info("Validating function inputs")
+            fn_inputs = validate_fields(["jira_url", "jira_transition_id"], kwargs)
+            log.info("Validated function inputs: %s", fn_inputs)
+
+            appDict = self._build_transitionIssue_appDict(app_configs, fn_inputs)
 
             yield StatusMessage("starting...")
             jira_common = JiraCommon(self.opts, self.options)
@@ -62,32 +71,29 @@ class FunctionComponent(ResilientComponent):
         except Exception as err:
             yield FunctionError(err)
 
-    def _build_transitionIssue_appDict(self, kwargs):
+    def _build_transitionIssue_appDict(self, app_configs, fn_inputs):
         '''
         build the dictionary used for the transition api request
         :param kwargs:
         :return: dictionary of values to use
         '''
 
-        # test for required fields
-        validate_fields(['jira_url', 'jira_transition_id'], kwargs)
-
         appDict = {
-            'user': self.options['user'],
-            'password': self.options['password'],
-            'url': kwargs['jira_url'],
-            'verifyFlag': str_to_bool(self.options.get('verify_cert', 'True')),
-            'transitionId': kwargs['jira_transition_id'],
+            'user': app_configs.get("user"),
+            'password': app_configs.get("password"),
+            'url': fn_inputs.get('jira_url'),
+            'verifyFlag': app_configs.get("verify_cert"),
+            'transitionId': fn_inputs.get('jira_transition_id'),
         }
 
-        if kwargs.get('jira_resolution'):
-            appDict['resolution'] = kwargs['jira_resolution']
+        if fn_inputs.get('jira_resolution'):
+            appDict['resolution'] = fn_inputs.get('jira_resolution')
 
         # optional
-        if kwargs.get('jira_comment', None):
+        if fn_inputs.get('jira_comment'):
             html2markdwn = MarkdownParser(strikeout=constants.STRIKEOUT_CHAR, bold=constants.BOLD_CHAR,
                                           underline=constants.UNDERLINE_CHAR, italic=constants.ITALIC_CHAR)
-            appDict['comment'] = html2markdwn.convert(kwargs['jira_comment'])
+            appDict['comment'] = html2markdwn.convert(fn_inputs.get('jira_comment'))
 
         return appDict
 
