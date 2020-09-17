@@ -5,10 +5,11 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_vmray_analyzer',
-    version='1.0.0',
+    version='1.0.1',
     license='MIT',
     author='IBM Resilient',
     author_email='resil.labs@gmail.com',
+    url='http://ibm.biz/resilientcommunity',
     description="Resilient Circuits VMRay Analyzer Functions",
     long_description="Resilient Circuits VMRay Analyzer Functions that submits an attached file to VMRAY Cloud for Malware analysis and returns the results in an incident note. ",
     install_requires=[

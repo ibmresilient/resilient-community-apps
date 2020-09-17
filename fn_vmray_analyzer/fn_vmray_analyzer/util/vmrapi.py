@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2020. All Rights Reserved.
+# pragma pylint: disable=unused-argument, no-self-use
+
 import time
 import random
 
