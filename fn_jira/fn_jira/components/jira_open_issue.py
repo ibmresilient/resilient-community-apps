@@ -30,7 +30,9 @@ import fn_jira.lib.constants as constants
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from .jira_common import JiraCommon
 from resilient_lib import MarkdownParser, validate_fields, str_to_bool, build_incident_url, build_resilient_url
+from fn_jira.util.helper import CONFIG_DATA_SECTION
 
+PACKAGE_NAME = CONFIG_DATA_SECTION
 BROWSE_FRAGMENT = 'browse'
 
 class FunctionComponent(ResilientComponent):
@@ -40,27 +42,26 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
-        self.opts = opts
-        self.options = opts.get("jira", {})
+        self.options = opts.get(PACKAGE_NAME, {})
         self.res_params = opts.get("resilient", {})
-        self.log = logging.getLogger(__name__)
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
-        self.opts = opts
-        self.options = opts.get("jira", {})
+        self.options = opts.get(PACKAGE_NAME, {})
         self.res_params = opts.get("resilient", {})
 
     @function("jira_open_issue")
     def _jira_open_issue_function(self, event, *args, **kwargs):
         """Function: create a jira issue. This requires app.config configuration information for jira """
         try:
+            log = logging.getLogger(__name__)
+
             appDict = self._build_createIssue_appDict(kwargs)
 
             yield StatusMessage("starting...")
             jira_common = JiraCommon(self.opts, self.options)
-            r = jira_common.create_issue(self.log, appDict)
+            r = jira_common.create_issue(log, appDict)
 
             if r.get('key'):
                 url = '/'.join((appDict['url'], BROWSE_FRAGMENT, r.get('key')))

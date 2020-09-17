@@ -22,6 +22,10 @@ import fn_jira.lib.constants as constants
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from .jira_common import JiraCommon
 from resilient_lib import validate_fields, MarkdownParser, str_to_bool
+from fn_jira.util.helper import CONFIG_DATA_SECTION
+
+PACKAGE_NAME = CONFIG_DATA_SECTION
+
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'jira_transition_issue"""
@@ -29,15 +33,12 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
-        self.opts = opts
-        self.options = opts.get("jira", {})
-        self.log = logging.getLogger(__name__)
+        self.options = opts.get(PACKAGE_NAME, {})
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
-        self.opts = opts
-        self.options = opts.get("jira", {})
+        self.options = opts.get(PACKAGE_NAME, {})
 
     @function("jira_transition_issue")
     def _jira_transition_issue_function(self, event, *args, **kwargs):
@@ -48,11 +49,13 @@ class FunctionComponent(ResilientComponent):
                https://<jira host>/rest/api/2/status/
         """
         try:
+            log = logging.getLogger(__name__)
+
             appDict = self._build_transitionIssue_appDict(kwargs)
 
             yield StatusMessage("starting...")
             jira_common = JiraCommon(self.opts, self.options)
-            r = jira_common.transition_issue(self.log, appDict)
+            r = jira_common.transition_issue(log, appDict)
 
             # Produce a FunctionResult with the return value
             yield FunctionResult({"issue": r})      # json object needed, not a string representation
