@@ -1,7 +1,8 @@
 # VMRay Sandbox Analyzer Function for IBM Resilient
 
 ## Table of Contents
-  - [app.config settings](#appconfig-settings)
+  - [Overview](#overview)
+  - [Installation](#installation)
   - [Function Inputs](#function-inputs)
   - [Function Output](#function-output)
   - [Pre-Process Script](#pre-process-script)
@@ -36,7 +37,7 @@
 <!--
   List any Requirements 
 -->
-* Resilient platform >= `v35.0.5343`
+* Resilient platform >= `v35.0.0`
 * An Integration Server running `resilient_circuits>=30.0.0`
  
   * To set up an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
