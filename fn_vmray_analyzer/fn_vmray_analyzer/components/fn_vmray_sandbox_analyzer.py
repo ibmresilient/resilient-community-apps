@@ -4,7 +4,7 @@
 """Function implementation"""
 
 import logging
-import tempfile, time, json
+import tempfile, time, os
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 
 from resilient_lib import validate_fields, get_file_attachment, get_file_attachment_name, RequestsCommon
@@ -41,8 +41,7 @@ class FunctionComponent(ResilientComponent):
 
         def write_temp_file(data, name=None):
             if name:
-                path = "{0}/{1}".format(tempfile.gettempdir(), name)
-
+                path = os.path.join(tempfile.gettempdir(), name)
             else:
                 tf = tempfile.mkstemp()
                 path = tf[1]
