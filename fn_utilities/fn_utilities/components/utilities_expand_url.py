@@ -56,7 +56,7 @@ class FunctionComponent(ResilientComponent):
         proxies = rc.get_proxies()
 
         if proxies:
-            proxy = proxies.get('https') if proxies.get('https') else proxies.get('http')
+            proxy = proxies.get('https', proxies.get('http'))
 
             if proxy:
                 proxy_url = urlparse.urlparse(proxy)
