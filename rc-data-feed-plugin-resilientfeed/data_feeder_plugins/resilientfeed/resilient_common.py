@@ -214,7 +214,7 @@ class Resilient(object):
         # do nothing if already deleted or bypassed
         if sync_state in ['deleted', 'bypassed']:
             LOG.debug("No action on %s: %s:%s->%s", sync_state, orig_inc_id, mapped_type_name, orig_type_id)
-            return None
+            return None, None
 
         opr_type = None
         # update operation?
@@ -253,7 +253,7 @@ class Resilient(object):
                 # do nothing if already deleted, bypassed or filtered
                 if sync_state in ['deleted', 'bypassed', 'filtered']:
                     LOG.debug("No action on %s: %s:%s->%s", sync_state, orig_inc_id, mapped_type_name, orig_type_id)
-                    return None
+                    return None, None
 
                 # a missing incident means the order of creating the child is incorrect.
                 # this happens when creating an incident with incident_type_ids and the tasks show up first in the
@@ -269,12 +269,12 @@ class Resilient(object):
                         LOG.error("Max retry exceeded for type: %s %s->%s:%s to %s payload %s",
                                   type_name, orig_org_id, orig_inc_id, orig_type_id, sync_inc_id, payload)
 
-                    return None
+                    return None, None
 
                 if sync_inc_id == 0:
                     # this is a child object to an incident which was filtered
                     LOG.info("filtering %s:%s->%s", type_name, orig_inc_id, orig_type_id)
-                    return None
+                    return None, None
 
             # creating a task? may already have one created when the incident was created
             if mapped_type_name == "task":

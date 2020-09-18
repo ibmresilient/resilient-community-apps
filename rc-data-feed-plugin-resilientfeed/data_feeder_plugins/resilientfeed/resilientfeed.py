@@ -116,7 +116,7 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
                     if sync_inc_id:
                         create_list.append("{}:{}".format('note', new_type_id))
 
-                LOG.debug("%s:%s %s, additional list: %s", type_name, new_id, opr_type, create_list)
+                new_id and LOG.debug("%s:%s %s, additional updates: %s", type_name, new_id, opr_type, create_list)
             except MatchError as err:
                 LOG.info("%s on Incident %s", err, context.inc_id)
 
