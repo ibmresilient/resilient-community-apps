@@ -10,7 +10,6 @@ if sys.version_info[0] == 2:
 else:
     import importlib
 
-import importlib
 import inspect
 import pytest
 import os

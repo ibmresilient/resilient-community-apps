@@ -68,7 +68,7 @@ class ConvertJson:
               [str]: None|original text if no links|text with html links
         """
         formatted_item = item
-        if item and not isinstance(item, int) and not isinstance(item, bool) and not isinstance(item, float):
+        if item and not isinstance(item, (int, bool, float)):
             list = rc.findall(item)
             if list:
                 for link in list:
@@ -187,7 +187,7 @@ def get_properties(property_name):
     if not workflow.properties[property_name].get('json'):
         helper.fail("workflow.properties.{}.json undefined".format(property_name))
 
-    padding = workflow.properties[property_name].get("padding", 10)
+    padding = int(workflow.properties[property_name].get("padding", 10))
     separator = workflow.properties[property_name].get("separator", u"<br />")
     if isinstance(separator, list) and len(separator) != 2:
         helper.fail("list of separators should be specified as a pair such as ['<div>', '</div>']: {}".format(separator))
@@ -200,7 +200,7 @@ def get_properties(property_name):
     json = workflow.properties[property_name].get("json")
     if not isinstance(json, dict):
         helper.fail("json element is not formatted correctly: {}".format(json))
-    sort_keys = workflow.properties[property_name].get("sort", False)
+    sort_keys = bool(workflow.properties[property_name].get("sort", False))
 
     return padding, separator, header, json_omit_list, incident_field, json, sort_keys
 
