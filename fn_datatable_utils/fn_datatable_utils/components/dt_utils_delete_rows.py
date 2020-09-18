@@ -72,7 +72,7 @@ class FunctionComponent(ResilientComponent):
                                      payload.inputs["dt_utils_datatable_api_name"])
             
             # get datatable row_id if function used on a datatable
-            row_id = datatable.get_row_id_from_workflow(event.message['workflow_instance']['workflow_instance_id']) 
+            row_id = datatable.get_row_id_from_workflow(event.message.get('workflow_instance', {}).get('workflow_instance_id'))
             row_id and log.debug("Current row_id: %s", row_id)
 
             # Get the data table data
