@@ -14,7 +14,8 @@ setup(
     long_description="This package contains 5 functions that help you manipulate IBM Resilient Data Tables: Get Row, Update Row, Delete Row, Get Rows and Delete Rows.",
     install_requires=[
         'resilient_circuits>=33.0.0',
-        'resilient-lib>=32.0.140'
+        'resilient-lib>=32.0.140',
+        'cachetools'
     ],
     packages=find_packages(),
     include_package_data=True,

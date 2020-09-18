@@ -43,10 +43,13 @@ class FunctionComponent(ResilientComponent):
             # Instansiate new Resilient API object
             res_client = self.rest_client()
 
+            dt_utils_row_id = get_function_input(kwargs, "dt_utils_row_id", optional=True)# number (optional)
+            dt_utils_datatable_api_name = get_function_input(kwargs, "dt_utils_datatable_api_name") # text (required)
+
             inputs = {
                 "incident_id": get_function_input(kwargs, "incident_id"),  # number (required)
-                "dt_utils_datatable_api_name": get_function_input(kwargs, "dt_utils_datatable_api_name"),  # text (required)
-                "dt_utils_row_id": get_function_input(kwargs, "dt_utils_row_id", optional=True)  # number (optional)
+                "dt_utils_datatable_api_name": dt_utils_datatable_api_name,  
+                "dt_utils_row_id": dt_utils_row_id  
             }
 
             # Create payload dict with inputs
@@ -55,19 +58,28 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Function Inputs OK")
 
             # Instantiate a new RESDatatable
-            datatable = RESDatatable(res_client, payload.inputs["incident_id"], payload.inputs["dt_utils_datatable_api_name"])
+            datatable = RESDatatable(res_client, payload.inputs["incident_id"], dt_utils_datatable_api_name)
 
-            deleted_row = datatable.delete_row(payload.inputs["dt_utils_row_id"])
+            # get datatable row_id if function used on a datatable
+            row_id = datatable.get_row_id_from_workflow(event.message['workflow_instance']['workflow_instance_id']) 
+            row_id and log.debug("Current row_id: %s", row_id)
+
+            if row_id == int(dt_utils_row_id):
+                deleted_row = {
+                    "error": "Cannot delete the invoking row. Row {0} in {1} NOT deleted".format(dt_utils_row_id,
+                                                                                                 dt_utils_datatable_api_name)
+                }
+            else:
+                deleted_row = datatable.delete_row(dt_utils_row_id)
 
             if "error" in deleted_row:
-                yield StatusMessage("Row {0} in {1} NOT deleted.".format(payload.inputs["dt_utils_row_id"], datatable.api_name))
+                yield StatusMessage("Row {0} in {1} NOT deleted.".format(dt_utils_row_id, dt_utils_datatable_api_name))
                 payload.success = False
                 raise ValueError(deleted_row["error"])
 
-            else:
-                yield StatusMessage("Row {0} in {1} deleted.".format(payload.inputs["dt_utils_row_id"], datatable.api_name))
-                payload.row = deleted_row
-                payload.success = True
+            yield StatusMessage("Row {0} in {1} deleted.".format(dt_utils_row_id, dt_utils_datatable_api_name))
+            payload.row = deleted_row
+            payload.success = True
 
             results = payload.as_dict()
 
