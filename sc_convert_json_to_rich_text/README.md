@@ -33,7 +33,7 @@ Before installing, verify that your environment meets the following prerequisite
 1. Select **Proceed**.
 
 ### Result
-After installing from **convert_json_to_rich_text.res**, the Resilient platform will have a new Python script called "Convert JSON to rich text v1.0.0". 
+After installing from **convert_json_to_rich_text.res**, the Resilient platform will have a new Python script called "Convert JSON to rich text v1.0". 
  
 ## Usage 
 In order to use this script, define a workflow property called: `convert_json_to_rich_text`, to define the json data and parameters to use for the conversion.
