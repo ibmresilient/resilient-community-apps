@@ -4,12 +4,11 @@
 
 import logging
 import sys
-if sys.version_info < (3, 6):
-    from pymisp import PyMISP
+if sys.version_info.major < 3:
+    from fn_misp.util import misp_2_helper as misp_helper
 else:
-    from pymisp import ExpandedPyMISP
-from resilient_circuits import ResilientComponent, function, FunctionResult, FunctionError
-
+    from fn_misp.util import misp_3_helper as misp_helper
+from resilient_circuits import ResilientComponent, function, StatusMessage, FunctionResult, FunctionError
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function(s)"""
@@ -31,12 +30,12 @@ class FunctionComponent(ResilientComponent):
                 if option is None and optional is False:
                     err = "'{0}' is mandatory and is not set in ~/.resilient/app.config file. You must set this value to run this function".format(option_name)
                     raise ValueError(err)
-
-                return option
+                else:
+                    return option
 
             API_KEY = get_config_option("misp_key")
             URL = get_config_option("misp_url")
-            VERIFY_CERT = (get_config_option("verify_cert").lower() == "true")
+            VERIFY_CERT = True if get_config_option("verify_cert").lower() == "true" else False
 
             # Get the function parameters:
             search_attribute = kwargs.get("misp_attribute_value")  # text
@@ -44,17 +43,27 @@ class FunctionComponent(ResilientComponent):
             log = logging.getLogger(__name__)
             log.info("search_attribute: %s", search_attribute)
 
-            if sys.version_info < (3, 6):
-                misp_client = PyMISP(URL, API_KEY, VERIFY_CERT, 'json')
+            yield StatusMessage("Setting up connection to MISP")
+
+            misp_client = misp_helper.get_misp_client(URL, API_KEY, VERIFY_CERT)
+
+            yield StatusMessage(u"Searching for attribute - {}".format(search_attribute))
+
+            results = {}
+
+            search_results = misp_helper.search_misp_attribute(misp_client, search_attribute)
+
+            log.debug(search_results)
+
+            if search_results['search_status']:
+                results['success'] = True
+                results['content'] = search_results['search_results']
+                misp_tags = misp_helper.get_misp_attribute_tags(misp_client, search_results['search_results'])
+                results['tags'] = misp_tags
             else:
-                misp_client = ExpandedPyMISP(URL, API_KEY, ssl=VERIFY_CERT)
+                results['success'] = False
 
-            result = misp_client.search('attributes', values=search_attribute)
-
-            results = {
-                "success": True,
-                "content": result
-            }
+            yield StatusMessage("Attribute search complete.")
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

@@ -4,11 +4,10 @@
 
 import logging
 import sys
-if sys.version_info < (3, 6):
-    from pymisp import PyMISP
+if sys.version_info.major < 3:
+    from fn_misp.util import misp_2_helper as misp_helper
 else:
-    from pymisp import ExpandedPyMISP
-
+    from fn_misp.util import misp_3_helper as misp_helper
 from resilient_circuits import ResilientComponent, function, StatusMessage, FunctionResult, FunctionError
 
 
@@ -32,12 +31,12 @@ class FunctionComponent(ResilientComponent):
                 if option is None and optional is False:
                     err = "'{0}' is mandatory and is not set in ~/.resilient/app.config file. You must set this value to run this function".format(option_name)
                     raise ValueError(err)
-
-                return option
+                else:
+                    return option
 
             API_KEY = get_config_option("misp_key")
             URL = get_config_option("misp_url")
-            VERIFY_CERT = (get_config_option("verify_cert").lower() == "true")
+            VERIFY_CERT = True if get_config_option("verify_cert").lower() == "true" else False
 
             # Get the function parameters:
             misp_event_id = kwargs.get("misp_event_id")  # number
@@ -51,47 +50,19 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("Setting up connection to MISP")
 
-            """
-            default_map = {
-                "DNS Name": "domain",
-                "Email Attachment": "email-attachment",
-                "Email Body": "email-body",
-                "Email Recipient": "email-dst",
-                "Email Sender": "email-src",
-                "Email subject": "email-subject",
-                "File Name": "filename",
-                "DNS Name": "hostname",
-                "MAC Address": "mac-address",
-                "Malware MD5 Hash": "md5",
-                "Port": "port",
-                "Malware SHA-1 Hash": "sha1",
-                "Malware SHA-256 Hash": "sha256",
-                "URI Path": "uri",
-                "URL": "url",
-                "Threat CVE ID": "vulnerability",
-                "IP Address": "ip-dst"
-            }
-            """
+            misp_client = misp_helper.get_misp_client(URL, API_KEY, VERIFY_CERT)
 
             yield StatusMessage("Creating new misp attribute {} {}".format(misp_attribute_type, misp_attribute_value))
 
-            if sys.version_info < (3, 6):
-                misp_client = PyMISP(URL, API_KEY, VERIFY_CERT, 'json')
-                attribute = misp_client.add_named_attribute(misp_event_id, misp_attribute_type, misp_attribute_value)
-            else:
-                misp_client = ExpandedPyMISP(URL, API_KEY, ssl=VERIFY_CERT)
-                attribute = {
-                    "type": misp_attribute_type,
-                    "value": misp_attribute_value
-                }
-                attribute = misp_client.add_attribute(event=misp_event_id, attribute=attribute)
+            attribute = misp_helper.create_misp_attribute(misp_client, misp_event_id, misp_attribute_type, misp_attribute_value)
 
-            log.info(event)
+            log.debug(attribute)
 
-            results = {
-                "success": True,
-                "content": attribute
-            }
+            yield StatusMessage("Attribute has been created")
+
+            results = { "success": True,
+                        "content": attribute
+                      }
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

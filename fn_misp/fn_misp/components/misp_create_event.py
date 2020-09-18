@@ -4,14 +4,13 @@
 
 import logging
 import sys
-if sys.version_info < (3, 6):
-    from pymisp import PyMISP
+if sys.version_info.major < 3:
+    from fn_misp.util import misp_2_helper as misp_helper
 else:
-    from pymisp import ExpandedPyMISP
-
+    from fn_misp.util import misp_3_helper as misp_helper
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 
-PACKAGE = "fn_misp"
+PACKAGE= "fn_misp"
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function(s)"""
@@ -38,12 +37,12 @@ class FunctionComponent(ResilientComponent):
                 if option is None and optional is False:
                     err = "'{0}' is mandatory and is not set in ~/.resilient/app.config file. You must set this value to run this function".format(option_name)
                     raise ValueError(err)
-
-                return option
+                else:
+                    return option
 
             API_KEY = get_config_option("misp_key")
             URL = get_config_option("misp_url")
-            VERIFY_CERT = (get_config_option("verify_cert").lower() == "true")
+            VERIFY_CERT = True if get_config_option("verify_cert").lower() == "true" else False
 
             # Get the function parameters:
             misp_event_name = kwargs.get("misp_event_name")  # text
@@ -59,23 +58,13 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("Setting up connection to MISP")
 
-            if sys.version_info < (3, 6):
-                misp_client = PyMISP(URL, API_KEY, VERIFY_CERT, 'json')
-            else:
-                misp_client = ExpandedPyMISP(URL, API_KEY, ssl=VERIFY_CERT)
+            misp_client = misp_helper.get_misp_client(URL, API_KEY, VERIFY_CERT)
 
-            eventJson = {
-                "Event": {
-                    "info": misp_event_name,
-                    "analysis": misp_analysis_level,
-                    "distribution": misp_distribution,
-                    "threat_level_id": misp_threat_level
-                }
-            }
+            yield StatusMessage("Creating event {}".format(misp_event_name))
 
-            event = misp_client.add_event(eventJson)
+            event = misp_helper.create_misp_event(misp_client, misp_distribution, misp_threat_level, misp_analysis_level, misp_event_name)
 
-            log.info(event)
+            log.debug(event)
 
             yield StatusMessage("Event has been created")
 

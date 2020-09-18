@@ -4,11 +4,11 @@
 
 import logging
 import sys
-if sys.version_info < (3, 6):
-    from pymisp import PyMISP
+if sys.version_info.major < 3:
+    from fn_misp.util import misp_2_helper as misp_helper
 else:
-    from pymisp import ExpandedPyMISP
-from resilient_circuits import ResilientComponent, function, FunctionResult, FunctionError
+    from fn_misp.util import misp_3_helper as misp_helper
+from resilient_circuits import ResilientComponent, function, StatusMessage, FunctionResult, FunctionError
 
 
 class FunctionComponent(ResilientComponent):
@@ -31,12 +31,12 @@ class FunctionComponent(ResilientComponent):
                 if option is None and optional is False:
                     err = "'{0}' is mandatory and is not set in ~/.resilient/app.config file. You must set this value to run this function".format(option_name)
                     raise ValueError(err)
-
-                return option
+                else:
+                    return option
 
             API_KEY = get_config_option("misp_key")
             URL = get_config_option("misp_url")
-            VERIFY_CERT = (get_config_option("verify_cert").lower() == "true")
+            VERIFY_CERT = True if get_config_option("verify_cert").lower() == "true" else False
 
             # Get the function parameters:
             event_id = int(kwargs.get("misp_event_id"))  # text
@@ -44,17 +44,19 @@ class FunctionComponent(ResilientComponent):
             log = logging.getLogger(__name__)
             log.info("event_id: %s", event_id)
 
-            if sys.version_info < (3, 6):
-                misp_client = PyMISP(URL, API_KEY, VERIFY_CERT, 'json')
-                result = misp_client.sighting_list(event_id, 'event')
-            else:
-                misp_client = ExpandedPyMISP(URL, API_KEY, ssl=VERIFY_CERT)
-                result = misp_client.search_sightings(context='event', context_id=event_id)
+            yield StatusMessage("Setting up connection to MISP")
 
-            results = {
-                "success": True,
-                "content": result
-            }
+            misp_client = misp_helper.get_misp_client(URL, API_KEY, VERIFY_CERT)
+
+            yield StatusMessage("Getting sighted list")
+
+            sighting_list_result = misp_helper.get_misp_sighting_list(misp_client, event_id)
+
+            yield StatusMessage("Finished getting sighting list")
+
+            results = { "success": True,
+                        "content": sighting_list_result 
+                    }
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

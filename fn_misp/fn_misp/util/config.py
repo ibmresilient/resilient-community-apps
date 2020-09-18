@@ -14,5 +14,7 @@ misp_url=http://localhost
 misp_key=<your key>
 # used to bypass cerification validation for self signed instances of MISP
 verify_cert=true
+# Depending on your MISP version and configuration - your tag can be different, the default is below.
+mitre_tag=misp-galaxy:mitre-attack-pattern
 """
     return config_data
