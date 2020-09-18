@@ -101,8 +101,6 @@ class FunctionComponent(ResilientComponent):
 
         self.log.debug("{} depth {}".format(url, depth))
         try:
-            #requests.head(url, allow_redirects=True).url
-
             parsed = urlparse.urlparse(url)     # this ensures we have a valid url
             # add proxy logic, if specified
             if self.proxy_host:
