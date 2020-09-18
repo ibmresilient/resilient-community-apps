@@ -84,11 +84,7 @@ if "Exchange Online data table" in output_format:
         message_row.exo_dt_sender_email = ""
       message_row.exo_dt_message_subject = email.subject
       message_row.exo_dt_has_attachments = email.hasAttachments
-      if email.webLink:
-        ref_html = u"""<a href='{0}'>Link</a>""".format(email.webLink)
-        message_row.exo_dt_web_link = helper.createRichText(ref_html)
-      else:
-        message_row.exo_dt_web_link = ""
+      message_row.exo_dt_web_link = ""
  
       text = u"""<p style= "color:{color}">{status} </p>""".format(color="red", status="Deleted")
       message_row.exo_dt_status = helper.createRichText(text)
