@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_cisco_umbrella_inv',
-    version='1.0.2',
+    version='1.0.3',
     author='IBM Resilient',
     author_email='support@resilientsystems.com',
     description="Resilient Circuits Integration for Cisco Umbrella Investigate",
@@ -15,7 +15,8 @@ setup(
                      "to the Resilient platform, such as updating incidents, data tables and so on.",
     install_requires=[
         'resilient_circuits>=30.0.0',
-        'investigate>=1.3.0'
+        'investigate>=1.3.0',
+        'resilient-lib'
     ],
     packages=find_packages(),
     include_package_data=True,
