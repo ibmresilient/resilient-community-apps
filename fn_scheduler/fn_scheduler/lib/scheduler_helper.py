@@ -2,7 +2,6 @@
 # pragma pylint: disable=unused-argument, no-self-use
 # (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 
-import re
 import threading
 from datetime import datetime
 from dateutil.relativedelta import *
@@ -27,16 +26,18 @@ class ResilientScheduler:
     It also contains helper functions for building and managing scheduler jobs
     """
 
-    def __init__(self, datastore_dir, threat_max, timezone):
+    def __init__(self, db_url, datastore_dir, threat_max, timezone):
         global _scheduler_
 
         self.timezone = timezone
+
+        url = db_url if db_url else 'sqlite:///{}/scheduler.sqlite'.format(datastore_dir)
 
         lock = threading.Lock()
         with lock:
             if not _scheduler_:
                 jobstores = {
-                    'default': SQLAlchemyJobStore(url='sqlite:///{}/scheduler.sqlite'.format(datastore_dir)),
+                    'default': SQLAlchemyJobStore(url=url),
                 }
                 executors = {
                     'default': ThreadPoolExecutor(threat_max),

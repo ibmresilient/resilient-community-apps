@@ -29,7 +29,8 @@ class FunctionComponent(ResilientComponent):
         self.validate_app_config(options)
         self.timezone = options.get("timezone")
 
-        self.scheduler = ResilientScheduler(options.get("datastore_dir"),
+        self.scheduler = ResilientScheduler(options.get("db_url"),
+                                            options.get("datastore_dir"),
                                             options.get("thread_max"),
                                             options.get("timezone"))
         log.info("Scheduler started")

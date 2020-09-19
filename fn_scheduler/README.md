@@ -29,8 +29,11 @@
   Specify all changes in this release. Do not remove the release 
   notes of a previous release
 -->
-### v1.0.0
-* Initial Release
+| Version | Date | Notes |
+| ------: | ---: | ----: |
+| 1.0.2   | Sept. 2020 | PostgreSQL support |
+| 1.0.1   | May 2020 | App Host support | 
+| 1.0.0   | Nov. 2019 | Initial Release |
 
 ---
 
@@ -71,15 +74,29 @@ Functions available include:
 ---
 
 ## Installation
-* Download the `fn_scheduler.zip`.
+### App Host
+All the components for running this integration in a container already exist when using the App Host app.
+
+To install,
+
+* Navigate to Administrative Settings and then the Apps tab.
+* Click the Install button and select the downloaded file: app-fn_scheduler-x.x.x.zip.
+* Go to the Configuration tab and edit the app.config file, editing the settings for Scheduler.
+
+  | Config | Required | Example | Description |
+  | ------ | :------: | ------- | ----------- |
+  | **timezone** | Yes | `utc` | *Specify the timezone (ex. America/New_York) which scheduled rules should follow.* |
+  | **thread_max** | Yes | `20` | *Number of threads which can run at the same. Typically, triggered rules run for a very short time to kick off a Resilient rule.* |
+  | **datastore_dir** | No | `/path/to/sqlite_folder` | *Specify a data path for the sqlite persistent datafile (ex. /path/to/scheduler.sqlite)* |
+  | **db_url** | No | postgresql+psycopg2://res_test:res_test@192.168.1.215:5432/res_test | *Specify a PostgreSQL db to retain the schedules. Uncomment and remove the setting datastore_dir.* |
+
+  
+### Integration Server
+* Download the `app-fn_scheduler.zip`.
 * Copy the `.zip` to your Integration Server and SSH into it.
 * **Unzip** the package:
   ```
   $ unzip fn_scheduler-x.x.x.zip
-  ```
-* **Change Directory** into the unzipped directory:
-  ```
-  $ cd fn_scheduler-x.x.x
   ```
 * **Install** the package:
   ```
@@ -101,7 +118,8 @@ Functions available include:
   | ------ | :------: | ------- | ----------- |
   | **timezone** | Yes | `utc` | *Specify the timezone (ex. America/New_York) which scheduled rules should follow* |
   | **thread_max** | Yes | `20` | *Number of threads which can run at the same. Typically, triggered rules run for a very short time to kick off a Resilient rule.* |
-  | **datastore_dir** | Yes | `` | *Specify a data path and file name for the sqlite persistent datafile (ex. /path/to/scheduler.sqlite)* |
+  | **datastore_dir** | No | `/path/to/sqlite_folder` | *Specify a data path for the sqlite persistent datafile (ex. /path/to/scheduler.sqlite)* |
+  | **db_url** | No | postgresql+psycopg2://res_test:res_test@192.168.1.215:5432/res_test | *Specify a postgres db to retain the schedules. Uncomment and remove the setting datastore_dir.** |
 
 * **Save** and **Close** the app.config file.
 * [Optional]: Run selftest to test the Integration you configured:
@@ -113,10 +131,19 @@ Functions available include:
   $ resilient-circuits run
   ```
 
+### Upgrades to v1.0.2
+
+If upgrading to v1.0.2, add the following comments and settings to your app.config [fn_scheduler] section:
+
+```
+# db url if using PostgreSQL DB. Use this with AppHost
+#db_url=postgresql+psycopg2://username:password@host:port/database
+```
+Use these settings to connect to a PostgreSQL db, rather than a SQLite db.
 
 ---
 
-## Uninstall
+### Uninstall
 * SSH into your Integration Server.
 * **Uninstall** the package:
   ```
@@ -167,6 +194,6 @@ There are several ways to verify the successful operation of a function.
 -->
 
 ## Support
-| Name | Version | Author | Support URL |
-| ---- | ------- | ------ | ----------- |
-| fn_scheduler | 1.0.0 | IBM | support@resilientsystems.com
+
+Use the [IBM Support](https://ibm.com/mysupport/) portal to open a case on this app. 
+Also reference the [Resilient Community](https://ibm.biz/resilientcommunity) for any discussion between customers and IBM.
