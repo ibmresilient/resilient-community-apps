@@ -1,7 +1,11 @@
 # (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 # -*- coding: utf-8 -*-
 import logging
-import json
+import sys
+if sys.version_info.major >= 3:
+    from urllib.parse import quote as url_encode
+else:
+    from urllib import quote as url_encode
 import datetime
 from pytz import timezone
 import pytz
@@ -752,7 +756,8 @@ class MSGraphHelper(object):
          :return: $search query portion of the string if there is a message_body string to search for.
          """
         if message_body:
-            return u'?$search="{0}"'.format(message_body)
+            url_encoded_body = url_encode(message_body.encode('utf8'))
+            return u'?$search="{0}"'.format(url_encoded_body)
 
         return ""
 
@@ -791,9 +796,12 @@ class MSGraphHelper(object):
             filter_query = self.append_query_to_query_url(filter_query, has_attachments_query)
 
         if message_subject:
-            # OData query requires single quotes be replaced by 2 single quotes
-            message_subject = message_subject.replace("'", "''")
-            subject_query = u"(contains(subject,'{0}'))".format(message_subject)
+            # OData query requires single quotes be replaced by 2 single quotes when using $filter (not $search)!
+            # First url encode the subject and then substitutes one single quote (%27)
+            # with 2 single quotes (not url encoded).
+            url_encoded_subject = url_encode(message_subject.encode('utf8'))
+            url_encoded_subject = url_encoded_subject.replace("%27", "''")
+            subject_query = u"(contains(subject,'{0}'))".format(url_encoded_subject)
             filter_query = self.append_query_to_query_url(filter_query, subject_query)
 
         # If nothing was added, then return the empty string.
