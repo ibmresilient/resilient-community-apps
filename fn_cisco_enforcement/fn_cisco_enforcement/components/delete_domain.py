@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 """Function implementation"""
 import logging
-import requests
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_cisco_enforcement.lib.resilient_common import validate_fields
+from resilient_lib import validate_fields, RequestsCommon
 
 HEADERS = {'content-type': 'application/json'}
+SECTION_NAME = "fn_cisco_enforcement"
 # Deletes a domain using the Cisco api. The apikey is refernced in the app.config under [fn_cisco_enforcement]
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'delete_domain"""
@@ -15,7 +15,8 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get("fn_cisco_enforcement", {})
+        self.opts = opts
+        self.options = opts.get(SECTION_NAME, {})
         self.log = logging.getLogger(__name__)
 
         self._init()
@@ -23,7 +24,8 @@ class FunctionComponent(ResilientComponent):
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
-        self.options = opts.get("fn_cisco_enforcement", {})
+        self.opts = opts
+        self.options = opts.get(SECTION_NAME, {})
 
         self._init()
 
@@ -48,7 +50,8 @@ class FunctionComponent(ResilientComponent):
             url = url.format(cisco_domain.strip(), self.apikey)
             self.log.debug(url)
 
-            response = requests.delete(url)
+            rc = RequestsCommon(self.opts, self.options)
+            response = rc.execute_call_v2("delete", url)
 
             if response.status_code >= 300:
                 resp = response.json()

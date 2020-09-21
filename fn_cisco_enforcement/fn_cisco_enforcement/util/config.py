@@ -13,5 +13,8 @@ url=https://s-platform.api.opendns.com/1.0
 api_token=
 protocol_version=1.0a
 provider_name=Security Platform
+# Uncomment to specify proxies needed
+#https_proxy=
+#http_proxy=
     """
     return config_result
