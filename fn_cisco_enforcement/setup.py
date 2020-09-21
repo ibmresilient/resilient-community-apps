@@ -11,7 +11,7 @@ setup(
     author_email='support@resilientsystems.com',
     description="Resilient Circuits Components for 'fn_cisco_enforcement'",
     long_description="Manage your Cisco Enforcement customer domain list by adding, listing and deleting entries.",
-    url='https://ibm.biz/resilientcommunity',
+    url='https://ibm.com/mysupport',
     install_requires=[
         'resilient_circuits>=30.0.0',
         'resilient-lib'
