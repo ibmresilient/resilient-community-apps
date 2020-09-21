@@ -51,7 +51,7 @@ class FunctionComponent(ResilientComponent):
             url = url.format(self.apikey)
             self.log.debug(url)
 
-            data  =self.createdataobject(kwargs)
+            data, cisco_dstdomain  =self.createdataobject(kwargs)
 
             rc = RequestsCommon(self.opts, self.options)
             response = rc.execute_call_v2("post", url, json=data, verify=False, headers=HEADERS)
@@ -67,9 +67,8 @@ class FunctionComponent(ResilientComponent):
                     yield StatusMessage(u"Cisco Enforcement failure: {}: {}".format(response.status_code, resp['message']))
             else:
                 result = response.content.decode('latin1')
-                yield StatusMessage("Post Event was successful")
+                yield StatusMessage(u"Add Domain for '{}' was successful".format(cisco_dstdomain))
 
-            self.log.debug(result)
             # Produce a FunctionResult with the results
             yield FunctionResult({ "value": result})
         except Exception as err:
@@ -147,7 +146,7 @@ class FunctionComponent(ResilientComponent):
         data = self.addothers(basicdata, cisco_dstip, cisco_eventseverity, cisco_eventtype, cisco_eventdescription, cisco_eventhash,
                   cisco_filename, cisco_filehash, cisco_externalurl, cisco_src)
 
-        return data
+        return data, cisco_dstdomain
 
     def _parseUrl(self, url_domain):
         """ split a url to also capture the domain """
