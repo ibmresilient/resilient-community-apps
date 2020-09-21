@@ -374,6 +374,7 @@ inputs.dt_utils_row_id = workflow.properties.row_to_delete.row["id"]
 ---
 ## Function - Delete Rows:
 Function that deletes rows from a Data Table given a list of internal row IDs or a 'search_column and search_value' pair.
+<p>Note: This function works with no issue when run on an Artifact workflow. There is an issue when the function is run on a custom workflow on a Data Table. If the delete rows action is performed of the row that meets the condition specified in the pre-process script, this row will not be deleted. 
 
  ![screenshot](./screenshots/dt_delete_rows.png)
 
