@@ -5,8 +5,8 @@ from pymisp import ExpandedPyMISP, MISPAttribute, MISPEvent, MISPSighting
 
 log = logging.getLogger(__name__)
 
-def get_misp_client(URL, API_KEY, VERIFY_CERT):
-    misp_client = ExpandedPyMISP(URL, API_KEY, ssl=VERIFY_CERT)
+def get_misp_client(URL, API_KEY, VERIFY_CERT, proxies):
+    misp_client = ExpandedPyMISP(URL, API_KEY, ssl=VERIFY_CERT, proxies=proxies)
     return misp_client
 
 def create_misp_event(misp_client, misp_distribution, misp_threat_level, misp_analysis_level, misp_event_name):

@@ -4,6 +4,13 @@
 from setuptools import setup, find_packages
 import glob
 import ntpath
+import sys
+
+install_requires = ['resilient_circuits>=30.0.0', 'resilient_lib']
+if sys.version_info[0] < 3:
+    install_requires.append('pymisp<=2.4.119.1')
+else:
+    install_requires.append('pymisp>=2.4')
 
 def get_module_name(module_path):
     """
@@ -19,17 +26,14 @@ def snake_to_camel(word):
 
 setup(
     name='fn_misp',
-    version='3.0.0',
+    version='3.0.1',
     license='MIT',
-    author='Craig',
-    author_email='craig@resilientlab.co.uk',
-    url='resilientsystems.com',
+    author='IBM Resilient',
+    author_email='resil.labs@gmail.com',
+    url='http://ibm.biz/resilientcommunity',
     description="Resilient Circuits Components for 'fn_misp'",
-    long_description="Resilient Circuits Components for 'fn_misp'",
-    install_requires=[
-        'resilient_circuits>=30.0.0',
-        'pymisp'
-    ],
+    long_description="Resilient Circuits Components for 'fn_misp'",  # Update
+    install_requires=install_requires,
     packages=find_packages(),
     include_package_data=True,
     platforms='any',

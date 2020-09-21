@@ -8,7 +8,10 @@ if sys.version_info.major < 3:
     from fn_misp.util import misp_2_helper as misp_helper
 else:
     from fn_misp.util import misp_3_helper as misp_helper
-from resilient_circuits import ResilientComponent, function, StatusMessage, FunctionResult, FunctionError
+from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from resilient_lib import RequestsCommon
+
+PACKAGE= "fn_misp"
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function(s)"""
@@ -16,7 +19,12 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get("fn_misp", {})
+        self.options = opts.get(PACKAGE, {})
+
+    @handler("reload")
+    def _reload(self, event, opts):
+        """Configuration options have changed, save new values"""
+        self.options = opts.get(PACKAGE, {})
 
     @function("misp_search_attribute")
     def _misp_search_attribute_function(self, event, *args, **kwargs):
@@ -45,7 +53,11 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("Setting up connection to MISP")
 
-            misp_client = misp_helper.get_misp_client(URL, API_KEY, VERIFY_CERT)
+            # get proxies
+            rc = RequestsCommon(opts=self.opts, function_opts=self.options)
+            proxies = rc.get_proxies()
+
+            misp_client = misp_helper.get_misp_client(URL, API_KEY, VERIFY_CERT, proxies=proxies)
 
             yield StatusMessage(u"Searching for attribute - {}".format(search_attribute))
 

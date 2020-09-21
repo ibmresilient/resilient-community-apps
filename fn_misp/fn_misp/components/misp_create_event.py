@@ -9,6 +9,7 @@ if sys.version_info.major < 3:
 else:
     from fn_misp.util import misp_3_helper as misp_helper
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from resilient_lib import RequestsCommon
 
 PACKAGE= "fn_misp"
 
@@ -58,7 +59,11 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("Setting up connection to MISP")
 
-            misp_client = misp_helper.get_misp_client(URL, API_KEY, VERIFY_CERT)
+            # get proxies
+            rc = RequestsCommon(opts=self.opts, function_opts=self.options)
+            proxies = rc.get_proxies()
+
+            misp_client = misp_helper.get_misp_client(URL, API_KEY, VERIFY_CERT, proxies=proxies)
 
             yield StatusMessage("Creating event {}".format(misp_event_name))
 
