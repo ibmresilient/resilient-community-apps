@@ -10,11 +10,11 @@
   - [Display the Data Table in an Incident](#display-the-datatable-in-an-incident)
 ---
 
-**This package contains 4 functions that help you manipulate IBM Resilient Data Tables**
+**This package contains 5 functions that help you manipulate IBM Resilient Data Tables**
 
  ![screenshot](./screenshots/dt_functions.png)
 
-The 4 functions allow you to GET, UPDATE and DELETE a row and GET rows in a Data Table
+The 4 functions allow you to GET, UPDATE, DELETE a row and GET and DELETE rows in a Data Table
 
 ---
 ## Function - Get Row:
@@ -374,6 +374,7 @@ inputs.dt_utils_row_id = workflow.properties.row_to_delete.row["id"]
 ---
 ## Function - Delete Rows:
 Function that deletes rows from a Data Table given a list of internal row IDs or a 'search_column and search_value' pair.
+<p>Note: This function works with no issue when run on an Artifact workflow. There is an issue when the function is run on a custom workflow on a Data Table. If the delete rows action is performed of the row that meets the condition specified in the pre-process script, this row will not be deleted. 
 
  ![screenshot](./screenshots/dt_delete_rows.png)
 

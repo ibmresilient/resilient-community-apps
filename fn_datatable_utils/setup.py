@@ -10,10 +10,12 @@ setup(
     author='Resilient Labs',
     author_email='resil.labs@gmail.com',
     url='http://ibm.biz/resilientcommunity',
-    description="Resilient Circuits Components for 'fn_datatable_utils'",
-    long_description="Resilient Circuits Components for 'fn_datatable_utils'",
+    description="Functions that allow you to Get, Update or Delete a single row or Get or Delete multiple rows in a Data Table",
+    long_description="This package contains 5 functions that help you manipulate IBM Resilient Data Tables: Get Row, Update Row, Delete Row, Get Rows and Delete Rows.",
     install_requires=[
-        'resilient_circuits>=31.0.0'
+        'resilient_circuits>=33.0.0',
+        'resilient-lib>=32.0.140',
+        'cachetools'
     ],
     packages=find_packages(),
     include_package_data=True,

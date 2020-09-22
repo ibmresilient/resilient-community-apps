@@ -1,9 +1,12 @@
-# (c) Copyright IBM Corp. 2019. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 """ This is a helper module for GET, UPDATE and DELETE
     Functions for a Resilient Data Table """
 
 import json
+import logging
+from cachetools import cached, LRUCache
 
+DATATABLE_TYPE = 8
 
 class RESDatatable(object):
     """ A helper class for manipulate a Resilient Data Table"""
@@ -13,6 +16,7 @@ class RESDatatable(object):
         self.api_name = dt_api_name
         self.data = None
         self.rows = None
+        self.log = logging.getLogger(__name__)
 
     def get_data(self):
         """ Function that gets all the data and rows of a Data Table
@@ -155,7 +159,7 @@ class RESDatatable(object):
 
         return return_value
 
-    def delete_rows(self, rows_ids=None, search_column=None, search_value=None):
+    def delete_rows(self, rows_ids=None, search_column=None, search_value=None, row_id=None):
         """ Deletes rows.
             Returns the response from Resilient API
             or dict with the entry 'error'. """
@@ -167,9 +171,14 @@ class RESDatatable(object):
         if rows_ids:
             # Convert input str to a list of rows ids
             rows_ids_input = json.loads(rows_ids)
+
+            # for each row returned from the datatable, compare row_ids with our list to delete
             for row in self.rows:
                 if row["id"] in rows_ids_input:
-                    rows_ids_list.append(row["id"])
+                    if row["id"] == row_id:
+                        self.log.warning("Unable to delete current row: %s", row_id)
+                    else:
+                        rows_ids_list.append(row["id"])
 
         # Else search by column name and cell value
         elif search_column and search_value:
@@ -178,7 +187,10 @@ class RESDatatable(object):
                 if search_column not in cells:
                     raise ValueError("{0} is not a valid column api name in for the data table {1}".format(search_column, self.api_name))
                 if "value" in cells[search_column] and cells[search_column]["value"] == search_value:
-                    rows_ids_list.append(row["id"])
+                    if row["id"] == row_id:
+                        self.log.warning("Unable to delete current row: %s", row_id)
+                    else:
+                        rows_ids_list.append(row["id"])
 
         if rows_ids_list:
             for row_id in rows_ids_list:
@@ -189,7 +201,47 @@ class RESDatatable(object):
                     return_value = rows_ids_list
 
         return return_value
+    
+    def get_row_id_from_workflow(self, workflow_instance_id):
+        """
+        Get row information from the workflow instance
 
+        Args:
+            workflow_instance_id (int):
+
+        Returns:
+            int: row_id or None if error or datatype is not a datatable
+        """
+        uri = "/workflow_instances/{}".format(workflow_instance_id)
+        try:
+            response = self.res_client.get(uri)
+
+            # determine if we have a custom object type and it's a datatable
+            if response['object']['type_id'] >= 1000:
+                # confirm this is a data table
+                type_info = self.get_object_type(response['object']['type_id'])
+                if type_info['type_id'] == DATATABLE_TYPE:
+                    return response['object']['object_id']
+
+        except Exception as err:
+            self.log.error("Error with url: %s %s", uri, str(err))
+
+        return None
+
+    @cached(cache=LRUCache(maxsize=100))
+    def get_object_type(self, id):
+        """
+        Get information about a Resilient object. This call is cached for multiple calls
+
+        Args:
+            id (int): object_id
+
+        Returns:
+            json: returned object information
+        """
+        uri = "/types/{}".format(id)
+
+        return self.res_client.get(uri)
 
 def get_function_input(inputs, input_name, optional=False):
     """Given input_name, checks if it defined. Raises ValueError if a mandatory input is None"""
