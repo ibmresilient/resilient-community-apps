@@ -6,9 +6,10 @@ import glob
 import ntpath
 import sys
 
-install_requires = ['resilient_circuits>=30.0.0', 'resilient_lib']
+install_requires = ['resilient_circuits>=32.0', 'resilient_lib>=32.0']
 if sys.version_info[0] < 3:
-    install_requires.append('pymisp<=2.4.119.1')
+    # recommended version from the pymisp docs
+    install_requires.append('pymisp==2.4.119.1')
 else:
     install_requires.append('pymisp>=2.4')
 
@@ -32,7 +33,12 @@ setup(
     author_email='resil.labs@gmail.com',
     url='http://ibm.biz/resilientcommunity',
     description="Resilient Circuits Components for 'fn_misp'",
-    long_description="Resilient Circuits Components for 'fn_misp'",  # Update
+    long_description="This package provides the capability to interct with the MISP REST API. "
+                     "Once installed, the user may create events in MISP from Resilient incidents, "
+                     "mark artifacts as \"sighted\" if they exist in MISP, "
+                     "search MISP events for a given attribute, "
+                     "return sightings in MISP for a given event, "
+                     "or create a tag on a MISP event or attribute.",
     install_requires=install_requires,
     packages=find_packages(),
     include_package_data=True,
