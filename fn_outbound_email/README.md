@@ -2,7 +2,7 @@
 
 - [fn-outbound-email Functions for IBM Resilient](#fn-outbound-email-functions-for-ibm-resilient)
   - [Release Notes](#release-notes)
-    - [v1.1.0](#v110)
+    - [v1.1.1](#v110)
     - [v1.0.9](#v109)
     - [v1.0.8](#v108)
   - [Requirements](#requirements)
@@ -28,7 +28,7 @@
   notes of a previous release
 -->
 
-### v1.1.0
+### v1.1.1
 * Bug fixes and send all or specific attachments
 
 ### v1.0.9
