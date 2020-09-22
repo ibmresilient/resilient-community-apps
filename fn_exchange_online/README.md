@@ -43,6 +43,10 @@ The 1.1.0 release addresses performance issues when querying messages of all Exc
   * Incident note
   * Incident attachment 
 
+* Fixed bug in query messages function which resulted in the search not completing when the queried message subject or message body contained single quote, hashtag or ampersand characters.
+
+* Removed Exchange Online Web Link to Outlook message from the Exchange Online Message Query Results data table when the message is deleted or not found.
+
 **NOTE** Existing users running Exchange Online functions on an integration server, should save the [fn_exchange_online] section of their app.config file to another file and delete that section from the app.config file before installing the new version, as this section has changed.  After installation, run the following command to obtain the new configuration:
 ```
   $ resilient-circuits config -u -l fn-microsoft-exchange-online
