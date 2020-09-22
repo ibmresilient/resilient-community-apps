@@ -10,6 +10,8 @@ else:
     from fn_misp.lib import misp_3_helper as misp_helper
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import RequestsCommon
+from fn_misp.lib import common
+
 
 PACKAGE= "fn_misp"
 
@@ -44,9 +46,7 @@ class FunctionComponent(ResilientComponent):
             misp_attribute_value = kwargs.get("misp_attribute_value")  # text
             misp_event_id = kwargs.get("misp_event_id")  # number
 
-            API_KEY = self.options.get("misp_key")
-            URL = self.options.get("misp_url")
-            VERIFY_CERT = True if self.options.get("verify_cert").lower() == "true" else False
+            API_KEY, URL, VERIFY_CERT = common.validate(self.options)
 
             log = logging.getLogger(__name__)
             log.info("misp_tag_type: %s", misp_tag_type)
@@ -59,9 +59,7 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("Setting up connection to MISP")
 
-            # get proxies
-            rc = RequestsCommon(opts=self.opts, function_opts=self.options)
-            proxies = rc.get_proxies()
+            proxies = common.get_proxies(self.opts, self.options)
 
             misp_client = misp_helper.get_misp_client(URL, API_KEY, VERIFY_CERT, proxies=proxies)
 

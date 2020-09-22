@@ -10,6 +10,7 @@ else:
     from fn_misp.lib import misp_3_helper as misp_helper
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import RequestsCommon
+from fn_misp.lib import common
 
 
 PACKAGE= "fn_misp"
@@ -32,19 +33,7 @@ class FunctionComponent(ResilientComponent):
         """Function: """
         try:
 
-            def get_config_option(option_name, optional=False):
-                """Given option_name, checks if it is in app.config. Raises ValueError if a mandatory option is missing"""
-                option = self.options.get(option_name)
-
-                if option is None and optional is False:
-                    err = u"'{0}' is mandatory and is not set in ~/.resilient/app.config file. You must set this value to run this function".format(option_name)
-                    raise ValueError(err)
-                else:
-                    return option
-
-            API_KEY = get_config_option("misp_key")
-            URL = get_config_option("misp_url")
-            VERIFY_CERT = True if get_config_option("verify_cert").lower() == "true" else False
+            API_KEY, URL, VERIFY_CERT = common.validate(self.options)
 
             # Get the function parameters:
             misp_sighting = kwargs.get("misp_sighting")  # text
@@ -54,9 +43,7 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("Setting up connection to MISP")
 
-            # get proxies
-            rc = RequestsCommon(opts=self.opts, function_opts=self.options)
-            proxies = rc.get_proxies()
+            proxies = common.get_proxies(self.opts, self.options)
 
             misp_client = misp_helper.get_misp_client(URL, API_KEY, VERIFY_CERT, proxies=proxies)
 
