@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
+# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+
 """Function implementation"""
 
 import logging
@@ -16,11 +18,13 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
+        self.opts = opts
         self.options = opts.get("fn_qradar_advisor", {})
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
+        self.opts = opts
         self.options = opts.get("fn_qradar_advisor", {})
 
     @function("qradar_advisor_offense_analysis")
@@ -65,22 +69,41 @@ class FunctionComponent(ResilientComponent):
             client = QRadarAdvisorClient(qradar_host=self.options["qradar_host"],
                                          qradar_token=self.options["qradar_advisor_token"],
                                          advisor_app_id=self.options["qradar_advisor_app_id"],
-                                         cafile=qradar_verify_cert,
-                                         log=log)
+                                         cafile=qradar_verify_cert, log=log,
+                                         opts=self.opts, function_opts=self.options)
+
             stix_json = client.offense_analysis(offense_id=qradar_offense_id,
                                                 restart_if_existed=qradar_analysis_restart_if_existed,
                                                 return_stage=qradar_advisor_result_stage,
                                                 timeout=offense_analysis_timeout,
                                                 period=offense_analysis_period)
-            #
-            # extract list of observables from this stix bundle
-            #
-            observables = stix_utils.get_observables(stix_json=stix_json,
-                                                     log=log)
-            #
-            # generate a folder-tree like structure in html for this stix bundle
-            #
-            html_str = stix_tree.get_html(stix_json, log)
+
+            if "status_code" in stix_json:
+                #
+                # If no observables found in analysis add an error status as html.
+                #
+                summary_string = 'The Offense ID analysis returned an error.'
+                status_string = "QRadar Advisor returned status code '{}'.".format(stix_json["status_code"])
+                if stix_json["status_code"] == 404:
+                    summary_string = "This Offense ID has no observables."
+
+                html_str = "<p>Watson Offense Analysis result for Offense ID: " + qradar_offense_id + "</p>"
+                html_str += "<br><p><span style=\"font-weight:bold\">" + status_string + "</span></p>"
+                html_str += "<p><span style=\"font-weight:bold\">" + summary_string + "</span></p><br>"
+
+                # Set observables as an empty list
+                observables = []
+
+            else:
+                #
+                # extract list of observables from this stix bundle
+                #
+                observables = stix_utils.get_observables(stix_json=stix_json,
+                                                         log=log)
+                #
+                # generate a folder-tree like structure in html for this stix bundle
+                #
+                html_str = stix_tree.get_html(stix_json, log)
 
             #
             # get the insights for this offense

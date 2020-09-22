@@ -9,6 +9,9 @@ def config_section_data():
     """Produce the default configuration section for app.config,
        when called by `resilient-circuits config [-c|-u]`
     """
-    # No additional config is needed
-    config_data = u""
+    config_data = u"""[fn_mitre_integration]
+# Settings for access to Mitre via a proxy
+#http_proxy=http://proxy:80
+#https_proxy=https://proxy:80
+"""
     return config_data

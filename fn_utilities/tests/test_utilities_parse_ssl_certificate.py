@@ -3,8 +3,10 @@
 
 from __future__ import print_function
 import pytest
+from mock_artifact import ArtifactMock
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
+from pytest_resilient_circuits import verify_subset
 
 PACKAGE_NAME = "fn_utilities"
 FUNCTION_NAME = "utilities_parse_ssl_certificate"
@@ -13,14 +15,14 @@ FUNCTION_NAME = "utilities_parse_ssl_certificate"
 config_data = get_config_data(PACKAGE_NAME)
 
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
-resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
+resilient_mock = ArtifactMock
 
 
 def call_utilities_parse_ssl_certificate_function(circuits, function_params, timeout=10):
     # Fire a message to the function
-    evt = SubmitTestFunction("utilities_parse_ssl_certificate", function_params)
+    evt = SubmitTestFunction(FUNCTION_NAME, function_params)
     circuits.manager.fire(evt)
-    event = circuits.watcher.wait("utilities_parse_ssl_certificate_result", parent=evt, timeout=timeout)
+    event = circuits.watcher.wait("{}_result".format(FUNCTION_NAME), parent=evt, timeout=timeout)
     assert event
     assert isinstance(event.kwargs["result"], FunctionResult)
     pytest.wait_for(event, "complete", True)
@@ -36,15 +38,15 @@ class TestUtilitiesParseSslCertificate:
         assert func is not None
 
     @pytest.mark.parametrize("artifact_id, certificate, incident_id, expected_results", [
-        (1, "text", 2095, {"expiration_status": "Valid"}),
-        (6, "text", 2095, {"expiration_status": "Expired"})
+        (6, "text", 2095, {"expiration_status": "Valid"}),
+        (7, "text", 2095, {"expiration_status": "Expired"})
     ])
     def test_success(self, circuits_app, artifact_id, certificate, incident_id, expected_results):
         """ Test calling with sample values for the parameters """
         function_params = { 
             "artifact_id": artifact_id,
-            "certificate": certificate,
+            "utilities_certificate": certificate,
             "incident_id": incident_id
         }
         results = call_utilities_parse_ssl_certificate_function(circuits_app, function_params)
-        ##assert(expected_results == results)
+        verify_subset(expected_results, results)

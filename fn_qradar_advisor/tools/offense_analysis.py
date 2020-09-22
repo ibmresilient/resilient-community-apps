@@ -19,8 +19,8 @@ class SampleCmd(ToolCommand):
         client = QRadarAdvisorClient(qradar_host=self.system_host,
                                      qradar_token=self.system_token,
                                      advisor_app_id=self.opts_dict["app_id"],
-                                     cafile=False,
-                                     log=logging)
+                                     cafile=False, log=logging,
+                                     opts={}, function_opts=self.opts_dict)
         offense_id = self.opts_dict["offense_id"]
         restart_if_existed = self.opts_dict.get("restart_if_exist", "False") == "True"
 

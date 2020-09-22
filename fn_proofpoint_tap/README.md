@@ -13,7 +13,7 @@
 -->
 
 # Proofpoint TAP Functions for IBM Resilient
-
+- [Release Notes](#release-notes)
 - [Overview](#overview)
 - [Requirements](#requirements)
 - [Installation](#installation)
@@ -21,6 +21,24 @@
 - [Troubleshooting](#troubleshooting)
 - [Support](#support)
 
+---
+
+## Release Notes
+<!--
+  Specify all changes in this release. Do not remove the release 
+  notes of a previous release
+-->
+### v1.0.3
+- Fix for event filtering.
+
+### v1.0.2
+- Fix for Poller.
+
+### v1.0.1
+- Bugfix.
+
+### v1.0
+- Initial release
 ---
 
 ## Overview

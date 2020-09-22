@@ -70,10 +70,11 @@ class TestXforceQueryCollection:
             assert(expected_results["success"] == results["success"])
 
     @pytest.mark.parametrize("xforce_collection_type, xforce_query, expected_results", [
-        ({'name': 'public'}, "badquery123", {"success": False}),
-        ({'name': 'public'}, "badquery999", {"success": False}),
-        ({'name': 'private'}, "mirai", {"success": False}) #Assumes the current user has no private collections
+        ({'name': 'public'}, "badquery123", {"success": True}),
+        ({'name': 'public'}, "badquery999", {"success": True}),
+        ({'name': 'private'}, "mirai", {"success": True}) #Assumes the current user has no private collections
     ])
+    # Even no results are returned, the function is a success since there was no error code
     def test_failure(self, circuits_app, xforce_collection_type, xforce_query, expected_results):
         """ Test calling with sample values for the parameters """
         function_params = { 

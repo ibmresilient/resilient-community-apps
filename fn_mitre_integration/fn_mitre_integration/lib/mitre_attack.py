@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 #
-# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 #
 from stix2 import TAXIICollectionSource, Filter, CompositeDataSource
 from stix2.datastore.taxii import DataSourceError
 # Current code is written to support v20, and importing from taxii2client directly returns v21 now
 from taxii2client.v20 import Server
 import re
+from resilient_lib import RequestsCommon
 
 MITRE_TAXII_URL = "https://cti-taxii.mitre.org/taxii/"
 MITRE_BASE_URL = "https://attack.mitre.org"
@@ -549,9 +550,10 @@ class MitreAttackConnection(object):
     Collection of methods for extracting data from MitreServer.
     Includes the logic of using multiple data sources.
     """
-    def __init__(self):
+    def __init__(self, opts=None, function_opts=None):
         self.attack_server = None
         self.composite_ds = None
+        self.proxies = RequestsCommon(opts, function_opts).get_proxies()
 
     def connect_server(self, url=None):
         """
@@ -560,7 +562,7 @@ class MitreAttackConnection(object):
         :return:
         """
         server_url = MITRE_TAXII_URL if url is None else url
-        self.attack_server = Server(server_url)
+        self.attack_server = Server(server_url, proxies=self.proxies)
         api_root = self.attack_server.api_roots[0]
         # CompositeSource to query all the collections at once
         c_sources = [TAXIICollectionSource(collection) for collection in api_root.collections]
@@ -625,8 +627,8 @@ class MitreAttack(object):
     """
     Facet class for accessing data from Mitre Attack
     """
-    def __init__(self):
-        self.conn = MitreAttackConnection()
+    def __init__(self, opts=None, function_opts=None):
+        self.conn = MitreAttackConnection(opts, function_opts)
 
     def get_technique(self, name=None, ext_id=None):
         """

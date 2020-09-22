@@ -19,6 +19,9 @@ urlscanio_screenshot_url=https://urlscan.io/screenshots
 
 # Optional timeout (seconds)
 # timeout=300
+# Optional http proxies
+#http_proxy=http://your_proxy.com
+#https_proxy=https://your_proxy.com
     """
     return config_data
 

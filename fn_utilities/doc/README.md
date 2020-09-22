@@ -12,9 +12,11 @@
   ![screenshot: screenshot_1](./screenshots/screenshot_1.png)
 -->
 
-# **User Guide:** fn_utilities_v1.0.10
+# **User Guide:** fn_utilities_v2.0.0
 
 ## Table of Contents
+- [App Host Setup](#app-host-setup)
+- [Integration Server Setup](#integration-server-setup)
 - [Function - Utilities: Attachment Hash](#function---utilities-attachment-hash)
 - [Function - Utilities: Attachment to Base64](#function---utilities-attachment-to-base64)
 - [Function - Utilities: Attachment Zip Extract](#function---utilities-attachment-zip-extract)
@@ -39,6 +41,27 @@
 - [Rules](#rules)
 
 ---
+
+### Release History
+
+| Version | Date | Notes |
+| ------- | ---- | ----- |
+| 2.0.0   | 7/2020 | Numerous fixes, improved Rules and workflows and only Python 3 supported |
+| 1.0.15 | 5/2020 | Bug fixes |
+| 1.0.14  | 5/2020 | Shell Command support for Remote Linux Execution |
+
+## App Host Setup
+This app is available for use in App Host. 
+
+When using Shell Command, several Linux commands have been installed on the container including: 
+dig, nslookup, traceroute and whois. These commands can be specified within the app.config file directly such as:
+`nslookup=nslookup "{{shell_param1}}"`. 
+Other commands not loaded within the container can be accessed via remote shell execution. See the section [Function - Utilities: Shell Command](#function---utilities-shell-command) for more information. 
+
+## Integration Server Setup
+Note: this version of fn_utilities will only run in a Python 3 environment. 
+This is due to changes in dependent python packages with Python 2's end of life. 
+If you continue to use Python 2 in your Integration Server environment, use previous versions of this app.
 
 ## Function - Utilities: Attachment Hash
 Calculate hashes for a file attachment. Returns `md5`, `sha1`, `sha256` and other hashes of the file content. Those hashes can then be used as artifacts or in other parts of your workflows.
@@ -174,7 +197,7 @@ if results.get("content", None) is not None:
 ## Function - Utilities: Attachment Zip Extract
 Extracts a file from a ZIP file attachment, producing a base64 string.
 
-That string can then be used as input to subsequent functions that might write it as a file attachment, as a malware sample artifact, or in other ways.
+That string can then be used as input to subsequent functions that might write it as a file attachment, such as a malware sample artifact.
 
  ![screenshot: fn-utilities-attachment-zip-extract ](./screenshots/fn-utilities-attachment-zip-extract.png)
 
@@ -255,7 +278,9 @@ None
 
 ---
 ## Function - Utilities: Attachment Zip List
-Reads a ZIP file and produces a list of the file paths, and a list with detailed information about each file.
+Reads a ZIP file and produces a list of the compressed files, and a list with detailed information about each file.
+
+**Note**: The contents of password protected Excel spreadsheets cannot be listed.
 
  ![screenshot: fn-utilities-attachment-zip-list ](./screenshots/fn-utilities-attachment-zip-list.png)
 
@@ -363,7 +388,7 @@ incident.addNote(helper.createRichText(html))
 
 ---
 ## Function - Utilities: Base64 to Artifact
-Creates a new artifact from a Base64 string. You can  specify the artifact type and description.
+Creates a new artifact from a Base64 string. You can also specify the artifact type and description.
 
  ![screenshot: fn-utilities-base64-to-artifact ](./screenshots/fn-utilities-base64-to-artifact.png)
 
@@ -469,7 +494,7 @@ None
 
 ---
 ## Function - Utilities: Base64 to Attachment
-Creates a new attachment from a base64 string.
+Creates a new attachment from a base64 string. You can also specify the file name and content type to use.
 
  ![screenshot: fn-utilities-base64-to-attachment ](./screenshots/fn-utilities-base64-to-attachment.png)
 
@@ -547,7 +572,7 @@ None
 ## Function - Utilities: Call REST API
 This function calls a REST web service. It supports the standard REST methods: GET, HEAD, POST, PUT, DELETE and OPTIONS.
 
-The function parameters determine the type of call, the URL, and optionally the headers and body. The results include the text or structured (JSON) result from the web service, and additional information including the elapsed time.
+The function parameters determine the type of call, the URL, and optionally the headers, cookies and body. The results include the text or structured (JSON) result from the web service, and additional information including the elapsed time.
 
  ![screenshot: fn-utilities-call-rest-api ](./screenshots/fn-utilities-call-rest-api.png)
 
@@ -657,7 +682,8 @@ artifact.description = results.text
 
 ---
 ## Function - Utilities: Domain Distance
-Identifies similarity between a suspicious domain name and a list of valid domain names.  Low distance result indicates a possible spoof attempt.
+Identifies similarity between a suspicious domain name and a list of valid domain names.  Low distance result indicates a possible spoof attempt. 
+For example, www.ibm.com and www.1bm.com would have a low distance. This can used for URLs, DNS names and email addresses.
 
  ![screenshot: fn-utilities-domain-distance ](./screenshots/fn-utilities-domain-distance.png)
 
@@ -698,8 +724,16 @@ results = {
 <p>
 
 ```python
-# The domain name being tested
-inputs.domain_name = artifact.value
+# if email address, return only domain portion
+if "email" in artifact.type.lower():
+  split_email = artifact.value.split("@")
+  if len(split_email) > 1:
+    inputs.domain_name = split_email[1]
+  else:
+    inputs.domain_name = artifact.value
+else:
+  # The domain name being tested
+  inputs.domain_name = artifact.value
 
 # The list of domains to test against
 inputs.domain_list = "ibm.com, resilientsystems.com, ibmcloud.com, bluemix.com"
@@ -729,27 +763,28 @@ if results.closest.distance <= 1:
 
 ---
 ## Function - Utilities: Email Parse
-Extracts message headers and body parts from an email message (.eml or .msg).
+Extracts message headers and parts of the message body from an email message (.eml or .msg).
 
 Any attachments found are added to the incident as artifacts if `utilities_parse_email_attachments` is set to True.
 
  ![screenshot: fn-utilities-email-parse ](./screenshots/fn-utilities-email-parse.png)
 
 ### Supporting Outlook .msg files
-* This function relies on `mail-parser>=3.9.3`
-* To support parsing of Outlook email files (`.msg`), you need to install the `msgconvert` tool
-* `msgconvert` is a tool written in Perl and can be found in `libemail-outlook-message-perl` (Debian) or `Email::Outlook::Message` (Linux).
-* See https://github.com/SpamScope/mail-parser for more
+* This function relies on `mail-parser>=3.9.3`.
 
-#### Install `msgconvert` on Debian based systems:
-```
-$ apt-get install libemail-outlook-message-perl
-```
-#### Install `msgconvert` on CentOS/Linux based systems:
+#### For Integrations Servers:
+* To support parsing of Outlook email files (`.msg`), you need to install the `msgconvert` tool.
+* `msgconvert` is a tool written in Perl and can be found in `Email::Outlook::Message` (Centos/RHEL).
+* See https://github.com/SpamScope/mail-parser for more information on the packaged used.
+
+#### Install `msgconvert` on CentOS/RHEL based systems:
 ```
 $ sudo yum install cpan
-$ sudo cpan install Email::Outlook::Message
+$ sudo cpan -fTi install Email::Outlook::Message
 ```
+
+#### For App Host Environments:
+* The packages required to parse Outlook .msg  files is built into the container.
 
 <details><summary>Inputs:</summary>
 <p>
@@ -1048,7 +1083,7 @@ for named_range in keys:
 
 ---
 ## Function - Utilities: Expand URL
-Takes a URL (mostly shortened) and follows it through redirects as it expands. The results include each URL, which are added to a new artifact.
+Takes a shortened URL and follows it through redirects as it expands. The results include each URL, which are added to a new artifact.
 
  ![screenshot: fn-utilities-expand-url ](./screenshots/fn-utilities-expand-url.png)
 
@@ -1213,9 +1248,9 @@ inputs.incident_id = incident.id
 ## Function - Utilities: JSON2HTML
 Produces an HTML representation of JSON data. All data is converted into tables of key / value pairs or lists.
 
-Provide an optional parameter `json2html_keys` to limit the JSON data to display.
+Provides an optional parameter `json2html_keys` to limit the JSON data to display.
 
-For the example below, specifying `key1.key2.key3` will only convert the JSON data associated with that key path.
+For the example below, specifying `key1.key2.key3` only converts the JSON data associated with that key path.
 
  ![screenshot: fn-utilities-json2html ](./screenshots/fn-utilities-json2html.png)
 
@@ -1267,13 +1302,13 @@ results = {
 
 ---
 ## Function - Utilities: Parse SSL Certificate
-This function produces the structured data from a provided SSL certificate. Three inputs are accepted by the function. There are 2 defined ways to use this function for parsing certificates.
+This function produces the structured data from a provided SSL certificate. Three inputs are accepted by the function. There are two defined ways to use this function for parsing certificates.
 
 Option 1 involves providing a JSON-encoded representation of a certificate. In this case the certificate input parameter should be this JSON string.
 
 Option 2 involves providing a certificate file for parsing. When the rule is triggered on an artifact, both the incident_id for that incident and the artifact_id for the specified certificate file must be provided.
 
-NOTE: The Parse SSL Certificate function expects a certificate of type PEM. If you require a way to get a PEM formatted certificate from a URL consider using this in conjunction with the Extract SSL Cert from URL function.
+NOTE: The Parse SSL Certificate function expects a certificate of type PEM. If you require a way to get a PEM formatted certificate from a URL, consider using this in conjunction with the Extract SSL Cert from URL function.
 
  ![screenshot: fn-utilities-parse-ssl-certificate ](./screenshots/fn-utilities-parse-ssl-certificate.png)
 
@@ -1346,7 +1381,8 @@ incident.addNote(helper.createRichText(noteText))
 
 ---
 ## Function - Utilities: PDFiD
-Produces summary information about the structure of a PDF file, using Didier Stevens' pdfid (https://blog.didierstevens.com/programs/pdf-tools/). Provide the PDF file content as a base64-encoded string, for example the output from the “Attachment to Base64” function.
+Produces summary information about the structure of a PDF file, using Didier Stevens' pdfid (https://blog.didierstevens.com/programs/pdf-tools/). 
+The PDF file content should be provided as a base64-encoded string, for example the output from the “Attachment to Base64” function.
 
 This function is useful in initial triage of suspicious email attachments and other files. It allows you to identify PDF documents that contain (for example) JavaScript or that execute an action when opened. PDFiD also handles name obfuscation. The combination of PDF automatic action and JavaScript makes a document very suspicious.
 
@@ -1453,9 +1489,10 @@ else:
 
 ---
 ## Function - Utilities: Resilient Search
-This function searches the Resilient platform for incident data according to the criteria specified, and returns the results to your workflow. It can be used to find incidents containing data that matches any string, or incidents currently assigned to a given user, or a very wide range of other search conditions.
+This function searches the Resilient platform for incident data according to the criteria specified, and returns the results to your workflow. 
+It can be used to find incidents containing data that matches any string, incidents currently assigned to a given user, or a very wide range of other search conditions.
 
-**NOTE:** The search results may include data from incidents that the current Resilient user (the person who triggered the workflow) cannot access. Often your Resilient users have the `Default` role that allows them to only see incidents where they are members. This function runs with the permissions of your integration account, which typically may have much wider access privileges. **Use with caution, to avoid information disclosure.**
+**NOTE:** The search results may include data from incidents that the current Resilient user (the person who triggered the workflow) cannot access. Often your Resilient users have the `Default` role that allows them to only see incidents where they are members. This function runs with the permissions of your app account, which typically may have much wider access privileges. **Use with caution, to avoid information disclosure.**
 
  ![screenshot: fn-utilities-resilient-search ](./screenshots/fn-utilities-resilient-search.png)
 
@@ -1732,24 +1769,45 @@ incident.addNote(helper.createRichText(html))
 ## Function - Utilities: Shell Command
 This function allows your workflows to execute shell-scripts locally or remotely, and return the result into the workflow. The results include the `stdout` and `stderr` streams, the return code, and information about the execution time. If the output of the shell script is JSON, it is returned as structured data. Results can then be added to the incident as file attachments, artifacts, data tables, or any other uses.
 
-These functions can be run on any platform. If you install and run the resilient-circuits framework on Windows, this allows you to configure this function to run PowerShell scripts.
+These shell commands can be run on any linux or windows platform. Different modes supported:
+* Remote Linux execution
+* Remote Windows command and powershell execution
+* Local command execution of Linux commands such as nslookup, dig, traceroute and whois
+* Local execution of Windows Powershell commands if resilient-circuits is installed on a Windows platform.
 
  ![screenshot: fn-utilities-shell-command ](./screenshots/fn-utilities-shell-command.png)
 
-* Remote commands must specify a target Windows machine that has Windows Remote Management (WinRM) enabled. This can be done by running `winrm qc` in the remote computer’s command prompt.
-* Remote shells have a max memory that may not be sufficient to run your script; to change this value you must set `MaxMemoryPerShellMB`.
 * For security, the list of available shell commands must be **configured explicitly by the administrator**. To do this, edit the [fn_utilities] section of the `app.config` file.
 * **NOTE:** The parameter values `{{shell_param1}}`, `{{shell_param2}}`, `{{shell_param3}}` may contain spaces, dashes and other characters. In your command configuration, they must be surrounded with double-quotes. Failure to properly quote your command parameters creates a security risk, since the parameter values usually come from artifacts and other untrusted data.
-For remote powershell scripts the, `shell_param2`, and `shell_param3` values map `$args[0]`, `$args[1]`, and `$args[2]` respectively in the Powershell script.
+
+For local and remote Windows environments:
+* Remote commands must specify a target Windows machine that has Windows Remote Management (WinRM) enabled. This can be done by running `winrm qc` in the remote computer’s command prompt.
+* Remote shells have a max memory that may not be sufficient to run your script; to change this value you must set `MaxMemoryPerShellMB`.
+* For remote powershell scripts, the `shell_param1`, `shell_param2` and `shell_param3` values map to `$args[0]`, `$args[1]`, and `$args[2]` respectively in the Powershell script.
 
 ### app.config examples:
-* Unix Operating Systems basic examples:
+* Linux Operating Systems basic examples:
   ```
+  # Remote Linux and Windows servers:
+  remote_computer=(usr1:password@192.168.1.186)
+  remote_computer_windows=(usr2:password@192.168.1.184)
+  
+  # Remote Windows commands:
+  traceroute_windows_ps=[\Users\ms\traceroute.ps1]
+  traceroute_windows_cmd=[tracert.exe -h 10 {{shell_param1}}]
+  
+  # Remote Linux command:
+  tracepath=(tracepath -m 10 '{{shell_param1}}')
+  
+  # Local Linux server commands:
   nslookup=nslookup "{{shell_param1}}"
-  dig=dig "{{shell_param1}}" traceroute=traceroute -m 15 "{{shell_param1}}"
+  dig=dig "{{shell_param1}}" 
+  traceroute=traceroute -m 15 "{{shell_param1}}"
   ```
 
-* In these examples using the Volatility forensics framework, the first parameter is filename of the memory image, assuming $VOLATILITY_LOCATION is set in the environment (such as in the system unit configuration). The second parameter is the Volatility profile ("Win7SP0x64" etc).
+* The following examples use the Volatility forensics framework. 
+The first parameter is filename of the memory image, assuming $VOLATILITY_LOCATION is set in the environment (such as in the system unit configuration). 
+The second parameter is the Volatility profile ("Win7SP0x64" etc).
   ```
   imageinfo=python /path/to/vol.py -f "{{shell_param1}}" imageinfo -- output=json
   kdbgscan=python /path/to/vol.py -f "{{shell_param1}}" -- profile="{{shell_param2}}" kdbgscan --output=json
@@ -1757,15 +1815,15 @@ For remote powershell scripts the, `shell_param2`, and `shell_param3` values map
   dlllist=python /path/to/vol.py -f "{{shell_param1}}" -- profile="{{shell_param2}}" dlllist --output=json
   ```
 
-### Running Scripts Remotely:
+### Running Powershell Scripts Remotely:
 To configure running scripts remotely, the user must make these changes to the config file:
-- Specify acceptable powershell compatible extensions of script files:
-  - `remote_powershell_extensions=ps1`
-- Specify the transport authentication method
+- Specify acceptable powershell compatible extensions of script files, comma separated:
+  - `remote_powershell_extensions=ps1,psc1`
+- Specify the transport authentication method:
   - `remote_auth_transport=ntlm`
-- Specify remote commands in the config file wrapped in square brackets []
+- Specify remote commands in the config file wrapped in square brackets []:
   - `remote_command=[C:\remote_directory\remote_script.ps1]`
-- Specify a remote computer in the config file to run the script wrapped in parentheses ()
+- Specify a remote computer in the config file to run the script wrapped in parentheses ():
   - `remote_computer=(username:password@server)`
 
 
@@ -1783,8 +1841,6 @@ remote_computer2=(domain\admin:P@ssw0rd@server2)
 - These remote commands can then be run in the workflow using the syntax `remote_command:remote_computer` as the input for shell_command. Examples:
   - `remote_command1:remote_computer1` runs `remote_command1` remotely on `remote_computer1`
   - `remote_command2:remote_computer1` runs `remote_command2` remotely on `remote_computer1`
-  - `remote_command1:remote_computer2` runs `remote_command1` remotely on `remote_computer2`
-  - `remote_command2:remote_computer2` runs `remote_command2` remotely on `remote_computer2`
 
 <details><summary>Inputs:</summary>
 <p>
@@ -1828,7 +1884,7 @@ results = {
 # NOTE: The administrator must configure each command before you can run it!
 inputs.shell_command = "traceroute"
 
-# True if running a Remote Powershell, otherwise False
+# True if running a Remote server, otherwise False
 inputs.shell_remote = False
 
 # Parameters to the command.  In this case we run traceroute to the artifact
@@ -1926,19 +1982,21 @@ None
 
 ---
 ## Function - Utilities: Timer
-This function implements a timer (sleep) function that when called from a workflow will cause the workflow to pause for the specified amount of time. The function takes one of two parameters as input: `utilities_time` or `utilities_epoch`.
+This function implements a timer (sleep) function that when called from a workflow causes the workflow to pause for the specified amount of time. The function takes one of two parameters as input: `utilities_time` or `utilities_epoch`.
 
 The utilities_time parameter is a string that specifies the total amount of time to pause. The input string is of format `time value` concatenated with a `time unit` character, where character is:
-• `s` for seconds
-• `m` for minutes
-• `h` for hours
-• `d` for days
+* `s` for seconds
+* `m` for minutes
+* `h` for hours
+* `d` for days
 
 For example: `30s` = 30 seconds; `20m` = 20 minutes; `5h` = 5 hours; `6d` = 6 days
 
-The `utilities_epoch` parameter is the epoch time that the timer function should stop sleeping. An epoch time value is returned from the date time picker UI widget.
+The `utilities_epoch` parameter is the epoch time which the timer function should sleep until that time has passed. 
+An epoch time value is returned from the date time picker UI widget.
 
-The timer function will break down the total amount of time to pause into smaller sleep time intervals and check in between sleep time whether the workflow has been terminated while the function is running. If the workflow has been terminated, the function will end execution.
+The timer function breaks down the total amount of time to pause into smaller sleep time intervals and checks in-between these sleep intervals whether the workflow has been terminated while the function is running. 
+If the workflow has been terminated, the function will end execution.
 
  ![screenshot: fn-utilities-timer ](./screenshots/fn-utilities-timer.png)
 
@@ -2010,9 +2068,17 @@ None
 
 ---
 ## Function - Utilities: XML Transformation
-Transforms an XML document using a preexisting `xsl` stylesheet. The resulting content is returned.
+Transforms an XML document using a pre-defined xsl stylesheet and returns the resulting content.
 
  ![screenshot: fn-utilities-xml-transformation ](./screenshots/fn-utilities-xml-transformation.png)
+
+### For App Host Environments:
+* Set the app.config `xml_stylesheet_dir` setting as follows:
+
+     xml_stylesheet_dir= /var/rescircuits/xmltransformation
+* Add your transformation file to the App Configuration tab to refer to the same directory as used in `xml_stylesheet_dir`.
+
+![screenshot: fn-utilities-apphost-XMTransformations](./screenshots/fn-utilities-apphost-XMTransformations.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -2134,5 +2200,5 @@ incident.addNote(content)
 <!--
 ## Inform Resilient Users
   Use this section to optionally provide additional information so that Resilient playbook 
-  designer can get the maximum benefit of your integration.
+  designer can get the maximum benefit of your app.
 -->

@@ -7,5 +7,9 @@ from __future__ import print_function
 
 
 def config_section_data():
-    return None
+    return """[fn_whois_rdap]
+# uncomment to include proxy support
+#https_proxy=https://some_proxy.com
+#http_proxy=http://some_proxy.com
+"""
     

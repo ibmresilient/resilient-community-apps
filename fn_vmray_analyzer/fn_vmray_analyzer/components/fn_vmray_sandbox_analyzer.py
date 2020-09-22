@@ -1,14 +1,13 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2019. All Rights Reserved.
+# (c) Copyright IBM Corp. 2020. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
 import logging
-import tempfile, time, json
+import tempfile, time, os
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 
-from resilient_lib import validate_fields, get_file_attachment, get_file_attachment_name, RequestsCommon, build_incident_url, build_resilient_url
-
+from resilient_lib import validate_fields, get_file_attachment, get_file_attachment_name, RequestsCommon
 from fn_vmray_analyzer.util.vmrapi import VMRayAPI
 
 CONFIG_DATA_SECTION = "fn_vmray_analyzer"
@@ -42,8 +41,7 @@ class FunctionComponent(ResilientComponent):
 
         def write_temp_file(data, name=None):
             if name:
-                path = "{0}/{1}".format(tempfile.gettempdir(), name)
-
+                path = os.path.join(tempfile.gettempdir(), name)
             else:
                 tf = tempfile.mkstemp()
                 path = tf[1]
@@ -79,10 +77,13 @@ class FunctionComponent(ResilientComponent):
             log.info("analysis_report_status: %s", analysis_report_status)
             log.info("sample_ids: %s", sample_ids)
 
+            sample_final_result = []
+
             if not analysis_report_status:
 
                 # VMRay client and Resilient client
-                vmray = VMRayAPI(VMRAY_API_KEY, url=VMRAY_ANALYZER_URL, proxies=RequestsCommon().get_proxies())
+                vmray = VMRayAPI(VMRAY_API_KEY, url=VMRAY_ANALYZER_URL,
+                                 proxies=RequestsCommon(self.opts, self.options).get_proxies())
                 resilient = self.rest_client()
 
                 # Get attachment entity we are dealing with (either attachment or artifact)
@@ -117,7 +118,6 @@ class FunctionComponent(ResilientComponent):
                     time.sleep(CHECK_REPORTS_SLEEP_TIME)
                     is_samples_analysis_finished = all(vmray.check(sample_id) for sample_id in sample_ids)
 
-                sample_final_result = []
                 if is_samples_analysis_finished:
                     for sample_id in sample_ids:
                         sample_final_result.append({"sample_id": sample_id,
@@ -138,5 +138,5 @@ class FunctionComponent(ResilientComponent):
             log.info("results: " + str(results))
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
-        except Exception:
-            yield FunctionError()
+        except Exception as err:
+            yield FunctionError(err)

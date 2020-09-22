@@ -10,6 +10,7 @@ import shutil
 import json
 import base64
 import mailparser
+from fn_utilities.util.utils_common import b_to_s, s_to_b
 from resilient_circuits import ResilientComponent, function, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import ResultPayload, validate_fields, get_file_attachment_metadata, get_file_attachment, write_to_tmp_file
 
@@ -41,7 +42,7 @@ class FunctionComponent(ResilientComponent):
             # If its just base64content as input, use parse_from_string
             if fn_inputs.get("base64content"):
                 yield StatusMessage("Processing provided base64content")
-                parsed_email = mailparser.parse_from_string(base64.b64decode(fn_inputs.get("base64content")))
+                parsed_email = mailparser.parse_from_string(b_to_s(base64.b64decode(fn_inputs.get("base64content"))))
                 yield StatusMessage("Provided base64content processed")
 
             else:
@@ -125,7 +126,7 @@ class FunctionComponent(ResilientComponent):
                             yield StatusMessage(u"Attempting to add {0} to Incident: {1}".format(attachment.get("filename"), fn_inputs.get("incident_id")))
 
                             # Write the attachment.payload to a temp file
-                            path_tmp_file, path_tmp_dir = write_to_tmp_file(data=attachment.get("payload"),
+                            path_tmp_file, path_tmp_dir = write_to_tmp_file(data=s_to_b(attachment.get("payload")),
                                                                             tmp_file_name=attachment.get("filename"),
                                                                             path_tmp_dir=path_tmp_dir)
 

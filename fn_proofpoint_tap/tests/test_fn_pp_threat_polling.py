@@ -70,8 +70,8 @@ class TestPPThreatPolling(object):
         (None, None),
         ("all", None),
         ("spam,, ALL  , phish", None),
-        ("SpaM, ,", {18}),
-        ("SpaM, MALWARE, Phish,", {18, 19, 22})
+        ("SpaM, ,", ({"spam"})),
+        ("SpaM, MALWARE, Phish,", ({"spam", "malware", "phish"}))
     ])
     def test_get_type_filter(self, inputs, results, monkeypatch):
         """ Test getting set of type ids for the type_filter string."""
@@ -118,17 +118,18 @@ class TestPPThreatPolling(object):
         poller = self.get_pp_threat_polling(monkeypatch)
         assert poller.map_to_incident_type_ids(inputs) == results
 
-    @pytest.mark.parametrize("input_type_filter,input_threat_types,results", [
-        (None, {'malware', 'spam'}, [18, 19]),
-        ({18}, {'malware', 'spam'}, [18, 19]),
-        ({10}, {'malware', 'spam'}, None)
+    @pytest.mark.parametrize("input_type_filter, type_filter, input_threat_types,results", [
+        (None, None, {'malware', 'spam'}, [18, 19]),
+        ({18}, {'spam'}, {'malware', 'spam'}, [18, 19]),
+        ({22}, {'phish'}, {'malware', 'spam'}, None)
     ])
-    def test_filtered_threat_types(self, input_type_filter, input_threat_types, results, monkeypatch):
+    def test_filtered_threat_types(self, input_type_filter, type_filter, input_threat_types, results, monkeypatch):
         """
         Test mapping the threat types to incident type ids and check to see if filtering is requested.
         """
         poller = self.get_pp_threat_polling(monkeypatch)
         poller.id_type_filter = input_type_filter
+        poller.type_filter = type_filter
         assert poller._filtered_threat_types(input_threat_types) == results
 
     @pytest.mark.parametrize("threatsInfoMap, results", [

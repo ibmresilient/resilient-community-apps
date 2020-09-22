@@ -81,7 +81,7 @@ while IFS='' read -r image || [[ -n "$image" ]]; do
     echo "Image pulled; Retagging image before pushing"
 
     # Tag the image with our destination registry
-    $container_engine tag "$SOURCE_REGISTRY/$image" "$destination_registry/$image"
+    $container_engine tag "$SOURCE_REGISTRY/$image" "$destination_registry/$REGISTRY_ORG/$image"
 
     # Uncomment this if you are on AWS and want to have repositories created for your newly tagged images
     # aws ecr describe-repositories  --region us-east-2 --repository-names $image 2>&1 > /dev/null
@@ -93,16 +93,16 @@ while IFS='' read -r image || [[ -n "$image" ]]; do
     echo "Image tagged; Pushing now to destination registry: $destination_registry"
 
     # Push our newly tagged image to the destination
-    $container_engine push "$destination_registry/$image"
+    $container_engine push "$destination_registry/$REGISTRY_ORG/$image"
 
     # After upload, check the second conf file to determine if this image should be removed
     if grep -Fxq $image $IMAGES_TO_PRESERVE_LOCALLY
     then
         echo "Transfer completed for image $image. The image $image was found in the list of images to be preserved and will not be removed locally"
     else
-        echo "Transfer completed for image $image. Now cleaning up and removing these local images: $destination_registry/$image, $SOURCE_REGISTRY/$image"
+        echo "Transfer completed for image $image. Now cleaning up and removing these local images: $destination_registry/$REGISTRY_ORG/$image, $SOURCE_REGISTRY/$image"
     
-        $container_engine rmi -f "$destination_registry/$image"
+        $container_engine rmi -f "$destination_registry/$REGISTRY_ORG/$image"
         
         $container_engine rmi -f "$SOURCE_REGISTRY/$image"
     fi

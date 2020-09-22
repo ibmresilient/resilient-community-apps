@@ -91,7 +91,7 @@ do
         echo "Image pulled; Retagging image before pushing"
 
         # Tag the image with our destination registry
-        $container_engine tag "$SOURCE_REGISTRY/$repo:$tag" "$destination_registry/$repo:$tag"
+        $container_engine tag "$SOURCE_REGISTRY/$repo:$tag" "$destination_registry/$REGISTRY_ORG/$repo:$tag"
 
         # Uncomment this if you are on AWS and want to have repositories created for your newly tagged images
         # aws ecr describe-repositories  --region us-east-2 --repository-names $image 2>&1 > /dev/null
@@ -103,12 +103,12 @@ do
         echo "Image tagged; Pushing now to destination registry: $destination_registry"
 
         # Push our newly tagged image to the destination
-        $container_engine push "$destination_registry/$repo:$tag"
+        $container_engine push "$destination_registry/$REGISTRY_ORG/$repo:$tag"
 
-        echo "Transfer completed for image $image. Now cleaning up and removing these local images: $destination_registry/$repo:$tag, $SOURCE_REGISTRY/$repo:$tag"
+        echo "Transfer completed for image $image. Now cleaning up and removing these local images: $destination_registry/$REGISTRY_ORG/$repo:$tag, $SOURCE_REGISTRY/$repo:$tag"
     
         # Delete the images locally to avoid using up all storage during transfer
-        $container_engine rmi -f "$destination_registry/$repo:$tag"
+        $container_engine rmi -f "$destination_registry/$REGISTRY_ORG/$repo:$tag"
         
         $container_engine rmi -f "$SOURCE_REGISTRY/$repo:$tag"
 

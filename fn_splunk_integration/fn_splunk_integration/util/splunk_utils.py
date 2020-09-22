@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright IBM Corp. - Confidential Information
+# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 #
 #   Util classes for Splunk
 #
@@ -44,21 +44,21 @@ class SearchTimeout(Exception):
 class SearchJobFailure(Exception):
     """ Search job creation failure"""
     def __init__(self, query):
-        fail_msg = "Failed to create search job for query [{}] ".format(query)
+        fail_msg = u"Failed to create search job for query [{}] ".format(query)
         super(SearchJobFailure, self).__init__(fail_msg)
 
 
 class RequestError(Exception):
     """ Request error"""
     def __init__(self, url, message):
-        fail_msg = "Request to url [{}] throws exception. Error [{}]".format(url, message)
+        fail_msg = u"Request to url [{}] throws exception. Error [{}]".format(url, message)
         super(RequestError, self).__init__(fail_msg)
 
 
 class DeleteError(Exception):
     """ Request error"""
     def __init__(self, url, message):
-        fail_msg = "Delete request to url [{}] throws exception. Error [{}]".format(url, message)
+        fail_msg = u"Delete request to url [{}] throws exception. Error [{}]".format(url, message)
         super(DeleteError, self).__init__(fail_msg)
 
 
@@ -132,7 +132,7 @@ class SplunkClient(object):
         """
         result = dict()
 
-        LOG.debug("Query: {}" .format(query))
+        LOG.debug(u"Query: {}" .format(query))
 
         splunk_job = self.start_search(query)
 
@@ -168,6 +168,7 @@ class SplunkClient(object):
                         #
                         splunk_job.cancel()
                         raise SearchTimeout(splunk_job.name, splunk_job["dispatchState"])
+                LOG.debug("Sleeping for %s", self.polling_interval)
                 time.sleep(self.polling_interval)
 
         if splunk_job["dispatchState"] != "DONE" or splunk_job["isFailed"] == True:
@@ -178,7 +179,7 @@ class SplunkClient(object):
                 raise SearchFailure(splunk_job.name, splunk_job["dispatchState"] + u", " + str(splunk_job["messages"]))
 
         reader = splunk_results.ResultsReader(splunk_job.results())
-        result = {"events": [row for row in reader]}
+        result = {"events": list([dict(row) for row in reader])}
 
         return result
 
@@ -306,7 +307,7 @@ class SplunkUtils(object):
                    "content": resp.json()}
 
         except Exception as e:
-            raise DeleteError(url, "Failed to delete: {}".format(str(e)))
+            raise DeleteError(url, u"Failed to delete: {}".format(str(e)))
 
         return ret
 

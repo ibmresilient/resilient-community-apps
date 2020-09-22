@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
+
+from resilient_circuits import FunctionError
+import logging
+
 class XForceHelper:
 
   def str_to_bool(self, str):
@@ -49,5 +53,17 @@ class XForceHelper:
         proxies = None
     return proxies
 
-  def __init__(self, options):
+  def handle_case_response(self, res):
+    if int(res.status_code / 100) == 2:
+      return res
+    elif res.status_code == 401:
+      raise FunctionError("401 Status code returned. Retry function with updated credentials")
+    elif res.status_code == 403:
+      raise FunctionError("403 Forbidden response received by API")
+    else:
+      logging.getLogger(__name__).error("Got unexpected result from request.")
+      return res
+
+  def __init__(self, opts, options):
+    self.opts = opts
     self.options = options

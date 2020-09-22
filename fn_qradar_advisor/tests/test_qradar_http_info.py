@@ -33,32 +33,32 @@ class TestQRadarHttpInfo(object):
 
         # quick search url
         quick_search_url = http_info.get_quick_search_url()
-        assert quick_search_url == api_base_url + "/search/quick"
+        assert quick_search_url == api_base_url + "/investigations/search/quick"
 
         # full search url
         full_search_url = http_info.get_full_search_url()
-        assert full_search_url == api_base_url + "/search/full"
+        assert full_search_url == api_base_url + "/investigations/search/full"
 
         # full search status
         search_id = 100
-        assert http_info.get_full_search_status_url(search_id) == api_base_url + "/search/full/" + str(search_id)
+        assert http_info.get_full_search_status_url(search_id) == api_base_url + "/investigations/search/full/" + str(search_id)
 
         # full search result
         stage = "stage3"
-        assert http_info.get_full_search_result_url(search_id, stage) == api_base_url + "/search/full/" + str(search_id) + "/stix/" + stage
+        assert http_info.get_full_search_result_url(search_id, stage) == api_base_url + "/investigations/search/full/" + str(search_id) + "/stix/" + stage
 
         # analysis url
         offense_id = 123
-        assert http_info.get_analysis_url(offense_id) == api_base_url + "/offense/" + str(offense_id) + "/analysis"
+        assert http_info.get_analysis_url(offense_id) == api_base_url + "/investigations/offense/" + str(offense_id) + "/analysis"
 
         # analysis status
-        assert http_info.get_analysis_status_url(offense_id) == api_base_url + "/offense/" + str(offense_id) + "/analysis/status"
+        assert http_info.get_analysis_status_url(offense_id) == api_base_url + "/investigations/offense/" + str(offense_id) + "/analysis/status"
 
         # analysis result
-        assert http_info.get_analysis_result_url(offense_id, stage) == api_base_url + "/offense/" + str(offense_id) + "/analysis/" + stage + "/stix"
+        assert http_info.get_analysis_result_url(offense_id, stage) == api_base_url + "/investigations/offense/" + str(offense_id) + "/analysis/" + stage + "/stix"
 
         # offense insights
-        assert http_info.get_offense_insights_url(offense_id) == api_base_url + "/offense/" + str(offense_id) + "/insights"
+        assert http_info.get_offense_insights_url(offense_id) == api_base_url + "/investigations/offense/" + str(offense_id) + "/insights"
 
         # all mappings
         assert http_info.get_all_mappings() == api_base_url + "/mappings"

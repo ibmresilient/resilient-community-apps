@@ -20,8 +20,8 @@ class SampleCmd(ToolCommand):
         client = QRadarAdvisorClient(qradar_host=self.system_host,
                                      qradar_token=self.system_token,
                                      advisor_app_id=self.opts_dict["app_id"],
-                                     cafile=False,
-                                     log=logging)
+                                     cafile=False, log=logging,
+                                     opts={}, function_opts=self.opts_dict)
         resp = client.offense_insights(self.opts_dict["offense"])
         print("Return: {}".format(str(resp)))
 

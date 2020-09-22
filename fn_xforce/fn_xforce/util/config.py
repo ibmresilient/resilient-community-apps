@@ -12,8 +12,8 @@ def config_section_data():
     config_data = u"""[fn_xforce]
 xforce_apikey = <YOUR_API_KEY>
 xforce_password = <YOUR_API_PASSWORD>
-xforce_https_proxy = <YOUR_PROXY_URL>
-xforce_http_proxy = <YOUR_PROXY_URL>
+#xforce_https_proxy = <YOUR_PROXY_URL>
+#xforce_http_proxy = <YOUR_PROXY_URL>
 xforce_baseurl = https://api.xforce.ibmcloud.com
 """
     return config_data
