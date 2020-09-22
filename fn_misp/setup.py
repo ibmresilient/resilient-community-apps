@@ -4,14 +4,7 @@
 from setuptools import setup, find_packages
 import glob
 import ntpath
-import sys
 
-install_requires = ['resilient_circuits>=32.0', 'resilient_lib>=32.0']
-if sys.version_info[0] < 3:
-    # recommended version from the pymisp docs
-    install_requires.append('pymisp==2.4.119.1')
-else:
-    install_requires.append('pymisp>=2.4')
 
 def get_module_name(module_path):
     """
@@ -39,7 +32,11 @@ setup(
                      "search MISP events for a given attribute, "
                      "return sightings in MISP for a given event, "
                      "or create a tag on a MISP event or attribute.",
-    install_requires=install_requires,
+    install_requires=['resilient_circuits>=32.0',
+                      'resilient_lib>=32.0',
+                      'pymisp>=2.4; python_version>="3"',
+                      'pymisp==2.4.119.1; python_version<"3"'
+                      ],
     packages=find_packages(),
     include_package_data=True,
     platforms='any',
