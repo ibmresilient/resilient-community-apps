@@ -4,10 +4,9 @@
 """Function implementation"""
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import validate_fields, RequestsCommon
+from resilient_lib import validate_fields, RequestsCommon, ResultPayload
+from fn_cisco_enforcement.lib.enforcement_common import SECTION_NAME, HEADERS, callback
 
-HEADERS = {'content-type': 'application/json'}
-SECTION_NAME = "fn_cisco_enforcement"
 # Deletes a domain using the Cisco api. The apikey is refernced in the app.config under [fn_cisco_enforcement]
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'delete_domain"""
@@ -45,30 +44,24 @@ class FunctionComponent(ResilientComponent):
             cisco_domain = kwargs.get("cisco_domain")  # text
 
             self.log.info(u'Deleting {} from list'.format(cisco_domain))
+            rp = ResultPayload(SECTION_NAME, **kwargs)
 
             url = '/'.join((self.options['url'], 'domains', '{}?customerKey={}'))
             url = url.format(cisco_domain.strip(), self.apikey)
             self.log.debug(url)
 
             rc = RequestsCommon(self.opts, self.options)
-            response = rc.execute_call_v2("delete", url)
-
-            if response.status_code >= 300:
-                resp = response.json()
-                if response.status_code == 404:
-                    response.content and self.log.warning(response.content)
-                    yield StatusMessage(u"Cisco Enforcement issue: {}: {}".format(response.status_code, resp['message']))
-                else:
-                    response.content and self.log.error(response.content)
-                    yield StatusMessage(u"Cisco Enforcement failure: {}: {}".format(response.status_code, resp['message']))
+            content, msg = rc.execute_call_v2("delete", url, callback=callback)
+            if msg:
+                yield StatusMessage(msg)
             else:
-                results = {
-                    "value": response.content.decode('latin1')
-                }
                 yield StatusMessage(u"Delete domain for '{}' was successful".format(cisco_domain))
 
-                # Produce a FunctionResult with the results
-                yield FunctionResult(results)
+            # Return the results
+            results = rp.done(False if msg else True, None if msg else content, msg)
+            # backward compatibility
+            results['value'] = None if msg else content
+            yield FunctionResult(results)
         except Exception as err:
             self.log.error(err)
             yield FunctionError()

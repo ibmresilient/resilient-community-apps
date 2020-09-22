@@ -9,13 +9,11 @@
 
 import logging
 from resilient_lib import RequestsCommon
+from fn_cisco_enforcement.lib.enforcement_common import SECTION_NAME, HEADERS, callback
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
 log.addHandler(logging.StreamHandler())
-
-HEADERS = {'content-type': 'application/json'}
-SECTION_NAME = "fn_cisco_enforcement"
 
 def selftest_function(opts):
     """
@@ -39,13 +37,9 @@ def selftest_function(opts):
         }
 
         rc = RequestsCommon(opts, options)
-        response = rc.execute_call_v2("post", url, json=test_data, verify=False, headers=HEADERS)
-        log.info(str(response))
+        content, msg = rc.execute_call_v2("post", url, json=test_data, verify=False, headers=HEADERS, callback=callback)
 
-        if response.status_code < 300:
-            return {"state": "success", "reason": None }
-        else:
-            return {"state": "failure", "reason": response.status_code }
+        return {"state": "failure" if msg else "success", "reason": msg }
 
     except Exception as e:
         return {"state": "failure", "reason": e}
