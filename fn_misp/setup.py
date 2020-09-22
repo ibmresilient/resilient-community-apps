@@ -29,7 +29,7 @@ setup(
     name='fn_misp',
     version='3.0.1',
     license='MIT',
-    author='IBM Resilient',
+    author='Resilient Labs',
     author_email='resil.labs@gmail.com',
     url='http://ibm.biz/resilientcommunity',
     description="Resilient Circuits Components for 'fn_misp'",
