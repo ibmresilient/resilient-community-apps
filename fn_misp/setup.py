@@ -26,7 +26,7 @@ setup(
     author_email='resil.labs@gmail.com',
     url='http://ibm.biz/resilientcommunity',
     description="Resilient Circuits Components for 'fn_misp'",
-    long_description="This package provides the capability to interct with the MISP REST API. "
+    long_description="This package provides the capability to interact with the MISP REST API. "
                      "Once installed, the user may create events in MISP from Resilient incidents, "
                      "mark artifacts as \"sighted\" if they exist in MISP, "
                      "search MISP events for a given attribute, "
