@@ -15,7 +15,7 @@
 
  ![screenshot](./screenshots/dt_functions.png)
 
-The 4 functions allow you to GET, UPDATE and DELETE a row and GET rows in a Data Table
+The 5 functions allow you to GET, UPDATE, DELETE a row and GET and DELETE rows in a Data Table.
 
 ---
 ## Release Notes
