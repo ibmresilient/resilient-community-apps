@@ -1,6 +1,7 @@
 # IBM Resilient - Data Table Helper Functions
 
 ## Table of Contents
+  - [Release Notes](#release-notes)
   - [Function - Get Row](#function---get-row)
   - [Function - Get Rows](#function---get-rows)
   - [Function - Update Row](#function---update-row)
@@ -14,7 +15,21 @@
 
  ![screenshot](./screenshots/dt_functions.png)
 
-The 4 functions allow you to GET, UPDATE, DELETE a row and GET and DELETE rows in a Data Table
+The 4 functions allow you to GET, UPDATE and DELETE a row and GET rows in a Data Table
+
+---
+## Release Notes
+### v1.1.0
+* Added support for App Host
+* Added example Rule: `Get Data Table Rows`
+* Added example Rule: `Delete Data Table Rows`
+* Added example Workflow: `example_data_table_utils_get_rows`
+* Added example Workflow: `example_data_table_utils_delete_rows`
+* Added example Function: `dt_utils_get_rows`
+* Added example Function: `dt_utils_delete_rows`
+
+### v1.0.0
+* Initial Release
 
 ---
 ## Function - Get Row:
