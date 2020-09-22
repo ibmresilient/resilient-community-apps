@@ -4,7 +4,7 @@
 FROM registry.access.redhat.com/ubi8/python-36:latest
 
 ARG APPLICATION=fn_outbound_email
-ARG RESILIENT_CIRCUITS_VERSION=36.2
+ARG RESILIENT_CIRCUITS_VERSION=37
 ARG PATH_RESILIENT_CIRCUITS=rescircuits
 
 # Update to latest packages, user 0 for root privilege
@@ -14,7 +14,7 @@ USER 0
 RUN pip install --upgrade pip
 
 # install resilient-circuits
-RUN pip install resilient-circuits>=${RESILIENT_CIRCUITS_VERSION}
+RUN pip install "resilient-circuits>=${RESILIENT_CIRCUITS_VERSION}"
 
 ## ---- section for changes ----
 # uncomment and replicate if additional os libraries are needed
