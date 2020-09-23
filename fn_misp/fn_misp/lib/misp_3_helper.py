@@ -2,6 +2,8 @@ import time
 import json
 import logging
 from pymisp import ExpandedPyMISP, MISPAttribute, MISPEvent, MISPSighting
+from resilient_lib.components.integration_errors import IntegrationError
+
 
 log = logging.getLogger(__name__)
 
@@ -104,10 +106,19 @@ def get_attribute_uuid(misp_client, misp_attribute_value, misp_event_id):
     misp_event = MISPEvent()
     misp_event.id = int(misp_event_id)
     event_response = misp_client.get_event(misp_event)
-    for attribute in event_response['Event']['Attribute']:
-        if attribute['value'] == misp_attribute_value:
-            attribute_uuid = attribute['uuid']
+    attribute_uuid = None
+    if not event_response['Event']['Attribute']:
+        log.error("Could not get a uuid for event = {} and attribute = {}. Does it exist?".format(misp_event_id, misp_attribute_value))
+        raise IntegrationError("Failed to find any attributes on event {}".format(misp_event_id))
+
+    else:
+        for attribute in event_response['Event']['Attribute']:
+            if attribute['value'] == misp_attribute_value:
+                attribute_uuid = attribute['uuid']
+        if attribute_uuid:
             return attribute_uuid
+        else:
+            raise IntegrationError("Failed to match attribute value = {} for any attributes associated with event = {}".format(misp_attribute_value, misp_event_id))
 
 def create_tag(misp_client, misp_attribute_value, misp_tag_type, misp_tag_name, misp_event_id):
     if misp_tag_type == "Event":
