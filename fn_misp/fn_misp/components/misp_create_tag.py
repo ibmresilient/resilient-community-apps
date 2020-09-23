@@ -10,6 +10,7 @@ else:
     from fn_misp.lib import misp_3_helper as misp_helper
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_misp.lib import common
+from resilient_lib.components.integration_errors import IntegrationError
 
 
 PACKAGE= "fn_misp"
@@ -60,6 +61,8 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Tagging {} with {}".format(misp_tag_type, misp_tag_name))
 
             tag_result = misp_helper.create_tag(misp_client, misp_attribute_value, misp_tag_type, misp_tag_name, misp_event_id)
+            if 'errors' in tag_result:
+                raise IntegrationError("Unable to save the tag. {}".format(tag_result['errors'][1]['errors']))
 
             log.debug(tag_result)
 
