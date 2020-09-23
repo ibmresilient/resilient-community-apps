@@ -86,10 +86,18 @@ def get_misp_sighting_list(misp_client, misp_event_id):
     return sighting_result
 
 def get_event_uuid(misp_client, misp_event_id):
+    '''
     misp_event = MISPEvent()
     misp_event.id = int(misp_event_id)
+    log.debug("Getting misp event for ID {}".format(misp_event.id))
     event_response = misp_client.get_event(misp_event)
+    log.debug("EVENT RESPONSE: {}\n\n\n\n\n\n\n\n\n\n".format(event_response))
     event_uuid = event_response['Event']['uuid']
+    '''
+    # returns list with a single element: an event dict
+    result = misp_client.search(eventid=misp_event_id)
+    for event in result:
+        event_uuid = event['Event']['uuid']
     return event_uuid
   
 def get_attribute_uuid(misp_client, misp_attribute_value, misp_event_id):
