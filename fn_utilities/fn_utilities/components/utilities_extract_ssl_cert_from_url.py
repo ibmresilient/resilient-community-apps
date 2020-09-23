@@ -34,14 +34,12 @@ class FunctionComponent(ResilientComponent):
         super(FunctionComponent, self).__init__(opts)
         self.opts = opts
         self.options = opts.get(SECTION_HDR, {})
-        self.init_proxies()
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
         self.opts = opts
         self.options = opts.get(SECTION_HDR, {})
-        self.init_proxies()
 
     def init_proxies(self):
         self.proxy_host = None
@@ -83,6 +81,7 @@ class FunctionComponent(ResilientComponent):
             if https_url is None:
                 raise ValueError("Error: https_url must be specified.")
 
+            self.init_proxies()
             url_dict = urlparse.urlparse(https_url)
             certificate = None  # Init x509 as None and try to gather the cert
             conn = None   # Init conn as None to prevent reference before assign

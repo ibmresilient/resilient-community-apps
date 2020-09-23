@@ -39,14 +39,12 @@ class FunctionComponent(ResilientComponent):
         super(FunctionComponent, self).__init__(opts)
         self.opts = opts
         self.options = opts.get(SECTION_HDR, {})
-        self.init_proxies()
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
         self.opts = opts
         self.options = opts.get(SECTION_HDR, {})
-        self.init_proxies()
 
     def init_proxies(self):
         self.proxy_host = None
@@ -75,6 +73,8 @@ class FunctionComponent(ResilientComponent):
 
             # Run the search and return the results
             yield StatusMessage("Starting...")
+
+            self.init_proxies()
             results = self.expand_url(resilient_url.strip())
             self.log.debug(results)
 
