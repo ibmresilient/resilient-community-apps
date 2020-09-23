@@ -2,28 +2,7 @@
 # pragma pylint: disable=unused-argument, no-self-use
 # (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 
-"""Integrations between Resilient and Jira
-    It supports: creating a jira issue with a title (summary) and description
-
-  Preprocessor script:
-    desc = ''
-    if incident.description is not None:
-      desc = incident.description.content
-
-    inputs.incidentID = incident.id
-    inputs.jira_description = "Incident types: {}\nNist Attack Vectors: {}\n\nAdditional Information: {}".format(incident.incident_type_ids, incident.nist_attack_vectors, desc)
-    inputs.jira_summary = "Resilient: {}".format(incident.name)
-  Postprocessor script:
-    incident.properties.jiraid = results.issue['key']
-    incident.properties.jiraurl = results.issue['self']
-
-  method calls return json when an issue is created:
-    "{"id":"19320","key":"DISCO-2","self":"https://jira1-01.internal.resilientsystems.com/rest/api/2/issue/19320"}"
-  errors:
-    {"errorMessages":[],"errors":{"project":"project is required"}}
-
-See config.py for properties needed for jira access
-"""
+"""Create an issue in Jira from IBM Resilient"""
 
 import logging
 import json
