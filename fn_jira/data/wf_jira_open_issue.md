@@ -94,6 +94,7 @@ if results.success:
   results_content = results.get("content", {})
   incident.properties.jira_url = "<a href='{}' target='blank'>{}</a>".format(results_content.get("issue_url"), results_content.get("issue_key"))
   incident.properties.jira_internal_url = results_content.get("issue_url_internal")
+  incident.properties.jira_issue_id = results_content.get("issue_key")
 ```
 
 ---

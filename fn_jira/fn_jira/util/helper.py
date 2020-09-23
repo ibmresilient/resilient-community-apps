@@ -2,10 +2,16 @@
 # -*- coding: utf-8 -*-
 
 from jira import JIRA
-from resilient_lib import IntegrationError, validate_fields, str_to_bool, build_incident_url, build_resilient_url
+from resilient_lib import IntegrationError, validate_fields, str_to_bool, build_incident_url, build_resilient_url, MarkdownParser
 
 CONFIG_DATA_SECTION = "fn_jira"
 SUPPORTED_AUTH_METHODS = ("AUTH", "BASIC", "OAUTH")
+
+# Markdown Constants
+STRIKEOUT_CHAR = "-"
+BOLD_CHAR = "*"
+UNDERLINE_CHAR = "+"
+ITALIC_CHAR = "_"
 
 
 def validate_app_configs(app_configs):
@@ -39,7 +45,7 @@ def get_jira_client(app_configs, rc):
     :return: Instance to jira client
     :rtype: JIRA object. See: https://jira.readthedocs.io/en/latest/api.html 
     """
-    auth_method = app_configs.get("auth_method", SUPPORTED_AUTH_METHODS[1])
+    auth_method = app_configs.get("auth_method", SUPPORTED_AUTH_METHODS[0])
     server = app_configs.get("url")
     verify = app_configs.get("verify_cert")
     proxies = rc.get_proxies()
@@ -93,3 +99,14 @@ def build_url_to_resilient(host, port, incident_id, task_id=None):
         url = "{0}?task_id={1}".format(url, task_id)
 
     return url
+
+
+def to_markdown(html):
+    """Takes a string of html converts it to Markdown
+    and returns it"""
+    parser = MarkdownParser(strikeout=STRIKEOUT_CHAR,
+                            bold=BOLD_CHAR,
+                            underline=UNDERLINE_CHAR,
+                            italic=ITALIC_CHAR)
+
+    return parser.convert(html)

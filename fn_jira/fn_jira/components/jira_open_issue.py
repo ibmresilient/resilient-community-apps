@@ -8,8 +8,8 @@ import logging
 import json
 import fn_jira.lib.constants as constants
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import MarkdownParser, validate_fields, ResultPayload, RequestsCommon
-from fn_jira.util.helper import CONFIG_DATA_SECTION, validate_app_configs, build_url_to_resilient, prepend_text, get_jira_client
+from resilient_lib import validate_fields, ResultPayload, RequestsCommon
+from fn_jira.util.helper import CONFIG_DATA_SECTION, validate_app_configs, build_url_to_resilient, prepend_text, get_jira_client, to_markdown
 
 PACKAGE_NAME = CONFIG_DATA_SECTION
 
@@ -49,7 +49,6 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("Connecting to JIRA")
 
-            # Connect to JIRA
             jira_client = get_jira_client(app_configs, rc)
 
             # Get JIRA fields from input
@@ -58,11 +57,7 @@ class FunctionComponent(ResilientComponent):
             # Build the URL to Resilient
             resilient_url = build_url_to_resilient(self.res_params.get("host"), self.res_params.get("port"), fn_inputs.get("incident_id"), fn_inputs.get("task_id"))
 
-            # Convert description from rich text to Markdown + prepend resilient_url
-            html2markdwn = MarkdownParser(strikeout=constants.STRIKEOUT_CHAR, bold=constants.BOLD_CHAR,
-                                          underline=constants.UNDERLINE_CHAR, italic=constants.ITALIC_CHAR)
-
-            jira_fields["description"] = prepend_text("IBM Resilient Link: {0}".format(resilient_url),  html2markdwn.convert(jira_fields.get("description", "")))
+            jira_fields["description"] = prepend_text("IBM Resilient Link: {0}".format(resilient_url), to_markdown(jira_fields.get("description", "")))
 
             yield StatusMessage("Creating JIRA issue")
 

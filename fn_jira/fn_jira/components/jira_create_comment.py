@@ -11,9 +11,8 @@ inputs.jira_comment = note.text.content
 import logging
 import fn_jira.lib.constants as constants
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from .jira_common import JiraCommon
-from resilient_lib import validate_fields, MarkdownParser
-from fn_jira.util.helper import CONFIG_DATA_SECTION, validate_app_configs
+from resilient_lib import validate_fields, MarkdownParser, ResultPayload, RequestsCommon
+from fn_jira.util.helper import CONFIG_DATA_SECTION, validate_app_configs, get_jira_client, to_markdown
 
 PACKAGE_NAME = CONFIG_DATA_SECTION
 
@@ -36,6 +35,8 @@ class FunctionComponent(ResilientComponent):
         """Function: create a jira comment"""
         try:
             log = logging.getLogger(__name__)
+            rc = RequestsCommon(self.opts, self.options)
+            rp = ResultPayload(PACKAGE_NAME, **kwargs)
 
             # Get + validate the app.config parameters:
             log.info("Validating app configs")
@@ -43,43 +44,28 @@ class FunctionComponent(ResilientComponent):
 
             # Get + validate the function parameters:
             log.info("Validating function inputs")
-            fn_inputs = validate_fields(["jira_url", "jira_comment"], kwargs)
+            fn_inputs = validate_fields(["jira_issue_id", "jira_comment"], kwargs)
             log.info("Validated function inputs: %s", fn_inputs)
 
-            # Get the function parameters:
-            appDict = self._build_comment_appDict(app_configs, fn_inputs)
+            jira_comment = to_markdown(fn_inputs.get("jira_comment"))
 
-            yield StatusMessage("starting...")
+            if jira_comment is None or not jira_comment.strip():
+                raise FunctionError("Note is empty after rich text is removed")
 
-            jira_common = JiraCommon(self.opts, self.options)
-            resp = jira_common.create_comment(log, appDict)
+            yield StatusMessage("Connecting to JIRA")
 
-            # Produce a FunctionResult with the return value
-            yield FunctionResult(resp)
+            jira_client = get_jira_client(app_configs, rc)
+
+            yield StatusMessage("Adding comment to {0} in JIRA".format(fn_inputs.get("jira_issue_id")))
+
+            comment = jira_client.add_comment(fn_inputs.get("jira_issue_id"), jira_comment)
+
+            results = rp.done(success=True, content=comment.raw)
+
+            log.info("Complete")
+
+            # Produce a FunctionResult with the results
+            yield FunctionResult(results)
+
         except Exception as err:
             yield FunctionError(err)
-
-
-    def _build_comment_appDict(self, app_configs, fn_inputs):
-        """
-        build the dictionary used to create a comment
-        :param kwargs:
-        :return: dictionary of values to use
-        """
-
-        html2markdwn = MarkdownParser(strikeout=constants.STRIKEOUT_CHAR, bold=constants.BOLD_CHAR,
-                                      underline=constants.UNDERLINE_CHAR, italic=constants.ITALIC_CHAR)
-        jira_comment = html2markdwn.convert(fn_inputs.get("jira_comment"))
-
-        if jira_comment is None or not jira_comment.strip():
-            raise FunctionError("comment is empty after rich text is removed")
-
-        appDict = {
-            'user': app_configs.get("user"),
-            'password': app_configs.get("password"),
-            'url': fn_inputs.get("jira_url"),
-            'verifyFlag': app_configs.get("verify_cert"),
-            'comment': jira_comment
-        }
-
-        return appDict
