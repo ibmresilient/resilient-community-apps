@@ -4,32 +4,55 @@ _Craig @ Resilient Labs_
 
 The MISP functions allows integration with MISP Threat Intelligence Platform from Resilient.
 
-## New for v3.0.0
+## New for v3.0.1
 
-There have been significant changes to the app for version 3, the community built a python3 compatible version of the app. This meant there was 2 different version in circulation.
-
-This version of the app is designed to reunify the fn-misp apps. To support both python2 and python3 automatically - using the latest recommended libraries from the MISP community.
-
-MISP are very clear they will be depreciating python2 support, so it is recommended if you want to continue using fn-misp you upgrade to python3 but in the meantime, this app is fully tested with python2. You will receive errors in logs referencing the depreciation.
-
-Finally, the Lookup Att&ck function has been removed, as MISP now stores Att&ck information as Tags - this is returned via the search attribute function, so no special function is required. The example of how to parse out Technique IDs has been updated.
-
-The old separate apps are packaged inside the app directory, marked as ARCHIVE. They are unsupported and just for code documentation purposes.
++ App Host support.
++ Proxy support.
 
 ## Use Cases
 
-The following 6 use cases are supported;
+The following 6 use cases are supported:
 
-+ Create a MISP "Event" from a Resilient incident
-+ Add attributes to the incident "Event" in MISP from incident artifacts incident
-+ Mark any artifact in Resilient as "Sighted" if they exist in MISP
-+ Search all MISP events for a match on a given attribute, this will also return tags for an attribute
-+ Return all MISP sightings for a given event
++ Create a MISP "Event" from a Resilient incident.
++ Add attributes to the incident "Event" in MISP from incident artifacts incident.
++ Mark any artifact in Resilient as "Sighted" if they exist in MISP.
++ Search all MISP events for a match on a given attribute, this will also return tags for an attribute.
++ Return all MISP sightings for a given event.
 + Create Tag on an event or attribute in MISP - such as TLP, Att&ck or threat actor.
 
-![Misp Functions](./doc/screen_0.png)
+![Misp Functions](./doc/screenshots/screen_0.png)
 
-## Installation 
+## Installation
+
+### App Host
+All the components for running this integration in a container already exist when using the App Host app.
+
+To install,
+
+* Navigate to Administrative Settings and then the Apps tab.
+* Click the Install button and select the downloaded file: app-fn_anomali_staxx-x.x.x.zip.
+* Go to the Configuration tab and edit the app.config file, editing the API key for Anomali Staxx and making any additional setting changes.
+
+<div style="page-break-after: always; break-after: page;"></div>
+
+  | Config | Required | Example | Description |
+  | ------ | :------: | ------- | ----------- |
+  | **misp_url** | Yes | `10.10.10.10:5000` | *IP or URL of the MISP instance along with the http port* |
+  | **misp_key** | Yes | `someAPIkey` | *API key to access the MISP API* |
+  | **verify_cert** | Yes | `True` | *Secure connection* |
+  | **https_proxy** | No | https://your.proxy.com | *https proxy for connecting to MISP* |
+  | **http_proxy** | No | http://your.proxy.com | *http proxy for connecting to MISP* |
+
+
+### Integration Server
+
+#### Python2 vs. Python3
+
+MISP has deprecated support for Python2 and does not gaurantee functionality in a Python2 environment.
+Bearing this in mind, we recommend that you use fn_misp in Python3. However, the fn_misp is designed to function
+in both Python2 and Python3.
+
+#### Installation
 
 This function is packaged as a zip, so you do not need to extract the zip to install it.
 
@@ -51,6 +74,9 @@ misp_url=http://localhost
 misp_key=<your key>
 # used to bypass cerification validation for self signed instances of MISP
 verify_cert=true
+# Optional: access MISP via an http/https proxy
+#http_proxy=<http_proxy_server>
+#https_proxy=<https_proxy_server>
 ```
 
 To add all the configuration settings for functions, workflows, runs, etc. to Resilient,  run the following command:
@@ -65,7 +91,7 @@ Sample workflows are included to demonstrate how to execute a function and how t
 
 For each workflow, edit each function (see the pencil icon) and visit the Post-Process Script for processing hints. Your use of the functions may need different data formatting or different feedback such as notes etc.
 
-![screenshot](./doc/screen_1.png)
+![screenshot](./doc/screenshots/screen_1.png)
 
 An incident field `misp_event_id` is used to track event creation. This field can remain hidden or added to your layout through the `Customization Settings` section. You can pair this with a rich text field and in-product script to give a direct Resilient UI link to the event in MISP.
 
@@ -75,10 +101,10 @@ This app is not packaged with rules to prevent adding needed configuration to yo
 
 Some recommended rules are below:
 
-+ Auto - Create MISP Event if incident is created
-+ Auto - Create MISP Attribute if artifact is created and incident.misp_event_id has a value
-+ Auto - Search MISP Attribute if artifact us created and incident.misp_event_id has a value
-+ Menu Item - Create TLP Tag on an artifact when misp_event_id has a value
++ Auto - Create MISP Event if incident is created.
++ Auto - Create MISP Attribute if artifact is created and incident.misp_event_id has a value.
++ Auto - Search MISP Attribute if artifact us created and incident.misp_event_id has a value.
++ Menu Item - Create TLP Tag on an artifact when misp_event_id has a value.
 
 ## Using MISP for Att&ck
 
@@ -87,8 +113,6 @@ The following assumes you have installed the Resilient Att&ck function.
 When you run a search for an attribute with event or attribute level artifacts. The response includes Technique IDs from MITRE Att&ck.
 
 You will see this is in the default search workflow, the Att&ck information comes back in the tags field in the artifact description.
-
-![screenshot](./doc/screen_2.png)
 
 We can use our postprocessing script to extract these to use in the Techniques DataTable for Att&ck.
 
