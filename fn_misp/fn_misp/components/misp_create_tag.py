@@ -36,8 +36,6 @@ class FunctionComponent(ResilientComponent):
     def _misp_create_tag_function(self, event, *args, **kwargs):
         """Function: Creates a Tag"""
         try:
-            # Get the wf_instance_id of the workflow this Function was called in
-            wf_instance_id = event.message["workflow_instance"]["workflow_instance_id"]
 
             # Get the function parameters:
             misp_tag_type = self.get_select_param(kwargs.get("misp_tag_type"))  # select, values: "Event", "Attribute"
