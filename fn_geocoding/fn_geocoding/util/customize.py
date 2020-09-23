@@ -3,7 +3,11 @@
 """Generate the Resilient customizations required for fn_geocoding"""
 
 from __future__ import print_function
-from resilient import ImportDefinition
+try:
+    from resilient import ImportDefinition
+except ImportError:
+    # Support Apps running on resilient-circuits < v35.0.195
+    from resilient_circuits.util import ImportDefinition
 
 def codegen_reload_data():
     """Parameters to codegen used to generate the fn_geocoding package"""
