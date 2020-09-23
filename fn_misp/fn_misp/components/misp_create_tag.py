@@ -20,17 +20,14 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
+        self.opts = opts
         self.options = opts.get(PACKAGE, {})
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
+        self.opts = opts
         self.options = opts.get(PACKAGE, {})
-
-    @handler("reload")
-    def _reload(self, event, opts):
-        """Configuration options have changed, save new values"""
-        self.options = opts.get("fn_misp", {})
 
     @function("misp_create_tag")
     def _misp_create_tag_function(self, event, *args, **kwargs):
