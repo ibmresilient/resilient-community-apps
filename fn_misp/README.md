@@ -30,8 +30,8 @@ All the components for running this integration in a container already exist whe
 To install,
 
 * Navigate to Administrative Settings and then the Apps tab.
-* Click the Install button and select the downloaded file: app-fn_anomali_staxx-x.x.x.zip.
-* Go to the Configuration tab and edit the app.config file, editing the API key for Anomali Staxx and making any additional setting changes.
+* Click the Install button and select the downloaded file: app-fn_misp-x.x.x.zip.
+* Go to the Configuration tab and edit the app.config file, editing the API key for MISP and making any additional setting changes.
 
 <div style="page-break-after: always; break-after: page;"></div>
 
