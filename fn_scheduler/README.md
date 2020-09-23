@@ -195,5 +195,5 @@ There are several ways to verify the successful operation of a function.
 
 ## Support
 
-Use the [IBM Support](https://ibm.com/mysupport/) portal to open a case on this app. 
+This is an IBM Supported app. Please search [IBM Support](https://ibm.com/mysupport/) for assistance.
 Also reference the [Resilient Community](https://ibm.biz/resilientcommunity) for any discussion between customers and IBM.

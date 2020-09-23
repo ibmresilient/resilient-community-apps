@@ -31,13 +31,13 @@ setup(
 " 2) Listing scheduled rules" \
 " 3) Removing a scheduled rule",
     install_requires=[
-        'resilient_circuits>=30.0.0',
+        'resilient_circuits>=32.0.0',
         'resilient_lib>=33.0.189',
         'pytz',
         'APScheduler>=3.6.1',
         'SQLAlchemy>=1.3.8',
-        'python-dateutil',
-        'psycopg2'
+        'python-dateutil>=2.8.1',
+        'psycopg2>=2.8.6'
     ],
     packages=find_packages(),
     include_package_data=True,
