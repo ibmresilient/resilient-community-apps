@@ -26,14 +26,14 @@ See config.py for properties needed for jira access
 """
 
 import logging
+import json
 import fn_jira.lib.constants as constants
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from .jira_common import JiraCommon
-from resilient_lib import MarkdownParser, validate_fields, build_incident_url, build_resilient_url
-from fn_jira.util.helper import CONFIG_DATA_SECTION, validate_app_configs
+from resilient_lib import MarkdownParser, validate_fields, ResultPayload, RequestsCommon
+from fn_jira.util.helper import CONFIG_DATA_SECTION, validate_app_configs, build_url_to_resilient, prepend_text, get_jira_client
 
 PACKAGE_NAME = CONFIG_DATA_SECTION
-BROWSE_FRAGMENT = 'browse'
+
 
 class FunctionComponent(ResilientComponent):
 
@@ -56,6 +56,8 @@ class FunctionComponent(ResilientComponent):
         """Function: create a jira issue. This requires app.config configuration information for jira """
         try:
             log = logging.getLogger(__name__)
+            rc = RequestsCommon(self.opts, self.options)
+            rp = ResultPayload(PACKAGE_NAME, **kwargs)
 
             # Get + validate the app.config parameters:
             log.info("Validating app configs")
@@ -63,57 +65,45 @@ class FunctionComponent(ResilientComponent):
 
             # Get + validate the function parameters:
             log.info("Validating function inputs")
-            fn_inputs = validate_fields(["incident_id", "jira_project", "jira_issuetype", "jira_summary"], kwargs)
+            fn_inputs = validate_fields(["incident_id", "jira_fields"], kwargs)
             log.info("Validated function inputs: %s", fn_inputs)
 
-            appDict = self._build_createIssue_appDict(app_configs, fn_inputs)
+            yield StatusMessage("Connecting to JIRA")
 
-            yield StatusMessage("starting...")
-            jira_common = JiraCommon(self.opts, self.options)
-            r = jira_common.create_issue(log, appDict)
+            # Connect to JIRA
+            jira_client = get_jira_client(app_configs, rc)
 
-            if r.get('key'):
-                url = '/'.join((appDict['url'], BROWSE_FRAGMENT, r.get('key')))
-                r['url'] = url
+            # Get JIRA fields from input
+            jira_fields = json.loads(fn_inputs.get("jira_fields"))
 
-            # Produce a FunctionResult with the return value
-            yield FunctionResult({"issue": r})      # json object needed, not a string representation
+            # Build the URL to Resilient
+            resilient_url = build_url_to_resilient(self.res_params.get("host"), self.res_params.get("port"), fn_inputs.get("incident_id"), fn_inputs.get("task_id"))
+
+            # Convert description from rich text to Markdown + prepend resilient_url
+            html2markdwn = MarkdownParser(strikeout=constants.STRIKEOUT_CHAR, bold=constants.BOLD_CHAR,
+                                          underline=constants.UNDERLINE_CHAR, italic=constants.ITALIC_CHAR)
+
+            jira_fields["description"] = prepend_text("IBM Resilient Link: {0}".format(resilient_url),  html2markdwn.convert(jira_fields.get("description", "")))
+
+            yield StatusMessage("Creating JIRA issue")
+
+            jira_issue = jira_client.create_issue(fields=jira_fields)
+
+            results_contents = {
+                "issue_url": jira_issue.permalink(),
+                "issue_url_internal": jira_issue.self,
+                "issue_key": jira_issue.key,
+                "issue": jira_issue.raw
+            }
+
+            yield StatusMessage(u"JIRA issue {0} created".format(jira_issue.key))
+
+            results = rp.done(success=True, content=results_contents)
+
+            log.info("Complete")
+
+            # Produce a FunctionResult with the results
+            yield FunctionResult(results)
+
         except Exception as err:
             yield FunctionError(err)
-
-
-    def _build_createIssue_appDict(self, app_configs, fn_inputs):
-        '''
-        build the dictionary used for the create api request
-        :param kwargs:
-        :return: dictionary of values to use
-        '''
-
-        # build the URL back to Resilient
-        url = build_incident_url(build_resilient_url(self.res_params.get('host'), self.res_params.get('port')), fn_inputs.get("incident_id"))
-        if fn_inputs.get("task_id"):
-            url = "{}?task_id={}".format(url, fn_inputs.get("task_id"))
-
-        html2markdwn = MarkdownParser(strikeout=constants.STRIKEOUT_CHAR, bold=constants.BOLD_CHAR,
-                                      underline=constants.UNDERLINE_CHAR, italic=constants.ITALIC_CHAR)
-
-        data = {
-            'url': app_configs.get("url"),
-            'user': app_configs.get("user"),
-            'password': app_configs.get("password"),
-            'verifyFlag': app_configs.get("verify_cert"),
-            'project': fn_inputs.get("jira_project"),
-            'issuetype': fn_inputs.get("jira_issuetype"),
-            'fields': {
-                'summary': fn_inputs.get("jira_summary"),
-                'description': u"{}\n{}".format(url, html2markdwn.convert(fn_inputs.get('jira_description', '')))
-            }
-        }
-
-        if fn_inputs.get('jira_priority'):
-            data['fields']['priority'] = {"id": fn_inputs['jira_priority']}
-
-        if fn_inputs.get('jira_assignee'):
-            data['fields']['assignee'] = {"name": fn_inputs['jira_assignee']}
-
-        return data

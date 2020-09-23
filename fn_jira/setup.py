@@ -15,7 +15,8 @@ setup(
     install_requires=[
         'resilient_circuits>=30.0.0',
         'resilient-lib>=38.0.0',
-        'beautifulsoup4>=4.8.0'
+        'beautifulsoup4>=4.8.0',
+        'jira>=2.0.0'
     ],
     packages=find_packages(),
     include_package_data=True,
