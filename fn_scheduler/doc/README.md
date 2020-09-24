@@ -12,9 +12,10 @@
   ![screenshot: screenshot_1](./screenshots/screenshot_1.png)
 -->
 
-# **User Guide:** fn_scheduler_v1.0.0
+# **User Guide:** fn_scheduler
 
 ## Table of Contents
+- [History](#history)
 - [Key Features](#key-features)
 - [Layout](#layout)
 - [Function - Create a Scheduled Rule](#function---create-a-scheduled-rule)
@@ -25,6 +26,22 @@
 - [Rules](#rules)
 
 ---
+## History
+| Version | Date | Notes |
+| ------: | ---: | ----: |
+| 1.0.2   | Sept. 2020 | Added ability to use PostgreSQL DB |
+| 1.0.1   | May 2020 | App Host support added |
+| 1.0.0   | Nov. 2019 | Initial Publication |
+
+### Migrating to v1.0.2
+When migrating to v1.0.2 from a previous release, add the following setting to your `[fn_scheduler]` app.config section:
+
+```
+# db url if using a postgreSQL DB. Use this with AppHost
+#db_url=postgresql+psycopg2://username:password@host:port/database
+```
+Use this setting rather than the SQLite `datastore_dir` setting to persist the scheduler DB in PostgreSQL. 
+This is necessary in an App Host environment to retain your schedules outside the app container.
 ## Key Features
 
 This package of functions allows an enterprise to schedule a rule to run in the future associated with a incident, task, artifact, and datatable. Schedule times to run can be specified in the following ways:
