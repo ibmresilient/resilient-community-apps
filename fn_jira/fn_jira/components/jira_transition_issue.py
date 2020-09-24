@@ -2,27 +2,13 @@
 # pragma pylint: disable=unused-argument, no-self-use
 # (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 
-"""Integrations between Resilient and Jira
-    It supports: transitioning a jira issue with a comment
-
-  Preprocessor script:
-    inputs.jira_url = incident.properties.jiraurl
-    inputs.jira_comment = "Resolution: {}\n{}".format(incident.resolution_id, incident.resolution_summary.content)
-
-  method calls return json when an issue is created:
-    "{"id":"19320","key":"DISCO-2","self":"https://jira1-01.internal.resilientsystems.com/rest/api/2/issue/19320"}"
-  errors:
-    {"errorMessages":[],"errors":{"project":"project is required"}}
-
-See config.py for properties needed for jira access
-"""
+"""Transition a Jira issue from IBM Resilient"""
 
 import logging
-import fn_jira.lib.constants as constants
+import json
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from .jira_common import JiraCommon
-from resilient_lib import validate_fields, MarkdownParser
-from fn_jira.util.helper import CONFIG_DATA_SECTION, validate_app_configs
+from resilient_lib import validate_fields, ResultPayload, RequestsCommon
+from fn_jira.util.helper import CONFIG_DATA_SECTION, validate_app_configs, get_jira_client, to_markdown
 
 PACKAGE_NAME = CONFIG_DATA_SECTION
 
@@ -50,6 +36,8 @@ class FunctionComponent(ResilientComponent):
         """
         try:
             log = logging.getLogger(__name__)
+            rc = RequestsCommon(self.opts, self.options)
+            rp = ResultPayload(PACKAGE_NAME, **kwargs)
 
             # Get + validate the app.config parameters:
             log.info("Validating app configs")
@@ -57,43 +45,29 @@ class FunctionComponent(ResilientComponent):
 
             # Get + validate the function parameters:
             log.info("Validating function inputs")
-            fn_inputs = validate_fields(["jira_url", "jira_transition_id"], kwargs)
+            fn_inputs = validate_fields(["jira_issue_id", "jira_transition_id"], kwargs)
             log.info("Validated function inputs: %s", fn_inputs)
 
-            appDict = self._build_transitionIssue_appDict(app_configs, fn_inputs)
+            jira_fields = json.loads(fn_inputs.get("jira_fields"))
+            jira_comment = to_markdown(fn_inputs.get("jira_comment"))
 
-            yield StatusMessage("starting...")
-            jira_common = JiraCommon(self.opts, self.options)
-            r = jira_common.transition_issue(log, appDict)
+            yield StatusMessage("Connecting to JIRA")
 
-            # Produce a FunctionResult with the return value
-            yield FunctionResult({"issue": r})      # json object needed, not a string representation
+            jira_client = get_jira_client(app_configs, rc)
+
+            yield StatusMessage(u"Transition issue {0} to '{1}'".format(fn_inputs.get("jira_issue_id"), fn_inputs.get("jira_transition_id")))
+
+            jira_client.transition_issue(
+                issue=fn_inputs.get("jira_issue_id"),
+                transition=fn_inputs.get("jira_transition_id"),
+                comment=jira_comment,
+                fields=jira_fields)
+
+            results = rp.done(success=True, content="Done")
+
+            log.info("Complete")
+
+            # Produce a FunctionResult with the results
+            yield FunctionResult(results)
         except Exception as err:
             yield FunctionError(err)
-
-    def _build_transitionIssue_appDict(self, app_configs, fn_inputs):
-        '''
-        build the dictionary used for the transition api request
-        :param kwargs:
-        :return: dictionary of values to use
-        '''
-
-        appDict = {
-            'user': app_configs.get("user"),
-            'password': app_configs.get("password"),
-            'url': fn_inputs.get('jira_url'),
-            'verifyFlag': app_configs.get("verify_cert"),
-            'transitionId': fn_inputs.get('jira_transition_id'),
-        }
-
-        if fn_inputs.get('jira_resolution'):
-            appDict['resolution'] = fn_inputs.get('jira_resolution')
-
-        # optional
-        if fn_inputs.get('jira_comment'):
-            html2markdwn = MarkdownParser(strikeout=constants.STRIKEOUT_CHAR, bold=constants.BOLD_CHAR,
-                                          underline=constants.UNDERLINE_CHAR, italic=constants.ITALIC_CHAR)
-            appDict['comment'] = html2markdwn.convert(fn_inputs.get('jira_comment'))
-
-        return appDict
-
