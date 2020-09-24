@@ -139,7 +139,7 @@ The following table describes the settings you need to configure in the app.conf
 -->
 * Import the Data Tables and Custom Fields like the screenshot below:
 
-  ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png)
+  ![screenshot: custom_layouts](./doc/screenshots/dt-jira-task-references.png)
 
 ---
 
