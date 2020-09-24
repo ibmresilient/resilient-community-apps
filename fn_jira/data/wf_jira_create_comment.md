@@ -18,6 +18,7 @@
 
 ### Pre-Processing Script
 ```python
+# Example: Jira Create Comment pre-processing script
 
 inputs.jira_issue_id = incident.properties.jira_issue_id
 inputs.jira_comment = note.text.content
@@ -25,7 +26,16 @@ inputs.jira_comment = note.text.content
 
 ### Post-Processing Script
 ```python
-None
+# Example: Jira Create Comment post-process script
+
+# Import Date
+from java.util import Date
+
+# Get the current time
+dt_now = Date()
+
+# Prepend message and time to the note
+note.text = u"<b>Sent to Jira at {0}</b><br>{1}".format(dt_now, unicode(note.text.content))
 ```
 
 ---
