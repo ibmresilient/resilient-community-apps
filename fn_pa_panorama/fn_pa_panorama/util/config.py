@@ -14,5 +14,8 @@ def config_section_data():
 panorama_host=<https://0.0.0.0>
 api_key=<Panorama_api_key>
 cert=[True|False]
+# optinal settings to access Panorama via proxies
+#http_proxy=http://proxy.domain:3128
+#https_proxy=https://proxy.domain:3128
 """
     return config_data
