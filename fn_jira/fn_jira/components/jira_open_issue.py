@@ -31,7 +31,7 @@ class FunctionComponent(ResilientComponent):
 
     @function("jira_open_issue")
     def _jira_open_issue_function(self, event, *args, **kwargs):
-        """Function: create a jira issue. This requires app.config configuration information for jira """
+        """Function: Create a jira issue."""
         try:
             log = logging.getLogger(__name__)
             rc = RequestsCommon(self.opts, self.options)

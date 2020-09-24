@@ -27,7 +27,7 @@ class FunctionComponent(ResilientComponent):
 
     @function("jira_create_comment")
     def _jira_create_comment_function(self, event, *args, **kwargs):
-        """Function: create a jira comment"""
+        """Function: Create a jira comment."""
         try:
             log = logging.getLogger(__name__)
             rc = RequestsCommon(self.opts, self.options)

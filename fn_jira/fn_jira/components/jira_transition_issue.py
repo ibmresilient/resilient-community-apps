@@ -28,12 +28,7 @@ class FunctionComponent(ResilientComponent):
 
     @function("jira_transition_issue")
     def _jira_transition_issue_function(self, event, *args, **kwargs):
-        """Function: transition a jira issue. This requires app.config configuration information for jira
-           It uses fields passed from resilient:
-            jira_url - complete url for the issue to transition
-            jira_transition_id - jira id to transition the issue. This is found in jira via the url:
-               https://<jira host>/rest/api/2/status/
-        """
+        """Function: Transition a jira issue."""
         try:
             log = logging.getLogger(__name__)
             rc = RequestsCommon(self.opts, self.options)
