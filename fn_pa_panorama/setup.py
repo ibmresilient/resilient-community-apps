@@ -11,7 +11,7 @@ setup(
     author_email='',
     url="http://ibm.biz/resilientcommunity",
     description="Resilient Circuits Components to Integrate with the Panorama Platform",
-    long_description="This integrations contains Functions to interact with address groups, "
+    long_description="This integration contains Functions to interact with address groups, "
                      "addresses, and user groups within Palo Alto Panorama.",
     install_requires=[
         'resilient_circuits>=30.0.0',
