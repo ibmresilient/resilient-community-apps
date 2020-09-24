@@ -23,12 +23,15 @@ class TestPanoramaCreateAddress:
         }
     }
 
+    mocked_location = mocked_opts["fn_pa_panorama"]["location"]
+
     def _generateResponse(self, content, status):
         class simResponse:
             def __init__(self, content, status):
                 self.status_code = status
                 self.content = content
                 self.reason = "test"
+                self.text = content
 
             def json(self):
                 return json.loads(self.content)
@@ -115,7 +118,7 @@ class TestPanoramaCreateAddress:
             }
         }
         mocked_requests_get.return_value = self._generateResponse(json.dumps(sim_content), 200)
-        pc = PanoramaClient(self.mocked_opts, None, None)
+        pc = PanoramaClient(self.mocked_opts, self.mocked_location, None)
         result = pc.get_addresses()
         assert result == sim_content
 
@@ -145,7 +148,7 @@ class TestPanoramaCreateAddress:
             }
         }
         mocked_requests_get.return_value = self._generateResponse(json.dumps(sim_content), 200)
-        pc = PanoramaClient(self.mocked_opts, None, None)
+        pc = PanoramaClient(self.mocked_opts, self.mocked_location, None)
         result = pc.get_address_groups("Blocked_Group")
         assert result == sim_content
 
@@ -166,7 +169,7 @@ class TestPanoramaCreateAddress:
             }
         }
         mocked_requests_get.return_value = self._generateResponse(json.dumps(sim_content), 200)
-        pc = PanoramaClient(self.mocked_opts, None, None)
+        pc = PanoramaClient(self.mocked_opts, self.mocked_location, None)
         result = pc.edit_address_groups("Blocked_Group", json.dumps(body))
         assert result == sim_content
 
@@ -183,7 +186,7 @@ class TestPanoramaCreateAddress:
             "msg": "command succeeded"
         }
         mocked_requests_get.return_value = self._generateResponse(json.dumps(sim_content), 200)
-        pc = PanoramaClient(self.mocked_opts, None, None)
+        pc = PanoramaClient(self.mocked_opts, self.mocked_location, None)
         result = pc.add_address("2.2.2.2", json.dumps(body))
         assert result == sim_content
 
@@ -192,8 +195,10 @@ class TestPanoramaCreateAddress:
         sim_content = '<response status="success" code="19"><result total-count="1" count="1"><entry name="Blocked_Users" admin="admin" dirtyId="14" time="2019/06/27 07:51:28"/></result></response>'
         body_xpath = "/config/shared/local-user-database/user-group/entry[@name=\\'Blocked_Users\\']"
         mocked_requests_get.return_value = self._generateResponse(sim_content, 200)
-        pc = PanoramaClient(self.mocked_opts, None, None)
+        pc = PanoramaClient(self.mocked_opts, self.mocked_location, None)
         result = pc.get_users_in_a_group( body_xpath)
+        print(result)
+        print(sim_content)
         assert result == sim_content
 
     @patch("requests.request")
@@ -206,6 +211,6 @@ class TestPanoramaCreateAddress:
                     </user>
                 </entry>"""
         mocked_requests_get.return_value = self._generateResponse(sim_content, 200)
-        pc = PanoramaClient(self.mocked_opts, None, None)
+        pc = PanoramaClient(self.mocked_opts, self.mocked_location, None)
         result = pc.edit_users_in_a_group(body_xpath, xml)
         assert result == sim_content
