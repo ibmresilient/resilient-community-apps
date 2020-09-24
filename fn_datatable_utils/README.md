@@ -214,8 +214,13 @@ inputs.dt_utils_search_value = artifact.value
 ```
 ### Post-Processing Script
 ```python
-noteText = str(results["rows"])
-incident.addNote(noteText)
+search_value = results.inputs["dt_utils_search_value"]
+note_text = "<b>Result from Example: Data Table Utils: Get Rows</b><br> search value: {0}".format(search_value) 
+if results.success:
+  note_text = "{0} <br>{1}".format(note_text, str(results["rows"]))
+else:
+  note_text = "{0} <br>No rows found.".format(note_text)
+incident.addNote(helper.createRichText(note_text))
 ```
 ---
 ## Function - Update Row:
@@ -438,7 +443,8 @@ if workflow.properties.rows_to_delete and workflow.properties.rows_to_delete.row
 
 ### Post-Process Script:
 ```python
-incident.addNote("Rows deleted: {0}".format(str(results["rows_ids"])))
+note_text = "<b>Result from Example: Data Table Utils: Delete Rows</b><br> {0}".format(str(results["rows_ids"]))
+incident.addNote(helper.createRichText(note_text))
 ```
 ---
 ## Rules
