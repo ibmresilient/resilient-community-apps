@@ -47,12 +47,12 @@ class FunctionComponent(ResilientComponent):
             fn_inputs = validate_fields(["incident_id", "jira_fields"], kwargs)
             log.info("Validated function inputs: %s", fn_inputs)
 
+            # Get JIRA fields from input
+            jira_fields = json.loads(fn_inputs.get("jira_fields"))
+
             yield StatusMessage("Connecting to JIRA")
 
             jira_client = get_jira_client(app_configs, rc)
-
-            # Get JIRA fields from input
-            jira_fields = json.loads(fn_inputs.get("jira_fields"))
 
             # Build the URL to Resilient
             resilient_url = build_url_to_resilient(self.res_params.get("host"), self.res_params.get("port"), fn_inputs.get("incident_id"), fn_inputs.get("task_id"))
