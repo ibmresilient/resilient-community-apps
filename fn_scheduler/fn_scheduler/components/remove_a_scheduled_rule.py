@@ -9,6 +9,7 @@ from resilient_circuits import ResilientComponent, function, FunctionResult, Fun
 from resilient_lib import validate_fields, ResultPayload
 from fn_scheduler.components import SECTION_SCHEDULER
 from fn_scheduler.lib.scheduler_helper import ResilientScheduler
+from fn_scheduler.lib.resilient_helper import validate_app_config
 
 log = logging.getLogger(__name__)
 
@@ -21,7 +22,7 @@ class FunctionComponent(ResilientComponent):
 
         options = opts.get(SECTION_SCHEDULER, {})
 
-        validate_fields(["datastore_dir", "thread_max", "timezone"], options)
+        validate_app_config(options)
 
         self.res_scheduler = ResilientScheduler(options.get("db_url"),
                                                 options.get("datastore_dir"),

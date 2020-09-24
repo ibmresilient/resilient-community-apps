@@ -5,9 +5,9 @@
 
 import logging
 from resilient_circuits import ResilientComponent, handler
-from resilient_lib import validate_fields
 from fn_scheduler.components import SECTION_SCHEDULER
 from fn_scheduler.lib.scheduler_helper import ResilientScheduler
+from fn_scheduler.lib.resilient_helper import validate_app_config
 
 """
 Summary:
@@ -26,7 +26,7 @@ class FunctionComponent(ResilientComponent):
         super(FunctionComponent, self).__init__(opts)
 
         options = opts.get(SECTION_SCHEDULER, {})
-        self.validate_app_config(options)
+        validate_app_config(options)
         self.timezone = options.get("timezone")
 
         self.scheduler = ResilientScheduler(options.get("db_url"),
@@ -40,15 +40,7 @@ class FunctionComponent(ResilientComponent):
         """Configuration options have changed, save new values"""
         self.opts = opts
         options = opts.get(SECTION_SCHEDULER, {})
-        self.validate_app_config(options)
+        validate_app_config(options)
 
         # TODO restart the scheduler
 
-    def validate_app_config(self, options):
-        """
-        ensure app.config settings are in place
-        :param options:
-        :return: True if success, otherwise ValueError
-        """
-        validate_fields(('datastore_dir', 'thread_max', 'timezone'), options)
-        return True
