@@ -12,7 +12,7 @@
   ![screenshot: screenshot_1](./screenshots/screenshot_1.png)
 -->
 
-# fn-jira for IBM Resilient
+# Atlassian Jira Functions for Resilient
 
 ## Table of Contents
 - [Release Notes](#release-notes)
@@ -37,6 +37,22 @@
   Specify all changes in this release. Do not remove the release 
   notes of a previous release
 -->
+### v2.0.0
+* Added App Host support
+* Added proxy support
+* Added support for https://pypi.org/project/jira/
+* Changed config heading from `jira` to `fn_jira`
+* Added configs: `timeout`, `auth_method`, `http_proxy` and `https_proxy`
+* Added incident field `jira_issue_id`
+* Changed column name in `jira_task_references` Data Table from `jira_api_url` to `jira_issue_id_col`
+
+### v1.0.2
+* Improvements to data table handling
+* Bug fixes
+
+### v1.0.1
+* Support for versions of Resilient 31.0 and beyond
+
 ### v1.0.0
 * Initial Release
 
@@ -67,9 +83,9 @@ Example rules and workflows can used used or modified to meet your business proc
 <!--
   List the Key Features of the Integration
 -->
-* Key Feature 1
-* Key Feature 2
-* Key Feature 3
+* Issue creation
+* Issue transition
+* Comment creation
 
 ---
 
@@ -89,7 +105,7 @@ Example rules and workflows can used used or modified to meet your business proc
     | ---- | ----------- |
     | Org Data | Read, Edit |
     | Function | Read |
-* Proxy supported: Yes/No
+* Proxy supported: Yes
 
 ---
 
@@ -104,14 +120,14 @@ The following table describes the settings you need to configure in the app.conf
 
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
-| **url** | Yes | `https://<jira url>` | *Enter a description of the config here.* |
-| **auth_method** | Yes | `AUTH` | *Enter a description of the config here.* |
-| **user** | Yes | `<jira user>` | *Enter a description of the config here.* |
-| **password** | Yes | `<jira user password>` | *Enter a description of the config here.* |
-| **timeout** | Yes | `10` | *Enter a description of the config here.* |
-| **verify_cert** | Yes | `True` | *Enter a description of the config here.* |
-| **http_proxy** | Yes | `` | *Enter a description of the config here.* |
-| **https_proxy** | Yes | `` | *Enter a description of the config here.* |
+| **url** | Yes | `https://<jira url>` | The URL of your Jira platform |
+| **auth_method** | Yes | `AUTH` | The method of authentication to use when connecting to your Jira platform. Supported methods are `AUTH` and `BASIC`. For more information on authentication see: https://jira.readthedocs.io/en/latest/examples.html#authentication |
+| **user** | Yes | `<jira user>` | The username of the Jira account to use with this integration. They must be a user on the Jira platform with the correct permissions |
+| **password** | Yes | `<jira user password>` | The password for the Jira account to use with this integration |
+| **timeout** | No | `10` | The number of seconds to timeout after when making a request to the Jira platform |
+| **verify_cert** | No | `True` | A boolean value. Set to `True` if you want ti verify SSL certificates on each request |
+| **http_proxy** | No | `http://localhost:3128` |  Your HTTP Proxy |
+| **https_proxy** | No | `https://localhost:3128` |  Your HTTPS Proxy |
 
 ---
 
