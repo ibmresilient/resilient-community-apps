@@ -25,6 +25,7 @@ class FunctionComponent(ResilientComponent):
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
+        self.opts = opts
         self.options = opts.get("fn_pa_panorama", {})
 
     @function("panorama_edit_users_in_a_group")
