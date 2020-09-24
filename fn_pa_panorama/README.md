@@ -29,6 +29,9 @@
   notes of a previous release
 -->
 ### v1.0.0
+* App Host support
+
+### v1.0.0
 * Initial Release
 
 ## Overview
@@ -47,14 +50,37 @@ Contains Functions to get and edit addresses groups, get and create addresses, a
 <!--
   List any Requirements 
 -->
-* IBM Resilient >= `v31.0.4254`
-* An Integration Server running `resilient_circuits>=30.0.0`
+* IBM Resilient >= `v35.2`
+* An App Host paired with Resilient or an Integration Server running `resilient_circuits>=30.0.0`
+  * To setup and pair an App Host with Resilient, visit the [IBM Knowledge Center](https://www.ibm.com/support/knowledgecenter/SSBRUQ)
   * To setup an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
 * `resilient-lib>32.0.140`
 * Panorama `9.0`
 
 ---
 ## Installation
+
+### App Host
+
+All the components for running this integration in a container already exist when using the App Host app.
+
+To install,
+
+* Navigate to Administrative Settings and then the Apps tab.
+* Click the Install button and select the downloaded file: app-fn_pa_panorama-x.x.x.zip.
+* Go to the Configuration tab and edit the app.config file, editing the API key for Panorama 
+and making any additional setting changes.
+
+  | Config | Required | Example | Description |
+  | ------ | :------: | ------- | ----------- |
+  | **panorama_host** | Yes | `https://0.0.0.0` | *The location where your Panorama software is running.* |
+  | **api_key** | Yes | `<Panorama_api_key>` | *API key generated in the step above* |
+  | **cert** | Yes | `[True/False]` | *True or False* |
+  | **http_proxy** | No | `http://0.0.0.0:3128` | *Optional http proxy* |
+  | **https_proxy** | No | `http://0.0.0.0:3128` | *Optional https proxy* |
+
+### Integration Sever
+
 * Download the `fn_pa_panorama.zip`.
 * Copy the `.zip` to your Integration Server and SSH into it.
 * **Unzip** the package:
@@ -79,7 +105,7 @@ Contains Functions to get and edit addresses groups, get and create addresses, a
   ```
 * Generate the API key for Panorama:
   ```
-  curl -X GET 'https://9.70.194.108/api/?type=keygen&user=<your_username>&password=<your_password>' -k
+  curl -X GET 'https://<server_ip>/api/?type=keygen&user=<your_username>&password=<your_password>' -k
   ```
 * Open the config file, scroll to the bottom and edit your fn\_pa\_panorama **configurations**:
   ```
@@ -91,6 +117,8 @@ Contains Functions to get and edit addresses groups, get and create addresses, a
   | **panorama_host** | Yes | `https://0.0.0.0` | *The location where your Panorama software is running.* |
   | **api_key** | Yes | `<Panorama_api_key>` | *API key generated in the step above* |
   | **cert** | Yes | `[True/False]` | *True or False* |
+  | **http_proxy** | No | `http://0.0.0.0:3128` | *Optional http proxy* |
+  | **https_proxy** | No | `http://0.0.0.0:3128` | *Optional https proxy* |
 
 * **Save** and **Close** the app.config file.
 * [Optional]: Run selftest to test the Integration you configured:
@@ -140,19 +168,7 @@ There are several ways to verify the successful operation of a function.
 
 ---
 
-<!--
-  If necessary, use this section to describe how to configure your security application to work with the integration.
-  Delete this section if the user does not need to perform any configuration procedures on your product.
-
-## Configure <Product_Name>
-
-* Step One
-* Step Two
-* Step Three
----
--->
-
 ## Support
 | Name | Version | Author | Support URL |
 | ---- | ------- | ------ | ----------- |
-| fn\_pa\_panorama | 1.0.0 | IBM Resilient | https://github.com/ibmresilient/resilient-community-apps |
+| fn\_pa\_panorama | 1.0.1 | IBM Resilient | http://ibm.biz/resilientcommunity |
