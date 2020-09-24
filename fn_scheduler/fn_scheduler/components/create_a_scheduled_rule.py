@@ -223,9 +223,11 @@ def triggered_job(incident_id, object_id, row_id,
         # is the object removed?
         if "Not Found" in str(err):
             log.error("Object not found and schedule will be removed for rule '%s'", rule_id)
-            add_comment(rest_client, incident_id, u"Error running rule '{}': {}".format(scheduler_label, str(err)))
             scheduler.remove_job(scheduler_label)
-            return
+        else:
+            log.error("An error occurred for rule '%s'", rule_id)
+        add_comment(rest_client, incident_id, u"Error running rule '{}': {}".format(scheduler_label, str(err)))
+        return
 
     if rule_type:
         add_comment(rest_client, incident_id, u"Scheduled job '{}' run on {}: {}".format(rule_name, rule_type, object_id))
