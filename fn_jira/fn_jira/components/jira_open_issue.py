@@ -6,7 +6,6 @@
 
 import logging
 import json
-import fn_jira.lib.constants as constants
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import validate_fields, ResultPayload, RequestsCommon
 from fn_jira.util.helper import CONFIG_DATA_SECTION, validate_app_configs, build_url_to_resilient, prepend_text, get_jira_client, to_markdown

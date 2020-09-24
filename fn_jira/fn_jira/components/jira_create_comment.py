@@ -2,14 +2,9 @@
 # pragma pylint: disable=unused-argument, no-self-use
 # (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 
-"""Function implementation
-Preprocessor script:
-inputs.jira_url = incident.properties.jiraurl
-inputs.jira_comment = note.text.content
-"""
+"""Add a comment to a Jira Issue"""
 
 import logging
-import fn_jira.lib.constants as constants
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import validate_fields, MarkdownParser, ResultPayload, RequestsCommon
 from fn_jira.util.helper import CONFIG_DATA_SECTION, validate_app_configs, get_jira_client, to_markdown
