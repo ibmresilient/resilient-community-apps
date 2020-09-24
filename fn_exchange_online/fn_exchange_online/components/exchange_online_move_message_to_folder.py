@@ -6,7 +6,7 @@
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import validate_fields, RequestsCommon, ResultPayload
-from fn_exchange_online.lib.ms_graph_helper import MSGraphHelper
+from fn_exchange_online.lib.ms_graph_helper import MSGraphHelper, MAX_RETRIES_TOTAL, MAX_RETRIES_BACKOFF_FACTOR, MAX_BATCHED_REQUESTS
 
 CONFIG_DATA_SECTION = 'fn_exchange_online'
 LOG = logging.getLogger(__name__)
@@ -64,6 +64,9 @@ class FunctionComponent(ResilientComponent):
                                             self.options.get("client_secret"),
                                             self.options.get("max_messages"),
                                             self.options.get("max_users"),
+                                            self.options.get("max_retries_total", MAX_RETRIES_TOTAL),
+                                            self.options.get("max_retries_backoff_factor", MAX_RETRIES_BACKOFF_FACTOR),
+                                            self.options.get("max_batched_requests", MAX_BATCHED_REQUESTS),
                                             RequestsCommon(self.opts, self.options).get_proxies())
 
             # Call MS Graph API to get the user profile
@@ -73,7 +76,9 @@ class FunctionComponent(ResilientComponent):
             if response.status_code == 201:
                 success = True
                 new_message_id = response.json().get('id')
-                response_json = {'new_message_id': new_message_id}
+                new_web_link = response.json().get('webLink')
+                response_json = {'new_message_id': new_message_id,
+                                 'new_web_link': new_web_link}
             else:
                 success = False
                 response_json = response.json()

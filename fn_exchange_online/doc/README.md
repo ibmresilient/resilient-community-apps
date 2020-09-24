@@ -12,7 +12,7 @@
   ![screenshot: screenshot_1](./screenshots/screenshot_1.png)
 -->
 
-# **User Guide:** Microsoft Exchange Online Functions for IBM Resilient v1.0.0
+# **User Guide:** Microsoft Exchange Online Functions for IBM Resilient v1.1.0
 
 ## Table of Contents
 - [Key Features](#key-features)
@@ -279,9 +279,11 @@ if results.success:
   # The message was deleted, so update "status" column in data table.
   text = u"""<p style= "color:{color}">{status} </p>""".format(color="red", status="Deleted")
   row['exo_dt_status'] = helper.createRichText(text)
+  row['exo_dt_web_link'] = ""
 elif results.content["error"] is not None: 
   # There is an "item not found" error mostly likely here
   row['exo_dt_status'] = helper.createRichText(results.content["error"]["code"])
+  row['exo_dt_web_link'] = ""
 ```
 
 </p>
@@ -374,44 +376,37 @@ inputs.exo_query_messages_results = workflow.properties.exo_query_results['raw']
 ```python
 from java.util import Date
 
-deleted_count = 0
-not_deleted_count = 0
+content = results.get("content")
+output_format = content.get("exo_query_output_format")
 
-# Add each email as a row in the query results data table
-for user in results["content"]:
-    
-  not_deleted_count = not_deleted_count + len(user["not_deleted_list"])
-  for email in user["deleted_list"]:
-    deleted_count = deleted_count + 1
-    message_row = incident.addRow("exo_message_query_results_dt")
-    message_row.exo_dt_query_date = Date()
-    message_row.exo_dt_message_id = email.id
-    message_row.exo_dt_received_date   = email.receivedDateTime
-    message_row.exo_dt_email_address = user["email_address"]
-    if email.sender:
-      message_row.exo_dt_sender_email = email.sender.emailAddress.address
-    else:
-      message_row.exo_dt_sender_email = ""
-    message_row.exo_dt_message_subject = email.subject
-    message_row.exo_dt_has_attachments = email.hasAttachments
-    if email.webLink:
-      ref_html = u"""<a href='{0}'>Link</a>""".format(email.webLink)
-      message_row.exo_dt_web_link = helper.createRichText(ref_html)
-    else:
-      message_row.exo_dt_web_link = ""
+# Write to the data table if the user requested it.
+if "Exchange Online data table" in output_format:
+
+  user_list = content.get("delete_results")
+  # Add each email as a row in the query results data table
+  for user in user_list:
+
+    for email in user.get("deleted_list"):
+      message_row = incident.addRow("exo_message_query_results_dt")
+      message_row.exo_dt_query_date = Date()
+      message_row.exo_dt_message_id = email.id
+      message_row.exo_dt_received_date   = email.receivedDateTime
+      message_row.exo_dt_email_address = user.get("email_address")
+      if email.sender:
+        message_row.exo_dt_sender_email = email.sender.emailAddress.address
+      else:
+        message_row.exo_dt_sender_email = ""
+      message_row.exo_dt_message_subject = email.subject
+      message_row.exo_dt_has_attachments = email.hasAttachments
+      if email.webLink:
+        ref_html = u"""<a href='{0}'>Link</a>""".format(email.webLink)
+        message_row.exo_dt_web_link = helper.createRichText(ref_html)
+      else:
+        message_row.exo_dt_web_link = ""
  
-    text = u"""<p style= "color:{color}">{status} </p>""".format(color="red", status="Deleted")
-    message_row.exo_dt_status = helper.createRichText(text)
+      text = u"""<p style= "color:{color}">{status} </p>""".format(color="red", status="Deleted")
+      message_row.exo_dt_status = helper.createRichText(text)
 
-
-# Post a note containing the number of emails deleted
-note = u"Exchange Online Delete Messages From Query Results:\n  {0} messages deleted".format(deleted_count)
-
-# Add to the note if any messages from the query were not deleted.
-if not_deleted_count > 0:
-  note2 = u"  {0} messages NOT deleted".format(not_deleted_count)
-  note = u"{0}\n{1}".format(note, note2)
-incident.addNote(note)
 ```
 
 </p>
@@ -529,6 +524,7 @@ inputs.exo_messages_id = row.exo_dt_message_id
 if results.content["error"] is not None:
   noteText = u"Exchange Online message NOT FOUND: \n email address: {0}\n message ID: {1}\n{2}".format(results.inputs["exo_email_address"], results.inputs["exo_messages_id"], results.pretty_string)
   row.exo_dt_status = "Not Found"
+  row..exo_dt_web_link = ""
 else:
   noteText = u"Exchange Online email address: {0} message:\n{1}".format(results.inputs["exo_email_address"], results.pretty_string)
 
@@ -769,10 +765,13 @@ if results.content["error"] is not None:
   noteText = u"Exchange Online message NOT FOUND: \n email address: {0}\n message ID: {1}".format(results.inputs["exo_email_address"], results.inputs["exo_messages_id"])
   status_text = u"""<p style= "color:{color}">{status} </p>""".format(color="red", status="Not Found")
   row['exo_dt_status'] = helper.createRichText(status_text)
+  row['exo_dt_web_link'] = ""
 else:
   # When a message is moved it's ID changes, so update the new message ID into the data table
+  # The message status is still "Active" but the weblink is no longer valid, so make is empty string.
   noteText = u"Exchange Online email address: {0}\n\n  Message has been moved to folder: {1}\n\n  Old message ID: {2} \n\n  New message ID: {3}".format(results.inputs["exo_email_address"], results.inputs["exo_destination_mailfolder_id"]["name"], results.inputs["exo_messages_id"], results.content["new_message_id"])
-  row['exo_dt_message_id'] = results.content["new_message_id"] 
+  row['exo_dt_message_id'] = results.content["new_message_id"]
+  row['exo_dt_web_link'] = ref_html = u"""<a href='{0}'>Link</a>""".format(results.content["new_web_link"])
 incident.addNote(noteText)
 ```
 
@@ -948,7 +947,7 @@ inputs.exo_has_attachments      = inputs.exo_has_attachments      if rule.proper
 ```python
 from java.util import Date
 
-note = u"Exchange Online Query Multiple users:\n"
+note = u"Exchange Online Query user:\n"
 note_len = len(note)
 
 # Add each email as a row in the query results data table
