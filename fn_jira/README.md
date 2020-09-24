@@ -167,9 +167,25 @@ See example workflow for configuration of function pre-processor and post-proces
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+    'version': '1.0',
+    'success': True,
+    'reason': None,
+    'content': 'Done',
+    'raw': '"Done"',
+    'inputs': {
+        'jira_issue_id': 'INT-2106',
+        'jira_transition_id': 'Close',
+        'jira_fields': '{ "resolution":{ "name":"Done" } }',
+        'jira_comment': 'Closed in IBM Resilient\n\nResolution: Done\n'
+    },
+    'metrics': {
+        'version': '1.0',
+        'package': 'fn-jira',
+        'package_version': '2.0.0',
+        'host': 'example',
+        'execution_time_ms': 1357,
+        'timestamp': '2020-09-24 16:27:09'
+    }
 }
 ```
 
@@ -291,9 +307,167 @@ See example workflow for configuration of function pre-processor and post-proces
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+    'version': '1.0',
+    'success': True,
+    'reason': None,
+    'content': {
+        'issue_url': 'https://jira1-01.example.com/browse/INT-2105',
+        'issue_url_internal': 'https://jira1-01.example.com/rest/api/2/issue/41939',
+        'issue_key': 'INT-2105',
+        'issue': {
+            'expand': 'renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations',
+            'id': '41939',
+            'self': 'https://jira1-01.example.com/rest/api/2/issue/41939',
+            'key': 'INT-2105',
+            'fields': {
+                'issuetype': {
+                    'self': 'https://jira1-01.example.com/rest/api/2/issuetype/10001',
+                    'id': '10001',
+                    'description': 'Created by Jira Software - do not edit or delete. Issue type for a user story.',
+                    'iconUrl': 'https://jira1-01.example.com/images/icons/issuetypes/story.svg',
+                    'name': 'Story',
+                    'subtask': False
+                },
+                'timespent': None,
+                'project': {
+                    'self': 'https://jira1-01.example.com/rest/api/2/project/10101',
+                    'id': '10101',
+                    'key': 'INT',
+                    'name': 'Example',
+                    'projectTypeKey': 'software',
+                    'avatarUrls': {
+                        '48x48': 'https://jira1-01.example.com/secure/projectavatar?avatarId=10324',
+                        '24x24': 'https://jira1-01.example.com/secure/projectavatar?size=small&avatarId=10324',
+                        '16x16': 'https://jira1-01.example.com/secure/projectavatar?size=xsmall&avatarId=10324',
+                        '32x32': 'https://jira1-01.example.com/secure/projectavatar?size=medium&avatarId=10324'
+                    }
+                },
+                'fixVersions': [],
+                'aggregatetimespent': None,
+                'resolution': None,
+                'customfield_10901': {
+                    'self': 'https://jira1-01.example.com/rest/api/2/customFieldOption/10807',
+                    'value': 'No',
+                    'id': '10807'
+                },
+                'resolutiondate': None,
+                'lastViewed': None,
+                'watches': {
+                    'self': 'https://jira1-01.example.com/rest/api/2/issue/INT-2105/watchers',
+                    'watchCount': 1,
+                    'isWatching': True
+                },
+                'created': '2020-09-24T15:10:06.296+0000',
+                'customfield_10220': None,
+                'priority': {
+                    'self': 'https://jira1-01.example.com/rest/api/2/priority/2',
+                    'iconUrl': 'https://jira1-01.example.com/secure/attachment/14751/high.svg',
+                    'name': 'High',
+                    'id': '2'
+                },
+                'labels': [],
+                'timeestimate': None,
+                'aggregatetimeoriginalestimate': None,
+                'versions': [],
+                'customfield_10219': None,
+                'issuelinks': [],
+                'assignee': None,
+                'updated': '2020-09-24T15:10:06.296+0000',
+                'status': {
+                    'self': 'https://jira1-01.example.com/rest/api/2/status/1',
+                    'description': 'The issue is open and ready for the assignee to start work on it.',
+                    'iconUrl': 'https://jira1-01.example.com/images/icons/statuses/open.png',
+                    'name': 'Open',
+                    'id': '1',
+                    'statusCategory': {
+                        'self': 'https://jira1-01.example.com/rest/api/2/statuscategory/2',
+                        'id': 2,
+                        'key': 'new',
+                        'colorName': 'blue-gray',
+                        'name': 'To Do'
+                    }
+                },
+                'components': [],
+                'timeoriginalestimate': None,
+                'description': 'IBM Resilient Link: https://example.ibm.com:443/#incidents/2130\n\nThe CEO recieved an email with a malcious attachment',
+                'timetracking': {},
+                'attachment': [],
+                'aggregatetimeestimate': None,
+                'summary': 'IBM Resilient: Malicious email sent to CEO',
+                'creator': {
+                    'self': 'https://jira1-01.example.com/rest/api/2/user?username=example',
+                    'name': 'example',
+                    'key': 'example',
+                    'emailAddress': 'example@ibm.com',
+                    'avatarUrls': {
+                        '48x48': 'https://jira1-01.example.com/secure/useravatar?ownerId=example&avatarId=10713',
+                        '24x24': 'https://jira1-01.example.com/secure/useravatar?size=small&ownerId=example&avatarId=10713',
+                        '16x16': 'https://jira1-01.example.com/secure/useravatar?size=xsmall&ownerId=example&avatarId=10713',
+                        '32x32': 'https://jira1-01.example.com/secure/useravatar?size=medium&ownerId=example&avatarId=10713'
+                    },
+                    'displayName': 'example',
+                    'active': True,
+                    'timeZone': 'UTC'
+                },
+                'subtasks': [],
+                'reporter': {
+                    'self': 'https://jira1-01.example.com/rest/api/2/user?username=example',
+                    'name': 'example',
+                    'key': 'example',
+                    'emailAddress': 'example@ibm.com',
+                    'avatarUrls': {
+                        '48x48': 'https://jira1-01.example.com/secure/useravatar?ownerId=example&avatarId=10713',
+                        '24x24': 'https://jira1-01.example.com/secure/useravatar?size=small&ownerId=example&avatarId=10713',
+                        '16x16': 'https://jira1-01.example.com/secure/useravatar?size=xsmall&ownerId=example&avatarId=10713',
+                        '32x32': 'https://jira1-01.example.com/secure/useravatar?size=medium&ownerId=example&avatarId=10713'
+                    },
+                    'displayName': 'example',
+                    'active': True,
+                    'timeZone': 'UTC'
+                },
+                'aggregateprogress': {
+                    'progress': 0,
+                    'total': 0
+                },
+                'environment': None,
+                'duedate': None,
+                'progress': {
+                    'progress': 0,
+                    'total': 0
+                },
+                'comment': {
+                    'comments': [],
+                    'maxResults': 0,
+                    'total': 0,
+                    'startAt': 0
+                },
+                'votes': {
+                    'self': 'https://jira1-01.example.com/rest/api/2/issue/INT-2105/votes',
+                    'votes': 0,
+                    'hasVoted': False
+                },
+                'worklog': {
+                    'startAt': 0,
+                    'maxResults': 20,
+                    'total': 0,
+                    'worklogs': []
+                }
+            }
+        }
+    },
+    'raw': '{"issue_url": "https://jira1-01.example.com/browse/INT-2105", "issue_url_internal": "https://jira1-01.example.com/rest/api/2/issue/41939", "issue_key": "INT-2105", "issue": ...
+    'inputs': {
+        'incident_id': 2130,
+        'jira_fields': '{ "summary":"IBM Resilient: Malicious email sent to CEO","issuetype":"Story","project":"INT","description":"<div class=\\"rte\\"><div>The CEO recieved an email with a malcious attachment</div></div>","priority":{ "name":"High" } }'
+    },
+    'metrics': {
+        'version': '1.0',
+        'package': 'fn-jira',
+        'package_version': '2.0.0',
+        'host': 'example',
+        'execution_time_ms': 2016,
+        'timestamp': '2020-09-24 16:09:51'
+    }
 }
 ```
 
@@ -418,9 +592,59 @@ See example workflow for configuration of function pre-processor and post-proces
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+    'version': '1.0',
+    'success': True,
+    'reason': None,
+    'content': {
+        'self': 'https://jira1-01.example.com/rest/api/2/issue/41939/comment/53123',
+        'id': '53123',
+        'author': {
+            'self': 'https://jira1-01.example.com/rest/api/2/user?username=.example',
+            'name': 'example',
+            'key': 'example',
+            'emailAddress': 'example@ibm.com',
+            'avatarUrls': {
+                '48x48': 'https://jira1-01.example.com/secure/useravatar?ownerId=.example&avatarId=10713',
+                '24x24': 'https://jira1-01.example.com/secure/useravatar?size=small&ownerId=.example&avatarId=10713',
+                '16x16': 'https://jira1-01.example.com/secure/useravatar?size=xsmall&ownerId=.example&avatarId=10713',
+                '32x32': 'https://jira1-01.example.com/secure/useravatar?size=medium&ownerId=.example&avatarId=10713'
+            },
+            'displayName': 'example',
+            'active': True,
+            'timeZone': 'UTC'
+        },
+        'body': 'Please note that the CEO is travelling',
+        'updateAuthor': {
+            'self': 'https://jira1-01.example.com/rest/api/2/user?username=.example',
+            'name': 'example',
+            'key': 'example',
+            'emailAddress': 'example@ibm.com',
+            'avatarUrls': {
+                '48x48': 'https://jira1-01.example.com/secure/useravatar?ownerId=.example&avatarId=10713',
+                '24x24': 'https://jira1-01.example.com/secure/useravatar?size=small&ownerId=.example&avatarId=10713',
+                '16x16': 'https://jira1-01.example.com/secure/useravatar?size=xsmall&ownerId=.example&avatarId=10713',
+                '32x32': 'https://jira1-01.example.com/secure/useravatar?size=medium&ownerId=.example&avatarId=10713'
+            },
+            'displayName': 'example',
+            'active': True,
+            'timeZone': 'UTC'
+        },
+        'created': '2020-09-24T15:23:12.870+0000',
+        'updated': '2020-09-24T15:23:12.870+0000'
+    },
+    'raw': '{"self": "https://jira1-01.example.com/rest/api/2/issue/41939/comment/53123", "id": "53123", "author": ...
+    'inputs': {
+        'jira_issue_id': 'INT-2105',
+        'jira_comment': '<div class="rte"><div>Please note that the CEO is travelling</div></div>'
+    },
+    'metrics': {
+        'version': '1.0',
+        'package': 'fn-jira',
+        'package_version': '2.0.0',
+        'host': 'example',
+        'execution_time_ms': 1150,
+        'timestamp': '2020-09-24 16:22:57'
+    }
 }
 ```
 
