@@ -51,7 +51,7 @@ class FunctionComponent(ResilientComponent):
 
             misp_client = misp_helper.get_misp_client(URL, API_KEY, VERIFY_CERT, proxies=proxies)
 
-            yield StatusMessage("Creating new misp attribute {} {}".format(misp_attribute_type, misp_attribute_value))
+            yield StatusMessage(u"Creating new misp attribute {} {}".format(misp_attribute_type, misp_attribute_value))
 
             attribute = misp_helper.create_misp_attribute(misp_client, misp_event_id, misp_attribute_type, misp_attribute_value)
 

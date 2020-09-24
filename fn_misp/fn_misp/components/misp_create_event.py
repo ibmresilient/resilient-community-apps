@@ -54,7 +54,7 @@ class FunctionComponent(ResilientComponent):
 
             misp_client = misp_helper.get_misp_client(URL, API_KEY, VERIFY_CERT, proxies=proxies)
 
-            yield StatusMessage("Creating event {}".format(misp_event_name))
+            yield StatusMessage(u"Creating event {}".format(misp_event_name))
 
             event = misp_helper.create_misp_event(misp_client, misp_distribution, misp_threat_level, misp_analysis_level, misp_event_name)
 

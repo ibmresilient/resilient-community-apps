@@ -62,7 +62,7 @@ class FunctionComponent(ResilientComponent):
 
             tag_result = misp_helper.create_tag(misp_client, misp_attribute_value, misp_tag_type, misp_tag_name, misp_event_id)
             if 'errors' in tag_result:
-                raise IntegrationError("Unable to save the tag. {}".format(tag_result['errors'][1]['errors']))
+                raise IntegrationError(u"Unable to save the tag. {}".format(tag_result['errors'][1]['errors']))
 
             log.debug(tag_result)
 
