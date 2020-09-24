@@ -7,10 +7,11 @@ import logging
 from resilient_circuits import ResilientComponent, function, FunctionResult, FunctionError, StatusMessage
 from resilient import SimpleHTTPException
 from resilient_circuits.rest_helper import get_resilient_client
-from resilient_lib import ResultPayload, validate_fields
+from resilient_lib import ResultPayload
 from fn_scheduler.components import SECTION_SCHEDULER, SECTION_RESILIENT
 from fn_scheduler.lib.scheduler_helper import ResilientScheduler
-from fn_scheduler.lib.resilient_helper import get_incident, get_rule_by_id, get_rule_by_name, add_comment, lookup_object_type
+from fn_scheduler.lib.resilient_helper import get_incident, get_rule_by_id, get_rule_by_name, add_comment, \
+    lookup_object_type, validate_app_config
 
 log = logging.getLogger(__name__)
 
@@ -23,9 +24,10 @@ class FunctionComponent(ResilientComponent):
 
         options = opts.get(SECTION_SCHEDULER, {})
 
-        validate_fields(["datastore_dir", "thread_max", "timezone"], options)
+        validate_app_config(options)
 
-        self.res_scheduler = ResilientScheduler(options.get("datastore_dir"),
+        self.res_scheduler = ResilientScheduler(options.get("db_url"),
+                                                options.get("datastore_dir"),
                                                 options.get("thread_max"),
                                                 options.get("timezone"))
 
@@ -77,7 +79,7 @@ class FunctionComponent(ResilientComponent):
                 raise FunctionError("Incident is closed")
 
             # get the rule id
-            rule_id, rule_object_type_id = get_rule_by_name(rest_client, scheduler_rule_name.strip(' '))
+            rule_id, rule_object_type_id = get_rule_by_name(rest_client, scheduler_rule_name.strip())
             if not rule_id:
                 raise ValueError(u"Rule name not found: %s", scheduler_rule_name)
 
@@ -135,7 +137,7 @@ class FunctionComponent(ResilientComponent):
             for items in rule_params.split(';'):
                 # improperly formatted parameters will fail with KeyError
                 k, v = items.split('=')
-                params[k.strip(' ').lower()] = v.strip(' ')
+                params[k.strip().lower()] = v.strip()
 
         return params
 
@@ -221,9 +223,11 @@ def triggered_job(incident_id, object_id, row_id,
         # is the object removed?
         if "Not Found" in str(err):
             log.error("Object not found and schedule will be removed for rule '%s'", rule_id)
-            add_comment(rest_client, incident_id, u"Error running rule '{}': {}".format(scheduler_label, str(err)))
             scheduler.remove_job(scheduler_label)
-            return
+        else:
+            log.error("An error occurred for rule '%s'", rule_id)
+        add_comment(rest_client, incident_id, u"Error running rule '{}': {}".format(scheduler_label, str(err)))
+        return
 
     if rule_type:
         add_comment(rest_client, incident_id, u"Scheduled job '{}' run on {}: {}".format(rule_name, rule_type, object_id))
