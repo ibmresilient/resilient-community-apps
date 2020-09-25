@@ -52,6 +52,8 @@ To install,
   | ------ | :------: | ------- | ----------- |
   | **url** | Yes | `https://maps.googleapis.com/maps/api/geocode/json` | *URL for Google geocoding* |
   | **api_key** | Yes | `AIza...b483sj` | *your Google Geocoding API Key* |
+    | **https_proxy** | No | https://proxy_host:\<port> | Optional proxy host |
+  | **http_proxy** | No | http://proxy_host:\<port> |  Optional proxy host |
 
 ### Integration Server
 * Download the `app-fn_geocoding-x.x.x.zip` file.
@@ -80,6 +82,8 @@ To install,
   | ------ | :------: | ------- | ----------- |
   | **url** | Yes | `https://maps.googleapis.com/maps/api/geocode/json` | *URL for Google geocoding* |
   | **api_key** | Yes | `AIza...b483sj` | *your Google geocoding API Key* |
+  | **https_proxy** | No | https://proxy_host:\<port> | Optional proxy setting |
+  | **http_proxy** | No | http://proxy_host:\<port> | Optional proxy setting |
 
 * **Save** and **Close** the app.config file.
 * [Optional]: Run selftest to test the Integration you configured:
@@ -90,6 +94,18 @@ To install,
   ```
   $ resilient-circuits run
   ```
+
+### Migrating to v1.0.2
+
+If upgrading to v1.0.2 from a previous release, manually edit your app.config `[fn_geocoding]`
+section with the optional proxy settings:
+
+```
+# uncomment for proxy settings
+#https_proxy=https://proxy_host:<port>
+#http_proxy=https://proxy_host:<port>
+```
+
 ---
 
 ## Uninstall
