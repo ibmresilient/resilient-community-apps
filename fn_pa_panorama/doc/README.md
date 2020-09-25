@@ -12,7 +12,7 @@
   ![screenshot: screenshot_1](./screenshots/screenshot_1.png)
 -->
 
-# **User Guide:** fn\_pa\_panorama\_v1.0.0
+# **User Guide:** fn\_pa\_panorama\_v1.0.1
 
 ## Table of Contents
 - [Key Features](#key-features)
