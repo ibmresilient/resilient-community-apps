@@ -84,8 +84,8 @@ inputs.jira_fields = dict_to_json_str({
   "project": "INT",
   "issuetype": "Story",
   "priority": jira_priority,
-  "summary": u"IBM Resilient: {0}".format(incident.name),
-  "description": incident.description.content if incident.get("description") else "Created in IBM Resilient"
+  "summary": u"IBM Resilient: {0}".format(unicode(task.name)),
+  "description": task.instructions.content if task.get("instructions") else "Created in IBM Resilient"
 })
 
 ```
@@ -110,7 +110,7 @@ if results.success:
   row['task_id'] = task.id
   row['task'] = task.name
   row['jira_link'] = helper.createRichText(url)
-  row['jira_api_url'] = results_content.get("issue_url_internal")
+  row['jira_issue_id_col'] = results_content.get("issue_key")
   row['status'] = 'Open'
 
 ```
