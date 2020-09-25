@@ -26,12 +26,18 @@ setup(
     author_email='resil.labs@gmail.com',
     url='http://ibm.biz/resilientcommunity',
     description="Resilient Circuits Components for 'fn_misp'",
-    long_description="This package provides the capability to interact with the MISP REST API. "
-                     "Once installed, the user may create events in MISP from Resilient incidents, "
-                     "mark artifacts as \"sighted\" if they exist in MISP, "
-                     "search MISP events for a given attribute, "
-                     "return sightings in MISP for a given event, "
-                     "or create a tag on a MISP event or attribute.",
+    long_description="The purpose of this package is to allow the creation of an event in MISP from an incident in Resilient. "
+                     "This could represent a multiple-to-one or a one-to-one relationship. Once the event is created, "
+                     "attributes can be populated to it. "
+                     "For artifacts which have a hit in MISP, one can create a sighting back to MISP to show threat "
+                     "intelligence teams the indicator has been seen in the wild. "
+                     "Additional search functions allow one to search all attributes and return sightings from an event. "
+                     "This package does not replace or supersede the MISP Custom Threat Service, "
+                     "the aim is to supplement it and create a bi-directional connection and integration."
+                     "The package is built in a flexible way so it can be used with any real rule or workflow configuration. "
+                     "Sample rules and workflows are provided. "
+                     "Custom attribute types can be mapped from the workflow pre-processing script of the function. "
+                     "See the sample workflows for sample payloads returned.",
     install_requires=['resilient_circuits>=32.0',
                       'resilient_lib>=32.0',
                       'pymisp>=2.4; python_version>="3"',
