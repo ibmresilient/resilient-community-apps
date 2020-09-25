@@ -5,7 +5,7 @@ from jira import JIRA
 from resilient_lib import IntegrationError, validate_fields, str_to_bool, build_incident_url, build_resilient_url, MarkdownParser
 
 CONFIG_DATA_SECTION = "fn_jira"
-SUPPORTED_AUTH_METHODS = ("AUTH", "BASIC", "OAUTH")
+SUPPORTED_AUTH_METHODS = ("AUTH", "BASIC")
 
 # Markdown Constants
 STRIKEOUT_CHAR = "-"
@@ -72,11 +72,6 @@ def get_jira_client(app_configs, rc):
             proxies=proxies,
             timeout=timeout,
         )
-
-    # OAUTH
-    elif auth_method == SUPPORTED_AUTH_METHODS[2]:
-        # TODO: support oauth
-        return "Not implemented yet"
 
     else:
         raise IntegrationError("{0} auth_method is not supported. Supported methods: {1}".format(auth_method, SUPPORTED_AUTH_METHODS))
