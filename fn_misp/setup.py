@@ -25,7 +25,7 @@ setup(
     author='Resilient Labs',
     author_email='resil.labs@gmail.com',
     url='http://ibm.biz/resilientcommunity',
-    description="Resilient Circuits Components for 'fn_misp'",
+    description="Creates Events, Attributes and Sightings in MISP from incidents and artifacts in Resilient.",
     long_description="The purpose of this package is to allow the creation of an event in MISP from an incident in Resilient. "
                      "This could represent a multiple-to-one or a one-to-one relationship. Once the event is created, "
                      "attributes can be populated to it. "
@@ -33,7 +33,7 @@ setup(
                      "intelligence teams the indicator has been seen in the wild. "
                      "Additional search functions allow one to search all attributes and return sightings from an event. "
                      "This package does not replace or supersede the MISP Custom Threat Service, "
-                     "the aim is to supplement it and create a bi-directional connection and integration."
+                     "the aim is to supplement it and create a bi-directional connection and integration. "
                      "The package is built in a flexible way so it can be used with any real rule or workflow configuration. "
                      "Sample rules and workflows are provided. "
                      "Custom attribute types can be mapped from the workflow pre-processing script of the function. "
