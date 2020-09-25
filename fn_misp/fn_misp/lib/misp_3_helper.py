@@ -2,7 +2,7 @@ import time
 import json
 import logging
 from pymisp import ExpandedPyMISP, MISPAttribute, MISPEvent, MISPSighting
-from resilient_lib.components.integration_errors import IntegrationError
+from resilient_lib import IntegrationError
 
 
 log = logging.getLogger(__name__)

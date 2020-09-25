@@ -10,7 +10,7 @@ else:
     from fn_misp.lib import misp_3_helper as misp_helper
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_misp.lib import common
-from resilient_lib.components.integration_errors import IntegrationError
+from resilient_lib import IntegrationError
 
 
 PACKAGE= "fn_misp"
