@@ -110,3 +110,27 @@ def to_markdown(html):
                             italic=ITALIC_CHAR)
 
     return parser.convert(html)
+
+
+def format_dict(dict_to_format):
+    """
+    Function that formats the passed dictionary
+    and returns a string
+
+    :param dict_to_format: A dict you want to format
+
+    :return: String of the keys and values in the dict formatted
+    :rtype: str
+    """
+    str_to_rtn = "\n-----------------\n"
+
+    if not dict_to_format:
+        str_to_rtn += "NONE\n"
+
+    for (k, v) in dict_to_format.items():
+
+        str_to_rtn += "{0}: {1}\n".format(k, v)
+
+    str_to_rtn += "-----------------\n"
+
+    return str_to_rtn
