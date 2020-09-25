@@ -95,7 +95,7 @@ Example rules and workflows can used used or modified to meet your business proc
 <!--
   List any Requirements 
 -->
-* Resilient platform >= `v37.2.38`
+* Resilient platform >= `v35.0.0`
 * App Host >= `v1.2.132` (if using App Host)
   * To setup up an App Host see:  [ibm.biz/res-app-host-setup](https://ibm.biz/res-app-host-setup)
 * An Integration Server running `resilient_circuits>=32.0.0` (if using an Integration Server)
