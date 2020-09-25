@@ -2,6 +2,7 @@ import time
 import json
 import logging
 from pymisp import PyMISP
+from resilient_lib import IntegrationError
 
 log = logging.getLogger(__name__)
 
@@ -30,6 +31,9 @@ def create_misp_sighting(misp_client, misp_sighting):
 def search_misp_attribute(misp_client, search_attribute):
     search_results = misp_client.search('attributes', values=search_attribute)
     log.debug(json.dumps(search_results, indent=4))
+    if not isinstance(search_results['response']['Attribute'], list):
+        raise IntegrationError("Received an unexpected response type from the MISP API. "
+                                "Expected a dictionary containing a list of attributes, but received: {}".format(type(search_results['response']['Attribute'])))
     search_results_len = len(search_results['response']['Attribute'])
     if search_results_len == 0:
         success_status = False

@@ -39,6 +39,8 @@ def create_misp_sighting(misp_client, my_misp_sighting):
 
 def search_misp_attribute(misp_client, search_attribute):
     search_results = misp_client.search(value=search_attribute)
+    if not isinstance(search_results, list):
+        raise IntegrationError("Received an unexpected response type from the MISP API. Expected a list but received: {}".format(type(search_results)))
     search_results_len = len(search_results)
     if search_results_len == 0:
         success_status = False
