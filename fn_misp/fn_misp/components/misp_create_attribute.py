@@ -10,6 +10,7 @@ else:
     from fn_misp.lib import misp_3_helper as misp_helper
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_misp.lib import common
+from resilient_lib import IntegrationError
 
 PACKAGE= "fn_misp"
 
@@ -39,6 +40,10 @@ class FunctionComponent(ResilientComponent):
             misp_event_id = kwargs.get("misp_event_id")  # number
             misp_attribute_value = kwargs.get("misp_attribute_value")  # text
             misp_attribute_type = kwargs.get("misp_attribute_type")  # text
+
+            # ensure misp_event_id is an integer so we can get an event by it's index
+            if not isinstance(misp_event_id, int):
+                raise IntegrationError(u"Unexpected input type for MISP Event ID. Expected and integer, received {}".format(type(misp_event_id)))
 
             log = logging.getLogger(__name__)
             log.info("misp_event_id: %s", misp_event_id)

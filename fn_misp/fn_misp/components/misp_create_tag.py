@@ -41,6 +41,11 @@ class FunctionComponent(ResilientComponent):
             misp_attribute_value = kwargs.get("misp_attribute_value")  # text
             misp_event_id = kwargs.get("misp_event_id")  # number
 
+            # ensure misp_event_id is an integer so we can get an event by it's index
+            if not isinstance(misp_event_id, int):
+                raise IntegrationError(
+                    u"Unexpected input type for MISP Event ID. Expected and integer, received {}".format(type(misp_event_id)))
+
             API_KEY, URL, VERIFY_CERT = common.validate(self.options)
 
             log = logging.getLogger(__name__)
@@ -58,7 +63,7 @@ class FunctionComponent(ResilientComponent):
 
             misp_client = misp_helper.get_misp_client(URL, API_KEY, VERIFY_CERT, proxies=proxies)
 
-            yield StatusMessage("Tagging {} with {}".format(misp_tag_type, misp_tag_name))
+            yield StatusMessage(u"Tagging {} with {}".format(misp_tag_type, misp_tag_name))
 
             tag_result = misp_helper.create_tag(misp_client, misp_attribute_value, misp_tag_type, misp_tag_name, misp_event_id)
             if 'errors' in tag_result:
