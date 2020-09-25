@@ -23,6 +23,7 @@ def create_misp_event(misp_client, misp_distribution, misp_threat_level, misp_an
 def create_misp_attribute(misp_client, misp_event_id, misp_attribute_type, misp_attribute_value):
     misp_event = MISPEvent()
     misp_event.id = int(misp_event_id)
+    misp_event.uuid = get_event_uuid(misp_client, misp_event_id)
     misp_attribute = MISPAttribute()
     misp_attribute.type = misp_attribute_type
     misp_attribute.value = misp_attribute_value
