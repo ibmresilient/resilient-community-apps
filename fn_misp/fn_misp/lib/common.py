@@ -1,4 +1,4 @@
-from resilient_lib import validate_fields, RequestsCommon
+from resilient_lib import validate_fields, RequestsCommon, str_to_bool
 
 def validate(options):
     """
@@ -6,10 +6,14 @@ def validate(options):
     :param options: function options from app.config
     :return
     """
-    validate_fields(['misp_key', 'misp_url', 'verify_cert'], options)
+    validate_fields([
+        {"name": "misp_key", "placeholder": "http://localhost"},
+        {"name": "misp_url", "placeholder": "<your key>"},
+        {"name": "verify_cert"}
+    ], options)
     key = options.get('misp_key')
     url = options.get('misp_url')
-    verify = True if options.get('verify_cert').lower() == "true" else False
+    verify = str_to_bool(options.get("verify_cert"))
     return key, url, verify
 
 def get_proxies(opts, options):
