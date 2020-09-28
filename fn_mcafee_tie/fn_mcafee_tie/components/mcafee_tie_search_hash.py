@@ -99,8 +99,8 @@ class FunctionComponent(ResilientComponent):
 
             # Produce a FunctionResult with the return value
             yield FunctionResult(response_dict)
-        except Exception:
-            yield FunctionError()
+        except Exception as err:
+            yield FunctionError(err)
 
     def _get_enterprise_info(self, reputations_dict):
         ent_dict = {}
