@@ -24,6 +24,7 @@ Two scripts are provided:
 are needed to run these commands, use `sudo` or `su` to access that login account in advance.
 * Login to each registry using the `docker login` orr `podman login` commands.
 * Add insecure_registry as the last argument if working with HTTP registry with podman, docker may require you edit /.docker/config.json or an environment variable
+* Add latest_tag to only the most the most recent version of each app
 
 ## mirror-all-images.sh
 This script is used to copy all container images from the IBM official registry, quay.io,
@@ -40,7 +41,7 @@ If missing, the script will attempt to determine which tool exists.
 ### Examples
 /bin/bash mirror-all-images 834299573936.dkr.ecr.us-east-2.amazonaws.com podman
 
-/bin/bash mirror-all-images localhost:5000 podman insecure_registry
+/bin/bash mirror-all-images localhost:5000 podman insecure_registry latest_tag
 
 ## mirror-images.sh
 This script is used to copy a select number of container images from the IBM official registry, quay.io,

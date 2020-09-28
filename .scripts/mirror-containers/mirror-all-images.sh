@@ -82,11 +82,12 @@ fi
 if [[ "$1" == "insecure_registry" ]]; then shift; fi
 
 # collect only latest tag if cmd line argument is specified
-if [[ "$1" == "latest_tag" ]]; then
-    latest_tag=" | sort | tail -1"
-else
-    latest_tag=" | uniq"
-fi
+
+#if [[ "$1" == "latest_tag" ]]; then
+#    latest_tag=" | sort | tail -1"
+#else
+#    latest_tag=" | uniq"
+#fi
 
 
 # # ========================================
@@ -100,9 +101,16 @@ repos=`curl -s "https://quay.io/api/v1/repository?namespace=${REGISTRY_ORG}" -H 
 
 while IFS= read -r repo;
 do
+    if [[ "$1" == "latest_tag" ]]; then
     echo "Starting to process all tags for repository: ${repo}"
     # Get all tags for the repo
-    tags=`curl -s "https://quay.io/api/v1/repository/${REGISTRY_ORG}/${repo}/tag/" -H "authorization: Bearer ${AUTH_TOKEN}" | jq ".tags[$count].name" | tr -d '"' $latest_tag`
+    #tag_it=`curl -s "https://quay.io/api/v1/repository/${REGISTRY_ORG}/${repo}/tag/" -H "authorization: Bearer ${AUTH_TOKEN}" | jq ".tags[$count].name" | tr -d '"'`
+    tags=`curl -s "https://quay.io/api/v1/repository/${REGISTRY_ORG}/${repo}/tag/" -H "authorization: Bearer ${AUTH_TOKEN}" | jq ".tags[$count].name" | sort | tail -1 | tr -d '"'`
+    #tags="$tag_it$latest_tag"
+    else
+    echo "Starting to process all tags for repository: ${repo}"
+    tags=`curl -s "https://quay.io/api/v1/repository/${REGISTRY_ORG}/${repo}/tag/" -H "authorization: Bearer ${AUTH_TOKEN}" | jq ".tags[$count].name" | uniq | tr -d '"'`
+    fi
     echo "Made an API Call to Registry for repository $repo; Found these tags ${tags[@]}"
     while IFS= read -r tag;
     do
