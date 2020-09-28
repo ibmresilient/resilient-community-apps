@@ -1,3 +1,4 @@
+# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 # -*- coding: utf-8 -*-
 """Tests using pytest_resilient_circuits"""
 
@@ -15,7 +16,6 @@ config_data = get_config_data(PACKAGE_NAME)
 
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
-
 
 def call_mcafee_tie_search_hash_function(circuits, function_params, timeout=10):
     # Fire a message to the function
@@ -51,6 +51,7 @@ class TestMcafeeTieSearchHash:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
+    @pytest.mark.livetest
     @pytest.mark.parametrize("mcafee_tie_hash_type, mcafee_tie_hash, expected_result", [
         ("md5", "30CB8BA19E19B42701CDB3627D6F4023", json.load(open("md5_hash_search_expected.txt"))),
         ("sha1", "C61AC5FE73D50BD41D0CAD1A43C471925E7DDCD4", json.load(open("sha1_hash_search_expected.txt"))),
