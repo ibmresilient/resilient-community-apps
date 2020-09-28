@@ -65,7 +65,7 @@ you should start there.
 
 Otherwise, please report issues using the [Issues](https://github.com/ibmresilient/resilient-community-apps/issues) tab on GitHub.
 
-Contributions are welcome.  Please read the [CONTRIBUTING](CONTRIBUTING.md) guidelines for more about the process.
+Contributions are welcome.  Please read the [CONTRIBUTING](CONTRIBUTING.md) guidelines for more about the process. We value our communities contributions and expertise. 
 
 
 # Open Source @ IBM

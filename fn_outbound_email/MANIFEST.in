@@ -1,5 +1,8 @@
 include README.md
+include Dockerfile
+include entrypoint.sh
 include fn_outbound_email/util/*
 include fn_outbound_email/LICENSE
 include fn_outbound_email/doc/*
 include fn_outbound_email/data/*
+include api_permissions.txt
