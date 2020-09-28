@@ -18,7 +18,9 @@ set -x
 # 2.1 Pull the tagged image from the source registry
 # 2.2 Tag the image with its new destination tag before push
 # 2.3 Push the image with its new tag to the destination registry
-# 2.4 Delete both the local image we pushed aswell as the destination retagged image(Local step)
+# 2.4 Delete both the local image we pushed as well as the destination retagged image(Local step)
+
+# Syntax: mirror-all-images registry.com:5000 [podman|docker] [insecure_registry] [latest_tag]
 
 ## Functions
 # Function used to check the existance of a command
@@ -44,7 +46,7 @@ destination_registry=""
 # Check if string is empty using -z. For more 'help test'
 if [[ -z "$1" ]]; then
    printf '%s\n' "No destination registry provided. Registry must be provided in the form: fqdn.registry.io/ exiting"
-   printf 'Syntax: mirror-all-images registry.com:5000 [podman|docker] [insecure_registry]'
+   printf 'Syntax: mirror-all-images registry.com:5000 [podman|docker] [insecure_registry] [latest_tag]'
    exit 1
 fi
 destination_registry=$1; shift
@@ -77,6 +79,16 @@ else
     insecure_registry=0
 fi
 
+if [[ "$1" == "insecure_registry" ]]; then shift; fi
+
+# collect only latest tag if cmd line argument is specified
+if [[ "$1" == "latest_tag" ]]; then
+    latest_tag=" | sort | tail -1"
+else
+    latest_tag=" | uniq"
+fi
+
+
 # # ========================================
 # #
 # # Operational Logic to get images tags and transfer them
@@ -90,7 +102,7 @@ while IFS= read -r repo;
 do
     echo "Starting to process all tags for repository: ${repo}"
     # Get all tags for the repo
-    tags=`curl -s "https://quay.io/api/v1/repository/${REGISTRY_ORG}/${repo}/tag/" -H "authorization: Bearer ${AUTH_TOKEN}" | jq ".tags[$count].name" | tr -d '"'`
+    tags=`curl -s "https://quay.io/api/v1/repository/${REGISTRY_ORG}/${repo}/tag/" -H "authorization: Bearer ${AUTH_TOKEN}" | jq ".tags[$count].name" | tr -d '"' $latest_tag`
     echo "Made an API Call to Registry for repository $repo; Found these tags ${tags[@]}"
     while IFS= read -r tag;
     do
