@@ -7,7 +7,7 @@
 # Version:       1.0.1
 # Release notes
 # 1.0.0 Initial Release
-# 1.0.1 Enhancement for local registries with podman using --tls-verify flag
+- # 1.0.1 Enhancements for insecure registries, latest and unique tags for each repo
 set -x
 
 # v1: At a high level; with this script we want to:
@@ -81,15 +81,6 @@ fi
 
 if [[ "$1" == "insecure_registry" ]]; then shift; fi
 
-# collect only latest tag if cmd line argument is specified
-
-#if [[ "$1" == "latest_tag" ]]; then
-#    latest_tag=" | sort | tail -1"
-#else
-#    latest_tag=" | uniq"
-#fi
-
-
 # # ========================================
 # #
 # # Operational Logic to get images tags and transfer them
@@ -101,6 +92,7 @@ repos=`curl -s "https://quay.io/api/v1/repository?namespace=${REGISTRY_ORG}" -H 
 
 while IFS= read -r repo;
 do
+    # collect only latest tag if cmd line argument is specified
     if [[ "$1" == "latest_tag" ]]; then
     echo "Starting to process all tags for repository: ${repo}"
     # Get all tags for the repo
@@ -108,6 +100,7 @@ do
     tags=`curl -s "https://quay.io/api/v1/repository/${REGISTRY_ORG}/${repo}/tag/" -H "authorization: Bearer ${AUTH_TOKEN}" | jq ".tags[$count].name" | sort | tail -1 | tr -d '"'`
     #tags="$tag_it$latest_tag"
     else
+    # collect only one unique tag at each app version in the repo
     echo "Starting to process all tags for repository: ${repo}"
     tags=`curl -s "https://quay.io/api/v1/repository/${REGISTRY_ORG}/${repo}/tag/" -H "authorization: Bearer ${AUTH_TOKEN}" | jq ".tags[$count].name" | uniq | tr -d '"'`
     fi
