@@ -3,6 +3,7 @@
 """Tests using pytest_resilient_circuits"""
 
 from __future__ import print_function
+import os
 import pytest
 import json
 from resilient_circuits.util import get_config_data, get_function_definition
@@ -10,6 +11,11 @@ from resilient_circuits import SubmitTestFunction, FunctionResult
 
 PACKAGE_NAME = "fn_mcafee_tie"
 FUNCTION_NAME = "mcafee_tie_search_hash"
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+TEST_PATH = os.path.join(CURRENT_DIR, "tests")
+MD5_PATH = os.path.join(TEST_PATH, "md5_hash_search_expected.txt")
+SHA1_PATH = os.path.join(TEST_PATH, "sha1_hash_search_expected.txt")
+SHA256_PATH = os.path.join(TEST_PATH, "sha256_hash_search_expected.txt")
 
 # Read the default configuration-data section from the package
 config_data = get_config_data(PACKAGE_NAME)
@@ -53,10 +59,10 @@ class TestMcafeeTieSearchHash:
 
     @pytest.mark.livetest
     @pytest.mark.parametrize("mcafee_tie_hash_type, mcafee_tie_hash, expected_result", [
-        ("md5", "30CB8BA19E19B42701CDB3627D6F4023", json.load(open("md5_hash_search_expected.txt"))),
-        ("sha1", "C61AC5FE73D50BD41D0CAD1A43C471925E7DDCD4", json.load(open("sha1_hash_search_expected.txt"))),
+        ("md5", "30CB8BA19E19B42701CDB3627D6F4023", json.load(open(MD5_PATH))),
+        ("sha1", "C61AC5FE73D50BD41D0CAD1A43C471925E7DDCD4", json.load(open(SHA1_PATH))),
         ("sha256", "A8B03AD33BC6D7A7F376B943F763EEDD1CDAF125D012F9018F2F56678AE67EA4",
-         json.load(open("sha256_hash_search_expected.txt")))
+         json.load(open(SHA256_PATH)))
 
     ])
     def test_success(self, circuits_app, mcafee_tie_hash_type, mcafee_tie_hash, expected_result):
