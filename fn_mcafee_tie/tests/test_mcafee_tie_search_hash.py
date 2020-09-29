@@ -11,8 +11,7 @@ from resilient_circuits import SubmitTestFunction, FunctionResult
 
 PACKAGE_NAME = "fn_mcafee_tie"
 FUNCTION_NAME = "mcafee_tie_search_hash"
-CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
-TEST_PATH = os.path.join(CURRENT_DIR, "tests")
+TEST_PATH = os.path.dirname(os.path.abspath(__file__))
 MD5_PATH = os.path.join(TEST_PATH, "md5_hash_search_expected.txt")
 SHA1_PATH = os.path.join(TEST_PATH, "sha1_hash_search_expected.txt")
 SHA256_PATH = os.path.join(TEST_PATH, "sha256_hash_search_expected.txt")
