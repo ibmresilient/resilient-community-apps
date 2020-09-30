@@ -39,11 +39,12 @@ class FunctionComponent(ResilientComponent):
 
             # Get the function parameters:
             user_group_xpath = kwargs.get("panorama_user_group_xpath")  # text
+            location = self.get_select_param(kwargs.get("panorama_location"))  # select
 
             # Log inputs
             log.info("panorama_user_group_xpath: {}".format(user_group_xpath))
 
-            panorama_util = PanoramaClient(self.opts, None)
+            panorama_util = PanoramaClient(self.opts, location, None)
             xml_response = panorama_util.get_users_in_a_group(user_group_xpath)
             dict_response = xmltodict.parse(xml_response)
 
@@ -53,7 +54,7 @@ class FunctionComponent(ResilientComponent):
                 if isinstance(members, list):
                     # Multiple existing users
                     for m in members:
-                        user_list.append(m.get("#text"))
+                        user_list.append(m)
                 else:
                     # Single user in group
                     user_list.append(members.get("#text"))

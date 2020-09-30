@@ -43,12 +43,13 @@ class FunctionComponent(ResilientComponent):
             # Get the function parameters:
             user_group_xpath = kwargs.get("panorama_user_group_xpath")  # text
             user_group_xml = self.get_textarea_param(kwargs.get("panorama_user_group_xml"))  # textarea
+            location = self.get_select_param(kwargs.get("panorama_location"))  # select
 
             # Log inputs
             log.info(u"panorama_user_group_xpath: {}".format(user_group_xpath))
             log.info(u"panorama_user_group_xml: {}".format(user_group_xml))
 
-            panorama_util = PanoramaClient(self.opts, None)
+            panorama_util = PanoramaClient(self.opts, location, None)
             xml_response = panorama_util.edit_users_in_a_group(user_group_xpath, user_group_xml)
             dict_response = xmltodict.parse(xml_response)
 
