@@ -39,6 +39,9 @@ Config values example:
 base_url=https://investigate.api.umbrella.com/
 api_token=abcd1234-a123-123a-123a-123456abcdef
 results_limit=200
+# uncomment to specify proxy settings
+#https_proxy=https://your.proxy.com
+#http_proxy=http://your.proxy.com
 ```
 
 Run with: `resilient-circuits run`.
