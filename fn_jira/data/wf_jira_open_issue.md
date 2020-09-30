@@ -45,6 +45,7 @@ def dict_to_json_str(d):
 
     if isinstance(value, basestring):
       value = value.replace(u'"', u'\\"')
+      value = value.replace("\n", "\\n")
       entries.append(json_entry_str.format(unicode(key), unicode(value)))
 
     elif isinstance(value, unicode):
