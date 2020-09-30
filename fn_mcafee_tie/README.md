@@ -188,7 +188,7 @@ results = {
 
 <p>
 
- ![screenshot: McAfee-TIE-workflow](./doc/screenshots/McAfee-TIE-Workflow.png)
+ ![screenshot: McAfee-TIE-workflow](./doc/screenshots/McAfee-TIE-workflow.png)
 
 
   <details><summary>Example Pre-Process Script:</summary>
@@ -312,7 +312,7 @@ tie_results
 
 <p>
 
- ![screenshot: McAfee-TIE-rule](./doc/screenshots/McAfee-TIE-Rule.png)
+ ![screenshot: McAfee-TIE-rule](./doc/screenshots/McAfee-TIE-rule.png)
 
 </p>
 </details>
