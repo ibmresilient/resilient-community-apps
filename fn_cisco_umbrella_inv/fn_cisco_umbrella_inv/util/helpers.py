@@ -11,6 +11,7 @@ import datetime
 import re
 import os
 import json
+from resilient_lib import RequestsCommon
 
 try:
     from urllib.parse import urlparse, quote_plus
@@ -298,3 +299,7 @@ def create_attachment(func_ref, func_name, artifact_value, params, rtn, query_ex
         raise ex
 
     return att_report
+
+def get_proxies(opts, options):
+    rc = RequestsCommon(opts, options)
+    return rc.get_proxies()

@@ -7,10 +7,13 @@ Circuits integration framework.
   Specify all changes in this release. Do not remove the release 
   notes of a previous release
 -->
-### v1.0.1 - August 2019
-* Configuration settings checking less restrictive.
-### v1.0.0 - June 2018
-* Original release.
+| Version | Date | Notes |
+| ------: | ---: | ----: |
+| v1.0.3 | September 2020 | Added proxy support |
+| v1.0.2 | May 2020 | App Host support |
+| v1.0.1 | August 2019 | Configuration settings checking less restrictive |
+| v1.0.0 | June 2018 | Initial Release |
+
 ## Prerequisites:
 ```
 resilient version 30 or later

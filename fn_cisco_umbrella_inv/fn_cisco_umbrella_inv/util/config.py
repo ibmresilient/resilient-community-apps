@@ -14,5 +14,8 @@ base_url=https://investigate.api.umbrella.com/
 # The api_token will be supplied by Cisco will be in uuid format.
 api_token=<api token>
 results_limit=200
+# uncomment to specify proxy settings
+#https_proxy=https://your.proxy.com
+#http_proxy=http://your.proxy.com
 """
     return config_data
