@@ -3,8 +3,14 @@
 """Function implementation"""
 
 import logging
-from pymisp import PyMISP
+import sys
+if sys.version_info.major < 3:
+    from fn_misp.lib import misp_2_helper as misp_helper
+else:
+    from fn_misp.lib import misp_3_helper as misp_helper
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from fn_misp.lib import common
+
 
 PACKAGE= "fn_misp"
 
@@ -14,11 +20,13 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
+        self.opts = opts
         self.options = opts.get(PACKAGE, {})
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
+        self.opts = opts
         self.options = opts.get(PACKAGE, {})
 
     @function("misp_create_event")
@@ -26,19 +34,7 @@ class FunctionComponent(ResilientComponent):
         """Function: create a MISP event from an incident """
         try:
 
-            def get_config_option(option_name, optional=False):
-                """Given option_name, checks if it is in app.config. Raises ValueError if a mandatory option is missing"""
-                option = self.options.get(option_name)
-
-                if option is None and optional is False:
-                    err = "'{0}' is mandatory and is not set in ~/.resilient/app.config file. You must set this value to run this function".format(option_name)
-                    raise ValueError(err)
-                else:
-                    return option
-
-            API_KEY = get_config_option("misp_key")
-            URL = get_config_option("misp_url")
-            VERIFY_CERT = True if get_config_option("verify_cert").lower() == "true" else False
+            API_KEY, URL, VERIFY_CERT = common.validate(self.options)
 
             # Get the function parameters:
             misp_event_name = kwargs.get("misp_event_name")  # text
@@ -54,16 +50,15 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("Setting up connection to MISP")
 
-            misp_client = PyMISP(URL, API_KEY, VERIFY_CERT, 'json')
+            proxies = common.get_proxies(self.opts, self.options)
 
-            eventJson = {"Event": {"info": misp_event_name,
-                    "analysis": misp_analysis_level,
-                    "distribution": misp_distribution,
-                    "threat_level_id": misp_threat_level}}
+            misp_client = misp_helper.get_misp_client(URL, API_KEY, VERIFY_CERT, proxies=proxies)
 
-            event = misp_client.add_event(eventJson)
+            yield StatusMessage(u"Creating event {}".format(misp_event_name))
 
-            log.info(event)
+            event = misp_helper.create_misp_event(misp_client, misp_distribution, misp_threat_level, misp_analysis_level, misp_event_name)
+
+            log.debug(event)
 
             yield StatusMessage("Event has been created")
 

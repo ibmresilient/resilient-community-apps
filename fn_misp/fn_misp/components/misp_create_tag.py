@@ -12,6 +12,7 @@ from resilient_circuits import ResilientComponent, function, handler, StatusMess
 from fn_misp.lib import common
 from resilient_lib import IntegrationError
 
+
 PACKAGE= "fn_misp"
 
 class FunctionComponent(ResilientComponent):
@@ -29,26 +30,32 @@ class FunctionComponent(ResilientComponent):
         self.opts = opts
         self.options = opts.get(PACKAGE, {})
 
-    @function("misp_create_attribute")
-    def _misp_create_attribute_function(self, event, *args, **kwargs):
-        """Function: """
+    @function("misp_create_tag")
+    def _misp_create_tag_function(self, event, *args, **kwargs):
+        """Function: Creates a Tag"""
         try:
 
-            API_KEY, URL, VERIFY_CERT = common.validate(self.options)
-
             # Get the function parameters:
-            misp_event_id = kwargs.get("misp_event_id")  # number
+            misp_tag_type = self.get_select_param(kwargs.get("misp_tag_type"))  # select, values: "Event", "Attribute"
+            misp_tag_name = kwargs.get("misp_tag_name")  # text
             misp_attribute_value = kwargs.get("misp_attribute_value")  # text
-            misp_attribute_type = kwargs.get("misp_attribute_type")  # text
+            misp_event_id = kwargs.get("misp_event_id")  # number
 
             # ensure misp_event_id is an integer so we can get an event by it's index
             if not isinstance(misp_event_id, int):
-                raise IntegrationError(u"Unexpected input type for MISP Event ID. Expected and integer, received {}".format(type(misp_event_id)))
+                raise IntegrationError(
+                    u"Unexpected input type for MISP Event ID. Expected and integer, received {}".format(type(misp_event_id)))
+
+            API_KEY, URL, VERIFY_CERT = common.validate(self.options)
 
             log = logging.getLogger(__name__)
-            log.info("misp_event_id: %s", misp_event_id)
+            log.info("misp_tag_type: %s", misp_tag_type)
+            log.info("misp_tag_name: %s", misp_tag_name)
             log.info("misp_attribute_value: %s", misp_attribute_value)
-            log.info("misp_attribute_type: %s", misp_attribute_type)
+            log.info("misp_event_id: %s", misp_event_id)
+
+            if sys.version_info.major < 3:
+                raise FunctionError("Tagging is only supported when using Python 3")
 
             yield StatusMessage("Setting up connection to MISP")
 
@@ -56,19 +63,19 @@ class FunctionComponent(ResilientComponent):
 
             misp_client = misp_helper.get_misp_client(URL, API_KEY, VERIFY_CERT, proxies=proxies)
 
-            yield StatusMessage(u"Creating new misp attribute {} {}".format(misp_attribute_type, misp_attribute_value))
+            yield StatusMessage(u"Tagging {} with {}".format(misp_tag_type, misp_tag_name))
 
-            attribute = misp_helper.create_misp_attribute(misp_client, misp_event_id, misp_attribute_type, misp_attribute_value)
+            tag_result = misp_helper.create_tag(misp_client, misp_attribute_value, misp_tag_type, misp_tag_name, misp_event_id)
+            if 'errors' in tag_result:
+                raise IntegrationError(u"Unable to save the tag. {}".format(tag_result['errors'][1]['errors']))
 
-            log.debug(attribute)
+            log.debug(tag_result)
 
-            yield StatusMessage("Attribute has been created")
+            yield StatusMessage("Tag has been created")
 
-            results = { "success": True,
-                        "content": attribute
-                      }
+            response_results = {"success": True}
 
             # Produce a FunctionResult with the results
-            yield FunctionResult(results)
+            yield FunctionResult(response_results)
         except Exception:
             yield FunctionError()
