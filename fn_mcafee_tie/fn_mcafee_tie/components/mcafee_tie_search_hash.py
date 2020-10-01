@@ -30,6 +30,8 @@ class FunctionComponent(ResilientComponent):
                 LOG.error(self.config_file + " is not set. You must set this path to run this function")
                 raise ValueError(self.config_file + " is not set. You must set this path to run this function")
 
+            LOG.info("Using %s to create configuration for DxlClient", config)
+
             # Create configuration from file for DxlClient
             self.config = DxlClientConfig.create_dxl_config_from_file(config)
         except AttributeError:
