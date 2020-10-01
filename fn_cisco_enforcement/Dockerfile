@@ -1,4 +1,4 @@
-# docker build -t ibmresilient/fn_cisco_amp4ep:1.0.1 -t ibmresilient/fn_cisco_amp4ep:latest .
+# docker build -t ibmresilient/fn_cisco_enforcement:1.0.1 -t ibmresilient/fn_cisco_enforcement:latest .
 
 # Base image using Red Hat's universal base image (rhel 8) for python
 FROM registry.access.redhat.com/ubi8/python-36:latest
@@ -6,6 +6,9 @@ FROM registry.access.redhat.com/ubi8/python-36:latest
 ARG APPLICATION=fn_cisco_enforcement
 ARG RESILIENT_CIRCUITS_VERSION=37.2
 ARG PATH_RESILIENT_CIRCUITS=rescircuits
+# Environment variable for any app to check if running in a container
+ARG APP_HOST_CONTAINER=1
+ENV APP_HOST_CONTAINER=${APP_HOST_CONTAINER}
 
 # Update to latest packages, user 0 for root privilege
 USER 0
