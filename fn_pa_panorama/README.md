@@ -127,28 +127,57 @@ List addresses in Panorama.
 <p>
 
 ```python
-results = {
-    "version": "1.0",
-    "success": true, 
-    "reason": null, 
-    "content": {
-        "@status": "success",
-        "@code": "19", 
-        "result": {
-            "@total-count": "1", 
-            "@count": "1", 
-            "entry": [{
-                "@name": "Blocked Group", 
-                "@location": "vsys", 
-                "@vsys": "vsys1", 
-                "description": "None", 
-                "static": {
-                    "member": ["208.113.204.14", "8.8.8.8", "10.10.10.10"]
-                }
-            }]
+
+{
+  "content": {
+    "@code": "19",
+    "@status": "success",
+    "result": {
+      "@count": "3",
+      "@total-count": "3",
+      "entry": [
+        {
+          "@location": "vsys",
+          "@name": "Test",
+          "@vsys": "vsys1",
+          "ip-netmask": "1.1.1.1"
+        },
+        {
+          "@location": "vsys",
+          "@name": "9.9.9.9",
+          "@vsys": "vsys1",
+          "description": "9.9.9.9",
+          "ip-netmask": "9.9.9.9"
+        },
+        {
+          "@location": "vsys",
+          "@name": "google.com",
+          "@vsys": "vsys1",
+          "description": "google.com",
+          "fqdn": "google.com"
         }
+      ]
+    }
+  },
+  "inputs": {
+    "panorama_location": {
+      "id": 801,
+      "name": "vsys"
     },
-    "raw": "{\\"@status\\": \\"success\\", \\"@code\\": \\"19\\", \\"result\\": {\\"@total-count\\": \\"1\\", \\"@count\\": \\"1\\", \\"entry\\": [{\\"@name\\": \\"Blocked Group\\", \\"@location\\": \\"vsys\\", \\"@vsys\\": \\"vsys1\\", \\"description\\": \\"None\\", \\"static\\": {\\"member\\": [\\"208.113.204.14\\", \\"8.8.8.8\\", \\"10.10.10.10\\"]}}]}}", "inputs": {"panorama_name_parameter": "Blocked Group", "panorama_location": {"id": 171, "name": "vsys"}, "panorama_vsys": "vsys1"}, "metrics": {"version": "1.0", "package": "fn-pa-panorama", "package_version": "1.0.1", "host": "example.host.domain.net", "execution_time_ms": 8064, "timestamp": "2020-09-29 13:40:46"}
+    "panorama_vsys": "vsys1"
+  },
+  "metrics": {
+    "execution_time_ms": 264,
+    "host": "",
+    "package": "fn-pa-panorama",
+    "package_version": "1.0.0",
+    "timestamp": "2019-06-25 14:57:42",
+    "version": "1.0"
+  },
+  "raw": "{\"@status\": \"success\", \"@code\": \"19\", \"result\": {\"@total-count\": \"3\", \"entry\": [{\"@vsys\": \"vsys1\", \"@location\": \"vsys\", \"ip-netmask\": \"1.1.1.1\", \"@name\": \"Test\"}, {\"@vsys\": \"vsys1\", \"@location\": \"vsys\", \"ip-netmask\": \"9.9.9.9\", \"@name\": \"9.9.9.9\", \"description\": \"9.9.9.9\"}, {\"@vsys\": \"vsys1\", \"@location\": \"vsys\", \"@name\": \"google.com\", \"description\": \"google.com\", \"fqdn\": \"google.com\"}], \"@count\": \"3\"}}",
+  "reason": null,
+  "success": true,
+  "version": "1.0"
 }
 ```
 
@@ -172,7 +201,7 @@ inputs.panorama_vsys = "vsys1"
   <p>
 
   ```python
-  """
+"""
 Example response:
 
 {
