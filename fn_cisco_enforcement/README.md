@@ -36,6 +36,9 @@ Set the following values in the config file under the `[fn_cisco_enforcement]` s
 
     url=https://s-platform.api.opendns.com/1.0
     api_token=xxxxxx-xxxx-xxxxx-xxxx-xxxxxxx
+    # Uncomment to specify proxies needed
+    #https_proxy=
+    #http_proxy=
 
 ### How to use the function
 

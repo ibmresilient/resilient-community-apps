@@ -3,7 +3,11 @@
 """Generate the Resilient customizations required for fn_cisco_enforcement"""
 
 from __future__ import print_function
-from resilient_circuits.util import *
+try:
+    from resilient import ImportDefinition
+except ImportError:
+    # Support Apps running on resilient-circuits < v35.0.195
+    from resilient_circuits.util import ImportDefinition
 
 
 def customization_data(client=None):
