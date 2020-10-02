@@ -139,9 +139,29 @@ Takes a number of parameters in a search request and attempts to gather events f
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+   "version":"1.0",
+   "success":False,
+   "reason":"None",
+   "content":{
+      "result_set":"None",
+      "num_of_results":0,
+      "execution_time":1601631906772
+   },
+   "raw":"{\"result_set\": null, \"num_of_results\": 0, \"execution_time\": 1601631906772}",
+   "inputs":{
+      "icdx_search_request":{
+         "format":"text",
+         "content":"{\"from\":[\"default\",\"dedicated/d900b5f0-aa0d-11e9-e053-000000000001\",\"dedicated/13547310-aec6-11e9-eb82-000000000002\",\"dedicated/3c7b5bd0-1f21-11e9-fa8e-000000000001\"],\"start\":\"-7d\",\"filter\":\"type = \\'NETWORK_EVENT\\'\",\"Query_Title\":\"Search for available archives, then search for NETWORK_EVENTs, limited to all available archives except system.\",\"limit\":5,\"where\":\"severity_id >= 3\",\"id\":1}"
+      }
+   },
+   "metrics":{
+      "version":"1.0",
+      "package":"fn-icdx",
+      "package_version":"1.0.1",
+      "host":"RG-MBP-18.local",
+      "execution_time_ms":1889,
+      "timestamp":"2020-10-02 10:45:06"
+   }
 }
 ```
 
@@ -308,9 +328,65 @@ Takes in an input of a UUID for an event and attempts to get the details of this
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+   "version":"1.0",
+   "success":True,
+   "reason":"None",
+   "content":{
+      "event":{
+         "user_name":"admin",
+         "session_uid":"hz73OQByQay0mAGlHJz4iw",
+         "feature_uid":"default",
+         "uuid":"85c62850-0490-11eb-c000-000000000000",
+         "  feature_type":"system",
+         "device_name":"integration-icdx-ubuntu-2",
+         "subfeature_name":"com.symantec.platform.identity.audit.AuditLogger",
+         "status_id":1,
+         "category_id":4,
+         "id":1,
+         "feature_path":"system/id_epmp_dx",
+         "device_time":1601630433109,
+         "feature_name":"Identity Service",
+         "x-epmp-sampled":"0",
+         "device_os_name":"Linux",
+         "log_name":"system",
+         "type_id":20,
+         "device_os_ver":"4.4.0-131-generic",
+         "log_level":"INFO",
+         "device_os_bits":"amd64",
+         "message":"Successful login of admin",
+         "version":"1.0",
+         "product_name":"Symantec Integrated Cyber Defense Exchange",
+         "log_time":"2020-10-02T05:20:33.109-04:00",
+         "device_ip":"9.70.194.66",
+         "event_id":20001,
+         "x-epmp-traceId":"0482fb724eca2f19",
+         "x-epmp-spanId":"0482fb724eca2f19",
+         "time":"2020-10-02T05:20:33.109-04:00",
+         "severity_id":1,
+         "status_thread_name":"SimpleAsyncTaskExecutor-2"
+      },
+      "artifacts":{
+         
+      },
+      "artifact_keys_as_list":[
+         
+      ],
+      "artifact_values_as_list":[
+         
+      ]
+   },
+   "raw":"{\"event\": {\"user_name\": \"admin\", \"session_uid\": \"hz73OQByQay0mAGlHJz4iw\", \"feature_uid\": \"default\", \"uuid\": \"85c62850-0490-11eb-c000-000000000000\", \"  feature_type\": \"system\", \"device_name\": \"integration-icdx-ubuntu-2\", \"subfeature_name\": \"com.symantec.platform.identity.audit.AuditLogger\", \"status_id\": 1, \"category_id\": 4, \"id\": 1, \"feature_path\": \"system/id_epmp_dx\", \"device_time\": 1601630433109, \"feature_name\": \"Identity Service\", \"x-epmp-sampled\": \"0\", \"device_os_name\": \"Linux\", \"log_name\": \"system\", \"type_id\": 20, \"device_os_ver\": \"4.4.0-131-generic\", \"log_level\": \"INFO\", \"device_os_bits\": \"amd64\", \"message\": \"Successful login of admin\", \"version\": \"1.0\", \"product_name\": \"Symantec Integrated Cyber Defense Exchange\", \"log_time\": \"2020-10-02T05:20:33.109-04:00\", \"device_ip\": \"9.70.194.66\", \"event_id\": 20001, \"x-epmp-traceId\": \"0482fb724eca2f19\", \"x-epmp-spanId\": \"0482fb724eca2f19\", \"time\": \"2020-10-02T05:20:33.109-04:00\", \"severity_id\": 1, \"status_thread_name\": \"SimpleAsyncTaskExecutor-2\"}, \"artifacts\": {}, \"artifact_keys_as_list\": [], \"artifact_values_as_list\": []}",
+   "inputs":{
+      "icdx_uuid":"85c62850-0490-11eb-c000-000000000000"
+   },
+   "metrics":{
+      "version":"1.0",
+      "package":"fn-icdx",
+      "package_version":"1.0.1",
+      "host":"RG-MBP-18.local",
+      "execution_time_ms":1851,
+      "timestamp":"2020-10-02 14:47:25"
+   }
 }
 ```
 
@@ -426,9 +502,45 @@ The Get Archive List API is used to return a list of archives in the ICDx system
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+   "version":"1.0",
+   "success":True,
+   "reason":"None",
+   "content":{
+      "archives":[
+         {
+            "name":"System Archive",
+            "path":"system"
+         },
+         {
+            "name":"Default Archive",
+            "path":"default"
+         },
+         {
+            "path":"dedicated/d900b5f0-aa0d-11e9-e053-000000000001",
+            "uuid":"d900b5f0-aa0d-11e9-e053-000000000001"
+         },
+         {
+            "path":"dedicated/13547310-aec6-11e9-eb82-000000000002",
+            "uuid":"13547310-aec6-11e9-eb82-000000000002"
+         },
+         {
+            "path":"dedicated/3c7b5bd0-1f21-11e9-fa8e-000000000001",
+            "uuid":"3c7b5bd0-1f21-11e9-fa8e-000000000001"
+         }
+      ]
+   },
+   "raw":"{\"archives\": [{\"name\": \"System Archive\", \"path\": \"system\"}, {\"name\": \"Default Archive\", \"path\": \"default\"}, {\"path\": \"dedicated/d900b5f0-aa0d-11e9-e053-000000000001\", \"uuid\": \"d900b5f0-aa0d-11e9-e053-000000000001\"}, {\"path\": \"dedicated/13547310-aec6-11e9-eb82-000000000002\", \"uuid\": \"13547310-aec6-11e9-eb82-000000000002\"}, {\"path\": \"dedicated/3c7b5bd0-1f21-11e9-fa8e-000000000001\", \"uuid\": \"3c7b5bd0-1f21-11e9-fa8e-000000000001\"}]}",
+   "inputs":{
+      
+   },
+   "metrics":{
+      "version":"1.0",
+      "package":"fn-icdx",
+      "package_version":"1.0.1",
+      "host":"RG-MBP-18.local",
+      "execution_time_ms":1874,
+      "timestamp":"2020-10-02 14:48:23"
+   }
 }
 ```
 
