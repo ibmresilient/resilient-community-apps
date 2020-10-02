@@ -191,7 +191,7 @@ class TestIcdxFindEvents:
                         mock_block_channel.return_value = mock.Mock()
                         results = call_icdx_find_events_function(circuits_app, function_params)
                         assert(results['success'] == False)
-                        assert (results['num_of_results'] == 0)
+                        assert (results['content']['num_of_results'] == 0)
 
                     else:
                         mock_amqp.return_value = mocked_call(payload=json.dumps(icdx_search_request['content']),
