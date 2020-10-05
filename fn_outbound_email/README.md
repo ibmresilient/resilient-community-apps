@@ -2,11 +2,15 @@
 
 - [fn-outbound-email Functions for IBM Resilient](#fn-outbound-email-functions-for-ibm-resilient)
   - [Release Notes](#release-notes)
-    - [v1.0.7](#v107)
+    - [v1.1.0](#v110)
+    - [v1.0.9](#v109)
+    - [v1.0.8](#v108)
   - [Requirements](#requirements)
   - [Installation](#installation)
-    - [Installation: New users](#installation-new-users)
-    - [Installation: Existing Users](#installation-existing-users)
+    - [Installation (App Host)](#installation-app-host)
+  - [* Once installed, navigate to the app's Configuration tab and edit the app.config file updating the `[resilient]` section as necessary and updating the `[fn_outbound_email]` section as necessary.](#ullionce-installed-navigate-to-the-apps-configuration-tab-and-edit-the-appconfig-file-updating-the-resilient-section-as-necessary-and-updating-the-fn_outbound_email-section-as-necessaryliul)
+      - [Installation: New users](#installation-new-users)
+      - [Installation: Existing Users](#installation-existing-users)
   - [Common connection issues with TLS and TroubleShooting](#common-connection-issues-with-tls-and-troubleshooting)
   - [Uninstall](#uninstall)
   - [Troubleshooting](#troubleshooting)
@@ -23,8 +27,15 @@
   Specify all changes in this release. Do not remove the release 
   notes of a previous release
 -->
+
+### v1.1.0
+* Bug fixes and send all or specific attachments
+
+### v1.0.9
+* Apphost compatibility
+
 ### v1.0.8
-* Initial Release after internal development by Professional, no prior release notes
+* Initial Release after internal development by Professional Services, no prior release notes
 
 ---
 
@@ -47,7 +58,16 @@
 
 ## Installation
 
-### Installation: New users
+### Installation (App Host)
+
+With App Host, all the run-time components are pre-built. Perform the following steps to install and configure:
+* Download the `app-fn_outbound_email-x.x.x.zip`.
+* In Resilient navigate to **Adiminstrator Settings > Apps**
+* Click the Install button and select the downloaded `app-fn_outbound_email-x.x.x.zip`. This will install the associated customizations.
+* Once installed, navigate to the app's Configuration tab and edit the app.config file updating the `[resilient]` section as necessary and updating the `[fn_outbound_email]` section as necessary.
+---
+
+#### Installation: New users
 * Download the `fn_outbound_email.zip`.
 * Copy the `.zip` to your Integration Server and SSH into it.
 * **Unzip** the package:
@@ -82,7 +102,7 @@
   | **smtp_port** | Yes | `25` | *Defaults to unauthenticated, 587/2525 for TLS* |
   | **smtp_conn_timeout** | Yes | `15` | *Time in seconds* |
   | **smtp_ssl_mode** | No | `None` | *Not supported* |
-  | **template_file** | No | `data/example_send_email.jinja` | *Optional - Path to a custom template file for formatting HTML email.* |
+  | **template_file** | No | `fn_outbound_email/data/example_send_email.jinja` | *Optional - Path to a custom template file for formatting HTML email/ differs in apphost* |
 
 * **Save** and **Close** the app.config file.
 * Run selftest to test the Integration you configured:
@@ -95,7 +115,7 @@
   $ resilient-circuits run
   ```
 
-### Installation: Existing Users
+#### Installation: Existing Users
 * Prior to the steps above, if you have a modified jinja template in use in the preprocessing script, save it offline as a .jinja file
 * This file can be specified using the `template_file` parameter, an example template is provided in the `data/` directory, which the integration uses out of the box
 * Export the current working state in Adminstrator Settings/ Organization/ Export
@@ -169,4 +189,4 @@ There are several ways to verify the successful operation of a function.
 ## Support
 | Name | Version | Author | Support URL |
 | ---- | ------- | ------ | ----------- |
-| fn_outbound_email | 1.0.7 | Sean@IBM Resilient | https://www.ibm.com/security/intelligent-orchestration/resilient |
+| fn_outbound_email | 1.1.0 | Sean@IBM Resilient | https://www.ibm.com/security/intelligent-orchestration/resilient |
