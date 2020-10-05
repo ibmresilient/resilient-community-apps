@@ -15,6 +15,7 @@
 # **User Guide:** fn_mcafee_epo_v1.0.2
 
 ## Table of Contents
+- [Configuration](#configuration)
 - [Key Features](#key-features)
 - [Function - McAfee ePO find a system](#function---mcafee-epo-find-a-system)
 - [Function - McAfee tag an ePO asset](#function---mcafee-tag-an-epo-asset)
@@ -36,7 +37,7 @@
 * Bug fixes
 ### v1.0.0
 * Initial Release
-
+---
 ## Key Features
 <!--
   List the Key Features of the Integration
@@ -45,7 +46,6 @@
 * List available tags 
 * Get info on an ePO system
 
----
 ## Configuration
 ### App Host Installation
 All the components for running this integration in a container already exist when using the App Host app.
