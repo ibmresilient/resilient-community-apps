@@ -5,13 +5,14 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_pa_panorama',
-    version='1.0.0',
+    version='1.0.1',
     license='MIT',
     author='IBM Resilient',
-    author_email='support@resilientsystems.com',
-    url='https://github.com/ibmresilient/resilient-community-apps',
+    author_email='',
+    url="http://ibm.biz/resilientcommunity",
     description="Resilient Circuits Components to Integrate with the Panorama Platform",
-    long_description="Contains Functions to get and edit addresses groups, get and create addresses, and get and edit users in a group within Panorama.",
+    long_description="This integration contains Functions to interact with address groups, "
+                     "addresses, and user groups within Palo Alto Panorama.",
     install_requires=[
         'resilient_circuits>=30.0.0',
         'resilient-lib>=32.0.0.186',
