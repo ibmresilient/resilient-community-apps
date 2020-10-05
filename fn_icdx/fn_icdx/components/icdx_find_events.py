@@ -115,11 +115,18 @@ class FunctionComponent(ResilientComponent):
                         res["result"])
                 elif status == 400:
                     yield StatusMessage("Received a 400 (Bad Request). Check the formatting of your ICDx Query")
-            results = rc.done(success=False if status != 200 else True,
+
+            execution_time = int(time.time() * 1000)
+            success=False if status != 200 else True
+            results = rc.done(success=success,
                               content={"result_set": result_set,
                                        "num_of_results": num_of_results,
-                                       "execution_time": int(time.time() * 1000)}
+                                       "execution_time": execution_time}
                               )
+            results.update({"result_set": result_set,
+                            "num_of_results": num_of_results,
+                            "execution_time": execution_time,
+                            "success": success})
             yield StatusMessage(
                 "Finishing. Received results: {}. Number of results: {}".format(results["success"], num_of_results))
             # Produce a FunctionResult with the results

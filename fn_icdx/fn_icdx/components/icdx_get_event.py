@@ -106,15 +106,20 @@ class FunctionComponent(ResilientComponent):
                 yield StatusMessage("Received a 401 (Auth). Check the credentials in app.config")
 
             # Return the results
-
+            event = None if status != 200 else json.loads(search_result_payload.decode('utf-8')),
+            artifacts = artifact_dictionary,
+            artifact_keys_as_list = None if isinstance(artifact_keys_as_list, type(None)) else list(artifact_keys_as_list)
+            artifact_values_as_list = None if isinstance(artifact_values_as_list, type(None)) else list(artifact_values_as_list)
             results = rc.done(success=False if status != 200 else True,
-                              content={"event": None if status != 200 else json.loads(search_result_payload.decode('utf-8')),
+                              content={"event": event,
                                        "artifacts": artifact_dictionary,
-                                       "artifact_keys_as_list": None if isinstance(artifact_keys_as_list, type(None)) else list(
-                                  artifact_keys_as_list),
-                                  "artifact_values_as_list": None if isinstance(artifact_values_as_list, type(None)) else list(
-                                  artifact_values_as_list)}
+                                       "artifact_keys_as_list": artifact_keys_as_list,
+                                       "artifact_values_as_list": artifact_values_as_list}
                               )
+            results.update({"event": event,
+                            "artifacts": artifact_dictionary,
+                            "artifact_keys_as_list": artifact_keys_as_list,
+                            "artifact_values_as_list": artifact_values_as_list})
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

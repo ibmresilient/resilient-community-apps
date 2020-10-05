@@ -68,6 +68,7 @@ class FunctionComponent(ResilientComponent):
             results = rc.done(success=False if status != 200 else True, content={
                 "archives": (json.loads(archives) if archives is not None else None)
             })
+            results.update({"archives": (json.loads(archives) if archives is not None else None)})
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
