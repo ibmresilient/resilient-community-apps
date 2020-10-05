@@ -29,7 +29,7 @@ class FunctionComponent(ResilientComponent):
         self.mail_data = {}
         self.opts = opts
         self.smtp_config_section = self.opts.get(CONFIG_DATA_SECTION, {})
-        validate_fields(["smtp_server","smtp_port"], self.smtp_config_section)
+        validate_fields(["smtp_server", "smtp_port"], self.smtp_config_section)
 
         self.template_file_path = self.smtp_config_section.get('template_file')
         self.smtp_port_choice = str(self.smtp_config_section.get("smtp_"))
@@ -78,7 +78,7 @@ class FunctionComponent(ResilientComponent):
             else:
                 mail_to = kwargs.get("mail_to")
             email_message = None
-            text = "N/A"
+            text = ""
             return mail_from, mail_to, mail_body_html, jinja, email_message, text
 
         try:
@@ -88,16 +88,17 @@ class FunctionComponent(ResilientComponent):
             mail_bcc = kwargs.get("mail_bcc") #text
             mail_subject = kwargs.get("mail_subject") #text
             mail_body_text = kwargs.get("mail_body_text") #text
-            mail_incident_id = kwargs.get("mail_incident_id") #number            
+            mail_attachments = kwargs.get("mail_attachments") #text
+            mail_incident_id = kwargs.get("mail_incident_id") #number
             # Get the conditional function parameters:
             mail_from, mail_to, mail_body_html, jinja, email_message, text = conditional_parameters(mail_body_text)
 
-            if not mail_from: 
+            if not mail_from:
                 raise Exception("no sender address specified")
-            if not mail_cc: 
-                mail_cc = "N/A"
-            if not mail_bcc: 
-                mail_bcc = "N/A"
+            if not mail_cc:
+                mail_cc = ""
+            if not mail_bcc:
+                mail_bcc = ""
             
             log.info("mail_from: %s", mail_from)
             log.info("mail_to: %s", mail_to)
@@ -106,13 +107,14 @@ class FunctionComponent(ResilientComponent):
             log.info("mail_subject: %s", mail_subject)
             log.info("mail_body_html: %s", mail_body_html)
             log.info("mail_body_text: %s", mail_body_text)
+            log.info("mail_attachments: %s", mail_attachments)
 
             self.mail_data['mail_from'] = mail_from
             self.mail_data['mail_to'] = FunctionComponent.split_string(mail_to)
             self.mail_data['mail_cc'] = FunctionComponent.split_string(mail_cc)
             self.mail_data['mail_bcc'] = FunctionComponent.split_string(mail_bcc)
             self.mail_data['mail_subject'] = mail_subject
-            self.mail_data['mail_attachments'] = self.process_attachments(inc_id=mail_incident_id)
+            self.mail_data['mail_attachments'] = self.process_attachments(inc_id=mail_incident_id, attachments=mail_attachments)
 
             payload = ResultPayload(CONFIG_DATA_SECTION, **kwargs)
             validate_fields(["mail_subject", "mail_incident_id"], kwargs)
@@ -148,7 +150,7 @@ class FunctionComponent(ResilientComponent):
             if error_msg:
                 yield StatusMessage("An error occurred while sending the email: {}".format(error_msg))
 
-            yield StatusMessage("Done with sending email...")            
+            yield StatusMessage("Done with sending email...")
             results = payload.done(success=True, content={
                 "inputs" : [mail_from, mail_to, mail_cc, mail_bcc, mail_subject],
                 "message": email_message,
@@ -167,21 +169,35 @@ class FunctionComponent(ResilientComponent):
             return in_string.split(',')
         return []
 
-    def process_attachments(self, inc_id):
+    def temp_attach(self, inc_id, incident_attachment_list, attachments, file_list):
+        updated_lists = list(file_list)
+        tempdir = tempfile.mkdtemp()
+        for incident_attachment in incident_attachment_list:
+            file_name = incident_attachment["name"]
+            if file_name in attachments:
+                file_contents = self.rest_client().get_content("/incidents/{inc_id}/attachments/{attach_id}/contents".
+                                                                format(inc_id=inc_id,
+                                                                attach_id=incident_attachment["id"]))
+                file_path = os.path.join(tempdir, file_name)
+                with open(file_path, "wb+") as temp_file:
+                    temp_file.write(file_contents)
+                updated_lists.append(file_path)
+        return set(updated_lists)
+
+    def process_attachments(self, inc_id, attachments):
         file_list = []
         incident_attachment_list = self.rest_client().get("/incidents/{inc_id}/attachments?handle_format=objects".
                                                           format(inc_id=inc_id))
-        for incident_attachment in incident_attachment_list:
-            file_name = incident_attachment["name"]
-            file_contents = self.rest_client().get_content("/incidents/{inc_id}/attachments/{attach_id}/contents".
-                                                           format(inc_id=inc_id, attach_id=incident_attachment["id"]))
-            tempdir = tempfile.mkdtemp()
-            file_path = os.path.join(tempdir, file_name)
-            with open(file_path, "wb+") as temp_file:
-                temp_file.write(file_contents)
+        if attachments == "*": # send all attachments
+            all_attach = temp_attach(self, inc_id, incident_attachment_list, attachments, file_list)
+            return all_attach
+        elif attachments: # send selected attachments
+            attachments = FunctionComponent.split_string(attachments)
+            set_attach = temp_attach(self, inc_id, incident_attachment_list, attachments, file_list)
+            return set_attach
+        else: # no attachments
+            return set(file_list)
 
-            file_list.append(file_path)
-        return set(file_list)
 
 
 class SimpleSendEmailException(Exception):
