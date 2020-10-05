@@ -47,36 +47,24 @@ class TestMcafeeEpoFindASystem:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
-    mock_inputs_success = {
-        "mcafee_epo_systems": "sample text"
-    }
-
-    expected_results_success = {"content": "xyz"}
-
-    mock_inputs_failure = {
-        "mcafee_epo_systems": "sample text"
-    }
-
-    expected_results_failure = {"content": "xyz"}
-
     # this live test relies on the server "test_server" existing in your EPO system
     @pytest.mark.livetest
-    @pytest.mark.parametrize("mock_inputs, expected_results", [
-        (mock_inputs_success, expected_results_success)
+    @pytest.mark.parametrize("mock_inputs", [
+        ({"mcafee_epo_systems": "test_server"})
     ])
-    def test_success(self, circuits_app, mock_inputs, expected_results):
+    def test_success(self, circuits_app, mock_inputs):
         """ Test calling with sample values for the parameters """
 
         results = call_mcafee_epo_find_a_system_function(circuits_app, mock_inputs)
-        assert(expected_results == results)
+        assert(results['content'])
 
 
     @pytest.mark.livetest
-    @pytest.mark.parametrize("mock_inputs, expected_results", [
-        (mock_inputs_failure, expected_results_failure)
+    @pytest.mark.parametrize("mock_inputs", [
+        ({"mcafee_epo_systems": "not_found"})
     ])
-    def test_failure(self, circuits_app, mock_inputs, expected_results):
+    def test_failure(self, circuits_app, mock_inputs):
         """ Test calling with sample values for the parameters """
 
         results = call_mcafee_epo_find_a_system_function(circuits_app, mock_inputs)
-        assert(expected_results == results)
+        assert(not results['content'])

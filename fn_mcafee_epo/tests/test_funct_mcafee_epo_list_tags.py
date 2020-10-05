@@ -47,22 +47,9 @@ class TestMcafeeEpoListTags:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
-    mock_inputs_1 = {
-    }
-
-    expected_results_1 = {"value": "xyz"}
-
-    mock_inputs_2 = {
-    }
-
-    expected_results_2 = {"value": "xyz"}
-
-    @pytest.mark.parametrize("mock_inputs, expected_results", [
-        (mock_inputs_1, expected_results_1),
-        (mock_inputs_2, expected_results_2)
-    ])
-    def test_success(self, circuits_app, mock_inputs, expected_results):
+    @pytest.mark.livetest
+    def test_success(self, circuits_app):
         """ Test calling with sample values for the parameters """
 
-        results = call_mcafee_epo_list_tags_function(circuits_app, mock_inputs)
-        assert(expected_results == results)
+        results = call_mcafee_epo_list_tags_function(circuits_app, {})
+        assert(results['content'])
