@@ -34,8 +34,10 @@ from java.util import Date
 # Get the current time
 dt_now = Date()
 
+issue_id = results.get("inputs", {}).get("jira_issue_id")
+
 # Prepend message and time to the note
-note.text = u"<b>Sent to Jira at {0}</b><br>{1}".format(dt_now, unicode(note.text.content))
+note.text = u"<b>Sent to the Jira issue {0} at {1}</b><br>{2}".format(issue_id, dt_now, unicode(note.text.content))
 ```
 
 ---
