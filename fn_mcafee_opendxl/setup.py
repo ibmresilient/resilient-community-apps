@@ -3,18 +3,20 @@
 
 from setuptools import setup, find_packages
 
-PUBLISH_VERSION = "1.1.0"
+PUBLISH_VERSION = "1.1.1"
 
 setup(
     name='fn_mcafee_opendxl',
     version=PUBLISH_VERSION,
     license='MIT',
     author='IBM Resilient',
-    author_email='support@resilientsystems.com',
+    url='https://ibm.com/mysupport',
+    author_email='',
     description="Resilient Circuits Components for McAfee publishing to DXL Functions",
     long_description="Resilient Circuits Components for McAfee publishing to DXL Functions",
     install_requires=[
         'resilient_circuits>=30.0.0',
+        'PySocks<1.7',
         'dxlclient'
     ],
     packages=find_packages(),
