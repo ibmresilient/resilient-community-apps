@@ -23,15 +23,57 @@
 #######################################
 ### Define pre-processing functions ###
 #######################################
+def list_to_json_str(l):
+  """
+  Function that converts a list into a JSON string.
+  Supports types: basestring, unicode, bool, int, list and dicts.
+  If the value is None, it sets it to False.
+  """
+  list_as_str = ''
+  json_entry = u'{0},'
+  json_entry_str = u'"{0}",'
+
+  for value in l:
+
+    if value is None:
+      value = False
+
+    if isinstance(value, list):
+      list_as_str += json_entry.format(list_to_json_str(value))
+
+    elif isinstance(value, dict):
+      list_as_str += json_entry.format(dict_to_json_str(value))
+
+    elif isinstance(value, basestring):
+      value = value.replace(u'"', u'\\"')
+      value = value.replace("\n", "\\n")
+      list_as_str += json_entry_str.format(unicode(value))
+
+    elif isinstance(value, unicode):
+      list_as_str += json_entry.format(unicode(value))
+
+    elif isinstance(value, bool):
+      value = 'true' if value is True else 'false'
+      list_as_str += json_entry.format(value)
+
+    elif isinstance(value, int):
+      list_as_str += json_entry.format(value)
+
+    else:
+      helper.fail('list_to_json_str does not support this type: {0}'.format(type(value)))
+
+  return u'{0} {1} {2}'.format(u'[', list_as_str[:-1], u']')
+
 def dict_to_json_str(d):
-  """Function that converts a dictionary into a JSON string.
-     Supports types: basestring, unicode, bool, int and nested dicts.
-     Does not support lists.
-     If the value is None, it sets it to False."""
+  """
+  Function that converts a dictionary into a JSON string.
+  Supports types: basestring, unicode, bool, int, list and nested dicts.
+  If the value is None, it sets it to False.
+  """
 
   json_entry = u'"{0}":{1}'
   json_entry_str = u'"{0}":"{1}"'
-  entries = [] 
+  entries = []
 
   for entry in d:
     key = entry
@@ -41,25 +83,25 @@ def dict_to_json_str(d):
       value = False
 
     if isinstance(value, list):
-      helper.fail('dict_to_json_str does not support Python Lists')
+      entries.append(json_entry.format(unicode(key), list_to_json_str(value)))
 
-    if isinstance(value, basestring):
+    elif isinstance(value, dict):
+      entries.append(json_entry.format(key, dict_to_json_str(value)))
+
+    elif isinstance(value, basestring):
       value = value.replace(u'"', u'\\"')
       value = value.replace("\n", "\\n")
       entries.append(json_entry_str.format(unicode(key), unicode(value)))
 
     elif isinstance(value, unicode):
       entries.append(json_entry.format(unicode(key), unicode(value)))
-    
+
     elif isinstance(value, bool):
-      value = 'true' if value == True else 'false'
+      value = 'true' if value is True else 'false'
       entries.append(json_entry.format(key, value))
 
     elif isinstance(value, int):
       entries.append(json_entry.format(unicode(key), value))
-
-    elif isinstance(value, dict):
-      entries.append(json_entry.format(key, dict_to_json_str(value)))
 
     else:
       helper.fail('dict_to_json_str does not support this type: {0}'.format(type(value)))
