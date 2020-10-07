@@ -3,7 +3,7 @@
 
 from setuptools import setup, find_packages
 
-PUBLISH_VERSION = "1.1.1"
+PUBLISH_VERSION = "1.2.0"
 
 setup(
     name='fn_mcafee_opendxl',
@@ -16,6 +16,7 @@ setup(
     long_description="Resilient Circuits Components for McAfee publishing to DXL Functions",
     install_requires=[
         'resilient_circuits>=30.0.0',
+        'resilient_lib',
         'PySocks<1.7',
         'dxlclient'
     ],
@@ -31,6 +32,7 @@ setup(
             "McafeeSubscribeToDxlComponent = fn_mcafee_opendxl.components.mcafee_subscribe_to_dxl:DxlComponentSubscriber"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_mcafee_opendxl.util.config:config_section_data"],
-        "resilient.circuits.customize": ["customize = fn_mcafee_opendxl.util.customize:customization_data"]
+        "resilient.circuits.customize": ["customize = fn_mcafee_opendxl.util.customize:customization_data"],
+        "resilient.circuits.selftest": ["selftest = fn_mcafee_opendxl.util.selftest:selftest_function"]
     }
 )
