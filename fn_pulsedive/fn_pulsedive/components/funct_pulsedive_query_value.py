@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
@@ -96,7 +96,7 @@ class FunctionComponent(ResilientComponent):
             client = self.rest_client()
 
             # prepare datastream to output to attachment
-            if pulsedive_data["pretty"] == "Yes":
+            if pulsedive_data.get("pretty") == "Yes":
                 # Pulsedive returns pp format if requested. Convert to bytestream for file handling.
                 datastream = BytesIO(resp.content)
             else:
