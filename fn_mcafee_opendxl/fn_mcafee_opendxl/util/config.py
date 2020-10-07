@@ -1,3 +1,4 @@
+# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 # -*- coding: utf-8 -*-
 
 """Generate a default configuration-file section for fn_mcafee_opendxl"""
@@ -10,13 +11,13 @@ def config_section_data():
        when called by `resilient-circuits config [-c|-u]`
     """
     config_data = u"""[fn_mcafee_opendxl]
-dxlclient_config=/home/integration/.resilient/mcafee/dxlclient.config
+dxlclient_config=/home/integration/.resilient/fn_mcafee_opendxl/dxlclient.config
 
 # Set topic_listener to False to prevent it from listening on any topics
 topic_listener_on=False
 
 ## custom_template_dir is optional and used to specify the directory where new 
 ## templates can be found/to override any default templates
-#custom_template_dir=<*optional* path to directory which contains custom templates>
+custom_template_dir=
 """
     return config_data
