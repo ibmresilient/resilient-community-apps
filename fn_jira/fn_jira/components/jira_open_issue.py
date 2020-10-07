@@ -50,6 +50,7 @@ class FunctionComponent(ResilientComponent):
             jira_fields = json.loads(fn_inputs.get("jira_fields"))
 
             yield StatusMessage("Connecting to JIRA")
+            yield StatusMessage("Additional message for our test")
 
             jira_client = get_jira_client(app_configs, rc)
 
