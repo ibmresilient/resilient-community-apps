@@ -1013,7 +1013,7 @@ if artifact_value:
 
 ## Data Table - MaaS360 Installed Software datatable
 
- ![screenshot: dt-maas360-installed-software-datatable](./doc/screenshots/dt-maas360-installed-software-datatable.png)
+ ![screenshot: dt-maas360-installed-software-datatable](./doc/screenshots/dt.png)
 
 #### API Name:
 maas360_installed_software_datatable
@@ -1031,7 +1031,7 @@ maas360_installed_software_datatable
 ---
 ## Data Table - MaaS360 Device datatable
 
- ![screenshot: dt-maas360-device-datatable](./doc/screenshots/dt-maas360-device-datatable.png)
+ ![screenshot: dt-maas360-device-datatable](./doc/screenshots/dt.png)
 
 #### API Name:
 maas360_device_dt
