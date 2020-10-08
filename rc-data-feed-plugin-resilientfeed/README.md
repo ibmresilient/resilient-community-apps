@@ -106,7 +106,7 @@ Use `~` for `in` when searching richtext fields.
 `None` can be used for \<value\>. Make sure to separate each \<field\> \<operator\> \<value\> with spaces. |
 | matching_operator | any\|all | When using matching_incident_fields, either `all` fields or `any` field needs to match for incident synchronization. Default: all | 
 | exclude_incident_fields	| severity_code; date_started; custom_field | Optional semicolon separated list of fields and field sections to exclude when synchronizing an incident. | 
-| sync_reference_fields | true\|false | Specify `True` to add information to the target incident to maintain the original org id and incident id. Fields are `df_org_id` and `df_inc_id`, respectively |
+| sync_reference_fields | true\|false | Specify `True` to add information to the target incident to maintain the original org id incident id, sync host and incident create date. Fields are `df_org_id`, `df_inc_id`, `df_host` and `df_create_date`, respectively |
 | delete_incidents | true\|false | Specify 'True' to delete the target incident and it's data when the source incident is deleted |
 
 ## Requirements

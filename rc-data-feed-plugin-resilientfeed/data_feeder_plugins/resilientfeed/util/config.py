@@ -32,7 +32,7 @@ postgresql_pwd=<pwd>
 #matching_operator=all
 # semicolon separated list of fields to exclude from an incident. Sections of fields can be used: pii;gdpr;hipaa;cm
 #exclude_incident_fields=
-# include references within the incident to source org_id and incident_id. Values true/false
+# include references within the incident to source host, org_id, incident_id and create_date. Values true/false
 sync_reference_fields=true
 # true|false - specify whether to delete the target incident if the source incident is deleted. Default: false
 delete_incidents=false

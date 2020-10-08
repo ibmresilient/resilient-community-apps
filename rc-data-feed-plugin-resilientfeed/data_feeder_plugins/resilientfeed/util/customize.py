@@ -1,80 +1,112 @@
 # -*- coding: utf-8 -*-
 
-"""Generate the Resilient customizations required for rc-data-feed-plugin-resilientfeed"""
+"""Generate the Resilient customizations required for data_feeder_plugins"""
 
-from __future__ import print_function
-from resilient import ImportDefinition
+try:
+    from resilient import ImportDefinition
+except ImportError:
+    # Support Apps running on resilient-circuits < v35.0.195
+    from resilient_circuits.util import ImportDefinition
+
 
 def codegen_reload_data():
-    """Parameters to codegen used to generate the rc-data-feed-plugin-resilientfeed package"""
-    reload_params = {"package": u"rc-data-feed-plugin-resilientfeed",
-                     "incident_fields": [u"df_inc_id", u"df_org_id"],
-                     "action_fields": [],
-                     "functions_params": [],
-                     "datatables": [],
-                     "message_destinations": [],
-                     "functions": [],
-                     "phases": [],
-                     "automatic_tasks": [],
-                     "scripts": [],
-                     "workflows": [],
-                     "actions": [],
-                     "incident_artifact_types": []
-                     }
-    return reload_params
+    """
+    Parameters required reload codegen for the rc-data-feed-plugin-resilientfeed package
+    """
+    return {
+        "package": u"rc-data-feed-plugin-resilientfeed",
+        "message_destinations": [],
+        "functions": [],
+        "workflows": [],
+        "actions": [],
+        "incident_fields": [u"df_host", u"df_org_id", u"df_create_date", u"df_inc_id"],
+        "incident_artifact_types": [],
+        "datatables": [],
+        "automatic_tasks": [],
+        "scripts": []
+    }
 
 
 def customization_data(client=None):
-    """Produce any customization definitions (types, fields, message destinations, etc)
-       that should be installed by `resilient-circuits customize`
     """
+    Returns a Generator of ImportDefinitions (Customizations).
+    Install them using `resilient-circuits customize`
 
-    # This import data contains:
-    #   Incident fields:
-    #     df_inc_id
-    #     df_org_id
-
+    Contents:
+    - Incident Fields:
+        - df_host
+        - df_org_id
+        - df_create_date
+        - df_inc_id
+    """
 
     yield ImportDefinition(u"""
 eyJhY3Rpb25fb3JkZXIiOiBbXSwgImFjdGlvbnMiOiBbXSwgImF1dG9tYXRpY190YXNrcyI6IFtd
-LCAiZXhwb3J0X2RhdGUiOiAxNTg0MDMxODExOTA5LCAiZXhwb3J0X2Zvcm1hdF92ZXJzaW9uIjog
+LCAiZXhwb3J0X2RhdGUiOiAxNjAyMTcyOTI4ODM5LCAiZXhwb3J0X2Zvcm1hdF92ZXJzaW9uIjog
 MiwgImZpZWxkcyI6IFt7ImFsbG93X2RlZmF1bHRfdmFsdWUiOiBmYWxzZSwgImJsYW5rX29wdGlv
 biI6IGZhbHNlLCAiY2FsY3VsYXRlZCI6IGZhbHNlLCAiY2hhbmdlYWJsZSI6IHRydWUsICJjaG9z
 ZW4iOiBmYWxzZSwgImRlZmF1bHRfY2hvc2VuX2J5X3NlcnZlciI6IGZhbHNlLCAiZGVwcmVjYXRl
-ZCI6IGZhbHNlLCAiZXhwb3J0X2tleSI6ICJpbmNpZGVudC9kZl9vcmdfaWQiLCAiaGlkZV9ub3Rp
-ZmljYXRpb24iOiBmYWxzZSwgImlkIjogMTQ0OSwgImlucHV0X3R5cGUiOiAibnVtYmVyIiwgImlu
-dGVybmFsIjogZmFsc2UsICJuYW1lIjogImRmX29yZ19pZCIsICJvcGVyYXRpb25fcGVybXMiOiB7
-fSwgIm9wZXJhdGlvbnMiOiBbXSwgInBsYWNlaG9sZGVyIjogIiIsICJwcmVmaXgiOiAicHJvcGVy
-dGllcyIsICJyZWFkX29ubHkiOiBmYWxzZSwgInJpY2hfdGV4dCI6IGZhbHNlLCAidGFncyI6IFtd
-LCAidGVtcGxhdGVzIjogW10sICJ0ZXh0IjogIkRhdGEgRmVlZGVyIFN5bmMgT3JnIElkIiwgInRv
-b2x0aXAiOiAiRGF0YSBGZWVkZXIgU3luYyBPcmlnaW5hdGluZyBPcmcgSWQiLCAidHlwZV9pZCI6
-IDAsICJ1dWlkIjogImFiNjJhZTdlLTdjZjItNDdiNC04OTQwLWYwZTFlMTNhNTgzNCIsICJ2YWx1
-ZXMiOiBbXX0sIHsiYWxsb3dfZGVmYXVsdF92YWx1ZSI6IGZhbHNlLCAiYmxhbmtfb3B0aW9uIjog
-ZmFsc2UsICJjYWxjdWxhdGVkIjogZmFsc2UsICJjaGFuZ2VhYmxlIjogdHJ1ZSwgImNob3NlbiI6
-IGZhbHNlLCAiZGVmYXVsdF9jaG9zZW5fYnlfc2VydmVyIjogZmFsc2UsICJkZXByZWNhdGVkIjog
-ZmFsc2UsICJleHBvcnRfa2V5IjogImluY2lkZW50L2RmX2luY19pZCIsICJoaWRlX25vdGlmaWNh
-dGlvbiI6IGZhbHNlLCAiaWQiOiAxNDUwLCAiaW5wdXRfdHlwZSI6ICJudW1iZXIiLCAiaW50ZXJu
-YWwiOiBmYWxzZSwgIm5hbWUiOiAiZGZfaW5jX2lkIiwgIm9wZXJhdGlvbl9wZXJtcyI6IHt9LCAi
-b3BlcmF0aW9ucyI6IFtdLCAicGxhY2Vob2xkZXIiOiAiIiwgInByZWZpeCI6ICJwcm9wZXJ0aWVz
-IiwgInJlYWRfb25seSI6IGZhbHNlLCAicmljaF90ZXh0IjogZmFsc2UsICJ0YWdzIjogW10sICJ0
-ZW1wbGF0ZXMiOiBbXSwgInRleHQiOiAiRGF0YSBGZWVkZXIgU3luYyBJbmNpZGVudCBJZCIsICJ0
-b29sdGlwIjogIkRhdGEgRmVlZGVyIFN5bmMgT3JpZ2luYXRpbmcgSW5jaWRlbnQgSWQiLCAidHlw
-ZV9pZCI6IDAsICJ1dWlkIjogImE1ZjdhNjM3LTBkMjMtNDYzYS1iOGMyLTlhMzdjYWI0Njc4NyIs
-ICJ2YWx1ZXMiOiBbXX1dLCAiZnVuY3Rpb25zIjogW10sICJnZW9zIjogbnVsbCwgImdyb3VwcyI6
-IG51bGwsICJpZCI6IDY1LCAiaW5ib3VuZF9tYWlsYm94ZXMiOiBudWxsLCAiaW5jaWRlbnRfYXJ0
-aWZhY3RfdHlwZXMiOiBbXSwgImluY2lkZW50X3R5cGVzIjogW3sidXBkYXRlX2RhdGUiOiAxNTg0
-MDMxODIwOTg2LCAiY3JlYXRlX2RhdGUiOiAxNTg0MDMxODIwOTg2LCAidXVpZCI6ICJiZmVlYzJk
-NC0zNzcwLTExZTgtYWQzOS00YTAwMDQwNDRhYTAiLCAiZGVzY3JpcHRpb24iOiAiQ3VzdG9taXph
-dGlvbiBQYWNrYWdlcyAoaW50ZXJuYWwpIiwgImV4cG9ydF9rZXkiOiAiQ3VzdG9taXphdGlvbiBQ
-YWNrYWdlcyAoaW50ZXJuYWwpIiwgIm5hbWUiOiAiQ3VzdG9taXphdGlvbiBQYWNrYWdlcyAoaW50
-ZXJuYWwpIiwgImVuYWJsZWQiOiBmYWxzZSwgInN5c3RlbSI6IGZhbHNlLCAicGFyZW50X2lkIjog
-bnVsbCwgImhpZGRlbiI6IGZhbHNlLCAiaWQiOiAwfV0sICJpbmR1c3RyaWVzIjogbnVsbCwgImxh
-eW91dHMiOiBbXSwgImxvY2FsZSI6IG51bGwsICJtZXNzYWdlX2Rlc3RpbmF0aW9ucyI6IFtdLCAi
-bm90aWZpY2F0aW9ucyI6IG51bGwsICJvdmVycmlkZXMiOiBbXSwgInBoYXNlcyI6IFtdLCAicmVn
-dWxhdG9ycyI6IG51bGwsICJyb2xlcyI6IFtdLCAic2NyaXB0cyI6IFtdLCAic2VydmVyX3ZlcnNp
-b24iOiB7ImJ1aWxkX251bWJlciI6IDUwODcsICJtYWpvciI6IDMzLCAibWlub3IiOiAwLCAidmVy
-c2lvbiI6ICIzMy4wLjUwODcifSwgInRhZ3MiOiBbXSwgInRhc2tfb3JkZXIiOiBbXSwgInRpbWVm
-cmFtZXMiOiBudWxsLCAidHlwZXMiOiBbXSwgIndvcmtmbG93cyI6IFtdLCAid29ya3NwYWNlcyI6
-IFtdfQ==
-"""
-)
+ZCI6IGZhbHNlLCAiZXhwb3J0X2tleSI6ICJpbmNpZGVudC9kZl9pbmNfaWQiLCAiaGlkZV9ub3Rp
+ZmljYXRpb24iOiBmYWxzZSwgImlkIjogOTczLCAiaW5wdXRfdHlwZSI6ICJudW1iZXIiLCAiaW50
+ZXJuYWwiOiBmYWxzZSwgImlzX3RyYWNrZWQiOiBmYWxzZSwgIm5hbWUiOiAiZGZfaW5jX2lkIiwg
+Im9wZXJhdGlvbl9wZXJtcyI6IHt9LCAib3BlcmF0aW9ucyI6IFtdLCAicGxhY2Vob2xkZXIiOiAi
+IiwgInByZWZpeCI6ICJwcm9wZXJ0aWVzIiwgInJlYWRfb25seSI6IGZhbHNlLCAicmljaF90ZXh0
+IjogZmFsc2UsICJ0YWdzIjogW10sICJ0ZW1wbGF0ZXMiOiBbXSwgInRleHQiOiAiRGF0YSBGZWVk
+ZXIgU3luYyBJbmNpZGVudCBJZCIsICJ0b29sdGlwIjogIkRhdGEgRmVlZGVyIFN5bmMgT3JpZ2lu
+YXRpbmcgSW5jaWRlbnQgSWQiLCAidHlwZV9pZCI6IDAsICJ1dWlkIjogImE1ZjdhNjM3LTBkMjMt
+NDYzYS1iOGMyLTlhMzdjYWI0Njc4NyIsICJ2YWx1ZXMiOiBbXX0sIHsiYWxsb3dfZGVmYXVsdF92
+YWx1ZSI6IGZhbHNlLCAiYmxhbmtfb3B0aW9uIjogZmFsc2UsICJjYWxjdWxhdGVkIjogZmFsc2Us
+ICJjaGFuZ2VhYmxlIjogdHJ1ZSwgImNob3NlbiI6IGZhbHNlLCAiZGVmYXVsdF9jaG9zZW5fYnlf
+c2VydmVyIjogZmFsc2UsICJkZXByZWNhdGVkIjogZmFsc2UsICJleHBvcnRfa2V5IjogImluY2lk
+ZW50L2RmX29yZ19pZCIsICJoaWRlX25vdGlmaWNhdGlvbiI6IGZhbHNlLCAiaWQiOiA5NzIsICJp
+bnB1dF90eXBlIjogIm51bWJlciIsICJpbnRlcm5hbCI6IGZhbHNlLCAiaXNfdHJhY2tlZCI6IGZh
+bHNlLCAibmFtZSI6ICJkZl9vcmdfaWQiLCAib3BlcmF0aW9uX3Blcm1zIjoge30sICJvcGVyYXRp
+b25zIjogW10sICJwbGFjZWhvbGRlciI6ICIiLCAicHJlZml4IjogInByb3BlcnRpZXMiLCAicmVh
+ZF9vbmx5IjogZmFsc2UsICJyaWNoX3RleHQiOiBmYWxzZSwgInRhZ3MiOiBbXSwgInRlbXBsYXRl
+cyI6IFtdLCAidGV4dCI6ICJEYXRhIEZlZWRlciBTeW5jIE9yZyBJZCIsICJ0b29sdGlwIjogIkRh
+dGEgRmVlZGVyIFN5bmMgT3JpZ2luYXRpbmcgT3JnIElkIiwgInR5cGVfaWQiOiAwLCAidXVpZCI6
+ICJhYjYyYWU3ZS03Y2YyLTQ3YjQtODk0MC1mMGUxZTEzYTU4MzQiLCAidmFsdWVzIjogW119LCB7
+ImFsbG93X2RlZmF1bHRfdmFsdWUiOiBmYWxzZSwgImJsYW5rX29wdGlvbiI6IGZhbHNlLCAiY2Fs
+Y3VsYXRlZCI6IGZhbHNlLCAiY2hhbmdlYWJsZSI6IHRydWUsICJjaG9zZW4iOiBmYWxzZSwgImRl
+ZmF1bHRfY2hvc2VuX2J5X3NlcnZlciI6IGZhbHNlLCAiZGVwcmVjYXRlZCI6IGZhbHNlLCAiZXhw
+b3J0X2tleSI6ICJpbmNpZGVudC9kZl9jcmVhdGVfZGF0ZSIsICJoaWRlX25vdGlmaWNhdGlvbiI6
+IGZhbHNlLCAiaWQiOiAxOTQ1LCAiaW5wdXRfdHlwZSI6ICJkYXRldGltZXBpY2tlciIsICJpbnRl
+cm5hbCI6IGZhbHNlLCAiaXNfdHJhY2tlZCI6IGZhbHNlLCAibmFtZSI6ICJkZl9jcmVhdGVfZGF0
+ZSIsICJvcGVyYXRpb25fcGVybXMiOiB7fSwgIm9wZXJhdGlvbnMiOiBbXSwgInBsYWNlaG9sZGVy
+IjogIiIsICJwcmVmaXgiOiAicHJvcGVydGllcyIsICJyZWFkX29ubHkiOiBmYWxzZSwgInJpY2hf
+dGV4dCI6IGZhbHNlLCAidGFncyI6IFtdLCAidGVtcGxhdGVzIjogW10sICJ0ZXh0IjogIkRhdGEg
+RmVlZGVyIFN5bmMgT3JpZ2luYWwgQ3JlYXRlIERhdGUiLCAidG9vbHRpcCI6ICJPcmlnaW5hbCBJ
+bmNpZGVudCBjcmVhdGUgZGF0ZSIsICJ0eXBlX2lkIjogMCwgInV1aWQiOiAiOTE1NmIzNzgtZWZk
+NC00YTUzLTk2N2EtZjU3YzcyNTYyMzk2IiwgInZhbHVlcyI6IFtdfSwgeyJhbGxvd19kZWZhdWx0
+X3ZhbHVlIjogZmFsc2UsICJibGFua19vcHRpb24iOiBmYWxzZSwgImNhbGN1bGF0ZWQiOiBmYWxz
+ZSwgImNoYW5nZWFibGUiOiB0cnVlLCAiY2hvc2VuIjogZmFsc2UsICJkZWZhdWx0X2Nob3Nlbl9i
+eV9zZXJ2ZXIiOiBmYWxzZSwgImRlcHJlY2F0ZWQiOiBmYWxzZSwgImV4cG9ydF9rZXkiOiAiaW5j
+aWRlbnQvZGZfaG9zdCIsICJoaWRlX25vdGlmaWNhdGlvbiI6IGZhbHNlLCAiaWQiOiAxOTQ0LCAi
+aW5wdXRfdHlwZSI6ICJ0ZXh0IiwgImludGVybmFsIjogZmFsc2UsICJpc190cmFja2VkIjogZmFs
+c2UsICJuYW1lIjogImRmX2hvc3QiLCAib3BlcmF0aW9uX3Blcm1zIjoge30sICJvcGVyYXRpb25z
+IjogW10sICJwbGFjZWhvbGRlciI6ICIiLCAicHJlZml4IjogInByb3BlcnRpZXMiLCAicmVhZF9v
+bmx5IjogZmFsc2UsICJyaWNoX3RleHQiOiBmYWxzZSwgInRhZ3MiOiBbXSwgInRlbXBsYXRlcyI6
+IFtdLCAidGV4dCI6ICJEYXRhIEZlZWRlciBTeW5jIEhvc3QiLCAidG9vbHRpcCI6ICJIb3N0IHdo
+aWNoIG9yaWdpbmF0ZWQgdGhlIHN5bmMgIiwgInR5cGVfaWQiOiAwLCAidXVpZCI6ICI2YmUxYjc4
+OS05MTNhLTRhMzQtODU4OS03OWY4ZGM5YzBlZmQiLCAidmFsdWVzIjogW119LCB7ImV4cG9ydF9r
+ZXkiOiAiaW5jaWRlbnQvaW50ZXJuYWxfY3VzdG9taXphdGlvbnNfZmllbGQiLCAiaWQiOiAwLCAi
+aW5wdXRfdHlwZSI6ICJ0ZXh0IiwgImludGVybmFsIjogdHJ1ZSwgIm5hbWUiOiAiaW50ZXJuYWxf
+Y3VzdG9taXphdGlvbnNfZmllbGQiLCAicmVhZF9vbmx5IjogdHJ1ZSwgInRleHQiOiAiQ3VzdG9t
+aXphdGlvbnMgRmllbGQgKGludGVybmFsKSIsICJ0eXBlX2lkIjogMCwgInV1aWQiOiAiYmZlZWMy
+ZDQtMzc3MC0xMWU4LWFkMzktNGEwMDA0MDQ0YWExIn1dLCAiZnVuY3Rpb25zIjogW10sICJnZW9z
+IjogbnVsbCwgImdyb3VwcyI6IG51bGwsICJpZCI6IDgzLCAiaW5ib3VuZF9tYWlsYm94ZXMiOiBu
+dWxsLCAiaW5jaWRlbnRfYXJ0aWZhY3RfdHlwZXMiOiBbXSwgImluY2lkZW50X3R5cGVzIjogW3si
+dXBkYXRlX2RhdGUiOiAxNjAyMTcyOTIxNDA1LCAiY3JlYXRlX2RhdGUiOiAxNjAyMTcyOTIxNDA1
+LCAidXVpZCI6ICJiZmVlYzJkNC0zNzcwLTExZTgtYWQzOS00YTAwMDQwNDRhYTAiLCAiZGVzY3Jp
+cHRpb24iOiAiQ3VzdG9taXphdGlvbiBQYWNrYWdlcyAoaW50ZXJuYWwpIiwgImV4cG9ydF9rZXki
+OiAiQ3VzdG9taXphdGlvbiBQYWNrYWdlcyAoaW50ZXJuYWwpIiwgIm5hbWUiOiAiQ3VzdG9taXph
+dGlvbiBQYWNrYWdlcyAoaW50ZXJuYWwpIiwgImVuYWJsZWQiOiBmYWxzZSwgInN5c3RlbSI6IGZh
+bHNlLCAicGFyZW50X2lkIjogbnVsbCwgImhpZGRlbiI6IGZhbHNlLCAiaWQiOiAwfV0sICJpbmR1
+c3RyaWVzIjogbnVsbCwgImxheW91dHMiOiBbXSwgImxvY2FsZSI6IG51bGwsICJtZXNzYWdlX2Rl
+c3RpbmF0aW9ucyI6IFtdLCAibm90aWZpY2F0aW9ucyI6IG51bGwsICJvdmVycmlkZXMiOiBbXSwg
+InBoYXNlcyI6IFtdLCAicmVndWxhdG9ycyI6IG51bGwsICJyb2xlcyI6IFtdLCAic2NyaXB0cyI6
+IFtdLCAic2VydmVyX3ZlcnNpb24iOiB7ImJ1aWxkX251bWJlciI6IDMyLCAibWFqb3IiOiAzNSwg
+Im1pbm9yIjogMiwgInZlcnNpb24iOiAiMzUuMi4zMiJ9LCAidGFncyI6IFtdLCAidGFza19vcmRl
+ciI6IFtdLCAidGltZWZyYW1lcyI6IG51bGwsICJ0eXBlcyI6IFtdLCAid29ya2Zsb3dzIjogW10s
+ICJ3b3Jrc3BhY2VzIjogW119
+""")

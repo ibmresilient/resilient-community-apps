@@ -22,6 +22,8 @@ REGEX_OPERATORS = re.compile(r"([a-zA-Z0-9_]+)\s*(~|!=|=<|>=|=>|>=|<|>|==|=|is n
 # sync properties for an incident
 DF_INC_ID = "df_inc_id"
 DF_ORG_ID = "df_org_id"
+DF_HOST = "df_host"
+DF_ORIGINAL_CREATE_DATE = "df_create_date"
 
 """
 This module contains the ResilientFeedDestination for writing Resilient data
@@ -281,6 +283,8 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
             if self.sync_references:
                 payload['properties'][DF_ORG_ID] = orig_org_id
                 payload['properties'][DF_INC_ID] = orig_type_id
+                payload['properties'][DF_HOST] = self.resilient_source.get_source_host()
+                payload['properties'][DF_ORIGINAL_CREATE_DATE] = payload.get('create_date', 0)
 
         elif type_name in ("artifact", "note") and payload.get("parent_id", None):
             # make the artifact type an api style name as custom artifact types are only supported this way

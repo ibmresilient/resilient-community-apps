@@ -13,6 +13,10 @@ from data_feeder_plugins.resilientfeed.lib.db_sync_sqlite import SQLiteDBSync
 from data_feeder_plugins.resilientfeed.lib.db_sync_postgres import PostgresDBSync
 from cachetools import cached, TTLCache
 from resilient_lib import IntegrationError, get_file_attachment, write_file_attachment
+try:
+    from urlparse import urlparse  # Python 2 import
+except:
+    from urllib.parse import urlparse  # Python 3 import
 
 RETRY_MAX = 5
 
@@ -657,6 +661,10 @@ class Resilient(object):
             new_attachment = new_attachment[0]
 
         return new_attachment
+
+    def get_source_host(self):
+        parsed_uri = urlparse(self.rest_client.base_url)
+        return parsed_uri.hostname
 
 # S T A T I C
 def get_url(inc_id, type_name, update_flag=False):
