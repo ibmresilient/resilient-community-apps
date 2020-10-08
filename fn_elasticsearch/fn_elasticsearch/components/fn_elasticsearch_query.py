@@ -10,17 +10,28 @@ from elasticsearch import Elasticsearch
 from resilient_lib import str_to_bool
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, \
     FunctionResult, FunctionError
-
+from resilient_lib import ResultPayload
 from fn_elasticsearch.util.helper import ElasticSearchHelper
+from elasticsearch import RequestsHttpConnection
+from resilient_lib import RequestsCommon
 
 BADLY_FORMED_QUERY = 400
 NOT_FOUND = 404
 ES_ERROR = 500
 ELASTIC_TAG_VERSION = 6
 ERROR_TUPLE = (BADLY_FORMED_QUERY, NOT_FOUND, ES_ERROR)
+SECTION_ELASTICSEARCH = "fn_elasticsearch"
+
 
 LOG = logging.getLogger(__name__)
-
+class ProxiedConnection(RequestsHttpConnection):
+    """ProxiedConnection A custom class which
+    takes any proxies provided and adds them to sessions
+    """
+    def __init__(self, *args, **kwargs):
+        proxies = kwargs.pop('proxies', {})
+        super(ProxiedConnection, self).__init__(*args, **kwargs)
+        self.session.proxies = proxies
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'fn_elasticsearch_query"""
@@ -28,14 +39,15 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get("fn_elasticsearch", {})
+        self.options = opts.get(SECTION_ELASTICSEARCH, {})
+        self.requestscommon = RequestsCommon(opts=opts, function_opts=self.options)
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
         LOG.debug("Reloading event triggered, comparing app.config values")
 
-        self.options = opts.get("fn_elasticsearch", {})
+        self.options = opts.get(SECTION_ELASTICSEARCH, {})
 
     @function("fn_elasticsearch_query")
     def _fn_elasticsearch_query_function(self, event, *args, **kwargs):
@@ -44,6 +56,7 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("Starting")
             helper = ElasticSearchHelper(self.options)
+            rc = ResultPayload(SECTION_ELASTICSEARCH, **kwargs)
 
             ELASTICSEARCH_BOOL_HTTP_AUTH = str_to_bool(
                 value=helper.get_config_option("es_use_http", True))
@@ -89,15 +102,16 @@ class FunctionComponent(ResilientComponent):
                             cafile=ELASTICSEARCH_CERT)
                     # Connect to the ElasticSearch instance
                     es = Elasticsearch(ELASTICSEARCH_SCHEME.lower() + "://" + ELASTICSEARCH_URL,
-                                       ssl_context=context, http_auth=(ELASTICSEARCH_USERNAME, ELASTICSEARCH_PASSWORD))
+                                       ssl_context=context, http_auth=(ELASTICSEARCH_USERNAME, ELASTICSEARCH_PASSWORD),
+                                       connection_class=ProxiedConnection, proxies=self.requestscommon.get_proxies())
                 else:
                     # This handles for HTTP statements
                     if ELASTICSEARCH_BOOL_HTTP_AUTH:
                         es = Elasticsearch([ELASTICSEARCH_URL], verify_certs=False, cafile=ELASTICSEARCH_CERT, http_auth=(
-                            ELASTICSEARCH_USERNAME, ELASTICSEARCH_PASSWORD))
+                            ELASTICSEARCH_USERNAME, ELASTICSEARCH_PASSWORD), connection_class=ProxiedConnection, proxies=self.requestscommon.get_proxies())
                     else:
                         es = Elasticsearch(
-                            [ELASTICSEARCH_URL], verify_certs=False, cafile=ELASTICSEARCH_CERT)
+                            [ELASTICSEARCH_URL], verify_certs=False, cafile=ELASTICSEARCH_CERT, connection_class=ProxiedConnection, proxies=self.requestscommon.get_proxies())
             except Exception as e:
                 raise FunctionError(
                     "Encountered error while connecting to ElasticSearch {0}".format(e))
