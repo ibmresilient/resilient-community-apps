@@ -21,14 +21,14 @@ setup(
     name='fn_pulsedive',
     version='1.0.1',
     license='MIT',
-    author='Priya Sapra',
+    author='Resilient Labs',
     author_email='resil.labs@gmail.com',
     url='http://ibm.biz/resilientcommunity',
     description="Resilient Circuits Components to Integrate with the Pulsedive",
     long_description="This integration contains Functions to search Pulsedive for Indicators, Threats, or Feeds, query Pulsedive for information on an indicator ID, threat ID, or feed ID and query Pulsedive for information on an indicator value, threat value, or feed value.",
     install_requires=[
         'resilient_circuits>=30.0.0',
-        'resilient_lib', 'requests'
+        'resilient_lib'
     ],
     packages=find_packages(),
     include_package_data=True,
