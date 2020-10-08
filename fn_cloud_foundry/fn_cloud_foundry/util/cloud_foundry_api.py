@@ -3,6 +3,7 @@
 import requests
 import logging
 from datetime import datetime
+from resilient_lib import RequestsCommon
 
 log = logging.getLogger(__name__)
 
@@ -23,7 +24,7 @@ class IBMCloudFoundryAPI:
     APP_ACTIONS     = ["start", "stop", "restage", "delete", "update", "instances", "info"]
     INSTANCE_ACTIONS= ["delete"]
 
-    def __init__(self, base_url, authenticator):
+    def __init__(self, opts, options, base_url, authenticator):
         if base_url[-1] != "/":
             base_url += "/"
         self.base_url = base_url + self.CF_API_BASE
@@ -40,6 +41,8 @@ class IBMCloudFoundryAPI:
         self.instance_commands = {
             "delete":       self.delete_app_instance
         }
+        self.opts = opts
+        self.options = options
 
     def _add_authentication_headers(self, request):
         """
@@ -67,9 +70,11 @@ class IBMCloudFoundryAPI:
         }
         self._add_authentication_headers(oauth_authorization_headers)
 
+        rc = RequestsCommon(self.opts, self.options)
+
         result = {}
 
-        response = requests.get(self.base_url+self.CF_ALL_APPS, headers=oauth_authorization_headers)
+        response = rc.execute_call_v2('GET', self.base_url+self.CF_ALL_APPS, headers=oauth_authorization_headers)
         if response.status_code == 200:
             app_resources = response.json()["resources"]
             for resource in app_resources:
@@ -110,7 +115,9 @@ class IBMCloudFoundryAPI:
         }
         self._add_authentication_headers(oauth_authorization_headers)
 
-        response = requests.get(self.base_url + self.CF_APP_INFO.format(guid), headers=oauth_authorization_headers)
+        rc = RequestsCommon(self.opts, self.options)
+
+        response = rc.execute_call_v2('GET', self.base_url + self.CF_APP_INFO.format(guid), headers=oauth_authorization_headers)
         if response.status_code == 200:
             apps_data = response.json()
         else:
@@ -134,8 +141,10 @@ class IBMCloudFoundryAPI:
         }
         self._add_authentication_headers(oauth_authorization_headers)
 
+        rc = RequestsCommon(self.opts, self.options)
+
         app_status = {}
-        response = requests.put(self.base_url + self.CF_APP.format(app_guid), headers=oauth_authorization_headers,
+        response = rc.execute_call_v2('PUT', self.base_url + self.CF_APP.format(app_guid), headers=oauth_authorization_headers,
                                 json=values)
 
         if response.status_code == 201:  # return status code for update
@@ -178,8 +187,10 @@ class IBMCloudFoundryAPI:
         }
         self._add_authentication_headers(oauth_authorization_headers)
 
+        rc = RequestsCommon(self.opts, self.options)
+
         app_status = {}
-        response = requests.post(self.base_url + self.CF_APP_RESTAGE.format(guid), headers=oauth_authorization_headers)
+        response = rc.execute_call_v2('POST', self.base_url + self.CF_APP_RESTAGE.format(guid), headers=oauth_authorization_headers)
         if response.status_code == 201:  # return status code for update
             log.info("Successful restage of {}".format(guid))
             app_status = response.json()
@@ -206,8 +217,10 @@ class IBMCloudFoundryAPI:
         }
         self._add_authentication_headers(oauth_authorization_headers)
 
+        rc = RequestsCommon(self.opts, self.options)
+
         app_status = {}
-        response = requests.delete(self.base_url + self.CF_APP.format(guid), headers=oauth_authorization_headers)
+        response = rc.execute_call_v2('DELETE', self.base_url + self.CF_APP.format(guid), headers=oauth_authorization_headers)
         if response.status_code == 204:  # return status code for update
             log.info("Successful deletion of {}".format(guid))
             app_status["success"] = True
@@ -234,8 +247,10 @@ class IBMCloudFoundryAPI:
         }
         self._add_authentication_headers(oauth_authorization_headers)
 
+        rc = RequestsCommon(self.opts, self.options)
+
         app_status = {}
-        response = requests.post(self.base_url + self.CF_ALL_APPS, headers=oauth_authorization_headers,
+        response = rc.execute_call_v2('POST', self.base_url + self.CF_ALL_APPS, headers=oauth_authorization_headers,
                                  json=values)
         if response.status_code == 201:  # return status code for update
             log.info("Successful creation ")
@@ -331,8 +346,10 @@ class IBMCloudFoundryAPI:
         }
         self._add_authentication_headers(oauth_authorization_headers)
 
+        rc = RequestsCommon(self.opts, self.options)
+
         app_status = {}
-        response = requests.get(self.base_url + self.CF_APP_INSTANCES.format(guid), headers=oauth_authorization_headers)
+        response = rc.execute_call_v2('GET', self.base_url + self.CF_APP_INSTANCES.format(guid), headers=oauth_authorization_headers)
         if response.status_code == 200:  # return status code for update
             log.info("Got instance information for {}".format(guid))
             app_status = response.json()
@@ -360,8 +377,12 @@ class IBMCloudFoundryAPI:
             "charset": "utf-8"
         }
         self._add_authentication_headers(oauth_authorization_headers)
+
+        rc = RequestsCommon(self.opts, self.options)
+
         app_status = {}
-        response = requests.delete(self.base_url + self.CF_DEL_INSTANCE.format(guid, instance),
+
+        response = rc.execute_call_v2('DELETE', self.base_url + self.CF_DEL_INSTANCE.format(guid, instance),
                                    headers=oauth_authorization_headers)
         if response.status_code == 204:  # return status code for update
             log.info("Successful deletion of {} instance {}".format(guid, instance))

@@ -15,6 +15,7 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
+        self.opts = opts
         self.options = opts.get(CONFIG_DATA_SECTION, {})
 
         if self.options == {}:
@@ -30,7 +31,8 @@ class FunctionComponent(ResilientComponent):
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
-        self.options = opts.get("fn_cloud_foundry", {})
+        self.opts = opts
+        self.options = opts.get(CONFIG_DATA_SECTION, {})
 
     @function("fn_cloud_foundry_instance_command")
     def _fn_cloud_foundry_instance_command_function(self, event, *args, **kwargs):
@@ -61,9 +63,9 @@ class FunctionComponent(ResilientComponent):
 
             instances = [x.strip() for x in instances.split(",")]
 
-            authenticator = IBMCloudFoundryAuthenticator(self.base_url, self.options)
+            authenticator = IBMCloudFoundryAuthenticator(self.opts, self.options, self.base_url)
             yield StatusMessage("Authenticated into Cloud Foundry")
-            cf_service = IBMCloudFoundryAPI(self.base_url, authenticator)
+            cf_service = IBMCloudFoundryAPI(self.opts, self.options, self.base_url, authenticator)
             results = cf_service.run_application_instance_command(application_name, instances, action_name,
                                                                   **additional_parameters)
             log.info("Result: %s", results)
