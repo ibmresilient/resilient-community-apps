@@ -5,7 +5,11 @@
 FROM resilient/rc-data-feed:latest
 
 ARG APPLICATION=rc_data_feed_plugin_resilientfeed
-ARG RES_CIRCUITS_VERSION=35.0.203
+ARG RES_CIRCUITS_VERSION=37.2
+
+# Environment variable for any app to check if running in a container
+ARG APP_HOST_CONTAINER=1
+ENV APP_HOST_CONTAINER=${APP_HOST_CONTAINER}
 
 # update to latest packages, user 0 for root privilege
 USER 0
@@ -13,7 +17,7 @@ USER 0
 RUN pip install --upgrade pip
 
 # install resilient-circuits
-RUN pip install resilient-circuits>=${RES_CIRCUITS_VERSION}
+RUN pip install "resilient-circuits>=${RES_CIRCUITS_VERSION}"
 
 ## ---- section for changes ----
 # uncomment and replicate if additional os libraries are needed
