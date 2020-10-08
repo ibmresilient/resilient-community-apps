@@ -110,22 +110,22 @@ The following table describes the settings you need to configure in the app.conf
 
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
-| **maas360_host_url** | Yes | `` | *Enter a description of the config here.* |
-| **maas360_billing_id** | Yes | `` | *Enter a description of the config here.* |
-| **maas360_platform_id** | Yes | `` | *Enter a description of the config here.* |
-| **maas360_app_id** | Yes | `` | *Enter a description of the config here.* |
-| **maas360_app_version** | Yes | `` | *Enter a description of the config here.* |
-| **maas360_app_access_key** | Yes | `` | *Enter a description of the config here.* |
-| **maas360_username** | Yes | `` | *Enter a description of the config here.* |
-| **maas360_password** | Yes | `` | *Enter a description of the config here.* |
-| **maas360_request_timeout** | Yes | `60` | *Enter a description of the config here.* |
-| **maas360_basic_search_page_size** | Yes | `25` | *Enter a description of the config here.* |
-| **maas360_basic_search_match** | Yes | `0` | *Enter a description of the config here.* |
-| **maas360_basic_search_sort_attribute** | Yes | `lastReported` | *Enter a description of the config here.* |
-| **maas360_basic_search_sort_order** | Yes | `dsc` | *Enter a description of the config here.* |
-| **maas360_wipe_device_notify_me** | Yes | `Yes` | *Enter a description of the config here.* |
-| **maas360_wipe_device_notify_user** | Yes | `No` | *Enter a description of the config here.* |
-| **maas360_wipe_device_notify_others** | Yes | `email1, email2` | *Enter a description of the config here.* |
+| **maas360_host_url** | Yes | `https://xxxx.maas360.com` | The URL of your MaaS360 instance |
+| **maas360_billing_id** | Yes | `30000001` | The billing or account ID for your MaaS360 Account |
+| **maas360_platform_id** | Yes | `2` | The platform ID of your MaaS360 instance. Can be seen when you create an Access Key |
+| **maas360_app_id** | Yes | `30000001_QS1Uuu5` | The App ID of the Access Key. For help on managing Access Keys for your MaaS360 instance refer to www.ibm.com/support/knowledgecenter/ |
+| **maas360_app_version** | Yes | `1.0` | The App Version when creating the Access Key. *Generally `1`* |
+| **maas360_app_access_key** | Yes | `Gjxdrwyw008` | The Access Key |
+| **maas360_username** | Yes | `username` | The username used to login to the MaaS360 instance |
+| **maas360_password** | Yes | `password` | The password for the account used to login to the MaaS360 instance|
+| **maas360_request_timeout** | No | `60` | The number of seconds to timeout after making a request to MaaS360. If you are seeing read `timeout=30` error you can override the timeout value |
+| **maas360_basic_search_page_size** | Yes | `25` | Limit number of devices returned at one time. Allowed page sizes: 25, 50, 100, 200, 250. Default value: 250 |
+| **maas360_basic_search_match** | No | `0` | When set to `0` (Default) indicates Partial match for Device Name, Username, Phone Number. When set to `1` indicates Exact match. |
+| **maas360_basic_search_sort_attribute** | No | `lastReported` | Sort attribute. Possible values: `lastReported` (Default) or `installedDate` |
+| **maas360_basic_search_sort_order** | No | `dsc` | Sort Order. Possible values: `asc` or `dsc` (Default) |
+| **maas360_wipe_device_notify_me** | Yes | `Yes` | Whether to notify the administrator on successful device wipe. `yes` value enables this flag |
+| **maas360_wipe_device_notify_user** | Yes | `No` | Whether to notify the user on successful device wipe. `yes` value enables this flag. |
+| **maas360_wipe_device_notify_others** | Yes | `example1@example.com, example2@example.com` | Comma separated list of other email addresses to notify on successful device wipe |
 
 ---
 
