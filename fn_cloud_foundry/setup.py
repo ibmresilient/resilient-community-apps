@@ -32,6 +32,7 @@ setup(
             "FnCloudFoundryCreateAppFunctionComponent = fn_cloud_foundry.components.fn_cloud_foundry_create_app:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_cloud_foundry.util.config:config_section_data"],
-        "resilient.circuits.customize": ["customize = fn_cloud_foundry.util.customize:customization_data"]
+        "resilient.circuits.customize": ["customize = fn_cloud_foundry.util.customize:customization_data"],
+        "resilient.circuits.selftest": ["selftest = fn_cloud_foundry.util.selftest:selftest_function"]
     }
 )

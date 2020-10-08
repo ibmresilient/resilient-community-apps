@@ -395,6 +395,21 @@ class IBMCloudFoundryAPI:
             log.debug(response)
         return app_status
 
+    # used for selftest
+    # gets all apps available to the user
+    def get_apps(self):
+        oauth_authorization_headers = {
+            "accept": "application/json",
+            "Content-Type": "application/json",
+            "charset": "utf-8"
+        }
+        self._add_authentication_headers(oauth_authorization_headers)
+
+        rc = RequestsCommon(self.opts, self.options)
+
+        response = rc.execute_call_v2("GET", self.base_url, headers=oauth_authorization_headers)
+        return response
+
     @staticmethod
     def convert_timestamp_to_epoch_time(ts, ts_format="%Y-%m-%dT%H:%M:%SZ"):
         utc_time = datetime.strptime(ts, ts_format)
