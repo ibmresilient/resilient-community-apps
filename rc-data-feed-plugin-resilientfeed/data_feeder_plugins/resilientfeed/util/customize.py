@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""Generate the Resilient customizations required for data_feeder_plugins"""
+"""Generate the Resilient customizations required for rc-data-feed-plugin-resilientfeed"""
 
 try:
     from resilient import ImportDefinition
@@ -11,10 +11,10 @@ except ImportError:
 
 def codegen_reload_data():
     """
-    Parameters required reload codegen for the data_feeder_plugins package
+    Parameters required reload codegen for the rc-data-feed-plugin-resilientfeed package
     """
     return {
-        "package": u"data_feeder_plugins",
+        "package": u"rc-data-feed-plugin-resilientfeed",
         "message_destinations": [u"feed_data_unused", u"feed_data_resilient"],
         "functions": [u"data_feeder_sync_incidents"],
         "workflows": [u"data_feeder_sync_incidents"],
