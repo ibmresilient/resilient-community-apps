@@ -116,16 +116,3 @@ class TestResilientEvenSubscriber:
 
             assert difference == {}
 
-    def test_get_override_template_file(self):
-        temp_dir = tempfile.mkdtemp()
-        try:
-            with open(temp_dir + "/_mcafee_event_epo_threat_response.jinja", "a") as temp:
-                expected_dict = {
-                    "/mcafee/event/epo/threat/response": temp.name
-                }
-                actual_dict = get_topic_template_dict(temp_dir)
-
-                assert actual_dict == expected_dict
-        finally:
-            # Remove the temp directory created
-            shutil.rmtree(temp_dir)
