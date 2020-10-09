@@ -21,5 +21,8 @@ cf_api_apikey=
 #Enter username and password if needed for access to DockerHub for Create Application function
 cf_api_username=
 cf_api_password=
+#Optional proxy settings
+#http_proxy=
+#https_proxy=
     """
     return config_data
