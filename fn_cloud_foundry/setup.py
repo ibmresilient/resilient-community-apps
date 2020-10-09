@@ -9,6 +9,7 @@ setup(
     license='MIT',
     author='IBM Resilient',
     author_email='support@resilientsystems.com',
+    url='https://ibm.com/mysupport',
     description="Resilient Circuits Components for 'fn_cloud_foundry'",
     long_description="This Resilient function interacts with Cloud Foundry platforms to allow the a Resilient user to manage deployed applications, "
                      "their instances, and deploy new applications. Managing applications includes: starting/stopping, "
