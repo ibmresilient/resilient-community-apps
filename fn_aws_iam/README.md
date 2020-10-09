@@ -29,6 +29,9 @@
   Specify all changes in this release. Do not remove the release 
   notes of a previous release
 -->
+### v1.0.1
+- Support added for App Host.
+
 ### v1.0.0
 * Initial Release
 
@@ -107,16 +110,29 @@ The integration contains the following functions:
 
 ---
 
-## Installation
-* Download the `fn_aws_iam.zip`.
+## Installation - App Host
+All the components for running this integration in a container already exist when using the App Host app.
+* Download the app `app-fn_aws_iam-x.x.x.zip`.
+* Navigate to Administrative Settings and then the Apps tab.
+* Click the Install button and select the downloaded file: app-fn_aws_iam-x.x.x.zip.
+* Go to the Configuration tab and edit the app.config file, editing the access key values for Amazon AWS IAM and add a proxy setting if required.
+```
+[fn_aws_iam]
+aws_iam_access_key_id=<AWS_IAM_ACCESS_KEY_ID>
+aws_iam_secret_access_key=<AWS_IAM_SECRET_ACCESS_KEY>
+# Optional settings for access to AWS IAM via a proxy.
+#http_proxy=http://proxy:80
+#https_proxy=http://proxy:80
+```
+* [Optional]: Test the configuration.
+* Deploy the app.
+
+## Installation - Integration server 
+* Download the app  `app-fn_aws_iam-x.x.x.zip`.
 * Copy the `.zip` to your Integration Server and SSH into it.
-* **Unzip** the package:
+* **Unzip** the app:
   ```
-  $ unzip fn_aws_iam-x.x.x.zip
-  ```
-* **Change Directory** into the unzipped directory:
-  ```
-  $ cd fn_aws_iam-x.x.x
+  $ unzip app-fn_aws_iam-x.x.x.zip
   ```
 * **Install** the package:
   ```
