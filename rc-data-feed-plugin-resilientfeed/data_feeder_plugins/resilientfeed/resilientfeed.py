@@ -106,8 +106,9 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
 
                 # create a note for the downstream incident when created
                 if new_id and opr_type == "created" and type_name == "incident":
-                    note = "Incident created from Org {} Incident {}".format(self.resilient_source.rest_client.org_id,
-                                                                             context.inc_id)
+                    note = "Incident created from \nHost:{}\nOrg {}\nIncident {}".format(self.resilient_source.get_source_host(),
+                                                                                         self.resilient_source.rest_client.org_id,
+                                                                                         context.inc_id)
                     payload = {
                         "text": {
                             "format": "text",
