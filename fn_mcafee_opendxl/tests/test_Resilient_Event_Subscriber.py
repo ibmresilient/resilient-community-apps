@@ -12,6 +12,7 @@ import tempfile
 import shutil
 
 
+
 class ConfigClass:
     def __init__(self):
         self.ops = {
@@ -95,19 +96,18 @@ class TestResilientEvenSubscriber:
         # Need to call to be able to use when rendering a template
         add_methods_to_global()
 
-        message_file = os.getcwd()
-        message_file = message_file + "/data/message.txt"
-        expected = os.getcwd()
-        expected = expected + "/data/expected.txt"
+        TEST_PATH = os.path.dirname(os.path.abspath(__file__))
+        DATA_PATH = os.path.join(TEST_PATH, "data")
+        MESSAGE_FILE = os.path.join(DATA_PATH, "message.txt")
+        EXPECTED_FILE = os.path.join(DATA_PATH, "expected.txt")
+        INCIDENT_TEMPLATE_FILE = os.path.join(DATA_PATH, "incident_template.txt")
 
-        with open(message_file, 'r') as message, open(expected, 'r') as expected_data:
-            incident_template = os.getcwd()
-            incident_template = incident_template + "/data/incident_template.txt"
+        with open(MESSAGE_FILE, 'r') as message, open(EXPECTED_FILE, 'r') as expected_data:
 
             # Read file and create dict
             message = json.loads(message.read())
 
-            incident_data = map_values(incident_template, message)
+            incident_data = map_values(INCIDENT_TEMPLATE_FILE, message)
 
             expected_data = json.loads(expected_data.read())
             actual_data = json.loads(incident_data)
