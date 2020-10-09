@@ -116,20 +116,6 @@ class TestResilientEvenSubscriber:
 
             assert difference == {}
 
-    def test_get_template_file(self):
-        current_path = os.path.dirname(os.path.realpath(__file__))
-        default_template = join(current_path, pardir, "fn_mcafee_opendxl/data/templates/_mcafee_event_epo_threat_response.jinja2")
-
-        expected_dict = {
-            "/mcafee/event/epo/threat/response": default_template
-        }
-        actual_dict = get_topic_template_dict()
-
-        expected_dict["/mcafee/event/epo/threat/response"] = os.path.abspath(expected_dict.get("/mcafee/event/epo/threat/response"))
-        actual_dict["/mcafee/event/epo/threat/response"] = os.path.abspath(actual_dict.get("/mcafee/event/epo/threat/response"))
-
-        assert actual_dict == expected_dict
-
     def test_get_override_template_file(self):
         temp_dir = tempfile.mkdtemp()
         try:
