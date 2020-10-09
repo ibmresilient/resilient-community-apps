@@ -31,9 +31,7 @@ class FunctionComponent(ResilientComponent):
         super(FunctionComponent, self).__init__(opts)
         try:
             self.opts = opts
-            self.options = opts.get(PACKAGE_NAME, {})
-
-            self.config = self.options.get(self.config_file)
+            self.config = opts.get(PACKAGE_NAME).get(self.config_file)
             if self.config is None:
                 log.error(self.config_file + " is not set. You must set this path to run this function")
                 raise ValueError(self.config_file + " is not set. You must set this path to run this function")

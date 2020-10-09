@@ -53,6 +53,7 @@ class TestMcafeePublishToDxl:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
+    @pytest.mark.livetest
     @pytest.mark.parametrize("mcafee_topic_name, mcafee_dxl_payload, mcafee_publish_method, "
                              "mcafee_return_response, expected_results", [
         ("/mcafee/service/tie/file/reputation/set", "{\"hashes\": [{\"type\": \"md5\", \"value\": "
