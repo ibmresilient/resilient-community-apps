@@ -388,7 +388,7 @@ class Resilient(object):
             else:
                 new_type_id = response['id']
         except Exception as err:
-            LOG.warning("Unable to create %s, Incident %s, %s", mapped_type_name, sync_inc_id, err)
+            LOG.error("Unable to create %s, Incident %s, %s", mapped_type_name, sync_inc_id, err)
             LOG.debug(uri)
             LOG.debug(payload)
             raise IntegrationError(str(err))
