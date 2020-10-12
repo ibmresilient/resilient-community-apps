@@ -290,6 +290,8 @@ See example workflow for configuration of function pre-processor and post-proces
 
  ![screenshot: fn-jira-open-issue ](./doc/screenshots/fn-jira-open-issue.png)
 
+**NOTE:** Some fields in Jira are required to open a new Issue. Ensure you add those fields in the pre-process script to `jira_fields` when creating a new Jira Issue
+
 <details><summary>Inputs:</summary>
 <p>
 
