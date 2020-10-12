@@ -47,5 +47,5 @@ reload=False
 # set to true if ElasticSearch errors occur during reload=True
 reload_query_api_method=False
 # feed_data is the default message destination that will be listened to
-queue=feed_data
+queue=feed_data_resilient
 """
