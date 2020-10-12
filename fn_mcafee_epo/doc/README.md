@@ -12,7 +12,7 @@
   ![screenshot: screenshot_1](./screenshots/screenshot_1.png)
 -->
 
-# **User Guide:** fn_mcafee_epo_v1.0.2
+# **User Guide:** fn_mcafee_epo_v1.0.3
 
 ## Table of Contents
 - [Configuration](#configuration)
@@ -30,9 +30,11 @@
   Specify all changes in this release. Do not remove the release 
   notes of a previous release
 -->
-### v1.0.2
+### v1.0.3
 * New functions
 * Enhanced rules and workflows
+### v1.0.2
+App Host support
 ### v1.0.1
 * Bug fixes
 ### v1.0.0
