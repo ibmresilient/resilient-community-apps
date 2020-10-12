@@ -19,7 +19,7 @@ def snake_to_camel(word):
 
 setup(
     name='fn_mcafee_epo',
-    version='1.0.2',
+    version='1.0.3',
     license='MIT',
     author='IBM Resilient',
     author_email='support@resilientsystems.com',
