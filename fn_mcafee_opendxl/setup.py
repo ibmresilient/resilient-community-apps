@@ -3,11 +3,9 @@
 
 from setuptools import setup, find_packages
 
-PUBLISH_VERSION = "1.2.0"
-
 setup(
     name='fn_mcafee_opendxl',
-    version=PUBLISH_VERSION,
+    version='1.2.0',
     license='MIT',
     author='IBM Resilient',
     url='https://ibm.com/mysupport',
