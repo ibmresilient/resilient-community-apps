@@ -388,7 +388,12 @@ class Resilient(object):
             else:
                 new_type_id = response['id']
         except Exception as err:
-            LOG.error("Unable to create %s, Incident %s, %s", mapped_type_name, sync_inc_id, err)
+            extra_msg = None
+            if "Invalid field name" in str(err):
+                extra_msg = "Make sure all custom fields are imported into the target organization."
+                       
+            LOG.error("Unable to create %s, Incident %s, %s. %s", mapped_type_name, sync_inc_id, 
+                      err, extra_msg)
             LOG.debug(uri)
             LOG.debug(payload)
             raise IntegrationError(str(err))
