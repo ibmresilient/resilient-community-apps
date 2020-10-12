@@ -56,8 +56,8 @@ Note: Perform an export and reimport of these customizations into the target Res
   [feeds]
   feed_names=resilient_feed
   reload=True
-  # feed_data is the default queue that will be listened to
-  queue=feed_data
+  # feed_data_resilient is the default queue that will be listened to
+  queue=feed_data_resilient
   
   [resilient_feed]
   class=ResilientFeed
@@ -101,9 +101,7 @@ The following configuration items are supported:
 | postgresql_connect | Driver={PostresSQL Driver};Server=127.0.0.1; DB=yourDB;Port=5432; connectTimeout=0 | connection string when using PostgreSQL. Comment out otherwise. |
 | postgresql_uid | postgeSQL_Acct| Your PostgreSQL account |
 | postgresql_pwd | postgeSQL_Acct | Your PostgreSQL password |
-| matching_incident_fields | plan_status == 'C'; custom_field > 5 | Optional semicolon separated list of comparison tuples to determine the criteria for synchronizing an incident and it's tasks, artifacts, etc. Use the syntax: \<field\> \<operator\> \<value\>. Operator may be one of: ~, ==, >=, <=, <, >, in, 'not in', is, and 'is not'. 
-Use `~` for `in` when searching richtext fields.
-`None` can be used for \<value\>. Make sure to separate each \<field\> \<operator\> \<value\> with spaces. |
+| matching_incident_fields | plan_status == 'C'; custom_field > 5 | Optional semicolon separated list of comparison tuples to determine the criteria for synchronizing an incident and it's tasks, artifacts, etc. Use the syntax: \<field\> \<operator\> \<value\>. Operator may be one of: ~, ==, >=, <=, <, >, in, 'not in', is, and 'is not'. Use `~` for `in` when searching richtext fields. `None` can be used for \<value\>. Make sure to separate each \<field\> \<operator\> \<value\> with spaces. |
 | matching_operator | any\|all | When using matching_incident_fields, either `all` fields or `any` field needs to match for incident synchronization. Default: all | 
 | exclude_incident_fields	| severity_code; date_started; custom_field | Optional semicolon separated list of fields and field sections to exclude when synchronizing an incident. | 
 | sync_reference_fields | true\|false | Specify `True` to add information to the target incident to maintain the original org id incident id, sync host and incident create date. Fields are `df_org_id`, `df_inc_id`, `df_host` and `df_create_date`, respectively |
@@ -115,7 +113,7 @@ There is presently an issue with v37.0 restricting the live synchronization of a
 * The target Resilient platform must be at the same version or greater than the source Resilient platform.
 * The target Resilient organization must have the same set of custom fields, incident types, playbooks (tasks and phases) in order to synchronize incident data. Use the export/import functionality under `Administrator Settings`.
 * The target Resilient organization should have the same users and groups defined. For any user or group not found, incident and task ownership as well as member lists will be left empty. 
-* To synchronize datatables in real time, create rules specifying the `feed_data` message destination in order to changes.
+* To synchronize datatables in real time, create rules specifying the `feed_data_resilient` message destination in order to changes.
 
 ## Setup Steps
 1. Ensure Resilient version requirements are met for both the source and destination instances.
@@ -123,7 +121,14 @@ There is presently an issue with v37.0 restricting the live synchronization of a
 3. Manually recreate the users and groups needed in the target Resilient organization.
 4. Configure the app.config settings with the settings for the target Resilient organization and, optionally, the criteria for the types of incidents to synchronize and fields to exclude.
 5. Run `resilient-circuits run` to confirm connectivity to both instances of Resilient (with `reload=False`).
-6. The best way to test is to set `reload=False` under `[feeds]` in your app.config file, and in the source Resilient organization, run the `Data Feeder: Sync Incidents` rule to synchronize a small number of incidents.
+6. The best way to test is to set `reload=False` under `[feeds]` in your app.config file, and in the source Resilient organization, run the `Data Feeder: Sync Incidents` rule to synchronize a small number of incidents. Change the message destination of the `Data Feeder: Sync Incidents` function to `feed_data_resilient` as it may be used by another Data Feeder plugin.
+
+![Changing Message Destination](snapshots/sync_incidents_msg_destination.png "Changing Message Destination")
+
+7. If using other Data Feeder plugins (ex. odbcfeed), change the Data Feeder rules to include the `feed_data_resilient` message destination.
+
+![Adding Message Destination](snapshots/rule_msg_destinations.png "Adding Message Destination")
+
 
 ## Considerations
 * If real-time synchronization remains in place, changes in the source Resilient data will overwrite any changes made in the target Resilient organization data. 
