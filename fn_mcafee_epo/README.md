@@ -29,6 +29,10 @@
   Specify all changes in this release. Do not remove the release 
   notes of a previous release
 -->
+### v1.0.3
+Added functions: Find systems, Get system info, remove tags
+### v1.0.2
+* AppHost support
 ### v1.0.1
 * New functions
 * Enhanced rules and workflows
