@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
+# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 """Function implementation"""
 
 import logging
@@ -27,7 +28,7 @@ class FunctionComponent(ResilientComponent):
 
     @function("mcafee_epo_list_tags")
     def _mcafee_epo_list_tags_function(self, event, *args, **kwargs):
-        """Function: None"""
+        """Function: list all tags defined in ePO"""
         try:
             yield StatusMessage("Starting")
 
