@@ -125,7 +125,7 @@ There is presently an issue with v37.0 restricting the live synchronization of a
 
 ![Changing Message Destination](snapshots/sync_incidents_msg_destination.png "Changing Message Destination")
 
-7. If using other Data Feeder plugins (ex. odbcfeed), change the Data Feeder rules to include the `feed_data_resilient` message destination.
+7. If using other Data Feeder plugins (ex. odbcfeed), change the Data Feeder rules to include the `feed_data_resilient` message destination. Restart resilient-circuits in order for the message destination change to take effect.
 
 ![Adding Message Destination](snapshots/rule_msg_destinations.png "Adding Message Destination")
 
