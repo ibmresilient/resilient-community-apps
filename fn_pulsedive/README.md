@@ -29,6 +29,8 @@
   Specify all changes in this release. Do not remove the release 
   notes of a previous release
 -->
+### v1.0.1
+* App Host support
 ### v1.0.0
 * Initial Release
 
@@ -174,4 +176,4 @@ timeout=60
 ## Support
 | Name | Version | Author | Support URL |
 | ---- | ------- | ------ | ----------- |
-| fn_pulsedive | 1.0.0 | Priya Sapra | http://ibm.biz/resilientcommunity |
+| fn_pulsedive | 1.0.1 | Resilient Labs | http://ibm.biz/resilientcommunity |

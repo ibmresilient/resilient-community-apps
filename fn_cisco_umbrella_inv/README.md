@@ -7,10 +7,13 @@ Circuits integration framework.
   Specify all changes in this release. Do not remove the release 
   notes of a previous release
 -->
-### v1.0.1 - August 2019
-* Configuration settings checking less restrictive.
-### v1.0.0 - June 2018
-* Original release.
+| Version | Date | Notes |
+| ------: | ---: | ----: |
+| v1.0.3 | September 2020 | Added proxy support |
+| v1.0.2 | May 2020 | App Host support |
+| v1.0.1 | August 2019 | Configuration settings checking less restrictive |
+| v1.0.0 | June 2018 | Initial Release |
+
 ## Prerequisites:
 ```
 resilient version 30 or later
@@ -36,6 +39,9 @@ Config values example:
 base_url=https://investigate.api.umbrella.com/
 api_token=abcd1234-a123-123a-123a-123456abcdef
 results_limit=200
+# uncomment to specify proxy settings
+#https_proxy=https://your.proxy.com
+#http_proxy=http://your.proxy.com
 ```
 
 Run with: `resilient-circuits run`.

@@ -12,7 +12,7 @@
   ![screenshot: screenshot_1](./screenshots/screenshot_1.png)
 -->
 
-# **User Guide:** fn_proofpoint_tap_v1.0.0
+# **User Guide:** fn_proofpoint_tap_v1.0.3
 
 ## Table of Contents
 - [Key Features](#key-features)

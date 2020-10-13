@@ -36,10 +36,10 @@ class TestAttachmentZipExtract:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
-    @pytest.mark.parametrize("incident_id, attachment_id, file_path, zipfile_password, expected_result", [
-        (1234, 201, "placeholder.txt", None, {"value": "xyz"})
+    @pytest.mark.parametrize("incident_id, attachment_id, file_path, zipfile_password", [
+        (1234, 201, "placeholder.txt", None)
     ])
-    def test_success(self, circuits_app, incident_id, attachment_id, file_path, zipfile_password, expected_result):
+    def test_success(self, circuits_app, incident_id, attachment_id, file_path, zipfile_password):
         """ Test calling with sample values for the parameters """
         function_params = { 
             "incident_id": incident_id,
@@ -48,4 +48,4 @@ class TestAttachmentZipExtract:
             "zipfile_password": zipfile_password
         }
         result = call_attachment_zip_extract_function(circuits_app, function_params)
-        #assert(result == expected_result)
+        assert(result['content'] == AttachmentMock.test_data_b64(file_path))

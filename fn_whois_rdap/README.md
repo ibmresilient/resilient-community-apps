@@ -2,10 +2,10 @@
 
 - [fn-whois-rdap Functions for IBM Resilient](#fn-whois-rdap-functions-for-ibm-resilient)
   - [Release Notes](#release-notes)
-    - [v1.0.0](#v100)
   - [Overview](#overview)
   - [Requirements](#requirements)
-  - [Installation](#installation)
+  - [App Host Installation](#app-host-installation)
+  - [Integration Server Installation](#integration-server-installation)
   - [Uninstall](#uninstall)
   - [Troubleshooting](#troubleshooting)
     - [Resilient Action Status](#resilient-action-status)
@@ -18,8 +18,15 @@
 
 ## Release Notes
 
-### v1.0.0
-* Initial Release
+### History
+
+| Version| Comment |
+| ------- | ------ |
+| 1.0.3 | Updated examples, proxy support added |
+| 1.0.2 | bug fixes |
+| 1.0.1 | Support for App Host |
+| 1.0.0 | Initial release |
+ 
 
 ---
 
@@ -35,22 +42,27 @@ This integration retrieves registry information (via legacy WHOIS or new RDAP pr
 
 ## Requirements
 
-* IBM Resilient >= `v32.0.4502`
-* An Integration Server running `resilient_circuits>=32.0.0`
-  * To setup an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
+* IBM Resilient >= `v35.0.5468`
+* An App Host environment or an Integration Server running `resilient_circuits>=32.0.0`
+  * To setup an Integration Server see [the Integration Server setup documentation](https://www.ibm.com/support/knowledgecenter/SSBRUQ_37.0.0/doc/container_apps.html)
 
 ---
+## App Host Installation
+All the components for running Whois in a container already exist when using the App Host app. Once installed, review the app.config file in the Customizations tab. 
+```
+[fn_whois_rdap]
+# uncomment to include proxy support
+#http_proxy=https://some_proxy.com
+#https_proxy=http://some_proxy.com
+```
 
-## Installation
-* Download the `fn_whois_rdap.zip`.
+## Integration Server Installation
+
+* Download the `app-fn_whois_rdap-x.x.x.zip`.
 * Copy the `.zip` to your Integration Server and SSH into it.
 * **Unzip** the package:
   ```
-  $ unzip fn_whois_rdap-x.x.x.zip
-  ```
-* **Change Directory** into the unzipped directory:
-  ```
-  $ cd fn_whois_rdap-x.x.x
+  $ unzip app-fn_whois_rdap-x.x.x.zip
   ```
 * **Install** the package:
   ```
@@ -64,7 +76,6 @@ This integration retrieves registry information (via legacy WHOIS or new RDAP pr
   ```
   $ resilient-circuits run
   ```
-
 
 ---
 
@@ -104,6 +115,4 @@ There are several ways to verify the successful operation of a function.
 ---
 
 ## Support
-| Name | Version | Author | Support URL |
-| ---- | ------- | ------ | ----------- |
-| fn_whois_rdap | 1.0.0 | Resilient Labs | https://github.com/ibmresilient/resilient-community-apps |
+View the [community forums](https://github.com/ibmresilient/resilient-community-apps) for help with this app.

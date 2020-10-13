@@ -5,11 +5,19 @@
 
 import logging
 import json
-import requests
+import sys
 from resilient_circuits import ResilientComponent, function, handler, \
     StatusMessage, FunctionResult, FunctionError
 from fn_xforce.util.helper import XForceHelper
+from resilient_lib import RequestsCommon, ResultPayload, validate_fields
 
+if sys.version_info.major >= 3:
+    from urllib.parse import quote as url_encode  # Python 3+
+else:
+    from urllib import quote as url_encode  # Python 2.X
+
+
+CONFIG_DATA_SECTION = 'fn_xforce'
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function
@@ -18,12 +26,14 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get("fn_xforce", {})
+        self.opts = opts
+        self.options = opts.get(CONFIG_DATA_SECTION, {})
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
-        self.options = opts.get("fn_xforce", {})
+        self.opts = opts
+        self.options = opts.get(CONFIG_DATA_SECTION, {})
 
     @function("xforce_get_collection_by_id")
     def _xforce_get_collection_by_id_function(self, event, *args, **kwargs):
@@ -32,74 +42,61 @@ class FunctionComponent(ResilientComponent):
         try:
 
             yield StatusMessage("Starting")
-            helper = XForceHelper(self.options)
+            helper = XForceHelper(self.opts, self.options)
             # Get Xforce params
             HTTPS_PROXY, HTTP_PROXY, XFORCE_APIKEY, XFORCE_BASEURL, XFORCE_PASSWORD = helper.setup_config()
 
             # Get the function parameters:
+            validate_fields("xforce_collection_id", kwargs)
             xforce_collection_id = kwargs.get("xforce_collection_id")  # text
 
             log = logging.getLogger(__name__)
             log.info("xforce_collection_id: %s", xforce_collection_id)
+            log.info("X-Force Proxies: HTTP %s and HTTPS %s", HTTP_PROXY, HTTPS_PROXY)
 
-            if xforce_collection_id is None:
-                raise ValueError("No Query provided for XForce search.")
-
-            if isinstance(str(xforce_collection_id),str) == False:
-                raise ValueError("Input must be a string.")
-
-            # Setup proxies parameter if exist in appconfig file
+            # Setup proxies parameter if exists in app.config file
             proxies = {}
-
+            # returns None if len(proxies) == 0
             proxies = helper.setup_proxies(proxies, HTTP_PROXY, HTTPS_PROXY)
 
             try:
                 case_files = {}
-                # Create the session and set the proxies.
-                with requests.Session() as session:
-                    session.proxies = proxies
+                # Initialize RequestsCommon with configs
+                rc = RequestsCommon(self.opts, self.options)
 
-                    # Prepare request string
-                    request_string = '{}/casefiles/{}'.format(XFORCE_BASEURL, str(xforce_collection_id))
-
-                    # Make the HTTP request through the session.
-                    res = session.get(request_string, auth=(XFORCE_APIKEY, XFORCE_PASSWORD))
-
-                    # Is the status code in the 2XX family?
-                    if int(res.status_code / 100) == 2:
-                        case_files = res.json()
-                    elif res.status_code == 401:
-                        raise FunctionError("401 Status code returned. Retry function with updated credentials")
-                    elif res.status_code == 403:
-                        raise FunctionError("403 Forbidden response received by API")
-
-                    else:
-                        yield StatusMessage("Got no results or unexpected result from request.")
+                # Prepare request string
+                id = url_encode(str(xforce_collection_id))
+                request_string = '{}/casefiles/{}'.format(XFORCE_BASEURL, id)
+                log.info("Making GET request to the url: %s", request_string)
+                # Make the HTTP request through resilient_lib.
+                res = rc.execute_call_v2(
+                    "get", request_string, proxies=proxies, auth=(XFORCE_APIKEY, XFORCE_PASSWORD), callback=helper.handle_case_response)
+                # Is the status code in the 2XX family?
+                # Save returned case files
+                if int(res.status_code / 100) == 2:
+                    case_files = res.json()
             except Exception:
                 raise ValueError("Encountered issue when contacting XForce API")
-            # Prepare results object
+
+            # initialize ResultPayload object
+            rp = ResultPayload(CONFIG_DATA_SECTION, **kwargs)
+            # set keys and values from response
             if 'contents' in case_files:
-                results = {
-                    "success": True,
-                    # We json.dump for python 2&3 compat
-                    "plaintext": json.dumps(case_files["contents"]["plainText"],default=lambda o: o.__dict__,
-                                            sort_keys=True, indent=4),
-                    "wiki": case_files["contents"]["wiki"],
-                    "created": case_files["created"],
-                    "title": case_files["title"],
-                    "tags": case_files["tags"]
-                }
-            # If no 'contents' set success to false for other functions
+                result = rp.done(True, res.json())
+                # backwards compatibility with original results keys
+                result["plaintext"] = json.dumps(case_files["contents"]["plainText"], default=lambda o: o.__dict__,
+                                                sort_keys=True, indent=4)
+                result["wiki"] = case_files["contents"]["wiki"]
+                result["created"] = case_files["created"]
+                result["title"] = case_files["title"]
+                result["tags"] = case_files["tags"]
+
+            # If no 'contents' set success to true and notify that no results match the queried ID
             else:
-                results = {
-                    "success": False
-                }
+                content = "No case files match ID: {}".format(xforce_collection_id)
+                result = rp.done(True, content)
+
             # Produce a FunctionResult with the results
-            yield FunctionResult(results)
+            yield FunctionResult(result)
         except Exception:
             yield FunctionError()
-
-
-
-
-

@@ -36,11 +36,11 @@ class TestAttachmentToBase64:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
-    @pytest.mark.parametrize("incident_id, task_id, attachment_id, expected_result", [
-        (123, None, 1, {"value": "xyz"}),
-        (123, None, 2, {"value": "xyz"})
+    @pytest.mark.parametrize("incident_id, task_id, attachment_id", [
+        (123, None, 1),
+        (123, None, 2)
     ])
-    def test_success(self, circuits_app, incident_id, task_id, attachment_id, expected_result):
+    def test_success(self, circuits_app, incident_id, task_id, attachment_id):
         """ Test calling with sample values for the parameters """
         function_params = { 
             "incident_id": incident_id,
@@ -48,4 +48,4 @@ class TestAttachmentToBase64:
             "attachment_id": attachment_id
         }
         result = call_attachment_to_base64_function(circuits_app, function_params)
-        #assert(result == expected_result)
+        assert(result['content'] == AttachmentMock.test_data_b64_by_id(attachment_id))

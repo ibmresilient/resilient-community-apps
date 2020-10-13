@@ -7,6 +7,7 @@ Usage: resilient-circuits selftest -l fn_cisco_umbrella_inv
 
 import logging
 from fn_cisco_umbrella_inv.util.resilient_inv import ResilientInv
+from fn_cisco_umbrella_inv.util.helpers import get_proxies
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
@@ -20,9 +21,10 @@ def selftest_function(opts):
     options = opts.get("fn_cisco_umbrella_inv", {})
     api_token = options.get("api_token")
     base_url = options.get("base_url")
+    proxies = get_proxies(opts, options)
     try:
 
-        rinv = ResilientInv(api_token, base_url)
+        rinv = ResilientInv(api_token, base_url, proxies=proxies)
 
         r = rinv.test_connectivity()
 

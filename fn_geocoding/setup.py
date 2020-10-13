@@ -5,16 +5,20 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_geocoding',
-    version='1.0.1',
+    version='1.0.2',
     license='MIT',
     author='Resilient Labs',
     author_email='resil.labs@gmail.com',
     url='http://ibm.biz/resilientcommunity',
     description="Resilient Circuits Components for 'fn_geocoding'",
-    long_description="Resilient Circuits Components for 'fn_geocoding' implementation of Google Geocoding capabilities. Specifically,"
-                     "get an address from latitude/longitude coordinates and get latitude/longitude coordinates from an address.",
+    long_description="""This package is an implementation of Google's Geocoding API set.
+Two function types are available: address and latlng.
+
+For an address, return coordinate information.
+For coordinates, return an address.""",
     install_requires=[
-        'resilient_circuits>=30.0.0'
+        'resilient_circuits>=32.0.0',
+        'resilient-lib>=32.0.0'
     ],
     packages=find_packages(),
     include_package_data=True,

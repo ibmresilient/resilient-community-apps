@@ -1,4 +1,4 @@
-# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 """
 The following is the full list of responses for the info API.
 To avoid added queries that would increase latency we imbedding these responses in codebase.

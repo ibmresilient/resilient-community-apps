@@ -15,7 +15,7 @@ from datetime import datetime
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_cisco_umbrella_inv.util.resilient_inv import ResilientInv
-from fn_cisco_umbrella_inv.util.helpers import validate_opts, validate_params, process_params, is_none
+from fn_cisco_umbrella_inv.util.helpers import validate_opts, validate_params, process_params, is_none, get_proxies
 
 
 class FunctionComponent(ResilientComponent):
@@ -66,11 +66,13 @@ class FunctionComponent(ResilientComponent):
         super(FunctionComponent, self).__init__(opts)
         self.options = opts.get("fn_cisco_umbrella_inv", {})
         validate_opts(self)
+        self.proxies = get_proxies(opts, self.options)
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
         self.options = opts.get("fn_cisco_umbrella_inv", {})
+        self.proxies = get_proxies(opts, self.options)
 
     @function("umbrella_domain_status_and_category")
     def _umbrella_domain_status_and_category_function(self, event, *args, **kwargs):
@@ -119,7 +121,7 @@ class FunctionComponent(ResilientComponent):
 
             api_token = self.options.get("api_token")
             base_url = self.options.get("base_url")
-            rinv = ResilientInv(api_token, base_url)
+            rinv = ResilientInv(api_token, base_url, proxies=self.proxies)
 
             yield StatusMessage("Running Cisco Investigate query...")
             if (umbinv_status_endpoint == "categories"):

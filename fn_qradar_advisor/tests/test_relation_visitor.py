@@ -5,7 +5,7 @@
 #
 # Test file for relation_visitor.py
 #
-from fn_qradar_advisor.lib.stix_tree import RelationVisitor
+from fn_qradar_advisor.lib.relation_visitor import RelationVisitor
 from fn_qradar_advisor.lib.tree_node import TreeNode
 from fn_qradar_advisor.lib.stix_tree import MultiRootTree
 

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corporation 2010, 2019. All Rights Reserved.
+# (c) Copyright IBM Corporation 2010, 2020. All Rights Reserved.
 
 """Generate a default configuration-file section for fn_urlhaus"""
 

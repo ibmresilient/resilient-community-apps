@@ -1,4 +1,4 @@
-# (c) Copyright IBM Corp. 2019. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation
@@ -30,7 +30,7 @@ def selftest_function(opts):
         LOG.info("Trying to connect to %s", host)
 
         SplunkClient.connect(host, port, username, password,
-                             verify=True
+                             verify=False
                              )
 
         return {"state": "success"}

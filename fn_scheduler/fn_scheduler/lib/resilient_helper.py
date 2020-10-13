@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 # (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
+from resilient_lib import validate_fields
+from fn_scheduler.components import SECTION_SCHEDULER
+
 
 def get_incident(rest_client, incident_id):
     """
@@ -98,3 +101,14 @@ def lookup_object_type(rest_client, type_id):
             return "table_data"
 
     raise ValueError("Rule type not supported")
+
+def validate_app_config(options):
+    """
+    ensure app.config settings are in place
+    :param options:
+    :return: True if success, otherwise ValueError
+    """
+    validate_fields(["thread_max", "timezone"], options)
+    if not options.get("db_url", options.get("datastore_dir", False)):
+        raise ValueError("Specify either [{}] db_url or datastore_dir".format(SECTION_SCHEDULER))
+    return True

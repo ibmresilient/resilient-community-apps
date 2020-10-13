@@ -34,11 +34,11 @@ edit_all_incidents_fields
 #
 ## users and groups permissions
 #create_group
-#read_group
+read_group
 #edit_group
 #create_users
 #edit_users
-#read_users
+read_users
 #
 ## workflow permissions - needed when using workflow_id
 #read_workflow

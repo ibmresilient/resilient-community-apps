@@ -4,12 +4,14 @@
 
 """Function implementation"""
 
+import datetime
 import logging
+import os
 import tempfile
 import zipfile
-import os
-import datetime
+from fn_utilities.util.utils_common import b_to_s
 from resilient_circuits import ResilientComponent, function, StatusMessage, FunctionResult, FunctionError
+from resilient_lib import get_file_attachment
 
 
 def epoch_millis(zipdate):
@@ -42,16 +44,9 @@ class FunctionComponent(ResilientComponent):
                 raise FunctionError("Error: attachment_id must be specified.")
 
             yield StatusMessage("Reading attachment...")
-            if task_id:
-                metadata_uri = "/tasks/{}/attachments/{}".format(task_id, attachment_id)
-                data_uri = "/tasks/{}/attachments/{}/contents".format(task_id, attachment_id)
-            else:
-                metadata_uri = "/incidents/{}/attachments/{}".format(incident_id, attachment_id)
-                data_uri = "/incidents/{}/attachments/{}/contents".format(incident_id, attachment_id)
 
             client = self.rest_client()
-            metadata = client.get(metadata_uri)
-            data = client.get_content(data_uri)
+            data = get_file_attachment(client, incident_id, task_id=task_id, attachment_id=attachment_id)
 
             results = {}
             with tempfile.NamedTemporaryFile(delete=False) as temp_file:
@@ -61,11 +56,12 @@ class FunctionComponent(ResilientComponent):
                     # Examine with zip
                     zfile = zipfile.ZipFile(temp_file.name, "r")
                     results["namelist"] = zfile.namelist()
+
                     # Don't include zinfo.extra since it's not a string
                     results["infolist"] = [{"filename": zinfo.filename,
                                             "date_time": epoch_millis(zinfo.date_time),
                                             "compress_type": zinfo.compress_type,
-                                            "comment": zinfo.comment,
+                                            "comment": b_to_s(zinfo.comment),
                                             "create_system": zinfo.create_system,
                                             "create_version": zinfo.create_version,
                                             "extract_version": zinfo.extract_version,

@@ -35,6 +35,7 @@ class TestFnVmraySandboxAnalyzer:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
+    @pytest.mark.livetest
     @pytest.mark.parametrize("incident_id, artifact_id, attachment_id, analysis_report_status, expected_results", [
         (123, 123, 123, True, {"value": "xyz"}),
         (123, 123, 123, True, {"value": "xyz"})

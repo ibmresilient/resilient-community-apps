@@ -17,5 +17,8 @@ verify_cert=
 # Cyber Adversary Framwork Mapping Application
 qradar_cafm_token=
 qradar_cafm_app_id=
+# Settings for access to Qradar Advisor via a proxy
+#http_proxy=http://proxy:80
+#https_proxy=https://proxy:80
 """
     return config_data

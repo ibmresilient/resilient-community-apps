@@ -29,9 +29,11 @@ if results.success:
   # The message was deleted, so update "status" column in data table.
   text = u"""<p style= "color:{color}">{status} </p>""".format(color="red", status="Deleted")
   row['exo_dt_status'] = helper.createRichText(text)
+  row['exo_dt_web_link'] = ""
 elif results.content["error"] is not None: 
   # There is an "item not found" error mostly likely here
   row['exo_dt_status'] = helper.createRichText(results.content["error"]["code"])
+  row['exo_dt_web_link'] = ""
 ```
 
 ---

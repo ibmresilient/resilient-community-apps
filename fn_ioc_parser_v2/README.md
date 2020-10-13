@@ -15,10 +15,8 @@
 # IOC Parser Function v2 for IBM Resilient
 
 - [Release Notes](#release-notes)
-- [Overview](#overview)
-- [Requirements](#requirements)
-- [Installation](#installation)
-- [Uninstall](#uninstall)
+- [App Host Setup](#app-host-setup)
+- [Integration Server Setup](#integration-server-setup)
 - [Troubleshooting](#troubleshooting)
 - [Support](#support)
 
@@ -29,8 +27,13 @@
   Specify all changes in this release. Do not remove the release 
   notes of a previous release
 -->
-### v1.0.0
-* Initial Release
+
+### History
+| Version| Comment |
+| ------- | ------ |
+| 1.0.2 | Updated Rules and Workflows |
+| 1.0.1 | Support for App Host, proxy support added |
+| 1.0.0 | Initial release
 
 ---
 
@@ -39,34 +42,38 @@
   Provide a high-level description of the function itself and its remote software or application.
   The text below is parsed from the "description" and "long_description" attributes in the setup.py file
 -->
-**These functions extract Indicators of Compromise (IOCs) from Resilient attachments and files**
+**This function extracts Indicators of Compromise (IOCs) from Resilient attachments and files**
 
  ![screenshot: main](./doc/screenshots/main.png)
 
 Uses the IOCParser Python Library to extract IOCs from Resilient Attachments and Artifacts. All unique IOCs that are found are added to the Resilient Incident as an Artifact
 
 ---
+## App Host Setup
+All the components for running IOC_Parser_v2 in a container already exist when using the App Host app. 
+To install, 
+* navigate to Administrative Settings and then the Apps tab. 
+* Click the `Install` button and select the downloaded file: app-fn_ioc_parser_v2-x.x.x.zip. 
+* No additional changes are needed to the app.config file in the Configuration section of the App. 
 
-## Requirements
+## Integration Server Setup
+
+### Requirements
 <!--
   List any Requirements 
 -->
-* Resilient platform >= `v31.0.4254`
+* Resilient platform >= `v35.2.32`
 * An Integration Server running `resilient_circuits>=30.0.0`
   * To set up an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
 
 ---
 
-## Installation
-* Download the `fn_ioc_parser_v2.zip`.
+### Installation
+* Download the `app-fn_ioc_parser_v2-x.x.x.zip`.
 * Copy the `.zip` to your Integration Server and SSH into it.
 * **Unzip** the package:
   ```
-  $ unzip fn_ioc_parser_v2-x.x.x.zip
-  ```
-* **Change Directory** into the unzipped directory:
-  ```
-  $ cd fn_ioc_parser_v2-x.x.x
+  $ unzip app-fn_ioc_parser_v2-x.x.x.zip
   ```
 * **Install** the package:
   ```
@@ -85,10 +92,9 @@ Uses the IOCParser Python Library to extract IOCs from Resilient Attachments and
   $ resilient-circuits run
   ```
 
-
 ---
 
-## Uninstall
+### Uninstall
 * SSH into your Integration Server.
 * **Uninstall** the package:
   ```
@@ -137,6 +143,6 @@ There are several ways to verify the successful operation of a function.
 -->
 
 ## Support
-| Name | Version | Author | Support URL |
-| ---- | ------- | ------ | ----------- |
-| fn_ioc_parser_v2 | 1.0.0 | Resilient Labs | http://ibm.biz/resilientcommunity |
+| Name | Author | Support URL |
+| ---- | ------ | ----------- |
+| fn_ioc_parser_v2 | Resilient Labs | http://ibm.biz/resilientcommunity |

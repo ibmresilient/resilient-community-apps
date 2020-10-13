@@ -1,14 +1,14 @@
-# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 
 """Function implementation"""
 
 import logging
-import requests
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_mxtoolbox.lib.resilient_common import validate_fields
+from resilient_lib import validate_fields, RequestsCommon
 
+CONFIG_DATA_SECTION = 'fn_mxtoolbox'
 HEADERS = {'content-type': 'application/json'}
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'fn_mxtoolbox"""
@@ -16,12 +16,12 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get("fn_mxtoolbox", {})
+        self.options = opts.get(CONFIG_DATA_SECTION, {})
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
-        self.options = opts.get("fn_mxtoolbox", {})
+        self.options = opts.get(CONFIG_DATA_SECTION, {})
         self._init()
 
     def _init(self):
@@ -32,6 +32,7 @@ class FunctionComponent(ResilientComponent):
     def _fn_mxtoolbox_function(self, event, *args, **kwargs):
         """Function allowing MxToolbox customers to query the status of their monitors and run lookups (blacklist, smtp, mx, etc.)"""
         try:
+
             # Get the function parameters:
             mx_command = self.get_select_param(kwargs.get("mx_command"))  # select, values: "mx", "a", "dns", "spf", "txt", "soa", "ptr", "blacklist", "smtp", "tcp", "http", "https", "ping", "trace"
             mx_argument = kwargs.get("mx_argument")  # text
@@ -47,13 +48,14 @@ class FunctionComponent(ResilientComponent):
             url = url.format(mx_argument, self.options['api_token'])
 
             # Make URL request
-            response = requests.get(url, headers=HEADERS)
+            rc = RequestsCommon(self.opts, self.options)
+            response = rc.execute_call_v2("get", url, headers=HEADERS)
 
             # Check the results
             if(response.status_code == 200):
                 res = response.json()
             else:
-                msg = "Some error occured while retrieving the information from MXToolbox with status code: {}"
+                msg = "Some error occurred while retrieving the information from MXToolbox with status code: {}"
                 raise ValueError(msg.format(response.status_code))
 
             # Send results back

@@ -1,13 +1,16 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright IBM Corp. - Confidential Information
+# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 #
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from resilient_lib import ResultPayload
 from fn_splunk_integration.util import splunk_utils
+
+SECTION_HDR = "fn_splunk_integration"
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'splunk_update_notable"""
@@ -15,12 +18,12 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get("fn_splunk_integration", {})
+        self.options = opts.get(SECTION_HDR, {})
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
-        self.options = opts.get("fn_splunk_integration", {})
+        self.options = opts.get(SECTION_HDR, {})
 
     @function("splunk_update_notable")
     def _splunk_update_notable_function(self, event, *args, **kwargs):
@@ -52,13 +55,15 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("starting...")
 
+            result_payload = ResultPayload(SECTION_HDR, **kwargs)
+
             splnk_utils = splunk_utils.SplunkUtils(host=self.options["host"],
                                                    port=self.options["port"],
                                                    username=self.options["username"],
                                                    password=self.options["splunkpassword"],
                                                    verify=splunk_verify_cert)
 
-            result = splnk_utils.update_notable(event_id=event_id,
+            splunk_result = splnk_utils.update_notable(event_id=event_id,
                                                  comment=comment,
                                                  status=notable_event_status,
                                                  cafile=splunk_verify_cert)
@@ -66,7 +71,7 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("done...")
 
             # Produce a FunctionResult with the return value
-            yield FunctionResult(result)
+            yield FunctionResult(result_payload.done(True, splunk_result.get('content', {})))
         except Exception as e:
             log.error("Function execution throws exception: {}".format(str(e)))
             yield FunctionError()

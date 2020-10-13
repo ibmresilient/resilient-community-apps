@@ -29,12 +29,15 @@ class SplunkHECFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
         self.event_source = options.get("event_source")
         self.event_host = options.get("event_host")
         self.event_source_type = options.get("event_source_type")
+        self.http_proxy = options.get("http_proxy")
+        self.https_proxy = options.get("https_proxy")
 
         self.hec_event = http_event_collector(self.token, self.host,
                                               http_event_port=self.port,
                                               http_event_server_ssl=self.use_ssl,
                                               host=self.event_host,
                                               input_type='json')
+        self.hec_event.set_proxies(self.http_proxy, self.https_proxy)
         self.hec_event.index = self.index
 
         if self.event_source:

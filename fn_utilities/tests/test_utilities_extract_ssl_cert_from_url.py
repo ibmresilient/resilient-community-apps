@@ -9,7 +9,7 @@ import json
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 
-PACKAGE_NAME = "utilities_extract_ssl_cert"
+PACKAGE_NAME = "fn_utilities"
 FUNCTION_NAME = "utilities_extract_ssl_cert_from_url"
 
 # Read the default configuration-data section from the package
@@ -38,21 +38,22 @@ class TestUtilitiesExtractSslCertFromUrl:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
+    @pytest.mark.livetest
     @pytest.mark.parametrize("https_url, expected_results", [
         ("www.ibm.com", {"successful": True}),
         ("www.google.com", {"successful": True}),
         ("https://self-signed.badssl.com", {"successful": True}),
         ("https://untrusted-root.badssl.com", {"successful": True}),
         ("https://revoked.badssl.com", {"successful": True}),
-        ("https://10000-sans.badssl.com", {"successful": True}),
+        #("https://10000-sans.badssl.com", {"successful": True}),
         ("notaurl", {"successful": False}),
         ("htp:/www.google.com", {"successful": False}),
         ("https://superfish.badssl.com", {"successful": True}),
-        ("https://dh512.badssl.com", {"successful": True}),
-        ("https://rc4-md5.badssl.com/", {"successful": True}),
-        ("https://rc4.badssl.com/", {"successful": True}),
-        ("https://3des.badssl.com/", {"successful": True}),
-        ("https://null.badssl.com/", {"successful": True}),
+        #("https://dh512.badssl.com", {"successful": True}),
+        #("https://rc4-md5.badssl.com/", {"successful": True}),
+        #("https://rc4.badssl.com/", {"successful": True}),
+        #("https://3des.badssl.com/", {"successful": True}),
+        #("https://null.badssl.com/", {"successful": True}),
         ("https://tls-v1-0.badssl.com:1010/", {"successful": True}),
         ("https://tls-v1-1.badssl.com:1011/", {"successful": True}),
         ("www.tls-v1-1.badssl.com:1011/", {"successful": True})
@@ -84,21 +85,22 @@ class TestUtilitiesExtractSslCertFromUrl:
             else:
                 assert (isinstance(results['certificate'], type(None)))
 
+    @pytest.mark.livetest
     @pytest.mark.parametrize("https_url, expected_results", [
         ("www.ibm.com", {"successful": True}),
         ("www.google.com", {"successful": True}),
         ("https://self-signed.badssl.com", {"successful": True}),
         ("https://untrusted-root.badssl.com", {"successful": True}),
         ("https://revoked.badssl.com", {"successful": True}),
-        ("https://10000-sans.badssl.com", {"successful": True}),
+        #("https://10000-sans.badssl.com", {"successful": True}),
         ("notaurl", {"successful": False}),
         ("htp:/www.google.com", {"successful": False}),
         ("https://superfish.badssl.com", {"successful": True}),
-        ("https://dh512.badssl.com", {"successful": True}),
-        ("https://rc4-md5.badssl.com/", {"successful": True}),
-        ("https://rc4.badssl.com/", {"successful": True}),
-        ("https://3des.badssl.com/", {"successful": True}),
-        ("https://null.badssl.com/", {"successful": True}),
+        #("https://dh512.badssl.com", {"successful": True}),
+        #("https://rc4-md5.badssl.com/", {"successful": True}),
+        #("https://rc4.badssl.com/", {"successful": True}),
+        #("https://3des.badssl.com/", {"successful": True}),
+        #("https://null.badssl.com/", {"successful": True}),
         ("https://tls-v1-0.badssl.com:1010/", {"successful": True}),
         ("https://tls-v1-1.badssl.com:1011/", {"successful": True}),
         ("www.tls-v1-1.badssl.com:1011", {"successful": True})
@@ -126,21 +128,22 @@ class TestUtilitiesExtractSslCertFromUrl:
             else:  # IF the success flag is false; there should be a result
                 assert (isinstance(results['certificate'], type(None)))
 
+    @pytest.mark.livetest
     @pytest.mark.parametrize("https_url, expected_results", [
         ("www.ibm.com", {"successful": True}),
         ("www.google.com", {"successful": True}),
         ("https://self-signed.badssl.com", {"successful": True}),
         ("https://untrusted-root.badssl.com", {"successful": True}),
         ("https://revoked.badssl.com", {"successful": True}),
-        ("https://10000-sans.badssl.com", {"successful": True}),
+        #("https://10000-sans.badssl.com", {"successful": True}),
         ("notaurl", {"successful": False}),
         ("htp:/www.google.com", {"successful": False}),
         ("https://superfish.badssl.com", {"successful": True}),
-        ("https://dh512.badssl.com", {"successful": True}),
-        ("https://rc4-md5.badssl.com/", {"successful": True}),
-        ("https://rc4.badssl.com/", {"successful": True}),
-        ("https://3des.badssl.com/", {"successful": True}),
-        ("https://null.badssl.com/", {"successful": True}),
+        #("https://dh512.badssl.com", {"successful": True}),
+        #("https://rc4-md5.badssl.com/", {"successful": True}),
+        #("https://rc4.badssl.com/", {"successful": True}),
+        #("https://3des.badssl.com/", {"successful": True}),
+        #("https://null.badssl.com/", {"successful": True}),
         ("https://tls-v1-0.badssl.com:1010/", {"successful": True}),
         ("https://tls-v1-1.badssl.com:1011/", {"successful": True}),
         ("www.tls-v1-1.badssl.com:1011", {"successful": True})

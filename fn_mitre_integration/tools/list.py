@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+# pragma pylint: disable=unused-argument, no-self-use
+# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 #
 # https://medium.com/mitre-attack/att-ck-content-available-in-stix-2-0-via-public-taxii-2-0-server-317e5c41e214
 #
@@ -12,8 +15,9 @@
 
 from stix2 import TAXIICollectionSource, Filter
 from taxii2client import Server
+from proxies import get_proxies
 
-server = Server("https://cti-taxii.mitre.org/taxii/")
+server = Server("https://cti-taxii.mitre.org/taxii/", proxies=get_proxies())
 
 api_root = server.api_roots[0]
 

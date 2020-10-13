@@ -1,6 +1,8 @@
 system_host_env = "QRADAR_ADVISOR_HOST"
 system_token_env = "QRADAR_ADVISOR_TOKEN"
 system_verify_env = "QRADAR_ADVISOR_VERIFY"
+system_http_proxy = "QRADAR_HTTP_PROXY"
+system_https_proxy = "QRADAR_HTTPS_PROXY"
 help_basic = "Use env vars QRADAR_ADVISOR_HOST/QRADAR_ADVISOR_TOKEN to specify login info"
 
 
@@ -12,6 +14,7 @@ class ToolCommand(object):
 
     def __init__(self, help_string):
         import os
+        self.opts_dict = {}
         if system_host_env in os.environ:
             self.system_host = os.environ[system_host_env]
         else:
@@ -25,9 +28,13 @@ class ToolCommand(object):
         if system_verify_env in os.environ and os.environ[system_verify_env] == "True":
             self.system_verify = True
 
-        self.help_string = help_basic + "\n" + help_string
+        if system_http_proxy  in os.environ:
+            self.opts_dict["http_proxy"] = os.environ[system_http_proxy]
 
-        self.opts_dict = {}
+        if system_https_proxy in os.environ:
+            self.opts_dict["https_proxy"] = os.environ[system_https_proxy]
+
+        self.help_string = help_basic + "\n" + help_string
 
 
     def run_command(self, argv, arg_str, arg_list):

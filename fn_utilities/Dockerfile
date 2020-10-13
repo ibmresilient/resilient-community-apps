@@ -5,7 +5,7 @@ FROM registry.access.redhat.com/ubi8/python-36:latest
 #FROM resilient/rc-data-feeder-base
 
 ARG APPLICATION=fn_utilities
-ARG RES_CIRCUITS_VERSION=34.0.195
+ARG RES_CIRCUITS_VERSION=37.0
 
 # update to latest packages, user 0 for root privilege
 USER 0
@@ -16,14 +16,21 @@ RUN pip install --upgrade pip
 RUN pip install resilient-circuits>=${RES_CIRCUITS_VERSION}
 
 # install and upgrade six to satisfy fn_utilities requirement
-RUN pip install --upgrade six
+RUN pip install six==1.14.0
 # install and upgrade cryptography to satisfy fn_utilities requirement
 RUN pip install --upgrade cryptography
 
 ## ---- section for changes ----
 # uncomment and replicate if additional os libraries are needed
-#RUN yum -y update && yum clean all
-#RUN yum -y install <package>
+RUN yum -y update && yum clean all
+# whois, traceroute, dig and nsloookup
+RUN yum install -y bind-utils net-tools
+RUN yum install -y http://mirror.centos.org/centos/8/AppStream/x86_64/os/Packages/whois-nls-5.5.1-2.el8.noarch.rpm
+RUN yum install -y http://mirror.centos.org/centos/8/AppStream/x86_64/os/Packages/whois-5.5.1-2.el8.x86_64.rpm
+RUN yum install -y http://mirror.centos.org/centos/8/BaseOS/x86_64/os/Packages/traceroute-2.1.0-6.el8.x86_64.rpm
+# changes for mail parsing of Outlook emails
+RUN yum install -y perl cpan
+RUN cpan -fTi Email::Outlook::Message
 
 # install the base package
 COPY ./dist /tmp/packages
