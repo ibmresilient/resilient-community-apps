@@ -22,7 +22,7 @@ class TestAuthenticator:
             "token_type": "say",
             "access_token": "melon"
         })
-        auth = IBMCloudFoundryAuthenticator("url", {"cf_api_apikey": "apikey"})
+        auth = IBMCloudFoundryAuthenticator({}, {"cf_api_apikey": "apikey"}, "url")
         auth.get_token()
         assert auth.get_headers() == {"Authorization": "say melon"}
 
@@ -38,7 +38,7 @@ class TestAuthenticator:
             "access_token": "melon"
         })
         with pytest.raises(ValueError):
-            auth = IBMCloudFoundryAuthenticator("url", {"cf_api_apikey": "apikey"})
+            auth = IBMCloudFoundryAuthenticator({}, {"cf_api_apikey": "apikey"}, "url")
             auth.get_token()
 
     @patch("fn_cloud_foundry.util.authentication.ibm_cf_bearer.requests.get")
