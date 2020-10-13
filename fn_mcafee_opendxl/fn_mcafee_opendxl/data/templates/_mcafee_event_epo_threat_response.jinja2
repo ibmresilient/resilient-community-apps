@@ -4,7 +4,7 @@
       "content": "{{event.eventDesc}}
       {%- if event.threatType -%} \nType: {{event.threatType}} {%- endif -%}"
    },
-   {# ds_to_millis expectes the data paramater to be a string datetime in the following format 2017-05-17T17:07:59.114Z -#}
+   {# ds_to_millis expects the data paramater to be a string datetime in the following format 2017-05-17T17:07:59.114Z -#}
    "discovered_date": {{ ds_to_millis(event.analyzer.detectedUTC) }},
    {%- if event.category == "Malware detected" -%}
        "incident_type_ids": ["Malware"],
