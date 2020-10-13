@@ -53,7 +53,7 @@ class TestAuthenticator:
             "access_token": "melon"
         })
         with pytest.raises(ValueError):
-            auth = IBMCloudFoundryAuthenticator("url", {"cf_api_apikey": "apikey"})
+            auth = IBMCloudFoundryAuthenticator({}, {"cf_api_apikey": "apikey"}, "url")
             auth.get_token()
 
     def test_authenticator_auth_error(self):
@@ -61,5 +61,5 @@ class TestAuthenticator:
         Fail if keys are not provided.
         """
         with pytest.raises(KeyError):
-            auth = IBMCloudFoundryAuthenticator("url", {"cf_api": "apikey"})
+            auth = IBMCloudFoundryAuthenticator({}, {"cf_api_apikey": "apikey"}, "url")
             auth.get_token()
