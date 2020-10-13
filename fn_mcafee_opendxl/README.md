@@ -216,7 +216,18 @@ incident.addNote(noteText)
 ## DXL Subscriber 
 
 <p>
+The DXL subscriber is designed using Resilient Circuits but does not rely on the functions
+capabilities. The subscriber connects to the Data Exchange Layer and listens on the topic
+specified topic(s). When a message is sent to the topic, the integration uses a mapping template
+to map the data into a Resilient incident DTO and create incidents and artifacts within the Resilient
+platform. 
+<p>
+To use the DXL Subscriber, set the topic_listener_on configuration parameter to True.
+<p>
+When you run Resilient Circuits, the subscriber listens on the default topic,
+/mcafee/event/epo/threat/response, and uses the default provided jinja template to map incident and artifact data into the Resilient Platform.
 
+---
 
 ## Troubleshooting & Support
 If using the app with an App Host, see the Resilient System Administrator Guide and the App Host Deployment Guide for troubleshooting procedures. You can find these guides on the [IBM Knowledge Center](https://www.ibm.com/support/knowledgecenter/SSBRUQ), where you can select which version of the Resilient platform you are using.
