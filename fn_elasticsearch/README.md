@@ -101,7 +101,7 @@ HTTPS connection with username:password authentication
     | ---- | ----------- |
     | Org Data | Read |
     | Function | Read |
-* Proxy supported: Yes/No
+* Proxy supported: Yes
 
 ---
 
@@ -116,12 +116,12 @@ The following table describes the settings you need to configure in the app.conf
 
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
-| **es_datastore_url** | Yes | `<ELASTICSEARCH_URL>` | *Enter a description of the config here.* |
-| **es_datastore_scheme** | Yes | `<https OR http>` | *Enter a description of the config here.* |
-| **es_auth_username** | Yes | `<ELASTICSEARCH_USERNAME>` | *Enter a description of the config here.* |
-| **es_use_http** | Yes | `<True OR False>` | *Enter a description of the config here.* |
-| **es_auth_password** | Yes | `<ELASTICSEARCH_PASSWORD>` | *Enter a description of the config here.* |
-| **es_cafile** | Yes | `<CA_FILE_TO_BE_USED>` | *Enter a description of the config here.* |
+| **es_datastore_url** | Yes | `localhost` | *The location of the elasticsearch instance.* |
+| **es_datastore_scheme** | Yes | `https` | *If HTTPS is provided an SSL Context is setup for the connection.* |
+| **es_auth_username** | Yes | `<ELASTICSEARCH_USERNAME>` | *Username of the Elastic User for the query.* |
+| **es_use_http** | Yes | `False` | *f true, connection to elasticsearch will be made over HTTP.* |
+| **es_auth_password** | Yes | `supersecret` | *Password for the elasticsearch user.* |
+| **es_cafile** | No | `path/to/certfile>` | *Location of the certificate file if using https.* |
 
 ---
 

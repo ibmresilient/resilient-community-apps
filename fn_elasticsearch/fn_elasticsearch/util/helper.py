@@ -5,15 +5,6 @@
 
 class ElasticSearchHelper():
 
-    def str_to_bool(self, str):
-        """Convert unicode string to equivalent boolean value. Converts a "true" or "false" string to a boolean value , string is case insensitive."""
-        if str.lower() == 'true':
-            return True
-        elif str.lower() == 'false':
-            return False
-        else:
-            raise ValueError
-
     def get_config_option(self, option_name, optional=False):
         """Given option_name, checks if it is in app.config. Raises ValueError if a mandatory option is missing"""
         option = self.options.get(option_name)
