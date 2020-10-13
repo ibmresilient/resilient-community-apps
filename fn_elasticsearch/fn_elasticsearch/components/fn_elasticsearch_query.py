@@ -7,14 +7,12 @@ import logging
 from ssl import create_default_context
 
 from elasticsearch import Elasticsearch
-from resilient_lib import str_to_bool
+from resilient_lib import RequestsCommon, str_to_bool, validate_fields
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, \
     FunctionResult, FunctionError
 from resilient_lib import ResultPayload
 from fn_elasticsearch.util.helper import ElasticSearchHelper
 from elasticsearch import RequestsHttpConnection
-from resilient_lib import RequestsCommon
-
 BADLY_FORMED_QUERY = 400
 NOT_FOUND = 404
 ES_ERROR = 500
@@ -57,6 +55,8 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Starting")
             helper = ElasticSearchHelper(self.options)
             rc = ResultPayload(SECTION_ELASTICSEARCH, **kwargs)
+
+            validate_fields(["es_datastore_url", "es_auth_username", "es_auth_password"], self.options)
 
             ELASTICSEARCH_BOOL_HTTP_AUTH = str_to_bool(
                 value=helper.get_config_option("es_use_http", True))
