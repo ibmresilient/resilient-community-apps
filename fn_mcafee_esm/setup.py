@@ -16,7 +16,8 @@ setup(
         returned results can be used to make customized updates to the Resilient platform, such as updating incidents,
         data tables and so on. The integration can also be used to make updates to McAfee ESM cases.""",
     install_requires=[
-        'resilient_circuits>=30.0.0'
+        'resilient_circuits>=30.0.0',
+        'resilient-lib'
     ],
     packages=find_packages(),
     include_package_data=True,

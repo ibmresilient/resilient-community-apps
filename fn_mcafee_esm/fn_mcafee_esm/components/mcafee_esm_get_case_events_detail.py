@@ -5,18 +5,18 @@
 
 import logging
 import json
-import requests
 import time
 from datetime import datetime
 from threading import current_thread
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from resilient_lib import RequestsCommon
 from fn_mcafee_esm.util.helper import check_config, get_authenticated_headers, check_status_code
 
 
-def case_get_case_events_details(options, ids):
+def case_get_case_events_details(rc, options, ids):
     url = options["esm_url"] + "/rs/esm/v2/caseGetCaseEventsDetail"
 
-    headers = get_authenticated_headers(options["esm_url"], options["esm_username"],
+    headers = get_authenticated_headers(rc, options["esm_url"], options["esm_username"],
                                         options["esm_password"], options["trust_cert"])
     payload = {
         "eventIds": {
@@ -24,7 +24,9 @@ def case_get_case_events_details(options, ids):
         }
     }
 
-    r = requests.post(url, headers=headers, data=json.dumps(payload), verify=options["trust_cert"])
+    r = rc.execute_call_v2('post', url, headers=headers, data=json.dumps(payload), verify=options["trust_cert"],
+                           proxies=rc.get_proxies())
+
     check_status_code(r.status_code)
 
     return r.json()
@@ -36,6 +38,7 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
+        self.opts = opts
         self.options = opts.get("fn_mcafee_esm", {})
 
         # Check config file and change trust_cert to Boolean
@@ -44,6 +47,7 @@ class FunctionComponent(ResilientComponent):
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
+        self.opts = opts
         self.options = opts.get("fn_mcafee_esm", {})
 
     @function("mcafee_esm_get_case_events_detail")
@@ -55,6 +59,10 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("starting...")
 
             options = self.options
+
+            # Instantiate RequestsCommon object
+            rc = RequestsCommon(opts=self.opts, function_opts=self.options)
+
             # Get the function parameters:
             mcafee_event_ids_list = kwargs.get("mcafee_event_ids_list")  # text
 
@@ -64,7 +72,7 @@ class FunctionComponent(ResilientComponent):
             log.info("mcafee_event_ids_list: %s", mcafee_event_ids_list)
 
             # Get case event details
-            event_details = case_get_case_events_details(options, mcafee_event_ids_list)
+            event_details = case_get_case_events_details(rc, options, mcafee_event_ids_list)
             yield StatusMessage("Got event details")
 
             end_time = time.time()

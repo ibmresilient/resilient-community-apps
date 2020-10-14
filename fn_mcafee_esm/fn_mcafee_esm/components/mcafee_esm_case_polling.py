@@ -18,7 +18,7 @@ from fn_mcafee_esm.components.mcafee_esm_get_case_detail import case_get_case_de
 from resilient_circuits.template_functions import environment
 from resilient import SimpleHTTPException
 import resilient_circuits.template_functions as template_functions
-
+from resilient_lib import RequestsCommon
 
 log = logging.getLogger(__name__)
 ESM_CASE_FIELD_NAME = "mcafee_esm_case_id"
@@ -30,6 +30,7 @@ class ESM_CasePolling(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(ESM_CasePolling, self).__init__(opts)
+        self.opts = opts
         self.options = opts.get("fn_mcafee_esm", {})
 
         # Check config file and change trust_cert to Boolean
@@ -39,6 +40,7 @@ class ESM_CasePolling(ResilientComponent):
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
+        self.opts = opts
         self.options = opts.get("fn_mcafee_esm", {})
 
     def main(self):
@@ -59,10 +61,14 @@ class ESM_CasePolling(ResilientComponent):
             log.info("Polling for cases in ESM is not occurring")
 
     def esm_polling_thread(self):
-        while True:
-            case_list = case_get_case_list(self.options)
 
-            headers = get_authenticated_headers(self.options["esm_url"], self.options["esm_username"],
+        # Instantiate RequestsCommon object
+        self.rc = RequestsCommon(opts=self.opts, function_opts=self.options)
+
+        while True:
+            case_list = case_get_case_list(self.rc, self.options)
+
+            headers = get_authenticated_headers(self.rc, self.options["esm_url"], self.options["esm_username"],
                                                 self.options["esm_password"], self.options["trust_cert"])
 
             # Check cases in incidents
@@ -84,7 +90,7 @@ class ESM_CasePolling(ResilientComponent):
             with open(template_file, 'r') as template:
                 log.debug("Reading template file")
 
-                case_details = case_get_case_detail(self.options, headers, case_id)
+                case_details = case_get_case_detail(self.rc, self.options, headers, case_id)
                 log.debug("Case details in dict form: {}".format(case_details))
 
                 incident_template = template.read()

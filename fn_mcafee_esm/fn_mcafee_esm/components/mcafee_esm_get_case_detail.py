@@ -4,26 +4,27 @@
 """Function implementation"""
 
 import logging
-import requests
 import time
 import json
 from datetime import datetime
 from threading import current_thread
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from resilient_lib import RequestsCommon
 from fn_mcafee_esm.util.helper import check_config, get_authenticated_headers, check_status_code
 
 
 log = logging.getLogger(__name__)
 
 
-def case_get_case_detail(options, headers, id):
+def case_get_case_detail(rc, options, headers, id):
     url = options["esm_url"] + "/rs/esm/v2/caseGetCaseDetail"
 
     payload = {
         "id": id
     }
 
-    r = requests.post(url, headers=headers, data=json.dumps(payload), verify=options["trust_cert"])
+    r = rc.execute_call_v2('post', url, headers=headers, data=json.dumps(payload), verify=options["trust_cert"],
+                           proxies=rc.get_proxies())
     log.debug(r.content)
     if r.status_code == 400:
         raise FunctionError(r.content)
@@ -38,6 +39,7 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
+        self.opts = opts
         self.options = opts.get("fn_mcafee_esm", {})
 
         # Check config file and change trust_cert to Boolean
@@ -46,6 +48,7 @@ class FunctionComponent(ResilientComponent):
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
+        self.opts = opts
         self.options = opts.get("fn_mcafee_esm", {})
 
     @function("mcafee_esm_get_case_detail")
@@ -56,7 +59,11 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("starting...")
 
             options = self.options
-            authenticated_headers = get_authenticated_headers(options["esm_url"], options["esm_username"],
+
+            # Instantiate RequestsCommon object
+            rc = RequestsCommon(opts=self.opts, function_opts=self.options)
+
+            authenticated_headers = get_authenticated_headers(rc, options["esm_url"], options["esm_username"],
                                                options["esm_password"], options["trust_cert"])
 
             # Get the function parameters:
@@ -68,7 +75,8 @@ class FunctionComponent(ResilientComponent):
             log.info("mcafee_esm_case_id: %s", mcafee_esm_case_id)
 
             # Get case details
-            details = case_get_case_detail(options, authenticated_headers, mcafee_esm_case_id)
+
+            details = case_get_case_detail(rc, options, authenticated_headers, mcafee_esm_case_id)
 
             end_time = time.time()
             results = {
