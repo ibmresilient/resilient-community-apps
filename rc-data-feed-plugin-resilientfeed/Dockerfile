@@ -19,10 +19,22 @@ RUN pip install --upgrade pip
 # install resilient-circuits
 RUN pip install "resilient-circuits>=${RES_CIRCUITS_VERSION}"
 
-## ---- section for changes ----
-# uncomment and replicate if additional os libraries are needed
-#RUN yum -y update && yum clean all
-#RUN yum -y install <package>
+# add yum repo with unixODBC and install
+#RUN curl https://packages.microsoft.com/config/rhel/8/prod.repo > /etc/yum.repos.d/mssql-release.repo
+RUN yum -y install unixODBC-devel
+
+# copy the driver configurations to the container
+COPY ./odbc-drivers.ini /etc/odbc-drivers.ini
+COPY ./drivers/drivers /tmp/lib/
+
+# configure unixODBC with the driver information in the .ini file
+RUN odbcinst -i -d -f /etc/odbc-drivers.ini
+
+# install psqlodbc driver
+RUN tar -zxvf /tmp/lib/psqlodbc-12.01.0000.tar.gz
+RUN ./psqlodbc-12.01.0000/configure
+RUN make
+RUN make install
 
 # install the base package
 COPY ./dist /tmp/packages
