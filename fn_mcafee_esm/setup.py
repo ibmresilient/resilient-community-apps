@@ -36,6 +36,7 @@ setup(
             "McafeeEsmCasePolling = fn_mcafee_esm.components.mcafee_esm_case_polling:ESM_CasePolling"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_mcafee_esm.util.config:config_section_data"],
-        "resilient.circuits.customize": ["customize = fn_mcafee_esm.util.customize:customization_data"]
+        "resilient.circuits.customize": ["customize = fn_mcafee_esm.util.customize:customization_data"],
+        "resilient.circuits.selftest": ["selftest = fn_mcafee_esm.util.selftest:selftest_function"]
     }
 )
