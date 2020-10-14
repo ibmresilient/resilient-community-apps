@@ -2,7 +2,7 @@
 # (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation
-   test with: resilient-circuits selftest -l fn_aws_iam
+   test with: resilient-circuits selftest -l fn-mcafee-esm
 """
 
 import logging
