@@ -14,6 +14,7 @@ setup(
     long_description="Resilient Circuits Components for sending data feeds to other (BI) systems",
     install_requires=[
         'cachetools',
+        'pyodbc',
         'rc_data_feed',
         'resilient',
         'resilient-lib'
