@@ -264,7 +264,7 @@ class MaaS360Utils(object):
 
     def lock_device(self, device_id):
         """
-        Function locks the device .
+        Function locks the device.
         :param device_id
         :return: action_response
         """

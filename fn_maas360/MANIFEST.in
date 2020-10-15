@@ -1,5 +1,9 @@
 include README.md
+include Dockerfile
+include entrypoint.sh
 include fn_maas360/util/*
 include fn_maas360/LICENSE
-include fn_maas360/lib/*
-include doc/*
+include doc/*.md
+include doc/screenshots/*
+
+exclude *.bak
