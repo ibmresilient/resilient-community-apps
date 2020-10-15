@@ -1,8 +1,5 @@
 include README.md
 include screenshots/*
 include fn_joe_sandbox_analysis/util/*
-include fn_joe_sandbox_analysis/LICENSE
 include Dockerfile
 include entrypoint.sh
-include doc/*.md
-include doc/screenshots/*
