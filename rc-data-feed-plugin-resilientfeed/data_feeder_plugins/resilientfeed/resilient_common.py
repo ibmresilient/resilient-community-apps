@@ -46,10 +46,8 @@ class DBSyncFactory:
         """
         if sqllite_file:
             return SQLiteDBSync(org_id, sqllite_file)
-        else:
-            return PostgresDBSync(org_id, db_connection, db_user, db_pwd)
 
-        return None
+        return PostgresDBSync(org_id, db_connection, db_user, db_pwd)
 
 class Resilient(object):
     """
@@ -189,7 +187,7 @@ class Resilient(object):
                          self.rest_client.org_id, new_id, retry_count)
                 # org1_type_id, org2_inc_id, org1_dep_type_name, org1_dep_type_id, payload
                 new_type_id, _ = self._create_update_type(orig_inc_id, orig_org_id, retry_type_name, retry_payload,
-                                                       retry_orig_id, retry_count=retry_count)
+                                                          retry_orig_id, retry_count=retry_count)
 
                 if new_type_id:
                     id_list.append("{}:{}".format(retry_type_name, new_type_id))
@@ -391,8 +389,8 @@ class Resilient(object):
             extra_msg = None
             if "Invalid field name" in str(err):
                 extra_msg = "Make sure all custom fields are imported into the target organization."
-                       
-            LOG.error("Unable to create %s, Incident %s, %s. %s", mapped_type_name, sync_inc_id, 
+
+            LOG.error("Unable to create %s, Incident %s, %s. %s", mapped_type_name, sync_inc_id,
                       err, extra_msg)
             LOG.debug(uri)
             LOG.debug(payload)
@@ -408,7 +406,7 @@ class Resilient(object):
         :param payload: task payload
         :return: new_type_id: task id of found task
         """
-        response = get_incident_tasks(self.rest_client, sync_inc_id)
+        response = self.get_incident_tasks(sync_inc_id)
 
         for task in response:
             # pick a number of comparison fields to ensure duplicate
@@ -557,9 +555,7 @@ class Resilient(object):
                                                                    "task", src_task_id)
             # if the task doesn't exist, the attachment will be requeued
             if not dst_task_id:
-                LOG.warning("task:{}->{} for attachment id '{}' does not exist, queuing".format(orig_inc_id,
-                                                                                                src_task_id,
-                                                                                                orig_type_id))
+                LOG.warning("task:%s->%s for attachment id '%s' does not exist, queuing", orig_inc_id, src_task_id, orig_type_id)
                 self.dbsync.create_retry_row(orig_org_id, orig_inc_id, "task", src_task_id,
                                              type_name, orig_type_id,
                                              sync_inc_id, payload, 1)
@@ -671,6 +667,66 @@ class Resilient(object):
         parsed_uri = urlparse(self.rest_client.base_url)
         return parsed_uri.hostname
 
+    @cached(cache=TTLCache(maxsize=10, ttl=600))
+    def get_type_info(self, type_name):
+        """
+        get the field definitions for the object type
+        :return: dictionary of field names
+        """
+
+        uri = Resilient.GET_FIELDS_URI.format(type_name)
+        try:
+            fields_by_name = {}
+            response = self.rest_client.get(uri)
+
+            for field in response:
+                fields_by_name[field['name']] = {
+                    "prefix": field['prefix'],
+                    "input_type": field['input_type'],
+                    "values": field['values']
+                }
+        except Exception as err:
+            LOG.error("get_type_info")
+            LOG.error(err)
+
+        return fields_by_name
+
+    @cached(cache=TTLCache(maxsize=128, ttl=60))
+    def get_incident_tasks(self, sync_inc_id):
+        """
+        get all tasks for an incident, if not yet cached or the cache has expired
+        :param sync_inc_id:
+        :return: list of tasks
+        """
+        uri = Resilient.GET_INCIDENT_TASKS_URI.format(sync_inc_id)
+        return self.rest_client.get(uri)
+
+    @cached(cache=TTLCache(maxsize=10, ttl=600))
+    def get_users_and_groups(self):
+        """
+        build list of users from the target organization
+        :return: dictionary based on email
+        """
+
+        user_list = {}
+        group_list = {}
+        try:
+            response = self.rest_client.post(Resilient.GET_USERS_URI, {})
+            # invert the list by ID
+            user_list = {user['email']: user for user in response['data']}
+
+            response = self.rest_client.get(Resilient.GET_GROUPS_URI)
+            # invert the list by ID
+            group_list = {group['export_key']: group for group in response}
+        except Exception as err:
+            LOG.error("get_users_and_groups")
+            LOG.error(err)
+
+        user_and_group_list = user_list.copy()
+        user_and_group_list.update(group_list)
+
+        return user_and_group_list
+
 # S T A T I C
 def get_url(inc_id, type_name, update_flag=False):
     """
@@ -689,38 +745,3 @@ def get_url(inc_id, type_name, update_flag=False):
     # if type not found, it's a datatable
     return Resilient.DATATABLE_ROWDATA_URI.format(inc_id, type_name), True
 
-@cached(cache=TTLCache(maxsize=128, ttl=60))
-def get_incident_tasks(rest_client, sync_inc_id):
-    """
-    get all tasks for an incident, if not yet cached or the cache has expired
-    :param sync_inc_id:
-    :return: list of tasks
-    """
-    uri = Resilient.GET_INCIDENT_TASKS_URI.format(sync_inc_id)
-    return rest_client.get(uri)
-
-@cached(cache=TTLCache(maxsize=10, ttl=600))
-def get_users_and_groups(rest_client):
-    """
-    build list of users from the target organization
-    :return: dictionary based on email
-    """
-
-    user_list = {}
-    group_list = {}
-    try:
-        response = rest_client.post(Resilient.GET_USERS_URI, {})
-        # invert the list by ID
-        user_list = {user['email']: user for user in response['data']}
-
-        response = rest_client.get(Resilient.GET_GROUPS_URI)
-        # invert the list by ID
-        group_list = {group['export_key']: group for group in response}
-    except Exception as err:
-        LOG.error("get_users_and_groups")
-        LOG.error(err)
-
-    user_and_group_list = user_list.copy()
-    user_and_group_list.update(group_list)
-
-    return user_and_group_list

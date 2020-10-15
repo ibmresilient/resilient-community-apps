@@ -6,9 +6,9 @@
 import logging
 import re
 from data_feeder_plugins.resilientfeed.lib.filters import Filters
-from resilient_lib import str_to_bool, validate_fields
+from resilient_lib import str_to_bool
 from rc_data_feed.lib.feed import FeedDestinationBase
-from .resilient_common import Resilient, get_users_and_groups
+from .resilient_common import Resilient
 
 LOG = logging.getLogger(__name__)
 
@@ -78,55 +78,58 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
             self.resilient_target.upload_attachment(self.resilient_source.rest_client,
                                                     self.resilient_source.rest_client.org_id, context.inc_id,
                                                     type_name, cleaned_payload, orig_type_id)
-        else:
-            # get all the field definitions from the source environment
-            all_fields = context.type_info.get_all_fields(refresh=False)
+            return
 
-            # invert the list into a dictionary for faster review
-            # data tables use the cell id for the column name. So we need to create the index list differently
-            if self._is_datatable(payload):
-                all_field_names = {str(field['id']):field for field in all_fields}
-            else:
-                all_field_names = {field['name']:field for field in all_fields}
+        src_field_names = self.build_field_names(context, self._is_datatable(payload))
+        # get target org field names
+        target_field_names = self.resilient_target.get_type_info(type_name)
 
-            # convert selection lists and multi-selection lists to values, not id's
-            try:
-                # get the fields of the target resilient
-                new_payload = self.convert_values(context, matching_criteria, type_name,
-                                                  all_field_names, None, payload,
-                                                  self._is_datatable(payload))
+        # convert selection lists and multi-selection lists to values, not id's
+        try:
+            # make sure datatables exist in new org
+            if self._is_datatable(payload) and not target_field_names:
+                LOG.warning(u"Discarding datatable not found in target org: %s", type_name)
+                return
 
-                # remove fields unrelated to creating/upgrading an object
-                orig_type_id, cleaned_payload = self.clean_payload(context.inc_id, type_name, new_payload)
-                LOG.debug(cleaned_payload)
+            # get the fields of the target resilient
+            new_payload, discard_list = self.convert_values(matching_criteria, type_name,
+                                                            src_field_names, target_field_names,
+                                                            None, payload,
+                                                            self._is_datatable(payload))
 
-                # perform the creation or update in the new resilient org
-                new_id, opr_type, create_list = self.resilient_target.create_update_type(self.resilient_source.rest_client.org_id, context.inc_id,
-                                                                       type_name, cleaned_payload, orig_type_id)
+            # remove fields unrelated to creating/upgrading an object
+            orig_type_id, cleaned_payload = self.clean_payload(context.inc_id, type_name, new_payload)
 
-                # create a note for the downstream incident when created
-                if new_id and opr_type == "created" and type_name == "incident":
-                    note = "Incident created from \nHost:{}\nOrg {}\nIncident {}".format(self.resilient_source.get_source_host(),
-                                                                                         self.resilient_source.rest_client.org_id,
-                                                                                         context.inc_id)
-                    payload = {
-                        "text": {
-                            "format": "text",
-                            "content": note
-                        }
+            # perform the creation or update in the new resilient org
+            new_id, opr_type, create_list = self.resilient_target.create_update_type(self.resilient_source.rest_client.org_id, context.inc_id,
+                                                                                     type_name, cleaned_payload, orig_type_id)
+
+            # create a note for the downstream incident when created
+            if new_id and opr_type == "created" and type_name == "incident":
+                note = u"Incident created from \nHost:{}\nOrg {}\nIncident {}".format(self.resilient_source.get_source_host(),
+                                                                                      self.resilient_source.rest_client.org_id,
+                                                                                      context.inc_id)
+                if discard_list:
+                    note = u"{}\n\nDiscarded fields: \n{}".format(note, "\n".join(discard_list))
+
+                payload = {
+                    "text": {
+                        "format": "text",
+                        "content": note
                     }
-                    sync_inc_id, new_type_id = self.resilient_target._create_type(new_id, None, "note", payload)
-                    if sync_inc_id:
-                        create_list.append("{}:{}".format('note', new_type_id))
+                }
+                sync_inc_id, new_type_id = self.resilient_target._create_type(new_id, None, "note", payload)
+                if sync_inc_id:
+                    create_list.append("{}:{}".format('note', new_type_id))
 
-                new_id and LOG.debug("%s:%s %s, additional updates: %s", type_name, new_id, opr_type, create_list)
-            except MatchError as err:
-                LOG.info("%s on Incident %s", err, context.inc_id)
+            new_id and LOG.debug("%s:%s %s, additional updates: %s", type_name, new_id, opr_type, create_list)
+        except MatchError as err:
+            LOG.info("%s on Incident %s", err, context.inc_id)
 
-                # create a sync entry so we know we skipped this incident
-                self.resilient_target.dbsync.create_sync_row(self.resilient_source.rest_client.org_id, context.inc_id,
-                                                              type_name, orig_type_id,
-                                                              None, None, "filtered")
+            # create a sync entry so we know we skipped this incident
+            self.resilient_target.dbsync.create_sync_row(self.resilient_source.rest_client.org_id, context.inc_id,
+                                                         type_name, orig_type_id,
+                                                         None, None, "filtered")
 
 
     def _is_datatable(self, payload):
@@ -138,57 +141,68 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
         return bool(payload.get("table_name", None))
 
 
-    def convert_values(self, context, matching_criteria, type_name,
-                       all_field_names, prefix, payload, datatable_flag):
+    def convert_values(self, matching_criteria, type_name,
+                       src_field_names, target_field_names,
+                       prefix, payload, datatable_flag):
         """
         recursive function to convert Ids to values for a given object
         raise MatchError if the matching criteria for an incident fails
-        :param context:
         :param matching_criteria: criteria to determine if this incident is allowed
         :param type_name: type of object converting
-        :param target_all_fields_by_name: type definition for the target org
-        :param target_prefix_list - list on target system of acceptable field prefixes
-        :param all_field_names: type definition for this object
+        :param src_field_names: type definition for the source org
+        :param target_field_names: type definition for the target org
         :param prefix: hierarchical fields have prefixes (incident)
         :param payload:
         :param datatable_flag:
-        :return: converted payload
+        :return: converted payload, discard_list of custom fields not sync'd
         """
         new_payload = {}
 
         # walk the payload, converting any list or ID based field with the appropriate value(s)
+        discarded_fields = []
         for field in payload:
             field_key = field
 
             # datatable column names need to be looked up differently based on cell Id
-            if datatable_flag and all_field_names.get(field, {}).get('name', None):
-                field_key = all_field_names[field]['name']
-                if all_field_names[field]['input_type'] in ('select', 'multiselect'):
-                    new_value = {"value": self.convert_selects(field_key, payload[field].get('value', None),
-                                                               all_field_names[field])}
-                else:
-                    new_value = {"value": payload[field].get('value', None)}
+            if datatable_flag:
+                if src_field_names.get(field, {}).get('name', None):
+                    field_key = src_field_names[field]['name']
+                    if src_field_names[field]['input_type'] in ('select', 'multiselect'):
+                        new_value = {"value": self.convert_selects(field_key, payload[field].get('value', None),
+                                                                   src_field_names[field])}
+                    else:
+                        new_value = {"value": payload[field].get('value', None)}
 
             else:
                 new_value = payload[field]
-                if field in all_field_names:
-                    if all_field_names[field]['input_type'] in ('select', 'multiselect', 'select_owner', 'multiselect_members') \
-                        and all_field_names[field].get('prefix', prefix) == prefix:
-                        new_value = self.convert_selects(field_key, payload[field], all_field_names[field])
+                if type_name == "incident":
+                    # apply logic to determine if the incident should be created
+                    if not matching_criteria.match_payload_value(field_key, new_value):
+                        msg = "Match failed on {}:{}".format(field_key, new_value)
+                        raise MatchError(msg)
+                    # ensure custom fields exist
+                    if prefix == "properties" and field_key not in target_field_names:
+                        # field not found on target org, we will discard
+                        LOG.warning(u"Discarding custom field not found in target org: %s", field_key)
+                        discarded_fields.append(field_key)
+                        continue
 
+                if field in src_field_names:
+                    if src_field_names[field]['input_type'] in ('select', 'multiselect', 'select_owner', 'multiselect_members') \
+                        and src_field_names[field].get('prefix', prefix) == prefix:
+                        new_value = self.convert_selects(field_key, payload[field], src_field_names[field])
+
+                # category header (pii, properties, gdpr, etc.)?
                 elif isinstance(payload[field], dict):
                     # recurse over this dictionary
-                    new_value = self.convert_values(context, matching_criteria, type_name,
-                                                    all_field_names, field, payload[field], datatable_flag)
-
-            # apply logic to determine if the incident should be created
-            if type_name == "incident" and not matching_criteria.match_payload_value(field_key, new_value):
-                msg = "Match failed on {}:{}".format(field_key, new_value)
-                raise MatchError(msg)
+                    new_value, discarded = self.convert_values(matching_criteria, type_name,
+                                                               src_field_names, target_field_names,
+                                                               field, payload[field], datatable_flag)
+                    discarded_fields.extend(discarded)
 
             new_payload[field_key] = new_value
 
-        return new_payload
+        return new_payload, discarded_fields
 
     def convert_selects(self, field_key, orig_values, type_info):
         """
@@ -302,6 +316,13 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
 
         return orig_type_id, payload
 
+    def add_sync_fields(self, orig_inc_id, payload):
+        if self.sync_references:
+            payload['properties'][DF_ORG_ID] = self.resilient_source.rest_client.org_id
+            payload['properties'][DF_INC_ID] = orig_inc_id
+            payload['properties'][DF_HOST] = self.resilient_source.get_source_host()
+            payload['properties'][DF_ORIGINAL_CREATE_DATE] = payload.get('create_date', 0)
+
 
     def _clean_assignee_value(self, input_type, email):
         """
@@ -315,7 +336,7 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
             return email
 
         # confirm that this user is in the target organization, if not return none
-        target_users = get_users_and_groups(self.resilient_target.rest_client)
+        target_users = self.resilient_target.get_users_and_groups()
         if email not in target_users:
             LOG.warning("User/Group '%s' does not exist in target organization", email)
             return None
@@ -331,6 +352,19 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
         """
         new_payload = dict((key, value) for key, value in payload.items() if value)
         return new_payload
+
+    def build_field_names(self, context, is_datatable):
+        # get all the field definitions from the source environment
+        all_fields = context.type_info.get_all_fields(refresh=False)
+
+        # invert the list into a dictionary for faster review
+        # data tables use the cell id for the column name. So we need to create the index list differently
+        if is_datatable:
+            src_field_names = {str(field['id']):field for field in all_fields}
+        else:
+            src_field_names = {field['name']:field for field in all_fields}
+
+        return src_field_names
 
 # S T A T I C
 def capture_email(value):

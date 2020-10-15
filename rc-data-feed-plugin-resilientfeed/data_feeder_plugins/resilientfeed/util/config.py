@@ -23,7 +23,7 @@ cafile=false
 # identify a sqlite db file to retain mapping between resilient instances.
 sqlite_sync_file=/path/to/file
 # postgresql db connection if sqlite_sync_file is not used
-postgresql_connect=Driver={PostresSQL Driver};Server=127.0.0.1;DB=<db>;Port=5432;connectTimeout=0
+postgresql_connect=Driver={PostgreSQL};Server=127.0.0.1;DB=<db>;Port=5432;connectTimeout=0
 postgresql_uid=<acct>
 postgresql_pwd=<pwd>
 # semicolon separated list of fields to allow incidents to sync. ex. incident_type_ids in ['Phishing'];custom_field == "a"
