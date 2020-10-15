@@ -26,6 +26,24 @@ def codegen_reload_data():
         "automatic_tasks": [],
         "scripts": []
     }
+    
+def customization_data(client=None):
+    """
+    Returns a Generator of ImportDefinitions (Customizations).
+    Install them using `resilient-circuits customize`
+
+    Contents:
+    - Message Destinations:
+        - joe_sandbox_message_destination
+    - Functions:
+        - fn_joe_sandbox_analysis
+    - Workflows:
+        - example_joe_sandbox_analysis_attachment
+        - example_joe_sandbox_artifact
+    - Rules:
+        - Example: Joe Sandbox Analysis [Attachment]
+        - Example: Joe Sandbox Analysis [Artifact]
+    """
 
 
     yield ImportDefinition(u"""
