@@ -42,17 +42,21 @@ class TestFnCloudFoundryInstanceCommand:
         assert func is not None
 
     @patch("fn_cloud_foundry.components.fn_cloud_foundry_instance_command.IBMCloudFoundryAuthenticator")
-    @patch("fn_cloud_foundry.util.cloud_foundry_api.requests.get")
-    @patch("fn_cloud_foundry.util.cloud_foundry_api.requests.delete")
+    @patch("fn_cloud_foundry.util.cloud_foundry_api.RequestsCommon.execute_call_v2")
     @pytest.mark.parametrize("fn_cloud_foundry_instance_action, fn_cloud_foundry_instances, fn_cloud_foundry_applications", [
         ('delete', "text", "test1")
     ])
-    def test_success(self, delete, get, auth, circuits_app, fn_cloud_foundry_instance_action, fn_cloud_foundry_instances,
+    def test_success(self, rc, auth, circuits_app, fn_cloud_foundry_instance_action, fn_cloud_foundry_instances,
                      fn_cloud_foundry_applications):
         """ Test calling with sample values for the parameters """
         auth.return_value = AuthenticationMock()
-        delete.return_value = give_response(204, {})
-        get.return_value = give_response(200, GUIDS_MOCK)
+
+        deleteResp = give_response(204, {})
+        getResp = give_response(200, GUIDS_MOCK)
+
+        # rc is expected to GET the app, and then DELETE it
+        # order responses accordingly
+        rc.side_effect = [getResp, deleteResp]
 
         function_params = { 
             "fn_cloud_foundry_instance_action": fn_cloud_foundry_instance_action,
@@ -64,19 +68,22 @@ class TestFnCloudFoundryInstanceCommand:
         assert(results["test1"]["text"]["success"] == True)
 
     @patch("fn_cloud_foundry.components.fn_cloud_foundry_instance_command.IBMCloudFoundryAuthenticator")
-    @patch("fn_cloud_foundry.util.cloud_foundry_api.requests.get")
-    @patch("fn_cloud_foundry.util.cloud_foundry_api.requests.delete")
+    @patch("fn_cloud_foundry.util.cloud_foundry_api.RequestsCommon.execute_call_v2")
     @pytest.mark.parametrize(
         "fn_cloud_foundry_instance_action, fn_cloud_foundry_instances, fn_cloud_foundry_applications", [
             ('delete', "text", "rand name")
         ])
-    def test_app_not_found(self, delete, get, auth, circuits_app, fn_cloud_foundry_instance_action,
+    def test_app_not_found(self, rc, auth, circuits_app, fn_cloud_foundry_instance_action,
                      fn_cloud_foundry_instances,
                      fn_cloud_foundry_applications):
         """ Test calling with sample values for the parameters """
         auth.return_value = AuthenticationMock()
-        delete.return_value = give_response(204, {})
-        get.return_value = give_response(200, GUIDS_MOCK)
+        deleteResp = give_response(204, {})
+        getResp = give_response(200, GUIDS_MOCK)
+
+        # rc is expected to GET the app, and then DELETE it
+        # order responses accordingly
+        rc.side_effect = [getResp, deleteResp]
 
         function_params = {
             "fn_cloud_foundry_instance_action": fn_cloud_foundry_instance_action,
@@ -88,19 +95,22 @@ class TestFnCloudFoundryInstanceCommand:
         assert (results["rand name"]["success"] == False)
 
     @patch("fn_cloud_foundry.components.fn_cloud_foundry_instance_command.IBMCloudFoundryAuthenticator")
-    @patch("fn_cloud_foundry.util.cloud_foundry_api.requests.get")
-    @patch("fn_cloud_foundry.util.cloud_foundry_api.requests.delete")
+    @patch("fn_cloud_foundry.util.cloud_foundry_api.RequestsCommon.execute_call_v2")
     @pytest.mark.parametrize(
         "fn_cloud_foundry_instance_action, fn_cloud_foundry_instances, fn_cloud_foundry_applications", [
             ('delete', "text", "test1")
         ])
-    def test_fail_info(self, delete, get, auth, circuits_app, fn_cloud_foundry_instance_action,
+    def test_fail_info(self, rc, auth, circuits_app, fn_cloud_foundry_instance_action,
                            fn_cloud_foundry_instances,
                            fn_cloud_foundry_applications):
         """ Test calling with sample values for the parameters """
         auth.return_value = AuthenticationMock()
-        delete.return_value = give_response(204, {})
-        get.return_value = give_response(404, GUIDS_MOCK)
+        deleteResp = give_response(204, {})
+        getResp = give_response(404, GUIDS_MOCK)
+
+        # rc is expected to GET the app, and then DELETE it
+        # order responses accordingly
+        rc.side_effect = [getResp, deleteResp]
 
         function_params = {
             "fn_cloud_foundry_instance_action": fn_cloud_foundry_instance_action,
@@ -112,19 +122,22 @@ class TestFnCloudFoundryInstanceCommand:
             results = call_fn_cloud_foundry_instance_command_function(circuits_app, function_params)
 
     @patch("fn_cloud_foundry.components.fn_cloud_foundry_instance_command.IBMCloudFoundryAuthenticator")
-    @patch("fn_cloud_foundry.util.cloud_foundry_api.requests.get")
-    @patch("fn_cloud_foundry.util.cloud_foundry_api.requests.delete")
+    @patch("fn_cloud_foundry.util.cloud_foundry_api.RequestsCommon.execute_call_v2")
     @pytest.mark.parametrize(
         "fn_cloud_foundry_instance_action, fn_cloud_foundry_instances, fn_cloud_foundry_applications", [
             ('delete', "text", "test1")
         ])
-    def test_fail_instance(self, delete, get, auth, circuits_app, fn_cloud_foundry_instance_action,
+    def test_fail_instance(self, rc, auth, circuits_app, fn_cloud_foundry_instance_action,
                        fn_cloud_foundry_instances,
                        fn_cloud_foundry_applications):
         """ Test calling with sample values for the parameters """
         auth.return_value = AuthenticationMock()
-        delete.return_value = give_response(404, {})
-        get.return_value = give_response(200, GUIDS_MOCK)
+        deleteResp = give_response(404, {})
+        getResp = give_response(200, GUIDS_MOCK)
+
+        # rc is expected to GET the app, and then DELETE it
+        # order responses accordingly
+        rc.side_effect = [getResp, deleteResp]
 
         function_params = {
             "fn_cloud_foundry_instance_action": fn_cloud_foundry_instance_action,
@@ -136,19 +149,22 @@ class TestFnCloudFoundryInstanceCommand:
         assert (results["test1"]["text"]["success"] == False)
 
     @patch("fn_cloud_foundry.components.fn_cloud_foundry_instance_command.IBMCloudFoundryAuthenticator")
-    @patch("fn_cloud_foundry.util.cloud_foundry_api.requests.get")
-    @patch("fn_cloud_foundry.util.cloud_foundry_api.requests.delete")
+    @patch("fn_cloud_foundry.util.cloud_foundry_api.RequestsCommon.execute_call_v2")
     @pytest.mark.parametrize(
         "fn_cloud_foundry_instance_action, fn_cloud_foundry_instances, fn_cloud_foundry_applications", [
             ('delete', "inst1, inst2", "test1")
         ])
-    def test_fail_and_succeed(self, delete, get, auth, circuits_app, fn_cloud_foundry_instance_action,
+    def test_fail_and_succeed(self, rc, auth, circuits_app, fn_cloud_foundry_instance_action,
                            fn_cloud_foundry_instances,
                            fn_cloud_foundry_applications):
         """ Test calling with sample values for the parameters """
         auth.return_value = AuthenticationMock()
-        delete.return_value = give_response(204, {})
-        get.return_value = give_response(200, GUIDS_MOCK)
+        deleteResp = give_response(204, {})
+        getResp = give_response(200, GUIDS_MOCK)
+
+        # rc is expected to GET the app, and then DELETE it
+        # order responses accordingly
+        rc.side_effect = [getResp, deleteResp]
 
         function_params = {
             "fn_cloud_foundry_instance_action": fn_cloud_foundry_instance_action,
@@ -161,19 +177,22 @@ class TestFnCloudFoundryInstanceCommand:
         assert (results["test1"]["inst2"]["success"] == True)
 
     @patch("fn_cloud_foundry.components.fn_cloud_foundry_instance_command.IBMCloudFoundryAuthenticator")
-    @patch("fn_cloud_foundry.util.cloud_foundry_api.requests.get")
-    @patch("fn_cloud_foundry.util.cloud_foundry_api.requests.delete")
+    @patch("fn_cloud_foundry.util.cloud_foundry_api.RequestsCommon.execute_call_v2")
     @pytest.mark.parametrize(
         "fn_cloud_foundry_instance_action, fn_cloud_foundry_instances, fn_cloud_foundry_applications", [
             ('unreal command', "inst1, inst2", "test1")
         ])
-    def test_fail_and_succeed(self, delete, get, auth, circuits_app, fn_cloud_foundry_instance_action,
+    def test_fail_and_succeed(self, rc, auth, circuits_app, fn_cloud_foundry_instance_action,
                               fn_cloud_foundry_instances,
                               fn_cloud_foundry_applications):
         """ Test calling with sample values for the parameters """
         auth.return_value = AuthenticationMock()
-        delete.return_value = give_response(204, {})
-        get.return_value = give_response(200, GUIDS_MOCK)
+        deleteResp = give_response(204, {})
+        getResp = give_response(200, GUIDS_MOCK)
+
+        # rc is expected to GET the app, and then DELETE it
+        # order responses accordingly
+        rc.side_effect = [getResp, deleteResp]
 
         function_params = {
             "fn_cloud_foundry_instance_action": fn_cloud_foundry_instance_action,
@@ -185,21 +204,24 @@ class TestFnCloudFoundryInstanceCommand:
         assert results["success"] == False
 
     @patch("fn_cloud_foundry.components.fn_cloud_foundry_instance_command.IBMCloudFoundryAuthenticator")
-    @patch("fn_cloud_foundry.util.cloud_foundry_api.requests.get")
-    @patch("fn_cloud_foundry.util.cloud_foundry_api.requests.delete")
+    @patch("fn_cloud_foundry.util.cloud_foundry_api.RequestsCommon.execute_call_v2")
     @pytest.mark.parametrize(
         "fn_cloud_foundry_instance_action, fn_cloud_foundry_instances, fn_cloud_foundry_applications", [
             ('delete', "text", None),
             ('delete', None, "test1"),
             (None, "text", "test1"),
         ])
-    def test_fail_parameters(self, delete, get, auth, circuits_app, fn_cloud_foundry_instance_action,
+    def test_fail_parameters(self, rc, auth, circuits_app, fn_cloud_foundry_instance_action,
                            fn_cloud_foundry_instances,
                            fn_cloud_foundry_applications):
         """ Test calling with sample values for the parameters """
         auth.return_value = AuthenticationMock()
-        delete.return_value = give_response(204, {})
-        get.return_value = give_response(200, GUIDS_MOCK)
+        deleteResp = give_response(204, {})
+        getResp = give_response(200, GUIDS_MOCK)
+
+        # rc is expected to GET the app, and then DELETE it
+        # order responses accordingly
+        rc.side_effect = [getResp, deleteResp]
 
         function_params = {
             "fn_cloud_foundry_instance_action": fn_cloud_foundry_instance_action,
