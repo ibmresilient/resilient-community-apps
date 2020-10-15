@@ -13,35 +13,35 @@
    "artifacts" : [
    {%- set comma = joiner(",") -%}
 
-   {%- if event.otherData.sc_evtFileMd5 != "{sc_evtFileMd5}" -%}
+   {%- if event.otherData.sc_evtFileMd5 != "" and event.otherData.sc_evtFileMd5 != "{sc_evtFileMd5}" -%}
        {{- comma() }}
        {"type": {"name": "Malware MD5 Hash"}, "value": "{{event.otherData.sc_evtFileMd5}}",
            "description" : {"format" : "html","content" : "File MD5 Hash"}}
    {%- endif -%}
-   {%- if event.otherData.sc_evtProcessMd5 != "{sc_evtProcessMd5}" -%}
+   {%- if event.otherData.sc_evtProcessMd5 != "" and event.otherData.sc_evtProcessMd5 !="{sc_evtProcessMd5}" -%}
        {{- comma() }}
        {"type": {"name": "Malware MD5 Hash"}, "value": "{{event.otherData.sc_evtProcessMd5}}",
-           "description" : {"format" : "html","content" : "Process MD5 Hash"}},
+           "description" : {"format" : "html","content" : "Process MD5 Hash"}}
    {%- endif -%}
-   {%- if event.otherData.sc_evtFileSha1 != "{sc_evtFileSha1}" -%}
+   {%- if event.otherData.sc_evtFileSha1 != "" and event.otherData.sc_evtFileSha1 != "{sc_evtFileSha1}" -%}
        {{- comma() }}
        {"type": {"name": "Malware SHA1 Hash"}, "value": "{{event.otherData.sc_evtFileSha1}}",
-           "description" : {"format" : "html","content" : "File SHA1 Hash"}},
+           "description" : {"format" : "html","content" : "File SHA1 Hash"}}
    {%- endif -%}
-   {%- if event.otherData.sc_evtProcessSha1 != "{sc_evtProcessSha1}" -%}
+   {%- if event.otherData.sc_evtProcessSha1 != "" and event.otherData.sc_evtProcessSha1 != "{sc_evtProcessSha1}" -%}
        {{- comma() }}
        {"type": {"name": "Malware SHA1 Hash"}, "value": "{{event.otherData.sc_evtProcessSha1}}",
-           "description" : {"format" : "html","content" : "Process SHA1 Hash"}},
+           "description" : {"format" : "html","content" : "Process SHA1 Hash"}}
    {%- endif -%}
-   {%- if event.otherData.sc_evtFileSha256 != "{sc_evtFileSha256}" -%}
+   {%- if event.otherData.sc_evtFileSha256 != "" and event.otherData.sc_evtFileSha256 != "{sc_evtFileSha256}" -%}
        {{- comma() }}
        {"type": {"name": "Malware SHA256 Hash"}, "value": "{{event.otherData.sc_evtFileSha256}}",
-           "description" : {"format" : "html","content" : "File SHA256 Hash"}},
+           "description" : {"format" : "html","content" : "File SHA256 Hash"}}
    {%- endif -%}
-   {%- if event.otherData.sc_evtProcessSha256 != "{sc_evtProcessSha256}" -%}
+   {%- if event.otherData.sc_evtProcessSha256 != "" and event.otherData.sc_evtProcessSha256 != "{sc_evtProcessSha256}" -%}
        {{- comma() }}
        {"type": {"name": "Malware SHA256 Hash"}, "value": "{{event.otherData.sc_evtProcessSha256}}",
-           "description" : {"format" : "html","content" : "Process SHA256 Hash"}},
+           "description" : {"format" : "html","content" : "Process SHA256 Hash"}}
    {%- endif -%}
 
    {%- for key, value in event.target.items() -%}
