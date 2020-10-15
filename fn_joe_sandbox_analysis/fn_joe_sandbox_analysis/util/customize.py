@@ -1,33 +1,31 @@
-# (c) Copyright IBM Corp. 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2020. All Rights Reserved.
 # -*- coding: utf-8 -*-
 
 """Generate the Resilient customizations required for fn_joe_sandbox_analysis"""
 
-from __future__ import print_function
-from resilient_circuits.util import *
+try:
+    from resilient import ImportDefinition
+except ImportError:
+    # Support Apps running on resilient-circuits < v35.0.195
+    from resilient_circuits.util import ImportDefinition
 
 
-def customization_data(client=None):
-    """Produce any customization definitions (types, fields, message destinations, etc)
-       that should be installed by `resilient-circuits customize`
+def codegen_reload_data():
     """
-
-    # This import data contains:
-    #   Function inputs:
-    #     artifact_id
-    #     attachment_id
-    #     incident_id
-    #     jsb_report_type
-    #   Message Destinations:
-    #     joe_sandbox_message_destination
-    #   Functions:
-    #     fn_joe_sandbox_analysis
-    #   Workflows:
-    #     example_joe_sandbox_analysis_attachment
-    #     example_joe_sandbox_artifact
-    #   Rules:
-    #     Example: Joe Sandbox Analysis [Artifact]
-    #     Example: Joe Sandbox Analysis [Attachment]
+    Parameters required reload codegen for the fn_joe_sandbox_analysis package
+    """
+    return {
+        "package": u"fn_joe_sandbox_analysis",
+        "message_destinations": [u"joe_sandbox_message_destination"],
+        "functions": [u"fn_joe_sandbox_analysis"],
+        "workflows": [u"example_joe_sandbox_analysis_attachment", u"example_joe_sandbox_artifact"],
+        "actions": [u"Example: Joe Sandbox Analysis [Attachment]", u"Example: Joe Sandbox Analysis [Artifact]"],
+        "incident_fields": [],
+        "incident_artifact_types": [],
+        "datatables": [],
+        "automatic_tasks": [],
+        "scripts": []
+    }
 
 
     yield ImportDefinition(u"""
