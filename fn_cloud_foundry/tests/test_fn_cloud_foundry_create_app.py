@@ -41,7 +41,7 @@ class TestFnCloudFoundryCreateApp:
         assert func is not None
 
     @patch("fn_cloud_foundry.components.fn_cloud_foundry_create_app.IBMCloudFoundryAuthenticator")
-    @patch("fn_cloud_foundry.util.cloud_foundry_api.requests.post")
+    @patch("fn_cloud_foundry.util.authentication.ibm_cf_bearer.RequestsCommon.execute_call_v2")
     @pytest.mark.parametrize("fn_cloud_foundry_applications, fn_cloud_foundry_space_guid, fn_cloud_foundry_additional_parameters_json", [
         ("text", "space", "{}")
     ])
@@ -61,7 +61,7 @@ class TestFnCloudFoundryCreateApp:
         assert(results["success"] == True)
 
     @patch("fn_cloud_foundry.components.fn_cloud_foundry_create_app.IBMCloudFoundryAuthenticator")
-    @patch("fn_cloud_foundry.util.cloud_foundry_api.requests.post")
+    @patch("fn_cloud_foundry.util.authentication.ibm_cf_bearer.RequestsCommon.execute_call_v2")
     @pytest.mark.parametrize(
         "fn_cloud_foundry_applications, fn_cloud_foundry_space_guid, fn_cloud_foundry_additional_parameters_json", [
             ("text", "space", "{}")
@@ -82,7 +82,7 @@ class TestFnCloudFoundryCreateApp:
         assert (results["success"] == False)
 
     @patch("fn_cloud_foundry.components.fn_cloud_foundry_create_app.IBMCloudFoundryAuthenticator")
-    @patch("fn_cloud_foundry.util.cloud_foundry_api.requests.post")
+    @patch("fn_cloud_foundry.util.authentication.ibm_cf_bearer.RequestsCommon.execute_call_v2")
     @pytest.mark.parametrize(
         "fn_cloud_foundry_applications, fn_cloud_foundry_space_guid, fn_cloud_foundry_additional_parameters_json", [
             (None, "space", "{}"),
