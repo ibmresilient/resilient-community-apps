@@ -33,32 +33,38 @@ class TestAuthenticator:
         auth.get_token()
         assert auth.get_headers() == {"Authorization": "say melon"}
 
-    @patch("fn_cloud_foundry.util.authentication.ibm_cf_bearer.requests.get")
-    @patch("fn_cloud_foundry.util.authentication.ibm_cf_bearer.requests.post")
-    def test_authenticator_details_error(self, post, get):
+    @patch("fn_cloud_foundry.util.authentication.ibm_cf_bearer.RequestsCommon.execute_call_v2")
+    def test_authenticator_details_error(self, rc):
         """
         If details won't be returned fail.
         """
-        get.return_value = give_response(404, {"authorization_endpoint": "test an end"})
-        post.return_value = give_response(200, {
+        getResp = give_response(404, {"authorization_endpoint": "test an end"})
+        postResp = give_response(200, {
             "token_type": "say",
             "access_token": "melon"
         })
+
+        rc.side_effect = [getResp, postResp]
+
         with pytest.raises(ValueError):
             auth = IBMCloudFoundryAuthenticator({}, {"cf_api_apikey": "apikey"}, "url")
             auth.get_token()
 
-    @patch("fn_cloud_foundry.util.authentication.ibm_cf_bearer.requests.get")
-    @patch("fn_cloud_foundry.util.authentication.ibm_cf_bearer.requests.post")
-    def test_authenticator_token_error(self, post, get):
+    @patch("fn_cloud_foundry.util.authentication.ibm_cf_bearer.RequestsCommon.execute_call_v2")
+    def test_authenticator_token_error(self, rc):
         """
         Fail if token isn't returned.
         """
-        get.return_value = give_response(200, {"authorization_endpoint": "test an end"})
-        post.return_value = give_response(404, {
+        getResp = give_response(200, {"authorization_endpoint": "test an end"})
+        postResp = give_response(404, {
             "token_type": "say",
             "access_token": "melon"
         })
+
+        # the test is makes a GET request followed by a POST request for authentication
+        # create an iterable of responses accordingly
+        rc.side_effect = [getResp, postResp]
+
         with pytest.raises(ValueError):
             auth = IBMCloudFoundryAuthenticator({}, {"cf_api_apikey": "apikey"}, "url")
             auth.get_token()
@@ -67,6 +73,7 @@ class TestAuthenticator:
         """
         Fail if keys are not provided.
         """
+        # call authenticator constructor without an api key in the options dict
         with pytest.raises(KeyError):
-            auth = IBMCloudFoundryAuthenticator({}, {"cf_api_apikey": "apikey"}, "url")
+            auth = IBMCloudFoundryAuthenticator({}, {}, "url")
             auth.get_token()
