@@ -31,7 +31,7 @@ setup(
     install_requires=[
         'resilient_circuits>=32.0.0',
         'jbxapi==2.10.1',
-        'resilient-lib'
+        'resilient_lib'
     ],
     packages=find_packages(),
     include_package_data=True,

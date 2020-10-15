@@ -15,6 +15,7 @@ if sys.version_info.major < 3:
 else:
    from urllib.parse import urlparse
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from resilient_lib import validate_fields, RequestsCommon
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'fn_joe_sandbox_analysis"""
@@ -187,6 +188,11 @@ class FunctionComponent(ResilientComponent):
         def should_timeout(ping_timeout, start_time):
           returnValue = (time.time() - start_time) > ping_timeout
           return returnValue
+      
+        def get_proxies(opts, options):
+            rc = RequestsCommon(opts, options)
+            proxies = rc.get_proxies()
+            return proxies
 
         try:
             # Get Joe Sandbox options from app.config file
@@ -216,15 +222,20 @@ class FunctionComponent(ResilientComponent):
 
             # Setup proxies parameter if exist in appconfig file
             proxies = {}
-
-            if (HTTP_PROXY):
-              proxies["http"] = HTTP_PROXY
             
-            if (HTTPS_PROXY):
-              proxies["https"] = HTTPS_PROXY
-            
-            if (len(proxies) == 0):
-              proxies = None
+            try:
+                proxies = get_proxies(self.opts, self.options)
+                
+                if (HTTP_PROXY) and (len(proxies) == 0):
+                    proxies["http"] = HTTP_PROXY
+                
+                if (HTTPS_PROXY) and (len(proxies) == 0):
+                    proxies["https"] = HTTPS_PROXY
+                
+                if (len(proxies) == 0):
+                    proxies = None
+            except Exception as proxy_error:
+                proxies = None
 
             # Instansiate new Joe Sandbox object
             joesandbox = jbxapi.JoeSandbox(apikey=API_KEY, accept_tac=ACCEPT_TAC, proxies=proxies)
