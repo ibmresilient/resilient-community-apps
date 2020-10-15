@@ -72,8 +72,7 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
 
         # check for attachments and artifacts with attachments
         if type_name == "attachment" or (type_name == "artifact" and payload.get("attachment", None)):
-            # remove org reference
-            orig_type_id, cleaned_payload = self.clean_payload(context.inc_id, type_name, payload)
+            cleaned_payload = self.clean_payload(context.inc_id, type_name, payload)
 
             self.resilient_target.upload_attachment(self.resilient_source.rest_client,
                                                     self.resilient_source.rest_client.org_id, context.inc_id,
@@ -91,14 +90,17 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
                 LOG.warning(u"Discarding datatable not found in target org: %s", type_name)
                 return
 
-            # get the fields of the target resilient
-            new_payload, discard_list = self.convert_values(matching_criteria, type_name,
-                                                            src_field_names, target_field_names,
-                                                            None, payload,
-                                                            self._is_datatable(payload))
+            if self._is_datatable(payload):
+                new_payload = self.convert_datatable_values(src_field_names, payload)
+                discard_list = None
+            else:
+                # get the fields for the target resilient
+                new_payload, discard_list = self.convert_values(matching_criteria, type_name,
+                                                                src_field_names, target_field_names,
+                                                                None, payload)
 
             # remove fields unrelated to creating/upgrading an object
-            orig_type_id, cleaned_payload = self.clean_payload(context.inc_id, type_name, new_payload)
+            cleaned_payload = self.clean_payload(context.inc_id, type_name, new_payload)
 
             # perform the creation or update in the new resilient org
             new_id, opr_type, create_list = self.resilient_target.create_update_type(self.resilient_source.rest_client.org_id, context.inc_id,
@@ -131,7 +133,6 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
                                                          type_name, orig_type_id,
                                                          None, None, "filtered")
 
-
     def _is_datatable(self, payload):
         """
         Return boolean regarding object if a datatable
@@ -140,10 +141,26 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
         """
         return bool(payload.get("table_name", None))
 
+    def convert_datatable_values(self, src_field_names, payload):
+        new_fields = {}
+        cells = payload['cells']
+        for field in cells:
+            # datatable column names need to be looked up differently based on cell Id
+            if src_field_names.get(field, {}).get('name', None):
+                field_key = src_field_names[field]['name']
+                if src_field_names[field]['input_type'] in ('select', 'multiselect'):
+                    new_value = {"value": self.convert_selects(field_key, cells[field].get('value', None),
+                                                               src_field_names[field])}
+                else:
+                    new_value = {"value": cells[field].get('value', None)}
+
+                new_fields[field_key] = new_value
+
+        return {"cells": new_fields}
 
     def convert_values(self, matching_criteria, type_name,
                        src_field_names, target_field_names,
-                       prefix, payload, datatable_flag):
+                       prefix, payload):
         """
         recursive function to convert Ids to values for a given object
         raise MatchError if the matching criteria for an incident fails
@@ -153,7 +170,6 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
         :param target_field_names: type definition for the target org
         :param prefix: hierarchical fields have prefixes (incident)
         :param payload:
-        :param datatable_flag:
         :return: converted payload, discard_list of custom fields not sync'd
         """
         new_payload = {}
@@ -162,43 +178,32 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
         discarded_fields = []
         for field in payload:
             field_key = field
+            new_value = payload[field]
 
-            # datatable column names need to be looked up differently based on cell Id
-            if datatable_flag:
-                if src_field_names.get(field, {}).get('name', None):
-                    field_key = src_field_names[field]['name']
-                    if src_field_names[field]['input_type'] in ('select', 'multiselect'):
-                        new_value = {"value": self.convert_selects(field_key, payload[field].get('value', None),
-                                                                   src_field_names[field])}
-                    else:
-                        new_value = {"value": payload[field].get('value', None)}
+            if type_name == "incident":
+                # apply logic to determine if the incident should be created
+                if not matching_criteria.match_payload_value(field_key, new_value):
+                    msg = "Match failed on {}:{}".format(field_key, new_value)
+                    raise MatchError(msg)
+                # ensure custom fields exist
+                if prefix == "properties" and field_key not in target_field_names:
+                    # field not found on target org, we will discard
+                    LOG.warning(u"Discarding custom field not found in target org: %s", field_key)
+                    discarded_fields.append(field_key)
+                    continue
 
-            else:
-                new_value = payload[field]
-                if type_name == "incident":
-                    # apply logic to determine if the incident should be created
-                    if not matching_criteria.match_payload_value(field_key, new_value):
-                        msg = "Match failed on {}:{}".format(field_key, new_value)
-                        raise MatchError(msg)
-                    # ensure custom fields exist
-                    if prefix == "properties" and field_key not in target_field_names:
-                        # field not found on target org, we will discard
-                        LOG.warning(u"Discarding custom field not found in target org: %s", field_key)
-                        discarded_fields.append(field_key)
-                        continue
+            if field in src_field_names:
+                if src_field_names[field]['input_type'] in ('select', 'multiselect', 'select_owner', 'multiselect_members') \
+                    and src_field_names[field].get('prefix', prefix) == prefix:
+                    new_value = self.convert_selects(field_key, payload[field], src_field_names[field])
 
-                if field in src_field_names:
-                    if src_field_names[field]['input_type'] in ('select', 'multiselect', 'select_owner', 'multiselect_members') \
-                        and src_field_names[field].get('prefix', prefix) == prefix:
-                        new_value = self.convert_selects(field_key, payload[field], src_field_names[field])
-
-                # category header (pii, properties, gdpr, etc.)?
-                elif isinstance(payload[field], dict):
-                    # recurse over this dictionary
-                    new_value, discarded = self.convert_values(matching_criteria, type_name,
-                                                               src_field_names, target_field_names,
-                                                               field, payload[field], datatable_flag)
-                    discarded_fields.extend(discarded)
+            # category header (pii, properties, gdpr, etc.)?
+            elif isinstance(payload[field], dict):
+                # recurse over this dictionary
+                new_value, discarded = self.convert_values(matching_criteria, type_name,
+                                                           src_field_names, target_field_names,
+                                                           field, payload[field])
+                discarded_fields.extend(discarded)
 
             new_payload[field_key] = new_value
 
@@ -314,7 +319,7 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
             if target_parent_id and sync_state == "active":
                 payload["parent_id"] = target_parent_id
 
-        return orig_type_id, payload
+        return payload
 
     def add_sync_fields(self, orig_inc_id, payload):
         if self.sync_references:
