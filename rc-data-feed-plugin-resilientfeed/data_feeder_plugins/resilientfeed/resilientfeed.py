@@ -178,18 +178,6 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
             field_key = field
             new_value = payload[field]
 
-            if type_name == "incident":
-                # apply logic to determine if the incident should be created
-                if not matching_criteria.match_payload_value(field_key, new_value):
-                    msg = "Match failed on {}:{}".format(field_key, new_value)
-                    raise MatchError(msg)
-                # ensure custom fields exist
-                if prefix == "properties" and field_key not in target_field_names:
-                    # field not found on target org, we will discard
-                    LOG.warning(u"Discarding custom field not found in target org: %s", field_key)
-                    discarded_fields.append(field_key)
-                    continue
-
             if field in src_field_names:
                 if src_field_names[field]['input_type'] in ('select', 'multiselect', 'select_owner', 'multiselect_members') \
                     and src_field_names[field].get('prefix', prefix) == prefix:
@@ -202,6 +190,18 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
                                                            src_field_names, target_field_names,
                                                            field, payload[field])
                 discarded_fields.extend(discarded)
+
+            if type_name == "incident":
+                # apply logic to determine if the incident should be created
+                if not matching_criteria.match_payload_value(field_key, new_value):
+                    msg = "Match failed on {}:{}".format(field_key, new_value)
+                    raise MatchError(msg)
+                # ensure custom fields exist
+                if prefix == "properties" and field_key not in target_field_names:
+                    # field not found on target org, we will discard
+                    LOG.warning(u"Discarding custom field not found in target org: %s", field_key)
+                    discarded_fields.append(field_key)
+                    continue
 
             new_payload[field_key] = new_value
 

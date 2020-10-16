@@ -33,12 +33,12 @@ class Filters():
 
         self.match_results = []
 
-    def match_payload_value(self, field, value):
+    def match_payload_value(self, field, payload_value):
         """
         for a given payload value, determine if it matches the filter criteria.
         for all tests in a payload, maintain an array to know if the entire payload passes all criteria
         :param field:
-        :param value:
+        :param payload_value:
         :return: true or false based on filter_and_operator: any or all
         """
 
@@ -48,9 +48,9 @@ class Filters():
         if field not in self.match_list:
             return True
 
-        eval_result = self._test_field_value(field, value)
+        eval_result = self._test_field_value(field, payload_value)
 
-        self.log.debug(u"%s: %s->%s %s", field, value, eval_result, self.match_results)
+        self.log.debug(u"%s: %s->%s %s", field, payload_value, eval_result, self.match_results)
         # maintain the running result for this incident
         self.match_results.append(eval_result)
 
@@ -59,11 +59,11 @@ class Filters():
 
         return any(self.match_results)
 
-    def _test_field_value(self, field, value):
+    def _test_field_value(self, field, payload_value):
         """
         Confirm if a field matches the filter criteria
         :param field:
-        :param value:
+        :param payload_value:
         :return: true/false if matches. No criteria will return true
         """
 
@@ -71,13 +71,20 @@ class Filters():
         _match_opr = copy.copy(match_opr)
         if _match_opr == "~":
             _match_opr = "in"
-            # flip the match_value and value
+            # flip the match_value and payload_value
             _match_value = match_value
-            match_value = value
-            value = _match_value
+            match_value = payload_value
+            payload_value = _match_value
 
         try:
-            eval_result = self._eval_field(match_value, _match_opr, value)
+            if isinstance(payload_value, list):
+                # test each payload_value as OR logic
+                eval_result = False
+                for item in payload_value:
+                    item_result = self._eval_field(match_value, _match_opr, item)
+                    eval_result = eval_result | item_result
+            else:
+                eval_result = self._eval_field(match_value, _match_opr, payload_value)
         except (SyntaxError, TypeError) as err:
             self.log.error(err)
             eval_result = False

@@ -121,6 +121,17 @@ def test_empty_string():
     f = Filters([], True)
     assert f.match_payload_value('fld_not_found', 'is')
 
+def test_list_to_list():
+    f = Filters({'fld':('fld', 'in', ['Phishing', 'Malicious'])}, True)
+    assert f.match_payload_value('fld', ['Phishing'])
+    assert f.match_payload_value('fld', ['Phishing', 'Malicious'])
+    assert not f.match_payload_value('fld', [])
+
+def test_string_to_list():
+    f = Filters({'fld':('fld', 'in', ['Phishing', 'Malicious'])}, True)
+    assert f.match_payload_value('fld', 'Phishing')
+    assert not f.match_payload_value('fld', 'hish')
+
 def test_parse_init_opr1():
     with pytest.raises(ValueError):
        parse_matching_criteria("fld!<> abc", "any")
