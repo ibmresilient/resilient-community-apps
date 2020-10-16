@@ -7,6 +7,11 @@ FROM registry.access.redhat.com/ubi8/python-36:latest
 ARG APPLICATION=fn_joe_sandbox_analysis
 ARG RES_CIRCUITS_VERSION=37
 
+#Environment variable for any app to check if running in a container
+
+ARG APP_HOST_CONTAINER=1
+ENV APP_HOST_CONTAINER=${APP_HOST_CONTAINER}
+
 # update to latest packages, user 0 for root privilege
 USER 0
 # Update to latest pip
