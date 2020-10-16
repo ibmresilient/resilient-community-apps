@@ -14,11 +14,9 @@ from fn_mcafee_opendxl.util.helper import verify_config, get_topic_template_dict
 
 log = logging.getLogger(__name__)
 
-
 def get_connected_resilient_client(config):
     opts = config.get("opts")
     client = get_resilient_client(opts)
-    client.connect(opts.email, opts.password)
 
     return client
 
