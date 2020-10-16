@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from data_feeder_plugins.resilientfeed.resilientfeed import exclude_incident_fields
 
 TEST_PAYLOAD = {

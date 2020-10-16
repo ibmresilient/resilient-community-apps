@@ -5,7 +5,7 @@
 
 import logging
 import re
-from data_feeder_plugins.resilientfeed.lib.filters import Filters
+from data_feeder_plugins.resilientfeed.lib.filters import Filters, parse_matching_criteria, MatchError
 from resilient_lib import str_to_bool
 from rc_data_feed.lib.feed import FeedDestinationBase
 from .resilient_common import Resilient
@@ -16,8 +16,6 @@ LOG = logging.getLogger(__name__)
 USER_REGEX = re.compile(r".*\((.*\@.*)\)")
 # remove xml identifier
 XML_REGEX = re.compile(r"^<\?xml.*\?>(.*)")
-# <field> <operator> <value>. ex: org_id = 201
-REGEX_OPERATORS = re.compile(r"([a-zA-Z0-9_]+)\s*(~|!=|=<|>=|=>|>=|<|>|==|=|is not| is |not in| in )\s*(.+)")
 
 # sync properties for an incident
 DF_INC_ID = "df_inc_id"
@@ -408,74 +406,3 @@ def exclude_incident_fields(exclude_fields, payload):
             LOG.debug("Excluding field: %s", field)
 
     return new_payload
-
-
-def parse_matching_criteria(filters, filter_operator):
-    """
-    build the filter criteria, if present
-    :param filters:field opr value[;]...
-    :param filter_operator: any|all
-    """
-    LOG.debug("%s %s", filters, filter_operator)
-
-    if filter_operator and filter_operator.strip().lower() not in ('all', 'any'):
-        raise ValueError("operator must be 'all' or 'any': {}".format(filter_operator))
-
-    match_operator_and = (filter_operator.strip().lower() == 'all') if filter_operator else True
-
-    # parse the filters and produce a tuple of (field, operator, value)
-    match_list = {}
-    if filters:
-        for filter_str in filters.split(';'):
-            m = REGEX_OPERATORS.match(filter_str.strip())
-            if not m or len(m.groups()) != 3:
-                raise ValueError("Unable to parse filter '{}'".format(filter_str))
-
-            match_field = m.group(1)
-            match_opr = m.group(2)
-            # correct mistyped comparison
-            if match_opr.strip() == '=':
-                match_opr = '=='
-
-            match_value = m.group(3)
-
-            # determine if working with a string, boolean, or int
-            if match_value in ["true", "True", "false", "False"]:
-                match_value = str_to_bool(match_value)
-            elif match_value == 'None':
-                match_value = None
-            else:
-                try:
-                    match_value = int(match_value) # this will fail for numbers, which will be trapped
-                except:
-                    pass
-
-            compare_tuple = (match_field, match_opr, match_value)
-            LOG.debug(compare_tuple)
-            match_list[match_field] = compare_tuple
-
-    return match_list, match_operator_and
-
-class MatchError(Exception):
-    """
-    Class used to signal Filter Error. It doesn't add any specific information other than
-    identifying the type of error
-    """
-    def __init__(self, message):
-        super(MatchError, self).__init__(message)
-        self.message = message
-
-    def __str__(self):
-        return repr(self.message)
-
-class FieldNotFoundError(Exception):
-    """
-    Class used to signal Filter Error. It doesn't add any specific information other than
-    identifying the type of error
-    """
-    def __init__(self, message):
-        super(FieldNotFoundError, self).__init__(message)
-        self.msg = message
-
-    def __str__(self):
-        return repr(self.msg)
