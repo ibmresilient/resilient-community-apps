@@ -10,8 +10,8 @@ setup(
     author='IBM Resilient',
     author_email='resil.labs@gmail.com',
     url='http://ibm.biz/resilientcommunity',
-    description="Resilient Circuits Components for sending data feeds to other (BI) systems",
-    long_description="Resilient Circuits Components for sending data feeds to other (BI) systems",
+    description="Sync incident data from one Resilient organization to another",
+    long_description="""Sync incident, artifact, attachment, milestone, note, task, and datatable data from one Resilient organization to another. Sync data in bulk and in real-time. This can be used to migrate incident data between different organizations within the same Resilient instance or with a new instance.""",
     install_requires=[
         'cachetools',
         'pyodbc',
