@@ -15,10 +15,6 @@ except ImportError:
 PACKAGE_NAME = "fn_cloud_foundry"
 FUNCTION_NAME = "fn_cloud_foundry_create_app"
 
-# Read the default configuration-data section from the package
-# uncomment to use a real app.config file
-config_data = get_config_data(PACKAGE_NAME)
-
 # set dummy app.config values
 config_data = u"""
 [fn_cloud_foundry]
@@ -37,6 +33,10 @@ cf_api_password=dummyPass
 #http_proxy=
 #https_proxy=
 """
+
+# Read the default configuration-data section from the package
+# uncomment to use a real app.config file
+#config_data = get_config_data(PACKAGE_NAME)
 
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"

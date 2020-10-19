@@ -15,8 +15,28 @@ except ImportError:
 PACKAGE_NAME = "fn_cloud_foundry"
 FUNCTION_NAME = "fn_cloud_foundry_manage_applications"
 
+# set dummy app.config values
+config_data = u"""
+[fn_cloud_foundry]
+#Base url endpoint of your CF platform
+#For example, for IBM’s BlueMix it is: https://api.ng.bluemix.net/
+cf_api_base=https://api.ng.bluemix.net/
+#
+#Enter only what’s required by your authenticator.
+#For example, the default BlueMixCF authenticator only requires apikey.
+#
+cf_api_apikey=dummyAPIKey
+#Enter username and password if needed for access to DockerHub for Create Application function
+cf_api_username=dummyUser
+cf_api_password=dummyPass
+#Optional proxy settings
+#http_proxy=
+#https_proxy=
+"""
+
 # Read the default configuration-data section from the package
-config_data = get_config_data(PACKAGE_NAME)
+# uncomment to use a real app.config file
+#config_data = get_config_data(PACKAGE_NAME)
 
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
