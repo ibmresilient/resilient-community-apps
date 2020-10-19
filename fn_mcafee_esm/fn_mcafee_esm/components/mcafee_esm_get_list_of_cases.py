@@ -42,8 +42,10 @@ class FunctionComponent(ResilientComponent):
         # GetRequestsCommon object
         rc = self.get_requests_object()
 
-        # Check the connection to ESM
-        case_get_case_list(rc, self.options)
+        # Avoid during testing.
+        if self.options["esm_url"] and "mockesmurl" not in self.options["esm_url"]:
+            # Check the connection to ESM
+            case_get_case_list(rc, self.options)
 
     @handler("reload")
     def _reload(self, event, opts):
