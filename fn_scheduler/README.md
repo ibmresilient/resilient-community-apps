@@ -21,7 +21,7 @@
   - [Installation](#installation)
     - [App Host](#app-host)
     - [Integration Server](#integration-server)
-    - [Upgrades to v1.0.2](#upgrades-to-v102)
+    - [Upgrades to v1.0.3](#upgrades-to-v103)
     - [Uninstall](#uninstall)
   - [Troubleshooting](#troubleshooting)
     - [Resilient Action Status](#resilient-action-status)
@@ -140,15 +140,16 @@ To install,
   $ resilient-circuits run
   ```
 
-### Upgrades to v1.0.2
+### Upgrades to v1.0.3
 
-If upgrading to v1.0.2, add the following comments and settings to your app.config [fn_scheduler] section:
+If upgrading to v1.0.3, add the following comments and settings to your app.config [fn_scheduler] section:
 
 ```
 # db url if using PostgreSQL DB. Use this with AppHost
 #db_url=postgresql+psycopg2://username:password@host:port/database
 ```
 Use these settings to connect to a PostgreSQL db, rather than a SQLite db.
+
 
 ---
 
