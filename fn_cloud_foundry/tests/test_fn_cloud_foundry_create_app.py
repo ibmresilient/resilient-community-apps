@@ -104,4 +104,3 @@ class TestFnCloudFoundryCreateApp:
         with pytest.raises(AssertionError):
             # failed. In the end it's the calling function that fails, so can only catch Assert
             results = call_fn_cloud_foundry_create_app_function(circuits_app, function_params)
-            assert True
