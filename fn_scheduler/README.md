@@ -14,13 +14,21 @@
 
 # fn-scheduler Functions for IBM Resilient
 
-- [Release Notes](#release-notes)
-- [Overview](#overview)
-- [Requirements](#requirements)
-- [Installation](#installation)
-- [Uninstall](#uninstall)
-- [Troubleshooting](#troubleshooting)
-- [Support](#support)
+- [fn-scheduler Functions for IBM Resilient](#fn-scheduler-functions-for-ibm-resilient)
+  - [Release Notes](#release-notes)
+  - [Overview](#overview)
+  - [Requirements](#requirements)
+  - [Installation](#installation)
+    - [App Host](#app-host)
+    - [Integration Server](#integration-server)
+    - [Upgrades to v1.0.2](#upgrades-to-v102)
+    - [Uninstall](#uninstall)
+  - [Troubleshooting](#troubleshooting)
+    - [Resilient Action Status](#resilient-action-status)
+    - [Resilient Scripting Log](#resilient-scripting-log)
+    - [Resilient Logs](#resilient-logs)
+    - [Resilient-Circuits](#resilient-circuits)
+  - [Support](#support)
 
 ---
 
@@ -31,6 +39,7 @@
 -->
 | Version | Date | Notes |
 | ------: | ---: | ----: |
+| 1.0.3   | Oct. 2020 | Using extra_requires parameter |
 | 1.0.2   | Sept. 2020 | PostgreSQL support |
 | 1.0.1   | May 2020 | App Host support | 
 | 1.0.0   | Nov. 2019 | Initial Release |
