@@ -39,14 +39,6 @@ class FunctionComponent(ResilientComponent):
         # Check config file and change trust_cert to Boolean
         self.options = check_config(self.options)
 
-        # GetRequestsCommon object
-        rc = self.get_requests_object()
-
-        # Avoid during testing.
-        if self.options["esm_url"] and "mockesmurl" not in self.options["esm_url"]:
-            # Check the connection to ESM
-            case_get_case_list(rc, self.options)
-
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
@@ -64,8 +56,8 @@ class FunctionComponent(ResilientComponent):
 
             options = self.options
 
-            # GetRequestsCommon object
-            rc = self.get_requests_object()
+            # Instantiate RequestsCommon object
+            rc = RequestsCommon(opts=self.opts, function_opts=self.options)
 
             # Call caseGetCaseList
             case_list = case_get_case_list(rc, options)
@@ -90,8 +82,3 @@ class FunctionComponent(ResilientComponent):
             yield FunctionResult(results)
         except Exception as e:
             yield FunctionError(e)
-
-    def get_requests_object(self):
-        """ Instantiate RequestsCommon object and return object """
-        rc = RequestsCommon(opts=self.opts, function_opts=self.options)
-        return rc
