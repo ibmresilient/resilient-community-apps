@@ -4,7 +4,7 @@
 
 from __future__ import print_function
 import pytest
-from mock import patch
+from mock import patch, MagicMock
 from resilient_circuits.util import get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 from test_helper import get_test_config, generate_response, string_test_config
@@ -36,8 +36,8 @@ def call_mcafee_esm_get_case_events_detail_function(circuits, function_params, t
 class TestMcafeeEsmGetCaseEvenstsDetail:
     """ Tests for the mcafee_esm_get_case_evensts_detail function"""
 
-    @patch("requests.post")
-    def test_get_case_event_detail(self, mocked_requests_post):
+    @patch("resilient_lib.RequestsCommon")
+    def test_get_case_event_detail(self, mocked_requests_common):
         ops = check_config(t_config_data)
         content1 = {
             "status": "success"
@@ -47,10 +47,11 @@ class TestMcafeeEsmGetCaseEvenstsDetail:
             "id": "144115188075855872|1422",
             "message": "Failed User Logon"
         }]
-        mocked_requests_post.side_effect = [generate_response(content1, 200),
-                                            generate_response(content2, 200)]
+        mocked_requests_common.execute_call_v2 = MagicMock()
+        mocked_requests_common.execute_call_v2.side_effect = [generate_response(content1, 200),
+                                                              generate_response(content2, 200)]
 
-        actual_response = case_get_case_events_details(ops, 1)
+        actual_response = case_get_case_events_details(mocked_requests_common, ops, 1)
         assert content2 == actual_response
 
     def test_function_definition(self):
@@ -61,8 +62,8 @@ class TestMcafeeEsmGetCaseEvenstsDetail:
     @pytest.mark.parametrize("mcafee_event_ids_list, expected_results", [
         ("1", {'inputs': {'mcafee_event_ids_list': '1'}, 'event_details': [{'message': 'Failed User Logon', 'lastTime': '08/22/2018 17:39:05', 'id': '144115188075855872|1422'}]})
     ])
-    @patch("requests.post")
-    def test_success(self, mocked_requests_post, circuits_app, mcafee_event_ids_list, expected_results):
+    @patch("resilient_lib.RequestsCommon.execute_call_v2")
+    def test_success(self, mocked_execute_call_v2, circuits_app, mcafee_event_ids_list, expected_results):
         """ Test calling with sample values for the parameters """
         function_params = {
             "mcafee_event_ids_list": mcafee_event_ids_list
@@ -75,8 +76,8 @@ class TestMcafeeEsmGetCaseEvenstsDetail:
             "id": "144115188075855872|1422",
             "message": "Failed User Logon"
         }]
-        mocked_requests_post.side_effect = [generate_response(content1, 200),
-                                            generate_response(content2, 200)]
+        mocked_execute_call_v2.side_effect = [generate_response(content1, 200),
+                                              generate_response(content2, 200)]
 
         results = call_mcafee_esm_get_case_events_detail_function(circuits_app, function_params)
         results.pop("metrics")
