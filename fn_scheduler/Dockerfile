@@ -22,7 +22,7 @@ RUN pip install "resilient-circuits>=${RES_CIRCUITS_VERSION}"
 
 # install the base package
 COPY ./dist /tmp/packages
-RUN pip install /tmp/packages/${APPLICATION}-*.tar.gz[apphost]
+RUN app_file=`ls -1 /tmp/packages/${APPLICATION}-*.tar.gz` && pip install ${app_file}[apphost]
 
 # uncomment and replicate if additional pypi packages are needed
 #RUN pip install <package>

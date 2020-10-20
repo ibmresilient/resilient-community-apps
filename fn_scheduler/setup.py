@@ -39,7 +39,7 @@ setup(
         'python-dateutil>=2.8.1',
     ],
     extras_require={
-    'apphost': ['psycopg2>=2.8.6']
+        'apphost': ['py-postgresql']
     },
     packages=find_packages(),
     include_package_data=True,
