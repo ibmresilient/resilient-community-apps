@@ -19,7 +19,7 @@ def snake_to_camel(word):
 
 setup(
     name='fn_scheduler',
-    version='1.0.2',
+    version='1.0.3',
     license='MIT',
     author='Resilient Labs',
     author_email='resil@gmail.com',
@@ -37,8 +37,10 @@ setup(
         'APScheduler>=3.6.1',
         'SQLAlchemy>=1.3.8',
         'python-dateutil>=2.8.1',
-        'psycopg2>=2.8.6'
     ],
+    extras_require={
+        'apphost': ['py-postgresql']
+    },
     packages=find_packages(),
     include_package_data=True,
     platforms='any',

@@ -17,6 +17,6 @@ thread_max=20
 # directory for the sqlite persistent db
 datastore_dir=
 # db url if using a postgreSQL DB. Use this with AppHost
-#db_url=postgresql+psycopg2://username:password@host:port/database
+#db_url=postgresql+pypostgresql://username:password@host:port/database
 """
     return config_data

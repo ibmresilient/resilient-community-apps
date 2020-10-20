@@ -14,13 +14,21 @@
 
 # fn-scheduler Functions for IBM Resilient
 
-- [Release Notes](#release-notes)
-- [Overview](#overview)
-- [Requirements](#requirements)
-- [Installation](#installation)
-- [Uninstall](#uninstall)
-- [Troubleshooting](#troubleshooting)
-- [Support](#support)
+- [fn-scheduler Functions for IBM Resilient](#fn-scheduler-functions-for-ibm-resilient)
+  - [Release Notes](#release-notes)
+  - [Overview](#overview)
+  - [Requirements](#requirements)
+  - [Installation](#installation)
+    - [App Host](#app-host)
+    - [Integration Server](#integration-server)
+    - [Upgrades to v1.0.3](#upgrades-to-v103)
+    - [Uninstall](#uninstall)
+  - [Troubleshooting](#troubleshooting)
+    - [Resilient Action Status](#resilient-action-status)
+    - [Resilient Scripting Log](#resilient-scripting-log)
+    - [Resilient Logs](#resilient-logs)
+    - [Resilient-Circuits](#resilient-circuits)
+  - [Support](#support)
 
 ---
 
@@ -31,6 +39,7 @@
 -->
 | Version | Date | Notes |
 | ------: | ---: | ----: |
+| 1.0.3   | Oct. 2020 | Conditional PostgreSQL dependency |
 | 1.0.2   | Sept. 2020 | PostgreSQL support |
 | 1.0.1   | May 2020 | App Host support | 
 | 1.0.0   | Nov. 2019 | Initial Release |
@@ -88,7 +97,7 @@ To install,
   | **timezone** | Yes | `utc` | *Specify the timezone (ex. America/New_York) which scheduled rules should follow.* |
   | **thread_max** | Yes | `20` | *Number of threads which can run at the same. Typically, triggered rules run for a very short time to kick off a Resilient rule.* |
   | **datastore_dir** | No | `/path/to/sqlite_folder` | *Specify a data path for the sqlite persistent datafile (ex. /path/to/scheduler.sqlite)* |
-  | **db_url** | No | postgresql+psycopg2://res_test:res_test@192.168.1.215:5432/res_test | *Specify a PostgreSQL db to retain the schedules. Uncomment and remove the setting datastore_dir.* |
+  | **db_url** | No | postgresql+pypostgresql://res_test:res_test@192.168.1.215:5432/res_test | *Specify a PostgreSQL db to retain the schedules. Uncomment and remove the setting datastore_dir.* |
 
   
 ### Integration Server
@@ -119,7 +128,7 @@ To install,
   | **timezone** | Yes | `utc` | *Specify the timezone (ex. America/New_York) which scheduled rules should follow* |
   | **thread_max** | Yes | `20` | *Number of threads which can run at the same. Typically, triggered rules run for a very short time to kick off a Resilient rule.* |
   | **datastore_dir** | No | `/path/to/sqlite_folder` | *Specify a data path for the sqlite persistent datafile (ex. /path/to/scheduler.sqlite)* |
-  | **db_url** | No | postgresql+psycopg2://res_test:res_test@192.168.1.215:5432/res_test | *Specify a postgres db to retain the schedules. Uncomment and remove the setting datastore_dir.** |
+  | **db_url** | No | postgresql+pypostgresql://res_test:res_test@192.168.1.215:5432/res_test | *Specify a postgres db to retain the schedules. Uncomment and remove the setting datastore_dir.** |
 
 * **Save** and **Close** the app.config file.
 * [Optional]: Run selftest to test the Integration you configured:
@@ -131,15 +140,16 @@ To install,
   $ resilient-circuits run
   ```
 
-### Upgrades to v1.0.2
+### Upgrades to v1.0.3
 
-If upgrading to v1.0.2, add the following comments and settings to your app.config [fn_scheduler] section:
+If upgrading to v1.0.3, add the following comments and settings to your app.config [fn_scheduler] section:
 
 ```
 # db url if using PostgreSQL DB. Use this with AppHost
-#db_url=postgresql+psycopg2://username:password@host:port/database
+#db_url=postgresql+pypostgresql://username:password@host:port/database
 ```
 Use these settings to connect to a PostgreSQL db, rather than a SQLite db.
+
 
 ---
 
