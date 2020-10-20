@@ -12,14 +12,16 @@ def config_section_data():
 class=ResilientFeed
 # provide configuration information to the target Resilient and Organization
 host=localhost
-#proxy_host=
+port=443
 api_key_id=
 api_key_secret=
 #email=
 #password=
-port=443
 org=
 cafile=false
+# all proxy settings can be specified, including proxy_user, and proxy_password
+#proxy_host=
+#proxy_port=
 # identify a sqlite db file to retain mapping between resilient instances.
 sqlite_sync_file=/path/to/file
 # postgresql db connection if sqlite_sync_file is not used
