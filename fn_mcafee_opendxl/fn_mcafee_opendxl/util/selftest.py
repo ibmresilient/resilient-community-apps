@@ -37,7 +37,7 @@ def selftest_function(opts):
         dxlclient.connect()
         if dxlclient.connected:
             state = 'success'
-            reason = 'success'
+            reason = None
         else:
             state = 'failure'
             reason = 'authorization failure'
