@@ -24,3 +24,4 @@ resilient_circuits_lockfile
 *.pytest_cache
 *.bak
 
+/older/
