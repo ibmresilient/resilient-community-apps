@@ -92,7 +92,7 @@ HTTPS connection with username:password authentication
   List any Requirements 
 -->
 * Resilient platform >= `v36.0.0`
-* App Host >= `v1.2.132` (if using App Host)
+* An App Host or an Integration Server:
   * To setup up an App Host see:  [ibm.biz/res-app-host-setup](https://ibm.biz/res-app-host-setup)
 * An Integration Server running `resilient_circuits>=31.0.0` (if using an Integration Server)
   * To set up an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
