@@ -49,7 +49,8 @@
 -->
 **Resilient Circuits Components for McAfee publishing to DXL Functions**
 
- ![screenshot: main](./doc/screenshots/main.png)
+ ![screenshot: fn-mcafee-publish-to-dxl-workflow ](./doc/screenshots/fn-mcafee-publish-to-dxl-workflow.png)
+
 
 Resilient Circuits Components for McAfee publishing to DXL Functions
 
@@ -68,7 +69,7 @@ Resilient Circuits Components for McAfee publishing to DXL Functions
 <!--
   List any Requirements 
 -->
-* Resilient platform >= `v36.0.5634`
+* Resilient platform >= `v35.0.0`
 * An App Host or an Integration Server:
   * To setup up an App Host see:  [ibm.biz/res-app-host-setup](https://ibm.biz/res-app-host-setup)
   * An Integration Server running `resilient_circuits>=30.0.0` (if using an Integration Server)
@@ -134,6 +135,46 @@ results = {
     # TODO: Copy and paste an example of the Function Output within this code block.
     # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
     # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+    {'version': '1.0', 
+     'success': True, 
+     'reason': None, 
+     'content': {'mcafee_topic_name': '/mcafee/service/epo/remote/epo1',  
+                 'mcafee_dxl_payload': '{"command": "system.applyTag", 
+                                         "output": "json", 
+                                         "params": {"names": "10.0.2.15", "tagName": "Shut Down"}}', 
+                 'mcafee_publish_method': 'Service', 
+                 'mcafee_wait_for_response': 'Yes', 
+                 'response': {'_version': '2', 
+                              '_message_id': '{eb976a7f-2051-43f7-bd13-0205630385a7}', 
+                              '_source_client_id': '', 
+                              '_source_broker_id': '', 
+                              '_destination_topic': '', 
+                              '_payload': '', 
+                              '_broker_ids': [], 
+                              '_client_ids': [], 
+                              '_other_fields': {}, 
+                              '_source_tenant_guid': '', 
+                              '_destination_tenant_guids': [], 
+                              '_request': None, 
+                              '_request_message_id': None, 
+                              '_service_id': ''}}, 
+        'raw': '{"mcafee_topic_name": "/mcafee/service/epo/remote/epo1", "mcafee_dxl_payload": "{\\"command\\": \\"system.applyTag\\", \\"output\\": \\"json\\", \\"params\\":       {\\"names\\": \\"10.0.2.15\\", \\"tagName\\": \\"Shut Down\\"}}", "mcafee_publish_method": "Service", "mcafee_wait_for_response": "Yes", "response": {"_version": "2", "_message_id": "{eb976a7f-2051-43f7-bd13-0205630385a7}", "_source_client_id": "", "_source_broker_id": "", "_destination_topic": "", "_payload": "", "_broker_ids": [], "_client_ids": [], "_other_fields": {}, "_source_tenant_guid": "", "_destination_tenant_guids": [], "_request": null, "_request_message_id": null, "_service_id": ""}}', 
+
+        'inputs': {'mcafee_publish_method': {'id': 305, 'name': 'Service'}, 
+                   'mcafee_topic_name': '/mcafee/service/epo/remote/epo1', 
+                   'mcafee_dxl_payload': '{"command": "system.applyTag", "output": "json", "params": {"names": "10.0.2.15", "tagName": "Shut Down"}}', 
+                   'mcafee_wait_for_response': {'id': 302, 'name': 'Yes'}}, 
+        
+        'metrics': {'version': '1.0', 
+                    'package': 'fn-mcafee-opendxl', 
+                    'package_version': '1.2.0', 
+                    'host': 'MacBook-Pro.local', 
+                    'execution_time_ms': 2534, 
+                    'timestamp': '2020-10-20 17:34:14'}, 
+        'mcafee_topic_name': '/mcafee/service/epo/remote/epo1', 
+        'mcafee_dxl_payload': '{"command": "system.applyTag", "output": "json", "params": {"names": "10.0.2.15", "tagName": "Shut Down"}}', 
+        'mcafee_publish_method': 'Service', 
+        'mcafee_wait_for_response': 'Yes'}
 }
 ```
 
