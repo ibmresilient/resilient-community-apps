@@ -1,5 +1,4 @@
 # Resilient Community Applications 
-# TEST
 
 This repository contains the source-code for packaged Resilient integrations.
 
