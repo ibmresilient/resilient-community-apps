@@ -13,7 +13,7 @@ setup(
     description="Integration with ICDX which provides access to the ICDX Search API over AMQP",
     long_description="The Symantec Integrated Cyber Defense Exchange (ICDX) is a central hub used to gather information from a number of different products in the Symantec Catalogue, normalising the information from these products into a schema. This establishes ICDx as an enrichment platform reporting on events gathered from other Symantec products",
     install_requires=[
-        'resilient_circuits>=36.0.0',
+        'resilient_circuits>=30.0.0',
         'resilient-lib',
         'pika==0.11.0',
         'ipaddress'
