@@ -5,16 +5,16 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_service_now',
-    version='1.0.3',
+    version='1.0.4',
     license='MIT',
     author='IBM Resilient',
     author_email='support@resilientsystems.com',
     url='www.resilientsystems.com',
     description="Bi-directional synchronization of Incidents, Tasks, Notes and Attachments with ServiceNow",
-    long_description="""Create an IBM Resilient Incident/Task from a ServiceNow Record in the Incident Table.
-        Create a ServiceNow Record in the Incident Table from an IBM Resilient Incident/Task.
-        Sync notes between a related IBM Resilient Incident/Task and a ServiceNow Record.
-        Send Attachments from an IBM Resilient Incident/Task to a related ServiceNow Record.""",
+    long_description="""- Create an IBM Resilient Incident/Task from a ServiceNow Record in the Incident Table.<br>
+        - Create a ServiceNow Record in the Incident Table from an IBM Resilient Incident/Task.<br>
+        - Sync notes between a related IBM Resilient Incident/Task and a ServiceNow Record.<br>
+        - Send Attachments from an IBM Resilient Incident/Task to a related ServiceNow Record.""",
     install_requires=[
         'resilient_circuits>=31.0.0',
         'beautifulsoup4>=4.6.3'

@@ -13,7 +13,7 @@
 ---
 
 ## Prerequisites 
-* ServiceNow Instance with ITSM enabled and running a `Kingston`, `London` or `Madrid` release
+* ServiceNow Instance with ITSM enabled and running or newer releases
 * Access to the `Incident Table` in ServiceNow
 * A user in ServiceNow with an `admin` role
 * IBM Resilient >= `v31.0.0`
@@ -118,7 +118,7 @@
   | ------ | :------: | ----------- |
   | sn_host | Yes | The host you use to access your ServiceNow Instance. E.g: `https://instance.service-now.com` |
   | sn_api_uri | Yes | This is the URI for the custom APIs that get exposed by your ServiceNow Instance when you install the app. Generally left as its default setting: `/api/x_ibmrt_resilient/api`. If you decide to implement your own endpoints, you would change this URI. |
-  | sn_table_name | Yes | This is the name of the Table in ServiceNow to Integrate with. It is where any Incidents/Tasks from Resilient will be created and synced. **NOTE:** *currently this version (v1.0.1) only supports the **Incident table** in ServiceNow* |
+  | sn_table_name | Yes | This is the name of the Table in ServiceNow to Integrate with. It is where any Incidents/Tasks from Resilient will be created and synced. **NOTE:** *currently this version only supports the **Incident table** in ServiceNow* |
   | sn_username | Yes | The **User ID** from **Step 3.** |
   | sn_password | Yes | The **Password** from **Step 3.** |
 

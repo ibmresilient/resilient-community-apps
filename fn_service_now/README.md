@@ -20,19 +20,21 @@
   notes of a previous release
 -->
 
-   
+### v1.0.4
+* Verified on ServiceNow Paris release
+
 ### v1.0.3
-*   Verified on ServiceNow Orlando release
-*   Support added for Resilient AppHost
+* Verified on ServiceNow Orlando release
+* Support added for Resilient AppHost
 
 ### v1.0.2
-*    Verified on ServiceNow New York release
+* Verified on ServiceNow New York release
 
 ### v1.0.1
-*   Verified on ServiceNow Madrid release
+* Verified on ServiceNow Madrid release
 
 ### v1.0.0
-*   Initial release
+* Initial release
 
 ---
 
@@ -51,7 +53,7 @@ Bi-directional integration with ServiceNow and IBM Resilient allowing SEC Ops Pr
 ---
 
 ## Requirements
-* ServiceNow Instance with ITSM enabled and running a `Kingston`, `London` or `Madrid` release
+* ServiceNow Instance with ITSM enabled and running `Kingston`, or newer releases
 * The ServiceNow `IBM Resilient App >= v1.0.0` installed on your ServiceNow Instance which you can download from [the ServiceNow Store](http://ibm.biz/get-ibm-resilient-service-now-app)
 * Access to the **Incident Table** in ServiceNow
 * If IBM Resilient is not publicly accessible (behind firewall) a ServiceNow MID Server is required
