@@ -39,7 +39,7 @@ def selftest_function(opts):
         tie_client = TieClient(dxlclient)
         if dxlclient.connected and tie_client:
             state = 'success'
-            reason = 'success'
+            reason = None
         else:
             state = 'failure'
             reason = 'authorization failure'
