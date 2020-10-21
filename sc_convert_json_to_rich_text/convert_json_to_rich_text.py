@@ -128,22 +128,26 @@ class ConvertJson:
         """
         notes = []
         if sub_dict:
-            keys = sorted (sub_dict.keys()) if self.sort_keys else sub_dict.keys()
+            if isinstance(sub_dict, list):
+                expanded_list = self.expand_list(sub_dict, is_list=True)
+                notes.append(self.add_separator(self.separator, expanded_list))
+            else:
+                keys = sorted (sub_dict.keys()) if self.sort_keys else sub_dict.keys()
 
-            for key in keys:
-                if key not in self.omit_keys:
-                    value = sub_dict[key]
-                    is_list = isinstance(value, list)
-                    item_list = [u"<strong>{0}</strong>: ".format(key)]
-                    if isinstance(value, dict):
-                        convert_result = self.convert_json_to_rich_text(value)
-                        if convert_result:
-                            item_list.append(u"<div style='padding:{}px'>{}</div>".format(self.padding, convert_result))
+                for key in keys:
+                    if key not in self.omit_keys:
+                        value = sub_dict[key]
+                        is_list = isinstance(value, list)
+                        item_list = [u"<strong>{0}</strong>: ".format(key)]
+                        if isinstance(value, dict):
+                            convert_result = self.convert_json_to_rich_text(value)
+                            if convert_result:
+                                item_list.append(u"<div style='padding:{}px'>{}</div>".format(self.padding, convert_result))
+                            else:
+                                item_list.append(u"None<br>")
                         else:
-                            item_list.append(u"None<br>")
-                    else:
-                        item_list.append(self.expand_list(value, is_list=is_list))
-                    notes.append(self.add_separator(self.separator, u"".join(unicode(v) for v in item_list), is_list=is_list))
+                            item_list.append(self.expand_list(value, is_list=is_list))
+                        notes.append(self.add_separator(self.separator, u"".join(unicode(v) for v in item_list), is_list=is_list))
 
         result_notes = u"".join(notes)
         if isinstance(self.separator, list):
