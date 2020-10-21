@@ -14,13 +14,24 @@
 
 # fn-joe-sandbox-analysis Functions for IBM Resilient
 
-- [Release Notes](#release-notes)
-- [Overview](#overview)
-- [Requirements](#requirements)
-- [Installation](#installation)
-- [Uninstall](#uninstall)
-- [Troubleshooting](#troubleshooting)
-- [Support](#support)
+- [fn-joe-sandbox-analysis Functions for IBM Resilient](#fn-joe-sandbox-analysis-functions-for-ibm-resilient)
+  - [Release Notes](#release-notes)
+    - [v1.0.4](#v104)
+    - [v1.0.3](#v103)
+    - [v1.0.1](#v101)
+    - [v1.0.0](#v100)
+  - [Overview](#overview)
+  - [Requirements](#requirements)
+  - [Installation](#installation)
+    - [App Host](#app-host)
+    - [Integration Server](#integration-server)
+  - [Uninstall](#uninstall)
+  - [Troubleshooting](#troubleshooting)
+    - [Resilient Action Status](#resilient-action-status)
+    - [Resilient Scripting Log](#resilient-scripting-log)
+    - [Resilient Logs](#resilient-logs)
+    - [Resilient-Circuits](#resilient-circuits)
+  - [Support](#support)
 
 ---
 
@@ -29,6 +40,13 @@
   Specify all changes in this release. Do not remove the release 
   notes of a previous release
 -->
+
+### v1.0.4
+* Apphost support
+### v1.0.3
+* Bug fixes
+### v1.0.1
+* Bug fixes & proxies
 ### v1.0.0
 * Initial Release
 
@@ -39,11 +57,11 @@
   Provide a high-level description of the function itself and its remote software or application.
   The text below is parsed from the "description" and "long_description" attributes in the setup.py file
 -->
-**Resilient Circuits Joe Sandbox Function**
+**Resilient Circuits Joe Sandbox functions**
 
- ![screenshot: main](./doc/screenshots/main.png)
-
-Resilient Circuits Joe Sandbox Function
+*This package contains a function that executes a Joe Sandbox Analysis of an Attachment or Artifact and returns the Analysis Report to IBM Resilient.*
+ 
+ ![screenshot: main](./doc/screenshots/1.png)
 
 ---
 
@@ -60,6 +78,21 @@ Resilient Circuits Joe Sandbox Function
 ---
 
 ## Installation
+
+### App Host
+
+All the components for running this integration in a container already exist when using the App Host app.
+
+To install,
+
+Navigate to Administrative Settings and then the Apps tab.
+
+Click the Install button and select the downloaded file: ```app-joe_sandbox_analysis-1.0.4.zip```.
+
+Go to the Configuration tab and edit the app.config file, editing the API key for fn_joe_sandbox_analysis qand making any additional setting changes.
+
+
+### Integration Server
 * Download the `fn_joe_sandbox_analysis.zip`.
 * Copy the `.zip` to your Integration Server and SSH into it.
 * **Unzip** the package:
