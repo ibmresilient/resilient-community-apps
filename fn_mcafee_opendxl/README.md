@@ -78,8 +78,9 @@ Resilient Circuits Components for McAfee publishing to DXL Functions
       | Name | Permissions |
       | ---- | ----------- |
       | Org Data | Read |
+      | Incident | Create, Read All |
       | Function | Read |
-* Proxy supported: Yes/No
+
 
 ---
 
@@ -97,6 +98,18 @@ The following table describes the settings you need to configure in the app.conf
 | **dxlclient_config** | Yes | `/home/integration/.resilient/fn_mcafee_opendxl/dxlclient.config` | *Enter a description of the config here.* |
 | **topic_listener_on** | Yes | `False` | *Enter a description of the config here.* |
 | **custom_template_dir** | No | `` | *Enter a description of the config here.* |
+---
+<p>
+More information on the dxlclient.config file and provisioning the system can be found here:
+
+[https://opendxl.github.io/opendxl-client-python/pydoc/provisioningoverview.html](https://opendxl.github.io/opendxl-client-python/pydoc/provisioningoverview.html)
+[https://opendxl.github.io/opendxl-client-python/pydoc/basiccliprovisioning.html#basiccliprovisioning](https://opendxl.github.io/opendxl-client-python/pydoc/basiccliprovisioning.html#basiccliprovisioning)
+
+An example of the CLI provisioning command:
+
+```python -m dxlclient -vv provisionconfig /home/integration/.resilient/fn_mcafee_tie X.X.X.X client1 -u admin -p password```
+
+where X.X.X.X is the IP address of the McAfee ePO server or OpenDXL Broker.
 
 ---
 
