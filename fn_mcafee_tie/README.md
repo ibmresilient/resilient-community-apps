@@ -73,14 +73,13 @@ In addition, a system list is returned by the function.
   List any Requirements 
 -->
 * Resilient platform >= `v35.0.0`
-* App Host >= `v1.2.132` (if using App Host)
   * To setup up an App Host see:  [ibm.biz/res-app-host-setup](https://ibm.biz/res-app-host-setup)
 * An Integration Server running `resilient_circuits>=30.0.0` (if using an Integration Server)
   * To set up an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
   * If using an API key account, minimum required permissions are:
     | Name | Permissions |
     | ---- | ----------- |
-    | Org Data | Read, Edit |
+    | Org Data | Read |
     | Function | Read |
 * Proxy supported: Yes
 
@@ -97,12 +96,23 @@ The following table describes the settings you need to configure in the app.conf
 
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
-| **dxlclient_config** | Yes | `/home/resilient/.resilient/mcafee_tie/dxlclient.config` | *Path to the dxlclient.config file* |
+| **dxlclient_config** | Yes | `/home/integration/.resilient/mcafee_tie/dxlclient.config` | *Path to the dxlclient.config file* |
 
 <p>
 More information on the dxlclient.config file and provisioning the system can be found here:
 
 [https://opendxl.github.io/opendxl-client-python/pydoc/provisioningoverview.html](https://opendxl.github.io/opendxl-client-python/pydoc/provisioningoverview.html)
+
+[https://opendxl.github.io/opendxl-client-python/pydoc/basiccliprovisioning.html#basiccliprovisioning](https://opendxl.github.io/opendxl-client-python/pydoc/basiccliprovisioning.html#basiccliprovisioning)
+
+An example of the CLI provisioning command:
+
+```python -m dxlclient -vv provisionconfig /home/integration/.resilient/fn_mcafee_tie X.X.X.X client1 -u admin -p password```
+
+where X.X.X.X is the IP address of the McAfee ePO server or OpenDXL Broker.
+
+
+
 
 ---
 
