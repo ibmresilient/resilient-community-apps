@@ -95,9 +95,9 @@ The following table describes the settings you need to configure in the app.conf
 
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
-| **dxlclient_config** | Yes | `/home/integration/.resilient/fn_mcafee_opendxl/dxlclient.config` | *Enter a description of the config here.* |
-| **topic_listener_on** | Yes | `False` | *Enter a description of the config here.* |
-| **custom_template_dir** | No | `` | *Enter a description of the config here.* |
+| **dxlclient_config** | Yes | `/home/integration/.resilient/fn_mcafee_opendxl/dxlclient.config` | *Path to the dxlclient.config file* |
+| **topic_listener_on** | Yes | `False` | *Boolean to turn ON/OFF Listener* |
+| **custom_template_dir** | No | `` | *Path to custom jinja template* |
 ---
 <p>
 More information on the dxlclient.config file and provisioning the system can be found here:
