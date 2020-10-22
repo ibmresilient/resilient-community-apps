@@ -70,7 +70,6 @@ The McAfee ESM package provides the following features:
   List any Requirements 
 -->
 * Resilient platform >= `v31.0.4254`
-* App Host >= `v1.2.132` (if using App Host)
 * To setup up an App Host see:  [ibm.biz/res-app-host-setup](https://ibm.biz/res-app-host-setup)
 * An Integration Server running `resilient_circuits>=30.0.0`
   * To set up an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
@@ -94,10 +93,10 @@ The McAfee ESM package provides the following features:
 The following table describes the settings you need to configure in the app.config file. If using App Host, see the Resilient System Administrator Guide. If using the integration server, see the Integration Server Guide.
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
-| **esm_url** | Yes | `<your_esm_url>` | *URL of the McAfee ESM server.* |
-| **esm_username** | Yes | `<your_esm_username>` | *User name for McAfee ESM api access.* |
-| **esm_password** | Yes | `<your_esm_password>` | *User password for McAfee ESM api access.*  |
-| **verify_cert** | Yes | `[True|False]` | *Use a CA cert for access to McAfee ESM server.* |
+| **esm_url** | Yes | `https://mcafee_esm_server` | *URL of the McAfee ESM server.* |
+| **esm_username** | Yes | `mcafee_esm_username` | *User name for McAfee ESM api access.* |
+| **esm_password** | Yes | `mcafee_esm_password` | *User password for McAfee ESM api access.*  |
+| **verify_cert** | Yes | `True or False` | *Use a CA cert for access to McAfee ESM server.* |
 | **esm_polling_interval** | Yes | `0` | *How often polling should happen. Value is in seconds.* |
 | **http_proxy** | Yes | `0` | *Optional setting for an http proxy if required.*  |
 | **https_proxy** | Yes | `0` | *Optional setting for an https proxy if required.*  |
