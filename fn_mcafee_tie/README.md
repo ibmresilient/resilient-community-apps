@@ -81,7 +81,6 @@ In addition, a system list is returned by the function.
     | ---- | ----------- |
     | Org Data | Read |
     | Function | Read |
-* Proxy supported: Yes
 
 ---
 
