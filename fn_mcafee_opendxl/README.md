@@ -107,7 +107,7 @@ More information on the dxlclient.config file and provisioning the system can be
 
 An example of the CLI provisioning command:
 
-```python -m dxlclient -vv provisionconfig /home/integration/.resilient/fn_mcafee_tie X.X.X.X client1 -u admin -p password```
+```python -m dxlclient -vv provisionconfig /home/integration/.resilient/fn_mcafee_opendxl X.X.X.X client1 -u admin -p password```
 
 where X.X.X.X is the IP address of the McAfee ePO server or OpenDXL Broker.
 
@@ -145,9 +145,6 @@ The function will send the provided message to the provided topic.
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
     {'version': '1.0', 
      'success': True, 
      'reason': None, 
