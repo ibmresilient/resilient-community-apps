@@ -11,7 +11,7 @@ setup(
     url='https://ibm.com/mysupport',
     author_email='',
     description="Resilient Circuits Components for McAfee publishing to DXL Functions",
-    long_description="Resilient Circuits Components for McAfee publishing to DXL Functions",
+    long_description="Publish a message to on OpenDXL topic. Listen on the default DXL topic and create incidents and artifacts in Resilient based on received messages.",
     install_requires=[
         'resilient_circuits>=30.0.0',
         'resilient_lib',
