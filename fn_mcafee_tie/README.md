@@ -101,7 +101,6 @@ The following table describes the settings you need to configure in the app.conf
 Before running the McAfee TIE functions, the dxlclient.config, certificates and key files must be created using a provisioning command.  More information on the dxlclient.config file and provisioning the system can be found here:
 
 [https://opendxl.github.io/opendxl-client-python/pydoc/provisioningoverview.html](https://opendxl.github.io/opendxl-client-python/pydoc/provisioningoverview.html)
-
 [https://opendxl.github.io/opendxl-client-python/pydoc/basiccliprovisioning.html#basiccliprovisioning](https://opendxl.github.io/opendxl-client-python/pydoc/basiccliprovisioning.html#basiccliprovisioning)
 
 Here is an example of the dxlclient CLI provisioning command:
@@ -114,7 +113,7 @@ In this example, ```X.X.X.X``` is the IP address of the McAfee ePO server or Ope
 ```/home/integration/.resilient/fn_mcafee_tie```
  is the location where the generated files will be created.
 
-In an App Host environment, cut and paste the contents of all the generated files into the App Settings Configuration tab in the Resilient UI in the File Locations ```/etc/rescircuits/fn_mcafee_tie```  
+In an App Host environment, cut and paste the contents of all the generated files into the App Settings Configuration tab in the Resilient UI in the File Locations ```/etc/rescircuits/fn_mcafee_tie```.
 
 Here is a screen shot of these files in an App Host environment:
 ![screenshot: fn-mcafee-tie-config-files](./doc/screenshots/McAfee-TIE-config-files.png)
