@@ -1,5 +1,5 @@
 # (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
-VERSION = 1.0
+VERSION = 1.1
 """
   This script converts a json object into a hierarchical display of rich text and adds the rich text to an incident's rich text (custom) field or an incident note.
   A workflow property is used to define the json to convert and identify parameters used on how to perform the conversion.
@@ -12,7 +12,7 @@ VERSION = 1.0
   In order to use this script, define a workflow property called: convert_json_to_rich_text, to define the json and parameters to use for the conversion.
   Workflow properties can be added using a command similar to this:
   workflow.addProperty('convert_json_to_rich_text', { 
-    "version": 1.0,
+    "version": 1.1,
     "header": "Artifact scan results for".format(artifact.value),
     "padding": 10,
     "separator": u"<br />",

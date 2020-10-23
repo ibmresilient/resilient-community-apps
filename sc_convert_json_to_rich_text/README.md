@@ -1,4 +1,4 @@
-[//]: # (resilient-sdk extract --script "Convert JSON to rich text v1.0" --export /pathto/export-resilient-20200918150300.resz)
+[//]: # (resilient-sdk extract --script "Convert JSON to rich text v1.1" --export /pathto/export-resilient-20200918150300.resz)
 
 # Resilient Convert JSON to Rich Text Script
 This package consists of the **convert_json_to_rich_text.res** export file. 
@@ -33,14 +33,14 @@ Before installing, verify that your environment meets the following prerequisite
 1. Select **Proceed**.
 
 ### Result
-After installing from **convert_json_to_rich_text.res**, the Resilient platform will have a new Python script called "Convert JSON to rich text v1.0". 
+After installing from **convert_json_to_rich_text.res**, the Resilient platform will have a new Python script called "Convert JSON to rich text v1.1". 
  
 ## Usage 
 In order to use this script, define a workflow property called: `convert_json_to_rich_text`, to define the json data and parameters to use for the conversion.
 Workflow properties can be added using a command similar to this:
 ```
   workflow.addProperty('convert_json_to_rich_text', { 
-    "version": 1.0,
+    "version": 1.1,
     "header": "Artifact scan results for {}".format(artifact.value),
     "padding": 10,
     "separator": u"<br />",
@@ -54,7 +54,7 @@ Workflow properties can be added using a command similar to this:
   Format of workflow.property.convert_json_to_rich_text:
 ```
   { 
-    "version": 1.0, [this is for future compatibility]
+    "version": 1.1, [this is for future compatibility]
     "header": str, [header line to add to converted json produced or None. Ex: Results from scanning artifact: xxx. The header may contain rich text tags]
     "padding": 10, [padding for nested json elements, or defaults to 10]
     "separator": u"<br />"|list such as ['<div>','</div>'], [any html separator between json keys and lists or defaults to html break: '<br />'. 
