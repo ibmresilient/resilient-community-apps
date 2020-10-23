@@ -48,16 +48,16 @@ class TestUrlToDns:
         assert func is not None
 
     mock_inputs_1 = {
-        "urltodns_url": "sample text"
+        "urltodns_url": "https://google.com"
     }
 
-    expected_results_1 = {"value": "xyz"}
+    expected_results_1 = {"dns": "google.com"}
 
     mock_inputs_2 = {
-        "urltodns_url": "sample text"
+        "urltodns_url": "http://1.2.3.4"
     }
 
-    expected_results_2 = {"value": "xyz"}
+    expected_results_2 = {"dns": "1.2.3.4"}
 
     @pytest.mark.parametrize("mock_inputs, expected_results", [
         (mock_inputs_1, expected_results_1),
@@ -67,4 +67,5 @@ class TestUrlToDns:
         """ Test calling with sample values for the parameters """
 
         results = call_url_to_dns_function(circuits_app, mock_inputs)
-        assert(expected_results == results)
+        results_content = results.get('content')
+        assert(expected_results == results_content)
