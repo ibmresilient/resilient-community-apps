@@ -8,6 +8,9 @@ import logging
 from resilient_lib import RequestsCommon
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 
+# default timeout if given value from function input is None
+default_timeout=1800
+
 CONTENT_TYPE = "Content-type"
 CONTENT_TYPE_JSON = "application/json"
 
@@ -33,6 +36,10 @@ class FunctionComponent(ResilientComponent):
             rest_cookies = self.get_textarea_param(kwargs.get("rest_cookies"))  # textarea
             rest_body = self.get_textarea_param(kwargs.get("rest_body"))  # textarea
             rest_verify = kwargs.get("rest_verify")  # boolean
+            rest_timeout = kwargs.get("timeout")  # number
+            
+            if rest_timeout is None:
+             rest_timeout = default_timeout                                           
 
             log = logging.getLogger(__name__)
             log.info("rest_method: %s", rest_method)
@@ -41,6 +48,7 @@ class FunctionComponent(ResilientComponent):
             log.info("rest_cookies: %s", rest_cookies)
             log.info("rest_body: %s", rest_body)
             log.info("rest_verify: %s", rest_verify)
+            log.info("rest_timeout: %s", rest_timeout)                                                      
 
             # Read newline-separated 'rest_headers' into a dictionary
             if isinstance(rest_headers, dict):
@@ -67,7 +75,7 @@ class FunctionComponent(ResilientComponent):
                             cookies_dict[keyval[0].strip()] = keyval[1].strip()
 
             resp = make_rest_call(self.opts, self.options, rest_method, rest_url,
-                                  headers_dict, cookies_dict, rest_body, rest_verify)
+                                  headers_dict, cookies_dict, rest_body, rest_verify, rest_timeout)
 
             try:
                 response_json = resp.json()
@@ -93,7 +101,7 @@ class FunctionComponent(ResilientComponent):
         except Exception:
             yield FunctionError()
 
-def make_rest_call(opts, options, rest_method, rest_url, headers_dict, cookies_dict, rest_body, rest_verify):
+def make_rest_call(opts, options, rest_method, rest_url, headers_dict, cookies_dict, rest_body, rest_verify, rest_timeout):
     rc = RequestsCommon(opts, options)
 
     if CONTENT_TYPE in headers_dict and CONTENT_TYPE_JSON in headers_dict[CONTENT_TYPE]:
@@ -101,13 +109,15 @@ def make_rest_call(opts, options, rest_method, rest_url, headers_dict, cookies_d
                                   headers=headers_dict,
                                   cookies=cookies_dict,
                                   json=rest_body,
-                                  verify=rest_verify)
+                                  verify=rest_verify,
+                                  timeout=rest_timeout)
 
     return rc.execute_call_v2(rest_method, rest_url,
                               headers=headers_dict,
                               cookies=cookies_dict,
                               data=rest_body,
-                              verify=rest_verify)
+                              verify=rest_verify,
+                              timeout=rest_timeout)
 
 def dedup_dict(item_list):
     """
