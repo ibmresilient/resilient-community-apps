@@ -28,7 +28,7 @@ class FunctionComponent(ResilientComponent):
 
     @function("url_to_dns")
     def _url_to_dns_function(self, event, *args, **kwargs):
-        """Function: None"""
+        """Function: url_to_dns parses a URL string and returns a string containing DNS value"""
         try:
             # Initialize the results payload
             rp = ResultPayload(PACKAGE_NAME, **kwargs)
