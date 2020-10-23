@@ -4,3 +4,5 @@ include fn_joe_sandbox_analysis/util/*
 include Dockerfile
 include entrypoint.sh
 include apikey_permissions.txt
+
+exclude *.bak
