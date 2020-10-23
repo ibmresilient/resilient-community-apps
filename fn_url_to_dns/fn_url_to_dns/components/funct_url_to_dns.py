@@ -3,7 +3,10 @@
 """Function implementation"""
 
 import logging
-from urlparse import urlparse
+try:
+    from urllib.parse import urlparse
+except:
+    from urlparse import urlparse
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import validate_fields, ResultPayload
 
