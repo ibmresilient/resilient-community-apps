@@ -59,8 +59,8 @@ The  McAfee TIE Functions for IBM Resilient provides the ability to search McAfe
 
 *  Enterprise
 *  GTI
-* ATD
-* MWG
+*  ATD
+*  MWG
 
 In addition, a system list is returned by the function.
 
@@ -115,7 +115,7 @@ In this example, ```X.X.X.X``` is the IP address of the McAfee ePO server or Ope
 
 In an App Host environment, cut and paste the contents of all the generated files into the App Settings Configuration tab in the Resilient UI in the File Locations ```/etc/rescircuits/fn_mcafee_tie```.
 
-Here is a screen shot of these files in an App Host environment:
+Here is a screenshot of these files in an App Host environment:
 ![screenshot: fn-mcafee-tie-config-files](./doc/screenshots/McAfee-TIE-config-files.png)
 
 ---
