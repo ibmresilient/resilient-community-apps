@@ -32,7 +32,7 @@
   Specify all changes in this release. Do not remove the release 
   notes of a previous release
 -->
-### v1.0.0
+### v1.1.0
 * App Host support
 ### v1.0.0
 * Initial Release
