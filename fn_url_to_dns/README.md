@@ -75,6 +75,7 @@ Resilient Circuits Components for 'fn_url_to_dns'
       | ---- | ----------- |
       | Org Data | Read |
       | Function | Read |
+      | Edit Incidents | Fields |
 * Proxy supported: No (not needed)
 
 ---
