@@ -112,10 +112,12 @@ In this example, ```X.X.X.X``` is the IP address of the McAfee ePO server or Ope
  The generated files are created in the /home/integration/.resilient/fn_mcafee_tie directory.
 
 If installing the app on an integration server, set the dxlclient_config app.config parameter to the location of the created dxlclient.config file.
-  [fn_mcafee_tie]
+ ``` [fn_mcafee_tie]
    dxlclient_config=/home/integration/.resilient/fn_mcafee_tie/dxlclient.config
-   
+```
+
 If installing the app directly to the Resilient platform (App Host environment), you need to use the New File button to create each file that was created by the provisioning command. As you create each file, copy the contents of the file into your new file. Make sure to enter /etc/rescircuits/fn_mcafee_tie as the File Path. See the Resilient Platform System Administrator Guide for the detailed procedure.
+
 ---
 
 ### Custom Layouts
