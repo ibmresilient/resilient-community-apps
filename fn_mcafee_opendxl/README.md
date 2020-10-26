@@ -100,7 +100,7 @@ The following table describes the settings you need to configure in the app.conf
 | **custom_template_dir** | No | `` | *Path to custom jinja template* |
 ---
 <p>
-Before running the McAfee OpenDXL functions, the dxlclient.config, certificates and key files must be created using a provisioning command.  More information on the dxlclient.config file and provisioning the system can be found here:
+In addition to updating the app.config file and before running the McAfee OpenDXL functions, the dxlclient.config, certificates and key files must be created using a provisioning command.  More information on the dxlclient.config file and provisioning the system can be found here:
 
 [https://opendxl.github.io/opendxl-client-python/pydoc/provisioningoverview.html](https://opendxl.github.io/opendxl-client-python/pydoc/provisioningoverview.html)
 [https://opendxl.github.io/opendxl-client-python/pydoc/basiccliprovisioning.html#basiccliprovisioning](https://opendxl.github.io/opendxl-client-python/pydoc/basiccliprovisioning.html#basiccliprovisioning)
@@ -109,20 +109,20 @@ Here is an example of the dxlclient CLI provisioning command:
 
 ```python -m dxlclient -vv provisionconfig /home/integration/.resilient/fn_mcafee_opendxl X.X.X.X client1 -u admin -p password```
 
-In this example, ```X.X.X.X``` is the IP address of the McAfee ePO server or OpenDXL Broker. 
+In this example, ```X.X.X.X``` is the IP address of the McAfee ePO server or OpenDXL Broker.
 
- The directory 
-```/home/integration/.resilient/fn_mcafee_opendxl```
- is the location where the generated files will be created.
+ The generated files are created in the /home/integration/.resilient/fn_mcafee_tie directory.
 
-In an App Host environment, cut and paste the contents of all the generated files into the App Settings Configuration tab in the Resilient UI in the File Locations ```/etc/rescircuits/fn_mcafee_opendxl```.
+If installing the app on an integration server, set the dxlclient_config app.config parameter to the location of the created dxlclient.config file.
 
-Here is a screenshot of these files in an App Host environment:
-![screenshot: fn-mcafee-opendxl-config-files](./doc/screenshots/fn-mcafee-OpenDXL-config-files.png)
+```
+  [fn_mcafee_opendxl]
+   dxlclient_config=/home/integration/.resilient/fn_mcafee_opendxl/dxlclient.config
+   ```
+
+If installing the app directly to the Resilient platform (App Host environment), you need to use the New File button to create each file that was created by the provisioning command. As you create each file, copy the contents of the file into your new file. Make sure to enter ```/etc/rescircuits/fn_mcafee_opendxl``` as the File Path. See the Resilient Platform System Administrator Guide for the detailed procedure.
 
 ---
-
-
 ## Function - McAfee Publish to DXL
 A function which takes 4 inputs:
 
