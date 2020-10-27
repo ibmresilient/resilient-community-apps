@@ -81,7 +81,7 @@ Resilient Circuits Components for McAfee publishing to DXL Functions
       | Incident | Create, Read All |
       | Function | Read |
 
-
+* Proxy supported: No (OpenDXL does not support proxy in on-prem installations)
 ---
 
 ### Install
