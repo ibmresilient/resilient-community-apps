@@ -4,7 +4,7 @@
 
 from __future__ import print_function
 import pytest
-from mock import patch
+from mock import patch, MagicMock
 from resilient_circuits.util import get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 from test_helper import get_test_config, generate_response, string_test_config
@@ -37,8 +37,8 @@ def call_mcafee_esm_query_function(circuits, function_params, timeout=10):
 class TestMcafeeEsmQuery:
     """ Tests for the mcafee_esm_query function"""
 
-    @patch("requests.post")
-    def test_query_esm(self, mocked_requests_post):
+    @patch("resilient_lib.RequestsCommon")
+    def test_query_esm(self, mocked_requests_common):
         ops = check_config(t_config_data)
         content1 = {
             "totalRows": 0,
@@ -56,21 +56,23 @@ class TestMcafeeEsmQuery:
             'milliseconds': 5,
             'percentComplete': 100
         }
-        mocked_requests_post.side_effect = [generate_response(content1, 200),
-                                            generate_response(content2, 200)]
+
+        mocked_requests_common.execute_call_v2 = MagicMock()
+        mocked_requests_common.execute_call_v2.side_effect = [generate_response(content1, 200),
+                                                              generate_response(content2, 200)]
         data = '{"config": {"timeRange": "CUSTOM", "customStart": "2018-08-15T14:49:25.324Z", "customEnd": "2018-08-20T15:49:25.324Z", "order": [{"direction": "ASCENDING", "field": {"name": "FirstTime"}}], "includeTotal": "false", "fields": [{"name": "FirstTime"}, {"name": "LastTime"}, {"name": "DSIDSigID"}, {"name": "EventCount"}, {"name": "SrcIP"}, {"name": "Rule.msg"}, {"name": "AppID"}, {"name": "Filename"}, {"name": "HostID"}, {"name": "Object_Type"}, {"name" : "Threat_Name"}], "filters": [{"type": "EsmFieldFilter", "field": {"name": "DSIDSigID"}, "operator": "IN", "values": [{"type": "EsmBasicValue", "value": "306-50080"}]}]}}'
-        r_ID, r = query_esm(ops, {}, data, "EVENT")
+        r_ID, r = query_esm(mocked_requests_common, ops, {}, data, "EVENT")
 
         assert 1 == r
         assert '{"resultID": "123456789"}' == r_ID
 
-    @patch("requests.post")
-    def test_get_results(self, mocked_requests_post):
+    @patch("resilient_lib.RequestsCommon")
+    def test_get_results(self, mocked_requests_common):
         ops = check_config(t_config_data)
         content = {u'rows': [{u'values': [u'08/20/2018 14:58:23', u'08/20/2018 14:58:23', u'306-50080', u'1', u'::', u'A physical network interface connection has been made or removed', u'', u'', u'', u'', u'']}], u'columns': [{u'name': u'Alert.FirstTime'}, {u'name': u'Alert.LastTime'}, {u'name': u'Alert.DSIDSigID'}, {u'name': u'Alert.EventCount'}, {u'name': u'Alert.SrcIP'}, {u'name': u'Rule.msg'}, {u'name': u'Alert.BIN(1)'}, {u'name': u'Alert.4259843'}, {u'name': u'Alert.BIN(4)'}, {u'name': u'Alert.BIN(10)'}, {u'name': u'Alert.65538'}]}
-
-        mocked_requests_post.return_value = generate_response(content, 200)
-        response = get_results(ops, {}, "123456789")
+        mocked_requests_common.execute_call_v2 = MagicMock()
+        mocked_requests_common.execute_call_v2.return_value = generate_response(content, 200)
+        response = get_results(mocked_requests_common, ops, {}, "123456789")
 
         assert content == response
 
@@ -82,8 +84,8 @@ class TestMcafeeEsmQuery:
     @pytest.mark.parametrize("mcafee_esm_qry_type, mcafee_esm_qry_config, expected_results", [
         ('EVENT', {"type": "text", "content": '{"config": {"timeRange": "CUSTOM", "customStart": "2018-08-15T14:49:25.324Z", "customEnd": "2018-08-20T15:49:25.324Z", "order": [{"direction": "ASCENDING", "field": {"name": "FirstTime"}}], "includeTotal": "false", "fields": [{"name": "FirstTime"}, {"name": "LastTime"}, {"name": "DSIDSigID"}, {"name": "EventCount"}, {"name": "SrcIP"}, {"name": "Rule.msg"}, {"name": "AppID"}, {"name": "Filename"}, {"name": "HostID"}, {"name": "Object_Type"}, {"name" : "Threat_Name"}], "filters": [{"type": "EsmFieldFilter", "field": {"name": "DSIDSigID"}, "operator": "IN", "values": [{"type": "EsmBasicValue", "value": "306-50080"}]}]}}'}, {'inputs': {'mcafee_esm_qry_config': '{"config": {"timeRange": "CUSTOM", "customStart": "2018-08-15T14:49:25.324Z", "customEnd": "2018-08-20T15:49:25.324Z", "order": [{"direction": "ASCENDING", "field": {"name": "FirstTime"}}], "includeTotal": "false", "fields": [{"name": "FirstTime"}, {"name": "LastTime"}, {"name": "DSIDSigID"}, {"name": "EventCount"}, {"name": "SrcIP"}, {"name": "Rule.msg"}, {"name": "AppID"}, {"name": "Filename"}, {"name": "HostID"}, {"name": "Object_Type"}, {"name" : "Threat_Name"}], "filters": [{"type": "EsmFieldFilter", "field": {"name": "DSIDSigID"}, "operator": "IN", "values": [{"type": "EsmBasicValue", "value": "306-50080"}]}]}}', 'mcafee_esm_qry_type': 'EVENT'}, 'result': {u'rows': [{u'values': [u'08/20/2018 14:58:23', u'08/20/2018 14:58:23', u'306-50080', u'1', u'::', u'A physical network interface connection has been made or removed', u'', u'', u'', u'', u'']}], u'columns': [{u'name': u'Alert.FirstTime'}, {u'name': u'Alert.LastTime'}, {u'name': u'Alert.DSIDSigID'}, {u'name': u'Alert.EventCount'}, {u'name': u'Alert.SrcIP'}, {u'name': u'Rule.msg'}, {u'name': u'Alert.BIN(1)'}, {u'name': u'Alert.4259843'}, {u'name': u'Alert.BIN(4)'}, {u'name': u'Alert.BIN(10)'}, {u'name': u'Alert.65538'}]}})
     ])
-    @patch("requests.post")
-    def test_success(self, mocked_requests_post, circuits_app, mcafee_esm_qry_type, mcafee_esm_qry_config, expected_results):
+    @patch("resilient_lib.RequestsCommon.execute_call_v2")
+    def test_success(self, mocked_execute_call_v2, circuits_app, mcafee_esm_qry_type, mcafee_esm_qry_config, expected_results):
         """ Test calling with sample values for the parameters """
         function_params = { 
             "mcafee_esm_qry_type": mcafee_esm_qry_type,
@@ -109,10 +111,10 @@ class TestMcafeeEsmQuery:
             'percentComplete': 100
         }
         content4 = {u'rows': [{u'values': [u'08/20/2018 14:58:23', u'08/20/2018 14:58:23', u'306-50080', u'1', u'::', u'A physical network interface connection has been made or removed', u'', u'', u'', u'', u'']}], u'columns': [{u'name': u'Alert.FirstTime'}, {u'name': u'Alert.LastTime'}, {u'name': u'Alert.DSIDSigID'}, {u'name': u'Alert.EventCount'}, {u'name': u'Alert.SrcIP'}, {u'name': u'Rule.msg'}, {u'name': u'Alert.BIN(1)'}, {u'name': u'Alert.4259843'}, {u'name': u'Alert.BIN(4)'}, {u'name': u'Alert.BIN(10)'}, {u'name': u'Alert.65538'}]}
-        mocked_requests_post.side_effect = [generate_response(content1, 200),
-                                            generate_response(content2, 200),
-                                            generate_response(content3, 200),
-                                            generate_response(content4, 200)]
+        mocked_execute_call_v2.side_effect = [generate_response(content1, 200),
+                                              generate_response(content2, 200),
+                                              generate_response(content3, 200),
+                                              generate_response(content4, 200)]
 
         results = call_mcafee_esm_query_function(circuits_app, function_params)
         results.pop("metrics")

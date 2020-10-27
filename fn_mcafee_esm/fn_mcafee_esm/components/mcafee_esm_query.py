@@ -1,27 +1,28 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 """Function implementation"""
 
 import logging
-import requests
 import time
 import json
 from datetime import datetime
 from threading import current_thread
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from resilient_lib import RequestsCommon
 from fn_mcafee_esm.util.helper import check_config, get_authenticated_headers, check_status_code
 
 
 log = logging.getLogger(__name__)
 
 
-def query_esm(options, headers, data, type):
+def query_esm(rc, options, headers, data, type):
     log.debug("Calling query_esm()")
     base_url = options["esm_url"]
     url = base_url + "/rs/esm/v2/qryExecuteDetail?type={}&reverse=False".format(type)
 
-    r = requests.post(url, headers=headers, data=data, verify=options["trust_cert"])
+    r = rc.execute_call_v2('post', url, headers=headers, data=data, verify=options["trust_cert"],
+                           proxies=rc.get_proxies())
     check_status_code(r.status_code)
 
     # return r.json()
@@ -34,7 +35,7 @@ def query_esm(options, headers, data, type):
     }
     qconf_json = json.dumps(qconf)
 
-    status_dict = get_qry_status(options, headers, qconf_json)
+    status_dict = get_qry_status(rc, options, headers, qconf_json)
     status = status_dict.get("percentComplete")
 
     # If the query is not 100% complete it will wait 10 seconds and then check again. If the query is not complete after
@@ -44,7 +45,7 @@ def query_esm(options, headers, data, type):
             break
         else:
             time.sleep(10)
-            status_dict = get_qry_status(options, headers, qconf_json)
+            status_dict = get_qry_status(rc, options, headers, qconf_json)
             status = status_dict.get("percentComplete")
         if status != 100 and i == 59:
             raise FunctionError("Query timed out.")
@@ -53,19 +54,23 @@ def query_esm(options, headers, data, type):
     return qconf_json, total_records
 
 
-def get_qry_status(options, headers, data):
+def get_qry_status(rc, options, headers, data):
     log.debug("Calling get_qry_status()")
-    result = requests.post(options["esm_url"] + '/rs/esm/v2/qryGetStatus',
-                           headers=headers, data=data, verify=options["trust_cert"])
+    url = options["esm_url"] + '/rs/esm/v2/qryGetStatus'
+
+    result = rc.execute_call_v2('post', url, headers=headers, data=data, verify=options["trust_cert"],
+                                proxies=rc.get_proxies())
     check_status_code(result.status_code)
 
     return result.json()
 
 
-def get_results(options, session_header, qconf_json):
+def get_results(rc, options, session_header, qconf_json):
     log.debug("Calling get_results() with {}".format(qconf_json))
-    result = requests.post(options["esm_url"] + '/rs/esm/v2/qryGetResults?startPos=0&numRows=100&reverse=false',
-                           headers=session_header, data=qconf_json, verify=options["trust_cert"])
+    url = options["esm_url"] + '/rs/esm/v2/qryGetResults?startPos=0&numRows=100&reverse=false'
+
+    result = rc.execute_call_v2('post', url, headers=session_header, data=qconf_json, verify=options["trust_cert"],
+                                proxies=rc.get_proxies())
     check_status_code(result.status_code)
 
     return result.json()
@@ -77,6 +82,7 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
+        self.opts = opts
         self.options = opts.get("fn_mcafee_esm", {})
 
         # Check config file and change trust_cert to Boolean
@@ -85,6 +91,7 @@ class FunctionComponent(ResilientComponent):
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
+        self.opts = opts
         self.options = opts.get("fn_mcafee_esm", {})
 
     @function("mcafee_esm_query")
@@ -93,8 +100,13 @@ class FunctionComponent(ResilientComponent):
         try:
             start_time = time.time()
             yield StatusMessage("starting...")
+
             options = self.options
-            authenticated_headers = get_authenticated_headers(options["esm_url"], options["esm_username"],
+
+            # Instantiate RequestsCommon object
+            rc = RequestsCommon(opts=self.opts, function_opts=self.options)
+
+            authenticated_headers = get_authenticated_headers(rc, options["esm_url"], options["esm_username"],
                                                               options["esm_password"], options["trust_cert"])
 
             # Get inputs
@@ -111,15 +123,14 @@ class FunctionComponent(ResilientComponent):
                 log.info("mcafee_esm_qry_config: %s", mcafee_esm_qry_config)
             else:
                 raise FunctionError("mcafee_esm_qry_config needs to be set")
-
             # Query Logs
-            qconf_json, total_records = query_esm(options, authenticated_headers, mcafee_esm_qry_config,
+            qconf_json, total_records = query_esm(rc, options, authenticated_headers, mcafee_esm_qry_config,
                                                   mcafee_esm_qry_type)
 
             query_result = None
-            if total_records > 0:
+            if total_records:
                 yield StatusMessage("{} records".format(str(total_records)))
-                query_result = get_results(options, authenticated_headers, qconf_json)
+                query_result = get_results(rc, options, authenticated_headers, qconf_json)
             else:
                 yield StatusMessage("No results returned")
 
