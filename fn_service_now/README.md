@@ -2,10 +2,6 @@
 
 - [IBM Resilient Integration for ServiceNow](#ibm-resilient-integration-for-servicenow)
   - [Release Notes](#release-notes)
-    - [v1.0.3](#v103)
-    - [v1.0.2](#v102)
-    - [v1.0.1](#v101)
-    - [v1.0.0](#v100)
   - [Overview](#overview)
   - [Key Features](#key-features)
   - [Requirements](#requirements)
