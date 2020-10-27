@@ -118,7 +118,7 @@ You can run this app on either an Integration Server or on an App Host.
   ```
   $ resilient-circuits customize -y -l fn-service-now
   ```
-* Open the config file, scroll to the bottom and **edit your ServiceNow credentials.** The details of which are described in the table below:
+* Open the config file, scroll to the bottom and **edit your ServiceNow credentials.** The details of which are described in the table below
 * **Save** and **Close** the app.config file.
 * **Test** your Connection to ServiceNow:
   ```
