@@ -54,7 +54,7 @@ Bi-directional integration with ServiceNow and IBM Resilient allowing SEC Ops Pr
 * Access to the **Incident Table** in ServiceNow
 * If IBM Resilient is not publicly accessible (behind firewall) a ServiceNow MID Server is required
 * IBM Resilient >= `v31.0.0`
-* An Integrations Server running `resilient-circuits >= v31.0.0` with `fn_service_now >= v1.0.0` installed which you can download from our [App Exchange](http://ibm.biz/get-ibm-resilient-service-now-integration)
+* An App Host >= `v1.0.0` or an Integrations Server running `resilient-circuits >= v31.0.0` with `fn_service_now >= v1.0.0` installed which you can download from our [App Exchange](http://ibm.biz/get-ibm-resilient-service-now-integration)
 
 ---
 
