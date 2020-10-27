@@ -5,4 +5,6 @@ include README.md
 include fn_mcafee_opendxl/*
 include fn_mcafee_opendxl/data/templates/*.jinja*
 include fn_mcafee_opendxl/LICENSE
+include fn_mcafee_opendxl/icons/*
+include fn_mcafee_opendxl/util/*
 include doc/*
