@@ -81,7 +81,7 @@ In addition, a system list is returned by the function.
     | ---- | ----------- |
     | Org Data | Read |
     | Function | Read |
-
+* Proxy supported: No (OpenDXL does not support proxy in on-prem installations)
 ---
 
 ### Install
