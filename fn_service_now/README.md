@@ -1,13 +1,12 @@
 # IBM Resilient Integration for ServiceNow
 
-- [IBM Resilient Integration for ServiceNow](#ibm-resilient-integration-for-servicenow)
-  - [Release Notes](#release-notes)
-  - [Overview](#overview)
-  - [Key Features](#key-features)
-  - [Requirements](#requirements)
-  - [Install](#install)
-  - [Customize](#customize)
-  - [Documentation](#documentation)
+- [Release Notes](#release-notes)
+- [Overview](#overview)
+- [Key Features](#key-features)
+- [Requirements](#requirements)
+- [Install](#install)
+- [Customize](#customize)
+- [Documentation](#documentation)
 
 ---
 ## Release Notes
