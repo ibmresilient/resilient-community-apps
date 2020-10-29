@@ -6,7 +6,7 @@
   - [Step 2: *Install ServiceNow IBM Resilient App*](#step-2-install-servicenow-ibm-resilient-app)
   - [Step 3: *Create a User in ServiceNow and assign it the correct Role*](#step-3-create-a-user-in-servicenow-and-assign-it-the-correct-role)
   - [Step 4: *Enter IBM Resilient Configurations*](#step-4-enter-ibm-resilient-configurations)
-  - [Step 5: *Download & Install fn_service_now Integration*](#step-5-download--install-fnservicenow-integration)
+  - [Step 5: *Download & Install fn_service_now Integration*](#step-5-download--install-fn_service_now-integration)
   - [Step 6: *Install and Configure ServiceNow Mid-Server (if needed)*](#step-6-install-and-configure-servicenow-mid-server-if-needed)
   - [Step 7: *Give your ServiceNow users the correct Role*](#step-7-give-your-servicenow-users-the-correct-role)
   - [Step 8: *Test*](#step-8-test)
