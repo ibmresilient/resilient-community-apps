@@ -1,17 +1,12 @@
 # IBM Resilient Integration for ServiceNow
 
-- [IBM Resilient Integration for ServiceNow](#ibm-resilient-integration-for-servicenow)
-  - [Release Notes](#release-notes)
-    - [v1.0.3](#v103)
-    - [v1.0.2](#v102)
-    - [v1.0.1](#v101)
-    - [v1.0.0](#v100)
-  - [Overview](#overview)
-  - [Key Features](#key-features)
-  - [Requirements](#requirements)
-  - [Install](#install)
-  - [Customize](#customize)
-  - [Documentation](#documentation)
+- [Release Notes](#release-notes)
+- [Overview](#overview)
+- [Key Features](#key-features)
+- [Requirements](#requirements)
+- [Install](#install)
+- [Customize](#customize)
+- [Documentation](#documentation)
 
 ---
 ## Release Notes
@@ -20,19 +15,21 @@
   notes of a previous release
 -->
 
-   
+### v1.0.4
+* Verified on ServiceNow Paris release
+
 ### v1.0.3
-*   Verified on ServiceNow Orlando release
-*   Support added for Resilient AppHost
+* Verified on ServiceNow Orlando release
+* Support added for Resilient AppHost
 
 ### v1.0.2
-*    Verified on ServiceNow New York release
+* Verified on ServiceNow New York release
 
 ### v1.0.1
-*   Verified on ServiceNow Madrid release
+* Verified on ServiceNow Madrid release
 
 ### v1.0.0
-*   Initial release
+* Initial release
 
 ---
 
@@ -51,12 +48,12 @@ Bi-directional integration with ServiceNow and IBM Resilient allowing SEC Ops Pr
 ---
 
 ## Requirements
-* ServiceNow Instance with ITSM enabled and running a `Kingston`, `London` or `Madrid` release
+* ServiceNow Instance with ITSM enabled and running `Kingston`, or newer releases
 * The ServiceNow `IBM Resilient App >= v1.0.0` installed on your ServiceNow Instance which you can download from [the ServiceNow Store](http://ibm.biz/get-ibm-resilient-service-now-app)
 * Access to the **Incident Table** in ServiceNow
 * If IBM Resilient is not publicly accessible (behind firewall) a ServiceNow MID Server is required
 * IBM Resilient >= `v31.0.0`
-* An Integrations Server running `resilient-circuits >= v31.0.0` with `fn_service_now >= v1.0.0` installed which you can download from our [App Exchange](http://ibm.biz/get-ibm-resilient-service-now-integration)
+* An App Host >= `v1.0.0` or an Integrations Server running `resilient-circuits >= v31.0.0` with `fn_service_now >= v1.0.0` installed which you can download from our [App Exchange](http://ibm.biz/get-ibm-resilient-service-now-integration)
 
 ---
 
