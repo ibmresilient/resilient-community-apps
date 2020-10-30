@@ -25,7 +25,7 @@ RUN yum -y install unixODBC-devel
 
 # copy the driver configurations to the container
 COPY ./odbc-drivers.ini /etc/odbc-drivers.ini
-COPY ./drivers/drivers /tmp/lib/
+COPY ./drivers/ /tmp/lib/
 
 # configure unixODBC with the driver information in the .ini file
 RUN odbcinst -i -d -f /etc/odbc-drivers.ini
