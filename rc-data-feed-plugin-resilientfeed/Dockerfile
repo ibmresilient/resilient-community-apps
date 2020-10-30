@@ -38,7 +38,7 @@ RUN make install
 
 # install the base package
 COPY ./dist /tmp/packages
-RUN pip install /tmp/packages/${APPLICATION}-*.tar.gz
+RUN app_file=`ls -1 /tmp/packages/${APPLICATION}-*.tar.gz` && pip install ${app_file}[postgres]
 
 # uncomment and replicate if additional pypi packages are needed
 #RUN pip install <package>

@@ -4,7 +4,12 @@
 
 import logging
 import json
-import pyodbc
+#make this conditional for environments which only use sqlite
+try:
+    import pyodbc
+except:
+    pass
+
 from .db_sync_common import DBSyncInterface
 
 

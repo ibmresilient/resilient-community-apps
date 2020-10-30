@@ -3,7 +3,7 @@
 # pragma pylint: disable=unused-argument, no-self-use, line-too-long
 
 
-class DBSyncInterface:
+class DBSyncInterface(object):
     """
     Interface class for methods associated with maintaining mappings between the source and destination
     Resilient objects

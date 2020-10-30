@@ -23,9 +23,14 @@ Unless otherwise specified, contents of this repository are published under the 
 * Complete the setup and configuration of your Integration server as detailed in our [Integration Server Guide](https://developer.ibm.com/security/resilient/start/).
 *	Run the following commands to install the package:
 ```
-  unzip rc_data_feed_plugin_resilient-<version>.zip
-  [sudo] pip install --upgrade rc_data_feed-plugin_resilient-<version>.tar.gz
-```  
+  unzip app-rc_data_feed_plugin_resilientfeed-<version>.zip
+  [sudo] pip install --upgrade rc_data_feed-plugin_resilientfeed-<version>.tar.gz
+```
+
+If using the support for PostreSQL, uninstall the package as:
+```
+  [sudo] pip install --upgrade rc_data_feed-plugin_resilientfeed-<version>.tar.gz[postgres]
+```
 *	Configure Resilient-circuits
 
   The Resilient Circuits process runs as an unprivileged user, typically named `integration`. If you do not already have an integration user configured on your appliance, create it now. 
@@ -88,6 +93,26 @@ Note: Perform an export and reimport of these customizations into the target Res
   # true|false - specify whether to delete the target incident if the source incident is deleted. Default: false
   delete_incidents=false
 ```
+
+### matching_incident_fields
+Use this capability to filter which incidents and it's tasks, notes, artifacts, etc. are sent to the target organization. Below are a few examples for how to use this capability.
+
+- Filter on the incident owner.
+> matching_incident_fields=ownerid == user@example.com
+- Filter on any incident type phishing or malware.
+> matching_incident_fields=incident_type_ids in ['Phishing', 'Malware']
+- Filter on the title or description field containing the word 'malicious'.
+
+> matching_incident_fields=name ~ malicious;description ~ malicious
+> matching_operator=any
+- Filter on a custom boolean field set to True.
+> matching_incident_fields=custom_bool == True
+- Filter on open incidents. This is useful when performing a bulk load with as `reload=true` or using the `Data Feeder: Sync Incidents` function.
+
+> matching_incident_fields=plan_status == A
+
+- Filtering on date and datetime fields are a little trickly as the epoch timestamp is needed. Websites such as [https://www.epochconverter.com/](https://www.epochconverter.com/) can be used to generate a timestamp. Be sure to use the GMT timezone and use a timezone in milliseconds.
+> matching_incident_fields=discovered_date >= 1604073642000
 
 # ResilientFeed Class
 This class allows you to write all incoming data to another Resilient Organization. Incidents, Artifacts, Attachments, Datatables, Notes, Milestones and Tasks (including task notes, and attachments) are copied. 
