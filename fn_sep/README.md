@@ -23,7 +23,8 @@
 - [Sample workflows](#sample-workflows)
 - [Sample rules](#sample-rules)
 - [Example](#example)
-- [Troubleshooting & Support](#troubleshooting-&-support)
+- [Troubleshooting](#troubleshooting)
+- [Support](#support)
 
 ---
 
@@ -127,7 +128,6 @@ The following table describes the settings you need to configure in the app.conf
   ```
 * Open the config file, scroll to the [fn_sep] section and remove the section or prefix `#` to comment out the section.
 * **Save** and **Close** the app.config file.
-
 ---
 
 ## Functions:
@@ -147,6 +147,8 @@ SEP - Delete Fingerprint List (fn_sep_delete_fingerprint_list)
 SEP - Get Command Status (fn_sep_get_command_status)
 SEP - Get Domains (fn_sep_get_domains)
 ```
+---
+
 ## Sample workflows:
 ```
 Example: SEP - Add Hash to Blacklist
@@ -171,6 +173,8 @@ Example: SEP - Quarantine Endpoint
 Example: SEP - Remediate Artifact on Endpoint
 Example: SEP - Upload file to SEPM server
 ```
+---
+
 ## Sample rules:
 ```
 Example: SEP - Add Artifact from Scan Result
@@ -198,6 +202,7 @@ Example: SEP - Remediate Artifact on Endpoint
 Example: SEP - Un-Quarantine Endpoint
 Example: SEP - Upload file to SEPM server
 ```
+---
 
 ## Example
 The provided **SEP - Scan Endpoints** function with the **Initiate EOC Scan for Artifact** workflow initiates an Evidence of Compromise (EOC) scan of an artifact value against a list of endpoints or groups. 
@@ -324,14 +329,15 @@ def main():
 if __name__ == "__main__":
     main()
 ```
-
 ---
 
-## Troubleshooting & Support
+## Troubleshooting
 If using the app with an App Host, see the Resilient System Administrator Guide and the App Host Deployment Guide for troubleshooting procedures. You can find these guides on the [IBM Knowledge Center](https://www.ibm.com/support/knowledgecenter/SSBRUQ), where you can select which version of the Resilient platform you are using.
 
 If using the app with an integration server, see the [Integration Server Guide](https://ibm.biz/res-int-server-guide)
 
-### For Support
+---
+
+## For Support
 This is an IBM Supported app. Please search https://ibm.com/mysupport for assistance.
 
