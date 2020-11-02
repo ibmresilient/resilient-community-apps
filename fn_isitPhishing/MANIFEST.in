@@ -1,4 +1,10 @@
+include apikey_permissions.txt
+include Dockerfile
+include entrypoint.sh
 include README.md
+include fn_isitPhishing/*
 include fn_isitPhishing/util/*
+include fn_isitPhishing/util/data/*
 include fn_isitPhishing/LICENSE
 include fn_isitPhishing/doc/*
+include fn_isitPhishing/icons/*

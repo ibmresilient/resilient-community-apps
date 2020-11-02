@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2020. All Rights Reserved.
+
 import sys
 import base64
 
