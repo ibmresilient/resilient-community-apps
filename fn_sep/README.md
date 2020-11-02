@@ -338,6 +338,6 @@ If using the app with an integration server, see the [Integration Server Guide](
 
 ---
 
-## For Support
+## Support
 This is an IBM Supported app. Please search https://ibm.com/mysupport for assistance.
 
