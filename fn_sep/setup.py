@@ -19,7 +19,8 @@ def snake_to_camel(word):
 
 setup(
     name='fn_sep',
-    version='1.0.0',
+    display_name='Symantec Endpoint Protection Integration for IBM Resilient',
+    version='1.0.1',
     license='MIT',
     author='IBM Resilient Support',
     author_email='support@resilientsystems.com',
