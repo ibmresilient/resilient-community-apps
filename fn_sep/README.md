@@ -23,7 +23,7 @@
 - [Sample workflows](#sample-workflows)
 - [Sample rules](#sample-rules)
 - [Example](#example)
-- [Troubleshooting & Support](#troubleshooting)
+- [Troubleshooting & Support](#troubleshooting-&-support)
 
 ---
 
