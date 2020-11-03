@@ -70,4 +70,4 @@ class TestQradarGetReferenceTables:
         for entry in results['content']:
             assert entry.get('collection_id', False)
             assert entry.get('name', False)
-            assert entry.get('number_of_elements', False)
+            assert isinstance(entry.get('number_of_elements', False), int)
