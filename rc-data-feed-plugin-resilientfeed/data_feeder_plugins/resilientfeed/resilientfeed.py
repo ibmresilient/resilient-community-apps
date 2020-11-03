@@ -194,7 +194,7 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
             if type_name == "incident":
                 # apply logic to determine if the incident should be created
                 if not matching_criteria.match_payload_value(field_key, new_value):
-                    msg = "Match failed on {}:{}".format(field_key, new_value)
+                    msg = u"Match failed on field: '{}', value: '{}'".format(field_key, new_value)
                     raise MatchError(msg)
                 # ensure custom fields exist
                 if prefix == "properties" and field_key not in target_field_names:

@@ -82,7 +82,7 @@ Note: Perform an export and reimport of these customizations into the target Res
   postgresql_connect=Driver={PostresSQL Driver};Server=127.0.0.1;DB=<db>;Port=5432;connectTimeout=0
   postgresql_uid=<acct>
   postgresql_pwd=<pwd>
-  # optional semicolon separated list of fields to allow incidents to sync. ex. incident_type_ids in ['Phishing', 'Malware'];custom_field = "a";description ~ malicious
+  # optional semicolon separated list of fields to allow incidents to sync. ex. incident_type_ids in ["Phishing", "Malware"];custom_field = a;description ~ malicious
   #matching_incident_fields=
   # when using matching_incident_fields, specify whether 'all' or 'any' field needs to match to accept
   #matching_operator=all
