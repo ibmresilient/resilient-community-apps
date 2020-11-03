@@ -24,6 +24,8 @@ stages:
     if: (branch = master AND type IN (push)) OR tag =~ ^container/.+
   - name: successful notification
     if: type NOT IN (cron) # no need for successful cron notifications
+  - name: rebuild containers
+    if: tag =~ ^rebuild\/.+
 
 matrix:
   fast_finish: true
@@ -82,6 +84,17 @@ matrix:
     install: skip
     script:
       - .scripts/send_notification.sh
+
+  - stage: rebuild containers
+    python: 3.6
+    services:
+      - docker
+    before_install:
+      - sudo apt-get install jq
+      - pip install resilient-sdk
+    script:
+      - RESILIENT_CIRCUITS_VERSION=$(echo $TRAVIS_TAG | cut -d "/" -f 2)
+      - .scripts/rebuild_container_images $RESILIENT_CIRCUITS_VERSION
 
 # If one job fails the whole build fails, so we can send it here
 after_failure:
