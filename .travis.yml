@@ -93,6 +93,8 @@ matrix:
       - sudo apt-get install jq
       - pip install resilient-sdk
     script:
+      # This will take everything after the '/' in the tag as the RESILIENT_CIRCUITS_VERSION
+      # E.g.: if the tag is 'rebuild/40.0.0' RESILIENT_CIRCUITS_VERSION will be 40.0.0
       - RESILIENT_CIRCUITS_VERSION=$(echo $TRAVIS_TAG | cut -d "/" -f 2)
       - .scripts/rebuild_container_images $RESILIENT_CIRCUITS_VERSION
 
