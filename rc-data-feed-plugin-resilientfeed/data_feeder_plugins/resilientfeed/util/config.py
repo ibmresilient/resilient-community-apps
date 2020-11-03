@@ -28,7 +28,7 @@ sqlite_sync_file=/path/to/file
 postgresql_connect=Driver={PostgreSQL};Server=127.0.0.1;DB=<db>;Port=5432;connectTimeout=0
 postgresql_uid=<acct>
 postgresql_pwd=<pwd>
-# semicolon separated list of fields to allow incidents to sync. ex. incident_type_ids in ["Phishing"];custom_field == a
+# semicolon separated list of fields to allow incidents to sync. ex. incident_type_ids in ["Phishing","Malware"];custom_field == a
 # use ~ for 'contains', such as description ~ malicious
 #matching_incident_fields=
 # when using matching_incident_fields, specify whether 'all' or 'any' field needs to match to accept. Default: all
