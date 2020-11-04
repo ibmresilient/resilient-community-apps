@@ -8,6 +8,8 @@
 
 QUAY_USERNAME=$QUAY_USERNAME_2
 QUAY_PASSWORD=$QUAY_PASSWORD_2
+ARTIFACTORY_USERNAME=$ARTIFACTORY_USERNAME_2
+ARTIFACTORY_PASSWORD=$ARTIFACTORY_PASSWORD_2
 
 ##################
 ## Check params ##
@@ -21,7 +23,6 @@ fi
 ## Variables ##
 ###############
 RESILIENT_CIRCUITS_VERSION=$1
-QUAY_URL="quay.io"
 QUAY_API_URL="$QUAY_URL/api/v1"
 PATH_IGNORE_IMAGE_NAMES="$TRAVIS_BUILD_DIR/.scripts/IGNORE_IMAGE_NAMES.txt"
 
@@ -46,6 +47,8 @@ RESILIENT_CIRCUITS_VERSION:\t$RESILIENT_CIRCUITS_VERSION \n\
 QUAY_URL:\t\t\t$QUAY_URL \n\
 QUAY_API_URL:\t\t\t$QUAY_API_URL \n\
 QUAY_USERNAME:\t\t\t$QUAY_USERNAME \n\
+ARTIFACTORY_REPO:\t\t$ARTIFACTORY_REPO \n\
+ARTIFACTORY_USERNAME:\t\t$ARTIFACTORY_USERNAME \n\
 PATH_IGNORE_IMAGE_NAMES:\t$PATH_IGNORE_IMAGE_NAMES \
 "
 
@@ -57,6 +60,7 @@ IGNORE_IMAGE_NAMES=( $(<$PATH_IGNORE_IMAGE_NAMES) )
 print_msg "IGNORE_IMAGE_NAMES:\n${IGNORE_IMAGE_NAMES[*]}"
 
 quay_io_tags=()
+artifactory_tags=()
 
 # Loop all image names at https://quay.io/user/$QUAY_USERNAME
 for image_name in "${IMAGE_NAMES[@]}"; do
@@ -88,11 +92,15 @@ for image_name in "${IMAGE_NAMES[@]}"; do
 
         # tag the image for quay.io
         quay_io_tag="$QUAY_URL/$QUAY_USERNAME/$image_name:$int_version"
-        print_msg "Tagging $image_name for quay.io with: $quay_io_tag"
+        print_msg "Tagging $image_name for $QUAY_URL/$QUAY_USERNAME with: $quay_io_tag"
         docker tag $docker_tag $quay_io_tag
         quay_io_tags+=($quay_io_tag)
 
-        # TODO: tag the image for artifactory
+        # tag the image for artifactory
+        artifactory_tag="$ARTIFACTORY_REPO/$QUAY_USERNAME/$image_name:$int_version"
+        print_msg "Tagging $image_name for $ARTIFACTORY_REPO with: $artifactory_tag"
+        docker tag $docker_tag $artifactory_tag
+        artifactory_tags+=($artifactory_tag)
 
         print_msg "Done building: $image_name"
 
@@ -111,4 +119,11 @@ for t in "${quay_io_tags[@]}"; do
     docker push $t
 done
 
-# TODO: Login and push to artifactory
+# Login and push to artifactory
+print_msg "Logging into $ARTIFACTORY_REPO as $ARTIFACTORY_USERNAME"
+repo_login $ARTIFACTORY_REPO $ARTIFACTORY_USERNAME $ARTIFACTORY_PASSWORD
+
+for t in "${artifactory_tags[@]}"; do
+    print_msg "Pushing $t"
+    docker push $t
+done
