@@ -34,10 +34,10 @@
   notes of a previous release
 -->
 ### v1.0.0
-* App Host support
+* App Host support.
 * Package name changed from fn_isitPhishing to fn_isitphishing.
 
-NOTE: Prior installs: edit your app.config file to change ```[fn_isitPhishing]``` to
+NOTE Prior installs: Edit your app.config file to change ```[fn_isitPhishing]``` to
 ```[fn_isitphishing]```
 
 ### v1.0.0
@@ -52,8 +52,6 @@ NOTE: Prior installs: edit your app.config file to change ```[fn_isitPhishing]``
 -->
 **Resilient Circuits Function that queries isitPhishing.org API to analyze a URL or an HTML document**
 
-
-Resilient Circuits Function that queries IsItPhishing.org API to analyze a URL or an HTML document
 
 ### Key Features
 <!--
