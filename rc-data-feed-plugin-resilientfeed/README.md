@@ -27,7 +27,7 @@ Unless otherwise specified, contents of this repository are published under the 
   [sudo] pip install --upgrade rc_data_feed-plugin_resilientfeed-<version>.tar.gz
 ```
 
-If using the support for PostreSQL, uninstall the package as:
+If adding support for PostreSQL, upgrade the package as:
 ```
   [sudo] pip install --upgrade rc_data_feed-plugin_resilientfeed-<version>.tar.gz[postgres]
 ```
