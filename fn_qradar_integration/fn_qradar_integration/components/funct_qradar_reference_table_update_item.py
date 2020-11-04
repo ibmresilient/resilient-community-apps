@@ -28,10 +28,10 @@ class FunctionComponent(ResilientComponent):
         """Function: Update an item in a given QRadar reference table"""
         try:
 
-            # Get the wf_instance_id of the workflow this Function was called in
-            wf_instance_id = event.message["workflow_instance"]["workflow_instance_id"]
+            # # Get the wf_instance_id of the workflow this Function was called in
+            # wf_instance_id = event.message["workflow_instance"]["workflow_instance_id"]
 
-            yield StatusMessage("Starting 'qradar_reference_table_update_item' running in workflow '{0}'".format(wf_instance_id))
+            # yield StatusMessage("Starting 'qradar_reference_table_update_item' running in workflow '{0}'".format(wf_instance_id))
 
             rp = ResultPayload(PACKAGE_NAME, **kwargs)
 
@@ -62,11 +62,11 @@ class FunctionComponent(ResilientComponent):
                                          opts=self.opts, function_opts=self.options)
 
             result = qradar_client.update_ref_table_element(qradar_reference_table_name, qradar_reference_table_item_inner_key, qradar_reference_table_item_outer_key, qradar_reference_table_item_value)
-
+            log.info(result)
             results = rp.done(success=True,
                               content=result)
 
-            yield StatusMessage("Finished 'qradar_reference_table_update_item' that was running in workflow '{0}'".format(wf_instance_id))
+            # yield StatusMessage("Finished 'qradar_reference_table_update_item' that was running in workflow '{0}'".format(wf_instance_id))
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

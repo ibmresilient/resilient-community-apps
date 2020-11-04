@@ -28,10 +28,10 @@ class FunctionComponent(ResilientComponent):
         """Function: Add an item to a given QRadar reference table"""
         try:
 
-            # Get the wf_instance_id of the workflow this Function was called in
-            wf_instance_id = event.message["workflow_instance"]["workflow_instance_id"]
+            # # Get the wf_instance_id of the workflow this Function was called in
+            # wf_instance_id = event.message["workflow_instance"]["workflow_instance_id"]
 
-            yield StatusMessage("Starting 'qradar_reference_table_add_item' running in workflow '{0}'".format(wf_instance_id))
+            # yield StatusMessage("Starting 'qradar_reference_table_add_item' running in workflow '{0}'".format(wf_instance_id))
 
             required_fields = ["qradar_reference_table_name", "qradar_reference_table_item_value"]
             validate_fields(required_fields, kwargs)
@@ -40,10 +40,14 @@ class FunctionComponent(ResilientComponent):
             # Get the function parameters:
             qradar_reference_table_name = kwargs.get("qradar_reference_table_name")  # text
             qradar_reference_table_item_value = kwargs.get("qradar_reference_table_item_value")  # text
+            qradar_reference_table_item_inner_key = kwargs.get("qradar_reference_table_item_inner_key")  # text
+            qradar_reference_table_item_outer_key = kwargs.get("qradar_reference_table_item_outer_key")  # text
 
             log = logging.getLogger(__name__)
             log.info("qradar_reference_table_name: %s", qradar_reference_table_name)
             log.info("qradar_reference_table_item_value: %s", qradar_reference_table_item_value)
+            log.info("qradar_reference_table_item_inner_key: %s", qradar_reference_table_item_inner_key)
+            log.info("qradar_reference_table_item_outer_key: %s", qradar_reference_table_item_outer_key)
 
             qradar_verify_cert = True
             if "verify_cert" in self.options and self.options["verify_cert"].lower() == "false":
@@ -59,12 +63,14 @@ class FunctionComponent(ResilientComponent):
                                          cafile=qradar_verify_cert,
                                          opts=self.opts, function_opts=self.options)
 
-            result = qradar_client.add_ref_element(qradar_reference_table_name,
-                                                   qradar_reference_table_item_value)
+            result = qradar_client.add_ref_table_element(qradar_reference_table_name, 
+                                                         qradar_reference_table_item_inner_key,
+                                                         qradar_reference_table_item_outer_key,
+                                                         qradar_reference_table_item_value)
 
-            results = rp.done(success=True, 
+            results = rp.done(success=True,
                               content=result)
-            yield StatusMessage("Finished 'qradar_reference_table_add_item' that was running in workflow '{0}'".format(wf_instance_id))
+            # yield StatusMessage("Finished 'qradar_reference_table_add_item' that was running in workflow '{0}'".format(wf_instance_id))
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
