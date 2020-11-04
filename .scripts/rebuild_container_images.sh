@@ -106,9 +106,9 @@ print_msg "List of all docker images:\n$(docker images)"
 print_msg "Logging into $QUAY_URL as $QUAY_USERNAME"
 repo_login $QUAY_URL $QUAY_USERNAME $QUAY_PASSWORD
 
-# for t in "${quay_io_tags[@]}"; do
-#     print_msg "Pushing $t"
-#     docker push $t
-# done
+for t in "${quay_io_tags[@]}"; do
+    print_msg "Pushing $t"
+    docker push $t
+done
 
 # TODO: Login and push to artifactory
