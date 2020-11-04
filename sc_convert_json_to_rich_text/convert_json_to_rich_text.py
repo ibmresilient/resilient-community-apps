@@ -1,5 +1,5 @@
 # (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
-VERSION = 1.0
+VERSION = 1.1
 """
   This script converts a json object into a hierarchical display of rich text and adds the rich text to an incident's rich text (custom) field or an incident note.
   A workflow property is used to define the json to convert and identify parameters used on how to perform the conversion.
@@ -11,9 +11,9 @@ VERSION = 1.0
   
   In order to use this script, define a workflow property called: convert_json_to_rich_text, to define the json and parameters to use for the conversion.
   Workflow properties can be added using a command similar to this:
-  workflow.addProperty('convert_json_to_rich_text', { 
-    "version": 1.0,
-    "header": "Artifact scan results for".format(artifact.value),
+  workflow.addProperty('convert_json_to_rich_text', {
+    "version": 1.1,
+    "header": "Artifact scan results for: {}".format(artifact.value),
     "padding": 10,
     "separator": u"<br />",
     "sort": True,
@@ -24,7 +24,7 @@ VERSION = 1.0
   
   Format of workflow.property.convert_json_to_rich_text:
   { 
-    "version": 1.0, [this is for future compatibility]
+    "version": 1.1, [this is for future compatibility]
     "header": str, [header line to add to converted json produced or None. Ex: Results from scanning artifact: xxx. The header may contain rich text tags]
     "padding": 10, [padding for nested json elements, or defaults to 10]
     "separator": u"<br />"|list such as ['<span>','</span>'], [html separator between json keys and lists or defaults to html break: '<br />'. 
@@ -128,22 +128,26 @@ class ConvertJson:
         """
         notes = []
         if sub_dict:
-            keys = sorted (sub_dict.keys()) if self.sort_keys else sub_dict.keys()
+            if isinstance(sub_dict, list):
+                expanded_list = self.expand_list(sub_dict, is_list=True)
+                notes.append(self.add_separator(self.separator, expanded_list))
+            else:
+                keys = sorted (sub_dict.keys()) if self.sort_keys else sub_dict.keys()
 
-            for key in keys:
-                if key not in self.omit_keys:
-                    value = sub_dict[key]
-                    is_list = isinstance(value, list)
-                    item_list = [u"<strong>{0}</strong>: ".format(key)]
-                    if isinstance(value, dict):
-                        convert_result = self.convert_json_to_rich_text(value)
-                        if convert_result:
-                            item_list.append(u"<div style='padding:{}px'>{}</div>".format(self.padding, convert_result))
+                for key in keys:
+                    if key not in self.omit_keys:
+                        value = sub_dict[key]
+                        is_list = isinstance(value, list)
+                        item_list = [u"<strong>{0}</strong>: ".format(key)]
+                        if isinstance(value, dict):
+                            convert_result = self.convert_json_to_rich_text(value)
+                            if convert_result:
+                                item_list.append(u"<div style='padding:{}px'>{}</div>".format(self.padding, convert_result))
+                            else:
+                                item_list.append(u"None<br>")
                         else:
-                            item_list.append(u"None<br>")
-                    else:
-                        item_list.append(self.expand_list(value, is_list=is_list))
-                    notes.append(self.add_separator(self.separator, u"".join(unicode(v) for v in item_list), is_list=is_list))
+                            item_list.append(self.expand_list(value, is_list=is_list))
+                        notes.append(self.add_separator(self.separator, u"".join(unicode(v) for v in item_list), is_list=is_list))
 
         result_notes = u"".join(notes)
         if isinstance(self.separator, list):
@@ -184,8 +188,6 @@ def get_properties(property_name):
     """
     if not workflow.properties.get(property_name):
         helper.fail("workflow.properties.{} undefined".format(property_name))
-    if not workflow.properties[property_name].get('json'):
-        helper.fail("workflow.properties.{}.json undefined".format(property_name))
 
     padding = int(workflow.properties[property_name].get("padding", 10))
     separator = workflow.properties[property_name].get("separator", u"<br />")
@@ -197,8 +199,9 @@ def get_properties(property_name):
     if not json_omit_list:
         json_omit_list = []
     incident_field = workflow.properties[property_name].get("incident_field")
-    json = workflow.properties[property_name].get("json")
-    if not isinstance(json, dict):
+    
+    json = workflow.properties[property_name].get("json", {})
+    if not isinstance(json, dict) and not isinstance(json, list):
         helper.fail("json element is not formatted correctly: {}".format(json))
     sort_keys = bool(workflow.properties[property_name].get("sort", False))
 
@@ -219,7 +222,7 @@ if 'workflow' in globals():
 
     convert = ConvertJson(omit_keys=json_omit_list, padding=padding, separator=separator, sort_keys=sort_keys)
     converted_json = convert.convert_json_to_rich_text(json)
-    result = u"{}{}".format(hdr, converted_json)
+    result = u"{}{}".format(hdr, converted_json if converted_json else "\nNone")
 
     rich_text_note = helper.createRichText(result)
     if incident_field:
