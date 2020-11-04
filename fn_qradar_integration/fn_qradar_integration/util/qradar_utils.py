@@ -13,6 +13,8 @@ from fn_qradar_integration.util.SearchWaitCommand import SearchWaitCommand, Sear
 import fn_qradar_integration.util.function_utils as function_utils
 from resilient_lib import RequestsCommon
 
+from fn_qradar_integration.util.exceptions.custom_exceptions import RequestError, DeleteError
+from ..lib.reference_data.ReferenceTableFacade import ReferenceTableFacade
 # handle python2 and 3
 try:
     from urllib import quote as quote_func  # Python 2.X
@@ -34,20 +36,6 @@ def quote(input_v, safe=None):
     if safe:
         return quote_func(input_v, safe)
     return quote_func(input_v)
-
-
-class RequestError(Exception):
-    """ Request error"""
-    def __init__(self, url, message):
-        fail_msg = "Request to url [{}] throws exception. Error [{}]".format(url, message)
-        super(RequestError, self).__init__(fail_msg)
-
-
-class DeleteError(Exception):
-    """ Request error"""
-    def __init__(self, url, message):
-        fail_msg = "Delete request to url [{}] throws exception. Error [{}]".format(url, message)
-        super(DeleteError, self).__init__(fail_msg)
 
 
 class AuthInfo(object):
@@ -236,7 +224,12 @@ class ArielSearch(SearchWaitCommand):
         return status
 
 
+
 class QRadarClient(object):
+
+    # QRadarClient has-a ReferenceTableFacade
+    reference_tables = ReferenceTableFacade()
+    auth_info = AuthInfo.get_authInfo()
 
     def __init__(self, host, username=None, password=None, token=None, cafile=None,
                  opts=None, function_opts=None):
@@ -250,8 +243,7 @@ class QRadarClient(object):
         :param opts: app.config options dictionary
         :param function_opts: function parameters from app.config
         """
-        auth_info = AuthInfo.get_authInfo()
-        auth_info.create(host, username, password, token, cafile, opts, function_opts)
+        self.auth_info.create(host, username, password, token, cafile, opts, function_opts)
 
     def check_openssl(self):
         """
@@ -451,7 +443,7 @@ class QRadarClient(object):
         return ret
 
     @staticmethod
-    def delete_ref_element(ref_set, value):
+    def delete_ref_element(ref_set, value, reference_endpoint=qradar_constants.REFERENCE_SET_URL):
         """
         Delete value from the given ref_set
         :param ref_set: Name of existing reference set
@@ -461,7 +453,7 @@ class QRadarClient(object):
         auth_info = AuthInfo.get_authInfo()
         ref_set_link = quote(ref_set, '')
         value = quote(value, '')
-        url = u"{}{}/{}/{}".format(auth_info.api_url, qradar_constants.REFERENCE_SET_URL,
+        url = u"{}{}/{}/{}".format(auth_info.api_url, reference_endpoint,
                                    ref_set_link, value)
 
         ret = {}
@@ -476,3 +468,39 @@ class QRadarClient(object):
             raise DeleteError(url, "delete_ref_element failed with exception {}".format(str(e)))
 
         return ret
+
+    @classmethod
+    def update_ref_table_element(cls, ref_table, inner_key, outer_key, value, reference_endpoint=qradar_constants.REFERENCE_TABLE_URL):
+        """
+        Delete value from the given ref_table
+        :param ref_table: Name of reference table.
+        :param value:
+        :return:
+        """
+        return cls.reference_tables.update_ref_element(AuthInfo.get_authInfo(), ref_table, inner_key, outer_key, value)
+
+    @classmethod
+    def delete_ref_table_element(cls, ref_table, inner_key, outer_key, value, reference_endpoint=qradar_constants.REFERENCE_TABLE_URL):
+        """
+        Delete value from the given ref_table
+        :param ref_table: Name of reference table.
+        :param value:
+        :return:
+        """
+        return cls.reference_tables.delete_ref_element(AuthInfo.get_authInfo(), ref_table, inner_key, outer_key, value)
+
+    
+
+    def get_all_ref_tables(self):
+        return self.reference_tables.get_all_reference_tables(AuthInfo.get_authInfo())
+
+    @classmethod
+    def add_ref_table_element(cls, ref_table, inner_key, outer_key, value):
+        """
+        Add the value to the given ref_table
+        :param ref_table: Name of reference table.
+        :param value:
+        :return:
+        """
+        return cls.reference_tables.add_ref_element(AuthInfo.get_authInfo(), ref_table, inner_key, outer_key, value)
+        

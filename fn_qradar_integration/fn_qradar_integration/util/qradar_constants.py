@@ -9,6 +9,8 @@ HELP_VERSIONS = "help/versions"
 ARIEL_SEARCHES = "ariel/searches"
 ARIEL_SEARCHES_RESULT = "ariel/searches/{}/results"
 REFERENCE_SET_URL = "reference_data/sets"
+REFERENCE_TABLE_URL = "reference_data/tables"
+
 
 SEARCH_STATUS_COMPLETED = "COMPLETED"
 SEARCH_STATUS_EXECUTE = "EXECUTE"
