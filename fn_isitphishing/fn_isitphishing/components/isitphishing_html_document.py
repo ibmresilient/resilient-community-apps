@@ -7,9 +7,9 @@ import base64
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import get_file_attachment, get_file_attachment_name, validate_fields, RequestsCommon, ResultPayload
-from fn_isitPhishing.lib.isitphishing_util import get_license_key
+from fn_isitphishing.lib.isitphishing_util import get_license_key
 
-CONFIG_DATA_SECTION = 'fn_isitphishing'
+PACKAGE_NAME = 'fn_isitphishing'
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'isitphishing_html_document"""
@@ -19,8 +19,8 @@ class FunctionComponent(ResilientComponent):
         super(FunctionComponent, self).__init__(opts)
 
         # Get app.config parameters.
-        self.options = opts.get(CONFIG_DATA_SECTION, {})
-        self._init_isitPhishing()
+        self.options = opts.get(PACKAGE_NAME, {})
+        self._init_isitphishing()
 
     def _init_isitphishing(self):
         """ validate required fields for app.config """
@@ -29,7 +29,7 @@ class FunctionComponent(ResilientComponent):
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
-        self.options = opts.get(CONFIG_DATA_SECTION, {})
+        self.options = opts.get(PACKAGE_NAME, {})
         self.opts = opts
         self._init_isitphishing()
 
@@ -46,7 +46,7 @@ class FunctionComponent(ResilientComponent):
         "contents" and the "inputs" parameters to the function.
         """
         try:
-            rp = ResultPayload(CONFIG_DATA_SECTION, **kwargs)
+            rp = ResultPayload(PACKAGE_NAME, **kwargs)
 
             # Get the function parameters:
             incident_id = kwargs.get("incident_id")  # number

@@ -6,7 +6,7 @@
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import validate_fields, RequestsCommon, ResultPayload
-from fn_isitPhishing.lib.isitphishing_util import get_license_key
+from fn_isitphishing.lib.isitphishing_util import get_license_key
 
 
 PACKAGE_NAME = 'fn_isitphishing'
@@ -42,7 +42,7 @@ class FunctionComponent(ResilientComponent):
         URL input parameter to the function.
         """
         try:
-            rp = ResultPayload(CONFIG_DATA_SECTION, **kwargs)
+            rp = ResultPayload(PACKAGE_NAME, **kwargs)
 
             # Get the function parameters:
             isitphishing_url = kwargs.get("isitphishing_url")  # text
