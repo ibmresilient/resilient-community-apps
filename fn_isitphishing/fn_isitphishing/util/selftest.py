@@ -7,7 +7,7 @@
 
 import requests
 import logging
-from fn_isitPhishing.lib.isitphishing_util import get_license_key
+from fn_isitphishing.lib.isitphishing_util import get_license_key
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
