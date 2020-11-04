@@ -6,7 +6,7 @@ from __future__ import print_function
 import pytest
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
-from test_helper import *
+from tests.test_helper import *
 
 PACKAGE_NAME = "fn_datatable_utils"
 FUNCTION_NAME = "dt_utils_get_row"

@@ -1,24 +1,41 @@
 # IBM Resilient - Data Table Helper Functions
 
 ## Table of Contents
+  - [Release Notes](#release-notes)
   - [Function - Get Row](#function---get-row)
+  - [Function - Get Rows](#function---get-rows)
   - [Function - Update Row](#function---update-row)
   - [Function - Delete Row](#function---delete-row)
+  - [Function - Delete Rows](#function---delete-rows)
   - [Rules](#rules)
   - [Display the Data Table in an Incident](#display-the-datatable-in-an-incident)
 ---
 
-**This package contains 3 functions that help you manipulate IBM Resilient Data Tables**
+**This package contains 5 functions that help you manipulate IBM Resilient Data Tables**
 
- ![screenshot](./screenshots/1.png)
+ ![screenshot](./screenshots/dt_functions.png)
 
-The 3 functions allow you to GET, UPDATE and DELETE a row in a Data Table
+The 5 functions allow you to GET, UPDATE, DELETE a row and GET and DELETE rows in a Data Table.
+
+---
+## Release Notes
+### v1.1.0
+* Added support for App Host
+* Added example Rule: `Get Data Table Rows`
+* Added example Rule: `Delete Data Table Rows`
+* Added example Workflow: `example_data_table_utils_get_rows`
+* Added example Workflow: `example_data_table_utils_delete_rows`
+* Added example Function: `dt_utils_get_rows`
+* Added example Function: `dt_utils_delete_rows`
+
+### v1.0.0
+* Initial Release
 
 ---
 ## Function - Get Row:
-Gets a row in a Data Table by the row's ID or by searching the column name and cell value
+Function that searches for a row using a internal row ID or a 'search_column and search_value' pair and returns the cells of the row that is found, if such a row exists.
 
- ![screenshot](./screenshots/2.png)
+ ![screenshot](./screenshots/dt_get_row.png)
 
 
 ### Inputs:
@@ -96,10 +113,120 @@ inputs.dt_utils_search_value = artifact.value
 # inputs.dt_utils_row_id = 3
 ```
 ---
-## Function - Update Row:
-Uses a JSON String of 'column name/cell value' pairs to update a Data Table row
+## Function - Get Rows:
+Function that returns the full unsorted list of JSON objects which contain all information regarding each row found, if no searching/sorting criteria were provided.
 
- ![screenshot](./screenshots/3.png)
+ ![screenshot](./screenshots/dt_get_rows.png)
+
+
+### Inputs:
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `incident_id` | `Number` | Yes | `2095` | ID of the current Incident |
+| `dt_utils_datatable_api_name` | `String` | Yes | `"dt_utils_test_data_table"` | API name of the Data Table to search |
+| `dt_utils_sort_by` | `String` | No | `"dt_col_status"` | The name of the API column |
+| `dt_utils_sort_direction` | `Select` | No | `{'name': 'ASC'}` | - |
+| `dt_utils_max_rows` | `Number` | No | `1` | A number of max rows to return |
+| `dt_utils_search_column` | `String` | No | `"dt_col_name"` | API name of the column to search |
+| `dt_utils_search_value` | `String` | No | `"Mary Murphy"` | Cell value to search for |
+
+### Output:
+```python
+results={
+  'inputs': {
+    'incident_id': 2095,
+    'dt_utils_datatable_api_name': 'dt_utils_test_data_table',
+    'dt_utils_sort_by': 'dt_col_status',
+    'dt_utils_sort_direction': 'ASC',
+    'dt_utils_max_rows': 1,
+    'dt_utils_search_column': 'dt_col_name',
+    'dt_utils_search_value': 'Mary Murphy'
+  },
+  'success': True,
+  'rows': [
+    {
+      'type_id': 1000,
+      'cells': {
+        'dt_col_name': {
+          'row_id': 1,
+          'id': 'dt_col_name',
+          'value': 'Mary Murphy'
+        },
+        'dt_col_status': {
+          'row_id': 1,
+          'id': 'dt_col_status',
+          'value': 'Incomplete'
+        },
+        'dt_col_time': {
+          'row_id': 1,
+          'id': 'dt_col_time',
+          'value': '10:45'
+        },
+        'dt_col_id': {
+          'row_id': 1,
+          'id': 'dt_col_id',
+          'value': '635'
+        }
+      },
+      'actions': [
+        
+      ],
+      'inc_owner': 'admin@res.com',
+      'version': 2,
+      'table_name': 'Test Data Table',
+      'inc_name': 'Test DT Utils',
+      'inc_id': 2095,
+      'id': 1
+    }
+  ]
+}
+```
+
+### Pre-Process Script:
+This example uses the Artifact Value as the value to search the data table for
+```python
+# The ID of this incident
+inputs.incident_id = incident.id
+
+# The api name of the Data Table to update
+inputs.dt_utils_datatable_api_name = "dt_utils_test_data_table"
+
+# The number of max rows to return
+if rule.properties.dt_utils_max_rows:
+  inputs.dt_utils_max_rows = rule.properties.dt_utils_max_rows
+else:
+  inputs.dt_utils_max_rows = 0
+  
+# The direction of the sort
+inputs.dt_utils_sort_direction = rule.properties.dt_utils_sort_direction
+
+# The api name of the column to sort by
+if rule.properties.dt_utils_sort_by:
+  inputs.dt_utils_sort_by = rule.properties.dt_utils_sort_by
+else:
+  inputs.dt_utils_sort_by = None
+  
+# The column api name to search for
+inputs.dt_utils_search_column = "dt_col_name"
+
+# The cell value to search for
+inputs.dt_utils_search_value = artifact.value
+```
+### Post-Processing Script
+```python
+search_value = results.inputs["dt_utils_search_value"]
+note_text = "<b>Result from Example: Data Table Utils: Get Rows</b><br> search value: {0}".format(search_value) 
+if results.success:
+  note_text = "{0} <br>{1}".format(note_text, str(results["rows"]))
+else:
+  note_text = "{0} <br>No rows found.".format(note_text)
+incident.addNote(helper.createRichText(note_text))
+```
+---
+## Function - Update Row:
+Function that takes a JSON String of 'search_column and search_value' pairs to update a Data Table row.
+
+ ![screenshot](./screenshots/dt_update_row.png)
 
 
 ### Inputs:
@@ -222,9 +349,9 @@ inputs.dt_utils_cells_to_update = dict_to_json_str({
 ```
 ---
 ## Function - Delete Row:
-Deletes a row from a Data Table given the row's ID
+Function that deletes a row from a Data Table given the internal row ID.
 
- ![screenshot](./screenshots/4.png)
+ ![screenshot](./screenshots/dt_delete_row.png)
 
 
 ### Inputs:
@@ -265,12 +392,69 @@ inputs.dt_utils_datatable_api_name = workflow.properties.row_to_delete.inputs.dt
 inputs.dt_utils_row_id = workflow.properties.row_to_delete.row["id"]
 ```
 ---
+## Function - Delete Rows:
+Function that deletes rows from a Data Table given a list of internal row IDs or a 'search_column and search_value' pair.
+<p>Note: This function works with no issue when run on an Artifact workflow. There is an issue when the function is run on a custom workflow on a Data Table. If the delete rows action is performed of the row that meets the condition specified in the pre-process script, this row will not be deleted. 
+
+ ![screenshot](./screenshots/dt_delete_rows.png)
+
+
+### Inputs:
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `dt_utils_datatable_api_name` | `text` | Yes | `-` | The API name of the Data Table |
+| `dt_utils_rows_ids` | `text` | No | `-` | The list of internal rows IDs of a Data Table to delete |
+| `dt_utils_search_column` | `text` | No | `-` | The API name of the column to search |
+| `dt_utils_search_value` | `text` | No | `-` | The cell value to search for within the search column |
+| `incident_id` | `number` | Yes | `-` | - ||
+
+
+### Output:
+```python
+results = [30,31]
+```
+
+### Pre-Process Script:
+```python
+# Data Table Utils: Example: Delete Row
+
+#####################
+### Define Inputs ###
+#####################
+
+# The ID of this incident
+inputs.incident_id = incident.id
+
+# The api name of the Data Table, search column, search value [here it is taken from previous Get Rows Function inputs]
+inputs.dt_utils_datatable_api_name = workflow.properties.rows_to_delete.inputs.dt_utils_datatable_api_name
+
+# The internal IDs of the rows that will be deleted [again, taken from previous Get Rows Function]
+if workflow.properties.rows_to_delete and workflow.properties.rows_to_delete.rows:
+  rows_ids = []
+  for row in workflow.properties.rows_to_delete.rows:
+    rows_ids.append(row["id"])
+  inputs.dt_utils_rows_ids = str(rows_ids)
+  
+## Alternatively you can delete row/rows by defining the list of internal row IDs or by defining the 'search_column and search_value' pair:
+# inputs.dt_utils_rows_ids = "[2,3]"  # or
+# inputs.dt_utils_search_column = "dt_col_name"
+# inputs.dt_utils_search_value = "Mary Murphy"
+```
+
+### Post-Process Script:
+```python
+note_text = "<b>Result from Example: Data Table Utils: Delete Rows</b><br> {0}".format(str(results["rows_ids"]))
+incident.addNote(helper.createRichText(note_text))
+```
+---
 ## Rules
 | Rule Name | Object Type | Workflow Triggered |
 | --------- | :---------: | ------------------ |
 | Get DT Row | `Artifact` | `Example: Data Table Utils: Get Row` |
+| Get DT Rows | `Artifact` | `Example: Data Table Utils: Get Rows` |
 | Update DT Row | `Artifact` | `Example: Data Table Utils: Update Row` |
 | Delete DT Row | `Artifact` | `Example: Data Table Utils: Delete Row` |
+| Delete DT Rows | `Artifact` | `Example: Data Table Utils: Delete Rows` |
 ---
 ## Data table
 ### Data Table Utils: Test Data Table
@@ -298,3 +482,4 @@ dt_utils_test_data_table
 3. **Drag** the Data table into the middle and click **Save**
  ![screenshot](./screenshots/dt_3.png)
 4. Create a new Incident and you will now see the **My Test Tab** with the **Test Data Table**
+
