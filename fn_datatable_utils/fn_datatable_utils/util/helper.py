@@ -43,7 +43,7 @@ class RESDatatable(object):
             for row in self.rows:
                 cells = row["cells"]
                 if search_column not in cells:
-                    raise ValueError("{0} is not a valid column api name in for the data table {1}".format(search_column, self.api_name))
+                    raise ValueError("{0} is not a valid column api name for the data table: {1}".format(search_column, self.api_name))
                 column = cells.get(search_column)
                 value = column.get("value", None)
                 if value is not None:
@@ -53,7 +53,7 @@ class RESDatatable(object):
             if sort_by:
                 if sort_by not in cells:
                     raise ValueError(
-                        "{0} is not a valid column api name in for the data table {1}".format(sort_by, self.api_name))
+                        "{0} is not a valid column api name for the data table: {1}".format(sort_by, self.api_name))
                 rows_to_return = sorted(rows_to_return, key=lambda item: item['cells'][sort_by]['value'],
                                         reverse=is_reverse)
             if max_rows != 0:

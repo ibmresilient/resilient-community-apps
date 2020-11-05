@@ -67,7 +67,11 @@ class FunctionComponent(ResilientComponent):
             row_id and log.debug("Current row_id: %s", row_id)
 
             # if dt_utils_row_id == 0, use row_id
-            if dt_utils_row_id == 0:
+            if not dt_utils_row_id or not int(dt_utils_row_id):
+                if not row_id:
+                    raise ValueError("Run the workflow from a datatable to get the current row_id.")
+
+                log.info("Using current row_id: %s", row_id)
                 dt_utils_row_id = row_id
 
             if row_id == int(dt_utils_row_id):
