@@ -85,8 +85,8 @@ The following table describes the settings you need to configure in the app.conf
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
 | **verify_cert** | Yes | `True or False` | *Use a CA cert for access to an Exchange server.* |
-| **server** | Yes | `domain\\username` | *Exchange server DNS name or ip address.* |
-| **username** | Yes | `192.168.190.190` | *Admin account with mailbox access to other accounts.* |
+| **server** | Yes | `192.168.1.2` | *Exchange server DNS name or ip address.* |
+| **username** | Yes | `domain\\username` | *Admin account with mailbox access to other accounts.* |
 | **email** | Yes | `admin@example.com` | *default account to send emails and create meetings if one was not specified. Specifying an account that is not this one will require impersonation access.* |
 | **password** | Yes | `password` | *User password for SEP api access.*  |
 | **default_folder_path** | Yes | `Top of Information Store/Inbox` | *Some folder path after root Multiple folderpaths must be separated by commas.*  |
