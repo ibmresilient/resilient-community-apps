@@ -5,6 +5,12 @@ apps-operator
 apps-synchronizer
 
 #Ignore-apps
+#Third Party Apps:
+fn_crowd_strike
+fn_digitalshadows
+fn_guardium_integration
+
+#IBM Resilient Apps
 #fn_alienvault_otx
 #fn_anomali_staxx
 #fn_ansible
@@ -16,20 +22,18 @@ apps-synchronizer
 #fn_cloud_foundry
 #fn_components
 #fn_crowdstrike_falcon
-#fn_crowd_strike
 #fn_cve_search
 #fn_datatable_utils
-#fn_digitalshadows
 #fn_elasticsearch
 #fn_email_header_validation
 #fn_exchange_online
 #fn_geocoding
-#fn_guardium_integration
 #fn_hibp
 #fn_icdx
 #fn_ioc_parser_v2
 #fn_ipinfo
 #fn_ip_void
+#fn_isitphishing
 #fn_jira
 #fn_joe_sandbox_analysis
 #fn_ldap_utilities
@@ -57,11 +61,13 @@ apps-synchronizer
 #fn_scheduler
 #fn_secureworks_ctp
 #fn_sep
+#fn_service_now
 #fn_shodan
 #fn_slack
 #fn_spamhaus_query
 #fn_splunk_integration
 #fn_stix_shifter_wrapper
+#fn_task_utils
 #fn_teams
 #fn_threatminer
 #fn_twilio
@@ -75,9 +81,6 @@ apps-synchronizer
 #fn_whois
 #fn_whois_rdap
 #fn_xforce
-#fn_isitphishing
-#fn_task_utils
-#fn_service_now
 rc-data-feed-plugin-splunkfeed
 rc_data_feed
 rc_data_feed_plugin_elasticfeed
