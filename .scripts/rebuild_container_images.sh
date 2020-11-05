@@ -6,10 +6,12 @@
 # sudo apt-get install jq
 # pip install resilient-sdk
 
+# TODO: Remove these when finished development
 QUAY_USERNAME=$QUAY_USERNAME_2
 QUAY_PASSWORD=$QUAY_PASSWORD_2
 ARTIFACTORY_USERNAME=$ARTIFACTORY_USERNAME_2
 ARTIFACTORY_PASSWORD=$ARTIFACTORY_PASSWORD_2
+ARTIFACTORY_URL=$ARTIFACTORY_URL_2
 
 ##################
 ## Check params ##
@@ -24,6 +26,7 @@ fi
 ###############
 RESILIENT_CIRCUITS_VERSION=$1
 QUAY_API_URL="$QUAY_URL/api/v1"
+ARTIFACTORY_REPO_URL="$ARTIFACTORY_REPO_NAME.$ARTIFACTORY_URL"
 PATH_IGNORE_IMAGE_NAMES="$TRAVIS_BUILD_DIR/.scripts/IGNORE_IMAGE_NAMES.txt"
 
 ###############
@@ -47,7 +50,9 @@ RESILIENT_CIRCUITS_VERSION:\t$RESILIENT_CIRCUITS_VERSION \n\
 QUAY_URL:\t\t\t$QUAY_URL \n\
 QUAY_API_URL:\t\t\t$QUAY_API_URL \n\
 QUAY_USERNAME:\t\t\t$QUAY_USERNAME \n\
-ARTIFACTORY_REPO:\t\t$ARTIFACTORY_REPO \n\
+ARTIFACTORY_URL:\t\t$ARTIFACTORY_URL \n\
+ARTIFACTORY_REPO_NAME:\t\t$ARTIFACTORY_REPO_NAME \n\
+ARTIFACTORY_REPO_URL:\t\t$ARTIFACTORY_REPO_URL \n\
 ARTIFACTORY_USERNAME:\t\t$ARTIFACTORY_USERNAME \n\
 PATH_IGNORE_IMAGE_NAMES:\t$PATH_IGNORE_IMAGE_NAMES \
 "
@@ -97,8 +102,8 @@ for image_name in "${IMAGE_NAMES[@]}"; do
         quay_io_tags+=($quay_io_tag)
 
         # tag the image for artifactory
-        artifactory_tag="$ARTIFACTORY_REPO/$QUAY_USERNAME/$image_name:$int_version"
-        print_msg "Tagging $image_name for $ARTIFACTORY_REPO with: $artifactory_tag"
+        artifactory_tag="$ARTIFACTORY_REPO_URL/$QUAY_USERNAME/$image_name:$int_version"
+        print_msg "Tagging $image_name for $ARTIFACTORY_REPO_URL with: $artifactory_tag"
         docker tag $docker_tag $artifactory_tag
         artifactory_tags+=($artifactory_tag)
 
@@ -120,8 +125,8 @@ for t in "${quay_io_tags[@]}"; do
 done
 
 # Login and push to artifactory
-print_msg "Logging into $ARTIFACTORY_REPO as $ARTIFACTORY_USERNAME"
-repo_login $ARTIFACTORY_REPO $ARTIFACTORY_USERNAME $ARTIFACTORY_PASSWORD
+print_msg "Logging into $ARTIFACTORY_REPO_NAME.$ARTIFACTORY_URL as $ARTIFACTORY_USERNAME"
+repo_login $ARTIFACTORY_REPO_URL $ARTIFACTORY_USERNAME $ARTIFACTORY_PASSWORD
 
 for t in "${artifactory_tags[@]}"; do
     print_msg "Pushing $t"
