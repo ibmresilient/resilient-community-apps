@@ -19,6 +19,9 @@ isitphishing_api_url=https://ws.isitphishing.org/api/v2
 # <NAME>:<LICENSE>
 isitphishing_name=
 isitphishing_license=
-
+#
+# Uncomment to specify proxy settings
+#https_proxy=https://your.proxy.com
+#http_proxy=http://your.proxy.com
 """
     return config_data
