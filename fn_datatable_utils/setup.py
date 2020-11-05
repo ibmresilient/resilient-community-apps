@@ -2,6 +2,20 @@
 # -*- coding: utf-8 -*-
 
 from setuptools import setup, find_packages
+import glob
+import ntpath
+
+def get_module_name(module_path):
+    """
+    Return the module name of the module path
+    """
+    return ntpath.split(module_path)[1].split(".")[0]
+
+def snake_to_camel(word):
+    """
+    Convert a word from snake_case to CamelCase
+    """
+    return ''.join(x.capitalize() or '_' for x in word.split('_'))
 
 setup(
     name='fn_datatable_utils',
@@ -25,11 +39,7 @@ setup(
     ],
     entry_points={
         "resilient.circuits.components": [
-            "DtUtilsGetRowFunctionComponent = fn_datatable_utils.components.dt_utils_get_row:FunctionComponent",
-            "DtUtilsUpdateRowFunctionComponent = fn_datatable_utils.components.dt_utils_update_row:FunctionComponent",
-            "DtUtilsDeleteRowFunctionComponent = fn_datatable_utils.components.dt_utils_delete_row:FunctionComponent",
-            "DtUtilsGetRowsFunctionComponent = fn_datatable_utils.components.dt_utils_get_rows:FunctionComponent",
-            "DtUtilsDeleteRowsFunctionComponent = fn_datatable_utils.components.dt_utils_delete_rows:FunctionComponent"
+            "{}FunctionComponent = fn_datatable_utils.components.{}:FunctionComponent".format(snake_to_camel(get_module_name(filename)), get_module_name(filename)) for filename in glob.glob("./fn_datatable_utils/components/[a-zA-Z]*.py")
         ],
         "resilient.circuits.configsection": ["gen_config = fn_datatable_utils.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_datatable_utils.util.customize:customization_data"],

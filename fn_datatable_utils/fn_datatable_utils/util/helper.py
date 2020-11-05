@@ -4,9 +4,13 @@
 
 import json
 import logging
+import threading
+import time
 from cachetools import cached, LRUCache
+from resilient_lib import get_workflow_status
 
 DATATABLE_TYPE = 8
+LOG = logging.getLogger(__name__)
 
 class RESDatatable(object):
     """ A helper class for manipulate a Resilient Data Table"""
@@ -16,7 +20,6 @@ class RESDatatable(object):
         self.api_name = dt_api_name
         self.data = None
         self.rows = None
-        self.log = logging.getLogger(__name__)
 
     def get_data(self):
         """ Function that gets all the data and rows of a Data Table
@@ -159,13 +162,15 @@ class RESDatatable(object):
 
         return return_value
 
-    def delete_rows(self, rows_ids=None, search_column=None, search_value=None, row_id=None):
+    def delete_rows(self, rows_ids=None, search_column=None, search_value=None, 
+                    row_id=None, workflow_id=None):
         """ Deletes rows.
             Returns the response from Resilient API
             or dict with the entry 'error'. """
 
         return_value = None
         rows_ids_list = []
+        queued_row_id = None
 
         # Search by rows_ids if defined
         if rows_ids:
@@ -176,7 +181,9 @@ class RESDatatable(object):
             for row in self.rows:
                 if row["id"] in rows_ids_input:
                     if row["id"] == row_id:
-                        self.log.warning("Unable to delete current row: %s", row_id)
+                        LOG.warning("Queuing delete of current row: %s", row_id)
+                        self.queue_delete(workflow_id, row_id)
+                        queued_row_id = row_id
                     else:
                         rows_ids_list.append(row["id"])
 
@@ -188,17 +195,22 @@ class RESDatatable(object):
                     raise ValueError("{0} is not a valid column api name in for the data table {1}".format(search_column, self.api_name))
                 if "value" in cells[search_column] and cells[search_column]["value"] == search_value:
                     if row["id"] == row_id:
-                        self.log.warning("Unable to delete current row: %s", row_id)
+                        LOG.info("Queuing delete of current row: %s", row_id)
+                        self.queue_delete(workflow_id, row_id)
+                        queued_row_id = row_id
                     else:
                         rows_ids_list.append(row["id"])
 
+        return_value = rows_ids_list.copy()
         if rows_ids_list:
             for row_id in rows_ids_list:
                 deleted_row = self.delete_row(row_id)
                 if "error" in deleted_row:
-                    return_value = deleted_row
-                else:
-                    return_value = rows_ids_list
+                    LOG.error("Unable to remove row_id: %s. Error: %s", row_id, deleted_row['error'])
+                    return_value.remove(row_id)                
+
+        if queued_row_id:
+            return_value.append(queued_row_id)
 
         return return_value
     
@@ -224,9 +236,36 @@ class RESDatatable(object):
                     return response['object']['object_id']
 
         except Exception as err:
-            self.log.error("Error with url: %s %s", uri, str(err))
+            LOG.error("Error with url: %s %s", uri, str(err))
 
         return None
+
+    def get_dt_headers(self):
+        """ Function that gets all the data and rows of a Data Table
+            using the Resilient API """
+        uri = "/types/{0}?handle_format=names".format(self.api_name)
+
+        try:
+            self.data = self.res_client.get(uri)
+            return self.data["fields"]
+        except Exception:
+            raise ValueError("Failed to get {0} Datatable".format(self.api_name))
+
+    def dt_add_rows(self, rows):
+        """ Adds rows to datatable
+            from uploaded CSV data """
+
+        uri = "/incidents/{0}/table_data/{1}/row_data?handle_format=names".format(self.incident_id, self.api_name)
+
+        formatted_cells = {
+            "cells": rows
+        }
+        try:
+            return_value = self.res_client.post(uri, formatted_cells)
+        except Exception as err:
+            return_value = {"error": err}
+
+        return return_value
 
     @cached(cache=LRUCache(maxsize=100))
     def get_object_type(self, id):
@@ -242,6 +281,29 @@ class RESDatatable(object):
         uri = "/types/{}".format(id)
 
         return self.res_client.get(uri)
+
+    def queue_delete(self, workflow_id, row_id):
+        """
+        queue the delete action for when the workflow completes
+
+        Args:
+            workflow_id ([int]): workflow id to ensure it's complete before deleting row
+            row_id ([int]): row to queue for delete
+
+        Returns:
+            [json]: similar API json for a delete action
+        """
+        t = threading.Thread(target=threaded_delete, args=[self, workflow_id, row_id])
+        t.daemon = True 
+        t.start()
+
+        # return a json result similar to the delete API json
+        return {
+            'success': True, 
+            'title': None, 
+            'message': None, 
+            'hints': [row_id]
+    }
 
 def get_function_input(inputs, input_name, optional=False):
     """Given input_name, checks if it defined. Raises ValueError if a mandatory input is None"""
@@ -292,3 +354,38 @@ def validate_search_inputs(**options):
             return_value["msg"] = "You must define 'sort_direction and sort_by' pair"
 
     return return_value
+
+
+
+def threaded_delete(datatable, workflow_id, row_id):
+    """
+    wait for the workflow to complete before performing the delete row action
+
+    Args:
+        rest_client ([object]): resilient helper object
+        workflow_id ([int]): workflow id to ensure it's complete before deleting row
+        datatable ([object]): helper object
+        row_id ([int]): row to queue for delete
+
+    Returns:
+        None
+    """
+    MAX_SLEEP_UNTIL_WF_COMPLETES = 60
+    MAX_LOOP = 60
+    sleep_time = 10
+    # check that the workflow is still active, sleep if still active
+    wf = get_workflow_status(datatable.res_client, workflow_id)
+    ndx = 0
+    while wf.status == 'running' and ndx < MAX_LOOP:
+        time.sleep(sleep_time)
+        sleep_time += sleep_time
+        sleep_time = min(sleep_time, MAX_SLEEP_UNTIL_WF_COMPLETES)
+        wf = get_workflow_status(datatable.res_client, workflow_id)
+
+    if wf.status != 'running':
+        # perform the delete rows()
+        result = datatable.delete_row(row_id)
+        if 'error' in result:
+            LOG.error("Queued delete failed for row_id: %s. Error: %s", row_id, result['error'])
+        else:
+            LOG.debug("Queued delete succeeded for row_id: %s", row_id)
