@@ -122,7 +122,7 @@ if [ "$REPO_TO_PUSH" == "BOTH" ] || [ "$REPO_TO_PUSH" == "QUAY" ] ; then
     repo_login $QUAY_URL $QUAY_USERNAME $QUAY_PASSWORD
 
     for t in "${quay_io_tags[@]}"; do
-        print_msg "Pushing $t"
+        print_msg "Pushing $t to quay.io"
         docker push $t
     done
 fi
@@ -133,7 +133,7 @@ if [ "$REPO_TO_PUSH" == "BOTH" ] || [ "$REPO_TO_PUSH" == "ARTIFACTORY" ] ; then
     repo_login $ARTIFACTORY_REPO_URL $ARTIFACTORY_USERNAME $ARTIFACTORY_PASSWORD
 
     for t in "${artifactory_tags[@]}"; do
-        print_msg "Pushing $t"
+        print_msg "Pushing $t to artifactory"
         docker push $t
     done
 fi
