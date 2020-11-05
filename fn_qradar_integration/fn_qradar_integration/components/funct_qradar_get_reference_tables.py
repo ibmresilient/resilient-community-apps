@@ -46,7 +46,7 @@ class FunctionComponent(ResilientComponent):
                 qradar_verify_cert = False
 
             log.debug("Connection to {} using {}".format(self.options["host"],
-                                                         self.options.get("username", None) or self.options.get("qradartoken", None) ))
+                                                         self.options.get("username", None) or self.options.get("qradartoken", None)))
 
             qradar_client = QRadarClient(host=self.options["host"],
                                          username=self.options.get("username", None),
@@ -59,8 +59,7 @@ class FunctionComponent(ResilientComponent):
 
             results = rp.done(success=True, 
                               content=result)
-            log.info(results)
-            log.info("Found {} tables from QRadar".format(len(result)))
+            log.debug("Request made to QRadar for reference table update; results {}".format(result))
             yield StatusMessage("Finished 'qradar_reference_table_add_item' that was running in workflow '{0}'".format(wf_instance_id))
 
             # Produce a FunctionResult with the results

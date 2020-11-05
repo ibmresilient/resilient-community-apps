@@ -54,7 +54,7 @@ class FunctionComponent(ResilientComponent):
                 qradar_verify_cert = False
 
             log.debug("Connection to {} using {}".format(self.options["host"],
-                                                         self.options.get("username", None) or self.options.get("qradartoken", None) ))
+                                                         self.options.get("username", None) or self.options.get("qradartoken", None)))
 
             qradar_client = QRadarClient(host=self.options["host"],
                                          username=self.options.get("username", None),
@@ -67,7 +67,8 @@ class FunctionComponent(ResilientComponent):
                                                          qradar_reference_table_item_inner_key,
                                                          qradar_reference_table_item_outer_key,
                                                          qradar_reference_table_item_value)
-
+            
+            log.debug("Request made to QRadar for reference table update; results {}".format(result))
             results = rp.done(success=True,
                               content=result)
             yield StatusMessage("Finished 'qradar_reference_table_add_item' that was running in workflow '{0}'".format(wf_instance_id))

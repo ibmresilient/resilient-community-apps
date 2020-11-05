@@ -62,9 +62,9 @@ class FunctionComponent(ResilientComponent):
                                          opts=self.opts, function_opts=self.options)
 
             result = qradar_client.update_ref_table_element(qradar_reference_table_name, qradar_reference_table_item_inner_key, qradar_reference_table_item_outer_key, qradar_reference_table_item_value)
-            log.info(result)
             results = rp.done(success=True,
                               content=result)
+            log.debug("Request made to QRadar for reference table update; results {}".format(result))
 
             yield StatusMessage("Finished 'qradar_reference_table_update_item' that was running in workflow '{0}'".format(wf_instance_id))
 
