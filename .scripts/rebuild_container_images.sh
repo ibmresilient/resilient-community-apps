@@ -28,6 +28,8 @@ RESILIENT_CIRCUITS_VERSION=$1
 QUAY_API_URL="$QUAY_URL/api/v1"
 ARTIFACTORY_REPO_URL="$ARTIFACTORY_REPO_NAME.$ARTIFACTORY_URL"
 PATH_IGNORE_IMAGE_NAMES="$TRAVIS_BUILD_DIR/.scripts/IGNORE_IMAGE_NAMES.txt"
+quay_io_tags=()
+artifactory_tags=()
 
 ###############
 ## Functions ##
@@ -38,7 +40,7 @@ print_msg () {
 
 # Logs in to repository at given URL with username and passowrd
 # Args: URL, username, password
-function repo_login (){
+repo_login () {
     echo "$3" | docker login --password-stdin --username "$2" https://${1}/
 }
 
@@ -63,9 +65,6 @@ print_msg "IMAGE_NAMES:\n${IMAGE_NAMES[*]}"
 
 IGNORE_IMAGE_NAMES=( $(<$PATH_IGNORE_IMAGE_NAMES) )
 print_msg "IGNORE_IMAGE_NAMES:\n${IGNORE_IMAGE_NAMES[*]}"
-
-quay_io_tags=()
-artifactory_tags=()
 
 # Loop all image names at https://quay.io/user/$QUAY_USERNAME
 for image_name in "${IMAGE_NAMES[@]}"; do
@@ -103,7 +102,7 @@ for image_name in "${IMAGE_NAMES[@]}"; do
 
         # tag the image for artifactory
         artifactory_tag="$ARTIFACTORY_REPO_URL/$QUAY_USERNAME/$image_name:$int_version"
-        print_msg "Tagging $image_name for $ARTIFACTORY_REPO_URL with: $artifactory_tag"
+        print_msg "Tagging $image_name for artifactory with: $artifactory_tag"
         docker tag $docker_tag $artifactory_tag
         artifactory_tags+=($artifactory_tag)
 
@@ -125,7 +124,7 @@ for t in "${quay_io_tags[@]}"; do
 done
 
 # Login and push to artifactory
-print_msg "Logging into $ARTIFACTORY_REPO_NAME.$ARTIFACTORY_URL as $ARTIFACTORY_USERNAME"
+print_msg "Logging into artifactory as $ARTIFACTORY_USERNAME"
 repo_login $ARTIFACTORY_REPO_URL $ARTIFACTORY_USERNAME $ARTIFACTORY_PASSWORD
 
 for t in "${artifactory_tags[@]}"; do
