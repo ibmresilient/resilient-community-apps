@@ -33,7 +33,7 @@ fn_icdx
 #fn_ioc_parser_v2
 #fn_ipinfo
 #fn_ip_void
-#fn_isitphishing
+fn_isitphishing
 #fn_jira
 #fn_joe_sandbox_analysis
 #fn_ldap_utilities
