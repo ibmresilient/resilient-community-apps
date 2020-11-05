@@ -1,6 +1,0 @@
-include Dockerfile
-include entrypoint.sh
-include fn_test_app_one/util/*
-include fn_test_app_one/LICENSE
-
-exclude *.bak
