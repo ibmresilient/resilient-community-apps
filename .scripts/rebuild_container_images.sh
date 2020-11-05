@@ -13,6 +13,17 @@ ARTIFACTORY_USERNAME=$ARTIFACTORY_USERNAME_2
 ARTIFACTORY_PASSWORD=$ARTIFACTORY_PASSWORD_2
 ARTIFACTORY_URL=$ARTIFACTORY_URL_2
 
+###############
+## Variables ##
+###############
+RESILIENT_CIRCUITS_VERSION=$1
+REPO_TO_PUSH=$2
+QUAY_API_URL="$QUAY_URL/api/v1"
+ARTIFACTORY_REPO_URL="$ARTIFACTORY_REPO_NAME.$ARTIFACTORY_URL"
+PATH_IGNORE_IMAGE_NAMES="$TRAVIS_BUILD_DIR/.scripts/IGNORE_IMAGE_NAMES.txt"
+quay_io_tags=()
+artifactory_tags=()
+
 ##################
 ## Check params ##
 ##################
@@ -21,15 +32,9 @@ if [ -z "$1" ] ; then
     exit 1
 fi
 
-###############
-## Variables ##
-###############
-RESILIENT_CIRCUITS_VERSION=$1
-QUAY_API_URL="$QUAY_URL/api/v1"
-ARTIFACTORY_REPO_URL="$ARTIFACTORY_REPO_NAME.$ARTIFACTORY_URL"
-PATH_IGNORE_IMAGE_NAMES="$TRAVIS_BUILD_DIR/.scripts/IGNORE_IMAGE_NAMES.txt"
-quay_io_tags=()
-artifactory_tags=()
+if [ -z "$2" ] ; then
+    REPO_TO_PUSH="BOTH"
+fi
 
 ###############
 ## Functions ##
@@ -49,6 +54,7 @@ repo_login () {
 ###########
 print_msg "\
 RESILIENT_CIRCUITS_VERSION:\t$RESILIENT_CIRCUITS_VERSION \n\
+REPO_TO_PUSH:\t\t\t$REPO_TO_PUSH \n\
 QUAY_URL:\t\t\t$QUAY_URL \n\
 QUAY_API_URL:\t\t\t$QUAY_API_URL \n\
 QUAY_USERNAME:\t\t\t$QUAY_USERNAME \n\
@@ -114,20 +120,24 @@ done
 
 print_msg "List of all docker images:\n$(docker images)"
 
-# Login and push to quay.io
-print_msg "Logging into $QUAY_URL as $QUAY_USERNAME"
-repo_login $QUAY_URL $QUAY_USERNAME $QUAY_PASSWORD
+if [ "$REPO_TO_PUSH" == "BOTH" ] || [ "$REPO_TO_PUSH" == "QUAY" ] ; then
+    # Login and push to quay.io
+    print_msg "Logging into $QUAY_URL as $QUAY_USERNAME"
+    repo_login $QUAY_URL $QUAY_USERNAME $QUAY_PASSWORD
 
-for t in "${quay_io_tags[@]}"; do
-    print_msg "Pushing $t"
-    docker push $t
-done
+    for t in "${quay_io_tags[@]}"; do
+        print_msg "Pushing $t"
+        docker push $t
+    done
+fi
 
-# Login and push to artifactory
-print_msg "Logging into artifactory as $ARTIFACTORY_USERNAME"
-repo_login $ARTIFACTORY_REPO_URL $ARTIFACTORY_USERNAME $ARTIFACTORY_PASSWORD
+if [ "$REPO_TO_PUSH" == "BOTH" ] || [ "$REPO_TO_PUSH" == "ARTIFACTORY" ] ; then
+    # Login and push to artifactory
+    print_msg "Logging into artifactory as $ARTIFACTORY_USERNAME"
+    repo_login $ARTIFACTORY_REPO_URL $ARTIFACTORY_USERNAME $ARTIFACTORY_PASSWORD
 
-for t in "${artifactory_tags[@]}"; do
-    print_msg "Pushing $t"
-    docker push $t
-done
+    for t in "${artifactory_tags[@]}"; do
+        print_msg "Pushing $t"
+        docker push $t
+    done
+fi
