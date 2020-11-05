@@ -28,10 +28,10 @@ class FunctionComponent(ResilientComponent):
         """Function: Add an item to a given QRadar reference table"""
         try:
 
-            # # Get the wf_instance_id of the workflow this Function was called in
-            # wf_instance_id = event.message["workflow_instance"]["workflow_instance_id"]
+            # Get the wf_instance_id of the workflow this Function was called in, if not found return a backup string
+            wf_instance_id = event.message.get("workflow_instance", {}).get("workflow_instance_id", "no instance id found")
 
-            # yield StatusMessage("Starting 'qradar_reference_table_add_item' running in workflow '{0}'".format(wf_instance_id))
+            yield StatusMessage("Starting 'qradar_reference_table_add_item' running in workflow '{0}'".format(wf_instance_id))
 
             required_fields = ["qradar_reference_table_name", "qradar_reference_table_item_value"]
             validate_fields(required_fields, kwargs)
@@ -70,7 +70,7 @@ class FunctionComponent(ResilientComponent):
 
             results = rp.done(success=True,
                               content=result)
-            # yield StatusMessage("Finished 'qradar_reference_table_add_item' that was running in workflow '{0}'".format(wf_instance_id))
+            yield StatusMessage("Finished 'qradar_reference_table_add_item' that was running in workflow '{0}'".format(wf_instance_id))
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
