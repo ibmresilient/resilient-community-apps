@@ -20,8 +20,7 @@ class FunctionComponent(ResilientComponent):
         super(FunctionComponent, self).__init__(opts)
         self.opts = opts
         self.options = opts.get("fn_qradar_integration", {})
-        required_fields = ["host", "verify_cert"]
-        validate_fields(required_fields, self.options)
+        
 
     @handler("reload")
     def _reload(self, event, opts):
@@ -35,6 +34,9 @@ class FunctionComponent(ResilientComponent):
         try:
             required_fields = ["qradar_query", "qradar_query_all_results"]
             validate_fields(required_fields, kwargs)
+
+            required_config_fields = ["host", "verify_cert"]
+            validate_fields(required_config_fields, self.options)
             # Get the function parameters:
             qradar_query = self.get_textarea_param(kwargs.get("qradar_query"))  # textarea
             qradar_query_param1 = kwargs.get("qradar_query_param1")  # text
