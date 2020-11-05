@@ -1,6 +1,7 @@
 #!/bin/bash -e
 
 # param $1: (required) version of resilient_circuits library to use in format x.x.x
+# param $2: (optional) repo name to push to. Accepted values are: ARTIFACTORY, QUAY or BOTH. Defaults to BOTH if blank
 
 # Dependencies on:
 # sudo apt-get install jq
