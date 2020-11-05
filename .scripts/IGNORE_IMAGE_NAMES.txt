@@ -29,7 +29,7 @@ fn_datatable_utils
 #fn_exchange_online
 #fn_geocoding
 #fn_hibp
-#fn_icdx
+fn_icdx
 #fn_ioc_parser_v2
 #fn_ipinfo
 #fn_ip_void
