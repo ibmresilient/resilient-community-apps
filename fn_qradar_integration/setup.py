@@ -24,6 +24,11 @@ setup(
     ],
     entry_points={
         "resilient.circuits.components": [
+            
+            "QradarGetReferenceTablesFunctionComponent = fn_qradar_integration.components.funct_qradar_get_reference_tables:FunctionComponent",
+            "QradarReferenceTablesAddItemFunctionComponent = fn_qradar_integration.components.funct_qradar_reference_table_add_item:FunctionComponent",
+            "QradarReferenceTablesDeleteItemFunctionComponent = fn_qradar_integration.components.funct_qradar_reference_table_delete_item:FunctionComponent",
+            "QradarReferenceTablesUpdateItemFunctionComponent = fn_qradar_integration.components.funct_qradar_reference_table_update_item:FunctionComponent",
             "QradarFindReferenceSetsFunctionComponent = fn_qradar_integration.components.qradar_find_reference_sets:FunctionComponent",
             "QradarDeleteReferenceSetItemFunctionComponent = fn_qradar_integration.components.qradar_delete_reference_set_item:FunctionComponent",
             "QradarAddReferenceSetItemFunctionComponent = fn_qradar_integration.components.qradar_add_reference_set_item:FunctionComponent",
