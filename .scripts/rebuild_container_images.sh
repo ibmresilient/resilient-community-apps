@@ -6,11 +6,7 @@
 # sudo apt-get install jq
 # pip install resilient-sdk
 
-# TODO: Remove these when finished development
-QUAY_USERNAME=$QUAY_USERNAME_2
-QUAY_PASSWORD=$QUAY_PASSWORD_2
-ARTIFACTORY_USERNAME=$ARTIFACTORY_USERNAME_2
-ARTIFACTORY_PASSWORD=$ARTIFACTORY_PASSWORD_2
+# Map ARTIFACTORY_URL until we change in Travis
 ARTIFACTORY_URL=$ARTIFACTORY_URL_2
 
 ###############
@@ -93,9 +89,9 @@ for image_name in "${IMAGE_NAMES[@]}"; do
         docker_tag="$image_name:$int_version"
 
         # run docker build
-        # TODO: add --quiet flag
         print_msg "Building $image_name with docker"
         docker build \
+        --quiet \
         --build-arg RESILIENT_CIRCUITS_VERSION=$RESILIENT_CIRCUITS_VERSION \
         -t $docker_tag \
         $int_path
