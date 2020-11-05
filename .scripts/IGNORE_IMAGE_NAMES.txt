@@ -23,7 +23,7 @@ fn_guardium_integration
 #fn_components
 #fn_crowdstrike_falcon
 #fn_cve_search
-#fn_datatable_utils
+fn_datatable_utils
 #fn_elasticsearch
 #fn_email_header_validation
 #fn_exchange_online
