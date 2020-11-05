@@ -83,8 +83,8 @@ rc_data_feed_plugin_odbcfeed
 rc_data_feed_plugin_resilientfeed
 rc_data_feed_plugin_splunkfeed
 fn_isitphishing
-fn_task_utils
-fn_service_now
+#fn_task_utils
+#fn_service_now
 
 #Ignore-other
 trustar_resilient
