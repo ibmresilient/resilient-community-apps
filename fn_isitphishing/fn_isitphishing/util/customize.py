@@ -2,13 +2,13 @@
 
 """Generate the Resilient customizations required for fn_isitphishing"""
 
+import base64
+import os
 try:
     from resilient import ImportDefinition
 except ImportError:
     # Support Apps running on resilient-circuits < v35.0.195
     from resilient_circuits.util import ImportDefinition
-import base64
-import os
 from resilient_circuits import FunctionError
 
 RES_FILE = "data/export.res"
@@ -21,9 +21,9 @@ def codegen_reload_data():
     return {
         "package": u"fn_isitphishing",
         "message_destinations": [u"fn_isitphishing"],
-        "functions": [u"isitphishing_html_document", u"isitphishing_url"],
+        "functions": [u"isitphishing_url", u"isitphishing_html_document"],
         "workflows": [u"example_isitphishing_analyze_url", u"example_isitphishing_analyze_html_document", u"example_isitphishing_analyze_html_document_artifact"],
-        "actions": [u"Example: IsItPhishing Analyze URL", u"Example: IsItPhishing Analyze HTML Document: Artifact", u"Example: IsItPhishing Analyze HTML Document: Attachment"],
+        "actions": [u"Example: IsItPhishing Analyze HTML Document: Artifact", u"Example: IsItPhishing Analyze HTML Document: Attachment", u"Example: IsItPhishing Analyze URL"],
         "incident_fields": [],
         "incident_artifact_types": [],
         "datatables": [],
@@ -43,22 +43,22 @@ def customization_data(client=None):
     - Message Destinations:
         - fn_isitphishing
     - Functions:
-        - isitphishing_html_document
         - isitphishing_url
+        - isitphishing_html_document
     - Workflows:
         - example_isitphishing_analyze_url
         - example_isitphishing_analyze_html_document
         - example_isitphishing_analyze_html_document_artifact
     - Rules:
-        - Example: IsItPhishing Analyze URL
         - Example: IsItPhishing Analyze HTML Document: Artifact
         - Example: IsItPhishing Analyze HTML Document: Attachment
+        - Example: IsItPhishing Analyze URL
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)
     if not os.path.isfile(res_file):
         raise FunctionError("{} not found".format(RES_FILE))
 
-    with open(res_file, 'rb') as f:
+    with io.open(res_file, mode="rt", encoding="utf-8") as f:
         b64_data = base64.b64encode(f.read())
         yield ImportDefinition(b64_data)
