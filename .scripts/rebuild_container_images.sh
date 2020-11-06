@@ -95,16 +95,17 @@ for image_name in "${IMAGE_NAMES[@]}"; do
         int_path="$TRAVIS_BUILD_DIR/$image_name"
         print_msg "int_path: $int_path"
 
-        # Get version to create latest tag
-        int_version=$(python "$int_path/setup.py" --version)
-        print_msg "int_version: $int_version"
-
         # run resilient-sdk package
         print_msg "Packaging $image_name with resilient-sdk"
         resilient-sdk package -p $int_path || resilient_sdk_package_pass=$?
 
         # If passes resilient-sdk package build it with docker
         if [ $resilient_sdk_package_pass = 0 ] ; then
+
+            # Get version to create latest tag
+            int_version=$(python "$int_path/setup.py" --version)
+            print_msg "int_version: $int_version"
+
             docker_tag="$image_name:$int_version"
 
             # run docker build
