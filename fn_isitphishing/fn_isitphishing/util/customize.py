@@ -4,12 +4,13 @@
 
 import base64
 import os
+import io
+from resilient_circuits import FunctionError
 try:
     from resilient import ImportDefinition
 except ImportError:
     # Support Apps running on resilient-circuits < v35.0.195
     from resilient_circuits.util import ImportDefinition
-from resilient_circuits import FunctionError
 
 RES_FILE = "data/export.res"
 
