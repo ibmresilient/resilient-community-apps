@@ -59,7 +59,6 @@ class FunctionComponent(ResilientComponent):
 
             results = rp.done(success=True, 
                               content=result)
-            log.debug("Request made to QRadar for reference table update; results {}".format(result))
             yield StatusMessage("Finished 'qradar_reference_table_add_item' that was running in workflow '{0}'".format(wf_instance_id))
 
             # Produce a FunctionResult with the results
