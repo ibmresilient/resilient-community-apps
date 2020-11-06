@@ -192,7 +192,7 @@ class exchange_utils:
 
     def create_meeting(self, username, start_time, end_time, subject, body, required_attendees, optional_attendees):
         """Create a meeting object"""
-        account = self.connect_to_account(username, impersonation=(username != self.email), proxies=self.proxies)
+        account = self.connect_to_account(username, impersonation=(username != self.email))
 
         if required_attendees:
             required_attendees = [ra.strip() for ra in required_attendees.split(',')]
