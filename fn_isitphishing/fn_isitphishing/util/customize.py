@@ -22,9 +22,9 @@ def codegen_reload_data():
     return {
         "package": u"fn_isitphishing",
         "message_destinations": [u"fn_isitphishing"],
-        "functions": [u"isitphishing_url", u"isitphishing_html_document"],
+        "functions": [u"isitphishing_html_document", u"isitphishing_url"],
         "workflows": [u"example_isitphishing_analyze_url", u"example_isitphishing_analyze_html_document", u"example_isitphishing_analyze_html_document_artifact"],
-        "actions": [u"Example: IsItPhishing Analyze HTML Document: Artifact", u"Example: IsItPhishing Analyze HTML Document: Attachment", u"Example: IsItPhishing Analyze URL"],
+        "actions": [u"Example: IsItPhishing Analyze HTML Document: Attachment", u"Example: IsItPhishing Analyze HTML Document: Artifact", u"Example: IsItPhishing Analyze URL"],
         "incident_fields": [],
         "incident_artifact_types": [],
         "datatables": [],
@@ -44,15 +44,15 @@ def customization_data(client=None):
     - Message Destinations:
         - fn_isitphishing
     - Functions:
-        - isitphishing_url
         - isitphishing_html_document
+        - isitphishing_url
     - Workflows:
         - example_isitphishing_analyze_url
         - example_isitphishing_analyze_html_document
         - example_isitphishing_analyze_html_document_artifact
     - Rules:
-        - Example: IsItPhishing Analyze HTML Document: Artifact
         - Example: IsItPhishing Analyze HTML Document: Attachment
+        - Example: IsItPhishing Analyze HTML Document: Artifact
         - Example: IsItPhishing Analyze URL
     """
 
@@ -60,6 +60,6 @@ def customization_data(client=None):
     if not os.path.isfile(res_file):
         raise FunctionError("{} not found".format(RES_FILE))
 
-    with io.open(res_file, mode="rt", encoding="utf-8") as f:
-        b64_data = base64.b64encode(f.read())
+    with io.open(res_file, mode='rt') as f:
+        b64_data = base64.b64encode(f.read().encode('utf-8'))
         yield ImportDefinition(b64_data)
