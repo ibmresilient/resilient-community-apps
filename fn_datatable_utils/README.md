@@ -498,12 +498,6 @@ if workflow.properties.rows_to_delete and workflow.properties.rows_to_delete.row
   for row in workflow.properties.rows_to_delete.rows:
     rows_ids.append(row["id"])
   inputs.dt_utils_rows_ids = str(rows_ids)
-
-## Alternatively you can delete row/rows by defining the list of internal row IDs or by defining the 'search_column and search_value' pair:
-inputs.dt_utils_current_row_id = row["id"] if row else None
-# inputs.dt_utils_rows_ids = "[2,3]"  # or
-# inputs.dt_utils_search_column = "dt_col_name"
-# inputs.dt_utils_search_value = "Mary Murphy"
   ```
 
   </p>
