@@ -20,6 +20,7 @@ ARTIFACTORY_REPO_URL="$ARTIFACTORY_REPO_NAME.$ARTIFACTORY_URL"
 PATH_IGNORE_IMAGE_NAMES="$TRAVIS_BUILD_DIR/.scripts/IGNORE_IMAGE_NAMES.txt"
 quay_io_tags=()
 artifactory_tags=()
+skipped_packages=()
 
 ##################
 ## Check params ##
@@ -69,11 +70,26 @@ print_msg "IMAGE_NAMES:\n${IMAGE_NAMES[*]}"
 IGNORE_IMAGE_NAMES=( $(<$PATH_IGNORE_IMAGE_NAMES) )
 print_msg "IGNORE_IMAGE_NAMES:\n${IGNORE_IMAGE_NAMES[*]}"
 
+# Login to quay.io
+if [ "$REPO_TO_PUSH" == "BOTH" ] || [ "$REPO_TO_PUSH" == "QUAY" ] ; then
+    print_msg "Logging into $QUAY_URL as $QUAY_USERNAME"
+    repo_login $QUAY_URL $QUAY_USERNAME $QUAY_PASSWORD
+fi
+
+# Login to artifactory
+if [ "$REPO_TO_PUSH" == "BOTH" ] || [ "$REPO_TO_PUSH" == "ARTIFACTORY" ] ; then
+    print_msg "Logging into artifactory as $ARTIFACTORY_USERNAME"
+    repo_login $ARTIFACTORY_REPO_URL $ARTIFACTORY_USERNAME $ARTIFACTORY_PASSWORD
+fi
+
 # Loop all image names at https://quay.io/user/$QUAY_USERNAME
 for image_name in "${IMAGE_NAMES[@]}"; do
 
     # If not in our blocked list
     if [[ ! " ${IGNORE_IMAGE_NAMES[@]} " =~ " ${image_name} " ]]; then
+        docker_build_pass=0
+        resilient_sdk_package_pass=0
+
         print_msg "Building: $image_name"
 
         int_path="$TRAVIS_BUILD_DIR/$image_name"
@@ -85,56 +101,66 @@ for image_name in "${IMAGE_NAMES[@]}"; do
 
         # run resilient-sdk package
         print_msg "Packaging $image_name with resilient-sdk"
-        resilient-sdk package -p $int_path
+        resilient-sdk package -p $int_path || resilient_sdk_package_pass=$?
 
-        docker_tag="$image_name:$int_version"
+        # If passes resilient-sdk package build it with docker
+        if [ $resilient_sdk_package_pass = 0 ] ; then
+            docker_tag="$image_name:$int_version"
 
-        # run docker build
-        print_msg "Building $image_name with docker"
-        docker build \
-        --quiet \
-        --build-arg RESILIENT_CIRCUITS_VERSION=$RESILIENT_CIRCUITS_VERSION \
-        -t $docker_tag \
-        $int_path
+            # run docker build
+            print_msg "Building $image_name with docker"
+            docker build \
+            --quiet \
+            --build-arg RESILIENT_CIRCUITS_VERSION=$RESILIENT_CIRCUITS_VERSION \
+            -t $docker_tag \
+            $int_path || docker_build_pass=$?
 
-        # tag the image for quay.io
-        quay_io_tag="$QUAY_URL/$QUAY_USERNAME/$image_name:$int_version"
-        print_msg "Tagging $image_name for $QUAY_URL/$QUAY_USERNAME with: $quay_io_tag"
-        docker tag $docker_tag $quay_io_tag
-        quay_io_tags+=($quay_io_tag)
+            # if passes docker build tag it
+            if [ $docker_build_pass = 0 ] ; then
+                # tag the image for quay.io
+                quay_io_tag="$QUAY_URL/$QUAY_USERNAME/$image_name:$int_version"
+                print_msg "Tagging $image_name for $QUAY_URL/$QUAY_USERNAME with: $quay_io_tag"
+                docker tag $docker_tag $quay_io_tag
+                quay_io_tags+=($quay_io_tag)
 
-        # tag the image for artifactory
-        artifactory_tag="$ARTIFACTORY_REPO_URL/$QUAY_USERNAME/$image_name:$int_version"
-        print_msg "Tagging $image_name for artifactory with: $artifactory_tag"
-        docker tag $docker_tag $artifactory_tag
-        artifactory_tags+=($artifactory_tag)
+                # tag the image for artifactory
+                artifactory_tag="$ARTIFACTORY_REPO_URL/$QUAY_USERNAME/$image_name:$int_version"
+                print_msg "Tagging $image_name for artifactory with: $artifactory_tag"
+                docker tag $docker_tag $artifactory_tag
+                artifactory_tags+=($artifactory_tag)
 
-        print_msg "Done building: $image_name"
+                print_msg "Done building: $image_name"
+            fi
+        fi
 
+        if [ $resilient_sdk_package_pass != 0 ] || [ $docker_build_pass != 0 ] ; then
+            print_msg "Packaging or building failed. Adding $image_name to list of skipped_packages"
+            skipped_packages+=($image_name)
+        fi
+    
+    else
+        print_msg "$image_name is in $PATH_IGNORE_IMAGE_NAMES\nAdding it to list of skipped_packages"
+        skipped_packages+=($image_name)
     fi
 
 done
 
 print_msg "List of all docker images:\n$(docker images)"
 
+# Push images to quay.io
 if [ "$REPO_TO_PUSH" == "BOTH" ] || [ "$REPO_TO_PUSH" == "QUAY" ] ; then
-    # Login and push to quay.io
-    print_msg "Logging into $QUAY_URL as $QUAY_USERNAME"
-    repo_login $QUAY_URL $QUAY_USERNAME $QUAY_PASSWORD
-
     for t in "${quay_io_tags[@]}"; do
         print_msg "Pushing $t to quay.io"
         docker push $t
     done
 fi
 
+# Push images to artifactory
 if [ "$REPO_TO_PUSH" == "BOTH" ] || [ "$REPO_TO_PUSH" == "ARTIFACTORY" ] ; then
-    # Login and push to artifactory
-    print_msg "Logging into artifactory as $ARTIFACTORY_USERNAME"
-    repo_login $ARTIFACTORY_REPO_URL $ARTIFACTORY_USERNAME $ARTIFACTORY_PASSWORD
-
     for t in "${artifactory_tags[@]}"; do
         print_msg "Pushing $t to artifactory"
         docker push $t
     done
 fi
+
+print_msg "Skipped Packages:\n${skipped_packages[*]}"
