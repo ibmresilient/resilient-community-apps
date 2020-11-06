@@ -55,7 +55,7 @@ class FunctionComponent(ResilientComponent):
             log.info("dt_utils_datatable_api_name: {0}".format(inputs["dt_utils_datatable_api_name"]))
             log.info("dt_utils_rows_ids: {0}".format(inputs["dt_utils_rows_ids"]))
             log.info("dt_utils_search_column: {0}".format(inputs["dt_utils_search_column"]))
-            log.info("dt_utils_search_value: {0}".format(inputs["dt_utils_search_value"]))
+            log.info(u"dt_utils_search_value: {0}".format(inputs["dt_utils_search_value"]))
 
             # Ensure correct search inputs are defined correctly
             valid_search_inputs = validate_search_inputs(rows_ids=inputs["dt_utils_rows_ids"],
@@ -90,7 +90,7 @@ class FunctionComponent(ResilientComponent):
                 payload.success = False
 
             elif "error" in deleted_rows:
-                yield StatusMessage("Row(s) NOT deleted. Error: {0}".format(deleted_rows["error"]))
+                yield StatusMessage(u"Row(s) not deleted. Error: {0}".format(deleted_rows["error"]))
                 payload.success = False
                 raise FunctionError("Failed to delete a row.")
 

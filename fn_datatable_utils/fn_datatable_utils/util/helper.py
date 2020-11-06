@@ -201,7 +201,7 @@ class RESDatatable(object):
                     else:
                         rows_ids_list.append(row["id"])
 
-        return_value = rows_ids_list.copy()
+        return_value = list(rows_ids_list)
         if rows_ids_list:
             for row_id in rows_ids_list:
                 deleted_row = self.delete_row(row_id)

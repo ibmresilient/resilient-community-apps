@@ -24,8 +24,8 @@ setup(
     author='Resilient Labs',
     author_email='resil.labs@gmail.com',
     url='http://ibm.biz/resilientcommunity',
-    description="Functions that allow you to Get, Update or Delete a single row or Get or Delete multiple rows in a Data Table",
-    long_description="This package contains 5 functions that help you manipulate IBM Resilient Data Tables: Get Row, Update Row, Delete Row, Get Rows and Delete Rows.",
+    description="Functions manipulate data in a Datatable",
+    long_description="This package contains 6 functions that help you manipulate IBM Resilient Data Tables: Get Row,  Get Rows, Update Row, Delete Row, Delete Rows and Convert CSV Data to a datatable.",
     install_requires=[
         'resilient_circuits>=33.0.0',
         'resilient-lib>=32.0.140',

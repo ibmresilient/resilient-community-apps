@@ -81,7 +81,7 @@ class FunctionComponent(ResilientComponent):
                 deleted_row = datatable.delete_row(dt_utils_row_id)
 
             if "error" in deleted_row:
-                yield StatusMessage("Row {0} in {1} NOT deleted.".format(dt_utils_row_id, dt_utils_datatable_api_name))
+                yield StatusMessage("Row {0} in {1} not deleted.".format(dt_utils_row_id, dt_utils_datatable_api_name))
                 payload.success = False
                 raise ValueError(deleted_row["error"])
 
