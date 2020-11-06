@@ -54,7 +54,7 @@ class RESDatatable(object):
                 if sort_by not in cells:
                     raise ValueError(
                         "{0} is not a valid column api name for the data table: {1}".format(sort_by, self.api_name))
-                rows_to_return = sorted(rows_to_return, key=lambda item: item['cells'][sort_by]['value'],
+                rows_to_return = sorted(rows_to_return, key=lambda item: item['cells'][sort_by].get('value'),
                                         reverse=is_reverse)
             if max_rows != 0:
                 rows_to_return = rows_to_return[:max_rows]
@@ -104,7 +104,7 @@ class RESDatatable(object):
             if "value" not in row["cells"][cell_name]:
                 return None
 
-            return row["cells"][cell_name]["value"]
+            return row["cells"][cell_name].get("value", None)
 
         # Get the row we want to update
         row = self.get_row(row_id)
@@ -303,7 +303,7 @@ class RESDatatable(object):
             'title': None, 
             'message': None, 
             'hints': [row_id]
-    }
+        }
 
 def get_function_input(inputs, input_name, optional=False):
     """Given input_name, checks if it defined. Raises ValueError if a mandatory input is None"""
@@ -370,8 +370,8 @@ def threaded_delete(datatable, workflow_id, row_id):
     Returns:
         None
     """
-    MAX_SLEEP_UNTIL_WF_COMPLETES = 60
-    MAX_LOOP = 60
+    MAX_SLEEP_UNTIL_WF_COMPLETES = 60 # no sleep time should exceed 60s
+    MAX_LOOP = 60  # roughly an hour of waiting
     sleep_time = 10
     # check that the workflow is still active, sleep if still active
     wf = get_workflow_status(datatable.res_client, workflow_id)
@@ -381,6 +381,7 @@ def threaded_delete(datatable, workflow_id, row_id):
         sleep_time += sleep_time
         sleep_time = min(sleep_time, MAX_SLEEP_UNTIL_WF_COMPLETES)
         wf = get_workflow_status(datatable.res_client, workflow_id)
+        ndx += 1
 
     if wf.status != 'running':
         # perform the delete rows()
@@ -389,3 +390,5 @@ def threaded_delete(datatable, workflow_id, row_id):
             LOG.error("Queued delete failed for row_id: %s. Error: %s", row_id, result['error'])
         else:
             LOG.debug("Queued delete succeeded for row_id: %s", row_id)
+    else:
+        LOG.error("Unable to delete row_id: %s with workflow %s state: %s", row_id, workflow_id, wf.status)
