@@ -47,8 +47,7 @@ class FunctionComponent(ResilientComponent):
             if "verify_cert" in self.options and self.options["verify_cert"].lower() == "false":
                 qradar_verify_cert = False
 
-            log.debug("Connection to {} using {}".format(self.options["host"],
-                                                         self.options.get("username", None) or self.options.get("qradartoken", None) ))
+            log.debug("Connecting to QRadar instance @ {}".format(self.options["host"]))
 
             yield StatusMessage("starting...")
             qradar_client = QRadarClient(host=self.options["host"],
