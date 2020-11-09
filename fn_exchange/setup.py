@@ -18,6 +18,7 @@ setup(
         the original, Move queried emails from one folder to another folder, Send email to a list of recipients.""",
     install_requires=[
         'resilient_circuits>=30.0.0',
+        'exchangelib==2.2.0; python_version<"3"',
         'exchangelib',
         'resilient_lib'
     ],
