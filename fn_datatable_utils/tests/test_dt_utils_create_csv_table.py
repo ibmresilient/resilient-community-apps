@@ -7,7 +7,8 @@ if sys.version_info.major < 3:
 else:
     from io import StringIO
 from collections import OrderedDict
-from fn_datatable_utils.components.dt_utils_create_csv_table import build_row, build_mapping_table, convert_field
+from fn_datatable_utils.components.dt_utils_create_csv_table import build_row, build_mapping_table, \
+        convert_field
 
 LOG = logging.getLogger(__name__)
 DATE_FORMAT = '%Y-%m-%dT%H:%M:%S%z' #"2017-06-09T00:00:00+0000"
@@ -48,8 +49,14 @@ def test_build_row_no_header(inputs, mapping_table, expected_results):
 @pytest.mark.parametrize("inputs, mapping_table, expected_results",[
     ("'h1','h2','h3'\n'a','b','2020-10-02T16:00:42+0000'", { 'h3':"col3", 'h1':"col1", 'h2':"col2" }, 
     {'col1': {'value': "a"}, 'col2': {'value': "b"}, 'col3': {'value': 1601668842000}}),
+    ("'h1','h2','h3'\n'a','b','1601668842000'", { 'h3':"col3", 'h1':"col1", 'h2':"col2" }, 
+    {'col1': {'value': "a"}, 'col2': {'value': "b"}, 'col3': {'value': 1601668842000}}),
+    ("'h1','h2','h3'\n'a','b',1601668842000", { 'h3':"col3", 'h1':"col1", 'h2':"col2" }, 
+    {'col1': {'value': "a"}, 'col2': {'value': "b"}, 'col3': {'value': 1601668842000}}),
+    ("'h1','h2','h3'\n'a','b','1601668842'", { 'h3':"col3", 'h1':"col1", 'h2':"col2" }, 
+    {'col1': {'value': "a"}, 'col2': {'value': "b"}, 'col3': {'value': 1601668842000}}),
 ])
-def test_build_row_datime(inputs, mapping_table, expected_results):
+def test_build_row_datetime(inputs, mapping_table, expected_results):
     s = StringIO(inputs)
     csv_reader = csv.DictReader(s, dialect=csv.Sniffer().sniff(inputs))
     for data_row in csv_reader:
@@ -62,6 +69,10 @@ def test_build_row_datime(inputs, mapping_table, expected_results):
     ({ 'h3':"col0", 'h1':"col1", 'h2':"col2" }, ['h1','h2','h3'], ['col0','col1', 'col2'], {'h1': 'col1', 'h2': 'col2', 'h3': 'col0'}),
     ({ 'h3':"colx", 'h1':"col1", 'h2':"col2" }, ['h1','h2','h3'], ['col0','col1', 'col2'], {'h1': 'col1', 'h2': 'col2'}),
     ({ 'hx':"col0", 'h1':"col1", 'h2':"col2" }, ['h1','h2','h3'], ['col0','col1', 'col2'], {'h1': 'col1', 'h2': 'col2'}),
+    (['a','b','c'], None, ['a','b','c'], {0:'a', 1:'b', 2:'c'}),
+    ([None,'b','c'], None, ['a','b','c'], {1:'b', 2:'c'}),
+    ([None,'b','d'], None, ['a','b','c'], {1:'b'}),
+    ([None,None,'c',None,'b','a'], None, ['a','b','c'], {2:'c', 4:'b', 5:'a'})
 ])
 def test_build_mapping_table(mapping_table, csv_headers, dt_column_names, expected_results):
     mapping_table = build_mapping_table(mapping_table, csv_headers, dt_column_names)

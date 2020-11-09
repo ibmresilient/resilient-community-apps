@@ -528,9 +528,12 @@ if results.success:
 
 ---
 ## Function - Data Table Utils: Create CSV Datatable
-Add CVS data to a named datatable. CSV data can originate from another function or from a referenced attachment with CSV encoded data. A mapping table is used to map CSV header row labels to datatable column (API) names.
+Add CVS data to a named datatable. CSV data can originate from another function or from a referenced attachment with CSV encoded data. A mapping table is used to map CSV header row labels to datatable column (API) names. 
 
-Attempts are made to match the field type of the datatable. CSV data matched to `select` and `multi-select` datatables columns must contain the correct values specified for those columns. String-based date fields will be converted into epoch timestamp values based on a date format pattern (ex. '%Y-%m-%d %H:%M:%S.%f') for `datetimepicker` and `datepicker` datatable column types. See [https://strftime.org/](https://strftime.org/) for the formatted values to use.
+For csv data without headers, the mapping table will contain a list of datatable columns to match with the positional csv data. For example:
+`[null, dt_colA, null, null, dt_colC, dt_colB]`.
+
+Attempts are made to match the field type of the datatable. CSV data matched to `select` and `multi-select` datatables columns must contain the correct values specified for those columns. String-based date fields will be converted into epoch timestamp values based on a date format pattern (ex. '%Y-%m-%d %H:%M:%S.%f') for `datetimepicker` and `datepicker` datatable column types. See [https://strftime.org/](https://strftime.org/) for the formatted values to use. Epoch date field values are also supported.
 
  ![screenshot: fn-data-table-utils-create-csv-datatable ](./screenshots/dt_add_csv_data.png)
 
@@ -539,14 +542,15 @@ Attempts are made to match the field type of the datatable. CSV data matched to 
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
+| `incident_id` | `number` | Yes | `-` | - |
 | `attachment_id` | `number` | No | `-` | - |
-| `dt_csv_data` | `text` | No | `CSV Data` | string of cvs data consisting an optional header row followed by rows of comma separated data. each comma separated field may contain quotes to allow for embedded commas |
-| `dt_datable_name` | `text` | Yes | `Datatable Name` | string of api name of datatable |
+| `dt_csv_data` | `text` | No | `CSV Data` | string of cvs data consisting an optional header row followed by rows of delimiter separated data. Each delimiter separated field may contain quotes. |
+| `dt_datable_name` | `text` | Yes | `Datatable Name` | API name of datatable |
 | `dt_date_time_format` | `text` | No | `E.g. dd/mm/yyyy` | If the CSV data contains date entries, provide the format for the date for conversion to a epoch timestamp. |
 | `dt_has_headers` | `boolean` | No | `-` | boolean True/Yes if the csv_data contains header information to match with the column names of the datatable. If False/No, the data is added to the datatable in column order. |
-| `dt_mapping_table` | `text` | No | `Mapping Table` | String formatted json: """{ "column_header": "column_name", ...}""" |
+| `dt_mapping_table` | `text` | Yes | `Mapping Table` | String formatted json: """{ "column_header": "column_name", ...}""" or string formatted json list: """[dt_colA, null, dt_colB]""" |
+| `dt_start_row` | `number` | No | `-` | first cvs data row to add to the datatable |
 | `dt_max_rows` | `number` | No | `-` | limit the number of rows to include. No value means unlimited. |
-| `incident_id` | `number` | Yes | `-` | - |
 
 </p>
 </details>
@@ -570,8 +574,8 @@ results = {
   <details><summary>Example Pre-Process Script:</summary>
   <p>
 
-  ```python
-  # Data Table Utils: Example: CSV Table
+```python
+# Data Table Utils: Example: CSV Table
 #####################
 ### Define Inputs ###
 #####################
@@ -579,30 +583,36 @@ results = {
 inputs.incident_id = incident.id
 # The api name of the Data Table to update
 inputs.dt_datable_name = "dt_utils_test_data_table"
-# uncomment when reading csv data from an attachmennt
-### inputs.attachment_id = attachment.id
+# uncomment attachment_id when reading csv data from an attachmennt
+##inputs.attachment_id = attachment.id
 
 # The CSV data. Use either dt_csv_data or attachment_id
-inputs.dt_csv_data = u"""hdr_number,hdr_text,hdr_datetime,hdr_boolean,hdr_select,hdr_multi_select,hdr_extra 
-18023,"summary 中国人",6/6/2020,yes,3,"a, b",中"""
-# A boolean to determine if CSV headers should be used
+data = u"""hdr_number,hdr_text,hdr_datetime,hdr_boolean,hdr_select,hdr_multiselect,hdr_extra 
+18023,"summary 中国人",6/6/20 8:12,yes,3,"a, b",中"""
+data_no_headers = u"""18023,"summary 中国人",yes,6/6/20 8:12,3,"a, b",中"""
+inputs.dt_csv_data = data
+# A boolean to determine if CSV headers are present
 inputs.dt_has_headers = True
 
-## The mapping format should be "cvs_header":"dt_column_name". 
-## Or when headers are absent, a numeric csv data position for the column order: 0: "dt_column_name"
+## The mapping format should be "cvs_header":"dt_column_name"
 mapping = '''{
   "hdr_number": "number",
   "hdr_text": "text",
   "hdr_boolean": "boolean",
   "hdr_datetime": "datetime",
   "hdr_select": "select",
-  "hdr_multi_select": "multi_select"
+  "hdr_multiselect": "multi_select"
 }'''
+# mappings of csv data without headers will be a list of data_table column names. Use null to bypass a csv data column
+mapping_no_headers = '''["number","text","boolean","datetime","select","multi_select"]'''
 inputs.dt_mapping_table = mapping
 # year - %Y, month - %m, day - %d, hour - %H, minutes - %M, seconds - %S, milliseconds - %f, timezone offset - %z'
-inputs.dt_date_time_format = "%d/%m/%Y"
-#inputs.dt_max_rows = 10
-  ```
+inputs.dt_date_time_format = "%d/%m/%y %H:%M"
+# optional start row csv data. The first data row = 1
+#inputs.dt_start_row = 0
+# optional max number of csv rows to add relative to dt_start_row
+#inputs.dt_max_rows = 5
+```
 
   </p>
   </details>

@@ -66,9 +66,10 @@ class FunctionComponent(ResilientComponent):
                 "has_headers": get_function_input(kwargs, "dt_has_headers", optional=False),  # boolean (optional)
                 "csv_data": get_function_input(kwargs, "dt_csv_data", optional=True),  # text (optional)
                 "datable_name": get_function_input(kwargs, "dt_datable_name", optional=False),  # text (required)
-                "mapping_table": get_function_input(kwargs, "dt_mapping_table", optional=True),  # text (optional)
+                "mapping_table": get_function_input(kwargs, "dt_mapping_table", optional=False),  # text (optional)
                 "date_time_format": get_function_input(kwargs, "dt_date_time_format", optional=True),  # text (optional)
-                "max_rows": get_function_input(kwargs, "dt_max_rows", optional=True),  # text (optional)
+                "start_row": get_function_input(kwargs, "dt_start_row", optional=True),  # number (optional)
+                "max_rows": get_function_input(kwargs, "dt_max_rows", optional=True),  # number (optional)
             }
 
             LOG.info(inputs)
@@ -104,10 +105,6 @@ class FunctionComponent(ResilientComponent):
                 else:
                     inline_data = StringIO(csv_data)
 
-            # We need to know how to interpret the data
-            if not (inputs["has_headers"] or inputs["mapping_table"]):
-                raise ValueError("You must provide a mapping table or indicate if the data contains column headings")
-
             datatable = RESDatatable(res_client, inputs["incident_id"], inputs["datable_name"])
 
             # Retrieve the column names for the datatable, and their data_types,
@@ -118,13 +115,14 @@ class FunctionComponent(ResilientComponent):
             dt_column_names = OrderedDict([dt_ordered_columns[field] for field in sorted (dt_ordered_columns.keys())])
 
             # different readers if we have headers or not
-            dialect = csv.Sniffer().sniff(csv_data)
+            dialect = csv.Sniffer().sniff(csv_data[0:csv_data.find('\n')]) # limit analysis to first row
             # py2 needs changes to dialect to avoid unicode attributes
             if sys.version_info.major < 3:
                 for attr in dir(dialect):
                     a = getattr(dialect, attr)
                     if type(a) == unicode:
                         setattr(dialect, attr, bytes(a))
+            LOG.debug(dialect.__dict__)
 
             if inputs["has_headers"]:
                 reader = csv.DictReader(inline_data, dialect=dialect)  # each row is a dictionary keyed by the column name
@@ -140,6 +138,7 @@ class FunctionComponent(ResilientComponent):
             number_of_added_rows, number_of_rows_with_errors = self.add_to_datatable(reader, datatable,
                                                                                      mapping_table, dt_column_names,
                                                                                      inputs['date_time_format'],
+                                                                                     inputs['start_row'],
                                                                                      inputs['max_rows'])
             LOG.info("Number of rows added: %s ", number_of_added_rows)
             LOG.info("Number of rows that could not be added: %s", number_of_rows_with_errors)
@@ -158,7 +157,8 @@ class FunctionComponent(ResilientComponent):
         except Exception as err:
             yield FunctionError(err)
 
-    def add_to_datatable(self, reader, datatable, mapping_table, dt_column_names, date_format, max_rows):
+    def add_to_datatable(self, reader, datatable, mapping_table, dt_column_names, date_format, 
+                         start_row, max_rows):
         """add the csv data to the named datatable. Filter out fields which don't map to the datatable columns
            and convert the data to the column's format, as necessary
 
@@ -168,6 +168,7 @@ class FunctionComponent(ResilientComponent):
             mapping_table (dict): provided by the function
             dt_column_names (OrderDict): column_name: column_type
             date_format (str): '%Y-%m-%dT%H:%M:%S%z'
+            start_row (int): Number of row to start adding or None
             max_rows (int): None or max number to add
         Returns:
             [int, int]: number_of_added_rows, number_of_rows_with_errors
@@ -175,20 +176,24 @@ class FunctionComponent(ResilientComponent):
         number_of_added_rows = 0
         number_of_rows_with_errors = 0
 
+        indx = 1
         for row in reader:
-            LOG.debug(row)
-            cells_data = build_row(row, mapping_table, dt_column_names, date_format)
-            LOG.debug(cells_data)
+            LOG.debug("%s %s",indx, row)
+            if not start_row or (start_row and indx >= start_row):
+                cells_data = build_row(row, mapping_table, dt_column_names, date_format)
+                LOG.debug("cells: %s", cells_data)
 
-            new_row = datatable.dt_add_rows(cells_data)
+                new_row = datatable.dt_add_rows(cells_data)
 
-            if "error" in new_row:
-                number_of_rows_with_errors += 1
-            else:
-                number_of_added_rows += 1
+                if "error" in new_row:
+                    number_of_rows_with_errors += 1
+                else:
+                    number_of_added_rows += 1
 
-            if max_rows and number_of_added_rows >= max_rows:
-                break
+                if max_rows and number_of_added_rows >= max_rows:
+                    break
+
+            indx += 1
 
         return number_of_added_rows, number_of_rows_with_errors
 
@@ -196,7 +201,7 @@ def build_mapping_table(input_mapping_table, csv_headers, dt_column_names):
     """Build a mapping table of the columns and datatable columns which are possible to map.
 
     Args:
-        input_mapping_table (dict): provided to the function or None. It may be correct or
+        input_mapping_table (dict): provided to the function
         csv_headers (list): [description]
         dt_column_names (OrderedDict): column_name: column_type
 
@@ -206,7 +211,16 @@ def build_mapping_table(input_mapping_table, csv_headers, dt_column_names):
     """
     mapping_table = {}
 
-    if input_mapping_table:
+    # convert list of fields for csv data without a header
+    if isinstance(input_mapping_table, list):
+        indx = 0
+        for col_name in input_mapping_table:
+            if col_name in dt_column_names:
+                mapping_table[indx] = col_name
+            else:
+                LOG.warning("Skipping datatable column not found. Entry: %s, column name: %s", indx, col_name)
+            indx += 1
+    else:
         # only use columns which match the column names in our datatable
         mapping_table = input_mapping_table.copy()
         for csv_header, dt_column_name in input_mapping_table.items():
@@ -214,21 +228,6 @@ def build_mapping_table(input_mapping_table, csv_headers, dt_column_names):
                 LOG.warning(u"Column '%s' not found in datatable. Ignoring.", dt_column_name)
                 mapping_table.pop(csv_header)
                 continue
-
-    else: # has_headers is set, so map to dt columns in header order
-        # map each header to a column sequentially for all datatable columns
-        mapping_table = {}
-        indx = 0
-        for header in csv_headers:
-            if indx > len(dt_column_names):
-                break
-
-            # get the datatable column with the same index
-            # it's possible that fewer datatable columns exist
-            if indx < len(dt_column_names):
-                dt_column  = dt_column_names[indx]
-                mapping_table[header] = dt_column
-            indx += 1
 
     return mapping_table
 
@@ -269,14 +268,15 @@ def build_row(csv_row, matching_table, dt_column_names, date_format):
                 ## use ordered_columns
                 if indx in matching_table:
                     row[matching_table[indx]] = \
-                       {"value": convert_field(csv_column_encoded, dt_column_names[matching_table[indx]], date_format)}
+                       {"value": convert_field(csv_column_encoded, dt_column_names[matching_table[indx]], 
+                                               date_format)}
                 else:
                     LOG.warning("Unable to find mapping entry for column index: %s", indx)
             # csv_row == dict
             elif csv_column_encoded in matching_table:
                 row[matching_table[csv_column_encoded]] = \
                     {"value": convert_field(csv_row[csv_column], dt_column_names[matching_table[csv_column_encoded]],
-                    date_format)}
+                                            date_format)}
             else:
                 LOG.warning(u"Unable to find mapping entry for csv column: %s", csv_column_encoded)
         except Exception as err:
@@ -304,7 +304,7 @@ def convert_field(value, column_type, date_format):
     """convert values based on the datatable column type
 
     Args:
-        value (multiple): value to convert. No conversions return value unchanged
+        value (str, int, bool, list): value to convert. No conversion returns value unchanged
         column_type (str): column type: text, number, boolean, datetimepicker, select, etc.
         date_format (str): when string-based date values exist, the format of the string: 
           ex. "%d/%m/%YT%H:%M:%S%Z"
@@ -340,26 +340,37 @@ def date_to_timestamp(date_value, date_format):
     """convert the sting based time value to epoch value
 
     Args:
-        date_value (str): ex. "02/12/2020T12:00:00-5000"
+        date_value (str): ex. "02/12/2020T12:00:00-5000" or "1604694813000"
         date_format (str): ex. "%d/%m/%YT%H:%M:%S%Z"
 
     Returns:
         [int]: convert value to epoch. If errors, None is returned
     """
+
+    try:
+        # try to see if this is an epoch value
+        new_date_value = int(date_value)
+        tm = time.gmtime(new_date_value)
+        # if in milliseconds, year will be huge
+        return new_date_value if tm.tm_year > 3000 else new_date_value*1000
+    except ValueError as err:
+        pass
+
+    # try now to convert using date_format pattern
     if not date_format:
         return None
 
     try:
         return int(time.mktime(time.strptime(date_value, date_format)))*1000
-    except:
+    except Exception as err:
         # python 2 can't do timezone information, strip out if present
         if sys.version_info.major < 3 and TZ_FORMAT.search(date_format):
             new_date_format = TZ_FORMAT.sub("", date_format)
             new_date_value = TZ_VALUE.sub("", date_value)
             try:
                 return int(time.mktime(time.strptime(new_date_value, new_date_format)))*1000
-            except Exception as err:
-                LOG.error(str(err))
+            except Exception as err1:
+                LOG.error(str(err1))
 
-    LOG.error(u"Unable to convert date to timestamp: %s", date_value)
+    LOG.error(u"Unable to convert date to timestamp: %s with format %s", date_value, date_format)
     return None
