@@ -152,12 +152,12 @@ class exchange_utils:
         if start_date:
             # get YYYY/MM/DD from epoch time in milliseconds
             tz = EWSTimeZone.timezone('Etc/GMT')
-            start_date = EWSDateTime.from_datetime(datetime.datetime.fromtimestamp(start_date/1000, tz=tz))
+            start_date = EWSDateTime.fromtimestamp(start_date/1000, tz=tz)
             filtered_emails = filtered_emails.filter(datetime_received__gte=start_date)
         if end_date:
             # get YYYY/MM/DD from epoch time in milliseconds
             tz = EWSTimeZone.timezone('Etc/GMT')
-            end_date = EWSDateTime.from_datetime(datetime.datetime.fromtimestamp(end_date/1000, tz=tz))
+            end_date = EWSDateTime.fromtimestamp(end_date/1000, tz=tz)
             filtered_emails = filtered_emails.filter(datetime_received__lte=end_date)
 
         # Check attachments
@@ -204,8 +204,8 @@ class exchange_utils:
         meeting = CalendarItem(
             account=account,
             folder=account.calendar,
-            start=EWSDateTime.from_datetime(datetime.datetime.fromtimestamp(start_time/1000, tz=tz)),
-            end=EWSDateTime.from_datetime(datetime.datetime.fromtimestamp(end_time/1000, tz=tz)),
+            start=EWSDateTime.fromtimestamp(start_time/1000, tz=tz),
+            end=EWSDateTime.fromtimestamp(end_time/1000, tz=tz),
             subject=subject,
             body=body,
             required_attendees=required_attendees,
