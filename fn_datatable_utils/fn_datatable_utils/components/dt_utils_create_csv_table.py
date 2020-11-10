@@ -178,7 +178,7 @@ class FunctionComponent(ResilientComponent):
 
         indx = 1
         for row in reader:
-            LOG.debug("%s %s",indx, row)
+            LOG.debug("%s: %s",indx, row)
             if not start_row or (start_row and indx >= start_row):
                 cells_data = build_row(row, mapping_table, dt_column_names, date_format)
                 LOG.debug("cells: %s", cells_data)
@@ -202,7 +202,7 @@ def build_mapping_table(input_mapping_table, csv_headers, dt_column_names):
 
     Args:
         input_mapping_table (dict): provided to the function
-        csv_headers (list): [description]
+        csv_headers (list): list of csv_headers if they present
         dt_column_names (OrderedDict): column_name: column_type
 
     Returns:
@@ -216,7 +216,13 @@ def build_mapping_table(input_mapping_table, csv_headers, dt_column_names):
         indx = 0
         for col_name in input_mapping_table:
             if col_name in dt_column_names:
-                mapping_table[indx] = col_name
+                if csv_headers:
+                    if indx < len(csv_headers):
+                        mapping_table[csv_headers[indx]] = col_name
+                    else:
+                        LOG.warning("csv header index: %s larger than list of headers: %s", indx, csv_headers)
+                else:
+                    mapping_table[indx] = col_name
             else:
                 LOG.warning("Skipping datatable column not found. Entry: %s, column name: %s", indx, col_name)
             indx += 1
@@ -263,22 +269,29 @@ def build_row(csv_row, matching_table, dt_column_names, date_format):
                 csv_column_encoded = csv_column
 
         try:
+            # index specific mapping_table (no headers used)
+            if csv_column_encoded in matching_table:
+                dt_col_name = matching_table[csv_column_encoded]
+                csv_value = csv_row[csv_column]
             # get the matching datatable column name
-            if isinstance(csv_row, list):
-                ## use ordered_columns
-                if indx in matching_table:
-                    row[matching_table[indx]] = \
-                       {"value": convert_field(csv_column_encoded, dt_column_names[matching_table[indx]], 
-                                               date_format)}
-                else:
-                    LOG.warning("Unable to find mapping entry for column index: %s", indx)
-            # csv_row == dict
-            elif csv_column_encoded in matching_table:
-                row[matching_table[csv_column_encoded]] = \
-                    {"value": convert_field(csv_row[csv_column], dt_column_names[matching_table[csv_column_encoded]],
-                                            date_format)}
+            elif indx in matching_table:
+                dt_col_name = matching_table[indx]
+                csv_value = csv_column
             else:
-                LOG.warning(u"Unable to find mapping entry for csv column: %s", csv_column_encoded)
+                LOG.debug(u"Unable to find mapping entry for csv column: %s", csv_column_encoded)
+                continue
+
+            converted_value = convert_field(csv_value, 
+                                            dt_column_names[dt_col_name],
+                                            date_format)
+
+            if dt_col_name in row:
+                LOG.warning("Replacing value: '%s' with '%s' for column: '%s'", 
+                            row.get(dt_col_name),
+                            converted_value,
+                            dt_col_name)
+
+            row[dt_col_name] = {"value": converted_value}
         except Exception as err:
             LOG.error(u"%s, indx: %s, column: %s, mapping_table: %s",
                       err, indx, csv_column, matching_table)
@@ -372,5 +385,5 @@ def date_to_timestamp(date_value, date_format):
             except Exception as err1:
                 LOG.error(str(err1))
 
-    LOG.error(u"Unable to convert date to timestamp: %s with format %s", date_value, date_format)
+    LOG.error(u"Unable to convert date to timestamp: '%s' with format '%s'", date_value, date_format)
     return None

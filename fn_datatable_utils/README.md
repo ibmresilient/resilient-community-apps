@@ -528,10 +528,28 @@ if results.success:
 
 ---
 ## Function - Data Table Utils: Create CSV Datatable
-Add CVS data to a named datatable. CSV data can originate from another function or from a referenced attachment with CSV encoded data. A mapping table is used to map CSV header row labels to datatable column (API) names. 
+Add CVS data to a named datatable. CSV data can originate from another function or from a referenced attachment with CSV encoded data. 
 
-For csv data without headers, the mapping table will contain a list of datatable columns to match with the positional csv data. For example:
-`[null, dt_colA, null, null, dt_colC, dt_colB]`.
+A mapping table is used to map CSV header row labels to datatable column (API) names. For csv_data with headers, either a string-encoded list can be used, referencing the column order of the CSV data for the associated datatable column names:
+
+```
+'[null, dt_col_nameA, null, null, dt_col_nameC, dt_col_nameB]'
+```
+
+Alternatively, a string-encoded dictionary can be used mapping CSV header names to datatable column names:
+```
+'{
+  "hdr1": "dt_col_name1",
+  "hdr2": "dt_col_name2",
+  "hdr4": "dt_col_name4"
+}'
+```
+
+For csv data without headers, the mapping table will contain a string-encoded list referencing the column order of the CSV data for the associated datatable column names. For example:
+
+```
+'[null, dt_col_nameA, null, null, dt_col_nameC, dt_col_nameB]'
+```
 
 Attempts are made to match the field type of the datatable. CSV data matched to `select` and `multi-select` datatables columns must contain the correct values specified for those columns. String-based date fields will be converted into epoch timestamp values based on a date format pattern (ex. '%Y-%m-%d %H:%M:%S.%f') for `datetimepicker` and `datepicker` datatable column types. See [https://strftime.org/](https://strftime.org/) for the formatted values to use. Epoch date field values are also supported.
 
