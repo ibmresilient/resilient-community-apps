@@ -5,7 +5,6 @@
 import base64
 import os
 import io
-from resilient_circuits import FunctionError
 try:
     from resilient import ImportDefinition
 except ImportError:
@@ -58,7 +57,7 @@ def customization_data(client=None):
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)
     if not os.path.isfile(res_file):
-        raise FunctionError("{} not found".format(RES_FILE))
+        raise FileNotFoundError("{} not found".format(RES_FILE))
 
     with io.open(res_file, mode='rt') as f:
         b64_data = base64.b64encode(f.read().encode('utf-8'))
