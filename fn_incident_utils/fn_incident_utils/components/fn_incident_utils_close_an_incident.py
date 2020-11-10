@@ -5,6 +5,7 @@
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from resilient_lib import close_incident
 
 PACKAGE_NAME = "fn_incident_utils"
 
@@ -27,6 +28,8 @@ class FunctionComponent(ResilientComponent):
         """Function: Function that takes a JSON String of field and value pairs to close an Incident."""
         try:
 
+            log = logging.getLogger(__name__)
+
             # Get the wf_instance_id of the workflow this Function was called in
             wf_instance_id = event.message["workflow_instance"]["workflow_instance_id"]
 
@@ -36,9 +39,15 @@ class FunctionComponent(ResilientComponent):
             incident_id = kwargs.get("incident_id")  # number
             close_fields = kwargs.get("close_fields")  # text
 
-            log = logging.getLogger(__name__)
             log.info("incident_id: %s", incident_id)
             log.info("close_fields: %s", close_fields)
+
+            # Instansiate new Resilient API object
+            res_client = self.rest_client()
+
+            response = close_incident(res_client, incident_id, close_fields)
+
+            log.info("close_incident response: %s", response)
 
             ##############################################
             # PUT YOUR FUNCTION IMPLEMENTATION CODE HERE #
