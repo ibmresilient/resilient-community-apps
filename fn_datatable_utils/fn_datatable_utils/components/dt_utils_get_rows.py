@@ -7,13 +7,12 @@ import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_datatable_utils.util.helper import *
 
-
 class FunctionPayload(object):
     """Class that contains the payload sent back to UI and available in the post-processing script"""
     def __init__(self, inputs):
         self.success = True
         self.inputs = inputs
-        self.row = None
+        self.rows = None
 
     def as_dict(self):
         """Return this class as a Dictionary"""
@@ -21,7 +20,7 @@ class FunctionPayload(object):
 
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'dt_utils_get_row"""
+    """Component that implements Resilient function 'dt_utils_get_rows''"""
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
@@ -33,9 +32,9 @@ class FunctionComponent(ResilientComponent):
         """Configuration options have changed, save new values"""
         self.options = opts.get("fn_datatable_utils", {})
 
-    @function("dt_utils_get_row")
-    def _dt_utils_get_row_function(self, event, *args, **kwargs):
-        """Function: Function that searches for a row using a 'column name/cell value' pair or the row id and returns the cells of the row found"""
+    @function("dt_utils_get_rows")
+    def _dt_utils_get_rows_function(self, event, *args, **kwargs):
+        """Function: Function that returns rows found based on searching/sorting criteria."""
 
         log = logging.getLogger(__name__)
 
@@ -46,13 +45,16 @@ class FunctionComponent(ResilientComponent):
             inputs = {
                 "incident_id": get_function_input(kwargs, "incident_id"),  # number (required)
                 "dt_utils_datatable_api_name": get_function_input(kwargs, "dt_utils_datatable_api_name"),  # text (required)
-                "dt_utils_row_id": get_function_input(kwargs, "dt_utils_row_id", optional=True),  # number (optional)
+                "dt_utils_sort_by": get_function_input(kwargs, "dt_utils_sort_by", optional=True),  # text (optional)
+                "dt_utils_sort_direction": get_function_input(kwargs, "dt_utils_sort_direction", optional=True)["name"],  # select, values: "ASC", "DESC" (optional)
+                "dt_utils_max_rows": get_function_input(kwargs, "dt_utils_max_rows", optional=True),  # number (optional)
                 "dt_utils_search_column": get_function_input(kwargs, "dt_utils_search_column", optional=True),  # text (optional)
                 "dt_utils_search_value": get_function_input(kwargs, "dt_utils_search_value", optional=True),  # text (optional)
             }
 
             # Ensure correct search inputs are defined correctly
-            valid_search_inputs = validate_search_inputs(row_id=inputs["dt_utils_row_id"],
+            valid_search_inputs = validate_search_inputs(sort_by=inputs["dt_utils_sort_by"],
+                                                         sort_direction=inputs["dt_utils_sort_direction"],
                                                          search_column=inputs["dt_utils_search_column"],
                                                          search_value=inputs["dt_utils_search_value"])
 
@@ -62,29 +64,27 @@ class FunctionComponent(ResilientComponent):
             # Create payload dict with inputs
             payload = FunctionPayload(inputs)
 
-            yield StatusMessage("Function Inputs OK")
-
             # Instantiate a new RESDatatable
             datatable = RESDatatable(res_client, payload.inputs["incident_id"], payload.inputs["dt_utils_datatable_api_name"])
 
             # Get the data table data
             datatable.get_data()
 
-            # Get the row
-            row = datatable.get_row(payload.inputs["dt_utils_row_id"], payload.inputs["dt_utils_search_column"], payload.inputs["dt_utils_search_value"])
+            # Get rows
+            rows = datatable.get_rows(payload.inputs["dt_utils_max_rows"], payload.inputs["dt_utils_sort_by"],
+                                      payload.inputs["dt_utils_sort_direction"],
+                                      payload.inputs["dt_utils_search_column"], payload.inputs["dt_utils_search_value"])
 
-            # If no row found, create a log and set success to False
-            if not row:
-                yield StatusMessage(u"No row found in {0} for: search_column: {1}, search_value: {2}".format(
-                    datatable.api_name, payload.inputs["dt_utils_search_column"], payload.inputs["dt_utils_search_value"]))
+            # If no rows found, create a log and set success to False
+            if not rows:
+                yield StatusMessage("No rows found")
                 payload.success = False
 
-            # Else, set the row in the payload
+            # Else, set rows in the payload
             else:
-                yield StatusMessage(u"Row found in {0}. row_id: {1}, search_column: {2}, search_value: {3}".format(
-                    datatable.api_name, row["id"], payload.inputs["dt_utils_search_column"], payload.inputs["dt_utils_search_value"]))
+                yield StatusMessage("{0} row/s found".format(len(rows)))
                 payload.success = True
-                payload.row = row
+                payload.rows = rows
 
             results = payload.as_dict()
 
