@@ -5,6 +5,7 @@
 # Util functions
 import six
 
+
 def make_query_string(query, params):
     """
     Substitute parameters into the query
