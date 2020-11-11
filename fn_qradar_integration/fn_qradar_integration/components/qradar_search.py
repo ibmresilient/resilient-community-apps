@@ -72,7 +72,7 @@ class FunctionComponent(ResilientComponent):
                 log.debug("Failed to read search_timeout: {}".format(self.options["search_timeout"]))
 
             log.debug("Connection to {} using {}".format(self.options["host"],
-                                                         self.options.get("username", None) or self.options.get("qradartoken", None)))
+                                                         self.options.get("username") or "service token"))
 
             query_string = function_utils.make_query_string(qradar_query,
                                                             [qradar_query_param1,

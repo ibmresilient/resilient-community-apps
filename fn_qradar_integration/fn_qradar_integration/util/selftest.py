@@ -59,14 +59,10 @@ def selftest_function(opts):
             Current Configs in app.config file::
             ---------
             host: {1}
-            username: {2}
-            qradarpassword: {3}
-            qradartoken: {4}\n""".format(
+            credentials: {2}\n""".format(
             err,
             options["host"],
-            options.get("username"),
-            options.get("qradarpassword"),
-            options.get("qradartoken")
+            options.get("username") or "service token"
         )
 
         log.error(err_reason_msg)
