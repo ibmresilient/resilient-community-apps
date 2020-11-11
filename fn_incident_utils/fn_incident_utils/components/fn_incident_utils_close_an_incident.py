@@ -4,6 +4,7 @@
 """Function implementation"""
 
 import logging
+import json
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import close_incident
 
@@ -41,6 +42,11 @@ class FunctionComponent(ResilientComponent):
 
             log.info("incident_id: %s", incident_id)
             log.info("close_fields: %s", close_fields)
+
+            if close_fields is None:
+                close_fields = {}
+            else:
+                close_fields = json.loads(close_fields)
 
             # Instansiate new Resilient API object
             res_client = self.rest_client()

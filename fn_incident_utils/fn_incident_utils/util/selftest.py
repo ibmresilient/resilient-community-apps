@@ -18,9 +18,5 @@ def selftest_function(opts):
     Placeholder for selftest function. An example use would be to test package api connectivity.
     Suggested return values are be unimplemented, success, or failure.
     """
-    app_configs = opts.get("fn_incident_utils", {})
 
-    return {
-        "state": "unimplemented",
-        "reason": None
-    }
+    return {"state": "success"}

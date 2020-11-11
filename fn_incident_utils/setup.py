@@ -23,14 +23,15 @@ def snake_to_camel(word):
 setup(
     name="fn_incident_utils",
     version="1.0.0",
-    license="<<insert here>>",
-    author="<<your name here>>",
-    author_email="you@example.com",
-    url="<<your company url>>",
+    license="MIT",
+    author="IBM Resilient",
+    author_email="support@resilientsystems.com",
+    url="https://ibm.com/mysupport",
     description="Resilient Circuits Components for 'fn_incident_utils'",
     long_description="""Resilient Circuits Components for 'fn_incident_utils'""",
     install_requires=[
-        "resilient_circuits>=30.0.0"
+        "resilient_circuits>=30.0.0",
+        "resilient-lib>=38.0.77"
     ],
     packages=find_packages(),
     include_package_data=True,

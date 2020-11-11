@@ -141,4 +141,4 @@ There are several ways to verify the successful operation of a function.
 ## Support
 | Name | Version | Author | Support URL |
 | ---- | ------- | ------ | ----------- |
-| fn_incident_utils | 1.0.0 | IBM Resilient Labs | https://github.com/ibmresilient/resilient-community-apps |
+| fn_incident_utils | 1.0.0 | IBM Resilient | https://ibm.com/mysupport |
