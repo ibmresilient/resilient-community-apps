@@ -31,7 +31,7 @@ setup(
     long_description="""Resilient Circuits Components for 'fn_incident_utils'""",
     install_requires=[
         "resilient_circuits>=30.0.0",
-        "resilient-lib>=38.0.77"
+        "resilient-lib>=38.0.76"
     ],
     packages=find_packages(),
     include_package_data=True,
