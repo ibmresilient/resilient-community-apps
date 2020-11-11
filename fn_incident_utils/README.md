@@ -39,11 +39,11 @@
   Provide a high-level description of the function itself and its remote software or application.
   The text below is parsed from the "description" and "long_description" attributes in the setup.py file
 -->
-**Resilient Circuits Components for 'fn_incident_utils'**
+**Close Incident Function for IBM Resilient**
 
  ![screenshot: main](./doc/screenshots/main.png)
 
-Resilient Circuits Components for 'fn_incident_utils'
+Close Incident Function takes an incident_id and a JSON String of field_name and field_value pairs to close an Incident.
 
 ---
 
@@ -141,4 +141,4 @@ There are several ways to verify the successful operation of a function.
 ## Support
 | Name | Version | Author | Support URL |
 | ---- | ------- | ------ | ----------- |
-| fn_incident_utils | 1.0.0 | IBM Resilient | https://ibm.com/mysupport |
+| fn_incident_utils | 1.0.0 | IBM Resilient | http://ibm.biz/resilientcommunity |

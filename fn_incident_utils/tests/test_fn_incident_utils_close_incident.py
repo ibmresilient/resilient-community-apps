@@ -8,7 +8,7 @@ from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 
 PACKAGE_NAME = "fn_incident_utils"
-FUNCTION_NAME = "incident_utils_close_an_incident"
+FUNCTION_NAME = "incident_utils_close_incident"
 
 # Read the default configuration-data section from the package
 config_data = get_config_data(PACKAGE_NAME)
@@ -17,9 +17,9 @@ config_data = get_config_data(PACKAGE_NAME)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
 
 
-def call_incident_utils_close_an_incident_function(circuits, function_params, timeout=5):
+def call_incident_utils_close_incident_function(circuits, function_params, timeout=5):
     # Create the submitTestFunction event
-    evt = SubmitTestFunction("incident_utils_close_an_incident", function_params)
+    evt = SubmitTestFunction("incident_utils_close_incident", function_params)
 
     # Fire a message to the function
     circuits.manager.fire(evt)
@@ -34,7 +34,7 @@ def call_incident_utils_close_an_incident_function(circuits, function_params, ti
 
     # else return the FunctionComponent's results
     else:
-        event = circuits.watcher.wait("incident_utils_close_an_incident_result", parent=evt, timeout=timeout)
+        event = circuits.watcher.wait("incident_utils_close_incident_result", parent=evt, timeout=timeout)
         assert event
         assert isinstance(event.kwargs["result"], FunctionResult)
         pytest.wait_for(event, "complete", True)
@@ -42,7 +42,7 @@ def call_incident_utils_close_an_incident_function(circuits, function_params, ti
 
 
 class TestIncidentUtilsCloseAnIncident:
-    """ Tests for the incident_utils_close_an_incident function"""
+    """ Tests for the incident_utils_close_incident function"""
 
     def test_function_definition(self):
         """ Test that the package provides customization_data that defines the function """
@@ -70,5 +70,5 @@ class TestIncidentUtilsCloseAnIncident:
     def test_success(self, circuits_app, mock_inputs, expected_results):
         """ Test calling with sample values for the parameters """
 
-        results = call_incident_utils_close_an_incident_function(circuits_app, mock_inputs)
+        results = call_incident_utils_close_incident_function(circuits_app, mock_inputs)
         assert(expected_results == results)

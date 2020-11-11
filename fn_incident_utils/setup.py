@@ -26,8 +26,8 @@ setup(
     license="MIT",
     author="IBM Resilient",
     author_email="support@resilientsystems.com",
-    url="https://ibm.com/mysupport",
-    description="Resilient Circuits Components for 'fn_incident_utils'",
+    url="http://ibm.biz/resilientcommunity",
+    description="Close Incident Function for IBM Resilient",
     long_description="""Resilient Circuits Components for 'fn_incident_utils'""",
     install_requires=[
         "resilient_circuits>=30.0.0",

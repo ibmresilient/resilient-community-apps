@@ -12,7 +12,7 @@ PACKAGE_NAME = "fn_incident_utils"
 
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'incident_utils_close_an_incident''"""
+    """Component that implements Resilient function 'incident_utils_close_incident''"""
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
@@ -24,8 +24,8 @@ class FunctionComponent(ResilientComponent):
         """Configuration options have changed, save new values"""
         self.options = opts.get(PACKAGE_NAME, {})
 
-    @function("incident_utils_close_an_incident")
-    def _incident_utils_close_an_incident_function(self, event, *args, **kwargs):
+    @function("incident_utils_close_incident")
+    def _incident_utils_close_incident_function(self, event, *args, **kwargs):
         """Function: Function that takes a JSON String of field and value pairs to close an Incident."""
         try:
             # Get the function parameters:
