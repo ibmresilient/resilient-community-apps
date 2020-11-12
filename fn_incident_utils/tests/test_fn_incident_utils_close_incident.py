@@ -3,9 +3,11 @@
 # pragma pylint: disable=unused-argument, no-self-use
 """Tests using pytest_resilient_circuits"""
 
+from __future__ import print_function
 import pytest
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
+from mock_incident import IncidentMock
 
 PACKAGE_NAME = "fn_incident_utils"
 FUNCTION_NAME = "incident_utils_close_incident"
@@ -14,34 +16,21 @@ FUNCTION_NAME = "incident_utils_close_incident"
 config_data = get_config_data(PACKAGE_NAME)
 
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
-resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
+resilient_mock = IncidentMock
 
 
-def call_incident_utils_close_incident_function(circuits, function_params, timeout=5):
-    # Create the submitTestFunction event
-    evt = SubmitTestFunction("incident_utils_close_incident", function_params)
-
+def call_incident_utils_close_incident_function(circuits, function_params, timeout=10):
     # Fire a message to the function
+    evt = SubmitTestFunction("incident_utils_close_incident", function_params)
     circuits.manager.fire(evt)
-
-    # circuits will fire an "exception" event if an exception is raised in the FunctionComponent
-    # return this exception if it is raised
-    exception_event = circuits.watcher.wait("exception", parent=None, timeout=timeout)
-
-    if exception_event is not False:
-        exception = exception_event.args[1].args[1]
-        raise exception
-
-    # else return the FunctionComponent's results
-    else:
-        event = circuits.watcher.wait("incident_utils_close_incident_result", parent=evt, timeout=timeout)
-        assert event
-        assert isinstance(event.kwargs["result"], FunctionResult)
-        pytest.wait_for(event, "complete", True)
-        return event.kwargs["result"].value
+    event = circuits.watcher.wait("incident_utils_close_incident_result", parent=evt, timeout=timeout)
+    assert event
+    assert isinstance(event.kwargs["result"], FunctionResult)
+    pytest.wait_for(event, "complete", True)
+    return event.kwargs["result"].value
 
 
-class TestIncidentUtilsCloseAnIncident:
+class TestIncidentUtilsCloseIncident:
     """ Tests for the incident_utils_close_incident function"""
 
     def test_function_definition(self):
@@ -49,26 +38,21 @@ class TestIncidentUtilsCloseAnIncident:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
-    mock_inputs_1 = {
+    inputs = {
         "incident_id": 123,
-        "close_fields": "sample text"
+        "close_fields": "{\"resolution_id\":9,\"resolution_summary\":\"resolved\"}"
     }
 
-    expected_results_1 = {"value": "xyz"}
-
-    mock_inputs_2 = {
-        "incident_id": 123,
-        "close_fields": "sample text"
+    output = {
+        "id": 123,
+        "resolution_summary": "<div class=\"rte\"><div>resolved</div></div>",
+        "plan_status": "C",
+        "vers": 5
     }
 
-    expected_results_2 = {"value": "xyz"}
-
-    @pytest.mark.parametrize("mock_inputs, expected_results", [
-        (mock_inputs_1, expected_results_1),
-        (mock_inputs_2, expected_results_2)
-    ])
-    def test_success(self, circuits_app, mock_inputs, expected_results):
+    @pytest.mark.parametrize("inputs, expected_results", [(inputs, output)])
+    def test_success(self, circuits_app, inputs, expected_results):
         """ Test calling with sample values for the parameters """
 
-        results = call_incident_utils_close_incident_function(circuits_app, mock_inputs)
+        results = call_incident_utils_close_incident_function(circuits_app, inputs)
         assert(expected_results == results)

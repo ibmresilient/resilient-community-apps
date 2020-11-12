@@ -6,7 +6,7 @@
 import logging
 import json
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import close_incident, ResultPayload, RequestsCommon
+from resilient_lib import close_incident, ResultPayload
 
 PACKAGE_NAME = "fn_incident_utils"
 
