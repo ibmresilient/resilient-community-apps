@@ -2,6 +2,20 @@
 # -*- coding: utf-8 -*-
 
 from setuptools import setup, find_packages
+import glob
+import ntpath
+
+def get_module_name(module_path):
+    """
+    Return the module name of the module path
+    """
+    return ntpath.split(module_path)[1].split(".")[0]
+
+def snake_to_camel(word):
+    """
+    Convert a word from snake_case to CamelCase
+    """
+    return ''.join(x.capitalize() or '_' for x in word.split('_'))
 
 setup(
     name='fn_qradar_integration',
@@ -24,16 +38,8 @@ setup(
     ],
     entry_points={
         "resilient.circuits.components": [
-            
-            "QradarGetReferenceTablesFunctionComponent = fn_qradar_integration.components.funct_qradar_get_reference_tables:FunctionComponent",
-            "QradarReferenceTablesAddItemFunctionComponent = fn_qradar_integration.components.funct_qradar_reference_table_add_item:FunctionComponent",
-            "QradarReferenceTablesDeleteItemFunctionComponent = fn_qradar_integration.components.funct_qradar_reference_table_delete_item:FunctionComponent",
-            "QradarReferenceTablesUpdateItemFunctionComponent = fn_qradar_integration.components.funct_qradar_reference_table_update_item:FunctionComponent",
-            "QradarFindReferenceSetsFunctionComponent = fn_qradar_integration.components.qradar_find_reference_sets:FunctionComponent",
-            "QradarDeleteReferenceSetItemFunctionComponent = fn_qradar_integration.components.qradar_delete_reference_set_item:FunctionComponent",
-            "QradarAddReferenceSetItemFunctionComponent = fn_qradar_integration.components.qradar_add_reference_set_item:FunctionComponent",
-            "QradarFindReferenceSetItemFunctionComponent = fn_qradar_integration.components.qradar_find_reference_set_item:FunctionComponent",
-            "QradarSearchFunctionComponent = fn_qradar_integration.components.qradar_search:FunctionComponent"
+            # When setup.py is executed, loop through the .py files in the components directory and create the entry points.
+            "{}FunctionComponent = fn_qradar_integration.components.{}:FunctionComponent".format(snake_to_camel(get_module_name(filename)), get_module_name(filename)) for filename in glob.glob("./fn_qradar_integration/components/[a-zA-Z]*.py")
         ],
         "resilient.circuits.configsection": ["gen_config = fn_qradar_integration.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_qradar_integration.util.customize:customization_data"],
