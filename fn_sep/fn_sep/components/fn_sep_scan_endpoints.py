@@ -92,7 +92,7 @@ class FunctionComponent(ResilientComponent):
             LOG.info("sep_description: %s", sep_description)
             LOG.info("sep_scan_action: %s", sep_scan_action)
 
-            validate_fields(["sep_scan_type", "sep_description", "sep_scan_action"], kwargs)
+            validate_fields(["sep_scan_type", "sep_description"], kwargs)
 
             yield StatusMessage("Running Symantec SEP Scan Endpoints command...")
 

@@ -24,5 +24,8 @@ verify_cert=[True|False]
 # How often polling should happen. Value is in seconds. To disable polling, set this to zero.
 esm_polling_interval=0
 #incident_template=<location_of_template_file>  # If not set uses default template.
+# Optional settings for access to McAfee ESM via a proxy.
+#http_proxy=http://proxy:80
+#https_proxy=http://proxy:80
 """
     return config_data

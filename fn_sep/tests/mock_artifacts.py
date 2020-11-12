@@ -8,6 +8,10 @@ import json
 from sys import version_info
 from requests import HTTPError
 from requests.models import Response
+import os
+
+TESTS_DIR = os.path.dirname(os.path.realpath(__file__))
+MOCK_ZIP = os.path.join(TESTS_DIR, "mock.zip")
 
 # Responses for standalone tests
 def get_fingerprint_list():
@@ -261,7 +265,7 @@ def post_res_att(file_name, incident_id):
     )
 
 def get_test_zip():
-    with open('mock.zip', 'rb') as mockzip:
+    with open(MOCK_ZIP, 'rb') as mockzip:
         data = mockzip.read()
     return data
 

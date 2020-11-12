@@ -70,10 +70,11 @@ class FunctionComponent(ResilientComponent):
             try:
                 if "search_timeout" in self.options:
                     timeout = float(self.options["search_timeout"])
-            except:
+            except Exception:
                 log.debug("Failed to read search_timeout: {}".format(self.options["search_timeout"]))
 
-            log.debug("Connection to {} using {}".format(self.options["host"], self.options["username"]))
+            log.debug("Connection to {} using {}".format(self.options["host"],
+                                                         self.options.get("username") or "service token"))
 
             query_string = function_utils.make_query_string(qradar_query,
                                                             [qradar_query_param1,

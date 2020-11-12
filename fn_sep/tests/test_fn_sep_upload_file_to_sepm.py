@@ -46,7 +46,7 @@ class TestFnSepUploadFileToSepm:
     @patch('fn_sep.components.fn_sep_upload_file_to_sepm.Sepclient', side_effect=mocked_sep_client)
     @pytest.mark.parametrize("sep_file_path, sep_computer_ids, sep_sha256, sep_sha1, sep_md5, sep_source, expected_results", [
         ("C:\temp\test_file.exe", "89AD1BBB0946C25D25E6C0984E971D8A",
-         "bfe4fd780b47e8d4e5661d4c3881d114e8631e84a686e3bb8aad85d4af20454a", None, None, None, "171969C124D54C069D7018914AA02184")
+         "bfe4fd780b47e8d4e5661d4c3881d114e8631e84a686e3bb8aad85d4af20454a", None, None, "FILESYSTEM", "171969C124D54C069D7018914AA02184")
     ])
     def test_success(self, mock_post, circuits_app, sep_file_path, sep_computer_ids, sep_sha256, sep_sha1, sep_md5, sep_source, expected_results):
         """ Test calling with sample values for the parameters """

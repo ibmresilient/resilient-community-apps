@@ -10,6 +10,14 @@ def config_section_data():
        when called by `resilient-circuits config [-c|-u]`
     """
     config_data = '''[fn_mcafee_tie]
-dxlclient_config=/home/resilient/.resilient/mcafee_tie/dxlclient.config
+# The absolute file path of the DxlClient configuration file created by the 
+# OpenDXL Python Client's command line provisionconfig operation.  
+# This parameter is mandatory.
+# On an integration server it will typically be defined like this:
+# dxlclient_config=/home/integration/.resilient/fn_mcafee_tie/dxlclient.config
+# In App Host environment it will typically be defined like this:
+# dxlclient_config = /etc/rescircuits/fn_mcafee_tie/dxlclient.config
+#
+dxlclient_config=
 '''
     return config_data

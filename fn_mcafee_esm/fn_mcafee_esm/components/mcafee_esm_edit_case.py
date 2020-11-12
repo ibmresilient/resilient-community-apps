@@ -1,24 +1,24 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 """Function implementation"""
 
 import logging
 import time
 import json
-import requests
 from datetime import datetime
 from threading import current_thread
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from resilient_lib import RequestsCommon
 from fn_mcafee_esm.util.helper import check_config, get_authenticated_headers, check_status_code, merge_two_dicts
 from fn_mcafee_esm.components.mcafee_esm_get_case_detail import case_get_case_detail
 
 
-def case_edit_case_details(options, dict_payload, case_id):
-    headers = get_authenticated_headers(options["esm_url"], options["esm_username"],
+def case_edit_case_details(rc, options, dict_payload, case_id):
+    headers = get_authenticated_headers(rc, options["esm_url"], options["esm_username"],
                                        options["esm_password"], options["trust_cert"])
 
-    case_details = case_get_case_detail(options, headers, case_id)
+    case_details = case_get_case_detail(rc, options, headers, case_id)
     case_assigned_dict = dict(caseDetail={})
     case_assigned_dict["caseDetail"]["assignedTo"] = case_details.get("assignedTo")
     case_assigned_dict["caseDetail"]["orgId"] = case_details.get("orgId")
@@ -27,7 +27,9 @@ def case_edit_case_details(options, dict_payload, case_id):
 
     url = options["esm_url"] + "/rs/esm/v2/caseEditCase"
 
-    r = requests.post(url, headers=headers, data=json.dumps(dict_payload), verify=options["trust_cert"])
+    r = rc.execute_call_v2('post', url,  headers=headers, data=json.dumps(dict_payload), verify=options["trust_cert"],
+                           proxies=rc.get_proxies())
+
     check_status_code(r.status_code)
 
 
@@ -48,6 +50,7 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
+        self.opts = opts
         self.options = opts.get("fn_mcafee_esm", {})
 
         # Check config file and change trust_cert to Boolean
@@ -56,6 +59,7 @@ class FunctionComponent(ResilientComponent):
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
+        self.opts = opts
         self.options = opts.get("fn_mcafee_esm", {})
 
     @function("mcafee_esm_edit_case")
@@ -66,6 +70,10 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("starting...")
 
             options = self.options
+
+            # Instantiate RequestsCommon object
+            rc = RequestsCommon(opts=self.opts, function_opts=self.options)
+
             # Get the function parameters:
             mcafee_esm_case_id = kwargs.get("mcafee_esm_case_id")  # number
             mcafee_esm_edit_case_json = self.get_textarea_param(
@@ -82,9 +90,8 @@ class FunctionComponent(ResilientComponent):
             # Combine details to edit case
             edit_case_dict = dict(caseDetail={})
             edit_case_dict["caseDetail"] = combine_case_details(mcafee_esm_edit_case_json, mcafee_esm_case_id)
-
             # Edit Case, nothing is returned
-            case_edit_case_details(options, edit_case_dict, mcafee_esm_case_id)
+            case_edit_case_details(rc, options, edit_case_dict, mcafee_esm_case_id)
             yield StatusMessage("Case edited")
 
             end_time = time.time()

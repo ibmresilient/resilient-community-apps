@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright IBM Corp. - Confidential Information
+# Copyright IBM Corp. 2010, 2020 - Confidential Information
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
@@ -29,6 +29,8 @@ class FunctionComponent(ResilientComponent):
             if config is None:
                 LOG.error(self.config_file + " is not set. You must set this path to run this function")
                 raise ValueError(self.config_file + " is not set. You must set this path to run this function")
+
+            LOG.info("Using %s to create configuration for DxlClient", config)
 
             # Create configuration from file for DxlClient
             self.config = DxlClientConfig.create_dxl_config_from_file(config)
@@ -99,8 +101,8 @@ class FunctionComponent(ResilientComponent):
 
             # Produce a FunctionResult with the return value
             yield FunctionResult(response_dict)
-        except Exception:
-            yield FunctionError()
+        except Exception as err:
+            yield FunctionError(err)
 
     def _get_enterprise_info(self, reputations_dict):
         ent_dict = {}

@@ -6,18 +6,20 @@
   - [Step 2: *Install ServiceNow IBM Resilient App*](#step-2-install-servicenow-ibm-resilient-app)
   - [Step 3: *Create a User in ServiceNow and assign it the correct Role*](#step-3-create-a-user-in-servicenow-and-assign-it-the-correct-role)
   - [Step 4: *Enter IBM Resilient Configurations*](#step-4-enter-ibm-resilient-configurations)
-  - [Step 5: *Download & Install fn_service_now Integration*](#step-5-download--install-fnservicenow-integration)
+  - [Step 5: *Download & Install fn_service_now Integration*](#step-5-download--install-fn_service_now-integration)
   - [Step 6: *Install and Configure ServiceNow Mid-Server (if needed)*](#step-6-install-and-configure-servicenow-mid-server-if-needed)
   - [Step 7: *Give your ServiceNow users the correct Role*](#step-7-give-your-servicenow-users-the-correct-role)
   - [Step 8: *Test*](#step-8-test)
 ---
 
 ## Prerequisites 
-* ServiceNow Instance with ITSM enabled and running a `Kingston`, `London` or `Madrid` release
+* ServiceNow Instance with ITSM enabled and running `Kingston` or newer releases
 * Access to the `Incident Table` in ServiceNow
 * A user in ServiceNow with an `admin` role
 * IBM Resilient >= `v31.0.0`
-* An Integrations Server running `resilient-circuits >= v31.0.0`
+* An App Host >= `v1.0.0` or an Integrations Server running `resilient-circuits >= v31.0.0`.
+  > - To setup an App Host see: [ibm.biz/res-app-host-setup](https://ibm.biz/res-app-host-setup)
+  > - To setup an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
 * If IBM Resilient is not publicly accessible (behind a firewall) a `ServiceNow MID Server` is required
 
 ---
@@ -92,11 +94,17 @@
 ---
 
 ## Step 5: *Download & Install fn_service_now Integration*
-* Download fn_service_now.zip from our [App Exchange](http://ibm.biz/get-ibm-resilient-service-now-integration)
+You can run this app on either an Integration Server or on an App Host. 
+
+### Download & Install on App Host
+* To install an App using the App Host see [ibm.biz/res-install-app](https://ibm.biz/res-install-app)
+
+### Download & Install on Integration Server
+* Download the  app-fn_service_now.zip from our [App Exchange](http://ibm.biz/get-ibm-resilient-service-now-integration)
 * Copy the .zip to your Integrations Server and SSH into it.
 * **Unzip** the package:
   ```
-  $ unzip fn_service_now-x.x.x.zip
+  $ unzip app-fn_service_now-x.x.x.zip
   ```
 * **Install** the package:
   ```
@@ -110,18 +118,7 @@
   ```
   $ resilient-circuits customize -y -l fn-service-now
   ```
-* Open the config file, scroll to the bottom and **edit your ServiceNow credentials**:
-  ```
-  $ nano ~/.resilient/app.config
-  ```
-  | Config | Required | Description |
-  | ------ | :------: | ----------- |
-  | sn_host | Yes | The host you use to access your ServiceNow Instance. E.g: `https://instance.service-now.com` |
-  | sn_api_uri | Yes | This is the URI for the custom APIs that get exposed by your ServiceNow Instance when you install the app. Generally left as its default setting: `/api/x_ibmrt_resilient/api`. If you decide to implement your own endpoints, you would change this URI. |
-  | sn_table_name | Yes | This is the name of the Table in ServiceNow to Integrate with. It is where any Incidents/Tasks from Resilient will be created and synced. **NOTE:** *currently this version (v1.0.1) only supports the **Incident table** in ServiceNow* |
-  | sn_username | Yes | The **User ID** from **Step 3.** |
-  | sn_password | Yes | The **Password** from **Step 3.** |
-
+* Open the config file, scroll to the bottom and **edit your ServiceNow credentials.** The details of which are described in the table below
 * **Save** and **Close** the app.config file.
 * **Test** your Connection to ServiceNow:
   ```
@@ -133,7 +130,21 @@
   ```
   $ resilient-circuits run
   ```
-* **Login** to the Resilient Appliance and select the Organization used in Step 1
+
+### App Configuration:
+The following table describes the settings you need to configure the App. If using App Host, see the Resilient System Administrator Guide. If using the integration server, you must update the app.config file.
+
+| Config | Required | Description |
+| ------ | :------: | ----------- |
+| sn_host | Yes | The host you use to access your ServiceNow Instance. E.g: `https://instance.service-now.com` |
+| sn_api_uri | Yes | This is the URI for the custom APIs that get exposed by your ServiceNow Instance when you install the app. Generally left as its default setting: `/api/x_ibmrt_resilient/api`. If you decide to implement your own endpoints, you would change this URI. |
+| sn_table_name | Yes | This is the name of the Table in ServiceNow to Integrate with. It is where any Incidents/Tasks from Resilient will be created and synced. **NOTE:** *currently this version only supports the **Incident table** in ServiceNow* |
+| sn_username | Yes | The **User ID** from **Step 3.** |
+| sn_password | Yes | The **Password** from **Step 3.** |
+
+
+### Custom Layouts
+Once the App is installed, you need to import the custom layouts. To do this:
 * Go to **Customization Settings** > **Layouts** > **Incident Tabs** > **Summary Section**
 * Under **Fields**, search for **snow**
 * Drag the two **SNOW Fields** into the **Summary Section** as per the screenshot below
