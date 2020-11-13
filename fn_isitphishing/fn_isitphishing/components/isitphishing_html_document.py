@@ -88,9 +88,15 @@ class FunctionComponent(ResilientComponent):
 
             # Make API URL request
             rc = RequestsCommon(self.opts, self.options)
-            results_analysis = rc.execute_call("post", API_URL, payload, log=log, headers=headers)
+            response = rc.execute_call_v2("post", API_URL, json=payload, headers=headers, proxies=rc.get_proxies())
+            if response.status_code == 200:
+                success = True
+            else:
+                success = False
 
-            results = rp.done(True, results_analysis)
+            response_json = response.json()
+            results = rp.done(success, response_json)
+
             # add back in the filename
             results["inputs"]["filename"] = filename
 

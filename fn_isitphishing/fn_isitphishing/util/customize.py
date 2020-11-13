@@ -22,8 +22,8 @@ def codegen_reload_data():
         "package": u"fn_isitphishing",
         "message_destinations": [u"fn_isitphishing"],
         "functions": [u"isitphishing_html_document", u"isitphishing_url"],
-        "workflows": [u"example_isitphishing_analyze_url", u"example_isitphishing_analyze_html_document", u"example_isitphishing_analyze_html_document_artifact"],
-        "actions": [u"Example: IsItPhishing Analyze HTML Document: Attachment", u"Example: IsItPhishing Analyze HTML Document: Artifact", u"Example: IsItPhishing Analyze URL"],
+        "workflows": [u"example_isitphishing_analyze_html_document_artifact", u"example_isitphishing_analyze_html_document", u"example_isitphishing_analyze_url"],
+        "actions": [u"Example: IsItPhishing Analyze HTML Document: Artifact", u"Example: IsItPhishing Analyze URL", u"Example: IsItPhishing Analyze HTML Document: Attachment"],
         "incident_fields": [],
         "incident_artifact_types": [],
         "datatables": [],
@@ -46,13 +46,13 @@ def customization_data(client=None):
         - isitphishing_html_document
         - isitphishing_url
     - Workflows:
-        - example_isitphishing_analyze_url
-        - example_isitphishing_analyze_html_document
         - example_isitphishing_analyze_html_document_artifact
+        - example_isitphishing_analyze_html_document
+        - example_isitphishing_analyze_url
     - Rules:
-        - Example: IsItPhishing Analyze HTML Document: Attachment
         - Example: IsItPhishing Analyze HTML Document: Artifact
         - Example: IsItPhishing Analyze URL
+        - Example: IsItPhishing Analyze HTML Document: Attachment
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)

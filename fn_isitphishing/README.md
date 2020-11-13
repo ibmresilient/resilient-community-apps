@@ -154,14 +154,19 @@ inputs.artifact_id = artifact.id
 <p>
 
 ```python
-# Plaintext 
-content = u"IsItPhishing analysis of artifact document {0} : {1}".format(results["inputs"]["filename"],results['content']['result'])
-
+if results.success:
+  content = u"IsItPhishing analysis of artifact document {0} : {1}".format(results["inputs"]["filename"],results['content']['result'])
+else:
+  content = u"IsItPhishing analysis of artifact document {0} : ERROR".format(results["inputs"]["filename"])
+  
 # Create a note
 note = helper.createPlainText(content)
 
-# Add note to the incident
-incident.addNote(note)
+# Add note to the task or incident
+if task:
+  task.addNote(note)
+else:
+  incident.addNote(note)
 ```
 
 </p>
@@ -187,8 +192,19 @@ Analyze a URL using the Vade Secure IsItPhishing Webservice API.
 <p>
 
 ```python
-results = {'content': {'status': 'PHISHING'}, 
-           'inputs': {'URL': 'https://www.bill-netflix.com/index.php'}
+results = {'version': '1.0', 
+           'success': True, 
+           'reason': None, 
+           'content': {'status': 'PHISHING'}, 
+           'raw': '{"status": "PHISHING"}', 
+           'inputs': {'isitphishing_url': 'https://www.bill-netflix.com/index.php'}, 
+           'metrics': {'version': '1.0', 
+                       'package': 'fn-isitphishing', 
+                       'package_version': '1.1.0', 
+                       'host': 'MacBook-Pro.local', 
+                       'execution_time_ms': 5394, 
+                       'timestamp': '2020-11-12 17:33:23'}}
+
 }
 ```
 
@@ -211,7 +227,10 @@ inputs.isitphishing_url = artifact.value
 
 ```python
 # Get the results and post to an incident note.
-content = u'IsItPhishing analysis of URL {0} : {1}\n'.format(results['inputs']['URL'], results['content']['status'])
+if results.success:
+  content = u'IsItPhishing analysis of URL {0} : {1}\n'.format(results['inputs']['isitphishing_url'], results['content']['status'])
+else:
+  content = u'IsItPhishing analysis of URL {0} : ERROR\n'.format(results['inputs']['isitphishing_url'])
 note = helper.createPlainText(content)
 incident.addNote(note)
 ```
