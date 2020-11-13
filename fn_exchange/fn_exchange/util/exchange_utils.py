@@ -80,7 +80,7 @@ class exchange_utils:
             credentials = Credentials(username=self.username, password=self.password)
             config = Configuration(server=self.server, credentials=credentials)
             account = Account(primary_smtp_address=primary_smtp_address, config=config,
-                              autodiscover=self.verify_cert, access_type=access_type)
+                              autodiscover=False, access_type=access_type)
         except ErrorNonExistentMailbox:
             raise NoMailboxError(primary_smtp_address)
         except ConnectionError:
