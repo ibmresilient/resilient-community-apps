@@ -21,6 +21,6 @@ def selftest_function(opts):
     app_configs = opts.get("fn_wiki", {})
 
     return {
-        "state": "unimplemented",
+        "state": "success",
         "reason": None
     }
