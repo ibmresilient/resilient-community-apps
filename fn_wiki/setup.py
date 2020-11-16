@@ -29,7 +29,7 @@ setup(
     long_description="Perform operations against the Resilient wiki: create or update pages, read wiki contents and perform lookups of content.",
     install_requires=[
         'resilient_circuits>=30.0.0',
-        'resilient-lib',
+        'resilient_lib',
         'cachetools'
     ],
     packages=find_packages(),
