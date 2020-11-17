@@ -147,6 +147,19 @@ test_everything_json = {
 test_everything_py2 = u"<div><strong>None</strong>: None</div><div><strong>bool</strong>: True</div><div><strong>dict</strong>: <div style='padding:15px'><div><strong>bool</strong>: True</div><div><strong>float</strong>: 1.1</div><div><strong>int</strong>: 1</div><div><strong>text</strong>: some text here</div></div></div><div><strong>empty list</strong>: None<br></div><div><strong>empty str</strong>: </div><div><strong>emtpy dict</strong>: None<br></div><div><strong>float</strong>: 1.1</div><div><strong>int</strong>: 1</div><div><strong>links</strong>: <a target='blank' href='https://abc1.com'>https://abc1.com</a> and <a target='blank' href='http://abc2.com?a=b&c=d'>http://abc2.com?a=b&c=d</a> and more <a target='blank' href='https://abc3.com:3212#something'>https://abc3.com:3212#something</a> here</div><div><strong>list</strong>: <ul><li>c</li><li>a</li><li>b</li></ul></div><div><strong>nested dict</strong>: <div style='padding:15px'><div><strong>bool</strong>: True</div><div><strong>float</strong>: 1.1</div><div><strong>int</strong>: 1</div><div><strong>text</strong>: some text here</div></div></div><div><strong>nested dict list</strong>: <div style='padding:15px'><div><strong>bool</strong>: True</div><div><strong>int</strong>: 1</div><div><strong>text</strong>: some text here</div></div></div><div><strong>nested list</strong>: <ul><li>b</li><li>a</li><li>c</li><ul><li>3</li><li>1</li><li>2</li></ul>None<br><ul><li>b</li><li>1</li><li>1.1</li><li>True</li></ul></ul></div><div><strong>text</strong>: some text here</div><div><strong>unicode</strong>: ƀ Ɓ Ƃ ƃ Ƅ ƅ Ɔ Ƈ ƈ Ɖ</div>"
 test_everything_py3 = u"<div><strong>None</strong>: None</div><div><strong>bool</strong>: True</div><div><strong>dict</strong>: <div style='padding:15px'><div><strong>bool</strong>: True</div><div><strong>float</strong>: 1.1</div><div><strong>int</strong>: 1</div><div><strong>text</strong>: some text here</div></div></div><div><strong>empty list</strong>: None<br></div><div><strong>empty str</strong>: </div><div><strong>emtpy dict</strong>: None<br></div><div><strong>float</strong>: 1.1</div><div><strong>int</strong>: 1</div><div><strong>links</strong>: <a target='blank' href='https://abc1.com'>https://abc1.com</a> and <a target='blank' href='http://abc2.com?a=b&c=d'>http://abc2.com?a=b&c=d</a> and more <a target='blank' href='https://abc3.com:3212#something'>https://abc3.com:3212#something</a> here</div><div><strong>list</strong>: <ul><li>c</li><li>a</li><li>b</li></ul></div><div><strong>nested dict</strong>: <div style='padding:15px'><div><strong>bool</strong>: True</div><div><strong>float</strong>: 1.1</div><div><strong>int</strong>: 1</div><div><strong>text</strong>: some text here</div></div></div><div><strong>nested dict list</strong>: <div style='padding:15px'><div><strong>bool</strong>: True</div><div><strong>int</strong>: 1</div><div><strong>text</strong>: some text here</div></div></div><div><strong>nested list</strong>: <ul><li>b</li><li>a</li><li>c</li><ul><li>3</li><li>1</li><li>2</li></ul>None<br><ul><li>b</li><li>1</li><li>1.1</li><li>True</li></ul></ul></div><div><strong>text</strong>: some text here</div><div><strong>unicode</strong>: ƀ Ɓ Ƃ ƃ Ƅ ƅ Ɔ Ƈ ƈ Ɖ</div>"
 
+test_list_json = [
+    {
+      'item1': '1',
+      'item2': '2',
+    },
+    {
+      'item1': '3',
+      'item2': '4',
+    }
+]
+
+test_list_result_py3 = u"<strong>test_json</strong>: <ul><li><strong>item1</strong>: 1<br /><strong>item2</strong>: 2<br /></li><li><strong>item1</strong>: 3<br /><strong>item2</strong>: 4<br /></li></ul>"
+test_list_result_py2 = u"<strong>test_json</strong>: <ul><li><strong>item2</strong>: 2<br /><strong>item1</strong>: 1<br /></li><li><strong>item2</strong>: 4<br /><strong>item1</strong>: 3<br /></li></ul>"
 
 class Workflow:
     def __init__(self):
@@ -202,6 +215,7 @@ for member in inspect.getmembers(module):
     ("tst_nested_dict_list", tst_nested_dict_list, tst_nested_dict_list_py2, tst_nested_dict_list_py3),
     ("tst_mixed_type_dict", tst_mixed_type_dict, tst_mixed_type_dict_py2, tst_mixed_type_dict_py3),
     ("tst_nested_mixed_type_dict", tst_nested_mixed_type_dict, tst_nested_mixed_type_dict_py2, tst_nested_mixed_type_dict_py3),
+    ("test_list_json", test_list_json, test_list_result_py2, test_list_result_py3)
 ])
 def test_simple_success(test_header, json_fragment, expected_results_py2, expected_results_py3):
     json_test = {"test_json": json_fragment}
