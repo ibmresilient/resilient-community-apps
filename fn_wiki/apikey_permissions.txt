@@ -44,8 +44,8 @@ read_function
 #read_workflow
 #
 ## wiki permissions
-#create_wiki
-#edit_wiki
+create_wiki
+edit_wiki
 #
 ## email permissions
 #read_inbox_emails
