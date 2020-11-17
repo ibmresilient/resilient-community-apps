@@ -7,7 +7,7 @@ setup(
     name='fn_isitphishing',
     version='1.1.0',
     license='MIT',
-    author='IBM Resilient Labs',
+    author='Resilient Labs',
     author_email='resil.labs@gmail.com',
     url='https://github.com/ibmresilient/resilient-community-apps',
     description="Resilient Circuits Function that queries isitPhishing.org API to analyze a URL or an HTML document",
