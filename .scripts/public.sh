@@ -106,6 +106,7 @@ fn_scheduler
 fn_secureworks_ctp
 fn_sep
 fn_service_now
+fn_shodan
 fn_slack
 fn_spamhaus_query
 fn_splunk_integration
@@ -115,6 +116,7 @@ fn_teams
 fn_thug
 fn_twilio
 fn_twitter_most_popular
+fn_url_to_dns
 fn_url_void
 fn_urlhaus
 fn_urlscanio
@@ -140,8 +142,10 @@ rc-data-feed-plugin-elasticfeed
 rc-data-feed-plugin-filefeed
 rc-data-feed-plugin-kafkafeed
 rc-data-feed-plugin-odbcfeed
+rc-data-feed-plugin-resilientfeed
 rc-data-feed-plugin-splunkfeed
 res_qraw_mitre
+sc_convert_json_to_rich_text
 sc_email_parser
 EOM
 
