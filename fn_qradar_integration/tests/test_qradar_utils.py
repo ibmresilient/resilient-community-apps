@@ -348,3 +348,15 @@ def test_get_ref_set(mocked_make_call):
         assert False
     except qradar_utils.RequestError:
         assert True
+
+
+def test_quote():
+    """
+    Adding test for INT-3117 - working with URLs and reference sets causes an error.
+    The issue is that forward slash doesn't get replaced by urllib.quote, and it causes issue with URL routing.
+    """
+    from six.moves.urllib_parse import quote as urlquote
+    assert (qradar_utils.quote("/") == urlquote(qradar_utils.FORWARD_SLASH))
+
+    test_val = "å∫ç∂´ƒ:_%^.abcdef1234"
+    assert qradar_utils.quote(test_val) == urlquote(test_val)
