@@ -7,19 +7,29 @@ import logging
 from ssl import create_default_context
 
 from elasticsearch import Elasticsearch
-from resilient_lib import str_to_bool
+from resilient_lib import RequestsCommon, str_to_bool, validate_fields
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, \
-FunctionResult, FunctionError
-
+    FunctionResult, FunctionError
+from resilient_lib import ResultPayload
 from fn_elasticsearch.util.helper import ElasticSearchHelper
-
+from elasticsearch import RequestsHttpConnection
 BADLY_FORMED_QUERY = 400
 NOT_FOUND = 404
 ES_ERROR = 500
 ELASTIC_TAG_VERSION = 6
 ERROR_TUPLE = (BADLY_FORMED_QUERY, NOT_FOUND, ES_ERROR)
+SECTION_ELASTICSEARCH = "fn_elasticsearch"
+
 
 LOG = logging.getLogger(__name__)
+class ProxiedConnection(RequestsHttpConnection):
+    """ProxiedConnection A custom class which
+    takes any proxies provided and adds them to sessions
+    """
+    def __init__(self, *args, **kwargs):
+        proxies = kwargs.pop('proxies', {})
+        super(ProxiedConnection, self).__init__(*args, **kwargs)
+        self.session.proxies = proxies
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'fn_elasticsearch_query"""
@@ -27,14 +37,15 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get("fn_elasticsearch", {})
+        self.options = opts.get(SECTION_ELASTICSEARCH, {})
+        self.requestscommon = RequestsCommon(opts=opts, function_opts=self.options)
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
         LOG.debug("Reloading event triggered, comparing app.config values")
 
-        self.options = opts.get("fn_elasticsearch", {})
+        self.options = opts.get(SECTION_ELASTICSEARCH, {})
 
     @function("fn_elasticsearch_query")
     def _fn_elasticsearch_query_function(self, event, *args, **kwargs):
@@ -43,17 +54,25 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("Starting")
             helper = ElasticSearchHelper(self.options)
+            rc = ResultPayload(SECTION_ELASTICSEARCH, **kwargs)
 
-            ELASTICSEARCH_BOOL_HTTP_AUTH = str_to_bool(value=helper.get_config_option("es_use_http", True))
+            validate_fields(["es_datastore_url", "es_auth_username", "es_auth_password"], self.options)
+
+            ELASTICSEARCH_BOOL_HTTP_AUTH = str_to_bool(
+                value=helper.get_config_option("es_use_http", True))
             ELASTICSEARCH_URL = helper.get_config_option("es_datastore_url")
             ELASTICSEARCH_CERT = helper.get_config_option("es_cafile", True)
-            ELASTICSEARCH_SCHEME = helper.get_config_option("es_datastore_scheme", True)
-            ELASTICSEARCH_USERNAME = helper.get_config_option("es_auth_username", True)
-            ELASTICSEARCH_PASSWORD = helper.get_config_option("es_auth_password", True)
+            ELASTICSEARCH_SCHEME = helper.get_config_option(
+                "es_datastore_scheme", True)
+            ELASTICSEARCH_USERNAME = helper.get_config_option(
+                "es_auth_username", True)
+            ELASTICSEARCH_PASSWORD = helper.get_config_option(
+                "es_auth_password", True)
             # Get the function parameters:
             es_index = kwargs.get("es_index")  # text
             es_doc_type = kwargs.get("es_doc_type")  # text
-            es_query = self.get_textarea_param(kwargs.get("es_query"))  # textarea
+            es_query = self.get_textarea_param(
+                kwargs.get("es_query"))  # textarea
 
             log = logging.getLogger(__name__)
             log.info("index: %s", es_index)
@@ -79,23 +98,30 @@ class FunctionComponent(ResilientComponent):
                     if ELASTICSEARCH_CERT is None:
                         context = create_default_context()
                     else:
-                        context = create_default_context(cafile=ELASTICSEARCH_CERT)
+                        context = create_default_context(
+                            cafile=ELASTICSEARCH_CERT)
                     # Connect to the ElasticSearch instance
-                    es = Elasticsearch(ELASTICSEARCH_SCHEME.lower() + "://" + ELASTICSEARCH_URL, ssl_context=context, http_auth=(ELASTICSEARCH_USERNAME, ELASTICSEARCH_PASSWORD))
+                    es = Elasticsearch(ELASTICSEARCH_SCHEME.lower() + "://" + ELASTICSEARCH_URL,
+                                       ssl_context=context, http_auth=(ELASTICSEARCH_USERNAME, ELASTICSEARCH_PASSWORD),
+                                       connection_class=ProxiedConnection, proxies=self.requestscommon.get_proxies())
                 else:
-                    #This handles for HTTP statements
+                    # This handles for HTTP statements
                     if ELASTICSEARCH_BOOL_HTTP_AUTH:
-                        es = Elasticsearch([ELASTICSEARCH_URL], verify_certs=False, cafile=ELASTICSEARCH_CERT, http_auth=(ELASTICSEARCH_USERNAME, ELASTICSEARCH_PASSWORD))
+                        es = Elasticsearch([ELASTICSEARCH_URL], verify_certs=False, cafile=ELASTICSEARCH_CERT, http_auth=(
+                            ELASTICSEARCH_USERNAME, ELASTICSEARCH_PASSWORD), connection_class=ProxiedConnection, proxies=self.requestscommon.get_proxies())
                     else:
-                        es = Elasticsearch([ELASTICSEARCH_URL], verify_certs=False, cafile=ELASTICSEARCH_CERT)
+                        es = Elasticsearch(
+                            [ELASTICSEARCH_URL], verify_certs=False, cafile=ELASTICSEARCH_CERT, connection_class=ProxiedConnection, proxies=self.requestscommon.get_proxies())
             except Exception as e:
-                raise FunctionError("Encountered error while connecting to ElasticSearch {0}".format(e))
+                raise FunctionError(
+                    "Encountered error while connecting to ElasticSearch {0}".format(e))
             # Start query results as None
             query_results = None
             matched_records = 0
             es_instance_info = es.info()
-            
-            es_results = self.perform_search(es_instance_info, es, es_query, es_index, es_doc_type)
+
+            es_results = self.perform_search(
+                es_instance_info, es, es_query, es_index, es_doc_type)
 
             # If our results has a 'hits' attribute; inform the user
             if 'hits' in es_results:
@@ -128,7 +154,7 @@ class FunctionComponent(ResilientComponent):
                 "inputs": {
                     "es_query": es_query,
                     "es_doc_type": es_doc_type,
-                    "es_index" : es_index
+                    "es_index": es_index
                 },
                 "query_results": query_results,
                 "success": (True if query_results is not None else False),
@@ -144,13 +170,18 @@ class FunctionComponent(ResilientComponent):
     def perform_search(es_instance_info, es, es_query, es_index, es_doc_type):
         try:
             if not es_doc_type:
-                es_doc_type = None 
+                es_doc_type = None
             if int(es_instance_info["version"]["number"][0]) > ELASTIC_TAG_VERSION:
-                LOG.debug("Connected ElasticSearch instance is higher than version 5.9, doc_type won't be sent with the request")
-                es_results = es.search(index=es_index, body=es_query, ignore=[400, 404, 500])
+                LOG.debug(
+                    "Connected ElasticSearch instance is higher than version 5.9, doc_type won't be sent with the request")
+                es_results = es.search(
+                    index=es_index, body=es_query, ignore=[400, 404, 500])
             else:
-                LOG.debug("Connected ElasticSearch instance is 5.9 or lower, doc_type will be added to the search request")
-                es_results = es.search(index=es_index, doc_type=es_doc_type, body=es_query, ignore=[400, 404, 500])
+                LOG.debug(
+                    "Connected ElasticSearch instance is 5.9 or lower, doc_type will be added to the search request")
+                es_results = es.search(
+                    index=es_index, doc_type=es_doc_type, body=es_query, ignore=[400, 404, 500])
         except Exception as e:
-            raise ValueError("Encountered error while submitting query to ElasticSearch {0}".format(e))
+            raise ValueError(
+                "Encountered error while submitting query to ElasticSearch {0}".format(e))
         return es_results

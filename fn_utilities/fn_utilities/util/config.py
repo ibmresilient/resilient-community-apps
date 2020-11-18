@@ -60,4 +60,8 @@ whois=whois "{{shell_param1}}"
 # “time unit” character, where character is: ‘s’ for seconds, ‘m’ for minutes, ‘h’ for hours
 # ‘d’ for days.  For example: '30s' = 30 seconds; '40m' = 40 minutes;
 max_timer=30d
+
+# uncomment to add proxies
+#https_proxy=https://<your_proxy>:<port>
+#http_proxy=http://<your_proxy>:<port>
 """

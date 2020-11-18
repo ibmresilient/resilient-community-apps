@@ -5,7 +5,7 @@ FROM registry.access.redhat.com/ubi8/python-36:latest
 #FROM resilient/rc-data-feeder-base
 
 ARG APPLICATION=fn_scheduler
-ARG RES_CIRCUITS_VERSION=34.0.195
+ARG RES_CIRCUITS_VERSION=37.2
 
 # update to latest packages, user 0 for root privilege
 USER 0
@@ -13,7 +13,7 @@ USER 0
 RUN pip install --upgrade pip
 
 # install resilient-circuits
-RUN pip install resilient-circuits>=${RES_CIRCUITS_VERSION}
+RUN pip install "resilient-circuits>=${RES_CIRCUITS_VERSION}"
 
 ## ---- section for changes ----
 # uncomment and replicate if additional os libraries are needed
@@ -22,7 +22,7 @@ RUN pip install resilient-circuits>=${RES_CIRCUITS_VERSION}
 
 # install the base package
 COPY ./dist /tmp/packages
-RUN pip install /tmp/packages/${APPLICATION}-*.tar.gz
+RUN app_file=`ls -1 /tmp/packages/${APPLICATION}-*.tar.gz` && pip install ${app_file}[apphost]
 
 # uncomment and replicate if additional pypi packages are needed
 #RUN pip install <package>

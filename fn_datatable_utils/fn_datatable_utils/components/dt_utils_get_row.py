@@ -1,4 +1,4 @@
-# (c) Copyright IBM Corp. 2019. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
@@ -52,7 +52,9 @@ class FunctionComponent(ResilientComponent):
             }
 
             # Ensure correct search inputs are defined correctly
-            valid_search_inputs = validate_search_inputs(inputs["dt_utils_row_id"], inputs["dt_utils_search_column"], inputs["dt_utils_search_value"])
+            valid_search_inputs = validate_search_inputs(row_id=inputs["dt_utils_row_id"],
+                                                         search_column=inputs["dt_utils_search_column"],
+                                                         search_value=inputs["dt_utils_search_value"])
 
             if not valid_search_inputs["valid"]:
                 raise ValueError(valid_search_inputs["msg"])
@@ -73,13 +75,13 @@ class FunctionComponent(ResilientComponent):
 
             # If no row found, create a log and set success to False
             if not row:
-                yield StatusMessage("No row found in {0} for: search_column: {1}, search_value: {2}".format(
+                yield StatusMessage(u"No row found in {0} for: search_column: {1}, search_value: {2}".format(
                     datatable.api_name, payload.inputs["dt_utils_search_column"], payload.inputs["dt_utils_search_value"]))
                 payload.success = False
 
             # Else, set the row in the payload
             else:
-                yield StatusMessage("Row found in {0}. row_id: {1}, search_column: {2}, search_value: {3}".format(
+                yield StatusMessage(u"Row found in {0}. row_id: {1}, search_column: {2}, search_value: {3}".format(
                     datatable.api_name, row["id"], payload.inputs["dt_utils_search_column"], payload.inputs["dt_utils_search_value"]))
                 payload.success = True
                 payload.row = row

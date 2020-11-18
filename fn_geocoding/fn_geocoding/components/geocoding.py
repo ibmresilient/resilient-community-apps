@@ -4,8 +4,8 @@
 """Function implementation"""
 
 import logging
-from fn_geocoding.util.request_common import execute_call
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from resilient_lib import RequestsCommon, validate_fields
 
 
 class FunctionComponent(ResilientComponent):
@@ -15,11 +15,13 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
+        self.opts = opts
         self.options = opts.get("fn_geocoding", {})
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
+        self.opts = opts
         self.options = opts.get("fn_geocoding", {})
 
     @function("geocoding")
@@ -39,7 +41,7 @@ class FunctionComponent(ResilientComponent):
             log.info("geocoding_data: %s", geocoding_data)
 
             # confirm app.config setup
-            self.init_config()
+            validate_fields(['url', 'api_key'], self.options)
 
             # choices are set in the workflow: lnglat or address
             if geocoding_source not in FunctionComponent.VALID_SOURCES:
@@ -54,16 +56,19 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("starting...")
 
             url = self.options['url']
-            payload = { "key": self.options['api_key'],
-                        geocoding_source: geocoding_data
-                      }
+            payload = {
+                "key": self.options['api_key'],
+                geocoding_source: geocoding_data
+            }
 
             log.debug(payload)
-            response = execute_call(log, "get", url, None, None, payload, True, None, None)
+            rc = RequestsCommon(self.opts, self.options)
+            response = rc.execute_call_v2("get", url, params=payload)
+            resp = response.json()
 
             results = {
-                "response": response,
-                "status": True if response.get('status', '') == "OK" else False
+                "response": resp,
+                "status": True if resp.get('status', '') == "OK" else False
             }
 
             yield StatusMessage("done...")
@@ -72,7 +77,3 @@ class FunctionComponent(ResilientComponent):
             yield FunctionResult(results)
         except Exception:
             yield FunctionError()
-
-    def init_config(self):
-        if not (self.options.get("url", None) and self.options.get("api_key", None)):
-            raise ValueError("Check that app.config [fn_geocoding] url and api_key settings are configured")

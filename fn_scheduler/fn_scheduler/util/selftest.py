@@ -23,7 +23,8 @@ def selftest_function(opts):
     state = None
     reason = None
     try:
-        scheduler = ResilientScheduler(options.get("datastore_dir"),
+        scheduler = ResilientScheduler(options.get("db_url"),
+                                       options.get("datastore_dir"),
                                        options.get("thread_max"),
                                        options.get("timezone"))
 

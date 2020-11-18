@@ -1,7 +1,8 @@
 # VMRay Sandbox Analyzer Function for IBM Resilient
 
 ## Table of Contents
-  - [app.config settings](#appconfig-settings)
+  - [Overview](#overview)
+  - [Installation](#installation)
   - [Function Inputs](#function-inputs)
   - [Function Output](#function-output)
   - [Pre-Process Script](#pre-process-script)
@@ -9,29 +10,143 @@
   - [Rules](#rules)
   
 --- 
- 
-**This package contains a function that executes a VMRay Malware Sandbox Analysis using VMRay Cloud APIs, also included are two example workflows and two example rules that demonstrate how to use this function.**
+
+## Release Notes
+<!--
+  Specify all changes in this release. Do not remove the release 
+  notes of a previous release
+-->
+### v1.0.1
+* App Host support
+### v1.0.0
+* Initial Release
+
+---
+## Overview
+
+**This package contains a function that executes a VMRay Malware Sandbox Analysis using VMRay Cloud API. Also included are two example workflows and two example rules that demonstrate how to use this function.**
 
 
  ![screenshot](./screenshots/workflow_attachment.jpeg)
 
-* an attachment or artifact must be a file.
-* The report only supports Type of JSON. HTML and PDF are not supported
-* Supports a proxy. Just add your proxy details to the `proxy` section in `app.config` file.
+* The attachment or artifact to be analyzed must be a file.
+* The report only supports JSON format. HTML and PDF are not supported.
+* Supports a proxy. Add your proxy details to the [integrations] section of the `app.config` file.
 
-## app.config settings:  
+## Requirements
+<!--
+  List any Requirements 
+-->
+* Resilient platform >= `v35.0.0`
+* An Integration Server running `resilient_circuits>=30.0.0`
+ 
+  * To set up an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
+---
+## Installation
+
+### App Format
+
+The app .zip file is in a container format and requires a Resilient platform configured with an App Host. 
+
+The app tar.gz file is an extension format and requires a Resilient platform configured with an integration server.
+
+### App Host
+For a complete guide on how to configure App Host and install apps in the Resilient platform, please reference the Resilient Apps topic in the Knowledge Center. [Knowledge Center](https://www.ibm.com/support/knowledgecenter/SSBRUQ).
+
+All the components for running this integration in a container already exist when using the App Host app.
+
+To install,
+
+* Navigate to Administrative Settings and then the Apps tab.
+* Click the Install button and select the downloaded file: app-fn_vmray_analyzer-x.x.x.zip.
+* Go to the Configuration tab and edit the app.config file, editing the vmray_api_key and making any additional setting changes.
+
 ---               
-```                                                                         
-# Your VMRay Analyzer API Key                                                         
-vmray_api_key=
-
-# Your VMRay Server URL, using https://cloud.vmray.com if empty.
-vmray_analyzer_url=https://cloud.vmray.com
-             
-# Amount of time in seconds to wait until checking if the report is ready again.
-vmray_analyzer_report_request_timeout=60 
-```
+  | Config | Required | Example | Description |
+  | ------ | :------: | ------- | ----------- |
+  | **vmray_api_key** | Yes | `` | *VMRay Analyzer API Key* |
+  | **vmray_analyzer_url** | Yes | `https://cloud.vmray.com` | *VMRay Server URL* |
+  | **vmray_analyzer_report_request_timeout** | Yes | `60` | *Amount of time in seconds to wait until checking if the report is ready* |
+  
 ---                                               
+### Integration Server
+
+* Download the `app-fn_vmray_analyzer-x.x.x.zip` file.
+* Copy the `.zip` to your Integration Server and SSH into it.
+* **Unzip** the package:
+  ```
+  $ unzip app-fn_vmray_analyzer-x.x.x.zip
+  ```
+* **Install** the package:
+  ```
+  $ pip install fn_vmray_analyzer-x.x.x.tar.gz
+  ```
+* Import the **configurations** into your app.config file:
+  ```
+  $ resilient-circuits config -u -l fn-vmray-analyzer
+  ```
+* Import the fn_vmray_analyzer **customizations** into the Resilient platform:
+  ```
+  $ resilient-circuits customize -y -l fn-vmray-analyzer
+  ```
+* Open the config file, scroll to the bottom and edit your fn_vmray_analyzer configurations:
+  ```
+  $ nano ~/.resilient/app.config
+  ```
+* Download the `fn_vmray_analyzer.zip`.
+* Copy the `.zip` to your Integration Server and SSH into it.
+* **Unzip** the package:
+  ```
+  $ unzip fn_vmray_analyzer-x.x.x.zip
+  ```
+* **Change Directory** into the unzipped directory:
+  ```
+  $ cd fn_vmray_analyzer-x.x.x
+ 
+  ```
+* **Install** the package:
+  ```
+  $ pip install fn_vmray_analyzer-x.x.x.tar.gz
+  ```
+* Import the **configurations** into your app.config file:
+  ```
+  $ resilient-circuits config -u -l fn-vmray-analyzer
+  ```
+* Import the fn_vmray_analyzer **customizations** into the Resilient platform:
+  ```
+  $ resilient-circuits customize -y -l fn-vmray-analyzer
+  ```
+* Open the config file, scroll to the bottom and edit your fn_vmray_analyzer configurations:
+  ```
+  $ nano ~/.resilient/app.config
+  ```
+  | Config | Required | Example | Description |
+  | ------ | :------: | ------- | ----------- |
+  | **vmray_api_key** | Yes | `` | *VMRay Analyzer API Key* |
+  | **vmray_analyzer_url** | Yes | `https://cloud.vmray.com` | *VMRay Server URL* |
+  | **vmray_analyzer_report_request_timeout** | Yes | `60` | *Amount of time in seconds to wait until checking if the report is ready* |
+
+* **Save** and **Close** the app.config file.
+* [Optional]: Run selftest to test the Integration you configured:
+  ```
+  $ resilient-circuits selftest -l fn-vmray-analyzer
+  ```
+* **Run** resilient-circuits or restart the Service on Windows/Linux:
+  ```
+  $ resilient-circuits run
+  ```
+  ### Uninstall
+  If using an integration server, you can uninstall your app as follows:
+
+* SSH into your Integration Server.
+* **Uninstall** the package:
+  ```
+  $ pip uninstall fn-vmray-analyzer
+  ```
+* Open the config file, scroll to the [fn_vmray_analyzer] section and remove the section or prefix `#` to comment out the section.
+* **Save** and **Close** the app.config file.
+
+---
 
 ## Function Inputs:
 

@@ -26,13 +26,18 @@ inputs.exo_destination_mailfolder_id = rule.properties.exo_destination_mailfolde
 
 ### Post-Processing Script
 ```python
-# Print the message to an incident note if it is found, otherwise update the status as Not Found in the datatable.
 if results.content["error"] is not None:
+  # Print the message to an incident note if it is found, otherwise update the status as Not Found in the datatable.
   noteText = u"Exchange Online message NOT FOUND: \n email address: {0}\n message ID: {1}".format(results.inputs["exo_email_address"], results.inputs["exo_messages_id"])
-  row.exo_dt_status = "Not Found"
+  status_text = u"""<p style= "color:{color}">{status} </p>""".format(color="red", status="Not Found")
+  row['exo_dt_status'] = helper.createRichText(status_text)
+  row['exo_dt_web_link'] = ""
 else:
-  noteText = u"Exchange Online email address: {0}\nmessage ID:\n{1} moved to folder {2}".format(results.inputs["exo_email_address"], results.inputs["exo_messages_id"], results.inputs["exo_destination_mailfolder_id"]["name"] )
-
+  # When a message is moved it's ID changes, so update the new message ID into the data table
+  # The message status is still "Active" but the weblink is no longer valid, so make is empty string.
+  noteText = u"Exchange Online email address: {0}\n\n  Message has been moved to folder: {1}\n\n  Old message ID: {2} \n\n  New message ID: {3}".format(results.inputs["exo_email_address"], results.inputs["exo_destination_mailfolder_id"]["name"], results.inputs["exo_messages_id"], results.content["new_message_id"])
+  row['exo_dt_message_id'] = results.content["new_message_id"]
+  row['exo_dt_web_link'] = ref_html = u"""<a href='{0}'>Link</a>""".format(results.content["new_web_link"])
 incident.addNote(noteText)
 ```
 

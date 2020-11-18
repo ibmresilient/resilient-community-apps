@@ -23,6 +23,8 @@ Two scripts are provided:
 * Ensure that the local container tool, docker or podman, is accessible. If root permissions
 are needed to run these commands, use `sudo` or `su` to access that login account in advance.
 * Login to each registry using the `docker login` orr `podman login` commands.
+* Add insecure_registry as an argument if working with HTTP registry with podman, docker may require you edit /.docker/config.json or an environment variable
+* Add latest_tag to only retrieve the most the most recent version of each app, instead of all the unique versions, that exist on quay.io
 
 ## mirror-all-images.sh
 This script is used to copy all container images from the IBM official registry, quay.io,
@@ -36,9 +38,10 @@ pull containers down from quay.io and then push them to the private registry.
 * [docker | podman] - optional reference to the tool to perform the container transfer. 
 If missing, the script will attempt to determine which tool exists.
 
-### Example
+### Examples
 /bin/bash mirror-all-images 834299573936.dkr.ecr.us-east-2.amazonaws.com podman
 
+/bin/bash mirror-all-images localhost:5000 podman insecure_registry latest_tag
 
 ## mirror-images.sh
 This script is used to copy a select number of container images from the IBM official registry, quay.io,
@@ -74,3 +77,5 @@ fn_utilities:1.14.0
 ## App Host Configuration
 Refer to the [Configuring a private repository](https://www-03preprod.ibm.com/support/knowledgecenter/SSBRUQ_37.0.0/doc/apps/private_repo_config.html) document on how to
 develop Apps and configure App Host for your private registry.
+Also, it will be necessary to secure your local registry currently for it to be paired correctly with App Host e.g.
+https://www.redhat.com/sysadmin/simple-container-registry

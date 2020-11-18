@@ -3,3 +3,6 @@ include fn_mcafee_esm/util/*
 include fn_mcafee_esm/data/templates/*.jinja*
 include fn_mcafee_esm/LICENSE
 include doc/*
+include apikey_permissions.txt
+include Dockerfile
+include entrypoint.sh

@@ -4,7 +4,7 @@
 
 from __future__ import print_function
 import pytest
-from mock import patch
+from mock import patch, MagicMock
 from resilient_circuits.util import get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 from test_helper import get_test_config, generate_response, string_test_config
@@ -36,8 +36,8 @@ def call_mcafee_esm_get_case_detail_function(circuits, function_params, timeout=
 class TestMcafeeEsmGetCaseDetail:
     """ Tests for the mcafee_esm_get_case_detail function"""
 
-    @patch("requests.post")
-    def test_case_edit_case_details(self, mocked_requests_post):
+    @patch("resilient_lib.RequestsCommon")
+    def test_case_edit_case_details(self, mocked_requests_common):
         ops = check_config(t_config_data)
         content = {
             "dataSourceList": None,
@@ -69,8 +69,10 @@ class TestMcafeeEsmGetCaseDetail:
                 "value": 1
             }
         }
-        mocked_requests_post.return_value = generate_response(content, 200)
-        case = case_get_case_detail(ops, {}, 1)
+        mocked_requests_common.execute_call_v2 = MagicMock()
+        mocked_requests_common.execute_call_v2.return_value = generate_response(content, 200)
+
+        case = case_get_case_detail(mocked_requests_common, ops, {}, 1)
 
         assert content == case
 
@@ -82,8 +84,8 @@ class TestMcafeeEsmGetCaseDetail:
     @pytest.mark.parametrize("mcafee_esm_case_id, expected_results", [
         (123, {'inputs': {'mcafee_esm_case_id': 123}, 'details': {'dataSourceList': None, 'noteAdded': '', 'id': 123, 'openTime': '08/22/2018 21:27:34', 'severity': 1, 'deviceList': None, 'eventList': [], 'notes': [{'content': '', 'username': 'admin', 'changes': [], 'action': 'Open', 'timestamp': '08/22/2018 21:27:34(GMT)'}], 'closeTime': '08/22/2018 21:27:34', 'summary': 'test5', 'assignedTo': 1, 'orgId': 1, 'statusId': {'value': 1}, 'history': [{'content': '', 'username': 'admin', 'changes': [], 'action': 'Viewed', 'timestamp': '08/22/2018 21:28:24(GMT)'}]}})
     ])
-    @patch("requests.post")
-    def test_success(self, mocked_requests_post, circuits_app, mcafee_esm_case_id, expected_results):
+    @patch("resilient_lib.RequestsCommon.execute_call_v2")
+    def test_success(self, mocked_execute_call_v2, circuits_app, mcafee_esm_case_id, expected_results):
         """ Test calling with sample values for the parameters """
         function_params = {
             "mcafee_esm_case_id": mcafee_esm_case_id
@@ -121,8 +123,9 @@ class TestMcafeeEsmGetCaseDetail:
                 "value": 1
             }
         }
-        mocked_requests_post.side_effect = [generate_response(content1, 200),
-                                            generate_response(content2, 200)]
+        mocked_execute_call_v2.side_effect = [generate_response(content1, 200),
+                                              generate_response(content2, 200)]
+
 
         results = call_mcafee_esm_get_case_detail_function(circuits_app, function_params)
         results.pop("metrics")

@@ -4,7 +4,7 @@
 """Function implementation"""
 
 import logging
-from fn_geocoding.util.request_common import execute_call
+from resilient_lib import RequestsCommon
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
@@ -18,19 +18,21 @@ def selftest_function(opts):
     options = opts.get("fn_geocoding", {})
 
     url = options['url']
-    payload = { "key": options['api_key'],
-                "latlng": "42.3656119,-71.0805841"
-                }
+    payload = {
+        "key": options['api_key'],
+        "latlng": "42.3656119,-71.0805841"
+    }
 
-    response = execute_call(log, "get", url, None, None, payload, True, None, None)
-
-    if response and response['status'] == "OK":
+    rc = RequestsCommon(opts, options)
+    response = rc.execute_call_v2("get", url, params=payload)
+    if response and response.json()['status'] == "OK":
         return {
             "state": "success",
-            "response": response
+            "response": response.json()
         }
     else:
         log.error(response)
         return {
-            "state": "failure"
+            "state": "failure",
+            "reason": str(response.text)
         }

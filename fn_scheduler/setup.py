@@ -19,21 +19,28 @@ def snake_to_camel(word):
 
 setup(
     name='fn_scheduler',
-    version='1.0.1',
+    version='1.0.3',
     license='MIT',
     author='Resilient Labs',
     author_email='resil@gmail.com',
     url='https://ibm.biz/resilientcommunity',
-    description="Resilient Circuits Components for 'fn_scheduler'",
-    long_description="Resilient Circuits Components for 'fn_scheduler'",
+    description="App Components for 'fn_scheduler'",
+    long_description="This package of functions allows an enterprise to schedule a rule to run in the future associated with a incident, task, artifact, and datatable." \
+"Functions available include:" \
+" 1) Scheduling a rule" \
+" 2) Listing scheduled rules" \
+" 3) Removing a scheduled rule",
     install_requires=[
-        'resilient_circuits>=30.0.0',
+        'resilient_circuits>=32.0.0',
         'resilient_lib>=33.0.189',
         'pytz',
         'APScheduler>=3.6.1',
         'SQLAlchemy>=1.3.8',
-        'python-dateutil'
+        'python-dateutil>=2.8.1',
     ],
+    extras_require={
+        'apphost': ['py-postgresql']
+    },
     packages=find_packages(),
     include_package_data=True,
     platforms='any',

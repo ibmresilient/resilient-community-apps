@@ -1,19 +1,17 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 """Function implementation"""
 import logging
-import re
-import requests
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_cisco_enforcement.lib.resilient_common import validate_fields, readable_datetime
+from resilient_lib import readable_datetime, validate_fields, RequestsCommon, ResultPayload
+from fn_cisco_enforcement.lib.enforcement_common import SECTION_NAME, HEADERS, callback
 
 try:
     from urlparse import urlparse
 except:
     from urllib.parse import urlparse
 
-HEADERS = {'content-type': 'application/json'}
 # This adds an event using the Cisco Event api. The inputs can be found with a description of the api here https://docs.umbrella.com/developer/enforcement-api/events2/
 # The apikey is refernced in the app.config under [fn_cisco_enforcement]
 
@@ -24,7 +22,8 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get("fn_cisco_enforcement", {})
+        self.opts = opts
+        self.options = opts.get(SECTION_NAME, {})
         self.log = logging.getLogger(__name__)
 
         self._init()
@@ -32,7 +31,8 @@ class FunctionComponent(ResilientComponent):
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
-        self.options = opts.get("fn_cisco_enforcement", {})
+        self.opts = opts
+        self.options = opts.get(SECTION_NAME, {})
 
         self._init()
 
@@ -46,37 +46,33 @@ class FunctionComponent(ResilientComponent):
     def _event_function(self, event, *args, **kwargs):
         """Function: This is a function implementation that uses the Cisco API to post a Malware event"""
         try:
+            rp = ResultPayload(SECTION_NAME, **kwargs)
+
             url = '/'.join((self.options['url'], 'events?customerKey={}'))
             url = url.format(self.apikey)
             self.log.debug(url)
 
-            data=self.createdataobject(kwargs)
+            data, cisco_dstdomain  =self.createdataobject(kwargs)
 
-            response = requests.post(url, json=data, verify=False, headers=HEADERS)
-
-            result = None
-            if response.status_code >= 300:
-                resp = response.json()
-                if response.status_code == 404:
-                    response.content and self.log.warning(response.content)
-                    yield StatusMessage(u"Cisco Enforcement issue: {}: {}".format(response.status_code, resp['message']))
-                else:
-                    response.content and self.log.error(response.content)
-                    yield StatusMessage(u"Cisco Enforcement failure: {}: {}".format(response.status_code, resp['message']))
+            rc = RequestsCommon(self.opts, self.options)
+            content, msg = rc.execute_call_v2("post", url, json=data, verify=False, headers=HEADERS, callback=callback)
+            if msg:
+                yield StatusMessage(msg)
             else:
-                result = response.content.decode('latin1')
-                yield StatusMessage("Post Event was successful")
+                yield StatusMessage(u"Add Domain for '{}' was successful".format(cisco_dstdomain))
 
-            self.log.debug(result)
+            results = rp.done(False if msg else True, None if msg else content, msg)
+            # backward compatibility
+            results['value'] = None if msg else content
+
             # Produce a FunctionResult with the results
-            yield FunctionResult({ "value": result})
+            yield FunctionResult(results)
         except Exception as err:
             self.log.error(err)
             yield FunctionError(err)
 
     # Creates the data object to send
     def createdataobject(self, kwargs):
-
         validate_fields(['protocol_version', 'provider_name'], self.options)
 
         # Get the function parameters:
@@ -140,12 +136,12 @@ class FunctionComponent(ResilientComponent):
                 "providerName": cisco_providername,
                 "dstDomain": cisco_dstdomain,
                 "dstUrl": cisco_dsturl
-                     }
+        }
 
         data = self.addothers(basicdata, cisco_dstip, cisco_eventseverity, cisco_eventtype, cisco_eventdescription, cisco_eventhash,
                   cisco_filename, cisco_filehash, cisco_externalurl, cisco_src)
 
-        return data
+        return data, cisco_dstdomain
 
     def _parseUrl(self, url_domain):
         """ split a url to also capture the domain """

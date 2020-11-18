@@ -3,9 +3,16 @@
 """Function implementation"""
 
 import logging
-from pymisp import PyMISP
-from resilient_circuits import ResilientComponent, function, StatusMessage, FunctionResult, FunctionError
+import sys
+if sys.version_info.major < 3:
+    from fn_misp.lib import misp_2_helper as misp_helper
+else:
+    from fn_misp.lib import misp_3_helper as misp_helper
+from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from fn_misp.lib import common
+from resilient_lib import IntegrationError
 
+PACKAGE= "fn_misp"
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function(s)"""
@@ -13,31 +20,30 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get("fn_misp", {})
+        self.opts = opts
+        self.options = opts.get(PACKAGE, {})
+
+    @handler("reload")
+    def _reload(self, event, opts):
+        """Configuration options have changed, save new values"""
+        self.opts = opts
+        self.options = opts.get(PACKAGE, {})
 
     @function("misp_create_attribute")
     def _misp_create_attribute_function(self, event, *args, **kwargs):
         """Function: """
         try:
 
-            def get_config_option(option_name, optional=False):
-                """Given option_name, checks if it is in app.config. Raises ValueError if a mandatory option is missing"""
-                option = self.options.get(option_name)
-
-                if option is None and optional is False:
-                    err = "'{0}' is mandatory and is not set in ~/.resilient/app.config file. You must set this value to run this function".format(option_name)
-                    raise ValueError(err)
-                else:
-                    return option
-
-            API_KEY = get_config_option("misp_key")
-            URL = get_config_option("misp_url")
-            VERIFY_CERT = True if get_config_option("verify_cert").lower() == "true" else False
+            API_KEY, URL, VERIFY_CERT = common.validate(self.options)
 
             # Get the function parameters:
             misp_event_id = kwargs.get("misp_event_id")  # number
             misp_attribute_value = kwargs.get("misp_attribute_value")  # text
             misp_attribute_type = kwargs.get("misp_attribute_type")  # text
+
+            # ensure misp_event_id is an integer so we can get an event by it's index
+            if not isinstance(misp_event_id, int):
+                raise IntegrationError(u"Unexpected input type for MISP Event ID. Expected and integer, received {}".format(type(misp_event_id)))
 
             log = logging.getLogger(__name__)
             log.info("misp_event_id: %s", misp_event_id)
@@ -46,35 +52,17 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("Setting up connection to MISP")
 
-            misp_client = PyMISP(URL, API_KEY, VERIFY_CERT, 'json')
+            proxies = common.get_proxies(self.opts, self.options)
 
-            """
-            default_map = { 
-                "DNS Name": "domain",
-                "Email Attachment": "email-attachment",
-                "Email Body": "email-body",
-                "Email Recipient": "email-dst",
-                "Email Sender": "email-src",
-                "Email subject": "email-subject",
-                "File Name": "filename",
-                "DNS Name": "hostname",
-                "MAC Address": "mac-address",
-                "Malware MD5 Hash": "md5",
-                "Port": "port",
-                "Malware SHA-1 Hash": "sha1",
-                "Malware SHA-256 Hash": "sha256",
-                "URI Path": "uri",
-                "URL": "url",
-                "Threat CVE ID": "vulnerability",
-                "IP Address": "ip-dst"
-            }
-            """
+            misp_client = misp_helper.get_misp_client(URL, API_KEY, VERIFY_CERT, proxies=proxies)
 
-            yield StatusMessage("Creating new misp attribute {} {}".format(misp_attribute_type, misp_attribute_value))
+            yield StatusMessage(u"Creating new misp attribute {} {}".format(misp_attribute_type, misp_attribute_value))
 
-            attribute = misp_client.add_named_attribute(misp_event_id, misp_attribute_type, misp_attribute_value)
+            attribute = misp_helper.create_misp_attribute(misp_client, misp_event_id, misp_attribute_type, misp_attribute_value)
 
-            log.info(event)
+            log.debug(attribute)
+
+            yield StatusMessage("Attribute has been created")
 
             results = { "success": True,
                         "content": attribute

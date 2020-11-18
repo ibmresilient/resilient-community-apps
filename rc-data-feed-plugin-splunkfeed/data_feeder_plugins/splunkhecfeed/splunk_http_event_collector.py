@@ -60,10 +60,13 @@ class http_event_collector:
     maxByteLength = 100000
     threadCount = 10
 
-    # An improved requests retry method from
-    # https://www.peterbe.com/plog/best-practice-with-retries-with-requests
-    # 503 added for endpoint busy
-    # 408 added in case using HAproxy
+    def set_proxies(self, http_proxy, https_proxy):
+        if http_proxy:
+            self.proxies["http"] = http_proxy
+        if https_proxy:
+            self.proxies["https"] = https_proxy
+        else:
+            self.proxies = None
 
     def requests_retry_session(self, retries=3,backoff_factor=0.3,status_forcelist=(408,500,502,503,504),session=None):
         session = session or requests.Session()
@@ -80,6 +83,7 @@ class http_event_collector:
         self.http_event_server = http_event_server
         self.http_event_server_ssl = http_event_server_ssl
         self.http_event_port = http_event_port
+        self.proxies = {}
         self.index = ""
         self.sourcetype = ""
         self.source = None
@@ -210,11 +214,19 @@ class http_event_collector:
         while True:
             if self.debug:
                 LOG.debug("Events received on thread. Sending to Splunk.")
+                LOG.debug("Splunk proxies: {}".format(self.proxies))
             payload = " ".join(self.flushQueue.get())
-            headers = {'Authorization':'Splunk '+self.token}
+            headers = {'Authorization': 'Splunk ' + self.token}
             # try to post payload twice then give up and move on
             try:
-                r = self.requests_retry_session().post(self.server_uri, data=payload, headers=headers, verify=self.SSL_verify)
+                # initialize the session with our Retry configuration
+                r = self.requests_retry_session()
+                # set the session proxies if they were provided
+                if self.proxies != None:
+                    r.proxies.update(self.proxies)
+                # make the POST request to the server
+                r.post(self.server_uri, data=payload, headers=headers,
+                                                       verify=self.SSL_verify, proxies=r.proxies)
             except Exception:
                 pass
 

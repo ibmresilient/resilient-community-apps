@@ -70,3 +70,4 @@ read_function
 #read_stats
 #edit_workflow
 #read_all_action_invocations
+#edit_data

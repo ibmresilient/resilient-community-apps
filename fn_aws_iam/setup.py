@@ -19,9 +19,9 @@ def snake_to_camel(word):
 
 setup(
     name='fn_aws_iam',
-    version='1.0.0',
+    version='1.0.1',
     license='MIT',
-    author='IBM Resilient Support',
+    author='IBM Resilient',
     author_email='',
     url='https://ibm.com/mysupport',
     description="Amazon AWS IAM Integration for Resilient",

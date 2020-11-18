@@ -5,17 +5,21 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_jira',
-    version='1.0.2',
+    version='2.0.0',
     license='MIT',
     author='IBM Resilient',
-    author_email='support@resilientsystems.com',
-    url='https://ibm.biz/resilientcommunity',
-    description="Resilient Circuits Components for 'fn_jira'",
-    long_description="Resilient Circuits Components for 'fn_jira'",
+    url='https://ibm.com/mysupport',
+    description="Provides integration with JIRA for Issue Creation, Issue Transition and Comment Creation",
+    long_description="""This app allows for the tracking of Resilient Incidents and Tasks as Jira Issues. Bidirectional links are saved to allow for easy navigation between the applications.
+
+It also allows for the transitioning of Jira issues when the corresponding incident is closed and adds comments to the Jira issue when a Note is created in Resilient.
+
+Example rules and workflows can used used or modified to meet your business processes.
+""",
     install_requires=[
-        'resilient_circuits>=30.0.0',
-        'resilient-lib>=32.0.186',
-        'beautifulsoup4>=4.8.0'
+        'resilient_circuits>=32.0.0',
+        'resilient-lib>=38.0.0',
+        'jira>=2.0.0'
     ],
     packages=find_packages(),
     include_package_data=True,

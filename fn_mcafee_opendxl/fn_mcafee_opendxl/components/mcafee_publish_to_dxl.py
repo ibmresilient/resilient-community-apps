@@ -1,15 +1,25 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2017. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 """Function implementation"""
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from resilient_lib import validate_fields, ResultPayload
 from dxlclient.client import DxlClient
 from dxlclient import Request, Event, Response
 from dxlclient.client_config import DxlClientConfig
 
 log = logging.getLogger(__name__)
 
+PACKAGE_NAME = "fn_mcafee_opendxl"
+
+def convert(data):
+  if isinstance(data, bytes):      return data.decode()
+  if isinstance(data, (str, int)): return str(data)
+  if isinstance(data, dict):       return dict(map(convert, data.items()))
+  if isinstance(data, tuple):      return tuple(map(convert, data))
+  if isinstance(data, list):       return list(map(convert, data))
+  if isinstance(data, set):        return set(map(convert, data))
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'mcafee_publish_to_dxl"""
@@ -20,7 +30,8 @@ class FunctionComponent(ResilientComponent):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         try:
-            self.config = opts.get("fn_mcafee_opendxl").get(self.config_file)
+            self.opts = opts
+            self.config = opts.get(PACKAGE_NAME).get(self.config_file)
             if self.config is None:
                 log.error(self.config_file + " is not set. You must set this path to run this function")
                 raise ValueError(self.config_file + " is not set. You must set this path to run this function")
@@ -38,7 +49,7 @@ class FunctionComponent(ResilientComponent):
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
-        self.config = opts.get("fn_mcafee_opendxl").get(self.config_file)
+        self.config = opts.get(PACKAGE_NAME).get(self.config_file)
 
     @function("mcafee_publish_to_dxl")
     def _mcafee_publish_to_dxl_function(self, event, *args, **kwargs):
@@ -100,11 +111,23 @@ class FunctionComponent(ResilientComponent):
                 "mcafee_wait_for_response": mcafee_wait_for_response
             }
 
+            # Initialize the results payload
+            rp = ResultPayload(PACKAGE_NAME, **kwargs)
+
             # Return response from publishing to topic
             if response is not None:
-                r["response"] = vars(response)
-                yield FunctionResult(r)
-            else:
-                yield FunctionResult(r)
+                # Convert response object to dict
+                response_dict = vars(response)
+                # Convert dict bytes fields to string for python 3
+                response_dict_str = convert(response_dict)
+                r["response"] = response_dict_str
+
+            results = rp.done(True, r)
+            # Include for backward compatibility
+            results["mcafee_topic_name"] = mcafee_topic_name
+            results["mcafee_dxl_payload"] = mcafee_dxl_payload
+            results["mcafee_publish_method"] = mcafee_publish_method
+            results["mcafee_wait_for_response"] = mcafee_wait_for_response
+            yield FunctionResult(results)
         except Exception as e:
             yield FunctionError(e)
