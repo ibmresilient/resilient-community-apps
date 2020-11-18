@@ -1,15 +1,17 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
 import logging
 import json
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from resilient_lib import ResultPayload
 from fn_icdx.util.helper import ICDXHelper
 from fn_icdx.util.amqp_facade import AmqpFacade
 
 GET_EVENT_API_CODE = 0
+ICDX_SECTION = "fn_icdx"
 
 
 class FunctionComponent(ResilientComponent):
@@ -30,6 +32,8 @@ class FunctionComponent(ResilientComponent):
         """Function: Takes in an input of a UUID for an event and attempts to get the details of this event from the ICDx platform."""
 
         try:
+            rc = ResultPayload(ICDX_SECTION, **kwargs)
+
             # Get the function parameters:
             icdx_uuid = kwargs.get("icdx_uuid")  # text
 
@@ -37,21 +41,27 @@ class FunctionComponent(ResilientComponent):
             log.info("icdx_uuid: %s", icdx_uuid)
 
             if icdx_uuid is None:
-                raise FunctionError("Encountered error: icdx_uuid may not be None")
+                raise FunctionError(
+                    "Encountered error: icdx_uuid may not be None")
 
             helper = ICDXHelper(self.options)
             yield StatusMessage("Attempting to gather config and setup the AMQP Client")
             try:
                 # Initialise the AmqpFacade, pass in config values
                 amqp_client = AmqpFacade(host=helper.get_config_option("icdx_amqp_host"),
-                                         port=helper.get_config_option("icdx_amqp_port", True),
-                                         virtual_host=helper.get_config_option("icdx_amqp_vhost"),
-                                         username=helper.get_config_option("icdx_amqp_username"),
-                                         amqp_password=helper.get_config_option("icdx_amqp_password")
+                                         port=helper.get_config_option(
+                                             "icdx_amqp_port", True),
+                                         virtual_host=helper.get_config_option(
+                                             "icdx_amqp_vhost"),
+                                         username=helper.get_config_option(
+                                             "icdx_amqp_username"),
+                                         amqp_password=helper.get_config_option(
+                                             "icdx_amqp_password")
                                          )
                 yield StatusMessage("Config options gathered and AMQP client setup.")
             except Exception:
-                raise FunctionError("Encountered error while initialising the AMQP Client")
+                raise FunctionError(
+                    "Encountered error while initialising the AMQP Client")
 
             yield StatusMessage("Sending request to ICDx with a UUID of {0}".format(icdx_uuid))
             # Prepare request payload
@@ -61,7 +71,8 @@ class FunctionComponent(ResilientComponent):
             }
 
             # Make the call to ICDx and get a handle on any results
-            search_result_payload, status = amqp_client.call(json.dumps(request))
+            search_result_payload, status = amqp_client.call(
+                json.dumps(request))
 
             yield StatusMessage("ICDx call complete with status: {}".format(status))
 
@@ -81,7 +92,8 @@ class FunctionComponent(ResilientComponent):
 
             if status == 200:
                 # Parse the search result for any artifacts
-                artifact_dictionary = helper.search_for_artifact_data(json.loads(search_result_payload))
+                artifact_dictionary = helper.search_for_artifact_data(
+                    json.loads(search_result_payload))
                 """Lastly get the keys and the values as separate lists
                 This is needed in v30 or lower.
                 Post-processing script shows how to use the data in both v30 and v31
@@ -94,19 +106,20 @@ class FunctionComponent(ResilientComponent):
                 yield StatusMessage("Received a 401 (Auth). Check the credentials in app.config")
 
             # Return the results
-            results = {
-                "inputs": {
-                    "icdx_uuid": icdx_uuid
-                },
-                "success": (False if status != 200 else True),
-                # 200 is the only status code where we expect a returning event, in all other cases, set to None
-                "event": None if status != 200 else json.loads(search_result_payload.decode('utf-8')),
-                "artifacts": artifact_dictionary,
-                "artifact_keys_as_list": None if isinstance(artifact_keys_as_list, type(None)) else list(
-                    artifact_keys_as_list),
-                "artifact_values_as_list": None if isinstance(artifact_values_as_list, type(None)) else list(
-                    artifact_values_as_list),
-            }
+            event = None if status != 200 else json.loads(search_result_payload.decode('utf-8')),
+            artifacts = artifact_dictionary,
+            artifact_keys_as_list = None if isinstance(artifact_keys_as_list, type(None)) else list(artifact_keys_as_list)
+            artifact_values_as_list = None if isinstance(artifact_values_as_list, type(None)) else list(artifact_values_as_list)
+            results = rc.done(success=False if status != 200 else True,
+                              content={"event": event,
+                                       "artifacts": artifact_dictionary,
+                                       "artifact_keys_as_list": artifact_keys_as_list,
+                                       "artifact_values_as_list": artifact_values_as_list}
+                              )
+            results.update({"event": event,
+                            "artifacts": artifact_dictionary,
+                            "artifact_keys_as_list": artifact_keys_as_list,
+                            "artifact_values_as_list": artifact_values_as_list})
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

@@ -1,15 +1,17 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
 import logging
 import json
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from resilient_lib import ResultPayload
 from fn_icdx.util.helper import ICDXHelper
 from fn_icdx.util.amqp_facade import AmqpFacade
 
 GET_ARCHIVE_LIST_CODE = 12
+ICDX_SECTION = "fn_icdx"
 
 
 class FunctionComponent(ResilientComponent):
@@ -31,20 +33,27 @@ class FunctionComponent(ResilientComponent):
 
         log = logging.getLogger(__name__)
         try:
+            rc = ResultPayload(ICDX_SECTION, **kwargs)
+
             helper = ICDXHelper(self.options)
             yield StatusMessage("Attempting to gather config and setup the AMQP Client")
             try:
                 # Initialise the AmqpFacade, pass in config values
                 amqp_client = AmqpFacade(host=helper.get_config_option("icdx_amqp_host"),
-                                         port=helper.get_config_option("icdx_amqp_port", True),
-                                         virtual_host=helper.get_config_option("icdx_amqp_vhost"),
-                                         username=helper.get_config_option("icdx_amqp_username"),
-                                         amqp_password=helper.get_config_option("icdx_amqp_password")
+                                         port=helper.get_config_option(
+                                             "icdx_amqp_port", True),
+                                         virtual_host=helper.get_config_option(
+                                             "icdx_amqp_vhost"),
+                                         username=helper.get_config_option(
+                                             "icdx_amqp_username"),
+                                         amqp_password=helper.get_config_option(
+                                             "icdx_amqp_password")
                                          )
 
                 yield StatusMessage("Config options gathered and AMQP client setup.")
             except Exception:
-                raise FunctionError("Encountered error while initialising the AMQP Client")
+                raise FunctionError(
+                    "Encountered error while initialising the AMQP Client")
             # Prepare request payload
             request = {
                 "id": GET_ARCHIVE_LIST_CODE
@@ -56,10 +65,11 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("ICDX call complete with status: {}".format(status))
 
             # If status code in the message header is 200 we have results, 204 is empty response.
-            results = {
-                "success": (False if status != 200 else True),
+            results = rc.done(success=False if status != 200 else True, content={
                 "archives": (json.loads(archives) if archives is not None else None)
-            }
+            })
+            results.update({"archives": (json.loads(archives) if archives is not None else None)})
+
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
             log.info("Complete")

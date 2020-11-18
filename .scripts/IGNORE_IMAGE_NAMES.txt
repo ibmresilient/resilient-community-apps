@@ -1,0 +1,20 @@
+#List-of-image-names-NOT-to-build
+
+#Ignore-runtime
+apps-operator
+apps-synchronizer
+
+#Ignore-apps
+#Third Party Apps:
+fn_crowd_strike
+fn_digitalshadows
+fn_guardium_integration
+
+#IBM Resilient Apps
+
+
+#Ignore-other
+trustar_resilient
+test-repo-with-script
+testtbd
+rflookup
