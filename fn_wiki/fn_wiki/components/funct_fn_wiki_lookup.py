@@ -29,26 +29,25 @@ class FunctionComponent(ResilientComponent):
             # Setup Resilient rest client
             helper = WikiHelper(self.rest_client())
             rp = ResultPayload(PACKAGE_NAME, **kwargs)
+            reason = matching_wiki_content = None
 
             content = helper.get_wiki_contents(wiki_title_or_id)
 
             if not content:
-                msg = u"Can't find the wiki with title or id: '{}'".format(wiki_title_or_id)
-                yield StatusMessage(msg)
-                raise ValueError(msg)
-
-            log.debug(content)
-
-            matching_wiki_content = do_lookup(wiki_search_term, content)
-
-            # Handle no matches
-            reason = None
-            if not matching_wiki_content:
-                reason = u"No Matches Found for {} in the Wiki {}".format(wiki_search_term, 
-                                                                          wiki_title_or_id)
+                reason = u"Can't find the wiki with title or id: '{}'".format(wiki_title_or_id)
                 yield StatusMessage(reason)
+            else:
+                log.debug(content)
 
-            yield StatusMessage("Found {} matching entries".format(len(matching_wiki_content)))
+                matching_wiki_content = do_lookup(wiki_search_term, content)
+
+                # Handle no matches
+                if not matching_wiki_content:
+                    reason = u"No Matches Found for {} in the Wiki {}".format(wiki_search_term, 
+                                                                            wiki_title_or_id)
+                    yield StatusMessage(reason)
+
+                yield StatusMessage("Found {} matching entries".format(len(matching_wiki_content)))
 
             results = rp.done(False if reason else True, matching_wiki_content, reason=reason)
 
