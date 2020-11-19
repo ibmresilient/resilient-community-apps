@@ -30,7 +30,7 @@ class FunctionComponent(ResilientComponent):
         try:
             # Get the function parameters:
             incident_id = kwargs.get("incident_id")  # number
-            close_fields = self.get_textarea_param(kwargs.get("close_fields"))  # text area
+            close_fields = kwargs.get("close_fields")  # text
 
             # Check JSON string and convert it to dict
             if close_fields is None:

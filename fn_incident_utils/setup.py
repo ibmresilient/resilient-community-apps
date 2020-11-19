@@ -28,10 +28,10 @@ setup(
     author_email="support@resilientsystems.com",
     url="http://ibm.biz/resilientcommunity",
     description="Close Incident Function for IBM Resilient",
-    long_description="""Resilient Circuits Components for 'fn_incident_utils'""",
+    long_description="""This package contains a function that enable you to close an Incident: Close Incident""",
     install_requires=[
         "resilient_circuits>=30.0.0",
-        "resilient-lib>=38.0.76"
+        "resilient-lib>38.0.76"
     ],
     packages=find_packages(),
     include_package_data=True,

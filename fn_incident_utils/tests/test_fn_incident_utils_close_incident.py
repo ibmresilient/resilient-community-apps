@@ -46,6 +46,7 @@ class TestIncidentUtilsCloseIncident:
     output = {
         "id": 123,
         "resolution_summary": "<div class=\"rte\"><div>resolved</div></div>",
+        "resolution_id": 9,
         "plan_status": "C",
         "vers": 5
     }
