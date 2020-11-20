@@ -41,7 +41,7 @@ MOCK_GET_TABLE_RESPONSE = [
     "timeout_type": "LAST_SEEN",
     "number_of_elements": 100,
     "creation_time": 1464119421471,
-    "name": "Mock Malware Hashes SHA Data",
+    "name": "Les faux logiciels malveillants hachent les données SHA",
     "namespace": "SHARED",
     "key_name_types": {
       "Brand": "ALNIC",

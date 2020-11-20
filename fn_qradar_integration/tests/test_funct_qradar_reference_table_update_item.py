@@ -25,6 +25,16 @@ MOCK_UPDATE_RESPONSE = {
   "element_type": "ALN",
   "collection_id": 86
 }
+MOCK_UPDATE_RESPONSE_UNICODE = {
+  "time_to_live": "999 years 0 mons 0 days 0 hours 0 mins 0.00 secs",
+  "timeout_type": "LAST_SEEN",
+  "number_of_elements": 555,
+  "creation_time": 1570221529014,
+  "name": "演示版vz",
+  "namespace": "SHARED",
+  "element_type": "ALN",
+  "collection_id": 86
+}
 
 def call_qradar_reference_table_update_item_function(circuits, function_params, timeout=5):
     # Create the submitTestFunction event
@@ -70,7 +80,7 @@ class TestQradarReferenceTableUpdateItem:
         "qradar_reference_table_item_value": "sample text"
     }
 
-    expected_results_2 = MOCK_UPDATE_RESPONSE
+    expected_results_2 = MOCK_UPDATE_RESPONSE_UNICODE
 
     @pytest.mark.parametrize("mock_inputs, expected_results", [
         (mock_inputs_1, expected_results_1),
