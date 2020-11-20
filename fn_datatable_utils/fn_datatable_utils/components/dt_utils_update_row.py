@@ -1,4 +1,4 @@
-# (c) Copyright IBM Corp. 2019. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
@@ -43,6 +43,7 @@ class FunctionComponent(ResilientComponent):
         try:
             # Instansiate new Resilient API object
             res_client = self.rest_client()
+            workflow_instance_id = event.message.get('workflow_instance', {}).get('workflow_instance_id')
 
             inputs = {
                 "incident_id": get_function_input(kwargs, "incident_id"),  # number (required)
@@ -50,6 +51,7 @@ class FunctionComponent(ResilientComponent):
                 "dt_utils_row_id": get_function_input(kwargs, "dt_utils_row_id"),  # number (required)
                 "dt_utils_cells_to_update": get_function_input(kwargs, "dt_utils_cells_to_update")  # text (required)
             }
+            log.info(inputs)
 
             try:
                 inputs["dt_utils_cells_to_update"] = json.loads(inputs["dt_utils_cells_to_update"])
@@ -66,6 +68,15 @@ class FunctionComponent(ResilientComponent):
 
             # Get the data table data
             datatable.get_data()
+
+            # use the current row_id if dt_utils_row_id = 0
+            if not inputs['dt_utils_row_id'] or not int(inputs['dt_utils_row_id']):
+                row_id = datatable.get_row_id_from_workflow(workflow_instance_id)
+                if not row_id:
+                    raise ValueError("Run the workflow from a datatable to get the current row_id.")
+
+                log.info("Using current row_id: %s", row_id)
+                inputs['dt_utils_row_id'] = row_id
 
             # Update the row
             updated_row = datatable.update_row(payload.inputs["dt_utils_row_id"], payload.inputs["dt_utils_cells_to_update"])

@@ -22,6 +22,7 @@ except ImportError:
     from urllib.parse import quote as quote_func  # Python 3+
 
 LOG = logging.getLogger(__name__)
+FORWARD_SLASH = b'%2F'
 
 
 def quote(input_v, safe=None):
@@ -32,6 +33,7 @@ def quote(input_v, safe=None):
     if not isinstance(input_v, six.binary_type):
         input_v = input_v.encode('utf-8')
 
+    input_v = input_v.replace(b'/', FORWARD_SLASH)
     # No need to re-define the default for safe
     if safe:
         return quote_func(input_v, safe)
@@ -52,7 +54,7 @@ class AuthInfo(object):
         pass
 
     @staticmethod
-    def get_authInfo(): 
+    def get_authInfo():
         if AuthInfo.__instance is None:
             AuthInfo.__instance = AuthInfo()
         return AuthInfo.__instance
@@ -72,7 +74,8 @@ class AuthInfo(object):
         """
         self.headers = {'Accept': 'application/json'}
         if username and password:
-            self.qradar_auth = base64.b64encode((username + ':' + password).encode('ascii'))
+            self.qradar_auth = base64.b64encode(
+                (username + ':' + password).encode('ascii'))
             self.headers['Authorization'] = b"Basic " + self.qradar_auth
         elif token:
             self.qradar_token = token
@@ -126,6 +129,7 @@ class ArielSearch(SearchWaitCommand):
         :return:
         """
         self.range_end = end
+
     def set_timeout(self, timeout):
         """
         Set timeout
@@ -133,6 +137,7 @@ class ArielSearch(SearchWaitCommand):
         :return:
         """
         self.search_timeout = timeout
+
     def set_query_all(self, query_all):
         """
         Set bool to determine if range header is necessary
@@ -172,14 +177,16 @@ class ArielSearch(SearchWaitCommand):
         :return: dict with events
         """
         auth_info = AuthInfo.get_authInfo()
-        url = auth_info.api_url + qradar_constants.ARIEL_SEARCHES_RESULT.format(search_id)
+        url = auth_info.api_url + \
+            qradar_constants.ARIEL_SEARCHES_RESULT.format(search_id)
 
         headers = auth_info.headers.copy()
         # if the # of returned items is big, this call will take a long time!
         # Need to use Range to limit the # if query_all is False.
         # If query_all is True, the Range will not be used and all the results will be returned from the query.
         if not self.query_all:
-            headers[b"Range"] = "items={}-{}".format(str(self.range_start), str(self.range_end))
+            headers[b"Range"] = "items={}-{}".format(
+                str(self.range_start), str(self.range_end))
 
         response = None
         try:
@@ -203,7 +210,8 @@ class ArielSearch(SearchWaitCommand):
         :return:
         """
         auth_info = AuthInfo.get_authInfo()
-        url = "{}{}/{}".format(auth_info.api_url, qradar_constants.ARIEL_SEARCHES, search_id)
+        url = "{}{}/{}".format(auth_info.api_url,
+                               qradar_constants.ARIEL_SEARCHES, search_id)
         status = SearchWaitCommand.SEARCH_STATUS_ERROR_STOP
         try:
             response = auth_info.make_call("GET", url)
@@ -243,7 +251,9 @@ class QRadarClient(object):
         :param opts: app.config options dictionary
         :param function_opts: function parameters from app.config
         """
-        self.auth_info.create(host, username, password, token, cafile, opts, function_opts)
+        auth_info = AuthInfo.get_authInfo()
+        auth_info.create(host, username, password, token,
+                         cafile, opts, function_opts)
 
     def check_openssl(self):
         """
@@ -320,7 +330,8 @@ class QRadarClient(object):
         :return: list of reference set names
         """
         auth_info = AuthInfo.get_authInfo()
-        url = u"{}{}".format(auth_info.api_url, qradar_constants.REFERENCE_SET_URL)
+        url = u"{}{}".format(
+            auth_info.api_url, qradar_constants.REFERENCE_SET_URL)
         ret = []
         try:
             response = auth_info.make_call("GET", url)
@@ -342,12 +353,13 @@ class QRadarClient(object):
             ret = response.json()
         except Exception as e:
             LOG.error(str(e))
-            raise RequestError(url, "get_all_ref_set call failed with exception {}".format(str(e)))
+            raise RequestError(
+                url, "get_all_ref_set call failed with exception {}".format(str(e)))
 
         return ret
 
     @staticmethod
-    def find_all_ref_set_contains(value, type=None):
+    def find_all_ref_set_contains(value):
         """
 
         :param value:
@@ -359,7 +371,8 @@ class QRadarClient(object):
 
         ret = []
         for r_set in ref_sets:
-            LOG.info(u"Looking for {} in reference set {}".format(value, r_set["name"]))
+            LOG.info(u"Looking for {} in reference set {}".format(
+                value, r_set["name"]))
             element = QRadarClient.search_ref_set(r_set["name"], value)
             if element["found"] == "True":
                 ret.append(element["content"])
@@ -378,7 +391,8 @@ class QRadarClient(object):
 
         ref_set_link = quote(ref_set, '')
 
-        url = u"{}{}/{}".format(auth_info.api_url, qradar_constants.REFERENCE_SET_URL, ref_set_link)
+        url = u"{}{}/{}".format(auth_info.api_url,
+                                qradar_constants.REFERENCE_SET_URL, ref_set_link)
 
         ret = None
         try:
@@ -391,7 +405,7 @@ class QRadarClient(object):
             response = auth_info.make_call("GET", url)
 
             # Sample return
-            #{"creation_time":1523020929069,"timeout_type":"FIRST_SEEN","number_of_elements":2,
+            # {"creation_time":1523020929069,"timeout_type":"FIRST_SEEN","number_of_elements":2,
             # "data":[{"last_seen":1523020984874,"first_seen":1523020984874,"source":"admin","value":"8.8.8.8"}],
             # "name":"Sample Suspect IPs","element_type":"IP"}
             found = "False"
@@ -402,7 +416,8 @@ class QRadarClient(object):
                 # Use dictionary comprehension on ret_data to determine if `filter` is assigned to the "value" in
                 # any of the dictionaries items in the ret_data list
                 # `element_found` will be None if the `filter` is not found in the data
-                element_found = next((item for item in ret_data if item["value"].encode('utf-8') == filter), None)
+                element_found = next(
+                    (item for item in ret_data if item["value"].encode('utf-8') == filter), None)
                 if element_found:
                     found = "True"
 
@@ -412,7 +427,8 @@ class QRadarClient(object):
 
         except Exception as e:
             LOG.error(str(e))
-            raise RequestError(url, "search_ref_set call failed with exception {}".format(str(e)))
+            raise RequestError(
+                url, "search_ref_set call failed with exception {}".format(str(e)))
 
         return ret
 
@@ -426,7 +442,8 @@ class QRadarClient(object):
         """
         auth_info = AuthInfo.get_authInfo()
         ref_set_link = quote(ref_set, '')
-        url = "{}{}/{}".format(auth_info.api_url, qradar_constants.REFERENCE_SET_URL, ref_set_link)
+        url = "{}{}/{}".format(auth_info.api_url,
+                               qradar_constants.REFERENCE_SET_URL, ref_set_link)
 
         ret = None
         try:
@@ -438,7 +455,8 @@ class QRadarClient(object):
 
         except Exception as e:
             LOG.error(str(e))
-            raise RequestError(url, "add_ref_element call failed with exception {}".format(str(e)))
+            raise RequestError(
+                url, "add_ref_element call failed with exception {}".format(str(e)))
 
         return ret
 
@@ -465,7 +483,8 @@ class QRadarClient(object):
 
         except Exception as e:
             LOG.error(str(e))
-            raise DeleteError(url, "delete_ref_element failed with exception {}".format(str(e)))
+            raise DeleteError(
+                url, "delete_ref_element failed with exception {}".format(str(e)))
 
         return ret
 

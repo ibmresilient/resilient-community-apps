@@ -2,18 +2,34 @@
 # -*- coding: utf-8 -*-
 
 from setuptools import setup, find_packages
+import glob
+import ntpath
+
+def get_module_name(module_path):
+    """
+    Return the module name of the module path
+    """
+    return ntpath.split(module_path)[1].split(".")[0]
+
+def snake_to_camel(word):
+    """
+    Convert a word from snake_case to CamelCase
+    """
+    return ''.join(x.capitalize() or '_' for x in word.split('_'))
 
 setup(
     name='fn_datatable_utils',
-    version='1.0.0',
+    version='1.1.0',
     license='MIT',
     author='Resilient Labs',
     author_email='resil.labs@gmail.com',
     url='http://ibm.biz/resilientcommunity',
-    description="Resilient Circuits Components for 'fn_datatable_utils'",
-    long_description="Resilient Circuits Components for 'fn_datatable_utils'",
+    description="Functions manipulate data in a Datatable",
+    long_description="This package contains 6 functions that help you manipulate IBM Resilient Data Tables: Get Row,  Get Rows, Update Row, Delete Row, Delete Rows and Convert CSV Data to a datatable.",
     install_requires=[
-        'resilient_circuits>=31.0.0'
+        'resilient_circuits>=33.0.0',
+        'resilient-lib>=32.0.140',
+        'cachetools'
     ],
     packages=find_packages(),
     include_package_data=True,
@@ -23,10 +39,7 @@ setup(
     ],
     entry_points={
         "resilient.circuits.components": [
-            "DtUtilsGetRowFunctionComponent = fn_datatable_utils.components.dt_utils_get_row:FunctionComponent",
-            "DtUtilsUpdateRowFunctionComponent = fn_datatable_utils.components.dt_utils_update_row:FunctionComponent",
-            "DtUtilsDeleteRowFunctionComponent = fn_datatable_utils.components.dt_utils_delete_row:FunctionComponent"
-
+            "{}FunctionComponent = fn_datatable_utils.components.{}:FunctionComponent".format(snake_to_camel(get_module_name(filename)), get_module_name(filename)) for filename in glob.glob("./fn_datatable_utils/components/[a-zA-Z]*.py")
         ],
         "resilient.circuits.configsection": ["gen_config = fn_datatable_utils.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_datatable_utils.util.customize:customization_data"],
