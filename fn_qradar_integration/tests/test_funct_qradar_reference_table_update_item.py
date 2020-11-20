@@ -90,6 +90,6 @@ class TestQradarReferenceTableUpdateItem:
         """ Test calling with sample values for the parameters """
 
         with patch('fn_qradar_integration.lib.reference_data.ReferenceTableFacade.ReferenceTableFacade.update_ref_element') as patched_add_element:
-            patched_add_element.return_value = MOCK_UPDATE_RESPONSE
+            patched_add_element.return_value = expected_results
             results = call_qradar_reference_table_update_item_function(circuits_app, mock_inputs)
             assert(expected_results == results['content'])

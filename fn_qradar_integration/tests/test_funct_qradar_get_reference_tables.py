@@ -94,12 +94,12 @@ class TestQradarGetReferenceTables:
     mock_inputs_1 = {
     }
 
-    expected_results_1 = {"value": "xyz"}
+    expected_results_1 = MOCK_GET_TABLE_RESPONSE
 
     mock_inputs_2 = {
     }
 
-    expected_results_2 = {"value": "xyz"}
+    expected_results_2 = MOCK_GET_TABLE_RESPONSE
 
     @pytest.mark.parametrize("mock_inputs, expected_results", [
         (mock_inputs_1, expected_results_1),
@@ -125,7 +125,7 @@ class TestQradarGetReferenceTables:
         """ Test calling with sample values for the parameters """
 
         with patch('fn_qradar_integration.lib.reference_data.ReferenceTableFacade.ReferenceTableFacade.get_all_reference_tables') as patched_add_element:
-            patched_add_element.return_value = MOCK_GET_TABLE_RESPONSE
+            patched_add_element.return_value = expected_results
             results = call_qradar_get_reference_tables_function(circuits_app, mock_inputs)
             assert results
             assert results['content'] # Ensure we have some results
