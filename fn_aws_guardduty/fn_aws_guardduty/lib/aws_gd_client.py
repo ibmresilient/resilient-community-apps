@@ -103,6 +103,25 @@ class AwsGdClient():
 
                 result.extend(response[result_type])
 
+        except self.gd.exceptions.InternalServerErrorException as intserv_ex:
+            LOG.info("ERROR with %s and args: '%s', Got exception: %s",
+                     op, kwargs, "InternalServerErrorException")
+            raise intserv_ex
+
+        except self.gd.exceptions.BadRequestException as badreq_ex:
+            LOG.info("ERROR with %s and args: '%s', Got exception: %s",
+                     op, kwargs, "BadRequestException")
+            raise badreq_ex
+
+        except self.gd.exceptions.ClientError as invalid_ex:
+
+            if "ValidationError" in invalid_ex.__repr__():
+
+                LOG.info("ERROR with %s and args: '%s', Got exception: %s",
+                         op, kwargs, "ValidationErrorException")
+
+            raise invalid_ex
+
         except Exception as int_ex:
             LOG.error("ERROR in paginator with operation: '%s' and args: '%s', Got exception: %s",
                       op, kwargs, int_ex.__repr__())
@@ -144,20 +163,27 @@ class AwsGdClient():
             if not result_type:
                 result_type = self._get_type_from_response(response, SUPPORTED_GET_TYPES)
 
-        except self.gd.exceptions.NoSuchEntityException:
-            # If Return empty dict if the entity doesn't exist for the user.
-            return {"Status": "NoSuchEntity"}
+        except self.gd.exceptions.InternalServerErrorException as intserv_ex:
+            LOG.info("ERROR with %s and args: '%s', Got exception: %s",
+                     aws_gd_op.__name__, kwargs, "InternalServerErrorException")
+            raise intserv_ex
+
+        except self.gd.exceptions.BadRequestException as badreq_ex:
+            LOG.info("ERROR with %s and args: '%s', Got exception: %s",
+                     aws_gd_op.__name__, kwargs, "BadRequestException")
+            raise badreq_ex
 
         except self.gd.exceptions.ClientError as invalid_ex:
 
             if "ValidationError" in invalid_ex.__repr__():
-                return {"Status": "ValidationError"}
 
-            LOG.info("ERROR with %s and args: '%s', Got exception: %s",
-                     aws_gd_op.__name__, kwargs, "ValidationErrorException")
+                LOG.info("ERROR with %s and args: '%s', Got exception: %s",
+                         aws_gd_op.__name__, kwargs, "ValidationErrorException")
+
             raise invalid_ex
 
         except Exception as int_ex:
+
             LOG.error("ERROR with %s and args: '%s', Got exception: %s",
                       aws_gd_op.__name__, kwargs, int_ex.__repr__())
             raise int_ex
