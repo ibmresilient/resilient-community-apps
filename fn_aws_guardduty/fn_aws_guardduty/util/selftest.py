@@ -6,6 +6,7 @@ Usage: resilient-circuits selftest -l fn_aws_guardduty
 """
 
 import logging
+from fn_aws_guardduty.lib.aws_gd_client import AwsGdClient
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
@@ -14,12 +15,17 @@ log.addHandler(logging.StreamHandler())
 
 def selftest_function(opts):
     """
-    Placeholder for selftest function. An example use would be to test package api connectivity.
-    Suggested return values are be unimplemented, success, or failure.
+    Simple test to verify AWS GuardDuty connectivity.
     """
-    app_configs = opts.get("fn_aws_guardduty", {})
+    options = opts.get("fn_aws_guardduty", {})
+    try:
+        aws_gd = AwsGdClient(opts, options)
+        # Get the DetectorId for the specified AWS Region.
+        detector = aws_gd.get("list_detectors")
+        if isinstance(detector, list):
+            return {"state": "success"}
+        else:
+            return {"state": "failure"}
 
-    return {
-        "state": "unimplemented",
-        "reason": None
-    }
+    except Exception as e:
+        return {"state": "failure", "status_code": e}
