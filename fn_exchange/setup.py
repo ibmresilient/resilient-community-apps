@@ -5,11 +5,11 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_exchange',
-    display_name='Microsoft Exchange for IBM Resilient',
     version='1.0.1',
     license='MIT',
     author='IBM Resilient',
     author_email='support@resilientsystems.com',
+    url='https://ibm.com/mysupport',
     description="Resilient Circuits Components for 'fn_exchange'",
     long_description="""This IBM Resilient Function package provides functions that can be used to access Microsoft 
         Exchange email and meeting capabilities. The package provided has the following capabilities: Create a meeting 
