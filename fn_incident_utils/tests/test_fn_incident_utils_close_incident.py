@@ -19,7 +19,7 @@ config_data = get_config_data(PACKAGE_NAME)
 resilient_mock = IncidentMock
 
 
-def call_incident_utils_close_incident_function(circuits, function_params, timeout=10):
+def call_incident_utils_close_incident_function(circuits, function_params, timeout=20):
     # Fire a message to the function
     evt = SubmitTestFunction("incident_utils_close_incident", function_params)
     circuits.manager.fire(evt)
@@ -44,16 +44,15 @@ class TestIncidentUtilsCloseIncident:
     }
 
     output = {
-        "id": 123,
-        "resolution_summary": "<div class=\"rte\"><div>resolved</div></div>",
-        "resolution_id": 9,
-        "plan_status": "C",
-        "vers": 5
+        "success": True,
+        "inputs": {
+            "incident_id": 123,
+            "close_fields": {"resolution_id": 9, "resolution_summary": "resolved"}
+        }
     }
 
     @pytest.mark.parametrize("inputs, expected_results", [(inputs, output)])
     def test_success(self, circuits_app, inputs, expected_results):
         """ Test calling with sample values for the parameters """
-
         results = call_incident_utils_close_incident_function(circuits_app, inputs)
-        assert(expected_results == results)
+        assert(expected_results == results['content'])
