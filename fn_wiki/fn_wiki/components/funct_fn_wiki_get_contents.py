@@ -58,8 +58,6 @@ class FunctionComponent(ResilientComponent):
                 reason = u"Unable to find wiki by title or id: %s".format(wiki_title_or_id)
                 yield StatusMessage(reason)
 
-            #yield StatusMessage("Finished 'fn_get_wiki_contents' that was running in workflow '{0}'".format(wf_instance_id))
-
             results = rp.done(False if reason else True, content, reason=reason)
 
             # Produce a FunctionResult with the results

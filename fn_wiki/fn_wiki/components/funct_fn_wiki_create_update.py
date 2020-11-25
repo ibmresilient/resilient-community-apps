@@ -74,8 +74,6 @@ class FunctionComponent(ResilientComponent):
                 reason = u"Unable to find page with title/id: {}".format(wiki_title_or_id)
                 result_content = None
 
-            #yield StatusMessage("Finished 'fn_wiki_create_update' that was running in workflow '{0}'".format(wf_instance_id))
-
             results = rp.done(False if reason else True, result_content, reason=reason)
 
             # Produce a FunctionResult with the results

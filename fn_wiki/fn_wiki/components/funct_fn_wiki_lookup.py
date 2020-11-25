@@ -44,7 +44,7 @@ class FunctionComponent(ResilientComponent):
                 # Handle no matches
                 if not matching_wiki_content:
                     reason = u"No Matches Found for {} in the Wiki {}".format(wiki_search_term, 
-                                                                            wiki_title_or_id)
+                                                                              wiki_title_or_id)
                     yield StatusMessage(reason)
 
                 yield StatusMessage("Found {} matching entries".format(len(matching_wiki_content)))
