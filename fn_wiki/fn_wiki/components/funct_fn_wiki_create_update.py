@@ -50,18 +50,18 @@ class FunctionComponent(ResilientComponent):
             helper = WikiHelper(self.rest_client())
             rp = ResultPayload(PACKAGE_NAME, **kwargs)
 
-            content = helper.get_wiki_contents(wiki_title_or_id)
+            content = helper.get_wiki_contents(wiki_title_or_id, wiki_parent_title_or_id)
             reason = None
             result_content = None
 
             # update if content found
             if content:
-                result_content = helper.update_wiki(content['id'], content['title'], wiki_body)
+                result_content = helper.update_wiki(content['id'], content['title'], content['parent'], wiki_body)
             elif wiki_create_if_missing:
                 # determine if the parent exists
                 parent_id = None
                 if wiki_parent_title_or_id:
-                    parent_content = helper.get_wiki_contents(wiki_parent_title_or_id)
+                    parent_content = helper.get_wiki_contents(wiki_parent_title_or_id, None)
                     if not parent_content:
                         reason = u"Unable to find parent page: '{}'".format(wiki_parent_title_or_id)
                         yield StatusMessage(reason)

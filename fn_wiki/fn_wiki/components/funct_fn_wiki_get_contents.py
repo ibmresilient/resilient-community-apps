@@ -37,10 +37,12 @@ class FunctionComponent(ResilientComponent):
             # Get the function parameters:
             wiki_contents_as_json = bool(kwargs.get("wiki_contents_as_json", False))  # boolean
             wiki_title_or_id = kwargs.get("wiki_title_or_id")  # text
+            wiki_parent_title_or_id = kwargs.get("wiki_parent_title_or_id")  # text
 
             log = logging.getLogger(__name__)
             log.info("wiki_contents_as_json: %s", wiki_contents_as_json)
             log.info(u"wiki_title_or_id: %s", wiki_title_or_id)
+            log.info(u"wiki_parent_title_or_id: %s", wiki_parent_title_or_id)
 
             ##############################################
             # PUT YOUR FUNCTION IMPLEMENTATION CODE HERE #
@@ -49,13 +51,13 @@ class FunctionComponent(ResilientComponent):
             helper = WikiHelper(self.rest_client())
 
             # find the wiki page
-            content = helper.get_wiki_contents(wiki_title_or_id)
+            content = helper.get_wiki_contents(wiki_title_or_id, wiki_parent_title_or_id)
 
             reason = None
             if content and wiki_contents_as_json:
                 content['json'] = json.loads(content['text'])
-            else:
-                reason = u"Unable to find wiki by title or id: %s".format(wiki_title_or_id)
+            elif not content:
+                reason = u"Unable to find wiki by title or id: {}".format(wiki_title_or_id)
                 yield StatusMessage(reason)
 
             results = rp.done(False if reason else True, content, reason=reason)

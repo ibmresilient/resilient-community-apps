@@ -20,10 +20,12 @@ class FunctionComponent(ResilientComponent):
         try:
             # Get the function parameters:
             wiki_title_or_id = kwargs.get("wiki_title_or_id")  # text
+            wiki_parent_title_or_id = kwargs.get("wiki_parent_title_or_id")  # text
             wiki_search_term = kwargs.get("wiki_search_term")  # text
 
             log = logging.getLogger(__name__)
             log.info("wiki_title_or_id: %s", wiki_title_or_id)
+            log.info("wiki_parent_title_or_id: %s", wiki_parent_title_or_id)
             log.info(u"wiki_search_term: %s", wiki_search_term)
 
             # Setup Resilient rest client
@@ -31,7 +33,7 @@ class FunctionComponent(ResilientComponent):
             rp = ResultPayload(PACKAGE_NAME, **kwargs)
             reason = matching_wiki_content = None
 
-            content = helper.get_wiki_contents(wiki_title_or_id)
+            content = helper.get_wiki_contents(wiki_title_or_id, wiki_parent_title_or_id)
 
             if not content:
                 reason = u"Can't find the wiki with title or id: '{}'".format(wiki_title_or_id)

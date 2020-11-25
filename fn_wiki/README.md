@@ -102,6 +102,7 @@ Return the contents of a wiki page based on the page's title or id. Optionally c
 | ---- | :--: | :------: | ------- | ------- |
 | `wiki_contents_as_json` | `boolean` | No | `-` | - |
 | `wiki_title_or_id` | `text` | Yes | `-` | Either wiki page title or numeric id |
+| `wiki_parent_title_or_id` | `text` | No | `-` | Either wiki parent page title or numeric id. Use to ensure you're referencing the correct child page. None will look for any page title that matches. |
 
 </p>
 </details>
@@ -214,6 +215,7 @@ Search a wiki page based on a search term and return the matching lines. The sea
 | ---- | :--: | :------: | ------- | ------- |
 | `wiki_search_term` | `text` | No | `-` | text or regular expression format |
 | `wiki_title_or_id` | `text` | Yes | `-` | Either wiki page title or numeric id |
+| `wiki_parent_title_or_id` | `text` | No | `-` | Either wiki parent page title or numeric id. Use to ensure you're referencing the correct child page. None will look for any page title that matches. |
 
 </p>
 </details>
