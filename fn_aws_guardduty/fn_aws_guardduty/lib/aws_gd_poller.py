@@ -231,10 +231,11 @@ class AwsGdPoller():
         :param finding_severity: GuardDuty finding severity
         :return resilient_severity: Resilient severity string
         """
-        if 1.0 >= finding_severity <= 3.9:
+        resilient_severity = None
+        if 1.0 <= finding_severity <= 3.9:
             resilient_severity = "Low"
-        elif 4.0 >= finding_severity >= 6.9:
+        elif 4.0 <= finding_severity <= 6.9:
             resilient_severity = "Medium"
-        elif 7.0 >= finding_severity <= 8.9:
+        elif 7.0 <= finding_severity <= 8.9:
             resilient_severity = "High"
         return resilient_severity
