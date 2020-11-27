@@ -65,24 +65,6 @@ class AwsGdClient():
         return client
 
 
-    def _update_result(self, result, result_type):
-        """ Make any necessary conversions and additions to AWS GuardDuty result.
-
-        :param result: Dict or list of dicts from AWS GuardDuty response.
-        :param result_type: The type of result e.g. "Findings".
-        :return: Updated result.
-
-        """
-        if isinstance(result, list):
-            for entry in result:
-                if isinstance(entry, dict):
-                    entry = self._datetime_to_str(entry)
-        elif isinstance(result, dict):
-            result = self._datetime_to_str(result)
-        else:
-            LOG.error("ERROR with unexpected result type %s for AWS GuardDuty query", type(result))
-
-        return result
 
     def paginate(self, op=None, results_filter=None, return_filtered=False, **kwargs):
         """ Get the result using get_paginator format for certain AWS GuardDuty queries.
@@ -127,10 +109,6 @@ class AwsGdClient():
                       op, kwargs, int_ex.__repr__())
             LOG.info(int_ex)
             raise int_ex
-
-        # Make updates to the raw result.
-        if result:
-            result = self._update_result(result, result_type)
 
         return result
 
@@ -190,8 +168,7 @@ class AwsGdClient():
 
         result = response[result_type]
 
-        return self._update_result(result, result_type)
-
+        return result
 
     def post(self, op, **kwargs):
         """ Execute a "post" type AWS GuardDuty  operation which results in an update or change
@@ -245,15 +222,3 @@ class AwsGdClient():
             raise ValueError("No supported type for integration found in AWS GuardDuty response")
 
         return result_type
-
-    @staticmethod
-    def _datetime_to_str(result_entry):
-        """ Convert datetime objects returned in result e.g. "CreateDate" to a string.
-
-        :param result_entry: Result entry dict from AWS GuardDuty response.
-        :return result_entry: Converted result entry.
-        """
-        for key in result_entry:
-            if isinstance(result_entry[key], datetime):
-                result_entry[key] = result_entry[key].strftime("%Y-%m-%d %H:%M:%S")
-        return result_entry
