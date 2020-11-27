@@ -25,6 +25,8 @@ CUSTOM_FIELDS_MAP = {
         "DetectorId": "aws_guardduty_detector_id",
     }
 }
+# Multiplier to convert minutes to seconds.
+WAIT_MULTIPLIER = 60
 
 class AwsGdPoller():
     """Component that polls for new findings from AWS GuardDuty"""
@@ -78,9 +80,10 @@ class AwsGdPoller():
             # Break out of loop before sleep if stop thread flag set.
             if config.STOP_THREAD:
                 break
-
-            # Amount of time (seconds) to wait to check cases again.
-            time.sleep(int(self.polling_interval) * 60)
+            # Use a timeout value of polling_interval (in secs) * WAIT_MULTIPLIER + TIMEOUT_WAIT secs to wait for
+            # all threads to end.
+            # Amount of time (seconds) * WAIT_MULTIPLIER to wait to check cases again.
+            time.sleep(int(self.polling_interval) * WAIT_MULTIPLIER)
 
 
     def make_incident_name(self, finding):

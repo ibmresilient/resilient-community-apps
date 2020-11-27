@@ -14,6 +14,12 @@ import fn_aws_guardduty.util.config as config
 
 
 LOG = logging.getLogger(__name__)
+# Default polling interval in minutes.
+POLLING_INTERVAL_DEFAULT = 10
+# Multiplier to convert minutes to seconds.
+TIMEOUT_MULTIPLIER = 60
+# Extra padding in secs to wait for thread to exit.
+TIMEOUT_WAIT = 10
 
 class FuncAwsGuarddutyPoller(ResilientComponent):
     """Component that polls for new findings from AWS GuardDuty"""
@@ -40,12 +46,13 @@ class FuncAwsGuarddutyPoller(ResilientComponent):
     def poller_setup(self):
         """Instantiate poller object and setup polling thread"""
 
-        # Amount of time (seconds) to wait to check findings again, defaults to 10 mins if not set
-        polling_interval = int(self.options.get("aws_gd_polling_interval", 10))
+        # Amount of time (seconds) to wait to check findings again, use default if not set.
+        polling_interval = int(self.options.get("aws_gd_polling_interval", POLLING_INTERVAL_DEFAULT))
         # Instantiate the poller object.
         aws_gd_poller = AwsGdPoller(self.opts, self.options, self.rest_client, polling_interval)
-        # Use a timeout value of polling_interval (in secs) + 10 secs to wait for all threads to end.
-        thread_timeout = (polling_interval * 60) + 10
+        # Use a timeout value of polling_interval (in secs) * WAIT_MULTIPLIER + TIMEOUT_WAIT secs to wait for
+        # all threads to end.
+        thread_timeout = (polling_interval * TIMEOUT_MULTIPLIER) + TIMEOUT_WAIT
 
         # Wait for threads to stop within thread timeout interval.
         stop_time = time.time() + thread_timeout
