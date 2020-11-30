@@ -130,7 +130,16 @@ class FunctionComponent(ResilientComponent):
                             yield StatusMessage(u"Attempting to add {0} to Incident: {1}".format(filename, fn_inputs.get("incident_id")))
                             
                             att_data=attachment.get("payload")
-                            decoded_att_data=base64.b64decode(att_data)                                                                                                                   
+                            
+                            try:
+                              decoded_att_data=base64.b64decode(att_data)
+                            except ValueError:
+                              yield StatusMessage(u"ERROR Uploading Attachment {0}: Invalid Content".format(filename))
+                              continue
+                            except Exception as Err:
+                              yield StatusMessage(u"ERROR Uploading Attachment {0}: {1}".format(filename, Err))
+                              continue
+                            
                             # Write the attachment.payload to a temp file
                             path_tmp_file, path_tmp_dir = write_to_tmp_file(data=s_to_b(decoded_att_data),
                                                                             tmp_file_name=filename,
