@@ -1,4 +1,8 @@
+include apikey_permissions.txt
+include Dockerfile
+include entrypoint.sh
 include README.md
+include icons/*
 include fn_exchange/util/*
 include fn_exchange/LICENSE
 include fn_exchange/doc/*
