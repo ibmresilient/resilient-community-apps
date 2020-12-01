@@ -14,7 +14,7 @@ read_all_incidents
 #delete_all_incidents
 #edit_all_incidents_members
 #edit_all_incidents_owner
-#edit_all_incidents_status
+edit_all_incidents_status
 #
 ## incident fields, artifacts, attachments, milestones, datatables
 edit_all_incidents_fields

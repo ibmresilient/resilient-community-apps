@@ -31,7 +31,7 @@ setup(
     long_description="""This package contains a function that enable you to close an Incident: Close Incident""",
     install_requires=[
         "resilient_circuits>=30.0.0",
-        "resilient-lib>38.0.76"
+        "resilient-lib>=39.0.77.dev0"
     ],
     packages=find_packages(),
     include_package_data=True,
