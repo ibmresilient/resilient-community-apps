@@ -32,7 +32,7 @@
 -->
 | Version | Date | Notes |
 | ------: | ---: | ----: |
-| v1.0.1 | November 2020 | Added App Host support, Added proxy support. |
+| v1.0.1 | December 2020 | Added App Host support, Added proxy support. |
 | v1.0.0 | August 2018 | Initial Release. |
 
 ---
@@ -63,25 +63,56 @@ The functions provided have the following capabilities:
 <!--
   List any Requirements 
 -->
-* Resilient version 31 or later
-* To setup up an App Host see:  [ibm.biz/res-app-host-setup](https://ibm.biz/res-app-host-setup)
-* An Integration Server running `resilient_circuits>=30.0.0`
-  * To set up an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
-  * If using API Keys, minimum required permissions are:
-    | Name | Permissions |
-    | ---- | ----------- |
-    | Org Data | Read, Edit |
-* Proxy supported: Yes
+This app supports the IBM Resilient SOAR Platform and the IBM Cloud Pak for Security.
+
+### Resilient platform
+The Resilient platform supports two app deployment mechanisms, App Host and integration server.
+
+If deploying to a Resilient platform with an App Host, the requirements are:
+* Resilient platform >= `37.1`.
+* The app is in a container-based format (available from the AppExchange as a `zip` file).
+
+If deploying to a Resilient platform with an integration server, the requirements are:
+* Resilient platform >= `31.0.4035`.
+* The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
+* Integration server is running `resilient_circuits>=30.0.0`.
+* If using an API key account, make sure the account provides the following minimum permissions: 
+  | Name | Permissions |
+  | ---- | ----------- |
+  | Org Data | Read, Edit |
+
+The following Resilient platform guides provide additional information: 
+* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
+* _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
+* _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
+
+The above guides are available on the IBM Knowledge Center at [ibm.biz/resilient-docs](https://ibm.biz/resilient-docs). On this web page, select your Resilient platform version. On the follow-on page, you can find the _App Host Deployment Guide_ or _Integration Server Guide_ by expanding **Resilient Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
+
+### Cloud Pak for Security
+If you are deploying to IBM Cloud Pak for Security, the requirements are:
+* IBM Cloud Pak for Security >= 1.4.
+* Cloud Pak is configured with an App Host.
+* The app is in a container-based format (available from the AppExchange as a `zip` file).
+
+The following Cloud Pak guides provide additional information: 
+* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
+* _System Administrator Guide_: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security Knowledge Center table of contents, select Case Management and Orchestration & Automation > **System administrator**.
+
+These guides are available on the IBM Knowledge Center at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs). From this web page, select your IBM Cloud Pak for Security version. From the version-specific Knowledge Center page, select Case Management and Orchestration & Automation.
+
+### Proxy Server
+The app supports a proxy server.
 
 ---
 
 ## Installation
-* To install or uninstall an App using the App Host see [ibm.biz/res-install-app](https://ibm.biz/res-install-app)
 
-* To install or uninstall an Integration using the Integration Server see the [ibm.biz/res-install-int](https://ibm.biz/res-install-int)
+### Install
+* To install or uninstall an App or Integration on the _Resilient platform_, see the documentation at [ibm.biz/resilient-docs](https://ibm.biz/resilient-docs).
+* To install or uninstall an App on _IBM Cloud Pak for Security_, see the documentation at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs) and follow the instructions above to navigate to Orchestration and Automation.
 
 ### App Configuration
-The following table describes the settings you need to configure in the app.config file. If using App Host, see the Resilient System Administrator Guide. If using the integration server, see the Integration Server Guide.
+The following table provides the settings you need to configure the app. These settings are made in the app.config file. See the documentation discussed in the Requirements section for the procedure.
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
 | **verify_cert** | Yes | `True or False` | *Use a CA cert for access to an Exchange server.* |
@@ -92,17 +123,6 @@ The following table describes the settings you need to configure in the app.conf
 | **default_folder_path** | Yes | `Top of Information Store/Inbox` | *Some folder path after root Multiple folderpaths must be separated by commas.*  |
 | **http_proxy** | Yes | `https://your.proxy.com:8080` | *Optional setting for an http proxy if required.*  |
 | **https_proxy** | Yes | `http://your.proxy.com:8080` | *Optional setting for an https proxy if required.*  |
-
----
-
-## Uninstall
-* SSH into your Integration Server.
-* **Uninstall** the package:
-  ```
-  $ pip uninstall fn-exchange
-  ```
-* Open the config file, scroll to the [fn_exchange] section and remove the section or prefix `#` to comment out the section.
-* **Save** and **Close** the app.config file.
 
 ---
 
@@ -177,9 +197,8 @@ exchange_start_date
 ---        
 
 ## Troubleshooting & Support
-If using the app with an App Host, see the Resilient System Administrator Guide and the App Host Deployment Guide for troubleshooting procedures. You can find these guides on the [IBM Knowledge Center](https://www.ibm.com/support/knowledgecenter/SSBRUQ), where you can select which version of the Resilient platform you are using.
-
-If using the app with an integration server, see the [Integration Server Guide](https://ibm.biz/res-int-server-guide)
+Refer to the documentation listed in the Requirements section for troubleshooting information.
 
 ### For Support
-This is an IBM Supported app. Please search https://ibm.com/mysupport for assistance.
+This is an IBM supported app. Please search https://ibm.com/mysupport for assistance.
+
