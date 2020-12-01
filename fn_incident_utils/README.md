@@ -41,7 +41,7 @@
 -->
 **Close Incident Function for IBM Resilient**
 
- ![screenshot: main](./doc/screenshots/main.png)
+ ![screenshot: main](./doc/screenshots/screenshot_1.png)
 
 Close Incident Function takes an incident_id and a JSON String of field_name and field_value pairs to close an Incident.
 

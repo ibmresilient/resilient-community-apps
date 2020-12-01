@@ -16,7 +16,7 @@
 
 ## Table of Contents
 - [Key Features](#key-features)
-- [Function - Incident Utils: Close an Incident](#function---incident-utils-close-an-incident)
+- [Function - Incident Utils: Close Incident](#function---incident-utils-close-incident)
 - [Rules](#rules)
 
 ---
@@ -25,23 +25,21 @@
 <!--
   List the Key Features of the Integration
 -->
-* Key Feature 1
-* Key Feature 2
-* Key Feature 3
+* Close an Incident
 
 ---
 
-## Function - Incident Utils: Close an Incident
-Function that takes a JSON String of field and value pairs to close an Incident.
+## Function - Incident Utils: Close Incident
+Function that takes an incident_id and a JSON String of field_name and field_value pairs to close an Incident.
 
- ![screenshot: fn-incident-utils-close-an-incident ](./screenshots/fn-incident-utils-close-an-incident.png)
+ ![screenshot: fn-incident-utils-close-incident ](./screenshots/screenshot_1.png)
 
 <details><summary>Inputs:</summary>
 <p>
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `close_fields` | `text` | No | `-` | A JSON String of the fields required to close an Incident e.g.: "{'field1':'value1','field2':'value2'}" |
+| `close_fields` | `text` | No | `-` | A JSON String of the fields required to close an Incident e.g.: {'field1':'value1','field2':'value2'} |
 | `incident_id` | `number` | Yes | `-` | - |
 
 </p>
@@ -51,11 +49,7 @@ Function that takes a JSON String of field and value pairs to close an Incident.
 <p>
 
 ```python
-results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
-}
+results = {'version': '1.0', 'success': True, 'reason': None, 'content': {'success': True, 'title': None, 'message': None, 'hints': []}, 'raw': '{"success": true, "title": null, "message": null, "hints": []}', 'inputs': {'close_fields': '{"resolution_id":9, "resolution_summary":"resolved"}', 'incident_id': 2111}, 'metrics': {'version': '1.0', 'package': 'fn-incident-utils', 'package_version': '1.0.0', 'host': 'User-MacBook-Pro.local', 'execution_time_ms': 890, 'timestamp': '2020-12-01 12:38:27'}}
 ```
 
 </p>
@@ -67,8 +61,9 @@ results = {
   <p>
 
   ```python
-  inputs.incident_id = incident_id
-inputs.close_fields = rule.properties.incident_utils_close_fields
+  inputs.incident_id = incident.id
+iu_close_fields = rule.properties.incident_utils_close_fields.content
+inputs.close_fields = u"{}".format(iu_close_fields)
   ```
 
   </p>
@@ -78,7 +73,9 @@ inputs.close_fields = rule.properties.incident_utils_close_fields
   <p>
 
   ```python
-  None
+  note_text = "Result from Example: Close Incident on Incident {0}: <strong>{1}</strong>".format(results.inputs['incident_id'], \
+"success" if results.success else "failure.<br>Reason: {}".format(results.reason))
+incident.addNote(helper.createRichText(note_text))
   ```
 
   </p>
@@ -94,7 +91,7 @@ inputs.close_fields = rule.properties.incident_utils_close_fields
 ## Rules
 | Rule Name | Object | Workflow Triggered |
 | --------- | ------ | ------------------ |
-| Example: Close an Incident | incident | `example_close_an_incident` |
+| Example: Close Incident | incident | `example_close_incident` |
 
 ---
 
