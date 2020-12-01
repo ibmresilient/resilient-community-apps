@@ -39,7 +39,7 @@ Function that takes an incident_id and a JSON String of field_name and field_val
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `close_fields` | `text` | No | `-` | A JSON String of the fields required to close an Incident e.g.: {'field1':'value1','field2':'value2'} |
+| `close_fields` | `text` | No | `-` | A JSON String of the fields required to close an Incident e.g.: {'resolution_id':'Resolved','resolution_summary':'closing'} |
 | `incident_id` | `number` | Yes | `-` | - |
 
 </p>
@@ -49,7 +49,7 @@ Function that takes an incident_id and a JSON String of field_name and field_val
 <p>
 
 ```python
-results = {'version': '1.0', 'success': True, 'reason': None, 'content': {'success': True, 'title': None, 'message': None, 'hints': []}, 'raw': '{"success": true, "title": null, "message": null, "hints": []}', 'inputs': {'close_fields': '{"resolution_id":9, "resolution_summary":"resolved"}', 'incident_id': 2111}, 'metrics': {'version': '1.0', 'package': 'fn-incident-utils', 'package_version': '1.0.0', 'host': 'User-MacBook-Pro.local', 'execution_time_ms': 890, 'timestamp': '2020-12-01 12:38:27'}}
+results = {'version': '1.0', 'success': True, 'reason': None, 'content': {'success': True, 'title': None, 'message': None, 'hints': []}, 'raw': '{"success": true, "title": null, "message": null, "hints": []}', 'inputs': {'close_fields': '{"resolution_id":"Resolved", "resolution_summary":"closing"}', 'incident_id': 2112}, 'metrics': {'version': '1.0', 'package': 'fn-incident-utils', 'package_version': '1.0.0', 'host': 'Users-MacBook-Pro.local', 'execution_time_ms': 1021, 'timestamp': '2020-12-01 15:25:08'}}
 ```
 
 </p>
