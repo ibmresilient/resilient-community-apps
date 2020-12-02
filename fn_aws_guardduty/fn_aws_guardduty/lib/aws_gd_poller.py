@@ -9,22 +9,10 @@ import time
 from fn_aws_guardduty.lib.aws_gd_client import AwsGdClient
 from resilient import SimpleHTTPException
 import fn_aws_guardduty.util.config as config
-
+from fn_aws_guardduty.lib.helpers import CUSTOM_FIELDS_MAP
 
 LOG = logging.getLogger(__name__)
-# Map GuardDuty finding fields to Resilient Incident custom fields.
-CUSTOM_FIELDS_MAP = {
-    "Id": "aws_guardduty_finding_id",
-    "Arn": "aws_guardduty_finding_arn",
-    "Type": "aws_guardduty_finding_type",
-    "Region": "aws_guardduty_region",
-    "Resource": {
-        "ResourceType": "aws_guardduty_resource_type"
-    },
-    "Service": {
-        "DetectorId": "aws_guardduty_detector_id",
-    }
-}
+
 # Multiplier to convert minutes to seconds.
 WAIT_MULTIPLIER = 60
 
