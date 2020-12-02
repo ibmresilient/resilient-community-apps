@@ -97,7 +97,6 @@ class ReferenceTableFacade(ReferenceObjectBase):
         value = quote(value, '')
         url = u"{}{}/{}?inner_key={}&outer_key={}&value={}".format(client.api_url, REF_TABLE_ENDPOINT,
                                          ref_table_link, inner_key, outer_key, value)
-        LOG.info(url)
         ret = {}
         try:
             response = client.make_call("POST", url)
@@ -133,8 +132,9 @@ class ReferenceTableFacade(ReferenceObjectBase):
         """
         ref_table_link = quote(ref_table, '')
         value = quote(value, '')
-        url = u"{}{}/{}/{}?value={}".format(client.api_url, REF_TABLE_ENDPOINT,
-                                         ref_table_link, inner_key, outer_key, value)
+
+        url = u"{}{}/{}/{}/{}?value={}".format(client.api_url, REF_TABLE_ENDPOINT,
+                                         ref_table_link, outer_key, inner_key, value)
         LOG.info(url)
         ret = {}
         try:

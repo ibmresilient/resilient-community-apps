@@ -62,11 +62,11 @@ class FunctionComponent(ResilientComponent):
                                          cafile=qradar_verify_cert,
                                          opts=self.opts, function_opts=self.options)
 
-            result = qradar_client.delete_ref_table_element(qradar_reference_table_name, qradar_reference_table_item_outer_key, qradar_reference_table_item_inner_key, qradar_reference_table_item_value)
+            result = qradar_client.delete_ref_table_element(qradar_reference_table_name, qradar_reference_table_item_inner_key, qradar_reference_table_item_outer_key, qradar_reference_table_item_value)
             results = rp.done(success=True,
                               content=result)
             
-
+            yield StatusMessage("Call made to QRadar and response code returned: {}".format(result.get('status_code', 'no response code found')))
             yield StatusMessage("Finished 'qradar_reference_table_delete_item' that was running in workflow '{0}'".format(wf_instance_id))
 
             # Produce a FunctionResult with the results

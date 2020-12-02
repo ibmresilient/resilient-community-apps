@@ -65,7 +65,7 @@ class FunctionComponent(ResilientComponent):
             result = qradar_client.update_ref_table_element(qradar_reference_table_name, qradar_reference_table_item_inner_key, qradar_reference_table_item_outer_key, qradar_reference_table_item_value)
             results = rp.done(success=True,
                               content=result)
-
+            yield StatusMessage("Call made to QRadar and response code returned: {}".format(result.get('status_code', 'no response code found')))
             yield StatusMessage("Finished 'qradar_reference_table_update_item' that was running in workflow '{0}'".format(wf_instance_id))
 
             # Produce a FunctionResult with the results
