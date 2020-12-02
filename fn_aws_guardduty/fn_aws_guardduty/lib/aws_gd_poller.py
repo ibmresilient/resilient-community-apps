@@ -85,80 +85,6 @@ class AwsGdPoller():
             # Amount of time (seconds) * WAIT_MULTIPLIER to wait to check cases again.
             time.sleep(int(self.polling_interval) * WAIT_MULTIPLIER)
 
-
-    def make_incident_name(self, finding):
-        """
-        Create Resilient Incident name from finding.
-
-        :param finding: Finding Payload from Poller
-        :return iname: String for Incident Name to be used in Search / Incident Creation
-        """
-        # Fill event summary when blank
-        i_title = finding.get("Title", "No Title Provided")
-
-        iname = "AWS GuardDuty: {}".format(i_title)
-        LOG.debug("Incident Label Assembled: %s", iname)
-
-        return iname
-
-
-    def create_incident(self, data):
-        """
-        Create Resilient Incident.
-
-        :param data: Formatted DTO for Incident
-        :return: Return response from Resilient
-        """
-        try:
-            resilient_client = self.rest_client()
-
-            uri = "/incidents"
-            # create Incident itself first
-            incident_response = resilient_client.post(uri=uri, payload=data)
-
-            return incident_response
-
-        except SimpleHTTPException as ex:
-            LOG.error("Something went wrong when attempting to create the Incident: %s", ex)
-
-
-    def make_incident_fields(self, finding):
-        """
-        Assemble the Incident DTO Payload / Fields from GuardDuty finding Payload.
-
-        :param finding: Finding payload from GuardDuty.
-        :return: Incident DTO payload
-        """
-        # Create Placeholder with lists as values
-        r_fields = {
-            "name": self.make_incident_name(finding),
-            "description": self.make_incident_description(finding),
-            "discovered_date": finding.get("CreatedAt"),
-            "severity_code": self.map_severity(finding.get("Severity", "Low")),
-            "properties": {},
-        }
-        # Use mapping to get incident field values from finding payload.
-        for prop_l1 in CUSTOM_FIELDS_MAP:
-            if isinstance(CUSTOM_FIELDS_MAP[prop_l1], dict):
-                for prop_l2 in CUSTOM_FIELDS_MAP[prop_l1]:
-                    r_fields["properties"][CUSTOM_FIELDS_MAP[prop_l1][prop_l2]] = finding.get(prop_l1, {}).get(prop_l2)
-            else:
-                r_fields["properties"][CUSTOM_FIELDS_MAP[prop_l1]] = finding.get(prop_l1)
-
-        return r_fields
-
-
-    def make_incident_description(self, finding):
-        """
-        Make Incident description text from GuardDuty finding description.
-
-        :param finding: Raw GuardDuty Payload
-        :return: Return formatted Description for Incident DTO
-        """
-        i_desc = finding.get("Description", "AWS GuardDuty finding --")
-        return {"format": "text", "content": i_desc}
-
-
     def _find_resilient_incident_for_req(self, finding_id, idtype):
         """
         Check if any Resilient incidents with the GuardDuty finding ID.
@@ -221,6 +147,55 @@ class AwsGdPoller():
 
         return r_incidents
 
+    def make_incident_fields(self, finding):
+        """
+        Assemble the Incident DTO Payload / Fields from GuardDuty finding Payload.
+
+        :param finding: Finding payload from GuardDuty.
+        :return: Incident DTO payload
+        """
+        # Create Placeholder with lists as values
+        r_fields = {
+            "name": self.make_incident_name(finding),
+            "description": self.make_incident_description(finding),
+            "discovered_date": finding.get("CreatedAt"),
+            "severity_code": self.map_severity(finding.get("Severity", "Low")),
+            "properties": {},
+        }
+        # Use mapping to get incident field values from finding payload.
+        for prop_l1 in CUSTOM_FIELDS_MAP:
+            if isinstance(CUSTOM_FIELDS_MAP[prop_l1], dict):
+                for prop_l2 in CUSTOM_FIELDS_MAP[prop_l1]:
+                    r_fields["properties"][CUSTOM_FIELDS_MAP[prop_l1][prop_l2]] = finding.get(prop_l1, {}).get(prop_l2)
+            else:
+                r_fields["properties"][CUSTOM_FIELDS_MAP[prop_l1]] = finding.get(prop_l1)
+
+        return r_fields
+
+    def make_incident_name(self, finding):
+        """
+        Create Resilient Incident name from finding.
+
+        :param finding: Finding Payload from Poller
+        :return iname: String for Incident Name to be used in Search / Incident Creation
+        """
+        # Fill event summary when blank
+        i_title = finding.get("Title", "No Title Provided")
+
+        iname = "AWS GuardDuty: {}".format(i_title)
+        LOG.debug("Incident Label Assembled: %s", iname)
+
+        return iname
+
+    def make_incident_description(self, finding):
+        """
+        Make Incident description text from GuardDuty finding description.
+
+        :param finding: Raw GuardDuty Payload
+        :return: Return formatted Description for Incident DTO
+        """
+        i_desc = finding.get("Description", "AWS GuardDuty finding --")
+        return {"format": "text", "content": i_desc}
 
     def map_severity(self, finding_severity):
         """
@@ -242,3 +217,23 @@ class AwsGdPoller():
         elif 7.0 <= finding_severity <= 8.9:
             resilient_severity = "High"
         return resilient_severity
+
+    def create_incident(self, data):
+        """
+        Create Resilient Incident.
+
+        :param data: Formatted DTO for Incident
+        :return: Return response from Resilient
+        """
+        try:
+            resilient_client = self.rest_client()
+
+            uri = "/incidents"
+            # create Incident itself first
+            incident_response = resilient_client.post(uri=uri, payload=data)
+
+            return incident_response
+
+        except SimpleHTTPException as ex:
+            LOG.error("Something went wrong when attempting to create the Incident: %s", ex)
+
