@@ -96,7 +96,7 @@ class AwsGdPoller():
         # Fill event summary when blank
         i_title = finding.get("Title", "No Title Provided")
 
-        iname = "AWS GuardDuty Incident: ID {} - {}".format(finding["Id"], i_title)
+        iname = "AWS GuardDuty: {}".format(i_title)
         LOG.debug("Incident Label Assembled: %s", iname)
 
         return iname
