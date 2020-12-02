@@ -12,7 +12,7 @@
   ![screenshot: screenshot_1](./screenshots/screenshot_1.png)
 -->
 
-# fn-isitphishing for IBM Resilient
+# fn-isitphishing Functions for IBM Resilient
 
 ## Table of Contents
 - [Release Notes](#release-notes)
