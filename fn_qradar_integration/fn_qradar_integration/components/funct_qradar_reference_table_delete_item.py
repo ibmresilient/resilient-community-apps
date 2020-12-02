@@ -66,7 +66,7 @@ class FunctionComponent(ResilientComponent):
             results = rp.done(success=True,
                               content=result)
             
-            yield StatusMessage("Call made to QRadar and response code returned is {}".format(result.get('status_code', 'no response code found')))
+            yield StatusMessage("Call made to QRadar and response code returned: {}".format(result.get('status_code', 'no response code found')))
             yield StatusMessage("Finished 'qradar_reference_table_delete_item' that was running in workflow '{0}'".format(wf_instance_id))
 
             # Produce a FunctionResult with the results
