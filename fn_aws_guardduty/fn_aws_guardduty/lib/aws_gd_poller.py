@@ -9,7 +9,7 @@ import time
 from fn_aws_guardduty.lib.aws_gd_client import AwsGdClient
 from resilient import SimpleHTTPException
 import fn_aws_guardduty.util.config as config
-from fn_aws_guardduty.lib.helpers import CUSTOM_FIELDS_MAP
+from fn_aws_guardduty.lib.helpers import CUSTOM_FIELDS_MAP, IQuery
 
 LOG = logging.getLogger(__name__)
 
@@ -48,11 +48,12 @@ class AwsGdPoller():
                     ### BEGIN Processing findings
                     # Iterate over finding ids to get properties.
                     for fid in findings_list:
-                        finding = aws_gd.get("get_findings", DetectorId=detectorid, FindingIds=[fid])[0]
-                        LOG.info("AWS GuardDuty Finding ID %s in region %s discovered: %s", finding["Id"],
-                                 finding["Region"], finding.get("Title", "No Title Provided"))
-                        if len(self._find_resilient_incident_for_req(finding["Id"], CUSTOM_FIELDS_MAP["Id"])) == 0:
 
+                        finding = aws_gd.get("get_findings", DetectorId=detectorid, FindingIds=[fid])[0]
+
+                        if len(self._find_resilient_incident_for_req(finding, ["Id", "Region"])) == 0:
+                            LOG.info("AWS GuardDuty Finding ID %s in region %s discovered: %s, escalating to Resilient",
+                                     finding["Id"], finding["Region"], finding.get("Title", "No Title Provided"))
                             # Get Extra Incident Fields
                             i_fields = self.make_incident_fields(finding)
 
@@ -73,7 +74,7 @@ class AwsGdPoller():
             # Amount of time (seconds) * WAIT_MULTIPLIER to wait to check cases again.
             time.sleep(int(self.polling_interval) * WAIT_MULTIPLIER)
 
-    def _find_resilient_incident_for_req(self, finding_id, idtype):
+    def _find_resilient_incident_for_req(self, finding, f_fields):
         """
         Check if any Resilient incidents with the GuardDuty finding ID.
 
@@ -82,47 +83,14 @@ class AwsGdPoller():
         """
         r_incidents = []
         query_uri = "/incidents/query?return_level=partial"
-        query = {
-            "filters": [{
-                "conditions": [
-                    {
-                        "field_name": "properties.{}".format(idtype),
-                        "method": "equals",
-                        "value": finding_id
-                    },
-                    {
-                        "field_name": "plan_status",
-                        "method": "equals",
-                        "value": 'A'
-                    }
-                ]
-            }],
-            "sorts": [{
-                "field_name": "create_date",
-                "type": "desc"
-            }]
-        }
+        query = IQuery(finding, f_fields)
         try:
             r_incidents = self.rest_client().post(query_uri, query)
         except SimpleHTTPException:
             # Some versions of Resilient 30.2 onward have a bug that prevents query for numeric fields.
             # To work around this issue, let's try a different query, and filter the results. (Expensive!)
-            query_uri = "/incidents/query?return_level=normal&field_handle={}".format(finding_id)
-            query = {
-                "filters": [{
-                    "conditions": [
-                        {
-                            "field_name": "properties.{}".format(idtype),
-                            "method": "has_a_value"
-                        },
-                        {
-                            "field_name": "plan_status",
-                            "method": "equals",
-                            "value": 'A'
-                        }
-                    ]
-                }]
-            }
+            query_uri = "/incidents/query?return_level=normal&field_handle={}".format(finding["Id"])
+            query = IQuery(finding, f_fields, alt=True)
 
             try:
                 r_incidents_tmp = self.rest_client().post(query_uri, query)
@@ -131,7 +99,7 @@ class AwsGdPoller():
                 raise Exception("Exception '{}' while trying to get list of Resilient incidents.".format(err)) from err
 
             r_incidents = [r_inc for r_inc in r_incidents_tmp
-                           if r_inc["properties"].get(idtype) == finding_id]
+                           for f in f_fields if r_inc["properties"].get(f) == finding[f]]
 
         return r_incidents
 
