@@ -70,6 +70,10 @@ class TypeInfo(object):
     NOTE_ATTACHMENT_INCLUDE_FIELDS = [
         (None, "task_id", "number")
     ]
+    # adding content field for attachments 
+    CONTENT_ATTACHMENT_INCLUDE_FIELDS = [
+        (None, "content", "blob")
+    ]
 
 
     def __init__(self, type_id, rest_client_helper):
@@ -123,6 +127,8 @@ class TypeInfo(object):
             fields = self.add_schema_fields(fields, TypeInfo.INCIDENT_INCLUDE_FIELDS)
         if self.type_id in (2,5):  # notes and attachments can be part of a task
             fields = self.add_schema_fields(fields, TypeInfo.NOTE_ATTACHMENT_INCLUDE_FIELDS)
+        if self.type_id == 5: # attachment
+            fields = self.add_schema_fields(fields, TypeInfo.CONTENT_ATTACHMENT_INCLUDE_FIELDS)
 
         TypeInfo.fields_cache[self.type_id] = fields
 
