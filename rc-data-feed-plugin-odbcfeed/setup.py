@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='rc_data_feed_plugin_odbcfeed',
-    version='1.0.4',
+    version='1.0.5',
     license='MIT',
     author='IBM Resilient Labs',
     author_email='resil.labs@gmail.com',

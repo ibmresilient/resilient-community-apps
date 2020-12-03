@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 # (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use, line-too-long
-
 """Module contains SqlFeedDestinationBase, the base class for all SQL feed destinations."""
 import abc
 import logging
@@ -164,6 +163,10 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
         table_name = context.type_info.get_pretty_type_name()
 
         all_fields = context.type_info.get_all_fields(refresh=False)
+
+        # if attachment content is included, make sure the db can store the blob
+        if table_name == 'attachment' and payload.get('content'):
+            all_fields.append({'name':'content', 'input_type':self.dialect.get_column_type('blob'')})
 
         self._create_or_update_table(table_name, all_fields)
 

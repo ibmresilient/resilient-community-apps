@@ -14,6 +14,8 @@ MAX_ORACLE_VARCHAR = 2000
 MAX_MARIADB_TEXT = 32000  # roughly 1/2 of 65535 limit to account for unicode
 ENCODING="utf-8"
 ORACLE_ENCODING="utf-16le"
+# attachment are limited to 20m bytes
+MAX_BLOB = 20000000
 
 class SqlDialect:
     """Base class for all SQL dialects that we will support."""
@@ -124,7 +126,8 @@ class SqlDialect:
             number='INTEGER',
             datepicker='DATE',
             datetimepicker='TIMESTAMP',
-            boolean='BOOLEAN'
+            boolean='BOOLEAN',
+            blob='BLOB'
         )
 
         if input_type in type_dict:
@@ -253,7 +256,8 @@ class PostgreSQL96Dialect(ODBCDialectBase):
             number='BIGINT',
             datepicker='DATE',
             datetimepicker='TIMESTAMPTZ',
-            boolean='BOOLEAN'
+            boolean='BOOLEAN',
+            blob='BYTEA'
         )
 
         if input_type in type_dict:
@@ -442,7 +446,8 @@ class MySqlDialect(ODBCDialectBase):
             number='BIGINT',
             datepicker='DATE',
             datetimepicker='DATETIME',
-            boolean='TINYINT'
+            boolean='TINYINT',
+            blob='BLOB'
         )
 
         if input_type in type_dict:
@@ -610,7 +615,8 @@ class SqlServerDialect(ODBCDialectBase):
             number='BIGINT',
             datepicker='DATE',
             datetimepicker='DATETIME2',
-            boolean='BIT'
+            boolean='BIT',
+            blob='VARBINARY({})'.format(MAX_BLOB)
         )
 
         if input_type in type_dict:
@@ -795,7 +801,8 @@ END; """
             number='NUMBER(16)',
             datepicker='DATE',
             datetimepicker='TIMESTAMP',
-            boolean='NUMBER(1)'
+            boolean='NUMBER(1)',
+            blob='BLOB({})'.format(MAX_BLOB)
         )
 
         if input_type in type_dict:
