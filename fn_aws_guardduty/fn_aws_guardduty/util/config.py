@@ -5,7 +5,7 @@
 
 # Shared/global variables used in poller/functions.
 STOP_THREAD = False
-REQUIRED_CONFIG_SETTINGS = ["aws_gd_access_key_id", "aws_gd_secret_access_key", "aws_gd_region"]
+REQUIRED_CONFIG_SETTINGS = ["aws_gd_access_key_id", "aws_gd_secret_access_key", "aws_gd_regions"]
 
 def config_section_data():
     """
@@ -15,9 +15,13 @@ def config_section_data():
     config_data = u"""[fn_aws_guardduty]
 aws_gd_access_key_id=<AWS_GUARDDUTY_ACCESS_KEY_ID>
 aws_gd_secret_access_key=<AWS_GUARDDUTY_SECRET_ACCESS_KEY>
-aws_gd_region=<AWS_GUARDDUTY_DEFAULT_REGION>
-# Interval to poll Guardduty in minutes
+# Filter by GuardDuty region names. Can be a string or regular expression.
+# e.g. aws_gd_regions=^(us|eu).* to get Europe and US regions.
+aws_gd_regions=<AWS_GUARDDUTY_REGION_REGEX>
+# Interval to poll Guardduty (in minutes).
 aws_gd_polling_interval=10
+# Interval to refresh regions information (in minutes).
+aws_gd_regions_interval=60
 # Initial Import Look-back Interval in minutes (default: 1 hour)
 aws_gd_startup_interval=60
 # Optional settings for access to GuardDuty via a proxy.

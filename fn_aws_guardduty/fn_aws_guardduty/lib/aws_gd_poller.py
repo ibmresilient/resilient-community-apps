@@ -5,6 +5,7 @@
 
 import logging
 import time
+from datetime import datetime
 
 from fn_aws_guardduty.lib.aws_gd_client import AwsGdClient
 from resilient import SimpleHTTPException
@@ -19,38 +20,53 @@ WAIT_MULTIPLIER = 60
 class AwsGdPoller():
     """Component that polls for new findings from AWS GuardDuty"""
 
-    def __init__(self, opts, options, rest_client, polling_interval):
+    def __init__(self, opts, options, rest_client, polling_interval, regions_interval):
         """constructor provides access to the configuration options"""
         self.opts = opts
         self.function_opts = options
         self.rest_client = rest_client
         self.polling_interval = polling_interval
+        self.regions_interval = regions_interval
 
     def run(self):
         """Run polling thread, alternately check for new data and wait"""
         # Get GuardDuty client.
 
-        aws_gd = AwsGdClient(self.opts, self.function_opts)
-
-        # Get the DetectorId for the specified AWS Region.
-        detector = aws_gd.get("list_detectors")
-        if detector:
-            detectorid = detector[0]
+        aws_gd = AwsGdClient(self.opts, self.function_opts, is_poller=True)
 
         while not config.STOP_THREAD:
-            # Get list of findings ids if any for DetectorId
-            findings_list = aws_gd.get("list_findings", DetectorId=detectorid)
 
-            if not findings_list:
-                LOG.info("No findings found for detector ID  %s.", detectorid)
-            else:
+            # Loop over accessible GuardDuty regions and get available DetectorIds.
+            for gd_region, gd_region_info in aws_gd.gd_clients["regions"].items():
+                aws_gd.gd = gd_region_info["cli"]
+                detectors = gd_region_info["detectors"]
+
+                if not detectors:
+                    # No cached detector info see if any available detectors available for the specified AWS Region.
+                    detectors = aws_gd.get("list_detectors")
+                    if not detectors:
+                        LOG.debug("No GuardDuty detectors found in region %s.", gd_region)
+                        # Detectors still not detected skip detected.
+                        continue
+
+
+                # Get the DetectorId for the specified AWS Region.
+                detectorid = detectors[0]
+
+                # Get list of findings ids if any for DetectorId
+                findings_list = aws_gd.get("list_findings", DetectorId=detectorid)
+
+                if not findings_list:
+                    LOG.debug("No GuardDuty findings found for detector ID %s  in region %s.", detectorid, gd_region)
+                    continue
+
+                LOG.debug("Getting GuardDuty findings found for detector ID %s  in region %s.", gd_region)
+
                 try:
                     ### BEGIN Processing findings
                     # Iterate over finding ids to get properties.
                     for fid in findings_list:
-
                         finding = aws_gd.get("get_findings", DetectorId=detectorid, FindingIds=[fid])[0]
-
                         if len(self._find_resilient_incident_for_req(finding, ["Id", "Region"])) == 0:
                             LOG.info("AWS GuardDuty Finding ID %s in region %s discovered: %s, escalating to Resilient",
                                      finding["Id"], finding["Region"], finding.get("Title", "No Title Provided"))
@@ -69,10 +85,15 @@ class AwsGdPoller():
             # Break out of loop before sleep if stop thread flag set.
             if config.STOP_THREAD:
                 break
-            # Use a timeout value of polling_interval (in secs) * WAIT_MULTIPLIER + TIMEOUT_WAIT secs to wait for
-            # all threads to end.
+
             # Amount of time (seconds) * WAIT_MULTIPLIER to wait to check cases again.
             time.sleep(int(self.polling_interval) * WAIT_MULTIPLIER)
+
+            # Refresh regions info if time since refresh > refresh interval. This is to enure we have
+            # latest detector ids for the regions.
+            now = datetime.now()
+            if (now - aws_gd.gd_clients["timestamp"]).total_seconds() > (self.regions_interval * WAIT_MULTIPLIER):
+                aws_gd.gd_clients = aws_gd._get_clients()
 
     def _find_resilient_incident_for_req(self, finding, f_fields):
         """

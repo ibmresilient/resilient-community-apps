@@ -3,6 +3,8 @@
 # pragma pylint: disable=unused-argument, no-self-use
 """ Helpers for AWS GuardDuty """
 # Map GuardDuty finding fields to Resilient Incident custom fields.
+import re
+
 CUSTOM_FIELDS_MAP = {
     "Id": "aws_guardduty_finding_id",
     "Arn": "aws_guardduty_finding_arn",
@@ -85,3 +87,15 @@ class IQuery(dict):
             "field_name": "properties.{}".format(CUSTOM_FIELDS_MAP[f]),
             "method": "has_a_value"
         }) for f in fields]
+
+def is_regex(regex_str):
+    """"Test if sting is a correctly formed regular expression.
+
+    :param regex_str: Regular expression string.
+    :return: Boolean.
+    """
+    try:
+        re.compile(regex_str)
+        return True
+    except re.error:
+        return False

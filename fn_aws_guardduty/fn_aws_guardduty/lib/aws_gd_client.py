@@ -2,14 +2,17 @@
 # (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 """ AWS GuardDuty client support classes. """
+import re
 from  datetime import datetime
 import logging
+from sys import version_info
+
 from botocore.exceptions import ClientError
 from botocore.config import Config
 from boto3 import Session
 from resilient_lib import RequestsCommon, validate_fields
 import fn_aws_guardduty.util.config as config
-
+from fn_aws_guardduty.lib.helpers import is_regex
 
 LOG = logging.getLogger(__name__)
 # List of get types supported for the integration.
@@ -26,7 +29,7 @@ class AwsGdClient():
     """
     Client class for AWS GuardDuty.
     """
-    def __init__(self, opts, function_options=None, sts_client=False):
+    def __init__(self, opts, function_options=None, is_poller=False):
         """
         Class constructor.
         """
@@ -38,21 +41,31 @@ class AwsGdClient():
 
         self.aws_gd_access_key_id = function_options.get("aws_gd_access_key_id")
         self.aws_gd_secret_access_key = function_options.get("aws_gd_secret_access_key")
-        self.aws_gd_region = function_options.get("aws_gd_region")
+        # Strip quotes from self.aws_gd_regions regex
+        self.aws_gd_regions = function_options.get("aws_gd_regions").strip("'\"")
+        # Test self.aws_gd_regions is a valid regex expression.
+        if not is_regex(self.aws_gd_regions):
+            raise ValueError("The query filter '{}' is not a valid regular expression.".format(repr(self.aws_gd_regions)))
         self.proxies = RequestsCommon(opts, function_options).get_proxies()
-        self.gd = self._get_client("guardduty")
+        self.gd = None # Property used to access GuardDuty clients.
+        if is_poller:
+            self.gd_clients = self._get_clients()
 
-    def _get_client(self, service_name):
+    def _get_client(self, service_name, region=None):
         """ Create an AWS GuardDuty client.
 
         :param service_name: AWS service for which to create client.
+        :param region: (Optional): AWS Region default is the integration default.
         :return: AWS client.
         """
-        # Create an AWS boto3 client instance for the specified AWS service name. Supported AWS service names
-        # for the integration are "aws" and "sts".
+        # Create an AWS boto3 client instance for AWS GuardDuty.
+        if region:
+            aws_gd_region = region
+        else:
+            aws_gd_region = self.aws_gd_region
         try:
             client = Session(
-                region_name=self.aws_gd_region,
+                region_name=aws_gd_region,
                 aws_access_key_id=self.aws_gd_access_key_id,
                 aws_secret_access_key=self.aws_gd_secret_access_key,
             ).client(service_name=service_name, config=Config(proxies=self.proxies))
@@ -64,7 +77,45 @@ class AwsGdClient():
 
         return client
 
+    def _get_clients(self):
+        """ Create a hash of GuardDuty clients for accessible regions.
 
+        :return clients: Hash of client objects.
+        """
+        clients = {
+            "timestamp": datetime.now(),
+            "regions": {}
+        }
+
+        if version_info.major < 3:
+            regex = r'{}'.format(self.aws_gd_regions.encode('utf-8'))
+        else:
+            regex = r'{}'.format(self.aws_gd_regions)
+
+        # Iterate over list of region names based on aws_gd_regions config property regex.
+        for region in [r for r in Session().get_available_regions('guardduty')
+                       if re.search(regex, r, re.IGNORECASE)]:
+            gd_cli = self._get_client("guardduty", region=region)
+            self.gd = gd_cli
+            try:
+                detectors = self.get("list_detectors")
+
+            except self.gd.exceptions.ClientError as invalid_ex:
+                if "The security token included in the request is invalid" in invalid_ex.__repr__():
+                    LOG.warning("Invalid security token for region %s, Got exception: %s. "
+                                "GuardDuty may need to be enabled for the user in the AWS region.",
+                                region, invalid_ex.__repr__())
+                    continue
+                raise invalid_ex
+
+            clients["regions"].update({
+                region: {
+                    "cli": gd_cli,
+                    "detectors": detectors
+                }
+            })
+
+        return clients
 
     def paginate(self, op=None, results_filter=None, return_filtered=False, **kwargs):
         """ Get the result using get_paginator format for certain AWS GuardDuty queries.
