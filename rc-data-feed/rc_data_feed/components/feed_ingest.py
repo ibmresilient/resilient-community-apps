@@ -10,7 +10,7 @@ import traceback
 
 from pydoc import locate
 from resilient_circuits import ResilientComponent, handler, ActionMessage
-from resilient_lib import str_to_bool
+from resilient_lib import str_to_bool, get_file_attachment
 from resilient import SimpleHTTPException
 
 from rc_data_feed.lib.type_info import FullTypeInfo, ActionMessageTypeInfo
@@ -19,6 +19,7 @@ from rc_data_feed.lib.rest_client_helper import RestClientHelper
 
 LOG = logging.getLogger(__name__)
 
+INCL_ATTACHMENT_DATA = False
 
 def _get_inc_id(payload):
     if 'incident' in payload:
@@ -74,6 +75,7 @@ def range_chunks(chunk_range, chunk_size):
         start += chunk_size
 
 def send_data(type_info, inc_id, rest_client_helper, payload, feed_outputs, is_deleted):
+    global INCL_ATTACHMENT_DATA
     """
     perform the sync to the different datastores
     :param type_info:
@@ -94,11 +96,23 @@ def send_data(type_info, inc_id, rest_client_helper, payload, feed_outputs, is_d
         # don't let a failure in one feed break all the rest
         try:
             LOG.debug("Calling feed %s", feed_output.__class__.__name__)
+            # collect attachment data to pass on
+            if type_info.get_pretty_type_name() == 'attachment' and INCL_ATTACHMENT_DATA:
+                payload['content'] = b_to_s(get_file_attachment(rest_client_helper.inst_rest_client, inc_id, 
+                                                                attachment_id=payload['id']))
+                LOG.debug(payload)
+
             feed_output.send_data(context, payload)
         except Exception as err:
             LOG.error("Failure in update to %s %s", feed_output.__class__.__name__, err)
             error_trace = traceback.format_exc()
             LOG.error("Traceback %s", error_trace)
+
+def b_to_s(value):
+    try:
+        return value.decode()
+    except:
+        return value
 
 class FeedComponent(ResilientComponent):
     """This component handles initial population of a feed and ongoing
@@ -111,6 +125,7 @@ class FeedComponent(ResilientComponent):
 
     """Component that ingests data"""
     def __init__(self, opts):
+        global INCL_ATTACHMENT_DATA
         super(FeedComponent, self).__init__(opts)
 
         try:
@@ -125,6 +140,9 @@ class FeedComponent(ResilientComponent):
                 rest_client_helper = RestClientHelper(self.rest_client)
 
                 self.feed_outputs = build_feed_outputs(rest_client_helper, opts, self.options.get("feed_names", None))
+
+                # expose attachment content setting
+                INCL_ATTACHMENT_DATA = str_to_bool(self.options.get("include_attachment_data", False))
 
                 # determine the reload options to follow
                 if self.options.get('reload', 'false').lower() == 'true':

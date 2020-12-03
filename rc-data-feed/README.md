@@ -15,6 +15,7 @@ The data can be written to any or all of the following destinations:
 - ElasticSearch
 - Splunk
 - Kafka
+- Resilient 
 
 Each of these destinations are available as separately installable packages to minimize the python libraries required for your Integrations Server. 
 

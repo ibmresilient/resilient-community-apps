@@ -18,5 +18,8 @@ reload_query_api_method=False
 
 # feed_data is the default message destination that will be listened to
 queue=feed_data
+
+# set to true if attachment data should be part of payload send to plugins
+include_attachment_data = false
 """
     return config_data
