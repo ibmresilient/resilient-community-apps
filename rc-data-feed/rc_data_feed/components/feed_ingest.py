@@ -142,7 +142,7 @@ class FeedComponent(ResilientComponent):
                 self.feed_outputs = build_feed_outputs(rest_client_helper, opts, self.options.get("feed_names", None))
 
                 # expose attachment content setting
-                INCL_ATTACHMENT_DATA = str_to_bool(self.options.get("include_attachment_data", False))
+                INCL_ATTACHMENT_DATA = str_to_bool(self.options.get("include_attachment_data", 'false'))
 
                 # determine the reload options to follow
                 if self.options.get('reload', 'false').lower() == 'true':
@@ -186,7 +186,8 @@ class FeedComponent(ResilientComponent):
             send_data(type_info, inc_id, rest_client_helper, payload, self.feed_outputs, is_deleted)
 
         except Exception as err:
-            LOG.error(err)
+            error_trace = traceback.format_exc()
+            LOG.error("Traceback %s", error_trace) 
             LOG.error("Failure on action %s object %s type_info %s",
                       event.message['operation_type'], event.message['object_type'], event.message['type_info'])
 
