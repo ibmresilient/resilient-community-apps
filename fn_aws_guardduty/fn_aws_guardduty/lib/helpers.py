@@ -12,7 +12,8 @@ CUSTOM_FIELDS_MAP = {
         "ResourceType": "aws_guardduty_resource_type"
     },
     "Service": {
-        "DetectorId": "aws_guardduty_detector_id",
+        "Count": "aws_guardduty_count",
+        "DetectorId": "aws_guardduty_detector_id"
     }
 }
 
