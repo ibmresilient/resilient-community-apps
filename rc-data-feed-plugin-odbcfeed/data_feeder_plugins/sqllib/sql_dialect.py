@@ -257,7 +257,7 @@ class PostgreSQL96Dialect(ODBCDialectBase):
             datepicker='DATE',
             datetimepicker='TIMESTAMPTZ',
             boolean='BOOLEAN',
-            blob='BYTEA'
+            blob='bytea'
         )
 
         if input_type in type_dict:

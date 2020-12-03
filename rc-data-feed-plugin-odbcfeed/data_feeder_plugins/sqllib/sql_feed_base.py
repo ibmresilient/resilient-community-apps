@@ -166,7 +166,7 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
 
         # if attachment content is included, make sure the db can store the blob
         if table_name == 'attachment' and payload.get('content'):
-            all_fields.append({'name':'content', 'input_type':self.dialect.get_column_type('blob'')})
+            all_fields.append({'name':'content', 'input_type':self.dialect.get_column_type('blob')})
 
         self._create_or_update_table(table_name, all_fields)
 
