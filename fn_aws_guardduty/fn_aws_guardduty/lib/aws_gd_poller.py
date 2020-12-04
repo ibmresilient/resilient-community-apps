@@ -6,27 +6,29 @@
 import logging
 import time
 from datetime import datetime
-
 from fn_aws_guardduty.lib.aws_gd_client import AwsGdClient
 from resilient import SimpleHTTPException
 import fn_aws_guardduty.util.config as config
 from fn_aws_guardduty.lib.helpers import CUSTOM_FIELDS_MAP, IQuery
 
-LOG = logging.getLogger(__name__)
 
+LOG = logging.getLogger(__name__)
+# Refresh region information interval in minutes
+REGIONS_INTERVAL_DEFAULT = 60
 # Multiplier to convert minutes to seconds.
 WAIT_MULTIPLIER = 60
 
 class AwsGdPoller():
     """Component that polls for new findings from AWS GuardDuty"""
 
-    def __init__(self, opts, options, rest_client, polling_interval, regions_interval):
+    def __init__(self, opts, options, rest_client, polling_interval):
         """constructor provides access to the configuration options"""
         self.opts = opts
         self.function_opts = options
         self.rest_client = rest_client
         self.polling_interval = polling_interval
-        self.regions_interval = regions_interval
+        # Amount of time (minutes) to wait to refresh regions information, use default if not set.
+        self.regions_interval = int(self.function_opts.get("aws_gd_regions_interval", REGIONS_INTERVAL_DEFAULT))
 
     def run(self):
         """Run polling thread, alternately check for new data and wait"""
