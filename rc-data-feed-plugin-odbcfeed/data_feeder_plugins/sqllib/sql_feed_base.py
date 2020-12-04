@@ -160,10 +160,6 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
 
         all_fields = context.type_info.get_all_fields(refresh=False)
 
-        # if attachment content is included, make sure the db can store the blob
-        if table_name == 'attachment' and payload.get('content'):
-            all_fields.append({'name':'content', 'input_type':self.dialect.get_column_type('blob')})
-
         self._create_or_update_table(table_name, all_fields)
 
         all_field_names = [field['name'] for field in all_fields]
