@@ -59,7 +59,7 @@ class FunctionComponent(ResilientComponent):
             qradar_client = QRadarClient(host=self.options["host"],
                                          username=self.options.get("username", None),
                                          password=self.options.get("qradarpassword", None),
-                                         token=self.options["qradartoken"],
+                                         token=self.options.get("qradartoken", None),
                                          cafile=qradar_verify_cert,
                                          opts=self.opts, function_opts=self.options)
 
