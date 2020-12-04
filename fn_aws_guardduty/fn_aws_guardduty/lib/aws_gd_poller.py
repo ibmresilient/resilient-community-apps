@@ -29,12 +29,17 @@ class AwsGdPoller():
         self.polling_interval = polling_interval
         # Amount of time (minutes) to wait to refresh regions information, use default if not set.
         self.regions_interval = int(self.function_opts.get("aws_gd_regions_interval", REGIONS_INTERVAL_DEFAULT))
+        # GuardDuty severity threshold
+        self.aws_gd_severity_threshold = int(self.function_opts.get("aws_gd_severity_threshold")) \
+            if self.function_opts.get("aws_gd_severity_threshold") else None
 
     def run(self):
         """Run polling thread, alternately check for new data and wait"""
         # Get GuardDuty client.
 
         aws_gd = AwsGdClient(self.opts, self.function_opts, is_poller=True)
+        # Set a criterion to filter findings results.
+        fc = self.set_criterion()
 
         while not config.STOP_THREAD:
 
@@ -56,7 +61,7 @@ class AwsGdPoller():
                 detectorid = detectors[0]
 
                 # Get list of findings ids if any for DetectorId
-                findings_list = aws_gd.get("list_findings", DetectorId=detectorid)
+                findings_list = aws_gd.get("list_findings", DetectorId=detectorid, FindingCriteria=fc)
 
                 if not findings_list:
                     LOG.debug("No GuardDuty findings found for detector ID %s  in region %s.", detectorid, gd_region)
@@ -216,3 +221,18 @@ class AwsGdPoller():
         except SimpleHTTPException as ex:
             LOG.error("Something went wrong when attempting to create the Incident: %s", ex)
 
+    def set_criterion(self):
+        """
+        Create a criterion to filter findings data form GuardDuty.
+
+        :param data: Formatted DTO for Incident
+        :return fc: Return criterion dict
+        """
+        fc = {"Criterion": {}}
+        # Add severity criterion if setting enabled.
+        if self.aws_gd_severity_threshold:
+            fc["Criterion"].update({
+                'severity': {'Gte': self.aws_gd_severity_threshold}
+            })
+
+        return fc

@@ -22,6 +22,9 @@ aws_gd_regions=<AWS_GUARDDUTY_REGION_REGEX>
 aws_gd_polling_interval=10
 # Interval to refresh regions information (in minutes).
 aws_gd_regions_interval=60
+# Optional setting - severity threshold (int) to use in criterion to filter findings results. (default 7).
+# Severity ranges: 7.0 - 8.9 -> High, 4.0 - 6.9 -> Medium, 1.0 = 3.9 -> Low
+aws_gd_severity_threshold = 7
 # Initial Import Look-back Interval in minutes (default: 1 hour)
 aws_gd_startup_interval=60
 # Optional settings for access to GuardDuty via a proxy.
