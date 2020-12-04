@@ -12,11 +12,11 @@ from mock import patch
 import mock
 
 
-from fn_qradar_integration.util.qradar_utils import ArielSearch
+from fn_qradar_enhanced_data.util.qradar_utils import ArielSearch
 
-@patch("fn_qradar_integration.util.qradar_utils.ArielSearch.get_search_result")
-@patch("fn_qradar_integration.util.qradar_utils.ArielSearch.check_status")
-@patch("fn_qradar_integration.util.qradar_utils.ArielSearch.get_search_id")
+@patch("fn_qradar_enhanced_data.util.qradar_utils.ArielSearch.get_search_result")
+@patch("fn_qradar_enhanced_data.util.qradar_utils.ArielSearch.check_status")
+@patch("fn_qradar_enhanced_data.util.qradar_utils.ArielSearch.get_search_id")
 def test_search_and_wait_command(mocked_get_search_id, mocked_check_status, mocked_get_search_result):
     # Test data
     timeout = 2
