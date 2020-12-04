@@ -8,6 +8,7 @@ import sys
 import sqlite3
 import pyodbc
 from six import string_types
+from rc_data_feed.lib.type_info import TypeInfo
 
 
 MAX_ORACLE_VARCHAR = 2000
@@ -163,6 +164,17 @@ class SqlDialect:
         else:
             return clean_field_name(args)
 
+    def make_blob(byte_array):
+        """[convert byte array into format required by the blob db type]
+
+        Args:
+            byte_array ([byte array]): [description]
+
+        Returns:
+            converted format for specific database
+        """
+        return byte_array
+
 class ODBCDialectBase(SqlDialect):  # pylint: disable=abstract-method
     """
     Base class for all ODBC-based databases.  Note that this is an
@@ -313,6 +325,38 @@ class PostgreSQL96Dialect(ODBCDialectBase):
         else: # an issue and try encoding without specifying fromtype
             connection.setencoding(encoding=ENCODING)
         
+    @staticmethod
+    def make_blob(type_info, field, value):
+        hex_address = value.hex()
+        return "0x" + hex_address
+
+    @staticmethod
+    def translate_value(type_info, field, value):
+        mapping = {
+            "select_owner": TypeInfo.translate_value_select,
+            "select_user": TypeInfo.translate_value_select,
+            "select_select": TypeInfo.translate_value_select,
+            "multiselect": TypeInfo.translate_value_multiselect,
+            "multiselect_members": TypeInfo.translate_value_multiselect,
+            "datepicker": TypeInfo.translate_value_datetimepicker,
+            "datetimepicker": TypeInfo.translate_value_datetimepicker,
+            "textarea": TypeInfo.translate_value_textarea,
+            "number": TypeInfo.translate_value_number,
+            "blob": PostgreSQL96Dialect.make_blob,
+            "list": TypeInfo.translate_value_list
+        }
+
+        if value is not None:
+            input_type = field['input_type']
+            for rule, rule_function in mapping.items():
+                if input_type == rule:
+                    value = rule_function(type_info, field, value)
+                    break
+
+            if isinstance(value, list):
+                value = mapping["list"](type_info, field, value)
+
+        return value
 
 
 class MySqlDialect(ODBCDialectBase):
