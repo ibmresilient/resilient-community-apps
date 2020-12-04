@@ -98,21 +98,15 @@ def send_data(type_info, inc_id, rest_client_helper, payload, feed_outputs, is_d
             LOG.debug("Calling feed %s", feed_output.__class__.__name__)
             # collect attachment data to pass on
             if type_info.get_pretty_type_name() == 'attachment' and INCL_ATTACHMENT_DATA:
-                payload['content'] = b_to_s(get_file_attachment(rest_client_helper.inst_rest_client, inc_id, 
-                                                                attachment_id=payload['id']))
-                LOG.debug(payload)
+                # this will return a byte string
+                payload['content'] = get_file_attachment(rest_client_helper.inst_rest_client, inc_id, 
+                                                         attachment_id=payload['id'])
 
             feed_output.send_data(context, payload)
         except Exception as err:
             LOG.error("Failure in update to %s %s", feed_output.__class__.__name__, err)
             error_trace = traceback.format_exc()
             LOG.error("Traceback %s", error_trace)
-
-def b_to_s(value):
-    try:
-        return value.decode()
-    except:
-        return value
 
 class FeedComponent(ResilientComponent):
     """This component handles initial population of a feed and ongoing
