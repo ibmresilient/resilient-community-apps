@@ -167,7 +167,7 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
         # Create a flattened map where each key of the map is the field name.
         #
         flat_payload = context.type_info.flatten(payload,
-                                                 translate_func=getattr(self.dialect, 'translate_value', TypeInfo.translate_value))
+                                                 translate_func=getattr(self.dialect, 'mapped_translate_value', TypeInfo.translate_value))
 
         # some data types, such as datetime, will need a conversion routine
         all_field_types = dict()

@@ -164,16 +164,9 @@ class SqlDialect:
         else:
             return clean_field_name(args)
 
-    def make_blob(byte_array):
-        """[convert byte array into format required by the blob db type]
-
-        Args:
-            byte_array ([byte array]): [description]
-
-        Returns:
-            converted format for specific database
-        """
-        return byte_array
+    @staticmethod
+    def make_blob(type_info, field, value):
+        return value
 
 class ODBCDialectBase(SqlDialect):  # pylint: disable=abstract-method
     """
@@ -195,6 +188,8 @@ class ODBCDialectBase(SqlDialect):  # pylint: disable=abstract-method
 
 class SqliteDialect(SqlDialect):
     RESERVE_LIST = []
+    def __init__(self):
+        self.mapped_translate_value = translate_value_for_blob(SqliteDialect.make_blob)
 
     """
     Dialect for SQLite database...note only use this if you are using the
@@ -236,6 +231,18 @@ class SqliteDialect(SqlDialect):
         # Sqlite supports named bound parameter (e.g. with ":parmname").
         return parameters
 
+    @staticmethod
+    def make_blob(type_info, field, value):
+        """[convert byte array into format required by the blob db type]
+
+        Args:
+            value ([byte array]): [description]
+
+        Returns:
+            converted format for specific database
+        """
+        return sqlite3.Binary(value)
+
 
 class PostgreSQL96Dialect(ODBCDialectBase):
     """
@@ -254,6 +261,9 @@ class PostgreSQL96Dialect(ODBCDialectBase):
                      'select', 'session_user', 'similar', 'some', 'symmetric', 'table', 'tablesample', 'then', 'to', 'trailing',
                      'true', 'union', 'unique', 'user', 'using', 'variadic', 'verbose', 'when', 'where', 'window', 'with'
                     ]
+
+    def __init__(self):
+        self.mapped_translate_value = translate_value_for_blob(PostgreSQL96Dialect.make_blob)
 
     def get_column_type(self, input_type):  # pylint: disable=no-self-use
         """
@@ -330,34 +340,6 @@ class PostgreSQL96Dialect(ODBCDialectBase):
         hex_address = value.hex()
         return "0x" + hex_address
 
-    @staticmethod
-    def translate_value(type_info, field, value):
-        mapping = {
-            "select_owner": TypeInfo.translate_value_select,
-            "select_user": TypeInfo.translate_value_select,
-            "select_select": TypeInfo.translate_value_select,
-            "multiselect": TypeInfo.translate_value_multiselect,
-            "multiselect_members": TypeInfo.translate_value_multiselect,
-            "datepicker": TypeInfo.translate_value_datetimepicker,
-            "datetimepicker": TypeInfo.translate_value_datetimepicker,
-            "textarea": TypeInfo.translate_value_textarea,
-            "number": TypeInfo.translate_value_number,
-            "blob": PostgreSQL96Dialect.make_blob,
-            "list": TypeInfo.translate_value_list
-        }
-
-        if value is not None:
-            input_type = field['input_type']
-            for rule, rule_function in mapping.items():
-                if input_type == rule:
-                    value = rule_function(type_info, field, value)
-                    break
-
-            if isinstance(value, list):
-                value = mapping["list"](type_info, field, value)
-
-        return value
-
 
 class MySqlDialect(ODBCDialectBase):
     RESERVE_LIST = ['add', 'all', 'alter', 'analyze', 'and', 'as', 'asc', 'auto_increment', 'bdb', 'berkeleydb', 'between', 'bigint',
@@ -377,6 +359,8 @@ class MySqlDialect(ODBCDialectBase):
                     'tables', 'terminated', 'text', 'then', 'tinyblob', 'tinyint', 'tinytext', 'to', 'trailing', 'true', 'types', 'union', 'unique',
                     'unlock', 'unsigned', 'update', 'usage', 'use', 'user_resources', 'using', 'values', 'varbinary', 'varchar', 'varcharacter',
                     'varying', 'warnings', 'when', 'where', 'with', 'write', 'xor', 'year_month', 'zerofill']
+    def __init__(self):
+        self.mapped_translate_value = translate_value_for_blob(MySqlDialect.make_blob)
 
     def get_upsert(self, table_name, field_names, field_types):
         """
@@ -507,6 +491,9 @@ class MySqlDialect(ODBCDialectBase):
         else: # an issue and try encoding without specifying fromtype
             connection.setencoding(encoding=ENCODING)
 
+    @staticmethod
+    def make_blob(type_info, field, value):
+        return value.hex()
 
 class SqlServerDialect(ODBCDialectBase):
     RESERVE_LIST = ['absolute', 'action', 'ada', 'add', 'all', 'allocate', 'alter', 'and', 'any', 'are', 'as', 'asc',
@@ -875,3 +862,33 @@ END; """
         else: # an issue and try encoding without specifying fromtype
             connection.setencoding(encoding=ORACLE_ENCODING)
 
+
+def translate_value_for_blob(blob_func):
+    mapping = {
+            "select_owner": TypeInfo.translate_value_select,
+            "select_user": TypeInfo.translate_value_select,
+            "select_select": TypeInfo.translate_value_select,
+            "multiselect": TypeInfo.translate_value_multiselect,
+            "multiselect_members": TypeInfo.translate_value_multiselect,
+            "datepicker": TypeInfo.translate_value_datetimepicker,
+            "datetimepicker": TypeInfo.translate_value_datetimepicker,
+            "textarea": TypeInfo.translate_value_textarea,
+            "number": TypeInfo.translate_value_number,
+            "blob": blob_func,
+            "list": TypeInfo.translate_value_list
+        }
+
+    def translate_value(type_info, field, value):
+        if value is not None:
+            input_type = field['input_type']
+            for rule, rule_function in mapping.items():
+                if input_type == rule:
+                    value = rule_function(type_info, field, value)
+                    break
+
+            if isinstance(value, list):
+                value = mapping["list"](type_info, field, value)
+
+        return value
+
+    return translate_value
