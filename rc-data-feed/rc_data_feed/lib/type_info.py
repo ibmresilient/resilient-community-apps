@@ -70,7 +70,7 @@ class TypeInfo(object):
     NOTE_ATTACHMENT_INCLUDE_FIELDS = [
         (None, "task_id", "number")
     ]
-    # adding content field for attachments 
+    # adding content field for attachments
     CONTENT_ATTACHMENT_INCLUDE_FIELDS = [
         (None, "content", "blob")
     ]
@@ -362,7 +362,86 @@ class TypeInfo(object):
         return obj
 
     @staticmethod
+    def translate_value_select(type_info, field, value):
+        return type_info.get_select_value(value, field)
+
+    @staticmethod
+    def translate_value_multiselect(type_info, field, value):
+        return [type_info.get_select_value(v, field) for v in value]
+
+    @staticmethod
+    def translate_value_datetimepicker(type_info, field, value):
+        # Server returns date as milliseconds since epoch (1/1/1970), but Python
+        # wants it as seconds.  Then, convert to an ISO formatted string
+        # representation.
+        #
+        d = datetime.utcfromtimestamp(value/1000)
+        if field['input_type'] == 'datetimepicker':
+            d = pytz.timezone('UTC').localize(d)
+
+        return d.isoformat()
+
+    @staticmethod
+    def translate_value_list(type_info, field, value):
+        # For now, squash lists into a joined string.  May need to actually
+        # return the list if the callers are going to need to do something
+        # else with it (like write data to a join table).
+        #
+        try:
+            value = ', '.join(value)
+        except:
+            value = json.dumps(value)
+
+        return value
+
+    @staticmethod
+    def translate_value_textarea(type_info, field, value):
+        if isinstance(value, dict):
+            return value['content']
+
+        return value
+
+    @staticmethod
+    def translate_value_number(type_info, field, value):
+        if isinstance(value, dict):
+            return value['id']
+
+        return value
+
+    @staticmethod
+    def translate_value_blob(type_info, field, value):
+        return value
+
+    @staticmethod
     def translate_value(type_info, field, value):
+        mapping = {
+            "select_owner": TypeInfo.translate_value_select,
+            "select_user": TypeInfo.translate_value_select,
+            "select_select": TypeInfo.translate_value_select,
+            "multiselect": TypeInfo.translate_value_multiselect,
+            "multiselect_members": TypeInfo.translate_value_multiselect,
+            "datepicker": TypeInfo.translate_value_datetimepicker,
+            "datetimepicker": TypeInfo.translate_value_datetimepicker,
+            "textarea": TypeInfo.translate_value_textarea,
+            "number": TypeInfo.translate_value_number,
+            "blob": TypeInfo.translate_value_blob,
+            "list": TypeInfo.translate_value_list
+        }
+
+        if value is not None:
+            input_type = field['input_type']
+            for rule, rule_function in mapping.items():
+                if input_type == rule:
+                    value = rule_function(type_info, field, value)
+                    break
+
+            if isinstance(value, list):
+                value = mapping["list"](type_info, field, value)
+
+        return value
+
+    @staticmethod
+    def translate_valuex(type_info, field, value):
         """Translates the value that we want in the 'flattened' output."""
         if value is not None:
             input_type = field['input_type']
