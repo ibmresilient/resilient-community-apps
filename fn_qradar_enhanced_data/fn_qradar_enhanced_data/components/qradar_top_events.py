@@ -5,7 +5,8 @@
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
-import datetime
+import time
+import random
 import logging
 import re
 import fn_qradar_enhanced_data.util.qradar_constants as qradar_constants
@@ -69,8 +70,8 @@ class FunctionComponent(ResilientComponent):
                                                          self.options.get("username", None) or self.options.get(
                                                              "qradartoken", None)))
 
-            temp_table = "offense-{0}-events-1000-{1}".format(qradar_query_param3,
-                                                             str(datetime.datetime.now().timestamp() * 1000))
+            temp_table = "offense-{0}-{1}-events-1000-{2}".format(qradar_query_param3, qradar_fn_type,
+                                                                  str(time.time()))
 
             qradar_temp_query = re.sub("FROM\s+{}".format(qradar_constants.ARIEL_SEARCH_EVENTS),
                                        "FROM {} INTO \"{}\"".format(qradar_constants.ARIEL_SEARCH_EVENTS, temp_table),
