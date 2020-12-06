@@ -69,7 +69,7 @@ class FunctionComponent(ResilientComponent):
                                                          self.options.get("username", None) or self.options.get(
                                                              "qradartoken", None)))
 
-            temp_table = "offense-{0}-{1}-events-1000-{2}".format(qradar_query_param3, qradar_fn_type,
+            temp_table = "offense-{0}-events-{1}-1000-{2}".format(qradar_query_param3, qradar_fn_type,
                                                                   str(time.time()))
 
             qradar_temp_query = re.sub("FROM\s+{}".format(qradar_constants.ARIEL_SEARCH_EVENTS),
