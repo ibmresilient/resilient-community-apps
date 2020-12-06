@@ -6,7 +6,6 @@
 """Function implementation"""
 
 import time
-import random
 import logging
 import re
 import fn_qradar_enhanced_data.util.qradar_constants as qradar_constants
