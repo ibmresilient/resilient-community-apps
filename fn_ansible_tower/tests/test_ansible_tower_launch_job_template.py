@@ -12,7 +12,7 @@ from . import helper
 pytest --resilient_app_config=/<path>/<to>/app.config tests/test_ansible_tower_launch_job_template.py
 """
 
-PACKAGE_NAME = "fn-ansible-tower"
+PACKAGE_NAME = "fn_ansible_tower"
 FUNCTION_NAME = "ansible_tower_launch_job_template"
 
 # Read the default configuration-data section from the package
