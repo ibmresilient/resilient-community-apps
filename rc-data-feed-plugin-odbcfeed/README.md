@@ -1,9 +1,9 @@
 ## Release Notes
 
+* v1.0.5 Support for attachment content
 * v1.0.4 Oracle definitions for AppHost
 * v1.0.3 AppHost configurations for Postresql, MS SQL Server, MySql, SQLite
 * v1.0.1 Duplication of incident id bug fix 
-
 
 # Introduction
 This package contains the odbcfeed Plugin to the Data Feed extension.  This Data Feed extension allows one to maintain "replica" data for Resilient incidents, artifacts, tasks, notes, etc.  The updates are performed in near real-time.
@@ -16,6 +16,23 @@ Refer to the documentation on the Data Feed extension for uses cases support and
 
 Unless otherwise specified, contents of this repository are published under the MIT open-source
 [LICENSE](LICENSE).
+
+# Change log
+## Version 1.0.5 changes
+Version 1.0.5 introduces the ability to include attachment content. When `include_attachment_data=true` is added to `[feeds]`, an additional database column is added: `content`. This column is created to the `attachment` table in the equivalent database storage type as a blob:
+
+| Database | content field |
+| -------- | ------------- |
+| Sqlite   | blob |
+| Postgres | bytea |
+| MySQL    | blob |
+| SQLServer | |
+| Oracle | |
+
+Attachment content can be to up 20mb. Plan your storage requirements for the `attachment` table accordingly. 
+
+Refer to the documentation for each database on how to read or process blob data.
+
 
 # Installation
   The integration package contains Python components that are called by the Resilient platform. These components run in the Resilient Circuits integration framework. The package also includes Resilient customizations that will be imported into the platform later.
@@ -59,7 +76,9 @@ Unless otherwise specified, contents of this repository are published under the 
   reload=True
   # feed_data is the default queue that will be listened to
   queue=feed_data
-  
+  # new in v1.0.5 include attachment content. Default is false
+  include_attachment_data=true
+
   [postgres_feed]
   class=ODBCFeed
   odbc_connect=Driver={PostresSQL Driver};Server=127.0.0.1;DB=<db>;Port=5432;connectTimeout=0
@@ -268,7 +287,8 @@ def get_column_type(self, input_type):  # pylint: disable=no-self-use
         number='BIGINT',
         datepicker='DATE',
         datetimepicker='TIMESTAMP',
-        boolean='BOOLEAN'
+        boolean='BOOLEAN',
+        blob='blob'
     )
 
     if input_type in type_dict:
