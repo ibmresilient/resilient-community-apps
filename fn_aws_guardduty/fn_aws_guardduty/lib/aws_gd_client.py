@@ -117,11 +117,10 @@ class AwsGdClient():
 
         return clients
 
-    def paginate(self, op=None, results_filter=None, return_filtered=False, **kwargs):
+    def paginate(self, op=None, **kwargs):
         """ Get the result using get_paginator format for certain AWS GuardDuty queries.
 
         :param op: The AWS GuardDuty operation to execute.
-        :param results_filter: Dict of filters by filter type.
         :param kwargs: Dictionary of AWS API parameters for function call .
         :return: Query result in a list.
         """
@@ -163,7 +162,7 @@ class AwsGdClient():
 
         return result
 
-    def get(self, op=None, paginate=False, results_filter=None, return_filtered=False, **kwargs):
+    def get(self, op=None, paginate=False, **kwargs):
         """ Execute a "query" type AWS GuardDuty  operation.
         The calls will translate to actual "get" or query operations. The operation will return
         standard or paginated result since not all query operations support pagination.
@@ -174,7 +173,7 @@ class AwsGdClient():
         :return: Result in a list.
         """
         if self.gd.can_paginate(op):
-            return self.paginate(op, results_filter=results_filter, return_filtered=return_filtered, **kwargs)
+            return self.paginate(op, **kwargs)
 
         result = []
         result_type = None
