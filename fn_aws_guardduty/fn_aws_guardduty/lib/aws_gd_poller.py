@@ -6,6 +6,8 @@
 import logging
 import time
 import datetime as dt
+
+from fn_aws_guardduty.lib.aws_gd_cli_man import AwsGdCliMan
 from fn_aws_guardduty.lib.aws_gd_client import AwsGdClient
 from resilient import SimpleHTTPException
 import fn_aws_guardduty.util.config as config
@@ -42,15 +44,15 @@ class AwsGdPoller():
         """Run polling thread, alternately check for new data and wait"""
         # Get GuardDuty client.
 
-        aws_gd = AwsGdClient(self.opts, self.function_opts, is_poller=True)
+        aws_cli_man = AwsGdCliMan(self.opts, self.function_opts)
 
         while not config.STOP_THREAD:
             # Set criteria to filter findings results.
             fc = self.set_criteria()
             # Loop over accessible GuardDuty regions and get available DetectorIds.
-            for gd_region, gd_region_info in aws_gd.gd_clients["regions"].items():
-                aws_gd.gd = gd_region_info["cli"]
-                detectors = gd_region_info["detectors"]
+            for gd_region, gd_client_info in aws_cli_man.gd_clients["clients"].items():
+                aws_gd = gd_client_info["client"]
+                detectors = gd_client_info["detectors"]
 
                 if not detectors:
                     # No cached detector info see if any available detectors available for the specified AWS Region.
@@ -100,11 +102,11 @@ class AwsGdPoller():
             # Amount of time (seconds) * WAIT_MULTIPLIER to wait to check cases again.
             time.sleep(int(self.polling_interval) * WAIT_MULTIPLIER)
 
-            # Refresh regions info if time since refresh > refresh interval. This is to enure we have
+            # Refresh clients info if time since refresh > refresh interval. This is to ensure we have
             # latest detector ids for the regions.
             now = dt.datetime.now()
-            if (now - aws_gd.gd_clients["timestamp"]).total_seconds() > (self.regions_interval * WAIT_MULTIPLIER):
-                aws_gd.gd_clients = aws_gd._get_clients()
+            if (now - aws_cli_man.gd_clients["timestamp"]).total_seconds() > (self.regions_interval * WAIT_MULTIPLIER):
+                aws_cli_man.refresh_clients()
 
     def _find_resilient_incident_for_req(self, finding, f_fields):
         """
