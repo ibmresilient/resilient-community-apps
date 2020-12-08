@@ -25,7 +25,7 @@ Version 1.0.5 introduces the ability to include attachment content. When `includ
 | -------- | ------------- |
 | Sqlite   | blob |
 | Postgres | bytea |
-| MySQL    | blob |
+| MySQL    | varbinary |
 | SQLServer | |
 | Oracle | |
 

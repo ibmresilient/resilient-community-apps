@@ -166,7 +166,7 @@ class SqlDialect:
 
     @staticmethod
     def make_blob(type_info, field, value):
-        return value
+        return value.hex()
 
 class ODBCDialectBase(SqlDialect):  # pylint: disable=abstract-method
     """
@@ -490,10 +490,6 @@ class MySqlDialect(ODBCDialectBase):
             connection.setencoding(unicode, encoding=ENCODING)
         else: # an issue and try encoding without specifying fromtype
             connection.setencoding(encoding=ENCODING)
-
-    @staticmethod
-    def make_blob(type_info, field, value):
-        return value.hex()
 
 class SqlServerDialect(ODBCDialectBase):
     RESERVE_LIST = ['absolute', 'action', 'ada', 'add', 'all', 'allocate', 'alter', 'and', 'any', 'are', 'as', 'asc',
