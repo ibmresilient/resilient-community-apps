@@ -4,19 +4,19 @@
 
 """This module contains all of the SqlDialect implementations that we support."""
 
+import logging
 import sys
 import sqlite3
 import pyodbc
 from six import string_types
 from rc_data_feed.lib.type_info import TypeInfo
 
+LOG = logging.getLogger(__name__)
 
 MAX_ORACLE_VARCHAR = 2000
 MAX_MARIADB_TEXT = 32000  # roughly 1/2 of 65535 limit to account for unicode
 ENCODING="utf-8"
 ORACLE_ENCODING="utf-16le"
-# attachment are limited to 20m bytes
-MAX_BLOB = 20000000
 
 class SqlDialect:
     """Base class for all SQL dialects that we will support."""
@@ -152,8 +152,8 @@ class SqlDialect:
             """
             if field_name.lower() in reserved_words:
                 return field_name.lower()+"_"
-            else:
-                return field_name.lower()
+
+            return field_name.lower()
 
         if type(args) == list:
             new_args = []
@@ -161,8 +161,8 @@ class SqlDialect:
                 new_args.append(clean_field_name(arg))
 
             return new_args
-        else:
-            return clean_field_name(args)
+
+        return clean_field_name(args)
 
     @staticmethod
     def make_blob(type_info, field, value):
@@ -329,12 +329,12 @@ class PostgreSQL96Dialect(ODBCDialectBase):
 
     def configure_connection(self, connection):
         connection.setdecoding(pyodbc.SQL_WCHAR, encoding=ENCODING)  # pylint: disable=c-extension-no-member
-        if sys.version_info.major == 2: # to set encoding on python 2  
+        if sys.version_info.major == 2: # to set encoding on python 2
             connection.setencoding(str, encoding=ENCODING)
             connection.setencoding(unicode, encoding=ENCODING)
         else: # an issue and try encoding without specifying fromtype
             connection.setencoding(encoding=ENCODING)
-        
+
     @staticmethod
     def make_blob(type_info, field, value):
         hex_address = value.hex()
@@ -627,7 +627,11 @@ class SqlServerDialect(ODBCDialectBase):
 
         :returns True if the exception was due to the column already existing; False otherwise.
         """
-        return True
+        if "Column names in each table must be unique" in str(the_exception):
+            return True
+
+        LOG.error(the_exception)
+        return False
 
     def get_column_type(self, input_type):  # pylint: disable=no-self-use
         """
@@ -643,7 +647,7 @@ class SqlServerDialect(ODBCDialectBase):
             datepicker='DATE',
             datetimepicker='DATETIME2',
             boolean='BIT',
-            blob='VARBINARY({})'.format(MAX_BLOB)
+            blob='VARBINARY(max)'
         )
 
         if input_type in type_dict:
@@ -702,6 +706,8 @@ class OracleDialect(ODBCDialectBase):
                 select_values.append("to_date(?, 'YYYY-MM-DD\"T\"HH24:MI:SS.######') as {}".format(clean_name))
             elif field_types.get(name, '') == "datetimepicker":
                 select_values.append("to_timestamp_tz(?, 'YYYY-MM-DD\"T\"HH24:MI:SS.FFTZH:TZM') as {}".format(clean_name))
+            elif field_types.get(name, '') == "blob":
+                select_values.append("hextoraw(?) as {}".format(clean_name))
             else:
                 select_values.append("? as {}".format(clean_name))
 
@@ -710,7 +716,7 @@ class OracleDialect(ODBCDialectBase):
 
         value_placeholders = ['source.{}'.format(name.lower()) for name in clean_field_names]
 
-        template = """MERGE INTO {0} target 
+        template = """MERGE INTO {0} target
         USING (
                SELECT {1} FROM dual
               ) source
@@ -829,7 +835,7 @@ END; """
             datepicker='DATE',
             datetimepicker='TIMESTAMP',
             boolean='NUMBER(1)',
-            blob='BLOB({})'.format(MAX_BLOB)
+            blob='BLOB'
         )
 
         if input_type in type_dict:
@@ -860,6 +866,14 @@ END; """
 
 
 def translate_value_for_blob(blob_func):
+    """[define mappings for Resilient fields to db fields]
+
+    Args:
+        blob_func ([method]): [method to run when encountering a blob field type]
+
+    Returns:
+        [object]: [translated field ready for the specific db]
+    """
     mapping = {
             "select_owner": TypeInfo.translate_value_select,
             "select_user": TypeInfo.translate_value_select,

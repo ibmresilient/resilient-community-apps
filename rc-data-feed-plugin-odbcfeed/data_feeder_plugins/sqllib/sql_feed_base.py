@@ -39,8 +39,8 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
 
             if dialect_name is None or SqlFeedDestinationBase.AVAILABLE_DIALECTS.get(dialect_name) is None:
                 raise ValueError("sql_dialect is incorrect: {}".format(dialect_name))
-            else:
-                self.dialect = SqlFeedDestinationBase.AVAILABLE_DIALECTS[dialect_name]()
+
+            self.dialect = SqlFeedDestinationBase.AVAILABLE_DIALECTS[dialect_name]()
 
         self.created_tables = {}
 
@@ -112,10 +112,11 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
                         # remember that we've added the field.
                         self.created_tables[type_name][field_name] = field['input_type']
                     elif field_name != 'id' and field_type != self.created_tables[type_name][field_name]:
-                        LOG.warn("Field {}.{} type was {}. Will be altered to {}".format(type_name, field_name, self.created_tables[type_name][field_name], field_type))
+                        LOG.warning("Field %s.%s type was %s. Will be altered to %s",
+                                    type_name, field_name, self.created_tables[type_name][field_name], field_type)
 
                 self._commit_transaction(cursor)
-                break;
+                break
             except Exception as err:
                 LOG.error("_create_or_update_table exception: %s", err)
                 if err.args and err.args[0] in PYODBC_CONNECTION_LOST:
@@ -151,6 +152,7 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
             # it's one we want to bypass.
             #
             if not self.dialect.is_column_exists_exception(db_exception):
+                LOG.error(ddl)
                 raise db_exception
 
     def send_data(self, context, payload):
@@ -167,7 +169,9 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
         # Create a flattened map where each key of the map is the field name.
         #
         flat_payload = context.type_info.flatten(payload,
-                                                 translate_func=getattr(self.dialect, 'mapped_translate_value', TypeInfo.translate_value))
+                                                 translate_func=getattr(self.dialect,
+                                                                        'mapped_translate_value',
+                                                                        TypeInfo.translate_value))
 
         # some data types, such as datetime, will need a conversion routine
         all_field_types = dict()
@@ -216,7 +220,7 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
                         self.dialect.get_parameters(all_field_names, flat_payload))
 
                 self._commit_transaction(cursor)
-                break;
+                break
             except Exception as err:
                 LOG.error("send_data exception: %s", err)
                 if err.args and err.args[0] in PYODBC_CONNECTION_LOST:
@@ -230,4 +234,3 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
                         raise err
                     except Exception:
                         pass
-
