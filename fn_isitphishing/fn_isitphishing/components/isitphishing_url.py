@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2020. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import validate_fields, RequestsCommon, ResultPayload
-from fn_isitPhishing.lib.isitphishing_util import get_license_key
+from fn_isitphishing.lib.isitphishing_util import get_license_key
 
 
-CONFIG_DATA_SECTION = 'fn_isitPhishing'
+PACKAGE_NAME = 'fn_isitphishing'
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'isitphishing"""
@@ -20,17 +20,17 @@ class FunctionComponent(ResilientComponent):
 
         # Get app.config parameters.
         self.opts = opts
-        self.options = opts.get(CONFIG_DATA_SECTION, {})
+        self.options = opts.get(PACKAGE_NAME, {})
 
-    def _init_isitPhishing(self):
+    def _init_isitphishing(self):
         """ validate required fields for app.config """
         validate_fields(('isitphishing_api_url', 'isitphishing_name', 'isitphishing_license'), self.options)
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
-        self.options = opts.get(CONFIG_DATA_SECTION, {})
-        self._init_isitPhishing()
+        self.options = opts.get(PACKAGE_NAME, {})
+        self._init_isitphishing()
 
     @function("isitphishing_url")
     def _isitphishing_url_function(self, event, *args, **kwargs):
@@ -42,7 +42,7 @@ class FunctionComponent(ResilientComponent):
         URL input parameter to the function.
         """
         try:
-            rp = ResultPayload(CONFIG_DATA_SECTION, **kwargs)
+            rp = ResultPayload(PACKAGE_NAME, **kwargs)
 
             # Get the function parameters:
             isitphishing_url = kwargs.get("isitphishing_url")  # text
@@ -64,19 +64,18 @@ class FunctionComponent(ResilientComponent):
 
             payload = {"url": isitphishing_url, "force": False, "smart": True, "timeout": 8000}
 
-            yield StatusMessage("Query isitPhishing.org endpoint for status of URL {0}.".format(isitphishing_url))
+            yield StatusMessage("Query IsItPhishing.org endpoint for status of URL {0}.".format(isitphishing_url))
 
             # Make URL request
             rc = RequestsCommon(self.opts, self.options)
-            results_analysis = rc.execute_call("post", API_URL, payload, log=log, headers=headers)
+            response = rc.execute_call_v2("post", API_URL, json=payload, headers=headers, proxies=rc.get_proxies())
+            if response.status_code == 200:
+                success = True
+            else:
+                success = False
 
-            results = rp.done(True, results_analysis)
-
-            # Send back the results and the input parameter.
-            results = {
-                "content": results_analysis,
-                "inputs": {"URL": isitphishing_url}
-            }
+            response_json = response.json()
+            results = rp.done(success, response_json)
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

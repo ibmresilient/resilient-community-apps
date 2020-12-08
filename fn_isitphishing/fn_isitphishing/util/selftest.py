@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2020. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation
-   test with: resilient-circuits selftest -l fn_isitPhishing
+   test with: resilient-circuits selftest -l fn_isitphishing
 """
 
 import requests
 import logging
-from fn_isitPhishing.lib.isitphishing_util import get_license_key
+from fn_isitphishing.lib.isitphishing_util import get_license_key
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
@@ -18,7 +19,7 @@ def selftest_function(opts):
     Placeholder for selftest function. An example use would be to test package api connectivity.
     Suggested return values are be unimplemented, success, or failure.
     """
-    options = opts.get("fn_isitPhishing", {})
+    options = opts.get("fn_isitphishing", {})
 
     # Get the license key to access the API endpoint.
     auth_token = get_license_key(options["isitphishing_name"], options["isitphishing_license"])
