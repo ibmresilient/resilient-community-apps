@@ -5,11 +5,11 @@
 
 import logging
 import time
-from datetime import datetime
+import datetime as dt
 from fn_aws_guardduty.lib.aws_gd_client import AwsGdClient
 from resilient import SimpleHTTPException
 import fn_aws_guardduty.util.config as config
-from fn_aws_guardduty.lib.helpers import CUSTOM_FIELDS_MAP, IQuery
+from fn_aws_guardduty.lib.helpers import CUSTOM_FIELDS_MAP, IQuery, FCrit, get_lastrun_unix_epoch
 
 
 LOG = logging.getLogger(__name__)
@@ -32,17 +32,21 @@ class AwsGdPoller():
         # GuardDuty severity threshold
         self.aws_gd_severity_threshold = int(self.function_opts.get("aws_gd_severity_threshold")) \
             if self.function_opts.get("aws_gd_severity_threshold") else None
+        self.aws_gd_lookback_interval = int(self.function_opts.get("aws_gd_lookback_interval")) \
+            if self.function_opts.get("aws_gd_lookback_interval") else None
+        # Use last_update to ensure full list of findings returned only on initial run loop
+        # Subsequently only return findings created/updated since last execution.
+        self.last_update = None
 
     def run(self):
         """Run polling thread, alternately check for new data and wait"""
         # Get GuardDuty client.
 
         aws_gd = AwsGdClient(self.opts, self.function_opts, is_poller=True)
-        # Set a criterion to filter findings results.
-        fc = self.set_criterion()
 
         while not config.STOP_THREAD:
-
+            # Set criteria to filter findings results.
+            fc = self.set_criteria()
             # Loop over accessible GuardDuty regions and get available DetectorIds.
             for gd_region, gd_region_info in aws_gd.gd_clients["regions"].items():
                 aws_gd.gd = gd_region_info["cli"]
@@ -98,7 +102,7 @@ class AwsGdPoller():
 
             # Refresh regions info if time since refresh > refresh interval. This is to enure we have
             # latest detector ids for the regions.
-            now = datetime.now()
+            now = dt.datetime.now()
             if (now - aws_gd.gd_clients["timestamp"]).total_seconds() > (self.regions_interval * WAIT_MULTIPLIER):
                 aws_gd.gd_clients = aws_gd._get_clients()
 
@@ -124,7 +128,7 @@ class AwsGdPoller():
                 r_incidents_tmp = self.rest_client().post(query_uri, query)
 
             except Exception as err:
-                raise Exception("Exception '{}' while trying to get list of Resilient incidents.".format(err)) from err
+                raise Exception("Exception '{}' while trying to get list of Resilient incidents.".format(err))
 
             r_incidents = [r_inc for r_inc in r_incidents_tmp
                            for f in f_fields if r_inc["properties"].get(f) == finding[f]]
@@ -221,18 +225,26 @@ class AwsGdPoller():
         except SimpleHTTPException as ex:
             LOG.error("Something went wrong when attempting to create the Incident: %s", ex)
 
-    def set_criterion(self):
+    def set_criteria(self):
         """
-        Create a criterion to filter findings data form GuardDuty.
+        Create criteria to filter findings data from GuardDuty.
 
-        :param data: Formatted DTO for Incident
         :return fc: Return criterion dict
         """
-        fc = {"Criterion": {}}
+        fc = FCrit()
         # Add severity criterion if setting enabled.
         if self.aws_gd_severity_threshold:
-            fc["Criterion"].update({
-                'severity': {'Gte': self.aws_gd_severity_threshold}
-            })
+            fc.set_severity(self.aws_gd_severity_threshold)
+        if self.aws_gd_lookback_interval:
+            # Set criteria for findings updated since lookback interval.
+            fc.set_update(get_lastrun_unix_epoch(self.aws_gd_lookback_interval))
+        else:
+            if self.last_update:
+                # Set criteria for findings updated since last run through loop.
+                fc.set_update(get_lastrun_unix_epoch(self.last_update))
+            else:
+                # First run no criterion set for updates, fetch all may take a long time.
+                LOG.info("First Run in progress - this may take a while.")
+            self.last_update = now = dt.datetime.now()
 
         return fc

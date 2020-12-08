@@ -18,15 +18,17 @@ aws_gd_secret_access_key=<AWS_GUARDDUTY_SECRET_ACCESS_KEY>
 # Filter by GuardDuty region names. Can be a string or regular expression.
 # e.g. aws_gd_regions=^(us|eu).* to get Europe and US regions.
 aws_gd_regions=<AWS_GUARDDUTY_REGION_REGEX>
-# Interval to poll Guardduty (in minutes).
-aws_gd_polling_interval=10
 # Interval to refresh regions information (in minutes).
 aws_gd_regions_interval=60
-# Optional setting - severity threshold (int) to use in criterion to filter findings results. (default 7).
+# Interval to poll Guardduty (in minutes).
+aws_gd_polling_interval=10
+# Optional - severity threshold (int) to use in criterion to filter findings 
+# results. (default 7).
 # Severity ranges: 7.0 - 8.9 -> High, 4.0 - 6.9 -> Medium, 1.0 = 3.9 -> Low
 aws_gd_severity_threshold = 7
-# Initial Import Look-back Interval in minutes (default: 1 hour)
-aws_gd_startup_interval=60
+# Optional - Lookback interval in minutes to check if findings updated
+# since last run. Used in criteria for filtering findings retrieval (default 60).
+aws_gd_lookback_interval=60
 # Optional settings for access to GuardDuty via a proxy.
 #http_proxy=http://proxy:80
 #https_proxy=http://proxy:80
