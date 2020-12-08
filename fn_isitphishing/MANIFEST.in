@@ -3,8 +3,7 @@ include Dockerfile
 include entrypoint.sh
 include README.md
 include fn_isitphishing/*
-include fn_isitphishing/util/*
-include fn_isitphishing/util/data/*
+recursive-include fn_isitphishing/util *
 include fn_isitphishing/LICENSE
 include fn_isitphishing/doc/*
 include fn_isitphishing/icons/*
