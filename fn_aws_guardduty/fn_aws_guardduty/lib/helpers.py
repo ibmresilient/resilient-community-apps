@@ -5,6 +5,7 @@
 # Map GuardDuty finding fields to Resilient Incident custom fields.
 import re
 import datetime as dt
+import time
 
 CUSTOM_FIELDS_MAP = {
     "Id": "aws_guardduty_finding_id",
@@ -134,7 +135,7 @@ def is_regex(regex_str):
 
 def get_lastrun_unix_epoch(lookback_interval):
     """
-    Get Unix epoch in miliseconds sincs last run.
+    Get Unix epoch in miliseconds since last run.
 
     :param lookback_interval: Interval in minutes(int) or a datetime object.
     :return: Unix epoch in miliseconds.
@@ -145,4 +146,4 @@ def get_lastrun_unix_epoch(lookback_interval):
     else:
         past = lookback_interval
 
-    return dt.datetime.timestamp(past) * 1000.0
+    return  (time.mktime(past.timetuple()) + past.microsecond / 1e6) * 1000.0
