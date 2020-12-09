@@ -41,17 +41,15 @@ class AwsGdCliMan():
         if not is_regex(self.aws_gd_regions):
             raise ValueError("The query filter '{}' is not a valid regular expression."
                              .format(repr(self.aws_gd_regions)))
-        self.gd_clients = self._get_clients()
+        self._get_clients()
 
     def _get_clients(self):
         """ Create a hash of GuardDuty clients for accessible regions.
 
         :return clients: Hash of client objects.
         """
-        clients = {
-            "timestamp": datetime.now(),
-            "clients": {}
-        }
+        self.timestamp = datetime.now()
+        self.clients = {}
 
         if version_info.major < 3:
             regex = r'{}'.format(self.aws_gd_regions.encode('utf-8'))
@@ -73,18 +71,16 @@ class AwsGdCliMan():
                     continue
                 raise invalid_ex
 
-            clients["clients"].update({
+            self.clients.update({
                 region: {
                     "client": aws_gd,
                     "detectors": detectors
                 }
             })
 
-        return clients
-
     def refresh_clients(self):
         """ Refresh hash of Clients for accessible GuardDuty regions.
 
         :return: Update hash of clients.
         """
-        self.gd_clients = self._get_clients()
+        self._get_clients()

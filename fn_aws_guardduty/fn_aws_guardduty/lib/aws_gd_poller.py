@@ -6,10 +6,9 @@
 import logging
 import time
 import datetime as dt
-
-from fn_aws_guardduty.lib.aws_gd_cli_man import AwsGdCliMan
-from fn_aws_guardduty.lib.aws_gd_client import AwsGdClient
 from resilient import SimpleHTTPException
+from resilient_lib.components.integration_errors import IntegrationError
+from fn_aws_guardduty.lib.aws_gd_cli_man import AwsGdCliMan
 import fn_aws_guardduty.util.config as config
 from fn_aws_guardduty.lib.helpers import CUSTOM_FIELDS_MAP, IQuery, FCrit, get_lastrun_unix_epoch
 
@@ -50,7 +49,7 @@ class AwsGdPoller():
             # Set criteria to filter findings results.
             fc = self.set_criteria()
             # Loop over accessible GuardDuty regions and get available DetectorIds.
-            for gd_region, gd_client_info in aws_cli_man.gd_clients["clients"].items():
+            for gd_region, gd_client_info in aws_cli_man.clients.items():
                 aws_gd = gd_client_info["client"]
                 detectors = gd_client_info["detectors"]
 
@@ -105,7 +104,7 @@ class AwsGdPoller():
             # Refresh clients info if time since refresh > refresh interval. This is to ensure we have
             # latest detector ids for the regions.
             now = dt.datetime.now()
-            if (now - aws_cli_man.gd_clients["timestamp"]).total_seconds() > (self.regions_interval * WAIT_MULTIPLIER):
+            if (now - aws_cli_man.timestamp).total_seconds() > (self.regions_interval * WAIT_MULTIPLIER):
                 aws_cli_man.refresh_clients()
 
     def _find_resilient_incident_for_req(self, finding, f_fields):
