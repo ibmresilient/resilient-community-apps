@@ -42,6 +42,11 @@ Function that takes an incident_id and a JSON String of field_name and field_val
 | `close_fields` | `text` | No | `-` | A JSON String of the fields required to close an Incident e.g.: {'resolution_id':'Resolved','resolution_summary':'closing'} |
 | `incident_id` | `number` | Yes | `-` | - |
 
+Make sure close_fields represents a JSON string. 
+* use double quotes to surround key names and string values.
+* use `true` or `false` for boolean values.
+* use brackets to surround multi-select field values. Ex. ["some", "thing"].
+* field types `datepicker` and `datetimepicker` need to be in epoch format in milliseconds. Ex. 1607533205000.
 </p>
 </details>
 

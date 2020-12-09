@@ -55,8 +55,9 @@ Close Incident Function takes an incident_id and a JSON String of field_name and
 * An Integration Server running `resilient_circuits>=30.0.0`
   * To set up an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
   * If using API Keys, minimum required permissions are:
-      * Org Data: Read, Edit
+      * Org Data: Read
       * Function: Read
+      * Incident Fields: Edit
 ---
 
 ## Installation
