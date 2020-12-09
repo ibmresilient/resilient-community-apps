@@ -77,7 +77,7 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
         raise NotImplementedError
 
     @abc.abstractmethod
-    def _reinit(self):
+    def _reinit(self, connect_str, uid, pwd):
         raise NotImplementedError
 
     def _create_or_update_table(self, type_name, all_fields):

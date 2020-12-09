@@ -9,6 +9,7 @@ LOG = logging.getLogger(__name__)
 
 
 TABLE_NAME = "all_types"
+BLOB_TABLE_NAME = "blob_test"
 
 FIND_COLUMNS_QUERY = "SELECT column_name, data_type FROM information_schema.columns WHERE  table_name='{table_name}'"
 
@@ -22,6 +23,10 @@ all_fields = [
     {"name": "test_bool",  "input_type": "boolean"}
 ]
 
+blob_fields = [
+    {"name": "id", "input_type": "number"},
+    {"name": "content", "input_type": "blob"}
+]
 
 flat_payload = OrderedDict()
 flat_payload["id"] =  101
@@ -42,7 +47,6 @@ class SQLCommon():
         self.inspect_cols_query = inspect_cols_query.format(table_name=self.table_name)
         self.baseClass = baseClass
         self.setup_stmt = setup_stmt
-
 
         self.all_field_names = [field['name'] for field in table_def]
         self.all_field_types = dict()
@@ -77,18 +81,17 @@ class SQLCommon():
             # find all the columns types by column name we expect
             exected_col_types = {}
 
-            for field in all_fields:
+            for field in self.table_def:
                 field_name = field['name']
                 field_type = field['input_type']
                 col_type = connection.dialect.get_column_type(field_type)
                 exected_col_types[field_name.lower()] = col_type.lower()
 
-            connection._create_or_update_table(self.table_name, all_fields)
+            connection._create_or_update_table(self.table_name, self.table_def)
 
             # confirm that the table was created
             cursor = connection._start_transaction()
             try:
-
                 get_cols_result = connection._execute_sql(
                     cursor,
                     self.inspect_cols_query)
@@ -121,13 +124,12 @@ class SQLCommon():
         try:
             payload = flat_payload.copy()
             # convert data for the fields
-            for field in all_fields:
+            for field in self.table_def:
                 item_name = field['name']
                 item_type = field['input_type']
                 item_value = flat_payload[item_name]
                 converted_value = TypeInfo.translate_value(None, field, item_value)
                 payload[item_name] = converted_value
-
 
             # add data to table
             cursor = connection._start_transaction()
@@ -178,7 +180,7 @@ class SQLCommon():
         try:
             payload = flat_payload.copy()
             # convert data for the fields
-            for field in all_fields:
+            for field in self.table_def:
                 item_name = field['name']
                 item_type = field['input_type']
                 item_value = flat_payload[item_name]
@@ -285,3 +287,6 @@ class SQLCommon():
             cursor.close()
             if hasattr(connection, "_close_connection"):
                 connection._close_connection()
+
+    def test_blob(self):
+        return True
