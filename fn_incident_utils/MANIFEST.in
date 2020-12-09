@@ -1,0 +1,8 @@
+include README.md
+include fn_incident_utils/util/*
+include fn_incident_utils/LICENSE
+include doc/*.md
+include doc/screenshots/*
+include data/*
+
+exclude *.bak
