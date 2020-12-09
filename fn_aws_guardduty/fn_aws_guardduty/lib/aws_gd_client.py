@@ -62,7 +62,7 @@ class AwsGdClient():
 
         except ClientError as cli_ex:
             LOG.error("ERROR instantiating AWS GuardDuty client for service: %s, Got exception : %s",
-                      service_name, cli_ex.__repr__())
+                      service_name, str(cli_ex))
             raise cli_ex
 
         return client
@@ -98,7 +98,7 @@ class AwsGdClient():
 
         except self.gd.exceptions.ClientError as invalid_ex:
 
-            if "ValidationError" in invalid_ex.__repr__():
+            if "ValidationError" in str(invalid_ex):
 
                 LOG.info("ERROR with %s and args: '%s', Got exception: %s",
                          op, kwargs, "ValidationErrorException")
@@ -107,7 +107,7 @@ class AwsGdClient():
 
         except Exception as int_ex:
             LOG.error("ERROR in paginator with operation: '%s' and args: '%s', Got exception: %s",
-                      op, kwargs, int_ex.__repr__())
+                      op, kwargs, str(int_ex))
             LOG.info(int_ex)
             raise int_ex
 
@@ -133,7 +133,7 @@ class AwsGdClient():
             aws_gd_op = getattr(self.gd, op)
         except AttributeError as attr_ex:
             LOG.error("Unknown AWS GuardDuty operation %s, Got exception: %s",
-                      op, attr_ex.__repr__())
+                      op, str(attr_ex))
             raise attr_ex
 
         try:
@@ -154,7 +154,7 @@ class AwsGdClient():
 
         except self.gd.exceptions.ClientError as invalid_ex:
 
-            if "ValidationError" in invalid_ex.__repr__():
+            if "ValidationError" in str(invalid_ex):
 
                 LOG.info("ERROR with %s and args: '%s', Got exception: %s",
                          aws_gd_op.__name__, kwargs, "ValidationErrorException")
@@ -164,7 +164,7 @@ class AwsGdClient():
         except Exception as int_ex:
 
             LOG.error("ERROR with %s and args: '%s', Got exception: %s",
-                      aws_gd_op.__name__, kwargs, int_ex.__repr__())
+                      aws_gd_op.__name__, kwargs, str(int_ex))
             raise int_ex
 
         result = response[result_type]
@@ -186,13 +186,13 @@ class AwsGdClient():
             aws_gd_op = getattr(self.gd, op)
         except AttributeError as attr_ex:
             LOG.error("Unknown AWS GuardDuty operation %s, Got exception: %s",
-                      op, attr_ex.__repr__())
+                      op, str(attr_ex))
             raise attr_ex
         try:
             aws_gd_op(**kwargs)
 
         except self.gd.exceptions.ClientError as invalid_ex:
-            if "ValidationError" in invalid_ex.__repr__():
+            if "ValidationError" in str(invalid_ex):
                 return "ValidationError"
 
             LOG.info("ERROR with %s and args: '%s', Got exception: %s",
@@ -200,7 +200,7 @@ class AwsGdClient():
             raise invalid_ex
 
         except Exception as int_ex:
-            LOG.error("ERROR with %s and args '%s', Got exception: %s", aws_gd_op.__name__, kwargs, int_ex.__repr__())
+            LOG.error("ERROR with %s and args '%s', Got exception: %s", aws_gd_op.__name__, kwargs, str(int_ex))
             raise int_ex
 
         return status

@@ -69,7 +69,7 @@ class AwsGdCliMan():
                 if "The security token included in the request is invalid" in invalid_ex.__repr__():
                     LOG.warning("Invalid security token for region %s, Got exception: %s. "
                                 "GuardDuty may need to be enabled for the user in the AWS region.",
-                                region, invalid_ex.__repr__())
+                                region, str(invalid_ex))
                     continue
                 raise invalid_ex
 
