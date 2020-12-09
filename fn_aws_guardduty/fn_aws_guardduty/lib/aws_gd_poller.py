@@ -246,6 +246,6 @@ class AwsGdPoller():
             else:
                 # First run no criterion set for updates, fetch all may take a long time.
                 LOG.info("First Run in progress - this may take a while.")
-            self.last_update = now = dt.datetime.now()
+            self.last_update = dt.datetime.now()
 
         return fc
