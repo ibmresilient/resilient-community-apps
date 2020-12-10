@@ -14,7 +14,7 @@
   NOTE: If your app is available in the container-format only, there is no need to mention the integration server in this readme.
 -->
 
-# None
+# QRadar Enhanced Offense Data Migration
 
 ## Table of Contents
 - [Release Notes](#release-notes)
@@ -140,7 +140,7 @@ The following table provides the settings you need to configure the app. These s
 | ------ | :------: | ------- | ----------- |
 | **host** | Yes | `localhost` | *QRadar host* |
 | **username** | Yes | `admin` | *QRadar account username.* |
-| **qradarpassword** | Yes | `P@ssw0rd` | *Password associated with the QRadar account username* |
+| **qradarpassword** | Yes | `password` | *Password associated with the QRadar account username* |
 | **qradartoken** | Yes | `cb971c75-b2f9-4445-aaae-xxxxxxxxxxxx` | *SEC Token generated in QRadar* |
 | **verify_cert** | No | `/path/to/cert` | *Path to certificate or specify `false` if using self signed certificate* |
 | **search_timeout** | No | `300` | *Timeout for the AQL search to be specified in seconds* |
