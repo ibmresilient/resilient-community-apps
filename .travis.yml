@@ -29,7 +29,7 @@ stages:
     if: branch = master AND type = cron
   # Every commit not on master runs tests
   - name: run tests
-    if: branch != master
+    if: branch != master OR type in (pull_request)
   # Build packages and images for PRs and tags
   - name: build packages
     if: type in (pull_request) OR ( tag IS present AND tag =~ ^container/.+ )
@@ -153,3 +153,4 @@ after_failure:
 before_install:
   - pip install --upgrade pip
   - pip install setuptools
+  - env
