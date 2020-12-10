@@ -12,8 +12,8 @@ env:
   # get the message of the latest tag this code is described by
   - TAG_MSG=`git tag -ln --format '%(subject)' $(git describe --tags --abbrev=0) | head -n 1`
   # this checks if commit message or a tag message if it's a tag push have [dev-deps] in them
-  - DEV_DEPS_KEYWORD="[dev-deps]"
-  - DEV_DEPS=`[[ ( -z $TRAVIS_TAG && $TRAVIS_COMMIT_MESSAGE =~ $DEV_DEPS_KEYWORD ) || $TAG_MSG =~ $DEV_DEPS_KEYWORD ]]; echo $?`
+  - DEV_DEPS_KEYWORD='[dev-deps]'
+  - DEV_DEPS=`[[ ( -z $TRAVIS_TAG && "$TRAVIS_COMMIT_MESSAGE" =~ "$DEV_DEPS_KEYWORD" ) || "$TAG_MSG" =~ "$DEV_DEPS_KEYWORD" ]]; echo $?`
   - ARTIFACTORY_PYPI_INDEX="https://$ARTIFACTORY_USERNAME:$ARTIFACTORY_PASSWORD@na.artifactory.swg-devops.com/artifactory/api/pypi/sec-resilient-team-integrations-pypi-virtual/simple"
   - ARTIFACTORY_REPO_LINK=https://na.artifactory.swg-devops.com/artifactory/sec-resilient-team-integrations-generic-local
 # Exclude these branches from having jobs ran.
