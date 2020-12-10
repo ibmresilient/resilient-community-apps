@@ -93,7 +93,7 @@ class FunctionComponent(ResilientComponent):
                                                                    [qradar_query_param1,
                                                                     " ",
                                                                     " ",
-                                                                    " ",
+                                                                    qradar_query_param4 or " ",
                                                                     qradar_query_param5,
                                                                     qradar_query_param6
                                                                     ])

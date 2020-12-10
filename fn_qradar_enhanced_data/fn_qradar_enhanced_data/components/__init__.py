@@ -16,6 +16,7 @@ class QRadarTab(Tab):
         Field("qr_source_ip_count"),
         Field("qr_destination_ip_count"),
         Field("qr_event_count"),
+        Field("qr_flow_count"),
         Field("qr_assigned"),
         Field("qr_magnitude"),
         Field("qr_credibility"),

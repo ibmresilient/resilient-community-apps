@@ -79,7 +79,6 @@ class FunctionComponent(ResilientComponent):
 
                 rules_data = qradar_client.get_rules_data(qradar_offenseid)
                 rules_data = rules_data["content"]["rules"]
-                rules_data = list(map(lambda x: self.format_rules_data(x), rules_data))
                 results["rules_data"]=rules_data
 
             # Fetch the Assets Info if function type is OFFENSE_ASSETS
@@ -97,7 +96,6 @@ class FunctionComponent(ResilientComponent):
                         offense_assets["sourceip"] = source["sourceIp"]
                         # Sorting the asset users list based on the last seen time
                         offense_assets["users"].sort(key=lambda x:int(x["lastSeenProfiler"]),reverse=True)
-                        offense_assets["users"] =list(map(lambda x: self.format_asset_data(x), offense_assets["users"]))
 
                         # Get the Operating System ID for the Asset
                         asset_prop = list(filter(lambda x:x["propertyType"]["name"] == "Primary OS ID",
@@ -118,16 +116,3 @@ class FunctionComponent(ResilientComponent):
             log.error(str(e))
             yield FunctionError()
 
-    def format_rules_data(self, rule):
-        rule["creationDate"] = datetime.datetime.fromtimestamp(int(rule["creationDate"]) / 1000).strftime(
-            "%Y-%m-%d %H:%M:%S")
-        rule["modificationDate"] = datetime.datetime.fromtimestamp(int(rule["modificationDate"]) / 1000).strftime(
-            "%Y-%m-%d %H:%M:%S")
-
-        return rule
-
-
-    def format_asset_data(self, asset):
-        asset["lastSeenProfiler"] = datetime.datetime.fromtimestamp(int(asset["lastSeenProfiler"]) / 1000).strftime(
-            "%Y-%m-%d %H:%M:%S")
-        return asset

@@ -28,6 +28,7 @@ GRAPHQL_OFFENSEQUERY = '''query offenseQuery($id: ID!) {
                                 }
                                 sourceCount
                                 eventCount
+                                flowCount
                                 __typename
                             }
                         }

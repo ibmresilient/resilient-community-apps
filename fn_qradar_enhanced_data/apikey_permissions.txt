@@ -52,8 +52,8 @@ read_function
 #download_inbox_emails
 #
 ## other permissions
-#read_layouts
-#edit_layouts
+read_layouts
+edit_layouts
 #delete_layouts
 #create_function
 #read_function

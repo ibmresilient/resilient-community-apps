@@ -24,11 +24,12 @@ setup(
     author='IBM Resilient',
     author_email='support@resilientsystems.com',
     url='https://github.com/ibmresilient/resilient-community-apps/tree/master/fn_qradar_enhanced_data',
-    description="Resilient Circuits Components for 'fn_qradar_enhanced_data'",
-    long_description="fn_qradar_enhanced_data supports performing ariel search to retrieve data from QRadar. It also provide functions to find/add/delete reference set items.",
+    description="QRadar Enhanced Offense Data Migration",
+    long_description="This app fetches the data associated with the Qradar Offense and provides live links back to QRadar, thereby simplifying case management.",
+
     install_requires=[
         'resilient_circuits>=30.0.0',
-        'resilient_lib>=39.0.dev'
+        'resilient_lib>=39.0'
     ],
     packages=find_packages(),
     include_package_data=True,
