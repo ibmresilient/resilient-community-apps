@@ -6,12 +6,12 @@
 import logging
 import time
 import datetime as dt
+
 from resilient import SimpleHTTPException
-from resilient_lib.components.integration_errors import IntegrationError
 from fn_aws_guardduty.lib.aws_gd_cli_man import AwsGdCliMan
 import fn_aws_guardduty.util.config as config
-from fn_aws_guardduty.lib.helpers import CUSTOM_FIELDS_MAP, IQuery, FCrit, get_lastrun_unix_epoch
-
+from fn_aws_guardduty.lib.helpers import IQuery, FCrit, get_lastrun_unix_epoch
+from fn_aws_guardduty.util import const
 
 LOG = logging.getLogger(__name__)
 # Refresh region information interval in minutes
@@ -152,12 +152,13 @@ class AwsGdPoller():
             "properties": {},
         }
         # Use mapping to get incident field values from finding payload.
-        for prop_l1 in CUSTOM_FIELDS_MAP:
-            if isinstance(CUSTOM_FIELDS_MAP[prop_l1], dict):
-                for prop_l2 in CUSTOM_FIELDS_MAP[prop_l1]:
-                    r_fields["properties"][CUSTOM_FIELDS_MAP[prop_l1][prop_l2]] = finding.get(prop_l1, {}).get(prop_l2)
+        for prop_l1 in const.CUSTOM_FIELDS_MAP:
+            if isinstance(const.CUSTOM_FIELDS_MAP[prop_l1], dict):
+                for prop_l2 in const.CUSTOM_FIELDS_MAP[prop_l1]:
+                    r_fields["properties"][const.CUSTOM_FIELDS_MAP[prop_l1][prop_l2]] = \
+                        finding.get(prop_l1, {}).get(prop_l2)
             else:
-                r_fields["properties"][CUSTOM_FIELDS_MAP[prop_l1]] = finding.get(prop_l1)
+                r_fields["properties"][const.CUSTOM_FIELDS_MAP[prop_l1]] = finding.get(prop_l1)
 
         return r_fields
 

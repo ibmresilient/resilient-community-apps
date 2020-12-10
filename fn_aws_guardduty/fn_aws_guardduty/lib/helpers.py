@@ -7,20 +7,7 @@ import re
 import datetime as dt
 import time
 
-CUSTOM_FIELDS_MAP = {
-    "Id": "aws_guardduty_finding_id",
-    "Arn": "aws_guardduty_finding_arn",
-    "Type": "aws_guardduty_finding_type",
-    "UpdatedAt": "aws_guardduty_finding_updated_at",
-    "Region": "aws_guardduty_region",
-    "Resource": {
-        "ResourceType": "aws_guardduty_resource_type"
-    },
-    "Service": {
-        "Count": "aws_guardduty_count",
-        "DetectorId": "aws_guardduty_detector_id"
-    }
-}
+from fn_aws_guardduty.util import const
 
 class IQuery(dict):
     """Class to create a query for existing findings from AWS GuardDuty in Resilient.
@@ -70,7 +57,7 @@ class IQuery(dict):
         :param fields: List of GuardDuty finding fields names
         """
         [self["filters"][0]["conditions"].append({
-            "field_name": "properties.{}".format(CUSTOM_FIELDS_MAP[f]),
+            "field_name": "properties.{}".format(const.CUSTOM_FIELDS_MAP[f]),
             "method": "equals",
             "value": finding[f]
         }) for f in fields]
@@ -87,7 +74,7 @@ class IQuery(dict):
         :param fields: List of GuardDuty finding fields names
         """
         [self["filters"][0]["conditions"].append({
-            "field_name": "properties.{}".format(CUSTOM_FIELDS_MAP[f]),
+            "field_name": "properties.{}".format(const.CUSTOM_FIELDS_MAP[f]),
             "method": "has_a_value"
         }) for f in fields]
 
