@@ -10,10 +10,11 @@ env:
   - secure: kr5Zz5frfrGOeuAylefGbDhY5s/YwyRhktuAly1ovOn/7Q3OJYjTq6h7wvnt1KQ/YeSdA+bxwOhWKbYHPQHAhovyo/5gsII7LruSs7VjdcD9tDoaYEoDBP7nki+NGr+dBVwrooGJ3f7TbuZs+4OSyPWD2FdN4PsOYLof4soDEW7C0cTP2KZ/wNGDjBGB2stOb6a5h4MQSohx+7B795noUoK5ojmygZObIGSDWmahR4kzCm+rEVLlMV0ptDCBXvn4xmJLCz5UOZhR27ckuiW342vNxShlms+rwWcvoxwbj61Qn3MEf9S9D59aJ+n4+u9Kb3VD4HJjlQ3rWZ/DADPfp7h6XOmfrQq3Xj3sQ4K2+8RMSFHdxWPsmhWd/Aty+YmWjoOnewoBfFaDUzFRURqwO3K+oh1H0IALTOTYQSYEeuVfi/+mwJRkKh0+IgvgscL5/bo+nVnQBk4FpWJRHV0x2fWiG8DHCKmInkkFSDHax3dHc9pYZXQTdNdfvsJRtc0rEn6GyVnRMia1TKLpB1joRhb7mkyc7pgDSatvV9W6+v6+evplHFxS7lkm9gqlW/ygJzPVYx7UaFuqo9cOi/c8sR6qf7NUTUi9Aa4aqY6qHNrkxfh7+5ck7wLTWmE0WL+0r3Z09Zg746SIGYqLrFQJZPn+JanFEy0q7kAU2Zr8vgE=
   - MASTER_BUILD=$( [[ $TRAVIS_BRANCH == "master"  &&  $TRAVIS_EVENT_TYPE != "pull_request" ]]; echo $? ) 
   # get the message of the latest tag this code is described by
+  - LATEST_COMMIT_MSG=`if [[ $TRAVIS_EVENT_TYPE == "pull_request" ]]; then git --no-pager log --format=%B -n 1 $(echo $TRAVIS_COMMIT_RANGE | tr '.' '\n' | tail -n 1); else echo $TRAVIS_COMMIT_MESSAGE; fi`
   - TAG_MSG=`git tag -ln --format '%(subject)' $(git describe --tags --abbrev=0) | head -n 1`
   # this checks if commit message or a tag message if it's a tag push have [dev-deps] in them
   - DEV_DEPS_KEYWORD='[dev-deps]'
-  - DEV_DEPS=`[[ ( -z $TRAVIS_TAG && "$TRAVIS_COMMIT_MESSAGE" =~ "$DEV_DEPS_KEYWORD" ) || "$TAG_MSG" =~ "$DEV_DEPS_KEYWORD" ]]; echo $?`
+  - DEV_DEPS=`[[ ( -z $TRAVIS_TAG && "$LATEST_COMMIT_MSG" =~ "$DEV_DEPS_KEYWORD" ) || "$TAG_MSG" =~ "$DEV_DEPS_KEYWORD" ]]; echo $?`
   - ARTIFACTORY_PYPI_INDEX="https://$ARTIFACTORY_USERNAME:$ARTIFACTORY_PASSWORD@na.artifactory.swg-devops.com/artifactory/api/pypi/sec-resilient-team-integrations-pypi-virtual/simple"
   - ARTIFACTORY_REPO_LINK=https://na.artifactory.swg-devops.com/artifactory/sec-resilient-team-integrations-generic-local
 # Exclude these branches from having jobs ran.
