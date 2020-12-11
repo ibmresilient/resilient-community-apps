@@ -150,7 +150,9 @@ The following table provides the settings you need to configure the app. These s
   You may wish to recommend a new incident tab.
   You should save a screenshot "custom_layouts.png" in the doc/screenshots directory and reference it here
 -->
-* This app upon installation adds a tab comprising of the custom fields and datatables to the Case management out of the box, if the Case has an associated Offense Id  . Each of the fields and datatables have information associated with the Offense and few have live links to QRadar Analyst Workflow. The data here is populated during the initial escalation of an Offense to a case. 
+ Upon installation, this app adds a tab comprising of the custom fields and data tables to the Case management, if the Case has an associated Offense ID. Each of the fields and data tables have information associated with the Offense and a few have live links to QRadar Analyst Workflow. The data here is populated during the initial escalation of an Offense to a case.
+
+ All screenshots are examples of using the app with Cloud Pak.
 
   ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png)
 
@@ -158,7 +160,7 @@ The following table provides the settings you need to configure the app. These s
 ---
 
 ## Function - QRadar Offense Summary
-Fetch QRadar Offense Details
+Fetch QRadar Offense Details.
 
 
 <details><summary>Inputs:</summary>
@@ -297,7 +299,7 @@ for event in results.rules_data:
 
 ---
 ## Function - QRadar Top Events
-Search QRadar Top events for the given Offense ID
+Search QRadar Top events for the given Offense ID.
 
 
 <details><summary>Inputs:</summary>
@@ -408,7 +410,7 @@ for event in results.events:
 ---
 
 ## Script - Create Artifact from Destination IP info
-Create artifact from Destination IP info for the selected row
+Create artifact from Destination IP information for the selected row.
 
 **Object:** qr_top_destination_ips
 
@@ -446,7 +448,7 @@ for type in artifact_types:
 
 ---
 ## Script - Create Artifact from Source IP info
-Create artifact from Source IP info for the selected row
+Create artifact from Source IP information for the selected row.
 
 **Object:** qr_top_source_ips
 
@@ -484,7 +486,7 @@ for type in artifact_types:
 
 ---
 ## Script - Create Artifact from Events info
-Create artifact from the Events info of the selected row
+Create artifact from the Events information of the selected row.
 
 **Object:** qr_offense_top_events
 
@@ -527,7 +529,7 @@ for type in artifact_types:
 
 ---
 ## Script - Create Artifact from Assets info
-Create artifact from Assets info for the selected row
+Create artifact from Assets information for the selected row.
 
 **Object:** qr_assets
 
@@ -569,7 +571,7 @@ for type in artifact_types:
 ---
 
 ## Data Table - QR Destination IPs (First 10)
-The following is an example of QRadar Destination IP datatable populated with the information related to Destination IPs associated with the Offense.
+The following is an example of QRadar Destination IP data table populated with the information related to Destination IPs associated with the Offense.
 
  ![screenshot: dt-qr-destination-ips-first-10-events](./doc/screenshots/dt-qr-destination-ips-first-10-events.png)
 
@@ -585,7 +587,7 @@ qr_top_destination_ips
 
 ---
 ## Data Table - QR Triggered Rules
-The following is an example of QRadar Triggered Rules datatable populated with the information related to Contributing Rules for the Offense.
+The following is an example of QRadar Triggered Rules data table populated with the information related to Contributing Rules for the Offense.
 
  ![screenshot: dt-qr-triggered-rules](./doc/screenshots/dt-qr-triggered-rules.png)
 
@@ -605,7 +607,7 @@ qr_triggered_rules
 
 ---
 ## Data Table - QR Categories
-The following is an example of QRadar Categories datatable populated with the information related to Categories associated with the Offense.
+The following is an example of QRadar Categories data table populated with the information related to Categories associated with the Offense.
 
  ![screenshot: dt-qr-categories](./doc/screenshots/dt-qr-categories.png)
 
@@ -624,7 +626,7 @@ qr_categories
 
 ---
 ## Data Table - QR Assets
-The following is an example of QRadar Assets datatable populated with the Assets information related to the Offense.
+The following is an example of QRadar Assets data table populated with the Assets information related to the Offense.
 
  ![screenshot: dt-qr-assets](./doc/screenshots/dt-qr-assets.png)
 
@@ -645,7 +647,7 @@ qr_assets
 
 ---
 ## Data Table - QR Source IPs (First 10 )
-The following is an example of QRadar Source IP datatable populated with the information related to Source IPs associated with the Offense.
+The following is an example of QRadar Source IP data table populated with the information related to Source IPs associated with the Offense.
 
  ![screenshot: dt-qr-source-ips-first-10-events](./doc/screenshots/dt-qr-source-ips-first-10-events.png)
 
@@ -666,6 +668,7 @@ qr_top_source_ips
 
 ---
 ## Data Table - QR Events (First 10 Events)
+The following is an example of QRadar Events data table populated with the information related to first 10 events associated with the Offense.
 
  ![screenshot: dt-qr-events-first-10-events](./doc/screenshots/dt-qr-events-first-10-events.png)
 
@@ -716,8 +719,7 @@ qr_offense_top_events
 | Create Artifact from Assets info | qr_assets | `-` |
 | Create artifact from Destination IP info | qr_top_destination_ips | `-` |
 
-The rule QRadar Enhanced Data is an automatic rule that triggers when a new incident having a qradar_id value is created or on an existing incident whose qradar_id value is updated. This rule triggers workflows as listed above and populates the Offense information in the custom fields and datatables. The rules for creating artifacts are menu item rules associated with the datatables. These rules can be executed at row level to generate artifacts from the column values.
-The workflows' input and post processing scripts can be customized for data retrieval and data presentation.
+The rule, QRadar Enhanced Data, is an automatic rule that triggers when a new incident with a qradar_id value is created, or an existing incident whose qradar_id value is updated. This rule triggers workflows as listed above and populates the Offense information in the custom fields and data tables. The rules for creating artifacts are menu item rules associated with the data tables. These rules can be executed at row level to generate artifacts from the column values. The workflows' input and post processing scripts can be customized for data retrieval and data presentation.
 
 
 ---
