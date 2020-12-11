@@ -34,13 +34,8 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("Starting 'qradar_reference_table_add_item' that was running in workflow '{0}'".format(wf_instance_id))
             rp = ResultPayload(PACKAGE_NAME, **kwargs)
-            # Get the function parameters:
-            qradar_reference_table_name = kwargs.get("qradar_reference_table_name")  # text
-            qradar_reference_table_item_value = kwargs.get("qradar_reference_table_item_value")  # text
 
             log = logging.getLogger(__name__)
-            log.info("qradar_reference_table_name: %s", qradar_reference_table_name)
-            log.info("qradar_reference_table_item_value: %s", qradar_reference_table_item_value)
 
             qradar_verify_cert = True
             if "verify_cert" in self.options and self.options["verify_cert"].lower() == "false":
