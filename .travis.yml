@@ -151,6 +151,7 @@ after_failure:
 - .scripts/send_notification.sh "" failure
 
 before_install:
+  - echo `[[ ( -z $TRAVIS_TAG && "$TRAVIS_COMMIT_MESSAGE" =~ "$DEV_DEPS_KEYWORD" ) || "$TAG_MSG" =~ "$DEV_DEPS_KEYWORD" ]]; echo $?`
   - pip install --upgrade pip
   - pip install setuptools
   - env
