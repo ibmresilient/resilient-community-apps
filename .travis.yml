@@ -112,7 +112,7 @@ matrix:
       - source .scripts/updated_integrations_package.sh
       # if there are failed packages send a message with their list
       - if [[ -n "${FAILED_PACKAGES[*]}" ]]; then .scripts/send_notification.sh "Packages not built ${FAILED_PACKAGES[*]}" failure; fi
-      - .scripts/send_current_pr_comments.sh
+      - .scripts/send_current_pr_comment.sh
 
   - stage: build an image
     name: Building containers
