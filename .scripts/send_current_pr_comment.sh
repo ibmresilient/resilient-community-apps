@@ -10,7 +10,7 @@
 # gets displayed
 # Professor Farnsworth says - good news everyone
 # Paul Revere brings bad news
-if [[ $TRAVIS_EVENT_TYPE != "pull_request" ]];
+if [[ $TRAVIS_EVENT_TYPE != "pull_request" ]]; then
 	exit 0
 fi
 
