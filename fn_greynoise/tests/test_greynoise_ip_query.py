@@ -42,8 +42,8 @@ class TestGreynoiseIpQuery:
         assert func is not None
 
     @pytest.mark.parametrize("greynoise_value, greynoise_type, expected_results", [
-        ("8.8.8.8", "context", {"error":"commonly spoofed ip"}),
-        ("8.8.8.8", "quick", {u'code': u'0x05', u'ip': u'8.8.8.8', u'noise': False})
+        ("91.241.19.122", "context", {'ip': '91.241.19.122', 'seen': False}),
+        ("91.241.19.122", "quick", {u'code': u'0x00', u'ip': u'91.241.19.122', u'noise': False})
     ])
     def test_success(self, circuits_app, greynoise_value, greynoise_type, expected_results):
         """ Test calling with sample values for the parameters """
