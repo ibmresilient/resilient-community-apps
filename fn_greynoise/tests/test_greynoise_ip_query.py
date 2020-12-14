@@ -41,6 +41,7 @@ class TestGreynoiseIpQuery:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
+    @pytest.mark.livetest
     @pytest.mark.parametrize("greynoise_value, greynoise_type, expected_results", [
         ("91.241.19.122", "context", {'ip': '91.241.19.122', 'seen': False}),
         ("91.241.19.122", "quick", {u'code': u'0x00', u'ip': u'91.241.19.122', u'noise': False})
