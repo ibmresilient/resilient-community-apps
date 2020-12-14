@@ -3,6 +3,7 @@
 # Base image using Red Hat's universal base image (rhel 8) for python
 FROM registry.access.redhat.com/ubi8/python-36:latest
 
+ARG PYPI_INDEX=https://pypi.org
 ARG APPLICATION=fn_mitre_integration
 ARG RESILIENT_CIRCUITS_VERSION=37
 ARG PATH_RESILIENT_CIRCUITS=rescircuits
@@ -17,7 +18,7 @@ USER 0
 RUN pip install --upgrade pip
 
 # install resilient-circuits
-RUN pip install "resilient-circuits>=${RESILIENT_CIRCUITS_VERSION}"
+RUN pip install "resilient-circuits>=${RESILIENT_CIRCUITS_VERSION}" -i ${PYPI_INDEX}
 
 ## ---- section for changes ----
 # uncomment and replicate if additional os libraries are needed
@@ -26,7 +27,7 @@ RUN pip install "resilient-circuits>=${RESILIENT_CIRCUITS_VERSION}"
 
 # install the base package
 COPY ./dist /tmp/packages
-RUN pip install /tmp/packages/${APPLICATION}-*.tar.gz
+RUN pip install /tmp/packages/${APPLICATION}-*.tar.gz -i ${PYPI_INDEX}
 
 # uncomment and replicate if additional pypi packages are needed
 #RUN pip install <package>
