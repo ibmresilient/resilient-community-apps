@@ -514,7 +514,7 @@ class SqlServerDialect(ODBCDialectBase):
                     'numeric', 'octet_length', 'of', 'on', 'only', 'open', 'option', 'or', 'order', 'outer', 'output',
                     'overlaps', 'pad', 'partial', 'pascal', 'position', 'precision', 'prepare', 'preserve', 'primary',
                     'prior', 'privileges', 'procedure', 'public', 'read', 'real', 'references', 'relative', 'restrict',
-                    'revoke', 'right', 'rollback', 'rows', 'schema', 'scroll', 'second', 'section', 'select', 'session',
+                    'revoke', 'right', 'rollback', 'rows', 'rule', 'schema', 'scroll', 'second', 'section', 'select', 'session',
                     'session_user', 'set', 'size', 'smallint', 'some', 'space', 'sql', 'sqlca', 'sqlcode', 'sqlerror',
                     'sqlstate', 'sqlwarning', 'substring', 'sum', 'system_user', 'table', 'temporary', 'then', 'time',
                     'timestamp', 'timezone_hour', 'timezone_minute', 'to', 'trailing', 'transaction', 'translate',
@@ -885,7 +885,7 @@ def translate_value_for_blob(blob_func):
     mapping = {
             "select_owner": TypeInfo.translate_value_select,
             "select_user": TypeInfo.translate_value_select,
-            "select_select": TypeInfo.translate_value_select,
+            "select": TypeInfo.translate_value_select,
             "multiselect": TypeInfo.translate_value_multiselect,
             "multiselect_members": TypeInfo.translate_value_multiselect,
             "datepicker": TypeInfo.translate_value_datetimepicker,

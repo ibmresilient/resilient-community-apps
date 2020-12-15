@@ -206,18 +206,21 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
                     self._execute_sql(
                         cursor,
                         self.dialect.get_delete(table_name), 
-                        {'id': flat_payload['id']})
+                        {'id': flat_payload['id']}
                     )
                 else:
                     LOG.info("Inserting/updating %s; id = %d", table_name, flat_payload['id'])
 
-                    LOG.debug (self.dialect.get_upsert(table_name, all_field_names, all_field_types))
-                    LOG.debug (self.dialect.get_parameters(all_field_names, flat_payload))
+                    upsert_stmt = self.dialect.get_upsert(table_name, all_field_names, all_field_types)
+                    upsert_params = self.dialect.get_parameters(all_field_names, flat_payload)
+                    LOG.debug (flat_payload)
+                    LOG.debug (upsert_stmt)
+                    LOG.debug (upsert_params)
 
                     self._execute_sql(
                         cursor,
-                        self.dialect.get_upsert(table_name, all_field_names, all_field_types),
-                        self.dialect.get_parameters(all_field_names, flat_payload))
+                        upsert_stmt,
+                        upsert_params)
 
                 self._commit_transaction(cursor)
                 break
