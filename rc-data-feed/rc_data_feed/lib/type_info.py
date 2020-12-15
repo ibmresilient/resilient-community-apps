@@ -509,6 +509,7 @@ class ActionMessageTypeInfo(TypeInfo):
         type_name = self.get_type_name(self.type_id, pretty=False)
 
         if type_name not in self.type_info_map:
+            LOG.warning("%s not found in %s. Returning raw_value: %s", type_name, self.type_info_map, raw_value)
             return raw_value
 
         field_name = field['name']
@@ -536,6 +537,7 @@ class ActionMessageTypeInfo(TypeInfo):
 
         if raw_value not in values_map:
             # Must be a NUMBER field.
+            LOG.warning("%s not found in %s. Returning raw_value", raw_value, values_map)
             return raw_value
 
         # if the entry isn't in the values dict then we're really confused (and this
@@ -553,7 +555,7 @@ class FullTypeInfo(TypeInfo):
     """
     def __init__(self, type_id, rest_client_helper, refresh, all_fields=None):
         """
-        Constructs a new FullTypeInfo ojbect.
+        Constructs a new FullTypeInfo object.
 
         :param type_id: The type ID of interest.
         :param rest_client_helper: The Resilient SimpleClient object wrapper.

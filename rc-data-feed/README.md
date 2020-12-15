@@ -15,9 +15,9 @@ The data can be written to any or all of the following destinations:
 - ElasticSearch
 - Splunk
 - Kafka
-- Resilient 
+- Resilient
 
-Each of these destinations are available as separately installable packages to minimize the python libraries required for your Integrations Server. 
+Each of these destinations are available as separately installed packages to minimize the python libraries required for your Integrations Server. 
 
 This extension was written to allow other destinations to be created with relative ease. The following diagram shows the overall data flow from Resilient to the existing feeds.
 
@@ -29,7 +29,7 @@ The content is consistent with the Resilient type/field semantic model and will 
 
 Data tables are supported (the programmatic name will be the same as the DB table name) but require rules to be added for data capture.
 
-Newly added fields and data tables are created in the destination database (for ODBC/SQLite destinations).
+Newly added fields and data tables are created in the destination database (for ODBC/SQLite destinations) in real-time.
 
 
 # Useful Tools
