@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+# pragma pylint: disable=unused-argument, no-self-use
+# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 """Tests using pytest_resilient_circuits"""
 
 from __future__ import print_function
@@ -39,9 +41,10 @@ class TestGreynoiseIpQuery:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
+    @pytest.mark.livetest
     @pytest.mark.parametrize("greynoise_value, greynoise_type, expected_results", [
-        ("8.8.8.8", "context", {"error":"commonly spoofed ip"}),
-        ("8.8.8.8", "quick", {u'code': u'0x05', u'ip': u'8.8.8.8', u'noise': False})
+        ("91.241.19.122", "context", {'ip': '91.241.19.122', 'seen': False}),
+        ("91.241.19.122", "quick", {u'code': u'0x00', u'ip': u'91.241.19.122', u'noise': False})
     ])
     def test_success(self, circuits_app, greynoise_value, greynoise_type, expected_results):
         """ Test calling with sample values for the parameters """
