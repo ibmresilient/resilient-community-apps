@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 
+import cx_Oracle
 import logging
+import os
 from collections import OrderedDict
 from data_feeder_plugins.odbcfeed.odbcfeed import ODBCFeedDestination
 from rc_data_feed.lib.type_info import TypeInfo, ActionMessageTypeInfo
 
 LOG = logging.getLogger(__name__)
-
 
 TABLE_NAME = "all_types"
 BLOB_TABLE_NAME = "blob_test"
@@ -25,6 +26,7 @@ all_fields = [
 
 blob_fields = [
     {"name": "id", "input_type": "number"},
+    {"name": "inc_id", "input_type": "number"},
     {"name": "content", "input_type": "blob"}
 ]
 
@@ -40,13 +42,14 @@ flat_payload["test_bool"] = True
 
 class SQLCommon():
     def __init__(self, app_config, table_name=TABLE_NAME, table_def=all_fields, inspect_cols_query=FIND_COLUMNS_QUERY,
-                 baseClass=ODBCFeedDestination, setup_stmt=None):
+                 baseClass=ODBCFeedDestination, setup_stmt=None, dialect=None):
         self.app_config = app_config
         self.table_name = table_name
         self.table_def = table_def
         self.inspect_cols_query = inspect_cols_query.format(table_name=self.table_name)
         self.baseClass = baseClass
         self.setup_stmt = setup_stmt
+        self.dialect = dialect
 
         self.all_field_names = [field['name'] for field in table_def]
         self.all_field_types = dict()
@@ -111,24 +114,26 @@ class SQLCommon():
                         col_type_simple = col_type.split(" ")[0]
                         assert exected_col_types[col].startswith(col_type_simple)
             finally:
-                cursor.close()
+                if 'cursor' in locals():
+                    cursor.close()
         finally:
             if hasattr(connection, "_close_connection"):
                 connection._close_connection()
 
 
-    def test_insert_row(self, result_payload):
-        global flat_payload
-
+    def test_insert_row(self, result_payload, row_payload=flat_payload):
         connection = self.baseClass(None, self.app_config)
+        translate_value_funct = getattr(connection.dialect,
+                                        'mapped_translate_value',
+                                        TypeInfo.translate_value)
         try:
-            payload = flat_payload.copy()
+            payload = row_payload.copy()
             # convert data for the fields
             for field in self.table_def:
                 item_name = field['name']
                 item_type = field['input_type']
-                item_value = flat_payload[item_name]
-                converted_value = TypeInfo.translate_value(None, field, item_value)
+                item_value = row_payload[item_name]
+                converted_value = translate_value_funct(None, field, item_value)
                 payload[item_name] = converted_value
 
             # add data to table
@@ -139,7 +144,7 @@ class SQLCommon():
                     cursor,
                     self.setup_stmt)
 
-            cmd = connection.dialect.get_upsert(TABLE_NAME, self.all_field_names, self.all_field_types)
+            cmd = connection.dialect.get_upsert(self.table_name, self.all_field_names, self.all_field_types)
             params = connection.dialect.get_parameters(self.all_field_names, payload)
 
             insert_result = connection._execute_sql(
@@ -156,7 +161,7 @@ class SQLCommon():
                     assert row_count == 1
 
             # get the row and confirm the values
-            select_stmt = "select * from {} where id = {}".format(TABLE_NAME, payload["id"])
+            select_stmt = "select * from {} where id = {}".format(self.table_name, payload["id"])
             select_result = connection._execute_sql(
                 cursor,
                 select_stmt)
@@ -165,10 +170,16 @@ class SQLCommon():
             for row in rows:
                 for ndx in range(len(select_result.description)):
                     col_name = select_result.description[ndx][0].lower()
-                    assert row[ndx] == result_payload[col_name]
+                    if isinstance(row[ndx], cx_Oracle.LOB):
+                        assert row[ndx].read() == result_payload[col_name]
+                    elif isinstance(row[ndx], (bytes, bytearray)):
+                        assert row[ndx][0:10] == result_payload[col_name][0:10]
+                    else:
+                        assert row[ndx] == result_payload[col_name]
 
         finally:
-            cursor.close()
+            if 'cursor' in locals():
+                cursor.close()
             if hasattr(connection, "_close_connection"):
                 connection._close_connection()
 
@@ -177,6 +188,10 @@ class SQLCommon():
         global flat_payload
 
         connection = self.baseClass(None, self.app_config)
+        translate_value_funct = getattr(connection.dialect,
+                                        'mapped_translate_value',
+                                        TypeInfo.translate_value)
+
         try:
             payload = flat_payload.copy()
             # convert data for the fields
@@ -184,7 +199,7 @@ class SQLCommon():
                 item_name = field['name']
                 item_type = field['input_type']
                 item_value = flat_payload[item_name]
-                converted_value = TypeInfo.translate_value(None, field, item_value)
+                converted_value = translate_value_funct(None, field, item_value)
                 payload[item_name] = converted_value
 
             payload['test_text'] = u"a" * MAX_TEXT_SIZE
@@ -202,7 +217,7 @@ class SQLCommon():
 
             update_result = connection._execute_sql(
                 cursor,
-                connection.dialect.get_upsert(TABLE_NAME, self.all_field_names, self.all_field_types),
+                connection.dialect.get_upsert(self.table_name, self.all_field_names, self.all_field_types),
                 connection.dialect.get_parameters(self.all_field_names, payload))
 
             connection._commit_transaction(cursor)
@@ -210,7 +225,7 @@ class SQLCommon():
             #assert update_result.rowcount == 1
 
             # get the row and confirm the values
-            select_stmt = "select * from {} where id = {}".format(TABLE_NAME, payload["id"])
+            select_stmt = "select * from {} where id = {}".format(self.table_name, payload["id"])
             select_result = connection._execute_sql(
                 cursor,
                 select_stmt)
@@ -222,7 +237,8 @@ class SQLCommon():
                     assert row[ndx] == payload_result[col_name]
 
         finally:
-            cursor.close()
+            if 'cursor' in locals():
+                cursor.close()
             if hasattr(connection, "_close_connection"):
                 connection._close_connection()
 
@@ -233,16 +249,22 @@ class SQLCommon():
 
         try:
             # delete the row
+            delete_stmt = connection.dialect.get_delete(self.table_name)
+            params = connection.dialect.get_parameters(['id'], {'id': flat_payload['id']})
+            LOG.info(delete_stmt)
+
             delete_result = connection._execute_sql(
                 cursor,
-                connection.dialect.get_delete(TABLE_NAME),
-                [flat_payload['id']])
+                delete_stmt,
+                params
+            )
 
             connection._commit_transaction(cursor)
 
             assert delete_result.rowcount == 1
         finally:
-            cursor.close()
+            if 'cursor' in locals():
+                cursor.close()
             if hasattr(connection, "_close_connection"):
                 connection._close_connection()
 
@@ -256,7 +278,7 @@ class SQLCommon():
         try:
             alter_result = connection._execute_sql(
                 cursor,
-                connection.dialect.get_add_column_to_table(TABLE_NAME, ALTER_COL, col_type))
+                connection.dialect.get_add_column_to_table(self.table_name, ALTER_COL, col_type))
 
             connection._commit_transaction(cursor)
 
@@ -268,10 +290,10 @@ class SQLCommon():
             assert len(rows) == 8    # number of columns
 
         finally:
-            cursor.close()
+            if 'cursor' in locals():
+                cursor.close()
             if hasattr(connection, "_close_connection"):
                 connection._close_connection()
-
 
     def test_droptable(self):
         connection = self.baseClass(None, self.app_config)
@@ -279,14 +301,35 @@ class SQLCommon():
         try:
             alter_result = connection._execute_sql(
                 cursor,
-                "Drop table {}".format(TABLE_NAME))
+                "Drop table {}".format(self.table_name))
 
             connection._commit_transaction(cursor)
 
         finally:
-            cursor.close()
+            if 'cursor' in locals():
+                cursor.close()
             if hasattr(connection, "_close_connection"):
                 connection._close_connection()
 
-    def test_blob(self):
-        return True
+    def test_insert_blob(self, translate_blob):
+        blob_data = self.get_blob_data()
+        #LOG.info(blob_data)
+
+        row_payload = OrderedDict()
+        row_payload["id"] =  101
+        row_payload["inc_id"] =  2301
+        row_payload["content"] = blob_data
+
+        result_blob = translate_blob(None, None, blob_data) if translate_blob else blob_data
+
+        result_payload = OrderedDict()
+        result_payload["id"] =  101
+        result_payload["inc_id"] =  2301
+        result_payload["content"] = result_blob if isinstance(result_blob, (bytes, bytearray, memoryview)) \
+                                                else bytes(result_blob, 'utf-8')
+
+        self.test_insert_row(result_payload, row_payload=row_payload)
+
+    def get_blob_data(self, filename="app_logo.png"):
+        with open(os.path.join(os.path.dirname(__file__), "data/{}".format(filename)), 'rb') as f:
+            return f.read()

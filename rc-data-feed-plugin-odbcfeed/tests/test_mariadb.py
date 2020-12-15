@@ -4,7 +4,8 @@ import logging
 import datetime
 import pytest
 
-from lib.test_sql_common import SQLCommon
+from lib.test_sql_common import SQLCommon, blob_fields, BLOB_TABLE_NAME
+from data_feeder_plugins.sqllib.sql_dialect import MySqlDialect 
 
 LOG = logging.getLogger(__name__)
 
@@ -35,38 +36,53 @@ result_payload = {  "id":  101,
 
 SETUP_STMT = "SET @@SQL_MODE = REPLACE(@@SQL_MODE, 'STRICT_TRANS_TABLES', '');"
 
+@pytest.mark.livetest
 @pytest.mark.order1
 def test_get_parameters():
     common = SQLCommon(app_config)
 
     common.test_get_parameters()
 
+@pytest.mark.livetest
 def test_createtable():
     common = SQLCommon(app_config)
 
     common.test_createtable()
 
+@pytest.mark.livetest
 def test_insert_row():
     common = SQLCommon(app_config, setup_stmt=SETUP_STMT)
 
     common.test_insert_row(result_payload)
 
+@pytest.mark.livetest
 def test_update_row():
     common = SQLCommon(app_config, setup_stmt=SETUP_STMT)
 
     common.test_update_row(MAX_TEXT_SIZE, result_payload)
 
+@pytest.mark.livetest
 def test_delete_row():
     common = SQLCommon(app_config)
 
     common.test_delete_row()
 
+@pytest.mark.livetest
 def test_altertable():
     common = SQLCommon(app_config)
 
     common.test_altertable()
 
+@pytest.mark.livetest
 def test_droptable():
     common = SQLCommon(app_config)
 
     common.test_droptable()
+
+@pytest.mark.livetest
+def test_blob():
+    common = SQLCommon(app_config, table_name=BLOB_TABLE_NAME, table_def=blob_fields)
+
+    common.test_createtable()
+
+    common.test_insert_blob(MySqlDialect.make_blob)

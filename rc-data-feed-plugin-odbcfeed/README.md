@@ -33,6 +33,11 @@ Attachment content can be to up 25mb. Plan your DB storage requirements for the 
 
 Refer to the documentation for each database on how to read or process blob data.
 
+Additionally, the connection string format of the app.config file for Oracle databases has changed. The format is now:
+```
+odbc_connect=<service_name> or (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=<host>)(PORT=<port>))(CONNECT_DATA=(SID=<sid>)))
+```
+
 # Installation
   The integration package contains Python components that are called by the Resilient platform. These components run in the Resilient Circuits integration framework. The package also includes Resilient customizations that will be imported into the platform later.
   You perform these installation procedures at the Resilient integration server.
@@ -87,7 +92,7 @@ Refer to the documentation for each database on how to read or process blob data
 
   #[oracle_feed]
   #class=ODBCFeed
-  #odbc_connect=Driver={Oracle 12c ODBC driver};DBQ=ORCLCDB
+  #odbc_connect=<service_name> or (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=<host>)(PORT=<port>))(CONNECT_DATA=(SID=<sid>)))
   #sql_dialect=OracleDialect
   #uid=<acct>
   #pwd=<pwd>
@@ -131,7 +136,7 @@ The following table lists additional database connection strings for the other s
 | Database | Connection Strings |
 | :------- | :----------------- |
 | MariaDB | Driver={MySQL};Server=127.0.0.1;Port=3306; DB=<yourDB>;connectTimeout=0 |
-| Oracle | Driver={Oracle 12c ODBC driver};DBQ=ORCLCDB |
+| Oracle | <service_name> or (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=127.0.0.1)(PORT=1521))(CONNECT_DATA=(SID=<youSID>))) |
 | SQLServer | DRIVER={FreeTDS};SERVER=127.0.0.1;PORT=1433;DATABASE=<yourDB>; |
 
 Your naming of the database drivers (Ex. `MySQL`) may vary and is specified in your `odbcinst.ini` file. 

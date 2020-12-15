@@ -17,7 +17,7 @@ pwd=<pwd>
 
 #[oracle_feed]
 #class=ODBCFeed
-#odbc_connect=Driver={Oracle 12c ODBC driver};DBQ=ORCLCDB
+#odbc_connect=<service_name> or (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=<host>)(PORT=<port>))(CONNECT_DATA=(SID=<sid>)))
 #sql_dialect=OracleDialect
 #uid=<acct>
 #pwd=<pwd>

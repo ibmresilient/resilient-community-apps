@@ -13,6 +13,7 @@ setup(
     description="Resilient Circuits Components for sending data feeds to other (BI) systems",
     long_description="Resilient Circuits Components for sending data feeds to other (BI) systems",
     install_requires=[
+        'cx_Oracle',
         'rc_data_feed',
         'resilient',
         'pyodbc',

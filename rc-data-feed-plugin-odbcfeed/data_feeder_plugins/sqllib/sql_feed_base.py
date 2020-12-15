@@ -77,7 +77,7 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
         raise NotImplementedError
 
     @abc.abstractmethod
-    def _reinit(self, connect_str, uid, pwd):
+    def _reinit(self, connect_str, uid, pwd, dialect=None):
         raise NotImplementedError
 
     def _create_or_update_table(self, type_name, all_fields):
@@ -122,7 +122,7 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
                 if err.args and err.args[0] in PYODBC_CONNECTION_LOST:
                     LOG.warning("ODBC Connection lost, reestablishing connection")
                     # try reestablishing the connection
-                    self.connection = self._reinit(self.connect_str, self.uid, self.pwd)
+                    self.connection = self._reinit(self.connect_str, self.uid, self.pwd, dialect=self.dialect)
                 else:
                     try:
                         if cursor:
@@ -205,8 +205,8 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
 
                     self._execute_sql(
                         cursor,
-                        self.dialect.get_delete(table_name),
-                        [flat_payload['id']]
+                        self.dialect.get_delete(table_name), 
+                        {'id': flat_payload['id']})
                     )
                 else:
                     LOG.info("Inserting/updating %s; id = %d", table_name, flat_payload['id'])
@@ -226,7 +226,7 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
                 if err.args and err.args[0] in PYODBC_CONNECTION_LOST:
                     LOG.warning("ODBC Connection lost, reestablishing connection")
                     # try reestablishing the connection
-                    self.connection = self._reinit(self.connect_str, self.uid, self.pwd)
+                    self.connection = self._reinit(self.connect_str, self.uid, self.pwd, dialect=self.dialect)
                 else:
                     try:
                         if cursor:

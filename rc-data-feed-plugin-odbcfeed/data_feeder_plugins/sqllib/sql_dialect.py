@@ -491,6 +491,10 @@ class MySqlDialect(ODBCDialectBase):
         else: # an issue and try encoding without specifying fromtype
             connection.setencoding(encoding=ENCODING)
 
+    @staticmethod
+    def make_blob(type_info, field, value):
+        return value
+
 class SqlServerDialect(ODBCDialectBase):
     RESERVE_LIST = ['absolute', 'action', 'ada', 'add', 'all', 'allocate', 'alter', 'and', 'any', 'are', 'as', 'asc',
                     'assertion', 'at', 'authorization', 'avg', 'begin', 'between', 'bit', 'bit_length', 'both', 'by',
@@ -703,13 +707,15 @@ class OracleDialect(ODBCDialectBase):
         for name in field_names:
             clean_name = self.clean_keywords(self.RESERVE_LIST, name)
             if field_types.get(name, '') == "datepicker":
-                select_values.append("to_date(?, 'YYYY-MM-DD\"T\"HH24:MI:SS.######') as {}".format(clean_name))
+                select_values.append("to_date(:{clean_name}, 'YYYY-MM-DD\"T\"HH24:MI:SS.######') as {clean_name}"\
+                            .format(clean_name=clean_name))
             elif field_types.get(name, '') == "datetimepicker":
-                select_values.append("to_timestamp_tz(?, 'YYYY-MM-DD\"T\"HH24:MI:SS.FFTZH:TZM') as {}".format(clean_name))
+                select_values.append("to_timestamp_tz(:{clean_name}, 'YYYY-MM-DD\"T\"HH24:MI:SS.FFTZH:TZM') as {clean_name}"\
+                            .format(clean_name=clean_name))
             elif field_types.get(name, '') == "blob":
-                select_values.append("hextoraw(?) as {}".format(clean_name))
+                select_values.append("hextoraw(:{clean_name}) as {clean_name}".format(clean_name=clean_name))
             else:
-                select_values.append("? as {}".format(clean_name))
+                select_values.append(":{clean_name} as {clean_name}".format(clean_name=clean_name))
 
         value_setters = ["target.{0} = source.{0}".format(name.lower()) if name != "id" else None for name in clean_field_names]
         filtered_value_setters = filter(None, value_setters)
@@ -722,7 +728,7 @@ class OracleDialect(ODBCDialectBase):
               ) source
         ON (target.id = source.id)
         WHEN MATCHED THEN  UPDATE SET {2}
-        WHEN NOT MATCHED THEN  INSERT ({3}) VALUES ({4});
+        WHEN NOT MATCHED THEN  INSERT ({3}) VALUES ({4})
         """
 
         sql_stmt = template.format(clean_table_name,
@@ -744,7 +750,7 @@ class OracleDialect(ODBCDialectBase):
             parameter named "id"
         """
         clean_name = self.clean_keywords(self.RESERVE_LIST, table_name)
-        return 'delete from {0} where id = ?;'.format(clean_name)
+        return 'delete from {0} where id = :id'.format(clean_name)
 
     def get_create_table_if_not_exists(self, table_name, column_spec_dict):
         """Gets SQL that will create the specified table if it doesn't exist already.
@@ -797,9 +803,9 @@ END; """
         :returns The SQL DDL needed to add the column.
         """
         clean_name = self.clean_keywords(self.RESERVE_LIST, table_name)
-        sql_stmt =  'alter table {0} add {1} {2};'.format(clean_name,
-                                                          self.clean_keywords(self.RESERVE_LIST, column_name),
-                                                          column_spec)
+        sql_stmt =  'alter table {0} add {1} {2}'.format(clean_name,
+                                                         self.clean_keywords(self.RESERVE_LIST, column_name),
+                                                         column_spec)
 
         return sql_stmt
 
@@ -815,10 +821,7 @@ END; """
         :returns True if the exception was due to the column already existing; False otherwise.
         """
 
-        if len(the_exception.args) > 1:
-            return True if the_exception.args[1].find('ORA-01430') != -1 else False
-
-        return False
+        return True if 'ORA-01430' in str(the_exception) else False
 
 
     def get_column_type(self, input_type):  # pylint: disable=no-self-use
@@ -845,24 +848,29 @@ END; """
 
     def get_parameters(self, parameter_names, parameters):
         # Need to get a list that contains all the values in the same order as parameter_names.
-        bind_parameters = list()
+        bind_parameters = {}
 
         for name in parameter_names:
+            clean_name = self.clean_keywords(self.RESERVE_LIST, name)
             if isinstance(parameters[name], bool):
-                bind_parameters.append(1 if parameters[name] else 0)
+                bind_parameters[clean_name] = 1 if parameters[name] else 0
             else:
-                bind_parameters.append(parameters[name][:MAX_ORACLE_VARCHAR] if isinstance(parameters[name], string_types) else parameters[name])
+                bind_parameters[clean_name] = parameters[name][:MAX_ORACLE_VARCHAR] \
+                                                   if isinstance(parameters[name], string_types) else parameters[name]
 
         return bind_parameters
 
 
     def configure_connection(self, connection):
+        return True
+        """
         connection.setdecoding(pyodbc.SQL_WCHAR, encoding=ORACLE_ENCODING)  # pylint: disable=c-extension-no-member
         if sys.version_info.major == 2: # to set encoding on python 2
             connection.setencoding(str, encoding=ORACLE_ENCODING)
             connection.setencoding(unicode, encoding=ORACLE_ENCODING)
         else: # an issue and try encoding without specifying fromtype
             connection.setencoding(encoding=ORACLE_ENCODING)
+        """
 
 
 def translate_value_for_blob(blob_func):
