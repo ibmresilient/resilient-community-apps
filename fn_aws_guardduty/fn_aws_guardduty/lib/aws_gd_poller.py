@@ -215,13 +215,18 @@ class AwsGdPoller():
 
         return fc
 
-    def build_artifacts(self, finding, artifact_payloads={}):
+    def build_artifacts(self, finding):
         """
-        Add artifact type and value to the artifact_payload
-        :param data:
-        :param artifact_payloads:
-        :return:
+        Add artifact type and value to an artifact_payload.
+
+        Example payload entry:
+            {'10.0.0.1':
+                ('IP Address', 'PrivateIpAddress', '["Resource"]["InstanceDetails"]["NetworkInterfaces"]["0"]')
+            }
+        :param finding: The finding json content to seach for artifacts.
+        :return artifact_payloads: Dict of artifacts payload.
         """
+        artifact_payloads = {}
         for artifact_type, gd_keys in const.ARTIFACT_TYPES_MAP.items():
             for gd_key in gd_keys:
                 for (artifact_id, path) in search_json(finding, gd_key):
