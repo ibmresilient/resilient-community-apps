@@ -505,8 +505,7 @@ class MSGraphHelper(object):
             responses_list = json_response.get("responses")
         else:
             # If invalid json then print the requests that failed and try to continue.
-            LOG.error(u"Error: Invalid response from MS Graph $batch endpoint:")
-            LOG.error(responses)
+            LOG.error(u"Error: Invalid response from MS Graph $batch endpoint: %s", responses)
             LOG.error(u"Requests list:")
             LOG.error(requests_list)
             responses_list = []
