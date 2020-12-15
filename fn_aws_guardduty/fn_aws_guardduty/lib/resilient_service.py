@@ -7,6 +7,7 @@ import logging
 from resilient_circuits import ResilientComponent
 from resilient import SimpleHTTPException
 from fn_aws_guardduty.lib.helpers import IQuery
+from fn_aws_guardduty.util import const
 
 LOG = logging.getLogger(__name__)
 
@@ -20,6 +21,26 @@ class ResSvc(ResilientComponent):
         super(ResSvc, self).__init__(opts)
         self.opts = opts
         self.options = options
+
+    def _find_resilient_artifacts_for_incident(self, incident_id):
+        """
+        Return list of artifacts for the given Incident ID.
+
+        :param incident_id: Resilient incident id
+        :return r_artifacts: Return list of artifacts or empty list.
+        """
+        r_artifacts = {}
+        resilient_client = self.rest_client()
+        artifacts_uri = '/incidents/{}/artifacts'.format(incident_id)
+        a_response = resilient_client.get(uri=artifacts_uri)
+
+        if a_response is not None:
+            for artifact_result in a_response:
+                artifact_type = artifact_result.get('description')
+                if artifact_type in const.ARTIFACT_TYPES:
+                    r_artifacts[artifact_result['value']] = artifact_type
+
+        return r_artifacts
 
     def find_resilient_incident_for_req(self, finding, f_fields):
         """
@@ -68,3 +89,44 @@ class ResSvc(ResilientComponent):
 
         except SimpleHTTPException as ex:
             LOG.error("Something went wrong when attempting to create the Incident: %s", ex)
+
+    def create_artifacts(self, incident_id, artifacts):
+        """Create artifacts for Resilient Incident
+
+        :param incident_id: Incident ID from incident creation.
+        :param artifacts: Artifact payload data.
+        """
+        try:
+            resilient_client = self.rest_client()
+            artifact_uri = '/incidents/{}/artifacts'.format(incident_id)
+
+            # set up Artifact payload skeleton
+            artifact_payload = {
+                'type': {
+                    'name': 'String',
+                },
+                'description': {
+                    'format': 'text',
+                }
+            }
+
+            # find artifacts that are already associated with this Incident
+            existing_artifacts = self._find_resilient_artifacts_for_incident(incident_id)
+
+            # loop through Artifacts provided with this Threat
+            for artifact_id, (artifact_type, gd_key, path) in artifacts.items():
+                # if this Artifact doesn't match an existing value and type
+                if artifact_id not in existing_artifacts or existing_artifacts[artifact_id] != artifact_type:
+                    # populate payload with ID and type
+                    desc = "'{}' extracted from GuardDuty from finding property '{}' at path '{}'."\
+                        .format(artifact_type, gd_key, path)
+                    artifact_payload['value'] = artifact_id
+                    artifact_payload['type']['name'] = const.ARTIFACT_TYPE_API_NAME.get(artifact_type, "String")
+                    artifact_payload['description']['content'] = desc
+                    # attach new Artifact to Incident
+                    resilient_client.post(uri=artifact_uri, payload=artifact_payload)
+
+        except SimpleHTTPException as ex:
+            LOG.info(u'Something went wrong when attempting to update the Incident: {}'.format(ex))
+            raise ex
+

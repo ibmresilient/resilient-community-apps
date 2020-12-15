@@ -134,3 +134,43 @@ def get_lastrun_unix_epoch(lookback_interval):
         past = lookback_interval
 
     return  (time.mktime(past.timetuple()) + past.microsecond / 1e6) * 1000.0
+
+def search_json(data, key, path=None):
+    """
+    Search finding json recursively for key, return all matching values + paths to key.
+
+    :param data: Finding Json Data to search in.
+    :param key: Key to search for.
+    :param path: Path to key in the data.
+    :return: Tuple of matched values and paths found in json data.
+    """
+    values = []
+    if path is None:
+        path = ''
+    new_path = ''
+
+    if isinstance(data, dict):
+        for k, v in data.items():
+            new_path = path
+            if isinstance(v, (dict, list)):
+                new_path += '["' + k + '"]'
+                items = search_json(v, key, path=new_path)
+                for item in items:
+                    if isinstance(item, tuple):
+                        values.append(item)
+                    else:
+                        values.append((item, new_path))
+            elif k == key:
+                values.append((v, new_path))
+
+    elif isinstance(data, list):
+        new_path = path
+        for i, item in enumerate(data):
+            new_path += '["' + str(i) + '"]'
+            items = search_json(item, key, path=new_path)
+            for item in items:
+                if isinstance(item, tuple):
+                    values.append(item)
+                else:
+                    values.append((item, new_path))
+    return values

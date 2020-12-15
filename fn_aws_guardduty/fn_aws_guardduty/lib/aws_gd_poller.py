@@ -9,7 +9,7 @@ import datetime as dt
 
 from fn_aws_guardduty.lib.aws_gd_cli_man import AwsGdCliMan
 import fn_aws_guardduty.util.config as config
-from fn_aws_guardduty.lib.helpers import FCrit, get_lastrun_unix_epoch
+from fn_aws_guardduty.lib.helpers import FCrit, get_lastrun_unix_epoch, search_json
 from fn_aws_guardduty.util import const
 from fn_aws_guardduty.lib.resilient_service import ResSvc
 
@@ -88,8 +88,16 @@ class AwsGdPoller():
                             # Get Extra Incident Fields
                             i_fields = self.make_incident_fields(finding)
 
+                            # Create any artifact payloads
+                            i_artifacts = self.build_artifacts(finding)
+
                             # Create incident and return response
                             i_response = res_svc.create_incident(i_fields)
+
+                            if i_response is not None:
+                                incident_id = i_response['id']
+                                # Incident created, attach any found artifacts
+                                res_svc.create_artifacts(i_response['id'], i_artifacts)
 
                         else:
                             LOG.info("Incident already exists for AWS GuardDuty Incident %d", finding["Id"])
@@ -206,3 +214,22 @@ class AwsGdPoller():
             self.last_update = dt.datetime.now()
 
         return fc
+
+    def build_artifacts(self, finding, artifact_payloads={}):
+        """
+        Add artifact type and value to the artifact_payload
+        :param data:
+        :param artifact_payloads:
+        :return:
+        """
+        for artifact_type, gd_keys in const.ARTIFACT_TYPES_MAP.items():
+            for gd_key in gd_keys:
+                for (artifact_id, path) in search_json(finding, gd_key):
+                    LOG.debug(u'artifact type {} ({}) ID {}, at path {}'.format(artifact_type, gd_key, artifact_id,
+                                                                                path))
+                    if artifact_id in artifact_payloads:
+                        # Artifact value aleady found skip.
+                        continue
+                    artifact_payloads[artifact_id] = (artifact_type, gd_key, path)
+
+        return artifact_payloads
