@@ -898,7 +898,7 @@ def translate_value_for_blob(blob_func):
         }
 
     def translate_value(type_info, field, value):
-        chged_value = copy(value)
+        chged_value = copy.copy(value)
         if chged_value is not None:
             input_type = field['input_type']
             if input_type in mapping:
