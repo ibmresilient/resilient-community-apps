@@ -5,7 +5,7 @@
 FROM quay.io/ibmresilient/rc_data_feed:2.1.0
 
 ARG APPLICATION=rc_data_feed_plugin_odbcfeed
-ARG RES_CIRCUITS_VERSION=34.0.195
+ARG RES_CIRCUITS_VERSION=38.0
 
 # update to latest packages, user 0 for root privilege
 USER 0
