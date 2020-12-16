@@ -417,7 +417,7 @@ class TypeInfo(object):
         mapping = {
             "select_owner": TypeInfo.translate_value_select,
             "select_user": TypeInfo.translate_value_select,
-            "select_select": TypeInfo.translate_value_select,
+            "select": TypeInfo.translate_value_select,
             "multiselect": TypeInfo.translate_value_multiselect,
             "multiselect_members": TypeInfo.translate_value_multiselect,
             "datepicker": TypeInfo.translate_value_datetimepicker,
