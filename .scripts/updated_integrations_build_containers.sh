@@ -171,7 +171,7 @@ do
 		continue
 	fi
 
-	ARTIFACTORY_LABEL=${ARTIFACTORY_URL}/resilient/${integration_name}:${integration_version}
+	ARTIFACTORY_LABEL=${ARTIFACTORY_URL}/ibmresilient/${integration_name}:${integration_version}
 	QUAY_LABEL=${QUAY_URL}/${QUAY_ORG}/${integration_name}:${integration_version}
 
 	container_build "$integration" "$ARTIFACTORY_LABEL" "$QUAY_LABEL"
