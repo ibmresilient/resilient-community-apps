@@ -4,6 +4,7 @@
 
 """This module contains all of the SqlDialect implementations that we support."""
 
+import copy
 import logging
 import sys
 import sqlite3
@@ -897,16 +898,17 @@ def translate_value_for_blob(blob_func):
         }
 
     def translate_value(type_info, field, value):
-        if value is not None:
+        chged_value = copy(value)
+        if chged_value is not None:
             input_type = field['input_type']
-            for rule, rule_function in mapping.items():
-                if input_type == rule:
-                    value = rule_function(type_info, field, value)
-                    break
+            if input_type in mapping:
+                chged_value = mapping[input_type](type_info, field, chged_value)
+            else:
+                LOG.warning("Unable to find a mapping for field type: %s", input_type)
 
-            if isinstance(value, list):
-                value = mapping["list"](type_info, field, value)
+            if isinstance(chged_value, list):
+                chged_value = mapping["list"](type_info, field, chged_value)
 
-        return value
+        return chged_value
 
     return translate_value
