@@ -35,3 +35,46 @@ ARTIFACT_TYPE_API_NAME = {
     "DNS Name": "DNS Name",
     "Port": "Port"
 }
+# API Name(s) of Data Table(s)
+DATA_TABLE_IDS = [
+    "gd_action_details",
+    "gd_resource_affected"
+]
+# Map of GuardDuty fields to data table columns,
+DATA_TABLE_FIELDS_MAP = {
+    "gd_action_details": [
+        {
+            "path": ["Service"],
+            "fields": {
+                "ActionType": "action_type",
+                "Api": "action_api",
+                "ServiceName": "action_service_name",
+                "EventFirstSeen:" "event_first_seen"
+                "EventLastSeen:" "event_last_seen"
+                "CallerType": "actor_caller_type",
+                "CityName": "city_name",
+                "CountryName": "country_name",
+                "Asn": "asn",
+                "AsnOrg": "asn_org" ,
+                "Isp": "isp",
+                "Org": "org"
+            }
+        }
+    ],
+    "gd_resource_affected": [
+        {
+            "path": ["Resource"],
+            "fields": {
+                "ResourceType": "resource_type",
+                "InstanceId": "instance_id",
+                "InstanceType": "instance_type",
+            }
+        },
+        {
+            "path": ["Service"],
+            "fields": {
+                "ResourceRole": "resource_role",
+            }
+        }
+    ]
+}

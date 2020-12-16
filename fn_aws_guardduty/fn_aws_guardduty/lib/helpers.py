@@ -135,26 +135,36 @@ def get_lastrun_unix_epoch(lookback_interval):
 
     return  (time.mktime(past.timetuple()) + past.microsecond / 1e6) * 1000.0
 
-def search_json(data, key, path=None):
+def search_json(data, key, path=None, iter=0):
     """
-    Search finding json recursively for key, return all matching values + paths to key.
+    Search finding json recursively for key, return all matching values + list of path
+     elements to key.
 
     :param data: Finding Json Data to search in.
-    :param key: Key to search for.
-    :param path: Path to key in the data.
-    :return: Tuple of matched values and paths found in json data.
+    :param key: Key to search for in finding.
+    :param path: List of path elements to key in the data.
+    :param iter: Level of recursion.
+    :return: Tuple of matched values and list of path elements in json data.
     """
     values = []
     if path is None:
-        path = ''
-    new_path = ''
+        path = []
+    new_path = []
+
+    if iter==0 and path:
+        # Not running recursively and path has values.
+        for ele in path:
+            if ele in data:
+                data = data[ele]
+            else:
+                return{"error": "Path not found", "path": "{}".format(path)}
 
     if isinstance(data, dict):
         for k, v in data.items():
-            new_path = path
+            new_path = path[:]
             if isinstance(v, (dict, list)):
-                new_path += '["' + k + '"]'
-                items = search_json(v, key, path=new_path)
+                new_path.append(k)
+                items = search_json(v, key, path=new_path, iter=iter+1)
                 for item in items:
                     if isinstance(item, tuple):
                         values.append(item)
@@ -164,10 +174,10 @@ def search_json(data, key, path=None):
                 values.append((v, new_path))
 
     elif isinstance(data, list):
-        new_path = path
+        new_path = path[:]
         for i, item in enumerate(data):
-            new_path += '["' + str(i) + '"]'
-            items = search_json(item, key, path=new_path)
+            new_path.append(i)
+            items = search_json(item, key, path=new_path, iter=iter+1)
             for item in items:
                 if isinstance(item, tuple):
                     values.append(item)

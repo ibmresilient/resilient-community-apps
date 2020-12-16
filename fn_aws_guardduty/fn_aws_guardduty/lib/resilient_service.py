@@ -37,7 +37,7 @@ class ResSvc(ResilientComponent):
         if a_response is not None:
             for artifact_result in a_response:
                 artifact_type = artifact_result.get('description')
-                if artifact_type in const.ARTIFACT_TYPES:
+                if artifact_type in const.ARTIFACT_TYPES_MAP:
                     r_artifacts[artifact_result['value']] = artifact_type
 
         return r_artifacts
@@ -130,3 +130,27 @@ class ResSvc(ResilientComponent):
             LOG.info(u'Something went wrong when attempting to update the Incident: {}'.format(ex))
             raise ex
 
+    def add_datatables(self, incident_id, tables):
+        """Add data tables to incident Resilient Incident.
+
+        :param incident_id: Incident ID from incident creation.
+        :param tables: Data table data.
+        """
+        try:
+            resilient_client = self.rest_client()
+
+            # attach ancilliary data to Incident
+            # self.create_incident_artifact(incident_id, artifacts)
+
+            for table_id, contents in tables.items():
+                if contents:
+                    if table_id in const.DATA_TABLE_IDS:
+                        # Table data, add row to specified data table
+                        uri = '/incidents/{0}/table_data/{1}/row_data'.format(incident_id, table_id)
+                        LOG.info("Attempting to create table with the following: %s", uri)
+
+                        for content in contents:
+                            resilient_client.post(uri=uri, payload=content)
+
+        except SimpleHTTPException as ex:
+            LOG.error('Something went wrong when attempting to create the Incident: %s', ex)
