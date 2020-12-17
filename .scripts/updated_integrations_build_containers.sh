@@ -11,7 +11,7 @@
 readonly REPO_API_URL='https://quay.io/api/v1/repository'
 
 # build using either global PyPi or Artifactory
-PYPI_INDEX="https://pypi.com"
+PYPI_INDEX="https://pypi.org"
 if [[ $MASTER_BUILD -ne 0 && -n $DEV_DEPS && $DEV_DEPS -eq 0 ]]; then
 	PYPI_INDEX="$ARTIFACTORY_PYPI_INDEX"
 fi
@@ -171,7 +171,7 @@ do
 		continue
 	fi
 
-	ARTIFACTORY_LABEL=${ARTIFACTORY_URL}/ibmresilient/${integration_name}:${integration_version}
+	ARTIFACTORY_LABEL=${ARTIFACTORY_URL}/${ARTIFACTORY_ORG}/${integration_name}:${integration_version}
 	QUAY_LABEL=${QUAY_URL}/${QUAY_ORG}/${integration_name}:${integration_version}
 
 	container_build "$integration" "$ARTIFACTORY_LABEL" "$QUAY_LABEL"
