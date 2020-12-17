@@ -66,10 +66,12 @@ do
 		skipped_packages+=($integration)
 		continue
 	fi
+	echo "Integration's name is $integration_name"
 
 	if [ -f ${dist_dir}/app-${integration_name}-${integration_version}.zip ]; then
 		# Now - if we can find digest of built image we can replace the tag with it
 	    docker_image=$(docker images --format "{{.Repository}}:{{.Tag}} {{.Digest}}" | grep ${integration_name} | head -n 1)
+	    echo "Found docker image $docker_image"
 	    if [[ -n $docker_image && $MASTER_BUILD -ne 0 ]]; then
 	    	sha_digest=$(echo $docker_image | cut -d ' ' -f 2)
 	    	echo "Digest of the image is ${sha_digest}"
