@@ -2,7 +2,7 @@
 dist_dir=$( cd $(dirname $0) ; pwd -P )
 
 # build using either global PyPi or Artifactory
-PYPI_INDEX="https://pypi.org"
+PYPI_INDEX="https://pypi.org/simple"
 if [[ $MASTER_BUILD -ne 0 && -n $DEV_DEPS && $DEV_DEPS -eq 0 ]]; then
 	PYPI_INDEX="$ARTIFACTORY_PYPI_INDEX"
 fi
