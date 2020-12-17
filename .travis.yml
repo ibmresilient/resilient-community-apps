@@ -105,16 +105,6 @@ matrix:
   # where <name> is a name of an integration directory whose container
   # will be build and pushed to artifactory with label :latest and :<version>
   # ARTIFACTORY_URL should be sec-resilient-docker-local.artifactory.swg-devops.com
-  - stage: build packages
-    name: Building packages for updated integrations
-    install:
-      - .scripts/install_resilient_api.sh
-    script:
-      - source .scripts/updated_integrations_package.sh
-      # if there are failed packages send a message with their list
-      - if [[ -n "${FAILED_PACKAGES[*]}" ]]; then .scripts/send_notification.sh "Packages not built ${FAILED_PACKAGES[*]}" failure; fi
-      - .scripts/send_current_pr_comment.sh
-
   - stage: build an image
     name: Building containers
     services:
@@ -124,6 +114,19 @@ matrix:
       - source .scripts/updated_integrations_build_containers.sh ARTIFACTORY
       # if there are failed containers send a message with their list
       - if [[ -n "${FAILED_CONTAINERS[*]}" ]]; then .scripts/send_notification.sh "Containers not built ${FAILED_CONTAINERS[*]}" failure; return 1; fi
+      
+  - stage: build packages 
+    name: Building packages for updated integrations
+    services:
+      - docker
+    install:
+      - .scripts/install_resilient_api.sh
+    script:
+      - sudo apt-get install jq
+      - source .scripts/updated_integrations_package.sh
+      # if there are failed packages send a message with their list
+      - if [[ -n "${FAILED_PACKAGES[*]}" ]]; then .scripts/send_notification.sh "Packages not built ${FAILED_PACKAGES[*]}" failure; fi
+      - .scripts/send_current_pr_comment.sh
 
   - stage: rebuild all images
     python: 3.6
