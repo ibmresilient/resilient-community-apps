@@ -31,10 +31,10 @@ stages:
   # Every commit not on master runs tests
   - name: run tests
     if: branch != master OR type in (pull_request)
-  # Build packages and images for PRs and tags
-  - name: build packages
-    if: type in (pull_request) OR ( tag IS present AND tag =~ ^container/.+ )
   - name: build an image
+    if: type in (pull_request) OR ( tag IS present AND tag =~ ^container/.+ )
+    # Build packages and images for PRs and tags
+  - name: build packages
     if: type in (pull_request) OR ( tag IS present AND tag =~ ^container/.+ )
   # Publish to Quay and create a package when merged to master
   - name: publish master
@@ -114,7 +114,7 @@ matrix:
       - source .scripts/updated_integrations_build_containers.sh ARTIFACTORY
       # if there are failed containers send a message with their list
       - if [[ -n "${FAILED_CONTAINERS[*]}" ]]; then .scripts/send_notification.sh "Containers not built ${FAILED_CONTAINERS[*]}" failure; return 1; fi
-      
+
   - stage: build packages 
     name: Building packages for updated integrations
     services:
