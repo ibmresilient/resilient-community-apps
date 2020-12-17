@@ -3,6 +3,7 @@ if [[ $MASTER_BUILD -eq 0 || $DEV_DEPS -eq 1 ]]; then
 	pip install resilient-circuits
 	pip install pytest-resilient-circuits
 	pip install resilient-lib
+	pip install resilient-sdk
 	exit 0
 fi
 
@@ -10,6 +11,7 @@ fi
 pip install resilient -i $ARTIFACTORY_PYPI_INDEX
 pip install resilient-circuits -i $ARTIFACTORY_PYPI_INDEX
 pip install resilient-lib -i $ARTIFACTORY_PYPI_INDEX
+pip install resilient-sdk -i $ARTIFACTORY_PYPI_INDEX
 pip install pytest-resilient-circuits -i $ARTIFACTORY_PYPI_INDEX
 
 
