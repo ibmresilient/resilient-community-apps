@@ -12,7 +12,7 @@
   ![screenshot: screenshot_1](./screenshots/screenshot_1.png)
 -->
 
-# **User Guide:** Microsoft Exchange Online Functions for IBM Resilient v1.1.0
+# **User Guide:** Microsoft Exchange Online Functions for IBM Resilient v1.2.0
 
 ## Table of Contents
 - [Key Features](#key-features)

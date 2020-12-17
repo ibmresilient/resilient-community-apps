@@ -152,7 +152,7 @@ class MSGraphHelper(object):
             # Get URL for the next batch of results.
             ms_graph_users_url = json_response.get('@odata.nextLink')
 
-        LOG.debug("get_users: Number of Exchange Online users to query: {}".format(user_count))
+        LOG.info("get_users: Number of Exchange Online users to query: {}".format(user_count))
         LOG.debug(user_list)
         return user_list
 
@@ -499,10 +499,19 @@ class MSGraphHelper(object):
         responses = self.ms_graph_session.post(ms_graph_batch,
                                                headers={'Content-Type': 'application/json'},
                                                json={'requests': requests_list})
-        json_response = responses.json()
+        status_code = responses.status_code
+        if status_code >= 200 and status_code < 300:
+            json_response = responses.json()
+            responses_list = json_response.get("responses")
+        else:
+            # If invalid json then print the requests that failed and try to continue.
+            LOG.error(u"Error: Invalid response from MS Graph $batch endpoint: %s", responses)
+            LOG.error(u"Requests list:")
+            LOG.error(requests_list)
+            responses_list = []
 
         # Each response is a query result.
-        for response in json_response.get("responses"):
+        for response in responses_list:
             status_code = response.get('status')
             # Only add to the email results list if the query was found.
             # 404 mailbox not found is status code when the mailbox is not found or it has no license.
@@ -542,12 +551,13 @@ class MSGraphHelper(object):
                     else:
                         value = []
 
-                # Put this query result in a json object.
-                query_result = {'email_address': email_address,
-                                'status_code': status_code,
-                                'email_list': email_list
-                                }
-                results.append(query_result)
+                if len(email_list) > 0:
+                    # Put this query result in a json object and add to the list or results.
+                    query_result = {'email_address': email_address,
+                                    'status_code': status_code,
+                                    'email_list': email_list
+                                    }
+                    results.append(query_result)
         return results
 
     def query_messages_by_list(self, email_address_string, mail_folder, sender, start_date, end_date, has_attachments,
