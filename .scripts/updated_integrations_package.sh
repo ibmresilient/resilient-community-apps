@@ -75,7 +75,7 @@ do
 	    	current_image=$(jq '.current_installation.executables[0].image' ${dist_dir}/build/app.json | cut -d '"' -f 2)
 	    	sha_image=$(echo $current_image | sed "s/:$integration_version/@$sha_digest/")
 	    	echo "Setting image to: ${sha_image}"
-	    	jq ".current_installation.executables[0].image=\"${sha_image}\"" ${dist_dir}/build/app.json > ${dist_dir}/build/app.json
+	    	echo $(jq ".current_installation.executables[0].image=\"${sha_image}\"" ${dist_dir}/build/app.json) > ${dist_dir}/build/app.json
 	    	# updates zip file with the new app.json
 	    	(cd ${dist_dir}/build && zip ../app-${integration_name}-${integration_version}.zip ./app.json)
 	    fi
