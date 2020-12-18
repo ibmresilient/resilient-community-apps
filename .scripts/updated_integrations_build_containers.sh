@@ -176,14 +176,7 @@ do
 
 	container_build "$integration" "$ARTIFACTORY_LABEL" "$QUAY_LABEL"
 
-	docker_image=$(docker images --format "{{.Repository}}:{{.Tag}} {{.Digest}}" | grep ${integration_name} | head -n 1)
-	echo "Found docker image $docker_image"
-	if [[ -n $docker_image && $MASTER_BUILD -ne 0 ]]; then
-		sha_digest=$(echo $docker_image | cut -d ' ' -f 2)
-		echo "Digest of the image is ${sha_digest}"
-		echo $sha_digest > ${dist_dir}/sha_digest
-	fi
-
+	
 	if [ $? -ne 0 ]; then
 		skipped_packages+=($integration)
 		continue
@@ -208,6 +201,13 @@ do
 			skipped_packages+=($integration)
 			continue
 		fi
+	fi
+	docker_image=$(docker images --format "{{.Repository}}:{{.Tag}} {{.Digest}}" | grep ${integration_name} | head -n 1)
+	echo "Found docker image $docker_image"
+	if [[ -n $docker_image && $MASTER_BUILD -ne 0 ]]; then
+		sha_digest=$(echo $docker_image | cut -d ' ' -f 2)
+		echo "Digest of the image is ${sha_digest}"
+		echo $sha_digest > ${dist_dir}/sha_digest
 	fi
 done
 
