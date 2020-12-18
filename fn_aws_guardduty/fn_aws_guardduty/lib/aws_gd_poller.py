@@ -4,9 +4,9 @@
 """ Findings poller for AWS GuardDuty """
 
 import logging
+import pprint
 import time
 import datetime as dt
-
 from fn_aws_guardduty.lib.aws_gd_cli_man import AwsGdCliMan
 import fn_aws_guardduty.util.config as config
 from fn_aws_guardduty.lib.helpers import FCrit, get_lastrun_unix_epoch, search_json
@@ -81,24 +81,33 @@ class AwsGdPoller():
                     ### BEGIN Processing findings
                     # Iterate over finding ids to get properties.
                     for fid in findings_list:
+
                         finding = aws_gd.get("get_findings", DetectorId=detectorid, FindingIds=[fid])[0]
+
                         if len(res_svc.find_resilient_incident_for_req(finding, ["Id", "Region"])) == 0:
                             LOG.info("AWS GuardDuty Finding ID %s in region %s discovered: %s, escalating to Resilient",
                                      finding["Id"], finding["Region"], finding.get("Title", "No Title Provided"))
+
                             # Get Extra Incident Fields
                             i_fields = self.make_incident_fields(finding)
 
                             # Create any artifact payloads
                             i_artifacts = self.build_artifacts(finding)
 
+                            # Assemble Data tables for incident
+                            i_tables = self.build_data_tables(finding)
+
                             # Create incident and return response
                             i_response = res_svc.create_incident(i_fields)
 
                             if i_response is not None:
                                 incident_id = i_response['id']
-                                # Incident created, attach any found artifacts
-                                res_svc.create_artifacts(i_response['id'], i_artifacts)
-
+                                # Attach any found artifacts.
+                                if i_artifacts:
+                                    res_svc.create_artifacts(i_response['id'], i_artifacts)
+                                # Create data tables.
+                                if i_tables:
+                                    res_svc.add_datatables(i_response['id'], i_tables)
                         else:
                             LOG.info("Incident already exists for AWS GuardDuty Incident %d", finding["Id"])
 
@@ -238,3 +247,75 @@ class AwsGdPoller():
                     artifact_payloads[artifact_id] = (artifact_type, gd_key, path)
 
         return artifact_payloads
+
+    def build_data_tables(self, finding):
+        """
+        Assemble the Data Table for an incident from a GuardDuty finding json payload
+
+        :param finding: GuardDuty finding data from query.
+        :return  Returns assembled LIST of DICTs by Resilient data table ID with Data Table column names and values.
+
+        Example Format of returned data including Resilient POST data:
+
+            {
+              "gd_action_details":[
+                {
+                  "cells":{
+                    "action_type":{
+                      "value":"NETWORK_CONNECTION"
+                    },
+                    "protocol":{
+                      "value":"TCP"
+                    },
+                    ...
+                    ...
+                  }
+                }
+              ],
+              "gd_resource_affected":[
+                {
+                  "cells":{
+                    "resource_type":{
+                      "value":"Instance"
+                    },
+                    "instance_id":{
+                      "value":"i-99999999"
+                    },
+                    ...
+                    ...
+                  }
+                }
+              ]
+            }
+
+        """
+        data_tables = {}
+        for table_id in const.DATA_TABLE_IDS:
+            data_table = []
+            table_row = {}
+            for section in const.DATA_TABLE_FIELDS_MAP[table_id]:
+                path = section["path"]
+                for key, val in section["fields"].items():
+                    table_copy = data_table[:]
+                    value = None
+                    # Search for key at path.
+                    search_json(finding, key, path=path)
+                    result = search_json(finding, key, path=path)
+                    if result:
+                        if isinstance(result, dict) and result.get("msg"):
+                            LOG.debug("%s for finding data %s.", result.get("msg"),
+                                      result.get("path"))
+                        elif isinstance(result, list):
+                            (value, _) = result.pop()
+                            table_row[val] = {"value" : value}
+                    table_copy.append({"cells" : table_row})
+
+            data_table = table_copy
+
+            LOG.info("Data Table Assembled with %d rows for table id '%s'.", len(data_table), table_id)
+
+            data_tables.update({table_id : data_table})
+
+            LOG.debug(pprint.pformat(data_table, indent=4))
+
+        return data_tables

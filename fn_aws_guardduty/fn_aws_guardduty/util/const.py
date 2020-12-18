@@ -48,9 +48,9 @@ DATA_TABLE_FIELDS_MAP = {
             "fields": {
                 "ActionType": "action_type",
                 "Api": "action_api",
-                "ServiceName": "action_service_name",
-                "EventFirstSeen:" "event_first_seen"
-                "EventLastSeen:" "event_last_seen"
+                "Protocol": "protocol",
+                "EventFirstSeen": "event_first_seen",
+                "EventLastSeen": "event_last_seen",
                 "CallerType": "actor_caller_type",
                 "CityName": "city_name",
                 "CountryName": "country_name",
@@ -59,6 +59,43 @@ DATA_TABLE_FIELDS_MAP = {
                 "Isp": "isp",
                 "Org": "org"
             }
+        },
+        {
+            "path": ["Service", "Action", "DnsRequestAction"],
+            "fields": {
+                "Domain": "dns_domain_name",
+                "Blocked": "dns_blocked"
+            }
+        },
+        {
+            "path": ["Service", "Action", "*Action"],
+            "fields": {
+                "ServiceName": "action_service_name",
+            }
+        },
+        {
+            "path": ["Service", "Action", "*Action", "LocalIpDetails"],
+            "fields": {
+                "IpAddressV4": "local_ip",
+            }
+        },
+        {
+            "path": ["Service", "Action", "*Action", "RemoteIpDetails"],
+            "fields": {
+                "IpAddressV4": "remote_ip",
+            }
+        },
+        {
+            "path": ["Service", "Action", "*Action", "RemotePortDetails"],
+            "fields": {
+                "Port": "remote_port",
+            }
+        },
+        {
+            "path": ["Service", "Action", "*Action", "LocalPortDetails"],
+            "fields": {
+                "Port": "local_port",
+            }
         }
     ],
     "gd_resource_affected": [
@@ -66,8 +103,14 @@ DATA_TABLE_FIELDS_MAP = {
             "path": ["Resource"],
             "fields": {
                 "ResourceType": "resource_type",
+            }
+        },
+        {
+            "path": ["Resource", "InstanceDetails"],
+            "fields": {
                 "InstanceId": "instance_id",
                 "InstanceType": "instance_type",
+                "InstanceState": "instance_state"
             }
         },
         {
@@ -75,6 +118,27 @@ DATA_TABLE_FIELDS_MAP = {
             "fields": {
                 "ResourceRole": "resource_role",
             }
-        }
+        },
+        {
+            "path": ["Resource", "InstanceDetails", "NetworkInterfaces", 0],
+            "fields": {
+                "PrivateIpAddress": "instance_private_ip",
+                "PrivateDnsName": "instance_private_dns",
+                "PublicIp": "instance_public_ip",
+                "PublicDnsName": "instance_public_dns",
+            }
+        },
+        {
+            "path": ["Resource", "S3BucketDetails", 0],
+            "fields": {
+                "Name": "s3bucket_name",
+            }
+        },
+        {
+            "path": ["Resource", "S3BucketDetails", 0, "Owner"],
+            "fields": {
+                "Id": "s3bucket_owner",
+            }
+        },
     ]
 }

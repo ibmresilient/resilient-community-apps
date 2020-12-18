@@ -6,6 +6,7 @@
 import re
 import datetime as dt
 import time
+import fnmatch
 
 from fn_aws_guardduty.util import const
 
@@ -135,7 +136,37 @@ def get_lastrun_unix_epoch(lookback_interval):
 
     return  (time.mktime(past.timetuple()) + past.microsecond / 1e6) * 1000.0
 
-def search_json(data, key, path=None, iter=0):
+def get_data_at_path(data, path):
+    """
+    Get data starting at path.
+
+     All findings data will not have the same contents. Iterate over elements
+     (int or string) in a path list to determine if they match a path in the json data.
+     Path elements can have Unix shell-style wildcards.
+     e.g.["Service", "Action", "*Action", "LocalIpDetails"] will match data starting
+     at
+      {'Service': {'Action': {'NetworkConnectionAction': {'LocalIpDetails':
+
+    :param data: Finding Json Data to search for path.
+    :param path: List of path elements to key in the data.
+    :return: Tuple of Boolean indicating a path match and data starting at path.
+    """
+    for ele in path:
+        ele_match = False
+        if isinstance(data, list) and isinstance(ele, int) and ele < len(data):
+            data = data[ele]
+            ele_match = True
+        elif isinstance(data, dict) and not isinstance(ele, int):
+            if not isinstance(ele, int):
+                for data_ele, item in data.items():
+                    # Do a Unix shell-style wildcard match
+                    if fnmatch.fnmatch(data_ele, ele):
+                        data = item
+                        ele_match = True
+
+        return(ele_match, data)
+
+def search_json(data, key, path=None, level=0):
     """
     Search finding json recursively for key, return all matching values + list of path
      elements to key.
@@ -143,7 +174,7 @@ def search_json(data, key, path=None, iter=0):
     :param data: Finding Json Data to search in.
     :param key: Key to search for in finding.
     :param path: List of path elements to key in the data.
-    :param iter: Level of recursion.
+    :param level: Level of recursion.
     :return: Tuple of matched values and list of path elements in json data.
     """
     values = []
@@ -151,20 +182,19 @@ def search_json(data, key, path=None, iter=0):
         path = []
     new_path = []
 
-    if iter==0 and path:
-        # Not running recursively and path has values.
-        for ele in path:
-            if ele in data:
-                data = data[ele]
-            else:
-                return{"error": "Path not found", "path": "{}".format(path)}
+    if level==0 and path:
+        # Running at top level and path has a value.
+        ele_match = False
+        (ele_match, data) = get_data_at_path(data, path)
+        if not ele_match:
+            return {"msg": "Path not found", "path": "{}".format(path)}
 
     if isinstance(data, dict):
         for k, v in data.items():
             new_path = path[:]
             if isinstance(v, (dict, list)):
                 new_path.append(k)
-                items = search_json(v, key, path=new_path, iter=iter+1)
+                items = search_json(v, key, path=new_path, level=level+1)
                 for item in items:
                     if isinstance(item, tuple):
                         values.append(item)
@@ -175,9 +205,9 @@ def search_json(data, key, path=None, iter=0):
 
     elif isinstance(data, list):
         new_path = path[:]
-        for i, item in enumerate(data):
+        for i, item_outer in enumerate(data):
             new_path.append(i)
-            items = search_json(item, key, path=new_path, iter=iter+1)
+            items = search_json(item_outer, key, path=new_path, level=level+1)
             for item in items:
                 if isinstance(item, tuple):
                     values.append(item)

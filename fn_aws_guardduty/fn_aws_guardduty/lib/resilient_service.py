@@ -139,9 +139,6 @@ class ResSvc(ResilientComponent):
         try:
             resilient_client = self.rest_client()
 
-            # attach ancilliary data to Incident
-            # self.create_incident_artifact(incident_id, artifacts)
-
             for table_id, contents in tables.items():
                 if contents:
                     if table_id in const.DATA_TABLE_IDS:
