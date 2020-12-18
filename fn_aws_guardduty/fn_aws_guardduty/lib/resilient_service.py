@@ -3,6 +3,7 @@
 # pragma pylint: disable=unused-argument, no-self-use
 """ Functions accessing Resilient """
 import logging
+import pprint
 
 from resilient_circuits import ResilientComponent
 from resilient import SimpleHTTPException
@@ -151,3 +152,24 @@ class ResSvc(ResilientComponent):
 
         except SimpleHTTPException as ex:
             LOG.error('Something went wrong when attempting to create the Incident: %s', ex)
+
+    def add_comment(self, incident_id, data):
+        """
+        Add a comment to the specified Resilient Incident by ID
+
+        :param incident_id:  Incident ID from incident creation.
+        :param data: Content to be added as a note.
+        """
+        try:
+            uri = '/incidents/{}/comments'.format(incident_id)
+            resilient_client = self.rest_client()
+            heading = "AWS GuardDuty finding Payload:\n"
+            note = {
+                'format': 'text',
+                'content': '{}{}'.format(heading, pprint.pformat(data, indent=4))
+            }
+            payload = {'text': note}
+            resilient_client.post(uri=uri, payload=payload)
+
+        except SimpleHTTPException as ex:
+            LOG.error("Failed to add note for incident %d: %s", incident_id, ex)

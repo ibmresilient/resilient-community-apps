@@ -108,6 +108,8 @@ class AwsGdPoller():
                                 # Create data tables.
                                 if i_tables:
                                     res_svc.add_datatables(i_response['id'], i_tables)
+                                # Add finding json as a note.
+                                res_svc.add_comment(i_response['id'], finding)
                         else:
                             LOG.info("Incident already exists for AWS GuardDuty Incident %d", finding["Id"])
 
