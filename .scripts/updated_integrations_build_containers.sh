@@ -190,6 +190,7 @@ do
 			skipped_packages+=($integration)
 			continue
 		fi
+		docker_image=$(docker images --format "{{.Repository}}:{{.Tag}} {{.Digest}}" | grep ${ARTIFACTORY_LABEL} | head -n 1)
 	else
 		# Before we push a container to quay, 
 		# create the repository first using the REST API 
@@ -201,8 +202,9 @@ do
 			skipped_packages+=($integration)
 			continue
 		fi
+		docker_image=$(docker images --format "{{.Repository}}:{{.Tag}} {{.Digest}}" | grep ${QUAY_LABEL} | head -n 1)
 	fi
-	docker_image=$(docker images --format "{{.Repository}}:{{.Tag}} {{.Digest}}" | grep ${integration_name} | head -n 1)
+	
 	echo "Found docker image $docker_image"
 	if [[ -n $docker_image && $MASTER_BUILD -ne 0 ]]; then
 		sha_digest=$(echo $docker_image | cut -d ' ' -f 2)
