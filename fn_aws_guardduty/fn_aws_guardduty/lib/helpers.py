@@ -2,13 +2,13 @@
 # (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 """ Helpers for AWS GuardDuty """
-# Map GuardDuty finding fields to Resilient Incident custom fields.
 import re
 import datetime as dt
 import time
 import fnmatch
 
 from fn_aws_guardduty.util import const
+
 
 class IQuery(dict):
     """Class to create a query for existing findings from AWS GuardDuty in Resilient.
@@ -35,6 +35,7 @@ class IQuery(dict):
         }
     """
     def __init__(self, finding, fields, alt=False):
+        super(IQuery, self).__init__()
         # Add default condition.
         self["filters"] = [{
             "conditions": [
@@ -86,6 +87,7 @@ class FCrit(dict):
 
     """
     def __init__(self):
+        super(FCrit, self).__init__()
         # Add default empty criterion.
         self["Criterion"] = {}
 

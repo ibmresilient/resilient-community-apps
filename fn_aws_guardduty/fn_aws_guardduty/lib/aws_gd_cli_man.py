@@ -13,6 +13,7 @@ from resilient_lib import validate_fields
 from fn_aws_guardduty.lib.aws_gd_client import AwsGdClient
 from fn_aws_guardduty.lib.helpers import is_regex
 import fn_aws_guardduty.util.config as config
+
 LOG = logging.getLogger(__name__)
 
 

@@ -2,14 +2,12 @@
 # (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 """ AWS GuardDuty client class. """
-
 import logging
 
 from botocore.exceptions import ClientError
 from botocore.config import Config
 from boto3 import Session
 from resilient_lib import RequestsCommon
-
 
 LOG = logging.getLogger(__name__)
 # List of get types supported for the integration.
@@ -21,6 +19,7 @@ SUPPORTED_PAGINATE_TYPES = [
     "DetectorIds",
     "FindingIds"
 ]
+
 
 class AwsGdClient():
     """

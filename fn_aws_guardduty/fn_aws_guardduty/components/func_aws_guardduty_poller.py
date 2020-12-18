@@ -2,16 +2,14 @@
 # (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 """ Findings poller for AWS GuardDuty """
-
 import logging
 import time
 from threading import Thread
 
-from fn_aws_guardduty.lib.aws_gd_poller import AwsGdPoller
 from resilient_circuits import ResilientComponent, handler
 from resilient_lib import validate_fields
+from fn_aws_guardduty.lib.aws_gd_poller import AwsGdPoller
 import fn_aws_guardduty.util.config as config
-
 
 LOG = logging.getLogger(__name__)
 # Default polling interval in minutes.
@@ -19,6 +17,7 @@ POLLING_INTERVAL_DEFAULT = 10
 TIMEOUT_MULTIPLIER = 60
 # Extra padding in secs to wait for thread to exit.
 TIMEOUT_WAIT = 10
+
 
 class FuncAwsGuarddutyPoller(ResilientComponent):
     """Component that polls for new findings from AWS GuardDuty"""

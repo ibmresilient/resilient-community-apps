@@ -92,7 +92,7 @@ class ResSvc(ResilientComponent):
             LOG.error("Something went wrong when attempting to create the Incident: %s", ex)
 
     def create_artifacts(self, incident_id, artifacts):
-        """Create artifacts for Resilient Incident
+        """Create artifacts for Resilient Incident.
 
         :param incident_id: Incident ID from incident creation.
         :param artifacts: Artifact payload data.
@@ -101,7 +101,7 @@ class ResSvc(ResilientComponent):
             resilient_client = self.rest_client()
             artifact_uri = '/incidents/{}/artifacts'.format(incident_id)
 
-            # set up Artifact payload skeleton
+            # Set up Artifact payload skeleton.
             artifact_payload = {
                 'type': {
                     'name': 'String',
@@ -111,20 +111,20 @@ class ResSvc(ResilientComponent):
                 }
             }
 
-            # find artifacts that are already associated with this Incident
+            # Find artifacts that are already associated with this Incident.
             existing_artifacts = self._find_resilient_artifacts_for_incident(incident_id)
 
-            # loop through Artifacts provided with this Threat
+            # Loop through Artifacts provided with the finding.
             for artifact_id, (artifact_type, gd_key, path) in artifacts.items():
-                # if this Artifact doesn't match an existing value and type
+                # if this Artifact doesn't match an existing value and type.
                 if artifact_id not in existing_artifacts or existing_artifacts[artifact_id] != artifact_type:
-                    # populate payload with ID and type
+                    # Populate payload with ID and type and description.
                     desc = "'{}' extracted from GuardDuty from finding property '{}' at path '{}'."\
                         .format(artifact_type, gd_key, path)
                     artifact_payload['value'] = artifact_id
                     artifact_payload['type']['name'] = const.ARTIFACT_TYPE_API_NAME.get(artifact_type, "String")
                     artifact_payload['description']['content'] = desc
-                    # attach new Artifact to Incident
+                    # Attach new Artifact to Incident
                     resilient_client.post(uri=artifact_uri, payload=artifact_payload)
 
         except SimpleHTTPException as ex:
@@ -132,7 +132,7 @@ class ResSvc(ResilientComponent):
             raise ex
 
     def add_datatables(self, incident_id, tables):
-        """Add data tables to incident Resilient Incident.
+        """Add data tables to Resilient Incident.
 
         :param incident_id: Incident ID from incident creation.
         :param tables: Data table data.
@@ -141,6 +141,7 @@ class ResSvc(ResilientComponent):
             resilient_client = self.rest_client()
 
             for table_id, contents in tables.items():
+                # Loop though Resilient table ids and related data table content.
                 if contents:
                     if table_id in const.DATA_TABLE_IDS:
                         # Table data, add row to specified data table
@@ -155,10 +156,10 @@ class ResSvc(ResilientComponent):
 
     def add_comment(self, incident_id, data):
         """
-        Add a comment to the specified Resilient Incident by ID
+        Add a comment/note to the specified Resilient Incident by ID.
 
         :param incident_id:  Incident ID from incident creation.
-        :param data: Content to be added as a note.
+        :param data: Content to be added as a Resilient incident note.
         """
         try:
             uri = '/incidents/{}/comments'.format(incident_id)

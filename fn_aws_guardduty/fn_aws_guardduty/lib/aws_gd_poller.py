@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 # (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
-""" Findings poller for AWS GuardDuty """
-
+""" Findings poller class for AWS GuardDuty """
 import logging
 import pprint
 import time
@@ -50,7 +49,7 @@ class AwsGdPoller():
 
         while not config.STOP_THREAD:
             # Set criteria to filter findings results.
-            fc = self.set_criteria()
+            f_criteria = self.set_criteria()
             # Loop over accessible GuardDuty regions and get available DetectorIds.
             for gd_region, gd_client_info in aws_cli_man.clients.items():
                 aws_gd = gd_client_info["client"]
@@ -69,13 +68,13 @@ class AwsGdPoller():
                 detectorid = detectors[0]
 
                 # Get list of findings ids if any for DetectorId
-                findings_list = aws_gd.get("list_findings", DetectorId=detectorid, FindingCriteria=fc)
+                findings_list = aws_gd.get("list_findings", DetectorId=detectorid, FindingCriteria=f_criteria)
 
                 if not findings_list:
                     LOG.debug("No GuardDuty findings found for detector ID %s  in region %s.", detectorid, gd_region)
                     continue
 
-                LOG.debug("Getting GuardDuty findings found for detector ID %s  in region %s.", gd_region)
+                LOG.debug("Getting GuardDuty findings found for detector ID %s  in region %s.",detectorid, gd_region)
 
                 try:
                     ### BEGIN Processing findings
@@ -101,7 +100,6 @@ class AwsGdPoller():
                             i_response = res_svc.create_incident(i_fields)
 
                             if i_response is not None:
-                                incident_id = i_response['id']
                                 # Attach any found artifacts.
                                 if i_artifacts:
                                     res_svc.create_artifacts(i_response['id'], i_artifacts)
@@ -208,23 +206,23 @@ class AwsGdPoller():
 
         :return fc: Return criterion dict
         """
-        fc = FCrit()
+        f_criteria = FCrit()
         # Add severity criterion if setting enabled.
         if self.aws_gd_severity_threshold:
-            fc.set_severity(self.aws_gd_severity_threshold)
+            f_criteria.set_severity(self.aws_gd_severity_threshold)
         if self.aws_gd_lookback_interval:
             # Set criteria for findings updated since lookback interval.
-            fc.set_update(get_lastrun_unix_epoch(self.aws_gd_lookback_interval))
+            f_criteria.set_update(get_lastrun_unix_epoch(self.aws_gd_lookback_interval))
         else:
             if self.last_update:
                 # Set criteria for findings updated since last run through loop.
-                fc.set_update(get_lastrun_unix_epoch(self.last_update))
+                f_criteria.set_update(get_lastrun_unix_epoch(self.last_update))
             else:
                 # First run no criterion set for updates, fetch all may take a long time.
                 LOG.info("First Run in progress - this may take a while.")
             self.last_update = dt.datetime.now()
 
-        return fc
+        return f_criteria
 
     def build_artifacts(self, finding):
         """
@@ -241,8 +239,7 @@ class AwsGdPoller():
         for artifact_type, gd_keys in const.ARTIFACT_TYPES_MAP.items():
             for gd_key in gd_keys:
                 for (artifact_id, path) in search_json(finding, gd_key):
-                    LOG.debug(u'artifact type {} ({}) ID {}, at path {}'.format(artifact_type, gd_key, artifact_id,
-                                                                                path))
+                    LOG.debug(u'artifact type %s (%s) ID %s, at path %s',artifact_type, gd_key, artifact_id, path)
                     if artifact_id in artifact_payloads:
                         # Artifact value aleady found skip.
                         continue
