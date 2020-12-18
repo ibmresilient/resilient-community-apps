@@ -45,13 +45,15 @@ class FunctionComponent(ResilientComponent):
 
                 # Handle no matches
                 if not matching_wiki_content:
-                    reason = u"No Matches Found for {} in the Wiki {}".format(wiki_search_term, 
+                    reason = u"No matches found for {} in the Wiki {}".format(wiki_search_term, 
                                                                               wiki_title_or_id)
                     yield StatusMessage(reason)
 
                 yield StatusMessage("Found {} matching entries".format(len(matching_wiki_content)))
 
             results = rp.done(False if reason else True, matching_wiki_content, reason=reason)
+            # add the title of the wiki page
+            results['title'] = content.get('title') if content else None
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
@@ -65,4 +67,4 @@ def do_lookup(wiki_search_term, content):
     wiki_content = content['text'].split('\n')
 
     # if search term is in the wiki pull that line and add to a new list
-    return [s for s in wiki_content if search.match(s)]
+    return [s for s in wiki_content if search.search(s)]

@@ -61,6 +61,8 @@ class FunctionComponent(ResilientComponent):
                 yield StatusMessage(reason)
 
             results = rp.done(False if reason else True, content, reason=reason)
+            # add the title of the wiki page
+            results['title'] = content.get('title') if content else None
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
