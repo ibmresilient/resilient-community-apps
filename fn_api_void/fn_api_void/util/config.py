@@ -10,7 +10,7 @@ def config_section_data():
     """
     config_data = u"""[fn_api_void]
 apivoid_base_url=https://endpoint.apivoid.com
-apivoid_sub_url=v1/pay-as-you-go/
+apivoid_sub_url=v1/pay-as-you-go
 apivoid_api_key=<your-api-key>
 """
     return config_data

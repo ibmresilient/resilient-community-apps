@@ -22,8 +22,8 @@ def codegen_reload_data():
         "package": u"fn_api_void",
         "message_destinations": [u"fn_api_void"],
         "functions": [u"fn_api_void_request"],
-        "workflows": [u"example_apivoid_url_reputation", u"example_apivoid_ip_reputation"],
-        "actions": [u"Example: APIVoid URL Reputation", u"Example: APIVoid IP Reputation"],
+        "workflows": [u"example_apivoid_ip_reputation", u"example_apivoid_url_reputation", u"example_apivoid_ssl_info", u"example_apivoid_dns_lookup", u"example_apivoid_domain_reputation", u"example_apivoid_email_verify", u"example_apivoid_threatlog"],
+        "actions": [u"Example: APIVoid SSL Info", u"Example: APIVoid Domain Reputation", u"Example: APIVoid ThreatLog", u"Example: APIVoid URL Reputation", u"Example: APIVoid DNS Lookup", u"Example: APIVoid Email Verify"],
         "incident_fields": [],
         "incident_artifact_types": [],
         "datatables": [],
@@ -45,11 +45,20 @@ def customization_data(client=None):
     - Functions:
         - fn_api_void_request
     - Workflows:
-        - example_apivoid_url_reputation
         - example_apivoid_ip_reputation
+        - example_apivoid_url_reputation
+        - example_apivoid_ssl_info
+        - example_apivoid_dns_lookup
+        - example_apivoid_domain_reputation
+        - example_apivoid_email_verify
+        - example_apivoid_threatlog
     - Rules:
+        - Example: APIVoid SSL Info
+        - Example: APIVoid Domain Reputation
+        - Example: APIVoid ThreatLog
         - Example: APIVoid URL Reputation
-        - Example: APIVoid IP Reputation
+        - Example: APIVoid DNS Lookup
+        - Example: APIVoid Email Verify
     - Scripts:
         - Convert JSON to rich text v1.1
     """

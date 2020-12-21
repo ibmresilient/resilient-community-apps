@@ -5,11 +5,11 @@
 import logging
 import urllib
 
-SUB_URL = "v1/pay-as-you-go/"
+SUB_URL = "v1/pay-as-you-go"
 LOG = logging.getLogger(__name__)
 
 
-def get_request_url(base_url, sub_url, query_type, api_key, value):
+def build_request_url(base_url, sub_url, query_type, api_key, value):
     """
     Function that creates the url and parameters
 
@@ -33,7 +33,7 @@ def get_request_url(base_url, sub_url, query_type, api_key, value):
                 "ip": value
             }
         },
-        "Domain Blacklist": {
+        "Domain Reputation": {
             "url": "domainbl",
             "params": {
                 "host": value
@@ -49,10 +49,10 @@ def get_request_url(base_url, sub_url, query_type, api_key, value):
         "Email Verify": {
             "url": "emailverify",
             "params": {
-                "host": value
+                "email": value
             }
         },
-        "Threat Log": {
+        "ThreatLog": {
             "url": "threatlog",
             "params": {
                 "host": value
@@ -119,12 +119,8 @@ def make_apivoid_api_call(base_url, sub_url, query_type, value, api_key, rc):
     :rtype: response
     """
 
-    # Get url and params
-    request_url = get_request_url(base_url, sub_url, query_type, api_key, value)
-
-    # Combine params
-    #params = {"key": api_key}
-    #params.update(request_info[1])
+    # Get url and params and build the request URL.
+    request_url = build_request_url(base_url, sub_url, query_type, api_key, value)
 
     # Execute api call and return response
     return rc.execute_call_v2(method="get", url=request_url)
