@@ -1,0 +1,1136 @@
+{
+  "action_order": [],
+  "actions": [
+    {
+      "automations": [],
+      "conditions": [
+        {
+          "evaluation_id": null,
+          "field_name": "artifact.type",
+          "method": "in",
+          "type": null,
+          "value": [
+            "Malware MD5 Hash",
+            "Malware SHA-1 Hash",
+            "Malware SHA-256 Hash"
+          ]
+        }
+      ],
+      "enabled": true,
+      "export_key": "(Example) McAfee artifact hash search",
+      "id": 90,
+      "logic_type": "all",
+      "message_destinations": [],
+      "name": "(Example) McAfee artifact hash search",
+      "object_type": "artifact",
+      "tags": [],
+      "timeout_seconds": 86400,
+      "type": 1,
+      "uuid": "5e35057f-921b-43cc-b28f-6d4e7908630c",
+      "view_items": [],
+      "workflows": [
+        "mcafee_tie_hash_search_workflow"
+      ]
+    },
+    {
+      "automations": [],
+      "conditions": [
+        {
+          "evaluation_id": null,
+          "field_name": "artifact.type",
+          "method": "in",
+          "type": null,
+          "value": [
+            "Malware MD5 Hash",
+            "Malware SHA-1 Hash",
+            "Malware SHA-256 Hash"
+          ]
+        }
+      ],
+      "enabled": true,
+      "export_key": "McAfee TIE Set File Reputation",
+      "id": 173,
+      "logic_type": "all",
+      "message_destinations": [],
+      "name": "McAfee TIE Set File Reputation",
+      "object_type": "artifact",
+      "tags": [],
+      "timeout_seconds": 86400,
+      "type": 1,
+      "uuid": "13c11735-d9c8-4fbd-ac35-18d676ebc067",
+      "view_items": [
+        {
+          "content": "34a45328-05b1-4b11-96ab-2df6a0921975",
+          "element": "field_uuid",
+          "field_type": "actioninvocation",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "27fa513d-a520-44d5-ac0e-994be004b3db",
+          "element": "field_uuid",
+          "field_type": "actioninvocation",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "3bac34ce-4583-4671-8627-224ba2449e2e",
+          "element": "field_uuid",
+          "field_type": "actioninvocation",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        }
+      ],
+      "workflows": [
+        "mcafee_tie_set_file_reputation"
+      ]
+    },
+    {
+      "automations": [],
+      "conditions": [],
+      "enabled": true,
+      "export_key": "McAfee TIE Set File Reputation - Datatable",
+      "id": 174,
+      "logic_type": "all",
+      "message_destinations": [],
+      "name": "McAfee TIE Set File Reputation - Datatable",
+      "object_type": "tie_results",
+      "tags": [],
+      "timeout_seconds": 86400,
+      "type": 1,
+      "uuid": "46d1ca1f-731b-43f6-b6c9-0a9403c45409",
+      "view_items": [
+        {
+          "content": "27fa513d-a520-44d5-ac0e-994be004b3db",
+          "element": "field_uuid",
+          "field_type": "actioninvocation",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "3bac34ce-4583-4671-8627-224ba2449e2e",
+          "element": "field_uuid",
+          "field_type": "actioninvocation",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        }
+      ],
+      "workflows": [
+        "mcafee_tie_set_reputation__datatable"
+      ]
+    }
+  ],
+  "automatic_tasks": [],
+  "export_date": 1608671699353,
+  "export_format_version": 2,
+  "extensions": [],
+  "fields": [
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "__function/mcafee_tie_comment",
+      "hide_notification": false,
+      "id": 1194,
+      "input_type": "text",
+      "internal": false,
+      "is_tracked": false,
+      "name": "mcafee_tie_comment",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": null,
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "mcafee_tie_comment",
+      "tooltip": "",
+      "type_id": 11,
+      "uuid": "0b2b8388-beae-4136-833c-1ec15028e06d",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "__function/mcafee_tie_filename",
+      "hide_notification": false,
+      "id": 1197,
+      "input_type": "text",
+      "internal": false,
+      "is_tracked": false,
+      "name": "mcafee_tie_filename",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": null,
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "mcafee_tie_filename",
+      "tooltip": "",
+      "type_id": 11,
+      "uuid": "ca35a201-5da8-4e22-b33d-83968ede3881",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "__function/mcafee_tie_hash",
+      "hide_notification": false,
+      "id": 514,
+      "input_type": "text",
+      "internal": false,
+      "is_tracked": false,
+      "name": "mcafee_tie_hash",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": null,
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "mcafee_tie_hash",
+      "tooltip": "The value of the hash",
+      "type_id": 11,
+      "uuid": "1fbd9156-b2c4-49c2-82e8-041832e990b6",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "__function/mcafee_tie_hash_type",
+      "hide_notification": false,
+      "id": 513,
+      "input_type": "text",
+      "internal": false,
+      "is_tracked": false,
+      "name": "mcafee_tie_hash_type",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": null,
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "mcafee_tie_hash_type",
+      "tooltip": "The type of file hash (md5, sha1, sha256)",
+      "type_id": 11,
+      "uuid": "88c38278-7078-455b-9029-0ec47d21a3d8",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "__function/mcafee_tie_trust_level",
+      "hide_notification": false,
+      "id": 1193,
+      "input_type": "select",
+      "internal": false,
+      "is_tracked": false,
+      "name": "mcafee_tie_trust_level",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": null,
+      "read_only": false,
+      "required": "always",
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "mcafee_tie_trust_level",
+      "tooltip": "",
+      "type_id": 11,
+      "uuid": "f00cef86-bfd5-4db6-8a80-7550e367f201",
+      "values": [
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "Known Trusted Installed",
+          "properties": null,
+          "uuid": "bd6bdf3c-77f6-492a-8b9f-4244113d2fc8",
+          "value": 879
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "Known Trusted",
+          "properties": null,
+          "uuid": "d566d7e9-8a96-4e82-9f21-24f39cd7b294",
+          "value": 880
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "Most Likely Trusted",
+          "properties": null,
+          "uuid": "9fed59b5-a472-4225-99e8-95ad124fade7",
+          "value": 881
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "Might be Trusted",
+          "properties": null,
+          "uuid": "d7b70729-5ebc-4dbe-b7ac-149d009ddaf8",
+          "value": 882
+        },
+        {
+          "default": true,
+          "enabled": true,
+          "hidden": false,
+          "label": "Unknown",
+          "properties": null,
+          "uuid": "c24cc79f-33b6-44e4-8152-074e99674c0b",
+          "value": 883
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "Might be Malicious",
+          "properties": null,
+          "uuid": "f5a1ad8c-75b3-491e-8235-8d1014ca07a6",
+          "value": 884
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "Most Likely Malicious",
+          "properties": null,
+          "uuid": "b61d0707-9e15-4dc4-9baf-cd525a32fda1",
+          "value": 885
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "Known Malicious",
+          "properties": null,
+          "uuid": "847411f7-d909-4a8b-9bda-ccf72e69cf44",
+          "value": 886
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "Not Set",
+          "properties": null,
+          "uuid": "2c62a727-f0c2-4846-ae16-4e16d11dd5fd",
+          "value": 887
+        }
+      ]
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "actioninvocation/mcafee_tie_comment",
+      "hide_notification": false,
+      "id": 1196,
+      "input_type": "textarea",
+      "internal": false,
+      "is_tracked": false,
+      "name": "mcafee_tie_comment",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": "properties",
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "McAfee TIE Comment",
+      "tooltip": "",
+      "type_id": 6,
+      "uuid": "3bac34ce-4583-4671-8627-224ba2449e2e",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "actioninvocation/mcafee_tie_filename",
+      "hide_notification": false,
+      "id": 1198,
+      "input_type": "text",
+      "internal": false,
+      "is_tracked": false,
+      "name": "mcafee_tie_filename",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": "properties",
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "McAfee TIE Filename",
+      "tooltip": "",
+      "type_id": 6,
+      "uuid": "34a45328-05b1-4b11-96ab-2df6a0921975",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "actioninvocation/mcafee_tie_trust_level",
+      "hide_notification": false,
+      "id": 1195,
+      "input_type": "select",
+      "internal": false,
+      "is_tracked": false,
+      "name": "mcafee_tie_trust_level",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": "properties",
+      "read_only": false,
+      "required": "always",
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "McAfee TIE Trust Level",
+      "tooltip": "",
+      "type_id": 6,
+      "uuid": "27fa513d-a520-44d5-ac0e-994be004b3db",
+      "values": [
+        {
+          "default": false,
+          "enabled": false,
+          "hidden": false,
+          "label": "KNOWN_TRUSTED",
+          "properties": null,
+          "uuid": "4f034a8d-e726-45e7-9d32-6e6f28039376",
+          "value": 803
+        },
+        {
+          "default": false,
+          "enabled": false,
+          "hidden": false,
+          "label": "MOST_LIKELY_TRUSTED",
+          "properties": null,
+          "uuid": "a73ce8f2-b361-4009-be1b-e7780c96986b",
+          "value": 804
+        },
+        {
+          "default": false,
+          "enabled": false,
+          "hidden": false,
+          "label": "MIGHT_BE_TRUSTED",
+          "properties": null,
+          "uuid": "f5d60dc9-46de-4d6e-9e11-bf0a513d1d66",
+          "value": 805
+        },
+        {
+          "default": false,
+          "enabled": false,
+          "hidden": false,
+          "label": "UNKNOWN",
+          "properties": null,
+          "uuid": "a6fea187-a57b-4f9a-916d-e3ad827c3990",
+          "value": 806
+        },
+        {
+          "default": false,
+          "enabled": false,
+          "hidden": false,
+          "label": "MIGHT_BE_MALICIOUS",
+          "properties": null,
+          "uuid": "9ff1c982-219a-4fd4-b47d-5df3916f3ed2",
+          "value": 807
+        },
+        {
+          "default": false,
+          "enabled": false,
+          "hidden": false,
+          "label": "MOST_LIKELY_MALICIOUS",
+          "properties": null,
+          "uuid": "a513fa33-a3cc-46ee-95ff-0a23c7584a96",
+          "value": 808
+        },
+        {
+          "default": false,
+          "enabled": false,
+          "hidden": false,
+          "label": "KNOWN_MALICIOUS",
+          "properties": null,
+          "uuid": "46197654-c641-45c7-adca-880c184b1174",
+          "value": 809
+        },
+        {
+          "default": false,
+          "enabled": false,
+          "hidden": false,
+          "label": "NOT SET",
+          "properties": null,
+          "uuid": "a08eea0b-5644-4ff4-ae2f-a3334817ce57",
+          "value": 810
+        },
+        {
+          "default": false,
+          "enabled": false,
+          "hidden": false,
+          "label": "known trusted installed",
+          "properties": null,
+          "uuid": "e275f740-54ab-4d58-a2dd-f5cc93bce8f8",
+          "value": 852
+        },
+        {
+          "default": false,
+          "enabled": false,
+          "hidden": false,
+          "label": "most likely trusted",
+          "properties": null,
+          "uuid": "ca83d0f7-011b-4d7e-81b8-65ab9ee57ccc",
+          "value": 854
+        },
+        {
+          "default": false,
+          "enabled": false,
+          "hidden": false,
+          "label": "might be trusted",
+          "properties": null,
+          "uuid": "6e4ef0b6-d86e-401a-824d-357d75302853",
+          "value": 855
+        },
+        {
+          "default": false,
+          "enabled": false,
+          "hidden": false,
+          "label": "unknown",
+          "properties": null,
+          "uuid": "2d92d01d-df03-42c3-a18f-727a98d69345",
+          "value": 856
+        },
+        {
+          "default": false,
+          "enabled": false,
+          "hidden": false,
+          "label": "might be malicious",
+          "properties": null,
+          "uuid": "78e8b756-3209-40a4-b0ba-f8c471d8c2e5",
+          "value": 857
+        },
+        {
+          "default": false,
+          "enabled": false,
+          "hidden": false,
+          "label": "most likely malicious",
+          "properties": null,
+          "uuid": "80b096b4-a65e-4253-bac0-35b2c25d33cf",
+          "value": 858
+        },
+        {
+          "default": false,
+          "enabled": false,
+          "hidden": false,
+          "label": "known malicious",
+          "properties": null,
+          "uuid": "020bbdda-5762-46a1-84db-e0181bbef26e",
+          "value": 859
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "Known Trusted Installed",
+          "properties": null,
+          "uuid": "0103d27f-77a7-445f-9c5f-2624fb23afb1",
+          "value": 870
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "Known Trusted",
+          "properties": null,
+          "uuid": "d8fc8cbc-77ee-446f-b6fa-f9afc280a300",
+          "value": 871
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "Most Likely Trusted",
+          "properties": null,
+          "uuid": "47c9a6ab-890d-4de5-bd28-6c8033a28a76",
+          "value": 872
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "Might Be Trusted",
+          "properties": null,
+          "uuid": "8feda912-8743-4ecb-aede-eebc1595891e",
+          "value": 873
+        },
+        {
+          "default": true,
+          "enabled": true,
+          "hidden": false,
+          "label": "Unknown",
+          "properties": null,
+          "uuid": "596ef8dd-5acf-42da-a633-9bb519518798",
+          "value": 874
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "Might be Malicious",
+          "properties": null,
+          "uuid": "6116f609-0892-4782-95ba-0bc28637d901",
+          "value": 875
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "Most Likely Malicious",
+          "properties": null,
+          "uuid": "abd3858f-2547-4e90-9cd6-1cdbe90d4e23",
+          "value": 876
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "Known Malicious",
+          "properties": null,
+          "uuid": "f788453e-a7ab-43b1-afb2-60f8c5489ef9",
+          "value": 877
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "Not Set",
+          "properties": null,
+          "uuid": "4d0b7871-4312-499a-9aad-0f234ff461a4",
+          "value": 878
+        }
+      ]
+    },
+    {
+      "export_key": "incident/internal_customizations_field",
+      "id": 0,
+      "input_type": "text",
+      "internal": true,
+      "name": "internal_customizations_field",
+      "read_only": true,
+      "text": "Customizations Field (internal)",
+      "type_id": 0,
+      "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa1"
+    }
+  ],
+  "functions": [
+    {
+      "creator": {
+        "display_name": "Resilient Sysadmin",
+        "id": 3,
+        "name": "a@example.com",
+        "type": "user"
+      },
+      "description": {
+        "content": "A function which takes two inputs:\n\nmcafee_tie_hash_type: The type of file hash (md5, sha1, sha256).\nmcafee_tie_hash: The value of the hash.\n\nThe function returns back a dict of all the available information from the different file providers (Enterprise, GTI, ATD, MWG) along with the list of systems related to it.",
+        "format": "text"
+      },
+      "destination_handle": "mcafee_tie_md",
+      "display_name": "McAfee TIE search hash",
+      "export_key": "mcafee_tie_search_hash",
+      "id": 46,
+      "last_modified_by": {
+        "display_name": "Resilient Sysadmin",
+        "id": 3,
+        "name": "a@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1608570328475,
+      "name": "mcafee_tie_search_hash",
+      "tags": [],
+      "uuid": "44a9cf5b-16b7-4cea-adc4-3956b079a1ab",
+      "version": 3,
+      "view_items": [
+        {
+          "content": "88c38278-7078-455b-9029-0ec47d21a3d8",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "1fbd9156-b2c4-49c2-82e8-041832e990b6",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        }
+      ],
+      "workflows": [
+        {
+          "actions": [],
+          "description": null,
+          "name": "(Example) McAfee TIE hash search workflow",
+          "object_type": "artifact",
+          "programmatic_name": "mcafee_tie_hash_search_workflow",
+          "tags": [],
+          "uuid": null,
+          "workflow_id": 58
+        },
+        {
+          "actions": [],
+          "description": null,
+          "name": "McAfee TIE Get File Reputation",
+          "object_type": "artifact",
+          "programmatic_name": "mcafee_tie_get_file_reputation",
+          "tags": [],
+          "uuid": null,
+          "workflow_id": 113
+        }
+      ]
+    },
+    {
+      "creator": {
+        "display_name": "Resilient Sysadmin",
+        "id": 3,
+        "name": "a@example.com",
+        "type": "user"
+      },
+      "description": {
+        "content": "Set a file\u0027s reputation. This works on MD5, SH1 and SHA256 hashes.",
+        "format": "text"
+      },
+      "destination_handle": "mcafee_tie_md",
+      "display_name": "McAfee TIE: Set File Reputation",
+      "export_key": "mcafee_tie_set_file_reputation",
+      "id": 85,
+      "last_modified_by": {
+        "display_name": "Resilient Sysadmin",
+        "id": 3,
+        "name": "a@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1608668912891,
+      "name": "mcafee_tie_set_file_reputation",
+      "tags": [],
+      "uuid": "120729ba-8e06-40dc-a816-efbde54d778e",
+      "version": 4,
+      "view_items": [
+        {
+          "content": "88c38278-7078-455b-9029-0ec47d21a3d8",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "1fbd9156-b2c4-49c2-82e8-041832e990b6",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "ca35a201-5da8-4e22-b33d-83968ede3881",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "f00cef86-bfd5-4db6-8a80-7550e367f201",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "0b2b8388-beae-4136-833c-1ec15028e06d",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        }
+      ],
+      "workflows": [
+        {
+          "actions": [],
+          "description": null,
+          "name": "McAfee TIE Set File Reputation",
+          "object_type": "artifact",
+          "programmatic_name": "mcafee_tie_set_file_reputation",
+          "tags": [],
+          "uuid": null,
+          "workflow_id": 112
+        },
+        {
+          "actions": [],
+          "description": null,
+          "name": "McAfee TIE Set File Reputation - Datatable",
+          "object_type": "tie_results",
+          "programmatic_name": "mcafee_tie_set_reputation__datatable",
+          "tags": [],
+          "uuid": null,
+          "workflow_id": 111
+        }
+      ]
+    }
+  ],
+  "geos": null,
+  "groups": null,
+  "id": 53,
+  "inbound_mailboxes": null,
+  "incident_artifact_types": [],
+  "incident_types": [
+    {
+      "create_date": 1608671697807,
+      "description": "Customization Packages (internal)",
+      "enabled": false,
+      "export_key": "Customization Packages (internal)",
+      "hidden": false,
+      "id": 0,
+      "name": "Customization Packages (internal)",
+      "parent_id": null,
+      "system": false,
+      "update_date": 1608671697807,
+      "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
+    }
+  ],
+  "industries": null,
+  "layouts": [],
+  "locale": null,
+  "message_destinations": [
+    {
+      "api_keys": [],
+      "destination_type": 0,
+      "expect_ack": true,
+      "export_key": "mcafee_tie_md",
+      "name": "McAfee TIE MD",
+      "programmatic_name": "mcafee_tie_md",
+      "tags": [],
+      "users": [
+        "a@example.com"
+      ],
+      "uuid": "ba3b83a3-e26e-4fb2-8027-1803087c1b1d"
+    }
+  ],
+  "notifications": null,
+  "overrides": [],
+  "phases": [],
+  "regulators": null,
+  "roles": [],
+  "scripts": [],
+  "server_version": {
+    "build_number": 5634,
+    "major": 36,
+    "minor": 0,
+    "version": "36.0.5634"
+  },
+  "tags": [],
+  "task_order": [],
+  "timeframes": null,
+  "types": [
+    {
+      "actions": [],
+      "display_name": "TIE Results",
+      "export_key": "tie_results",
+      "fields": {
+        "file_provider": {
+          "allow_default_value": false,
+          "blank_option": true,
+          "calculated": false,
+          "changeable": true,
+          "chosen": true,
+          "default_chosen_by_server": false,
+          "deprecated": false,
+          "export_key": "tie_results/file_provider",
+          "hide_notification": false,
+          "id": 508,
+          "input_type": "text",
+          "internal": false,
+          "is_tracked": false,
+          "name": "file_provider",
+          "operation_perms": {},
+          "operations": [],
+          "order": 2,
+          "placeholder": "",
+          "prefix": null,
+          "read_only": false,
+          "rich_text": false,
+          "tags": [],
+          "templates": [],
+          "text": "File Provider",
+          "tooltip": "",
+          "type_id": 1006,
+          "uuid": "a51f6bd9-ab21-4ff5-9b13-d55f485da02c",
+          "values": [],
+          "width": 88
+        },
+        "hash": {
+          "allow_default_value": false,
+          "blank_option": false,
+          "calculated": false,
+          "changeable": true,
+          "chosen": false,
+          "default_chosen_by_server": false,
+          "deprecated": false,
+          "export_key": "tie_results/hash",
+          "hide_notification": false,
+          "id": 509,
+          "input_type": "text",
+          "internal": false,
+          "is_tracked": false,
+          "name": "hash",
+          "operation_perms": {},
+          "operations": [],
+          "order": 1,
+          "placeholder": "",
+          "prefix": null,
+          "read_only": false,
+          "rich_text": false,
+          "tags": [],
+          "templates": [],
+          "text": "Hash",
+          "tooltip": "",
+          "type_id": 1006,
+          "uuid": "738c0bfe-06d7-4766-a5c3-72b9f7abbcb0",
+          "values": [],
+          "width": 254
+        },
+        "hash_type": {
+          "allow_default_value": false,
+          "blank_option": false,
+          "calculated": false,
+          "changeable": true,
+          "chosen": false,
+          "default_chosen_by_server": false,
+          "deprecated": false,
+          "export_key": "tie_results/hash_type",
+          "hide_notification": false,
+          "id": 510,
+          "input_type": "text",
+          "internal": false,
+          "is_tracked": false,
+          "name": "hash_type",
+          "operation_perms": {},
+          "operations": [],
+          "order": 0,
+          "placeholder": "",
+          "prefix": null,
+          "read_only": false,
+          "rich_text": false,
+          "tags": [],
+          "templates": [],
+          "text": "Hash Type",
+          "tooltip": "",
+          "type_id": 1006,
+          "uuid": "53a989b2-d622-41c6-9842-1853c031dea1",
+          "values": [],
+          "width": 159
+        },
+        "tie_create_date": {
+          "allow_default_value": false,
+          "blank_option": true,
+          "calculated": false,
+          "changeable": true,
+          "chosen": true,
+          "default_chosen_by_server": false,
+          "deprecated": false,
+          "export_key": "tie_results/tie_create_date",
+          "hide_notification": false,
+          "id": 512,
+          "input_type": "text",
+          "internal": false,
+          "is_tracked": false,
+          "name": "tie_create_date",
+          "operation_perms": {},
+          "operations": [],
+          "order": 4,
+          "placeholder": "",
+          "prefix": null,
+          "read_only": false,
+          "rich_text": false,
+          "tags": [],
+          "templates": [],
+          "text": "Create Date",
+          "tooltip": "",
+          "type_id": 1006,
+          "uuid": "bbf67ecc-245d-496c-a448-3c77a18bc88f",
+          "values": [],
+          "width": 82
+        },
+        "trust_level": {
+          "allow_default_value": false,
+          "blank_option": true,
+          "calculated": false,
+          "changeable": true,
+          "chosen": true,
+          "default_chosen_by_server": false,
+          "deprecated": false,
+          "export_key": "tie_results/trust_level",
+          "hide_notification": false,
+          "id": 511,
+          "input_type": "text",
+          "internal": false,
+          "is_tracked": false,
+          "name": "trust_level",
+          "operation_perms": {},
+          "operations": [],
+          "order": 3,
+          "placeholder": "",
+          "prefix": null,
+          "read_only": false,
+          "rich_text": false,
+          "tags": [],
+          "templates": [],
+          "text": "Trust Level",
+          "tooltip": "",
+          "type_id": 1006,
+          "uuid": "9cc34a9b-0ff1-4cd3-90d1-588d418e8e66",
+          "values": [],
+          "width": 90
+        }
+      },
+      "for_actions": false,
+      "for_custom_fields": false,
+      "for_notifications": false,
+      "for_workflows": false,
+      "id": null,
+      "parent_types": [
+        "incident"
+      ],
+      "properties": {
+        "can_create": false,
+        "can_destroy": false,
+        "for_who": []
+      },
+      "scripts": [],
+      "tags": [],
+      "type_id": 8,
+      "type_name": "tie_results",
+      "uuid": "0682b663-d821-430c-bfd0-3c6d4e4c35ec"
+    }
+  ],
+  "workflows": [
+    {
+      "actions": [],
+      "content": {
+        "version": 9,
+        "workflow_id": "mcafee_tie_set_reputation__datatable",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"mcafee_tie_set_reputation__datatable\" isExecutable=\"true\" name=\"McAfee TIE Set File Reputation - Datatable\"\u003e\u003cdocumentation\u003e\u003c![CDATA[Set a file\u0027s reputation from the search results datatable]]\u003e\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0tyvuam\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_19quqws\" name=\"McAfee TIE: Set File Reputation\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"120729ba-8e06-40dc-a816-efbde54d778e\"\u003e{\"inputs\":{\"f00cef86-bfd5-4db6-8a80-7550e367f201\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"c24cc79f-33b6-44e4-8152-074e99674c0b\"}}},\"post_processing_script\":\"note = \\\"McAfee TIE File Reputation: {}, Hash: {}\\\".format(results.inputs[\u0027mcafee_tie_trust_level\u0027][\u0027name\u0027], results.inputs[\u0027mcafee_tie_hash\u0027])\\nif results.content:\\n    incident.addNote(\\\"Set reputation successfull\\\\n{}\\\".format(note))\\n    row[\u0027trust_level\u0027] = results.inputs[\u0027mcafee_tie_trust_level\u0027][\u0027name\u0027]\\nelse:\\n    incident.addNote(\\\"Set reputation unsuccessfull\\\\n{}\\\".format(note))\\n\",\"pre_processing_script\":\"inputs.mcafee_tie_trust_level = str(rule.properties.mcafee_tie_trust_level)\\ninputs.mcafee_tie_comment = rule.properties.mcafee_tie_comment.content\\ninputs.mcafee_tie_hash_type = row.hash_type\\ninputs.mcafee_tie_hash = row.hash\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0tyvuam\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_157v1mh\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0tyvuam\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_19quqws\"/\u003e\u003cendEvent id=\"EndEvent_1siist9\"\u003e\u003cincoming\u003eSequenceFlow_157v1mh\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_157v1mh\" sourceRef=\"ServiceTask_19quqws\" targetRef=\"EndEvent_1siist9\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0zqmymj\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned in a note\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1lwx747\" sourceRef=\"ServiceTask_19quqws\" targetRef=\"TextAnnotation_0zqmymj\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_19quqws\" id=\"ServiceTask_19quqws_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"260\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0tyvuam\" id=\"SequenceFlow_0tyvuam_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"260\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"229\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1siist9\" id=\"EndEvent_1siist9_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"420\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"438\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_157v1mh\" id=\"SequenceFlow_157v1mh_di\"\u003e\u003comgdi:waypoint x=\"360\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"420\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"390\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0zqmymj\" id=\"TextAnnotation_0zqmymj_di\"\u003e\u003comgdc:Bounds height=\"51\" width=\"202\" x=\"354\" y=\"92\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1lwx747\" id=\"Association_1lwx747_di\"\u003e\u003comgdi:waypoint x=\"360\" xsi:type=\"omgdc:Point\" y=\"176\"/\u003e\u003comgdi:waypoint x=\"414\" xsi:type=\"omgdc:Point\" y=\"143\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 9,
+      "creator_id": "a@example.com",
+      "description": "Set a file\u0027s reputation from the search results datatable",
+      "export_key": "mcafee_tie_set_reputation__datatable",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1608668869168,
+      "name": "McAfee TIE Set File Reputation - Datatable",
+      "object_type": "tie_results",
+      "programmatic_name": "mcafee_tie_set_reputation__datatable",
+      "tags": [],
+      "uuid": "a7a1c0d9-2649-4ef4-a40f-3c30998bf9f3",
+      "workflow_id": 111
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 10,
+        "workflow_id": "mcafee_tie_set_file_reputation",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"mcafee_tie_set_file_reputation\" isExecutable=\"true\" name=\"McAfee TIE Set File Reputation\"\u003e\u003cdocumentation\u003e\u003c![CDATA[Set a file\u0027s reputation in McAfee Tie. This works on file hashes: MD5, SHA1, SHA256]]\u003e\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0aojjlk\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_00ib6yw\" name=\"McAfee TIE: Set File Reputation\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"120729ba-8e06-40dc-a816-efbde54d778e\"\u003e{\"inputs\":{\"f00cef86-bfd5-4db6-8a80-7550e367f201\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"c24cc79f-33b6-44e4-8152-074e99674c0b\"}}},\"post_processing_script\":\"note = \\\"McAfee TIE File Reputation: {}, Hash: {}\\\".format(results.inputs[\u0027mcafee_tie_trust_level\u0027][\u0027name\u0027], results.inputs[\u0027mcafee_tie_hash\u0027])\\nif results.content:\\n    incident.addNote(\\\"Set reputation successfull\\\\n{}\\\".format(note))\\nelse:\\n    incident.addNote(\\\"Set reputation unsuccessfull\\\\n{}\\\".format(note))\\n    \",\"pre_processing_script\":\"inputs.mcafee_tie_trust_level = str(rule.properties.mcafee_tie_trust_level)\\ninputs.mcafee_tie_comment = rule.properties.mcafee_tie_comment.content\\ninputs.mcafee_tie_filename = rule.properties.mcafee_tie_filename\\ninputs.mcafee_tie_hash_type = artifact.type\\ninputs.mcafee_tie_hash = artifact.value\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0aojjlk\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0i3d8vd\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0aojjlk\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_00ib6yw\"/\u003e\u003cendEvent id=\"EndEvent_19pwnih\"\u003e\u003cincoming\u003eSequenceFlow_0i3d8vd\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0i3d8vd\" sourceRef=\"ServiceTask_00ib6yw\" targetRef=\"EndEvent_19pwnih\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0c8zdri\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned in a note\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0x65k49\" sourceRef=\"ServiceTask_00ib6yw\" targetRef=\"TextAnnotation_0c8zdri\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_00ib6yw\" id=\"ServiceTask_00ib6yw_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"264\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0aojjlk\" id=\"SequenceFlow_0aojjlk_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"264\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"231\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_19pwnih\" id=\"EndEvent_19pwnih_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"436.57260920897284\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"454.57260920897284\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0i3d8vd\" id=\"SequenceFlow_0i3d8vd_di\"\u003e\u003comgdi:waypoint x=\"364\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"437\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"400.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0c8zdri\" id=\"TextAnnotation_0c8zdri_di\"\u003e\u003comgdc:Bounds height=\"53\" width=\"162\" x=\"367\" y=\"88\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0x65k49\" id=\"Association_0x65k49_di\"\u003e\u003comgdi:waypoint x=\"362\" xsi:type=\"omgdc:Point\" y=\"174\"/\u003e\u003comgdi:waypoint x=\"410\" xsi:type=\"omgdc:Point\" y=\"141\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 10,
+      "creator_id": "a@example.com",
+      "description": "Set a file\u0027s reputation in McAfee Tie. This works on file hashes: MD5, SHA1, SHA256",
+      "export_key": "mcafee_tie_set_file_reputation",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1608668854901,
+      "name": "McAfee TIE Set File Reputation",
+      "object_type": "artifact",
+      "programmatic_name": "mcafee_tie_set_file_reputation",
+      "tags": [],
+      "uuid": "d2940034-f105-4366-bb4b-8beee61f425e",
+      "workflow_id": 112
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 3,
+        "workflow_id": "mcafee_tie_hash_search_workflow",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"mcafee_tie_hash_search_workflow\" isExecutable=\"true\" name=\"(Example) McAfee TIE hash search workflow\"\u003e\u003cdocumentation\u003e\u003c![CDATA[Workflow to trigger function to search hash in TIE.  \nResults are written as a row in the TIE Results data table.]]\u003e\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_159kb3y\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0trnpek\" name=\"McAfee TIE search hash\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"44a9cf5b-16b7-4cea-adc4-3956b079a1ab\"\u003e{\"inputs\":{},\"post_processing_script\":\"\\\"\\\"\\\"\\nData returned will be in the following structure\\n\\n\\n{  \\n   \\\"GTI\\\":{  \\n      \\\"File Provider\\\":\\\"GTI\\\",\\n      \\\"Attributes\\\":{  \\n\\n      },\\n      \\\"Create Date\\\":\\\"2018-02-21 12:17:10\\\",\\n      \\\"Trust Level\\\":\\\"Known Malicious\\\"\\n   },\\n   \\\"ATD\\\":{  \\n      \\\"File Provider\\\":\\\"ATD\\\",\\n      \\\"Create Date\\\":\\\"2018-03-14 11:53:09\\\",\\n      \\\"Trust Level\\\":\\\"Most Likely Malicious\\\"\\n   },\\n   \\\"MWG\\\":{  \\n      \\\"File Provider\\\":\\\"MWG\\\",\\n      \\\"Create Date\\\":\\\"2018-03-14 11:53:55\\\",\\n      \\\"Trust Level\\\":\\\"Most Likely Malicious\\\"\\n   },\\n   \\\"Enterprise\\\":{  \\n      \\\"File Provider\\\":\\\"Enterprise\\\",\\n      \\\"Attributes\\\":{  \\n         \\\"Average Local Rep\\\":\\\"Most Likely Malicious\\\",\\n         \\\"First Contact\\\":\\\"2018-02-21 12:17:10\\\",\\n         \\\"Min Local Rep\\\":\\\"Most Likely Malicious\\\",\\n         \\\"Is Prevalent\\\":\\\"0\\\",\\n         \\\"File Name Count\\\":\\\"1\\\",\\n         \\\"Max Local Rep\\\":\\\"Most Likely Malicious\\\"\\n      },\\n      \\\"Create Date\\\":\\\"2018-02-21 12:17:10\\\",\\n      \\\"Trust Level\\\":\\\"Most Likely Malicious\\\"\\n   }\\n   \\\"system_list\\\":[{\\n     \\\"date\\\": 1519233563,\\n     \\\"agentGuid\\\": {a00728ff-3187-46c1-97d2-8e0f26ea940b}\\n   }]\\n}\\n\\\"\\\"\\\"\\n\\nrow = incident.addRow(\\\"tie_results\\\")\\nrow[\\\"hash_type\\\"] = artifact.type\\nrow[\\\"hash\\\"] = artifact.value\\nrow[\\\"file_provider\\\"] = results[\\\"Enterprise\\\"][\\\"File Provider\\\"]\\nrow[\\\"trust_level\\\"] = results[\\\"Enterprise\\\"][\\\"Trust Level\\\"]\\nrow[\\\"tie_create_date\\\"] = results[\\\"Enterprise\\\"][\\\"Create Date\\\"]\\n\\n\\n\\n\\n\",\"pre_processing_script\":\"if artifact.type == \\\"Malware MD5 Hash\\\":\\n  inputs.mcafee_tie_hash_type = \\\"md5\\\"\\n  inputs.mcafee_tie_hash = artifact.value\\nelif artifact.type == \\\"Malware SHA-1 Hash\\\":\\n  inputs.mcafee_tie_hash_type = \\\"sha1\\\"\\n  inputs.mcafee_tie_hash = artifact.value\\nelif artifact.type == \\\"Malware SHA-256 Hash\\\":\\n  inputs.mcafee_tie_hash_type = \\\"sha256\\\"\\n  inputs.mcafee_tie_hash = artifact.value\\nelse:\\n  helper.fail(\\\"Artifact hash was not set correctly\\\")\\n\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_159kb3y\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_17q1ve9\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_159kb3y\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0trnpek\"/\u003e\u003cendEvent id=\"EndEvent_1ahf1kb\"\u003e\u003cincoming\u003eSequenceFlow_17q1ve9\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_17q1ve9\" sourceRef=\"ServiceTask_0trnpek\" targetRef=\"EndEvent_1ahf1kb\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1m4abb3\"\u003e\u003ctext\u003e\u003c![CDATA[Input: Hash artifact\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1fitgld\" sourceRef=\"ServiceTask_0trnpek\" targetRef=\"TextAnnotation_1m4abb3\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1hn7xog\"\u003e\u003ctext\u003e\u003c![CDATA[Output: Row entry in the TIE Results data table\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_18ifopb\" sourceRef=\"ServiceTask_0trnpek\" targetRef=\"TextAnnotation_1hn7xog\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0trnpek\" id=\"ServiceTask_0trnpek_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"354\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_159kb3y\" id=\"SequenceFlow_159kb3y_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"354\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"276\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1ahf1kb\" id=\"EndEvent_1ahf1kb_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"636\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"654\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_17q1ve9\" id=\"SequenceFlow_17q1ve9_di\"\u003e\u003comgdi:waypoint x=\"454\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"636\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"545\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1m4abb3\" id=\"TextAnnotation_1m4abb3_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"210\" y=\"67\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1fitgld\" id=\"Association_1fitgld_di\"\u003e\u003comgdi:waypoint x=\"361\" xsi:type=\"omgdc:Point\" y=\"169\"/\u003e\u003comgdi:waypoint x=\"277\" xsi:type=\"omgdc:Point\" y=\"97\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1hn7xog\" id=\"TextAnnotation_1hn7xog_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"511\" y=\"67\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_18ifopb\" id=\"Association_18ifopb_di\"\u003e\u003comgdi:waypoint x=\"449\" xsi:type=\"omgdc:Point\" y=\"171\"/\u003e\u003comgdi:waypoint x=\"542\" xsi:type=\"omgdc:Point\" y=\"97\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 3,
+      "creator_id": "a@example.com",
+      "description": "Workflow to trigger function to search hash in TIE.  \nResults are written as a row in the TIE Results data table.",
+      "export_key": "mcafee_tie_hash_search_workflow",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1608570328979,
+      "name": "(Example) McAfee TIE hash search workflow",
+      "object_type": "artifact",
+      "programmatic_name": "mcafee_tie_hash_search_workflow",
+      "tags": [],
+      "uuid": "4ed65094-e16d-4732-8862-08ce15a75a85",
+      "workflow_id": 58
+    }
+  ],
+  "workspaces": []
+}
