@@ -1,4 +1,5 @@
-#!/usr/bin/env python
+# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
+# #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 from setuptools import setup, find_packages
@@ -32,7 +33,7 @@ setup(
     long_description="Provides APIVoid's threat intelligence to enrich Resilient artifacts",
     install_requires=[
         'resilient_circuits>=30.0.0',
-        'resilient_lib>=38.0.0'
+        'resilient_lib>=35.0.0'
     ],
     packages=find_packages(),
     include_package_data=True,
