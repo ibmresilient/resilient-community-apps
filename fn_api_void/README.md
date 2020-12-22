@@ -51,7 +51,7 @@
 -->
 **A Resilient Function to integrate with the APIVoid API**
 
- ![screenshot: main](./doc/screenshots/main.png)
+ ![screenshot: main](./doc/screenshots/fn-apivoid-iprep-workflow.png)
 
 Provides APIVoid's threat intelligence to enrich Resilient artifacts
 
@@ -68,7 +68,7 @@ Included in this package are:
   * ThreatLog (threatlog)
   * SSL Info (sslinfo)
   * URL Reputation (urlrep)
-* 7 example workflows and 7 example rules which  
+* 7 example workflows and 7 example rules which demonstrate how to call each supported APIVoid endpoint. 
 * The JSON results of the function are written to an incident note by the workflows.
 
 ---
@@ -116,7 +116,7 @@ The following Cloud Pak guides provide additional information:
 These guides are available on the IBM Knowledge Center at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs). From this web page, select your IBM Cloud Pak for Security version. From the version-specific Knowledge Center page, select Case Management and Orchestration & Automation.
 
 ### Proxy Server
-The app **does/does not** support a proxy server.
+The app does support a proxy server.
 
 ---
 
