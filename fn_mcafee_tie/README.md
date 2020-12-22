@@ -71,8 +71,7 @@ In addition, a system list is returned by the function.
 <!--
   List the Key Features of the Integration
 -->
-* Search for Hashes in McAfee ePO/TIE
-* Set tags on McAfee TIE systems
+* Search for hashes in McAfee TIE
 * Set file reputation trust levels on file hashes
 
 ---
@@ -278,7 +277,6 @@ if results.content:
     incident.addNote("Set reputation successfull\n{}".format(note))
 else:
     incident.addNote("Set reputation unsuccessfull\n{}".format(note))
-    
 ```
 
 </p>
@@ -456,7 +454,6 @@ tie_results
 ## Rules
 | Rule Name | Object | Workflow Triggered |
 | --------- | ------ | ------------------ |
-| (Example) McAfee artifact hash search | artifact | `mcafee_tie_hash_search_workflow` |
 | McAfee TIE Set File Reputation | artifact | `mcafee_tie_set_file_reputation` |
 | McAfee TIE Set File Reputation - Datatable | tie_results | `mcafee_tie_set_reputation__datatable` |
 | McAfee TIE Get File Reputation | artifact | `mcafee_tie_get_file_reputation` |
