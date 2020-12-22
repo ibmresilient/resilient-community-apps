@@ -1,3 +1,4 @@
+# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 # -*- coding: utf-8 -*-
 
 """
@@ -7,53 +8,49 @@ Usage: resilient-circuits selftest -l fn_api_void
 
 import logging
 
-log = logging.getLogger(__name__)
-log.setLevel(logging.INFO)
-log.addHandler(logging.StreamHandler())
-
+LOG = logging.getLogger(__name__)
+from resilient_lib import RequestsCommon, validate_fields
+from fn_api_void.lib.apivoid_helper import make_apivoid_api_call
+PACKAGE_NAME = "fn_api_void"
 
 def selftest_function(opts):
     """
     Placeholder for selftest function. An example use would be to test package api connectivity.
     Suggested return values are be unimplemented, success, or failure.
     """
-    app_configs = opts.get("fn_api_void", {})
+    options = opts.get(PACKAGE_NAME, {})
+    rc = RequestsCommon(opts, options)
+    reason = "Test was successful!"
 
-    log = logging.getLogger(__name__)
-    rp = ResultPayload("fn_api_void", **kwargs)
+    try:
+        # Get and validate app configs
+        valid_app_configs = validate_fields(["apivoid_base_url", "apivoid_sub_url", "apivoid_api_key"], options)
 
-    # Add support for Requests Common
-    req_common = RequestsCommon(self.opts, self.options)
+        # Execute api call
+        res = make_apivoid_api_call(
+            base_url=valid_app_configs.get("apivoid_base_url"),
+            sub_url=valid_app_configs.get("apivoid_sub_url"),
+            query_type="selftest",
+            value=True,
+            api_key=valid_app_configs.get("apivoid_api_key"),
+            rc=rc
+        )
 
-    apivoid_base_url = self.options.get("apivoid_base_url")
-    apivoid_sub_url = self.options.get("apivoid_sub_url")
-    apivoid_api_key = self.options.get("apivoid_api_key")
+        res = res.json()
 
-    # Get the function parameters:
-    artifact_value = kwargs.get("api_void_artifact_value")  # text
-    validate_fields(["api_void_artifact_value"], kwargs)
+        if res.get("success"):
+            LOG.info("%s\nCredits Remaining:\t%s\nEstimated Queries:\t%s", reason, res.get("credits_remained", "Unknown"), res.get("estimated_queries", "Unknown"))
+            return {"state": "success"}
 
-    log.info("api_void_artifact_value: %s", artifact_value)
+        elif res.get("error"):
+            reason = res.get("error")
+            LOG.error(reason)
+            return {"state": "failure", "reason": reason}
 
-    urlencoded_url = urllib.parse.quote_plus(artifact_value)
+        reason = "Test was not successful. An unknown error occurred"
+        LOG.error(reason)
+        return {"state": "failure", "reason": reason}
 
-    url = "/".join((apivoid_base_url, "urlrep", apivoid_sub_url))
-    url = u"{0}/?key={1}&url={2}".format(url, apivoid_api_key, urlencoded_url)
-
-    response = req_common.execute_call_v2(method="get", url=url)
-
-    response_json = response.json()
-
-    yield StatusMessage("APIVoid URL reputation function completed successfully...")
-    results = rp.done(True, response_json)
-
-    # Produce a FunctionResult with the results
-    yield FunctionResult(results)
-
-except Exception as e:
-yield FunctionError(e)
-
-    return {
-        "state": "unimplemented",
-        "reason": None
-    }
+    except Exception as err:
+        LOG.error(err)
+        return {"state": "failure", "reason": err}

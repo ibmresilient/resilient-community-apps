@@ -10,7 +10,6 @@ from fn_api_void.lib.apivoid_helper import make_apivoid_api_call
 
 PACKAGE_NAME = "fn_api_void"
 
-
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'fn_api_void_urlrep''"""
 
@@ -35,6 +34,7 @@ class FunctionComponent(ResilientComponent):
             # Add support for Requests Common
             rc = RequestsCommon(self.opts, self.options)
 
+            # Get app.config parameters
             apivoid_base_url = self.options.get("apivoid_base_url")
             apivoid_sub_url = self.options.get("apivoid_sub_url")
             apivoid_api_key = self.options.get("apivoid_api_key")

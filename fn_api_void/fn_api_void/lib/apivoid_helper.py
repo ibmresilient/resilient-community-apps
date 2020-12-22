@@ -9,7 +9,7 @@ if sys.version_info.major >= 3:
 else:
     from urllib import quote as url_encode
 
-SUB_URL = "v1/pay-as-you-go"
+SUB_URL = "v1/pay-as-you-go/"
 LOG = logging.getLogger(__name__)
 
 
@@ -71,11 +71,11 @@ def build_request_url(base_url, sub_url, query_type, api_key, value):
         "URL Reputation": {
             "url": "urlrep",
             "params": {
-                "url": url_encode(value.encode('utf8'))
+                "url": url_encode(value.encode('utf8')) if isinstance(value, str) else value
             }
         },
         "selftest": {
-            "url": "iprep",
+            "url": "sitetrust",
             "params": {
                 "stats": value
             }
