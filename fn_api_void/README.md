@@ -40,7 +40,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.0.0 | MM/YYYY | Initial Release |
+| 1.0.0 | 12/2020 | Initial Release |
 
 ---
 
@@ -59,9 +59,17 @@ Provides APIVoid's threat intelligence to enrich Resilient artifacts
 <!--
   List the Key Features of the Integration
 -->
-* Key Feature 1
-* Key Feature 2
-* Key Feature 3
+Included in this package are:
+* A function which makes APIVoid API calls and returns threat intelligence information in JSON-format.  The APIVoid Request function supports the following APIVoid API request types:
+  * IP Reputation (iprep)
+  * Domain Reputation (domainbl)
+  * DNS Lookup (dnslookup)
+  * Email Verify (emailverify)
+  * ThreatLog (threatlog)
+  * SSL Info (sslinfo)
+  * URL Reputation (urlrep)
+* 7 example workflows and 7 example rules which  
+* The JSON results of the function are written to an incident note by the workflows.
 
 ---
 
@@ -123,9 +131,9 @@ The following table provides the settings you need to configure the app. These s
 
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
-| **apivoid_base_url** | Yes | `https://endpoint.apivoid.com` | *Enter a description of the config here.* |
-| **apivoid_sub_url** | Yes | `v1/pay-as-you-go` | *Enter a description of the config here.* |
-| **apivoid_api_key** | Yes | `<your-api-key>` | *Enter a description of the config here.* |
+| **apivoid_base_url** | Yes | `https://endpoint.apivoid.com` | *APIVoid API base URL.* |
+| **apivoid_sub_url** | Yes | `v1/pay-as-you-go/` | *APIVoid API sub-url.* |
+| **apivoid_api_key** | Yes | `<your-api-key>` | *APIVoid API Key.* |
 
 
 ---
@@ -140,9 +148,13 @@ Make an APIVoid API request call.  The API json is returned by the function.
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `api_void_artifact_type` | `text` | Yes | `-` | - |
-| `api_void_artifact_value` | `text` | Yes | `-` | - |
-| `api_void_request_type` | `select` | Yes | `-` | - |
+| `api_void_artifact_type` | `text` | Yes | `URL` | - |
+| `api_void_artifact_value` | `text` | Yes | `https://example.com` | - |
+| `api_void_request_type` | `select` | Yes | `URL Reputation` | - |
+
+<p>
+Supported APIVoid request types included in the app are:
+* 
 
 </p>
 </details>
@@ -152,9 +164,13 @@ Make an APIVoid API request call.  The API json is returned by the function.
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+   {'version': '1.0', 
+   'success': True, 
+   'reason': None, 
+   'content': {'data': {'report': {'dns_records': {'ns': {'records': [{'target': 'ns3.google.com', 'ip': '216.239.36.10', 'country_code': 'US', 'country_name': 'United States of America', 'isp': 'Google LLC'}, {'target': 'ns2.google.com', 'ip': '216.239.34.10', 'country_code': 'US', 'country_name': 'United States of America', 'isp': 'Google LLC'}, {'target': 'ns1.google.com', 'ip': '216.239.32.10', 'country_code': 'US', 'country_name': 'United States of America', 'isp': 'Google LLC'}, {'target': 'ns4.google.com', 'ip': '216.239.38.10', 'country_code': 'US', 'country_name': 'United States of America', 'isp': 'Google LLC'}]}, 'mx': {'records': [{'target': 'aspmx.l.google.com', 'ip': '173.194.216.27', 'country_code': 'US', 'country_name': 'United States of America', 'isp': 'Google LLC'}, {'target': 'alt1.aspmx.l.google.com', 'ip': '209.85.202.26', 'country_code': 'US', 'country_name': 'United States of America', 'isp': 'Google LLC'}, {'target': 'alt3.aspmx.l.google.com', 'ip': '172.217.218.27', 'country_code': 'US', 'country_name': 'United States of America', 'isp': 'Google LLC'}, {'target': 'alt4.aspmx.l.google.com', 'ip': '209.85.233.26', 'country_code': 'US', 'country_name': 'United States of America', 'isp': 'Google LLC'}, {'target': 'alt2.aspmx.l.google.com', 'ip': '66.102.1.27', 'country_code': 'US', 'country_name': 'United States of America', 'isp': 'Google LLC'}]}}, 'domain_blacklist': {'engines': [{'name': 'SpamhausDBL', 'reference': 'https://www.spamhaus.org/lookup/', 'detected': False}, {'name': 'ThreatLog', 'reference': 'https://www.threatlog.com/', 'detected': False}, {'name': 'OpenPhish', 'reference': 'https://www.openphish.com/', 'detected': False}, {'name': 'PhishTank', 'reference': 'https://www.phishtank.com/', 'detected': False}, {'name': 'Phishing.Database', 'reference': 'https://github.com/mitchellkrogza/Phishing.Database', 'detected': False}, {'name': 'PhishStats', 'reference': 'https://phishstats.info/', 'detected': False}, {'name': 'URLVir', 'reference': 'https://www.urlvir.com/', 'detected': False}, {'name': 'URLhaus', 'reference': 'https://urlhaus.abuse.ch/', 'detected': False}, {'name': 'RPiList Not Serious', 'reference': 'https://github.com/RPiList/specials', 'detected': False}, {'name': 'precisionsec', 'reference': 'https://precisionsec.com/', 'detected': False}, {'name': 'AntiSocial Blacklist', 'reference': 'https://theantisocialengineer.com/', 'detected': False}, {'name': 'PhishFeed', 'reference': 'https://phishfeed.com/', 'detected': False}, {'name': 'Spam404', 'reference': 'https://www.spam404.com/', 'detected': False}, {'name': 'CRDF', 'reference': 'https://threatcenter.crdf.fr/check.html', 'detected': False}, {'name': 'Artists Against 419', 'reference': 'http://wiki.aa419.org/index.php/Main_Page', 'detected': False}], 'detections': 0}, 'file_type': {'signature': '', 'extension': '', 'headers': 'HTML'}, 'geo_location': {'countries': ['US']}, 'html_forms': {'number_of_total_forms': 0, 'number_of_total_input_fields': 0, 'two_text_inputs_in_a_form': False, 'credit_card_field_present': False, 'password_field_present': False, 'email_field_present': False}, 'redirection': {'found': True, 'external': False, 'url': 'https://www.google.com/'}, 'response_headers': {'code': 301, 'status': 'HTTP/1.1 301 Moved Permanently', 'location': 'https://www.google.com/', 'content-type': 'text/html; charset=UTF-8', 'date': 'Tue, 22 Dec 2020 18:24:33 GMT', 'expires': 'Thu, 21 Jan 2021 18:24:33 GMT', 'cache-control': 'public, max-age=2592000', 'server': 'gws', 'content-length': '220', 'x-xss-protection': '0', 'x-frame-options': 'SAMEORIGIN'}, 'risk_score': {'result': 0}, 'security_checks': {'is_host_an_ipv4': False, 'is_suspicious_url_pattern': False, 'is_suspicious_file_extension': False, 'is_robots_noindex': False, 'is_suspended_page': False, 'is_most_abused_tld': False, 'is_uncommon_clickable_url': False, 'is_phishing_heuristic': False, 'is_possible_emotet': False, 'is_suspicious_content': False, 'is_empty_page_title': False, 'is_empty_page_content': False, 'is_domain_blacklisted': False, 'is_suspicious_domain': False, 'is_sinkholed_domain': False, 'is_defaced_heuristic': False, 'is_masked_file': False, 'is_risky_geo_location': False, 'is_china_country': False, 'is_non_standard_port': False, 'is_email_address_on_url_query': False, 'is_directory_listing': False, 'is_exe_on_directory_listing': False, 'is_zip_on_directory_listing': False, 'is_php_on_directory_listing': False, 'is_doc_on_directory_listing': False, 'is_pdf_on_directory_listing': False, 'is_linux_elf_file': False, 'is_linux_elf_file_on_free_dynamic_dns': False, 'is_linux_elf_file_on_free_hosting': False, 'is_linux_elf_file_on_ipv4': False, 'is_masked_linux_elf_file': False, 'is_masked_windows_exe_file': False, 'is_ms_office_file': False, 'is_windows_exe_file_on_free_dynamic_dns': False, 'is_windows_exe_file_on_free_hosting': False, 'is_windows_exe_file_on_ipv4': False, 'is_windows_exe_file': False, 'is_external_redirect': False, 'is_credit_card_field': False, 'is_password_field': False, 'is_valid_https': True}, 'server_details': {'ip': '173.194.216.138', 'hostname': 'vu-in-f138.1e100.net', 'continent_code': 'NA', 'continent_name': 'North America', 'country_code': 'US', 'country_name': 'United States of America', 'region_name': 'California', 'city_name': 'Mountain View', 'latitude': 37.40599060058594, 'longitude': -122.0785140991211, 'isp': 'Google LLC'}, 'site_category': {'is_torrent': False, 'is_vpn_provider': False, 'is_free_hosting': False, 'is_anonymizer': False, 'is_url_shortener': False, 'is_free_dynamic_dns': False}, 'url_parts': {'scheme': 'https', 'host': 'google.com', 'host_nowww': 'google.com', 'port': None, 'path': None, 'query': None}, 'web_page': {'title': '301 Moved', 'description': '', 'keywords': ''}}}, 'credits_remained': 17.82, 'estimated_queries': '35', 'elapsed_time': '0.14', 'success': True}, 'raw': '{"data": {"report": {"dns_records": {"ns": {"records": [{"target": "ns3.google.com", "ip": "216.239.36.10", "country_code": "US", "country_name": "United States of America", "isp": "Google LLC"}, {"target": "ns2.google.com", "ip": "216.239.34.10", "country_code": "US", "country_name": "United States of America", "isp": "Google LLC"}, {"target": "ns1.google.com", "ip": "216.239.32.10", "country_code": "US", "country_name": "United States of America", "isp": "Google LLC"}, {"target": "ns4.google.com", "ip": "216.239.38.10", "country_code": "US", "country_name": "United States of America", "isp": "Google LLC"}]}, "mx": {"records": [{"target": "aspmx.l.google.com", "ip": "173.194.216.27", "country_code": "US", "country_name": "United States of America", "isp": "Google LLC"}, {"target": "alt1.aspmx.l.google.com", "ip": "209.85.202.26", "country_code": "US", "country_name": "United States of America", "isp": "Google LLC"}, {"target": "alt3.aspmx.l.google.com", "ip": "172.217.218.27", "country_code": "US", "country_name": "United States of America", "isp": "Google LLC"}, {"target": "alt4.aspmx.l.google.com", "ip": "209.85.233.26", "country_code": "US", "country_name": "United States of America", "isp": "Google LLC"}, {"target": "alt2.aspmx.l.google.com", "ip": "66.102.1.27", "country_code": "US", "country_name": "United States of America", "isp": "Google LLC"}]}}, "domain_blacklist": {"engines": [{"name": "SpamhausDBL", "reference": "https://www.spamhaus.org/lookup/", "detected": false}, {"name": "ThreatLog", "reference": "https://www.threatlog.com/", "detected": false}, {"name": "OpenPhish", "reference": "https://www.openphish.com/", "detected": false}, {"name": "PhishTank", "reference": "https://www.phishtank.com/", "detected": false}, {"name": "Phishing.Database", "reference": "https://github.com/mitchellkrogza/Phishing.Database", "detected": false}, {"name": "PhishStats", "reference": "https://phishstats.info/", "detected": false}, {"name": "URLVir", "reference": "https://www.urlvir.com/", "detected": false}, {"name": "URLhaus", "reference": "https://urlhaus.abuse.ch/", "detected": false}, {"name": "RPiList Not Serious", "reference": "https://github.com/RPiList/specials", "detected": false}, {"name": "precisionsec", "reference": "https://precisionsec.com/", "detected": false}, {"name": "AntiSocial Blacklist", "reference": "https://theantisocialengineer.com/", "detected": false}, {"name": "PhishFeed", "reference": "https://phishfeed.com/", "detected": false}, {"name": "Spam404", "reference": "https://www.spam404.com/", "detected": false}, {"name": "CRDF", "reference": "https://threatcenter.crdf.fr/check.html", "detected": false}, {"name": "Artists Against 419", "reference": "http://wiki.aa419.org/index.php/Main_Page", "detected": false}], "detections": 0}, "file_type": {"signature": "", "extension": "", "headers": "HTML"}, "geo_location": {"countries": ["US"]}, "html_forms": {"number_of_total_forms": 0, "number_of_total_input_fields": 0, "two_text_inputs_in_a_form": false, "credit_card_field_present": false, "password_field_present": false, "email_field_present": false}, "redirection": {"found": true, "external": false, "url": "https://www.google.com/"}, "response_headers": {"code": 301, "status": "HTTP/1.1 301 Moved Permanently", "location": "https://www.google.com/", "content-type": "text/html; charset=UTF-8", "date": "Tue, 22 Dec 2020 18:24:33 GMT", "expires": "Thu, 21 Jan 2021 18:24:33 GMT", "cache-control": "public, max-age=2592000", "server": "gws", "content-length": "220", "x-xss-protection": "0", "x-frame-options": "SAMEORIGIN"}, "risk_score": {"result": 0}, "security_checks": {"is_host_an_ipv4": false, "is_suspicious_url_pattern": false, "is_suspicious_file_extension": false, "is_robots_noindex": false, "is_suspended_page": false, "is_most_abused_tld": false, "is_uncommon_clickable_url": false, "is_phishing_heuristic": false, "is_possible_emotet": false, "is_suspicious_content": false, "is_empty_page_title": false, "is_empty_page_content": false, "is_domain_blacklisted": false, "is_suspicious_domain": false, "is_sinkholed_domain": false, "is_defaced_heuristic": false, "is_masked_file": false, "is_risky_geo_location": false, "is_china_country": false, "is_non_standard_port": false, "is_email_address_on_url_query": false, "is_directory_listing": false, "is_exe_on_directory_listing": false, "is_zip_on_directory_listing": false, "is_php_on_directory_listing": false, "is_doc_on_directory_listing": false, "is_pdf_on_directory_listing": false, "is_linux_elf_file": false, "is_linux_elf_file_on_free_dynamic_dns": false, "is_linux_elf_file_on_free_hosting": false, "is_linux_elf_file_on_ipv4": false, "is_masked_linux_elf_file": false, "is_masked_windows_exe_file": false, "is_ms_office_file": false, "is_windows_exe_file_on_free_dynamic_dns": false, "is_windows_exe_file_on_free_hosting": false, "is_windows_exe_file_on_ipv4": false, "is_windows_exe_file": false, "is_external_redirect": false, "is_credit_card_field": false, "is_password_field": false, "is_valid_https": true}, "server_details": {"ip": "173.194.216.138", "hostname": "vu-in-f138.1e100.net", "continent_code": "NA", "continent_name": "North America", "country_code": "US", "country_name": "United States of America", "region_name": "California", "city_name": "Mountain View", "latitude": 37.40599060058594, "longitude": -122.0785140991211, "isp": "Google LLC"}, "site_category": {"is_torrent": false, "is_vpn_provider": false, "is_free_hosting": false, "is_anonymizer": false, "is_url_shortener": false, "is_free_dynamic_dns": false}, "url_parts": {"scheme": "https", "host": "google.com", "host_nowww": "google.com", "port": null, "path": null, "query": null}, "web_page": {"title": "301 Moved", "description": "", "keywords": ""}}}, "credits_remained": 17.82, "estimated_queries": "35", "elapsed_time": "0.14", "success": true}', 
+   'inputs': {'api_void_request_type': {'id': 308, 'name': 'URL Reputation'}, 'api_void_artifact_type': 'URL', 'api_void_artifact_value': 'https://google.com'}, 'metrics': {'version': '1.0', 'package': 'fn-api-void', 'package_version': '1.0.0', 'host': 'local', 'execution_time_ms': 194345, 'timestamp': '2020-12-22 13:27:31'}
+   }
+
 }
 ```
 
