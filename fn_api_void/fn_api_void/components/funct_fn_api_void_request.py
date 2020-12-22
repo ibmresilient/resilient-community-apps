@@ -40,16 +40,15 @@ class FunctionComponent(ResilientComponent):
             apivoid_api_key = self.options.get("apivoid_api_key")
 
             # Get the function parameters:
-            validate_fields(["api_void_request_type", "api_void_artifact_value", "api_void_artifact_value"], kwargs)
+            validate_fields(["api_void_request_type", "api_void_artifact_type", "api_void_artifact_value"], kwargs)
+            api_void_request_type = self.get_select_param(kwargs.get("api_void_request_type"))  # select
             api_void_artifact_type = kwargs.get("api_void_artifact_type")  # text
             api_void_artifact_value = kwargs.get("api_void_artifact_value")  # text
-            api_void_request_type = kwargs.get("api_void_request_type")  # select
-
 
             log.info("api_void_artifact_value: %s", api_void_artifact_value)
 
-            yield StatusMessage("Getting Intelligence for {}: {}".format(api_void_artifact_type,
-                                                                         api_void_artifact_value))
+            yield StatusMessage(u"Getting Intelligence for {0}: {1}".format(api_void_artifact_type,
+                                                                            api_void_artifact_value))
 
             # Execute APIVoid API call
             response = make_apivoid_api_call(

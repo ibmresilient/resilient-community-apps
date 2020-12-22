@@ -3,7 +3,11 @@
 # pragma pylint: disable=unused-argument, no-self-use
 
 import logging
-import urllib
+import sys
+if sys.version_info.major >= 3:
+    from urllib.parse import quote as url_encode
+else:
+    from urllib import quote as url_encode
 
 SUB_URL = "v1/pay-as-you-go"
 LOG = logging.getLogger(__name__)
@@ -67,7 +71,7 @@ def build_request_url(base_url, sub_url, query_type, api_key, value):
         "URL Reputation": {
             "url": "urlrep",
             "params": {
-                "url": urllib.parse.quote_plus(value)
+                "url": url_encode(value.encode('utf8'))
             }
         },
         "selftest": {
@@ -79,11 +83,9 @@ def build_request_url(base_url, sub_url, query_type, api_key, value):
     }
 
     try:
-        name = query_type.get("name")
-        request_type_name = url_map.get(name)
-        request_url = request_type_name.get("url")
-        request_params = request_type_name.get("params")
-        #request_url = url_map.get(query_type).get("url")
+        request_type = url_map.get(query_type)
+        request_url = request_type.get("url")
+        request_params = request_type.get("params")
 
     except KeyError:
         raise ValueError("%s is an Invalid IP Void request type or it's not supported", query_type)
@@ -92,13 +94,12 @@ def build_request_url(base_url, sub_url, query_type, api_key, value):
     the_url = "/".join((base_url, request_url, sub_url))
 
     # Append the api key
-    the_url = u"{0}/?key={1}".format(the_url, api_key)
+    the_url = u"{0}?key={1}".format(the_url, api_key)
 
-    params_list = list(request_params.keys())
     # Append the params
-    for k in params_list:
-        params_value = request_params.get(k)
-        the_url = u"{0}&{1}={2}".format(the_url, k, params_value)
+    for (k, v) in request_params.items():
+        the_url = u"{0}&{1}={2}".format(the_url, k, v)
+
     LOG.info("Using URL: %s", the_url)
 
     return the_url
@@ -124,27 +125,3 @@ def make_apivoid_api_call(base_url, sub_url, query_type, value, api_key, rc):
 
     # Execute api call and return response
     return rc.execute_call_v2(method="get", url=request_url)
-
-
-def format_dict(dict_to_format):
-    """
-    Function that formats the passed dictionary
-    and returns a string
-
-    :param dict_to_format: A dict you want to format
-
-    :return: String of the keys and values in the dict formatted
-    :rtype: str
-    """
-    str_to_rtn = "\n-----------------\n"
-
-    if not dict_to_format:
-        str_to_rtn += "NONE\n"
-
-    for (k, v) in dict_to_format.items():
-
-        str_to_rtn += "{0}: {1}\n".format(k, v)
-
-    str_to_rtn += "-----------------\n"
-
-    return str_to_rtn

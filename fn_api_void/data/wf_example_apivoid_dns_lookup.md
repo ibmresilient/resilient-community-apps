@@ -27,8 +27,8 @@ inputs.api_void_artifact_type = artifact.type
 # Put the results json into a workflow property so we can call the 
 # convert_json_to_rich_text script to print readable formatted json in an incident note.
 inputs = results.get("inputs")
-url_artifact = inputs.get("api_void_artifact_value")
-header = "APIVoid DNS Lookup: {0}".format(url_artifact)
+artifact_value = inputs.get("api_void_artifact_value")
+header = u"APIVoid DNS Lookup: {0}".format(artifact_value)
 
 json_note = {
               "version": "1.1",

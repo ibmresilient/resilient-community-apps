@@ -28,7 +28,7 @@ inputs.api_void_artifact_type = artifact.type
 # convert_json_to_rich_text script to print readable formatted json in an incident note.
 inputs = results.get("inputs")
 artifact_value = inputs.get("api_void_artifact_value")
-header = "APIVoid URL Reputation: {0}".format(artifact_value)
+header = u"APIVoid URL Reputation: {0}".format(artifact_value)
 
 json_note = {
               "version": "1.1",
