@@ -22,8 +22,8 @@ def codegen_reload_data():
         "package": u"fn_api_void",
         "message_destinations": [u"fn_api_void"],
         "functions": [u"fn_api_void_request"],
-        "workflows": [u"example_apivoid_ip_reputation", u"example_apivoid_url_reputation", u"example_apivoid_dns_lookup", u"example_apivoid_domain_reputation", u"example_apivoid_email_verify", u"example_apivoid_threatlog", u"example_apivoid_ssl_info"],
-        "actions": [u"Example: APIVoid SSL Info", u"Example: APIVoid DNS Lookup", u"Example: APIVoid URL Reputation", u"Example: APIVoid ThreatLog", u"Example: APIVoid Email Verify", u"Example: APIVoid Domain Reputation"],
+        "workflows": [u"example_apivoid_email_verify", u"example_apivoid_domain_reputation", u"example_apivoid_threatlog", u"example_apivoid_ssl_info", u"example_apivoid_ip_reputation", u"example_apivoid_dns_lookup", u"example_apivoid_url_reputation"],
+        "actions": [u"Example: APIVoid DNS Lookup", u"Example: APIVoid Domain Reputation", u"Example: APIVoid URL Reputation", u"Example: APIVoid IP Reputation", u"Example: APIVoid SSL Info", u"Example: APIVoid Email Verify", u"Example: APIVoid ThreatLog"],
         "incident_fields": [],
         "incident_artifact_types": [],
         "datatables": [],
@@ -45,20 +45,21 @@ def customization_data(client=None):
     - Functions:
         - fn_api_void_request
     - Workflows:
-        - example_apivoid_ip_reputation
-        - example_apivoid_url_reputation
-        - example_apivoid_dns_lookup
-        - example_apivoid_domain_reputation
         - example_apivoid_email_verify
+        - example_apivoid_domain_reputation
         - example_apivoid_threatlog
         - example_apivoid_ssl_info
+        - example_apivoid_ip_reputation
+        - example_apivoid_dns_lookup
+        - example_apivoid_url_reputation
     - Rules:
-        - Example: APIVoid SSL Info
         - Example: APIVoid DNS Lookup
-        - Example: APIVoid URL Reputation
-        - Example: APIVoid ThreatLog
-        - Example: APIVoid Email Verify
         - Example: APIVoid Domain Reputation
+        - Example: APIVoid URL Reputation
+        - Example: APIVoid IP Reputation
+        - Example: APIVoid SSL Info
+        - Example: APIVoid Email Verify
+        - Example: APIVoid ThreatLog
     - Scripts:
         - Convert JSON to rich text v1.1
     """
