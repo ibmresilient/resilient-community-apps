@@ -31,10 +31,7 @@ stages:
   # Every commit not on master runs tests
   - name: run tests
     if: branch != master OR type in (pull_request)
-  # Build packages and images for PRs and tags
-  - name: build packages
-    if: type in (pull_request) OR ( tag IS present AND tag =~ ^container/.+ )
-  - name: build an image
+  - name: build images and packages
     if: type in (pull_request) OR ( tag IS present AND tag =~ ^container/.+ )
   # Publish to Quay and create a package when merged to master
   - name: publish master
@@ -105,25 +102,21 @@ matrix:
   # where <name> is a name of an integration directory whose container
   # will be build and pushed to artifactory with label :latest and :<version>
   # ARTIFACTORY_URL should be sec-resilient-docker-local.artifactory.swg-devops.com
-  - stage: build packages
-    name: Building packages for updated integrations
-    install:
-      - .scripts/install_resilient_api.sh
-    script:
-      - source .scripts/updated_integrations_package.sh
-      # if there are failed packages send a message with their list
-      - if [[ -n "${FAILED_PACKAGES[*]}" ]]; then .scripts/send_notification.sh "Packages not built ${FAILED_PACKAGES[*]}" failure; fi
-      - .scripts/send_current_pr_comment.sh
-
-  - stage: build an image
-    name: Building containers
+  - stage: build images and packages
+    name: Building containers and packagee
     services:
       - docker
-    install: skip
+    install:
+      - .scripts/install_resilient_api.sh
     script:
       - source .scripts/updated_integrations_build_containers.sh ARTIFACTORY
       # if there are failed containers send a message with their list
       - if [[ -n "${FAILED_CONTAINERS[*]}" ]]; then .scripts/send_notification.sh "Containers not built ${FAILED_CONTAINERS[*]}" failure; return 1; fi
+      - sudo apt-get install jq
+      - source .scripts/updated_integrations_package.sh
+      # if there are failed packages send a message with their list
+      - if [[ -n "${FAILED_PACKAGES[*]}" ]]; then .scripts/send_notification.sh "Packages not built ${FAILED_PACKAGES[*]}" failure; fi
+      - .scripts/send_current_pr_comment.sh
 
   - stage: rebuild all images
     python: 3.6

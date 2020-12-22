@@ -3,5 +3,6 @@ readonly CUR_DIR=$( cd $(dirname $0) ; pwd -P )
 pip install tox
 pip install pylint
 pip install pytest
+pip install --upgrade attrs
 
 ${CUR_DIR}/install_resilient_api.sh

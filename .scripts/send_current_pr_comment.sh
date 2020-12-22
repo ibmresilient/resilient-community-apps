@@ -18,8 +18,8 @@ message=""
 if [[ -n "${PUBLISHED_PACKAGES[*]}" ]]; then
 	for package_url in ${PUBLISHED_PACKAGES[@]};
 	do
-		package=$(echo package_url | tr "/" "\n" | tail -n 1)
-		message="${message}\n[package](package_url)"
+		package=$(echo $package_url | tr "/" "\n" | tail -n 1)
+		message="${message}\n[$package]($package_url)"
 	done
 	curl -s -H "Authorization: token $GITHUB_AUTH_TOKEN" \
  		-X POST -d "{\"body\": \"Bot: ${message}\"}" \

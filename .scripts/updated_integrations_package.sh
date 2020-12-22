@@ -2,7 +2,7 @@
 dist_dir=$( cd $(dirname $0) ; pwd -P )
 
 # build using either global PyPi or Artifactory
-PYPI_INDEX="https://pypi.com"
+PYPI_INDEX="https://pypi.org/simple"
 if [[ $MASTER_BUILD -ne 0 && -n $DEV_DEPS && $DEV_DEPS -eq 0 ]]; then
 	PYPI_INDEX="$ARTIFACTORY_PYPI_INDEX"
 fi
@@ -45,9 +45,9 @@ do
     fi
 
     dist_dir="$(dirname $BASH_SOURCE)/../$integration/dist"
-    mkdir dist_dir
+    mkdir $dist_dir
     #actually build
-    (cd $(dirname $setup_file) && python setup.py -q sdist --dist-dir ./dist && resilient-sdk package -p .);
+    (cd $(dirname $setup_file) && python setup.py -q sdist --dist-dir ./dist && resilient-sdk package -p . --keep-build-dir);
 
 	# To get version of the integration we first extract line verion=<version> from setup.py, from where we extract
 	# the actual version substring. Doing it in 2 steps to avoid using Perl style regex with lookahead capabilities
@@ -66,8 +66,19 @@ do
 		skipped_packages+=($integration)
 		continue
 	fi
+	echo "Integration's name is $integration_name"
 
 	if [ -f ${dist_dir}/app-${integration_name}-${integration_version}.zip ]; then
+		# Now - if we can find digest of built image we can replace the tag with it
+	    if [[ -f ${dist_dir}/sha_digest && $MASTER_BUILD -ne 0 ]]; then
+	    	sha_digest=$(cat ${dist_dir}/sha_digest)
+	    	current_image=$(jq '.current_installation.executables[0].image' ${dist_dir}/build/app.json | cut -d '"' -f 2)
+	    	sha_image=$(echo $current_image | sed "s/:$integration_version/@$sha_digest/")
+	    	echo "Setting image to: ${sha_image}"
+	    	echo $(jq ".current_installation.executables[0].image=\"${sha_image}\"" ${dist_dir}/build/app.json) > ${dist_dir}/build/app.json
+	    	# updates zip file with the new app.json
+	    	(cd ${dist_dir}/build && zip ../app-${integration_name}-${integration_version}.zip ./app.json)
+	    fi
         # curl -H [header including the Artifactory API Key] -T [path to the file to upload to Artifactory] "https://na.artifactory.swg-devops.com/artifactory/<repo-name>/<path-in-repo>"
 		curl -H "X-JFrog-Art-Api:${ARTIFACTORY_API_KEY}" -T ${dist_dir}/app-${integration_name}-${integration_version}.zip "$ARTIFACTORY_REPO_LINK/$integration_name/$integration_version/app-${integration_name}-${integration_version}-${TRAVIS_BUILD_NUMBER}.zip"
 		shipped_packages+=("$ARTIFACTORY_REPO_LINK/$integration_name/$integration_version/app-${integration_name}-${integration_version}-${TRAVIS_BUILD_NUMBER}.zip")

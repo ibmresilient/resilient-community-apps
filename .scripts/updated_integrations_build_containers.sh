@@ -11,7 +11,7 @@
 readonly REPO_API_URL='https://quay.io/api/v1/repository'
 
 # build using either global PyPi or Artifactory
-PYPI_INDEX="https://pypi.com"
+PYPI_INDEX="https://pypi.org/simple"
 if [[ $MASTER_BUILD -ne 0 && -n $DEV_DEPS && $DEV_DEPS -eq 0 ]]; then
 	PYPI_INDEX="$ARTIFACTORY_PYPI_INDEX"
 fi
@@ -171,11 +171,12 @@ do
 		continue
 	fi
 
-	ARTIFACTORY_LABEL=${ARTIFACTORY_URL}/resilient/${integration_name}:${integration_version}
+	ARTIFACTORY_LABEL=${ARTIFACTORY_URL}/${ARTIFACTORY_ORG}/${integration_name}:${integration_version}
 	QUAY_LABEL=${QUAY_URL}/${QUAY_ORG}/${integration_name}:${integration_version}
 
 	container_build "$integration" "$ARTIFACTORY_LABEL" "$QUAY_LABEL"
 
+	
 	if [ $? -ne 0 ]; then
 		skipped_packages+=($integration)
 		continue
@@ -189,6 +190,7 @@ do
 			skipped_packages+=($integration)
 			continue
 		fi
+		docker_image=$(docker images --format "{{.Repository}}:{{.Tag}} {{.Digest}}" | grep ${ARTIFACTORY_LABEL} | head -n 1)
 	else
 		# Before we push a container to quay, 
 		# create the repository first using the REST API 
@@ -200,6 +202,14 @@ do
 			skipped_packages+=($integration)
 			continue
 		fi
+		docker_image=$(docker images --format "{{.Repository}}:{{.Tag}} {{.Digest}}" | grep ${QUAY_LABEL} | head -n 1)
+	fi
+	
+	echo "Found docker image $docker_image"
+	if [[ -n $docker_image && $MASTER_BUILD -ne 0 ]]; then
+		sha_digest=$(echo $docker_image | cut -d ' ' -f 2)
+		echo "Digest of the image is ${sha_digest}"
+		echo $sha_digest > ${dist_dir}/sha_digest
 	fi
 done
 
