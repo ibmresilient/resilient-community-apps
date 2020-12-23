@@ -134,7 +134,16 @@ The following table provides the settings you need to configure the app. These s
 
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
-| **dxlclient_config** | Yes | `` | *DXLClient configuration file. See the [OpenDXL documentation](https://opendxl.github.io/opendxl-client-python/pydoc/updatingconfigfromcli.html) for instructions on how to set.* |
+| **dxlclient_config** | Yes | `/var/rescircuits/fn_macafee_tie/dxlclient.config` | *DXLClient configuration file. See the [OpenDXL documentation](https://opendxl.github.io/opendxl-client-python/pydoc/updatingconfigfromcli.html) for instructions on how to set.* |
+
+#### App Host Configuration
+Since McAfee TIE references it's own configuration file, this file needs to be added to the files available to the container running this app for App Host. This is done by referring to the location of config file as `/var/rescircuits/fn_macafee_tie/dxlclient.config` within the container and then including that file in the files available to the app. See the snapshot below for an example. 
+
+![screenshot: app.config](./doc/screenshots/app_config.png)
+
+In addition to the dxlclient.config file, three certificate files need to be added to the app: ca-bundle.crt, client.crt, client.key. These files were built when you generated the dxlclient.config file and will be included in the same folder location. Be aware that all references to the folder (ex. `/var/rescircuits/fn_macafee_tie/`) must be specified the same way. That is, all references to the file path should contain the trailing slash or all references should leave it off.
+
+![screenshot: macfee_tie_config.png](./doc/screenshots/mcafee_tie_config.png)
 
 ### Custom Layouts
 <!--
@@ -142,7 +151,7 @@ The following table provides the settings you need to configure the app. These s
   You may wish to recommend a new incident tab.
   You should save a screenshot "custom_layouts.png" in the doc/screenshots directory and reference it here
 -->
-* Import the Data Tables like the screenshot below:
+* Import the Data Table, TIE Results, like the screenshot below. Your setup may use a different tab:
 
   ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png)
 
@@ -151,6 +160,8 @@ The following table provides the settings you need to configure the app. These s
 
 ## Function - McAfee TIE: Set File Reputation
 Set a file's reputation. This works on MD5, SH1 and SHA256 hashes.
+
+Manual action rules are available from an artifact or from the TIE Results datatable.
 
  ![screenshot: fn-mcafee-tie-set-file-reputation ](./doc/screenshots/fn-mcafee-tie-set-file-reputation.png)
 
