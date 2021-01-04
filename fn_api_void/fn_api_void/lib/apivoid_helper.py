@@ -9,7 +9,6 @@ if sys.version_info.major >= 3:
 else:
     from urllib import quote as url_encode
 
-SUB_URL = "v1/pay-as-you-go/"
 LOG = logging.getLogger(__name__)
 
 
@@ -26,10 +25,8 @@ def build_request_url(base_url, sub_url, query_type, api_key, value):
     :return: Tuple. A string of the URL and a dict of the params
     :rtype: tuple
     """
-    # If no sub url defined in app.config file use the default one
-    if not sub_url:
-        sub_url = SUB_URL
 
+    # Setup the mapping dict for APIVoid API call types and the url and params for the requests call.
     url_map = {
         "IP Reputation": {
             "url": "iprep",
