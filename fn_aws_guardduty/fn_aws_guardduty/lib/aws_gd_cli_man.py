@@ -6,8 +6,6 @@ import re
 from  datetime import datetime
 import logging
 from sys import version_info
-from botocore.config import Config
-from boto3 import Session
 from resilient_lib import RequestsCommon
 from resilient_lib import validate_fields
 from fn_aws_guardduty.lib.aws_gd_client import AwsGdClient
@@ -35,6 +33,7 @@ class AwsGdCliMan():
 
         self.opts = opts
         self.function_opts = function_options
+        self.aws_gd_master_region = function_options.get("aws_gd_master_region")
         # Strip quotes from self.aws_gd_regions regex
         self.aws_gd_regions = function_options.get("aws_gd_regions").strip("'\"")
         # Test self.aws_gd_regions is a valid regex expression.
@@ -57,8 +56,7 @@ class AwsGdCliMan():
         else:
             regex = r'{}'.format(self.aws_gd_regions)
 
-        # Iterate over list of region names based on aws_gd_regions config property regex.
-        for region in [r for r in Session().get_available_regions('guardduty')
+        for region in [r for r in self.get_regions()
                        if re.search(regex, r, re.IGNORECASE)]:
             aws_gd = AwsGdClient(self.opts, self.function_opts, region=region)
             try:
@@ -78,6 +76,20 @@ class AwsGdCliMan():
                     "detectors": detectors
                 }
             })
+
+    def get_regions(self):
+        """ Get a list of regions.
+
+        Use the ec2 service, which has the 'describe_regions' method, as a proxy to get available regions.
+
+        :return regions: List of region names.
+        """
+        regions = []
+        ec2 = AwsGdClient(self.opts, self.function_opts, service_name="ec2", region=self.aws_gd_master_region)
+
+        regions = [region['RegionName'] for region in ec2.get("describe_regions")]
+
+        return regions
 
     def refresh_clients(self):
         """ Refresh hash of Clients for accessible GuardDuty regions.

@@ -12,7 +12,8 @@ from resilient_lib import RequestsCommon
 LOG = logging.getLogger(__name__)
 # List of get types supported for the integration.
 SUPPORTED_GET_TYPES = [
-    "Findings"
+    "Findings",
+    "Regions"
 ]
 # List of get paginated types supported for the integration.
 SUPPORTED_PAGINATE_TYPES = [
@@ -25,7 +26,7 @@ class AwsGdClient():
     """
     Client class for AWS GuardDuty.
     """
-    def __init__(self, opts, function_options=None, region=None):
+    def __init__(self, opts, function_options=None, service_name=None, region=None):
         """
         Class constructor.
         """
@@ -38,10 +39,11 @@ class AwsGdClient():
 
         self.aws_gd_access_key_id = function_options.get("aws_gd_access_key_id")
         self.aws_gd_secret_access_key = function_options.get("aws_gd_secret_access_key")
-        # Strip quotes from self.aws_gd_regions regex
         self.aws_gd_region = region
         self.proxies = RequestsCommon(opts, function_options).get_proxies()
-        self.gd = self._get_client("guardduty")
+        if not service_name:
+            service_name = "guardduty"
+        self.gd = self._get_client(service_name)
 
     def _get_client(self, service_name):
         """ Create an AWS GuardDuty client.
