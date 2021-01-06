@@ -105,7 +105,7 @@ matrix:
     name: Python 2.7 Bandit Security Scan
     python: 2.7
     install:
-      - pip install bandit
+      - pip install bandit==1.6.2
     script:
     - .scripts/run_bandit_scan_on_updated_packages.sh
   - stage: security scan
