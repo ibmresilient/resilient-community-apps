@@ -19,7 +19,7 @@ aws_gd_secret_access_key=<AWS_GUARDDUTY_SECRET_ACCESS_KEY>
 # Default or master region for the integration
 aws_gd_master_region=<AWS_GUARDDUTY_DEFAULT_REGION>
 # Filter by GuardDuty region names. Can be a string or regular expression.
-# e.g. aws_gd_regions=^(us|eu).* to get Europe and US regions.
+# e.g. aws_gd_regions="^(us|eu).*" to get Europe and US regions.
 aws_gd_regions=<AWS_GUARDDUTY_REGION_REGEX>
 # Interval to refresh regions information (in minutes).
 aws_gd_regions_interval=60
@@ -34,6 +34,6 @@ aws_gd_severity_threshold = 7
 aws_gd_lookback_interval=60
 # Optional settings for access to GuardDuty via a proxy.
 #http_proxy=http://proxy:80
-#https_proxy=http://proxy:80
+#https_proxy=http://proxy:443
 """
     return config_data
