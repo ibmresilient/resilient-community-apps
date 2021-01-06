@@ -14,10 +14,10 @@ from fn_mitre_integration.lib.mitre_attack_utils import get_tactics_and_techniqu
 import requests
 import pytest
 import mock
-from .mock_stix import MitreQueryMocker
+from .mock_stix import MitreQueryMocker, MockCollection
 from mock import patch
 import re
-
+from stix2 import CompositeDataSource, TAXIICollectionSource
 
 MAXIMUM_N_TECHNIQUES_WITHOUT_MITIGATION = 5
 
@@ -32,6 +32,11 @@ def url_get(url):
         ret = False
     return ret
 
+def mock_connect_server(self, *args):
+    self.attack_server = True
+    # CompositeSource to query all the collections at once
+    self.composite_ds = CompositeDataSource()
+    self.composite_ds.add_data_sources([TAXIICollectionSource(MockCollection()), TAXIICollectionSource(MockCollection()), TAXIICollectionSource(MockCollection())])
 
 class TestMitreTactic(object):
     mitre_attack = MitreAttackConnection()
@@ -39,8 +44,9 @@ class TestMitreTactic(object):
     @pytest.fixture(autouse=True)
     def set_up_mock_for_query(self):
         data_mocker = MitreQueryMocker()
-        with patch("fn_mitre_integration.lib.mitre_attack.TAXIICollectionSource.query", data_mocker.query):
-            yield
+        with patch("fn_mitre_integration.lib.mitre_attack.MitreAttackConnection.connect_server", mock_connect_server):
+            with patch("fn_mitre_integration.lib.mitre_attack.TAXIICollectionSource.query", data_mocker.query):
+                yield
 
     def test_get_by_id_works(self):
         assert MitreAttackTactic.get_by_id(self.mitre_attack, "TA0007") is not None
@@ -95,8 +101,9 @@ class TestMitreTechnique(object):
     @pytest.fixture(autouse=True)
     def set_up_mock_for_query(self):
         data_mocker = MitreQueryMocker()
-        with patch("fn_mitre_integration.lib.mitre_attack.TAXIICollectionSource.query", data_mocker.query):
-            yield
+        with patch("fn_mitre_integration.lib.mitre_attack.MitreAttackConnection.connect_server", mock_connect_server):
+            with patch("fn_mitre_integration.lib.mitre_attack.TAXIICollectionSource.query", data_mocker.query):
+                yield
 
     def test_getting_tactic_from_technique_works(self):
         tech = MitreAttackTechnique.get_by_id(self.mitre_attack, "T1205")[0]
@@ -163,6 +170,7 @@ class TestMitreTechnique(object):
 class TestMitreMitigation(object):
     mitre_attack = MitreAttackConnection()
 
+    @pytest.mark.livetest
     def test_mitigation_of_tech(self):
         """
         This one isn't mocked, because it would require mocking relationships
@@ -175,31 +183,34 @@ class TestMitreMitigation(object):
 
     def test_mitigation_get_all(self):
         data_mocker = MitreQueryMocker()
-        with patch("fn_mitre_integration.lib.mitre_attack.TAXIICollectionSource.query", data_mocker.query):
-            assert len(MitreAttackMitigation.get_all(self.mitre_attack)) == len(MitreQueryMocker.MITIGATIONS[0]) + len(
-                MitreQueryMocker.MITIGATIONS[1]) + len(MitreQueryMocker.MITIGATIONS[2])
+        with patch("fn_mitre_integration.lib.mitre_attack.MitreAttackConnection.connect_server", mock_connect_server):
+            with patch("fn_mitre_integration.lib.mitre_attack.TAXIICollectionSource.query", data_mocker.query):
+                assert len(MitreAttackMitigation.get_all(self.mitre_attack)) == len(MitreQueryMocker.MITIGATIONS[0]) + len(
+                    MitreQueryMocker.MITIGATIONS[1]) + len(MitreQueryMocker.MITIGATIONS[2])
 
     def test_mitigation_representation_doesnt_have_unsupported_tags(self):
         """
         Mocked Domain Generation Algorithms on purpose has added code tags to where they could appear.
         """
         data_mocker = MitreQueryMocker()
-        with patch("fn_mitre_integration.lib.mitre_attack.TAXIICollectionSource.query", data_mocker.query):
-            mitigations = MitreAttackMitigation.get_all(self.mitre_attack)
-            dict_reps = [mitigation.dict_form() for mitigation in mitigations]
-            # check for every technique's representation that all the field don't have the tag
-            assert all([("<code>" not in mitigation_repr[key] for key in mitigation_repr) for mitigation_repr in dict_reps])
+        with patch("fn_mitre_integration.lib.mitre_attack.MitreAttackConnection.connect_server", mock_connect_server):
+            with patch("fn_mitre_integration.lib.mitre_attack.TAXIICollectionSource.query", data_mocker.query):
+                mitigations = MitreAttackMitigation.get_all(self.mitre_attack)
+                dict_reps = [mitigation.dict_form() for mitigation in mitigations]
+                # check for every technique's representation that all the field don't have the tag
+                assert all([("<code>" not in mitigation_repr[key] for key in mitigation_repr) for mitigation_repr in dict_reps])
 
     def test_mitigation_doesnt_have_mardown_links(self):
         """
         Mocked Domain Generation Algorithms on purpose has added code tags to where they could appear.
         """
         data_mocker = MitreQueryMocker()
-        with patch("fn_mitre_integration.lib.mitre_attack.TAXIICollectionSource.query", data_mocker.query):
-            mitigation = MitreAttackMitigation.get_all(self.mitre_attack)
-            dict_reps = [s.dict_form() for s in mitigation]
-            # check for every technique's representation that all the field don't have the tag
-            assert all([(re.search("\[(.*?)\]\((.*?)\)", s_repr["description"]) is None) for s_repr in dict_reps])
+        with patch("fn_mitre_integration.lib.mitre_attack.MitreAttackConnection.connect_server", mock_connect_server):
+            with patch("fn_mitre_integration.lib.mitre_attack.TAXIICollectionSource.query", data_mocker.query):
+                mitigation = MitreAttackMitigation.get_all(self.mitre_attack)
+                dict_reps = [s.dict_form() for s in mitigation]
+                # check for every technique's representation that all the field don't have the tag
+                assert all([(re.search("\[(.*?)\]\((.*?)\)", s_repr["description"]) is None) for s_repr in dict_reps])
 
     def test_deprecated_mitigation_states_so_in_description(self):
         """
@@ -207,9 +218,10 @@ class TestMitreMitigation(object):
         Deprecation flag was added to one of the mocked mitigations.
         """
         data_mocker = MitreQueryMocker()
-        with patch("fn_mitre_integration.lib.mitre_attack.TAXIICollectionSource.query", data_mocker.query):
-            mitigations = MitreAttackMitigation.get_all(self.mitre_attack)
-            assert any(x.description.startswith("Deprecated") for x in mitigations)
+        with patch("fn_mitre_integration.lib.mitre_attack.MitreAttackConnection.connect_server", mock_connect_server):
+            with patch("fn_mitre_integration.lib.mitre_attack.TAXIICollectionSource.query", data_mocker.query):
+                mitigations = MitreAttackMitigation.get_all(self.mitre_attack)
+                assert any(x.description.startswith("Deprecated") for x in mitigations)
 
 
 class TestMitreSoftware(object):
@@ -220,17 +232,19 @@ class TestMitreSoftware(object):
         Mocked Domain Generation Algorithms on purpose has added code tags to where they could appear.
         """
         data_mocker = MitreQueryMocker()
-        with patch("fn_mitre_integration.lib.mitre_attack.TAXIICollectionSource.query", data_mocker.query):
-            software = MitreAttackSoftware.get_all(self.mitre_attack)
-            dict_reps = [s.dict_form() for s in software]
-            # check for every technique's representation that all the field don't have the tag
-            assert all([(re.search("\[(.*?)\]\((.*?)\)", s_repr["description"]) is None) for s_repr in dict_reps])
+        with patch("fn_mitre_integration.lib.mitre_attack.MitreAttackConnection.connect_server", mock_connect_server):
+            with patch("fn_mitre_integration.lib.mitre_attack.TAXIICollectionSource.query", data_mocker.query):
+                software = MitreAttackSoftware.get_all(self.mitre_attack)
+                dict_reps = [s.dict_form() for s in software]
+                # check for every technique's representation that all the field don't have the tag
+                assert all([(re.search("\[(.*?)\]\((.*?)\)", s_repr["description"]) is None) for s_repr in dict_reps])
 
     def test_get_all(self):
         data_mocker = MitreQueryMocker()
-        with patch("fn_mitre_integration.lib.mitre_attack.TAXIICollectionSource.query", data_mocker.query):
-            assert len(MitreAttackSoftware.get_all(self.mitre_attack)) == len(MitreQueryMocker.SOFTWARE[0]) + len(
-                MitreQueryMocker.SOFTWARE[1]) + len(MitreQueryMocker.SOFTWARE[2])
+        with patch("fn_mitre_integration.lib.mitre_attack.MitreAttackConnection.connect_server", mock_connect_server):
+            with patch("fn_mitre_integration.lib.mitre_attack.TAXIICollectionSource.query", data_mocker.query):
+                assert len(MitreAttackSoftware.get_all(self.mitre_attack)) == len(MitreQueryMocker.SOFTWARE[0]) + len(
+                    MitreQueryMocker.SOFTWARE[1]) + len(MitreQueryMocker.SOFTWARE[2])
 
 
 class TestMitreGroup(object):
@@ -245,22 +259,24 @@ class TestMitreGroup(object):
         Test that links are sanitized.
         """
         data_mocker = MitreQueryMocker()
-        with patch("fn_mitre_integration.lib.mitre_attack.TAXIICollectionSource.query", data_mocker.query):
-            groups = MitreAttackGroup.get_all(self.mitre_attack)
-            dict_reps = [g.dict_form() for g in groups]
-            # check for every technique's representation that all the field don't have the tag
-            assert all([(re.search("\[(.*?)\]\((.*?)\)", group["description"]) is None) for group in dict_reps])
+        with patch("fn_mitre_integration.lib.mitre_attack.MitreAttackConnection.connect_server", mock_connect_server):
+            with patch("fn_mitre_integration.lib.mitre_attack.TAXIICollectionSource.query", data_mocker.query):
+                groups = MitreAttackGroup.get_all(self.mitre_attack)
+                dict_reps = [g.dict_form() for g in groups]
+                # check for every technique's representation that all the field don't have the tag
+                assert all([(re.search("\[(.*?)\]\((.*?)\)", group["description"]) is None) for group in dict_reps])
 
     def test_groups_dont_have_mardown_links(self):
         """
         Mocked Domain Generation Algorithms on purpose has added code tags to where they could appear.
         """
         data_mocker = MitreQueryMocker()
-        with patch("fn_mitre_integration.lib.mitre_attack.TAXIICollectionSource.query", data_mocker.query):
-            software = MitreAttackSoftware.get_all(self.mitre_attack)
-            dict_reps = [s.dict_form() for s in software]
-            # check for every technique's representation that all the field don't have the tag
-            assert all([(re.search("\[(.*?)\]\((.*?)\)", s_repr["description"]) is None) for s_repr in dict_reps])
+        with patch("fn_mitre_integration.lib.mitre_attack.MitreAttackConnection.connect_server", mock_connect_server):
+            with patch("fn_mitre_integration.lib.mitre_attack.TAXIICollectionSource.query", data_mocker.query):
+                software = MitreAttackSoftware.get_all(self.mitre_attack)
+                dict_reps = [s.dict_form() for s in software]
+                # check for every technique's representation that all the field don't have the tag
+                assert all([(re.search("\[(.*?)\]\((.*?)\)", s_repr["description"]) is None) for s_repr in dict_reps])
 
     def test_group_single_intersection_exists(self):
         """
@@ -372,23 +388,25 @@ class TestMitre(object):
 
     def test_mitre_attack_util(self):
         data_mocker = MitreQueryMocker()
-        with patch("fn_mitre_integration.lib.mitre_attack.TAXIICollectionSource.query", data_mocker.query):
-            tactics = "Impact, Collection"
-            techs = get_tactics_and_techniques(tactic_names=tactics)
-            assert len(techs) == 3
+        with patch("fn_mitre_integration.lib.mitre_attack.MitreAttackConnection.connect_server", mock_connect_server):
+            with patch("fn_mitre_integration.lib.mitre_attack.TAXIICollectionSource.query", data_mocker.query):
+                tactics = "Impact, Collection"
+                techs = get_tactics_and_techniques(tactic_names=tactics)
+                assert len(techs) == 3
 
-            tactics = "TA0040, TA0007, TA0009"
-            techs = get_tactics_and_techniques(tactic_ids=tactics)
-            assert(len(techs) > 0)
+                tactics = "TA0040, TA0007, TA0009"
+                techs = get_tactics_and_techniques(tactic_ids=tactics)
+                assert(len(techs) > 0)
 
     def test_get_tech_info(self):
         data_mocker = MitreQueryMocker()
-        with patch("fn_mitre_integration.lib.mitre_attack.TAXIICollectionSource.query", data_mocker.query):
-            tech = MitreAttackTechnique.get_by_name(self.mitre_conn, "Port Knocking")
-            assert(tech[0].name == "Port Knocking")
+        with patch("fn_mitre_integration.lib.mitre_attack.MitreAttackConnection.connect_server", mock_connect_server):
+            with patch("fn_mitre_integration.lib.mitre_attack.TAXIICollectionSource.query", data_mocker.query):
+                tech = MitreAttackTechnique.get_by_name(self.mitre_conn, "Port Knocking")
+                assert(tech[0].name == "Port Knocking")
 
-            tech = MitreAttackTechnique.get_by_id(self.mitre_conn, "T1205")
-            assert(tech[0].id == "T1205")
+                tech = MitreAttackTechnique.get_by_id(self.mitre_conn, "T1205")
+                assert(tech[0].id == "T1205")
 
 
 class TestMitreUtilMultipleTechniques(object):
@@ -397,8 +415,9 @@ class TestMitreUtilMultipleTechniques(object):
     @pytest.fixture(autouse=True)
     def set_up_mock_for_query(self):
         data_mocker = MitreQueryMocker()
-        with patch("fn_mitre_integration.lib.mitre_attack.TAXIICollectionSource.query", data_mocker.query):
-            yield
+        with patch("fn_mitre_integration.lib.mitre_attack.MitreAttackConnection.connect_server", mock_connect_server):
+            with patch("fn_mitre_integration.lib.mitre_attack.TAXIICollectionSource.query", data_mocker.query):
+                yield
 
     def test_multiple_techniques_works_by_id(self):
         techniques = get_multiple_techniques(self.mitre_attack, mitre_technique_ids="T1213, T1483",
