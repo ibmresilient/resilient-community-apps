@@ -138,10 +138,10 @@ Function that dumps any text/code to pastebin.com and returns a link to that pas
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `pastebin_code` | `print 'Hello World'` | Yes | `-` | This is the text that will be written inside your paste. |
-| `pastebin_expiration` | `1H` | No | `-` | This sets the expiration date of your paste. |
-| `pastebin_format` | `python` | No | `-` | This will be the syntax highlighting value |
-| `pastebin_name` | `Output of Malware Sample` | No | `-` | This will be the name / title of your paste. |
+| `pastebin_code` | `text` | Yes | `print 'Hello World'` | This is the text that will be written inside your paste. |
+| `pastebin_expiration` | `text` | No | `1H` | This sets the expiration date of your paste. |
+| `pastebin_format` | `text` | No | `python` | This will be the syntax highlighting value |
+| `pastebin_name` | `text` | No | `Output of Malware Sample` | This will be the name / title of your paste. |
 | `pastebin_privacy` | `number` | No | `2` | This makes a paste public, unlisted or private. (Public = 0. Unlisted = 1. Private = 2) |
 
 </p>
