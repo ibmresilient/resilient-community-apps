@@ -40,7 +40,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.0.0 | 12/2020 | Initial Release |
+| 1.0.0 | 1/2021 | Initial Release |
 
 ---
 
