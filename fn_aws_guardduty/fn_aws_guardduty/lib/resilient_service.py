@@ -23,26 +23,6 @@ class ResSvc(ResilientComponent):
         self.opts = opts
         self.options = options
 
-    def _find_resilient_artifacts_for_incident(self, incident_id):
-        """
-        Return list of artifacts for the given Incident ID.
-
-        :param incident_id: Resilient incident id
-        :return r_artifacts: Return list of artifacts or empty list.
-        """
-        r_artifacts = {}
-        resilient_client = self.rest_client()
-        artifacts_uri = '/incidents/{}/artifacts'.format(incident_id)
-        a_response = resilient_client.get(uri=artifacts_uri)
-
-        if a_response is not None:
-            for artifact_result in a_response:
-                artifact_type = artifact_result.get('description')
-                if artifact_type in const.ARTIFACT_TYPES_MAP:
-                    r_artifacts[artifact_result['value']] = artifact_type
-
-        return r_artifacts
-
     def find_resilient_incident_for_req(self, finding, f_fields):
         """
         Check if any Resilient incidents with the GuardDuty finding ID.
@@ -91,46 +71,6 @@ class ResSvc(ResilientComponent):
         except SimpleHTTPException as ex:
             LOG.error("Something went wrong when attempting to create the Incident: %s", ex)
 
-    def create_artifacts(self, incident_id, artifacts):
-        """Create artifacts for Resilient Incident.
-
-        :param incident_id: Incident ID from incident creation.
-        :param artifacts: Artifact payload data.
-        """
-        try:
-            resilient_client = self.rest_client()
-            artifact_uri = '/incidents/{}/artifacts'.format(incident_id)
-
-            # Set up Artifact payload skeleton.
-            artifact_payload = {
-                'type': {
-                    'name': 'String',
-                },
-                'description': {
-                    'format': 'text',
-                }
-            }
-
-            # Find artifacts that are already associated with this Incident.
-            existing_artifacts = self._find_resilient_artifacts_for_incident(incident_id)
-
-            # Loop through Artifacts provided with the finding.
-            for artifact_id, (artifact_type, gd_key, path) in artifacts.items():
-                # if this Artifact doesn't match an existing value and type.
-                if artifact_id not in existing_artifacts or existing_artifacts[artifact_id] != artifact_type:
-                    # Populate payload with ID and type and description.
-                    desc = "'{}' extracted from GuardDuty from finding property '{}' at path '{}'."\
-                        .format(artifact_type, gd_key, path)
-                    artifact_payload['value'] = artifact_id
-                    artifact_payload['type']['name'] = const.ARTIFACT_TYPE_API_NAME.get(artifact_type, "String")
-                    artifact_payload['description']['content'] = desc
-                    # Attach new Artifact to Incident
-                    resilient_client.post(uri=artifact_uri, payload=artifact_payload)
-
-        except SimpleHTTPException as ex:
-            LOG.info(u'Something went wrong when attempting to update the Incident: {}'.format(ex))
-            raise ex
-
     def add_datatables(self, incident_id, tables):
         """Add data tables to Resilient Incident.
 
@@ -154,23 +94,3 @@ class ResSvc(ResilientComponent):
         except SimpleHTTPException as ex:
             LOG.error('Something went wrong when attempting to create the Incident: %s', ex)
 
-    def add_comment(self, incident_id, data):
-        """
-        Add a comment/note to the specified Resilient Incident by ID.
-
-        :param incident_id:  Incident ID from incident creation.
-        :param data: Content to be added as a Resilient incident note.
-        """
-        try:
-            uri = '/incidents/{}/comments'.format(incident_id)
-            resilient_client = self.rest_client()
-            heading = "AWS GuardDuty finding Payload:\n"
-            note = {
-                'format': 'text',
-                'content': '{}{}'.format(heading, pprint.pformat(data, indent=4))
-            }
-            payload = {'text': note}
-            resilient_client.post(uri=uri, payload=payload)
-
-        except SimpleHTTPException as ex:
-            LOG.error("Failed to add note for incident %d: %s", incident_id, ex)

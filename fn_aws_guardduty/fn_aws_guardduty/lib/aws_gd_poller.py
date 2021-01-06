@@ -6,6 +6,7 @@ import logging
 import pprint
 import time
 import datetime as dt
+import copy
 from fn_aws_guardduty.lib.aws_gd_cli_man import AwsGdCliMan
 import fn_aws_guardduty.util.config as config
 from fn_aws_guardduty.lib.helpers import FCrit, get_lastrun_unix_epoch, search_json
@@ -87,27 +88,29 @@ class AwsGdPoller():
                             LOG.info("AWS GuardDuty Finding ID %s in region %s discovered: %s, escalating to Resilient",
                                      finding["Id"], finding["Region"], finding.get("Title", "No Title Provided"))
 
-                            # Get Extra Incident Fields
-                            i_fields = self.make_incident_fields(finding)
+                            # Add Incident Fields to incident payload.
+                            i_payload = self.make_incident_fields(finding)
 
-                            # Create any artifact payloads
-                            i_artifacts = self.build_artifacts(finding)
+                            # Get any artifact data from finding.
+                            artifact_data = self.get_artifact_data(finding)
+
+                            # Add any artifacts from finding to incident payload.
+                            if artifact_data:
+                                i_payload = self.add_artifacts_to_payload(i_payload, artifact_data)
+
+                            # Add finding json as a note to incident payload.
+                            i_payload = self.add_note_to_payload(i_payload, finding)
 
                             # Assemble Data tables for incident
                             i_tables = self.build_data_tables(finding)
 
                             # Create incident and return response
-                            i_response = res_svc.create_incident(i_fields)
+                            i_response = res_svc.create_incident(i_payload)
 
                             if i_response is not None:
-                                # Attach any found artifacts.
-                                if i_artifacts:
-                                    res_svc.create_artifacts(i_response['id'], i_artifacts)
                                 # Create data tables.
                                 if i_tables:
                                     res_svc.add_datatables(i_response['id'], i_tables)
-                                # Add finding json as a note.
-                                res_svc.add_comment(i_response['id'], finding)
                         else:
                             LOG.info("Incident already exists for AWS GuardDuty Incident %d", finding["Id"])
 
@@ -224,28 +227,81 @@ class AwsGdPoller():
 
         return f_criteria
 
-    def build_artifacts(self, finding):
+    def get_artifact_data(self, finding):
         """
-        Add artifact type and value to an artifact_payload.
+        Add artifact types and values to an artifacts_data payload.
 
         Example payload entry:
             {'10.0.0.1':
                 ('IP Address', 'PrivateIpAddress', '["Resource"]["InstanceDetails"]["NetworkInterfaces"]["0"]')
             }
         :param finding: The finding json content to seach for artifacts.
-        :return artifact_payloads: Dict of artifacts payload.
+        :return artifact_data: Dict of artifacts data.
         """
-        artifact_payloads = {}
+        artifact_data = {}
         for artifact_type, gd_keys in const.ARTIFACT_TYPES_MAP.items():
             for gd_key in gd_keys:
-                for (artifact_id, path) in search_json(finding, gd_key):
-                    LOG.debug(u'artifact type %s (%s) ID %s, at path %s',artifact_type, gd_key, artifact_id, path)
-                    if artifact_id in artifact_payloads:
+                for (artifact_value, path) in search_json(finding, gd_key):
+                    LOG.debug(u'artifact type %s (%s) ID %s, at path %s',artifact_type, gd_key, artifact_value, path)
+                    if artifact_value in artifact_data:
                         # Artifact value aleady found skip.
                         continue
-                    artifact_payloads[artifact_id] = (artifact_type, gd_key, path)
+                    artifact_data[artifact_value] = (artifact_type, gd_key, path)
 
-        return artifact_payloads
+
+
+        return artifact_data
+
+    def add_artifacts_to_payload(self, i_payload, artifact_data):
+        """Add artifacts to Resilient Incident payload.
+
+        :param i_payload: Incident payload.
+        :param artifact_data: Artifact data from finding.
+        """
+        i_payload["artifacts"] = []
+
+        # Set up Artifact payload skeleton.
+        artifact_payload = {
+            'type': {
+                'name': 'String',
+            },
+            'description': {
+                'format': 'text',
+            }
+        }
+
+
+        # Loop through Artifact data provided with the finding.
+        for artifact_value, (artifact_type, gd_key, path) in artifact_data.items():
+            # Populate payload with ID and type and description.
+            artifact = copy.deepcopy(artifact_payload)
+            desc = "'{}' extracted from GuardDuty from finding property '{}' at path '{}'." \
+                .format(artifact_type, gd_key, path)
+            artifact['value'] = artifact_value
+            artifact['type']['name'] = const.ARTIFACT_TYPE_API_NAME.get(artifact_type, "String")
+            artifact['description']['content'] = desc
+            i_payload["artifacts"].append(artifact)
+
+        return i_payload
+
+    def add_note_to_payload(self, i_payload, finding):
+        """
+        Add a comment/note to the specified Resilient Incident payload.
+
+        :param i_payload: Incident payload.
+        :param finding: Raw GuardDuty json to be added as a Resilient incident note.
+        """
+        i_payload["comments"] = []
+        heading = "AWS GuardDuty finding Payload:\n"
+
+        note = {
+            'format': 'text',
+            'content': '{}{}'.format(heading, pprint.pformat(finding, indent=4))
+        }
+
+        i_payload["comments"].append({'text': note})
+
+        return i_payload
 
     def build_data_tables(self, finding):
         """
