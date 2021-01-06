@@ -9,7 +9,7 @@ from mock import patch
 
 
 def test_build_request_url():
-    request_url = build_request_url("https://www.example.com", None, "selftest", "12345", True)
+    request_url = build_request_url("https://www.example.com", "v1/pay-as-you-go/", "selftest", "12345", True)
 
     assert request_url == "https://www.example.com/sitetrust/v1/pay-as-you-go/?key=12345&stats=True"
 
@@ -19,7 +19,7 @@ def test_make_api_call():
 
         make_apivoid_api_call(
             base_url="https://www.example.com",
-            sub_url=None,
+            sub_url="v1/pay-as-you-go/",
             query_type="selftest",
             value=True,
             api_key="12345",
