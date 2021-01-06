@@ -362,6 +362,9 @@ class AwsGdPoller():
                                       result.get("path"))
                         elif isinstance(result, list):
                             (value, _) = result.pop()
+                            # Convert boolean values to string 'True' or 'False'
+                            if isinstance(value, bool):
+                                value = "{}".format(value)
                             table_row[val] = {"value" : value}
                     table_copy.append({"cells" : table_row})
 
