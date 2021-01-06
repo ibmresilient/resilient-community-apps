@@ -31,6 +31,8 @@ stages:
   # Every commit not on master runs tests
   - name: run tests
     if: branch != master OR type in (pull_request)
+  - name: security scan
+    if: branch != master OR type in (pull_request)
   - name: build images and packages
     if: type in (pull_request) OR ( tag IS present AND tag =~ ^container/.+ )
   # Publish to Quay and create a package when merged to master
@@ -66,6 +68,7 @@ matrix:
       - .scripts/install_tests_deps.sh
     script:
     - echo "3.6 Master Build" && .scripts/run_tests.sh
+  # Deploy job for publishing containers
   - stage: publish master
     name: Building Quay containers
     python: 3.6
@@ -98,6 +101,20 @@ matrix:
       - .scripts/install_tests_deps.sh
     script:
     - echo "3.6 push test" && .scripts/run_most_recent_tests.sh
+  - stage: security scan
+    name: Python 2.7 Bandit Security Scan
+    python: 2.7
+    install:
+      - pip install bandit
+    script:
+    - .scripts/run_bandit_scan_on_updated_packages.sh
+  - stage: security scan
+    name: Python 3.6 Bandit Security Scan
+    python: 3.6
+    install:
+      - pip install bandit
+    script:
+    - .scripts/run_bandit_scan_on_updated_packages.sh
   # Next job is started when a tag is pushed of the form container/<name> or a pull request is created
   # where <name> is a name of an integration directory whose container
   # will be build and pushed to artifactory with label :latest and :<version>
