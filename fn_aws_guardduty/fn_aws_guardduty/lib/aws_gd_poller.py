@@ -165,7 +165,7 @@ class AwsGdPoller():
         :return iname: String for Incident Name to be used in Search / Incident Creation
         """
         # Fill event summary when blank
-        i_title = finding.get("Title", "No Title Provided")
+        i_title = finding.get("Title", "No Title Provided.") or "No Title Provided."
 
         iname = "AWS GuardDuty: {}".format(i_title)
         LOG.debug("Incident Label Assembled: %s", iname)
@@ -179,7 +179,7 @@ class AwsGdPoller():
         :param finding: Raw GuardDuty Payload
         :return: Return formatted Description for Incident DTO
         """
-        i_desc = finding.get("Description", "AWS GuardDuty finding --")
+        i_desc = finding.get("Description", "AWS GuardDuty finding --") or "AWS GuardDuty finding --"
         return {"format": "text", "content": i_desc}
 
     def map_severity(self, finding_severity):
