@@ -29,9 +29,7 @@ stages:
   - name: all tests
     if: branch = master AND type = cron
   # Every commit not on master runs tests
-  - name: run tests
-    if: branch != master OR type in (pull_request)
-  - name: security scan
+  - name: run tests and security scan
     if: branch != master OR type in (pull_request)
   - name: build images and packages
     if: type in (pull_request) OR ( tag IS present AND tag =~ ^container/.+ )
@@ -83,7 +81,7 @@ matrix:
   # ==========
   # Below jobs are used to run tests against the most recently modified integration.
   # We determine the most recent one using git diff and then ensure to only run tests against a package once. 
-  - stage: run tests
+  - stage: run tests and security scan
     name: Python 2.7 Build and Run Tests
     python: 2.7
     env:
@@ -92,7 +90,7 @@ matrix:
       - .scripts/install_tests_deps.sh
     script:
     - echo "2.7 push test" && .scripts/run_most_recent_tests.sh
-  - stage: run tests
+  - stage: run tests and security scan
     name: Python 3.6 Build and Run Tests
     python: 3.6
     env:
@@ -101,14 +99,14 @@ matrix:
       - .scripts/install_tests_deps.sh
     script:
     - echo "3.6 push test" && .scripts/run_most_recent_tests.sh
-  - stage: security scan
+  - stage: run tests and security scan
     name: Python 2.7 Bandit Security Scan
     python: 2.7
     install:
       - pip install bandit==1.6.2
     script:
     - .scripts/run_bandit_scan_on_updated_packages.sh
-  - stage: security scan
+  - stage: run tests and security scan
     name: Python 3.6 Bandit Security Scan
     python: 3.6
     install:
