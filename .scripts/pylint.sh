@@ -1,11 +1,11 @@
-#!/bin/sh
+#!/bin/sh -x
 #
 # An example script to do linting on the repo.
 # Called by "git commit" with no arguments.  The hook should
 # exit with non-zero status after issuing an appropriate message if
 # it wants to stop the commit.
 #
-echo "\nStarting a  script to run pylint on python files."
+echo "\nStarting a script to run pylint on python files."
 readonly MIN_PASSING_SCORE=6.25
 readonly ERROR_MSG="Aborting commit. Your commit has a pylint score lower than ${MIN_PASSING_SCORE}"
 
