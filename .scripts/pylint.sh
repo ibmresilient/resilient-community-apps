@@ -6,7 +6,7 @@
 # it wants to stop the commit.
 #
 echo "\nStarting a  script to run pylint on python files."
-readonly MIN_PASSING_SCORE=7.25
+readonly MIN_PASSING_SCORE=6.25
 readonly ERROR_MSG="Aborting commit. Your commit has a pylint score lower than ${MIN_PASSING_SCORE}"
 
 # Declare an array that will hold the fn_ or rc_ packages
