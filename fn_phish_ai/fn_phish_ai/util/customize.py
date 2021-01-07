@@ -21,7 +21,7 @@ def codegen_reload_data():
     return {
         "package": u"fn_phish_ai",
         "message_destinations": [u"phish_ai_message_destination"],
-        "functions": [u"phish_ai_get_report", u"phish_ai_scan_url"],
+        "functions": [u"phish_ai_scan_url", u"phish_ai_get_report"],
         "workflows": [u"example_phishai_scan_url"],
         "actions": [u"Example: Phish.AI URL scan"],
         "incident_fields": [],
@@ -43,8 +43,8 @@ def customization_data(client=None):
     - Message Destinations:
         - phish_ai_message_destination
     - Functions:
-        - phish_ai_get_report
         - phish_ai_scan_url
+        - phish_ai_get_report
     - Workflows:
         - example_phishai_scan_url
     - Rules:
