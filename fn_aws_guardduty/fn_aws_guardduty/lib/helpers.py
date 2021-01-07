@@ -166,7 +166,11 @@ def get_data_at_path(data, path):
                         data = item
                         ele_match = True
 
-        return(ele_match, data)
+        # If any elem in path doesn't exist in data exit loop.
+        if not ele_match:
+            break
+
+    return(ele_match, data)
 
 def search_json(data, key, path=None, level=0):
     """
