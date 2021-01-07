@@ -128,7 +128,7 @@ matrix:
     install:
       - pip install pylint
     script:
-    - sh .scripts/pylint.sh
+    - .scripts/pylint.sh
 
   # Next job is started when a tag is pushed of the form container/<name> or a pull request is created
   # where <name> is a name of an integration directory whose container
