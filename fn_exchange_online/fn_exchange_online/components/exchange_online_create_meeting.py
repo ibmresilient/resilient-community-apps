@@ -13,7 +13,7 @@ from fn_exchange_online.lib.ms_graph_helper import MSGraphHelper, MAX_RETRIES_TO
 
 CONFIG_DATA_SECTION = 'fn_exchange_online'
 LOG = logging.getLogger(__name__)
-LOG.info('.')
+LOG.info('')
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'exchange_online_create_meeting"""
 
