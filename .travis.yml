@@ -105,13 +105,17 @@ matrix:
   - stage: static analysis
     name: Py2.7 Bandit Security Scan 
     python: 2.7
+    env:
+    - ANALYSIS_NAME="Py2.7 Bandit Security Scan"
     install:
       - pip install bandit==1.6.2
     script:
     - .scripts/run_bandit_scan_on_updated_packages.sh
-  - stage: run tests and security scan
+  - stage: run tests
     name: Py3.6 Bandit Security Scan
     python: 3.6
+    env:
+    - ANALYSIS_NAME="Py3.6 Bandit Security Scan"
     install:
       - pip install bandit
     script:
@@ -119,6 +123,8 @@ matrix:
   - stage: static analysis
     name: Pylint 
     python: 3.6
+    env:
+    - ANALYSIS_NAME="Pylint"
     install:
       - pip install pylint
     script:
