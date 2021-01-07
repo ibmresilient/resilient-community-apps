@@ -23,7 +23,6 @@ done
 
 # Make a new array which acts as a Set to gather only unique package names
 INTEGRATIONS=($(for v in "${packages_that_have_been_changed[@]}"; do echo "$v"; done | sort | uniq | xargs))
-INTEGRATIONS=('fn_sep')
 if [ -z "$INTEGRATIONS" ]; then
     echo "Did not find any integrations that were modified"
     exit 0

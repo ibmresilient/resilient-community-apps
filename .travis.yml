@@ -111,7 +111,7 @@ matrix:
       - pip install bandit==1.6.2
     script:
     - .scripts/run_bandit_scan_on_updated_packages.sh
-  - stage: run tests
+  - stage: static analysis
     name: Py3.6 Bandit Security Scan
     python: 3.6
     env:
