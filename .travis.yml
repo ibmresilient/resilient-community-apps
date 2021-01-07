@@ -103,14 +103,14 @@ matrix:
     - echo "3.6 push test" && .scripts/run_most_recent_tests.sh
   # Jobs that perform static analysis; code quality, security scans etc
   - stage: static analysis
-    name: [2.7]Bandit Security Scan 
+    name: Py2.7 Bandit Security Scan 
     python: 2.7
     install:
       - pip install bandit==1.6.2
     script:
     - .scripts/run_bandit_scan_on_updated_packages.sh
   - stage: run tests and security scan
-    name: [3.6]Bandit Security Scan
+    name: Py3.6 Bandit Security Scan
     python: 3.6
     install:
       - pip install bandit
