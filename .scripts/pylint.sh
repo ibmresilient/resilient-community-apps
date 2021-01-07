@@ -32,7 +32,7 @@ fi
 
 for integration in ${INTEGRATIONS[@]}; do
     # Lint all the python files
-    pylint ${integration}/**/**/*.py \; |
+    pylint --rcfile=.scripts/.pylintrc ${integration}/**/**/*.py \; |
         # Only get the number values
         grep -oE "\-?[0-9]+\.[0-9]+" |
         # Extract the score
