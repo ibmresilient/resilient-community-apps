@@ -1,4 +1,4 @@
-#!/bin/sh -x
+#!/bin/bash -x
 #
 # An example script to do linting on the repo.
 # Called by "git commit" with no arguments.  The hook should
@@ -10,7 +10,7 @@ readonly MIN_PASSING_SCORE=6.25
 readonly ERROR_MSG="Aborting commit. Your commit has a pylint score lower than ${MIN_PASSING_SCORE}"
 
 # Declare an array that will hold the fn_ or rc_ packages
-# packages_that_have_been_changed=()
+packages_that_have_been_changed=()
 
 # For every file in the diff
 for file in $(git diff --name-only HEAD~0 HEAD~1); do
