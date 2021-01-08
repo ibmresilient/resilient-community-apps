@@ -59,17 +59,18 @@ Provides APIVoid's threat intelligence to enrich Resilient artifacts
 <!--
   List the Key Features of the Integration
 -->
-Included in this package are:
-* A function which makes APIVoid API calls and returns threat intelligence information in JSON-format.  The APIVoid Request function supports the following APIVoid API request types:
-  * IP Reputation (iprep)
-  * Domain Reputation (domainbl)
-  * DNS Lookup (dnslookup)
-  * Email Verify (emailverify)
-  * ThreatLog (threatlog)
-  * SSL Info (sslinfo)
-  * URL Reputation (urlrep)
-* 7 example workflows and 7 example rules which demonstrate how to call each supported APIVoid endpoint. 
-* The JSON results of the function are written to an incident note by the workflows.
+
+This package is merged of what was previous IPVoid and URLVoid as both of those solutions have been folded into APIVoid. It contains functions that support the following APIVoid API request types: 
+
+  * IP Reputation
+  * Domain Reputation
+  * DNS Lookup
+  * Email Verify
+  * ThreatLog
+  * SSL Info
+  * URL Reputation
+<p>
+An example workflow is provided for each of the supported request types that writes the APIVoid JSON results to an incident note.  An example rule is also provided for each workflow that is activated from an artifact.
 
 ---
 
