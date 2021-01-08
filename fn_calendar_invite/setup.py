@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
 
 from setuptools import setup, find_packages
 
 setup(
     name='fn_calendar_invite',
-    version='1.0.0',
+    version='1.1.0',
     license='MIT',
     author='Resilient Labs',
     author_email='resil.labs@gmail.com',
