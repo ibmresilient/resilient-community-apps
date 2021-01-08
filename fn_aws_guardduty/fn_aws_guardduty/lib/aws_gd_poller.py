@@ -196,7 +196,7 @@ class AwsGdPoller():
         """
         resilient_severity = None
 
-        if not isinstance(finding_severity, int) or not 1.0 <= finding_severity <= 8.9:
+        if not isinstance(finding_severity, (int, float)) or not 1.0 <= finding_severity <= 8.9:
             raise ValueError("Incorrect value '{}' set for severity level.".format(finding_severity))
         if 1.0 <= finding_severity <= 3.9:
             resilient_severity = "Low"
