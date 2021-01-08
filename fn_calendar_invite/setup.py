@@ -14,6 +14,7 @@ setup(
     long_description="Resilient Circuits Components for 'fn_calendar_invite'",
     install_requires=[
         'resilient_circuits>=30.0.0',
+        'resilient_lib',
         'email; python_version<"3.0"'
     ],
     packages=find_packages(),

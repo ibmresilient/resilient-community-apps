@@ -10,6 +10,7 @@
 import logging
 import datetime
 from resilient_circuits import ResilientComponent, function, StatusMessage, FunctionResult, FunctionError
+from resilient_lib import validate_fields, ResultPayload
 from fn_calendar_invite.lib.calendar_invite_util import get_email_addresses, build_email_message, send_email
 
 CONFIG_DATA_SECTION = 'fn_calendar_invite'
@@ -47,6 +48,9 @@ class FunctionComponent(ResilientComponent):
     def _fn_calendar_invite_function(self, event, *args, **kwargs):
         """Function: A function to invite people to a meeting via a calendar invite"""
         try:
+            # Initialize the results payload
+            rp = ResultPayload(CONFIG_DATA_SECTION, **kwargs)
+
             # Get the calendar meeting information input
             calendar_invite_datetime = kwargs.get("calendar_invite_datetime")        # datetime picker
             calendar_invite_subject = kwargs.get("calendar_invite_subject")          # text
@@ -96,12 +100,13 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("Send Mail - Complete")
 
-            results = {
+            # Put query results in the results payload.
+            results = rp.done(success=True, content={
                 "recipient": attendees,
                 "sender": sender,
                 "subject": calendar_invite_subject,
                 "description": calendar_invite_description
-            }
+            })
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
