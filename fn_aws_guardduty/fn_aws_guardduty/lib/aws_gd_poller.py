@@ -195,12 +195,16 @@ class AwsGdPoller():
         :return resilient_severity: Resilient severity string
         """
         resilient_severity = None
+
+        if not isinstance(finding_severity, int) or not 1.0 <= finding_severity <= 8.9:
+            raise ValueError("Incorrect value '{}' set for severity level.".format(finding_severity))
         if 1.0 <= finding_severity <= 3.9:
             resilient_severity = "Low"
         elif 4.0 <= finding_severity <= 6.9:
             resilient_severity = "Medium"
         elif 7.0 <= finding_severity <= 8.9:
             resilient_severity = "High"
+
         return resilient_severity
 
     def set_criteria(self):
