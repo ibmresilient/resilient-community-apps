@@ -27,7 +27,7 @@ setup(
     description="Resilient Circuits Components for 'fn_qradar_integration'",
     long_description="fn_qradar_integration supports performing ariel search to retrieve data from QRadar. It also provide functions to find/add/delete reference set items.",
     install_requires=[
-        'resilient_circuits>=30.0.0',
+        'resilient_circuits==37.2.215',
         'resilient_lib'
     ],
     packages=find_packages(),
