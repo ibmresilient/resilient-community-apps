@@ -12,11 +12,17 @@ from . import helper
 pytest --resilient_app_config=/<path>/<to>/app.config tests/test_ansible_tower_launch_job_template.py
 """
 
-PACKAGE_NAME = "fn-ansible-tower"
+PACKAGE_NAME = "fn_ansible_tower"
 FUNCTION_NAME = "ansible_tower_launch_job_template"
 
 # Read the default configuration-data section from the package
-config_data = get_config_data(PACKAGE_NAME)
+config_data = """[fn_ansible_tower]
+username=admin
+password=password
+url=https://192.168.1.215/
+cafile=False
+"""
+#get_config_data(PACKAGE_NAME)
 
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"

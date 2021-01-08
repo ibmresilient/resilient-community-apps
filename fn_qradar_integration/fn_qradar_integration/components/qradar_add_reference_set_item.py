@@ -46,7 +46,7 @@ class FunctionComponent(ResilientComponent):
                 qradar_verify_cert = False
 
             log.debug("Connection to {} using {}".format(self.options["host"],
-                                                         self.options.get("username", None) or self.options.get("qradartoken", None) ))
+                                                         self.options.get("username") or "service token"))
 
             yield StatusMessage("starting...")
 

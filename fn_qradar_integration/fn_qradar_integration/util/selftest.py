@@ -5,7 +5,7 @@
 """
 
 import logging
-from fn_qradar_integration.util import qradar_utils
+from fn_qradar_integration.util.qradar_utils import QRadarClient
 
 
 log = logging.getLogger(__name__)
@@ -26,17 +26,21 @@ def selftest_function(opts):
         log.info("Verifying app.config values for fn_qradar_integration")
 
         if res_options["cafile"].lower() == "false":
-            qradar_client = qradar_utils.QRadarClient(options["host"],
-                                                      username=options["username"],
-                                                      password=options["qradarpassword"],
-                                                      token=None,
-                                                      cafile=False)
+            qradar_client = QRadarClient(host=options["host"],
+                                         username=options.get("username", None),
+                                         password=options.get("qradarpassword", None),
+                                         token=options.get("qradartoken", None),
+                                         cafile=False,
+                                         opts=opts,
+                                         function_opts=options)
         else:
-            qradar_client = qradar_utils.QRadarClient(options["host"],
-                                                      username=options["username"],
-                                                      password=options["qradarpassword"],
-                                                      token=None,
-                                                      cafile=res_options["cafile"])
+            qradar_client = QRadarClient(host=options["host"],
+                                         username=options.get("username", None),
+                                         password=options.get("qradarpassword", None),
+                                         token=options.get("qradartoken", None),
+                                         cafile=res_options["cafile"],
+                                         opts=opts,
+                                         function_opts=options)
 
         connected = qradar_client.verify_connect()
 
@@ -55,14 +59,11 @@ def selftest_function(opts):
             Current Configs in app.config file::
             ---------
             host: {1}
-            username: {2}
-            qradarpassword: {3}
-            qradartoken: {4}\n""".format(
+            credentials: {2}\n""".format(
             err,
             options["host"],
-            options["username"],
-            options["qradarpassword"],
-            options["qradartoken"])
+            options.get("username") or "service token"
+        )
 
         log.error(err_reason_msg)
 

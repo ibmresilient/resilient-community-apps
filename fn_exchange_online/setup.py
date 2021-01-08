@@ -19,7 +19,7 @@ def snake_to_camel(word):
 
 setup(
     name='fn_exchange_online',
-    version='1.1.0',
+    version='1.2.0',
     license='MIT',
     author='IBM Resilient',
     author_email='',

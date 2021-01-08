@@ -1,5 +1,9 @@
+include apikey_permissions.txt
+include Dockerfile
+include entrypoint.sh
 include README.md
-include fn_exchange_online/util/*
+recursive-include fn_exchange_online/util/ *
 include fn_exchange_online/lib/*
 include fn_exchange_online/LICENSE
 include doc/*
+include data

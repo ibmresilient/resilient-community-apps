@@ -29,6 +29,9 @@
   Specify all changes in this release. Do not remove the release 
   notes of a previous release
 -->
+### v1.0.1
+* App Host Support
+
 ### v1.0.0
 * Initial Release
 
@@ -61,22 +64,36 @@ Specific features include:
 <!--
   List any Requirements 
 -->
-* Resilient platform >= `v33.0.5087`
+* Resilient platform >= `v36.0`
 * An Integration Server running `resilient_circuits>=30.0.0`
   * To set up an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
 
 ---
 
 ## Installation
-* Download the `fn_ansible_tower.zip`.
+### App Host
+All the components for running this integration in a container already exist when using the App Host app.
+
+To install,
+
+* Navigate to Administrative Settings and then the Apps tab.
+* Click the Install button and select the downloaded file: app-fn_ansible_tower-x.x.x.zip.
+* Go to the Configuration tab and edit the app.config file, editing the url, access credentials, etc.
+
+  | Config | Required | Example | Description |
+  | ------ | :------: | ------- | ----------- |
+  | **username** | Yes | `` | *User name for API access to Ansible Tower* |
+  | **password** | Yes | `` | *Password for above user name* |
+  | **url** | Yes | `` | *URL to Ansible Tower* |
+  | **cafile** | Yes | `False` | *False for no SSL certificate verification or path to certificate file* |
+
+
+### Integration Server
+* Download the `app-fn_ansible_tower-x.x.x.zip`.
 * Copy the `.zip` to your Integration Server and SSH into it.
 * **Unzip** the package:
   ```
-  $ unzip fn_ansible_tower-x.x.x.zip
-  ```
-* **Change Directory** into the unzipped directory:
-  ```
-  $ cd fn_ansible_tower-x.x.x
+  $ unzip app-fn_ansible_tower-x.x.x.zip
   ```
 * **Install** the package:
   ```
