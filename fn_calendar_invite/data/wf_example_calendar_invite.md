@@ -30,11 +30,12 @@ inputs.calendar_invite_extra_email_addr = rule.properties.rule_calendar_extra_em
 
 ### Post-Processing Script
 ```python
-# results dict contains "recipient", "sender", "subject", body" 
-r_to = results.recipient
-r_from = results.sender
-r_subject = results.subject
-r_description = results.description
+# results.content dict contains "recipient", "sender", "subject", body" 
+content = results.get("content")
+r_to = content.get("recipient")
+r_from = content.get("sender")
+r_subject = content.get("subject")
+r_description = content.get("description")
 
 note_text = u"""<p><b>Meeting Invite</b></p>
 To: {}<br>
