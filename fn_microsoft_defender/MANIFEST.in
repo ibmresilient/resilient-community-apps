@@ -1,0 +1,9 @@
+include README.md
+include Dockerfile
+include entrypoint.sh
+recursive-include fn_microsoft_defender/util *
+include fn_microsoft_defender/LICENSE
+include doc/*.md
+include doc/screenshots/*
+
+exclude *.bak
