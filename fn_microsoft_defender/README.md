@@ -28,6 +28,7 @@
   - [Install](#install)
   - [App Configuration](#app-configuration)
   - [Custom Layouts](#custom-layouts)
+- [Function - Defender Machine Scan](#function---defender-machine-scan)
 - [Function - Defender Machine Isolation](#function---defender-machine-isolation)
 - [Function - Defender App Execution](#function---defender-app-execution)
 - [Function - Defender Quarantine File](#function---defender-quarantine-file)
@@ -74,6 +75,7 @@ Perform operations against Defender ATP such as set indicators, isolate and quar
 * Search for Defender machines by file hash
 * Isolate/unisolate Defender machines
 * Restrict/unrestrict apps on a Defender machine
+* Run an antivirus scan on a Defender machine
 * Quarantine files on a Defender machine
 
 ---
@@ -151,6 +153,79 @@ The following table provides the settings you need to configure the app. These s
 
   ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png)
 
+---
+
+## Function - Defender Machine Scan
+Perform an antivirus scan on a Defender Machine.
+
+ ![screenshot: fn-defender-machine-isolation ](./doc/screenshots/fn-defender-machine-isolation.png)
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `defender_description` | `text` | Yes | `-` | Commend on scan action |
+| `defender_machine_scantype` | `Full|Quick` | Yes | `-` | Type of antivirus scan to perform |
+| `defender_machine_id` | `text` | Yes | `-` | Defender Machine ID |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+```python
+results = {
+    "id": "5382f7ea-7557-4ab7-9782-d50480024a4e",
+    "type": "Full",
+    "scope": "Selective",
+    "requestor": "Analyst@TestPrd.onmicrosoft.com",
+    "requestorComment": "test for docs",
+    "status": "Succeeded",
+    "machineId": "7b1f4967d9728e5aa3c06a9e617a22a4a5a17378",
+    "computerDnsName": "desktop-test",
+    "creationDateTimeUtc": "2019-01-02T14:39:38.2262283Z",
+    "lastUpdateDateTimeUtc": "2019-01-02T14:40:44.6596267Z",
+    "relatedFileInfo": None
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.defender_machine_id = row['machine_id']
+inputs.defender_machine_scantype = str(rule.properties.defender_machine_scantype)
+inputs.defender_description = rule.properties.defender_action_comment
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+msg = u"Defender ATP Action {}.\nAction: Antivirus Scan\nMachine: {} ({})\nScan Type: {}\nComment: {}\nScan ID: {}"\
+   .format("successful" if results.success else "unsuccessful",
+           results.content.get('computerDnsName'), row['machine_id'],
+           str(rule.properties.defender_machine_scantype),
+           rule.properties.defender_action_comment,
+           results.content.get('id'))
+           
+if not results.success:
+    msg = u"{}\nReason: {}".format(msg, results.reason)
+
+incident.addNote(msg)
+
+```
+
+</p>
+</details>
 
 ---
 
