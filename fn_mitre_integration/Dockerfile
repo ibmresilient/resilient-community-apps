@@ -5,7 +5,7 @@ FROM registry.access.redhat.com/ubi8/python-36:latest
 
 ARG PYPI_INDEX=https://pypi.org/simple
 ARG APPLICATION=fn_mitre_integration
-ARG RES_CIRCUITS_VERSION=37
+ARG RESILIENT_CIRCUITS_VERSION=39.0
 ARG PATH_RESILIENT_CIRCUITS=rescircuits
 # Environment variable for any app to check if running in a container
 ARG APP_HOST_CONTAINER=1
@@ -18,7 +18,7 @@ USER 0
 RUN pip install --upgrade pip
 
 # install resilient-circuits
-RUN pip install "resilient-circuits>=${RES_CIRCUITS_VERSION}" -i ${PYPI_INDEX}
+RUN pip install "resilient-circuits>=${RESILIENT_CIRCUITS_VERSION}" -i ${PYPI_INDEX}
 
 ## ---- section for changes ----
 # uncomment and replicate if additional os libraries are needed
