@@ -28,6 +28,7 @@ setup(
             "FnCalendarInviteFunctionComponent = fn_calendar_invite.components.function_calendar_invite:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_calendar_invite.util.config:config_section_data"],
-        "resilient.circuits.customize": ["customize = fn_calendar_invite.util.customize:customization_data"]
+        "resilient.circuits.customize": ["customize = fn_calendar_invite.util.customize:customization_data"],
+        "resilient.circuits.selftest": ["selftest = fn_calendar_invite.util.selftest:selftest_function"]
     }
 )
