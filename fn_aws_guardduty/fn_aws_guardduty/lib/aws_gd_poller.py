@@ -23,11 +23,10 @@ WAIT_MULTIPLIER = 60
 class AwsGdPoller():
     """Component that polls for new findings from AWS GuardDuty"""
 
-    def __init__(self, opts, options, rest_client, polling_interval):
+    def __init__(self, opts, options, polling_interval):
         """constructor provides access to the configuration options"""
         self.opts = opts
         self.function_opts = options
-        self.rest_client = rest_client
         self.polling_interval = polling_interval
         # Amount of time (minutes) to wait to refresh regions information, use default if not set.
         self.regions_interval = int(self.function_opts.get("aws_gd_regions_interval", REGIONS_INTERVAL_DEFAULT))
