@@ -67,6 +67,7 @@ class TestFnCalendarInvite:
 
     expected_results_2 = {"value": "xyz"}
 
+    @pytest.mark.livetest
     @pytest.mark.parametrize("mock_inputs, expected_results", [
         (mock_inputs_1, expected_results_1),
         (mock_inputs_2, expected_results_2)
