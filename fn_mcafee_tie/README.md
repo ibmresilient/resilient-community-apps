@@ -42,7 +42,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.1.0 | 12/2020 | Added Feature: Set Reputation |
+| 1.1.0 | 1/2021 | Added Feature: Set Reputation |
 | 1.0.2 | 09/2020 | Bug fixes |
 | 1.0.1 | 05/2020 | App Host support |
 | 1.0.0 | 05/2018 | Initial Release |
