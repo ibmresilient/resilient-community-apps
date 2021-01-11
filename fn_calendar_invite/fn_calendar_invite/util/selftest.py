@@ -29,7 +29,7 @@ def selftest_function(opts):
     password = app_configs.get("email_password")
     nickname = app_configs.get("email_nickname")
     host = app_configs.get("email_host")
-    port = app_configs.get("email_port")
+    port = int(app_configs.get("email_port"))
 
     # Build the email message string to be sent.
     sender = u"{} <{}>".format(nickname, username)
