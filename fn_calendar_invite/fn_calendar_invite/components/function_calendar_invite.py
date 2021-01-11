@@ -13,6 +13,8 @@ from resilient_circuits import ResilientComponent, function, StatusMessage, Func
 from resilient_lib import validate_fields, ResultPayload
 from fn_calendar_invite.lib.calendar_invite_util import get_email_addresses, build_email_message, send_email
 
+from fn_calendar_invite.util.selftest import selftest_function
+
 CONFIG_DATA_SECTION = 'fn_calendar_invite'
 
 class FunctionComponent(ResilientComponent):
@@ -27,21 +29,8 @@ class FunctionComponent(ResilientComponent):
         if self.options == {}:
             raise ValueError("{} section is not set in the config file".format(CONFIG_DATA_SECTION))
 
-        self.email_username = self.options.get("email_username")
-        self.email_password = self.options.get("email_password")
-        self.email_nickname = self.options.get("email_nickname")
-        self.email_host = self.options.get("email_host")
-        self.email_port = self.options.get("email_port")
-
-        # Check that config parameters are defined.
-        if not self.email_username:
-            raise ValueError("email_username is not set. You must set this value to run {}".format(CONFIG_DATA_SECTION))
-        if not self.email_password:
-            raise ValueError("email_password is not set. You must set this value to run {}".format(CONFIG_DATA_SECTION))
-        if not self.email_host:
-            raise ValueError("email_host is not set. You must set this value to run {}".format(CONFIG_DATA_SECTION))
-        if not self.email_port:
-            raise ValueError("email_port is not set. You must set this value to run {}".format(CONFIG_DATA_SECTION))
+        required_fields = ["email_username", "email_password", "email_nickname", "email_host", "email_port"]
+        validate_fields(required_fields, self.options)
 
 
     @function("fn_calendar_invite")
@@ -65,11 +54,11 @@ class FunctionComponent(ResilientComponent):
             log.info(u"calendar_invite_extra_email_addr %s", calendar_invite_extra_email_addr)
 
             # Email sender information
-            host = self.email_host
-            port = int(self.email_port)
-            nickname = self.email_nickname
-            e_login = self.email_username
-            e_password = self.email_password
+            host = self.options.get("email_host")
+            port = int(self.options.get("email_port"))
+            nickname = self.options.get("email_nickname")
+            e_login = self.options.get("email_username")
+            e_password = self.options.get("email_password")
 
             now_utc = datetime.datetime.utcnow()
             meeting_time_utc = datetime.datetime.utcfromtimestamp(calendar_invite_datetime / 1000)
