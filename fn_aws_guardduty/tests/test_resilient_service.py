@@ -1,0 +1,72 @@
+# -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+# pragma pylint: disable=unused-argument, no-self-use
+""" Test AWS GuardDuty Resilient service. """
+from mock import patch, MagicMock, Mock
+import pytest
+from pytest_resilient_circuits.mocks import BasicResilientMock
+from fn_aws_guardduty.lib.resilient_service import *
+from .mock_artifacts import *
+"""
+Suite of tests to test AWS GuardDuty Resilient service class
+"""
+def get_config(**settings):
+    config = {
+        "aws_gd_access_key_id":    "AKAABBCCDDEEFFGGHH12",
+        "aws_gd_secret_access_key": "pplXXEEK/aAbBcCdDeEfFgGhHiH1234567+sssss",
+    }
+    for key, value in settings.items():
+        config[key] = value
+    return config
+
+def get_opt(**settings):
+    opt = {
+        "email":    "email=a@a.com",
+        "password": "password"
+    }
+    for key, value in settings.items():
+        opt[key] = value
+    return opt
+
+class TestResilientService:
+    """Test get_data_at_path function"""
+
+    @patch('fn_aws_guardduty.lib.resilient_service.ResilientComponent.rest_client', side_effect=MagicMock)
+    @pytest.mark.parametrize("expected_results", [
+        None
+    ])
+    def test_setup(self, mock_res, expected_results):
+        res_svc =  ResSvc(get_opt(), get_config())
+        assert isinstance(res_svc, (ResSvc, ResilientComponent))
+
+    @patch('fn_aws_guardduty.lib.resilient_service.ResilientComponent.rest_client', side_effect=MagicMock)
+    @pytest.mark.parametrize("finding, f_fields, expected_results", [
+        (get_cli_raw_responses("get_findings")["Findings"][0], ["Id", "Region"], None)
+    ])
+    def test_find_resilient_incident_for_req(self, mock_res, finding, f_fields, expected_results):
+        res_svc = ResSvc(get_opt(), get_config())
+        assert isinstance(res_svc, (ResSvc, ResilientComponent))
+        result = res_svc.find_resilient_incident_for_req(finding, ["Id", "Region"])
+        assert isinstance(result, MagicMock)
+        assert "mock.post()" in str(result)
+
+    @patch('fn_aws_guardduty.lib.resilient_service.ResilientComponent.rest_client', side_effect=MagicMock)
+    @pytest.mark.parametrize("data, expected_results", [
+        (get_function_params("data"), None)
+    ])
+    def test_create_incident(self, mock_res, data, expected_results):
+        res_svc = ResSvc(get_opt(), get_config())
+        assert isinstance(res_svc, (ResSvc, ResilientComponent))
+        result = res_svc.create_incident(data)
+        assert isinstance(result, MagicMock)
+        assert "mock.post()" in str(result)
+
+    @patch('fn_aws_guardduty.lib.resilient_service.ResilientComponent.rest_client', side_effect=MagicMock)
+    @pytest.mark.parametrize("incident_id, tables, expected_results", [
+        (2000, get_function_params("tables"), None)
+    ])
+    def test_add_datatables(self, mock_res, incident_id, tables, expected_results):
+        res_svc = ResSvc(get_opt(), get_config())
+        assert isinstance(res_svc, (ResSvc, ResilientComponent))
+        result = res_svc.add_datatables(incident_id, tables)
+        assert result is None
