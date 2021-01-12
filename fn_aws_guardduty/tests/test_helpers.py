@@ -133,7 +133,7 @@ class TestSearchJson:
         result = search_json(finding, key, path=path)
         assert isinstance(result, list)
         assert len(result) == expected_length
-        assert result == expected_results
+        assert sorted(result) == sorted(expected_results)
         if len(result) > 0:
             for r in result:
                 assert isinstance(r, tuple)
