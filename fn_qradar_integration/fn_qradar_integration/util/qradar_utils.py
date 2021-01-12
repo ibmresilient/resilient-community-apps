@@ -491,7 +491,7 @@ class QRadarClient(object):
     @classmethod
     def get_ref_table_element(cls, ref_table, reference_endpoint=qradar_constants.REFERENCE_TABLE_URL):
         """
-        Delete value from the given ref_table
+        Get value from the given ref_table
         :param ref_table: Name of reference table.
         :param value:
         :return:
