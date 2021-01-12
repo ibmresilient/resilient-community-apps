@@ -47,7 +47,7 @@ class FuncAwsGuarddutyPoller(ResilientComponent):
         # Amount of time (minutes) to wait to check findings again, use default if not set.
         polling_interval = int(self.options.get("aws_gd_polling_interval", POLLING_INTERVAL_DEFAULT))
 
-        aws_gd_poller = AwsGdPoller(self.opts, self.options, self.rest_client, polling_interval)
+        aws_gd_poller = AwsGdPoller(self.opts, self.options, polling_interval)
         # Use a timeout value of polling_interval (in secs) * WAIT_MULTIPLIER + TIMEOUT_WAIT secs to wait for
         # all threads to end.
         thread_timeout = (polling_interval * TIMEOUT_MULTIPLIER) + TIMEOUT_WAIT
