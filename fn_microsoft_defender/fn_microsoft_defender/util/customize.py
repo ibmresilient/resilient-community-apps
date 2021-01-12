@@ -21,12 +21,12 @@ def codegen_reload_data():
     return {
         "package": u"fn_microsoft_defender",
         "message_destinations": [u"fn_msdefender"],
-        "functions": [u"defender_find_machines", u"defender_update_alert", u"defender_alert_search", u"defender_machine_scan", u"defender_quarantine_file", u"defender_delete_indicator", u"defender_app_execution", u"defender_machine_isolation", u"defender_set_indicator", u"defender_find_machines_by_file", u"defender_list_indicators"],
-        "workflows": [u"defender_atp_update_alert", u"defender_atp_find_machines", u"defender_quarantine_file", u"defender_atp_delete_indicator", u"defender_atp_app_execution", u"defender_atp_machine_isolation", u"defender_atp_set_indicator", u"defender_atp_find_machines_by_file_hash", u"defender_atp_machine_scan", u"defender_atp_update_indicator", u"defender_atp_alerts_by_machine", u"defender_list_indicators"],
-        "actions": [u"Defender ATP Quarantine Machine File", u"Delete Indicator", u"Defender ATP Alerts by Machine", u"Update Indicator", u"Defender ATP App Execution Restriction", u"Defender ATP Machine Isolate Action", u"Defender ATP Machine Scan", u"Defender ATP Find Machines by File Hash", u"Defender ATP List Indicators", u"Create Artifact from Indicator", u"Defender ATP Find Machines", u"Defender ATP Update Alert", u"Defender ATP Set Indicator"],
+        "functions": [u"defender_alert_search", u"defender_app_execution", u"defender_set_indicator", u"defender_delete_indicator", u"defender_quarantine_file", u"defender_find_machines", u"defender_find_machines_by_file", u"defender_update_alert", u"defender_list_indicators", u"defender_machine_scan", u"defender_machine_isolation"],
+        "workflows": [u"defender_atp_find_machines_by_file_hash", u"defender_atp_alerts_by_machine", u"defender_atp_update_alert", u"defender_atp_app_execution", u"defender_atp_update_indicator", u"defender_atp_machine_isolation", u"defender_quarantine_file", u"defender_atp_delete_indicator", u"defender_atp_machine_scan", u"defender_atp_set_indicator", u"defender_list_indicators", u"defender_atp_find_machines"],
+        "actions": [u"Update Indicator", u"Defender ATP Machine Isolate Action", u"Defender ATP Alerts by Machine", u"Defender ATP Update Alert", u"Defender ATP Set Indicator", u"Defender ATP List Indicators", u"Defender ATP Machine Scan", u"Defender ATP Find Machines by File Hash", u"Defender ATP Quarantine Machine File", u"Delete Indicator", u"Defender ATP Find Machines", u"Create Artifact from Indicator", u"Defender ATP App Execution Restriction"],
         "incident_fields": [],
         "incident_artifact_types": [],
-        "datatables": [u"defender_atp_indicators", u"defender_atp_machines"],
+        "datatables": [u"defender_atp_alerts", u"defender_atp_indicators", u"defender_atp_machines"],
         "automatic_tasks": [],
         "scripts": [u"Create Artifact from Indicator"],
     }
@@ -43,45 +43,46 @@ def customization_data(client=None):
     - Message Destinations:
         - fn_msdefender
     - Functions:
-        - defender_find_machines
-        - defender_update_alert
         - defender_alert_search
-        - defender_machine_scan
-        - defender_quarantine_file
-        - defender_delete_indicator
         - defender_app_execution
-        - defender_machine_isolation
         - defender_set_indicator
+        - defender_delete_indicator
+        - defender_quarantine_file
+        - defender_find_machines
         - defender_find_machines_by_file
+        - defender_update_alert
         - defender_list_indicators
+        - defender_machine_scan
+        - defender_machine_isolation
     - Workflows:
+        - defender_atp_find_machines_by_file_hash
+        - defender_atp_alerts_by_machine
         - defender_atp_update_alert
-        - defender_atp_find_machines
+        - defender_atp_app_execution
+        - defender_atp_update_indicator
+        - defender_atp_machine_isolation
         - defender_quarantine_file
         - defender_atp_delete_indicator
-        - defender_atp_app_execution
-        - defender_atp_machine_isolation
-        - defender_atp_set_indicator
-        - defender_atp_find_machines_by_file_hash
         - defender_atp_machine_scan
-        - defender_atp_update_indicator
-        - defender_atp_alerts_by_machine
+        - defender_atp_set_indicator
         - defender_list_indicators
+        - defender_atp_find_machines
     - Rules:
-        - Defender ATP Quarantine Machine File
-        - Delete Indicator
-        - Defender ATP Alerts by Machine
         - Update Indicator
-        - Defender ATP App Execution Restriction
         - Defender ATP Machine Isolate Action
-        - Defender ATP Machine Scan
-        - Defender ATP Find Machines by File Hash
-        - Defender ATP List Indicators
-        - Create Artifact from Indicator
-        - Defender ATP Find Machines
+        - Defender ATP Alerts by Machine
         - Defender ATP Update Alert
         - Defender ATP Set Indicator
+        - Defender ATP List Indicators
+        - Defender ATP Machine Scan
+        - Defender ATP Find Machines by File Hash
+        - Defender ATP Quarantine Machine File
+        - Delete Indicator
+        - Defender ATP Find Machines
+        - Create Artifact from Indicator
+        - Defender ATP App Execution Restriction
     - Data Tables:
+        - defender_atp_alerts
         - defender_atp_indicators
         - defender_atp_machines
     - Scripts:
