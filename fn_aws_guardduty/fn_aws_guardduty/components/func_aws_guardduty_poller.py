@@ -54,7 +54,7 @@ class FuncAwsGuarddutyPoller(ResilientComponent):
 
         # Wait for threads to stop within thread timeout interval.
         stop_time = time.time() + thread_timeout
-        while any(t.isAlive for t in self.threads) and (time.time() < stop_time):
+        while any(t.isAlive() for t in self.threads) and (time.time() < stop_time):
             time.sleep(0.1)
 
         # Get rid of stopped threads from list.
