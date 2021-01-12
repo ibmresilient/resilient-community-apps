@@ -12,6 +12,7 @@ PACKAGE_NAME = "fn_microsoft_defender"
 INDICATOR_URL = "api/indicators"
 MACHINES_URL = "api/machines"
 FILES_URL = "api/files/{}/machines"
+ALERTS_URL = "api/alerts"
 
 AUTH_URL = "https://login.microsoftonline.com/{tenant_id}" # /v2.0  https://login.microsoftonline.com/82319d65-80f7-431f-8ee7-57bae5b231c2/oauth2/token
 RESOURCE_URI = "https://api.securitycenter.windows.com"
@@ -104,10 +105,10 @@ class DefenderAPI():
         url = "/".join([self.api_url, url_endpoint])
         headers = self.make_header(content_type)
 
-        if payload or oper == "POST":
-            result, status = self.rc.execute_call_v2("POST", url, json=payload, headers=headers, callback=callback_response)
+        if oper in ["POST", "PATCH"]:
+            result, status = self.rc.execute_call_v2(oper, url, json=payload, headers=headers, callback=callback_response)
         else:
-            result, status = self.rc.execute_call_v2(oper, url, headers=headers, callback=callback_response)
+            result, status = self.rc.execute_call_v2(oper, url, params=payload, headers=headers, callback=callback_response)
 
         reason = None
         if not status:

@@ -37,6 +37,8 @@
 - [Function - Defender List Indicators](#function---defender-list-indicators)
 - [Function - Defender Delete Indicator](#function---defender-delete-indicator)
 - [Function - Defender Find Machines by File](#function---defender-find-machines-by-file)
+- [Function - Defender Find Alerts by Machine](#function---defender-find-alerts-by-machine)
+- [Function - Defender Update Alert](#function---defender-update-alert)
 - [Script - Create Artifact from Indicator](#script---create-artifact-from-indicator)
 - [Data Table - Defender ATP Machines](#data-table---defender-atp-machines)
 - [Data Table - Defender ATP Indicators](#data-table---defender-atp-indicators)
@@ -715,6 +717,186 @@ incident.addNote(msg)
 
 ---
 ## Function - Defender Find Machines by File
+Find machines which match a given file hash. Results are populated in the defender_atp_machines datatable.
+
+ ![screenshot: fn-defender-find-machines-by-file ](./doc/screenshots/fn-defender-find-machines-by-file.png)
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `defender_indicator_value` | `text` | No | `-` | - |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+```python
+results = {
+    # TODO: Copy and paste an example of the Function Output within this code block.
+    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
+    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.defender_indicator_value = artifact.value
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+if results.success:
+    for machine in results.content['value']:
+        row = incident.addRow("defender_atp_machines")
+        row['machine_id'] = machine['id']
+        row['machine_name'] = machine['computerDnsName']
+        row['machine_platform'] = machine['osPlatform']
+        row['machine_firstseen'] = machine['firstSeen_ts']
+        row['machine_lastseen'] = machine['lastSeen_ts']
+        row['machine_ip'] = machine['lastIpAddress']
+        row['machine_file_hash'] = artifact.value
+        row['machine_health_status'] = machine.get('healthStatus')
+        row['machine_risk_score'] = machine.get('riskScore')
+        row['machine_exposure_level'] = machine.get('exposureLevel')
+        row['machine_tags'] = ', '.join(machine.get('machineTags', []))
+else:
+    msg = u"Defender ATP Action unsuccessful.\nAction: Find machines by file hash\nReason: {}".format(results.reason)
+    incident.addNote(msg)
+```
+
+</p>
+</details>
+
+---
+## Function - Defender Search Alerts
+Return Defender alerts based on a set of search criteria
+
+ ![screenshot: fn-defender-find-machines-by-file ](./doc/screenshots/fn-defender-find-machines-by-file.png)
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `defender_machine_id` | `text` | Yes | `-` | Filter alerts to a Defender Machine |
+| `defender_alert_severity` | `Informational|Low|Medium|High` | No | `-` | Filter on alert status |
+| `defender_alert_lastseen` | `text` | No | `-` | Filter on alert last seen date |
+| `defender_alert_lastupdatetime` | `text` | No | `-` | Filter on alert last update time |
+| `defender_alert_result_max` | `number` | No | `-` | Limit alert results returned |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+```python
+results = {
+    "@odata.context": "https://api.securitycenter.microsoft.com/api/$metadata#Alerts",
+    "value": [
+        {
+            "id": "da637308392288907382_-880718168",
+            "incidentId": 7587,
+            "investigationId": 723156,
+            "assignedTo": "secop123@contoso.com",
+            "severity": "Low",
+            "status": "New",
+            "classification": "TruePositive",
+            "determination": null,
+            "investigationState": "Queued",
+            "detectionSource": "WindowsDefenderAv",
+            "category": "SuspiciousActivity",
+            "threatFamilyName": "Meterpreter",
+            "title": "Suspicious 'Meterpreter' behavior was detected",
+            "description": "Malware and unwanted software are undesirable applications that perform annoying, disruptive, or harmful actions on affected machines. Some of these undesirable applications can replicate and spread from one machine to another. Others are able to receive commands from remote attackers and perform activities associated with cyber attacks.\n\nA malware is considered active if it is found running on the machine or it already has persistence mechanisms in place. Active malware detections are assigned higher severity ratings.\n\nBecause this malware was active, take precautionary measures and check for residual signs of infection.",
+            "alertCreationTime": "2020-07-20T10:53:48.7657932Z",
+            "firstEventTime": "2020-07-20T10:52:17.6654369Z",
+            "lastEventTime": "2020-07-20T10:52:18.1362905Z",
+            "lastUpdateTime": "2020-07-20T10:53:50.19Z",
+            "resolvedTime": null,
+            "machineId": "12ee6dd8c833c8a052ea231ec1b19adaf497b625",
+            "computerDnsName": "temp123.middleeast.corp.microsoft.com",
+            "rbacGroupName": "MiddleEast",
+            "aadTenantId": "a839b112-1253-6432-9bf6-94542403f21c",
+            "relatedUser": {
+                "userName": "temp123",
+                "domainName": "MIDDLEEAST"
+            },
+			"comments": [
+				{
+					"comment": "test comment for docs",
+					"createdBy": "secop123@contoso.com",
+					"createdTime": "2020-07-21T01:00:37.8404534Z"
+				}
+			],
+            "evidence": []
+		}
+	]
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.defender_machine_id = row['machine_id']
+inputs.defender_alert_lastseen = rule.properties.defender_alert_last_seen
+inputs.defender_alert_lastupdatetime = rule.properties.defender_alert_lastupdatetime
+inputs.defender_alert_severity = str(rule.properties.defender_alert_severity)
+inputs.defender_alert_result_max = rule.properties.defender_max_results
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+if results.success:
+    for alert in results.content['value']:
+        row = incident.addRow("defender_atp_alerts")
+        row['alert_id'] = alert['id']
+        row['azure_incident_id'] = alert['incidentId']
+        row['assigned_to'] = alert['assignedTo']
+        row['severity'] = alert['severity']
+        row['status'] = alert['status']
+        row['title'] = alert['title']
+        row['alert_description'] = alert['description']
+        row['classification'] = alert['classification']
+        row['determination'] = alert['determination']
+        row['category'] = alert['category']
+        row['computer_name'] = alert['computerDnsName']
+        row['machine_id'] = alert['machineId']
+        row['last_event'] = alert['lastEventTime_ts']
+        row['last_updated'] = alert['lastUpdateTime_ts']
+else:
+    msg = u"Defender ATP Action unsuccessful.\nAction: Find alerts by machine\nReason: {}".format(results.reason)
+    incident.addNote(msg)
+```
+
+</p>
+</details>
+
+---
+## Function - Defender Update Alert
 Find machines which match a given file hash. Results are populated in the defender_atp_machines datatable.
 
  ![screenshot: fn-defender-find-machines-by-file ](./doc/screenshots/fn-defender-find-machines-by-file.png)
