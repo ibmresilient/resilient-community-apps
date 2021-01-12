@@ -1095,7 +1095,7 @@ defender_atp_indicators
 ---
 ## Data Table - Defender ATP Alerts
 
- ![screenshot: dt-defender-atp-indicators](./doc/screenshots/fn-defender-update-alert.png)
+ ![screenshot: dt-defender-update-alerts](./doc/screenshots/fn-defender-update-alerts.png)
 
 #### API Name:
 defender_atp_alerts
@@ -1111,7 +1111,7 @@ defender_atp_alerts
 | Status | `status` | `New|InProgress|Resolved` | - |
 | Severity | `severity` | `Informational|Low|Medium|High` | - |
 | Classification | `classification` | `Unknown|FalsePositive|TruePositive` | - |
-| Determination | `determination` | `'NotAvailable|Apt|Malware|SecurityPersonnel|SecurityTesting|UnwantedSoftware|Other` | -- |
+| Determination | `determination` | `NotAvailable|Apt|Malware|SecurityPersonnel|SecurityTesting|UnwantedSoftware|Other` | -- |
 | Last Event | `last_event` | `datetimepicker` | Last Event Date |
 | Last Updated | `last_updated` | `datetimepicker` | Last Updated Date |
 | Machine ID | `machine_id` | `text` | - |
@@ -1126,11 +1126,14 @@ defender_atp_alerts
 | Defender ATP Find Machines | artifact | `defender_atp_find_machines` |
 | Defender ATP App Execution Restriction | defender_atp_machines | `defender_atp_app_execution` |
 | Defender ATP Machine Isolate Action | defender_atp_machines | `defender_atp_machine_isolation` |
+| Defender ATP Alerts by Machine | defender_atp_machines | `defender_atp_alerts_by_machine` |
+| Defender ATP Quarantine Machine File | defender_atp_machines | `defender_quarantine_file` |
 | Update Indicator | defender_atp_indicators | `defender_atp_update_indicator` |
 | Defender ATP Find Machines by File Hash | artifact | `defender_atp_find_machines_by_file_hash` |
-| Defender ATP Quarantine Machine File | defender_atp_machines | `defender_quarantine_file` |
 | Defender ATP List Indicators | incident | `defender_list_indicators` |
 | Delete Indicator | defender_atp_indicators | `defender_atp_delete_indicator` |
+| Defender ATP Update Alert | defender_atp_alerts | `defender_atp_update_alert` |
+
 
 ---
 

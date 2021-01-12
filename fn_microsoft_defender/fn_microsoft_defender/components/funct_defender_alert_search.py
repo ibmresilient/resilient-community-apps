@@ -64,16 +64,14 @@ class FunctionComponent(ResilientComponent):
                 filters.append("severity+eq+'{}'".format(defender_alert_severity))
             if defender_alert_lastupdatetime:
                 filters.append("lastUpdateTime+ge+'{}'".format(readable_datetime(defender_alert_lastupdatetime)))
-            if defender_alert_lastupdatetime:
+            if defender_alert_creationdate:
                 filters.append("alertCreationDate+ge+'{}'".format(readable_datetime(defender_alert_creationdate)))
 
             if filters:
-                params['$filters'] = " and ".join(filters)
+                params['$filter'] = " and ".join(filters)
             log.debug(params)
 
-            # build the url
-            url = "/".join([ALERTS_URL, defender_machine_id])
-            alert_payload, status, reason = defender_api.call(url, payload=params)
+            alert_payload, status, reason = defender_api.call(ALERTS_URL, payload=params)
 
             ## TODO
             xstatus = True
