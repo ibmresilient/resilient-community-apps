@@ -18,8 +18,6 @@ def snake_to_camel(word):
     Convert a word from snake_case to CamelCase
     """
     return ''.join(x.capitalize() or '_' for x in word.split('_'))
-
-
 setup(
     name="fn_aws_guardduty",
     version="1.0.0",
@@ -30,8 +28,8 @@ setup(
     description="Resilient Circuits Components for 'fn_aws_guardduty'",
     long_description="""Resilient Circuits Components for 'fn_aws_guardduty'""",
     install_requires=[
-        'resilient_circuits<=v39.0.0',
-        'resilient_lib<=v39.0.0',
+        'resilient_circuits>=35.0.0,<v39.0.0',
+        'resilient_lib>=35.0.0',
         'boto3>=1.16.19'
     ],
     packages=find_packages(),
@@ -50,3 +48,5 @@ setup(
         "resilient.circuits.selftest": ["selftest = fn_aws_guardduty.util.selftest:selftest_function"]
     }
 )
+
+
