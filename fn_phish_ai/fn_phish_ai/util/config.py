@@ -10,8 +10,8 @@ def config_section_data():
        when called by `resilient-circuits config [-c|-u]`
     """
     config_data = u"""[fn_phish_ai]
-#phishai_api_key=<phish.ai_api_key>
+phishai_api_key=<phish.ai_api_key>
 ## Timeout to return report in seconds, defaults to 60 seconds
-#timeout_seconds=60
+timeout_seconds=60
 """
     return config_data
