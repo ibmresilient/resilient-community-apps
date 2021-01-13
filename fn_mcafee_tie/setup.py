@@ -26,7 +26,7 @@ setup(
     author_email='',
     url='https://ibm.com/mysupport',
     description="Resilient Circuits Components for McAfee TIE Functions",
-    long_description="Provides the ability to search McAfee Threat Intelliegence Exchange (TIE) server for information on a specific file hash from Resilient",
+    long_description="Provides the ability to search McAfee Threat Intelligence Exchange (TIE) server for information on a specific file hash from Resilient",
     install_requires=[
         'resilient_circuits>=30.0.0',
         'resilient-lib',
