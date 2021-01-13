@@ -28,6 +28,7 @@
   - [Install](#install)
   - [App Configuration](#app-configuration)
   - [Custom Layouts](#custom-layouts)
+  - [Azure App Configuration](#azure-app-configuration)
 - [Function - Defender Machine Scan](#function---defender-machine-scan)
 - [Function - Defender Machine Isolation](#function---defender-machine-isolation)
 - [Function - Defender App Execution](#function---defender-app-execution)
@@ -157,6 +158,34 @@ The following table provides the settings you need to configure the app. These s
   ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png)
 
 ---
+
+## Azure App Configuration
+
+In order to use this app, an Azure app needs to be registered with the proper permissions for Defender ATP and a client secret generated. Settings, in general are:
+
+Application Type: Daemon with api calls enabled 
+
+API Permissions (Application type):
+
+    Machine.Read.All
+    Machine.ReadWrite.All
+    Machine.Isolate
+    Machine.RestrictExecution
+    Machine.Scan
+    Machine.StopAndQuarantine
+    Ti.ReadWrite
+    Ti.ReadWrite.All
+    Alert.Read.All
+    Alert.ReadWrite.All
+    File.Read.All
+
+![screenshot: Azure App Registration](./doc/screenshots/azure_app_registration.png)
+
+![screenshot: Azure App Permissions](./doc/screenshots/azure_app_permissions.png)
+
+![screenshot: Azure App Secrets](./doc/screenshots/azure_app_secrets.png)
+
+--
 
 ## Function - Defender Machine Scan
 Perform an antivirus scan on a Defender Machine.
