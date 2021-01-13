@@ -13,5 +13,8 @@ def config_section_data():
 phishai_api_key=<phish.ai_api_key>
 ## Timeout to return report in seconds, defaults to 60 seconds
 timeout_seconds=60
+# Optional settings to access Phish.AI via a proxy.
+#http_proxy=
+#https_proxy=
 """
     return config_data
