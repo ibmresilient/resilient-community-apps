@@ -15,7 +15,7 @@ ENDPOINT_REPORT_URL = 'url/report?scan_id='
 class PhishAI(object):
     def __init__(self, opts, options):
         self.rc = RequestsCommon(opts, options)
-        self.api_key = options.get("phish_api_key")
+        self.api_key = options.get("phishai_api_key")
         self.timeout_seconds = int(options.get("timeout_seconds", DEFAULT_TIMEOUT))
         self.headers = {'Authorization': self.api_key}
         self.cafile = options.get('cafile')

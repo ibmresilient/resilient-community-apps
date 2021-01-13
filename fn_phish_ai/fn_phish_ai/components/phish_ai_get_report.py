@@ -4,11 +4,11 @@
 """Function implementation"""
 
 import logging
-import time
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import validate_fields, ResultPayload
 from fn_phish_ai.lib.phish_ai_helper import PhishAI, PACKAGE_NAME
 
+LOG = logging.getLogger(__name__)
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'phish_ai_get_report"""
@@ -36,41 +36,24 @@ class FunctionComponent(ResilientComponent):
     def _phish_ai_get_report_function(self, event, *args, **kwargs):
         """Function: Returns report of a URL scan from Phish.AI."""
         try:
-            start_time = time.time()
             yield StatusMessage("starting...")
             rp = ResultPayload(PACKAGE_NAME, **kwargs)
 
             # Get the function parameters:
             phishai_scan_id = kwargs.get("phishai_scan_id")  # text
 
-            log = logging.getLogger(__name__)
-
-            log.info("phishai_scan_id: %s", phishai_scan_id)
+            LOG.info(u"phishai_scan_id: %s", phishai_scan_id)
 
             ph = PhishAI(self.opts, self.options)
 
+            # Get the report
             response_json = ph.get_report(phishai_scan_id)
 
-            if response_json.get("status") != "completed":
-                raise FunctionError("Timed out getting report from Phish.AI")
-
-            end_time = time.time()
-
-            if response_json.status_code == 200:
-                success = True
-            else:
-                success = False
-
             yield StatusMessage("done...")
-            results = rp.done(success, response_json)
+            results = rp.done(True, response_json)
 
-            """results = {
-                "inputs": {
-                    "phishai_scan_id": phishai_scan_id
-                },
-                "run_time": str(end_time - start_time),
-                "content": respsonse_json
-            }"""
+            # For backward compatibility with v1.0.0
+            results["run_time"] = str(results['metrics']['execution_time_ms'] /1000)
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

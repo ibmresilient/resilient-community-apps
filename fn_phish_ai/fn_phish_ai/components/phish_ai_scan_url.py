@@ -4,11 +4,11 @@
 """Function implementation"""
 
 import logging
-import time
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import validate_fields, ResultPayload
 from fn_phish_ai.lib.phish_ai_helper import PhishAI, PACKAGE_NAME
 
+LOG = logging.getLogger(__name__)
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'phish_ai_scan_url"""
@@ -39,39 +39,22 @@ class FunctionComponent(ResilientComponent):
         try:
             rp = ResultPayload(PACKAGE_NAME, **kwargs)
 
-            start_time = time.time()
             yield StatusMessage("starting...")
-            api_key = self.options.get("phishai_api_key", None)
 
             # Get the function parameters:
             artifact_value = kwargs.get("artifact_value")  # text
 
             log = logging.getLogger(__name__)
-            if artifact_value is not None:
-                log.info("artifact_value: %s", artifact_value)
-            else:
-                raise ValueError("artifact_value needs to be set to run this function.")
+            LOG.info(u"artifact_value: %s", artifact_value)
 
             ph = PhishAI(self.opts, self.options)
             response_json = ph.scan_url(artifact_value)
 
-            end_time = time.time()
-
-            if response_json.status_code == 200:
-                success = True
-            else:
-                success = False
-
             yield StatusMessage("done...")
-            results = rp.done(success, response_json)
+            results = rp.done(True, response_json)
 
-            """results = {
-                "inputs": {
-                    "artifact_value": artifact_value
-                },
-                "run_time": str(end_time - start_time),
-                "content": response_json
-            }"""
+            # For backward compatibility with v1.0.0
+            results["run_time"] = str(results['metrics']['execution_time_ms'] /1000)
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
