@@ -16,7 +16,7 @@ class PhishAI(object):
     def __init__(self, opts, options):
         self.rc = RequestsCommon(opts, options)
         self.api_key = options.get("phish_api_key")
-        self.timeout_seconds = options.get("timeout_seconds", DEFAULT_TIMEOUT)
+        self.timeout_seconds = int(options.get("timeout_seconds", DEFAULT_TIMEOUT))
         self.headers = {'Authorization': self.api_key}
         self.cafile = options.get('cafile')
         self.bundle = os.path.expanduser(self.cafile) if self.cafile else False
