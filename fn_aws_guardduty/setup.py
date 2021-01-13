@@ -30,8 +30,8 @@ setup(
     description="Resilient Circuits Components for 'fn_aws_guardduty'",
     long_description="""Resilient Circuits Components for 'fn_aws_guardduty'""",
     install_requires=[
-        'resilient_circuits>=35.0.0',
-        'resilient_lib>=35.0.0',
+        'resilient_circuits<=v39.0.0',
+        'resilient_lib<=v39.0.0',
         'boto3>=1.16.19'
     ],
     packages=find_packages(),
