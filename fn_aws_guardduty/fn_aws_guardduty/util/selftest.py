@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-
+# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
+# pragma pylint: disable=unused-argument, no-self-use
 """
 Function implementation test.
 Usage: resilient-circuits selftest -l fn_aws_guardduty
