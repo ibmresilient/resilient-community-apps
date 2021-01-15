@@ -10,8 +10,8 @@
 
 readonly REPO_API_URL='https://quay.io/api/v1/repository'
 
-# build using either global PyPi or Artifactory
-PYPI_INDEX="https://pypi.org/simple"
+# Use either public PyPi to install packages, or if the build isn't master build
+# and [dev-deps] were passed - use Artifactory PyPi
 if [[ $MASTER_BUILD -ne 0 && -n $DEV_DEPS && $DEV_DEPS -eq 0 ]]; then
 	PYPI_INDEX="$ARTIFACTORY_PYPI_INDEX"
 fi
@@ -35,11 +35,11 @@ fi
 
 # Build a container
 # Args: Name and the tags to attach
-function container_build (){
+function image_build (){
 	argc=$#
 	argv=("$@")
 
-	docker build --build-arg RES_CIRCUITS_VERSION=$RES_CIRCUITS_VERSION --build-arg PYPI_INDEX=$PYPI_INDEX -t resilient/${1} ./${1}
+	docker build --build-arg RESILIENT_CIRCUITS_VERSION=$RES_CIRCUITS_VERSION --build-arg RES_CIRCUITS_VERSION=$RES_CIRCUITS_VERSION --build-arg PYPI_INDEX=$PYPI_INDEX -t resilient/${1} ./${1}
 	if [ $? -ne 0 ]; then
 		return 1
 	fi
@@ -174,7 +174,7 @@ do
 	ARTIFACTORY_LABEL=${ARTIFACTORY_URL}/${ARTIFACTORY_ORG}/${integration_name}:${integration_version}
 	QUAY_LABEL=${QUAY_URL}/${QUAY_ORG}/${integration_name}:${integration_version}
 
-	container_build "$integration" "$ARTIFACTORY_LABEL" "$QUAY_LABEL"
+	image_build "$integration" "$ARTIFACTORY_LABEL" "$QUAY_LABEL"
 
 	
 	if [ $? -ne 0 ]; then
@@ -205,6 +205,8 @@ do
 		docker_image=$(docker images --format "{{.Repository}}:{{.Tag}} {{.Digest}}" | grep ${QUAY_LABEL} | head -n 1)
 	fi
 	
+	# After the image is pushed to a repository, get its digest. Save it to integrations directory, to be re-used later
+	# to make the app.zip point to a specific build, and not just the latest tag.
 	echo "Found docker image $docker_image"
 	if [[ -n $docker_image && $MASTER_BUILD -ne 0 ]]; then
 		sha_digest=$(echo $docker_image | cut -d ' ' -f 2)

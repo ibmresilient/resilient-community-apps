@@ -23,7 +23,7 @@ if [[ -n "${PUBLISHED_PACKAGES[*]}" ]]; then
 	done
 	curl -s -H "Authorization: token $GITHUB_AUTH_TOKEN" \
  		-X POST -d "{\"body\": \"Bot: ${message}\"}" \
-		"https://api.github.ibm.com/repos/${TRAVIS_REPO_SLUG}/issues/${TRAVIS_PULL_REQUEST}/comments"
+		$GITHUB_PR_COMMENT_URL
 else
 	echo "No packages to link to PR"
 fi

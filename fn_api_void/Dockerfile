@@ -1,12 +1,12 @@
-# docker build -t ibmresilient/fn_mitre_integration:2.0.2 -t ibmresilient/fn_mitre_integration:latest .
+# docker build -t ibmresilient/fn_api_void:1.0.0 -t ibmresilient/fn_api_void:latest .
 
 # Base image using Red Hat's universal base image (rhel 8) for python
 FROM registry.access.redhat.com/ubi8/python-36:latest
 
-ARG PYPI_INDEX=https://pypi.org/simple
-ARG APPLICATION=fn_mitre_integration
-ARG RESILIENT_CIRCUITS_VERSION=39.0
+ARG APPLICATION=fn_api_void
+ARG RESILIENT_CIRCUITS_VERSION=37
 ARG PATH_RESILIENT_CIRCUITS=rescircuits
+
 # Environment variable for any app to check if running in a container
 ARG APP_HOST_CONTAINER=1
 ENV APP_HOST_CONTAINER=${APP_HOST_CONTAINER}
@@ -18,7 +18,7 @@ USER 0
 RUN pip install --upgrade pip
 
 # install resilient-circuits
-RUN pip install "resilient-circuits>=${RESILIENT_CIRCUITS_VERSION}" -i ${PYPI_INDEX}
+RUN pip install "resilient-circuits>=${RESILIENT_CIRCUITS_VERSION}"
 
 ## ---- section for changes ----
 # uncomment and replicate if additional os libraries are needed
@@ -27,7 +27,7 @@ RUN pip install "resilient-circuits>=${RESILIENT_CIRCUITS_VERSION}" -i ${PYPI_IN
 
 # install the base package
 COPY ./dist /tmp/packages
-RUN pip install /tmp/packages/${APPLICATION}-*.tar.gz -i ${PYPI_INDEX}
+RUN pip install /tmp/packages/${APPLICATION}-*.tar.gz
 
 # uncomment and replicate if additional pypi packages are needed
 #RUN pip install <package>

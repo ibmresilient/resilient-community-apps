@@ -1,0 +1,9 @@
+include README.md
+include Dockerfile
+include entrypoint.sh
+recursive-include fn_api_void/util *
+include fn_api_void/LICENSE
+include doc/*.md
+include doc/screenshots/*
+
+exclude *.bak

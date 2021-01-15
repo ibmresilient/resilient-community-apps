@@ -17,6 +17,8 @@ env:
   - DEV_DEPS=`[[ ( -z $TRAVIS_TAG && "$LATEST_COMMIT_MSG" =~ "$DEV_DEPS_KEYWORD" ) || "$TAG_MSG" =~ "$DEV_DEPS_KEYWORD" ]]; echo $?`
   - ARTIFACTORY_PYPI_INDEX="https://$ARTIFACTORY_USERNAME:$ARTIFACTORY_PASSWORD@na.artifactory.swg-devops.com/artifactory/api/pypi/sec-resilient-team-integrations-pypi-virtual/simple"
   - ARTIFACTORY_REPO_LINK=https://na.artifactory.swg-devops.com/artifactory/sec-resilient-team-integrations-generic-local
+  - GITHUB_PR_COMMENT_URL=https://api.github.ibm.com/repos/${TRAVIS_REPO_SLUG}/issues/${TRAVIS_PULL_REQUEST}/comments
+  - PYPI_INDEX="https://pypi.org/simple"
 # Exclude these branches from having jobs ran.
 branches:
   except:
@@ -25,7 +27,7 @@ branches:
 
 stages:
   # todo - install deps for master tests
-  # All tests are executed on CRON
+  # All tests are executed on CRON - checks if any dependencies got broken
   - name: all tests
     if: branch = master AND type = cron
   # Every commit not on master runs tests and performs static analysis
@@ -33,9 +35,10 @@ stages:
     if: branch != master OR type in (pull_request)
   - name: run tests
     if: branch != master OR type in (pull_request)
+  # For every commit in pull_request, or on special tag - images and packages are built and pushed to Artifactory
   - name: build images and packages
     if: type in (pull_request) OR ( tag IS present AND tag =~ ^container/.+ )
-  # Publish to Quay and create a package when merged to master
+  # Publish to Quay and create a package when merged to master (only push to Quay on master)
   - name: publish master
     if: branch = master AND type IN (push)
   # Rebuild all images
@@ -76,7 +79,7 @@ matrix:
       - docker
     install: skip
     script:
-      - source .scripts/updated_integrations_build_containers.sh QUAY
+      - source .scripts/updated_integrations_build_images.sh QUAY
       # if there are failed containers send a message with their list
       - if [[ -n "${FAILED_CONTAINERS[*]}" ]]; then .scripts/send_notification.sh "Containers not built ${FAILED_CONTAINERS[*]}" failure; return 1; fi
   # Jobs below this line are reserved for push contributions i.e when someone pushes changes
@@ -135,16 +138,18 @@ matrix:
   # will be build and pushed to artifactory with label :latest and :<version>
   # ARTIFACTORY_URL should be sec-resilient-docker-local.artifactory.swg-devops.com
   - stage: build images and packages
-    name: Building containers and packagee
+    name: Building containers and packages
     services:
       - docker
     install:
       - .scripts/install_resilient_api.sh
     script:
-      - source .scripts/updated_integrations_build_containers.sh ARTIFACTORY
+      - source .scripts/updated_integrations_build_images.sh ARTIFACTORY
       # if there are failed containers send a message with their list
       - if [[ -n "${FAILED_CONTAINERS[*]}" ]]; then .scripts/send_notification.sh "Containers not built ${FAILED_CONTAINERS[*]}" failure; return 1; fi
       - sudo apt-get install jq
+      # Package the updated integrations and push to Artifactory
+      # This is done 2nd, because we need digest of the image in the repository to update app.zip
       - source .scripts/updated_integrations_package.sh
       # if there are failed packages send a message with their list
       - if [[ -n "${FAILED_PACKAGES[*]}" ]]; then .scripts/send_notification.sh "Packages not built ${FAILED_PACKAGES[*]}" failure; fi

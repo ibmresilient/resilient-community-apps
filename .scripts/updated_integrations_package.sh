@@ -1,8 +1,9 @@
 #!/bin/bash -v
 dist_dir=$( cd $(dirname $0) ; pwd -P )
 
-# build using either global PyPi or Artifactory
-PYPI_INDEX="https://pypi.org/simple"
+
+# Use either public PyPi to install packages, or if the build isn't master build
+# and [dev-deps] were passed - use Artifactory PyPi
 if [[ $MASTER_BUILD -ne 0 && -n $DEV_DEPS && $DEV_DEPS -eq 0 ]]; then
 	PYPI_INDEX="$ARTIFACTORY_PYPI_INDEX"
 fi
@@ -51,7 +52,7 @@ do
 
 	# To get version of the integration we first extract line verion=<version> from setup.py, from where we extract
 	# the actual version substring. Doing it in 2 steps to avoid using Perl style regex with lookahead capabilities
-	integration_version=$(cat "$setup_file" | grep -o "version=['\"][0-9.]*['\"]" | grep -oE "[0-9.]+")
+	integration_version=$(python "$setup_file" --version)
 	if [ -z "$integration_version" ]; then
 		echo "Couldn't detect version for package $integration. Make sure it's listed as version=<version>."
 		skipped_packages+=($integration)
@@ -67,7 +68,7 @@ do
 		continue
 	fi
 	echo "Integration's name is $integration_name"
-
+	# Check if the app.zip exists (was it AppHost converted) or not.
 	if [ -f ${dist_dir}/app-${integration_name}-${integration_version}.zip ]; then
 		# Now - if we can find digest of built image we can replace the tag with it
 	    if [[ -f ${dist_dir}/sha_digest && $MASTER_BUILD -ne 0 ]]; then
