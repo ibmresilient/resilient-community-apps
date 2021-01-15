@@ -3,8 +3,25 @@
 # - pulls out the name of the integration out of the tag pushed
 # - or gets a list of all changed integrations based on the TRAVIS_COMMIT_RANGE
 # It then pulls out current version of each integration from its setup.py
-# builds its Dockerfile and pushes it up to the artifactory.
+# builds its Dockerfile:
+# - with PyPi resilient packages or Artifactory based on $DEPS_DEV
+# - and pushes it up to the artifactory or Quay as specified
+
+
 readonly REPO_API_URL='https://quay.io/api/v1/repository'
+
+# Use either public PyPi to install packages, or if the build isn't master build
+# and [dev-deps] were passed - use Artifactory PyPi
+if [[ $MASTER_BUILD -ne 0 && -n $DEV_DEPS && $DEV_DEPS -eq 0 ]]; then
+	PYPI_INDEX="$ARTIFACTORY_PYPI_INDEX"
+fi
+
+DESTINATION_REPO=$1
+
+if [ -z "$1" ] ; then
+    DESTINATION_REPO="ARTIFACTORY"
+fi
+
 # Logs in to repository at given URL with username and passowrd
 # Args: URL, username, password
 function repo_login (){
@@ -13,16 +30,16 @@ function repo_login (){
 
 # use latest rircuits if not defined. Allows to change it per job with env
 if [ -z $RES_CIRCUITS_VERSION ]; then
-	RES_CIRCUITS_VERSION="36.2.209.dev"
+	RES_CIRCUITS_VERSION="39.0"
 fi
 
 # Build a container
 # Args: Name and the tags to attach
-function container_build (){
+function image_build (){
 	argc=$#
 	argv=("$@")
 
-	docker build --build-arg RES_CIRCUITS_VERSION=$RES_CIRCUITS_VERSION -t resilient/${1} ./${1}
+	docker build --build-arg RESILIENT_CIRCUITS_VERSION=$RES_CIRCUITS_VERSION --build-arg RES_CIRCUITS_VERSION=$RES_CIRCUITS_VERSION --build-arg PYPI_INDEX=$PYPI_INDEX -t resilient/${1} ./${1}
 	if [ $? -ne 0 ]; then
 		return 1
 	fi
@@ -86,21 +103,23 @@ else
       echo "Most recently modified integrations from last commit show as : ${INTEGRATIONS}"
 fi
 
-echo "Logging in to Artifactory"
-repo_login $ARTIFACTORY_URL $ARTIFACTORY_USERNAME $ARTIFACTORY_PASSWORD
-if [ $? -ne 0 ]; then
-	echo "Failed log in to artifactory"
-	set -e
-	return 1
-fi   	
-
-echo "Logging in to Quay"
-repo_login $QUAY_URL $QUAY_USERNAME $QUAY_PASSWORD
-if [ $? -ne 0 ]; then
-	echo "Failed log in to Quay"
-	set -e
-	return 1
-fi   	
+if [[ $DESTINATION_REPO == "ARTIFACTORY" ]]; then
+	echo "Logging in to Artifactory"
+	repo_login $ARTIFACTORY_URL $ARTIFACTORY_USERNAME $ARTIFACTORY_PASSWORD
+	if [ $? -ne 0 ]; then
+		echo "Failed log in to artifactory"
+		set -e
+		return 1
+	fi   	
+else
+	echo "Logging in to Quay"
+	repo_login $QUAY_URL $QUAY_USERNAME $QUAY_PASSWORD
+	if [ $? -ne 0 ]; then
+		echo "Failed log in to Quay"
+		set -e
+		return 1
+	fi   	
+fi
 
 for integration in ${INTEGRATIONS[@]};
 do
@@ -152,32 +171,47 @@ do
 		continue
 	fi
 
-	ARTIFACTORY_LABEL=${ARTIFACTORY_URL}/resilient/${integration_name}:${integration_version}
+	ARTIFACTORY_LABEL=${ARTIFACTORY_URL}/${ARTIFACTORY_ORG}/${integration_name}:${integration_version}
 	QUAY_LABEL=${QUAY_URL}/${QUAY_ORG}/${integration_name}:${integration_version}
 
-	container_build "$integration" "$ARTIFACTORY_LABEL" "$QUAY_LABEL"
+	image_build "$integration" "$ARTIFACTORY_LABEL" "$QUAY_LABEL"
 
+	
 	if [ $? -ne 0 ]; then
 		skipped_packages+=($integration)
 		continue
 	fi
 
-	container_push $ARTIFACTORY_LABEL
-	if [ $? -ne 0 ]; then
-		echo "Failed to push to Artifactory."
-		skipped_packages+=($integration)
-		continue
-	fi
 
-	# Before we push a container to quay, 
-	# create the repository first using the REST API 
-	# This will ensure all new repos are public.
-	repo_create "$integration" "$QUAY_ORG"
-	container_push $QUAY_LABEL
-	if [ $? -ne 0 ]; then
-		echo "Failed to push to Quay."
-		skipped_packages+=($integration)
-		continue
+	if [[ $DESTINATION_REPO == "ARTIFACTORY" ]]; then
+		container_push $ARTIFACTORY_LABEL
+		if [ $? -ne 0 ]; then
+			echo "Failed to push to Artifactory."
+			skipped_packages+=($integration)
+			continue
+		fi
+		docker_image=$(docker images --format "{{.Repository}}:{{.Tag}} {{.Digest}}" | grep ${ARTIFACTORY_LABEL} | head -n 1)
+	else
+		# Before we push a container to quay, 
+		# create the repository first using the REST API 
+		# This will ensure all new repos are public.
+		repo_create "$integration" "$QUAY_ORG"
+		container_push $QUAY_LABEL
+		if [ $? -ne 0 ]; then
+			echo "Failed to push to Quay."
+			skipped_packages+=($integration)
+			continue
+		fi
+		docker_image=$(docker images --format "{{.Repository}}:{{.Tag}} {{.Digest}}" | grep ${QUAY_LABEL} | head -n 1)
+	fi
+	
+	# After the image is pushed to a repository, get its digest. Save it to integrations directory, to be re-used later
+	# to make the app.zip point to a specific build, and not just the latest tag.
+	echo "Found docker image $docker_image"
+	if [[ -n $docker_image && $MASTER_BUILD -ne 0 ]]; then
+		sha_digest=$(echo $docker_image | cut -d ' ' -f 2)
+		echo "Digest of the image is ${sha_digest}"
+		echo $sha_digest > ${dist_dir}/sha_digest
 	fi
 done
 
