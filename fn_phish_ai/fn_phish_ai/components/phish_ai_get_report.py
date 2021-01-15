@@ -3,6 +3,7 @@
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
+import time
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import validate_fields, ResultPayload
@@ -41,13 +42,25 @@ class FunctionComponent(ResilientComponent):
 
             # Get the function parameters:
             phishai_scan_id = kwargs.get("phishai_scan_id")  # text
+            timeout_seconds = int(self.options.get("timeout_seconds", 60))
 
             LOG.info(u"phishai_scan_id: %s", phishai_scan_id)
 
             ph = PhishAI(self.opts, self.options)
 
             # Get the report
-            response_json = ph.get_report(phishai_scan_id)
+            # Keep checking until report is ready, will timeout after a minute
+            i = 0
+            while i < round(timeout_seconds/5):
+                time.sleep(5)
+                response_json = ph.get_report(phishai_scan_id)
+                if response_json.get("status") == "completed":
+                    break
+                i += 5
+                yield StatusMessage("Waiting for report to report to complete")
+
+            if response_json.get("status") != "completed":
+                raise FunctionError("Timed out getting report from Phish.AI")
 
             yield StatusMessage("done...")
             results = rp.done(True, response_json)
