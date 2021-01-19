@@ -35,6 +35,7 @@ class TestPhishAiScanUrl:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
+    @pytest.mark.livetest
     @pytest.mark.parametrize("artifact_value, expected_results", [
         ("https://google.com", {}),
         ("https://startup417.gb.net/M3?mes1=asdf@asdf.com", {})
