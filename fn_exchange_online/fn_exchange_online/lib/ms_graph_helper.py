@@ -14,6 +14,8 @@ from resilient_lib import OAuth2ClientCredentialsSession
 from requests.packages.urllib3.util import Retry
 from requests.adapters import HTTPAdapter
 from resilient_lib.components.integration_errors import IntegrationError
+from resilient_lib import get_file_attachment_metadata
+from fn_exchange_online.lib.resilient_helper import get_incident_file_attachment
 
 LOG = logging.getLogger(__name__)
 DEFAULT_SCOPE = 'https://graph.microsoft.com/.default'
@@ -257,13 +259,42 @@ class MSGraphHelper(object):
 
         return response
 
+    def build_attachments(self, attachment_names, incident_id, resilient_client):
+        """
+        Get attachment data from Resilient and format it for Exchange Online.
+        :param attachment_name: name of the attachment in Resilient
+        :param incident_id: ID of Resilient incident
+        :param resilient_client: Resilient REST API client
+        :return: formatted attachment data
+        """
+        attachments = []
+        attachment_names = attachment_names.split(",")
+        for attachment_name in attachment_names:
+            attachment_name = attachment_name.strip()
+            base64content, attachment_id = get_incident_file_attachment(resilient_client, incident_id, attachment_name)
+            if not attachment_id:
+                continue
+            contentType = get_file_attachment_metadata(resilient_client, incident_id, attachment_id=attachment_id)["content_type"]
+            attachment = {
+                    "@odata.type": "#microsoft.graph.fileAttachment",
+                    "name": attachment_name,
+                    "contentType": contentType,
+                    "contentBytes": base64content
+                }
 
-    def send_message(self, sender_address, recipients, subject, body):
+            attachments.append(attachment)
+            LOG.info(u"Successfully attached %s", attachment_name)
+        return attachments
+
+    def send_message(self, sender_address, recipients, subject, body, attachment_names=None, incident_id=None, resilient_client=None):
         """
         Call MS Graph to send message.
         :param sender_address: email address of the message sender
         :param recipients: comma separated list of users to send message to
         :param subject: message subject text
+        :param attachment_namse: comma seperated names of incident attachment to send with the message
+        :param incident_id: ID of Resilient incident
+        :param resilient_client: Resilient REST API client
         :param body: message body text
         :return: requests response from post.
         """
@@ -279,6 +310,11 @@ class MSGraphHelper(object):
                                     "body": {"contentType": "HTML", "content": body},
                                     "toRecipients": recipient_list},
                         "saveToSentItems": "true"}
+
+        # Build attachment data
+        if attachment_names:
+            attachments = self.build_attachments(attachment_names, incident_id, resilient_client)
+            message_json["message"]["attachments"] = attachments
 
         response = self.ms_graph_session.post(ms_graph_create_message_url,
                                               headers={'Content-Type': 'application/json'},

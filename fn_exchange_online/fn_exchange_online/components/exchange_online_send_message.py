@@ -46,12 +46,16 @@ class FunctionComponent(ResilientComponent):
             recipients = kwargs.get("exo_recipients")  # text
             message_subject = kwargs.get("exo_message_subject")  # text
             message_body = kwargs.get("exo_message_body")  # text
+            attachment_names = kwargs.get("exo_attachment_names") # text
+            incident_id = kwargs.get("incident_id") # number
 
             log = logging.getLogger(__name__)
             log.info(u"exo_email_address: %s", email_address)
             log.info(u"exo_recipients: %s", recipients)
             log.info(u"exo_message_subject: %s", message_subject)
             log.info(u"exo_message_body: %s", message_body)
+            log.info(u"exo_attachment_names: %s", attachment_names)
+            log.info(u"incident_id: %d", incident_id)
 
             yield StatusMessage(u"Starting send message from email address: {}".format(email_address))
 
@@ -68,8 +72,12 @@ class FunctionComponent(ResilientComponent):
                                             self.options.get("max_batched_requests", MAX_BATCHED_REQUESTS),
                                             RequestsCommon(self.opts, self.options).get_proxies())
 
+            # Get a rest client to work with attachments if required
+            rest_client = self.rest_client() if attachment_names else None
+
             # Call MS Graph API to send the message
-            response = MS_graph_helper.send_message(email_address, recipients, message_subject, message_body)
+            response = MS_graph_helper.send_message(email_address, recipients, message_subject, message_body,
+                            attachment_names=attachment_names, incident_id=incident_id, resilient_client=rest_client)
 
             # If message was sent a 202 code is returned...nothing is returned in the response.
             if response.status_code == 202:
