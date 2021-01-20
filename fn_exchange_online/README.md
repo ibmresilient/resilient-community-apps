@@ -53,7 +53,7 @@ The 1.1.0 release addresses performance issues when querying messages of all Exc
 
 **NOTE** Existing users running Exchange Online functions on an integration server, should save the [fn_exchange_online] section of their app.config file to another file and delete that section from the app.config file before installing the new version, as this section has changed.  After installation, run the following command to obtain the new configuration:
 ```
-  $ resilient-circuits config -u -l fn-microsoft-exchange-online
+  $ resilient-circuits config -u -l fn-exchange-online
   ```
 Edit the required configuration setting as described in the [Integration Server](#integration-server) section.
 
