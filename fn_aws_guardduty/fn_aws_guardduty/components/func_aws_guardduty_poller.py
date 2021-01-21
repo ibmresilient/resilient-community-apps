@@ -5,6 +5,7 @@
 import logging
 import time
 from threading import Thread
+import sys
 
 from resilient_circuits import ResilientComponent, handler
 from resilient_lib import validate_fields
@@ -27,10 +28,13 @@ class FuncAwsGuarddutyPoller(ResilientComponent):
         super(FuncAwsGuarddutyPoller, self).__init__(opts)
         self.options = opts.get("fn_aws_guardduty", {})
         self.opts = opts
-        validate_fields(config.REQUIRED_CONFIG_SETTINGS, self.options)
-        config.STOP_THREAD = False
-        self.threads = []
-        self.poller_setup()
+        if "pytest" in sys.modules and not self.opts.get("pytest_poller", False):
+            LOG.info("Running within a test environment with circuits. Not starting poller.")
+        else:
+            validate_fields(config.REQUIRED_CONFIG_SETTINGS, self.options)
+            config.STOP_THREAD = False
+            self.threads = []
+            self.poller_setup()
 
     @handler("reload")
     def _reload(self, event, opts):

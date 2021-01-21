@@ -3,7 +3,7 @@
 # pragma pylint: disable=unused-argument, no-self-use
 """ Functions accessing Resilient """
 import logging
-import pprint
+import re
 
 from resilient_circuits import ResilientComponent
 from resilient import SimpleHTTPException
@@ -94,3 +94,24 @@ class ResSvc(ResilientComponent):
         except SimpleHTTPException as ex:
             LOG.error('Something went wrong when attempting to create the Incident: %s', ex)
 
+    def find_resilient_artifacts_for_incident(self, incident_id):
+        """Return list of existing artifacts for a Resilient Incident ID.
+
+        :param incident_id: Incident ID from incident creation.
+        :return: Return dict of artifacts with key=artifact value, value=artifact type.
+        """
+        r_artifacts = {}
+        artifact_types = list(const.ARTIFACT_TYPES_MAP.keys())
+        resilient_client = self.rest_client()
+        artifacts_uri = '/incidents/{}/artifacts'.format(incident_id)
+        artifact_results = resilient_client.get(uri=artifacts_uri)
+
+        if artifact_results is not None:
+            for artifact_result in artifact_results:
+                artifact_desc = artifact_result.get('description')
+                # Match artifact type at beginning of description e.g. artifact_desc = "\'IP Address\' ... "
+                artifact_type = next((t for t in artifact_types if re.match("\'"+t+"\'", artifact_desc)), None)
+                if artifact_type:
+                    r_artifacts[artifact_result['value']] = artifact_type
+
+        return r_artifacts
