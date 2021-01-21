@@ -63,12 +63,12 @@ class FunctionComponent(ResilientComponent):
             if defender_alert_severity:
                 filters.append("severity+eq+'{}'".format(defender_alert_severity))
             if defender_alert_lastupdatetime:
-                filters.append("lastUpdateTime+ge+'{}'".format(readable_datetime(defender_alert_lastupdatetime)))
+                filters.append("lastUpdateTime+ge+{}".format(readable_datetime(defender_alert_lastupdatetime)))
             if defender_alert_creationdate:
-                filters.append("alertCreationDate+ge+'{}'".format(readable_datetime(defender_alert_creationdate)))
+                filters.append("alertCreationDate+ge+{}".format(readable_datetime(defender_alert_creationdate)))
 
             if filters:
-                params['$filter'] = " and ".join(filters)
+                params['$filter'] = "+and+".join(filters)
             log.debug(params)
 
             alert_payload, status, reason = defender_api.call(ALERTS_URL, payload=params)
