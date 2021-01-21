@@ -171,6 +171,37 @@ class ReferenceTableFacade(ReferenceObjectBase):
         self.failed_tbl_insert += number_failed_tble_insert
 
     @staticmethod
+    def get_one_reference_table(client, table_name):
+        """
+        Get a list of all the reference tables.
+        :return: list of reference table names
+        """
+        url = u"{}{}/{}".format(client.api_url, REF_TABLE_ENDPOINT, table_name)
+        try:
+            response = client.make_call("GET", url)
+            #
+            # Sample return:
+            """
+            [
+                {
+                    "timeout_type": "FIRST_SEEN",
+                    "number_of_elements": 0,
+                    "creation_time": 1516812810600,
+                    "name": "Watson Advisor: File Action Blocked",
+                    "element_type": "ALNIC"
+                },
+                ...
+            ]
+            """
+
+        except Exception as e:
+            LOG.error(str(e))
+            raise RequestError(
+                url, "get_one_ref_table call failed with exception {}".format(str(e)))
+        else:
+            return response.json()
+
+    @staticmethod
     def get_all_reference_tables(client):
         """
         Get a list of all the reference tables.
