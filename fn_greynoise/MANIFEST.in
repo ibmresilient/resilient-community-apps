@@ -1,5 +1,6 @@
 include README.md
 include fn_greynoise/util/*
+include fn_greynoise/util/data/*
 include fn_greynoise/lib/*
 include fn_greynoise/LICENSE
 include doc/*.md

@@ -1,13 +1,14 @@
 #!/bin/bash -xv
 
+# This is a Jenkins script
+
 # Build python packages with setup.py
 # This section builds all the feature packages implemented in
 # python. It searches for all folders that contains setup.py
 #
 dist_dir=$( cd $(dirname $0) ; pwd -P )
 
-python -m pip install resilient_sdk-1.0.0.tar.gz
-
+python -m pip install resilient_sdk
 
 setup_files=(`find .. -type f -name 'setup.py' -not -path "../older/*"`);
 echo "Building these packages:";

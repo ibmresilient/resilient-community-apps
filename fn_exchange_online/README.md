@@ -28,6 +28,10 @@
   Specify all changes in this release. Do not remove the release 
   notes of a previous release
 -->
+### v1.2.0
+* Minor performance improvement when query "all" user mailboxes.
+* Continue querying "all" users if there is an error returned from a single call to the $batch endpoint.
+
 ### v1.1.0
 The 1.1.0 release addresses performance issues when querying messages of all Exchange Online users of a tenant.
 * Added batching of multiple message query requests into a single Microsoft Graph API request call using the /$batch endpoint.  The maximum number of requests that Microsoft Graph currently supports in the batch endpoint is 20 requests.  Should Microsoft change this value, the <code>max_batch_requests</code>  parameter should be updated in the app.config file.
@@ -102,6 +106,18 @@ The integration contains the following functions:
 <!--
   List any Requirements 
 -->
+
+This app supports the IBM Resilient SOAR Platform and the IBM Cloud Pak for Security.
+
+### Resilient platform
+The Resilient platform supports two app deployment mechanisms, App Host and integration server.
+
+If deploying to a Resilient platform with an App Host, the requirements are:
+* Resilient platform >= `37.1`.
+* The app is in a container-based format (available from the AppExchange as a `zip` file).
+
+If deploying to a Resilient platform with an integration server, the requirements are:
+
 * Resilient platform >= `v35.0.0`
 * If not using an App Host, an integration server running:
   *  `resilient_circuits>=31.0.0`
@@ -121,7 +137,29 @@ The integration contains the following functions:
     * Workflows.Create
     * Workflow.Edit
 
-  * To set up an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
+The following Resilient platform guides provide additional information: 
+* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
+* _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
+* _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
+
+The above guides are available on the IBM Knowledge Center at [ibm.biz/resilient-docs](https://ibm.biz/resilient-docs). On this web page, select your Resilient platform version. On the follow-on page, you can find the _App Host Deployment Guide_ or _Integration Server Guide_ by expanding **Resilient Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
+
+### Cloud Pak for Security
+If you are deploying to IBM Cloud Pak for Security, the requirements are:
+* IBM Cloud Pak for Security >= 1.4.
+* Cloud Pak is configured with an App Host.
+* The app is in a container-based format (available from the AppExchange as a `zip` file).
+
+The following Cloud Pak guides provide additional information: 
+* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
+* _System Administrator Guide_: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security Knowledge Center table of contents, select Case Management and Orchestration & Automation > **System administrator**.
+
+These guides are available on the IBM Knowledge Center at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs). From this web page, select your IBM Cloud Pak for Security version. From the version-specific Knowledge Center page, select Case Management and Orchestration & Automation.
+
+### Proxy Server
+The app supports a proxy server.
+
+---
 
 * The following Microsoft Graph API "Application permissions" for this integration:
   * Calendars.ReadWrite
@@ -138,22 +176,13 @@ The integration contains the following functions:
 
 ## Installation
 
-### App Format
+### Install
+* To install or uninstall an App or Integration on the _Resilient platform_, see the documentation at [ibm.biz/resilient-docs](https://ibm.biz/resilient-docs).
+* To install or uninstall an App on _IBM Cloud Pak for Security_, see the documentation at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs) and follow the instructions above to navigate to Orchestration and Automation.
 
-The app .zip file is in a container format and requires a Resilient platform configured with an App Host. 
+### App Configuration
+The following table describes the settings you need to configure in the app.config file. If using App Host, see the Resilient System Administrator Guide. If using the integration server, see the Integration Server Guide.
 
-The app tar.gz file is an extension format and requires a Resilient platform configured with an integration server.
-
-### App Host
-For a complete guide on how to configure App Host and install apps in the Resilient platform, please reference the Resilient Apps topic in the Knowledge Center. [Knowledge Center](https://www.ibm.com/support/knowledgecenter/SSBRUQ).
-
-All the components for running this integration in a container already exist when using the App Host app.
-
-To install,
-
-* Navigate to Administrative Settings and then the Apps tab.
-* Click the Install button and select the downloaded file: app-fn_echange_online-x.x.x.zip.
-* Go to the Configuration tab and edit the app.config file, editing the tenant_id, client_id and client_secret and making any additional setting changes.
 
   | Config | Required | Example | Description |
   | ------ | :------: | ------- | ----------- |
@@ -168,90 +197,6 @@ To install,
   | **max_retries_total** | Yes | `10` | *Maximum number of retries for MS Graph API request* |
   | **max_retries_backoff_factor** | Yes | `5` | *Backoff factor used to determine time to sleep between requests* |
 
-
-
-### Integration Server
-
-* Download the `app-fn_exchange_online-x.x.x.zip` file.
-* Copy the `.zip` to your Integration Server and SSH into it.
-* **Unzip** the package:
-  ```
-  $ unzip app-fn_exchange_online-x.x.x.zip
-  ```
-* **Install** the package:
-  ```
-  $ pip install fn_exchange_online-x.x.x.tar.gz
-  ```
-* Import the **configurations** into your app.config file:
-  ```
-  $ resilient-circuits config -u -l fn-exchange-online
-  ```
-* Import the fn_exchange_online **customizations** into the Resilient platform:
-  ```
-  $ resilient-circuits customize -y -l fn-exchange-online
-  ```
-* Open the config file, scroll to the bottom and edit your fn_exchange_online configurations:
-  ```
-  $ nano ~/.resilient/app.config
-  ```
-* Download the `fn_exchange_online.zip`.
-* Copy the `.zip` to your Integration Server and SSH into it.
-* **Unzip** the package:
-  ```
-  $ unzip fn_exchange_online-x.x.x.zip
-  ```
-* **Change Directory** into the unzipped directory:
-  ```
-  $ cd fn_exchange_online-x.x.x
- 
-  ```
-* **Install** the package:
-  ```
-  $ pip install fn_exchange_online-x.x.x.tar.gz
-  ```
-* Import the **configurations** into your app.config file:
-  ```
-  $ resilient-circuits config -u -l fn-exchange-online 
-  ```
-* Import the fn_exchange_online **customizations** into the Resilient platform:
-  ```
-  $ resilient-circuits customize -y -l fn-exchange-online
-  ```
-* Open the config file, scroll to the bottom and edit your fn_exchange_online configurations:
-  ```
-  $ nano ~/.resilient/app.config
-  ```
-  | Config | Required | Example | Description |
-  | ------ | :------: | ------- | ----------- |
-  | **microsoft_graph_token_url** | Yes | `https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token` | *Microsoft Graph URL endpoint for acquiring access token* |
-  | **microsoft_graph_url** | Yes | `https://graph.microsoft.com/v1.0` | *Microsoft Graph base URL* |
-  | **tenant_id** | Yes | `xxx` | *Microsoft Azure Tenant ID* |
-  | **client_id** | Yes | `xxx` | *Microsoft Azure Client ID (Application ID)* |
-  | **client_secret** | Yes | `xxx` | *Microsoft Azure Client Secret* |
-  | **max_batched_requests** | Yes | `20` | *Maximum number of requests to send MS Graph API $batch endpoint in single call* |
-  | **max_messages** | Yes | `100` | *Maximum number of messages that a query returns* |
-  | **max_users** | Yes | `2000` | *Maximum number of users searched in a query* |
-  | **max_retries_total** | Yes | `10` | *Maximum number of retries for MS Graph API request* |
-  | **max_retries_backoff_factor** | Yes | `5` | *Backoff factor used to determine time to sleep between requests* |
-* **Save** and **Close** the app.config file.
-* [Optional]: Run selftest to test the Integration you configured:
-  ```
-  $ resilient-circuits selftest -l fn-exchange-online
-  ```
-* **Run** resilient-circuits or restart the Service on Windows/Linux:
-  ```
-  $ resilient-circuits run
-  ```
-  ### Uninstall
-  If using an integration server, you can uninstall your app as follows:
-
-* SSH into your Integration Server.
-* **Uninstall** the package:
-  ```
-  $ pip uninstall fn-exchange-online
-  ```
-* Open the config file, scroll to the [fn_exchange_online] section and remove the section or prefix `#` to comment out the section.
-* **Save** and **Close** the app.config file.
 
 ---
 
@@ -323,46 +268,9 @@ You may need to log in to an admin account to accept the permissions requested o
 
 ---
 
-## Troubleshooting
-There are several ways to verify the successful operation of a function.
+## Troubleshooting & Support
+Refer to the documentation listed in the Requirements section for troubleshooting information.
 
-### Resilient Action Status
-* When viewing an incident, use the Actions menu to view **Action Status**.
-* By default, pending and errors are displayed.
-* Modify the filter for actions to also show Completed actions.
-* Clicking on an action displays additional information on the progress made or what error occurred.
+### For Support
 
-### Resilient Scripting Log
-* A separate log file is available to review scripting errors.
-* This is useful when issues occur in the pre-processing or post-processing scripts.
-* The default location for this log file is: `/var/log/resilient-scripting/resilient-scripting.log`.
-
-### Resilient Logs
-* By default, Resilient logs are retained at `/usr/share/co3/logs`.
-* The `client.log` may contain additional information regarding the execution of functions.
-
-### Resilient-Circuits
-* The log is controlled in the `.resilient/app.config` file under the section [resilient] and the property `logdir`.
-* The default file name is `app.log`.
-* Each function will create progress information.
-* Failures will show up as errors and may contain python trace statements.
-
----
-
-<!--
-  If necessary, use this section to describe how to configure your security application to work with the integration.
-  Delete this section if the user does not need to perform any configuration procedures on your product.
-
-## Configure <Product_Name>
-
-* Step One
-* Step Two
-* Step Three
-
----
--->
-
-## Support
-| Name | Version | Author | Support URL |
-| ---- | ------- | ------ | ----------- |
-| fn_exchange_online | 1.1.0 | IBM Resilient | https://ibm.com/mysupport |
+This is an IBM supported app. Please search https://ibm.com/mysupport for assistance.

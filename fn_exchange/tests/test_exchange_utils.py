@@ -1,101 +1,16 @@
 # import unittest
 import pytest
-from exchangelib import Message, FileAttachment, Account, Folder, FolderCollection
+from exchangelib import FolderCollection, Folder, Account
+from exchangelib.folders import Root
 from exchangelib.restriction import Q
 from fn_exchange.util.exchange_utils import exchange_utils, parse_time, FolderError, get_config_option, str_to_bool
+from mock_artifacts import MOCK_OPTS, MOCK_INT_OPTS, MockEmail, MockSender, MockAttachment, MockAttachmentId, \
+    MockAccount, MockFolder
 
 try:
     from unittest.mock import patch
 except ImportError:
-    from mock import patch
-
-MOCK_OPTS = {
-    'verify_cert': 'false',
-    'server': 'server',
-    'username': 'username',
-    'email': 'email',
-    'password': 'password',
-    'default_folder_path': 'path',
-    'default_timezone': 'Etc/GMT'
-}
-
-class MockEmail(Message):
-    """Mocking exchangelib Email"""
-    def __init__(self, message_id, subject, body, sender, attachments, mime_content):
-        self.message_id = message_id
-        self.subject = subject
-        self.body = body
-        self.sender = sender
-        self.attachments = attachments
-        self.mime_content = mime_content
-
-
-class MockSender(object):
-    """Mocking exchangelib Sender"""
-    def __init__(self, name, email_address):
-        self.name = name
-        self.email_address = email_address
-
-
-class MockAttachment(FileAttachment):
-    """Mocking exchangelib FileAttachment"""
-    def __init__(self, attachment_id, name, content_type, size, content):
-        self.attachment_id = attachment_id
-        self.name = name
-        self.content_type = content_type
-        self.size = size
-        self.content = content
-
-
-class MockAttachmentId(object):
-    """Mocking exchangelib AttachmentId"""
-    def __init__(self, id):
-        self.id = id
-
-
-class MockAccount(Account):
-    """Mocking exchangelib Account"""
-    def __init__(self, root):
-        self.root = root
-        self.sent = MockFolder('sent', {}, account=self)
-        self.calendar = MockFolder('calendar', {}, account=self)
-
-    def set_root(self, root):
-        self.root = root
-
-
-class MockFolder(Folder):
-    """Mocking exchangelib Folder"""
-    FIELDS = []
-
-    def __init__(self, name, subfolders, account=None):
-        self.name = name
-        self.subfolders = subfolders
-        self.child_folder_count = len(subfolders)
-        self.account = account
-
-    def __truediv__(self, other):
-        """Overloading / operator for folder navigation"""
-        if self.subfolders.get(other):
-            return self.subfolders[other]
-        raise FolderError('mock@address.com', 'path', other, 'tree')
-    __div__ = __truediv__
-
-    def __eq__(self, other):
-        return self.name == other.name and self.subfolders == other.subfolders
-
-    def __hash__(self):
-        return hash(self.name + str(set(self.subfolders)))
-
-    def __repr__(self):
-        return '{}: {}'.format(self.name, str(self.subfolders))
-
-    # For get_emails search_subfolders list(folder.walk().get_folders())
-    def get_folders(self):
-        for item in self.subfolders.values():
-            yield item
-            for recur_item in item.subfolders.values():
-                yield recur_item
+    from mock import patch, MagicMock
 
 
 class TestExchangeUtils:
@@ -123,7 +38,7 @@ class TestExchangeUtils:
 
     def test_create_email_function_results(self):
         """Testing create_email_function_results"""
-        test_utils = exchange_utils(MOCK_OPTS)
+        test_utils = exchange_utils(MOCK_OPTS, MOCK_INT_OPTS)
 
         # Test when no results are returned
         emails1 = test_utils.create_email_function_results([])
@@ -211,7 +126,7 @@ class TestExchangeUtils:
             })
         })
         connect_to_account.return_value = MockAccount(test_root)
-        test_utils = exchange_utils(MOCK_OPTS)
+        test_utils = exchange_utils(MOCK_OPTS, MOCK_INT_OPTS)
 
         # Check when go to folder that doesn't exist appropriate error is raised
         with pytest.raises(FolderError):
@@ -219,7 +134,7 @@ class TestExchangeUtils:
 
         # First level navigatino check - root/1
         test1 = test_utils.go_to_folder('mockemail', '1')
-        assert test1 == test_root.subfolders['1']
+        assert test1 == test_root._subfolders['1']
 
         # Two level navigation check - root/1/1_1
         with pytest.raises(FolderError):
@@ -227,26 +142,26 @@ class TestExchangeUtils:
 
         # First level navigation check - root/2
         test2 = test_utils.go_to_folder('mockemail', '2')
-        assert test2 == test_root.subfolders['2']
+        assert test2 == test_root._subfolders['2']
 
         # Two level navigation check - root/2/2_1
         test2_1 = test_utils.go_to_folder('mockemail', '2/2_1')
-        assert test2_1 == test_root.subfolders['2'].subfolders['2_1']
+        assert test2_1 == test_root._subfolders['2']._subfolders['2_1']
 
         # Two level navigation check - root/2/2_2
         test2_2 = test_utils.go_to_folder('mockemail', '2/2_2')
-        assert test2_2 == test_root.subfolders['2'].subfolders['2_2']
+        assert test2_2 == test_root._subfolders['2']._subfolders['2_2']
 
         # Three level navigation check - root/2/2_2/2_2_1
         test2_2_1 = test_utils.go_to_folder('mockemail', '2/2_2/2_2_1')
-        assert test2_2_1 == test_root.subfolders['2'].subfolders['2_2'].subfolders['2_2_1']
+        assert test2_2_1 == test_root._subfolders['2']._subfolders['2_2']._subfolders['2_2_1']
 
 
     @patch("fn_exchange.util.exchange_utils.exchange_utils.connect_to_account")
     def test_create_email_message(self, connect_to_account):
         """Testing create_email_message"""
 
-        test_utils = exchange_utils(MOCK_OPTS)
+        test_utils = exchange_utils(MOCK_OPTS, MOCK_INT_OPTS)
         mock_account = MockAccount(MockFolder('root', {}))
         connect_to_account.return_value = mock_account
 
@@ -261,7 +176,7 @@ class TestExchangeUtils:
         assert email1.account == mock_account
         assert email1.folder == mock_account.sent
         assert email1.subject == 'subject1'
-        assert email1.body == 'body1'
+        assert email1.body == "<html><body>body1</body></html>"
         assert email1.to_recipients == ['a@a.com']
 
         # More input parameters
@@ -275,13 +190,13 @@ class TestExchangeUtils:
         assert email2.account == mock_account
         assert email2.folder == mock_account.sent
         assert email2.subject == None
-        assert email2.body == None
+        assert email2.body == "<html><body>None</body></html>"
         assert email2.to_recipients == ['a@a.com', 'b@a.com']
 
     @patch("fn_exchange.util.exchange_utils.exchange_utils.connect_to_account")
     def test_create_meeting(self, connect_to_account):
         """Testing create meeting"""
-        test_utils = exchange_utils(MOCK_OPTS)
+        test_utils = exchange_utils(MOCK_OPTS,MOCK_INT_OPTS)
         mock_account = MockAccount(MockFolder('root', {}))
         connect_to_account.return_value = mock_account
 
@@ -323,8 +238,9 @@ class TestExchangeUtils:
         # Initialize testing variables with Mock objects
         # Mocked account and mocked root with subfolders
         opts = MOCK_OPTS
+        opts_int = MOCK_INT_OPTS
         opts['default_folder_path'] = '1'
-        test_utils = exchange_utils(opts)
+        test_utils = exchange_utils(opts, opts_int)
         mock_account = MockAccount(None)
         test_root = MockFolder('root', {
             '1': MockFolder('1', {}, mock_account),
@@ -335,7 +251,7 @@ class TestExchangeUtils:
                 }, mock_account)
             }, mock_account)
         }, mock_account)
-        rsf = test_root.subfolders
+        rsf = test_root._subfolders
         mock_account.set_root(test_root)
         connect_to_account.return_value = mock_account
 
@@ -371,11 +287,12 @@ class TestExchangeUtils:
 
         # search_subfolders filter check
         with patch.object(Folder, 'walk') as walk:
-            walk.return_value = test_root.subfolders['2']
+            walk.return_value = test_root._subfolders['2']
             emails7 = test_utils.get_emails('mockemail', folder_path='2', search_subfolders=True)
-        assert emails7.folder_collection == FolderCollection(folders=[rsf['2'], rsf['2'].subfolders['2_1'],
-                                                                      rsf['2'].subfolders['2_2'].subfolders['2_2_1'],
-                                                                      rsf['2'].subfolders['2_2']], account=mock_account)
+
+        fc_expected = FolderCollection(folders=[rsf['2']], account=mock_account)
+        assert emails7.folder_collection.folders == fc_expected.folders
+        assert emails7.folder_collection.account == fc_expected.account
         assert emails7.q == Q()
 
         emails8 = test_utils.get_emails('mockemail', folder_path='1', sender='sender', subject='subject', body='body',

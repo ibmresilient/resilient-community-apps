@@ -1,4 +1,4 @@
-# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
@@ -16,11 +16,13 @@ class FunctionComponent(ResilientComponent):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         self.options = opts.get("fn_exchange", {})
+        self.opts = opts
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
         self.options = opts.get("fn_exchange", {})
+        self.opts = opts
 
     @function("exchange_send_email")
     def _exchange_send_email_function(self, event, *args, **kwargs):
@@ -42,7 +44,7 @@ class FunctionComponent(ResilientComponent):
             log.info("exchange_emails: %s" % exchange_emails)
 
             # Initialize utils
-            utils = exchange_utils(self.options)
+            utils = exchange_utils(self.options, self.opts)
 
             # Get sender account
             email = utils.create_email_message(exchange_email, exchange_message_subject, exchange_message_body,

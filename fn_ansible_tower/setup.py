@@ -19,13 +19,13 @@ def snake_to_camel(word):
 
 setup(
     name='fn_ansible_tower',
-    version='1.0.0',
+    version='1.0.1',
     license='MIT',
     author='IBM Resilient',
     author_email='support@resilientsystems.com',
     url='https://github.com/ibmresilient/resilient-community-apps',
     description="Resilient Circuits Components for 'fn_ansible_tower'",
-    long_description="Resilient Circuits Components for 'fn_ansible_tower'",
+    long_description="Get job templates, launch jobs, and get job results from Ansible Tower",
     install_requires=[
         'resilient_circuits>=30.0.0',
         'resilient_lib>=34.0.195'
