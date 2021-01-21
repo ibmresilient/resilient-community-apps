@@ -28,6 +28,9 @@
   Specify all changes in this release. Do not remove the release 
   notes of a previous release
 -->
+### v1.3.0
+* Support attaching incident attachments to a message.
+
 ### v1.2.0
 * Minor performance improvement when query "all" user mailboxes.
 * Continue querying "all" users if there is an error returned from a single call to the $batch endpoint.
