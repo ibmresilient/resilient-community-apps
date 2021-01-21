@@ -70,3 +70,13 @@ class TestResilientService:
         assert isinstance(res_svc, (ResSvc, ResilientComponent))
         result = res_svc.add_datatables(incident_id, tables)
         assert result is None
+
+    @patch('fn_aws_guardduty.lib.resilient_service.ResilientComponent.rest_client', side_effect=MagicMock)
+    @pytest.mark.parametrize("incident_id, tables, expected_results", [
+        (2000, get_function_params("tables"), None)
+    ])
+    def test_add_datatables(self, mock_res, incident_id, tables, expected_results):
+        res_svc = ResSvc(get_opt(), get_config())
+        assert isinstance(res_svc, (ResSvc, ResilientComponent))
+        result = res_svc.find_resilient_artifacts_for_incident(incident_id)
+        assert result is None

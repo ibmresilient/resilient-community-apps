@@ -248,6 +248,287 @@ def get_cli_raw_responses(op):
     }
     return response[op]
 
+
+## Mock results.
+def get_mocked_results(type):
+    response = {
+        "finding_payload_with_artifacts": (
+        {'name': 'AWS GuardDuty: API GeneratedFindingAPIName was invoked from an IP address on a custom threat list.',
+         'description': {'format': 'text',
+                         'content': 'An API was used to access a bucket from an IP address on a custom threat list.'},
+         'discovered_date': '2020-11-25T13:46:37.960Z', 'severity_code': 'Low',
+         'properties': {'aws_guardduty_finding_id': '60baffd3f9042e38640f2300d5c5a631',
+                        'aws_guardduty_finding_arn': 'arn:aws:guardduty:us-west-2:834299573936:detector/f2baedb0ac74f8f42fc929e15f56da6a/finding/60baffd3f9042e38640f2300d5c5a631',
+                        'aws_guardduty_finding_type': 'UnauthorizedAccess:S3/MaliciousIPCaller.Custom',
+                        'aws_guardduty_finding_updated_at': '2020-11-26T15:18:12.620Z',
+                        'aws_guardduty_region': 'us-west-2', 'aws_guardduty_resource_type': 'S3Bucket',
+                        'aws_guardduty_count': 4, 'aws_guardduty_detector_id': 'f2baedb0ac74f8f42fc929e15f56da6a'},
+         'artifacts': []
+         }
+        ),
+        "finding_payload_no_artifacts":({'name': 'AWS GuardDuty: API GeneratedFindingAPIName was invoked from an IP address on a custom threat list.',
+                                    'description': {'format': 'text', 'content': 'An API was used to access a bucket from an IP address on a custom threat list.'},
+                                    'discovered_date': '2020-11-25T13:46:37.960Z', 'severity_code': 'Low',
+                                    'properties': {'aws_guardduty_finding_id': '60baffd3f9042e38640f2300d5c5a631',
+                                                   'aws_guardduty_finding_arn': 'arn:aws:guardduty:us-west-2:834299573936:detector/f2baedb0ac74f8f42fc929e15f56da6a/finding/60baffd3f9042e38640f2300d5c5a631',
+                                                   'aws_guardduty_finding_type': 'UnauthorizedAccess:S3/MaliciousIPCaller.Custom',
+                                                   'aws_guardduty_finding_updated_at': '2020-11-26T15:18:12.620Z',
+                                                   'aws_guardduty_region': 'us-west-2', 'aws_guardduty_resource_type': 'S3Bucket',
+                                                   'aws_guardduty_count': 4, 'aws_guardduty_detector_id': 'f2baedb0ac74f8f42fc929e15f56da6a'},
+                                    'artifacts': [{'type': {'name': 'aws_iam_access_key_id'}, 'description': {'format': 'text', 'content': "'AWS IAM Access Key ID' extracted from GuardDuty from finding property 'AccessKeyId' at path '['Resource', 'AccessKeyDetails']'."}, 'value': 'GeneratedFindingAccessKeyId'},
+                                                  {'type': {'name': 'aws_iam_user_name'}, 'description': {'format': 'text', 'content': "'AWS IAM User Name' extracted from GuardDuty from finding property 'UserName' at path '['Resource', 'AccessKeyDetails']'."}, 'value': 'GeneratedFindingUserName'},
+                                                  {'type': {'name': 'IP Address'}, 'description': {'format': 'text', 'content': "'IP Address' extracted from GuardDuty from finding property 'IpAddressV4' at path '['Service', 'Action', 'AwsApiCallAction', 'RemoteIpDetails']'."}, 'value': '198.51.100.0'},
+                                                  {'type': {'name': 'IP Address'}, 'description': {'format': 'text', 'content': "'IP Address' extracted from GuardDuty from finding property 'PrivateIpAddress' at path '['Resource', 'InstanceDetails', 'NetworkInterfaces', 0]'."}, 'value': '10.0.0.1'},
+                                                  {'type': {'name': 'DNS Name'}, 'description': {'format': 'text', 'content': "'DNS Name' extracted from GuardDuty from finding property 'PublicDnsName' at path '['Resource', 'InstanceDetails', 'NetworkInterfaces', 0]'."}, 'value': 'GeneratedFindingPublicDNSName'},
+                                                  {'type': {'name': 'DNS Name'}, 'description': {'format': 'text', 'content': "'DNS Name' extracted from GuardDuty from finding property 'PrivateDnsName' at path '['Resource', 'InstanceDetails', 'NetworkInterfaces', 0]'."}, 'value': 'GeneratedFindingPrivateDnsName'},
+                                                  {'type': {'name': 'DNS Name'}, 'description': {'format': 'text', 'content': "'DNS Name' extracted from GuardDuty from finding property 'PrivateDnsName' at path '['Resource', 'InstanceDetails', 'NetworkInterfaces', 0, 'PrivateIpAddresses', 0]'."}, 'value': 'GeneratedFindingPrivateName'}
+                                                  ]
+                                    }
+        ),
+        "finding_payload_with_artifacts_with_refresh": (
+            {
+                'name': 'AWS GuardDuty: API GeneratedFindingAPIName was invoked from an IP address on a custom threat list.',
+                'description': {'format': 'text',
+                                'content': 'An API was used to access a bucket from an IP address on a custom threat list.'},
+                'discovered_date': '2020-11-25T13:46:37.960Z', 'severity_code': 'Low',
+                'properties': {'aws_guardduty_finding_id': '60baffd3f9042e38640f2300d5c5a631',
+                               'aws_guardduty_finding_arn': 'arn:aws:guardduty:us-west-2:834299573936:detector/f2baedb0ac74f8f42fc929e15f56da6a/finding/60baffd3f9042e38640f2300d5c5a631',
+                               'aws_guardduty_finding_type': 'UnauthorizedAccess:S3/MaliciousIPCaller.Custom',
+                               'aws_guardduty_finding_updated_at': '2020-11-26T15:18:12.620Z',
+                               'aws_guardduty_region': 'us-west-2', 'aws_guardduty_resource_type': 'S3Bucket',
+                               'aws_guardduty_count': 4,
+                               'aws_guardduty_detector_id': 'f2baedb0ac74f8f42fc929e15f56da6a'}, 'artifacts': [
+                {'type': {'name': 'aws_iam_access_key_id'}, 'description': {'format': 'text',
+                                                                            'content': "'AWS IAM Access Key ID' extracted from GuardDuty from finding property 'AccessKeyId' at path '['Resource', 'AccessKeyDetails']'."},
+                 'value': 'GeneratedFindingAccessKeyId'}, {'type': {'name': 'aws_iam_user_name'},
+                                                           'description': {'format': 'text',
+                                                                           'content': "'AWS IAM User Name' extracted from GuardDuty from finding property 'UserName' at path '['Resource', 'AccessKeyDetails']'."},
+                                                           'value': 'GeneratedFindingUserName'},
+                {'type': {'name': 'IP Address'}, 'description': {'format': 'text',
+                                                                 'content': "'IP Address' extracted from GuardDuty from finding property 'IpAddressV4' at path '['Service', 'Action', 'AwsApiCallAction', 'RemoteIpDetails']'."},
+                 'value': '198.51.100.0'}, {'type': {'name': 'IP Address'}, 'description': {'format': 'text',
+                                                                                            'content': "'IP Address' extracted from GuardDuty from finding property 'PrivateIpAddress' at path '['Resource', 'InstanceDetails', 'NetworkInterfaces', 0]'."},
+                                            'value': '10.0.0.1'}, {'type': {'name': 'DNS Name'},
+                                                                   'description': {'format': 'text',
+                                                                                   'content': "'DNS Name' extracted from GuardDuty from finding property 'PublicDnsName' at path '['Resource', 'InstanceDetails', 'NetworkInterfaces', 0]'."},
+                                                                   'value': 'GeneratedFindingPublicDNSName'},
+                {'type': {'name': 'DNS Name'}, 'description': {'format': 'text',
+                                                               'content': "'DNS Name' extracted from GuardDuty from finding property 'PrivateDnsName' at path '['Resource', 'InstanceDetails', 'NetworkInterfaces', 0]'."},
+                 'value': 'GeneratedFindingPrivateDnsName'}, {'type': {'name': 'DNS Name'},
+                                                              'description': {'format': 'text',
+                                                                              'content': "'DNS Name' extracted from GuardDuty from finding property 'PrivateDnsName' at path '['Resource', 'InstanceDetails', 'NetworkInterfaces', 0, 'PrivateIpAddresses', 0]'."},
+                                                              'value': 'GeneratedFindingPrivateName'}], 'comments': [{
+                                                                                                                         'text': {
+                                                                                                                             'format': 'text',
+                                                                                                                             'content': "AWS GuardDuty finding Payload:\n{   'AccountId': '834299573936',\n    'Arn': 'arn:aws:guardduty:us-west-2:834299573936:detector/f2baedb0ac74f8f42fc929e15f56da6a/finding/60baffd3f9042e38640f2300d5c5a631',\n    'CreatedAt': '2020-11-25T13:46:37.960Z',\n    'Description': 'An API was used to access a bucket from an IP address on a '\n                   'custom threat list.',\n    'Id': '60baffd3f9042e38640f2300d5c5a631',\n    'Partition': 'aws',\n    'Region': 'us-west-2',\n    'Resource': {   'AccessKeyDetails': {   'AccessKeyId': 'GeneratedFindingAccessKeyId',\n                                            'PrincipalId': 'GeneratedFindingPrincipalId',\n                                            'UserName': 'GeneratedFindingUserName',\n                                            'UserType': 'IAMUser'},\n                    'InstanceDetails': {   'AvailabilityZone': 'GeneratedFindingInstaceAvailabilityZone',\n                                           'IamInstanceProfile': {   'Arn': 'arn:aws:iam::834299573936:example/instance/profile',\n                                                                     'Id': 'GeneratedFindingInstanceProfileId'},\n                                           'ImageDescription': 'GeneratedFindingInstaceImageDescription',\n                                           'ImageId': 'ami-99999999',\n                                           'InstanceId': 'i-99999999',\n                                           'InstanceState': 'running',\n                                           'InstanceType': 'm3.xlarge',\n                                           'LaunchTime': '2016-08-02T02:05:06Z',\n                                           'NetworkInterfaces': [   {   'Ipv6Addresses': [   ],\n                                                                        'NetworkInterfaceId': 'eni-bfcffe88',\n                                                                        'PrivateDnsName': 'GeneratedFindingPrivateDnsName',\n                                                                        'PrivateIpAddress': '10.0.0.1',\n                                                                        'PrivateIpAddresses': [   {   'PrivateDnsName': 'GeneratedFindingPrivateName',\n                                                                                                      'PrivateIpAddress': '10.0.0.1'}],\n                                                                        'PublicDnsName': 'GeneratedFindingPublicDNSName',\n                                                                        'PublicIp': '198.51.100.0',\n                                                                        'SecurityGroups': [   {   'GroupId': 'GeneratedFindingSecurityId',\n                                                                                                  'GroupName': 'GeneratedFindingSecurityGroupName'}],\n                                                                        'SubnetId': 'GeneratedFindingSubnetId',\n                                                                        'VpcId': 'GeneratedFindingVPCId'}],\n                                           'OutpostArn': 'arn:aws:outposts:us-west-2:123456789000:outpost/op-0fbc006e9abbc73c3',\n                                           'ProductCodes': [{}],\n                                           'Tags': [   {   'Key': 'GeneratedFindingInstaceTag1',\n                                                           'Value': 'GeneratedFindingInstaceValue1'},\n                                                       {   'Key': 'GeneratedFindingInstaceTag2',\n                                                           'Value': 'GeneratedFindingInstaceTagValue2'},\n                                                       {   'Key': 'GeneratedFindingInstaceTag3',\n                                                           'Value': 'GeneratedFindingInstaceTagValue3'},\n                                                       {   'Key': 'GeneratedFindingInstaceTag4',\n                                                           'Value': 'GeneratedFindingInstaceTagValue4'},\n                                                       {   'Key': 'GeneratedFindingInstaceTag5',\n                                                           'Value': 'GeneratedFindingInstaceTagValue5'},\n                                                       {   'Key': 'GeneratedFindingInstaceTag6',\n                                                           'Value': 'GeneratedFindingInstaceTagValue6'},\n                                                       {   'Key': 'GeneratedFindingInstaceTag7',\n                                                           'Value': 'GeneratedFindingInstaceTagValue7'},\n                                                       {   'Key': 'GeneratedFindingInstaceTag8',\n                                                           'Value': 'GeneratedFindingInstaceTagValue8'},\n                                                       {   'Key': 'GeneratedFindingInstaceTag9',\n                                                           'Value': 'GeneratedFindingInstaceTagValue9'}]},\n                    'ResourceType': 'S3Bucket',\n                    'S3BucketDetails': [   {   'Arn': 'arn:aws:s3:::bucketName',\n                                               'CreatedAt': '2017-12-18 '\n                                                            '15:58:11',\n                                               'DefaultServerSideEncryption': {   'EncryptionType': 'SSEAlgorithm',\n                                                                                  'KmsMasterKeyArn': 'arn:aws:kms:region:123456789012:key/key-id'},\n                                               'Name': 'bucketName',\n                                               'Owner': {   'Id': 'CanonicalId '\n                                                                  'of Owner'},\n                                               'PublicAccess': {   'EffectivePermission': 'NOT_PUBLIC',\n                                                                   'PermissionConfiguration': {   'AccountLevelPermissions': {   'BlockPublicAccess': {   'BlockPublicAcls': False,\n                                                                                                                                                          'BlockPublicPolicy': False,\n                                                                                                                                                          'IgnorePublicAcls': False,\n                                                                                                                                                          'RestrictPublicBuckets': False}},\n                                                                                                  'BucketLevelPermissions': {   'AccessControlList': {   'AllowsPublicReadAccess': False,\n                                                                                                                                                         'AllowsPublicWriteAccess': False},\n                                                                                                                                'BlockPublicAccess': {   'BlockPublicAcls': False,\n                                                                                                                                                         'BlockPublicPolicy': False,\n                                                                                                                                                         'IgnorePublicAcls': False,\n                                                                                                                                                         'RestrictPublicBuckets': False},\n                                                                                                                                'BucketPolicy': {   'AllowsPublicReadAccess': False,\n                                                                                                                                                    'AllowsPublicWriteAccess': False}}}},\n                                               'Tags': [   {   'Key': 'foo',\n                                                               'Value': 'bar'}],\n                                               'Type': 'Destination'}]},\n    'SchemaVersion': '2.0',\n    'Service': {   'Action': {   'ActionType': 'AWS_API_CALL',\n                                 'AwsApiCallAction': {   'Api': 'GeneratedFindingAPIName',\n                                                         'CallerType': 'Remote '\n                                                                       'IP',\n                                                         'RemoteIpDetails': {   'City': {   'CityName': 'GeneratedFindingCityName'},\n                                                                                'Country': {   'CountryName': 'GeneratedFindingCountryName'},\n                                                                                'GeoLocation': {   'Lat': 0,\n                                                                                                   'Lon': 0},\n                                                                                'IpAddressV4': '198.51.100.0',\n                                                                                'Organization': {   'Asn': '-1',\n                                                                                                    'AsnOrg': 'GeneratedFindingASNOrg',\n                                                                                                    'Isp': 'GeneratedFindingISP',\n                                                                                                    'Org': 'GeneratedFindingORG'}},\n                                                         'ServiceName': 'GeneratedFindingAPIServiceName'}},\n                   'Archived': False,\n                   'Count': 4,\n                   'DetectorId': 'f2baedb0ac74f8f42fc929e15f56da6a',\n                   'EventFirstSeen': '2020-11-25T13:46:37.960Z',\n                   'EventLastSeen': '2020-11-26T15:18:12.620Z',\n                   'ResourceRole': 'TARGET',\n                   'ServiceName': 'guardduty'},\n    'Severity': 2,\n    'Title': 'API GeneratedFindingAPIName was invoked from an IP address on a '\n             'custom threat list.',\n    'Type': 'UnauthorizedAccess:S3/MaliciousIPCaller.Custom',\n    'UpdatedAt': '2020-11-26T15:18:12.620Z'}"}}]}
+        ),
+        "finding_payload_data_tables":({'gd_action_details': [{'cells': {'action_type': {'value': 'AWS_API_CALL'}, 'action_api': {'value': 'GeneratedFindingAPIName'}, 'event_first_seen': {'value': '2020-11-25T13:46:37.960Z'}, 'event_last_seen': {'value': '2020-11-26T15:18:12.620Z'}, 'actor_caller_type': {'value': 'Remote IP'}, 'city_name': {'value': 'GeneratedFindingCityName'}, 'country_name': {'value': 'GeneratedFindingCountryName'}, 'asn': {'value': '-1'}, 'asn_org': {'value': 'GeneratedFindingASNOrg'}, 'isp': {'value': 'GeneratedFindingISP'}, 'org': {'value': 'GeneratedFindingORG'}, 'action_service_name': {'value': 'GeneratedFindingAPIServiceName'}, 'remote_ip': {'value': '198.51.100.0'}}}],
+                                        'gd_resource_affected': [{'cells': {'resource_type': {'value': 'S3Bucket'}, 'instance_id': {'value': 'i-99999999'}, 'instance_type': {'value': 'm3.xlarge'}, 'instance_state': {'value': 'running'}, 'resource_role': {'value': 'TARGET'}, 'instance_private_ip': {'value': '10.0.0.1'}, 'instance_private_dns': {'value': 'GeneratedFindingPrivateName'}, 'instance_public_ip': {'value': '198.51.100.0'}, 'instance_public_dns': {'value': 'GeneratedFindingPublicDNSName'}, 's3bucket_name': {'value': 'bucketName'}, 's3bucket_owner': {'value': 'CanonicalId of Owner'}}}]}
+
+        ),
+        "replace_datetime": ({'name': 'AWS GuardDuty: API GeneratedFindingAPIName was invoked from an IP address on a custom threat list.',
+                              'description': {'format': 'text', 'content': 'An API was used to access a bucket from an IP address on a custom threat list.'},
+                              'discovered_date': '2020-11-25T13:46:37.960Z',
+                              'severity_code': 'Low',
+                              'properties': {'aws_guardduty_finding_id': '60baffd3f9042e38640f2300d5c5a631',
+                                             'aws_guardduty_finding_arn': 'arn:aws:guardduty:us-west-2:834299573936:detector/f2baedb0ac74f8f42fc929e15f56da6a/finding/60baffd3f9042e38640f2300d5c5a631',
+                                             'aws_guardduty_finding_type': 'UnauthorizedAccess:S3/MaliciousIPCaller.Custom',
+                                             'aws_guardduty_finding_updated_at': '2020-11-26T15:18:12.620Z',
+                                             'aws_guardduty_region': 'us-west-2',
+                                             'aws_guardduty_resource_type': 'S3Bucket',
+                                             'aws_guardduty_count': 4,
+                                             'aws_guardduty_detector_id': 'f2baedb0ac74f8f42fc929e15f56da6a'
+                                             }
+                              },
+        ),
+        "refresh_finding_no_artifacts": (
+            [{'type': {'name': 'aws_iam_access_key_id'}, 'description': {'format': 'text',
+                                                                         'content': "'AWS IAM Access Key ID' extracted from GuardDuty from finding property 'AccessKeyId' at path '['Resource', 'AccessKeyDetails']'."},
+              'value': 'GeneratedFindingAccessKeyId'},
+             {'type': {'name': 'aws_iam_user_name'}, 'description': {'format': 'text',
+                                                                     'content': "'AWS IAM User Name' extracted from GuardDuty from finding property 'UserName' at path '['Resource', 'AccessKeyDetails']'."},
+              'value': 'GeneratedFindingUserName'},
+             {'type': {'name': 'IP Address'}, 'description': {'format': 'text',
+                                                              'content': "'IP Address' extracted from GuardDuty from finding property 'IpAddressV4' at path '['Service', 'Action', 'AwsApiCallAction', 'RemoteIpDetails']'."},
+              'value': '198.51.100.0'},
+             {'type': {'name': 'IP Address'}, 'description': {'format': 'text',
+                                                              'content': "'IP Address' extracted from GuardDuty from finding property 'PrivateIpAddress' at path '['Resource', 'InstanceDetails', 'NetworkInterfaces', 0]'."},
+              'value': '10.0.0.1'},
+             {'type': {'name': 'DNS Name'}, 'description': {'format': 'text',
+                                                            'content': "'DNS Name' extracted from GuardDuty from finding property 'PublicDnsName' at path '['Resource', 'InstanceDetails', 'NetworkInterfaces', 0]'."},
+              'value': 'GeneratedFindingPublicDNSName'},
+             {'type': {'name': 'DNS Name'}, 'description': {'format': 'text',
+                                                            'content': "'DNS Name' extracted from GuardDuty from finding property 'PrivateDnsName' at path '['Resource', 'InstanceDetails', 'NetworkInterfaces', 0]'."},
+              'value': 'GeneratedFindingPrivateDnsName'},
+             {'type': {'name': 'DNS Name'}, 'description': {'format': 'text',
+                                                            'content': "'DNS Name' extracted from GuardDuty from finding property 'PrivateDnsName' at path '['Resource', 'InstanceDetails', 'NetworkInterfaces', 0, 'PrivateIpAddresses', 0]'."},
+              'value': 'GeneratedFindingPrivateName'}
+             ]
+        ),
+        "refresh_finding_with_artifacts": (
+            []
+        ),
+        "refresh_finding_to_json": (
+            {'finding': {'AccountId': '834299573936',
+                         'Arn': 'arn:aws:guardduty:us-west-2:834299573936:detector/f2baedb0ac74f8f42fc929e15f56da6a/finding/60baffd3f9042e38640f2300d5c5a631',
+                         'CreatedAt': '2020-11-25T13:46:37.960Z',
+                         'Description': 'An API was used to access a bucket from an IP address on a custom threat list.',
+                         'Id': '60baffd3f9042e38640f2300d5c5a631', 'Partition': 'aws', 'Region': 'us-west-2',
+                         'Resource': {'AccessKeyDetails': {'AccessKeyId': 'GeneratedFindingAccessKeyId',
+                                                           'PrincipalId': 'GeneratedFindingPrincipalId',
+                                                           'UserName': 'GeneratedFindingUserName',
+                                                           'UserType': 'IAMUser'}, 'S3BucketDetails': [
+                             {'Arn': 'arn:aws:s3:::bucketName', 'Name': 'bucketName', 'Type': 'Destination',
+                              'CreatedAt': '2017-12-18 15:58:11', 'Owner': {'Id': 'CanonicalId of Owner'},
+                              'Tags': [{'Key': 'foo', 'Value': 'bar'}],
+                              'DefaultServerSideEncryption': {'EncryptionType': 'SSEAlgorithm',
+                                                              'KmsMasterKeyArn': 'arn:aws:kms:region:123456789012:key/key-id'},
+                              'PublicAccess': {'PermissionConfiguration': {'BucketLevelPermissions': {
+                                  'AccessControlList': {'AllowsPublicReadAccess': False,
+                                                        'AllowsPublicWriteAccess': False},
+                                  'BucketPolicy': {'AllowsPublicReadAccess': False, 'AllowsPublicWriteAccess': False},
+                                  'BlockPublicAccess': {'IgnorePublicAcls': False, 'RestrictPublicBuckets': False,
+                                                        'BlockPublicAcls': False, 'BlockPublicPolicy': False}},
+                                                                           'AccountLevelPermissions': {
+                                                                               'BlockPublicAccess': {
+                                                                                   'IgnorePublicAcls': False,
+                                                                                   'RestrictPublicBuckets': False,
+                                                                                   'BlockPublicAcls': False,
+                                                                                   'BlockPublicPolicy': False}}},
+                                               'EffectivePermission': 'NOT_PUBLIC'}}],
+                                      'InstanceDetails': {'AvailabilityZone': 'GeneratedFindingInstaceAvailabilityZone',
+                                                          'IamInstanceProfile': {
+                                                              'Arn': 'arn:aws:iam::834299573936:example/instance/profile',
+                                                              'Id': 'GeneratedFindingInstanceProfileId'},
+                                                          'ImageDescription': 'GeneratedFindingInstaceImageDescription',
+                                                          'ImageId': 'ami-99999999', 'InstanceId': 'i-99999999',
+                                                          'InstanceState': 'running', 'InstanceType': 'm3.xlarge',
+                                                          'OutpostArn': 'arn:aws:outposts:us-west-2:123456789000:outpost/op-0fbc006e9abbc73c3',
+                                                          'LaunchTime': '2016-08-02T02:05:06Z', 'NetworkInterfaces': [
+                                              {'Ipv6Addresses': [], 'NetworkInterfaceId': 'eni-bfcffe88',
+                                               'PrivateDnsName': 'GeneratedFindingPrivateDnsName',
+                                               'PrivateIpAddress': '10.0.0.1', 'PrivateIpAddresses': [
+                                                  {'PrivateDnsName': 'GeneratedFindingPrivateName',
+                                                   'PrivateIpAddress': '10.0.0.1'}],
+                                               'PublicDnsName': 'GeneratedFindingPublicDNSName',
+                                               'PublicIp': '198.51.100.0', 'SecurityGroups': [
+                                                  {'GroupId': 'GeneratedFindingSecurityId',
+                                                   'GroupName': 'GeneratedFindingSecurityGroupName'}],
+                                               'SubnetId': 'GeneratedFindingSubnetId',
+                                               'VpcId': 'GeneratedFindingVPCId'}], 'ProductCodes': [{}], 'Tags': [
+                                              {'Key': 'GeneratedFindingInstaceTag1',
+                                               'Value': 'GeneratedFindingInstaceValue1'},
+                                              {'Key': 'GeneratedFindingInstaceTag2',
+                                               'Value': 'GeneratedFindingInstaceTagValue2'},
+                                              {'Key': 'GeneratedFindingInstaceTag3',
+                                               'Value': 'GeneratedFindingInstaceTagValue3'},
+                                              {'Key': 'GeneratedFindingInstaceTag4',
+                                               'Value': 'GeneratedFindingInstaceTagValue4'},
+                                              {'Key': 'GeneratedFindingInstaceTag5',
+                                               'Value': 'GeneratedFindingInstaceTagValue5'},
+                                              {'Key': 'GeneratedFindingInstaceTag6',
+                                               'Value': 'GeneratedFindingInstaceTagValue6'},
+                                              {'Key': 'GeneratedFindingInstaceTag7',
+                                               'Value': 'GeneratedFindingInstaceTagValue7'},
+                                              {'Key': 'GeneratedFindingInstaceTag8',
+                                               'Value': 'GeneratedFindingInstaceTagValue8'},
+                                              {'Key': 'GeneratedFindingInstaceTag9',
+                                               'Value': 'GeneratedFindingInstaceTagValue9'}]},
+                                      'ResourceType': 'S3Bucket'}, 'SchemaVersion': '2.0', 'Service': {
+                    'Action': {'ActionType': 'AWS_API_CALL',
+                               'AwsApiCallAction': {'Api': 'GeneratedFindingAPIName', 'CallerType': 'Remote IP',
+                                                    'RemoteIpDetails': {
+                                                        'City': {'CityName': 'GeneratedFindingCityName'},
+                                                        'Country': {'CountryName': 'GeneratedFindingCountryName'},
+                                                        'GeoLocation': {'Lat': 0, 'Lon': 0},
+                                                        'IpAddressV4': '198.51.100.0', 'Organization': {'Asn': '-1',
+                                                                                                        'AsnOrg': 'GeneratedFindingASNOrg',
+                                                                                                        'Isp': 'GeneratedFindingISP',
+                                                                                                        'Org': 'GeneratedFindingORG'}},
+                                                    'ServiceName': 'GeneratedFindingAPIServiceName'}},
+                    'Archived': False, 'Count': 4, 'DetectorId': 'f2baedb0ac74f8f42fc929e15f56da6a',
+                    'EventFirstSeen': '2020-11-25T13:46:37.960Z', 'EventLastSeen': '2020-11-26T15:18:12.620Z',
+                    'ResourceRole': 'TARGET', 'ServiceName': 'guardduty'}, 'Severity': 2,
+                         'Title': 'API GeneratedFindingAPIName was invoked from an IP address on a custom threat list.',
+                         'Type': 'UnauthorizedAccess:S3/MaliciousIPCaller.Custom',
+                         'UpdatedAt': '2020-11-26T15:18:12.620Z'}, 'payload': {
+                'name': 'AWS GuardDuty: API GeneratedFindingAPIName was invoked from an IP address on a custom threat list.',
+                'description': {'format': 'text',
+                                'content': 'An API was used to access a bucket from an IP address on a custom threat list.'},
+                'discovered_date': '2020-11-25T13:46:37.960Z', 'severity_code': 'Low',
+                'properties': {'aws_guardduty_finding_id': '60baffd3f9042e38640f2300d5c5a631',
+                               'aws_guardduty_finding_arn': 'arn:aws:guardduty:us-west-2:834299573936:detector/f2baedb0ac74f8f42fc929e15f56da6a/finding/60baffd3f9042e38640f2300d5c5a631',
+                               'aws_guardduty_finding_type': 'UnauthorizedAccess:S3/MaliciousIPCaller.Custom',
+                               'aws_guardduty_finding_updated_at': '2020-11-26T15:18:12.620Z',
+                               'aws_guardduty_region': 'us-west-2', 'aws_guardduty_resource_type': 'S3Bucket',
+                               'aws_guardduty_count': 4,
+                               'aws_guardduty_detector_id': 'f2baedb0ac74f8f42fc929e15f56da6a'}, 'artifacts': [
+                    {'type': {'name': 'aws_iam_access_key_id'}, 'description': {'format': 'text',
+                                                                                'content': "'AWS IAM Access Key ID' extracted from GuardDuty from finding property 'AccessKeyId' at path '['Resource', 'AccessKeyDetails']'."},
+                     'value': 'GeneratedFindingAccessKeyId'}, {'type': {'name': 'aws_iam_user_name'},
+                                                               'description': {'format': 'text',
+                                                                               'content': "'AWS IAM User Name' extracted from GuardDuty from finding property 'UserName' at path '['Resource', 'AccessKeyDetails']'."},
+                                                               'value': 'GeneratedFindingUserName'},
+                    {'type': {'name': 'IP Address'}, 'description': {'format': 'text',
+                                                                     'content': "'IP Address' extracted from GuardDuty from finding property 'IpAddressV4' at path '['Service', 'Action', 'AwsApiCallAction', 'RemoteIpDetails']'."},
+                     'value': '198.51.100.0'}, {'type': {'name': 'IP Address'}, 'description': {'format': 'text',
+                                                                                                'content': "'IP Address' extracted from GuardDuty from finding property 'PrivateIpAddress' at path '['Resource', 'InstanceDetails', 'NetworkInterfaces', 0]'."},
+                                                'value': '10.0.0.1'}, {'type': {'name': 'DNS Name'},
+                                                                       'description': {'format': 'text',
+                                                                                       'content': "'DNS Name' extracted from GuardDuty from finding property 'PublicDnsName' at path '['Resource', 'InstanceDetails', 'NetworkInterfaces', 0]'."},
+                                                                       'value': 'GeneratedFindingPublicDNSName'},
+                    {'type': {'name': 'DNS Name'}, 'description': {'format': 'text',
+                                                                   'content': "'DNS Name' extracted from GuardDuty from finding property 'PrivateDnsName' at path '['Resource', 'InstanceDetails', 'NetworkInterfaces', 0]'."},
+                     'value': 'GeneratedFindingPrivateDnsName'}, {'type': {'name': 'DNS Name'},
+                                                                  'description': {'format': 'text',
+                                                                                  'content': "'DNS Name' extracted from GuardDuty from finding property 'PrivateDnsName' at path '['Resource', 'InstanceDetails', 'NetworkInterfaces', 0, 'PrivateIpAddresses', 0]'."},
+                                                                  'value': 'GeneratedFindingPrivateName'}],
+                'comments': [{'text': {'format': 'text',
+                                       'content': "AWS GuardDuty finding Payload:\n{   'AccountId': '834299573936',\n    'Arn': 'arn:aws:guardduty:us-west-2:834299573936:detector/f2baedb0ac74f8f42fc929e15f56da6a/finding/60baffd3f9042e38640f2300d5c5a631',\n    'CreatedAt': '2020-11-25T13:46:37.960Z',\n    'Description': 'An API was used to access a bucket from an IP address on a '\n                   'custom threat list.',\n    'Id': '60baffd3f9042e38640f2300d5c5a631',\n    'Partition': 'aws',\n    'Region': 'us-west-2',\n    'Resource': {   'AccessKeyDetails': {   'AccessKeyId': 'GeneratedFindingAccessKeyId',\n                                            'PrincipalId': 'GeneratedFindingPrincipalId',\n                                            'UserName': 'GeneratedFindingUserName',\n                                            'UserType': 'IAMUser'},\n                    'InstanceDetails': {   'AvailabilityZone': 'GeneratedFindingInstaceAvailabilityZone',\n                                           'IamInstanceProfile': {   'Arn': 'arn:aws:iam::834299573936:example/instance/profile',\n                                                                     'Id': 'GeneratedFindingInstanceProfileId'},\n                                           'ImageDescription': 'GeneratedFindingInstaceImageDescription',\n                                           'ImageId': 'ami-99999999',\n                                           'InstanceId': 'i-99999999',\n                                           'InstanceState': 'running',\n                                           'InstanceType': 'm3.xlarge',\n                                           'LaunchTime': '2016-08-02T02:05:06Z',\n                                           'NetworkInterfaces': [   {   'Ipv6Addresses': [   ],\n                                                                        'NetworkInterfaceId': 'eni-bfcffe88',\n                                                                        'PrivateDnsName': 'GeneratedFindingPrivateDnsName',\n                                                                        'PrivateIpAddress': '10.0.0.1',\n                                                                        'PrivateIpAddresses': [   {   'PrivateDnsName': 'GeneratedFindingPrivateName',\n                                                                                                      'PrivateIpAddress': '10.0.0.1'}],\n                                                                        'PublicDnsName': 'GeneratedFindingPublicDNSName',\n                                                                        'PublicIp': '198.51.100.0',\n                                                                        'SecurityGroups': [   {   'GroupId': 'GeneratedFindingSecurityId',\n                                                                                                  'GroupName': 'GeneratedFindingSecurityGroupName'}],\n                                                                        'SubnetId': 'GeneratedFindingSubnetId',\n                                                                        'VpcId': 'GeneratedFindingVPCId'}],\n                                           'OutpostArn': 'arn:aws:outposts:us-west-2:123456789000:outpost/op-0fbc006e9abbc73c3',\n                                           'ProductCodes': [{}],\n                                           'Tags': [   {   'Key': 'GeneratedFindingInstaceTag1',\n                                                           'Value': 'GeneratedFindingInstaceValue1'},\n                                                       {   'Key': 'GeneratedFindingInstaceTag2',\n                                                           'Value': 'GeneratedFindingInstaceTagValue2'},\n                                                       {   'Key': 'GeneratedFindingInstaceTag3',\n                                                           'Value': 'GeneratedFindingInstaceTagValue3'},\n                                                       {   'Key': 'GeneratedFindingInstaceTag4',\n                                                           'Value': 'GeneratedFindingInstaceTagValue4'},\n                                                       {   'Key': 'GeneratedFindingInstaceTag5',\n                                                           'Value': 'GeneratedFindingInstaceTagValue5'},\n                                                       {   'Key': 'GeneratedFindingInstaceTag6',\n                                                           'Value': 'GeneratedFindingInstaceTagValue6'},\n                                                       {   'Key': 'GeneratedFindingInstaceTag7',\n                                                           'Value': 'GeneratedFindingInstaceTagValue7'},\n                                                       {   'Key': 'GeneratedFindingInstaceTag8',\n                                                           'Value': 'GeneratedFindingInstaceTagValue8'},\n                                                       {   'Key': 'GeneratedFindingInstaceTag9',\n                                                           'Value': 'GeneratedFindingInstaceTagValue9'}]},\n                    'ResourceType': 'S3Bucket',\n                    'S3BucketDetails': [   {   'Arn': 'arn:aws:s3:::bucketName',\n                                               'CreatedAt': '2017-12-18 '\n                                                            '15:58:11',\n                                               'DefaultServerSideEncryption': {   'EncryptionType': 'SSEAlgorithm',\n                                                                                  'KmsMasterKeyArn': 'arn:aws:kms:region:123456789012:key/key-id'},\n                                               'Name': 'bucketName',\n                                               'Owner': {   'Id': 'CanonicalId '\n                                                                  'of Owner'},\n                                               'PublicAccess': {   'EffectivePermission': 'NOT_PUBLIC',\n                                                                   'PermissionConfiguration': {   'AccountLevelPermissions': {   'BlockPublicAccess': {   'BlockPublicAcls': False,\n                                                                                                                                                          'BlockPublicPolicy': False,\n                                                                                                                                                          'IgnorePublicAcls': False,\n                                                                                                                                                          'RestrictPublicBuckets': False}},\n                                                                                                  'BucketLevelPermissions': {   'AccessControlList': {   'AllowsPublicReadAccess': False,\n                                                                                                                                                         'AllowsPublicWriteAccess': False},\n                                                                                                                                'BlockPublicAccess': {   'BlockPublicAcls': False,\n                                                                                                                                                         'BlockPublicPolicy': False,\n                                                                                                                                                         'IgnorePublicAcls': False,\n                                                                                                                                                         'RestrictPublicBuckets': False},\n                                                                                                                                'BucketPolicy': {   'AllowsPublicReadAccess': False,\n                                                                                                                                                    'AllowsPublicWriteAccess': False}}}},\n                                               'Tags': [   {   'Key': 'foo',\n                                                               'Value': 'bar'}],\n                                               'Type': 'Destination'}]},\n    'SchemaVersion': '2.0',\n    'Service': {   'Action': {   'ActionType': 'AWS_API_CALL',\n                                 'AwsApiCallAction': {   'Api': 'GeneratedFindingAPIName',\n                                                         'CallerType': 'Remote '\n                                                                       'IP',\n                                                         'RemoteIpDetails': {   'City': {   'CityName': 'GeneratedFindingCityName'},\n                                                                                'Country': {   'CountryName': 'GeneratedFindingCountryName'},\n                                                                                'GeoLocation': {   'Lat': 0,\n                                                                                                   'Lon': 0},\n                                                                                'IpAddressV4': '198.51.100.0',\n                                                                                'Organization': {   'Asn': '-1',\n                                                                                                    'AsnOrg': 'GeneratedFindingASNOrg',\n                                                                                                    'Isp': 'GeneratedFindingISP',\n                                                                                                    'Org': 'GeneratedFindingORG'}},\n                                                         'ServiceName': 'GeneratedFindingAPIServiceName'}},\n                   'Archived': False,\n                   'Count': 4,\n                   'DetectorId': 'f2baedb0ac74f8f42fc929e15f56da6a',\n                   'EventFirstSeen': '2020-11-25T13:46:37.960Z',\n                   'EventLastSeen': '2020-11-26T15:18:12.620Z',\n                   'ResourceRole': 'TARGET',\n                   'ServiceName': 'guardduty'},\n    'Severity': 2,\n    'Title': 'API GeneratedFindingAPIName was invoked from an IP address on a '\n             'custom threat list.',\n    'Type': 'UnauthorizedAccess:S3/MaliciousIPCaller.Custom',\n    'UpdatedAt': '2020-11-26T15:18:12.620Z'}"}}]},
+             'data_tables': {'gd_action_details': [{'cells': {'action_type': {'value': 'AWS_API_CALL'},
+                                                              'action_api': {'value': 'GeneratedFindingAPIName'},
+                                                              'event_first_seen': {'value': '2020-11-25T13:46:37.960Z'},
+                                                              'event_last_seen': {'value': '2020-11-26T15:18:12.620Z'},
+                                                              'actor_caller_type': {'value': 'Remote IP'},
+                                                              'city_name': {'value': 'GeneratedFindingCityName'},
+                                                              'country_name': {'value': 'GeneratedFindingCountryName'},
+                                                              'asn': {'value': '-1'},
+                                                              'asn_org': {'value': 'GeneratedFindingASNOrg'},
+                                                              'isp': {'value': 'GeneratedFindingISP'},
+                                                              'org': {'value': 'GeneratedFindingORG'},
+                                                              'action_service_name': {
+                                                                  'value': 'GeneratedFindingAPIServiceName'},
+                                                              'remote_ip': {'value': '198.51.100.0'}}}],
+                             'gd_resource_affected': [{'cells': {'resource_type': {'value': 'S3Bucket'},
+                                                                 'instance_id': {'value': 'i-99999999'},
+                                                                 'instance_type': {'value': 'm3.xlarge'},
+                                                                 'instance_state': {'value': 'running'},
+                                                                 'resource_role': {'value': 'TARGET'},
+                                                                 'instance_private_ip': {'value': '10.0.0.1'},
+                                                                 'instance_private_dns': {
+                                                                     'value': 'GeneratedFindingPrivateName'},
+                                                                 'instance_public_ip': {'value': '198.51.100.0'},
+                                                                 'instance_public_dns': {
+                                                                     'value': 'GeneratedFindingPublicDNSName'},
+                                                                 's3bucket_name': {'value': 'bucketName'},
+                                                                 's3bucket_owner': {
+                                                                     'value': 'CanonicalId of Owner'}}}]}}
+        )
+    }
+    return response[type]
+
+## Mock results - Expected results before updates/filters applied.
+def get_mocked_finding_data(type):
+    response = {
+        "replace_datetime_finding":({"Severity": 7,
+                             "CreatedAt": datetime.datetime(2017, 12, 18, 15, 58, 11, 551000, tzinfo=tzlocal()),
+                             "Dates": [{'TestDate': datetime.datetime(2017, 10, 16, 13, 56, 10, 551000, tzinfo=tzlocal())}],
+                             "OtherDates": {'TestDate2': datetime.datetime(2016, 10, 16, 13, 56, 10, 551000, tzinfo=tzlocal())}
+                             }
+        ),
+    }
+    return response[type]
+
 # Mocked resilient for standalone tests.
 def get_resilient_responses(op):
     response = {
@@ -448,10 +729,18 @@ def get_resilient_responses(op):
              'id': 2239, 'sequence_code': None, 'discovered_date': 1606311997960, 'due_date': None,
              'create_date': 1610391036688, 'owner_id': 4, 'severity_code': 100, 'plan_status': 'A'}
         ),
-        "add_datatables": (
-
+        "find_resilient_artifacts_for_incident_with_artifacts": ({
+                'GeneratedFindingPrivateName': 'DNS Name',
+                '10.0.0.1': 'IP Address',
+                'GeneratedFindingPublicDNSName': 'DNS Name',
+                'GeneratedFindingAccessKeyId': 'AWS IAM Access Key ID',
+                '198.51.100.0': 'IP Address',
+                'GeneratedFindingUserName': 'AWS IAM User Name',
+                'GeneratedFindingPrivateDnsName': 'DNS Name'
+        }),
+        "find_resilient_artifacts_for_incident_no_artifacts": (
+            {}
         )
-
     }
     return response[op]
 
@@ -470,7 +759,8 @@ def get_function_params(op):
                                'aws_guardduty_finding_updated_at': '2020-11-26T15:18:12.620Z',
                                'aws_guardduty_region': 'us-west-2', 'aws_guardduty_resource_type': 'S3Bucket',
                                'aws_guardduty_count': 4,
-                               'aws_guardduty_detector_id': 'f2baedb0ac74f8f42fc929e15f56da6a'}, 'artifacts': [
+                               'aws_guardduty_detector_id': 'f2baedb0ac74f8f42fc929e15f56da6a'},
+                'artifacts': [
                 {'type': {'name': 'aws_iam_access_key_id'}, 'description': {'format': 'text',
                                                                             'content': "'AWS IAM Access Key ID' extracted from GuardDuty from finding property 'AccessKeyId' at path '['Resource', 'AccessKeyDetails']'."},
                  'value': 'GeneratedFindingAccessKeyId'}, {'type': {'name': 'aws_iam_user_name'},
@@ -589,7 +879,10 @@ def mocked_gd_client(*args, **kwargs):
             if op == "list_findings":
                 return get_cli_raw_responses("list_findings")["FindingIds"]
             if op == "get_findings":
-                return get_cli_raw_responses("get_findings")["Findings"]
+                if "60baffd3f9042e38640f2300d5c5a630" in kwargs["FindingIds"]:
+                    return []
+                else:
+                    return get_cli_raw_responses("get_findings")["Findings"]
     return MockResponse(*args, **kwargs)
 
 def mocked_ResSvc(*args, **kwargs):
@@ -607,7 +900,11 @@ def mocked_ResSvc(*args, **kwargs):
             return get_resilient_responses("create_incident")
         def add_datatables(self, i_payload):
             return
-
+        def find_resilient_artifacts_for_incident(self, incident_id):
+            if  incident_id == 1:
+                return get_resilient_responses("find_resilient_artifacts_for_incident_with_artifacts")
+            else:
+                return get_resilient_responses("find_resilient_artifacts_for_incident_no_artifacts")
     return MockResponse(*args, **kwargs)
 
 def get_mock_config():

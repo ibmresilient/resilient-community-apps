@@ -23,7 +23,8 @@ def get_opt(**settings):
             "aws_gd_regions": ".*",
         },
         "email": "a@b.com",
-        "password": "password"
+        "password": "password",
+        "pytest_poller": True,
     }
     for key, value in settings.items():
         if value:
