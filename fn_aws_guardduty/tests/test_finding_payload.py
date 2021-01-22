@@ -8,12 +8,14 @@ from threading import Thread
 from mock import patch, MagicMock
 import pytest
 from fn_aws_guardduty.lib.aws_gd_poller import *
+from fn_aws_guardduty.util import const
 import fn_aws_guardduty.util.config as config
 from .mock_artifacts import *
 LOG = logging.getLogger(__name__)
 """
 Suite of tests to test finding paylaod class
 """
+time_stamp = "2021-01-22 15:45:26"
 def get_config(**settings):
     config = {
         "aws_gd_access_key_id":    "AKAABBCCDDEEFFGGHH12",
@@ -37,6 +39,7 @@ def assert_attribs_in(json_obj, *attribs):
 
 class TestParseFinding:
     """Test ParseFinding class"""
+
     mock_inputs_1 = {
         "finding": get_cli_raw_responses("get_findings")["Findings"][0],
         "refresh": False,
@@ -76,6 +79,9 @@ class TestParseFinding:
         result =  ParseFinding(**mock_inputs)
         assert_attribs_in(result, *expected_attribs)
         assert sorted(result.payload) == sorted(expected_results_1)
+        for table_id in const.DATA_TABLE_IDS:
+            assert "query_execution_date" in result.data_tables[table_id][0]["cells"]
+            result.data_tables[table_id][0]["cells"]["query_execution_date"] = time_stamp
         assert result.data_tables == expected_results_2
 
     @pytest.mark.parametrize("finding, expected_results", [

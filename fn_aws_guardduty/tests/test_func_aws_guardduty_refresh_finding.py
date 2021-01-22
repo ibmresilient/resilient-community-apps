@@ -56,11 +56,12 @@ def call_func_aws_guardduty_refresh_finding_function(circuits, function_params, 
 
 class TestFuncAwsGuarddutyRefreshFinding:
     """ Tests for the func_aws_guardduty_refresh_finding function"""
-
+    time_stamp = "2021-01-22 15:35:48"
     def test_function_definition(self):
         """ Test that the package provides customization_data that defines the function """
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
+
     # Test Case where finding id not found.
     mock_inputs_1 = {
         "aws_gd_finding_id": "60baffd3f9042e38640f2300d5c5a630",
@@ -95,7 +96,7 @@ class TestFuncAwsGuarddutyRefreshFinding:
     def test_success(self, mock_cli, mock_res, circuits_app, mock_inputs, expected_results_1, expected_results_2):
         """ Test calling with sample values for the parameters """
         keys = ["content", "inputs", "metrics", "raw", "reason", "success", "version"]
-        keys_content = ["finding", "payload", "data_tables"]
+        keys_content = ["finding", "payload", "data_tables", "timestamp"]
         keys_payload = ["name", "description", "discovered_date", "severity_code", "properties",
                         "artifacts", "comments"]
 
