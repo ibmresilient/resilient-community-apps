@@ -79,4 +79,15 @@ class TestResilientService:
         res_svc = ResSvc(get_opt(), get_config())
         assert isinstance(res_svc, (ResSvc, ResilientComponent))
         result = res_svc.find_resilient_artifacts_for_incident(incident_id)
-        assert result is None
+        assert isinstance(result, dict)
+        assert not result
+
+    @patch('fn_aws_guardduty.lib.resilient_service.ResilientComponent.rest_client', side_effect=MagicMock)
+    @pytest.mark.parametrize("incident_id, note, tables, expected_results", [
+        (2000, get_function_params("tables"), None,  None)
+    ])
+    def test_add_comment(self, mock_res, incident_id, note, tables, expected_results):
+        res_svc = ResSvc(get_opt(), get_config())
+        assert isinstance(res_svc, (ResSvc, ResilientComponent))
+        result = res_svc.add_comment(incident_id, note)
+        assert isinstance(result, MagicMock)

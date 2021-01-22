@@ -3,7 +3,8 @@
 # pragma pylint: disable=unused-argument, no-self-use
 """ Test AWS GuardDuty refresh finding function. """
 import pytest
-from mock import patch, MagicMock
+from mock import patch
+from sys import version_info
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 from pytest_resilient_circuits.mocks import BasicResilientMock
@@ -60,7 +61,7 @@ class TestFuncAwsGuarddutyRefreshFinding:
         """ Test that the package provides customization_data that defines the function """
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
-
+    # Test Case where finding id not found.
     mock_inputs_1 = {
         "aws_gd_finding_id": "60baffd3f9042e38640f2300d5c5a630",
         "aws_gd_detector_id": "f2baedb0ac74f8f42fc929e15f56da6a",
@@ -71,6 +72,7 @@ class TestFuncAwsGuarddutyRefreshFinding:
     expected_results_1_1 = {}
     expected_results_1_2 = get_mocked_results("refresh_finding_with_artifacts")
 
+    # Test Case where finding id exists.
     mock_inputs_2 = {
         "aws_gd_finding_id": "60baffd3f9042e38640f2300d5c5a631",
         "aws_gd_detector_id": "f2baedb0ac74f8f42fc929e15f56da6a",
@@ -79,7 +81,10 @@ class TestFuncAwsGuarddutyRefreshFinding:
     }
 
     expected_results_2_1 = get_mocked_results("refresh_finding_to_json")
-    expected_results_2_2 = get_mocked_results("refresh_finding_no_artifacts")
+    if version_info.major == 2:
+        expected_results_2_2 = get_mocked_results("refresh_finding_no_artifacts_py2")
+    else:
+        expected_results_2_2 = get_mocked_results("refresh_finding_no_artifacts")
 
     @patch('fn_aws_guardduty.components.func_aws_guardduty_refresh_finding.ResSvc', side_effect=mocked_ResSvc)
     @patch('fn_aws_guardduty.components.func_aws_guardduty_refresh_finding.AwsGdClient', side_effect=mocked_gd_client)
@@ -96,9 +101,9 @@ class TestFuncAwsGuarddutyRefreshFinding:
 
         results = call_func_aws_guardduty_refresh_finding_function(circuits_app, mock_inputs)
         assert_keys_in(results, *keys)
-        assert results["content"] == expected_results_1
+        assert sorted(results["content"]) == sorted(expected_results_1)
         content = results["content"]
         if content:
             assert_keys_in(content, *keys_content)
             assert_keys_in(content["payload"], *keys_payload)
-            assert content["payload"]["artifacts"] ==  expected_results_2
+            assert content["payload"] ==  expected_results_2

@@ -2,6 +2,7 @@
 # (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 """ Test AWS GuardDuty poller class. """
+import sys
 from threading import Thread
 
 from mock import patch, MagicMock
@@ -74,7 +75,7 @@ class TestParseFinding:
     def test_make_create_object(self, mock_inputs, expected_results_1, expected_results_2, expected_attribs):
         result =  ParseFinding(**mock_inputs)
         assert_attribs_in(result, *expected_attribs)
-        assert result.payload == expected_results_1
+        assert sorted(result.payload) == sorted(expected_results_1)
         assert result.data_tables == expected_results_2
 
     @pytest.mark.parametrize("finding, expected_results", [
@@ -210,14 +211,17 @@ class TestParseFinding:
         for artifact in artifacts:
             assert_keys_in(artifact, *keys)
 
-    @pytest.mark.parametrize("finding, expected_results", [
-        (get_cli_raw_responses("get_findings")["Findings"][0], ["text","AWS GuardDuty finding Payload:"])
+    @pytest.mark.parametrize("finding, refresh, expected_results", [
+        (get_cli_raw_responses("get_findings")["Findings"][0], True, ["text","AWS GuardDuty finding Payload for refresh:"]),
+        (get_cli_raw_responses("get_findings")["Findings"][0], False, ["text", "AWS GuardDuty finding Payload:"])
+
     ])
-    def test_add_note_to_payload(self, finding, expected_results):
+    def test_add_note_to_payload(self, finding, refresh, expected_results):
 
         finding_payload = ParseFinding({"Severity": 7})
         finding_payload.finding = finding_payload.replace_datetime(finding)
         finding_payload.payload = {}
+        finding_payload.refresh = refresh
 
         finding_payload.add_note_to_payload()
         assert "comments" in finding_payload.payload
@@ -278,3 +282,20 @@ class TestParseFinding:
         assert_keys_in(result, *keys)
         for key in keys:
             assert isinstance(result[key], dict)
+
+    @pytest.mark.skipif(sys.version_info.major != 2 , reason="requires python2")
+    @pytest.mark.parametrize("finding, expected_results", [
+        (get_mocked_finding_data("convert_unicode_finding"), None)
+    ])
+    def test_convert_unicode(self, finding, expected_results):
+
+        finding_payload = ParseFinding({"Severity": 7})
+        finding_payload.finding = finding
+
+        assert isinstance(finding["CreatedAt"], unicode)
+        assert isinstance(finding["Dates"][0]["TestDate"], unicode)
+        assert isinstance(finding["OtherDates"]["TestDate2"], unicode)
+        finding = finding_payload.convert_unicode(finding)
+        assert isinstance(finding["CreatedAt"], str)
+        assert isinstance(finding["Dates"][0]["TestDate"], str)
+        assert isinstance(finding["OtherDates"]["TestDate2"], str)
