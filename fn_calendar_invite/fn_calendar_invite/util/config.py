@@ -16,5 +16,7 @@ email_password=l33t
 email_nickname=Resilient Meeting Organizer
 email_host=mail.example.com
 email_port=25
+#http_proxy=
+#https_proxy= 
 """
     return config_data
