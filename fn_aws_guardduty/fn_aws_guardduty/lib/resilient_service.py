@@ -3,6 +3,7 @@
 # pragma pylint: disable=unused-argument, no-self-use
 """ Functions accessing Resilient """
 import logging
+import pprint
 import re
 
 from resilient_circuits import ResilientComponent
@@ -115,3 +116,21 @@ class ResSvc(ResilientComponent):
                     r_artifacts[artifact_result['value']] = artifact_type
 
         return r_artifacts
+
+    def add_comment(self, incident_id, note):
+        """
+        Add a comment to the specified Resilient Incident by ID
+
+        :param incident_id:  Incident ID from incident creation.
+        :param note: Content to be added as a note.
+        """
+        try:
+            uri = '/incidents/{}/comments'.format(incident_id)
+            resilient_client = self.rest_client()
+
+            comment_response = resilient_client.post(uri=uri, payload=note)
+
+            return comment_response
+
+        except SimpleHTTPException as ex:
+            LOG.error("Failed to add note for incident %d: %s", incident_id, ex)

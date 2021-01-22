@@ -7,6 +7,8 @@ import logging
 import pprint
 import copy
 import datetime
+from sys import version_info
+
 from fn_aws_guardduty.lib.helpers import search_json
 from fn_aws_guardduty.util import const
 
@@ -31,8 +33,8 @@ class ParseFinding():
         self.add_artifacts_to_payload()
 
         # Add finding json as a note to incident payload.
-        if self.refresh:
-            self.add_note_to_payload()
+
+        self.add_note_to_payload()
 
         # Assemble Data tables for incident
         self.build_data_tables()
@@ -196,11 +198,21 @@ class ParseFinding():
         """
         self.payload["comments"] = []
 
-        heading = "AWS GuardDuty finding Payload:\n"
+        if self.refresh:
+            heading = "AWS GuardDuty finding Payload for refresh:\n"
+        else:
+            heading = "AWS GuardDuty finding Payload:\n"
+
+        if version_info.major == 2:
+            finding = self.convert_unicode(self.finding)
+        else:
+            finding = self.finding
+
         note = {
             'format': 'text',
-            'content': '{}{}'.format(heading, pprint.pformat(self.finding, indent=4))
+            'content': '{}{}'.format(heading, pprint.pformat(finding, indent=4))
         }
+
         self.payload["comments"].append({'text': note})
 
     def build_data_tables(self):
@@ -277,6 +289,7 @@ class ParseFinding():
     def replace_datetime(self, finding):
         """ Convert in-place datetime objects returned in finding payload to strings.
 
+        :param finding: Raw GuardDuty finding json.
         """
         if isinstance(finding, (dict, list)):
             for k, v in finding.items() if isinstance(finding, dict) else enumerate(finding):
@@ -285,3 +298,27 @@ class ParseFinding():
                 self.replace_datetime(v)
 
         return finding
+
+    def convert_unicode(self, data, level=0):
+        """ Convert unicode strings in finding payload e.g. u'string' to allow pretty printing.
+
+        :param data: GuardDuty finding json data.
+        :param level: Level of recursion.
+        :return conv_finding: Converted finding json.
+        """
+        if level == 0:
+            # Ensure original finding not altered.
+            conv_finding = copy.deepcopy(self.finding)
+        else:
+            conv_finding = data
+
+        if isinstance(conv_finding, (dict, list)):
+            for k, v in conv_finding.items() if isinstance(conv_finding, dict) else enumerate(conv_finding):
+                if isinstance(k, unicode):
+                    del conv_finding[k]
+                    conv_finding[k.encode('utf-8')] = v
+                if isinstance(v, unicode):
+                    conv_finding[k] = v.encode('utf-8')
+                self.convert_unicode(v, level=level+1)
+
+        return conv_finding

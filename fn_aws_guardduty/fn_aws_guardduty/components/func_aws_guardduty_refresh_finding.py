@@ -55,7 +55,8 @@ class FunctionComponent(ResilientComponent):
             aws_gd_finding_id = kwargs.get("aws_gd_finding_id")  # text
             aws_gd_detector_id = kwargs.get("aws_gd_detector_id")  # text
             aws_gd_region = kwargs.get("aws_gd_region")  # text
-            incident_id = kwargs.get("incident_id")  # text
+            incident_id = kwargs.get("incident_id")  # number
+
 
             validate_fields(REQUIRED_FIELDS, kwargs)
 
@@ -82,13 +83,19 @@ class FunctionComponent(ResilientComponent):
 
                 # Create a object to parse finding payload.
                 finding_payload = ParseFinding(finding, refresh=True, existing_artifacts=existing_artifacts)
-
-                results = rp.done(True, finding_payload.to_json())
+                result = finding_payload.to_json()
+                note = result["payload"]["comments"].pop()
             else:
                 # No finding data returned.
-                results = rp.done(True, {})
+                result = {}
+
+            results = rp.done(True, result)
 
             yield StatusMessage("Finished 'func_aws_guardduty_refresh_finding' that was running in workflow '{0}'".format(wf_instance_id))
+
+            # Add finding json as a rich text note.
+            if result:
+                res_svc.add_comment(incident_id, note)
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

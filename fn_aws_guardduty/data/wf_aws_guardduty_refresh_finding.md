@@ -86,12 +86,9 @@ if CONTENT:
 
 def main():
     note_text = ''
-    note_json_payload = ''
     if CONTENT:
         note_text = "AWS GuardDuty Integration: Workflow <b>{0}</b>: Finding data returned for Resilient function " \
                     "<b>{2}</b>".format(WF_NAME, len(CONTENT), FN_NAME)
-        if FINDING:
-            note_json_payload = '{}{}'.format("AWS GuardDuty finding Payload for refresh:\n", FINDING)
 
         update_fields()
         update_datatables()
@@ -101,11 +98,7 @@ def main():
         note_text = "AWS GuardDuty Integration: Workflow <b>{0}</b>: No finding data returned for Resilient function " \
                     "<b>{2}</b>".format(WF_NAME, len(CONTENT), FN_NAME)
 
-
     incident.addNote(helper.createRichText(note_text))
-    if note_json_payload:
-        incident.addNote(helper.createRichText(note_json_payload))
-
 
 def update_fields():
     incident.severity_code = PAYLOAD["severity_code"]
