@@ -6,7 +6,7 @@ import json
 import logging
 import pprint
 import copy
-import datetime
+import datetime as dt
 from sys import version_info
 
 from fn_aws_guardduty.lib.helpers import search_json
@@ -14,12 +14,12 @@ from fn_aws_guardduty.util import const
 
 LOG = logging.getLogger(__name__)
 
-
 class ParseFinding():
     """Class that parses an AWS finding and generates a payload and data tables data."""
 
     def __init__(self, finding, refresh=False, existing_artifacts=None):
         """constructor """
+        self.timestamp = dt.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         self.finding = self.replace_datetime(finding)
         self.existing_artifacts = existing_artifacts if existing_artifacts else {}
         self.payload = {}
@@ -42,6 +42,7 @@ class ParseFinding():
         # Remove other unwanted object atributes after finding has been parsed.
         if not self.refresh:
             del self.finding
+
         del self.existing_artifacts
         del self.refresh
 
@@ -258,6 +259,7 @@ class ParseFinding():
         for table_id in const.DATA_TABLE_IDS:
             data_table = []
             table_row = {}
+            table_row["query_execution_date"] = {"value": self.timestamp}
             for section in const.DATA_TABLE_FIELDS_MAP[table_id]:
                 path = section["path"]
                 for key, val in section["fields"].items():
@@ -293,7 +295,7 @@ class ParseFinding():
         """
         if isinstance(finding, (dict, list)):
             for k, v in finding.items() if isinstance(finding, dict) else enumerate(finding):
-                if isinstance(v, datetime.datetime):
+                if isinstance(v, dt.datetime):
                     finding[k] = v.strftime("%Y-%m-%d %H:%M:%S")
                 self.replace_datetime(v)
 
