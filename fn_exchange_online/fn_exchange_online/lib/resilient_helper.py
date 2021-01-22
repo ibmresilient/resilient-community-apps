@@ -73,6 +73,7 @@ def get_attachment_id(rest_client, incident_id, attachment_name):
     for attachment in attachments:
         if attachment["name"] ==  attachment_name:
             id = attachment["id"]
+            break
     if not id:
         LOG.error(u"Attachment name '%s' not found on the incident! Skipping that attachment.", attachment_name)
     return id

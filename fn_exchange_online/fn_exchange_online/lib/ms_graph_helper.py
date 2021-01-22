@@ -268,9 +268,8 @@ class MSGraphHelper(object):
         :return: formatted attachment data
         """
         attachments = []
-        attachment_names = attachment_names.split(",")
+        attachment_names = [item.strip() for item in attachment_names.split(",")]
         for attachment_name in attachment_names:
-            attachment_name = attachment_name.strip()
             base64content, attachment_id = get_incident_file_attachment(resilient_client, incident_id, attachment_name)
             if not attachment_id:
                 continue
