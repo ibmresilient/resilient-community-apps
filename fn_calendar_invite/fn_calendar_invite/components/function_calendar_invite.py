@@ -11,9 +11,7 @@ import logging
 import datetime
 from resilient_circuits import ResilientComponent, function, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import validate_fields, ResultPayload
-from fn_calendar_invite.lib.calendar_invite_util import get_email_addresses, build_email_message, send_email
-
-from fn_calendar_invite.util.selftest import selftest_function
+from fn_calendar_invite.lib.calendar_invite_util import get_email_addresses, build_email_message, send_email, get_proxies
 
 CONFIG_DATA_SECTION = 'fn_calendar_invite'
 
@@ -60,6 +58,8 @@ class FunctionComponent(ResilientComponent):
             e_login = self.options.get("email_username")
             e_password = self.options.get("email_password")
 
+            timeout = 60
+
             now_utc = datetime.datetime.utcnow()
             meeting_time_utc = datetime.datetime.utcfromtimestamp(calendar_invite_datetime / 1000)
             if now_utc > meeting_time_utc:
@@ -85,7 +85,10 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Connecting to Mail Server")
 
             # Connect to SMTP server and send the message.
-            send_email(host, port, sender, e_login, e_password, attendees, email_message_string)
+            proxies = get_proxies(self.opts, self.options)
+
+            send_email(host, port, proxies, timeout, sender, e_login, e_password, attendees,
+                       email_message_string)
 
             yield StatusMessage("Send Mail - Complete")
 
@@ -99,5 +102,5 @@ class FunctionComponent(ResilientComponent):
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
-        except Exception as e:
-            yield FunctionError()
+        except Exception as err:
+            yield FunctionError(err)

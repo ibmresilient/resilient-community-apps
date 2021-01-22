@@ -39,7 +39,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.0.0 | 1/2021 | App Host Support |
+| 1.2.0 | 1/2021 | App Host and Proxy Support |
 | 1.0.0 | 9/2018 | Initial Release |
 
 ---
@@ -108,7 +108,7 @@ The following Cloud Pak guides provide additional information:
 These guides are available on the IBM Knowledge Center at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs). From this web page, select your IBM Cloud Pak for Security version. From the version-specific Knowledge Center page, select Case Management and Orchestration & Automation.
 
 ### Proxy Server
-The app does not support a proxy server.
+The app supports a proxy server.
 
 ---
 
@@ -123,12 +123,13 @@ The following table provides the settings you need to configure the app. These s
 
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
-| **email_username** | Yes | `jimmy@example.com` | Calendar invitation sender email address |
+| **email_username** | Yes | `user@example.com` | Calendar invitation sender email address |
 | **email_password** | Yes | `xxxx` | Password of sender's email account  |
 | **email_nickname** | Yes | `Resilient Meeting Organizer` | Calendar invite sender nickname |
 | **email_host** | Yes | `smtp.gmail.com` | Email server |
 | **email_port** | Yes | `587` | Email server port |
-
+| **http_proxy** | No | http://user:password@x.x.x.x:3128 | http proxy |
+| **https_proxy** | No | http://user:password@x.x.x.x:3128 | https proxy |
 
 ---
 
