@@ -39,7 +39,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.2.0 | 1/2021 | App Host and Proxy Support |
+| 1.1.0 | 1/2021 | App Host and Proxy Support |
 | 1.0.0 | 9/2018 | Initial Release |
 
 ---
