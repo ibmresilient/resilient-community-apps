@@ -38,7 +38,7 @@ read_all_incidents
 #edit_group
 #create_users
 #edit_users
-#read_users
+read_users
 #
 ## workflow permissions - needed when using workflow_id
 #read_workflow
