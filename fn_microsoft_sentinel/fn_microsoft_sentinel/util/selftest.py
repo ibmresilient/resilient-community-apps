@@ -9,7 +9,8 @@ Usage: resilient-circuits selftest -l fn_microsoft_sentinel
 
 import logging
 from resilient_lib import validate_fields, IntegrationError
-from fn_microsoft_sentinel.lib.sentinel_common import SentinelAPI, PACKAGE_NAME
+from fn_microsoft_sentinel.lib.function_common import PACKAGE_NAME
+from fn_microsoft_sentinel.lib.sentinel_common import SentinelAPI
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
