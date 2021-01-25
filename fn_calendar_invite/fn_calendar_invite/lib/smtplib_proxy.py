@@ -30,7 +30,7 @@ class ProxySMTP(smtplib.SMTP):
     For additional information see smtplib.py
     """
 
-    def __init__(self, host='', port=0, proxy_host='', proxy_port=0, proxy_username=None, proxy_password=None,
+    def __init__(self, host='', port=0, proxy_host=None, proxy_port=None, proxy_username=None, proxy_password=None,
                  proxy_type=socks.HTTP, local_hostname=None, timeout=socket._GLOBAL_DEFAULT_TIMEOUT,
                  source_address=None):
         """Initialize a new instance.
