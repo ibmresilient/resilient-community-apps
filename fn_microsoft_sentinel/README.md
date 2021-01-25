@@ -181,8 +181,16 @@ See the section below for examples of the templates.
 
   The Sentinel fields are used to capture information specific on a Sentinel Incident, including close incident information (Classification). The datatable, Sentintel Entities, is used to capture specific entity information. Another datatable, Sentinel Comment IDs, is used for tracking purposes and need not be added to a layout.
 
+#### Sentinel Comment Sync
+
+A Rule exists to automatically link Resilient SOAR comments with Sentinel: `Sentinel Comment Sync`. 
+This rule needs to be modified to reference the user account or API Key used for app communication. 
+The screenshot below shows an added condition for the comment's `user` set to be `not equal to` the app account used. `Please make this manual change.`
+
+![screenshot: Sentinel Comment Sync ](./doc/screenshots/sync_comment.png)
 
 ---
+
  ![screenshot: fn-sentinel-get-incident-entities ](./doc/screenshots/function_list.png)
 
 ## Function - Sentinel Get Incident Entities
@@ -542,7 +550,6 @@ sentinel_incident_entities
 | Sentinel Incident URL | `sentinel_incident_url` | `textarea` | `properties` | - | Clickable link back to Sentinel and the specific incident. |
 
 ---
-
 
 ## Rules
 | Rule Name | Object | Workflow Triggered |
