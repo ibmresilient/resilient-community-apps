@@ -21,10 +21,10 @@ def codegen_reload_data():
     return {
         "package": u"fn_microsoft_sentinel",
         "message_destinations": [u"fn_microsoft_sentinel"],
-        "functions": [u"sentinel_add_incident_comment", u"sentinel_get_incident_entities", u"sentinel_get_incident_comments"],
-        "workflows": [u"sentinel_comment_sync", u"sentinel_get_incident_entities", u"sentinel_get_incident_comments"],
-        "actions": [u"Sentinel Get Incident Comments", u"Sentinel Get Incident Entities", u"Sentinel Comment Sync", u"Sentinel Incident Entity Sync"],
-        "incident_fields": [u"sentinel_profile", u"sentinel_incident_classification_reason", u"sentinel_incident_labels", u"sentinel_incident_url", u"sentinel_incident_status", u"sentinel_incident_classification_comment", u"sentinel_incident_tactics", u"sentinel_incident_classification", u"sentinel_incident_id", u"sentinel_incident_assigned_to"],
+        "functions": [u"sentinel_update_incident", u"sentinel_get_incident_entities", u"sentinel_get_incident_comments", u"sentinel_add_incident_comment"],
+        "workflows": [u"sentinel_update_incident", u"sentinel_get_incident_entities", u"sentinel_comment_sync", u"sentinel_get_incident_comments"],
+        "actions": [u"Sentinel Comment Sync", u"Sentinel Get Incident Entities", u"Sentinel Update Incident", u"Sentinel Get Incident Comments", u"Sentinel Incident Entity Sync"],
+        "incident_fields": [u"sentinel_incident_url", u"sentinel_incident_classification", u"sentinel_incident_classification_comment", u"sentinel_incident_id", u"sentinel_incident_labels", u"sentinel_incident_classification_reason", u"sentinel_incident_status", u"sentinel_profile", u"sentinel_incident_tactics", u"sentinel_incident_assigned_to"],
         "incident_artifact_types": [],
         "datatables": [u"sentinel_incident_entities", u"sentinel_comment_ids"],
         "automatic_tasks": [],
@@ -43,28 +43,31 @@ def customization_data(client=None):
     - Message Destinations:
         - fn_microsoft_sentinel
     - Functions:
-        - sentinel_add_incident_comment
+        - sentinel_update_incident
         - sentinel_get_incident_entities
         - sentinel_get_incident_comments
+        - sentinel_add_incident_comment
     - Workflows:
-        - sentinel_comment_sync
+        - sentinel_update_incident
         - sentinel_get_incident_entities
+        - sentinel_comment_sync
         - sentinel_get_incident_comments
     - Rules:
-        - Sentinel Get Incident Comments
-        - Sentinel Get Incident Entities
         - Sentinel Comment Sync
+        - Sentinel Get Incident Entities
+        - Sentinel Update Incident
+        - Sentinel Get Incident Comments
         - Sentinel Incident Entity Sync
     - Incident Fields:
-        - sentinel_profile
-        - sentinel_incident_classification_reason
-        - sentinel_incident_labels
         - sentinel_incident_url
-        - sentinel_incident_status
-        - sentinel_incident_classification_comment
-        - sentinel_incident_tactics
         - sentinel_incident_classification
+        - sentinel_incident_classification_comment
         - sentinel_incident_id
+        - sentinel_incident_labels
+        - sentinel_incident_classification_reason
+        - sentinel_incident_status
+        - sentinel_profile
+        - sentinel_incident_tactics
         - sentinel_incident_assigned_to
     - Data Tables:
         - sentinel_incident_entities

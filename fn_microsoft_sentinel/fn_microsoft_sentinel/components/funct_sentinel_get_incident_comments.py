@@ -1,15 +1,14 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
+# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
 """Function implementation"""
 
 import logging
-from fn_microsoft_sentinel.lib.sentinel_common import SentinelAPI, PACKAGE_NAME
+from fn_microsoft_sentinel.lib.function_common import PACKAGE_NAME, SentinelProfiles
+from fn_microsoft_sentinel.lib.sentinel_common import SentinelAPI
 from fn_microsoft_sentinel.lib.resilient_common import ResilientCommon
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import ResultPayload, validate_fields
-
-PACKAGE_NAME = "fn_microsoft_sentinel"
-
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'sentinel_get_incident_comments''"""
@@ -18,11 +17,13 @@ class FunctionComponent(ResilientComponent):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         self.options = opts.get(PACKAGE_NAME, {})
+        self.sentinel_profiles = SentinelProfiles(opts, self.options)
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
         self.options = opts.get(PACKAGE_NAME, {})
+        self.sentinel_profiles = SentinelProfiles(opts, self.options)
 
     @function("sentinel_get_incident_comments")
     def _sentinel_get_incident_comments_function(self, event, *args, **kwargs):
@@ -54,26 +55,12 @@ class FunctionComponent(ResilientComponent):
 
             resilient_api = ResilientCommon(self.rest_client())
 
-            result, status, reason = sentinel_api.get_comments(sentinel_incident_id,
-                                                               sentinel_profile)
-            # need to avoid creating same comments over and over
-            # this logic will read a datatable of sentinel incident comment_ids
-            #  and remove those comments which have already sync
-            # WARNING: This logic will not update an existing comment (which may have been updated)
+            profile_data = self.sentinel_profiles.get_profile(sentinel_profile)
+            result, status, reason = sentinel_api.get_comments(profile_data, sentinel_incident_id)
+
             new_comments = []
             if status:
-                # get incident comments and filter out those already sync'd
-                incident_comments = resilient_api.get_comment_datatable(incident_id)
-
-                if incident_comments:
-                    for comment in result['value']:
-                        if comment['name'] not in incident_comments:
-                            new_comments.append(comment)
-                else:
-                    new_comments = result['value']
-
-                log.info("Filtered new comments %s out of %s", len(new_comments),
-                                                               len(result['value']))
+                new_comments = resilient_api.filter_resilient_comments(incident_id, result['value'])
 
             yield StatusMessage("Finished 'sentinel_get_incident_comments'")
 

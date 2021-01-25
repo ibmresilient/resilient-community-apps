@@ -7,16 +7,13 @@ import datetime
 import logging
 import time
 import uuid
-from resilient_lib import RequestsCommon, IntegrationError, validate_fields
+from resilient_lib import RequestsCommon, IntegrationError
 from simplejson.errors import JSONDecodeError
 
-PACKAGE_NAME = "fn_microsoft_sentinel"
 INDICATOR_URL = "api/indicators"
 MACHINES_URL = "api/machines"
 FILES_URL = "api/files/{}/machines"
 ALERTS_URL = "api/alerts"
-
-REQUIRED_PROFILE_FIELDS = ["subscription_id", "workspace_name", "resource_groupname"]
 
 DEFAULT_POLLER_LOOBACK_MINUTES = 120
 
@@ -46,7 +43,12 @@ ENTITY_TYPE_LOOKUP = {
     "cloudapplication": "String",
     "dns": "DNS Name",
     "azure resource": "Service",
-    "filehash": None,
+    "filehash": {
+        "(SHA1)": "Malware SHA-1 Hash",
+        "(SHA256)": "Malware SHA-256 Hash",
+        "(MD5)": "Malware MD5 Hash",
+        "default": "Malware Sample Fuzzy Hash"
+    },
     "registry key": "Registry Key",
     "registry value": "Registry Key",
     "security group": "String",
@@ -219,12 +221,7 @@ class SentinelAPI():
         self.client_id = client_id
         self.app_secret = app_secret
 
-        self.opts = opts
-        self.options = options
-
-        self.profiles = {}
         self.access_token = None
-        self._load_profiles()
 
         # TODO
         self.test_counter = 0
@@ -268,50 +265,6 @@ class SentinelAPI():
                 .format(result_json.get("error"), result_json.get("error_description"), result_json.get("correlation_id"))
         raise IntegrationError(msg)
 
-    def _load_profiles(self):
-        """load the app.config profiles for sentinel. Each profile represents a different workspace
-             to pull incidents from.
-
-        Raises:
-            KeyError: [error when a named profile is not found in app.config]
-        """
-        sentinel_profiles = self.options["sentinel_profiles"]
-
-        # confirm all profiles are valid
-        profile_list = [item.strip() for item in sentinel_profiles.split(",")]
-        for profile in profile_list:
-            profile_name = u"{}:{}".format(PACKAGE_NAME, profile)
-            profile_data = self.opts.get(profile_name)
-            if not profile_data:
-                raise KeyError(u"Unable to find Sentinel profile: {}".format(profile_name))
-
-            # check each profile for the correct settings
-            validate_fields(REQUIRED_PROFILE_FIELDS, profile_data)
-
-            self.profiles[profile] = profile_data
-
-    def get_profile(self, profile_name):
-        """collect the settings for a Sentinel profile: subscription, resource group, workspace
-
-        Args:
-            profile_name ([str]): [name of profile in app.config]
-
-        Raises:
-            KeyError: [profile not found]
-
-        Returns:
-            [dict]: [settings for a sentinel incident environment]
-        """
-        if not profile_name in self.profiles:
-            raise KeyError(u"Unable to find profile: {}".format(profile_name))
-
-        return self.profiles[profile_name]
-
-    def get_profiles(self):
-        """
-        Return all profiles
-        """
-        return self.profiles
 
     def _make_header(self, content_type="application/json"):
         """build headers needed for API calls. It will include the Defender access token
@@ -366,20 +319,18 @@ class SentinelAPI():
 
         return result, status, reason
 
-    def get_incidents(self, profile_name):
+    def query_incidents(self, profile_data):
         """Query Sentinel for all incidents created within the last polling window. If first time,
               then use a lookback value.
 
         Args:
-            profile_name ([str]): [name of profile to query incidents]
+            profile_data ([dict]): [profile to query incidents]
 
         Returns:
             result [dict]: API results
             status [bool]: True if API call was successful
             reason [str]: Reason of error when status=False
         """
-        profile_data = self.get_profile(profile_name)
-
         url = self._get_base_payload(profile_data['subscription_id'],
                                      profile_data['resource_groupname'],
                                      profile_data['workspace_name'],
@@ -439,12 +390,12 @@ class SentinelAPI():
 
         return { "value": filtered }
 
-    def get_incident_alerts(self, sentinel_incident_id, profile_name):
+    def get_incident_alerts(self, profile_data, sentinel_incident_id):
         """Query for alerts associated with a sentinel incident
 
         Args:
-            sentinel_incident_id ([str]): [sentinel incident id]
             profile_name ([str]): [profile name with incident access parameters]
+            sentinel_incident_id ([str]): [sentinel incident id]
 
         Returns:
             [dict]: [alert list from API call]
@@ -490,8 +441,6 @@ class SentinelAPI():
             }
         }
         """
-        profile_data = self.get_profile(profile_name)
-
         relations_url = "/".join([INCIDENTS_URL, str(sentinel_incident_id),
                                   RELATIONS_URL])
 
@@ -641,52 +590,46 @@ class SentinelAPI():
 
         return last_poller_datetime
 
-    def create_incident(self, profile_name, **kwargs):
-        """create a sentinel incident. This has been used for testing purposes to seed the incident
-             list
+    def create_update_incident(self, profile_data, sentinel_incident_id, incident_payload):
+        """create or update a Sentinel incident based on a resilient incident.
 
         Args:
             profile_name ([str]): [profile to use for creating the incident]
+            sentinel_incident_id ([str]): [sentinel incident id or None for creating a new one]
+            incident_payload ([dict]): [dictionary of sentinel incident data]
 
         Returns:
             result [dict]: API results
             status [bool]: True if API call was successful
             reason [str]: Reason of error when status=False
         """
-        incident_properties = {
-            "properties": { name: kwargs[name] for name in kwargs }
-        }
-        LOG.debug(incident_properties)
+        if sentinel_incident_id is None:
+            sentinel_incident_id = make_uuid()
 
-        profile_data = self.get_profile(profile_name)
-
-        incident_url = "/".join([INCIDENTS_URL, make_uuid()])
+        incident_url = "/".join([INCIDENTS_URL, sentinel_incident_id])
 
         url = self._get_base_payload(profile_data['subscription_id'],
                                      profile_data['resource_groupname'],
                                      profile_data['workspace_name'],
                                      extra_url=incident_url)
 
-        result, status, reason = self._call(url, payload=incident_properties, oper="PUT")
+        result, status, reason = self._call(url, payload=incident_payload, oper="PUT")
 
         LOG.debug("%s:%s:%s", status, reason, result)
         return result, status, reason
 
-    def get_incident_comments(self, sentinel_incident_id, profile_name):
+    def get_incident_comments(self, profile_data, sentinel_incident_id):
         """Get all comments for a Sentinel incident
 
         Args:
-            sentinel_incident_id ([str]): [sentinel incident id]
             profile_name ([str]): [profile for incident]
+            sentinel_incident_id ([str]): [sentinel incident id]
 
         Returns:
             result [dict]: API results
             status [bool]: True if API call was successful
             reason [str]: Reason of error when status=False
         """
-        #url = "https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/comments?api-version=2020-01-01"
-        profile_data = self.get_profile(profile_name)
-
         comments_url = "/".join([INCIDENTS_URL, str(sentinel_incident_id), COMMENTS_URL])
 
         url = self._get_base_payload(profile_data['subscription_id'],
@@ -699,7 +642,7 @@ class SentinelAPI():
         LOG.debug("%s:%s:%s", status, reason, result)
         return result, status, reason
 
-    def create_comment(self, sentinel_incident_id, profile_name, note):
+    def create_comment(self, profile_data, sentinel_incident_id, note):
         """create a sentinel incident comment
 
         Args:
@@ -712,7 +655,6 @@ class SentinelAPI():
             status [bool]: True if API call was successful
             reason [str]: Reason of error when status=False
         """
-        profile_data = self.get_profile(profile_name)
         comment_url = "/".join([INCIDENTS_URL, sentinel_incident_id, COMMENTS_URL, make_uuid()])
 
         url = self._get_base_payload(profile_data['subscription_id'],
@@ -731,19 +673,18 @@ class SentinelAPI():
         LOG.debug("%s:%s:%s", status, reason, result)
         return result, status, reason
 
-    def get_comments(self, sentinel_incident_id, profile_name):
+    def get_comments(self, profile_data, sentinel_incident_id):
         """get all comments for sentinel incident
 
         Args:
-            sentinel_incident_id ([str]): [sentinel incident id]
             profile_name ([str]): [profile to use for the incident]
+            sentinel_incident_id ([str]): [sentinel incident id]
 
         Returns:
             result [dict]: API results
             status [bool]: True if API call was successful
             reason [str]: Reason of error when status=False
         """
-        profile_data = self.get_profile(profile_name)
         comment_url = "/".join([INCIDENTS_URL, sentinel_incident_id, COMMENTS_URL])
 
         url = self._get_base_payload(profile_data['subscription_id'],
@@ -841,26 +782,29 @@ def convert_date(value):
 
 
 def convert_entity_type(entity_type, entity_value):
-    """[summary]
+    """[convert entity information to artifacts. A lookup table on entity types is used]
 
     Args:
-        entity_type ([type]): [description]
+        entity_type ([str]): [description]
+        entity_value ([str]): [entity value used in part or whole as an artifact value]
 
-        sha-1 - 40
-        md5 - 32
-        sha-256 - 64
+        sha-1 - 40(MD5)
+        md5 - 32(SHA1)
+        sha-256 - 64(SHA256)
+
+    Returns:
+        artifact_type, artifact_value
     """
 
     resilient_artifact_type = ENTITY_TYPE_LOOKUP.get(entity_type.lower(), "String")
-    if not resilient_artifact_type:
-        # file hash, get length
-        if len(entity_value) in [31,32]:
-            resilient_artifact_type = "Malware MD5 Hash"
-        elif len(entity_value) == 40:
-            resilient_artifact_type = "Malware SHA-1 Hash"
-        elif len(entity_value) == 64:
-            resilient_artifact_type = "Malware SHA-256 Hash"
-        else:
-            resilient_artifact_type = "Malware Sample Fuzzy Hash"
+    if isinstance(resilient_artifact_type, dict):
+        new_value = None
+        for label in resilient_artifact_type:
+            if label in entity_value:
+                new_value = entity_value.replace(label, "")
+                return resilient_artifact_type[label], entity_value.replace(label, "")
 
-    return resilient_artifact_type
+        if not new_value:
+            return resilient_artifact_type["default"], entity_value
+
+    return resilient_artifact_type, entity_value

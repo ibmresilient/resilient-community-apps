@@ -7,7 +7,7 @@
     "sentinel_incident_status": "{{ properties.status }}",
     "sentinel_incident_classification": "{{ properties.classification }}",
     "sentinel_incident_classification_reason": "{{ properties.classificationReason }}",
-    "sentinel_incident_classification_comment": "{{ properties.classificationComment }}",
+    "sentinel_incident_classification_comment": "{{ properties.classificationComment|e }}",
     "sentinel_incident_assigned_to": "{{ properties.owner.assignedTo }}",
     "sentinel_incident_labels": "{{ properties.labels|join(' ') }}",
     "sentinel_incident_tactics": "{{ properties.additionalData.tactics|join(' ') }}"

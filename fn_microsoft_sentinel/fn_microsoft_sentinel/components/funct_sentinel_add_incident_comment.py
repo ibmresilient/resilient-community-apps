@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
+# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
 """Function implementation"""
 
 import logging
 from resilient_lib import validate_fields, ResultPayload, clean_html
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage,\
                                FunctionResult, FunctionError
-from fn_microsoft_sentinel.lib.sentinel_common import SentinelAPI, PACKAGE_NAME
-
-PACKAGE_NAME = "fn_microsoft_sentinel"
+from fn_microsoft_sentinel.lib.function_common import PACKAGE_NAME, SentinelProfiles
+from fn_microsoft_sentinel.lib.sentinel_common import SentinelAPI
 
 
 class FunctionComponent(ResilientComponent):
@@ -17,14 +17,14 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
-        self.opts = opts
         self.options = opts.get(PACKAGE_NAME, {})
+        self.sentinel_profiles = SentinelProfiles(opts, self.options)
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
-        self.opts = opts
         self.options = opts.get(PACKAGE_NAME, {})
+        self.sentinel_profiles = SentinelProfiles(opts, self.options)
 
     @function("sentinel_add_incident_comment")
     def _sentinel_add_incident_comment_function(self, event, *args, **kwargs):
@@ -53,8 +53,9 @@ class FunctionComponent(ResilientComponent):
                                        self.options['app_secret'],
                                        self.opts, self.options)
 
-            result, status, reason = sentinel_api.create_comment(sentinel_incident_id,
-                                                                 sentinel_profile,
+            profile_data = self.sentinel_profiles.get_profile(sentinel_profile)
+            result, status, reason = sentinel_api.create_comment(profile_data,
+                                                                 sentinel_incident_id,
                                                                  clean_html(sentinel_incident_comment))
             if status:
                 yield StatusMessage("Sentinel comment added to incident: {}"\

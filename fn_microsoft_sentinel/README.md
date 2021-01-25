@@ -31,6 +31,7 @@
 - [Function - Sentinel Get Incident Entities](#function---sentinel-get-incident-entities)
 - [Function - Sentinel Add Incident Comment](#function---sentinel-add-incident-comment)
 - [Function - Sentinel Get Incident Comments](#function---sentinel-get-incident-comments)
+- [Action - Update Sentinel Incident](#action---update-sentinel-incident)
 - [Data Table - Sentinel Comment IDs](#data-table---sentinel-comment-ids)
 - [Data Table - Sentinel Incident Entities](#data-table---sentinel-incident-entities)
 - [Custom Fields](#custom-fields)
@@ -164,6 +165,7 @@ For each profile:
 | **create_incident_template** | /user/path/to/create_incident_template.jinja | Customer supplied template for mapping Sentinel Incident fields to an Resilient incident. If not specified, a default template is used. |
 | **update_incident_template** | /user/path/to/update_incident_template.jinja | Customer supplied template for mapping Sentinel Incident fields to an Resilient incident. If not specified, a default template is used. |
 | **close_incident_template** | /user/path/to/close_incident_template.jinja | Customer supplied template for mapping Sentinel Incident fields to an Resilient incident. If not specified, a default template is used. This is useful when a customer customizes the fields used when closing an incident. |
+| **update_sentinel_incident_template** | /user/path/to/update_sentinel_incident_template.jinja | Customer supplied template for updating a sentinel incident when the Resilient SOAR incident is updated |
 
 See the section below for examples of the templates.
 
@@ -458,8 +460,39 @@ if results.success:
 </details>
 
 ---
+## Action - Update Sentinel Incident
+This is an action module used to synchronize changes from the Resilient SOAR incident to the 
+corresponding Sentinel incident. The default template will synchronize the follow Sentinel fields:
 
+```
+title
+description
+severity
+status
+classification
+classificationComment
+classificationReason
+labels
+```
+Changes to the synchronization fields are possible by using the app.config profile setting: `update_sentinel_incident_template` and providing a mapping table. This is the default mapping
+table:
 
+```
+{
+    {# JINJA template for updating a new Resilient incident from a Sentinel incident. #}
+    "properties": {
+        "severity": "{{ properties.sentinel_incident_status }}",
+        "status": "{{ properties.sentinel_incident_status }}",
+        "title": "{{ name|e }}",
+        "classification": "{{ properties.sentinel_incident_classification }}",
+        "classificationComment": "{{ properties.sentinel_incident_classification_comment|e }}",
+        "classificationReason": "{{ properties.sentinel_incident_classification_reason }}",
+        "description": "{{ description|e }}",
+        "labels": "{{ properties.sentinel_incident_labels }}",
+    }
+}
+```
+---
 ## Data Table - Sentinel Comment IDs
 This is a reference table of synchronized Sentinel Comment ids. It is an internal table to ensure
 comments are not synchronized more than once.

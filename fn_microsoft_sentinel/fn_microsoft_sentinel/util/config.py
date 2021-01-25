@@ -40,5 +40,6 @@ new_incident_filters="status": ["New", "Active"],"severity": ["High", "Medium","
 #create_incident_template=
 #update_incident_template=
 #close_incident_template=
+#update_sentinel_incident_template=
 """
     return config_data

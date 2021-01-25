@@ -10,8 +10,13 @@ import logging
 from circuits import Event, Timer
 from resilient_circuits import ResilientComponent, handler
 from resilient_lib import validate_fields
-from fn_microsoft_sentinel.lib.sentinel_common import SentinelAPI, PACKAGE_NAME, get_sentinel_incident_id
+from fn_microsoft_sentinel.lib.function_common import PACKAGE_NAME, SentinelProfiles,\
+        DEFAULT_INCIDENT_CREATION_TEMPLATE,\
+        DEFAULT_INCIDENT_UPDATE_TEMPLATE,\
+        DEFAULT_INCIDENT_CLOSE_TEMPLATE
+from fn_microsoft_sentinel.lib.jinja_common import JinjaEnvironment
 from fn_microsoft_sentinel.lib.resilient_common import ResilientCommon
+from fn_microsoft_sentinel.lib.sentinel_common import SentinelAPI, get_sentinel_incident_id
 
 POLLER_CHANNEL = "sentinel_poller"
 TICKET_ID_FIELDNAME = "sentinel_incident_id"
@@ -40,19 +45,23 @@ class SentinelPollerComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(SentinelPollerComponent, self).__init__(opts)
+        self.jinja_env = JinjaEnvironment()
+        self.options = opts.get(PACKAGE_NAME, {})
+        self.sentinel_profiles = SentinelProfiles(opts, self.options)
 
         self._load_options(opts)
-
-        if not self.polling_interval:
+        if self.polling_interval == 0:
             LOG.info(u"Sentinel poller interval is not configured.  Automated escalation is disabled.")
             return
 
+        #self._test_create() # TODO
         LOG.info(u"Sentinel poller initiated, polling interval %s", self.polling_interval)
         Timer(self.polling_interval, Poll(), persist=False).register(self)
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
+        self.sentinel_profiles = SentinelProfiles(opts, self.options)
         self._load_options(opts)
 
     @handler("Poll")
@@ -77,7 +86,6 @@ class SentinelPollerComponent(ResilientComponent):
         validate_fields(required_fields, self.options)
 
         self.polling_interval = int(self.options.get("polling_interval", 0))
-
         if not self.polling_interval:
             return
 
@@ -89,7 +97,8 @@ class SentinelPollerComponent(ResilientComponent):
 
         self.resilient_common = ResilientCommon(self.rest_client())
 
-        '''
+
+    def _test_create(self):
         ## TODO - seed the incident list
         # create incident
         now = datetime.datetime.now()
@@ -98,17 +107,22 @@ class SentinelPollerComponent(ResilientComponent):
         classificationComment="Some comment",
         classificationReason="SuspiciousActivity",
         """
-        result, status, reason = self.sentinel_client.create_incident("profile_a",
-                                             title="incident "+ str(now),
-                                             description="some description",
-                                             severity="Medium",
-                                             status="New",
-                                             firstActivityTimeUtc=now.strftime("%Y-%m-%dT%H:%M:%SZ"),
-                                             createdTimeUtc=now.strftime("%Y-%m-%dT%H:%M:%SZ"),
-                                            )
-        LOG.debug("Creating an incident: %s", result)
+        payload = {
+            "properties": {
+                "title": "incident "+ str(now),
+                "description": "new description "+ str(now),
+                "severity": "Medium",
+                "status": "New",
+                "firstActivityTimeUtc": now.strftime("%Y-%m-%dT%H:%M:%SZ"),
+                "createdTimeUtc": now.strftime("%Y-%m-%dT%H:%M:%SZ")
+            }
+        }
+        profile_data = self.sentinel_profiles.get_profile("profile_a")
+        result, status, reason = self.sentinel_client.create_update_incident(profile_data,
+                                                                             None,
+                                                                             payload)
+        LOG.debug("Creating an incident: %s %s %s", status, reason, result)
         ## TODO
-        '''
 
     def _escalate(self):
         """ This is the main logic of the poller
@@ -116,26 +130,44 @@ class SentinelPollerComponent(ResilientComponent):
         """
         #try:
         # call Sentinel for each profile to get the incident list
-        for profile_name, profile_data in self.sentinel_client.get_profiles().items():
+        for profile_name, profile_data in self.sentinel_profiles.get_profiles().items():
             try:
-                result, status, reason  = self.sentinel_client.get_incidents(profile_name)
+                result, status, reason  = self.sentinel_client.query_incidents(profile_data)
 
                 # filter the incident list returned based on the criteria in a filter
-                new_incident_filters = get_profile_filters(profile_data['new_incident_filters'])
-                if status:
+                if not status:
+                    LOG.error("Error querying for incidents: %s, %s", reason, result)
+                else:
                     for sentinel_incident in result.get("value", []):
                         # determine if an incident already exists, used to know if create or update
                         sentinel_incident_id = get_sentinel_incident_id(sentinel_incident)
                         resilient_incident = self.resilient_common.find_incident(sentinel_incident_id)
 
-                        self._create_update_incident(profile_name, profile_data,
-                                                     sentinel_incident, resilient_incident,
-                                                     new_incident_filters)
+                        new_incident_filters = get_profile_filters(profile_data['new_incident_filters'])
+                        result_resilient_incident = self._create_update_incident(profile_name, profile_data,
+                                                                    sentinel_incident, resilient_incident,
+                                                                    new_incident_filters)
 
-                        if resilient_incident:
+                        if result_resilient_incident:
+                            incident_id = result_resilient_incident['id']
                             # get the sentinel comments and add to Resilient.
                             # need to ensure not adding the comment more than once
-                            pass
+                            result, status, reason = self.sentinel_client.get_comments(
+                                                                               profile_data,
+                                                                               sentinel_incident_id
+                                                                          )
+                            new_comments = []
+                            if status:
+                                new_comments = self.resilient_common.filter_resilient_comments(
+                                                                        incident_id,
+                                                                        result['value']
+                                                                     )
+                                for comment in new_comments:
+                                    self.resilient_common.create_incident_comment(
+                                                                          incident_id,
+                                                                          sentinel_incident_id,
+                                                                          comment['properties']['message']
+                                                          )
                             """
                             {
                                 "value": [
@@ -179,9 +211,13 @@ class SentinelPollerComponent(ResilientComponent):
             profile_data ([dict]): [profile data]
             resilient_incident ([dict]): [existing resilient or none]
             new_incident_filters ([dict]): [filter to apply to new incidents]
+
+        Returns:
+            resilient_incident ([dict])
         """
         sentinel_incident_id = get_sentinel_incident_id(sentinel_incident)
         # resilient incident found
+        updated_resilient_incident = None
         if resilient_incident:
             resilient_incident_id = resilient_incident['id']
             if resilient_incident["plan_status"] == "C":
@@ -189,18 +225,26 @@ class SentinelPollerComponent(ResilientComponent):
                             resilient_incident_id, sentinel_incident_id)
             elif sentinel_incident['properties']['status'] == "Closed":
                 # close the incident
-                resilient_incident = \
-                    self.resilient_common.close_incident(resilient_incident,
-                                                         sentinel_incident,
-                                                         profile_data.get("close_incident_template"))
+                incident_payload = self.jinja_env.make_payload_from_template(
+                                                    profile_data.get("close_incident_template"),
+                                                    DEFAULT_INCIDENT_CLOSE_TEMPLATE,
+                                                    sentinel_incident)
+                updated_resilient_incident = self.resilient_common.close_incident(
+                                                                resilient_incident_id,
+                                                                incident_payload
+                                                            )
                 LOG.info("Closed incident %s from Sentinel incident %s",
                          resilient_incident_id, sentinel_incident_id)
             else:
                 # update an incident incident
-                resilient_incident = \
-                    self.resilient_common.update_incident(resilient_incident,
-                                                          sentinel_incident,
-                                                          profile_data.get("update_incident_template"))
+                incident_payload = self.jinja_env.make_payload_from_template(
+                                                    profile_data.get("update_incident_template"),
+                                                    DEFAULT_INCIDENT_UPDATE_TEMPLATE,
+                                                    sentinel_incident)
+                updated_resilient_incident = self.resilient_common.update_incident(
+                                                    resilient_incident_id,
+                                                    incident_payload
+                                                )
                 LOG.info("Updated incident %s from Sentinel incident %s",
                          resilient_incident_id, sentinel_incident_id)
         else:
@@ -208,15 +252,22 @@ class SentinelPollerComponent(ResilientComponent):
             if check_incident_filters(sentinel_incident, new_incident_filters):
                 # add in the profile to track
                 sentinel_incident['resilient_profile'] = profile_name
+
                 # create a new incident
-                resilient_incident = \
-                    self.resilient_common.create_incident(sentinel_incident,
-                                                          profile_data.get("create_incident_template"))
+                incident_payload = self.jinja_env.make_payload_from_template(
+                                                    profile_data.get("create_incident_template"),
+                                                    DEFAULT_INCIDENT_CREATION_TEMPLATE,
+                                                    sentinel_incident)
+                updated_resilient_incident = self.resilient_common.create_incident(incident_payload)
                 LOG.info("Created incident %s from Sentinel incident %s",
-                         resilient_incident['id'], sentinel_incident_id)
+                         updated_resilient_incident['id'], sentinel_incident_id)
             else:
                 LOG.info("Sentinel incident %s bypassed due to new_incident_filters",
                          sentinel_incident_id)
+                updated_resilient_incident = None
+
+        return updated_resilient_incident
+
 
 def get_profile_filters(str_filters):
     """convert str representation of filters into a dictionary

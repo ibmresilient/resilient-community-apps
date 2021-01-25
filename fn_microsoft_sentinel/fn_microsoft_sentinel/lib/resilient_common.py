@@ -2,28 +2,17 @@
 # pragma pylint: disable=unused-argument, no-self-use
 # (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
 
-import calendar
-import json
 import logging
-import os
 import resilient
-import time
-from fn_microsoft_sentinel.lib.sentinel_common import get_sentinel_incident_id
 from resilient import SimpleHTTPException
-from resilient_circuits.template_functions import render_json, environment
 from resilient_lib import IntegrationError
 from cachetools import cached, LRUCache
 
 SENTINEL_INC_ID_FIELD = "sentinel_incident_id"
 
-DEFAULT_INCIDENT_CREATION_TEMPLATE = "data/incident_creation_template.jinja"
-DEFAULT_INCIDENT_UPDATE_TEMPLATE = "data/incident_update_template.jinja"
-DEFAULT_INCIDENT_CLOSE_TEMPLATE = "data/incident_close_template.jinja"
-
 COMMENT_ID_DATATABLE = "sentinel_comment_ids"
 COMMENT_FIELD_SENTINEL_ID = "comment_id"
 COMMENT_FIELD_RESILIENT_ID = "resilient_comment_id"
-
 
 LOG = logging.getLogger(__name__)
 
@@ -32,20 +21,9 @@ class ResilientCommon():
     def __init__(self, rest_client):
         self.rest_client = rest_client
 
-        # Add the timestamp-parse function to the global JINJA environment
-        env = environment()
-        env.globals.update({
-            "resilient_datetimeformat": jinja_resilient_datetimeformat,
-            "resilient_substitute": jinja_resilient_substitute
-            })
-        env.filters.update({
-            "resilient_datetimeformat": jinja_resilient_datetimeformat,
-            "resilient_substitute": jinja_resilient_substitute
-            })
-
     def find_incident(self, sentinel_incident_id):
-        """Find a Resilient incident which contains a custom field associated with a sentinal
-             incident 
+        """Find a Resilient incident which contains a custom field associated with a Sentinel
+             incident
 
         Args:
             sentinel_incident_id ([str]): [sentinel incident id]
@@ -80,31 +58,21 @@ class ResilientCommon():
 
         return r_incidents[0] if r_incidents else None
 
-    def create_incident(self, sentinel_incident, incident_creation_template):
+    def create_incident(self, incident_payload):
         """
         Create a new Resilient incident by rendering a jinja2 template
         :param sentinel_incident: sentinel_incident (json object)
-        
+
         :return: Resilient incident
         """
-        sentinel_incident_id = get_sentinel_incident_id(sentinel_incident)
         try:
-            template_data = get_template(incident_creation_template,
-                                        DEFAULT_INCIDENT_CREATION_TEMPLATE)
-
-            # Render the template.
-            new_incident_payload = render_json(template_data, sentinel_incident)
-            LOG.debug(new_incident_payload)
-
             # Post incident to Resilient
-            incident = self.rest_client.post("/incidents", new_incident_payload)
-
+            incident = self.rest_client.post("/incidents", incident_payload)
             return incident
         except Exception as err:
             raise IntegrationError(str(err))
 
-
-    def close_incident(self, incident, sentinel_incident, incident_close_template):
+    def close_incident(self, incident_id, incident_payload):
         """Close an incident, applying a template for the required and optional fields needed
               during the close process
 
@@ -121,21 +89,13 @@ class ResilientCommon():
         """
 
         try:
-            template_data = get_template(incident_close_template, DEFAULT_INCIDENT_CLOSE_TEMPLATE)
-
-            incident_payload = render_json(template_data, sentinel_incident)
-            LOG.debug(incident_payload)
-
-            # Render the template.
-            incident_id = incident.get('id')
             result = self._patch_incident(incident_id, incident_payload)
-
             return result
 
         except Exception as err:
             raise IntegrationError(err)
 
-    def update_incident(self, incident, sentinel_incident, update_template):
+    def update_incident(self, incident_id, incident_payload):
         """
         Update a Resilient incident by rendering a jinja2 template
         :param sentinel_incident: Secureworks CTP sentinel_incident (json object)
@@ -143,14 +103,7 @@ class ResilientCommon():
         """
 
         try:
-            template_data = get_template(update_template, DEFAULT_INCIDENT_UPDATE_TEMPLATE)
-            incident_payload = render_json(template_data, sentinel_incident)
-            LOG.debug(incident_payload)
-
-            # Render the template.
-            incident_id = incident.get('id')
             result = self._patch_incident(incident_id, incident_payload)
-
             return result
 
         except Exception as err:
@@ -179,12 +132,14 @@ class ResilientCommon():
 
             patch_result = self.rest_client.patch(incident_url, patch)
             result = self._chk_status(patch_result)
-            return result if result else {}
+            # add back the incident id
+            result['id'] = incident_id
+            return result
 
         except Exception as err:
             raise IntegrationError(err)
 
-    def _create_incident_comment(self, incident_id, note):
+    def create_incident_comment(self, incident_id, sentinel_comment_id, note):
         """
         Add a comment to the specified Resilient Incident by ID
         :param incident_id:  Resilient Incident ID
@@ -200,6 +155,10 @@ class ResilientCommon():
             payload = {'text': note_json}
 
             comment_response = self.rest_client.post(uri=uri, payload=payload)
+            if comment_response:
+                # create a datatable reference to this comment
+                self._update_comment_datatable(incident_id, sentinel_comment_id)
+
             return comment_response
 
         except Exception as err:
@@ -215,13 +174,42 @@ class ResilientCommon():
         except Exception as err:
             raise IntegrationError(err)
 
+    def filter_resilient_comments(self, incident_id, sentinel_comments):
+        """
+            need to avoid creating same comments over and over
+              this logic will read a datatable of sentinel incident comment_ids
+              and remove those comments which have already sync
+            WARNING: This logic will not update an existing comment (which may have been updated)
+
+        Args:
+            incident_id ([str]): [resilient incident id]
+            sentinel_comments ([list]): [description]
+        Returns:
+            new_comments ([list])
+        """
+        new_comments = []
+        # get incident comments and filter out those already sync'd
+        incident_comments = self.get_comment_datatable(incident_id)
+
+        if incident_comments:
+            for comment in sentinel_comments:
+                if comment['name'] not in incident_comments:
+                    new_comments.append(comment)
+        else:
+            new_comments = sentinel_comments
+
+        LOG.info("Filtered new comments %s out of %s", len(new_comments), len(sentinel_comments))
+
+        return new_comments
+
+
     def get_comment_datatable(self, incident_id, sort_by=COMMENT_FIELD_SENTINEL_ID):
-        """read contents of datatable containing references of sentinel incident comments 
+        """read contents of datatable containing references of sentinel incident comments
              already sync'd
 
         Args:
             incident_id ([str]): [resilient incident id]
-            sort_by ([str], optional): [field of datatable to build the dictionary of results]. 
+            sort_by ([str], optional): [field of datatable to build the dictionary of results].
                     Defaults to COMMENT_FIELD_SENTINEL_ID.
 
         Raises:
@@ -252,6 +240,23 @@ class ResilientCommon():
                     response[key] = value
 
             return response
+        except Exception as err:
+            raise IntegrationError(err)
+
+    def _update_comment_datatable(self, incident_id, sentinel_comment_id,\
+                                  datatable_name=COMMENT_ID_DATATABLE,\
+                                  field_name=COMMENT_FIELD_SENTINEL_ID):
+        try:
+            # get table information of sentinel to resilient comment ids
+            uri = u'/incidents/{0}/table_data/{1}/row_data'.format(incident_id,
+                                                          datatable_name)
+            payload = {
+                "cells": {
+                    field_name: { "value": sentinel_comment_id }
+                }
+            }
+
+            comment_response = self.rest_client.post(uri, payload)
         except Exception as err:
             raise IntegrationError(err)
 
@@ -294,64 +299,3 @@ class ResilientCommon():
             return resp.json()
 
         return {}
-
-def get_template(specified_template, default_template):
-    """return the contents of a jinja template, either from the default or a customer specified
-          custom path
-
-    Args:
-        specified_template ([str]): [customer specified template path]
-        default_template ([str]): [default template location]
-
-    Returns:
-        [str]: [contents of template]
-    """
-    template_file_path = specified_template
-    if template_file_path:
-        if not (os.path.exists(template_file_path) and os.path.isfile(template_file_path)):
-            LOG.error(u"Template file: %s doesn't exist, using default template",
-                      template_file_path)
-            template_file_path = None
-
-    if not template_file_path:
-        # using default template
-        template_file_path = os.path.join(
-                                os.path.dirname(os.path.realpath(__file__)),
-                                default_template
-                             )
-
-    LOG.info(u"Incident creation template file: %s", template_file_path)
-    with open(template_file_path, "r") as definition:
-        return definition.read()
-
-def jinja_resilient_datetimeformat(value, date_format="%Y-%m-%dT%H:%M:%S"):
-    """custom jinja filter to convert UTC dates to epoch format
-
-    Args:
-        value ([str]): [jinja provided field value]
-        date_format (str, optional): [conversion format]. Defaults to "%Y-%m-%dT%H:%M:%S".
-
-    Returns:
-        [int]: [epoch value of datetime, in milliseconds]
-    """
-    if not value:
-        return value
-
-    utc_time = time.strptime(value[:value.rfind('.')], date_format)
-    return calendar.timegm(utc_time)*1000
-
-def jinja_resilient_substitute(value, json_str):
-    """jinja custom filter to replace values based on a lookup dictionary
-
-    Args:
-        value ([str]): [original value]
-        json_str ([str]): [string encoded json lookup values]
-
-    Returns:
-        [str]: [replacement value or original value if no replacement found]
-    """
-    replace_dict = json.loads(json_str)
-    if value in replace_dict:
-        return replace_dict[value]
-
-    return value
