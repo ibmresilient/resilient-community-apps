@@ -107,7 +107,7 @@ class TestParseFinding:
         (get_cli_raw_responses("get_findings")["Findings"][0], True,
          "AWS GuardDuty: API GeneratedFindingAPIName was invoked from an IP address on a custom threat list."),
         (get_cli_raw_responses("get_findings")["Findings"][0], False,
-         "AWS GuardDuty: No Title Provided."),
+         "AWS GuardDuty: No Title Provided, Create date : 2020-11-25T13:46:37.960Z."),
     ])
     def test_make_incident_name(self, finding, title, expected_results):
 
