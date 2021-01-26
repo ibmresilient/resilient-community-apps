@@ -28,8 +28,8 @@ class FuncAwsGuarddutyPoller(ResilientComponent):
         super(FuncAwsGuarddutyPoller, self).__init__(opts)
         self.options = opts.get("fn_aws_guardduty", {})
         self.opts = opts
-        if "pytest" in sys.modules and not self.opts.get("pytest_poller", False):
-            LOG.info("Running within a test environment with circuits. Not starting poller.")
+        if int(self.options.get("aws_gd_polling_interval", POLLING_INTERVAL_DEFAULT)) == 0:
+            LOG.info("Polling for findings in AWS GuardDuty not enabled")
         else:
             validate_fields(config.REQUIRED_CONFIG_SETTINGS, self.options)
             config.STOP_THREAD = False
@@ -74,12 +74,9 @@ class FuncAwsGuarddutyPoller(ResilientComponent):
         # Turn off "STOP_THREAD" flag.
         config.STOP_THREAD = False
 
-        if polling_interval > 0:
-            # Create and start polling thread
-            thread = Thread(target=aws_gd_poller.run)
-            self.threads.append(thread)
-            thread.daemon = True
-            thread.start()
-            LOG.info("Polling for findings in AWS GuardDuty every %d minutes", polling_interval)
-        else:
-            LOG.info("Polling for findings in AWS GuardDuty not enabled")
+        # Create and start polling thread
+        thread = Thread(target=aws_gd_poller.run)
+        self.threads.append(thread)
+        thread.daemon = True
+        thread.start()
+        LOG.info("Polling for findings in AWS GuardDuty every %d minutes", polling_interval)
