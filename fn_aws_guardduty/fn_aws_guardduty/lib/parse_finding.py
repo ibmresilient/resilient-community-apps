@@ -94,7 +94,10 @@ class ParseFinding():
         :return iname: String for Incident Name to be used in Search / Incident Creation
         """
         # Fill event summary when blank
-        i_title = self.finding.get("Title", "No Title Provided.") or "No Title Provided."
+        if not self.finding.get("Title"):
+            i_title = "No Title Provided, Create date : {}.".format(self.finding.get("CreatedAt"))
+        else:
+            i_title = self.finding.get("Title")
 
         iname = "AWS GuardDuty: {}".format(i_title)
         LOG.debug("Incident Label Assembled: %s", iname)
