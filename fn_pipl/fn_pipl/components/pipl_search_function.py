@@ -46,17 +46,6 @@ class FunctionComponent(ResilientComponent):
         The minimal requirement to run a search is to have at least one full name, email, phone, username, user_id,
         URL or a single valid US address (down to a house number)."""
 
-        def get_config_option(option_name, optional=False):
-            """Given option_name, checks if it is in appconfig. Raises ValueError if a mandatory option is missing"""
-            option = self.options.get(option_name)
-
-            if not option and optional is False:
-                err = "'{0}' is mandatory and is not set in the app.config file. " \
-                      "You must set this value to run this function".format(option_name)
-                raise ValueError(err)
-            else:
-                return option
-
         try:
             # Get the function parameters:
             artifact_type = kwargs.get("pipl_artifact_type")  # text
