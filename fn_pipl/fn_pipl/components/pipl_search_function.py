@@ -10,8 +10,6 @@ from resilient_circuits import ResilientComponent, function, handler, StatusMess
 from resilient_lib import validate_fields, ResultPayload, RequestsCommon
 import json
 
-from fn_pipl.util.example_response import ExampleResponse
-
 PACKAGE_NAME = "fn_pipl"
 
 class FunctionComponent(ResilientComponent):
