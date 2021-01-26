@@ -12,15 +12,16 @@ Suites of tests to test the AWS GuardDuty Helper functions
 class TestIQuery:
     """Test IQuery class"""
 
-    @pytest.mark.parametrize("finding, fields, expected_results", [
+    @pytest.mark.parametrize("finding, fields, region, expected_results, expected_results_2", [
         (get_cli_raw_responses("get_findings")["Findings"][0],
-         ["Id", "Region"], ["60baffd3f9042e38640f2300d5c5a631", "us-west-2"]),
+         ["Id", "DetectorId"], "us-west-2",
+         ["60baffd3f9042e38640f2300d5c5a631", "f2baedb0ac74f8f42fc929e15f56da6a"], "us-west-2"),
         (get_cli_raw_responses("get_findings")["Findings"][0],
-         ["Id"], ["60baffd3f9042e38640f2300d5c5a631", ""]),
+         ["Id"], "us-west-2", ["60baffd3f9042e38640f2300d5c5a631", ""], "us-west-2"),
         (get_cli_raw_responses("get_findings")["Findings"][0],
-         ["Region"], ["", "us-west-2"]),
+         ["DetectorId"], "us-west-2", ["", "f2baedb0ac74f8f42fc929e15f56da6a"], "us-west-2"),
     ])
-    def test_iquery(self, finding, fields, expected_results):
+    def test_iquery(self, finding, fields, region, expected_results_2, expected_results):
         result = IQuery(finding, fields)
         assert(issubclass(type(result), dict))
         assert "filters" in result
@@ -28,19 +29,23 @@ class TestIQuery:
         assert len(fields) + 1 == len(result["filters"][0]["conditions"])
         if "Id" in fields:
             assert result["filters"][0]["conditions"][1]["value"] == expected_results[0]
-        if "Region" in fields:
+        if "DetectorId" in fields:
             inx = len(fields)
             assert result["filters"][0]["conditions"][inx]["value"] == expected_results[1]
+        result.add_conditions(region, "Region")
+        inx = len(fields) + 1
+        assert result["filters"][0]["conditions"][inx]["value"] == expected_results_2
 
-    @pytest.mark.parametrize("finding, fields, expected_results", [
+    @pytest.mark.parametrize("finding, fields, expected_results, expected_results_2", [
         (get_cli_raw_responses("get_findings")["Findings"][0],
-         ["Id", "Region"], ["properties.aws_guardduty_finding_id", "properties.aws_guardduty_region"]),
+         ["Id", "DetectorId"], ["properties.aws_guardduty_finding_id", "properties.aws_guardduty_detector_id"],
+         "properties.aws_guardduty_region"),
         (get_cli_raw_responses("get_findings")["Findings"][0],
-         ["Id"], ["properties.aws_guardduty_finding_id", ""]),
+         ["Id"], ["properties.aws_guardduty_finding_id", ""], "properties.aws_guardduty_region"),
         (get_cli_raw_responses("get_findings")["Findings"][0],
-         ["Region"], ["", "properties.aws_guardduty_region"]),
+         ["DetectorId"], ["", "properties.aws_guardduty_detector_id"], "properties.aws_guardduty_region"),
     ])
-    def test_iquery_alt(self, finding, fields, expected_results):
+    def test_iquery_alt(self, finding, fields, expected_results, expected_results_2):
         result = IQuery(finding, fields, alt=True)
         assert(issubclass(type(result), dict))
         assert "filters" in result
@@ -48,10 +53,12 @@ class TestIQuery:
         assert len(fields) + 1 == len(result["filters"][0]["conditions"])
         if "Id" in fields:
             assert result["filters"][0]["conditions"][1]["field_name"] == expected_results[0]
-        if "Region" in fields:
+        if "DetectorId" in fields:
             inx = len(fields)
             assert result["filters"][0]["conditions"][inx]["field_name"] == expected_results[1]
-
+        result.add_alt_conditions("Region")
+        inx = len(fields) + 1
+        assert result["filters"][0]["conditions"][inx]["field_name"] == expected_results_2
 
 class TestFCrit:
     """Test FCrit class"""
@@ -148,4 +155,31 @@ class TestSearchJson:
     def test_search_json_missing_path(self, finding, key, path, expected_results):
         result = search_json(finding, key, path=path)
         assert isinstance(result, dict)
+        assert result == expected_results
+
+    @pytest.mark.parametrize("finding, key, path, expected_results", [
+        (get_cli_raw_responses("get_findings")["Findings"][0], "AccessKeyId", ["Resource", "NotExists"],
+         {"msg": "Path not found", "path": "['Resource', 'NotExists']"}),
+        (get_cli_raw_responses("get_findings")["Findings"][0], "AccessKeyId", ["Resource", "S3BucketDetails", 1],
+         {"msg": "Path not found", "path": "['Resource', 'S3BucketDetails', 1]"}),
+
+    ])
+    def test_map_property(self, finding, key, path, expected_results):
+        result = search_json(finding, key, path=path)
+        assert isinstance(result, dict)
+        assert result == expected_results
+
+
+    @pytest.mark.parametrize("gd_prop, expected_results", [
+        ("Id", ("aws_guardduty_finding_id", None)),
+        ("Arn", ("aws_guardduty_finding_arn", None)),
+        ("Type", ("aws_guardduty_finding_type", None)),
+        ("UpdatedAt", ("aws_guardduty_finding_updated_at", None)),
+        ("Region", ("aws_guardduty_region", None)),
+        ("ResourceType", ("aws_guardduty_resource_type", "Resource")),
+        ("DetectorId", ("aws_guardduty_detector_id", "Service")),
+        ("Count", ("aws_guardduty_count", "Service")),
+    ])
+    def test_search_json_missing_path(self, gd_prop, expected_results):
+        result = map_property(gd_prop)
         assert result == expected_results

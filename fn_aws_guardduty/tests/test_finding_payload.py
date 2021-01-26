@@ -42,6 +42,7 @@ class TestParseFinding:
 
     mock_inputs_1 = {
         "finding": get_cli_raw_responses("get_findings")["Findings"][0],
+        "region": "us-west-2",
         "refresh": False,
         "existing_artifacts": get_resilient_responses("find_resilient_artifacts_for_incident_with_artifacts"),
     }
@@ -52,6 +53,7 @@ class TestParseFinding:
 
     mock_inputs_2 = {
         "finding": get_cli_raw_responses("get_findings")["Findings"][0],
+        "region": "us-west-2",
         "refresh": True,
         "existing_artifacts": get_resilient_responses("find_resilient_artifacts_for_incident_no_artifacts"),
     }
@@ -62,6 +64,7 @@ class TestParseFinding:
 
     mock_inputs_3 = {
         "finding": get_cli_raw_responses("get_findings")["Findings"][0],
+        "region": "us-west-2",
         "refresh": False,
         "existing_artifacts": [],
     }
@@ -91,7 +94,7 @@ class TestParseFinding:
 
         keys = ["name", "description", "discovered_date", "severity_code", "properties"]
 
-        finding_payload = ParseFinding({"Severity": 7})
+        finding_payload = ParseFinding({"Severity": 7}, "us-west-2")
 
         finding_payload.payload = {}
         finding_payload.finding = finding_payload.replace_datetime(finding)
@@ -108,7 +111,7 @@ class TestParseFinding:
     ])
     def test_make_incident_name(self, finding, title, expected_results):
 
-        finding_payload = ParseFinding({"Severity": 7})
+        finding_payload = ParseFinding({"Severity": 7, "Region": "us-west-2"}, "us-west-2")
 
         if not title:
             finding["Title"] = ''
@@ -131,7 +134,7 @@ class TestParseFinding:
     ])
     def test_make_incident_fields(self, finding, desc, expected_results):
 
-        finding_payload = ParseFinding({"Severity": 7})
+        finding_payload = ParseFinding({"Severity": 7, "Region": "us-west-2"}, "us-west-2")
 
         if not desc:
             finding["Description"] = ''
@@ -159,7 +162,7 @@ class TestParseFinding:
     ])
     def test_map_severity(self, finding_severity, expected_results):
 
-        finding_payload = ParseFinding({"Severity": 7})
+        finding_payload = ParseFinding({"Severity": 7, "Region": "us-west-2"}, "us-west-2")
 
         result = finding_payload.map_severity(finding_severity)
         assert result == expected_results
@@ -172,7 +175,7 @@ class TestParseFinding:
     ])
     def test_map_severity_invalid(self, finding_severity, expected_results):
 
-        finding_payload = ParseFinding({"Severity": 7})
+        finding_payload = ParseFinding({"Severity": 7, "Region": "us-west-2"}, "us-west-2")
 
         with pytest.raises(ValueError) as e:
             result = finding_payload.map_severity(finding_severity)
@@ -186,7 +189,7 @@ class TestParseFinding:
         keys = ["GeneratedFindingAccessKeyId", "GeneratedFindingUserName", "198.51.100.0", "10.0.0.1",
                 "GeneratedFindingPublicDNSName", "GeneratedFindingPrivateDnsName", "GeneratedFindingPrivateName"]
 
-        finding_payload = ParseFinding({"Severity": 7})
+        finding_payload = ParseFinding({"Severity": 7, "Region": "us-west-2"}, "us-west-2")
         finding_payload.finding = finding_payload.replace_datetime(finding)
 
         result = finding_payload.get_artifact_data()
@@ -204,7 +207,7 @@ class TestParseFinding:
 
         keys = ["type", "description", "value"]
 
-        finding_payload = ParseFinding({"Severity": 7})
+        finding_payload = ParseFinding({"Severity": 7,"Region": "us-west-2"}, "us-west-2")
         finding_payload.finding = finding_payload.replace_datetime(finding)
         finding_payload.existing_artifacts = []
         finding_payload.payload = {}
@@ -224,7 +227,7 @@ class TestParseFinding:
     ])
     def test_add_note_to_payload(self, finding, refresh, expected_results):
 
-        finding_payload = ParseFinding({"Severity": 7})
+        finding_payload = ParseFinding({"Severity": 7, "Region": "us-west-2"}, "us-west-2")
         finding_payload.finding = finding_payload.replace_datetime(finding)
         finding_payload.payload = {}
         finding_payload.refresh = refresh
@@ -243,7 +246,7 @@ class TestParseFinding:
 
         keys_1 = ["gd_action_details", "gd_resource_affected"]
 
-        finding_payload = ParseFinding({"Severity": 7})
+        finding_payload = ParseFinding({"Severity": 7, "Region": "us-west-2"}, "us-west-2")
         finding_payload.finding = finding_payload.replace_datetime(finding)
         finding_payload.data_tables = {}
 
@@ -255,7 +258,7 @@ class TestParseFinding:
     ])
     def test_replace_datetime(self, finding, expected_results):
 
-        finding_payload = ParseFinding({"Severity": 7})
+        finding_payload = ParseFinding({"Severity": 7, "Region": "us-west-2"}, "us-west-2")
         finding_payload.finding = finding
 
         assert isinstance(finding_payload.finding["CreatedAt"], datetime.datetime)
@@ -269,6 +272,7 @@ class TestParseFinding:
 
     mock_inputs_1 = {
         "finding": get_cli_raw_responses("get_findings")["Findings"][0],
+        "region": "us-west-2",
         "refresh": True,
         "existing_artifacts": get_resilient_responses("find_resilient_artifacts_for_incident_with_artifacts")
     }
@@ -295,7 +299,7 @@ class TestParseFinding:
     ])
     def test_convert_unicode(self, finding, expected_results):
 
-        finding_payload = ParseFinding({"Severity": 7})
+        finding_payload = ParseFinding({"Severity": 7, "Region": "us-west-2"}, "us-west-2")
         finding_payload.finding = finding
 
         assert isinstance(finding["CreatedAt"], unicode)

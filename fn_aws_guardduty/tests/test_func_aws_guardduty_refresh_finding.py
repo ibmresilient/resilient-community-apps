@@ -96,7 +96,7 @@ class TestFuncAwsGuarddutyRefreshFinding:
     def test_success(self, mock_cli, mock_res, circuits_app, mock_inputs, expected_results_1, expected_results_2):
         """ Test calling with sample values for the parameters """
         keys = ["content", "inputs", "metrics", "raw", "reason", "success", "version"]
-        keys_content = ["finding", "payload", "data_tables", "timestamp"]
+        keys_content = ["finding", "payload", "data_tables", "timestamp", "region"]
         keys_payload = ["name", "description", "discovered_date", "severity_code", "properties",
                         "artifacts", "comments"]
 

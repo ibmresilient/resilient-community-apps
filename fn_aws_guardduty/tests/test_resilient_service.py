@@ -40,13 +40,14 @@ class TestResilientService:
         assert isinstance(res_svc, (ResSvc, ResilientComponent))
 
     @patch('fn_aws_guardduty.lib.resilient_service.ResilientComponent.rest_client', side_effect=MagicMock)
-    @pytest.mark.parametrize("finding, f_fields, expected_results", [
-        (get_cli_raw_responses("get_findings")["Findings"][0], ["Id", "Region"], None)
+    @pytest.mark.parametrize("finding, region, f_fields, expected_results", [
+        (get_cli_raw_responses("get_findings")["Findings"][0], "us-west-2", ["Id", "DetectorId"], None),
+        (get_cli_raw_responses("get_findings")["Findings"][0], "us-west-1", ["Id", "DetectorId"], None),
     ])
-    def test_find_resilient_incident_for_req(self, mock_res, finding, f_fields, expected_results):
+    def test_find_resilient_incident_for_req(self, mock_res, finding, region, f_fields, expected_results):
         res_svc = ResSvc(get_opt(), get_config())
         assert isinstance(res_svc, (ResSvc, ResilientComponent))
-        result = res_svc.find_resilient_incident_for_req(finding, ["Id", "Region"])
+        result = res_svc.find_resilient_incident_for_req(finding, region, f_fields)
         assert isinstance(result, MagicMock)
         assert "mock.post()" in str(result)
 

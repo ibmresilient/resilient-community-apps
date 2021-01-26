@@ -18,7 +18,7 @@ aws_gd_regions=.*
 # Interval to refresh regions information (in minutes).
 aws_gd_regions_interval=60
 # Interval to poll Guardduty (in minutes).
-aws_gd_polling_interval=10
+aws_gd_polling_interval=0
 # Optional - severity threshold (int) to use in criterion to filter findings 
 # results. (default 7).
 # Severity ranges: 7.0 - 8.9 -> High, 4.0 - 6.9 -> Medium, 1.0 = 3.9 -> Low
@@ -460,6 +460,7 @@ def get_mocked_results(type):
         ),
         "refresh_finding_to_json": (
             {'timestamp': '2021-01-22 15:45:26',
+             'region': 'us-west-2',
              'finding': {'AccountId': '834299573936',
                          'Arn': 'arn:aws:guardduty:us-west-2:834299573936:detector/f2baedb0ac74f8f42fc929e15f56da6a/finding/60baffd3f9042e38640f2300d5c5a631',
                          'CreatedAt': '2020-11-25T13:46:37.960Z',
