@@ -82,7 +82,7 @@ class FunctionComponent(ResilientComponent):
                 existing_artifacts = res_svc.find_resilient_artifacts_for_incident(incident_id)
 
                 # Create a object to parse finding payload.
-                finding_payload = ParseFinding(finding, refresh=True, existing_artifacts=existing_artifacts)
+                finding_payload = ParseFinding(finding, aws_gd_region, refresh=True, existing_artifacts=existing_artifacts)
                 result = finding_payload.to_json()
                 note = result["payload"]["comments"].pop()
             else:

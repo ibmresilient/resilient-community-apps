@@ -11,13 +11,9 @@ CUSTOM_FIELDS_MAP = {
     "Type": "aws_guardduty_finding_type",
     "UpdatedAt": "aws_guardduty_finding_updated_at",
     "Region": "aws_guardduty_region",
-    "Resource": {
-        "ResourceType": "aws_guardduty_resource_type"
-    },
-    "Service": {
-        "Count": "aws_guardduty_count",
-        "DetectorId": "aws_guardduty_detector_id"
-    }
+    "ResourceType": {"aws_guardduty_resource_type": {"path": "Resource"}},
+    "DetectorId": {"aws_guardduty_detector_id": {"path": "Service"}},
+    "Count": {"aws_guardduty_count": {"path": "Service"}},
 }
 # Map Resilient artifact types to GuardDuty properties.
 ARTIFACT_TYPES_MAP = {

@@ -34,7 +34,7 @@ class IQuery(dict):
          ]}
         }
     """
-    def __init__(self, finding, fields, alt=False):
+    def __init__(self, gd_obj, fields, alt=False):
         super(IQuery, self).__init__()
         # Add default condition.
         self["filters"] = [{
@@ -47,38 +47,57 @@ class IQuery(dict):
             ]
         }]
         if alt:
-            self.add_alt_conditions(finding, fields)
+            self.add_alt_conditions(fields)
         else:
-            self.add_conditions(finding, fields)
+            self.add_conditions(gd_obj, fields)
 
-    def add_conditions(self, finding, fields):
+    def add_conditions(self, gd_obj, fields):
         """
         Update query for conditions for GuardDuty finding fields.
 
-        :param finding: GuardDuty finding properties
-        :param fields: List of GuardDuty finding fields names
+        :param gd_obj: Object with GuardDuty properties e.g finding payload dict.
+        :param fields: String or List of GuardDuty finding field name(s)
         """
-        [self["filters"][0]["conditions"].append({
-            "field_name": "properties.{}".format(const.CUSTOM_FIELDS_MAP[f]),
-            "method": "equals",
-            "value": finding[f]
-        }) for f in fields]
-        self["sorts"] =  [{
-            "field_name": "create_date",
-            "type": "desc"
-        }]
+        if isinstance(fields, list):
+            for f in fields:
+                (res_prop, path) = map_property(f)
+                self["filters"][0]["conditions"].append({
+                    "field_name": "properties.{}".format(res_prop),
+                    "method": "equals",
+                    "value": gd_obj.get(path, {}).get(f) if path else gd_obj.get(f)
+                })
 
-    def add_alt_conditions(self, finding, fields):
+            self["sorts"] =  [{
+                "field_name": "create_date",
+                "type": "desc"
+            }]
+        elif isinstance(fields, str):
+            (res_prop, _) = map_property(fields)
+            self["filters"][0]["conditions"].append({
+                "field_name": "properties.{}".format(res_prop),
+                "method": "equals",
+                "value": gd_obj
+            })
+
+    def add_alt_conditions(self, fields):
         """
         Update query for alternate conditions for GuardDuty finding fields.
 
-        :param finding: GuardDuty finding properties
-        :param fields: List of GuardDuty finding fields names
+        :param fields: String or List of GuardDuty finding field name(s)
         """
-        [self["filters"][0]["conditions"].append({
-            "field_name": "properties.{}".format(const.CUSTOM_FIELDS_MAP[f]),
-            "method": "has_a_value"
-        }) for f in fields]
+        if isinstance(fields, list):
+            for f in fields:
+                (res_prop, _) = map_property(f)
+                self["filters"][0]["conditions"].append({
+                    "field_name": "properties.{}".format(res_prop),
+                    "method": "has_a_value"
+                })
+        elif isinstance(fields, str):
+            (res_prop, _) = map_property(fields)
+            self["filters"][0]["conditions"].append({
+                "field_name": "properties.{}".format(res_prop),
+                "method": "has_a_value"
+            })
 
 class FCrit(dict):
     """Class to create criteria for querying findings on AWS GuardDuty.
@@ -220,3 +239,25 @@ def search_json(data, key, path=None, level=0):
                 else:
                     values.append((item, new_path))
     return values
+
+def map_property(gd_prop):
+    """
+    Map GuardDuty property field to corresponding Resilient value.
+    Return a path variable if GuardDuty property not at top-level
+
+    :param gd_prop: GuardDuty property value.
+    :return : Tuple of Resilient property value and path
+    """
+    path = None
+    res_prop = None
+
+    prop = const.CUSTOM_FIELDS_MAP[gd_prop]
+    if isinstance(const.CUSTOM_FIELDS_MAP[gd_prop], dict):
+        # Get the Resilient incident property value.
+        res_prop = list(prop.keys())[0]
+        # Get path to property in finding json
+        path = list(prop.values())[0]["path"]
+    else:
+        res_prop = prop
+
+    return (res_prop, path)

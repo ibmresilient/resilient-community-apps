@@ -24,7 +24,7 @@ class ResSvc(ResilientComponent):
         self.opts = opts
         self.options = options
 
-    def find_resilient_incident_for_req(self, finding, f_fields):
+    def find_resilient_incident_for_req(self, finding, region, f_fields):
         """
         Check if any Resilient incidents with the GuardDuty finding ID.
 
@@ -34,13 +34,17 @@ class ResSvc(ResilientComponent):
         r_incidents = []
         query_uri = "/incidents/query?return_level=partial"
         query = IQuery(finding, f_fields)
+        # Add query for region.
+        query.add_conditions(region, "Region")
         try:
             r_incidents = self.rest_client().post(query_uri, query)
         except SimpleHTTPException:
             # Some versions of Resilient 30.2 onward have a bug that prevents query for numeric fields.
             # To work around this issue, let's try a different query, and filter the results. (Expensive!)
             query_uri = "/incidents/query?return_level=normal&field_handle={}".format(finding["Id"])
-            query = IQuery(finding, f_fields, alt=True)
+            query = IQuery(None, f_fields, alt=True)
+            # Add query for region.
+            query.add_alt_conditions("Region")
 
             try:
                 r_incidents_tmp = self.rest_client().post(query_uri, query)

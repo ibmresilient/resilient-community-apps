@@ -81,12 +81,12 @@ class AwsGdPoller():
 
                         finding = aws_gd.get("get_findings", DetectorId=detectorid, FindingIds=[fid])[0]
 
-                        if len(res_svc.find_resilient_incident_for_req(finding, ["Id", "Region"])) == 0:
+                        if len(res_svc.find_resilient_incident_for_req(finding, gd_region, ["Id", "DetectorId"])) == 0:
                             LOG.info("AWS GuardDuty Finding ID %s in region %s discovered: %s, escalating to Resilient",
                                      finding["Id"], finding["Region"], finding.get("Title", "No Title Provided"))
 
                             # Instantiate object to generate Resilient incident payload and data tables from finding.
-                            finding_payload = ParseFinding(finding)
+                            finding_payload = ParseFinding(finding, gd_region)
 
                             # Create incident and return response
                             i_response = res_svc.create_incident(finding_payload.payload)

@@ -9,7 +9,7 @@ import copy
 import datetime as dt
 from sys import version_info
 
-from fn_aws_guardduty.lib.helpers import search_json
+from fn_aws_guardduty.lib.helpers import search_json, map_property
 from fn_aws_guardduty.util import const
 
 LOG = logging.getLogger(__name__)
@@ -17,10 +17,11 @@ LOG = logging.getLogger(__name__)
 class ParseFinding():
     """Class that parses an AWS finding and generates a payload and data tables data."""
 
-    def __init__(self, finding, refresh=False, existing_artifacts=None):
+    def __init__(self, finding, region, refresh=False, existing_artifacts=None):
         """constructor """
         self.timestamp = dt.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         self.finding = self.replace_datetime(finding)
+        self.region = region
         self.existing_artifacts = existing_artifacts if existing_artifacts else {}
         self.payload = {}
         self.data_tables = {}
@@ -69,16 +70,21 @@ class ParseFinding():
             "severity_code": self.map_severity(self.finding.get("Severity", "Low")),
             "properties": {},
         })
+
         # Use mapping to get incident field values from finding payload.
-        for prop_l1 in const.CUSTOM_FIELDS_MAP:
-            if isinstance(const.CUSTOM_FIELDS_MAP[prop_l1], dict):
-                for prop_l2 in const.CUSTOM_FIELDS_MAP[prop_l1]:
-                    self.payload["properties"][const.CUSTOM_FIELDS_MAP[prop_l1][prop_l2]] = \
-                        self.finding.get(prop_l1, {}).get(prop_l2)
+        for gd_prop in const.CUSTOM_FIELDS_MAP.keys():
+            (res_prop, path) = map_property(gd_prop)
+            if path:
+                self.payload["properties"][res_prop] = self.finding.get(path, {}).get(gd_prop)
             else:
-                self.payload["properties"][const.CUSTOM_FIELDS_MAP[prop_l1]] = self.finding.get(prop_l1)
+                self.payload["properties"][res_prop] = self.finding.get(gd_prop)
+
+        if self.finding["Region"] != self.region:
+            # In case region in finding payload is different default to value used with API.
+            self.payload["properties"][const.CUSTOM_FIELDS_MAP["Region"]] =  self.region
 
         return self.payload
+
 
     def make_incident_name(self):
         """
