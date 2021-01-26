@@ -42,7 +42,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.1.0 | 1/2021 | Added Feature: Set Reputation |
+| 1.1.0 | 1/2021 | Added Feature: Get, Set Reputation |
 | 1.0.2 | 09/2020 | Bug fixes |
 | 1.0.1 | 05/2020 | App Host support |
 | 1.0.0 | 05/2018 | Initial Release |
@@ -302,7 +302,6 @@ mcafee_tie_hash: The value of the hash.
 
 The function returns back a dict of all the available information from the different file providers (Enterprise, GTI, ATD, MWG) along with the list of systems related to it.
 
- ![screenshot: fn-mcafee-tie-search-hash ](./doc/screenshots/fn-mcafee-tie-search-hash.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -452,7 +451,9 @@ tie_results
 #### Columns:
 | Column Name | API Access Name | Type | Tooltip |
 | ----------- | --------------- | ---- | ------- |
+| Results Date | `results_date` | `text` | - |
 | File Provider | `file_provider` | `text` | - |
+| File Name | `file_name` | `text` | - |
 | Hash | `hash` | `text` | - |
 | Hash Type | `hash_type` | `text` | - |
 | Create Date | `tie_create_date` | `text` | - |
@@ -468,6 +469,7 @@ tie_results
 | McAfee TIE Set File Reputation | artifact | `mcafee_tie_set_file_reputation` |
 | McAfee TIE Set File Reputation - Datatable | tie_results | `mcafee_tie_set_reputation__datatable` |
 | McAfee TIE Get File Reputation | artifact | `mcafee_tie_get_file_reputation` |
+| McAfee TIE Get Latest Reputation | Datatable | `mcafee_tie_get_lastest_reputation` |
 
 ---
 
