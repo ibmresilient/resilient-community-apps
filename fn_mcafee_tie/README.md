@@ -134,16 +134,16 @@ The following table provides the settings you need to configure the app. These s
 
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
-| **dxlclient_config** | Yes | `/var/rescircuits/fn_macafee_tie/dxlclient.config` | *DXLClient configuration file. See the [OpenDXL documentation](https://opendxl.github.io/opendxl-client-python/pydoc/updatingconfigfromcli.html) for instructions on how to set.* |
+| **dxlclient_config** | Yes | `/var/rescircuits/fn_mcafee_tie/dxlclient.config` | *DXLClient configuration file. See the [OpenDXL documentation](https://opendxl.github.io/opendxl-client-python/pydoc/updatingconfigfromcli.html) for instructions on how to set.* |
 
 #### App Host Configuration
-Since McAfee TIE references it's own configuration file, this file needs to be added to the files available to the container running this app for App Host. This is done by referring to the location of config file as `/var/rescircuits/fn_macafee_tie/dxlclient.config` within the container and then including that file in the files available to the app. See the snapshot below for an example. 
+Since McAfee TIE references it's own configuration file, this file needs to be added to the files available to the container running this app for App Host. This is done by referring to the location of config file as `/var/rescircuits/fn_mcafee_tie/dxlclient.config` within the container and then including that file in the files available to the app. See the snapshot below for an example. 
 
 ![screenshot: app.config](./doc/screenshots/app_config.png)
 
-In addition to the dxlclient.config file, three certificate files need to be added to the app: ca-bundle.crt, client.crt, client.key. These files were built when you generated the dxlclient.config file and will be included in the same folder location. Be aware that all references to the folder (ex. `/var/rescircuits/fn_macafee_tie/`) must be specified the same way. That is, all references to the file path should contain the trailing slash or all references should leave it off.
+In addition to the dxlclient.config file, three certificate files need to be added to the app: ca-bundle.crt, client.crt, client.key. These files were built when you generated the dxlclient.config file and will be included in the same folder location. Be aware that all references to the folder (ex. `/var/rescircuits/fn_mcafee_tie/`) must be specified the same way. That is, all references to the file path should contain the trailing slash or all references should leave it off.
 
-![screenshot: macfee_tie_config.png](./doc/screenshots/mcafee_tie_config.png)
+![screenshot: mcafee_tie_config.png](./doc/screenshots/mcafee_tie_config.png)
 
 ### Custom Layouts
 <!--
@@ -170,6 +170,7 @@ Manual action rules are available from an artifact or from the TIE Results datat
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
+| `mcafee_tie_reputation_type` | `text` | Yes | `External | Enterprise` | - |
 | `mcafee_tie_comment` | `text` | No | `-` | - |
 | `mcafee_tie_filename` | `text` | No | `-` | Used for new reputation entries |
 | `mcafee_tie_hash` | `text` | Yes | `D5DD920BE5BCFEB904E95DA4B6D0CCCA0727D692` | The value of the hash |
@@ -283,11 +284,17 @@ inputs.mcafee_tie_hash = artifact.value
 <p>
 
 ```python
-note = "McAfee TIE File Reputation: {}, Hash: {}".format(results.inputs['mcafee_tie_trust_level']['name'], results.inputs['mcafee_tie_hash'])
+note = u"McAfee TIE File Reputation: {}\nHash: {} ({})\nFile Name: {}\nComment: {}"\
+            .format(results.inputs['mcafee_tie_trust_level']['name'],
+                    results.inputs['mcafee_tie_hash'],
+                    artifact.type,
+                    results.inputs['mcafee_tie_filename'],
+                    results.inputs['mcafee_tie_comment'])
+
 if results.content:
-    incident.addNote("Set reputation successfull\n{}".format(note))
+    incident.addNote("Set reputation successful\n{}".format(note))
 else:
-    incident.addNote("Set reputation unsuccessfull\n{}".format(note))
+    incident.addNote("Set reputation unsuccessful\n{}".format(note))
 ```
 
 </p>
@@ -427,12 +434,20 @@ Data returned will be in the following structure
 }
 """
 
-row = incident.addRow("tie_results")
-row["hash_type"] = artifact.type
-row["hash"] = artifact.value
-row["file_provider"] = results["Enterprise"]["File Provider"]
-row["trust_level"] = results["Enterprise"]["Trust Level"]
-row["tie_create_date"] = results["Enterprise"]["Create Date"]
+import java.util.Date as Date
+
+if results.get("Enterprise"):
+    row = incident.addRow("tie_results")
+    row['results_date'] = str(Date())
+    row["hash_type"] = artifact.type
+    row["hash"] = artifact.value
+    row["file_provider"] = results["Enterprise"].get("File Provider")
+    row["ent_trust_level"] = results["Enterprise"].get("Trust Level")
+    row["tie_create_date"] = results["Enterprise"].get("Create Date")
+    row["gti_trust_level"] = results["GTI"].get("Trust Level")
+    row["atd_trust_level"] = results["ATD"].get("Trust Level")
+    row["mwg_trust_level"] = results["MWG"].get("Trust Level")
+
 ```
 
 </p>
@@ -443,7 +458,7 @@ row["tie_create_date"] = results["Enterprise"]["Create Date"]
 
 ## Data Table - TIE Results
 
- ![screenshot: dt-tie-results](./doc/screenshots/McAfee-TIE-results.png)
+ ![screenshot: dt-tie-results](./doc/screenshots/McAfee-TIE-Results.png)
 
 #### API Name:
 tie_results
@@ -457,7 +472,10 @@ tie_results
 | Hash | `hash` | `text` | - |
 | Hash Type | `hash_type` | `text` | - |
 | Create Date | `tie_create_date` | `text` | - |
-| Trust Level | `trust_level` | `text` | - |
+| Enterprise Trust Level | `trust_level` | `text` | - |
+| GTI Trust Level | `trust_level` | `text` | - |
+| ATD Trust Level | `trust_level` | `text` | - |
+| MWG Trust Level | `trust_level` | `text` | - |
 
 ---
 

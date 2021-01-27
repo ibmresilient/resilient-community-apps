@@ -37,18 +37,21 @@ class FunctionComponent(ResilientComponent):
             # Get the function parameters:
             mcafee_tie_hash_type = kwargs.get("mcafee_tie_hash_type")  # text
             mcafee_tie_comment = kwargs.get("mcafee_tie_comment")  # text
+            mcafee_tie_reputation_type = self.get_select_param(kwargs.get("mcafee_tie_reputation_type"))  # select, values: "Enterprise", "External"
             mcafee_tie_trust_level = self.get_select_param(kwargs.get("mcafee_tie_trust_level"))  # select, values: "KNOWN_TRUSTED_INSTALLED", "KNOWN_TRUSTED", "MOST_LIKELY_TRUSTED", "MIGHT_BE_TRUSTED", "UNKNOWN", "MIGHT_BE_MALICIOUS", "MOST_LIKELY_MALICIOUS", "KNOWN_MALICIOUS", "NOT SET"
             mcafee_tie_hash = kwargs.get("mcafee_tie_hash")  # text
             mcafee_tie_filename = kwargs.get("mcafee_tie_filename")  # text
 
             log = logging.getLogger(__name__)
+            log.info("mcafee_tie_reputation_type: %s", mcafee_tie_reputation_type)
             log.info("mcafee_tie_hash_type: %s", mcafee_tie_hash_type)
             log.info("mcafee_tie_comment: %s", mcafee_tie_comment)
             log.info("mcafee_tie_trust_level: %s", mcafee_tie_trust_level)
             log.info("mcafee_tie_hash: %s", mcafee_tie_hash)
             log.info("mcafee_tie_filename: %s", mcafee_tie_filename)
 
-            validate_fields(["mcafee_tie_hash_type", "mcafee_tie_hash", "mcafee_tie_trust_level"], kwargs)
+            validate_fields(["mcafee_tie_reputation_type", "mcafee_tie_hash_type", 
+                             "mcafee_tie_hash", "mcafee_tie_trust_level"], kwargs)
 
             result_payload = ResultPayload(PACKAGE_NAME, **kwargs)
 
@@ -65,13 +68,24 @@ class FunctionComponent(ResilientComponent):
             result_callback = MyReputationChangeCallback()
             tie_client.add_file_reputation_change_callback(result_callback)            
 
-            # Set the Enterprise reputation for notepad.exe to Known Trusted
-            tie_client.set_file_reputation(
-                trust_level,
-                hash_payload,
-                comment=mcafee_tie_comment,
-                filename=mcafee_tie_filename
-            )
+            if mcafee_tie_reputation_type == "Enterprise":
+                # Set the Enterprise reputation for notepad.exe to Known Trusted
+                tie_client.set_file_reputation(
+                    trust_level,
+                    hash_payload,
+                    comment=mcafee_tie_comment,
+                    filename=mcafee_tie_filename
+                )
+            elif mcafee_tie_reputation_type == "External":
+                # Set the Enterprise reputation for notepad.exe to Known Trusted
+                tie_client.set_external_file_reputation(
+                    trust_level,
+                    hash_payload,
+                    comment=mcafee_tie_comment,
+                    filename=mcafee_tie_filename
+                )
+            else:
+                raise ValueError("Unknown reputation type: %s", mcafee_tie_reputation_type)
 
             # wait for result or a timeout
             wait_iter = 4
