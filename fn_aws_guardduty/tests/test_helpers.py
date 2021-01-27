@@ -169,7 +169,7 @@ class TestSearchJson:
         assert isinstance(result, dict)
         assert result == expected_results
 
-
+class TestMapProperty:
     @pytest.mark.parametrize("gd_prop, expected_results", [
         ("Id", ("aws_guardduty_finding_id", None)),
         ("Arn", ("aws_guardduty_finding_arn", None)),
@@ -178,8 +178,17 @@ class TestSearchJson:
         ("Region", ("aws_guardduty_region", None)),
         ("ResourceType", ("aws_guardduty_resource_type", "Resource")),
         ("DetectorId", ("aws_guardduty_detector_id", "Service")),
-        ("Count", ("aws_guardduty_count", "Service")),
+        ("Count", ("aws_guardduty_count", "Service"))
     ])
-    def test_search_json_missing_path(self, gd_prop, expected_results):
+    def test_map_property(self, gd_prop, expected_results):
         result = map_property(gd_prop)
         assert result == expected_results
+
+    @pytest.mark.parametrize("gd_prop, expected_results", [
+        ("Unknown", "'Unsupported finding property: Unknown.'")
+    ])
+    def test_map_property_unsupported(self, gd_prop, expected_results):
+
+        with pytest.raises(KeyError) as e:
+            response = map_property(gd_prop)
+        assert str(e.value) == expected_results
