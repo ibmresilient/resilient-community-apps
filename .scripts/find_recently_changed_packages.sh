@@ -1,14 +1,4 @@
-#!/bin/bash -x
-
-# Title:         find_recently_changed_packages.sh
-# Author:        ryan.gordon1@ibm.com
-# Description:   A CI/CD script which contains a helper function for algorithmically determining 
-#                which packages in the repository we should be doing CI/CD actions on based on the work that was 
-#                done in the PR
-# Version:       1.0.0
-# Release notes
-# 1.0.0 Initial Release
-
+#!/bin/bash
 # Helper function find_recently_changed_packages
 # Used by our CI/CD scripts to scour the PR/Pushed branch and find
 # - Any packages which were changed that match our naming convention
