@@ -12,20 +12,20 @@
 set -x 
 # Source the script which finds recent changes 
 . .scripts/find_recently_changed_packages.sh
-# Call the function which will search for packages, the result will be available via the $INTEGRATIONS variable defined in that script
+# Call the function which will search for packages, the result will be available via the $PACKAGES variable defined in that script
 find_recently_changed_packages
 
 # Loop over all recently changed package
-for integration in ${INTEGRATIONS[@]};
+for package in ${PACKAGES[@]};
 do 
-    echo "Running a bandit security scan for $integration"
+    echo "Running a bandit security scan for $package"
     # Perform a bandit security scan on the given integration/app and suppress any Low level warnings. 
-    bandit -r $integration -ll 
+    bandit -r $package -ll 
     # Get the exit code of the bandit scan 
     last_status=$?;
 
     if [ $last_status -ne 0 ]; then
-            printf 'Security Scan failure for %s which gave an exit code of [%d]\n' $integration $last_status;
+            printf 'Security Scan failure for %s which gave an exit code of [%d]\n' $package $last_status;
             status=$last_status;
     fi
 
