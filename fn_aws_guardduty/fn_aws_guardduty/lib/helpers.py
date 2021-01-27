@@ -6,9 +6,10 @@ import re
 import datetime as dt
 import time
 import fnmatch
-
+import logging
 from fn_aws_guardduty.util import const
 
+LOG = logging.getLogger(__name__)
 
 class IQuery(dict):
     """Class to create a query for existing findings from AWS GuardDuty in Resilient.
@@ -250,14 +251,16 @@ def map_property(gd_prop):
     """
     path = None
     res_prop = None
-
-    prop = const.CUSTOM_FIELDS_MAP[gd_prop]
-    if isinstance(const.CUSTOM_FIELDS_MAP[gd_prop], dict):
-        # Get the Resilient incident property value.
-        res_prop = list(prop.keys())[0]
-        # Get path to property in finding json
-        path = list(prop.values())[0]["path"]
-    else:
-        res_prop = prop
+    try:
+        prop = const.CUSTOM_FIELDS_MAP[gd_prop]
+        if isinstance(const.CUSTOM_FIELDS_MAP[gd_prop], dict):
+            # Get the Resilient incident property value.
+            res_prop = list(prop.keys())[0]
+            # Get path to property in finding json
+            path = list(prop.values())[0]["path"]
+        else:
+            res_prop = prop
+    except KeyError:
+        raise KeyError("Unsupported finding property: {}.".format(gd_prop))
 
     return (res_prop, path)
