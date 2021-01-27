@@ -20,6 +20,12 @@ function find_recently_changed_packages(){
     # Declare an array that will hold the fn_ or rc_ packages 
     packages_that_have_been_changed=()
     
+    # If the TRAVIS_TAG is defined, use this. This indicates a master build or tagged build, not an often case for this but it covers the edge case
+    if [ -z $TRAVIS_TAG ]; then
+        echo "Build is triggered with a tag push. Collecting the integration"
+        # required tag format is container/<name>/# - name gets taken out
+        packages_that_have_been_changed+=($(echo $TRAVIS_TAG | cut -d "/" -f 2));
+    fi
     # Gather a range of commits to find candidate projects to return which were recently modified
     # If the TRAVIS_COMMIT_RANGE is missing, we are not in Travis. Instead get latest commit (Possibly running locally)
     # If the TRAVIS_COMMIT_RANGE is defined, use that as a convenience to get all commits that were pushed.
