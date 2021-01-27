@@ -1,30 +1,9 @@
 #!/bin/bash
 
-# Declare an array that will hold the fn_ or rc_ packages 
-packages_that_have_been_changed=()
-
-# For every file in the diff 
-for file in $(git diff --name-only HEAD~0 HEAD~1); 
-do 
-    # If the file contains either fn_ or rc_ in the path 
-    if [[ $file =~ (fn_|rc-)+ ]]; 
-    then 
-    # Strip everything except the first directory in the path (integration name) and append to an array
-    packages_that_have_been_changed+=($(echo "$file" | awk -F "/" '{print $1}')); 
-    fi
-done
-
-# Make a new array which acts as a Set to gather only unique package names 
-INTEGRATIONS=($(for v in "${packages_that_have_been_changed[@]}"; do echo "$v";done| sort| uniq| xargs));
-
-
-if [ -z "$INTEGRATIONS" ]
-then
-      echo "Did not find any integrations that were modified"
-      exit 0
-else
-      echo "Most recently modified integrations from last commit show as : ${INTEGRATIONS}"
-fi
+# Source the script which finds recent changes 
+. .scripts/find_recently_changed_packages.sh
+# Call the function which will search for packages, the result will be available via the $PACKAGES variable defined in that script
+find_recently_changed_packages
       
 for integration in ${INTEGRATIONS[@]};
 do 
