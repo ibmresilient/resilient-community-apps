@@ -42,16 +42,16 @@ function find_recently_changed_packages(){
     done
 
     # Make a new array which acts as a Set to gather only unique package names 
-    INTEGRATIONS=($(for v in "${packages_that_have_been_changed[@]}"; do echo "$v";done| sort| uniq| xargs));
+    PACKAGES=($(for v in "${packages_that_have_been_changed[@]}"; do echo "$v";done| sort| uniq| xargs));
 
 
-    if [ -z "$INTEGRATIONS" ]; then
-        echo "Did not find any integrations that were modified"
+    if [ -z "$PACKAGES" ]; then
+        echo "Did not find any packages that were modified"
         # We're using return and not exit, because we are sourcing this script and don't want to kill the job
         return 0
     else
-        echo "Most recently modified integrations from last commit show as : ${INTEGRATIONS}"
-        # echo the $integrations so any script, which calls this can get them, we can only use numbers with the return keyword in bash
-        echo "$INTEGRATIONS" 
+        echo "Most recently modified packages from last commit show as : ${PACKAGES}"
+        # echo the $PACKAGES so any script, which calls this can get them, we can only use numbers with the return keyword in bash
+        echo "$PACKAGES" 
     fi
 }
