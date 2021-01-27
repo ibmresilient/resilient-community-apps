@@ -3,6 +3,25 @@
   "actions": [
     {
       "automations": [],
+      "conditions": [],
+      "enabled": true,
+      "export_key": "McAfee TIE Get Current Reputation",
+      "id": 207,
+      "logic_type": "all",
+      "message_destinations": [],
+      "name": "McAfee TIE Get Current Reputation",
+      "object_type": "tie_results",
+      "tags": [],
+      "timeout_seconds": 86400,
+      "type": 1,
+      "uuid": "075a97f1-ccd6-46f3-9238-46fbb85d52e6",
+      "view_items": [],
+      "workflows": [
+        "mcafee_tie_get_latest_reputation"
+      ]
+    },
+    {
+      "automations": [],
       "conditions": [
         {
           "evaluation_id": null,
@@ -30,25 +49,6 @@
       "view_items": [],
       "workflows": [
         "mcafee_tie_get_file_reputation"
-      ]
-    },
-    {
-      "automations": [],
-      "conditions": [],
-      "enabled": true,
-      "export_key": "McAfee TIE Get Latest Reputation",
-      "id": 207,
-      "logic_type": "all",
-      "message_destinations": [],
-      "name": "McAfee TIE Get Latest Reputation",
-      "object_type": "tie_results",
-      "tags": [],
-      "timeout_seconds": 86400,
-      "type": 1,
-      "uuid": "075a97f1-ccd6-46f3-9238-46fbb85d52e6",
-      "view_items": [],
-      "workflows": [
-        "mcafee_tie_get_latest_reputation"
       ]
     },
     {
@@ -169,7 +169,7 @@
     }
   ],
   "automatic_tasks": [],
-  "export_date": 1611771327666,
+  "export_date": 1611786158202,
   "export_format_version": 2,
   "extensions": [],
   "fields": [
@@ -221,6 +221,35 @@
           "value": 1205
         }
       ]
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "__function/mcafee_tie_hash_type",
+      "hide_notification": false,
+      "id": 513,
+      "input_type": "text",
+      "internal": false,
+      "is_tracked": false,
+      "name": "mcafee_tie_hash_type",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": null,
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "mcafee_tie_hash_type",
+      "tooltip": "The type of file hash (md5, sha1, sha256)",
+      "type_id": 11,
+      "uuid": "88c38278-7078-455b-9029-0ec47d21a3d8",
+      "values": []
     },
     {
       "allow_default_value": false,
@@ -400,35 +429,6 @@
       "chosen": false,
       "default_chosen_by_server": false,
       "deprecated": false,
-      "export_key": "__function/mcafee_tie_hash_type",
-      "hide_notification": false,
-      "id": 513,
-      "input_type": "text",
-      "internal": false,
-      "is_tracked": false,
-      "name": "mcafee_tie_hash_type",
-      "operation_perms": {},
-      "operations": [],
-      "placeholder": "",
-      "prefix": null,
-      "read_only": false,
-      "rich_text": false,
-      "tags": [],
-      "templates": [],
-      "text": "mcafee_tie_hash_type",
-      "tooltip": "The type of file hash (md5, sha1, sha256)",
-      "type_id": 11,
-      "uuid": "88c38278-7078-455b-9029-0ec47d21a3d8",
-      "values": []
-    },
-    {
-      "allow_default_value": false,
-      "blank_option": false,
-      "calculated": false,
-      "changeable": true,
-      "chosen": false,
-      "default_chosen_by_server": false,
-      "deprecated": false,
       "export_key": "__function/mcafee_tie_hash",
       "hide_notification": false,
       "id": 514,
@@ -498,6 +498,35 @@
           "value": 1203
         }
       ]
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "actioninvocation/mcafee_tie_comment",
+      "hide_notification": false,
+      "id": 1196,
+      "input_type": "textarea",
+      "internal": false,
+      "is_tracked": false,
+      "name": "mcafee_tie_comment",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": "properties",
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "McAfee TIE Comment",
+      "tooltip": "",
+      "type_id": 6,
+      "uuid": "3bac34ce-4583-4671-8627-224ba2449e2e",
+      "values": []
     },
     {
       "allow_default_value": false,
@@ -754,35 +783,6 @@
       "chosen": false,
       "default_chosen_by_server": false,
       "deprecated": false,
-      "export_key": "actioninvocation/mcafee_tie_comment",
-      "hide_notification": false,
-      "id": 1196,
-      "input_type": "textarea",
-      "internal": false,
-      "is_tracked": false,
-      "name": "mcafee_tie_comment",
-      "operation_perms": {},
-      "operations": [],
-      "placeholder": "",
-      "prefix": "properties",
-      "read_only": false,
-      "rich_text": false,
-      "tags": [],
-      "templates": [],
-      "text": "McAfee TIE Comment",
-      "tooltip": "",
-      "type_id": 6,
-      "uuid": "3bac34ce-4583-4671-8627-224ba2449e2e",
-      "values": []
-    },
-    {
-      "allow_default_value": false,
-      "blank_option": false,
-      "calculated": false,
-      "changeable": true,
-      "chosen": false,
-      "default_chosen_by_server": false,
-      "deprecated": false,
       "export_key": "actioninvocation/mcafee_tie_filename",
       "hide_notification": false,
       "id": 1198,
@@ -875,22 +875,22 @@
         {
           "actions": [],
           "description": null,
+          "name": "McAfee TIE Get Current Reputation",
+          "object_type": "tie_results",
+          "programmatic_name": "mcafee_tie_get_latest_reputation",
+          "tags": [],
+          "uuid": null,
+          "workflow_id": 153
+        },
+        {
+          "actions": [],
+          "description": null,
           "name": "McAfee TIE Get File Reputation",
           "object_type": "artifact",
           "programmatic_name": "mcafee_tie_get_file_reputation",
           "tags": [],
           "uuid": null,
           "workflow_id": 113
-        },
-        {
-          "actions": [],
-          "description": null,
-          "name": "McAfee TIE Get Latest Reputation",
-          "object_type": "tie_results",
-          "programmatic_name": "mcafee_tie_get_latest_reputation",
-          "tags": [],
-          "uuid": null,
-          "workflow_id": 153
         }
       ]
     },
@@ -996,12 +996,12 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 88,
+  "id": 89,
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1611772414127,
+      "create_date": 1611786154563,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -1010,7 +1010,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1611772414127,
+      "update_date": 1611786154563,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -1139,7 +1139,7 @@
           "rich_text": false,
           "tags": [],
           "templates": [],
-          "text": "File Provider",
+          "text": "Enterprise File Provider",
           "tooltip": "",
           "type_id": 1006,
           "uuid": "a51f6bd9-ab21-4ff5-9b13-d55f485da02c",
@@ -1377,26 +1377,6 @@
     {
       "actions": [],
       "content": {
-        "version": 6,
-        "workflow_id": "mcafee_tie_get_latest_reputation",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"mcafee_tie_get_latest_reputation\" isExecutable=\"true\" name=\"McAfee TIE Get Latest Reputation\"\u003e\u003cdocumentation\u003eGet the latest reputation information for a file hash\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0dke6kq\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_06sheeb\" name=\"McAfee TIE search hash\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"44a9cf5b-16b7-4cea-adc4-3956b079a1ab\"\u003e{\"inputs\":{},\"post_processing_script\":\"import java.util.Date as Date\\n\\nif results.get(\u0027Enterprise\u0027):\\n    row[\u0027results_date\u0027] = str(Date())\\n    row[\u0027ent_trust_level\u0027] = results[\u0027Enterprise\u0027].get(\u0027Trust Level\u0027)\\n    row[\u0027gti_trust_level\u0027] = results[\u0027GTI\u0027].get(\u0027Trust Level\u0027)\\n    row[\u0027atd_trust_level\u0027] = results[\u0027ATD\u0027].get(\u0027Trust Level\u0027)\\n    row[\u0027mwg_trust_level\u0027] = results[\u0027MWG\u0027].get(\u0027Trust Level\u0027)\\n\\n\\\"\\\"\\\"\\n{\\n  \u0027Enterprise\u0027: {\\n    \u0027File Provider\u0027: \u0027Enterprise\u0027,\\n    \u0027Create Date\u0027: \u00272020-12-22 10:47:38\u0027,\\n    \u0027Trust Level\u0027: \u0027Known Malicious\u0027,\\n    \u0027Attributes\u0027: {\\n      \u0027Prevalence\u0027: \u00272\u0027,\\n      \u0027Enterprise Size\u0027: \u00276\u0027,\\n      \u0027First Contact\u0027: \u00272020-12-22 10:47:38\u0027,\\n      \u0027File Name Count\u0027: \u00273\u0027,\\n      \u0027Is Prevalent\u0027: \u00270\u0027\\n    }\\n  },\\n  \u0027GTI\u0027: {\\n    \u0027File Provider\u0027: \u0027GTI\u0027,\\n    \u0027Create Date\u0027: \u00272020-12-22 10:48:25\u0027,\\n    \u0027Trust Level\u0027: \u0027Known Malicious\u0027,\\n    \u0027Attributes\u0027: {\\n      \\n    }\\n  },\\n  \u0027ATD\u0027: {\\n    \\n  },\\n  \u0027MWG\u0027: {\\n    \\n  },\\n  \u0027system_list\u0027: [\\n    {\\n      \u0027agentGuid\u0027: \u0027{c0ffbb8b-424f-4c7a-94ca-976d2fa13104}\u0027,\\n      \u0027date\u0027: 1608652232992\\n    },\\n    {\\n      \u0027agentGuid\u0027: \u0027716dd9a1332dbfe8a9a9332f1561d24ee1260aac\u0027,\\n      \u0027date\u0027: 1610624110510\\n    }\\n  ]\\n}\\n\\\"\\\"\\\"\\n\\n\",\"pre_processing_script\":\"lookup_type = {\\n    \\\"Malware MD5 Hash\\\": \\\"md5\\\",\\n    \\\"Malware SHA-1 Hash\\\": \\\"sha1\\\",\\n    \\\"Malware SHA-256 Hash\\\": \\\"sha256\\\"\\n}\\n\\ninputs.mcafee_tie_hash = row[\u0027hash\u0027]\\ninputs.mcafee_tie_hash_type = lookup_type.get(row[\u0027hash_type\u0027], \u0027sha1\u0027)\\n\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0dke6kq\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_10s06aa\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0dke6kq\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_06sheeb\"/\u003e\u003cendEvent id=\"EndEvent_00fj06n\"\u003e\u003cincoming\u003eSequenceFlow_10s06aa\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_10s06aa\" sourceRef=\"ServiceTask_06sheeb\" targetRef=\"EndEvent_00fj06n\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_06sheeb\" id=\"ServiceTask_06sheeb_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"262\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0dke6kq\" id=\"SequenceFlow_0dke6kq_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"262\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"230\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_00fj06n\" id=\"EndEvent_00fj06n_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"415\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"433\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_10s06aa\" id=\"SequenceFlow_10s06aa_di\"\u003e\u003comgdi:waypoint x=\"362\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"415\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"388.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 6,
-      "creator_id": "a@example.com",
-      "description": "Get the latest reputation information for a file hash",
-      "export_key": "mcafee_tie_get_latest_reputation",
-      "last_modified_by": "a@example.com",
-      "last_modified_time": 1611755117015,
-      "name": "McAfee TIE Get Latest Reputation",
-      "object_type": "tie_results",
-      "programmatic_name": "mcafee_tie_get_latest_reputation",
-      "tags": [],
-      "uuid": "9fd03be8-3792-4db4-ac9c-7fa1b68549c2",
-      "workflow_id": 153
-    },
-    {
-      "actions": [],
-      "content": {
         "version": 5,
         "workflow_id": "mcafee_tie_get_file_reputation",
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"mcafee_tie_get_file_reputation\" isExecutable=\"true\" name=\"McAfee TIE Get File Reputation\"\u003e\u003cdocumentation\u003eGet information about a hashes Mcafee Tie reputation\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0oeqpuw\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1l0rtkh\" name=\"McAfee TIE search hash\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"44a9cf5b-16b7-4cea-adc4-3956b079a1ab\"\u003e{\"inputs\":{},\"post_processing_script\":\"import java.util.Date as Date\\n\\nif results.get(\\\"Enterprise\\\"):\\n    row = incident.addRow(\\\"tie_results\\\")\\n    row[\u0027results_date\u0027] = str(Date())\\n    row[\\\"hash_type\\\"] = artifact.type\\n    row[\\\"hash\\\"] = artifact.value\\n    row[\\\"file_provider\\\"] = results[\\\"Enterprise\\\"].get(\\\"File Provider\\\")\\n    row[\\\"ent_trust_level\\\"] = results[\\\"Enterprise\\\"].get(\\\"Trust Level\\\")\\n    row[\\\"tie_create_date\\\"] = results[\\\"Enterprise\\\"].get(\\\"Create Date\\\")\\n    row[\\\"gti_trust_level\\\"] = results[\\\"GTI\\\"].get(\\\"Trust Level\\\")\\n    row[\\\"atd_trust_level\\\"] = results[\\\"ATD\\\"].get(\\\"Trust Level\\\")\\n    row[\\\"mwg_trust_level\\\"] = results[\\\"MWG\\\"].get(\\\"Trust Level\\\")\\n\\n\\\"\\\"\\\"\\nData returned will be in the following structure\\n\\n\\n{  \\n   \\\"GTI\\\":{  \\n      \\\"File Provider\\\":\\\"GTI\\\",\\n      \\\"Attributes\\\":{  \\n\\n      },\\n      \\\"Create Date\\\":\\\"2018-02-21 12:17:10\\\",\\n      \\\"Trust Level\\\":\\\"Known Malicious\\\"\\n   },\\n   \\\"ATD\\\":{  \\n      \\\"File Provider\\\":\\\"ATD\\\",\\n      \\\"Create Date\\\":\\\"2018-03-14 11:53:09\\\",\\n      \\\"Trust Level\\\":\\\"Most Likely Malicious\\\"\\n   },\\n   \\\"MWG\\\":{  \\n      \\\"File Provider\\\":\\\"MWG\\\",\\n      \\\"Create Date\\\":\\\"2018-03-14 11:53:55\\\",\\n      \\\"Trust Level\\\":\\\"Most Likely Malicious\\\"\\n   },\\n   \\\"Enterprise\\\":{  \\n      \\\"File Provider\\\":\\\"Enterprise\\\",\\n      \\\"Attributes\\\":{  \\n         \\\"Average Local Rep\\\":\\\"Most Likely Malicious\\\",\\n         \\\"First Contact\\\":\\\"2018-02-21 12:17:10\\\",\\n         \\\"Min Local Rep\\\":\\\"Most Likely Malicious\\\",\\n         \\\"Is Prevalent\\\":\\\"0\\\",\\n         \\\"File Name Count\\\":\\\"1\\\",\\n         \\\"Max Local Rep\\\":\\\"Most Likely Malicious\\\"\\n      },\\n      \\\"Create Date\\\":\\\"2018-02-21 12:17:10\\\",\\n      \\\"Trust Level\\\":\\\"Most Likely Malicious\\\"\\n   }\\n   \\\"system_list\\\":[{\\n     \\\"date\\\": 1519233563,\\n     \\\"agentGuid\\\": {a00728ff-3187-46c1-97d2-8e0f26ea940b}\\n   }]\\n}\\n\\\"\\\"\\\"\\n\",\"pre_processing_script\":\"inputs.mcafee_tie_hash = artifact.value\\ninputs.mcafee_tie_hash_type = artifact.type\\n\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0oeqpuw\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1nmsksv\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0oeqpuw\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1l0rtkh\"/\u003e\u003cendEvent id=\"EndEvent_0x4zyj2\"\u003e\u003cincoming\u003eSequenceFlow_1nmsksv\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1nmsksv\" sourceRef=\"ServiceTask_1l0rtkh\" targetRef=\"EndEvent_0x4zyj2\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_067iry2\"\u003e\u003ctext\u003e\u003c![CDATA[Result returned to McAfee datatable\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1r1d62m\" sourceRef=\"ServiceTask_1l0rtkh\" targetRef=\"TextAnnotation_067iry2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1l0rtkh\" id=\"ServiceTask_1l0rtkh_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"276\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0oeqpuw\" id=\"SequenceFlow_0oeqpuw_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"276\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"237\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0x4zyj2\" id=\"EndEvent_0x4zyj2_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"438.13935340022294\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"456.13935340022294\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1nmsksv\" id=\"SequenceFlow_1nmsksv_di\"\u003e\u003comgdi:waypoint x=\"376\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"438\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"407\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_067iry2\" id=\"TextAnnotation_067iry2_di\"\u003e\u003comgdc:Bounds height=\"49\" width=\"208\" x=\"371\" y=\"71\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1r1d62m\" id=\"Association_1r1d62m_di\"\u003e\u003comgdi:waypoint x=\"372\" xsi:type=\"omgdc:Point\" y=\"172\"/\u003e\u003comgdi:waypoint x=\"443\" xsi:type=\"omgdc:Point\" y=\"120\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
@@ -1433,6 +1413,26 @@
       "tags": [],
       "uuid": "a7a1c0d9-2649-4ef4-a40f-3c30998bf9f3",
       "workflow_id": 111
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 7,
+        "workflow_id": "mcafee_tie_get_latest_reputation",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"mcafee_tie_get_latest_reputation\" isExecutable=\"true\" name=\"McAfee TIE Get Current Reputation\"\u003e\u003cdocumentation\u003eGet the current reputation information for a file hash\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0dke6kq\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_06sheeb\" name=\"McAfee TIE search hash\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"44a9cf5b-16b7-4cea-adc4-3956b079a1ab\"\u003e{\"inputs\":{},\"post_processing_script\":\"import java.util.Date as Date\\n\\nif results.get(\u0027Enterprise\u0027):\\n    row[\u0027results_date\u0027] = str(Date())\\n    row[\u0027ent_trust_level\u0027] = results[\u0027Enterprise\u0027].get(\u0027Trust Level\u0027)\\n    row[\u0027gti_trust_level\u0027] = results[\u0027GTI\u0027].get(\u0027Trust Level\u0027)\\n    row[\u0027atd_trust_level\u0027] = results[\u0027ATD\u0027].get(\u0027Trust Level\u0027)\\n    row[\u0027mwg_trust_level\u0027] = results[\u0027MWG\u0027].get(\u0027Trust Level\u0027)\\n\\n\\\"\\\"\\\"\\n{\\n  \u0027Enterprise\u0027: {\\n    \u0027File Provider\u0027: \u0027Enterprise\u0027,\\n    \u0027Create Date\u0027: \u00272020-12-22 10:47:38\u0027,\\n    \u0027Trust Level\u0027: \u0027Known Malicious\u0027,\\n    \u0027Attributes\u0027: {\\n      \u0027Prevalence\u0027: \u00272\u0027,\\n      \u0027Enterprise Size\u0027: \u00276\u0027,\\n      \u0027First Contact\u0027: \u00272020-12-22 10:47:38\u0027,\\n      \u0027File Name Count\u0027: \u00273\u0027,\\n      \u0027Is Prevalent\u0027: \u00270\u0027\\n    }\\n  },\\n  \u0027GTI\u0027: {\\n    \u0027File Provider\u0027: \u0027GTI\u0027,\\n    \u0027Create Date\u0027: \u00272020-12-22 10:48:25\u0027,\\n    \u0027Trust Level\u0027: \u0027Known Malicious\u0027,\\n    \u0027Attributes\u0027: {\\n      \\n    }\\n  },\\n  \u0027ATD\u0027: {\\n    \\n  },\\n  \u0027MWG\u0027: {\\n    \\n  },\\n  \u0027system_list\u0027: [\\n    {\\n      \u0027agentGuid\u0027: \u0027{c0ffbb8b-424f-4c7a-94ca-976d2fa13104}\u0027,\\n      \u0027date\u0027: 1608652232992\\n    },\\n    {\\n      \u0027agentGuid\u0027: \u0027716dd9a1332dbfe8a9a9332f1561d24ee1260aac\u0027,\\n      \u0027date\u0027: 1610624110510\\n    }\\n  ]\\n}\\n\\\"\\\"\\\"\\n\\n\",\"pre_processing_script\":\"lookup_type = {\\n    \\\"Malware MD5 Hash\\\": \\\"md5\\\",\\n    \\\"Malware SHA-1 Hash\\\": \\\"sha1\\\",\\n    \\\"Malware SHA-256 Hash\\\": \\\"sha256\\\"\\n}\\n\\ninputs.mcafee_tie_hash = row[\u0027hash\u0027]\\ninputs.mcafee_tie_hash_type = lookup_type.get(row[\u0027hash_type\u0027], \u0027sha1\u0027)\\n\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0dke6kq\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_10s06aa\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0dke6kq\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_06sheeb\"/\u003e\u003cendEvent id=\"EndEvent_00fj06n\"\u003e\u003cincoming\u003eSequenceFlow_10s06aa\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_10s06aa\" sourceRef=\"ServiceTask_06sheeb\" targetRef=\"EndEvent_00fj06n\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_06sheeb\" id=\"ServiceTask_06sheeb_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"262\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0dke6kq\" id=\"SequenceFlow_0dke6kq_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"262\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"230\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_00fj06n\" id=\"EndEvent_00fj06n_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"415\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"433\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_10s06aa\" id=\"SequenceFlow_10s06aa_di\"\u003e\u003comgdi:waypoint x=\"362\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"415\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"388.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 7,
+      "creator_id": "a@example.com",
+      "description": "Get the current reputation information for a file hash",
+      "export_key": "mcafee_tie_get_latest_reputation",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1611785421122,
+      "name": "McAfee TIE Get Current Reputation",
+      "object_type": "tie_results",
+      "programmatic_name": "mcafee_tie_get_latest_reputation",
+      "tags": [],
+      "uuid": "9fd03be8-3792-4db4-ac9c-7fa1b68549c2",
+      "workflow_id": 153
     }
   ],
   "workspaces": []

@@ -159,7 +159,8 @@ In addition to the dxlclient.config file, three certificate files need to be add
 ---
 
 ## Function - McAfee TIE: Set File Reputation
-Set a file's reputation. This works on MD5, SH1 and SHA256 hashes.
+Set a file's reputation. This works on MD5, SH1 and SHA256 hashes. Either 'Enterprise' or 'External'
+reputations can be set.
 
 Manual action rules are available from an artifact or from the TIE Results datatable.
 
@@ -270,6 +271,7 @@ results = {
 <p>
 
 ```python
+inputs.mcafee_tie_reputation_type = str(rule.properties.mcafee_tie_reputation_type)
 inputs.mcafee_tie_trust_level = str(rule.properties.mcafee_tie_trust_level)
 inputs.mcafee_tie_comment = rule.properties.mcafee_tie_comment.content
 inputs.mcafee_tie_filename = rule.properties.mcafee_tie_filename

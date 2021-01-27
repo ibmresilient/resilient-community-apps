@@ -22,8 +22,8 @@ def codegen_reload_data():
         "package": u"fn_mcafee_tie",
         "message_destinations": [u"mcafee_tie_md"],
         "functions": [u"mcafee_tie_set_file_reputation", u"mcafee_tie_search_hash"],
-        "workflows": [u"mcafee_tie_set_reputation__datatable", u"mcafee_tie_get_latest_reputation", u"mcafee_tie_set_file_reputation", u"mcafee_tie_get_file_reputation"],
-        "actions": [u"McAfee TIE Set File Reputation", u"McAfee TIE Set File Reputation - Datatable", u"McAfee TIE Get File Reputation", u"McAfee TIE Get Latest Reputation"],
+        "workflows": [u"mcafee_tie_set_reputation__datatable", u"mcafee_tie_set_file_reputation", u"mcafee_tie_get_latest_reputation", u"mcafee_tie_get_file_reputation"],
+        "actions": [u"McAfee TIE Set File Reputation", u"McAfee TIE Get Current Reputation", u"McAfee TIE Get File Reputation", u"McAfee TIE Set File Reputation - Datatable"],
         "incident_fields": [],
         "incident_artifact_types": [],
         "datatables": [u"tie_results"],
@@ -47,14 +47,14 @@ def customization_data(client=None):
         - mcafee_tie_search_hash
     - Workflows:
         - mcafee_tie_set_reputation__datatable
-        - mcafee_tie_get_latest_reputation
         - mcafee_tie_set_file_reputation
+        - mcafee_tie_get_latest_reputation
         - mcafee_tie_get_file_reputation
     - Rules:
         - McAfee TIE Set File Reputation
-        - McAfee TIE Set File Reputation - Datatable
+        - McAfee TIE Get Current Reputation
         - McAfee TIE Get File Reputation
-        - McAfee TIE Get Latest Reputation
+        - McAfee TIE Set File Reputation - Datatable
     - Data Tables:
         - tie_results
     """
