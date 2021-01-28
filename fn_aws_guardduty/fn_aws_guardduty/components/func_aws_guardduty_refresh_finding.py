@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
-""" Function to retrieve data for AWS GuardDuty finding"""
+""" Function to refresh data for AWS GuardDuty finding"""
 import logging
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
@@ -11,7 +11,6 @@ import fn_aws_guardduty.util.config as config
 from fn_aws_guardduty.lib.parse_finding import ParseFinding
 from fn_aws_guardduty.lib.resilient_service import ResSvc
 
-LOG = logging.getLogger(__name__)
 PACKAGE_NAME = "fn_aws_guardduty"
 REQUIRED_FIELDS = ["aws_gd_finding_id", "aws_gd_detector_id", "aws_gd_region", "incident_id"]
 
@@ -102,4 +101,3 @@ class FunctionComponent(ResilientComponent):
 
         except Exception:
             yield FunctionError()
-
