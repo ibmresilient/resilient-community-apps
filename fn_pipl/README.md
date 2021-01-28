@@ -42,7 +42,8 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.0.0 | MM/YYYY | Initial Release |
+| 1.1.0 | 01/2021 | App Host Support | 
+| 1.0.0 | 12/2018 | Initial Release |
 
 ---
 
