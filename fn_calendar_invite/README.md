@@ -14,7 +14,7 @@
   NOTE: If your app is available in the container-format only, there is no need to mention the integration server in this readme.
 -->
 
-# Calendar Invite Functions for IBM Resilient
+# Calendar Invite Functions for IBM Security SOAR
 
 ## Table of Contents
 - [Release Notes](#release-notes)
