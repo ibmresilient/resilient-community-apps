@@ -159,19 +159,35 @@ This function sends a meeting invitation via email to the members and owners of 
 <p>
 
 ```python
-results = {
-   'version': '1.0', 
-   'success': True, 
-   'reason': None, 
-   'content': {'recipient': ['a@a.com', 'restest@gmail.com'], 
-               'sender': 'Resilient Meeting Organizer <restest@gmail.com>', 'subject': 'My Incident', 
-               'description': 'My Inicdent meeting'}, 'raw': '{"recipient": ["a@a.com", "restest@gmail.com"], "sender": "Resilient Meeting Organizer <restest@gmail.com>", "subject": "My Incident", "description": "My Incident meeting"}', 'inputs': {'calendar_invite_incident_id': 2151, 'calendar_invite_datetime': 1611291600000, 'calendar_invite_extra_email_addr': 'restest@gmail.com', 'calendar_invite_subject': 'My Incident', 'calendar_invite_description': 'My Incident meeting'}, 
-    'metrics': {'version': '1.0', 
-               'package': 'fn-calendar-invite', 
-               'package_version': '1.1.0', 
-               'host': 'MacBook-Pro.local', 
-               'execution_time_ms': 12759, 
-               'timestamp': '2021-01-08 15:27:01'}
+results = {{
+   "version":"1.0",
+   "success":true,
+   "reason":"None",
+   "content":{
+      "recipient":[
+         "a@a.com",
+         "restest@gmail.com"
+      ],
+      "sender":"Resilient Meeting Organizer <restest@gmail.com>",
+      "subject":"My Incident",
+      "description":"My Inicdent meeting"
+   },
+   "raw":"{\"recipient\": [\"a@a.com\", \"restest@gmail.com\"], \"sender\": \"Resilient Meeting Organizer <restest@gmail.com>\", \"subject\": \"My Incident\", \"description\": \"My Incident meeting\"}",
+   "inputs":{
+      "calendar_invite_incident_id":2151,
+      "calendar_invite_datetime":1611291600000,
+      "calendar_invite_extra_email_addr":"restest@gmail.com",
+      "calendar_invite_subject":"My Incident",
+      "calendar_invite_description":"My Incident meeting"
+   },
+   "metrics":{
+      "version":"1.0",
+      "package":"fn-calendar-invite",
+      "package_version":"1.1.0",
+      "host":"MacBook-Pro.local",
+      "execution_time_ms":12759,
+      "timestamp":"2021-01-08 15:27:01"
+   }
 }
 ```
 
