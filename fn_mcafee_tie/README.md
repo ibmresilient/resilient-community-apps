@@ -286,8 +286,9 @@ inputs.mcafee_tie_hash = artifact.value
 <p>
 
 ```python
-note = u"McAfee TIE File Reputation: {}\nHash: {} ({})\nFile Name: {}\nComment: {}"\
+note = u"McAfee TIE File Reputation: {}\nReputation Type: {}\nHash: {} ({})\nFile Name: {}\nComment: {}"\
             .format(results.inputs['mcafee_tie_trust_level']['name'],
+                    results.inputs['mcafee_tie_reputation_type']['name'],
                     results.inputs['mcafee_tie_hash'],
                     artifact.type,
                     results.inputs['mcafee_tie_filename'],
