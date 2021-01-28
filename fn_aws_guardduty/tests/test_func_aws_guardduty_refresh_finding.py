@@ -7,13 +7,12 @@ from mock import patch
 from sys import version_info
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
-from pytest_resilient_circuits.mocks import BasicResilientMock
 from .mock_artifacts import *
 
 PACKAGE_NAME = "fn_aws_guardduty"
 FUNCTION_NAME = "func_aws_guardduty_refresh_finding"
 
-# Read the default configuration-data section from the package
+# Read the mockconfiguration-data section from the package
 config_data = get_mock_config()
 
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
@@ -56,6 +55,7 @@ def call_func_aws_guardduty_refresh_finding_function(circuits, function_params, 
 
 class TestFuncAwsGuarddutyRefreshFinding:
     """ Tests for the func_aws_guardduty_refresh_finding function"""
+
     time_stamp = "2021-01-22 15:35:48"
     def test_function_definition(self):
         """ Test that the package provides customization_data that defines the function """
@@ -97,8 +97,8 @@ class TestFuncAwsGuarddutyRefreshFinding:
         """ Test calling with sample values for the parameters """
         keys = ["content", "inputs", "metrics", "raw", "reason", "success", "version"]
         keys_content = ["finding", "payload", "data_tables", "timestamp", "region"]
-        keys_payload = ["name", "description", "discovered_date", "severity_code", "properties",
-                        "artifacts", "comments"]
+        keys_incident_properties = ["name", "description", "discovered_date", "severity_code"]
+        keys_payload = keys_incident_properties + ["artifacts", "comments"]
 
         results = call_func_aws_guardduty_refresh_finding_function(circuits_app, mock_inputs)
         assert_keys_in(results, *keys)
@@ -106,5 +106,10 @@ class TestFuncAwsGuarddutyRefreshFinding:
         content = results["content"]
         if content:
             assert_keys_in(content, *keys_content)
-            assert_keys_in(content["payload"], *keys_payload)
-            assert content["payload"] ==  expected_results_2
+            payload = content["payload"]
+            for k in keys_incident_properties:
+                assert payload[k] == expected_results_2[k]
+            assert_keys_in(payload, *keys_payload)
+            assert sorted(payload) == sorted(expected_results_2)
+            assert payload["properties"] == expected_results_2["properties"]
+            assert sorted(payload["artifacts"]) == sorted(expected_results_2["artifacts"])
