@@ -11,7 +11,7 @@ import logging
 import datetime
 from resilient_circuits import ResilientComponent, function, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import validate_fields, ResultPayload
-from fn_calendar_invite.lib.calendar_invite_util import get_email_addresses, build_email_message, send_email, get_proxies
+from fn_calendar_invite.lib.calendar_invite_util import get_email_addresses, build_email_message, send_email, get_proxies, get_timeout
 
 CONFIG_DATA_SECTION = 'fn_calendar_invite'
 
@@ -58,8 +58,6 @@ class FunctionComponent(ResilientComponent):
             e_login = self.options.get("email_username")
             e_password = self.options.get("email_password")
 
-            timeout = 60
-
             now_utc = datetime.datetime.utcnow()
             meeting_time_utc = datetime.datetime.utcfromtimestamp(calendar_invite_datetime / 1000)
             if now_utc > meeting_time_utc:
@@ -86,6 +84,7 @@ class FunctionComponent(ResilientComponent):
 
             # Connect to SMTP server and send the message.
             proxies = get_proxies(self.opts, self.options)
+            timeout = get_timeout(self.opts, self.options)
 
             send_email(host, port, proxies, timeout, sender, e_login, e_password, attendees,
                        email_message_string)

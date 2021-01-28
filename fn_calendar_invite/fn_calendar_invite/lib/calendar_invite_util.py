@@ -31,6 +31,11 @@ def get_proxies(opts, options):
     rc = RequestsCommon(opts, options)
     return rc.get_proxies()
 
+def get_timeout(opts, options):
+    """Get timeout value from app.config"""
+    rc = RequestsCommon(opts, options)
+    return rc.get_timeout()
+
 def parse_proxies(proxies):
     """ Return the first proxy that is defined, else return None."""
     for key, value in proxies.items():
