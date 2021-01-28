@@ -5,8 +5,7 @@ import pytest
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 
-PACKAGE_NAME = "fn_calendar_invite"
-FUNCTION_NAME = "fn_calendar_invite"
+PACKAGE_NAME = FUNCTION_NAME = "fn_calendar_invite"
 
 # Read the default configuration-data section from the package
 config_data = get_config_data(PACKAGE_NAME)
@@ -17,7 +16,7 @@ resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
 
 def call_fn_calendar_invite_function(circuits, function_params, timeout=5):
     # Create the submitTestFunction event
-    evt = SubmitTestFunction("fn_calendar_invite", function_params)
+    evt = SubmitTestFunction(FUNCTION_NAME, function_params)
 
     # Fire a message to the function
     circuits.manager.fire(evt)
