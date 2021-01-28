@@ -156,6 +156,10 @@ In addition to the dxlclient.config file, three certificate files need to be add
   ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png)
 
 
+#### Custom Artifact Type
+A new artifact type is provided, `Certificate SHA-1 Hash`. This can be used to create new artifacts
+which are different than Malware SHA-1 Hash artifacts. The latter are used for getting and 
+setting reputations.
 ---
 
 ## Function - McAfee TIE: Set File Reputation
@@ -297,7 +301,7 @@ note = u"McAfee TIE File Reputation: {}\nReputation Type: {}\nHash: {} ({})\nFil
 if results.content:
     incident.addNote("Set reputation successful\n{}".format(note))
 else:
-    incident.addNote("Set reputation unsuccessful\n{}".format(note))
+    incident.addNote("Set reputation unsuccessful. An internal McAfee error has occurred.\n{}".format(note))
 ```
 
 </p>
@@ -444,7 +448,6 @@ if results.get("Enterprise"):
     row['results_date'] = str(Date())
     row["hash_type"] = artifact.type
     row["hash"] = artifact.value
-    row["file_provider"] = results["Enterprise"].get("File Provider")
     row["ent_trust_level"] = results["Enterprise"].get("Trust Level")
     row["tie_create_date"] = results["Enterprise"].get("Create Date")
     row["gti_trust_level"] = results["GTI"].get("Trust Level")
@@ -470,7 +473,6 @@ tie_results
 | Column Name | API Access Name | Type | Tooltip |
 | ----------- | --------------- | ---- | ------- |
 | Results Date | `results_date` | `text` | - |
-| File Provider | `file_provider` | `text` | - |
 | File Name | `file_name` | `text` | - |
 | Hash | `hash` | `text` | - |
 | Hash Type | `hash_type` | `text` | - |

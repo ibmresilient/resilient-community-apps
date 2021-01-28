@@ -22,10 +22,10 @@ def codegen_reload_data():
         "package": u"fn_mcafee_tie",
         "message_destinations": [u"mcafee_tie_md"],
         "functions": [u"mcafee_tie_search_hash", u"mcafee_tie_set_file_reputation"],
-        "workflows": [u"mcafee_tie_get_latest_reputation", u"mcafee_tie_set_reputation__datatable", u"mcafee_tie_set_file_reputation", u"mcafee_tie_get_file_reputation"],
-        "actions": [u"McAfee TIE Set File Reputation - Datatable", u"McAfee TIE Get Current File Reputation", u"McAfee TIE Set File Reputation", u"McAfee TIE Get File Reputation"],
+        "workflows": [u"mcafee_tie_get_file_reputation", u"mcafee_tie_set_reputation__datatable", u"mcafee_tie_get_latest_reputation", u"mcafee_tie_set_file_reputation"],
+        "actions": [u"McAfee TIE Get Current File Reputation", u"McAfee TIE Get File Reputation", u"McAfee TIE Set File Reputation - Datatable", u"McAfee TIE Set File Reputation"],
         "incident_fields": [],
-        "incident_artifact_types": [],
+        "incident_artifact_types": [u"certificate_sha1_hash"],
         "datatables": [u"tie_results"],
         "automatic_tasks": [],
         "scripts": []
@@ -46,15 +46,17 @@ def customization_data(client=None):
         - mcafee_tie_search_hash
         - mcafee_tie_set_file_reputation
     - Workflows:
-        - mcafee_tie_get_latest_reputation
-        - mcafee_tie_set_reputation__datatable
-        - mcafee_tie_set_file_reputation
         - mcafee_tie_get_file_reputation
+        - mcafee_tie_set_reputation__datatable
+        - mcafee_tie_get_latest_reputation
+        - mcafee_tie_set_file_reputation
     - Rules:
-        - McAfee TIE Set File Reputation - Datatable
         - McAfee TIE Get Current File Reputation
-        - McAfee TIE Set File Reputation
         - McAfee TIE Get File Reputation
+        - McAfee TIE Set File Reputation - Datatable
+        - McAfee TIE Set File Reputation
+    - Custom Artifact Types:
+        - certificate_sha1_hash
     - Data Tables:
         - tie_results
     """
