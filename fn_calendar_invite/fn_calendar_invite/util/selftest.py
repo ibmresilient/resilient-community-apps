@@ -8,7 +8,7 @@ Usage: resilient-circuits selftest -l fn_calendar_invite
 
 import logging
 from resilient_lib import validate_fields
-from fn_calendar_invite.lib.calendar_invite_util import send_email, get_proxies
+from fn_calendar_invite.lib.calendar_invite_util import send_email, get_proxies, get_timeout
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
@@ -31,7 +31,7 @@ def selftest_function(opts):
     host = app_configs.get("email_host")
     port = int(app_configs.get("email_port"))
     proxies = get_proxies(opts, app_configs)
-    timeout = 60
+    timeout = get_timeout(opts, app_configs)
 
     # Build the email message string to be sent.
     sender = u"{} <{}>".format(nickname, username)
