@@ -112,4 +112,4 @@ class TestFuncAwsGuarddutyRefreshFinding:
             assert_keys_in(payload, *keys_payload)
             assert sorted(payload) == sorted(expected_results_2)
             assert payload["properties"] == expected_results_2["properties"]
-            assert sorted(payload["artifacts"]) == sorted(expected_results_2["artifacts"])
+            assert len(payload["artifacts"]) == len(expected_results_2["artifacts"])
