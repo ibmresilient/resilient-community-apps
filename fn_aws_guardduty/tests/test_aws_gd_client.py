@@ -86,7 +86,7 @@ class TestAWSGdClient:
         assert (expected_result == response)
 
     """ Test aws_gd_client.get"""
-    @patch('fn_aws_guardduty.lib.aws_gd_client.AwsGdClient._get_client', side_effect=mocked_get_client)
+    @patch('fn_aws_guardduty.lib.aws_gd_client.AwsGdClient._get_client', side_effect=mocked_aws)
     @pytest.mark.parametrize("op, expected_result", [
         ("get_findings", get_cli_raw_responses("get_findings")["Findings"])
     ])

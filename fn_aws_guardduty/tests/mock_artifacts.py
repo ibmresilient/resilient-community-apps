@@ -244,7 +244,17 @@ def get_cli_raw_responses(op):
                     'ResourceRole': 'TARGET', 'ServiceName': 'guardduty'}, 'Severity': 2,
                                                                      'Title': 'API GeneratedFindingAPIName was invoked from an IP address on a custom threat list.',
                                                                      'Type': 'UnauthorizedAccess:S3/MaliciousIPCaller.Custom',
-                                                                     'UpdatedAt': '2020-11-26T15:18:12.620Z'}]}        )
+                                                                     'UpdatedAt': '2020-11-26T15:18:12.620Z'}]}
+        ),
+        "archive_findings": (
+            {'ResponseMetadata': {'RetryAttempts': 0, 'HTTPStatusCode': 200,
+                                  'RequestId': 'af84ee9f-7267-478e-ade9-4ec1ce50b66c',
+                                  'HTTPHeaders': {'x-amzn-requestid': 'af84ee9f-7267-478e-ade9-4ec1ce50b66c',
+                                                  'content-length': '0', 'x-amz-apigw-id': 'Z6P_6ET5iYcFlXg=',
+                                                  'x-amzn-trace-id': 'Root=1-6013f9ff-7991c29e4458ff242c99d482;Sampled=0',
+                                                  'connection': 'keep-alive', 'date': 'Fri, 29 Jan 2021 12:05:19 GMT',
+                                                  'content-type': 'application/json'}}}
+        )
     }
     return response[op]
 
@@ -398,6 +408,7 @@ def get_mocked_results(type):
                                'aws_guardduty_finding_updated_at': '2020-11-26T15:18:12.620Z',
                                'aws_guardduty_region': 'us-west-2', 'aws_guardduty_resource_type': 'S3Bucket',
                                'aws_guardduty_count': 4,
+                               'aws_guardduty_archived': 'False',
                                'aws_guardduty_detector_id': 'f2baedb0ac74f8f42fc929e15f56da6a'}, 'artifacts': [
                 {'type': {'name': 'aws_iam_access_key_id'}, 'description': {'format': 'text',
                                                                             'content': "'AWS IAM Access Key ID' extracted from GuardDuty from finding property 'AccessKeyId' at path '['Resource', 'AccessKeyDetails']'."},
@@ -448,6 +459,7 @@ def get_mocked_results(type):
              u'severity_code': u'Low', u'comments': [], u'properties': {u'aws_guardduty_resource_type': u'S3Bucket',
                                                                         u'aws_guardduty_finding_updated_at': u'2020-11-26T15:18:12.620Z',
                                                                         u'aws_guardduty_count': 4,
+                                                                        u'aws_guardduty_archived': u'False',
                                                                         u'aws_guardduty_finding_arn': u'arn:aws:guardduty:us-west-2:834299573936:detector/f2baedb0ac74f8f42fc929e15f56da6a/finding/60baffd3f9042e38640f2300d5c5a631',
                                                                         u'aws_guardduty_detector_id': u'f2baedb0ac74f8f42fc929e15f56da6a',
                                                                         u'aws_guardduty_finding_type': u'UnauthorizedAccess:S3/MaliciousIPCaller.Custom',
@@ -915,8 +927,8 @@ def get_function_params(op):
     }
     return response[op]
 
-# Mocked GuardDuty client response for standalone tests.
-def mocked_get_client(*args, **kwargs):
+# Mocked GuardDuty AWS client response for standalone tests.
+def mocked_aws(*args, **kwargs):
     class MockResponse:
         """Class will be used by the mock to replace gd client in circuits tests"""
         def __init__(self, *args, **kwargs):
@@ -924,6 +936,7 @@ def mocked_get_client(*args, **kwargs):
 
         def get_findings(self):
             return get_cli_raw_responses("get_findings")
+
         def __init__(self, *args, **kwargs):
             self.exceptions = {}
 
@@ -933,7 +946,11 @@ def mocked_get_client(*args, **kwargs):
             else:
                 return False
 
+        def archive_findings(self):
+            return get_cli_raw_responses("archive_findings")
+
     return MockResponse(args, **kwargs)
+
 
 # Mocked paginate class for standalone tests.
 class Paginate(object):
@@ -981,6 +998,16 @@ def mocked_gd_client(*args, **kwargs):
                     return []
                 else:
                     return get_cli_raw_responses("get_findings")["Findings"]
+
+        def post(self, op, **kwargs):
+            if op == "archive_findings":
+                if "32b7017d2019dfe922abc4e07c3fdfff" in kwargs["DetectorId"]:
+                    return {"status": "error",
+                            "msg": "An error occurred (BadRequestException) when calling the ArchiveFindings operation: "
+                                   "The request is rejected because the input detectorId is not owned by the current account."}
+                else:
+                    return{"status": "ok"}
+
     return MockResponse(*args, **kwargs)
 
 def mocked_ResSvc(*args, **kwargs):
