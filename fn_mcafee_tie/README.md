@@ -29,6 +29,7 @@
   - [App Configuration](#app-configuration)
   - [Custom Layouts](#custom-layouts)
 - [Function - McAfee TIE: Set File Reputation](#function---mcafee-tie-set-file-reputation)
+  - [Support for External Reputations](#support-for-external-reputations)
 - [Function - McAfee TIE search hash](#function---mcafee-tie-search-hash)
 - [Data Table - TIE Results](#data-table---tie-results)
 - [Rules](#rules)
@@ -157,9 +158,11 @@ In addition to the dxlclient.config file, three certificate files need to be add
 
 
 #### Custom Artifact Type
+
 A new artifact type is provided, `Certificate SHA-1 Hash`. This can be used to create new artifacts
 which are different than Malware SHA-1 Hash artifacts. The latter are used for getting and 
 setting reputations.
+
 ---
 
 ## Function - McAfee TIE: Set File Reputation
@@ -306,6 +309,20 @@ else:
 
 </p>
 </details>
+
+
+### Support for External Reputations
+It's possible to configure your workflows to use `External` reputations as well as `Enterprise` reputations. One solution would be to add a selection field to your action rule with the values 'External' and 'Enterprise'. Then, in your workflow, you can alter the pre-processing script to reference the reputation type from the rule properties:
+
+```
+inputs.mcafee_tie_reputation_type = str(rule.properties.mcafee_tie_reputation_type)
+```
+
+Creating a new activity field as type Select with Enterprise and External values.
+ ![screenshot: creating a new activity field ](./doc/screenshots/creating_activity_field.png)
+
+Adding the activity field to the rule.
+  ![screenshot: Adding the activity field to the rule ](./doc/screenshots/rule_activity_field.png)
 
 ---
 ## Function - McAfee TIE search hash
