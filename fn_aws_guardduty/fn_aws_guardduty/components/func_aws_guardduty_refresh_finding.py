@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 """ Function to refresh data for AWS GuardDuty finding"""
 import logging
