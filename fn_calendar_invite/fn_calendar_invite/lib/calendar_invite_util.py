@@ -1,15 +1,18 @@
-# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """
 This module contains utility routines used by the fn_calensdar_invite functions
 """
-import smtplib
-import time
+from fn_calendar_invite.lib.smtplib_proxy import ProxySMTP
 from datetime import datetime, timedelta
 import sys
+if sys.version_info.major < 3:
+   from urlparse import urlparse
+else:
+   from urllib.parse import urlparse
 
-if sys.version_info[0] == 2:
+if sys.version_info.major < 3:
     from email.MIMEMultipart import MIMEMultipart
     from email.MIMEBase import MIMEBase
     from email.MIMEText import MIMEText
@@ -21,6 +24,30 @@ else:
     from email.mime.text import MIMEText
     from email.utils import formatdate
     from email.encoders import encode_base64
+from resilient_lib import RequestsCommon
+
+def get_proxies(opts, options):
+    """Get proxy data from app.config"""
+    rc = RequestsCommon(opts, options)
+    return rc.get_proxies()
+
+def get_timeout(opts, options):
+    """Get timeout value from app.config"""
+    rc = RequestsCommon(opts, options)
+    return rc.get_timeout()
+
+def parse_proxies(proxies):
+    """ Return the first proxy that is defined, else return None."""
+    for key, value in proxies.items():
+        if value:
+            parsed_proxy = urlparse(value)
+            proxy_host = parsed_proxy.hostname
+            proxy_port = parsed_proxy.port
+            proxy_user = parsed_proxy.username
+            proxy_pass = parsed_proxy.password
+            return proxy_host, proxy_port, proxy_user, proxy_pass
+    return None, None, None, None
+
 
 def get_user_id (client, uid):
     """Get user id"""
@@ -133,9 +160,14 @@ def build_email_message(calendar_invite_datetime, calendar_invite_subject, calen
 
     return msg.as_string()
 
-def send_email(host, port, from_email, e_login, e_password, attendees_email_addr, msg_string):
+def send_email(host, port, proxies, timeout, from_email, e_login, e_password, attendees_email_addr, msg_string):
     """Open the SMTP host port and send the email"""
-    mailServer = smtplib.SMTP(host, port)
+
+    # Get proxy data if defined
+    proxy_host, proxy_port, proxy_user, proxy_pass = parse_proxies(proxies)
+
+    # Send message through SMTP
+    mailServer = ProxySMTP(host, port, proxy_host, proxy_port, proxy_user, proxy_pass, timeout=timeout)
     mailServer.ehlo()
     mailServer.starttls()
     mailServer.login(e_login, e_password)
