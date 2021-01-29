@@ -21,12 +21,12 @@ def codegen_reload_data():
     return {
         "package": u"fn_aws_guardduty",
         "message_destinations": [u"fn_aws_gd"],
-        "functions": [u"func_aws_guardduty_refresh_finding"],
-        "workflows": [u"wf_aws_guardduty_refresh_finding"],
-        "actions": [u"Example: AWS GuardDuty: Refresh Finding"],
-        "incident_fields": [u"aws_guardduty_finding_id", u"aws_guardduty_finding_arn", u"aws_guardduty_finding_type", u"aws_guardduty_resource_type", u"aws_guardduty_detector_id", u"aws_guardduty_count", u"aws_guardduty_finding_updated_at", u"aws_guardduty_region"],
-        "incident_artifact_types": [u"aws_iam_user_name", u"aws_iam_access_key_id"],
-        "datatables": [u"gd_resource_affected", u"gd_action_details"],
+        "functions": [u"func_aws_guardduty_archive_finding", u"func_aws_guardduty_refresh_finding"],
+        "workflows": [u"wf_aws_guardduty_refresh_finding", u"wf_aws_guardduty_archive_finding"],
+        "actions": [u"Example: AWS GuardDuty: Refresh Finding", u"Example: AWS GuardDuty: Archive Finding"],
+        "incident_fields": [u"aws_guardduty_finding_type", u"aws_guardduty_finding_updated_at", u"aws_guardduty_finding_id", u"aws_guardduty_detector_id", u"aws_guardduty_archived", u"aws_guardduty_resource_type", u"aws_guardduty_count", u"aws_guardduty_finding_arn", u"aws_guardduty_region"],
+        "incident_artifact_types": [u"aws_iam_access_key_id", u"aws_iam_user_name"],
+        "datatables": [u"gd_action_details", u"gd_resource_affected"],
         "automatic_tasks": [],
         "scripts": []
     }
@@ -43,26 +43,30 @@ def customization_data(client=None):
     - Message Destinations:
         - fn_aws_gd
     - Functions:
+        - func_aws_guardduty_archive_finding
         - func_aws_guardduty_refresh_finding
     - Workflows:
         - wf_aws_guardduty_refresh_finding
+        - wf_aws_guardduty_archive_finding
     - Rules:
         - Example: AWS GuardDuty: Refresh Finding
+        - Example: AWS GuardDuty: Archive Finding
     - Incident Fields:
-        - aws_guardduty_finding_id
-        - aws_guardduty_finding_arn
         - aws_guardduty_finding_type
-        - aws_guardduty_resource_type
-        - aws_guardduty_detector_id
-        - aws_guardduty_count
         - aws_guardduty_finding_updated_at
+        - aws_guardduty_finding_id
+        - aws_guardduty_detector_id
+        - aws_guardduty_archived
+        - aws_guardduty_resource_type
+        - aws_guardduty_count
+        - aws_guardduty_finding_arn
         - aws_guardduty_region
     - Custom Artifact Types:
-        - aws_iam_user_name
         - aws_iam_access_key_id
+        - aws_iam_user_name
     - Data Tables:
-        - gd_resource_affected
         - gd_action_details
+        - gd_resource_affected
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)

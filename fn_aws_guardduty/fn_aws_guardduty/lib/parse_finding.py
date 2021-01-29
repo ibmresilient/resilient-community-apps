@@ -74,10 +74,18 @@ class ParseFinding():
         # Use mapping to get incident field values from finding payload.
         for gd_prop in const.CUSTOM_FIELDS_MAP.keys():
             (res_prop, path) = map_property(gd_prop)
+
+            # Get GuardDuty property value.
             if path:
-                self.payload["properties"][res_prop] = self.finding.get(path, {}).get(gd_prop)
+                gd_prop_val = self.finding.get(path, {}).get(gd_prop)
             else:
-                self.payload["properties"][res_prop] = self.finding.get(gd_prop)
+                gd_prop_val = self.finding.get(gd_prop)
+
+            # Convert boolean value to string 'True' or 'False'
+            if isinstance(gd_prop_val, bool):
+                gd_prop_val = "{}".format(gd_prop_val)
+
+            self.payload["properties"][res_prop] = gd_prop_val
 
         if self.finding["Region"] != self.region:
             # In case region in finding payload is different default to value used with API.

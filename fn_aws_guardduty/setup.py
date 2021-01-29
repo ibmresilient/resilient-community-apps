@@ -42,7 +42,8 @@ setup(
         "resilient.circuits.components": [
             # When setup.py is executed, loop through the .py files in the components directory and create the entry points.
             "FuncAwsGuarddutyPoller = fn_aws_guardduty.components.func_aws_guardduty_poller:FuncAwsGuarddutyPoller",
-            "FuncAwsGuarddutyRefreshFindingFunctionComponent = fn_aws_guardduty.components.func_aws_guardduty_refresh_finding:FunctionComponent"
+            "FuncAwsGuarddutyRefreshFindingFunctionComponent = fn_aws_guardduty.components.func_aws_guardduty_refresh_finding:FunctionComponent",
+            "FuncAwsGuarddutyArchiveFindingFunctionComponent = fn_aws_guardduty.components.func_aws_guardduty_archive_finding:FunctionComponent",
         ],
         "resilient.circuits.configsection": ["gen_config = fn_aws_guardduty.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_aws_guardduty.util.customize:customization_data"],

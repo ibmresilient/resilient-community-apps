@@ -14,6 +14,7 @@ CUSTOM_FIELDS_MAP = {
     "ResourceType": {"aws_guardduty_resource_type": {"path": "Resource"}},
     "DetectorId": {"aws_guardduty_detector_id": {"path": "Service"}},
     "Count": {"aws_guardduty_count": {"path": "Service"}},
+    "Archived": {"aws_guardduty_archived": {"path": "Service"}},
 }
 # Map Resilient artifact types to GuardDuty properties.
 ARTIFACT_TYPES_MAP = {

@@ -181,7 +181,7 @@ class AwsGdClient():
         :return status: Return status string.
         """
         # Set default good status:
-        status = "OK"
+        status = {"status": "ok"}
         try:
             # Get the AWS GuardDuty object corresponding to the operation "op".
             aws_gd_op = getattr(self.gd, op)
@@ -190,11 +190,13 @@ class AwsGdClient():
                       op, str(attr_ex))
             raise attr_ex
         try:
-            aws_gd_op(**kwargs)
+            res = aws_gd_op(**kwargs)
 
         except self.gd.exceptions.ClientError as invalid_ex:
-            if "ValidationError" in str(invalid_ex):
-                return "ValidationError"
+            for excp in ["ValidationError", "BadRequestException", "InternalServerErrorException"
+                         "EndpointConnectionError"]:
+                if excp in str(invalid_ex):
+                    return {"status": "error", "msg": str(invalid_ex)}
 
             LOG.info("ERROR with %s and args: '%s', Got exception: %s",
                      aws_gd_op.__name__, kwargs, "ValidationErrorException")

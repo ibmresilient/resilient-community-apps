@@ -104,6 +104,7 @@ def update_fields():
     incident.severity_code = PAYLOAD["severity_code"]
     incident.properties.aws_guardduty_finding_updated_at = PAYLOAD["properties"]["aws_guardduty_finding_updated_at"]
     incident.properties.aws_guardduty_count = str(PAYLOAD["properties"]["aws_guardduty_count"])
+    incident.properties.aws_guardduty_archived= str(PAYLOAD["properties"]["aws_guardduty_archived"])
 
 
 def update_datatables():
