@@ -51,5 +51,5 @@ for integration in ${INTEGRATIONS[@]}; do
             fi
         done
 done
-printf 'Pylint Run Complete.  Final Status [%d]\n' $status
+echo "Pylint Run Complete.  Final Status $status"
 exit $status

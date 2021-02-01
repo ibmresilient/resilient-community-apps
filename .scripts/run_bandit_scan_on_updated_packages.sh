@@ -25,11 +25,11 @@ do
     last_status=$?;
 
     if [ $last_status -ne 0 ]; then
-            printf 'Security Scan failure for %s which gave an exit code of [%d]\n' $package $last_status;
+            echo "Security Scan failure for $package which gave an exit code of $last_status"
             status=$last_status;
     fi
 
 done
-printf 'Bandit security scan of packages complete.  Final Status [%d]\n' $status;
+echo "Bandit security scan of packages complete.  Final Status $status"
 exit $status
 

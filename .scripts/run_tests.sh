@@ -24,14 +24,14 @@ do
         tox -c $toxfile -- --resilient_email 'integrations@example.org' --resilient_password 'supersecret' --resilient_host 'example.com' -m "not livetest" tests;
         last_status=$?;
         if [ $last_status -ne 0 ]; then
-            printf 'FAILURE %s: [%d]\n' $toxfile $last_status;
+            echo "FAILURE $toxfile: [$last_status]"
             status=$last_status;
         fi
     else
         # Skip tests if TOXENV variable is not in the tox.ini envlist.
-        printf 'Skipping %s because TOXENV %s incompatible\n' "$toxfile" "$TOXENV"
+        echo "Skipping $toxfile because TOXENV $TOXENV incompatible"
     fi
 done;
 
-printf 'Test Run Complete.  Final Status [%d]\n' $status;
+echo "Test Run Complete.  Final Status [$status]"
 exit $status
