@@ -1,4 +1,4 @@
-#!/bin/bash -x 
+#!/bin/bash 
 
 # Title:         run_bandit_scan_on_updated_packages.sh
 # Author:        ryan.gordon1@ibm.com

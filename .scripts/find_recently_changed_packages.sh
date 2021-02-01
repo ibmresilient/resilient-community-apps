@@ -5,6 +5,10 @@
 # - From these packages gather the filepaths
 # - Using the filepaths, return a list of project names
 # - Filter the list into a Set to ensure we don't test something twice
+PATHS_TO_USE="(fn_|rc-|app_)+"
+
+set -x 
+
 function find_recently_changed_packages(){
 
     # Declare an array that will hold the fn_ or rc_ packages 
@@ -31,7 +35,7 @@ function find_recently_changed_packages(){
     for file in ${commit_range}; 
     do 
         # If the file contains either fn_ or rc_ in the path 
-        if [[ $file =~ (fn_|rc-)+ ]]; then 
+        if [[ $file =~ $PATHS_TO_USE ]]; then 
             # Strip everything except the first directory in the path (integration name) and append to an array
             packages_that_have_been_changed+=($(echo "$file" | awk -F "/" '{print $1}')); 
         fi
