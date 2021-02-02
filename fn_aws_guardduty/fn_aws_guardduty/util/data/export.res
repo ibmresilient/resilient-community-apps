@@ -185,12 +185,7 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_aws_guardduty",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "AWS GuardDuty Region",
       "tooltip": "",
@@ -219,12 +214,7 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_aws_guardduty",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "AWS GuardDuty Count",
       "tooltip": "",
@@ -253,12 +243,7 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_aws_guardduty",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "AWS GuardDuty Finding Id",
       "tooltip": "",
@@ -287,12 +272,7 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_aws_guardduty",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "AWS GuardDuty Finding Arn",
       "tooltip": "",
@@ -321,12 +301,7 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_aws_guardduty",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "AWS GuardDuty Resource Type",
       "tooltip": "",
@@ -355,12 +330,7 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_aws_guardduty",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "AWS GuardDuty Detector Id",
       "tooltip": "",
@@ -389,12 +359,7 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_aws_guardduty",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "AWS GuardDuty Resource Updated At",
       "tooltip": "",
@@ -423,12 +388,7 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_aws_guardduty",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "AWS GuardDuty Finding Type",
       "tooltip": "",
@@ -540,12 +500,7 @@
       "programmatic_name": "aws_iam_access_key_id",
       "reg_exp": null,
       "system": false,
-      "tags": [
-        {
-          "tag_handle": "fn_aws_guardduty",
-          "value": null
-        }
-      ],
+      "tags": [],
       "use_for_relationships": true,
       "uuid": "a33a1971-162c-4417-b344-8708f9d25644",
       "version": 0
@@ -562,12 +517,7 @@
       "programmatic_name": "aws_iam_user_name",
       "reg_exp": null,
       "system": false,
-      "tags": [
-        {
-          "tag_handle": "fn_aws_guardduty",
-          "value": null
-        }
-      ],
+      "tags": [],
       "use_for_relationships": true,
       "uuid": "3a0a5309-ba33-47cb-92df-c8a506f87317",
       "version": 0
@@ -1262,12 +1212,7 @@
         "for_who": []
       },
       "scripts": [],
-      "tags": [
-        {
-          "tag_handle": "fn_aws_guardduty",
-          "value": null
-        }
-      ],
+      "tags": [],
       "type_id": 8,
       "type_name": "gd_action_details",
       "uuid": "883bd79f-a9e2-4544-b5bd-cf866725d42c"
@@ -1664,12 +1609,7 @@
         "for_who": []
       },
       "scripts": [],
-      "tags": [
-        {
-          "tag_handle": "fn_aws_guardduty",
-          "value": null
-        }
-      ],
+      "tags": [],
       "type_id": 8,
       "type_name": "gd_resource_affected",
       "uuid": "b2462a6f-8b07-4702-8943-e0df9213c349"
