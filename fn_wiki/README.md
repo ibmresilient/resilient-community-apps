@@ -90,7 +90,6 @@ This app has no settings in app.config.
 
 ---
 
-
 ## Function - Wiki Get Contents
 Return the contents of a wiki page based on the page's title or id. Optionally convert the results to JSON format (for string-encoded JSON data).
 
@@ -101,8 +100,8 @@ Return the contents of a wiki page based on the page's title or id. Optionally c
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `wiki_contents_as_json` | `boolean` | No | `-` | - |
-| `wiki_title_or_id` | `text` | Yes | `-` | Either wiki page title or numeric id |
-| `wiki_parent_title_or_id` | `text` | No | `-` | Either wiki parent page title or numeric id. Use to ensure you're referencing the correct child page. None will look for any page title that matches. |
+| `wiki_path` | `text` | Yes | `parent/sub parent/target_wiki` | Use slash between wiki pages |
+
 
 </p>
 </details>
@@ -135,7 +134,7 @@ None
 <p>
 
 ```python
-note = u"Page/Id: '{}'".format(results.inputs.get('wiki_title') if results.inputs.get('wiki_title') else results.inputs.get('wiki_id'))
+note = u"Page: '{}'".format(results.inputs.get('wiki_path'))
 if results.content:
     note = u"{} contents:\n\n{}".format(note, results.content['text'])
     if results.content.get('json'):
@@ -161,8 +160,7 @@ Create or update a wiki page in Resilient based on the page's title or id. Optio
 | ---- | :--: | :------: | ------- | ------- |
 | `wiki_body` | `text` | Yes | `-` | - |
 | `wiki_create_if_missing` | `boolean` | Yes | `-` | Specify 'No' to only update |
-| `wiki_parent_title_or_id` | `text` | No | `-` | Either wiki page title or numeric id |
-| `wiki_title_or_id` | `text` | Yes | `-` | Either wiki page title or numeric id |
+| `wiki_path` | `text` | Yes | `parent/sub parent/target_wiki` | Use slash between wiki pages |
 
 </p>
 </details>
@@ -195,7 +193,7 @@ None
 <p>
 
 ```python
-note = u"Page/Id: '{}'".format(results.inputs.get('wiki_title') if results.inputs.get('wiki_title') else results.inputs.get('wiki_id'))
+note = u"Page/Id: '{}'".format(results.inputs.get('wiki_path'))
 if results.content:
     incident.addNote(u"{} created/updated\n\n{}".format(note, results.content['text']))
 ```
@@ -214,8 +212,7 @@ Search a wiki page based on a search term and return the matching lines. The sea
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `wiki_search_term` | `text` | No | `-` | text or regular expression format |
-| `wiki_title_or_id` | `text` | Yes | `-` | Either wiki page title or numeric id |
-| `wiki_parent_title_or_id` | `text` | No | `-` | Either wiki parent page title or numeric id. Use to ensure you're referencing the correct child page. None will look for any page title that matches. |
+| `wiki_path` | `text` | Yes | `parent/sub parent/target_wiki` | Use slash between wiki pages |
 
 </p>
 </details>
@@ -248,7 +245,7 @@ None
 <p>
 
 ```python
-note = u"Page/Id: '{}'".format(results.inputs.get('wiki_title') if results.inputs.get('wiki_title') else results.inputs.get('wiki_id'))
+note = u"Page/Id: '{}'".format(results.inputs.get('wiki_path'))
 if results.content:
     incident.addNote(u"{}\n\n{}".format(note, "\n".join(results.content)))
 else:
@@ -259,10 +256,6 @@ else:
 </details>
 
 ---
-
-
-
-
 
 ## Rules
 Use the example rules and workflows to understand how to use the inputs and parse the resulting content. Design your own rules and workflows based on your business requirements. 

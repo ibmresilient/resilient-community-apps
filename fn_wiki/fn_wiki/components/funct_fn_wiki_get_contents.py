@@ -7,7 +7,7 @@ import json
 import logging
 from fn_wiki.lib.wiki_common import WikiHelper
 from resilient_circuits import ResilientComponent, handler, function, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import ResultPayload
+from resilient_lib import ResultPayload, validate_fields
 
 PACKAGE_NAME = "fn_wiki"
 
@@ -29,20 +29,18 @@ class FunctionComponent(ResilientComponent):
     def _fn_get_wiki_contents_function(self, event, *args, **kwargs):
         """Function: None"""
         try:
-
+            validate_fields(["wiki_path"], kwargs)
             # Get the wf_instance_id of the workflow this Function was called in
             #wf_instance_id = event.message["workflow_instance"]["workflow_instance_id"]
             #yield StatusMessage("Starting 'fn_get_wiki_contents' running in workflow '{0}'".format(wf_instance_id))
 
             # Get the function parameters:
             wiki_contents_as_json = bool(kwargs.get("wiki_contents_as_json", False))  # boolean
-            wiki_title_or_id = kwargs.get("wiki_title_or_id")  # text
-            wiki_parent_title_or_id = kwargs.get("wiki_parent_title_or_id")  # text
+            wiki_path = kwargs.get("wiki_path")  # text
 
             log = logging.getLogger(__name__)
             log.info("wiki_contents_as_json: %s", wiki_contents_as_json)
-            log.info(u"wiki_title_or_id: %s", wiki_title_or_id)
-            log.info(u"wiki_parent_title_or_id: %s", wiki_parent_title_or_id)
+            log.info(u"wiki_path: %s", wiki_path)
 
             ##############################################
             # PUT YOUR FUNCTION IMPLEMENTATION CODE HERE #
@@ -50,17 +48,24 @@ class FunctionComponent(ResilientComponent):
             rp = ResultPayload(PACKAGE_NAME, **kwargs)
             helper = WikiHelper(self.rest_client())
 
-            # find the wiki page
-            content = helper.get_wiki_contents(wiki_title_or_id, wiki_parent_title_or_id)
+            # separate the target wiki from it's parent path
+            wiki_list = wiki_path.strip().split("/")
+            wiki_title = wiki_list.pop()
 
-            reason = None
-            if content and wiki_contents_as_json:
-                content['json'] = json.loads(content['text'])
-            elif not content:
-                reason = u"Unable to find wiki by title or id: {}".format(wiki_title_or_id)
+            # find the wiki page
+            content = helper.get_wiki_contents(wiki_title, wiki_list)
+            log.debug(content)
+
+            content_text = reason = None
+            if content:
+                content_text = content['text']
+                if wiki_contents_as_json:
+                    content['json'] = json.loads(content_text.replace('\n', ''))
+            else:
+                reason = u"Unable to find wiki by path: {}".format(wiki_path)
                 yield StatusMessage(reason)
 
-            results = rp.done(False if reason else True, content, reason=reason)
+            results = rp.done(not bool(reason), content, reason=reason)
             # add the title of the wiki page
             results['title'] = content.get('title') if content else None
 

@@ -1,49 +1,58 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 # (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
-
+import logging
 from cachetools import cached, TTLCache
 
+LOG = logging.getLogger(__name__)
 WIKI_URL = "/wikis"
 
 class WikiHelper():
     def __init__(self, res_client):
         self.res_client = res_client
 
-    def get_wiki_id_by_title(self, title_or_id, parent_title_or_id):
+    def get_wiki_contents(self, wiki_title, wiki_parent_path):
+        # grab the wiki content
+        wiki_id, _ = self.get_wiki_by_title(wiki_title, wiki_parent_path)
+        if not wiki_id:
+            return None
+
+        return self.res_client.get('{}/{}'.format(WIKI_URL, wiki_id))
+
+    def get_wiki_by_title(self, title, parent_path_list):
         # get the wikis for the org
-        all_wikis = self.get_wikis()
+        wikis = self.get_wikis()
 
-        id_type, wiki_title  = self.is_wiki_id(title_or_id)
-        parent_type = parent_wiki_title = None
-        if parent_title_or_id:
-            parent_type, parent_wiki_title = self.is_wiki_id(parent_title_or_id)
+        for parent_name in parent_path_list:
+            if parent_name in wikis:
+                wikis = wikis[parent_name]['children']
+            else:
+                LOG.error(wikis)
+                raise ValueError(u"Unable to find parent page: %s", parent_name)
 
-        # match wiki defined by workflow to get id
-        for wiki in all_wikis['entities']:
-            if wiki[id_type] == wiki_title and parent_title_or_id is None:
-                return wiki['id'], None
-
-            if parent_title_or_id is None or wiki[parent_type] == parent_wiki_title:
-                # look for child pages
-                for child in wiki['children']:
-                    if child[id_type] == wiki_title:
-                        return child['id'], wiki['id']
+        if title in wikis:
+            return wikis[title]['id'], wikis[title]['parent']
 
         return None, None
 
     @cached(cache=TTLCache(maxsize=30, ttl=60))
     def get_wikis(self):
         # get the wikis for the org
-        return self.res_client.get(WIKI_URL)
+        wikis = self.res_client.get(WIKI_URL)
 
-    def get_wiki_contents(self, wiki_title_or_id, wiki_parent_title_or_id):
-        # grab the wiki content
-        wiki_id, wiki_parent_id = self.get_wiki_id_by_title(wiki_title_or_id, wiki_parent_title_or_id)
-        if not wiki_id:
-            return None
+        # build index of ids and titles
+        return self._index_wikis(wikis['entities'])
 
-        return self.res_client.get('{}/{}'.format(WIKI_URL, wiki_id))
+    def _index_wikis(self, entities):
+        index = {}
+        for entity in entities:
+            index[entity["title"]] = {
+                "id": entity["id"],
+                "parent": entity["parent"],
+                "children": self._index_wikis(entity["children"])
+            }
+
+        return index
 
     def create_wiki(self, wiki_title, wiki_parent_id, content):
         payload = {
