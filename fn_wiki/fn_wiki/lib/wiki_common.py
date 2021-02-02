@@ -24,11 +24,12 @@ class WikiHelper():
         wikis = self.get_wikis()
 
         for parent_name in parent_path_list:
-            if parent_name in wikis:
-                wikis = wikis[parent_name]['children']
+            parent_name_strip = parent_name.strip()
+            if parent_name_strip in wikis:
+                wikis = wikis[parent_name_strip]['children']
             else:
                 LOG.error(wikis)
-                raise ValueError(u"Unable to find parent page: %s", parent_name)
+                raise ValueError(u"Unable to find parent page: '%s'", parent_name_strip)
 
         if title in wikis:
             return wikis[title]['id'], wikis[title]['parent']
