@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 
-# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
 
-import requests
 import re
 import logging
 import datetime
 import pytz
 
 from resilient_circuits import FunctionError
+from resilient_lib import RequestsCommon
 
 DEFAULT_MEETING_LENGTH = 60
 
@@ -40,10 +40,12 @@ class WebexAPI:
             headers["Content-Type"] = "application/xml"
 
         response = None
+        rc = RequestsCommon(self.opts, self.opts.get("options"))
+
         if method == "GET":
-            response = requests.get(url, headers=headers)
+            response = rc.execute_call_v2("get", url, headers=headers, proxies=rc.get_proxies())
         elif method == "POST":
-            response = requests.post(url, data=query, headers=headers)
+            response = rc.execute_call_v2("post", url, data=query, headers=headers, proxies=rc.get_proxies())
 
         if response is None:
             raise FunctionError("Invalid METHOD passed to webex_request! Method: {}".format(method))
