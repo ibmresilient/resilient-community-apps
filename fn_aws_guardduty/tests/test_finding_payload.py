@@ -84,7 +84,7 @@ class TestParseFinding:
         assert sorted(result.payload) == sorted(expected_results_1)
         for table_id in const.DATA_TABLE_IDS:
             assert "query_execution_date" in result.data_tables[table_id][0]["cells"]
-            result.data_tables[table_id][0]["cells"]["query_execution_date"] = time_stamp
+            result.data_tables[table_id][0]["cells"]["query_execution_date"] = {"value": time_stamp}
         assert result.data_tables == expected_results_2
 
     @pytest.mark.parametrize("finding, expected_results", [
@@ -94,7 +94,7 @@ class TestParseFinding:
 
         keys = ["name", "description", "discovered_date", "severity_code", "properties"]
 
-        finding_payload = ParseFinding({"Severity": 7}, "us-west-2")
+        finding_payload = ParseFinding({"Severity": 7, "Region": "us-west-2"}, "us-west-2")
 
         finding_payload.payload = {}
         finding_payload.finding = finding_payload.replace_datetime(finding)
@@ -132,7 +132,7 @@ class TestParseFinding:
         (get_cli_raw_responses("get_findings")["Findings"][0], False,
          {'content': 'AWS GuardDuty finding --', 'format': 'text'}),
     ])
-    def test_make_incident_fields(self, finding, desc, expected_results):
+    def test_make_incident_description(self, finding, desc, expected_results):
 
         finding_payload = ParseFinding({"Severity": 7, "Region": "us-west-2"}, "us-west-2")
 
@@ -182,11 +182,11 @@ class TestParseFinding:
         assert str(e.value) == expected_results
 
     @pytest.mark.parametrize("finding, expected_results", [
-        (get_cli_raw_responses("get_findings")["Findings"][0], [7, 3])
+        (get_cli_raw_responses("get_findings")["Findings"][0], [8, 3])
     ])
     def test_get_artifact_data(self, finding, expected_results):
 
-        keys = ["GeneratedFindingAccessKeyId", "GeneratedFindingUserName", "198.51.100.0", "10.0.0.1",
+        keys = ["GeneratedFindingAccessKeyId", "bucketName", "GeneratedFindingUserName", "198.51.100.0", "10.0.0.1",
                 "GeneratedFindingPublicDNSName", "GeneratedFindingPrivateDnsName", "GeneratedFindingPrivateName"]
 
         finding_payload = ParseFinding({"Severity": 7, "Region": "us-west-2"}, "us-west-2")
@@ -201,7 +201,7 @@ class TestParseFinding:
             assert len(value) == expected_results[1]
 
     @pytest.mark.parametrize("finding, expected_results", [
-        (get_cli_raw_responses("get_findings")["Findings"][0], 7)
+        (get_cli_raw_responses("get_findings")["Findings"][0], 8)
     ])
     def test_add_artifacts_to_payload(self, finding, expected_results):
 

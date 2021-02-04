@@ -99,6 +99,8 @@ class TestFuncAwsGuarddutyRefreshFinding:
         keys_content = ["finding", "payload", "data_tables", "timestamp", "region"]
         keys_incident_properties = ["name", "description", "discovered_date", "severity_code"]
         keys_payload = keys_incident_properties + ["artifacts", "comments"]
+        keys_data_tables = ["gd_finding_overview", "gd_s3_bucket_details", "gd_access_key_details",
+                           "gd_instance_details", "gd_resource_affected", "gd_action_details"]
 
         results = call_func_aws_guardduty_refresh_finding_function(circuits_app, mock_inputs)
         assert_keys_in(results, *keys)
@@ -107,9 +109,11 @@ class TestFuncAwsGuarddutyRefreshFinding:
         if content:
             assert_keys_in(content, *keys_content)
             payload = content["payload"]
+            data_tables = content["data_tables"]
             for k in keys_incident_properties:
                 assert payload[k] == expected_results_2[k]
             assert_keys_in(payload, *keys_payload)
+            assert_keys_in(data_tables, *keys_data_tables )
             assert sorted(payload) == sorted(expected_results_2)
             assert payload["properties"] == expected_results_2["properties"]
             assert len(payload["artifacts"]) == len(expected_results_2["artifacts"])
