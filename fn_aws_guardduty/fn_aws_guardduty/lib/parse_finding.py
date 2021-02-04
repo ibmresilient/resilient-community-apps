@@ -14,6 +14,7 @@ from fn_aws_guardduty.util import const
 
 LOG = logging.getLogger(__name__)
 
+
 class ParseFinding():
     """Class that parses an AWS finding and generates a payload and data tables data."""
 
@@ -85,14 +86,17 @@ class ParseFinding():
             if isinstance(gd_prop_val, bool):
                 gd_prop_val = "{}".format(gd_prop_val)
 
+            if isinstance(gd_prop_val, int):
+                # Convert number to text equivalent.
+                gd_prop_val = self.map_severity(gd_prop_val)
+
             self.payload["properties"][res_prop] = gd_prop_val
 
         if self.finding["Region"] != self.region:
             # In case region in finding payload is different default to value used with API.
-            self.payload["properties"][const.CUSTOM_FIELDS_MAP["Region"]] =  self.region
+            self.payload["properties"][const.CUSTOM_FIELDS_MAP["Region"]] = self.region
 
         return self.payload
-
 
     def make_incident_name(self):
         """
@@ -160,15 +164,25 @@ class ParseFinding():
         """
         artifact_data = {}
         for artifact_type, gd_keys in const.ARTIFACT_TYPES_MAP.items():
+            base_path = None
+            if isinstance(gd_keys, dict):
+                # A path to property is defined.
+                base_path = gd_keys["path"]
+                gd_keys = gd_keys["gd_props"]
+
             for gd_key in gd_keys:
-                for (artifact_value, path) in search_json(self.finding, gd_key):
-                    LOG.debug(u'artifact type %s (%s) ID %s, at path %s',artifact_type, gd_key, artifact_value, path)
+                result = search_json(self.finding, gd_key, path=base_path)
+                if isinstance(result, dict) and result.get("msg"):
+                    LOG.debug("%s for finding data %s.", result.get("msg"),
+                              result.get("path"))
+                    # Artifact match not found in finding skip.
+                    continue
+                for (artifact_value, path) in result:
+                    LOG.debug(u'artifact type %s (%s) ID %s, at path %s', artifact_type, gd_key, artifact_value, path)
                     if artifact_value in artifact_data:
-                        # Artifact value aleady found skip.
+                        # Artifact value already found skip.
                         continue
                     artifact_data[artifact_value] = (artifact_type, gd_key, path)
-
-
 
         return artifact_data
 
@@ -192,7 +206,6 @@ class ParseFinding():
                 'format': 'text',
             }
         }
-
 
         # Loop through Artifact data provided with the finding.
         for artifact_val, (artifact_type, gd_key, path) in artifact_data.items():
@@ -248,9 +261,6 @@ class ParseFinding():
                     "action_type":{
                       "value":"NETWORK_CONNECTION"
                     },
-                    "protocol":{
-                      "value":"TCP"
-                    },
                     ...
                     ...
                   }
@@ -262,48 +272,87 @@ class ParseFinding():
                     "resource_type":{
                       "value":"Instance"
                     },
-                    "instance_id":{
-                      "value":"i-99999999"
-                    },
                     ...
                     ...
                   }
                 }
-              ]
+              ],
+              "gd_s3_bucket_details":[
+                {
+                  "cells":{
+                    "s3_bucket_owner":{
+                      "value":"Instance"
+                    },
+                    ...
+                    ...
+                  }
             }
 
         """
         for table_id in const.DATA_TABLE_IDS:
             data_table = []
-            table_row = {}
-            table_row["query_execution_date"] = {"value": self.timestamp}
-            for section in const.DATA_TABLE_FIELDS_MAP[table_id]:
-                path = section["path"]
-                for key, val in section["fields"].items():
-                    table_copy = data_table[:]
-                    value = None
-                    # Search for key at path.
-                    search_json(self.finding, key, path=path)
-                    result = search_json(self.finding, key, path=path)
-                    if result:
-                        if isinstance(result, dict) and result.get("msg"):
-                            LOG.debug("%s for finding data %s.", result.get("msg"),
-                                      result.get("path"))
-                        elif isinstance(result, list):
-                            (value, _) = result.pop()
-                            # Convert boolean values to string 'True' or 'False'
-                            if isinstance(value, bool):
-                                value = "{}".format(value)
-                            table_row[val] = {"value" : value}
-                    table_copy.append({"cells" : table_row})
-
-            data_table = table_copy
+            # Iterate over section for each data table id.
+            for dt_section in const.DATA_TABLE_FIELDS_MAP[table_id]:
+                path = copy.deepcopy(dt_section.get("path", None))
+                if path and isinstance(path[-1], list):
+                    # The path to properties in GuardDuty finding points to a list.
+                    row_count = 0
+                    result = True
+                    while result:
+                        path[-1] = row_count
+                        dt_row = self.setup_data_table_rows(dt_section, path, [])
+                        if dt_row:
+                            data_table.extend(dt_row)
+                            row_count += 1
+                        else:
+                            result = False
+                else:
+                    data_table = self.setup_data_table_rows(dt_section, path, data_table)
 
             LOG.info("Data Table Assembled with %d rows for table id '%s'.", len(data_table), table_id)
 
-            self.data_tables.update({table_id : data_table})
+            self.data_tables.update({table_id: data_table})
 
             LOG.debug(pprint.pformat(data_table, indent=4))
+
+    def setup_data_table_rows(self, dt_section, path, table_copy):
+        """ Setup data table data row structures for Resilient from finding payload.
+
+        :param dt_section: Section of definitions for a data-table (c.f. DATA_TABLE_FIELDS_MAP in const.py).
+        :param path: Path to a data-table property in GuardDuty finding. (c.f. DATA_TABLE_FIELDS_MAP in const.py).
+        :param table_copy: Interim list with data table row information for a data-table id.
+        :return dt_copy: Return interim data table copy with new rows added.
+        """
+        table_row = {}
+        for key, val in dt_section["fields"].items():
+            dt_copy = table_copy[:]
+            value = None
+            # Search for key at path.
+            search_json(self.finding, key, path=path)
+            result = search_json(self.finding, key, path=path)
+            if result:
+                if isinstance(result, dict) and result.get("msg"):
+                    LOG.debug("%s for finding data %s.", result.get("msg"),
+                              result.get("path"))
+                elif isinstance(result, list):
+                    # Grab 1st result.
+                    (value, _) = result.pop(0)
+                    # Convert boolean values to string 'True' or 'False'
+                    if isinstance(value, bool):
+                        value = "{}".format(value)
+                    table_row[val] = {"value": value}
+                    if isinstance(value, int):
+                        value = str(value)
+                    table_row[val] = {"value": value}
+            if table_row:
+                # Value found for key in search.
+                if not dt_copy and "cells" not in table_row:
+                    # Setup new data table row.
+                    table_row["query_execution_date"] = {"value": self.timestamp}
+                    dt_copy.append({"cells": table_row})
+                dt_copy[0]["cells"].update(table_row)
+
+        return dt_copy
 
     def replace_datetime(self, finding):
         """ Convert in-place datetime objects returned in finding payload to strings.
