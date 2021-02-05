@@ -36,6 +36,8 @@ RUN cpan -fTi Email::Outlook::Message
 COPY ./dist /tmp/packages
 RUN pip install /tmp/packages/${APPLICATION}-*.tar.gz
 
+# install and upgrade cryptography to satisfy fn_utilities requirement
+RUN pip install --upgrade cryptography
 # uncomment and replicate if additional pypi packages are needed
 #RUN pip install <package>
 

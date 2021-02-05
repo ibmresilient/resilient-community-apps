@@ -29,52 +29,15 @@
   Specify all changes in this release. Do not remove the release 
   notes of a previous release
 -->
-### v1.0.16
-* Fixes for Python 3
-* Updated test cases
+### Release History
 
-### v1.0.15
-* Python 3 fixes
-* Support added for App Host
-
-### v1.0.14
-* Replace incorrect package loaded
-
-### v1.0.13
-* Updated utilities_string_to_attachment function. Added a check for the attachment's file extension and keep it as it is if it exists.
-
-### v1.0.12
-* Python3 support for utilities_base64_to_artifact, utilities_attachment_hash, utilities_attachment_zip_list, utilities_email_parse
-* Pinned openpyxl<=2.5.14 which is used in utilities_excel_query
-* Removed six requirement
-* Updated test suites
-
-### v1.0.11
-* Improved support for base64_to_attachment 
-
-### v1.0.10
-* Update utilities_email_parse Function to use `mail-parser>=3.9.3`: https://github.com/SpamScope/mail-parser
-* Remove dependency of `MailtoJson` from utilities_email_parse function.
-* utilities_email_parse now supports parsing `.eml` and `.msg` files.
-* utilities_email_parse can now be invoked from the menu item rules with an Object Type of Artifact or Attachment.
-* FunctionResult of utilities_email_parse has changed. See the User Guide in `/doc` for more information.
-* Added updated documentation.
-
-### v1.0.9
-* Updated the Function utilities_attachment_to_base64.
-* utilities_attachment_to_base64 now supports both Resilient Attachments and Resilient Artifacts that are of type File.
-
-### v1.0.8
-* Bug fix for attachment_to_hash on Python 3.6.
-
-### v1.0.7
-* A Timer function is new in this release of the Utility Functions. The function will allow a workflow to pause for a specified amount of time.
-
-### v1.0.6
-* Bug fix for Call Rest API function.
-
-### v1.0.5
-* Pushed a fix related to some functions firing twice.
+| Version | Date | Notes |
+| ------- | ---- | ----- |
+| 2.0.2   | 2/2021 | bug fixes for Shell Command |
+| 2.0.1   | 9/2020 | bug fixes|
+| 2.0.0   | 7/2020 | Numerous fixes, improved Rules and workflows and only Python 3 supported |
+| 1.0.15 | 5/2020 | Bug fixes, App Host Support |
+| 1.0.14  | 5/2020 | Shell Command support for Remote Linux Execution |
 
 ---
 
