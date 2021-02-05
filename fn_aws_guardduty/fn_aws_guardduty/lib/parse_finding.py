@@ -179,6 +179,9 @@ class ParseFinding():
                     continue
                 for (artifact_value, path) in result:
                     LOG.debug(u'artifact type %s (%s) ID %s, at path %s', artifact_type, gd_key, artifact_value, path)
+                    if isinstance(artifact_value, int):
+                        # Convert number to text equivalent.
+                        artifact_value = str(artifact_value)
                     if artifact_value in artifact_data:
                         # Artifact value already found skip.
                         continue
