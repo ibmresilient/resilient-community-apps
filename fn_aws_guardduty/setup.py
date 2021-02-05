@@ -25,8 +25,18 @@ setup(
     author="IBM Resilient",
     author_email="",
     url='https://ibm.com/mysupport',
-    description="Resilient Circuits Components for 'fn_aws_guardduty'",
-    long_description="""Resilient Circuits Components for 'fn_aws_guardduty'""",
+    description="Amazon AWS GuardDuty Integration for Resilient",
+    long_description="""The Amazon AWS GuardDuty Integration for Resilient allows you to process and respond to Amazon 
+        AWS GuardDuty findings within the IBM Resilient Platform.
+        <br>
+        The AWS GuardDuty Integration provides the following functionality:
+        <br>
+        * A poller which gathers current findings from GuardDuty and escalates to the Resilient platform as incidents.
+        <br>
+        * A function to archive a GuardDuty finding when the corresponding Resilient incident is closed.
+        <br>
+        * A function to refresh a Resilient incident with the latest information from the corresponding GuardDuty finding.
+        """,
     install_requires=[
         'resilient_circuits>=35.0.0,<v39.0.0',
         'resilient_lib>=35.0.0',
