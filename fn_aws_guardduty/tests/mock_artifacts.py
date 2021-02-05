@@ -273,7 +273,7 @@ def get_mocked_results(type):
                                'aws_guardduty_finding_type': 'UnauthorizedAccess:S3/MaliciousIPCaller.Custom',
                                'aws_guardduty_finding_updated_at': '2020-11-26T15:18:12.620Z',
                                'aws_guardduty_region': 'us-west-2', 'aws_guardduty_resource_type': 'S3Bucket',
-                               'aws_guardduty_count': 4,
+                               'aws_guardduty_count': '4',
                                'aws_guardduty_detector_id': 'f2baedb0ac74f8f42fc929e15f56da6a'},
                 'artifacts': [],
                 'comments': [{'text': {'format': 'text',
@@ -289,7 +289,7 @@ def get_mocked_results(type):
                                'aws_guardduty_finding_type': 'UnauthorizedAccess:S3/MaliciousIPCaller.Custom',
                                'aws_guardduty_finding_updated_at': '2020-11-26T15:18:12.620Z',
                                'aws_guardduty_region': 'us-west-2', 'aws_guardduty_resource_type': 'S3Bucket',
-                               'aws_guardduty_count': 4,
+                               'aws_guardduty_count': '4',
                                'aws_guardduty_detector_id': 'f2baedb0ac74f8f42fc929e15f56da6a'}, 'artifacts': [
                 {'type': {'name': 'aws_iam_access_key_id'}, 'description': {'format': 'text',
                                                                             'content': "'AWS IAM Access Key ID' extracted from GuardDuty from finding property 'AccessKeyId' at path '['Resource', 'AccessKeyDetails']'."},
@@ -326,7 +326,7 @@ def get_mocked_results(type):
                                'aws_guardduty_finding_type': 'UnauthorizedAccess:S3/MaliciousIPCaller.Custom',
                                'aws_guardduty_finding_updated_at': '2020-11-26T15:18:12.620Z',
                                'aws_guardduty_region': 'us-west-2', 'aws_guardduty_resource_type': 'S3Bucket',
-                               'aws_guardduty_count': 4,
+                               'aws_guardduty_count': '4',
                                'aws_guardduty_detector_id': 'f2baedb0ac74f8f42fc929e15f56da6a'}, 'artifacts': [
                 {'type': {'name': 'aws_iam_access_key_id'}, 'description': {'format': 'text',
                                                                             'content': "'AWS IAM Access Key ID' extracted from GuardDuty from finding property 'AccessKeyId' at path '['Resource', 'AccessKeyDetails']'."},
@@ -415,7 +415,7 @@ def get_mocked_results(type):
              'discovered_date': '2020-11-25T13:46:37.960Z',
              'name': 'AWS GuardDuty: API GeneratedFindingAPIName was invoked from an IP address on a custom threat list.',
              'properties': {'aws_guardduty_archived': 'False',
-                            'aws_guardduty_count': 4,
+                            'aws_guardduty_count': '4',
                             'aws_guardduty_detector_id': 'f2baedb0ac74f8f42fc929e15f56da6a',
                             'aws_guardduty_finding_arn': 'arn:aws:guardduty:us-west-2:834299573936:detector/f2baedb0ac74f8f42fc929e15f56da6a/finding/60baffd3f9042e38640f2300d5c5a631',
                             'aws_guardduty_finding_id': '60baffd3f9042e38640f2300d5c5a631',
@@ -423,7 +423,7 @@ def get_mocked_results(type):
                             'aws_guardduty_finding_updated_at': '2020-11-26T15:18:12.620Z',
                             'aws_guardduty_region': 'us-west-2',
                             'aws_guardduty_resource_type': 'S3Bucket',
-                            'aws_guardduty_severity': 2},
+                            'aws_guardduty_severity': '2'},
              'severity_code': 'Low'}
         ),
         "refresh_finding_no_artifacts": (
@@ -436,10 +436,10 @@ def get_mocked_results(type):
                                'aws_guardduty_finding_arn': 'arn:aws:guardduty:us-west-2:834299573936:detector/f2baedb0ac74f8f42fc929e15f56da6a/finding/60baffd3f9042e38640f2300d5c5a631',
                                'aws_guardduty_finding_type': 'UnauthorizedAccess:S3/MaliciousIPCaller.Custom',
                                'aws_guardduty_finding_updated_at': '2020-11-26T15:18:12.620Z',
-                               'aws_guardduty_region': 'us-west-2', 'aws_guardduty_severity': 2,
+                               'aws_guardduty_region': 'us-west-2', 'aws_guardduty_severity': '2',
                                'aws_guardduty_resource_type': 'S3Bucket',
                                'aws_guardduty_detector_id': 'f2baedb0ac74f8f42fc929e15f56da6a',
-                               'aws_guardduty_count': 4, 'aws_guardduty_archived': 'False'}, 'artifacts': [
+                               'aws_guardduty_count': '4', 'aws_guardduty_archived': 'False'}, 'artifacts': [
                 {'type': {'name': 'aws_iam_access_key_id'}, 'description': {'format': 'text',
                                                                             'content': "'AWS IAM Access Key ID' extracted from GuardDuty from finding property 'AccessKeyId' at path '['Resource', 'AccessKeyDetails']'."},
                  'value': 'GeneratedFindingAccessKeyId'}, {'type': {'name': 'aws_iam_user_name'},
@@ -494,14 +494,14 @@ def get_mocked_results(type):
                                                      u'value': u'GeneratedFindingPrivateDnsName'}],
              u'severity_code': u'Low', u'comments': [], u'properties': {u'aws_guardduty_resource_type': u'S3Bucket',
                                                                         u'aws_guardduty_finding_updated_at': u'2020-11-26T15:18:12.620Z',
-                                                                        u'aws_guardduty_count': 4,
+                                                                        u'aws_guardduty_count': '4',
                                                                         u'aws_guardduty_finding_arn': u'arn:aws:guardduty:us-west-2:834299573936:detector/f2baedb0ac74f8f42fc929e15f56da6a/finding/60baffd3f9042e38640f2300d5c5a631',
                                                                         u'aws_guardduty_detector_id': u'f2baedb0ac74f8f42fc929e15f56da6a',
                                                                         u'aws_guardduty_finding_type': u'UnauthorizedAccess:S3/MaliciousIPCaller.Custom',
                                                                         u'aws_guardduty_finding_id': u'60baffd3f9042e38640f2300d5c5a631',
                                                                         u'aws_guardduty_archived': u'False',
                                                                         u'aws_guardduty_region': u'us-west-2',
-                                                                        u'aws_guardduty_severity': 2},
+                                                                        u'aws_guardduty_severity': '2'},
              u'name': u'AWS GuardDuty: API GeneratedFindingAPIName was invoked from an IP address on a custom threat list.'}
         ),
         "refresh_finding_with_artifacts": (
@@ -602,7 +602,7 @@ def get_mocked_results(type):
                                'aws_guardduty_finding_type': 'UnauthorizedAccess:S3/MaliciousIPCaller.Custom',
                                'aws_guardduty_finding_updated_at': '2020-11-26T15:18:12.620Z',
                                'aws_guardduty_region': 'us-west-2', 'aws_guardduty_resource_type': 'S3Bucket',
-                               'aws_guardduty_count': 4,
+                               'aws_guardduty_count': '4',
                                'aws_guardduty_detector_id': 'f2baedb0ac74f8f42fc929e15f56da6a'}, 'artifacts': [
                     {'type': {'name': 'aws_iam_access_key_id'}, 'description': {'format': 'text',
                                                                                 'content': "'AWS IAM Access Key ID' extracted from GuardDuty from finding property 'AccessKeyId' at path '['Resource', 'AccessKeyDetails']'."},
@@ -905,7 +905,7 @@ def get_function_params(op):
                                'aws_guardduty_finding_type': 'UnauthorizedAccess:S3/MaliciousIPCaller.Custom',
                                'aws_guardduty_finding_updated_at': '2020-11-26T15:18:12.620Z',
                                'aws_guardduty_region': 'us-west-2', 'aws_guardduty_resource_type': 'S3Bucket',
-                               'aws_guardduty_count': 4,
+                               'aws_guardduty_count': '4',
                                'aws_guardduty_detector_id': 'f2baedb0ac74f8f42fc929e15f56da6a'},
                 'artifacts': [
                 {'type': {'name': 'aws_iam_access_key_id'}, 'description': {'format': 'text',
