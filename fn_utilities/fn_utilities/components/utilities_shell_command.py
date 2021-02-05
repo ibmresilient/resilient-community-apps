@@ -213,6 +213,7 @@ class RunCmd():
             self.stderrdata = stderr.read().decode()
             self.retcode = stdout.channel.recv_exit_status()
         except Exception as err:
+            self.stderrdata = str(err)
             LOG.error(str(err))
             LOG.error("Unable to run cmd: %s on remote server: %s", self.commandline,
                                                                     self.remote_server)
