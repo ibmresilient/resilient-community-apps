@@ -101,8 +101,6 @@ Microsoft Exchange Online Functions for IBM Resilient provides the capability to
 The integration contains the following functions:
  ![screenshot: main](./doc/screenshots/EXO-functions.png)
 
-
-
 ---
 
 ## Requirements
