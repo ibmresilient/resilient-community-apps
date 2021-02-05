@@ -9,7 +9,6 @@ import datetime
 import pytz
 
 from resilient_circuits import FunctionError
-from resilient_lib import RequestsCommon
 
 DEFAULT_MEETING_LENGTH = 60
 
@@ -40,7 +39,7 @@ class WebexAPI:
             headers["Content-Type"] = "application/xml"
 
         response = None
-        rc = RequestsCommon(self.opts, self.opts.get("options"))
+        rc = self.opts.get("rc")
 
         if method == "GET":
             response = rc.execute_call_v2("get", url, headers=headers, proxies=rc.get_proxies())

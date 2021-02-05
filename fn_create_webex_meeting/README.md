@@ -156,9 +156,30 @@ Creates a webex meeting and returns the Host URL and the attendee URL.
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+   "version":"1.0",
+   "success":true,
+   "reason":"None",
+   "content":{
+      "status":"SUCCESS",
+      "host_url":"https://meet8.webex.com/meet8/j.php?MTID=m84f604b5194e7f10e384fe4043aafd",
+      "attendee_url":"https://meet8.webex.com/meet8/j.php?MTID=meb86e2013c2d82c3c9dea7b8b27253"
+   },
+   "raw":"{\"status\": \"SUCCESS\", \"host_url\": \"https://meet8.webex.com/meet8/j.php?MTID=m84f604b5194e7f10e384fe4043aafd\", \"attendee_url\": \"https://meet8.webex.com/meet8/j.php?MTID=meb86e2013c2d82c3c9dea7b8b27253\"}",
+   "inputs":{
+      "webex_meeting_name":"My Incident",
+      "webex_meeting_password":"abcxyzABC!!!",
+      "webex_meeting_start_time":1613797200000,
+      "webex_meeting_agenda":"",
+      "webex_meeting_end_time":1613797620000
+   },
+   "metrics":{
+      "version":"1.0",
+      "package":"fn-create-webex-meeting",
+      "package_version":"1.1.0",
+      "host":"MacBook-Pro.local",
+      "execution_time_ms":8725,
+      "timestamp":"2021-02-05 10:11:36"
+   }
 }
 ```
 
@@ -195,14 +216,16 @@ inputs.webex_meeting_password = inputs.webex_meeting_password if rule.properties
 <p>
 
 ```python
+content = results.get("content")
+
 if not results.success:
   text = u"Unable to create Cisco WebEx Meeting"
-  content = results.get("content")
+
   fail_reason = content.get("fail_reason")
   if fail_reason:
     text = u"{0}:\n\tFailure reason: {1}".format(text, fail_reason)
 else:
-  content = results.get("content")
+
   host_url = content.get("host_url")
   attendee_url = content.get("attendee_url")
 
@@ -211,10 +234,13 @@ else:
 
   if attendee_url is None:
     attendee_url = ""
+    
+  ref_html_host = u"""<a href='{0}'>Link</a>""".format(host_url)
+  ref_html_attendee = u"""<a href='{0}'>Link</a>""".format(attendee_url)
 
-  text = u"Cisco WebEx Meeting:\n\tHost URL: {0}\n\tAttendee URL: {1}".format(host_url, attendee_url)
+  text = u"<b>Cisco WebEx Meeting Links:</b><br />Host URL: {0}<br />Attendee URL: {1}".format(ref_html_host, ref_html_attendee)
   
-note = helper.createPlainText(text)
+note = helper.createRichText(text)
 incident.addNote(note)
 ```
 

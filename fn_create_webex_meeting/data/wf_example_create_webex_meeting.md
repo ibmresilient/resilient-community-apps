@@ -20,25 +20,50 @@
 ```python
 # To set meeting name to the workflow inputs, uncomment the following lines
 inputs.webex_meeting_name = incident.name
-if incident.description is not None and incident.description.content is not None:
-  inputs.webex_meeting_agenda = incident.description.content
+
+inputs.webex_meeting_start_time = inputs.webex_meeting_start_time if rule.properties.webex_meeting_start_time is None else rule.properties.webex_meeting_start_time
+inputs.webex_meeting_end_time = inputs.webex_meeting_end_time if rule.properties.webex_meeting_end_time is None else rule.properties.webex_meeting_end_time
+
+# Get the agenda from the activity field or the incident description
+if rule.properties.webex_meeting_agenda is None:
+  if incident.description is not None and incident.description.content is not None:
+    inputs.webex_meeting_agenda = incident.description.content
+  else:
+    inputs.webex_meeting_agenda = ""
 else:
-  inputs.webex_meeting_agenda = ""
+  inputs.webex_meeting_agenda = rule.properties.webex_meeting_agenda
+
+inputs.webex_meeting_password = inputs.webex_meeting_password if rule.properties.webex_meeting_password is None else rule.properties.webex_meeting_password
+  
 ```
 
 ### Post-Processing Script
 ```python
-host_url = results.host_url
-attendee_url = results.attendee_url
+content = results.get("content")
 
-if host_url is None:
-  host_url = ""
+if not results.success:
+  text = u"Unable to create Cisco WebEx Meeting"
 
-if attendee_url is None:
-  attendee_url = ""
+  fail_reason = content.get("fail_reason")
+  if fail_reason:
+    text = u"{0}:\n\tFailure reason: {1}".format(text, fail_reason)
+else:
 
-text = "Cisco WebEx Meeting:\n\tHost URL: " + results.host_url + "\n\tAttendee URL: " + results.attendee_url
-note = helper.createPlainText(text)
+  host_url = content.get("host_url")
+  attendee_url = content.get("attendee_url")
+
+  if host_url is None:
+    host_url = ""
+
+  if attendee_url is None:
+    attendee_url = ""
+    
+  ref_html_host = u"""<a href='{0}'>Link</a>""".format(host_url)
+  ref_html_attendee = u"""<a href='{0}'>Link</a>""".format(attendee_url)
+
+  text = u"<b>Cisco WebEx Meeting Links:</b><br />Host URL: {0}<br />Attendee URL: {1}".format(ref_html_host, ref_html_attendee)
+  
+note = helper.createRichText(text)
 incident.addNote(note)
 ```
 

@@ -43,7 +43,7 @@ class FunctionComponent(ResilientComponent):
             rp = ResultPayload(PACKAGE_NAME, **kwargs)
 
             opts = dict()
-            opts["options"] = self.options
+            opts["rc"] = RequestsCommon(self.opts, self.options)
             opts["webex_site_url"] = self.options.get("webex_site_url")
             opts["email"] = self.options.get("webex_email")
             opts["password"] = self.options.get("webex_password")
