@@ -63,7 +63,7 @@ class ParseFinding():
         :param finding: Finding payload from GuardDuty.
         :return: Incident DTO payload
         """
-        # Create Placeholder with lists as values
+        # Create Placeholder with finding properties as values
         self.payload.update({
             "name": self.make_incident_name(),
             "description": self.make_incident_description(),
@@ -88,7 +88,7 @@ class ParseFinding():
 
             if isinstance(gd_prop_val, int):
                 # Convert number to text equivalent.
-                gd_prop_val = self.map_severity(gd_prop_val)
+                gd_prop_val = str(gd_prop_val)
 
             self.payload["properties"][res_prop] = gd_prop_val
 
