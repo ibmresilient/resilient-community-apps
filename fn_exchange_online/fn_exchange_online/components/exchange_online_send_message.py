@@ -83,6 +83,7 @@ class FunctionComponent(ResilientComponent):
             if response.status_code == 202:
                 success = True
                 response_json = {'value': success}
+                response_json["failed_attachments"] = response.failed_attachments if response.failed_attachments else None
             else:
                 success = False
                 response_json = response.json()

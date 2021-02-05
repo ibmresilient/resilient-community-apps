@@ -16,6 +16,7 @@ from requests.adapters import HTTPAdapter
 from resilient_lib.components.integration_errors import IntegrationError
 from resilient_lib import get_file_attachment_metadata
 from fn_exchange_online.lib.resilient_helper import get_incident_file_attachment
+from fn_exchange_online.lib.resilient_helper import create_incident_comment
 
 LOG = logging.getLogger(__name__)
 DEFAULT_SCOPE = 'https://graph.microsoft.com/.default'
@@ -268,10 +269,14 @@ class MSGraphHelper(object):
         :return: formatted attachment data
         """
         attachments = []
+        failed_attached = []
+
         attachment_names = [item.strip() for item in attachment_names.split(",")]
         for attachment_name in attachment_names:
             base64content, attachment_id = get_incident_file_attachment(resilient_client, incident_id, attachment_name)
             if not attachment_id:
+                failed_attached.append(attachment_name)
+                LOG.info(u"Failed to attach %s. No mathcing incident attachment found.", attachment_name)
                 continue
             contentType = get_file_attachment_metadata(resilient_client, incident_id, attachment_id=attachment_id)["content_type"]
             attachment = {
@@ -283,7 +288,8 @@ class MSGraphHelper(object):
 
             attachments.append(attachment)
             LOG.info(u"Successfully attached %s", attachment_name)
-        return attachments
+
+        return attachments , failed_attached
 
     def send_message(self, sender_address, recipients, subject, body, attachment_names=None, incident_id=None, resilient_client=None):
         """
@@ -312,12 +318,13 @@ class MSGraphHelper(object):
 
         # Build attachment data
         if attachment_names:
-            attachments = self.build_attachments(attachment_names, incident_id, resilient_client)
+            attachments, failed_attachments = self.build_attachments(attachment_names, incident_id, resilient_client)
             message_json["message"]["attachments"] = attachments
 
         response = self.ms_graph_session.post(ms_graph_create_message_url,
                                               headers={'Content-Type': 'application/json'},
                                               json=message_json)
+        response.failed_attachments = failed_attachments
 
         self.check_ms_graph_response_code(response.status_code)
 
