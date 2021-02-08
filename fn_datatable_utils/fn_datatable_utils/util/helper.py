@@ -41,6 +41,7 @@ class RESDatatable(object):
 
             if not search_column:
                 rows_to_return = self.rows
+                cells = self.rows[0]["cells"]
             else:
                 rows_to_return = []
                 for row in self.rows:
