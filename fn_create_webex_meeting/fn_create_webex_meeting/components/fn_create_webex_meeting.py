@@ -21,9 +21,9 @@ class FunctionComponent(ResilientComponent):
         """
         self.options = opts.get(PACKAGE_NAME, {})
         self.opts = opts
-
+        selftest_function(opts)
         # Validate required fields
-        required_fields = ["webex_email", "webex_password", "webex_site_url", "webex_timezone"]
+        required_fields = ["webex_email", "webex_password", "webex_site_url", "webex_site", "webex_timezone"]
         validate_fields(required_fields, self.options)
 
     def __init__(self, opts):
