@@ -1,12 +1,15 @@
 # -*- coding: utf-8 -*-
 
-# (c) Copyright IBM Corp. 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2021. All Rights Reserved.
 """Tests using pytest_resilient_circuits"""
 
 from __future__ import print_function
-
-import mock
+import sys
 from fn_create_webex_meeting.lib.cisco_api import WebexAPI
+if sys.version_info.major == 2:
+    from mock import patch
+else:
+    from unittest.mock import patch
 
 partial_data = {"timezone": True, "createmeeting": True}
 
@@ -53,8 +56,10 @@ def run_cisco_api_create_meeting():
     opts["meeting_password"] = webex_meeting_password
     opts["meeting_name"] = webex_meeting_name
     opts["meeting_agenda"] = webex_meeting_agenda
+    webex_meeting_start_time = 1896812034000
+    webex_meeting_end_time = 1896813234000
 
-    common = WebexAPI(opts)
+    common = WebexAPI(opts, webex_meeting_start_time, webex_meeting_end_time)
 
     result = common.create_meeting()
 
@@ -64,14 +69,14 @@ def run_cisco_api_create_meeting():
 class TestCreateWebexMeeting:
     """ Tests for the fn_create_webex_meeting function"""
 
-    @mock.patch('requests.post', side_effect=mocked_requests_post)
+    @patch('requests.post', side_effect=mocked_requests_post)
     def test_success(self, request):
         """ Test calling with sample values for the parameters """
         result = run_cisco_api_create_meeting()
 
         assert result["status"] == "SUCCESS"
 
-    @mock.patch('requests.post', side_effect=mocked_requests_post)
+    @patch('requests.post', side_effect=mocked_requests_post)
     def test_partial_data(self, request):
         """Simulate invalid response from the Cisco WebEx API"""
         global partial_data
@@ -93,3 +98,4 @@ class TestCreateWebexMeeting:
             pass
 
         assert True
+

@@ -59,9 +59,11 @@ Resilient Circuits Components for 'fn_create_webex_meeting'
 <!--
   List the Key Features of the Integration
 -->
-* Key Feature 1
-* Key Feature 2
-* Key Feature 3
+* This package provides a function that will create Cisco WebEx meeting host URL and attendee URL given the following parameters":
+**  Webex email account 
+
+* An example workflow is included that writes the host URL and attendee URL to an incident note as live links to acces the meeting.
+* An example rule is included that activates an activity field popup that prompts the user for a meeting start and end time and an optional meeting agenda and password.
 
 ---
 
@@ -125,15 +127,14 @@ The following table provides the settings you need to configure the app. These s
 | ------ | :------: | ------- | ----------- |
 | **webex_email** | Yes | `user@example.com` | *Email address associated with WebEx account.* |
 | **webex_password** | Yes | `*****` | *WebEx account password.* |
-| **webex_site** | Yes | `meet8` | *WebEx Hostedname* |
+| **webex_site** | Yes | `meet8` | *WebEx Hostedname.* |
 | **webex_site_url** | Yes | `meet8.webex.com` | *WebEx URL.* |
-| **webex_timezone** | Yes | `GMT-05:00` | *Time in which meeting is created.* |
-
+| **webex_timezone** | Yes | `GMT-05:00` | *Timezone in which meeting is created.* |
 
 ---
 
 ## Function - Create WebEx Meeting
-Creates a webex meeting and returns the Host URL and the attendee URL.
+Creates a webex meeting and returns the host URL and the attendee URL for meeting access.
 
  ![screenshot: fn-create-webex-meeting ](./doc/screenshots/fn-create-webex-meeting-function.png)
 
@@ -143,10 +144,10 @@ Creates a webex meeting and returns the Host URL and the attendee URL.
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `webex_meeting_agenda` | `text` | No | `-` | Meeting agenda |
-| `webex_meeting_end_time` | `datetimepicker` | No | `-` | - |
+| `webex_meeting_end_time` | `datetimepicker` | Yes | `-` | - |
 | `webex_meeting_name` | `text` | No | `-` | Meeting name |
 | `webex_meeting_password` | `text` | No | `-` | Meeting password |
-| `webex_meeting_start_time` | `datetimepicker` | No | `-` | - |
+| `webex_meeting_start_time` | `datetimepicker` | Yes | `-` | - |
 
 </p>
 </details>
@@ -254,10 +255,15 @@ incident.addNote(note)
 
 
 ## Rules
+
 | Rule Name | Object | Workflow Triggered |
 | --------- | ------ | ------------------ |
 | Example: Create WebEx Meeting: Incident | incident | `example_create_webex_meeting` |
+<p>
 
+The example incident rule activates the following activity popup menu to allow the user to enter the WebEx meeting information: 
+
+![screenshot: main](./doc/screenshots/fn-create-webex-meeting-activity-popup.png)
 ---
 
 ## Troubleshooting & Support
