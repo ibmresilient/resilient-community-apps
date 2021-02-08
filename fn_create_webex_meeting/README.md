@@ -53,17 +53,16 @@
 
  ![screenshot: main](./doc/screenshots/fn-create-webex-meeting-workflow.png)
 
-Resilient Circuits Components for 'fn_create_webex_meeting'
+
 
 ### Key Features
 <!--
   List the Key Features of the Integration
 -->
-* This package provides a function that will create Cisco WebEx meeting host URL and attendee URL given the following parameters":
-**  Webex email account 
+* This package provides a function that creates Cisco WebEx meeting host URL and attendee URL given the following parameters: meeting start and end time, meeting name and agenda and a WebEx password.
 
-* An example workflow is included that writes the host URL and attendee URL to an incident note as live links to acces the meeting.
-* An example rule is included that activates an activity field popup that prompts the user for a meeting start and end time and an optional meeting agenda and password.
+* An example workflow is included that writes the host URL and attendee URL to an incident note as live links to access the meeting.
+* An example rule is included that activates an menu popup that prompts the user for a meeting start and end time and an optional meeting agenda and password.
 
 ---
 
@@ -110,7 +109,7 @@ The following Cloud Pak guides provide additional information:
 These guides are available on the IBM Knowledge Center at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs). From this web page, select your IBM Cloud Pak for Security version. From the version-specific Knowledge Center page, select Case Management and Orchestration & Automation.
 
 ### Proxy Server
-The app **does/does not** support a proxy server.
+The app does support a proxy server.
 
 ---
 
