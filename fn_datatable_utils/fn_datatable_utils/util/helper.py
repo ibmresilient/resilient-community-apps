@@ -41,14 +41,17 @@ class RESDatatable(object):
             is_reverse = True if sort_direction == "DESC" else False
 
             for row in self.rows:
-                cells = row["cells"]
-                if search_column not in cells:
-                    raise ValueError("{0} is not a valid column api name for the data table: {1}".format(search_column, self.api_name))
-                column = cells.get(search_column)
-                value = column.get("value", None)
-                if value is not None:
-                    if value == search_value:
-                        rows_to_return.append(row)
+                if not search_column:
+                    rows_to_return.append(row)
+                else:
+                    cells = row["cells"]
+                    if search_column not in cells:
+                        raise ValueError("{0} is not a valid column api name for the data table: {1}".format(search_column, self.api_name))
+                    column = cells.get(search_column)
+                    value = column.get("value", None)
+                    if value is not None:
+                        if value == search_value:
+                            rows_to_return.append(row)
 
             if sort_by:
                 if sort_by not in cells:
@@ -346,9 +349,6 @@ def validate_search_inputs(**options):
             return_value["valid"] = False
             return_value["msg"] = "You must define either 'rows_ids' or the 'search_column and search_value' pair"
     elif not is_row_id and not is_rows_ids:
-        if not a_search_var_defined:
-            return_value["valid"] = False
-            return_value["msg"] = "You must define the 'search_column and search_value' pair"
         if is_reverse and not is_sort_by_var_defined:
             return_value["valid"] = False
             return_value["msg"] = "You must define 'sort_direction and sort_by' pair"

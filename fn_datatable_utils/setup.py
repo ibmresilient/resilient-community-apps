@@ -19,7 +19,7 @@ def snake_to_camel(word):
 
 setup(
     name='fn_datatable_utils',
-    version='1.1.0',
+    version='1.2.0',
     license='MIT',
     author='Resilient Labs',
     author_email='resil.labs@gmail.com',
