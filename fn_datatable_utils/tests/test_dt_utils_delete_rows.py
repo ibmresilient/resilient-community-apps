@@ -51,7 +51,8 @@ class TestDtUtilsDeleteRows:
         'dt_utils_datatable_api_name': 'mock_data_table',
         'dt_utils_rows_ids': '[1,2]',
         'dt_utils_search_column': None,
-        'dt_utils_search_value': None
+        'dt_utils_search_value': None,
+        'dt_utils_delete_all_rows': False
       },
       'success': True,
       'rows_ids': [1, 2]

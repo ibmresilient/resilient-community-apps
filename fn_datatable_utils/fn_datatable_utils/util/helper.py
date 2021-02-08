@@ -37,13 +37,13 @@ class RESDatatable(object):
         """ Searches and returns rows based on a search/sort criteria, else None """
 
         if self.rows:
-            rows_to_return = []
             is_reverse = True if sort_direction == "DESC" else False
 
-            for row in self.rows:
-                if not search_column:
-                    rows_to_return.append(row)
-                else:
+            if not search_column:
+                rows_to_return = self.rows
+            else:
+                rows_to_return = []
+                for row in self.rows:
                     cells = row["cells"]
                     if search_column not in cells:
                         raise ValueError("{0} is not a valid column api name for the data table: {1}".format(search_column, self.api_name))
@@ -166,7 +166,7 @@ class RESDatatable(object):
         return return_value
 
     def delete_rows(self, rows_ids=None, search_column=None, search_value=None, 
-                    row_id=None, workflow_id=None):
+                    delete_all_rows=False, row_id=None, workflow_id=None):
         """ Deletes rows.
             Returns the response from Resilient API
             or dict with the entry 'error'. """
@@ -175,8 +175,11 @@ class RESDatatable(object):
         rows_ids_list = []
         queued_row_id = None
 
+        if delete_all_rows:
+            rows_ids_list = [row["id"] for row in self.rows]
+
         # Search by rows_ids if defined
-        if rows_ids:
+        elif rows_ids:
             # Convert input str to a list of rows ids
             rows_ids_input = json.loads(rows_ids)
 
@@ -308,9 +311,9 @@ class RESDatatable(object):
             'hints': [row_id]
         }
 
-def get_function_input(inputs, input_name, optional=False):
+def get_function_input(inputs, input_name, optional=False, default=None):
     """Given input_name, checks if it defined. Raises ValueError if a mandatory input is None"""
-    the_input = inputs.get(input_name)
+    the_input = inputs.get(input_name, default)
 
     if the_input is None and optional is False:
         err = "'{0}' is a mandatory function input".format(input_name)
@@ -345,10 +348,13 @@ def validate_search_inputs(**options):
         if options["rows_ids"] and a_search_var_defined:
             return_value["valid"] = False
             return_value["msg"] = "Only 'rows_ids' or the 'search_column and search_value' pair can be defined"
-        elif not options["rows_ids"] and not a_search_var_defined:
+        elif not options["rows_ids"] and not a_search_var_defined and options.get('search_criteria_required', True):
             return_value["valid"] = False
             return_value["msg"] = "You must define either 'rows_ids' or the 'search_column and search_value' pair"
     elif not is_row_id and not is_rows_ids:
+        if not a_search_var_defined and options.get('search_criteria_required', True):
+            return_value["valid"] = False
+            return_value["msg"] = "You must define the 'search_column and search_value' pair"
         if is_reverse and not is_sort_by_var_defined:
             return_value["valid"] = False
             return_value["msg"] = "You must define 'sort_direction and sort_by' pair"
