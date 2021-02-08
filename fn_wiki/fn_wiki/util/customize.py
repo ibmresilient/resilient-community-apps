@@ -21,9 +21,9 @@ def codegen_reload_data():
     return {
         "package": u"fn_wiki",
         "message_destinations": [u"fn_wiki"],
-        "functions": [u"fn_wiki_get_contents", u"fn_wiki_create_update", u"fn_wiki_lookup"],
-        "workflows": [u"example_wiki_get_contents", u"example_wiki_lookup", u"example_wiki_create_page"],
-        "actions": [u"Example: Wiki Create Page", u"Example: Wiki Get Contents", u"Example: Wiki Lookup"],
+        "functions": [u"fn_wiki_lookup", u"fn_wiki_get_contents", u"fn_wiki_create_update"],
+        "workflows": [u"example_wiki_create_page", u"example_wiki_lookup", u"example_wiki_get_contents"],
+        "actions": [u"Example: Wiki Lookup", u"Example: Wiki Get Contents", u"Example: Wiki Create Page"],
         "incident_fields": [],
         "incident_artifact_types": [],
         "datatables": [],
@@ -43,17 +43,17 @@ def customization_data(client=None):
     - Message Destinations:
         - fn_wiki
     - Functions:
+        - fn_wiki_lookup
         - fn_wiki_get_contents
         - fn_wiki_create_update
-        - fn_wiki_lookup
     - Workflows:
-        - example_wiki_get_contents
-        - example_wiki_lookup
         - example_wiki_create_page
+        - example_wiki_lookup
+        - example_wiki_get_contents
     - Rules:
-        - Example: Wiki Create Page
-        - Example: Wiki Get Contents
         - Example: Wiki Lookup
+        - Example: Wiki Get Contents
+        - Example: Wiki Create Page
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)
