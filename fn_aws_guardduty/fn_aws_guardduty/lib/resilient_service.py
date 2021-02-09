@@ -53,7 +53,7 @@ class ResSvc(ResilientComponent):
                 raise Exception("Exception '{}' while trying to get list of Resilient incidents.".format(err))
 
             r_incidents = [r_inc for r_inc in r_incidents_tmp
-                           for f in f_fields if r_inc["properties"].get(f) == finding[f]]
+                           if r_inc["properties"].get(const.CUSTOM_FIELDS_MAP["Id"]) == finding["Id"]]
 
         return r_incidents
 
