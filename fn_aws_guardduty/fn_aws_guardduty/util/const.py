@@ -4,6 +4,10 @@
 """
 File contains constants used in the integration.
 """
+
+# Page size to for paged results from Resilient.
+INC_PAGE_SIZE = 500
+
 # Map GuardDuty findings fields to Resilient incident custom fields.
 CUSTOM_FIELDS_MAP = {
     "Id": "aws_guardduty_finding_id",

@@ -143,3 +143,32 @@ class ResSvc(ResilientComponent):
 
         except SimpleHTTPException as ex:
             LOG.error("Failed to add note for incident %d: %s", incident_id, ex)
+
+    def page_incidents(self, region=None, f_fields=None):
+        """
+        Get paged list of Resilinet incidents using a filter to filter incidents returned.
+
+        :param region: GuardDuty region
+        :param f_fields: List of fields to use in the query filter.
+        :return: Yield matching incident payload dicts.
+        """
+        query_uri = "/incidents/query_paged?return_level=normal"
+        query = IQuery(paged=True)
+        # Add query for region.
+        query.add_conditions(region, "Region")
+        query.add_alt_conditions(f_fields)
+        try:
+            paged_results = self.rest_client().post(query_uri, query)
+
+            while paged_results.get('data'):
+                data = paged_results.get('data')
+
+                for result in data:
+                    yield result
+
+                query["start"] = len(data) + query["start"]
+
+                paged_results = self.rest_client().post(query_uri, query)
+
+        except Exception as err:
+            raise Exception("Exception '{}' while trying to get list of Resilient incidents.".format(err))

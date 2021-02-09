@@ -5,6 +5,8 @@
 import logging
 import time
 import datetime as dt
+from resilient import SimpleHTTPException
+from resilient_lib.components.resilient_common import close_incident
 from fn_aws_guardduty.lib.aws_gd_cli_man import AwsGdCliMan
 import fn_aws_guardduty.util.config as config
 from fn_aws_guardduty.lib.helpers import FCrit, get_lastrun_unix_epoch
@@ -101,6 +103,9 @@ class AwsGdPoller():
                 except TypeError as ex:
                     LOG.error(ex)
 
+                # Resolve archived finding with still opened Resilient incident.
+                self.resolve_archived_findings(res_svc, aws_gd, gd_region, detectorid)
+
             # Break out of loop before sleep if stop thread flag set.
             if config.STOP_THREAD:
                 break
@@ -140,3 +145,42 @@ class AwsGdPoller():
             self.last_update = dt.datetime.now()
 
         return f_criteria
+
+    def resolve_archived_findings(self, res_svc, aws_gd, region, detectorid):
+        """
+        Close open Resilient incidents if the corresponing finding has been archived in GuardDuty.
+        :param res_svc: Resilient helper service object.
+        :param aws_gd: GuardDuty client object for region 'region'.
+        :param region: GuardDuty region.
+        :param detectorid: GuardDuty detector id.
+        """
+        # Get open Resilient incidents in region as dict of finding id keys and resilient id values.
+        res_open_findings = {inc["properties"]["aws_guardduty_finding_id"]:inc["id"]
+                             for inc in res_svc.page_incidents(region=region, f_fields=["Id", "DetectorId"])}
+
+        # Set filter to return only current (non-archived) findings.
+        f_criteria = FCrit()
+        f_criteria.set_archived(value="false")
+
+        # Get a list of current finding ids.
+        gd_open_findings = aws_gd.get("list_findings", DetectorId=detectorid, FindingCriteria=f_criteria)
+
+        # Determine finding ids from Resilient open incidents list not in GuardDuty current incident list.
+        fid_diff = list(set(res_open_findings.keys()).difference(gd_open_findings))
+        for fid in fid_diff:
+            # Retrieve finding details and check if it has been archived.
+            finding = aws_gd.get("get_findings", DetectorId=detectorid, FindingIds=[fid])[0]
+            if isinstance(finding["Service"]["Archived"], bool) and finding["Service"]["Archived"]:
+                # Finding is archived, close corresponding Resilient incident.
+                incident_id = res_open_findings[fid]
+                incident_close_status = {
+                    "plan_status": "C",
+                    "resolution_id": "Resolved",
+                    "resolution_summary": "Resolved by Resilient integration AWS GuardDuty poller because "
+                                          "corresponding GuardDuty finding has been Archived."
+                }
+                LOG.info("Closing incident {}".format(incident_id))
+                try:
+                    close_incident(res_svc.rest_client(), incident_id, incident_close_status)
+                except SimpleHTTPException as ex:
+                    LOG.error('Something went wrong when attempting to create the Incident: %s', ex)
