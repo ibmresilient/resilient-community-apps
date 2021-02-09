@@ -11,6 +11,7 @@ from fn_aws_guardduty.util import const
 
 LOG = logging.getLogger(__name__)
 
+
 class IQuery(dict):
     """Class to create a query for existing findings from AWS GuardDuty in Resilient.
 
