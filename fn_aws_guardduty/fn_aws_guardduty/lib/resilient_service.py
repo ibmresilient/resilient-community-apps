@@ -28,7 +28,9 @@ class ResSvc(ResilientComponent):
         """
         Check if any Resilient incidents with the GuardDuty finding ID.
 
-        :param finding_id: GuardDuty finding id
+        :param finding: GuardDuty finding payload.
+        :param region: The GuardDuty region with the finding.
+        :param f_fields: The GuardDuty finding fields used to query Resilient.
         :return: Return list of incidents with finding id set
         """
         r_incidents = []
