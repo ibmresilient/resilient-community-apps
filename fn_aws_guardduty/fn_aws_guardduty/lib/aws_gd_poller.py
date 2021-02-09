@@ -121,6 +121,9 @@ class AwsGdPoller():
         :return fc: Return criterion dict
         """
         f_criteria = FCrit()
+        # Only return current findings omit archived findings.
+        f_criteria.set_archived(value="false")
+        # Add severity criterion if setting enabled.
         # Add severity criterion if setting enabled.
         if self.aws_gd_severity_threshold:
             f_criteria.set_severity(self.aws_gd_severity_threshold)

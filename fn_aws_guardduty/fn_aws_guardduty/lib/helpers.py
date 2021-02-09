@@ -131,6 +131,16 @@ class FCrit(dict):
             "updatedAt": {"Gte": int(update_epoch)}
         })
 
+    def set_archived(self, value="false"):
+        """
+        Set archived  filter for GuardDuty findings.
+
+        :param value: String value should be "true" or "false"
+        """
+        self["Criterion"].update({
+            "service.archived": {"Eq":[value]}
+        })
+
 def is_regex(regex_str):
     """"Test if sting is a correctly formed regular expression.
 
