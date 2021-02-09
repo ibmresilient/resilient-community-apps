@@ -22,7 +22,8 @@ class TestIQuery:
          ["DetectorId"], "us-west-2", ["", "f2baedb0ac74f8f42fc929e15f56da6a"], "us-west-2"),
     ])
     def test_iquery(self, finding, fields, region, expected_results_2, expected_results):
-        result = IQuery(finding, fields)
+        result = IQuery()
+        result.add_conditions(gd_obj=finding, fields=fields)
         assert(issubclass(type(result), dict))
         assert "filters" in result
         assert "sorts" in result
@@ -36,17 +37,15 @@ class TestIQuery:
         inx = len(fields) + 1
         assert result["filters"][0]["conditions"][inx]["value"] == expected_results_2
 
-    @pytest.mark.parametrize("finding, fields, expected_results, expected_results_2", [
-        (get_cli_raw_responses("get_findings")["Findings"][0],
-         ["Id", "DetectorId"], ["properties.aws_guardduty_finding_id", "properties.aws_guardduty_detector_id"],
-         "properties.aws_guardduty_region"),
-        (get_cli_raw_responses("get_findings")["Findings"][0],
-         ["Id"], ["properties.aws_guardduty_finding_id", ""], "properties.aws_guardduty_region"),
-        (get_cli_raw_responses("get_findings")["Findings"][0],
-         ["DetectorId"], ["", "properties.aws_guardduty_detector_id"], "properties.aws_guardduty_region"),
+    @pytest.mark.parametrize("fields, expected_results, expected_results_2", [
+        (["Id", "DetectorId"], ["properties.aws_guardduty_finding_id", "properties.aws_guardduty_detector_id"],
+             "properties.aws_guardduty_region"),
+        (["Id"], ["properties.aws_guardduty_finding_id", ""], "properties.aws_guardduty_region"),
+        (["DetectorId"], ["", "properties.aws_guardduty_detector_id"], "properties.aws_guardduty_region"),
     ])
-    def test_iquery_alt(self, finding, fields, expected_results, expected_results_2):
-        result = IQuery(finding, fields, alt=True)
+    def test_iquery_alt(self, fields, expected_results, expected_results_2):
+        result = IQuery()
+        result.add_alt_conditions(fields=fields)
         assert(issubclass(type(result), dict))
         assert "filters" in result
         assert "sorts" not in result
@@ -59,6 +58,14 @@ class TestIQuery:
         result.add_alt_conditions("Region")
         inx = len(fields) + 1
         assert result["filters"][0]["conditions"][inx]["field_name"] == expected_results_2
+
+    def test_iquery_paging(self):
+        result = IQuery(paged=True)
+        assert "start" in result
+        assert "length" in result
+        assert result["start"] == 0
+        assert result["length"] == const.INC_PAGE_SIZE
+
 
 class TestFCrit:
     """Test FCrit class"""

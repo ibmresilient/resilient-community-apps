@@ -54,8 +54,8 @@ class TestAwsGdPoller:
         assert not thread.isAlive()
 
     @pytest.mark.parametrize("aws_gd_severity_threshold, aws_gd_lookback_interval, last_update, expected_results", [
-        (None, None, None, {'Criterion': {}}),
-        (7, None, None, {'Criterion': {'severity': {'Gte': 7}}}),
+        (None, None, None, {'Criterion': {'service.archived': {'Eq': ['false']}}}),
+        (7, None, None, {'Criterion': {'service.archived': {'Eq': ['false']}, 'severity': {'Gte': 7}}}),
         (None, 2, None, None),
         (7, 2, None, 7),
         (None, None, dt.datetime.now(), None),

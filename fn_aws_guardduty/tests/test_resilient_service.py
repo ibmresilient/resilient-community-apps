@@ -2,6 +2,7 @@
 # (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 """ Test AWS GuardDuty Resilient service. """
+import types
 from mock import patch, MagicMock, Mock
 import pytest
 from pytest_resilient_circuits.mocks import BasicResilientMock
@@ -92,3 +93,14 @@ class TestResilientService:
         assert isinstance(res_svc, (ResSvc, ResilientComponent))
         result = res_svc.add_comment(incident_id, note)
         assert isinstance(result, MagicMock)
+
+
+    @patch('fn_aws_guardduty.lib.resilient_service.ResilientComponent.rest_client', side_effect=MagicMock)
+    @pytest.mark.parametrize("region, f_fields, expected_results", [
+        ("us-west-2", ["Id", "DetectorId"], None)
+    ])
+    def test_page_incidents(self, mock_res, region, f_fields, expected_results):
+        res_svc = ResSvc(get_opt(), get_config())
+        assert isinstance(res_svc, (ResSvc, ResilientComponent))
+        result = res_svc.page_incidents(region=region, f_fields=f_fields)
+        assert isinstance(result, types.GeneratorType)
