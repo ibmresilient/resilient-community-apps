@@ -35,7 +35,7 @@ class IQuery(dict):
          ]}
         }
     """
-    def __init__(self, gd_obj, fields, alt=False):
+    def __init__(self, paged=False):
         super(IQuery, self).__init__()
         # Add default condition.
         self["filters"] = [{
@@ -47,12 +47,12 @@ class IQuery(dict):
                 }
             ]
         }]
-        if alt:
-            self.add_alt_conditions(fields)
-        else:
-            self.add_conditions(gd_obj, fields)
+        # If a paged query.
+        if paged:
+            self["start"] = 0
+            self["length"] = const.INC_PAGE_SIZE
 
-    def add_conditions(self, gd_obj, fields):
+    def add_conditions(self, gd_obj=None, fields=None):
         """
         Update query for conditions for GuardDuty finding fields.
 
@@ -68,7 +68,7 @@ class IQuery(dict):
                     "value": gd_obj.get(path, {}).get(f) if path else gd_obj.get(f)
                 })
 
-            self["sorts"] =  [{
+            self["sorts"] = [{
                 "field_name": "create_date",
                 "type": "desc"
             }]
@@ -80,7 +80,7 @@ class IQuery(dict):
                 "value": gd_obj
             })
 
-    def add_alt_conditions(self, fields):
+    def add_alt_conditions(self, fields=None):
         """
         Update query for alternate conditions for GuardDuty finding fields.
 

@@ -33,19 +33,24 @@ class ResSvc(ResilientComponent):
         """
         r_incidents = []
         query_uri = "/incidents/query?return_level=partial"
-        query = IQuery(finding, f_fields)
-        # Add query for region.
-        query.add_conditions(region, "Region")
+        # Create query.
+        query = IQuery()
+        # Add conditions for fields.
+        query.add_conditions(gd_obj=finding, fields=f_fields)
+        # Add condition for region.
+        query.add_conditions(gd_obj=region, fields="Region")
         try:
             r_incidents = self.rest_client().post(query_uri, query)
         except SimpleHTTPException:
             # Some versions of Resilient 30.2 onward have a bug that prevents query for numeric fields.
             # To work around this issue, let's try a different query, and filter the results. (Expensive!)
             query_uri = "/incidents/query?return_level=normal&field_handle={}".format(finding["Id"])
-            query = IQuery(None, f_fields, alt=True)
-            # Add query for region.
-            query.add_alt_conditions("Region")
-
+            # Add condition for 'region' to f_fields.
+            f_fields.append("Region")
+            # Create query.
+            query = IQuery()
+            # Add alt conditions for fields.
+            query.add_alt_conditions(fields=f_fields)
             try:
                 r_incidents_tmp = self.rest_client().post(query_uri, query)
 
