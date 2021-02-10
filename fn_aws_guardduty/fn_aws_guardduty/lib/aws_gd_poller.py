@@ -133,17 +133,18 @@ class AwsGdPoller():
         # Add severity criterion if setting enabled.
         if self.aws_gd_severity_threshold:
             f_criteria.set_severity(self.aws_gd_severity_threshold)
-        if self.aws_gd_lookback_interval:
-            # Set criteria for findings updated since lookback interval.
+
+        if self.last_update:
+            # Set criteria for findings updated since last run through loop.
+            f_criteria.set_update(get_lastrun_unix_epoch(self.last_update))
+        elif self.aws_gd_lookback_interval:
+            # Set criteria for previous findings in lookback interval.
             f_criteria.set_update(get_lastrun_unix_epoch(self.aws_gd_lookback_interval))
         else:
-            if self.last_update:
-                # Set criteria for findings updated since last run through loop.
-                f_criteria.set_update(get_lastrun_unix_epoch(self.last_update))
-            else:
-                # First run no criterion set for updates, fetch all may take a long time.
-                LOG.info("First Run in progress - this may take a while.")
-            self.last_update = dt.datetime.now()
+            # First run no criterion set for updates, fetch all may take a long time.
+            LOG.info("First Run in progress - this may take a while.")
+
+        self.last_update = dt.datetime.now()
 
         return f_criteria
 
