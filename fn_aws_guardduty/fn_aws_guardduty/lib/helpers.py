@@ -14,8 +14,6 @@ from fn_aws_guardduty.util import const
 from pkg_resources import resource_filename, Requirement
 
 LOG = logging.getLogger(__name__)
-PACKAGE = "fn-aws-guardduty"
-PATH_TO_TEMPLATES = "fn_aws_guardduty/data/templates/"
 
 
 class IQuery(dict):
@@ -306,8 +304,8 @@ def load_template(filename, override_template_file=None):
 
     if not override_file_exists:
         # Use the default template file.
-        template_file = resource_filename(Requirement(PACKAGE),
-                                          PATH_TO_TEMPLATES + filename)
+        template_file = resource_filename(Requirement(const.PACKAGE),
+                                          const.PATH_TO_TEMPLATES + filename)
         if not os.path.exists(template_file):
             raise Exception("Template file '{}' not found".format(template_file))
 

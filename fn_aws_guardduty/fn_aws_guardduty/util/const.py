@@ -7,6 +7,12 @@ File contains constants used in the integration.
 
 # Page size to for paged results from Resilient.
 INC_PAGE_SIZE = 500
+# Name of Resilient incident close status template file name.
+CLOSE_INCIDENT_TEMPLATE = "incident_close.json"
+# Installed package name.
+PACKAGE = "fn-aws-guardduty"
+# Path to templates in package.
+PATH_TO_TEMPLATES = "fn_aws_guardduty/data/templates/"
 
 # Map GuardDuty findings fields to Resilient incident custom fields.
 CUSTOM_FIELDS_MAP = {

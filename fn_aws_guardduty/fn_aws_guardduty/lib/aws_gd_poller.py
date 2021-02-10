@@ -9,6 +9,7 @@ from resilient import SimpleHTTPException
 from resilient_lib import close_incident
 from fn_aws_guardduty.lib.aws_gd_cli_man import AwsGdCliMan
 import fn_aws_guardduty.util.config as config
+from fn_aws_guardduty.util import const
 from fn_aws_guardduty.lib.helpers import FCrit, get_lastrun_unix_epoch, load_template
 from fn_aws_guardduty.lib.resilient_service import ResSvc
 from fn_aws_guardduty.lib.parse_finding import ParseFinding
@@ -175,7 +176,7 @@ class AwsGdPoller():
             if isinstance(finding["Service"]["Archived"], bool) and finding["Service"]["Archived"]:
                 # Finding is archived, close corresponding Resilient incident.
                 incident_id = res_open_findings[fid]
-                incident_close_status = load_template("incident_close.json", self.close_incident_template)
+                incident_close_status = load_template(const.CLOSE_INCIDENT_TEMPLATE, self.close_incident_template)
                 LOG.info("Closing incident {}".format(incident_id))
                 try:
                     close_incident(res_svc.rest_client(), incident_id, incident_close_status)
