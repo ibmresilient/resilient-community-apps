@@ -25,7 +25,7 @@ def mocked_requests_post(method, url, data=None, headers=None, proxies=None):
             self.text = text
             self.status_code = status_code
 
-    dirTestData = os.path.join(os.getcwd(), 'data')
+    dirTestData = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data")
     fileTimezone = os.path.join(dirTestData, TIMEZONE_FILE)
     fileMeeting = os.path.join(dirTestData, MEETING_FILE)
 
