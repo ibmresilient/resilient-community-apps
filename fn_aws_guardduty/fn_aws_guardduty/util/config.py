@@ -32,6 +32,8 @@ aws_gd_severity_threshold = 7
 # Optional - Lookback interval in minutes to check if findings updated
 # since last run. Used in criteria for filtering findings retrieval (default 60).
 aws_gd_lookback_interval=60
+# Optional - User defined Json template file to use for closing Resilient iincidents.
+#aws_gd_close_incident_template=<PATH_TO_TEMPLATE_FILE>
 # Optional settings for access to GuardDuty via a proxy.
 #http_proxy=http://proxy:80
 #https_proxy=http://proxy:443

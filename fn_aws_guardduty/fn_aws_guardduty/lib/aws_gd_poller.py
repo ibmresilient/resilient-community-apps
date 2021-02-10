@@ -9,7 +9,7 @@ from resilient import SimpleHTTPException
 from resilient_lib.components.resilient_common import close_incident
 from fn_aws_guardduty.lib.aws_gd_cli_man import AwsGdCliMan
 import fn_aws_guardduty.util.config as config
-from fn_aws_guardduty.lib.helpers import FCrit, get_lastrun_unix_epoch
+from fn_aws_guardduty.lib.helpers import FCrit, get_lastrun_unix_epoch, load_template
 from fn_aws_guardduty.lib.resilient_service import ResSvc
 from fn_aws_guardduty.lib.parse_finding import ParseFinding
 
@@ -35,6 +35,7 @@ class AwsGdPoller():
             if self.function_opts.get("aws_gd_severity_threshold") else None
         self.aws_gd_lookback_interval = int(self.function_opts.get("aws_gd_lookback_interval")) \
             if self.function_opts.get("aws_gd_lookback_interval") else None
+        self.close_incident_template = self.function_opts.get("aws_gd_close_incident_template")
         # Use last_update to ensure full list of findings returned only on initial run loop
         # Subsequently only return findings created/updated since last execution.
         self.last_update = None
@@ -173,12 +174,7 @@ class AwsGdPoller():
             if isinstance(finding["Service"]["Archived"], bool) and finding["Service"]["Archived"]:
                 # Finding is archived, close corresponding Resilient incident.
                 incident_id = res_open_findings[fid]
-                incident_close_status = {
-                    "plan_status": "C",
-                    "resolution_id": "Resolved",
-                    "resolution_summary": "Resolved by Resilient integration AWS GuardDuty poller because "
-                                          "corresponding GuardDuty finding has been Archived."
-                }
+                incident_close_status = load_template("incident_close.json", self.close_incident_template)
                 LOG.info("Closing incident {}".format(incident_id))
                 try:
                     close_incident(res_svc.rest_client(), incident_id, incident_close_status)

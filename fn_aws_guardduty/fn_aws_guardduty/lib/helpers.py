@@ -2,14 +2,20 @@
 # (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 """ Helpers for AWS GuardDuty """
+import json
+import os
+import io
 import re
 import datetime as dt
 import time
 import fnmatch
 import logging
 from fn_aws_guardduty.util import const
+from pkg_resources import resource_filename, Requirement
 
 LOG = logging.getLogger(__name__)
+PACKAGE = "fn-aws-guardduty"
+PATH_TO_TEMPLATES = "fn_aws_guardduty/data/templates/"
 
 
 class IQuery(dict):
@@ -275,3 +281,38 @@ def map_property(gd_prop):
         raise KeyError("Unsupported finding property: {}.".format(gd_prop))
 
     return (res_prop, path)
+
+
+def load_template(filename, override_template_file=None):
+    """ Load contents of template file return as json.
+
+    :param filename: Template file.
+    :param override_template_file: Options user defined template path.
+    :return : Return contents of file as json.
+    """
+    file_contents = None
+    template_file = None
+    override_file_exists = False
+
+    if override_template_file:
+        # Check user defined template file exists.
+        if os.path.exists(override_template_file):
+            override_file_exists = True
+            template_file = override_template_file
+            LOG.debug("Using user defined template file %s", override_template_file)
+
+    if not override_file_exists:
+        # Use the default template file.
+        template_file = resource_filename(Requirement(PACKAGE),
+                                          PATH_TO_TEMPLATES + filename)
+        if not os.path.exists(template_file):
+            raise Exception("Template file '{}' not found".format(template_file))
+
+        LOG.debug("Using package defined template file %s", template_file)
+
+    LOG.debug("Attempting to use template file %s", template_file)
+
+    with io.open(template_file, mode="rt", encoding="utf-8") as load_file:
+        file_contents = json.load(load_file)
+
+    return file_contents
