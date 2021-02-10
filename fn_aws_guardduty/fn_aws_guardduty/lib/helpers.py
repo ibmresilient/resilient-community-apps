@@ -244,8 +244,11 @@ def search_json(data, key, path=None, level=0):
                     else:
                         values.append((item, new_path))
             elif k == key:
-                values.append((v, new_path))
-
+                if new_path:
+                    values.append((v, new_path))
+                else:
+                    # Empty 'new_path' so top level property add at beginning of list.
+                    values[:0] = [(v, new_path)]
     elif isinstance(data, list):
         new_path = path[:]
         for i, item_outer in enumerate(data):
