@@ -47,73 +47,55 @@ class TestFnWikiCreateUpdate:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
-    mock_fail_title = {
-        "wiki_parent_title_or_id": None,
-        "wiki_title_or_id": "sample text",
+    mock_fail_path = {
+        "wiki_path": None,
         "wiki_body": "sample text",
         "wiki_create_if_missing": False
     }
 
-    mock_fail_id = {
-        "wiki_parent_title_or_id": None,
-        "wiki_title_or_id": "99",
+    mock_fail_page_not_found = {
+        "wiki_path": "not found",
         "wiki_body": "sample text",
         "wiki_create_if_missing": False,
     }
 
-    mock_fail_parent_title = {
-        "wiki_parent_title_or_id": "sample text",
-        "wiki_title_or_id": "sample text",
+    mock_fail_parent_not_found = {
+        "wiki_path": "parent not found/new page",
         "wiki_body": "sample text",
         "wiki_create_if_missing": False
     }
 
-    mock_fail_parent_id = {
-        "wiki_parent_title_or_id": "99",
-        "wiki_title_or_id": "sample text",
-        "wiki_body": "sample text",
-        "wiki_create_if_missing": True
-    }
 
     @pytest.mark.parametrize("mock_inputs, expected_results", [
-        (mock_fail_title, None),
-        (mock_fail_id, None),
-        (mock_fail_parent_title, None),
-        (mock_fail_parent_id, None),
+        (mock_fail_path, None),
+        (mock_fail_page_not_found, None),
+        (mock_fail_parent_not_found, None),
     ])
     def test_fail_update(self, circuits_app, mock_inputs, expected_results):
         """ Test calling with sample values for the parameters """
 
-        results = call_fn_wiki_create_update_function(circuits_app, mock_inputs)
-        assert(results['success'] == False)
-        assert(results['reason'])
+        with pytest.raises(ValueError):
+            results = call_fn_wiki_create_update_function(circuits_app, mock_inputs)
+            assert(results['success'] == False)
+            assert(results['reason'])
 
 
     mock_success_title = {
-        "wiki_parent_title_or_id": None,
-        "wiki_title_or_id": "ΣΤ",
+        "wiki_path": "ΣΤ",
         "wiki_body": "ΣΤ",
         "wiki_create_if_missing": True
     }
 
     mock_success_w_parent_title = {
-        "wiki_parent_title_or_id": "parent1",
-        "wiki_title_or_id": "new3",
-        "wiki_body": "ΣΤ",
+        "wiki_path": "ΣΤ3/new3",
+        "wiki_body": "new3",
         "wiki_create_if_missing": True
     }
 
-    mock_success_w_parent_id = {
-        "wiki_parent_title_or_id": "1",
-        "wiki_title_or_id": "new3",
-        "wiki_body": "ΣΤ",
-        "wiki_create_if_missing": True
-    }
 
     @pytest.mark.parametrize("mock_inputs, expected_results", [
         (mock_success_title, None),
         (mock_success_w_parent_title, None),
-        (mock_success_w_parent_id, None),
     ])
     def test_create_success(self, circuits_app, mock_inputs, expected_results):
         """ Test calling with sample values for the parameters """
@@ -123,22 +105,14 @@ class TestFnWikiCreateUpdate:
 
 
     mock_success_update_title = {
-        "wiki_parent_title_or_id": None,
-        "wiki_title_or_id": "ΣΤ3",
-        "wiki_body": "ΣΤ3",
+        "wiki_path": "parent1/json2",
+        "wiki_body": "new3 ΣΤ3",
         "wiki_create_if_missing": False
     }
 
-    mock_success_update_id = {
-        "wiki_parent_title_or_id": None,
-        "wiki_title_or_id": "2",
-        "wiki_body": "ΣΤ3",
-        "wiki_create_if_missing": False
-    }
 
     @pytest.mark.parametrize("mock_inputs, expected_results", [
-        (mock_success_update_title, None),
-        (mock_success_update_id, None)
+        (mock_success_update_title, None)
     ])
     def test_update_success(self, circuits_app, mock_inputs, expected_results):
         """ Test calling with sample values for the parameters """
@@ -148,22 +122,21 @@ class TestFnWikiCreateUpdate:
 
     
     mock_success_update_parent_title = {
-        "wiki_parent_title_or_id": "parent1",
-        "wiki_title_or_id": "2",
-        "wiki_body": "ΣΤ3",
-        "wiki_create_if_missing": False
+        "wiki_path": "ΣΤ3/ΣΤ4",
+        "wiki_body": "ΣΤ4",
+        "wiki_create_if_missing": True
     }
 
-    mock_success_update_parent_title = {
-        "wiki_parent_title_or_id": "1",
-        "wiki_title_or_id": "json2",
-        "wiki_body": "ΣΤ3",
-        "wiki_create_if_missing": False
+    mock_success_update_parent_subparent = {
+        "wiki_path": "parent1/json2/ΣΤ5",
+        "wiki_body": "ΣΤ5",
+        "wiki_create_if_missing": True
     }
+
 
     @pytest.mark.parametrize("mock_inputs, expected_results", [
-        (mock_success_update_title, None),
-        (mock_success_update_id, None)
+        (mock_success_update_parent_title, None),
+        (mock_success_update_parent_subparent, None)
     ])
     def test_update_parent_success(self, circuits_app, mock_inputs, expected_results):
         """ Test calling with sample values for the parameters """

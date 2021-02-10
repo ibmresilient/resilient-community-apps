@@ -48,7 +48,7 @@ class TestFnWikiGetContents:
         assert func is not None
 
     mock_get_json = {
-        "wiki_title_or_id": "json2",
+        "wiki_path": "ΣΤ3",
         "wiki_contents_as_json": True,
     }
 

@@ -48,19 +48,19 @@ class TestFnWikiLookup:
         assert func is not None
 
     mock_search_term = {
-        "wiki_title_or_id": "100",
+        "wiki_path": "wiki_lookup",
         "wiki_search_term": "line"
     }
     mock_search_results = ['line2', 'line3']
 
     mock_regex = {
-        "wiki_title_or_id": "100",
+        "wiki_path": "wiki_lookup",
         "wiki_search_term": "line[0123456789]+"
     }
     mock_regex_results = ['line2', 'line3']
 
     mock_not_found = {
-        "wiki_title_or_id": "100",
+        "wiki_path": "wiki_lookup",
         "wiki_search_term": "nadda"
     }
     mock_not_found_results = []
