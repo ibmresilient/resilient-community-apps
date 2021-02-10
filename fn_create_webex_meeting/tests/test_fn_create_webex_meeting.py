@@ -5,13 +5,9 @@
 
 from __future__ import print_function
 import os
-import sys
 from resilient_lib import RequestsCommon
 from fn_create_webex_meeting.lib.cisco_api import WebexAPI
-if sys.version_info.major == 2:
-    from mock import patch
-else:
-    from unittest.mock import patch
+from mock import patch
 
 TIMEZONE_FILE = 'timezone_info.txt'
 MEETING_FILE = 'meeting_request.txt'
