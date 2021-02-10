@@ -5,6 +5,7 @@
 
 from __future__ import print_function
 import sys
+from resilient_lib import RequestsCommon
 from fn_create_webex_meeting.lib.cisco_api import WebexAPI
 if sys.version_info.major == 2:
     from mock import patch
@@ -13,8 +14,7 @@ else:
 
 partial_data = {"timezone": True, "createmeeting": True}
 
-
-def mocked_requests_post(url, data=None, **kwargs):
+def mocked_requests_post(method, url, data=None, headers=None, proxies=None):
     global partial_data
 
     class MockResponse:
@@ -43,6 +43,7 @@ def mocked_requests_post(url, data=None, **kwargs):
 
 def run_cisco_api_create_meeting():
     opts = dict()
+    opts["rc"] = RequestsCommon()
     opts["webex_site_url"] = ""  # Fill with the full site url, i.e abc.webex.com
     opts["email"] = ""  # Fill with user email
     opts["password"] = ""  # Fill with user password
@@ -69,15 +70,21 @@ def run_cisco_api_create_meeting():
 class TestCreateWebexMeeting:
     """ Tests for the fn_create_webex_meeting function"""
 
-    @patch('requests.post', side_effect=mocked_requests_post)
-    def test_success(self, request):
+    #@patch('requests.post', side_effect=mocked_requests_post)
+
+    @patch('resilient_lib.RequestsCommon.execute_call_v2', side_effect=mocked_requests_post)
+    @patch('resilient_lib.RequestsCommon.execute_call_v2', side_effect=mocked_requests_post)
+    def test_success(self, mock1, mock2):
         """ Test calling with sample values for the parameters """
+
         result = run_cisco_api_create_meeting()
 
         assert result["status"] == "SUCCESS"
 
-    @patch('requests.post', side_effect=mocked_requests_post)
-    def test_partial_data(self, request):
+
+    @patch('resilient_lib.RequestsCommon.execute_call_v2', side_effect=mocked_requests_post)
+    @patch('resilient_lib.RequestsCommon.execute_call_v2', side_effect=mocked_requests_post)
+    def test_partial_data(self, mock_id, temp):
         """Simulate invalid response from the Cisco WebEx API"""
         global partial_data
         partial_data["timezone"] = False
