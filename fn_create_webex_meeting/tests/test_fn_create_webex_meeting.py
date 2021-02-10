@@ -4,6 +4,7 @@
 """Tests using pytest_resilient_circuits"""
 
 from __future__ import print_function
+import os
 import sys
 from resilient_lib import RequestsCommon
 from fn_create_webex_meeting.lib.cisco_api import WebexAPI
@@ -12,20 +13,26 @@ if sys.version_info.major == 2:
 else:
     from unittest.mock import patch
 
+TIMEZONE_FILE = 'timezone_info.txt'
+MEETING_FILE = 'meeting_request.txt'
 partial_data = {"timezone": True, "createmeeting": True}
 
 def mocked_requests_post(method, url, data=None, headers=None, proxies=None):
-    global partial_data
+    global PARTIAL_DATA
 
     class MockResponse:
         def __init__(self, text, status_code):
             self.text = text
             self.status_code = status_code
 
+    dirTestData = os.path.join(os.getcwd(), 'data')
+    fileTimezone = os.path.join(dirTestData, TIMEZONE_FILE)
+    fileMeeting = os.path.join(dirTestData, MEETING_FILE)
+
     if "site.LstTimeZone" in str(data) and partial_data["timezone"] == True:
         print("Mocking timezone")
         content = ""
-        with open('data/timezone_info.txt', 'r') as timezone_info_file:
+        with open(fileTimezone, 'r') as timezone_info_file:
             content = timezone_info_file.read()
 
         return MockResponse(content, 200)
@@ -33,7 +40,7 @@ def mocked_requests_post(method, url, data=None, headers=None, proxies=None):
     if "java:com.webex.service.binding.meeting.CreateMeeting" in str(data) and partial_data["createmeeting"] == True:
         print("Mocking createmeeting")
         content = ""
-        with open('data/meeting_request.txt', 'r') as meeting_request_file:
+        with open(fileMeeting, 'r') as meeting_request_file:
             content = meeting_request_file.read()
 
         return MockResponse(content, 200)
@@ -70,8 +77,6 @@ def run_cisco_api_create_meeting():
 class TestCreateWebexMeeting:
     """ Tests for the fn_create_webex_meeting function"""
 
-    #@patch('requests.post', side_effect=mocked_requests_post)
-
     @patch('resilient_lib.RequestsCommon.execute_call_v2', side_effect=mocked_requests_post)
     @patch('resilient_lib.RequestsCommon.execute_call_v2', side_effect=mocked_requests_post)
     def test_success(self, mock1, mock2):
@@ -81,10 +86,11 @@ class TestCreateWebexMeeting:
 
         assert result["status"] == "SUCCESS"
 
-
     @patch('resilient_lib.RequestsCommon.execute_call_v2', side_effect=mocked_requests_post)
     @patch('resilient_lib.RequestsCommon.execute_call_v2', side_effect=mocked_requests_post)
-    def test_partial_data(self, mock_id, temp):
+    @patch('resilient_lib.RequestsCommon.execute_call_v2', side_effect=mocked_requests_post)
+    @patch('resilient_lib.RequestsCommon.execute_call_v2', side_effect=mocked_requests_post)
+    def test_partial_data(self, mock1, mock2, mock3, mock4):
         """Simulate invalid response from the Cisco WebEx API"""
         global partial_data
         partial_data["timezone"] = False
