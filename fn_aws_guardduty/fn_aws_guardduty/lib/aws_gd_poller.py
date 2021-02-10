@@ -6,7 +6,7 @@ import logging
 import time
 import datetime as dt
 from resilient import SimpleHTTPException
-from resilient_lib.components.resilient_common import close_incident
+from resilient_lib import close_incident
 from fn_aws_guardduty.lib.aws_gd_cli_man import AwsGdCliMan
 import fn_aws_guardduty.util.config as config
 from fn_aws_guardduty.lib.helpers import FCrit, get_lastrun_unix_epoch, load_template
@@ -72,37 +72,37 @@ class AwsGdPoller():
                 findings_list = aws_gd.get("list_findings", DetectorId=detectorid, FindingCriteria=f_criteria)
 
                 if not findings_list:
-                    LOG.debug("No GuardDuty findings found for detector ID %s  in region %s.", detectorid, gd_region)
-                    continue
+                    LOG.debug("No GuardDuty finding updates found for detector ID %s  in region %s.", detectorid, gd_region)
+                    #continue
+                else:
+                    LOG.debug("Processing GuardDuty finding updates for detector ID %s  in region %s.",detectorid, gd_region)
 
-                LOG.debug("Getting GuardDuty findings found for detector ID %s  in region %s.",detectorid, gd_region)
+                    try:
+                        ### BEGIN Processing findings
+                        # Iterate over finding ids to get properties.
+                        for fid in findings_list:
 
-                try:
-                    ### BEGIN Processing findings
-                    # Iterate over finding ids to get properties.
-                    for fid in findings_list:
+                            finding = aws_gd.get("get_findings", DetectorId=detectorid, FindingIds=[fid])[0]
 
-                        finding = aws_gd.get("get_findings", DetectorId=detectorid, FindingIds=[fid])[0]
+                            if len(res_svc.find_resilient_incident_for_req(finding, gd_region, ["Id", "DetectorId"])) == 0:
+                                LOG.info("AWS GuardDuty Finding ID %s in region %s discovered: %s, escalating to Resilient",
+                                         finding["Id"], finding["Region"], finding.get("Title", "No Title Provided"))
 
-                        if len(res_svc.find_resilient_incident_for_req(finding, gd_region, ["Id", "DetectorId"])) == 0:
-                            LOG.info("AWS GuardDuty Finding ID %s in region %s discovered: %s, escalating to Resilient",
-                                     finding["Id"], finding["Region"], finding.get("Title", "No Title Provided"))
+                                # Instantiate object to generate Resilient incident payload and data tables from finding.
+                                finding_payload = ParseFinding(finding, gd_region)
 
-                            # Instantiate object to generate Resilient incident payload and data tables from finding.
-                            finding_payload = ParseFinding(finding, gd_region)
+                                # Create incident and return response
+                                i_response = res_svc.create_incident(finding_payload.payload)
 
-                            # Create incident and return response
-                            i_response = res_svc.create_incident(finding_payload.payload)
+                                if i_response is not None:
+                                    # Create data tables.
+                                    if finding_payload.data_tables:
+                                        res_svc.add_datatables(i_response['id'], finding_payload.data_tables)
+                            else:
+                                LOG.info("Incident already exists for AWS GuardDuty Incident %d", finding["Id"])
 
-                            if i_response is not None:
-                                # Create data tables.
-                                if finding_payload.data_tables:
-                                    res_svc.add_datatables(i_response['id'], finding_payload.data_tables)
-                        else:
-                            LOG.info("Incident already exists for AWS GuardDuty Incident %d", finding["Id"])
-
-                except TypeError as ex:
-                    LOG.error(ex)
+                    except TypeError as ex:
+                        LOG.error(ex)
 
                 # Resolve archived finding with still opened Resilient incident.
                 self.resolve_archived_findings(res_svc, aws_gd, gd_region, detectorid)
