@@ -15,7 +15,7 @@ This function package provides the following features which can be used in workf
 - Ability to connect to Resilient server with HTTPS on port 443 and 65001
 - Ability to connect to QRadar with HTTPS on port 443
 
-## Package Dependences
+## Package Dependencies
 - resilient_circuits version 30 or later
 - python version 2.7.10 or later, or 3.6 or later
 ## Installation
@@ -47,7 +47,7 @@ Functions:
 - QRadar Find Reference Set Item
 - QRadar Search
 
-Sample Workflows that demostrate how to use the functions above:
+Sample Workflows that demonstrate how to use the functions above:
 - Example of adding an item to QRadar reference set
 - Example of deleting QRadar Reference set item
 - Example of finding an item from a QRadar reference set
@@ -57,7 +57,7 @@ Sample rules that call the sample workflow above
 - Add to QRadar Reference Set. A menu item added to artifact.
 - Delete from QRadar Reference Set. A menu item added to artifact
 - Find in QRadar Reference Set. A menu item added to artifact
-- QRadar Move from suspet to blocked. A menu item added to artifact
+- QRadar Move from subset to blocked. A menu item added to artifact
 - Search QRadar for offense id
 
 
