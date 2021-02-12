@@ -10,6 +10,8 @@ from resilient_circuits import ResilientComponent, function, handler, StatusMess
 from resilient_lib import validate_fields
 from fn_qradar_integration.util.qradar_utils import QRadarClient
 
+LOG = logging.getLogger(__name__)
+
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'qradar_add_reference_set_item"""
 
@@ -37,15 +39,14 @@ class FunctionComponent(ResilientComponent):
             qradar_reference_set_name = kwargs.get("qradar_reference_set_name")  # text
             qradar_reference_set_item_value = kwargs.get("qradar_reference_set_item_value")  # text
 
-            log = logging.getLogger(__name__)
-            log.info("qradar_reference_set_name: %s", qradar_reference_set_name)
-            log.info("qradar_reference_set_item_value: %s", qradar_reference_set_item_value)
+            LOG.info("qradar_reference_set_name: %s", qradar_reference_set_name)
+            LOG.info("qradar_reference_set_item_value: %s", qradar_reference_set_item_value)
 
             qradar_verify_cert = True
             if "verify_cert" in self.options and self.options["verify_cert"].lower() == "false":
                 qradar_verify_cert = False
 
-            log.debug("Connection to {} using {}".format(self.options["host"],
+            LOG.debug("Connection to {} using {}".format(self.options["host"],
                                                          self.options.get("username") or "service token"))
 
             yield StatusMessage("starting...")
@@ -65,5 +66,5 @@ class FunctionComponent(ResilientComponent):
             # Produce a FunctionResult with the results
             yield FunctionResult(result)
         except Exception as e:
-            log.error(str(e))
+            LOG.error(str(e))
             yield FunctionError()
