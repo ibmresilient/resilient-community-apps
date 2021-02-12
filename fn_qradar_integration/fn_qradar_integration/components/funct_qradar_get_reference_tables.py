@@ -10,6 +10,7 @@ from fn_qradar_integration.util.qradar_utils import QRadarClient
 
 PACKAGE_NAME = "fn_qradar_integration"
 
+LOG = logging.getLogger(__name__)
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'qradar_get_reference_tables''"""
@@ -35,13 +36,11 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Starting 'qradar_reference_table_add_item' that was running in workflow '{0}'".format(wf_instance_id))
             rp = ResultPayload(PACKAGE_NAME, **kwargs)
 
-            log = logging.getLogger(__name__)
-
             qradar_verify_cert = True
             if "verify_cert" in self.options and self.options["verify_cert"].lower() == "false":
                 qradar_verify_cert = False
 
-            log.debug("Connecting to QRadar instance @ {}".format(self.options["host"]))
+            LOG.debug("Connecting to QRadar instance @ {}".format(self.options["host"]))
 
             qradar_client = QRadarClient(host=self.options["host"],
                                          username=self.options.get("username", None),
@@ -52,8 +51,11 @@ class FunctionComponent(ResilientComponent):
 
             result = qradar_client.get_all_ref_tables()
 
-            results = rp.done(success=True, 
-                              content=result)
+            status_code = isinstance(result, list)
+            reason = None if status_code else result.get('http_response', {}).get('message', 'unknown')
+            results = rp.done(success=status_code, 
+                              content=result,
+                              reason=reason)
             yield StatusMessage("Finished 'qradar_reference_table_add_item' that was running in workflow '{0}'".format(wf_instance_id))
 
             # Produce a FunctionResult with the results
