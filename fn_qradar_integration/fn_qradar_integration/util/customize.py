@@ -21,12 +21,12 @@ def codegen_reload_data():
     return {
         "package": u"fn_qradar_integration",
         "message_destinations": [u"fn_qradar_integration"],
-        "functions": [u"qradar_find_reference_set_item", u"qradar_delete_reference_set_item", u"qradar_reference_table_add_item", u"qradar_search", u"qradar_reference_table_update_item", u"qradar_reference_table_delete_item", u"qradar_find_reference_sets", u"qradar_reference_table_get_table", u"qradar_add_reference_set_item", u"qradar_get_reference_tables"],
-        "workflows": [u"qradar_find_reference_set_item", u"qradar_move_item_to_different_ref_set", u"example_qradar__update_this_reference_table_item", u"qradar_get_reference_table_data", u"example_qradar__add_reference_table_item_dt", u"qradar_search_event_offense", u"example_qradar__get_all_reference_tables", u"qradar_find_reference_sets_artifact", u"qradar_add_reference_set_item", u"example_qradar__delete_reference_table_item_dt"],
-        "actions": [u"Find All QRadar Reference Sets", u"Example: QRadar - Gather Reference Table Data", u"Find in QRadar Reference Set", u"Example: QRadar - Get all Reference Tables", u"Search QRadar for offense id", u"QRadar Move from Sample Blocked to Sample Suspected", u"Example: QRadar - Delete this Reference Table Item", u"Example: QRadar - Update this Reference Table Item", u"QRadar Add to Reference Set", u"Example: QRadar - Add Item to this Reference Table"],
+        "functions": [u"qradar_find_reference_set_item", u"qradar_reference_table_get_table", u"qradar_reference_table_add_item", u"qradar_search", u"qradar_reference_table_update_item", u"qradar_find_reference_sets", u"qradar_reference_table_delete_item", u"qradar_add_reference_set_item", u"qradar_get_reference_tables", u"qradar_delete_reference_set_item"],
+        "workflows": [u"qradar_find_reference_set_item", u"example_qradar__delete_reference_table_item_dt", u"qradar_get_reference_table_data", u"qradar_move_item_to_different_ref_set", u"example_qradar__update_this_reference_table_item", u"example_qradar__add_reference_table_item_dt", u"qradar_find_reference_sets_artifact", u"qradar_add_reference_set_item", u"example_qradar__get_all_reference_tables", u"qradar_search_event_offense"],
+        "actions": [u"Example: QRadar - Update this Reference Table Item", u"QRadar Move from Sample Blocked to Sample Suspected", u"Find in QRadar Reference Set", u"Example: QRadar - Delete this Reference Table Item", u"Example: QRadar - Gather Reference Table Data", u"Find All QRadar Reference Sets", u"Example: QRadar - Get all Reference Tables", u"Search QRadar for offense id", u"QRadar Add to Reference Set", u"Example: QRadar - Add Item to this Reference Table"],
         "incident_fields": [u"qradar_id"],
         "incident_artifact_types": [],
-        "datatables": [u"qradar_reference_table", u"qradar_offense_event", u"qradar_reference_set", u"qradar_reference_table_queried_rows"],
+        "datatables": [u"qradar_reference_table_queried_rows", u"qradar_reference_table", u"qradar_offense_event", u"qradar_reference_set"],
         "automatic_tasks": [],
         "scripts": []
     }
@@ -44,44 +44,44 @@ def customization_data(client=None):
         - fn_qradar_integration
     - Functions:
         - qradar_find_reference_set_item
-        - qradar_delete_reference_set_item
+        - qradar_reference_table_get_table
         - qradar_reference_table_add_item
         - qradar_search
         - qradar_reference_table_update_item
-        - qradar_reference_table_delete_item
         - qradar_find_reference_sets
-        - qradar_reference_table_get_table
+        - qradar_reference_table_delete_item
         - qradar_add_reference_set_item
         - qradar_get_reference_tables
+        - qradar_delete_reference_set_item
     - Workflows:
         - qradar_find_reference_set_item
+        - example_qradar__delete_reference_table_item_dt
+        - qradar_get_reference_table_data
         - qradar_move_item_to_different_ref_set
         - example_qradar__update_this_reference_table_item
-        - qradar_get_reference_table_data
         - example_qradar__add_reference_table_item_dt
-        - qradar_search_event_offense
-        - example_qradar__get_all_reference_tables
         - qradar_find_reference_sets_artifact
         - qradar_add_reference_set_item
-        - example_qradar__delete_reference_table_item_dt
+        - example_qradar__get_all_reference_tables
+        - qradar_search_event_offense
     - Rules:
-        - Find All QRadar Reference Sets
-        - Example: QRadar - Gather Reference Table Data
+        - Example: QRadar - Update this Reference Table Item
+        - QRadar Move from Sample Blocked to Sample Suspected
         - Find in QRadar Reference Set
+        - Example: QRadar - Delete this Reference Table Item
+        - Example: QRadar - Gather Reference Table Data
+        - Find All QRadar Reference Sets
         - Example: QRadar - Get all Reference Tables
         - Search QRadar for offense id
-        - QRadar Move from Sample Blocked to Sample Suspected
-        - Example: QRadar - Delete this Reference Table Item
-        - Example: QRadar - Update this Reference Table Item
         - QRadar Add to Reference Set
         - Example: QRadar - Add Item to this Reference Table
     - Incident Fields:
         - qradar_id
     - Data Tables:
+        - qradar_reference_table_queried_rows
         - qradar_reference_table
         - qradar_offense_event
         - qradar_reference_set
-        - qradar_reference_table_queried_rows
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)
