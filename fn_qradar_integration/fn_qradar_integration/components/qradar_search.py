@@ -11,6 +11,7 @@ from resilient_lib import validate_fields
 from fn_qradar_integration.util.qradar_utils import QRadarClient
 from fn_qradar_integration.util import function_utils
 
+LOG = logging.getLogger(__name__)
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'qradar_search"""
@@ -20,7 +21,8 @@ class FunctionComponent(ResilientComponent):
         super(FunctionComponent, self).__init__(opts)
         self.opts = opts
         self.options = opts.get("fn_qradar_integration", {})
-        
+        required_fields = ["host", "verify_cert"]
+        validate_fields(required_fields, self.options)
 
     @handler("reload")
     def _reload(self, event, opts):
@@ -34,9 +36,6 @@ class FunctionComponent(ResilientComponent):
         try:
             required_fields = ["qradar_query", "qradar_query_all_results"]
             validate_fields(required_fields, kwargs)
-
-            required_config_fields = ["host", "verify_cert"]
-            validate_fields(required_config_fields, self.options)
             # Get the function parameters:
             qradar_query = self.get_textarea_param(kwargs.get("qradar_query"))  # textarea
             qradar_query_param1 = kwargs.get("qradar_query_param1")  # text
@@ -51,16 +50,15 @@ class FunctionComponent(ResilientComponent):
             if "Yes" in kwargs.get("qradar_query_all_results")["name"]:
                 qradar_query_all_results = True
 
-            log = logging.getLogger(__name__)
-            log.info("qradar_query: %s", qradar_query)
-            log.info("qradar_query_param1: %s", qradar_query_param1)
-            log.info("qradar_query_param2: %s", qradar_query_param2)
-            log.info("qradar_query_param3: %s", qradar_query_param3)
-            log.info("qradar_query_param4: %s", qradar_query_param4)
-            log.info("qradar_query_param5: %s", qradar_query_param5)
-            log.info("qradar_query_range_start: %s", qradar_query_range_start)
-            log.info("qradar_query_range_end: %s", qradar_query_range_end)
-            log.info("qradar_query_all_results: %s", qradar_query_all_results)
+            LOG.info("qradar_query: %s", qradar_query)
+            LOG.info("qradar_query_param1: %s", qradar_query_param1)
+            LOG.info("qradar_query_param2: %s", qradar_query_param2)
+            LOG.info("qradar_query_param3: %s", qradar_query_param3)
+            LOG.info("qradar_query_param4: %s", qradar_query_param4)
+            LOG.info("qradar_query_param5: %s", qradar_query_param5)
+            LOG.info("qradar_query_range_start: %s", qradar_query_range_start)
+            LOG.info("qradar_query_range_end: %s", qradar_query_range_end)
+            LOG.info("qradar_query_all_results: %s", qradar_query_all_results)
 
             qradar_verify_cert = True
             if "verify_cert" in self.options and self.options["verify_cert"].lower() == "false":
@@ -71,9 +69,9 @@ class FunctionComponent(ResilientComponent):
                 if "search_timeout" in self.options:
                     timeout = float(self.options["search_timeout"])
             except Exception:
-                log.debug("Failed to read search_timeout: {}".format(self.options["search_timeout"]))
+                LOG.debug("Failed to read search_timeout: {}".format(self.options["search_timeout"]))
 
-            log.debug("Connection to {} using {}".format(self.options["host"],
+            LOG.debug("Connection to {} using {}".format(self.options["host"],
                                                          self.options.get("username") or "service token"))
 
             query_string = function_utils.make_query_string(qradar_query,
@@ -83,7 +81,7 @@ class FunctionComponent(ResilientComponent):
                                                              qradar_query_param4,
                                                              qradar_query_param5])
 
-            log.info("Running query: " + query_string)
+            LOG.info("Running query: " + query_string)
 
             yield StatusMessage("starting...")
             qradar_client = QRadarClient(host=self.options["host"],
@@ -102,5 +100,5 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("done...")
             yield FunctionResult(result)
         except Exception as e:
-            log.error(str(e))
+            LOG.error(str(e))
             yield FunctionError()

@@ -14,6 +14,7 @@ from fn_qradar_integration.util.qradar_utils import QRadarClient
     For a given (artifact) value, find all the QRadar reference sets that contain it.
 """
 
+LOG = logging.getLogger(__name__)
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'qradar_find_reference_sets"""
@@ -23,7 +24,8 @@ class FunctionComponent(ResilientComponent):
         super(FunctionComponent, self).__init__(opts)
         self.opts = opts
         self.options = opts.get("fn_qradar_integration", {})
-        
+        required_fields = ["host", "verify_cert"]
+        validate_fields(required_fields, self.options)
 
     @handler("reload")
     def _reload(self, event, opts):
@@ -37,20 +39,16 @@ class FunctionComponent(ResilientComponent):
         try:
             required_fields = ["qradar_reference_set_item_value"]
             validate_fields(required_fields, kwargs)
-
-            required_config_fields = ["host", "verify_cert"]
-            validate_fields(required_config_fields, self.options)
             # Get the function parameters:
             qradar_reference_set_item_value = kwargs.get("qradar_reference_set_item_value")  # text
 
-            log = logging.getLogger(__name__)
-            log.info("qradar_reference_set_item_value: %s", qradar_reference_set_item_value)
+            LOG.info("qradar_reference_set_item_value: %s", qradar_reference_set_item_value)
 
             qradar_verify_cert = True
             if "verify_cert" in self.options and self.options["verify_cert"].lower() == "false":
                 qradar_verify_cert = False
 
-            log.debug("Connection to {} using {}".format(self.options["host"],
+            LOG.debug("Connection to {} using {}".format(self.options["host"],
                                                          self.options.get("username") or "service token"))
 
             yield StatusMessage("starting...")
@@ -72,5 +70,5 @@ class FunctionComponent(ResilientComponent):
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception as e:
-            log.exception(e)
+            LOG.exception(e)
             yield FunctionError()
