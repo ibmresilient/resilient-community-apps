@@ -70,6 +70,7 @@ WF_NAME = "Example: AWS GuardDuty: Refresh Finding"
 ARTIFACT_API_TO_TYPE = {
     "aws_iam_access_key_id": "AWS IAM Access Key ID",
     "aws_iam_user_name": "AWS IAM User Name",
+    "aws_s3_bucket_name": "AWS S3 Bucket Name",
     "IP Address": "IP Address",
     "DNS Name": "DNS Name",
     "Port": "Port"
@@ -104,8 +105,8 @@ def update_fields():
     incident.severity_code = PAYLOAD["severity_code"]
     incident.properties.aws_guardduty_finding_updated_at = PAYLOAD["properties"]["aws_guardduty_finding_updated_at"]
     incident.properties.aws_guardduty_count = str(PAYLOAD["properties"]["aws_guardduty_count"])
-    incident.properties.aws_guardduty_archived= str(PAYLOAD["properties"]["aws_guardduty_archived"])
-
+    incident.properties.aws_guardduty_archived = str(PAYLOAD["properties"]["aws_guardduty_archived"])
+    incident.properties.aws_guardduty_severity = str(PAYLOAD["properties"]["aws_guardduty_severity"])
 
 def update_datatables():
     for data_table in DATA_TABLES:

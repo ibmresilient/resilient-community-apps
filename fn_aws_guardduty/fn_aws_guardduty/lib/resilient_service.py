@@ -6,6 +6,7 @@ import logging
 import pprint
 import re
 
+import resilient
 from resilient_circuits import ResilientComponent
 from resilient import SimpleHTTPException
 from fn_aws_guardduty.lib.helpers import IQuery
@@ -34,7 +35,7 @@ class ResSvc(ResilientComponent):
         :return: Return list of incidents with finding id set
         """
         r_incidents = []
-        query_uri = "/incidents/query?return_level=partial"
+        query_uri = "/incidents/query?return_level=normal"
         # Create query.
         query = IQuery()
         # Add conditions for fields.
@@ -174,3 +175,38 @@ class ResSvc(ResilientComponent):
 
         except Exception as err:
             raise Exception("Exception '{}' while trying to get list of Resilient incidents.".format(err))
+
+    def update_incident_properties(self, incident_id, fields):
+        """ Update Resilient incident custom property or fields.
+
+        :param incident_id: Incident ID.
+        :param fields: Property fields to be updates.
+        :return: response object
+        """
+        try:
+            response = None
+            resilient_client = self.rest_client()
+            uri = "/incidents/{}".format(incident_id)
+
+            previous_object = resilient_client.get(uri)
+            patch = resilient.Patch(previous_object)
+
+            properties = fields.get("properties")
+
+            if properties:
+                for field in properties:
+                    if field not in previous_object["properties"]:
+                        raise ValueError("Invalid property parameter {}".format(field))
+
+                    patch.changes[field] = \
+                        resilient.patch.Change(field, properties[field], patch.previous_object["properties"][field])
+            else:
+                for field in fields:
+                    patch.add_value(field, fields[field])
+
+            response = resilient_client.patch(uri, patch)
+
+        except SimpleHTTPException as ex:
+            LOG.error('Something went wrong when attempting to patch the Incident: %s', ex)
+
+        return response

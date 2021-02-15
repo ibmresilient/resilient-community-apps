@@ -85,7 +85,11 @@ class AwsGdPoller():
 
                             finding = aws_gd.get("get_findings", DetectorId=detectorid, FindingIds=[fid])[0]
 
-                            if len(res_svc.find_resilient_incident_for_req(finding, gd_region, ["Id", "DetectorId"])) == 0:
+                            incident_for_req = \
+                                res_svc.find_resilient_incident_for_req(finding, gd_region, ["Id", "DetectorId"])
+
+                            if len(incident_for_req) == 0:
+                                # No corresponding Resilient incident exists.
                                 LOG.info("AWS GuardDuty Finding ID %s in region %s discovered: %s, escalating to Resilient",
                                          finding["Id"], finding["Region"], finding.get("Title", "No Title Provided"))
 
@@ -99,6 +103,24 @@ class AwsGdPoller():
                                     # Create data tables.
                                     if finding_payload.data_tables:
                                         res_svc.add_datatables(i_response['id'], finding_payload.data_tables)
+
+                            elif incident_for_req[0]["properties"][const.CUSTOM_FIELDS_MAP["UpdatedAt"]] != finding["UpdatedAt"]:
+                                # GuardDuty finding updated, trigger update rule on resilient.
+                                LOG.info("New updates detected for existing GuardDuty incident %d.", finding["Id"])
+                                incident_id = incident_for_req[0]["id"]
+                                fields = {
+                                    "properties": {
+                                        "aws_guardduty_trigger_refresh": True
+                                    }
+                                }
+                                res_svc.update_incident_properties(incident_id, fields)
+                                # Reset flag to False.
+                                fields = {
+                                    "properties": {
+                                        "aws_guardduty_trigger_refresh": False
+                                    }
+                                }
+                                res_svc.update_incident_properties(incident_id, fields)
                             else:
                                 LOG.info("Incident already exists for AWS GuardDuty Incident %d", finding["Id"])
 
@@ -177,7 +199,7 @@ class AwsGdPoller():
                 # Finding is archived, close corresponding Resilient incident.
                 incident_id = res_open_findings[fid]
                 incident_close_status = load_template(const.CLOSE_INCIDENT_TEMPLATE, self.close_incident_template)
-                LOG.info("Closing incident {}".format(incident_id))
+                LOG.info("Closing incident %s", incident_id)
                 try:
                     close_incident(res_svc.rest_client(), incident_id, incident_close_status)
                 except SimpleHTTPException as ex:
