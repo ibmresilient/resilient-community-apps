@@ -55,7 +55,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.0.0 | 01/2021 | Initial Release |
+| 1.0.0 | 02/2021 | Initial Release |
 
 ---
 
