@@ -48,7 +48,7 @@ class RESDatatable(object):
                     cells = row["cells"]
                     if search_column not in cells:
                         raise ValueError("{0} is not a valid column api name for the data table: {1}".format(search_column, self.api_name))
-                    column = cells.get(search_column)
+                    column = cells.get(search_column, {})
                     value = column.get("value", None)
                     if value is not None:
                         if value == search_value:
