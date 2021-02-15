@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
+# Copyright IBM Corp. 2010, 2020 - Confidential Information
+
 """Function implementation"""
 
 import logging
@@ -61,23 +63,6 @@ class FunctionComponent(ResilientComponent):
             # build the url
             url = "/".join([MACHINES_URL, defender_machine_id, "runAntiVirusScan"])
             scan_result, status, reason = defender_api.call(url, payload=payload, oper="POST")
-
-            # TODO
-            xstatus = True
-            xscan_result = {
-        "id": "5382f7ea-7557-4ab7-9782-d50480024a4e",
-        "type": "Full",
-		"scope": "Selective",
-        "requestor": "Analyst@TestPrd.onmicrosoft.com",
-        "requestorComment": "test for docs",
-        "status": "Succeeded",
-        "machineId": "7b1f4967d9728e5aa3c06a9e617a22a4a5a17378",
-        "computerDnsName": "desktop-test",
-        "creationDateTimeUtc": "2019-01-02T14:39:38.2262283Z",
-        "lastUpdateDateTimeUtc": "2019-01-02T14:40:44.6596267Z",
-        "relatedFileInfo": None
-}
-            # TODO
 
             if not status:
                 yield StatusMessage(u"{} failure. Status: {} Reason: {}"\

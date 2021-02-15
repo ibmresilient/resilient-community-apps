@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 # (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
+
 import logging
 from resilient_lib import IntegrationError
 from fn_microsoft_defender.lib.defender_common import DefenderAPI, PACKAGE_NAME

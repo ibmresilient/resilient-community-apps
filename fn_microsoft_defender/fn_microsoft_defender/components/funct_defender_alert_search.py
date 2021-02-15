@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
+# Copyright IBM Corp. 2010, 2020 - Confidential Information
+
 """Function implementation"""
 
 import logging
@@ -72,52 +74,6 @@ class FunctionComponent(ResilientComponent):
             log.debug(params)
 
             alert_payload, status, reason = defender_api.call(ALERTS_URL, payload=params)
-
-            ## TODO
-            xstatus = True
-            xalert_payload = {
-                "@odata.context": "https://api.securitycenter.microsoft.com/api/$metadata#Alerts",
-                "value": [
-                    {
-                        "id": "da637308392288907382_-880718168",
-                        "incidentId": 7587,
-                        "investigationId": 723156,
-                        "assignedTo": "secop123@contoso.com",
-                        "severity": "Low",
-                        "status": "New",
-                        "classification": "TruePositive",
-                        "determination": None,
-                        "investigationState": "Queued",
-                        "detectionSource": "WindowsDefenderAv",
-                        "category": "SuspiciousActivity",
-                        "threatFamilyName": "Meterpreter",
-                        "title": "Suspicious 'Meterpreter' behavior was detected",
-                        "description": "Malware and unwanted software are undesirable applications that perform annoying, disruptive, or harmful actions on affected machines. Some of these undesirable applications can replicate and spread from one machine to another. Others are able to receive commands from remote attackers and perform activities associated with cyber attacks.\n\nA malware is considered active if it is found running on the machine or it already has persistence mechanisms in place. Active malware detections are assigned higher severity ratings.\n\nBecause this malware was active, take precautionary measures and check for residual signs of infection.",
-                        "alertCreationTime": "2020-07-20T10:53:48.7657932Z",
-                        "firstEventTime": "2020-07-20T10:52:17.6654369Z",
-                        "lastEventTime": "2020-07-20T10:52:18.1362905Z",
-                        "lastUpdateTime": "2020-07-20T10:53:50.19Z",
-                        "resolvedTime": None,
-                        "machineId": "12ee6dd8c833c8a052ea231ec1b19adaf497b625",
-                        "computerDnsName": "temp123.middleeast.corp.microsoft.com",
-                        "rbacGroupName": "MiddleEast",
-                        "aadTenantId": "a839b112-1253-6432-9bf6-94542403f21c",
-                        "relatedUser": {
-                            "userName": "temp123",
-                            "domainName": "MIDDLEEAST"
-                        },
-                        "comments": [
-                            {
-                                "comment": "test comment for docs",
-                                "createdBy": "secop123@contoso.com",
-                                "createdTime": "2020-07-21T01:00:37.8404534Z"
-                            }
-                        ],
-                        "evidence": []
-                    }
-                ]
-            }
-            ## TODO
 
             # filter on machine id and convert dates to timestamps
             filtered_alerts = []

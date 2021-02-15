@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
+# Copyright IBM Corp. 2010, 2020 - Confidential Information
+
 """Function implementation"""
 
 import logging
@@ -73,10 +75,6 @@ class FunctionComponent(ResilientComponent):
             # build the url
             url = "/".join([ALERTS_URL, defender_alert_id])
             alert_payload, status, reason = defender_api.call(url, payload=payload, oper="PATCH")
-
-            # TODO
-            xstatus = True
-            # TODO
 
             if not status:
                 yield StatusMessage(u"{} failure. Status: {} Reason: {}".format(FUNCTION, status, reason))

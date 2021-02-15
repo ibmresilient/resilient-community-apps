@@ -19,7 +19,7 @@ app_secret=xxx
 #   api-eu.securitycenter.microsoft.com
 #   api-uk.securitycenter.microsoft.com
 api_url=https://api.securitycenter.microsoft.com
-#
+# uncomment as necessary for proxies
 #http_proxy=http://yourproxy.com
 #https_proxy=https://yourproxy.com
 """

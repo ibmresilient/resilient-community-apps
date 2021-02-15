@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
+# Copyright IBM Corp. 2010, 2020 - Confidential Information
+
 """Function implementation"""
 
 import logging
@@ -51,34 +53,6 @@ class FunctionComponent(ResilientComponent):
 
             if not status:
                 yield StatusMessage(u"{} failure. Status: {} Reason: {}".format(FUNCTION, status, reason))
-
-            # TODO
-            xmachines_result = {
-                "@odata.context": "https://api.securitycenter.microsoft.com/api/$metadata#Machines",
-                "value": [
-                    {
-                        "id": "1e5bc9d7e413ddd7902c2932e418702b84d0cc07",
-                        "computerDnsName": "mymachine1.contoso.com",
-                        "firstSeen": "2018-08-02T14:55:03.7791856Z",
-                        "lastSeen": "2018-08-02T14:55:03.7791856Z",
-                        "osPlatform": "Windows10",
-                        "version": "1709",
-                        "osProcessor": "x64",
-                        "lastIpAddress": "172.17.230.209",
-                        "lastExternalIpAddress": "167.220.196.71",
-                        "osBuild": 18209,
-                        "healthStatus": "Active",
-                        "rbacGroupId": 140,
-                        "rbacGroupName": "The-A-Team",
-                        "riskScore": "Low",
-                        "exposureLevel": "Medium",
-                        "isAadJoined": True,
-                        "aadDeviceId": "80fe8ff8-2624-418e-9591-41f0491218f9",
-                        "machineTags": [ "test tag 1", "test tag 2" ]
-                    }
-                ]
-            }
-            # TODO
 
             # convert dates to timestamps
             if status:

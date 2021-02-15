@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 # (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
+
 """Function implementation"""
 
 import logging
@@ -56,20 +57,6 @@ class FunctionComponent(ResilientComponent):
 
             rp = ResultPayload(PACKAGE_NAME, **kwargs)
             machines_result, status, reason = defender_api.call(url, content_type=None)
-
-            ### TODO
-            xmachines_result = {
-                "@odata.context": "https://graph.microsoft.com/testwdatppreview/$metadata#Machines",
-                "value": [
-                    {
-                        "id": "04c99d46599f078f1c3da3783cf5b95f01ac61bb",
-                        "computerDnsName": "",
-                        "firstSeen": "2017-07-06T01:25:04.9480498Z",
-                        "osPlatform": "Windows10"
-                    }
-                ]
-            }
-            ### TODO
 
             # convert the timestamp
             if status:

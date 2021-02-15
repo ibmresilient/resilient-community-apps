@@ -4,7 +4,7 @@
 FROM registry.access.redhat.com/ubi8/python-36:latest
 
 ARG APPLICATION=fn_microsoft_defender
-ARG RESILIENT_CIRCUITS_VERSION=37
+ARG RESILIENT_CIRCUITS_VERSION=39
 ARG PATH_RESILIENT_CIRCUITS=rescircuits
 
 # Environment variable for any app to check if running in a container
@@ -53,6 +53,13 @@ ENV APP_LOG_DIR /var/log/${PATH_RESILIENT_CIRCUITS}
 
 # setup entrypoint for read-only enterprise data used by integration, if needed
 RUN mkdir /var/${PATH_RESILIENT_CIRCUITS}
+
+# ansible directory structure
+RUN mkdir -p /var/${PATH_RESILIENT_CIRCUITS}/ansible/env && \
+    chgrp -R 0 /var/${PATH_RESILIENT_CIRCUITS}/ansible && \
+    chmod -R g=u /var/${PATH_RESILIENT_CIRCUITS}/ansible
+# ansible artifacts
+RUN mkdir /tmp/artifacts
 
 # entrypoint for resilient-circuits.  Use /opt, the conventional location for optional software on Linux
 RUN mkdir /opt/${PATH_RESILIENT_CIRCUITS}
