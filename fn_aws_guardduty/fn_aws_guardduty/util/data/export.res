@@ -155,7 +155,7 @@
   ],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1613476843076,
+  "export_date": 1613494839309,
   "export_format_version": 2,
   "fields": [
     {
@@ -718,7 +718,7 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 2,
+  "id": 3,
   "inbound_mailboxes": null,
   "incident_artifact_types": [
     {
@@ -775,7 +775,7 @@
   ],
   "incident_types": [
     {
-      "create_date": 1613476813486,
+      "create_date": 1613494814692,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -784,7 +784,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1613476813486,
+      "update_date": 1613494814692,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -826,7 +826,7 @@
   "types": [
     {
       "actions": [],
-      "display_name": "GuardDuty Access Key Details",
+      "display_name": "GuardDuty Resource - Access Key Details",
       "export_key": "gd_access_key_details",
       "fields": {
         "access_key_id": {
@@ -1006,7 +1006,7 @@
     },
     {
       "actions": [],
-      "display_name": "GuardDuty Action Details",
+      "display_name": "GuardDuty Action/Actor Details",
       "export_key": "gd_action_details",
       "fields": {
         "action_api": {
@@ -1955,7 +1955,7 @@
     },
     {
       "actions": [],
-      "display_name": "GuardDuty Instance Details",
+      "display_name": "GuardDuty Resource - Instance Details",
       "export_key": "gd_instance_details",
       "fields": {
         "instance_id": {
@@ -2408,7 +2408,7 @@
     },
     {
       "actions": [],
-      "display_name": "GuardDuty S3 Bucket Details",
+      "display_name": "GuardDuty Resource - S3 Bucket Details",
       "export_key": "gd_s3_bucket_details",
       "fields": {
         "bucket_arn": {
