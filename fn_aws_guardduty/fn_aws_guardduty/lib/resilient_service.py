@@ -199,7 +199,7 @@ class ResSvc(ResilientComponent):
                         raise ValueError("Invalid property parameter {}".format(field))
 
                     patch.changes[field] = \
-                        resilient.patch.Change(field, properties[field], patch.previous_object["properties"][field])
+                        resilient.patch.Change(field, properties[field], previous_object["properties"][field])
             else:
                 for field in fields:
                     patch.add_value(field, fields[field])
