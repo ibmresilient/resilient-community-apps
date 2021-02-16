@@ -166,6 +166,14 @@ DATA_TABLE_FIELDS_MAP = {
                 "InstanceType": "instance_type",
             }
         },
+        # If bucketname exists will use 1st instance as instance instead.
+        {
+            "path": ["Resource", "S3BucketDetails", 0],
+            "fields": {
+                "Name": "instance_id",
+                "Type": "instance_type",
+            }
+        },
     ],
     "gd_s3_bucket_details": [
         {
