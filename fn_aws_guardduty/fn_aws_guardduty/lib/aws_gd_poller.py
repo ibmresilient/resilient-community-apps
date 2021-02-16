@@ -82,13 +82,14 @@ class AwsGdPoller():
                         ### BEGIN Processing findings
                         # Iterate over finding ids to get properties.
                         for fid in findings_list:
-
                             finding = aws_gd.get("get_findings", DetectorId=detectorid, FindingIds=[fid])[0]
 
                             incident_for_req = \
                                 res_svc.find_resilient_incident_for_req(finding, gd_region, ["Id", "DetectorId"])
 
-                            if len(incident_for_req) == 0:
+                            num_incidents = len(incident_for_req)
+
+                            if num_incidents == 0:
                                 # No corresponding Resilient incident exists.
                                 LOG.info("AWS GuardDuty Finding ID %s in region %s discovered: %s, escalating to Resilient",
                                          finding["Id"], finding["Region"], finding.get("Title", "No Title Provided"))
@@ -104,25 +105,32 @@ class AwsGdPoller():
                                     if finding_payload.data_tables:
                                         res_svc.add_datatables(i_response['id'], finding_payload.data_tables)
 
-                            elif incident_for_req[0]["properties"][const.CUSTOM_FIELDS_MAP["UpdatedAt"]] != finding["UpdatedAt"]:
-                                # GuardDuty finding updated, trigger update rule on resilient.
-                                LOG.info("New updates detected for existing GuardDuty incident %d.", finding["Id"])
-                                incident_id = incident_for_req[0]["id"]
-                                fields = {
-                                    "properties": {
-                                        "aws_guardduty_trigger_refresh": True
+                            elif num_incidents == 1:
+                                if incident_for_req[0]["properties"][const.CUSTOM_FIELDS_MAP["UpdatedAt"]] \
+                                    != finding["UpdatedAt"]:
+                                    # GuardDuty finding updated but corresponding incident not yet refreshed
+                                    # trigger update rule on resilient.
+                                    LOG.info("New updates detected for existing AWS GuardDuty incident %d.", finding["Id"])
+                                    incident_id = incident_for_req[0]["id"]
+                                    fields = {
+                                        "properties": {
+                                            "aws_guardduty_trigger_refresh": True
+                                        }
                                     }
-                                }
-                                res_svc.update_incident_properties(incident_id, fields)
-                                # Reset flag to False.
-                                fields = {
-                                    "properties": {
-                                        "aws_guardduty_trigger_refresh": False
+                                    res_svc.update_incident_properties(incident_id, fields)
+                                    # Reset flag to False.
+                                    fields = {
+                                        "properties": {
+                                            "aws_guardduty_trigger_refresh": False
+                                        }
                                     }
-                                }
-                                res_svc.update_incident_properties(incident_id, fields)
-                            else:
-                                LOG.info("Incident already exists for AWS GuardDuty Incident %d", finding["Id"])
+                                    res_svc.update_incident_properties(incident_id, fields)
+                                else:
+                                    LOG.info("Incident already exists for AWS GuardDuty finding ID %d and is up to date",
+                                             finding["Id"])
+                            elif num_incidents > 1:
+                                LOG.error("Something went wrong, there are %s open Resilient Incidents matching AWS "
+                                          "GuardDuty finding ID %s.", num_incidents, finding["Id"])
 
                     except TypeError as ex:
                         LOG.error(ex)
