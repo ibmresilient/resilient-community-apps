@@ -6,6 +6,7 @@
   - [Table of Contents](#table-of-contents)
   - [History](#history)
   - [App Config Settings:](#app-config-settings)
+  - [API Permissions:](#api-permissions)
   - [Function - Task Utils: Add Note](#function---task-utils-add-note)
   - [Function - Task Utils: Close Task](#function---task-utils-close-task)
   - [Function - Task Utils: Create Custom Task](#function---task-utils-create-custom-task)
@@ -26,6 +27,18 @@
 ```
 None
 ```
+---
+## API Permissions
+For Integration server environments using API Keys, set the permissions on the key as follows:
+* Incidents: Read
+* Incident Fields: Edit
+* Org Data: read
+* Functions: read
+* Read Tasks
+* Edit Tasks: Fields, Members, Notes
+* Read Private Tasks
+* Edit Private Tasks: Fields, Members, Notes
+
 ---
 ## Function - Task Utils: Add Note
 A function which takes in the ID of an existing Task and then adds either a plain or richtext note to the Task.
