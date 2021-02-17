@@ -211,4 +211,4 @@ class AwsGdPoller():
                 try:
                     close_incident(res_svc.rest_client(), incident_id, incident_close_status)
                 except SimpleHTTPException as ex:
-                    LOG.error('Something went wrong when attempting to create the Incident: %s', ex)
+                    LOG.error('Something went wrong when attempting to close the Incident: %s', ex)
