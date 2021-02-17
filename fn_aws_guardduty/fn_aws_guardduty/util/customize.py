@@ -21,12 +21,12 @@ def codegen_reload_data():
     return {
         "package": u"fn_aws_guardduty",
         "message_destinations": [u"fn_aws_gd"],
-        "functions": [u"func_aws_guardduty_archive_finding", u"func_aws_guardduty_refresh_finding"],
+        "functions": [u"func_aws_guardduty_refresh_finding", u"func_aws_guardduty_archive_finding"],
         "workflows": [u"wf_aws_guardduty_archive_finding", u"wf_aws_guardduty_refresh_finding"],
         "actions": [u"Example: AWS GuardDuty: Update Finding Details", u"Example: AWS GuardDuty: Archive Finding", u"Example: AWS GuardDuty: Refresh Finding Details"],
-        "incident_fields": [u"aws_guardduty_region", u"aws_guardduty_resource_type", u"aws_guardduty_finding_id", u"aws_guardduty_finding_arn", u"aws_guardduty_finding_type", u"aws_guardduty_archived", u"aws_guardduty_detector_id", u"aws_guardduty_count", u"aws_guardduty_trigger_refresh", u"aws_guardduty_finding_updated_at"],
-        "incident_artifact_types": [u"aws_iam_user_name", u"aws_s3_bucket_name", u"aws_iam_access_key_id"],
-        "datatables": [u"gd_access_key_details", u"gd_finding_overview", u"gd_instance_details", u"gd_s3_bucket_details", u"gd_action_details", u"gd_resource_affected"],
+        "incident_fields": [u"aws_guardduty_trigger_refresh", u"aws_guardduty_finding_type", u"aws_guardduty_region", u"aws_guardduty_archived", u"aws_guardduty_count", u"aws_guardduty_finding_arn", u"aws_guardduty_finding_id", u"aws_guardduty_severity", u"aws_guardduty_detector_id", u"aws_guardduty_resource_type", u"aws_guardduty_finding_updated_at"],
+        "incident_artifact_types": [u"aws_s3_bucket_name", u"aws_iam_access_key_id", u"aws_iam_user_name"],
+        "datatables": [u"gd_s3_bucket_details", u"gd_access_key_details", u"gd_finding_overview", u"gd_instance_details", u"gd_action_details", u"gd_resource_affected"],
         "automatic_tasks": [],
         "scripts": []
     }
@@ -43,8 +43,8 @@ def customization_data(client=None):
     - Message Destinations:
         - fn_aws_gd
     - Functions:
-        - func_aws_guardduty_archive_finding
         - func_aws_guardduty_refresh_finding
+        - func_aws_guardduty_archive_finding
     - Workflows:
         - wf_aws_guardduty_archive_finding
         - wf_aws_guardduty_refresh_finding
@@ -53,25 +53,26 @@ def customization_data(client=None):
         - Example: AWS GuardDuty: Archive Finding
         - Example: AWS GuardDuty: Refresh Finding Details
     - Incident Fields:
-        - aws_guardduty_region
-        - aws_guardduty_resource_type
-        - aws_guardduty_finding_id
-        - aws_guardduty_finding_arn
-        - aws_guardduty_finding_type
-        - aws_guardduty_archived
-        - aws_guardduty_detector_id
-        - aws_guardduty_count
         - aws_guardduty_trigger_refresh
+        - aws_guardduty_finding_type
+        - aws_guardduty_region
+        - aws_guardduty_archived
+        - aws_guardduty_count
+        - aws_guardduty_finding_arn
+        - aws_guardduty_finding_id
+        - aws_guardduty_severity
+        - aws_guardduty_detector_id
+        - aws_guardduty_resource_type
         - aws_guardduty_finding_updated_at
     - Custom Artifact Types:
-        - aws_iam_user_name
         - aws_s3_bucket_name
         - aws_iam_access_key_id
+        - aws_iam_user_name
     - Data Tables:
+        - gd_s3_bucket_details
         - gd_access_key_details
         - gd_finding_overview
         - gd_instance_details
-        - gd_s3_bucket_details
         - gd_action_details
         - gd_resource_affected
     """
