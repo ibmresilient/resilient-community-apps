@@ -31,7 +31,7 @@ class RESDatatable(object):
             self.data = self.res_client.get(uri)
             self.rows = self.data["rows"]
         except Exception:
-            raise ValueError("Failed to get {0} Datatable".format(self.api_name))
+            raise ValueError(u"Failed to get {0} Datatable".format(self.api_name))
 
     def get_rows(self, max_rows=0, sort_by=None, sort_direction="ASC", search_column=None, search_value=None):
         """ Searches and returns rows based on a search/sort criteria, else None """
@@ -47,7 +47,7 @@ class RESDatatable(object):
                 for row in self.rows:
                     cells = row["cells"]
                     if search_column not in cells:
-                        raise ValueError("{0} is not a valid column api name for the data table: {1}".format(search_column, self.api_name))
+                        raise ValueError(u"{0} is not a valid column api name for the data table: {1}".format(search_column, self.api_name))
                     column = cells.get(search_column, {})
                     value = column.get("value", None)
                     if value is not None:
@@ -57,7 +57,7 @@ class RESDatatable(object):
             if sort_by:
                 if sort_by not in cells:
                     raise ValueError(
-                        "{0} is not a valid column api name for the data table: {1}".format(sort_by, self.api_name))
+                        u"{0} is not a valid column api name for the data table: {1}".format(sort_by, self.api_name))
                 rows_to_return = sorted(rows_to_return, key=lambda item: item['cells'][sort_by].get('value'),
                                         reverse=is_reverse)
             if max_rows != 0:
@@ -82,7 +82,7 @@ class RESDatatable(object):
                 cells = row["cells"]
 
                 if search_column not in cells:
-                    raise ValueError("{0} is not a valid column api name in for the data table {1}".format(search_column, self.api_name))
+                    raise ValueError(u"{0} is not a valid column api name in for the data table {1}".format(search_column, self.api_name))
                 column = cells.get(search_column)
                 value = column.get("value", None)
                 if value is not None:
@@ -141,7 +141,7 @@ class RESDatatable(object):
                 return_value = {"error": err_msg}
 
             else:
-                raise ValueError("Could not update row in {0}. Unknown Error".format(self.api_name))
+                raise ValueError(u"Could not update row in {0}. Unknown Error".format(self.api_name))
 
         return return_value
 
@@ -158,11 +158,7 @@ class RESDatatable(object):
             return_value = self.res_client.delete(uri)
 
         except Exception as err:
-            if err:
-                return_value = {"error": err}
-
-            else:
-                raise ValueError("Could not delete row in {0}. Unknown Error: {1}".format(self.api_name, err))
+            return_value = {"error": str(err)}
 
         return return_value
 
@@ -199,7 +195,7 @@ class RESDatatable(object):
             for row in self.rows:
                 cells = row["cells"]
                 if search_column not in cells:
-                    raise ValueError("{0} is not a valid column api name in for the data table {1}".format(search_column, self.api_name))
+                    raise ValueError(u"{0} is not a valid column api name in for the data table {1}".format(search_column, self.api_name))
                 if "value" in cells[search_column] and cells[search_column]["value"] == search_value:
                     if row["id"] == row_id:
                         LOG.info("Queuing delete of current row: %s", row_id)
@@ -256,7 +252,7 @@ class RESDatatable(object):
             self.data = self.res_client.get(uri)
             return self.data["fields"]
         except Exception:
-            raise ValueError("Failed to get {0} Datatable".format(self.api_name))
+            raise ValueError(u"Failed to get {0} Datatable".format(self.api_name))
 
     def dt_add_rows(self, rows):
         """ Adds rows to datatable
