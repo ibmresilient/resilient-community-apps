@@ -269,4 +269,4 @@ The example incident rule activates the following activity popup menu to allow t
 Refer to the documentation listed in the Requirements section for troubleshooting information.
 
 ### For Support
-This is a IBM Community provided App. Please search the Community https://ibm.biz/resilientcommunity for assistance.
+This is a IBM Community provided App. Please search the Community https://ibm.biz/soarcommunity for assistance.
