@@ -90,6 +90,7 @@ class ResSvc(ResilientComponent):
         :param incident_id: Incident ID from incident creation.
         :param tables: Data table data.
         """
+        LOG.info("Creating data tables.")
         try:
             resilient_client = self.rest_client()
 
@@ -99,7 +100,7 @@ class ResSvc(ResilientComponent):
                     if table_id in const.DATA_TABLE_IDS:
                         # Table data, add row to specified data table
                         uri = '/incidents/{0}/table_data/{1}/row_data'.format(incident_id, table_id)
-                        LOG.info("Attempting to create table with the following: %s", uri)
+                        LOG.debug("Attempting to create table with the following: %s", uri)
 
                         for content in contents:
                             resilient_client.post(uri=uri, payload=content)

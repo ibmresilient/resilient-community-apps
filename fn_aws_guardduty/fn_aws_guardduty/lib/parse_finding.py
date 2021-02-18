@@ -292,6 +292,7 @@ class ParseFinding():
             }
 
         """
+        LOG.info("Assembling data tables.")
         for table_id in const.DATA_TABLE_IDS:
             data_table = []
             # Iterate over section for each data table id.
@@ -312,7 +313,7 @@ class ParseFinding():
                 else:
                     data_table = self.setup_data_table_rows(dt_section, path, data_table)
 
-            LOG.info("Data Table Assembled with %d rows for table id '%s'.", len(data_table), table_id)
+            LOG.debug("Data Table Assembled with %d rows for table id '%s'.", len(data_table), table_id)
 
             self.data_tables.update({table_id: data_table})
 
