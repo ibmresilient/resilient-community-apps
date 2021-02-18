@@ -42,11 +42,10 @@ class FunctionComponent(ResilientComponent):
             # If its just base64content as input, use parse_from_string
             if fn_inputs.get("base64content"):
                 yield StatusMessage("Processing provided base64content")
-                parsed_email = mailparser.parse_from_string(b_to_s(base64.b64decode(fn_inputs.get("base64content"))))
+                parsed_email = mailparser.parse_from_bytes(base64.b64decode(fn_inputs.get("base64content")))
                 yield StatusMessage("Provided base64content processed")
 
             else:
-
                 # Validate that either: (incident_id AND attachment_id OR artifact_id) OR (task_id AND attachment_id) is defined
                 if not (fn_inputs.get("incident_id") and (fn_inputs.get("attachment_id") or fn_inputs.get("artifact_id"))) and \
                    not (fn_inputs.get("task_id") and fn_inputs.get("attachment_id")):
@@ -73,14 +72,15 @@ class FunctionComponent(ResilientComponent):
                     attachment_id=fn_inputs.get("attachment_id")
                 )
 
-                # Write the attachment_contents to a temp file
-                path_tmp_file, path_tmp_dir = write_to_tmp_file(attachment_contents, tmp_file_name=attachment_metadata.get("name"))
-
                 # Get the file_extension
-                file_extension = os.path.splitext(path_tmp_file)[1]
+                file_extension = os.path.splitext(attachment_metadata.get("name"))[1]
 
-                if file_extension == ".msg":
+                if file_extension.lower() == ".msg":
                     yield StatusMessage("Processing MSG File")
+                    # Write the attachment_contents to a temp file
+                    path_tmp_file, path_tmp_dir = write_to_tmp_file(attachment_contents, 
+                                                                    tmp_file_name=attachment_metadata.get("name"))
+
                     try:
                         parsed_email = mailparser.parse_from_file_msg(path_tmp_file)
                         yield StatusMessage("MSG File processed")
@@ -91,9 +91,9 @@ class FunctionComponent(ResilientComponent):
                         log.error(err)
 
                 else:
-                    yield StatusMessage("Processing Raw Email File")
+                    yield StatusMessage("Processing Raw Email File: {}".format(attachment_metadata.get("name")))
                     try:
-                        parsed_email = mailparser.parse_from_file(path_tmp_file)
+                        parsed_email = mailparser.parse_from_bytes(attachment_contents)
                         yield StatusMessage("Raw Email File processed")
                     except Exception as err:
                         reason = u"Could not parse {0} Email File".format(attachment_metadata.get("name"))
