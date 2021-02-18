@@ -82,7 +82,13 @@ class AwsGdPoller():
                         ### BEGIN Processing findings
                         # Iterate over finding ids to get properties.
                         for fid in findings_list:
-                            finding = aws_gd.get("get_findings", DetectorId=detectorid, FindingIds=[fid])[0]
+                            finding_data = aws_gd.get("get_findings", DetectorId=detectorid, FindingIds=[fid])
+
+                            if not finding_data:
+                                LOG.error("Unable to retrieve details for AWS GuardDuty finding ID %s.", fid)
+                                continue
+
+                            finding = finding_data[0]
 
                             incident_for_req = \
                                 res_svc.find_resilient_incident_for_req(finding, gd_region, ["Id", "DetectorId"])
@@ -201,11 +207,19 @@ class AwsGdPoller():
         # Determine finding ids from Resilient open incidents list not in GuardDuty current incident list.
         fid_diff = list(set(res_open_findings.keys()).difference(gd_open_findings))
         for fid in fid_diff:
+            incident_id = res_open_findings[fid]
             # Retrieve finding details and check if it has been archived.
-            finding = aws_gd.get("get_findings", DetectorId=detectorid, FindingIds=[fid])[0]
+            finding_data = aws_gd.get("get_findings", DetectorId=detectorid, FindingIds=[fid])
+
+            if not finding_data:
+                LOG.error("Unable to retrieve details for AWS GuardDuty finding ID %s which has a corresponding "
+                          "Resilient incident with ID %d.", fid, incident_id)
+                continue
+
+            finding = finding_data[0]
+
             if isinstance(finding["Service"]["Archived"], bool) and finding["Service"]["Archived"]:
                 # Finding is archived, close corresponding Resilient incident.
-                incident_id = res_open_findings[fid]
                 incident_close_status = load_template(const.CLOSE_INCIDENT_TEMPLATE, self.close_incident_template)
                 LOG.info("Closing incident %s", incident_id)
                 try:
