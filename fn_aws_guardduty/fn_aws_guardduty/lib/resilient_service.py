@@ -72,6 +72,7 @@ class ResSvc(ResilientComponent):
         :param data: Formatted DTO for Incident
         :return: Return response from Resilient
         """
+        LOG.info("Creating incident.")
         try:
             resilient_client = self.rest_client()
 
