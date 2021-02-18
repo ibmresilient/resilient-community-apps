@@ -50,13 +50,13 @@ class AwsGdPoller():
         res_svc = ResSvc(self.opts, self.function_opts)
 
         while not config.STOP_THREAD:
+            LOG.info("Polling GuardDuty for new and updated findings")
             # Set criteria to filter findings results.
             f_criteria = self.set_criteria()
             # Loop over accessible GuardDuty regions and get available DetectorIds.
             for gd_region, gd_client_info in aws_cli_man.clients.items():
                 aws_gd = gd_client_info["client"]
                 detectors = gd_client_info["detectors"]
-
                 if not detectors:
                     # No cached detector info see if any available detectors available for the specified AWS Region.
                     detectors = aws_gd.get("list_detectors")
@@ -65,6 +65,7 @@ class AwsGdPoller():
                         # Detectors still not detected skip detected.
                         continue
 
+                LOG.info("Polling for region - %s", gd_region)
 
                 # Get the DetectorId for the specified AWS Region.
                 detectorid = detectors[0]
