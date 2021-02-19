@@ -85,6 +85,11 @@ class AwsGdPoller():
                         for fid in findings_list:
                             finding_data = aws_gd.get("get_findings", DetectorId=detectorid, FindingIds=[fid])
 
+                            if not isinstance(finding_data, list):
+                                LOG.error("Got unexpected result when attempting to retrieve details for AWS GuardDuty "
+                                          "finding ID %s.", fid)
+                                continue
+
                             if not finding_data:
                                 LOG.error("Unable to retrieve details for AWS GuardDuty finding ID %s.", fid)
                                 continue
@@ -212,6 +217,10 @@ class AwsGdPoller():
             incident_id = res_open_findings[fid]
             # Retrieve finding details and check if it has been archived.
             finding_data = aws_gd.get("get_findings", DetectorId=detectorid, FindingIds=[fid])
+            if not isinstance(finding_data, list):
+                LOG.error("Got unexpected result when attempting to retrieve details for AWS GuardDuty finding ID %s.",
+                          fid)
+                continue
 
             if not finding_data:
                 LOG.error("Unable to retrieve details for AWS GuardDuty finding ID %s which has a corresponding "
