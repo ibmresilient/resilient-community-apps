@@ -276,7 +276,7 @@ class MSGraphHelper(object):
             base64content, attachment_id = get_incident_file_attachment(resilient_client, incident_id, attachment_name)
             if not attachment_id:
                 failed_attached.append(attachment_name)
-                LOG.info(u"Failed to attach %s. No mathcing incident attachment found.", attachment_name)
+                LOG.info(u"Failed to attach %s. No matching incident attachment found.", attachment_name)
                 continue
             contentType = get_file_attachment_metadata(resilient_client, incident_id, attachment_id=attachment_id)["content_type"]
             attachment = {
@@ -297,7 +297,7 @@ class MSGraphHelper(object):
         :param sender_address: email address of the message sender
         :param recipients: comma separated list of users to send message to
         :param subject: message subject text
-        :param attachment_namse: comma seperated names of incident attachment to send with the message
+        :param attachment_names: comma seperated names of incident attachment to send with the message
         :param incident_id: ID of Resilient incident
         :param resilient_client: Resilient REST API client
         :param body: message body text
@@ -317,6 +317,7 @@ class MSGraphHelper(object):
                         "saveToSentItems": "true"}
 
         # Build attachment data
+        failed_attachments = None
         if attachment_names:
             attachments, failed_attachments = self.build_attachments(attachment_names, incident_id, resilient_client)
             message_json["message"]["attachments"] = attachments
@@ -334,7 +335,7 @@ class MSGraphHelper(object):
     def create_meeting(self, email_address, start_time, end_time, subject, body, required_attendees, optional_attendees,
                        location):
         """
-         create_meeting will create an event in the specified email_address user's calandar and send email to the
+         create_meeting will create an event in the specified email_address user's calendar and send email to the
          required and optional attendee email addresses.
         :param email_address: meeting organizer
         :param start_time: start time of the meeting
