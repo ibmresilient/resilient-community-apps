@@ -232,7 +232,7 @@ class AwsGdPoller():
             if isinstance(finding["Service"]["Archived"], bool) and finding["Service"]["Archived"]:
                 # Finding is archived, close corresponding Resilient incident.
                 incident_close_status = load_template(const.CLOSE_INCIDENT_TEMPLATE, self.close_incident_template)
-                LOG.info("Closing incident %s", incident_id)
+                LOG.info("Closing incident %d for archived finding %s.", incident_id, fid)
                 try:
                     close_incident(res_svc.rest_client(), incident_id, incident_close_status)
                 except SimpleHTTPException as ex:
