@@ -49,6 +49,13 @@ stages:
     if: tag !~ ^rebuild/.+
 
 matrix:
+  # Specification of jobs which may fail but should not fail the build
+  # TODO: Review
+  allow_failures:
+    # The safety checker job is likely to fail often in its initial usage
+    # Rather than explicity setting it to always pass
+    # Allow failures of the job to still gather the useful info
+    - name: Safety Checker
   fast_finish: true
   include:
     # Master branch is where all the integrations should be tested, its okay if it takes a while
@@ -132,6 +139,15 @@ matrix:
         - pip install pylint
       script:
         - .scripts/pylint.sh
+    - stage: static analysis
+      name: Safety Checker
+      python: 3.6
+      env:
+        - ANALYSIS_NAME="CVE Search against dependancies"
+      install:
+        - pip install safety
+      script:
+        - .scripts/run_safety_scan_for_cve.sh
 
     # Next job is started when a tag is pushed of the form container/<name> or a pull request is created
     # where <name> is a name of an integration directory whose container
