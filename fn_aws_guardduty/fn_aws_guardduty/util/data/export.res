@@ -47,12 +47,7 @@
       "message_destinations": [],
       "name": "Example: AWS GuardDuty: Archive Finding",
       "object_type": "incident",
-      "tags": [
-        {
-          "tag_handle": "fn_aws_guardduty",
-          "value": null
-        }
-      ],
+      "tags": [],
       "timeout_seconds": 86400,
       "type": 0,
       "uuid": "bca3c12d-b674-419a-a81c-9b2d92ab1f7d",
