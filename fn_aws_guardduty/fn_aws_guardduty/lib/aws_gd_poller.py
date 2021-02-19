@@ -3,6 +3,7 @@
 # pragma pylint: disable=unused-argument, no-self-use
 """ Findings poller class for AWS GuardDuty """
 import logging
+import os
 import time
 import datetime as dt
 from resilient import SimpleHTTPException
@@ -37,6 +38,10 @@ class AwsGdPoller():
         self.aws_gd_lookback_interval = int(self.function_opts.get("aws_gd_lookback_interval")) \
             if self.function_opts.get("aws_gd_lookback_interval") else None
         self.close_incident_template = self.function_opts.get("aws_gd_close_incident_template")
+        if self.close_incident_template and not os.path.isfile(self.close_incident_template):
+            LOG.error("User defined JSON template %s not accessible.", self.close_incident_template)
+            raise IOError("User defined JSON template {} not accessible.".format(self.close_incident_template))
+
         # Use last_update to ensure full list of findings returned only on initial run loop
         # Subsequently only return findings created/updated since last execution.
         self.last_update = None
