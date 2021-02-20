@@ -19,8 +19,6 @@ from rc_data_feed.lib.rest_client_helper import RestClientHelper
 
 LOG = logging.getLogger(__name__)
 
-INCL_ATTACHMENT_DATA = False
-
 def _get_inc_id(payload):
     if 'incident' in payload:
         return payload['incident']['id']
@@ -74,8 +72,8 @@ def range_chunks(chunk_range, chunk_size):
 
         start += chunk_size
 
-def send_data(type_info, inc_id, rest_client_helper, payload, feed_outputs, is_deleted):
-    global INCL_ATTACHMENT_DATA
+def send_data(type_info, inc_id, rest_client_helper, payload,\
+              feed_outputs, is_deleted, incl_attachment_data):
     """
     perform the sync to the different datastores
     :param type_info:
@@ -83,7 +81,8 @@ def send_data(type_info, inc_id, rest_client_helper, payload, feed_outputs, is_d
     :param rest_client:
     :param payload:
     :param feed_outputs:
-    :param is_deleted:
+    :param is_deleted: true/false
+    :param incl_attachment_data: true/false
     :return: None
     """
     context = FeedContext(type_info, inc_id, rest_client_helper.inst_rest_client, is_deleted)
@@ -97,9 +96,9 @@ def send_data(type_info, inc_id, rest_client_helper, payload, feed_outputs, is_d
         try:
             LOG.debug("Calling feed %s", feed_output.__class__.__name__)
             # collect attachment data to pass on
-            if type_info.get_pretty_type_name() == 'attachment' and INCL_ATTACHMENT_DATA:
+            if type_info.get_pretty_type_name() == 'attachment' and incl_attachment_data:
                 # this will return a byte string
-                payload['content'] = get_file_attachment(rest_client_helper.inst_rest_client, inc_id, 
+                payload['content'] = get_file_attachment(rest_client_helper.inst_rest_client, inc_id,
                                                          attachment_id=payload['id'])
 
             feed_output.send_data(context, payload)
@@ -119,7 +118,6 @@ class FeedComponent(ResilientComponent):
 
     """Component that ingests data"""
     def __init__(self, opts):
-        global INCL_ATTACHMENT_DATA
         super(FeedComponent, self).__init__(opts)
 
         try:
@@ -136,13 +134,15 @@ class FeedComponent(ResilientComponent):
                 self.feed_outputs = build_feed_outputs(rest_client_helper, opts, self.options.get("feed_names", None))
 
                 # expose attachment content setting
-                INCL_ATTACHMENT_DATA = str_to_bool(self.options.get("include_attachment_data", 'false'))
+                self.incl_attachment_data = str_to_bool(self.options.get("include_attachment_data", 'false'))
 
                 # determine the reload options to follow
-                if self.options.get('reload', 'false').lower() == 'true':
+                if str_to_bool(self.options.get('reload', 'false')):
                     query_api_method = str_to_bool(self.options.get("reload_query_api_method", 'false'))
 
-                    reload = Reload(rest_client_helper, self.feed_outputs, query_api_method=query_api_method)
+                    reload = Reload(rest_client_helper, self.feed_outputs,
+                                    query_api_method=query_api_method,
+                                    incl_attachment_data=self.incl_attachment_data)
                     reload.reload_all()
 
         except Exception as err:
@@ -177,26 +177,30 @@ class FeedComponent(ResilientComponent):
             else:
                 payload = event.message[type_name]
 
-            send_data(type_info, inc_id, rest_client_helper, payload, self.feed_outputs, is_deleted)
+            send_data(type_info, inc_id, rest_client_helper, payload,
+                      self.feed_outputs, is_deleted, self.incl_attachment_data)
 
         except Exception as err:
             error_trace = traceback.format_exc()
-            LOG.error("Traceback %s", error_trace) 
+            LOG.error("Traceback %s", error_trace)
             LOG.error("Failure on action %s object %s type_info %s",
                       event.message['operation_type'], event.message['object_type'], event.message['type_info'])
 
 
 class Reload(object):
-    def __init__(self, rest_client_helper, feed_outputs, query_api_method=False):
+    def __init__(self, rest_client_helper, feed_outputs,\
+                 query_api_method=False, incl_attachment_data=False):
         """
 
         :param rest_client: not the instance as we may need to refresh the client at a later point
         :param feed_outputs:
         :param query_api_method:
+        :param incl_attachment_data: true/false
         """
         self.rest_client_helper = rest_client_helper
         self.feed_outputs = feed_outputs
         self.query_api_method = query_api_method
+        self.incl_attachment_data = incl_attachment_data
 
         self.init_type_info()
 
@@ -272,7 +276,8 @@ class Reload(object):
 
                 type_info = type_info_index[FeedComponent.INCIDENT_TYPE_ID]
 
-                send_data(type_info, inc_id, self.rest_client_helper, incident, self.feed_outputs, False)
+                send_data(type_info, inc_id, self.rest_client_helper, incident,
+                          self.feed_outputs, False, self.incl_attachment_data)
 
                 # query api call should be done now
                 if query_api_method:
@@ -320,7 +325,8 @@ class Reload(object):
 
             inc_id = result['inc_id']
 
-            send_data(type_info, inc_id, self.rest_client_helper, result_data, self.feed_outputs, False)
+            send_data(type_info, inc_id, self.rest_client_helper, result_data,
+                      self.feed_outputs, False, self.incl_attachment_data)
 
     def _populate_others_query(self,
                          inc_id,
@@ -329,7 +335,7 @@ class Reload(object):
 
         # ensure the incident is found
         try:
-            incident = self.rest_client_helper.get("/incidents/{}".format(inc_id))
+            _incident = self.rest_client_helper.get("/incidents/{}".format(inc_id))
             for object_type in object_type_names:
                 if not self.lookup.get(object_type):
                     LOG.error("Method for synchronization not found: %s", object_type)
@@ -349,7 +355,8 @@ class Reload(object):
         query = "/incidents/{}/artifacts".format(inc_id)
         item_list = rest_client_helper.get(query)
         for item in item_list:
-            send_data(type_info, inc_id, rest_client_helper, item, self.feed_outputs, False)
+            send_data(type_info, inc_id, rest_client_helper,
+                      item, self.feed_outputs, False, self.incl_attachment_data)
 
         return len(item_list)
 
@@ -357,7 +364,8 @@ class Reload(object):
         query = "/incidents/{}/milestones".format(inc_id)
         item_list = rest_client_helper.get(query)
         for item in item_list:
-            send_data(type_info, inc_id, rest_client_helper, item, self.feed_outputs, False)
+            send_data(type_info, inc_id, rest_client_helper, item,
+                      self.feed_outputs, False, self.incl_attachment_data)
 
         return len(item_list)
 
@@ -365,7 +373,8 @@ class Reload(object):
         query = "/incidents/{}/comments".format(inc_id)
         item_list = rest_client_helper.get(query)
         for item in item_list:
-            send_data(type_info, inc_id, rest_client_helper, item, self.feed_outputs, False)
+            send_data(type_info, inc_id, rest_client_helper, item,
+            self.feed_outputs, False, self.incl_attachment_data)
 
         return len(item_list)
 
@@ -373,7 +382,8 @@ class Reload(object):
         query = "/incidents/{}/tasks".format(inc_id)
         item_list = rest_client_helper.get(query)
         for item in item_list:
-            send_data(type_info, inc_id, rest_client_helper, item, self.feed_outputs, False)
+            send_data(type_info, inc_id, rest_client_helper, item,
+                      self.feed_outputs, False, self.incl_attachment_data)
 
         return len(item_list)
 
@@ -381,20 +391,22 @@ class Reload(object):
         query = "/incidents/{}/attachments".format(inc_id)
         item_list = rest_client_helper.get(query)
         for item in item_list:
-            send_data(type_info, inc_id, rest_client_helper, item, self.feed_outputs, False)
+            send_data(type_info, inc_id, rest_client_helper, item,
+                      self.feed_outputs, False, self.incl_attachment_data)
 
         return len(item_list)
 
     def _query_datatable(self, rest_client_helper, inc_id, type_info):
         query = "/incidents/{}/table_data".format(inc_id)
         item_list = rest_client_helper.get(query)
-        for key, table in item_list.items():
+        for _, table in item_list.items():
             # We need the ID of the table, not the ID for the generic "datatable" type.
             type_id = table['id']
             type_info = self.type_info_index[type_id]
 
             for row in table['rows']:
-                send_data(type_info, inc_id, rest_client_helper, row, self.feed_outputs, False)
+                send_data(type_info, inc_id, rest_client_helper, row,
+                          self.feed_outputs, False, self.incl_attachment_data)
 
         return len(item_list)
 

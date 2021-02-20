@@ -388,7 +388,7 @@ class TypeInfo(object):
         # else with it (like write data to a join table).
         #
         try:
-            value = ', '.join(value)
+            value = u', '.join(value)
         except:
             value = json.dumps(value)
 
@@ -440,48 +440,6 @@ class TypeInfo(object):
 
         return value
 
-    @staticmethod
-    def translate_valuex(type_info, field, value):
-        """Translates the value that we want in the 'flattened' output."""
-        if value is not None:
-            input_type = field['input_type']
-
-            if input_type in TypeInfo.SELECT_INPUT_TYPES:
-                value = type_info.get_select_value(value, field)
-            elif input_type in TypeInfo.MULTISELECT_INPUT_TYPES:
-                value = [type_info.get_select_value(v, field) for v in value]
-            elif input_type in ['datetimepicker', 'datepicker']:
-                # Server returns date as milliseconds since epoch (1/1/1970), but Python
-                # wants it as seconds.  Then, convert to an ISO formatted string
-                # representation.
-                #
-                d = datetime.utcfromtimestamp(value/1000)
-
-                if input_type == 'datetimepicker':
-                    d = pytz.timezone('UTC').localize(d)
-                value = d.isoformat()
-
-            if isinstance(value, list):
-                # For now, squash lists into a joined string.  May need to actually
-                # return the list if the callers are going to need to do something
-                # else with it (like write data to a join table).
-                #
-                try:
-                    value = ', '.join(value)
-                except:
-                    value = json.dumps(value)
-
-            if input_type == 'textarea' and isinstance(value, dict):
-                value = value['content']
-
-            if input_type == 'number' and isinstance(value, dict):
-                # TODO This is working around a server issue where the server specifies
-                #  a 'number' type for a field that is really a select list.
-                #
-                value = value['id']
-
-        return value
-
 
 class ActionMessageTypeInfo(TypeInfo):
     """
@@ -509,7 +467,7 @@ class ActionMessageTypeInfo(TypeInfo):
         type_name = self.get_type_name(self.type_id, pretty=False)
 
         if type_name not in self.type_info_map:
-            LOG.warning("%s not found in %s. Returning raw_value: %s", type_name, self.type_info_map, raw_value)
+            LOG.warning(u"%s not found in %s. Returning raw_value: %s", type_name, self.type_info_map, raw_value)
             return raw_value
 
         field_name = field['name']
@@ -537,7 +495,7 @@ class ActionMessageTypeInfo(TypeInfo):
 
         if raw_value not in values_map:
             # Must be a NUMBER field.
-            LOG.warning("%s not found in %s. Returning raw_value", raw_value, values_map)
+            LOG.warning(u"%s not found in %s. Returning raw_value", raw_value, values_map)
             return raw_value
 
         # if the entry isn't in the values dict then we're really confused (and this
