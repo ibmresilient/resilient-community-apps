@@ -238,6 +238,13 @@ class AwsGdPoller():
                 # Finding is archived, close corresponding Resilient incident.
                 incident_close_status = load_template(const.CLOSE_INCIDENT_TEMPLATE, self.close_incident_template)
                 LOG.info("Closing incident %d for archived finding %s.", incident_id, fid)
+                # Reset 'aws_guardduty_archived' property to 'False' to prevent triggering of automatic rule.
+                fields = {
+                    "properties": {
+                        "aws_guardduty_archived": "True"
+                    }
+                }
+                res_svc.update_incident_properties(incident_id, fields)
                 try:
                     close_incident(res_svc.rest_client(), incident_id, incident_close_status)
                 except SimpleHTTPException as ex:
