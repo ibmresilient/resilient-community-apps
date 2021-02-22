@@ -31,7 +31,6 @@ class FunctionComponent(ResilientComponent):
         validate_fields(["smtp_server", "smtp_port"], self.smtp_config_section)
 
         self.template_file_path = self.smtp_config_section.get('template_file')
-        self.smtp_port_choice = str(self.smtp_config_section.get("smtp_"))
         self.smtp_user = self.smtp_config_section.get("smtp_user")
 
         if self.template_file_path and not os.path.exists(self.template_file_path):
@@ -113,9 +112,6 @@ class FunctionComponent(ResilientComponent):
             mail_data['mail_attachments'] = self.process_attachments(inc_id=mail_incident_id, attachments=mail_attachments)
 
             send_smtp_email = SendSMTPEmail(self.opts, mail_data)
-
-            if not mail_incident_id:
-                raise SimpleSendEmailException("mail_incident_id cannot be empty.")
 
             incident_data = send_smtp_email.get_incident_data(mail_incident_id)
 
