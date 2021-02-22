@@ -39,12 +39,11 @@ class SendSMTPEmail(ResilientComponent):
         self.smtp_config_section = self.opts.get(CONFIG_DATA_SECTION, {})
         self.smtp_server = self.smtp_config_section.get("smtp_server")
         self.smtp_port = str(self.smtp_config_section.get("smtp_port", SMTP_DEFAULT_PORT))
-        self.smtp_cafile = self.smtp_config_section.get("smtp_ssl_cafile", False)
-
-        if self.smtp_cafile in ['False', 'false']:
+        # cafile can be false or a path to a cafile cert
+        if self.smtp_config_section.get("smtp_ssl_cafile", 'false').lower() == 'false':
             self.smtp_cafile = False
-        elif self.smtp_cafile in ['True', 'true']:
-            self.smtp_cafile = True
+        else:
+            self.smtp_cafile = self.smtp_config_section.get("smtp_ssl_cafile")
 
         self.smtp_user = self.smtp_config_section.get("smtp_user")
         self.smtp_password = self.smtp_config_section.get("smtp_password")
@@ -128,12 +127,12 @@ class SendSMTPEmail(ResilientComponent):
 
 
             if self.smtp_user:
-                log.info("Logging in to SMTP...")
                 if not self.smtp_password:
                     raise SimpleSendEmailException('An SMTP user has been set; '
                                                    'the SMTP password from app.config cannot be null')
-                else:
-                    smtp_connection.login(user=self.smtp_user, password=self.smtp_password)
+
+                log.info("Logging in to SMTP...")
+                smtp_connection.login(user=self.smtp_user, password=self.smtp_password)
 
             log.info("Sending mail")
             smtp_connection.sendmail(self.from_address,
