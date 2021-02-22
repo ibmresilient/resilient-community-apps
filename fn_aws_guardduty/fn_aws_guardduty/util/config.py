@@ -27,13 +27,13 @@ aws_gd_regions_interval = <REGIONS_INTERVAL>
 # Interval to poll Guardduty for findings (in minutes).
 # To turn the poller off use value 0
 aws_gd_polling_interval = <POLLING_INTERVAL>
-# Optional - severity threshold (integer) criteria to filter findings results.
+# Optional - Severity threshold (integer) criteria to filter findings results.
 # Severity ranges: 7.0 - 8.9 -> High, 4.0 - 6.9 -> Medium, 1.0 = 3.9 -> Low
 #aws_gd_severity_threshold = <SEVERITY_THRESHOLD>
-# Optional - How long, to check for previous findings at startup (in minutes).
+# Optional - Lookback interval to check for findings at startup (in minutes).
 # Used in criteria for filtering findings retrieval.
 #aws_gd_lookback_interval = <LOOKBACK_INTERVAL>
-# Optional - User defined JSON template file for closing Resilient incidents.
+# Optional - Close Incident  template file (JSON) for closing Resilient incidents (Overrides the default template).
 #aws_gd_close_incident_template = <PATH_TO_TEMPLATE_FILE>
 # Optional settings for access to GuardDuty via a proxy.
 #http_proxy=http://proxy:80
