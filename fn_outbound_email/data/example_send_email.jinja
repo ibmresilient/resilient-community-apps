@@ -5,7 +5,7 @@
     {% if value and value not in NOT_FOUND and not value.startswith('-') %}
     <tr>
         <td width="100" style="{{style}}; font-weight:bold">{{ label }}</td>
-        <td style="{{style}}">{{ value | replace('<div>', '---===newline===---') |  striptags}}</td>
+        <td style="{{style}}">{{ value | safe }}</td>
     </tr>
     {% endif %}
 {%- endmacro %}

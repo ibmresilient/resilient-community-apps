@@ -117,18 +117,19 @@ class FunctionComponent(ResilientComponent):
 
             if mail_body_html:
                 LOG.info("Rendering template")
-                mail_body_html = send_smtp_email.render_template(mail_body_html, incident_data, mail_data)
+                rendered_mail_html = send_smtp_email.render_template(mail_body_html, incident_data, mail_data)
+                LOG.debug(rendered_mail_html)
 
-                if not mail_body_html:
+                if not rendered_mail_html:
                     raise Exception("Local jinja template not valid, please retry sending with valid template locally or remove file to use default")
 
                 if not jinja:
-                    error_msg = send_smtp_email.send(body_html=mail_body_html)
-                    text = mail_body_html
+                    error_msg = send_smtp_email.send(body_html=rendered_mail_html)
+                    text = rendered_mail_html
                 else:
-                    mail_body_html = mail_body_html.replace('---===newline===---', '<div>')
-                    error_msg = send_smtp_email.send(body_html=mail_body_html)
-                    text = mail_body_html.replace('---===newline===---', '<br>')
+                    rendered_mail_html = rendered_mail_html.replace('---===newline===---', '<div>')
+                    error_msg = send_smtp_email.send(body_html=rendered_mail_html)
+                    text = rendered_mail_html.replace('---===newline===---', '<br>')
             elif mail_body_text:
                 LOG.info("Rendering text")
                 text = mail_body_text

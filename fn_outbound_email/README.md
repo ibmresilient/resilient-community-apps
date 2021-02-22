@@ -26,9 +26,10 @@
 
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| v1.1.0  | | Bug fixes and send all or specific attachments |
-| v1.0.9 | | App Host compatibility |
-| v1.0.8 | | Initial Release after internal development by Professional Services, no prior release notes |
+| v1.1.1  | 2/2021 | Bug fixes associated with sending attachments |
+| v1.1.0  | 10/2020 | Bug fixes and send all or specific attachments |
+| v1.0.9 | 5/2020 | App Host compatibility |
+| v1.0.8 | 4/2020 | Initial Release after internal development by Professional Services, no prior release notes |
 
 ---
 
