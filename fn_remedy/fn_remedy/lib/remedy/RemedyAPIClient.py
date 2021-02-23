@@ -50,7 +50,7 @@ class RemedyClient(RemedyAPI):
         token = self.get_token()
         reqHeaders = {
             "content-type": "application/json",
-            "Authorization": token
+            "Authorization": "AR-JWT " + token
         }
 
         return reqHeaders
@@ -63,12 +63,13 @@ class RemedyClient(RemedyAPI):
         :return: null
         """
         url = self.base_url + "/jwt/logout"
-        data = {"username": self.username, "password": self.password}
 
-        response = requests.request("POST", url, data=data, headers=self.authHeaders, verify=self.verify, proxies=self.proxies)
+        response = requests.request("POST", url, headers=self.reqHeaders, verify=self.verify, proxies=self.proxies)
         response.raise_for_status()
 
-        return
+        # logging off returns an empty 204
+        # return True in the absence of response content
+        return True
 
     def create_form_entry(self, form_name, values, return_values, payload={}):
         """
