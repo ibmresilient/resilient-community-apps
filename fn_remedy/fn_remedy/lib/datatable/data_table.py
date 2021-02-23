@@ -17,8 +17,20 @@ LOG = logging.getLogger(__name__)
 
 class Datatable(object):
     """ A helper class which provides a facade to interface with a Resilient / CP4S Data Table
+    Example:
+    .. code-block:: python
 
-    TODO: Add some code usage examples"""
+        dt = Datatable(mocked_res_client, <incident_id>, <datatable_api_name>)
+        dt.get_data()
+        print(dt.rows)
+        ...
+
+    .. code-block:: python
+
+        dt = Datatable(mocked_res_client, <incident_id>, <datatable_api_name>)
+        dt.get_data()
+        dt.get_row(<row_id>, <column_to_search>, <value_to_search_in_column>)
+        ..."""
 
     def __init__(self, res_client, incident_id, dt_api_name):
         self.res_client = res_client
