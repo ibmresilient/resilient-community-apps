@@ -7,14 +7,41 @@ try:
 except ImportError:
     from mock import patch, Mock
 
+import json
 import pytest
 import resilient
-from mocks.datatable_mock import DTResilientMock
 from mocks.datatable_mocked_inputs import *
 
+@pytest.fixture(scope="class")
+def mocked_res_client():
+    """mocked_res_client a pytest fixture which
+    uses the resilient package to get a mocked client.
+    Calls resilient.get_client() with mocked user values
+    and also passes a custom mock module 
+    which has definitions to mock certain
+    Resilient/CP4S Datatable endpoints
+
+    :return: A mocked ResClient
+    :rtype: SimpleClient
+    """
+    mocked_res_client = resilient.get_client({
+        "email": "info@example.com",
+        "host": "example.com",
+        "password": "example",
+        "org": "example_rg",
+        "resilient_mock": "mocks.datatable_mock.DTResilientMock"})
+    return mocked_res_client
 
 
 class TestDataTable():
+    """TestDataTable a Test Module
+    which is used verify functionality 
+    of the Datatable class. 
+
+    Each test uses a pytest fixture - mocked_res_client
+    This fixture instantiates a resilient_client with mocked info
+    and a custom test class which has extra endpoints for datatable functions.
+    """
 
     def test_get_row(self, mocked_res_client):
         """test_get_row gathers both a mocked input and output
@@ -31,13 +58,13 @@ class TestDataTable():
         output = GET_ROW_MOCKED_OUTPUT
 
         dt = Datatable(
-            mocked_res_client, inputs["incident_id"], inputs["dt_utils_datatable_api_name"])
+            mocked_res_client, inputs["incident_id"], inputs["datatable_datatable_api_name"])
         # Get the data table data
         dt.get_data()
 
         # Get the row
         row = dt.get_row(
-            inputs["dt_utils_row_id"], inputs["dt_utils_search_column"], inputs["dt_utils_search_value"])
+            inputs["datatable_row_id"], inputs["datatable_search_column"], inputs["datatable_search_value"])
         assert row is not None
         assert row['id'] == output['id']
 
@@ -56,20 +83,14 @@ class TestDataTable():
         output = GET_ROWS_MOCKED_OUTPUT
 
         dt = Datatable(
-            mocked_res_client, inputs["incident_id"], inputs["dt_utils_datatable_api_name"])
+            mocked_res_client, inputs["incident_id"], inputs["datatable_datatable_api_name"])
         # Get the data table data
         dt.get_data()
 
         # Get rows
-        rows = dt.get_rows(inputs["dt_utils_max_rows"], inputs["dt_utils_sort_by"],
-                           inputs["dt_utils_sort_direction"],
-                           inputs["dt_utils_search_column"], inputs["dt_utils_search_value"])
+        rows = dt.get_rows(inputs["datatable_max_rows"], inputs["datatable_sort_by"],
+                           inputs["datatable_sort_direction"],
+                           inputs["datatable_search_column"], inputs["datatable_search_value"])
 
         assert rows
-        assert len(rows[0]['cells'])
-
-    def test_update_row(self):
-        pass
-
-    def test_delete(self):
-        pass
+        assert len(rows[0]['cells']) == len(output[0]['cells'])
