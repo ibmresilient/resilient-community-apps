@@ -98,8 +98,6 @@ class RemedyClient(RemedyAPI):
         
         return response.json()
 
-        # return response, response_json["values"]["Incident Number"], response_json["values"]["Request ID"]
-
     def get_form_entry(self, form_name, req_id, payload={}):
         """
         get_form_entry is a member function used to gather form data
