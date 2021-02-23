@@ -37,4 +37,8 @@ class RemedyAPI(ABC):
     @abc.abstractmethod
     def update_form_entry(self, *args, **kwargs):
         pass
+
+    @abc.abstractmethod
+    def delete_form_entry(self, *args, **kwargs):
+        pass
     

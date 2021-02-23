@@ -147,3 +147,24 @@ class RemedyClient(RemedyAPI):
         # Remedy returns an empty 204 for form updates.
         # return True in the absence of response content
         return True
+
+    def delete_form_entry(self, form_name, req_id, payload={}):
+        """
+        delete_form_entry is a member function used to delete
+        a form entry baed on a form name and request ID
+
+        :param form_name: name of the form to query
+        :type form_name: str
+        :param req_id: the request ID of the desired entry
+        :type req_id: str
+        :param payload: Any extra options you want to include on the incident, defaults to {}
+        :type payload: dict, optional
+        """
+        url = self.base_url + "/arsys/v1/entry/{}/{}".format(form_name, req_id)
+        response = requests.request("DELETE", url, headers=self.reqHeaders, verify=self.verify, proxies=self.proxies)
+        response.raise_for_status()
+
+        # Remedy returns an empty 204 for form deletion.
+        # return True in the absence of response content
+        return True
+        
