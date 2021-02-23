@@ -173,9 +173,6 @@ class ParseFinding():
             for gd_key in gd_keys:
                 result = search_json(self.finding, gd_key, path=base_path)
                 if isinstance(result, dict) and result.get("msg"):
-                    #LOG.debug("%s for finding data %s.", result.get("msg"),
-                    #          result.get("path"))
-                    # Artifact match not found in finding skip.
                     continue
                 for (artifact_value, path) in result:
                     LOG.debug('artifact type %s (%s) ID %s, at path %s', artifact_type, gd_key, artifact_value, path)
