@@ -31,12 +31,12 @@
 - [Poller - AWS GUARDDUTY: Escalate Findings](#poller---aws-guardduty-escalate-findings)
 - [Function - AWS GUARDDUTY: Refresh Finding](#function---aws-guardduty-refresh-finding)
 - [Function - AWS GUARDDUTY: Archive finding](#function---aws-guardduty-archive-finding)
-- [Data Table - GuardDuty S3 Bucket Details](#data-table---guardduty-s3-bucket-details)
-- [Data Table - GuardDuty Instance Details](#data-table---guardduty-instance-details)
 - [Data Table - GuardDuty Finding Overview](#data-table---guardduty-finding-overview)
-- [Data Table - GuardDuty Access Key Details](#data-table---guardduty-access-key-details)
 - [Data Table - GuardDuty Resource Affected](#data-table---guardduty-resource-affected)
-- [Data Table - GuardDuty Action Details](#data-table---guardduty-action-details)
+- [Data Table - GuardDuty Resource - Instance Details](#data-table---guardduty-resource---instance-details)
+- [Data Table - GuardDuty Resource - Access Key Details](#data-table---guardduty-resource---access-key-details)
+- [Data Table - GuardDuty Resource - S3 Bucket Details](#data-table---guardduty-resource---s3-bucket-details)
+- [Data Table - GuardDuty Action/Actor Details](#data-table---guardduty-actionactor-details)
 - [Custom Fields](#custom-fields)
 - [Custom Artifact Types](#custom-artifact-types)
 - [Rules](#rules)
@@ -77,9 +77,9 @@ The GuardDuty Integration provides the following functionality:
 * A poller which gathers current findings from GuardDuty and escalates to the Resilient platform as incidents.
 * A function to archive a GuardDuty finding when the corresponding Resilient incident is closed.
 * A function to refresh a Resilient incident with the latest information from the corresponding GuardDuty finding.
-* Resilient incidents are closed if the corresponding GuardDuty findings are archived.
-* GuardDuty findings are archived if the corresponding Resilient incidents are closed.
-* A refresh will be triggered for an Resilient incident if the corresponding GuardDuty finding gets updated.
+* Close Resilient incidents if the corresponding GuardDuty findings are archived.
+* Archive GuardDuty findings if the corresponding Resilient incidents are closed.
+* Trigger a refresh for a Resilient incident if the corresponding GuardDuty finding gets updated. 
 * A refresh of Resilient incidents can be executed manually.
 ---
 
@@ -161,8 +161,9 @@ The following table provides the settings you need to configure the app. These s
   You may wish to recommend a new incident tab.
   You should save a screenshot "custom_layouts.png" in the doc/screenshots directory and reference it here
 -->
-* Import the Data Tables and Custom Fields like the screenshot below:
-Configure the Incident Details tab layout to display the AWS GuardDuty information:
+Import the Data Tables and Custom Fields as shown in the screenshot below.
+
+Configure the Incident Details tab layout to display the AWS GuardDuty information as follows:
 1. Navigate to the ‘Customization Settings’ and select the Layouts tab.
 2. Click on ‘Incident Tabs’.
 3. Create new heading 'AWS GuardDuty Properties' in the Details tab.
@@ -173,7 +174,7 @@ The following screenshot shows the GuardDuty fields added to the Details tab.
   ![screenshot: custom_layouts_fields](./doc/screenshots/custom_layouts_fields.png)
 
 
-5. Add new incident tab named ‘AWS GuardDuty Details’.
+5. Add a new incident tab named ‘AWS GuardDuty Details’.
 6. Drag and drop the GuardDuty data tables under the new tab.
 7. Click Save.
 
@@ -183,26 +184,26 @@ The following screenshot shows the GuardDuty data tables added to the GuardDuty 
 
 ---
 ## Poller - AWS GUARDDUTY: Escalate Findings
-The GuardDuty integration poller will start querying GuardDuty for findings as soon as the integration begins running.
+The GuardDuty integration poller starts querying GuardDuty for findings as soon as the app begins running.
 
 The poller provide the following functionality.
 
-* For any new findings discovered creates a  matching incident in the Resilient platform. 
+* For any new findings discovered, creates a  matching incident in the Resilient platform. 
 * Enhances the incidents by adding artifacts, data tables and a note with data from the findings. The note includes the JSON content of the finding.
-* Can be configured to filter the findings which are escalated to Resilient.  
+* Can be configured to filter the findings, which are escalated to the Resilient incidents.  
 * Closes Resilient incidents if the corresponding GuardDuty findings are archived.
 * Archives GuardDuty findings if the corresponding Resilient incidents are closed.
-* Triggers a refresh of GuardDuty information for a Resilient incident if the corresponding GuardDuty finding gets updated.
+* Triggers a refresh of GuardDuty information for a Resilient incident if the corresponding GuardDuty finding is updated.
 
-The following screenshot shows an examples of Resilient incidents created by the poller from GuardDuty findings:
+The following screenshot shows examples of Resilient incidents created by the poller from GuardDuty findings:
 
   ![screenshot: fn-aws-guardduty-incidents](./doc/screenshots/fn-aws-guardduty-incidents.png)
   
-The following screenshot shows an example of a Resilient incident details tab created by the poller:
+The following screenshot shows an example of a Resilient incident Details tab created by the poller:
 
   ![screenshot: fn-aws-guardduty-incident-details](./doc/screenshots/fn-aws-guardduty-incident-details.png)
   
-The following screenshot shows an example of GuardDuty finding custom properties in the details tab of a Resilient incident created by the poller:
+The following screenshot shows an example of GuardDuty finding custom properties in the Details tab of a Resilient incident created by the poller:
 
    ![screenshot: fn-aws-guardduty-incident-properties](./doc/screenshots/fn-aws-guardduty-incident-properties.png)
 
@@ -219,24 +220,24 @@ Note: See the data tables section for examples of data tables added by the polle
 ---
 
 ## Function - AWS GUARDDUTY: Refresh Finding
-Resilient Function to refresh AWS GuardDuty finding details in an incident.
+Resilient function to refresh AWS GuardDuty finding details in an incident.
 
   ![screenshot: fn-aws-guardduty-refresh-finding](./doc/screenshots/fn-aws-guardduty-refresh-finding.png)
   
-The Function provides the following functionality.
+The function provides the following functionality.
 
 * Updates incident fields such as the `aws_guardduty_count` , `aws_guardduty_finding_updated_at` and  `aws_guardduty_severity`.
 * Refreshes all related data tables of the Resilient incident.
 * Adds new or missing artifacts discovered in the GuardDuty finding.
-* Adds 2 notes to the Resilient incident. One of the notes includes the JSON refreshed content of the finding.
+* Adds two notes to the Resilient incident. One of the notes includes the JSON refreshed content of the finding.
 
 The following screenshot shows an example of data tables updated by the function:
 
-   ![screenshot: fn-aws-guardduty-refresh-notes](./doc/screenshots/fn-aws-guardduty-refresh-notes.png)
+   ![screenshot: fn-aws-guardduty-refresh-datatables](./doc/screenshots/fn-aws-guardduty-refresh-datatables.png)
 
 The following screenshot shows an example of notes added to a Resilient incident created by the poller:
 
-   ![screenshot: fn-aws-guardduty-refresh-datatables](./doc/screenshots/fn-aws-guardduty-refresh-datatables.png)
+   ![screenshot: fn-aws-guardduty-refresh-notes](./doc/screenshots/fn-aws-guardduty-refresh-notes.png)
 
 
 <details><summary>Inputs:</summary>
@@ -393,14 +394,14 @@ if __name__ == "__main__":
 
 ---
 ## Function - AWS GUARDDUTY: Archive finding
-Resilient Function to archive an AWS GuardDuty finding when the corresponding incident is closed.
+Resilient function to archive an AWS GuardDuty finding when the corresponding incident is closed.
 
   ![screenshot: fn-aws-guardduty-archive-finding](./doc/screenshots/fn-aws-guardduty-archive-finding.png)
 
-The Function provides the following functionality.
+The function provides the following functionality.
 
-* When a Resilient incident corresponding to a GuardDuty find is closed an automatic rule `Example: AWS GuardDuty: Archive Finding` is triggered which executes the funtion.
-* The function archives the related GuardDuty finding.
+* When a Resilient incident corresponding to a GuardDuty find is closed, an automatic rule `Example: AWS GuardDuty: Archive Finding` is triggered which executes the function.
+* Archives the related GuardDuty finding.
 * Adds a note to the Resilient incident.
 
 The following screenshot shows an example of a note added to a Resilient incident created by the function:
@@ -530,47 +531,6 @@ if __name__ == "__main__":
 
 ---
 
-
-## Data Table - GuardDuty S3 Bucket Details
-
- ![screenshot: dt-guardduty-s3-bucket-details](./doc/screenshots/dt-guardduty-s3-bucket-details.png)
-
-#### API Name:
-gd_s3_bucket_details
-
-#### Columns:
-| Column Name | API Access Name | Type | Tooltip |
-| ----------- | --------------- | ---- | ------- |
-| Bucket Arn | `bucket_arn` | `text` | - |
-| Bucket name | `bucket_name` | `text` | - |
-| Bucket owner | `bucket_owner` | `text` | - |
-| Bucket Type | `bucket_type` | `text` | - |
-| Effective Permission | `effective_permissions` | `text` | - |
-| Encryption type | `encryption_type` | `text` | - |
-| Kms master key ARN | `kms_master_key_arn` | `text` | - |
-| Query execution date | `query_execution_date` | `text` | - |
-
----
-## Data Table - GuardDuty Instance Details
-
- ![screenshot: dt-guardduty-instance-details](./doc/screenshots/dt-guardduty-instance-details.png)
-
-#### API Name:
-gd_instance_details
-
-#### Columns:
-| Column Name | API Access Name | Type | Tooltip |
-| ----------- | --------------- | ---- | ------- |
-| ID | `instance_id` | `text` | - |
-| State | `instance_state` | `text` | - |
-| Private dns name | `private_dns_name` | `text` | - |
-| Private ip address | `private_ip` | `text` | - |
-| Public dns name | `public_dns_name` | `text` | - |
-| Public ip address | `public_ip` | `text` | - |
-| Query execution date | `query_execution_date` | `text` | - |
-| Type | `type` | `text` | - |
-
----
 ## Data Table - GuardDuty Finding Overview
 
  ![screenshot: dt-guardduty-finding-overview](./doc/screenshots/dt-guardduty-finding-overview.png)
@@ -591,23 +551,6 @@ gd_finding_overview
 | Updated at | `updated_at` | `text` | - |
 
 ---
-## Data Table - GuardDuty Access Key Details
-
- ![screenshot: dt-guardduty-access-key-details](./doc/screenshots/dt-guardduty-access-key-details.png)
-
-#### API Name:
-gd_access_key_details
-
-#### Columns:
-| Column Name | API Access Name | Type | Tooltip |
-| ----------- | --------------- | ---- | ------- |
-| Access key ID | `access_key_id` | `text` | - |
-| Principal ID | `principal_id` | `text` | - |
-| Query Execution date | `query_execution_date` | `text` | - |
-| User name | `user_name` | `text` | - |
-| User type | `user_type` | `text` | - |
-
----
 ## Data Table - GuardDuty Resource Affected
 
  ![screenshot: dt-guardduty-resource-affected](./doc/screenshots/dt-guardduty-resource-affected.png)
@@ -625,9 +568,66 @@ gd_resource_affected
 | Resource type | `resource_type` | `text` | - |
 
 ---
-## Data Table - GuardDuty Action Details
+## Data Table - GuardDuty Resource - Instance Details
 
- ![screenshot: dt-guardduty-action-details_1](doc/screenshots/dt-guardduty-action-details_1_old.png)
+ ![screenshot: dt-guardduty-instance-details](./doc/screenshots/dt-guardduty-instance-details.png)
+
+#### API Name:
+gd_instance_details
+
+#### Columns:
+| Column Name | API Access Name | Type | Tooltip |
+| ----------- | --------------- | ---- | ------- |
+| ID | `instance_id` | `text` | - |
+| State | `instance_state` | `text` | - |
+| Private dns name | `private_dns_name` | `text` | - |
+| Private ip address | `private_ip` | `text` | - |
+| Public dns name | `public_dns_name` | `text` | - |
+| Public ip address | `public_ip` | `text` | - |
+| Query execution date | `query_execution_date` | `text` | - |
+| Type | `type` | `text` | - |
+
+---
+## Data Table - GuardDuty Resource - Access Key Details
+
+ ![screenshot: dt-guardduty-access-key-details](./doc/screenshots/dt-guardduty-access-key-details.png)
+
+#### API Name:
+gd_access_key_details
+
+#### Columns:
+| Column Name | API Access Name | Type | Tooltip |
+| ----------- | --------------- | ---- | ------- |
+| Access key ID | `access_key_id` | `text` | - |
+| Principal ID | `principal_id` | `text` | - |
+| Query Execution date | `query_execution_date` | `text` | - |
+| User name | `user_name` | `text` | - |
+| User type | `user_type` | `text` | - |
+
+---
+## Data Table - GuardDuty Resource - S3 Bucket Details
+
+ ![screenshot: dt-guardduty-s3-bucket-details](./doc/screenshots/dt-guardduty-s3-bucket-details.png)
+
+#### API Name:
+gd_s3_bucket_details
+
+#### Columns:
+| Column Name | API Access Name | Type | Tooltip |
+| ----------- | --------------- | ---- | ------- |
+| Bucket Arn | `bucket_arn` | `text` | - |
+| Bucket name | `bucket_name` | `text` | - |
+| Bucket owner | `bucket_owner` | `text` | - |
+| Bucket Type | `bucket_type` | `text` | - |
+| Effective Permission | `effective_permissions` | `text` | - |
+| Encryption type | `encryption_type` | `text` | - |
+| Kms master key ARN | `kms_master_key_arn` | `text` | - |
+| Query execution date | `query_execution_date` | `text` | - |
+
+---
+## Data Table - GuardDuty Action/Actor Details
+
+ ![screenshot: dt-guardduty-action-details_1](doc/screenshots/dt-guardduty-action-details_1.png)
  ![screenshot: dt-guardduty-action-details_2](./doc/screenshots/dt-guardduty-action-details_2.png)
 
 #### API Name:
