@@ -120,7 +120,7 @@ class TestDataTable():
             inputs["datatable_row_id"], inputs["datatable_cells_to_update"])
 
         assert updated_row
-        assert updated_row['id'] == output['id']
+        
         for cell_key in updated_row['cells'].keys():
             assert cell_key in output['cells'].keys()
             assert updated_row['cells'][cell_key]['value'] == output['cells'][cell_key]['value']
