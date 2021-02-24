@@ -30,7 +30,7 @@ class RemedyClient(RemedyAPI):
         decoded based on the apparent_encoding.
 
         :return: the token
-        :rtype: string
+        :rtype: str
         """
         url = self.base_url + "/jwt/login"
         data = {"username": self.username, "password": self.password}
@@ -64,8 +64,10 @@ class RemedyClient(RemedyAPI):
         """
         Releases a JWT token so that it cannot be used
         for further interaction with the REST API.
+        The function returns: a tuple with the response content as json and the http status code.
 
-        :return: null
+        :return: the response content and http status code as a tuple
+        :rtype: tuple(json, int)
         """
         url = self.base_url + "/jwt/logout"
 
@@ -82,7 +84,7 @@ class RemedyClient(RemedyAPI):
         """
         create_form_entry is a member function used to take a payload
         and form name and use it to create a new entry on the Remedy system. 
-        The function returns: the response as json
+        The function returns: a tuple with the response content as json and the http status code.
 
         :param form_name: name of the form to add an entry for
         :type form_name: str
@@ -92,8 +94,8 @@ class RemedyClient(RemedyAPI):
         :type return_values: list
         :param payload: Any extra options you want to include on the incident, defaults to {}
         :type payload: dict, optional
-        :return: The Response as json
-        :rtype: json
+        :return: the response content and http status code as a tuple
+        :rtype: tuple(json, int)
         """
         field_list = ', '.join(return_values)
         url = self.base_url + REQUEST_PREFIX + "/{}?fields=values({})".format(form_name, field_list)
@@ -110,7 +112,7 @@ class RemedyClient(RemedyAPI):
         """
         get_form_entry is a member function used to gather form data
         based on a form name and request ID
-        The function returns: the response as json
+        The function returns: a tuple with the response content as json and the http status code.
 
         :param form_name: name of the form to query
         :type form_name: str
@@ -118,8 +120,8 @@ class RemedyClient(RemedyAPI):
         :type req_id: str
         :param payload: Any extra options you want to include on the incident, defaults to {}
         :type payload: dict, optional
-        :return: The Response as json
-        :rtype: json
+        :return: the response content and http status code as a tuple
+        :rtype: tuple(json, int)
         """
         url = self.base_url + REQUEST_PREFIX + "/{}/{}".format(form_name, req_id)
         response = requests.request("GET", url, headers=self.reqHeaders, verify=self.verify,
@@ -131,7 +133,7 @@ class RemedyClient(RemedyAPI):
         """
         update_form_entry is a member function used to update form data
         based on a form name and request ID
-        The function returns: the response as json
+        The function returns: a tuple with the response content as json and the http status code.
 
         :param form_name: name of the form to query
         :type form_name: str
@@ -141,8 +143,8 @@ class RemedyClient(RemedyAPI):
         :type values: dict
         :param payload: Any extra options you want to include on the incident, defaults to {}
         :type payload: dict, optional
-        :return: The Response as json
-        :rtype: json
+        :return: the response content and http status code as a tuple
+        :rtype: tuple(json, int)
         """
         entry = {
             "values": values
@@ -162,7 +164,8 @@ class RemedyClient(RemedyAPI):
     def delete_form_entry(self, form_name, req_id, payload={}):
         """
         delete_form_entry is a member function used to delete
-        a form entry based on a form name and request ID
+        a form entry based on a form name and request ID.
+        The function returns: a tuple with the response content as json and the http status code.
 
         :param form_name: name of the form to query
         :type form_name: str
@@ -170,6 +173,8 @@ class RemedyClient(RemedyAPI):
         :type req_id: str
         :param payload: Any extra options you want to include on the incident, defaults to {}
         :type payload: dict, optional
+        :return: the response content and http status code as a tuple
+        :rtype: tuple(json, int)
         """
         url = self.base_url + REQUEST_PREFIX + "/{}/{}".format(form_name, req_id)
         response = requests.request("DELETE", url, headers=self.reqHeaders, verify=self.verify,
