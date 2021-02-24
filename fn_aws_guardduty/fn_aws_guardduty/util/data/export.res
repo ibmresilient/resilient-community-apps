@@ -162,7 +162,7 @@
   ],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1614100526375,
+  "export_date": 1614183476837,
   "export_format_version": 2,
   "fields": [
     {
@@ -625,7 +625,7 @@
         "format": "text"
       },
       "destination_handle": "fn_aws_gd",
-      "display_name": "AWS GUARDDUTY: Archive finding",
+      "display_name": "AWS GuardDuty: Archive finding",
       "export_key": "func_aws_guardduty_archive_finding",
       "id": 3,
       "last_modified_by": {
@@ -634,11 +634,11 @@
         "name": "a@a.com",
         "type": "user"
       },
-      "last_modified_time": 1614094092915,
+      "last_modified_time": 1614183345501,
       "name": "func_aws_guardduty_archive_finding",
       "tags": [],
       "uuid": "ee7aaede-3fd1-46d5-bd05-4bd6062f67e3",
-      "version": 2,
+      "version": 3,
       "view_items": [
         {
           "content": "9af24b4c-9409-43ec-8c72-ea86f04fbc25",
@@ -690,7 +690,7 @@
         "format": "text"
       },
       "destination_handle": "fn_aws_gd",
-      "display_name": "AWS GUARDDUTY: Refresh Finding",
+      "display_name": "AWS GuardDuty: Refresh Finding",
       "export_key": "func_aws_guardduty_refresh_finding",
       "id": 4,
       "last_modified_by": {
@@ -699,11 +699,11 @@
         "name": "a@a.com",
         "type": "user"
       },
-      "last_modified_time": 1614093804668,
+      "last_modified_time": 1614183368526,
       "name": "func_aws_guardduty_refresh_finding",
       "tags": [],
       "uuid": "2d1446f8-13fc-4400-af6a-c96b55d9a0df",
-      "version": 1,
+      "version": 2,
       "view_items": [
         {
           "content": "9af24b4c-9409-43ec-8c72-ea86f04fbc25",
@@ -754,7 +754,7 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 3,
+  "id": 4,
   "inbound_mailboxes": null,
   "incident_artifact_types": [
     {
@@ -811,7 +811,7 @@
   ],
   "incident_types": [
     {
-      "create_date": 1614100497689,
+      "create_date": 1614183466434,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -820,7 +820,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1614100497689,
+      "update_date": 1614183466434,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
