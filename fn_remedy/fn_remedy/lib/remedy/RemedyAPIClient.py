@@ -6,6 +6,8 @@ from interface.remedy_api import RemedyAPI
 # Load constant values for API Calls
 from RemedyConstants import *
 
+REQUEST_PREFIX = "/arsys/v1/entry"
+
 class RemedyClient(RemedyAPI):
 
     def __init__(self, host, username, password, port=None, verify=True, proxies={}):
@@ -89,7 +91,7 @@ class RemedyClient(RemedyAPI):
         :rtype: json
         """
         field_list = ', '.join(return_values)
-        url = self.base_url + "/arsys/v1/entry/{}?fields=values({})".format(form_name, field_list)
+        url = self.base_url + REQUEST_PREFIX + "/{}?fields=values({})".format(form_name, field_list)
         entry = {
             "values": values
         }
@@ -114,7 +116,7 @@ class RemedyClient(RemedyAPI):
         :return: The Response as json
         :rtype: json
         """
-        url = self.base_url + "/arsys/v1/entry/{}/{}".format(form_name, req_id)
+        url = self.base_url + REQUEST_PREFIX + "/{}/{}".format(form_name, req_id)
         response = requests.request("GET", url, headers=self.reqHeaders, verify=self.verify, proxies=self.proxies)
         response.raise_for_status()
 
@@ -140,7 +142,7 @@ class RemedyClient(RemedyAPI):
         entry = {
             "values": values
         }
-        url = self.base_url + "/arsys/v1/entry/{}/{}".format(form_name, req_id)
+        url = self.base_url + REQUEST_PREFIX + "/{}/{}".format(form_name, req_id)
 
         response = requests.request("PUT", url, json=entry, headers=self.reqHeaders, verify=self.verify, proxies=self.proxies)
         response.raise_for_status()
@@ -161,7 +163,7 @@ class RemedyClient(RemedyAPI):
         :param payload: Any extra options you want to include on the incident, defaults to {}
         :type payload: dict, optional
         """
-        url = self.base_url + "/arsys/v1/entry/{}/{}".format(form_name, req_id)
+        url = self.base_url + REQUEST_PREFIX + "/{}/{}".format(form_name, req_id)
         response = requests.request("DELETE", url, headers=self.reqHeaders, verify=self.verify, proxies=self.proxies)
         response.raise_for_status()
 
