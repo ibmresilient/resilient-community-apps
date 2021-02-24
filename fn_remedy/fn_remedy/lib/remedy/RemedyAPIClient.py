@@ -80,7 +80,7 @@ class RemedyClient(RemedyAPI):
 
         return response_json, response.status_code
 
-    def create_form_entry(self, form_name, values, return_values, payload={}):
+    def create_form_entry(self, form_name, values, return_values=[], payload={}):
         """
         create_form_entry is a member function used to take a payload
         and form name and use it to create a new entry on the Remedy system. 
