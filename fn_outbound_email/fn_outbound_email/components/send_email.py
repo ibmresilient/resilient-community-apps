@@ -9,7 +9,7 @@ import logging
 import os
 import tempfile
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import ResultPayload, validate_fields
+from resilient_lib import ResultPayload, validate_fields, IntegrationError
 from fn_outbound_email.lib.smtp_mailer import SendSMTPEmail
 
 
@@ -85,7 +85,7 @@ class FunctionComponent(ResilientComponent):
             mail_from, mail_to, mail_body_html, jinja, email_message, text = conditional_parameters(mail_body_text)
 
             if not mail_from:
-                raise Exception("no sender address specified")
+                raise IntegrationError("no sender address specified")
             if not mail_cc:
                 mail_cc = ""
             if not mail_bcc:
@@ -121,7 +121,7 @@ class FunctionComponent(ResilientComponent):
                 LOG.debug(rendered_mail_html)
 
                 if not rendered_mail_html:
-                    raise Exception("Local jinja template not valid, please retry sending with valid template locally or remove file to use default")
+                    raise IntegrationError("Local jinja template not valid, please retry sending with valid template locally or remove file to use default")
 
                 if not jinja:
                     error_msg = send_smtp_email.send(body_html=rendered_mail_html)

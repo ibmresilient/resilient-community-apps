@@ -1,10 +1,7 @@
 # fn-outbound-email Functions for IBM Resilient
 
 - [fn-outbound-email Functions for IBM Resilient](#fn-outbound-email-functions-for-ibm-resilient)
-  - [History](#history)
-    - [v1.1.0](#v110)
-    - [v1.0.9](#v109)
-    - [v1.0.8](#v108)
+  - [Release Notes](#release-notes)
   - [Requirements](#requirements)
   - [Installation](#installation)
     - [Installation (App Host)](#installation-app-host)
@@ -22,7 +19,7 @@
 
 ---
 
-## History
+## Release Notes
 
 | Version | Date | Notes |
 | ------- | ---- | ----- |

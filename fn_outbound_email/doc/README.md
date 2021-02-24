@@ -3,7 +3,7 @@
 ## Table of Contents
 - [**User Guide:** fn_outbound_email](#user-guide-fnoutboundemail107)
   - [Table of Contents](#table-of-contents)
-  - [History](#history)
+  - [Release Notes](#release-notes)
   - [Key Features](#key-features)
   - [Function - Send Email HTML](#function---send-email-html)
   - [Function - Send Email Text](#function---send-email-text)
@@ -11,7 +11,7 @@
 
 ---
 
-## History
+## Release Notes
 
 | Version | Date | Notes |
 | ------- | ---- | ----- |
