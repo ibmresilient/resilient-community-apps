@@ -152,7 +152,7 @@ class RemedyClient(RemedyAPI):
     def delete_form_entry(self, form_name, req_id, payload={}):
         """
         delete_form_entry is a member function used to delete
-        a form entry baed on a form name and request ID
+        a form entry based on a form name and request ID
 
         :param form_name: name of the form to query
         :type form_name: str
