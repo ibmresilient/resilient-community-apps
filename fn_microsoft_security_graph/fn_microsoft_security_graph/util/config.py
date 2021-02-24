@@ -22,6 +22,7 @@ microsoft_graph_url=https://graph.microsoft.com/v1.0
 tenant_id=xxx
 client_id=xxx
 client_secret=xxx
+scope=https://graph.microsoft.com/.default
 
 ## Polling options
 # How often polling should happen. Value is in seconds. To disable polling, set this to zero.

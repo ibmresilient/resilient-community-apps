@@ -38,6 +38,7 @@ class IntegrationComponent(ResilientComponent):
                                                              self.options.get("tenant_id"),
                                                              self.options.get("client_id"),
                                                              self.options.get("client_secret"),
+                                                             self.options.get("scope"),
                                                              RequestsCommon(self.opts, self.options).get_proxies())
         self.polling_main()
 
@@ -48,7 +49,8 @@ class IntegrationComponent(ResilientComponent):
 
         self.Microsoft_security_graph_helper = MSGraphHelper(self.options.get("tenant_id"),
                                                              self.options.get("client_id"),
-                                                             self.options.get("client_secret"))
+                                                             self.options.get("client_secret"),
+                                                             self.options.get("scope"))
 
     @function("microsoft_security_graph_alert_search")
     def _microsoft_security_graph_alert_search_function(self, event, *args, **kwargs):
