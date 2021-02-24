@@ -16,29 +16,29 @@ class RemedyAPI(ABC):
 
     @abc.abstractmethod
     def get_token(self, *args, **kwargs):
-        pass
+        raise NotImplementedError("Child classes must implement all methods of the RemedyAPI interface.")
 
     @abc.abstractmethod
     def build_request_headers(self, *args, **kwargs):
-        pass
+        raise NotImplementedError("Child classes must implement all methods of the RemedyAPI interface.")
 
     @abc.abstractmethod
     def release_token(self, *args, **kwargs):
-        pass
+        raise NotImplementedError("Child classes must implement all methods of the RemedyAPI interface.")
 
     @abc.abstractmethod
     def create_form_entry(self, *args, **kwargs):
-        pass
+        raise NotImplementedError("Child classes must implement all methods of the RemedyAPI interface.")
 
     @abc.abstractmethod
     def get_form_entry(self, *args, **kwargs):
-        pass
+        raise NotImplementedError("Child classes must implement all methods of the RemedyAPI interface.")
 
     @abc.abstractmethod
     def update_form_entry(self, *args, **kwargs):
-        pass
+        raise NotImplementedError("Child classes must implement all methods of the RemedyAPI interface.")
 
     @abc.abstractmethod
     def delete_form_entry(self, *args, **kwargs):
-        pass
+        raise NotImplementedError("Child classes must implement all methods of the RemedyAPI interface.")
     
