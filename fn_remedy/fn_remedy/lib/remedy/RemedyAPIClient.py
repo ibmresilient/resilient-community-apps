@@ -7,15 +7,17 @@ from interface.remedy_api import RemedyAPI
 from RemedyConstants import *
 
 REQUEST_PREFIX = "/arsys/v1/entry"
+DEFAULT_TIMEOUT = 30
 
 class RemedyClient(RemedyAPI):
 
-    def __init__(self, host, username, password, port=None, verify=True, proxies={}):
+    def __init__(self, host, username, password, port=None, verify=True, proxies={}, timeout=DEFAULT_TIMEOUT):
         self.host = host
         self.username = username
         self.password = password
         self.verify = verify
         self.proxies = proxies
+        self.timeout = timeout
         self.port = port or DEFAULT_HTTPS_PORT if self.verify else port or DEFAULT_HTTP_PORT
         self.base_url = HTTPS_BASE_URL(self.host, self.port) if self.verify else HTTP_BASE_URL(self.host, self.port)
         self.authHeaders = {"content-type": "application/x-www-form-urlencoded"}
@@ -33,7 +35,8 @@ class RemedyClient(RemedyAPI):
         url = self.base_url + "/jwt/login"
         data = {"username": self.username, "password": self.password}
 
-        response = requests.request("POST", url, data=data, headers=self.authHeaders, verify=self.verify, proxies=self.proxies)
+        response = requests.request("POST", url, data=data, headers=self.authHeaders, 
+                                    verify=self.verify, proxies=self.proxies, timeout=self.timeout)
         response.raise_for_status()
         token = response.content
         encoding = response.apparent_encoding
@@ -66,7 +69,8 @@ class RemedyClient(RemedyAPI):
         """
         url = self.base_url + "/jwt/logout"
 
-        response = requests.request("POST", url, headers=self.reqHeaders, verify=self.verify, proxies=self.proxies)
+        response = requests.request("POST", url, headers=self.reqHeaders, verify=self.verify,
+                                    proxies=self.proxies, timeout=self.timeout)
         response.raise_for_status()
 
         # logging off returns an empty 204
@@ -96,7 +100,8 @@ class RemedyClient(RemedyAPI):
             "values": values
         }
 
-        response = requests.request("POST", url, json=entry, headers=self.reqHeaders, verify=self.verify, proxies=self.proxies)
+        response = requests.request("POST", url, json=entry, headers=self.reqHeaders, verify=self.verify,
+                                    proxies=self.proxies, timeout=self.timeout)
         response.raise_for_status()
         
         return response.json()
@@ -117,7 +122,8 @@ class RemedyClient(RemedyAPI):
         :rtype: json
         """
         url = self.base_url + REQUEST_PREFIX + "/{}/{}".format(form_name, req_id)
-        response = requests.request("GET", url, headers=self.reqHeaders, verify=self.verify, proxies=self.proxies)
+        response = requests.request("GET", url, headers=self.reqHeaders, verify=self.verify,
+                                    proxies=self.proxies, timeout=self.timeout)
         response.raise_for_status()
 
         return response.json()
@@ -144,7 +150,8 @@ class RemedyClient(RemedyAPI):
         }
         url = self.base_url + REQUEST_PREFIX + "/{}/{}".format(form_name, req_id)
 
-        response = requests.request("PUT", url, json=entry, headers=self.reqHeaders, verify=self.verify, proxies=self.proxies)
+        response = requests.request("PUT", url, json=entry, headers=self.reqHeaders, verify=self.verify,
+                                    proxies=self.proxies, timeout=self.timeout)
         response.raise_for_status()
 
         # Remedy returns an empty 204 for form updates.
@@ -164,7 +171,8 @@ class RemedyClient(RemedyAPI):
         :type payload: dict, optional
         """
         url = self.base_url + REQUEST_PREFIX + "/{}/{}".format(form_name, req_id)
-        response = requests.request("DELETE", url, headers=self.reqHeaders, verify=self.verify, proxies=self.proxies)
+        response = requests.request("DELETE", url, headers=self.reqHeaders, verify=self.verify,
+                                    proxies=self.proxies, timeout=self.timeout)
         response.raise_for_status()
 
         # Remedy returns an empty 204 for form deletion.
