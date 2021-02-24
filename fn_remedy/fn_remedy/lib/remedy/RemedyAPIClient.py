@@ -71,11 +71,12 @@ class RemedyClient(RemedyAPI):
 
         response = requests.request("POST", url, headers=self.reqHeaders, verify=self.verify,
                                     proxies=self.proxies, timeout=self.timeout)
-        response.raise_for_status()
 
         # logging off returns an empty 204
-        # return True in the absence of response content
-        return True
+        # return empty json in the absence of response/incident content
+        response_json = response.json() if response.content else {}
+
+        return response_json, response.status_code
 
     def create_form_entry(self, form_name, values, return_values, payload={}):
         """
@@ -102,9 +103,8 @@ class RemedyClient(RemedyAPI):
 
         response = requests.request("POST", url, json=entry, headers=self.reqHeaders, verify=self.verify,
                                     proxies=self.proxies, timeout=self.timeout)
-        response.raise_for_status()
         
-        return response.json()
+        return response.json(), response.status_code
 
     def get_form_entry(self, form_name, req_id, payload={}):
         """
@@ -124,9 +124,8 @@ class RemedyClient(RemedyAPI):
         url = self.base_url + REQUEST_PREFIX + "/{}/{}".format(form_name, req_id)
         response = requests.request("GET", url, headers=self.reqHeaders, verify=self.verify,
                                     proxies=self.proxies, timeout=self.timeout)
-        response.raise_for_status()
 
-        return response.json()
+        return response.json(), response.status_code
 
     def update_form_entry(self, form_name, req_id, values, payload={}):
         """
@@ -152,11 +151,13 @@ class RemedyClient(RemedyAPI):
 
         response = requests.request("PUT", url, json=entry, headers=self.reqHeaders, verify=self.verify,
                                     proxies=self.proxies, timeout=self.timeout)
-        response.raise_for_status()
-
+        
         # Remedy returns an empty 204 for form updates.
-        # return True in the absence of response content
-        return True
+        # get the updated incident and return it with the update status code
+        status_code = response.status_code
+        updated_incident, _ = self.get_form_entry(form_name, req_id, values)
+
+        return updated_incident, status_code
 
     def delete_form_entry(self, form_name, req_id, payload={}):
         """
@@ -173,9 +174,10 @@ class RemedyClient(RemedyAPI):
         url = self.base_url + REQUEST_PREFIX + "/{}/{}".format(form_name, req_id)
         response = requests.request("DELETE", url, headers=self.reqHeaders, verify=self.verify,
                                     proxies=self.proxies, timeout=self.timeout)
-        response.raise_for_status()
+
+        response_json = response.json() if response.content else {}
 
         # Remedy returns an empty 204 for form deletion.
-        # return True in the absence of response content
-        return True
+        # return empty json in the absence of response/incident content
+        return response_json, response.status_code
         
