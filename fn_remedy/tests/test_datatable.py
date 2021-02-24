@@ -94,3 +94,60 @@ class TestDataTable():
 
         assert rows
         assert len(rows[0]['cells']) == len(output[0]['cells'])
+
+    def test_update_row(self, mocked_res_client):
+        """test_update_row gathers both a mocked input and output
+        initializes a datatable object with some mocked inputs
+        and then attempts to call update_row with the other
+        mocked inputs.
+
+        Afterwards verify the result with the mocked outputs
+
+        :param mocked_res_client: A instance of ResClient with mocked values and a custom Datatable Resilient Mock for endpoints
+        :type mocked_res_client: fixture
+        """
+        inputs = UPDATE_ROW_MOCKED_INPUT
+        output = UPDATE_ROW_MOCKED_OUTPUT
+
+        dt = Datatable(
+            mocked_res_client, inputs["incident_id"], inputs["datatable_datatable_api_name"])
+
+        # Get the data table data
+        dt.get_data()
+
+        # Update the row
+        updated_row = dt.update_row(
+            inputs["datatable_row_id"], inputs["datatable_cells_to_update"])
+
+        assert updated_row
+        assert updated_row['id'] == output['id']
+        for cell_key in updated_row['cells'].keys():
+            assert cell_key in output['cells'].keys()
+            assert updated_row['cells'][cell_key]['value'] == output['cells'][cell_key]['value']
+
+    def test_delete(self, mocked_res_client):
+        """test_delete_row gathers both a mocked input and output
+        initializes a datatable object with some mocked inputs
+        and then attempts to call delete_row with the other
+        mocked inputs.
+
+        Afterwards verify the result with the mocked outputs
+
+        :param mocked_res_client: A instance of ResClient with mocked values and a custom Datatable Resilient Mock for endpoints
+        :type mocked_res_client: fixture
+        """
+        inputs = DELETE_ROW_MOCKED_INPUT
+
+        dt = Datatable(
+            mocked_res_client, inputs["incident_id"], inputs["datatable_datatable_api_name"])
+
+        # Get the data table data
+        dt.get_data()
+
+        # Update the row
+        deleted_row = dt.delete_row(inputs["datatable_row_id"])
+
+        with pytest.raises(ValueError):
+            dt.get_row(inputs["datatable_row_id"])
+
+        assert deleted_row
