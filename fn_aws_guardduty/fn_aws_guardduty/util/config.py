@@ -37,6 +37,6 @@ aws_gd_polling_interval = <POLLING_INTERVAL>
 #aws_gd_close_incident_template = <PATH_TO_TEMPLATE_FILE>
 # Optional settings for access to GuardDuty via a proxy.
 #http_proxy=http://proxy:80
-#https_proxy=http://proxy:443
+#https_proxy=https://proxy:443
 """
     return config_data
