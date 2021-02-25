@@ -118,7 +118,9 @@ class AwsGdPoller():
                                 # Create incident and return response
                                 i_response = res_svc.create_incident(finding_payload.payload)
 
-                                if i_response is not None:
+                                if i_response:
+                                    LOG.info("Incident '{}' successfully created for finding '{}' in region '{}'."
+                                             .format(i_response['id'], finding["Id"], gd_region))
                                     # Create data tables.
                                     if finding_payload.data_tables:
                                         res_svc.add_datatables(i_response['id'], finding_payload.data_tables)
