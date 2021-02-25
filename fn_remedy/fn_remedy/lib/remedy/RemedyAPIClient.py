@@ -11,13 +11,12 @@ DEFAULT_TIMEOUT = 30
 
 class RemedyClient(RemedyAPI):
 
-    def __init__(self, host, username, password, port=None, verify=True, proxies={}, timeout=DEFAULT_TIMEOUT):
+    def __init__(self, host, username, password, rc, port=None, verify=True):
         self.host = host
         self.username = username
         self.password = password
+        self.rc = rc
         self.verify = verify
-        self.proxies = proxies
-        self.timeout = timeout
         self.port = port or DEFAULT_HTTPS_PORT if self.verify else port or DEFAULT_HTTP_PORT
         self.base_url = HTTPS_BASE_URL(self.host, self.port) if self.verify else HTTP_BASE_URL(self.host, self.port)
         self.authHeaders = {"content-type": "application/x-www-form-urlencoded"}
@@ -35,8 +34,7 @@ class RemedyClient(RemedyAPI):
         url = self.base_url + "/jwt/login"
         data = {"username": self.username, "password": self.password}
 
-        response = requests.request("POST", url, data=data, headers=self.authHeaders, 
-                                    verify=self.verify, proxies=self.proxies, timeout=self.timeout)
+        response = self.rc.execute_call_v2("POST", url, data=data, headers=self.authHeaders, verify=self.verify)
         response.raise_for_status()
         token = response.content
         encoding = response.apparent_encoding
@@ -71,8 +69,7 @@ class RemedyClient(RemedyAPI):
         """
         url = self.base_url + "/jwt/logout"
 
-        response = requests.request("POST", url, headers=self.reqHeaders, verify=self.verify,
-                                    proxies=self.proxies, timeout=self.timeout)
+        response = self.rc.execute_call_v2("POST", url, headers=self.reqHeaders, verify=self.verify)
 
         # logging off returns an empty 204
         # return empty json in the absence of response/incident content
@@ -103,8 +100,7 @@ class RemedyClient(RemedyAPI):
             "values": values
         }
 
-        response = requests.request("POST", url, json=entry, headers=self.reqHeaders, verify=self.verify,
-                                    proxies=self.proxies, timeout=self.timeout)
+        response = self.rc.execute_call_v2("POST", url, json=entry, headers=self.reqHeaders, verify=self.verify)
         
         return response.json(), response.status_code
 
@@ -124,8 +120,7 @@ class RemedyClient(RemedyAPI):
         :rtype: tuple(json, int)
         """
         url = self.base_url + REQUEST_PREFIX + "/{}/{}".format(form_name, req_id)
-        response = requests.request("GET", url, headers=self.reqHeaders, verify=self.verify,
-                                    proxies=self.proxies, timeout=self.timeout)
+        response = self.rc.execute_call_v2("GET", url, headers=self.reqHeaders, verify=self.verify)
 
         return response.json(), response.status_code
 
@@ -151,8 +146,7 @@ class RemedyClient(RemedyAPI):
         }
         url = self.base_url + REQUEST_PREFIX + "/{}/{}".format(form_name, req_id)
 
-        response = requests.request("PUT", url, json=entry, headers=self.reqHeaders, verify=self.verify,
-                                    proxies=self.proxies, timeout=self.timeout)
+        response = self.rc.execute_call_v2("PUT", url, json=entry, headers=self.reqHeaders, verify=self.verify)
         
         # Remedy returns an empty 204 for form updates.
         # get the updated incident and return it with the update status code
@@ -177,8 +171,7 @@ class RemedyClient(RemedyAPI):
         :rtype: tuple(json, int)
         """
         url = self.base_url + REQUEST_PREFIX + "/{}/{}".format(form_name, req_id)
-        response = requests.request("DELETE", url, headers=self.reqHeaders, verify=self.verify,
-                                    proxies=self.proxies, timeout=self.timeout)
+        response = self.rc.execute_call_v2("DELETE", url, headers=self.reqHeaders, verify=self.verify)
 
         response_json = response.json() if response.content else {}
 
