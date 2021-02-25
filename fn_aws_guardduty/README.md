@@ -143,8 +143,8 @@ The following table provides the settings you need to configure the app. These s
 
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
-| **aws_gd_access_key_id** | Yes | `ABCD1EFGHI2JK3L4MNOP` | *Enter a description of the config here.* |
-| **aws_gd_secret_access_key** | Yes | `aBcdeFGH/iJkl1MNo2P3Q4rs5tuV6wXYZAbc+Def` | *Enter a description of the config here.* |
+| **aws_gd_access_key_id** | Yes | `ABCD1EFGHI2JK3L4MNOP` | *AWS access key id of user with programmatic (API) access to AWS GuardDuty services for an AWS account. Note: User must have sufficent permissions to be able to manage GuardDuty resources for the AWS account.* |
+| **aws_gd_secret_access_key** | Yes | `aBcdeFGH/iJkl1MNo2P3Q4rs5tuV6wXYZAbc+Def` | *AWS secret access key used for programmatic (API) access to AWS services.* |
 | **aws_gd_master_region** | Yes | `us-west-1` | *Default or master region for the integration.* |
 | **aws_gd_regions** | Yes | `"^us.*"` | *Filter by GuardDuty region names. Can be a string or regular expression.* |
 | **aws_gd_regions_interval** | Yes | `60` | *Interval to refresh regions information (in minutes).* |
