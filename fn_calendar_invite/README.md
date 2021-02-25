@@ -41,6 +41,7 @@ Note: The results payload returned by the Calendar Invite function has changed i
 
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 1.1.1 | 2/2021 | Update copyright |
 | 1.1.0 | 1/2021 | App Host and Proxy Support |
 | 1.0.0 | 9/2018 | Initial Release |
 
