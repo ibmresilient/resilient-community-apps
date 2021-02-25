@@ -338,8 +338,7 @@ class PostgreSQL96Dialect(ODBCDialectBase):
 
     @staticmethod
     def make_blob(type_info, field, value):
-        hex_address = value.hex()
-        return "0x" + hex_address
+        return value
 
 
 class MySqlDialect(ODBCDialectBase):
