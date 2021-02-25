@@ -21,7 +21,7 @@ def codegen_reload_data():
     return {
         "package": u"fn_cisco_asa",
         "message_destinations": [u"fn_cisco_asa"],
-        "functions": [],
+        "functions": [u"cisco_asa_get_network_objects"],
         "workflows": [],
         "actions": [],
         "incident_fields": [],
@@ -42,6 +42,8 @@ def customization_data(client=None):
     Contents:
     - Message Destinations:
         - fn_cisco_asa
+    - Functions:
+        - cisco_asa_get_network_objects
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)
