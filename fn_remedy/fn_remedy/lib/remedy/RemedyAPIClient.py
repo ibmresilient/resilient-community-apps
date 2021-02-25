@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use, undefined-variable
 # (c) Copyright IBM Corp. 2021. All Rights Reserved.
-import requests
 from interface.remedy_api import RemedyAPI
 # Load constant values for API Calls
 from RemedyConstants import *
 
 REQUEST_PREFIX = "/arsys/v1/entry"
-DEFAULT_TIMEOUT = 30
+
 
 class RemedyClient(RemedyAPI):
 
