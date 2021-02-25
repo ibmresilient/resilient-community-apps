@@ -27,20 +27,30 @@ def mocked_requests_get(*args, **kwargs):
         """
         A mock class intended to mock the entire Response attribute for a requests.
         """
-        def __init__(self, http_status_code, raw_json, persons_count, error):
+        def __init__(self, http_status_code, person, possible_persons, persons_count, error):
             self.http_status_code = http_status_code
-            self.raw_json = raw_json
+            self.person = person
+            self.possible_persons = possible_persons
             self.persons_count = persons_count
             self.error = error
 
+        def to_dict(self):
+            return {
+                "@http_status_code": self.http_status_code,
+                "@persons_count": self.persons_count,
+                "person": self.person,
+                "possible_persons": self.possible_persons,
+                "error": self.error
+            }
+
     if kwargs.get("success") and kwargs.get("no_match"):
-        return MockResponse(200, '{}', 0, None)
+        return MockResponse(200, {}, None, 0, None)
     elif kwargs.get("success") and not kwargs.get("definite"):
-        return MockResponse(200, '{"possible_persons": [{"@id": "id1"}, {"@id": "id2"}]}', 2, None)
+        return MockResponse(200, None, [{"@id": "id1"}, {"@id": "id2"}], 2, None)
     elif kwargs.get("success") and kwargs.get("definite"):
-        return MockResponse(200, '{"person": {"@id": "id1"}}', 1, None)
+        return MockResponse(200, {"@id": "id1"}, None, 1, None)
     else:
-        return MockResponse(400, None, None, "Bad Request")
+        return MockResponse(400, None, None, None, "Bad Request")
 
 
 def call_pipl_search_function_function(circuits, function_params, timeout=10):

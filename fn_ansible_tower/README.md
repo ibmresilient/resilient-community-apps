@@ -29,11 +29,11 @@
   Specify all changes in this release. Do not remove the release 
   notes of a previous release
 -->
-### v1.0.1
-* App Host Support
-
-### v1.0.0
-* Initial Release
+| Release | Date | Notes |
+| ------- | ---- | ----- |
+| v1.0.2  | 2/2021 | Bug fix for paged results from templates, jobs, etc. |
+| v1.0.1  | 12/2020 | App Host support |
+| v1.0.0  | 2/2020 | Initial release |
 
 ---
 

@@ -19,7 +19,7 @@ def snake_to_camel(word):
 
 setup(
     name='fn_ansible_tower',
-    version='1.0.1',
+    version='1.0.2',
     license='MIT',
     author='IBM Resilient',
     author_email='support@resilientsystems.com',

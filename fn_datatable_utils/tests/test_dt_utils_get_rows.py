@@ -47,6 +47,13 @@ class TestDtUtilsGetRows:
         'dt_utils_search_value': 'Mary Blogs'
     }
 
+    get_all_rows_inputs = {
+        'incident_id': 1001,
+        'dt_utils_datatable_api_name': 'mock_data_table',
+        'dt_utils_sort_by': 'dt_col_status',
+        'dt_utils_sort_direction': {'name': 'ASC'}
+    }
+
     output = {
       'inputs': {
         'dt_utils_datatable_api_name': 'mock_data_table',
@@ -87,7 +94,100 @@ class TestDtUtilsGetRows:
       ]
     }
 
-    @pytest.mark.parametrize("mock_inputs, expected_results", [(inputs, output)])
+    get_all_rows_output = {
+      'success': True,
+      'inputs': {
+        'incident_id': 1001,
+        'dt_utils_datatable_api_name': 'mock_data_table',
+        'dt_utils_sort_by': 'dt_col_status',
+        'dt_utils_sort_direction': 'ASC',
+        'dt_utils_max_rows': None,
+        'dt_utils_search_column': None,
+        'dt_utils_search_value': None
+      },
+      'rows': [
+        {
+          'id': 3,
+          'cells': {
+            'dt_col_id': {
+              'row_id': 3,
+              'id': 'dt_col_id',
+              'value': 3003
+            },
+            'dt_col_name': {
+              'row_id': 3,
+              'id': 'dt_col_name',
+              'value': 'Mary Blogs'
+            },
+            'dt_col_email': {
+              'row_id': 3,
+              'id': 'dt_col_email',
+              'value': 'mary@example.com'
+            },
+            'dt_col_status': {
+              'row_id': 3,
+              'id': 'dt_col_status',
+              'value': 'Active'
+            }
+          }
+        },
+        {
+          'id': 1,
+          'cells': {
+            'dt_col_id': {
+              'row_id': 1,
+              'id': 'dt_col_id',
+              'value': 3001
+            },
+            'dt_col_name': {
+              'row_id': 1,
+              'id': 'dt_col_name',
+              'value': 'Joe Blogs'
+            },
+            'dt_col_email': {
+              'row_id': 1,
+              'id': 'dt_col_email',
+              'value': 'joe@example.com'
+            },
+            'dt_col_status': {
+              'row_id': 1,
+              'id': 'dt_col_status',
+              'value': 'In Progress'
+            }
+          }
+        },
+        {
+          'id': 2,
+          'cells': {
+            'dt_col_id': {
+              'row_id': 2,
+              'id': 'dt_col_id',
+              'value': 3002
+            },
+            'dt_col_name': {
+              'row_id': 2,
+              'id': 'dt_col_name',
+              'value': 'Mary Blogs'
+            },
+            'dt_col_email': {
+              'row_id': 2,
+              'id': 'dt_col_email',
+              'value': 'mary@example.com'
+            },
+            'dt_col_status': {
+              'row_id': 2,
+              'id': 'dt_col_status',
+              'value': 'In Progress'
+            }
+          }
+        }
+      ]
+    }
+
+    @pytest.mark.parametrize("mock_inputs, expected_results", [
+      (inputs, output),
+      (get_all_rows_inputs, get_all_rows_output)
+    ])
     def test_success(self, circuits_app, mock_inputs, expected_results):
         """ Test calling with sample values for the parameters """
 

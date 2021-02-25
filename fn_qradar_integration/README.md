@@ -138,6 +138,10 @@ The app **does/does not** support a proxy server.
 
 ---
 
+## Package Dependencies
+- resilient_circuits version 30 or later
+- python version 2.7.10 or later, or 3.6 or later
+
 ## Installation
 
 ### Install
@@ -888,14 +892,6 @@ qradar_reference_set
 | Source | `source` | `text` | how this value is added to the reference set |
 
 ---
-
-## Custom Fields
-| Label | API Access Name | Type | Prefix | Placeholder | Tooltip |
-| ----- | --------------- | ---- | ------ | ----------- | ------- |
-| qradar_id | `qradar_id` | `text` | `properties` | - | - |
-
----
-
 
 ## Rules
 | Rule Name | Object | Workflow Triggered |

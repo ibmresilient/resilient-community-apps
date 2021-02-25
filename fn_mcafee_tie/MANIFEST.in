@@ -4,5 +4,5 @@ include entrypoint.sh
 include README.md
 include fn_mcafee_tie/*
 include fn_mcafee_tie/LICENSE
-include fn_mcafee_tie/util/*
+recursive-include fn_mcafee_tie/util *
 include fn_mcafee_tie/icons/*
