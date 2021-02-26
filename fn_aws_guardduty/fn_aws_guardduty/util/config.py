@@ -24,7 +24,7 @@ aws_gd_master_region = <AWS_GUARDDUTY_DEFAULT_REGION>
 aws_gd_regions = <AWS_GUARDDUTY_REGION_REGEX>
 # Interval to refresh regions information (in minutes).
 aws_gd_regions_interval = <REGIONS_INTERVAL>
-# Interval to poll Guardduty for findings (in minutes).
+# Interval to poll GuardDuty for findings (in minutes).
 # To turn the poller off use value 0
 aws_gd_polling_interval = <POLLING_INTERVAL>
 # Optional - Severity threshold (integer) criteria to filter findings results.

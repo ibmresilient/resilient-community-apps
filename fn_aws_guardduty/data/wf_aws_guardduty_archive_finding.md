@@ -5,7 +5,7 @@
 
 # Example: AWS GuardDuty: Archive Finding
 
-## Function - AWS GUARDDUTY: Archive finding
+## Function - AWS GuardDuty: Archive finding
 
 ### API Name
 `func_aws_guardduty_archive_finding`

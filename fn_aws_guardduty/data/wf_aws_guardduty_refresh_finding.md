@@ -5,7 +5,7 @@
 
 # Example: AWS GuardDuty: Refresh Finding Details
 
-## Function - AWS GUARDDUTY: Refresh Finding
+## Function - AWS GuardDuty: Refresh Finding
 
 ### API Name
 `func_aws_guardduty_refresh_finding`
