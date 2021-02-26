@@ -28,9 +28,9 @@
   - [Install](#install)
   - [App Configuration](#app-configuration)
   - [Custom Layouts](#custom-layouts)
-- [Poller - AWS GUARDDUTY: Escalate Findings](#poller---aws-guardduty-escalate-findings)
-- [Function - AWS GUARDDUTY: Refresh Finding](#function---aws-guardduty-refresh-finding)
-- [Function - AWS GUARDDUTY: Archive finding](#function---aws-guardduty-archive-finding)
+- [Poller - AWS GuardDuty: Escalate Findings](#poller---aws-guardduty-escalate-findings)
+- [Function - AWS GuardDuty: Refresh Finding](#function---aws-guardduty-refresh-finding)
+- [Function - AWS GuardDuty: Archive finding](#function---aws-guardduty-archive-finding)
 - [Data Table - GuardDuty Finding Overview](#data-table---guardduty-finding-overview)
 - [Data Table - GuardDuty Resource Affected](#data-table---guardduty-resource-affected)
 - [Data Table - GuardDuty Resource - Instance Details](#data-table---guardduty-resource---instance-details)
@@ -148,7 +148,7 @@ The following table provides the settings you need to configure the app. These s
 | **aws_gd_master_region** | Yes | `us-west-1` | *Default or master region for the integration.* |
 | **aws_gd_regions** | Yes | `"^us.*"` | *Filter by GuardDuty region names. Can be a string or regular expression.* |
 | **aws_gd_regions_interval** | Yes | `60` | *Interval to refresh regions information (in minutes).* |
-| **aws_gd_polling_interval** | Yes | `15` | *Interval to poll Guardduty for findings (in minutes).* |
+| **aws_gd_polling_interval** | Yes | `15` | *Interval to poll GuardDuty for findings (in minutes).* |
 | **aws_gd_severity_threshold** | No | `7` | *Severity threshold (int) to use in criterion to filter findings .* |
 | **aws_gd_lookback_interval** | No | `60` | *How long, (in minutes) to check back for previous findings at startup. Filter to process only more recent findings.* |
 | **aws_gd_close_incident_template** | No | `` | *User defined JSON template file to use for closing Resilient incidents.* |
@@ -183,7 +183,7 @@ The following screenshot shows the GuardDuty data tables added to the GuardDuty 
   ![screenshot: custom_layouts_datatables](./doc/screenshots/custom_layouts_datatables.png)
 
 ---
-## Poller - AWS GUARDDUTY: Escalate Findings
+## Poller - AWS GuardDuty: Escalate Findings
 The GuardDuty integration poller starts querying GuardDuty for findings as soon as the app begins running.
 
 The poller provide the following functionality.
@@ -219,7 +219,7 @@ Note: See the data tables section for examples of data tables added by the polle
 
 ---
 
-## Function - AWS GUARDDUTY: Refresh Finding
+## Function - AWS GuardDuty: Refresh Finding
 Resilient function to refresh AWS GuardDuty finding details in an incident.
 
   ![screenshot: fn-aws-guardduty-refresh-finding](./doc/screenshots/fn-aws-guardduty-refresh-finding.png)
@@ -393,7 +393,7 @@ if __name__ == "__main__":
 </details>
 
 ---
-## Function - AWS GUARDDUTY: Archive finding
+## Function - AWS GuardDuty: Archive finding
 Resilient function to archive an AWS GuardDuty finding when the corresponding incident is closed.
 
   ![screenshot: fn-aws-guardduty-archive-finding](./doc/screenshots/fn-aws-guardduty-archive-finding.png)
@@ -664,14 +664,14 @@ gd_action_details
 | Label | API Access Name | Type | Prefix | Placeholder | Tooltip |
 | ----- | --------------- | ---- | ------ | ----------- | ------- |
 | AWS GuardDuty Finding Arn | `aws_guardduty_finding_arn` | `text` | `properties` | - | Arn of the GuardDuty finding. |
-| AWS GuardDuty Resource Updated At | `aws_guardduty_finding_updated_at` | `text` | `properties` | The last time this finding was updated with new activity matching the pattern that prompted GuardDuty to generate this finding.  | - |
+| AWS GuardDuty Resource Updated At | `aws_guardduty_finding_updated_at` | `text` | `properties` | - | The last time this finding was updated with new activity matching the pattern that prompted GuardDuty to generate this finding.  |
 | AWS GuardDuty Resource Type | `aws_guardduty_resource_type` | `text` | `properties` | - | The type of the affected resource of the GuardDuty finding. This value is either AccessKey, S3 bucket or Instance.  |
 | AWS GuardDuty Finding Id | `aws_guardduty_finding_id` | `text` | `properties` | - | A unique Finding ID for this GuardDuty finding type and set of parameters. New occurrences of activity matching this pattern will be aggregated to the same ID.  |
-| AWS GuardDuty Region | `aws_guardduty_region` | `text` | `properties` | - | The AWS Region in which the GuarDuty finding was generated.  |
+| AWS GuardDuty Region | `aws_guardduty_region` | `text` | `properties` | - | The AWS Region in which the GuardDuty finding was generated.  |
 | AWS GuardDuty Archived | `aws_guardduty_archived` | `text` | `properties` | - |  A true or false value that indicates whether this is GuardDuty finding has been archived.  |
 | AWS GuardDuty Detector Id | `aws_guardduty_detector_id` | `text` | `properties` | - | The detector ID where the GuardDuty finding was detected. |
 | AWS GuardDuty Count | `aws_guardduty_count` | `text` | `properties` | - | The number of times GuardDuty has aggregated an activity matching this pattern to this finding ID.  |
-| AWS GuardDuty Trigger Refresh | `aws_guardduty_trigger_refresh` | `boolean` | `properties` | False | Used by integration to trigger an refresh of GuarDuty incidents. |
+| AWS GuardDuty Trigger Refresh | `aws_guardduty_trigger_refresh` | `boolean` | `properties` | False | Used by integration to trigger an refresh of GuardDuty incidents. |
 | AWS GuardDuty Finding Type | `aws_guardduty_finding_type` | `text` | `properties` | - | The type of activity that triggered the GuardDuty finding. |
 
 ---
