@@ -38,8 +38,8 @@ setup(
         * A function to refresh a Resilient incident with the latest information from the corresponding GuardDuty finding.
         """,
     install_requires=[
-        'resilient_circuits>=35.0.0,<v39.0.0',
-        'resilient_lib>=35.0.0',
+        'resilient_circuits>=40.0.0',
+        'resilient_lib>=40.0.0',
         'boto3>=1.16.19'
     ],
     packages=find_packages(),
