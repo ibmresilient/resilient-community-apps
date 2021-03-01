@@ -52,4 +52,6 @@ reload=False
 reload_query_api_method=False
 # feed_data is the default message destination that will be listened to
 queue=feed_data
+# change setting to true to capture contents of an attachment 
+include_attachment_data = false
 """
