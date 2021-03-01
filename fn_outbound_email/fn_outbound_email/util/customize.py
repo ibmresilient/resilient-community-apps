@@ -22,7 +22,7 @@ def codegen_reload_data():
         "package": u"fn_outbound_email",
         "message_destinations": [u"email_outbound"],
         "functions": [u"send_email"],
-        "workflows": [u"example_send_incident_email_text", u"example_send_incident_email_html"],
+        "workflows": [u"example_send_incident_email_html", u"example_send_incident_email_text"],
         "actions": [u"Example: Send Incident Email Text", u"Example: Send Incident Email HTML"],
         "incident_fields": [],
         "incident_artifact_types": [],
@@ -45,8 +45,8 @@ def customization_data(client=None):
     - Functions:
         - send_email
     - Workflows:
-        - example_send_incident_email_text
         - example_send_incident_email_html
+        - example_send_incident_email_text
     - Rules:
         - Example: Send Incident Email Text
         - Example: Send Incident Email HTML
