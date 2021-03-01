@@ -10,7 +10,7 @@ setup(
     version='1.1.1',
     license='MIT',
     author='IBM Resilient',
-    url='https://www.ibm.com/security/intelligent-orchestration/resilient',
+    url='https://github.com/ibmresilient/resilient-community-apps/tree/master/fn_outbound_email',
     description="Resilient Circuits Components for 'fn_outbound_email'",
     long_description="Resilient Circuits Components for 'fn_outbound_email'",
     install_requires=[

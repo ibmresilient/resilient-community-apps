@@ -8,6 +8,7 @@
   - [Function - Send Email HTML](#function---send-email-html)
   - [Function - Send Email Text](#function---send-email-text)
   - [Rules](#rules)
+  - [Support](#support)
 
 ---
 
@@ -137,3 +138,6 @@ results = {
 | Example: Send Incident Email Text | incident | `example_send_incident_email_text` |
 
 ---
+
+## Support
+[My Support link](https://ibm.com/mysupport)

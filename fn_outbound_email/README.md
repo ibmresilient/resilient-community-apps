@@ -178,4 +178,4 @@ There are several ways to verify the successful operation of a function.
 
 
 ## Support
-https://www.ibm.com/security/intelligent-orchestration/resilient
+[My Support link](https://ibm.com/mysupport)
