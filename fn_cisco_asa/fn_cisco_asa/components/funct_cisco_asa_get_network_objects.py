@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
 """Function implementation"""
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import ResultPayload, RequestsCommon, validate_fields
+from fn_cisco_asa.lib.cisco_asa_client import CiscoASAClient
 
 PACKAGE_NAME = "fn_cisco_asa"
 FN_NAME = "cisco_asa_get_network_objects"
@@ -30,51 +32,23 @@ class FunctionComponent(ResilientComponent):
             rc = RequestsCommon(self.opts, self.fn_options)
             rp = ResultPayload(PACKAGE_NAME, **kwargs)
 
-            # Get the wf_instance_id of the workflow this Function was called in
-            wf_instance_id = event.message["workflow_instance"]["workflow_instance_id"]
 
-            yield StatusMessage("Starting '{0}' running in workflow '{1}'".format(FN_NAME, wf_instance_id))
+            yield StatusMessage("Starting '{0}'".format(FN_NAME))
 
             # Get and validate app configs
-            # app_configs = validate_fields([
-            #     {"name": "api_key", "placeholder": "<your-api-key>"},
-            #     {"name": "base_url", "placeholder": "<api-base_url>"}],
-            #     self.fn_options)
+            #app_configs = validate_fields(["host", "username", "password", "outbound_network_object_group", "inbound_network_object_group", "is_ASAv"]
 
-            # Get and validate required function inputs:
-            # If input is optional, remove it from list
-            # Optional inputs will still be available in fn_inputs
-            fn_inputs = validate_fields(
-                ["ciscso_asa_network_object_group"],
-                kwargs)
-
-            LOG.info("'{0}' inputs: %s", fn_inputs)
+            # Get the function parameters:
+            host = kwargs.get("cisco_asa_host")  # text
+            network_object_group = kwargs.get("cisco_asa_network_object_group")  # text
+            LOG.info(u"cisco_asa_network_object_group: %s", network_object_group)
 
             yield StatusMessage("Validations complete. Starting business logic")
 
-            ##############################################
-            # PUT YOUR FUNCTION IMPLEMENTATION CODE HERE #
-            ##############################################
+            asa = CiscoASAClient(self.fn_options, rc)
+            response = asa.get_network_object_group(network_object_group)
 
-            # Call API implemtation example:
-            # params = {
-            #     "key": app_configs.get("api_key"),
-            #     "ip_address": fn_inputs.get("artifact_value")
-            # }
-            #
-            # response = rc.execute_call_v2(
-            #     method="get",
-            #     url=app_configs.get("api_url")
-            #     params=params
-            # )
-            #
-            # results = rp.done(True, response.json())
-
-            ##############################################
-
-            yield StatusMessage("Finished '{0}' that was running in workflow '{1}'".format(FN_NAME, wf_instance_id))
-
-            results = rp.done(True, {"mock_key": "Mock Value!"})
+            results = rp.done(True, response)
 
             LOG.info("'%s' complete", FN_NAME)
 
