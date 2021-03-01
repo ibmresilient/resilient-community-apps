@@ -74,3 +74,25 @@ class TestAwsGdPoller:
             assert isinstance(result["Criterion"]["updatedAt"]["Gte"], int)
             if aws_gd_severity_threshold:
                 assert result["Criterion"]["severity"]["Gte"] == expected_results
+
+    @pytest.mark.parametrize("aws_gd_severity_threshold, aws_gd_lookback_interval, initial_lookback, last_update, expected_results", [
+        (None, None, None, None, {'Criterion': {'service.archived': {'Eq': ['false']}}}),
+        (7, None, None, None, {'Criterion': {'service.archived': {'Eq': ['false']}, 'severity': {'Gte': 7}}}),
+        (None, 2, 1.61461300782e+12, None, None),
+        (7, 2, 1.61461300782e+12, None, 7),
+    ])
+    def test_set_criteria_new_region(self, aws_gd_severity_threshold, aws_gd_lookback_interval, initial_lookback, last_update, expected_results):
+
+        aws_gd_poller = AwsGdPoller({}, get_config(aws_gd_severity_threshold=aws_gd_severity_threshold,
+                                                   aws_gd_lookback_interval=aws_gd_lookback_interval), 2)
+        if last_update:
+            aws_gd_poller.last_update = last_update
+        if initial_lookback:
+            aws_gd_poller.initial_lookback = initial_lookback
+        result = aws_gd_poller.set_criteria(new_region=True)
+        if not aws_gd_lookback_interval and not last_update:
+            assert result == expected_results
+        else:
+            assert isinstance(result["Criterion"]["updatedAt"]["Gte"], int)
+            if aws_gd_severity_threshold:
+                assert result["Criterion"]["severity"]["Gte"] == expected_results

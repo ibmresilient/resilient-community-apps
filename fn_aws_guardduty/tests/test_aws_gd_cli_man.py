@@ -76,9 +76,13 @@ class TestAwsGdCliMan:
     def test_refresh_clients(self, mock_cli, aws_gd_regions, aws_gd_regions_new, expected_results):
         aws_gd_man = AwsGdCliMan({}, get_config(aws_gd_regions=aws_gd_regions))
         assert len(aws_gd_man.clients) == expected_results[0]
+        assert len(aws_gd_man.available_regions) == expected_results[0]
         aws_gd_man.aws_gd_regions = aws_gd_regions_new
         aws_gd_man.refresh_clients()
         assert len(aws_gd_man.clients) == expected_results[1]
+        assert len(aws_gd_man.available_regions) == expected_results[1]
+        for gd_region, gd_client_info in aws_gd_man.clients.items():
+            assert gd_client_info.get("is_new", False) == True
 
     @patch('fn_aws_guardduty.lib.aws_gd_cli_man.AwsGdClient', side_effect=mocked_gd_client)
     @pytest.mark.parametrize("expected_results", [
