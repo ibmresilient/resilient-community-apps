@@ -38,10 +38,14 @@ class AwsGdCliMan():
         self.aws_gd_regions = function_options.get("aws_gd_regions").strip("'\"")
         # Test self.aws_gd_regions is a valid regex expression.
         self.proxies = RequestsCommon(opts, function_options).get_proxies()
+        self.startup = True
+        self.available_regions = []
         if not is_regex(self.aws_gd_regions):
             raise ValueError("The query filter '{}' is not a valid regular expression."
                              .format(repr(self.aws_gd_regions)))
         self._get_clients()
+        # Unset startup flag
+        self.startup = False
 
     def _get_clients(self):
         """ Create a hash of GuardDuty clients for accessible regions.
@@ -58,7 +62,9 @@ class AwsGdCliMan():
 
         for region in [r for r in self.get_regions()
                        if re.search(regex, r, re.IGNORECASE)]:
+            is_new = False
             aws_gd = AwsGdClient(self.opts, self.function_opts, region=region)
+
             try:
                 detectors = aws_gd.get("list_detectors")
 
@@ -70,12 +76,18 @@ class AwsGdCliMan():
                     continue
                 raise invalid_ex
 
+            if not self.startup and region not in self.available_regions:
+                # Set flag for newly accessible region.
+                is_new = True
+
             self.clients.update({
                 region: {
                     "client": aws_gd,
-                    "detectors": detectors
+                    "detectors": detectors,
+                    "is_new": is_new
                 }
             })
+            self.available_regions.append(region)
 
     def get_regions(self):
         """ Get a list of regions.

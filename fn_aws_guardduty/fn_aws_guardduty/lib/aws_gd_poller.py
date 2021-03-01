@@ -45,6 +45,8 @@ class AwsGdPoller():
         # Use last_update to ensure full list of findings returned only on initial run loop
         # Subsequently only return findings created/updated since last execution.
         self.last_update = None
+        # Use initial_lookback if new region added and aws_gd_lookback_interval specified.
+        self.initial_lookback = None
 
     def run(self):
         """Run polling thread, alternately check for new data and wait"""
@@ -74,9 +76,12 @@ class AwsGdPoller():
 
                 # Get the DetectorId for the specified AWS Region.
                 detectorid = detectors[0]
-
+                criteria = f_criteria
+                if gd_client_info.get("is_new", False):
+                    criteria = self.set_criteria(new_region=True)
+                    del gd_client_info["is_new"]
                 # Get list of findings ids if any for DetectorId
-                findings_list = aws_gd.get("list_findings", DetectorId=detectorid, FindingCriteria=f_criteria)
+                findings_list = aws_gd.get("list_findings", DetectorId=detectorid, FindingCriteria=criteria)
 
                 if not findings_list:
                     LOG.debug("No GuardDuty finding updates found for detector ID %s  in region %s.", detectorid, gd_region)
@@ -171,26 +176,32 @@ class AwsGdPoller():
             if (now - aws_cli_man.timestamp).total_seconds() > (self.regions_interval * WAIT_MULTIPLIER):
                 aws_cli_man.refresh_clients()
 
-    def set_criteria(self):
+    def set_criteria(self, new_region=False):
         """
         Create criteria to filter findings data from GuardDuty.
 
+        :param new_region: Optional boolean if new regions accessible..
         :return fc: Return criterion dict
         """
         f_criteria = FCrit()
         # Only return current findings omit archived findings.
         f_criteria.set_archived(value="false")
         # Add severity criterion if setting enabled.
-        # Add severity criterion if setting enabled.
         if self.aws_gd_severity_threshold:
             f_criteria.set_severity(self.aws_gd_severity_threshold)
 
-        if self.last_update:
+        if new_region:
+            if self.initial_lookback:
+                # Set criteria for findings from inital lookback interval.
+                f_criteria.set_update(self.initial_lookback)
+            LOG.info("First Run for a new client in progress - this may take a while.")
+        elif self.last_update:
             # Set criteria for findings updated since last run through loop.
             f_criteria.set_update(get_lastrun_unix_epoch(self.last_update))
         elif self.aws_gd_lookback_interval:
-            # Set criteria for previous findings in lookback interval.
-            f_criteria.set_update(get_lastrun_unix_epoch(self.aws_gd_lookback_interval))
+            # Set criteria for previous findings in lookback interval epoch value.
+            self.initial_lookback = get_lastrun_unix_epoch(self.aws_gd_lookback_interval)
+            f_criteria.set_update(self.initial_lookback)
         else:
             # First run no criterion set for updates, fetch all may take a long time.
             LOG.info("First Run in progress - this may take a while.")
