@@ -6,7 +6,6 @@ import logging
 import os
 import time
 import datetime as dt
-from resilient import SimpleHTTPException
 from resilient_lib import close_incident
 from fn_aws_guardduty.lib.aws_gd_cli_man import AwsGdCliMan
 import fn_aws_guardduty.util.config as config
@@ -124,8 +123,8 @@ class AwsGdPoller():
                                 i_response = res_svc.create_incident(finding_payload.payload)
 
                                 if i_response:
-                                    LOG.info("Incident '{}' successfully created for finding '{}' in region '{}'."
-                                             .format(i_response['id'], finding["Id"], gd_region))
+                                    LOG.info("Incident '%s' successfully created for finding '%s' in region '%s'.",
+                                             i_response['id'], finding["Id"], gd_region)
                                     # Create data tables.
                                     if finding_payload.data_tables:
                                         res_svc.add_datatables(i_response['id'], finding_payload.data_tables)
