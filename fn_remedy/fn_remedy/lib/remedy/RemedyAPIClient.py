@@ -34,7 +34,6 @@ class RemedyClient(RemedyAPI):
         data = {"username": self.username, "password": self.password}
 
         response = self.rc.execute_call_v2("POST", url, data=data, headers=self.authHeaders, verify=self.verify)
-        response.raise_for_status()
         token = response.content
         encoding = response.apparent_encoding
         token = token.decode(encoding)
