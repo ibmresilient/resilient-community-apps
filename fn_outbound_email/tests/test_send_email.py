@@ -36,11 +36,11 @@ class TestSendEmail:
         assert func is not None
 
     @pytest.mark.livetest #can be removed in future when attachment mock endpoint is updated
-    @pytest.mark.parametrize("mail_from, mail_incident_id, mail_to, mail_cc, mail_bcc, mail_subject, mail_body_text, expected_results", [
-        ("text", 123, "text", "text", "text", "text", "text", {"value": "xyz"}),
-        ("text", 123, "text", "text", "text", "text", "text", {"value": "xyz"})
+    @pytest.mark.parametrize("mail_from, mail_incident_id, mail_to, mail_cc, mail_bcc, mail_subject, mail_body_text", [
+        ("a@example.com", 123, "b@example.com", "c@example.com", "d@example.com", "text", "text"),
+        ("a@example.com", 123, "b@example.com", "c@example.com", "d@example.com", "text", "text")
     ])
-    def test_success(self, circuits_app, mail_from, mail_incident_id, mail_to, mail_cc, mail_bcc, mail_subject, mail_body_text, expected_results):
+    def test_success(self, circuits_app, mail_from, mail_incident_id, mail_to, mail_cc, mail_bcc, mail_subject, mail_body_text):
         """ Test calling with sample values for the parameters """
         function_params = { 
             "mail_from": mail_from,
@@ -52,4 +52,4 @@ class TestSendEmail:
             "mail_body_text": mail_body_text
         }
         results = call_send_email_function(circuits_app, function_params)
-        assert(expected_results == results)
+        assert(results['success'])
