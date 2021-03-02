@@ -66,6 +66,7 @@ fn_grr_search
 fn_hibp
 fn_html2pdf
 fn_icdx
+fn_incident_utils
 fn_ioc_parser_v2
 fn_ip_void
 fn_ipinfo
@@ -96,7 +97,9 @@ fn_phish_tank
 fn_pipl
 fn_proofpoint_tap
 fn_proofpoint_trap
+fn_pulsedive
 fn_qradar_advisor
+fn_qradar_enhanced_data
 fn_qradar_integration
 fn_query_tor_network
 fn_res_to_icd
@@ -126,6 +129,7 @@ fn_vmray_analyzer
 fn_watson_translate
 fn_whois
 fn_whois_rdap
+fn_wiki
 fn_xforce
 older
 rc-cts-abuseipdb
