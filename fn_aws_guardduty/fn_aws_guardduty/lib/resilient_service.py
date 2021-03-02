@@ -3,7 +3,6 @@
 # pragma pylint: disable=unused-argument, no-self-use
 """ Functions accessing Resilient """
 import logging
-import pprint
 import re
 
 import resilient
@@ -176,7 +175,8 @@ class ResSvc(ResilientComponent):
                 paged_results = self.rest_client().post(query_uri, query)
 
         except Exception as err:
-            raise Exception("Exception '{}' while trying to get list of Resilient incidents.".format(err))
+            LOG.error("Got Exception '%s' while trying to get list of Resilient incidents.", err)
+            raise Exception(err)
 
     def update_incident_properties(self, incident_id, fields):
         """ Update Resilient incident custom property or fields.

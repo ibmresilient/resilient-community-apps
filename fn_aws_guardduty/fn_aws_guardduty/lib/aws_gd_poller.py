@@ -218,8 +218,12 @@ class AwsGdPoller():
         :param detectorid: GuardDuty detector id.
         """
         # Get open Resilient incidents in region as dict of finding id keys and resilient id values.
-        res_open_findings = {inc["properties"]["aws_guardduty_finding_id"]:inc["id"]
-                             for inc in res_svc.page_incidents(region=region, f_fields=["Id", "DetectorId"])}
+        try:
+            res_open_findings = {inc["properties"]["aws_guardduty_finding_id"]:inc["id"]
+                                 for inc in res_svc.page_incidents(region=region, f_fields=["Id", "DetectorId"])}
+        except Exception as ex:
+            LOG.error("Something went wrong when attempting to get list of Resilient incidents")
+            return
 
         # Set filter to return only current (non-archived) findings.
         f_criteria = FCrit()
