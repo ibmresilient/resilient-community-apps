@@ -357,6 +357,7 @@ class TypeInfo(object):
                 obj = payload.get(prefix)
 
             if obj is not None:
+                LOG.debug(obj) # TODO
                 obj = obj.get(field['name'])
 
         return obj
@@ -413,13 +414,14 @@ class TypeInfo(object):
         return value
 
     @staticmethod
-    def translate_value(type_info, field, value):
-        mapping = {
+    def get_default_mapping():
+        return {
             "select_owner": TypeInfo.translate_value_select,
             "select_user": TypeInfo.translate_value_select,
             "select": TypeInfo.translate_value_select,
             "multiselect": TypeInfo.translate_value_multiselect,
             "multiselect_members": TypeInfo.translate_value_multiselect,
+            "multiselect_tagref": TypeInfo.translate_value_list,
             "datepicker": TypeInfo.translate_value_datetimepicker,
             "datetimepicker": TypeInfo.translate_value_datetimepicker,
             "textarea": TypeInfo.translate_value_textarea,
@@ -428,12 +430,15 @@ class TypeInfo(object):
             "list": TypeInfo.translate_value_list
         }
 
+    @staticmethod
+    def translate_value(type_info, field, value):
+        mapping = TypeInfo.get_default_mapping()
+
         if value is not None:
             input_type = field['input_type']
-            for rule, rule_function in mapping.items():
-                if input_type == rule:
-                    value = rule_function(type_info, field, value)
-                    break
+            if input_type in mapping:
+                rule_function = mapping[input_type]
+                value = rule_function(type_info, field, value)
 
             if isinstance(value, list):
                 value = mapping["list"](type_info, field, value)
