@@ -205,14 +205,18 @@ class RunCmd():
         # add to known hosts
         client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         try:
-            client.connect(hostname=self.remote_server, username=self.remote_user, password=self.remote_password)
+            client.connect(hostname=self.remote_server, username=self.remote_user, 
+                           password=self.remote_password)
 
             stdin, stdout, stderr = client.exec_command(self.commandline)
             self.stdoutdata = stdout.read().decode()
             self.stderrdata = stderr.read().decode()
-            self.retcode = client.recv_exit_status()
-        except:
-            LOG.error("Unable to run cmd: %s on remote server: %s", self.remote_server, self.commandline)
+            self.retcode = stdout.channel.recv_exit_status()
+        except Exception as err:
+            self.stderrdata = str(err)
+            LOG.error(str(err))
+            LOG.error("Unable to run cmd: %s on remote server: %s", self.commandline,
+                                                                    self.remote_server)
 
 
     def make_result(self):

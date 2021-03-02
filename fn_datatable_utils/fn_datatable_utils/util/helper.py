@@ -31,29 +31,33 @@ class RESDatatable(object):
             self.data = self.res_client.get(uri)
             self.rows = self.data["rows"]
         except Exception:
-            raise ValueError("Failed to get {0} Datatable".format(self.api_name))
+            raise ValueError(u"Failed to get {0} Datatable".format(self.api_name))
 
     def get_rows(self, max_rows=0, sort_by=None, sort_direction="ASC", search_column=None, search_value=None):
         """ Searches and returns rows based on a search/sort criteria, else None """
 
         if self.rows:
-            rows_to_return = []
             is_reverse = True if sort_direction == "DESC" else False
 
-            for row in self.rows:
-                cells = row["cells"]
-                if search_column not in cells:
-                    raise ValueError("{0} is not a valid column api name for the data table: {1}".format(search_column, self.api_name))
-                column = cells.get(search_column)
-                value = column.get("value", None)
-                if value is not None:
-                    if value == search_value:
-                        rows_to_return.append(row)
+            if not search_column:
+                rows_to_return = self.rows
+                cells = self.rows[0]["cells"]
+            else:
+                rows_to_return = []
+                for row in self.rows:
+                    cells = row["cells"]
+                    if search_column not in cells:
+                        raise ValueError(u"{0} is not a valid column api name for the data table: {1}".format(search_column, self.api_name))
+                    column = cells.get(search_column, {})
+                    value = column.get("value", None)
+                    if value is not None:
+                        if value == search_value:
+                            rows_to_return.append(row)
 
             if sort_by:
                 if sort_by not in cells:
                     raise ValueError(
-                        "{0} is not a valid column api name for the data table: {1}".format(sort_by, self.api_name))
+                        u"{0} is not a valid column api name for the data table: {1}".format(sort_by, self.api_name))
                 rows_to_return = sorted(rows_to_return, key=lambda item: item['cells'][sort_by].get('value'),
                                         reverse=is_reverse)
             if max_rows != 0:
@@ -78,7 +82,7 @@ class RESDatatable(object):
                 cells = row["cells"]
 
                 if search_column not in cells:
-                    raise ValueError("{0} is not a valid column api name in for the data table {1}".format(search_column, self.api_name))
+                    raise ValueError(u"{0} is not a valid column api name in for the data table {1}".format(search_column, self.api_name))
                 column = cells.get(search_column)
                 value = column.get("value", None)
                 if value is not None:
@@ -137,7 +141,7 @@ class RESDatatable(object):
                 return_value = {"error": err_msg}
 
             else:
-                raise ValueError("Could not update row in {0}. Unknown Error".format(self.api_name))
+                raise ValueError(u"Could not update row in {0}. Unknown Error".format(self.api_name))
 
         return return_value
 
@@ -154,16 +158,12 @@ class RESDatatable(object):
             return_value = self.res_client.delete(uri)
 
         except Exception as err:
-            if err:
-                return_value = {"error": err}
-
-            else:
-                raise ValueError("Could not delete row in {0}. Unknown Error: {1}".format(self.api_name, err))
+            return_value = {"error": str(err)}
 
         return return_value
 
     def delete_rows(self, rows_ids=None, search_column=None, search_value=None, 
-                    row_id=None, workflow_id=None):
+                    delete_all_rows=False, row_id=None, workflow_id=None):
         """ Deletes rows.
             Returns the response from Resilient API
             or dict with the entry 'error'. """
@@ -172,8 +172,11 @@ class RESDatatable(object):
         rows_ids_list = []
         queued_row_id = None
 
+        if delete_all_rows:
+            rows_ids_list = [row["id"] for row in self.rows]
+
         # Search by rows_ids if defined
-        if rows_ids:
+        elif rows_ids:
             # Convert input str to a list of rows ids
             rows_ids_input = json.loads(rows_ids)
 
@@ -192,7 +195,7 @@ class RESDatatable(object):
             for row in self.rows:
                 cells = row["cells"]
                 if search_column not in cells:
-                    raise ValueError("{0} is not a valid column api name in for the data table {1}".format(search_column, self.api_name))
+                    raise ValueError(u"{0} is not a valid column api name in for the data table {1}".format(search_column, self.api_name))
                 if "value" in cells[search_column] and cells[search_column]["value"] == search_value:
                     if row["id"] == row_id:
                         LOG.info("Queuing delete of current row: %s", row_id)
@@ -249,7 +252,7 @@ class RESDatatable(object):
             self.data = self.res_client.get(uri)
             return self.data["fields"]
         except Exception:
-            raise ValueError("Failed to get {0} Datatable".format(self.api_name))
+            raise ValueError(u"Failed to get {0} Datatable".format(self.api_name))
 
     def dt_add_rows(self, rows):
         """ Adds rows to datatable
@@ -305,9 +308,9 @@ class RESDatatable(object):
             'hints': [row_id]
         }
 
-def get_function_input(inputs, input_name, optional=False):
+def get_function_input(inputs, input_name, optional=False, default=None):
     """Given input_name, checks if it defined. Raises ValueError if a mandatory input is None"""
-    the_input = inputs.get(input_name)
+    the_input = inputs.get(input_name, default)
 
     if the_input is None and optional is False:
         err = "'{0}' is a mandatory function input".format(input_name)
@@ -342,11 +345,11 @@ def validate_search_inputs(**options):
         if options["rows_ids"] and a_search_var_defined:
             return_value["valid"] = False
             return_value["msg"] = "Only 'rows_ids' or the 'search_column and search_value' pair can be defined"
-        elif not options["rows_ids"] and not a_search_var_defined:
+        elif not options["rows_ids"] and not a_search_var_defined and options.get('search_criteria_required', True):
             return_value["valid"] = False
             return_value["msg"] = "You must define either 'rows_ids' or the 'search_column and search_value' pair"
     elif not is_row_id and not is_rows_ids:
-        if not a_search_var_defined:
+        if not a_search_var_defined and options.get('search_criteria_required', True):
             return_value["valid"] = False
             return_value["msg"] = "You must define the 'search_column and search_value' pair"
         if is_reverse and not is_sort_by_var_defined:

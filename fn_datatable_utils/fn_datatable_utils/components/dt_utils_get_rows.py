@@ -56,7 +56,8 @@ class FunctionComponent(ResilientComponent):
             valid_search_inputs = validate_search_inputs(sort_by=inputs["dt_utils_sort_by"],
                                                          sort_direction=inputs["dt_utils_sort_direction"],
                                                          search_column=inputs["dt_utils_search_column"],
-                                                         search_value=inputs["dt_utils_search_value"])
+                                                         search_value=inputs["dt_utils_search_value"],
+                                                         search_criteria_required=False)
 
             if not valid_search_inputs["valid"]:
                 raise ValueError(valid_search_inputs["msg"])

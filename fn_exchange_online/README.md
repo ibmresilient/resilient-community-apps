@@ -28,6 +28,9 @@
   Specify all changes in this release. Do not remove the release 
   notes of a previous release
 -->
+### v1.3.0
+* Support attaching incident attachments to a message.
+
 ### v1.2.0
 * Minor performance improvement when query "all" user mailboxes.
 * Continue querying "all" users if there is an error returned from a single call to the $batch endpoint.
@@ -53,7 +56,7 @@ The 1.1.0 release addresses performance issues when querying messages of all Exc
 
 **NOTE** Existing users running Exchange Online functions on an integration server, should save the [fn_exchange_online] section of their app.config file to another file and delete that section from the app.config file before installing the new version, as this section has changed.  After installation, run the following command to obtain the new configuration:
 ```
-  $ resilient-circuits config -u -l fn-microsoft-exchange-online
+  $ resilient-circuits config -u -l fn-exchange-online
   ```
 Edit the required configuration setting as described in the [Integration Server](#integration-server) section.
 
@@ -97,8 +100,6 @@ Microsoft Exchange Online Functions for IBM Resilient provides the capability to
 
 The integration contains the following functions:
  ![screenshot: main](./doc/screenshots/EXO-functions.png)
-
-
 
 ---
 

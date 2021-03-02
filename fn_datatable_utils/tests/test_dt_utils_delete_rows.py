@@ -45,19 +45,42 @@ class TestDtUtilsDeleteRows:
         'dt_utils_search_value': None
     }
 
+    delete_all_inputs = {
+        'incident_id': 1001,
+        'dt_utils_datatable_api_name': 'mock_data_table',
+        'dt_utils_delete_all_rows': True
+    }
+
+    delete_all_output = {
+      'inputs': {
+        'incident_id': 1001,
+        'dt_utils_datatable_api_name': 'mock_data_table',
+        'dt_utils_rows_ids': None,
+        'dt_utils_search_column': None,
+        'dt_utils_search_value': None,
+        'dt_utils_delete_all_rows': True
+      },
+      'success': True,
+      'rows_ids': [1, 2, 3]
+    }
+
     output = {
       'inputs': {
         'incident_id': 1001,
         'dt_utils_datatable_api_name': 'mock_data_table',
         'dt_utils_rows_ids': '[1,2]',
         'dt_utils_search_column': None,
-        'dt_utils_search_value': None
+        'dt_utils_search_value': None,
+        'dt_utils_delete_all_rows': False
       },
       'success': True,
       'rows_ids': [1, 2]
     }
 
-    @pytest.mark.parametrize("mock_inputs, expected_results", [(inputs, output)])
+    @pytest.mark.parametrize("mock_inputs, expected_results", [
+      (inputs, output),
+      (delete_all_inputs, delete_all_output)
+      ])
     def test_success(self, circuits_app, mock_inputs, expected_results):
         """ Test calling with sample values for the parameters """
 

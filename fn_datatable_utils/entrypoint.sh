@@ -12,5 +12,6 @@ do
     kill -9 $CIRCUITS_PID
     break
   fi
+  if [ "$CIRCUITS_PID" != "`ps -o pid= -p $CIRCUITS_PID|xargs`" ]; then break; fi
   sleep 60
 done

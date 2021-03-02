@@ -66,8 +66,8 @@ class TestTaskUtilsCloseTask:
 
     @pytest.mark.mock_test
     @pytest.mark.parametrize("incident_id, task_id, task_name", [
-        (2096, 0, "Determine if illegal activity is involved"),
-        (2096, 0, "Ensure updated antivirus signatures are deployed")
+        (2096, None, "Determine if illegal activity is involved"),
+        (2096, None, "Ensure updated antivirus signatures are deployed")
     ])
     def test_close_task_by_name_success(self, circuits_app, incident_id, task_id, task_name):
         """ Test calling with sample values for the parameters """
@@ -81,7 +81,7 @@ class TestTaskUtilsCloseTask:
 
     @pytest.mark.mock_test
     @pytest.mark.parametrize("incident_id, task_id, task_name", [
-        (2096, 0, "text")
+        (2096, None, "text")
     ])
     def test_close_task_failure(self, circuits_app, incident_id, task_id, task_name):
         """ Test calling with sample values for the parameters """
@@ -114,8 +114,8 @@ class TestTaskUtilsCloseTask:
 
     @pytest.mark.mock_test
     @pytest.mark.parametrize("incident_id, task_id, task_name", [
-        (2096, 0, "Η Θ Ι Κ Λ Μ Ν Ξ Ο Π Ρ"),
-        (2096, 0, " Й К Л М Н О П Р С Т ")
+        (2096, None, "Η Θ Ι Κ Λ Μ Ν Ξ Ο Π Ρ"),
+        (2096, None, " Й К Л М Н О П Р С Т ")
     ])
     def test_close_task_by_name_unicode(self, circuits_app, incident_id, task_id, task_name):
         """ Test calling with sample values for the parameters """

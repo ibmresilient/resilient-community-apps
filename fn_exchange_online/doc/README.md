@@ -12,7 +12,7 @@
   ![screenshot: screenshot_1](./screenshots/screenshot_1.png)
 -->
 
-# **User Guide:** Microsoft Exchange Online Functions for IBM Resilient v1.2.0
+# **User Guide:** Microsoft Exchange Online Functions for IBM Resilient v1.3.0
 
 ## Table of Contents
 - [Key Features](#key-features)
@@ -29,6 +29,14 @@
 - [Rules](#rules)
 
 ---
+
+## History
+| Date | Version | Note |
+| ---- | ------- | ---- |
+| 2/2021 | 1.3.0 | Added attachments to send message |
+| 12/2020 | 1.2.0 | Performance improvement when querying a large tenant using the "all" query parameter |
+| 9/2020 | 1.1.0 | Numerous performance and functional improvements around querying mailboxes |
+| 2/2020 | 1.0.0 | Initial publication |
 
 ## Key Features
 <!--
