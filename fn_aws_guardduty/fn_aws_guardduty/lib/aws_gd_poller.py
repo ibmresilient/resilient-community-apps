@@ -223,6 +223,7 @@ class AwsGdPoller():
                                  for inc in res_svc.page_incidents(region=region, f_fields=["Id", "DetectorId"])}
         except Exception as ex:
             LOG.error("Something went wrong when attempting to get list of Resilient incidents")
+            LOG.error(str(ex))
             return
 
         # Set filter to return only current (non-archived) findings.
