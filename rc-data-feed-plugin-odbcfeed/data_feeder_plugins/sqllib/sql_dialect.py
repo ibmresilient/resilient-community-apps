@@ -882,19 +882,8 @@ def translate_value_for_blob(blob_func):
     Returns:
         [object]: [translated field ready for the specific db]
     """
-    mapping = {
-            "select_owner": TypeInfo.translate_value_select,
-            "select_user": TypeInfo.translate_value_select,
-            "select": TypeInfo.translate_value_select,
-            "multiselect": TypeInfo.translate_value_multiselect,
-            "multiselect_members": TypeInfo.translate_value_multiselect,
-            "datepicker": TypeInfo.translate_value_datetimepicker,
-            "datetimepicker": TypeInfo.translate_value_datetimepicker,
-            "textarea": TypeInfo.translate_value_textarea,
-            "number": TypeInfo.translate_value_number,
-            "blob": blob_func,
-            "list": TypeInfo.translate_value_list
-        }
+    mapping = TypeInfo.get_default_mapping()
+    mapping['blob'] = blob_func
 
     def translate_value(type_info, field, value):
         chged_value = copy.copy(value)
