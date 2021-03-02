@@ -356,8 +356,7 @@ class TypeInfo(object):
             if prefix is not None:
                 obj = payload.get(prefix)
 
-            if obj is not None:
-                LOG.debug(obj) # TODO
+            if obj is not None and isinstance(obj, dict):
                 obj = obj.get(field['name'])
 
         return obj
