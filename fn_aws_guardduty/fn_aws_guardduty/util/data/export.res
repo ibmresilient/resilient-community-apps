@@ -13,6 +13,13 @@
         },
         {
           "evaluation_id": null,
+          "field_name": "incident.properties.aws_guardduty_archived",
+          "method": "not_equals",
+          "type": null,
+          "value": "True"
+        },
+        {
+          "evaluation_id": null,
           "field_name": "incident.properties.aws_guardduty_detector_id",
           "method": "has_a_value",
           "type": null,
@@ -31,28 +38,16 @@
           "method": "has_a_value",
           "type": null,
           "value": null
-        },
-        {
-          "evaluation_id": null,
-          "field_name": "incident.resolution_id",
-          "method": "not_has_a_value",
-          "type": null,
-          "value": null
         }
       ],
       "enabled": true,
       "export_key": "Example: AWS GuardDuty: Archive Finding",
-      "id": 33,
+      "id": 69,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: AWS GuardDuty: Archive Finding",
       "object_type": "incident",
-      "tags": [
-        {
-          "tag_handle": "fn_aws_guardduty",
-          "value": null
-        }
-      ],
+      "tags": [],
       "timeout_seconds": 86400,
       "type": 0,
       "uuid": "bca3c12d-b674-419a-a81c-9b2d92ab1f7d",
@@ -88,17 +83,12 @@
       ],
       "enabled": true,
       "export_key": "Example: AWS GuardDuty: Refresh Finding Details",
-      "id": 34,
+      "id": 70,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: AWS GuardDuty: Refresh Finding Details",
       "object_type": "incident",
-      "tags": [
-        {
-          "tag_handle": "fn_aws_guardduty",
-          "value": null
-        }
-      ],
+      "tags": [],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "d7aa6986-65c9-4321-9880-f742e56452f3",
@@ -155,17 +145,12 @@
       ],
       "enabled": true,
       "export_key": "Example: AWS GuardDuty: Update Finding Details",
-      "id": 35,
+      "id": 71,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: AWS GuardDuty: Update Finding Details",
       "object_type": "incident",
-      "tags": [
-        {
-          "tag_handle": "fn_aws_guardduty",
-          "value": null
-        }
-      ],
+      "tags": [],
       "timeout_seconds": 86400,
       "type": 0,
       "uuid": "3603fc28-266b-487f-868f-fec33eafdd65",
@@ -177,7 +162,7 @@
   ],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1614335806655,
+  "export_date": 1614695408340,
   "export_format_version": 2,
   "fields": [
     {
@@ -190,7 +175,7 @@
       "deprecated": false,
       "export_key": "__function/aws_gd_region",
       "hide_notification": false,
-      "id": 508,
+      "id": 545,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -201,12 +186,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_aws_guardduty",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "aws_gd_region",
       "tooltip": "AWS GuardDuty region.",
@@ -224,7 +204,7 @@
       "deprecated": false,
       "export_key": "__function/aws_gd_detector_id",
       "hide_notification": false,
-      "id": 509,
+      "id": 546,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -235,12 +215,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_aws_guardduty",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "aws_gd_detector_id",
       "tooltip": "AWS GuardDuty detector ID.",
@@ -258,7 +233,7 @@
       "deprecated": false,
       "export_key": "__function/aws_gd_finding_id",
       "hide_notification": false,
-      "id": 510,
+      "id": 547,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -269,12 +244,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_aws_guardduty",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "aws_gd_finding_id",
       "tooltip": "AWS GuardDuty finding ID.",
@@ -292,7 +262,7 @@
       "deprecated": false,
       "export_key": "__function/incident_id",
       "hide_notification": false,
-      "id": 511,
+      "id": 548,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -303,12 +273,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_aws_guardduty",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "incident_id",
       "tooltip": "Resilient incident ID.",
@@ -337,12 +302,7 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_aws_guardduty",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "AWS GuardDuty Severity",
       "tooltip": "The severity of the affected resource of the GuardDuty finding. ",
@@ -371,12 +331,7 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_aws_guardduty",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "AWS GuardDuty Region",
       "tooltip": "The AWS Region in which the GuardDuty finding was generated. ",
@@ -405,12 +360,7 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_aws_guardduty",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "AWS GuardDuty Count",
       "tooltip": "The number of times GuardDuty has aggregated an activity matching this pattern to this finding ID. ",
@@ -439,12 +389,7 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_aws_guardduty",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "AWS GuardDuty Finding Id",
       "tooltip": "A unique Finding ID for this GuardDuty finding type and set of parameters. New occurrences of activity matching this pattern will be aggregated to the same ID. ",
@@ -473,12 +418,7 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_aws_guardduty",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "AWS GuardDuty Finding Arn",
       "tooltip": "Arn of the GuardDuty finding.",
@@ -507,12 +447,7 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_aws_guardduty",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "AWS GuardDuty Resource Type",
       "tooltip": "The type of the affected resource of the GuardDuty finding. This value is either AccessKey, S3 bucket or Instance. ",
@@ -541,12 +476,7 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_aws_guardduty",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "AWS GuardDuty Detector Id",
       "tooltip": "The detector ID where the GuardDuty finding was detected.",
@@ -575,12 +505,7 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_aws_guardduty",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "AWS GuardDuty Resource Updated At",
       "tooltip": "The last time this finding was updated with new activity matching the pattern that prompted GuardDuty to generate this finding. ",
@@ -609,12 +534,7 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_aws_guardduty",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "AWS GuardDuty Archived",
       "tooltip": " A true or false value that indicates whether this is GuardDuty finding has been archived. ",
@@ -643,12 +563,7 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_aws_guardduty",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "AWS GuardDuty Finding Type",
       "tooltip": "The type of activity that triggered the GuardDuty finding.",
@@ -677,12 +592,7 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_aws_guardduty",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "AWS GuardDuty Trigger Refresh",
       "tooltip": "Used by integration to trigger an refresh of GuardDuty incidents.",
@@ -717,21 +627,16 @@
       "destination_handle": "fn_aws_gd",
       "display_name": "AWS GuardDuty: Archive finding",
       "export_key": "func_aws_guardduty_archive_finding",
-      "id": 5,
+      "id": 40,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
         "id": 4,
         "name": "a@a.com",
         "type": "user"
       },
-      "last_modified_time": 1614184329032,
+      "last_modified_time": 1614694311110,
       "name": "func_aws_guardduty_archive_finding",
-      "tags": [
-        {
-          "tag_handle": "fn_aws_guardduty",
-          "value": null
-        }
-      ],
+      "tags": [],
       "uuid": "ee7aaede-3fd1-46d5-bd05-4bd6062f67e3",
       "version": 1,
       "view_items": [
@@ -767,14 +672,9 @@
           "name": "Example: AWS GuardDuty: Archive Finding",
           "object_type": "incident",
           "programmatic_name": "wf_aws_guardduty_archive_finding",
-          "tags": [
-            {
-              "tag_handle": "fn_aws_guardduty",
-              "value": null
-            }
-          ],
+          "tags": [],
           "uuid": null,
-          "workflow_id": 5
+          "workflow_id": 41
         }
       ]
     },
@@ -792,21 +692,16 @@
       "destination_handle": "fn_aws_gd",
       "display_name": "AWS GuardDuty: Refresh Finding",
       "export_key": "func_aws_guardduty_refresh_finding",
-      "id": 6,
+      "id": 41,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
         "id": 4,
         "name": "a@a.com",
         "type": "user"
       },
-      "last_modified_time": 1614184329091,
+      "last_modified_time": 1614694311179,
       "name": "func_aws_guardduty_refresh_finding",
-      "tags": [
-        {
-          "tag_handle": "fn_aws_guardduty",
-          "value": null
-        }
-      ],
+      "tags": [],
       "uuid": "2d1446f8-13fc-4400-af6a-c96b55d9a0df",
       "version": 1,
       "view_items": [
@@ -850,21 +745,16 @@
           "name": "Example: AWS GuardDuty: Refresh Finding Details",
           "object_type": "incident",
           "programmatic_name": "wf_aws_guardduty_refresh_finding",
-          "tags": [
-            {
-              "tag_handle": "fn_aws_guardduty",
-              "value": null
-            }
-          ],
+          "tags": [],
           "uuid": null,
-          "workflow_id": 6
+          "workflow_id": 40
         }
       ]
     }
   ],
   "geos": null,
   "groups": null,
-  "id": 5,
+  "id": 6,
   "inbound_mailboxes": null,
   "incident_artifact_types": [
     {
@@ -879,12 +769,7 @@
       "programmatic_name": "aws_iam_access_key_id",
       "reg_exp": null,
       "system": false,
-      "tags": [
-        {
-          "tag_handle": "fn_aws_guardduty",
-          "value": null
-        }
-      ],
+      "tags": [],
       "use_for_relationships": true,
       "uuid": "a33a1971-162c-4417-b344-8708f9d25644",
       "version": 0
@@ -901,12 +786,7 @@
       "programmatic_name": "aws_iam_user_name",
       "reg_exp": null,
       "system": false,
-      "tags": [
-        {
-          "tag_handle": "fn_aws_guardduty",
-          "value": null
-        }
-      ],
+      "tags": [],
       "use_for_relationships": true,
       "uuid": "3a0a5309-ba33-47cb-92df-c8a506f87317",
       "version": 0
@@ -923,12 +803,7 @@
       "programmatic_name": "aws_s3_bucket_name",
       "reg_exp": null,
       "system": false,
-      "tags": [
-        {
-          "tag_handle": "fn_aws_guardduty",
-          "value": null
-        }
-      ],
+      "tags": [],
       "use_for_relationships": true,
       "uuid": "b98bbc83-39be-4379-aa1e-2a38b7053560",
       "version": 0
@@ -936,7 +811,7 @@
   ],
   "incident_types": [
     {
-      "create_date": 1614335776365,
+      "create_date": 1614695398721,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -945,7 +820,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1614335776365,
+      "update_date": 1614695398721,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -954,20 +829,13 @@
   "locale": null,
   "message_destinations": [
     {
-      "api_keys": [
-        "db01e08f-8049-4be3-be5f-818e7ff48359"
-      ],
+      "api_keys": [],
       "destination_type": 0,
       "expect_ack": true,
       "export_key": "fn_aws_gd",
       "name": "fn_aws_gd",
       "programmatic_name": "fn_aws_gd",
-      "tags": [
-        {
-          "tag_handle": "fn_aws_guardduty",
-          "value": null
-        }
-      ],
+      "tags": [],
       "users": [
         "a@a.com"
       ],
@@ -1165,12 +1033,7 @@
         "for_who": []
       },
       "scripts": [],
-      "tags": [
-        {
-          "tag_handle": "fn_aws_guardduty",
-          "value": null
-        }
-      ],
+      "tags": [],
       "type_id": 8,
       "type_name": "gd_access_key_details",
       "uuid": "9c33b5ca-a3fa-4d8d-8609-e337373279f4"
@@ -1846,12 +1709,7 @@
         "for_who": []
       },
       "scripts": [],
-      "tags": [
-        {
-          "tag_handle": "fn_aws_guardduty",
-          "value": null
-        }
-      ],
+      "tags": [],
       "type_id": 8,
       "type_name": "gd_action_details",
       "uuid": "883bd79f-a9e2-4544-b5bd-cf866725d42c"
@@ -2124,12 +1982,7 @@
         "for_who": []
       },
       "scripts": [],
-      "tags": [
-        {
-          "tag_handle": "fn_aws_guardduty",
-          "value": null
-        }
-      ],
+      "tags": [],
       "type_id": 8,
       "type_name": "gd_finding_overview",
       "uuid": "4cfac58d-2303-4726-9378-adb0bf4e81cb"
@@ -2402,12 +2255,7 @@
         "for_who": []
       },
       "scripts": [],
-      "tags": [
-        {
-          "tag_handle": "fn_aws_guardduty",
-          "value": null
-        }
-      ],
+      "tags": [],
       "type_id": 8,
       "type_name": "gd_instance_details",
       "uuid": "9ace7caf-f184-40a8-bc91-7fd421fe3280"
@@ -2587,12 +2435,7 @@
         "for_who": []
       },
       "scripts": [],
-      "tags": [
-        {
-          "tag_handle": "fn_aws_guardduty",
-          "value": null
-        }
-      ],
+      "tags": [],
       "type_id": 8,
       "type_name": "gd_resource_affected",
       "uuid": "b2462a6f-8b07-4702-8943-e0df9213c349"
@@ -2865,12 +2708,7 @@
         "for_who": []
       },
       "scripts": [],
-      "tags": [
-        {
-          "tag_handle": "fn_aws_guardduty",
-          "value": null
-        }
-      ],
+      "tags": [],
       "type_id": 8,
       "type_name": "gd_s3_bucket_details",
       "uuid": "c71024b5-5f5a-470e-b020-7d4b22db5e83"
@@ -2880,52 +2718,42 @@
     {
       "actions": [],
       "content": {
-        "version": 3,
-        "workflow_id": "wf_aws_guardduty_refresh_finding",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_aws_guardduty_refresh_finding\" isExecutable=\"true\" name=\"Example: AWS GuardDuty: Refresh Finding Details\"\u003e\u003cdocumentation\u003eResilient Workflow to refresh or update AWS GuardDuty finding details in an incident.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0zedv2p\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_06mwqw8\" name=\"AWS GUARDDUTY: Refresh Finding\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"2d1446f8-13fc-4400-af6a-c96b55d9a0df\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  wf_aws_guardduty_refresh_finding ##\\n# Example result:\\n\\\"\\\"\\\"\\nResult: { \u0027version\u0027: \u00271.0\u0027,\\n          \u0027success\u0027: True,\\n          \u0027reason\u0027: None,\\n          \u0027content\u0027: {\u0027payload\u0027: {\u0027name\u0027: \u0027AWS GuardDuty: API GeneratedFindingAPIName was invoked from an IP address on a custom threat list.\u0027,\\n                                  \u0027description\u0027: {\u0027format\u0027: \u0027text\u0027, \u0027content\u0027: \u0027An API was used to access a bucket from an IP address on a custom threat list.\u0027},\\n                                  \u0027discovered_date\u0027: \u00272020-11-25T13:46:37.960Z\u0027,\\n                                  \u0027severity_code\u0027: \u0027Low\u0027,\\n                                  \u0027properties\u0027: {\u0027aws_guardduty_finding_id\u0027: \u002760baffd3f9042e38640f2300d5c5a631\u0027,\\n                                                 \u0027aws_guardduty_finding_arn\u0027: \u0027arn:aws:guardduty:us-west-2:834299573936:detector/f2baedb0ac74f8f42fc929e15f56da6a/finding/60baffd3f9042e38640f2300d5c5a631\u0027,\\n                                                 \u0027aws_guardduty_finding_type\u0027: \u0027UnauthorizedAccess:S3/MaliciousIPCaller.Custom\u0027,\\n                                                 \u0027aws_guardduty_finding_updated_at\u0027: \u00272020-11-26T15:18:12.620Z\u0027, \u0027aws_guardduty_region\u0027: \u0027us-west-2\u0027,\\n                                                 \u0027aws_guardduty_resource_type\u0027: \u0027S3Bucket\u0027, \u0027aws_guardduty_count\u0027: 4,\\n                                                 \u0027aws_guardduty_detector_id\u0027: \u0027f2baedb0ac74f8f42fc929e15f56da6a\u0027},\\n                                  \u0027artifacts\u0027: [],\\n                                  \u0027comments\u0027: [{\u0027text\u0027: {\u0027format\u0027: \u0027text\u0027, \u0027content\u0027: \\\"AWS GuardDuty finding Payload:\\\\n\u0026lt;FINDING_PAYLOAD_AS_STRING\u0026gt;\\\"}}]\\n\\n                                 },\\n                      \\\"data_tables\\\": {\\\"gd_action_details\\\": [{\\\"cells\\\": {\\\"action_type\\\": {\\\"value\\\": \\\"AWS_API_CALL\\\"},\\n                                                             \\\"action_api\\\": {\\\"value\\\": \\\"GeneratedFindingAPIName\\\"},\\n                                                             \\\"event_first_seen\\\": {\\\"value\\\": \\\"2020-11-25T13:46:37.960Z\\\"},\\n                                                             \\\"event_last_seen\\\": {\\\"value\\\": \\\"2020-11-26T15:18:12.620Z\\\"},\\n                                                            \\\"actor_caller_type\\\": {\\\"value\\\": \\\"Remote IP\\\"}, \\\"city_name\\\": {\\\"value\\\": \\\"GeneratedFindingCityName\\\"}, \\\"country_name\\\": {\\\"value\\\": \\\"GeneratedFindingCountryName\\\"}, \\\"asn\\\": {\\\"value\\\": \\\"-1\\\"}, \\\"asn_org\\\": {\\\"value\\\": \\\"GeneratedFindingASNOrg\\\"}, \\\"isp\\\": {\\\"value\\\": \\\"GeneratedFindingISP\\\"}, \\\"org\\\": {\\\"value\\\": \\\"GeneratedFindingORG\\\"}, \\\"action_service_name\\\": {\\\"value\\\": \\\"GeneratedFindingAPIServiceName\\\"}, \\\"remote_ip\\\": {\\\"value\\\": \\\"198.51.100.0\\\"}}}],\\n                                     \\\"gd_resource_affected\\\": [{\\\"cells\\\": {\\\"resource_type\\\": {\\\"value\\\": \\\"S3Bucket\\\"}, \\\"instance_id\\\": {\\\"value\\\": \\\"i-99999999\\\"}, \\\"instance_type\\\": {\\\"value\\\": \\\"m3.xlarge\\\"}, \\\"instance_state\\\": {\\\"value\\\": \\\"running\\\"}, \\\"resource_role\\\": {\\\"value\\\": \\\"TARGET\\\"}, \\\"instance_private_ip\\\": {\\\"value\\\": \\\"10.0.0.1\\\"}, \\\"instance_private_dns\\\": {\\\"value\\\": \\\"GeneratedFindingPrivateName\\\"}, \\\"instance_public_ip\\\": {\\\"value\\\": \\\"198.51.100.0\\\"}, \\\"instance_public_dns\\\": {\\\"value\\\": \\\"GeneratedFindingPublicDNSName\\\"}, \\\"s3bucket_name\\\": {\\\"value\\\": \\\"bucketName\\\"}, \\\"s3bucket_owner\\\": {\\\"value\\\": \\\"CanonicalId of Owner\\\"}}}]\\n\\n                      }}\u0027,\\n            \u0027inputs\u0027: {\u0027incident_id\u0027: 2168, \u0027aws_gd_finding_id\u0027: \u002760baffd3f9042e38640f2300d5c5a631\u0027,\\n                       \u0027aws_gd_region\u0027: \u0027us-west-2\u0027, \u0027aws_gd_detector_id\u0027: \u0027f2baedb0ac74f8f42fc929e15f56da6a\u0027},\\n            \u0027metrics\u0027: {\u0027version\u0027: \u00271.0\u0027, \u0027package\u0027: \u0027fn-aws-guardduty\u0027, \u0027package_version\u0027: \u00271.0.0\u0027,\\n                        \u0027host\u0027: \u0027Johnp-MacBook-Pro-2.galway.ie.ibm.com\u0027, \u0027execution_time_ms\u0027: 10739,\\n                        \u0027timestamp\u0027: \u00272021-01-18 16:51:10\u0027}\\n}\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable for wf_aws_guardduty_refresh_finding script\\nDATA_TABLES = [\\\"gd_action_details\\\", \\\"gd_resource_affected\\\"]\\nFN_NAME = \\\"func_aws_guardduty_refresh_finding\\\"\\nWF_NAME = \\\"Example: AWS GuardDuty: Refresh Finding\\\"\\n# Resilient artifact names to api names.\\nARTIFACT_API_TO_TYPE = {\\n    \\\"aws_iam_access_key_id\\\": \\\"AWS IAM Access Key ID\\\",\\n    \\\"aws_iam_user_name\\\": \\\"AWS IAM User Name\\\",\\n    \\\"aws_s3_bucket_name\\\": \\\"AWS S3 Bucket Name\\\",\\n    \\\"IP Address\\\": \\\"IP Address\\\",\\n    \\\"DNS Name\\\": \\\"DNS Name\\\",\\n    \\\"Port\\\": \\\"Port\\\"\\n}\\nCONTENT = results.content\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\nif CONTENT:\\n    FINDING = CONTENT.finding\\n    PAYLOAD = CONTENT.payload\\n    ARTIFACTS = PAYLOAD.artifacts\\n    DATA_TABLES = CONTENT.data_tables\\n\\n# Processing\\n\\ndef main():\\n    note_text = \u0027\u0027\\n    if CONTENT:\\n        note_text = \\\"AWS GuardDuty Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Finding data returned for Resilient function \\\" \\\\\\n                    \\\"\u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;\\\".format(WF_NAME, len(CONTENT), FN_NAME)\\n\\n        update_fields()\\n        update_datatables()\\n        if ARTIFACTS:\\n            add_artifacts()\\n    else:\\n        note_text = \\\"AWS GuardDuty Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: No finding data returned for Resilient function \\\" \\\\\\n                    \\\"\u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;\\\".format(WF_NAME, len(CONTENT), FN_NAME)\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\ndef update_fields():\\n    incident.severity_code = PAYLOAD[\\\"severity_code\\\"]\\n    incident.properties.aws_guardduty_finding_updated_at = PAYLOAD[\\\"properties\\\"][\\\"aws_guardduty_finding_updated_at\\\"]\\n    incident.properties.aws_guardduty_count = str(PAYLOAD[\\\"properties\\\"][\\\"aws_guardduty_count\\\"])\\n    incident.properties.aws_guardduty_archived = str(PAYLOAD[\\\"properties\\\"][\\\"aws_guardduty_archived\\\"])\\n    incident.properties.aws_guardduty_severity = str(PAYLOAD[\\\"properties\\\"][\\\"aws_guardduty_severity\\\"])\\n\\ndef update_datatables():\\n    for data_table in DATA_TABLES:\\n        for row in DATA_TABLES[data_table]:\\n            newrow = incident.addRow(data_table)\\n            newrow.query_execution_date = QUERY_EXECUTION_DATE\\n            data_table_fields = row[\\\"cells\\\"]\\n            for f, v_info in data_table_fields.items():\\n                newrow[f] = v_info.value\\n\\n\\ndef add_artifacts():\\n    for artifact in ARTIFACTS:\\n        artifact_type = ARTIFACT_API_TO_TYPE[artifact[\\\"type\\\"][\\\"name\\\"]]\\n        artifact_value = artifact[\\\"value\\\"]\\n        description = artifact[\\\"description\\\"][\\\"content\\\"]\\n        incident.addArtifact(artifact_type, artifact_value, description)\\n\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.aws_gd_region = incident.properties.aws_guardduty_region\\ninputs.aws_gd_detector_id = incident.properties.aws_guardduty_detector_id\\ninputs.aws_gd_finding_id = incident.properties.aws_guardduty_finding_id\\ninputs.incident_id = incident.id\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0zedv2p\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0k5uvi0\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0zedv2p\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_06mwqw8\"/\u003e\u003cendEvent id=\"EndEvent_0ec9efk\"\u003e\u003cincoming\u003eSequenceFlow_0k5uvi0\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0k5uvi0\" sourceRef=\"ServiceTask_06mwqw8\" targetRef=\"EndEvent_0ec9efk\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_06mwqw8\" id=\"ServiceTask_06mwqw8_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"255\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0zedv2p\" id=\"SequenceFlow_0zedv2p_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"228\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"228\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"255\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"243\" y=\"199.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0ec9efk\" id=\"EndEvent_0ec9efk_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"395\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"413\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0k5uvi0\" id=\"SequenceFlow_0k5uvi0_di\"\u003e\u003comgdi:waypoint x=\"355\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"395\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"375\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 3,
-      "creator_id": "a@a.com",
-      "description": "Resilient Workflow to refresh or update AWS GuardDuty finding details in an incident.",
-      "export_key": "wf_aws_guardduty_refresh_finding",
-      "last_modified_by": "a@a.com",
-      "last_modified_time": 1614184329872,
-      "name": "Example: AWS GuardDuty: Refresh Finding Details",
-      "object_type": "incident",
-      "programmatic_name": "wf_aws_guardduty_refresh_finding",
-      "tags": [
-        {
-          "tag_handle": "fn_aws_guardduty",
-          "value": null
-        }
-      ],
-      "uuid": "25ff8bf1-ed1b-433b-912a-a78e6a9384c5",
-      "workflow_id": 6
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 3,
+        "version": 5,
         "workflow_id": "wf_aws_guardduty_archive_finding",
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_aws_guardduty_archive_finding\" isExecutable=\"true\" name=\"Example: AWS GuardDuty: Archive Finding\"\u003e\u003cdocumentation\u003eResilient Workflow to archive an AWS GuardDuty finding when the corresponding incident is closed.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_06kfw43\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_11o56o1\" name=\"AWS GUARDDUTY: Archive finding\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"ee7aaede-3fd1-46d5-bd05-4bd6062f67e3\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  wf_aws_guardduty_refresh_finding ##\\n# Example result:\\n\\\"\\\"\\\"\\nGood\\n====\\nResult: {\u0027version\u0027: \u00271.0\u0027, \u0027success\u0027: True, \u0027reason\u0027: None,\\n         \u0027content\u0027: {\u0027status\u0027: \u0027ok\u0027},\\n         \u0027raw\u0027: \u0027{\\\"status\\\": \\\"ok\\\"}\u0027,\\n         \u0027inputs\u0027: {\u0027aws_gd_finding_id\u0027: \u0027c2bb95a17b879bffc96c58f8a1689785\u0027, \u0027aws_gd_region\u0027: \u0027us-east-2\u0027,\\n                    \u0027aws_gd_detector_id\u0027: \u002732b7017d2019dfe922abc4e07c3fdded\u0027\\n                    },\\n         \u0027metrics\u0027: {\u0027version\u0027: \u00271.0\u0027, \u0027package\u0027: \u0027fn-aws-guardduty\u0027, \u0027package_version\u0027: \u00271.0.0\u0027,\\n         \u0027host\u0027: \u0027myhost.ibm.com\u0027, \u0027execution_time_ms\u0027: 1310, \u0027timestamp\u0027: \u00272021-01-28 11:31:30\u0027\\n        }\\n}\\nError:\\nResult: {\u0027version\u0027: \u00271.0\u0027, \u0027success\u0027: True, \u0027reason\u0027: None,\\n         \u0027content\u0027: {\u0027status\u0027: \u0027error\u0027,\\n                     \u0027msg\u0027: \u0027An error occurred (BadRequestException) when calling the ArchiveFindings operation:\\n                     The request is rejected because the input detectorId is not owned by the current account.\u0027},\\n                     \u0027raw\u0027: \u0027\u0026lt;content_as_string\u0026gt;\u0027,\\n         \u0027inputs\u0027: {\u0027aws_gd_finding_id\u0027: \u0027c2bb95a17b879bffc96c58f8a1689784\u0027, \u0027aws_gd_region\u0027: \u0027us-east-2\u0027,\\n                    \u0027aws_gd_detector_id\u0027: \u002732b7017d2019dfe922abc4e07c3fdfff\u0027\\n                    },\\n         \u0027metrics\u0027: {\u0027version\u0027: \u00271.0\u0027, \u0027package\u0027: \u0027fn-aws-guardduty\u0027, \u0027package_version\u0027: \u00271.0.0\u0027,\\n         \u0027host\u0027: \u0027myhost.ibm.com\u0027, \u0027execution_time_ms\u0027: 1446, \u0027timestamp\u0027: \u00272021-01-28 11:34:53\u0027\\n         }\\n}\\n\\\"\\\"\\\"\\n#  Globals\\nFN_NAME = \\\"func_aws_guardduty_archive_finding\\\"\\nWF_NAME = \\\"Example: AWS GuardDuty: Archive Finding\\\"\\n# Resilient artifact names to api names.\\n# Processing\\n# Processing\\nCONTENT = results.content\\nINPUTS = results.inputs\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\n\\n\\n# Processing\\n\\ndef main():\\n    note_text = \u0027\u0027\\n    if CONTENT:\\n        if CONTENT[\\\"status\\\"] == \\\"ok\\\":\\n            note_text = \\\"AWS IAM Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: The finding with id \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; and detector id \\\" \\\\\\n                        \\\"\u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; in region \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt; was successfully archived for Resilient function \u0026lt;b\u0026gt;{4}\u0026lt;/b\u0026gt;\\\"\\\\\\n                .format(WF_NAME, INPUTS[\\\"aws_gd_finding_id\\\"], INPUTS[\\\"aws_gd_detector_id\\\"], INPUTS[\\\"aws_gd_region\\\"], FN_NAME)\\n            # Update archived property.\\n            incident.properties.aws_guardduty_archived = \\\"True\\\"  \\n            \\n\\n        elif CONTENT[\\\"status\\\"] == \\\"error\\\":\\n            note_text = \\\"AWS IAM Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: The finding with id \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; and detector id \\\" \\\\\\n                        \\\"\u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; in region \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt; failed archive with error \u0026lt;b\u0026gt;{4}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{5}\u0026lt;/b\u0026gt;\\\"\\\\\\n                .format(WF_NAME, INPUTS[\\\"aws_gd_finding_id\\\"], INPUTS[\\\"aws_gd_detector_id\\\"], INPUTS[\\\"aws_gd_region\\\"],\\n                        CONTENT[\\\"msg\\\"], FN_NAME)\\n\\n        else:\\n            note_text = \\\"AWS IAM Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: The finding with id \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; and detector id \\\" \\\\\\n                        \\\"\u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; in region \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt; got unexpected status \u0026lt;b\u0026gt;{4}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{5}\u0026lt;/b\u0026gt;\\\" \\\\\\n                .format(WF_NAME, INPUTS[\\\"aws_gd_finding_id\\\"], INPUTS[\\\"aws_gd_detector_id\\\"], CONTENT[\\\"status\\\"], INPUTS[\\\"aws_gd_region\\\"],\\n                        FN_NAME)\\n\\n    else:\\n        note_text += \\\"AWS IAM Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was no result returned for Resilient function \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;\\\"\\\\\\n            .format(WF_NAME, FN_NAME)\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.aws_gd_region = incident.properties.aws_guardduty_region\\ninputs.aws_gd_detector_id = incident.properties.aws_guardduty_detector_id\\ninputs.aws_gd_finding_id = incident.properties.aws_guardduty_finding_id\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_06kfw43\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1o6uno2\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_06kfw43\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_11o56o1\"/\u003e\u003cendEvent id=\"EndEvent_1hcamul\"\u003e\u003cincoming\u003eSequenceFlow_1o6uno2\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1o6uno2\" sourceRef=\"ServiceTask_11o56o1\" targetRef=\"EndEvent_1hcamul\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_11o56o1\" id=\"ServiceTask_11o56o1_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"253\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_06kfw43\" id=\"SequenceFlow_06kfw43_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"222\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"222\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"253\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"237\" y=\"199.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1hcamul\" id=\"EndEvent_1hcamul_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"408\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"426\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1o6uno2\" id=\"SequenceFlow_1o6uno2_di\"\u003e\u003comgdi:waypoint x=\"353\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"408\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"380.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 3,
+      "content_version": 5,
       "creator_id": "a@a.com",
       "description": "Resilient Workflow to archive an AWS GuardDuty finding when the corresponding incident is closed.",
       "export_key": "wf_aws_guardduty_archive_finding",
       "last_modified_by": "a@a.com",
-      "last_modified_time": 1614184329676,
+      "last_modified_time": 1614694312212,
       "name": "Example: AWS GuardDuty: Archive Finding",
       "object_type": "incident",
       "programmatic_name": "wf_aws_guardduty_archive_finding",
-      "tags": [
-        {
-          "tag_handle": "fn_aws_guardduty",
-          "value": null
-        }
-      ],
+      "tags": [],
       "uuid": "1e619863-9ce2-4194-a889-0608b3f8193d",
-      "workflow_id": 5
+      "workflow_id": 41
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 5,
+        "workflow_id": "wf_aws_guardduty_refresh_finding",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_aws_guardduty_refresh_finding\" isExecutable=\"true\" name=\"Example: AWS GuardDuty: Refresh Finding Details\"\u003e\u003cdocumentation\u003eResilient Workflow to refresh or update AWS GuardDuty finding details in an incident.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0zedv2p\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_06mwqw8\" name=\"AWS GUARDDUTY: Refresh Finding\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"2d1446f8-13fc-4400-af6a-c96b55d9a0df\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  wf_aws_guardduty_refresh_finding ##\\n# Example result:\\n\\\"\\\"\\\"\\nResult: { \u0027version\u0027: \u00271.0\u0027,\\n          \u0027success\u0027: True,\\n          \u0027reason\u0027: None,\\n          \u0027content\u0027: {\u0027payload\u0027: {\u0027name\u0027: \u0027AWS GuardDuty: API GeneratedFindingAPIName was invoked from an IP address on a custom threat list.\u0027,\\n                                  \u0027description\u0027: {\u0027format\u0027: \u0027text\u0027, \u0027content\u0027: \u0027An API was used to access a bucket from an IP address on a custom threat list.\u0027},\\n                                  \u0027discovered_date\u0027: \u00272020-11-25T13:46:37.960Z\u0027,\\n                                  \u0027severity_code\u0027: \u0027Low\u0027,\\n                                  \u0027properties\u0027: {\u0027aws_guardduty_finding_id\u0027: \u002760baffd3f9042e38640f2300d5c5a631\u0027,\\n                                                 \u0027aws_guardduty_finding_arn\u0027: \u0027arn:aws:guardduty:us-west-2:834299573936:detector/f2baedb0ac74f8f42fc929e15f56da6a/finding/60baffd3f9042e38640f2300d5c5a631\u0027,\\n                                                 \u0027aws_guardduty_finding_type\u0027: \u0027UnauthorizedAccess:S3/MaliciousIPCaller.Custom\u0027,\\n                                                 \u0027aws_guardduty_finding_updated_at\u0027: \u00272020-11-26T15:18:12.620Z\u0027, \u0027aws_guardduty_region\u0027: \u0027us-west-2\u0027,\\n                                                 \u0027aws_guardduty_resource_type\u0027: \u0027S3Bucket\u0027, \u0027aws_guardduty_count\u0027: 4,\\n                                                 \u0027aws_guardduty_detector_id\u0027: \u0027f2baedb0ac74f8f42fc929e15f56da6a\u0027},\\n                                  \u0027artifacts\u0027: [],\\n                                  \u0027comments\u0027: [{\u0027text\u0027: {\u0027format\u0027: \u0027text\u0027, \u0027content\u0027: \\\"AWS GuardDuty finding Payload:\\\\n\u0026lt;FINDING_PAYLOAD_AS_STRING\u0026gt;\\\"}}]\\n\\n                                 },\\n                      \\\"data_tables\\\": {\\\"gd_action_details\\\": [{\\\"cells\\\": {\\\"action_type\\\": {\\\"value\\\": \\\"AWS_API_CALL\\\"},\\n                                                             \\\"action_api\\\": {\\\"value\\\": \\\"GeneratedFindingAPIName\\\"},\\n                                                             \\\"event_first_seen\\\": {\\\"value\\\": \\\"2020-11-25T13:46:37.960Z\\\"},\\n                                                             \\\"event_last_seen\\\": {\\\"value\\\": \\\"2020-11-26T15:18:12.620Z\\\"},\\n                                                            \\\"actor_caller_type\\\": {\\\"value\\\": \\\"Remote IP\\\"}, \\\"city_name\\\": {\\\"value\\\": \\\"GeneratedFindingCityName\\\"}, \\\"country_name\\\": {\\\"value\\\": \\\"GeneratedFindingCountryName\\\"}, \\\"asn\\\": {\\\"value\\\": \\\"-1\\\"}, \\\"asn_org\\\": {\\\"value\\\": \\\"GeneratedFindingASNOrg\\\"}, \\\"isp\\\": {\\\"value\\\": \\\"GeneratedFindingISP\\\"}, \\\"org\\\": {\\\"value\\\": \\\"GeneratedFindingORG\\\"}, \\\"action_service_name\\\": {\\\"value\\\": \\\"GeneratedFindingAPIServiceName\\\"}, \\\"remote_ip\\\": {\\\"value\\\": \\\"198.51.100.0\\\"}}}],\\n                                     \\\"gd_resource_affected\\\": [{\\\"cells\\\": {\\\"resource_type\\\": {\\\"value\\\": \\\"S3Bucket\\\"}, \\\"instance_id\\\": {\\\"value\\\": \\\"i-99999999\\\"}, \\\"instance_type\\\": {\\\"value\\\": \\\"m3.xlarge\\\"}, \\\"instance_state\\\": {\\\"value\\\": \\\"running\\\"}, \\\"resource_role\\\": {\\\"value\\\": \\\"TARGET\\\"}, \\\"instance_private_ip\\\": {\\\"value\\\": \\\"10.0.0.1\\\"}, \\\"instance_private_dns\\\": {\\\"value\\\": \\\"GeneratedFindingPrivateName\\\"}, \\\"instance_public_ip\\\": {\\\"value\\\": \\\"198.51.100.0\\\"}, \\\"instance_public_dns\\\": {\\\"value\\\": \\\"GeneratedFindingPublicDNSName\\\"}, \\\"s3bucket_name\\\": {\\\"value\\\": \\\"bucketName\\\"}, \\\"s3bucket_owner\\\": {\\\"value\\\": \\\"CanonicalId of Owner\\\"}}}]\\n\\n                      }}\u0027,\\n            \u0027inputs\u0027: {\u0027incident_id\u0027: 2168, \u0027aws_gd_finding_id\u0027: \u002760baffd3f9042e38640f2300d5c5a631\u0027,\\n                       \u0027aws_gd_region\u0027: \u0027us-west-2\u0027, \u0027aws_gd_detector_id\u0027: \u0027f2baedb0ac74f8f42fc929e15f56da6a\u0027},\\n            \u0027metrics\u0027: {\u0027version\u0027: \u00271.0\u0027, \u0027package\u0027: \u0027fn-aws-guardduty\u0027, \u0027package_version\u0027: \u00271.0.0\u0027,\\n                        \u0027host\u0027: \u0027Johnp-MacBook-Pro-2.galway.ie.ibm.com\u0027, \u0027execution_time_ms\u0027: 10739,\\n                        \u0027timestamp\u0027: \u00272021-01-18 16:51:10\u0027}\\n}\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable for wf_aws_guardduty_refresh_finding script\\nDATA_TABLES = [\\\"gd_action_details\\\", \\\"gd_resource_affected\\\"]\\nFN_NAME = \\\"func_aws_guardduty_refresh_finding\\\"\\nWF_NAME = \\\"Example: AWS GuardDuty: Refresh Finding\\\"\\n# Resilient artifact names to api names.\\nARTIFACT_API_TO_TYPE = {\\n    \\\"aws_iam_access_key_id\\\": \\\"AWS IAM Access Key ID\\\",\\n    \\\"aws_iam_user_name\\\": \\\"AWS IAM User Name\\\",\\n    \\\"aws_s3_bucket_name\\\": \\\"AWS S3 Bucket Name\\\",\\n    \\\"IP Address\\\": \\\"IP Address\\\",\\n    \\\"DNS Name\\\": \\\"DNS Name\\\",\\n    \\\"Port\\\": \\\"Port\\\"\\n}\\nCONTENT = results.content\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\nif CONTENT:\\n    FINDING = CONTENT.finding\\n    PAYLOAD = CONTENT.payload\\n    ARTIFACTS = PAYLOAD.artifacts\\n    DATA_TABLES = CONTENT.data_tables\\n\\n# Processing\\n\\ndef main():\\n    note_text = \u0027\u0027\\n    if CONTENT:\\n        note_text = \\\"AWS GuardDuty Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Finding data returned for Resilient function \\\" \\\\\\n                    \\\"\u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;\\\".format(WF_NAME, len(CONTENT), FN_NAME)\\n\\n        update_fields()\\n        update_datatables()\\n        if ARTIFACTS:\\n            add_artifacts()\\n    else:\\n        note_text = \\\"AWS GuardDuty Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: No finding data returned for Resilient function \\\" \\\\\\n                    \\\"\u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;\\\".format(WF_NAME, len(CONTENT), FN_NAME)\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\ndef update_fields():\\n    incident.severity_code = PAYLOAD[\\\"severity_code\\\"]\\n    incident.properties.aws_guardduty_finding_updated_at = PAYLOAD[\\\"properties\\\"][\\\"aws_guardduty_finding_updated_at\\\"]\\n    incident.properties.aws_guardduty_count = str(PAYLOAD[\\\"properties\\\"][\\\"aws_guardduty_count\\\"])\\n    incident.properties.aws_guardduty_archived = str(PAYLOAD[\\\"properties\\\"][\\\"aws_guardduty_archived\\\"])\\n    incident.properties.aws_guardduty_severity = str(PAYLOAD[\\\"properties\\\"][\\\"aws_guardduty_severity\\\"])\\n\\ndef update_datatables():\\n    for data_table in DATA_TABLES:\\n        for row in DATA_TABLES[data_table]:\\n            newrow = incident.addRow(data_table)\\n            newrow.query_execution_date = QUERY_EXECUTION_DATE\\n            data_table_fields = row[\\\"cells\\\"]\\n            for f, v_info in data_table_fields.items():\\n                newrow[f] = v_info.value\\n\\n\\ndef add_artifacts():\\n    for artifact in ARTIFACTS:\\n        artifact_type = ARTIFACT_API_TO_TYPE[artifact[\\\"type\\\"][\\\"name\\\"]]\\n        artifact_value = artifact[\\\"value\\\"]\\n        description = artifact[\\\"description\\\"][\\\"content\\\"]\\n        incident.addArtifact(artifact_type, artifact_value, description)\\n\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.aws_gd_region = incident.properties.aws_guardduty_region\\ninputs.aws_gd_detector_id = incident.properties.aws_guardduty_detector_id\\ninputs.aws_gd_finding_id = incident.properties.aws_guardduty_finding_id\\ninputs.incident_id = incident.id\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0zedv2p\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0k5uvi0\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0zedv2p\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_06mwqw8\"/\u003e\u003cendEvent id=\"EndEvent_0ec9efk\"\u003e\u003cincoming\u003eSequenceFlow_0k5uvi0\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0k5uvi0\" sourceRef=\"ServiceTask_06mwqw8\" targetRef=\"EndEvent_0ec9efk\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_06mwqw8\" id=\"ServiceTask_06mwqw8_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"255\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0zedv2p\" id=\"SequenceFlow_0zedv2p_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"228\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"228\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"255\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"243\" y=\"199.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0ec9efk\" id=\"EndEvent_0ec9efk_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"395\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"413\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0k5uvi0\" id=\"SequenceFlow_0k5uvi0_di\"\u003e\u003comgdi:waypoint x=\"355\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"395\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"375\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 5,
+      "creator_id": "a@a.com",
+      "description": "Resilient Workflow to refresh or update AWS GuardDuty finding details in an incident.",
+      "export_key": "wf_aws_guardduty_refresh_finding",
+      "last_modified_by": "a@a.com",
+      "last_modified_time": 1614694311994,
+      "name": "Example: AWS GuardDuty: Refresh Finding Details",
+      "object_type": "incident",
+      "programmatic_name": "wf_aws_guardduty_refresh_finding",
+      "tags": [],
+      "uuid": "25ff8bf1-ed1b-433b-912a-a78e6a9384c5",
+      "workflow_id": 40
     }
   ],
   "workspaces": []
