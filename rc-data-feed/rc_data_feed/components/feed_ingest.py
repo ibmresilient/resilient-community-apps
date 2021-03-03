@@ -96,7 +96,9 @@ def send_data(type_info, inc_id, rest_client_helper, payload,\
         try:
             LOG.debug("Calling feed %s", feed_output.__class__.__name__)
             # collect attachment data to pass on
-            if type_info.get_pretty_type_name() == 'attachment' and incl_attachment_data:
+            if type_info.get_pretty_type_name() == 'attachment' \
+               and incl_attachment_data \
+               and not is_deleted:
                 # this will return a byte string
                 payload['content'] = get_file_attachment(rest_client_helper.inst_rest_client, inc_id,
                                                          attachment_id=payload['id'])
