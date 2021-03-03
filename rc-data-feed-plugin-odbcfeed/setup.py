@@ -17,7 +17,8 @@ setup(
         'rc_data_feed>=2.1.0',
         'resilient',
         'pyodbc',
-        'six'
+        'six',
+        'sqlparams'
     ],
     packages=find_packages(),
     include_package_data=True,

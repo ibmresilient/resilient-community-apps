@@ -176,7 +176,7 @@ class ODBCDialectBase(SqlDialect):  # pylint: disable=abstract-method
     the ancestor class.
     """
     def get_delete(self, table_name):
-        return 'delete from {0} where id = ?'.format(table_name)
+        return 'delete from {0} where id = :id'.format(table_name)
 
     def get_parameters(self, parameter_names, parameters):
         # Need to get a list that contains all the values in the same order as parameter_names.
@@ -401,7 +401,7 @@ class MySqlDialect(ODBCDialectBase):
             parameter named "id"
         """
         clean_name = self.clean_keywords(self.RESERVE_LIST, table_name)
-        return 'delete from {0} where id = ?'.format(clean_name)
+        return 'delete from {0} where id = :id'.format(clean_name)
 
     def get_create_table_if_not_exists(self, table_name, column_spec_dict):
         """Gets SQL that will create the specified table if it doesn't exist already.
@@ -578,7 +578,7 @@ class SqlServerDialect(ODBCDialectBase):
             parameter named "id"
         """
         clean_name = self.clean_keywords(self.RESERVE_LIST, table_name)
-        return 'delete from {0} where id = ?;'.format(clean_name)
+        return 'delete from {0} where id = :id;'.format(clean_name)
 
     def get_create_table_if_not_exists(self, table_name, column_spec_dict):
         """Gets SQL that will create the specified table if it doesn't exist already.
