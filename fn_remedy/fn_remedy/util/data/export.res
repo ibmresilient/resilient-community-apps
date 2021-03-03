@@ -6,9 +6,11 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Create Remedy Incident from Task",
-      "id": 14,
+      "id": 157,
       "logic_type": "all",
-      "message_destinations": [],
+      "message_destinations": [
+        "fn_remedy"
+      ],
       "name": "Create Remedy Incident from Task",
       "object_type": "task",
       "tags": [],
@@ -16,22 +18,6 @@
       "type": 1,
       "uuid": "edeb2d07-4321-493a-930d-b04d479d61fa",
       "view_items": [
-        {
-          "content": "a977f7a7-ef06-4d38-a4ed-f293b5066989",
-          "element": "field_uuid",
-          "field_type": "actioninvocation",
-          "show_if": null,
-          "show_link_header": false,
-          "step_label": null
-        },
-        {
-          "content": "eb2e0522-4e18-46a8-a62c-542ff3de289b",
-          "element": "field_uuid",
-          "field_type": "actioninvocation",
-          "show_if": null,
-          "show_link_header": false,
-          "step_label": null
-        },
         {
           "content": "2bff6802-bc66-4044-859f-5fd326149c85",
           "element": "field_uuid",
@@ -41,7 +27,47 @@
           "step_label": null
         },
         {
-          "content": "76e09ff6-f8ca-4c5f-bfcc-801ec6a8372a",
+          "content": "cbc02626-2673-49ed-a11d-14ee6a34cbc9",
+          "element": "field_uuid",
+          "field_type": "actioninvocation",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "cfd08d81-2598-46d6-b4d8-cb5b083d9afd",
+          "element": "field_uuid",
+          "field_type": "actioninvocation",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "209f2896-2427-48ae-a6e8-45803160ebc5",
+          "element": "field_uuid",
+          "field_type": "actioninvocation",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "8ae7377f-d799-4ad9-af81-9ffece3b29a6",
+          "element": "field_uuid",
+          "field_type": "actioninvocation",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "076bf9ea-79be-471e-82d4-cc27de3f3ab7",
+          "element": "field_uuid",
+          "field_type": "actioninvocation",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "3ac24106-39a2-4843-9ba0-a92da2f453cf",
           "element": "field_uuid",
           "field_type": "actioninvocation",
           "show_if": null,
@@ -50,6 +76,22 @@
         },
         {
           "content": "f9831ec1-c511-455f-a142-2c1155c9130d",
+          "element": "field_uuid",
+          "field_type": "actioninvocation",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "a977f7a7-ef06-4d38-a4ed-f293b5066989",
+          "element": "field_uuid",
+          "field_type": "actioninvocation",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "76e09ff6-f8ca-4c5f-bfcc-801ec6a8372a",
           "element": "field_uuid",
           "field_type": "actioninvocation",
           "show_if": null,
@@ -64,7 +106,7 @@
   ],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1614686846587,
+  "export_date": 1614812203927,
   "export_format_version": 2,
   "fields": [
     {
@@ -77,7 +119,7 @@
       "deprecated": false,
       "export_key": "__function/task_id",
       "hide_notification": false,
-      "id": 213,
+      "id": 704,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -106,7 +148,7 @@
       "deprecated": false,
       "export_key": "__function/incident_id",
       "hide_notification": false,
-      "id": 220,
+      "id": 701,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -135,7 +177,7 @@
       "deprecated": false,
       "export_key": "__function/remedy_payload",
       "hide_notification": false,
-      "id": 214,
+      "id": 929,
       "input_type": "textarea",
       "internal": false,
       "is_tracked": false,
@@ -164,7 +206,7 @@
       "deprecated": false,
       "export_key": "__function/remedy_incident_name",
       "hide_notification": false,
-      "id": 212,
+      "id": 930,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -185,6 +227,72 @@
     },
     {
       "allow_default_value": false,
+      "blank_option": true,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "actioninvocation/remedy_urgency",
+      "hide_notification": false,
+      "id": 934,
+      "input_type": "select",
+      "internal": false,
+      "is_tracked": false,
+      "name": "remedy_urgency",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": "properties",
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "Remedy Urgency",
+      "tooltip": "Urgency to assign to the Remedy form",
+      "type_id": 6,
+      "uuid": "8ae7377f-d799-4ad9-af81-9ffece3b29a6",
+      "values": [
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "1-Critical",
+          "properties": null,
+          "uuid": "a84342c0-8084-4457-8ea4-1d40f6738409",
+          "value": 673
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "2-High",
+          "properties": null,
+          "uuid": "e571569c-5c7a-48ca-bea0-a2719bc2e541",
+          "value": 674
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "3-Medium",
+          "properties": null,
+          "uuid": "05c6e6c2-62f4-4d50-9946-49a97ace3dd2",
+          "value": 675
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "4-Low",
+          "properties": null,
+          "uuid": "598471fb-2b98-432c-ab6f-54ed8b454a06",
+          "value": 676
+        }
+      ]
+    },
+    {
+      "allow_default_value": false,
       "blank_option": false,
       "calculated": false,
       "changeable": true,
@@ -193,7 +301,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/remedy_note",
       "hide_notification": false,
-      "id": 219,
+      "id": 924,
       "input_type": "textarea",
       "internal": false,
       "is_tracked": false,
@@ -220,13 +328,13 @@
       "chosen": false,
       "default_chosen_by_server": false,
       "deprecated": false,
-      "export_key": "actioninvocation/remedy_serviceq",
+      "export_key": "actioninvocation/remedy_first_name",
       "hide_notification": false,
-      "id": 218,
+      "id": 931,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
-      "name": "remedy_serviceq",
+      "name": "remedy_first_name",
       "operation_perms": {},
       "operations": [],
       "placeholder": "",
@@ -235,10 +343,10 @@
       "rich_text": false,
       "tags": [],
       "templates": [],
-      "text": "Remedy Service",
-      "tooltip": "Which Remedy Service is associated with this Incident",
+      "text": "Remedy First Name",
+      "tooltip": "First name of the Remedy user to assign",
       "type_id": 6,
-      "uuid": "eb2e0522-4e18-46a8-a62c-542ff3de289b",
+      "uuid": "cbc02626-2673-49ed-a11d-14ee6a34cbc9",
       "values": []
     },
     {
@@ -249,9 +357,38 @@
       "chosen": false,
       "default_chosen_by_server": false,
       "deprecated": false,
+      "export_key": "actioninvocation/remedy_last_name",
+      "hide_notification": false,
+      "id": 932,
+      "input_type": "text",
+      "internal": false,
+      "is_tracked": false,
+      "name": "remedy_last_name",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": "properties",
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "Remedy Last Name",
+      "tooltip": "Last name of the Remedy user to assign",
+      "type_id": 6,
+      "uuid": "cfd08d81-2598-46d6-b4d8-cb5b083d9afd",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": true,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
       "export_key": "actioninvocation/remedy_reported_source",
       "hide_notification": false,
-      "id": 221,
+      "id": 926,
       "input_type": "select",
       "internal": false,
       "is_tracked": false,
@@ -270,13 +407,13 @@
       "uuid": "f9831ec1-c511-455f-a142-2c1155c9130d",
       "values": [
         {
-          "default": true,
+          "default": false,
           "enabled": true,
           "hidden": false,
           "label": "Direct Input",
           "properties": null,
           "uuid": "22d89ff3-db61-4c32-81f7-867772c69c4e",
-          "value": 52
+          "value": 652
         },
         {
           "default": false,
@@ -285,7 +422,7 @@
           "label": "Email",
           "properties": null,
           "uuid": "a08b4372-1c1f-412a-bcef-92f78b2dca44",
-          "value": 53
+          "value": 653
         },
         {
           "default": false,
@@ -294,7 +431,7 @@
           "label": "External Escalation",
           "properties": null,
           "uuid": "fb132e77-f1bd-424e-b652-d6830ab30935",
-          "value": 54
+          "value": 654
         },
         {
           "default": false,
@@ -303,7 +440,7 @@
           "label": "Fax",
           "properties": null,
           "uuid": "dae4c261-9743-4f66-ac16-224ea537e1a0",
-          "value": 55
+          "value": 655
         },
         {
           "default": false,
@@ -312,7 +449,7 @@
           "label": "Self Service",
           "properties": null,
           "uuid": "fd910d74-cb45-4aef-99e7-c9cb30cce6bd",
-          "value": 56
+          "value": 656
         },
         {
           "default": false,
@@ -321,7 +458,7 @@
           "label": "Systems Management",
           "properties": null,
           "uuid": "157c3ab1-568f-4908-8e78-e7728943f6a3",
-          "value": 57
+          "value": 657
         },
         {
           "default": false,
@@ -330,7 +467,7 @@
           "label": "Phone",
           "properties": null,
           "uuid": "684c7a18-f6f1-44e6-9a09-0d92bf7d6be1",
-          "value": 58
+          "value": 658
         },
         {
           "default": false,
@@ -339,7 +476,7 @@
           "label": "Voice Mail",
           "properties": null,
           "uuid": "43056ab2-c3aa-4466-afe0-f7de900c679f",
-          "value": 59
+          "value": 659
         },
         {
           "default": false,
@@ -348,7 +485,7 @@
           "label": "Walk In",
           "properties": null,
           "uuid": "581abf4e-7942-493c-9577-188ecb3f33cf",
-          "value": 60
+          "value": 660
         },
         {
           "default": false,
@@ -357,7 +494,7 @@
           "label": "Web",
           "properties": null,
           "uuid": "9d024012-25e0-464c-8e2c-9eff33d9312d",
-          "value": 61
+          "value": 661
         },
         {
           "default": false,
@@ -366,7 +503,7 @@
           "label": "Other",
           "properties": null,
           "uuid": "fdbbce1d-0f2c-4306-9f39-849100e0f4f8",
-          "value": 62
+          "value": 662
         },
         {
           "default": false,
@@ -375,7 +512,148 @@
           "label": "BMC Impact Manager Event",
           "properties": null,
           "uuid": "0a4b1301-2064-4694-b88e-b2fefcda91d0",
-          "value": 63
+          "value": 663
+        }
+      ]
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": true,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "actioninvocation/remedy_service_type",
+      "hide_notification": false,
+      "id": 936,
+      "input_type": "select",
+      "internal": false,
+      "is_tracked": false,
+      "name": "remedy_service_type",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": "properties",
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "Remedy Service Type",
+      "tooltip": "Service type to assign to the Remedy form",
+      "type_id": 6,
+      "uuid": "076bf9ea-79be-471e-82d4-cc27de3f3ab7",
+      "values": [
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "User Service Restoration",
+          "properties": null,
+          "uuid": "0f0716a5-dd16-46f5-ba69-c0ef3c16245d",
+          "value": 689
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "User Service Request",
+          "properties": null,
+          "uuid": "c54c7389-7298-4481-8e12-194e2aec1467",
+          "value": 690
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "Infrastructure Restoration",
+          "properties": null,
+          "uuid": "ea38f484-a8b1-490a-9b81-8f8a706b96ca",
+          "value": 691
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "Infrastructure Event",
+          "properties": null,
+          "uuid": "92f32723-f65f-4816-b15c-a80f3f6c0596",
+          "value": 692
+        },
+        {
+          "default": true,
+          "enabled": true,
+          "hidden": false,
+          "label": "Security Incident",
+          "properties": null,
+          "uuid": "ef5aad57-a740-41dd-8210-0997a4441549",
+          "value": 693
+        }
+      ]
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": true,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "actioninvocation/remedy_impact",
+      "hide_notification": false,
+      "id": 935,
+      "input_type": "select",
+      "internal": false,
+      "is_tracked": false,
+      "name": "remedy_impact",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": "properties",
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "Remedy Impact",
+      "tooltip": "Impact to assign to the Remedy form",
+      "type_id": 6,
+      "uuid": "209f2896-2427-48ae-a6e8-45803160ebc5",
+      "values": [
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "1-Extensive/Widespread",
+          "properties": null,
+          "uuid": "a43a4b7a-54df-4dfe-aea9-dd85e23625d9",
+          "value": 677
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "2-Significant/Large",
+          "properties": null,
+          "uuid": "b84e3042-32ef-41c0-b961-924412a6ffff",
+          "value": 678
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "3-Moderate/Limited",
+          "properties": null,
+          "uuid": "b4d2ffae-2502-4ac3-a175-b1371c5055f5",
+          "value": 679
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "4-Minor/Localized",
+          "properties": null,
+          "uuid": "138d917d-7bcf-4be6-9a6b-5fa979b37176",
+          "value": 680
         }
       ]
     },
@@ -389,7 +667,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/remedy_template",
       "hide_notification": false,
-      "id": 215,
+      "id": 927,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -410,6 +688,99 @@
     },
     {
       "allow_default_value": false,
+      "blank_option": true,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "actioninvocation/remedy_status",
+      "hide_notification": false,
+      "id": 937,
+      "input_type": "select",
+      "internal": false,
+      "is_tracked": false,
+      "name": "remedy_status",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": "properties",
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "Remedy Status",
+      "tooltip": "The status to assign to the Remedy form",
+      "type_id": 6,
+      "uuid": "3ac24106-39a2-4843-9ba0-a92da2f453cf",
+      "values": [
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "New",
+          "properties": null,
+          "uuid": "c8e5ce2b-1081-439b-8db2-ef7d86401e85",
+          "value": 694
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "Assigned",
+          "properties": null,
+          "uuid": "0c19bd7b-8bd6-4592-b7ac-bad12f581c68",
+          "value": 695
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "In Progress",
+          "properties": null,
+          "uuid": "0b09fe1c-eba9-4dd9-a8a0-f8260fe56ee7",
+          "value": 696
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "Pending",
+          "properties": null,
+          "uuid": "a49f9b73-6b99-4825-aaa8-3656a21bc1e3",
+          "value": 697
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "Resolved",
+          "properties": null,
+          "uuid": "aa0b8bc0-943b-415b-84e7-3322d83a38cc",
+          "value": 698
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "Closed",
+          "properties": null,
+          "uuid": "916379e0-d4c1-45a5-b383-181367b42050",
+          "value": 699
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "Cancelled",
+          "properties": null,
+          "uuid": "3f5c9627-6e3f-429f-b7ac-6a24a6b46e03",
+          "value": 700
+        }
+      ]
+    },
+    {
+      "allow_default_value": false,
       "blank_option": false,
       "calculated": false,
       "changeable": true,
@@ -418,7 +789,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/remedy_support_group_to_assign",
       "hide_notification": false,
-      "id": 222,
+      "id": 928,
       "input_type": "select",
       "internal": false,
       "is_tracked": false,
@@ -443,7 +814,7 @@
           "label": "Backoffice Support",
           "properties": null,
           "uuid": "4fc1dfe4-0b5e-4fee-99a6-12b729f0114b",
-          "value": 64
+          "value": 664
         },
         {
           "default": false,
@@ -452,7 +823,7 @@
           "label": "Change Management",
           "properties": null,
           "uuid": "8234ad53-86eb-437e-8f5a-4ab30c469834",
-          "value": 65
+          "value": 665
         },
         {
           "default": false,
@@ -461,7 +832,7 @@
           "label": "Frontoffice Suport",
           "properties": null,
           "uuid": "24d01fcd-4f8b-4c95-a43b-48cf7870f66c",
-          "value": 66
+          "value": 666
         },
         {
           "default": false,
@@ -470,7 +841,7 @@
           "label": "Service Desk",
           "properties": null,
           "uuid": "36732d30-3917-4e07-ae93-a6656038a4fd",
-          "value": 67
+          "value": 667
         },
         {
           "default": true,
@@ -479,7 +850,7 @@
           "label": "SOC",
           "properties": null,
           "uuid": "7cda3bb8-ee25-4342-983c-2d93e4fe0069",
-          "value": 68
+          "value": 668
         }
       ]
     },
@@ -498,9 +869,9 @@
   "functions": [
     {
       "creator": {
-        "display_name": "Admin User",
+        "display_name": "Brian Reid",
         "id": 1,
-        "name": "admin@example.com",
+        "name": "a@example.com",
         "type": "user"
       },
       "description": {
@@ -510,14 +881,14 @@
       "destination_handle": "fn_remedy",
       "display_name": "Remedy: Create Incident",
       "export_key": "remedy_create_incident",
-      "id": 1,
+      "id": 95,
       "last_modified_by": {
-        "display_name": "Admin User",
+        "display_name": "Brian Reid",
         "id": 1,
-        "name": "admin@example.com",
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1614339356111,
+      "last_modified_time": 1614799890926,
       "name": "remedy_create_incident",
       "tags": [],
       "uuid": "914c7f97-8d48-4cfb-a411-0da2957950c4",
@@ -565,19 +936,19 @@
           "programmatic_name": "create_a_remedy_incident_from_task",
           "tags": [],
           "uuid": null,
-          "workflow_id": 1
+          "workflow_id": 110
         }
       ]
     }
   ],
   "geos": null,
   "groups": null,
-  "id": 4,
+  "id": 5,
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1614799825566,
+      "create_date": 1614812219204,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -586,7 +957,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1614799825566,
+      "update_date": 1614812219204,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -595,10 +966,7 @@
   "locale": null,
   "message_destinations": [
     {
-      "api_keys": [
-        "80a1a29b-5cb5-4c37-8655-e18837968b43",
-        "ad261c1f-f1cc-4115-bbce-a151f88bac5e"
-      ],
+      "api_keys": [],
       "destination_type": 0,
       "expect_ack": true,
       "export_key": "fn_remedy",
@@ -606,7 +974,7 @@
       "programmatic_name": "fn_remedy",
       "tags": [],
       "users": [
-        "admin@example.com"
+        "a@example.com"
       ],
       "uuid": "251c5949-0bcb-4db3-bbbd-cd2832d7d550"
     }
@@ -642,7 +1010,7 @@
           "deprecated": false,
           "export_key": "remedy_linked_incidents_reference_table/extra",
           "hide_notification": false,
-          "id": 223,
+          "id": 919,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -658,7 +1026,7 @@
           "templates": [],
           "text": "Extra",
           "tooltip": "",
-          "type_id": 1000,
+          "type_id": 1003,
           "uuid": "a187d2ef-afa1-4fd4-acd3-20ddd53366b6",
           "values": [],
           "width": 50
@@ -673,7 +1041,7 @@
           "deprecated": false,
           "export_key": "remedy_linked_incidents_reference_table/remedy_id",
           "hide_notification": false,
-          "id": 224,
+          "id": 920,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -689,7 +1057,7 @@
           "templates": [],
           "text": "Remedy ID",
           "tooltip": "",
-          "type_id": 1000,
+          "type_id": 1003,
           "uuid": "1870ab95-e280-412b-9235-71db10529a6e",
           "values": [],
           "width": 203
@@ -704,7 +1072,7 @@
           "deprecated": false,
           "export_key": "remedy_linked_incidents_reference_table/status",
           "hide_notification": false,
-          "id": 225,
+          "id": 921,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -720,7 +1088,7 @@
           "templates": [],
           "text": "Status",
           "tooltip": "",
-          "type_id": 1000,
+          "type_id": 1003,
           "uuid": "845c1ce2-88e3-4874-a460-b47ac52cc0fc",
           "values": [],
           "width": 79
@@ -735,7 +1103,7 @@
           "deprecated": false,
           "export_key": "remedy_linked_incidents_reference_table/taskincident_id",
           "hide_notification": false,
-          "id": 226,
+          "id": 922,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -751,7 +1119,7 @@
           "templates": [],
           "text": "Task/Incident ID",
           "tooltip": "",
-          "type_id": 1000,
+          "type_id": 1003,
           "uuid": "6f1ec8eb-aaec-4b47-b032-1f8f7c901e47",
           "values": [],
           "width": 108
@@ -766,7 +1134,7 @@
           "deprecated": false,
           "export_key": "remedy_linked_incidents_reference_table/timestamp",
           "hide_notification": false,
-          "id": 227,
+          "id": 923,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -782,7 +1150,7 @@
           "templates": [],
           "text": "timestamp",
           "tooltip": "",
-          "type_id": 1000,
+          "type_id": 1003,
           "uuid": "fb2b36a0-d5e1-4df2-88ae-9da71cab2d95",
           "values": [],
           "width": 138
@@ -814,20 +1182,20 @@
       "content": {
         "version": 3,
         "workflow_id": "create_a_remedy_incident_from_task",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"create_a_remedy_incident_from_task\" isExecutable=\"true\" name=\"Create a Remedy Incident from Task\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_16gpxlj\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0herueu\" name=\"Remedy: Create Incident\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"914c7f97-8d48-4cfb-a411-0da2957950c4\"\u003e{\"inputs\":{},\"pre_processing_script\":\"# Importing JSON means this function has a hard requirement on the python 3 feature.\\nimport json\\n\\n\\n# Any of the selected Activity Fields in the rule are taken in and formed as a dict\\npayload = {\\n  \\\"service\\\": rule.properties.remedy_serviceq,\\n  \\\"template\\\": rule.properties.remedy_template,\\n  \\\"group\\\": rule.properties.remedy_support_group_to_assign,\\n  \\\"source\\\": rule.properties.remedy_reported_source,\\n  \\\"note\\\": rule.properties.remedy_note,\\n}\\n\\ninputs.task_id = task.id \\ninputs.incident_id = incident.id\\ninputs.remedy_incident_name = task.name\\ninputs.remedy_payload = json.dumps(payload)\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_16gpxlj\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_104rfpk\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_16gpxlj\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0herueu\"/\u003e\u003cendEvent id=\"EndEvent_07o8z3v\"\u003e\u003cincoming\u003eSequenceFlow_104rfpk\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_104rfpk\" sourceRef=\"ServiceTask_0herueu\" targetRef=\"EndEvent_07o8z3v\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0herueu\" id=\"ServiceTask_0herueu_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"547\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_16gpxlj\" id=\"SequenceFlow_16gpxlj_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"547\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"372.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_07o8z3v\" id=\"EndEvent_07o8z3v_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"1003\" y=\"180\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"1021\" y=\"219\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_104rfpk\" id=\"SequenceFlow_104rfpk_di\"\u003e\u003comgdi:waypoint x=\"652\" xsi:type=\"omgdc:Point\" y=\"198\"/\u003e\u003comgdi:waypoint x=\"1003\" xsi:type=\"omgdc:Point\" y=\"198\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"782.5\" y=\"176.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"create_a_remedy_incident_from_task\" isExecutable=\"true\" name=\"Create a Remedy Incident from Task\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_16gpxlj\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0herueu\" name=\"Remedy: Create Incident\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"914c7f97-8d48-4cfb-a411-0da2957950c4\"\u003e{\"inputs\":{},\"pre_processing_script\":\"# Importing JSON means this function has a hard requirement on the python 3 feature.\\nimport json\\n\\n\\n# Any of the selected Activity Fields in the rule are taken in and formed as a dict\\npayload = {\\n  \\\"template\\\": rule.properties.remedy_template,\\n  \\\"first_name\\\": rule.properties.remedy_first_name,\\n  \\\"last_name\\\": rule.properties.remedy_last_name,\\n  \\\"impact\\\": rule.properties.remedy_impact,\\n  \\\"urgency\\\": rule.properties.remedy_urgency,\\n  \\\"service_type\\\": rule.properties.remedy_service_type,\\n  \\\"status\\\": rule.properties.remedy_status,\\n  \\\"reported_source\\\": rule.properties.remedy_reported_source,\\n  \\\"note\\\": rule.properties.remedy_note,\\n  \\\"group\\\": rule.properties.remedy_support_group_to_assign\\n}\\n\\ninputs.task_id = task.id \\ninputs.incident_id = incident.id\\ninputs.remedy_incident_name = task.name\\ninputs.remedy_payload = json.dumps(payload)\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_16gpxlj\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_104rfpk\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_16gpxlj\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0herueu\"/\u003e\u003cendEvent id=\"EndEvent_07o8z3v\"\u003e\u003cincoming\u003eSequenceFlow_104rfpk\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_104rfpk\" sourceRef=\"ServiceTask_0herueu\" targetRef=\"EndEvent_07o8z3v\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0herueu\" id=\"ServiceTask_0herueu_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"547\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_16gpxlj\" id=\"SequenceFlow_16gpxlj_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"547\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"372.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_07o8z3v\" id=\"EndEvent_07o8z3v_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"1003\" y=\"180\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"1021\" y=\"219\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_104rfpk\" id=\"SequenceFlow_104rfpk_di\"\u003e\u003comgdi:waypoint x=\"652\" xsi:type=\"omgdc:Point\" y=\"198\"/\u003e\u003comgdi:waypoint x=\"1003\" xsi:type=\"omgdc:Point\" y=\"198\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"782.5\" y=\"176.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "content_version": 3,
-      "creator_id": "admin@example.com",
+      "creator_id": "a@example.com",
       "description": "",
       "export_key": "create_a_remedy_incident_from_task",
-      "last_modified_by": "admin@example.com",
-      "last_modified_time": 1614340255255,
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1614801886313,
       "name": "Create a Remedy Incident from Task",
       "object_type": "task",
       "programmatic_name": "create_a_remedy_incident_from_task",
       "tags": [],
       "uuid": "cafb745a-f842-4c43-a4a4-c07b0589ee71",
-      "workflow_id": 1
+      "workflow_id": 110
     }
   ],
   "workspaces": []
