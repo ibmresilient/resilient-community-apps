@@ -14,10 +14,8 @@ FN_NAME = "cisco_asa_get_network_objects"
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'cisco_asa_get_network_objects''"""
-
-    def __init__(self, opts):
-        """Constructor provides access to the configuration options"""
-        super(FunctionComponent, self).__init__(opts)
+    def _load_opts(self, opts):
+        """ Load the options """
         self.fn_options = opts.get(PACKAGE_NAME, {})
         
         required_fields = ["firewalls"]
@@ -27,15 +25,21 @@ class FunctionComponent(ResilientComponent):
         cisco_asa_firewalls = self.fn_options.get("firewalls")
         firewall_list = [item.strip() for item in cisco_asa_firewalls.split(",")]
 
+        # Load the rule activity select field with the firewall options from app.config
         self._init_firewall_choices("cisco_asa_firewall", firewall_list)
+
+        # Load the firewall options from the app.config
         self.firewalls = CiscoASAFirewalls(opts, self.fn_options)
+
+    def __init__(self, opts):
+        """Constructor provides access to the configuration options"""
+        super(FunctionComponent, self).__init__(opts)
+        self._load_opts(opts)
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
-        self.fn_options = opts.get(PACKAGE_NAME, {})
-        self.firewalls = CiscoASAFirewalls(opts, self.fn_options)
-        self._init_firewall_choices("cisco_asa_firewall", self.firewalls)
+        self._load_opts(opts)
 
     @function(FN_NAME)
     def _cisco_asa_get_network_objects_function(self, event, *args, **kwargs):
@@ -45,7 +49,6 @@ class FunctionComponent(ResilientComponent):
             rc = RequestsCommon(self.opts, self.fn_options)
             rp = ResultPayload(PACKAGE_NAME, **kwargs)
 
-
             yield StatusMessage("Starting '{0}'".format(FN_NAME))
 
             # Get the function parameters
@@ -53,9 +56,11 @@ class FunctionComponent(ResilientComponent):
             network_object_group = kwargs.get("cisco_asa_network_object_group")  # text
             LOG.info(u"cisco_asa_network_object_group: %s", network_object_group)
 
-            yield StatusMessage("Validations complete. Starting business logic")
+
             firewall_options = self.firewalls.get_firewall(firewall_name)
             asa = CiscoASAClient(firewall_options, rc)
+
+            yield StatusMessage("Validations complete. Get the network objects.")
             response = asa.get_network_object_group(network_object_group)
 
             results = rp.done(True, response)
