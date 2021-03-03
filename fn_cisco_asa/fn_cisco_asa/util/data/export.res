@@ -15,7 +15,16 @@
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "708955e6-dd70-4d30-8414-636bcc4c525f",
-      "view_items": [],
+      "view_items": [
+        {
+          "content": "a542b836-087c-4e9f-a491-9bf74a9a6239",
+          "element": "field_uuid",
+          "field_type": "actioninvocation",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        }
+      ],
       "workflows": [
         "example_cisco_asa_get_blacklist_inbound"
       ]
@@ -34,7 +43,16 @@
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "ec0089bf-84fd-47f3-997a-143e3e979a1e",
-      "view_items": [],
+      "view_items": [
+        {
+          "content": "a542b836-087c-4e9f-a491-9bf74a9a6239",
+          "element": "field_uuid",
+          "field_type": "actioninvocation",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        }
+      ],
       "workflows": [
         "example_cisco_asa_get_blacklist_outbound"
       ]
@@ -42,39 +60,9 @@
   ],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1614569888112,
+  "export_date": 1614639829472,
   "export_format_version": 2,
   "fields": [
-    {
-      "allow_default_value": false,
-      "blank_option": false,
-      "calculated": false,
-      "changeable": true,
-      "chosen": false,
-      "default_chosen_by_server": false,
-      "deprecated": false,
-      "export_key": "__function/cisco_asa_host",
-      "hide_notification": false,
-      "id": 198,
-      "input_type": "text",
-      "internal": false,
-      "is_tracked": false,
-      "name": "cisco_asa_host",
-      "operation_perms": {},
-      "operations": [],
-      "placeholder": "",
-      "prefix": null,
-      "read_only": false,
-      "required": "always",
-      "rich_text": false,
-      "tags": [],
-      "templates": [],
-      "text": "cisco_asa_host",
-      "tooltip": "",
-      "type_id": 11,
-      "uuid": "6e5a3cb6-18fe-4dae-9b87-a8c5d889b070",
-      "values": []
-    },
     {
       "allow_default_value": false,
       "blank_option": false,
@@ -104,6 +92,85 @@
       "type_id": 11,
       "uuid": "737cf112-4adc-4e54-b7a1-a5d696340dcc",
       "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "__function/cisco_asa_firewall",
+      "hide_notification": false,
+      "id": 198,
+      "input_type": "text",
+      "internal": false,
+      "is_tracked": false,
+      "name": "cisco_asa_firewall",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": null,
+      "read_only": false,
+      "required": "always",
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "cisco_asa_firewall",
+      "tooltip": "",
+      "type_id": 11,
+      "uuid": "6e5a3cb6-18fe-4dae-9b87-a8c5d889b070",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "actioninvocation/cisco_asa_firewall",
+      "hide_notification": false,
+      "id": 205,
+      "input_type": "select",
+      "internal": false,
+      "is_tracked": false,
+      "name": "cisco_asa_firewall",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": "properties",
+      "read_only": false,
+      "required": "always",
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "Cisco ASA Firewall",
+      "tooltip": "",
+      "type_id": 6,
+      "uuid": "a542b836-087c-4e9f-a491-9bf74a9a6239",
+      "values": [
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "firewall_1",
+          "properties": null,
+          "uuid": "af5e58e6-b0f3-46f9-9c03-896e743aaa29",
+          "value": 52
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "firewall_2",
+          "properties": null,
+          "uuid": "9f031da0-c0ca-4057-bea1-f38244e49068",
+          "value": 53
+        }
+      ]
     },
     {
       "export_key": "incident/internal_customizations_field",
@@ -188,12 +255,12 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 10,
+  "id": 14,
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1614625511071,
+      "create_date": 1614795737595,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -202,7 +269,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1614625511071,
+      "update_date": 1614795737595,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -245,7 +312,7 @@
       "display_name": "Cisco ASA Blacklist Inbound",
       "export_key": "cisco_asa_inbound_dt",
       "fields": {
-        "cisco_asa_host": {
+        "cisco_asa_firewall": {
           "allow_default_value": false,
           "blank_option": true,
           "calculated": false,
@@ -253,13 +320,13 @@
           "chosen": true,
           "default_chosen_by_server": false,
           "deprecated": false,
-          "export_key": "cisco_asa_inbound_dt/cisco_asa_host",
+          "export_key": "cisco_asa_inbound_dt/cisco_asa_firewall",
           "hide_notification": false,
           "id": 194,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
-          "name": "cisco_asa_host",
+          "name": "cisco_asa_firewall",
           "operation_perms": {},
           "operations": [],
           "order": 1,
@@ -270,7 +337,7 @@
           "rich_text": false,
           "tags": [],
           "templates": [],
-          "text": "Cisco ASA Host",
+          "text": "Cisco ASA Firewall",
           "tooltip": "",
           "type_id": 1000,
           "uuid": "bad68072-c0ed-4111-af17-02132d5703e6",
@@ -430,7 +497,7 @@
       "display_name": "Cisco ASA Blacklist Outbound",
       "export_key": "cisco_asa_outbound_dt",
       "fields": {
-        "cisco_asa_host": {
+        "cisco_asa_firewall": {
           "allow_default_value": false,
           "blank_option": true,
           "calculated": false,
@@ -438,13 +505,13 @@
           "chosen": true,
           "default_chosen_by_server": false,
           "deprecated": false,
-          "export_key": "cisco_asa_outbound_dt/cisco_asa_host",
+          "export_key": "cisco_asa_outbound_dt/cisco_asa_firewall",
           "hide_notification": false,
           "id": 200,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
-          "name": "cisco_asa_host",
+          "name": "cisco_asa_firewall",
           "operation_perms": {},
           "operations": [],
           "order": 1,
@@ -455,7 +522,7 @@
           "rich_text": false,
           "tags": [],
           "templates": [],
-          "text": "Cisco ASA Host",
+          "text": "Cisco ASA Firewall",
           "tooltip": "",
           "type_id": 1001,
           "uuid": "1788a159-9409-488a-83d0-05aa83ee1105",
@@ -615,16 +682,16 @@
     {
       "actions": [],
       "content": {
-        "version": 12,
+        "version": 17,
         "workflow_id": "example_cisco_asa_get_blacklist_inbound",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_cisco_asa_get_blacklist_inbound\" isExecutable=\"true\" name=\"Example: Cisco ASA Get Blacklist Inbound\"\u003e\u003cdocumentation\u003eExample workflow that gets the network objects of the specified network object group and writes them to the Blacklist Inbound data table.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0lrikjy\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_181hekj\" name=\"Cisco ASA Get Network Objects\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"af7d53df-369d-4e78-b33b-865d5a85895a\"\u003e{\"inputs\":{},\"post_processing_script\":\"from java.util import Date\\n\\ncontent = results.get(\\\"content\\\")\\nmember_list = content.get(\\\"members\\\")\\nhost = results.inputs.get(\\\"cisco_asa_host\\\")\\n\\n# Add each email as a row in the query results data table\\nfor network_object in member_list:\\n  network_object_row = incident.addRow(\\\"cisco_asa_inbound_dt\\\")\\n  network_object_row.cisco_asa_query_date = Date()\\n  network_object_row.cisco_asa_host = host\\n  network_object_row.cisco_asa_network_object_kind = network_object.get(\\\"kind\\\")\\n  network_object_row.cisco_asa_network_object_value = network_object.get(\\\"value\\\")  \\n  network_object_row.cisco_asa_status = \\\"Active\\\"\\n\",\"pre_processing_script\":\"inputs.cisco_asa_host = \\\"198.168.1.162\\\"\\ninputs.cisco_asa_network_object_group = \\\"BLACKLIST_IN\\\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0lrikjy\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0v4egf9\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0lrikjy\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_181hekj\"/\u003e\u003cendEvent id=\"EndEvent_14dhg81\"\u003e\u003cincoming\u003eSequenceFlow_0v4egf9\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0v4egf9\" sourceRef=\"ServiceTask_181hekj\" targetRef=\"EndEvent_14dhg81\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_06n52yh\"\u003e\u003ctext\u003e\u003c![CDATA[Input: Cisco ASA Host, Cisco ASA Network Object Group\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0e7erpf\" sourceRef=\"ServiceTask_181hekj\" targetRef=\"TextAnnotation_06n52yh\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_017886w\"\u003e\u003ctext\u003e\u003c![CDATA[Output: Network objects contained in the Network Object Group are written to the Blacklist Inbound data table\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_00cljd0\" sourceRef=\"ServiceTask_181hekj\" targetRef=\"TextAnnotation_017886w\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_181hekj\" id=\"ServiceTask_181hekj_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"571\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0lrikjy\" id=\"SequenceFlow_0lrikjy_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"571\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"384.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_14dhg81\" id=\"EndEvent_14dhg81_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"976\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"994\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0v4egf9\" id=\"SequenceFlow_0v4egf9_di\"\u003e\u003comgdi:waypoint x=\"671\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"976\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"823.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_06n52yh\" id=\"TextAnnotation_06n52yh_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"400\" y=\"52\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0e7erpf\" id=\"Association_0e7erpf_di\"\u003e\u003comgdi:waypoint x=\"577\" xsi:type=\"omgdc:Point\" y=\"170\"/\u003e\u003comgdi:waypoint x=\"468\" xsi:type=\"omgdc:Point\" y=\"82\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_017886w\" id=\"TextAnnotation_017886w_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"749\" y=\"52\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_00cljd0\" id=\"Association_00cljd0_di\"\u003e\u003comgdi:waypoint x=\"666\" xsi:type=\"omgdc:Point\" y=\"171\"/\u003e\u003comgdi:waypoint x=\"780\" xsi:type=\"omgdc:Point\" y=\"82\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_cisco_asa_get_blacklist_inbound\" isExecutable=\"true\" name=\"Example: Cisco ASA Get Blacklist Inbound\"\u003e\u003cdocumentation\u003eExample workflow that gets the network objects of the specified network object group and writes them to the Blacklist Inbound data table.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0lrikjy\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_181hekj\" name=\"Cisco ASA Get Network Objects\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"af7d53df-369d-4e78-b33b-865d5a85895a\"\u003e{\"inputs\":{},\"post_processing_script\":\"from java.util import Date\\n\\ncontent = results.get(\\\"content\\\")\\nmember_list = content.get(\\\"members\\\")\\nfirewall = results.inputs.get(\\\"cisco_asa_firewall\\\")\\n\\n# Add each email as a row in the query results data table\\nfor network_object in member_list:\\n  network_object_row = incident.addRow(\\\"cisco_asa_inbound_dt\\\")\\n  network_object_row.cisco_asa_query_date = Date()\\n  network_object_row.cisco_asa_host = firewall\\n  network_object_row.cisco_asa_network_object_kind = network_object.get(\\\"kind\\\")\\n  network_object_row.cisco_asa_network_object_value = network_object.get(\\\"value\\\")  \\n  network_object_row.cisco_asa_status = \\\"Active\\\"\\n\",\"pre_processing_script\":\"inputs.cisco_asa_firewall = rule.properties.cisco_asa_firewall\\ninputs.cisco_asa_network_object_group = \\\"BLACKLIST_IN\\\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0lrikjy\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0v4egf9\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0lrikjy\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_181hekj\"/\u003e\u003cendEvent id=\"EndEvent_14dhg81\"\u003e\u003cincoming\u003eSequenceFlow_0v4egf9\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0v4egf9\" sourceRef=\"ServiceTask_181hekj\" targetRef=\"EndEvent_14dhg81\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_06n52yh\"\u003e\u003ctext\u003e\u003c![CDATA[Input: Cisco ASA Host, Cisco ASA Network Object Group\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0e7erpf\" sourceRef=\"ServiceTask_181hekj\" targetRef=\"TextAnnotation_06n52yh\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_017886w\"\u003e\u003ctext\u003e\u003c![CDATA[Output: Network objects contained in the Network Object Group are written to the Blacklist Inbound data table\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_00cljd0\" sourceRef=\"ServiceTask_181hekj\" targetRef=\"TextAnnotation_017886w\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_181hekj\" id=\"ServiceTask_181hekj_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"571\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0lrikjy\" id=\"SequenceFlow_0lrikjy_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"571\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"384.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_14dhg81\" id=\"EndEvent_14dhg81_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"976\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"994\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0v4egf9\" id=\"SequenceFlow_0v4egf9_di\"\u003e\u003comgdi:waypoint x=\"671\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"976\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"823.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_06n52yh\" id=\"TextAnnotation_06n52yh_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"400\" y=\"52\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0e7erpf\" id=\"Association_0e7erpf_di\"\u003e\u003comgdi:waypoint x=\"577\" xsi:type=\"omgdc:Point\" y=\"170\"/\u003e\u003comgdi:waypoint x=\"468\" xsi:type=\"omgdc:Point\" y=\"82\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_017886w\" id=\"TextAnnotation_017886w_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"749\" y=\"52\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_00cljd0\" id=\"Association_00cljd0_di\"\u003e\u003comgdi:waypoint x=\"666\" xsi:type=\"omgdc:Point\" y=\"171\"/\u003e\u003comgdi:waypoint x=\"780\" xsi:type=\"omgdc:Point\" y=\"82\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 12,
+      "content_version": 17,
       "creator_id": "a@a.com",
       "description": "Example workflow that gets the network objects of the specified network object group and writes them to the Blacklist Inbound data table.",
       "export_key": "example_cisco_asa_get_blacklist_inbound",
       "last_modified_by": "a@a.com",
-      "last_modified_time": 1614562286706,
+      "last_modified_time": 1614627506374,
       "name": "Example: Cisco ASA Get Blacklist Inbound",
       "object_type": "incident",
       "programmatic_name": "example_cisco_asa_get_blacklist_inbound",
@@ -635,16 +702,16 @@
     {
       "actions": [],
       "content": {
-        "version": 4,
+        "version": 10,
         "workflow_id": "example_cisco_asa_get_blacklist_outbound",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_cisco_asa_get_blacklist_outbound\" isExecutable=\"true\" name=\"Example: Cisco ASA Get Blacklist Outbound\"\u003e\u003cdocumentation\u003eExample workflow that gets the network objects of the specified network object group and writes them to the Blacklist Outbound data table.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_13b12t6\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0v61uwb\" name=\"Cisco ASA Get Network Objects\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"af7d53df-369d-4e78-b33b-865d5a85895a\"\u003e{\"inputs\":{},\"post_processing_script\":\"from java.util import Date\\n\\ncontent = results.get(\\\"content\\\")\\nmember_list = content.get(\\\"members\\\")\\nhost = results.inputs.get(\\\"cisco_asa_host\\\")\\n\\n# Add each email as a row in the query results data table\\nfor network_object in member_list:\\n  network_object_row = incident.addRow(\\\"cisco_asa_outbound_dt\\\")\\n  network_object_row.cisco_asa_query_date = Date()\\n  network_object_row.cisco_asa_host = host\\n  network_object_row.cisco_asa_network_object_kind = network_object.get(\\\"kind\\\")\\n  network_object_row.cisco_asa_network_object_value = network_object.get(\\\"value\\\")\\n  network_object_row.cisco_asa_status = \\\"Active\\\"\",\"pre_processing_script\":\"inputs.cisco_asa_host = \\\"192.168.1.162\\\"\\ninputs.cisco_asa_network_object_group = \\\"BLACKLIST_OUT\\\"\\n\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_13b12t6\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1y8zct9\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_13b12t6\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0v61uwb\"/\u003e\u003cendEvent id=\"EndEvent_0v5ttkx\"\u003e\u003cincoming\u003eSequenceFlow_1y8zct9\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1y8zct9\" sourceRef=\"ServiceTask_0v61uwb\" targetRef=\"EndEvent_0v5ttkx\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0y9v6s4\"\u003e\u003ctext\u003e\u003c![CDATA[Output: Network objects contained in the Network Object Group are written to the Blacklist Outbound data table\u00a0\n\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0ufu38x\" sourceRef=\"ServiceTask_0v61uwb\" targetRef=\"TextAnnotation_0y9v6s4\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0o0095c\"\u003e\u003ctext\u003eInput: Cisco ASA Host, Cisco ASA Network Object Group\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_19khdh2\" sourceRef=\"ServiceTask_0v61uwb\" targetRef=\"TextAnnotation_0o0095c\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0v61uwb\" id=\"ServiceTask_0v61uwb_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"501\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_13b12t6\" id=\"SequenceFlow_13b12t6_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"501\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"349.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0v5ttkx\" id=\"EndEvent_0v5ttkx_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"877\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"895\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1y8zct9\" id=\"SequenceFlow_1y8zct9_di\"\u003e\u003comgdi:waypoint x=\"601\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"877\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"739\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0y9v6s4\" id=\"TextAnnotation_0y9v6s4_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"102\" x=\"647\" y=\"61\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0ufu38x\" id=\"Association_0ufu38x_di\"\u003e\u003comgdi:waypoint x=\"593\" xsi:type=\"omgdc:Point\" y=\"168\"/\u003e\u003comgdi:waypoint x=\"681\" xsi:type=\"omgdc:Point\" y=\"91\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0o0095c\" id=\"TextAnnotation_0o0095c_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"320\" y=\"61\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_19khdh2\" id=\"Association_19khdh2_di\"\u003e\u003comgdi:waypoint x=\"504\" xsi:type=\"omgdc:Point\" y=\"173\"/\u003e\u003comgdi:waypoint x=\"391\" xsi:type=\"omgdc:Point\" y=\"91\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_cisco_asa_get_blacklist_outbound\" isExecutable=\"true\" name=\"Example: Cisco ASA Get Blacklist Outbound\"\u003e\u003cdocumentation\u003eExample workflow that gets the network objects of the specified network object group and writes them to the Blacklist Outbound data table.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_13b12t6\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0v61uwb\" name=\"Cisco ASA Get Network Objects\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"af7d53df-369d-4e78-b33b-865d5a85895a\"\u003e{\"inputs\":{},\"post_processing_script\":\"from java.util import Date\\n\\ncontent = results.get(\\\"content\\\")\\nmember_list = content.get(\\\"members\\\")\\nfirewall = results.inputs.get(\\\"cisco_asa_firewall\\\")\\n\\n# Add each email as a row in the query results data table\\nfor network_object in member_list:\\n  network_object_row = incident.addRow(\\\"cisco_asa_outbound_dt\\\")\\n  network_object_row.cisco_asa_query_date = Date()\\n  network_object_row.cisco_asa_firewall = firewall\\n  network_object_row.cisco_asa_network_object_kind = network_object.get(\\\"kind\\\")\\n  network_object_row.cisco_asa_network_object_value = network_object.get(\\\"value\\\")\\n  network_object_row.cisco_asa_status = \\\"Active\\\"\",\"pre_processing_script\":\"inputs.cisco_asa_firewall = rule.properties.cisco_asa_firewall\\ninputs.cisco_asa_network_object_group = \\\"BLACKLIST_OUT\\\"\\n\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_13b12t6\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1y8zct9\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_13b12t6\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0v61uwb\"/\u003e\u003cendEvent id=\"EndEvent_0v5ttkx\"\u003e\u003cincoming\u003eSequenceFlow_1y8zct9\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1y8zct9\" sourceRef=\"ServiceTask_0v61uwb\" targetRef=\"EndEvent_0v5ttkx\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0y9v6s4\"\u003e\u003ctext\u003e\u003c![CDATA[Output: Network objects contained in the Network Object Group are written to the Blacklist Outbound data table\u00a0\n\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0ufu38x\" sourceRef=\"ServiceTask_0v61uwb\" targetRef=\"TextAnnotation_0y9v6s4\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0o0095c\"\u003e\u003ctext\u003eInput: Cisco ASA Host, Cisco ASA Network Object Group\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_19khdh2\" sourceRef=\"ServiceTask_0v61uwb\" targetRef=\"TextAnnotation_0o0095c\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0v61uwb\" id=\"ServiceTask_0v61uwb_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"501\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_13b12t6\" id=\"SequenceFlow_13b12t6_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"501\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"349.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0v5ttkx\" id=\"EndEvent_0v5ttkx_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"877\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"895\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1y8zct9\" id=\"SequenceFlow_1y8zct9_di\"\u003e\u003comgdi:waypoint x=\"601\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"877\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"739\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0y9v6s4\" id=\"TextAnnotation_0y9v6s4_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"102\" x=\"647\" y=\"61\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0ufu38x\" id=\"Association_0ufu38x_di\"\u003e\u003comgdi:waypoint x=\"593\" xsi:type=\"omgdc:Point\" y=\"168\"/\u003e\u003comgdi:waypoint x=\"681\" xsi:type=\"omgdc:Point\" y=\"91\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0o0095c\" id=\"TextAnnotation_0o0095c_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"320\" y=\"61\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_19khdh2\" id=\"Association_19khdh2_di\"\u003e\u003comgdi:waypoint x=\"504\" xsi:type=\"omgdc:Point\" y=\"173\"/\u003e\u003comgdi:waypoint x=\"391\" xsi:type=\"omgdc:Point\" y=\"91\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 4,
+      "content_version": 10,
       "creator_id": "a@a.com",
       "description": "Example workflow that gets the network objects of the specified network object group and writes them to the Blacklist Outbound data table.",
       "export_key": "example_cisco_asa_get_blacklist_outbound",
       "last_modified_by": "a@a.com",
-      "last_modified_time": 1614569805569,
+      "last_modified_time": 1614639173684,
       "name": "Example: Cisco ASA Get Blacklist Outbound",
       "object_type": "incident",
       "programmatic_name": "example_cisco_asa_get_blacklist_outbound",
