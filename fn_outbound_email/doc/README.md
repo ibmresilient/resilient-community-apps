@@ -16,11 +16,14 @@
 
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| v1.1.1  | 2/2021 | Bug fixes associated with sending attachments |
+| v1.1.1  | 3/2021 | Bug fixes associated with sending attachments |
 | v1.1.0  | 10/2020 | Bug fixes and send all or specific attachments |
 | v1.0.9 | 5/2020 | App Host compatibility |
 | v1.0.8 | 4/2020 | Initial Release after internal development by Professional Services, no prior release notes |
 
+## 1.1.1 Notes
+Sending attachments are now enabled with the function input field `mail_attachments`. Specify the attachments
+as a case-sensitive comma separated list. Use `*` to represent sending all attachments.
 
 ## Key Features
 * Send a plain text or HTML-formatted email by triggering a Resilient action
