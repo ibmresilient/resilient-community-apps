@@ -20,7 +20,7 @@ def selftest_function(opts):
     """
     options = opts.get("fn_aws_guardduty", {})
     try:
-        aws_gd = AwsGdClient(opts, options)
+        aws_gd = AwsGdClient(opts, options, region=options.get("aws_gd_master_region"))
         # Get the DetectorId for the specified AWS Region.
         detector = aws_gd.get("list_detectors")
         if isinstance(detector, list):
