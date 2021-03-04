@@ -65,10 +65,15 @@ class FunctionComponent(ResilientComponent):
             LOG.info(u"cisco_asa_firewall: %s", firewall_name)
             LOG.info(u"cisco_asa_network_object_group: %s", network_object_group)
 
+            # Get the the options for this firewall.
             firewall_options = self.firewalls.get_firewall(firewall_name)
+
+            # Initialize the Cisco ASA object.
             asa = CiscoASAClient(self.fn_options, firewall_options, rc)
 
             yield StatusMessage("Validations complete. Get the network objects.")
+
+            # Call the ASA API to get the network objects in this network object group.
             response = asa.get_network_object_group(network_object_group)
 
             results = rp.done(True, response)
