@@ -701,7 +701,7 @@ class OracleDialect(ODBCDialectBase):
         :returns The SQL for the upsert.
         """
         clean_table_name = self.clean_keywords(self.RESERVE_LIST, table_name)
-        """
+
         # if we're dealing with a blob table column, just do an insert (no update)
         if any([bool(field_types.get(name, '') == "blob") for name in field_names]):
             select_values, clean_field_names = self.get_select_value(field_names, field_types, False)
@@ -712,27 +712,26 @@ class OracleDialect(ODBCDialectBase):
                                        ','.join(select_values))
             LOG.debug(sql_stmt)
         else:
-        """
-        select_values, clean_field_names = self.get_select_value(field_names, field_types, True)
-        value_setters = ["target.{0} = source.{0}".format(name.lower()) if name != "id" else None for name in clean_field_names]
-        filtered_value_setters = filter(None, value_setters)
+            select_values, clean_field_names = self.get_select_value(field_names, field_types, True)
+            value_setters = ["target.{0} = source.{0}".format(name.lower()) if name != "id" else None for name in clean_field_names]
+            filtered_value_setters = filter(None, value_setters)
 
-        value_placeholders = ['source.{}'.format(name.lower()) for name in clean_field_names]
+            value_placeholders = ['source.{}'.format(name.lower()) for name in clean_field_names]
 
-        template = """MERGE INTO {0} target
-            USING (
-                SELECT {1} FROM dual
-                ) source
-            ON (target.id = source.id)
-            WHEN MATCHED THEN  UPDATE SET {2}
-            WHEN NOT MATCHED THEN  INSERT ({3}) VALUES ({4})
-        """
+            template = """MERGE INTO {0} target
+                USING (
+                    SELECT {1} FROM dual
+                    ) source
+                ON (target.id = source.id)
+                WHEN MATCHED THEN  UPDATE SET {2}
+                WHEN NOT MATCHED THEN  INSERT ({3}) VALUES ({4})
+            """
 
-        sql_stmt = template.format(clean_table_name,
-                                    ','.join(select_values),
-                                    ','.join(filtered_value_setters),
-                                    ','.join(clean_field_names),
-                                    ','.join(value_placeholders))
+            sql_stmt = template.format(clean_table_name,
+                                        ','.join(select_values),
+                                        ','.join(filtered_value_setters),
+                                        ','.join(clean_field_names),
+                                        ','.join(value_placeholders))
 
         return sql_stmt
 
