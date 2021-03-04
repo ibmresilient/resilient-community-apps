@@ -21,12 +21,12 @@ def codegen_reload_data():
     return {
         "package": u"fn_remedy",
         "message_destinations": [u"fn_remedy"],
-        "functions": [],
-        "workflows": [],
-        "actions": [],
+        "functions": [u"remedy_create_incident"],
+        "workflows": [u"create_a_remedy_incident_from_task"],
+        "actions": [u"Create Remedy Incident from Task"],
         "incident_fields": [],
         "incident_artifact_types": [],
-        "datatables": [],
+        "datatables": [u"remedy_linked_incidents_reference_table"],
         "automatic_tasks": [],
         "scripts": []
     }
@@ -37,11 +37,19 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM Resilient Platform Version: 39.0.6328
+    IBM Resilient Platform Version: 37.0.0
 
     Contents:
     - Message Destinations:
         - fn_remedy
+    - Functions:
+        - remedy_create_incident
+    - Workflows:
+        - create_a_remedy_incident_from_task
+    - Rules:
+        - Create Remedy Incident from Task
+    - Data Tables:
+        - remedy_linked_incidents_reference_table
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)
