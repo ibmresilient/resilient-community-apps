@@ -23,7 +23,7 @@ def codegen_reload_data():
         "message_destinations": [u"email_outbound"],
         "functions": [u"send_email"],
         "workflows": [u"example_send_incident_email_html", u"example_send_incident_email_text"],
-        "actions": [u"Example: Send Incident Email Text", u"Example: Send Incident Email HTML"],
+        "actions": [u"Example: Send Incident Email HTML", u"Example: Send Incident Email Text"],
         "incident_fields": [],
         "incident_artifact_types": [],
         "datatables": [],
@@ -48,8 +48,8 @@ def customization_data(client=None):
         - example_send_incident_email_html
         - example_send_incident_email_text
     - Rules:
-        - Example: Send Incident Email Text
         - Example: Send Incident Email HTML
+        - Example: Send Incident Email Text
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)
