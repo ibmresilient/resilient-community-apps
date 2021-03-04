@@ -701,43 +701,70 @@ class OracleDialect(ODBCDialectBase):
         :returns The SQL for the upsert.
         """
         clean_table_name = self.clean_keywords(self.RESERVE_LIST, table_name)
+        """
+        # if we're dealing with a blob table column, just do an insert (no update)
+        if any([bool(field_types.get(name, '') == "blob") for name in field_names]):
+            select_values, clean_field_names = self.get_select_value(field_names, field_types, False)
+            template = "INSERT INTO {0} ({1}) VALUES ({2})"
 
-        select_values = []
-        clean_field_names = self.clean_keywords(self.RESERVE_LIST, field_names)
-        for name in field_names:
-            clean_name = self.clean_keywords(self.RESERVE_LIST, name)
-            if field_types.get(name, '') == "datepicker":
-                select_values.append("to_date(:{clean_name}, 'YYYY-MM-DD\"T\"HH24:MI:SS.######') as {clean_name}"\
-                            .format(clean_name=clean_name))
-            elif field_types.get(name, '') == "datetimepicker":
-                select_values.append("to_timestamp_tz(:{clean_name}, 'YYYY-MM-DD\"T\"HH24:MI:SS.FFTZH:TZM') as {clean_name}"\
-                            .format(clean_name=clean_name))
-            elif field_types.get(name, '') == "blob":
-                select_values.append("hextoraw(:{clean_name}) as {clean_name}".format(clean_name=clean_name))
-            else:
-                select_values.append(":{clean_name} as {clean_name}".format(clean_name=clean_name))
-
+            sql_stmt = template.format(clean_table_name,
+                                       ','.join(clean_field_names),
+                                       ','.join(select_values))
+            LOG.debug(sql_stmt)
+        else:
+        """
+        select_values, clean_field_names = self.get_select_value(field_names, field_types, True)
         value_setters = ["target.{0} = source.{0}".format(name.lower()) if name != "id" else None for name in clean_field_names]
         filtered_value_setters = filter(None, value_setters)
 
         value_placeholders = ['source.{}'.format(name.lower()) for name in clean_field_names]
 
         template = """MERGE INTO {0} target
-        USING (
-               SELECT {1} FROM dual
-              ) source
-        ON (target.id = source.id)
-        WHEN MATCHED THEN  UPDATE SET {2}
-        WHEN NOT MATCHED THEN  INSERT ({3}) VALUES ({4})
+            USING (
+                SELECT {1} FROM dual
+                ) source
+            ON (target.id = source.id)
+            WHEN MATCHED THEN  UPDATE SET {2}
+            WHEN NOT MATCHED THEN  INSERT ({3}) VALUES ({4})
         """
 
         sql_stmt = template.format(clean_table_name,
-                                   ','.join(select_values),
-                                   ','.join(filtered_value_setters),
-                                   ','.join(clean_field_names),
-                                   ','.join(value_placeholders))
+                                    ','.join(select_values),
+                                    ','.join(filtered_value_setters),
+                                    ','.join(clean_field_names),
+                                    ','.join(value_placeholders))
 
         return sql_stmt
+
+    def get_select_value(self, field_names, field_types, include_alias):
+        """[build the sql field defintions to use]
+
+        Args:
+            field_names ([dict]): [object field names]
+            field_types ([dict]): [type information for object]
+            include_alias ([bool]): [true to include an 'as <field_name>' alias]
+
+        Returns:
+            [list]: [field definitions for sql stmt]
+        """
+        select_values = []
+        clean_field_names = self.clean_keywords(self.RESERVE_LIST, field_names)
+        for name in field_names:
+            clean_name = self.clean_keywords(self.RESERVE_LIST, name)
+            alias = " as {clean_name}"
+            if field_types.get(name, '') == "datepicker":
+                sql_field = "to_date(:{clean_name}, 'YYYY-MM-DD\"T\"HH24:MI:SS.######')"
+            elif field_types.get(name, '') == "datetimepicker":
+                sql_field = "to_timestamp_tz(:{clean_name}, 'YYYY-MM-DD\"T\"HH24:MI:SS.FFTZH:TZM')"
+            #elif field_types.get(name, '') == "blob":
+            #    sql_field = "hextoraw(:{clean_name})"
+            else:
+                sql_field = ":{clean_name}"
+
+            sql_field = "{}{}".format(sql_field, alias) if include_alias else sql_field
+            select_values.append(sql_field.format(clean_name=clean_name))
+
+        return select_values, clean_field_names
 
     def get_delete(self, table_name):
         """
@@ -821,7 +848,7 @@ END; """
         :returns True if the exception was due to the column already existing; False otherwise.
         """
 
-        return True if 'ORA-01430' in str(the_exception) else False
+        return bool('ORA-01430' in str(the_exception))
 
 
     def get_column_type(self, input_type):  # pylint: disable=no-self-use
