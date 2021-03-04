@@ -14,7 +14,9 @@ from fn_aws_guardduty.util import const
 from pkg_resources import resource_filename, Requirement
 
 LOG = logging.getLogger(__name__)
-
+# Interval (in seconds) to decrement last_update epoch to correct
+# for minor clock differences between GuardDuty and app/integration server.
+UPDATE_ALIGN_INTERVAL = 5
 
 class IQuery(dict):
     """Class to create a query for existing findings from AWS GuardDuty in Resilient.
@@ -132,9 +134,13 @@ class FCrit(dict):
 
         :param update_epoch: Epoch value in millisecs
         """
+        # Substract alignment interval (in millisecs) from update epoch.
+        updated_at = int(update_epoch) - (UPDATE_ALIGN_INTERVAL * 1000)
+
         self["Criterion"].update({
-            "updatedAt": {"Gte": int(update_epoch)}
+            "updatedAt": {"Gte": updated_at}
         })
+
 
     def set_archived(self, value="false"):
         """
