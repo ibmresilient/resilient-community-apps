@@ -22,11 +22,11 @@ def codegen_reload_data():
         "package": u"fn_cisco_asa",
         "message_destinations": [u"fn_cisco_asa"],
         "functions": [u"cisco_asa_get_network_objects"],
-        "workflows": [u"example_cisco_asa_get_blacklist_inbound", u"example_cisco_asa_get_blacklist_outbound"],
-        "actions": [u"Example: Cisco ASA Get Blacklist Inbound", u"Example: Cisco ASA Get Blacklist Outbound"],
+        "workflows": [u"example_cisco_asa_get_network_object_group"],
+        "actions": [u"Example: Cisco ASA Get Network Object Group"],
         "incident_fields": [],
         "incident_artifact_types": [],
-        "datatables": [u"cisco_asa_inbound_dt", u"cisco_asa_outbound_dt"],
+        "datatables": [u"cisco_asa_network_object_dt"],
         "automatic_tasks": [],
         "scripts": []
     }
@@ -45,14 +45,11 @@ def customization_data(client=None):
     - Functions:
         - cisco_asa_get_network_objects
     - Workflows:
-        - example_cisco_asa_get_blacklist_inbound
-        - example_cisco_asa_get_blacklist_outbound
+        - example_cisco_asa_get_network_object_group
     - Rules:
-        - Example: Cisco ASA Get Blacklist Inbound
-        - Example: Cisco ASA Get Blacklist Outbound
+        - Example: Cisco ASA Get Network Object Group
     - Data Tables:
-        - cisco_asa_inbound_dt
-        - cisco_asa_outbound_dt
+        - cisco_asa_network_object_dt
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)

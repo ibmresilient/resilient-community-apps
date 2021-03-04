@@ -11,6 +11,13 @@ def config_section_data():
     config_data = u"""[fn_cisco_asa]
 # Comma separated list of firewalls to manage: firewall_1[,firewall_2]
 firewalls=firewall_1
+# Comma separated list of network object groups to manage: blacklist_in, blacklist_out
+network_object_lists=BLACKLIST_IN, BLACKLIST_OUT
+#
+# Optional Global username and password to be used if not defined in the individual firewall
+# section
+#username=<asa_username>
+#password=<asa_password> 
 # Optional proxy settings
 #http_proxy=
 #https_proxy=
@@ -22,8 +29,6 @@ firewalls=firewall_1
 host=<asa_ip>
 username=<asa_username>
 password=<asa_password>
-outbound_network_object_group=BLACKLIST_OUT
-inbound_network_object_group=BLACKLIST_IN
 #cafile=False
 #"""
     return config_data

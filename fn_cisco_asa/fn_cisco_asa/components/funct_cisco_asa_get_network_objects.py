@@ -5,6 +5,7 @@
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import ResultPayload, RequestsCommon, validate_fields, IntegrationError
+from fn_cisco_asa.lib.resilient_helper import init_select_list_choices
 from fn_cisco_asa.lib.functions_common import CiscoASAFirewalls
 from fn_cisco_asa.lib.cisco_asa_client import CiscoASAClient
 
@@ -14,19 +15,25 @@ FN_NAME = "cisco_asa_get_network_objects"
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'cisco_asa_get_network_objects''"""
+    def _convert_csv_to_list(self, csv):
+        return [item.strip() for item in csv.split(",")]
+
     def _load_opts(self, opts):
         """ Load the options """
         self.fn_options = opts.get(PACKAGE_NAME, {})
         
-        required_fields = ["firewalls"]
+        required_fields = ["firewalls", "network_object_groups"]
         validate_fields(required_fields, self.fn_options)
 
-        # Put the comma separated list of firewalls into python list format.
-        cisco_asa_firewalls = self.fn_options.get("firewalls")
-        firewall_list = [item.strip() for item in cisco_asa_firewalls.split(",")]
+        rest_client = self.rest_client()
 
         # Load the rule activity select field with the firewall options from app.config
-        self._init_firewall_choices("cisco_asa_firewall", firewall_list)
+        firewall_list = self._convert_csv_to_list(self.fn_options.get("firewalls"))
+        init_select_list_choices(rest_client, "cisco_asa_firewall", firewall_list)
+
+        # Load the rule activity select field with the network object group options from app.config
+        network_object_groups_list = self._convert_csv_to_list(self.fn_options.get("network_object_groups"))
+        init_select_list_choices(rest_client, "cisco_asa_network_object_group", network_object_groups_list)
 
         # Load the firewall options from the app.config
         self.firewalls = CiscoASAFirewalls(opts, self.fn_options)
@@ -54,11 +61,12 @@ class FunctionComponent(ResilientComponent):
             # Get the function parameters
             firewall_name = kwargs.get("cisco_asa_firewall")  # text
             network_object_group = kwargs.get("cisco_asa_network_object_group")  # text
+
+            LOG.info(u"cisco_asa_firewall: %s", firewall_name)
             LOG.info(u"cisco_asa_network_object_group: %s", network_object_group)
 
-
             firewall_options = self.firewalls.get_firewall(firewall_name)
-            asa = CiscoASAClient(firewall_options, rc)
+            asa = CiscoASAClient(self.fn_options, firewall_options, rc)
 
             yield StatusMessage("Validations complete. Get the network objects.")
             response = asa.get_network_object_group(network_object_group)
@@ -73,31 +81,3 @@ class FunctionComponent(ResilientComponent):
             yield FunctionError(e)
 
 
-    def _init_firewall_choices(self, field_name, field_value=None):
-        """
-        Update the rule activity select field choices.  
-        We do not know the firewall list til run time as they are defined by
-        the user n the app.config.
-        """
-        try: 
-            # Get the current firewall rule activity select list.
-            uri = "/types/actioninvocation/fields/{0}".format(field_name)
-            get_response = self.rest_client().get(uri)
-
-            values = []
-
-            # Add each firewall as a select list entry.
-            for firewall in field_value:
-                entry = {'label': firewall,
-                         'enabled': True,
-                         'hidden': False}
-                values.append(entry)
-
-            # Put the new values into the select list to replace the current values there.
-            get_response['values'] = values
-            put_response = self.rest_client().put(uri, payload=get_response)
-
-            return put_response
-
-        except Exception as err:
-            raise IntegrationError(err)

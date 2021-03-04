@@ -7,7 +7,7 @@ import os
 import sys
 import base64
 import logging
-from resilient_lib import RequestsCommon
+from resilient_lib import RequestsCommon, validate_fields, IntegrationError
 
 LOG = logging.getLogger(__name__)
 
@@ -28,16 +28,21 @@ def get_headers(username, password):
     return headers
 
 class CiscoASAClient(object):
-    def __init__(self, options, rc):
+    def __init__(self, global_options, options, rc):
         # Read the configuration options
+        required_fields = ["host"]
+        validate_fields(required_fields, options)
+
         self.rc = rc
-        self.base_url = "https://{0}".format(options.get("host"))
-        self.username = options.get("username")
-        self.password = options.get("password")
+        self.host = options.get("host")
+        self.base_url = "https://{0}".format(self.host)
+        self.username = options.get("username", global_options.get("username"))
+        self.password = options.get("password", global_options.get("password"))
+        if self.username is None or self.password is None:
+            raise IntegrationError("Cisco ASA username and password must be defined.")
         self.cafile = options.get("cafile")
         self.bundle = os.path.expanduser(self.cafile) if self.cafile else False
 
-        self.is_ASAv = options.get("is_asav")
         self.headers = get_headers(self.username, self.password)
     
     def get_network_object_group(self, group):

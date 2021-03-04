@@ -3,7 +3,7 @@
 # (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
 from resilient_lib import validate_fields
 
-REQUIRED_FIREWALL_FIELDS = ["host", "username", "password", "inbound_network_object_group", "outbound_network_object_group"]
+REQUIRED_FIREWALL_FIELDS = ["host"]
 
 PACKAGE_NAME = "fn_cisco_asa"
 
