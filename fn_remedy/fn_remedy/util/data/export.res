@@ -89,14 +89,6 @@
           "show_if": null,
           "show_link_header": false,
           "step_label": null
-        },
-        {
-          "content": "76e09ff6-f8ca-4c5f-bfcc-801ec6a8372a",
-          "element": "field_uuid",
-          "field_type": "actioninvocation",
-          "show_if": null,
-          "show_link_header": false,
-          "step_label": null
         }
       ],
       "workflows": [
@@ -106,7 +98,7 @@
   ],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1614812203927,
+  "export_date": 1614891876523,
   "export_format_version": 2,
   "fields": [
     {
@@ -315,7 +307,7 @@
       "tags": [],
       "templates": [],
       "text": "Remedy Note",
-      "tooltip": "Optionally, send a note to Remedy also.",
+      "tooltip": "Optionally, define the note/description of the Remedy form",
       "type_id": 6,
       "uuid": "a977f7a7-ef06-4d38-a4ed-f293b5066989",
       "values": []
@@ -581,7 +573,7 @@
           "value": 692
         },
         {
-          "default": true,
+          "default": false,
           "enabled": true,
           "hidden": false,
           "label": "Security Incident",
@@ -780,81 +772,6 @@
       ]
     },
     {
-      "allow_default_value": false,
-      "blank_option": false,
-      "calculated": false,
-      "changeable": true,
-      "chosen": false,
-      "default_chosen_by_server": false,
-      "deprecated": false,
-      "export_key": "actioninvocation/remedy_support_group_to_assign",
-      "hide_notification": false,
-      "id": 928,
-      "input_type": "select",
-      "internal": false,
-      "is_tracked": false,
-      "name": "remedy_support_group_to_assign",
-      "operation_perms": {},
-      "operations": [],
-      "placeholder": "",
-      "prefix": "properties",
-      "read_only": false,
-      "rich_text": false,
-      "tags": [],
-      "templates": [],
-      "text": "Remedy Support Group to Assign",
-      "tooltip": "",
-      "type_id": 6,
-      "uuid": "76e09ff6-f8ca-4c5f-bfcc-801ec6a8372a",
-      "values": [
-        {
-          "default": false,
-          "enabled": true,
-          "hidden": false,
-          "label": "Backoffice Support",
-          "properties": null,
-          "uuid": "4fc1dfe4-0b5e-4fee-99a6-12b729f0114b",
-          "value": 664
-        },
-        {
-          "default": false,
-          "enabled": true,
-          "hidden": false,
-          "label": "Change Management",
-          "properties": null,
-          "uuid": "8234ad53-86eb-437e-8f5a-4ab30c469834",
-          "value": 665
-        },
-        {
-          "default": false,
-          "enabled": true,
-          "hidden": false,
-          "label": "Frontoffice Suport",
-          "properties": null,
-          "uuid": "24d01fcd-4f8b-4c95-a43b-48cf7870f66c",
-          "value": 666
-        },
-        {
-          "default": false,
-          "enabled": true,
-          "hidden": false,
-          "label": "Service Desk",
-          "properties": null,
-          "uuid": "36732d30-3917-4e07-ae93-a6656038a4fd",
-          "value": 667
-        },
-        {
-          "default": true,
-          "enabled": true,
-          "hidden": false,
-          "label": "SOC",
-          "properties": null,
-          "uuid": "7cda3bb8-ee25-4342-983c-2d93e4fe0069",
-          "value": 668
-        }
-      ]
-    },
-    {
       "export_key": "incident/internal_customizations_field",
       "id": 0,
       "input_type": "text",
@@ -943,12 +860,12 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 5,
+  "id": 6,
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1614812219204,
+      "create_date": 1614891936536,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -957,7 +874,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1614812219204,
+      "update_date": 1614891936536,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
