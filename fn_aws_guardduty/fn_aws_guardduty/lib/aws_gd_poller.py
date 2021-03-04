@@ -62,14 +62,16 @@ class AwsGdPoller():
             # Loop over accessible GuardDuty regions and get available DetectorIds.
             for gd_region, gd_client_info in aws_cli_man.clients.items():
                 aws_gd = gd_client_info["client"]
-                detectors = gd_client_info["detectors"]
+                detectors = gd_client_info.get("detectors")
                 if not detectors:
                     # No cached detector info see if any available detectors available for the specified AWS Region.
                     detectors = aws_gd.get("list_detectors")
                     if not detectors:
                         LOG.debug("No GuardDuty detectors found in region %s.", gd_region)
-                        # Detectors still not detected skip detected.
+                        # Detectors still not detected skip.
                         continue
+                    # Update saved detectors for region.
+                    gd_client_info["detectors"] = detectors
 
                 LOG.info("Polling for region - %s.", gd_region)
 
@@ -80,7 +82,16 @@ class AwsGdPoller():
                     criteria = self.set_criteria(new_region=True)
                     del gd_client_info["is_new"]
                 # Get list of findings ids if any for DetectorId
-                findings_list = aws_gd.get("list_findings", DetectorId=detectorid, FindingCriteria=criteria)
+                try:
+                    findings_list = aws_gd.get("list_findings", DetectorId=detectorid, FindingCriteria=criteria)
+                except Exception as ex:
+                    LOG.error("Something went wrong when attempting to get list of GuardDuty findings for region",
+                              gd_region)
+                    LOG.error(str(ex))
+                    if "detectorId is not owned by the current account" in str(ex):
+                        # Delete discovered detectors for region if it has been disabled.
+                        del gd_client_info["detectors"]
+                    continue
 
                 if not findings_list:
                     LOG.debug("No GuardDuty finding updates found for detector ID %s  in region %s.", detectorid, gd_region)
@@ -231,8 +242,12 @@ class AwsGdPoller():
         f_criteria.set_archived(value="false")
 
         # Get a list of current finding ids.
-        gd_open_findings = aws_gd.get("list_findings", DetectorId=detectorid, FindingCriteria=f_criteria)
-
+        try:
+            gd_open_findings = aws_gd.get("list_findings", DetectorId=detectorid, FindingCriteria=f_criteria)
+        except Exception as ex:
+            LOG.error("Something went wrong when attempting to get list of GuardDuty findings for region '%s'.", region)
+            LOG.error(str(ex))
+            return
         # Determine finding ids from Resilient open incidents list not in GuardDuty current incident list.
         fid_diff = list(set(res_open_findings.keys()).difference(gd_open_findings))
         for fid in fid_diff:
