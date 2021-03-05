@@ -2,9 +2,6 @@
 
 - [fn-outbound-email Functions for IBM Resilient](#fn-outbound-email-functions-for-ibm-resilient)
   - [Release Notes](#release-notes)
-    - [v1.1.0](#v110)
-    - [v1.0.9](#v109)
-    - [v1.0.8](#v108)
   - [Requirements](#requirements)
   - [Installation](#installation)
     - [Installation (App Host)](#installation-app-host)
@@ -23,19 +20,13 @@
 ---
 
 ## Release Notes
-<!--
-  Specify all changes in this release. Do not remove the release 
-  notes of a previous release
--->
 
-### v1.1.0
-* Bug fixes and send all or specific attachments
-
-### v1.0.9
-* Apphost compatibility
-
-### v1.0.8
-* Initial Release after internal development by Professional Services, no prior release notes
+| Version | Date | Notes |
+| ------- | ---- | ----- |
+| v1.1.1  | 2/2021 | Bug fixes associated with sending attachments |
+| v1.1.0  | 10/2020 | Bug fixes and send all or specific attachments |
+| v1.0.9 | 5/2020 | App Host compatibility |
+| v1.0.8 | 4/2020 | Initial Release after internal development by Professional Services, no prior release notes |
 
 ---
 
@@ -43,7 +34,7 @@
 <!--
   List any Requirements 
 -->
-* IBM Resilient >= `v33.0.5112`
+* IBM Resilient >= `v36.0.5634`
 * An Integration Server running `resilient_circuits`
 
   * The minimum set of Resilient API permissions for this integration if using an API key account:
@@ -187,6 +178,4 @@ There are several ways to verify the successful operation of a function.
 
 
 ## Support
-| Name | Version | Author | Support URL |
-| ---- | ------- | ------ | ----------- |
-| fn_outbound_email | 1.1.0 | Sean@IBM Resilient | https://www.ibm.com/security/intelligent-orchestration/resilient |
+[My Support link](https://ibm.com/mysupport)
