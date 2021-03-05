@@ -3,13 +3,17 @@
 
 import sys
 import json
+import pytest
 from fn_cisco_asa.lib.cisco_asa_client import CiscoASAClient
+from resilient_circuits.util import get_function_definition
 from resilient_lib import IntegrationError, RequestsCommon
 
 if sys.version_info.major == 2:
     from mock import patch
 else:
     from unittest.mock import patch
+
+PACKAGE_NAME = "fn_cisco_asa"
 
 MOCKED_GLOBAL_OPTS = {
     "firewalls": "firewall_1,firewall_2",
@@ -66,6 +70,15 @@ def generate_response(content, status):
 class TestCiscoASAClient(object):
     """ Tests for the Cisco ASA Client functions"""
 
+    @pytest.mark.parametrize(
+        "func_name", [
+            ('cisco_asa_get_network_objects')
+    ])
+    def test_function_definition(self, func_name):
+        """ Test that the package provides customization_data that defines the function """
+        func = get_function_definition(PACKAGE_NAME, func_name)
+        assert func is not None
+
     @patch('fn_cisco_asa.lib.cisco_asa_client.RequestsCommon.execute_call_v2')
     def test_get_network_object_group(self, get_mock):
         """ Test get_network_object_group"""
@@ -83,8 +96,8 @@ class TestCiscoASAClient(object):
                     "value":"192.168.10.2"
                 },
                 {
-                "kind":"IPv4Address",
-                "value":"192.168.10.3"
+                    "kind":"IPv4Address",
+                    "value":"192.168.10.3"
                 }
             ],
             "description":"",
