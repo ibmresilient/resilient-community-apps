@@ -101,6 +101,7 @@ def send_data(type_info, inc_id, rest_client_helper, payload,\
                and not is_deleted:
                 # this will return a byte string
                 payload['content'] = get_file_attachment(rest_client_helper.inst_rest_client, inc_id,
+                                                         task_id=payload.get('task_id'),
                                                          attachment_id=payload['id'])
 
             feed_output.send_data(context, payload)
