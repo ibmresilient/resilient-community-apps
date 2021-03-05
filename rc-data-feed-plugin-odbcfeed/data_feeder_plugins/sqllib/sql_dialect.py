@@ -706,6 +706,9 @@ class OracleDialect(ODBCDialectBase):
         if any([bool(field_types.get(name, '') == "blob") for name in field_names]):
             select_values, clean_field_names = self.get_select_value(field_names, field_types, False)
             template = "INSERT INTO {0} ({1}) VALUES ({2})"
+            """insert into {0} ({1}) 
+                select {2} from dual
+                where not exists(select id from {0} where (id=:id AND inc_id=:inc_id))"""
 
             sql_stmt = template.format(clean_table_name,
                                        ','.join(clean_field_names),
