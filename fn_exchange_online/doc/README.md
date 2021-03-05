@@ -1258,8 +1258,8 @@ exo_message_query_results_dt
 ### Proxy Configuration
 
 If configuring fn_exchange_online with a proxy server, setting both the `http_proxy` and `https_proxy` can lead to connection issues.
-This is due to the fact that Microsoft expects and HTTPS proxy only. For this reason, we recommend setting only the `https_proxy` value and
-either deleting or commenting out the `http_proxy` setting.
+Microsoft only supports a secure HTTPS proxy and we recommend only using the `https_proxy` parameter.
+The `http_proxy` parameter should be omitted.
 
 <!--
 ## Inform Resilient Users
