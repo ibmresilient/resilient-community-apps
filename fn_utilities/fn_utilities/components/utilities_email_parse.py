@@ -10,6 +10,7 @@ import shutil
 import json
 import base64
 import mailparser
+import re 
 from fn_utilities.util.utils_common import b_to_s, s_to_b
 from resilient_circuits import ResilientComponent, function, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import ResultPayload, validate_fields, get_file_attachment_metadata, get_file_attachment, write_to_tmp_file
@@ -18,6 +19,8 @@ CONFIG_DATA_SECTION = 'fn_utilities'
 EMAIL_ATTACHMENT_ARTIFACT_ID = 7
 ARTIFACT_URI = "/incidents/{0}/artifacts/files"
 
+RE_CONTENT_TYPE = re.compile("Content-Transfer-Encoding:\W+base64")
+RE_START_BASE64 = re.compile("\n\n")
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'email_message_parts"""
@@ -110,7 +113,8 @@ class FunctionComponent(ResilientComponent):
                 else:
                     # Load all parsed email attributes into a Python Dict
                     parsed_email_dict = json.loads(parsed_email.mail_json, encoding="utf-8")
-                    parsed_email_dict["plain_body"] = parsed_email.text_plain_json
+                    parsed_email_dict["body"] = convert_base64_encoding(parsed_email.body)
+                    parsed_email_dict["plain_body"] = ", ".join(convert_base64_encoding(parsed_email.text_plain))
                     parsed_email_dict["html_body"] = parsed_email.text_html_json
                     yield StatusMessage("Email parsed")
 
@@ -157,3 +161,32 @@ class FunctionComponent(ResilientComponent):
             # Remove the tmp directory
             if path_tmp_dir and os.path.isdir(path_tmp_dir):
                 shutil.rmtree(path_tmp_dir)
+
+def decode_mail_body(value):
+    """ decode data. There's no guarantee that data is in base64"""
+    try:
+        return base64.b64decode(value)
+    except Exception:
+        return value
+
+def convert_base64_encoding(payload):
+    """ look for base64 mime type and convert the data that follows. 
+    return: payload with the base64 encoded data substituted
+    """
+    if isinstance(payload, list):
+        return [convert_base64_encoding(item) for item in payload]
+
+    result = payload
+    # determine if we have embedded base64
+    match = RE_CONTENT_TYPE.search(payload)
+    if match:
+        # find the start of the data which is demarked by an empty line
+        match_base64 = RE_START_BASE64.search(payload[match.end():])
+        if match_base64:
+            base64_data = payload[match.end()+match_base64.end():]
+        else:
+            base64_data = payload[match.end():]  # just start where we found the mime information
+        decoded_data = b_to_s(decode_mail_body(base64_data))
+        # insert where we found it
+        result = "\n".join([payload[:match.end()], decoded_data])
+    return result
