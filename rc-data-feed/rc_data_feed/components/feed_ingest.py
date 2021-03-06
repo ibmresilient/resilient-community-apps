@@ -393,7 +393,7 @@ class Reload(object):
     def _query_attachment(self, rest_client_helper, inc_id, type_info):
         query = "/incidents/{}/attachments/query?include_tasks=true".format(inc_id)
         item_list = rest_client_helper.post(query, None)
-        for item in item_list:
+        for item in item_list['attachments']:
             send_data(type_info, inc_id, rest_client_helper, item,
                       self.feed_outputs, False, self.incl_attachment_data)
 
