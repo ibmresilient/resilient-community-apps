@@ -91,19 +91,26 @@ def send_data(type_info, inc_id, rest_client_helper, payload,\
     if type_info.get_pretty_type_name() == 'incident':
         payload['org_name'] = type_info.get_org_name(payload['org_id'])
 
+    # collect attachment data to pass on
+    if type_info.get_pretty_type_name() == 'attachment' \
+            and incl_attachment_data \
+            and not is_deleted:
+        # this will return a byte string
+        payload['content'] = get_file_attachment(rest_client_helper.inst_rest_client, inc_id,
+                                                    task_id=payload.get('task_id'),
+                                                    attachment_id=payload['id'])
+    elif type_info.get_pretty_type_name() == 'artifact' \
+            and payload.get('attachment') \
+            and incl_attachment_data \
+            and not is_deleted:
+        # this will return a byte string
+        payload['content'] = get_file_attachment(rest_client_helper.inst_rest_client, inc_id,
+                                                artifact_id=payload.get('id'))
+
     for feed_output in feed_outputs:
         # don't let a failure in one feed break all the rest
         try:
             LOG.debug("Calling feed %s", feed_output.__class__.__name__)
-            # collect attachment data to pass on
-            if type_info.get_pretty_type_name() == 'attachment' \
-               and incl_attachment_data \
-               and not is_deleted:
-                # this will return a byte string
-                payload['content'] = get_file_attachment(rest_client_helper.inst_rest_client, inc_id,
-                                                         task_id=payload.get('task_id'),
-                                                         attachment_id=payload['id'])
-
             feed_output.send_data(context, payload)
         except Exception as err:
             LOG.error("Failure in update to %s %s", feed_output.__class__.__name__, err)
