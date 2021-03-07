@@ -87,25 +87,26 @@ def send_data(type_info, inc_id, rest_client_helper, payload,\
     """
     context = FeedContext(type_info, inc_id, rest_client_helper.inst_rest_client, is_deleted)
 
+    type_name = type_info.get_pretty_type_name()
     # make sure the incident has a org_name
-    if type_info.get_pretty_type_name() == 'incident':
+    if type_name == 'incident':
         payload['org_name'] = type_info.get_org_name(payload['org_id'])
 
     # collect attachment data to pass on
-    if type_info.get_pretty_type_name() == 'attachment' \
+    elif type_name == 'attachment' \
             and incl_attachment_data \
             and not is_deleted:
         # this will return a byte string
         payload['content'] = get_file_attachment(rest_client_helper.inst_rest_client, inc_id,
-                                                    task_id=payload.get('task_id'),
-                                                    attachment_id=payload['id'])
-    elif type_info.get_pretty_type_name() == 'artifact' \
+                                                 task_id=payload.get('task_id'),
+                                                 attachment_id=payload['id'])
+    elif type_name == 'artifact' \
             and payload.get('attachment') \
             and incl_attachment_data \
             and not is_deleted:
         # this will return a byte string
         payload['content'] = get_file_attachment(rest_client_helper.inst_rest_client, inc_id,
-                                                artifact_id=payload.get('id'))
+                                                 artifact_id=payload['id'])
 
     for feed_output in feed_outputs:
         # don't let a failure in one feed break all the rest

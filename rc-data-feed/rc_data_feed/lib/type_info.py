@@ -125,9 +125,9 @@ class TypeInfo(object):
         # some fields for an incident are not part of the /types/0/fields api call, so add them
         if self.type_id == 0:
             fields = self.add_schema_fields(fields, TypeInfo.INCIDENT_INCLUDE_FIELDS)
-        if self.type_id in (2,5):  # notes and attachments can be part of a task
+        if self.type_id in (2, 5):  # notes and attachments can be part of a task
             fields = self.add_schema_fields(fields, TypeInfo.NOTE_ATTACHMENT_INCLUDE_FIELDS)
-        if self.type_id == 5: # attachment
+        if self.type_id in (4, 5): # artifact and attachment
             fields = self.add_schema_fields(fields, TypeInfo.CONTENT_ATTACHMENT_INCLUDE_FIELDS)
 
         TypeInfo.fields_cache[self.type_id] = fields
