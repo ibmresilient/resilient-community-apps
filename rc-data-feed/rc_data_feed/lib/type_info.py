@@ -413,6 +413,13 @@ class TypeInfo(object):
         return value
 
     @staticmethod
+    def translate_nested_collection(type_info, field, value):
+        if isinstance(value, dict)
+            return value.get("name", None)
+
+        return value
+
+    @staticmethod
     def get_default_mapping():
         return {
             "select_owner": TypeInfo.translate_value_select,
@@ -421,6 +428,7 @@ class TypeInfo(object):
             "multiselect": TypeInfo.translate_value_multiselect,
             "multiselect_members": TypeInfo.translate_value_multiselect,
             "multiselect_tagref": TypeInfo.translate_value_list,
+            "nested_collection": TypeInfo.translate_nested_collection,
             "datepicker": TypeInfo.translate_value_datetimepicker,
             "datetimepicker": TypeInfo.translate_value_datetimepicker,
             "textarea": TypeInfo.translate_value_textarea,
