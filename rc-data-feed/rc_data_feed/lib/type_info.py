@@ -414,7 +414,7 @@ class TypeInfo(object):
 
     @staticmethod
     def translate_nested_collection(type_info, field, value):
-        if isinstance(value, dict)
+        if isinstance(value, dict):
             return value.get("name", None)
 
         return value
