@@ -11,11 +11,11 @@ from fn_cisco_asa.lib.cisco_asa_client import CiscoASAClient
 from fn_cisco_asa.lib.resilient_helper import artifact_type_to_network_object_kind
 
 PACKAGE_NAME = "fn_cisco_asa"
-FN_NAME = "cisco_asa_add_network_object_to_network_object_group"
+FN_NAME = "cisco_asa_add_artifact_to_network_object_group"
 
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'cisco_asa_add_network_object_to_network_object_group''"""
+    """Component that implements Resilient function 'cisco_asa_add_artifact_to_network_object_group''"""
 
     def __init__(self, opts):
         """Constructor provides access to the configuration options"""
@@ -31,7 +31,7 @@ class FunctionComponent(ResilientComponent):
         self.firewalls = CiscoASAFirewalls(opts, self.fn_options)
 
     @function(FN_NAME)
-    def _cisco_asa_add_network_object_to_network_object_group_function(self, event, *args, **kwargs):
+    def _cisco_asa_add_artifact_to_network_object_group_function(self, event, *args, **kwargs):
         """Function: Add a network object to the network object group."""
         try:
             LOG = logging.getLogger(__name__)
@@ -44,12 +44,12 @@ class FunctionComponent(ResilientComponent):
             firewall_name = kwargs.get("cisco_asa_firewall")  # text
             network_object_group = kwargs.get("cisco_asa_network_object_group")  # text
             network_object_value = kwargs.get("cisco_asa_network_object_value")  # text
-            network_object_kind = kwargs.get("cisco_asa_network_object_kind")  # text
+            artifact_type = kwargs.get("cisco_asa_artifact_type")  # text
 
             LOG.info(u"cisco_asa_firewall: %s", firewall_name)
             LOG.info(u"cisco_asa_network_object_group: %s", network_object_group)
             LOG.info(u"cisco_asa_network_object_value: %s", network_object_value)
-            LOG.info(u"cisco_asa_network_object_kind: %s", network_object_kind)
+            LOG.info(u"cisco_asa_artifact_type: %s", artifact_type)
 
             # Get the the options for this firewall.
             firewall_options = self.firewalls.get_firewall(firewall_name)
@@ -59,10 +59,11 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("Validations complete. Add the network object.")
 
+            # Translate Resilient artifact type to Cisco ASA network object kind.
+            network_object_kind = artifact_type_to_network_object_kind(artifact_type, network_object_value)
 
             # Call the ASA API to get the network objects in this network object group.
-            response = asa.add_to_network_object_group(network_object_group, network_object_kind, 
-                                                       network_object_value)
+            response = asa.add_to_network_object_group(network_object_group, network_object_kind, network_object_value)
  
             content = {"firewall": firewall_name,
                        "network_object_group": network_object_group,
