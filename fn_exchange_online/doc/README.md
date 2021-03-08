@@ -27,6 +27,7 @@
 - [Function - Exchange Online: Write Message as Attachment](#function---exchange-online-write-message-as-attachment)
 - [Data Table - Exchange Online Message Query Results](#data-table---exchange-online-message-query-results)
 - [Rules](#rules)
+- [Troubleshooting](#troubleshooting)
 
 ---
 
@@ -1251,6 +1252,14 @@ exo_message_query_results_dt
 | Example: Exchange Online Delete Message | exo_message_query_results_dt | `example_exchange_online_delete_email` |
 
 ---
+
+## Troubleshooting
+
+### Proxy Configuration
+
+If configuring fn_exchange_online with a proxy server, setting both the `http_proxy` and `https_proxy` can lead to connection issues.
+Microsoft only supports a secure HTTPS proxy and we recommend only using the `https_proxy` parameter.
+The `http_proxy` parameter should be omitted.
 
 <!--
 ## Inform Resilient Users
