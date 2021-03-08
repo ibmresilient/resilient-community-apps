@@ -6,52 +6,33 @@
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import ResultPayload, RequestsCommon, validate_fields
-from fn_cisco_asa.lib.resilient_helper import init_select_list_choices
 from fn_cisco_asa.lib.functions_common import CiscoASAFirewalls
 from fn_cisco_asa.lib.cisco_asa_client import CiscoASAClient
 
 PACKAGE_NAME = "fn_cisco_asa"
-FN_NAME = "cisco_asa_get_network_objects"
+FN_NAME = "cisco_asa_remove_network_object_from_network_object_group"
 
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'cisco_asa_get_network_objects''"""
-    def _convert_csv_to_list(self, csv):
-        return [item.strip() for item in csv.split(",")]
-
-    def _load_opts(self, opts):
-        """ Load the options """
-        self.fn_options = opts.get(PACKAGE_NAME, {})
-        
-        required_fields = ["firewalls", "network_object_groups"]
-        validate_fields(required_fields, self.fn_options)
-
-        rest_client = self.rest_client()
-
-        # Load the rule activity select field with the firewall options from app.config
-        firewall_list = self._convert_csv_to_list(self.fn_options.get("firewalls"))
-        init_select_list_choices(rest_client, "cisco_asa_firewall", firewall_list)
-
-        # Load the rule activity select field with the network object group options from app.config
-        network_object_groups_list = self._convert_csv_to_list(self.fn_options.get("network_object_groups"))
-        init_select_list_choices(rest_client, "cisco_asa_network_object_group", network_object_groups_list)
-
-        # Load the firewall options from the app.config
-        self.firewalls = CiscoASAFirewalls(opts, self.fn_options)
+    """Component that implements Resilient function 'cisco_asa_remove_network_object_from_network_object_group''"""
 
     def __init__(self, opts):
         """Constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
-        self._load_opts(opts)
+        self.fn_options = opts.get(PACKAGE_NAME, {})
+        # Load the firewall options from the app.config
+        self.firewalls = CiscoASAFirewalls(opts, self.fn_options)
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
-        self._load_opts(opts)
+        self.fn_options = opts.get(PACKAGE_NAME, {})
+        # Load the firewall options from the app.config
+        self.firewalls = CiscoASAFirewalls(opts, self.fn_options)
 
     @function(FN_NAME)
-    def _cisco_asa_get_network_objects_function(self, event, *args, **kwargs):
-        """Function: Query the Cisco ASA firewall and return the network objects contained in the specified network object group."""
+    def _cisco_asa_remove_network_object_from_network_object_group_function(self, event, *args, **kwargs):
+        """Function: Remove a network object from a Cisco ASA network object group."""
         try:
             LOG = logging.getLogger(__name__)
             rc = RequestsCommon(self.opts, self.fn_options)
@@ -62,9 +43,13 @@ class FunctionComponent(ResilientComponent):
             # Get the function parameters
             firewall_name = kwargs.get("cisco_asa_firewall")  # text
             network_object_group = kwargs.get("cisco_asa_network_object_group")  # text
+            network_object_value = kwargs.get("cisco_asa_network_object_value")  # text
+            network_object_kind = kwargs.get("cisco_asa_network_object_kind")  # text
 
             LOG.info(u"cisco_asa_firewall: %s", firewall_name)
             LOG.info(u"cisco_asa_network_object_group: %s", network_object_group)
+            LOG.info(u"cisco_asa_network_object_value: %s", network_object_value)
+            LOG.info(u"cisco_asa_newtork_object_kind: %s", network_object_kind)
 
             # Get the the options for this firewall.
             firewall_options = self.firewalls.get_firewall(firewall_name)
@@ -72,12 +57,13 @@ class FunctionComponent(ResilientComponent):
             # Initialize the Cisco ASA object.
             asa = CiscoASAClient(firewall_name, self.fn_options, firewall_options, rc)
 
-            yield StatusMessage("Validations complete. Get the network objects.")
+            yield StatusMessage("Validations complete. Remove the network object.")
 
             # Call the ASA API to get the network objects in this network object group.
-            response = asa.get_network_object_group(network_object_group)
+            response = asa.remove_from_network_object_group(network_object_group, network_object_kind, 
+                                                            network_object_value)
 
-            results = rp.done(True, response)
+            results = rp.done(response, response)
 
             LOG.info("'%s' complete", FN_NAME)
 
