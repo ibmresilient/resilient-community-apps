@@ -93,17 +93,15 @@ def send_data(type_info, inc_id, rest_client_helper, payload,\
         payload['org_name'] = type_info.get_org_name(payload['org_id'])
 
     # collect attachment data to pass on
-    elif type_name == 'attachment' \
-            and incl_attachment_data \
-            and not is_deleted:
+    elif not is_deleted and incl_attachment_data \
+            and type_name == 'attachment':
         # this will return a byte string
         payload['content'] = get_file_attachment(rest_client_helper.inst_rest_client, inc_id,
                                                  task_id=payload.get('task_id'),
                                                  attachment_id=payload['id'])
-    elif type_name == 'artifact' \
-            and payload.get('attachment') \
-            and incl_attachment_data \
-            and not is_deleted:
+    elif not is_deleted and incl_attachment_data \
+            and type_name == 'artifact' \
+            and payload.get('attachment'):
         # this will return a byte string
         payload['content'] = get_file_attachment(rest_client_helper.inst_rest_client, inc_id,
                                                  artifact_id=payload['id'])
