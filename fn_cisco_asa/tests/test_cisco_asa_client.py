@@ -85,7 +85,7 @@ class TestCiscoASAClient(object):
         func = get_function_definition(PACKAGE_NAME, func_name)
         assert func is not None
 
-    @patch('fn_cisco_asa.lib.cisco_asa_client.rc.execute_call_v2')
+    @patch('resilient_lib.RequestsCommon.execute_call_v2')
     def test_get_network_object_group(self, get_mock):
         """ Test get_network_object_group"""
         print("Test get_network_object_group\n")
