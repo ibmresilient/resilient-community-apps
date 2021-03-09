@@ -82,7 +82,7 @@ class TestFCrit:
         result.set_update(last_update)
         assert (issubclass(type(result), dict))
         assert result["Criterion"]["severity"]["Gte"] == expected_results
-        assert result["Criterion"]["updatedAt"]["Gte"] == int(last_update) - (UPDATE_ALIGN_INTERVAL * 1000)
+        assert result["Criterion"]["updatedAt"]["Gte"] == int(last_update) - UPDATE_ALIGN_INTERVAL
 
 class TestIsRegex:
     """Test is_regex function"""
