@@ -5,10 +5,10 @@
 
 # Cisco ASA Add Artifact to Network Object Group
 
-## Function - Cisco ASA Add Network Object to Network Object Group
+## Function - Cisco ASA Add Artifact to Network Object Group
 
 ### API Name
-`cisco_asa_add_network_object_to_network_object_group`
+`cisco_asa_add_artifact_to_network_object_group`
 
 ### Output Name
 `None`
@@ -47,7 +47,8 @@ if results.get("success"):
   network_object_row.cisco_asa_network_object_group = network_object_group
   network_object_row.cisco_asa_network_object_kind = network_object_kind
   network_object_row.cisco_asa_network_object_value = network_object_value
-  network_object_row.cisco_asa_status = "Active"
+  status_text = u"""<p style= "color:{color}">{status}</p>""".format(color="green", status="Active")
+  network_object_row.cisco_asa_status = helper.createRichText(status_text)
 ```
 
 ---

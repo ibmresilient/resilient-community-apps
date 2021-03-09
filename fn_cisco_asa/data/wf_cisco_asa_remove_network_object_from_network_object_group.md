@@ -36,6 +36,7 @@ else:
   
 status_text = u"""<p style= "color:{color}">{status}</p>""".format(color="red", status=text)
 row['cisco_asa_status'] = helper.createRichText(status_text)
+row["cisco_asa_query_date"] = Date()
 
 ```
 

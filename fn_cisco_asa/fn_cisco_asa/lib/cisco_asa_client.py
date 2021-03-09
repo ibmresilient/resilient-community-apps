@@ -16,11 +16,8 @@ LOG = logging.getLogger(__name__)
 def get_headers(username, password):
     url_key = u'{0}:{1}'.format(username, password)
 
-    # It must be Base64-encoded. Handled different on Python 2 vs 3.
-    if sys.version_info[0] == 2:
-        auth_token = base64.b64encode(bytes(url_key).encode("utf-8"))
-    else:
-        auth_token = base64.b64encode(bytes(url_key, 'ascii')).decode('ascii')
+    string_encoded_url_key = base64.b64encode(str.encode(str(url_key)))
+    auth_token = string_encoded_url_key.decode("utf-8")
 
     # Create the headers
     headers = {'Authorization': u'Basic {0}'.format(auth_token),
@@ -54,8 +51,6 @@ class CiscoASAClient(object):
 
         response = self.rc.execute_call_v2("get", url, headers=self.headers, verify=self.bundle,
                                            proxies=self.rc.get_proxies())
-        LOG.debug(u"Response: %s", response.text)
-        response.raise_for_status()
         return response.json()
 
     def is_object_in_network_object_group(self, net_obj_group, obj_kind, obj_value):
@@ -92,8 +87,6 @@ class CiscoASAClient(object):
         data_string = json.dumps(data)
         response = self.rc.execute_call_v2("patch", url, headers=self.headers, data=data_string,
                                             verify=self.bundle, proxies=self.rc.get_proxies())
-        LOG.debug(u"Response: %s", response.status_code)
-        response.raise_for_status()
 
         # If the object is added then write this change to ASA memory.
         if response.status_code == 204:
@@ -126,8 +119,6 @@ class CiscoASAClient(object):
         data_string = json.dumps(data)
         response = self.rc.execute_call_v2("patch", url, headers=self.headers, data=data_string,
                                             verify=self.bundle, proxies=self.rc.get_proxies())
-        LOG.debug(u"Response: %s", response.status_code)
-        response.raise_for_status()
 
         # If the object is added then write this change to ASA memory.
         if response.status_code == 204:
@@ -144,8 +135,6 @@ class CiscoASAClient(object):
 
         response = self.rc.execute_call_v2("post", url, headers=self.headers, verify=self.bundle,
                                            proxies=self.rc.get_proxies())
-        LOG.debug(u"Response: %s", response.text)
-        response.raise_for_status()
         return response
 
     

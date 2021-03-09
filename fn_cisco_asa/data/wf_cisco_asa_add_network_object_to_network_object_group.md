@@ -29,12 +29,13 @@ inputs.cisco_asa_network_object_value = row.cisco_asa_network_object_value
 from java.util import Date
 
 if results.success:
-  text = "Active"
-  
-status_text = u"""<p style= "color:{color}">{status}</p>""".format(color="green", status=text)
-row['cisco_asa_status'] = helper.createRichText(status_text)
-row["cisco_asa_query_date" = Date()
-
+  status_text = u"""<p style= "color:{color}">{status}</p>""".format(color="green", status="Active")
+  row['cisco_asa_status'] = helper.createRichText(status_text)
+  row["cisco_asa_query_date"] = Date()
+else:
+  status_text = u"""<p style= "color:{color}">{status}</p>""".format(color="red", status="Already Active")
+  row['cisco_asa_status'] = helper.createRichText(status_text)
+  row["cisco_asa_query_date"] = Date()
 ```
 
 ---
