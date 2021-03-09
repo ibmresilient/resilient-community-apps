@@ -22,14 +22,10 @@ class FunctionComponent(ResilientComponent):
         """ Load the options """
         self.fn_options = opts.get(PACKAGE_NAME, {})
         
-        required_fields = ["firewalls", "network_object_groups"]
+        required_fields = ["network_object_groups"]
         validate_fields(required_fields, self.fn_options)
 
         rest_client = self.rest_client()
-
-        # Load the rule activity select field with the firewall options from app.config
-        firewall_list = self._convert_csv_to_list(self.fn_options.get("firewalls"))
-        init_select_list_choices(rest_client, "cisco_asa_firewall", firewall_list)
 
         # Load the rule activity select field with the network object group options from app.config
         network_object_groups_list = self._convert_csv_to_list(self.fn_options.get("network_object_groups"))
@@ -37,6 +33,10 @@ class FunctionComponent(ResilientComponent):
 
         # Load the firewall options from the app.config
         self.firewalls = CiscoASAFirewalls(opts, self.fn_options)
+
+        # Load the rule activity select field with the firewall options from app.config
+        firewall_name_list = self.firewalls.get_firewall_name_list()
+        init_select_list_choices(rest_client, "cisco_asa_firewall", firewall_name_list)
 
     def __init__(self, opts):
         """Constructor provides access to the configuration options"""
