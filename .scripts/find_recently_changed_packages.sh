@@ -47,7 +47,6 @@ function find_recently_changed_packages(){
 
     if [ -z "$PACKAGES" ]; then
         echo "Did not find any packages that were modified"
-        # We're using return and not exit, because we are sourcing this script and don't want to kill the job
         return 1
     else
         echo "Most recently modified packages from last commit show as : ${PACKAGES}"
