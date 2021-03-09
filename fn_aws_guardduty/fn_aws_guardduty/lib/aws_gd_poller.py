@@ -85,10 +85,10 @@ class AwsGdPoller():
                 try:
                     findings_list = aws_gd.get("list_findings", DetectorId=detectorid, FindingCriteria=criteria)
                 except Exception as ex:
-                    LOG.error("Something went wrong when attempting to get list of GuardDuty findings for region",
+                    LOG.error("Something went wrong when attempting to get list of GuardDuty findings for region '%s'.",
                               gd_region)
                     LOG.error(str(ex))
-                    if "detectorId is not owned by the current account" in str(ex):
+                    if u"detectorId is not owned by the current account" in str(ex):
                         # Delete discovered detectors for region if it has been disabled.
                         del gd_client_info["detectors"]
                     continue
