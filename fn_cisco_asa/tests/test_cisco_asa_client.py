@@ -106,7 +106,7 @@ class TestCiscoASAClient(object):
 
 
         rc = RequestsCommon(MOCKED_FIREWALL_OPTS, MOCKED_FIREWALL_OPTS)
-        asa_client = CiscoASAClient(MOCKED_GLOBAL_OPTS, MOCKED_FIREWALL_OPTS, rc)
+        asa_client = CiscoASAClient("firewall_1", MOCKED_GLOBAL_OPTS, MOCKED_FIREWALL_OPTS, rc)
  
         get_mock.return_value = generate_response(json.dumps(sim_content), 200)
         response = asa_client.get_network_object_group("BLACKLIST_IN")
