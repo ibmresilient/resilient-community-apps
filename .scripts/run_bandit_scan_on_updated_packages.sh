@@ -18,14 +18,15 @@ find_recently_changed_packages
 # Loop over all recently changed package
 for package in ${PACKAGES[@]};
 do 
-    echo "Running a bandit security scan for $package"
+    echo "[$package]"
+    echo ">Running a bandit security scan for $package"
     # Perform a bandit security scan on the given integration/app and suppress any Low level warnings. 
     bandit -r $package -ll 
     # Get the exit code of the bandit scan 
     last_status=$?;
 
     if [ $last_status -ne 0 ]; then
-            echo "Security Scan failure for $package which gave an exit code of $last_status"
+            echo ">Security Scan failure for $package which gave an exit code of $last_status"
             status=$last_status;
     fi
 

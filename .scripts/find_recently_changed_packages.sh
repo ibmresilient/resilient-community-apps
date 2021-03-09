@@ -28,7 +28,7 @@ function find_recently_changed_packages(){
         commit_range=$(git diff --name-only HEAD~0 HEAD~1) 
     else 
         echo "TRAVIS_COMMIT_RANGE was defined, using this to find commit range"
-        commit_range=$(git diff --name-only ${TRAVIS_COMMIT_RANGE/.../..})
+        commit_range=$(git diff --name-only ${TRAVIS_COMMIT_RANGE})
     fi
     # For every file in the PR/commit diff
     # Replacing ... w/ ..: https://github.com/travis-ci/travis-ci/issues/4596
@@ -48,7 +48,7 @@ function find_recently_changed_packages(){
     if [ -z "$PACKAGES" ]; then
         echo "Did not find any packages that were modified"
         # We're using return and not exit, because we are sourcing this script and don't want to kill the job
-        return 0
+        return 1
     else
         echo "Most recently modified packages from last commit show as : ${PACKAGES}"
         # echo the $PACKAGES so any script, which calls this can get them, we can only use numbers with the return keyword in bash

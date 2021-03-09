@@ -9,18 +9,21 @@
 # Release notes
 # 1.0.0 Initial Release
 set -x 
+status=0
+
 # Source the script which finds recent changes 
 . .scripts/find_recently_changed_packages.sh
 # Call the function which will search for packages, the result will be available via the $PACKAGES variable defined in that script
 find_recently_changed_packages
-
 # Loop over all recently changed package
 for package in ${PACKAGES[@]};
 do 
-    echo "Running a cve security scan for $package"
+    echo "[$package]"
+    echo ">Running CVE scan for $package python package"
+    echo ">Installing $package"
     # Install the package and all its deps. 
-    python $package/setup.py install 
-
+    python $package/setup.py -q install 
+    echo ">Running a cve security scan for $package"
     # Perform a safety check printing all info to job logs
     safety check --full-report
     # Get the exit code of the safety scan 
