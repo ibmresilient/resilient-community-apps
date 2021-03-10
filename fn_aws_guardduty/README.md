@@ -231,6 +231,14 @@ The function provides the following functionality.
 * Adds new or missing artifacts discovered in the GuardDuty finding.
 * Adds two notes to the Resilient incident. One of the notes includes the JSON refreshed content of the finding.
 
+An Example workflow that uses this Resilient function is `Example: AWS GuardDuty: Refresh Finding`.
+
+The workflow is initiated by the incident rules `Example: AWS GuardDuty: Update Finding Details` and `Example: AWS GuardDuty: Refresh Finding Details`.
+
+The rule `Example: AWS GuardDuty: Update Finding Details` is an automatic rule which is triggered by the poller if a GuardDuty finding with a corresponding Resilient incident is updated.
+
+The rule `Example: AWS GuardDuty: Refresh Finding` is a manual incident rule which can be invoked by a user to refresh GuardDuty finding information for an incident.
+
 The following screenshot shows an example of data tables updated by the function:
 
    ![screenshot: fn-aws-guardduty-refresh-datatables](./doc/screenshots/fn-aws-guardduty-refresh-datatables.png)
@@ -403,6 +411,12 @@ The function provides the following functionality.
 * When a Resilient incident corresponding to a GuardDuty find is closed, an automatic rule `Example: AWS GuardDuty: Archive Finding` is triggered which executes the function.
 * Archives the related GuardDuty finding.
 * Adds a note to the Resilient incident.
+
+An Example workflow that uses this Resilient function is `Example: AWS GuardDuty: Archive Finding`.
+
+The workflow is initiated by the incident rule `Example: AWS GuardDuty: Archive Finding`.
+
+The rule `Example: AWS GuardDuty: Archive Finding` is an automatic rule which is triggered when a Resilient incident corresponding to a GuardDuty finding is closed.
 
 The following screenshot shows an example of a note added to a Resilient incident created by the function:
 
