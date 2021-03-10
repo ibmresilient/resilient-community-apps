@@ -28,7 +28,10 @@
   - [Install](#install)
   - [App Configuration](#app-configuration)
   - [Custom Layouts](#custom-layouts)
+- [Function - Cisco ASA Remove Network Object from Network Object Group](#function---cisco-asa-remove-network-object-from-network-object-group)
+- [Function - Cisco ASA Add Network Object to Network Object Group](#function---cisco-asa-add-network-object-to-network-object-group)
 - [Function - Cisco ASA Get Network Objects](#function---cisco-asa-get-network-objects)
+- [Function - Cisco ASA Add Artifact to Network Object Group](#function---cisco-asa-add-artifact-to-network-object-group)
 - [Data Table - Cisco ASA Network Objects](#data-table---cisco-asa-network-objects)
 - [Rules](#rules)
 - [Troubleshooting & Support](#troubleshooting--support)
@@ -124,7 +127,6 @@ The following table provides the settings you need to configure the app. These s
 
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
-| **firewalls** | Yes | `firewall_1` | *Enter a description of the config here.* |
 | **network_object_lists** | Yes | `BLACKLIST_IN, BLACKLIST_OUT` | *Enter a description of the config here.* |
 | **host** | Yes | `<asa_ip>` | *Enter a description of the config here.* |
 | **username** | Yes | `<asa_username>` | *Enter a description of the config here.* |
@@ -143,6 +145,138 @@ The following table provides the settings you need to configure the app. These s
 
 ---
 
+## Function - Cisco ASA Remove Network Object from Network Object Group
+Remove a network object from a Cisco ASA network object group.
+
+ ![screenshot: fn-cisco-asa-remove-network-object-from-network-object-group ](./doc/screenshots/fn-cisco-asa-remove-network-object-from-network-object-group.png)
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `cisco_asa_firewall` | `text` | Yes | `-` | - |
+| `cisco_asa_network_object_group` | `text` | Yes | `-` | - |
+| `cisco_asa_network_object_kind` | `text` | Yes | `-` | - |
+| `cisco_asa_network_object_value` | `text` | Yes | `-` | - |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+```python
+results = {
+    # TODO: Copy and paste an example of the Function Output within this code block.
+    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
+    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.cisco_asa_firewall = row.cisco_asa_firewall
+inputs.cisco_asa_network_object_group = row.cisco_asa_network_object_group
+inputs.cisco_asa_network_object_kind = row.cisco_asa_network_object_kind
+inputs.cisco_asa_network_object_value = row.cisco_asa_network_object_value
+
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+from java.util import Date
+
+if results.success:
+  text = "Removed"
+else:
+  text = "NotFound"
+  
+status_text = u"""<p style= "color:{color}">{status}</p>""".format(color="red", status=text)
+row['cisco_asa_status'] = helper.createRichText(status_text)
+row["cisco_asa_query_date"] = Date()
+
+```
+
+</p>
+</details>
+
+---
+## Function - Cisco ASA Add Network Object to Network Object Group
+Add a network object to the specified Cisco ASA network object group.
+
+ ![screenshot: fn-cisco-asa-add-network-object-to-network-object-group ](./doc/screenshots/fn-cisco-asa-add-network-object-to-network-object-group.png)
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `cisco_asa_firewall` | `text` | Yes | `-` | - |
+| `cisco_asa_network_object_group` | `text` | Yes | `-` | - |
+| `cisco_asa_network_object_kind` | `text` | Yes | `-` | - |
+| `cisco_asa_network_object_value` | `text` | Yes | `-` | - |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+```python
+results = {
+    # TODO: Copy and paste an example of the Function Output within this code block.
+    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
+    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.cisco_asa_firewall = row.cisco_asa_firewall
+inputs.cisco_asa_network_object_group = row.cisco_asa_network_object_group
+inputs.cisco_asa_network_object_kind = row.cisco_asa_network_object_kind
+inputs.cisco_asa_network_object_value = row.cisco_asa_network_object_value
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+from java.util import Date
+
+if results.success:
+  status_text = u"""<p style= "color:{color}">{status}</p>""".format(color="green", status="Active")
+  row['cisco_asa_status'] = helper.createRichText(status_text)
+  row["cisco_asa_query_date"] = Date()
+else:
+  status_text = u"""<p style= "color:{color}">{status}</p>""".format(color="red", status="Already Active")
+  row['cisco_asa_status'] = helper.createRichText(status_text)
+  row["cisco_asa_query_date"] = Date()
+```
+
+</p>
+</details>
+
+---
 ## Function - Cisco ASA Get Network Objects
 Query the Cisco ASA firewall and return the network objects contained in the specified network object group.
 
@@ -206,9 +340,91 @@ for network_object in member_list:
   network_object_row.cisco_asa_firewall = firewall
   network_object_row.cisco_asa_network_object_group = network_object_group
   network_object_row.cisco_asa_network_object_kind = network_object.get("kind")
-  network_object_row.cisco_asa_network_object_value = network_object.get("value")  
-  network_object_row.cisco_asa_status = "Active"
+  if network_object.get("kind")  == 'objectRef#NetworkObj':
+    network_object_row.cisco_asa_network_object_value = network_object.get("objectId")
+  else:
+    network_object_row.cisco_asa_network_object_value = network_object.get("value")
+  status_text = u"""<p style= "color:{color}">{status}</p>""".format(color="green", status="Active")
+  network_object_row.cisco_asa_status = helper.createRichText(status_text)
 
+```
+
+</p>
+</details>
+
+---
+## Function - Cisco ASA Add Artifact to Network Object Group
+Add an artifact to a Cisco ASA network object group.
+
+ ![screenshot: fn-cisco-asa-add-artifact-to-network-object-group ](./doc/screenshots/fn-cisco-asa-add-artifact-to-network-object-group.png)
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `cisco_asa_artifact_type` | `text` | Yes | `-` | - |
+| `cisco_asa_firewall` | `text` | Yes | `-` | - |
+| `cisco_asa_network_object_group` | `text` | Yes | `-` | - |
+| `cisco_asa_network_object_value` | `text` | Yes | `-` | - |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+```python
+results = {
+    # TODO: Copy and paste an example of the Function Output within this code block.
+    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
+    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.cisco_asa_firewall = rule.properties.cisco_asa_firewall
+override = rule.properties.cisco_asa_network_object_group_override
+if override is "" or override is None:
+  inputs.cisco_asa_network_object_group = rule.properties.cisco_asa_network_object_group
+else:
+  inputs.cisco_asa_network_object_group = override
+inputs.cisco_asa_network_object_value = artifact.value
+inputs.cisco_asa_artifact_type = artifact.type
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+from java.util import Date
+
+if results.success:
+
+  content = results.get("content")
+  firewall = content.get("firewall")
+  network_object_group = content.get("network_object_group")
+  network_object_kind = content.get("network_object_kind")
+  network_object_value = content.get("network_object_value")
+
+  # Add each email as a row in the query results data table
+  network_object_row = incident.addRow("cisco_asa_network_object_dt")
+  network_object_row.cisco_asa_query_date = Date()
+  network_object_row.cisco_asa_firewall = firewall
+  network_object_row.cisco_asa_network_object_group = network_object_group
+  network_object_row.cisco_asa_network_object_kind = network_object_kind
+  network_object_row.cisco_asa_network_object_value = network_object_value
+  status_text = u"""<p style= "color:{color}">{status}</p>""".format(color="green", status="Active")
+  network_object_row.cisco_asa_status = helper.createRichText(status_text)
 ```
 
 </p>
@@ -232,7 +448,7 @@ cisco_asa_network_object_dt
 | Object Kind | `cisco_asa_network_object_kind` | `text` | - |
 | Object Value | `cisco_asa_network_object_value` | `text` | - |
 | Query Date | `cisco_asa_query_date` | `datetimepicker` | - |
-| Status | `cisco_asa_status` | `text` | - |
+| Status | `cisco_asa_status` | `textarea` | - |
 
 ---
 
@@ -241,7 +457,10 @@ cisco_asa_network_object_dt
 ## Rules
 | Rule Name | Object | Workflow Triggered |
 | --------- | ------ | ------------------ |
-| Example: Cisco ASA Get Network Object Group | incident | `example_cisco_asa_get_network_object_group` |
+| Cisco ASA Get Network Object Group | incident | `cisco_asa_get_network_object_group` |
+| Cisco ASA Add Network Object to Network Object Group | cisco_asa_network_object_dt | `cisco_asa_add_network_object_to_network_object_group` |
+| Cisco ASA Add Artifact to Network Object Group | artifact | `cisco_asa_add_artifact_to_network_object_group` |
+| Cisco ASA Remove Network Object from Network Object Group | cisco_asa_network_object_dt | `cisco_asa_remove_network_object_from_network_object_group` |
 
 ---
 
@@ -249,4 +468,4 @@ cisco_asa_network_object_dt
 Refer to the documentation listed in the Requirements section for troubleshooting information.
 
 ### For Support
-This is a IBM Community provided App. Please search the Community https://ibm.biz/resilientcommunity for assistance.
+This is a IBM Community provided App. Please search the Community https://ibm.biz/soarcommunity for assistance.

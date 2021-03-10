@@ -61,14 +61,21 @@ class CiscoASAClient(object):
         members = response_group.get("members")
         found = False
         for member in members:
-            if member.get("value") == obj_value and member.get("kind") == obj_kind:
-                found = True
-                break
+            if member.get("kind") == obj_kind:
+                if member.get("kind") == 'objectRef#NetworkObj':
+                    if member.get("objectId") == obj_value:
+                        found = True
+                        break
+                else:
+                    if member.get("value") == obj_value:
+                        found = True
+                        break
+
         return found
 
     def add_to_network_object_group(self, group, obj_kind, obj_value):
         """ Add a network object to the specified network object group.
-            This function returns False if the object to be added is already in the group.
+            This function returns False if the object to be added is already in the network object group.
         """
         # Check if this object is already in the network object group
         found = self.is_object_in_network_object_group(group, obj_kind, obj_value)
@@ -79,11 +86,21 @@ class CiscoASAClient(object):
 
         # Add this object to the network object group
         url = u"{0}/api/objects/networkobjectgroups/{1}".format(self.base_url, group)
-        data = {"members.add":[{
-                    "kind": obj_kind,
-                    "value": obj_value
+
+        # Members of a network object group can be of type network object or IPv4Address or IPv6Address.
+        # Either 
+        if obj_kind == 'objectRef#NetworkObj':
+            data = {"members.add":[{
+                        "kind": obj_kind,
+                        "objectId" : obj_value
                     }]
                 }
+        else:
+            data = {"members.add":[{
+                        "kind": obj_kind,
+                        "value": obj_value
+                        }]
+                    }
         data_string = json.dumps(data)
         response = self.rc.execute_call_v2("patch", url, headers=self.headers, data=data_string,
                                             verify=self.bundle, proxies=self.rc.get_proxies())
@@ -111,11 +128,19 @@ class CiscoASAClient(object):
 
         # Remove this object from the network object group
         url = u"{0}/api/objects/networkobjectgroups/{1}".format(self.base_url, group)
-        data = {"members.remove":[{
-                    "kind": obj_kind,
-                    "value": obj_value
+        # Key is different when dealing with a network object vs an IP address.
+        if obj_kind == 'objectRef#NetworkObj':
+            data = {"members.remove":[{
+                        "kind": obj_kind,
+                        "objectId" : obj_value
                     }]
                 }
+        else:
+            data = {"members.remove":[{
+                        "kind": obj_kind,
+                        "value": obj_value
+                        }]
+                    }
         data_string = json.dumps(data)
         response = self.rc.execute_call_v2("patch", url, headers=self.headers, data=data_string,
                                             verify=self.bundle, proxies=self.rc.get_proxies())
@@ -128,7 +153,7 @@ class CiscoASAClient(object):
             else:
                 raise IntegrationError("Write memory failed.")
         else:    
-            raise IntegrationError("Object was not added to network object group.")
+            raise IntegrationError("Object was not removed from network object group.")
 
     def write_memory(self):
         url = u"{0}/api/commands/writemem".format(self.base_url)

@@ -42,7 +42,10 @@ for network_object in member_list:
   network_object_row.cisco_asa_firewall = firewall
   network_object_row.cisco_asa_network_object_group = network_object_group
   network_object_row.cisco_asa_network_object_kind = network_object.get("kind")
-  network_object_row.cisco_asa_network_object_value = network_object.get("value")
+  if network_object.get("kind")  == 'objectRef#NetworkObj':
+    network_object_row.cisco_asa_network_object_value = network_object.get("objectId")
+  else:
+    network_object_row.cisco_asa_network_object_value = network_object.get("value")
   status_text = u"""<p style= "color:{color}">{status}</p>""".format(color="green", status="Active")
   network_object_row.cisco_asa_status = helper.createRichText(status_text)
 

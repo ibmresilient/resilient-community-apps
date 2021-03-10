@@ -32,7 +32,7 @@ inputs.cisco_asa_artifact_type = artifact.type
 ```python
 from java.util import Date
 
-if results.get("success"):
+if results.success:
 
   content = results.get("content")
   firewall = content.get("firewall")
