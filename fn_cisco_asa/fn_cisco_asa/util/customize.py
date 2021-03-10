@@ -21,12 +21,12 @@ def codegen_reload_data():
     return {
         "package": u"fn_cisco_asa",
         "message_destinations": [u"fn_cisco_asa"],
-        "functions": [],
-        "workflows": [],
-        "actions": [],
+        "functions": [u"cisco_asa_get_network_objects"],
+        "workflows": [u"example_cisco_asa_get_network_object_group"],
+        "actions": [u"Example: Cisco ASA Get Network Object Group"],
         "incident_fields": [],
         "incident_artifact_types": [],
-        "datatables": [],
+        "datatables": [u"cisco_asa_network_object_dt"],
         "automatic_tasks": [],
         "scripts": []
     }
@@ -42,6 +42,14 @@ def customization_data(client=None):
     Contents:
     - Message Destinations:
         - fn_cisco_asa
+    - Functions:
+        - cisco_asa_get_network_objects
+    - Workflows:
+        - example_cisco_asa_get_network_object_group
+    - Rules:
+        - Example: Cisco ASA Get Network Object Group
+    - Data Tables:
+        - cisco_asa_network_object_dt
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)
