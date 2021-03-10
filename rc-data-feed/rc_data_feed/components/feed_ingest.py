@@ -149,10 +149,10 @@ class FeedComponent(ResilientComponent):
                 if str_to_bool(self.options.get('reload', 'false')):
                     query_api_method = str_to_bool(self.options.get("reload_query_api_method", 'false'))
 
-                    reload = Reload(rest_client_helper, self.feed_outputs,
+                    reload_feeds = Reload(rest_client_helper, self.feed_outputs,
                                     query_api_method=query_api_method,
                                     incl_attachment_data=self.incl_attachment_data)
-                    reload.reload_all()
+                    reload_feeds.reload_all()
 
         except Exception as err:
             LOG.error("exception: %s", err)

@@ -13,8 +13,8 @@ def config_section_data():
 # comma separated section names. ex. sqlserver_feed,file_feed
 feed_names=<your feeds>
 reload=true
-# set to true if ElasticSearch errors occur during reload=True
-reload_query_api_method=False
+# set to true if ElasticSearch errors occur during reload=true
+reload_query_api_method=false
 
 # feed_data is the default message destination that will be listened to
 queue=feed_data
