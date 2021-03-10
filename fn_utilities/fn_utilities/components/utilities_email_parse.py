@@ -20,7 +20,10 @@ EMAIL_ATTACHMENT_ARTIFACT_ID = 7
 ARTIFACT_URI = "/incidents/{0}/artifacts/files"
 
 RE_CONTENT_TYPE = re.compile("Content-Transfer-Encoding:\W+base64")
+RE_BASE64 = re.compile("^[A-Za-z0-9+/\r\n]+={0,2}$")
 RE_START_BASE64 = re.compile("\n\n")
+
+LOG = logging.getLogger(__name__)
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'email_message_parts"""
@@ -31,7 +34,6 @@ class FunctionComponent(ResilientComponent):
         Any attachments found are added to the Incident as Artifacts if 'utilities_parse_email_attachments' is set to True"""
 
         try:
-            log = logging.getLogger(__name__)
 
             # Set variables
             parsed_email = path_tmp_file = path_tmp_dir = reason = results = None
@@ -91,7 +93,7 @@ class FunctionComponent(ResilientComponent):
                         reason = u"Could not parse {0} MSG File".format(attachment_metadata.get("name"))
                         yield StatusMessage(reason)
                         results = rp.done(success=False, content=None, reason=reason)
-                        log.error(err)
+                        LOG.error(err)
 
                 else:
                     yield StatusMessage("Processing Raw Email File: {}".format(attachment_metadata.get("name")))
@@ -102,7 +104,7 @@ class FunctionComponent(ResilientComponent):
                         reason = u"Could not parse {0} Email File".format(attachment_metadata.get("name"))
                         yield StatusMessage(reason)
                         results = rp.done(success=False, content=None, reason=reason)
-                        log.error(err)
+                        LOG.error(err)
 
             if parsed_email is not None:
                 if not parsed_email.mail:
@@ -151,7 +153,7 @@ class FunctionComponent(ResilientComponent):
                 yield StatusMessage(reason)
                 results = rp.done(success=False, content=None, reason=reason)
 
-            log.info("Done")
+            LOG.info("Done")
 
             yield FunctionResult(results)
         except Exception:
@@ -180,13 +182,17 @@ def convert_base64_encoding(payload):
     # determine if we have embedded base64
     match = RE_CONTENT_TYPE.search(payload)
     if match:
+        LOG.INFO("Found bas64 encoded content")
         # find the start of the data which is demarked by an empty line
         match_base64 = RE_START_BASE64.search(payload[match.end():])
         if match_base64:
             base64_data = payload[match.end()+match_base64.end():]
         else:
             base64_data = payload[match.end():]  # just start where we found the mime information
-        decoded_data = b_to_s(decode_mail_body(base64_data))
-        # insert where we found it
-        result = "\n".join([payload[:match.end()], decoded_data])
+        # ensure we are really dealing with base64 data
+        if RE_BASE64.search(base64_data):
+            LOG.debug(base64_data)
+            decoded_data = b_to_s(decode_mail_body(base64_data))
+            # insert where we found it
+            result = "\n".join([payload[:match.end()], decoded_data])
     return result
