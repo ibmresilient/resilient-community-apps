@@ -45,13 +45,24 @@ class CiscoASAClient(object):
         self.headers = get_headers(self.username, self.password)
     
     def get_network_object(self, objectId):
-        """ Return the members of a network object list.
+        """ Return the details of a network object.
         """
         url = u"{0}/api/objects/networkobjects/{1}".format(self.base_url, objectId)
 
         response = self.rc.execute_call_v2("get", url, headers=self.headers, verify=self.bundle,
                                            proxies=self.rc.get_proxies())
         return response.json()
+
+    def get_network_objects(self):
+        """ Return the network objects of the firewall (host).
+        """
+        url = u"{0}/api/objects/networkobjects".format(self.base_url)
+
+        response = self.rc.execute_call_v2("get", url, headers=self.headers, verify=self.bundle,
+                                           proxies=self.rc.get_proxies())
+        status_code = response.status_code
+        return status_code, response.json()
+
 
     def get_network_object_group(self, group):
         """ Return the members of a network object list.

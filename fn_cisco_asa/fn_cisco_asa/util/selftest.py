@@ -19,20 +19,48 @@ Return examples:
 """
 
 import logging
+from resilient_lib import RequestsCommon, validate_fields
+from fn_cisco_asa.lib.functions_common import CiscoASAFirewalls
+from fn_cisco_asa.lib.cisco_asa_client import CiscoASAClient
 
-log = logging.getLogger(__name__)
-log.setLevel(logging.INFO)
-log.addHandler(logging.StreamHandler())
+LOG = logging.getLogger(__name__)
 
+PACKAGE_NAME = "fn_cisco_asa"
 
 def selftest_function(opts):
     """
-    Placeholder for selftest function. An example use would be to test package api connectivity.
-    Suggested return values are be unimplemented, success, or failure.
+    Test connectivity to at least one Cisco ASA device defined in the app.config.
     """
-    app_configs = opts.get("fn_cisco_asa", {})
+    fn_options = opts.get("fn_cisco_asa", {})
+
+    rc = RequestsCommon(opts, fn_options)
+
+    # Load the firewall options from the app.config
+    firewalls = CiscoASAFirewalls(opts, fn_options)
+    firewall_list = firewalls.get_firewall_name_list()
+
+    # Loop through the firewalls to find at least one that is up and connectable.
+    for firewall_name in firewall_list:
+        # Get the the options for this firewall.
+        firewall_options = firewalls.get_firewall(firewall_name)
+
+        # Initialize the Cisco ASA object.
+        asa = CiscoASAClient(firewall_name, fn_options, firewall_options, rc)
+
+        try:
+            # Check if we can access this Cisco ASA device.
+            status_code, response = asa.get_network_objects()
+            if status_code == 200:
+                reason = "Successfull connection to firewall {0}.".format(firewall_name)
+                return {
+                    "state": "success",
+                    "reason": reason
+                }
+        except Exception as err:
+            LOG.info(err)
+            continue
 
     return {
-        "state": "unimplemented",
-        "reason": None
+        "state": "failure",
+        "reason": "Unable to connect to any Cisco ASA firewall."
     }
