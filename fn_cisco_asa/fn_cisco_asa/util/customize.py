@@ -21,14 +21,14 @@ def codegen_reload_data():
     return {
         "package": u"fn_cisco_asa",
         "message_destinations": [u"fn_cisco_asa"],
-        "functions": [u"cisco_asa_add_artifact_to_network_object_group", u"cisco_asa_add_network_object_to_network_object_group", u"cisco_asa_get_network_objects", u"cisco_asa_remove_network_object_from_network_object_group"],
+        "functions": [u"cisco_asa_add_artifact_to_network_object_group", u"cisco_asa_add_network_object_to_network_object_group", u"cisco_asa_get_network_object_details", u"cisco_asa_get_network_objects", u"cisco_asa_remove_network_object_from_network_object_group"],
         "workflows": [u"cisco_asa_add_artifact_to_network_object_group", u"cisco_asa_add_network_object_to_network_object_group", u"cisco_asa_get_network_object_group", u"cisco_asa_remove_network_object_from_network_object_group"],
         "actions": [u"Cisco ASA Add Artifact to Network Object Group", u"Cisco ASA Add Network Object to Network Object Group", u"Cisco ASA Get Network Object Group", u"Cisco ASA Remove Network Object from Network Object Group"],
         "incident_fields": [],
         "incident_artifact_types": [],
         "datatables": [u"cisco_asa_network_object_dt"],
         "automatic_tasks": [],
-        "scripts": []
+        "scripts": [u"Convert JSON to rich text v1.1"],
     }
 
 
@@ -45,6 +45,7 @@ def customization_data(client=None):
     - Functions:
         - cisco_asa_add_artifact_to_network_object_group
         - cisco_asa_add_network_object_to_network_object_group
+        - cisco_asa_get_network_object_details
         - cisco_asa_get_network_objects
         - cisco_asa_remove_network_object_from_network_object_group
     - Workflows:
@@ -59,6 +60,8 @@ def customization_data(client=None):
         - Cisco ASA Remove Network Object from Network Object Group
     - Data Tables:
         - cisco_asa_network_object_dt
+    - Scripts:
+        - Convert JSON to rich text v1.1
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)

@@ -9,14 +9,14 @@
           "field_name": "artifact.type",
           "method": "equals",
           "type": null,
-          "value": "IP Address"
+          "value": "String"
         },
         {
           "evaluation_id": null,
           "field_name": "artifact.type",
           "method": "equals",
           "type": null,
-          "value": "String"
+          "value": "IP Address"
         }
       ],
       "enabled": true,
@@ -177,7 +177,7 @@
   ],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1614837632659,
+  "export_date": 1614852587758,
   "export_format_version": 2,
   "fields": [
     {
@@ -208,6 +208,36 @@
       "tooltip": "",
       "type_id": 11,
       "uuid": "2f25706e-1951-4911-b198-11fb4c73c973",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "__function/cisco_asa_network_object_id",
+      "hide_notification": false,
+      "id": 212,
+      "input_type": "text",
+      "internal": false,
+      "is_tracked": false,
+      "name": "cisco_asa_network_object_id",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": null,
+      "read_only": false,
+      "required": "always",
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "cisco_asa_network_object_id",
+      "tooltip": "",
+      "type_id": 11,
+      "uuid": "f11f8c30-8f0c-462b-bac3-ad8a550b8de7",
       "values": []
     },
     {
@@ -278,36 +308,6 @@
       "chosen": false,
       "default_chosen_by_server": false,
       "deprecated": false,
-      "export_key": "__function/cisco_asa_firewall",
-      "hide_notification": false,
-      "id": 198,
-      "input_type": "text",
-      "internal": false,
-      "is_tracked": false,
-      "name": "cisco_asa_firewall",
-      "operation_perms": {},
-      "operations": [],
-      "placeholder": "",
-      "prefix": null,
-      "read_only": false,
-      "required": "always",
-      "rich_text": false,
-      "tags": [],
-      "templates": [],
-      "text": "cisco_asa_firewall",
-      "tooltip": "",
-      "type_id": 11,
-      "uuid": "6e5a3cb6-18fe-4dae-9b87-a8c5d889b070",
-      "values": []
-    },
-    {
-      "allow_default_value": false,
-      "blank_option": false,
-      "calculated": false,
-      "changeable": true,
-      "chosen": false,
-      "default_chosen_by_server": false,
-      "deprecated": false,
       "export_key": "__function/cisco_asa_network_object_value",
       "hide_notification": false,
       "id": 210,
@@ -328,6 +328,36 @@
       "tooltip": "",
       "type_id": 11,
       "uuid": "ed9ad5be-b3c3-4105-926d-57c63228a592",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "__function/cisco_asa_firewall",
+      "hide_notification": false,
+      "id": 198,
+      "input_type": "text",
+      "internal": false,
+      "is_tracked": false,
+      "name": "cisco_asa_firewall",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": null,
+      "read_only": false,
+      "required": "always",
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "cisco_asa_firewall",
+      "tooltip": "",
+      "type_id": 11,
+      "uuid": "6e5a3cb6-18fe-4dae-9b87-a8c5d889b070",
       "values": []
     },
     {
@@ -623,6 +653,63 @@
         "type": "user"
       },
       "description": {
+        "content": "Get the details of the Cisco ASA network object.",
+        "format": "text"
+      },
+      "destination_handle": "fn_cisco_asa",
+      "display_name": "Cisco ASA Get Network Object Details",
+      "export_key": "cisco_asa_get_network_object_details",
+      "id": 6,
+      "last_modified_by": {
+        "display_name": "Resilient Sysadmin",
+        "id": 3,
+        "name": "a@a.com",
+        "type": "user"
+      },
+      "last_modified_time": 1614848836112,
+      "name": "cisco_asa_get_network_object_details",
+      "tags": [],
+      "uuid": "0cfd3303-0293-46cb-b257-911c49167204",
+      "version": 1,
+      "view_items": [
+        {
+          "content": "6e5a3cb6-18fe-4dae-9b87-a8c5d889b070",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "f11f8c30-8f0c-462b-bac3-ad8a550b8de7",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        }
+      ],
+      "workflows": [
+        {
+          "actions": [],
+          "description": null,
+          "name": "Cisco ASA Get Network Object Details",
+          "object_type": "cisco_asa_network_object_dt",
+          "programmatic_name": "cisco_asa_get_network_object_details",
+          "tags": [],
+          "uuid": null,
+          "workflow_id": 13
+        }
+      ]
+    },
+    {
+      "creator": {
+        "display_name": "Resilient Sysadmin",
+        "id": 3,
+        "name": "a@a.com",
+        "type": "user"
+      },
+      "description": {
         "content": "Query the Cisco ASA firewall and return the network objects contained in the specified network object group.",
         "format": "text"
       },
@@ -748,12 +835,12 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 58,
+  "id": 62,
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1615409031182,
+      "create_date": 1615475490049,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -762,7 +849,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1615409031182,
+      "update_date": 1615475490049,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -789,7 +876,23 @@
   "phases": [],
   "regulators": null,
   "roles": [],
-  "scripts": [],
+  "scripts": [
+    {
+      "actions": [],
+      "creator_id": "a@a.com",
+      "description": "This script converts a json object into a hierarchical display of rich text and adds the rich text to an incident\u0027s rich text (custom) field or an incident note. A workflow property is used to share the json to convert and identify parameters used on how to perform the conversion.\n\nTypically, a function will create the workflow property \u0027convert_json_to_rich_text\u0027, and this script will run after that function to perform the conversion.\n\nFeatures:\n* Display the hierarchical nature of json, presenting the json keys (sorted if specified) as bold labels\n* Provide links to found URLs\n* Create either an incident note or add results to an incident (custom) rich text field.",
+      "export_key": "Convert JSON to rich text v1.1",
+      "id": 2,
+      "language": "python",
+      "last_modified_by": "a@a.com",
+      "last_modified_time": 1614851082746,
+      "name": "Convert JSON to rich text v1.1",
+      "object_type": "incident",
+      "script_text": "# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.\nVERSION = 1.1\n\"\"\"\n  This script converts a json object into a hierarchical display of rich text and adds the rich text to an incident\u0027s rich text (custom) field or an incident note.\n  A workflow property is used to define the json to convert and identify parameters used on how to perform the conversion.\n  Typically, a function will create workflow property and this script will run after that function to perform the conversion.\n  Features:\n    * Display the hierarchical nature of json, presenting the json keys as bold labels\n    * Provide links to found URLs\n    * Create either an incident note or add results to an incident (custom) rich text field.\n  \n  In order to use this script, define a workflow property called: convert_json_to_rich_text, to define the json and parameters to use for the conversion.\n  Workflow properties can be added using a command similar to this:\n  workflow.addProperty(\u0027convert_json_to_rich_text\u0027, {\n    \"version\": 1.1,\n    \"header\": \"Artifact scan results for: {}\".format(artifact.value),\n    \"padding\": 10,\n    \"separator\": u\"\u003cbr /\u003e\",\n    \"sort\": True,\n    \"json\": results.content,\n    \"json_omit_list\": [\"omit\"],\n    \"incident_field\": None\n  })\n  \n  Format of workflow.property.convert_json_to_rich_text:\n  { \n    \"version\": 1.1, [this is for future compatibility]\n    \"header\": str, [header line to add to converted json produced or None. Ex: Results from scanning artifact: xxx. The header may contain rich text tags]\n    \"padding\": 10, [padding for nested json elements, or defaults to 10]\n    \"separator\": u\"\u003cbr /\u003e\"|list such as [\u0027\u003cspan\u003e\u0027,\u0027\u003c/span\u003e\u0027], [html separator between json keys and lists or defaults to html break: \u0027\u003cbr /\u003e\u0027. \n                                                If a list, then the data is brackets by the pair specified]\n    \"sort\": True|False, [sort the json keys at each level when displayed]\n    \"json\": json, [required json to convert]\n    \"json_omit_list\": [list of json keys to exclude or None]\n    \"incident_field\": \"\u003cincident_field\u003e\" [indicates a builtin rich text incident field, such as \u0027description\u0027 \n                                          or a custom rich text field in the format: \u0027properties.\u003cfield\u003e\u0027. default: create an incident note]\n  }\n\"\"\"\n\nimport re\n\n# needed for python 3\ntry:\n    unicode(\"abc\")\nexcept:\n    unicode = str\n\n\nrc = re.compile(r\u0027http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.\u0026+#\\?]|[!*\\(\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+\u0027)\n\nclass ConvertJson:\n    \"\"\"Class to hold the conversion parameters and perform the conversion\"\"\"\n\n    def __init__(self, omit_keys=[], padding=10, separator=u\"\u003cbr /\u003e\", sort_keys=False):\n        self.omit_keys = omit_keys\n        self.padding = padding\n        self.separator = separator\n        self.sort_keys = sort_keys\n\n\n    def format_link(self, item):\n        \"\"\"[summary]\n          Find embedded urls (http(s)) and add html anchor tags to display as links\n          Args:\n              item ([string])\n\n          Returns:\n              [str]: None|original text if no links|text with html links\n        \"\"\"\n        formatted_item = item\n        if item and not isinstance(item, (int, bool, float)):\n            list = rc.findall(item)\n            if list:\n                for link in list:\n                    formatted_item = formatted_item.replace(link, u\"\u003ca target=\u0027blank\u0027 href=\u0027{0}\u0027\u003e{0}\u003c/a\u003e\".format(link))\n\n        return formatted_item\n\n    def expand_list(self, list_value, is_list=False):\n        \"\"\"[summary]\n          convert items to html, adding indents to nested dictionaries.\n          Args:\n              list_value ([dict|list]): json element\n\n          Returns:\n              [str]: html converted code\n        \"\"\"\n        if not isinstance(list_value, list):\n            return self.format_link(list_value)\n        elif not list_value:\n            return u\"None\u003cbr\u003e\"\n\n        try:\n            items_list = []  # this will ensure list starts on second line of key label\n            for item in list_value:\n                if isinstance(item, dict):\n                    result = self.convert_json_to_rich_text(item)\n                    if is_list:\n                        items_list.append(u\"\u003cli\u003e{}\u003c/li\u003e\".format(result))\n                    else:\n                        items_list.append(result)\n                elif isinstance(item, list):\n                    items_list.append(self.expand_list(item, is_list=True))\n                elif is_list:\n                    items_list.append(u\"\u003cli\u003e{}\u003c/li\u003e\".format(self.format_link(unicode(item))))\n                else:\n                    items_list.append(self.format_link(unicode(item)))\n\n            expand_list_result = self.add_separator(self.separator if not is_list else u\"\",\n                                                    items_list,\n                                                    is_list=is_list)\n\n            if is_list:\n                return u\"\u003cul\u003e{}\u003c/ul\u003e\".format(expand_list_result)\n            else:\n                return u\"\u003cdiv style=\u0027padding:5px\u0027\u003e{}\u003c/div\u003e\".format(expand_list_result)\n        except Exception as err:\n            return str(err)\n\n    def convert_json_to_rich_text(self, sub_dict):\n        \"\"\"[summary]\n          Walk dictionary tree and convert to html for better display\n          Args:\n              sub_dict ([type]): [description]\n\n          Returns:\n              [type]: [description]\n        \"\"\"\n        notes = []\n        if sub_dict:\n            if isinstance(sub_dict, list):\n                expanded_list = self.expand_list(sub_dict, is_list=True)\n                notes.append(self.add_separator(self.separator, expanded_list))\n            else:\n                keys = sorted (sub_dict.keys()) if self.sort_keys else sub_dict.keys()\n\n                for key in keys:\n                    if key not in self.omit_keys:\n                        value = sub_dict[key]\n                        is_list = isinstance(value, list)\n                        item_list = [u\"\u003cstrong\u003e{0}\u003c/strong\u003e: \".format(key)]\n                        if isinstance(value, dict):\n                            convert_result = self.convert_json_to_rich_text(value)\n                            if convert_result:\n                                item_list.append(u\"\u003cdiv style=\u0027padding:{}px\u0027\u003e{}\u003c/div\u003e\".format(self.padding, convert_result))\n                            else:\n                                item_list.append(u\"None\u003cbr\u003e\")\n                        else:\n                            item_list.append(self.expand_list(value, is_list=is_list))\n                        notes.append(self.add_separator(self.separator, u\"\".join(unicode(v) for v in item_list), is_list=is_list))\n\n        result_notes = u\"\".join(notes)\n        if isinstance(self.separator, list):\n            return result_notes\n        else:\n            return result_notes.replace(\n                u\"\u003c/div\u003e{0}\".format(self.separator), u\"\u003c/div\u003e\").replace(\n                u\"{0}\u003c/div\u003e\".format(self.separator), u\"\u003c/div\u003e\"\n            )  # tighten up result\n\n    def add_separator(self, separator, items, is_list=False):\n        \"\"\"\n        apply the separator to the data\n        :param separator: None, str or list such as [\u0027\u003cspan\u003e\u0027, \u0027\u003c/span\u003e\u0027]\n        :param items: str or list to add separator\n        :return: text with separator applied\n        \"\"\"\n        _items = items\n\n        if not _items:\n            return \"\u003cbr\u003e\"\n\n        if not isinstance(_items, list):\n            _items = [_items]\n\n        if isinstance(separator, list):\n            return u\"\".join([u\"{}{}{}\".format(separator[0], item, separator[1]) for item in _items])\n\n        return u\"{}{}\".format(separator.join(_items), separator if not is_list else u\"\")\n\ndef get_properties(property_name):\n    \"\"\"\n    Logic to collect the json and parameters from a workflow property.\n    Args:\n      property_name: workflow property to reference\n    Returns:\n      padding, separator, header, json_omit_list, incident_field, json, sort_keys\n    \"\"\"\n    if not workflow.properties.get(property_name):\n        helper.fail(\"workflow.properties.{} undefined\".format(property_name))\n\n    padding = int(workflow.properties[property_name].get(\"padding\", 10))\n    separator = workflow.properties[property_name].get(\"separator\", u\"\u003cbr /\u003e\")\n    if isinstance(separator, list) and len(separator) != 2:\n        helper.fail(\"list of separators should be specified as a pair such as [\u0027\u003cdiv\u003e\u0027, \u0027\u003c/div\u003e\u0027]: {}\".format(separator))\n\n    header = workflow.properties[property_name].get(\"header\")\n    json_omit_list = workflow.properties[property_name].get(\"json_omit_list\")\n    if not json_omit_list:\n        json_omit_list = []\n    incident_field = workflow.properties[property_name].get(\"incident_field\")\n    json = workflow.properties[property_name].get(\"json\", {})\n    if not isinstance(json, dict) and not isinstance(json, list):\n        helper.fail(\"json element is not formatted correctly: {}\".format(json))\n    sort_keys = bool(workflow.properties[property_name].get(\"sort\", False))\n\n    return padding, separator, header, json_omit_list, incident_field, json, sort_keys\n\n\n## S T A R T\nif \u0027workflow\u0027 in globals():\n    padding, separator, header, json_omit_list, incident_field, json, sort_keys = get_properties(\u0027convert_json_to_rich_text\u0027)\n\n    if header:\n        if isinstance(separator, list):\n            hdr = u\"{0}{1}{2}\".format(separator[0], header, separator[1])\n        else:\n            hdr = u\"{0}{1}\".format(header, separator)\n    else:\n        hdr = u\"\"\n\n    convert = ConvertJson(omit_keys=json_omit_list, padding=padding, separator=separator, sort_keys=sort_keys)\n    converted_json = convert.convert_json_to_rich_text(json)\n    result = u\"{}{}\".format(hdr, converted_json if converted_json else \"\\nNone\")\n\n    rich_text_note = helper.createRichText(result)\n    if incident_field:\n        incident[incident_field] = rich_text_note\n    else:\n        incident.addNote(rich_text_note)\n",
+      "tags": [],
+      "uuid": "874d929b-7b4c-4f47-983a-58295c93d6bf"
+    }
+  ],
   "server_version": {
     "build_number": 5832,
     "major": 37,
@@ -1022,26 +1125,6 @@
     {
       "actions": [],
       "content": {
-        "version": 15,
-        "workflow_id": "cisco_asa_remove_network_object_from_network_object_group",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"cisco_asa_remove_network_object_from_network_object_group\" isExecutable=\"true\" name=\"Cisco ASA Remove Network Object from Network Object Group\"\u003e\u003cdocumentation\u003eRemove the network object from the specified Cisco ASA network object group. The status column of the row is marked as Removed in the data table.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0zs3em8\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0qz9u75\" name=\"Cisco ASA Remove Network Object f...\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"50488692-9f80-4d9b-ad88-44e5a80e4fc7\"\u003e{\"inputs\":{},\"post_processing_script\":\"from java.util import Date\\n\\nif results.success:\\n  text = \\\"Removed\\\"\\nelse:\\n  text = \\\"NotFound\\\"\\n  \\nstatus_text = u\\\"\\\"\\\"\u0026lt;p style= \\\"color:{color}\\\"\u0026gt;{status}\u0026lt;/p\u0026gt;\\\"\\\"\\\".format(color=\\\"red\\\", status=text)\\nrow[\u0027cisco_asa_status\u0027] = helper.createRichText(status_text)\\nrow[\\\"cisco_asa_query_date\\\"] = Date()\\n\",\"pre_processing_script\":\"inputs.cisco_asa_firewall = row.cisco_asa_firewall\\ninputs.cisco_asa_network_object_group = row.cisco_asa_network_object_group\\ninputs.cisco_asa_network_object_kind = row.cisco_asa_network_object_kind\\ninputs.cisco_asa_network_object_value = row.cisco_asa_network_object_value\\n\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0zs3em8\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1un9ebq\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0zs3em8\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0qz9u75\"/\u003e\u003cendEvent id=\"EndEvent_1busvxw\"\u003e\u003cincoming\u003eSequenceFlow_1un9ebq\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1un9ebq\" sourceRef=\"ServiceTask_0qz9u75\" targetRef=\"EndEvent_1busvxw\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1lw2x61\"\u003e\u003ctext\u003e\u003c![CDATA[Input: Data table row\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1418gmu\" sourceRef=\"ServiceTask_0qz9u75\" targetRef=\"TextAnnotation_1lw2x61\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_16fukp9\"\u003e\u003ctext\u003e\u003c![CDATA[Output: Network object in the data table row is removed from the Cisco ASA network object group.\u00a0 Data table Status column is updated.\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0fgqbcz\" sourceRef=\"ServiceTask_0qz9u75\" targetRef=\"TextAnnotation_16fukp9\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0qz9u75\" id=\"ServiceTask_0qz9u75_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"482\" y=\"168\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0zs3em8\" id=\"SequenceFlow_0zs3em8_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"482\" xsi:type=\"omgdc:Point\" y=\"208\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"90\" x=\"295\" y=\"185\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1busvxw\" id=\"EndEvent_1busvxw_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"840\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"858\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1un9ebq\" id=\"SequenceFlow_1un9ebq_di\"\u003e\u003comgdi:waypoint x=\"582\" xsi:type=\"omgdc:Point\" y=\"208\"/\u003e\u003comgdi:waypoint x=\"840\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"90\" x=\"666\" y=\"185\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1lw2x61\" id=\"TextAnnotation_1lw2x61_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"318\" y=\"55\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1418gmu\" id=\"Association_1418gmu_di\"\u003e\u003comgdi:waypoint x=\"489\" xsi:type=\"omgdc:Point\" y=\"171\"/\u003e\u003comgdi:waypoint x=\"386\" xsi:type=\"omgdc:Point\" y=\"85\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_16fukp9\" id=\"TextAnnotation_16fukp9_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"655\" y=\"55\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0fgqbcz\" id=\"Association_0fgqbcz_di\"\u003e\u003comgdi:waypoint x=\"577\" xsi:type=\"omgdc:Point\" y=\"173\"/\u003e\u003comgdi:waypoint x=\"686\" xsi:type=\"omgdc:Point\" y=\"85\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 15,
-      "creator_id": "a@a.com",
-      "description": "Remove the network object from the specified Cisco ASA network object group. The status column of the row is marked as Removed in the data table.",
-      "export_key": "cisco_asa_remove_network_object_from_network_object_group",
-      "last_modified_by": "a@a.com",
-      "last_modified_time": 1614837450693,
-      "name": "Cisco ASA Remove Network Object from Network Object Group",
-      "object_type": "cisco_asa_network_object_dt",
-      "programmatic_name": "cisco_asa_remove_network_object_from_network_object_group",
-      "tags": [],
-      "uuid": "a3e14aae-44a2-421e-a4e3-d15b7438faa8",
-      "workflow_id": 9
-    },
-    {
-      "actions": [],
-      "content": {
         "version": 10,
         "workflow_id": "cisco_asa_add_artifact_to_network_object_group",
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"cisco_asa_add_artifact_to_network_object_group\" isExecutable=\"true\" name=\"Cisco ASA Add Artifact to Network Object Group\"\u003e\u003cdocumentation\u003eAdd an artifact to the Cisco ASA network object group.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_10x6vmu\u003c/outgoing\u003e\u003c/startEvent\u003e\u003csequenceFlow id=\"SequenceFlow_10x6vmu\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0qpnwgg\"/\u003e\u003cendEvent id=\"EndEvent_0z4dkmr\"\u003e\u003cincoming\u003eSequenceFlow_1835eiz\u003c/incoming\u003e\u003c/endEvent\u003e\u003cserviceTask id=\"ServiceTask_0qpnwgg\" name=\"Cisco ASA Add Artifact to Network...\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"95186e9d-4ebe-438e-aa4a-6f03d1a75055\"\u003e{\"inputs\":{},\"post_processing_script\":\"from java.util import Date\\n\\nif results.success:\\n\\n  content = results.get(\\\"content\\\")\\n  firewall = content.get(\\\"firewall\\\")\\n  network_object_group = content.get(\\\"network_object_group\\\")\\n  network_object_kind = content.get(\\\"network_object_kind\\\")\\n  network_object_value = content.get(\\\"network_object_value\\\")\\n\\n  # Add each email as a row in the query results data table\\n  network_object_row = incident.addRow(\\\"cisco_asa_network_object_dt\\\")\\n  network_object_row.cisco_asa_query_date = Date()\\n  network_object_row.cisco_asa_firewall = firewall\\n  network_object_row.cisco_asa_network_object_group = network_object_group\\n  network_object_row.cisco_asa_network_object_kind = network_object_kind\\n  network_object_row.cisco_asa_network_object_value = network_object_value\\n  status_text = u\\\"\\\"\\\"\u0026lt;p style= \\\"color:{color}\\\"\u0026gt;{status}\u0026lt;/p\u0026gt;\\\"\\\"\\\".format(color=\\\"green\\\", status=\\\"Active\\\")\\n  network_object_row.cisco_asa_status = helper.createRichText(status_text)\",\"pre_processing_script\":\"inputs.cisco_asa_firewall = rule.properties.cisco_asa_firewall\\noverride = rule.properties.cisco_asa_network_object_group_override\\nif override is \\\"\\\" or override is None:\\n  inputs.cisco_asa_network_object_group = rule.properties.cisco_asa_network_object_group\\nelse:\\n  inputs.cisco_asa_network_object_group = override\\ninputs.cisco_asa_network_object_value = artifact.value\\ninputs.cisco_asa_artifact_type = artifact.type\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_10x6vmu\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1835eiz\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1835eiz\" sourceRef=\"ServiceTask_0qpnwgg\" targetRef=\"EndEvent_0z4dkmr\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0n37lmi\"\u003e\u003ctext\u003e\u003c![CDATA[Input: IP address artifact or String artifact\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1vdjclh\" sourceRef=\"ServiceTask_0qpnwgg\" targetRef=\"TextAnnotation_0n37lmi\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0dvro8n\"\u003e\u003ctext\u003e\u003c![CDATA[Output: artifact\u00a0 value of IP Address\u00a0 artifact is added to the Cisco ASA netowrk object group and a row entry is added to the Cisco ASA data table\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0amcyrn\" sourceRef=\"ServiceTask_0qpnwgg\" targetRef=\"TextAnnotation_0dvro8n\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_10x6vmu\" id=\"SequenceFlow_10x6vmu_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"511\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"90\" x=\"309.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0z4dkmr\" id=\"EndEvent_0z4dkmr_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"937\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"955\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0qpnwgg\" id=\"ServiceTask_0qpnwgg_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"511\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1835eiz\" id=\"SequenceFlow_1835eiz_di\"\u003e\u003comgdi:waypoint x=\"611\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"937\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"774\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0n37lmi\" id=\"TextAnnotation_0n37lmi_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"323\" y=\"42\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1vdjclh\" id=\"Association_1vdjclh_di\"\u003e\u003comgdi:waypoint x=\"516\" xsi:type=\"omgdc:Point\" y=\"171\"/\u003e\u003comgdi:waypoint x=\"392\" xsi:type=\"omgdc:Point\" y=\"72\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0dvro8n\" id=\"TextAnnotation_0dvro8n_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"661\" y=\"42\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0amcyrn\" id=\"Association_0amcyrn_di\"\u003e\u003comgdi:waypoint x=\"601\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"696\" xsi:type=\"omgdc:Point\" y=\"72\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
@@ -1058,6 +1141,26 @@
       "tags": [],
       "uuid": "540d75ae-8285-447f-8919-f2353ba5c971",
       "workflow_id": 11
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 15,
+        "workflow_id": "cisco_asa_remove_network_object_from_network_object_group",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"cisco_asa_remove_network_object_from_network_object_group\" isExecutable=\"true\" name=\"Cisco ASA Remove Network Object from Network Object Group\"\u003e\u003cdocumentation\u003eRemove the network object from the specified Cisco ASA network object group. The status column of the row is marked as Removed in the data table.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0zs3em8\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0qz9u75\" name=\"Cisco ASA Remove Network Object f...\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"50488692-9f80-4d9b-ad88-44e5a80e4fc7\"\u003e{\"inputs\":{},\"post_processing_script\":\"from java.util import Date\\n\\nif results.success:\\n  text = \\\"Removed\\\"\\nelse:\\n  text = \\\"NotFound\\\"\\n  \\nstatus_text = u\\\"\\\"\\\"\u0026lt;p style= \\\"color:{color}\\\"\u0026gt;{status}\u0026lt;/p\u0026gt;\\\"\\\"\\\".format(color=\\\"red\\\", status=text)\\nrow[\u0027cisco_asa_status\u0027] = helper.createRichText(status_text)\\nrow[\\\"cisco_asa_query_date\\\"] = Date()\\n\",\"pre_processing_script\":\"inputs.cisco_asa_firewall = row.cisco_asa_firewall\\ninputs.cisco_asa_network_object_group = row.cisco_asa_network_object_group\\ninputs.cisco_asa_network_object_kind = row.cisco_asa_network_object_kind\\ninputs.cisco_asa_network_object_value = row.cisco_asa_network_object_value\\n\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0zs3em8\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1un9ebq\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0zs3em8\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0qz9u75\"/\u003e\u003cendEvent id=\"EndEvent_1busvxw\"\u003e\u003cincoming\u003eSequenceFlow_1un9ebq\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1un9ebq\" sourceRef=\"ServiceTask_0qz9u75\" targetRef=\"EndEvent_1busvxw\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1lw2x61\"\u003e\u003ctext\u003e\u003c![CDATA[Input: Data table row\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1418gmu\" sourceRef=\"ServiceTask_0qz9u75\" targetRef=\"TextAnnotation_1lw2x61\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_16fukp9\"\u003e\u003ctext\u003e\u003c![CDATA[Output: Network object in the data table row is removed from the Cisco ASA network object group.\u00a0 Data table Status column is updated.\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0fgqbcz\" sourceRef=\"ServiceTask_0qz9u75\" targetRef=\"TextAnnotation_16fukp9\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0qz9u75\" id=\"ServiceTask_0qz9u75_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"482\" y=\"168\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0zs3em8\" id=\"SequenceFlow_0zs3em8_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"482\" xsi:type=\"omgdc:Point\" y=\"208\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"90\" x=\"295\" y=\"185\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1busvxw\" id=\"EndEvent_1busvxw_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"840\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"858\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1un9ebq\" id=\"SequenceFlow_1un9ebq_di\"\u003e\u003comgdi:waypoint x=\"582\" xsi:type=\"omgdc:Point\" y=\"208\"/\u003e\u003comgdi:waypoint x=\"840\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"90\" x=\"666\" y=\"185\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1lw2x61\" id=\"TextAnnotation_1lw2x61_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"318\" y=\"55\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1418gmu\" id=\"Association_1418gmu_di\"\u003e\u003comgdi:waypoint x=\"489\" xsi:type=\"omgdc:Point\" y=\"171\"/\u003e\u003comgdi:waypoint x=\"386\" xsi:type=\"omgdc:Point\" y=\"85\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_16fukp9\" id=\"TextAnnotation_16fukp9_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"655\" y=\"55\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0fgqbcz\" id=\"Association_0fgqbcz_di\"\u003e\u003comgdi:waypoint x=\"577\" xsi:type=\"omgdc:Point\" y=\"173\"/\u003e\u003comgdi:waypoint x=\"686\" xsi:type=\"omgdc:Point\" y=\"85\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 15,
+      "creator_id": "a@a.com",
+      "description": "Remove the network object from the specified Cisco ASA network object group. The status column of the row is marked as Removed in the data table.",
+      "export_key": "cisco_asa_remove_network_object_from_network_object_group",
+      "last_modified_by": "a@a.com",
+      "last_modified_time": 1614837450693,
+      "name": "Cisco ASA Remove Network Object from Network Object Group",
+      "object_type": "cisco_asa_network_object_dt",
+      "programmatic_name": "cisco_asa_remove_network_object_from_network_object_group",
+      "tags": [],
+      "uuid": "a3e14aae-44a2-421e-a4e3-d15b7438faa8",
+      "workflow_id": 9
     },
     {
       "actions": [],
