@@ -9,8 +9,7 @@ def config_section_data():
     for fn_cisco_asa when called by `resilient-circuits config [-c|-u]`
     """
     config_data = u"""[fn_cisco_asa]
-# Comma separated list of network object groups to manage: blacklist_in, blacklist_out
-network_object_lists=BLACKLIST_IN, BLACKLIST_OUT
+
 #
 # Optional Global username and password to be used if not defined in the individual firewall
 # sections.
@@ -22,11 +21,13 @@ network_object_lists=BLACKLIST_IN, BLACKLIST_OUT
 
 # Copy this firewall template for each firewall to be managed. 
 # Each firewall_name should be unique. 
-# Each firewall section requires a mandatory "host" parameter. 
+# Each firewall section requires a mandatory "host" parameter and "network_object_lists". 
 [fn_cisco_asa:firewall_name]
 host=<asa_ip>
 username=<asa_username>
 password=<asa_password>
+# Comma separated list of network object groups to manage.
+network_object_lists=BLACKLIST_IN, BLACKLIST_OUT
 #cafile=False
 #"""
     return config_data
