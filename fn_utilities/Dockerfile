@@ -5,7 +5,7 @@ FROM registry.access.redhat.com/ubi8/python-36:latest
 #FROM resilient/rc-data-feeder-base
 
 ARG APPLICATION=fn_utilities
-ARG RES_CIRCUITS_VERSION=39.0
+ARG RES_CIRCUITS_VERSION=40.0
 ARG PATH_RESILIENT_CIRCUITS=rescircuits
 
 # Environment variable for any app to check if running in a container
