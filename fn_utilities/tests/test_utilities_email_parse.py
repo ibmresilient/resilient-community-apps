@@ -56,7 +56,7 @@ class TestArtifactEmailParse:
             ]
         }),
         (ArtifactMock.test_data_b64("email_sample_3.eml"), {
-            "html_body": u'["<div dir=\\"ltr\\">see this<div><br></div></div>"]',
+            "html_body": u'["<div dir=\\"ltr\\">see this<div><br></div></div>',
             "attachments": [
                 {
                     "mail_content_type": "application/pdf",
