@@ -86,4 +86,4 @@ def verify_subset(expected, actual):
         for evalue, avalue in zip(expected, actual):
             verify_subset(evalue, avalue)
     else:
-        assert expected.startswith(actual)
+        assert actual.startswith(expected)
