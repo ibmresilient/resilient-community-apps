@@ -6,7 +6,11 @@ import json
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 from mock import patch
-from mocks.resilient_client_mock import mocked_res_client
+
+""" 
+Depends on v41 of pytest-resilient-circuits where a mock
+task GET endpoint was added to the appliance.
+"""
 
 PACKAGE_NAME = "fn_remedy"
 FUNCTION_NAME = "remedy_create_incident"
@@ -27,19 +31,18 @@ def call_remedy_create_incident_function(circuits, function_params, timeout=5):
 
     # circuits will fire an "exception" event if an exception is raised in the FunctionComponent
     # return this exception if it is raised
-    # exception_event = circuits.watcher.wait("exception", parent=None, timeout=timeout)
+    exception_event = circuits.watcher.wait("exception", parent=None, timeout=timeout)
 
-    # if exception_event is not False:
-    #     exception = exception_event.args[1]
-    #     raise exception
+    if exception_event is not False:
+        exception = exception_event.args[1]
+        raise exception
 
     # else return the FunctionComponent's results
-    if True:
-        event = circuits.watcher.wait("remedy_create_incident_result", parent=evt, timeout=timeout)
-        assert event
-        assert isinstance(event.kwargs["result"], FunctionResult)
-        pytest.wait_for(event, "complete", True)
-        return event.kwargs["result"].value
+    event = circuits.watcher.wait("remedy_create_incident_result", parent=evt, timeout=timeout)
+    assert event
+    assert isinstance(event.kwargs["result"], FunctionResult)
+    pytest.wait_for(event, "complete", True)
+    return event.kwargs["result"].value
 
 
 class TestRemedyCreateIncident:
