@@ -6,9 +6,10 @@
 
 import copy
 import logging
-import sys
 import sqlite3
 import pyodbc
+import sys
+import sqlparams
 from six import string_types
 from rc_data_feed.lib.type_info import TypeInfo
 
@@ -164,6 +165,9 @@ class SqlDialect:
             return new_args
 
         return clean_field_name(args)
+
+    def get_sqlparams_helper(self):
+        return sqlparams.SQLParams('named', 'qmark')
 
     @staticmethod
     def make_blob(type_info, field, value):
@@ -898,6 +902,8 @@ END; """
             connection.setencoding(encoding=ORACLE_ENCODING)
         """
 
+    def get_sqlparams_helper(self):
+        return None
 
 def translate_value_for_blob(blob_func):
     """[define mappings for Resilient fields to db fields]

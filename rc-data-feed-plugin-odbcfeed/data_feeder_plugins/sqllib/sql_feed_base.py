@@ -4,7 +4,6 @@
 """Module contains SqlFeedDestinationBase, the base class for all SQL feed destinations."""
 import abc
 import logging
-import sqlparams
 
 from rc_data_feed.lib.feed import FeedDestinationBase
 from rc_data_feed.lib.type_info import TypeInfo
@@ -44,7 +43,7 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
             self.dialect = SqlFeedDestinationBase.AVAILABLE_DIALECTS[dialect_name]()
 
         self.created_tables = {}
-        self.sqlparams_helper = sqlparams.SQLParams('named', 'qmark')
+        self.sqlparams_helper = self.dialect.get_sqlparams_helper()
 
     def _init_tables(self):
         if self.rest_client_helper:
@@ -205,9 +204,11 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
                 if context.is_deleted:
                     LOG.info("Deleting %s; id = %d", table_name, flat_payload['id'])
 
-                    sql, params = self.sqlparams_helper.format(self.dialect.get_delete(table_name),
-                                                               {'id': flat_payload['id']})
-
+                    sql = self.dialect.get_delete(table_name)
+                    params = {'id': flat_payload['id']}
+                    if self.sqlparams_helper:
+                        sql, params = self.sqlparams_helper.format(sql, params)
+                    LOG.debug("{}:{}".format(sql, params))
                     self._execute_sql(
                         cursor,
                         sql,
