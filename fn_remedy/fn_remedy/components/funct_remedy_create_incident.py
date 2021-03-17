@@ -18,8 +18,6 @@ TABLE_NAME = "remedy_linked_incidents_reference_table"
 RETURN_FIELDS = ["Incident Number", "Request ID"]
 # form name corresponding to a Remedy Incident
 FORM_NAME = "HPD:IncidentInterface_Create"
-# jinja template for remedy payload
-TEMPLATE = Path(__file__).parent.parent.parent / "./data/templates/_remedy_incident_template.jinja2"
 
 LOG = logging.getLogger(__name__)
 
@@ -36,6 +34,94 @@ class FunctionComponent(ResilientComponent):
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
         self.fn_options = opts.get(PACKAGE_NAME, {})
+
+    @staticmethod
+    def parse_additional_data(remedy_payload, values):
+        """Parses the additional data parameter provided in the workflow.
+        Adds the additional_data key:value pairs to the values dict
+        we build to send to Remedy.
+
+        :param remedy_payload: remedy_payload kwarg passes from the workflow
+        :param values: dict of values we build to send to Remedy
+        :return: updated values dict
+        """
+        if remedy_payload.get("additional_data").get("content"):
+            try:
+                additional_data = json.loads(remedy_payload["additional_data"]["content"])
+            except json.decoder.JSONDecodeError:
+                LOG.error(
+                    u"Exception when converting %s to json. Incident will be raised without additional_data."
+                    "" % remedy_payload["additional_data"]["content"])
+                return values
+            values.update(additional_data)
+        return values
+
+    def add_dt_row(self, incident_id, task, request_id, values):
+        """Adds a row to the datatable correlating the Resilient task
+        to the Remedy incident.
+
+        :param incident_id: Resilient incident ID
+        :param task: task dictionary payload from Resilient
+        :param request_id: unique request ID for the Remedy incident, gather from the POST response
+        :param values: dictionary of values POSTed to Remedy
+        :return: Resilient's response to the datatable request
+        """
+        # instantiate a datatable client
+        dt = Datatable(self.rest_client(), incident_id, TABLE_NAME)
+        # add the task and its associated Remedy data to the lookup table
+        row = {
+            "timestamp": {"value": int(datetime.now().timestamp() * 1000)},
+            # convert to mills and discard fractions of a second
+            "taskincident_id": {"value": str(task["id"]) + ": " + task["name"]},
+            "remedy_id": {"value": request_id},
+            "status": {"value": values["Status"]},
+            "extra": {"value": ''}
+        }
+        LOG.info("Adding row to the remedy_linked_incidents_reference_table DataTable: {0}".format(row))
+        dt_response = dt.dt_add_rows(row)
+        LOG.debug("Response from the Resilient Datatable API:\n{0}".format(dt_response))
+        return dt_response
+
+    def post_incident_to_remedy(self, remedy_client, rp, values, incident_id, task):
+        """POSTs a new incident to the Remedy AR server.
+        If Remedy rejects the request or we get an unexpected status code,
+        we return a ResultsPayload object with success=False.
+        Otherwise, we return a ResultsPayload with success=True
+        and the incident payload returned under results["content"]
+        :param remedy_client: RemedyClient object
+        :param rp: ResultsPayload object
+        :param values: values dict to send to Remedy
+        :param incident_id: Resilient incident ID
+        :param task: task dict from Resilient
+        :return: ResultsPayload.done
+        """
+        # POST an incident to Remedy
+        try:
+            remedy_incident, status_code = remedy_client.create_form_entry(
+                FORM_NAME, values, return_values=RETURN_FIELDS
+            )
+        except IntegrationError as e:
+            LOG.error("POST request to Remedy resulted in an error. Ensure all required Remedy fields were provided.")
+            return rp.done(False, {"error": e.value}, reason="Request resulted in an error from the Remedy API.")
+
+        # 201 is returned for resource created
+        if status_code != 201:
+            # unexpected response from Remedy
+            LOG.error("Received an unexpected status code from Remedy. Expected 201, but got {0}".format(status_code))
+            reason = "Expected 201 - resource created response from Remedy. Received {0}".format(status_code)
+            return rp.done(False, remedy_incident)
+
+        LOG.info("Incident successfully posted to Remedy.")
+        # capture the Incident Number and Request ID
+        incident_number = remedy_incident["values"]["Incident Number"]
+        request_id = remedy_incident["values"]["Request ID"]
+
+        dt_response = self.add_dt_row(incident_id, task, request_id, values)
+
+        results = rp.done(True, remedy_incident)
+        # pass the task back to Resilient to use in the post-script if we were successful
+        results["content"]["task"] = task
+        return results
 
     @function(FN_NAME)
     def _remedy_create_incident_function(self, event, *args, **kwargs):
@@ -74,26 +160,8 @@ class FunctionComponent(ResilientComponent):
                 if (key != "additional_data" and value):
                     values[key] = value
 
-            # get the additional data
-            # this must be valid json so we can load it into a dict
-            additional_data = None
-            if remedy_payload.get("additional_data").get("content"):
-                try:
-                    additional_data = json.loads(remedy_payload["additional_data"]["content"])
-                except json.decoder.JSONDecodeError:
-                    LOG.error(u"Exception when converting %s to json. Incident will be raised without additional_data."
-                              "" % remedy_payload["additional_data"]["content"])
-
-            # TODO - do we even need jinja?? seems like extra steps since all we are doing is building a dict...
-            # map the additional data to the jinja template
-            # if additional_data:
-            #     additional_data = self.map_values(TEMPLATE, values)
-            #     # update values with the jinja result
-            #     values.update(additional_data)
-
-            # add the key, value pairs in additional data to the values dict
-            if additional_data:
-                values.update(additional_data)
+            # add the additional data to the values dict
+            values = self.parse_additional_data(remedy_payload, values)
 
             # required metadata field to create a resource
             values["z1D_Action"] = "CREATE"
@@ -104,24 +172,21 @@ class FunctionComponent(ResilientComponent):
             task_id = kwargs.get("task_id")
 
             # instantiate a resilient API client
-            # get the incident and task data
             resilientClient = self.rest_client()
+            # get the incident and task data
             incident = resilientClient.get("/incidents/{0}".format(incident_id))
             task = resilientClient.get("/tasks/{0}".format(task_id))
 
+            # add task instructions to the values dict if present in the task
             if task.get("instructions"):
-                # set the short description to the task instructions
-                # short description is the biggest text field we have available to us
-                short_desc = clean_html(task["instructions"])
-                # max length is 254
-                if len(short_desc) > 254:
-                    short_desc = short_desc[:254]
-            else:
-                short_desc = "."
-            # add it to the values dict
-            values["Short Description"] = short_desc
+                # set the description to the task instructions
+                # detailed description is the biggest text field we have available to us
+                desc = clean_html(task["instructions"])
+                # add it to the values dict
+                # remedy has a typo in their API, the below is correct
+                values["Detailed_Decription"] = desc
 
-            # add the task name to the description if one wasn't provided
+            # add the task name to the description if one wasn't provided in the inputs
             if not values.get("Description"):
                 values["Description"] = "CP4S Case " + str(incident_id) + ": " + task["name"]
             # description has a max length of 100
@@ -135,44 +200,7 @@ class FunctionComponent(ResilientComponent):
 
             LOG.info(u"Incident values to POST:\n{0}".format(str(values)))
 
-            results = []
-
-            while not results:
-                # POST an incident to Remedy
-                try:
-                    remedy_incident, status_code = client.create_form_entry(
-                        FORM_NAME, values, return_values=RETURN_FIELDS
-                    )
-                except Exception as e:
-                    results = rp.done(False, e, reason="Request resulted in an error from the Remedy API.")
-
-                # 201 is returned for resource created
-                if status_code != 201:
-                    # unexpected response from Remedy
-                    reason = "Expected 201 - resource created response from Remedy. Received {0}".format(status_code)
-                    results = rp.done(False, remedy_incident)
-
-                # capture the Incident Number and Request ID
-                incident_number = remedy_incident["values"]["Incident Number"]
-                request_id = remedy_incident["values"]["Request ID"]
-
-                # instantiate a datatable client
-                dt = Datatable(self.rest_client(), incident_id, TABLE_NAME)
-                # add the task and its associated Remedy data to the lookup table
-                row = {
-                    "timestamp": {"value": int(datetime.now().timestamp() * 1000)}, # convert to mills and discard fractions of a second
-                    "taskincident_id": {"value": str(task_id) + ": " + task["name"]},
-                    "remedy_id": {"value": request_id},
-                    "status": {"value": values["Status"]},
-                    "extra": {"value": ''}
-                }
-                LOG.debug("Adding row to the remedy_linked_incidents_reference_table DataTable: {0}".format(row))
-                dt_response = dt.dt_add_rows(row)
-
-                results = rp.done(True, remedy_incident)
-
-            # pass the task back to Resilient to use in the post-script if we were successful
-            results["content"]["task"] = task if results["success"] else None
+            results = self.post_incident_to_remedy(client, rp, values, incident_id, task)
 
             yield StatusMessage("Finished '{0}' that was running in workflow '{1}'".format(FN_NAME, wf_instance_id))
 
