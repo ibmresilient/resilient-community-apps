@@ -46,16 +46,16 @@ class FunctionComponent(ResilientComponent):
             network_object_name = kwargs.get("cisco_asa_network_object_name")  # text
             network_object_value = kwargs.get("cisco_asa_network_object_value")  # text
             artifact_type = kwargs.get("cisco_asa_artifact_type")  # text
-            ipv4_netmask = kwargs.get("cisco_asa_ipv4_netmask")  # text
-            ipv4_end_range = kwargs.get("cisco_asa_ipv4_end_range")  # text
+            ip_netmask = kwargs.get("cisco_asa_netmask")  # text
+            ip_end_range = kwargs.get("cisco_asa_end_range")  # text
 
             LOG.info(u"cisco_asa_firewall: %s", firewall_name)
             LOG.info(u"cisco_asa_network_object_group: %s", network_object_group)
             LOG.info(u"cisco_asa_network_object_name: %s", network_object_name)
             LOG.info(u"cisco_asa_network_object_value: %s", network_object_value)
             LOG.info(u"cisco_asa_artifact_type: %s", artifact_type)
-            LOG.info(u"cisco_asa_ipv4_netmask: %s", ipv4_netmask)
-            LOG.info(u"cisco_asa_ipv4_end_range: %s", ipv4_end_range)
+            LOG.info(u"cisco_asa_ipv4_netmask: %s", ip_netmask)
+            LOG.info(u"cisco_asa_ipv4_end_range: %s", ip_end_range)
 
             # Get the the options for this firewall.
             firewall_options = self.firewalls.get_firewall(firewall_name)
@@ -67,17 +67,30 @@ class FunctionComponent(ResilientComponent):
 
             # Translate Resilient artifact type to Cisco ASA network object kind.
             network_object_kind = artifact_type_to_network_object_kind(artifact_type,
-                                            network_object_value, ipv4_netmask, ipv4_end_range)
+                                            network_object_value, ip_netmask, ip_end_range)
  
-            if ipv4_netmask:
-                netmask = ipv4_netmask.split(" /")[1]
-                if netmask == '32':
-                    network_object_value = u"{0}/{1}".format(network_object_value, "255.255.255.255")
-                    network_object_kind = "IPv4Address"
+            if ip_netmask:
+                if network_object_kind == "IPv4Network":
+                    netmask = ip_netmask.split(" /")[1]
+                    if netmask == '32':
+                        network_object_value = u"{0}/{1}".format(network_object_value, "255.255.255.255")
+                        network_object_kind = "IPv4Address"
+                    else:
+                        network_object_value = u"{0}/{1}".format(network_object_value, netmask)
+                elif network_object_kind == "IPv6Network":
+                    raise IntegrationError ("Implement IPv6Network.")                   
                 else:
-                    network_object_value = u"{0}/{1}".format(network_object_value, netmask)
-            elif ipv4_end_range:
-                network_object_value = u"{0}-{1}".format(network_object_value, ipv4_end_range)
+                    raise IntegrationError ("Invalid network object kind for IP netmask.")
+            elif ip_end_range:
+                if network_object_kind == "IPv4Address":
+                    if not is_valid_ipv4_addr(ip_end_range):
+                        raise IntegrationError ("IPv4Address end range is not a valid IP.")
+                elif network_object_kind == "IPv6Address":
+                    if not is_valid_ipv6_addr(ip_end_range):
+                        raise IntegrationError ("IPv6Address end range is not a valid IP.")
+                else:
+                    raise IntegrationError ("Invalid network object kind for IP end range.")
+                network_object_value = u"{0}-{1}".format(network_object_value, ip_end_range)
 
             # Call the ASA API to add the network object to the network object group.
             response = asa.add_to_network_object_group(network_object_group, network_object_name, 

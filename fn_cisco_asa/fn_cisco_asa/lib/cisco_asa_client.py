@@ -45,7 +45,7 @@ class CiscoASAClient(object):
         self.headers = get_headers(self.username, self.password)
     
     def get_network_object(self, objectId):
-        """ Return the details of a network object.
+        """ Return the details of a single network object.
         """
         url = u"{0}/api/objects/networkobjects/{1}".format(self.base_url, objectId)
 
@@ -54,11 +54,8 @@ class CiscoASAClient(object):
         return response.json()
     
     def post_network_object(self, obj_data):
-        """ Create a a network object.
+        """ Create a single network object.
         """
-        #url = u"{0}/api/objects/networkobjects".format(self.base_url)
-        #response = self.rc.execute_call_v2("get", url, headers=self.headers, verify=self.bundle,
-        #                                   proxies=self.rc.get_proxies())
         url = u"{0}/api/objects/networkobjects".format(self.base_url)
 
         response = self.rc.execute_call_v2("post", url, headers=self.headers, json=obj_data, 
@@ -76,7 +73,7 @@ class CiscoASAClient(object):
         return status_code, response.json()
 
     def get_network_object_group(self, group):
-        """ Return the members of a network object list.
+        """ Return the members of a network object group.
         """
         url = u"{0}/api/objects/networkobjectgroups/{1}".format(self.base_url, group)
 
@@ -85,7 +82,12 @@ class CiscoASAClient(object):
         return response.json()
 
     def get_network_object_group_detailed(self, group):
-        """ Return the members of a network object list.
+        """ Return the members of a network object group as a list.  
+        This function is called by the function that fills the Cisco ASA Network Object data table.
+        This function also calls get_network_object for each non-primitive network object so that 
+        objectId (name) is stored in the datable.  Primitive objects (like IPv4Address and IPv4Network
+        do not require a name) but network objects (like IPv4FQDN and IPv4Range) do require a
+        Name (objectId).  
         """
         url = u"{0}/api/objects/networkobjectgroups/{1}".format(self.base_url, group)
 
@@ -102,8 +104,6 @@ class CiscoASAClient(object):
             else:
                 network_object_list.append(member)
         return network_object_list
-
-
 
     def is_object_in_network_object_group(self, net_obj_group, obj_name, obj_kind, obj_value):
         """ Get the members of a network object group and determine if specified object is 
@@ -127,7 +127,7 @@ class CiscoASAClient(object):
 
     def is_object_in_network(self, obj_name, obj_kind, obj_value):
         """ Get the network objects of the server and determine if specified object is 
-            already in the network. 
+            already in the global firewall network. 
         """
         status, response_group = self.get_network_objects()
         items = response_group.get("items")
@@ -159,7 +159,7 @@ class CiscoASAClient(object):
 
         # If this object is not in the network, then add it.    
         if obj_name and not self.is_object_in_network(obj_name, obj_kind, obj_value):
-            fqdn_object = {
+            new_object = {
                 "kind": "object#NetworkObj",
                 "name": obj_name,
                 "host": {
@@ -168,21 +168,19 @@ class CiscoASAClient(object):
                 }
             }
 
-            resp = self.post_network_object(fqdn_object)
+            resp = self.post_network_object(new_object)
 
         # Add this object to the network object group
         url = u"{0}/api/objects/networkobjectgroups/{1}".format(self.base_url, group)
 
-        # Members of a network object group can be of type network object or IPv4Address or IPv6Address.
-        # Either 
-        if obj_kind == 'IPv4Address' or obj_kind == 'IPv4Network':
+        # Members of a network object group can be of type network object or IPv4Address or IPv6
+        if obj_kind == 'IPv4Address' or obj_kind == 'IPv4Network' or obj_kind == 'IPv6Address':
             data = {"members.add":[{
                         "kind": obj_kind,
                         "value": obj_value
                         }]
                     }
         else:
-
             data = {"members.add":[{
                         "kind": "objectRef#NetworkObj",
                         "objectId" : obj_name

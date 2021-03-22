@@ -69,7 +69,12 @@ def artifact_type_to_network_object_kind(artifact_type, artifact_value, netmask,
             else:
                 cisco_asa_network_object_type = "IPv4Address"
         elif is_valid_ipv6_addr(artifact_value):
-            cisco_asa_network_object_type = "IPv6Address"
+            if netmask:
+                cisco_asa_network_object_type = "IPv6Network"
+            elif range:
+                cisco_asa_network_object_type = "IPv6Range"
+            else:
+                cisco_asa_network_object_type = "IPv6Address"
         else:
             raise IntegrationError("Unknown artifact type to add to network object group.")
     elif artifact_type == "DNS Name":
