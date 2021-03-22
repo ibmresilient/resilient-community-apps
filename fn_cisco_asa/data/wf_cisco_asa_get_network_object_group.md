@@ -18,12 +18,17 @@
 
 ### Pre-Processing Script
 ```python
-inputs.cisco_asa_firewall = rule.properties.cisco_asa_firewall
-override = rule.properties.cisco_asa_network_object_group_override
+override = rule.properties.cisco_asa_firewall_network_object_group_pair_overide
 if override is "" or override is None:
-  inputs.cisco_asa_network_object_group = rule.properties.cisco_asa_network_object_group
+  firewall_group_pair = rule.properties.cisco_asa_firewall_network_object_group_pair
 else:
-  inputs.cisco_asa_network_object_group = override
+  firewall_group_pair = override
+
+# Parse the firewall group pair, which is a string in "firewall:network_object_group" format
+firewall_group_pair_list = firewall_group_pair.split(":")
+inputs.cisco_asa_firewall = firewall_group_pair_list[0]
+inputs.cisco_asa_network_object_group = firewall_group_pair_list[1]
+
 ```
 
 ### Post-Processing Script
@@ -31,7 +36,7 @@ else:
 from java.util import Date
 
 content = results.get("content")
-member_list = content.get("members")
+member_list = content.get("member_list")
 firewall = results.inputs.get("cisco_asa_firewall")
 network_object_group = results.inputs.get("cisco_asa_network_object_group")
 
@@ -41,11 +46,16 @@ for network_object in member_list:
   network_object_row.cisco_asa_query_date = Date()
   network_object_row.cisco_asa_firewall = firewall
   network_object_row.cisco_asa_network_object_group = network_object_group
-  network_object_row.cisco_asa_network_object_kind = network_object.get("kind")
-  if network_object.get("kind")  == 'objectRef#NetworkObj':
-    network_object_row.cisco_asa_network_object_value = network_object.get("objectId")
+
+  if network_object.get("kind")  == 'object#NetworkObj':
+    network_object_row.cisco_asa_network_object_id = network_object.get("objectId")
+    host = network_object.get("host")
+    network_object_row.cisco_asa_network_object_kind = host.get("kind")
+    network_object_row.cisco_asa_network_object_value = host.get("value")
   else:
+    network_object_row.cisco_asa_network_object_kind = network_object.get("kind")
     network_object_row.cisco_asa_network_object_value = network_object.get("value")
+
   status_text = u"""<p style= "color:{color}">{status}</p>""".format(color="green", status="Active")
   network_object_row.cisco_asa_status = helper.createRichText(status_text)
 

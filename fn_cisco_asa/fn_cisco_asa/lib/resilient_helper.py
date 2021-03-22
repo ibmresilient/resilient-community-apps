@@ -50,18 +50,30 @@ def is_valid_ipv6_addr(ip):
     except Exception as e:
         return False
 
-def artifact_type_to_network_object_kind(artifact_type, artifact_value):
+def artifact_type_to_network_object_kind(artifact_type, artifact_value, netmask, range):
     """ Given an artifact type and value, return the Cisco ASA object kind.
     """
     if artifact_type == "IP Address":
-        cisco_asa_network_object_type = "IPv4Address"
+        if netmask:
+            cisco_asa_network_object_type = "IPv4Network"
+        elif range:
+            cisco_asa_network_object_type = "IPv4Range"
+        else:
+            cisco_asa_network_object_type = "IPv4Address"
     elif artifact_type == "String":
         if is_valid_ipv4_addr(artifact_value):
-            cisco_asa_network_object_type = "IPv4Address"
+            if netmask:
+                cisco_asa_network_object_type = "IPv4Network"
+            elif range:
+                cisco_asa_network_object_type = "IPv4Range"
+            else:
+                cisco_asa_network_object_type = "IPv4Address"
         elif is_valid_ipv6_addr(artifact_value):
             cisco_asa_network_object_type = "IPv6Address"
         else:
             raise IntegrationError("Unknown artifact type to add to network object group.")
+    elif artifact_type == "DNS Name":
+        cisco_asa_network_object_type = "IPv4FQDN"
     else:
            raise IntegrationError("Unknown artifact type to add to network object group.")        
     return cisco_asa_network_object_type

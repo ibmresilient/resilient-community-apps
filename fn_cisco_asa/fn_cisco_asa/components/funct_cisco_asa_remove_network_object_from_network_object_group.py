@@ -45,11 +45,13 @@ class FunctionComponent(ResilientComponent):
             network_object_group = kwargs.get("cisco_asa_network_object_group")  # text
             network_object_value = kwargs.get("cisco_asa_network_object_value")  # text
             network_object_kind = kwargs.get("cisco_asa_network_object_kind")  # text
+            network_object_id = kwargs.get("cisco_asa_network_object_id")  # text
 
             LOG.info(u"cisco_asa_firewall: %s", firewall_name)
             LOG.info(u"cisco_asa_network_object_group: %s", network_object_group)
             LOG.info(u"cisco_asa_network_object_value: %s", network_object_value)
             LOG.info(u"cisco_asa_newtork_object_kind: %s", network_object_kind)
+            LOG.info(u"cisco_asa_newtork_object_id: %s", network_object_id)
 
             # Get the the options for this firewall.
             firewall_options = self.firewalls.get_firewall(firewall_name)
@@ -61,7 +63,7 @@ class FunctionComponent(ResilientComponent):
 
             # Call the ASA API to get the network objects in this network object group.
             response = asa.remove_from_network_object_group(network_object_group, network_object_kind, 
-                                                            network_object_value)
+                                                            network_object_value, network_object_id)
 
             results = rp.done(response, response)
 

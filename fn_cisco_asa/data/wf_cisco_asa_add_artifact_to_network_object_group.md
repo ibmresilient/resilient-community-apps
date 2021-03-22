@@ -18,14 +18,33 @@
 
 ### Pre-Processing Script
 ```python
-inputs.cisco_asa_firewall = rule.properties.cisco_asa_firewall
-override = rule.properties.cisco_asa_network_object_group_override
+# Parse the firewall name and network object group from the colon separated string
+# Or get the string from the text edit box if the use overrides the select list.
+override = rule.properties.cisco_asa_firewall_network_object_group_pair_overide
 if override is "" or override is None:
-  inputs.cisco_asa_network_object_group = rule.properties.cisco_asa_network_object_group
+  firewall_group_pair = rule.properties.cisco_asa_firewall_network_object_group_pair
 else:
-  inputs.cisco_asa_network_object_group = override
+  firewall_group_pair = override
+
+# Parse the firewall group pair, which is a string in "firewall:network_object_group" format
+firewall_group_pair_list = firewall_group_pair.split(":")
+inputs.cisco_asa_firewall = firewall_group_pair_list[0]
+inputs.cisco_asa_network_object_group = firewall_group_pair_list[1]
+
+# Get input from the artifact type and value
 inputs.cisco_asa_network_object_value = artifact.value
 inputs.cisco_asa_artifact_type = artifact.type
+
+# Option params for IP netmask or end IP for IP range
+inputs.cisco_asa_ipv4_netmask = rule.properties.cisco_asa_ipv4_netmask
+inputs.cisco_asa_ipv4_end_range = rule.properties.cisco_asa_ipv4_end_range
+
+# IPv4FQDN and IPv4Range require a name as input.
+if rule.properties.cisco_asa_network_object_name_required:
+  inputs.cisco_asa_network_object_name = rule.properties.cisco_asa_network_object_name_required
+else:
+  inputs.cisco_asa_network_object_name = rule.properties.cisco_asa_network_object_name
+
 ```
 
 ### Post-Processing Script
@@ -39,7 +58,8 @@ if results.success:
   network_object_group = content.get("network_object_group")
   network_object_kind = content.get("network_object_kind")
   network_object_value = content.get("network_object_value")
-
+  network_object_name = content.get("network_object_name")
+  
   # Add each email as a row in the query results data table
   network_object_row = incident.addRow("cisco_asa_network_object_dt")
   network_object_row.cisco_asa_query_date = Date()
@@ -47,6 +67,9 @@ if results.success:
   network_object_row.cisco_asa_network_object_group = network_object_group
   network_object_row.cisco_asa_network_object_kind = network_object_kind
   network_object_row.cisco_asa_network_object_value = network_object_value
+  network_object_row.cisco_asa_network_object_id = network_object_name
+  
+  # Update status field
   status_text = u"""<p style= "color:{color}">{status}</p>""".format(color="green", status="Active")
   network_object_row.cisco_asa_status = helper.createRichText(status_text)
 ```

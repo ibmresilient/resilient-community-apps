@@ -22,7 +22,7 @@ inputs.cisco_asa_firewall = row.cisco_asa_firewall
 inputs.cisco_asa_network_object_group = row.cisco_asa_network_object_group
 inputs.cisco_asa_network_object_kind = row.cisco_asa_network_object_kind
 inputs.cisco_asa_network_object_value = row.cisco_asa_network_object_value
-
+inputs.cisco_asa_network_object_id = row.cisco_asa_network_object_id
 ```
 
 ### Post-Processing Script

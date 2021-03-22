@@ -52,6 +52,18 @@ class CiscoASAClient(object):
         response = self.rc.execute_call_v2("get", url, headers=self.headers, verify=self.bundle,
                                            proxies=self.rc.get_proxies())
         return response.json()
+    
+    def post_network_object(self, obj_data):
+        """ Create a a network object.
+        """
+        #url = u"{0}/api/objects/networkobjects".format(self.base_url)
+        #response = self.rc.execute_call_v2("get", url, headers=self.headers, verify=self.bundle,
+        #                                   proxies=self.rc.get_proxies())
+        url = u"{0}/api/objects/networkobjects".format(self.base_url)
+
+        response = self.rc.execute_call_v2("post", url, headers=self.headers, json=obj_data, 
+                                            verify=self.bundle, proxies=self.rc.get_proxies())
+        return response
 
     def get_network_objects(self):
         """ Return the network objects of the firewall (host).
@@ -63,7 +75,6 @@ class CiscoASAClient(object):
         status_code = response.status_code
         return status_code, response.json()
 
-
     def get_network_object_group(self, group):
         """ Return the members of a network object list.
         """
@@ -73,7 +84,28 @@ class CiscoASAClient(object):
                                            proxies=self.rc.get_proxies())
         return response.json()
 
-    def is_object_in_network_object_group(self, net_obj_group, obj_kind, obj_value):
+    def get_network_object_group_detailed(self, group):
+        """ Return the members of a network object list.
+        """
+        url = u"{0}/api/objects/networkobjectgroups/{1}".format(self.base_url, group)
+
+        response = self.rc.execute_call_v2("get", url, headers=self.headers, verify=self.bundle,
+                                           proxies=self.rc.get_proxies())
+        group = response.json()
+        members = group.get("members")
+        network_object_list = []
+        for member in members:
+            if member.get("kind") == "objectRef#NetworkObj":
+                object_id = member.get("objectId")
+                net_object = self.get_network_object(object_id)
+                network_object_list.append(net_object)
+            else:
+                network_object_list.append(member)
+        return network_object_list
+
+
+
+    def is_object_in_network_object_group(self, net_obj_group, obj_name, obj_kind, obj_value):
         """ Get the members of a network object group and determine if specified object is 
             contained in the group. 
         """
@@ -81,44 +113,79 @@ class CiscoASAClient(object):
         members = response_group.get("members")
         found = False
         for member in members:
-            if member.get("kind") == obj_kind:
-                if member.get("kind") == 'objectRef#NetworkObj':
-                    if member.get("objectId") == obj_value:
-                        found = True
-                        break
-                else:
-                    if member.get("value") == obj_value:
-                        found = True
-                        break
+            member_kind = member.get("kind")
+            if member_kind == 'object#NetworkObj' or member_kind == 'objectRef#NetworkObj':
+                if member.get("objectId") == obj_name:
+                    found = True
+                    break
+            elif member_kind == obj_kind:
+                if member.get("value") == obj_value:
+                    found = True
+                    break
 
         return found
 
-    def add_to_network_object_group(self, group, obj_kind, obj_value):
+    def is_object_in_network(self, obj_name, obj_kind, obj_value):
+        """ Get the network objects of the server and determine if specified object is 
+            already in the network. 
+        """
+        status, response_group = self.get_network_objects()
+        items = response_group.get("items")
+        found = False
+        for item in items:
+            item_name = item.get("name") 
+            item_host = item.get('host')
+            item_kind = item.get("kind")
+            host_kind = item_host.get("kind")
+            host_value = item_host.get("value")
+            if item_name == obj_name and item_kind == "object#NetworkObj":
+                if host_kind == obj_kind and host_value == obj_value:
+                    found = True
+                    break
+
+        return found
+
+
+    def add_to_network_object_group(self, group, obj_name, obj_kind, obj_value):
         """ Add a network object to the specified network object group.
             This function returns False if the object to be added is already in the network object group.
         """
         # Check if this object is already in the network object group
-        found = self.is_object_in_network_object_group(group, obj_kind, obj_value)
+        found = self.is_object_in_network_object_group(group, obj_name, obj_kind, obj_value)
         if found:
-            LOG.info(u"%s %s is already in firewall: %s group: %s.", obj_kind, obj_value, 
+            LOG.info(u"%s %s %s is already in firewall: %s group: %s.", obj_name, obj_kind, obj_value, 
                     self.firewall_name, group)
             return False
+
+        # If this object is not in the network, then add it.    
+        if obj_name and not self.is_object_in_network(obj_name, obj_kind, obj_value):
+            fqdn_object = {
+                "kind": "object#NetworkObj",
+                "name": obj_name,
+                "host": {
+                    "kind": obj_kind,
+                    "value": obj_value
+                }
+            }
+
+            resp = self.post_network_object(fqdn_object)
 
         # Add this object to the network object group
         url = u"{0}/api/objects/networkobjectgroups/{1}".format(self.base_url, group)
 
         # Members of a network object group can be of type network object or IPv4Address or IPv6Address.
         # Either 
-        if obj_kind == 'objectRef#NetworkObj':
-            data = {"members.add":[{
-                        "kind": obj_kind,
-                        "objectId" : obj_value
-                    }]
-                }
-        else:
+        if obj_kind == 'IPv4Address' or obj_kind == 'IPv4Network':
             data = {"members.add":[{
                         "kind": obj_kind,
                         "value": obj_value
+                        }]
+                    }
+        else:
+
+            data = {"members.add":[{
+                        "kind": "objectRef#NetworkObj",
+                        "objectId" : obj_name
                         }]
                     }
         data_string = json.dumps(data)
@@ -135,33 +202,38 @@ class CiscoASAClient(object):
         else:    
             raise IntegrationError("Object was not added to network object group.")
 
-    def remove_from_network_object_group(self, group, obj_kind, obj_value):
+
+    def remove_from_network_object_group(self, group, obj_kind, obj_value, obj_id):
         """ Remove network object from the specified network object group.
             This function returns False if the object to be added is already in the group.
         """
         # Check if this object is already in the network object group
-        found = self.is_object_in_network_object_group(group, obj_kind, obj_value)
+        obj_name = obj_id
+        found = self.is_object_in_network_object_group(group, obj_name, obj_kind, obj_value)
         if not found:
-            LOG.info(u"%s %s is not in firewall: %s group: %s.", obj_kind, obj_value, 
+            LOG.info(u"%s %s %s is not in firewall: %s group: %s.", obj_name, obj_kind, obj_value, 
                     self.firewall_name, group)
             return False
 
         # Remove this object from the network object group
         url = u"{0}/api/objects/networkobjectgroups/{1}".format(self.base_url, group)
         # Key is different when dealing with a network object vs an IP address.
-        if obj_kind == 'objectRef#NetworkObj':
-            data = {"members.remove":[{
-                        "kind": obj_kind,
-                        "objectId" : obj_value
-                    }]
-                }
-        else:
+        if obj_kind == 'IPv4Address' or obj_kind == 'IPv4Network':
             data = {"members.remove":[{
                         "kind": obj_kind,
                         "value": obj_value
                         }]
                     }
+        else:
+            data = {"members.remove":[{
+                        "kind": "objectRef#NetworkObj",
+                        "objectId" : obj_name
+                        }]
+                    }
+
         data_string = json.dumps(data)
+        LOG.debug(data_string)
+
         response = self.rc.execute_call_v2("patch", url, headers=self.headers, data=data_string,
                                             verify=self.bundle, proxies=self.rc.get_proxies())
 

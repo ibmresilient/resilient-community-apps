@@ -43,13 +43,19 @@ class FunctionComponent(ResilientComponent):
             # Get the function parameters
             firewall_name = kwargs.get("cisco_asa_firewall")  # text
             network_object_group = kwargs.get("cisco_asa_network_object_group")  # text
+            network_object_name = kwargs.get("cisco_asa_network_object_name")  # text
             network_object_value = kwargs.get("cisco_asa_network_object_value")  # text
             artifact_type = kwargs.get("cisco_asa_artifact_type")  # text
+            ipv4_netmask = kwargs.get("cisco_asa_ipv4_netmask")  # text
+            ipv4_end_range = kwargs.get("cisco_asa_ipv4_end_range")  # text
 
             LOG.info(u"cisco_asa_firewall: %s", firewall_name)
             LOG.info(u"cisco_asa_network_object_group: %s", network_object_group)
+            LOG.info(u"cisco_asa_network_object_name: %s", network_object_name)
             LOG.info(u"cisco_asa_network_object_value: %s", network_object_value)
             LOG.info(u"cisco_asa_artifact_type: %s", artifact_type)
+            LOG.info(u"cisco_asa_ipv4_netmask: %s", ipv4_netmask)
+            LOG.info(u"cisco_asa_ipv4_end_range: %s", ipv4_end_range)
 
             # Get the the options for this firewall.
             firewall_options = self.firewalls.get_firewall(firewall_name)
@@ -60,13 +66,26 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Validations complete. Add the network object.")
 
             # Translate Resilient artifact type to Cisco ASA network object kind.
-            network_object_kind = artifact_type_to_network_object_kind(artifact_type, network_object_value)
-
-            # Call the ASA API to get the network objects in this network object group.
-            response = asa.add_to_network_object_group(network_object_group, network_object_kind, network_object_value)
+            network_object_kind = artifact_type_to_network_object_kind(artifact_type,
+                                            network_object_value, ipv4_netmask, ipv4_end_range)
  
+            if ipv4_netmask:
+                netmask = ipv4_netmask.split(" /")[1]
+                if netmask == '32':
+                    network_object_value = u"{0}/{1}".format(network_object_value, "255.255.255.255")
+                    network_object_kind = "IPv4Address"
+                else:
+                    network_object_value = u"{0}/{1}".format(network_object_value, netmask)
+            elif ipv4_end_range:
+                network_object_value = u"{0}-{1}".format(network_object_value, ipv4_end_range)
+
+            # Call the ASA API to add the network object to the network object group.
+            response = asa.add_to_network_object_group(network_object_group, network_object_name, 
+                                                       network_object_kind, network_object_value)
+
             content = {"firewall": firewall_name,
                        "network_object_group": network_object_group,
+                       "network_object_name": network_object_name,
                        "network_object_kind": network_object_kind,
                        "network_object_value": network_object_value}
             results = rp.done(response, content)

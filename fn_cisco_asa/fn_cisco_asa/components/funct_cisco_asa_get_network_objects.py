@@ -77,9 +77,10 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Validations complete. Get the network objects.")
 
             # Call the ASA API to get the network objects in this network object group.
-            response = asa.get_network_object_group(network_object_group)
+            members = asa.get_network_object_group_detailed(network_object_group)
 
-            results = rp.done(True, response)
+            member_results = {"member_list": members}
+            results = rp.done(True, member_results)
 
             LOG.info("'%s' complete", FN_NAME)
 
