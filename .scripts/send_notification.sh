@@ -11,13 +11,13 @@
 # Professor Farnsworth says - good news everyone
 # Paul Revere brings bad news
 
-if [ -z $1 ]; then
+if [ -z "$1" ]; then
 	custom_message="No message."
 else
 	custom_message=$1
 fi
 
-if [ -z $2 ]; then
+if [ -z "$2" ]; then
 	status="green_square"
 	username="Professor Farnsworth"
 elif [ $2 == "success" ]; then
