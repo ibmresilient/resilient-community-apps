@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 # (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use, line-too-long
-
 """Module contains SqlFeedDestinationBase, the base class for all SQL feed destinations."""
 import abc
 import logging
@@ -40,10 +39,11 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
 
             if dialect_name is None or SqlFeedDestinationBase.AVAILABLE_DIALECTS.get(dialect_name) is None:
                 raise ValueError("sql_dialect is incorrect: {}".format(dialect_name))
-            else:
-                self.dialect = SqlFeedDestinationBase.AVAILABLE_DIALECTS[dialect_name]()
+
+            self.dialect = SqlFeedDestinationBase.AVAILABLE_DIALECTS[dialect_name]()
 
         self.created_tables = {}
+        self.sqlparams_helper = self.dialect.get_sqlparams_helper()
 
     def _init_tables(self):
         if self.rest_client_helper:
@@ -78,7 +78,7 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
         raise NotImplementedError
 
     @abc.abstractmethod
-    def _reinit(self):
+    def _reinit(self, connect_str, uid, pwd, dialect=None):
         raise NotImplementedError
 
     def _create_or_update_table(self, type_name, all_fields):
@@ -113,16 +113,17 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
                         # remember that we've added the field.
                         self.created_tables[type_name][field_name] = field['input_type']
                     elif field_name != 'id' and field_type != self.created_tables[type_name][field_name]:
-                        LOG.warn("Field {}.{} type was {}. Will be altered to {}".format(type_name, field_name, self.created_tables[type_name][field_name], field_type))
+                        LOG.warning("Field %s.%s type was %s. Will be altered to %s",
+                                    type_name, field_name, self.created_tables[type_name][field_name], field_type)
 
                 self._commit_transaction(cursor)
-                break;
+                break
             except Exception as err:
                 LOG.error("_create_or_update_table exception: %s", err)
                 if err.args and err.args[0] in PYODBC_CONNECTION_LOST:
                     LOG.warning("ODBC Connection lost, reestablishing connection")
                     # try reestablishing the connection
-                    self.connection = self._reinit(self.connect_str, self.uid, self.pwd)
+                    self.connection = self._reinit(self.connect_str, self.uid, self.pwd, dialect=self.dialect)
                 else:
                     try:
                         if cursor:
@@ -152,13 +153,10 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
             # it's one we want to bypass.
             #
             if not self.dialect.is_column_exists_exception(db_exception):
+                LOG.error(ddl)
                 raise db_exception
 
     def send_data(self, context, payload):
-        # Create a flattened map where each key of the map is the field name.
-        #
-        flat_payload = context.type_info.flatten(payload, translate_func=TypeInfo.translate_value)
-
         # We'll use the type's name as the table name.
         #
         table_name = context.type_info.get_pretty_type_name()
@@ -168,6 +166,13 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
         self._create_or_update_table(table_name, all_fields)
 
         all_field_names = [field['name'] for field in all_fields]
+
+        # Create a flattened map where each key of the map is the field name.
+        #
+        flat_payload = context.type_info.flatten(payload,
+                                                 translate_func=getattr(self.dialect,
+                                                                        'mapped_translate_value',
+                                                                        TypeInfo.translate_value))
 
         # some data types, such as datetime, will need a conversion routine
         all_field_types = dict()
@@ -199,30 +204,38 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
                 if context.is_deleted:
                     LOG.info("Deleting %s; id = %d", table_name, flat_payload['id'])
 
+                    sql = self.dialect.get_delete(table_name)
+                    params = {'id': flat_payload['id']}
+                    if self.sqlparams_helper:
+                        sql, params = self.sqlparams_helper.format(sql, params)
+                    LOG.debug("{}:{}".format(sql, params))
                     self._execute_sql(
                         cursor,
-                        self.dialect.get_delete(table_name),
-                        [flat_payload['id']]
+                        sql,
+                        params
                     )
                 else:
                     LOG.info("Inserting/updating %s; id = %d", table_name, flat_payload['id'])
 
-                    LOG.debug (self.dialect.get_upsert(table_name, all_field_names, all_field_types))
-                    LOG.debug (self.dialect.get_parameters(all_field_names, flat_payload))
+                    upsert_stmt = self.dialect.get_upsert(table_name, all_field_names, all_field_types)
+                    upsert_params = self.dialect.get_parameters(all_field_names, flat_payload)
+                    LOG.debug (flat_payload)
+                    LOG.debug (upsert_stmt)
+                    LOG.debug (upsert_params)
 
                     self._execute_sql(
                         cursor,
-                        self.dialect.get_upsert(table_name, all_field_names, all_field_types),
-                        self.dialect.get_parameters(all_field_names, flat_payload))
+                        upsert_stmt,
+                        upsert_params)
 
                 self._commit_transaction(cursor)
-                break;
+                break
             except Exception as err:
                 LOG.error("send_data exception: %s", err)
                 if err.args and err.args[0] in PYODBC_CONNECTION_LOST:
                     LOG.warning("ODBC Connection lost, reestablishing connection")
                     # try reestablishing the connection
-                    self.connection = self._reinit(self.connect_str, self.uid, self.pwd)
+                    self.connection = self._reinit(self.connect_str, self.uid, self.pwd, dialect=self.dialect)
                 else:
                     try:
                         if cursor:
@@ -230,4 +243,3 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
                         raise err
                     except Exception:
                         pass
-

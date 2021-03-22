@@ -1,9 +1,9 @@
 ## Release Notes
 
+* v1.0.5 Support for attachment content
 * v1.0.4 Oracle definitions for AppHost
 * v1.0.3 AppHost configurations for Postresql, MS SQL Server, MySql, SQLite
 * v1.0.1 Duplication of incident id bug fix 
-
 
 # Introduction
 This package contains the odbcfeed Plugin to the Data Feed extension.  This Data Feed extension allows one to maintain "replica" data for Resilient incidents, artifacts, tasks, notes, etc.  The updates are performed in near real-time.
@@ -16,6 +16,27 @@ Refer to the documentation on the Data Feed extension for uses cases support and
 
 Unless otherwise specified, contents of this repository are published under the MIT open-source
 [LICENSE](LICENSE).
+
+# Change log
+## Version 1.0.5 changes
+Version 1.0.5 introduces the ability to include attachment content. When `include_attachment_data=true` is added to `[feeds]`, an additional database column is added: `content`. This column is created to the `attachment` table in the equivalent database storage type as a blob:
+
+| Database | content field |
+| -------- | ------------- |
+| Sqlite   | blob |
+| Postgres | bytea |
+| MySQL    | blob |
+| SQLServer | varbinary(max) |
+| Oracle | blob |
+
+Attachment content can be to up 25mb. Plan your DB storage requirements for the `attachment` table accordingly. 
+
+Refer to the documentation for each database on how to read or process blob data.
+
+Additionally, the connection string format of the app.config file for Oracle databases has changed. The format is now:
+```
+odbc_connect=<service_name> or (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=<host>)(PORT=<port>))(CONNECT_DATA=(SID=<sid>)))
+```
 
 # Installation
   The integration package contains Python components that are called by the Resilient platform. These components run in the Resilient Circuits integration framework. The package also includes Resilient customizations that will be imported into the platform later.
@@ -59,31 +80,33 @@ Unless otherwise specified, contents of this repository are published under the 
   reload=True
   # feed_data is the default queue that will be listened to
   queue=feed_data
-  
+  # new in v1.0.5 include attachment content. Default is false
+  include_attachment_data=true
+
   [postgres_feed]
   class=ODBCFeed
-  odbc_connect=Driver={PostresSQL Driver};Server=127.0.0.1;DB=<db>;Port=5432;connectTimeout=0
+  odbc_connect=Driver={PostresSQL};Server=127.0.0.1;DB=<db>;Port=5432;connectTimeout=0
   sql_dialect=PostgreSQL96Dialect
   uid=<acct>
   pwd=<pwd>
 
   #[oracle_feed]
   #class=ODBCFeed
-  #odbc_connect=Driver={Oracle 12c ODBC driver};DBQ=ORCLCDB
+  #odbc_connect=<service_name> or (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=<host>)(PORT=<port>))(CONNECT_DATA=(SID=<sid>)))
   #sql_dialect=OracleDialect
   #uid=<acct>
   #pwd=<pwd>
 
   #[sqlserver_feed]
   #class=ODBCFeed
-  #odbc_connect=DRIVER={ODBC Driver 17 for SQL Server};SERVER=127.0.0.1;PORT=1443;DATABASE=<db>
+  #odbc_connect=DRIVER={FreeTNS};SERVER=127.0.0.1;PORT=1443;DATABASE=<db>
   #sql_dialect=SQLServerDialect
   #uid=<acct>
   #pwd=<pwd>
 
   #[mysql_feed]
   #class=ODBCFeed
-  #odbc_connect=Driver={MariaDB ODBC 3.0 Driver};Server=127.0.0.1;DB=<db>;Port=3306;connectTimeout=0
+  #odbc_connect=Driver={MySQL};Server=127.0.0.1;DB=<db>;Port=3306;connectTimeout=0
   #sql_dialect=MariaDBDialect
   #uid=<acct>
   #pwd=<pwd>
@@ -112,11 +135,11 @@ The following table lists additional database connection strings for the other s
 
 | Database | Connection Strings |
 | :------- | :----------------- |
-MariaDB | Driver={MariaDB ODBC 3.0 Driver};Server=127.0.0.1;Port=3306; DB=<yourDB>;connectTimeout=0 |
-| Oracle | Driver={Oracle 12c ODBC driver};DBQ=ORCLCDB |
-| SQLServer | DRIVER={ODBC Driver 17 for SQL Server};SERVER=127.0.0.1;PORT=1443;DATABASE=<yourDB>; |
+| MariaDB | Driver={MySQL};Server=127.0.0.1;Port=3306; DB=<yourDB>;connectTimeout=0 |
+| Oracle | <service_name> or (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=127.0.0.1)(PORT=1521))(CONNECT_DATA=(SID=<youSID>))) |
+| SQLServer | DRIVER={FreeTDS};SERVER=127.0.0.1;PORT=1433;DATABASE=<yourDB>; |
 
-Your naming of the database drivers (Ex. `MariaDB ODBC 3.0 Driver`) may vary and is specified in your `odbcinst.ini` file. 
+Your naming of the database drivers (Ex. `MySQL`) may vary and is specified in your `odbcinst.ini` file. 
 
 ### Integration Server
 Oracle has the further requirement of specifying the connection string references in a TNSNAMES.ORA file. Setting up the Oracle client environment will include the following environment variables (and may include others):
@@ -142,7 +165,7 @@ ORCLPDB1=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=9.10.11.12)(PORT=1521))
 ![tnsnames.ora](screenshots/tnsnames.png)
 
 ## Integration Server Requirements
-All SQL database datastores are accessible via a python library (pyodbc) which further references a system library (unixodbc). Due to the complexity of the pyodbc, you will either need an environment with the `gcc compiler` to install it or, for RHEL environments, you can use a .whl file packaged by IBM and available on the public github (https://github.com/ibmresilient/resilient-community-apps/tree/master/fn_odbc_query/lib). 
+All SQL database datastores are accessible via a python library (pyodbc) which further references a system library (unixodbc). Due to the complexity of the pyodbc package, you will either need an environment with the `gcc compiler` to install it or, for RHEL environments, you can use a .whl file packaged by IBM and available on the public github (https://github.com/ibmresilient/resilient-community-apps/tree/master/fn_odbc_query/lib). 
 
 Information about pyodbc and installing unixodbc can be found here: https://github.com/mkleehammer/pyodbc/wiki/Install.
 
@@ -161,22 +184,22 @@ The following configuration items are supported:
 # ODBC Database Considerations
 *	All databases require their own set of drivers to be installed. This package does not install the libraries necessary as those operations are specific to the database used, Once the necessary driver(s) and installed, this information is captured in the odbcinst.ini file (for instance, found here: `/usr/local/etc/odbcinst.inifile`) similar to the following:
 ```
-[PostresSQL Driver]
+[PostgreSQL]
 Description=ODBC for PostgreSQL
-Driver=/usr/local/lib/psqlodbcw.so
+Driver=/usr/local/lib/psqlodbcw.la
 
 [MariaDB ODBC 3.0 Driver]
 Description=MariaDB Connector/ODBC v.3.0
-Driver=/usr/local/Cellar/mariadb-connector-odbc/3.0.2/lib/libmaodbc.dylib
+Driver=/usr/local/lib64/mariadb/libmaodbc.so
 
-[ODBC Driver 17 for SQL Server]
-Description=Microsoft ODBC Driver 17 for SQL Server
-Driver=/usr/local/lib/libmsodbcsql.17.dylib
-UsageCount=1
+[FreeTDS]
+Description=Freetds v 0.95
+Driver=/usr/lib64/libtdsodbc.so.0
 
 [Oracle 12c ODBC driver]
 Description     = Oracle ODBC driver for Oracle 12c
-Driver          = /usr/local/lib/libsqora.so.12.1
+Driver          = /usr/lib/oracle/19.6/client64/lib/libsqora.so.19.1
+CharacterSet    = AL32UTF8
 Setup           =
 FileUsage       =
 CPTimeout       =
@@ -194,8 +217,6 @@ CPReuse         =
   | MS SQLServer | varchar(max) | 2GB |
   | MS SQLServer | varchar(xx) | 4000 |
   | Oracle | nvarchar2(xx) | 2000 |
-
-  Some databases support blobs which can be supported specific cases. Blobs are presently unsupported.
 
 *	When creating the database user account which will access the defined database, provide the necessary permissions to allow full access to create tables, alter tables by adding columns, and full capability to insert, update and delete records. 
 
@@ -268,7 +289,8 @@ def get_column_type(self, input_type):  # pylint: disable=no-self-use
         number='BIGINT',
         datepicker='DATE',
         datetimepicker='TIMESTAMP',
-        boolean='BOOLEAN'
+        boolean='BOOLEAN',
+        blob='blob'
     )
 
     if input_type in type_dict:

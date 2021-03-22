@@ -6,12 +6,12 @@ import pytest
 import sys
 
 from lib.test_sql_common import SQLCommon, blob_fields, BLOB_TABLE_NAME
-from data_feeder_plugins.sqllib.sql_dialect import PostgreSQL96Dialect
+from data_feeder_plugins.sqllib.sql_dialect import SQLServerDialect
 
 LOG = logging.getLogger(__name__)
 
 # make sure this db already exists
-TEST_DB = "test_db"
+TEST_DB = "res_test"
 
 MAX_TEXT_SIZE = 65000
 
@@ -19,10 +19,10 @@ FIND_COLUMNS_STMT = "SELECT column_name, data_type FROM information_schema.colum
 
 app_config = {
     "class": "ODBCFeed",
-    "odbc_connect": "Driver={{PostgreSQL}};Server=127.0.0.1;DB={db};Port=5432;connectTimeout=0".format(db=TEST_DB),
-    "sql_dialect": "PostgreSQL96Dialect",
+    "odbc_connect": "DRIVER={{FreeTDS}};SERVER=192.168.1.215;PORT=1433;DATABASE={db}".format(db=TEST_DB),
+    "sql_dialect": "SQLServerDialect",
     "uid": "res_test",
-    "pwd": "res_test"
+    "pwd": "R#s_test"
 }
 
 SETUP_STMT = "set timezone='UTC'"
@@ -33,7 +33,7 @@ result_payload = {  "id":  101,
                     "test_text": u"this is a text fieldँ ं ः अ आ इ ई उ ऊ ऋ ऌ ऍ ऎ",
                     "test_int": 1000,
                     "test_date": datetime.date(2019, 2, 13),
-                    "test_bool": "1"
+                    "test_bool": True
                     }
 
 if sys.version_info.major == 2:
@@ -56,13 +56,13 @@ def test_createtable():
 
 @pytest.mark.livetest
 def test_insert_row():
-    common = SQLCommon(app_config, setup_stmt=SETUP_STMT)
+    common = SQLCommon(app_config)
 
     common.test_insert_row(result_payload)
 
 @pytest.mark.livetest
 def test_update_row():
-    common = SQLCommon(app_config, setup_stmt=SETUP_STMT)
+    common = SQLCommon(app_config)
 
     common.test_update_row(MAX_TEXT_SIZE, result_payload)
 
@@ -90,4 +90,4 @@ def test_blob():
 
     common.test_createtable()
 
-    common.test_insert_blob(PostgreSQL96Dialect.make_blob)
+    common.test_insert_blob(None)
