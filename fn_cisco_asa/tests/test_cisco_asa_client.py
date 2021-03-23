@@ -76,7 +76,7 @@ class TestCiscoASAClient(object):
     @pytest.mark.parametrize(
         "func_name", [
             ('cisco_asa_get_network_objects'),
-            ('cisco_asa_add_network_object_to_network_object_group'),
+            ('cisco_asa_get_network_object_details'),
             ('cisco_asa_add_artifact_to_network_object_group'),
             ('cisco_asa_remove_network_object_from_network_object_group'),
     ])
