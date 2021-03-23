@@ -8,7 +8,6 @@ from resilient_circuits import ResilientComponent, function, handler, StatusMess
 from resilient_lib import ResultPayload, RequestsCommon, validate_fields, IntegrationError
 from fn_cisco_asa.lib.functions_common import CiscoASAFirewalls
 from fn_cisco_asa.lib.cisco_asa_client import CiscoASAClient
-from fn_cisco_asa.lib.resilient_helper import artifact_type_to_network_object_kind
 
 PACKAGE_NAME = "fn_cisco_asa"
 FN_NAME = "cisco_asa_add_network_object_to_network_object_group"
@@ -58,7 +57,6 @@ class FunctionComponent(ResilientComponent):
             asa = CiscoASAClient(firewall_name, self.fn_options, firewall_options, rc)
 
             yield StatusMessage("Validations complete. Add the network object.")
-
 
             # Call the ASA API to get the network objects in this network object group.
             response = asa.add_to_network_object_group(network_object_group, network_object_kind, 

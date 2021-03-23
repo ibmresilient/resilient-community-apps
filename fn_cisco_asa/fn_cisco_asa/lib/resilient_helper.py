@@ -50,35 +50,84 @@ def is_valid_ipv6_addr(ip):
     except Exception as e:
         return False
 
-def artifact_type_to_network_object_kind(artifact_type, artifact_value, netmask, range):
-    """ Given an artifact type and value, return the Cisco ASA object kind.
+def artifact_to_network_object(artifact_type, artifact_value, netmask, range_end_ip):
+    """ Given an artifact type and value, return the Cisco ASA network object kind and value.
     """
-    if artifact_type == "IP Address":
+    if artifact_type == "DNS Name":
+        network_object_kind = "IPv4FQDN"
+        network_object_value = artifact_value
+    elif artifact_type == "IP Address":
         if netmask:
-            cisco_asa_network_object_type = "IPv4Network"
-        elif range:
-            cisco_asa_network_object_type = "IPv4Range"
+            network_object_kind, network_object_value = compute_ip_with_netmask("IPv4Network", artifact_value, netmask)
+        elif range_end_ip:
+            network_object_kind = "IPv4Range"
+            network_object_value = compute_ip_with_range("IPv4Address", artifact_value, range_end_ip)
         else:
-            cisco_asa_network_object_type = "IPv4Address"
+            network_object_kind = "IPv4Address"
+            network_object_value = artifact_value
     elif artifact_type == "String":
         if is_valid_ipv4_addr(artifact_value):
             if netmask:
-                cisco_asa_network_object_type = "IPv4Network"
-            elif range:
-                cisco_asa_network_object_type = "IPv4Range"
+                network_object_kind, network_object_value = compute_ip_with_netmask("IPv4Network", artifact_value, netmask)
+            elif range_end_ip:
+                network_object_kind = "IPv4Range"
+                network_object_value = compute_ip_with_range("IPv4Address", artifact_value, range_end_ip)
             else:
-                cisco_asa_network_object_type = "IPv4Address"
+                network_object_kind = "IPv4Address"
+                network_object_value = artifact_value
         elif is_valid_ipv6_addr(artifact_value):
             if netmask:
-                cisco_asa_network_object_type = "IPv6Network"
-            elif range:
-                cisco_asa_network_object_type = "IPv6Range"
+                network_object_kind, network_object_value = compute_ip_with_netmask("IPv6Network", artifact_value, netmask)
+            elif range_end_ip:
+                network_object_kind = "IPv6Range"
+                network_object_value = compute_ip_with_range("IPv6Address", artifact_value, range_end_ip)
             else:
-                cisco_asa_network_object_type = "IPv6Address"
+                network_object_kind = "IPv6Address"
+                network_object_value = artifact_value
         else:
-            raise IntegrationError("Unknown artifact type to add to network object group.")
-    elif artifact_type == "DNS Name":
-        cisco_asa_network_object_type = "IPv4FQDN"
+            raise IntegrationError("Unknown artifact type to convert to network object.")
     else:
-           raise IntegrationError("Unknown artifact type to add to network object group.")        
-    return cisco_asa_network_object_type
+        raise IntegrationError("Unknown artifact type to convert to network object.")
+
+    return network_object_kind, network_object_value
+
+def compute_ip_with_netmask(ip_kind, ip_value, ip_netmask):
+    """ Compute the network object value of an IPv4Range or IPv6Range kind of network object.
+    """
+    if not ip_netmask:
+        raise IntegrationError ("IP netmask not defined.")
+
+    if ip_kind == "IPv4Network":
+        # Netmask /32 is treated differently. It is a single IP address where as other
+        # netmask cover a range of IPs.  Set the network object type to IPv4Address
+        # in this special case.
+        netmask = ip_netmask.split(" /")[1]
+        if netmask == '32':
+            network_object_value = u"{0}/{1}".format(ip_value, "255.255.255.255")
+            network_object_kind = "IPv4Address"
+        else:
+            network_object_value = u"{0}/{1}".format(ip__value, netmask)
+    elif ip_kind == "IPv6Network":
+            raise IntegrationError ("Implement IPv6Network.")                   
+    else:
+        raise IntegrationError ("Invalid network object kind for IP netmask.")
+
+    return network_object_kind, network_object_value
+
+def compute_ip_with_range(ip_kind, ip_value, ip_end_range):
+    """ Compute the network object value of an IPv4Range kind of network object.
+    """
+    if not ip_end_range:
+        raise IntegrationError ("IP netmask not defined.")
+
+    if ip_kind == "IPv4Address":
+        if not is_valid_ipv4_addr(ip_end_range):
+            raise IntegrationError ("IPv4Address end range is not a valid IP.")
+    elif ip_kind == "IPv6Address":
+        if not is_valid_ipv6_addr(ip_end_range):
+            raise IntegrationError ("IPv6Address end range is not a valid IP.")
+    else:
+        raise IntegrationError ("Invalid network object kind for IP end range.")
+
+    network_object_value = u"{0}-{1}".format(ip_value, ip_end_range)
+    return network_object_value

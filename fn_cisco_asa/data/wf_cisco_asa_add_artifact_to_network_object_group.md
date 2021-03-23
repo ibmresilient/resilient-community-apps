@@ -36,8 +36,9 @@ inputs.cisco_asa_network_object_value = artifact.value
 inputs.cisco_asa_artifact_type = artifact.type
 
 # Option params for IP netmask or end IP for IP range
-inputs.cisco_asa_ipv4_netmask = rule.properties.cisco_asa_ipv4_netmask
-inputs.cisco_asa_ipv4_end_range = rule.properties.cisco_asa_ipv4_end_range
+inputs.cisco_asa_end_range = rule.properties.cisco_asa_end_range
+if rule.properties.cisco_asa_ipv4_netmask:
+  inputs.cisco_asa_netmask = rule.properties.cisco_asa_ipv4_netmask
 
 # IPv4FQDN and IPv4Range require a name as input.
 if rule.properties.cisco_asa_network_object_name_required:
