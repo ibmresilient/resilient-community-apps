@@ -4,26 +4,12 @@
 """Cisco ASA REST API client"""
 
 import os
-import sys
 import json
 import base64
 import logging
 from resilient_lib import validate_fields, IntegrationError
 
 LOG = logging.getLogger(__name__)
-
-
-def get_headers(username, password):
-    url_key = u'{0}:{1}'.format(username, password)
-
-    string_encoded_url_key = base64.b64encode(str.encode(str(url_key)))
-    auth_token = string_encoded_url_key.decode("utf-8")
-
-    # Create the headers
-    headers = {'Authorization': u'Basic {0}'.format(auth_token),
-               'Content-Type': 'application/json', 
-               'User-Agent': 'REST API Agent'}
-    return headers
 
 class CiscoASAClient(object):
     def __init__(self, firewall_name, global_options, options, rc):
@@ -42,8 +28,20 @@ class CiscoASAClient(object):
         self.cafile = options.get("cafile")
         self.bundle = os.path.expanduser(self.cafile) if self.cafile else False
 
-        self.headers = get_headers(self.username, self.password)
+        self.headers = self.get_headers(self.username, self.password)
     
+    def get_headers(self, username, password):
+        url_key = u'{0}:{1}'.format(username, password)
+
+        string_encoded_url_key = base64.b64encode(str.encode(str(url_key)))
+        auth_token = string_encoded_url_key.decode("utf-8")
+
+        # Create the headers
+        headers = {'Authorization': u'Basic {0}'.format(auth_token),
+                   'Content-Type': 'application/json', 
+                   'User-Agent': 'REST API Agent'}
+        return headers
+
     def get_network_object(self, objectId):
         """ Return the details of a single network object.
         """
@@ -114,7 +112,7 @@ class CiscoASAClient(object):
         found = False
         for member in members:
             member_kind = member.get("kind")
-            if member_kind == 'object#NetworkObj' or member_kind == 'objectRef#NetworkObj':
+            if member_kind in ('object#NetworkObj', 'objectRef#NetworkObj'):
                 if member.get("objectId") == obj_name:
                     found = True
                     break
@@ -145,7 +143,6 @@ class CiscoASAClient(object):
 
         return found
 
-
     def add_to_network_object_group(self, group, obj_name, obj_kind, obj_value):
         """ Add a network object to the specified network object group.
             This function returns False if the object to be added is already in the network object group.
@@ -167,14 +164,13 @@ class CiscoASAClient(object):
                     "value": obj_value
                 }
             }
-
             resp = self.post_network_object(new_object)
 
         # Add this object to the network object group
         url = u"{0}/api/objects/networkobjectgroups/{1}".format(self.base_url, group)
 
         # Members of a network object group can be of type network object or IPv4Address or IPv6
-        if obj_kind == 'IPv4Address' or obj_kind == 'IPv4Network' or obj_kind == 'IPv6Address':
+        if obj_kind in ('IPv4Address', 'IPv4Network', 'IPv6Address'):
             data = {"members.add":[{
                         "kind": obj_kind,
                         "value": obj_value
@@ -195,11 +191,9 @@ class CiscoASAClient(object):
             wr_mem_response = self.write_memory()
             if wr_mem_response.status_code == 200:
                 return True
-            else:
-                raise IntegrationError("Write memory failed.")
         else:    
             raise IntegrationError("Object was not added to network object group.")
-
+        return False
 
     def remove_from_network_object_group(self, group, obj_kind, obj_value, obj_id):
         """ Remove network object from the specified network object group.
@@ -216,7 +210,7 @@ class CiscoASAClient(object):
         # Remove this object from the network object group
         url = u"{0}/api/objects/networkobjectgroups/{1}".format(self.base_url, group)
         # Key is different when dealing with a network object vs an IP address.
-        if obj_kind == 'IPv4Address' or obj_kind == 'IPv4Network':
+        if obj_kind in ('IPv4Address', 'IPv4Network'):
             data = {"members.remove":[{
                         "kind": obj_kind,
                         "value": obj_value
@@ -240,10 +234,9 @@ class CiscoASAClient(object):
             wr_mem_response = self.write_memory()
             if wr_mem_response.status_code == 200:
                 return True
-            else:
-                raise IntegrationError("Write memory failed.")
         else:    
             raise IntegrationError("Object was not removed from network object group.")
+        return False
 
     def write_memory(self):
         url = u"{0}/api/commands/writemem".format(self.base_url)

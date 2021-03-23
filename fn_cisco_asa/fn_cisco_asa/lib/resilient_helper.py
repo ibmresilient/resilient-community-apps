@@ -1,15 +1,14 @@
 # (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# 
-
-from resilient_lib import IntegrationError
+#
 import ipaddress
+from resilient_lib import IntegrationError
 
 def init_select_list_choices(rest_client, field_name, field_value=None):
     """
     Update the rule activity select field choices at run time.  
-    We do not know the firewall and network object group lists till run time as 
+    We do not know the firewall and network object group lists till run time as
     these are defined by the user in the app.config.  
     """
     try: 
@@ -106,9 +105,10 @@ def compute_ip_with_netmask(ip_kind, ip_value, ip_netmask):
             network_object_value = u"{0}/{1}".format(ip_value, "255.255.255.255")
             network_object_kind = "IPv4Address"
         else:
-            network_object_value = u"{0}/{1}".format(ip__value, netmask)
+            network_object_kind = "IPv4Network"
+            network_object_value = u"{0}/{1}".format(ip_value, netmask)
     elif ip_kind == "IPv6Network":
-            raise IntegrationError ("Implement IPv6Network.")                   
+        raise IntegrationError ("Implement IPv6Network.")                   
     else:
         raise IntegrationError ("Invalid network object kind for IP netmask.")
 

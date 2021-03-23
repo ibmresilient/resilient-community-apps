@@ -5,7 +5,7 @@
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import ResultPayload, RequestsCommon, validate_fields, IntegrationError
+from resilient_lib import ResultPayload, RequestsCommon
 from fn_cisco_asa.lib.functions_common import CiscoASAFirewalls
 from fn_cisco_asa.lib.cisco_asa_client import CiscoASAClient
 from fn_cisco_asa.lib.resilient_helper import artifact_to_network_object
