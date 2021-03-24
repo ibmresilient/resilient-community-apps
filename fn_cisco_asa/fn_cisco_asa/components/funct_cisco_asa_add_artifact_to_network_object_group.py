@@ -48,6 +48,7 @@ class FunctionComponent(ResilientComponent):
             artifact_type = kwargs.get("cisco_asa_artifact_type")  # text
             ip_netmask = kwargs.get("cisco_asa_netmask")  # text
             ip_end_range = kwargs.get("cisco_asa_end_range")  # text
+            fqdn_version = self.get_select_param(kwargs.get("cisco_asa_fqdn_ip_version"))
 
             LOG.info(u"cisco_asa_firewall: %s", firewall_name)
             LOG.info(u"cisco_asa_network_object_group: %s", network_object_group)
@@ -56,6 +57,7 @@ class FunctionComponent(ResilientComponent):
             LOG.info(u"cisco_asa_artifact_type: %s", artifact_type)
             LOG.info(u"cisco_asa_ipv4_netmask: %s", ip_netmask)
             LOG.info(u"cisco_asa_ipv4_end_range: %s", ip_end_range)
+            LOG.info(u"cisco_asa_fqdn_ip_version: %s", fqdn_version)
 
             # Get the the options for this firewall.
             firewall_options = self.firewalls.get_firewall(firewall_name)
@@ -69,7 +71,8 @@ class FunctionComponent(ResilientComponent):
             network_object_kind, network_object_value = artifact_to_network_object(artifact_type,
                                                                                    artifact_value, 
                                                                                    ip_netmask, 
-                                                                                   ip_end_range)
+                                                                                   ip_end_range,
+                                                                                   fqdn_version)
 
             # Call the ASA API to add the network object to the network object group.
             response = asa.add_to_network_object_group(network_object_group, 

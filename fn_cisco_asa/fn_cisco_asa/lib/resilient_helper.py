@@ -49,11 +49,11 @@ def is_valid_ipv6_addr(ip):
     except Exception as e:
         return False
 
-def artifact_to_network_object(artifact_type, artifact_value, netmask, range_end_ip):
+def artifact_to_network_object(artifact_type, artifact_value, netmask, range_end_ip, fqdn_version):
     """ Given an artifact type and value, return the Cisco ASA network object kind and value.
     """
     if artifact_type == "DNS Name":
-        network_object_kind = "IPv4FQDN"
+        network_object_kind = fqdn_version
         network_object_value = artifact_value
     elif artifact_type == "IP Address":
         if netmask:
