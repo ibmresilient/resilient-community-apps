@@ -70,16 +70,16 @@ class FunctionComponent(ResilientComponent):
         dt = Datatable(self.rest_client(), incident_id, TABLE_NAME)
         # add the task and its associated Remedy data to the lookup table
         row = {
-            "timestamp": {"value": int(datetime.now().timestamp() * 1000)},
             # convert to mills and discard fractions of a second
-            "taskincident_id": {"value": str(task["id"]) + ": " + task["name"]},
+            "timestamp": {"value": int(datetime.now().timestamp() * 1000)},
+            "taskincident_id": {u"value": "{0}: {1}".format(str(task["id"]), task["name"])},
             "remedy_id": {"value": request_id},
             "status": {"value": values["Status"]},
             "extra": {"value": ''}
         }
-        LOG.info("Adding row to the remedy_linked_incidents_reference_table DataTable: {0}".format(row))
+        LOG.info(u"Adding row to the remedy_linked_incidents_reference_table DataTable: {0}".format(row))
         dt_response = dt.dt_add_rows(row)
-        LOG.debug("Response from the Resilient Datatable API:\n{0}".format(dt_response))
+        LOG.debug(u"Response from the Resilient Datatable API:\n{0}".format(dt_response))
         return dt_response
 
     def post_incident_to_remedy(self, remedy_client, rp, values, incident_id, task):
@@ -188,7 +188,7 @@ class FunctionComponent(ResilientComponent):
 
             # add the task name to the description if one wasn't provided in the inputs
             if not values.get("Description"):
-                values["Description"] = "CP4S Case " + str(incident_id) + ": " + task["name"]
+                values["Description"] = u"CP4S Case {0}: {1}".format(str(incident_id), task["name"])
             # description has a max length of 100
             if len(values.get("Description", "")) > 100:
                 values["Description"] = values["Description"][:100]
