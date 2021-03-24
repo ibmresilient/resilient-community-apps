@@ -23,7 +23,7 @@ def codegen_reload_data():
         "message_destinations": [u"fn_cisco_asa"],
         "functions": [u"cisco_asa_add_artifact_to_network_object_group", u"cisco_asa_get_network_object_details", u"cisco_asa_get_network_objects", u"cisco_asa_remove_network_object_from_network_object_group"],
         "workflows": [u"cisco_asa_add_artifact_to_network_object_group", u"cisco_asa_get_network_object_details", u"cisco_asa_get_network_object_group", u"cisco_asa_remove_network_object_from_network_object_group"],
-        "actions": [u"Cisco ASA: Add IP Address to Network Object Group", u"Cisco ASA: Add FQDN to Network Object Group", u"Cisco ASA: Add IPv4Network to Network Object Group", u"Cisco ASA: Add IP Range to Network Object Group", u"Cisco ASA: Add IPv6Network to Network Object Group", u"Cisco ASA: Get Network Object Details", u"Cisco ASA: Get Network Object Group", u"Cisco ASA: Remove Network Object from Network Object Group"],
+        "actions": [u"Cisco ASA: Add FQDN to Network Object Group", u"Cisco ASA: Add IP Address to Network Object Group", u"Cisco ASA: Add IP Range to Network Object Group", u"Cisco ASA: Add IPv4Network to Network Object Group", u"Cisco ASA: Add IPv6Network to Network Object Group", u"Cisco ASA: Get Network Object Details", u"Cisco ASA: Get Network Object Group", u"Cisco ASA: Remove Network Object from Network Object Group"],
         "incident_fields": [],
         "incident_artifact_types": [],
         "datatables": [u"cisco_asa_network_object_dt"],
@@ -53,10 +53,10 @@ def customization_data(client=None):
         - cisco_asa_get_network_object_group
         - cisco_asa_remove_network_object_from_network_object_group
     - Rules:
-        - Cisco ASA: Add IPv4Address to Network Object Group
-        - Cisco ASA: Add IPv4FQDN to Network Object Group
+        - Cisco ASA: Add FQDN to Network Object Group
+        - Cisco ASA: Add IP Address to Network Object Group
+        - Cisco ASA: Add IP Range to Network Object Group
         - Cisco ASA: Add IPv4Network to Network Object Group
-        - Cisco ASA: Add IPv4Range to Network Object Group
         - Cisco ASA: Add IPv6Network to Network Object Group
         - Cisco ASA: Get Network Object Details
         - Cisco ASA: Get Network Object Group
