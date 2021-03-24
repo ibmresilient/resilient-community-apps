@@ -42,6 +42,10 @@ if rule.properties.cisco_asa_ipv4_netmask:
 elif rule.properties.cisco_asa_ipv6_prefix_length:
   inputs.cisco_asa_netmask = rule.properties.cisco_asa_ipv6_prefix_length
 
+# FQDN version
+if rule.properties.cisco_asa_fqdn_ip_version:
+  inputs.cisco_asa_fqdn_ip_version = rule.properties.cisco_asa_fqdn_ip_version
+  
 # IPv4FQDN and IPv4Range require a name as input.
 if rule.properties.cisco_asa_network_object_name_required:
   inputs.cisco_asa_network_object_name = rule.properties.cisco_asa_network_object_name_required
