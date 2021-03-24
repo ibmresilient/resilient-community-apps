@@ -231,7 +231,7 @@ class ArielSearch(SearchWaitCommand):
         ret = {}
         if response.status_code == 200:
             res = response.json()
-            events = res["events"] if "events" in res else res["other"]
+            events = res["events"] if "events" in res else res["flows"] if "flows" in res else res["other"]
             events = function_utils.fix_dict_value(events)
             ret = {"events": events}
 
