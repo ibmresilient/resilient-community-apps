@@ -478,7 +478,7 @@ else:
   network_object_group = content.get("network_object_group")
   network_object_value = content.get("network_object_value")
   
-  note = u"Cisco ASA {0}: Artifact {1} was not added to network object group {3}.".format(firewall, network_object_value, network_object_group)
+  note = u"Cisco ASA {0}: Artifact {1} was not added to network object group {2}.".format(firewall, network_object_value, network_object_group)
   incident.addNote(helper.createPlainText(note))
 ```
 

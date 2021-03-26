@@ -96,21 +96,22 @@ def compute_ip_with_netmask(ip_kind, ip_value, ip_netmask):
     if not ip_netmask:
         raise IntegrationError ("IP netmask not defined.")
 
+    netmask = int(ip_netmask.split("/")[1])
     if ip_kind == "IPv4Network":
         # Netmask /32 is treated differently. It is a single IP address where as other
         # netmask cover a range of IPs.  Set the network object type to IPv4Address
         # in this special case.
-        netmask = ip_netmask.split(" /")[1]
-        if netmask == '32':
+
+        if netmask == 32:
             network_object_kind = "IPv4Address"
             network_object_value = u"{0}/{1}".format(ip_value, "255.255.255.255")
         else:
             network_object_kind = "IPv4Network"
             network_object_value = u"{0}/{1}".format(ip_value, netmask)
     elif ip_kind == "IPv6Network":
-        if int(ip_netmask) > 128 or int(ip_netmask) < 8:
+        if netmask > 128 or netmask < 8:
             raise IntegrationError ("Invalid IPv6Network prefix length must be less than or equal to 128 and greater than 8.")
-        if ip_netmask == '128':
+        if netmask == 128:
             network_object_kind = "IPv6Address"
         else:
             network_object_kind = "IPv6Network"
