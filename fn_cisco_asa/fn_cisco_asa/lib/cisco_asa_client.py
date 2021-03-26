@@ -147,7 +147,7 @@ class CiscoASAClient(object):
                 [bool]: [True is the object is in the network
                          False if the object is not in the network]
         """
-        status, response_group = self.get_network_objects(limit=100)
+        status, response_group = self.get_network_objects(limit=CISCO_ASA_DEFAULT_LIMIT)
         items = response_group.get("items")
         found = False
         for item in items:
