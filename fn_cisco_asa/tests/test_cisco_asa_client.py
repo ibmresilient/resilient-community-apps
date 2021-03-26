@@ -117,3 +117,26 @@ class TestCiscoASAClient(object):
         get_mock.return_value = generate_response(json.dumps(sim_content), 200)
         response = asa_client.get_network_object_group("BLACKLIST_IN")
         assert response == sim_content
+
+    
+    @patch('resilient_lib.RequestsCommon.execute_call_v2')
+    def test_get_network_object_details(self, get_mock):
+        """ Test get_network_object_details"""
+        print("Test get_network_object_details\n")
+
+        sim_content = {"host":{
+                                "kind":"IPv6FQDN",
+                                "value":"www.fqdnipv6.com"
+                                },
+                        "kind":"object#NetworkObj",
+                        "name":"TESTfqdnipv6",
+                        "objectId":"TESTfqdnipv6",
+                        "selfLink":"https://192.168.1.162/api/objects/networkobjects/TESTfqdnipv6"
+                        }
+
+        rc = RequestsCommon(MOCKED_FIREWALL_OPTS, MOCKED_FIREWALL_OPTS)
+        asa_client = CiscoASAClient("firewall_1", MOCKED_GLOBAL_OPTS, MOCKED_FIREWALL_OPTS, rc)
+        
+        get_mock.return_value = generate_response(json.dumps(sim_content), 200)
+        response = asa_client.get_network_object("TESTfqdnipv6")
+        assert response == sim_content

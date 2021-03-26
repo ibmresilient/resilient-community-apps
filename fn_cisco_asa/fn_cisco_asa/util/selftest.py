@@ -49,7 +49,8 @@ def selftest_function(opts):
 
         try:
             # Check if we can access this Cisco ASA device.
-            status_code, response = asa.get_network_objects()
+            # See if we can get just one object.
+            status_code, response = asa.get_network_objects(limit=1)
             if status_code == 200:
                 reason = "Successfull connection to firewall {0}.".format(firewall_name)
                 return {

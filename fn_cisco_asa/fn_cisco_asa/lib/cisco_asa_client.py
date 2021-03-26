@@ -6,10 +6,12 @@
 import os
 import json
 import base64
-import logging
+import logging 
 from resilient_lib import validate_fields, IntegrationError
 
 LOG = logging.getLogger(__name__)
+
+CISCO_ASA_DEFAULT_LIMIT = 100
 
 class CiscoASAClient(object):
     def __init__(self, firewall_name, global_options, options, rc):
@@ -31,6 +33,8 @@ class CiscoASAClient(object):
         self.headers = self.get_headers(self.username, self.password)
     
     def get_headers(self, username, password):
+        """ Return the authorization header.
+        """
         url_key = u'{0}:{1}'.format(username, password)
 
         string_encoded_url_key = base64.b64encode(str.encode(str(url_key)))
@@ -60,14 +64,22 @@ class CiscoASAClient(object):
                                             verify=self.bundle, proxies=self.rc.get_proxies())
         return response
 
-    def get_network_objects(self):
+    def get_network_objects(self, limit=None):
         """ Return the network objects of the firewall (host).
+        Return the number of objects specified in the limit parameter.
+        Cisco ASA will return 100 objects by default.
         """
         url = u"{0}/api/objects/networkobjects".format(self.base_url)
+        
+        if not limit:
+            limit = CISCO_ASA_DEFAULT_LIMIT
+            
+        params = {"limit": limit}
 
-        response = self.rc.execute_call_v2("get", url, headers=self.headers, verify=self.bundle,
-                                           proxies=self.rc.get_proxies())
+        response = self.rc.execute_call_v2("get", url, headers=self.headers, params=params,
+                                            verify=self.bundle, proxies=self.rc.get_proxies())
         status_code = response.status_code
+
         return status_code, response.json()
 
     def get_network_object_group(self, group):
@@ -106,6 +118,10 @@ class CiscoASAClient(object):
     def is_object_in_network_object_group(self, net_obj_group, obj_name, obj_kind, obj_value):
         """ Get the members of a network object group and determine if specified object is 
             contained in the group. 
+
+            Returns:
+                [bool]: [True is the object is in the network group
+                         False if the object is not in the network group]
         """
         response_group = self.get_network_object_group(net_obj_group)
         members = response_group.get("members")
@@ -126,8 +142,12 @@ class CiscoASAClient(object):
     def is_object_in_network(self, obj_name, obj_kind, obj_value):
         """ Get the network objects of the server and determine if specified object is 
             already in the global firewall network. 
+
+            Returns:
+                [bool]: [True is the object is in the network
+                         False if the object is not in the network]
         """
-        status, response_group = self.get_network_objects()
+        status, response_group = self.get_network_objects(limit=100)
         items = response_group.get("items")
         found = False
         for item in items:
@@ -145,7 +165,13 @@ class CiscoASAClient(object):
 
     def add_to_network_object_group(self, group, obj_name, obj_kind, obj_value):
         """ Add a network object to the specified network object group.
-            This function returns False if the object to be added is already in the network object group.
+
+            Raises:
+                IntegrationError: [if REST API call is not successful]
+
+            Returns:
+                [bool]: [True is the object is added
+                         False if not add and is already in the group]
         """
         # Check if this object is already in the network object group
         found = self.is_object_in_network_object_group(group, obj_name, obj_kind, obj_value)
@@ -154,8 +180,9 @@ class CiscoASAClient(object):
                     self.firewall_name, group)
             return False
 
-        # If this object is not in the network, then add it.    
-        if obj_name and not self.is_object_in_network(obj_name, obj_kind, obj_value):
+        # If object to be added has a name, then it is not a primitive object.
+        # Create a network object for this object.
+        if obj_name:
             new_object = {
                 "kind": "object#NetworkObj",
                 "name": obj_name,
@@ -164,7 +191,11 @@ class CiscoASAClient(object):
                     "value": obj_value
                 }
             }
-            resp = self.post_network_object(new_object)
+            try: 
+                post_response = self.post_network_object(new_object)
+            except Exception as err:
+                LOG.info(err)
+                return False
 
         # Add this object to the network object group
         url = u"{0}/api/objects/networkobjectgroups/{1}".format(self.base_url, group)
@@ -197,7 +228,13 @@ class CiscoASAClient(object):
 
     def remove_from_network_object_group(self, group, obj_kind, obj_value, obj_id):
         """ Remove network object from the specified network object group.
-            This function returns False if the object to be added is already in the group.
+
+            Raises:
+                IntegrationError: [if REST API call is not successful]
+
+            Returns:
+                [bool]: [True is the object is removed
+                         False if not removed and is not in the group]
         """
         # Check if this object is already in the network object group
         obj_name = obj_id
@@ -239,6 +276,12 @@ class CiscoASAClient(object):
         return False
 
     def write_memory(self):
+        """Send a write memory command to the Cisco ASA device to save the current running 
+           configuration to the startup configuration.  Call after making an update to the device.
+
+        Returns:
+            [int]: [status code 200 if success (no payload)]
+        """
         url = u"{0}/api/commands/writemem".format(self.base_url)
 
         response = self.rc.execute_call_v2("post", url, headers=self.headers, verify=self.bundle,
