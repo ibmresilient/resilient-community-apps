@@ -472,6 +472,14 @@ if results.success:
   # Update status field
   status_text = u"""<p style= "color:{color}">{status}</p>""".format(color="green", status="Active")
   network_object_row.cisco_asa_status = helper.createRichText(status_text)
+else:
+  content = results.get("content")
+  firewall = content.get("firewall")
+  network_object_group = content.get("network_object_group")
+  network_object_value = content.get("network_object_value")
+  
+  note = u"Cisco ASA {0}: Artifact {1} was not added to network object group {1}.".format(firewall, network_object_value, network_object_group)
+  incident.addNote(helper.createPlainText(note))
 ```
 
 </p>
