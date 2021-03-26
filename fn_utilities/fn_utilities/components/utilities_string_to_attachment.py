@@ -6,6 +6,7 @@
 import sys
 import logging
 from io import BytesIO
+import os
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import write_file_attachment
 
@@ -35,7 +36,12 @@ class FunctionComponent(ResilientComponent):
             attachment_name = kwargs.get('attachment_name')  # text (required)
             if not attachment_name:
               raise ValueError('attachment_name is required')
-            attachment_name = '{0}.txt'.format(attachment_name)  # text (required)
+
+            ext = os.path.splitext(attachment_name)[1]
+            if not ext or ext == '.':
+                # Attachment has no extension specified or ends with '.'.
+                a_ext = "txt" if attachment_name.endswith('.') else ".txt"
+                attachment_name = '{0}{1}'.format(attachment_name, a_ext)
 
             incident_id = kwargs.get('incident_id')  # number (required)
             if not incident_id:
