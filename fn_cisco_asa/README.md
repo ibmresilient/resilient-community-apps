@@ -61,7 +61,7 @@ The Cisco ASA Family of security devices protects corporate networks and data ce
 <p>
 Cisco Adaptive Security Appliance (ASA) Software is the core operating system for the Cisco ASA Family. It delivers enterprise-class firewall capabilities for ASA devices in an array of form factors - standalone appliances, blades, and virtual appliances - for any distributed network environment. ASA Software also integrates with other critical security technologies to deliver comprehensive solutions that meet continuously evolving security needs.
 <p>
-Cisco ASA firewalls are historically managed thru the command line, however they do provide a robust REST API for integrating with 3rd party products.  The fn_cisco_asa app uses the Cisco ASA REST API to allow SOC analyst to controll internet access from the IBM Security SOAR Platform.
+Cisco ASA firewalls are historically managed through the command line, however they do provide a robust REST API for integrating with 3rd party products.  The fn_cisco_asa app uses the Cisco ASA REST API to allow SOC analyst to controll internet access from the IBM Security SOAR Platform.
 <p>
  ![screenshot: main](./doc/screenshots/main.png)
 
@@ -340,7 +340,7 @@ row["cisco_asa_query_date"] = Date()
 
 ---
 ## Function - Cisco ASA Get Network Object Details
-Get the details of the Cisco ASA network object.
+Get the details of a Cisco ASA network object.
 
  ![screenshot: fn-cisco-asa-get-network-object-details ](./doc/screenshots/fn-cisco-asa-get-network-object-details.png)
 
