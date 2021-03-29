@@ -54,19 +54,30 @@
   Provide a high-level description of the function itself and its remote software or application.
   The text below is parsed from the "description" and "long_description" attributes in the setup.py file
 -->
-**Resilient Circuits Components for 'fn_cisco_asa'**
+**IBM Security SOAR Components for 'fn_cisco_asa'**
 
+<p>
+The Cisco ASA Family of security devices protects corporate networks and data centers of all sizes. It provides users with highly secure access to data and network resources - anytime, anywhere, using any device. Cisco ASA devices represent more than 15 years of proven firewall and network security engineering and le
+<p>
+Cisco Adaptive Security Appliance (ASA) Software is the core operating system for the Cisco ASA Family. It delivers enterprise-class firewall capabilities for ASA devices in an array of form factors - standalone appliances, blades, and virtual appliances - for any distributed network environment. ASA Software also integrates with other critical security technologies to deliver comprehensive solutions that meet continuously evolving security needs.
+<p>
+Cisco ASA firewalls are historically managed thru the command line, however they do provide a robust REST API for integrating with 3rd party products.  The fn_cisco_asa app uses the Cisco ASA REST API to allow SOC analyst to controll internet access from the IBM Security SOAR Platform.
+<p>
  ![screenshot: main](./doc/screenshots/main.png)
 
-Resilient Circuits Components for 'fn_cisco_asa'
+IBM Security SOAR Components for 'fn_cisco_asa'
 
 ### Key Features
 <!--
   List the Key Features of the Integration
 -->
-* Key Feature 1
-* Key Feature 2
-* Key Feature 3
+<p>
+<b>Use Case:</b> A SOC analyst using the IBM Security SOAR Platform wants to be able to block and unblock machines on the network quickly during a security event.  The Cisco ASA shoulds already be configured with <b>Cisco ASA network object groups </b> called something list BLACKLIST_IN and BLACKLIST_OUT.
+
+* Allows a SOC analyst to pre-configure 20 available firewalls with credentials in the app.config file. Each firewall contains a list of Cisco ASA named network object groups for blacklisting inbound traffic and a outbound traffic, also specified in the app.config.
+* Provides the ability to display all IP address currently in a network object group  blacklist in a data table.
+* Allows for the addition of IP addresses to the blacklist.
+* Allows for the removal of IP addresses from the blacklist.
 
 ---
 
@@ -92,6 +103,8 @@ If deploying to a Resilient platform with an integration server, the requirement
   | ---- | ----------- |
   | Org Data | Read |
   | Function | Read |
+  | Incidents | Read |
+  | Edit Incidents | Fields
 
 The following Resilient platform guides provide additional information: 
 * _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
@@ -113,7 +126,7 @@ The following Cloud Pak guides provide additional information:
 These guides are available on the IBM Knowledge Center at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs). From this web page, select your IBM Cloud Pak for Security version. From the version-specific Knowledge Center page, select Case Management and Orchestration & Automation.
 
 ### Proxy Server
-The app **does/does not** support a proxy server.
+The app does support a proxy server.
 
 ---
 
@@ -128,10 +141,10 @@ The following table provides the settings you need to configure the app. These s
 
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
-| **host** | Yes | `<asa_ip>` | *Enter a description of the config here.* |
-| **username** | Yes | `<asa_username>` | *Enter a description of the config here.* |
-| **password** | Yes | `<asa_password>` | *Enter a description of the config here.* |
-| **network_object_lists** | Yes | `BLACKLIST_IN, BLACKLIST_OUT` | *Enter a description of the config here.* |
+| **host** | Yes | `<asa_ip>` | *IP Address of the Cisco ASA firewall.* |
+| **username** | Yes | `<asa_username>` | *Username of the Cisco ASA firewall* |
+| **password** | Yes | `<asa_password>` | *Password of the Cisco ASA firewall.* |
+| **network_object_lists** | Yes | `BLACKLIST_IN, BLACKLIST_OUT` | *Comma seperated list of the network object groups * |
 
 ### Custom Layouts
 <!--
@@ -139,9 +152,10 @@ The following table provides the settings you need to configure the app. These s
   You may wish to recommend a new incident tab.
   You should save a screenshot "custom_layouts.png" in the doc/screenshots directory and reference it here
 -->
-* Import the Data Tables and Custom Fields like the screenshot below:
+<p>
+Import the Cisco ASA Network Objects Data Tables like the screenshot below:
 
-  ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png)
+  ![screenshot: custom_layouts](./doc/screenshots/fn-cisco-asa-custom-layouts.png)
 
 
 ---
@@ -166,10 +180,23 @@ Query the Cisco ASA firewall and return the network objects contained in the spe
 <p>
 
 ```python
-results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+results = {'content': 
+            {'member_list': [{"kind": "IPv4Address", "value": "192.168.10.1"}, 
+                             {"kind": "IPv4Address", "value": "192.168.10.2"}, 
+                             {"kind": "IPv4Address", "value": "192.168.10.3"}, 
+                             {"kind": "IPv4Network", "value": "7.7.7.0/24"}, 
+                             {"kind": "IPv4Address", "value": "8.8.8.8"}], 
+              'inputs': {'cisco_asa_firewall': 'firewall_1', 
+                         'cisco_asa_network_object_group': 'BLACKLIST_IN'}, 
+              'metrics': {'execution_time_ms': 4802, 
+                          'host': 'MacBook-Pro.local', 
+                          'package': 'fn-cisco-asa', 
+                          'package_version': '1.0.0', 'timestamp': '2021-03-29 13:27:04', 
+                          'version': '1.0'}, 
+              'raw': '{"member_list": [{"kind": "IPv4Address", "value": "192.168.10.1"}, {"kind": "IPv4Address", "value": "192.168.10.2"}, {"kind": "IPv4Address", "value": "192.168.10.3"}, {"kind": "IPv4Network", "value": "7.7.7.0/24"}, {"kind": "IPv4Address", "value": "8.8.8.8"}]}', 
+              'reason': None, 
+              'success': True, 
+              'version': '1.0'}
 }
 ```
 
@@ -255,10 +282,22 @@ Remove a network object from a Cisco ASA network object group.
 <p>
 
 ```python
-results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+results = {'content': True, 
+           'inputs': {'cisco_asa_firewall': 'firewall_1', 
+                      'cisco_asa_network_object_group': 'BLACKLIST_IN', 
+                      'cisco_asa_network_object_id': None, 
+                      'cisco_asa_network_object_kind': 'IPv4Address', 
+                      'cisco_asa_network_object_value': '8.8.8.8'}, 
+           'metrics': {'execution_time_ms': 946, 
+                       'host': 'MacBook-Pro.local', 
+                       'package': 'fn-cisco-asa', 
+                       'package_version': '1.0.0', 
+                       'timestamp': '2021-03-29 13:41:07', 
+                       'version': '1.0'}, 
+           'raw': 'true', 
+           'reason': None, 
+           'success': True, 
+           'version': '1.0'}
 }
 ```
 
@@ -320,11 +359,25 @@ Get the details of the Cisco ASA network object.
 <p>
 
 ```python
-results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
-}
+results = {{'content': {'host': {'kind': 'IPv4FQDN', 
+                                 'value': 'www.fqdn.com'}, 
+                        'kind': 'object#NetworkObj', 
+                        'name': 'TESTfqdn', 
+                        'objectId': 'TESTfqdn', 
+                        'selfLink': 'https://192.168.1.162/api/objects/networkobjects/TESTfqdn'},
+            'inputs': {'cisco_asa_firewall': 'firewall_1', 
+                       'cisco_asa_network_object_id': 'TESTfqdn'}, 
+            'metrics': {'execution_time_ms': 83, 
+                        'host': 'MacBook-Pro.local', 
+                        'package': 'fn-cisco-asa', 
+                        'package_version': '1.0.0', 
+                        'timestamp': '2021-03-29 13:53:27', 
+                        'version': '1.0'},
+            'raw': '{"kind": "object#NetworkObj", "selfLink": "https://192.168.1.162/api/objects/networkobjects/TESTfqdn", "name": "TESTfqdn", "host": {"kind": "IPv4FQDN", "value": "www.fqdn.com"}, "objectId": "TESTfqdn"}', 
+            'reason': None, 
+            'success': True, 
+            'version': '1.0'
+            }
 ```
 
 </p>
@@ -392,11 +445,29 @@ Add an artifact to a Cisco ASA network object group.
 <p>
 
 ```python
-results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
-}
+results = {'content': {'firewall': 'firewall_1', 
+                       'network_object_group': 'BLACKLIST_IN', 
+                       'network_object_kind': 'IPv4Address', 
+                       'network_object_name': None, 
+                       'network_object_value': '8.8.8.8'}, 
+           'inputs': {'cisco_asa_artifact_type': 'IP Address', 
+                      'cisco_asa_end_range': None, 
+                      'cisco_asa_firewall': 'firewall_1', 
+                      'cisco_asa_fqdn_ip_version': {...}, 
+                      'cisco_asa_network_object_group': 'BLACKLIST_IN', 
+                      'cisco_asa_network_object_name': None, 
+                      'cisco_asa_network_object_value': '8.8.8.8'}, 
+            'metrics': {'execution_time_ms': 8289, 
+                        'host': 'MacBook-Pro.local', 
+                        'package': 'fn-cisco-asa', 
+                        'package_version': '1.0.0', 
+                        'timestamp': '2021-03-29 13:34:03', 
+                        'version': '1.0'}, 
+            'raw': '{"firewall": "firewall_1", "network_object_group": "BLACKLIST_IN", "network_object_name": null, "network_object_kind": "IPv4Address", "network_object_value": "8.8.8.8"}', 
+            'reason': None, 
+            'success': True, 
+            'version': '1.0'
+           }
 ```
 
 </p>
