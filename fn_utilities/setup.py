@@ -47,7 +47,7 @@ setup(
         'mail-parser>=3.9.3',
         'paramiko',
         'defusedxml>=0.7.1',
-        
+        'pdfid>=1.0.4'
     ],
     packages=find_packages(),
     python_requires='>=3',
