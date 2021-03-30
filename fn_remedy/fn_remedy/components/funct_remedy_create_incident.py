@@ -7,7 +7,6 @@ from resilient_lib import ResultPayload, RequestsCommon, validate_fields, Integr
 from fn_remedy.lib.remedy.RemedyAPIClient import RemedyClient
 from fn_remedy.lib.datatable.data_table import Datatable
 import json
-from pathlib import Path
 from datetime import datetime
 
 PACKAGE_NAME = "fn_remedy"
