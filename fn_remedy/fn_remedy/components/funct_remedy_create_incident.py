@@ -98,8 +98,7 @@ class FunctionComponent(ResilientComponent):
         # POST an incident to Remedy
         try:
             remedy_incident, status_code = remedy_client.create_form_entry(
-                FORM_NAME, values, return_values=RETURN_FIELDS
-            )
+                FORM_NAME, values, return_values=RETURN_FIELDS)
         except IntegrationError as e:
             LOG.error("POST request to Remedy resulted in an error. Ensure all required Remedy fields were provided.")
             return rp.done(False, {"error": e.value}, reason="Request resulted in an error from the Remedy API.")
@@ -140,8 +139,7 @@ class FunctionComponent(ResilientComponent):
                 {"name": "remedy_host", "placeholder": "<example.domain>"},
                 {"name": "remedy_user", "placeholder": "<example_user>"},
                 {"name": "remedy_password", "placeholder": "xxx"}],
-                self.fn_options
-            )
+                self.fn_options)
 
             yield StatusMessage("Validations complete. Starting business logic")
 
@@ -195,8 +193,7 @@ class FunctionComponent(ResilientComponent):
 
             # instantiate a RemedyClient
             client = RemedyClient(app_configs["remedy_host"], app_configs["remedy_user"],
-                                  app_configs["remedy_password"], rc, port=port, verify=verify
-            )
+                                  app_configs["remedy_password"], rc, port=port, verify=verify)
 
             LOG.info(u"Incident values to POST:\n{0}".format(str(values)))
 
