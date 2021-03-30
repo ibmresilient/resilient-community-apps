@@ -57,13 +57,15 @@
 **IBM Security SOAR Components for 'fn_cisco_asa'**
 
 <p>
-The Cisco ASA Family of security devices protects corporate networks and data centers of all sizes. It provides users with highly secure access to data and network resources - anytime, anywhere, using any device. Cisco ASA devices represent more than 15 years of proven firewall and network security engineering and le
+The Cisco ASA Family of security devices protects corporate networks and data centers of all sizes. It provides users with highly secure access to data and network resources - anytime, anywhere, using any device. Cisco ASA devices represent more than 15 years of proven firewall and network security engineering and leadership, with more than 1 million security appliances deployed throughout the world.
 <p>
 Cisco Adaptive Security Appliance (ASA) Software is the core operating system for the Cisco ASA Family. It delivers enterprise-class firewall capabilities for ASA devices in an array of form factors - standalone appliances, blades, and virtual appliances - for any distributed network environment. ASA Software also integrates with other critical security technologies to deliver comprehensive solutions that meet continuously evolving security needs.
 <p>
-Cisco ASA firewalls are historically managed through the command line, however they do provide a robust REST API for integrating with 3rd party products.  The fn_cisco_asa app uses the Cisco ASA REST API to allow SOC analyst to controll internet access from the IBM Security SOAR Platform.
+Cisco ASA firewalls are historically managed through the command line, however they do provide a robust REST API for integrating with 3rd party products.  The IBM Security SOAR Cisco ASA app uses the Cisco ASA REST API to allow SOC analyst to controll internet access of machines from the IBM Security SOAR Platform.
 <p>
+ <!--
  ![screenshot: main](./doc/screenshots/main.png)
+-->
 
 IBM Security SOAR Components for 'fn_cisco_asa'
 
@@ -180,7 +182,7 @@ The table below provides the settings for each Cisco ASA firewall denoted by <co
   You should save a screenshot "custom_layouts.png" in the doc/screenshots directory and reference it here
 -->
 <p>
-Import the Cisco ASA Network Objects Data Tables like the screenshot below:
+Import the Cisco ASA Network Objects Data Tables and drag it onto a Cisco ASA Incident tab as shown in the screenshot below:
 
   ![screenshot: custom_layouts](./doc/screenshots/fn-cisco-asa-custom-layouts.png)
 ---
