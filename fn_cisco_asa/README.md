@@ -72,12 +72,23 @@ IBM Security SOAR Components for 'fn_cisco_asa'
   List the Key Features of the Integration
 -->
 <p>
-<b>Use Case:</b> A SOC analyst using the IBM Security SOAR Platform wants to be able to block and unblock machines on the network quickly during a security event.  The Cisco ASA shoulds already be configured with <b>Cisco ASA network object groups </b> called something list BLACKLIST_IN and BLACKLIST_OUT.
+<b>Use Case:</b> A SOC analyst using the IBM Security SOAR Platform and Cisco ASA firewall(s) would like the ability to block and unblock machines on the network quickly during a security event. 
+
+<b> This app provides the capility to move Cisco ASA network objects in and out of a Cisco ASA network object group.  The Cisco ASA shoulds already be pre-configured with <b>Cisco ASA network object groups </b> called something list BLACKLIST_IN and BLACKLIST_OUT.  The app uses the Cisco ASA REST API to add and remove the network objects from the network object group.
 
 * Allows a SOC analyst to pre-configure 20 available firewalls with credentials in the app.config file. Each firewall contains a list of Cisco ASA named network object groups for blacklisting inbound traffic and a outbound traffic, also specified in the app.config.
-* Provides the ability to display all IP address currently in a network object group  blacklist in a data table.
-* Allows for the addition of IP addresses to the blacklist.
-* Allows for the removal of IP addresses from the blacklist.
+* Provides the ability to display all IP addresses currently in a network object group blacklist in a data table.
+* Provides the ability to add IP address to the blacklist (network object group).
+* Provides the ability to remove an IP addresses from blacklist (network object group).
+* The following IP network objects are can be added/removed from a network object group:
+  * IPv4Address
+  * IPv4Range
+  * IPv4Network
+  * IPv4FQDN
+  * IPv6Address
+  * IPv6Range
+  * IPv6Network
+  * IPv6FQDN
 
 ---
 
@@ -139,12 +150,28 @@ The app does support a proxy server.
 ### App Configuration
 The following table provides the settings you need to configure the app. These settings are made in the app.config file. See the documentation discussed in the Requirements section for the procedure.
 
+<p>The app.config file for this app contains a high level section denoted by <code>[fn_cisco_asa]</code> and subsections for each firewall denoted as <code>[fn_cisco_asa:firewall_name]</code>, where each firewall_name is unique.
+
+<p>The table below provides the optional high level default settings. The credentials defined in this section are the default credentials used if the credentials are not defined in the individual firewall subsection.
+
+| Config | Required | Example | Description |
+| ------ | :------: | ------- | ----------- |
+| **username** | No | `<asa_username>` | *Username of the Cisco ASA firewall* |
+| **password** | No | `<asa_password>` | *Password of the Cisco ASA firewall.* |
+| **https_proxy** | No | `https://your.proxy.com` | - |
+| **http_proxy** | No | `http://your.proxy.com` | - |
+---
+<p>
+The table below provides the settings for each Cisco ASA firewall denoted by <code>[fn_cisco_asa:firewall_name]</code> in the app.config file:
+
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
 | **host** | Yes | `<asa_ip>` | *IP Address of the Cisco ASA firewall.* |
-| **username** | Yes | `<asa_username>` | *Username of the Cisco ASA firewall* |
-| **password** | Yes | `<asa_password>` | *Password of the Cisco ASA firewall.* |
-| **network_object_lists** | Yes | `BLACKLIST_IN, BLACKLIST_OUT` | *Comma seperated list of the network object groups * |
+| **username** | No | `<asa_username>` | *Username of the Cisco ASA firewall* |
+| **password** | No | `<asa_password>` | *Password of the Cisco ASA firewall.* |
+| **network_object_groups** | Yes | `BLACKLIST_IN, BLACKLIST_OUT` | *Comma separated list of the Cisco ASA network object groups.* |
+| **cafile** | No | - | *Path to certificate file.* |
+---
 
 ### Custom Layouts
 <!--
@@ -156,9 +183,38 @@ The following table provides the settings you need to configure the app. These s
 Import the Cisco ASA Network Objects Data Tables like the screenshot below:
 
   ![screenshot: custom_layouts](./doc/screenshots/fn-cisco-asa-custom-layouts.png)
-
-
 ---
+
+### Cisco ASA Configuration
+
+#### Install and Configure ASA REST API Agent and Client
+
+To run the Cisco ASA app, you must first install and configure the Cisco ASA REST API Agent and Client on each device as described in the 
+[Cisco ASA REST API Quick Start Guide](https://www.cisco.com/c/en/us/td/docs/security/asa/api/qsg-asa-api.html)
+
+#### Create Cisco ASA Network Object Groups
+<p>
+The network object groups defined in the app.config are created by a user before running the app.  The Cisco ASA CLI (command line interface) or the ASDM (Cisco Adaptive Security Device Manager - GUI interface) can be used to create the network object group(s).
+<p>
+Here is an example config to create a network object group called BLACKLIST_IN using the CLI:
+<p>
+<code>
+hostname(config)# object-group network BLACKLIST_IN
+
+hostname(config-network)# network-object host 192.168.10.1
+
+hostname(config-network)# network-object host 192.168.10.2
+
+hostname(config-network)# network-object host 192.168.10.3
+
+hostname(config-network)# access-list my-internet-access deny ip object-group BLACKLIST_IN any
+
+hostname(config)# access-list my-internet-access permit ip any any
+
+hostname(config)# access-group my-internet-access in interface inside
+</code>
+
+The app will make REST API calls to add and remove network objects from the BLACKLIST_IN network object group.
 
 ## Function - Cisco ASA Get Network Objects
 Query the Cisco ASA firewall and return the network objects contained in the specified network object group.
