@@ -46,7 +46,8 @@ setup(
         'lxml',
         'mail-parser>=3.9.3',
         'paramiko',
-        'defusedxml'
+        'defusedxml>=0.7.1',
+        
     ],
     packages=find_packages(),
     python_requires='>=3',
