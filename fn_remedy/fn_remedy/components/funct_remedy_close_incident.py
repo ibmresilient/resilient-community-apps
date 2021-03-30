@@ -3,11 +3,12 @@
 
 import logging
 import json
+from datetime import datetime
+
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import ResultPayload, RequestsCommon, validate_fields, IntegrationError
+from resilient_lib import ResultPayload, RequestsCommon, validate_fields, IntegrationError, str_to_bool
 from fn_remedy.lib.remedy.RemedyAPIClient import RemedyClient
 from fn_remedy.lib.datatable.data_table import Datatable
-from datetime import datetime
 
 PACKAGE_NAME = "fn_remedy"
 FN_NAME = "remedy_close_incident"
@@ -123,7 +124,7 @@ class FunctionComponent(ResilientComponent):
 
             # get optional settings
             port = self.fn_options.get("port", None)
-            verify = self.fn_options.get("verify", "true").lower() == "true"
+            verify = str_to_bool(self.fn_options.get("verify", "true"))
 
             # get function inputs
             remedy_payload = kwargs.get("remedy_payload")
