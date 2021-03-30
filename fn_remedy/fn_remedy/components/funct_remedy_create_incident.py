@@ -152,10 +152,8 @@ class FunctionComponent(ResilientComponent):
 
             # From the payload, build a values dict from only the information provided.
             # If the field was left blank, we leave it blank in order to give priority to templating.
-            values = {}
-            for key, value in remedy_payload.items():
-                if (key != "additional_data" and value):
-                    values[key] = value
+            values = {**remedy_payload}
+            del values["additional_data"]
 
             # add the additional data to the values dict
             values = self.parse_additional_data(remedy_payload, values)
