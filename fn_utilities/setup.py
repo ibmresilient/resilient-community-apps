@@ -45,7 +45,8 @@ setup(
         'json2html',
         'lxml',
         'mail-parser>=3.9.3',
-        'paramiko'
+        'paramiko',
+        'defusedxml'
     ],
     packages=find_packages(),
     python_requires='>=3',
