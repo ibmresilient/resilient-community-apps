@@ -117,8 +117,7 @@ class FunctionComponent(ResilientComponent):
                 {"name": "remedy_host", "placeholder": "<example.domain>"},
                 {"name": "remedy_user", "placeholder": "<example_user>"},
                 {"name": "remedy_password", "placeholder": "xxx"}],
-                self.fn_options
-            )
+                self.fn_options)
 
             yield StatusMessage("Validations complete. Starting business logic")
 
@@ -138,8 +137,7 @@ class FunctionComponent(ResilientComponent):
 
             # instantiate a RemedyClient
             client = RemedyClient(app_configs["remedy_host"], app_configs["remedy_user"],
-                                  app_configs["remedy_password"], rc, port=port, verify=verify
-            )
+                                  app_configs["remedy_password"], rc, port=port, verify=verify)
 
             results = self.close_remedy_incident(incident_id, task, client, rp, remedy_payload)
 
