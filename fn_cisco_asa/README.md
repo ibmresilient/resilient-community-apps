@@ -76,7 +76,7 @@ IBM Security SOAR Components for 'fn_cisco_asa'
 <p>
 <b>Use Case:</b> A SOC analyst using the IBM Security SOAR Platform and Cisco ASA firewall(s) would like the ability to block and unblock machines on the network quickly during a security event. 
 
-<b> This app provides the capility to move Cisco ASA network objects in and out of a Cisco ASA network object group.  The Cisco ASA shoulds already be pre-configured with <b>Cisco ASA network object groups </b> called something list BLACKLIST_IN and BLACKLIST_OUT.  The app uses the Cisco ASA REST API to add and remove the network objects from the network object group.
+<p> This app provides the capility to move Cisco ASA network objects in and out of a Cisco ASA network object group.  The Cisco ASA shoulds already be pre-configured with <b>Cisco ASA network object groups </b> called something list BLACKLIST_IN and BLACKLIST_OUT.  The app uses the Cisco ASA REST API to add and remove the network objects from the network object group.
 
 * Allows a SOC analyst to pre-configure 20 available firewalls with credentials in the app.config file. Each firewall contains a list of Cisco ASA named network object groups for blacklisting inbound traffic and a outbound traffic, also specified in the app.config.
 * Provides the ability to display all IP addresses currently in a network object group blacklist in a data table.
