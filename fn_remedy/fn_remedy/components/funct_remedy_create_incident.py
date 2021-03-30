@@ -73,7 +73,7 @@ class FunctionComponent(ResilientComponent):
         row = {
             # convert to mills and discard fractions of a second
             "timestamp": {"value": int(datetime.now().timestamp() * 1000)},
-            "taskincident_id": {u"value": "{0}: {1}".format(str(task["id"]), task["name"])},
+            "taskincident_id": {u"value": "{0}: {1}".format(task["id"], task["name"])},
             "remedy_id": {"value": request_id},
             "status": {"value": values["Status"]},
             "extra": {"value": ''}
@@ -185,7 +185,7 @@ class FunctionComponent(ResilientComponent):
 
             # add the task name to the description if one wasn't provided in the inputs
             if not values.get("Description"):
-                values["Description"] = u"CP4S Case {0}: {1}".format(str(incident_id), task["name"])
+                values["Description"] = u"CP4S Case {0}: {1}".format(incident_id, task["name"])
             # description has a max length of 100
             if len(values.get("Description", "")) > 100:
                 values["Description"] = values["Description"][:100]
@@ -194,7 +194,7 @@ class FunctionComponent(ResilientComponent):
             client = RemedyClient(app_configs["remedy_host"], app_configs["remedy_user"],
                                   app_configs["remedy_password"], rc, port=port, verify=verify)
 
-            LOG.info(u"Incident values to POST:\n{0}".format(str(values)))
+            LOG.info(u"Incident values to POST:\n{0}".format(values))
 
             results = self.post_incident_to_remedy(client, rp, values, incident_id, task)
 
