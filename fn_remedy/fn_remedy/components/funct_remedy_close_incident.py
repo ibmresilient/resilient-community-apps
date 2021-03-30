@@ -68,9 +68,16 @@ class FunctionComponent(ResilientComponent):
                 continue # move on to the next row
             # close the incident if not already closed
             closed, skipped = self.update_incident_values(remedy_client, closed, skipped, incident, request_id, remedy_payload)
-            dt.update_row(row["id"], {"status": "Closed", "timestamp": int(datetime.now().timestamp() * 1000)})
+            updated_row = {"status": "Closed", "timestamp": int(datetime.now().timestamp() * 1000)}
+            self.update_datatable_row(row["id"], updated_row, incident_id)
 
         return rp.done(True, {"closed": closed, "skipped": skipped})
+
+    def update_datatable_row(self, row_id, row, incident_id):
+        dt = Datatable(self.rest_client(), incident_id, TABLE_NAME)
+        dt.get_data()
+        dt.update_row(row_id, row)
+        return
 
     def update_incident_values(self, remedy_client, closed, skipped, incident, request_id, remedy_payload):
         if incident["values"]["Status"] not in CLOSED_LIST:
