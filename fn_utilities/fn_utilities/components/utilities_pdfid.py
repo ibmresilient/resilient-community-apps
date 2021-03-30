@@ -9,7 +9,7 @@ import json
 import logging
 import base64
 import tempfile
-import pdfid
+from pdfid.pdfid import PDFiD, PDFiD2JSON
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 
 
@@ -34,8 +34,8 @@ class FunctionComponent(ResilientComponent):
                     try:
                         temp_file.write(pdfcontent)
                         temp_file.close()
-                        xmldoc = pdfid.PDFiD(temp_file.name)
-                        data = json.loads(pdfid.PDFiD2JSON(xmldoc, True))
+                        xmldoc = PDFiD(temp_file.name)
+                        data = json.loads(PDFiD2JSON(xmldoc, True))
                     finally:
                         os.unlink(temp_file.name)
 
