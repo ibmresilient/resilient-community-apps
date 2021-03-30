@@ -217,7 +217,7 @@ hostname(config)# access-group my-internet-access in interface inside
 The app will make REST API calls to add and remove network objects from the BLACKLIST_IN network object group.
 
 ## Function - Cisco ASA Get Network Objects
-Query the Cisco ASA firewall and return the network objects contained in the specified network object group.
+Query the Cisco ASA firewall and return the network objects contained in the specified network object group.  The sample post processor script will write the network objects to the Cisco ASA Network Objects data table.
 
  ![screenshot: fn-cisco-asa-get-network-objects ](./doc/screenshots/fn-cisco-asa-get-network-objects.png)
 
@@ -396,7 +396,7 @@ row["cisco_asa_query_date"] = Date()
 
 ---
 ## Function - Cisco ASA Get Network Object Details
-Get the details of a Cisco ASA network object.
+Get the details of a Cisco ASA network object.  The sample post processor script will write the details to an incident note.
 
  ![screenshot: fn-cisco-asa-get-network-object-details ](./doc/screenshots/fn-cisco-asa-get-network-object-details.png)
 
