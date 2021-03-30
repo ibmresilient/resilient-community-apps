@@ -208,7 +208,7 @@ class RunCmd():
             client.connect(hostname=self.remote_server, username=self.remote_user, 
                            password=self.remote_password)
 
-            stdin, stdout, stderr = client.exec_command(self.commandline)
+            stdin, stdout, stderr = client.exec_command(shlex.quote(self.commandline)) # nosec
             self.stdoutdata = stdout.read().decode()
             self.stderrdata = stderr.read().decode()
             self.retcode = stdout.channel.recv_exit_status()
