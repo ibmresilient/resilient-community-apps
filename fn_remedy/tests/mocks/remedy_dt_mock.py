@@ -17,10 +17,3 @@ def mock_init():
             pass
 
     return MockDT()
-
-# def get_data():
-#     return {}
-
-# def get_rows():
-#     rows = [{ "cells": { "remedy_id": { "value": "INC000000000001"}}}]
-#     return rows
