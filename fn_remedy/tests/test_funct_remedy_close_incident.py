@@ -114,5 +114,3 @@ class TestRemedyCloseIncident:
         results = call_remedy_close_incident_function(circuits_app, mock_inputs)
         assert(results["success"])
         assert(results["content"]["closed"])
-
-
