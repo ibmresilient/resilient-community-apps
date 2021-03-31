@@ -55,7 +55,7 @@ class FunctionComponent(ResilientComponent):
                             headers_dict[keyval[0].strip()] = keyval[1].strip()
 
             # Read newline-separated 'rest_cookies' into a dictionary
-            if isinstance(rest_headers, dict):
+            if isinstance(rest_cookies, dict):
                 cookies_dict = rest_cookies
             else:
                 cookies_dict = {}
