@@ -14,6 +14,7 @@ from fn_remedy.lib.datatable.data_table import Datatable
 PACKAGE_NAME = "fn_remedy"
 FN_NAME = "remedy_close_incident"
 TABLE_NAME = "remedy_linked_incidents_reference_table"
+MAX_ROWS=30
 
 # fields we want Remedy to return when creating an incident
 RETURN_FIELDS = ["Incident Number", "Request ID"]
@@ -150,7 +151,7 @@ class FunctionComponent(ResilientComponent):
         dt = Datatable(self.rest_client(), incident_id, TABLE_NAME)
         dt.get_data()
         # query the rows
-        rows = dt.get_rows(max_rows=10, search_column="taskincident_id",
+        rows = dt.get_rows(max_rows=30, search_column="taskincident_id",
                            search_value=str(task["id"]) + ": " + task["name"])
         return rows
 
