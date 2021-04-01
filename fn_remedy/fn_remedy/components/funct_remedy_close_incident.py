@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2021. All Rights Reserved.
 """Function implementation"""
 
 import logging
