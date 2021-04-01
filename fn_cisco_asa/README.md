@@ -258,11 +258,8 @@ results = {'content':
 <p>
 
 ```python
-override = rule.properties.cisco_asa_firewall_network_object_group_pair_overide
-if override is "" or override is None:
-  firewall_group_pair = rule.properties.cisco_asa_firewall_network_object_group_pair
-else:
-  firewall_group_pair = override
+# Get the firewall network object group pair
+firewall_group_pair = rule.properties.cisco_asa_firewall_network_object_group
 
 # Parse the firewall group pair, which is a string in "firewall:network_object_group" format
 firewall_group_pair_list = firewall_group_pair.split(":")
@@ -529,12 +526,7 @@ results = {'content': {'firewall': 'firewall_1',
 
 ```python
 # Parse the firewall name and network object group from the colon separated string
-# Or get the string from the text edit box if the use overrides the select list.
-override = rule.properties.cisco_asa_firewall_network_object_group_pair_overide
-if override is "" or override is None:
-  firewall_group_pair = rule.properties.cisco_asa_firewall_network_object_group_pair
-else:
-  firewall_group_pair = override
+firewall_group_pair = rule.properties.cisco_asa_firewall_network_object_group
 
 # Parse the firewall group pair, which is a string in "firewall:network_object_group" format
 firewall_group_pair_list = firewall_group_pair.split(":")

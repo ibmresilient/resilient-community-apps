@@ -18,11 +18,8 @@
 
 ### Pre-Processing Script
 ```python
-override = rule.properties.cisco_asa_firewall_network_object_group_pair_overide
-if override is "" or override is None:
-  firewall_group_pair = rule.properties.cisco_asa_firewall_network_object_group_pair
-else:
-  firewall_group_pair = override
+# Get the firewall network object group pair
+firewall_group_pair = rule.properties.cisco_asa_firewall_network_object_group
 
 # Parse the firewall group pair, which is a string in "firewall:network_object_group" format
 firewall_group_pair_list = firewall_group_pair.split(":")

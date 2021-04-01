@@ -39,7 +39,7 @@ class FunctionComponent(ResilientComponent):
                 firewall_group_select_list.append(select_item)
 
         # Load the rule activity select field with the network object group options from app.config
-        init_select_list_choices(rest_client, "cisco_asa_firewall_network_object_group_pair", firewall_group_select_list)
+        init_select_list_choices(rest_client, "cisco_asa_firewall_network_object_group", firewall_group_select_list)
 
     def __init__(self, opts):
         """Constructor provides access to the configuration options"""
