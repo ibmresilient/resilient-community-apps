@@ -36,7 +36,7 @@ def mock_init():
             status_code = 201
             form = {
                 "values": {
-                    "Incident ID": "INC00000001",
+                    "Incident Number": "INC00000001",
                     "Request ID": "0000000001"
                 },
                 "links": {
