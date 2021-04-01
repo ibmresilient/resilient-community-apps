@@ -45,7 +45,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.0.0 | 04/4021 | Initial Release |
+| 1.0.0 | 04/2021 | Initial Release |
 
 ---
 
@@ -67,8 +67,6 @@ Cisco ASA firewalls are historically managed through the command line, however t
  ![screenshot: main](./doc/screenshots/main.png)
 -->
 
-IBM Security SOAR Components for 'fn_cisco_asa'
-
 ### Key Features
 <!--
   List the Key Features of the Integration
@@ -76,9 +74,12 @@ IBM Security SOAR Components for 'fn_cisco_asa'
 <p>
 <b>Use Case:</b> A SOC analyst using the IBM Security SOAR Platform and Cisco ASA firewall(s) would like the ability to block and unblock machines on the network quickly during a security event. 
 
-<p> This app provides the capility to move Cisco ASA network objects in and out of a Cisco ASA network object group.  The Cisco ASA shoulds already be pre-configured with <b>Cisco ASA network object groups </b> called something list BLACKLIST_IN and BLACKLIST_OUT.  The app uses the Cisco ASA REST API to add and remove the network objects from the network object group.
+<p> This app provides the capability to move Cisco ASA network objects in and out of a Cisco ASA network object group. The Cisco ASA device should be pre-configured with Cisco ASA network object groups that are named BLACKLIST_IN and BLACKLIST_OUT or similar. The app uses the Cisco ASA REST API to add and remove the network objects from these network object groups.
 
-* Allows a SOC analyst to pre-configure 20 available firewalls with credentials in the app.config file. Each firewall contains a list of Cisco ASA named network object groups for blacklisting inbound traffic and a outbound traffic, also specified in the app.config.
+<p>
+Key capabilities include the following:
+
+* Allows a SOC analyst to pre-configure 20 available firewalls with credentials in the app.config file. Each firewall contains a list of Cisco ASA named network object groups for blacklisting inbound traffic and outbound traffic, also specified in the app.config.
 * Provides the ability to display all IP addresses currently in a network object group blacklist in a data table.
 * Provides the ability to add IP address to the blacklist (network object group).
 * Provides the ability to remove an IP addresses from blacklist (network object group).
@@ -117,7 +118,7 @@ If deploying to a Resilient platform with an integration server, the requirement
   | Org Data | Read |
   | Function | Read |
   | Incidents | Read |
-  | Edit Incidents | Fields
+  | Edit Incidents | Fields |
 
 The following Resilient platform guides provide additional information: 
 * _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
@@ -171,7 +172,7 @@ The table below provides the settings for each Cisco ASA firewall denoted by <co
 | **host** | Yes | `<asa_ip>` | *IP Address of the Cisco ASA firewall.* |
 | **username** | No | `<asa_username>` | *Username of the Cisco ASA firewall* |
 | **password** | No | `<asa_password>` | *Password of the Cisco ASA firewall.* |
-| **network_object_groups** | Yes | `BLACKLIST_IN, BLACKLIST_OUT` | *Comma separated list of the Cisco ASA network object groups.* |
+| **network_object_groups** | Yes | `BLOCKLIST_IN, BLOCKLIST_OUT` | *Comma separated list of the Cisco ASA network object groups.* |
 | **cafile** | No | - | *Path to certificate file.* |
 ---
 
@@ -192,34 +193,26 @@ Import the Cisco ASA Network Objects Data Tables and drag it onto a Cisco ASA In
 #### Install and Configure ASA REST API Agent and Client
 
 To run the Cisco ASA app, you must first install and configure the Cisco ASA REST API Agent and Client on each device as described in the 
-[Cisco ASA REST API Quick Start Guide](https://www.cisco.com/c/en/us/td/docs/security/asa/api/qsg-asa-api.html)
+[Cisco ASA REST API Quick Start Guide](https://www.cisco.com/c/en/us/td/docs/security/asa/api/qsg-asa-api.html).
 
 #### Create Cisco ASA Network Object Groups
 <p>
-The network object groups defined in the app.config are created by a user before running the app.  The Cisco ASA CLI (command line interface) or the ASDM (Cisco Adaptive Security Device Manager - GUI interface) can be used to create the network object group(s).
+The network object groups defined in the app.config are created by a user before running the app.  The Cisco ASA CLI (command line interface) or the ASDM (Cisco Adaptive Security Device Manager - GUI interface) can be used to create the network object groups.
 <p>
-Here is an example config to create a network object group called BLACKLIST_IN using the CLI:
-<p>
-<code>
-hostname(config)# object-group network BLACKLIST_IN
-
-hostname(config-network)# network-object host 192.168.10.1
-
+Here is an example configuration to create a network object group called BLOCKLIST_IN using the CLI:
+<pre><code>hostname(config)# object-group network BLOCKLIST_IN   
+hostname(config-network)# network-object host 192.168.10.1  
 hostname(config-network)# network-object host 192.168.10.2
-
 hostname(config-network)# network-object host 192.168.10.3
-
-hostname(config-network)# access-list my-internet-access deny ip object-group BLACKLIST_IN any
-
+hostname(config-network)# access-list my-internet-access deny ip object-group BLOCKLIST_IN any
 hostname(config)# access-list my-internet-access permit ip any any
-
 hostname(config)# access-group my-internet-access in interface inside
-</code>
+</code></pre>
 
-The app will make REST API calls to add and remove network objects from the BLACKLIST_IN network object group.
+The app makes REST API calls to add and remove network objects from the BLACKLIST_IN network object group.
 
 ## Function - Cisco ASA Get Network Objects
-Query the Cisco ASA firewall and return the network objects contained in the specified network object group.  The sample post processor script will write the network objects to the Cisco ASA Network Objects data table.
+Query the Cisco ASA firewall and return the network objects contained in the specified network object group. The sample post processor script writes the network objects to the Cisco ASA Network Objects data table.
 
  ![screenshot: fn-cisco-asa-get-network-objects ](./doc/screenshots/fn-cisco-asa-get-network-objects.png)
 
@@ -398,7 +391,7 @@ row["cisco_asa_query_date"] = Date()
 
 ---
 ## Function - Cisco ASA Get Network Object Details
-Get the details of a Cisco ASA network object.  The sample post processor script will write the details to an incident note.
+Get the details of a Cisco ASA network object. The sample post processor script writes the details to an incident note.
 
  ![screenshot: fn-cisco-asa-get-network-object-details ](./doc/screenshots/fn-cisco-asa-get-network-object-details.png)
 
