@@ -2,13 +2,14 @@
 """Function implementation"""
 
 import logging
+import json
+from datetime import datetime
+
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError, template_functions
-from resilient_lib import ResultPayload, RequestsCommon, validate_fields, IntegrationError, clean_html
+from resilient_lib import ResultPayload, RequestsCommon, validate_fields, IntegrationError, clean_html, str_to_bool
 from fn_remedy.lib.remedy.RemedyAPIClient import RemedyClient
 from fn_remedy.lib.datatable.data_table import Datatable
-import json
-from pathlib import Path
-from datetime import datetime
+
 
 PACKAGE_NAME = "fn_remedy"
 FN_NAME = "remedy_create_incident"
@@ -70,16 +71,16 @@ class FunctionComponent(ResilientComponent):
         dt = Datatable(self.rest_client(), incident_id, TABLE_NAME)
         # add the task and its associated Remedy data to the lookup table
         row = {
-            "timestamp": {"value": int(datetime.now().timestamp() * 1000)},
             # convert to mills and discard fractions of a second
-            "taskincident_id": {"value": str(task["id"]) + ": " + task["name"]},
+            "timestamp": {"value": int(datetime.now().timestamp() * 1000)},
+            "taskincident_id": {u"value": "{0}: {1}".format(task["id"], task["name"])},
             "remedy_id": {"value": request_id},
             "status": {"value": values["Status"]},
             "extra": {"value": ''}
         }
-        LOG.info("Adding row to the remedy_linked_incidents_reference_table DataTable: {0}".format(row))
+        LOG.info(u"Adding row to the remedy_linked_incidents_reference_table DataTable: {0}".format(row))
         dt_response = dt.dt_add_rows(row)
-        LOG.debug("Response from the Resilient Datatable API:\n{0}".format(dt_response))
+        LOG.debug(u"Response from the Resilient Datatable API:\n{0}".format(dt_response))
         return dt_response
 
     def post_incident_to_remedy(self, remedy_client, rp, values, incident_id, task):
@@ -98,8 +99,7 @@ class FunctionComponent(ResilientComponent):
         # POST an incident to Remedy
         try:
             remedy_incident, status_code = remedy_client.create_form_entry(
-                FORM_NAME, values, return_values=RETURN_FIELDS
-            )
+                FORM_NAME, values, return_values=RETURN_FIELDS)
         except IntegrationError as e:
             LOG.error("POST request to Remedy resulted in an error. Ensure all required Remedy fields were provided.")
             return rp.done(False, {"error": e.value}, reason="Request resulted in an error from the Remedy API.")
@@ -140,14 +140,13 @@ class FunctionComponent(ResilientComponent):
                 {"name": "remedy_host", "placeholder": "<example.domain>"},
                 {"name": "remedy_user", "placeholder": "<example_user>"},
                 {"name": "remedy_password", "placeholder": "xxx"}],
-                self.fn_options
-            )
+                self.fn_options)
 
             yield StatusMessage("Validations complete. Starting business logic")
 
             # get optional settings
             port = self.fn_options.get("port", None)
-            verify = self.fn_options.get("verify", "true").lower() == "true"
+            verify = str_to_bool(self.fn_options.get("verify", "true"))
 
             # get function inputs
             remedy_payload = kwargs.get("remedy_payload")
@@ -155,10 +154,8 @@ class FunctionComponent(ResilientComponent):
 
             # From the payload, build a values dict from only the information provided.
             # If the field was left blank, we leave it blank in order to give priority to templating.
-            values = {}
-            for key, value in remedy_payload.items():
-                if (key != "additional_data" and value):
-                    values[key] = value
+            values = {**remedy_payload}
+            del values["additional_data"]
 
             # add the additional data to the values dict
             values = self.parse_additional_data(remedy_payload, values)
@@ -188,17 +185,16 @@ class FunctionComponent(ResilientComponent):
 
             # add the task name to the description if one wasn't provided in the inputs
             if not values.get("Description"):
-                values["Description"] = "CP4S Case " + str(incident_id) + ": " + task["name"]
+                values["Description"] = u"CP4S Case {0}: {1}".format(incident_id, task["name"])
             # description has a max length of 100
             if len(values.get("Description", "")) > 100:
                 values["Description"] = values["Description"][:100]
 
             # instantiate a RemedyClient
             client = RemedyClient(app_configs["remedy_host"], app_configs["remedy_user"],
-                                  app_configs["remedy_password"], rc, port=port, verify=verify
-            )
+                                  app_configs["remedy_password"], rc, port=port, verify=verify)
 
-            LOG.info(u"Incident values to POST:\n{0}".format(str(values)))
+            LOG.info(u"Incident values to POST:\n{0}".format(values))
 
             results = self.post_incident_to_remedy(client, rp, values, incident_id, task)
 
