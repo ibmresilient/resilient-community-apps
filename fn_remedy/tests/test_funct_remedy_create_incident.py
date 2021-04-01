@@ -6,6 +6,8 @@ import json
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 from mock import patch
+from mocks import remedy_dt_mock, remedy_mock
+
 
 """ 
 Depends on v41 of pytest-resilient-circuits where a mock
@@ -20,6 +22,14 @@ config_data = get_config_data(PACKAGE_NAME)
 
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
+
+remedy_side_effect = [
+    remedy_mock.mock_init()
+]
+
+remedy_dt_side_effect = [
+    remedy_dt_mock.mock_init()
+]
 
 
 def call_remedy_create_incident_function(circuits, function_params, timeout=5):
@@ -79,11 +89,13 @@ class TestRemedyCreateIncident:
 
     expected_results_1 = {"value": "xyz"}
 
+    @patch("fn_remedy.components.funct_remedy_create_incident.RemedyClient", side_effect=remedy_side_effect)
+    @patch("fn_remedy.components.funct_remedy_create_incident.Datatable", side_effect=remedy_dt_side_effect)
     @pytest.mark.livetest
     @pytest.mark.parametrize("mock_inputs, expected_results", [
         (mock_inputs_1, expected_results_1)
     ])
-    def test_success(self, circuits_app, mock_inputs, expected_results):
+    def test_success(self, remedy_mock, remedy_dt_mock, circuits_app, mock_inputs, expected_results):
         """ Test calling with sample values for the parameters """
 
         results = call_remedy_create_incident_function(circuits_app, mock_inputs)
