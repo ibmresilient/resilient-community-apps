@@ -39,6 +39,24 @@ class FunctionComponent(ResilientComponent):
         self.fn_options = opts.get(PACKAGE_NAME, {})
 
     def close_remedy_incident(self, incident_id, task, remedy_client, rp, remedy_payload):
+        """Performs the work of closing (updating) an incident in Remedy and updating the
+        corresponding row in the resilient data table. If the incident is already closed,
+        the status value on the incident is not changed and we only update the status
+        on the resilient side.
+
+        :param incident_id: resilient incident id
+        :type incident_id: int
+        :param task: resilient task data
+        :type task: dict
+        :param remedy_client: remedy API client
+        :type remedy_client: RemedyClient
+        :param rp: result payload object
+        :type rp: ResultPayload
+        :param remedy_payload: key value pairs to update on the remedy incident
+        :type remedy_payload: dict
+        :return: the results of the method
+        :rtype: ResultPayload
+        """
 
         skipped, closed = [], []
 
@@ -69,19 +87,44 @@ class FunctionComponent(ResilientComponent):
                 skipped.append(request_id)
                 continue # move on to the next row
             # close the incident if not already closed
-            closed, skipped = self.update_incident_values(remedy_client, closed, skipped, incident, request_id, remedy_payload)
+            closed, skipped = self.update_incident_values(remedy_client, closed, skipped, incident, remedy_payload)
             updated_row = {"status": "Closed", "timestamp": int(datetime.now().timestamp() * 1000)}
             self.update_datatable_row(row["id"], updated_row, incident_id)
 
         return rp.done(True, {"closed": closed, "skipped": skipped})
 
     def update_datatable_row(self, row_id, row, incident_id):
+        """Updates the values of a row in a resilient data table
+
+        :param row_id: target id of the data table row
+        :type row_id: int
+        :param row: the values to update on the row
+        :type row: dict
+        :param incident_id: incident the datatable is associated with
+        :type incident_id: int
+        """
         dt = Datatable(self.rest_client(), incident_id, TABLE_NAME)
         dt.get_data()
         dt.update_row(row_id, row)
         return
 
-    def update_incident_values(self, remedy_client, closed, skipped, incident, request_id, remedy_payload):
+    def update_incident_values(self, remedy_client, closed, skipped, incident, remedy_payload):
+        """Updates the values dictionary of a remedy incident to indicate the incident is closed.
+
+        :param remedy_client: remedy API client
+        :type remedy_client: RemedyClient
+        :param closed: previously closed request ID's
+        :type closed: list
+        :param skipped: previously skipped request ID's
+        :type skipped: list
+        :param incident: remedy incident
+        :type incident: dict
+        :param remedy_payload: values to update on the remedy incident
+        :type remedy_payload: dict
+        :return: updated list of request ID's that have been closed or skipped
+        :rtype: list, list
+        """
+        request_id = incident["values"]["Request ID"]
         if incident["values"]["Status"] not in CLOSED_LIST:
             remedy_payload["Status"] = "Closed"
             incident, _ = remedy_client.update_form_entry(FORM_NAME, request_id, remedy_payload)
@@ -93,6 +136,16 @@ class FunctionComponent(ResilientComponent):
         return closed, skipped
 
     def get_dt_rows(self, incident_id, task):
+        """Gets rows from a resilient datatable. Rows matching a query
+        string concatenated from the task ID and name are returned
+
+        :param incident_id: resilient incident id
+        :type incident_id: int
+        :param task: resilient task data
+        :type task: dict
+        :return: matched rows from the datatable
+        :rtype: dict
+        """
         # instantiate a datatable client
         dt = Datatable(self.rest_client(), incident_id, TABLE_NAME)
         dt.get_data()
