@@ -345,7 +345,7 @@ results = {'content': True,
            'raw': 'true', 
            'reason': None, 
            'success': True, 
-           'version': '1.0'}
+           'version': '1.0'
 }
 ```
 
@@ -407,7 +407,7 @@ Get the details of a Cisco ASA network object. The sample post processor script 
 <p>
 
 ```python
-results = {{'content': {'host': {'kind': 'IPv4FQDN', 
+results = {'content': {'host': {'kind': 'IPv4FQDN', 
                                  'value': 'www.fqdn.com'}, 
                         'kind': 'object#NetworkObj', 
                         'name': 'TESTfqdn', 
