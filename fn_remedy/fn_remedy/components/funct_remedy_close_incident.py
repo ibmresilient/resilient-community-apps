@@ -178,7 +178,7 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Validations complete. Starting business logic")
 
             # get optional settings
-            port = self.fn_options.get("port", None)
+            port = self.fn_options.get("remedy_port", None)
             verify = str_to_bool(self.fn_options.get("verify", "true"))
 
             # get function inputs
