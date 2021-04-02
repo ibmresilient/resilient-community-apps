@@ -1,9 +1,11 @@
 # (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
 # -*- coding: utf-8 -*-
+# pragma pylint: disable=unused-argument, no-self-use
 
 import sys
 import json
 import pytest
+from requests.exceptions import HTTPError
 from fn_cisco_asa.lib.cisco_asa_client import CiscoASAClient
 from resilient_circuits.util import get_function_definition
 from resilient_lib import IntegrationError, RequestsCommon
@@ -34,6 +36,7 @@ def generate_response(content, status):
             self.content = content
             self.reason = "test"
             self.text = json.dumps(content)
+            self.url = "test"
 
         def json(self):
             return json.loads(self.content)
@@ -72,14 +75,17 @@ class TestCiscoASAClient(object):
 
     @pytest.mark.parametrize(
         "func_name", [
-            ('cisco_asa_get_network_objects')
+            ('cisco_asa_get_network_objects'),
+            ('cisco_asa_get_network_object_details'),
+            ('cisco_asa_add_artifact_to_network_object_group'),
+            ('cisco_asa_remove_network_object_from_network_object_group'),
     ])
     def test_function_definition(self, func_name):
         """ Test that the package provides customization_data that defines the function """
         func = get_function_definition(PACKAGE_NAME, func_name)
         assert func is not None
 
-    @patch('fn_cisco_asa.lib.cisco_asa_client.RequestsCommon.execute_call_v2')
+    @patch('resilient_lib.RequestsCommon.execute_call_v2')
     def test_get_network_object_group(self, get_mock):
         """ Test get_network_object_group"""
         print("Test get_network_object_group\n")
@@ -106,8 +112,31 @@ class TestCiscoASAClient(object):
 
 
         rc = RequestsCommon(MOCKED_FIREWALL_OPTS, MOCKED_FIREWALL_OPTS)
-        asa_client = CiscoASAClient(MOCKED_GLOBAL_OPTS, MOCKED_FIREWALL_OPTS, rc)
+        asa_client = CiscoASAClient("firewall_1", MOCKED_GLOBAL_OPTS, MOCKED_FIREWALL_OPTS, rc)
  
         get_mock.return_value = generate_response(json.dumps(sim_content), 200)
         response = asa_client.get_network_object_group("BLACKLIST_IN")
+        assert response == sim_content
+
+    
+    @patch('resilient_lib.RequestsCommon.execute_call_v2')
+    def test_get_network_object_details(self, get_mock):
+        """ Test get_network_object_details"""
+        print("Test get_network_object_details\n")
+
+        sim_content = {"host":{
+                                "kind":"IPv6FQDN",
+                                "value":"www.fqdnipv6.com"
+                                },
+                        "kind":"object#NetworkObj",
+                        "name":"TESTfqdnipv6",
+                        "objectId":"TESTfqdnipv6",
+                        "selfLink":"https://192.168.1.162/api/objects/networkobjects/TESTfqdnipv6"
+                        }
+
+        rc = RequestsCommon(MOCKED_FIREWALL_OPTS, MOCKED_FIREWALL_OPTS)
+        asa_client = CiscoASAClient("firewall_1", MOCKED_GLOBAL_OPTS, MOCKED_FIREWALL_OPTS, rc)
+        
+        get_mock.return_value = generate_response(json.dumps(sim_content), 200)
+        response = asa_client.get_network_object("TESTfqdnipv6")
         assert response == sim_content
