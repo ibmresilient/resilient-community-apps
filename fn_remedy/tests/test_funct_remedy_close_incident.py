@@ -23,21 +23,6 @@ config_data = get_config_data(PACKAGE_NAME)
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
 
-def mocked_response():
-    token = "foo.token"
-    reqHeaders = {
-            "content-type": "application/json",
-            "Authorization": "AR-JWT " + token
-        }
-    return reqHeaders
-
-def mocked_row():
-    rows = [{"cells": { "remedy_id": { "value": "INC000000000001"}}}]
-    return rows
-
-def mocked_form():
-    status_code = 201
-
 remedy_side_effect = [
     remedy_mock.mock_init()
 ]
