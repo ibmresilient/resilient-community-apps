@@ -13,6 +13,8 @@ def config_section_data():
 remedy_host=<example.domain>
 remedy_user=<example_user>
 remedy_password=xxx
+#remedy_port=8443
+#verify=true
 #http_proxy=
 #http_proxy=
 """
