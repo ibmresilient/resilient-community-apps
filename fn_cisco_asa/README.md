@@ -74,15 +74,15 @@ Cisco ASA firewalls are historically managed through the command line, however t
 <p>
 <b>Use Case:</b> A SOC analyst using the IBM Security SOAR Platform and Cisco ASA firewall(s) would like the ability to block and unblock machines on the network quickly during a security event. 
 
-<p> This app provides the capability to move Cisco ASA network objects in and out of a Cisco ASA network object group. The Cisco ASA device should be pre-configured with Cisco ASA network object groups that are named BLACKLIST_IN and BLACKLIST_OUT or similar. The app uses the Cisco ASA REST API to add and remove the network objects from these network object groups.
+<p> This app provides the capability to move Cisco ASA network objects in and out of a Cisco ASA network object group. The Cisco ASA device should be pre-configured with Cisco ASA network object groups that are named BLOCKLIST_IN and BLOCKLIST_OUT or similar. The app uses the Cisco ASA REST API to add and remove the network objects from these network object groups.
 
 <p>
 Key capabilities include the following:
 
-* Allows a SOC analyst to pre-configure 20 available firewalls with credentials in the app.config file. Each firewall contains a list of Cisco ASA named network object groups for blacklisting inbound traffic and outbound traffic, also specified in the app.config.
-* Provides the ability to display all IP addresses currently in a network object group blacklist in a data table.
-* Provides the ability to add IP address to the blacklist (network object group).
-* Provides the ability to remove an IP addresses from blacklist (network object group).
+* Allows a SOC analyst to pre-configure 20 available firewalls with credentials in the app.config file. Each firewall contains a list of Cisco ASA named network object groups for blocking inbound traffic and outbound traffic, also specified in the app.config.
+* Provides the ability to display all IP addresses currently in a network object group blocklist in a data table.
+* Provides the ability to add IP address to the blocklist (network object group).
+* Provides the ability to remove an IP addresses from blocklist (network object group).
 * The following IP network objects are can be added/removed from a network object group:
   * IPv4Address
   * IPv4Range
@@ -209,7 +209,7 @@ hostname(config)# access-list my-internet-access permit ip any any
 hostname(config)# access-group my-internet-access in interface inside
 </code></pre>
 
-The app makes REST API calls to add and remove network objects from the BLACKLIST_IN network object group.
+The app makes REST API calls to add and remove network objects from the BLOCKLIST_IN network object group.
 
 ## Function - Cisco ASA Get Network Objects
 Query the Cisco ASA firewall and return the network objects contained in the specified network object group. The sample post processor script writes the network objects to the Cisco ASA Network Objects data table.
@@ -238,7 +238,7 @@ results = {'content':
                              {"kind": "IPv4Network", "value": "7.7.7.0/24"}, 
                              {"kind": "IPv4Address", "value": "8.8.8.8"}], 
               'inputs': {'cisco_asa_firewall': 'firewall_1', 
-                         'cisco_asa_network_object_group': 'BLACKLIST_IN'}, 
+                         'cisco_asa_network_object_group': 'BLOCKLIST_IN'}, 
               'metrics': {'execution_time_ms': 4802, 
                           'host': 'MacBook-Pro.local', 
                           'package': 'fn-cisco-asa', 
@@ -332,7 +332,7 @@ Remove a network object from a Cisco ASA network object group.
 ```python
 results = {'content': True, 
            'inputs': {'cisco_asa_firewall': 'firewall_1', 
-                      'cisco_asa_network_object_group': 'BLACKLIST_IN', 
+                      'cisco_asa_network_object_group': 'BLOCKLIST_IN', 
                       'cisco_asa_network_object_id': None, 
                       'cisco_asa_network_object_kind': 'IPv4Address', 
                       'cisco_asa_network_object_value': '8.8.8.8'}, 
@@ -494,7 +494,7 @@ Add an artifact to a Cisco ASA network object group.
 
 ```python
 results = {'content': {'firewall': 'firewall_1', 
-                       'network_object_group': 'BLACKLIST_IN', 
+                       'network_object_group': 'BLOCKLIST_IN', 
                        'network_object_kind': 'IPv4Address', 
                        'network_object_name': None, 
                        'network_object_value': '8.8.8.8'}, 
@@ -502,7 +502,7 @@ results = {'content': {'firewall': 'firewall_1',
                       'cisco_asa_end_range': None, 
                       'cisco_asa_firewall': 'firewall_1', 
                       'cisco_asa_fqdn_ip_version': {...}, 
-                      'cisco_asa_network_object_group': 'BLACKLIST_IN', 
+                      'cisco_asa_network_object_group': 'BLOCKLIST_IN', 
                       'cisco_asa_network_object_name': None, 
                       'cisco_asa_network_object_value': '8.8.8.8'}, 
             'metrics': {'execution_time_ms': 8289, 
@@ -511,7 +511,7 @@ results = {'content': {'firewall': 'firewall_1',
                         'package_version': '1.0.0', 
                         'timestamp': '2021-03-29 13:34:03', 
                         'version': '1.0'}, 
-            'raw': '{"firewall": "firewall_1", "network_object_group": "BLACKLIST_IN", "network_object_name": null, "network_object_kind": "IPv4Address", "network_object_value": "8.8.8.8"}', 
+            'raw': '{"firewall": "firewall_1", "network_object_group": "BLOCKLIST_IN", "network_object_name": null, "network_object_kind": "IPv4Address", "network_object_value": "8.8.8.8"}', 
             'reason': None, 
             'success': True, 
             'version': '1.0'
