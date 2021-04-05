@@ -52,6 +52,8 @@ class FunctionComponent(ResilientComponent):
             else:
                 mail_from = kwargs.get("mail_from")  # text
 
+            mail_body_html = None
+            jinja = False
             if kwargs.get("mail_body_html"):
                 mail_body_html = kwargs.get("mail_body_html")
                 jinja = False
@@ -211,7 +213,7 @@ class FunctionComponent(ResilientComponent):
             [set]: [file paths for attachments]
         """
         incident_attachment_result = self.rest_client().post("/incidents/{inc_id}/attachments/query?include_tasks=true".
-                                                          format(inc_id=inc_id), None)
+                                                             format(inc_id=inc_id), None)
         incident_attachment_list = incident_attachment_result['attachments']
         # convert the list of requested attachments
         if attachments and attachments == "*":
