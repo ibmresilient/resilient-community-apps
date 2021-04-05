@@ -22,14 +22,19 @@ def snake_to_camel(word):
 
 setup(
     name="fn_remedy",
-    display_name="<<display name of your app here>>",
+    display_name="fn_remedy",
     version="1.0.0",
-    license="<<insert here>>",
-    author="<<your name here>>",
-    author_email="you@example.com",
-    url="<<your company url>>",
+    license="MIT",
+    author="IBM SOAR",
+    author_email="",
+    url="https://ibm.com/mysupport",
     description="Resilient Circuits Components for 'fn_remedy'",
-    long_description="""Resilient Circuits Components for 'fn_remedy'""",
+    long_description="Resilient Circuits Components for 'fn_remedy.' "
+                    "This integration provides the capability to create "
+                    "new incidents in Remedy from Resilient tasks via the"
+                    "HPD:IncidentInterface_Create form over the REST API. "
+                    "Once the task is complete, this integration also provides "
+                    "the capability to close existing Remedy Incidents.",
     install_requires=[
         "resilient-circuits>=30.0.0",
         "resilient-lib>=39.0.0"
