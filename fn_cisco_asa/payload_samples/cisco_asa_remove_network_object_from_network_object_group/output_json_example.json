@@ -1,0 +1,18 @@
+{
+    'content': True, 
+    'inputs': {'cisco_asa_firewall': 'firewall_1', 
+               'cisco_asa_network_object_group': 'BLOCKLIST_IN', 
+               'cisco_asa_network_object_id': None, 
+               'cisco_asa_network_object_kind': 'IPv4Address', 
+               'cisco_asa_network_object_value': '8.8.8.8'}, 
+    'metrics': {'execution_time_ms': 946, 
+                'host': 'MacBook-Pro.local', 
+                'package': 'fn-cisco-asa', 
+                'package_version': '1.0.0', 
+                'timestamp': '2021-03-29 13:41:07', 
+                'version': '1.0'}, 
+    'raw': 'true', 
+    'reason': None, 
+    'success': True, 
+    'version': '1.0'
+}

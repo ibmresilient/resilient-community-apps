@@ -236,7 +236,7 @@ results = {'content':
                              {"kind": "IPv4Address", "value": "192.168.10.2"}, 
                              {"kind": "IPv4Address", "value": "192.168.10.3"}, 
                              {"kind": "IPv4Network", "value": "7.7.7.0/24"}, 
-                             {"kind": "IPv4Address", "value": "8.8.8.8"}], 
+                             {"kind": "IPv4Address", "value": "8.8.8.8"}]}, 
               'inputs': {'cisco_asa_firewall': 'firewall_1', 
                          'cisco_asa_network_object_group': 'BLOCKLIST_IN'}, 
               'metrics': {'execution_time_ms': 4802, 
@@ -247,7 +247,7 @@ results = {'content':
               'raw': '{"member_list": [{"kind": "IPv4Address", "value": "192.168.10.1"}, {"kind": "IPv4Address", "value": "192.168.10.2"}, {"kind": "IPv4Address", "value": "192.168.10.3"}, {"kind": "IPv4Network", "value": "7.7.7.0/24"}, {"kind": "IPv4Address", "value": "8.8.8.8"}]}', 
               'reason': None, 
               'success': True, 
-              'version': '1.0'}
+              'version': '1.0'
 }
 ```
 
@@ -345,7 +345,7 @@ results = {'content': True,
            'raw': 'true', 
            'reason': None, 
            'success': True, 
-           'version': '1.0'}
+           'version': '1.0'
 }
 ```
 
@@ -407,7 +407,7 @@ Get the details of a Cisco ASA network object. The sample post processor script 
 <p>
 
 ```python
-results = {{'content': {'host': {'kind': 'IPv4FQDN', 
+results = {'content': {'host': {'kind': 'IPv4FQDN', 
                                  'value': 'www.fqdn.com'}, 
                         'kind': 'object#NetworkObj', 
                         'name': 'TESTfqdn', 
