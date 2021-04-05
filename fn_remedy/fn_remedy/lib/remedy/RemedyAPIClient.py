@@ -176,4 +176,18 @@ class RemedyClient(RemedyAPI):
         # Remedy returns an empty 204 for form deletion.
         # return empty json in the absence of response/incident content
         return response_json, response.status_code
+
+    # used in selftest
+    def get_form_schema(self, form_name):
+        """Gets a form definition schema from remedy
+
+        :param form_name: name of the form schema to retrieve
+        :type form_name: str
+        :return: the response content and http status code as a tuple
+        :rtype: tuple(json, int)
+        """
+        url = self.base_url + REQUEST_PREFIX + "/{}".format(form_name)
+        response = self.rc.execute_call_v2("GET", url, headers=self.reqHeaders, verify=self.verify)
+
+        return response.json(), response.status_code
         

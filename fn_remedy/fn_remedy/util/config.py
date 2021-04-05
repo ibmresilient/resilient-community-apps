@@ -14,6 +14,8 @@ remedy_host=<example.domain>
 remedy_user=<example_user>
 remedy_password=xxx
 max_datatable_rows=30
+#remedy_port=8443
+#verify=true
 #http_proxy=
 #http_proxy=
 """
