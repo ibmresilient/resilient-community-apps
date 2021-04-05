@@ -163,7 +163,7 @@ class CiscoASAClient(object):
 
         return found
 
-    def add_to_network_object_group(self, group, obj_name, obj_kind, obj_value):
+    def add_to_network_object_group(self, group, obj_name, obj_desc, obj_kind, obj_value):
         """ Add a network object to the specified network object group.
 
             Raises:
@@ -189,7 +189,8 @@ class CiscoASAClient(object):
                 "host": {
                     "kind": obj_kind,
                     "value": obj_value
-                }
+                },
+                "description": obj_desc
             }
             try: 
                 post_response = self.post_network_object(new_object)
