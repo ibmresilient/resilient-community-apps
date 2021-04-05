@@ -22,8 +22,8 @@ def codegen_reload_data():
         "package": u"fn_remedy",
         "message_destinations": [u"fn_remedy"],
         "functions": [u"remedy_close_incident", u"remedy_create_incident"],
-        "workflows": [u"create_a_remedy_incident_from_task"],
-        "actions": [u"Create Remedy Incident from Task"],
+        "workflows": [u"close_a_remedy_incident_from_task", u"create_a_remedy_incident_from_task"],
+        "actions": [u"Remedy Close Incident from Task", u"Remedy Create Incident from Task"],
         "incident_fields": [],
         "incident_artifact_types": [],
         "datatables": [u"remedy_linked_incidents_reference_table"],
@@ -46,9 +46,11 @@ def customization_data(client=None):
         - remedy_close_incident
         - remedy_create_incident
     - Workflows:
+        - close_a_remedy_incident_from_task
         - create_a_remedy_incident_from_task
     - Rules:
-        - Create Remedy Incident from Task
+        - Remedy Close Incident from Task
+        - Remedy Create Incident from Task
     - Data Tables:
         - remedy_linked_incidents_reference_table
     """

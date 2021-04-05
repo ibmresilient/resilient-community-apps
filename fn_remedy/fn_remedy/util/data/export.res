@@ -3,15 +3,44 @@
   "actions": [
     {
       "automations": [],
+      "conditions": [
+        {
+          "evaluation_id": null,
+          "field_name": "task.status",
+          "method": "changed_to",
+          "type": null,
+          "value": "Closed"
+        }
+      ],
+      "enabled": true,
+      "export_key": "Remedy Close Incident from Task",
+      "id": 161,
+      "logic_type": "all",
+      "message_destinations": [
+        "fn_remedy"
+      ],
+      "name": "Remedy Close Incident from Task",
+      "object_type": "task",
+      "tags": [],
+      "timeout_seconds": 86400,
+      "type": 0,
+      "uuid": "0f48b579-f54b-42a8-832e-0cfe2d3178d4",
+      "view_items": [],
+      "workflows": [
+        "close_a_remedy_incident_from_task"
+      ]
+    },
+    {
+      "automations": [],
       "conditions": [],
       "enabled": true,
-      "export_key": "Create Remedy Incident from Task",
+      "export_key": "Remedy Create Incident from Task",
       "id": 157,
       "logic_type": "all",
       "message_destinations": [
         "fn_remedy"
       ],
-      "name": "Create Remedy Incident from Task",
+      "name": "Remedy Create Incident from Task",
       "object_type": "task",
       "tags": [],
       "timeout_seconds": 86400,
@@ -114,7 +143,7 @@
   ],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1616613787081,
+  "export_date": 1617638875321,
   "export_format_version": 2,
   "fields": [
     {
@@ -980,7 +1009,7 @@
         "type": "user"
       },
       "description": {
-        "content": null,
+        "content": "Create a new incident in Remedy from a Resilient task.",
         "format": "text"
       },
       "destination_handle": "fn_remedy",
@@ -993,11 +1022,11 @@
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1614799890926,
+      "last_modified_time": 1617638162354,
       "name": "remedy_create_incident",
       "tags": [],
       "uuid": "914c7f97-8d48-4cfb-a411-0da2957950c4",
-      "version": 2,
+      "version": 3,
       "view_items": [
         {
           "content": "c98c6c66-3492-407c-a5f5-18bae6d61c62",
@@ -1048,12 +1077,12 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 14,
+  "id": 21,
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1616613784119,
+      "create_date": 1617638872041,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -1062,7 +1091,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1616613784119,
+      "update_date": 1617638872041,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -1282,6 +1311,26 @@
     }
   ],
   "workflows": [
+    {
+      "actions": [],
+      "content": {
+        "version": 14,
+        "workflow_id": "close_a_remedy_incident_from_task",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"close_a_remedy_incident_from_task\" isExecutable=\"true\" name=\"Close a Remedy Incident from Task\"\u003e\u003cdocumentation\u003e\u003c![CDATA[Close an existing incident in Remedy from a task by updating it\u0027s status.]]\u003e\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0p0a2oy\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0j4wj9n\" name=\"Remedy: Close Incident\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"92d5714d-4d38-485e-82af-cce278830a3e\"\u003e{\"inputs\":{},\"post_processing_script\":\"noteText = \\\"\u0026lt;h5\u0026gt;Remedy Close Incident:\u0026lt;/h5\u0026gt;\\\"\\n\\nif results[\\\"success\\\"]:\\n  if results[\\\"content\\\"][\\\"closed\\\"]:\\n    noteText += \\\"\u0026lt;p\u0026gt;The following Request ID\u0027s were matched in Remedy and the incident was successfully closed:\u0026lt;/p\u0026gt;\\\"\\n    for item in results[\\\"content\\\"][\\\"closed\\\"]:\\n      noteText += \\\"\u0026lt;p\u0026gt;    {0}\u0026lt;/p\u0026gt;\\\".format(item)\\n  if results[\\\"content\\\"][\\\"skipped\\\"]:\\n    noteText += \\\"\u0026lt;p\u0026gt;The following Request ID\u0027s were not able to be closed. Common reasons include that the incident has been previously closed, \\\" \\\\\\n    \\\"the incident has been deleted, or the payload sent to Remedy was incomplete according to the requirements of your specific system:\u0026lt;/p\u0026gt;\\\"\\n    for item in results[\\\"content\\\"][\\\"skipped\\\"]:\\n      noteText += \\\"\u0026lt;p\u0026gt;    {0}\u0026lt;/p\u0026gt;\\\".format(item)\\nelse:\\n  noteText += \\\"\u0026lt;p\u0026gt;Function failed to complete.\u0026lt;/p\u0026gt;\\\"\\n\\nrichText = helper.createRichText(noteText)\\nincident.addNote(richText)\\n\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"# Importing JSON means this function has a hard requirement on the python 3 feature.\\nimport json\\n\\ninputs.task_id = task.id\\ninputs.incident_id = incident.id\\n\\npayload = {}\\n\\n# Use this section to add key, value pairs to send to Remedy\\n# These values will be added/updated on the target Remedy incident,\\n# so they must conform with the \\\"HPD:IncidentInterface_Create\\\" schema\\n\\npayload[\\\"Status_Reason\\\"] = \\\"foo\\\"\\n# payload[\\\"policy_name\\\"] = \\\"bar\\\"\\n\\ninputs.remedy_payload = json.dumps(payload) if payload else \u0027\u0027\\n\\n\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0p0a2oy\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_087loyw\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0p0a2oy\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0j4wj9n\"/\u003e\u003cendEvent id=\"EndEvent_1bene68\"\u003e\u003cincoming\u003eSequenceFlow_087loyw\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_087loyw\" sourceRef=\"ServiceTask_0j4wj9n\" targetRef=\"EndEvent_1bene68\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0j4wj9n\" id=\"ServiceTask_0j4wj9n_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"398\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0p0a2oy\" id=\"SequenceFlow_0p0a2oy_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"398\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"298\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1bene68\" id=\"EndEvent_1bene68_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"713.943820224719\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"731.943820224719\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_087loyw\" id=\"SequenceFlow_087loyw_di\"\u003e\u003comgdi:waypoint x=\"498\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"714\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"606\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 14,
+      "creator_id": "a@example.com",
+      "description": "Close an existing incident in Remedy from a task by updating it\u0027s status.",
+      "export_key": "close_a_remedy_incident_from_task",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1616611875139,
+      "name": "Close a Remedy Incident from Task",
+      "object_type": "task",
+      "programmatic_name": "close_a_remedy_incident_from_task",
+      "tags": [],
+      "uuid": "f15e4054-1aa8-43d8-8e28-4addfc607117",
+      "workflow_id": 113
+    },
     {
       "actions": [],
       "content": {
