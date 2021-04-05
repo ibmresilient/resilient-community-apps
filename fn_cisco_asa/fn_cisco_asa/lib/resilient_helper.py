@@ -96,7 +96,12 @@ def compute_ip_with_netmask(ip_kind, ip_value, ip_netmask):
     if not ip_netmask:
         raise IntegrationError ("IP netmask not defined.")
 
-    netmask = int(ip_netmask.split("/")[1])
+    # IPv4 netmask contains / in the input but IPv6 does not. 
+    # Using the same input format as ASDM.
+    if "/" in ip_netmask:
+        netmask = int(ip_netmask.split("/")[1])
+    else: 
+        netmask = int(ip_netmask)
     if ip_kind == "IPv4Network":
         # Netmask /32 is treated differently. It is a single IP address where as other
         # netmask cover a range of IPs.  Set the network object type to IPv4Address
