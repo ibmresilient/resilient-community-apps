@@ -13,6 +13,7 @@ def config_section_data():
 remedy_host=<example.domain>
 remedy_user=<example_user>
 remedy_password=xxx
+max_datatable_rows=30
 #http_proxy=
 #http_proxy=
 """

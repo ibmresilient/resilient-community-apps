@@ -14,7 +14,7 @@ from fn_remedy.lib.datatable.data_table import Datatable
 PACKAGE_NAME = "fn_remedy"
 FN_NAME = "remedy_close_incident"
 TABLE_NAME = "remedy_linked_incidents_reference_table"
-MAX_ROWS=30
+MAX_ROWS = 30 # override option available in app.config as max_datatable_rows
 
 # fields we want Remedy to return when creating an incident
 RETURN_FIELDS = ["Incident Number", "Request ID"]
@@ -151,7 +151,7 @@ class FunctionComponent(ResilientComponent):
         dt = Datatable(self.rest_client(), incident_id, TABLE_NAME)
         dt.get_data()
         # query the rows
-        rows = dt.get_rows(max_rows=30, search_column="taskincident_id",
+        rows = dt.get_rows(max_rows=MAX_ROWS, search_column="taskincident_id",
                            search_value=str(task["id"]) + ": " + task["name"])
         return rows
 
@@ -180,6 +180,8 @@ class FunctionComponent(ResilientComponent):
             # get optional settings
             port = self.fn_options.get("remedy_port", None)
             verify = str_to_bool(self.fn_options.get("verify", "true"))
+            # override MAX_ROWS if provided in app.config
+            MAX_ROWS = self.fn_options.get("max_datatable_rows", MAX_ROWS)
 
             # get function inputs
             remedy_payload = kwargs.get("remedy_payload")
