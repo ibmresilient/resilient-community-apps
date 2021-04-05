@@ -17,5 +17,4 @@ def mock_init():
             pass
         def dt_add_rows(self, *args, **kwargs):
             response = {"status_code": 200, "content": "foo"}
-
     return MockDT()
