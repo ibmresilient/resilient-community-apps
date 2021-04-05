@@ -51,7 +51,11 @@ class FunctionComponent(ResilientComponent):
                 mail_from = self.smtp_user
             else:
                 mail_from = kwargs.get("mail_from")  # text
-            if self.template_file_path and not mail_body_text:
+
+            if kwargs.get("mail_body_html"):
+                mail_body_html = kwargs.get("mail_body_html")
+                jinja = False
+            elif self.template_file_path and not mail_body_text:
                 with open(self.template_file_path, "r") as definition:
                     mail_body_html = definition.read()
                     LOG.info("Using custom jinja template instead of default, path: %s", self.template_file_path)
@@ -59,9 +63,7 @@ class FunctionComponent(ResilientComponent):
                         jinja = False
                     else:
                         jinja = True
-            else:
-                mail_body_html = kwargs.get("mail_body_html")
-                jinja = False
+
             if self.smtp_user and not kwargs.get("mail_to"):
                 mail_to = self.smtp_user
             else:
@@ -81,6 +83,7 @@ class FunctionComponent(ResilientComponent):
             mail_body_text = kwargs.get("mail_body_text") #text
             mail_attachments = kwargs.get("mail_attachments") #text
             mail_incident_id = kwargs.get("mail_incident_id") #number
+
             # Get the conditional function parameters:
             mail_from, mail_to, mail_body_html, jinja, email_message, text = conditional_parameters(mail_body_text)
 
@@ -178,9 +181,14 @@ class FunctionComponent(ResilientComponent):
             if file_name in requested_attachments:
                 remaining_attachment_list.remove(file_name)
 
-                file_contents = self.rest_client().get_content("/incidents/{inc_id}/attachments/{attach_id}/contents".
-                                                                format(inc_id=inc_id,
-                                                                attach_id=incident_attachment["id"]))
+                if incident_attachment['type'] == 'incident':
+                    file_contents = self.rest_client().get_content("/incidents/{inc_id}/attachments/{attach_id}/contents".
+                                                                  format(inc_id=inc_id,
+                                                                         attach_id=incident_attachment["id"]))
+                else:
+                    file_contents = self.rest_client().get_content("/tasks/{task_id}/attachments/{attach_id}/contents".
+                                                                  format(task_id=incident_attachment["task_id"],
+                                                                         attach_id=incident_attachment["id"]))
                 file_path = os.path.join(tempdir, file_name)
                 with open(file_path, "wb+") as temp_file:
                     temp_file.write(file_contents)
@@ -202,8 +210,9 @@ class FunctionComponent(ResilientComponent):
         Returns:
             [set]: [file paths for attachments]
         """
-        incident_attachment_list = self.rest_client().get("/incidents/{inc_id}/attachments?handle_format=objects".
-                                                          format(inc_id=inc_id))
+        incident_attachment_result = self.rest_client().post("/incidents/{inc_id}/attachments/query?include_tasks=true".
+                                                          format(inc_id=inc_id), None)
+        incident_attachment_list = incident_attachment_result['attachments']
         # convert the list of requested attachments
         if attachments and attachments == "*":
             # include all incident attachments
