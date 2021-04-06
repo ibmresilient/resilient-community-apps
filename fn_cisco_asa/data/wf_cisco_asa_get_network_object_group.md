@@ -46,6 +46,7 @@ for network_object in member_list:
 
   if network_object.get("kind")  == 'object#NetworkObj':
     network_object_row.cisco_asa_network_object_id = network_object.get("objectId")
+    network_object_row.cisco_asa_network_object_description = network_object.get("description")
     host = network_object.get("host")
     network_object_row.cisco_asa_network_object_kind = host.get("kind")
     network_object_row.cisco_asa_network_object_value = host.get("value")

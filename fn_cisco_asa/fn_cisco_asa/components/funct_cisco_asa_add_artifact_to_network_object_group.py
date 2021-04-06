@@ -44,6 +44,7 @@ class FunctionComponent(ResilientComponent):
             firewall_name = kwargs.get("cisco_asa_firewall")  # text
             network_object_group = kwargs.get("cisco_asa_network_object_group")  # text
             network_object_name = kwargs.get("cisco_asa_network_object_name")  # text
+            network_object_description = kwargs.get("cisco_asa_network_object_description")  # text
             artifact_value = kwargs.get("cisco_asa_network_object_value")  # text
             artifact_type = kwargs.get("cisco_asa_artifact_type")  # text
             ip_netmask = kwargs.get("cisco_asa_netmask")  # text
@@ -54,6 +55,7 @@ class FunctionComponent(ResilientComponent):
             LOG.info(u"cisco_asa_network_object_group: %s", network_object_group)
             LOG.info(u"cisco_asa_network_object_name: %s", network_object_name)
             LOG.info(u"cisco_asa_network_object_value: %s", artifact_value)
+            LOG.info(u"cisco_asa_network_object_description: %s", artifact_value)
             LOG.info(u"cisco_asa_artifact_type: %s", artifact_type)
             LOG.info(u"cisco_asa_ipv4_netmask: %s", ip_netmask)
             LOG.info(u"cisco_asa_ipv4_end_range: %s", ip_end_range)
@@ -77,11 +79,13 @@ class FunctionComponent(ResilientComponent):
             # Call the ASA API to add the network object to the network object group.
             response = asa.add_to_network_object_group(network_object_group, 
                                                        network_object_name, 
+                                                       network_object_description,
                                                        network_object_kind, 
                                                        network_object_value)
             content = {"firewall": firewall_name,
                        "network_object_group": network_object_group,
                        "network_object_name": network_object_name,
+                       "network_object_description": network_object_description,
                        "network_object_kind": network_object_kind,
                        "network_object_value": network_object_value}
             results = rp.done(response, content)

@@ -291,6 +291,7 @@ for network_object in member_list:
 
   if network_object.get("kind")  == 'object#NetworkObj':
     network_object_row.cisco_asa_network_object_id = network_object.get("objectId")
+    network_object_row.cisco_asa_network_object_description = network_object.get("description")
     host = network_object.get("host")
     network_object_row.cisco_asa_network_object_kind = host.get("kind")
     network_object_row.cisco_asa_network_object_value = host.get("value")
@@ -537,6 +538,10 @@ inputs.cisco_asa_network_object_group = firewall_group_pair_list[1]
 inputs.cisco_asa_network_object_value = artifact.value
 inputs.cisco_asa_artifact_type = artifact.type
 
+# Optional network object description
+if rule.properties.cisco_asa_network_object_description:
+  inputs.cisco_asa_network_object_description = rule.properties.cisco_asa_network_object_description
+  
 # Option params for IP netmask or end IP for IP range
 inputs.cisco_asa_end_range = rule.properties.cisco_asa_end_range
 if rule.properties.cisco_asa_ipv4_netmask:
@@ -565,15 +570,15 @@ else:
 ```python
 from java.util import Date
 
-if results.success:
-
-  content = results.get("content")
-  firewall = content.get("firewall")
+success = results.get("success")
+content = results.get("content")
+firewall = content.get("firewall")
+if success:
   network_object_group = content.get("network_object_group")
   network_object_kind = content.get("network_object_kind")
   network_object_value = content.get("network_object_value")
   network_object_name = content.get("network_object_name")
-  
+  network_object_description = content.get("network_object_description")
   # Add each email as a row in the query results data table
   network_object_row = incident.addRow("cisco_asa_network_object_dt")
   network_object_row.cisco_asa_query_date = Date()
@@ -582,17 +587,16 @@ if results.success:
   network_object_row.cisco_asa_network_object_kind = network_object_kind
   network_object_row.cisco_asa_network_object_value = network_object_value
   network_object_row.cisco_asa_network_object_id = network_object_name
-  
+  network_object_row.cisco_asa_network_object_description = network_object_description  
   # Update status field
   status_text = u"""<p style= "color:{color}">{status}</p>""".format(color="green", status="Active")
   network_object_row.cisco_asa_status = helper.createRichText(status_text)
 else:
-  content = results.get("content")
-  firewall = content.get("firewall")
+
   network_object_group = content.get("network_object_group")
   network_object_value = content.get("network_object_value")
-  
-  note = u"Cisco ASA {0}: Artifact {1} was not added to network object group {2}.".format(firewall, network_object_value, network_object_group)
+  status_message = content.get("status_message")
+  note = u"Cisco ASA {0}: Artifact {1} was not added to network object group {2}\n\n{3}.".format(firewall, network_object_value, network_object_group, status_message)
   incident.addNote(helper.createPlainText(note))
 ```
 
