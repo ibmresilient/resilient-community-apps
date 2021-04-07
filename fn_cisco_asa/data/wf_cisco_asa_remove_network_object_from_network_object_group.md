@@ -33,6 +33,8 @@ if results.success:
   text = "Removed"
 else:
   text = "NotFound"
+  note = "Remove Network Object From Network Object Group Results:\n\n    {0}".format(results.content)
+  incident.addNote(helper.createPlainText(note))
   
 status_text = u"""<p style= "color:{color}">{status}</p>""".format(color="red", status=text)
 row['cisco_asa_status'] = helper.createRichText(status_text)

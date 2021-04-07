@@ -77,20 +77,21 @@ class FunctionComponent(ResilientComponent):
                                                                                    fqdn_version)
 
             # Call the ASA API to add the network object to the network object group.
-            response = asa.add_to_network_object_group(network_object_group, 
-                                                       network_object_name, 
-                                                       network_object_description,
-                                                       network_object_kind, 
-                                                       network_object_value)
+            success, reason = asa.add_to_network_object_group(network_object_group, 
+                                                              network_object_name, 
+                                                              network_object_description,
+                                                              network_object_kind, 
+                                                              network_object_value)
             content = {"firewall": firewall_name,
                        "network_object_group": network_object_group,
                        "network_object_name": network_object_name,
                        "network_object_description": network_object_description,
                        "network_object_kind": network_object_kind,
-                       "network_object_value": network_object_value}
-            results = rp.done(response, content)
+                       "network_object_value": network_object_value, 
+                       "reason": reason}
+            results = rp.done(success, content)
 
-            LOG.info("'%s' complete", FN_NAME)
+            LOG.info("'%s' complete: success = %s", FN_NAME, success)
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

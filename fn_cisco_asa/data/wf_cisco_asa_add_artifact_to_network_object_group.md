@@ -60,13 +60,13 @@ from java.util import Date
 success = results.get("success")
 content = results.get("content")
 firewall = content.get("firewall")
+network_object_group = content.get("network_object_group")
+network_object_value = content.get("network_object_value")
+network_object_name = content.get("network_object_name")
+network_object_kind = content.get("network_object_kind")
 if success:
-  network_object_group = content.get("network_object_group")
-  network_object_kind = content.get("network_object_kind")
-  network_object_value = content.get("network_object_value")
-  network_object_name = content.get("network_object_name")
   network_object_description = content.get("network_object_description")
-  # Add each email as a row in the query results data table
+  # Add network object as a row in the network Cisco ASA network objects data table
   network_object_row = incident.addRow("cisco_asa_network_object_dt")
   network_object_row.cisco_asa_query_date = Date()
   network_object_row.cisco_asa_firewall = firewall
@@ -79,11 +79,10 @@ if success:
   status_text = u"""<p style= "color:{color}">{status}</p>""".format(color="green", status="Active")
   network_object_row.cisco_asa_status = helper.createRichText(status_text)
 else:
-
-  network_object_group = content.get("network_object_group")
-  network_object_value = content.get("network_object_value")
-  status_message = content.get("status_message")
-  note = u"Cisco ASA {0}: Artifact {1} was not added to network object group {2}\n\n{3}.".format(firewall, network_object_value, network_object_group, status_message)
+  # Artifact not added to the group so add a note with the reason.
+  reason = content.get("reason")
+  note = u"Cisco ASA Add Artifact to Network Object Group Results:\n    Artifact value: {0}\n    Object Name: {1} \n    Object Kind: {2} was not added to Firewall: {3}, Network Object Group: {4}\n\n{5}"
+  note = note.format(network_object_value, network_object_name, network_object_kind, firewall, network_object_group, reason)
   incident.addNote(helper.createPlainText(note))
 ```
 

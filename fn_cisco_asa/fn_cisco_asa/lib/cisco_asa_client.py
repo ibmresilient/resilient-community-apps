@@ -60,9 +60,9 @@ class CiscoASAClient(object):
         """
         url = u"{0}/api/objects/networkobjects".format(self.base_url)
 
-        response = self.rc.execute_call_v2("post", url, headers=self.headers, json=obj_data, 
-                                            verify=self.bundle, proxies=self.rc.get_proxies())
-        return response
+        response, msg = self.rc.execute_call_v2("post", url, headers=self.headers, json=obj_data, 
+                                            verify=self.bundle, proxies=self.rc.get_proxies(), callback=callback)
+        return response, msg
 
     def get_network_objects(self, limit=None):
         """ Return the network objects of the firewall (host).
@@ -166,19 +166,18 @@ class CiscoASAClient(object):
     def add_to_network_object_group(self, group, obj_name, obj_desc, obj_kind, obj_value):
         """ Add a network object to the specified network object group.
 
-            Raises:
-                IntegrationError: [if REST API call is not successful]
-
             Returns:
                 [bool]: [True is the object is added
-                         False if not add and is already in the group]
+                         False if not added to the group]
+                [string]: [message indicating why the message was not added]
         """
         # Check if this object is already in the network object group
         found = self.is_object_in_network_object_group(group, obj_name, obj_kind, obj_value)
         if found:
-            LOG.info(u"%s %s %s is already in firewall: %s group: %s.", obj_name, obj_kind, obj_value, 
-                    self.firewall_name, group)
-            return False
+            reason = u"Object Kind: {0}, Object Value: {1}, Object Name: {2} is already in Firewall: {3} Group: {4}".format(obj_kind, obj_value, obj_name, 
+                     self.firewall_name, group)
+            LOG.info(reason)
+            return False, reason
 
         # If object to be added has a name, then it is not a primitive object.
         # Create a network object for this object.
@@ -192,11 +191,11 @@ class CiscoASAClient(object):
                 },
                 "description": obj_desc
             }
-            try: 
-                post_response = self.post_network_object(new_object)
-            except Exception as err:
-                LOG.info(err)
-                return False
+ 
+            post_response, error_msg = self.post_network_object(new_object)
+
+            if error_msg:
+                return False, error_msg
 
         # Add this object to the network object group
         url = u"{0}/api/objects/networkobjectgroups/{1}".format(self.base_url, group)
@@ -215,35 +214,46 @@ class CiscoASAClient(object):
                         }]
                     }
         data_string = json.dumps(data)
-        response = self.rc.execute_call_v2("patch", url, headers=self.headers, data=data_string,
-                                            verify=self.bundle, proxies=self.rc.get_proxies())
+
+        response, error_msg = self.rc.execute_call_v2("patch", url, headers=self.headers, data=data_string,
+                                                      verify=self.bundle, proxies=self.rc.get_proxies(), 
+                                                      callback=callback)
 
         # If the object is added then write this change to ASA memory.
         if response.status_code == 204:
             wr_mem_response = self.write_memory()
             if wr_mem_response.status_code == 200:
-                return True
-        else:    
-            raise IntegrationError("Object was not added to network object group.")
-        return False
+                reason = u"Object Kind: {0}, Object Value: {1}, Object Name: {2}, is added to Firewall: {3}, Group: {4}".format(obj_kind, 
+                         obj_value, obj_name, self.firewall_name, group)
+                LOG.info(reason)
+                return True, reason
+            else:
+                reason = u"Object Kind: {0}, Object Value: {1}, Object Name: {2}, is added to Firewall: {3}, Group: {4} but write mem failed.".format(obj_kind, 
+                         obj_value, obj_name, self.firewall_name, group)
+                LOG.info(reason)
+                return False, reason        
+        else:
+            reason = u"Object Kind: {0}, Object Value: {1}, Object Name: {2}, is NOT added to Firewall: {3}, Group: {4}\n{5}".format(obj_kind, 
+                     obj_value, obj_name, self.firewall_name, group, error_msg)
+            LOG.info(reason)
+            return False, reason
 
     def remove_from_network_object_group(self, group, obj_kind, obj_value, obj_id):
         """ Remove network object from the specified network object group.
 
-            Raises:
-                IntegrationError: [if REST API call is not successful]
-
             Returns:
                 [bool]: [True is the object is removed
                          False if not removed and is not in the group]
+                [string]: [message indicating why the message was not removed]
         """
         # Check if this object is already in the network object group
         obj_name = obj_id
         found = self.is_object_in_network_object_group(group, obj_name, obj_kind, obj_value)
         if not found:
-            LOG.info(u"%s %s %s is not in firewall: %s group: %s.", obj_name, obj_kind, obj_value, 
-                    self.firewall_name, group)
-            return False
+            reason = u"Object Kind: {0}, Object Value: {1}, Object Name: {2} is not in Firewall: {3} Group: {4}".format(obj_kind, obj_value, obj_name, 
+                     self.firewall_name, group)
+            LOG.info(reason)
+            return False, reason
 
         # Remove this object from the network object group
         url = u"{0}/api/objects/networkobjectgroups/{1}".format(self.base_url, group)
@@ -264,17 +274,27 @@ class CiscoASAClient(object):
         data_string = json.dumps(data)
         LOG.debug(data_string)
 
-        response = self.rc.execute_call_v2("patch", url, headers=self.headers, data=data_string,
-                                            verify=self.bundle, proxies=self.rc.get_proxies())
+        response, error_msg = self.rc.execute_call_v2("patch", url, headers=self.headers, data=data_string,
+                                                    verify=self.bundle, proxies=self.rc.get_proxies(), callback=callback)
 
         # If the object is added then write this change to ASA memory.
         if response.status_code == 204:
             wr_mem_response = self.write_memory()
             if wr_mem_response.status_code == 200:
-                return True
+                reason = u"Object Kind: {0}, Object Value: {1}, Object Name: {2}, is removed from Firewall: {3}, Group: {4}".format(obj_kind, 
+                         obj_value, obj_name, self.firewall_name, group)
+                LOG.info(reason)
+                return True, reason
+            else:
+                reason = u"Object Kind: {0}, Object Value: {1}, Object Name: {2}, is removed from Firewall: {3}, Group: {4} but write mem failed.".format(obj_kind, 
+                         obj_value, obj_name, self.firewall_name, group)
+                LOG.info(reason)
+                return False, reason               
         else:    
-            raise IntegrationError("Object was not removed from network object group.")
-        return False
+            reason = u"Object Kind: {0}, Object Value: {1}, Object Name: {2}, is NOT removed from Firewall: {3}, Group: {4}\n\n{5}".format(obj_kind, 
+                     obj_value, obj_name, self.firewall_name, group, error_msg)
+            LOG.info(reason)
+            return False, reason
 
     def write_memory(self):
         """Send a write memory command to the Cisco ASA device to save the current running 
@@ -289,4 +309,16 @@ class CiscoASAClient(object):
                                            proxies=self.rc.get_proxies())
         return response
 
-    
+def callback(response):
+    """
+    callback needed for certain REST API calls to return a formatted error message
+    :param response:
+    :return: response, error_msg
+    """
+    error_msg = None
+    if response.status_code >= 300:
+        resp = response.json()
+        msg = resp['messages']
+        error_msg  = u"Cisco ASA Error: \n    status code: {0}\n    messages: {1}".format(response.status_code, msg)
+
+    return response, error_msg
