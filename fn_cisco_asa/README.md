@@ -79,7 +79,7 @@ Cisco ASA firewalls are historically managed through the command line, however t
 <p>
 Key capabilities include the following:
 
-* Allows a SOC analyst to pre-configure 20 available firewalls with credentials in the app.config file. Each firewall contains a list of Cisco ASA named network object groups for blocking inbound traffic and outbound traffic, also specified in the app.config.
+* Allows a SOC analyst to pre-configure available firewalls with credentials in the app.config file. Each firewall contains a list of Cisco ASA named network object groups for blocking inbound traffic and outbound traffic, also specified in the app.config.
 * Provides the ability to display all IP addresses currently in a network object group blocklist in a data table.
 * Provides the ability to add IP address to the blocklist (network object group).
 * Provides the ability to remove an IP addresses from blocklist (network object group).
@@ -377,6 +377,8 @@ if results.success:
   text = "Removed"
 else:
   text = "NotFound"
+  note = "Remove Network Object From Network Object Group Results:\n\n    {0}".format(results.content)
+  incident.addNote(helper.createPlainText(note))
   
 status_text = u"""<p style= "color:{color}">{status}</p>""".format(color="red", status=text)
 row['cisco_asa_status'] = helper.createRichText(status_text)
@@ -573,13 +575,13 @@ from java.util import Date
 success = results.get("success")
 content = results.get("content")
 firewall = content.get("firewall")
+network_object_group = content.get("network_object_group")
+network_object_value = content.get("network_object_value")
+network_object_name = content.get("network_object_name")
+network_object_kind = content.get("network_object_kind")
 if success:
-  network_object_group = content.get("network_object_group")
-  network_object_kind = content.get("network_object_kind")
-  network_object_value = content.get("network_object_value")
-  network_object_name = content.get("network_object_name")
   network_object_description = content.get("network_object_description")
-  # Add each email as a row in the query results data table
+  # Add network object as a row in the network Cisco ASA network objects data table
   network_object_row = incident.addRow("cisco_asa_network_object_dt")
   network_object_row.cisco_asa_query_date = Date()
   network_object_row.cisco_asa_firewall = firewall
@@ -592,11 +594,10 @@ if success:
   status_text = u"""<p style= "color:{color}">{status}</p>""".format(color="green", status="Active")
   network_object_row.cisco_asa_status = helper.createRichText(status_text)
 else:
-
-  network_object_group = content.get("network_object_group")
-  network_object_value = content.get("network_object_value")
-  status_message = content.get("status_message")
-  note = u"Cisco ASA {0}: Artifact {1} was not added to network object group {2}\n\n{3}.".format(firewall, network_object_value, network_object_group, status_message)
+  # Artifact not added to the group so add a note with the reason.
+  reason = content.get("reason")
+  note = u"Cisco ASA Add Artifact to Network Object Group Results:\n    Artifact value: {0}\n    Object Name: {1} \n    Object Kind: {2} was not added to Firewall: {3}, Network Object Group: {4}\n\n{5}"
+  note = note.format(network_object_value, network_object_name, network_object_kind, firewall, network_object_group, reason)
   incident.addNote(helper.createPlainText(note))
 ```
 
@@ -871,6 +872,7 @@ cisco_asa_network_object_dt
 | ----------- | --------------- | ---- | ------- |
 | Cisco ASA Firewall | `cisco_asa_firewall` | `text` | - |
 | Network Object Group | `cisco_asa_network_object_group` | `text` | - |
+| Object Description | `cisco_asa_network_object_description` | `text` | - |
 | Object ID | `cisco_asa_network_object_id` | `text` | - |
 | Object Kind | `cisco_asa_network_object_kind` | `text` | - |
 | Object Value | `cisco_asa_network_object_value` | `text` | - |
