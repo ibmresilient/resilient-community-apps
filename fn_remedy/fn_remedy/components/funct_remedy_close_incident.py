@@ -183,6 +183,7 @@ class FunctionComponent(ResilientComponent):
             port = self.fn_options.get("remedy_port", None)
             verify = str_to_bool(self.fn_options.get("verify", "true"))
             # override MAX_ROWS if provided in app.config
+            global MAX_ROWS
             MAX_ROWS = self.fn_options.get("max_datatable_rows", MAX_ROWS)
 
             # get function inputs
