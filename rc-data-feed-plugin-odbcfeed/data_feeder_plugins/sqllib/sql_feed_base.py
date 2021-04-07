@@ -217,11 +217,19 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
                 else:
                     LOG.info("Inserting/updating %s; id = %d", table_name, flat_payload['id'])
 
-                    upsert_stmt = self.dialect.get_upsert(table_name, all_field_names, all_field_types)
-                    upsert_params = self.dialect.get_parameters(all_field_names, flat_payload)
-                    LOG.debug (flat_payload)
-                    LOG.debug (upsert_stmt)
-                    LOG.debug (upsert_params)
+                    # reduce data of attachments which are empty
+                    non_null_payload = {}
+                    for key, value in flat_payload.items():
+                        if all_field_types.get(key) == 'blob':
+                            if value is not None:
+                                non_null_payload[key] = value
+                        else:
+                            non_null_payload[key] = value
+
+                    sorted_keys = sorted(list(set(non_null_payload.keys()) & set(all_field_names)))
+
+                    upsert_stmt = self.dialect.get_upsert(table_name, sorted_keys, all_field_types)
+                    upsert_params = self.dialect.get_parameters(sorted_keys, non_null_payload)
 
                     self._execute_sql(
                         cursor,
@@ -232,6 +240,11 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
                 break
             except Exception as err:
                 LOG.error("send_data exception: %s", err)
+                LOG.debug (flat_payload)
+                'non_null_payload' in locals() and LOG.debug(non_null_payload)
+                'upsert_stmt' in locals() and LOG.debug(upsert_stmt)
+                'upsert_params' in locals() and LOG.debug(upsert_params)
+
                 if err.args and err.args[0] in PYODBC_CONNECTION_LOST:
                     LOG.warning("ODBC Connection lost, reestablishing connection")
                     # try reestablishing the connection

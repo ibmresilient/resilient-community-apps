@@ -5,6 +5,10 @@
 * v1.0.3 AppHost configurations for Postresql, MS SQL Server, MySql, SQLite
 * v1.0.1 Duplication of incident id bug fix 
 
+## Notes:
+* Issues exist deleting attachments and artifact attachments for IBM SOAR v39 and v40. A future release is expected to resolve this issue.
+* Deleting an incident will not also delete the incident artifacts, notes, tasks, datatables, etc.
+* Deleting a task will not also delete the task notes and attachments
 # Introduction
 This package contains the odbcfeed Plugin to the Data Feed extension.  This Data Feed extension allows one to maintain "replica" data for Resilient incidents, artifacts, tasks, notes, etc.  The updates are performed in near real-time.
 
