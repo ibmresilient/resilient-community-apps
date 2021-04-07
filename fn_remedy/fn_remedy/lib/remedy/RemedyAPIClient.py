@@ -195,7 +195,7 @@ class RemedyClient(RemedyAPI):
         :return: the response content and http status code as a tuple
         :rtype: tuple(json, int)
         """
-        # this url fomratting is less than ideal, but the Remedy API is very picky with how we specify endpoints
+        # this url formatting is less than ideal, but the Remedy API is very picky with how we specify endpoints
         # and therefore we cannot fully url encode.
         url = self.base_url + REQUEST_PREFIX + "/{0}?q=%27Incident+Number%27+%3D+%22{1}%22".format(form_name, id)
         response = self.rc.execute_call_v2("GET", url, headers=self.reqHeaders, verify=self.verify)
