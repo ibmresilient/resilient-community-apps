@@ -121,7 +121,7 @@ class FunctionComponent(ResilientComponent):
         entries, status_code = remedy_client.query_form_entry(ENTRY_NAME, incident_number)
         # we expect only one result to be returned
         if len(entries["entries"]) > 1:
-            LOG.debug("Multiple form entryes in Remedy found matching Incident Number: {0}."
+            LOG.debug("Multiple form entries in Remedy found matching Incident Number: {0}."
                       "The Request ID of the first entry will be written to the datatable.".format(incident_number))
         # save the request ID
         request_id = entries["entries"][0]["values"]["Request ID"]
