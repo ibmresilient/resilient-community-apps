@@ -19,8 +19,10 @@ def snake_to_camel(word):
     """
     return ''.join(x.capitalize() or '_' for x in word.split('_'))
 
+
 setup(
     name='fn_pastebin',
+    display_name='PasteBin Creator for IBM Resilient',
     version='1.0.1',
     license='MIT',
     author='Resilient Labs',
