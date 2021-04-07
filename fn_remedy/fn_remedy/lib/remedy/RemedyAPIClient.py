@@ -5,6 +5,8 @@ from .interface.remedy_api import RemedyAPI
 # Load constant values for API Calls
 from .RemedyConstants import *
 
+import sys
+
 REQUEST_PREFIX = "/arsys/v1/entry"
 
 
@@ -176,6 +178,28 @@ class RemedyClient(RemedyAPI):
         # Remedy returns an empty 204 for form deletion.
         # return empty json in the absence of response/incident content
         return response_json, response.status_code
+
+    def query_form_entry(self, form_name, id, payload={}):
+        """
+        query_form_entry is a member function used to query
+        a form entry based on a form name and request ID.
+        The query matches an incident number to the provided ID
+        The function returns: a tuple with the response content as json and the http status code.
+
+        :param form_name: name of the form to query
+        :type form_name: str
+        :param req_id: the request ID of the desired entry
+        :type req_id: str
+        :param payload: Any extra options you want to include on the incident, defaults to {}
+        :type payload: dict, optional
+        :return: the response content and http status code as a tuple
+        :rtype: tuple(json, int)
+        """
+        # this url fomratting is less than ideal, but the Remedy API is very picky with how we specify endpoints
+        # and therefore we cannot fully url encode.
+        url = self.base_url + REQUEST_PREFIX + "/{0}?q=%27Incident+Number%27+%3D+%22{1}%22".format(form_name, id)
+        response = self.rc.execute_call_v2("GET", url, headers=self.reqHeaders, verify=self.verify)
+        return response.json(), response.status_code
 
     # used in selftest
     def get_form_schema(self, form_name):
