@@ -20,6 +20,7 @@ TABLE_NAME = "remedy_linked_incidents_reference_table"
 RETURN_FIELDS = ["Incident Number", "Request ID"]
 # form name corresponding to a Remedy Incident
 FORM_NAME = "HPD:IncidentInterface_Create"
+ENTRY_NAME = "HPD:IncidentInterface"
 
 LOG = logging.getLogger(__name__)
 
@@ -113,9 +114,18 @@ class FunctionComponent(ResilientComponent):
             return rp.done(False, remedy_incident)
 
         LOG.info("Incident successfully posted to Remedy.")
-        # capture the Incident Number and Request ID
+        # capture the Incident Number
         incident_number = remedy_incident["values"]["Incident Number"]
-        request_id = remedy_incident["values"]["Request ID"]
+
+        # get the newly created form entry object
+        entries, status_code = remedy_client.query_form_entry(ENTRY_NAME, incident_number)
+        # we expect only one result to be returned
+        if len(entries["entries"]) > 1:
+            LOG.debug("Multiple form entryes in Remedy found matching Incident Number: {0}."
+                      "The Request ID of the first entry will be written to the datatable.".format(incident_number))
+        # save the request ID
+        request_id = entries["entries"][0]["values"]["Request ID"]
+        LOG.info("Correlated Request ID {0} to Incident Number {1}".format(request_id, incident_number))
 
         dt_response = self.add_dt_row(incident_id, task, request_id, values)
 
