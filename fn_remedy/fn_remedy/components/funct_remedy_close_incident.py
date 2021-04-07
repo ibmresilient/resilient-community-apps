@@ -19,7 +19,7 @@ MAX_ROWS = 30 # override option available in app.config as max_datatable_rows
 # fields we want Remedy to return when creating an incident
 RETURN_FIELDS = ["Incident Number", "Request ID"]
 # form name corresponding to a Remedy Incident
-FORM_NAME = "HPD:IncidentInterface_Create"
+FORM_NAME = "HPD:IncidentInterface"
 # status values that indicate closure
 CLOSED_LIST = ["Resolved", "Closed", "Cancelled"]
 
