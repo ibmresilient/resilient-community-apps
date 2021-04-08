@@ -62,12 +62,12 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Validations complete. Remove the network object.")
 
             # Call the ASA API to get the network objects in this network object group.
-            response = asa.remove_from_network_object_group(network_object_group, network_object_kind, 
-                                                            network_object_value, network_object_id)
+            success, reason = asa.remove_from_network_object_group(network_object_group, network_object_kind, 
+                                                                   network_object_value, network_object_id)
 
-            results = rp.done(response, response)
+            results = rp.done(success, reason)
 
-            LOG.info("'%s' complete", FN_NAME)
+            LOG.info("'%s' complete: success = %s", FN_NAME, success)
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

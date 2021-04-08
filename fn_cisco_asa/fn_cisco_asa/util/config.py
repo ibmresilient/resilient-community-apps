@@ -28,6 +28,6 @@ username=<asa_username>
 password=<asa_password>
 # Comma separated list of network object groups to manage.
 network_object_groups=BLOCKLIST_IN, BLOCKLIST_OUT
-#cafile=False
+#cafile=<path to certificate file>
 """
     return config_data
