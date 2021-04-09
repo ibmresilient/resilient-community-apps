@@ -67,6 +67,8 @@ class FunctionComponent(ResilientComponent):
 
             results = rp.done(success, reason)
 
+            yield StatusMessage("Artifact removed network object group: {0}".format(success))
+
             LOG.info("'%s' complete: success = %s", FN_NAME, success)
 
             # Produce a FunctionResult with the results

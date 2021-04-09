@@ -91,6 +91,8 @@ class FunctionComponent(ResilientComponent):
                        "reason": reason}
             results = rp.done(success, content)
 
+            yield StatusMessage("Artifact added to network object group: {0}".format(success))
+
             LOG.info("'%s' complete: success = %s", FN_NAME, success)
 
             # Produce a FunctionResult with the results
