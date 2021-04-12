@@ -132,7 +132,7 @@ class CiscoASAClient(object):
                 if member.get("objectId") == obj_name:
                     found = True
                     break
-            elif member_kind == obj_kind:
+            elif member_kind == obj_kind and not obj_name:
                 if member.get("value") == obj_value:
                     found = True
                     break
@@ -201,7 +201,7 @@ class CiscoASAClient(object):
         url = u"{0}/api/objects/networkobjectgroups/{1}".format(self.base_url, group)
 
         # Members of a network object group can be of type network object or IPv4Address or IPv6
-        if obj_kind in ('IPv4Address', 'IPv4Network', 'IPv6Address'):
+        if obj_kind in ('IPv4Address', 'IPv4Network', 'IPv6Address') and not obj_name:
             data = {"members.add":[{
                         "kind": obj_kind,
                         "value": obj_value

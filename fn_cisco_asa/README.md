@@ -208,7 +208,7 @@ hostname(config-network)# access-list my-internet-access deny ip object-group BL
 hostname(config)# access-list my-internet-access permit ip any any
 hostname(config)# access-group my-internet-access in interface inside
 </code></pre>
-
+ 
 The app makes REST API calls to add and remove network objects from the BLOCKLIST_IN network object group.
 
 ## Function - Cisco ASA Get Network Objects
