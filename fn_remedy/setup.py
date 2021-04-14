@@ -31,7 +31,7 @@ setup(
     description="Resilient Circuits Components for 'fn_remedy'",
     long_description="Resilient Circuits Components for 'fn_remedy.' "
                     "This integration provides the capability to create "
-                    "new incidents in Remedy from Resilient tasks via the"
+                    "new incidents in Remedy from Resilient tasks via the "
                     "HPD:IncidentInterface_Create form over the REST API. "
                     "Once the task is complete, this integration also provides "
                     "the capability to close existing Remedy Incidents.",
