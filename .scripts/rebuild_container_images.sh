@@ -21,7 +21,6 @@ REPO_TO_PUSH=$3
 QUAY_API_URL="$QUAY_URL/api/v1"
 ARTIFACTORY_REPO_URL="$ARTIFACTORY_REPO_NAME.$ARTIFACTORY_URL"
 SCRIPTS_DIR="$TRAVIS_BUILD_DIR/.scripts"
-PATH_ALLOW_IMAGE_NAMES="$TRAVIS_BUILD_DIR/.scripts/ALLOW_IMAGE_NAMES.txt"
 PACKAGES_TO_CHANGE="[{\"name\":\"resilient\",\"version\":\"$PYTHON_LIBRARIES_VERSION\"},{\"name\":\"resilient-circuits\",\"version\":\"$PYTHON_LIBRARIES_VERSION\"},{\"name\":\"resilient-lib\",\"version\":\"$PYTHON_LIBRARIES_VERSION\"}]"
 DOCKERFILE_KEYWORD="registry.access.redhat.com"
 DOCKERFILE_WORDS_TO_INSERT="[\"\\n\", \"RUN pip install --upgrade pip\\n\", \"COPY ./new_requirements.txt /tmp/new_requirements.txt\\n\", \"RUN pip install -r /tmp/new_requirements.txt\\n\"]"
