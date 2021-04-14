@@ -196,7 +196,7 @@ class FunctionComponent(ResilientComponent):
 
             # add the task name to the description if one wasn't provided in the inputs
             if not values.get("Description"):
-                values["Description"] = u"CP4S Case {0}: {1}".format(incident_id, task["name"])
+                values["Description"] = u"IBM SOAR Case {0}: {1}".format(incident_id, task["name"])
             # description has a max length of 100
             if len(values.get("Description", "")) > 100:
                 values["Description"] = values["Description"][:100]
