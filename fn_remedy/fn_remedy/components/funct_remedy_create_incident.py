@@ -133,7 +133,7 @@ class FunctionComponent(ResilientComponent):
 
         dt_response = self.add_dt_row(incident_id, task, entry["values"])
 
-        results = rp.done(True, remedy_incident)
+        results = rp.done(True, entry)
         # pass the task back to Resilient to use in the post-script if we were successful
         results["content"]["task"] = task
         return results
