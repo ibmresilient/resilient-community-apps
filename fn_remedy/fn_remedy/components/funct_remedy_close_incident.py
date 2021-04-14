@@ -129,7 +129,7 @@ class FunctionComponent(ResilientComponent):
         if incident["values"]["Status"] not in CLOSED_LIST:
             remedy_payload["Status"] = "Resolved"
             remedy_payload["Status_Reason"] = "No Further Action Required"
-            remedy_payload["Resolution"] = "Closed from CP4S"
+            remedy_payload["Resolution"] = "Closed from IBM SOAR"
             incident, _ = remedy_client.update_form_entry(FORM_NAME, request_id, remedy_payload)
             closed.append(request_id)
             LOG.info("Successfully close Request ID {0}".format(remedy_payload))
