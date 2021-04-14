@@ -85,7 +85,7 @@ class FunctionComponent(ResilientComponent):
                     LOG.error("Received error response from Remedy when attempting to close Request ID {0}.\n"
                           "Check your remedy_payload input to ensure it matches the HPD:IncidentInterface_Create schema.\n"
                           "Continuing to the next ID.".format(request_id))
-                skipped.append(request_id)
+                skipped.append(incident)
                 continue # move on to the next row
             # close the incident if not already closed
             closed, skipped = self.update_incident_values(remedy_client, closed, skipped, incident, remedy_payload)
@@ -131,10 +131,10 @@ class FunctionComponent(ResilientComponent):
             remedy_payload["Status_Reason"] = "No Further Action Required"
             remedy_payload["Resolution"] = "Closed from IBM SOAR"
             incident, _ = remedy_client.update_form_entry(FORM_NAME, request_id, remedy_payload)
-            closed.append(request_id)
-            LOG.info("Successfully close Request ID {0}".format(remedy_payload))
+            closed.append(incident)
+            LOG.info("Successfully closed Request ID {0}".format(request_id))
         else:
-            skipped.append(request_id)
+            skipped.append(incident)
             LOG.info("Request ID {0} aready closed, resolved, or cancelled. Skipping this incident.".format(request_id))
         return closed, skipped
 
