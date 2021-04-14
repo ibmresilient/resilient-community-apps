@@ -59,14 +59,13 @@ class FunctionComponent(ResilientComponent):
             values.update(additional_data)
         return values
 
-    def add_dt_row(self, incident_id, task, request_id, values):
+    def add_dt_row(self, incident_id, task, values):
         """Adds a row to the datatable correlating the Resilient task
         to the Remedy incident.
 
         :param incident_id: Resilient incident ID
         :param task: task dictionary payload from Resilient
-        :param request_id: unique request ID for the Remedy incident, gather from the POST response
-        :param values: dictionary of values POSTed to Remedy
+        :param values: dictionary of Remedy Incident values
         :return: Resilient's response to the datatable request
         """
         # instantiate a datatable client
@@ -76,9 +75,9 @@ class FunctionComponent(ResilientComponent):
             # convert to mills and discard fractions of a second
             "timestamp": {"value": int(datetime.now().timestamp() * 1000)},
             "taskincident_id": {u"value": "{0}: {1}".format(task["id"], task["name"])},
-            "remedy_id": {"value": request_id},
+            "remedy_id": {"value": values["Request ID"]},
             "status": {"value": values["Status"]},
-            "extra": {"value": ''}
+            "extra": {"value": values["Incident Number"]}
         }
         LOG.info(u"Adding row to the remedy_linked_incidents_reference_table DataTable: {0}".format(row))
         dt_response = dt.dt_add_rows(row)
@@ -115,19 +114,24 @@ class FunctionComponent(ResilientComponent):
 
         LOG.info("Incident successfully posted to Remedy.")
         # capture the Incident Number
+        # note this is a temporary number for the request to create a new entry
+        # and this value will be reassigned to reflect the true value
+        # by getting the newly created object from Remedy
         incident_number = remedy_incident["values"]["Incident Number"]
 
         # get the newly created form entry object
         entries, status_code = remedy_client.query_form_entry(ENTRY_NAME, incident_number)
+        entry = entries["entries"][0]
+        # save the incident number so we can log it. this is the ID that shows in the Remedy UI
+        incident_number = entry["values"]["Incident Number"]
         # we expect only one result to be returned
         if len(entries["entries"]) > 1:
             LOG.debug("Multiple form entries in Remedy found matching Incident Number: {0}."
                       "The Request ID of the first entry will be written to the datatable.".format(incident_number))
-        # save the request ID
-        request_id = entries["entries"][0]["values"]["Request ID"]
+
         LOG.info("Correlated Request ID {0} to Incident Number {1}".format(request_id, incident_number))
 
-        dt_response = self.add_dt_row(incident_id, task, request_id, values)
+        dt_response = self.add_dt_row(incident_id, task, entry["values"])
 
         results = rp.done(True, remedy_incident)
         # pass the task back to Resilient to use in the post-script if we were successful
