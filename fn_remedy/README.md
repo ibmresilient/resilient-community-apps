@@ -162,6 +162,12 @@ Create a new incident in Remedy from a Resilient task.
 
 Remedy is a highly customizable product, and this integration was designed with those customizations in mind.
 
+Note that when creating an incident in Remedy via the REST API, any auto-routing that is configured in the Remedy platform will continue to apply as it would when creating
+a new incident. This can result in a discrepancy between the data that was submitted and the data that is present in Remedy once the incident object is actually created.
+For example, the payload sent to Remedy could indicate a Status of New for an incident (either directly or via a [template](#templating).) However, when that ticket is actually
+created, the auto-routing in Remedy could be configured to assign it to a user and update the Status to Assigned. This is expected, and the true status of the created incident
+will be reflected in the [datatable](#data-table---remedy-Linked-incidents-reference-table).
+
 **Templating**
 
 To facilitate the use of templates, none of the activity fields are required. If your Remedy server has a template defined that provides all required fields to create an incident, you may simply provided the template name and run the function. Note that it is necessary to manually enter the template name(s) so that they are available in the dropdown. We have provided a stock, out-of-the-box template name as an example.
