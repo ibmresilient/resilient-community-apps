@@ -111,18 +111,6 @@ matrix:
         - echo "Starting Python 3.6 Unit Tests - Package"
         - .scripts/run_tests.sh "$PACKAGE_NAME" "$PYPI_INDEX_TO_USE"
 
-    # Deploy job for publishing containers
-    - stage: publish master
-      name: Building Quay containers
-      python: 3.6
-      services:
-        - docker
-      install: skip
-      script:
-        - source .scripts/updated_integrations_build_images.sh QUAY
-        # if there are failed containers send a message with their list
-        - if [[ -n "${FAILED_CONTAINERS[*]}" ]]; then .scripts/send_notification.sh "Containers not built ${FAILED_CONTAINERS[*]}" failure; return 1; fi
-
     # Jobs that perform static analysis; code quality, security scans etc
     - stage: static analysis
       name: Py2.7 Bandit Security Scan
@@ -133,6 +121,7 @@ matrix:
         - pip install bandit==1.6.2
       script:
         - .scripts/run_bandit_scan_on_updated_packages.sh
+
     - stage: static analysis
       name: Py3.6 Bandit Security Scan
       python: 3.6
@@ -142,6 +131,7 @@ matrix:
         - pip install bandit
       script:
         - .scripts/run_bandit_scan_on_updated_packages.sh
+
     - stage: static analysis
       name: Pylint
       python: 3.6
@@ -151,6 +141,7 @@ matrix:
         - pip install pylint
       script:
         - .scripts/pylint.sh
+
     - stage: static analysis
       name: Safety Checker
       python: 3.6
@@ -161,10 +152,6 @@ matrix:
       script:
         - .scripts/run_safety_scan_for_cve.sh
 
-    # Next job is started when a tag is pushed of the form container/<name> or a pull request is created
-    # where <name> is a name of an integration directory whose container
-    # will be build and pushed to artifactory with label :latest and :<version>
-    # ARTIFACTORY_URL should be sec-resilient-docker-local.artifactory.swg-devops.com
     - stage: build images and packages
       name: Building containers and packages
       services:
@@ -197,7 +184,7 @@ matrix:
         - PYTHON_LIBRARIES_VERSION=$(echo $TRAVIS_TAG | cut -d "/" -f 2)
         - IMAGE_TO_REBUILD=$(echo $TRAVIS_TAG | cut -d "/" -f 3)
         - REPO_TO_PUSH=$(echo $TRAVIS_TAG | cut -d "/" -f 4)
-        - .scripts/rebuild_container_images.sh $PYTHON_LIBRARIES_VERSION $IMAGE_TO_REBUILD $REPO_TO_PUSH
+        - .scripts/rebuild_images.sh $PYTHON_LIBRARIES_VERSION $IMAGE_TO_REBUILD $REPO_TO_PUSH
 
     - stage: successful notification
       # To make sure that success is sent once per job we create a separate stage for it
@@ -208,7 +195,3 @@ matrix:
 # If one job fails the whole build fails, so we can send it here
 # after_failure:
 #   - .scripts/send_notification.sh "" failure
-
-before_install:
-  - echo `[[ ( -z $TRAVIS_TAG && "$TRAVIS_COMMIT_MESSAGE" =~ "$DEV_DEPS_KEYWORD" ) || "$TAG_MSG" =~ "$DEV_DEPS_KEYWORD" ]]; echo $?`
-  - env
