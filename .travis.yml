@@ -6,6 +6,7 @@ env:
     - PATH_ALLOW_IMAGE_NAMES="$TRAVIS_BUILD_DIR/.scripts/ALLOW_IMAGE_NAMES.txt"
     - PATH_PIP_REQ_MAIN="$TRAVIS_BUILD_DIR/.scripts/requirements_main.txt"
     - PATH_PIP_REQ_TESTS="$TRAVIS_BUILD_DIR/.scripts/requirements_tests.txt"
+    - SCRIPTS_DIR="$TRAVIS_BUILD_DIR/.scripts"
 
     - PYPI_INDEX="https://pypi.org/simple"
     - ARTIFACTORY_PYPI_INDEX="https://$ARTIFACTORY_USERNAME:$ARTIFACTORY_PASSWORD@na.artifactory.swg-devops.com/artifactory/api/pypi/sec-resilient-team-integrations-pypi-virtual/simple"
