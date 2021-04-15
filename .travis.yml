@@ -70,7 +70,7 @@ matrix:
         - RUN_TYPE=unit_test_main TOXENV=py27
       install:
         - pip install -U -r "$PATH_PIP_REQ_MAIN"
-        - .scripts/install_tests_deps.sh
+        - pip install -U -r "$PATH_PIP_REQ_TESTS"
       script:
         - echo "Starting Python 2.7 Unit Tests - Main"
         - .scripts/run_tests.sh "ALL" "$PYPI_INDEX_TO_USE"
@@ -82,7 +82,7 @@ matrix:
         - RUN_TYPE=unit_test_main TOXENV=py36
       install:
         - pip install -U -r "$PATH_PIP_REQ_MAIN"
-        - .scripts/install_tests_deps.sh
+        - pip install -U -r "$PATH_PIP_REQ_TESTS"
       script:
         - echo "Starting Python 3.6 Unit Tests - Main"
         - .scripts/run_tests.sh "ALL" "$PYPI_INDEX_TO_USE"
@@ -94,7 +94,7 @@ matrix:
         - RUN_TYPE=unit_test_package TOXENV=py27
       install:
         - pip install -U -r "$PATH_PIP_REQ_MAIN"
-        - .scripts/install_tests_deps.sh
+        - pip install -U -r "$PATH_PIP_REQ_TESTS"
       script:
         - echo "Starting Python 2.7 Unit Tests - Package"
         - .scripts/run_tests.sh "$PACKAGE_NAME" "$PYPI_INDEX_TO_USE"
@@ -106,7 +106,7 @@ matrix:
         - RUN_TYPE=unit_test_package TOXENV=py36
       install:
         - pip install -U -r "$PATH_PIP_REQ_MAIN"
-        - .scripts/install_tests_deps.sh
+        - pip install -U -r "$PATH_PIP_REQ_TESTS"
       script:
         - echo "Starting Python 3.6 Unit Tests - Package"
         - .scripts/run_tests.sh "$PACKAGE_NAME" "$PYPI_INDEX_TO_USE"
