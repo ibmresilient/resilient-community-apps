@@ -344,7 +344,7 @@ inputs.remedy_payload = json.dumps(payload)
 noteText = "<h5> Remedy Create Incident</h5>"
 
 if results["success"]:
-  noteText += "<p>Successfully sent task {0} \"{1}\" to Remedy as Incident Number {2} and Request ID {3}.</p>"\
+  noteText += "<p>Successfully sent task {0} \"{1}\" to Remedy as Incident Number {2} (UI name) and Request ID {3} (API name).</p>"\
   "".format(results["content"]["task"]["id"], results["content"]["task"]["name"],\
   results["content"]["values"]["Incident Number"], results["content"]["values"]["Request ID"])
 else:
@@ -427,12 +427,10 @@ payload = {}
 # These values will be added/updated on the target Remedy incident,
 # so they must conform with the "HPD:IncidentInterface_Create" schema
 
-# payload["Status_Reason"] = "foo"
+payload["Status_Reason"] = "foo"
 # payload["policy_name"] = "bar"
 
 inputs.remedy_payload = json.dumps(payload) if payload else ''
-
-
 
 ```
 
@@ -446,20 +444,24 @@ inputs.remedy_payload = json.dumps(payload) if payload else ''
 noteText = "<h5>Remedy Close Incident:</h5>"
 
 if results["success"]:
-  if results["content"]["closed"]:
-    noteText += "<p>The following Request ID's were matched in Remedy and the incident was successfully closed:</p>"
-    for item in results["content"]["closed"]:
-      noteText += "<p>    {0}</p>".format(item)
-  if results["content"]["skipped"]:
-    noteText += "<p>The following Request ID's were not able to be closed. Common reasons include that the incident has been previously closed, " \
-    "the incident has been deleted, or the payload sent to Remedy was incomplete according to the requirements of your specific system:</p>"
-    for item in results["content"]["skipped"]:
-      noteText += "<p>    {0}</p>".format(item)
+  if not results["content"]["closed"] and not results["content"]["skipped"]:
+    "<p>No record of task ID {0} in Remedy. Nothing was updated.</p>".format(task.id)
+  else:
+    if results["content"]["closed"]:
+      noteText += "<p>The following incidents were matched in Remedy and the successfully closed:</p>"
+      for item in results["content"]["closed"]:
+        noteText += "<p>    Incident Number {0}, Request ID: {1}</p>".format(item["values"]["Incident Number"], item["values"]["Request ID"])
+    if results["content"]["skipped"]:
+      noteText += "<p>The following incidents were not able to be closed. Common reasons include that the incident has been previously closed, " \
+      "the incident has been deleted, or the payload sent to Remedy was incomplete according to the requirements of your specific system:</p>"
+      for item in results["content"]["skipped"]:
+        noteText += "<p>    Incident Number {0}, Request ID: {1}</p>".format(item["values"]["Incident Number"], item["values"]["Request ID"])
 else:
   noteText += "<p>Function failed to complete.</p>"
 
 richText = helper.createRichText(noteText)
 incident.addNote(richText)
+
 
 ```
 
