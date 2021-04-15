@@ -3,11 +3,23 @@ python: 3.6
 os: linux
 env:
   global:
-    - PACKAGE_NAME=`python .scripts/get_package_name_from_cmt_msg.py "$TRAVIS_COMMIT_MESSAGE"`
     - PATH_ALLOW_IMAGE_NAMES="$TRAVIS_BUILD_DIR/.scripts/ALLOW_IMAGE_NAMES.txt"
+    - PATH_PIP_REQ_MAIN="$TRAVIS_BUILD_DIR/.scripts/requirements_main.txt"
+    - PATH_PIP_REQ_TESTS="$TRAVIS_BUILD_DIR/.scripts/requirements_tests.txt"
+
+    - PYPI_INDEX="https://pypi.org/simple"
+    - ARTIFACTORY_PYPI_INDEX="https://$ARTIFACTORY_USERNAME:$ARTIFACTORY_PASSWORD@na.artifactory.swg-devops.com/artifactory/api/pypi/sec-resilient-team-integrations-pypi-virtual/simple"
+    - ARTIFACTORY_REPO_LINK="https://na.artifactory.swg-devops.com/artifactory/sec-resilient-team-integrations-generic-local"
+
+    - PACKAGE_NAME=`python .scripts/get_package_name_from_cmt_msg.py "$TRAVIS_COMMIT_MESSAGE"`
+
+    - KEYWORD_DEV_DEPS='[dev-deps]'
+    - USE_ARTIFACTORY_DEPS=`[[ "$TRAVIS_COMMIT_MESSAGE" != *"$KEYWORD_DEV_DEPS"* ]]; echo $?`
+    - PYPI_INDEX_TO_USE=`if [ $USE_ARTIFACTORY_DEPS == 1 ]; then echo "$ARTIFACTORY_PYPI_INDEX"; else echo "$PYPI_INDEX"; fi`
+    - DEV_DEPS=`[[ ( -z $TRAVIS_TAG && "$LATEST_COMMIT_MSG" =~ "$DEV_DEPS_KEYWORD" ) || "$TAG_MSG" =~ "$DEV_DEPS_KEYWORD" ]]; echo $?`
+
     - TEST_RESILIENT_APPLIANCE=staging2.internal.resilientsystems.com
     - OCTOKIT_API_ENDPOINT="https://github.ibm.com/api/v3/"
-    - PIP_FIND_LINKS="$TRAVIS_BUILD_DIR/pkgs"
     - secure: VU1PL2bWOE+E3ieBz/0Oa2hIRXGeSFYubE9SYh3dH541h8V8FWE0kGt8P6xdZOGmf9xNsDL/O+rKqrq5TCKTdUQqFXm7RCD//iQrHUcbu2YU38XPpBQrWxSZs29sR3R6UkUypZahHmn/ghjgZnRxQIWGscYPvvNCiOP9X85ckmVaKLYPwW0HPH7vIKs9zcT8tEyRDANokc0BQDjeVu0s29FeKGyy9JVbuye8/1TmVkQWBvutvcQ/z/mOQ7dOO3fW0wkVwOHPF9FtBc79WzjK5w/Ej30EWHC5zdRG46+2FLcqKSHvkyuV59f0ojxLzRmeR1ueS37pNncmXfVMREwtiIYN/Dd3isLsg14RK1leu/JHiPxfQtz2TV4+yeVO4aZk+Bs/JLf1ZbXAE+A71hIH6rTUpEBq1S8qjKsfTPEWLg1cuq1ujf2WOAumdIf8rSOnQ9EbEfBlm3N8Wo9RjXbEx6hq+UHr7L28tw0u00gcAex6Ky2eRk+USFnXBHs/Kf5i29CWzw4Lcnb2hPa0bup3yNQuss/Yy+cQO5tDW8jJPP8joR5Fvr8fJZVtGlTGp09odHcrDGKvbdlf0gVmVDYawKi0v4m0URCKVy0vYAbzVOgZF46nW+VfcexiLxomwYpKeltigk+L52aV5DIodfuxS9aB6IJtEYSTO8Mf+Yo2x8Q=
     - secure: kr5Zz5frfrGOeuAylefGbDhY5s/YwyRhktuAly1ovOn/7Q3OJYjTq6h7wvnt1KQ/YeSdA+bxwOhWKbYHPQHAhovyo/5gsII7LruSs7VjdcD9tDoaYEoDBP7nki+NGr+dBVwrooGJ3f7TbuZs+4OSyPWD2FdN4PsOYLof4soDEW7C0cTP2KZ/wNGDjBGB2stOb6a5h4MQSohx+7B795noUoK5ojmygZObIGSDWmahR4kzCm+rEVLlMV0ptDCBXvn4xmJLCz5UOZhR27ckuiW342vNxShlms+rwWcvoxwbj61Qn3MEf9S9D59aJ+n4+u9Kb3VD4HJjlQ3rWZ/DADPfp7h6XOmfrQq3Xj3sQ4K2+8RMSFHdxWPsmhWd/Aty+YmWjoOnewoBfFaDUzFRURqwO3K+oh1H0IALTOTYQSYEeuVfi/+mwJRkKh0+IgvgscL5/bo+nVnQBk4FpWJRHV0x2fWiG8DHCKmInkkFSDHax3dHc9pYZXQTdNdfvsJRtc0rEn6GyVnRMia1TKLpB1joRhb7mkyc7pgDSatvV9W6+v6+evplHFxS7lkm9gqlW/ygJzPVYx7UaFuqo9cOi/c8sR6qf7NUTUi9Aa4aqY6qHNrkxfh7+5ck7wLTWmE0WL+0r3Z09Zg746SIGYqLrFQJZPn+JanFEy0q7kAU2Zr8vgE=
     - MASTER_BUILD=$( [[ $TRAVIS_BRANCH == "master"  &&  $TRAVIS_EVENT_TYPE != "pull_request" ]]; echo $? )
@@ -15,12 +27,7 @@ env:
     - LATEST_COMMIT_MSG=`if [[ $TRAVIS_EVENT_TYPE == "pull_request" ]]; then git --no-pager log --format=%B -n 1 $(echo $TRAVIS_COMMIT_RANGE | tr '.' '\n' | tail -n 1); else echo $TRAVIS_COMMIT_MESSAGE; fi`
     - TAG_MSG=`git tag -ln --format '%(subject)' $(git describe --tags --abbrev=0) | head -n 1`
     # this checks if commit message or a tag message if it's a tag push have [dev-deps] in them
-    - DEV_DEPS_KEYWORD='[dev-deps]'
-    - DEV_DEPS=`[[ ( -z $TRAVIS_TAG && "$LATEST_COMMIT_MSG" =~ "$DEV_DEPS_KEYWORD" ) || "$TAG_MSG" =~ "$DEV_DEPS_KEYWORD" ]]; echo $?`
-    - ARTIFACTORY_PYPI_INDEX="https://$ARTIFACTORY_USERNAME:$ARTIFACTORY_PASSWORD@na.artifactory.swg-devops.com/artifactory/api/pypi/sec-resilient-team-integrations-pypi-virtual/simple"
-    - ARTIFACTORY_REPO_LINK=https://na.artifactory.swg-devops.com/artifactory/sec-resilient-team-integrations-generic-local
     - GITHUB_PR_COMMENT_URL=https://api.github.ibm.com/repos/${TRAVIS_REPO_SLUG}/issues/${TRAVIS_PULL_REQUEST}/comments
-    - PYPI_INDEX="https://pypi.org/simple"
 # Exclude these branches from having jobs ran.
 branches:
   except:
@@ -62,10 +69,11 @@ matrix:
       env:
         - RUN_TYPE=unit_test_main TOXENV=py27
       install:
+        - pip install -U -r "$PATH_PIP_REQ_MAIN"
         - .scripts/install_tests_deps.sh
       script:
         - echo "Starting Python 2.7 Unit Tests - Main"
-        - .scripts/run_tests.sh ALL
+        - .scripts/run_tests.sh "ALL" "$PYPI_INDEX_TO_USE"
 
     - stage: run all tests
       name: Python 3.6 Unit Tests - Main
@@ -73,10 +81,11 @@ matrix:
       env:
         - RUN_TYPE=unit_test_main TOXENV=py36
       install:
+        - pip install -U -r "$PATH_PIP_REQ_MAIN"
         - .scripts/install_tests_deps.sh
       script:
         - echo "Starting Python 3.6 Unit Tests - Main"
-        - .scripts/run_tests.sh ALL
+        - .scripts/run_tests.sh "ALL" "$PYPI_INDEX_TO_USE"
 
     - stage: run package tests
       name: Python 2.7 Unit Tests - Package
@@ -84,10 +93,11 @@ matrix:
       env:
         - RUN_TYPE=unit_test_package TOXENV=py27
       install:
+        - pip install -U -r "$PATH_PIP_REQ_MAIN"
         - .scripts/install_tests_deps.sh
       script:
         - echo "Starting Python 2.7 Unit Tests - Package"
-        - .scripts/run_tests.sh $PACKAGE_NAME
+        - .scripts/run_tests.sh "$PACKAGE_NAME" "$PYPI_INDEX_TO_USE"
 
     - stage: run package tests
       name: Python 3.6 Build and Run Tests
@@ -95,10 +105,11 @@ matrix:
       env:
         - RUN_TYPE=unit_test_package TOXENV=py36
       install:
+        - pip install -U -r "$PATH_PIP_REQ_MAIN"
         - .scripts/install_tests_deps.sh
       script:
         - echo "Starting Python 3.6 Unit Tests - Package"
-        - .scripts/run_tests.sh $PACKAGE_NAME
+        - .scripts/run_tests.sh "$PACKAGE_NAME" "$PYPI_INDEX_TO_USE"
 
     # Deploy job for publishing containers
     - stage: publish master
@@ -177,8 +188,9 @@ matrix:
       services:
         - docker
       install:
-        - sudo apt-get install jq
+        - pip install -U -r "$PATH_PIP_REQ_MAIN"
         - pip install resilient-sdk
+        - sudo apt-get install jq
       script:
         # This will take split the git tag on '/'
         # E.g.: tag is 'rebuild/40.1.1880/fn_utilities/ARTIFACTORY' OR rebuild/40.1.1880/ALL/QUAY
@@ -199,6 +211,4 @@ matrix:
 
 before_install:
   - echo `[[ ( -z $TRAVIS_TAG && "$TRAVIS_COMMIT_MESSAGE" =~ "$DEV_DEPS_KEYWORD" ) || "$TAG_MSG" =~ "$DEV_DEPS_KEYWORD" ]]; echo $?`
-  - pip install --upgrade pip
-  - pip install setuptools
   - env

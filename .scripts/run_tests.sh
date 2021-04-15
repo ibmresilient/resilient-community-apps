@@ -2,17 +2,25 @@
 
 # param $1: (required) which package_name to run the tests for or ALL.
 #           If ALL, run tox for all packages in ALLOW_IMAGE_NAMES.txt
+# param $2: (required) the PYPI_INDEX to use when running tox
+#            "https://pypi.org/simple" or $ARTIFACTORY_PYPI_INDEX
 
 ###############
 ## Variables ##
 ###############
 PACKAGE_NAME=$1
+PYPI_INDEX_TO_USE=$2
 
 ##################
 ## Check params ##
 ##################
 if [ -z "$1" ] ; then
     echo "ERROR: Must provide PACKAGE_NAME or 'ALL' as first parameter"
+    exit 1
+fi
+
+if [ -z "$1" ] ; then
+    echo "ERROR: Must provide PYPI_INDEX_TO_USE as second parameter"
     exit 1
 fi
 
@@ -43,7 +51,12 @@ if [ "$PACKAGE_NAME" == "ALL" ] ; then
         else
             print_msg "Running tests for $p"
             int_path=$TRAVIS_BUILD_DIR/$p
-            tox -c $int_path -- --resilient_email 'integrations@example.org' --resilient_password 'supersecret' --resilient_host 'example.com' --resilient_org 'Test Organization' -m "not livetest"
+            tox -c $int_path -i $PYPI_INDEX_TO_USE -- \
+            --resilient_email 'integrations@example.org' \
+            --resilient_password 'supersecret' \
+            --resilient_host 'example.com' \
+            --resilient_org 'Test Organization' \
+            -m "not livetest"
             print_msg "Test complete for $p"
         fi
     done
@@ -56,6 +69,11 @@ else
 
     print_msg "Running tests for $PACKAGE_NAME"
     int_path=$TRAVIS_BUILD_DIR/$PACKAGE_NAME
-    tox -c $int_path -- --resilient_email 'integrations@example.org' --resilient_password 'supersecret' --resilient_host 'example.com' --resilient_org 'Test Organization' -m "not livetest"
+    tox -c $int_path -i $PYPI_INDEX_TO_USE -- \
+    --resilient_email 'integrations@example.org' \
+    --resilient_password 'supersecret' \
+    --resilient_host 'example.com' \
+    --resilient_org 'Test Organization' \
+    -m "not livetest"
     print_msg "Test complete for $p"
 fi
