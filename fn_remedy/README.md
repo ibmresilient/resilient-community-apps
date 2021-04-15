@@ -365,6 +365,8 @@ Close an incident ticket in Remedy by modifying its status. The function will ma
 
 When a task is closed under a case, an automatic rule will trigger containing this function. If a row in the Remedy datatable matches the name and ID of the task just closed, the above logic will trigger to ensure that the corresponding incident in Remedy is also closed.
 
+In the event that multiple rows in the datatable match the target task (a task has been raised to Remedy more than once), the function will iterate over those rows to ensure that each of the corresponding incidents in Remedy are closed.
+
  ![screenshot: fn-remedy-close-incident ](./doc/screenshots/fn-remedy-close-incident.png)
 
 <details><summary>Inputs:</summary>
@@ -477,7 +479,7 @@ remedy_linked_incidents_reference_table
 #### Columns:
 | Column Name | API Access Name | Type | Tooltip |
 | ----------- | --------------- | ---- | ------- |
-| Extra | `extra` | `textarea` | - |
+| Extra | `extra` | `textarea` | Incident ID of the Remedy form entry |
 | Remedy ID | `remedy_id` | `text` | Request ID of the Remedy form entry |
 | Status | `status` | `textarea` | Last status applied to the Remedy Incident |
 | Task ID | `taskincident_id` | `text` | ID of the Task and its description |
@@ -485,6 +487,28 @@ remedy_linked_incidents_reference_table
 
 ---
 
+### Data explanation
+The Remedy Linked Incidents Reference Table will be updated when either the `Remedy: Create Incident` or `Remedy: Close Incident`
+functions complete.
+
+#### Remedy: Create Incident
+Once an incident is posted to Remedy, the auto-routing feature has the potential to alter the values of some of the fields within the Remedy incident 
+(see [Activity Fields](#activity-fields) for more information on this). Due to this potential, the integration will fetch the incident back from the 
+Remedy server after it has been created to ensure the datatable is updated with accurate information. Once the incident data is received from Remedy, relevant
+fields are recorded in the datatable.
+
+One item to note is the difference between the `Remedy ID` and `Extra` columns. As noted in [columns](#columns), above, both of these columns contain some sort of ID
+value relevant to the Remedy Incident.
+
+The `Remedy ID` column contains the "Request ID" of the form entry. Often, this value is of the form `INCxxxxxxx|INCxxxxxxx`.
+Although this notation may appear to be two numbers separated by the `|` character, the entire string together is a single Request ID value.
+This ID is used to refer to the incident over the API.
+
+The `Extra` columns contains the "Incident Number" of the form entry. Often this value is of the form `INCxxxxx`, but will likely not look like either component of
+the Request ID. This Incident Number is the ID that appears in the UI for the incident inside the Incident Management Console.
+
+#### Remedy: Close Incident
+Once an Incident is Closed in Remedy, the datatable will be updated with the new status of that incident.
 
 
 ## Rules
