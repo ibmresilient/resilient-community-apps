@@ -28,12 +28,12 @@ branches:
     - /^_.*$/
 
 stages:
-  - name: all tests
-  # TODO comment back in if: branch = master AND type = cron
+  - name: run all tests
+    if: branch = master AND type = cron
+  - name: run package tests
+    if: branch != master
   # Every commit not on master runs tests and performs static analysis
   - name: static analysis
-    if: branch != master OR type in (pull_request)
-  - name: run tests
     if: branch != master OR type in (pull_request)
   # For every commit in pull_request, or on special tag - images and packages are built and pushed to Artifactory
   - name: build images and packages
@@ -56,9 +56,9 @@ matrix:
 
   include:
 
-    - stage: all tests
-      python: 2.7
+    - stage: run all tests
       name: Python 2.7 Unit Tests - Main
+      python: 2.7
       env:
         - RUN_TYPE=unit_test_main TOXENV=py27
       install:
@@ -67,9 +67,9 @@ matrix:
         - echo "Starting Python 2.7 Unit Tests - Main"
         - .scripts/run_tests.sh ALL
 
-    - stage: all tests
-      python: 3.6
+    - stage: run all tests
       name: Python 3.6 Unit Tests - Main
+      python: 3.6
       env:
         - RUN_TYPE=unit_test_main TOXENV=py36
       install:
@@ -77,6 +77,28 @@ matrix:
       script:
         - echo "Starting Python 3.6 Unit Tests - Main"
         - .scripts/run_tests.sh ALL
+
+    - stage: run package tests
+      name: Python 2.7 Unit Tests - Package
+      python: 2.7
+      env:
+        - RUN_TYPE=unit_test_package TOXENV=py27
+      install:
+        - .scripts/install_tests_deps.sh
+      script:
+        - echo "Starting Python 2.7 Unit Tests - Package"
+        - .scripts/run_tests.sh $PACKAGE_NAME
+
+    - stage: run package tests
+      name: Python 3.6 Build and Run Tests
+      python: 3.6
+      env:
+        - RUN_TYPE=unit_test_package TOXENV=py36
+      install:
+        - .scripts/install_tests_deps.sh
+      script:
+        - echo "Starting Python 3.6 Unit Tests - Package"
+        - .scripts/run_tests.sh $PACKAGE_NAME
 
     # Deploy job for publishing containers
     - stage: publish master
@@ -90,24 +112,6 @@ matrix:
         # if there are failed containers send a message with their list
         - if [[ -n "${FAILED_CONTAINERS[*]}" ]]; then .scripts/send_notification.sh "Containers not built ${FAILED_CONTAINERS[*]}" failure; return 1; fi
 
-    - stage: run tests
-      name: Python 2.7 Build and Run Tests
-      python: 2.7
-      env:
-        - TOXENV=py27 TEST_RESILIENT_ORG="Resilient Integrations - Test"
-      install:
-        - .scripts/install_tests_deps.sh
-      script:
-        - echo "2.7 push test" && .scripts/run_most_recent_tests.sh
-    - stage: run tests
-      name: Python 3.6 Build and Run Tests
-      python: 3.6
-      env:
-        - TOXENV=py36 TEST_RESILIENT_ORG="Resilient Integrations - Test"
-      install:
-        - .scripts/install_tests_deps.sh
-      script:
-        - echo "3.6 push test" && .scripts/run_most_recent_tests.sh
     # Jobs that perform static analysis; code quality, security scans etc
     - stage: static analysis
       name: Py2.7 Bandit Security Scan
