@@ -24,7 +24,7 @@ edit_all_incidents_fields
 #
 ## tasks permissions
 #edit_incident_public_task_fields
-#read_all_private_tasks
+read_all_private_tasks
 #edit_incident_private_task_member
 #edit_all_private_task_notes
 #edit_incident_public_task_member
