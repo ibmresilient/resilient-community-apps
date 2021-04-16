@@ -113,12 +113,12 @@ for image_name in "${IMAGE_NAMES[@]}"; do
         resilient_sdk_package_pass=0
         docker_build_pass=0
 
-        int_path="$TRAVIS_BUILD_DIR/$image_name"
-        path_current_requirements="$int_path/current_requirements.txt"
-        path_new_requirements="$int_path/new_requirements.txt"
-        path_dockerfile="$int_path/Dockerfile"
-        int_version=$(python "$int_path/setup.py" --version)
-        print_msg "int_path:\t\t\t$int_path\npath_current_requirements:\t$path_current_requirements\npath_new_requirements:\t\t$path_new_requirements\npath_dockerfile:\t\t$path_dockerfile\nint_version:\t\t\t$int_version"
+        package_path="$TRAVIS_BUILD_DIR/$image_name"
+        path_current_requirements="$package_path/current_requirements.txt"
+        path_new_requirements="$package_path/new_requirements.txt"
+        path_dockerfile="$package_path/Dockerfile"
+        int_version=$(python "$package_path/setup.py" --version)
+        print_msg "package_path:\t\t\t$package_path\npath_current_requirements:\t$path_current_requirements\npath_new_requirements:\t\t$path_new_requirements\npath_dockerfile:\t\t$path_dockerfile\nint_version:\t\t\t$int_version"
 
         docker_tag="$image_name:$int_version"
         quay_io_tag="$QUAY_URL/$QUAY_USERNAME/$docker_tag"
@@ -148,7 +148,7 @@ for image_name in "${IMAGE_NAMES[@]}"; do
         python $SCRIPTS_DIR/insert_into_Dockerfile.py $path_dockerfile $DOCKERFILE_KEYWORD "$DOCKERFILE_WORDS_TO_INSERT"
 
         print_msg "Packaging $image_name with resilient-sdk"
-        resilient-sdk package -p $int_path || resilient_sdk_package_pass=$?
+        resilient-sdk package -p $package_path || resilient_sdk_package_pass=$?
 
         print_msg "Rebuilding: $image_name"
 
@@ -159,7 +159,7 @@ for image_name in "${IMAGE_NAMES[@]}"; do
             docker build \
             --quiet \
             -t $docker_tag \
-            $int_path || docker_build_pass=$?
+            $package_path || docker_build_pass=$?
 
             # if passes docker build tag it
             if [ $docker_build_pass = 0 ] ; then

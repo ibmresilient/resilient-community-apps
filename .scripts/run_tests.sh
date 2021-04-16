@@ -50,8 +50,8 @@ if [ "$PACKAGE_NAME" == "ALL" ] ; then
             print_msg "Skipping comment: $p..."
         else
             print_msg "Running tests for $p"
-            int_path=$TRAVIS_BUILD_DIR/$p
-            tox -c $int_path -i $PYPI_INDEX_TO_USE -- \
+            package_path=$TRAVIS_BUILD_DIR/$p
+            tox -c $package_path -i $PYPI_INDEX_TO_USE -- \
             --resilient_email 'integrations@example.org' \
             --resilient_password 'supersecret' \
             --resilient_host 'example.com' \
@@ -68,8 +68,8 @@ else
     fi
 
     print_msg "Running tests for $PACKAGE_NAME"
-    int_path=$TRAVIS_BUILD_DIR/$PACKAGE_NAME
-    tox -c $int_path -i $PYPI_INDEX_TO_USE -- \
+    package_path=$TRAVIS_BUILD_DIR/$PACKAGE_NAME
+    tox -c $package_path -i $PYPI_INDEX_TO_USE -- \
     --resilient_email 'integrations@example.org' \
     --resilient_password 'supersecret' \
     --resilient_host 'example.com' \
