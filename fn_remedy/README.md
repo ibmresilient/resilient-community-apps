@@ -60,8 +60,8 @@ Resilient Circuits Components for 'fn_remedy.' This integration provides the cap
 <!--
   List the Key Features of the Integration
 -->
-* Send CP4S Case tasks to Remedy as Incidents
-* Close Remedy Incidents from CP4S
+* Send IBM SOAR Case tasks to Remedy as Incidents
+* Close Remedy Incidents from IBM SOAR
 
 ---
 
@@ -124,18 +124,18 @@ This app requires Remedy IT Service Management Suite 20.x or above with AR Serve
 * To install or uninstall an App on _IBM Cloud Pak for Security_, see the documentation at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs) and follow the instructions above to navigate to Orchestration and Automation.
 
 ### App Configuration
-The following table provides the settings you need to configure the app. These settings are made in the app.config file. See the documentation discussed in the Requirements section for the procedure.
+The following table provides the settings you need to configure the app. These settings are made in the app.config file. See the documentation discussed in the [Requirements](#requirements) section for the procedure.
 
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
-| **remedy_host** | Yes | `<example.domain>` | *Hostname for the Remedy instance* |
+| **remedy_host** | Yes | `<example.domain>` | *Hostname or IP for the Remedy instance.* |
 | **remedy_user** | Yes | `<example_user>` | *Username to use to authenticate with Remedy.* |
 | **remedy_password** | Yes | `xxx` | *Password to use to authenticate with Remedy.* |
-| **max_datatable_rows** | No | `30` | *Max number of datatable rows to return from the Reilient API when closing an Incident.* |
-| remedy_port | No | `8443` | *Port number where the Remedy REST API is exposed.* |
-| verifye | No | `true` | *Set to `true` to make verified request to Remedy, `false` otherwise.* |
-| http_proxy | No | `example.domain` | *http proxy for request traffic* |
-| http_proxy | No | `example.domain` | *https proxy for request traffic* |
+| **max_datatable_rows** | No | `30` | *Max number of datatable rows to return from the Resilient API when closing an Incident.* |
+| remedy_port | No | `8443` | *Port number over which the Remedy REST API is exposed.* |
+| verify | No | `true` | *Set to `true` to make verified requests to Remedy, `false` otherwise.* |
+| http_proxy | No | `example.domain` | *http proxy for request traffic.* |
+| http_proxy | No | `example.domain` | *https proxy for request traffic.* |
 
 ### Custom Layouts
 <!--
@@ -163,30 +163,30 @@ Create a new incident in Remedy from a Resilient task.
 Remedy is a highly customizable product, and this integration was designed with those customizations in mind.
 
 Note that when creating an incident in Remedy via the REST API, any auto-routing that is configured in the Remedy platform will continue to apply as it would when creating
-a new incident. This can result in a discrepancy between the data that was submitted and the data that is present in Remedy once the incident object is actually created.
-For example, the payload sent to Remedy could indicate a Status of New for an incident (either directly or via a [template](#templating).) However, when that ticket is actually
+a new incident in the user interface. This can result in a discrepancy between the data that was submitted by the integration and the data that is present in Remedy once the incident object is actually created.
+For example, the payload sent to Remedy by the integration could indicate a Status of New for an incident (either directly or via a [template](#templating).) However, when that ticket is actually
 created, the auto-routing in Remedy could be configured to assign it to a user and update the Status to Assigned. This is expected, and the true status of the created incident
 will be reflected in the [datatable](#data-table---remedy-Linked-incidents-reference-table).
 
 **Templating**
 
-To facilitate the use of templates, none of the activity fields are required. If your Remedy server has a template defined that provides all required fields to create an incident, you may simply provided the template name and run the function. Note that it is necessary to manually enter the template name(s) so that they are available in the dropdown. We have provided a stock, out-of-the-box template name as an example.
+To facilitate the use of templates, none of the activity fields are required. If your Remedy server has a template defined that provides all required fields to create an incident, you may simply provided the template name and use this function. Note that it is necessary to manually enter the template name(s) so that they are available in the dropdown. We have provided a stock, out-of-the-box template name as an example. Other template names can be added as necessary by modifying this activity field within the Customization Settings of the platform.
 
 **Other Common Fields**
 
 For convenience, several activity fields have been created to handle input for commonly used fields in Remedy such as Status, Impact, and Urgency. These activity fields are not required, as templates can also provide those values. Note that if a template and activity field provide the same value, the activity field will take precedence over the template.
 
-Please note that the user has the ability to customize what values appear in the dropdown menu for each activity field. This action will likely be necessary if not taking advantage of the Remedy's templating functionality via this integration.
+Please note that the user has the ability to customize what values appear in the dropdown menu for each activity field. This action will likely be necessary if not taking advantage of the Remedy's templating functionality via this integration. Activity fields can be modified within the Customization Settings of the platform.
 
 **Additional Data**
 
 Finally, the Additional Data activity field allows the mapping of any other values to the Remedy form not covered in the above activity fields, including custom defined fields. The fields must be provided as a Python-like dictionary. For example:
 
 ```python
-{"Short Description": "example incident text", "my_custom_field": 1, }
+{"Short Description": "example incident text", "my_custom_field": 1}
 ```
 
-The keys provided in this dictionary string must match the API names of fields in the `HPD:IncidentInterface` form. To retrieve the schema for this form on the Remedy server, send an HTTP OPTIONS request to `http://serverName/api/arsys/v1/entry/HPD:Interface_Create`. This is the endpoint used to create Remedy incidents over the API, and thus the response will indicate which fields are available to map and which values are acceptable.
+The keys provided in this dictionary string must match the API names of fields in the `HPD:IncidentInterface` form. To retrieve the schema for this form on the Remedy server, send an HTTP OPTIONS request to `http://serverName/api/arsys/v1/entry/HPD:IncidentInterface_Create`. This is the endpoint used to create Remedy incidents over the API, and thus the response will indicate which fields are available to map and any value restrictions.
 
 <details><summary>Inputs:</summary>
 <p>
@@ -548,9 +548,9 @@ incident.addNote(richText)
 ---
 
 ## Function - Remedy: Close Incident
-Close an incident ticket in Remedy by modifying its status. The function will make an API call to Remedy to retrieve the target incident form. If the status of that form is "Resolved", "Closed", or "Cancelled," no change to the incident is made. Otherwise, the status is updated to Resolved with Status Reason "No Further Action Required" and Resolution "Closed from CP4S."
+Close an incident ticket in Remedy by modifying its status. The function will make an API call to Remedy to retrieve the target incident form. If the status of that form is "Resolved," "Closed," or "Cancelled," no change to the incident is made. Otherwise, the status is updated to Resolved with Status Reason "No Further Action Required" and Resolution "Closed from IBM SOAR."
 
-When a task is closed under a case, an automatic rule will trigger containing this function. If a row in the Remedy datatable matches the name and ID of the task just closed, the above logic will trigger to ensure that the corresponding incident in Remedy is also closed.
+When a task is closed under a case, an automatic rule will trigger containing this function. If a row in the Remedy datatable matches the name and ID of the task just closed, the logic described above will trigger to ensure that the corresponding incident in Remedy is also closed.
 
 In the event that multiple rows in the datatable match the target task (a task has been raised to Remedy more than once), the function will iterate over those rows to ensure that each of the corresponding incidents in Remedy are closed.
 
@@ -872,20 +872,20 @@ remedy_linked_incidents_reference_table
 #### Columns:
 | Column Name | API Access Name | Type | Tooltip |
 | ----------- | --------------- | ---- | ------- |
-| Extra | `extra` | `textarea` | Incident ID of the Remedy form entry |
-| Remedy ID | `remedy_id` | `text` | Request ID of the Remedy form entry |
-| Status | `status` | `textarea` | Last status applied to the Remedy Incident |
-| Task ID | `taskincident_id` | `text` | ID of the Task and its description |
+| Extra | `extra` | `textarea` | Incident ID of the Remedy form entry. |
+| Remedy ID | `remedy_id` | `text` | Request ID of the Remedy form entry. |
+| Status | `status` | `textarea` | Last status applied to the Remedy Incident. |
+| Task ID | `taskincident_id` | `text` | ID of the Task and its description. |
 | Timestamp | `timestamp` | `datetimepicker` | - |
 
 ---
 
 ### Data explanation
 The Remedy Linked Incidents Reference Table will be updated when either the `Remedy: Create Incident` or `Remedy: Close Incident`
-functions complete.
+function completes.
 
 #### Remedy: Create Incident
-Once an incident is posted to Remedy, the auto-routing feature has the potential to alter the values of some of the fields within the Remedy incident 
+Once an incident is posted to Remedy, the auto-routing feature has the potential to further alter the values of some of the fields within the Remedy incident 
 (see [Activity Fields](#activity-fields) for more information on this). Due to this potential, the integration will fetch the incident back from the 
 Remedy server after it has been created to ensure the datatable is updated with accurate information. Once the incident data is received from Remedy, relevant
 fields are recorded in the datatable.
