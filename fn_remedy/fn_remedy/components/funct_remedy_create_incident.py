@@ -124,6 +124,8 @@ class FunctionComponent(ResilientComponent):
         entry = entries["entries"][0]
         # save the incident number so we can log it. this is the ID that shows in the Remedy UI
         incident_number = entry["values"]["Incident Number"]
+        # save the request id so we can log it. this is the ID that shows in the Remedy API
+        request_id = entry["values"]["Request ID"]
         # we expect only one result to be returned
         if len(entries["entries"]) > 1:
             LOG.debug("Multiple form entries in Remedy found matching Incident Number: {0}."
