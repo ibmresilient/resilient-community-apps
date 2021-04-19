@@ -8,9 +8,9 @@ env:
     - PATH_PIP_REQ_TESTS="$TRAVIS_BUILD_DIR/.scripts/requirements_tests.txt"
     - SCRIPTS_DIR="$TRAVIS_BUILD_DIR/.scripts"
 
-    - ARTIFACTORY_BASE_URL="https://na.$ARTIFACTORY_URL_2/artifactory"
+    - ARTIFACTORY_BASE_URL="https://na.$ARTIFACTORY_URL/artifactory"
     - ARTIFACTORY_GENERIC_STORAGE="$ARTIFACTORY_BASE_URL/$ARTIFACTORY_GENERIC_STORAGE"
-    - ARTIFACTORY_DOCKER_REPO="$ARTIFACTORY_DOCKER_REPO_NAME.$ARTIFACTORY_URL_2"
+    - ARTIFACTORY_DOCKER_REPO="$ARTIFACTORY_DOCKER_REPO_NAME.$ARTIFACTORY_URL"
     - ARTIFACTORY_PYPI_INDEX="https://$ARTIFACTORY_USERNAME:$ARTIFACTORY_PASSWORD@na.artifactory.swg-devops.com/artifactory/api/pypi/sec-resilient-team-integrations-pypi-virtual/simple"
 
     - PYPI_INDEX="https://pypi.org/simple"

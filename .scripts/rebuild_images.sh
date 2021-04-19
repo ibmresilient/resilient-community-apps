@@ -8,10 +8,6 @@
 # sudo apt-get install jq
 # pip install resilient-sdk
 
-# Map ARTIFACTORY_URL until we change in Travis
-# TODO: use rescli account
-ARTIFACTORY_URL=$ARTIFACTORY_URL_2
-
 ###############
 ## Variables ##
 ###############
