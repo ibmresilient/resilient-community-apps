@@ -122,7 +122,7 @@ if [ "$BUILD_TYPE" == "MAIN" ] ; then
     print_msg "Push to quay.io for $BUILD_TYPE"
 
     print_msg "Pushing $quay_io_tag to quay.io"
-    # docker push $quay_io_tag
+    docker push $quay_io_tag
 
     full_file_name=$(basename -- $app_zip_path)
     file_name="${full_file_name%.*}-$TRAVIS_BUILD_NUMBER.zip"
