@@ -8,11 +8,20 @@ env:
     - PATH_PIP_REQ_TESTS="$TRAVIS_BUILD_DIR/.scripts/requirements_tests.txt"
     - SCRIPTS_DIR="$TRAVIS_BUILD_DIR/.scripts"
 
-    - PYPI_INDEX="https://pypi.org/simple"
+    - ARTIFACTORY_BASE_URL="https://na.$ARTIFACTORY_URL_2/artifactory"
+    - ARTIFACTORY_GENERIC_STORAGE="$ARTIFACTORY_BASE_URL/$ARTIFACTORY_GENERIC_STORAGE"
+    - ARTIFACTORY_DOCKER_REPO="$ARTIFACTORY_DOCKER_REPO_NAME.$ARTIFACTORY_URL_2"
     - ARTIFACTORY_PYPI_INDEX="https://$ARTIFACTORY_USERNAME:$ARTIFACTORY_PASSWORD@na.artifactory.swg-devops.com/artifactory/api/pypi/sec-resilient-team-integrations-pypi-virtual/simple"
-    - ARTIFACTORY_REPO_LINK="https://na.artifactory.swg-devops.com/artifactory/sec-resilient-team-integrations-generic-local"
+
+    - PYPI_INDEX="https://pypi.org/simple"
 
     - PACKAGE_NAME=`python .scripts/get_package_name_from_cmt_msg.py "$TRAVIS_COMMIT_MESSAGE"`
+
+    - KEYWORD_BUILD_DEV_APP="[build-dev-app]"
+    - BUILD_DEV_APP=$([[ "$TRAVIS_COMMIT_MESSAGE" != *"$KEYWORD_BUILD_DEV_APP"* ]]; echo $?)
+
+    - KEYWORD_BUILD_MAIN_APP="[build-main-app]"
+    - BUILD_MAIN_APP=$([[ "$TRAVIS_COMMIT_MESSAGE" != *"$KEYWORD_BUILD_MAIN_APP"* ]]; echo $?)
 
     - KEYWORD_DEV_DEPS='[dev-deps]'
     - USE_ARTIFACTORY_DEPS=`[[ "$TRAVIS_COMMIT_MESSAGE" != *"$KEYWORD_DEV_DEPS"* ]]; echo $?`
@@ -153,23 +162,30 @@ matrix:
       script:
         - .scripts/run_safety_scan_for_cve.sh
 
-    - stage: build images and packages
-      name: Building containers and packages
+    - stage: build image and app zip
+      name: Build Image and App zip
       services:
         - docker
       install:
-        - .scripts/install_resilient_api.sh
+        - pip install resilient-sdk -i $PYPI_INDEX_TO_USE
       script:
-        - source .scripts/updated_integrations_build_images.sh ARTIFACTORY
-        # if there are failed containers send a message with their list
-        - if [[ -n "${FAILED_CONTAINERS[*]}" ]]; then .scripts/send_notification.sh "Containers not built ${FAILED_CONTAINERS[*]}" failure; return 1; fi
-        - sudo apt-get install jq
-        # Package the updated integrations and push to Artifactory
-        # This is done 2nd, because we need digest of the image in the repository to update app.zip
-        - source .scripts/updated_integrations_package.sh
-        # if there are failed packages send a message with their list
-        - if [[ -n "${FAILED_PACKAGES[*]}" ]]; then .scripts/send_notification.sh "Packages not built ${FAILED_PACKAGES[*]}" failure; fi
-        - .scripts/send_current_pr_comment.sh
+        - if [ $BUILD_DEV_APP == 1 ]; then
+            .scripts/build_image_and_app_zip.sh "$PACKAGE_NAME" "DEV" "$PYPI_INDEX_TO_USE";
+            PATH_APP_ZIP=`cat "$TRAVIS_BUILD_DIR/PATH_APP_ZIP.txt"`;
+            echo "PATH_APP_ZIP=$PATH_APP_ZIP";
+            FILE_NAME=$(basename $PATH_APP_ZIP);
+            .scripts/send_slack_notification.sh "Built DEV version of [$PACKAGE_NAME] \n Artifactory App.zip - <$PATH_APP_ZIP|$FILE_NAME>" "success";
+
+          elif [ $BUILD_MAIN_APP == 1 ]; then
+            .scripts/build_image_and_app_zip.sh "$PACKAGE_NAME" "MAIN" "$PYPI_INDEX_TO_USE";
+            PATH_APP_ZIP=`cat "$TRAVIS_BUILD_DIR/PATH_APP_ZIP.txt"`;
+            echo "PATH_APP_ZIP=$PATH_APP_ZIP";
+            FILE_NAME=$(basename $PATH_APP_ZIP);
+            .scripts/send_slack_notification.sh "Built MAIN version of [$PACKAGE_NAME] \n Artifactory App.zip - <$PATH_APP_ZIP|$FILE_NAME> \n Pushed image to <https://quay.io/user/ibmresilient|quay.io>" "success";
+
+          else
+            echo "No build keywords found. Not building...";
+          fi
 
     - stage: rebuild all images
       python: 3.6
@@ -185,14 +201,8 @@ matrix:
         - PYTHON_LIBRARIES_VERSION=$(echo $TRAVIS_TAG | cut -d "/" -f 2)
         - IMAGE_TO_REBUILD=$(echo $TRAVIS_TAG | cut -d "/" -f 3)
         - REPO_TO_PUSH=$(echo $TRAVIS_TAG | cut -d "/" -f 4)
-        - .scripts/rebuild_images.sh $PYTHON_LIBRARIES_VERSION $IMAGE_TO_REBUILD $REPO_TO_PUSH
-
-    - stage: successful notification
-      # To make sure that success is sent once per job we create a separate stage for it
-      install: skip
-      script:
-        - .scripts/send_notification.sh
+        - .scripts/rebuild_images.sh "$PYTHON_LIBRARIES_VERSION" "$IMAGE_TO_REBUILD" "$REPO_TO_PUSH"
 
 # If one job fails the whole build fails, so we can send it here
-# after_failure:
-#   - .scripts/send_notification.sh "" failure
+after_failure:
+  - .scripts/send_notification.sh "" failure
