@@ -160,14 +160,14 @@ matrix:
         - pip install resilient-sdk -i $PYPI_INDEX_TO_USE
       script:
         - if [ $BUILD_DEV_APP == 1 ]; then
-            .scripts/build_image_and_app_zip.sh "$PACKAGE_NAME" "DEV" "$PYPI_INDEX_TO_USE";
+            .scripts/build_image_and_app_zip.sh "$PACKAGE_NAME" "DEV" "$PYPI_INDEX_TO_USE" || travis_terminate 1;
             PATH_APP_ZIP=`cat "$TRAVIS_BUILD_DIR/PATH_APP_ZIP.txt"`;
             echo "PATH_APP_ZIP=$PATH_APP_ZIP";
             FILE_NAME=$(basename $PATH_APP_ZIP);
             .scripts/send_slack_notification.sh "Built DEV version of [$PACKAGE_NAME] \n Artifactory App.zip - <$PATH_APP_ZIP|$FILE_NAME>" "success";
 
           elif [ $BUILD_MAIN_APP == 1 ]; then
-            .scripts/build_image_and_app_zip.sh "$PACKAGE_NAME" "MAIN" "$PYPI_INDEX_TO_USE";
+            .scripts/build_image_and_app_zip.sh "$PACKAGE_NAME" "MAIN" "$PYPI_INDEX_TO_USE" || travis_terminate 1;
             PATH_APP_ZIP=`cat "$TRAVIS_BUILD_DIR/PATH_APP_ZIP.txt"`;
             echo "PATH_APP_ZIP=$PATH_APP_ZIP";
             FILE_NAME=$(basename $PATH_APP_ZIP);
