@@ -75,5 +75,5 @@ else
     --resilient_host 'example.com' \
     --resilient_org 'Test Organization' \
     -m "not livetest"
-    print_msg "Test complete for $p"
+    print_msg "Test complete for $PACKAGE_NAME"
 fi
