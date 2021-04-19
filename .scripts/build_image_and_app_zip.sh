@@ -83,11 +83,15 @@ package_path="$TRAVIS_BUILD_DIR/$PACKAGE_NAME"
 path_setup_py_file="$package_path/setup.py"
 current_version=$(python $path_setup_py_file --version)
 lib_version=$(echo $current_version | cut -d "." -f 1,2)
-new_version=$lib_version.$TRAVIS_BUILD_NUMBER
-print_msg "Updating $path_setup_py_file to version '$new_version'"
-python $SCRIPTS_DIR/modify_attribute_in_setup_py_file.py "$package_path/setup.py" "version" "version=\"$new_version\","
+version_to_use=current_version
 
-docker_tag="$PACKAGE_NAME:$new_version"
+if [ "$BUILD_TYPE" == "DEV" ] ; then
+    version_to_use=$lib_version.$TRAVIS_BUILD_NUMBER
+    print_msg "Updating $path_setup_py_file to version '$version_to_use'"
+    python $SCRIPTS_DIR/modify_attribute_in_setup_py_file.py "$package_path/setup.py" "version" "version=\"$version_to_use\","
+fi
+
+docker_tag="$PACKAGE_NAME:$version_to_use"
 
 print_msg "Packaging $PACKAGE_NAME with resilient-sdk"
 resilient-sdk package -p $package_path
@@ -103,12 +107,12 @@ image_sha_digest=$(echo $image_sha_digest | cut -d ":" -f 2)
 print_msg "image_sha_digest=$image_sha_digest"
 
 # tag the image for quay.io
-quay_io_tag="$QUAY_URL/$QUAY_USERNAME/$PACKAGE_NAME:$new_version"
+quay_io_tag="$QUAY_URL/$QUAY_USERNAME/$PACKAGE_NAME:$version_to_use"
 print_msg "Tagging $PACKAGE_NAME for $QUAY_URL/$QUAY_USERNAME with: $quay_io_tag"
 docker tag $docker_tag $quay_io_tag
 
 # tag the image for artifactory
-artifactory_tag="$ARTIFACTORY_DOCKER_REPO/$QUAY_USERNAME/$PACKAGE_NAME:$new_version"
+artifactory_tag="$ARTIFACTORY_DOCKER_REPO/$QUAY_USERNAME/$PACKAGE_NAME:$version_to_use"
 print_msg "Tagging $PACKAGE_NAME for artifactory with: $artifactory_tag"
 docker tag $docker_tag $artifactory_tag
 
@@ -118,9 +122,10 @@ if [ "$BUILD_TYPE" == "MAIN" ] ; then
     print_msg "Push to quay.io for $BUILD_TYPE"
 
     print_msg "Pushing $quay_io_tag to quay.io"
-    docker push $quay_io_tag
+    # docker push $quay_io_tag
 
-    file_name=$(basename $app_zip_path)
+    full_file_name=$(basename -- $app_zip_path)
+    file_name="${full_file_name%.*}-$TRAVIS_BUILD_NUMBER.zip"
     artifactory_path="$ARTIFACTORY_GENERIC_STORAGE/$PACKAGE_NAME/main/$lib_version/$file_name"
     print_msg "copying App.zip $file_name to Artifactory at: $artifactory_path"
     # curl -H [header including the Artifactory API Key] -T [path to the file to upload to Artifactory] "https://na.artifactory.swg-devops.com/artifactory/<repo-name>/<path-in-repo>"
