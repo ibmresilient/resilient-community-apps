@@ -5,19 +5,19 @@ from resilient_lib import OAuth2ClientCredentialsSession
 from resilient_lib.components.integration_errors import IntegrationError
 
 LOG = logging.getLogger(__name__)
-DEFAULT_SCOPE = 'https://graph.microsoft.com/.default'
 
 class MSGraphHelper(object):
     """
     Helper object MSGraphHelper.
     """
-    def __init__(self, ms_graph_token_url, ms_graph_url, tenant_id, client_id, client_secret, proxies=None):
+    def __init__(self, ms_graph_token_url, ms_graph_url, tenant_id, client_id, client_secret, scope, proxies=None):
         self.ms_graph_token_url = ms_graph_token_url.format(tenant=tenant_id)
         self.ms_graph_url = ms_graph_url
         self.tenant_id = tenant_id
         self.client_id = client_id
         self.client_secret = client_secret
         self.proxies = proxies
+        self.scope = scope
         self.ms_graph_session = self.authenticate()
 
     @staticmethod
@@ -37,6 +37,6 @@ class MSGraphHelper(object):
         return OAuth2ClientCredentialsSession(url=self.ms_graph_token_url,
                                               client_id=self.client_id,
                                               client_secret=self.client_secret,
-                                              scope=DEFAULT_SCOPE,
+                                              scope=self.scope,
                                               proxies=self.proxies)
 
