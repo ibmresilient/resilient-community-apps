@@ -1,0 +1,7 @@
+#List-of-allowed-image-names
+
+#IBM_SOAR_Apps
+
+fn_task_utils
+fn_service_now
+fn_cisco_asa

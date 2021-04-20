@@ -3,10 +3,12 @@
 # pragma pylint: disable=unused-argument, no-self-use, line-too-long
 
 """This module contains the definition of the ODBCFeedDestination class."""
+import cx_Oracle
 import logging
 import pyodbc
 
 from data_feeder_plugins.sqllib.sql_feed_base import SqlFeedDestinationBase
+from data_feeder_plugins.sqllib.sql_dialect import OracleDialect
 
 LOG = logging.getLogger(__name__)
 
@@ -28,13 +30,16 @@ class ODBCFeedDestination(SqlFeedDestinationBase):  # pylint: disable=too-few-pu
         self.pwd = options.get("pwd")
         self.uid = options.get("uid")
 
-        self.connection = self._reinit(self.connect_str, self.uid, self.pwd)
+        self.connection = self._reinit(self.connect_str, self.uid, self.pwd, dialect=self.dialect)
 
         self._init_tables()
 
-    def _reinit(self, connect_str, uid, pwd):
+    def _reinit(self, connect_str, uid, pwd, dialect=None):
         # pylint: disable=c-extension-no-member
-        connection = pyodbc.connect(connect_str, uid=uid, pwd=pwd)
+        if dialect and isinstance(dialect, OracleDialect):
+            connection = cx_Oracle.connect(uid, pwd, connect_str, encoding="UTF-8")
+        else:
+            connection = pyodbc.connect(connect_str, uid=uid, pwd=pwd)
 
         self.dialect.configure_connection(connection)
 
@@ -66,7 +71,12 @@ class ODBCFeedDestination(SqlFeedDestinationBase):  # pylint: disable=too-few-pu
             data = []
 
         try:
+            if isinstance(cursor, cx_Oracle.Cursor):
+                cursor.execute(sql, data)
+                return cursor
+
             return cursor.execute(sql, data)
+
         except Exception as err:
             raise err
 

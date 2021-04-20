@@ -2,10 +2,10 @@
 # Base image using Red Hat's universal base image (rhel 8) for python
 #FROM registry.access.redhat.com/ubi8/python-36:latest
 # rc-data-feeder will build plugins from a base image
-FROM quay.io/ibmresilient/rc_data_feed:2.0.0
+FROM quay.io/ibmresilient/rc_data_feed:2.1.0
 
 ARG APPLICATION=rc_data_feed_plugin_odbcfeed
-ARG RES_CIRCUITS_VERSION=34.0.195
+ARG RES_CIRCUITS_VERSION="40.0"
 
 # update to latest packages, user 0 for root privilege
 USER 0
@@ -22,13 +22,23 @@ RUN yum -y update && yum clean all
 # link libnsl2 to libnsl
 RUN ln -s /usr/lib64/libnsl.so.2.0.0 /usr/lib64/libnsl.so.1
 
-# add yum repo with unixODBC and install
-RUN curl https://packages.microsoft.com/config/rhel/8/prod.repo > /etc/yum.repos.d/mssql-release.repo
-RUN yum -y install unixODBC-devel
+# install MS SQL driver
+RUN yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+RUN yum -y install freetds
 
 # copy the driver configurations to the container
 COPY ./drivers/drivers.ini /etc/odbc-drivers.ini
 COPY ./drivers/drivers/ /tmp/lib/
+
+# install Oracle DB driver
+RUN yum -y install /tmp/lib/oracle-instantclient19.6-basic-19.6.0.0.0-1.x86_64.rpm
+RUN yum -y install /tmp/lib/oracle-instantclient-odbc-linuxx64.rpm
+#RUN rpm -i /tmp/lib/libnsl-2.28-72.el8_1.1.x86_64.rpm
+ENV TNS_ADMIN /var/rescircuits
+
+# add yum repo with unixODBC and install
+RUN yum -y install unixODBC-devel
+RUN curl https://packages.microsoft.com/config/rhel/8/prod.repo > /etc/yum.repos.d/mssql-release.repo
 
 # configure unixODBC with the driver information in the .ini file
 RUN odbcinst -i -d -f /etc/odbc-drivers.ini
@@ -47,15 +57,6 @@ RUN cmake --build . --config RelWithDebInfo
 RUN make install
 WORKDIR /opt/app-root/src
 
-# install MS SQL driver
-RUN yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
-RUN yum -y install freetds
-
-# install Oracle DB driver
-RUN yum -y install /tmp/lib/oracle-instantclient19.6-basic-19.6.0.0.0-1.x86_64.rpm
-RUN yum -y install /tmp/lib/oracle-instantclient-odbc-linuxx64.rpm
-#RUN rpm -i /tmp/lib/libnsl-2.28-72.el8_1.1.x86_64.rpm
-ENV TNS_ADMIN /var/rescircuits
 
 # install the base package
 COPY ./dist /tmp/packages

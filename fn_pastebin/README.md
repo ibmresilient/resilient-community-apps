@@ -14,7 +14,7 @@
   NOTE: If your app is available in the container-format only, there is no need to mention the integration server in this readme.
 -->
 
-# None
+# PasteBin Creator for IBM Resilient
 
 ## Table of Contents
 - [Release Notes](#release-notes)
@@ -49,7 +49,7 @@
   Provide a high-level description of the function itself and its remote software or application.
   The text below is parsed from the "description" and "long_description" attributes in the setup.py file
 -->
-**Resilient Circuits Function that dumps any text/code to pastebin.com and returns a link to that Paste**
+**Resilient Circuits Function that dumps any text/code to pastebin.com and returns a link to that paste**
 
  ![screenshot: main](./doc/screenshots/fn-create-pastebin.png)
 
@@ -73,11 +73,11 @@ This app supports the IBM Resilient SOAR Platform and the IBM Cloud Pak for Secu
 The Resilient platform supports two app deployment mechanisms, App Host and integration server.
 
 If deploying to a Resilient platform with an App Host, the requirements are:
-* Resilient platform >= `36.0.5634`.
+* Resilient platform >= `35.0.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a Resilient platform with an integration server, the requirements are:
-* Resilient platform >= `36.0.5634`.
+* Resilient platform >= `35.0.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient_circuits>=30.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions: 

@@ -6,7 +6,7 @@
 import logging
 import sys
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import ResultPayload
+from resilient_lib import ResultPayload, str_to_bool
 from rc_data_feed.lib.rest_client_helper import RestClientHelper
 from .feed_ingest import Reload, build_feed_outputs
 
@@ -57,7 +57,12 @@ class FunctionComponent(ResilientComponent):
             rest_client_helper = RestClientHelper(self.rest_client)
             feed_outputs = build_feed_outputs(rest_client_helper, self.opts, self.options.get("feed_names", None))
 
-            df = Reload(rest_client_helper, feed_outputs, query_api_method=df_query_api_method)
+            # expose attachment content setting
+            self.incl_attachment_data = str_to_bool(self.options.get("include_attachment_data", 'false'))
+
+            df = Reload(rest_client_helper, feed_outputs, 
+                        query_api_method=df_query_api_method,
+                        incl_attachment_data=self.incl_attachment_data)
             reloaded_incidents = df.reload_all(min_inc_id=df_min_incident_id, max_inc_id=df_max_incident_id)
 
             result_payload = result.done(True, {"num_of_sync_incidents": reloaded_incidents})
