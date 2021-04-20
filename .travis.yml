@@ -114,8 +114,6 @@ matrix:
       script:
         - echo "Starting Python 3.6 Unit Tests - Package"
         - .scripts/run_tests.sh "$PACKAGE_NAME" "$PYPI_INDEX_TO_USE"
-      after_failure:
-        - .scripts/send_slack_notification.sh "Python 3.6 tests failed for '[$PACKAGE_NAME]'" "failure"
 
     # Jobs that perform static analysis; code quality, security scans etc
     - stage: static analysis
