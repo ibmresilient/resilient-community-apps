@@ -22,6 +22,7 @@ env:
 
     - KEYWORD_BUILD_MAIN_APP="[build-main-app]"
     - BUILD_MAIN_APP=$([[ "$TRAVIS_COMMIT_MESSAGE" != *"$KEYWORD_BUILD_MAIN_APP"* ]]; echo $?)
+    - BUILD_TYPE=`if [ $BUILD_MAIN_APP == 1 ]; then echo "MAIN"; else echo "DEV"; fi`
 
     - KEYWORD_DEV_DEPS='[dev-deps]'
     - USE_ARTIFACTORY_DEPS=`[[ "$TRAVIS_COMMIT_MESSAGE" != *"$KEYWORD_DEV_DEPS"* ]]; echo $?`
@@ -33,6 +34,11 @@ branches:
   except:
     - public
     - /^_.*$/
+
+notifications:
+  slack: ibm-security:3QEUFP4Q5n6jxrnfxzTpoWAW
+  on_success: never
+  on_failure: always
 
 stages:
   - name: run all tests
@@ -72,8 +78,6 @@ matrix:
       script:
         - echo "Starting Python 2.7 Unit Tests - Main"
         - .scripts/run_tests.sh "ALL" "$PYPI_INDEX_TO_USE"
-      after_failure:
-        - .scripts/send_slack_notification.sh "Python 2.7 tests failed for 'ALL'" "failure"
 
     - stage: run all tests
       name: Python 3.6 Unit Tests - Main
@@ -86,8 +90,6 @@ matrix:
       script:
         - echo "Starting Python 3.6 Unit Tests - Main"
         - .scripts/run_tests.sh "ALL" "$PYPI_INDEX_TO_USE"
-      after_failure:
-        - .scripts/send_slack_notification.sh "Python 3.6 tests failed for 'ALL'" "failure"
 
     - stage: run package tests
       name: Python 2.7 Unit Tests - Package
@@ -100,8 +102,6 @@ matrix:
       script:
         - echo "Starting Python 2.7 Unit Tests - Package"
         - .scripts/run_tests.sh "$PACKAGE_NAME" "$PYPI_INDEX_TO_USE"
-      after_failure:
-        - .scripts/send_slack_notification.sh "Python 2.7 tests failed for '[$PACKAGE_NAME]'" "failure"
 
     - stage: run package tests
       name: Python 3.6 Build and Run Tests
@@ -160,30 +160,28 @@ matrix:
 
     - stage: build image and app zip
       name: Build Image and App zip
+      python: 3.6
       services:
         - docker
-      install:
+      script: skip
+      before_deploy:
         - pip install resilient-sdk -i $PYPI_INDEX_TO_USE
-      script:
-        - if [ $BUILD_DEV_APP == 1 ]; then
-            .scripts/build_image_and_app_zip.sh "$PACKAGE_NAME" "DEV" "$PYPI_INDEX_TO_USE" || travis_terminate 1;
-            PATH_APP_ZIP=`cat "$TRAVIS_BUILD_DIR/PATH_APP_ZIP.txt"`;
-            echo "PATH_APP_ZIP=$PATH_APP_ZIP";
-            FILE_NAME=$(basename $PATH_APP_ZIP);
-            .scripts/send_slack_notification.sh "Built DEV version of [$PACKAGE_NAME] \n Artifactory App.zip - <$PATH_APP_ZIP|$FILE_NAME>" "success";
-
-          elif [ $BUILD_MAIN_APP == 1 ]; then
-            .scripts/build_image_and_app_zip.sh "$PACKAGE_NAME" "MAIN" "$PYPI_INDEX_TO_USE" || travis_terminate 1;
-            PATH_APP_ZIP=`cat "$TRAVIS_BUILD_DIR/PATH_APP_ZIP.txt"`;
-            echo "PATH_APP_ZIP=$PATH_APP_ZIP";
-            FILE_NAME=$(basename $PATH_APP_ZIP);
-            .scripts/send_slack_notification.sh "Built MAIN version of [$PACKAGE_NAME] \n Artifactory App.zip - <$PATH_APP_ZIP|$FILE_NAME> \n Pushed image to <https://quay.io/user/ibmresilient|quay.io>" "success";
-
-          else
-            echo "No build keywords found. Not building...";
-          fi
-      after_failure:
-        - .scripts/send_slack_notification.sh "Build failed for '[$PACKAGE_NAME]' \n $TRAVIS_TEST_RESULT $" "failure"
+      deploy:
+        - provider: script
+          script: .scripts/build_image_and_app_zip.sh "$PACKAGE_NAME" "DEV" "$PYPI_INDEX_TO_USE";
+          on:
+            all_branches: true
+            condition: "$BUILD_DEV_APP = 1"
+        - provider: script
+          script: .scripts/build_image_and_app_zip.sh "$PACKAGE_NAME" "MAIN" "$PYPI_INDEX_TO_USE";
+          on:
+            all_branches: true
+            condition: "$BUILD_MAIN_APP = 1"
+      after_deploy:
+        - PATH_APP_ZIP=`cat "$TRAVIS_BUILD_DIR/PATH_APP_ZIP.txt"`;
+        - echo "PATH_APP_ZIP=$PATH_APP_ZIP";
+        - FILE_NAME=$(basename $PATH_APP_ZIP);
+        - .scripts/send_slack_notification.sh "Built $BUILD_TYPE version of [$PACKAGE_NAME] \n Artifactory App.zip - <$PATH_APP_ZIP|$FILE_NAME>" "success";
 
     - stage: rebuild all images
       python: 3.6
@@ -200,4 +198,3 @@ matrix:
         - IMAGE_TO_REBUILD=$(echo $TRAVIS_TAG | cut -d "/" -f 3)
         - REPO_TO_PUSH=$(echo $TRAVIS_TAG | cut -d "/" -f 4)
         - .scripts/rebuild_images.sh "$PYTHON_LIBRARIES_VERSION" "$IMAGE_TO_REBUILD" "$REPO_TO_PUSH"
-

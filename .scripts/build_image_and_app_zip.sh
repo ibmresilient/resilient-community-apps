@@ -53,7 +53,7 @@ repo_login () {
 print_msg "\
 PACKAGE_NAME:\t\t$PACKAGE_NAME \n\
 BUILD_TYPE:\t\t$BUILD_TYPE \n\
-PYPI_INDEX_TO_USE:\t$PYPI_INDEX_TO_USE \n\
+PYPI_INDEX_TO_USE:\t$PYPI_INDEX_TO_USE\
 "
 
 ALLOW_IMAGE_NAMES=( $(<$PATH_ALLOW_IMAGE_NAMES) )
@@ -86,7 +86,7 @@ lib_version=$(echo $current_version | cut -d "." -f 1,2)
 version_to_use=current_version
 
 if [ "$BUILD_TYPE" == "DEV" ] ; then
-    version_to_use=$current_version.$TRAVIS_BUILD_NUMBER
+    version_to_use=$lib_version.$TRAVIS_BUILD_NUMBER
     print_msg "Updating $path_setup_py_file to version '$version_to_use'"
     python $SCRIPTS_DIR/modify_attribute_in_setup_py_file.py "$package_path/setup.py" "version" "version=\"$version_to_use\","
 fi
