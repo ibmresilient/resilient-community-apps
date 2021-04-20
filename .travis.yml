@@ -146,7 +146,7 @@ matrix:
       install:
         - pip install pylint
       script:
-        - .scripts/pylint.sh
+        - .scripts/pylint.sh "$PACKAGE_NAME"
 
     - stage: static analysis
       name: Safety Checker
