@@ -161,6 +161,7 @@ matrix:
       python: 3.6
       services:
         - docker
+      install: skip
       script: skip
       before_deploy:
         - pip install resilient-sdk -i $PYPI_INDEX_TO_USE
