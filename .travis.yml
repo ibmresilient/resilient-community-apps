@@ -126,7 +126,7 @@ matrix:
       install:
         - pip install bandit==1.6.2
       script:
-        - .scripts/run_bandit_scan_on_updated_packages.sh
+        - .scripts/run_bandit_scan.sh "$PACKAGE_NAME"
 
     - stage: static analysis
       name: Py3.6 Bandit Security Scan
@@ -136,7 +136,7 @@ matrix:
       install:
         - pip install bandit
       script:
-        - .scripts/run_bandit_scan_on_updated_packages.sh
+        - .scripts/run_bandit_scan.sh "$PACKAGE_NAME"
 
     - stage: static analysis
       name: Pylint
@@ -146,7 +146,7 @@ matrix:
       install:
         - pip install pylint
       script:
-        - .scripts/pylint.sh
+        - .scripts/pylint.sh "$PACKAGE_NAME"
 
     - stage: static analysis
       name: Safety Checker
@@ -156,7 +156,7 @@ matrix:
       install:
         - pip install safety
       script:
-        - .scripts/run_safety_scan_for_cve.sh
+        - .scripts/run_safety_scan_for_cve.sh "$PACKAGE_NAME"
 
     - stage: build image and app zip
       name: Build Image and App zip
