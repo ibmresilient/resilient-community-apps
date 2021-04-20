@@ -156,7 +156,7 @@ matrix:
       install:
         - pip install safety
       script:
-        - .scripts/run_safety_scan_for_cve.sh
+        - .scripts/run_safety_scan_for_cve.sh "$PACKAGE_NAME"
 
     - stage: build image and app zip
       name: Build Image and App zip
