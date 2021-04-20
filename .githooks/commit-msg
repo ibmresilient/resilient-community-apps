@@ -12,7 +12,7 @@
 
 # regex to validate in commit msg
 commit_regex='(^INT-\d+: \[?.*\])'
-error_msg="Aborting commit. \nYour commit message is either missing a JIRA Issue ('INT-1111') or a package name ('[myapp]').\n\n Example: INT-123: [fn_cool_action] added new cool action"
+error_msg="Aborting commit. Your commit message is either missing a JIRA Issue ('INT-1111') or a package name ('[myapp]'). Example: INT-123: [fn_cool_action] added new cool action"
 
 # Ensure the commit message contains the ticket 
 if ! grep -iqE "$commit_regex" "$1"; then
