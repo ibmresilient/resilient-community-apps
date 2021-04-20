@@ -46,6 +46,7 @@ fi
 ALLOW_IMAGE_NAMES=( $(<$PATH_ALLOW_IMAGE_NAMES) )
 print_msg "ALLOW_IMAGE_NAMES:\n${ALLOW_IMAGE_NAMES[*]}"
 
+if [ "$PACKAGE_NAME" == "ALL" ] ; then
     print_msg "Running ALL tests"
 
     for p in "${ALLOW_IMAGE_NAMES[@]}"; do
