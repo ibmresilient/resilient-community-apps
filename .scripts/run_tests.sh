@@ -38,10 +38,14 @@ print_msg "\
 PACKAGE_NAME:\t$PACKAGE_NAME \n\
 "
 
+if [ "$PACKAGE_NAME" == "MERGE" ] ; then
+    print_msg "Latest commit is a Merge. Not running tests"
+    exit 0
+fi
+
 ALLOW_IMAGE_NAMES=( $(<$PATH_ALLOW_IMAGE_NAMES) )
 print_msg "ALLOW_IMAGE_NAMES:\n${ALLOW_IMAGE_NAMES[*]}"
 
-if [ "$PACKAGE_NAME" == "ALL" ] ; then
     print_msg "Running ALL tests"
 
     for p in "${ALLOW_IMAGE_NAMES[@]}"; do

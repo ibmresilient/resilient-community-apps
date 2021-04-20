@@ -17,6 +17,10 @@ assert len(args) == 2
 SCRIPT_NAME = args[0]
 COMMIT_MSG = args[1]
 
+if COMMIT_MSG.startswith("Merge"):
+    print("MERGE")
+    exit(0)
+
 regex = re.compile(r'(?:INT-\d+: \[)(.+)(?=])')
 package_name = regex.match(COMMIT_MSG).groups()
 
