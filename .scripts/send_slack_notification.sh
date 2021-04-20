@@ -48,7 +48,7 @@ message="{
 			\"fields\": [
 				{
 					\"type\": \"mrkdwn\",
-					\"text\": \"*Buid*\"
+					\"text\": \"*Build*\"
 				},
 				{
 					\"type\": \"mrkdwn\",

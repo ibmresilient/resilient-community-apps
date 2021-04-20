@@ -1,6 +1,6 @@
-#List-of-image-names-to-build
+#List-of-allowed-image-names
 
-#IBM Resilient Apps
+#IBM_SOAR_Apps
 
 fn_task_utils
 fn_service_now

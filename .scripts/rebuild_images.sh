@@ -8,10 +8,6 @@
 # sudo apt-get install jq
 # pip install resilient-sdk
 
-# Map ARTIFACTORY_URL until we change in Travis
-# TODO: use rescli account
-ARTIFACTORY_URL=$ARTIFACTORY_URL_2
-
 ###############
 ## Variables ##
 ###############
@@ -19,9 +15,6 @@ PYTHON_LIBRARIES_VERSION=$1
 IMAGE_TO_REBUILD=$2
 REPO_TO_PUSH=$3
 QUAY_API_URL="$QUAY_URL/api/v1"
-ARTIFACTORY_REPO_URL="$ARTIFACTORY_REPO_NAME.$ARTIFACTORY_URL"
-SCRIPTS_DIR="$TRAVIS_BUILD_DIR/.scripts"
-PATH_ALLOW_IMAGE_NAMES="$TRAVIS_BUILD_DIR/.scripts/ALLOW_IMAGE_NAMES.txt"
 PACKAGES_TO_CHANGE="[{\"name\":\"resilient\",\"version\":\"$PYTHON_LIBRARIES_VERSION\"},{\"name\":\"resilient-circuits\",\"version\":\"$PYTHON_LIBRARIES_VERSION\"},{\"name\":\"resilient-lib\",\"version\":\"$PYTHON_LIBRARIES_VERSION\"}]"
 DOCKERFILE_KEYWORD="registry.access.redhat.com"
 DOCKERFILE_WORDS_TO_INSERT="[\"\\n\", \"RUN pip install --upgrade pip\\n\", \"COPY ./new_requirements.txt /tmp/new_requirements.txt\\n\", \"RUN pip install -r /tmp/new_requirements.txt\\n\"]"
@@ -71,8 +64,7 @@ QUAY_URL:\t\t\t$QUAY_URL \n\
 QUAY_API_URL:\t\t\t$QUAY_API_URL \n\
 QUAY_USERNAME:\t\t\t$QUAY_USERNAME \n\
 ARTIFACTORY_URL:\t\t$ARTIFACTORY_URL \n\
-ARTIFACTORY_REPO_NAME:\t\t$ARTIFACTORY_REPO_NAME \n\
-ARTIFACTORY_REPO_URL:\t\t$ARTIFACTORY_REPO_URL \n\
+ARTIFACTORY_DOCKER_REPO:\t\t$ARTIFACTORY_DOCKER_REPO \n\
 ARTIFACTORY_USERNAME:\t\t$ARTIFACTORY_USERNAME \n\
 PATH_ALLOW_IMAGE_NAMES:\t\t$PATH_ALLOW_IMAGE_NAMES \n\
 PACKAGES_TO_CHANGE:\t\t$PACKAGES_TO_CHANGE \n\
@@ -103,7 +95,7 @@ fi
 # Login to artifactory
 if [ "$REPO_TO_PUSH" == "BOTH" ] || [ "$REPO_TO_PUSH" == "ARTIFACTORY" ] ; then
     print_msg "Logging into artifactory as $ARTIFACTORY_USERNAME"
-    repo_login $ARTIFACTORY_REPO_URL $ARTIFACTORY_USERNAME $ARTIFACTORY_PASSWORD
+    repo_login $ARTIFACTORY_DOCKER_REPO $ARTIFACTORY_USERNAME $ARTIFACTORY_PASSWORD
 fi
 
 # Loop all image names at https://quay.io/user/$QUAY_USERNAME
@@ -115,12 +107,12 @@ for image_name in "${IMAGE_NAMES[@]}"; do
         resilient_sdk_package_pass=0
         docker_build_pass=0
 
-        int_path="$TRAVIS_BUILD_DIR/$image_name"
-        path_current_requirements="$int_path/current_requirements.txt"
-        path_new_requirements="$int_path/new_requirements.txt"
-        path_dockerfile="$int_path/Dockerfile"
-        int_version=$(python "$int_path/setup.py" --version)
-        print_msg "int_path:\t\t\t$int_path\npath_current_requirements:\t$path_current_requirements\npath_new_requirements:\t\t$path_new_requirements\npath_dockerfile:\t\t$path_dockerfile\nint_version:\t\t\t$int_version"
+        package_path="$TRAVIS_BUILD_DIR/$image_name"
+        path_current_requirements="$package_path/current_requirements.txt"
+        path_new_requirements="$package_path/new_requirements.txt"
+        path_dockerfile="$package_path/Dockerfile"
+        int_version=$(python "$package_path/setup.py" --version)
+        print_msg "package_path:\t\t\t$package_path\npath_current_requirements:\t$path_current_requirements\npath_new_requirements:\t\t$path_new_requirements\npath_dockerfile:\t\t$path_dockerfile\nint_version:\t\t\t$int_version"
 
         docker_tag="$image_name:$int_version"
         quay_io_tag="$QUAY_URL/$QUAY_USERNAME/$docker_tag"
@@ -150,7 +142,7 @@ for image_name in "${IMAGE_NAMES[@]}"; do
         python $SCRIPTS_DIR/insert_into_Dockerfile.py $path_dockerfile $DOCKERFILE_KEYWORD "$DOCKERFILE_WORDS_TO_INSERT"
 
         print_msg "Packaging $image_name with resilient-sdk"
-        resilient-sdk package -p $int_path || resilient_sdk_package_pass=$?
+        resilient-sdk package -p $package_path || resilient_sdk_package_pass=$?
 
         print_msg "Rebuilding: $image_name"
 
@@ -161,7 +153,7 @@ for image_name in "${IMAGE_NAMES[@]}"; do
             docker build \
             --quiet \
             -t $docker_tag \
-            $int_path || docker_build_pass=$?
+            $package_path || docker_build_pass=$?
 
             # if passes docker build tag it
             if [ $docker_build_pass = 0 ] ; then
@@ -172,7 +164,7 @@ for image_name in "${IMAGE_NAMES[@]}"; do
                 quay_io_tags+=($quay_io_tag)
 
                 # tag the image for artifactory
-                artifactory_tag="$ARTIFACTORY_REPO_URL/$QUAY_USERNAME/$image_name:$int_version"
+                artifactory_tag="$ARTIFACTORY_DOCKER_REPO/$QUAY_USERNAME/$image_name:$int_version"
                 print_msg "Tagging $image_name for artifactory with: $artifactory_tag"
                 docker tag $docker_tag $artifactory_tag
                 artifactory_tags+=($artifactory_tag)
