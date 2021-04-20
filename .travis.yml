@@ -126,7 +126,7 @@ matrix:
       install:
         - pip install bandit==1.6.2
       script:
-        - .scripts/run_bandit_scan_on_updated_packages.sh
+        - .scripts/run_bandit_scan.sh "$PACKAGE_NAME"
 
     - stage: static analysis
       name: Py3.6 Bandit Security Scan
@@ -136,7 +136,7 @@ matrix:
       install:
         - pip install bandit
       script:
-        - .scripts/run_bandit_scan_on_updated_packages.sh
+        - .scripts/run_bandit_scan.sh "$PACKAGE_NAME"
 
     - stage: static analysis
       name: Pylint

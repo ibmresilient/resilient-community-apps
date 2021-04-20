@@ -19,7 +19,7 @@ if [ -z "$1" ] ; then
     exit 1
 fi
 
-if [ -z "$1" ] ; then
+if [ -z "$2" ] ; then
     echo "ERROR: Must provide PYPI_INDEX_TO_USE as second parameter"
     exit 1
 fi
