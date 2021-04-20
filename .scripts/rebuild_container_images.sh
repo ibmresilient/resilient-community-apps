@@ -1,23 +1,30 @@
 #!/bin/bash -e
 
-# param $1: (required) version of resilient_circuits library to use in format x.x.x
-# param $2: (optional) repo name to push to. Accepted values are: ARTIFACTORY, QUAY or BOTH. Defaults to BOTH if blank
+# param $1: (required) version of Python Libraries to use in format x.x.x
+# param $2: (required) name of package that is in ALLOW_IMAGE_NAMES.txt to rebuild or ALL for all images in ALLOW_IMAGE_NAMES.txt
+# param $3: (required) repo name to push to. Accepted values are: ARTIFACTORY, QUAY or BOTH.
 
 # Dependencies on:
 # sudo apt-get install jq
 # pip install resilient-sdk
 
 # Map ARTIFACTORY_URL until we change in Travis
+# TODO: use rescli account
 ARTIFACTORY_URL=$ARTIFACTORY_URL_2
 
 ###############
 ## Variables ##
 ###############
-RESILIENT_CIRCUITS_VERSION=$1
-REPO_TO_PUSH=$2
+PYTHON_LIBRARIES_VERSION=$1
+IMAGE_TO_REBUILD=$2
+REPO_TO_PUSH=$3
 QUAY_API_URL="$QUAY_URL/api/v1"
 ARTIFACTORY_REPO_URL="$ARTIFACTORY_REPO_NAME.$ARTIFACTORY_URL"
-PATH_IGNORE_IMAGE_NAMES="$TRAVIS_BUILD_DIR/.scripts/IGNORE_IMAGE_NAMES.txt"
+SCRIPTS_DIR="$TRAVIS_BUILD_DIR/.scripts"
+PATH_ALLOW_IMAGE_NAMES="$TRAVIS_BUILD_DIR/.scripts/ALLOW_IMAGE_NAMES.txt"
+PACKAGES_TO_CHANGE="[{\"name\":\"resilient\",\"version\":\"$PYTHON_LIBRARIES_VERSION\"},{\"name\":\"resilient-circuits\",\"version\":\"$PYTHON_LIBRARIES_VERSION\"},{\"name\":\"resilient-lib\",\"version\":\"$PYTHON_LIBRARIES_VERSION\"}]"
+DOCKERFILE_KEYWORD="registry.access.redhat.com"
+DOCKERFILE_WORDS_TO_INSERT="[\"\\n\", \"RUN pip install --upgrade pip\\n\", \"COPY ./new_requirements.txt /tmp/new_requirements.txt\\n\", \"RUN pip install -r /tmp/new_requirements.txt\\n\"]"
 quay_io_tags=()
 artifactory_tags=()
 skipped_packages=()
@@ -26,12 +33,18 @@ skipped_packages=()
 ## Check params ##
 ##################
 if [ -z "$1" ] ; then
-    echo "Must provide resilient_circuits version as first parameter"
+    echo "Must provide Python Libraries version as first parameter"
     exit 1
 fi
 
 if [ -z "$2" ] ; then
-    REPO_TO_PUSH="BOTH"
+    echo "Must provide ALL or <package_name> as second parameter"
+    exit 1
+fi
+
+if [ -z "$3" ] ; then
+    echo "Must provide repo name as third parameter: ARTIFACTORY, QUAY or BOTH"
+    exit 1
 fi
 
 ###############
@@ -51,7 +64,8 @@ repo_login () {
 ## Start ##
 ###########
 print_msg "\
-RESILIENT_CIRCUITS_VERSION:\t$RESILIENT_CIRCUITS_VERSION \n\
+PYTHON_LIBRARIES_VERSION:\t$PYTHON_LIBRARIES_VERSION \n\
+IMAGE_TO_REBUILD:\t$IMAGE_TO_REBUILD \n\
 REPO_TO_PUSH:\t\t\t$REPO_TO_PUSH \n\
 QUAY_URL:\t\t\t$QUAY_URL \n\
 QUAY_API_URL:\t\t\t$QUAY_API_URL \n\
@@ -60,15 +74,25 @@ ARTIFACTORY_URL:\t\t$ARTIFACTORY_URL \n\
 ARTIFACTORY_REPO_NAME:\t\t$ARTIFACTORY_REPO_NAME \n\
 ARTIFACTORY_REPO_URL:\t\t$ARTIFACTORY_REPO_URL \n\
 ARTIFACTORY_USERNAME:\t\t$ARTIFACTORY_USERNAME \n\
-PATH_IGNORE_IMAGE_NAMES:\t$PATH_IGNORE_IMAGE_NAMES \
+PATH_ALLOW_IMAGE_NAMES:\t\t$PATH_ALLOW_IMAGE_NAMES \n\
+PACKAGES_TO_CHANGE:\t\t$PACKAGES_TO_CHANGE \n\
+DOCKERFILE_KEYWORD:\t\t$DOCKERFILE_KEYWORD \n\
+DOCKERFILE_WORDS_TO_INSERT:\t$DOCKERFILE_WORDS_TO_INSERT \n\
 "
 
-# Make array of image names public on quay.io to rebuild
-IMAGE_NAMES=( $(curl "https://$QUAY_API_URL/repository?namespace=$QUAY_USERNAME&public=true" | jq -r ".repositories[].name") )
+if [ "$IMAGE_TO_REBUILD" == "ALL" ] ; then
+    # Make array of image names public on quay.io to rebuild
+    print_msg "Getting list of IMAGE_NAMES at 'https://$QUAY_API_URL/repository?namespace=$QUAY_USERNAME&public=true'"
+    IMAGE_NAMES=( $(curl "https://$QUAY_API_URL/repository?namespace=$QUAY_USERNAME&public=true" | jq -r ".repositories[].name") )
+
+else
+    IMAGE_NAMES=$IMAGE_TO_REBUILD
+fi
+
 print_msg "IMAGE_NAMES:\n${IMAGE_NAMES[*]}"
 
-IGNORE_IMAGE_NAMES=( $(<$PATH_IGNORE_IMAGE_NAMES) )
-print_msg "IGNORE_IMAGE_NAMES:\n${IGNORE_IMAGE_NAMES[*]}"
+ALLOW_IMAGE_NAMES=( $(<$PATH_ALLOW_IMAGE_NAMES) )
+print_msg "ALLOW_IMAGE_NAMES:\n${ALLOW_IMAGE_NAMES[*]}"
 
 # Login to quay.io
 if [ "$REPO_TO_PUSH" == "BOTH" ] || [ "$REPO_TO_PUSH" == "QUAY" ] ; then
@@ -85,34 +109,57 @@ fi
 # Loop all image names at https://quay.io/user/$QUAY_USERNAME
 for image_name in "${IMAGE_NAMES[@]}"; do
 
-    # If not in our blocked list
-    if [[ ! " ${IGNORE_IMAGE_NAMES[@]} " =~ " ${image_name} " ]]; then
-        docker_build_pass=0
-        resilient_sdk_package_pass=0
+    # If in our allowed list
+    if [[ " ${ALLOW_IMAGE_NAMES[@]} " =~ " ${image_name} " ]]; then
 
-        print_msg "Building: $image_name"
+        resilient_sdk_package_pass=0
+        docker_build_pass=0
 
         int_path="$TRAVIS_BUILD_DIR/$image_name"
-        print_msg "int_path: $int_path"
+        path_current_requirements="$int_path/current_requirements.txt"
+        path_new_requirements="$int_path/new_requirements.txt"
+        path_dockerfile="$int_path/Dockerfile"
+        int_version=$(python "$int_path/setup.py" --version)
+        print_msg "int_path:\t\t\t$int_path\npath_current_requirements:\t$path_current_requirements\npath_new_requirements:\t\t$path_new_requirements\npath_dockerfile:\t\t$path_dockerfile\nint_version:\t\t\t$int_version"
 
-        # run resilient-sdk package
+        docker_tag="$image_name:$int_version"
+        quay_io_tag="$QUAY_URL/$QUAY_USERNAME/$docker_tag"
+
+        print_msg "docker_tag:\t\t\t$docker_tag\nquay_io_tag:\t\t\t$quay_io_tag"
+
+        print_msg "Pull image from $quay_io_tag"
+        docker pull $quay_io_tag
+
+        print_msg "Starting container for $quay_io_tag"
+        # Can point -v to mock file but has to exist
+        docker_container=`docker run -d -v $path_dockerfile:/etc/rescircuits/app.config $quay_io_tag`
+
+        print_msg "Running pip freeze on $docker_container"
+        docker exec -it $docker_container sh -c "pip freeze" > $path_current_requirements
+        print_msg "Current requirements:\n$(cat $path_current_requirements)"
+
+        print_msg "Stopping and removing $docker_container"
+        docker stop $docker_container
+        docker container rm $docker_container
+
+        print_msg "Writing new requirements file"
+        python $SCRIPTS_DIR/modify_requirements_file.py $path_current_requirements $path_new_requirements $PACKAGES_TO_CHANGE
+        print_msg "New requirements:\n$(cat $path_new_requirements)"
+
+        print_msg "Overwriting Dockerfile"
+        python $SCRIPTS_DIR/insert_into_Dockerfile.py $path_dockerfile $DOCKERFILE_KEYWORD "$DOCKERFILE_WORDS_TO_INSERT"
+
         print_msg "Packaging $image_name with resilient-sdk"
         resilient-sdk package -p $int_path || resilient_sdk_package_pass=$?
+
+        print_msg "Rebuilding: $image_name"
 
         # If passes resilient-sdk package build it with docker
         if [ $resilient_sdk_package_pass = 0 ] ; then
 
-            # Get version to create latest tag
-            int_version=$(python "$int_path/setup.py" --version)
-            print_msg "int_version: $int_version"
-
-            docker_tag="$image_name:$int_version"
-
-            # run docker build
-            print_msg "Building $image_name with docker"
+            print_msg "Rebuilding $image_name with docker"
             docker build \
             --quiet \
-            --build-arg RESILIENT_CIRCUITS_VERSION=$RESILIENT_CIRCUITS_VERSION \
             -t $docker_tag \
             $int_path || docker_build_pass=$?
 
@@ -138,9 +185,9 @@ for image_name in "${IMAGE_NAMES[@]}"; do
             print_msg "Packaging or building failed. Adding $image_name to list of skipped_packages"
             skipped_packages+=($image_name)
         fi
-    
+
     else
-        print_msg "$image_name is in $PATH_IGNORE_IMAGE_NAMES\nAdding it to list of skipped_packages"
+        print_msg "$image_name is NOT in $PATH_ALLOW_IMAGE_NAMES\nAdding it to list of skipped_packages"
         skipped_packages+=($image_name)
     fi
 

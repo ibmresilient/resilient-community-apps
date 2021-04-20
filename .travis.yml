@@ -180,12 +180,11 @@ matrix:
         - pip install resilient-sdk
       script:
         # This will take split the git tag on '/'
-        # E.g.: tag is 'rebuild/40.0.0,!=38.0.76/QUAY'
-        # - the version of resilient-circuits installed will be >=40.0.0 and NOT 38.0.76
-        # - it will only push the image to the quay.io repository. If REPO_TO_PUSH is blank, it will push the image to quay.io and artifactory
-        - RESILIENT_CIRCUITS_VERSION=$(echo $TRAVIS_TAG | cut -d "/" -f 2)
-        - REPO_TO_PUSH=$(echo $TRAVIS_TAG | cut -d "/" -f 3)
-        - .scripts/rebuild_container_images.sh $RESILIENT_CIRCUITS_VERSION $REPO_TO_PUSH
+        # E.g.: tag is 'rebuild/40.1.1880/fn_utilities/ARTIFACTORY' OR rebuild/40.1.1880/ALL/QUAY
+        - PYTHON_LIBRARIES_VERSION=$(echo $TRAVIS_TAG | cut -d "/" -f 2)
+        - IMAGE_TO_REBUILD=$(echo $TRAVIS_TAG | cut -d "/" -f 3)
+        - REPO_TO_PUSH=$(echo $TRAVIS_TAG | cut -d "/" -f 4)
+        - .scripts/rebuild_container_images.sh $PYTHON_LIBRARIES_VERSION $IMAGE_TO_REBUILD $REPO_TO_PUSH
 
     - stage: successful notification
       # To make sure that success is sent once per job we create a separate stage for it
