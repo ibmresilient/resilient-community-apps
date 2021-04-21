@@ -4,7 +4,7 @@
 """
     Script to modify get package_name from commit message
     Takes 1 parameters:
-        1: COMMIT_MSG: e.g 'INT-000: [fn_utilities] fix bug with - Bump to version 3.0.0'
+        1: COMMIT_MSG: e.g 'INT-000: [fn_utilities]: fix bug with - Bump to version 3.0.0'
 """
 
 import sys
@@ -21,7 +21,7 @@ if COMMIT_MSG.startswith("Merge"):
     print("MERGE")
     exit(0)
 
-regex = re.compile(r'(?:INT-\d+: \[)(.+)(?=])')
+regex = re.compile(r'(?:INT-\d+: \[)(.+)(?=]:)')
 package_name = regex.match(COMMIT_MSG).groups()
 
 if not isinstance(package_name, tuple) and len(package_name) != 1:

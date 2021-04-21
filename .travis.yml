@@ -51,6 +51,7 @@ stages:
   - name: static analysis
     if: branch != master OR type in (pull_request)
   - name: build image and app zip
+    if: type != cron
   # Rebuild all images
   - name: rebuild all images
     if: tag =~ ^rebuild/.+
