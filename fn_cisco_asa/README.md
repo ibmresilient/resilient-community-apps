@@ -52,7 +52,7 @@
 ## Overview
 <!--
   Provide a high-level description of the function itself and its remote software or application.
-  The text below is parsed from the "description" and "long_description" attributes in the setup.py file
+  The text below is parsed from the "description" and "long_description" attributes in the setup.py file 
 -->
 **IBM Security SOAR Components for 'fn_cisco_asa'**
 
