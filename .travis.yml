@@ -46,10 +46,10 @@ stages:
   - name: run all tests
     if: branch = master AND type = cron
   - name: run package tests
-    if: branch != master
+    if: type != cron
   # Every commit not on master performs static analysis
   - name: static analysis
-    if: branch != master OR type in (pull_request)
+    if: type != cron
   - name: build image and app zip
     if: type != cron
   # Rebuild all images
