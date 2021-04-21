@@ -8,14 +8,14 @@
 # The hook checks for 2 conventions in a commit message:
 # 1: A JIRA Ticket Number; INT-XXXX
 # 2: A package name enclosed in []
-# Full example: INT-123 [fn_utilities] added a new feature
+# Full example: INT-123 {fn_utilities} added a new feature
 # 
 # This also accepts a "Merge"
 # Full example: "Merge branch 'master' into story/INT-3104_improve_build"
 # regex to validate in commit msg
 
-commit_regex='(^Merge|INT-\d+ \[?.*\]:)'
-error_msg="Aborting commit. Your commit message is either missing a JIRA Issue ('INT-1111'), a package name ('[myapp]') or if its a merge should start with ('Merge'). Example: INT-123 [fn_cool_action]: added new cool action"
+commit_regex='(^Merge|INT-\d+ \{?.*\})'
+error_msg="Aborting commit. Your commit message is either missing a JIRA Issue ('INT-1111'), a package name ('{myapp}') or if its a merge should start with ('Merge'). Example: INT-123 {fn_my_package} added new cool action"
 
 # Ensure the commit message contains the ticket 
 if ! grep -iqE "$commit_regex" "$1"; then
