@@ -136,11 +136,7 @@ if [ "$BUILD_TYPE" == "MAIN" ] ; then
 fi
 
 if [ "$BUILD_TYPE" == "DEV" ] ; then
-    print_msg "Re-packing + push to Artifactory for $BUILD_TYPE"
-
-    print_msg "Re-packaging $PACKAGE_NAME with resilient-sdk --image-hash '$image_sha_digest'"
-    resilient-sdk package -p $package_path --image-hash "$image_sha_digest"
-    app_zip_path=$(ls $package_path/dist/*.zip)
+    print_msg "Push to Artifactory for $BUILD_TYPE"
 
     print_msg "Pushing $artifactory_tag to artifactory"
     docker push $artifactory_tag
