@@ -3,5 +3,6 @@
 #IBM_SOAR_Apps
 
 fn_task_utils
+fn_scheduler
 fn_service_now
 fn_utilities
