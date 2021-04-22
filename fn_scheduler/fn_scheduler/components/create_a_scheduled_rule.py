@@ -7,7 +7,7 @@ import logging
 from resilient_circuits import ResilientComponent, function, FunctionResult, FunctionError, StatusMessage
 from resilient import SimpleHTTPException
 from resilient_circuits.rest_helper import get_resilient_client
-from resilient_lib import ResultPayload
+from resilient_lib import ResultPayload, str_to_bool
 from fn_scheduler.components import SECTION_SCHEDULER, SECTION_RESILIENT
 from fn_scheduler.lib.scheduler_helper import ResilientScheduler
 from fn_scheduler.lib.resilient_helper import get_incident, get_rule_by_id, get_rule_by_name, add_comment, \
@@ -95,7 +95,8 @@ class FunctionComponent(ResilientComponent):
             incident_data = [incident_id, object_id, row_id,
                              scheduler_label_prefix,
                              scheduler_rule_name, rule_id, rule_object_type_id, rule_params,
-                             self.opts[SECTION_RESILIENT]]
+                             self.opts[SECTION_RESILIENT],
+                             self.opts[SECTION_SCHEDULER]]
 
             # validate the type and type_value
             trigger = self.res_scheduler.build_trigger(scheduler_type, scheduler_type_value)
@@ -144,7 +145,7 @@ class FunctionComponent(ResilientComponent):
 def triggered_job(incident_id, object_id, row_id,
                   scheduler_label,
                   rule_name, rule_id, rule_object_type_id, rule_params,
-                  opts, **kwargs):
+                  opts, options, **kwargs):
     """
     This function is called when a scheduled rule is triggered. It is run asynchronous of the create_scheduled_rule process.
     It's role is to build the api call-back to Resilient to run the rule.
@@ -158,6 +159,7 @@ def triggered_job(incident_id, object_id, row_id,
     :param rule_object_type_id: internal id referring to incident, task, artifact, etc.
     :param rule_params:
     :param opts: contains [resilient] parameters needed to connect back to Resilient for API calls
+    :param options: contains [fn_scheduler] parameters
     :param kwargs: catch all for additional arguments as necessary
     :return: None
     """
@@ -166,6 +168,9 @@ def triggered_job(incident_id, object_id, row_id,
     log.debug(rule_object_type_id)
     log.debug(rule_params)
     log.debug(kwargs)
+
+    disable_notes = str_to_bool(options.get("disable_notes", False))
+    log.debug(disable_notes)
 
     # get the rest client
     rest_client = get_resilient_client(opts)
@@ -188,7 +193,7 @@ def triggered_job(incident_id, object_id, row_id,
     except KeyError as err:
         # remove rules which no longer exist
         log.error(u"Rule '%s' not found and schedule will be removed.", rule_name)
-        add_comment(rest_client, incident_id, u"Error running rule '{}': {}".format(scheduler_label, str(err)))
+        (not disable_notes) and add_comment(rest_client, incident_id, u"Error running rule '{}': {}".format(scheduler_label, str(err)))
         scheduler.remove_job(scheduler_label)
         return
 
@@ -226,10 +231,10 @@ def triggered_job(incident_id, object_id, row_id,
             scheduler.remove_job(scheduler_label)
         else:
             log.error("An error occurred for rule '%s'", rule_id)
-        add_comment(rest_client, incident_id, u"Error running rule '{}': {}".format(scheduler_label, str(err)))
+        (not disable_notes) and add_comment(rest_client, incident_id, u"Error running rule '{}': {}".format(scheduler_label, str(err)))
         return
 
     if rule_type:
-        add_comment(rest_client, incident_id, u"Scheduled job '{}' run on {}: {}".format(rule_name, rule_type, object_id))
+        (not disable_notes) and add_comment(rest_client, incident_id, u"Scheduled job '{}' run on {}: {}".format(rule_name, rule_type, object_id))
     else:
-        add_comment(rest_client, incident_id, u"Scheduled job '{}' run on incident".format(rule_name))
+        (not disable_notes) and add_comment(rest_client, incident_id, u"Scheduled job '{}' run on incident".format(rule_name))
