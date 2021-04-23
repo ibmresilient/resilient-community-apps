@@ -17,8 +17,11 @@ else:
 PACKAGE_NAME = "fn_scheduler"
 FUNCTION_NAME = "list_scheduled_rules"
 
-# Read the default configuration-data section from the package
-config_data = get_config_data(PACKAGE_NAME)
+# Use mock configuration data
+config_data = """[{0}]
+thread_max=20
+timezone=utc
+datastore_dir=/tmp""".format(PACKAGE_NAME)
 
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
