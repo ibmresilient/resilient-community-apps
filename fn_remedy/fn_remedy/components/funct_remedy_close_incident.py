@@ -184,7 +184,7 @@ class FunctionComponent(ResilientComponent):
             verify = str_to_bool(self.fn_options.get("verify", "true"))
             # override MAX_ROWS if provided in app.config
             global MAX_ROWS
-            MAX_ROWS = self.fn_options.get("max_datatable_rows", MAX_ROWS)
+            MAX_ROWS = int(self.fn_options.get("max_datatable_rows", MAX_ROWS))
 
             # get function inputs
             remedy_payload = kwargs.get("remedy_payload")
