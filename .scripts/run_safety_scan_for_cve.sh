@@ -31,6 +31,11 @@ print_msg () {
 ## Start ##
 ###########
 
+if [ "$PACKAGE_NAME" == "MERGE" ] ; then
+    print_msg "Latest commit is a Merge. Not running CVE scan"
+    exit 0
+fi
+
 print_msg "Installing $PACKAGE_NAME"
 # Install the package and all its deps.
 python $PACKAGE_NAME/setup.py -q install

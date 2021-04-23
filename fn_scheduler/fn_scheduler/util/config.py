@@ -18,5 +18,7 @@ thread_max=20
 datastore_dir=
 # db url if using a postgreSQL DB. Use this with AppHost
 #db_url=postgresql+pypostgresql://username:password@host:port/database
+# set to True to disable note creation when a scheduled rule is triggered. Default is False.
+disable_notes=False
 """
     return config_data

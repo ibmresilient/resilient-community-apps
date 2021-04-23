@@ -37,11 +37,11 @@
   Specify all changes in this release. Do not remove the release 
   notes of a previous release
 -->
-### v1.0.1
-* App Host support
-
-### v1.0.0
-* Initial Release
+| Version | Date | Notes |
+| ------- | ---- | ----- |
+| v1.1.0  | 4/2021 | Support for different API versions. See app.config `api_version` setting |
+| v1.0.1  | 7/2019 | App Host support |
+| v1.0.0  | 10/2020 | Initial release |
 
 ---
 
@@ -99,7 +99,8 @@ The following table describes the settings you need to configure in the app.conf
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
 | **panorama_host** | Yes | `<https://0.0.0.0>` | *IP or hostname of the panorama server.* |
-| **api_key** | Yes | `<Panorama_api_key>` | *API key generated with permissions to query the Panorama API.* |
+| **api_version** | No | `9.0` | *Specify the api version to use. '9.0' is the default.* |
+| **api_key** | Yes | `<Panorama_api_key>` | *API key generated with permissions to query the Panorama API. Get the API key via: curl -k -X GET 'https://<panoramaIP>/api/?type=keygen&user=<username>&password=<password>'* |
 | **cert** | Yes | <code>[True &#124; False]</code> | *Validate certificates (True) or allow insecure connections (False).* |
 | **http_proxy** | No | `<http://proxy.server:3128>` | *Optional http proxy server.* |
 | **https_proxy** | No | `<https://proxy.server:3128>` | *Optional https proxy server.* |
@@ -947,10 +948,6 @@ Example Response:
 </details>
 
 ---
-
-
-
-
 
 ## Rules
 | Rule Name | Object | Workflow Triggered |
