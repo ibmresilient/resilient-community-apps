@@ -12,7 +12,7 @@
   ![screenshot: screenshot_1](./screenshots/screenshot_1.png)
 -->
 
-# **User Guide:** Microsoft Exchange Online Functions for IBM Resilient v1.2.0
+# **User Guide:** Microsoft Exchange Online Functions for IBM Resilient v1.3.0
 
 ## Table of Contents
 - [Key Features](#key-features)
@@ -27,8 +27,17 @@
 - [Function - Exchange Online: Write Message as Attachment](#function---exchange-online-write-message-as-attachment)
 - [Data Table - Exchange Online Message Query Results](#data-table---exchange-online-message-query-results)
 - [Rules](#rules)
+- [Troubleshooting](#troubleshooting)
 
 ---
+
+## History
+| Date | Version | Note |
+| ---- | ------- | ---- |
+| 2/2021 | 1.3.0 | Added attachments to send message |
+| 12/2020 | 1.2.0 | Performance improvement when querying a large tenant using the "all" query parameter |
+| 9/2020 | 1.1.0 | Numerous performance and functional improvements around querying mailboxes |
+| 2/2020 | 1.0.0 | Initial publication |
 
 ## Key Features
 <!--
@@ -1243,6 +1252,14 @@ exo_message_query_results_dt
 | Example: Exchange Online Delete Message | exo_message_query_results_dt | `example_exchange_online_delete_email` |
 
 ---
+
+## Troubleshooting
+
+### Proxy Configuration
+
+If configuring fn_exchange_online with a proxy server, setting both the `http_proxy` and `https_proxy` can lead to connection issues.
+Microsoft only supports a secure HTTPS proxy and we recommend only using the `https_proxy` parameter.
+The `http_proxy` parameter should be omitted.
 
 <!--
 ## Inform Resilient Users

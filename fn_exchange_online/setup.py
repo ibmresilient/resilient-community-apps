@@ -19,7 +19,7 @@ def snake_to_camel(word):
 
 setup(
     name='fn_exchange_online',
-    version='1.2.0',
+    version='1.3.0',
     license='MIT',
     author='IBM Resilient',
     author_email='',
@@ -28,7 +28,7 @@ setup(
     long_description="Resilient Integration with Exchange Online provides the capability to access and manipulate Microsoft Exchange Online messages from Resilient.",
     install_requires=[
         'resilient_circuits>=31.0.0',
-        'resilient_lib>=35.0.0',
+        'resilient_lib>=40.0.1rc0',
         'pytz>=2019.3',
         'tzlocal>=2.0.0'
     ],

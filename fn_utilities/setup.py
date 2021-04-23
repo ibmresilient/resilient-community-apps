@@ -22,7 +22,7 @@ def snake_to_camel(word):
 
 setup(
     name='fn_utilities',
-    version='2.0.2',
+    version='2.0.5',
     license='MIT',
     author='IBM Resilient',
     author_email='support@resilientsystems.com',
@@ -45,7 +45,9 @@ setup(
         'json2html',
         'lxml',
         'mail-parser>=3.9.3',
-        'paramiko'
+        'paramiko',
+        'defusedxml>=0.7.1',
+        'pdfid>=1.0.4'
     ],
     packages=find_packages(),
     python_requires='>=3',

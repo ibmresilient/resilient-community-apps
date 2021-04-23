@@ -19,7 +19,7 @@ def snake_to_camel(word):
 
 setup(
     name='fn_datatable_utils',
-    version='1.1.0',
+    version='1.2.0',
     license='MIT',
     author='Resilient Labs',
     author_email='resil.labs@gmail.com',
@@ -28,8 +28,7 @@ setup(
     long_description="This package contains 6 functions that help you manipulate IBM Resilient Data Tables: Get Row,  Get Rows, Update Row, Delete Row, Delete Rows and Convert CSV Data to a datatable.",
     install_requires=[
         'resilient_circuits>=33.0.0',
-        'resilient-lib>=32.0.140',
-        'cachetools'
+        'resilient-lib>=32.0.140'
     ],
     packages=find_packages(),
     include_package_data=True,

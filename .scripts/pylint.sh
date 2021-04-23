@@ -1,56 +1,68 @@
-#!/bin/sh
+#!/bin/bash -x
 #
 # An example script to do linting on the repo.
 # Called by "git commit" with no arguments.  The hook should
 # exit with non-zero status after issuing an appropriate message if
 # it wants to stop the commit.
 #
-echo "\nStarting a  script to run pylint on python files."
-readonly MIN_PASSING_SCORE=7.25
+
+# param $1: (required) which package_name to run the scan for
+
+###############
+## Variables ##
+###############
+PACKAGE_NAME=$1
+readonly MIN_PASSING_SCORE=6.25
 readonly ERROR_MSG="Aborting commit. Your commit has a pylint score lower than ${MIN_PASSING_SCORE}"
+RCFILE=".scripts/.pylintrc"
 
-# Declare an array that will hold the fn_ or rc_ packages
-packages_that_have_been_changed=()
-
-# For every file in the diff
-for file in $(git diff --name-only HEAD~0 HEAD~1); do
-    # If the file contains either fn_ or rc_ in the path
-    if [[ $file =~ (fn_|rc-)+ ]]; then
-        # Strip everything except the first directory in the path (integration name) and append to an array
-        packages_that_have_been_changed+=($(echo "$file" | awk -F "/" '{print $1}'))
-    fi
-done
-
-# Make a new array which acts as a Set to gather only unique package names
-INTEGRATIONS=($(for v in "${packages_that_have_been_changed[@]}"; do echo "$v"; done | sort | uniq | xargs))
-INTEGRATIONS=('fn_sep')
-if [ -z "$INTEGRATIONS" ]; then
-    echo "Did not find any integrations that were modified"
-    exit 0
-else
-    echo "Most recently modified integrations from last commit show as : ${INTEGRATIONS}"
+##################
+## Check params ##
+##################
+if [ -z "$1" ] ; then
+    echo "ERROR: Must provide PACKAGE_NAME as first parameter"
+    exit 1
 fi
 
-for integration in ${INTEGRATIONS[@]}; do
-    # Lint all the python files
-    pylint ${integration}/**/**/*.py \; |
-        # Only get the number values
-        grep -oE "\-?[0-9]+\.[0-9]+" |
-        # Extract the score
-        awk 'NR==1 || NR % 4 == 0' |
-        # # Round the score down
-        # sed 's/...$//' |
-        # For score lines
-        while read line; do
-            # If the line contains a score lower than MIN_PASSING_SCORE throw a problem.
-            if (($(echo "$line < ${MIN_PASSING_SCORE}" | bc -l))); then
-                # else print the error message
-                echo "$ERROR_MSG" >&2
-                exit 1
-            else
-                echo "Success: Pylint score $line greater than min required score: ${MIN_PASSING_SCORE}"
-            fi
-        done
-done
-printf 'Pylint Run Complete.  Final Status [%d]\n' $status
+###############
+## Functions ##
+###############
+print_msg () {
+    printf "\n--------------------\n$1\n--------------------\n"
+}
+
+###########
+## Start ##
+###########
+print_msg "Starting a script to run pylint on python files for $PACKAGE_NAME"
+
+
+# Lint all the python files;
+# **/**/*.py catches every dir such as cmds, util, tests
+pylint --rcfile=${RCFILE} ./${PACKAGE_NAME}/**/**/*.py \; |
+    # Only get the number values
+    grep -oE "\-?[0-9]+\.[0-9]+" |
+    # Extract the score
+    awk 'NR==1 || NR % 4 == 0' |
+    # For score lines
+    while read line; do
+        print_msg "Pylint score for $PACKAGE_NAME is $line"
+        # If the line contains a score lower than MIN_PASSING_SCORE throw a problem.
+        if (($(echo "$line < ${MIN_PASSING_SCORE}" | bc -l))); then
+            # and print the error message
+            echo ">$ERROR_MSG" >&2
+            # and save the last_status as failure
+            last_status=1
+        else
+            print_msg "Pylint score $line greater than min required score: ${MIN_PASSING_SCORE}; Success!"
+            last_status=0
+        fi
+        # Update the status if any pylint scan for a package fails
+        if [ $last_status -ne 0 ]; then
+            echo "FAILURE $toxfile: [$last_status]"
+            status=$last_status;
+        fi
+    done
+
+echo "Pylint Run Complete.  Final Status $status"
 exit $status

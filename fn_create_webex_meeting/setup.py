@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_create_webex_meeting',
-    version='1.0.1',
+    version='1.1.0',
     url='https://github.com/ibmresilient/resilient-community-apps',
     license='MIT',
     author='IBM Resilient Labs',
@@ -14,7 +14,7 @@ setup(
     long_description="Resilient Circuits Components for 'fn_create_webex_meeting'",
     install_requires=[
         'resilient_circuits>=30.0.0',
-        'requests',
+        'resilient-lib',
         'pytz'
     ],
     packages=find_packages(),
@@ -25,7 +25,7 @@ setup(
     ],
     entry_points={
         "resilient.circuits.components": [
-            "FnCreateWebexMeetingFunctionComponent = fn_create_webex_meeting.components.fn_create_webex_meeting:FunctionComponent"
+            "FnCreateWebexMeetingFunctionComponent = fn_create_webex_meeting.components.funct_create_webex_meeting:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_create_webex_meeting.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_create_webex_meeting.util.customize:customization_data"],

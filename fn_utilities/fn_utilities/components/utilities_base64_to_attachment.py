@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2021. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 
 """Function implementation"""
 
+import base64
 import logging
 import json
 import mimetypes
@@ -41,10 +42,7 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("Writing attachment...")
 
-            if sys.version_info.major < 3:
-                datastream = BytesIO(base64content)
-            else:
-                datastream = BytesIO(base64content.encode("utf-8"))
+            datastream = BytesIO(base64.b64decode(base64content.encode("utf-8")))
 
             client = self.rest_client()
             new_attachment  = write_file_attachment(client, file_name, datastream, incident_id, task_id, content_type)
