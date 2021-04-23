@@ -110,7 +110,7 @@ class TestListScheduledRules:
         now = datetime.datetime.now()
         yyyymmdd = now.strftime('%s')
 
-        rule_label = "{}_{}".format(scheduler_label_prefix, yyyymmdd)
+        rule_label = u"{}_{}".format(scheduler_label_prefix, yyyymmdd)
 
         function_params = {
             "scheduler_type": scheduler_type,

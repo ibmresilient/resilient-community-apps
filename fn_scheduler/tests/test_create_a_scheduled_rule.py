@@ -216,7 +216,7 @@ class TestCreateAScheduledRule:
                                  ('interval', "2h", "Test Rule", None, "interval", 123, None, None, {"value": "xyz"}),
                                  ('date', "", "Test Rule", None, "date", 123, None, None, {"value": "xyz"}),
                                  ('delta', "2h", "Test Rule", None, "delta", 123, None, None, {"value": "xyz"}),
-                                 ('delta', "2h", "unicode ΞΟΠΡ", None, "unicode ΞΟΠΡ", 123, None, None, {"value": "xyz"})
+                                 ('delta', "2h", u"unicode ΞΟΠΡ", None, u"unicode ΞΟΠΡ", 123, None, None, {"value": "xyz"})
                              ])
     @patch('fn_scheduler.lib.resilient_helper.get_rules')
     @patch('fn_scheduler.components.create_a_scheduled_rule.get_incident')
@@ -228,7 +228,7 @@ class TestCreateAScheduledRule:
         setup_mock_incident(mock_get_incident)
         setup_mock_actions(mock_get_rules)
 
-        rule_label = "{}_{}".format(scheduler_label_prefix, yyyymmdd)
+        rule_label = u"{}_{}".format(scheduler_label_prefix, yyyymmdd)
 
         if scheduler_type == "date":
             dt = ResilientScheduler.get_interval("2h", date=True)
