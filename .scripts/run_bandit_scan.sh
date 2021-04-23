@@ -32,6 +32,12 @@ print_msg () {
 ###########
 ## Start ##
 ###########
+
+if [ "$PACKAGE_NAME" == "MERGE" ] ; then
+    print_msg "Latest commit is a Merge. Not running bandit scan"
+    exit 0
+fi
+
 print_msg "Running a bandit security scan for $PACKAGE_NAME"
 
 # Perform a bandit security scan on the given integration/app and suppress any Low level warnings. 
