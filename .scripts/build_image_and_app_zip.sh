@@ -83,7 +83,7 @@ package_path="$TRAVIS_BUILD_DIR/$PACKAGE_NAME"
 path_setup_py_file="$package_path/setup.py"
 current_version=$(python $path_setup_py_file --version)
 lib_version=$(echo $current_version | cut -d "." -f 1,2)
-version_to_use=current_version
+version_to_use=$current_version
 
 if [ "$BUILD_TYPE" == "DEV" ] ; then
     version_to_use=$lib_version.$TRAVIS_BUILD_NUMBER
