@@ -107,7 +107,7 @@ matrix:
         - .scripts/run_tests.sh "$PACKAGE_NAME" "$PYPI_INDEX_TO_USE"
 
     - stage: run package tests
-      name: Python 3.6 Build and Run Tests
+      name: Python 3.6 Unit Tests - Package
       python: 3.6
       env:
         - RUN_TYPE=unit_test_package TOXENV=py36
