@@ -14,7 +14,7 @@ LC_ALL=C
 
 local_branch="$(git rev-parse --abbrev-ref HEAD)"
 
-valid_branch_regex="^(epic|story|bug|task|rebuild)\/INT-[0-9]+\/[a-z_]+"
+valid_branch_regex="^[a-z]+\/INT-[0-9]+\/[a-z_]+"
 
 message="INVALID BRANCH NAME. Branch names must adhere to this contract: $valid_branch_regex with the 3rd segment being the package_name. You should rename your branch to a valid name and try again. Example 1: 'story/INT-0000/fn_my_package/new_feature'. Example 2: 'epic/INT-0000/fn_my_package'"
 
