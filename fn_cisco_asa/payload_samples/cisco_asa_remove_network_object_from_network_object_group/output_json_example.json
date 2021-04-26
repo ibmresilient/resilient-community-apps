@@ -1,0 +1,21 @@
+{
+    "content":"Object Kind: IPv4Range, Object Value: 7.7.7.0-7.7.7.10, Object Name: Ranges7.0-7.10, is removed from Firewall: firewall_1, Group: BLOCKLIST_IN",
+    "inputs":{
+                "cisco_asa_firewall":"firewall_1",
+                "cisco_asa_network_object_group":"BLOCKLIST_IN",
+                "cisco_asa_network_object_id":"Ranges7.0-7.10",
+                "cisco_asa_network_object_kind":"IPv4Range",
+                "cisco_asa_network_object_value":"7.7.7.0-7.7.7.10"
+    },
+    "metrics":{
+                "execution_time_ms":23101,
+                "host":"MacBook-Pro.local",
+                "package":"fn-cisco-asa",
+                "package_version":"1.0.0",
+                "timestamp":"2021-04-07 16:46:06",
+                "version":"1.0"
+    },
+    "raw":"\"Object Kind: IPv4Range, Object Value: 7.7.7.0-7.7.7.10, Object Name: Ranges7.0-7.10, is removed from Firewall: firewall_1, Group: BLOCKLIST_IN\"",
+    "reason":"None",
+    "success":true
+}
