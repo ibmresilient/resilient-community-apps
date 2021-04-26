@@ -89,6 +89,7 @@ If deploying to a Resilient platform with an integration server, the requirement
   | Function | Read |
   | Incidents |  Read |
   | Incident Notes | Write |
+  | Private Tasks | Read |
 
 The following Resilient platform guides provide additional information: 
 * _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
