@@ -19,10 +19,23 @@ COMMIT_MSG = args[1]
 
 if COMMIT_MSG.startswith("Merge"):
     # Example commit message if its a merge
-    # "Merge pull request #895 from Resilient/story/INT-0000/fn_my_package/new_feature"
-    package_name = COMMIT_MSG.split("/")[3]
-    print(package_name)
-    exit(0)
+    # "Merge pull request #895 from Resilient/story/INT-0000/fn_my_package"
+    commit_msg_split = COMMIT_MSG.split("/")
+
+    try:
+
+        for i in range(len(commit_msg_split)):
+            if commit_msg_split[i].startswith("INT"):
+                package_name = commit_msg_split[i + 1].split()[0]
+                print(package_name)
+                exit(0)
+
+    except IndexError:
+        print("Could not get package name")
+        exit(1)
+
+    # package_name could not be found in COMMIT_MSG
+    exit(1)
 
 else:
     regex = re.compile(r'(?:INT-\d+ \{)(.+)(?=})')
