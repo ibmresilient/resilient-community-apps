@@ -19,10 +19,7 @@ env:
 
     - KEYWORD_BUILD_DEV_APP="[build-dev-app]"
     - BUILD_DEV_APP=$([[ "$TRAVIS_COMMIT_MESSAGE" != *"$KEYWORD_BUILD_DEV_APP"* ]]; echo $?)
-
-    - KEYWORD_BUILD_MAIN_APP="[build-main-app]"
-    - BUILD_MAIN_APP=$([[ "$TRAVIS_COMMIT_MESSAGE" != *"$KEYWORD_BUILD_MAIN_APP"* ]]; echo $?)
-    - BUILD_TYPE=`if [ $BUILD_MAIN_APP == 1 ]; then echo "MAIN"; else echo "DEV"; fi`
+    - BUILD_TYPE=`if [ $BUILD_DEV_APP == 1 ]; then echo "DEV"; else echo "MAIN"; fi`
 
     - KEYWORD_DEV_DEPS='[dev-deps]'
     - USE_ARTIFACTORY_DEPS=`[[ "$TRAVIS_COMMIT_MESSAGE" != *"$KEYWORD_DEV_DEPS"* ]]; echo $?`
@@ -51,7 +48,7 @@ stages:
   - name: static analysis
     if: type != cron
   - name: build image and app zip
-    if: type != cron
+    if: type = push
   # Rebuild all images
   - name: rebuild all images
     if: tag =~ ^rebuild/.+
@@ -107,7 +104,7 @@ matrix:
         - .scripts/run_tests.sh "$PACKAGE_NAME" "$PYPI_INDEX_TO_USE"
 
     - stage: run package tests
-      name: Python 3.6 Build and Run Tests
+      name: Python 3.6 Unit Tests - Package
       python: 3.6
       env:
         - RUN_TYPE=unit_test_package TOXENV=py36
@@ -177,8 +174,7 @@ matrix:
         - provider: script
           script: .scripts/build_image_and_app_zip.sh "$PACKAGE_NAME" "MAIN" "$PYPI_INDEX_TO_USE";
           on:
-            all_branches: true
-            condition: "$BUILD_MAIN_APP = 1"
+            branch: master
       after_deploy:
         - PATH_APP_ZIP=`cat "$TRAVIS_BUILD_DIR/PATH_APP_ZIP.txt"`;
         - echo "PATH_APP_ZIP=$PATH_APP_ZIP";

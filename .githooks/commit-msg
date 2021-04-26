@@ -15,7 +15,7 @@
 # regex to validate in commit msg
 
 commit_regex='(^Merge|INT-\d+ \{?.*\})'
-error_msg="Aborting commit. Your commit message is either missing a JIRA Issue ('INT-1111'), a package name ('{myapp}') or if its a merge should start with ('Merge'). Example: INT-123 {fn_my_package} added new cool action"
+error_msg="INVALID COMMIT MESSAGE. Your commit message is either missing a JIRA Issue ('INT-1111'), a package name ('{myapp}') or if its a merge should start with ('Merge'). Example: INT-123 {fn_my_package} added new cool action"
 
 # Ensure the commit message contains the ticket 
 if ! grep -iqE "$commit_regex" "$1"; then

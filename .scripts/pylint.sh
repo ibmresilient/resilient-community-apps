@@ -34,6 +34,12 @@ print_msg () {
 ###########
 ## Start ##
 ###########
+
+if [ "$PACKAGE_NAME" == "MERGE" ] ; then
+    print_msg "Latest commit is a Merge. Not running pylint"
+    exit 0
+fi
+
 print_msg "Starting a script to run pylint on python files for $PACKAGE_NAME"
 
 
