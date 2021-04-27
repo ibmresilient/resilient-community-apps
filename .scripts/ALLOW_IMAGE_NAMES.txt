@@ -1,9 +1,4 @@
 #List-of-allowed-image-names
 
 #IBM_SOAR_Apps
-fn_pa_panorama
-fn_task_utils
-fn_scheduler
 fn_service_now
-fn_utilities
-fn_cisco_asa

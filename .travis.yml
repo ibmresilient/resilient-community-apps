@@ -32,23 +32,23 @@ branches:
     - public
     - /^_.*$/
 
-notifications:
-  slack:
-    rooms:
-      - secure: "OnC0Emkl5zxS0lWkoly700RI3oaMyn/QVNjFgYy3GHtX44cynlGYmrKiWU1oN12QBVdt6GcVsN+9IW/dovORfZQWtgaLdbVwNClL5MZkVUS3/PrFiA56Sx38zsrlKWVNNPg1ktPtlKSvZ36NwRwTKq5C7eyVWJ9uc3Kx0E5lI7MWP3n+pfAMXpiJ3r9tAuuXKT07YUTtxN+bev8yhSjj9hLWZvfobXVuWLhJHCPp6vWH2ME55GD9cqtxCJtPE0I7jElqUQZQ+ubHdHWpnFGySM+af+45kkE7NwavbdpkB57FQrCjXOeRCZ4Znei7r+iAet/ADQOXyOk6dXUAI9wccevORQnRTvPiyBan62apV/xvEIr4mqXPilD6EGMUAhi7rAWVyWwQeCFGNYHbX7EbHm7Tv30PF1CSjGxV3YYiZWLzjLSwNrCzwSZ0AnqN857WWygNfoe3h5PV6tGz9a12oFjaS3VvX61Ow93C5FeRWZMKkZHZuouZ68a4yGM99Gr3mJ9vffyhbV1b/SfGmfWdZs50ThBbyw1gEn/Hvq5L9uBOEktq9iVhzhWmWG0zpGL0HDCTvANvAoVK5EWUBfEymjpxL46ieK5lOV7e/QA1XSiM7YSgkPnz9wJx3/25WHOHLYLslKlXdwukwZwYhwT1JYGpZmWbT2nLsm7NBcC5fMQ="
-  on_success: never
-  on_failure: always
+# notifications:
+#   slack:
+#     rooms:
+#       - secure: "OnC0Emkl5zxS0lWkoly700RI3oaMyn/QVNjFgYy3GHtX44cynlGYmrKiWU1oN12QBVdt6GcVsN+9IW/dovORfZQWtgaLdbVwNClL5MZkVUS3/PrFiA56Sx38zsrlKWVNNPg1ktPtlKSvZ36NwRwTKq5C7eyVWJ9uc3Kx0E5lI7MWP3n+pfAMXpiJ3r9tAuuXKT07YUTtxN+bev8yhSjj9hLWZvfobXVuWLhJHCPp6vWH2ME55GD9cqtxCJtPE0I7jElqUQZQ+ubHdHWpnFGySM+af+45kkE7NwavbdpkB57FQrCjXOeRCZ4Znei7r+iAet/ADQOXyOk6dXUAI9wccevORQnRTvPiyBan62apV/xvEIr4mqXPilD6EGMUAhi7rAWVyWwQeCFGNYHbX7EbHm7Tv30PF1CSjGxV3YYiZWLzjLSwNrCzwSZ0AnqN857WWygNfoe3h5PV6tGz9a12oFjaS3VvX61Ow93C5FeRWZMKkZHZuouZ68a4yGM99Gr3mJ9vffyhbV1b/SfGmfWdZs50ThBbyw1gEn/Hvq5L9uBOEktq9iVhzhWmWG0zpGL0HDCTvANvAoVK5EWUBfEymjpxL46ieK5lOV7e/QA1XSiM7YSgkPnz9wJx3/25WHOHLYLslKlXdwukwZwYhwT1JYGpZmWbT2nLsm7NBcC5fMQ="
+#   on_success: never
+#   on_failure: always
 
 stages:
   - name: run all tests
-    if: branch = master AND type = cron
+    if: tag IS present OR (branch = master AND type = cron)
   - name: run package tests
-    if: type != cron
+    if: tag IS blank AND type != cron
   # Every commit not on master performs static analysis
   - name: static analysis
-    if: type != cron
+    if: tag IS blank AND type != cron
   - name: build image and app zip
-    if: type = push
+    if: tag IS blank AND type = push
   # Rebuild all images
   - name: rebuild all images
     if: tag =~ ^rebuild/.+
