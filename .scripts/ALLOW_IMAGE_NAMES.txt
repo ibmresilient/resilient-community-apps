@@ -1,4 +1,9 @@
 #List-of-allowed-image-names
 
 #IBM_SOAR_Apps
-fn_service_now
+#Batch_1
+#fn_service_now
+fn_task_utils
+fn_datatable_utils
+fn_alienvault_otx
+fn_urlhaus
