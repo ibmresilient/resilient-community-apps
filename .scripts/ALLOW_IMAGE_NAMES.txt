@@ -3,9 +3,11 @@
 #IBM_SOAR_Apps
 #Batch_1
 #fn_alienvault_otx
-fn_anomali_staxx
-fn_api_void
-fn_aws_iam
+#fn_anomali_staxx
+#fn_api_void
+#fn_aws_iam
+fn_bigfix
+fn_calendar_invite
 #fn_datatable_utils
 #fn_service_now
 #fn_task_utils
@@ -21,3 +23,6 @@ fn_aws_iam
 #No_Related_image
 #fn_apility
 #fn_aws_utilities
+
+#Not_on_AppX
+#fn_bluecoat_site_review-not-on-appx
