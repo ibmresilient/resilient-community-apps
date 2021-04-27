@@ -21,7 +21,7 @@ def selftest_function(opts):
     options = opts.get("fn_cve_search", {})
 
     try:
-        url = "/".join((options.get('cve_base_url'), 'last'))
+        url = "/".join((options.get('cve_base_url'), 'dbInfo'))
         _response = make_rest_api_get_call(url, opts, options)
 
         return {"state": "Success"}

@@ -8,12 +8,16 @@
 #fn_aws_iam
 #fn_bigfix
 #fn_calendar_invite
-fn_cisco_amp4ep
-fn_cisco_enforcement
-fn_cisco_umbrella_inv
-fn_cloud_foundry
-fn_components
+#fn_cisco_amp4ep
+#fn_cisco_enforcement
+#fn_cisco_umbrella_inv
+#fn_cloud_foundry
+#fn_components
+fn_create_webex_meeting
+fn_cve_search
 #fn_datatable_utils
+fn_elasticsearch
+fn_email_header_validation
 #fn_service_now
 #fn_task_utils
 #fn_urlhaus
@@ -23,6 +27,7 @@ fn_components
 #fn_ansible
 #fn_ansible_tower
 #fn_aws_guardduty-failing-test
+#fn_crowdstrike_falcon
 
 
 #No_Related_image
@@ -30,6 +35,9 @@ fn_components
 #fn_aws_utilities
 #fn_cb_protection
 #fn_clamav
+#fn_create_zoom_meeting
+#fn_digital_shadows_search
+#fn_docker
 
 #Not_on_AppX
-#fn_bluecoat_site_review-not-on-appx
+#fn_bluecoat_site_review
