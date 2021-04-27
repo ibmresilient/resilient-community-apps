@@ -6,8 +6,13 @@
 #fn_anomali_staxx
 #fn_api_void
 #fn_aws_iam
-fn_bigfix
-fn_calendar_invite
+#fn_bigfix
+#fn_calendar_invite
+fn_cisco_amp4ep
+fn_cisco_enforcement
+fn_cisco_umbrella_inv
+fn_cloud_foundry
+fn_components
 #fn_datatable_utils
 #fn_service_now
 #fn_task_utils
@@ -23,6 +28,8 @@ fn_calendar_invite
 #No_Related_image
 #fn_apility
 #fn_aws_utilities
+#fn_cb_protection
+#fn_clamav
 
 #Not_on_AppX
 #fn_bluecoat_site_review-not-on-appx
