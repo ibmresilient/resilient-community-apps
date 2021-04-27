@@ -116,6 +116,7 @@ If deploying to a Resilient platform with an integration server, the requirement
   | Name | Permissions |
   | ---- | ----------- |
   | Org Data | Read |
+  | Org Data | Edit |
   | Function | Read |
   | Incidents | Read |
   | Edit Incidents | Fields |
