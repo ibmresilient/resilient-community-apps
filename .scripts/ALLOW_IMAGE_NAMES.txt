@@ -13,11 +13,16 @@
 #fn_cisco_umbrella_inv
 #fn_cloud_foundry
 #fn_components
-fn_create_webex_meeting
-fn_cve_search
+#fn_create_webex_meeting
+#fn_cve_search
 #fn_datatable_utils
-fn_elasticsearch
-fn_email_header_validation
+#fn_elasticsearch
+#fn_email_header_validation
+fn_exchange
+fn_exchange_online
+fn_geocoding
+fn_greynoise
+fn_hibp
 #fn_service_now
 #fn_task_utils
 #fn_urlhaus
@@ -38,6 +43,13 @@ fn_email_header_validation
 #fn_create_zoom_meeting
 #fn_digital_shadows_search
 #fn_docker
+#fn_floss
+#fn_google_cloud_dlp
+#fn_google_cloud_functions
+#fn_google_maps_directions
+#fn_grpc_interface
+#fn_grr_search
+
 
 #Not_on_AppX
 #fn_bluecoat_site_review
