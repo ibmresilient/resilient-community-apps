@@ -23,11 +23,21 @@
 #fn_geocoding
 #fn_greynoise
 #fn_hibp
-fn_icdx
-fn_incident_utils
-fn_ioc_parser_v2
-fn_ip_void
-fn_ipinfo
+#fn_icdx
+#fn_incident_utils
+#fn_ioc_parser_v2
+#fn_ip_void
+#fn_ipinfo
+fn_isitphishing
+fn_jira
+fn_joe_sandbox_analysis
+fn_ldap_utilities
+fn_maas360
+fn_mcafee_atd
+fn_mcafee_epo
+fn_mcafee_esm
+fn_mcafee_opendxl
+fn_mcafee_tie
 #fn_service_now
 #fn_task_utils
 #fn_urlhaus
@@ -55,7 +65,9 @@ fn_ipinfo
 #fn_grpc_interface
 #fn_grr_search
 #fn_html2pdf
-
+#fn_log_capture
+#fn_machine_learning
+#fn_machine_learning_nlp
 
 #Not_on_AppX
 #fn_bluecoat_site_review
