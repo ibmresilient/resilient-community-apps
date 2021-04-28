@@ -47,13 +47,17 @@
 #fn_pagerduty
 #fn_pastebin
 #fn_phish_ai
-fn_phish_tank
-fn_pipl
-fn_proofpoint_tap
-fn_proofpoint_trap
-fn_pulsedive
-fn_qradar_advisor
-fn_qradar_enhanced_data
+#fn_phish_tank
+#fn_pipl
+#fn_proofpoint_tap
+#fn_proofpoint_trap
+#fn_pulsedive
+#fn_qradar_advisor
+#fn_qradar_enhanced_data
+fn_query_tor_network
+fn_scheduler
+fn_secureworks_ctp
+fn_sep
 #fn_service_now
 #fn_task_utils
 #fn_urlhaus
@@ -87,6 +91,11 @@ fn_qradar_enhanced_data
 #fn_machine_learning
 #fn_machine_learning_nlp
 #fn_netdevice
+#fn_rsa_netwitness
 
 #Not_on_AppX
 #fn_bluecoat_site_review
+#fn_res_to_icd
+
+#Externally_Developed
+#fn_risk_fabric
