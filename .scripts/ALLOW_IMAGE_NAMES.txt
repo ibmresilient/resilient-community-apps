@@ -18,11 +18,16 @@
 #fn_datatable_utils
 #fn_elasticsearch
 #fn_email_header_validation
-fn_exchange
-fn_exchange_online
-fn_geocoding
-fn_greynoise
-fn_hibp
+#fn_exchange
+#fn_exchange_online
+#fn_geocoding
+#fn_greynoise
+#fn_hibp
+fn_icdx
+fn_incident_utils
+fn_ioc_parser_v2
+fn_ip_void
+fn_ipinfo
 #fn_service_now
 #fn_task_utils
 #fn_urlhaus
@@ -49,6 +54,7 @@ fn_hibp
 #fn_google_maps_directions
 #fn_grpc_interface
 #fn_grr_search
+#fn_html2pdf
 
 
 #Not_on_AppX
