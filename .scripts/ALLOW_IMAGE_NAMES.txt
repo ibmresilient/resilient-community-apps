@@ -70,8 +70,8 @@
 #fn_urlscanio
 #fn_utilities
 #fn_virustotal
-fn_vmray_analyzer
-fn_whois
+#fn_vmray_analyzer
+#fn_whois
 
 #Other_batch
 #fn_ansible
@@ -83,6 +83,13 @@ fn_whois
 #fn_twilio-failingPY27-test
 #fn_whois_rdap-failing-test
 #fn_wiki-failingPY27-test
+#fn_xforce-failing-test
+#rc-data-feed
+#rc-data-feed-plugin-elasticfeed
+#rc-data-feed-plugin-kafkafeed
+#rc-data-feed-plugin-odbcfeed
+#rc-data-feed-plugin-resilientfeed
+#rc-data-feed-plugin-splunkfeed
 
 
 #No_Related_image
