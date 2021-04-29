@@ -58,7 +58,7 @@
 #fn_scheduler
 #fn_secureworks_ctp
 #fn_sep
-fn_service_now
+#fn_service_now
 #fn_shodan
 #fn_slack
 #fn_spamhaus_query
@@ -67,9 +67,11 @@ fn_service_now
 #fn_twitter_most_popular
 #fn_url_to_dns
 #fn_urlhaus
-fn_urlscanio
-fn_utilities
-fn_virustotal
+#fn_urlscanio
+#fn_utilities
+#fn_virustotal
+fn_vmray_analyzer
+fn_whois
 
 #Other_batch
 #fn_ansible
@@ -79,6 +81,8 @@ fn_virustotal
 #fn_odbc_query
 #fn_qradar_integration-failing-test
 #fn_twilio-failingPY27-test
+#fn_whois_rdap-failing-test
+#fn_wiki-failingPY27-test
 
 
 #No_Related_image
@@ -104,6 +108,7 @@ fn_virustotal
 #fn_symantec_dlp
 #fn_teams
 #fn_thug
+#fn_watson_translate
 
 #Not_on_AppX
 #fn_bluecoat_site_review
