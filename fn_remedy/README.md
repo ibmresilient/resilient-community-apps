@@ -91,6 +91,11 @@ If deploying to a Resilient platform with an integration server, the requirement
   | Incident Notes | Write |
   | Private Tasks | Read |
 
+* Resilient-circuits will also require the following permission to run the customize import process.
+  | Name | Permissions |
+  | ---- | ----------- |
+  | Org Data | Write |
+
 The following Resilient platform guides provide additional information: 
 * _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
