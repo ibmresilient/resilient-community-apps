@@ -54,13 +54,20 @@
 #fn_pulsedive
 #fn_qradar_advisor
 #fn_qradar_enhanced_data
-fn_query_tor_network
-fn_scheduler
-fn_secureworks_ctp
-fn_sep
+#fn_query_tor_network
+#fn_scheduler
+#fn_secureworks_ctp
+#fn_sep
 #fn_service_now
+#fn_shodan
+#fn_slack
+#fn_spamhaus_query
 #fn_task_utils
+#fn_threatminer
+#fn_twitter_most_popular
+#fn_url_to_dns
 #fn_urlhaus
+
 
 
 #Other_batch
@@ -70,6 +77,7 @@ fn_sep
 #fn_crowdstrike_falcon
 #fn_odbc_query
 #fn_qradar_integration-failing-test
+#fn_twilio-failingPY27-test
 
 
 #No_Related_image
@@ -92,6 +100,9 @@ fn_sep
 #fn_machine_learning_nlp
 #fn_netdevice
 #fn_rsa_netwitness
+#fn_symantec_dlp
+#fn_teams
+#fn_thug
 
 #Not_on_AppX
 #fn_bluecoat_site_review
