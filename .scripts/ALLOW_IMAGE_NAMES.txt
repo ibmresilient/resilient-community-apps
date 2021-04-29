@@ -58,7 +58,7 @@
 #fn_scheduler
 #fn_secureworks_ctp
 #fn_sep
-#fn_service_now
+fn_service_now
 #fn_shodan
 #fn_slack
 #fn_spamhaus_query
@@ -67,8 +67,9 @@
 #fn_twitter_most_popular
 #fn_url_to_dns
 #fn_urlhaus
-
-
+fn_urlscanio
+fn_utilities
+fn_virustotal
 
 #Other_batch
 #fn_ansible
