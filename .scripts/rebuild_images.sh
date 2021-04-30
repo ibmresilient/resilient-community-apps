@@ -104,6 +104,8 @@ for image_name in "${IMAGE_NAMES[@]}"; do
     # If in our allowed list
     if [[ " ${ALLOW_IMAGE_NAMES[@]} " =~ " ${image_name} " ]]; then
 
+        print_msg="$image_name:: Starting: $image_name"
+
         resilient_sdk_package_pass=0
         docker_build_pass=0
 
@@ -112,44 +114,44 @@ for image_name in "${IMAGE_NAMES[@]}"; do
         path_new_requirements="$package_path/new_requirements.txt"
         path_dockerfile="$package_path/Dockerfile"
         int_version=$(python "$package_path/setup.py" --version)
-        print_msg "package_path:\t\t\t$package_path\npath_current_requirements:\t$path_current_requirements\npath_new_requirements:\t\t$path_new_requirements\npath_dockerfile:\t\t$path_dockerfile\nint_version:\t\t\t$int_version"
+        print_msg "$package_path:\t\t\t$package_path\npath_current_requirements:\t$path_current_requirements\npath_new_requirements:\t\t$path_new_requirements\npath_dockerfile:\t\t$path_dockerfile\nint_version:\t\t\t$int_version"
 
         docker_tag="$image_name:$int_version"
         quay_io_tag="$QUAY_URL/$QUAY_USERNAME/$docker_tag"
 
-        print_msg "docker_tag:\t\t\t$docker_tag\nquay_io_tag:\t\t\t$quay_io_tag"
+        print_msg "$image_name:: docker_tag:\t\t\t$docker_tag\nquay_io_tag:\t\t\t$quay_io_tag"
 
-        print_msg "Pull image from $quay_io_tag"
+        print_msg "$image_name:: Pull image from $quay_io_tag"
         docker pull $quay_io_tag
 
-        print_msg "Starting container for $quay_io_tag"
+        print_msg "$image_name:: Starting container for $quay_io_tag"
         # Can point -v to mock file but has to exist
         docker_container=`docker run -d -v $path_dockerfile:/etc/rescircuits/app.config $quay_io_tag`
 
-        print_msg "Running pip freeze on $docker_container"
+        print_msg "$image_name:: Running pip freeze on $docker_container"
         docker exec -it $docker_container sh -c "pip freeze" > $path_current_requirements
-        print_msg "Current requirements:\n$(cat $path_current_requirements)"
+        print_msg "$image_name:: Current requirements:\n$(cat $path_current_requirements)"
 
-        print_msg "Stopping and removing $docker_container"
+        print_msg "$image_name:: Stopping and removing $docker_container"
         docker stop $docker_container
         docker container rm $docker_container
 
-        print_msg "Writing new requirements file"
+        print_msg "$image_name:: Writing new requirements file"
         python $SCRIPTS_DIR/modify_requirements_file.py $path_current_requirements $path_new_requirements $PACKAGES_TO_CHANGE
-        print_msg "New requirements:\n$(cat $path_new_requirements)"
+        print_msg "$image_name:: New requirements:\n$(cat $path_new_requirements)"
 
-        print_msg "Overwriting Dockerfile"
+        print_msg "$image_name:: Overwriting Dockerfile"
         python $SCRIPTS_DIR/insert_into_Dockerfile.py $path_dockerfile $DOCKERFILE_KEYWORD "$DOCKERFILE_WORDS_TO_INSERT"
 
-        print_msg "Packaging $image_name with resilient-sdk"
+        print_msg "$image_name:: Packaging $image_name with resilient-sdk"
         resilient-sdk package -p $package_path || resilient_sdk_package_pass=$?
 
-        print_msg "Rebuilding: $image_name"
+        print_msg "$image_name:: Rebuilding: $image_name"
 
         # If passes resilient-sdk package build it with docker
         if [ $resilient_sdk_package_pass = 0 ] ; then
 
-            print_msg "Rebuilding $image_name with docker"
+            print_msg "$image_name:: Rebuilding $image_name with docker"
             docker build \
             --quiet \
             -t $docker_tag \
@@ -159,27 +161,27 @@ for image_name in "${IMAGE_NAMES[@]}"; do
             if [ $docker_build_pass = 0 ] ; then
                 # tag the image for quay.io
                 quay_io_tag="$QUAY_URL/$QUAY_USERNAME/$image_name:$int_version"
-                print_msg "Tagging $image_name for $QUAY_URL/$QUAY_USERNAME with: $quay_io_tag"
+                print_msg "$image_name:: Tagging $image_name for $QUAY_URL/$QUAY_USERNAME with: $quay_io_tag"
                 docker tag $docker_tag $quay_io_tag
                 quay_io_tags+=($quay_io_tag)
 
                 # tag the image for artifactory
                 artifactory_tag="$ARTIFACTORY_DOCKER_REPO/$QUAY_USERNAME/$image_name:$int_version"
-                print_msg "Tagging $image_name for artifactory with: $artifactory_tag"
+                print_msg "$image_name:: Tagging $image_name for artifactory with: $artifactory_tag"
                 docker tag $docker_tag $artifactory_tag
                 artifactory_tags+=($artifactory_tag)
 
-                print_msg "Done building: $image_name"
+                print_msg "$image_name:: Done building: $image_name"
             fi
         fi
 
         if [ $resilient_sdk_package_pass != 0 ] || [ $docker_build_pass != 0 ] ; then
-            print_msg "Packaging or building failed. Adding $image_name to list of skipped_packages"
+            print_msg "$image_name:: Packaging or building failed. Adding $image_name to list of skipped_packages"
             skipped_packages+=($image_name)
         fi
 
     else
-        print_msg "$image_name is NOT in $PATH_ALLOW_IMAGE_NAMES\nAdding it to list of skipped_packages"
+        print_msg "$image_name:: $image_name is NOT in $PATH_ALLOW_IMAGE_NAMES\nAdding it to list of skipped_packages"
         skipped_packages+=($image_name)
     fi
 
