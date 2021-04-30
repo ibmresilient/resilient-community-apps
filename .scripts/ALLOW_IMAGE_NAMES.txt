@@ -1,11 +1,11 @@
-#List-of-allowed-image-names
+#ALPHABETICAL-List-of-allowed-image-names
 
 #IBM_SOAR_Apps
-#fn_alienvault_otx
-#fn_anomali_staxx
+fn_alienvault_otx
+fn_anomali_staxx
 fn_ansible
 fn_ansible_tower
-#fn_api_void
+fn_api_void
 #fn_aws_iam
 #fn_bigfix
 #fn_calendar_invite
