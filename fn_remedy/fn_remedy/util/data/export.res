@@ -157,9 +157,48 @@
   ],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1619440193730,
+  "export_date": 1619813732960,
   "export_format_version": 2,
   "fields": [
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "__function/incident_id",
+      "hide_notification": false,
+      "id": 230,
+      "input_type": "number",
+      "internal": false,
+      "is_tracked": false,
+      "name": "incident_id",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": null,
+      "read_only": false,
+      "required": "always",
+      "rich_text": false,
+      "tags": [
+        {
+          "tag_handle": "fn_remedy",
+          "value": null
+        },
+        {
+          "tag_handle": "fn_utilities",
+          "value": null
+        }
+      ],
+      "templates": [],
+      "text": "incident_id",
+      "tooltip": "",
+      "type_id": 11,
+      "uuid": "811e99d7-d194-4ce8-86cc-aff5e01ab85c",
+      "values": []
+    },
     {
       "allow_default_value": false,
       "blank_option": false,
@@ -185,47 +224,17 @@
         {
           "tag_handle": "fn_remedy",
           "value": null
+        },
+        {
+          "tag_handle": "fn_utilities",
+          "value": null
         }
       ],
       "templates": [],
       "text": "task_id",
       "tooltip": "",
       "type_id": 11,
-      "uuid": "c98c6c66-3492-407c-a5f5-18bae6d61c62",
-      "values": []
-    },
-    {
-      "allow_default_value": false,
-      "blank_option": false,
-      "calculated": false,
-      "changeable": true,
-      "chosen": false,
-      "default_chosen_by_server": false,
-      "deprecated": false,
-      "export_key": "__function/incident_id",
-      "hide_notification": false,
-      "id": 230,
-      "input_type": "number",
-      "internal": false,
-      "is_tracked": false,
-      "name": "incident_id",
-      "operation_perms": {},
-      "operations": [],
-      "placeholder": "",
-      "prefix": null,
-      "read_only": false,
-      "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_remedy",
-          "value": null
-        }
-      ],
-      "templates": [],
-      "text": "incident_id",
-      "tooltip": "",
-      "type_id": 11,
-      "uuid": "cc894d23-91cc-4947-a88b-7b3955bf2ef8",
+      "uuid": "f934cf75-e9f3-4d1c-bf64-9e4f66f16d7f",
       "values": []
     },
     {
@@ -239,7 +248,7 @@
       "export_key": "__function/remedy_payload",
       "hide_notification": false,
       "id": 231,
-      "input_type": "textarea",
+      "input_type": "text",
       "internal": false,
       "is_tracked": false,
       "name": "remedy_payload",
@@ -1046,7 +1055,7 @@
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1619439066085,
+      "last_modified_time": 1619535376318,
       "name": "remedy_close_incident",
       "tags": [
         {
@@ -1055,10 +1064,10 @@
         }
       ],
       "uuid": "92d5714d-4d38-485e-82af-cce278830a3e",
-      "version": 1,
+      "version": 2,
       "view_items": [
         {
-          "content": "c98c6c66-3492-407c-a5f5-18bae6d61c62",
+          "content": "f934cf75-e9f3-4d1c-bf64-9e4f66f16d7f",
           "element": "field_uuid",
           "field_type": "__function",
           "show_if": null,
@@ -1066,7 +1075,7 @@
           "step_label": null
         },
         {
-          "content": "cc894d23-91cc-4947-a88b-7b3955bf2ef8",
+          "content": "811e99d7-d194-4ce8-86cc-aff5e01ab85c",
           "element": "field_uuid",
           "field_type": "__function",
           "show_if": null,
@@ -1121,7 +1130,7 @@
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1619439066115,
+      "last_modified_time": 1619535376318,
       "name": "remedy_create_incident",
       "tags": [
         {
@@ -1130,10 +1139,10 @@
         }
       ],
       "uuid": "914c7f97-8d48-4cfb-a411-0da2957950c4",
-      "version": 1,
+      "version": 2,
       "view_items": [
         {
-          "content": "c98c6c66-3492-407c-a5f5-18bae6d61c62",
+          "content": "f934cf75-e9f3-4d1c-bf64-9e4f66f16d7f",
           "element": "field_uuid",
           "field_type": "__function",
           "show_if": null,
@@ -1141,7 +1150,7 @@
           "step_label": null
         },
         {
-          "content": "cc894d23-91cc-4947-a88b-7b3955bf2ef8",
+          "content": "811e99d7-d194-4ce8-86cc-aff5e01ab85c",
           "element": "field_uuid",
           "field_type": "__function",
           "show_if": null,
@@ -1186,12 +1195,12 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 1,
+  "id": 2,
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1619440193438,
+      "create_date": 1619813732529,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -1200,7 +1209,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1619440193438,
+      "update_date": 1619813732529,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -1433,16 +1442,16 @@
     {
       "actions": [],
       "content": {
-        "version": 3,
+        "version": 7,
         "workflow_id": "close_a_remedy_incident_from_task",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"close_a_remedy_incident_from_task\" isExecutable=\"true\" name=\"Close a Remedy Incident from Task\"\u003e\u003cdocumentation\u003e\u003c![CDATA[Close an existing incident in Remedy from a task by updating it\u0027s status.]]\u003e\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0p0a2oy\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0j4wj9n\" name=\"Remedy: Close Incident\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"92d5714d-4d38-485e-82af-cce278830a3e\"\u003e{\"inputs\":{},\"post_processing_script\":\"noteText = \\\"\u0026lt;h5\u0026gt;Remedy Close Incident:\u0026lt;/h5\u0026gt;\\\"\\n\\nif results[\\\"success\\\"]:\\n  if not results[\\\"content\\\"][\\\"closed\\\"] and not results[\\\"content\\\"][\\\"skipped\\\"]:\\n    \\\"\u0026lt;p\u0026gt;No record of task ID {0} in Remedy. Nothing was updated.\u0026lt;/p\u0026gt;\\\".format(task.id)\\n  else:\\n    if results[\\\"content\\\"][\\\"closed\\\"]:\\n      noteText += \\\"\u0026lt;p\u0026gt;The following incidents were matched in Remedy and the successfully closed:\u0026lt;/p\u0026gt;\\\"\\n      for item in results[\\\"content\\\"][\\\"closed\\\"]:\\n        noteText += \\\"\u0026lt;p\u0026gt;    Incident Number {0}, Request ID: {1}\u0026lt;/p\u0026gt;\\\".format(item[\\\"values\\\"][\\\"Incident Number\\\"], item[\\\"values\\\"][\\\"Request ID\\\"])\\n    if results[\\\"content\\\"][\\\"skipped\\\"]:\\n      noteText += \\\"\u0026lt;p\u0026gt;The following incidents were not able to be closed. Common reasons include that the incident has been previously closed, \\\" \\\\\\n      \\\"the incident has been deleted, or the payload sent to Remedy was incomplete according to the requirements of your specific system:\u0026lt;/p\u0026gt;\\\"\\n      for item in results[\\\"content\\\"][\\\"skipped\\\"]:\\n        noteText += \\\"\u0026lt;p\u0026gt;    Incident Number {0}, Request ID: {1}\u0026lt;/p\u0026gt;\\\".format(item[\\\"values\\\"][\\\"Incident Number\\\"], item[\\\"values\\\"][\\\"Request ID\\\"])\\nelse:\\n  noteText += \\\"\u0026lt;p\u0026gt;Function failed to complete.\u0026lt;/p\u0026gt;\\\"\\n\\nrichText = helper.createRichText(noteText)\\nincident.addNote(richText)\\n\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"# Importing JSON means this function has a hard requirement on the python 3 feature.\\nimport json\\n\\ninputs.task_id = task.id\\ninputs.incident_id = incident.id\\n\\npayload = {}\\n\\n# Use this section to add key, value pairs to send to Remedy\\n# These values will be added/updated on the target Remedy incident,\\n# so they must conform with the \\\"HPD:IncidentInterface_Create\\\" schema\\n\\npayload[\\\"Status_Reason\\\"] = \\\"foo\\\"\\n# payload[\\\"policy_name\\\"] = \\\"bar\\\"\\n\\ninputs.remedy_payload = json.dumps(payload) if payload else \u0027\u0027\\n\\n\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0p0a2oy\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_087loyw\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0p0a2oy\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0j4wj9n\"/\u003e\u003cendEvent id=\"EndEvent_1bene68\"\u003e\u003cincoming\u003eSequenceFlow_087loyw\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_087loyw\" sourceRef=\"ServiceTask_0j4wj9n\" targetRef=\"EndEvent_1bene68\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_04y1g33\"\u003e\u003ctext\u003e\u003c![CDATA[Create a note reflecting the operation success\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0yah6uc\" sourceRef=\"ServiceTask_0j4wj9n\" targetRef=\"TextAnnotation_04y1g33\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0j4wj9n\" id=\"ServiceTask_0j4wj9n_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"285\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0p0a2oy\" id=\"SequenceFlow_0p0a2oy_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"285\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"90\" x=\"196.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1bene68\" id=\"EndEvent_1bene68_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"466\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"90\" x=\"439\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_087loyw\" id=\"SequenceFlow_087loyw_di\"\u003e\u003comgdi:waypoint x=\"385\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"466\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"90\" x=\"380.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_04y1g33\" id=\"TextAnnotation_04y1g33_di\"\u003e\u003comgdc:Bounds height=\"39\" width=\"278\" x=\"394\" y=\"79\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0yah6uc\" id=\"Association_0yah6uc_di\"\u003e\u003comgdi:waypoint x=\"385\" xsi:type=\"omgdc:Point\" y=\"179\"/\u003e\u003comgdi:waypoint x=\"496\" xsi:type=\"omgdc:Point\" y=\"118\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"close_a_remedy_incident_from_task\" isExecutable=\"true\" name=\"Close a Remedy Incident from Task\"\u003e\u003cdocumentation\u003e\u003c![CDATA[Close an existing incident in Remedy from a task by updating it\u0027s status.]]\u003e\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0p0a2oy\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0j4wj9n\" name=\"Remedy: Close Incident\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"92d5714d-4d38-485e-82af-cce278830a3e\"\u003e{\"inputs\":{},\"post_processing_script\":\"noteText = \\\"\u0026lt;h5\u0026gt;Remedy Close Incident:\u0026lt;/h5\u0026gt;\\\"\\n\\nif results[\\\"success\\\"]:\\n  if not results[\\\"content\\\"][\\\"closed\\\"] and not results[\\\"content\\\"][\\\"skipped\\\"]:\\n    \\\"\u0026lt;p\u0026gt;No record of task ID {0} in Remedy. Nothing was updated.\u0026lt;/p\u0026gt;\\\".format(task.id)\\n  else:\\n    if results[\\\"content\\\"][\\\"closed\\\"]:\\n      noteText += \\\"\u0026lt;p\u0026gt;The following incidents were matched in Remedy and the successfully closed:\u0026lt;/p\u0026gt;\\\"\\n      for item in results[\\\"content\\\"][\\\"closed\\\"]:\\n        noteText += \\\"\u0026lt;p\u0026gt;    Incident Number {0}, Request ID: {1}\u0026lt;/p\u0026gt;\\\".format(item[\\\"values\\\"][\\\"Incident Number\\\"], item[\\\"values\\\"][\\\"Request ID\\\"])\\n    if results[\\\"content\\\"][\\\"skipped\\\"]:\\n      noteText += \\\"\u0026lt;p\u0026gt;The following incidents were not able to be closed. Common reasons include that the incident has been previously closed, \\\" \\\\\\n      \\\"the incident has been deleted, or the payload sent to Remedy was incomplete according to the requirements of your specific system:\u0026lt;/p\u0026gt;\\\"\\n      for item in results[\\\"content\\\"][\\\"skipped\\\"]:\\n        noteText += \\\"\u0026lt;p\u0026gt;    Incident Number {0}, Request ID: {1}\u0026lt;/p\u0026gt;\\\".format(item[\\\"values\\\"][\\\"Incident Number\\\"], item[\\\"values\\\"][\\\"Request ID\\\"])\\nelse:\\n  noteText += \\\"\u0026lt;p\u0026gt;Function failed to complete.\u0026lt;/p\u0026gt;\\\"\\n\\nrichText = helper.createRichText(noteText)\\nincident.addNote(richText)\\n\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"# Python 2 compatibility for CP4S 1.6\\ndef mk_str(value, quotes=u\u0027\\\"\u0027):\\n    if value is None:\\n        return \\\"null\\\"\\n    else:\\n        esc_value = value.replace(u\u0027\\\"\u0027, u\u0027\\\\\\\\\\\"\u0027)\\n        if quotes:\\n            return u\u0027{0}{1}{0}\u0027.format(quotes, esc_value)\\n        else:\\n            return esc_value\\n\\n\\ninputs.task_id = task.id\\ninputs.incident_id = incident.id\\n\\n# Use this section to add key, value pairs to send to Remedy\\n# These values will be added/updated on the target Remedy incident,\\n# so they must conform with the \\\"HPD:IncidentInterface_Create\\\" schema\\npayload = \\\"\\\"\\\"{\\\"Status_Reason\\\": \\\"foo\\\"}\\\"\\\"\\\"\\n\\ninputs.remedy_payload = payload if payload else \u0027\u0027\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0p0a2oy\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_087loyw\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0p0a2oy\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0j4wj9n\"/\u003e\u003cendEvent id=\"EndEvent_1bene68\"\u003e\u003cincoming\u003eSequenceFlow_087loyw\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_087loyw\" sourceRef=\"ServiceTask_0j4wj9n\" targetRef=\"EndEvent_1bene68\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_04y1g33\"\u003e\u003ctext\u003e\u003c![CDATA[Create a note reflecting the operation success\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0yah6uc\" sourceRef=\"ServiceTask_0j4wj9n\" targetRef=\"TextAnnotation_04y1g33\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0j4wj9n\" id=\"ServiceTask_0j4wj9n_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"285\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0p0a2oy\" id=\"SequenceFlow_0p0a2oy_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"285\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"90\" x=\"196.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1bene68\" id=\"EndEvent_1bene68_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"466\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"90\" x=\"439\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_087loyw\" id=\"SequenceFlow_087loyw_di\"\u003e\u003comgdi:waypoint x=\"385\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"466\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"90\" x=\"380.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_04y1g33\" id=\"TextAnnotation_04y1g33_di\"\u003e\u003comgdc:Bounds height=\"39\" width=\"278\" x=\"394\" y=\"79\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0yah6uc\" id=\"Association_0yah6uc_di\"\u003e\u003comgdi:waypoint x=\"385\" xsi:type=\"omgdc:Point\" y=\"179\"/\u003e\u003comgdi:waypoint x=\"496\" xsi:type=\"omgdc:Point\" y=\"118\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 3,
+      "content_version": 7,
       "creator_id": "a@example.com",
       "description": "Close an existing incident in Remedy from a task by updating it\u0027s status.",
       "export_key": "close_a_remedy_incident_from_task",
       "last_modified_by": "a@example.com",
-      "last_modified_time": 1619439911603,
+      "last_modified_time": 1619806685770,
       "name": "Close a Remedy Incident from Task",
       "object_type": "task",
       "programmatic_name": "close_a_remedy_incident_from_task",
@@ -1458,16 +1467,16 @@
     {
       "actions": [],
       "content": {
-        "version": 3,
+        "version": 9,
         "workflow_id": "create_a_remedy_incident_from_task",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"create_a_remedy_incident_from_task\" isExecutable=\"true\" name=\"Create a Remedy Incident from Task\"\u003e\u003cdocumentation\u003eCreate a new Incident in Remedy from a Task\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_16gpxlj\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0herueu\" name=\"Remedy: Create Incident\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"914c7f97-8d48-4cfb-a411-0da2957950c4\"\u003e{\"inputs\":{},\"post_processing_script\":\"noteText = \\\"\u0026lt;h5\u0026gt; Remedy Create Incident\u0026lt;/h5\u0026gt;\\\"\\n\\ntask_id = task.id\\ntask_name = task.name\\n\\nif results[\\\"success\\\"]:\\n  noteText += \\\"\u0026lt;p\u0026gt;Successfully sent task {0} \\\\\\\"{1}\\\\\\\" to Remedy as Incident Number {2} (UI name) and Request ID {3} (API name).\u0026lt;/p\u0026gt;\\\"\\\\\\n  \\\"\\\".format(task_id, task_name, \\\\\\n  results[\\\"content\\\"][\\\"values\\\"][\\\"Incident Number\\\"], results[\\\"content\\\"][\\\"values\\\"][\\\"Request ID\\\"])\\nelse:\\n  noteText += \\\"\u0026lt;p\u0026gt;Unable to send task {0} \\\\\\\"{1}\\\\\\\" to Remedy\u0026lt;/p\u0026gt;\\\".format(task_id, task_name)\\n  noteText += \\\"\u0026lt;p\u0026gt;Ensure the activity fields and payload you provide meet the minimum requirements in your system for incident creation and routing.\\\"\\n\\nrichText = helper.createRichText(noteText)\\nincident.addNote(richText)\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"# Importing JSON means this function has a hard requirement on the python 3 feature.\\nimport json\\n\\n# Any of the selected Activity Fields in the rule are taken in and formed as a dict\\npayload = {\\n  \\\"ApplyTemplate\\\": rule.properties.remedy_template,\\n  \\\"First_Name\\\": rule.properties.remedy_first_name,\\n  \\\"Last_Name\\\": rule.properties.remedy_last_name,\\n  \\\"Impact\\\": rule.properties.remedy_impact,\\n  \\\"Urgency\\\": rule.properties.remedy_urgency,\\n  \\\"Service_Type\\\": rule.properties.remedy_service_type,\\n  \\\"Status\\\": rule.properties.remedy_status,\\n  \\\"Reported Source\\\": rule.properties.remedy_reported_source,\\n  \\\"Description\\\": rule.properties.remedy_note,\\n  \\\"Assigned Support Organization\\\": rule.properties.remedy_support_group,\\n  \\\"additional_data\\\": rule.properties.remedy_additional_data\\n}\\n\\n# set inputs\\ninputs.task_id = task.id \\ninputs.incident_id = incident.id\\ninputs.remedy_incident_name = task.name\\ninputs.remedy_payload = json.dumps(payload)\\n\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_16gpxlj\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_104rfpk\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_16gpxlj\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0herueu\"/\u003e\u003cendEvent id=\"EndEvent_07o8z3v\"\u003e\u003cincoming\u003eSequenceFlow_104rfpk\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_104rfpk\" sourceRef=\"ServiceTask_0herueu\" targetRef=\"EndEvent_07o8z3v\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_048yfkp\"\u003e\u003ctext\u003e\u003c![CDATA[Create a note reflecting the operation success\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1cozu34\" sourceRef=\"ServiceTask_0herueu\" targetRef=\"TextAnnotation_048yfkp\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0herueu\" id=\"ServiceTask_0herueu_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"304\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_16gpxlj\" id=\"SequenceFlow_16gpxlj_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"304\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"206\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_07o8z3v\" id=\"EndEvent_07o8z3v_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"483\" y=\"180\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"456\" y=\"219\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_104rfpk\" id=\"SequenceFlow_104rfpk_di\"\u003e\u003comgdi:waypoint x=\"404\" xsi:type=\"omgdc:Point\" y=\"198\"/\u003e\u003comgdi:waypoint x=\"483\" xsi:type=\"omgdc:Point\" y=\"198\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"398.5\" y=\"176.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_048yfkp\" id=\"TextAnnotation_048yfkp_di\"\u003e\u003comgdc:Bounds height=\"32\" width=\"278\" x=\"390\" y=\"74\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1cozu34\" id=\"Association_1cozu34_di\"\u003e\u003comgdi:waypoint x=\"402\" xsi:type=\"omgdc:Point\" y=\"174\"/\u003e\u003comgdi:waypoint x=\"505\" xsi:type=\"omgdc:Point\" y=\"106\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"create_a_remedy_incident_from_task\" isExecutable=\"true\" name=\"Create a Remedy Incident from Task\"\u003e\u003cdocumentation\u003eCreate a new Incident in Remedy from a Task\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_16gpxlj\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0herueu\" name=\"Remedy: Create Incident\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"914c7f97-8d48-4cfb-a411-0da2957950c4\"\u003e{\"inputs\":{},\"post_processing_script\":\"noteText = \\\"\u0026lt;h5\u0026gt; Remedy Create Incident\u0026lt;/h5\u0026gt;\\\"\\n\\ntask_id = task.id\\ntask_name = task.name\\n\\nif results[\\\"success\\\"]:\\n  noteText += \\\"\u0026lt;p\u0026gt;Successfully sent task {0} \\\\\\\"{1}\\\\\\\" to Remedy as Incident Number {2} (UI name) and Request ID {3} (API name).\u0026lt;/p\u0026gt;\\\"\\\\\\n  \\\"\\\".format(task_id, task_name, \\\\\\n  results[\\\"content\\\"][\\\"values\\\"][\\\"Incident Number\\\"], results[\\\"content\\\"][\\\"values\\\"][\\\"Request ID\\\"])\\nelse:\\n  noteText += \\\"\u0026lt;p\u0026gt;Unable to send task {0} \\\\\\\"{1}\\\\\\\" to Remedy\u0026lt;/p\u0026gt;\\\".format(task_id, task_name)\\n  noteText += \\\"\u0026lt;p\u0026gt;Ensure the activity fields and payload you provide meet the minimum requirements in your system for incident creation and routing.\\\"\\n\\nrichText = helper.createRichText(noteText)\\nincident.addNote(richText)\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"# Python 2 compatibility for CP4S 1.6\\ndef mk_str(value, quotes=u\u0027\\\"\u0027):\\n    if value is None:\\n        return \\\"null\\\"\\n    else:\\n        esc_value = value.replace(u\u0027\\\"\u0027, u\u0027\\\\\\\\\\\"\u0027)\\n        if quotes:\\n            return u\u0027{0}{1}{0}\u0027.format(quotes, esc_value)\\n        else:\\n            return esc_value\\n\\n\\npayload = u\\\"\\\"\\\"{{ \\\"ApplyTemplate\\\": {},\\n  \\\"First_Name\\\": {},\\n  \\\"Last_Name\\\": {},\\n  \\\"Impact\\\": {},\\n  \\\"Urgency\\\": {},\\n  \\\"Service_Type\\\": {},\\n  \\\"Status\\\": {},\\n  \\\"Reported Source\\\": {},\\n  \\\"Description\\\": {},\\n  \\\"Assigned Support Organization\\\": {},\\n  \\\"additional_data\\\": {}\\n}}\\\"\\\"\\\".format(mk_str(rule.properties.remedy_template),\\n  mk_str(rule.properties.remedy_first_name),\\n  mk_str(rule.properties.remedy_last_name),\\n  mk_str(rule.properties.remedy_impact),\\n  mk_str(rule.properties.remedy_urgency),\\n  mk_str(rule.properties.remedy_service_type),\\n  mk_str(rule.properties.remedy_status),\\n  mk_str(rule.properties.remedy_reported_source),\\n  mk_str(rule.properties.remedy_note),\\n  mk_str(rule.properties.remedy_support_group),\\n  rule.properties.remedy_additional_data.content if rule.properties.remedy_additional_data.content else \\\"null\\\"\\n)\\n\\n# set inputs\\ninputs.task_id = task.id \\ninputs.incident_id = incident.id\\ninputs.remedy_incident_name = task.name\\ninputs.remedy_payload = payload\\n\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_16gpxlj\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_104rfpk\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_16gpxlj\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0herueu\"/\u003e\u003cendEvent id=\"EndEvent_07o8z3v\"\u003e\u003cincoming\u003eSequenceFlow_104rfpk\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_104rfpk\" sourceRef=\"ServiceTask_0herueu\" targetRef=\"EndEvent_07o8z3v\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_048yfkp\"\u003e\u003ctext\u003e\u003c![CDATA[Create a note reflecting the operation success\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1cozu34\" sourceRef=\"ServiceTask_0herueu\" targetRef=\"TextAnnotation_048yfkp\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0herueu\" id=\"ServiceTask_0herueu_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"304\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_16gpxlj\" id=\"SequenceFlow_16gpxlj_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"304\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"206\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_07o8z3v\" id=\"EndEvent_07o8z3v_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"483\" y=\"180\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"456\" y=\"219\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_104rfpk\" id=\"SequenceFlow_104rfpk_di\"\u003e\u003comgdi:waypoint x=\"404\" xsi:type=\"omgdc:Point\" y=\"198\"/\u003e\u003comgdi:waypoint x=\"483\" xsi:type=\"omgdc:Point\" y=\"198\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"398.5\" y=\"176.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_048yfkp\" id=\"TextAnnotation_048yfkp_di\"\u003e\u003comgdc:Bounds height=\"32\" width=\"278\" x=\"390\" y=\"74\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1cozu34\" id=\"Association_1cozu34_di\"\u003e\u003comgdi:waypoint x=\"402\" xsi:type=\"omgdc:Point\" y=\"174\"/\u003e\u003comgdi:waypoint x=\"505\" xsi:type=\"omgdc:Point\" y=\"106\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 3,
+      "content_version": 9,
       "creator_id": "a@example.com",
       "description": "Create a new Incident in Remedy from a Task",
       "export_key": "create_a_remedy_incident_from_task",
       "last_modified_by": "a@example.com",
-      "last_modified_time": 1619439939628,
+      "last_modified_time": 1619811495703,
       "name": "Create a Remedy Incident from Task",
       "object_type": "task",
       "programmatic_name": "create_a_remedy_incident_from_task",

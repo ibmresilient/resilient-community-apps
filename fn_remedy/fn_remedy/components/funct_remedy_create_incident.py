@@ -6,7 +6,7 @@ import logging
 import json
 from datetime import datetime
 
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError, template_functions
+from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import ResultPayload, RequestsCommon, validate_fields, IntegrationError, clean_html, str_to_bool
 from fn_remedy.lib.remedy.RemedyAPIClient import RemedyClient
 from fn_remedy.lib.datatable.data_table import Datatable
@@ -38,27 +38,6 @@ class FunctionComponent(ResilientComponent):
         """Configuration options have changed, save new values"""
         self.fn_options = opts.get(PACKAGE_NAME, {})
 
-    @staticmethod
-    def parse_additional_data(remedy_payload, values):
-        """Parses the additional data parameter provided in the workflow.
-        Adds the additional_data key:value pairs to the values dict
-        we build to send to Remedy.
-
-        :param remedy_payload: remedy_payload kwarg passes from the workflow
-        :param values: dict of values we build to send to Remedy
-        :return: updated values dict
-        """
-        if remedy_payload.get("additional_data").get("content"):
-            try:
-                additional_data = json.loads(remedy_payload["additional_data"]["content"])
-            except json.decoder.JSONDecodeError:
-                LOG.error(
-                    u"Exception when converting %s to json. Incident will be raised without additional_data."
-                    "" % remedy_payload["additional_data"]["content"])
-                return values
-            values.update(additional_data)
-        return values
-
     def add_dt_row(self, incident_id, task, values):
         """Adds a row to the datatable correlating the Resilient task
         to the Remedy incident.
@@ -79,9 +58,9 @@ class FunctionComponent(ResilientComponent):
             "status": {"value": values["Status"]},
             "extra": {"value": values["Incident Number"]}
         }
-        LOG.info(u"Adding row to the remedy_linked_incidents_reference_table DataTable: {0}".format(row))
+        LOG.info(u"Adding row to the remedy_linked_incidents_reference_table DataTable: %s", row)
         dt_response = dt.dt_add_rows(row)
-        LOG.debug(u"Response from the Resilient Datatable API:\n{0}".format(dt_response))
+        LOG.debug(u"Response from the Resilient Datatable API:\n%s", dt_response)
         return dt_response
 
     def post_incident_to_remedy(self, remedy_client, rp, values, incident_id, task):
@@ -108,9 +87,9 @@ class FunctionComponent(ResilientComponent):
         # 201 is returned for resource created
         if status_code != 201:
             # unexpected response from Remedy
-            LOG.error("Received an unexpected status code from Remedy. Expected 201, but got {0}".format(status_code))
             reason = "Expected 201 - resource created response from Remedy. Received {0}".format(status_code)
-            return rp.done(False, remedy_incident)
+            LOG.error(reason)
+            return rp.done(False, remedy_incident, reason=reason)
 
         LOG.info("Incident successfully posted to Remedy.")
         # capture the Incident Number
@@ -128,12 +107,12 @@ class FunctionComponent(ResilientComponent):
         request_id = entry["values"]["Request ID"]
         # we expect only one result to be returned
         if len(entries["entries"]) > 1:
-            LOG.debug("Multiple form entries in Remedy found matching Incident Number: {0}."
-                      "The Request ID of the first entry will be written to the datatable.".format(incident_number))
+            LOG.debug("Multiple form entries in Remedy found matching Incident Number: %s."
+                      "The Request ID of the first entry will be written to the datatable.", incident_number)
 
-        LOG.info("Correlated Request ID {0} to Incident Number {1}".format(request_id, incident_number))
+        LOG.info("Correlated Request ID %s to Incident Number %s", request_id, incident_number)
 
-        dt_response = self.add_dt_row(incident_id, task, entry["values"])
+        self.add_dt_row(incident_id, task, entry["values"])
 
         results = rp.done(True, entry)
         # pass the task back to Resilient to use in the post-script if we were successful
@@ -167,18 +146,14 @@ class FunctionComponent(ResilientComponent):
 
             # get function inputs
             remedy_payload = kwargs.get("remedy_payload")
-            remedy_payload = json.loads(remedy_payload.get("content"))
+            remedy_payload = json.loads(remedy_payload)
 
-            # From the payload, build a values dict from only the information provided.
-            # If the field was left blank, we leave it blank in order to give priority to templating.
-            values = {**remedy_payload}
-            del values["additional_data"]
-
-            # add the additional data to the values dict
-            values = self.parse_additional_data(remedy_payload, values)
+            # add in the additional data
+            addl_data = remedy_payload.pop("additional_data")
+            addl_data and remedy_payload.update(addl_data)
 
             # required metadata field to create a resource
-            values["z1D_Action"] = "CREATE"
+            remedy_payload["z1D_Action"] = "CREATE"
 
             # resilient incident_id
             incident_id = kwargs.get("incident_id")
@@ -187,35 +162,34 @@ class FunctionComponent(ResilientComponent):
 
             # instantiate a resilient API client
             resilientClient = self.rest_client()
-            # get the incident and task data
-            incident = resilientClient.get("/incidents/{0}".format(incident_id))
+            # get the task data
             task = resilientClient.get("/tasks/{0}".format(task_id))
 
-            # add task instructions to the values dict if present in the task
+            # add task instructions to the remedy_payload dict if present in the task
             if task.get("instructions"):
                 # set the description to the task instructions
                 # detailed description is the biggest text field we have available to us
                 desc = clean_html(task["instructions"])
-                # add it to the values dict
+                # add it to the remedy_payload dict
                 # remedy has a typo in their API, the below is correct
-                values["Detailed_Decription"] = desc
+                remedy_payload["Detailed_Decription"] = desc
 
             # add the task name to the description if one wasn't provided in the inputs
-            if not values.get("Description"):
-                values["Description"] = u"IBM SOAR Case {0}: {1}".format(incident_id, task["name"])
+            if not remedy_payload.get("Description"):
+                remedy_payload["Description"] = u"IBM SOAR Case {0}: {1}".format(incident_id, task["name"])
             # description has a max length of 100
-            if len(values.get("Description", "")) > 100:
-                values["Description"] = values["Description"][:100]
+            if len(remedy_payload.get("Description", "")) > 100:
+                remedy_payload["Description"] = remedy_payload["Description"][:100]
 
             # instantiate a RemedyClient
             client = RemedyClient(app_configs["remedy_host"], app_configs["remedy_user"],
                                   app_configs["remedy_password"], rc, port=port, verify=verify)
 
-            LOG.info(u"Incident values to POST:\n{0}".format(values))
+            LOG.info(u"Incident values to POST:\n%s", remedy_payload)
 
-            results = self.post_incident_to_remedy(client, rp, values, incident_id, task)
+            results = self.post_incident_to_remedy(client, rp, remedy_payload, incident_id, task)
 
-            yield StatusMessage("Finished '{0}' that was running in workflow '{1}'".format(FN_NAME, wf_instance_id))
+            yield StatusMessage("Finished '{}' that was running in workflow '{}'".format(FN_NAME, wf_instance_id))
 
             LOG.info("'%s' complete", FN_NAME)
 

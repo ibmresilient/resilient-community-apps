@@ -201,7 +201,7 @@ The keys provided in this dictionary string must match the API names of fields i
 | ---- | :--: | :------: | ------- | ------- |
 | `incident_id` | `number` | No | `-` | - |
 | `remedy_incident_name` | `text` | No | `-` | - |
-| `remedy_payload` | `textarea` | No | `-` | - |
+| `remedy_payload` | `text` | No | `-` | - |
 | `task_id` | `number` | No | `-` | - |
 
 </p>
@@ -501,29 +501,47 @@ results = {
 <p>
 
 ```python
-# Importing JSON means this function has a hard requirement on the python 3 feature.
-import json
+# Python 2 compatibility for CP4S 1.6
+def mk_str(value, quotes=u'"'):
+    if value is None:
+        return "null"
+    else:
+        esc_value = value.replace(u'"', u'\\"')
+        if quotes:
+            return u'{0}{1}{0}'.format(quotes, esc_value)
+        else:
+            return esc_value
 
-# Any of the selected Activity Fields in the rule are taken in and formed as a dict
-payload = {
-  "ApplyTemplate": rule.properties.remedy_template,
-  "First_Name": rule.properties.remedy_first_name,
-  "Last_Name": rule.properties.remedy_last_name,
-  "Impact": rule.properties.remedy_impact,
-  "Urgency": rule.properties.remedy_urgency,
-  "Service_Type": rule.properties.remedy_service_type,
-  "Status": rule.properties.remedy_status,
-  "Reported Source": rule.properties.remedy_reported_source,
-  "Description": rule.properties.remedy_note,
-  "Assigned Support Organization": rule.properties.remedy_support_group,
-  "additional_data": rule.properties.remedy_additional_data
-}
+
+payload = u"""{{ "ApplyTemplate": {},
+  "First_Name": {},
+  "Last_Name": {},
+  "Impact": {},
+  "Urgency": {},
+  "Service_Type": {},
+  "Status": {},
+  "Reported Source": {},
+  "Description": {},
+  "Assigned Support Organization": {},
+  "additional_data": {}
+}}""".format(mk_str(rule.properties.remedy_template),
+  mk_str(rule.properties.remedy_first_name),
+  mk_str(rule.properties.remedy_last_name),
+  mk_str(rule.properties.remedy_impact),
+  mk_str(rule.properties.remedy_urgency),
+  mk_str(rule.properties.remedy_service_type),
+  mk_str(rule.properties.remedy_status),
+  mk_str(rule.properties.remedy_reported_source),
+  mk_str(rule.properties.remedy_note),
+  mk_str(rule.properties.remedy_support_group),
+  rule.properties.remedy_additional_data.content if rule.properties.remedy_additional_data.content else "null"
+)
 
 # set inputs
 inputs.task_id = task.id 
 inputs.incident_id = incident.id
 inputs.remedy_incident_name = task.name
-inputs.remedy_payload = json.dumps(payload)
+inputs.remedy_payload = payload
 
 ```
 
@@ -568,7 +586,7 @@ In the event that multiple rows in the datatable match the target task (a task h
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `incident_id` | `number` | No | `-` | - |
-| `remedy_payload` | `textarea` | No | `-` | - |
+| `remedy_payload` | `text` | No | `-` | - |
 | `task_id` | `number` | No | `-` | - |
 
 </p>
@@ -812,22 +830,27 @@ results = {
 <p>
 
 ```python
-# Importing JSON means this function has a hard requirement on the python 3 feature.
-import json
+# Python 2 compatibility for CP4S 1.6
+def mk_str(value, quotes=u'"'):
+    if value is None:
+        return "null"
+    else:
+        esc_value = value.replace(u'"', u'\\"')
+        if quotes:
+            return u'{0}{1}{0}'.format(quotes, esc_value)
+        else:
+            return esc_value
+
 
 inputs.task_id = task.id
 inputs.incident_id = incident.id
 
-payload = {}
-
 # Use this section to add key, value pairs to send to Remedy
 # These values will be added/updated on the target Remedy incident,
 # so they must conform with the "HPD:IncidentInterface_Create" schema
+payload = """{"Status_Reason": "foo"}"""
 
-payload["Status_Reason"] = "foo"
-# payload["policy_name"] = "bar"
-
-inputs.remedy_payload = json.dumps(payload) if payload else ''
+inputs.remedy_payload = payload if payload else ''
 
 ```
 

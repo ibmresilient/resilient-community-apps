@@ -33,6 +33,8 @@ class FunctionComponent(ResilientComponent):
         """Constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         self.fn_options = opts.get(PACKAGE_NAME, {})
+        # override MAX_ROWS if provided in app.config
+        self.max_rows = int(self.fn_options.get("max_datatable_rows", MAX_ROWS))
 
     @handler("reload")
     def _reload(self, event, opts):
@@ -63,28 +65,30 @@ class FunctionComponent(ResilientComponent):
 
         rows = self.get_dt_rows(incident_id, task)
         if not rows:
-            LOG.info("Task {0}: {1} not found in the Remedy datatable. Incidents in Remedy will be left unchanged.")
+            LOG.info("Task %s: %s not found in the Remedy datatable. Incidents in Remedy will be left unchanged.",
+                    task["id"], task["name"])
             return rp.done(True, {"skipped": skipped, "closed": closed}, "No record of escalating to Remedy")
 
         if len(rows) > 1:
-            LOG.info("Multiple datatable rows found matching task {0}: {1}.\n"
-                     "Any incidents matching these rows in Remedy will be closed.".format(task["id"], task["name"]))
+            LOG.info("Multiple datatable rows found matching task %s: %s.\n"
+                     "Any incidents matching these rows in Remedy will be closed.", task["id"], task["name"])
         # handle multiple rows
         for row in rows:
             # get remedy UUID from the table
             request_id = row["cells"]["remedy_id"]["value"]
             # get the remedy incident
             try:
-                incident, status_code = remedy_client.get_form_entry(FORM_NAME, request_id)
+                incident, _ = remedy_client.get_form_entry(FORM_NAME, request_id)
             except IntegrationError as e:
                 if e.value.find("404 Client Error: Not Found") > -1:
                     # 404 - the incident was probably deleted
-                    LOG.info("Unable to find Request ID {0} in Remedy. It may have been deleted. Continuing to the next ID.")
+                    LOG.info("Unable to find Request ID %s in Remedy. It may have been deleted. Continuing to the next ID.",
+                             request_id)
                 else:
                     # unknown error case - the remedy_payload supplied might have a bad key
-                    LOG.error("Received error response from Remedy when attempting to close Request ID {0}.\n"
+                    LOG.error("Received error response from Remedy when attempting to close Request ID %s.\n"
                           "Check your remedy_payload input to ensure it matches the HPD:IncidentInterface_Create schema.\n"
-                          "Continuing to the next ID.".format(request_id))
+                          "Continuing to the next ID.", request_id)
                 skipped.append(incident)
                 continue # move on to the next row
             # close the incident if not already closed
@@ -132,10 +136,10 @@ class FunctionComponent(ResilientComponent):
             remedy_payload["Resolution"] = "Closed from IBM SOAR"
             incident, _ = remedy_client.update_form_entry(FORM_NAME, request_id, remedy_payload)
             closed.append(incident)
-            LOG.info("Successfully closed Request ID {0}".format(request_id))
+            LOG.info("Successfully closed Request ID %s", request_id)
         else:
             skipped.append(incident)
-            LOG.info("Request ID {0} aready closed, resolved, or cancelled. Skipping this incident.".format(request_id))
+            LOG.info("Request ID %s already closed, resolved, or cancelled. Skipping this incident.", request_id)
         return closed, skipped
 
     def get_dt_rows(self, incident_id, task):
@@ -153,10 +157,9 @@ class FunctionComponent(ResilientComponent):
         dt = Datatable(self.rest_client(), incident_id, TABLE_NAME)
         dt.get_data()
         # query the rows
-        rows = dt.get_rows(max_rows=MAX_ROWS, search_column="taskincident_id",
+        rows = dt.get_rows(max_rows=self.max_rows, search_column="taskincident_id",
                            search_value=str(task["id"]) + ": " + task["name"])
         return rows
-
 
     @function(FN_NAME)
     def _remedy_close_incident_function(self, event, *args, **kwargs):
@@ -182,13 +185,10 @@ class FunctionComponent(ResilientComponent):
             # get optional settings
             port = self.fn_options.get("remedy_port", None)
             verify = str_to_bool(self.fn_options.get("verify", "true"))
-            # override MAX_ROWS if provided in app.config
-            global MAX_ROWS
-            MAX_ROWS = int(self.fn_options.get("max_datatable_rows", MAX_ROWS))
 
             # get function inputs
             remedy_payload = kwargs.get("remedy_payload")
-            remedy_payload = json.loads(remedy_payload.get("content"))
+            remedy_payload = json.loads(remedy_payload)
             incident_id = kwargs.get("incident_id")
             task_id = kwargs.get("task_id")
 
