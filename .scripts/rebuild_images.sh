@@ -114,7 +114,7 @@ for image_name in "${IMAGE_NAMES[@]}"; do
         path_new_requirements="$package_path/new_requirements.txt"
         path_dockerfile="$package_path/Dockerfile"
         int_version=$(python "$package_path/setup.py" --version)
-        print_msg "$package_path:\t\t\t$package_path\npath_current_requirements:\t$path_current_requirements\npath_new_requirements:\t\t$path_new_requirements\npath_dockerfile:\t\t$path_dockerfile\nint_version:\t\t\t$int_version"
+        print_msg "package_path:\t\t\t$package_path\npath_current_requirements:\t$path_current_requirements\npath_new_requirements:\t\t$path_new_requirements\npath_dockerfile:\t\t$path_dockerfile\nint_version:\t\t\t$int_version"
 
         docker_tag="$image_name:$int_version"
         quay_io_tag="$QUAY_URL/$QUAY_USERNAME/$docker_tag"
