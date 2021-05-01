@@ -67,7 +67,7 @@ class FunctionComponent(ResilientComponent):
         if not rows:
             LOG.info("Task %s: %s not found in the Remedy datatable. Incidents in Remedy will be left unchanged.",
                     task["id"], task["name"])
-            return rp.done(True, {"skipped": skipped, "closed": closed}, "No record of escalating to Remedy")
+            return rp.done(False, {"skipped": skipped, "closed": closed}, "No record of escalating to Remedy")
 
         if len(rows) > 1:
             LOG.info("Multiple datatable rows found matching task %s: %s.\n"
