@@ -74,26 +74,20 @@ class TestRemedyCloseIncident:
         }
     }
 
-    content = json.dumps(content)
-
     mock_inputs_1 = {
-        "remedy_payload": { 
-            "content": content
-        },
+        "remedy_payload": json.dumps(content),
         "task_id": 1,
         "incident_id": 2
     }
-
-    expected_results_1 = {"value": "xyz"}
 
     # @patch("fn_remedy.lib.remedy.RemedyAPIClient.RemedyClient", side_effect=remedy_mock)
     @patch("fn_remedy.components.funct_remedy_close_incident.RemedyClient", side_effect=remedy_side_effect)
     @patch("fn_remedy.components.funct_remedy_close_incident.Datatable", side_effect=remedy_dt_side_effect)
     @pytest.mark.livetest
-    @pytest.mark.parametrize("mock_inputs, expected_results", [
-        (mock_inputs_1, expected_results_1)
+    @pytest.mark.parametrize("mock_inputs", [
+        (mock_inputs_1)
     ])
-    def test_success(self, remedy_mock, remedy_dt_mock, circuits_app, mock_inputs, expected_results):
+    def test_success(self, remedy_mock, remedy_dt_mock, circuits_app, mock_inputs):
         """ Test calling with sample values for the parameters """
 
         results = call_remedy_close_incident_function(circuits_app, mock_inputs)
