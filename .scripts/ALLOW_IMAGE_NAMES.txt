@@ -13,7 +13,7 @@
 #fn_cisco_enforcement
 #fn_cisco_umbrella_inv
 #fn_cloud_foundry
-fn_components
+#fn_components
 #fn_create_webex_meeting
 #fn_cve_search
 #fn_datatable_utils
@@ -63,6 +63,7 @@ fn_components
 #fn_spamhaus_query
 #fn_task_utils
 #fn_threatminer
+fn_twilio
 #fn_twitter_most_popular
 #fn_url_to_dns
 #fn_urlhaus
@@ -73,14 +74,13 @@ fn_components
 #fn_whois
 
 #Other_batch
-#fn_teams
 #fn_phish_tank-fn-phish-tank-was-in-req-file
 #fn_aws_guardduty-failing-test
 #fn_crowdstrike_falcon
 #fn_incident_utils-failing-test
 #fn_odbc_query
 #fn_qradar_integration-failing-test
-#fn_twilio-failingPY27-test
+#fn_teams-failing-test
 #fn_whois_rdap-failing-test
 #fn_wiki-failingPY27-test
 #fn_xforce-failing-test
