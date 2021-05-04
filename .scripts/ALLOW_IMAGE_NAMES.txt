@@ -47,6 +47,7 @@
 #fn_pagerduty
 #fn_pastebin
 #fn_phish_ai
+fn_phish_tank
 #fn_pipl
 #fn_proofpoint_tap
 #fn_proofpoint_trap
@@ -63,7 +64,7 @@
 #fn_spamhaus_query
 #fn_task_utils
 #fn_threatminer
-fn_twilio
+#fn_twilio
 #fn_twitter_most_popular
 #fn_url_to_dns
 #fn_urlhaus
@@ -74,7 +75,6 @@ fn_twilio
 #fn_whois
 
 #Other_batch
-#fn_phish_tank-fn-phish-tank-was-in-req-file
 #fn_aws_guardduty-failing-test
 #fn_crowdstrike_falcon
 #fn_incident_utils-failing-test
