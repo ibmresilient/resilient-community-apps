@@ -68,7 +68,7 @@ Perform operations against the Resilient wiki: create or update pages, read wiki
 * Resilient platform >= `v36.0.5634`
 * An App Host or an Integration Server:
   * To setup up an App Host see:  [ibm.biz/res-app-host-setup](https://ibm.biz/res-app-host-setup)
-  * An Integration Server running `resilient_circuits>=30.0.0` (if using an Integration Server)
+  * An Integration Server running `resilient_circuits>=30.0.0` on Python 3.6 (if using an Integration Server)
     * To set up an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
     * If using an API key account, minimum required permissions are:
       | Name | Permissions |

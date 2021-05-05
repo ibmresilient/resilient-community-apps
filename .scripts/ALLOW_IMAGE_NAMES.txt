@@ -72,8 +72,9 @@
 #fn_utilities
 #fn_virustotal
 #fn_vmray_analyzer
+fn_wiki
 #fn_whois
-fn_xforce
+#fn_xforce
 
 #Other_batch
 #fn_aws_guardduty-failing-test
@@ -83,7 +84,6 @@ fn_xforce
 #fn_qradar_integration-failing-test
 #fn_teams-failing-test
 #fn_whois_rdap-failing-test
-#fn_wiki-failingPY27-test
 #rc-data-feed
 #rc-data-feed-plugin-elasticfeed
 #rc-data-feed-plugin-kafkafeed
