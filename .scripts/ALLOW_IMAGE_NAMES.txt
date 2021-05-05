@@ -10,6 +10,7 @@ fn_aws_iam
 fn_bigfix
 fn_calendar_invite
 fn_cisco_amp4ep
+fn_cisco_asa
 fn_cisco_enforcement
 fn_cisco_umbrella_inv
 fn_cloud_foundry
@@ -56,6 +57,7 @@ fn_pulsedive
 fn_qradar_advisor
 fn_qradar_enhanced_data
 fn_query_tor_network
+fn_remedy
 fn_scheduler
 fn_secureworks_ctp
 fn_sep

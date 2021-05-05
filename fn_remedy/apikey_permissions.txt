@@ -20,11 +20,11 @@ read_all_incidents
 edit_all_incidents_fields
 #
 ## notes permissions
-#edit_all_incident_notes
+edit_all_incident_notes
 #
 ## tasks permissions
 #edit_incident_public_task_fields
-#read_all_private_tasks
+read_all_private_tasks
 #edit_incident_private_task_member
 #edit_all_private_task_notes
 #edit_incident_public_task_member
@@ -70,4 +70,4 @@ edit_all_incidents_fields
 #read_stats
 #read_all_action_invocations
 #read_workspace
-edit_data
+#edit_data
