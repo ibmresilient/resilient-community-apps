@@ -7,6 +7,7 @@ APP_CONFIG_SHA=`sha256sum /etc/rescircuits/app.config`
 resilient-circuits run & CIRCUITS_PID=`echo $!`
 while true
 do
+  echo -n "`date +'%F %T,%N INFO '`"
   if ! echo $APP_CONFIG_SHA | sha256sum --check
   then
     kill -9 $CIRCUITS_PID

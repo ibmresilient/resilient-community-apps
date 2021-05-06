@@ -29,14 +29,15 @@ setup(
     long_description="Perform operations against the Resilient wiki: create or update pages, read wiki contents and perform lookups of content.",
     install_requires=[
         'resilient_circuits>=30.0.0',
-        'resilient_lib',
-        'cachetools<3.0.0'
+        'resilient_lib'
     ],
     packages=find_packages(),
     include_package_data=True,
     platforms='any',
+    python_requires='>=3',
     classifiers=[
         'Programming Language :: Python',
+        'Programming Language :: Python :: 3'
     ],
     entry_points={
         "resilient.circuits.components": [

@@ -41,14 +41,14 @@ notifications:
 
 stages:
   - name: run all tests
-    if: branch = master AND type = cron
+    if: tag IS present OR (branch = master AND type = cron)
   - name: run package tests
-    if: type != cron
+    if: tag IS blank AND type != cron
   # Every commit not on master performs static analysis
   - name: static analysis
-    if: type != cron
+    if: tag IS blank AND type != cron
   - name: build image and app zip
-    if: type = push
+    if: tag IS blank AND type = push
   # Rebuild all images
   - name: rebuild all images
     if: tag =~ ^rebuild/.+
