@@ -37,6 +37,7 @@ fn_bluecoat_site_review
 fn_calendar_invite
 fn_cb_protection
 fn_cisco_amp4ep
+fn_cisco_asa
 fn_cisco_enforcement
 fn_cisco_umbrella_inv
 fn_clamav
