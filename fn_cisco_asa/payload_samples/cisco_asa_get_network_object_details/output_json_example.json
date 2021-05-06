@@ -1,0 +1,20 @@
+{
+    'content': {'host': {'kind': 'IPv4FQDN', 
+                         'value': 'www.fqdn.com'}, 
+                'kind': 'object#NetworkObj', 
+                'name': 'TESTfqdn', 
+                'objectId': 'TESTfqdn', 
+                'selfLink': 'https://192.168.1.162/api/objects/networkobjects/TESTfqdn'},
+    'inputs': {'cisco_asa_firewall': 'firewall_1', 
+               'cisco_asa_network_object_id': 'TESTfqdn'}, 
+    'metrics': {'execution_time_ms': 83, 
+    'host': 'MacBook-Pro.local', 
+    'package': 'fn-cisco-asa', 
+    'package_version': '1.0.0', 
+    'timestamp': '2021-03-29 13:53:27', 
+    'version': '1.0'},
+    'raw': '{"kind": "object#NetworkObj", "selfLink": "https://192.168.1.162/api/objects/networkobjects/TESTfqdn", "name": "TESTfqdn", "host": {"kind": "IPv4FQDN", "value": "www.fqdn.com"}, "objectId": "TESTfqdn"}', 
+    'reason': None, 
+    'success': True, 
+    'version': '1.0'
+}

@@ -1,0 +1,9 @@
+include README.md
+include Dockerfile
+include entrypoint.sh
+recursive-include fn_cisco_asa/util *
+include fn_cisco_asa/LICENSE
+include doc/*
+recursive-include payload_samples/*/ *.json
+
+exclude *.bak
