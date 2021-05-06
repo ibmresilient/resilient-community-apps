@@ -9,5 +9,5 @@ for compatibility only.  New deployments should use the Function-based alternati
 * rc-shell-runner: replace with fn_utilities "Shell Command" function
 * rc-splunk-search: replace with fn_splunk_integration "Splunk Search" function
 * fn_bluecoat_site_review: no longer needed
-
+* fn_risk_fabric: maintained externally
 

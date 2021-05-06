@@ -120,6 +120,3 @@ fn_xforce
 
 #Not_on_AppX
 #fn_res_to_icd
-
-#Externally_Developed
-#fn_risk_fabric
