@@ -159,6 +159,9 @@ These guides are available on the IBM Knowledge Center at [ibm.biz/cp4s-docs](ht
 
 ### Proxy Server
 The app supports a proxy server.
+*Note:* If using a proxy, please note that Microsoft expects only an HTTPS proxy.
+Setting both an HTTP an HTTPS proxy in your app.config could result in a failed connection.
+See [App Configuration](#app-configuration) for more detail.
 
 ---
 
@@ -184,6 +187,9 @@ The app supports a proxy server.
 ### App Configuration
 The following table describes the settings you need to configure in the app.config file. If using App Host, see the Resilient System Administrator Guide. If using the integration server, see the Integration Server Guide.
 
+*Note:* if configuring fn_exchange_online with a proxy server, setting both the `http_proxy` and `https_proxy` can lead to connection issues.
+Microsoft only supports a secure HTTPS proxy and we recommend only using the `https_proxy` parameter.
+The `http_proxy` parameter should be omitted.
 
   | Config | Required | Example | Description |
   | ------ | :------: | ------- | ----------- |

@@ -132,4 +132,5 @@ class TestLdapUtilitiesSearch:
             "ldap_search_param": success_param
         }
         result = call_ldap_utilities_search_function(circuits_app, function_params)
-        assert(success_expected_result == result)
+        for expected_result in success_expected_result:
+            assert expected_result in result

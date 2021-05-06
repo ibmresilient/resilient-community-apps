@@ -19,10 +19,7 @@ do
     #echo ${array[@]}
 done <<EOM
 .github
-.gitignore
-.icons
 .scripts/mirror-containers
-.travis.yml
 CONTRIBUTING.md
 LICENSE
 README.md
@@ -159,5 +156,8 @@ do
     # Removes specific directories
     rm -rf ../$line
 done <<EOM
+.gitignore
+.icons
+.travis.yml
 fn_service_now/snow_app
 EOM

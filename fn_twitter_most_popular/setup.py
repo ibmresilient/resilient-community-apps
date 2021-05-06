@@ -12,8 +12,9 @@ setup(
     description="Resilient Circuits Twitter Search Function",
     long_description="A Resilient Circuits Function allowing you to search tweets with one or more tags",
     install_requires=[
-        'resilient_circuits>=30.0.0',
-        'twython>= 3.7.0'
+        "resilient_circuits>=30.0.0",
+        "twython < 3.8.0;python_version<'3.0'",
+        "twython >= 3.8.0;python_version>='3.0'"
     ],
     packages=find_packages(),
     include_package_data=True,

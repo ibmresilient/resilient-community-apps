@@ -12,6 +12,8 @@ def config_section_data():
     config_data = u"""[fn_pa_panorama]
 # URL/IP of Panorama
 panorama_host=<https://0.0.0.0>
+# Versions of panorama can be used by changing the api_version to use a different API version
+api_version=9.0
 api_key=<Panorama_api_key>
 cert=[True|False]
 # optional settings to access Panorama via proxies

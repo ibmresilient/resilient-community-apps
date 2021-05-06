@@ -23,7 +23,7 @@ def snake_to_camel(word):
 setup(
     name='fn_service_now',
     display_name="ServiceNow Functions for IBM Resilient",
-    version="1.0.4",
+    version="1.0.5",
     license="MIT",
     author="IBM Resilient",
     url="https://ibm.com/mysupport",

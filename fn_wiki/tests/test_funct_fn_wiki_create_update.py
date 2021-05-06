@@ -68,7 +68,6 @@ class TestFnWikiCreateUpdate:
 
     @pytest.mark.parametrize("mock_inputs, expected_results", [
         (mock_fail_path, None),
-        (mock_fail_page_not_found, None),
         (mock_fail_parent_not_found, None),
     ])
     def test_fail_update(self, circuits_app, mock_inputs, expected_results):
@@ -79,6 +78,13 @@ class TestFnWikiCreateUpdate:
             assert(results['success'] == False)
             assert(results['reason'])
 
+    @pytest.mark.parametrize("mock_inputs, expected_results", [
+        (mock_fail_page_not_found, None)
+    ])
+    def test_page_not_found(self, circuits_app, mock_inputs, expected_results):
+        results = call_fn_wiki_create_update_function(circuits_app, mock_inputs)
+        assert(results['success'] == False)
+        assert(results['reason'] == 'Unable to find page with title: not found')
 
     mock_success_title = {
         "wiki_path": "ΣΤ",
