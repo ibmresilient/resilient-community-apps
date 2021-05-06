@@ -117,6 +117,3 @@ fn_xforce
 #fn_symantec_dlp
 #fn_thug
 #fn_watson_translate
-
-#Not_on_AppX
-#fn_res_to_icd
