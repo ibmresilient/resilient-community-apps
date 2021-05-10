@@ -80,6 +80,7 @@ fn_vmray_analyzer
 fn_wiki
 fn_whois
 fn_xforce
+fn_zia
 
 #Not_Rebuilt
 #fn_aws_guardduty-failing-test
