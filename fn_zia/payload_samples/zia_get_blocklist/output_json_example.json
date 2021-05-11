@@ -1,0 +1,21 @@
+{
+    "content": {
+        "blacklistUrls": [
+            "badhost.com",
+            "192.168.12.2"
+        ]
+    },
+    "inputs": {},
+    "metrics": {
+        "version": "1.0",
+        "package": "fn-zia",
+        "package_version": "1.0.0",
+        "host": "host.ibm.com",
+        "execution_time_ms": 22199,
+        "timestamp": "2021-05-11 10:33:14"
+    },
+    "raw": "{'blacklistUrls': ['badhost.com'], ['192.168.12.2']}",
+    "version": "1.0",
+    "success": True,
+    "reason": None,
+}

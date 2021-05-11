@@ -1,0 +1,20 @@
+{
+    "content": {
+        "status": "OK"
+    },
+    "inputs": {
+        "zia_blocklisturls": "1.1.1.1"
+    },
+    "metrics": {
+        "version": "1.0",
+        "package": "fn-zia",
+        "package_version": "1.0.0",
+        "host": "host.ibm.com",
+        "execution_time_ms": 22199,
+        "timestamp": "2021-05-11 10:33:14"
+    },
+    "raw": "{'status': 'OK'}",
+    "version": "1.0",
+    "success": True,
+    "reason": None
+}
