@@ -8,7 +8,7 @@ import re
 from resilient_lib import RequestsCommon
 
 LOG = logging.getLogger(__name__)
-
+MILLISEC_MULTIPLIER = 1000
 
 class Auth():
     """ Class to support Zscaler Internet Access (Zia) api authentication
@@ -26,8 +26,8 @@ class Auth():
         self.api_key = fn_opts.get("zia_api_key")
         self._req = RequestsCommon(opts, fn_opts)
         self.proxies = self._req.get_proxies()
+        self._timestamp = str(int(time.time() * MILLISEC_MULTIPLIER))
         self._obf_api_key = ''
-        self._timestamp = ''
         self._jsession_id = ''
         # Set basic request headers.
         self._headers = {
@@ -75,11 +75,16 @@ class Auth():
         # Update request headers to include JSESSIONID .
         self._headers.update({"cookie": self._jsession_id})
 
-    def _obfuscate_api_key(self):
+    def _obfuscate_api_key(self, timestamp=None):
         """ Obfuscate api key to be used in api requests.
             Set obfuscated key and timestamp.
+
+        :param timestamp: Optional parameter (Unix epoch value in millisecs)
         """
-        now = str(int(time.time() * 1000))
+        if timestamp:
+            now = self._timestamp = timestamp
+        else:
+            now = self._timestamp
         n = now[-6:]
         r = str(int(n) >> 1).zfill(6)
         key = ""
@@ -88,7 +93,6 @@ class Auth():
         for j in range(0, len(r), 1):
             key += self.api_key[int(r[j]) + 2]
         self._obf_api_key = key
-        self._timestamp = now
 
     def _parse_jsessionid(self, set_cookie):
         """ Parse JSESSIONID from response header.
