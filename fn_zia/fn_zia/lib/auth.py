@@ -40,6 +40,11 @@ class Auth():
         self._obfuscate_api_key()
         self._set_jsession_header()
 
+    def __getattr__(self, name):
+        """Log warning for undefined class attributes."""
+        LOG.warning("The attribute '%s' not defined.", name)
+        return ''
+
     def _set_jsession_header(self):
         """ Setup headers to allow authentication to Zia server.
 
