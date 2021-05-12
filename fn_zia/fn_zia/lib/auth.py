@@ -25,7 +25,7 @@ class Auth():
         self.password = fn_opts.get("zia_password")
         self.api_key = fn_opts.get("zia_api_key")
         self._req = RequestsCommon(opts, fn_opts)
-        self.proxies = RequestsCommon(opts, fn_opts).get_proxies()
+        self.proxies = self._req.get_proxies()
         # Set basic request headers.
         self.obf_api_key = ''
         self.timestamp = ''
@@ -36,7 +36,7 @@ class Auth():
             "User-Agent": "SOARCLIENT"
         }
         # Add authenticate endpoint.
-        self._endpoints.update({"authenticate": self.api_base_url + "/authenticatedSession"})
+        self._endpoints.update({"authenticate": "/".join([self.api_base_url, "authenticatedSession"])})
         self._obfuscate_api_key()
         self._set_jsession_header()
 

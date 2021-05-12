@@ -29,9 +29,8 @@ class ZiaClient(Auth):
         # Define api endpoints
         self._endpoints = {
             # Block lists
-            "blocklist":       self.api_base_url+"/security/advanced",
-            "blocklist_action": self.api_base_url+"/security/advanced/blacklistUrls?action={}",
-            # Allow lists
+            "blocklist":        "/".join([self.api_base_url, "security/advanced"]),
+            "blocklist_action": "/".join([self.api_base_url, "security/advanced/blacklistUrls?action={}"]),            # Allow lists
             # Custom lists
             # Sandbox
             # Activation

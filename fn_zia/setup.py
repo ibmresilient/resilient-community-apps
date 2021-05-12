@@ -26,8 +26,8 @@ setup(
     version="1.0.0",
     license="MIT",
     author="IBM SOAR",
-    author_email="support@resilientsystems.com",
-    url="http://ibm.biz/resilientcommunity",
+    author_email="",
+    url="http://ibm.biz/soarcommunity",
     description="Resilient Circuits Components for 'fn_zia'",
     long_description="""The Zscaler Internet Access Integration (ZIA) for SOAR to facilitate manual enrichment and 
      actions against a ZIA environment in the IBM SOAR Platform.
