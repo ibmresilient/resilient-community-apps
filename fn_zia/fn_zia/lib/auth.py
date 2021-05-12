@@ -36,6 +36,8 @@ class Auth():
             "User-Agent": "SOARCLIENT"
         }
         # Add authenticate endpoint.
+        if not self._endpoints:
+            self._endpoints = {}
         self._endpoints.update({"authenticate": "/".join([self.api_base_url, "authenticatedSession"])})
         self._obfuscate_api_key()
         self._set_jsession_header()
