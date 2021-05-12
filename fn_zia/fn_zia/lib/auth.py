@@ -27,9 +27,9 @@ class Auth():
         self._req = RequestsCommon(opts, fn_opts)
         self.proxies = self._req.get_proxies()
         # Set basic request headers.
-        self.obf_api_key = ''
-        self.timestamp = ''
-        self.jsession_id = ''
+        self._obf_api_key = ''
+        self._timestamp = ''
+        self._jsession_id = ''
         self._headers = {
             "content-type": "application/json",
             "cache-control": "no-cache",
@@ -37,7 +37,7 @@ class Auth():
         }
         # Add authenticate endpoint.
         if not self._endpoints:
-            self._endpoints = {}
+        self._endpoints = {}
         self._endpoints.update({"authenticate": "/".join([self.api_base_url, "authenticatedSession"])})
         self._obfuscate_api_key()
         self._set_jsession_header()
@@ -57,10 +57,10 @@ class Auth():
 
         # Payload with credentials.
         payload = {
-            "apiKey": self.obf_api_key,
+            "apiKey": self._obf_api_key,
             "username": self.username,
             "password": self.password,
-            "timestamp": self.timestamp
+            "timestamp": self._timestamp
         }
 
         try:
@@ -71,9 +71,9 @@ class Auth():
             raise int_ex
 
         # Get JSESSIONID value .
-        self.jsession_id = self._parse_jsessionid(res.headers["Set-Cookie"])
+        self._jsession_id = self._parse_jsessionid(res.headers["Set-Cookie"])
         # Update request headers to include JSESSIONID .
-        self._headers.update({"cookie": self.jsession_id})
+        self._headers.update({"cookie": self._jsession_id})
 
     def _obfuscate_api_key(self):
         """ Obfuscate api key to be used in api requests.
@@ -87,8 +87,8 @@ class Auth():
             key += self.api_key[int(n[i])]
         for j in range(0, len(r), 1):
             key += self.api_key[int(r[j]) + 2]
-        self.obf_api_key = key
-        self.timestamp = now
+        self._obf_api_key = key
+        self._timestamp = now
 
     def _parse_jsessionid(self, set_cookie):
         """ Parse JSESSIONID from response header.
