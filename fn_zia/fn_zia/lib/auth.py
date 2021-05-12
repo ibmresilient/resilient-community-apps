@@ -104,5 +104,11 @@ class Auth():
         :param set-cookie: The set-cookie parameter form response
         return res: The jsession iD
         """
-        jsession_id = re.sub(r";.*$", "", set_cookie)
+        js_match = re.search(r".*(JSESSIONID=[0-9a-f]{32}).*", set_cookie, re.IGNORECASE)
+
+        if js_match:
+            jsession_id = js_match.group(1)
+        else:
+            raise ValueError("The 'JSESSIONID' parameter is missing from the authenticate response.")
+
         return jsession_id
