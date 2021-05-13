@@ -23,14 +23,13 @@ inputs.zia_blocklisturls = row.blocklist_url
 
 ### Post-Processing Script
 ```python
-##  ZIA - wf_zia_get_blocklist post processing script ##
+##  ZIA - wf_zia_remove_url_from_blocklist post processing script ##
 
 #  Globals
 FN_NAME = "funct_zia_remove_from_blocklist"
 WF_NAME = "Example: ZIA: Remove URL From Blocklist"
 CONTENT = results.content
 INPUTS = results.inputs
-QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
 
 # Processing
 def main():

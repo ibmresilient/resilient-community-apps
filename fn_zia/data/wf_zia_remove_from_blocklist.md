@@ -30,8 +30,6 @@ FN_NAME = "funct_zia_remove_from_blocklist"
 WF_NAME = "Example: ZIA: Remove From Blocklist"
 CONTENT = results.content
 INPUTS = results.inputs
-QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
-
 
 # Processing
 def main():

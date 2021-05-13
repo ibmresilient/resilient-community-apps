@@ -26,15 +26,13 @@ None
 ##  ZIA - wf_zia_get_blocklist post processing script ##
 
 #  Globals
-
 FN_NAME = "funct_zia_get_blocklist"
 WF_NAME = "Example: ZIA: Get Blocklist"
-# Processing
 CONTENT = results.content
 INPUTS = results.inputs
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
-note_text = ''
 
+# Processing
 def main():
     note_text = u''
     key_count = 0

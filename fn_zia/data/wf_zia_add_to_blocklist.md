@@ -30,9 +30,7 @@ FN_NAME = "funct_zia_add_to_blocklist"
 WF_NAME = "Example: ZIA: Add To Blocklist"
 CONTENT = results.content
 INPUTS = results.inputs
-QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
 
-# Processing
 # Processing
 def main():
     note_text = u''
