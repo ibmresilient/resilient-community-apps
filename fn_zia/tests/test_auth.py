@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 
-"""Test Sep client  class."""
+"""Test Zia Auth  class."""
 from __future__ import print_function
 from mock import patch
 import pytest
@@ -28,6 +28,14 @@ def get_fn_opts():
 
 class TestZia:
     """ Test auth using mocked data.  """
+    """ Test auth create object"""
+    @patch("fn_zia.lib.auth.RequestsCommon", side_effect=mocked_requests)
+    @pytest.mark.parametrize("expected_result", [
+        ("JSESSIONID=971F40D46FE1A27AB4E2783BA77A1C76")
+    ])
+    def test_set_jsession_header(self, mock_req, expected_result):
+        opts = {}
+        auth = Auth(opts, get_fn_opts())
 
     """ Test auth._set_jsession_header"""
     @patch("fn_zia.lib.auth.RequestsCommon", side_effect=mocked_requests)

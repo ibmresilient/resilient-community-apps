@@ -3,6 +3,7 @@
 # pragma pylint: disable=unused-argument, no-self-use
 """Generate Mock responses to simulate ZIA for Unit and function tests """
 from requests.models import Response
+import json
 
 def get_mock_config():
     config_data = u"""[fn_zia]
@@ -65,11 +66,13 @@ def mocked_requests(*args, **kwargs):
 
         def execute_call_v2(self, *args, **kwargs):
             if args[0].lower() == "post":
-                if args[1].lower() == "/authenticatedsession":
+                if args[1].lower().endswith("/authenticatedsession"):
                     return MockGetResponse(get_auth_headers(), None, 204)
+                elif "/advanced/blacklisturls?action=" in args[1].lower():
+                    return MockGetResponse(None, None, 204)
             elif args[0].lower() == "get":
-                pass
-
+                if args[1].lower().endswith("/security/advanced"):
+                    return MockGetResponse(None, get_blocklist_urls_result(), 204)
         def get_proxies(self, *args, **kwargs):
             return {}
 
@@ -81,11 +84,17 @@ def mocked_requests(*args, **kwargs):
 class MockGetResponse:
     """Class will be used by the mock to replace request response in standalone tests"""
     def __init__(self, *args, **kwargs):
-        self.headers = args[0] if "Set-Cookie" in args[0] else {}
+        self.headers = {}
+        self.content = None
+        if args[0] and "Set-Cookie" in args[0]:
+            self.headers = args[0]
         self.r = Response()
         if args[0]:
             self.token = args[0]
         if args[1]:
-            self.r._content = (args[1]).encode()
+            self.content = self.r._content = json.dumps(args[1]).encode('utf-8')
         self.status_code = args[2]
         self.r.status_code = args[2]
+
+    def json(self):
+        return self.r.json()
