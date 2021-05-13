@@ -38,6 +38,8 @@ class Auth():
         # Add authenticate endpoint.
         if not self._endpoints:
             self._endpoints = {}
+        if not self.api_base_url:
+            self.api_base_url = fn_opts.get("zia_api_base_url")
         self._endpoints.update({"authenticate": "/".join([self.api_base_url, "authenticatedSession"])})
         self._obfuscate_api_key()
         self._set_jsession_header()
