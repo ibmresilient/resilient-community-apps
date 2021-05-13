@@ -85,7 +85,7 @@ class ZiaClient(Auth):
         """ Perform an add or remove action on a list of URLs to the blocklist.
 
         The URLs can be either urls or ip addresses.
-
+        Valid actions are "ADD_TO_LIST" and "REMOVE_FROM_LIST".
         See following for url guidelines
         https://help.zscaler.com/zia/url-format-guidelines
 
