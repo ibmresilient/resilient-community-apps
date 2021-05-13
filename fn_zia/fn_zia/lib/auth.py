@@ -65,12 +65,7 @@ class Auth():
             "timestamp": self._timestamp
         }
 
-        try:
-            res = self._req.execute_call_v2("post", uri, headers=self._headers, proxies=self.proxies, json=payload)
-        except Exception as int_ex:
-            LOG.error("ERROR for '%s' call for uri '%s', Got exception: %s",
-                      "post", uri, str(int_ex))
-            raise int_ex
+        res = self._req.execute_call_v2("post", uri, headers=self._headers, proxies=self.proxies, json=payload)
 
         # Get JSESSIONID value .
         self._jsession_id = self._parse_jsessionid(res.headers["Set-Cookie"])

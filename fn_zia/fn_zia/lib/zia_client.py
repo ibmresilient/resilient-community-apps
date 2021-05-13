@@ -46,13 +46,8 @@ class ZiaClient(Auth):
         :return res: Parsed response
         """
         result = None
-        try:
-            res = self._req.execute_call_v2(method, uri, proxies=self.proxies, **kwargs)
 
-        except Exception as int_ex:
-            LOG.error("ERROR for '%s' call for uri '%s', Got exception: %s",
-                      "get", uri, str(int_ex))
-            raise int_ex
+        res = self._req.execute_call_v2(method, uri, proxies=self.proxies, **kwargs)
 
         if res.content:
             try:
