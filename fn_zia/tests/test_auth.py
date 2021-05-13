@@ -7,7 +7,7 @@ from __future__ import print_function
 from mock import patch
 import pytest
 from fn_zia.lib.auth import *
-from  mock_artifacts import mocked_requests
+from .mock_artifacts import mocked_requests
 
 """
 Suite of tests to test Zia client class
