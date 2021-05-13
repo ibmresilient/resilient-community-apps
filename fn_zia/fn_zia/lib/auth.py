@@ -49,6 +49,10 @@ class Auth():
         LOG.warning("The attribute '%s' not defined.", name)
         return ''
 
+    def __len__(self, name):
+        """ Dummy method to prevent warning from __getattr__"""
+        pass
+
     def _set_jsession_header(self):
         """ Setup headers to allow authentication to Zia server.
 
