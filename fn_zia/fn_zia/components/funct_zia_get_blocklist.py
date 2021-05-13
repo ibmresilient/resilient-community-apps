@@ -34,7 +34,7 @@ class FunctionComponent(ResilientComponent):
 
     @function(FN_NAME)
     def _funct_zia_get_blocklist_function(self, event, *args, **kwargs):
-        """Function: Get a list of black-listed URLs.
+        """Function: Get a list of block-listed URLs.
         """
         try:
             rp = ResultPayload(PACKAGE_NAME, **kwargs)
