@@ -74,7 +74,11 @@ class Auth():
 
     def _obfuscate_api_key(self, timestamp=None):
         """ Obfuscate api key to be used in api requests.
-            Set obfuscated key and timestamp.
+        Set obfuscated api key attribute and optionally timestamp.
+
+        Example:
+            self.api_key = "abCDeFIJkl0M", self._timestamp = "1620837564418"
+            self._obf_api_key = "FIeebke0eeCM"
 
         :param timestamp: Optional parameter (Unix epoch value in millisecs)
         """
