@@ -7,8 +7,8 @@ import re
 # Change this value to reflect who will be the owner of the incident before running the script.
 newIncidentOwner = ""
 
-# Whitelist for IP V4 addresses
-ipV4WhiteList = [
+# Allowlist for IP V4 addresses
+ipV4AllowList = [
   #"127.0.0.0/8",                # Loopback
   #"192.168.0.0/16",             # Class B private network local communication (RFC 1918)
   #"198.18.0.0/15",              # Testing of inter-network communications between subnets (RFC 2544)
@@ -26,8 +26,8 @@ ipV4WhiteList = [
   #"239.0.0.0-239.255.255.255"   # Administrative Multicast
 ]
 
-# Whitelist for IP V6 addresses
-ipV6WhiteList = [
+# Allowlist for IP V6 addresses
+ipV6AllowList = [
   #"::/8",                       # Reserved by IETF [RFC3513][RFC4291]
   #"0100::/8",                   # Reserved by IETF [RFC3513][RFC4291]
   #"0200::/7",                   # Reserved by IETF [RFC4048]
@@ -47,8 +47,8 @@ ipV6WhiteList = [
   #"FEC0::/1                     # Reserved by IETF [RFC3879]
 ]
 
-# Domain whitelist
-domainWhiteList = [
+# Domain allowlist
+domainAllowList = [
   #"*.ibm.com"
 ]
 
@@ -100,7 +100,7 @@ class Utils:
       return addressAsBinary
 
 
-class WhiteListElement(object):
+class AllowListElement(object):
   """ A class that represents a domain, IP address range or network segment that has been verified as not being suspicious. """
 
   # A text representation of the element
@@ -116,11 +116,11 @@ class WhiteListElement(object):
 
   def __repr__(self):
     """Method to return the text representation of the object."""
-    return u"WhiteListElement(\"{0}\")".format(self.asString)
+    return u"AllowListElement(\"{0}\")".format(self.asString)
 
   def test(self, other):
     """ A function intended to be inherited but overrided by subclasses. It should return True if the "other" object
-    would be matched by this white list element.
+    would be matched by this allow list element.
     """
     return False
 
@@ -148,8 +148,8 @@ class IPAddress:
     return "IPAddress(\"{0}\")".format(self.addressAsString)
 
 
-class CIDR(WhiteListElement):
-  """ A CIDR (Classless Inter-Domain Routing) is one of the possible types of white list element, representing either an explicit IP Address or
+class CIDR(AllowListElement):
+  """ A CIDR (Classless Inter-Domain Routing) is one of the possible types of allow list element, representing either an explicit IP Address or
   a subnet in the form of an IP Address and a subnet mask suffix. E.G.
   127.0.0.1
   10.0.0.0/8
@@ -188,8 +188,8 @@ class CIDR(WhiteListElement):
     return (anIPAddress.addressAsBinary >> (self.width - self.cidrSuffix) == self.addressAsBinary >> (self.width - self.cidrSuffix))
 
 
-class IPRange(WhiteListElement):
-  """ A type of WhiteListElement that represents a range, from a lower bound to an upper bound, inclusive. """
+class IPRange(AllowListElement):
+  """ A type of AllowListElement that represents a range, from a lower bound to an upper bound, inclusive. """
   lowest = None
   highest = None
 
@@ -216,8 +216,8 @@ class IPRange(WhiteListElement):
     return "IPRange(\"{0}-{1}\")".format(self.lowest, self.highest)
 
 
-class Domain(WhiteListElement):
-  """ A type of WhiteListElement that represents a domain or domain pattern. E.G.
+class Domain(AllowListElement):
+  """ A type of AllowListElement that represents a domain or domain pattern. E.G.
   *.ibm.com
   mailserver.knowngood.com
   """
@@ -251,27 +251,27 @@ class Domain(WhiteListElement):
     return u"Domain(\"{0}\")".format(self.asString)
 
 
-class WhiteList(list):
-  """ A class that extends the list class to support the white list facility. """
+class AllowList(list):
+  """ A class that extends the list class to support the allow list facility. """
 
-  def checkIsItemNotOnWhiteList(self, anItem):
-    """ A method that checks if an item should be removed from the artifact list because if matches a whitelist element.
+  def checkIsItemNotOnAllowList(self, anItem):
+    """ A method that checks if an item should be removed from the artifact list because if matches a allowlist element.
     Parameter "anItem" - the item in question.
     Return value: The item if it should be kept, None if it should be removed.
     """
-    for whiteListEntry in self:
-      if whiteListEntry.test(anItem):
-        log.info(u"Filtering out {0} because it matched with whitelist entry {1}".format(anItem, self))
+    for allowListEntry in self:
+      if allowListEntry.test(anItem):
+        log.info(u"Filtering out {0} because it matched with allowlist entry {1}".format(anItem, self))
         return None
     return anItem
 
   @staticmethod
   def createFromIPv4Collection(theList):
-    """ A static method to create a list of IPv4 WhiteListElements based on a list of strings.
-    Parameter "theList" - the list of string representations of WhiteListElements suitable for IPv4.
-    Return value: A WhiteList that can be used against IPv4 addresses.
+    """ A static method to create a list of IPv4 AllowListElements based on a list of strings.
+    Parameter "theList" - the list of string representations of AllowListElements suitable for IPv4.
+    Return value: A AllowList that can be used against IPv4 addresses.
     """
-    completedList = WhiteList()
+    completedList = AllowList()
     for element in theList:
       if "-" in element:
         completedList.append(IPRange(element))
@@ -281,12 +281,12 @@ class WhiteList(list):
 
   @staticmethod
   def createFromCollection(theList, constructor):
-    """ A static method to create a list of WhiteListElements based on a list of strings.
-    Parameter "theList" - the list of string representations of WhiteListElements.
+    """ A static method to create a list of AllowListElements based on a list of strings.
+    Parameter "theList" - the list of string representations of AllowListElements.
     Parameter "constructor" - the class for objects that will populate the return value.
-    Return value: A WhiteList that can be used against IPv4 addresses.
+    Return value: A AllowList that can be used against IPv4 addresses.
     """
-    completedList = WhiteList()
+    completedList = AllowList()
     for element in theList:
       completedList.append(constructor(element))
     return completedList
@@ -305,14 +305,14 @@ class EmailProcessor(object):
   # a second time.
   addedArtifacts = set()
 
-  # Create Whitelist for IP V4 addresses from string representations
-  ipV4WhiteListConverted = WhiteList.createFromIPv4Collection(ipV4WhiteList)
+  # Create Allowlist for IP V4 addresses from string representations
+  ipV4AllowListConverted = AllowList.createFromIPv4Collection(ipV4AllowList)
 
-  # Create Whitelist for IP V6 addresses from string representations
-  ipV6WhiteListConverted = WhiteList.createFromCollection(ipV6WhiteList, CIDR)
+  # Create Allowlist for IP V6 addresses from string representations
+  ipV6AllowListConverted = AllowList.createFromCollection(ipV6AllowList, CIDR)
 
-  # Create Whitelist domains from string representations
-  domainWhiteListConverted = WhiteList.createFromCollection(domainWhiteList, Domain)
+  # Create Allowlist domains from string representations
+  domainAllowListConverted = AllowList.createFromCollection(domainAllowList, Domain)
 
   def __init__(self):
     """The EmailProcessor constructor.
@@ -469,19 +469,19 @@ class EmailProcessor(object):
       else:
         log.debug(u"Could not find artifact {0} for regex {1}".format(artifactType,regex))
 
-  def checkIPWhiteList(self, anAddress):
-    """ A method to check a list of IP Addresses aginst the whitelist. """
-    whiteList = self.ipV4WhiteListConverted if "." in anAddress.addressAsString else self.ipV6WhiteListConverted
-    log.debug(u"Going to filter {0} against whitelist {1}".format(anAddress, whiteList))
-    return whiteList.checkIsItemNotOnWhiteList(anAddress)
+  def checkIPAllowList(self, anAddress):
+    """ A method to check a list of IP Addresses aginst the allowlist. """
+    allowList = self.ipV4AllowListConverted if "." in anAddress.addressAsString else self.ipV6AllowListConverted
+    log.debug(u"Going to filter {0} against allowlist {1}".format(anAddress, allowList))
+    return allowList.checkIsItemNotOnAllowList(anAddress)
 
-  def checkDomainWhiteList(self, aURL):
-    """ A method to check a list of URLs aginst a whitelist. """
-    log.debug(u"Going to filter {0} against whitelist {1}".format(aURL, self.domainWhiteListConverted))
-    return self.domainWhiteListConverted.checkIsItemNotOnWhiteList(aURL)
+  def checkDomainAllowList(self, aURL):
+    """ A method to check a list of URLs aginst a allowlist. """
+    log.debug(u"Going to filter {0} against allowlist {1}".format(aURL, self.domainAllowListConverted))
+    return self.domainAllowListConverted.checkIsItemNotOnAllowList(aURL)
 
   def processIPFully(self, theAddressAsString):
-    """ A method to filter inadvertantly matched IP strings and then filter out IP addresses that appear on the whitelist.
+    """ A method to filter inadvertantly matched IP strings and then filter out IP addresses that appear on the allowlist.
     Parameter "theAddressAsString" - The address in question as a string
     Return value - if the address passes the tests then it is returned, otherwise None.
     """
@@ -489,7 +489,7 @@ class EmailProcessor(object):
     if theAddressAsString is not None:
       theAddressAsObj = IPAddress(theAddressAsString)      # Convert to IPAddress object
       if theAddressAsObj is not None:
-        theAddressAsObj = self.checkIPWhiteList(theAddressAsObj) # Check against whitelist
+        theAddressAsObj = self.checkIPAllowList(theAddressAsObj) # Check against allowlist
         if theAddressAsObj is not None:
           return theAddressAsObj.addressAsString         # Convert back to String
     return None                          # The address was filtered out
@@ -511,7 +511,7 @@ class EmailProcessor(object):
     No return value.
     """
     newReporterInfo = emailmessage.from.address
-    if emailmessage.from.name is not None:
+    if hasattr(emailmessage.from, 'name') and emailmessage.from.name is not None:
       newReporterInfo = u"{0} <{1}>".format(emailmessage.from.name, emailmessage.from.address)
       log.info(u"Adding reporter field \"{0}\"".format(newReporterInfo))
       incident.reporter = newReporterInfo
@@ -553,7 +553,7 @@ else:
   emailmessage.associateWithIncident(incidents[0])
 
 # Capture any URLs present in the email body text and add them as artifacts
-processor.processArtifactCategory(processor.makeUrlPattern(), "URL", "Suspicious URL", processor.fixURL, processor.checkDomainWhiteList)
+processor.processArtifactCategory(processor.makeUrlPattern(), "URL", "Suspicious URL", processor.fixURL, processor.checkDomainAllowList)
 
 # Capture any IPv4 addresses present in the email body text and add them as artifacts
 processor.processArtifactCategory(processor.makeIPv4Pattern(), "IP Address", "Suspicious IP Address", processor.processIPFully)
