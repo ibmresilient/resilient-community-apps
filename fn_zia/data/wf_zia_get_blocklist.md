@@ -47,7 +47,7 @@ def main():
 
     else:
         note_text += u"ZIA Integration: Workflow <b>{0}</b>: There were <b>no</b> results returned " \
-                     u"for SOAR function <b>{2}</b>."\
+                     u"for SOAR function <b>{1}</b>."\
             .format(WF_NAME, FN_NAME)
 
     incident.addNote(helper.createRichText(note_text))
