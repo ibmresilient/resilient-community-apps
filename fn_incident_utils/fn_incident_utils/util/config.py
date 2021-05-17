@@ -10,7 +10,4 @@ def config_section_data():
     """
     config_data = None
 
-#    config_data = u"""[fn_incident_utils]
-#setting=xxx
-#"""
     return config_data
