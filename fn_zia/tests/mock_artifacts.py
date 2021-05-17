@@ -4,6 +4,7 @@
 """Generate Mock responses to simulate ZIA for Unit and function tests """
 from requests.models import Response
 import json
+import re
 
 def get_mock_config():
     config_data = u"""[fn_zia]
@@ -19,6 +20,19 @@ zia_api_key = abCDeFIJkl0M
 def blocklist_action_result():
     return {"status": "OK"}
 
+def allowlist_action_result(urls=None):
+    if urls:
+        urls =  list(filter(None, re.split("\s+|,", urls)))
+    else:
+        urls = []
+    res = {
+        "whitelistUrls": []
+    }
+    for url in urls:
+        res["whitelistUrls"].append(url)
+
+    return res
+
 def get_blocklist_urls_result():
     return {
         "blacklistUrls": [
@@ -27,6 +41,25 @@ def get_blocklist_urls_result():
         ]
     }
 
+def get_allowlist_urls_result():
+    return {
+        "whitelistUrls": [
+            "goodhost.com",
+            "192.168.1.1"
+        ]
+    }
+def add_or_remove_allowlist_urls_result(urls=None):
+    if urls:
+        urls =  list(filter(None, re.split("\s+|,", urls)))
+    else:
+        urls = []
+    res = {
+        "whitelistUrls": []
+    }
+    for url in urls:
+        res["whitelistUrls"].append(url)
+
+    return res
 
 def get_auth_headers():
     return {'Strict-Transport-Security': 'max-age=31622400;includeSubDomains;preload',
@@ -53,8 +86,24 @@ def mocked_zia_client(*args, **kwargs):
             assert action in ["ADD_TO_LIST", "REMOVE_FROM_LIST"]
             return blocklist_action_result()
 
+        def allowlist_action(self, allowlisturls=None, action=None):
+            assert action in ["ADD_TO_LIST", "REMOVE_FROM_LIST"]
+            if action in "ADD_TO_LIST":
+                if "192.168.1.1" in allowlisturls:
+                    return allowlist_action_result("192.168.1.1, goodhost.com")
+                else:
+                    return allowlist_action_result("goodhost.com")
+            elif action in "REMOVE_FROM_LIST":
+                if "goodhost.com" in allowlisturls:
+                    return allowlist_action_result("")
+                elif "192.168.1.1" in allowlisturls:
+                    return allowlist_action_result("goodhost.com")
+
         def get_blocklist_urls(self):
             return get_blocklist_urls_result()
+
+        def get_allowlist_urls(self):
+            return get_allowlist_urls_result()
 
     return MockResponse(*args, **kwargs)
 
@@ -73,6 +122,16 @@ def mocked_requests(*args, **kwargs):
             elif args[0].lower() == "get":
                 if args[1].lower().endswith("/security/advanced"):
                     return MockGetResponse(None, get_blocklist_urls_result(), 204)
+                elif args[1].lower().endswith("/security"):
+                    return MockGetResponse(None, get_allowlist_urls_result(), 204)
+            elif args[0].lower() == "put":
+                if args[1].lower().endswith("/security"):
+                    allowlisturls = json.loads(kwargs["data"])["whitelistUrls"]
+                    if "192.168.1.1" in allowlisturls:
+                        return MockGetResponse(None, add_or_remove_allowlist_urls_result("goodhost.com"), 204)
+                    else:
+                        return MockGetResponse(None, add_or_remove_allowlist_urls_result(""), 204)
+
         def get_proxies(self, *args, **kwargs):
             return {}
 
