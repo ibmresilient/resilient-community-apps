@@ -1,24 +1,9 @@
 # -*- coding: utf-8 -*-
-
-"""
-Function implementation test.
-Usage: 
-    resilient-circuits selftest -l fn_zia
-    resilient-circuits selftest --print-env -l fn_zia
-
-Return examples:
-    return {
-        "state": "success",
-        "reason": "Successful connection to third party endpoint"
-    }
-
-    return {
-        "state": "failure",
-        "reason": "Failed to connect to third party endpoint"
-    }
-"""
+# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
+# pragma pylint: disable=unused-argument, no-self-use
 
 import logging
+from fn_zia.lib.zia_client import ZiaClient
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
@@ -27,12 +12,25 @@ log.addHandler(logging.StreamHandler())
 
 def selftest_function(opts):
     """
-    Placeholder for selftest function. An example use would be to test package api connectivity.
-    Suggested return values are be unimplemented, success, or failure.
+    Simple test to verify Zia connectivity.
     """
-    app_configs = opts.get("fn_zia", {})
+    fn_opts = opts.get("fn_zia", {})
+    try:
+        ziacli = ZiaClient(opts, fn_opts)
+        result = ziacli.get_blocklist_urls()
+        if isinstance(result, dict):
+            return {
+                "state": "success",
+                "reason": "Successful connection to Zia endpoint"
+            }
+        else:
+            return {
+                "state": "failure",
+                "reason": "Failed to connect to Zia endpoint"
+            }
 
-    return {
-        "state": "unimplemented",
-        "reason": None
-    }
+    except Exception as e:
+        return {
+            "state": "failure",
+            "status_code": e
+        }
