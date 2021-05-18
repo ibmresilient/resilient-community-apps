@@ -22,8 +22,6 @@ class FunctionComponent(ResilientComponent):
         self.fn_options = opts.get(PACKAGE_NAME, {})
         self.opts = opts
         validate_fields(config.REQUIRED_CONFIG_SETTINGS, self.fn_options)
-        self.opts = opts
-        validate_fields(config.REQUIRED_CONFIG_SETTINGS, self.fn_options)
 
     @handler("reload")
     def _reload(self, event, opts):
