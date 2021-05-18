@@ -20,11 +20,15 @@ class FunctionComponent(ResilientComponent):
         """Constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         self.fn_options = opts.get(PACKAGE_NAME, {})
+        self.opts = opts
+        validate_fields(config.REQUIRED_CONFIG_SETTINGS, self.fn_options)
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
         self.fn_options = opts.get(PACKAGE_NAME, {})
+        self.opts = opts
+        validate_fields(config.REQUIRED_CONFIG_SETTINGS, self.fn_options)
 
     @function(FN_NAME)
     def _funct_zia_add_to_allowlist_function(self, event, *args, **kwargs):
