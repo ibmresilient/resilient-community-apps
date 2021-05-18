@@ -23,12 +23,12 @@ None
 
 ### Post-Processing Script
 ```python
-##  ZIA - wf_zia_get_blocklist post processing script ##
+##  ZIA - wf_zia_get_allowlist post processing script ##
 
 #  Globals
 
-FN_NAME = "funct_zia_get_blocklist"
-WF_NAME = "Example: ZIA: Get Blocklist"
+FN_NAME = "funct_zia_get_allowlist"
+WF_NAME = "Example: ZIA: Get Allowlist"
 # Processing
 CONTENT = results.content
 INPUTS = results.inputs
@@ -39,13 +39,13 @@ def main():
     note_text = u''
     key_count = 0
     if CONTENT:
-        blocklist_urls = CONTENT.blacklistUrls
-        note_text = u"ZIA Integration: Workflow <b>{0}</b>: There were <b>{1}</b> blocklist URLS (s) returned for " \
-                        u"SOAR function <b>{2}</b>.".format(WF_NAME, len(blocklist_urls), FN_NAME)
-        for url in blocklist_urls:
-            newrow = incident.addRow("zia_blocklist")
+        allowlist_urls = CONTENT.whitelistUrls
+        note_text = u"ZIA Integration: Workflow <b>{0}</b>: There were <b>{1}</b> allowlist URLS (s) returned for " \
+                        u"SOAR function <b>{2}</b>.".format(WF_NAME, len(allowlist_urls), FN_NAME)
+        for url in allowlist_urls:
+            newrow = incident.addRow("zia_allowlist")
             newrow.query_execution_date = QUERY_EXECUTION_DATE
-            newrow.blocklist_url = url
+            newrow.allowlist_url = url
 
     else:
         note_text += u"ZIA Integration: Workflow <b>{0}</b>: There were <b>no</b> results returned " \
