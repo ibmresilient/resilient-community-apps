@@ -14,6 +14,7 @@ FN_NAME = "search_incidents"
 
 INCIDENT_QUERY_PAGED = "/incidents/query_paged"
 
+LOG = logging.getLogger(__name__)
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'search_incidents''"""
 
@@ -31,8 +32,6 @@ class FunctionComponent(ResilientComponent):
     def _search_incidents_function(self, event, *args, **kwargs):
         """Function: Search for incidents based on filter criteria. Sorting field are optional"""
         try:
-            LOG = logging.getLogger(__name__)
-            rc = RequestsCommon(self.opts, self.fn_options)
             rp = ResultPayload(PACKAGE_NAME, **kwargs)
 
             # Get the wf_instance_id of the workflow this Function was called in
@@ -40,23 +39,22 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("Starting '{0}' running in workflow '{1}'".format(FN_NAME, wf_instance_id))
 
-            # Get and validate app configs
-            # app_configs = validate_fields([
-            #     {"name": "api_key", "placeholder": "<your-api-key>"},
-            #     {"name": "base_url", "placeholder": "<api-base_url>"}],
-            #     self.fn_options)
-
-            # Get and validate required function inputs:
-            # If input is optional, remove it from list
-            # Optional inputs will still be available in fn_inputs
             fn_inputs = validate_fields(
-                ["inc_filter_conditions"],
+                [],
                 kwargs
             )
 
             LOG.info("'{0}' inputs: %s", fn_inputs)
 
-            filter_conditions = json.loads(fn_inputs['inc_filter_conditions'])
+            filter_conditions, reason = convert_json('inc_filter_conditions', fn_inputs['inc_filter_conditions'], default=[])
+            if reason:
+                yield FunctionResult(rp.done(False, None, reason=reason))
+                return
+
+            sort_fields, reason = convert_json('inc_sort_fields', fn_inputs['inc_sort_fields'], default=[])
+            if reason:
+                yield FunctionResult(rp.done(False, None, reason=reason))
+                return
 
             # build the filter json structure
             filter = {
@@ -65,12 +63,8 @@ class FunctionComponent(ResilientComponent):
                         "conditions": filter_conditions
                     }
                 ],
-                "sorts": []
+                "sorts": sort_fields
             }
-
-            if fn_inputs['inc_sort_fields']:
-                sort_fields = json.loads(fn_inputs['inc_sort_fields'])
-                filter['sorts'] = sort_fields
 
             # Run the search and return the results
             yield StatusMessage("Searching...")
@@ -92,3 +86,26 @@ class FunctionComponent(ResilientComponent):
             yield FunctionResult(results)
         except Exception as e:
             yield FunctionError(e)
+
+
+def convert_json(field_name, value, default=None):
+    """[convert string encoded json to a dictionary]
+
+    Args:
+        field_name ([str]): [field name for logging purposes]
+        value ([string]): [string encoded json]
+        default ([various], optional): [if value is None, return this value]. Defaults to None.
+
+    Returns:
+        [dict, string]: return json result and reason string if error
+    """
+    if not value:
+        return default, None
+
+    try:
+        result = json.loads(value)
+        return result, None
+    except json.decoder.JSONDecodeError as jerr:
+        reason = u"Failure parsing json content in '{}': {}".format(field_name, str(jerr))
+        LOG.error(reason)
+        return None, reason

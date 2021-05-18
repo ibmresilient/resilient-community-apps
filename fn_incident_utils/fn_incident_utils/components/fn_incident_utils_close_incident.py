@@ -32,17 +32,23 @@ class FunctionComponent(ResilientComponent):
             incident_id = kwargs.get("incident_id")  # number
             close_fields = kwargs.get("close_fields")  # text
 
+            log = logging.getLogger(__name__)
+            rp = ResultPayload(PACKAGE_NAME, **kwargs)
+
             # Check JSON string and convert it to dict
             if close_fields is None:
                 close_fields = {}
             else:
-                close_fields = json.loads(close_fields)
+                try:
+                    close_fields = json.loads(close_fields)
+                except json.decoder.JSONDecodeError as jerr:
+                    reason = "Failure parsing 'close_fields': {}".format(str(jerr))
+                    log.error(reason)
+                    yield FunctionResult(rp.done(False, None, reason=reason))
+                    return
 
-            log = logging.getLogger(__name__)
             log.info("incident_id: %s", incident_id)
             log.info("close_fields: %s", close_fields)
-
-            rp = ResultPayload(PACKAGE_NAME, **kwargs)
 
             yield StatusMessage("starting...")
             # Instansiate new Resilient API object

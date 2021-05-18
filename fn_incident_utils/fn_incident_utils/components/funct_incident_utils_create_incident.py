@@ -50,14 +50,16 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Validations complete. Starting business logic")
 
             rest_client = self.rest_client()
+            incident = reason = None
             try:
                 create_fields = json.loads(fn_inputs['inc_create_fields'])
                 incident = rest_client.post(INCIDENT_URL, create_fields)
-                reason = None
+            except json.decoder.JSONDecodeError as jerr:
+                reason = "Failure parsing 'inc_create_fields': {}".format(str(jerr))
+                LOG.error(reason)
             except SimpleHTTPException as err:
-                LOG.error("Failure creating incident: %s", str(err))
-                incident = None
-                reason = str(err)
+                reason = "Failure creating incident: {}".format(str(err))
+                LOG.error(reason)
 
             yield StatusMessage("Finished '{0}' that was running in workflow '{1}'".format(FN_NAME, wf_instance_id))
 
