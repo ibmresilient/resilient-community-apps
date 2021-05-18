@@ -105,7 +105,7 @@ class ZiaClient(Auth):
         return res: Parsed response
         """
         if blocklisturls:
-            blacklisturls = re.split("\s+|,", blocklisturls)
+            blacklisturls = list(filter(None, re.split("\s+|,", blocklisturls)))
 
         payload = {
             "blacklistUrls": blacklisturls
