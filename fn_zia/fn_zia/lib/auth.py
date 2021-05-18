@@ -36,9 +36,9 @@ class Auth():
             "User-Agent": "SOARCLIENT"
         }
         # Add authenticate endpoint.
-        if not self._endpoints:
+        if not getattr(self, "_endpoints"):
             self._endpoints = {}
-        if not self.api_base_url:
+        if not getattr(self, "api_base_url"):
             self.api_base_url = fn_opts.get("zia_api_base_url")
         self._endpoints.update({"authenticate": "/".join([self.api_base_url, "authenticatedSession"])})
         self._obfuscate_api_key()
@@ -49,7 +49,7 @@ class Auth():
         LOG.warning("The attribute '%s' not defined.", name)
         return ''
 
-    def __len__(self, name):
+    def __len__(self):
         """ Dummy method to prevent warning from __getattr__"""
         pass
 
