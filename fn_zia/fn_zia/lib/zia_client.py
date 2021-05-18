@@ -131,10 +131,10 @@ class ZiaClient(Auth):
             # Convert urls in comma-seperated string to a list.
             allowlisturls = list(filter(None, re.split("\s+|,", allowlisturls)))
 
-        # Get current allowlist.
-        curr_allowlist = self.get_allowlist_urls()
-        if curr_allowlist:
-            curr_allowlist = curr_allowlist["whitelistUrls"]
+        # Get result for current allowlist query.
+        curr_allowlist_res = self.get_allowlist_urls()
+        # Set current allow list.
+        curr_allowlist = curr_allowlist_res["whitelistUrls"] if curr_allowlist_res else []
 
         if action == "ADD_TO_LIST":
             new_allowlist = curr_allowlist.copy()
