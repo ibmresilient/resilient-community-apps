@@ -5,9 +5,13 @@
 
 import logging
 import json
+import sys
+if sys.version_info[0] >= 3:
+    from json.decoder import JSONDecodeError as ValueError
+    
 from resilient import SimpleHTTPException
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import ResultPayload, RequestsCommon, validate_fields
+from resilient_lib import ResultPayload, validate_fields
 
 PACKAGE_NAME = "fn_incident_utils"
 FN_NAME = "search_incidents"
@@ -105,7 +109,7 @@ def convert_json(field_name, value, default=None):
     try:
         result = json.loads(value)
         return result, None
-    except json.decoder.JSONDecodeError as jerr:
+    except ValueError as jerr:
         reason = u"Failure parsing json content in '{}': {}".format(field_name, str(jerr))
         LOG.error(reason)
         return None, reason

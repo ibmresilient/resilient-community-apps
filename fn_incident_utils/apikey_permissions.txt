@@ -9,7 +9,7 @@ read_function
 # Add additional permissions below, one per line.
 #
 ## incident permissions
-#create_incident
+create_incident
 read_all_incidents
 #delete_all_incidents
 #edit_all_incidents_members

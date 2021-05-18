@@ -5,6 +5,9 @@
 
 import logging
 import json
+import sys
+if sys.version_info[0] >= 3:
+    from json.decoder import JSONDecodeError as ValueError
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import close_incident, ResultPayload
 
@@ -41,7 +44,7 @@ class FunctionComponent(ResilientComponent):
             else:
                 try:
                     close_fields = json.loads(close_fields)
-                except json.decoder.JSONDecodeError as jerr:
+                except ValueError as jerr:
                     reason = "Failure parsing 'close_fields': {}".format(str(jerr))
                     log.error(reason)
                     yield FunctionResult(rp.done(False, None, reason=reason))

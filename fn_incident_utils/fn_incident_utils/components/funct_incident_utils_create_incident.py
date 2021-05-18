@@ -5,6 +5,10 @@
 
 import logging
 import json
+import sys
+if sys.version_info[0] >= 3:
+    from json.decoder import JSONDecodeError as ValueError
+
 from resilient import SimpleHTTPException
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import ResultPayload, RequestsCommon, validate_fields
@@ -54,7 +58,7 @@ class FunctionComponent(ResilientComponent):
             try:
                 create_fields = json.loads(fn_inputs['inc_create_fields'])
                 incident = rest_client.post(INCIDENT_URL, create_fields)
-            except json.decoder.JSONDecodeError as jerr:
+            except ValueError as jerr:
                 reason = "Failure parsing 'inc_create_fields': {}".format(str(jerr))
                 LOG.error(reason)
             except SimpleHTTPException as err:
