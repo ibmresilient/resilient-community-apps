@@ -31,6 +31,8 @@ class ZiaClient(Auth):
             # Block lists
             "blocklist":        "/".join([self.api_base_url, "security/advanced"]),
             "blocklist_action": "/".join([self.api_base_url, "security/advanced/blacklistUrls?action={}"]),            # Allow lists
+            # Allow lists
+            "allowlist":        "/".join([self.api_base_url, "security"]),
             # Custom lists
             # Sandbox
             # Activation
@@ -76,6 +78,21 @@ class ZiaClient(Auth):
 
         return res
 
+    def get_allowlist_urls(self):
+        """Get a list of allowlisted URLs.
+
+        The URLs can be either a url or ip address.
+
+        See following for url guidelines
+        https://help.zscaler.com/zia/url-format-guidelines
+
+        return res: Parsed response
+        """
+        uri = self._endpoints["allowlist"]
+        res = self._perform_method("get", uri, headers=self._headers)
+
+        return res
+
     def blocklist_action(self, blocklisturls=None, action=None):
         """ Perform an add or remove action on a list of URLs to the blocklist.
 
@@ -88,7 +105,7 @@ class ZiaClient(Auth):
         return res: Parsed response
         """
         if blocklisturls:
-            blacklisturls = re.split("\s+|,", blocklisturls)
+            blacklisturls = list(filter(None, re.split("\s+|,", blocklisturls)))
 
         payload = {
             "blacklistUrls": blacklisturls
@@ -96,5 +113,40 @@ class ZiaClient(Auth):
 
         uri = self._endpoints["blocklist_action"].format(action)
         res = self._perform_method("post", uri, data=json.dumps(payload), headers=self._headers)
+
+        return res
+
+    def allowlist_action(self, allowlisturls=None, action=None):
+        """ Perform an add or remove action on a list of URLs to the allowlist.
+
+        The URLs can be either urls or ip addresses.
+        Valid actions are "ADD_TO_LIST" and "REMOVE_FROM_LIST".
+        See following for url guidelines
+        https://help.zscaler.com/zia/url-format-guidelines
+
+        :param blocklist_urls: List of urls and/or ipaddresses
+        return res: Parsed response
+        """
+        if allowlisturls:
+            # Convert urls in comma-seperated string to a list.
+            allowlisturls = list(filter(None, re.split("\s+|,", allowlisturls)))
+
+        # Get result for current allowlist query.
+        curr_allowlist_res = self.get_allowlist_urls()
+        # Set current allow list.
+        curr_allowlist = curr_allowlist_res["whitelistUrls"] if curr_allowlist_res else []
+
+        if action == "ADD_TO_LIST":
+            new_allowlist = curr_allowlist.copy()
+            new_allowlist += [a for a in allowlisturls if a not in new_allowlist]
+        elif action == "REMOVE_FROM_LIST":
+            new_allowlist = [a for a in curr_allowlist if a not in allowlisturls]
+
+        payload = {
+            "whitelistUrls": new_allowlist
+        }
+
+        uri = self._endpoints["allowlist"]
+        res = self._perform_method("put", uri, data=json.dumps(payload), headers=self._headers)
 
         return res

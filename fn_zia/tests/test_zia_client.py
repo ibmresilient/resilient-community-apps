@@ -101,3 +101,26 @@ class TestZIAClient:
         zia_client = ZiaClient(opts, get_fn_opts())
         result = zia_client.blocklist_action(blocklisturls, action)
         assert(result == expected_result)
+
+    """ Test zia_client.allowlist_action"""
+    @patch("fn_zia.lib.auth.RequestsCommon", side_effect=mocked_requests)
+    @pytest.mark.parametrize("allowlisturls, action, expected_result", [
+        ("192.168.1.1", "ADD_TO_LIST", {"whitelistUrls": ["goodhost.com"]}),
+        ("goodhost.com, 192.168.1.1", "REMOVE_FROM_LIST", {"whitelistUrls": []})
+    ])
+    def test_allowlist_action(self, mock_post, allowlisturls, action, expected_result):
+        opts = {}
+        zia_client = ZiaClient(opts, get_fn_opts())
+        result = zia_client.allowlist_action(allowlisturls, action)
+        assert(result == expected_result)
+
+    """ Test zia_client.get_allowlist_urls"""
+    @patch("fn_zia.lib.auth.RequestsCommon", side_effect=mocked_requests)
+    @pytest.mark.parametrize("expected_result", [
+        ({"whitelistUrls": ["goodhost.com", "192.168.1.1"]})
+    ])
+    def test_get_allowlist_urls(self, mock_post, expected_result):
+        opts = {}
+        zia_client = ZiaClient(opts, get_fn_opts())
+        result = zia_client.get_allowlist_urls()
+        assert(result == expected_result)

@@ -1,0 +1,23 @@
+{
+    "content": {
+        "whitelistUrls": [
+            "1.1.1.1",
+            "goodhost.com"
+        ]
+    },
+    "inputs": {
+        "zia_allowlisturls": "badhost.com"
+    },
+    "metrics": {
+        "version": "1.0",
+        "package": "fn-zia",
+        "package_version": "1.0.0",
+        "host": "host.ibm.com",
+        "execution_time_ms": 22199,
+        "timestamp": "2021-05-11 10:33:14"
+    },
+    "raw": '{"whitelistUrls": ["1.1.1.1", "goodhost.com"]}',
+    "version": "1.0",
+    "success": True,
+    "reason": None
+}

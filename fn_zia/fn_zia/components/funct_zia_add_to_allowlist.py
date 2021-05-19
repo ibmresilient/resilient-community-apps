@@ -10,11 +10,11 @@ import fn_zia.util.config as config
 from fn_zia.lib.zia_client import ZiaClient
 
 PACKAGE_NAME = "fn_zia"
-FN_NAME = "funct_zia_remove_from_blocklist"
+FN_NAME = "funct_zia_add_to_allowlist"
 LOG = logging.getLogger(__name__)
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'funct_zia_remove_from_blocklist''"""
+    """Component that implements Resilient function 'funct_zia_add_to_allowlist''"""
 
     def __init__(self, opts):
         """Constructor provides access to the configuration options"""
@@ -31,11 +31,8 @@ class FunctionComponent(ResilientComponent):
         validate_fields(config.REQUIRED_CONFIG_SETTINGS, self.fn_options)
 
     @function(FN_NAME)
-    def _funct_zia_remove_from_blocklist_function(self, event, *args, **kwargs):
-        """Function: Remove URLs or IP addresses from the blocklist.
-            See link for URL guidelines:
-              https://help.zscaler.com/zia/url-format-guidelines
-        """
+    def _funct_zia_add_to_allowlist_function(self, event, *args, **kwargs):
+        """Function: None"""
         try:
             rp = ResultPayload(PACKAGE_NAME, **kwargs)
 
@@ -44,24 +41,24 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("Starting '{0}' running in workflow '{1}'".format(FN_NAME, wf_instance_id))
 
+
             # Get and validate required function inputs:
             fn_inputs = validate_fields(
-                ["zia_blocklisturls"],
+                ["zia_allowlisturls"],
                 kwargs)
 
             LOG.info("'{0}' inputs: %s", fn_inputs)
 
             yield StatusMessage("Validations complete. Starting business logic")
 
-            blocklisturls = fn_inputs.get("zia_blocklisturls")
+            allowlisturls = fn_inputs.get("zia_allowlisturls")
 
             ziacli = ZiaClient(self.opts, self.fn_options)
-            result = ziacli.blocklist_action(blocklisturls, "REMOVE_FROM_LIST")
+            result = ziacli.allowlist_action(allowlisturls, "ADD_TO_LIST")
 
             yield StatusMessage("Finished '{0}' that was running in workflow '{1}'".format(FN_NAME, wf_instance_id))
 
             results = rp.done(True, result)
-
             LOG.info("'%s' complete", FN_NAME)
 
             # Produce a FunctionResult with the results
