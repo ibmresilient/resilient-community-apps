@@ -33,7 +33,8 @@ class ZiaClient(Auth):
             "blocklist_action": "/".join([self.api_base_url, "security/advanced/blacklistUrls?action={}"]),            # Allow lists
             # Allow lists
             "allowlist":        "/".join([self.api_base_url, "security"]),
-            # Custom lists
+            # Custom lists/URL categories
+            "categories":        "/".join([self.api_base_url, "urlCategories{}"]),
             # Sandbox
             # Activation
         }
@@ -148,5 +149,93 @@ class ZiaClient(Auth):
 
         uri = self._endpoints["allowlist"]
         res = self._perform_method("put", uri, data=json.dumps(payload), headers=self._headers)
+
+        return res
+
+    def get_url_categories(self, custom_only, category_id):
+        """Get a list of URL categories.
+
+        :param custom_only: Custom categories only = 'true', all = 'false'
+        :param category_id: Custom category ID
+        return res: Normalized response
+        """
+        # Set default uri
+        uri = self._endpoints["categories"].format('')
+        params = {}
+
+        if category_id:
+            uri = "/".join([uri, category_id])
+
+        elif custom_only:
+            params = {"customOnly": custom_only}
+
+        res = self._perform_method("get", uri, headers=self._headers, params=params)
+
+        # Normalize response dict to a list.
+        return [res] if isinstance(res, dict) else res
+
+    def add_url_category(self, urls=None, configured_name=None, custom_category=True,
+                         super_category=None, keywords=None):
+        """Add a new URL category with a list of urls.
+
+        The URLs can be either a url or ip address.
+
+        :param urls: Comma or newline seperated urls in string to add to new category
+        :param configured_name: Name of new category
+        :param custom_category: Custom categories = 'true'
+        :param super_category: Name of super category
+        :param keywords: Comma or newline seperated keywords in string to add to new category
+        return res: Response
+        """
+        if urls:
+            # Convert urls in comma or newline seperated string to a list.
+            urls = list(filter(None, re.split(r"\s+|,|\n", urls)))
+
+        if keywords:
+            # Convert keywords in comma or newline seperated string to a list.
+            keywords = list(filter(None, re.split(r"\s+|,|\n", keywords)))
+
+        payload = {
+            "configuredName": configured_name,
+            "customCategory": custom_category,
+            "superCategory": super_category,
+            "keywords": keywords,
+            "urls": urls
+        }
+
+        uri = self._endpoints["categories"].format('')
+        res = self._perform_method("post", uri, data=json.dumps(payload), headers=self._headers)
+
+        return res
+
+    def category_action(self, category_id=None, configured_name=None, urls=None, action=None):
+        """ Perform an add or remove action on a list of URLs to a custom category.
+
+        The URLs can be either urls or ip addresses.
+        Valid actions are "ADD_TO_LIST" and "REMOVE_FROM_LIST".
+        See following for url guidelines
+        https://help.zscaler.com/zia/url-format-guidelines
+
+        :param category_id: Custom category ID
+        :param configured_name: Name of category
+        :param urls: List of urls and/or ipaddresses
+        :param action: Action name "ADD_TO_LIST" and "REMOVE_FROM_LIST"
+        return res: Response
+        """
+        if urls:
+            # Convert urls in comma-seperated string to a list.
+            urls = list(filter(None, re.split(r"\s+|,", urls)))
+
+        params = {
+            "action": action
+        }
+
+        payload = {
+            "urls": urls,
+            "configuredName": configured_name
+        }
+
+        uri = "/".join([self._endpoints["categories"].format(''), category_id])
+        res = self._perform_method("put", uri, params=params, data=json.dumps(payload), headers=self._headers)
 
         return res
