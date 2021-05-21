@@ -21,12 +21,12 @@ def codegen_reload_data():
     return {
         "package": u"fn_zia",
         "message_destinations": [u"zia"],
-        "functions": [u"funct_zia_add_to_allowlist", u"funct_zia_add_to_blocklist", u"funct_zia_get_allowlist", u"funct_zia_get_blocklist", u"funct_zia_remove_from_allowlist", u"funct_zia_remove_from_blocklist"],
-        "workflows": [u"wf_zia_add_to_allowlist", u"wf_zia_add_to_blocklist", u"wf_zia_get_allowlist", u"wf_zia_get_blocklist", u"wf_zia_remove_from_allowlist", u"wf_zia_remove_from_blocklist", u"wf_zia_remove_url_from_allowlist", u"wf_zia_remove_url_from_blocklist"],
-        "actions": [u"Example: ZIA: Add To Allowlist", u"Example: ZIA: Add To Blocklist", u"Example: ZIA: Get Allowlist", u"Example: ZIA: Get Blocklist", u"Example: ZIA: Remove From Allowlist", u"Example: ZIA: Remove From Blocklist", u"Example: ZIA: Remove URL From Allowlist", u"Example: ZIA: Remove URL From Blocklist"],
+        "functions": [u"funct_zia_add_to_allowlist", u"funct_zia_add_to_blocklist", u"funct_zia_add_to_url_category", u"funct_zia_add_url_category", u"funct_zia_get_allowlist", u"funct_zia_get_blocklist", u"funct_zia_get_url_categories", u"funct_zia_remove_from_allowlist", u"funct_zia_remove_from_blocklist", u"funct_zia_remove_from_url_category"],
+        "workflows": [u"wf_zia_add_to_allowlist", u"wf_zia_add_to_blocklist", u"wf_zia_add_to_customlist", u"wf_zia_add_url_category", u"wf_zia_get_allowlist", u"wf_zia_get_blocklist", u"wf_zia_get_customlist", u"wf_zia_get_url_categories", u"wf_zia_remove_from_allowlist", u"wf_zia_remove_from_blocklist", u"wf_zia_remove_from_customlist", u"wf_zia_remove_url_from_allowlist", u"wf_zia_remove_url_from_blocklist", u"wf_zia_remove_url_from_customlist"],
+        "actions": [u"Example: ZIA: Add To Allowlist", u"Example: ZIA: Add To Blocklist", u"Example: ZIA: Add To Customlist", u"Example: ZIA: Add URL Category", u"Example: ZIA: Get Allowlist", u"Example: ZIA: Get Blocklist", u"Example: ZIA: Get Customlist", u"Example: ZIA: Get URL Categories", u"Example: ZIA: Remove From Allowlist", u"Example: ZIA: Remove From Blocklist", u"Example: ZIA: Remove From Customlist", u"Example: ZIA: Remove URL From Allowlist", u"Example: ZIA: Remove URL From Blocklist", u"Example: ZIA: Remove URL From Customlist"],
         "incident_fields": [],
         "incident_artifact_types": [],
-        "datatables": [u"zia_allowlist", u"zia_blocklist"],
+        "datatables": [u"zia_allowlist", u"zia_blocklist", u"zia_customlists", u"zia_url_categories"],
         "automatic_tasks": [],
         "scripts": []
     }
@@ -45,31 +45,49 @@ def customization_data(client=None):
     - Functions:
         - funct_zia_add_to_allowlist
         - funct_zia_add_to_blocklist
+        - funct_zia_add_to_url_category
+        - funct_zia_add_url_category
         - funct_zia_get_allowlist
         - funct_zia_get_blocklist
+        - funct_zia_get_url_categories
         - funct_zia_remove_from_allowlist
         - funct_zia_remove_from_blocklist
+        - funct_zia_remove_from_url_category
     - Workflows:
         - wf_zia_add_to_allowlist
         - wf_zia_add_to_blocklist
+        - wf_zia_add_to_customlist
+        - wf_zia_add_url_category
         - wf_zia_get_allowlist
         - wf_zia_get_blocklist
+        - wf_zia_get_customlist
+        - wf_zia_get_url_categories
         - wf_zia_remove_from_allowlist
         - wf_zia_remove_from_blocklist
+        - wf_zia_remove_from_customlist
         - wf_zia_remove_url_from_allowlist
         - wf_zia_remove_url_from_blocklist
+        - wf_zia_remove_url_from_customlist
     - Rules:
         - Example: ZIA: Add To Allowlist
         - Example: ZIA: Add To Blocklist
+        - Example: ZIA: Add To Customlist
+        - Example: ZIA: Add URL Category
         - Example: ZIA: Get Allowlist
         - Example: ZIA: Get Blocklist
+        - Example: ZIA: Get Customlist
+        - Example: ZIA: Get URL Categories
         - Example: ZIA: Remove From Allowlist
         - Example: ZIA: Remove From Blocklist
+        - Example: ZIA: Remove From Customlist
         - Example: ZIA: Remove URL From Allowlist
         - Example: ZIA: Remove URL From Blocklist
+        - Example: ZIA: Remove URL From Customlist
     - Data Tables:
         - zia_allowlist
         - zia_blocklist
+        - zia_customlists
+        - zia_url_categories
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)
