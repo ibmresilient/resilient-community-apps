@@ -21,9 +21,9 @@ def codegen_reload_data():
     return {
         "package": u"fn_zia",
         "message_destinations": [u"zia"],
-        "functions": [u"funct_zia_add_to_allowlist", u"funct_zia_add_to_blocklist", u"funct_zia_add_to_url_category", u"funct_zia_add_url_category", u"funct_zia_get_allowlist", u"funct_zia_get_blocklist", u"funct_zia_get_url_categories", u"funct_zia_remove_from_allowlist", u"funct_zia_remove_from_blocklist", u"funct_zia_remove_from_url_category"],
-        "workflows": [u"wf_zia_add_to_allowlist", u"wf_zia_add_to_blocklist", u"wf_zia_add_to_customlist", u"wf_zia_add_url_category", u"wf_zia_get_allowlist", u"wf_zia_get_blocklist", u"wf_zia_get_customlist", u"wf_zia_get_url_categories", u"wf_zia_remove_from_allowlist", u"wf_zia_remove_from_blocklist", u"wf_zia_remove_from_customlist", u"wf_zia_remove_url_from_allowlist", u"wf_zia_remove_url_from_blocklist", u"wf_zia_remove_url_from_customlist"],
-        "actions": [u"Example: ZIA: Add To Allowlist", u"Example: ZIA: Add To Blocklist", u"Example: ZIA: Add To Customlist", u"Example: ZIA: Add URL Category", u"Example: ZIA: Get Allowlist", u"Example: ZIA: Get Blocklist", u"Example: ZIA: Get Customlist", u"Example: ZIA: Get URL Categories", u"Example: ZIA: Remove From Allowlist", u"Example: ZIA: Remove From Blocklist", u"Example: ZIA: Remove From Customlist", u"Example: ZIA: Remove URL From Allowlist", u"Example: ZIA: Remove URL From Blocklist", u"Example: ZIA: Remove URL From Customlist"],
+        "functions": [u"funct_zia_add_to_allowlist", u"funct_zia_add_to_blocklist", u"funct_zia_add_to_url_category", u"funct_zia_add_url_category", u"funct_zia_get_allowlist", u"funct_zia_get_blocklist", u"funct_zia_get_url_categories", u"funct_zia_remove_from_allowlist", u"funct_zia_remove_from_blocklist", u"funct_zia_remove_from_url_category", u"funct_zia_url_lookup"],
+        "workflows": [u"wf_zia_add_to_allowlist", u"wf_zia_add_to_blocklist", u"wf_zia_add_to_customlist", u"wf_zia_add_url_category", u"wf_zia_get_allowlist", u"wf_zia_get_blocklist", u"wf_zia_get_customlist", u"wf_zia_get_url_categories", u"wf_zia_remove_from_allowlist", u"wf_zia_remove_from_blocklist", u"wf_zia_remove_from_customlist", u"wf_zia_remove_url_from_allowlist", u"wf_zia_remove_url_from_blocklist", u"wf_zia_remove_url_from_customlist", u"wf_zia_url_lookup"],
+        "actions": [u"Example: ZIA: Add To Allowlist", u"Example: ZIA: Add To Blocklist", u"Example: ZIA: Add To Customlist", u"Example: ZIA: Add URL Category", u"Example: ZIA: Get Allowlist", u"Example: ZIA: Get Blocklist", u"Example: ZIA: Get Customlist", u"Example: ZIA: Get URL Categories", u"Example: ZIA: Remove From Allowlist", u"Example: ZIA: Remove From Blocklist", u"Example: ZIA: Remove From Customlist", u"Example: ZIA: Remove URL From Allowlist", u"Example: ZIA: Remove URL From Blocklist", u"Example: ZIA: Remove URL From Customlist", u"Example: ZIA: URL Lookup"],
         "incident_fields": [],
         "incident_artifact_types": [],
         "datatables": [u"zia_allowlist", u"zia_blocklist", u"zia_customlists", u"zia_url_categories"],
@@ -53,6 +53,7 @@ def customization_data(client=None):
         - funct_zia_remove_from_allowlist
         - funct_zia_remove_from_blocklist
         - funct_zia_remove_from_url_category
+        - funct_zia_url_lookup
     - Workflows:
         - wf_zia_add_to_allowlist
         - wf_zia_add_to_blocklist
@@ -68,6 +69,7 @@ def customization_data(client=None):
         - wf_zia_remove_url_from_allowlist
         - wf_zia_remove_url_from_blocklist
         - wf_zia_remove_url_from_customlist
+        - wf_zia_url_lookup
     - Rules:
         - Example: ZIA: Add To Allowlist
         - Example: ZIA: Add To Blocklist
@@ -83,6 +85,7 @@ def customization_data(client=None):
         - Example: ZIA: Remove URL From Allowlist
         - Example: ZIA: Remove URL From Blocklist
         - Example: ZIA: Remove URL From Customlist
+        - Example: ZIA: URL Lookup
     - Data Tables:
         - zia_allowlist
         - zia_blocklist
