@@ -34,7 +34,8 @@ class ZiaClient(Auth):
             # Allow lists
             "allowlist":        "/".join([self.api_base_url, "security"]),
             # Custom lists/URL categories
-            "categories":        "/".join([self.api_base_url, "urlCategories{}"]),
+            "categories":       "/".join([self.api_base_url, "urlCategories{}"]),
+            "url_lookup":       "/".join([self.api_base_url, "urlLookup"]),
             # Sandbox
             # Activation
         }
@@ -224,7 +225,7 @@ class ZiaClient(Auth):
         """
         if urls:
             # Convert urls in comma-seperated string to a list.
-            urls = list(filter(None, re.split(r"\s+|,", urls)))
+            urls = list(filter(None, re.split(r"\s+|,|\n", urls)))
 
         params = {
             "action": action
@@ -239,3 +240,27 @@ class ZiaClient(Auth):
         res = self._perform_method("put", uri, params=params, data=json.dumps(payload), headers=self._headers)
 
         return res
+
+    def url_lookup(self, urls=None):
+        """ Lookup categorization  on a list of URLs.
+
+        The URLs can be either urls or ip addresses.
+        See following for url guidelines
+        https://help.zscaler.com/zia/url-format-guidelines
+
+        :param urls: Comma or newline seperated string of urls and/or ipaddresses
+        return res: Response
+        """
+        if urls:
+            # Convert urls in comma or newline seperated string to a list.
+            urls = list(filter(None, re.split(r"\s+|,|\n", urls)))
+
+        payload = urls
+
+        uri = self._endpoints["url_lookup"]
+        res = self._perform_method("post", uri, headers=self._headers, data=json.dumps(payload))
+
+        # Normalize response dict to a list.
+        return res
+
+
