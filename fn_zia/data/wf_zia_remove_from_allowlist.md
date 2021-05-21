@@ -24,7 +24,7 @@ inputs.zia_allowlisturls = artifact.value
 ### Post-Processing Script
 ```python
 ##  ZIA - wf_zia_remove_from_allowlist post processing script ##
-
+import re
 #  Globals
 FN_NAME = "funct_zia_remove_from_allowlist"
 WF_NAME = "Example: ZIA: Remove From Allowlist"
