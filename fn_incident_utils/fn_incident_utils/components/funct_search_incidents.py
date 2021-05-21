@@ -17,6 +17,7 @@ PACKAGE_NAME = "fn_incident_utils"
 FN_NAME = "search_incidents"
 
 INCIDENT_QUERY_PAGED = "/incidents/query_paged"
+QUERY_PAGED_RETURN_LEVEL = "?return_level="
 
 LOG = logging.getLogger(__name__)
 class FunctionComponent(ResilientComponent):
@@ -73,7 +74,9 @@ class FunctionComponent(ResilientComponent):
             # Run the search and return the results
             yield StatusMessage("Searching...")
             try:
-                search_results = self.rest_client().post(INCIDENT_QUERY_PAGED, filter)
+                url = "{}{}{}".format(INCIDENT_QUERY_PAGED, QUERY_PAGED_RETURN_LEVEL, 
+                                      self.fn_options.get("search_result_level", "normal"))
+                search_results = self.rest_client().post(url, filter)
                 reason = None
             except SimpleHTTPException as err:
                 search_results = None

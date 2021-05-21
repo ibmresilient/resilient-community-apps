@@ -132,7 +132,10 @@ Additional package dependencies may exist for each of these packages:
 * To install or uninstall an App on _IBM Cloud Pak for Security_, see the documentation at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs) and follow the instructions above to navigate to Orchestration and Automation.
 
 ### App Configuration
-No additional app.config settings are needed for this app.
+
+  | Config | Required | Example | Description |
+  | ------ | :------: | ------- | ----------- |
+  | **search_result_level** | Yes | `full` | *Scope of incidents fields to return: partial, normal and full* |
 
 ---
 
