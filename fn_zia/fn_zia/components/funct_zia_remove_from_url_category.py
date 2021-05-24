@@ -5,7 +5,7 @@
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import ResultPayload, RequestsCommon, validate_fields
+from resilient_lib import ResultPayload, validate_fields
 import fn_zia.util.config as config
 from fn_zia.lib.zia_client import ZiaClient
 
