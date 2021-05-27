@@ -153,6 +153,146 @@ def url_lookup_result(urls):
     ]
     return [x for x in base_result if x["url"]  in urls]
 
+def get_sandbox_report_result(full):
+
+    report_type = "full" if full else "summary"
+    result = {
+        "full": {
+            "Full Details": {
+                "Summary": {
+                    "Status": "COMPLETED",
+                    "Category": "EXECS",
+                    "FileType": "EXE",
+                    "StartTime": 1620229320,
+                    "Duration": 658451
+                },
+                "Classification": {
+                    "Type": "MALICIOUS",
+                    "Category": "MALWARE_BOTNET",
+                    "Score": 80,
+                    "DetectedMalware": "Gen:Variant.MSILPerseus.158871"
+                },
+                "FileProperties": {
+                    "FileType": "EXE",
+                    "FileSize": 22016,
+                    "MD5": "542a09dbd513bf75e29572922ce0687e",
+                    "SHA1": "6e0d16aa60b37596774ed0d3054ed2ff39d9378f",
+                    "Sha256": "dbcb1fa12366b385224f1a203c8cc24d6740f4bfa3b4f7a9d6d9ff059f470819",
+                    "Issuer": '',
+                    "DigitalCerificate": '',
+                    "SSDeep": "384:UGaRIorFBiFKx5v38y3QLp29Jub/mPkaVIKvtMNokpkjUo165Dt:1JorvjxZPAgyQRt/7jUo1A",
+                    "RootCA": ''
+                },
+                "SystemSummary": [
+                    {
+                        "Risk": "LOW",
+                        "Signature": "Binary contains paths to debug symbols",
+                        "SignatureSources": [
+                            '',
+                            "14351.PDB source: 14351.exe, 00000000.00000002.1064908917.000000001CAC4000.00000004.00000001.sdmp",
+                            "C:\\14351.PDB source: 14351.exe, 00000000.00000002.1064908917.000000001CAC4000.00000004.00000001.sdmp",
+                            "X8c:\\Users\\Julien\\Documents\\Visual Studio 2013\\Projects\\Botnet\\Botnet\\obj\\Release\\Botnet.pdb source: 14351.exe",
+                            "c:\\Users\\Julien\\Documents\\Visual Studio 2013\\Projects\\Botnet\\Botnet\\obj\\Release\\Botnet.pdb source: 14351.exe",
+                            "pC:\\14351.PDB source: 14351.exe, 00000000.00000002.1064908917.000000001CAC4000.00000004.00000001.sdmp",
+                            "t.pdb source: 14351.exe, 00000000.00000002.1064908917.000000001CAC4000.00000004.00000001.sdmp"
+                        ]
+                    },
+                    {
+                        "Risk": "LOW",
+                        "Signature": "Classification label",
+                        "SignatureSources": [
+                            '',
+                            "mal52.winEXE@2/1@2/4"
+                        ]
+                    }
+
+                ],
+                "Networking": [
+                    {
+                        "Risk": "LOW",
+                        "Signature": "Downloads files from web servers via HTTP",
+                        "SignatureSources": [
+                            '',
+                            "GET /Yabrod.pdf HTTP/1.1Authorization: Basic enNjYWxlcjp6c2NhbGVyUser-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; TNJB; rv:11.0) like GeckoHost: d1stb3hi9jgowm.cloudfront.net",
+                            "GET /Yabrod.pdf HTTP/1.1Authorization: Basic enNjYWxlcjp6c2NhbGVyUser-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; TNJB; rv:11.0) like GeckoHost: d1stb3hi9jgowm.cloudfront.net"
+                        ]
+                    }
+                ],
+                "SecurityBypass": [
+                    {
+                        "Risk": "MODERATE",
+                        "Signature": "Found a high number of Window / User specific system calls",
+                        "SignatureSources": [
+                            '',
+                            "foregroundWindowGot 1497",
+                            "foregroundWindowGot 494",
+                            "threadDelayed 1941",
+                            "threadDelayed 36971",
+                            "threadDelayed 4118",
+                            "threadDelayed 448978"
+                        ]
+                    }
+                ],
+                "Exploit": [
+                    {
+                        "Risk": "LOW",
+                        "Signature": "May try to detect the Windows Explorer process",
+                        "SignatureSources": [
+                            '',
+                            "+Mouse><LMouse><LMouse>[Program Manager]",
+                            "<LMouse><RMouse><LMouse><RMouse><LMouse><LMouse><LMouse>[Program Manager]p",
+                            "<LMouse><RMouse><LMouse><RMouse><LMouse><LMouse>[Program Manager]",
+                            "<LMouse><RMouse><LMouse><RMouse><LMouse><LMouse>[Program Manager]p",
+                            "<LMouse>[Program Manager]",
+                            "Program Manager",
+                            "Program Managerp",
+                            "[Program Manager] "
+                        ]
+                    }
+                ],
+                "Stealth": [
+                    {
+                        "Risk": "LOW",
+                        "Signature": "Disables application error messages",
+                        "SignatureSources": [
+                            '',
+                            "NOOPENFILEERRORBOX",
+                        ]
+                    }
+                ]
+            }
+        },
+        "summary": {
+            "Summary": {
+                "Summary": {
+                    "Status": "COMPLETED",
+                    "Category": "EXECS",
+                    "FileType": "DLL",
+                    "StartTime": 1522111841,
+                    "Duration": 481690
+                },
+                "Classification": {
+                    "Type": "MALICIOUS",
+                    "Category": "MALWARE_BOTNET",
+                    "Score": 82,
+                    "DetectedMalware": "Win32/TrojanDownloader.Banload.TNJ trojan"
+                },
+                "FileProperties": {
+                    "FileType": "DLL",
+                    "FileSize": 2358272,
+                    "MD5": "b3b13c2fe5710507612106cb11ceced3",
+                    "SHA1": "6f30404f8b30812758acc06455bc95348c86f9f2",
+                    "Sha256": "c77ab4c60b73c8f8135d54162813ab7c63432058f17ff00754d5fd547c22db76",
+                    "Issuer": "",
+                    "DigitalCerificate": "",
+                    "SSDeep": "49152:mQU0HSp/RcGuBLe/PESBbFVZ86MfBWPvGZxnBGVV3NcKRLFcTOJP:mQUn6LsPQp6vkoiKt",
+                    "RootCA": ""
+                }
+            }
+        }
+    }
+    return result[report_type]
+
 def activate_result():
     return {"status": "ACTIVE"}
 
@@ -214,6 +354,9 @@ def mocked_zia_client(*args, **kwargs):
         def activate(self):
             return activate_result()
 
+        def get_sandbox_report(self, md5, full):
+            return get_sandbox_report_result(full)
+
     return MockResponse(*args, **kwargs)
 
 def mocked_requests(*args, **kwargs):
@@ -248,6 +391,10 @@ def mocked_requests(*args, **kwargs):
                     return MockGetResponse(None, get_url_categories_result("true", "CUSTOM_01"), 204)
                 elif args[1].lower().endswith("urlcategories"):
                     return MockGetResponse(None, get_url_categories_result("true", None), 204)
+                elif "sandbox/report" in args[1].lower():
+                    params = kwargs.get("params")
+                    full = True if params and params.get("details") == "full" else False
+                    return MockGetResponse(None, get_sandbox_report_result(full), 204)
             elif args[0].lower() == "put":
                 if args[1].lower().endswith("/security"):
                     allowlisturls = json.loads(kwargs["data"])["whitelistUrls"]

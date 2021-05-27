@@ -237,3 +237,29 @@ class TestZIAClient:
         zia_client = ZiaClient(opts, get_fn_opts())
         result = zia_client.activate()
         assert(result == expected_result)
+
+    mock_inputs_1 = {
+        "zia_full_report": True,
+        "zia_md5": "542a09dbd513bf75e29572922ce0687e"
+    }
+
+    expected_results_1 = "Full Details"
+
+    mock_inputs_2 = {
+        "zia_full_report": False,
+        "zia_md5": "542a09dbd513bf75e29572922ce0687e"
+    }
+
+    expected_results_2 = "Summary"
+
+    """ Test zia_client.get_sandbox_report"""
+    @patch("fn_zia.lib.auth.RequestsCommon", side_effect=mocked_requests)
+    @pytest.mark.parametrize("mock_inputs, expected_result", [
+        (mock_inputs_1, expected_results_1),
+        (mock_inputs_2, expected_results_2)
+    ])
+    def test_get_sandbox_report(self, mock_post, mock_inputs, expected_result):
+        opts = {}
+        zia_client = ZiaClient(opts, get_fn_opts())
+        result = zia_client.get_sandbox_report(mock_inputs["zia_md5"], mock_inputs["zia_full_report"])
+        assert (expected_result in result)
