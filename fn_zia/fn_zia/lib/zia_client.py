@@ -37,6 +37,7 @@ class ZiaClient(Auth):
             "categories":       "/".join([self.api_base_url, "urlCategories{}"]),
             "url_lookup":       "/".join([self.api_base_url, "urlLookup"]),
             # Sandbox
+            "sandbox_report":       "/".join([self.api_base_url, "sandbox/report/{}"]),
             # Activation
             "activate":         "/".join([self.api_base_url, "status/activate"]),
         }
@@ -274,3 +275,21 @@ class ZiaClient(Auth):
 
         return res
 
+    def get_sandbox_report(self, md5, full=False):
+        """ Get a full (i.e., complete) or summary detail report for an MD5 hash of a
+        file that was analyzed by the Sandbox.
+
+        :param md5: MD5 hash value
+        :param full: Boolean true if a full report required
+        return res: Response
+        """
+        params = {}
+        if full:
+            params.update({
+                "details": "full"
+            })
+
+        uri = self._endpoints["sandbox_report"].format(md5)
+        res = self._perform_method("get", uri, params=params, headers=self._headers)
+
+        return res
