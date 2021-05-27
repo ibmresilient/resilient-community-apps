@@ -38,6 +38,7 @@ class ZiaClient(Auth):
             "url_lookup":       "/".join([self.api_base_url, "urlLookup"]),
             # Sandbox
             # Activation
+            "activate":         "/".join([self.api_base_url, "status/activate"]),
         }
         super(ZiaClient, self).__init__(opts, fn_opts)
 
@@ -263,4 +264,13 @@ class ZiaClient(Auth):
         # Normalize response dict to a list.
         return res
 
+    def activate(self):
+        """Activate configuration.
+
+        return res: Response
+        """
+        uri = self._endpoints["activate"]
+        res = self._perform_method("post", uri, headers=self._headers)
+
+        return res
 

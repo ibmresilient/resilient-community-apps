@@ -49,17 +49,36 @@ class FunctionComponent(ResilientComponent):
 
             # Get and validate required function inputs:
             fn_inputs = validate_fields(
-                ["zia_blocklisturls"],
+                ["zia_blocklisturls",
+                 "zia_activate"],
                 kwargs)
 
             LOG.info("'{0}' inputs: %s", fn_inputs)
 
+            if fn_inputs.get("zia_category_id") and fn_inputs.get("zia_custom_only").lower() == "false":
+                raise ValueError("If parameter '{0}' is set parameter '{1}' should be set '{2}'.")\
+                    .format("zia_category_id", "zia_custom_only", "true")
+
             yield StatusMessage("Validations complete. Starting business logic")
 
             blocklisturls = fn_inputs.get("zia_blocklisturls")
+            activate = fn_inputs.get("zia_activate")
 
             ziacli = ZiaClient(self.opts, self.fn_options)
-            result = ziacli.blocklist_action(blocklisturls, "ADD_TO_LIST")
+
+            result = {
+                "response": ziacli.blocklist_action(blocklisturls, "ADD_TO_LIST")
+            }
+
+            if activate:
+                # Activate configuration changes.
+                activate_result = ziacli.activate()
+                if activate_result.get("status").lower() == "active":
+                    result["activation"] = {"status": "Activated"}
+                else:
+                    result["activation"] = activate_result
+            else:
+                result["activation"] = {"status": "Not_selected"}
 
             yield StatusMessage("Finished '{0}' that was running in workflow '{1}'".format(FN_NAME, wf_instance_id))
 

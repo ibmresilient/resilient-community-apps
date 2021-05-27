@@ -42,7 +42,8 @@ class FunctionComponent(ResilientComponent):
             fn_inputs = validate_fields(
                 ["zia_urls",
                  "zia_category_id",
-                 "zia_configured_name"],
+                 "zia_configured_name",
+                 "zia_activate"],
                 kwargs)
 
             LOG.info("'{0}' inputs: %s", fn_inputs)
@@ -52,9 +53,24 @@ class FunctionComponent(ResilientComponent):
             category_id = fn_inputs.get("zia_category_id")
             configured_name = fn_inputs.get("zia_configured_name")
             urls = fn_inputs.get("zia_urls")
+            activate = fn_inputs.get("zia_activate")
 
             ziacli = ZiaClient(self.opts, self.fn_options)
-            result = ziacli.category_action(category_id, configured_name, urls, "ADD_TO_LIST")
+
+            result = {
+                "response": ziacli.category_action(category_id, configured_name, urls, "ADD_TO_LIST")
+            }
+
+            if activate:
+                # Activate configuration changes.
+                activate_result = ziacli.activate()
+                if activate_result.get("status").lower() == "active":
+                    result["activation"] = {"status": "Activated"}
+                else:
+                    result["activation"] = activate_result
+            else:
+                result["activation"] = {"status": "Not_selected"}
+
 
             yield StatusMessage("Finished '{0}' that was running in workflow '{1}'".format(FN_NAME, wf_instance_id))
 

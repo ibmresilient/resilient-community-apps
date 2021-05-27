@@ -43,7 +43,8 @@ class FunctionComponent(ResilientComponent):
 
             # Get and validate required function inputs:
             fn_inputs = validate_fields(
-                ["zia_allowlisturls"],
+                ["zia_allowlisturls",
+                 "zia_activate"],
                 kwargs)
 
             LOG.info("'{0}' inputs: %s", fn_inputs)
@@ -51,9 +52,23 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Validations complete. Starting business logic")
 
             allowlisturls = fn_inputs.get("zia_allowlisturls")
+            activate = fn_inputs.get("zia_activate")
 
             ziacli = ZiaClient(self.opts, self.fn_options)
-            result = ziacli.allowlist_action(allowlisturls, "REMOVE_FROM_LIST")
+
+            result = {
+                "response": ziacli.allowlist_action(allowlisturls, "REMOVE_FROM_LIST")
+            }
+
+            if activate:
+                # Activate configuration changes.
+                activate_result = ziacli.activate()
+                if activate_result.get("status").lower() == "active":
+                    result["activation"] = {"status": "Activated"}
+                else:
+                    result["activation"] = activate_result
+            else:
+                result["activation"] = {"status": "Not_selected"}
 
             yield StatusMessage("Finished '{0}' that was running in workflow '{1}'".format(FN_NAME, wf_instance_id))
 
