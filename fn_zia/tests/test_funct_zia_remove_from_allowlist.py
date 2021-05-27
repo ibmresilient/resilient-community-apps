@@ -53,16 +53,20 @@ class TestFunctZiaRemoveFromAllowlist:
         assert func is not None
 
     mock_inputs_1 = {
-        "zia_allowlisturls": "192.168.1.1"
+        "zia_allowlisturls": "192.168.1.1",
+        "zia_activate": False,
     }
 
-    expected_results_1 = {"whitelistUrls": ["goodhost.com"]}
+    expected_results_1 = {"response": {"whitelistUrls": ["goodhost.com"]},
+                          "activation": {"status": "Not_selected"}}
 
     mock_inputs_2 = {
-        "zia_allowlisturls": "goodhost.com, 192.168.1.1"
+        "zia_allowlisturls": "goodhost.com, 192.168.1.1",
+        "zia_activate": True,
     }
 
-    expected_results_2 = {"whitelistUrls": []}
+    expected_results_2 = {"response": {"whitelistUrls": []},
+                          "activation": {"status": "Activated"}}
 
     @patch("fn_zia.components.funct_zia_remove_from_allowlist.ZiaClient", side_effect=mocked_zia_client)
     @pytest.mark.parametrize("mock_inputs, expected_results", [

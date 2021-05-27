@@ -225,3 +225,15 @@ class TestZIAClient:
         zia_client = ZiaClient(opts, get_fn_opts())
         result = zia_client.url_lookup(mock_inputs["zia_urls"])
         assert(result == expected_results)
+
+
+    """ Test zia_client.activate"""
+    @patch("fn_zia.lib.auth.RequestsCommon", side_effect=mocked_requests)
+    @pytest.mark.parametrize("expected_result", [
+        ({"status": "ACTIVE"})
+    ])
+    def test_activate(self, mock_post, expected_result):
+        opts = {}
+        zia_client = ZiaClient(opts, get_fn_opts())
+        result = zia_client.activate()
+        assert(result == expected_result)

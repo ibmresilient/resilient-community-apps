@@ -55,24 +55,28 @@ class TestFunctZiaRemoveFromUrlCategory:
     mock_inputs_1 = {
         "zia_category_id": "CUSTOM_01",
         "zia_urls": "192.168.1.1",
-        "zia_configured_name": "TEST_CAT_1"
+        "zia_configured_name": "TEST_CAT_1",
+        "zia_activate": False,
     }
 
-    expected_results_1 = {"id": "CUSTOM_01", "configuredName": "TEST_CAT_1", "keywordsRetainingParentCategory": [],
-                          "urls": ["1.1.1.1", "testhost.com"], "dbCategorizedUrls": [], "customCategory": True,
-                          "editable": True, "description": "CUSTOM_01_DESC", "type": "URL_CATEGORY", "val": 128,
-                          "customUrlsCount": 2, "urlsRetainingParentCategoryCount": 0}
+    expected_results_1 = {"response": {"id": "CUSTOM_01", "configuredName": "TEST_CAT_1", "keywordsRetainingParentCategory": [],
+                                       "urls": ["1.1.1.1", "testhost.com"], "dbCategorizedUrls": [], "customCategory": True,
+                                       "editable": True, "description": "CUSTOM_01_DESC", "type": "URL_CATEGORY", "val": 128,
+                                       "customUrlsCount": 2, "urlsRetainingParentCategoryCount": 0},
+                          "activation": {"status": "Not_selected"}}
 
     mock_inputs_2 = {
         "zia_category_id": "CUSTOM_02",
         "zia_urls": "192.168.1.1, testhost.com",
-        "zia_configured_name": "TEST_CAT_2"
+        "zia_configured_name": "TEST_CAT_2",
+        "zia_activate": True,
     }
 
-    expected_results_2 = {"id": "CUSTOM_02", "configuredName": "TEST_CAT_2", "keywordsRetainingParentCategory": [],
-                          "urls": ["1.1.1.1"], "dbCategorizedUrls": [], "customCategory": True,
-                          "editable": True, "description": "CUSTOM_01_DESC", "type": "URL_CATEGORY", "val": 128,
-                          "customUrlsCount": 2, "urlsRetainingParentCategoryCount": 0}
+    expected_results_2 = {"response": {"id": "CUSTOM_02", "configuredName": "TEST_CAT_2", "keywordsRetainingParentCategory": [],
+                                       "urls": ["1.1.1.1"], "dbCategorizedUrls": [], "customCategory": True,
+                                       "editable": True, "description": "CUSTOM_01_DESC", "type": "URL_CATEGORY", "val": 128,
+                                       "customUrlsCount": 2, "urlsRetainingParentCategoryCount": 0},
+                          "activation": {"status": "Activated"}}
 
     @patch("fn_zia.components.funct_zia_remove_from_url_category.ZiaClient", side_effect=mocked_zia_client)
     @pytest.mark.parametrize("mock_inputs, expected_results", [

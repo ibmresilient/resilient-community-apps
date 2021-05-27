@@ -57,26 +57,30 @@ class TestFunctZiaAddUrlCategory:
         "zia_super_category": "USER_DEFINED",
         "zia_urls": "testhost.com",
         "zia_keywords": "test1",
-        "zia_configured_name": "TEST_CAT_1"
+        "zia_configured_name": "TEST_CAT_1",
+        "zia_activate": False,
     }
 
-    expected_results_1 = {"id": "CUSTOM_01", "configuredName": "TEST_CAT_1", "superCategory": "USER_DEFINED",
-                          "keywords": ["test1"], "keywordsRetainingParentCategory": [], "urls": ["testhost.com"],
-                          "dbCategorizedUrls": [], "customCategory": True, "editable": True, "type": "true", "val": 130,
-                          "customUrlsCount": 2, "urlsRetainingParentCategoryCount": 0}
+    expected_results_1 = {"response": {"id": "CUSTOM_01", "configuredName": "TEST_CAT_1", "superCategory": "USER_DEFINED",
+                                       "keywords": ["test1"], "keywordsRetainingParentCategory": [], "urls": ["testhost.com"],
+                                       "dbCategorizedUrls": [], "customCategory": True, "editable": True, "type": "true", "val": 130,
+                                       "customUrlsCount": 2, "urlsRetainingParentCategoryCount": 0},
+                          "activation": {"status": "Not_selected"}}
     mock_inputs_2 = {
         "zia_custom_category": "true",
         "zia_super_category": "USER_DEFINED",
         "zia_urls": "testhost.com 192.168.1.1",
         "zia_keywords": "test1 test2",
-        "zia_configured_name": "TEST_CAT_2"
+        "zia_configured_name": "TEST_CAT_2",
+        "zia_activate": True,
     }
 
-    expected_results_2 = {"id": "CUSTOM_01", "configuredName": "TEST_CAT_2", "superCategory": "USER_DEFINED",
-                          "keywords": ["test1", "test2"], "keywordsRetainingParentCategory": [],
-                          "urls": ["testhost.com", "192.168.1.1"], "dbCategorizedUrls": [], "customCategory": True,
-                          "editable": True, "type": "true", "val": 130, "customUrlsCount": 2,
-                          "urlsRetainingParentCategoryCount": 0}
+    expected_results_2 = {"response": {"id": "CUSTOM_01", "configuredName": "TEST_CAT_2", "superCategory": "USER_DEFINED",
+                                       "keywords": ["test1", "test2"], "keywordsRetainingParentCategory": [],
+                                       "urls": ["testhost.com", "192.168.1.1"], "dbCategorizedUrls": [], "customCategory": True,
+                                       "editable": True, "type": "true", "val": 130, "customUrlsCount": 2,
+                                       "urlsRetainingParentCategoryCount": 0},
+                          "activation": {"status": "Activated"}}
 
     @patch("fn_zia.components.funct_zia_add_url_category.ZiaClient", side_effect=mocked_zia_client)
     @pytest.mark.parametrize("mock_inputs, expected_results", [

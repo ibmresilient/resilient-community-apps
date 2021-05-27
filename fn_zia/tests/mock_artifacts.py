@@ -153,6 +153,9 @@ def url_lookup_result(urls):
     ]
     return [x for x in base_result if x["url"]  in urls]
 
+def activate_result():
+    return {"status": "ACTIVE"}
+
 def get_auth_headers():
     return {'Strict-Transport-Security': 'max-age=31622400;includeSubDomains;preload',
             'X-Frame-Options': 'SAMEORIGIN', 'X-Content-Type-Options': 'nosniff',
@@ -208,6 +211,9 @@ def mocked_zia_client(*args, **kwargs):
         def url_lookup(self, urls=None):
             return url_lookup_result(urls)
 
+        def activate(self):
+            return activate_result()
+
     return MockResponse(*args, **kwargs)
 
 def mocked_requests(*args, **kwargs):
@@ -230,7 +236,9 @@ def mocked_requests(*args, **kwargs):
                 elif args[1].lower().endswith("urllookup"):
                     urls = ", ".join(json.loads(kwargs.get("data")))
                     return MockGetResponse(None, url_lookup_result(urls), 204)
-                #add_url_category_result(urls, configured_name, custom_category, super_category, keywords)
+                elif args[1].lower().endswith("status/activate"):
+                    return MockGetResponse(None, activate_result(), 204)
+
             elif args[0].lower() == "get":
                 if args[1].lower().endswith("/security/advanced"):
                     return MockGetResponse(None, get_blocklist_urls_result(), 204)
