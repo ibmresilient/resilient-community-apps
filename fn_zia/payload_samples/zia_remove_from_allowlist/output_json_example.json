@@ -1,9 +1,14 @@
 {
     "content": {
-        "whitelistUrls": [
-            "1.1.1.1",
-            "goodhost.com"
-        ]
+        "response": {
+            "whitelistUrls": [
+                "1.1.1.1",
+                "goodhost.com"
+            ]
+        },
+        "activation": {
+            "status": "Activated"
+        }
     },
     "inputs": {
         "zia_allowlisturls": "badhost.com"

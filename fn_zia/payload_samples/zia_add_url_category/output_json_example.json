@@ -1,19 +1,26 @@
 {
     "content": {
-        "id": "CUSTOM_01", "configuredName": "TEST_CAT_1",
-        "superCategory": "USER_DEFINED",
-        "keywords": [],
-        "keywordsRetainingParentCategory": [],
-        "urls": [
-            "192.168.1.1",
-            "testhost.com"
-        ],
-        "dbCategorizedUrls": [],
-        "customCategory": True,
-        "editable": True,
-        "type": "URL_CATEGORY",
-        "val": 130, "customUrlsCount": 2,
-        "urlsRetainingParentCategoryCount": 0
+        "response": {
+            "id": "CUSTOM_01",
+            "configuredName": "TEST_CAT_1",
+            "superCategory": "USER_DEFINED",
+            "keywords": [],
+            "keywordsRetainingParentCategory": [],
+            "urls": [
+                "192.168.1.1",
+                "testhost.com"
+            ],
+            "dbCategorizedUrls": [],
+            "customCategory": True,
+            "editable": True,
+            "type": "URL_CATEGORY",
+            "val": 130,
+            "customUrlsCount": 2,
+            "urlsRetainingParentCategoryCount": 0
+        },
+        "activation": {
+            "status": "Activated"
+        }
     },
     "inputs": {
         "zia_custom_category": "true",

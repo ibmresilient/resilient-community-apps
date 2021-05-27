@@ -1,6 +1,11 @@
 {
     "content": {
-        "status": "OK"
+        "response": {
+            "status": "OK"
+        },
+        "activation": {
+            "status": "Activated"
+        }
     },
     "inputs": {
         "zia_blocklisturls": "1.1.1.1"
