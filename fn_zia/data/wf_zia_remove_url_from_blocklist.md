@@ -19,6 +19,8 @@
 ### Pre-Processing Script
 ```python
 inputs.zia_blocklisturls = row.blocklist_url
+inputs.zia_activate = rule.properties.zia_activate
+
 ```
 
 ### Post-Processing Script
@@ -34,20 +36,22 @@ INPUTS = results.inputs
 # Processing
 def main():
     note_text = u''
-    key_count = 0
     urls = INPUTS.get("zia_blocklisturls")
     if CONTENT:
-        status = CONTENT.get("status")
+        response = CONTENT.get("response")
+        activation = CONTENT.get("activation")
+        status = response.get("status")
         if status == "OK":
-            note_text = u"ZIA Integration: Workflow <b>{0}</b>: Successfully removed URLS <b>{1}</b> from blocklist " \
+            note_text = u"ZIA Integration: Workflow <b>{0}</b>: Successfully removed URLs <b>{1}</b> from blocklist " \
                         u"for SOAR function <b>{2}</b>.".format(WF_NAME, urls, FN_NAME)
+            note_text += u" Activation status: <b>{0}</b>.".format(activation["status"])
         else:
             note_text = u"ZIA Integration: Workflow <b>{0}</b>: Unexpected status <b>{1}</b> returned while attempting " \
-                        u"to remove URLS <b>{2}</b> from blocklist by SOAR function <b>{3}</b>."\
+                        u"to remove URLs <b>{2}</b> from blocklist by SOAR function <b>{3}</b>."\
                 .format(WF_NAME, status, urls, FN_NAME)
     else:
         note_text += u"ZIA Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
-                     u"to remove URLS <b>{1}</b> from blocklist for SOAR function <b>{2}</b>."\
+                     u"to remove URLs <b>{1}</b> from blocklist for SOAR function <b>{2}</b>."\
             .format(WF_NAME, urls, FN_NAME)
 
     incident.addNote(helper.createRichText(note_text))

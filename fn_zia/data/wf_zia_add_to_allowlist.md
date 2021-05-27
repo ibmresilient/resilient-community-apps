@@ -19,6 +19,8 @@
 ### Pre-Processing Script
 ```python
 inputs.zia_allowlisturls = artifact.value
+inputs.zia_activate = rule.properties.zia_activate
+
 ```
 
 ### Post-Processing Script
@@ -36,18 +38,22 @@ def main():
     note_text = u''
     urls = INPUTS.get("zia_allowlisturls")
     if CONTENT:
+        response = CONTENT.get("response")
+        activation = CONTENT.get("activation")
         allowlist_urls = re.split("\s+|,", urls)
-        updated_allowlist = CONTENT.whitelistUrls
+        updated_allowlist = response.get("whitelistUrls")
         if all(a in updated_allowlist for a in allowlist_urls):
-            note_text = u"ZIA Integration: Workflow <b>{0}</b>: Successfully added URLS <b>{1}</b> to allowlist " \
+            note_text = u"ZIA Integration: Workflow <b>{0}</b>: Successfully added URLs <b>{1}</b> to allowlist " \
                         u"for SOAR function <b>{2}</b>.".format(WF_NAME, urls, FN_NAME)
+            note_text += u" Activation status: <b>{0}</b>.".format(activation["status"])
+        
         else:
-            note_text = u"ZIA Integration: Workflow <b>{0}</b>: Not all urls added while attempting " \
-                        u"to add URLS <b>{2}</b> to allowlist for SOAR function <b>{2}</b>."\
+            note_text = u"ZIA Integration: Workflow <b>{0}</b>: Not all uris added while attempting " \
+                        u"to add URLs <b>{2}</b> to allowlist for SOAR function <b>{2}</b>."\
                 .format(WF_NAME, urls, FN_NAME)
     else:
         note_text += u"ZIA Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
-                     u"to add URLS <b>{1}</b> to allowlist for SOAR function <b>{2}</b>."\
+                     u"to add URLs <b>{1}</b> to allowlist for SOAR function <b>{2}</b>."\
             .format(WF_NAME, urls, FN_NAME)
 
     incident.addNote(helper.createRichText(note_text))

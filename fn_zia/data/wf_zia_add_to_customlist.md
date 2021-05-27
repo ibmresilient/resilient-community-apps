@@ -21,6 +21,7 @@
 inputs.zia_urls = artifact.value
 inputs.zia_category_id = rule.properties.zia_category_id
 inputs.zia_configured_name = rule.properties.zia_configured_name
+inputs.zia_activate = rule.properties.zia_activate
 
 ```
 
@@ -39,24 +40,30 @@ def main():
     note_text = u''
     urls = INPUTS.get("zia_urls")
     category_id = INPUTS.get("zia_category_id")
+    configured_name = INPUTS.get("zia_configured_name")
     if CONTENT:
+        response = CONTENT.get("response")
+        activation = CONTENT.get("activation")
         customlist_urls = re.split("\s+|,", urls)
-        updated_customlist = CONTENT.urls
+        updated_customlist = response.get("urls")
         if all(a in updated_customlist for a in customlist_urls):
-            note_text = u"ZIA Integration: Workflow <b>{0}</b>: Successfully added URLS <b>{1}</b> to customlist " \
-                        u"of category ID <b>{2}</b> for SOAR function <b>{3}</b>.".format(WF_NAME, urls, category_id, FN_NAME)
+            note_text = u"ZIA Integration: Workflow <b>{0}</b>: Successfully added URLs <b>{1}</b> to customlist "\
+                        u"with category ID <b>{2}</b> and configured name <b>{3}</b> for SOAR function <b>{4}</b>."\
+                        .format(WF_NAME, urls, category_id, configured_name, FN_NAME)
+            note_text += u" Activation status: <b>{0}</b>.".format(activation["status"])
         else:
-            note_text = u"ZIA Integration: Workflow <b>{0}</b>: Not all urls added while attempting " \
-                        u"to add URLS <b>{1}</b> to customlist of category ID <b>{2}</b> for SOAR function <b>{3}</b>."\
-                .format(WF_NAME, urls, category_id,  FN_NAME)
+            note_text = u"ZIA Integration: Workflow <b>{0}</b>: Not all urls added while attempting "\
+                        u"to add URLs <b>{1}</b> to customlist with category ID <b>{2}</b> and configured name <b>{3}</b> "\
+                        u"for SOAR function <b>{4}</b>.".format(WF_NAME, urls, category_id,  FN_NAME)
     else:
-        note_text += u"ZIA Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
-                     u"to add URLS <b>{1}</b> to to customlist of category ID <b>{2}</b> for SOAR function <b>{2}</b>."\
+        note_text += u"ZIA Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting "\
+                     u"to add URLs <b>{1}</b> to to customlist of category ID <b>{2}</b> for SOAR function <b>{2}</b>."\
             .format(WF_NAME, urls, category_id,  FN_NAME)
 
     incident.addNote(helper.createRichText(note_text))
 
 main()
+
 ```
 
 ---

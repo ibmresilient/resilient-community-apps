@@ -21,6 +21,8 @@
 inputs.zia_urls = row.url
 inputs.zia_category_id = row.cat_id
 inputs.zia_configured_name = row.configuredName
+inputs.zia_activate = rule.properties.zia_activate
+
 ```
 
 ### Post-Processing Script
@@ -34,30 +36,34 @@ CONTENT = results.content
 INPUTS = results.inputs
 
 # Processing
-def main():
+ddef main():
     note_text = u''
     urls = INPUTS.get("zia_urls")
     category_id = INPUTS.get("zia_category_id")
     if CONTENT:
+        response = CONTENT.get("response")
+        activation = CONTENT.get("activation")
         customlist_urls = re.split("\s+|,", urls)
-        updated_customlist = CONTENT.urls
+        updated_customlist = response.get("urls")
         if not any(a in updated_customlist for a in customlist_urls):
-            note_text = u"ZIA Integration: Workflow <b>{0}</b>: Successfully removed URLS <b>{1}</b> from customlist " \
+            note_text = u"ZIA Integration: Workflow <b>{0}</b>: Successfully removed URLs <b>{1}</b> from customlist " \
                         u"of category ID <b>{2}</b> for SOAR function <b>{3}</b>.".format(WF_NAME, urls, category_id, FN_NAME)
+            note_text += u" Activation status: <b>{0}</b>.".format(activation["status"])
         else:
             note_text = u"ZIA Integration: Workflow <b>{0}</b>: Not all urls removed while attempting " \
-                        u"to remove URLS <b>{1}</b> from customlist of category ID <b>{2}</b> by SOAR function <b>{3}</b>."\
+                        u"to remove URLs <b>{1}</b> from customlist of category ID <b>{2}</b> by SOAR function <b>{3}</b>."\
                 .format(WF_NAME, urls, category_id, FN_NAME)
     elif isinstance(content, dict):
         note_text += u"Is a dict"
     else:
         note_text += u"ZIA Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
-                     u"to remove URLS <b>{1}</b> from customlist of category ID <b>{2}</b> for SOAR function <b>{3}</b>."\
+                     u"to remove URLs <b>{1}</b> from customlist of category ID <b>{2}</b> for SOAR function <b>{3}</b>."\
             .format(WF_NAME, urls, category_id, FN_NAME)
 
     incident.addNote(helper.createRichText(note_text))
 
 main()
+
 ```
 
 ---

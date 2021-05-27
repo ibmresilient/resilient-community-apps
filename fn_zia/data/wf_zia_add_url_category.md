@@ -18,11 +18,8 @@
 
 ### Pre-Processing Script
 ```python
-inputs.zia_configured_name = rule.properties.zia_configured_name_input
-inputs.zia_custom_category = rule.properties.zia_custom_category
-inputs.zia_super_category = rule.properties.zia_super_category
-inputs.zia_keywords = rule.properties.zia_keywords.content
-inputs.zia_urls = rule.properties.zia_urls.content
+inputs.zia_activate = rule.properties.zia_activate
+
 ```
 
 ### Post-Processing Script
