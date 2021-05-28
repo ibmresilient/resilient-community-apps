@@ -19,6 +19,8 @@
 ### Pre-Processing Script
 ```python
 inputs.zia_allowlisturls = artifact.value
+inputs.zia_activate = rule.properties.zia_activate
+
 ```
 
 ### Post-Processing Script
@@ -36,23 +38,27 @@ def main():
     note_text = u''
     urls = INPUTS.get("zia_allowlisturls")
     if CONTENT:
+        response = CONTENT.get("response")
+        activation = CONTENT.get("activation")
         allowlist_urls = re.split("\s+|,", urls)
-        updated_allowlist_urls = CONTENT.whitelistUrls
+        updated_allowlist_urls = response.get("whitelistUrls")
         if not any(a in updated_allowlist_urls for a in allowlist_urls):
-            note_text = u"ZIA Integration: Workflow <b>{0}</b>: Successfully removed URLS <b>{1}</b> from allowlist " \
+            note_text = u"ZIA Integration: Workflow <b>{0}</b>: Successfully removed URLs <b>{1}</b> from allowlist " \
                         u"for SOAR function <b>{2}</b>.".format(WF_NAME, urls, FN_NAME)
+            note_text += u" Activation status: <b>{0}</b>.".format(activation["status"])
         else:
             note_text = u"ZIA Integration: Workflow <b>{0}</b>: Not all urls removed while attempting " \
-                        u"to remove URLS <b>{1}</b> from allowlist by SOAR function <b>{2}</b>."\
+                        u"to remove URLs <b>{1}</b> from allowlist by SOAR function <b>{2}</b>."\
                 .format(WF_NAME, urls, FN_NAME)
     else:
         note_text += u"ZIA Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
-                     u"to remove URLS <b>{1}</b> from allowlist for SOAR function <b>{2}</b>."\
+                     u"to remove URLs <b>{1}</b> from allowlist for SOAR function <b>{2}</b>."\
             .format(WF_NAME, urls, FN_NAME)
 
     incident.addNote(helper.createRichText(note_text))
 
 main()
+
 ```
 
 ---

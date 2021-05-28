@@ -8,7 +8,7 @@ from resilient_circuits import SubmitTestFunction, FunctionResult
 from .mock_artifacts import *
 
 PACKAGE_NAME = "fn_zia"
-FUNCTION_NAME = "funct_zia_remove_from_blocklist"
+FUNCTION_NAME = "funct_zia_get_url_categories"
 
 # Read the mock configuration-data section from the package
 config_data = get_mock_config()
@@ -20,9 +20,9 @@ def assert_keys_in(json_obj, *keys):
     for key in keys:
         assert key in json_obj
 
-def call_funct_zia_remove_from_blocklist_function(circuits, function_params, timeout=5):
+def call_funct_zia_get_url_categories_function(circuits, function_params, timeout=5):
     # Create the submitTestFunction event
-    evt = SubmitTestFunction("funct_zia_remove_from_blocklist", function_params)
+    evt = SubmitTestFunction("funct_zia_get_url_categories", function_params)
 
     # Fire a message to the function
     circuits.manager.fire(evt)
@@ -37,15 +37,15 @@ def call_funct_zia_remove_from_blocklist_function(circuits, function_params, tim
 
     # else return the FunctionComponent's results
     else:
-        event = circuits.watcher.wait("funct_zia_remove_from_blocklist_result", parent=evt, timeout=timeout)
+        event = circuits.watcher.wait("funct_zia_get_url_categories_result", parent=evt, timeout=timeout)
         assert event
         assert isinstance(event.kwargs["result"], FunctionResult)
         pytest.wait_for(event, "complete", True)
         return event.kwargs["result"].value
 
 
-class TestFunctZiaRemoveFromBlocklist:
-    """ Tests for the funct_zia_remove_from_blocklist function"""
+class TestFunctZiaGetUrlCategories:
+    """ Tests for the funct_zia_get_url_categories function"""
 
     def test_function_definition(self):
         """ Test that the package provides customization_data that defines the function """
@@ -53,22 +53,27 @@ class TestFunctZiaRemoveFromBlocklist:
         assert func is not None
 
     mock_inputs_1 = {
-        "zia_blocklisturls": "badhost",
-        "zia_activate": False,
+        "zia_custom_only": "true",
+        "zia_category_id": "CUSTOM_01"
     }
 
-    expected_results_1 = {"response": {"status": "OK"},
-                          "activation": {"status": "Not_selected"}}
+    expected_results_1 = [{"id": "CUSTOM_01", "configuredName": "TEST_CAT_1", "superCategory": "USER_DEFINED",
+                           "keywords": ["test"], "keywordsRetainingParentCategory": [], "urls": ["testhost.com"],
+                           "dbCategorizedUrls": [], "customCategory": True, "editable": True, "type": "URL_CATEGORY",
+                           "val": 128, "customUrlsCount": 1, "urlsRetainingParentCategoryCount": 0}]
 
     mock_inputs_2 = {
-        "zia_blocklisturls": "badhost, 192.168.1.1",
-        "zia_activate": True,
+        "zia_custom_only": "true",
+        "zia_category_id": None
     }
 
-    expected_results_2 = {"response": {"status": "OK"},
-                          "activation": {"status": "Activated"}}
+    expected_results_2 = [{"id": "CUSTOM_02", "configuredName": "TEST_CAT_2", "superCategory": "USER_DEFINED",
+                           "keywords": ["test2"], "keywordsRetainingParentCategory": [],
+                           "urls": ["testhost2.com, 192.168.1.1"], "dbCategorizedUrls": [], "customCategory": True,
+                           "editable": True, "type": "URL_CATEGORY", "val": 128, "customUrlsCount": 2,
+                           "urlsRetainingParentCategoryCount": 0}]
 
-    @patch('fn_zia.components.funct_zia_remove_from_blocklist.ZiaClient', side_effect=mocked_zia_client)
+    @patch("fn_zia.components.funct_zia_get_url_categories.ZiaClient", side_effect=mocked_zia_client)
     @pytest.mark.parametrize("mock_inputs, expected_results", [
         (mock_inputs_1, expected_results_1),
         (mock_inputs_2, expected_results_2)
@@ -78,6 +83,6 @@ class TestFunctZiaRemoveFromBlocklist:
 
         keys = ["content", "inputs", "metrics", "raw", "reason", "success", "version"]
 
-        results = call_funct_zia_remove_from_blocklist_function(circuits_app, mock_inputs)
+        results = call_funct_zia_get_url_categories_function(circuits_app, mock_inputs)
         assert_keys_in(results, *keys)
         assert(expected_results == results["content"])

@@ -4,19 +4,17 @@
 """Function implementation"""
 
 import logging
-from resilient_circuits import ResilientComponent, function, handler, \
-    StatusMessage, FunctionResult, FunctionError
+from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import ResultPayload, validate_fields
 import fn_zia.util.config as config
 from fn_zia.lib.zia_client import ZiaClient
 
 PACKAGE_NAME = "fn_zia"
-FN_NAME = "funct_zia_add_to_blocklist"
+FN_NAME = "funct_zia_remove_from_url_category"
 LOG = logging.getLogger(__name__)
 
-
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'funct_zia_add_to_blocklist''"""
+    """Component that implements Resilient function 'funct_zia_remove_from_url_category''"""
 
     def __init__(self, opts):
         """Constructor provides access to the configuration options"""
@@ -33,11 +31,8 @@ class FunctionComponent(ResilientComponent):
         validate_fields(config.REQUIRED_CONFIG_SETTINGS, self.fn_options)
 
     @function(FN_NAME)
-    def _funct_zia_add_to_blocklist_function(self, event, *args, **kwargs):
-        """Function: Add a URLs or IP addresses to the blocklist list.
-            See link for URL guidelines:
-              https://help.zscaler.com/zia/url-format-guidelines
-        """
+    def _funct_zia_remove_from_url_category_function(self, event, *args, **kwargs):
+        """Function: Remove URLs or IP addresses from a URL Category. See following for URL guidelines https://help.zscaler.com/zia/url-format-guidelines"""
         try:
             rp = ResultPayload(PACKAGE_NAME, **kwargs)
 
@@ -46,28 +41,27 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("Starting '{0}' running in workflow '{1}'".format(FN_NAME, wf_instance_id))
 
-
             # Get and validate required function inputs:
             fn_inputs = validate_fields(
-                ["zia_blocklisturls",
+                ["zia_configured_name",
+                 "zia_urls",
+                 "zia_category_id",
                  "zia_activate"],
                 kwargs)
 
             LOG.info("'{0}' inputs: %s", fn_inputs)
 
-            if fn_inputs.get("zia_category_id") and fn_inputs.get("zia_custom_only").lower() == "false":
-                raise ValueError("If parameter '{0}' is set parameter '{1}' should be set '{2}'.")\
-                    .format("zia_category_id", "zia_custom_only", "true")
-
             yield StatusMessage("Validations complete. Starting business logic")
 
-            blocklisturls = fn_inputs.get("zia_blocklisturls")
+            category_id = fn_inputs.get("zia_category_id")
+            configured_name = fn_inputs.get("zia_configured_name")
+            urls = fn_inputs.get("zia_urls")
             activate = fn_inputs.get("zia_activate")
 
             ziacli = ZiaClient(self.opts, self.fn_options)
 
             result = {
-                "response": ziacli.blocklist_action(blocklisturls, "ADD_TO_LIST")
+                "response": ziacli.category_action(category_id, configured_name, urls, "REMOVE_FROM_LIST")
             }
 
             result["activation"] = ziacli.activate(fn_inputs["zia_activate"])

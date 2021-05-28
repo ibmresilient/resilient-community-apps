@@ -1,0 +1,35 @@
+{
+    "content": [
+        {
+            "id": "CUSTOM_01",
+            "configuredName": "TEST_CAT_1",
+            "superCategory": "USER_DEFINED",
+            "keywords": ["test"],
+            "keywordsRetainingParentCategory": [],
+            "urls": ["testhost.com"],
+            "dbCategorizedUrls": [],
+            "customCategory": True,
+            "editable": True,
+            "type": "URL_CATEGORY",
+            "val": 128,
+            "customUrlsCount": 1,
+            "urlsRetainingParentCategoryCount": 0
+        }
+    ],
+    "inputs": {
+        "zia_custom_only": "true",
+        "zia_category_id": "CUSTOM_01"
+    },
+    "raw": '{"id": "CUSTOM_01", "configuredName": "TEST_CAT_1", "superCategory": "USER_DEFINED", "keywords": ["test"], "keywordsRetainingParentCategory": [], "urls": ["testhost.com"], "dbCategorizedUrls": [], "customCategory": true, "editable": true, "type": "URL_CATEGORY", "val": 128, "customUrlsCount": 1, "urlsRetainingParentCategoryCount": 0}',
+    "metrics": {
+        "version": "1.0",
+        "package": "fn-zia",
+        "package_version": "1.0.0",
+        "host": "host.ibm.com",
+        "execution_time_ms": 22199,
+        "timestamp": "2021-05-11 10:33:14"
+    },
+    "version": "1.0",
+    "success": True,
+    "reason": None
+}

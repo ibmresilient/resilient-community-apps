@@ -1,0 +1,44 @@
+{
+    "content": {
+        "response": {
+            "id": "CUSTOM_01",
+            "configuredName": "TEST_CAT_1",
+            "superCategory": "USER_DEFINED",
+            "keywords": [],
+            "keywordsRetainingParentCategory": [],
+            "urls": [
+                "192.168.1.1",
+                "testhost.com"
+            ],
+            "dbCategorizedUrls": [],
+            "customCategory": True,
+            "editable": True,
+            "type": "URL_CATEGORY",
+            "val": 130,
+            "customUrlsCount": 2,
+            "urlsRetainingParentCategoryCount": 0
+        },
+        "activation": {
+            "status": "Activated"
+        }
+    },
+    "inputs": {
+        "zia_custom_category": "true",
+        "zia_configured_name": "TEST_CAT_1",
+        "zia_urls": "testhost.com 192.168.1.1",
+        "zia_super_category": "USER_DEFINED",
+        "zia_keywords": "test1"
+    },
+    "metrics": {
+        "version": "1.0",
+        "package": "fn-zia",
+        "package_version": "1.0.0",
+        "host": "host.ibm.com",
+        "execution_time_ms": 22199,
+        "timestamp": "2021-05-11 10:33:14"
+    },
+    "raw": '{"id": "CUSTOM_01", "configuredName": "TEST_CAT_1", "superCategory": "USER_DEFINED", "keywords": [], "keywordsRetainingParentCategory": [], "urls": ["192.168.1.1", "testhost.com"], "dbCategorizedUrls": [], "customCategory": true, "editable": true, "type": "URL_CATEGORY", "val": 130, "customUrlsCount": 2, "urlsRetainingParentCategoryCount": 0}',
+    "version": "1.0",
+    "success": True,
+    "reason": None
+}
