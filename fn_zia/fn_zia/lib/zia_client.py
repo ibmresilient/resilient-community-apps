@@ -265,13 +265,23 @@ class ZiaClient(Auth):
         # Normalize response dict to a list.
         return res
 
-    def activate(self):
+    def activate(self, activate=None):
         """Activate configuration.
 
+        :param activate: Boolean to determine whether changes should be activated.
         return res: Response
         """
         uri = self._endpoints["activate"]
-        res = self._perform_method("post", uri, headers=self._headers)
+
+        if activate:
+            # Activate configuration changes.
+            res = self._perform_method("post", uri, headers=self._headers)
+
+            if res.get("status").lower() == "active":
+                res = {"status": "Activated"}
+        else:
+            # Activate not selected.
+            res = {"status": "Not_selected"}
 
         return res
 

@@ -61,15 +61,7 @@ class FunctionComponent(ResilientComponent):
                 "response": ziacli.category_action(category_id, configured_name, urls, "ADD_TO_LIST")
             }
 
-            if activate:
-                # Activate configuration changes.
-                activate_result = ziacli.activate()
-                if activate_result.get("status").lower() == "active":
-                    result["activation"] = {"status": "Activated"}
-                else:
-                    result["activation"] = activate_result
-            else:
-                result["activation"] = {"status": "Not_selected"}
+            result["activation"] = ziacli.activate(fn_inputs["zia_activate"])
 
 
             yield StatusMessage("Finished '{0}' that was running in workflow '{1}'".format(FN_NAME, wf_instance_id))
