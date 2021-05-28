@@ -229,13 +229,14 @@ class TestZIAClient:
 
     """ Test zia_client.activate"""
     @patch("fn_zia.lib.auth.RequestsCommon", side_effect=mocked_requests)
-    @pytest.mark.parametrize("expected_result", [
-        ({"status": "ACTIVE"})
+    @pytest.mark.parametrize("zia_activate, expected_result", [
+        (True, {"status": "Activated"}),
+        (False, {"status": "Not_selected"})
     ])
-    def test_activate(self, mock_post, expected_result):
+    def test_activate(self, mock_post, zia_activate, expected_result):
         opts = {}
         zia_client = ZiaClient(opts, get_fn_opts())
-        result = zia_client.activate()
+        result = zia_client.activate(zia_activate)
         assert(result == expected_result)
 
     mock_inputs_1 = {

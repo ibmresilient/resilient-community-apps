@@ -293,8 +293,10 @@ def get_sandbox_report_result(full):
     }
     return result[report_type]
 
-def activate_result():
-    return {"status": "ACTIVE"}
+def activate_result(activate):
+    if activate:
+        return {"status": "Activated"}
+    return {"status": "Not_selected"}
 
 def get_auth_headers():
     return {'Strict-Transport-Security': 'max-age=31622400;includeSubDomains;preload',
@@ -351,8 +353,8 @@ def mocked_zia_client(*args, **kwargs):
         def url_lookup(self, urls=None):
             return url_lookup_result(urls)
 
-        def activate(self):
-            return activate_result()
+        def activate(self, activate):
+            return activate_result(activate)
 
         def get_sandbox_report(self, md5, full):
             return get_sandbox_report_result(full)
@@ -380,7 +382,7 @@ def mocked_requests(*args, **kwargs):
                     urls = ", ".join(json.loads(kwargs.get("data")))
                     return MockGetResponse(None, url_lookup_result(urls), 204)
                 elif args[1].lower().endswith("status/activate"):
-                    return MockGetResponse(None, activate_result(), 204)
+                    return MockGetResponse(None, activate_result(True), 204)
 
             elif args[0].lower() == "get":
                 if args[1].lower().endswith("/security/advanced"):
