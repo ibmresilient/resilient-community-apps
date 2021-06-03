@@ -56,13 +56,11 @@ def filter_by_url(result, url_filter=None, url_type=None):
     if not url_type:
         raise ValueError("The 'url_type' parameter is not set correctly.")
 
-    urls = result.get(url_type)
-    regex = r'{}'.format(url_filter)
+    urls = result.get(url_type, [])
 
     result["url_counts"] = {}
 
     # Add url total and filtered counts to result.
-    urls = result.get(url_type)
     result.update({
         "url_counts": {
             "total": len(urls),
@@ -71,6 +69,7 @@ def filter_by_url(result, url_filter=None, url_type=None):
     })
 
     if url_filter and urls:
+        regex = r'{}'.format(url_filter)
         filtered_urls = [u for u in urls if re.search(regex, u, re.I)]
         if filtered_urls:
             result[url_type] = filtered_urls

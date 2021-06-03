@@ -139,8 +139,9 @@ class ZiaClient(Auth):
 
         # Get result for current allowlist query.
         curr_allowlist_res = self.get_allowlist_urls()
+
         # Set current allow list.
-        curr_allowlist = curr_allowlist_res["whitelistUrls"] if curr_allowlist_res else []
+        curr_allowlist = curr_allowlist_res.get("whitelistUrls", [])
 
         if action == "ADD_TO_LIST":
             new_allowlist = curr_allowlist.copy()
