@@ -31,7 +31,6 @@ def get_headers():
         "User-Agent": "SOARCLIENT",
         "cookie": "JSESSIONID=971F40D46FE1A27AB4E2783BA77A1C76"
     })
-    return test_xml
 
 class TestZIAClient:
     """ Test zia_client test instantiation"""
@@ -81,13 +80,16 @@ class TestZIAClient:
 
     """ Test zia_client.get_blocklist_urls"""
     @patch("fn_zia.lib.auth.RequestsCommon", side_effect=mocked_requests)
-    @pytest.mark.parametrize("expected_result", [
-        ({"blacklistUrls": ["badhost.com", "192.168.12.2"]})
+    @pytest.mark.parametrize("url_filter, expected_result", [
+        (None, {"blacklistUrls": ["badhost.com", "192.168.12.2"],
+          "url_counts": {"total": 2, "filtered": 2}}),
+        ("badhost", {"blacklistUrls": ["badhost.com"],
+                   "url_counts": {"total": 2, "filtered": 1}})
     ])
-    def test_get_blocklist_urls(self, mock_post, expected_result):
+    def test_get_blocklist_urls(self, mock_post, url_filter, expected_result):
         opts = {}
         zia_client = ZiaClient(opts, get_fn_opts())
-        result = zia_client.get_blocklist_urls()
+        result = zia_client.get_blocklist_urls(url_filter)
         assert(result == expected_result)
 
     """ Test zia_client.blocklist_action"""
@@ -116,42 +118,106 @@ class TestZIAClient:
 
     """ Test zia_client.get_allowlist_urls"""
     @patch("fn_zia.lib.auth.RequestsCommon", side_effect=mocked_requests)
-    @pytest.mark.parametrize("expected_result", [
-        ({"whitelistUrls": ["goodhost.com", "192.168.1.1"]})
+    @pytest.mark.parametrize("url_filter, expected_result", [
+        (None, {"whitelistUrls": ["goodhost.com", "192.168.1.1"],
+                    "url_counts": {"total": 2, "filtered": 2}}),
+        ("goodhost", {"whitelistUrls": ["goodhost.com"],
+                     "url_counts": {"total": 2, "filtered": 1}})
     ])
-    def test_get_allowlist_urls(self, mock_post, expected_result):
+    def test_get_allowlist_urls(self, mock_post, url_filter, expected_result):
         opts = {}
         zia_client = ZiaClient(opts, get_fn_opts())
-        result = zia_client.get_allowlist_urls()
+        result = zia_client.get_allowlist_urls(url_filter)
         assert(result == expected_result)
+
+    mock_inputs_1 = {
+        "custom_only": "true",
+        "category_id": "CUSTOM_01",
+        "name_filter": None,
+        "url_filter": None
+    }
+
+    expected_results_1 = {"categories": [{"id": "CUSTOM_01", "configuredName": "TEST_CAT_1",
+                                          "superCategory": "USER_DEFINED", "keywords": ["test"],
+                                          "keywordsRetainingParentCategory": [], "urls": ["testhost.com"],
+                                          "dbCategorizedUrls": [], "customCategory": True, "editable": True,
+                                          "type": "URL_CATEGORY", "val": 128, "customUrlsCount": 1,
+                                          "urlsRetainingParentCategoryCount": 0, "url_counts": {"total": 1, "filtered": 1}}],
+                          "category_counts": {"total": 1, "filtered": 1}}
+
+
+    mock_inputs_2 = {
+        "custom_only": "true",
+        "category_id": None,
+        "name_filter": None,
+        "url_filter": None
+    }
+    expected_results_2 = {"categories": [{"id": "CUSTOM_02", "configuredName": "TEST_CAT_2",
+                                          "superCategory": "USER_DEFINED", "keywords": ["test2"],
+                                          "keywordsRetainingParentCategory": [], "urls": ["testhost2.com, 192.168.1.1"],
+                                          "dbCategorizedUrls": [], "customCategory": True, "editable": True,
+                                          "type": "URL_CATEGORY", "val": 128, "customUrlsCount": 2,
+                                          "urlsRetainingParentCategoryCount": 0, "url_counts": {"total": 2, "filtered": 2}}],
+                          "category_counts": {"total": 1, "filtered": 1}}
+    mock_inputs_2 = {
+        "custom_only": "true",
+        "category_id": None,
+        "name_filter": None,
+        "url_filter": None
+    }
+    expected_results_2 = {"categories": [{"id": "CUSTOM_02", "configuredName": "TEST_CAT_2",
+                                          "superCategory": "USER_DEFINED", "keywords": ["test2"],
+                                          "keywordsRetainingParentCategory": [], "urls": ["testhost2.com", "192.168.1.1"],
+                                          "dbCategorizedUrls": [], "customCategory": True, "editable": True,
+                                          "type": "URL_CATEGORY", "val": 128, "customUrlsCount": 2,
+                                          "urlsRetainingParentCategoryCount": 0, "url_counts": {"total": 2, "filtered": 2}}],
+                          "category_counts": {"total": 1, "filtered": 1}}
+
+    mock_inputs_3 = {
+        "custom_only": "true",
+        "category_id": None,
+        "name_filter": "CAT_1",
+        "url_filter": None
+    }
+    expected_results_3 = {"categories": [], "category_counts": {"filtered": 0, "total": 1}}
+
+    mock_inputs_4 = {
+        "custom_only": "true",
+        "category_id": None,
+        "name_filter": "TEST_CAT_2",
+        "url_filter": "testhost2.com"
+    }
+    expected_results_4 = {"categories": [{"id": "CUSTOM_02", "configuredName": "TEST_CAT_2",
+                                          "superCategory": "USER_DEFINED", "keywords": ["test2"],
+                                          "keywordsRetainingParentCategory": [], "urls": ["testhost2.com"],
+                                          "dbCategorizedUrls": [], "customCategory": True, "editable": True,
+                                          "type": "URL_CATEGORY", "val": 128, "customUrlsCount": 2,
+                                          "urlsRetainingParentCategoryCount": 0, "url_counts": {"total": 2, "filtered": 1}}],
+                          "category_counts": {"total": 1, "filtered": 1}}
 
     """ Test zia_client.get_url_categories"""
     @patch("fn_zia.lib.auth.RequestsCommon", side_effect=mocked_requests)
-    @pytest.mark.parametrize("custom_only, category_id, expected_result", [
-        ("true", "CUSTOM_01", [{'id': 'CUSTOM_01', 'configuredName': 'TEST_CAT_1', 'superCategory': 'USER_DEFINED',
-                                'keywords': ['test'], 'keywordsRetainingParentCategory': [], 'urls': ['testhost.com'],
-                                'dbCategorizedUrls': [], 'customCategory': True, 'editable': True, 'type': 'URL_CATEGORY',
-                                'val': 128, 'customUrlsCount': 1, 'urlsRetainingParentCategoryCount': 0}]),
-        ("true", None, [{'id': 'CUSTOM_02', 'configuredName': 'TEST_CAT_2', 'superCategory': 'USER_DEFINED',
-                         'keywords': ['test2'], 'keywordsRetainingParentCategory': [],
-                         'urls': ['testhost2.com, 192.168.1.1'], 'dbCategorizedUrls': [], 'customCategory': True,
-                         'editable': True, 'type': 'URL_CATEGORY', 'val': 128, 'customUrlsCount': 2,
-                         'urlsRetainingParentCategoryCount': 0}])
+    @pytest.mark.parametrize("mock_inputs, expected_results", [
+        (mock_inputs_1, expected_results_1),
+        (mock_inputs_2, expected_results_2),
+        (mock_inputs_3, expected_results_3),
+        (mock_inputs_4, expected_results_4)
     ])
-    def test_get_url_categories(self, mock_post, custom_only, category_id, expected_result):
+    def test_get_url_categories(self, mock_post, mock_inputs, expected_results):
         opts = {}
         zia_client = ZiaClient(opts, get_fn_opts())
-        result = zia_client.get_url_categories(custom_only, category_id)
-        assert(result == expected_result)
+        result = zia_client.get_url_categories(mock_inputs["custom_only"], mock_inputs["category_id"],
+                                               mock_inputs["name_filter"], mock_inputs["url_filter"])
+        assert(result == expected_results)
 
     """ Test zia_client.category_action"""
     @patch("fn_zia.lib.auth.RequestsCommon", side_effect=mocked_requests)
     @pytest.mark.parametrize("category_id, configured_name, urls, action, expected_result", [
         ("CUSTOM_01", "TEST_CAT_1", "192.168.1.2, 192.168.1.3", "ADD_TO_LIST",
-         {'id': 'CUSTOM_01', 'configuredName': 'TEST_CAT_1', 'keywordsRetainingParentCategory': [],
-          'urls': ['1.1.1.1', 'testhost.com', '192.168.1.1', '192.168.1.2', '192.168.1.3'], 'dbCategorizedUrls': [],
-          'customCategory': True, 'editable': True, 'description': 'CUSTOM_01_DESC', 'type': 'URL_CATEGORY', 'val': 128,
-          'customUrlsCount': 2, 'urlsRetainingParentCategoryCount': 0}),
+         {"id": "CUSTOM_01", "configuredName": "TEST_CAT_1", "keywordsRetainingParentCategory": [],
+          "urls": ["1.1.1.1", "testhost.com", "192.168.1.1", "192.168.1.2", "192.168.1.3"], "dbCategorizedUrls": [],
+          "customCategory": True, "editable": True, "description": "CUSTOM_01_DESC", "type": "URL_CATEGORY", "val": 128,
+          "customUrlsCount": 2, "urlsRetainingParentCategoryCount": 0}),
     ])
     def test_category_action(self, mock_post, category_id, configured_name, urls, action, expected_result):
         opts = {}
@@ -167,10 +233,10 @@ class TestZIAClient:
         "configured_name": "TEST_CAT_1"
     }
 
-    expected_results_1 = {'id': 'CUSTOM_01', 'configuredName': 'true', 'superCategory': ['test1'],
-                          'keywords': ['testhost.com'], 'keywordsRetainingParentCategory': [],
-                          'urls': ['TEST_CAT_1'], 'dbCategorizedUrls': [], 'customCategory': True, 'editable': True,
-                          'type': 'USER_DEFINED', 'val': 130, 'customUrlsCount': 2, 'urlsRetainingParentCategoryCount': 0}
+    expected_results_1 = {"id": "CUSTOM_01", "configuredName": "true", "superCategory": ["test1"],
+                          "keywords": ["testhost.com"], "keywordsRetainingParentCategory": [],
+                          "urls": ["TEST_CAT_1"], "dbCategorizedUrls": [], "customCategory": True, "editable": True,
+                          "type": "USER_DEFINED", "val": 130, "customUrlsCount": 2, "urlsRetainingParentCategoryCount": 0}
 
 
     mock_inputs_2 = {
@@ -180,11 +246,11 @@ class TestZIAClient:
         "keywords": "test1 test2",
         "configured_name": "TEST_CAT_2"
     }
-    expected_results_2 = {'id': 'CUSTOM_01', 'configuredName': 'true', 'superCategory': ['test1', 'test2'],
-                          'keywords': ['testhost.com', '192.168.1.1'], 'keywordsRetainingParentCategory': [],
-                          'urls': ['TEST_CAT_2'], 'dbCategorizedUrls': [], 'customCategory': True, 'editable': True,
-                          'type': 'USER_DEFINED', 'val': 130, 'customUrlsCount': 2,
-                          'urlsRetainingParentCategoryCount': 0}
+    expected_results_2 = {"id": "CUSTOM_01", "configuredName": "true", "superCategory": ["test1", "test2"],
+                          "keywords": ["testhost.com", "192.168.1.1"], "keywordsRetainingParentCategory": [],
+                          "urls": ["TEST_CAT_2"], "dbCategorizedUrls": [], "customCategory": True, "editable": True,
+                          "type": "USER_DEFINED", "val": 130, "customUrlsCount": 2,
+                          "urlsRetainingParentCategoryCount": 0}
 
     """ Test zia_client.add_url_category"""
     @patch("fn_zia.lib.auth.RequestsCommon", side_effect=mocked_requests)

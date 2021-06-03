@@ -51,21 +51,36 @@ class TestFunctZiaGetAllowlist:
         """ Test that the package provides customization_data that defines the function """
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
-
     mock_inputs_1 = {
+        "zia_url_filter": None
     }
 
-    expected_results_1 = {"whitelistUrls": ["goodhost.com", "192.168.1.1"]}
+    expected_results_1 = {"whitelistUrls": ["goodhost.com", "192.168.1.1"], "url_counts": {"filtered": 2, "total": 2}}
 
     mock_inputs_2 = {
+        "zia_url_filter": ".*"
     }
 
-    expected_results_2 = {"whitelistUrls": ["goodhost.com", "192.168.1.1"]}
+    expected_results_2 = {"whitelistUrls": ["goodhost.com", "192.168.1.1"], "url_counts": {"filtered": 2, "total": 2}}
 
-    @patch('fn_zia.components.funct_zia_get_allowlist.ZiaClient', side_effect=mocked_zia_client)
+    mock_inputs_3 = {
+        "zia_url_filter": "goodhost"
+    }
+
+    expected_results_3 = {"whitelistUrls": ["goodhost.com"], "url_counts": {"filtered": 1, "total": 2}}
+
+    mock_inputs_4 = {
+        "zia_url_filter": "badhost"
+    }
+
+    expected_results_4 = {"whitelistUrls": [], "url_counts": {"filtered": 0, "total": 2}}
+
+    @patch("fn_zia.components.funct_zia_get_allowlist.ZiaClient", side_effect=mocked_zia_client)
     @pytest.mark.parametrize("mock_inputs, expected_results", [
         (mock_inputs_1, expected_results_1),
-        (mock_inputs_2, expected_results_2)
+        (mock_inputs_2, expected_results_2),
+        (mock_inputs_3, expected_results_3),
+        (mock_inputs_4, expected_results_4)
     ])
     def test_success(self, mock_cli, circuits_app, mock_inputs, expected_results):
         """ Test calling with sample values for the parameters """
