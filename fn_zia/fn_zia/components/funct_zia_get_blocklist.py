@@ -9,6 +9,7 @@ from resilient_circuits import ResilientComponent, function, handler, \
 from resilient_lib import ResultPayload, validate_fields
 import fn_zia.util.config as config
 from fn_zia.lib.zia_client import ZiaClient
+from fn_zia.lib.helpers import is_regex
 
 PACKAGE_NAME = "fn_zia"
 FN_NAME = "funct_zia_get_blocklist"
@@ -44,10 +45,22 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("Starting '{0}' running in workflow '{1}'".format(FN_NAME, wf_instance_id))
 
-            yield StatusMessage("Starting business logic")
+            # Get and validate required function inputs:
+            fn_inputs = validate_fields(
+                [],
+                kwargs)
+
+            LOG.info("'{0}' inputs: %s", fn_inputs)
+
+            url_filter_patt = fn_inputs.get("zia_url_filter")
+            if url_filter_patt and not is_regex(url_filter_patt):
+                raise ValueError("The url query filter '{}' does not have a valid regular expression."
+                                 .format("zia_url_filter"))
+
+            yield StatusMessage("Validations complete. Starting business logic")
 
             ziacli = ZiaClient(self.opts, self.fn_options)
-            result = ziacli.get_blocklist_urls()
+            result = ziacli.get_blocklist_urls(url_filter=url_filter_patt)
 
             yield StatusMessage("Finished '{0}' that was running in workflow '{1}'".format(FN_NAME, wf_instance_id))
 

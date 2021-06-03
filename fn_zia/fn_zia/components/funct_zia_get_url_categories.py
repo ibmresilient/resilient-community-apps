@@ -8,6 +8,7 @@ from resilient_circuits import ResilientComponent, function, handler, StatusMess
 from resilient_lib import ResultPayload, validate_fields
 import fn_zia.util.config as config
 from fn_zia.lib.zia_client import ZiaClient
+from fn_zia.lib.helpers import is_regex
 
 PACKAGE_NAME = "fn_zia"
 FN_NAME = "funct_zia_get_url_categories"
@@ -50,13 +51,22 @@ class FunctionComponent(ResilientComponent):
             LOG.info("'{0}' inputs: %s", fn_inputs)
 
             if fn_inputs.get("zia_category_id") and fn_inputs.get("zia_custom_only").lower() == "false":
-                raise ValueError("If parameter '{0}' is set parameter '{1}' should be set '{2}'.")\
-                    .format("zia_category_id", "zia_custom_only", "true")
+                raise ValueError("If parameter '{0}' is set parameter '{1}' should be set '{2}'."
+                                 .format("zia_category_id", "zia_custom_only", "true"))
+
+            # Test any enabled filters to ensure they are valid regular expressions.
+            for f in ["zia_name_filter","zia_url_filter"]:
+                patt = fn_inputs.get(f)
+                if patt and not is_regex(patt):
+                    raise ValueError("The query filter '{}' does not have a valid regular expression.".format(repr(f)))
+
+            # Remove 'zia_' prefix from function parameters.
+            fn_inputs = dict((k.split('_', 1)[1], v) for k, v in fn_inputs.items())
 
             yield StatusMessage("Validations complete. Starting business logic")
 
             ziacli = ZiaClient(self.opts, self.fn_options)
-            result = ziacli.get_url_categories(fn_inputs.get("zia_custom_only"), fn_inputs.get("zia_category_id"))
+            result = ziacli.get_url_categories(**fn_inputs)
 
             yield StatusMessage("Finished '{0}' that was running in workflow '{1}'".format(FN_NAME, wf_instance_id))
 

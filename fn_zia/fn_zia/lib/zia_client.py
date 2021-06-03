@@ -6,7 +6,7 @@ import logging
 import json
 import re
 from .auth import Auth
-
+from fn_zia.lib.helpers import filter_by_url, filter_by_category
 LOG = logging.getLogger(__name__)
 
 
@@ -67,7 +67,7 @@ class ZiaClient(Auth):
 
         return result
 
-    def get_blocklist_urls(self):
+    def get_blocklist_urls(self, url_filter=None):
         """Get a list of blocklisted URLs.
 
         The URLs can be either a url or ip address.
@@ -75,14 +75,15 @@ class ZiaClient(Auth):
         See following for url guidelines
         https://help.zscaler.com/zia/url-format-guidelines
 
+        :param url_filter:  Regex string used for url filter (Optional)
         return res: Parsed response
         """
         uri = self._endpoints["blocklist"]
         res = self._perform_method("get", uri, headers=self._headers)
+        # Filter result by url name and return.
+        return filter_by_url(res, url_filter=url_filter, url_type="blacklistUrls")
 
-        return res
-
-    def get_allowlist_urls(self):
+    def get_allowlist_urls(self, url_filter=None):
         """Get a list of allowlisted URLs.
 
         The URLs can be either a url or ip address.
@@ -90,12 +91,13 @@ class ZiaClient(Auth):
         See following for url guidelines
         https://help.zscaler.com/zia/url-format-guidelines
 
+        :param url_filter:  Regex string used for url filter (Optional)
         return res: Parsed response
         """
         uri = self._endpoints["allowlist"]
         res = self._perform_method("get", uri, headers=self._headers)
-
-        return res
+        # Filter result by url name and return.
+        return filter_by_url(res, url_filter=url_filter, url_type="whitelistUrls")
 
     def blocklist_action(self, blocklisturls=None, action=None):
         """ Perform an add or remove action on a list of URLs to the blocklist.
@@ -155,16 +157,19 @@ class ZiaClient(Auth):
 
         return res
 
-    def get_url_categories(self, custom_only, category_id):
+    def get_url_categories(self, custom_only=None, category_id=None, name_filter=None, url_filter=None):
         """Get a list of URL categories.
 
         :param custom_only: Custom categories only = 'true', all = 'false'
         :param category_id: Custom category ID
+        :param name_filter: Regex string used for custom name filter (Optional)
+        :param url_filter:  Regex string used for url filter (Optional)
         return res: Normalized response
         """
         # Set default uri
         uri = self._endpoints["categories"].format('')
         params = {}
+        result = {}
 
         if category_id:
             uri = "/".join([uri, category_id])
@@ -175,7 +180,20 @@ class ZiaClient(Auth):
         res = self._perform_method("get", uri, headers=self._headers, params=params)
 
         # Normalize response dict to a list.
-        return [res] if isinstance(res, dict) else res
+        result["categories"] = [res] if isinstance(res, dict) else res
+        # Filter result by category  name.
+        result = filter_by_category(result, name_filter=name_filter)
+
+        if result["categories"]:
+            categories = result["categories"].copy()
+            # Filter result by url value.
+            url_filtered_categories = [filter_by_url(r, url_filter=url_filter, url_type="urls") for r in categories]
+            # Prune filtered list to remove empty category results
+            result["categories"] = list(filter(None, url_filtered_categories))
+            # Re-set filtered category count.
+            result["category_counts"]["filtered"] = len(result["categories"])
+
+        return result
 
     def add_url_category(self, urls=None, configured_name=None, custom_category=True,
                          super_category=None, keywords=None):
@@ -244,7 +262,7 @@ class ZiaClient(Auth):
         return res
 
     def url_lookup(self, urls=None):
-        """ Lookup categorization  on a list of URLs.
+        """ Lookup categorization on a list of URLs.
 
         The URLs can be either urls or ip addresses.
         See following for url guidelines
