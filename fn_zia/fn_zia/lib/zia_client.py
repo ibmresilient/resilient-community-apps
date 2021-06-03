@@ -6,7 +6,8 @@ import logging
 import json
 import re
 from .auth import Auth
-from fn_zia.lib.helpers import filter_by_url, filter_by_category
+from .helpers import filter_by_url, filter_by_category
+
 LOG = logging.getLogger(__name__)
 
 

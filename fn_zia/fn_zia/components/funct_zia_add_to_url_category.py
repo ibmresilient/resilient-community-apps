@@ -5,7 +5,7 @@
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import ResultPayload, RequestsCommon, validate_fields
+from resilient_lib import ResultPayload, validate_fields
 import fn_zia.util.config as config
 from fn_zia.lib.zia_client import ZiaClient
 
@@ -21,11 +21,15 @@ class FunctionComponent(ResilientComponent):
         """Constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         self.fn_options = opts.get(PACKAGE_NAME, {})
+        self.opts = opts
+        validate_fields(config.REQUIRED_CONFIG_SETTINGS, self.fn_options)
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
         self.fn_options = opts.get(PACKAGE_NAME, {})
+        self.opts = opts
+        validate_fields(config.REQUIRED_CONFIG_SETTINGS, self.fn_options)
 
     @function(FN_NAME)
     def _funct_zia_add_to_url_category_function(self, event, *args, **kwargs):
@@ -61,7 +65,7 @@ class FunctionComponent(ResilientComponent):
                 "response": ziacli.category_action(category_id, configured_name, urls, "ADD_TO_LIST")
             }
 
-            result["activation"] = ziacli.activate(fn_inputs["zia_activate"])
+            result["activation"] = ziacli.activate(activate)
 
 
             yield StatusMessage("Finished '{0}' that was running in workflow '{1}'".format(FN_NAME, wf_instance_id))
