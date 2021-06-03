@@ -18,8 +18,42 @@
 
 ### Pre-Processing Script
 ```python
+##  ZIA - wf_zia_get_url_categories pre processing script ##
 inputs.zia_custom_only = rule.properties.zia_custom_only
 inputs.zia_category_id = rule.properties.zia_category_id_input
+import re
+
+URL_FILTER = rule.properties.zia_url_filter
+NAME_FILTER = rule.properties.zia_name_filter
+
+def is_regex(regex_str):
+    """"Test if sting is a correctly formed regular expression.
+
+    :param regex_str: Regular expression string.
+    :return: Boolean.
+    """
+    try:
+        re.compile(regex_str)
+        return True
+    except (re.error, TypeError):
+        return False
+
+
+def main():
+    # Test filter to ensure it is a valid regular expressions.
+
+    if URL_FILTER and not is_regex(URL_FILTER):
+        raise ValueError("The url filter '{}' is not a valid regular expression.".format(unicode(URL_FILTER)))
+    
+    if NAME_FILTER and not is_regex(NAME_FILTER):
+        raise ValueError("The category name filter '{}' is not a valid regular expression.".format(unicode(NAME_FILTER)))
+    
+    inputs.zia_url_filter = URL_FILTER
+    inputs.zia_name_filter = NAME_FILTER
+
+
+if __name__ == "__main__":
+    main()
 ```
 
 ### Post-Processing Script
@@ -38,9 +72,14 @@ DATA_TBL_FIELDS = ["configuredName", "superCategory", "keywords", "urls", "custo
 def main():
     note_text = u''
     if CONTENT:
-        note_text = u"ZIA Integration: Workflow <b>{0}</b>: There were <b>{1}</b> URL categories (s) returned for " \
-                        u"SOAR function <b>{2}</b>.".format(WF_NAME, len(CONTENT), FN_NAME)
-        for cat in CONTENT:
+        categories = CONTENT.get("categories")
+        cat_counts = CONTENT.get("category_counts")
+        name_filter = INPUTS.get("zia_name_filter")
+        note_text += u"ZIA Integration: Workflow <b>{0}</b>: There were <b>{1}</b> URL categories out of a total of "\
+                     u"<b>{2}</b> using category name filter <b>{3}</b> returned for SOAR function <b>{4}</b>."\
+        .format(WF_NAME, cat_counts["filtered"], cat_counts["total"], name_filter, FN_NAME)
+        note_text += u"<br>The data table <b>{0}</b> has been updated".format("Zscaler Internet Access - URL Categories")
+        for cat in categories:
             newrow = incident.addRow("zia_url_categories")
             newrow.query_execution_date = QUERY_EXECUTION_DATE
             newrow.cat_id = cat["id"]

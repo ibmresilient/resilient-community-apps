@@ -11,14 +11,40 @@
 `funct_zia_get_allowlist`
 
 ### Output Name
-`None`
+``
 
 ### Message Destination
 `zia`
 
 ### Pre-Processing Script
 ```python
-None
+##  ZIA - wf_zia_get_allowlist post processing script ##
+import re
+
+URL_FILTER = rule.properties.zia_url_filter
+
+def is_regex(regex_str):
+    """"Test if sting is a correctly formed regular expression.
+
+    :param regex_str: Regular expression string.
+    :return: Boolean.
+    """
+    try:
+        re.compile(regex_str)
+        return True
+    except (re.error, TypeError):
+        return False
+
+
+def main():
+    # Test filter to ensure it is a valid regular expressions.
+    if URL_FILTER and not is_regex(URL_FILTER):
+        raise ValueError("The query filter '{}' is not a valid regular expression.".format(unicode(URL_FILTER)))
+
+    inputs.zia_url_filter = rule.properties.zia_url_filter
+
+if __name__ == "__main__":
+    main()
 ```
 
 ### Post-Processing Script
@@ -37,16 +63,22 @@ note_text = ''
 
 def main():
     note_text = u''
-    key_count = 0
     if CONTENT:
+        url_filter = INPUTS.get("zia_url_filter")
         allowlist_urls = CONTENT.whitelistUrls
-        note_text = u"ZIA Integration: Workflow <b>{0}</b>: There were <b>{1}</b> allowlist URLS (s) returned for " \
-                        u"SOAR function <b>{2}</b>.".format(WF_NAME, len(allowlist_urls), FN_NAME)
-        for url in allowlist_urls:
-            newrow = incident.addRow("zia_allowlist")
-            newrow.query_execution_date = QUERY_EXECUTION_DATE
-            newrow.allowlist_url = url
-
+        url_counts = CONTENT.url_counts
+        note_text = u"ZIA Integration: Workflow <b>{0}</b>: There were <b>{1}</b> allowlist URLS (s) out of a total of "\
+                    u"<b>{2}</b> using filter <b>{3}</b> returned for SOAR function <b>{2}</b>."\
+        .format(WF_NAME, url_counts["filtered"], url_counts["total"], url_filter, FN_NAME)
+        if allowlist_urls:
+            if url_counts["filtered"] <= 50:
+                note_text += u"<br>The data table <b>{0}</b> has been updated".format("Zscaler Internet Access - Allowlist")
+                for url in allowlist_urls:
+                    newrow = incident.addRow("zia_allowlist")
+                    newrow.query_execution_date = QUERY_EXECUTION_DATE
+                    newrow.allowlist_url = url
+            else:
+                note_text += "<br>Allow list URLS: <b>{0}</b>".format(", ".join(allowlist_urls))
     else:
         note_text += u"ZIA Integration: Workflow <b>{0}</b>: There were <b>no</b> results returned " \
                      u"for SOAR function <b>{1}</b>."\
