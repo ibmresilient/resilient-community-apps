@@ -55,7 +55,7 @@ class FunctionComponent(ResilientComponent):
                                  .format("zia_category_id", "zia_custom_only", "true"))
 
             # Test any enabled filters to ensure they are valid regular expressions.
-            for f in ["zia_name_filter","zia_url_filter"]:
+            for f in ["zia_name_filter", "zia_url_filter"]:
                 patt = fn_inputs.get(f)
                 if patt and not is_regex(patt):
                     raise ValueError("The query filter '{}' does not have a valid regular expression.".format(repr(f)))
@@ -73,6 +73,9 @@ class FunctionComponent(ResilientComponent):
             results = rp.done(True, result)
 
             LOG.info("'%s' complete", FN_NAME)
+
+            yield StatusMessage("Returning results for function '{}' with parameters '{}'."
+                                .format(FN_NAME, ", ".join("{!s}={!r}".format(k,v) for (k,v) in fn_inputs.items())))
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
