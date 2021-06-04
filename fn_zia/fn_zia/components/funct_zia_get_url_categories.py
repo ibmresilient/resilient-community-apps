@@ -51,7 +51,7 @@ class FunctionComponent(ResilientComponent):
             LOG.info("'{0}' inputs: %s", fn_inputs)
 
             if fn_inputs.get("zia_category_id") and fn_inputs.get("zia_custom_only").lower() == "false":
-                raise ValueError("If parameter '{0}' is set parameter '{1}' should be set '{2}'."
+                raise ValueError("If parameter '{0}' is set then parameter '{1}' should be set to '{2}'."
                                  .format("zia_category_id", "zia_custom_only", "true"))
 
             # Test any enabled filters to ensure they are valid regular expressions.
