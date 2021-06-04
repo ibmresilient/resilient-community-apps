@@ -18,8 +18,40 @@
 
 ### Pre-Processing Script
 ```python
+##  ZIA - wf_zia_get_customlist pre processing script ##
 inputs.zia_custom_only = "true"
 inputs.zia_category_id = rule.properties.zia_category_id
+import re
+
+URL_FILTER = rule.properties.zia_url_filter
+NAME_FILTER = rule.properties.zia_name_filter
+
+def is_regex(regex_str):
+    """"Test if sting is a correctly formed regular expression.
+
+    :param regex_str: Regular expression string.
+    :return: Boolean.
+    """
+    try:
+        re.compile(regex_str)
+        return True
+    except (re.error, TypeError):
+        return False
+
+
+def main():
+    # Test filter to ensure it is a valid regular expressions.
+    if URL_FILTER and not is_regex(URL_FILTER):
+        raise ValueError("The url filter '{}' is not a valid regular expression.".format(unicode(URL_FILTER)))
+    
+    if NAME_FILTER and not is_regex(NAME_FILTER):
+        raise ValueError("The category name filter '{}' is not a valid regular expression.".format(unicode(NAME_FILTER)))
+    
+    inputs.zia_url_filter = URL_FILTER
+    inputs.zia_name_filter = NAME_FILTER
+
+if __name__ == "__main__":
+    main()
 ```
 
 ### Post-Processing Script
@@ -34,27 +66,45 @@ INPUTS = results.inputs
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
 note_text = ''
 DATA_TBL_FIELDS = ["cat_id", "configuredName", "url"]
-#Processing
 
-note_text = u''
-if CONTENT:
-    cat = CONTENT.pop()
-    configured_name = cat.configuredNam
-    customlist_urls = cat.urls
-    note_text = u"ZIA Integration: Workflow <b>{0}</b>: There were <b>{1}</b> customlist URLS (s) returned for " \
-                    u"SOAR function <b>{2}</b>.".format(WF_NAME, len(customlist_urls), FN_NAME)
-    for url in customlist_urls:
-        newrow = incident.addRow("zia_customlists")
-        newrow.query_execution_date = QUERY_EXECUTION_DATE
-        newrow.cat_id = cat["id"]
-        newrow.configuredName = cat["configuredName"]
-        newrow.url = url
-else:
-    note_text += u"ZIA Integration: Workflow <b>{0}</b>: There were <b>no</b> results returned " \
-                 u"for SOAR function <b>{1}</b>."\
-        .format(WF_NAME, FN_NAME)
-
+# Processing
+def main():
+    note_text = u''
+    if CONTENT:
+        categories = CONTENT.get("categories")
+        cat_counts = CONTENT.get("category_counts")
+        url_filter = INPUTS.get("zia_url_filter")
+        name_filter = INPUTS.get("zia_name_filter")
+        note_text += u"ZIA Integration: Workflow <b>{0}</b>: There were <b>{1}</b> Custom lists out of a total of "\
+                     u"<b>{2}</b> using category name filter <b>{3}</b> returned for SOAR function <b>{4}</b>."\
+        .format(WF_NAME, cat_counts["filtered"], cat_counts["total"], name_filter, FN_NAME)
+        for cat in categories:
+            url_counts = cat.get("url_counts")
+            cat_id = cat.get("id")
+            configured_name = cat.get("configuredName")
+            customlist_urls = cat.get("urls")
+            note_text += u"<br>There were <b>{0}</b> customlist URLS(s) out of a total of <b>{1}</b> using URL filter <b>{2}</b> "\
+                         u"for Category ID <b>{3}</b> and Configured name <b>{4}</b> "\
+            .format(url_counts["filtered"], url_counts["total"], url_filter, cat_id, configured_name)
+            if customlist_urls:
+                if url_counts["filtered"] <= 50:
+                    note_text += u"<br>The data table <b>{0}</b> has been updated".format("Zscaler Internet Access - Custom lists")
+                    for url in customlist_urls:
+                        newrow = incident.addRow("zia_customlists")
+                        newrow.query_execution_date = QUERY_EXECUTION_DATE
+                        newrow.cat_id = cat_id
+                        newrow.configuredName = configured_name
+                        newrow.url = url
+                else:
+                    note_text += "<br>Custom list URLS for Category ID <b>{0}</b> and configured name <b>{1}</b> : <b>{2}</b>".format(", ".join(customlist_urls))
+    else:
+        note_text += u"ZIA Integration: Workflow <b>{0}</b>: There were <b>no</b> results returned using filter <b>{1}</b> "\
+                     u"for SOAR function <b>{2}</b>."\
+            .format(WF_NAME, url_filter, FN_NAME)
+    
     incident.addNote(helper.createRichText(note_text))
+
+main()
 
 ```
 

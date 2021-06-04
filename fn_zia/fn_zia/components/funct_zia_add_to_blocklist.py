@@ -70,13 +70,16 @@ class FunctionComponent(ResilientComponent):
                 "response": ziacli.blocklist_action(blocklisturls, "ADD_TO_LIST")
             }
 
-            result["activation"] = ziacli.activate(fn_inputs["zia_activate"])
+            result["activation"] = ziacli.activate(activate)
 
             yield StatusMessage("Finished '{0}' that was running in workflow '{1}'".format(FN_NAME, wf_instance_id))
 
             results = rp.done(True, result)
 
             LOG.info("'%s' complete", FN_NAME)
+
+            yield StatusMessage("Returning results for function '{}' with parameters '{}'."
+                                .format(FN_NAME, ", ".join("{!s}={!r}".format(k,v) for (k,v) in fn_inputs.items())))
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

@@ -33,7 +33,7 @@ def allowlist_action_result(urls=None):
 
     return res
 
-def get_blocklist_urls_result():
+def get_blocklist_urls():
     return {
         "blacklistUrls": [
             "badhost.com",
@@ -41,13 +41,47 @@ def get_blocklist_urls_result():
         ]
     }
 
-def get_allowlist_urls_result():
+def get_blocklist_urls_result(url_filter=None):
+    res = get_blocklist_urls()
+    total = filtered = 2
+    if url_filter:
+        regex = r'{}'.format(url_filter)
+        res["blacklistUrls"] = [u for u in res["blacklistUrls"] if re.search(regex, u, re.I)]
+        filtered = len(res["blacklistUrls"])
+
+    res.update({
+        "url_counts": {
+            "total": total,
+            "filtered": filtered
+        }
+    })
+    return res
+
+def get_allowlist_urls():
     return {
         "whitelistUrls": [
             "goodhost.com",
             "192.168.1.1"
         ]
     }
+
+def get_allowlist_urls_result(url_filter=None):
+    res = get_allowlist_urls()
+    total = filtered = 2
+
+    if url_filter:
+        regex = r'{}'.format(url_filter)
+        res["whitelistUrls"] = [u for u in res["whitelistUrls"] if re.search(regex, u, re.I)]
+        filtered = len(res["whitelistUrls"])
+
+    res.update({
+        'url_counts': {
+            "total": total,
+            "filtered": filtered
+        }
+    })
+    return res
+
 def add_or_remove_allowlist_urls_result(urls=None):
     if urls:
         urls =  list(filter(None, re.split("\s+|,", urls)))
@@ -101,11 +135,10 @@ def add_url_category_result(urls, configured_name, custom_category, super_catego
         "urlsRetainingParentCategoryCount": 0
     }
 
-def get_url_categories_result(custom_only, category_id):
-    def_category_id = category_id if category_id else "CUSTOM_02"
+def get_url_categories_base():
     base_result = [
         {
-            "id": category_id,
+            "id": "CUSTOM_01",
             "configuredName": "TEST_CAT_1",
             "superCategory": "USER_DEFINED",
             "keywords": ["test"],
@@ -125,7 +158,7 @@ def get_url_categories_result(custom_only, category_id):
             "superCategory": "USER_DEFINED",
             "keywords": ["test2"],
             "keywordsRetainingParentCategory": [],
-            "urls": ["testhost2.com, 192.168.1.1"],
+            "urls": ["testhost2.com", "192.168.1.1"],
             "dbCategorizedUrls": [],
             "customCategory": True,
             "editable": True,
@@ -135,7 +168,47 @@ def get_url_categories_result(custom_only, category_id):
             "urlsRetainingParentCategoryCount": 0
         },
     ]
-    return [x for x in base_result if x["id"] == def_category_id]
+
+    return base_result
+
+def get_url_categories(custom_only, category_id):
+        categories = get_url_categories_base()
+        def_category_id = category_id if category_id else "CUSTOM_02"
+        return [x for x in categories if x["id"] == def_category_id]
+
+def get_url_categories_result(custom_only, category_id, name_filter=None, url_filter=None ):
+    def_category_id = category_id if category_id else "CUSTOM_02"
+    cat_total = 1 if category_id else 2
+
+    categories = get_url_categories_base()
+
+    for c in categories:
+        c.update({
+            "url_counts": {
+                "total": len(c["urls"]),
+                "filtered": len(c["urls"])
+            }
+        })
+    if url_filter:
+        regex_url = r'{}'.format(url_filter)
+        for c in categories:
+            c["urls"] =  [u for u in c["urls"] if re.search(regex_url, u, re.I)]
+            c["url_counts"]["filtered"] = len(c["urls"])
+
+    if name_filter:
+        regex_name = r'{}'.format(name_filter)
+        categories = [c for c in categories if re.search(regex_name, c["configuredName"], re.I)]
+    else:
+        categories = [c for c in categories if c["id"] == def_category_id]
+
+    cat_filtered = len(categories)
+
+    res = {
+        "categories": categories,
+        "category_counts": {"total": cat_total, "filtered": cat_filtered}
+    }
+
+    return res
 
 def url_lookup_result(urls):
     urls = list(filter(None, re.split(r"\s+|,|\n", urls)))
@@ -335,11 +408,11 @@ def mocked_zia_client(*args, **kwargs):
                 elif "192.168.1.1" in allowlisturls:
                     return allowlist_action_result("goodhost.com")
 
-        def get_blocklist_urls(self):
-            return get_blocklist_urls_result()
+        def get_blocklist_urls(self, url_filter=None):
+            return get_blocklist_urls_result(url_filter=url_filter)
 
-        def get_allowlist_urls(self):
-            return get_allowlist_urls_result()
+        def get_allowlist_urls(self, url_filter=None):
+            return get_allowlist_urls_result(url_filter=url_filter)
 
         def category_action(self, category_id, configured_name, urls, action):
             return category_action_result(category_id, configured_name, urls, action)
@@ -347,8 +420,8 @@ def mocked_zia_client(*args, **kwargs):
         def add_url_category(self, urls, configured_name, custom_category, super_category, keywords):
             return add_url_category_result(urls, configured_name, custom_category, super_category, keywords)
 
-        def get_url_categories(self, custom_only, category_id):
-            return get_url_categories_result(custom_only, category_id)
+        def get_url_categories(self, custom_only, category_id, name_filter=None, url_filter=None):
+            return get_url_categories_result(custom_only, category_id, name_filter=name_filter, url_filter=url_filter)
 
         def url_lookup(self, urls=None):
             return url_lookup_result(urls)
@@ -386,13 +459,13 @@ def mocked_requests(*args, **kwargs):
 
             elif args[0].lower() == "get":
                 if args[1].lower().endswith("/security/advanced"):
-                    return MockGetResponse(None, get_blocklist_urls_result(), 204)
+                    return MockGetResponse(None, get_blocklist_urls(), 204)
                 elif args[1].lower().endswith("/security"):
-                    return MockGetResponse(None, get_allowlist_urls_result(), 204)
+                    return MockGetResponse(None, get_allowlist_urls(), 204)
                 elif args[1].lower().endswith("urlcategories/custom_01"):
-                    return MockGetResponse(None, get_url_categories_result("true", "CUSTOM_01"), 204)
+                    return MockGetResponse(None, get_url_categories("true", "CUSTOM_01"), 204)
                 elif args[1].lower().endswith("urlcategories"):
-                    return MockGetResponse(None, get_url_categories_result("true", None), 204)
+                    return MockGetResponse(None, get_url_categories("true", None), 204)
                 elif "sandbox/report" in args[1].lower():
                     params = kwargs.get("params")
                     full = True if params and params.get("details") == "full" else False

@@ -1,26 +1,38 @@
 {
-    "content": [
-        {
-            "id": "CUSTOM_01",
-            "configuredName": "TEST_CAT_1",
-            "superCategory": "USER_DEFINED",
-            "keywords": ["test"],
-            "keywordsRetainingParentCategory": [],
-            "urls": ["testhost.com"],
-            "dbCategorizedUrls": [],
-            "customCategory": True,
-            "editable": True,
-            "type": "URL_CATEGORY",
-            "val": 128,
-            "customUrlsCount": 1,
-            "urlsRetainingParentCategoryCount": 0
+    "content": {
+        "categories": [
+            {
+                "id": "CUSTOM_01",
+                "configuredName": "TEST_CAT_1",
+                "urls": [
+                    "testhost.com"
+                ],
+                "dbCategorizedUrls": [],
+                "customCategory": True,
+                "editable": True,
+                "description": "CUSTOM_01_DESC",
+                "type": "URL_CATEGORY",
+                "val": 129,
+                "customUrlsCount": 1,
+                "urlsRetainingParentCategoryCount": 0,
+                "url_counts": {
+                    "total": 1,
+                    "filtered": 1
+                }
+            }
+        ],
+        "category_counts": {
+            "total": 5,
+            "filtered": 1
         }
-    ],
+    },
     "inputs": {
         "zia_custom_only": "true",
+        "zia_url_filter": "testhost",
+        "zia_name_filter": "TEST",
         "zia_category_id": "CUSTOM_01"
     },
-    "raw": '{"id": "CUSTOM_01", "configuredName": "TEST_CAT_1", "superCategory": "USER_DEFINED", "keywords": ["test"], "keywordsRetainingParentCategory": [], "urls": ["testhost.com"], "dbCategorizedUrls": [], "customCategory": true, "editable": true, "type": "URL_CATEGORY", "val": 128, "customUrlsCount": 1, "urlsRetainingParentCategoryCount": 0}',
+    "raw": '{"categories": [{"id": "CUSTOM_01", "configuredName": "TEST_CAT_1", "urls": ["testhost.com"], "dbCategorizedUrls": [], "customCategory": true, "editable": true, "description": "CUSTOM_01_DESC", "type": "URL_CATEGORY", "val": 129, "customUrlsCount": 1, "urlsRetainingParentCategoryCount": 0, "url_counts": {"total": 1, "filtered": 1}}], "category_counts": {"total": 5, "filtered": 1}}',
     "metrics": {
         "version": "1.0",
         "package": "fn-zia",

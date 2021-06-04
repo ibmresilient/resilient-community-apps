@@ -18,7 +18,33 @@
 
 ### Pre-Processing Script
 ```python
-None
+##  ZIA - wf_zia_get_blocklist pre processing script ##
+import re
+
+URL_FILTER = rule.properties.zia_url_filter
+
+def is_regex(regex_str):
+    """"Test if sting is a correctly formed regular expression.
+
+    :param regex_str: Regular expression string.
+    :return: Boolean.
+    """
+    try:
+        re.compile(regex_str)
+        return True
+    except (re.error, TypeError):
+        return False
+
+
+def main():
+    # Test filter to ensure it is a valid regular expressions.
+    if URL_FILTER and not is_regex(URL_FILTER):
+        raise ValueError("The query filter '{}' is not a valid regular expression.".format(unicode(URL_FILTER)))
+
+    inputs.zia_url_filter = rule.properties.zia_url_filter
+
+if __name__ == "__main__":
+    main()
 ```
 
 ### Post-Processing Script
@@ -35,18 +61,24 @@ QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
 # Processing
 def main():
     note_text = u''
-    key_count = 0
     if CONTENT:
+        url_filter = INPUTS.get("zia_url_filter")
         blocklist_urls = CONTENT.blacklistUrls
-        note_text = u"ZIA Integration: Workflow <b>{0}</b>: There were <b>{1}</b> blocklist URLS (s) returned for " \
-                        u"SOAR function <b>{2}</b>.".format(WF_NAME, len(blocklist_urls), FN_NAME)
-        for url in blocklist_urls:
-            newrow = incident.addRow("zia_blocklist")
-            newrow.query_execution_date = QUERY_EXECUTION_DATE
-            newrow.blocklist_url = url
-
+        url_counts = CONTENT.url_counts
+        note_text = u"ZIA Integration: Workflow <b>{0}</b>: There were <b>{1}</b> blocklist URLS(s) out of a total of "\
+                    u"<b>{2}</b> using filter <b>{3}</b> returned for SOAR function <b>{4}</b>."\
+        .format(WF_NAME, url_counts["filtered"], url_counts["total"], url_filter, FN_NAME)
+        if blocklist_urls:
+            if url_counts["filtered"] <= 50:
+                note_text += u"<br>The data table <b>{0}</b> has been updated".format("Zscaler Internet Access - Blocklist")
+                for url in blocklist_urls:
+                    newrow = incident.addRow("zia_blocklist")
+                    newrow.query_execution_date = QUERY_EXECUTION_DATE
+                    newrow.blocklist_url = url
+            else:
+                note_text += "<br>Blocklisted URLS: <b>{0}</b>".format(", ".join(blocklist_urls))
     else:
-        note_text += u"ZIA Integration: Workflow <b>{0}</b>: There were <b>no</b> results returned " \
+        note_text += u"ZIzA Integration: Workflow <b>{0}</b>: There were <b>no</b> results returned " \
                      u"for SOAR function <b>{1}</b>."\
             .format(WF_NAME, FN_NAME)
 

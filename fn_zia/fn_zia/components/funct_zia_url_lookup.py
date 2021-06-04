@@ -62,6 +62,9 @@ class FunctionComponent(ResilientComponent):
 
             LOG.info("'%s' complete", FN_NAME)
 
+            yield StatusMessage("Returning results for function '{}' with parameters '{}'."
+                                .format(FN_NAME, ", ".join("{!s}={!r}".format(k,v) for (k,v) in fn_inputs.items())))
+
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception as e:
