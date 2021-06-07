@@ -1,0 +1,11 @@
+Metadata-Version: 1.1
+Name: fn_ansible_tower
+Version: 1.0.2
+Summary: Resilient Circuits Components for 'fn_ansible_tower'
+Home-page: https://github.com/ibmresilient/resilient-community-apps
+Author: IBM Resilient
+Author-email: support@resilientsystems.com
+License: MIT
+Description: Get job templates, launch jobs, and get job results from Ansible Tower
+Platform: any
+Classifier: Programming Language :: Python
