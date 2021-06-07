@@ -6,8 +6,7 @@ import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import RequestsCommon, ResultPayload, validate_fields
 from fn_ansible_tower.lib.common import get_job_template_by_name, SECTION_HDR, TOWER_API_BASE, JSON_HEADERS, \
-    make_extra_vars, \
-    get_common_request_items, clean_url
+    make_extra_vars, get_common_request_items, clean_url
 
 LAUNCH_URL = "job_templates/{id}/launch/"
 
