@@ -10,7 +10,7 @@ read_function
 #
 ## incident permissions
 #create_incident
-read_all_incidents
+#read_all_incidents
 #delete_all_incidents
 #edit_all_incidents_members
 #edit_all_incidents_owner
@@ -20,7 +20,7 @@ read_all_incidents
 edit_all_incidents_fields
 #
 ## notes permissions
-edit_all_incident_notes
+#edit_all_incident_notes
 #
 ## tasks permissions
 #edit_incident_public_task_fields
@@ -41,7 +41,7 @@ edit_all_incident_notes
 #read_users
 #
 ## workflow permissions - needed when using workflow_id
-read_workflow
+#read_workflow
 #
 ## wiki permissions
 #create_wiki
@@ -56,7 +56,7 @@ read_workflow
 #edit_layouts
 #delete_layouts
 #create_function
-read_function
+#read_function
 #edit_function
 #delete_function
 #create_script
