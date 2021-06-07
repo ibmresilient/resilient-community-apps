@@ -1,17 +1,17 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2021. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 
 """Function implementation"""
 
-import logging
-import tempfile
-import os
-import json
 import base64
+import logging
+import json
 import mimetypes
+import sys
+from io import BytesIO
 from resilient_circuits import ResilientComponent, function, StatusMessage, FunctionResult, FunctionError
-
+from resilient_lib import write_file_attachment
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'base64_to_attachment'"""
@@ -41,26 +41,12 @@ class FunctionComponent(ResilientComponent):
             log.info("content_type: %s", content_type)
 
             yield StatusMessage("Writing attachment...")
-            with tempfile.NamedTemporaryFile(delete=False) as temp_file:
-                try:
-                    temp_file.write(base64.b64decode(base64content))
-                    temp_file.close()
-                    # Create a new artifact
-                    client = self.rest_client()
-                    if task_id:
-                        attachment_uri = "/tasks/{}/attachments".format(task_id)
-                    else:
-                        attachment_uri = "/incidents/{}/attachments".format(incident_id)
-                    new_attachment = client.post_attachment(attachment_uri,
-                                                            temp_file.name,
-                                                            filename=file_name,
-                                                            mimetype=content_type)
-                finally:
-                    os.unlink(temp_file.name)
 
-            # Produce a FunctionResult with the return value
-            if isinstance(new_attachment, list):
-                new_attachment = new_attachment[0]
+            datastream = BytesIO(base64.b64decode(base64content.encode("utf-8")))
+
+            client = self.rest_client()
+            new_attachment  = write_file_attachment(client, file_name, datastream, incident_id, task_id, content_type)
+
             log.info(json.dumps(new_attachment))
             yield FunctionResult(new_attachment)
         except Exception:

@@ -23,6 +23,7 @@ import datetime
 import logging
 import fn_machine_learning.lib.model_utils as model_utils
 import numpy
+import sys
 
 
 class MlModelCommon(object):
@@ -132,7 +133,14 @@ class MlModelCommon(object):
         A label encoder convert a string value (of features) into integers.
         :return:
         """
-        for col_name, col in self.X.iteritems():
+
+        # check Python version and use appropriate method to return iterable list
+        if sys.version_info[0] < 3:
+            items = self.X.iteritems()
+        else:
+            items = self.X.items()
+
+        for col_name, col in items:
             self.log.debug("Column {col_name} is {col_type}".format(col_name=col_name,
                                                                     col_type=col.dtype.name))
             #
@@ -205,7 +213,14 @@ class MlModelCommon(object):
         :param df:      Dataframe we need to predict
         :return:
         """
-        for col_name, col in df.iteritems():
+
+        # check Python version and use appropriate method to return iterable list
+        if sys.version_info[0] < 3:
+            items = df.iteritems()
+        else:
+            items = df.items()
+
+        for col_name, col in items:
             if col.dtype.name == "object" or col.dtype.name == "float64":
                 try:
                     le = self.label_encoder.get(col_name, None)

@@ -7,6 +7,7 @@ from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 from sn_test_helper import *
 from copy import deepcopy
+import sys
 
 
 PACKAGE_NAME = "fn_service_now"
@@ -50,7 +51,7 @@ class TestFnSnowHelperUpdateDatatable:
         'res_id': 'RES-1001-2002',
         'success': True
     }
-
+    @pytest.mark.skipif(sys.version_info < (3, 6), reason="requires python3.6")
     @pytest.mark.parametrize("inputs, expected_results", [(inputs1, output1)])
     def test_success(self, circuits_app, inputs, expected_results):
         """ Test calling with sample values for the parameters """

@@ -17,5 +17,8 @@ username=domain\\username - to use this package, this must be an admin account w
 email=admin@example.com - this is the default account to send emails and create meetings if one was not specified. Specifying an account that is not this one will require impersonation access.
 password=password
 default_folder_path=Some folder path after root i.e. Top of Information Store/Inbox. Multiple folderpaths must be separated by commas.
+# Uncomment to specify proxy settings
+#https_proxy=https://your.proxy.com
+#http_proxy=http://your.proxy.com
 """
     return config_data

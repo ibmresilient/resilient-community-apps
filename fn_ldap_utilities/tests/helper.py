@@ -36,3 +36,14 @@ class TestingHelper():
 
     connection = Mock(return_value=mocked_connection)
     return connection
+
+def get_mock_config_data():
+    return u"""[fn_ldap_utilities]
+ldap_server=192.168.0.1
+ldap_port=389
+ldap_use_ssl=False
+ldap_auth=SIMPLE
+ldap_user_dn=CN=Username,CN=Users,DC=example,DC=com
+ldap_password=password
+ldap_is_active_directory=True
+ldap_connect_timeout=10"""

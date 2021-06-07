@@ -29,7 +29,7 @@ QRADAR_HOST = "the.qradar.host.com"
 QRADAR_TOKEN = "bogus qradar token"
 CSRF_TOKEN = "bogus csfr token"
 QRADAR_APP_ID = 1234
-QRADAR_API_BASE_URL=QRADAR_HOST+"/console/plugins/" + str(QRADAR_APP_ID) + "/app_proxy/api"
+QRADAR_API_BASE_URL="https://" + QRADAR_HOST+"/console/plugins/" + str(QRADAR_APP_ID) + "/app_proxy/api"
 QRADAR_VERIFY = False
 
 # Util function to generate simulated requests response
@@ -267,7 +267,7 @@ class TestQRadarAdvisorClient(object):
         ret_cookies = {"XSRF-TOKEN": CSRF_TOKEN}
         mocked_cookies.get_dict.return_value = ret_cookies
 
-        url = QRADAR_API_BASE_URL + "/search/quick"
+        url = QRADAR_API_BASE_URL + "/investigations/search/quick"
 
         search_value = "user:jsmith"
 
@@ -275,6 +275,13 @@ class TestQRadarAdvisorClient(object):
         dict_str = json.dumps(search_dict)
         quick_search_result = {"suspicious_observables":[],
                                "other_observables":[]}
+
+        err_422_result = {
+            "search": {
+                "search_value": search_value,
+                "status_code": 422
+            }
+        }
 
         mocked_session.post.return_value = _generate_response(quick_search_result, 200)
 
@@ -288,12 +295,10 @@ class TestQRadarAdvisorClient(object):
         #
         # Verify status_code other than 200 shall result in exception
         #
-        mocked_session.post.return_value = _generate_response(quick_search_result, 422)
-        try:
-            client.quick_search(search_value)
-            assert False
-        except QuickSearchError:
-            assert True
+        mocked_session.post.return_value = _generate_response(err_422_result, 422)
+
+        ret = client.quick_search(search_value)
+        assert ret == err_422_result
 
         #
         # Verify exception of post call
@@ -349,7 +354,7 @@ class TestQRadarAdvisorClient(object):
 
         offense_id = 12345
 
-        url = QRADAR_API_BASE_URL + "/offense/" + str(offense_id) + "/insights"
+        url = QRADAR_API_BASE_URL + "/investigations/offense/" + str(offense_id) + "/insights"
         ret_json = {"insights": "Sample insights from Watson"}
 
         mocked_session.get.return_value = _generate_response(ret_json, 200)
@@ -465,7 +470,7 @@ class TestQRadarFullSearch(object):
 
         search_value = "user:jsmith"
 
-        url = QRADAR_API_BASE_URL + "/search/full"
+        url = QRADAR_API_BASE_URL + "/investigations/search/full"
 
         data_str = json.dumps({"indicator": search_value})
         search_id = 123
@@ -531,7 +536,7 @@ class TestQRadarFullSearch(object):
         # 2.Test check_status
         #
 
-        url = QRADAR_API_BASE_URL + "/search/full/" + str(search_id)
+        url = QRADAR_API_BASE_URL + "/investigations/search/full/" + str(search_id)
         ret_dict = {
             "search_status": "PROCESSING STAGE3"
         }
@@ -582,12 +587,22 @@ class TestQRadarFullSearch(object):
         full_search.stage3_available = False
 
         # We shall query stage2 data
-        url = QRADAR_API_BASE_URL + "/search/full/" + str(search_id) + "/stix/stage2"
+        url = QRADAR_API_BASE_URL + "/investigations/search/full/" + str(search_id) + "/stix/stage2"
 
         stix_json = {
             "type": "bundle"
         }
 
+        err_json = {
+            'status': '',
+            'error': 'ERROR'
+        }
+
+        err_404_json = {
+            'status': 'NO_OBSERVABLES',
+            'progress': 'LOCAL_MINING_COMPLETE',
+            'error': 'NO_ERROR'
+        }
         mocked_session.get.return_value = _generate_response(stix_json, 200)
 
         mocked_session.get.side_effect = None
@@ -600,7 +615,7 @@ class TestQRadarFullSearch(object):
         full_search.stage3_available = True
 
         # We shall query stage3 data
-        url = QRADAR_API_BASE_URL + "/search/full/" + str(search_id) + "/stix/stage3"
+        url = QRADAR_API_BASE_URL + "/investigations/search/full/" + str(search_id) + "/stix/stage3"
 
         ret = full_search.get_search_result(search_id)
         assert ret == stix_json
@@ -608,13 +623,18 @@ class TestQRadarFullSearch(object):
                                               verify=True)
 
         # status_doce = 404 handling
-        mocked_session.get.return_value = _generate_response(stix_json, 404)
+        mocked_session.get.return_value = _generate_response(err_json, 404)
 
         try:
             full_search.get_search_result(search_id)
             assert False
         except SearchFailure as e:
             assert True
+
+        mocked_session.get.return_value = _generate_response(err_404_json, 404)
+
+        ret = full_search.get_search_result(search_id)
+        assert ret == { "status_code": 404}
 
         # other status_doce  handling
         mocked_session.get.return_value = _generate_response(stix_json, 400)
@@ -646,7 +666,7 @@ class TestQRadarOffenseAnalysis(object):
 
         offense_id = 1234
 
-        url = QRADAR_API_BASE_URL + "/offense/" + str(offense_id) + "/analysis"
+        url = QRADAR_API_BASE_URL + "/investigations/offense/" + str(offense_id) + "/analysis"
 
         ret_dict = {
             "status": "PROCESSING_LOCAL"
@@ -738,7 +758,7 @@ class TestQRadarOffenseAnalysis(object):
         # 2.Test check_status
         #
 
-        url = QRADAR_API_BASE_URL + "/offense/" + str(offense_id) + "/analysis/status"
+        url = QRADAR_API_BASE_URL + "/investigations/offense/" + str(offense_id) + "/analysis/status"
         ret_dict = {
             "status": "PROCESSING STAGE3"
         }
@@ -789,10 +809,21 @@ class TestQRadarOffenseAnalysis(object):
         offense_analysis.stage3_available = False
 
         # We shall query stage2 data
-        url = QRADAR_API_BASE_URL + "/offense/" + str(offense_id) + "/analysis/stage2/stix"
+        url = QRADAR_API_BASE_URL + "/investigations/offense/" + str(offense_id) + "/analysis/stage2/stix"
 
         stix_json = {
             "type": "bundle"
+        }
+
+        err_json = {
+            'status': '',
+            'error': 'ERROR'
+        }
+
+        err_404_json = {
+            'status': 'NO_OBSERVABLES',
+            'progress': 'LOCAL_MINING_COMPLETE',
+            'error': 'NO_ERROR'
         }
 
         mocked_session.get.return_value = _generate_response(stix_json, 200)
@@ -807,7 +838,7 @@ class TestQRadarOffenseAnalysis(object):
         offense_analysis.stage3_available = True
 
         # We shall query stage3 data
-        url = QRADAR_API_BASE_URL + "/offense/" + str(offense_id) + "/analysis/stage3/stix"
+        url = QRADAR_API_BASE_URL + "/investigations/offense/" + str(offense_id) + "/analysis/stage3/stix"
 
         ret = offense_analysis.get_search_result(offense_id)
         assert ret == stix_json
@@ -815,7 +846,7 @@ class TestQRadarOffenseAnalysis(object):
                                               verify=True)
 
         # status_doce = 404 handling
-        mocked_session.get.return_value = _generate_response(stix_json, 404)
+        mocked_session.get.return_value = _generate_response(err_json, 404)
 
         try:
             offense_analysis.get_search_result(offense_id)
@@ -823,8 +854,14 @@ class TestQRadarOffenseAnalysis(object):
         except SearchFailure as e:
             assert True
 
+        mocked_session.get.return_value = _generate_response(err_404_json, 404)
+
+
+        ret = offense_analysis.get_search_result(offense_id)
+        assert ret == { "status_code": 404}
+
         # status_doce = 403 handling
-        mocked_session.get.return_value = _generate_response(stix_json, 403)
+        mocked_session.get.return_value = _generate_response(err_json, 403)
 
         try:
             offense_analysis.get_search_result(offense_id)
@@ -833,7 +870,7 @@ class TestQRadarOffenseAnalysis(object):
             assert True
 
         # other status_doce  handling
-        mocked_session.get.return_value = _generate_response(stix_json, 400)
+        mocked_session.get.return_value = _generate_response(err_json, 400)
 
         try:
             offense_analysis.get_search_result(offense_id)

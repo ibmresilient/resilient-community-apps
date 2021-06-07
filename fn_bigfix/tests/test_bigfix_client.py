@@ -15,15 +15,24 @@ from  mock_artifacts import mocked_requests, get_asset_properties
 Suite of tests to test BigFix client class
 """
 
+def get_opts():
+    return dict({
+        "integrations": {
+            "https_proxy": "https:\/\/127.0.0.1:8080"
+        },
+        "fn_bigfix": get_config(),
+    })
+
 def get_config():
     return dict({
         "bigfix_url": "https://bigfix-url.com",
         "bigfix_port": "12345",
         "bigfix_user": "BigFixAdmin",
-        "bigfix_pass": "MyPassword",
+        "bigfix_pass": "TestPassword",
         "bigfix_polling_interval": 30,
         "bigfix_polling_timeout":  600,
-        "hunt_results_limit": 200
+        "bigfix_hunt_results_limit": 200,
+        "bigfix_endpoints_wait": 10
     })
 
 class TestGetBfComputerProperties:
@@ -36,7 +45,7 @@ class TestGetBfComputerProperties:
     ])
     def test_get_bf_computer_properties(self, mock_get, computer_id, expected_results):
 
-        bigfix_client = BigFixClient(get_config())
+        bigfix_client = BigFixClient(get_opts(), get_config())
         response = bigfix_client.get_bf_computer_properties(computer_id)
         assert expected_results in response
 
@@ -51,7 +60,7 @@ class TestGetBfClientQuery:
     def test_get_bfclientquery(self, mock_get, query_id, expected_results):
         """ Test create_attachment using mocked data.  """
 
-        bigfix_client = BigFixClient(get_config())
+        bigfix_client = BigFixClient(get_opts(), get_config())
         response = bigfix_client.get_bfclientquery(query_id)
         assert(expected_results == len(response))
 
@@ -66,7 +75,7 @@ class TestPostBfClientQuery:
     def test_post_bfclientquery(self, mock_get, query_id, expected_results):
         """ Test create_attachment using mocked data.  """
 
-        bigfix_client = BigFixClient(get_config())
+        bigfix_client = BigFixClient(get_opts(), get_config())
 
         response = bigfix_client.post_bfclientquery(query_id)
 
@@ -82,7 +91,7 @@ class TestPostBfActionQuery:
     def test_post_bf_action_query(self, mock_get, query, computer_id, action_name, expected_results):
         """ Test create_attachment using mocked data.  """
 
-        bigfix_client = BigFixClient(get_config())
+        bigfix_client = BigFixClient(get_opts(), get_config())
 
         status = bigfix_client._post_bf_action_query(query, computer_id, action_name)
         assert status == expected_results
@@ -99,7 +108,7 @@ class TestPostBfActionQuery:
         def test_process_bf_computer_query_response_to_attachment(self, response_text, title, expected_results):
             """ Test create_attachment using mocked data.  """
 
-            bigfix_client = BigFixClient(get_config())
+            bigfix_client = BigFixClient(get_opts(), get_config())
 
             response = bigfix_client._process_bf_computer_query_response_to_attachment(response_text, title)
 
@@ -118,7 +127,7 @@ class TestGetBfActionStatus:
     def test_get_bf_action_status(self, mock_get, action_id, expected_results):
         """ Test create_attachment using mocked data.  """
 
-        bigfix_client = BigFixClient(get_config())
+        bigfix_client = BigFixClient(get_opts(), get_config())
 
         status = bigfix_client.get_bf_action_status(action_id)
         assert status == expected_results

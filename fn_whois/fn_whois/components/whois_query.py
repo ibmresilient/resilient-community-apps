@@ -3,18 +3,10 @@
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
-import logging
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-
-import whois
 import datetime
-import socks
-import socket
-
-try:
-    import urllib.parse as urlparse
-except ImportError:
-    import urlparse
+import logging
+from fn_whois.lib.whois_common import get_config_option, whois_query
+from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 
 
 class FunctionPayload:
@@ -26,8 +18,6 @@ class FunctionPayload:
         self.domain_details = {}
         self.domain_details_keys = [],
         self.domain_details_values = []
-
-
 
         for input in inputs:
             self.inputs[input] = inputs[input]
@@ -53,42 +43,23 @@ class FunctionComponent(ResilientComponent):
     def _whois_query_function(self, event, *args, **kwargs):
         """Function: Used to send a query directly to a WHOIS server to gather information about an IP Or URL taken as an input."""
 
-        # Inner Function used to get config:
-
-        def get_config_option(option_name, optional=False):
-            """Given option_name, checks if it is in app.config. Raises ValueError if a mandatory option is missing"""
-            option = self.options.get(option_name)
-
-            if not option and optional is False:
-                err = "'{0}' is mandatory and is not set in app.config file. You must set this value to run this function".format(
-                    option_name)
-                raise ValueError(err)
-            else:
-                return option
         try:
             # Get the function parameters:
-            whois_query = kwargs.get("whois_query")  # text
+            whois_value = kwargs.get("whois_query")  # text
             log = logging.getLogger(__name__)
 
-            log.info("whois_query: %s", whois_query)
+            log.info("whois_query: %s", whois_value)
             # Initialise the payload
             payload = FunctionPayload({
-                "whois_query": whois_query
+                "whois_query": whois_value
             })
 
             # PUT YOUR FUNCTION IMPLEMENTATION CODE HERE
             yield StatusMessage("starting...")
-
-            # Check proxy settings
-            if get_config_option("whois_https_proxy", True):
-                yield StatusMessage("Config option found for proxies. Attempting to setup with proxy.")
-                uri = urlparse.urlparse(get_config_option("whois_https_proxy", True))
-                socks.set_default_proxy(socks.PROXY_TYPE_HTTP, uri.hostname, uri.port)
-                socket.socket = socks.socksocket
-
             domain = None
             try:
-                domain = whois.whois(whois_query)
+                domain = whois_query(whois_value, get_config_option(self.options, "whois_https_proxy", True))
+                log.debug(domain)
             except Exception as e:
                 yield StatusMessage("Encountered exception when sending query. Reason {0}".format(str(e)))
                 payload.success = False
@@ -100,11 +71,11 @@ class FunctionComponent(ResilientComponent):
 
                 yield StatusMessage("Gathered domain details, now normalising dates.")
                 try:
-                    for key,value in zip(domain_details.keys(), domain_details.values()):
+                    for key,value in domain_details.items():
                         # If value is a datetime, convert to a datestring
-                        if isinstance(value,datetime.datetime):
-
+                        if isinstance(value, datetime.datetime):
                             domain_details[key] = value.strftime('%m/%d/%Y')
+
                         # Possible also to encounter a list of datetimes for updated_date
                         if isinstance(value, list) \
                            and any(isinstance(x, datetime.datetime) for x in value):
@@ -114,11 +85,11 @@ class FunctionComponent(ResilientComponent):
                                                            if isinstance(date, datetime.datetime)))
 
                     # Ensure there aren't duplicate domain names
-                    if domain_details.get("domain_name", None):
+                    if isinstance(domain_details.get("domain_name", None), list):
                         domain_details["domain_name"] = list(set(element.lower() for element in domain_details["domain_name"]))
 
                     # Last check if name_servers are provided
-                    if isinstance(domain_details.get("name_servers",None),list):
+                    if isinstance(domain_details.get("name_servers", None), list):
                         # Servers are duplicated with /r char, remove it then convert it from set to list
                         domain_details["name_servers"] = list({
                             element.lower()
@@ -138,4 +109,3 @@ class FunctionComponent(ResilientComponent):
             log.info("Complete")
         except Exception:
             yield FunctionError()
-

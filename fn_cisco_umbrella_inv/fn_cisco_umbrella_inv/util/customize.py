@@ -3,7 +3,29 @@
 """Generate the Resilient customizations required for fn_cisco_umbrella_inv"""
 
 from __future__ import print_function
-from resilient_circuits.util import *
+try:
+    from resilient import ImportDefinition
+except ImportError:
+    # Support Apps running on resilient-circuits < v35.0.195
+    from resilient_circuits.util import ImportDefinition
+
+def codegen_reload_data():
+    """Parameters to codegen used to generate the fn_cisco_umbrella_inv package"""
+    reload_params = {"package": u"fn_cisco_umbrella_inv",
+                    "incident_fields": [],
+                    "action_fields": [],
+                    "function_params": [u"artifact_type", u"incident_id", u"umbinv_dns_type", u"umbinv_domain", u"umbinv_domains", u"umbinv_hash", u"umbinv_include_category", u"umbinv_ipaddr", u"umbinv_limit", u"umbinv_match", u"umbinv_offset", u"umbinv_regex", u"umbinv_resource", u"umbinv_sample_endpoint", u"umbinv_showlabels", u"umbinv_sortby", u"umbinv_start_epoch", u"umbinv_start_relative", u"umbinv_status_endpoint", u"umbinv_stop_epoch", u"umbinv_stop_relative"],
+                    "datatables": [u"umbinv_as_for_an_ip_or_asn", u"umbinv_categories_for_a_domain", u"umbinv_category_identifiers", u"umbinv_classifiers_for_a_domain", u"umbinv_dns_rr_history_domain", u"umbinv_dns_rr_history_ip", u"umbinv_domain_co_occurrences", u"umbinv_domain_security_info", u"umbinv_domain_volume", u"umbinv_domain_whois_info_domain", u"umbinv_latest_malicious_domains_for_an_ip", u"umbinv_pattern_search_start_epoch", u"umbinv_pattern_search_start_relative", u"umbinv_related_domains_for_a_domain", u"umbinv_thread_grid_sample_info_for_a_hash_basic", u"umbinv_thread_grid_samples_for_a_resource", u"umbinv_timeline_for_a_resource"],
+                    "message_destinations": [u"umbrella_investigate"],
+                    "functions": [u"umbrella_classifiers", u"umbrella_dns_rr_hist", u"umbrella_domain_co_occurrences", u"umbrella_domain_related_domains", u"umbrella_domain_security_info", u"umbrella_domain_status_and_category", u"umbrella_domain_volume", u"umbrella_domain_whois_info", u"umbrella_ip_as_info", u"umbrella_ip_latest_malicious_domains", u"umbrella_pattern_search", u"umbrella_threat_grid_sample", u"umbrella_threat_grid_samples", u"umbrella_timeline"],
+                    "phases": [],
+                    "automatic_tasks": [],
+                    "scripts": [],
+                    "workflows": [u"wf_umbrella_classifiers", u"wf_umbrella_dns_rr_hist_domain", u"wf_umbrella_dns_rr_hist_ip", u"wf_umbrella_domain_co_occurrences", u"wf_umbrella_domain_related_domains", u"wf_umbrella_domain_security_info", u"wf_umbrella_domain_status_and_category_cats", u"wf_umbrella_domain_status_and_category_dom", u"wf_umbrella_domain_volume", u"wf_umbrella_domain_whois_info", u"wf_umbrella_ip_as_info", u"wf_umbrella_ip_latest_malicious_domains", u"wf_umbrella_pattern_search_epoch", u"wf_umbrella_pattern_search_relative", u"wf_umbrella_threat_grid_sample", u"wf_umbrella_threat_grid_samples", u"wf_umbrella_timeline"],
+                    "actions": [u"Example: AS Information for an ip address or ASN", u"Example: Categories for a domain", u"Example: Classifiers for a domain", u"Example: Co-occurences for a domain", u"Example: DNS RR history for a domain", u"Example: DNS RR history for an ip address", u"Example: Domain volume", u"Example: Domain WHOIS information for a domain", u"Example: Get list of category identifiers", u"Example: Latest Malicious Domains for an ip address", u"Example: Pattern search start epoch", u"Example: Pattern search start relative", u"Example: Related Domains for a Domain", u"Example: Security information for a domain", u"Example: ThreadGrid sample information for a hash", u"Example: ThreadGrid samples for a resource", u"Example: Timeline for a resource"],
+                    "incident_artifact_types": []
+                    }
+    return reload_params
 
 
 def customization_data(client=None):

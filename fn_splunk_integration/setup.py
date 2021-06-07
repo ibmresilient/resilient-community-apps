@@ -5,14 +5,16 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_splunk_integration',
-    version='1.0.1',
+    version='1.0.3',
     license='MIT License',
     author='IBM Resilient',
     author_email='support@resilientsystems.com',
-    description="Resilient Circuits Components for 'fn_splunk_integration'",
-    long_description="Update SplunkES notable event; perform Splunk/SplunkES search; add new threat intel item; delete threat intel item",
+    description="Add, Search and Delete artifacts to Splunk ES",
+    long_description="Several functions to operate with Splunk ES intel collections, including updates to SplunkES notable events and add, search and delete operations to intel collections based on artifact type values.",
+    url="https://github.com/ibmresilient/resilient-community-apps",
     install_requires=[
         'resilient_circuits>=30.0.0',
+        'resilient_lib',
         'splunk-sdk'
     ],
     packages=find_packages(),
@@ -29,6 +31,7 @@ setup(
             "SplunkAddIntelItemFunctionComponent = fn_splunk_integration.components.splunk_add_intel_item:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_splunk_integration.util.config:config_section_data"],
-        "resilient.circuits.customize": ["customize = fn_splunk_integration.util.customize:customization_data"]
+        "resilient.circuits.customize": ["customize = fn_splunk_integration.util.customize:customization_data"],
+        "resilient.circuits.selftest": ["selftest = fn_splunk_integration.util.selftest:selftest_function"]
     }
 )

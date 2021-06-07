@@ -1,0 +1,4 @@
+include README.md
+include fn_teams/util/*
+include fn_teams/LICENSE
+include doc/*

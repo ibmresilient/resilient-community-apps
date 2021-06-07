@@ -1,3 +1,0 @@
-include README.md
-include fn_ioc_parser/util/*
-include fn_ioc_parser/LICENSE

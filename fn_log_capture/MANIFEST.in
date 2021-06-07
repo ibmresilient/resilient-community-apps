@@ -1,0 +1,4 @@
+include README.md
+include fn_log_capture/util/*
+include fn_log_capture/LICENSE
+include doc/*

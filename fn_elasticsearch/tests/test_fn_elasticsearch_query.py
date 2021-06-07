@@ -2,7 +2,6 @@
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 
 """Tests using pytest_resilient_circuits"""
-
 from __future__ import print_function
 import pytest
 from resilient_circuits.util import get_config_data, get_function_definition
@@ -36,6 +35,8 @@ class TestFnElasticsearchQuery:
         """ Test that the package provides customization_data that defines the function """
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
+
+    @pytest.mark.livetest
     @pytest.mark.parametrize("index, doc_type, es_query, expected_results", [
         ("", "", {"type": "text", "content": '{ "query": { "match_all": {} } }'}, {"value": "xyz"}),
         ("test_data", "", {"type": "text", "content": '{ "query": { "match_all": {} } }'}, {"value": "xyz"})
@@ -50,6 +51,7 @@ class TestFnElasticsearchQuery:
         results = call_fn_elasticsearch_query_function(circuits_app, function_params)
         assert(results)
 
+    @pytest.mark.livetest
     @pytest.mark.parametrize("index, doc_type, es_query, expected_results", [
         ("badIndex", "", {"type": "text", "content": '{ "query": { "match_all": {} } }'}, {"value": "xyz"}),
         ("BadIndex2", "badType", {"type": "text", "content": '{ "query": { "match_all": {} } }'}, {"value": "xyz"})

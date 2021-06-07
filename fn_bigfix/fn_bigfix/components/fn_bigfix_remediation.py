@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 
-# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 
 """ Resilient functions component to remediate a hit on an endpoint in a Bigfix environment """
 
@@ -43,12 +43,14 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
+        self.opts = opts
         self.options = opts.get("fn_bigfix", {})
         validate_opts(self)
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
+        self.opts = opts
         self.options = opts.get("fn_bigfix", {})
         validate_opts(self)
 
@@ -74,9 +76,9 @@ class FunctionComponent(ResilientComponent):
 
             validate_params(params, "fn_bigfix_remediation")
 
-            yield StatusMessage("Running BigFix remediation for Artifact '{0}' on endpoint '{1}' ..."
+            yield StatusMessage(u"Running BigFix remediation for Artifact '{0}' on endpoint '{1}' ..."
                                 .format(params["artifact_value"], params["asset_id"]))
-            bigfix_client = BigFixClient(self.options)
+            bigfix_client = BigFixClient(self.opts, self.options)
 
             yield StatusMessage("Running BigFix remediation ...")
 

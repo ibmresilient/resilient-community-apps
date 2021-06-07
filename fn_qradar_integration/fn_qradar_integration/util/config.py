@@ -13,7 +13,9 @@ def config_section_data():
 host=localhost
 username=admin
 qradarpassword=changeme
-#Note, if both qradarpassword and qadartoken are given, password will be used
+#Note, if both qradarpassword and qradartoken are given, password will be used
 qradartoken=changeme
+#verify_cert=[true|false]
+#search_timeout=
 '''
     return config_data

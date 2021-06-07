@@ -6,7 +6,7 @@ import logging
 import time
 from fn_mcafee_atd.util.helper import submit_url, check_job_status, get_atd_report, create_report_file, remove_dir, \
     check_status_code, check_timeout, get_incident_id, check_config, _get_atd_session_headers, atd_logout, \
-    check_task_status, get_task_id_list
+    get_task_id_list, check_task_status
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 
 log = logging.getLogger(__name__)
@@ -28,11 +28,6 @@ class FunctionComponent(ResilientComponent):
         self.vm_profile_list = config_opts.get("vm_profile_list")
         self.filePriority = config_opts.get("filePriority")
         self.trust_cert = config_opts.get("trust_cert")
-
-        # Verify can make connection to ATD with given config values
-        h = _get_atd_session_headers(self)
-        # Logout after making connection
-        atd_logout(self.atd_url, h, self.trust_cert)
 
     @handler("reload")
     def _reload(self, event, opts):
@@ -62,7 +57,7 @@ class FunctionComponent(ResilientComponent):
                 inputs["artifact_id"] = artifact_id
             if url_to_analyze is not None:
                 yield StatusMessage("URL value: {}".format(url_to_analyze))
-                log.info("artifact_value: $s", url_to_analyze)
+                log.info("artifact_value: %s", url_to_analyze)
                 inputs["artifact_value"] = url_to_analyze
             if atd_report_type is not None:
                 log.info("macfee_atd_report_type: %s", atd_report_type)
@@ -95,13 +90,13 @@ class FunctionComponent(ResilientComponent):
                     check_timeout(start, self.polling_interval, timeout_seconds)
 
                 task_id_list = get_task_id_list(self, atd_job_id)
-                for task_id in task_id_list:
-                    try:
-                        while check_task_status(self, task_id) is False:
-                            check_timeout(start, self.polling_interval, timeout_seconds)
-                    except ValueError:
-                        log.info("ATD analysis probably failed, please check ATD system.")
-                        raise FunctionError()
+                task_id = task_id_list[-1]
+                try:
+                    while check_task_status(self, task_id) is False:
+                        check_timeout(start, self.polling_interval, timeout_seconds)
+                except ValueError:
+                    log.info("ATD analysis probably failed, please check ATD system.")
+                    raise FunctionError()
 
             except ValueError:
                 yield StatusMessage("ATD analysis probably failed, please check ATD system.")

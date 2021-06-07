@@ -1,0 +1,8 @@
+---
+- name: "Ping Host to ensure availability"
+  gather_facts: false
+  hosts: "{{host_names}}"
+  become: true
+  tasks:
+    - name: Check whether system is reachable or not
+      action: ping

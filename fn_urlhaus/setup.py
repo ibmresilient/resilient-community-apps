@@ -1,20 +1,21 @@
 #!/usr/bin/env python
+# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 # -*- coding: utf-8 -*-
 
 from setuptools import setup, find_packages
 
 setup(
     name='fn_urlhaus',
-    version='1.0.0',
+    version='1.0.2',
     license='MIT',
     author='Resilient Labs',
     author_email='resil.labs@gmail.com',
-    url='https://github.com/ibmresilient/resilient-community-apps',
-    description="Resilient Circuits Components for 'fn_urlhaus'",
-    long_description="""Resilient Circuits Components for 'fn_urlhaus'. Supported is inqueries on ip addresses, hashes and domains
-              and submissions on malware distributing urls""",
+    url='https://ibm.biz/resilientcommunity',
+    description="Look up artifacts in URLhaus and submit malicious URLs",
+    long_description="""Look up supported artifacts in URLhaus to get more enrichment information and submit a malicious URL to the security community""",
     install_requires=[
-        'resilient_circuits>=30.0.0'
+        'resilient_circuits>=33.0.0',
+        'resilient-lib>=32.0.140'
     ],
     packages=find_packages(),
     include_package_data=True,
@@ -24,7 +25,8 @@ setup(
     ],
     entry_points={
         "resilient.circuits.components": [
-            "UrlHausFunctionComponent = fn_urlhaus.components.func_urlhaus:FunctionComponent"
+            "UrlHausFunctionComponent = fn_urlhaus.components.funct_fn_urlhaus:FunctionComponent",
+            "UrlHausSubmissionFunctionComponent = fn_urlhaus.components.funct_fn_urlhaus_submission:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_urlhaus.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_urlhaus.util.customize:customization_data"],

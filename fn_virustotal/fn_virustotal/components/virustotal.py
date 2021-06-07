@@ -11,6 +11,8 @@ from fn_virustotal.lib.resilient_common import validateFields, get_input_entity,
 from fn_virustotal.lib.errors import IntegrationError
 from virus_total_apis import PublicApi as VirusTotal
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from resilient_lib import RequestsCommon
+
 
 RC_NOT_FOUND = 0
 RC_READY     = 1
@@ -25,6 +27,7 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
+        self.opts = opts
         self.options = opts.get("fn_virustotal", {})
         self.resilient = opts.get("resilient", {})
         self._init_virustotal()
@@ -36,6 +39,7 @@ class FunctionComponent(ResilientComponent):
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
+        self.opts = opts
         self.options = opts.get("fn_virustotal", {})
         self.resilient = opts.get("resilient", {})
         self._init_virustotal()
@@ -53,7 +57,11 @@ class FunctionComponent(ResilientComponent):
         try:
             validateFields(('incident_id', 'vt_type'), kwargs)  # required
 
-            vt = VirusTotal(self.options['api_token'], self.options['proxies'])
+            # Init RequestsCommon with app.config options
+            rc = RequestsCommon(opts=self.opts, function_opts=self.options)
+
+            # Create a VirusTotal instance with the API Token and any proxies gathered by RequestsCommon
+            vt = VirusTotal(self.options['api_token'], rc.get_proxies())
 
             # Get the function parameters:
             incident_id = kwargs.get("incident_id")  # number
@@ -172,8 +180,8 @@ class FunctionComponent(ResilientComponent):
 
         elif code == RC_IN_QUEUE:
             curr_time = time.time()
-            if int(curr_time - start_time)/1000 >= int(self.options('max_polling_wait_sec')):
-                raise IntegrationError("exceeded max wait time: {}".format(self.options('max_polling_wait_sec')))
+            if int(curr_time - start_time)/1000 >= int(self.options.get('max_polling_wait_sec')):
+                raise IntegrationError("exceeded max wait time: {}".format(self.options.get('max_polling_wait_sec')))
 
             if callback:
                 time.sleep(int(self.options['polling_interval_sec']))

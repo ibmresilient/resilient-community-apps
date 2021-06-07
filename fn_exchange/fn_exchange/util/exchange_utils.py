@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 from exchangelib import Credentials, Account, DELEGATE, Configuration, EWSDateTime, EWSTimeZone, Message, HTMLBody, CalendarItem, IMPERSONATION
 from exchangelib.folders import FolderCollection
 from exchangelib.attachments import FileAttachment
@@ -8,9 +8,11 @@ from exchangelib.restriction import Q
 import time, base64
 import datetime
 import re
+from  requests.adapters import HTTPAdapter
 # Errors
 from exchangelib.errors import ErrorNonExistentMailbox, UnauthorizedError, ErrorFolderNotFound, ErrorImpersonateUserDenied
 from requests.exceptions import ConnectionError
+from resilient_lib import RequestsCommon
 
 # from exchangelib.folders import ArchiveInbox
 # from exchangelib.version import EXCHANGE_2016
@@ -49,22 +51,26 @@ class ImpersonationError(Exception):
         fail_msg = '{} does not have permission to impersonate {}'.format(impersonator, impersonation_target)
         super(ImpersonationError, self).__init__(fail_msg)
 
-
 class exchange_utils:
-    def __init__(self, opts):
+    def __init__(self, opts, integration_opts):
         self.verify_cert = str_to_bool(get_config_option(opts, 'verify_cert'))
         self.server = get_config_option(opts, 'server')
         self.username = get_config_option(opts, 'username')
         self.email = get_config_option(opts, 'email')
         self.password = get_config_option(opts, 'password')
         self.default_folder_path = get_config_option(opts, 'default_folder_path')
+        self.proxies = RequestsCommon(integration_opts, opts).get_proxies()
 
     def connect_to_account(self, primary_smtp_address, impersonation=False):
         """Connect to specified account and return it"""
 
+        proxy_base_adapter = HTTPAdapter
+
         # Don't check certificates
         if not self.verify_cert:
-            BaseProtocol.HTTP_ADAPTER_CLS = NoVerifyHTTPAdapter
+            proxy_base_adapter = NoVerifyHTTPAdapter
+
+        BaseProtocol.HTTP_ADAPTER_CLS = get_proxy_adapter(proxy_base_adapter, self.proxies)
 
         # Decide whether or not to use impersonation access
         access_type = IMPERSONATION if impersonation else DELEGATE
@@ -74,7 +80,7 @@ class exchange_utils:
             credentials = Credentials(username=self.username, password=self.password)
             config = Configuration(server=self.server, credentials=credentials)
             account = Account(primary_smtp_address=primary_smtp_address, config=config,
-                              autodiscover=self.verify_cert, access_type=access_type)
+                              autodiscover=False, access_type=access_type)
         except ErrorNonExistentMailbox:
             raise NoMailboxError(primary_smtp_address)
         except ConnectionError:
@@ -146,12 +152,12 @@ class exchange_utils:
         if start_date:
             # get YYYY/MM/DD from epoch time in milliseconds
             tz = EWSTimeZone.timezone('Etc/GMT')
-            start_date = EWSDateTime.from_datetime(datetime.datetime.fromtimestamp(start_date/1000, tz=tz))
+            start_date = EWSDateTime.fromtimestamp(start_date/1000, tz=tz)
             filtered_emails = filtered_emails.filter(datetime_received__gte=start_date)
         if end_date:
             # get YYYY/MM/DD from epoch time in milliseconds
             tz = EWSTimeZone.timezone('Etc/GMT')
-            end_date = EWSDateTime.from_datetime(datetime.datetime.fromtimestamp(end_date/1000, tz=tz))
+            end_date = EWSDateTime.fromtimestamp(end_date/1000, tz=tz)
             filtered_emails = filtered_emails.filter(datetime_received__lte=end_date)
 
         # Check attachments
@@ -198,8 +204,8 @@ class exchange_utils:
         meeting = CalendarItem(
             account=account,
             folder=account.calendar,
-            start=EWSDateTime.from_datetime(datetime.datetime.fromtimestamp(start_time/1000, tz=tz)),
-            end=EWSDateTime.from_datetime(datetime.datetime.fromtimestamp(end_time/1000, tz=tz)),
+            start=EWSDateTime.fromtimestamp(start_time/1000, tz=tz),
+            end=EWSDateTime.fromtimestamp(end_time/1000, tz=tz),
             subject=subject,
             body=body,
             required_attendees=required_attendees,
@@ -328,3 +334,18 @@ def get_config_option(options, option_name):
         raise ValueError(err.format(option_name))
     else:
         return option
+
+
+def get_proxy_adapter(proxy_base_adapter, proxies):
+    """ Factory function to set correct base adapter for proxy adapter.
+
+    :param proxy_base_adapter: Base http adapter.
+    :param proxies: Proxies dict.
+    :return: Proxy adapter class.
+    """
+    class ProxyAdapter(proxy_base_adapter):
+        def send(self, *args, **kwargs):
+            kwargs['proxies'] = proxies
+            return super(ProxyAdapter, self).send(*args, **kwargs)
+
+    return ProxyAdapter

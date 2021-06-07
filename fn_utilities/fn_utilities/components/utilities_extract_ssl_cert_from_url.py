@@ -21,13 +21,40 @@ except ImportError:
 import logging
 import ssl
 import json
-from resilient_circuits import ResilientComponent, function,\
+from resilient_circuits import ResilientComponent, handler, function,\
      FunctionResult, FunctionError
+from resilient_lib import RequestsCommon
 
+SECTION_HDR = "fn_utilities"
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'utilities_extract_ssl_cert_from_url"""
+    def __init__(self, opts):
+        """constructor provides access to the configuration options"""
+        super(FunctionComponent, self).__init__(opts)
+        self.opts = opts
+        self.options = opts.get(SECTION_HDR, {})
 
+    @handler("reload")
+    def _reload(self, event, opts):
+        """Configuration options have changed, save new values"""
+        self.opts = opts
+        self.options = opts.get(SECTION_HDR, {})
+
+    def init_proxies(self):
+        self.proxy_host = None
+        self.proxy_port = None
+
+        rc = RequestsCommon(self.opts, self.options)
+        proxies = rc.get_proxies()
+
+        if proxies:
+            proxy = proxies.get('https', proxies.get('http'))
+
+            if proxy:
+                proxy_url = urlparse.urlparse(proxy)
+                self.proxy_host = proxy_url.hostname
+                self.proxy_port = proxy_url.port
 
     @function("utilities_extract_ssl_cert_from_url")
     def _utilities_extract_ssl_cert_from_url_function(self, event, *args, **kwargs):
@@ -54,6 +81,7 @@ class FunctionComponent(ResilientComponent):
             if https_url is None:
                 raise ValueError("Error: https_url must be specified.")
 
+            self.init_proxies()
             url_dict = urlparse.urlparse(https_url)
             certificate = None  # Init x509 as None and try to gather the cert
             conn = None   # Init conn as None to prevent reference before assign
@@ -75,11 +103,13 @@ class FunctionComponent(ResilientComponent):
                     url_dict = urlparse.urlparse(
                         '//' + https_url)  # Note; this wont fix urls with bad schemes i.e htp:/
 
-                if url_dict.port is not None:
-                    conn = ssl.create_connection((url_dict.hostname, url_dict.port))
+                if self.proxy_host:
+                    log.debug("Using proxy: %s:%s", self.proxy_host, self.proxy_port)
+                    conn = ssl.create_connection((self.proxy_host, self.proxy_port))
                 else:
-                    conn = ssl.create_connection((url_dict.hostname, 443))
-                context = ssl.SSLContext(ssl.PROTOCOL_SSLv23)
+                    conn = ssl.create_connection((url_dict.hostname, url_dict.port if url_dict.port else 443))
+
+                context = ssl.SSLContext(ssl.PROTOCOL_TLS)
                 sock = context.wrap_socket(conn, server_hostname=url_dict.hostname)
                 certificate = ssl.DER_cert_to_PEM_cert(sock.getpeercert(True))
             except Exception:

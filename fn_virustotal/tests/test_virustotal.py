@@ -37,6 +37,7 @@ class TestVirustotal:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
+    @pytest.mark.livetest
     @pytest.mark.parametrize("incident_id, artifact_id, attachment_id, vt_type, vt_data, expected_results", [
         (123, 123, 123, "ip", "8.8.8.8", 'detected_urls'),
         (123, 123, 123, "hash", "85be64025453711c9c7396efe3965b79f0115fd6647c68d186edf88d6398c21f", "permalink")

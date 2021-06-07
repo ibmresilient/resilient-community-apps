@@ -14,6 +14,7 @@ def config_section_data():
 es_datastore_url = <ELASTICSEARCH_URL>
 es_datastore_scheme = <https OR http>
 es_auth_username = <ELASTICSEARCH_USERNAME>
+es_use_http = <True OR False>
 es_auth_password = <ELASTICSEARCH_PASSWORD>
 es_cafile = <CA_FILE_TO_BE_USED>
 """

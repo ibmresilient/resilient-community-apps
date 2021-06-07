@@ -11,8 +11,10 @@ def config_section_data():
     """
     config_data = u"""[fn_virustotal]
 api_token=
-proxies=
 polling_interval_sec=60
 max_polling_wait_sec=600
+# uncomment is proxies are needed to access VirusTotal
+#http_proxy=
+#https_proxy=
 """
     return config_data

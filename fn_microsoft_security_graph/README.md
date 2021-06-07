@@ -1,80 +1,119 @@
 # Resilient Functions Integration for Microsoft Graph Security API
-<br/>
-This is just a brief overview of the integration, please review the main doc to see the full length of installation instructions.
+
+## Release Notes
+<!--
+  Specify all changes in this release. Do not remove the release 
+  notes of a previous release
+-->
+### v1.1.0
+* Support for App Host
+* Proxy support
+* Readable formatting of incident notes containing Alert JSON data
+
+**NOTE** Existing users running fn_microsoft_security_graph functions on an integrations server, should save the [fn_microsoft_security_graph] section of their app.config file to another file and delete that section from the app.config file before installing the new version, as this section has changed.  After installation get the new configuration by running:
+```
+  $ resilient-circuits config -u -l fn-microsoft-security-graph
+  ```
+Edit the required configuration setting as described in the [Integration Server](#integration-server) section below.
+
+### v1.0.1
+* Python 2 to 3 improvements
+* UI version changes
+
+## Key Features
+<!--
+  List the Key Features of the Integration
+-->
+* Alert Polling Integration that creates new incidents in the Resilient platform from Microsoft Graph Security API alerts.
+* Search function to query alerts across the tenant's data using Microsoft Graph Security API.
+* Function to get details of specific Microsoft Security alerts.
+* Function to update details of specific Microsoft Security alerts.
+* Update Microsoft Security alerts as "Resolved" when the corresponding Resilient incident is closed.
+
+---
 ## Installation
 
-To install in "development mode":
+### App Format
 
-    pip install -e ./fn_microsoft_security_graph/
+The app .zip file is in a container format and requires a Resilient platform configured with an App Host. 
 
-After installation, the package is loaded by `resilient-circuits run`.
+The app tar.gz file is an extension format and requires a Resilient platform configured with an integration server.
 
+### App Host
+For a complete guide on how to configure App Host for Resilient and install apps, please reference the Resilient Apps [Knowledge Center](https://www.ibm.com/support/knowledgecenter/SSBRUQ).
 
-To uninstall:
+All the components for running this integration in a container already exist when using the App Host app.
 
-    pip uninstall fn_microsoft_security_graph
+To install,
 
+* Navigate to Administrative Settings and then the Apps tab.
+* Click the Install button and select the downloaded file: app-fn_microsoft_security_graph-x.x.x.zip.
+* Go to the Configuration tab and edit the app.config file, editing the tenant_id, client_id and client_secret and making any additional setting changes.
 
-To package for distribution:
+  | Config | Required | Example | Description |
+  | ------ | :------: | ------- | ----------- |
+  | **microsoft_graph_token_url** | Yes | `https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token` | *Microsoft Graph URL endpoint for acquring access token* |
+  | **microsoft_graph_url** | Yes | `https://graph.microsoft.com/v1.0` | *Microsoft Graph base URL * |
+  | **tenant_id** | Yes | `xxx` | *Microsoft Azure Tenant ID* |
+  | **client_id** | Yes | `xxx` | *Microsoft Azure Client ID (Application ID)* |
+  | **client_secret** | Yes | `xxx` | *Microsoft Azure Client Secret* |
+  | **msg_polling_intervals** | Yes | `0` | *Polling interval in seconds. Zero to turn off poller* |
+  | **incident_template** | No | `` | *Path to custom jinja template. If not set, use default template* |
+  | **alert_query** | No | `filter=assignedTo eq 'analyst@m365x594651.onmicrosoft.com' and severity eq 'high'` | *String query to apply to the alert polling component* |
+  | **alert_time_range_sec** | No | `3600` | *Times in seconds to set the start dateTime values for the createdDateTime field when filtering alerts* |
 
-    python ./fn_microsoft_security_graph/setup.py sdist
+### Integration Server
 
-The resulting .tar.gz file can be installed using:
+* Download the `app-fn_microsoft_security_graph-x.x.x.zip` file.
+* Copy the `.zip` to your Integration Server and SSH into it.
+* **Unzip** the package:
+  ```
+  $ unzip app-fn_microsoft_security_graph-x.x.x.zip
+  ```
+* **Install** the package:
+  ```
+  $ pip install fn_microsoft_security_graph-x.x.x.tar.gz
+  ```
+* Import the **configurations** into your app.config file:
+  ```
+  $ resilient-circuits config -u -l fn-microsoft-security-graph
+  ```
+* Import the fn_microsoft_security_graph **customizations** into the Resilient platform:
+  ```
+  $ resilient-circuits customize -y -l fn-microsoft-security-graph
+  ```
+* Open the config file, scroll to the bottom and edit your fn_microsoft_security_graph configurations:
+  ```
+  $ nano ~/.resilient/app.config
+  ```
+    | Config | Required | Example | Description |
+  | ------ | :------: | ------- | ----------- |
+  | **microsoft_graph_token_url** | Yes | `https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token` | *Microsoft Graph URL endpoint for acquring access token* |
+  | **microsoft_graph_url** | Yes | `https://graph.microsoft.com/v1.0` | *Microsoft Graph base URL * |
+  | **tenant_id** | Yes | `xxx` | *Microsoft Azure Tenant ID* |
+  | **client_id** | Yes | `xxx` | *Microsoft Azure Client ID (Application ID)* |
+  | **client_secret** | Yes | `xxx` | *Microsoft Azure Client Secret* |
+  | **msg_polling_intervals** | Yes | `0` | *Polling interval in seconds. Zero to turn off poller* |
+  | **incident_template** | No | `` | *Path to custom jinja template. If not set, use default template* |
+  | **alert_query** | No | `filter=assignedTo eq 'analyst@m365x594651.onmicrosoft.com' and severity eq 'high'` | *String query to apply to the alert polling component* |
+  | **alert_time_range_sec** | No | `3600` | *Times in seconds to set the start dateTime values for the createdDateTime field when filtering alerts* |
 
-    pip install <filename>.tar.gz
+* **Save** and **Close** the app.config file.
+* [Optional]: Run selftest to test the Integration you configured:
+  ```
+  $ resilient-circuits selftest -l fn-microsoft-security-graph
+  ```
+* **Run** resilient-circuits or restart the Service on Windows/Linux:
+  ```
+  $ resilient-circuits run
+  ```
+---
 
-<br/>
-## Configuration
-
-1. Import the package's customization data into the Resilient platform using the command:
-
-		resilient-circuits customize
-
-2. Update the `app.config` file by first running:
-
-		resilient-circuits configure -c, to start a new configuration file or
-		resilient-circuits configure -u, to update an existing configuration
-
-3.	Edit the `app.config` file:
-
-		[fn_microsoft_security_graph]
-		# Graph URL with version number
-		microsoft_graph_url=https://graph.microsoft.com/v1.0/
-		tenant_id=<Tenant directory id>
-		client_id=<App client id>
-		client_secret=<App client secret>
-		
-		## Polling options
-		# How often polling should happen. Value is in seconds. To disable polling, set this to zero.
-		msg_polling_interval=0
-		#incident_template=<location_of_template_file>  # If not set uses default template.
-		
-		# String query to apply to the alert polling component. This will be added to the end of the url
-		# when searching for alerts. The example shown below would make the whole search url equal to
-		# https://graph.microsoft.com/v1.0/security/alerts/?$filter=assignedTo eq 'analyst@m365x594651.onmicrosoft.com' and severity eq 'high'
-		# This query string is full OData so alert query can start with 'top=', 'skip=', 'filter=', etc. Do not add a '$' at the start
-        # of the value as that character is reserved for environment variables
-		#alert_query=filter=assignedTo eq 'analyst@m365x594651.onmicrosoft.com' and severity eq 'high'
-		
-		# Alert Time range sec - Optional value in seconds to set the start dateTime values for the createdDateTime field when filtering alerts.
-		# This is calculated by adding to the filter 'createdDateTime ge (current_dateTime - alert_time_range_sec)
-		#alert_time_range_sec=3600
-
-## Customization
-For each workflow, verify the inputs and the post-process scripts to ensure that they are accurate and appropriate.
-
-## Run Functions
-1. Start Resilient Circuits with:
-
-		resilient-circuits run
-
-2. Trigger one of the rules that will return information on alerts from the Microsoft Graph.
-
-## Run alert poller:
-Based on configurations under the `## Polling options` section in the `app.config`, you can customize the polling interval, which alerts to find, and other settings.
-
-1. Start Resilient Circuits with:
-
-		resilient-circuits run
-
-2. When an alert that does not have a corresponding open incident in the Resilient platform and would be returned by the search query, is generated in the Microsoft Security Graph, a new incident is created.
+#### Uninstall
+* SSH into your Integration Server.
+* **Uninstall** the package:
+  ```
+  $ pip uninstall fn-microsoft-security-graph
+  ```
+* Open the config file, scroll to the [fn_microsoft_security_graph] section and remove the section or prefix `#` to comment out the section.
+* **Save** and **Close** the app.config file.

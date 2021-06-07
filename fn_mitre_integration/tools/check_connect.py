@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
+# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 
 """
     This is sample code from MITRE:
@@ -11,9 +12,10 @@
 
 from stix2 import TAXIICollectionSource
 from taxii2client import Server
+from proxies import get_proxies
 
 # Instantiate server and get API Root
-server = Server("https://cti-taxii.mitre.org/taxii/")
+server = Server("https://cti-taxii.mitre.org/taxii/", proxies=get_proxies())
 api_root = server.api_roots[0]
 
 # Print name and ID of all ATT&CK technology-domains available as collections

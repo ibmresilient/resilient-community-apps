@@ -1,0 +1,8 @@
+include README.md
+include fn_ansible_tower/util/*
+include fn_ansible_tower/lib/*
+include fn_ansible_tower/LICENSE
+include doc/*.md
+include doc/*.docx
+include doc/*.pdf
+include doc/screenshots/*

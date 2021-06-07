@@ -7,8 +7,9 @@
 import logging
 import hashlib
 import json
+import sys
 from resilient_circuits import ResilientComponent, function, StatusMessage, FunctionResult, FunctionError
-
+from resilient_lib import get_file_attachment, get_file_attachment_metadata
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'attachment_hash"""
@@ -33,16 +34,10 @@ class FunctionComponent(ResilientComponent):
                 raise FunctionError("Error: attachment_id must be specified.")
 
             yield StatusMessage("Reading attachment...")
-            if task_id:
-                metadata_uri = "/tasks/{}/attachments/{}".format(task_id, attachment_id)
-                data_uri = "/tasks/{}/attachments/{}/contents".format(task_id, attachment_id)
-            else:
-                metadata_uri = "/incidents/{}/attachments/{}".format(incident_id, attachment_id)
-                data_uri = "/incidents/{}/attachments/{}/contents".format(incident_id, attachment_id)
 
             client = self.rest_client()
-            metadata = client.get(metadata_uri)
-            data = client.get_content(data_uri)
+            data = get_file_attachment(client, incident_id, task_id=task_id, attachment_id=attachment_id)
+            metadata = get_file_attachment_metadata(client, incident_id, task_id=task_id, attachment_id=attachment_id)
 
             results = {
                 "filename": metadata["name"],
@@ -53,10 +48,22 @@ class FunctionComponent(ResilientComponent):
 
             # Hashlib provides a list of all "algorithms_available", but there's duplication, so
             # use the standard list: ('md5', 'sha1', 'sha224', 'sha256', 'sha384', 'sha512')
-            for algo in hashlib.algorithms:
+            # Hashlib in 3.2 and above does not supports hashlib.algorithms_guaranteed this contains a longer
+            # list but will be used instead of hashlib.algorithms
+            if sys.version_info.major >= 3:
+                algorithms = hashlib.algorithms_guaranteed
+            else:
+                algorithms = hashlib.algorithms
+
+            for algo in algorithms:
                 impl = hashlib.new(algo)
                 impl.update(data)
-                results[algo] = impl.hexdigest()
+                # shake algorithms require a 'length' parameter
+                if algo.startswith("shake_"):
+                    length_list = algo.split('_')
+                    results[algo] = impl.hexdigest(int(length_list[-1]))
+                else:
+                    results[algo] = impl.hexdigest()
 
             log.info(u"{} sha1={}".format(metadata["name"], results["sha1"]))
 

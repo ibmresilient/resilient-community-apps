@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_phish_ai',
-    version='1.0.0',
+    version='1.1.0',
     license='MIT',
     author='Resilient Labs',
     author_email='resil.labs@gmail.com',
@@ -13,6 +13,7 @@ setup(
     long_description="Resilient Circuits Components for 'fn_phish_ai'",
     install_requires=[
         'resilient_circuits>=30.0.0',
+        'resilient-lib',
         'phish-ai-api'
     ],
     packages=find_packages(),

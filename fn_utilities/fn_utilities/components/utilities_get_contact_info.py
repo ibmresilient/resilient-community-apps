@@ -101,18 +101,21 @@ class FunctionComponent(ResilientComponent):
         result = []
 
         for member in member_list:
-            result.append(self.get_contact_info_for_uid(res_client, member))
+            contact_info = self.get_contact_info_for_uid(res_client, member)
+            if not contact_info:
+                contact_info = self.get_group_info_for_uid(res_client, member)
+
+            if contact_info:
+                result.append(contact_info)
 
         return result
 
-
     def get_contact_info_for_uid(self, res_client, uid):
         """
-        return contact information for a user
-        :param uid:
-        :return: JSON contact information
+            return contact information for a user
+            :param uid:
+            :return: JSON contact information
         """
-        result = {}
         try:
             user_data = res_client.get('/users/{}'.format(uid))
             result = {  "fname": user_data.get("fname"),
@@ -123,6 +126,28 @@ class FunctionComponent(ResilientComponent):
                         "phone": user_data.get("phone"),
                         "cell": user_data.get("cell")
                         }
+        except Exception:
+            return None
+
+        return result
+
+    def get_group_info_for_uid(self, res_client, uid):
+        """
+        return information for a group
+        :param uid:
+        :return: JSON group information
+        """
+        try:
+            user_data = res_client.get('/groups/{}'.format(uid))
+            result = {
+                "fname": None,
+                "lname": None,
+                "title": None,
+                "display_name": user_data.get("name"),
+                "email": None,
+                "phone": None,
+                "cell": None
+            }
         except Exception:
             return None
 

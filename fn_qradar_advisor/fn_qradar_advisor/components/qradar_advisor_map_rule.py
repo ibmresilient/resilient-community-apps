@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 
 """Function implementation"""
 
@@ -21,11 +21,13 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
+        self.opts = opts
         self.options = opts.get("fn_qradar_advisor", {})
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
+        self.opts = opts
         self.options = opts.get("fn_qradar_advisor", {})
 
     @function("qradar_advisor_map_rule")
@@ -47,8 +49,8 @@ class FunctionComponent(ResilientComponent):
             client = QRadarCafmClient(qradar_host=self.options["qradar_host"],
                                       cafm_token=self.options["qradar_cafm_token"],
                                       cafm_app_id=self.options["qradar_cafm_app_id"],
-                                      cafile=qradar_verify_cert,
-                                      log=log)
+                                      cafile=qradar_verify_cert, log=log,
+                                      opts=self.opts, function_opts=self.options)
 
             tactics = client.find_tactic_mapping(qradar_rule_name)
 

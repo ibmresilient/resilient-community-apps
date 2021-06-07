@@ -1,4 +1,8 @@
 include README.md
+include Dockerfile
+include entrypoint.sh
 include fn_service_now/util/*
 include fn_service_now/LICENSE
-recursive-include docs *
+include appx_docs/*.pdf
+
+exclude *.bak

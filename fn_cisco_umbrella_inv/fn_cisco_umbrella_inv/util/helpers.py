@@ -11,6 +11,7 @@ import datetime
 import re
 import os
 import json
+from resilient_lib import RequestsCommon
 
 try:
     from urllib.parse import urlparse, quote_plus
@@ -28,6 +29,7 @@ TIMEDELTA_PATTERN =  re.compile(r"^-*(\d+)(seconds|minutes|hours|days|weeks)$")
 MD5_PATTERN = re.compile(r"^[a-fA-F0-9]{32}$")
 SHA1_PATTERN = re.compile(r"\b[a-fA-F0-9]{40}$")
 SHA256_PATTERN = re.compile(r"\b[a-fA-F0-9]{64}$")
+MANDATORY_CONFIG_PARAMS = ["api_token", "base_url", "results_limit"]
 
 def validate_opts(func):
     """"Check options set correctly.
@@ -35,18 +37,14 @@ def validate_opts(func):
     :param func: Resilient Function instance reference
 
      """
-    if not "api_token" in func.options:
-        raise Exception("Mandatory config setting 'api_token' not set.")
-    if not UUID_PATTERN.match(func.options["api_token"]):
-        raise ValueError("Invalid format for config setting 'api_token'.")
-    if not "base_url" in func.options:
-        raise Exception("Mandatory config setting 'base_url' not set.")
-    if not validate_url(func.options["base_url"]):
-        raise ValueError("Invalid format for config setting 'base_url'.")
-    if not "results_limit" in func.options:
-        raise Exception("Mandatory config setting 'results_limit' not set.")
-    if not validate_is_int(func.options["results_limit"]):
-        raise ValueError("Invalid value for config setting 'results_limit'.")
+    for param in MANDATORY_CONFIG_PARAMS:
+        param_value = func.options.get(param, None)
+
+        if param_value is None:
+            raise Exception("Mandatory config setting '{}' not set.".format(param))
+        if not param_value:
+            raise ValueError("Invalid value for config setting '{}'.".format(param))
+
 
 def validate_url(url):
     """"Validate url string in a valid format and can be parsed ok.
@@ -301,3 +299,7 @@ def create_attachment(func_ref, func_name, artifact_value, params, rtn, query_ex
         raise ex
 
     return att_report
+
+def get_proxies(opts, options):
+    rc = RequestsCommon(opts, options)
+    return rc.get_proxies()

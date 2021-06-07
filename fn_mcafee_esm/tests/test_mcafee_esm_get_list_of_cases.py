@@ -4,7 +4,7 @@
 
 from __future__ import print_function
 import pytest
-from mock import patch
+from mock import patch, MagicMock
 from resilient_circuits.util import get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 from test_helper import get_test_config, generate_response, string_test_config
@@ -37,8 +37,8 @@ def call_mcafee_esm_get_list_of_cases_function(circuits, function_params, timeou
 class TestMcafeeEsmGetListOfCases:
     """ Tests for the mcafee_esm_get_list_of_cases function"""
 
-    @patch("requests.post")
-    def test_case_get_list_of_cases(self, mocked_requests_post):
+    @patch("resilient_lib.RequestsCommon.execute_call_v2")
+    def test_case_get_list_of_cases(self, mocked_requests_common):
         ops = check_config(t_config_data)
         content1 = {
             "status": "success"
@@ -60,10 +60,11 @@ class TestMcafeeEsmGetListOfCases:
                 "value": 1
             }
         }]
-        mocked_requests_post.side_effect = [generate_response(content1, 200),
-                                            generate_response(content2, 200)]
+        mocked_requests_common.execute_call_v2 = MagicMock()
+        mocked_requests_common.execute_call_v2.side_effect = [generate_response(content1, 200),
+                                                              generate_response(content2, 200)]
 
-        actual_response = case_get_case_list(ops)
+        actual_response = case_get_case_list(mocked_requests_common, ops)
         assert content2 == actual_response
 
 
@@ -77,8 +78,8 @@ class TestMcafeeEsmGetListOfCases:
     @pytest.mark.parametrize("expected_results", [
         ({'case_list': [{'id': 2, 'openTime': '08/09/2018 21:07:29', 'statusId': {'value': 1}, 'severity': 2, 'summary': 'test3'}, {'id': 3, 'openTime': '08/10/2018 19:18:43', 'statusId': {'value': 1}, 'severity': 1, 'summary': 'test3'}]})
     ])
-    @patch("requests.post")
-    def test_success(self, mocked_requests_post, circuits_app, expected_results):
+    @patch("resilient_lib.RequestsCommon.execute_call_v2")
+    def test_success(self, mocked_execute_call_v2, circuits_app, expected_results):
         """ Test calling with sample values for the parameters """
         function_params = {
         }
@@ -102,8 +103,9 @@ class TestMcafeeEsmGetListOfCases:
                 "value": 1
             }
         }]
-        mocked_requests_post.side_effect = [generate_response(content1, 200),
-                                            generate_response(content2, 200)]
+
+        mocked_execute_call_v2.side_effect = [generate_response(content1, 200),
+                                              generate_response(content2, 200)]
 
         results = call_mcafee_esm_get_list_of_cases_function(circuits_app, function_params)
         results.pop("metrics")

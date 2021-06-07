@@ -38,9 +38,10 @@ class TestGeocoding:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
+    @pytest.mark.livetest
     @pytest.mark.parametrize("geocoding_source, geocoding_data, expected_results", [
-        ('latlng', "42.3656119,-71.0805841", "75 Binney St, Cambridge, MA 02142, USA"),
-        ('address', "75 Binney St, Cambridge, MA 02142, USA", "42.3656119,-71.0805841")
+        ('latlng', "42.365703,-71.080571", "75 Binney St, Cambridge, MA 02142, USA"),
+        ('address', "75 Binney St, Cambridge, MA 02142, USA", "42.365703,-71.080571")
     ])
     def test_success(self, circuits_app, geocoding_source, geocoding_data, expected_results):
         """ Test calling with sample values for the parameters """

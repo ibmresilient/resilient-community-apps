@@ -4,7 +4,8 @@
 
 from __future__ import print_function
 import pytest
-from mock import patch
+from mock import patch, MagicMock
+from resilient_lib import RequestsCommon
 from resilient_circuits.util import get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 from test_helper import get_test_config, get_default_test_config, generate_response, string_test_config
@@ -167,13 +168,14 @@ class TestMcafeeEsmEditCase:
         except ValueError as e:
             assert e.args[0] == "verify_cert is still the default value, this must be changed to run this function"
 
-    @patch("requests.post")
-    def test_get_authenticated_headers(self, mocked_requests_post):
+    @patch("resilient_lib.RequestsCommon")
+    def test_get_authenticated_headers(self, mocked_requests_common):
         ops = check_config(t_config_data)
         content = {
             "status": "success"
         }
-        mocked_requests_post.return_value = generate_response(content, 200)
+        mocked_requests_common.execute_call_v2 = MagicMock()
+        mocked_requests_common.execute_call_v2.return_value = generate_response(content, 200)
 
         expected_headers = {
             "content-type": "application/json",
@@ -181,13 +183,13 @@ class TestMcafeeEsmEditCase:
             "Cookie": "JWTToken=mock_cookie_token",
             "X-Xsrf-Token": "mock_header_token"
         }
-        actual_headers = get_authenticated_headers(ops.get("esm_url"), ops.get("esm_username"),
+        actual_headers = get_authenticated_headers(mocked_requests_common, ops.get("esm_url"), ops.get("esm_username"),
                                                    ops.get("esm_password"), ops.get("verify_cert"))
 
         assert expected_headers == actual_headers
 
-    @patch("requests.post")
-    def test_case_edit_case_details(self, mocked_requests_post):
+    @patch("resilient_lib.RequestsCommon")
+    def test_case_edit_case_details(self, mocked_requests_common):
         ops = check_config(t_config_data)
         content1 = {
             "status": "success"
@@ -222,16 +224,16 @@ class TestMcafeeEsmEditCase:
                 "value": 1
             }
         }
-        mocked_requests_post.side_effect = [generate_response(content1, 200),
-                                            generate_response(content2, 200),
-                                            generate_response({}, 200)]
-
+        mocked_requests_common.execute_call_v2 = MagicMock()
+        mocked_requests_common.execute_call_v2.side_effect = [generate_response(content1, 200),
+                                                              generate_response(content2, 200),
+                                                              generate_response({}, 200)]
         payload = {"caseDetail": {
             "summary": "This is a new summary",
             "severity": "2"
         }}
 
-        case_edit_case_details(ops, payload, 1)
+        case_edit_case_details(mocked_requests_common, ops, payload, 1)
         # Doesn't return anything, if it made it here it passed successfully
         assert True
 
@@ -245,8 +247,8 @@ class TestMcafeeEsmEditCase:
         [
             ({"type": "text", "content": '{"caseDetail": {"summary": "This is a new summary","severity": "2"}}'}, 1, {"inputs": {"mcafee_esm_case_id": 1, "mcafee_esm_edit_case_json": '{"caseDetail": {"summary": "This is a new summary","severity": "2"}}'}})
         ])
-    @patch("requests.post")
-    def test_success(self, mocked_requests_post, circuits_app, mcafee_esm_edit_case_json, mcafee_esm_case_id,
+    @patch("resilient_lib.RequestsCommon.execute_call_v2")
+    def test_success(self, mocked_execute_call_v2, circuits_app, mcafee_esm_edit_case_json, mcafee_esm_case_id,
                      expected_results):
         """ Test calling with sample values for the parameters """
         function_params = {
@@ -287,10 +289,9 @@ class TestMcafeeEsmEditCase:
                 "value": 1
             }
         }
-        mocked_requests_post.side_effect = [generate_response(content1, 200),
-                                            generate_response(content2, 200),
-                                            generate_response({}, 200)]
-
+        mocked_execute_call_v2.side_effect =  [generate_response(content1, 200),
+                                               generate_response(content2, 200),
+                                               generate_response({}, 200)]
         results = call_mcafee_esm_edit_case_function(circuits_app, function_params)
         results.pop("metrics")
         assert expected_results == results

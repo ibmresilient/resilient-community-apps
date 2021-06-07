@@ -6,22 +6,14 @@ from __future__ import print_function
 import pytest
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
-from helper import TestingHelper
+from helper import TestingHelper, get_mock_config_data
 from mock import patch
 
 PACKAGE_NAME = "fn_ldap_utilities"
 FUNCTION_NAME = "ldap_utilities_toggle_access"
 
 #Set mock config_data
-config_data="""[fn_ldap_utilities]
-ldap_server=xxx.xxx.xxx.xxx
-ldap_port=389
-ldap_use_ssl=False
-ldap_auth=SIMPLE
-ldap_user_dn=CN=Username,CN=Users,DC=example,DC=com
-ldap_password=password
-ldap_is_active_directory=True
-ldap_connect_timeout=10"""
+config_data = get_mock_config_data()
 
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"

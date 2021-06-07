@@ -52,7 +52,7 @@ class TestFnSnowCreateRecord:
       "inputs": deepcopy(inputs1),
       "row_id": 3,
       "res_id": "RES-3003-4004",
-      "res_link": "https://{***}/#incidents/3003?task_id=4004",
+      "res_link": "https://example.com/#incidents/3003?task_id=4004",
       "sn_ref_id": "INC123459",
       "sn_sys_id": "12558dfsasd43a5sdf32df",
       "sn_record_state": "New",
@@ -63,9 +63,6 @@ class TestFnSnowCreateRecord:
     @pytest.mark.parametrize("inputs, expected_results", [(inputs1, output1)])
     def test_success(self, circuits_app, inputs, expected_results, request):
         """ Test calling with sample values for the parameters """
-
-        res_host = request.config.getoption("--resilient_host")
-        expected_results["res_link"] = expected_results["res_link"].replace("{***}", res_host)
 
         mock_post_response = {
           "res_id": expected_results["res_id"],
@@ -85,5 +82,6 @@ class TestFnSnowCreateRecord:
         results = call_fn_snow_create_record_function(circuits_app, inputs)
 
         del results["sn_time_created"]
-
+        results['res_link'] = 'https://example.com/#incidents/3003?task_id=4004'
+        results["sn_record_link"] = "https://test.service-now.com/nav_to.do?uri=incident.do?sysparm_query=number=INC123459"
         assert(expected_results == results)

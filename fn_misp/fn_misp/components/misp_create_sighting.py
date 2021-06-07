@@ -3,10 +3,16 @@
 """Function implementation"""
 
 import logging
-from pymisp import PyMISP
-import time
-from resilient_circuits import ResilientComponent, function, StatusMessage, FunctionResult, FunctionError
+import sys
+if sys.version_info.major < 3:
+    from fn_misp.lib import misp_2_helper as misp_helper
+else:
+    from fn_misp.lib import misp_3_helper as misp_helper
+from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from fn_misp.lib import common
 
+
+PACKAGE= "fn_misp"
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function(s)"""
@@ -14,26 +20,21 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get("fn_misp", {})
+        self.opts = opts
+        self.options = opts.get(PACKAGE, {})
+
+    @handler("reload")
+    def _reload(self, event, opts):
+        """Configuration options have changed, save new values"""
+        self.opts = opts
+        self.options = opts.get(PACKAGE, {})
 
     @function("misp_create_sighting")
     def _misp_create_sighting_function(self, event, *args, **kwargs):
         """Function: """
         try:
 
-            def get_config_option(option_name, optional=False):
-                """Given option_name, checks if it is in app.config. Raises ValueError if a mandatory option is missing"""
-                option = self.options.get(option_name)
-
-                if option is None and optional is False:
-                    err = "'{0}' is mandatory and is not set in ~/.resilient/app.config file. You must set this value to run this function".format(option_name)
-                    raise ValueError(err)
-                else:
-                    return option
-
-            API_KEY = get_config_option("misp_key")
-            URL = get_config_option("misp_url")
-            VERIFY_CERT = True if get_config_option("verify_cert").lower() == "true" else False
+            API_KEY, URL, VERIFY_CERT = common.validate(self.options)
 
             # Get the function parameters:
             misp_sighting = kwargs.get("misp_sighting")  # text
@@ -41,17 +42,24 @@ class FunctionComponent(ResilientComponent):
             log = logging.getLogger(__name__)
             log.info("misp_sighting: %s", misp_sighting)
 
-            misp_client = PyMISP(URL, API_KEY, VERIFY_CERT, 'json')
+            yield StatusMessage("Setting up connection to MISP")
 
-            sighting_json = {
-                            "values":["{}".format(misp_sighting)], 
-                            "timestamp": int(time.time())
-                            }
+            proxies = common.get_proxies(self.opts, self.options)
 
-            result = misp_client.set_sightings(sighting_json)
+            misp_client = misp_helper.get_misp_client(URL, API_KEY, VERIFY_CERT, proxies=proxies)
 
-            results = { "success": True,
-                        "content": result }
+            yield StatusMessage(u"Marking {} as sighted".format(misp_sighting))
+
+            sighting = misp_helper.create_misp_sighting(misp_client, misp_sighting)
+
+            log.debug(sighting)
+
+            yield StatusMessage("Sighting has been created")
+
+            results = { 
+                        "success": True,
+                        "content": sighting
+                    }
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 
 import requests
-from qradar_http_info import HttpInfo
-from search_wait_command import SearchWaitCommand
-from search_wait_command import SearchJobFailure
-from search_wait_command import SearchFailure
+from .qradar_http_info import HttpInfo
+from .search_wait_command import SearchWaitCommand
+from .search_wait_command import SearchJobFailure
+from .search_wait_command import SearchFailure
 import json
 import time
 
@@ -42,9 +42,11 @@ class XFECredentialError(Exception):
 
 
 class QRadarAdvisorClient(object):
+    INSIGHTS_NO_OBSERVABLES = "NO_OBSERVABLES"
+    INSIGHTS_NO_ERROR = "NO_ERROR"
 
-    def __init__(self, qradar_host, advisor_app_id, qradar_token, cafile, log):
-        self.http_info = HttpInfo(qradar_host, advisor_app_id, qradar_token, cafile, log)
+    def __init__(self, qradar_host, advisor_app_id, qradar_token, cafile, log, opts=None, function_opts=None):
+        self.http_info = HttpInfo(qradar_host, advisor_app_id, qradar_token, cafile, log, opts, function_opts)
         self.full_search_stage = "stage3"
         self.full_search_timeout = 1200
         self.full_search_period = 5
@@ -74,6 +76,25 @@ class QRadarAdvisorClient(object):
         """
         self.full_search_period = period
 
+    def test_connectivity(self):
+        """Connectivity Test which is used by resilient_circuits selftest.
+
+        Calls http 'get' request the "investigations" endpoint.
+
+        :return: Response
+        """
+        if not self.http_info.xsrf_token:
+            self.get_csrf_token()
+
+        url = self.http_info.get_investigations_url()
+
+        params = {"page": 0, "count": 5}
+
+        session = self.http_info.get_session()
+        r = response = session.get(url=url, params=params,
+                                    verify=self.http_info.get_cafile())
+        return r
+
     def get_csrf_token(self):
         """
         The call to the "about" endpoint serves as the way to fetch a CSRF token
@@ -98,7 +119,7 @@ class QRadarAdvisorClient(object):
         except Exception as e:
             self.log.error("Get token failed with exception:")
             self.log.error(str(e))
-            raise CsrfTokenError(url, e.message)
+            raise CsrfTokenError(url, str(e))
 
     def full_search(self, search_value):
         """
@@ -161,6 +182,17 @@ class QRadarAdvisorClient(object):
                                     data=data,
                                     verify=self.http_info.get_cafile())
             if response.status_code != 200:
+                if response.status_code == 422:
+                    # Throw 422 for unsupported indicator value e.g private IP addresses
+                    # or where certain qradar ignore tuning parameters are set
+                    # e.g. qadvisor.ip4.ignore or qadvisor.ip6.ignore.
+                    return {
+                        "search": {
+                            "search_value": search_value,
+                            "status_code": 422
+                        }
+                    }
+
                 error_msg = "Quick search using {} returns {}".format(url, str(response))
                 self.log.error(error_msg)
                 raise QuickSearchError(url, error_msg)
@@ -168,7 +200,7 @@ class QRadarAdvisorClient(object):
         except Exception as e:
             self.log.error("Quick search failed with exception:")
             self.log.error(str(e))
-            raise QuickSearchError(url, e.message)
+            raise QuickSearchError(url, str(e))
 
         return response.json()
 
@@ -189,13 +221,20 @@ class QRadarAdvisorClient(object):
                                    data=None,
                                    verify=self.http_info.get_cafile())
             if response.status_code != 200:
+                res = response.json()
+                if res["error"] == self.INSIGHTS_NO_ERROR and res["status"] == self.INSIGHTS_NO_OBSERVABLES:
+                    # Status 404 can be thrown if No observables is found in insights.
+                    return {
+                        "status_code": response.status_code
+                    }
+
                 error_msg = "Offense insights using {} returns error {}".format(url, str(response))
                 self.log.error(error_msg)
                 raise OffenseInsightsError(url, error_msg)
         except Exception as e:
             self.log.error("Offense insights failed with exception:")
             self.log.error(str(e))
-            raise OffenseInsightsError(url, e.message)
+            raise OffenseInsightsError(url, str(e))
 
         return response.json()
 
@@ -240,6 +279,7 @@ class QRadarFullSearch(SearchWaitCommand):
     SEARCH_RETURN_DONE = "DONE"
     SEARCH_RETURN_NO_OBSERVABLES = "NO_OBSERVABLES"
     SEARCH_RETURN_ERROR = "ERROR"
+    SEARCH_RETURN_NO_ERROR = "NO_ERROR"
     SEARCH_RETURN_ERROR_AUTH = "ERROR_AUTH"
 
     def __init__(self, http_info, log, return_stage="stage3", timeout=1200, period=5):
@@ -284,7 +324,7 @@ class QRadarFullSearch(SearchWaitCommand):
             search_id = ret_json["search_ids"][0]
         except Exception as e:
             self.log.error("Failed to get search id for full search with exception:")
-            self.log.error(e.message)
+            self.log.error(str(e))
             raise SearchJobFailure(search_value)
 
         return search_id
@@ -334,7 +374,7 @@ class QRadarFullSearch(SearchWaitCommand):
                 status = self.SEARCH_STATUS_ERROR_STOP
         except Exception as e:
             self.log.error("Failed to get search status. Stop waiting for the result.")
-            self.log.error(e.message)
+            self.log.error(str(e))
             status = self.SEARCH_STATUS_ERROR_STOP
             raise SearchFailure(str(search_id), str(status))
 
@@ -370,12 +410,19 @@ class QRadarFullSearch(SearchWaitCommand):
             self.log.info("Full search {} status {}".format(str(search_id), str(response)))
         except Exception as e:
             self.log.error("Failed to get full search result.")
-            self.log.error(e.message)
-            raise SearchFailure(str(search_id), e.message)
+            self.log.error(str(e))
+            raise SearchFailure(str(search_id), str(e))
 
         if response.status_code == 200:
             stix_json = response.json()
         elif response.status_code == 404:
+            res = response.json()
+            if res["error"] == self.SEARCH_RETURN_NO_ERROR and res["status"] == self.SEARCH_RETURN_NO_OBSERVABLES:
+                # Status 404 can be thrown if No observables is found in search.
+                return {
+                    "status_code": response.status_code
+                }
+
             self.log.error("Search result for {} does not exist.".format(str(search_id)))
             raise SearchFailure(str(search_id), "Search result do not exist.")
         else:
@@ -393,6 +440,7 @@ class QRadarOffenseAnalysis(SearchWaitCommand):
     ANALYSIS_DONE_STATUS = "DONE"
     ANALYSIS_DONE_STAGE3 = "DONE_STAGE3"
     ANALYSIS_NO_OBSERVABLES = "NO_OBSERVABLES"
+    ANALYSIS_NO_ERROR = "NO_ERROR"
     ANALYSIS_ERROR = "ERROR"
     ANALYSIS_ERROR_AUTH = "ERROR_AUTH"
 
@@ -419,7 +467,7 @@ class QRadarOffenseAnalysis(SearchWaitCommand):
                                     verify=self.http_info.get_cafile())
         except Exception as e:
             self.log.error("Failed to start search for offense analysis with exception:")
-            self.log.error(e.message)
+            self.log.error(str(e))
             raise SearchJobFailure(str(offense_id))
 
         self.log.info("Start offense {} analysis returns {}".format(str(offense_id), str(response)))
@@ -484,8 +532,8 @@ class QRadarOffenseAnalysis(SearchWaitCommand):
                 self.log.error("Offense {} does not exist or no permission to read".format(str(offense_id)))
                 status = self.SEARCH_STATUS_ERROR_STOP
         except Exception as e:
-            self.log.error("Offense {} status exception: {}".format(str(offense_id), e.message))
-            raise SearchFailure(str(search_id), e.message)
+            self.log.error("Offense {} status exception: {}".format(str(offense_id), str(e)))
+            raise SearchFailure(str(search_id), str(e))
 
         return status
 
@@ -518,8 +566,8 @@ class QRadarOffenseAnalysis(SearchWaitCommand):
                                    verify=self.http_info.get_cafile())
 
         except Exception as e:
-            self.log.error("Exception in getting analysis result for {}:{}".format(str(offense_id), e.message))
-            raise SearchFailure(search_id, e.message)
+            self.log.error("Exception in getting analysis result for {}:{}".format(str(offense_id), str(e)))
+            raise SearchFailure(search_id, str(e))
 
         if response.status_code == 200:
             self.log.info("Get analysis result for offense {}".format(str(offense_id)))
@@ -528,6 +576,14 @@ class QRadarOffenseAnalysis(SearchWaitCommand):
             self.log.error("Offense {} does not exist or no permission to read".format(str(offense_id)))
             raise SearchFailure(search_id, str(response))
         elif response.status_code == 404:
+            res = response.json()
+            if res["error"] == self.ANALYSIS_NO_ERROR and res["status"] == self.ANALYSIS_NO_OBSERVABLES:
+                # Status 404 can be thrown if No observables is found in analysis.
+                return {
+                    "status_code": response.status_code
+                }
+
+
             self.log.error("Offense {} analysis does not exists".format(str(offense_id)))
             raise SearchFailure(search_id, str(response))
         else:

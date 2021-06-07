@@ -1,9 +1,0 @@
-**/*.pyc
-.gradle/
-gradle/
-*.egg-info
-PKG-INFO
-*.iml
-.pytest_cache/
-gradlew.bat
-gradlew

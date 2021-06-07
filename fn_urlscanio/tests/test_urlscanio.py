@@ -16,11 +16,11 @@ config_data = get_config_data(PACKAGE_NAME)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
 
 
-def call_urlscanio_function(circuits, function_params, timeout=10):
+def call_urlscanio_function(circuits, function_params, timeout=60):
     # Fire a message to the function
-    evt = SubmitTestFunction("urlscanio", function_params)
+    evt = SubmitTestFunction(FUNCTION_NAME, function_params)
     circuits.manager.fire(evt)
-    event = circuits.watcher.wait("urlscanio_result", parent=evt, timeout=timeout)
+    event = circuits.watcher.wait("{}_result".format(FUNCTION_NAME), parent=evt, timeout=timeout)
     assert event
     assert isinstance(event.kwargs["result"], FunctionResult)
     pytest.wait_for(event, "complete", True)
@@ -35,9 +35,9 @@ class TestUrlscanio:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
+    @pytest.mark.livetest
     @pytest.mark.parametrize("urlscanio_url, urlscan_incident_id, expected_results", [
-        ("text", "text", {"value": "xyz"}),
-        ("text", "text", {"value": "xyz"})
+        ("https://ibm.com", "2144", None)
     ])
     def test_success(self, circuits_app, urlscanio_url, urlscan_incident_id, expected_results):
         """ Test calling with sample values for the parameters """
@@ -46,4 +46,4 @@ class TestUrlscanio:
             "urlscan_incident_id": urlscan_incident_id
         }
         results = call_urlscanio_function(circuits_app, function_params)
-        assert(expected_results == results)
+        assert(results)

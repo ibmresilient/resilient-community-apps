@@ -1,6 +1,6 @@
 import logging
-import requests
 from .authenticator_base import AuthenticatorBase
+from resilient_lib import RequestsCommon
 
 log = logging.getLogger(__name__)
 
@@ -12,10 +12,13 @@ class IBMCloudFoundryAuthenticator(AuthenticatorBase):
     AUTHENTICATION_TYPE = "apikey"
     CF_INFO_URL = "/v2/info"
 
-    def __init__(self, url, options):
+    def __init__(self, opts, options, url):
         super(IBMCloudFoundryAuthenticator, self).__init__(options)
+        self.opts = opts
+        self.options = options
         self.base_url = url + self.CF_INFO_URL  # CF v2 API for info
         self.authenticate()
+
 
     def authenticate(self):
         self.get_token()
@@ -24,7 +27,10 @@ class IBMCloudFoundryAuthenticator(AuthenticatorBase):
         """
         Gets authentication token from the IBM CF's UAA server.
         """
-        response = requests.get(self.base_url)
+
+        rc = RequestsCommon(self.opts, self.options)
+
+        response = rc.execute_call_v2('GET', self.base_url)
         if response.status_code == 200:
             # read authorization end point
             auth_url = response.json()["authorization_endpoint"]
@@ -42,7 +48,8 @@ class IBMCloudFoundryAuthenticator(AuthenticatorBase):
                 "accept": "application/json",
                 "authorization": "Basic Y2Y6"
             }
-            response = requests.post(oauth_token_url, headers=oauth_headers, data=oauth_key)
+
+            response = rc.execute_call_v2('POST', oauth_token_url, headers=oauth_headers, data=oauth_key)
 
             if response.status_code == 200:
                 self.oauth_token = response.json()

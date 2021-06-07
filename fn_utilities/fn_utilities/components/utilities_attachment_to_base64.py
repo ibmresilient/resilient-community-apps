@@ -7,8 +7,15 @@
 import logging
 import base64
 import json
-from resilient_circuits import ResilientComponent, function, StatusMessage, FunctionResult, FunctionError
-
+from resilient_circuits import (
+    ResilientComponent,
+    function,
+    StatusMessage,
+    FunctionResult,
+    FunctionError,
+)
+from fn_utilities.util.utils_common import b_to_s
+from resilient_lib import get_file_attachment, get_file_attachment_metadata
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'attachment_base64"""
@@ -23,35 +30,34 @@ class FunctionComponent(ResilientComponent):
             incident_id = kwargs.get("incident_id")  # number
             task_id = kwargs.get("task_id")  # number
             attachment_id = kwargs.get("attachment_id")  # number
+            artifact_id = kwargs.get("artifact_id")  # number
 
             log.info("incident_id: %s", incident_id)
             log.info("task_id: %s", task_id)
             log.info("attachment_id: %s", attachment_id)
-            if incident_id is None and task_id is None:
-                raise FunctionError("Error: incident_id or task_id must be specified.")
-            if attachment_id is None:
-                raise FunctionError("Error: attachment_id must be specified.")
+            log.info("artifact_id: %s", artifact_id)
 
-            yield StatusMessage("Reading attachment...")
-            if task_id:
-                metadata_uri = "/tasks/{}/attachments/{}".format(task_id, attachment_id)
-                data_uri = "/tasks/{}/attachments/{}/contents".format(task_id, attachment_id)
+            if incident_id is None:
+                raise FunctionError("Error: incident_id must be specified.")
+            elif attachment_id is None and artifact_id is None:
+                raise FunctionError("Error: attachment_id or artifact_id must be specified.")
             else:
-                metadata_uri = "/incidents/{}/attachments/{}".format(incident_id, attachment_id)
-                data_uri = "/incidents/{}/attachments/{}/contents".format(incident_id, attachment_id)
+                yield StatusMessage("> Function inputs OK")
+
+            yield StatusMessage("> Reading attachment...")
 
             client = self.rest_client()
-            metadata = client.get(metadata_uri)
-            data = client.get_content(data_uri)
+            data = get_file_attachment(client, incident_id, artifact_id=artifact_id, task_id=task_id, attachment_id=attachment_id)
+            metadata = get_file_attachment_metadata(client, incident_id, artifact_id=artifact_id, task_id=task_id, attachment_id=attachment_id)
 
             results = {
                 "filename": metadata["name"],
                 "content_type": metadata["content_type"],
                 "size": metadata["size"],
                 "created": metadata["created"],
-                "content": base64.b64encode(data)
+                "content": b_to_s(base64.b64encode(data)),
             }
-
+            yield StatusMessage("> Complete...")
             # Produce a FunctionResult with the return value
             log.debug(json.dumps(results, indent=2))
             yield FunctionResult(results)

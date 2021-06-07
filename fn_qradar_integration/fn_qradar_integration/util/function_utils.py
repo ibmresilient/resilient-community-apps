@@ -3,6 +3,7 @@
 # (c) Copyright IBM Corp. 2018. All Rights Reserved.
 #
 # Util functions
+import six
 
 
 def make_query_string(query, params):
@@ -34,8 +35,8 @@ def fix_dict_value(events):
     for event in events:
         # event is a dict
         if isinstance(event, dict):
-            for key, value in event.iteritems():
-                if not isinstance(value, str):
-                    event[key] = str(value)
+            for key in event:
+                if not isinstance(event[key], six.string_types):
+                    event[key] = u"{}".format(event[key])
 
     return events

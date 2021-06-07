@@ -12,5 +12,8 @@ def config_section_data():
     config_data = u"""[fn_geocoding]
 url=https://maps.googleapis.com/maps/api/geocode/json
 api_key=<<customer key>>
+# uncomment for proxy settings
+#https_proxy=
+#http_proxy=
 """
     return config_data

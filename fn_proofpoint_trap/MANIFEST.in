@@ -1,0 +1,4 @@
+include README.md
+include fn_proofpoint_trap/util/*
+include fn_proofpoint_trap/LICENSE
+include fn_proofpoint_trap/doc/*

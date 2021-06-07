@@ -5,14 +5,18 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_cisco_umbrella_inv',
-    version='1.0.0',
+    version='1.0.3',
     author='IBM Resilient',
     author_email='support@resilientsystems.com',
-    description="Resilient Circuits Components for 'fn_cisco_umbrella_inv'",
-    long_description="Resilient Circuits Components for 'fn_cisco_umbrella_inv'",
+    description="Resilient Circuits Integration for Cisco Umbrella Investigate",
+    long_description="The Cisco Umbrella Investigate integration with the Resilient platform allows for the querying of a "
+                     "Cisco Umbrella Investigate deployment. The integration includes 14 functions that return results "
+                     "which show security events and correlations. The results can be used to make customized updates "
+                     "to the Resilient platform, such as updating incidents, data tables and so on.",
     install_requires=[
-        'resilient_circuits>=30.0.0',
-        'investigate>=1.3.0'
+        'resilient_circuits>=32.0.0',
+        'investigate>=1.3.0',
+        'resilient-lib'
     ],
     packages=find_packages(),
     include_package_data=True,
@@ -38,6 +42,7 @@ setup(
             "UmbrellaDomainVolumeFunctionComponent = fn_cisco_umbrella_inv.components.umbrella_domain_volume:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_cisco_umbrella_inv.util.config:config_section_data"],
-        "resilient.circuits.customize": ["customize = fn_cisco_umbrella_inv.util.customize:customization_data"]
+        "resilient.circuits.customize": ["customize = fn_cisco_umbrella_inv.util.customize:customization_data"],
+        "resilient.circuits.selftest": ["selftest = fn_cisco_umbrella_inv.util.selftest:selftest_function"]
     }
 )

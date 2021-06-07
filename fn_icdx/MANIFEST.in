@@ -1,0 +1,10 @@
+include README.md
+include Dockerfile
+include entrypoint.sh
+include fn_icdx/util/*
+include fn_icdx/LICENSE
+include fn_icdx/doc/*
+include fn_icdx/data/templates/*.jinja*
+include fn_icdx/screenshots/*
+
+exclude *.bak 

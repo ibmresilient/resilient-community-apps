@@ -6,6 +6,7 @@ import pytest
 from mock_attachment import AttachmentMock
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
+from pytest_resilient_circuits import verify_subset
 
 PACKAGE_NAME = "fn_utilities"
 FUNCTION_NAME = "utilities_base64_to_attachment"
@@ -36,8 +37,9 @@ class TestBase64ToAttachment:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
+    @pytest.mark.livetest
     @pytest.mark.parametrize("base64content, incident_id, task_id, file_name, content_type, expected_result", [
-        (AttachmentMock.test_data_b64("sample1.pdf"), 1234, None, "file.txt", "text/plain", {"value": "xyz"})
+        (AttachmentMock.test_data_b64("sample1.pdf"), 1234, None, "file.txt", "text/plain", {"id": 27})
     ])
     def test_success(self, circuits_app, base64content, incident_id, task_id, file_name, content_type, expected_result):
         """ Test calling with sample values for the parameters """
@@ -48,5 +50,5 @@ class TestBase64ToAttachment:
             "file_name": file_name,
             "content_type": content_type
         }
-        #result = call_base64_to_attachment_function(circuits_app, function_params)
-        #assert(result == expected_result)
+        result = call_base64_to_attachment_function(circuits_app, function_params)
+        verify_subset(expected_result, result)

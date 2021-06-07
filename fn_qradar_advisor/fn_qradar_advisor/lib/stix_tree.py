@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
-
-from visitors import GetNodeVisitor
-from html_gen_visitor import HtmlGenVisitor
-from tree_node import TreeNode
-from relation_visitor import RelationVisitor
-import stix_utils
+# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+from collections import Counter
+from .visitors import GetNodeVisitor
+from .html_gen_visitor import HtmlGenVisitor
+from .tree_node import TreeNode
+from . import stix_utils
 
 
 class MultiRootTree(object):
@@ -83,7 +82,12 @@ def handle_relations(stix_objects, tree, log):
     :param log:
     :return:
     """
+    # Import class here to avoid circular dependency error at module level.
+    from .relation_visitor import RelationVisitor
+
     found_relationship = False
+    initial_stix_obj_count = len(stix_objects)
+
     for obj in stix_objects:
         if obj["type"] == "relationship":
             found_relationship = True
@@ -98,8 +102,53 @@ def handle_relations(stix_objects, tree, log):
                 # relationship used. Remove it
                 stix_objects.remove(obj)
 
+    final_stix_obj_count = len(stix_objects)
+
+    if found_relationship and final_stix_obj_count >= initial_stix_obj_count:
+        # A stix relationship object was detected but not accepted in the tree because
+        # a relationship could not be determined from the existing tree.
+        found_relationship = handle_missing_relationships(stix_objects, tree, log)
+
     return found_relationship
 
+
+def handle_missing_relationships(stix_objects, tree, log):
+    """
+    Handle denied relationship objects given in the stix_objects input.
+    :param stix_objects: list of stix2 objects
+    :param tree: multi-root tree
+    :param log:
+    :return:
+    """
+    # Get list of remaining unprocessed relationship objects
+    stix_rel_objects = [o for o in stix_objects if o["type"] == "relationship"]
+
+    # Get object reference counts from unprocessed relationships.
+    obj_ref_counts = {}
+    for obj_rel in stix_rel_objects:
+        # Get count of object references for "source_ref" and "target_ref" of unprocessed relationships.
+        for ref in ["source_ref", "target_ref"]:
+            obj_ref_counts[obj_rel[ref]] = obj_ref_counts.get(obj_rel[ref], 0) + 1
+
+    obj_ref_counter = Counter(obj_ref_counts)
+
+    # Iterate over object references starting with object with most references.
+    for obj_ref, _ in obj_ref_counter.most_common(sum(obj_ref_counter.values())):
+        # Test if stix object has already been included in the tree.
+        existing, node = extract_object(stix_objects=stix_objects,
+                                               multi_root_tree=tree,
+                                               object_id=obj_ref,
+                                               log=log)
+        if not existing and node:
+            tree.add_root(node)
+            # Return to main relationship handler with new root node.
+            return True
+
+    # If we got here some of the relationship objects couldn't be processed.
+    for obj_rel in stix_rel_objects:
+        log.info("Relationship object couldn't be processed %s ." , str(obj_rel))
+
+    return False
 
 def get_sight_ref_created_by(stix_objects, obj, log):
     """
@@ -128,6 +177,8 @@ def handle_sightings(stix_objects, tree, log):
     :param log:
     :return:
     """
+    # Import class here to avoid circular dependency error at module level.
+    from .relation_visitor import RelationVisitor
     for obj in stix_objects:
         if obj["type"] == "sighting":
             #

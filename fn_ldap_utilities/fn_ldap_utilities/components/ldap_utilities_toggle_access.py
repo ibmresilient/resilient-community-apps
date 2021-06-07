@@ -61,8 +61,8 @@ class FunctionComponent(ResilientComponent):
             try:
               # Bind to the connection
               c.bind()
-            except:
-              raise ValueError("Cannot connect to LDAP Server. Ensure credentials are correct")
+            except Exception as err:
+              raise ValueError("Cannot connect to LDAP Server. Ensure credentials are correct\n Error: {0}".format(err))
 
             # Inform user
             msg = ""

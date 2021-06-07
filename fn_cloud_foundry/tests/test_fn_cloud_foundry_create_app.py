@@ -15,8 +15,28 @@ except ImportError:
 PACKAGE_NAME = "fn_cloud_foundry"
 FUNCTION_NAME = "fn_cloud_foundry_create_app"
 
+# set dummy app.config values
+config_data = u"""
+[fn_cloud_foundry]
+#Base url endpoint of your CF platform
+#For example, for IBM’s BlueMix it is: https://api.ng.bluemix.net/
+cf_api_base=https://api.ng.bluemix.net/
+#
+#Enter only what’s required by your authenticator.
+#For example, the default BlueMixCF authenticator only requires apikey.
+#
+cf_api_apikey=dummyAPIKey
+#Enter username and password if needed for access to DockerHub for Create Application function
+cf_api_username=dummyUser
+cf_api_password=dummyPass
+#Optional proxy settings
+#http_proxy=
+#https_proxy=
+"""
+
 # Read the default configuration-data section from the package
-config_data = get_config_data(PACKAGE_NAME)
+# uncomment to use a real app.config file
+#config_data = get_config_data(PACKAGE_NAME)
 
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
@@ -41,7 +61,7 @@ class TestFnCloudFoundryCreateApp:
         assert func is not None
 
     @patch("fn_cloud_foundry.components.fn_cloud_foundry_create_app.IBMCloudFoundryAuthenticator")
-    @patch("fn_cloud_foundry.util.cloud_foundry_api.requests.post")
+    @patch("fn_cloud_foundry.util.authentication.ibm_cf_bearer.RequestsCommon.execute_call_v2")
     @pytest.mark.parametrize("fn_cloud_foundry_applications, fn_cloud_foundry_space_guid, fn_cloud_foundry_additional_parameters_json", [
         ("text", "space", "{}")
     ])
@@ -61,7 +81,7 @@ class TestFnCloudFoundryCreateApp:
         assert(results["success"] == True)
 
     @patch("fn_cloud_foundry.components.fn_cloud_foundry_create_app.IBMCloudFoundryAuthenticator")
-    @patch("fn_cloud_foundry.util.cloud_foundry_api.requests.post")
+    @patch("fn_cloud_foundry.util.authentication.ibm_cf_bearer.RequestsCommon.execute_call_v2")
     @pytest.mark.parametrize(
         "fn_cloud_foundry_applications, fn_cloud_foundry_space_guid, fn_cloud_foundry_additional_parameters_json", [
             ("text", "space", "{}")
@@ -82,7 +102,7 @@ class TestFnCloudFoundryCreateApp:
         assert (results["success"] == False)
 
     @patch("fn_cloud_foundry.components.fn_cloud_foundry_create_app.IBMCloudFoundryAuthenticator")
-    @patch("fn_cloud_foundry.util.cloud_foundry_api.requests.post")
+    @patch("fn_cloud_foundry.util.authentication.ibm_cf_bearer.RequestsCommon.execute_call_v2")
     @pytest.mark.parametrize(
         "fn_cloud_foundry_applications, fn_cloud_foundry_space_guid, fn_cloud_foundry_additional_parameters_json", [
             (None, "space", "{}"),
@@ -104,4 +124,3 @@ class TestFnCloudFoundryCreateApp:
         with pytest.raises(AssertionError):
             # failed. In the end it's the calling function that fails, so can only catch Assert
             results = call_fn_cloud_foundry_create_app_function(circuits_app, function_params)
-            assert True

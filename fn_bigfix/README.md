@@ -11,8 +11,8 @@ Update status of a Bigfix remediating action.
 
 Prerequisites:
 ```
-resilient version 30 or later
-resilient_circuits version 30 or later
+resilient version 31 or later
+resilient_circuits version 31 or later
 ```
 * For more info about BigFix, please visit https://www.ibm.com/support/knowledgecenter/en/SSQL82_9.5.0/com.ibm.bigfix.doc/welcome/BigFix_Platform_welcome.html
 
@@ -33,7 +33,11 @@ bigfix_user=BigFixAdmin
 bigfix_pass=MyPassword
 bigfix_polling_interval=30
 bigfix_polling_timeout=1800
-hunt_results_limit=200
+bigfix_endpoints_wait=30
+bigfix_hunt_results_limit=200
+# Settings for access to BigFix via a proxy
+#http_proxy=http://proxy:80
+#https_proxy=https://proxy:80
 ```
 
 Run with: `resilient-circuits run`.

@@ -1,4 +1,10 @@
 include README.md
+include Dockerfile
+include entrypoint.sh
 include fn_jira/util/*
-include fn_pagerduty/lib/*
+include fn_jira/lib/*
 include fn_jira/LICENSE
+include doc/*
+include doc/screenshots/*
+
+exclude *.bak

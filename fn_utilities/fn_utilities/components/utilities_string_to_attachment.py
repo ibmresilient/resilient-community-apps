@@ -1,12 +1,14 @@
-# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
-import tempfile
-import os
+import sys
 import logging
+from io import BytesIO
+import os
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from resilient_lib import write_file_attachment
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'utilities_string_to_attachment"""
@@ -34,7 +36,12 @@ class FunctionComponent(ResilientComponent):
             attachment_name = kwargs.get('attachment_name')  # text (required)
             if not attachment_name:
               raise ValueError('attachment_name is required')
-            attachment_name = '{0}.txt'.format(attachment_name)  # text (required)
+
+            ext = os.path.splitext(attachment_name)[1]
+            if not ext or ext == '.':
+                # Attachment has no extension specified or ends with '.'.
+                a_ext = "txt" if attachment_name.endswith('.') else ".txt"
+                attachment_name = '{0}{1}'.format(attachment_name, a_ext)
 
             incident_id = kwargs.get('incident_id')  # number (required)
             if not incident_id:
@@ -56,29 +63,18 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage('Writing attachment...')
 
-            # Setup tempfile
-            with tempfile.NamedTemporaryFile(mode="w+t", delete=False) as temp_file:
-                try:
-                    # Write and close tempfile
-                    temp_file.write(string_to_convert_to_attachment)
-                    temp_file.close()
+            if sys.version_info.major < 3:
+                datastream = BytesIO(string_to_convert_to_attachment)
+            else:
+                datastream = BytesIO(string_to_convert_to_attachment.encode("utf-8"))
 
-                    #  Access Resilient API
-                    client = self.rest_client()
+            #  Access Resilient API
+            client = self.rest_client()
 
-                    # Create POST uri
-                    # ..for a task, if task_id is defined
-                    if task_id:
-                        attachment_uri = '/tasks/{}/attachments'.format(task_id)
-                    # ...else for an attachment
-                    else:
-                        attachment_uri = '/incidents/{}/attachments'.format(incident_id)
-
-                    # POST the new attachment
-                    new_attachment = client.post_attachment(attachment_uri, temp_file.name, filename=attachment_name, mimetype=content_type)
-                
-                finally:
-                    os.unlink(temp_file.name)
+            # POST the new attachment
+            new_attachment = write_file_attachment(client, attachment_name, datastream,
+                                                   incident_id, task_id=task_id,
+                                                   content_type=content_type)
 
             # If the attachment succeeded in POSTing, print message, return result
             if new_attachment is not None:

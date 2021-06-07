@@ -6,14 +6,14 @@ from __future__ import print_function
 import pytest
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
-from helper import TestingHelper
+from helper import TestingHelper, get_mock_config_data
 from mock import patch
 
 PACKAGE_NAME = "fn_ldap_utilities"
 FUNCTION_NAME = "ldap_utilities_update"
 
 # Read the default configuration-data section from the package
-config_data = get_config_data(PACKAGE_NAME)
+config_data = get_mock_config_data()
 
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"

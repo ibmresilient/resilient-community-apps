@@ -1,7 +1,6 @@
-# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 
 import logging
-import requests
 import json
 import base64
 import configparser
@@ -61,7 +60,7 @@ def check_status_code(status_code):
         raise ValueError("Request not successful")
 
 
-def get_authenticated_headers(address, username, password, verify_cert=True):
+def get_authenticated_headers(rc, address, username, password, verify_cert=True):
     url = address + "/rs/esm/v2/login"
     headers = {
         'Content-Type': "application/json",
@@ -80,7 +79,9 @@ def get_authenticated_headers(address, username, password, verify_cert=True):
         "locale": "en_US"
     }
     data_string = json.dumps(data)
-    r = requests.post(url, data=data_string, headers=headers, verify=verify_cert)
+
+    r = rc.execute_call_v2('post', url, data=data_string, headers=headers, verify=verify_cert, proxies=rc.get_proxies())
+
     check_status_code(r.status_code)
 
     cookies = r.cookies

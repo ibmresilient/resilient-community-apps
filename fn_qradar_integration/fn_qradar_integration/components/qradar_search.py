@@ -7,9 +7,11 @@
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from resilient_lib import validate_fields
 from fn_qradar_integration.util.qradar_utils import QRadarClient
 from fn_qradar_integration.util import function_utils
 
+LOG = logging.getLogger(__name__)
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'qradar_search"""
@@ -17,17 +19,23 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
+        self.opts = opts
         self.options = opts.get("fn_qradar_integration", {})
+        required_fields = ["host", "verify_cert"]
+        validate_fields(required_fields, self.options)
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
+        self.opts = opts
         self.options = opts.get("fn_qradar_integration", {})
 
     @function("qradar_search")
     def _qradar_search_function(self, event, *args, **kwargs):
         """Function: Search QRadar"""
         try:
+            required_fields = ["qradar_query", "qradar_query_all_results"]
+            validate_fields(required_fields, kwargs)
             # Get the function parameters:
             qradar_query = self.get_textarea_param(kwargs.get("qradar_query"))  # textarea
             qradar_query_param1 = kwargs.get("qradar_query_param1")  # text
@@ -38,25 +46,33 @@ class FunctionComponent(ResilientComponent):
             qradar_query_range_start = kwargs.get("qradar_query_range_start")  # number
             qradar_query_range_end = kwargs.get("qradar_query_range_end")  # number
 
-            log = logging.getLogger(__name__)
-            log.info("qradar_query: %s", qradar_query)
-            log.info("qradar_query_param1: %s", qradar_query_param1)
-            log.info("qradar_query_param2: %s", qradar_query_param2)
-            log.info("qradar_query_param3: %s", qradar_query_param3)
-            log.info("qradar_query_param4: %s", qradar_query_param4)
-            log.info("qradar_query_param5: %s", qradar_query_param5)
-            log.info("qradar_query_range_start: %s", qradar_query_range_start)
-            log.info("qradar_query_range_end: %s", qradar_query_range_end)
+            qradar_query_all_results = False
+            if "Yes" in kwargs.get("qradar_query_all_results")["name"]:
+                qradar_query_all_results = True
+
+            LOG.info("qradar_query: %s", qradar_query)
+            LOG.info("qradar_query_param1: %s", qradar_query_param1)
+            LOG.info("qradar_query_param2: %s", qradar_query_param2)
+            LOG.info("qradar_query_param3: %s", qradar_query_param3)
+            LOG.info("qradar_query_param4: %s", qradar_query_param4)
+            LOG.info("qradar_query_param5: %s", qradar_query_param5)
+            LOG.info("qradar_query_range_start: %s", qradar_query_range_start)
+            LOG.info("qradar_query_range_end: %s", qradar_query_range_end)
+            LOG.info("qradar_query_all_results: %s", qradar_query_all_results)
 
             qradar_verify_cert = True
-            if "verify_cert" in self.options and self.options["verify_cert"] == "false":
+            if "verify_cert" in self.options and self.options["verify_cert"].lower() == "false":
                 qradar_verify_cert = False
 
             timeout = None
-            if "search_timeout" in self.options:
-                timeout = self.options["search_timeout"]
+            try:
+                if "search_timeout" in self.options:
+                    timeout = float(self.options["search_timeout"])
+            except Exception:
+                LOG.debug("Failed to read search_timeout: {}".format(self.options["search_timeout"]))
 
-            log.debug("Connection to {} using {}".format(self.options["host"], self.options["username"]))
+            LOG.debug("Connection to {} using {}".format(self.options["host"],
+                                                         self.options.get("username") or "service token"))
 
             query_string = function_utils.make_query_string(qradar_query,
                                                             [qradar_query_param1,
@@ -65,16 +81,18 @@ class FunctionComponent(ResilientComponent):
                                                              qradar_query_param4,
                                                              qradar_query_param5])
 
-            log.info("Running query: " + query_string)
+            LOG.info("Running query: " + query_string)
 
             yield StatusMessage("starting...")
             qradar_client = QRadarClient(host=self.options["host"],
                                          username=self.options.get("username", None),
                                          password=self.options.get("qradarpassword", None),
                                          token=self.options.get("qradartoken", None),
-                                         cafile=qradar_verify_cert)
+                                         cafile=qradar_verify_cert,
+                                         opts=self.opts, function_opts=self.options)
 
             result = qradar_client.ariel_search(query_string,
+                                                qradar_query_all_results,
                                                 range_start=qradar_query_range_start,
                                                 range_end=qradar_query_range_end,
                                                 timeout=timeout)
@@ -82,5 +100,5 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("done...")
             yield FunctionResult(result)
         except Exception as e:
-            log.error(str(e))
+            LOG.error(str(e))
             yield FunctionError()

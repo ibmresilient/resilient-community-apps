@@ -1,4 +1,4 @@
-# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 
 import logging
 import jinja2
@@ -12,8 +12,8 @@ from os.path import join, pardir, os
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_circuits.template_functions import environment
 from resilient import SimpleHTTPException
-from fn_microsoft_security_graph.util.helper import MicrosoftGraphHelper
-from resilient_lib import validate_fields
+from fn_microsoft_security_graph.lib.ms_graph_helper import MSGraphHelper
+from resilient_lib import validate_fields, RequestsCommon
 import resilient_circuits.template_functions as template_functions
 
 
@@ -30,12 +30,15 @@ class IntegrationComponent(ResilientComponent):
         self.options = opts.get("fn_microsoft_security_graph", {})
 
         # Validate required fields in app.config are set
-        required_fields = ["microsoft_graph_url", "tenant_id", "client_id", "client_secret"]
+        required_fields = ["microsoft_graph_token_url", "microsoft_graph_url", "tenant_id", "client_id", "client_secret"]
         validate_fields(required_fields, self.options)
 
-        self.Microsoft_security_graph_helper = MicrosoftGraphHelper(self.options.get("tenant_id"),
-                                                                    self.options.get("client_id"),
-                                                                    self.options.get("client_secret"))
+        self.Microsoft_security_graph_helper = MSGraphHelper(self.options.get("microsoft_graph_token_url"),
+                                                             self.options.get("microsoft_graph_url"),
+                                                             self.options.get("tenant_id"),
+                                                             self.options.get("client_id"),
+                                                             self.options.get("client_secret"),
+                                                             RequestsCommon(self.opts, self.options).get_proxies())
         self.polling_main()
 
     @handler("reload")
@@ -43,9 +46,9 @@ class IntegrationComponent(ResilientComponent):
         """Configuration options have changed, save new values"""
         self.options = opts.get("fn_microsoft_security_graph", {})
 
-        self.Microsoft_security_graph_helper = MicrosoftGraphHelper(self.options.get("tenant_id"),
-                                                                    self.options.get("client_id"),
-                                                                    self.options.get("client_secret"))
+        self.Microsoft_security_graph_helper = MSGraphHelper(self.options.get("tenant_id"),
+                                                             self.options.get("client_id"),
+                                                             self.options.get("client_secret"))
 
     @function("microsoft_security_graph_alert_search")
     def _microsoft_security_graph_alert_search_function(self, event, *args, **kwargs):
@@ -76,7 +79,8 @@ class IntegrationComponent(ResilientComponent):
                     "microsoft_security_graph_alert_search_query": microsoft_security_graph_alert_search_query
                 },
                 "run_time": end_time - start_time,
-                "content": r.json()
+                "content": r.json(),
+                "success": True
             }
 
             # Produce a FunctionResult with the results
@@ -113,7 +117,8 @@ class IntegrationComponent(ResilientComponent):
                     "microsoft_security_graph_alert_id": microsoft_security_graph_alert_id
                 },
                 "run_time": end_time - start_time,
-                "content": r.json()
+                "content": r.json(),
+                "success": True
             }
 
             # Produce a FunctionResult with the results
@@ -157,7 +162,8 @@ class IntegrationComponent(ResilientComponent):
                     "microsoft_security_graph_alert_data": microsoft_security_graph_alert_data
                 },
                 "run_time": end_time - start_time,
-                "content": r.json()
+                "content": r.json(),
+                "success": True
             }
 
             # Produce a FunctionResult with the results
@@ -213,8 +219,8 @@ class IntegrationComponent(ResilientComponent):
             response = resilient_client.post(uri=uri, payload=payload_dict)
             return response
 
-        except SimpleHTTPException:
-            log.info("Something went wrong when attempting to create the Incident")
+        except SimpleHTTPException as err:
+            log.info("Something went wrong when attempting to create the Incident %s", err)
 
     # Returns back list of incidents if there is one with the same case ID, else returns empty list
     def _find_resilient_incident_for_req(self, field_value):
@@ -276,13 +282,10 @@ def get_alerts(options, ms_graph_helper):
         createdDateTime_start = datetime.utcnow().isoformat() + 'Z'
         createdDateTime_filter = "createdDateTime%20ge%20{}".format(createdDateTime_start)
 
-    headers = {
-        "Content-type": "application/json",
-        "Authorization": "Bearer " + ms_graph_helper.get_access_token()
-    }
-    url = "{}security/alerts{}".format(options.get("microsoft_graph_url"), create_query(options.get("alert_query"),
+    url = "{}/security/alerts{}".format(options.get("microsoft_graph_url"), create_query(options.get("alert_query"),
                                                                                          createdDateTime_filter))
-    r = ms_graph_helper.microsoft_graph_request("GET", url, headers)
+
+    r = ms_graph_helper.ms_graph_session.get(url)
     if not r:
         raise FunctionError("Request failed, please check the log.")
 
@@ -310,27 +313,22 @@ def build_incident_dto(alert, custom_temp_file=None):
 
 
 def alert_search(url, ms_helper, search_query=None):
-    headers = {
-        "Content-type": "application/json",
-        "Authorization": "Bearer " + ms_helper.get_access_token()
-    }
+
     start_query = ""
     if search_query:
         start_query = "?$"
 
-    url = "{}security/alerts/{}{}".format(url, start_query, search_query)
-    r = ms_helper.microsoft_graph_request("GET", url, headers)
+    url = "{}/security/alerts/{}{}".format(url, start_query, search_query)
+
+    r = ms_helper.ms_graph_session.get(url)
 
     return r
 
 
 def get_alert_details(url, ms_helper, alert_id):
-    headers = {
-        "Content-type": "application/json",
-        "Authorization": "Bearer " + ms_helper.get_access_token()
-    }
-    request_url = "{}security/alerts/{}".format(url, alert_id)
-    r = ms_helper.microsoft_graph_request("GET", request_url, headers)
+
+    request_url = "{}/security/alerts/{}".format(url, alert_id)
+    r = ms_helper.ms_graph_session.get(request_url)
 
     return r
 
@@ -339,16 +337,17 @@ def update_alert(url, ms_helper, alert_id, alert_data):
     r = None
     headers = {
         "Content-type": "application/json",
-        "Authorization": "Bearer " + ms_helper.get_access_token(),
         "Prefer": "return=representation"
     }
+
     try:
         data = ast.literal_eval(alert_data)
     except ValueError as e:
         raise FunctionError("microsoft_security_graph_alert_data needs to be in dict format; " + e.message)
 
     request_url = "{}/security/alerts/{}".format(url, alert_id)
-    r = ms_helper.microsoft_graph_request("PATCH", request_url, headers, data)
+
+    r = ms_helper.ms_graph_session.patch(request_url, headers=headers, json=data)
 
     return r
 

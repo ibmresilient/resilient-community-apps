@@ -1,0 +1,4 @@
+include README.md
+include fn_codegen_test/util/*
+include fn_codegen_test/LICENSE
+include doc/*

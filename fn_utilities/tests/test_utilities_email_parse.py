@@ -5,9 +5,9 @@ from __future__ import print_function
 import pytest
 import logging
 from mock_artifact import ArtifactMock
+from fn_utilities.util.utils_common import b_to_s
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
-from pytest_resilient_circuits import verify_subset
 
 PACKAGE_NAME = "fn_utilities"
 FUNCTION_NAME = "utilities_email_parse"
@@ -42,32 +42,24 @@ class TestArtifactEmailParse:
 
     @pytest.mark.parametrize("base64content, expected_result", [
         (ArtifactMock.test_data_b64("email_sample_1.eml"), {
-            "from": [
-                {
-                    "name": "",
-                    "email": "foo@example.com"
-                }
-            ],
-            "body_text": "This is the first part.\r\n",
-            "timestamp": 1118089282000,
+            "from": [["", "foo@example.com"]],
+            "body": u"This is the first part.",
             "subject": "testing"
         }),
         (ArtifactMock.test_data_b64("email_sample_2.eml"), {
-            "headers": {
-                "received": [
-                    "from xxx.xxxx.xxx by xxx.xxxx.xxx with ESMTP id C1B953B4CB6 for <xxxxx@Exxx.xxxx.xxx>; Tue, 10 May 2005 15:27:05 -0500",
-                    "from SMS-GTYxxx.xxxx.xxx by xxx.xxxx.xxx with ESMTP id ca for <xxxxx@Exxx.xxxx.xxx>; Tue, 10 May 2005 15:27:04 -0500",
-                    "from xxx.xxxx.xxx by SMS-GTYxxx.xxxx.xxx with ESMTP id j4AKR3r23323 for <xxxxx@Exxx.xxxx.xxx>; Tue, 10 May 2005 15:27:03 -0500"
-                ],
-                "from": "xxx@xxxx.xxx",
-                "to": "xxxxxxxxxxx@xxxx.xxxx.xxx",
-            }
+            "from": [["", "xxx@xxxx.xxx"]],
+            "to": [["", "xxxxxxxxxxx@xxxx.xxxx.xxx"]],
+            "received": [
+                {"from": u'xxx.xxxx.xxx', "by": u'SMS-GTYxxx.xxxx.xxx', "id": u'j4AKR3r23323', "for": u'<xxxxx@Exxx.xxxx.xxx>', "date": u'Tue, 10 May 2005 15:27:03 -0500'},
+                {"from": u'SMS-GTYxxx.xxxx.xxx', "by": u'xxx.xxxx.xxx', "id": u'ca', "for": u'<xxxxx@Exxx.xxxx.xxx>', "date": u'Tue, 10 May 2005 15:27:04 -0500'},
+                {"from": u'xxx.xxxx.xxx', "by": u'xxx.xxxx.xxx', "id": u'C1B953B4CB6', "for": u'<xxxxx@Exxx.xxxx.xxx>', "date": u'Tue, 10 May 2005 15:27:05 -0500'}
+            ]
         }),
         (ArtifactMock.test_data_b64("email_sample_3.eml"), {
-            "body_html": "<div dir=\"ltr\">see this<div><br></div></div>\r\n",
+            "html_body": u'["<div dir=\\"ltr\\">see this<div><br></div></div>',
             "attachments": [
                 {
-                    "content_type": "application/pdf",
+                    "mail_content_type": "application/pdf",
                     "filename": "example.pdf"
                 }
             ]
@@ -76,7 +68,22 @@ class TestArtifactEmailParse:
     def test_success(self, circuits_app, base64content, expected_result):
         """ Test calling with sample values for the parameters """
         function_params = { 
-            "base64content": base64content
+            "base64content": b_to_s(base64content),
+            "incident_id": 1001
         }
         result = call_email_parse_function(circuits_app, function_params)
-        verify_subset(expected_result, result)
+        verify_subset(expected_result, result["content"])
+
+
+def verify_subset(expected, actual):
+    """Test that the values match, where expected can be a subset of actual"""
+    if isinstance(expected, dict):
+        assert isinstance(actual, dict)
+        for (key, value) in expected.items():
+            verify_subset(value, actual.get(key))
+    elif isinstance(expected, list):
+        assert isinstance(actual, list)
+        for evalue, avalue in zip(expected, actual):
+            verify_subset(evalue, avalue)
+    else:
+        assert actual.startswith(expected)

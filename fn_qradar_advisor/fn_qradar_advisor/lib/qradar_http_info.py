@@ -1,24 +1,26 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 import requests
 import base64
+from resilient_lib import RequestsCommon
 
-QRADAR_PULGIN_API_URL = "{host}/console/plugins/{app_id}/app_proxy/api"
-QRADAR_OFFENSE_INSIGHTS_URL="/offense/{offense_id}/insights"
-QRADAR_QUICK_SEARCH_URL = "/search/quick"
-QRADAR_FULL_SEARCH_URL = "/search/full"
-QRADAR_FULL_SEARCH_RESULT_URL = "/search/full/{search_id}/stix/{stage}"
+QRADAR_PLUGIN_API_URL = "{host}/console/plugins/{app_id}/app_proxy/api"
+QRADAR_OFFENSE_INSIGHTS_URL = "/investigations/offense/{offense_id}/insights"
+QRADAR_INVESTIGATIONS = "/investigations"
+QRADAR_QUICK_SEARCH_URL = "/investigations/search/quick"
+QRADAR_FULL_SEARCH_URL = "/investigations/search/full"
+QRADAR_FULL_SEARCH_RESULT_URL = "/investigations/search/full/{search_id}/stix/{stage}"
 QRADAR_ABOUT_URL="/about"
-QRADAR_ANALYSIS_URL = "/offense/{offense_id}/analysis"
-QRADAR_ANALYSIS_STATUS_URL = "/offense/{offense_id}/analysis/status"
-QRADAR_ANALYSIS_RESULT_URL = "/offense/{offense_id}/analysis/{stage}/stix"
+QRADAR_ANALYSIS_URL = "/investigations/offense/{offense_id}/analysis"
+QRADAR_ANALYSIS_STATUS_URL = "/investigations/offense/{offense_id}/analysis/status"
+QRADAR_ANALYSIS_RESULT_URL = "/investigations/offense/{offense_id}/analysis/{stage}/stix"
 
 QRADAR_CFMA_MAPPINGS = "/mappings"
 QRADAR_CFMA_TUNING="/config/tuning"
 
 class HttpInfo(object):
-    def __init__(self, qradar_host, advisor_app_id, qradar_token, cafile, log):
+    def __init__(self, qradar_host, advisor_app_id, qradar_token, cafile, log, opts=None, function_opts=None):
         if qradar_host.startswith("http"):
             # User wants to specify http or https
             self.host = qradar_host
@@ -31,12 +33,14 @@ class HttpInfo(object):
         self.token = qradar_token
         self.xsrf_token = None
         self.log = log
-        self.api_base_url = QRADAR_PULGIN_API_URL.format(host=self.host, app_id=self.app_id)
+        self.api_base_url = QRADAR_PLUGIN_API_URL.format(host=self.host, app_id=self.app_id)
 
         self.session = requests.session()
         self.session.headers["Accept"] = "application/json"
         self.session.headers["Content-Type"] = "application/json"
+        self.session.headers["SEC"] = self.token
         self.session.cookies["SEC"] = self.token
+        self.session.proxies = RequestsCommon(opts, function_opts).get_proxies()
 
     def get_all_mappings(self):
         """
@@ -58,6 +62,13 @@ class HttpInfo(object):
         :return:
         """
         return self.api_base_url + QRADAR_ABOUT_URL
+
+    def get_investigations_url(self):
+        """
+        Get the url to the api/investigations endpoint
+        :return:
+        """
+        return self.api_base_url + QRADAR_INVESTIGATIONS
 
     def get_quick_search_url(self):
         """

@@ -1,4 +1,7 @@
 include README.md
-include fn_datatable_utils/util/*
+include Dockerfile
+include entrypoint.sh
+recursive-include fn_datatable_utils/util *
 include fn_datatable_utils/LICENSE
 include screenshots/*
+include doc/*

@@ -6,6 +6,7 @@
 
 import logging
 import unicodedata
+from urllib.parse import urlsplit
 from fn_utilities.util.distance import damerau_levenshtein_distance
 from fn_utilities.util.confusable import Confusable
 from resilient_circuits import ResilientComponent, function, FunctionResult, FunctionError
@@ -34,7 +35,13 @@ class FunctionComponent(ResilientComponent):
         # Normalize unicode strings
         # domain = unicodedata.normalize("NFKD", domain)
         domain = self.confusable.skeleton(domain)
-        return domain
+
+        # strip off any aspect of a URL name
+        parsed = urlsplit(domain)
+        if parsed.scheme:
+            return parsed.hostname
+        else:
+            return parsed.path
 
     @function("utilities_domain_distance")
     def _domain_distance_function(self, event, *args, **kwargs):
@@ -58,6 +65,8 @@ class FunctionComponent(ResilientComponent):
 
             min_distance = None
             comp1 = self.normalize_name(domain_name)
+            log.debug("normalized domain: %s", comp1)
+
             for compare in compare_domains:
                 compp = compare.strip()
                 comp2 = self.normalize_name(compare)

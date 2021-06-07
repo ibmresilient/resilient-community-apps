@@ -1,4 +1,4 @@
-# Resilient LDAP Utilities v1.0.0
+# Resilient LDAP Utilities v1.1.0
 
 This Python Package is comprised of various Resilient Functions that allow you to manage users in your Directory Service, without having to leave the UI of Resilient
 
@@ -12,6 +12,7 @@ See [Detailed PDF Documentation here](./docs/Resilient%20Integration%20LDAP%20Ut
       [fn_ldap_utilities]
       ldap_port=636
       ldap_use_ssl=True
+      ldap_user_ntlm=Domain\\User
       ldap_is_active_directory=True
     ```
 
@@ -45,6 +46,7 @@ entries where each entry has a 'dn' entry and a set of attributes
       [fn_ldap_utilities]
       ldap_port=636
       ldap_use_ssl=True
+      ldap_user_ntlm=Domain\\User
       ldap_is_active_directory=True
     ```
   * Must use a secure connection
@@ -77,6 +79,7 @@ entries where each entry has a 'dn' entry and a set of attributes
       [fn_ldap_utilities]
       ldap_port=636
       ldap_use_ssl=True
+      ldap_user_ntlm=Domain\\User
       ldap_is_active_directory=True
     ```
 * Enables or Disables an **Active Directory** user
@@ -90,6 +93,7 @@ entries where each entry has a 'dn' entry and a set of attributes
       [fn_ldap_utilities]
       ldap_port=636
       ldap_use_ssl=True
+      ldap_user_ntlm=Domain\\User
       ldap_is_active_directory=True
     ```
 * The function inputs `ldap_multiple_user_dn` and `ldap_multiple_group_dn` must be **string representation of a list:**
