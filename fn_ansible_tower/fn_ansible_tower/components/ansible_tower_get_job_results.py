@@ -78,7 +78,6 @@ class FunctionComponent(ResilientComponent):
                 yield StatusMessage(u"Attachment {} Id: {} created".format(file_name, attachment_json.get("id")))
 
             result_payload = result.done(True, payload)
-            print(result_payload.get("inputs"))
 
             yield StatusMessage("done...")
 
