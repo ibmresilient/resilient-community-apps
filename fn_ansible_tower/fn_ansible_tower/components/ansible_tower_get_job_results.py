@@ -6,10 +6,12 @@
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import RequestsCommon, ResultPayload, validate_fields
-from fn_ansible_tower.lib.common import SECTION_HDR, TOWER_API_BASE, get_common_request_items, save_as_attachment, clean_url
+from fn_ansible_tower.lib.common import SECTION_HDR, TOWER_API_BASE, get_common_request_items, save_as_attachment, \
+    clean_url
 
 JOBS_URL = "jobs/{id}"
 EVENTS_URL = "jobs/{id}/job_events/"
+
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'ansible_tower_get_job_results"""
@@ -28,12 +30,12 @@ class FunctionComponent(ResilientComponent):
     def _ansible_tower_get_job_results_function(self, event, *args, **kwargs):
         """Function: Get the results of a complete job"""
         try:
-            validate_fields(("url"), self.options) # validate key app.config settings
+            validate_fields(("url"), self.options)  # validate key app.config settings
 
             # Get the function parameters:
             tower_job_id = kwargs.get("tower_job_id")  # text
-            tower_save_as = self.get_select_param(kwargs.get("tower_save_as")) # select
-            incident_id = kwargs.get("incident_id") # number
+            tower_save_as = self.get_select_param(kwargs.get("tower_save_as"))  # select
+            incident_id = kwargs.get("incident_id")  # number
 
             log = logging.getLogger(__name__)
             log.info("tower_job_id: %s", tower_job_id)
@@ -76,10 +78,11 @@ class FunctionComponent(ResilientComponent):
                 yield StatusMessage(u"Attachment {} Id: {} created".format(file_name, attachment_json.get("id")))
 
             result_payload = result.done(True, payload)
+            print(result_payload.get("inputs"))
 
             yield StatusMessage("done...")
 
             # Produce a FunctionResult with the results
             yield FunctionResult(result_payload)
-        except Exception:
-            yield FunctionError()
+        except Exception as fun_err:
+            yield FunctionError(fun_err)

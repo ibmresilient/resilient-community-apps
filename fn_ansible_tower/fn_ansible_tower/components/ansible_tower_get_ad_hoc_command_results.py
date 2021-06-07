@@ -4,12 +4,13 @@
 """Function implementation"""
 
 import logging
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError, template_functions
 from resilient_lib import RequestsCommon, ResultPayload, validate_fields
 from fn_ansible_tower.lib.common import SECTION_HDR, TOWER_API_BASE, get_common_request_items, save_as_attachment, clean_url
 
 JOBS_URL = "ad_hoc_commands/{id}/"
 EVENTS_URL = "ad_hoc_commands/{id}/events/"
+
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'ansible_tower_get_job_results"""
@@ -79,5 +80,5 @@ class FunctionComponent(ResilientComponent):
 
             # Produce a FunctionResult with the results
             yield FunctionResult(result_payload)
-        except Exception:
-            yield FunctionError()
+        except Exception as fn_err:
+            yield FunctionError(fn_err)

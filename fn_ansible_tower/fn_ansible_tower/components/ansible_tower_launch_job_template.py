@@ -2,14 +2,16 @@
 # pragma pylint: disable=unused-argument, no-self-use
 # (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 """Function implementation"""
-
+import json
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import RequestsCommon, ResultPayload, validate_fields
-from fn_ansible_tower.lib.common import get_job_template_by_name, SECTION_HDR, TOWER_API_BASE, JSON_HEADERS, make_extra_vars, \
-                                        get_common_request_items, clean_url
+from fn_ansible_tower.lib.common import get_job_template_by_name, SECTION_HDR, TOWER_API_BASE, JSON_HEADERS, \
+    make_extra_vars, \
+    get_common_request_items, clean_url
 
 LAUNCH_URL = "job_templates/{id}/launch/"
+
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'ansible_tower_launch_job_template"""
@@ -28,15 +30,15 @@ class FunctionComponent(ResilientComponent):
     def _ansible_tower_launch_job_template_function(self, event, *args, **kwargs):
         """Function: None"""
         try:
-            validate_fields(("url"), self.options) # validate key app.config settings
+            validate_fields(("url"), self.options)  # validate key app.config settings
 
             # Get the function parameters:
-            tower_template_id = kwargs.get('tower_template_id') # number
-            tower_template_name = kwargs.get('tower_template_name') # text
-            tower_template_hosts = kwargs.get('tower_hosts') # text
-            tower_template_run_tags = kwargs.get('tower_run_tags') # text
-            tower_template_skip_tags = kwargs.get('tower_skip_tags') # text
-            tower_template_arguments = kwargs.get('tower_arguments') # text
+            tower_template_id = kwargs.get('tower_template_id')  # number
+            tower_template_name = kwargs.get('tower_template_name')  # text
+            tower_template_hosts = kwargs.get('tower_hosts')  # text
+            tower_template_run_tags = kwargs.get('tower_run_tags')  # text
+            tower_template_skip_tags = kwargs.get('tower_skip_tags')  # text
+            tower_template_arguments = kwargs.get('tower_arguments')  # text
 
             log = logging.getLogger(__name__)
             log.info("tower_template_id: %s", tower_template_id)
@@ -48,7 +50,6 @@ class FunctionComponent(ResilientComponent):
 
             result = ResultPayload(SECTION_HDR, **kwargs)
 
-            # PUT YOUR FUNCTION IMPLEMENTATION CODE HERE
             yield StatusMessage("starting...")
             if not tower_template_id:
                 if not tower_template_name:
@@ -65,22 +66,23 @@ class FunctionComponent(ResilientComponent):
                                             tower_template_run_tags, tower_template_skip_tags)
 
             result_payload = result.done(True, tower_result)
+
             yield StatusMessage("done...")
 
             # Produce a FunctionResult with the results
             yield FunctionResult(result_payload)
-        except Exception:
-            yield FunctionError()
+        except Exception as fun_err:
+            yield FunctionError(fun_err)
 
-def run_job_template(opts, options, tower_template_id,
-                     tower_template_hosts, tower_template_arguments,
+
+def run_job_template(opts, options, tower_template_id, tower_template_hosts, tower_template_arguments,
                      tower_template_run_tags, tower_template_skip_tags):
     """
     invoke the call to launch a job
     :param opts: full set of app.config settings
     :param options: specific settings for ansible tower
     :param tower_template_id:
-    :param tower_teemplate_hosts
+    :param tower_teemplate_hosts:
     :param tower_template_arguments:
     :param tower_template_run_tags:
     :param tower_template_skip_tags:
