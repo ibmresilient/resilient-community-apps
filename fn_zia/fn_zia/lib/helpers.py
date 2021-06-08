@@ -5,6 +5,8 @@
 from __future__ import print_function
 import logging
 import re
+import validators
+from urllib.parse import urlparse
 
 LOG = logging.getLogger(__name__)
 
