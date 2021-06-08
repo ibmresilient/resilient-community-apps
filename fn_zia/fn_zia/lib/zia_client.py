@@ -6,7 +6,7 @@ import logging
 import json
 import re
 from .auth import Auth
-from .helpers import filter_by_url, filter_by_category
+from .helpers import filter_by_url, filter_by_category, parse_urls
 
 LOG = logging.getLogger(__name__)
 
@@ -111,11 +111,10 @@ class ZiaClient(Auth):
         :param blocklist_urls: List of urls and/or ipaddresses
         return res: Parsed response
         """
-        if blocklisturls:
-            blacklisturls = list(filter(None, re.split("\s+|,", blocklisturls)))
+        blocklisturls = parse_urls(blocklisturls)
 
         payload = {
-            "blacklistUrls": blacklisturls
+            "blacklistUrls": blocklisturls
         }
 
         uri = self._endpoints["blocklist_action"].format(action)
@@ -134,9 +133,7 @@ class ZiaClient(Auth):
         :param blocklist_urls: List of urls and/or ipaddresses
         return res: Parsed response
         """
-        if allowlisturls:
-            # Convert urls in comma-seperated string to a list.
-            allowlisturls = list(filter(None, re.split("\s+|,", allowlisturls)))
+        allowlisturls = parse_urls(allowlisturls)
 
         # Get result for current allowlist query.
         curr_allowlist_res = self.get_allowlist_urls()
@@ -210,9 +207,7 @@ class ZiaClient(Auth):
         :param keywords: Comma or newline seperated keywords in string to add to new category
         return res: Response
         """
-        if urls:
-            # Convert urls in comma or newline seperated string to a list.
-            urls = list(filter(None, re.split(r"\s+|,|\n", urls)))
+        urls = parse_urls(urls)
 
         if keywords:
             # Convert keywords in comma or newline seperated string to a list.
@@ -245,9 +240,7 @@ class ZiaClient(Auth):
         :param action: Action name "ADD_TO_LIST" and "REMOVE_FROM_LIST"
         return res: Response
         """
-        if urls:
-            # Convert urls in comma-seperated string to a list.
-            urls = list(filter(None, re.split(r"\s+|,|\n", urls)))
+        urls = parse_urls(urls)
 
         params = {
             "action": action
