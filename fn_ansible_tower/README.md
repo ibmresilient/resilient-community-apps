@@ -31,7 +31,7 @@
 -->
 | Release | Date | Notes |
 | ------- | ---- | ----- |
-| v1.0.3  | 8/6/2022 | Bug fix to handle results data. |
+| v1.0.3  | 6/2021 | Bug fix to handle results data. |
 | v1.0.2  | 2/2021 | Bug fix for paged results from templates, jobs, etc. |
 | v1.0.1  | 12/2020 | App Host support |
 | v1.0.0  | 2/2020 | Initial release |
