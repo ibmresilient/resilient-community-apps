@@ -6,7 +6,7 @@ import logging
 import json
 import re
 from .auth import Auth
-from .helpers import filter_by_url, filter_by_category, parse_urls
+from .helpers import filter_by_url, filter_by_category, process_urls
 
 LOG = logging.getLogger(__name__)
 
@@ -111,7 +111,7 @@ class ZiaClient(Auth):
         :param blocklist_urls: List of urls and/or ipaddresses
         return res: Parsed response
         """
-        blocklisturls = parse_urls(blocklisturls)
+        blocklisturls = process_urls(blocklisturls)
 
         payload = {
             "blacklistUrls": blocklisturls
@@ -133,7 +133,7 @@ class ZiaClient(Auth):
         :param blocklist_urls: List of urls and/or ipaddresses
         return res: Parsed response
         """
-        allowlisturls = parse_urls(allowlisturls)
+        allowlisturls = process_urls(allowlisturls)
 
         # Get result for current allowlist query.
         curr_allowlist_res = self.get_allowlist_urls()
@@ -207,7 +207,7 @@ class ZiaClient(Auth):
         :param keywords: Comma or newline seperated keywords in string to add to new category
         return res: Response
         """
-        urls = parse_urls(urls)
+        urls = process_urls(urls)
 
         if keywords:
             # Convert keywords in comma or newline seperated string to a list.
@@ -240,7 +240,7 @@ class ZiaClient(Auth):
         :param action: Action name "ADD_TO_LIST" and "REMOVE_FROM_LIST"
         return res: Response
         """
-        urls = parse_urls(urls)
+        urls = process_urls(urls)
 
         params = {
             "action": action

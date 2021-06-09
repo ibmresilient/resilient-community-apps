@@ -5,8 +5,8 @@
 from __future__ import print_function
 import logging
 import re
-import validators
 from urllib.parse import urlparse
+import validators
 
 LOG = logging.getLogger(__name__)
 
@@ -22,27 +22,6 @@ def is_regex(regex_str):
         return True
     except re.error:
         return False
-
-def parse_urls(urls_str):
-    """"Process string and extract url values convert to list.
-
-    Urls in string consist of DNS host name, ip addresses or URLS.
-    URLS will be parsed to extract hostname.
-
-    :param regex_str: Comma or newline seperated string of urls.
-    :return: Boolean.
-    """
-
-    if not urls_str:
-        raise ValueError("The urls string is not set or is empty.")
-    # Convert urls in comma or newline seperated string to a list.
-    urls = list(filter(None, re.split(r"\s+|,|\n", urls_str)))
-
-    # Parse any actual urls to extract the hostname.
-    urls = [urlparse(u).hostname if validators.url(u) else u for u in urls]
-
-    # Return list of urls
-    return urls
 
 def filter_by_category(result, name_filter=None):
     """ Filter by category name the result returned from ZIA.
@@ -101,3 +80,42 @@ def filter_by_url(result, url_filter=None, url_type=None):
             result = None
 
     return result
+
+
+def process_urls(urls_str):
+    """"Process string and extract url values and convert to list.
+
+    Urls in string consist of DNS host name, ip addresses or URLS.
+    URLS will be parsed to sanitize for ZIA.
+
+    :param regex_str: Comma or newline seperated string of urls.
+    :return: list of hostnames.
+    """
+    if not urls_str:
+        raise ValueError("The urls string is not set or is empty.")
+    # Convert urls in comma or newline seperated string to a list.
+    urls = list(filter(None, re.split(r"\s+|,|\n", urls_str)))
+
+    # Parse url if it is an actual url.
+    urls = [parse_url(u) for u in urls]
+
+    # Return list of urls
+    return urls
+
+def parse_url(url):
+    """"Parse url to convert to format acceptable to ZIA.
+    Remove scheme and username and password if present.
+
+    :param url: A url.
+    :return: Parsed url.
+    """
+    # If an IP address, DNS host return as is
+    if validators.domain(url) or validators.ipv4(url) or validators.ipv6(url):
+        return url
+    parsed = urlparse(url)
+    scheme = "{}://".format(parsed.scheme)
+    netloc = parsed.netloc
+    # Remove any username and password from netloc.
+    stripped_netloc = re.sub("^(.*@)", '', netloc)
+    # Return sanitize url
+    return parsed.geturl().replace(scheme, '', 1).replace(netloc, stripped_netloc, 1)
