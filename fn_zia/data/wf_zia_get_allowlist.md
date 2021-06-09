@@ -68,7 +68,7 @@ def main():
         allowlist_urls = CONTENT.whitelistUrls
         url_counts = CONTENT.url_counts
         note_text = u"ZIA Integration: Workflow <b>{0}</b>: There were <b>{1}</b> allowlist URLS (s) out of a total of "\
-                    u"<b>{2}</b> using filter <b>{3}</b> returned for SOAR function <b>{2}</b>."\
+                    u"<b>{2}</b> using filter <b>{3}</b> returned for SOAR function <b>{4}</b>."\
         .format(WF_NAME, url_counts["filtered"], url_counts["total"], url_filter, FN_NAME)
         if allowlist_urls:
             if url_counts["filtered"] <= 50:
