@@ -225,6 +225,14 @@
       "uuid": "1e34e038-c2f9-4956-bffd-0e88570a1e81",
       "view_items": [
         {
+          "content": "a43d0fec-4081-4a05-8866-bde580cd8106",
+          "element": "field_uuid",
+          "field_type": "actioninvocation",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
           "content": "22b4d6a5-6acb-4126-af93-71184392d051",
           "element": "field_uuid",
           "field_type": "actioninvocation",
@@ -449,14 +457,6 @@
       "uuid": "a7bcae78-ead5-430e-abad-5368ecb74bbe",
       "view_items": [
         {
-          "content": "6c4fd6d8-62ea-48b8-b133-69badb0b0ff2",
-          "element": "field_uuid",
-          "field_type": "actioninvocation",
-          "show_if": null,
-          "show_link_header": false,
-          "step_label": null
-        },
-        {
           "content": "35303301-4222-4a79-a252-08c1cb9a6bad",
           "element": "field_uuid",
           "field_type": "actioninvocation",
@@ -466,14 +466,6 @@
         },
         {
           "content": "62de6078-fd7a-4b19-8b95-4627e3193faf",
-          "element": "field_uuid",
-          "field_type": "actioninvocation",
-          "show_if": null,
-          "show_link_header": false,
-          "step_label": null
-        },
-        {
-          "content": "45e74e32-2bb1-44b0-8f3d-d36585bbf9ce",
           "element": "field_uuid",
           "field_type": "actioninvocation",
           "show_if": null,
@@ -537,22 +529,6 @@
       "uuid": "87ae570d-4082-4f41-a9f0-1db6f259afad",
       "view_items": [
         {
-          "content": "6c4fd6d8-62ea-48b8-b133-69badb0b0ff2",
-          "element": "field_uuid",
-          "field_type": "actioninvocation",
-          "show_if": null,
-          "show_link_header": false,
-          "step_label": null
-        },
-        {
-          "content": "0ec4b02c-611e-4466-b84b-766f00fe9440",
-          "element": "field_uuid",
-          "field_type": "actioninvocation",
-          "show_if": null,
-          "show_link_header": false,
-          "step_label": null
-        },
-        {
           "content": "35303301-4222-4a79-a252-08c1cb9a6bad",
           "element": "field_uuid",
           "field_type": "actioninvocation",
@@ -562,6 +538,14 @@
         },
         {
           "content": "62de6078-fd7a-4b19-8b95-4627e3193faf",
+          "element": "field_uuid",
+          "field_type": "actioninvocation",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "0ec4b02c-611e-4466-b84b-766f00fe9440",
           "element": "field_uuid",
           "field_type": "actioninvocation",
           "show_if": null,
@@ -933,7 +917,7 @@
   ],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1623259674009,
+  "export_date": 1623346105617,
   "export_format_version": 2,
   "fields": [
     {
@@ -1397,11 +1381,402 @@
       "rich_text": false,
       "tags": [],
       "templates": [],
-      "text": "Urls",
-      "tooltip": "DNS names or IP addresses. Entries of type URL or URL referrer will be parsed to extract the hostname. ",
+      "text": "URLs",
+      "tooltip": "Entries of type DNS hostname, IP Address, URL or URI. Wildcard is a \u0027.\u0027   Entries will be parsed to extract a format suitable for ZIA to add to a list. URL guidelines https://help.zscaler.com/zia/url-format-guidelines.",
       "type_id": 6,
       "uuid": "8c064411-c875-4675-8a79-bf025c297022",
       "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "actioninvocation/zia_super_category",
+      "hide_notification": false,
+      "id": 571,
+      "input_type": "select",
+      "internal": false,
+      "is_tracked": false,
+      "name": "zia_super_category",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": "properties",
+      "read_only": false,
+      "required": "always",
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "Super category",
+      "tooltip": "",
+      "type_id": 6,
+      "uuid": "a43d0fec-4081-4a05-8866-bde580cd8106",
+      "values": [
+        {
+          "default": false,
+          "enabled": false,
+          "hidden": false,
+          "label": "BLOG",
+          "properties": null,
+          "uuid": "fec59731-4b52-4a6c-b57a-78204afb9c19",
+          "value": 515
+        },
+        {
+          "default": true,
+          "enabled": true,
+          "hidden": false,
+          "label": "USER_DEFINED",
+          "properties": null,
+          "uuid": "1e203720-6e0c-4fd6-82dd-773cc64d513e",
+          "value": 257
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "ADULT_MATERIAL",
+          "properties": null,
+          "uuid": "24b552ce-2d6a-4e23-9b2e-cae4cc763241",
+          "value": 610
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "ADVANCED_SECURITY",
+          "properties": null,
+          "uuid": "fcd2747a-af95-448c-a302-00cb6fe6793b",
+          "value": 611
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "ANY",
+          "properties": null,
+          "uuid": "98374bb6-5e76-4390-99ed-fbaccc184492",
+          "value": 612
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "BUSINESS_AND_ECONOMY",
+          "properties": null,
+          "uuid": "e23cffdf-3893-49db-96d9-b232eb4cdc39",
+          "value": 613
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "CUSTOM_BP",
+          "properties": null,
+          "uuid": "34377ed2-1c93-4a4b-a274-a4673301d71d",
+          "value": 614
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "CUSTOM_BW",
+          "properties": null,
+          "uuid": "a7f14f2c-b009-48a8-94d2-8a84d9143732",
+          "value": 615
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "CUSTOM_SUPERCATEGORY",
+          "properties": null,
+          "uuid": "6ac3a662-f2a8-4cba-9951-0acd7811d69b",
+          "value": 616
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "DRUGS",
+          "properties": null,
+          "uuid": "6d6e79b7-304f-4d10-9bce-34f6bb287544",
+          "value": 617
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "EDUCATION",
+          "properties": null,
+          "uuid": "6a9bfbeb-795f-4537-bda9-5ab8c8da50aa",
+          "value": 618
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "ENTERTAINMENT_AND_RECREATION",
+          "properties": null,
+          "uuid": "fc3c7e26-d529-42b6-8439-818101d23624",
+          "value": 619
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "GAMBLING",
+          "properties": null,
+          "uuid": "f7829f11-b174-4740-a45a-14e87577e021",
+          "value": 533
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "GAMES",
+          "properties": null,
+          "uuid": "6bf01a26-b6a0-441e-a8d2-9df8a16739a8",
+          "value": 620
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "GLOBAL_INT",
+          "properties": null,
+          "uuid": "c75babe4-990f-49c2-9d90-8dad656393ff",
+          "value": 621
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "GLOBAL_INT_BP",
+          "properties": null,
+          "uuid": "05101f93-4a75-4ae4-8df0-4655057e6cc0",
+          "value": 622
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "GLOBAL_INT_BW",
+          "properties": null,
+          "uuid": "fec263c9-6094-4651-b05d-d4d8c286926a",
+          "value": 623
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "GOVERNMENT_AND_POLITICS",
+          "properties": null,
+          "uuid": "2a01d036-bf86-45b8-baa3-b02c50d157fe",
+          "value": 624
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "HEALTH",
+          "properties": null,
+          "uuid": "cca5434e-b255-4568-baa2-0fb4d48da673",
+          "value": 535
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "ILLEGAL_OR_QUESTIONABLE",
+          "properties": null,
+          "uuid": "a498d9cc-bf4e-4b0e-8aff-6183dce2c723",
+          "value": 625
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "INFORMATION_TECHNOLOGY",
+          "properties": null,
+          "uuid": "641e1e3a-9d85-47b4-8672-f77c769b0006",
+          "value": 626
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "INTERNET_COMMUNICATION",
+          "properties": null,
+          "uuid": "b0f1be74-0cf2-4748-9c27-988574ec581a",
+          "value": 627
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "JOB_SEARCH",
+          "properties": null,
+          "uuid": "a2b9f678-85d2-4d10-8a70-ba06673f8265",
+          "value": 540
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "MILITANCY_HATE_AND_EXTREMISM",
+          "properties": null,
+          "uuid": "70dfc139-fc64-4b91-87b3-ac31a5bd6002",
+          "value": 546
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "MISCELLANEOUS",
+          "properties": null,
+          "uuid": "4af73458-70e3-47a7-97c3-76f68e806c31",
+          "value": 628
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "NEWS_AND_MEDIA",
+          "properties": null,
+          "uuid": "176d4907-ef7e-4656-9162-476c8a6d04a1",
+          "value": 551
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "NONE",
+          "properties": null,
+          "uuid": "2eba7419-6f98-4433-9f31-25b40f577b0f",
+          "value": 629
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "OFFICE_365",
+          "properties": null,
+          "uuid": "421624ad-c1e0-4e96-891e-32bd3e6f8219",
+          "value": 630
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "RELIGION",
+          "properties": null,
+          "uuid": "c41f0e59-f09a-418b-bfeb-3b4c1927fb81",
+          "value": 631
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "SHOPPING_AND_AUCTIONS",
+          "properties": null,
+          "uuid": "2ec6936c-ceee-42c8-a9cb-7ef6b5243238",
+          "value": 632
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "SOCIAL_AND_FAMILY_ISSUES",
+          "properties": null,
+          "uuid": "79eb2d9a-5583-4cf8-bc0c-508f9be23f7f",
+          "value": 633
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "SOCIETY_AND_LIFESTYLE",
+          "properties": null,
+          "uuid": "a0dbc6f1-85cc-45ec-a581-10ffe2ace42c",
+          "value": 634
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "SPECIAL_INTERESTS_SOCIAL_ORGANIZATIONS",
+          "properties": null,
+          "uuid": "04514ca9-8d5b-4c4a-ab59-3f2dc39f59c9",
+          "value": 635
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "SPORTS",
+          "properties": null,
+          "uuid": "471d1ade-f8ff-48cf-af79-c5017263095a",
+          "value": 594
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "TASTELESS",
+          "properties": null,
+          "uuid": "8a373f66-1bf9-4301-80a3-25e3956b11de",
+          "value": 596
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "TRAVEL",
+          "properties": null,
+          "uuid": "23cb284f-328a-4770-b2b5-6f21f7287dfe",
+          "value": 601
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "VEHICLES",
+          "properties": null,
+          "uuid": "c0f6522a-de7d-4a55-b508-c29b60c23fa2",
+          "value": 602
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "VIOLENCE",
+          "properties": null,
+          "uuid": "ce8f765a-a288-4c3e-b496-6e5ab2fc9d3e",
+          "value": 603
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "WEAPONS_AND_BOMBS",
+          "properties": null,
+          "uuid": "786cc9cb-7db9-4a28-87b6-ea93a051e5e3",
+          "value": 604
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "SECURITY",
+          "properties": null,
+          "uuid": "ef8fda1a-0066-475f-8803-a0e679c02506",
+          "value": 636
+        }
+      ]
     },
     {
       "allow_default_value": false,
@@ -1427,7 +1802,7 @@
       "rich_text": false,
       "tags": [],
       "templates": [],
-      "text": "Category configured name",
+      "text": "Configured name",
       "tooltip": "Custom category configured name. Note: If a different configured name to the original is used it will be over-written.",
       "type_id": 6,
       "uuid": "c92ca054-2751-4579-b0f9-5682ab358138",
@@ -1583,7 +1958,7 @@
       "tags": [],
       "templates": [],
       "text": "Configured name",
-      "tooltip": "Configured name of the custom category.  e.g. \u0027Custom blocklist\u0027",
+      "tooltip": "Configured name of the custom category.  e.g. \u0027Custom blocklist\u0027, \u0027CUSTOM_ALLOWLIST\u0027 etc\u0027",
       "type_id": 6,
       "uuid": "22b4d6a5-6acb-4126-af93-71184392d051",
       "values": []
@@ -1644,45 +2019,16 @@
       "name": "zia_name_filter",
       "operation_perms": {},
       "operations": [],
-      "placeholder": "Custom blocklist",
+      "placeholder": "\u003cREGEX\u003e|\u003cSTRING\u003e",
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
       "tags": [],
       "templates": [],
       "text": "Category name filter",
-      "tooltip": "Filter by category name. Can be a string or regular expression. e.g. \u0027^CAT.*\u0027 or ^(List 1|LIST_2)$",
+      "tooltip": "Filter by category name. Can be a string or regular expression. e.g. \u0027Custom category\u0027, \u0027^CAT.*\u0027 or ^(List 1|LIST_2)$. Leaving the filter blank will return the full list. ",
       "type_id": 6,
       "uuid": "35303301-4222-4a79-a252-08c1cb9a6bad",
-      "values": []
-    },
-    {
-      "allow_default_value": false,
-      "blank_option": false,
-      "calculated": false,
-      "changeable": true,
-      "chosen": false,
-      "default_chosen_by_server": false,
-      "deprecated": false,
-      "export_key": "actioninvocation/zia_keyword_filter",
-      "hide_notification": false,
-      "id": 624,
-      "input_type": "text",
-      "internal": false,
-      "is_tracked": false,
-      "name": "zia_keyword_filter",
-      "operation_perms": {},
-      "operations": [],
-      "placeholder": "test",
-      "prefix": "properties",
-      "read_only": false,
-      "rich_text": false,
-      "tags": [],
-      "templates": [],
-      "text": "Keyword filter",
-      "tooltip": "Filter by keyword. Can be a string or regular expression.",
-      "type_id": 6,
-      "uuid": "45e74e32-2bb1-44b0-8f3d-d36585bbf9ce",
       "values": []
     },
     {
@@ -1702,14 +2048,14 @@
       "name": "zia_url_filter",
       "operation_perms": {},
       "operations": [],
-      "placeholder": "example.com",
+      "placeholder": "\u003cREGEX\u003e|\u003cSTRING\u003e",
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
       "tags": [],
       "templates": [],
       "text": "URL filter",
-      "tooltip": "Filter by url. Can be a string or regular expression. e.g. \u0027^host.*\u0027 or ^(?:[0-9]{1,3}\\.){3}[0-9]{1,3}$",
+      "tooltip": "Filter by URL. Can be a string or regular expression. e.g. host.ibm.com, ^host.*\u0027 or ^(?:[0-9]{1,3}\\.){3}[0-9]{1,3}$. Leaving the filter blank will return the full list.",
       "type_id": 6,
       "uuid": "62de6078-fd7a-4b19-8b95-4627e3193faf",
       "values": []
@@ -1780,35 +2126,6 @@
           "value": 364
         }
       ]
-    },
-    {
-      "allow_default_value": false,
-      "blank_option": false,
-      "calculated": false,
-      "changeable": true,
-      "chosen": false,
-      "default_chosen_by_server": false,
-      "deprecated": false,
-      "export_key": "actioninvocation/zia_category_id_input",
-      "hide_notification": false,
-      "id": 592,
-      "input_type": "text",
-      "internal": false,
-      "is_tracked": false,
-      "name": "zia_category_id_input",
-      "operation_perms": {},
-      "operations": [],
-      "placeholder": "CUSTOM_01",
-      "prefix": "properties",
-      "read_only": false,
-      "rich_text": false,
-      "tags": [],
-      "templates": [],
-      "text": "Category ID",
-      "tooltip": "THe category id for a category.",
-      "type_id": 6,
-      "uuid": "6c4fd6d8-62ea-48b8-b133-69badb0b0ff2",
-      "values": []
     },
     {
       "export_key": "incident/internal_customizations_field",
@@ -2644,12 +2961,12 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 154,
+  "id": 159,
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1623259650184,
+      "create_date": 1623346095986,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -2658,7 +2975,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1623259650184,
+      "update_date": 1623346095986,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -2703,10 +3020,10 @@
       "fields": {
         "allowlist_url": {
           "allow_default_value": false,
-          "blank_option": false,
+          "blank_option": true,
           "calculated": false,
           "changeable": true,
-          "chosen": false,
+          "chosen": true,
           "default_chosen_by_server": false,
           "deprecated": false,
           "export_key": "zia_allowlist/allowlist_url",
@@ -2718,26 +3035,26 @@
           "name": "allowlist_url",
           "operation_perms": {},
           "operations": [],
-          "order": 1,
+          "order": 2,
           "placeholder": "",
           "prefix": null,
           "read_only": false,
           "rich_text": false,
           "tags": [],
           "templates": [],
-          "text": "Allowlist url",
-          "tooltip": "A url  or  ip address which is on allowlist",
+          "text": "Allowlist URL",
+          "tooltip": "A URL which is on the allowlist",
           "type_id": 1007,
           "uuid": "f9b4cb08-86ff-4f39-a3af-d8992d8cc329",
           "values": [],
-          "width": 271
+          "width": 340
         },
         "query_execution_date": {
           "allow_default_value": false,
-          "blank_option": false,
+          "blank_option": true,
           "calculated": false,
           "changeable": true,
-          "chosen": false,
+          "chosen": true,
           "default_chosen_by_server": false,
           "deprecated": false,
           "export_key": "zia_allowlist/query_execution_date",
@@ -2757,11 +3074,42 @@
           "tags": [],
           "templates": [],
           "text": "Query execution date",
-          "tooltip": "",
+          "tooltip": "Date and time when query was run.",
           "type_id": 1007,
           "uuid": "037eb7d8-1d26-440c-b814-69d89b44c2ed",
           "values": [],
-          "width": 427
+          "width": 158
+        },
+        "query_filter": {
+          "allow_default_value": false,
+          "blank_option": true,
+          "calculated": false,
+          "changeable": true,
+          "chosen": true,
+          "default_chosen_by_server": false,
+          "deprecated": false,
+          "export_key": "zia_allowlist/query_filter",
+          "hide_notification": false,
+          "id": 627,
+          "input_type": "text",
+          "internal": false,
+          "is_tracked": false,
+          "name": "query_filter",
+          "operation_perms": {},
+          "operations": [],
+          "order": 1,
+          "placeholder": "",
+          "prefix": null,
+          "read_only": false,
+          "rich_text": false,
+          "tags": [],
+          "templates": [],
+          "text": "Query filter",
+          "tooltip": "Filter, if any, used in query.",
+          "type_id": 1007,
+          "uuid": "58e361b5-4f2d-442a-a967-c94e7c9aa12e",
+          "values": [],
+          "width": 175
         }
       },
       "for_actions": false,
@@ -2805,19 +3153,19 @@
           "name": "blocklist_url",
           "operation_perms": {},
           "operations": [],
-          "order": 1,
+          "order": 2,
           "placeholder": "",
           "prefix": null,
           "read_only": false,
           "rich_text": false,
           "tags": [],
           "templates": [],
-          "text": "Blocklist url",
-          "tooltip": "A url  or  ip address which is on blocklist",
+          "text": "Blocklist URL",
+          "tooltip": "A URL which is on the blocklist.",
           "type_id": 1006,
           "uuid": "b227eee6-0fc0-4352-8975-53d7b1b393b7",
           "values": [],
-          "width": 321
+          "width": 362
         },
         "query_execution_date": {
           "allow_default_value": false,
@@ -2844,11 +3192,42 @@
           "tags": [],
           "templates": [],
           "text": "Query Execution Date",
-          "tooltip": "",
+          "tooltip": "Date and time when query was run.",
           "type_id": 1006,
           "uuid": "f8a3ddba-bd77-4179-91ec-0d73b440ed63",
           "values": [],
-          "width": 351
+          "width": 155
+        },
+        "query_filter": {
+          "allow_default_value": false,
+          "blank_option": true,
+          "calculated": false,
+          "changeable": true,
+          "chosen": true,
+          "default_chosen_by_server": false,
+          "deprecated": false,
+          "export_key": "zia_blocklist/query_filter",
+          "hide_notification": false,
+          "id": 628,
+          "input_type": "text",
+          "internal": false,
+          "is_tracked": false,
+          "name": "query_filter",
+          "operation_perms": {},
+          "operations": [],
+          "order": 1,
+          "placeholder": "",
+          "prefix": null,
+          "read_only": false,
+          "rich_text": false,
+          "tags": [],
+          "templates": [],
+          "text": "Query filter",
+          "tooltip": "Filter, if any, used in query.",
+          "type_id": 1006,
+          "uuid": "0c8d95fe-1b9d-49e4-b23a-69f08144d958",
+          "values": [],
+          "width": 171
         }
       },
       "for_actions": false,
@@ -2892,7 +3271,7 @@
           "name": "cat_id",
           "operation_perms": {},
           "operations": [],
-          "order": 1,
+          "order": 2,
           "placeholder": "",
           "prefix": null,
           "read_only": false,
@@ -2900,11 +3279,11 @@
           "tags": [],
           "templates": [],
           "text": "Category ID",
-          "tooltip": "",
+          "tooltip": "Category ID of custom list.",
           "type_id": 1009,
           "uuid": "58bae690-90b6-48ac-9fc3-ff82b35298dd",
           "values": [],
-          "width": 178
+          "width": 173
         },
         "configuredName": {
           "allow_default_value": false,
@@ -2923,7 +3302,7 @@
           "name": "configuredName",
           "operation_perms": {},
           "operations": [],
-          "order": 2,
+          "order": 3,
           "placeholder": "",
           "prefix": null,
           "read_only": false,
@@ -2931,11 +3310,11 @@
           "tags": [],
           "templates": [],
           "text": "Category configured name",
-          "tooltip": "",
+          "tooltip": "configured name of the custom list.",
           "type_id": 1009,
           "uuid": "629f32a3-e679-427a-8d8d-4cc5fa3d670a",
           "values": [],
-          "width": 164
+          "width": 159
         },
         "query_execution_date": {
           "allow_default_value": false,
@@ -2962,18 +3341,49 @@
           "tags": [],
           "templates": [],
           "text": "Query execution date",
-          "tooltip": "",
+          "tooltip": "Date and time when query was run.",
           "type_id": 1009,
           "uuid": "ee640694-00bb-4e64-98a8-1072567804ba",
           "values": [],
-          "width": 163
+          "width": 161
+        },
+        "query_filter": {
+          "allow_default_value": false,
+          "blank_option": true,
+          "calculated": false,
+          "changeable": true,
+          "chosen": true,
+          "default_chosen_by_server": false,
+          "deprecated": false,
+          "export_key": "zia_customlists/query_filter",
+          "hide_notification": false,
+          "id": 629,
+          "input_type": "text",
+          "internal": false,
+          "is_tracked": false,
+          "name": "query_filter",
+          "operation_perms": {},
+          "operations": [],
+          "order": 1,
+          "placeholder": "",
+          "prefix": null,
+          "read_only": false,
+          "rich_text": false,
+          "tags": [],
+          "templates": [],
+          "text": "Query filter",
+          "tooltip": "Filter, if any, used in the query.",
+          "type_id": 1009,
+          "uuid": "f0fa99f7-bae2-4f3a-bc3f-f49406e9a66c",
+          "values": [],
+          "width": 114
         },
         "url": {
           "allow_default_value": false,
-          "blank_option": false,
+          "blank_option": true,
           "calculated": false,
           "changeable": true,
-          "chosen": false,
+          "chosen": true,
           "default_chosen_by_server": false,
           "deprecated": false,
           "export_key": "zia_customlists/url",
@@ -2985,19 +3395,19 @@
           "name": "url",
           "operation_perms": {},
           "operations": [],
-          "order": 3,
+          "order": 4,
           "placeholder": "",
           "prefix": null,
           "read_only": false,
           "rich_text": false,
           "tags": [],
           "templates": [],
-          "text": "Url",
-          "tooltip": "",
+          "text": "URL",
+          "tooltip": "A URL on the custom list.",
           "type_id": 1009,
           "uuid": "05d7e8f1-d744-4f1a-b12f-f075dbc58a9d",
           "values": [],
-          "width": 179
+          "width": 301
         }
       },
       "for_actions": false,
@@ -3079,7 +3489,7 @@
           "rich_text": false,
           "tags": [],
           "templates": [],
-          "text": "Detected Malware",
+          "text": "Detected malware",
           "tooltip": "",
           "type_id": 1010,
           "uuid": "2bdc7b30-6690-4c18-a7ad-2892c0f909ed",
@@ -3110,12 +3520,12 @@
           "rich_text": false,
           "tags": [],
           "templates": [],
-          "text": "Digital Cerificate",
+          "text": "Digital certificate",
           "tooltip": "",
           "type_id": 1010,
           "uuid": "c107641a-9c1c-489b-bd21-1552c749588f",
           "values": [],
-          "width": 125
+          "width": 124
         },
         "FileSize": {
           "allow_default_value": false,
@@ -3146,7 +3556,7 @@
           "type_id": 1010,
           "uuid": "ed42cf5f-ced6-4371-b982-8a1d9db6f2a6",
           "values": [],
-          "width": 34
+          "width": 33
         },
         "FileType": {
           "allow_default_value": false,
@@ -3172,12 +3582,12 @@
           "rich_text": false,
           "tags": [],
           "templates": [],
-          "text": "FileType",
+          "text": "File type",
           "tooltip": "",
           "type_id": 1010,
           "uuid": "c8ffbbf0-07d4-4819-9f40-83f7ce16b4cf",
           "values": [],
-          "width": 64
+          "width": 63
         },
         "Issuer": {
           "allow_default_value": false,
@@ -3212,10 +3622,10 @@
         },
         "MD5": {
           "allow_default_value": false,
-          "blank_option": false,
+          "blank_option": true,
           "calculated": false,
           "changeable": true,
-          "chosen": false,
+          "chosen": true,
           "default_chosen_by_server": false,
           "deprecated": false,
           "export_key": "zia_sandbox_report_summary/MD5",
@@ -3389,12 +3799,12 @@
           "rich_text": false,
           "tags": [],
           "templates": [],
-          "text": "Sha256",
+          "text": "SHA256",
           "tooltip": "",
           "type_id": 1010,
           "uuid": "26eed72a-67f2-4ea8-972d-adf15df3b422",
           "values": [],
-          "width": 58
+          "width": 62
         },
         "Status": {
           "allow_default_value": false,
@@ -3425,7 +3835,7 @@
           "type_id": 1010,
           "uuid": "ab4e86d7-5a92-418c-96a1-625a22448ca5",
           "values": [],
-          "width": 52
+          "width": 51
         },
         "Type": {
           "allow_default_value": false,
@@ -3451,7 +3861,7 @@
           "rich_text": false,
           "tags": [],
           "templates": [],
-          "text": "Classification Type",
+          "text": "Classification type",
           "tooltip": "",
           "type_id": 1010,
           "uuid": "6debe44b-c43f-4731-a04a-e616bf4fc993",
@@ -3482,12 +3892,12 @@
           "rich_text": false,
           "tags": [],
           "templates": [],
-          "text": "Query Execution Date",
+          "text": "Query execution date",
           "tooltip": "",
           "type_id": 1010,
           "uuid": "fc17debd-1bbb-49d0-a71f-1ceddbddcdb3",
           "values": [],
-          "width": 151
+          "width": 150
         },
         "report_Category": {
           "allow_default_value": false,
@@ -3518,7 +3928,7 @@
           "type_id": 1010,
           "uuid": "e08b6d91-6cb8-47a1-a07b-b84a3d5c55fb",
           "values": [],
-          "width": 73
+          "width": 72
         }
       },
       "for_actions": false,
@@ -3605,7 +4015,7 @@
           "type_id": 1008,
           "uuid": "133bbe54-06ef-4c73-97c6-76a4af04f8e8",
           "values": [],
-          "width": 91
+          "width": 96
         },
         "configuredName": {
           "allow_default_value": false,
@@ -3636,14 +4046,14 @@
           "type_id": 1008,
           "uuid": "71b285f2-db92-4ce4-9e8c-03410a4c2013",
           "values": [],
-          "width": 127
+          "width": 129
         },
         "customCategory": {
           "allow_default_value": false,
-          "blank_option": false,
+          "blank_option": true,
           "calculated": false,
           "changeable": true,
-          "chosen": false,
+          "chosen": true,
           "default_chosen_by_server": false,
           "deprecated": false,
           "export_key": "zia_url_categories/customCategory",
@@ -3655,7 +4065,7 @@
           "name": "customCategory",
           "operation_perms": {},
           "operations": [],
-          "order": 7,
+          "order": 8,
           "placeholder": "",
           "prefix": null,
           "read_only": false,
@@ -3667,7 +4077,7 @@
           "type_id": 1008,
           "uuid": "6cce2020-d6d3-4f6d-b5d2-0633999789ea",
           "values": [],
-          "width": 124
+          "width": 81
         },
         "customUrlsCount": {
           "allow_default_value": false,
@@ -3686,26 +4096,26 @@
           "name": "customUrlsCount",
           "operation_perms": {},
           "operations": [],
-          "order": 10,
+          "order": 4,
           "placeholder": "",
           "prefix": null,
           "read_only": false,
           "rich_text": false,
           "tags": [],
           "templates": [],
-          "text": "Custom Urls count",
+          "text": "Custom URLs count",
           "tooltip": "",
           "type_id": 1008,
           "uuid": "c102cf4f-02b5-495a-af00-689a3439f82a",
           "values": [],
-          "width": 132
+          "width": 84
         },
         "editable": {
           "allow_default_value": false,
-          "blank_option": false,
+          "blank_option": true,
           "calculated": false,
           "changeable": true,
-          "chosen": false,
+          "chosen": true,
           "default_chosen_by_server": false,
           "deprecated": false,
           "export_key": "zia_url_categories/editable",
@@ -3717,7 +4127,7 @@
           "name": "editable",
           "operation_perms": {},
           "operations": [],
-          "order": 8,
+          "order": 9,
           "placeholder": "",
           "prefix": null,
           "read_only": false,
@@ -3729,7 +4139,7 @@
           "type_id": 1008,
           "uuid": "4e7c9909-f6b1-4283-a822-3fcc18baddcb",
           "values": [],
-          "width": 64
+          "width": 63
         },
         "keywords": {
           "allow_default_value": false,
@@ -3741,14 +4151,14 @@
           "deprecated": false,
           "export_key": "zia_url_categories/keywords",
           "hide_notification": false,
-          "id": 580,
+          "id": 631,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
           "name": "keywords",
           "operation_perms": {},
           "operations": [],
-          "order": 5,
+          "order": 6,
           "placeholder": "",
           "prefix": null,
           "read_only": false,
@@ -3758,9 +4168,9 @@
           "text": "Keywords",
           "tooltip": "",
           "type_id": 1008,
-          "uuid": "5fcb38fd-d660-4c78-9a6f-20f21983f317",
+          "uuid": "803b20ec-6d74-497e-bc28-a603535b2b32",
           "values": [],
-          "width": 76
+          "width": 99
         },
         "query_execution_date": {
           "allow_default_value": false,
@@ -3787,11 +4197,11 @@
           "tags": [],
           "templates": [],
           "text": "Query execution date",
-          "tooltip": "",
+          "tooltip": "Date and time when query was run.",
           "type_id": 1008,
           "uuid": "2e8f71da-f58a-473b-b259-8224dbc3d3e7",
           "values": [],
-          "width": 75
+          "width": 156
         },
         "superCategory": {
           "allow_default_value": false,
@@ -3803,14 +4213,14 @@
           "deprecated": false,
           "export_key": "zia_url_categories/superCategory",
           "hide_notification": false,
-          "id": 582,
+          "id": 630,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
           "name": "superCategory",
           "operation_perms": {},
           "operations": [],
-          "order": 4,
+          "order": 7,
           "placeholder": "",
           "prefix": null,
           "read_only": false,
@@ -3820,16 +4230,16 @@
           "text": "Super category",
           "tooltip": "",
           "type_id": 1008,
-          "uuid": "c7738040-727d-4818-92a4-70ee6e7690c6",
+          "uuid": "3a365cdd-5497-4939-8480-ebfde0ef2f21",
           "values": [],
-          "width": 112
+          "width": 124
         },
         "type": {
           "allow_default_value": false,
-          "blank_option": false,
+          "blank_option": true,
           "calculated": false,
           "changeable": true,
-          "chosen": false,
+          "chosen": true,
           "default_chosen_by_server": false,
           "deprecated": false,
           "export_key": "zia_url_categories/type",
@@ -3841,7 +4251,7 @@
           "name": "type",
           "operation_perms": {},
           "operations": [],
-          "order": 9,
+          "order": 10,
           "placeholder": "",
           "prefix": null,
           "read_only": false,
@@ -3872,19 +4282,19 @@
           "name": "urls",
           "operation_perms": {},
           "operations": [],
-          "order": 6,
+          "order": 5,
           "placeholder": "",
           "prefix": null,
           "read_only": false,
           "rich_text": false,
           "tags": [],
           "templates": [],
-          "text": "Urls",
+          "text": "URLs",
           "tooltip": "",
           "type_id": 1008,
           "uuid": "2ebd5d0d-7929-41cd-a69c-b24a8582e519",
           "values": [],
-          "width": 31
+          "width": 241
         }
       },
       "for_actions": false,
@@ -3911,42 +4321,182 @@
     {
       "actions": [],
       "content": {
-        "version": 29,
-        "workflow_id": "wf_zia_get_url_categories",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_zia_get_url_categories\" isExecutable=\"true\" name=\"ZIA: Get URL Categories\"\u003e\u003cdocumentation\u003eGet information about URL categories\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_09yuw8h\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_00b72q2\" name=\"ZIA: Get URL Categories\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"a50d525c-96cf-4006-9f1d-1dd6cd21c9f4\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  ZIA - wf_zia_get_url_categories post processing script ##\\n\\n#  Globals\\nFN_NAME = \\\"funct_zia_get_url_categories\\\"\\nWF_NAME = \\\"ZIA: Get URL Categories\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\nnote_text = \u0027\u0027\\nDATA_TBL_FIELDS = [\\\"configuredName\\\", \\\"superCategory\\\", \\\"keywords\\\", \\\"urls\\\", \\\"customCategory\\\",  \\\"editable\\\", \\\"type\\\", \\\"customUrlsCount\\\"]\\n#Processing\\ndef main():\\n    note_text = u\u0027\u0027\\n    if CONTENT:\\n        categories = CONTENT.get(\\\"categories\\\")\\n        cat_counts = CONTENT.get(\\\"category_counts\\\")\\n        name_filter = INPUTS.get(\\\"zia_name_filter\\\")\\n        note_text += u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; URL categories out of a total of \\\"\\\\\\n                     u\\\"\u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; using category name filter \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt; returned for SOAR function \u0026lt;b\u0026gt;{4}\u0026lt;/b\u0026gt;.\\\"\\\\\\n        .format(WF_NAME, cat_counts[\\\"filtered\\\"], cat_counts[\\\"total\\\"], name_filter, FN_NAME)\\n        note_text += u\\\"\u0026lt;br\u0026gt;The data table \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; has been updated\\\".format(\\\"Zscaler Internet Access - URL Categories\\\")\\n        for cat in categories:\\n            newrow = incident.addRow(\\\"zia_url_categories\\\")\\n            newrow.query_execution_date = QUERY_EXECUTION_DATE\\n            newrow.cat_id = cat[\\\"id\\\"]\\n            for f in DATA_TBL_FIELDS:\\n              if isinstance(cat[f], list):\\n                  newrow[f]  = \\\"{}\\\".format(\\\", \\\".join(cat[f]))\\n              else:\\n                  newrow[f]  = \\\"{}\\\".format(cat[f])\\n    else:\\n        note_text += u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned \\\" \\\\\\n                     u\\\"for SOAR function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt;.\\\"\\\\\\n            .format(WF_NAME, FN_NAME)\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nmain()\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"##  ZIA - wf_zia_get_url_categories pre processing script ##\\ninputs.zia_custom_only = rule.properties.zia_custom_only\\ninputs.zia_category_id = rule.properties.zia_category_id_input\\nimport re\\n\\nURL_FILTER = rule.properties.zia_url_filter\\nNAME_FILTER = rule.properties.zia_name_filter\\n\\ndef is_regex(regex_str):\\n    \\\"\\\"\\\"\\\"Test if sting is a correctly formed regular expression.\\n\\n    :param regex_str: Regular expression string.\\n    :return: Boolean.\\n    \\\"\\\"\\\"\\n    try:\\n        re.compile(regex_str)\\n        return True\\n    except (re.error, TypeError):\\n        return False\\n\\n\\ndef main():\\n    # Test filter to ensure it is a valid regular expressions.\\n\\n    if URL_FILTER and not is_regex(URL_FILTER):\\n        raise ValueError(\\\"The url filter \u0027{}\u0027 is not a valid regular expression.\\\".format(unicode(URL_FILTER)))\\n    \\n    if NAME_FILTER and not is_regex(NAME_FILTER):\\n        raise ValueError(\\\"The category name filter \u0027{}\u0027 is not a valid regular expression.\\\".format(unicode(NAME_FILTER)))\\n    \\n    inputs.zia_url_filter = URL_FILTER\\n    inputs.zia_name_filter = NAME_FILTER\\n\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_09yuw8h\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_141hh7j\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_09yuw8h\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_00b72q2\"/\u003e\u003cendEvent id=\"EndEvent_0gwkfc8\"\u003e\u003cincoming\u003eSequenceFlow_141hh7j\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_141hh7j\" sourceRef=\"ServiceTask_00b72q2\" targetRef=\"EndEvent_0gwkfc8\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_00b72q2\" id=\"ServiceTask_00b72q2_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"223\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_09yuw8h\" id=\"SequenceFlow_09yuw8h_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"223\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"210.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0gwkfc8\" id=\"EndEvent_0gwkfc8_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"345\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"363\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_141hh7j\" id=\"SequenceFlow_141hh7j_di\"\u003e\u003comgdi:waypoint x=\"323\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"345\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"334\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "version": 3,
+        "workflow_id": "wf_zia_remove_artifact_from_allowlist",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_zia_remove_artifact_from_allowlist\" isExecutable=\"true\" name=\"ZIA: Remove Artifact From Allowlist\"\u003e\u003cdocumentation\u003eRemove artifact from the allowlist. Artifacts of type URL will be parsed to extract format suitable for ZIA which will be removed from the allowlist. See following for URL guidelines\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1doni36\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1fi6bw5\" name=\"ZIA: Remove From Allowlist\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"e642b020-f7b1-4e65-aa18-8f05e28ae07e\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  ZIA - wf_zia_remove_artifact_from_allowlist post processing script ##\\nimport re\\n#  Globals\\nFN_NAME = \\\"funct_zia_remove_from_allowlist\\\"\\nWF_NAME = \\\"ZIA: Remove Artifact From Allowlist\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\n\\n# Processing\\ndef main():\\n    note_text = u\u0027\u0027\\n    urls = INPUTS.get(\\\"zia_allowlisturls\\\")\\n    if CONTENT:\\n        response = CONTENT.get(\\\"response\\\")\\n        activation = CONTENT.get(\\\"activation\\\")\\n        allowlist_urls = re.split(\\\"\\\\s+|,\\\", urls)\\n        updated_allowlist_urls = response.get(\\\"whitelistUrls\\\")\\n        if not any(a in updated_allowlist_urls for a in allowlist_urls):\\n            note_text = u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Successfully removed URLs \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; from allowlist \\\" \\\\\\n                        u\\\"for SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\".format(WF_NAME, urls, FN_NAME)\\n            note_text += u\\\" Activation status: \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;.\\\".format(activation[\\\"status\\\"])\\n        else:\\n            note_text = u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Not all urls removed while attempting \\\" \\\\\\n                        u\\\"to remove URLs \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; from allowlist by SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\"\\\\\\n                .format(WF_NAME, urls, FN_NAME)\\n    else:\\n        note_text += u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; result returned while attempting \\\" \\\\\\n                     u\\\"to remove URLs \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; from allowlist for SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\"\\\\\\n            .format(WF_NAME, urls, FN_NAME)\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nmain()\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.zia_allowlisturls = artifact.value\\ninputs.zia_activate = rule.properties.zia_activate\\n\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1doni36\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0ptbho9\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1doni36\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1fi6bw5\"/\u003e\u003cendEvent id=\"EndEvent_121o9de\"\u003e\u003cincoming\u003eSequenceFlow_0ptbho9\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0ptbho9\" sourceRef=\"ServiceTask_1fi6bw5\" targetRef=\"EndEvent_121o9de\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1fi6bw5\" id=\"ServiceTask_1fi6bw5_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"239\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1doni36\" id=\"SequenceFlow_1doni36_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"239\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"218.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_121o9de\" id=\"EndEvent_121o9de_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"368\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"386\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0ptbho9\" id=\"SequenceFlow_0ptbho9_di\"\u003e\u003comgdi:waypoint x=\"339\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"368\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"353.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 29,
+      "content_version": 3,
       "creator_id": "a@a.com",
-      "description": "Get information about URL categories",
-      "export_key": "wf_zia_get_url_categories",
+      "description": "Remove artifact from the allowlist. Artifacts of type URL will be parsed to extract format suitable for ZIA which will be removed from the allowlist. See following for URL guidelines",
+      "export_key": "wf_zia_remove_artifact_from_allowlist",
       "last_modified_by": "a@a.com",
-      "last_modified_time": 1623165142973,
-      "name": "ZIA: Get URL Categories",
-      "object_type": "incident",
-      "programmatic_name": "wf_zia_get_url_categories",
+      "last_modified_time": 1623254226311,
+      "name": "ZIA: Remove Artifact From Allowlist",
+      "object_type": "artifact",
+      "programmatic_name": "wf_zia_remove_artifact_from_allowlist",
       "tags": [],
-      "uuid": "68256f21-b1f2-469d-9755-184e431f9807",
-      "workflow_id": 35
+      "uuid": "a1a55e5f-b9d6-4e2c-b1a0-c7810dbcd91c",
+      "workflow_id": 70
     },
     {
       "actions": [],
       "content": {
-        "version": 4,
-        "workflow_id": "wf_zia_remove_artifact_from_blocklist",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_zia_remove_artifact_from_blocklist\" isExecutable=\"true\" name=\"ZIA: Remove Artifact From Blocklist\"\u003e\u003cdocumentation\u003eRemove artifact from the blocklist. Artifacts of type URL will be parsed to extract format suitable for ZIA which will be removed from the blocklist. See following for URL guidelines https://help.zscaler.com/zia/url-format-guidelines.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0rp90ut\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0kcy4vx\" name=\"ZIA: Remove From Blocklist\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"eafc0196-f4bd-4654-8b7c-90e2a67ccac7\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  ZIA - wf_zia_remove_artifact_from_blocklist post processing script ##\\n\\n#  Globals\\nFN_NAME = \\\"funct_zia_remove_from_blocklist\\\"\\nWF_NAME = \\\"ZIA: Remove Artifact From Blocklist\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\n\\n# Processing\\ndef main():\\n    note_text = u\u0027\u0027\\n    urls = INPUTS.get(\\\"zia_blocklisturls\\\")\\n    if CONTENT:\\n        response = CONTENT.get(\\\"response\\\")\\n        activation = CONTENT.get(\\\"activation\\\")\\n        status = response.get(\\\"status\\\")\\n        if status == \\\"OK\\\":\\n            note_text = u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Successfully removed URLs \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; from blocklist \\\" \\\\\\n                        u\\\"for SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\".format(WF_NAME, urls, FN_NAME)\\n            note_text += u\\\" Activation status: \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;.\\\".format(activation[\\\"status\\\"])\\n        else:\\n            note_text = u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Unexpected status \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; returned while attempting \\\" \\\\\\n                        u\\\"to remove URLs \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; from blocklist by SOAR function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;.\\\"\\\\\\n                .format(WF_NAME, status, urls, FN_NAME)\\n    else:\\n        note_text += u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; result returned while attempting \\\" \\\\\\n                     u\\\"to remove URLs \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; from blocklist for SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\"\\\\\\n            .format(WF_NAME, urls, FN_NAME)\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nmain()\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.zia_blocklisturls = artifact.value\\ninputs.zia_activate = rule.properties.zia_activate\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0rp90ut\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0i9mxjf\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0rp90ut\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0kcy4vx\"/\u003e\u003cendEvent id=\"EndEvent_00a2ggx\"\u003e\u003cincoming\u003eSequenceFlow_0i9mxjf\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0i9mxjf\" sourceRef=\"ServiceTask_0kcy4vx\" targetRef=\"EndEvent_00a2ggx\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0kcy4vx\" id=\"ServiceTask_0kcy4vx_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"225\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0rp90ut\" id=\"SequenceFlow_0rp90ut_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"225\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"211.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_00a2ggx\" id=\"EndEvent_00a2ggx_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"347\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"365\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0i9mxjf\" id=\"SequenceFlow_0i9mxjf_di\"\u003e\u003comgdi:waypoint x=\"325\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"347\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"336\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "version": 5,
+        "workflow_id": "wf_zia_add_urls_to_blocklist",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_zia_add_urls_to_blocklist\" isExecutable=\"true\" name=\"ZIA: Add URLs To BlockList\"\u003e\u003cdocumentation\u003eAdd URLS to the blocklist. Entries of type URL will be parsed to extract format suitable for ZIA which will be added to the blocklist.  See following for URL guidelines https://help.zscaler.com/zia/url-format-guidelines\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1p44jzc\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0anwat3\" name=\"ZIA: Add To Blocklist\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d02e8977-6437-4093-8e19-422f3ba315f7\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  ZIA -wf_zia_add_urls_to_blocklist post processing script ##\\n\\n#  Globals\\nFN_NAME = \\\"funct_zia_add_to_blocklist\\\"\\nWF_NAME = \\\"ZIA: Add URLs To BlockList\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\n\\n# Processing\\ndef main():\\n    note_text = u\u0027\u0027\\n    urls = INPUTS.get(\\\"zia_blocklisturls\\\")\\n    if CONTENT:\\n        response = CONTENT.get(\\\"response\\\")\\n        activation = CONTENT.get(\\\"activation\\\")\\n        status = response.get(\\\"status\\\")\\n        if status == \\\"OK\\\":\\n            note_text = u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Successfully added URIs \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; to blocklist \\\" \\\\\\n                        u\\\"for SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\".format(WF_NAME, urls, FN_NAME)\\n            note_text += u\\\" Activation status: \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;.\\\".format(activation[\\\"status\\\"])\\n        else:\\n            note_text = u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Unexpected status \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; returned while attempting \\\" \\\\\\n                        u\\\"to add URLs \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; to blocklist for SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\"\\\\\\n                .format(WF_NAME, urls, FN_NAME)\\n    else:\\n        note_text += u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; result returned while attempting \\\" \\\\\\n                     u\\\"to add URLs \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; to blocklist for SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\"\\\\\\n            .format(WF_NAME, urls, FN_NAME)\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nmain()\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.zia_activate = rule.properties.zia_activate\\ninputs.zia_blocklisturls = rule.properties.zia_urls.content\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1p44jzc\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1pm93w4\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1p44jzc\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0anwat3\"/\u003e\u003cendEvent id=\"EndEvent_005xi4k\"\u003e\u003cincoming\u003eSequenceFlow_1pm93w4\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1pm93w4\" sourceRef=\"ServiceTask_0anwat3\" targetRef=\"EndEvent_005xi4k\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0anwat3\" id=\"ServiceTask_0anwat3_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"229\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1p44jzc\" id=\"SequenceFlow_1p44jzc_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"229\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"213.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_005xi4k\" id=\"EndEvent_005xi4k_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"370\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"388\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1pm93w4\" id=\"SequenceFlow_1pm93w4_di\"\u003e\u003comgdi:waypoint x=\"329\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"370\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"349.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 4,
+      "content_version": 5,
       "creator_id": "a@a.com",
-      "description": "Remove artifact from the blocklist. Artifacts of type URL will be parsed to extract format suitable for ZIA which will be removed from the blocklist. See following for URL guidelines https://help.zscaler.com/zia/url-format-guidelines.",
-      "export_key": "wf_zia_remove_artifact_from_blocklist",
+      "description": "Add URLS to the blocklist. Entries of type URL will be parsed to extract format suitable for ZIA which will be added to the blocklist.  See following for URL guidelines https://help.zscaler.com/zia/url-format-guidelines",
+      "export_key": "wf_zia_add_urls_to_blocklist",
       "last_modified_by": "a@a.com",
-      "last_modified_time": 1623254257211,
-      "name": "ZIA: Remove Artifact From Blocklist",
-      "object_type": "artifact",
-      "programmatic_name": "wf_zia_remove_artifact_from_blocklist",
+      "last_modified_time": 1623251363278,
+      "name": "ZIA: Add URLs To BlockList",
+      "object_type": "incident",
+      "programmatic_name": "wf_zia_add_urls_to_blocklist",
       "tags": [],
-      "uuid": "51b314d7-65a7-47d7-8f9b-6f1037218251",
-      "workflow_id": 71
+      "uuid": "761782ae-0adc-4946-8a85-f2f8a8b434ec",
+      "workflow_id": 63
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 55,
+        "workflow_id": "wf_zia_get_customlist",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_zia_get_customlist\" isExecutable=\"true\" name=\"ZIA: Get Customlist\"\u003e\u003cdocumentation\u003eGet a list of URLs on a custom list\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1bkbuxi\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_13g8k04\" name=\"ZIA: Get URL Categories\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"a50d525c-96cf-4006-9f1d-1dd6cd21c9f4\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  ZIA - wf_zia_get_customlist post processing script ##\\n\\n#  Globals\\nFN_NAME = \\\"funct_zia_get_url_categories\\\"\\nWF_NAME = \\\"ZIA: Get Customlist\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\nnote_text = \u0027\u0027\\nDATA_TBL_FIELDS = [\\\"cat_id\\\", \\\"configuredName\\\", \\\"url\\\"]\\n\\n# Processing\\ndef main():\\n    note_text = u\u0027\u0027\\n    if CONTENT:\\n        categories = CONTENT.get(\\\"categories\\\")\\n        cat_counts = CONTENT.get(\\\"category_counts\\\")\\n        url_filter = INPUTS.get(\\\"zia_url_filter\\\")\\n        name_filter = INPUTS.get(\\\"zia_name_filter\\\")\\n        note_text += u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; Custom lists out of a total of \\\"\\\\\\n                     u\\\"\u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; using category name filter \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt; returned for SOAR function \u0026lt;b\u0026gt;{4}\u0026lt;/b\u0026gt;.\\\"\\\\\\n        .format(WF_NAME, cat_counts[\\\"filtered\\\"], cat_counts[\\\"total\\\"], name_filter, FN_NAME)\\n        for cat in categories:\\n            url_counts = cat.get(\\\"url_counts\\\")\\n            cat_id = cat.get(\\\"id\\\")\\n            configured_name = cat.get(\\\"configuredName\\\")\\n            customlist_urls = cat.get(\\\"urls\\\")\\n            note_text += u\\\"\u0026lt;br\u0026gt;There were \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; customlist URLS(s) out of a total of \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; using URL filter \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; \\\"\\\\\\n                         u\\\"for Category ID \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt; and Configured name \u0026lt;b\u0026gt;{4}\u0026lt;/b\u0026gt; \\\"\\\\\\n            .format(url_counts[\\\"filtered\\\"], url_counts[\\\"total\\\"], url_filter, cat_id, configured_name)\\n            if customlist_urls:\\n                if url_counts[\\\"filtered\\\"] \u0026lt;= 50:\\n                    note_text += u\\\"\u0026lt;br\u0026gt;The data table \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; has been updated\\\".format(\\\"Zscaler Internet Access - Custom lists\\\")\\n                    for url in customlist_urls:\\n                        newrow = incident.addRow(\\\"zia_customlists\\\")\\n                        newrow.query_execution_date = QUERY_EXECUTION_DATE\\n                        newrow.cat_id = cat_id\\n                        newrow.configuredName = configured_name\\n                        newrow.url = url\\n                        newrow.query_filter = url_filter\\n                else:\\n                    note_text += \\\"\u0026lt;br\u0026gt;Custom list URLS for Category ID \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; and configured name \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; : \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;\\\".format(\\\", \\\".join(customlist_urls))\\n    else:\\n        note_text += u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned using configured name filter \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; \\\"\\\\\\n                     u\\\"and url filter \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for SOAR function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;.\\\"\\\\\\n            .format(WF_NAME, url_filter, name_filter, FN_NAME)\\n    \\n    incident.addNote(helper.createRichText(note_text))\\n\\nmain()\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"##  ZIA - wf_zia_get_customlist pre processing script ##\\ninputs.zia_custom_only = \\\"true\\\"\\ninputs.zia_category_id = rule.properties.zia_category_id\\nimport re\\n\\nURL_FILTER = rule.properties.zia_url_filter\\nNAME_FILTER = rule.properties.zia_name_filter\\n\\ndef is_regex(regex_str):\\n    \\\"\\\"\\\"\\\"Test if sting is a correctly formed regular expression.\\n\\n    :param regex_str: Regular expression string.\\n    :return: Boolean.\\n    \\\"\\\"\\\"\\n    try:\\n        re.compile(regex_str)\\n        return True\\n    except (re.error, TypeError):\\n        return False\\n\\n\\ndef main():\\n    # Test filters to ensure they are valid regular expressions.\\n    for query_filter in [URL_FILTER, NAME_FILTER]:\\n        if query_filter and not is_regex(query_filter):\\n            raise ValueError(\\\"The filter \u0027{}\u0027 is not a valid regular expression.\\\".format(unicode(repr(query_filter))))\\n    \\n    inputs.zia_url_filter = URL_FILTER\\n    inputs.zia_name_filter = NAME_FILTER\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1bkbuxi\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_13jy8qo\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1bkbuxi\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_13g8k04\"/\u003e\u003cendEvent id=\"EndEvent_0fxdk6v\"\u003e\u003cincoming\u003eSequenceFlow_13jy8qo\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_13jy8qo\" sourceRef=\"ServiceTask_13g8k04\" targetRef=\"EndEvent_0fxdk6v\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_13g8k04\" id=\"ServiceTask_13g8k04_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"236\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1bkbuxi\" id=\"SequenceFlow_1bkbuxi_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"236\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"217\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0fxdk6v\" id=\"EndEvent_0fxdk6v_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"383\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"401\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_13jy8qo\" id=\"SequenceFlow_13jy8qo_di\"\u003e\u003comgdi:waypoint x=\"336\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"383\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"359.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 55,
+      "creator_id": "a@a.com",
+      "description": "Get a list of URLs on a custom list",
+      "export_key": "wf_zia_get_customlist",
+      "last_modified_by": "a@a.com",
+      "last_modified_time": 1623345396029,
+      "name": "ZIA: Get Customlist",
+      "object_type": "incident",
+      "programmatic_name": "wf_zia_get_customlist",
+      "tags": [],
+      "uuid": "28172655-1e5b-407d-ba19-3b6e4e930c6b",
+      "workflow_id": 47
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 2,
+        "workflow_id": "wf_zia_add_artifact_to_blocklist",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_zia_add_artifact_to_blocklist\" isExecutable=\"true\" name=\"ZIA: Add Artifact To Blocklist\"\u003e\u003cdocumentation\u003eAdd artifact to the blocklist. Artifacts of type URL will be parsed to extract format suitable for ZIA which will be added to the blocklist. See following for URL guidelines https://help.zscaler.com/zia/url-format-guidelines.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_11faor5\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_16xg70t\" name=\"ZIA: Add To Blocklist\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d02e8977-6437-4093-8e19-422f3ba315f7\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  ZIA - wf_zia_add_artfact_to_blocklist post processing script ##\\n\\n#  Globals\\nFN_NAME = \\\"funct_zia_add_to_blocklist\\\"\\nWF_NAME = \\\"ZIA: Add Artfact To Blocklist\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\n\\n# Processing\\ndef main():\\n    note_text = u\u0027\u0027\\n    urls = INPUTS.get(\\\"zia_blocklisturls\\\")\\n    if CONTENT:\\n        response = CONTENT.get(\\\"response\\\")\\n        activation = CONTENT.get(\\\"activation\\\")\\n        status = response.get(\\\"status\\\")\\n        if status == \\\"OK\\\":\\n            note_text = u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Successfully added URIs \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; to blocklist \\\" \\\\\\n                        u\\\"for SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\".format(WF_NAME, urls, FN_NAME)\\n            note_text += u\\\" Activation status: \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;.\\\".format(activation[\\\"status\\\"])\\n        else:\\n            note_text = u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Unexpected status \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; returned while attempting \\\" \\\\\\n                        u\\\"to add URLs \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; to blocklist for SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\"\\\\\\n                .format(WF_NAME, urls, FN_NAME)\\n    else:\\n        note_text += u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; result returned while attempting \\\" \\\\\\n                     u\\\"to add URLs \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; to blocklist for SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\"\\\\\\n            .format(WF_NAME, urls, FN_NAME)\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nmain()\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.zia_blocklisturls = artifact.value\\ninputs.zia_activate = rule.properties.zia_activate\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_11faor5\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_01oljus\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_11faor5\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_16xg70t\"/\u003e\u003cendEvent id=\"EndEvent_01x5bt3\"\u003e\u003cincoming\u003eSequenceFlow_01oljus\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_01oljus\" sourceRef=\"ServiceTask_16xg70t\" targetRef=\"EndEvent_01x5bt3\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_16xg70t\" id=\"ServiceTask_16xg70t_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"241\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_11faor5\" id=\"SequenceFlow_11faor5_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"241\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"219.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_01x5bt3\" id=\"EndEvent_01x5bt3_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"371\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"389\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_01oljus\" id=\"SequenceFlow_01oljus_di\"\u003e\u003comgdi:waypoint x=\"341\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"371\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"356\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 2,
+      "creator_id": "a@a.com",
+      "description": "Add artifact to the blocklist. Artifacts of type URL will be parsed to extract format suitable for ZIA which will be added to the blocklist. See following for URL guidelines https://help.zscaler.com/zia/url-format-guidelines.",
+      "export_key": "wf_zia_add_artifact_to_blocklist",
+      "last_modified_by": "a@a.com",
+      "last_modified_time": 1623254478852,
+      "name": "ZIA: Add Artifact To Blocklist",
+      "object_type": "artifact",
+      "programmatic_name": "wf_zia_add_artifact_to_blocklist",
+      "tags": [],
+      "uuid": "42e6bd4b-fed4-4a14-9f53-a8cd10bc0bcc",
+      "workflow_id": 75
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 9,
+        "workflow_id": "wf_zia_add_custom_category",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_zia_add_custom_category\" isExecutable=\"true\" name=\"ZIA: Add Custom Category\"\u003e\u003cdocumentation\u003eAdd a new custom URL category\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_11p6qvq\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_03e4w5z\" name=\"ZIA: Add URL Category\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"197a1156-a58e-417f-9e60-71923a030c2c\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  ZIA - wf_zia_add_url_category post processing script ##\\nimport re\\n#  Globals\\nFN_NAME = \\\"funct_zia_add_url_category\\\"\\nWF_NAME = \\\"ZIA: Add Custom Category\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\n\\n# Processing\\ndef main():\\n    note_text = u\u0027\u0027\\n    \\n    urls = INPUTS.get(\\\"zia_urls\\\")\\n    configured_name = INPUTS.get(\\\"zia_configured_name\\\")\\n\\n    if CONTENT:\\n        response = CONTENT.get(\\\"response\\\")\\n        activation = CONTENT.get(\\\"activation\\\")\\n        list_urls = re.split(\\\"\\\\s+|,\\\", urls)\\n        id = response.get(\\\"id\\\")\\n        category_list = response.get(\\\"urls\\\")\\n        if all(a in category_list for a in list_urls):\\n            note_text = u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Successfully Created category \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; with id \\\"\\\\\\n                        u\\\"\u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; and with urls \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt; for SOAR function \u0026lt;b\u0026gt;{4}\u0026lt;/b\u0026gt;.\\\".format(WF_NAME, configured_name, id, urls, FN_NAME)\\n            note_text += u\\\" Activation status: \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;.\\\".format(activation[\\\"status\\\"])\\n        \\n        else:\\n            note_text = u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Category \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; creation not successfull \\\" \\\\\\n                        u\\\"with URLs \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;  for SOAR function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;.\\\"\\\\\\n                .format(WF_NAME, configured_name, urls, FN_NAME)\\n    else:\\n        note_text += u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; result returned while attempting \\\" \\\\\\n                     u\\\"to create category \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; with URLS \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for SOAR function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;.\\\"\\\\\\n            .format(WF_NAME, configured_name, urls, FN_NAME)\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nmain()\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.zia_configured_name = rule.properties.zia_configured_name_input\\ninputs.zia_custom_category = \\\"true\\\"\\ninputs.zia_super_category = rule.properties.zia_super_category\\ninputs.zia_urls = rule.properties.zia_urls.content\\ninputs.zia_activate = rule.properties.zia_activate\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_11p6qvq\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_17j1gfe\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_11p6qvq\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_03e4w5z\"/\u003e\u003cendEvent id=\"EndEvent_1wtibk9\"\u003e\u003cincoming\u003eSequenceFlow_17j1gfe\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_17j1gfe\" sourceRef=\"ServiceTask_03e4w5z\" targetRef=\"EndEvent_1wtibk9\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_03e4w5z\" id=\"ServiceTask_03e4w5z_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"243\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_11p6qvq\" id=\"SequenceFlow_11p6qvq_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"243\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"220.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1wtibk9\" id=\"EndEvent_1wtibk9_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"374\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"392\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_17j1gfe\" id=\"SequenceFlow_17j1gfe_di\"\u003e\u003comgdi:waypoint x=\"343\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"374\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"358.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 9,
+      "creator_id": "a@a.com",
+      "description": "Add a new custom URL category",
+      "export_key": "wf_zia_add_custom_category",
+      "last_modified_by": "a@a.com",
+      "last_modified_time": 1623335249662,
+      "name": "ZIA: Add Custom Category",
+      "object_type": "incident",
+      "programmatic_name": "wf_zia_add_custom_category",
+      "tags": [],
+      "uuid": "3717ff63-21f3-4ff3-83cb-3ba02aa7e98e",
+      "workflow_id": 55
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 60,
+        "workflow_id": "wf_zia_get_blocklist",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_zia_get_blocklist\" isExecutable=\"true\" name=\"ZIA: Get Blocklist\"\u003e\u003cdocumentation\u003eGet a list of block-listed URLs\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0s9avfm\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1tf8yli\" name=\"ZIA: Get Blocklist\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"c24a73f2-6ef7-4b12-9b39-ad345ffe0b7f\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  ZIA - wf_zia_get_blocklist post processing script ##\\n\\n#  Globals\\nFN_NAME = \\\"funct_zia_get_blocklist\\\"\\nWF_NAME = \\\"ZIA: Get Blocklist\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\n\\n# Processing\\ndef main():\\n    note_text = u\u0027\u0027\\n    if CONTENT:\\n        url_filter = INPUTS.get(\\\"zia_url_filter\\\")\\n        blocklist_urls = CONTENT.blacklistUrls\\n        url_counts = CONTENT.url_counts\\n        note_text = u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; blocklist URLS(s) out of a total of \\\"\\\\\\n                    u\\\"\u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; using filter \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt; returned for SOAR function \u0026lt;b\u0026gt;{4}\u0026lt;/b\u0026gt;.\\\"\\\\\\n        .format(WF_NAME, url_counts[\\\"filtered\\\"], url_counts[\\\"total\\\"], url_filter, FN_NAME)\\n        if blocklist_urls:\\n            if url_counts[\\\"filtered\\\"] \u0026lt;= 50:\\n                note_text += u\\\"\u0026lt;br\u0026gt;The data table \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; has been updated\\\".format(\\\"Zscaler Internet Access - Blocklist\\\")\\n                for url in blocklist_urls:\\n                    newrow = incident.addRow(\\\"zia_blocklist\\\")\\n                    newrow.query_execution_date = QUERY_EXECUTION_DATE\\n                    newrow.blocklist_url = url\\n                    newrow.query_filter = url_filter\\n            else:\\n                note_text += \\\"\u0026lt;br\u0026gt;Blocklisted URLS: \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;\\\".format(\\\", \\\".join(blocklist_urls))\\n    else:\\n        note_text += u\\\"ZIzA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned \\\" \\\\\\n                     u\\\"for SOAR function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt;.\\\"\\\\\\n            .format(WF_NAME, FN_NAME)\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nmain()\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"##  ZIA - wf_zia_get_blocklist pre processing script ##\\nimport re\\n\\nURL_FILTER = rule.properties.zia_url_filter\\n\\ndef is_regex(regex_str):\\n    \\\"\\\"\\\"\\\"Test if sting is a correctly formed regular expression.\\n\\n    :param regex_str: Regular expression string.\\n    :return: Boolean.\\n    \\\"\\\"\\\"\\n    try:\\n        re.compile(regex_str)\\n        return True\\n    except (re.error, TypeError):\\n        return False\\n\\n\\ndef main():\\n    # Test filter to ensure it is a valid regular expressions.\\n    if URL_FILTER and not is_regex(URL_FILTER):\\n        raise ValueError(\\\"The query filter \u0027{}\u0027 is not a valid regular expression.\\\".format(unicode(URL_FILTER)))\\n\\n    inputs.zia_url_filter = rule.properties.zia_url_filter\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0s9avfm\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_18cyza4\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0s9avfm\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1tf8yli\"/\u003e\u003cendEvent id=\"EndEvent_0skpuhv\"\u003e\u003cincoming\u003eSequenceFlow_18cyza4\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_18cyza4\" sourceRef=\"ServiceTask_1tf8yli\" targetRef=\"EndEvent_0skpuhv\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1tf8yli\" id=\"ServiceTask_1tf8yli_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"235\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0s9avfm\" id=\"SequenceFlow_0s9avfm_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"235\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"216.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0skpuhv\" id=\"EndEvent_0skpuhv_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"373\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"391\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_18cyza4\" id=\"SequenceFlow_18cyza4_di\"\u003e\u003comgdi:waypoint x=\"335\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"373\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"354\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 60,
+      "creator_id": "a@a.com",
+      "description": "Get a list of block-listed URLs",
+      "export_key": "wf_zia_get_blocklist",
+      "last_modified_by": "a@a.com",
+      "last_modified_time": 1623318132880,
+      "name": "ZIA: Get Blocklist",
+      "object_type": "incident",
+      "programmatic_name": "wf_zia_get_blocklist",
+      "tags": [],
+      "uuid": "87dfa86f-ee6e-4cdb-a54d-116b5e8f82eb",
+      "workflow_id": 1
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 17,
+        "workflow_id": "wf_zia_get_sandbox_report",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_zia_get_sandbox_report\" isExecutable=\"true\" name=\"ZIA: Get Sandbox Report\"\u003e\u003cdocumentation\u003eGets a full (i.e., complete) or summary detail report for an MD5 hash of a file that was analyzed by Sandbox.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1oow3wc\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0rwdnn8\" name=\"ZIA: Get Sandbox Report\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"775a93c4-2eb2-41c1-938c-fcb10311b3d6\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  ZIA - wf_zia_get_sandbox_report post processing script ##\\n\\n#  Globals\\nFN_NAME = \\\"funct_zia_get_sandbox_report\\\"\\nWF_NAME = \\\"ZIA: Get Sandbox Report\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\n\\nSUMM_HEADERS = [\\\"Summary\\\", \\\"Classification\\\", \\\"FileProperties\\\"]\\nDATA_TBL_FIELDS = {\\n    \\\"Summary\\\": [\\\"Status\\\", \\\"report_Category\\\"],\\n    \\\"Classification\\\": [\\\"Type\\\", \\\"Category\\\", \\\"Score\\\", \\\"DetectedMalware\\\"],\\n    \\\"FileProperties\\\":  [\\\"FileType\\\", \\\"FileSize\\\", \\\"MD5\\\", \\\"SHA1\\\", \\\"Sha256\\\", \\\"Issuer\\\", \\\"DigitalCerificate\\\", \\n                        \\\"SSDeep\\\", \\\"RootCA\\\"]\\n}\\n\\n#Processing\\ndef main():\\n    note_text = u\u0027\u0027\\n    md5 = INPUTS.get(\\\"zia_md5\\\")\\n    if CONTENT:\\n        full = CONTENT.get(\\\"Full Details\\\")\\n        summary = CONTENT.get(\\\"Summary\\\")\\n        if summary:\\n            note_text = u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: A summary report was returned for MD5 \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt;. \\\" \\\\\\n                        u\\\"The data table \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; has been updated for SOAR function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;.\\\"\\\\\\n                .format(WF_NAME, md5, \\\"Zscaler Internet Access - Sandbox Report Summary\\\", FN_NAME)\\n            \\n            newrow = incident.addRow(\\\"zia_sandbox_report_summary\\\")\\n            newrow.query_execution_date = QUERY_EXECUTION_DATE\\n            \\n            for header in SUMM_HEADERS:\\n                section = summary.get(header)\\n                for field in DATA_TBL_FIELDS[header]:\\n                    try:\\n                        f = field.split(\u0027_\u0027)[1]\\n                    except IndexError:\\n                        f = field\\n                    newrow[field]  = \\\"{}\\\".format(section[f])\\n        elif full:\\n            note_text = u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: A full report was returned for MD5 \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt;. \\\" \\\\\\n                        u\\\"for SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\"\\\\\\n                .format(WF_NAME, md5, FN_NAME)\\n            note_text += \\\"\u0026lt;br\u0026gt;\u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;\\\".format(full)\\n        else:\\n            note_text += u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was an unknown report type returned for MD5 \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt;\\\" \\\\\\n                         u\\\" for SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\".format(WF_NAME, md5, FN_NAME)\\n    else:\\n        note_text += u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for MD5 \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt;\\\" \\\\\\n                     u\\\" for SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\"\\\\\\n            .format(WF_NAME, md5, FN_NAME)\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nmain()\\n\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.zia_md5 =  artifact.value\\nif rule.properties.zia_report_type.lower() == \\\"full\\\":\\n    inputs.zia_full_report = True\\nelse:\\n    inputs.zia_full_report = False\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1oow3wc\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0zq13oj\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1oow3wc\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0rwdnn8\"/\u003e\u003cendEvent id=\"EndEvent_0ypkg8z\"\u003e\u003cincoming\u003eSequenceFlow_0zq13oj\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0zq13oj\" sourceRef=\"ServiceTask_0rwdnn8\" targetRef=\"EndEvent_0ypkg8z\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0rwdnn8\" id=\"ServiceTask_0rwdnn8_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"231\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1oow3wc\" id=\"SequenceFlow_1oow3wc_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"231\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"214.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0ypkg8z\" id=\"EndEvent_0ypkg8z_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"366\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"384\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0zq13oj\" id=\"SequenceFlow_0zq13oj_di\"\u003e\u003comgdi:waypoint x=\"331\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"366\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"348.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 17,
+      "creator_id": "a@a.com",
+      "description": "Gets a full (i.e., complete) or summary detail report for an MD5 hash of a file that was analyzed by Sandbox.",
+      "export_key": "wf_zia_get_sandbox_report",
+      "last_modified_by": "a@a.com",
+      "last_modified_time": 1623251384984,
+      "name": "ZIA: Get Sandbox Report",
+      "object_type": "artifact",
+      "programmatic_name": "wf_zia_get_sandbox_report",
+      "tags": [],
+      "uuid": "40cfaf78-54f9-4e94-b887-d35fcbea6371",
+      "workflow_id": 50
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 48,
+        "workflow_id": "wf_zia_get_allowlist",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_zia_get_allowlist\" isExecutable=\"true\" name=\"ZIA: Get Allowlist\"\u003e\u003cdocumentation\u003eGet a list of allow-listed URLs\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_061sgnf\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1u727i8\" name=\"ZIA: Get Allowlist\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"afef84ad-f288-4a0c-a8e1-7c22ffcf1261\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  ZIA - wf_zia_get_allowlist post processing script ##\\n\\n#  Globals\\n\\nFN_NAME = \\\"funct_zia_get_allowlist\\\"\\nWF_NAME = \\\"ZIA: Get Allowlist\\\"\\n# Processing\\nCONTENT = results.content\\nINPUTS = results.inputs\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\nnote_text = \u0027\u0027\\n\\ndef main():\\n    note_text = u\u0027\u0027\\n    if CONTENT:\\n        url_filter = INPUTS.get(\\\"zia_url_filter\\\")\\n        allowlist_urls = CONTENT.whitelistUrls\\n        url_counts = CONTENT.url_counts\\n        note_text = u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; allowlist URLS (s) out of a total of \\\"\\\\\\n                    u\\\"\u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; using filter \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt; returned for SOAR function \u0026lt;b\u0026gt;{4}\u0026lt;/b\u0026gt;.\\\"\\\\\\n        .format(WF_NAME, url_counts[\\\"filtered\\\"], url_counts[\\\"total\\\"], url_filter, FN_NAME)\\n        if allowlist_urls:\\n            if url_counts[\\\"filtered\\\"] \u0026lt;= 50:\\n                note_text += u\\\"\u0026lt;br\u0026gt;The data table \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; has been updated\\\".format(\\\"Zscaler Internet Access - Allowlist\\\")\\n                for url in allowlist_urls:\\n                    newrow = incident.addRow(\\\"zia_allowlist\\\")\\n                    newrow.query_execution_date = QUERY_EXECUTION_DATE\\n                    newrow.allowlist_url = url\\n                    newrow.query_filter = url_filter\\n            else:\\n                note_text += \\\"\u0026lt;br\u0026gt;Allow list URLS: \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;\\\".format(\\\", \\\".join(allowlist_urls))\\n    else:\\n        note_text += u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned \\\" \\\\\\n                     u\\\"for SOAR function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt;.\\\"\\\\\\n            .format(WF_NAME, FN_NAME)\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nmain()\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"##  ZIA - wf_zia_get_allowlist post processing script ##\\nimport re\\n\\nURL_FILTER = rule.properties.zia_url_filter\\n\\ndef is_regex(regex_str):\\n    \\\"\\\"\\\"\\\"Test if sting is a correctly formed regular expression.\\n\\n    :param regex_str: Regular expression string.\\n    :return: Boolean.\\n    \\\"\\\"\\\"\\n    try:\\n        re.compile(regex_str)\\n        return True\\n    except (re.error, TypeError):\\n        return False\\n\\n\\ndef main():\\n    # Test filter to ensure it is a valid regular expressions.\\n    if URL_FILTER and not is_regex(URL_FILTER):\\n        raise ValueError(\\\"The query filter \u0027{}\u0027 is not a valid regular expression.\\\".format(unicode(URL_FILTER)))\\n\\n    inputs.zia_url_filter = rule.properties.zia_url_filter\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_061sgnf\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1intjjs\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_061sgnf\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1u727i8\"/\u003e\u003cendEvent id=\"EndEvent_01p3u33\"\u003e\u003cincoming\u003eSequenceFlow_1intjjs\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1intjjs\" sourceRef=\"ServiceTask_1u727i8\" targetRef=\"EndEvent_01p3u33\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1u727i8\" id=\"ServiceTask_1u727i8_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"228\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_061sgnf\" id=\"SequenceFlow_061sgnf_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"228\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"213\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_01p3u33\" id=\"EndEvent_01p3u33_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"381\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"399\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1intjjs\" id=\"SequenceFlow_1intjjs_di\"\u003e\u003comgdi:waypoint x=\"328\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"381\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"354.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 48,
+      "creator_id": "a@a.com",
+      "description": "Get a list of allow-listed URLs",
+      "export_key": "wf_zia_get_allowlist",
+      "last_modified_by": "a@a.com",
+      "last_modified_time": 1623318109593,
+      "name": "ZIA: Get Allowlist",
+      "object_type": "incident",
+      "programmatic_name": "wf_zia_get_allowlist",
+      "tags": [],
+      "uuid": "88a31f09-9615-4a74-819d-3cb428d32840",
+      "workflow_id": 29
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 3,
+        "workflow_id": "wf_zia_add_artifact_to_customlist",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_zia_add_artifact_to_customlist\" isExecutable=\"true\" name=\"ZIA: Add Artifact To Customlist\"\u003e\u003cdocumentation\u003eAdd artifact to a custom list. Artifacts of type URL will be parsed to extract format suitable for ZIA which will be added to the custom list. See following for URL guidelines https://help.zscaler.com/zia/url-format-guidelines.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0nr2or5\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0aa9gvg\" name=\"ZIA: Add To URL Category\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"73e8d2a4-79ca-4896-a022-c895de32762b\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  ZIA - wf_zia_add_to_customlist post processing script ##\\nimport re\\n#  Globals\\nFN_NAME = \\\"funct_zia_add_to_url_category\\\"\\nWF_NAME = \\\"ZIA: Add Artifact To Customlist\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\n\\n# Processing\\ndef main():\\n    note_text = u\u0027\u0027\\n    urls = INPUTS.get(\\\"zia_urls\\\")\\n    category_id = INPUTS.get(\\\"zia_category_id\\\")\\n    configured_name = INPUTS.get(\\\"zia_configured_name\\\")\\n    if CONTENT:\\n        response = CONTENT.get(\\\"response\\\")\\n        activation = CONTENT.get(\\\"activation\\\")\\n        customlist_urls = re.split(\\\"\\\\s+|,\\\", urls)\\n        updated_customlist = response.get(\\\"urls\\\")\\n        if all(a in updated_customlist for a in customlist_urls):\\n            note_text = u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Successfully added URLs \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; to customlist \\\"\\\\\\n                        u\\\"with category ID \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; and configured name \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt; for SOAR function \u0026lt;b\u0026gt;{4}\u0026lt;/b\u0026gt;.\\\"\\\\\\n                        .format(WF_NAME, urls, category_id, configured_name, FN_NAME)\\n            note_text += u\\\" Activation status: \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;.\\\".format(activation[\\\"status\\\"])\\n        else:\\n            note_text = u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Not all urls added while attempting \\\"\\\\\\n                        u\\\"to add URLs \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; to customlist with category ID \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; and configured name \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt; \\\"\\\\\\n                        u\\\"for SOAR function \u0026lt;b\u0026gt;{4}\u0026lt;/b\u0026gt;.\\\".format(WF_NAME, urls, category_id,  FN_NAME)\\n    else:\\n        note_text += u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; result returned while attempting \\\"\\\\\\n                     u\\\"to add URLs \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; to to customlist of category ID \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\"\\\\\\n            .format(WF_NAME, urls, category_id,  FN_NAME)\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nmain()\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.zia_urls = artifact.value\\ninputs.zia_category_id = rule.properties.zia_category_id\\ninputs.zia_configured_name = rule.properties.zia_configured_name\\ninputs.zia_activate = rule.properties.zia_activate\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0nr2or5\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0q55te1\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0nr2or5\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0aa9gvg\"/\u003e\u003cendEvent id=\"EndEvent_0rjvdlw\"\u003e\u003cincoming\u003eSequenceFlow_0q55te1\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0q55te1\" sourceRef=\"ServiceTask_0aa9gvg\" targetRef=\"EndEvent_0rjvdlw\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0aa9gvg\" id=\"ServiceTask_0aa9gvg_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"223\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0nr2or5\" id=\"SequenceFlow_0nr2or5_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"223\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"210.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0rjvdlw\" id=\"EndEvent_0rjvdlw_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"343\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"361\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0q55te1\" id=\"SequenceFlow_0q55te1_di\"\u003e\u003comgdi:waypoint x=\"323\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"343\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"333\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 3,
+      "creator_id": "a@a.com",
+      "description": "Add artifact to a custom list. Artifacts of type URL will be parsed to extract format suitable for ZIA which will be added to the custom list. See following for URL guidelines https://help.zscaler.com/zia/url-format-guidelines.",
+      "export_key": "wf_zia_add_artifact_to_customlist",
+      "last_modified_by": "a@a.com",
+      "last_modified_time": 1623254149609,
+      "name": "ZIA: Add Artifact To Customlist",
+      "object_type": "artifact",
+      "programmatic_name": "wf_zia_add_artifact_to_customlist",
+      "tags": [],
+      "uuid": "0d2888a7-246e-4645-8bd8-6dd21a09e8e7",
+      "workflow_id": 66
     },
     {
       "actions": [],
@@ -3991,166 +4541,6 @@
     {
       "actions": [],
       "content": {
-        "version": 2,
-        "workflow_id": "wf_zia_add_artifact_to_allowlist",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_zia_add_artifact_to_allowlist\" isExecutable=\"true\" name=\"ZIA: Add Artifact To Allowlist\"\u003e\u003cdocumentation\u003eAdd artifact to the allowlist. Artifacts of type URL will be parsed to extract format suitable for ZIA which will be added to the allowlist. See following for URL guidelines https://help.zscaler.com/zia/url-format-guidelines.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_04n57x1\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0xikvmi\" name=\"ZIA: Add To Allowlist\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"1f0a1aaa-477e-4ed8-afa2-13cb049e47d7\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  ZIA - zia_add_artifact_to_allowlist post processing script ##\\nimport re\\n#  Globals\\nFN_NAME = \\\"funct_zia_add_to_allowlist\\\"\\nWF_NAME = \\\"ZIA: Add Artifact To Allowlist\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\n\\n# Processing\\ndef main():\\n    note_text = u\u0027\u0027\\n    urls = INPUTS.get(\\\"zia_allowlisturls\\\")\\n    if CONTENT:\\n        response = CONTENT.get(\\\"response\\\")\\n        activation = CONTENT.get(\\\"activation\\\")\\n        allowlist_urls = re.split(\\\"\\\\s+|,\\\", urls)\\n        updated_allowlist = response.get(\\\"whitelistUrls\\\")\\n        if all(a in updated_allowlist for a in allowlist_urls):\\n            note_text = u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Successfully added URLs \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; to allowlist \\\" \\\\\\n                        u\\\"for SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\".format(WF_NAME, urls, FN_NAME)\\n            note_text += u\\\" Activation status: \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;.\\\".format(activation[\\\"status\\\"])\\n        \\n        else:\\n            note_text = u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Not all uris added while attempting \\\" \\\\\\n                        u\\\"to add URLs \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; to allowlist for SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\"\\\\\\n                .format(WF_NAME, urls, FN_NAME)\\n    else:\\n        note_text += u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; result returned while attempting \\\" \\\\\\n                     u\\\"to add URLs \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; to allowlist for SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\"\\\\\\n            .format(WF_NAME, urls, FN_NAME)\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nmain()\\n\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.zia_allowlisturls = artifact.value\\ninputs.zia_activate = rule.properties.zia_activate\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_04n57x1\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1ov0tce\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_04n57x1\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0xikvmi\"/\u003e\u003cendEvent id=\"EndEvent_1gsxe6a\"\u003e\u003cincoming\u003eSequenceFlow_1ov0tce\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1ov0tce\" sourceRef=\"ServiceTask_0xikvmi\" targetRef=\"EndEvent_1gsxe6a\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0xikvmi\" id=\"ServiceTask_0xikvmi_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"238\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_04n57x1\" id=\"SequenceFlow_04n57x1_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"238\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"218\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1gsxe6a\" id=\"EndEvent_1gsxe6a_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"366\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"384\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1ov0tce\" id=\"SequenceFlow_1ov0tce_di\"\u003e\u003comgdi:waypoint x=\"338\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"366\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"352\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 2,
-      "creator_id": "a@a.com",
-      "description": "Add artifact to the allowlist. Artifacts of type URL will be parsed to extract format suitable for ZIA which will be added to the allowlist. See following for URL guidelines https://help.zscaler.com/zia/url-format-guidelines.",
-      "export_key": "wf_zia_add_artifact_to_allowlist",
-      "last_modified_by": "a@a.com",
-      "last_modified_time": 1623259587029,
-      "name": "ZIA: Add Artifact To Allowlist",
-      "object_type": "artifact",
-      "programmatic_name": "wf_zia_add_artifact_to_allowlist",
-      "tags": [],
-      "uuid": "309d0766-cf12-4a16-ad7a-35fcb59b7df6",
-      "workflow_id": 81
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 2,
-        "workflow_id": "wf_zia_add_artifact_to_blocklist",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_zia_add_artifact_to_blocklist\" isExecutable=\"true\" name=\"ZIA: Add Artifact To Blocklist\"\u003e\u003cdocumentation\u003eAdd artifact to the blocklist. Artifacts of type URL will be parsed to extract format suitable for ZIA which will be added to the blocklist. See following for URL guidelines https://help.zscaler.com/zia/url-format-guidelines.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_11faor5\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_16xg70t\" name=\"ZIA: Add To Blocklist\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d02e8977-6437-4093-8e19-422f3ba315f7\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  ZIA - wf_zia_add_artfact_to_blocklist post processing script ##\\n\\n#  Globals\\nFN_NAME = \\\"funct_zia_add_to_blocklist\\\"\\nWF_NAME = \\\"ZIA: Add Artfact To Blocklist\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\n\\n# Processing\\ndef main():\\n    note_text = u\u0027\u0027\\n    urls = INPUTS.get(\\\"zia_blocklisturls\\\")\\n    if CONTENT:\\n        response = CONTENT.get(\\\"response\\\")\\n        activation = CONTENT.get(\\\"activation\\\")\\n        status = response.get(\\\"status\\\")\\n        if status == \\\"OK\\\":\\n            note_text = u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Successfully added URIs \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; to blocklist \\\" \\\\\\n                        u\\\"for SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\".format(WF_NAME, urls, FN_NAME)\\n            note_text += u\\\" Activation status: \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;.\\\".format(activation[\\\"status\\\"])\\n        else:\\n            note_text = u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Unexpected status \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; returned while attempting \\\" \\\\\\n                        u\\\"to add URLs \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; to blocklist for SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\"\\\\\\n                .format(WF_NAME, urls, FN_NAME)\\n    else:\\n        note_text += u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; result returned while attempting \\\" \\\\\\n                     u\\\"to add URLs \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; to blocklist for SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\"\\\\\\n            .format(WF_NAME, urls, FN_NAME)\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nmain()\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.zia_blocklisturls = artifact.value\\ninputs.zia_activate = rule.properties.zia_activate\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_11faor5\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_01oljus\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_11faor5\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_16xg70t\"/\u003e\u003cendEvent id=\"EndEvent_01x5bt3\"\u003e\u003cincoming\u003eSequenceFlow_01oljus\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_01oljus\" sourceRef=\"ServiceTask_16xg70t\" targetRef=\"EndEvent_01x5bt3\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_16xg70t\" id=\"ServiceTask_16xg70t_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"241\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_11faor5\" id=\"SequenceFlow_11faor5_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"241\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"219.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_01x5bt3\" id=\"EndEvent_01x5bt3_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"371\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"389\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_01oljus\" id=\"SequenceFlow_01oljus_di\"\u003e\u003comgdi:waypoint x=\"341\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"371\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"356\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 2,
-      "creator_id": "a@a.com",
-      "description": "Add artifact to the blocklist. Artifacts of type URL will be parsed to extract format suitable for ZIA which will be added to the blocklist. See following for URL guidelines https://help.zscaler.com/zia/url-format-guidelines.",
-      "export_key": "wf_zia_add_artifact_to_blocklist",
-      "last_modified_by": "a@a.com",
-      "last_modified_time": 1623254478852,
-      "name": "ZIA: Add Artifact To Blocklist",
-      "object_type": "artifact",
-      "programmatic_name": "wf_zia_add_artifact_to_blocklist",
-      "tags": [],
-      "uuid": "42e6bd4b-fed4-4a14-9f53-a8cd10bc0bcc",
-      "workflow_id": 75
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 5,
-        "workflow_id": "wf_zia_add_urls_to_blocklist",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_zia_add_urls_to_blocklist\" isExecutable=\"true\" name=\"ZIA: Add URLs To BlockList\"\u003e\u003cdocumentation\u003eAdd URLS to the blocklist. Entries of type URL will be parsed to extract format suitable for ZIA which will be added to the blocklist.  See following for URL guidelines https://help.zscaler.com/zia/url-format-guidelines\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1p44jzc\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0anwat3\" name=\"ZIA: Add To Blocklist\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d02e8977-6437-4093-8e19-422f3ba315f7\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  ZIA -wf_zia_add_urls_to_blocklist post processing script ##\\n\\n#  Globals\\nFN_NAME = \\\"funct_zia_add_to_blocklist\\\"\\nWF_NAME = \\\"ZIA: Add URLs To BlockList\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\n\\n# Processing\\ndef main():\\n    note_text = u\u0027\u0027\\n    urls = INPUTS.get(\\\"zia_blocklisturls\\\")\\n    if CONTENT:\\n        response = CONTENT.get(\\\"response\\\")\\n        activation = CONTENT.get(\\\"activation\\\")\\n        status = response.get(\\\"status\\\")\\n        if status == \\\"OK\\\":\\n            note_text = u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Successfully added URIs \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; to blocklist \\\" \\\\\\n                        u\\\"for SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\".format(WF_NAME, urls, FN_NAME)\\n            note_text += u\\\" Activation status: \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;.\\\".format(activation[\\\"status\\\"])\\n        else:\\n            note_text = u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Unexpected status \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; returned while attempting \\\" \\\\\\n                        u\\\"to add URLs \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; to blocklist for SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\"\\\\\\n                .format(WF_NAME, urls, FN_NAME)\\n    else:\\n        note_text += u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; result returned while attempting \\\" \\\\\\n                     u\\\"to add URLs \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; to blocklist for SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\"\\\\\\n            .format(WF_NAME, urls, FN_NAME)\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nmain()\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.zia_activate = rule.properties.zia_activate\\ninputs.zia_blocklisturls = rule.properties.zia_urls.content\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1p44jzc\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1pm93w4\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1p44jzc\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0anwat3\"/\u003e\u003cendEvent id=\"EndEvent_005xi4k\"\u003e\u003cincoming\u003eSequenceFlow_1pm93w4\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1pm93w4\" sourceRef=\"ServiceTask_0anwat3\" targetRef=\"EndEvent_005xi4k\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0anwat3\" id=\"ServiceTask_0anwat3_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"229\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1p44jzc\" id=\"SequenceFlow_1p44jzc_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"229\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"213.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_005xi4k\" id=\"EndEvent_005xi4k_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"370\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"388\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1pm93w4\" id=\"SequenceFlow_1pm93w4_di\"\u003e\u003comgdi:waypoint x=\"329\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"370\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"349.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 5,
-      "creator_id": "a@a.com",
-      "description": "Add URLS to the blocklist. Entries of type URL will be parsed to extract format suitable for ZIA which will be added to the blocklist.  See following for URL guidelines https://help.zscaler.com/zia/url-format-guidelines",
-      "export_key": "wf_zia_add_urls_to_blocklist",
-      "last_modified_by": "a@a.com",
-      "last_modified_time": 1623251363278,
-      "name": "ZIA: Add URLs To BlockList",
-      "object_type": "incident",
-      "programmatic_name": "wf_zia_add_urls_to_blocklist",
-      "tags": [],
-      "uuid": "761782ae-0adc-4946-8a85-f2f8a8b434ec",
-      "workflow_id": 63
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 58,
-        "workflow_id": "wf_zia_get_blocklist",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_zia_get_blocklist\" isExecutable=\"true\" name=\"ZIA: Get Blocklist\"\u003e\u003cdocumentation\u003eGet a list of block-listed URLs\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0s9avfm\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1tf8yli\" name=\"ZIA: Get Blocklist\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"c24a73f2-6ef7-4b12-9b39-ad345ffe0b7f\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  ZIA - wf_zia_get_blocklist post processing script ##\\n\\n#  Globals\\nFN_NAME = \\\"funct_zia_get_blocklist\\\"\\nWF_NAME = \\\"ZIA: Get Blocklist\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\n\\n# Processing\\ndef main():\\n    note_text = u\u0027\u0027\\n    if CONTENT:\\n        url_filter = INPUTS.get(\\\"zia_url_filter\\\")\\n        blocklist_urls = CONTENT.blacklistUrls\\n        url_counts = CONTENT.url_counts\\n        note_text = u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; blocklist URLS(s) out of a total of \\\"\\\\\\n                    u\\\"\u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; using filter \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt; returned for SOAR function \u0026lt;b\u0026gt;{4}\u0026lt;/b\u0026gt;.\\\"\\\\\\n        .format(WF_NAME, url_counts[\\\"filtered\\\"], url_counts[\\\"total\\\"], url_filter, FN_NAME)\\n        if blocklist_urls:\\n            if url_counts[\\\"filtered\\\"] \u0026lt;= 50:\\n                note_text += u\\\"\u0026lt;br\u0026gt;The data table \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; has been updated\\\".format(\\\"Zscaler Internet Access - Blocklist\\\")\\n                for url in blocklist_urls:\\n                    newrow = incident.addRow(\\\"zia_blocklist\\\")\\n                    newrow.query_execution_date = QUERY_EXECUTION_DATE\\n                    newrow.blocklist_url = url\\n            else:\\n                note_text += \\\"\u0026lt;br\u0026gt;Blocklisted URLS: \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;\\\".format(\\\", \\\".join(blocklist_urls))\\n    else:\\n        note_text += u\\\"ZIzA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned \\\" \\\\\\n                     u\\\"for SOAR function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt;.\\\"\\\\\\n            .format(WF_NAME, FN_NAME)\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nmain()\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"##  ZIA - wf_zia_get_blocklist pre processing script ##\\nimport re\\n\\nURL_FILTER = rule.properties.zia_url_filter\\n\\ndef is_regex(regex_str):\\n    \\\"\\\"\\\"\\\"Test if sting is a correctly formed regular expression.\\n\\n    :param regex_str: Regular expression string.\\n    :return: Boolean.\\n    \\\"\\\"\\\"\\n    try:\\n        re.compile(regex_str)\\n        return True\\n    except (re.error, TypeError):\\n        return False\\n\\n\\ndef main():\\n    # Test filter to ensure it is a valid regular expressions.\\n    if URL_FILTER and not is_regex(URL_FILTER):\\n        raise ValueError(\\\"The query filter \u0027{}\u0027 is not a valid regular expression.\\\".format(unicode(URL_FILTER)))\\n\\n    inputs.zia_url_filter = rule.properties.zia_url_filter\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0s9avfm\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_18cyza4\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0s9avfm\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1tf8yli\"/\u003e\u003cendEvent id=\"EndEvent_0skpuhv\"\u003e\u003cincoming\u003eSequenceFlow_18cyza4\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_18cyza4\" sourceRef=\"ServiceTask_1tf8yli\" targetRef=\"EndEvent_0skpuhv\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1tf8yli\" id=\"ServiceTask_1tf8yli_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"235\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0s9avfm\" id=\"SequenceFlow_0s9avfm_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"235\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"216.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0skpuhv\" id=\"EndEvent_0skpuhv_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"373\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"391\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_18cyza4\" id=\"SequenceFlow_18cyza4_di\"\u003e\u003comgdi:waypoint x=\"335\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"373\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"354\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 58,
-      "creator_id": "a@a.com",
-      "description": "Get a list of block-listed URLs",
-      "export_key": "wf_zia_get_blocklist",
-      "last_modified_by": "a@a.com",
-      "last_modified_time": 1623165046693,
-      "name": "ZIA: Get Blocklist",
-      "object_type": "incident",
-      "programmatic_name": "wf_zia_get_blocklist",
-      "tags": [],
-      "uuid": "87dfa86f-ee6e-4cdb-a54d-116b5e8f82eb",
-      "workflow_id": 1
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 17,
-        "workflow_id": "wf_zia_get_sandbox_report",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_zia_get_sandbox_report\" isExecutable=\"true\" name=\"ZIA: Get Sandbox Report\"\u003e\u003cdocumentation\u003eGets a full (i.e., complete) or summary detail report for an MD5 hash of a file that was analyzed by Sandbox.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1oow3wc\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0rwdnn8\" name=\"ZIA: Get Sandbox Report\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"775a93c4-2eb2-41c1-938c-fcb10311b3d6\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  ZIA - wf_zia_get_sandbox_report post processing script ##\\n\\n#  Globals\\nFN_NAME = \\\"funct_zia_get_sandbox_report\\\"\\nWF_NAME = \\\"ZIA: Get Sandbox Report\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\n\\nSUMM_HEADERS = [\\\"Summary\\\", \\\"Classification\\\", \\\"FileProperties\\\"]\\nDATA_TBL_FIELDS = {\\n    \\\"Summary\\\": [\\\"Status\\\", \\\"report_Category\\\"],\\n    \\\"Classification\\\": [\\\"Type\\\", \\\"Category\\\", \\\"Score\\\", \\\"DetectedMalware\\\"],\\n    \\\"FileProperties\\\":  [\\\"FileType\\\", \\\"FileSize\\\", \\\"MD5\\\", \\\"SHA1\\\", \\\"Sha256\\\", \\\"Issuer\\\", \\\"DigitalCerificate\\\", \\n                        \\\"SSDeep\\\", \\\"RootCA\\\"]\\n}\\n\\n#Processing\\ndef main():\\n    note_text = u\u0027\u0027\\n    md5 = INPUTS.get(\\\"zia_md5\\\")\\n    if CONTENT:\\n        full = CONTENT.get(\\\"Full Details\\\")\\n        summary = CONTENT.get(\\\"Summary\\\")\\n        if summary:\\n            note_text = u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: A summary report was returned for MD5 \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt;. \\\" \\\\\\n                        u\\\"The data table \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; has been updated for SOAR function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;.\\\"\\\\\\n                .format(WF_NAME, md5, \\\"Zscaler Internet Access - Sandbox Report Summary\\\", FN_NAME)\\n            \\n            newrow = incident.addRow(\\\"zia_sandbox_report_summary\\\")\\n            newrow.query_execution_date = QUERY_EXECUTION_DATE\\n            \\n            for header in SUMM_HEADERS:\\n                section = summary.get(header)\\n                for field in DATA_TBL_FIELDS[header]:\\n                    try:\\n                        f = field.split(\u0027_\u0027)[1]\\n                    except IndexError:\\n                        f = field\\n                    newrow[field]  = \\\"{}\\\".format(section[f])\\n        elif full:\\n            note_text = u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: A full report was returned for MD5 \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt;. \\\" \\\\\\n                        u\\\"for SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\"\\\\\\n                .format(WF_NAME, md5, FN_NAME)\\n            note_text += \\\"\u0026lt;br\u0026gt;\u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;\\\".format(full)\\n        else:\\n            note_text += u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was an unknown report type returned for MD5 \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt;\\\" \\\\\\n                         u\\\" for SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\".format(WF_NAME, md5, FN_NAME)\\n    else:\\n        note_text += u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for MD5 \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt;\\\" \\\\\\n                     u\\\" for SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\"\\\\\\n            .format(WF_NAME, md5, FN_NAME)\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nmain()\\n\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.zia_md5 =  artifact.value\\nif rule.properties.zia_report_type.lower() == \\\"full\\\":\\n    inputs.zia_full_report = True\\nelse:\\n    inputs.zia_full_report = False\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1oow3wc\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0zq13oj\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1oow3wc\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0rwdnn8\"/\u003e\u003cendEvent id=\"EndEvent_0ypkg8z\"\u003e\u003cincoming\u003eSequenceFlow_0zq13oj\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0zq13oj\" sourceRef=\"ServiceTask_0rwdnn8\" targetRef=\"EndEvent_0ypkg8z\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0rwdnn8\" id=\"ServiceTask_0rwdnn8_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"231\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1oow3wc\" id=\"SequenceFlow_1oow3wc_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"231\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"214.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0ypkg8z\" id=\"EndEvent_0ypkg8z_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"366\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"384\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0zq13oj\" id=\"SequenceFlow_0zq13oj_di\"\u003e\u003comgdi:waypoint x=\"331\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"366\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"348.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 17,
-      "creator_id": "a@a.com",
-      "description": "Gets a full (i.e., complete) or summary detail report for an MD5 hash of a file that was analyzed by Sandbox.",
-      "export_key": "wf_zia_get_sandbox_report",
-      "last_modified_by": "a@a.com",
-      "last_modified_time": 1623251384984,
-      "name": "ZIA: Get Sandbox Report",
-      "object_type": "artifact",
-      "programmatic_name": "wf_zia_get_sandbox_report",
-      "tags": [],
-      "uuid": "40cfaf78-54f9-4e94-b887-d35fcbea6371",
-      "workflow_id": 50
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 46,
-        "workflow_id": "wf_zia_get_customlist",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_zia_get_customlist\" isExecutable=\"true\" name=\"ZIA: Get Customlist\"\u003e\u003cdocumentation\u003eGet a list of URLs on a custom list\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1bkbuxi\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_13g8k04\" name=\"ZIA: Get URL Categories\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"a50d525c-96cf-4006-9f1d-1dd6cd21c9f4\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  ZIA - wf_zia_get_customlist post processing script ##\\n\\n#  Globals\\nFN_NAME = \\\"funct_zia_get_url_categories\\\"\\nWF_NAME = \\\"ZIA: Get Customlist\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\nnote_text = \u0027\u0027\\nDATA_TBL_FIELDS = [\\\"cat_id\\\", \\\"configuredName\\\", \\\"url\\\"]\\n\\n# Processing\\ndef main():\\n    note_text = u\u0027\u0027\\n    if CONTENT:\\n        categories = CONTENT.get(\\\"categories\\\")\\n        cat_counts = CONTENT.get(\\\"category_counts\\\")\\n        url_filter = INPUTS.get(\\\"zia_url_filter\\\")\\n        name_filter = INPUTS.get(\\\"zia_name_filter\\\")\\n        note_text += u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; Custom lists out of a total of \\\"\\\\\\n                     u\\\"\u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; using category name filter \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt; returned for SOAR function \u0026lt;b\u0026gt;{4}\u0026lt;/b\u0026gt;.\\\"\\\\\\n        .format(WF_NAME, cat_counts[\\\"filtered\\\"], cat_counts[\\\"total\\\"], name_filter, FN_NAME)\\n        for cat in categories:\\n            url_counts = cat.get(\\\"url_counts\\\")\\n            cat_id = cat.get(\\\"id\\\")\\n            configured_name = cat.get(\\\"configuredName\\\")\\n            customlist_urls = cat.get(\\\"urls\\\")\\n            note_text += u\\\"\u0026lt;br\u0026gt;There were \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; customlist URLS(s) out of a total of \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; using URL filter \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; \\\"\\\\\\n                         u\\\"for Category ID \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt; and Configured name \u0026lt;b\u0026gt;{4}\u0026lt;/b\u0026gt; \\\"\\\\\\n            .format(url_counts[\\\"filtered\\\"], url_counts[\\\"total\\\"], url_filter, cat_id, configured_name)\\n            if customlist_urls:\\n                if url_counts[\\\"filtered\\\"] \u0026lt;= 50:\\n                    note_text += u\\\"\u0026lt;br\u0026gt;The data table \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; has been updated\\\".format(\\\"Zscaler Internet Access - Custom lists\\\")\\n                    for url in customlist_urls:\\n                        newrow = incident.addRow(\\\"zia_customlists\\\")\\n                        newrow.query_execution_date = QUERY_EXECUTION_DATE\\n                        newrow.cat_id = cat_id\\n                        newrow.configuredName = configured_name\\n                        newrow.url = url\\n                else:\\n                    note_text += \\\"\u0026lt;br\u0026gt;Custom list URLS for Category ID \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; and configured name \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; : \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;\\\".format(\\\", \\\".join(customlist_urls))\\n    else:\\n        note_text += u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned using filter \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; \\\"\\\\\\n                     u\\\"for SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\"\\\\\\n            .format(WF_NAME, url_filter, FN_NAME)\\n    \\n    incident.addNote(helper.createRichText(note_text))\\n\\nmain()\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"##  ZIA - wf_zia_get_customlist pre processing script ##\\ninputs.zia_custom_only = \\\"true\\\"\\ninputs.zia_category_id = rule.properties.zia_category_id\\nimport re\\n\\nURL_FILTER = rule.properties.zia_url_filter\\nKEYWORD_FILTER = rule.properties.zia_keyword_filter\\nNAME_FILTER = rule.properties.zia_name_filter\\n\\ndef is_regex(regex_str):\\n    \\\"\\\"\\\"\\\"Test if sting is a correctly formed regular expression.\\n\\n    :param regex_str: Regular expression string.\\n    :return: Boolean.\\n    \\\"\\\"\\\"\\n    try:\\n        re.compile(regex_str)\\n        return True\\n    except (re.error, TypeError):\\n        return False\\n\\n\\ndef main():\\n    # Test filters to ensure they are valid regular expressions.\\n    for query_filter in [URL_FILTER, NAME_FILTER, KEYWORD_FILTER]:\\n        if query_filter and not is_regex(query_filter):\\n            raise ValueError(\\\"The filter \u0027{}\u0027 is not a valid regular expression.\\\".format(unicode(repr(query_filter))))\\n    \\n    inputs.zia_url_filter = URL_FILTER\\n    inputs.zia_name_filter = NAME_FILTER\\n    inputs.zia_keyword_filter = KEYWORD_FILTER\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1bkbuxi\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_13jy8qo\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1bkbuxi\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_13g8k04\"/\u003e\u003cendEvent id=\"EndEvent_0fxdk6v\"\u003e\u003cincoming\u003eSequenceFlow_13jy8qo\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_13jy8qo\" sourceRef=\"ServiceTask_13g8k04\" targetRef=\"EndEvent_0fxdk6v\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_13g8k04\" id=\"ServiceTask_13g8k04_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"236\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1bkbuxi\" id=\"SequenceFlow_1bkbuxi_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"236\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"217\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0fxdk6v\" id=\"EndEvent_0fxdk6v_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"383\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"401\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_13jy8qo\" id=\"SequenceFlow_13jy8qo_di\"\u003e\u003comgdi:waypoint x=\"336\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"383\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"359.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 46,
-      "creator_id": "a@a.com",
-      "description": "Get a list of URLs on a custom list",
-      "export_key": "wf_zia_get_customlist",
-      "last_modified_by": "a@a.com",
-      "last_modified_time": 1623165066131,
-      "name": "ZIA: Get Customlist",
-      "object_type": "incident",
-      "programmatic_name": "wf_zia_get_customlist",
-      "tags": [],
-      "uuid": "28172655-1e5b-407d-ba19-3b6e4e930c6b",
-      "workflow_id": 47
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 3,
-        "workflow_id": "wf_zia_add_artifact_to_customlist",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_zia_add_artifact_to_customlist\" isExecutable=\"true\" name=\"ZIA: Add Artifact To Customlist\"\u003e\u003cdocumentation\u003eAdd artifact to a custom list. Artifacts of type URL will be parsed to extract format suitable for ZIA which will be added to the custom list. See following for URL guidelines https://help.zscaler.com/zia/url-format-guidelines.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0nr2or5\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0aa9gvg\" name=\"ZIA: Add To URL Category\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"73e8d2a4-79ca-4896-a022-c895de32762b\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  ZIA - wf_zia_add_to_customlist post processing script ##\\nimport re\\n#  Globals\\nFN_NAME = \\\"funct_zia_add_to_url_category\\\"\\nWF_NAME = \\\"ZIA: Add Artifact To Customlist\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\n\\n# Processing\\ndef main():\\n    note_text = u\u0027\u0027\\n    urls = INPUTS.get(\\\"zia_urls\\\")\\n    category_id = INPUTS.get(\\\"zia_category_id\\\")\\n    configured_name = INPUTS.get(\\\"zia_configured_name\\\")\\n    if CONTENT:\\n        response = CONTENT.get(\\\"response\\\")\\n        activation = CONTENT.get(\\\"activation\\\")\\n        customlist_urls = re.split(\\\"\\\\s+|,\\\", urls)\\n        updated_customlist = response.get(\\\"urls\\\")\\n        if all(a in updated_customlist for a in customlist_urls):\\n            note_text = u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Successfully added URLs \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; to customlist \\\"\\\\\\n                        u\\\"with category ID \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; and configured name \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt; for SOAR function \u0026lt;b\u0026gt;{4}\u0026lt;/b\u0026gt;.\\\"\\\\\\n                        .format(WF_NAME, urls, category_id, configured_name, FN_NAME)\\n            note_text += u\\\" Activation status: \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;.\\\".format(activation[\\\"status\\\"])\\n        else:\\n            note_text = u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Not all urls added while attempting \\\"\\\\\\n                        u\\\"to add URLs \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; to customlist with category ID \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; and configured name \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt; \\\"\\\\\\n                        u\\\"for SOAR function \u0026lt;b\u0026gt;{4}\u0026lt;/b\u0026gt;.\\\".format(WF_NAME, urls, category_id,  FN_NAME)\\n    else:\\n        note_text += u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; result returned while attempting \\\"\\\\\\n                     u\\\"to add URLs \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; to to customlist of category ID \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\"\\\\\\n            .format(WF_NAME, urls, category_id,  FN_NAME)\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nmain()\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.zia_urls = artifact.value\\ninputs.zia_category_id = rule.properties.zia_category_id\\ninputs.zia_configured_name = rule.properties.zia_configured_name\\ninputs.zia_activate = rule.properties.zia_activate\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0nr2or5\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0q55te1\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0nr2or5\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0aa9gvg\"/\u003e\u003cendEvent id=\"EndEvent_0rjvdlw\"\u003e\u003cincoming\u003eSequenceFlow_0q55te1\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0q55te1\" sourceRef=\"ServiceTask_0aa9gvg\" targetRef=\"EndEvent_0rjvdlw\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0aa9gvg\" id=\"ServiceTask_0aa9gvg_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"223\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0nr2or5\" id=\"SequenceFlow_0nr2or5_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"223\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"210.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0rjvdlw\" id=\"EndEvent_0rjvdlw_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"343\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"361\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0q55te1\" id=\"SequenceFlow_0q55te1_di\"\u003e\u003comgdi:waypoint x=\"323\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"343\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"333\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 3,
-      "creator_id": "a@a.com",
-      "description": "Add artifact to a custom list. Artifacts of type URL will be parsed to extract format suitable for ZIA which will be added to the custom list. See following for URL guidelines https://help.zscaler.com/zia/url-format-guidelines.",
-      "export_key": "wf_zia_add_artifact_to_customlist",
-      "last_modified_by": "a@a.com",
-      "last_modified_time": 1623254149609,
-      "name": "ZIA: Add Artifact To Customlist",
-      "object_type": "artifact",
-      "programmatic_name": "wf_zia_add_artifact_to_customlist",
-      "tags": [],
-      "uuid": "0d2888a7-246e-4645-8bd8-6dd21a09e8e7",
-      "workflow_id": 66
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 2,
-        "workflow_id": "wf_zia_remove_from_allowlist",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_zia_remove_from_allowlist\" isExecutable=\"true\" name=\"ZIA: Remove From Allowlist\"\u003e\u003cdocumentation\u003eRemove URL from the allowlist. URLs will be parsed to extract format suitable for ZIA which will be removed from the allowlist. See following for URL guidelines https://help.zscaler.com/zia/url-format-guidelines\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0pdpsvb\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0y3z974\" name=\"ZIA: Remove From Allowlist\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"e642b020-f7b1-4e65-aa18-8f05e28ae07e\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  ZIA - wf_zia_remove_from_allowlist post processing script ##\\nimport re\\n#  Globals\\nFN_NAME = \\\"funct_zia_remove_from_allowlist\\\"\\nWF_NAME = \\\"ZIA: Remove From Allowlist\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\n\\n# Processing\\ndef main():\\n    note_text = u\u0027\u0027\\n    urls = INPUTS.get(\\\"zia_allowlisturls\\\")\\n    if CONTENT:\\n        response = CONTENT.get(\\\"response\\\")\\n        activation = CONTENT.get(\\\"activation\\\")\\n        allowlist_urls = re.split(\\\"\\\\s+|,\\\", urls)\\n        updated_allowlist = response.get(\\\"whitelistUrls\\\")\\n        if not any(a in updated_allowlist for a in allowlist_urls):\\n            note_text = u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Successfully removed URLs \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; from allowlist \\\" \\\\\\n                        u\\\"for SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\".format(WF_NAME, urls, FN_NAME)\\n            note_text += u\\\" Activation status: \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;.\\\".format(activation[\\\"status\\\"])\\n        else:\\n            note_text = u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Not all urls removed while attempting \\\" \\\\\\n                        u\\\"to remove URLs \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; from allowlist by SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\"\\\\\\n                .format(WF_NAME, urls, FN_NAME)\\n    elif isinstance(content, dict):\\n        note_text += u\\\"Is a dict\\\"\\n    else:\\n        note_text += u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; result returned while attempting \\\" \\\\\\n                     u\\\"to remove URLs \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; from allowlist for SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\"\\\\\\n            .format(WF_NAME, urls, FN_NAME)\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nmain()\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.zia_allowlisturls = row.allowlist_url\\ninputs.zia_activate = rule.properties.zia_activate\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0pdpsvb\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1motbxw\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0pdpsvb\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0y3z974\"/\u003e\u003cendEvent id=\"EndEvent_1dzgan7\"\u003e\u003cincoming\u003eSequenceFlow_1motbxw\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1motbxw\" sourceRef=\"ServiceTask_0y3z974\" targetRef=\"EndEvent_1dzgan7\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0y3z974\" id=\"ServiceTask_0y3z974_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"240\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0pdpsvb\" id=\"SequenceFlow_0pdpsvb_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"240\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"219\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1dzgan7\" id=\"EndEvent_1dzgan7_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"380\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"398\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1motbxw\" id=\"SequenceFlow_1motbxw_di\"\u003e\u003comgdi:waypoint x=\"340\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"380\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"360\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 2,
-      "creator_id": "a@a.com",
-      "description": "Remove URL from the allowlist. URLs will be parsed to extract format suitable for ZIA which will be removed from the allowlist. See following for URL guidelines https://help.zscaler.com/zia/url-format-guidelines",
-      "export_key": "wf_zia_remove_from_allowlist",
-      "last_modified_by": "a@a.com",
-      "last_modified_time": 1623258017370,
-      "name": "ZIA: Remove From Allowlist",
-      "object_type": "zia_allowlist",
-      "programmatic_name": "wf_zia_remove_from_allowlist",
-      "tags": [],
-      "uuid": "a97f0a5f-dfa9-4ad3-a261-185f1504f01c",
-      "workflow_id": 79
-    },
-    {
-      "actions": [],
-      "content": {
         "version": 11,
         "workflow_id": "wf_zia_url_lookup",
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_zia_url_lookup\" isExecutable=\"true\" name=\"ZIA: URL Lookup\"\u003e\u003cdocumentation\u003e\u003c![CDATA[Look up the categorization of an artifact of type URL or IP Address e.g., [\u0027abc.com\u0027, \u0027xyz.com\u0027]]]\u003e\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0bibnqz\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1trkalw\" name=\"ZIA: URL Lookup\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"c4d74e5f-b75c-44cc-ae33-3e37a5c2e917\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  ZIA - wf_zia_url_lookup post processing script ##\\n\\n#  Globals\\nFN_NAME = \\\"funct_zia_url_lookup\\\"\\nWF_NAME = \\\"Example: ZIA: URL Lookup\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\n\\n# Processing\\ndef main():\\n    note_text = u\u0027\u0027\\n    urls = INPUTS.get(\\\"zia_urls\\\")\\n    if CONTENT:\\n        note_text = u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; Results (s) returned for \\\" \\\\\\n                        u\\\"URL \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; SOAR function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;.\\\".format(WF_NAME, len(CONTENT), urls, FN_NAME)\\n        note_text += \\\"\u0026lt;b\u0026gt;{}\u0026lt;/b\u0026gt;\\\".format(CONTENT)\\n\\n    else:\\n        note_text += u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned \\\" \\\\\\n                     u\\\"for SOAR function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt;.\\\"\\\\\\n            .format(WF_NAME, FN_NAME)\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nmain()\\n\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.zia_urls = artifact.value\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0bibnqz\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_10wfpe9\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0bibnqz\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1trkalw\"/\u003e\u003cendEvent id=\"EndEvent_1oq0v7l\"\u003e\u003cincoming\u003eSequenceFlow_10wfpe9\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_10wfpe9\" sourceRef=\"ServiceTask_1trkalw\" targetRef=\"EndEvent_1oq0v7l\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1trkalw\" id=\"ServiceTask_1trkalw_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"236\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0bibnqz\" id=\"SequenceFlow_0bibnqz_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"236\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"217\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1oq0v7l\" id=\"EndEvent_1oq0v7l_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"361\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"379\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_10wfpe9\" id=\"SequenceFlow_10wfpe9_di\"\u003e\u003comgdi:waypoint x=\"336\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"361\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"348.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
@@ -4167,46 +4557,6 @@
       "tags": [],
       "uuid": "e9a60225-0990-4af3-bbd3-4981d24bf417",
       "workflow_id": 49
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 3,
-        "workflow_id": "wf_zia_remove_artifact_from_allowlist",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_zia_remove_artifact_from_allowlist\" isExecutable=\"true\" name=\"ZIA: Remove Artifact From Allowlist\"\u003e\u003cdocumentation\u003eRemove artifact from the allowlist. Artifacts of type URL will be parsed to extract format suitable for ZIA which will be removed from the allowlist. See following for URL guidelines\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1doni36\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1fi6bw5\" name=\"ZIA: Remove From Allowlist\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"e642b020-f7b1-4e65-aa18-8f05e28ae07e\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  ZIA - wf_zia_remove_artifact_from_allowlist post processing script ##\\nimport re\\n#  Globals\\nFN_NAME = \\\"funct_zia_remove_from_allowlist\\\"\\nWF_NAME = \\\"ZIA: Remove Artifact From Allowlist\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\n\\n# Processing\\ndef main():\\n    note_text = u\u0027\u0027\\n    urls = INPUTS.get(\\\"zia_allowlisturls\\\")\\n    if CONTENT:\\n        response = CONTENT.get(\\\"response\\\")\\n        activation = CONTENT.get(\\\"activation\\\")\\n        allowlist_urls = re.split(\\\"\\\\s+|,\\\", urls)\\n        updated_allowlist_urls = response.get(\\\"whitelistUrls\\\")\\n        if not any(a in updated_allowlist_urls for a in allowlist_urls):\\n            note_text = u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Successfully removed URLs \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; from allowlist \\\" \\\\\\n                        u\\\"for SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\".format(WF_NAME, urls, FN_NAME)\\n            note_text += u\\\" Activation status: \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;.\\\".format(activation[\\\"status\\\"])\\n        else:\\n            note_text = u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Not all urls removed while attempting \\\" \\\\\\n                        u\\\"to remove URLs \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; from allowlist by SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\"\\\\\\n                .format(WF_NAME, urls, FN_NAME)\\n    else:\\n        note_text += u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; result returned while attempting \\\" \\\\\\n                     u\\\"to remove URLs \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; from allowlist for SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\"\\\\\\n            .format(WF_NAME, urls, FN_NAME)\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nmain()\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.zia_allowlisturls = artifact.value\\ninputs.zia_activate = rule.properties.zia_activate\\n\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1doni36\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0ptbho9\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1doni36\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1fi6bw5\"/\u003e\u003cendEvent id=\"EndEvent_121o9de\"\u003e\u003cincoming\u003eSequenceFlow_0ptbho9\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0ptbho9\" sourceRef=\"ServiceTask_1fi6bw5\" targetRef=\"EndEvent_121o9de\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1fi6bw5\" id=\"ServiceTask_1fi6bw5_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"239\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1doni36\" id=\"SequenceFlow_1doni36_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"239\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"218.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_121o9de\" id=\"EndEvent_121o9de_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"368\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"386\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0ptbho9\" id=\"SequenceFlow_0ptbho9_di\"\u003e\u003comgdi:waypoint x=\"339\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"368\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"353.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 3,
-      "creator_id": "a@a.com",
-      "description": "Remove artifact from the allowlist. Artifacts of type URL will be parsed to extract format suitable for ZIA which will be removed from the allowlist. See following for URL guidelines",
-      "export_key": "wf_zia_remove_artifact_from_allowlist",
-      "last_modified_by": "a@a.com",
-      "last_modified_time": 1623254226311,
-      "name": "ZIA: Remove Artifact From Allowlist",
-      "object_type": "artifact",
-      "programmatic_name": "wf_zia_remove_artifact_from_allowlist",
-      "tags": [],
-      "uuid": "a1a55e5f-b9d6-4e2c-b1a0-c7810dbcd91c",
-      "workflow_id": 70
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 4,
-        "workflow_id": "wf_zia_add_urls_to_allowlist",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_zia_add_urls_to_allowlist\" isExecutable=\"true\" name=\"ZIA: Add URLs To AllowList\"\u003e\u003cdocumentation\u003eAdd URLS to the allowlist. Entries of type URL will be parsed to extract format suitable for ZIA which will be added to the allowlist. See following for URL guidelines https://help.zscaler.com/zia/url-format-guidelines\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0dquv84\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1fksf4s\" name=\"ZIA: Add To Blocklist\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d02e8977-6437-4093-8e19-422f3ba315f7\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  ZIA - wf_zia_add_urls_to_allowlist post processing script ##\\nimport re\\n#  Globals\\nFN_NAME = \\\"funct_zia_add_to_allowlist\\\"\\nWF_NAME = \\\"ZIA: Add URLs To AllowList\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\n\\n# Processing\\ndef main():\\n    note_text = u\u0027\u0027\\n    urls = INPUTS.get(\\\"zia_allowlisturls\\\")\\n    if CONTENT:\\n        response = CONTENT.get(\\\"response\\\")\\n        activation = CONTENT.get(\\\"activation\\\")\\n        allowlist_urls = re.split(\\\"\\\\s+|,\\\", urls)\\n        updated_allowlist = response.get(\\\"whitelistUrls\\\")\\n        if all(a in updated_allowlist for a in allowlist_urls):\\n            note_text = u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Successfully added URLs \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; to allowlist \\\" \\\\\\n                        u\\\"for SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\".format(WF_NAME, urls, FN_NAME)\\n            note_text += u\\\" Activation status: \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;.\\\".format(activation[\\\"status\\\"])\\n        \\n        else:\\n            note_text = u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Not all uris added while attempting \\\" \\\\\\n                        u\\\"to add URLs \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; to allowlist for SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\"\\\\\\n                .format(WF_NAME, urls, FN_NAME)\\n    else:\\n        note_text += u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; result returned while attempting \\\" \\\\\\n                     u\\\"to add URLs \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; to allowlist for SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\"\\\\\\n            .format(WF_NAME, urls, FN_NAME)\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nmain()\",\"post_processing_script_language\":\"python\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0dquv84\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1b87zlo\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0dquv84\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1fksf4s\"/\u003e\u003cendEvent id=\"EndEvent_1ebtwgr\"\u003e\u003cincoming\u003eSequenceFlow_1b87zlo\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1b87zlo\" sourceRef=\"ServiceTask_1fksf4s\" targetRef=\"EndEvent_1ebtwgr\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1fksf4s\" id=\"ServiceTask_1fksf4s_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"226\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0dquv84\" id=\"SequenceFlow_0dquv84_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"226\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"212\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1ebtwgr\" id=\"EndEvent_1ebtwgr_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"349\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"367\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1b87zlo\" id=\"SequenceFlow_1b87zlo_di\"\u003e\u003comgdi:waypoint x=\"326\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"349\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"337.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 4,
-      "creator_id": "a@a.com",
-      "description": "Add URLS to the allowlist. Entries of type URL will be parsed to extract format suitable for ZIA which will be added to the allowlist. See following for URL guidelines https://help.zscaler.com/zia/url-format-guidelines",
-      "export_key": "wf_zia_add_urls_to_allowlist",
-      "last_modified_by": "a@a.com",
-      "last_modified_time": 1623251342583,
-      "name": "ZIA: Add URLs To AllowList",
-      "object_type": "incident",
-      "programmatic_name": "wf_zia_add_urls_to_allowlist",
-      "tags": [],
-      "uuid": "3ebbd3f9-8d0d-41b6-89e4-39f5c8cedba1",
-      "workflow_id": 62
     },
     {
       "actions": [],
@@ -4231,6 +4581,106 @@
     {
       "actions": [],
       "content": {
+        "version": 2,
+        "workflow_id": "wf_zia_remove_from_allowlist",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_zia_remove_from_allowlist\" isExecutable=\"true\" name=\"ZIA: Remove From Allowlist\"\u003e\u003cdocumentation\u003eRemove URL from the allowlist. URLs will be parsed to extract format suitable for ZIA which will be removed from the allowlist. See following for URL guidelines https://help.zscaler.com/zia/url-format-guidelines\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0pdpsvb\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0y3z974\" name=\"ZIA: Remove From Allowlist\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"e642b020-f7b1-4e65-aa18-8f05e28ae07e\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  ZIA - wf_zia_remove_from_allowlist post processing script ##\\nimport re\\n#  Globals\\nFN_NAME = \\\"funct_zia_remove_from_allowlist\\\"\\nWF_NAME = \\\"ZIA: Remove From Allowlist\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\n\\n# Processing\\ndef main():\\n    note_text = u\u0027\u0027\\n    urls = INPUTS.get(\\\"zia_allowlisturls\\\")\\n    if CONTENT:\\n        response = CONTENT.get(\\\"response\\\")\\n        activation = CONTENT.get(\\\"activation\\\")\\n        allowlist_urls = re.split(\\\"\\\\s+|,\\\", urls)\\n        updated_allowlist = response.get(\\\"whitelistUrls\\\")\\n        if not any(a in updated_allowlist for a in allowlist_urls):\\n            note_text = u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Successfully removed URLs \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; from allowlist \\\" \\\\\\n                        u\\\"for SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\".format(WF_NAME, urls, FN_NAME)\\n            note_text += u\\\" Activation status: \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;.\\\".format(activation[\\\"status\\\"])\\n        else:\\n            note_text = u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Not all urls removed while attempting \\\" \\\\\\n                        u\\\"to remove URLs \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; from allowlist by SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\"\\\\\\n                .format(WF_NAME, urls, FN_NAME)\\n    elif isinstance(content, dict):\\n        note_text += u\\\"Is a dict\\\"\\n    else:\\n        note_text += u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; result returned while attempting \\\" \\\\\\n                     u\\\"to remove URLs \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; from allowlist for SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\"\\\\\\n            .format(WF_NAME, urls, FN_NAME)\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nmain()\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.zia_allowlisturls = row.allowlist_url\\ninputs.zia_activate = rule.properties.zia_activate\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0pdpsvb\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1motbxw\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0pdpsvb\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0y3z974\"/\u003e\u003cendEvent id=\"EndEvent_1dzgan7\"\u003e\u003cincoming\u003eSequenceFlow_1motbxw\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1motbxw\" sourceRef=\"ServiceTask_0y3z974\" targetRef=\"EndEvent_1dzgan7\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0y3z974\" id=\"ServiceTask_0y3z974_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"240\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0pdpsvb\" id=\"SequenceFlow_0pdpsvb_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"240\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"219\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1dzgan7\" id=\"EndEvent_1dzgan7_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"380\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"398\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1motbxw\" id=\"SequenceFlow_1motbxw_di\"\u003e\u003comgdi:waypoint x=\"340\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"380\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"360\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 2,
+      "creator_id": "a@a.com",
+      "description": "Remove URL from the allowlist. URLs will be parsed to extract format suitable for ZIA which will be removed from the allowlist. See following for URL guidelines https://help.zscaler.com/zia/url-format-guidelines",
+      "export_key": "wf_zia_remove_from_allowlist",
+      "last_modified_by": "a@a.com",
+      "last_modified_time": 1623258017370,
+      "name": "ZIA: Remove From Allowlist",
+      "object_type": "zia_allowlist",
+      "programmatic_name": "wf_zia_remove_from_allowlist",
+      "tags": [],
+      "uuid": "a97f0a5f-dfa9-4ad3-a261-185f1504f01c",
+      "workflow_id": 79
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 4,
+        "workflow_id": "wf_zia_add_urls_to_allowlist",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_zia_add_urls_to_allowlist\" isExecutable=\"true\" name=\"ZIA: Add URLs To AllowList\"\u003e\u003cdocumentation\u003eAdd URLS to the allowlist. Entries of type URL will be parsed to extract format suitable for ZIA which will be added to the allowlist. See following for URL guidelines https://help.zscaler.com/zia/url-format-guidelines\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0dquv84\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1fksf4s\" name=\"ZIA: Add To Blocklist\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d02e8977-6437-4093-8e19-422f3ba315f7\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  ZIA - wf_zia_add_urls_to_allowlist post processing script ##\\nimport re\\n#  Globals\\nFN_NAME = \\\"funct_zia_add_to_allowlist\\\"\\nWF_NAME = \\\"ZIA: Add URLs To AllowList\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\n\\n# Processing\\ndef main():\\n    note_text = u\u0027\u0027\\n    urls = INPUTS.get(\\\"zia_allowlisturls\\\")\\n    if CONTENT:\\n        response = CONTENT.get(\\\"response\\\")\\n        activation = CONTENT.get(\\\"activation\\\")\\n        allowlist_urls = re.split(\\\"\\\\s+|,\\\", urls)\\n        updated_allowlist = response.get(\\\"whitelistUrls\\\")\\n        if all(a in updated_allowlist for a in allowlist_urls):\\n            note_text = u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Successfully added URLs \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; to allowlist \\\" \\\\\\n                        u\\\"for SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\".format(WF_NAME, urls, FN_NAME)\\n            note_text += u\\\" Activation status: \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;.\\\".format(activation[\\\"status\\\"])\\n        \\n        else:\\n            note_text = u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Not all uris added while attempting \\\" \\\\\\n                        u\\\"to add URLs \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; to allowlist for SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\"\\\\\\n                .format(WF_NAME, urls, FN_NAME)\\n    else:\\n        note_text += u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; result returned while attempting \\\" \\\\\\n                     u\\\"to add URLs \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; to allowlist for SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\"\\\\\\n            .format(WF_NAME, urls, FN_NAME)\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nmain()\",\"post_processing_script_language\":\"python\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0dquv84\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1b87zlo\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0dquv84\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1fksf4s\"/\u003e\u003cendEvent id=\"EndEvent_1ebtwgr\"\u003e\u003cincoming\u003eSequenceFlow_1b87zlo\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1b87zlo\" sourceRef=\"ServiceTask_1fksf4s\" targetRef=\"EndEvent_1ebtwgr\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1fksf4s\" id=\"ServiceTask_1fksf4s_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"226\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0dquv84\" id=\"SequenceFlow_0dquv84_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"226\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"212\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1ebtwgr\" id=\"EndEvent_1ebtwgr_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"349\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"367\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1b87zlo\" id=\"SequenceFlow_1b87zlo_di\"\u003e\u003comgdi:waypoint x=\"326\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"349\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"337.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 4,
+      "creator_id": "a@a.com",
+      "description": "Add URLS to the allowlist. Entries of type URL will be parsed to extract format suitable for ZIA which will be added to the allowlist. See following for URL guidelines https://help.zscaler.com/zia/url-format-guidelines",
+      "export_key": "wf_zia_add_urls_to_allowlist",
+      "last_modified_by": "a@a.com",
+      "last_modified_time": 1623251342583,
+      "name": "ZIA: Add URLs To AllowList",
+      "object_type": "incident",
+      "programmatic_name": "wf_zia_add_urls_to_allowlist",
+      "tags": [],
+      "uuid": "3ebbd3f9-8d0d-41b6-89e4-39f5c8cedba1",
+      "workflow_id": 62
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 42,
+        "workflow_id": "wf_zia_get_url_categories",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_zia_get_url_categories\" isExecutable=\"true\" name=\"ZIA: Get URL Categories\"\u003e\u003cdocumentation\u003eGet information about URL categories\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_09yuw8h\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_00b72q2\" name=\"ZIA: Get URL Categories\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"a50d525c-96cf-4006-9f1d-1dd6cd21c9f4\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  ZIA - wf_zia_get_url_categories post processing script ##\\n\\n#  Globals\\nFN_NAME = \\\"funct_zia_get_url_categories\\\"\\nWF_NAME = \\\"ZIA: Get URL Categories\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\nnote_text = \u0027\u0027\\nDATA_TBL_FIELDS = [\\\"configuredName\\\", \\\"superCategory\\\", \\\"keywords\\\", \\\"urls\\\", \\\"customCategory\\\", \\\"editable\\\", \\\"type\\\", \\\"customUrlsCount\\\"]\\n#Processing\\ndef main():\\n    note_text = u\u0027\u0027\\n    if CONTENT:\\n        categories = CONTENT.get(\\\"categories\\\")\\n        cat_counts = CONTENT.get(\\\"category_counts\\\")\\n        name_filter = INPUTS.get(\\\"zia_name_filter\\\")\\n        url_filter = INPUTS.get(\\\"zia_url_filter\\\")\\n        note_text += u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; URL categories out of a total of \\\"\\\\\\n                     u\\\"\u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; using category name filter \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt; and url filter \u0026lt;b\u0026gt;{4}\u0026lt;/b\u0026gt; returned for SOAR function \u0026lt;b\u0026gt;{5}\u0026lt;/b\u0026gt;.\\\"\\\\\\n        .format(WF_NAME, cat_counts[\\\"filtered\\\"], cat_counts[\\\"total\\\"], name_filter, url_filter, FN_NAME)\\n        if categories:\\n            note_text += u\\\"\u0026lt;br\u0026gt;The data table \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; has been updated\\\".format(\\\"Zscaler Internet Access - URL Categories\\\")\\n        for cat in categories:\\n            newrow = incident.addRow(\\\"zia_url_categories\\\")\\n            newrow.query_execution_date = QUERY_EXECUTION_DATE\\n            newrow.cat_id = cat[\\\"id\\\"]\\n            for f in DATA_TBL_FIELDS:\\n              if cat[f] is None:\\n                  newrow[f]  = cat[f]\\n              if isinstance(cat[f], list):\\n                  newrow[f]  = \\\"{}\\\".format(\\\", \\\".join(cat[f]))\\n              elif isinstance(cat[f], bool):\\n                  newrow[f]  = str(cat[f])\\n              else:\\n                  newrow[f]  = \\\"{}\\\".format(cat[f])\\n    else:\\n        note_text += u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned using configured name filter \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; \\\"\\\\\\n                     u\\\"and url filter \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for SOAR function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;.\\\"\\\\\\n            .format(WF_NAME, url_filter, name_filter, FN_NAME)\\n\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nmain()\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"##  ZIA - wf_zia_get_url_categories pre processing script ##\\ninputs.zia_custom_only = rule.properties.zia_custom_only\\ninputs.zia_category_id = rule.properties.zia_category_id_input\\nimport re\\n\\nURL_FILTER = rule.properties.zia_url_filter\\nNAME_FILTER = rule.properties.zia_name_filter\\n\\ndef is_regex(regex_str):\\n    \\\"\\\"\\\"\\\"Test if sting is a correctly formed regular expression.\\n\\n    :param regex_str: Regular expression string.\\n    :return: Boolean.\\n    \\\"\\\"\\\"\\n    try:\\n        re.compile(regex_str)\\n        return True\\n    except (re.error, TypeError):\\n        return False\\n\\n\\ndef main():\\n    # Test filter to ensure it is a valid regular expressions.\\n\\n    if URL_FILTER and not is_regex(URL_FILTER):\\n        raise ValueError(\\\"The url filter \u0027{}\u0027 is not a valid regular expression.\\\".format(unicode(URL_FILTER)))\\n    \\n    if NAME_FILTER and not is_regex(NAME_FILTER):\\n        raise ValueError(\\\"The category name filter \u0027{}\u0027 is not a valid regular expression.\\\".format(unicode(NAME_FILTER)))\\n    \\n    inputs.zia_url_filter = URL_FILTER\\n    inputs.zia_name_filter = NAME_FILTER\\n\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_09yuw8h\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_141hh7j\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_09yuw8h\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_00b72q2\"/\u003e\u003cendEvent id=\"EndEvent_0gwkfc8\"\u003e\u003cincoming\u003eSequenceFlow_141hh7j\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_141hh7j\" sourceRef=\"ServiceTask_00b72q2\" targetRef=\"EndEvent_0gwkfc8\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_00b72q2\" id=\"ServiceTask_00b72q2_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"223\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_09yuw8h\" id=\"SequenceFlow_09yuw8h_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"223\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"210.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0gwkfc8\" id=\"EndEvent_0gwkfc8_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"345\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"363\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_141hh7j\" id=\"SequenceFlow_141hh7j_di\"\u003e\u003comgdi:waypoint x=\"323\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"345\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"334\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 42,
+      "creator_id": "a@a.com",
+      "description": "Get information about URL categories",
+      "export_key": "wf_zia_get_url_categories",
+      "last_modified_by": "a@a.com",
+      "last_modified_time": 1623345945279,
+      "name": "ZIA: Get URL Categories",
+      "object_type": "incident",
+      "programmatic_name": "wf_zia_get_url_categories",
+      "tags": [],
+      "uuid": "68256f21-b1f2-469d-9755-184e431f9807",
+      "workflow_id": 35
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 4,
+        "workflow_id": "wf_zia_remove_artifact_from_blocklist",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_zia_remove_artifact_from_blocklist\" isExecutable=\"true\" name=\"ZIA: Remove Artifact From Blocklist\"\u003e\u003cdocumentation\u003eRemove artifact from the blocklist. Artifacts of type URL will be parsed to extract format suitable for ZIA which will be removed from the blocklist. See following for URL guidelines https://help.zscaler.com/zia/url-format-guidelines.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0rp90ut\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0kcy4vx\" name=\"ZIA: Remove From Blocklist\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"eafc0196-f4bd-4654-8b7c-90e2a67ccac7\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  ZIA - wf_zia_remove_artifact_from_blocklist post processing script ##\\n\\n#  Globals\\nFN_NAME = \\\"funct_zia_remove_from_blocklist\\\"\\nWF_NAME = \\\"ZIA: Remove Artifact From Blocklist\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\n\\n# Processing\\ndef main():\\n    note_text = u\u0027\u0027\\n    urls = INPUTS.get(\\\"zia_blocklisturls\\\")\\n    if CONTENT:\\n        response = CONTENT.get(\\\"response\\\")\\n        activation = CONTENT.get(\\\"activation\\\")\\n        status = response.get(\\\"status\\\")\\n        if status == \\\"OK\\\":\\n            note_text = u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Successfully removed URLs \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; from blocklist \\\" \\\\\\n                        u\\\"for SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\".format(WF_NAME, urls, FN_NAME)\\n            note_text += u\\\" Activation status: \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;.\\\".format(activation[\\\"status\\\"])\\n        else:\\n            note_text = u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Unexpected status \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; returned while attempting \\\" \\\\\\n                        u\\\"to remove URLs \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; from blocklist by SOAR function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;.\\\"\\\\\\n                .format(WF_NAME, status, urls, FN_NAME)\\n    else:\\n        note_text += u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; result returned while attempting \\\" \\\\\\n                     u\\\"to remove URLs \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; from blocklist for SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\"\\\\\\n            .format(WF_NAME, urls, FN_NAME)\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nmain()\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.zia_blocklisturls = artifact.value\\ninputs.zia_activate = rule.properties.zia_activate\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0rp90ut\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0i9mxjf\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0rp90ut\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0kcy4vx\"/\u003e\u003cendEvent id=\"EndEvent_00a2ggx\"\u003e\u003cincoming\u003eSequenceFlow_0i9mxjf\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0i9mxjf\" sourceRef=\"ServiceTask_0kcy4vx\" targetRef=\"EndEvent_00a2ggx\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0kcy4vx\" id=\"ServiceTask_0kcy4vx_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"225\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0rp90ut\" id=\"SequenceFlow_0rp90ut_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"225\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"211.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_00a2ggx\" id=\"EndEvent_00a2ggx_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"347\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"365\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0i9mxjf\" id=\"SequenceFlow_0i9mxjf_di\"\u003e\u003comgdi:waypoint x=\"325\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"347\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"336\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 4,
+      "creator_id": "a@a.com",
+      "description": "Remove artifact from the blocklist. Artifacts of type URL will be parsed to extract format suitable for ZIA which will be removed from the blocklist. See following for URL guidelines https://help.zscaler.com/zia/url-format-guidelines.",
+      "export_key": "wf_zia_remove_artifact_from_blocklist",
+      "last_modified_by": "a@a.com",
+      "last_modified_time": 1623254257211,
+      "name": "ZIA: Remove Artifact From Blocklist",
+      "object_type": "artifact",
+      "programmatic_name": "wf_zia_remove_artifact_from_blocklist",
+      "tags": [],
+      "uuid": "51b314d7-65a7-47d7-8f9b-6f1037218251",
+      "workflow_id": 71
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 2,
+        "workflow_id": "wf_zia_add_artifact_to_allowlist",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_zia_add_artifact_to_allowlist\" isExecutable=\"true\" name=\"ZIA: Add Artifact To Allowlist\"\u003e\u003cdocumentation\u003eAdd artifact to the allowlist. Artifacts of type URL will be parsed to extract format suitable for ZIA which will be added to the allowlist. See following for URL guidelines https://help.zscaler.com/zia/url-format-guidelines.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_04n57x1\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0xikvmi\" name=\"ZIA: Add To Allowlist\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"1f0a1aaa-477e-4ed8-afa2-13cb049e47d7\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  ZIA - zia_add_artifact_to_allowlist post processing script ##\\nimport re\\n#  Globals\\nFN_NAME = \\\"funct_zia_add_to_allowlist\\\"\\nWF_NAME = \\\"ZIA: Add Artifact To Allowlist\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\n\\n# Processing\\ndef main():\\n    note_text = u\u0027\u0027\\n    urls = INPUTS.get(\\\"zia_allowlisturls\\\")\\n    if CONTENT:\\n        response = CONTENT.get(\\\"response\\\")\\n        activation = CONTENT.get(\\\"activation\\\")\\n        allowlist_urls = re.split(\\\"\\\\s+|,\\\", urls)\\n        updated_allowlist = response.get(\\\"whitelistUrls\\\")\\n        if all(a in updated_allowlist for a in allowlist_urls):\\n            note_text = u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Successfully added URLs \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; to allowlist \\\" \\\\\\n                        u\\\"for SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\".format(WF_NAME, urls, FN_NAME)\\n            note_text += u\\\" Activation status: \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;.\\\".format(activation[\\\"status\\\"])\\n        \\n        else:\\n            note_text = u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Not all uris added while attempting \\\" \\\\\\n                        u\\\"to add URLs \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; to allowlist for SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\"\\\\\\n                .format(WF_NAME, urls, FN_NAME)\\n    else:\\n        note_text += u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; result returned while attempting \\\" \\\\\\n                     u\\\"to add URLs \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; to allowlist for SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\"\\\\\\n            .format(WF_NAME, urls, FN_NAME)\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nmain()\\n\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.zia_allowlisturls = artifact.value\\ninputs.zia_activate = rule.properties.zia_activate\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_04n57x1\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1ov0tce\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_04n57x1\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0xikvmi\"/\u003e\u003cendEvent id=\"EndEvent_1gsxe6a\"\u003e\u003cincoming\u003eSequenceFlow_1ov0tce\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1ov0tce\" sourceRef=\"ServiceTask_0xikvmi\" targetRef=\"EndEvent_1gsxe6a\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0xikvmi\" id=\"ServiceTask_0xikvmi_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"238\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_04n57x1\" id=\"SequenceFlow_04n57x1_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"238\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"218\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1gsxe6a\" id=\"EndEvent_1gsxe6a_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"366\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"384\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1ov0tce\" id=\"SequenceFlow_1ov0tce_di\"\u003e\u003comgdi:waypoint x=\"338\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"366\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"352\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 2,
+      "creator_id": "a@a.com",
+      "description": "Add artifact to the allowlist. Artifacts of type URL will be parsed to extract format suitable for ZIA which will be added to the allowlist. See following for URL guidelines https://help.zscaler.com/zia/url-format-guidelines.",
+      "export_key": "wf_zia_add_artifact_to_allowlist",
+      "last_modified_by": "a@a.com",
+      "last_modified_time": 1623259587029,
+      "name": "ZIA: Add Artifact To Allowlist",
+      "object_type": "artifact",
+      "programmatic_name": "wf_zia_add_artifact_to_allowlist",
+      "tags": [],
+      "uuid": "309d0766-cf12-4a16-ad7a-35fcb59b7df6",
+      "workflow_id": 81
+    },
+    {
+      "actions": [],
+      "content": {
         "version": 9,
         "workflow_id": "wf_zia_add_urls_to_customlist",
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_zia_add_urls_to_customlist\" isExecutable=\"true\" name=\"ZIA: Add URLs To CustomList\"\u003e\u003cdocumentation\u003eAdd URLS to a custom list. Entries of type URL will be parsed to extract format suitable for ZIA which will be added to the custom list. See following for URL guidelines https://help.zscaler.com/zia/url-format-guidelines\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_05m864i\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0ypki88\" name=\"ZIA: Add To URL Category\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"73e8d2a4-79ca-4896-a022-c895de32762b\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  ZIA - wf_zia_add_urls_to_customlist post processing script ##\\nimport re\\n#  Globals\\nFN_NAME = \\\"funct_zia_add_to_url_category\\\"\\nWF_NAME = \\\"ZIA: Add URLs To CustomList\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\n\\n# Processing\\ndef main():\\n    note_text = u\u0027\u0027\\n    urls = INPUTS.get(\\\"zia_urls\\\")\\n    category_id = INPUTS.get(\\\"zia_category_id\\\")\\n    configured_name = INPUTS.get(\\\"zia_configured_name\\\")\\n    if CONTENT:\\n        response = CONTENT.get(\\\"response\\\")\\n        activation = CONTENT.get(\\\"activation\\\")\\n        customlist_urls = re.split(\\\"\\\\s+|,\\\", urls)\\n        updated_customlist = response.get(\\\"urls\\\")\\n        if all(a in updated_customlist for a in customlist_urls):\\n            note_text = u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Successfully added URLs \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; to customlist \\\"\\\\\\n                        u\\\"with category ID \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; and configured name \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt; for SOAR function \u0026lt;b\u0026gt;{4}\u0026lt;/b\u0026gt;.\\\"\\\\\\n                        .format(WF_NAME, urls, category_id, configured_name, FN_NAME)\\n            note_text += u\\\" Activation status: \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;.\\\".format(activation[\\\"status\\\"])\\n        else:\\n            note_text = u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Not all urls added while attempting \\\"\\\\\\n                        u\\\"to add URLs \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; to customlist with category ID \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; and configured name \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt; \\\"\\\\\\n                        u\\\"for SOAR function \u0026lt;b\u0026gt;{4}\u0026lt;/b\u0026gt;.\\\".format(WF_NAME, urls, category_id,  FN_NAME)\\n    else:\\n        note_text += u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; result returned while attempting \\\"\\\\\\n                     u\\\"to add URLs \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; to to customlist of category ID \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\"\\\\\\n            .format(WF_NAME, urls, category_id,  FN_NAME)\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nmain()\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.zia_urls = rule.properties.zia_urls.content\\ninputs.zia_category_id = rule.properties.zia_category_id\\ninputs.zia_configured_name = rule.properties.zia_configured_name\\ninputs.zia_activate = rule.properties.zia_activate\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_05m864i\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0dxp22q\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_05m864i\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0ypki88\"/\u003e\u003cendEvent id=\"EndEvent_1xp8ibg\"\u003e\u003cincoming\u003eSequenceFlow_0dxp22q\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0dxp22q\" sourceRef=\"ServiceTask_0ypki88\" targetRef=\"EndEvent_1xp8ibg\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0ypki88\" id=\"ServiceTask_0ypki88_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"224\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_05m864i\" id=\"SequenceFlow_05m864i_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"224\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"211\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1xp8ibg\" id=\"EndEvent_1xp8ibg_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"362\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"380\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0dxp22q\" id=\"SequenceFlow_0dxp22q_di\"\u003e\u003comgdi:waypoint x=\"324\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"362\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"343\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
@@ -4247,46 +4697,6 @@
       "tags": [],
       "uuid": "5d5b5feb-048d-4f19-a9c5-c4419afba3d3",
       "workflow_id": 64
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 8,
-        "workflow_id": "wf_zia_add_custom_category",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_zia_add_custom_category\" isExecutable=\"true\" name=\"ZIA: Add Custom Category\"\u003e\u003cdocumentation\u003eAdd a new custom URL category\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_11p6qvq\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_03e4w5z\" name=\"ZIA: Add URL Category\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"197a1156-a58e-417f-9e60-71923a030c2c\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  ZIA - wf_zia_add_url_category post processing script ##\\nimport re\\n#  Globals\\nFN_NAME = \\\"funct_zia_add_url_category\\\"\\nWF_NAME = \\\"ZIA: Add Custom Category\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\n\\n# Processing\\ndef main():\\n    note_text = u\u0027\u0027\\n    \\n    urls = INPUTS.get(\\\"zia_urls\\\")\\n    configured_name = INPUTS.get(\\\"zia_configured_name\\\")\\n\\n    if CONTENT:\\n        response = CONTENT.get(\\\"response\\\")\\n        activation = CONTENT.get(\\\"activation\\\")\\n        list_urls = re.split(\\\"\\\\s+|,\\\", urls)\\n        id = response.get(\\\"id\\\")\\n        category_list = response.get(\\\"urls\\\")\\n        if all(a in category_list for a in list_urls):\\n            note_text = u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Successfully Created category \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; with id \\\"\\\\\\n                        u\\\"\u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; and with urls \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt; for SOAR function \u0026lt;b\u0026gt;{4}\u0026lt;/b\u0026gt;.\\\".format(WF_NAME, configured_name, id, urls, FN_NAME)\\n            note_text += u\\\" Activation status: \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;.\\\".format(activation[\\\"status\\\"])\\n        \\n        else:\\n            note_text = u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Category \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; creation not successfull \\\" \\\\\\n                        u\\\"with URLs \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;  for SOAR function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;.\\\"\\\\\\n                .format(WF_NAME, configured_name, urls, FN_NAME)\\n    else:\\n        note_text += u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; result returned while attempting \\\" \\\\\\n                     u\\\"to create category \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; with URLS \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for SOAR function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;.\\\"\\\\\\n            .format(WF_NAME, configured_name, urls, FN_NAME)\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nmain()\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.zia_configured_name = rule.properties.zia_configured_name_input\\ninputs.zia_custom_category = \\\"true\\\"\\ninputs.zia_super_category = \\\"USER_DEFINED\\\"\\ninputs.zia_urls = rule.properties.zia_urls.content\\ninputs.zia_activate = rule.properties.zia_activate\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_11p6qvq\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_17j1gfe\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_11p6qvq\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_03e4w5z\"/\u003e\u003cendEvent id=\"EndEvent_1wtibk9\"\u003e\u003cincoming\u003eSequenceFlow_17j1gfe\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_17j1gfe\" sourceRef=\"ServiceTask_03e4w5z\" targetRef=\"EndEvent_1wtibk9\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_03e4w5z\" id=\"ServiceTask_03e4w5z_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"243\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_11p6qvq\" id=\"SequenceFlow_11p6qvq_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"243\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"220.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1wtibk9\" id=\"EndEvent_1wtibk9_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"374\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"392\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_17j1gfe\" id=\"SequenceFlow_17j1gfe_di\"\u003e\u003comgdi:waypoint x=\"343\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"374\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"358.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 8,
-      "creator_id": "a@a.com",
-      "description": "Add a new custom URL category",
-      "export_key": "wf_zia_add_custom_category",
-      "last_modified_by": "a@a.com",
-      "last_modified_time": 1623250822489,
-      "name": "ZIA: Add Custom Category",
-      "object_type": "incident",
-      "programmatic_name": "wf_zia_add_custom_category",
-      "tags": [],
-      "uuid": "3717ff63-21f3-4ff3-83cb-3ba02aa7e98e",
-      "workflow_id": 55
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 39,
-        "workflow_id": "wf_zia_get_allowlist",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_zia_get_allowlist\" isExecutable=\"true\" name=\"ZIA: Get Allowlist\"\u003e\u003cdocumentation\u003eGet a list of allow-listed URLs\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_061sgnf\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1u727i8\" name=\"ZIA: Get Allowlist\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"afef84ad-f288-4a0c-a8e1-7c22ffcf1261\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  ZIA - wf_zia_get_allowlist post processing script ##\\n\\n#  Globals\\n\\nFN_NAME = \\\"funct_zia_get_allowlist\\\"\\nWF_NAME = \\\"ZIA: Get Allowlist\\\"\\n# Processing\\nCONTENT = results.content\\nINPUTS = results.inputs\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\nnote_text = \u0027\u0027\\n\\ndef main():\\n    note_text = u\u0027\u0027\\n    if CONTENT:\\n        url_filter = INPUTS.get(\\\"zia_url_filter\\\")\\n        allowlist_urls = CONTENT.whitelistUrls\\n        url_counts = CONTENT.url_counts\\n        note_text = u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; allowlist URLS (s) out of a total of \\\"\\\\\\n                    u\\\"\u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; using filter \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt; returned for SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\"\\\\\\n        .format(WF_NAME, url_counts[\\\"filtered\\\"], url_counts[\\\"total\\\"], url_filter, FN_NAME)\\n        if allowlist_urls:\\n            if url_counts[\\\"filtered\\\"] \u0026lt;= 50:\\n                note_text += u\\\"\u0026lt;br\u0026gt;The data table \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; has been updated\\\".format(\\\"Zscaler Internet Access - Allowlist\\\")\\n                for url in allowlist_urls:\\n                    newrow = incident.addRow(\\\"zia_allowlist\\\")\\n                    newrow.query_execution_date = QUERY_EXECUTION_DATE\\n                    newrow.allowlist_url = url\\n            else:\\n                note_text += \\\"\u0026lt;br\u0026gt;Allow list URLS: \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;\\\".format(\\\", \\\".join(allowlist_urls))\\n    else:\\n        note_text += u\\\"ZIA Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned \\\" \\\\\\n                     u\\\"for SOAR function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt;.\\\"\\\\\\n            .format(WF_NAME, FN_NAME)\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nmain()\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"##  ZIA - wf_zia_get_allowlist post processing script ##\\nimport re\\n\\nURL_FILTER = rule.properties.zia_url_filter\\n\\ndef is_regex(regex_str):\\n    \\\"\\\"\\\"\\\"Test if sting is a correctly formed regular expression.\\n\\n    :param regex_str: Regular expression string.\\n    :return: Boolean.\\n    \\\"\\\"\\\"\\n    try:\\n        re.compile(regex_str)\\n        return True\\n    except (re.error, TypeError):\\n        return False\\n\\n\\ndef main():\\n    # Test filter to ensure it is a valid regular expressions.\\n    if URL_FILTER and not is_regex(URL_FILTER):\\n        raise ValueError(\\\"The query filter \u0027{}\u0027 is not a valid regular expression.\\\".format(unicode(URL_FILTER)))\\n\\n    inputs.zia_url_filter = rule.properties.zia_url_filter\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_061sgnf\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1intjjs\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_061sgnf\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1u727i8\"/\u003e\u003cendEvent id=\"EndEvent_01p3u33\"\u003e\u003cincoming\u003eSequenceFlow_1intjjs\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1intjjs\" sourceRef=\"ServiceTask_1u727i8\" targetRef=\"EndEvent_01p3u33\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1u727i8\" id=\"ServiceTask_1u727i8_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"228\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_061sgnf\" id=\"SequenceFlow_061sgnf_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"228\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"213\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_01p3u33\" id=\"EndEvent_01p3u33_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"381\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"399\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1intjjs\" id=\"SequenceFlow_1intjjs_di\"\u003e\u003comgdi:waypoint x=\"328\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"381\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"354.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 39,
-      "creator_id": "a@a.com",
-      "description": "Get a list of allow-listed URLs",
-      "export_key": "wf_zia_get_allowlist",
-      "last_modified_by": "a@a.com",
-      "last_modified_time": 1623165033670,
-      "name": "ZIA: Get Allowlist",
-      "object_type": "incident",
-      "programmatic_name": "wf_zia_get_allowlist",
-      "tags": [],
-      "uuid": "88a31f09-9615-4a74-819d-3cb428d32840",
-      "workflow_id": 29
     }
   ],
   "workspaces": []
