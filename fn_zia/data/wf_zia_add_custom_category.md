@@ -20,7 +20,7 @@
 ```python
 inputs.zia_configured_name = rule.properties.zia_configured_name_input
 inputs.zia_custom_category = "true"
-inputs.zia_super_category = "USER_DEFINED"
+inputs.zia_super_category = rule.properties.zia_super_category
 inputs.zia_urls = rule.properties.zia_urls.content
 inputs.zia_activate = rule.properties.zia_activate
 ```
