@@ -77,6 +77,7 @@ def main():
                     newrow = incident.addRow("zia_allowlist")
                     newrow.query_execution_date = QUERY_EXECUTION_DATE
                     newrow.allowlist_url = url
+                    newrow.query_filter = url_filter
             else:
                 note_text += "<br>Allow list URLS: <b>{0}</b>".format(", ".join(allowlist_urls))
     else:

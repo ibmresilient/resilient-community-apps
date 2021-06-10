@@ -75,6 +75,7 @@ def main():
                     newrow = incident.addRow("zia_blocklist")
                     newrow.query_execution_date = QUERY_EXECUTION_DATE
                     newrow.blocklist_url = url
+                    newrow.query_filter = url_filter
             else:
                 note_text += "<br>Blocklisted URLS: <b>{0}</b>".format(", ".join(blocklist_urls))
     else:

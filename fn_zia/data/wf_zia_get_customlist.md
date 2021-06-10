@@ -24,7 +24,6 @@ inputs.zia_category_id = rule.properties.zia_category_id
 import re
 
 URL_FILTER = rule.properties.zia_url_filter
-KEYWORD_FILTER = rule.properties.zia_keyword_filter
 NAME_FILTER = rule.properties.zia_name_filter
 
 def is_regex(regex_str):
@@ -42,13 +41,12 @@ def is_regex(regex_str):
 
 def main():
     # Test filters to ensure they are valid regular expressions.
-    for query_filter in [URL_FILTER, NAME_FILTER, KEYWORD_FILTER]:
+    for query_filter in [URL_FILTER, NAME_FILTER]:
         if query_filter and not is_regex(query_filter):
             raise ValueError("The filter '{}' is not a valid regular expression.".format(unicode(repr(query_filter))))
     
     inputs.zia_url_filter = URL_FILTER
     inputs.zia_name_filter = NAME_FILTER
-    inputs.zia_keyword_filter = KEYWORD_FILTER
 
 if __name__ == "__main__":
     main()
@@ -95,6 +93,7 @@ def main():
                         newrow.cat_id = cat_id
                         newrow.configuredName = configured_name
                         newrow.url = url
+                        newrow.query_filter = url_filter
                 else:
                     note_text += "<br>Custom list URLS for Category ID <b>{0}</b> and configured name <b>{1}</b> : <b>{2}</b>".format(", ".join(customlist_urls))
     else:
