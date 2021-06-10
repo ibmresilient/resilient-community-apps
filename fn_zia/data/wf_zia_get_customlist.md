@@ -97,9 +97,9 @@ def main():
                 else:
                     note_text += "<br>Custom list URLS for Category ID <b>{0}</b> and configured name <b>{1}</b> : <b>{2}</b>".format(", ".join(customlist_urls))
     else:
-        note_text += u"ZIA Integration: Workflow <b>{0}</b>: There were <b>no</b> results returned using filter <b>{1}</b> "\
-                     u"for SOAR function <b>{2}</b>."\
-            .format(WF_NAME, url_filter, FN_NAME)
+        note_text += u"ZIA Integration: Workflow <b>{0}</b>: There were <b>no</b> results returned using configured name filter <b>{1}</b> "\
+                     u"and url filter <b>{2}</b> for SOAR function <b>{3}</b>."\
+            .format(WF_NAME, url_filter, name_filter, FN_NAME)
     
     incident.addNote(helper.createRichText(note_text))
 

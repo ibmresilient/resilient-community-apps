@@ -75,10 +75,12 @@ def main():
         categories = CONTENT.get("categories")
         cat_counts = CONTENT.get("category_counts")
         name_filter = INPUTS.get("zia_name_filter")
+        url_filter = INPUTS.get("zia_url_filter")
         note_text += u"ZIA Integration: Workflow <b>{0}</b>: There were <b>{1}</b> URL categories out of a total of "\
-                     u"<b>{2}</b> using category name filter <b>{3}</b> returned for SOAR function <b>{4}</b>."\
-        .format(WF_NAME, cat_counts["filtered"], cat_counts["total"], name_filter, FN_NAME)
-        note_text += u"<br>The data table <b>{0}</b> has been updated".format("Zscaler Internet Access - URL Categories")
+                     u"<b>{2}</b> using category name filter <b>{3}</b> and url filter <b>{4}</b> returned for SOAR function <b>{5}</b>."\
+        .format(WF_NAME, cat_counts["filtered"], cat_counts["total"], name_filter, url_filter, FN_NAME)
+        if categories:
+            note_text += u"<br>The data table <b>{0}</b> has been updated".format("Zscaler Internet Access - URL Categories")
         for cat in categories:
             newrow = incident.addRow("zia_url_categories")
             newrow.query_execution_date = QUERY_EXECUTION_DATE
@@ -93,9 +95,10 @@ def main():
               else:
                   newrow[f]  = "{}".format(cat[f])
     else:
-        note_text += u"ZIA Integration: Workflow <b>{0}</b>: There were <b>no</b> results returned " \
-                     u"for SOAR function <b>{1}</b>."\
-            .format(WF_NAME, FN_NAME)
+        note_text += u"ZIA Integration: Workflow <b>{0}</b>: There were <b>no</b> results returned using configured name filter <b>{1}</b> "\
+                     u"and url filter <b>{2}</b> for SOAR function <b>{3}</b>."\
+            .format(WF_NAME, url_filter, name_filter, FN_NAME)
+
 
     incident.addNote(helper.createRichText(note_text))
 
