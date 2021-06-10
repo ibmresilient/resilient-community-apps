@@ -67,7 +67,7 @@ CONTENT = results.content
 INPUTS = results.inputs
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
 note_text = ''
-DATA_TBL_FIELDS = ["configuredName", "superCategory", "keywords", "urls", "customCategory",  "editable", "type", "customUrlsCount"]
+DATA_TBL_FIELDS = ["configuredName", "superCategory", "keywords", "urls", "customCategory", "editable", "type", "customUrlsCount"]
 #Processing
 def main():
     note_text = u''
@@ -84,8 +84,12 @@ def main():
             newrow.query_execution_date = QUERY_EXECUTION_DATE
             newrow.cat_id = cat["id"]
             for f in DATA_TBL_FIELDS:
+              if cat[f] is None:
+                  newrow[f]  = cat[f]
               if isinstance(cat[f], list):
                   newrow[f]  = "{}".format(", ".join(cat[f]))
+              elif isinstance(cat[f], bool):
+                  newrow[f]  = str(cat[f])
               else:
                   newrow[f]  = "{}".format(cat[f])
     else:
