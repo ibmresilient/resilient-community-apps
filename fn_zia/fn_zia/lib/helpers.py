@@ -41,7 +41,7 @@ def filter_by_category(result, name_filter=None):
     })
 
     if name_filter and categories:
-        filtered_categories = [c for c in categories if re.search(regex, c["configuredName"], re.I)]
+        filtered_categories = [c for c in categories if re.search(regex, c.get("configuredName", ''), re.I)]
         result["categories"] = filtered_categories
         result["category_counts"]["filtered"] = len(filtered_categories)
 
