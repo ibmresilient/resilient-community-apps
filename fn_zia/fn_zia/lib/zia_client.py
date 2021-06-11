@@ -266,9 +266,7 @@ class ZiaClient(Auth):
         :param urls: Comma or newline seperated string of urls and/or ipaddresses
         return res: Response
         """
-        if urls:
-            # Convert urls in comma or newline seperated string to a list.
-            urls = list(filter(None, re.split(r"\s+|,|\n", urls)))
+        urls = process_urls(urls)
 
         payload = urls
 
