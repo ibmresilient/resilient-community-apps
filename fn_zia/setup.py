@@ -43,7 +43,8 @@ setup(
     """,
     install_requires=[
         "resilient-circuits>=30.0.0",
-        "resilient-lib>=39.0.0"
+        "resilient-lib>=39.0.0",
+        "validators>=0.18.2"
     ],
     packages=find_packages(),
     include_package_data=True,

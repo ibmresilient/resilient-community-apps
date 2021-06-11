@@ -22,8 +22,8 @@ def codegen_reload_data():
         "package": u"fn_zia",
         "message_destinations": [u"zia"],
         "functions": [u"funct_zia_add_to_allowlist", u"funct_zia_add_to_blocklist", u"funct_zia_add_to_url_category", u"funct_zia_add_url_category", u"funct_zia_get_allowlist", u"funct_zia_get_blocklist", u"funct_zia_get_sandbox_report", u"funct_zia_get_url_categories", u"funct_zia_remove_from_allowlist", u"funct_zia_remove_from_blocklist", u"funct_zia_remove_from_url_category", u"funct_zia_url_lookup"],
-        "workflows": [u"wf_zia_add_to_allowlist", u"wf_zia_add_to_blocklist", u"wf_zia_add_to_customlist", u"wf_zia_add_url_category", u"wf_zia_get_allowlist", u"wf_zia_get_blocklist", u"wf_zia_get_customlist", u"wf_zia_get_sandbox_report", u"wf_zia_get_url_categories", u"wf_zia_remove_from_allowlist", u"wf_zia_remove_from_blocklist", u"wf_zia_remove_from_customlist", u"wf_zia_remove_url_from_allowlist", u"wf_zia_remove_url_from_blocklist", u"wf_zia_remove_url_from_customlist", u"wf_zia_url_lookup"],
-        "actions": [u"Example: ZIA: Add To Allowlist", u"Example: ZIA: Add To Blocklist", u"Example: ZIA: Add To Customlist", u"Example: ZIA: Add URL Category", u"Example: ZIA: Get Allowlist", u"Example: ZIA: Get Blocklist", u"Example: ZIA: Get Customlist", u"Example: ZIA: Get Sandbox Report", u"Example: ZIA: Get URL Categories", u"Example: ZIA: Remove From Allowlist", u"Example: ZIA: Remove From Blocklist", u"Example: ZIA: Remove From Customlist", u"Example: ZIA: Remove URL From Allowlist", u"Example: ZIA: Remove URL From Blocklist", u"Example: ZIA: Remove URL From Customlist", u"Example: ZIA: URL Lookup"],
+        "workflows": [u"wf_zia_add_artifact_to_allowlist", u"wf_zia_add_artifact_to_blocklist", u"wf_zia_add_artifact_to_customlist", u"wf_zia_add_custom_category", u"wf_zia_add_urls_to_allowlist", u"wf_zia_add_urls_to_blocklist", u"wf_zia_add_urls_to_customlist", u"wf_zia_get_allowlist", u"wf_zia_get_blocklist", u"wf_zia_get_customlist", u"wf_zia_get_sandbox_report", u"wf_zia_get_url_categories", u"wf_zia_remove_artifact_from_allowlist", u"wf_zia_remove_artifact_from_blocklist", u"wf_zia_remove_artifact_from_customlist", u"wf_zia_remove_from_allowlist", u"wf_zia_remove_from_blocklist", u"wf_zia_remove_from_customlist", u"wf_zia_url_lookup"],
+        "actions": [u"ZIA: Add Artifact To Allowlist", u"ZIA: Add Artifact To Blocklist", u"ZIA: Add Artifact To Customlist", u"ZIA: Add Custom Category", u"ZIA: Add URLs To AllowList", u"ZIA: Add URLs To BlockList", u"ZIA: Add URLs To CustomList", u"ZIA: Get Allowlist", u"ZIA: Get Blocklist", u"ZIA: Get Customlist", u"ZIA: Get Sandbox Report", u"ZIA: Get URL Categories", u"ZIA: Remove Artifact From Allowlist", u"ZIA: Remove Artifact From Blocklist", u"ZIA: Remove Artifact From Customlist", u"ZIA: Remove From Allowlist", u"ZIA: Remove From Blocklist", u"ZIA: Remove From Customlist", u"ZIA: URL Lookup"],
         "incident_fields": [],
         "incident_artifact_types": [],
         "datatables": [u"zia_allowlist", u"zia_blocklist", u"zia_customlists", u"zia_sandbox_report_summary", u"zia_url_categories"],
@@ -56,39 +56,45 @@ def customization_data(client=None):
         - funct_zia_remove_from_url_category
         - funct_zia_url_lookup
     - Workflows:
-        - wf_zia_add_to_allowlist
-        - wf_zia_add_to_blocklist
-        - wf_zia_add_to_customlist
-        - wf_zia_add_url_category
+        - wf_zia_add_artifact_to_allowlist
+        - wf_zia_add_artifact_to_blocklist
+        - wf_zia_add_artifact_to_customlist
+        - wf_zia_add_custom_category
+        - wf_zia_add_urls_to_allowlist
+        - wf_zia_add_urls_to_blocklist
+        - wf_zia_add_urls_to_customlist
         - wf_zia_get_allowlist
         - wf_zia_get_blocklist
         - wf_zia_get_customlist
         - wf_zia_get_sandbox_report
         - wf_zia_get_url_categories
+        - wf_zia_remove_artifact_from_allowlist
+        - wf_zia_remove_artifact_from_blocklist
+        - wf_zia_remove_artifact_from_customlist
         - wf_zia_remove_from_allowlist
         - wf_zia_remove_from_blocklist
         - wf_zia_remove_from_customlist
-        - wf_zia_remove_url_from_allowlist
-        - wf_zia_remove_url_from_blocklist
-        - wf_zia_remove_url_from_customlist
         - wf_zia_url_lookup
     - Rules:
-        - Example: ZIA: Add To Allowlist
-        - Example: ZIA: Add To Blocklist
-        - Example: ZIA: Add To Customlist
-        - Example: ZIA: Add URL Category
-        - Example: ZIA: Get Allowlist
-        - Example: ZIA: Get Blocklist
-        - Example: ZIA: Get Customlist
-        - Example: ZIA: Get Sandbox Report
-        - Example: ZIA: Get URL Categories
-        - Example: ZIA: Remove From Allowlist
-        - Example: ZIA: Remove From Blocklist
-        - Example: ZIA: Remove From Customlist
-        - Example: ZIA: Remove URL From Allowlist
-        - Example: ZIA: Remove URL From Blocklist
-        - Example: ZIA: Remove URL From Customlist
-        - Example: ZIA: URL Lookup
+        - ZIA: Add Artifact To Allowlist
+        - ZIA: Add Artifact To Blocklist
+        - ZIA: Add Artifact To Customlist
+        - ZIA: Add Custom Category
+        - ZIA: Add URLs To AllowList
+        - ZIA: Add URLs To BlockList
+        - ZIA: Add URLs To CustomList
+        - ZIA: Get Allowlist
+        - ZIA: Get Blocklist
+        - ZIA: Get Customlist
+        - ZIA: Get Sandbox Report
+        - ZIA: Get URL Categories
+        - ZIA: Remove Artifact From Allowlist
+        - ZIA: Remove Artifact From Blocklist
+        - ZIA: Remove Artifact From Customlist
+        - ZIA: Remove From Allowlist
+        - ZIA: Remove From Blocklist
+        - ZIA: Remove From Customlist
+        - ZIA: URL Lookup
     - Data Tables:
         - zia_allowlist
         - zia_blocklist
