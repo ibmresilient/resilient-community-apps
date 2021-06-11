@@ -88,7 +88,7 @@ def process_urls(urls_str):
     Urls in string consist of DNS host name, ip addresses or URLS.
     URLS will be parsed to sanitize for ZIA.
 
-    :param regex_str: Comma or newline seperated string of urls.
+    :param urls_str: Comma or newline seperated string of urls.
     :return: list of hostnames.
     """
     if not urls_str:
@@ -106,6 +106,8 @@ def parse_url(url):
     """"Parse url to convert to format acceptable to ZIA.
     Remove scheme and username and password if present.
 
+    Example parsing: "https://user:password@domain.com:port/index.html" ->
+                     "domain.com:port/index.html"
     :param url: A url.
     :return: Parsed url.
     """
