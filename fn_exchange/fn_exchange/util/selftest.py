@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
 """
 Function implementation test.
 Usage: resilient-circuits selftest -l fn_exchange
@@ -22,7 +22,7 @@ def selftest_function(opts):
     try:
 
         # Initialize utils
-        utils = exchange_utils(options)
+        utils = exchange_utils(options, opts)
 
         # Connect to server
         account = utils.connect_to_account(username)
