@@ -22,6 +22,7 @@
 
 | Version| Comment |
 | ------- | ------ |
+| 1.0.4 | Bug fix ipwhois version pin |
 | 1.0.3 | Updated examples, proxy support added |
 | 1.0.2 | bug fixes |
 | 1.0.1 | Support for App Host |
