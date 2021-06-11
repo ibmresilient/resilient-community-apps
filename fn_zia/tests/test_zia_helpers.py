@@ -133,3 +133,25 @@ class TestZIAHelpers:
         results = filter_by_url(mock_inputs["response"], url_filter=mock_inputs["url_filter"],
                                 url_type=mock_inputs["url_type"])
         assert results == expected_results
+
+    """Test process_urls function"""
+    mock_inputs_1 = {
+        "urls": "host1.ibm, 192.168.1.1, host2.com, FE80:0000:0000:0000:0202:B3FF:FE1E:8329"
+    }
+    expected_results_1 = ["host1.ibm", "192.168.1.1", "host2.com", "FE80:0000:0000:0000:0202:B3FF:FE1E:8329"]
+    mock_inputs_2 = {
+        "urls": "host.ibm,\n.host2.com,\nhttp://host.com:1234/,  ftp://user:password@host:port/path"
+    }
+    expected_results_2 = ["host.ibm", ".host2.com", "host.com:1234/", "host:port/path"]
+    mock_inputs_3 = {
+        "urls": "https://user:password@domain.com/index.html"
+    }
+    expected_results_3 = ["domain.com/index.html"]
+
+    @pytest.mark.parametrize("mock_inputs, expected_results", [
+        (mock_inputs_1, expected_results_1),
+        (mock_inputs_2, expected_results_2),
+        (mock_inputs_3, expected_results_3)
+    ])
+    def test_process_urls(self, mock_inputs, expected_results):
+        assert process_urls(mock_inputs["urls"]) == expected_results
