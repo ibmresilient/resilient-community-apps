@@ -40,7 +40,7 @@ def main():
     if CONTENT:
         response = CONTENT.get("response")
         activation = CONTENT.get("activation")
-        allowlist_urls = re.split("\s+|,", urls)
+        allowlist_urls = [re.sub(r'^.*\/\/(.*@)*(.*)', r'\2', u) for u in re.split("\s+|,", urls)]
         updated_allowlist_urls = response.get("whitelistUrls")
         if not any(a in updated_allowlist_urls for a in allowlist_urls):
             note_text = u"ZIA Integration: Workflow <b>{0}</b>: Successfully removed URLs <b>{1}</b> from allowlist " \
