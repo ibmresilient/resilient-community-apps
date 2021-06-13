@@ -38,7 +38,7 @@ def main():
     if CONTENT:
         response = CONTENT.get("response")
         activation = CONTENT.get("activation")
-        allowlist_urls = re.split("\s+|,", urls)
+        allowlist_urls = [re.sub(r'^.*\/\/(.*@)*(.*)', r'\2', u) for u in re.split("\s+|,", urls)]
         updated_allowlist = response.get("whitelistUrls")
         if all(a in updated_allowlist for a in allowlist_urls):
             note_text = u"ZIA Integration: Workflow <b>{0}</b>: Successfully added URLs <b>{1}</b> to allowlist " \
@@ -46,7 +46,7 @@ def main():
             note_text += u" Activation status: <b>{0}</b>.".format(activation["status"])
         
         else:
-            note_text = u"ZIA Integration: Workflow <b>{0}</b>: Not all uris added while attempting " \
+            note_text = u"ZIA Integration: Workflow <b>{0}</b>: Not all URIs added while attempting " \
                         u"to add URLs <b>{2}</b> to allowlist for SOAR function <b>{2}</b>."\
                 .format(WF_NAME, urls, FN_NAME)
     else:
