@@ -18,10 +18,14 @@
 
 ### Pre-Processing Script
 ```python
+content = workflow.properties.get_categories_results.content
+configured_name = rule.properties.zia_configured_name
+cats = content.get("categories")
+inputs.zia_category_id = [c["id"] for c in cats if configured_name == c["configuredName"]][0]
+inputs.zia_configured_name = configured_name
 inputs.zia_urls = artifact.value
-inputs.zia_category_id = rule.properties.zia_category_id
-inputs.zia_configured_name = rule.properties.zia_configured_name
 inputs.zia_activate = rule.properties.zia_activate
+
 ```
 
 ### Post-Processing Script
@@ -43,7 +47,7 @@ def main():
     if CONTENT:
         response = CONTENT.get("response")
         activation = CONTENT.get("activation")
-        customlist_urls = re.split("\s+|,", urls)
+        customlist_urls = [re.sub(r'^.*\/\/(.*@)*(.*)', r'\2', u) for u in re.split("\s+|,", urls)]
         updated_customlist = response.get("urls")
         if all(a in updated_customlist for a in customlist_urls):
             note_text = u"ZIA Integration: Workflow <b>{0}</b>: Successfully added URLs <b>{1}</b> to customlist "\
@@ -60,6 +64,57 @@ def main():
             .format(WF_NAME, urls, category_id,  FN_NAME)
 
     incident.addNote(helper.createRichText(note_text))
+
+main()
+
+```
+
+---
+
+## Function - ZIA: Get URL Categories
+
+### API Name
+`funct_zia_get_url_categories`
+
+### Output Name
+`get_categories_results`
+
+### Message Destination
+`zia`
+
+### Pre-Processing Script
+```python
+None
+```
+
+### Post-Processing Script
+```python
+##  ZIA - wf_zia_get_customlist post processing script ##
+
+#  Globals
+FN_NAME = "funct_zia_get_url_categories"
+WF_NAME = "ZIA: Add Artifact To Customlist"
+CONTENT = results.content
+INPUTS = results.inputs
+note_text = ''
+
+
+# Processing
+def main():
+    catname_exists = False
+    note_text = u''
+    name_filter = INPUTS.get("zia_name_filter")
+    if CONTENT:
+        cats = CONTENT.get("categories")
+        if any(name_filter == c["configuredName"] for c in cats):
+            catname_exists = True
+    if catname_exists:
+        workflow.addProperty("catname_exists", {})
+    else:
+        note_text += u"ZIA Integration: Workflow <b>{0}</b>: Workflow <b>{0}</b>: The category nmae  <b>{1}</b> was not found " \
+                     u"for SOAR function <b>{2}</b>." \
+            .format(WF_NAME, name_filter, FN_NAME)
+        incident.addNote(helper.createRichText(note_text))
 
 main()
 

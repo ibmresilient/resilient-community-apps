@@ -18,7 +18,13 @@
 
 ### Pre-Processing Script
 ```python
-None
+content = workflow.properties.get_categories_results.content
+configured_name = rule.properties.zia_configured_name
+cats = content.get("categories")
+inputs.zia_category_id = [c["id"] for c in cats if configured_name == c["configuredName"]][0]
+inputs.zia_urls = artifact.value
+inputs.zia_configured_name = rule.properties.zia_configured_name
+inputs.zia_activate = rule.properties.zia_activate
 ```
 
 ### Post-Processing Script
@@ -39,15 +45,15 @@ def main():
     if CONTENT:
         response = CONTENT.get("response")
         activation = CONTENT.get("activation")
-        customlist_urls = re.split("\s+|,", urls)
+        customlist_urls = [re.sub(r'^.*\/\/(.*@)*(.*)', r'\2', u) for u in re.split("\s+|,", urls)]
         updated_customlist = response.get("urls")
         if not any(a in updated_customlist for a in customlist_urls):
-            note_text = u"ZIA Integration: Workflow <b>{0}</b>: Successfully removed URIs <b>{1}</b> from customlist "\
+            note_text = u"ZIA Integration: Workflow <b>{0}</b>: Successfully removed URLs <b>{1}</b> from customlist "\
                         u"of category ID <b>{2}</b> and configured name <b>{3}</b> for SOAR function <b>{4}</b>."\
             .format(WF_NAME, urls, category_id, configured_name, FN_NAME)
             note_text += u" Activation status: <b>{0}</b>.".format(activation["status"])
         else:
-            note_text = u"ZIA Integration: Workflow <b>{0}</b>: Not all urls were removed while attempting "\
+            note_text = u"ZIA Integration: Workflow <b>{0}</b>: Not all URLs were removed while attempting "\
                         u"to remove URLs <b>{1}</b> from customlist with category ID <b>{2}</b> and configured name <b>{3}</b> "\
                         u"for SOAR function <b>{4}</b>.".format(WF_NAME, urls, category_id, configured_name, FN_NAME)
     else:
@@ -56,6 +62,57 @@ def main():
             .format(WF_NAME, urls, category_id, FN_NAME)
 
     incident.addNote(helper.createRichText(note_text))
+
+main()
+
+```
+
+---
+
+## Function - ZIA: Get URL Categories
+
+### API Name
+`funct_zia_get_url_categories`
+
+### Output Name
+`get_categories_results`
+
+### Message Destination
+`zia`
+
+### Pre-Processing Script
+```python
+None
+```
+
+### Post-Processing Script
+```python
+##  ZIA - wf_zia_get_customlist post processing script ##
+
+#  Globals
+FN_NAME = "funct_zia_get_url_categories"
+WF_NAME = "ZIA: Remove Artifact From Customlist@
+CONTENT = results.content
+INPUTS = results.inputs
+note_text = ''
+
+
+# Processing
+def main():
+    catname_exists = False
+    note_text = u''
+    name_filter = INPUTS.get("zia_name_filter")
+    if CONTENT:
+        cats = CONTENT.get("categories")
+        if any(name_filter == c["configuredName"] for c in cats):
+            catname_exists = True
+    if catname_exists:
+        workflow.addProperty("catname_exists", {})
+    else:
+        note_text += u"ZIA Integration: Workflow <b>{0}</b>: Workflow <b>{0}</b>: The category nmae  <b>{1}</b> was not found " \
+                     u"for SOAR function <b>{2}</b>." \
+            .format(WF_NAME, name_filter, FN_NAME)
+        incident.addNote(helper.createRichText(note_text))
 
 main()
 
