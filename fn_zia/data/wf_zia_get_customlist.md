@@ -20,7 +20,6 @@
 ```python
 ##  ZIA - wf_zia_get_customlist pre processing script ##
 inputs.zia_custom_only = "true"
-inputs.zia_category_id = rule.properties.zia_category_id
 import re
 
 URL_FILTER = rule.properties.zia_url_filter
@@ -94,7 +93,8 @@ def main():
                         newrow.cat_id = cat_id
                         newrow.configuredName = configured_name
                         newrow.url = url
-                        newrow.query_filter = url_filter
+                        newrow.url_filter = url_filter
+                        newrow.name_filter = name_filter
                 else:
                     note_text += "<br>Custom list URLS for Category ID <b>{0}</b> and configured name <b>{1}</b> : <b>{2}</b>".format(", ".join(customlist_urls))
     else:
