@@ -79,6 +79,7 @@ fn_virustotal
 fn_vmray_analyzer
 fn_wiki
 fn_whois
+fn_whois_rdap
 fn_xforce
 
 #Not_Rebuilt

@@ -55,7 +55,7 @@ def get_whois_registry_info(ip_input, proxies=None):
     """
     try:
         proxy_opener = make_proxy_opener(proxies) if proxies else None
-        internet_protocol_address_object = IPWhois(ip_input, allow_permutations=True, proxy_opener=proxy_opener)
+        internet_protocol_address_object = IPWhois(ip_input, proxy_opener=proxy_opener)
         try:
             whois_response = internet_protocol_address_object.lookup_whois()
             if internet_protocol_address_object.dns_zone:
@@ -78,7 +78,7 @@ def get_rdap_registry_info(ip_input, rdap_depth, proxies=None):
     """
     try:
         proxy_opener = make_proxy_opener(proxies) if proxies else None
-        internet_protocol_address_object = IPWhois(ip_input, allow_permutations=True, proxy_opener=proxy_opener)
+        internet_protocol_address_object = IPWhois(ip_input, proxy_opener=proxy_opener)
         try:
             rdap_response = internet_protocol_address_object.lookup_rdap(rdap_depth)
             if internet_protocol_address_object.dns_zone:
