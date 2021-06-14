@@ -5,10 +5,10 @@
 
 # ZIA: Add URLs To AllowList
 
-## Function - ZIA: Add To Blocklist
+## Function - ZIA: Add To Allowlist
 
 ### API Name
-`funct_zia_add_to_blocklist`
+`funct_zia_add_to_allowlist`
 
 ### Output Name
 `None`
@@ -18,7 +18,9 @@
 
 ### Pre-Processing Script
 ```python
-None
+inputs.zia_activate = rule.properties.zia_activate
+inputs.zia_allowlisturls = rule.properties.zia_urls.content
+
 ```
 
 ### Post-Processing Script
