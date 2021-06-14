@@ -47,14 +47,27 @@ DATA_TBL_FIELDS = {
 #Processing
 def main():
     note_text = u''
+    bad_summary = u''
+    bad_report_status = False
+    unknown_md5_str = "md5 is unknown or analysis has yet not been completed"
     md5 = INPUTS.get("zia_md5")
+    report_type = "Full" if INPUTS.get("zia_full_report") else "Summary"
     if CONTENT:
         full = CONTENT.get("Full Details")
         summary = CONTENT.get("Summary")
-        if summary:
-            note_text = u"ZIA Integration: Workflow <b>{0}</b>: A summary report was returned for MD5 <b>{1}</b>. " \
-                        u"The data table <b>{2}</b> has been updated for SOAR function <b>{3}</b>."\
-                .format(WF_NAME, md5, "Zscaler Internet Access - Sandbox Report Summary", FN_NAME)
+        for r in list(filter(None, [full, summary])):
+            if  not isinstance(r, dict) and r.find(unknown_md5_str) > -1:
+                bad_summary = r
+                bad_report_status = True
+        if bad_report_status:
+            note_text = u"ZIA Integration: Workflow <b>{0}</b>: A <b>{1}</b> report was not returned for MD5 <b>{2}</b> " \
+                        u"for SOAR function <b>{3}</b>." \
+                .format(WF_NAME, report_type, md5, FN_NAME)
+            note_text += "<br><b>{0}</b>".format(bad_summary)      
+        elif summary:
+            note_text = u"ZIA Integration: Workflow <b>{0}</b>: A <b>{1}</b> report was returned for MD5 <b>{2}</b>. " \
+                        u"The data table <b>{3}</b> has been updated for SOAR function <b>{4}</b>."\
+                .format(WF_NAME, report_type, md5, "Zscaler Internet Access - Sandbox Report Summary", FN_NAME)
             
             newrow = incident.addRow("zia_sandbox_report_summary")
             newrow.query_execution_date = QUERY_EXECUTION_DATE
@@ -68,9 +81,9 @@ def main():
                         f = field
                     newrow[field]  = "{}".format(section[f])
         elif full:
-            note_text = u"ZIA Integration: Workflow <b>{0}</b>: A full report was returned for MD5 <b>{1}</b>. " \
-                        u"for SOAR function <b>{2}</b>."\
-                .format(WF_NAME, md5, FN_NAME)
+            note_text = u"ZIA Integration: Workflow <b>{0}</b>: A <b>{1}</b> report was returned for MD5 <b>{2}</b>. " \
+                        u"for SOAR function <b>{3}</b>."\
+                .format(WF_NAME, report_type, md5, FN_NAME)
             note_text += "<br><b>{0}</b>".format(full)
         else:
             note_text += u"ZIA Integration: Workflow <b>{0}</b>: There was an unknown report type returned for MD5 <b>{1}</b>" \
@@ -83,8 +96,6 @@ def main():
     incident.addNote(helper.createRichText(note_text))
 
 main()
-
-
 ```
 
 ---

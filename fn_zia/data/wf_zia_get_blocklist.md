@@ -61,12 +61,12 @@ QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
 # Processing
 def main():
     note_text = u''
+    url_filter = INPUTS.get("zia_url_filter")
     if CONTENT:
-        url_filter = INPUTS.get("zia_url_filter")
         blocklist_urls = CONTENT.blacklistUrls
         url_counts = CONTENT.url_counts
         note_text = u"ZIA Integration: Workflow <b>{0}</b>: There were <b>{1}</b> blocklist URLS(s) out of a total of "\
-                    u"<b>{2}</b> using filter <b>{3}</b> returned for SOAR function <b>{4}</b>."\
+                    u"<b>{2}</b> using URL filter <b>{3}</b> returned for SOAR function <b>{4}</b>."\
         .format(WF_NAME, url_counts["filtered"], url_counts["total"], url_filter, FN_NAME)
         if blocklist_urls:
             if url_counts["filtered"] <= 50:
@@ -79,9 +79,9 @@ def main():
             else:
                 note_text += "<br>Blocklisted URLS: <b>{0}</b>".format(", ".join(blocklist_urls))
     else:
-        note_text += u"ZIzA Integration: Workflow <b>{0}</b>: There were <b>no</b> results returned " \
-                     u"for SOAR function <b>{1}</b>."\
-            .format(WF_NAME, FN_NAME)
+        note_text += u"ZIA Integration: Workflow <b>{0}</b>: There were <b>no</b> results using URL filter <b>{1}</b> "\
+                     u"returned for SOAR function <b>{2}</b>."\
+            .format(WF_NAME, url_filter, FN_NAME)
 
     incident.addNote(helper.createRichText(note_text))
 
