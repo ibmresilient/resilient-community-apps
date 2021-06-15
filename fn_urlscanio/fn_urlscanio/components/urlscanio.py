@@ -67,58 +67,69 @@ class FunctionComponent(ResilientComponent):
             urlscanio_scan_url = u"{}/scan/".format(self.urlscanio_report_url)
             urlscanio_post = req_common.execute_call_v2("POST", urlscanio_scan_url, self.timeout,
                                        headers=urlscanio_headers,
-                                       data=json.dumps(urlscanio_data))
+                                       data=json.dumps(urlscanio_data),
+                                       callback=report_callback)
 
-            urlscanio_post.raise_for_status()
+            #urlscanio_post.raise_for_status()
 
             # The post response contains a UUID that we use to check for the report
             urlscanio_post_json = urlscanio_post.json()
             LOG.debug(urlscanio_post_json)
+            print(urlscanio_post_json)
 
-            # UUID tells me my report ID so I can go grab it after
-            uuid = urlscanio_post_json['uuid']
-            yield StatusMessage("Submitted URL successfully as %s" % uuid)
+            if "Submission successful" != urlscanio_post_json['message']:
+                yield StatusMessage(urlscanio_post_json['message'])
+                results = {
+                    "png_base64content": None,
+                    "png_url": None,
+                    "report_url": urlscanio_scan_url,
+                    "report": urlscanio_post_json
+                }
+            else:
+                # UUID tells me my report ID so I can go grab it after
+                uuid = urlscanio_post_json['uuid']
+                yield StatusMessage("Submitted URL successfully as %s" % uuid)
 
-            # Loop until the report is ready
-            start_time = time.time()  # epoch seconds
-            while True:
-                time.sleep(10)
-                if time.time() > start_time + self.timeout:
-                    yield RuntimeError("Timeout: report was not ready after {} seconds".format(self.timeout))
-                urlscanio_result_url = u"{}/result/{}".format(self.urlscanio_report_url, uuid)
+                # Loop until the report is ready
+                start_time = time.time()  # epoch seconds
+                while True:
+                    time.sleep(10)
+                    if time.time() > start_time + self.timeout:
+                        yield RuntimeError("Timeout: report was not ready after {} seconds".format(self.timeout))
+                    urlscanio_result_url = u"{}/result/{}".format(self.urlscanio_report_url, uuid)
 
-                urlscanio_get = req_common.execute_call_v2("GET", urlscanio_result_url, self.timeout, callback=report_callback)
-                if urlscanio_get.status_code == 200:
-                    # Report is done
-                    break
+                    urlscanio_get = req_common.execute_call_v2("GET", urlscanio_result_url, self.timeout, callback=report_callback)
+                    if urlscanio_get.status_code == 200:
+                        # Report is done
+                        break
 
-            # get the full report json - usually a big blob
-            urlscanio_report_url = u"{}/result/{}/".format(self.urlscanio_report_url, uuid)
-            urlscanio_report_get = req_common.execute_call_v2("GET", urlscanio_report_url, self.timeout)
-            urlscanio_report_json = urlscanio_report_get.json()
-            yield StatusMessage("Downloaded report from {}".format(urlscanio_report_url))
+                # get the full report json - usually a big blob
+                urlscanio_report_url = u"{}/result/{}/".format(self.urlscanio_report_url, uuid)
+                urlscanio_report_get = req_common.execute_call_v2("GET", urlscanio_report_url, self.timeout)
+                urlscanio_report_json = urlscanio_report_get.json()
+                yield StatusMessage("Downloaded report from {}".format(urlscanio_report_url))
 
-            # Grab the PNG screenshot.  Return as a base64 string so it can be passed to another function as needed
-            urlscanio_png_url = u"{}/{}.png".format(self.urlscanio_screenshot_url, uuid)
-            urlscanio_png_get = req_common.execute_call_v2("GET", urlscanio_png_url, self.timeout)
-            urlscanio_png_b64 = base64.b64encode(urlscanio_png_get.content)
-            yield StatusMessage("Downloaded PNG screenshot from {}".format(urlscanio_png_url))
+                # Grab the PNG screenshot.  Return as a base64 string so it can be passed to another function as needed
+                urlscanio_png_url = u"{}/{}.png".format(self.urlscanio_screenshot_url, uuid)
+                urlscanio_png_get = req_common.execute_call_v2("GET", urlscanio_png_url, self.timeout)
+                urlscanio_png_b64 = base64.b64encode(urlscanio_png_get.content)
+                yield StatusMessage("Downloaded PNG screenshot from {}".format(urlscanio_png_url))
 
-            # returns the png file base64 and also the report url
-            results = {
-                "png_base64content": str(urlscanio_png_b64),
-                "png_url": urlscanio_png_url,
-                "report_url": urlscanio_report_url,
-                "report": urlscanio_report_json
-            }
+                # returns the png file base64 and also the report url
+                results = {
+                    "png_base64content": str(urlscanio_png_b64),
+                    "png_url": urlscanio_png_url,
+                    "report_url": urlscanio_report_url,
+                    "report": urlscanio_report_json
+                }
 
-            # Get rest client, attachment name, and png content so we can write as an attachment
-            rest_client = self.rest_client()
-            attachment_name = u"urlscanio-screenshot-{}.png".format(urlscanio_url)
-            datastream = BytesIO(urlscanio_png_get.content)
+                # Get rest client, attachment name, and png content so we can write as an attachment
+                rest_client = self.rest_client()
+                attachment_name = u"urlscanio-screenshot-{}.png".format(urlscanio_url)
+                datastream = BytesIO(urlscanio_png_get.content)
 
-            # Write the file as an attachment
-            write_file_attachment(rest_client, attachment_name, datastream, incident_id, None)
+                # Write the file as an attachment
+                write_file_attachment(rest_client, attachment_name, datastream, incident_id, None)
 
             yield FunctionResult(results)
         except Exception as err:
@@ -130,7 +141,7 @@ def report_callback(response):
     :param response:
     :return: response
     """
-    if response.status_code == 200 or response.status_code == 404:
+    if response.status_code == 200 or response.status_code == 404 or response.status_code == 400:
         return response
     else:
         raise IntegrationError(response.content)
