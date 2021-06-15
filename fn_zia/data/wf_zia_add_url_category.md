@@ -48,8 +48,9 @@ def main():
         activation = CONTENT.get("activation")
         list_urls = re.split("\s+|,", urls)
         id = response.get("id")
+        urls = [re.sub(r'^.*\/\/(.*@)*(.*)', r'\2', u) for u in re.split("\s+|,", urls)]
         category_list = response.get("urls")
-        if all(a in category_list for a in list_urls):
+        if all(a in category_list for a in urls):
             note_text = u"ZIA Integration: Workflow <b>{0}</b>: Successfully Created category <b>{1}</b> with id "\
                         u"<b>{2}</b> and with urls <b>{3}</b> for SOAR function <b>{4}</b>.".format(WF_NAME, configured_name, id, urls, FN_NAME)
             note_text += u" Activation status: <b>{0}</b>.".format(activation["status"])
