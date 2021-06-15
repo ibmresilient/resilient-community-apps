@@ -14,14 +14,14 @@
   NOTE: If your app is available in the container-format only, there is no need to mention the integration server in this readme.
 -->
 
-# Zscaler Internet Access(Zia) Functions for IBM SOAR
+# Zscaler Internet Access(ZIA) Functions for IBM SOAR
 
 ## Table of Contents
 - [Release Notes](#release-notes)
 - [Overview](#overview)
   - [Key Features](#key-features)
 - [Requirements](#requirements)
-  - [Resilient platform](#resilient-platform)
+  - [IBM SOAR platform](#ibm-soar-platform)
   - [Cloud Pak for Security](#cloud-pak-for-security)
   - [Proxy Server](#proxy-server)
   - [Python Environment](#python-environment)
@@ -57,7 +57,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.0.0 | MM/YYYY | Initial Release |
+| 1.0.0 | 06/2021 | Initial Release |
 
 ---
 
@@ -66,37 +66,41 @@
   Provide a high-level description of the function itself and its remote software or application.
   The text below is parsed from the "description" and "long_description" attributes in the setup.py file
 -->
-**Resilient Circuits Components for 'fn_zia'**
+****Zscaler Internet Access Integration for IBM SOAR.****
 
  ![screenshot: main](./doc/screenshots/main.png)
 
-Resilient Circuits Components for 'fn_zia'
-
+Zscaler Internet Access(ZIA) is a secure internet and web gateway delivered as a service from the cloud. Zia provides a secure connection between users and the internet, inspecting every byte of traffic inline across multiple security techniques.
 ### Key Features
 <!--
   List the Key Features of the Integration
 -->
-* Key Feature 1
-* Key Feature 2
-* Key Feature 3
-
+The Zscaler Internet Access Integration provides the following functionality:
+* Functions to get the global blocklist and allowlist.
+* Functions to add URLs, URIs, DNS hostnames and IP addresses to the main blocklist and allowlist.
+* Functions to remove URLs, URIs, DNS hostnames and IP addresses from the main blocklist and allowlist.
+* Functions to get URL catergories and create custom URL categories.
+* Functions to add URLs, URIs, DNS hostnames and IP addresses to custom URL categories.
+* A function to query the ZIA sandbox for a hash value.
+* A function to lookup the category of a URL.
+Note: See following for ZIA URL definitions https://help.zscaler.com/zia/url-format-guidelines.
 ---
 
 ## Requirements
 <!--
   List any Requirements 
 -->
-This app supports the IBM Resilient SOAR Platform and the IBM Cloud Pak for Security.
+This app supports the IBM SOAR Platform and the IBM Cloud Pak for Security.
 
-### Resilient platform
-The Resilient platform supports two app deployment mechanisms, App Host and integration server.
+### IBM SOAR platform
+The IBM SOAR platform supports two app deployment mechanisms, App Host and integration server.
 
-If deploying to a Resilient platform with an App Host, the requirements are:
-* Resilient platform >= `39.0.6328`.
+If deploying to an IBM SOAR platform with an App Host, the requirements are:
+* IBM SOAR platform >= `39.0.6328`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
-If deploying to a Resilient platform with an integration server, the requirements are:
-* Resilient platform >= `39.0.6328`.
+If deploying to a IBM SOAR platform with an integration server, the requirements are:
+* IBM SOAR platform >= `39.0.6328`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `None`.
 * If using an API key account, make sure the account provides the following minimum permissions: 
@@ -105,12 +109,12 @@ If deploying to a Resilient platform with an integration server, the requirement
   | Org Data | Read |
   | Function | Read |
 
-The following Resilient platform guides provide additional information: 
+The following IBM SOAR platform guides provide additional information: 
 * _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
 
-The above guides are available on the IBM Knowledge Center at [ibm.biz/resilient-docs](https://ibm.biz/resilient-docs). On this web page, select your Resilient platform version. On the follow-on page, you can find the _App Host Deployment Guide_ or _Integration Server Guide_ by expanding **Resilient Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
+The above guides are available on the IBM Knowledge Center at [ibm.biz/resilient-docs](https://ibm.biz/resilient-docs). On this web page, select your IBM SOAR platform version. On the follow-on page, you can find the _App Host Deployment Guide_ or _Integration Server Guide_ by expanding **Resilient Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
 ### Cloud Pak for Security
 If you are deploying to IBM Cloud Pak for Security, the requirements are:
@@ -128,7 +132,7 @@ These guides are available on the IBM Knowledge Center at [ibm.biz/cp4s-docs](ht
 The app **does/does not** support a proxy server.
 
 ### Python Environment
-Both Python 2.7 and Python 3.6 are supported.
+Python 3.6 is supported.
 Additional package dependencies may exist for each of these packages:
 * resilient-circuits>=41.0.0
 * resilient-lib>=41.0.0
@@ -138,7 +142,7 @@ Additional package dependencies may exist for each of these packages:
 ## Installation
 
 ### Install
-* To install or uninstall an App or Integration on the _Resilient platform_, see the documentation at [ibm.biz/resilient-docs](https://ibm.biz/resilient-docs).
+* To install or uninstall an App or Integration on the _IBM SOAR platform_, see the documentation at [ibm.biz/resilient-docs](https://ibm.biz/resilient-docs).
 * To install or uninstall an App on _IBM Cloud Pak for Security_, see the documentation at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs) and follow the instructions above to navigate to Orchestration and Automation.
 
 ### App Configuration
@@ -146,6 +150,12 @@ The following table provides the settings you need to configure the app. These s
 
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
+| **zia_api_base_url** | Yes | `https://zsapi.zscaler.net/api/v1` | *ZIA API base URL. Dependent on particular ZIA cloud instance being accessed by user.* |
+| **zia_username** | Yes | `user@1234567.zscalerbeta.net` | *Username used for programmatic (API) access to ZIA.* |
+| **zia_password** | Yes | `password` | *Password used for programmatic (API) access to ZIA.* |
+| **zia_api_key** | Yes | `abCDeFGHij0K` | *Api Key used for programmatic (API) access to ZIA.* |
+| **http_proxy** | No | `http://proxy:80` | *Optional setting for an http proxy if required.*  |
+| **https_proxy** | No | `https://proxy:443` | *Optional setting for an https proxy if required.* |
 
 ### Custom Layouts
 <!--
@@ -154,9 +164,16 @@ The following table provides the settings you need to configure the app. These s
   You should save a screenshot "custom_layouts.png" in the doc/screenshots directory and reference it here
 -->
 * Import the Data Tables and Custom Fields like the screenshot below:
+Configure the Incident Details tab layout to display the AWS GuardDuty information as follows:
 
+1. Navigate to the ‘Customization Settings’ and select the Layouts tab.
+2. Click on ‘Incident Tabs’.
+3. Add a new incident tab named ‘ZIA’.
+4. Drag and drop the ZIA data tables under the new tab.
+5. Click Save.
+
+The following screenshot shows the data tables added to the ZIA tab:
   ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png)
-
 
 ---
 
@@ -166,13 +183,35 @@ Get a full (i.e., complete) or summary detail report for a file that was analyze
 
  ![screenshot: fn-zia-get-sandbox-report ](./doc/screenshots/fn-zia-get-sandbox-report.png)
 
+The function provides the following functionality.
+
+* Query the ZIA sandbox for MD5 values where the associated file has been run through the sandbox.
+* If the report type is `summary` the data table `Zscaler Internet Access - Sandbox Report Summary` is updated.
+* A note is added to the SOAR incident with the status of the query. 
+* If the report is a `full` report the raw JSON is included in the note, the data table will not be updated.
+
+An Example workflow that uses this IBM SOAR function is `ZIA: Get Sandbox Report`.
+
+The workflow is initiated by the incident rule `ZIA: Get Sandbox Report`.
+
+The rule `ZIA: Get Sandbox Report` is a manual artifact rule.
+
+The following screenshot shows an example of the data table updated by the function:
+
+   ![screenshot: fn-zia-get-sandbox-datatable](./doc/screenshots/fn-zia-get-sandbox-datatable.png)
+
+The following screenshot shows an example of a note added to an IBM SOAR incident:
+
+   ![screenshot: fn-zia-get-sandbox-notes](./doc/screenshots/fn-zia-get-sandbox-notes.png)
+
+
 <details><summary>Inputs:</summary>
 <p>
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `zia_full_report` | `boolean` | No | `-` | Boolean True if a full report required |
-| `zia_md5` | `text` | No | `-` | MD5 hash value. |
+| `zia_full_report` | `boolean` | Yes | `-` | Boolean True if a full report required |
+| `zia_md5` | `text` | Yes | `-` | MD5 hash value. |
 
 </p>
 </details>
@@ -229,14 +268,27 @@ DATA_TBL_FIELDS = {
 #Processing
 def main():
     note_text = u''
+    bad_summary = u''
+    bad_report_status = False
+    unknown_md5_str = "md5 is unknown or analysis has yet not been completed"
     md5 = INPUTS.get("zia_md5")
+    report_type = "Full" if INPUTS.get("zia_full_report") else "Summary"
     if CONTENT:
         full = CONTENT.get("Full Details")
         summary = CONTENT.get("Summary")
-        if summary:
-            note_text = u"ZIA Integration: Workflow <b>{0}</b>: A summary report was returned for MD5 <b>{1}</b>. " \
-                        u"The data table <b>{2}</b> has been updated for SOAR function <b>{3}</b>."\
-                .format(WF_NAME, md5, "Zscaler Internet Access - Sandbox Report Summary", FN_NAME)
+        for r in list(filter(None, [full, summary])):
+            if  not isinstance(r, dict) and r.find(unknown_md5_str) > -1:
+                bad_summary = r
+                bad_report_status = True
+        if bad_report_status:
+            note_text = u"ZIA Integration: Workflow <b>{0}</b>: A <b>{1}</b> report was not returned for MD5 <b>{2}</b> " \
+                        u"for SOAR function <b>{3}</b>." \
+                .format(WF_NAME, report_type, md5, FN_NAME)
+            note_text += "<br><b>{0}</b>".format(bad_summary)      
+        elif summary:
+            note_text = u"ZIA Integration: Workflow <b>{0}</b>: A <b>{1}</b> report was returned for MD5 <b>{2}</b>. " \
+                        u"The data table <b>{3}</b> has been updated for SOAR function <b>{4}</b>."\
+                .format(WF_NAME, report_type, md5, "Zscaler Internet Access - Sandbox Report Summary", FN_NAME)
             
             newrow = incident.addRow("zia_sandbox_report_summary")
             newrow.query_execution_date = QUERY_EXECUTION_DATE
@@ -250,9 +302,9 @@ def main():
                         f = field
                     newrow[field]  = "{}".format(section[f])
         elif full:
-            note_text = u"ZIA Integration: Workflow <b>{0}</b>: A full report was returned for MD5 <b>{1}</b>. " \
-                        u"for SOAR function <b>{2}</b>."\
-                .format(WF_NAME, md5, FN_NAME)
+            note_text = u"ZIA Integration: Workflow <b>{0}</b>: A <b>{1}</b> report was returned for MD5 <b>{2}</b>. " \
+                        u"for SOAR function <b>{3}</b>."\
+                .format(WF_NAME, report_type, md5, FN_NAME)
             note_text += "<br><b>{0}</b>".format(full)
         else:
             note_text += u"ZIA Integration: Workflow <b>{0}</b>: There was an unknown report type returned for MD5 <b>{1}</b>" \
@@ -265,8 +317,6 @@ def main():
     incident.addNote(helper.createRichText(note_text))
 
 main()
-
-
 ```
 
 </p>
@@ -278,6 +328,35 @@ Get information about URL categories.
 
  ![screenshot: fn-zia-get-url-categories ](./doc/screenshots/fn-zia-get-url-categories.png)
 
+The function provides the following functionality.
+
+* Query ZIA for information on URL categories.
+* The result can be filtered by category name and/or by url value using regular expressions.
+* A data table is updated (The data table depends on the workflow).
+* A note is added to the IBM SOAR incident with the status of the query.
+* If the number of categories or url count are > 50 the raw JSON is included in the note, the data table will not be updated.
+
+An Example workflow that uses this IBM SOAR function is `ZIA: Get Customlist`.
+
+The workflow is initiated by the manual incident rule `ZIA: Get Customlist`.
+
+The data table `Zscaler Internet Access - Custom lists` is updated.
+
+An Example workflow that uses this IBM SOAR function is `ZIA: Get URL Categories`.
+
+The workflow is initiated by the manual incident rule `ZIA: Get URL Categories`.
+
+The data table `Zscaler Internet Access - URL Categories` is updated.
+
+The following screenshot shows an example of data table updated by the function:
+
+   ![screenshot: fn-zia-get-url-categories-datatable](./doc/screenshots/fn-zia-get-url-categories-datatable.png)
+
+The following screenshot shows an example of a note added to an IBM SOAR incident:
+
+   ![screenshot: fn-zia-get-url-categories-notes](./doc/screenshots/fn-zia-get-url-categories-notes.png)
+
+
 <details><summary>Inputs:</summary>
 <p>
 
@@ -285,7 +364,6 @@ Get information about URL categories.
 | ---- | :--: | :------: | ------- | ------- |
 | `zia_category_id` | `text` | No | `-` | Category ID of a  URL category. |
 | `zia_custom_only` | `text` | No | `-` | Parameter to get only Custom Categories.Options 'true' or 'false' |
-| `zia_keyword_filter` | `text` | No | `-` | Filter by keyword. Can be a string or regular expression. e.g. gambling or ^gambling.*' . Leaving the filter blank will return the full list. |
 | `zia_name_filter` | `text` | No | `<REGEX>|<STRING>` | Filter by category name. Can be a string or regular expression. e.g. 'Custom category', '^CAT.*' or ^(List 1|LIST_2)$. Leaving the filter blank will return the full list.  |
 | `zia_url_filter` | `text` | No | `<REGEX>|<STRING>` | Filter by URL. Can be a string or regular expression. e.g. host.ibm.com, ^host.*' or ^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$. Leaving the filter blank will return the full list. |
 
@@ -312,7 +390,6 @@ results = {
 ```python
 ##  ZIA - wf_zia_get_customlist pre processing script ##
 inputs.zia_custom_only = "true"
-inputs.zia_category_id = rule.properties.zia_category_id
 import re
 
 URL_FILTER = rule.properties.zia_url_filter
@@ -355,51 +432,28 @@ if __name__ == "__main__":
 
 #  Globals
 FN_NAME = "funct_zia_get_url_categories"
-WF_NAME = "ZIA: Get Customlist"
+WF_NAME = "ZIA: Add Artifact To Customlist"
 CONTENT = results.content
 INPUTS = results.inputs
-QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
 note_text = ''
-DATA_TBL_FIELDS = ["cat_id", "configuredName", "url"]
+
 
 # Processing
 def main():
+    catname_exists = False
     note_text = u''
-    url_filter = INPUTS.get("zia_url_filter")
+    name_filter = INPUTS.get("zia_name_filter")
     if CONTENT:
-        categories = CONTENT.get("categories")
-        cat_counts = CONTENT.get("category_counts")
-        name_filter = INPUTS.get("zia_name_filter")
-        note_text += u"ZIA Integration: Workflow <b>{0}</b>: There were <b>{1}</b> Custom lists out of a total of "\
-                     u"<b>{2}</b> using category name filter <b>{3}</b> and URL filter <b>{4}</b> returned for SOAR "\
-                     u"function <b>{5}</b>."\
-        .format(WF_NAME, cat_counts["filtered"], cat_counts["total"], name_filter, url_filter, FN_NAME)
-        for cat in categories:
-            url_counts = cat.get("url_counts")
-            cat_id = cat.get("id")
-            configured_name = cat.get("configuredName")
-            customlist_urls = cat.get("urls")
-            note_text += u"<br>There were <b>{0}</b> URLS(s) out of a total of <b>{1}</b> returned using URL filter <b>{2}</b> "\
-                         u"for Custom list <b>{4}</b> "\
-            .format(url_counts["filtered"], url_counts["total"], url_filter, cat_id, configured_name)
-            if customlist_urls:
-                if url_counts["filtered"] <= 50:
-                    note_text += u"<br>The data table <b>{0}</b> has been updated".format("Zscaler Internet Access - Custom lists")
-                    for url in customlist_urls:
-                        newrow = incident.addRow("zia_customlists")
-                        newrow.query_execution_date = QUERY_EXECUTION_DATE
-                        newrow.cat_id = cat_id
-                        newrow.configuredName = configured_name
-                        newrow.url = url
-                        newrow.query_filter = url_filter
-                else:
-                    note_text += "<br>Custom list URLS for Category ID <b>{0}</b> and configured name <b>{1}</b> : <b>{2}</b>".format(", ".join(customlist_urls))
+        cats = CONTENT.get("categories")
+        if any(name_filter == c["configuredName"] for c in cats):
+            catname_exists = True
+    if catname_exists:
+        workflow.addProperty("catname_exists", {})
     else:
-        note_text += u"ZIA Integration: Workflow <b>{0}</b>: There were <b>no</b> results returned using configured name filter <b>{1}</b> "\
-                     u"and URL filter <b>{2}</b> for SOAR function <b>{3}</b>."\
-            .format(WF_NAME, url_filter, name_filter, url_filter, FN_NAME)
-    
-    incident.addNote(helper.createRichText(note_text))
+        note_text += u"ZIA Integration: Workflow <b>{0}</b>: Workflow <b>{0}</b>: The category nmae  <b>{1}</b> was not found " \
+                     u"for SOAR function <b>{2}</b>." \
+            .format(WF_NAME, name_filter, FN_NAME)
+        incident.addNote(helper.createRichText(note_text))
 
 main()
 
@@ -414,6 +468,24 @@ Add a new custom URL category.
 
  ![screenshot: fn-zia-add-url-category ](./doc/screenshots/fn-zia-add-url-category.png)
 
+The function provides the following functionality.
+
+* An action to add a new custom URL category to the ZIA environment.
+* A list of URLs must be included in the action with at least one URL in the list.
+* A super category must be specified.
+* Set `zia_custom_category` to `true` to indicate this is a custom category.
+* There is an option to activate the configuration change.
+* A note is added to the IBM SOAR incident with the status of the action. 
+ 
+An Example workflow that uses this IBM SOAR function is `ZIA: Add Custom Category`.
+
+The workflow is initiated by the manual incident rule `ZIA: Add Custom Category`.
+
+The following screenshot shows an example of a note added to an IBM SOAR incident:
+
+   ![screenshot: fn-zia-get-url-category-note](./doc/screenshots/fn-zia-get-url-category-note.png)
+
+
 <details><summary>Inputs:</summary>
 <p>
 
@@ -423,7 +495,7 @@ Add a new custom URL category.
 | `zia_configured_name` | `text` | No | `-` | Configured name of a custom URL category. |
 | `zia_custom_category` | `text` | No | `-` | Indicates whether category is custom type. Valid values are "true", "false"" |
 | `zia_keywords` | `text` | No | `-` | Keyword string. |
-| `zia_super_category` | `text` | No | `-` | Super category of a custom URL category. |
+| `zia_super_category` | `text` | Yes | `-` | Super category of a custom URL category. |
 | `zia_urls` | `text` | Yes | `-` | Entries of type DNS hostname, IP Address, URL or URI. Wildcard is a '.'   Entries will be parsed to extract a format suitable for ZIA to add to a list. URL guidelines https://help.zscaler.com/zia/url-format-guidelines. |
 
 </p>
@@ -511,6 +583,18 @@ Look up the categorization of a URL or set of URLs, e.g., ['abc.com', 'xyz.com']
 
  ![screenshot: fn-zia-url-lookup ](./doc/screenshots/fn-zia-url-lookup.png)
 
+* A query which looks up the categorization of a url in the ZIA environment.
+* A note is added to the IBM SOAR incident with the status of the query including the query result as raw JSON data.
+
+An Example workflow that uses this IBM SOAR function is `ZIA: URL Lookup`.
+
+The workflow is initiated by the manual artifact rule `ZIA: URL Lookup`.
+
+The following screenshot shows an example of a note added to an IBM SOAR incident:
+
+   ![screenshot: fn-zia-get-url-lookup-note](./doc/screenshots/fn-zia-get-url-lookup-note.png)
+
+
 <details><summary>Inputs:</summary>
 <p>
 
@@ -588,6 +672,29 @@ Remove URLs, DNS hostnames or IP addresses  from a URL Category. Artifacts of ty
 
  ![screenshot: fn-zia-remove-from-url-category ](./doc/screenshots/fn-zia-remove-from-url-category.png)
 
+The function provides the following functionality.
+
+* An action to remove a URL or list of URLs from a custom URL category in the ZIA environment.
+* A URL or list of URLs must be included in the action.
+* A custom category name and category id must be included in the action.
+* In the example workflows the category name is set from a user defined drop-down list.
+* In the example workflows the category id is obtained by querying ZIA by category name.
+* There is an option to activate the configuration change.
+* A note is added to the IBM SOAR incident with the status of the action.
+
+An Example workflow that uses this IBM SOAR function is `ZIA: Remove Artifact From Customlist`.
+
+The workflow is initiated by the manual artifact rule `ZIA: Remove Artifact From Customlist`.
+
+An Example workflow that uses this IBM SOAR function is `ZIA: Remove From Customlist`.
+
+The workflow is initiated by the manual data table rule `ZIA: Remove From Customlist`.
+
+The following screenshot shows an example of a note added to an IBM SOAR incident:
+
+   ![screenshot: fn-zia-remove-from-url-category-note](./doc/screenshots/fn-zia-get-url-categories-note.png)
+
+
 <details><summary>Inputs:</summary>
 <p>
 
@@ -619,9 +726,12 @@ results = {
 <p>
 
 ```python
-inputs.zia_urls = row.url
-inputs.zia_category_id = row.cat_id
-inputs.zia_configured_name = row.configuredName
+content = workflow.properties.get_categories_results.content
+configured_name = rule.properties.zia_configured_name
+cats = content.get("categories")
+inputs.zia_category_id = [c["id"] for c in cats if configured_name == c["configuredName"]][0]
+inputs.zia_urls = artifact.value
+inputs.zia_configured_name = rule.properties.zia_configured_name
 inputs.zia_activate = rule.properties.zia_activate
 ```
 
@@ -648,15 +758,15 @@ def main():
     if CONTENT:
         response = CONTENT.get("response")
         activation = CONTENT.get("activation")
-        customlist_urls = re.split("\s+|,", urls)
+        customlist_urls = [re.sub(r'^.*\/\/(.*@)*(.*)', r'\2', u) for u in re.split("\s+|,", urls)]
         updated_customlist = response.get("urls")
         if not any(a in updated_customlist for a in customlist_urls):
-            note_text = u"ZIA Integration: Workflow <b>{0}</b>: Successfully removed URIs <b>{1}</b> from customlist "\
+            note_text = u"ZIA Integration: Workflow <b>{0}</b>: Successfully removed URLs <b>{1}</b> from customlist "\
                         u"of category ID <b>{2}</b> and configured name <b>{3}</b> for SOAR function <b>{4}</b>."\
             .format(WF_NAME, urls, category_id, configured_name, FN_NAME)
             note_text += u" Activation status: <b>{0}</b>.".format(activation["status"])
         else:
-            note_text = u"ZIA Integration: Workflow <b>{0}</b>: Not all urls were removed while attempting "\
+            note_text = u"ZIA Integration: Workflow <b>{0}</b>: Not all URLs were removed while attempting "\
                         u"to remove URLs <b>{1}</b> from customlist with category ID <b>{2}</b> and configured name <b>{3}</b> "\
                         u"for SOAR function <b>{4}</b>.".format(WF_NAME, urls, category_id, configured_name, FN_NAME)
     else:
@@ -678,6 +788,26 @@ main()
 Add URLs, DNS hostnames or IP addresses to the allowlist. Artifacts of type URL will be parsed to extract format suitable for ZIA. See following for URL guidelines https://help.zscaler.com/zia/url-format-guidelines.
 
  ![screenshot: fn-zia-add-to-allowlist ](./doc/screenshots/fn-zia-add-to-allowlist.png)
+
+The function provides the following functionality.
+
+* An action to add a URL or list of URLs to the main allow list.
+* A URL or list of URLs must be included in the action.
+* There is an option to activate the configuration change.
+* A note is added to the IBM SOAR incident with the status of the action.
+
+An Example workflow that uses this IBM SOAR function is `Add Artifact To Allowlist`.
+
+The workflow is initiated by the manual artifact rule `Add Artifact To Allowlist`.
+
+An Example workflow that uses this IBM SOAR function is `Add URLs To AllowList`.
+
+The workflow is initiated by the manual data table rule `Add URLs To AllowList`.
+
+The following screenshot shows an example of a note added to an IBM SOAR incident:
+
+   ![screenshot: fn-zia-add-to-allowlist-notes](./doc/screenshots/fn-zia-add-to-allowlist-notes.png)
+
 
 <details><summary>Inputs:</summary>
 <p>
@@ -734,7 +864,7 @@ def main():
     if CONTENT:
         response = CONTENT.get("response")
         activation = CONTENT.get("activation")
-        allowlist_urls = re.split("\s+|,", urls)
+        allowlist_urls = [re.sub(r'^.*\/\/(.*@)*(.*)', r'\2', u) for u in re.split("\s+|,", urls)]
         updated_allowlist = response.get("whitelistUrls")
         if all(a in updated_allowlist for a in allowlist_urls):
             note_text = u"ZIA Integration: Workflow <b>{0}</b>: Successfully added URLs <b>{1}</b> to allowlist " \
@@ -742,7 +872,7 @@ def main():
             note_text += u" Activation status: <b>{0}</b>.".format(activation["status"])
         
         else:
-            note_text = u"ZIA Integration: Workflow <b>{0}</b>: Not all uris added while attempting " \
+            note_text = u"ZIA Integration: Workflow <b>{0}</b>: Not all URLss added while attempting " \
                         u"to add URLs <b>{2}</b> to allowlist for SOAR function <b>{2}</b>."\
                 .format(WF_NAME, urls, FN_NAME)
     else:
@@ -764,6 +894,29 @@ main()
 Gets a list of allow-listed URLs. See following for URL guidelines https://help.zscaler.com/zia/url-format-guidelines.
 
  ![screenshot: fn-zia-get-allowlist ](./doc/screenshots/fn-zia-get-allowlist.png)
+
+The function provides the following functionality.
+
+* Query ZIA for information on the main allow list.
+* The result can be filtered by url value using regular expressions.
+* A data table is updated.
+* A note is added to the IBM SOAR incident with the status of the query.
+* If the url count are > 50 the raw JSON is included in the note, the data table will not be updated.
+
+An Example workflow that uses this IBM SOAR function is `Get Allowlist`.
+
+The workflow is initiated by the manual incident rule `Get Allowlist`.
+
+The data table `Zscaler Internet Access - Allowlist` is updated.
+
+The following screenshot shows an example of data table updated by the function:
+
+   ![screenshot: fn-zia-get-allowlist-datatable](./doc/screenshots/fn-zia-get-allowlist-datatable.png)
+
+The following screenshot shows an example of a note added to an IBM SOAR incident:
+
+   ![screenshot: fn-zia-get-allowlist-note](./doc/screenshots/fn-zia-get-allowlist-note.png)
+
 
 <details><summary>Inputs:</summary>
 <p>
@@ -880,6 +1033,26 @@ Remove  URLs, DNS hostnames or IP addresses from the allowlist. Artifacts of typ
 
  ![screenshot: fn-zia-remove-from-allowlist ](./doc/screenshots/fn-zia-remove-from-allowlist.png)
 
+The function provides the following functionality.
+
+* An action to remove a URL or list of URLs from the main allow list.
+* A URL or list of URLs must be included in the action.
+* There is an option to activate the configuration change.
+* A note is added to the IBM SOAR incident with the status of the action.
+
+An Example workflow that uses this IBM SOAR function is `ZIA: Remove Artifact From Allowlist`.
+
+The workflow is initiated by the manual artifact rule `ZIA: Remove Artifact From Allowlist`.
+
+An Example workflow that uses this IBM SOAR function is `ZIA: Remove From Allowlist`.
+
+The workflow is initiated by the manual data table rule `ZIA: Remove From Allowlist`.
+
+The following screenshot shows an example of a note added to an IBM SOAR incident:
+
+   ![screenshot: fn-zia-remove-from-allowlist-note](./doc/screenshots/fn-zia-remove-from-allowlist-note.png)
+
+
 <details><summary>Inputs:</summary>
 <p>
 
@@ -936,7 +1109,7 @@ def main():
     if CONTENT:
         response = CONTENT.get("response")
         activation = CONTENT.get("activation")
-        allowlist_urls = re.split("\s+|,", urls)
+        allowlist_urls = [re.sub(r'^.*\/\/(.*@)*(.*)', r'\2', u) for u in re.split("\s+|,", urls)]
         updated_allowlist_urls = response.get("whitelistUrls")
         if not any(a in updated_allowlist_urls for a in allowlist_urls):
             note_text = u"ZIA Integration: Workflow <b>{0}</b>: Successfully removed URLs <b>{1}</b> from allowlist " \
@@ -965,6 +1138,26 @@ main()
 Remove  URLs, DNS hostnames or IP addresses from the blocklist. Artifacts of type URL will be parsed to extract format suitable for ZIA.  See following for URL guidelines https://help.zscaler.com/zia/url-format-guidelines.
 
  ![screenshot: fn-zia-remove-from-blocklist ](./doc/screenshots/fn-zia-remove-from-blocklist.png)
+
+The function provides the following functionality.
+
+* An action to remove a URL or list of URLs from the main block list.
+* A URL or list of URLs must be included in the action.
+* There is an option to activate the configuration change.
+* A note is added to the IBM SOAR incident with the status of the action.
+
+An Example workflow that uses this IBM SOAR function is `Remove Artifact From Blocklist`.
+
+The workflow is initiated by the manual artifact rule `Remove Artifact From Blocklist`.
+
+An Example workflow that uses this IBM SOAR function is `Remove From Blocklist`.
+
+The workflow is initiated by the manual data table rule `Remove From Blocklist`.
+
+The following screenshot shows an example of a note added to an IBM SOAR incident:
+
+   ![screenshot: fn-zia-remove-from-blocklist-note](./doc/screenshots/fn-zia-remove-from-blocklist-note.png)
+
 
 <details><summary>Inputs:</summary>
 <p>
@@ -1045,9 +1238,34 @@ main()
 
 ---
 ## Function - ZIA: Add To URL Category
-Add URLs, DNS hostnames or IP addresses to a custom category. Artifacts of type URL will be parsed to extract format suitable for ZIA. See following for URL guidelines https://help.zscaler.com/zia/url-format-guidelines. See following for URL guidelines https://help.zscaler.com/zia/url-format-guidelines.
+Add URLs, DNS hostnames or IP addresses to a custom category. Artifacts of type URL will be parsed to extract format suitable for ZIA. See following for URL guidelines https://help.zscaler.com/zia/url-format-guidelines.
 
  ![screenshot: fn-zia-add-to-url-category ](./doc/screenshots/fn-zia-add-to-url-category.png)
+
+The function provides the following functionality.
+
+* An action to add a URL or list of URLs from a custom URL category in the ZIA environment.
+* A URL or list of URLs must be included in the action.
+* A custom category name and category id must be included in the action.
+* In the example workflows the category name is set from a user defined drop-down list.
+* In the example workflows the category id is obtained by querying ZIA by category name.
+* There is an option to activate the configuration change.
+* A note is added to the IBM SOAR incident with the status of the action.
+
+An Example workflow that uses this IBM SOAR function is `ZIA: Add Artifact To Customlist`.
+
+The workflow is initiated by the manual artifact rule `ZIA: Add Artifact To Customlist`.
+
+An Example workflow that uses this IBM SOAR function is `ZIA: Add URLs To CustomList`.
+
+The workflow is initiated by the manual artifact rule `ZIA: Add URLs To CustomList`.
+
+The data table `Zscaler Internet Access - URL Categories` is updated.
+
+The following screenshot shows an example of a note added to an IBM SOAR incident:
+
+   ![screenshot: fn-zia-add-to-url-category-note](./doc/screenshots/fn-zia-add-to-url-category-note.png)
+
 
 <details><summary>Inputs:</summary>
 <p>
@@ -1080,10 +1298,14 @@ results = {
 <p>
 
 ```python
+content = workflow.properties.get_categories_results.content
+configured_name = rule.properties.zia_configured_name
+cats = content.get("categories")
+inputs.zia_category_id = [c["id"] for c in cats if configured_name == c["configuredName"]][0]
+inputs.zia_configured_name = configured_name
 inputs.zia_urls = artifact.value
-inputs.zia_category_id = rule.properties.zia_category_id
-inputs.zia_configured_name = rule.properties.zia_configured_name
 inputs.zia_activate = rule.properties.zia_activate
+
 ```
 
 </p>
@@ -1110,7 +1332,7 @@ def main():
     if CONTENT:
         response = CONTENT.get("response")
         activation = CONTENT.get("activation")
-        customlist_urls = re.split("\s+|,", urls)
+        customlist_urls = [re.sub(r'^.*\/\/(.*@)*(.*)', r'\2', u) for u in re.split("\s+|,", urls)]
         updated_customlist = response.get("urls")
         if all(a in updated_customlist for a in customlist_urls):
             note_text = u"ZIA Integration: Workflow <b>{0}</b>: Successfully added URLs <b>{1}</b> to customlist "\
@@ -1140,6 +1362,29 @@ main()
 Get a list of black-listed URLs. See following for URL guidelines https://help.zscaler.com/zia/url-format-guidelines.
 
  ![screenshot: fn-zia-get-blocklist ](./doc/screenshots/fn-zia-get-blocklist.png)
+
+The function provides the following functionality.
+
+* Query ZIA for information on the main block list.
+* The result can be filtered by url value using regular expressions.
+* A data table is updated.
+* A note is added to the IBM SOAR incident with the status of the query.
+* If the url count are > 50 the raw JSON is included in the note, the data table will not be updated.
+
+An Example workflow that uses this IBM SOAR function is `Get Blocklist`.
+
+The workflow is initiated by the manual incident rule `Get Blocklist`.
+
+The data table `Zscaler Internet Access - Blocklist` is updated.
+
+The following screenshot shows an example of data table updated by the function:
+
+   ![screenshot: fn-zia-get-blocklist-datatable](./doc/screenshots/fn-zia-get-blocklist-datatable.png)
+
+The following screenshFot shows an example of a note added to an IBM SOAR incident:
+
+   ![screenshot: fn-zia-get-blocklist-note](./doc/screenshots/fn-zia-get-blocklist-note.png)
+
 
 <details><summary>Inputs:</summary>
 <p>
@@ -1254,6 +1499,26 @@ Add URLs, DNS hostnames or IP addresses to the blocklist. Artifacts of type URL 
 
  ![screenshot: fn-zia-add-to-blocklist ](./doc/screenshots/fn-zia-add-to-blocklist.png)
 
+The function provides the following functionality.
+
+* An action to add a URL or list of URLs to the main block list.
+* A URL or list of URLs must be included in the action.
+* There is an option to activate the configuration change.
+* A note is added to the IBM SOAR incident with the status of the action.
+
+An Example workflow that uses this IBM SOAR function is `Add Artifact To Blocklist`.
+
+The workflow is initiated by the manual artifact rule `Add Artifact To Blocklist`.
+
+An Example workflow that uses this IBM SOAR function is `ZIA: Add URLs To BlockList`.
+
+The workflow is initiated by the manual data table rule `ZIA: Add URLs To BlockList`.
+
+The following screenshot shows an example of a note added to an IBM SOAR incident:
+
+   ![screenshot: fn-zia-add-to-blocklist-notes](./doc/screenshots/fn-zia-add-to-blocklist-notes.png)
+
+
 <details><summary>Inputs:</summary>
 <p>
 
@@ -1311,7 +1576,7 @@ def main():
         activation = CONTENT.get("activation")
         status = response.get("status")
         if status == "OK":
-            note_text = u"ZIA Integration: Workflow <b>{0}</b>: Successfully added URIs <b>{1}</b> to blocklist " \
+            note_text = u"ZIA Integration: Workflow <b>{0}</b>: Successfully added URLs <b>{1}</b> to blocklist " \
                         u"for SOAR function <b>{2}</b>.".format(WF_NAME, urls, FN_NAME)
             note_text += u" Activation status: <b>{0}</b>.".format(activation["status"])
         else:
@@ -1334,37 +1599,19 @@ main()
 
 ---
 
+## Data Table - Zscaler Internet Access - Blocklist
 
-## Data Table - Zscaler Internet Access - Allowlist
-
- ![screenshot: dt-zscaler-internet-access---allowlist](./doc/screenshots/dt-zscaler-internet-access---allowlist.png)
+ ![screenshot: dt-zscaler-internet-access---blocklist](./doc/screenshots/dt-zscaler-internet-access---blocklist.png)
 
 #### API Name:
-zia_allowlist
+zia_blocklist
 
 #### Columns:
 | Column Name | API Access Name | Type | Tooltip |
 | ----------- | --------------- | ---- | ------- |
-| Allowlist URL | `allowlist_url` | `text` | A URL which is on the allowlist |
-| Query execution date | `query_execution_date` | `text` | Date and time when query was run. |
+| Blocklist URL | `blocklist_url` | `text` | A URL which is on the blocklist. |
+| Query Execution Date | `query_execution_date` | `text` | Date and time when query was run. |
 | Query filter | `query_filter` | `text` | Filter, if any, used in query. |
-
----
-## Data Table - Zscaler Internet Access - Custom lists
-
- ![screenshot: dt-zscaler-internet-access---custom-lists](./doc/screenshots/dt-zscaler-internet-access---custom-lists.png)
-
-#### API Name:
-zia_customlists
-
-#### Columns:
-| Column Name | API Access Name | Type | Tooltip |
-| ----------- | --------------- | ---- | ------- |
-| Category ID | `cat_id` | `text` | Category ID of custom list. |
-| Category configured name | `configuredName` | `text` | configured name of the custom list. |
-| Query execution date | `query_execution_date` | `text` | Date and time when query was run. |
-| Query filter | `query_filter` | `text` | Filter, if any, used in the query. |
-| URL | `url` | `text` | A URL on the custom list. |
 
 ---
 ## Data Table - Zscaler Internet Access - URL Categories
@@ -1384,10 +1631,45 @@ zia_url_categories
 | Custom URLs count | `customUrlsCount` | `text` | - |
 | Editable | `editable` | `text` | - |
 | Keywords | `keywords` | `text` | - |
+| Category name filter | `name_filter` | `text` | Configured name filter, if any, used in the query. |
 | Query execution date | `query_execution_date` | `text` | Date and time when query was run. |
 | Super category | `superCategory` | `text` | - |
 | Type | `type` | `text` | - |
+| URL Query filter | `url_filter` | `text` | URL filter, if any, used in the query. |
 | URLs | `urls` | `text` | - |
+
+---
+## Data Table - Zscaler Internet Access - Custom lists
+
+ ![screenshot: dt-zscaler-internet-access---custom-lists](./doc/screenshots/dt-zscaler-internet-access---custom-lists.png)
+
+#### API Name:
+zia_customlists
+
+#### Columns:
+| Column Name | API Access Name | Type | Tooltip |
+| ----------- | --------------- | ---- | ------- |
+| Category ID | `cat_id` | `text` | Category ID of custom list. |
+| Category configured name | `configuredName` | `text` | configured name of the custom list. |
+| Category name filter | `name_filter` | `text` | Configured name filter, if any, used in the query. |
+| Query execution date | `query_execution_date` | `text` | Date and time when query was run. |
+| URL | `url` | `text` | A URL on the custom list. |
+| URL Query filter | `url_filter` | `text` | URL filter, if any, used in the query. |
+
+---
+## Data Table - Zscaler Internet Access - Allowlist
+
+ ![screenshot: dt-zscaler-internet-access---allowlist](./doc/screenshots/dt-zscaler-internet-access---allowlist.png)
+
+#### API Name:
+zia_allowlist
+
+#### Columns:
+| Column Name | API Access Name | Type | Tooltip |
+| ----------- | --------------- | ---- | ------- |
+| Allowlist URL | `allowlist_url` | `text` | A URL which is on the allowlist |
+| Query execution date | `query_execution_date` | `text` | Date and time when query was run. |
+| Query filter | `query_filter` | `text` | Filter, if any, used in query. |
 
 ---
 ## Data Table - Zscaler Internet Access - Sandbox Report Summary
@@ -1418,46 +1700,31 @@ zia_sandbox_report_summary
 | Report category | `report_Category` | `text` | - |
 
 ---
-## Data Table - Zscaler Internet Access - Blocklist
-
- ![screenshot: dt-zscaler-internet-access---blocklist](./doc/screenshots/dt-zscaler-internet-access---blocklist.png)
-
-#### API Name:
-zia_blocklist
-
-#### Columns:
-| Column Name | API Access Name | Type | Tooltip |
-| ----------- | --------------- | ---- | ------- |
-| Blocklist URL | `blocklist_url` | `text` | A URL which is on the blocklist. |
-| Query Execution Date | `query_execution_date` | `text` | Date and time when query was run. |
-| Query filter | `query_filter` | `text` | Filter, if any, used in query. |
-
----
 
 
 
 ## Rules
 | Rule Name | Object | Workflow Triggered |
 | --------- | ------ | ------------------ |
-| ZIA: Remove From Customlist | zia_customlists | `wf_zia_remove_from_customlist` |
-| ZIA: Get Customlist | incident | `wf_zia_get_customlist` |
-| ZIA: Get URL Categories | incident | `wf_zia_get_url_categories` |
-| ZIA: Get Sandbox Report | artifact | `wf_zia_get_sandbox_report` |
-| ZIA: URL Lookup | artifact | `wf_zia_url_lookup` |
-| ZIA: Add URLs To BlockList | incident | `wf_zia_add_urls_to_blocklist` |
-| ZIA: Add Custom Category | incident | `wf_zia_add_custom_category` |
-| ZIA: Remove Artifact From Blocklist | artifact | `wf_zia_remove_artifact_from_blocklist` |
-| ZIA: Add URLs To CustomList | incident | `wf_zia_add_urls_to_customlist` |
-| ZIA: Get Blocklist | incident | `wf_zia_get_blocklist` |
-| ZIA: Remove Artifact From Customlist | artifact | `wf_zia_remove_artifact_from_customlist` |
-| ZIA: Add Artifact To Customlist | artifact | `wf_zia_add_artifact_to_customlist` |
-| ZIA: Add Artifact To Blocklist | artifact | `wf_zia_add_artifact_to_blocklist` |
-| ZIA: Remove From Allowlist | zia_allowlist | `wf_zia_remove_from_allowlist` |
-| ZIA: Remove From Blocklist | zia_blocklist | `wf_zia_remove_from_blocklist` |
 | ZIA: Add URLs To AllowList | incident | `wf_zia_add_urls_to_allowlist` |
-| ZIA: Remove Artifact From Allowlist | artifact | `wf_zia_remove_artifact_from_allowlist` |
-| ZIA: Get Allowlist | incident | `wf_zia_get_allowlist` |
+| ZIA: Remove From Allowlist | zia_allowlist | `wf_zia_remove_from_allowlist` |
+| ZIA: Remove From Customlist | zia_customlists | `wf_zia_remove_from_customlist` |
+| ZIA: Remove Artifact From Customlist | artifact | `wf_zia_remove_artifact_from_customlist` |
+| ZIA: Get Blocklist | incident | `wf_zia_get_blocklist` |
+| ZIA: Add Artifact To Customlist | artifact | `wf_zia_add_artifact_to_customlist` |
 | ZIA: Add Artifact To Allowlist | artifact | `wf_zia_add_artifact_to_allowlist` |
+| ZIA: Get Allowlist | incident | `wf_zia_get_allowlist` |
+| ZIA: Add URLs To BlockList | incident | `wf_zia_add_urls_to_blocklist` |
+| ZIA: Add URLs To CustomList | incident | `wf_zia_add_urls_to_customlist` |
+| ZIA: Get Customlist | incident | `wf_zia_get_customlist` |
+| ZIA: Add Artifact To Blocklist | artifact | `wf_zia_add_artifact_to_blocklist` |
+| ZIA: Get URL Categories | incident | `wf_zia_get_url_categories` |
+| ZIA: Remove Artifact From Allowlist | artifact | `wf_zia_remove_artifact_from_allowlist` |
+| ZIA: Get Sandbox Report | artifact | `wf_zia_get_sandbox_report` |
+| ZIA: Remove From Blocklist | zia_blocklist | `wf_zia_remove_from_blocklist` |
+| ZIA: Remove Artifact From Blocklist | artifact | `wf_zia_remove_artifact_from_blocklist` |
+| ZIA: URL Lookup | artifact | `wf_zia_url_lookup` |
+| ZIA: Add Custom Category | incident | `wf_zia_add_custom_category` |
 
 ---
 
