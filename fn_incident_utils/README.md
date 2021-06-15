@@ -38,7 +38,7 @@
 
 ## Release Notes
 <!--
-  Specify all changes in this release. Do not remove the release 
+  Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
 | Version | Date | Notes |
@@ -66,14 +66,14 @@
 
  ![screenshot: main](./doc/screenshots/main.png)
 
-This package contains a function that enable you to close an Incident: Close Incident
+This package contains a function that enables you to close an Incident: Close Incident
 
 
 ---
 
 ## Requirements
 <!--
-  List any Requirements 
+  List any Requirements
 -->
 This app supports the IBM IBM SOAR Platform and the IBM Cloud Pak for Security.
 
@@ -88,17 +88,18 @@ If deploying to an IBM SOAR platform with an integration server, the requirement
 * IBM SOAR platform >= `38.0.6006`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient_circuits>=30.0.0`.
-* If using an API key account, make sure the account provides the following minimum permissions: 
+* If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
   | Org Data | Read |
   | Function | Read |
-  | Incident Fields | Edit |
+  | Incident Fields | Edit, Create |
+  | Edit Incidents | Fields, Status |
 
-The following IBM SOAR platform guides provide additional information: 
-* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
+The following IBM SOAR platform guides provide additional information:
+* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
-* _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
+* _System Administrator Guide_: provides the procedure to install, configure and deploy apps.
 
 The above guides are available on the IBM Knowledge Center at [ibm.biz/resilient-docs](https://ibm.biz/resilient-docs). On this web page, select your IBM SOAR platform version. On the follow-on page, you can find the _App Host Deployment Guide_ or _Integration Server Guide_ by expanding **Resilient Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
@@ -108,7 +109,7 @@ If you are deploying to IBM Cloud Pak for Security, the requirements are:
 * Cloud Pak is configured with an App Host.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
-The following Cloud Pak guides provide additional information: 
+The following Cloud Pak guides provide additional information:
 * _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
 * _System Administrator Guide_: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security Knowledge Center table of contents, select Case Management and Orchestration & Automation > **System administrator**.
 
@@ -140,7 +141,7 @@ Additional package dependencies may exist for each of these packages:
 ---
 
 ## Function - Incident Utils: Create Incident
-Create an incident from a function. 
+Create an incident from a function.
 
 
 <details><summary>Inputs:</summary>
@@ -148,28 +149,29 @@ Create an incident from a function.
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `inc_create_fields` | `text` | Yes | `-` | json fields to create an incident |
+| `inc_create_fields` | `text` | Yes | `-` | json incident fields to create an incident |
 
 
-Format `inc_create_fields` in support of the SOAR API call to create an incident. Below is a sample of the fields which can used. The only required fields are `name` and `discovered_date`. Use the `properties` area to add content to custom fields. See the [appendix](#appendix---create-incident-data-model) for a complete listing of all the fields allowed. 
+Format `inc_create_fields` in support of the SOAR API call to create an incident. Below is a sample of the fields which can used. The only required fields are `name` and `discovered_date`. Use the `properties` area to add content to custom fields. See the [appendix](#appendix---create-incident-data-model) for a complete listing of all the fields allowed.
 
 Example:
 ```
 inc_create_fields: {
-  "name": "sample incident", 
-  "description": "something", 
-  "discovered_date": 1621110044, 
+  "name": "sample incident",
+  "description": "something",
+  "discovered_date": 1621110044,
   "artifact": [
     {"type": "IP Address": "1.2.3.4"}
   ]
 }
 ```
 
-Make sure `inc_create_fields` represents a JSON string. 
+Make sure `inc_create_fields` represents a JSON string.
 * use double quotes to surround key names and string values.
 * use `true` or `false` for boolean values.
 * use brackets to surround multi-select field values. Ex. ["some", "thing"].
 * field types `datepicker` and `datetimepicker` need to be in epoch format in milliseconds. Ex. 1607533205000.
+* custom incident fields are specified within the "properties" heirarchy.
 
 ```json
 {
@@ -181,10 +183,11 @@ Make sure `inc_create_fields` represents a JSON string.
     "content": "string"
   },
   "severity_code": {
-    "name": "string"
+    "name": "Low|Medium|High"
   },
   "incident_type_ids": [
-    null
+    "Phishing",
+    "Malware"
   ],
   "confirmed": true,
   "nist_attack_vectors": [
@@ -194,7 +197,7 @@ Make sure `inc_create_fields` represents a JSON string.
     "name": "string"
   },
   "properties": {
-
+    "custom_field": "value",
   },
   "artifacts": [
     {
@@ -232,20 +235,20 @@ results = {
   'reason': None,
   'content': {
     'dtm': {
-      
+
     },
     'cm': {
       'unassigneds': [
-        
+
       ],
       'total': 0,
       'geo_counts': {
-        
+
       }
     },
     'regulators': {
       'ids': [
-        
+
       ]
     },
     'hipaa': {
@@ -285,7 +288,7 @@ results = {
         'inc_name': 'sample incident',
         'inc_owner': 3,
         'hits': [
-          
+
         ],
         'created': 1621111014796,
         'last_modified_time': 1621111014807,
@@ -347,7 +350,7 @@ results = {
     },
     'exposure_type_id': 1,
     'incident_type_ids': [
-      
+
     ],
     'reporter': None,
     'state': None,
@@ -357,7 +360,7 @@ results = {
     'exposure': 0,
     'org_handle': 201,
     'members': [
-      
+
     ],
     'negative_pr_likely': None,
     'perms': {
@@ -380,10 +383,10 @@ results = {
     'confirmed': False,
     'task_changes': {
       'added': [
-        
+
       ],
       'removed': [
-        
+
       ]
     },
     'assessment': '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<assessment>\n    <rollups/>\n    <optional>There are 1 required and 0 optional tasks from 1 regulators.</optional>\n</assessment>\n',
@@ -407,20 +410,20 @@ results = {
       'wa_impact_likely': None,
       'dc_impact_likely': None,
       'data_source_ids': [
-        
+
       ],
       'data_format': None,
       'assessment': '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<assessment>\n    <rollups/>\n    <optional>There are 1 required and 0 optional tasks from 1 regulators.</optional>\n</assessment>\n',
       'exposure': 0,
       'gdpr_harm_risk': None,
       'gdpr_lawful_data_processing_categories': [
-        
+
       ],
       'alberta_health_risk_assessment': None
     },
     'gdpr': {
       'gdpr_breach_circumstances': [
-        
+
       ],
       'gdpr_breach_type': None,
       'gdpr_personal_data': None,
@@ -435,14 +438,14 @@ results = {
       'gdpr_subsequent_notification': None
     },
     'regulator_risk': {
-      
+
     },
     'inc_last_modified_date': 1621111014823,
     'comments': None,
     'actions': [
     ],
     'timer_field_summarized_incident_data': [
-      
+
     ],
     'admin_id': None,
     'creator_id': 3,
@@ -460,7 +463,7 @@ results = {
     'is_scenario': False,
     'hard_liability': 0,
     'nist_attack_vectors': [
-      
+
     ],
     'id': 2107,
     'sequence_code': None,
@@ -529,7 +532,7 @@ Search for incidents based on filter criteria. Sorting field are optional
 Examples:
 ```
 inc_filter_conditions: [
-  {"field_name":"name", "method":"contains", "value":"sample"}, 
+  {"field_name":"name", "method":"contains", "value":"sample"},
   {"field_name":"create_date", "method":"gte", "value":1621111014529}
 ]
 
@@ -624,7 +627,7 @@ if results.success:
 
 else:
   incident.addNote(u"Search error found: {}".format(results.reason))
-  
+
 ```
 
 </p>
@@ -651,7 +654,7 @@ close_fields: {
   "resolution_summary": "False Positive"
 }
 ```
-Make sure `close_fields` represents a JSON string. 
+Make sure `close_fields` represents a JSON string.
 * use double quotes to surround key names and string values.
 * use `true` or `false` for boolean values.
 * use brackets to surround multi-select field values. Ex. ["some", "thing"].
@@ -672,7 +675,7 @@ results = {
     'title': None,
     'message': None,
     'hints': [
-      
+
     ]
   },
   'raw': '{}',
@@ -719,10 +722,6 @@ incident.addNote(helper.createRichText(note_text))
 </details>
 
 ---
-
-
-
-
 
 ## Rules
 | Rule Name | Object | Workflow Triggered |
