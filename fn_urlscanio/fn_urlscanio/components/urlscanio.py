@@ -75,9 +75,8 @@ class FunctionComponent(ResilientComponent):
             # The post response contains a UUID that we use to check for the report
             urlscanio_post_json = urlscanio_post.json()
             LOG.debug(urlscanio_post_json)
-            print(urlscanio_post_json)
 
-            if "Submission successful" != urlscanio_post_json['message']:
+            if urlscanio_post.status_code == 400:
                 yield StatusMessage(urlscanio_post_json['message'])
                 results = {
                     "png_base64content": None,
@@ -111,9 +110,13 @@ class FunctionComponent(ResilientComponent):
 
                 # Grab the PNG screenshot.  Return as a base64 string so it can be passed to another function as needed
                 urlscanio_png_url = u"{}/{}.png".format(self.urlscanio_screenshot_url, uuid)
-                urlscanio_png_get = req_common.execute_call_v2("GET", urlscanio_png_url, self.timeout)
-                urlscanio_png_b64 = base64.b64encode(urlscanio_png_get.content)
-                yield StatusMessage("Downloaded PNG screenshot from {}".format(urlscanio_png_url))
+                urlscanio_png_get = req_common.execute_call_v2("GET", urlscanio_png_url, self.timeout, callback=report_callback)
+                if urlscanio_png_get.status_code == 404:
+                    urlscanio_png_b64 = None
+                    yield StatusMessage("No Screenshot Available")
+                else:
+                    urlscanio_png_b64 = base64.b64encode(urlscanio_png_get.content)
+                    yield StatusMessage("Downloaded PNG screenshot from {}".format(urlscanio_png_url))
 
                 # returns the png file base64 and also the report url
                 results = {
