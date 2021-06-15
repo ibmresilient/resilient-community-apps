@@ -160,8 +160,8 @@ inc_create_fields: {
   "name": "sample incident",
   "description": "something",
   "discovered_date": 1621110044,
-  "artifact": [
-    {"type": "IP Address": "1.2.3.4"}
+  "artifacts": [
+    {"type": "IP Address", "value": "1.2.3.4"}
   ]
 }
 ```
