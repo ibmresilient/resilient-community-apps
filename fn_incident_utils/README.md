@@ -21,7 +21,7 @@
 - [Overview](#overview)
   - [Key Features](#key-features)
 - [Requirements](#requirements)
-  - [IBM SOAR platform](#ibm soar-platform)
+  - [IBM SOAR platform](#ibm-soar-platform)
   - [Cloud Pak for Security](#cloud-pak-for-security)
   - [Proxy Server](#proxy-server)
   - [Python Environment](#python-environment)
@@ -496,7 +496,7 @@ results = {
 <p>
 
 ```python
-inputs.inc_create_fields = rule.properties.inc_create_fields
+inputs.inc_create_fields = rule.properties.inc_create_fields.content
 ```
 
 </p>
@@ -533,13 +533,20 @@ Examples:
 ```
 inc_filter_conditions: [
   {"field_name":"name", "method":"contains", "value":"sample"},
-  {"field_name":"create_date", "method":"gte", "value":1621111014529}
+  {"field_name":"create_date", "method":"gte", "value":1621111014529},
+  {"field_name":"properties.custom_field", "method":"equals", "value":"something"}
 ]
 
 inc_sort_fields: [
   {"field_name":"discovered_date", "type": "asc"}
 ]
 ```
+
+Make sure `inc_filter_conditions` and `inc_sort_fields` represents a JSON string or they can be left empty.
+* use double quotes to surround key names and string values.
+* use `true` or `false` for boolean values.
+* append `properties.` to custom fields Ex. "properties.custom_field".
+* field types `datepicker` and `datetimepicker` need to be in epoch format in milliseconds. Ex. 1607533205000.
 </p>
 </details>
 
@@ -608,8 +615,8 @@ results = {
 <p>
 
 ```python
-inputs.inc_filter_conditions = rule.properties.inc_search_fields
-inputs.inc_sort_fields = rule.properties.inc_sort_fields
+inputs.inc_filter_conditions = rule.properties.inc_search_fields.content
+inputs.inc_sort_fields = rule.properties.inc_sort_fields.content
 ```
 
 </p>

@@ -8,7 +8,7 @@ import json
 import sys
 if sys.version_info[0] >= 3:
     from json.decoder import JSONDecodeError as ValueError
-    
+
 from resilient import SimpleHTTPException
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import ResultPayload, validate_fields
@@ -74,7 +74,7 @@ class FunctionComponent(ResilientComponent):
             # Run the search and return the results
             yield StatusMessage("Searching...")
             try:
-                url = "{}{}{}".format(INCIDENT_QUERY_PAGED, QUERY_PAGED_RETURN_LEVEL, 
+                url = "{}{}{}".format(INCIDENT_QUERY_PAGED, QUERY_PAGED_RETURN_LEVEL,
                                       self.fn_options.get("search_result_level", "normal"))
                 search_results = self.rest_client().post(url, filter)
                 reason = None
@@ -113,6 +113,6 @@ def convert_json(field_name, value, default=None):
         result = json.loads(value)
         return result, None
     except ValueError as jerr:
-        reason = u"Failure parsing json content in '{}': {}".format(field_name, str(jerr))
+        reason = u"Failure parsing json content in '{}': {}\n{}".format(field_name, value, str(jerr))
         LOG.error(reason)
         return None, reason

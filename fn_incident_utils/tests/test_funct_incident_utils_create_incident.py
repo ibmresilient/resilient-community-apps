@@ -49,7 +49,7 @@ class TestIncidentUtilsCreateIncident:
         "inc_create_fields": json.dumps({
             "name": "sample incident",
             "description": "something",
-            "discovered_date": 1621110044,
+            "discovered_date": 1621110044000,
             "artifacts": [
                 {"type": "IP Address", "value": "1.2.3.4"}
             ]
@@ -60,7 +60,7 @@ class TestIncidentUtilsCreateIncident:
         "inc_create_fields": json.dumps({
             "name": "sample incident",
             "description": "something",
-            "discovered_date": 1621110044,
+            "discovered_date": 1621110044000,
             "incident_type_ids": ["Malware", "Phishing"],
             "comments": [
                 {

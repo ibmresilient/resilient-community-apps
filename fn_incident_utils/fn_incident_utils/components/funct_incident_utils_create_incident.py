@@ -59,7 +59,7 @@ class FunctionComponent(ResilientComponent):
                 create_fields = json.loads(fn_inputs['inc_create_fields'])
                 incident = rest_client.post(INCIDENT_URL, create_fields)
             except ValueError as jerr:
-                reason = "Failure parsing 'inc_create_fields': {}".format(str(jerr))
+                reason = "Failure parsing 'inc_create_fields': {}\n{}".format(fn_inputs['inc_create_fields'], str(jerr))
                 LOG.error(reason)
             except SimpleHTTPException as err:
                 reason = "Failure creating incident: {}".format(str(err))
