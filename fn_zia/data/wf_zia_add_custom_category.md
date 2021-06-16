@@ -47,6 +47,9 @@ def main():
         activation = CONTENT.get("activation")
         id = response.get("id")
         super_cat = response.get("superCategory")
+        # In order to test all urls have been successfully added, convert string of urls
+        # to a list and convert urls to the format used by ZIA. e.g. https://user:password@domain.com:port/index.html ->
+        # domain.com:port/index.html
         list_urls = [re.sub(r'^.*\/\/(.*@)*(.*)', r'\2', u) for u in re.split("\s+|,", urls)]
         category_list = response.get("urls")
         if all(a in category_list for a in list_urls):

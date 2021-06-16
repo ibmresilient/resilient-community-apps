@@ -40,6 +40,9 @@ def main():
     if CONTENT:
         response = CONTENT.get("response")
         activation = CONTENT.get("activation")
+        # In order to test all urls have been successfully added, convert string of urls
+        # to a list and convert urls to the format used by ZIA. e.g. https://user:password@domain.com:port/index.html ->
+        # domain.com:port/index.html
         allowlist_urls = [re.sub(r'^.*\/\/(.*@)*(.*)', r'\2', u) for u in re.split("\s+|,", urls)]
         updated_allowlist = response.get("whitelistUrls")
         if all(a in updated_allowlist for a in allowlist_urls):
