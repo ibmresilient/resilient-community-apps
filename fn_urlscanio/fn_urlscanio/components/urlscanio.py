@@ -70,8 +70,6 @@ class FunctionComponent(ResilientComponent):
                                        data=json.dumps(urlscanio_data),
                                        callback=report_callback)
 
-            #urlscanio_post.raise_for_status()
-
             # The post response contains a UUID that we use to check for the report
             urlscanio_post_json = urlscanio_post.json()
             LOG.debug(urlscanio_post_json)
@@ -144,7 +142,7 @@ def report_callback(response):
     :param response:
     :return: response
     """
-    if response.status_code == 200 or response.status_code == 404 or response.status_code == 400:
+    if response.status_code in [200, 400, 404]:
         return response
     else:
         raise IntegrationError(response.content)
