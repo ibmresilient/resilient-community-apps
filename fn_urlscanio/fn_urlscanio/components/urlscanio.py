@@ -75,7 +75,7 @@ class FunctionComponent(ResilientComponent):
             # The post response contains a UUID that we use to check for the report
             urlscanio_post_json = urlscanio_post.json()
             LOG.debug(urlscanio_post_json)
-
+            
             if urlscanio_post.status_code == 400:
                 yield StatusMessage(urlscanio_post_json['message'])
                 results = {
