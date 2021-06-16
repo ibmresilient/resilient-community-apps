@@ -67,7 +67,7 @@ CONTENT = results.content
 INPUTS = results.inputs
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
 note_text = ''
-DATA_TBL_FIELDS = ["configuredName", "superCategory", "keywords", "urls", "customCategory", "editable", "type", "customUrlsCount"]
+DATA_TBL_FIELDS = ["configuredName", "urls", "customCategory", "editable", "type", "customUrlsCount"]
 #Processing
 def main():
     note_text = u''
