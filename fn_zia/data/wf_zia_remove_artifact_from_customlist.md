@@ -52,7 +52,7 @@ def main():
         updated_customlist = response.get("urls")
         if not any(a in updated_customlist for a in customlist_urls):
             note_text = u"ZIA Integration: Workflow <b>{0}</b>: Successfully removed URLs <b>{1}</b> from customlist "\
-                        u"of category ID <b>{2}</b> and configured name <b>{3}</b> for SOAR function <b>{4}</b>."\
+                        u"with category ID <b>{2}</b> and configured name <b>{3}</b> for SOAR function <b>{4}</b>."\
             .format(WF_NAME, urls, category_id, configured_name, FN_NAME)
             note_text += u" Activation status: <b>{0}</b>.".format(activation["status"])
         else:
