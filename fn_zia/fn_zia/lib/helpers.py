@@ -30,7 +30,7 @@ def filter_by_category(result, name_filter=None):
     :param name_filter: A regex string used to filter result.
     :return: Filtered result.
     """
-    categories = result.get("categories")
+    categories = result.get("categories", [])
     regex = r'{}'.format(name_filter)
     # Add category total and filtered counts to result.
     result.update({
@@ -40,7 +40,7 @@ def filter_by_category(result, name_filter=None):
         }
     })
 
-    if name_filter and categories:
+    if name_filter:
         filtered_categories = [c for c in categories if re.search(regex, c.get("configuredName", ''), re.I)]
         result["categories"] = filtered_categories
         result["category_counts"]["filtered"] = len(filtered_categories)
@@ -70,7 +70,7 @@ def filter_by_url(result, url_filter=None, url_type=None):
         }
     })
 
-    if url_filter and urls:
+    if url_filter:
         regex = r'{}'.format(url_filter)
         filtered_urls = [u for u in urls if re.search(regex, u, re.I)]
         if filtered_urls:

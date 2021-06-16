@@ -5,10 +5,10 @@
 
 # ZIA: Add URLs To AllowList
 
-## Function - ZIA: Add To Blocklist
+## Function - ZIA: Add To Allowlist
 
 ### API Name
-`funct_zia_add_to_blocklist`
+`funct_zia_add_to_allowlist`
 
 ### Output Name
 `None`
@@ -18,7 +18,9 @@
 
 ### Pre-Processing Script
 ```python
-None
+inputs.zia_activate = rule.properties.zia_activate
+inputs.zia_allowlisturls = rule.properties.zia_urls.content
+
 ```
 
 ### Post-Processing Script
@@ -38,6 +40,9 @@ def main():
     if CONTENT:
         response = CONTENT.get("response")
         activation = CONTENT.get("activation")
+        # In order to test all urls have been successfully added, convert string of urls
+        # to a list and convert urls to the format used by ZIA. e.g. https://user:password@domain.com:port/index.html ->
+        # domain.com:port/index.html
         allowlist_urls = [re.sub(r'^.*\/\/(.*@)*(.*)', r'\2', u) for u in re.split("\s+|,", urls)]
         updated_allowlist = response.get("whitelistUrls")
         if all(a in updated_allowlist for a in allowlist_urls):

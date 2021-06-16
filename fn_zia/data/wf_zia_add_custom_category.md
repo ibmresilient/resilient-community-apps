@@ -45,12 +45,17 @@ def main():
     if CONTENT:
         response = CONTENT.get("response")
         activation = CONTENT.get("activation")
-        list_urls = re.split("\s+|,", urls)
         id = response.get("id")
+        super_cat = response.get("superCategory")
+        # In order to test all urls have been successfully added, convert string of urls
+        # to a list and convert urls to the format used by ZIA. e.g. https://user:password@domain.com:port/index.html ->
+        # domain.com:port/index.html
+        list_urls = [re.sub(r'^.*\/\/(.*@)*(.*)', r'\2', u) for u in re.split("\s+|,", urls)]
         category_list = response.get("urls")
         if all(a in category_list for a in list_urls):
             note_text = u"ZIA Integration: Workflow <b>{0}</b>: Successfully Created category <b>{1}</b> with id "\
-                        u"<b>{2}</b> and with urls <b>{3}</b> for SOAR function <b>{4}</b>.".format(WF_NAME, configured_name, id, urls, FN_NAME)
+                        u"<b>{2}</b> and with urls <b>{3}</b> in super category <b>{4}</b> for SOAR function <b>{5}</b>."\
+            .format(WF_NAME, configured_name, id, urls, super_cat, FN_NAME)
             note_text += u" Activation status: <b>{0}</b>.".format(activation["status"])
         
         else:
@@ -65,6 +70,8 @@ def main():
     incident.addNote(helper.createRichText(note_text))
 
 main()
+
+
 
 ```
 

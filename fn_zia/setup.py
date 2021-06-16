@@ -29,17 +29,22 @@ setup(
     author_email="",
     url="http://ibm.biz/soarcommunity",
     description="Resilient Circuits Components for 'fn_zia'",
-    long_description="""The Zscaler Internet Access Integration (ZIA) for SOAR to facilitate manual enrichment and 
-     actions against a ZIA environment in the IBM SOAR Platform.
+    long_description="""The Zscaler Internet Access Integration for SOAR to facilitates manual enrichment and 
+        actions against a ZIA environment in the IBM SOAR Platform.
+        <br>
         The ZIA Integration provides the following functionality:
         <br>
-        * Functions to get, block and unblock urls or ip addresses.
+        * Functions to add URLs, URIs, DNS hostnames and IP addresses to the main blocklist and allowlist.
         <br>
-        * Functions to get, allow and disallow urls or ip addresses.
+        * Functions to remove URLs, URIs, DNS hostnames and IP addresses from the main blocklist and allowlist.
         <br>
-        * Functions to support custom block lists.
+        * Functions to get URL categories and create custom URL categories.
+        <br>
+        * Functions to add URLs, URIs, DNS hostnames and IP addresses to custom URL categories.
         <br>
         * A function to query the ZIA sandbox for a hash value.
+         <br>
+        * A function to lookup the category of a URL.
     """,
     install_requires=[
         "resilient-circuits>=30.0.0",
