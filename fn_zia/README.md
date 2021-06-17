@@ -14,7 +14,7 @@
   NOTE: If your app is available in the container-format only, there is no need to mention the integration server in this readme.
 -->
 
-# Zscaler Internet Access(ZIA) Functions for IBM SOAR
+# Zscaler Internet Access (ZIA) Functions for IBM SOAR
 
 ## Table of Contents
 - [Release Notes](#release-notes)
@@ -84,7 +84,7 @@ The Zscaler Internet Access Integration provides the following functionality:
 * A function to query the ZIA sandbox for a hash value.
 * A function to lookup the category of a URL.
 
-Note: See following for ZIA URL definitions https://help.zscaler.com/zia/url-format-guidelines.
+Note: See the following for ZIA URL definitions https://help.zscaler.com/zia/url-format-guidelines.
 
 ---
 
@@ -104,7 +104,7 @@ If deploying to an IBM SOAR platform with an App Host, the requirements are:
 If deploying to an IBM SOAR platform with an integration server, the requirements are:
 * IBM SOAR platform >= `39.0.6328`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `None`.
+* Integration server is running `resilient_circuits>=35.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions: 
   | Name | Permissions |
   | ---- | ----------- |
@@ -116,7 +116,7 @@ The following IBM SOAR platform guides provide additional information:
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
 
-The above guides are available on the IBM Knowledge Center at [ibm.biz/resilient-docs](https://ibm.biz/resilient-docs). On this web page, select your IBM SOAR platform version. On the follow-on page, you can find the _App Host Deployment Guide_ or _Integration Server Guide_ by expanding **Resilient Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
+The above guides are available on the IBM Documentation at [ibm.biz/resilient-docs](https://ibm.biz/resilient-docs). On this web page, select your IBM SOAR platform version. On the follow-on page, you can find the _App Host Deployment Guide_ or _Integration Server Guide_ by expanding **Resilient Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
 ### Cloud Pak for Security
 If you are deploying to IBM Cloud Pak for Security, the requirements are:
@@ -166,8 +166,8 @@ The following table provides the settings you need to configure the app. These s
   You should save a screenshot "custom_layouts.png" in the doc/screenshots directory and reference it here
 -->
 * Import the Data Tables and Custom Fields like the screenshot below:
-Configure the Incident Details tab layout to display the AWS GuardDuty information as follows:
-
+Create a new ZIA incident tab in Layouts as follows:
+  
 1. Navigate to the ‘Customization Settings’ and select the Layouts tab.
 2. Click on ‘Incident Tabs’.
 3. Add a new incident tab named ‘ZIA’.
@@ -188,11 +188,11 @@ Get a full (i.e., complete) or summary detail report for a file that was analyze
 The function provides the following functionality.
 
 * Query the ZIA sandbox for MD5 values where the associated file has been run through the sandbox.
-* If the report type is `summary` the data table `Zscaler Internet Access - Sandbox Report Summary` is updated.
+* If the report type is `summary`, the data table `Zscaler Internet Access - Sandbox Report Summary` is updated.
 * A note is added to the SOAR incident with the status of the query. 
-* If the report is a `full` report the raw JSON is included in the note, the data table will not be updated.
+* If the report is a `full` report, the raw JSON is included in the note, the data table will not be updated.
 
-An Example workflow that uses this IBM SOAR function is `ZIA: Get Sandbox Report`.
+An example workflow that uses this IBM SOAR function is `ZIA: Get Sandbox Report`.
 
 The workflow is initiated by the manual artifact rule `ZIA: Get Sandbox Report`.
 
@@ -211,7 +211,7 @@ The following screenshot shows an example of notes added to an IBM SOAR incident
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `zia_full_report` | `boolean` | Yes | `-` | Boolean True if a full report required |
+| `zia_full_report` | `boolean` | Yes | `-` | Boolean True if a full report required. |
 | `zia_md5` | `text` | Yes | `-` | MD5 hash value. |
 
 </p>
@@ -332,12 +332,12 @@ Get information about URL categories.
 The function provides the following functionality.
 
 * Query ZIA for information on URL categories.
-* The result can be filtered by category name and/or by url values using regular expressions.
+* The result can be filtered by category name and/or by URL values using regular expressions.
 * A data table is updated (The data table depends on the workflow).
 * A note is added to the IBM SOAR incident with the status of the query.
-* If the number of categories or url count are > 50 the raw JSON is included in the note, the data table will not be updated.
+* If the number of categories or URL count are > 50 the raw JSON is included in the note, the data table will not be updated.
 
-An Example workflow that uses this IBM SOAR function is `ZIA: Get Customlist`.
+An example workflow that uses this IBM SOAR function is `ZIA: Get Customlist`.
 
 The workflow is initiated by the manual incident rule `ZIA: Get Customlist`.
 
@@ -351,7 +351,7 @@ The following screenshot shows an example of a note added to an IBM SOAR inciden
 
    ![screenshot: fn-zia-zia-get-custom-list-note](./doc/screenshots/fn-zia-get-custom-list-note.png)
 
-An Example workflow that uses this IBM SOAR function is `ZIA: Get URL Categories`.
+Another example workflow that uses this IBM SOAR function is `ZIA: Get URL Categories`.
 
 The workflow is initiated by the manual incident rule `ZIA: Get URL Categories`.
 
@@ -373,9 +373,9 @@ The following screenshot shows an example of a note added to an IBM SOAR inciden
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `zia_category_id` | `text` | No | `-` | Category ID of a  URL category. |
-| `zia_custom_only` | `text` | No | `-` | Parameter to get only Custom Categories.Options 'true' or 'false' |
+| `zia_custom_only` | `text` | No | `-` | Parameter to get only Custom Categories. Options 'true' or 'false'. |
 | `zia_name_filter` | `text` | No | `<REGEX>|<STRING>` | Filter by category name. Can be a string or regular expression. e.g. 'Custom category', '^CAT.*' or ^(List 1|LIST_2)$. Leaving the filter blank will return the full list.  |
-| `zia_url_filter` | `text` | No | `<REGEX>|<STRING>` | Filter by URL. Can be a string or regular expression. e.g. host.ibm.com, ^host.*' or ^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$. Leaving the filter blank will return the full list. |
+| `zia_url_filter` | `text` | No | `<REGEX>|<STRING>` | Filter by URL. Can be a string or regular expression. e.g. host.ibm.com, '^host.*' or ^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$. Leaving the filter blank will return the full list. |
 
 </p>
 </details>
@@ -487,7 +487,7 @@ The function provides the following functionality.
 * There is an option to activate the configuration change.
 * A note is added to the IBM SOAR incident with the status of the action. 
  
-An Example workflow that uses this IBM SOAR function is `ZIA: Add Custom Category`.
+An example workflow that uses this IBM SOAR function is `ZIA: Add Custom Category`.
 
 The workflow is initiated by the manual incident rule `ZIA: Add Custom Category`.
 
@@ -503,7 +503,7 @@ The following screenshot shows an example of a note added to an IBM SOAR inciden
 | ---- | :--: | :------: | ------- | ------- |
 | `zia_activate` | `boolean` | Yes | `-` | Activate the configuration on ZIA. |
 | `zia_configured_name` | `text` | No | `-` | Configured name of a custom URL category. |
-| `zia_custom_category` | `text` | No | `-` | Indicates whether category is custom type. Valid values are "true", "false"" |
+| `zia_custom_category` | `text` | No | `-` | Indicates whether category is custom type. Valid values are "true" or "false" |
 | `zia_keywords` | `text` | No | `-` | Keyword string. |
 | `zia_super_category` | `text` | Yes | `-` | Super category of a custom URL category. |
 | `zia_urls` | `text` | Yes | `-` | Entries of type DNS hostname, IP Address, URL or URI. Wildcard is a '.'   Entries will be parsed to extract a format suitable for ZIA to add to a list. URL guidelines https://help.zscaler.com/zia/url-format-guidelines. |
@@ -589,16 +589,16 @@ main()
 
 ---
 ## Function - ZIA: URL Lookup
-Look up the categorization of a URL or set of URLs, e.g., ['abc.com', 'xyz.com'].  See following for URL guidelines https://help.zscaler.com/zia/url-format-guidelines.
+Look up the categorization of a URL or set of URLs, e.g., ['abc.com', 'xyz.com'].  See the following for URL guidelines https://help.zscaler.com/zia/url-format-guidelines.
 
  ![screenshot: fn-zia-url-lookup ](./doc/screenshots/fn-zia-url-lookup.png)
 
 The function provides the following functionality.
 
-* A query which looks up the categorization of a url in the ZIA environment.
+* A query which looks up the categorization of a URL in the ZIA environment.
 * A note is added to the IBM SOAR incident with the status of the query including the query result as raw JSON data.
 
-An Example workflow that uses this IBM SOAR function is `ZIA: URL Lookup`.
+An example workflow that uses this IBM SOAR function is `ZIA: URL Lookup`.
 
 The workflow is initiated by the manual artifact rule `ZIA: URL Lookup`.
 
@@ -612,7 +612,7 @@ The following screenshot shows an example of a note added to an IBM SOAR inciden
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `zia_urls` | `text` | Yes | `-` | Entries of type DNS hostname, IP Address, URL or URI. Wildcard is a '.'   Entries will be parsed to extract a format suitable for ZIA to add to a list. URL guidelines https://help.zscaler.com/zia/url-format-guidelines. |
+| `zia_urls` | `text` | Yes | `-` | Entries of type DNS hostname, IP Address, URL or URI.  Wildcard is a period (.). Entries will be parsed to extract a format suitable for ZIA to add to a list. See the URL guidelines at https://help.zscaler.com/zia/url-format-guidelines. |
 
 </p>
 </details>
@@ -680,7 +680,7 @@ main()
 
 ---
 ## Function - ZIA: Remove From URL Category
-Remove URLs, DNS hostnames or IP addresses  from a URL Category. Artifacts of type URL will be parsed to extract format suitable for ZIA. See following for URL guidelines https://help.zscaler.com/zia/url-format-guidelines.
+Remove URLs, DNS hostnames or IP addresses from a URL Category. Artifacts of type URL are parsed to extract the format suitable for ZIA. See the URL guidelines at https://help.zscaler.com/zia/url-format-guidelines.
 
  ![screenshot: fn-zia-remove-from-url-category ](./doc/screenshots/fn-zia-remove-from-url-category.png)
 
@@ -688,13 +688,13 @@ The function provides the following functionality.
 
 * An action to remove a URL or list of URLs from a custom URL category in the ZIA environment.
 * A URL or list of URLs must be included in the action.
-* A custom category name and category id must be included in the action.
+* A custom category name and category ID must be included in the action.
 * In the example workflows the category name is set from a user defined drop-down list.
-* In the example workflows the category id is obtained by querying ZIA by category name.
+* In the example workflows the category ID is obtained by querying ZIA by category name.
 * There is an option to activate the configuration change.
 * A note is added to the IBM SOAR incident with the status of the action.
 
-An Example workflow that uses this IBM SOAR function is `ZIA: Remove Artifact From Customlist`.
+An example workflow that uses this IBM SOAR function is `ZIA: Remove Artifact From Customlist`.
 
 The workflow is initiated by the manual artifact rule `ZIA: Remove Artifact From Customlist`.
 
@@ -702,7 +702,7 @@ The following screenshot shows an example of a note added to an IBM SOAR inciden
 
    ![screenshot: fn-zia-artifact-from-customlist-note](./doc/screenshots/fn-zia-remove-artifact-from-customlist-note.png)
 
-An Example workflow that uses this IBM SOAR function is `ZIA: Remove From Customlist`.
+Another example workflow that uses this IBM SOAR function is `ZIA: Remove From Customlist`.
 
 The workflow is initiated by the manual data table rule `ZIA: Remove From Customlist` for data table `Zscaler Internet Access - Custom lists`.
 
@@ -719,7 +719,7 @@ The following screenshot shows an example of a note added to an IBM SOAR inciden
 | `zia_activate` | `boolean` | Yes | `-` | Activate the configuration on ZIA. |
 | `zia_category_id` | `text` | No | `-` | Category ID of a  URL category. |
 | `zia_configured_name` | `text` | No | `-` | Configured name of a custom URL category. |
-| `zia_urls` | `text` | Yes | `-` | Entries of type DNS hostname, IP Address, URL or URI. Wildcard is a '.'   Entries will be parsed to extract a format suitable for ZIA to add to a list. URL guidelines https://help.zscaler.com/zia/url-format-guidelines. |
+| `zia_urls` | `text` | Yes | `-` | Entries of type DNS hostname, IP Address, URL or URI. Wildcard is a period (.). Entries are parsed to extract a format suitable for ZIA to add to a list. See the URL guidelines at https://help.zscaler.com/zia/url-format-guidelines. |
 
 </p>
 </details>
@@ -801,7 +801,7 @@ main()
 
 ---
 ## Function - ZIA: Add To Allowlist
-Add URLs, DNS hostnames or IP addresses to the allowlist. Artifacts of type URL will be parsed to extract format suitable for ZIA. See following for URL guidelines https://help.zscaler.com/zia/url-format-guidelines.
+Add URLs, DNS hostnames or IP addresses to the allowlist. Artifacts of type URL are parsed to extract a format suitable for ZIA. See the URL guidelines at https://help.zscaler.com/zia/url-format-guidelines.
 
  ![screenshot: fn-zia-add-to-allowlist ](./doc/screenshots/fn-zia-add-to-allowlist.png)
 
@@ -812,7 +812,7 @@ The function provides the following functionality.
 * There is an option to activate the configuration change.
 * A note is added to the IBM SOAR incident with the status of the action.
 
-An Example workflow that uses this IBM SOAR function is `Add Artifact To Allowlist`.
+An example workflow that uses this IBM SOAR function is `Add Artifact To Allowlist`.
 
 The workflow is initiated by the manual artifact rule `Add Artifact To Allowlist`.
 
@@ -820,7 +820,7 @@ The following screenshot shows an example of a note added to an IBM SOAR inciden
 
    ![screenshot: fn-zia-add-to-allowlist-notes](./doc/screenshots/fn-zia-add-to-allowlist-notes.png)
 
-An Example workflow that uses this IBM SOAR function is `Add URLs To AllowList`.
+Another example workflow that uses this IBM SOAR function is `Add URLs To AllowList`.
 
 The workflow is initiated by the manual incident rule `Add URLs To AllowList`.
 
@@ -835,7 +835,7 @@ The following screenshot shows an example of a note added to an IBM SOAR inciden
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `zia_activate` | `boolean` | Yes | `-` | Activate the configuration on ZIA. |
-| `zia_allowlisturls` | `text` | No | `-` | The URLs, URIs, DNS hostnames or IP addresses to the allowlist. See following for URL guidelines  https://help.zscaler.com/zia/url-format-guidelines |
+| `zia_allowlisturls` | `text` | No | `-` | The URLs, URIs, DNS hostnames or IP addresses to the allowlist. See the URL guidelines at https://help.zscaler.com/zia/url-format-guidelines. |
 
 </p>
 </details>
@@ -911,19 +911,19 @@ main()
 
 ---
 ## Function - ZIA: Get Allowlist
-Gets a list of allow-listed URLs. See following for URL guidelines https://help.zscaler.com/zia/url-format-guidelines.
+Gets a list of allow-listed URLs. See the following URL guidelines: https://help.zscaler.com/zia/url-format-guidelines.
 
  ![screenshot: fn-zia-get-allowlist ](./doc/screenshots/fn-zia-get-allowlist.png)
 
 The function provides the following functionality.
 
 * Query ZIA for information on the main allow list.
-* The result can be filtered by url values using regular expressions.
+* The result can be filtered by URL values using regular expressions.
 * A data table is updated.
 * A note is added to the IBM SOAR incident with the status of the query.
-* If the url count are > 50 the raw JSON is included in the note, the data table will not be updated.
+* If the URL count is > 50, the raw JSON is included in the note and the data table is not updated.
 
-An Example workflow that uses this IBM SOAR function is `Get Allowlist`.
+An example workflow that uses this IBM SOAR function is `Get Allowlist`.
 
 The workflow is initiated by the manual incident rule `Get Allowlist`.
 
@@ -1049,7 +1049,7 @@ main()
 
 ---
 ## Function - ZIA: Remove From Allowlist
-Remove  URLs, DNS hostnames or IP addresses from the allowlist. Artifacts of type URL will be parsed to extract format suitable for ZIA. See following for URL guidelines https://help.zscaler.com/zia/url-format-guidelines.
+Remove URLs, DNS hostnames or IP addresses from the allowlist. Artifacts of type URL are parsed to extract a format suitable for ZIA. See the URL guidelines at https://help.zscaler.com/zia/url-format-guidelines.
 
  ![screenshot: fn-zia-remove-from-allowlist ](./doc/screenshots/fn-zia-remove-from-allowlist.png)
 
@@ -1060,7 +1060,7 @@ The function provides the following functionality.
 * There is an option to activate the configuration change.
 * A note is added to the IBM SOAR incident with the status of the action.
 
-An Example workflow that uses this IBM SOAR function is `ZIA: Remove Artifact From Allowlist`.
+An example workflow that uses this IBM SOAR function is `ZIA: Remove Artifact From Allowlist`.
 
 The workflow is initiated by the manual artifact rule `ZIA: Remove Artifact From Allowlist`.
 
@@ -1069,7 +1069,7 @@ The following screenshot shows an example of a note added to an IBM SOAR inciden
    ![screenshot: fn-zia-remove-from-allowlist-note](./doc/screenshots/fn-zia-remove-artifact-from-allowlist-note.png)
 
 
-An Example workflow that uses this IBM SOAR function is `ZIA: Remove From Allowlist`.
+Another example workflow that uses this IBM SOAR function is `ZIA: Remove From Allowlist`.
 
 The workflow is initiated by the manual data table rule `ZIA: Remove From Allowlist` for data table `Zscaler Internet Access - Allowlist`.
 
@@ -1084,7 +1084,7 @@ The following screenshot shows an example of a note added to an IBM SOAR inciden
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `zia_activate` | `boolean` | Yes | `-` | Activate the configuration on ZIA. |
-| `zia_allowlisturls` | `text` | No | `-` | The URLs, URIs, DNS hostnames or IP addresses to the allowlist. See following for URL guidelines  https://help.zscaler.com/zia/url-format-guidelines |
+| `zia_allowlisturls` | `text` | No | `-` | The URLs, URIs, DNS hostnames or IP addresses to the allowlist. See the URL guidelines at https://help.zscaler.com/zia/url-format-guidelines. |
 
 </p>
 </details>
@@ -1160,7 +1160,7 @@ main()
 
 ---
 ## Function - ZIA: Remove From Blocklist
-Remove  URLs, DNS hostnames or IP addresses from the blocklist. Artifacts of type URL will be parsed to extract format suitable for ZIA.  See following for URL guidelines https://help.zscaler.com/zia/url-format-guidelines.
+Remove URLs, DNS hostnames or IP addresses from the blocklist. Artifacts of type URL are parsed to extract a format suitable for ZIA. See the following for URL guidelines: https://help.zscaler.com/zia/url-format-guidelines.
 
  ![screenshot: fn-zia-remove-from-blocklist ](./doc/screenshots/fn-zia-remove-from-blocklist.png)
 
@@ -1171,7 +1171,7 @@ The function provides the following functionality.
 * There is an option to activate the configuration change.
 * A note is added to the IBM SOAR incident with the status of the action.
 
-An Example workflow that uses this IBM SOAR function is `Remove Artifact From Blocklist`.
+An example workflow that uses this IBM SOAR function is `Remove Artifact From Blocklist`.
 
 The workflow is initiated by the manual artifact rule `Remove Artifact From Blocklist`.
 
@@ -1179,7 +1179,7 @@ The following screenshot shows an example of a note added to an IBM SOAR inciden
 
    ![screenshot: fn-zia-remove-from-blocklist-note](./doc/screenshots/fn-zia-remove-artifact-from-blocklist-note.png)
 
-An Example workflow that uses this IBM SOAR function is `Remove From Blocklist`.
+Another example workflow that uses this IBM SOAR function is `Remove From Blocklist`.
 
 The workflow is initiated by the manual data table rule `Remove From Blocklist` for data table `Zscaler Internet Access - Blocklist`.
 
@@ -1194,7 +1194,7 @@ The following screenshot shows an example of a note added to an IBM SOAR inciden
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `zia_activate` | `boolean` | Yes | `-` | Activate the configuration on ZIA. |
-| `zia_blocklisturls` | `text` | No | `-` | The URLs, URIs, DNS hostnames or IP addresses to add to the blocklist. See following for URL guidelines  https://help.zscaler.com/zia/url-format-guidelines |
+| `zia_blocklisturls` | `text` | No | `-` | The URLs, URIs, DNS hostnames or IP addresses to add to the blocklist. See the URL guidelines at https://help.zscaler.com/zia/url-format-guidelines. |
 
 </p>
 </details>
@@ -1267,7 +1267,7 @@ main()
 
 ---
 ## Function - ZIA: Add To URL Category
-Add URLs, DNS hostnames or IP addresses to a custom category. Artifacts of type URL will be parsed to extract format suitable for ZIA. See following for URL guidelines https://help.zscaler.com/zia/url-format-guidelines.
+Add URLs, DNS hostnames or IP addresses to a custom category. Artifacts of type URL are parsed to extract a format suitable for ZIA. See the following for URL guidelines: https://help.zscaler.com/zia/url-format-guidelines.
 
  ![screenshot: fn-zia-add-to-url-category ](./doc/screenshots/fn-zia-add-to-url-category.png)
 
@@ -1275,13 +1275,13 @@ The function provides the following functionality.
 
 * An action to add a URL or list of URLs to a custom URL category in the ZIA environment.
 * A URL or list of URLs must be included in the action.
-* A custom category name and category id must be included in the action.
-* In the example workflows the category name is set from a user defined drop-down list.
-* In the example workflows the category id is obtained by querying ZIA by category name.
+* A custom category name and category ID must be included in the action.
+* In the example workflows, the category name is set from a user defined drop-down list.
+* In the example workflows, the category ID is obtained by querying ZIA by category name.
 * There is an option to activate the configuration change.
 * A note is added to the IBM SOAR incident with the status of the action.
 
-An Example workflow that uses this IBM SOAR function is `ZIA: Add Artifact To Customlist`.
+An example workflow that uses this IBM SOAR function is `ZIA: Add Artifact To Customlist`.
 
 The workflow is initiated by the manual artifact rule `ZIA: Add Artifact To Customlist`.
 
@@ -1289,7 +1289,7 @@ The following screenshot shows an example of a note added to an IBM SOAR inciden
 
    ![screenshot: fn-zia-add-to-url-category-note](./doc/screenshots/fn-zia-add-artifact-to-url-category-note.png)
 
-An Example workflow that uses this IBM SOAR function is `ZIA: Add URLs To CustomList`.
+Another example workflow that uses this IBM SOAR function is `ZIA: Add URLs To CustomList`.
 
 The workflow is initiated by the manual incident rule `ZIA: Add URLs To CustomList`.
 
@@ -1304,9 +1304,9 @@ The following screenshot shows an example of a note added to an IBM SOAR inciden
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `zia_activate` | `boolean` | Yes | `-` | Activate the configuration on ZIA. |
-| `zia_category_id` | `text` | No | `-` | Category ID of a  URL category. |
-| `zia_configured_name` | `text` | No | `-` | Configured name of a custom URL category. |
-| `zia_urls` | `text` | Yes | `-` | Entries of type DNS hostname, IP Address, URL or URI. Wildcard is a '.'   Entries will be parsed to extract a format suitable for ZIA to add to a list. URL guidelines https://help.zscaler.com/zia/url-format-guidelines. |
+| `zia_category_id` | `text` | Yes | `-` | Category ID of a  URL category. |
+| `zia_configured_name` | `text` | Yes | `-` | Configured name of a custom URL category. |
+| `zia_urls` | `text` | Yes | `-` | Entries of type DNS hostname, IP Address, URL or URI. Wildcard is a period (.). Entries are parsed to extract a format suitable for ZIA to add to a list. See the URL guidelines at https://help.zscaler.com/zia/url-format-guidelines. |
 
 </p>
 </details>
@@ -1390,19 +1390,19 @@ main()
 
 ---
 ## Function - ZIA: Get Blocklist
-Get a list of black-listed URLs. See following for URL guidelines https://help.zscaler.com/zia/url-format-guidelines.
+Get a list of block-listed URLs. See the URL guidelines at https://help.zscaler.com/zia/url-format-guidelines.
 
  ![screenshot: fn-zia-get-blocklist ](./doc/screenshots/fn-zia-get-blocklist.png)
 
 The function provides the following functionality.
 
 * Query ZIA for information on the main block list.
-* The result can be filtered by url values using regular expressions.
+* The result can be filtered by URL values using regular expressions.
 * A data table is updated.
 * A note is added to the IBM SOAR incident with the status of the query.
-* If the url count are > 50 the raw JSON is included in the note, the data table will not be updated.
+* If the URL count is > 50, the raw JSON is included in the note and the data table is not updated.
 
-An Example workflow that uses this IBM SOAR function is `Get Blocklist`.
+An example workflow that uses this IBM SOAR function is `Get Blocklist`.
 
 The workflow is initiated by the manual incident rule `Get Blocklist`.
 
@@ -1422,7 +1422,7 @@ The following screenshFot shows an example of a note added to an IBM SOAR incide
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `zia_url_filter` | `text` | No | `<REGEX>|<STRING>` | Filter by URL. Can be a string or regular expression. e.g. host.ibm.com, ^host.*' or ^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$. Leaving the filter blank will return the full list. |
+| `zia_url_filter` | `text` | No | `<REGEX>|<STRING>` | Filter by URL. Can be a string or regular expression. e.g. host.ibm.com, '^host.*' or ^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$. Leaving the filter blank will return the full list. |
 
 </p>
 </details>
@@ -1526,7 +1526,7 @@ main()
 
 ---
 ## Function - ZIA: Add To Blocklist
-Add URLs, DNS hostnames or IP addresses to the blocklist. Artifacts of type URL will be parsed to extract format suitable for ZIA. See following for URL guidelines https://help.zscaler.com/zia/url-format-guidelines.
+Add URLs, DNS hostnames or IP addresses to the blocklist. Artifacts of type URL are parsed to extract a format suitable for ZIA. See the URL guidelines at https://help.zscaler.com/zia/url-format-guidelines.
 
  ![screenshot: fn-zia-add-to-blocklist ](./doc/screenshots/fn-zia-add-to-blocklist.png)
 
@@ -1537,7 +1537,7 @@ The function provides the following functionality.
 * There is an option to activate the configuration change.
 * A note is added to the IBM SOAR incident with the status of the action.
 
-An Example workflow that uses this IBM SOAR function is `Add Artifact To Blocklist`.
+An example workflow that uses this IBM SOAR function is `Add Artifact To Blocklist`.
 
 The workflow is initiated by the manual artifact rule `Add Artifact To Blocklist`.
 
@@ -1545,7 +1545,7 @@ The following screenshot shows an example of a note added to an IBM SOAR inciden
 
    ![screenshot: fn-zia-add-artifact-to-blocklist-note](./doc/screenshots/fn-zia-add-artifact-to-blocklist-note.png)
 
-An Example workflow that uses this IBM SOAR function is `ZIA: Add URLs To BlockList`.
+Another example workflow that uses this IBM SOAR function is `ZIA: Add URLs To BlockList`.
 
 The workflow is initiated by the manual incident rule `ZIA: Add URLs To BlockList`.
 
@@ -1560,7 +1560,7 @@ The following screenshot shows an example of a note added to an IBM SOAR inciden
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `zia_activate` | `boolean` | Yes | `-` | Activate the configuration on ZIA. |
-| `zia_blocklisturls` | `text` | No | `-` | The URLs, URIs, DNS hostnames or IP addresses to add to the blocklist. See following for URL guidelines  https://help.zscaler.com/zia/url-format-guidelines |
+| `zia_blocklisturls` | `text` | No | `-` | The URLs, URIs, DNS hostnames or IP addresses to add to the blocklist. See the URL guidelines at https://help.zscaler.com/zia/url-format-guidelines. |
 
 </p>
 </details>
