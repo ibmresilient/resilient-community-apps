@@ -337,6 +337,8 @@ The function provides the following functionality.
 * A note is added to the IBM SOAR incident with the status of the query.
 * If the number of categories or URL count are > 50 the raw JSON is included in the note, the data table will not be updated.
 
+Note: The category name field is only valid for custom categories.
+
 An example workflow that uses this IBM SOAR function is `ZIA: Get Customlist`.
 
 The workflow is initiated by the manual incident rule `ZIA: Get Customlist`.
@@ -374,7 +376,7 @@ The following screenshot shows an example of a note added to an IBM SOAR inciden
 | ---- | :--: | :------: | ------- | ------- |
 | `zia_category_id` | `text` | No | `-` | Category ID of a  URL category. |
 | `zia_custom_only` | `text` | No | `-` | Parameter to get only Custom Categories. Options 'true' or 'false'. |
-| `zia_name_filter` | `text` | No | `<REGEX>|<STRING>` | Filter by category name. Can be a string or regular expression. e.g. 'Custom category', '^CAT.*' or ^(List 1|LIST_2)$. Leaving the filter blank will return the full list.  |
+| `zia_name_filter` | `text` | No | `<REGEX>|<STRING>` | Filter by category name. Can be a string or regular expression. e.g. 'Custom category', '^CAT.*' or ^(List 1|LIST_2)$. Leaving the filter blank will return the full list. Note: The category name field is only valid for custom categories. |
 | `zia_url_filter` | `text` | No | `<REGEX>|<STRING>` | Filter by URL. Can be a string or regular expression. e.g. host.ibm.com, '^host.*' or ^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$. Leaving the filter blank will return the full list. |
 
 </p>
