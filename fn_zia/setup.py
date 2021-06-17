@@ -22,14 +22,14 @@ def snake_to_camel(word):
 
 setup(
     name="fn_zia",
-    display_name="Zscaler Internet Access(Zia) Functions for IBM SOAR",
+    display_name="Zscaler Internet Access Functions for IBM SOAR",
     version="1.0.0",
     license="MIT",
     author="IBM SOAR",
     author_email="",
     url="http://ibm.biz/soarcommunity",
     description="Resilient Circuits Components for 'fn_zia'",
-    long_description="""The Zscaler Internet Access Integration for SOAR to facilitates manual enrichment and 
+    long_description="""The Zscaler Internet Access Integration (ZIA) for SOAR to facilitate manual enrichment and 
         actions against a ZIA environment in the IBM SOAR Platform.
         <br>
         The ZIA Integration provides the following functionality:
