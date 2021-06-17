@@ -22,13 +22,13 @@ def snake_to_camel(word):
 
 setup(
     name="fn_incident_utils",
-    version="1.0.0",
+    version="1.1.0",
     license="MIT",
-    author="IBM Resilient",
-    author_email="support@resilientsystems.com",
-    url="http://ibm.biz/resilientcommunity",
-    description="Close Incident Function for IBM Resilient",
-    long_description="""This package contains a function that enable you to close an Incident: Close Incident""",
+    author="IBM SOAR",
+    author_email="IBM SOAR Apps",
+    url="http://ibm.biz/soarcommunity",
+    description="Incident functions for IBM SOAR",
+    long_description="""This package contains functions to create an incident, close an incident and search for incidents based on filtering conditions.""",
     install_requires=[
         "resilient_circuits>=30.0.0",
         "resilient-lib>=39.0"
