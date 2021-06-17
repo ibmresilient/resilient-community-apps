@@ -222,9 +222,50 @@ The following screenshot shows an example of notes added to an IBM SOAR incident
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+    'content': {
+        "Summary": {
+            "Summary": {
+                "Status": "COMPLETED",
+                "Category": "EXECS",
+                "FileType": "DLL",
+                "StartTime": 1522111841,
+                "Duration": 481690
+            },
+            "Classification": {
+                "Type": "MALICIOUS",
+                "Category": "MALWARE_BOTNET",
+                "Score": 82,
+                "DetectedMalware": "Win32/TrojanDownloader.Banload.TNJ trojan"
+            },
+            "FileProperties": {
+                "FileType": "DLL",
+                "FileSize": 2358272,
+                "MD5": "b3b13c2fe5710507612106cb11ceced3",
+                "SHA1": "6f30404f8b30812758acc06455bc95348c86f9f2",
+                "Sha256": "c77ab4c60b73c8f8135d54162813ab7c63432058f17ff00754d5fd547c22db76",
+                "Issuer": "",
+                "DigitalCerificate": "",
+                "SSDeep": "49152:mQU0HSp/RcGuBLe/PESBbFVZ86MfBWPvGZxnBGVV3NcKRLFcTOJP:mQUn6LsPQp6vkoiKt",
+                "RootCA": ""
+            }
+        }
+    },
+    "inputs": {
+        "zia_full_report": False,
+        "zia_md5": "542a09dbd513bf75e29572922ce0687e"
+    },
+    "metrics": {
+        "version": "1.0",
+        "package": "fn-zia",
+        "package_version": "1.0.0",
+        "host": "host.ibm.com",
+        "execution_time_ms": 22199,
+        "timestamp": "2021-05-11 10:33:14"
+    },
+    "raw": '{"Summary": {"Summary": {"Status": "COMPLETED", "Category": "EXECS", "FileType": "EXE", "StartTime": 1620229320, "Duration": 658451}, "Classification": {"Type": "MALICIOUS", "Category": "MALWARE_BOTNET", "Score": 80, "DetectedMalware": "Gen:Variant.MSILPerseus.158871"}, "FileProperties": {"FileType": "EXE", "FileSize": 22016, "MD5": "542a09dbd513bf75e29572922ce0687e", "SHA1": "6e0d16aa60b37596774ed0d3054ed2ff39d9378f", "Sha256": "dbcb1fa12366b385224f1a203c8cc24d6740f4bfa3b4f7a9d6d9ff059f470819", "Issuer": "", "DigitalCerificate": "", "SSDeep": "384:UGaRIorFBiFKx5v38y3QLp29Jub/mPkaVIKvtMNokpkjUo165Dt:1JorvjxZPAgyQRt/7jUo1A", "RootCA": ""}}}',
+    "version": "1.0",
+    "success": True,
+    "reason": None
 }
 ```
 
@@ -387,9 +428,51 @@ The following screenshot shows an example of a note added to an IBM SOAR inciden
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+    "content": {
+        "categories": [
+            {
+                "id": "CUSTOM_01",
+                "configuredName": "TEST_CAT_1",
+                "urls": [
+                    "testhost.com"
+                ],
+                "dbCategorizedUrls": [],
+                "customCategory": True,
+                "editable": True,
+                "description": "CUSTOM_01_DESC",
+                "type": "URL_CATEGORY",
+                "val": 129,
+                "customUrlsCount": 1,
+                "urlsRetainingParentCategoryCount": 0,
+                "url_counts": {
+                    "total": 1,
+                    "filtered": 1
+                }
+            }
+        ],
+        "category_counts": {
+            "total": 5,
+            "filtered": 1
+        }
+    },
+    "inputs": {
+        "zia_custom_only": "true",
+        "zia_url_filter": "testhost",
+        "zia_name_filter": "TEST",
+        "zia_category_id": "CUSTOM_01"
+    },
+    "raw": '{"categories": [{"id": "CUSTOM_01", "configuredName": "TEST_CAT_1", "urls": ["testhost.com"], "dbCategorizedUrls": [], "customCategory": true, "editable": true, "description": "CUSTOM_01_DESC", "type": "URL_CATEGORY", "val": 129, "customUrlsCount": 1, "urlsRetainingParentCategoryCount": 0, "url_counts": {"total": 1, "filtered": 1}}], "category_counts": {"total": 5, "filtered": 1}}',
+    "metrics": {
+        "version": "1.0",
+        "package": "fn-zia",
+        "package_version": "1.0.0",
+        "host": "host.ibm.com",
+        "execution_time_ms": 22199,
+        "timestamp": "2021-05-11 10:33:14"
+    },
+    "version": "1.0",
+    "success": True,
+    "reason": None
 }
 ```
 
@@ -518,9 +601,48 @@ The following screenshot shows an example of a note added to an IBM SOAR inciden
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+    "content": {
+        "response": {
+            "id": "CUSTOM_01",
+            "configuredName": "TEST_CAT_1",
+            "superCategory": "USER_DEFINED",
+            "keywords": [],
+            "keywordsRetainingParentCategory": [],
+            "urls": [
+                "192.168.1.1",
+                "testhost.com"
+            ],
+            "dbCategorizedUrls": [],
+            "customCategory": True,
+            "editable": True,
+            "type": "URL_CATEGORY",
+            "val": 130,
+            "customUrlsCount": 2,
+            "urlsRetainingParentCategoryCount": 0
+        },
+        "activation": {
+            "status": "Activated"
+        }
+    },
+    "inputs": {
+        "zia_custom_category": "true",
+        "zia_configured_name": "TEST_CAT_1",
+        "zia_urls": "testhost.com 192.168.1.1",
+        "zia_super_category": "USER_DEFINED",
+        "zia_keywords": "test1"
+    },
+    "metrics": {
+        "version": "1.0",
+        "package": "fn-zia",
+        "package_version": "1.0.0",
+        "host": "host.ibm.com",
+        "execution_time_ms": 22199,
+        "timestamp": "2021-05-11 10:33:14"
+    },
+    "raw": '{"id": "CUSTOM_01", "configuredName": "TEST_CAT_1", "superCategory": "USER_DEFINED", "keywords": [], "keywordsRetainingParentCategory": [], "urls": ["192.168.1.1", "testhost.com"], "dbCategorizedUrls": [], "customCategory": true, "editable": true, "type": "URL_CATEGORY", "val": 130, "customUrlsCount": 2, "urlsRetainingParentCategoryCount": 0}',
+    "version": "1.0",
+    "success": True,
+    "reason": None
 }
 ```
 
@@ -563,12 +685,17 @@ def main():
     if CONTENT:
         response = CONTENT.get("response")
         activation = CONTENT.get("activation")
-        list_urls = re.split("\s+|,", urls)
         id = response.get("id")
+        super_cat = response.get("superCategory")
+        # In order to test all urls have been successfully added, convert string of urls
+        # to a list and convert urls to the format used by ZIA. e.g. https://user:password@domain.com:port/index.html ->
+        # domain.com:port/index.html
+        list_urls = [re.sub(r'^.*\/\/(.*@)*(.*)', r'\2', u) for u in re.split("\s+|,", urls)]
         category_list = response.get("urls")
         if all(a in category_list for a in list_urls):
             note_text = u"ZIA Integration: Workflow <b>{0}</b>: Successfully Created category <b>{1}</b> with id "\
-                        u"<b>{2}</b> and with urls <b>{3}</b> for SOAR function <b>{4}</b>.".format(WF_NAME, configured_name, id, urls, FN_NAME)
+                        u"<b>{2}</b> and with urls <b>{3}</b> in super category <b>{4}</b> for SOAR function <b>{5}</b>."\
+            .format(WF_NAME, configured_name, id, urls, super_cat, FN_NAME)
             note_text += u" Activation status: <b>{0}</b>.".format(activation["status"])
         
         else:
@@ -624,9 +751,28 @@ The following screenshot shows an example of a note added to an IBM SOAR inciden
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+    "content": [
+        {
+            "url": "host.com",
+            "urlClassifications": ["PROFESSIONAL_SERVICES"],
+            "urlClassificationsWithSecurityAlert": []
+        }
+    ],
+    "inputs": {
+        "zia_urls": "host.com"
+    },
+    "metrics": {
+        "version": "1.0",
+        "package": "fn-zia",
+        "package_version": "1.0.0",
+        "host": "host.ibm.com",
+        "execution_time_ms": 22199,
+        "timestamp": "2021-05-11 10:33:14"
+    },
+    "raw": '[{"url": "host.com", "urlClassifications": ["PROFESSIONAL_SERVICES"], "urlClassificationsWithSecurityAlert": []}]',
+    "version": "1.0",
+    "success": True,
+    "reason": None
 }
 ```
 
@@ -673,7 +819,6 @@ def main():
     incident.addNote(helper.createRichText(note_text))
 
 main()
-
 
 ```
 
@@ -731,9 +876,44 @@ The following screenshot shows an example of a note added to an IBM SOAR inciden
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+    "content": {
+        "response": {
+            "id": "CUSTOM_01",
+            "configuredName": "TEST_CAT_1",
+            "keywordsRetainingParentCategory": [],
+            "urls": [
+                "1.1.1.1",
+                "testhost.com"
+            ],
+            "dbCategorizedUrls": [],
+            "customCategory": True,
+            "editable": True,
+            "description": "CUSTOM_01_DESC",
+            "type": "URL_CATEGORY",
+            "val": 128, "customUrlsCount": 2,
+            "urlsRetainingParentCategoryCount": 0
+        },
+        "activation": {
+            "status": "Activated"
+        }
+    },
+    "inputs": {
+        "zia_configured_name": "TEST_CAT_1",
+        "zia_urls": "192.168.1.1",
+        "zia_category_id": "CUSTOM_01"
+    },
+    "raw": '{"id": "CUSTOM_01", "configuredName": "TEST_CAT_1", "keywordsRetainingParentCategory": [], "urls": ["1.1.1.1", "testhost.com"], "dbCategorizedUrls": [], "customCategory": true, "editable": true, "description": "CUSTOM_01_DESC", "type": "URL_CATEGORY", "val": 128, "customUrlsCount": 2, "urlsRetainingParentCategoryCount": 0}',
+    "metrics": {
+        "version": "1.0",
+        "package": "fn-zia",
+        "package_version": "1.0.0",
+        "host": "host.ibm.com",
+        "execution_time_ms": 22199,
+        "timestamp": "2021-05-11 10:33:14"
+    },
+    "version": "1.0",
+    "success": True,
+    "reason": None
 }
 ```
 
@@ -776,11 +956,14 @@ def main():
     if CONTENT:
         response = CONTENT.get("response")
         activation = CONTENT.get("activation")
+        # In order to test all urls have been successfully added, convert string of urls
+        # to a list and convert urls to the format used by ZIA. e.g. https://user:password@domain.com:port/index.html ->
+        # domain.com:port/index.html
         customlist_urls = [re.sub(r'^.*\/\/(.*@)*(.*)', r'\2', u) for u in re.split("\s+|,", urls)]
         updated_customlist = response.get("urls")
         if not any(a in updated_customlist for a in customlist_urls):
             note_text = u"ZIA Integration: Workflow <b>{0}</b>: Successfully removed URLs <b>{1}</b> from customlist "\
-                        u"of category ID <b>{2}</b> and configured name <b>{3}</b> for SOAR function <b>{4}</b>."\
+                        u"with category ID <b>{2}</b> and configured name <b>{3}</b> for SOAR function <b>{4}</b>."\
             .format(WF_NAME, urls, category_id, configured_name, FN_NAME)
             note_text += u" Activation status: <b>{0}</b>.".format(activation["status"])
         else:
@@ -847,9 +1030,32 @@ The following screenshot shows an example of a note added to an IBM SOAR inciden
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+    "content": {
+        "response": {
+            "whitelistUrls": [
+                "1.1.1.1",
+                "goodhost.com"
+            ]
+        },
+        "activation": {
+            "status": "Activated"
+        }
+    },
+    "inputs": {
+        "zia_allowlisturls": "goodhost.com"
+    },
+    "metrics": {
+        "version": "1.0",
+        "package": "fn-zia",
+        "package_version": "1.0.0",
+        "host": "host.ibm.com",
+        "execution_time_ms": 22199,
+        "timestamp": "2021-05-11 10:33:14"
+    },
+    "raw": '{"whitelistUrls": ["1.1.1.1", "goodhost.com"]}',
+    "version": "1.0",
+    "success": True,
+    "reason": None
 }
 ```
 
@@ -886,6 +1092,9 @@ def main():
     if CONTENT:
         response = CONTENT.get("response")
         activation = CONTENT.get("activation")
+        # In order to test all urls have been successfully added, convert string of urls
+        # to a list and convert urls to the format used by ZIA. e.g. https://user:password@domain.com:port/index.html ->
+        # domain.com:port/index.html
         allowlist_urls = [re.sub(r'^.*\/\/(.*@)*(.*)', r'\2', u) for u in re.split("\s+|,", urls)]
         updated_allowlist = response.get("whitelistUrls")
         if all(a in updated_allowlist for a in allowlist_urls):
@@ -955,9 +1164,31 @@ The following screenshot shows an example of a note added to an IBM SOAR inciden
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+    "content": {
+        "whitelistUrls": [
+            "1.1.1.1",
+            "goodhost.com"
+        ],
+        "url_counts": {
+            "total": 3,
+            "filtered": 3
+        }
+    },
+    "inputs": {
+        "zia_url_filter": ".*"
+    },
+    "metrics": {
+        "version": "1.0",
+        "package": "fn-zia",
+        "package_version": "1.0.0",
+        "host": "host.ibm.com",
+        "execution_time_ms": 22199,
+        "timestamp": "2021-05-11 10:33:14"
+    },
+    "raw": '{"whitelistUrls": ["1.1.1.1", "goodhost.com"]}',
+    "version": "1.0",
+    "success": True,
+    "reason": None,
 }
 ```
 
@@ -1096,9 +1327,32 @@ The following screenshot shows an example of a note added to an IBM SOAR inciden
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+    "content": {
+        "response": {
+            "whitelistUrls": [
+                "1.1.1.1",
+                "goodhost.com"
+            ]
+        },
+        "activation": {
+            "status": "Activated"
+        }
+    },
+    "inputs": {
+        "zia_allowlisturls": "badhost.com"
+    },
+    "metrics": {
+        "version": "1.0",
+        "package": "fn-zia",
+        "package_version": "1.0.0",
+        "host": "host.ibm.com",
+        "execution_time_ms": 22199,
+        "timestamp": "2021-05-11 10:33:14"
+    },
+    "raw": '{"whitelistUrls": ["1.1.1.1", "goodhost.com"]}',
+    "version": "1.0",
+    "success": True,
+    "reason": None
 }
 ```
 
@@ -1136,6 +1390,9 @@ def main():
     if CONTENT:
         response = CONTENT.get("response")
         activation = CONTENT.get("activation")
+        # In order to test all urls have been successfully added, convert string of urls
+        # to a list and convert urls to the format used by ZIA. e.g. https://user:password@domain.com:port/index.html ->
+        # domain.com:port/index.html
         allowlist_urls = [re.sub(r'^.*\/\/(.*@)*(.*)', r'\2', u) for u in re.split("\s+|,", urls)]
         updated_allowlist_urls = response.get("whitelistUrls")
         if not any(a in updated_allowlist_urls for a in allowlist_urls):
@@ -1206,9 +1463,29 @@ The following screenshot shows an example of a note added to an IBM SOAR inciden
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+    "content": {
+        "response": {
+            "status": "OK"
+        },
+        "activation": {
+            "status": "Activated"
+        }
+    },
+    "inputs": {
+        "zia_blocklisturls": "1.1.1.1"
+    },
+    "metrics": {
+        "version": "1.0",
+        "package": "fn-zia",
+        "package_version": "1.0.0",
+        "host": "host.ibm.com",
+        "execution_time_ms": 22199,
+        "timestamp": "2021-05-11 10:33:14"
+    },
+    "raw": "{'status': 'OK'}",
+    "version": "1.0",
+    "success": True,
+    "reason": None
 }
 ```
 
@@ -1318,9 +1595,45 @@ The following screenshot shows an example of a note added to an IBM SOAR inciden
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+    "content": {
+        "response": {
+            "id": "CUSTOM_01",
+            "configuredName": "TEST_CAT_1",
+            "keywordsRetainingParentCategory": [],
+            "urls": [
+                "192.168.1.1",
+                "testhost.com"
+            ],
+            "dbCategorizedUrls": [],
+            "customCategory": True,
+            "editable": True,
+            "description": "CUSTOM_01_DESC",
+            "type": "URL_CATEGORY",
+            "val": 128,
+            "customUrlsCount": 2,
+            "urlsRetainingParentCategoryCount": 0
+        },
+        "activation": {
+            "status": "Activated"
+        }
+    },
+    "inputs": {
+        "zia_configured_name": "TEST_CAT_1",
+        "zia_urls": "192.168.1.1",
+        "zia_category_id": "CUSTOM_01"
+    },
+    "raw": '{"id": "CUSTOM_01", "configuredName": "TEST_CAT_1", "keywordsRetainingParentCategory": [], "urls": ["192.168.1.1", "testhost.com"], "dbCategorizedUrls": [], "customCategory": true, "editable": true, "description": "CUSTOM_01_DESC", "type": "URL_CATEGORY", "val": 128, "customUrlsCount": 2, "urlsRetainingParentCategoryCount": 0}',
+    "metrics": {
+        "version": "1.0",
+        "package": "fn-zia",
+        "package_version": "1.0.0",
+        "host": "host.ibm.com",
+        "execution_time_ms": 22199,
+        "timestamp": "2021-05-11 10:33:14"
+    },
+    "version": "1.0",
+    "success": True,
+    "reason": None
 }
 ```
 
@@ -1365,6 +1678,9 @@ def main():
     if CONTENT:
         response = CONTENT.get("response")
         activation = CONTENT.get("activation")
+        # In order to test all urls have been successfully added, convert string of urls
+        # to a list and convert urls to the format used by ZIA. e.g. https://user:password@domain.com:port/index.html ->
+        # domain.com:port/index.html
         customlist_urls = [re.sub(r'^.*\/\/(.*@)*(.*)', r'\2', u) for u in re.split("\s+|,", urls)]
         updated_customlist = response.get("urls")
         if all(a in updated_customlist for a in customlist_urls):
@@ -1434,9 +1750,31 @@ The following screenshFot shows an example of a note added to an IBM SOAR incide
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+    "content": {
+        "blacklistUrls": [
+            "badhost.com",
+            "192.168.12.2"
+        ],
+        "url_counts": {
+            "total": 3,
+            "filtered": 3
+        }
+    },
+    "inputs": {
+        "zia_url_filter": ".*"
+    },
+    "metrics": {
+        "version": "1.0",
+        "package": "fn-zia",
+        "package_version": "1.0.0",
+        "host": "host.ibm.com",
+        "execution_time_ms": 22199,
+        "timestamp": "2021-05-11 10:33:14"
+    },
+    "raw": "{'blacklistUrls': ['badhost.com'], ['192.168.12.2']}",
+    "version": "1.0",
+    "success": True,
+    "reason": None,
 }
 ```
 
@@ -1572,9 +1910,29 @@ The following screenshot shows an example of a note added to an IBM SOAR inciden
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+    "content": {
+        "response": {
+            "status": "OK"
+        },
+        "activation": {
+            "status": "Activated"
+        }
+    },
+    "inputs": {
+        "zia_blocklisturls": "1.1.1.1"
+    },
+    "metrics": {
+        "version": "1.0",
+        "package": "fn-zia",
+        "package_version": "1.0.0",
+        "host": "host.ibm.com",
+        "execution_time_ms": 22199,
+        "timestamp": "2021-05-11 10:33:14"
+    },
+    "raw": "{'status': 'OK'}",
+    "version": "1.0",
+    "success": True,
+    "reason": None
 }
 ```
 
@@ -1596,11 +1954,11 @@ inputs.zia_activate = rule.properties.zia_activate
 <p>
 
 ```python
-##  ZIA - wf_zia_add_artfact_to_blocklist post processing script ##
+##  ZIA - wf_zia_add_artifact_to_blocklist post processing script ##
 
 #  Globals
 FN_NAME = "funct_zia_add_to_blocklist"
-WF_NAME = "ZIA: Add Artfact To Blocklist"
+WF_NAME = "ZIA: Add Artifact To Blocklist"
 CONTENT = results.content
 INPUTS = results.inputs
 
@@ -1666,14 +2024,12 @@ zia_url_categories
 | Category ID | `cat_id` | `text` | - |
 | Configured name | `configuredName` | `text` | - |
 | Custom category | `customCategory` | `text` | - |
-| Custom URLs count | `customUrlsCount` | `text` | - |
+| Custom URLs count | `customUrlsCount` | `text` | Total custom URL count before any results filtering. |
 | Editable | `editable` | `text` | - |
-| Keywords | `keywords` | `text` | - |
 | Category name filter | `name_filter` | `text` | Configured name filter, if any, used in the query. |
 | Query execution date | `query_execution_date` | `text` | Date and time when query was run. |
-| Super category | `superCategory` | `text` | - |
 | Type | `type` | `text` | - |
-| URL Query filter | `url_filter` | `text` | URL filter, if any, used in the query. |
+| URL filter | `url_filter` | `text` | URL filter, if any, used in the query. |
 | URLs | `urls` | `text` | - |
 
 ---
@@ -1692,7 +2048,7 @@ zia_customlists
 | Category name filter | `name_filter` | `text` | Configured name filter, if any, used in the query. |
 | Query execution date | `query_execution_date` | `text` | Date and time when query was run. |
 | URL | `url` | `text` | A URL on the custom list. |
-| URL Query filter | `url_filter` | `text` | URL filter, if any, used in the query. |
+| URL filter | `url_filter` | `text` | URL filter, if any, used in the query. |
 
 ---
 ## Data Table - Zscaler Internet Access - Allowlist
