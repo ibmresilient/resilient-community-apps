@@ -24,11 +24,11 @@ inputs.zia_activate = rule.properties.zia_activate
 
 ### Post-Processing Script
 ```python
-##  ZIA - wf_zia_add_artfact_to_blocklist post processing script ##
+##  ZIA - wf_zia_add_artifact_to_blocklist post processing script ##
 
 #  Globals
 FN_NAME = "funct_zia_add_to_blocklist"
-WF_NAME = "ZIA: Add Artfact To Blocklist"
+WF_NAME = "ZIA: Add Artifact To Blocklist"
 CONTENT = results.content
 INPUTS = results.inputs
 
