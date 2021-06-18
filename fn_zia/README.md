@@ -156,8 +156,8 @@ The following table provides the settings you need to configure the app. These s
 | **zia_username** | Yes | `user@1234567.zscalerbeta.net` | *Username used for programmatic (API) access to ZIA.* |
 | **zia_password** | Yes | `password` | *Password used for programmatic (API) access to ZIA.* |
 | **zia_api_key** | Yes | `abCDeFGHij0K` | *Api Key used for programmatic (API) access to ZIA.* |
-| **http_proxy** | No | `http://proxy:80` | *Optional setting for an http proxy if required.*  |
-| **https_proxy** | No | `https://proxy:443` | *Optional setting for an https proxy if required.* |
+| **http_proxy** | No | `http://proxy:80` or `proxy:80`  | *Optional setting for an http proxy if required.*  |
+| **https_proxy** | No | `https://proxy:443` or `proxy:443` | *Optional setting for an https proxy if required.* |
 
 ### Custom Layouts
 <!--
