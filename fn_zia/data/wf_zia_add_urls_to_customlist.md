@@ -62,7 +62,7 @@ def main():
                         u"for SOAR function <b>{4}</b>.".format(WF_NAME, urls, category_id,  FN_NAME)
     else:
         note_text += u"ZIA Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting "\
-                     u"to add URLs <b>{1}</b> to to customlist of category ID <b>{2}</b> for SOAR function <b>{2}</b>."\
+                     u"to add URLs <b>{1}</b> to customlist of category ID <b>{2}</b> for SOAR function <b>{2}</b>."\
             .format(WF_NAME, urls, category_id,  FN_NAME)
 
     incident.addNote(helper.createRichText(note_text))
@@ -85,7 +85,12 @@ main()
 
 ### Pre-Processing Script
 ```python
-None
+# Test is a valid category name.
+configured_name =  rule.properties.zia_configured_name
+if configured_name.startswith('<') or configured_name.endswith('>'):
+    raise ValueError("The Category configured name '{}' is not a valid value.".format(unicode(configured_name)))
+inputs.zia_name_filter = configured_name
+
 ```
 
 ### Post-Processing Script
@@ -112,7 +117,7 @@ def main():
     if catname_exists:
         workflow.addProperty("catname_exists", {})
     else:
-        note_text += u"ZIA Integration: Workflow <b>{0}</b>: Workflow <b>{0}</b>: The category nmae  <b>{1}</b> was not found " \
+        note_text += u"ZIA Integration: Workflow <b>{0}</b>: The category name <b>{1}</b> was not found " \
                      u"for SOAR function <b>{2}</b>." \
             .format(WF_NAME, name_filter, FN_NAME)
         incident.addNote(helper.createRichText(note_text))
