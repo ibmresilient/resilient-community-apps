@@ -17,5 +17,7 @@ zia_api_base_url = <ZIA_API_BASE_URL>
 zia_username = <ZIA_USER_NAME>
 zia_password = <ZIA_PASSWORD>
 zia_api_key = <ZIA_API_KEY>
+#http_proxy=http://proxy:80
+#https_proxy=https://proxy:443
 """
     return config_data
