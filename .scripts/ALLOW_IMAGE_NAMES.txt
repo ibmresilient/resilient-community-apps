@@ -81,6 +81,7 @@ fn_wiki
 fn_whois
 fn_whois_rdap
 fn_xforce
+fn_zia
 
 #Not_Rebuilt
 #fn_aws_guardduty-failing-test
