@@ -130,6 +130,7 @@ fn_whois
 fn_whois_rdap
 fn_wiki
 fn_xforce
+fn_zia
 older
 rc-cts-abuseipdb
 rc-cts-googlesafebrowsing
