@@ -71,6 +71,7 @@ fn_ipinfo
 fn_isitphishing
 fn_jira
 fn_joe_sandbox_analysis
+fn_kafka
 fn_ldap_utilities
 fn_log_capture
 fn_machine_learning
