@@ -19,9 +19,9 @@ resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
 
 def call_whois_query_function(circuits, function_params, timeout=10):
     # Fire a message to the function
-    evt = SubmitTestFunction("whois_query", function_params)
+    evt = SubmitTestFunction("whois_rdap_query", function_params)
     circuits.manager.fire(evt)
-    event = circuits.watcher.wait("whois_query_result", parent=evt, timeout=timeout)
+    event = circuits.watcher.wait("whois_rdap_query_result", parent=evt, timeout=timeout)
     assert event
     assert isinstance(event.kwargs["result"], FunctionResult)
     pytest.wait_for(event, "complete", True)
@@ -37,7 +37,7 @@ class TestWhoisQuery:
 ])
     def test_success(self, circuits_app, whois_query, expected_results):
         """ Test calling with sample values for the parameters """
-        function_params = { 
+        function_params = {
             "whois_query": whois_query
         }
         results = call_whois_query_function(circuits_app, function_params)

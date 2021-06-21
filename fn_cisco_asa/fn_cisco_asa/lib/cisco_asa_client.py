@@ -258,7 +258,7 @@ class CiscoASAClient(object):
         # Remove this object from the network object group
         url = u"{0}/api/objects/networkobjectgroups/{1}".format(self.base_url, group)
         # Key is different when dealing with a network object vs an IP address.
-        if obj_kind in ('IPv4Address', 'IPv4Network'):
+        if obj_kind in ('IPv4Address', 'IPv4Network', 'IPv6Address') and not obj_name:
             data = {"members.remove":[{
                         "kind": obj_kind,
                         "value": obj_value

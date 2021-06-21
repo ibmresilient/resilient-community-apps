@@ -68,7 +68,7 @@ fn_incident_utils
 fn_ioc_parser_v2
 fn_ip_void
 fn_ipinfo
-fn_isitPhishing
+fn_isitphishing
 fn_jira
 fn_joe_sandbox_analysis
 fn_ldap_utilities

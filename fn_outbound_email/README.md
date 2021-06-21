@@ -40,6 +40,7 @@
 
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| v1.2.1  | 5/2021 | Bug fix for python 2 |
 | v1.2.0  | 4/2021 | Added capability for task attachments |
 | v1.1.1  | 2/2021 | Bug fixes associated with sending attachments |
 | v1.1.0  | 10/2020 | Bug fixes and send all or specific attachments |
