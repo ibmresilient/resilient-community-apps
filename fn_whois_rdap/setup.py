@@ -20,7 +20,7 @@ def snake_to_camel(word):
 
 setup(
     name='fn_whois_rdap',
-    version='1.0.3',
+    version='1.0.4',
     license='MIT',
     author='Resilient Labs',
     author_email='resil.labs@gmail.com',
@@ -32,7 +32,7 @@ setup(
     install_requires=[
         'resilient_circuits>=32.0.0',
         'resilient_lib>=33.0.189',
-        'ipwhois>=1.1.0',
+        'ipwhois==1.1.0',
         'tldextract>=2.2.1',
         'future>=0.18.0',
         'six==1.12.0',

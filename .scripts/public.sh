@@ -68,9 +68,10 @@ fn_incident_utils
 fn_ioc_parser_v2
 fn_ip_void
 fn_ipinfo
-fn_isitPhishing
+fn_isitphishing
 fn_jira
 fn_joe_sandbox_analysis
+fn_kafka
 fn_ldap_utilities
 fn_log_capture
 fn_machine_learning
@@ -129,6 +130,7 @@ fn_whois
 fn_whois_rdap
 fn_wiki
 fn_xforce
+fn_zia
 older
 rc-cts-abuseipdb
 rc-cts-googlesafebrowsing

@@ -174,7 +174,7 @@ class FunctionComponent(ResilientComponent):
         Returns:
             [set]: [file paths of attachments to send]
         """
-        remaining_attachment_list = requested_attachments.copy()
+        remaining_attachment_list = requested_attachments[:]
         attachment_path = []
         tempdir = tempfile.mkdtemp()
 

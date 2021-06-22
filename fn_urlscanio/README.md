@@ -34,7 +34,7 @@ To install,
 
 Unzip file from AppExchange:
 
-    unzip app-fn_urlscanio-1.1.4.zip
+    unzip app-fn_urlscanio-1.1.5.zip
 
 The resulting .tar.gz file can be installed using
 
@@ -119,6 +119,7 @@ To regenerate the customization blob,
 | 1.1.2 | Support added for App Host |
 | 1.1.3 | Compatibility with older versions of resilient-circuits |
 | 1.1.4 | Proxy support added |
+| 1.1.5 | Bug fix error for non existing url |
 
 When upgrading from a previous version. Add these lines to your existing app.config [urlscanio] settings
 
