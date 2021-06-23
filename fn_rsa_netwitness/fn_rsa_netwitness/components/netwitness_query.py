@@ -75,4 +75,4 @@ def query_netwitness(url, user, pw, cafile, query, req_common, size=""):
         size = "&size={}".format(size)
     request_url = "{}/sdk?msg=query&query={}&force-content-type=application/json{}".format(url, query, size)
 
-    return req_common.execute_call("GET", request_url, verify_flag=cafile, headers=headers)
+    return req_common.execute_call_v2("GET", request_url, verify=cafile, headers=headers)

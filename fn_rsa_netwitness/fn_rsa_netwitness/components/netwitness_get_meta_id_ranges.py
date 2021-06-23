@@ -77,4 +77,4 @@ def get_meta_id_ranges(url, user, pw, cafile, id1, id2, req_common, size=""):
         size = "&size={}".format(size)
     request_url = "{}/sdk?msg=session&id1={}&id2={}&force-content-type=application/json{}".format(url, id1, id2, size)
 
-    return req_common.execute_call("GET", request_url, verify_flag=cafile, headers=headers)
+    return req_common.execute_call_v2("GET", request_url, verify=cafile, headers=headers)

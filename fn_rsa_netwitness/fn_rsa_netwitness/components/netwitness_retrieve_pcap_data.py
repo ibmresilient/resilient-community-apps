@@ -102,11 +102,11 @@ def get_nw_session_pcap_file(url, user, pw, cafile, event_session_id, req_common
     headers = get_headers(user, pw)
     request_url = "{}/sdk/packets?sessions={}&render=pcap".format(url, event_session_id)
 
-    return req_common.execute_call("GET", request_url, verify_flag=cafile, headers=headers, resp_type='bytes')
+    return req_common.execute_call_v2("GET", request_url, verify=cafile, headers=headers).content
 
 
 def get_nw_session_pcap_file_time(url, user, pw, cafile, start_time, end_time, req_common):
     headers = get_headers(user, pw)
     request_url = "{}/sdk/packets?time1={}&time2={}&render=pcap".format(url, start_time, end_time)
 
-    return req_common.execute_call("GET", request_url, verify_flag=cafile, headers=headers, resp_type="bytes")
+    return req_common.execute_call_v2("GET", request_url, verify=cafile, headers=headers).content
