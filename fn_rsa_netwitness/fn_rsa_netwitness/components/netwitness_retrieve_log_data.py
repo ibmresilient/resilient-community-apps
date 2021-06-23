@@ -9,6 +9,7 @@ from resilient_lib import validate_fields, ResultPayload, RequestsCommon, str_to
 from fn_rsa_netwitness.util.helper import get_headers, convert_to_nw_time
 from io import BytesIO, StringIO
 import sys
+import json
 
 log = logging.getLogger(__name__)
 
@@ -84,13 +85,13 @@ class FunctionComponent(ResilientComponent):
             # Return log data in json format
             if nw_data_format == "logs_json":
                 data_file = get_nw_session_logs_file(url, username, password, nw_verify, start_time, end_time,
-                                                     req_common, render_format=render_format_dict.get("nw_data_format"),
+                                                     req_common, render_format=render_format_dict[nw_data_format],
                                                      resp_type="json")
 
             # Return log data in text format
             else:
                 data_file = get_nw_session_logs_file(url, username, password, nw_verify, start_time, end_time,
-                                                     req_common, render_format=render_format_dict.get("nw_data_format"))
+                                                     req_common, render_format=render_format_dict[nw_data_format])
 
             log.debug("data_file: {}".format(data_file))
             results = rp.done(True, data_file)
@@ -111,7 +112,9 @@ class FunctionComponent(ResilientComponent):
 
                 attachment_name = u"Log file for {} - {}.{}".format(nw_start_time, nw_end_time, ext)
 
-                if sys.version_info.major < 3:
+                if nw_data_format == "logs_json":
+                    datastream = BytesIO(json.dumps(results['content'], indent = 4).encode('utf-8'))
+                elif sys.version_info.major < 3:
                     datastream = StringIO(results["content"])
                 else:
                     datastream = BytesIO(results["content"].encode("utf-8"))
@@ -130,4 +133,11 @@ def get_nw_session_logs_file(url, user, pw, cafile, time1, time2, req_common, re
     headers = get_headers(user, pw)
     request_url = "{}/sdk/packets?time1={}&time2={}&render={}".format(url, time1, time2, render_format)
 
-    return req_common.execute_call("GET", request_url, verify_flag=cafile, headers=headers, resp_type=resp_type)
+    resp = req_common.execute_call_v2("GET", request_url, verify=cafile, headers=headers)
+
+    if resp_type == 'json':
+        return resp.json()
+    elif resp_type == 'text':
+        return resp.text
+    elif resp_type == 'bytes':
+        return resp.content

@@ -37,14 +37,14 @@ def selftest_function(opts):
         # Test PCAP server connection
         headers = get_headers(nw_packet_server_user, nw_packet_server_password)
         request_url = "{}/sdk/packets?sessions={}&render=pcap".format(nw_packet_server_url, "100")
-        rc.execute_call("GET", request_url, verify_flag=nw_packet_server_verify, headers=headers, resp_type='bytes')
+        rc.execute_call_v2("GET", request_url, verify=nw_packet_server_verify, headers=headers).content
 
         # Test Logger server connection
         time1 = int(time.time()) * 1000
         time2 = int(time.time()) * 1000
         headers = get_headers(nw_log_server_user, nw_log_server_password)
         request_url = "{}/sdk/packets?time1={}&time2={}&render={}".format(nw_log_server_url, time1, time2, "logs")
-        rc.execute_call("GET", request_url, verify_flag=nw_log_server_verify, headers=headers, resp_type="text")
+        rc.execute_call_v2("GET", request_url, verify=nw_log_server_verify, headers=headers).text
 
         return {"state": "success"}
     except Exception as err:
