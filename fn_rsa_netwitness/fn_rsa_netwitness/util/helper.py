@@ -7,6 +7,7 @@ import shutil
 import logging
 import base64
 import datetime
+import pytz
 
 
 log = logging.getLogger(__name__)
@@ -48,5 +49,6 @@ def get_headers(username, password):
 # Converts Resilient epoch time to time format for NetWitness server
 def convert_to_nw_time(resilient_time):
     time = resilient_time/1000
+    tzone = pytz.timezone("America/New_York")
 
-    return datetime.datetime.fromtimestamp(time).strftime('%Y-%b-%d %H:%M:%S')
+    return datetime.datetime.fromtimestamp(time).astimezone(tzone).strftime('%Y-%b-%d %H:%M:%S')
