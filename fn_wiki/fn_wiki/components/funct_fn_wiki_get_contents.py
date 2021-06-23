@@ -7,7 +7,7 @@ import json
 import logging
 from fn_wiki.lib.wiki_common import WikiHelper
 from resilient_circuits import ResilientComponent, handler, function, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import ResultPayload, validate_fields
+from resilient_lib import ResultPayload, validate_fields, str_to_bool
 
 PACKAGE_NAME = "fn_wiki"
 
@@ -35,7 +35,7 @@ class FunctionComponent(ResilientComponent):
             #yield StatusMessage("Starting 'fn_get_wiki_contents' running in workflow '{0}'".format(wf_instance_id))
 
             # Get the function parameters:
-            wiki_contents_as_json = bool(kwargs.get("wiki_contents_as_json", False))  # boolean
+            wiki_contents_as_json = str_to_bool(kwargs.get("wiki_contents_as_json", "False"))  # boolean
             wiki_path = kwargs.get("wiki_path")  # text
 
             log = logging.getLogger(__name__)
