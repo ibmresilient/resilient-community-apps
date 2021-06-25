@@ -6,7 +6,7 @@
 import logging
 from fn_wiki.lib.wiki_common import WikiHelper
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import ResultPayload, validate_fields
+from resilient_lib import ResultPayload, validate_fields, str_to_bool
 
 PACKAGE_NAME = "fn_wiki"
 
@@ -34,7 +34,7 @@ class FunctionComponent(ResilientComponent):
             #yield StatusMessage("Starting 'fn_wiki_create_update' running in workflow '{0}'".format(wf_instance_id))
 
             # Get the function parameters:
-            wiki_create_if_missing = bool(kwargs.get("wiki_create_if_missing", False))  # boolean
+            wiki_create_if_missing = str_to_bool(kwargs.get("wiki_create_if_missing", "False"))  # boolean
             wiki_path = kwargs.get("wiki_path")  # text
             wiki_body = kwargs.get("wiki_body")  # text
 

@@ -44,10 +44,13 @@ RUN pip install /tmp/packages/${APPLICATION}-*.tar.gz
 RUN mkdir /etc/rescircuits
 ENV APP_CONFIG_FILE /etc/rescircuits/app.config
 
+# create arbitrary group for user 1001
+RUN groupadd -g 1001 default && usermod -g 1001 default
+
 # create directory for logs and set to be root group to allow access by non root processes
 # See https://docs.openshift.com/container-platform/4.2/openshift_images/create-images.html#images-create-guide-openshift_create-images
 RUN mkdir /var/log/rescircuits && \
-    chgrp -R 0 /var/log/rescircuits && \
+    chgrp -R 1001 /var/log/rescircuits && \
     chmod -R g=u /var/log/rescircuits
 ENV APP_LOG_DIR /var/log/rescircuits
 
