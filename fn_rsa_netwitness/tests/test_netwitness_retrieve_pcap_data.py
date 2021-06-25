@@ -13,7 +13,7 @@ FUNCTION_NAME = "netwitness_retrieve_pcap_data"
 # config_data = get_config_data(PACKAGE_NAME)
 
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
-# resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
+resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
 
 
 def call_netwitness_retrieve_pcap_data_function(circuits, function_params, timeout=10):
@@ -37,7 +37,7 @@ class TestNetwitnessRetrievePcapData:
 
     @pytest.mark.parametrize("nw_event_session_ids, incident_id, nw_start_time, nw_end_time, expected_results", [
         ("32987239, 2398793287", 3252, "", "", {"value": "xyz"}),
-        ("", 3252, "1545157725000", "1545158725000", {"value": "xyz"})
+        ("", 3252, 1545157725000, 1545158725000, {"value": "xyz"})
     ])
     def test_success(self, circuits_app, nw_event_session_ids, incident_id, nw_start_time, nw_end_time, expected_results):
         """ Test calling with sample values for the parameters """
