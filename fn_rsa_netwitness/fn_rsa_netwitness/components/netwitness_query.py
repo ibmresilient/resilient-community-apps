@@ -60,7 +60,7 @@ class FunctionComponent(ResilientComponent):
             else:
                 StatusMessage("No query results found")
             yield StatusMessage("Complete...")
-            results = rp.done(True, nw_query_results)
+            results = rp.done(True, nw_query_results.json() if nw_query_results else None)
             log.debug("RESULTS: %s", results)
 
             # Produce a FunctionResult with the results

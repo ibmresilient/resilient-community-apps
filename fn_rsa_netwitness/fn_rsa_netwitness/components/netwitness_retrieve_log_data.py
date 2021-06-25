@@ -93,7 +93,7 @@ class FunctionComponent(ResilientComponent):
                 data_file = get_nw_session_logs_file(url, username, password, nw_verify, start_time, end_time,
                                                      req_common, render_format=render_format_dict[nw_data_format])
 
-            log.debug("data_file: {}".format(data_file))
+            log.debug("data_file: %s", data_file)
             results = rp.done(True, data_file)
             log.debug("RESULTS: %s", results)
 
@@ -137,7 +137,9 @@ def get_nw_session_logs_file(url, user, pw, cafile, time1, time2, req_common, re
 
     if resp_type == 'json':
         return resp.json()
-    elif resp_type == 'text':
+
+    if resp_type == 'text':
         return resp.text
-    elif resp_type == 'bytes':
+
+    if resp_type == 'bytes':
         return resp.content

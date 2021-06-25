@@ -35,12 +35,13 @@ class TestNetwitnessGetMetaIdRanges:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
+    @pytest.mark.livetest
     @pytest.mark.parametrize("nw_session_id1, nw_session_id2, nw_results_size, expected_results", [
         (23787, 23983, 10, {"value": "xyz"})
     ])
     def test_success(self, circuits_app, nw_session_id1, nw_session_id2, nw_results_size, expected_results):
         """ Test calling with sample values for the parameters """
-        function_params = { 
+        function_params = {
             "nw_session_id1": nw_session_id1,
             "nw_session_id2": nw_session_id2,
             "nw_results_size": nw_results_size

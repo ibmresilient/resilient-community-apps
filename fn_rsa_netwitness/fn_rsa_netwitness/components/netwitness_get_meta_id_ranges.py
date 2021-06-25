@@ -62,7 +62,7 @@ class FunctionComponent(ResilientComponent):
             else:
                 StatusMessage("No meta ID ranges found")
             yield StatusMessage("Complete...")
-            results = rp.done(True, nw_query_metadata)
+            results = rp.done(True, nw_query_metadata.json() if nw_query_metadata else None)
             log.debug("RESULTS: %s", results)
 
             # Produce a FunctionResult with the results

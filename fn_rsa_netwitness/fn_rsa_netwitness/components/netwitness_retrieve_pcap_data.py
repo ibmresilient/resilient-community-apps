@@ -5,8 +5,8 @@
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import validate_fields, ResultPayload, RequestsCommon, str_to_bool
-from fn_rsa_netwitness.util.helper import remove_dir, create_tmp_file, get_headers, convert_to_nw_time
+from resilient_lib import validate_fields, ResultPayload, RequestsCommon, str_to_bool, write_file_attachment
+from fn_rsa_netwitness.util.helper import create_tmp_file, get_headers, convert_to_nw_time
 
 log = logging.getLogger(__name__)
 
@@ -33,7 +33,6 @@ class FunctionComponent(ResilientComponent):
     def _netwitness_retrieve_pcap_data(self, event, *args, **kwargs):
         """Function: Returns back either a pcap file from Netwitness,
         and attaches it to an incident."""
-        temp_d = None
         try:
             yield StatusMessage("Starting...")
             # Get the function parameters:
@@ -77,12 +76,11 @@ class FunctionComponent(ResilientComponent):
                                                           req_common)
                 file_name = "PCAP file between {} and {}.pcap".format(nw_start, nw_end)
 
-            temp_d, temp_f = create_tmp_file(pcap_file)
-            log.debug("pcap_file: {}".format(pcap_file))
+            temp_contents = create_tmp_file(pcap_file)
+            log.debug("pcap_file: %s", pcap_file)
 
             resilient_client = self.rest_client()
-            resilient_client.post_attachment("/incidents/{}/attachments/".format(incident_id),
-                                             temp_f, filename=file_name)
+            write_file_attachment(resilient_client, file_name, temp_contents, incident_id)
             yield StatusMessage("PCAP file added as attachment to Incident {}".format(str(incident_id)))
 
             results = rp.done(True, {})
@@ -93,9 +91,6 @@ class FunctionComponent(ResilientComponent):
             yield FunctionResult(results)
         except Exception as e:
             yield FunctionError(e)
-        finally:
-            if temp_d:
-                remove_dir(temp_d)
 
 
 def get_nw_session_pcap_file(url, user, pw, cafile, event_session_id, req_common):
