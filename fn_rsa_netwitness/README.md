@@ -18,7 +18,7 @@ The RSA NetWitness functions query for metadata and return pcap and log files fo
 | 1.1.0 | 3/2020 | Initial commit | 
 
 ---
-
+ 
 ### Contents:
 #### Message Destinations: 
   * RSA NetWitness Message Destination
