@@ -17,9 +17,10 @@ def create_tmp_file(contents):
     temp_d = tempfile.mkdtemp("tmp")
     temp_f = tempfile.mkstemp(dir=temp_d)
     report_file = temp_f[1]
+    content = bytes(contents, 'utf-8')
 
     with open(report_file, 'wb') as f:
-        f.write(contents)
+        f.write(content)
         log.info("Saved PCAP data locally.")
 
     return temp_d, report_file
