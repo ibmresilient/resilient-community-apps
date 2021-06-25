@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_rsa_netwitness',
-    version='1.1.3',
+    version='1.1.1',
     license='MIT',
     author='Resilient Labs',
     author_email='resil.labs@gmail',

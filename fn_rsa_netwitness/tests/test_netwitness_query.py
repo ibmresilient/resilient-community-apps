@@ -16,7 +16,7 @@ FUNCTION_NAME = "netwitness_query"
 # config_data = get_config_data(PACKAGE_NAME)
 
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
-# resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
+resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
 
 
 def call_netwitness_query_function(circuits, function_params, timeout=10):
@@ -66,7 +66,7 @@ class TestNetwitnessQuery:
 
     def test_convert_to_nw_time(self):
         expected_nw_time = "2018-Dec-18 13:28:45"
-        nw_time = convert_to_nw_time(int("1545157725000"))
+        nw_time = convert_to_nw_time(1545157725000)
 
         assert nw_time == expected_nw_time
 

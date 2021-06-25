@@ -47,4 +47,4 @@ class TestNetwitnessRetrieveLogData:
             "nw_data_format": nw_data_format
         }
         results = call_netwitness_retrieve_log_data_function(circuits_app, function_params)
-        assert results.get("content") is not None
+        assert results["content"] is not None

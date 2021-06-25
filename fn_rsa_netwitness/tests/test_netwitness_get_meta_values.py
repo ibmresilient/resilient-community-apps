@@ -13,7 +13,7 @@ FUNCTION_NAME = "netwitness_get_meta_values"
 # config_data = get_config_data(PACKAGE_NAME)
 
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
-# resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
+resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
 
 
 def call_netwitness_get_meta_values_function(circuits, function_params, timeout=10):

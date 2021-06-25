@@ -14,12 +14,11 @@ The RSA NetWitness functions query for metadata and return pcap and log files fo
 
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.1.3 | 6/2021 | Fix for convert_to_nw_time |
-| 1.1.2 | 6/2021 | Updated execute_call to execute_call_v2 |
-| 1.1.1 | 6/2021 | Bug fix for json logs output |
+| 1.1.1 | 6/2021 | Bug fix for json logs output, updated execute_call to execute_call_v2, fix for convert_to_nw_time, fix for create_tmp_file |
+| 1.1.0 | 3/2020 | Initial commit | 
 
 ---
-
+ 
 ### Contents:
 #### Message Destinations: 
   * RSA NetWitness Message Destination
