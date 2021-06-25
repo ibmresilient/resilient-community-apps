@@ -59,12 +59,13 @@ fn_qradar_advisor
 fn_qradar_enhanced_data
 fn_query_tor_network
 fn_remedy
-fn_scheduler
+#fn_scheduler*
 fn_secureworks_ctp
 fn_sep
 fn_service_now
 fn_shodan
 fn_slack
+fn_splunk_integration
 fn_spamhaus_query
 fn_task_utils
 fn_teams
@@ -74,7 +75,7 @@ fn_twitter_most_popular
 fn_url_to_dns
 fn_urlhaus
 fn_urlscanio
-fn_utilities
+#fn_utilities*
 fn_virustotal
 fn_vmray_analyzer
 fn_wiki
@@ -85,10 +86,9 @@ fn_zia
 
 #Not_Rebuilt
 #fn_aws_guardduty-failing-test
-#fn_qradar_integration-failing-test
-#fn_whois_rdap-failing-test
-#fn_crowdstrike_falcon
-#fn_odbc_query
+#fn_qradar_integration-failing-test-still-root-group
+#fn_crowdstrike_falcon-still-root-group
+#fn_odbc_query-still-root-group
 #rc-data-feed
 #rc-data-feed-plugin-elasticfeed
 #rc-data-feed-plugin-kafkafeed
