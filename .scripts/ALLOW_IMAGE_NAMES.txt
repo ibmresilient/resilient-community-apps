@@ -75,7 +75,7 @@ fn_twitter_most_popular
 fn_url_to_dns
 fn_urlhaus
 fn_urlscanio
-#fn_utilities*
+fn_utilities
 fn_virustotal
 fn_vmray_analyzer
 fn_wiki
