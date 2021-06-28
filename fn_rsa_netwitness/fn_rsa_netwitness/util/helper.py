@@ -2,12 +2,9 @@
 # pragma pylint: disable=unused-argument, no-self-use
 # Copyright © IBM Corporation 2010, 2019
 
-import tempfile
-import shutil
 import logging
 import base64
 import datetime
-import pytz
 import sys
 if sys.version_info.major < 3:
     from StringIO import StringIO
@@ -44,6 +41,5 @@ def get_headers(username, password):
 # Converts Resilient epoch time to time format for NetWitness server
 def convert_to_nw_time(resilient_time):
     time = resilient_time/1000
-    tzone = pytz.timezone("America/New_York")
 
-    return datetime.datetime.fromtimestamp(time).astimezone(tzone).strftime('%Y-%b-%d %H:%M:%S')
+    return datetime.datetime.fromtimestamp(time).strftime('%Y-%b-%d %H:%M:%S')

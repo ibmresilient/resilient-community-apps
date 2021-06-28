@@ -4,8 +4,10 @@
 """Function implementation"""
 
 import logging
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import validate_fields, ResultPayload, RequestsCommon, str_to_bool, write_file_attachment
+from resilient_circuits import ResilientComponent, function, handler, \
+    StatusMessage, FunctionResult, FunctionError
+from resilient_lib import validate_fields, ResultPayload, RequestsCommon, \
+    str_to_bool, write_file_attachment
 from fn_rsa_netwitness.util.helper import create_tmp_file, get_headers, convert_to_nw_time
 
 log = logging.getLogger(__name__)
@@ -20,9 +22,11 @@ class FunctionComponent(ResilientComponent):
         self.options = opts.get("fn_rsa_netwitness", {})
 
         # Validate app.config fields
-        validate_fields(["nw_packet_server_url", "nw_packet_server_user", "nw_packet_server_password"], self.options)
+        validate_fields(["nw_packet_server_url", "nw_packet_server_user",\
+            "nw_packet_server_password"], self.options)
 
-        self.options["nw_packet_server_verify"] = str_to_bool(self.options.get("nw_packet_server_verify"))
+        self.options["nw_packet_server_verify"] = \
+            str_to_bool(self.options.get("nw_packet_server_verify"))
 
     @handler("reload")
     def _reload(self, event, opts):
@@ -49,8 +53,8 @@ class FunctionComponent(ResilientComponent):
             # Verify inputs are set correctly
             if nw_event_session_ids is None:
                 if nw_start_time is None or nw_end_time is None:
-                    raise FunctionError("Either nw_event_session_ids or nw_start_time and nw_end_time must be set for "
-                                        "this function to run correctly.")
+                    raise FunctionError("Either nw_event_session_ids or nw_start_time and \
+                        nw_end_time must be set for this function to run correctly.")
 
             log.info("nw_event_session_ids: %s", nw_event_session_ids)
             log.info("nw_start_time: %s", nw_start_time)
@@ -65,15 +69,15 @@ class FunctionComponent(ResilientComponent):
 
             # User session id if avaiable
             if nw_event_session_ids:
-                pcap_file = get_nw_session_pcap_file(url, username, password, nw_verify, nw_event_session_ids,
-                                                     req_common)
+                pcap_file = get_nw_session_pcap_file(url, username, password, nw_verify, \
+                    nw_event_session_ids, req_common)
                 file_name = "PCAP file for session IDs: {}.pcap".format(nw_event_session_ids)
             else:
                 nw_start = convert_to_nw_time(nw_start_time)
                 nw_end = convert_to_nw_time(nw_end_time)
 
-                pcap_file = get_nw_session_pcap_file_time(url, username, password, nw_verify, nw_start, nw_end,
-                                                          req_common)
+                pcap_file = get_nw_session_pcap_file_time(url, username, password, nw_verify, \
+                    nw_start, nw_end, req_common)
                 file_name = "PCAP file between {} and {}.pcap".format(nw_start, nw_end)
 
             temp_contents = create_tmp_file(pcap_file)
@@ -81,7 +85,8 @@ class FunctionComponent(ResilientComponent):
 
             resilient_client = self.rest_client()
             write_file_attachment(resilient_client, file_name, temp_contents, incident_id)
-            yield StatusMessage("PCAP file added as attachment to Incident {}".format(str(incident_id)))
+            yield StatusMessage("PCAP file added as attachment to Incident {}"\
+                .format(str(incident_id)))
 
             results = rp.done(True, {})
             yield StatusMessage("Done...")
@@ -89,8 +94,8 @@ class FunctionComponent(ResilientComponent):
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
-        except Exception as e:
-            yield FunctionError(e)
+        except Exception as error:
+            yield FunctionError(error)
 
 
 def get_nw_session_pcap_file(url, user, pw, cafile, event_session_id, req_common):

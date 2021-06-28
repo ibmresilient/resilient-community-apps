@@ -3,6 +3,8 @@
 
 from __future__ import print_function
 import pytest
+import datetime
+import pytz
 import os
 from resilient_circuits.util import get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
@@ -66,9 +68,10 @@ class TestNetwitnessQuery:
 
     def test_convert_to_nw_time(self):
         expected_nw_time = "2018-Dec-18 13:28:45"
-        nw_time = convert_to_nw_time(1545157725000)
+        nw_time = datetime.datetime.strptime(convert_to_nw_time(1545157725000), '%Y-%b-%d %H:%M:%S')
+        nw_time_timezone = nw_time.astimezone(pytz.timezone("America/New_York")).strftime('%Y-%b-%d %H:%M:%S')
 
-        assert nw_time == expected_nw_time
+        assert nw_time_timezone == expected_nw_time
 
     def test_creating_and_removing_tmp_dir_and_file(self):
         new_file_contents = "Some new file contents"
