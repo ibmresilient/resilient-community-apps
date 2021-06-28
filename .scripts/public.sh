@@ -28,6 +28,7 @@ README.md
 fn_alienvault_otx
 fn_ansible
 fn_apility
+fn_api_void
 fn_aws_utilities
 fn_bigfix
 fn_bluecoat_site_review
@@ -58,7 +59,6 @@ fn_hibp
 fn_html2pdf
 fn_icdx
 fn_ioc_parser_v2
-fn_ip_void
 fn_ipinfo
 fn_isitPhishing
 fn_jira
@@ -96,7 +96,6 @@ fn_task_utils
 fn_thug
 fn_twilio
 fn_twitter_most_popular
-fn_url_void
 fn_urlhaus
 fn_urlscanio
 fn_utilities
