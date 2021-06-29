@@ -17,6 +17,7 @@ JSON_HEADERS = {
     "Content-Type": "application/json"
 }
 
+
 def get_job_template_by_name(opts, options, filter_by_name):
     """
     get job templates, optionally based on template name
@@ -47,6 +48,7 @@ def get_job_template_by_name(opts, options, filter_by_name):
         next_url = json_results['next']
 
     return None
+
 
 def get_job_template_by_project(opts, options, filter_by_project, template_pattern):
     """
@@ -81,6 +83,7 @@ def get_job_template_by_project(opts, options, filter_by_project, template_patte
 
     return result_templates
 
+
 def project_pattern_match(results, project_pattern):
     """
     Return projects which match the project pattern. No pattern specified returns all projects
@@ -93,9 +96,20 @@ def project_pattern_match(results, project_pattern):
         # convert wildcard "*" to regex format ".*"
         pattern = project_pattern.replace("*", ".*")
         compiled = re.compile(pattern)
-        return [project for project in results if compiled.match(project['summary_fields']['project']['name'])]
+
+        # previous code
+        # return [project for project in results if compiled.match(project['summary_fields']['project']['name'])]
+        # latest fix
+        pro_list = []
+        for project in results:
+            pro_name = project.get("summary_fields", {}).get("project", {}).get("name", None)
+            if pro_name:
+                if compiled.match(pro_name):
+                    pro_list.append(project)
+        return pro_list
 
     return results
+
 
 def template_pattern_match(results, template_pattern):
     """
@@ -113,6 +127,7 @@ def template_pattern_match(results, template_pattern):
 
     return results
 
+
 def make_extra_vars(arguments):
     """
     convert from name=value;name=value into dictionary
@@ -128,6 +143,7 @@ def make_extra_vars(arguments):
 
     return extra_vars
 
+
 def get_common_request_items(options):
     """
     return basic auth and cafile information
@@ -139,6 +155,7 @@ def get_common_request_items(options):
 
     return basic_auth, cafile
 
+
 def save_as_attachment(res_client, incident_id, results):
     """
     save an attachment to the incident with the job results
@@ -148,10 +165,11 @@ def save_as_attachment(res_client, incident_id, results):
     :return: None
     """
     finished = results['summary']['finished'].replace('T', ' ') if results['summary']['finished'] else None
-    note = u"Job Id: {}\nStatus: {}\nTemplate Name: {}\nFinished: {}".format(results['summary']['id'], results['summary']['status'],
+    note = u"Job Id: {}\nStatus: {}\nTemplate Name: {}\nFinished: {}".format(results['summary']['id'],
+                                                                             results['summary']['status'],
                                                                              results['summary']['name'], finished)
     note = u"{0}{1}".format(note, u"\n".join(event.get("stdout") for event in results['events']['results']))
-    note = re.sub(r'[\x00-\x7f]\[[0-9;]*m', r'', note) # remove color highlighting
+    note = re.sub(r'[\x00-\x7f]\[[0-9;]*m', r'', note)  # remove color highlighting
 
     if sys.version_info.major < 3:
         file_handle = io.StringIO(note)
@@ -163,6 +181,7 @@ def save_as_attachment(res_client, incident_id, results):
     attachment_json = write_file_attachment(res_client, file_name, file_handle, incident_id)
 
     return file_name, attachment_json
+
 
 def clean_url(url, leading_slash=False):
     """

@@ -73,5 +73,5 @@ class FunctionComponent(ResilientComponent):
 
             # Produce a FunctionResult with the results
             yield FunctionResult(result_payload)
-        except Exception:
-            yield FunctionError()
+        except Exception as fn_err:
+            yield FunctionError(fn_err)

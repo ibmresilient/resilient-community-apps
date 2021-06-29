@@ -11,6 +11,7 @@ from fn_ansible_tower.lib.common import SECTION_HDR, TOWER_API_BASE, get_common_
 JOBS_URL = "ad_hoc_commands/{id}/"
 EVENTS_URL = "ad_hoc_commands/{id}/events/"
 
+
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'ansible_tower_get_job_results"""
 
@@ -79,5 +80,5 @@ class FunctionComponent(ResilientComponent):
 
             # Produce a FunctionResult with the results
             yield FunctionResult(result_payload)
-        except Exception:
-            yield FunctionError()
+        except Exception as fn_err:
+            yield FunctionError(fn_err)

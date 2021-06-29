@@ -14,6 +14,7 @@ from fn_ansible_tower.lib.common import SECTION_HDR, TOWER_API_BASE, get_common_
 JOBS_URL = "jobs/"
 EVENTS_URL = "jobs/{id}/job_events/"
 
+
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'ansible_tower_list_jobs"""
 
@@ -33,7 +34,7 @@ class FunctionComponent(ResilientComponent):
     def _ansible_tower_list_jobs_function(self, event, *args, **kwargs):
         """Function: get all jobs, using criteria to filter if present"""
         try:
-            validate_fields(("url"), self.options) # validate key app.config settings
+            validate_fields(("url"), self.options)  # validate key app.config settings
 
             # Get the function parameters:
             tower_job_status_list = self.get_select_param(kwargs.get("tower_job_status"))  # multi-select
@@ -51,7 +52,6 @@ class FunctionComponent(ResilientComponent):
             result = ResultPayload(SECTION_HDR, **kwargs)
             rc = RequestsCommon(self.opts, self.options)
 
-            # PUT YOUR FUNCTION IMPLEMENTATION CODE HERE
             yield StatusMessage("starting...")
             job_results = []
             url = "/".join((clean_url(self.options['url']), TOWER_API_BASE, JOBS_URL))
@@ -69,14 +69,14 @@ class FunctionComponent(ResilientComponent):
                     url = "/".join((clean_url(self.options.get('url')), next_url)).replace("//api", "/api")
                 else:
                     url = None
-
             result_payload = result.done(True, job_results)
             yield StatusMessage("done...")
 
             # Produce a FunctionResult with the results
             yield FunctionResult(result_payload)
-        except Exception:
-            yield FunctionError()
+        except Exception as fun_err:
+            yield FunctionError(fun_err)
+
 
 def get_paged_jobs(rc, url, basic_auth, cafile, tower_job_status_list, last_update_epoch):
     """
@@ -148,13 +148,13 @@ def convert_job_search_time(search_time):
             raise ValueError("Positive value required: %s", delta)
 
         if units in ("minute", "minutes"):
-            delta = delta*60 # convert minutes to seconds
+            delta = delta * 60  # convert minutes to seconds
         elif units in ("hour", "hours"):
-            delta = delta*60*60 # convert hours to seconds
+            delta = delta * 60 * 60  # convert hours to seconds
         elif units in ("day", "days"):
-            delta = delta*60*60*24 # convert days to seconds
+            delta = delta * 60 * 60 * 24  # convert days to seconds
         elif units in ("week", "weeks"):
-            delta = delta*60*60*24*7 # convert weeks to seconds
+            delta = delta * 60 * 60 * 24 * 7  # convert weeks to seconds
         else:
             raise ValueError("Unrecognized time frame: %s", units)
 
