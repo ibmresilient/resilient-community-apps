@@ -63,6 +63,7 @@ class FunctionComponent(ResilientComponent):
             else:
                 StatusMessage("No query results found")
             yield StatusMessage("Complete...")
+
             results = results_payload.done(True, \
                 nw_query_results.json() if nw_query_results else None)
             log.debug("RESULTS: %s", results)
@@ -73,11 +74,11 @@ class FunctionComponent(ResilientComponent):
             yield FunctionError(error)
 
 
-def query_netwitness(url, user, pw, cafile, query, req_common, size=""):
-    headers = get_headers(user, pw)
+def query_netwitness(url, user, passw, cafile, query, req_common, size=""):
+    headers = get_headers(user, passw)
     if size:
         size = "&size={}".format(size)
-    request_url = "{}/sdk?msg=query&query={}&\
-        force-content-type=application/json{}".format(url, query, size)
+    request_url = "{}/sdk?msg=query&query={}&force-content-type=application/json{}"\
+        .format(url, query, size)
 
     return req_common.execute_call_v2("GET", request_url, verify=cafile, headers=headers)

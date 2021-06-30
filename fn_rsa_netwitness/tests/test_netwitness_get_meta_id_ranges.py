@@ -20,7 +20,8 @@ def call_netwitness_get_meta_id_ranges_function(circuits, function_params, timeo
     # Fire a message to the function
     evt = SubmitTestFunction("netwitness_get_meta_id_ranges", function_params)
     circuits.manager.fire(evt)
-    event = circuits.watcher.wait("netwitness_get_meta_id_ranges_result", parent=evt, timeout=timeout)
+    event = circuits.watcher.wait("netwitness_get_meta_id_ranges_result",\
+        parent=evt, timeout=timeout)
     assert event
     assert isinstance(event.kwargs["result"], FunctionResult)
     pytest.wait_for(event, "complete", True)
@@ -39,7 +40,8 @@ class TestNetwitnessGetMetaIdRanges:
     @pytest.mark.parametrize("nw_session_id1, nw_session_id2, nw_results_size, expected_results", [
         (23787, 23983, 10, {"value": "xyz"})
     ])
-    def test_success(self, circuits_app, nw_session_id1, nw_session_id2, nw_results_size, expected_results):
+    def test_success(self, circuits_app, nw_session_id1, nw_session_id2,\
+        nw_results_size, expected_results):
         """ Test calling with sample values for the parameters """
         function_params = {
             "nw_session_id1": nw_session_id1,
@@ -48,3 +50,4 @@ class TestNetwitnessGetMetaIdRanges:
         }
         results = call_netwitness_get_meta_id_ranges_function(circuits_app, function_params)
         assert results.get("content") is not None
+        

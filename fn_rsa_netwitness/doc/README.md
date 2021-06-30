@@ -14,7 +14,7 @@ The RSA NetWitness functions query for metadata and return pcap and log files fo
 
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.1.1 | 6/2021 | Bug fix for json logs output, updated execute_call to execute_call_v2, fix for convert_to_nw_time, fix for create_tmp_file |
+| 1.1.1 | 6/2021 | Bug fix for json logs output, updated execute_call to execute_call_v2, fix for convert_to_nw_time, removed create_tmp_file, fixed workflow scripts for all action functions |
 | 1.1.0 | 3/2020 | Initial commit | 
 
 ---

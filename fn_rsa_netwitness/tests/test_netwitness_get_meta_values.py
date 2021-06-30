@@ -39,7 +39,8 @@ class TestNetwitnessGetMetaValues:
     @pytest.mark.parametrize("nw_meta_id1, nw_meta_id2, nw_results_size, expected_results", [
         (23489798, 2349832, 10, {"value": "xyz"})
     ])
-    def test_success(self, circuits_app, nw_meta_id1, nw_meta_id2, nw_results_size, expected_results):
+    def test_success(self, circuits_app, nw_meta_id1, nw_meta_id2,\
+        nw_results_size, expected_results):
         """ Test calling with sample values for the parameters """
         function_params = {
             "nw_meta_id1": nw_meta_id1,

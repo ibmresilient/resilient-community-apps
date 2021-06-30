@@ -2,27 +2,17 @@
 # pragma pylint: disable=unused-argument, no-self-use
 # Copyright © IBM Corporation 2010, 2019
 
+"""Helper functions for Resilient circuits Functions supporting NetWitness integration"""
+
 import logging
 import base64
 import datetime
-import sys
-if sys.version_info.major < 3:
-    from StringIO import StringIO
-    from io import BytesIO
-else:
-    from io import StringIO, BytesIO
 
 
 log = logging.getLogger(__name__)
 
-
-def create_tmp_file(contents):
-    if isinstance(contents, bytes):
-        return BytesIO(contents)
-
-    return StringIO(contents)
-
 def get_headers(username, password):
+    """Formats the header to contain username and password variables """
     login_string = "{}:{}".format(username, password)
 
     # Python 2.7 and 3.6 support
@@ -37,9 +27,8 @@ def get_headers(username, password):
 
     return headers
 
-
-# Converts Resilient epoch time to time format for NetWitness server
 def convert_to_nw_time(resilient_time):
+    """Converts Resilient epoch time to time format for NetWitness server"""
     time = resilient_time/1000
 
     return datetime.datetime.fromtimestamp(time).strftime('%Y-%b-%d %H:%M:%S')

@@ -4,6 +4,7 @@
 """Function implementation"""
 
 import logging
+import json
 from resilient_circuits import ResilientComponent, function, handler, \
     StatusMessage, FunctionResult, FunctionError
 from resilient_lib import validate_fields, ResultPayload, RequestsCommon
@@ -65,8 +66,10 @@ class FunctionComponent(ResilientComponent):
             else:
                 yield StatusMessage("No meta ID ranges found")
             yield StatusMessage("Complete...")
-            results = results_payload.done(True,
-                                           nw_query_metadata.json() if nw_query_metadata else None)
+
+            nw_query_metadata_json = json.dumps(nw_query_metadata, indent = 4)
+            results = results_payload.done(True,\
+                nw_query_metadata_json if nw_query_metadata else None)
             log.debug("RESULTS: %s", results)
 
             # Produce a FunctionResult with the results
@@ -75,11 +78,11 @@ class FunctionComponent(ResilientComponent):
             yield FunctionError(error)
 
 
-def get_meta_values(url, user, pw, cafile, id1, id2, req_common, size=""):
-    headers = get_headers(user, pw)
+def get_meta_values(url, user, passw, cafile, id1, id2, req_common, size=""):
+    headers = get_headers(user, passw)
     if size:
         size = "&size={}".format(size)
-    request_url = "{}/sdk?msg=query&force-content-type=application/\
-        json&id1={}&id2={}&query=select%20*{}".format(url, id1, id2, size)
+    request_url = "{}/sdk?msg=query&force-content-type=application/"\
+        "json&id1={}&id2={}&query=select%20*{}".format(url, id1, id2, size)
 
-    return req_common.execute_call_v2("GET", request_url, verify=cafile, headers=headers)
+    return req_common.execute_call_v2("GET", request_url, verify=cafile, headers=headers).json()

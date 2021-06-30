@@ -75,8 +75,8 @@ class FunctionComponent(ResilientComponent):
             yield FunctionError(error)
 
 
-def get_meta_id_ranges(url, user, pw, cafile, id1, id2, req_common, size=""):
-    headers = get_headers(user, pw)
+def get_meta_id_ranges(url, user, passw, cafile, id1, id2, req_common, size=""):
+    headers = get_headers(user, passw)
     if size:
         size = "&size={}".format(size)
     request_url = "{}/sdk?msg=session&id1={}&id2={}&force-content-type=application/json{}" \

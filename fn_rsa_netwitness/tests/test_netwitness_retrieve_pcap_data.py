@@ -20,7 +20,8 @@ def call_netwitness_retrieve_pcap_data_function(circuits, function_params, timeo
     # Fire a message to the function
     evt = SubmitTestFunction("netwitness_retrieve_pcap_data", function_params)
     circuits.manager.fire(evt)
-    event = circuits.watcher.wait("netwitness_retrieve_pcap_data_result", parent=evt, timeout=timeout)
+    event = circuits.watcher.wait("netwitness_retrieve_pcap_data_result",\
+        parent=evt, timeout=timeout)
     assert event
     assert isinstance(event.kwargs["result"], FunctionResult)
     pytest.wait_for(event, "complete", True)
@@ -36,11 +37,13 @@ class TestNetwitnessRetrievePcapData:
         assert func is not None
 
     @pytest.mark.livetest
-    @pytest.mark.parametrize("nw_event_session_ids, incident_id, nw_start_time, nw_end_time, expected_results", [
+    @pytest.mark.parametrize("nw_event_session_ids, incident_id, nw_start_time,"\
+        "nw_end_time, expected_results", [
         ("32987239, 2398793287", 3252, "", "", {"value": "xyz"}),
         ("", 3252, 1545157725000, 1545158725000, {"value": "xyz"})
     ])
-    def test_success(self, circuits_app, nw_event_session_ids, incident_id, nw_start_time, nw_end_time, expected_results):
+    def test_success(self, circuits_app, nw_event_session_ids, incident_id, nw_start_time,\
+        nw_end_time, expected_results):
         """ Test calling with sample values for the parameters """
         function_params = {
             "nw_event_session_ids": nw_event_session_ids,

@@ -127,7 +127,15 @@ class FunctionComponent(ResilientComponent):
                 else:
                     datastream = BytesIO(results["content"].encode("utf-8"))
 
-                write_file_attachment(rest_client, attachment_name, datastream, incident_id, None)
+                # Check for log file size
+                # (if over 25MB, no log file will be attached and a note will
+                # be added in the workflow post-process)
+                log_size = datastream.getbuffer().nbytes / (1024 ** 2)
+                if log_size > 25:
+                    results["content"] = "Attachment exceeds the maximum size of 25 MB"
+                else:
+                    write_file_attachment(rest_client, attachment_name,\
+                        datastream, incident_id, None)
 
             yield StatusMessage("Done...")
 
@@ -137,14 +145,14 @@ class FunctionComponent(ResilientComponent):
             yield FunctionError(error)
 
 
-def get_nw_session_logs_file(url, user, pw, cafile, time1, time2,
+def get_nw_session_logs_file(url, user, passw, cafile, time1, time2,
                              req_common, render_format, resp_type="text"):
 
-    headers = get_headers(user, pw)
+    headers = get_headers(user, passw)
     request_url = "{}/sdk/packets?time1={}&time2={}&render={}"\
         .format(url, time1, time2, render_format)
 
-    resp = req_common.execute_call_v2("GET", request_url, verify=cafile, headers=headers)
+    resp = req_common.execute_call_v2("GET", request_url, timeout=300, verify=cafile, headers=headers)
 
     if resp_type == 'json':
         return resp.json()
