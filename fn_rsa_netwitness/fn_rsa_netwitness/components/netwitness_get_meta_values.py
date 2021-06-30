@@ -4,7 +4,6 @@
 """Function implementation"""
 
 import logging
-import json
 from resilient_circuits import ResilientComponent, function, handler, \
     StatusMessage, FunctionResult, FunctionError
 from resilient_lib import validate_fields, ResultPayload, RequestsCommon
@@ -67,9 +66,8 @@ class FunctionComponent(ResilientComponent):
                 yield StatusMessage("No meta ID ranges found")
             yield StatusMessage("Complete...")
 
-            nw_query_metadata_json = json.dumps(nw_query_metadata, indent = 4)
             results = results_payload.done(True,\
-                nw_query_metadata_json if nw_query_metadata else None)
+                nw_query_metadata if nw_query_metadata else None)
             log.debug("RESULTS: %s", results)
 
             # Produce a FunctionResult with the results
