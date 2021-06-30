@@ -3,3 +3,4 @@ include fn_rsa_netwitness/util/*
 include fn_rsa_netwitness/LICENSE
 include doc/*
 include fn_rsa_netwitness/components
+include data/*
