@@ -86,22 +86,15 @@ class FunctionComponent(ResilientComponent):
 
             results = results_payload.done(True, {})
 
-            # Check for PCAP file size
-            # (if over 25MB, no log file will be attached and a note will
-            # be added in the workflow post-process)
-            file_size = len(pcap_file) / (1024 ** 2)
-            if file_size > 25:
-                results['content'] = "Attachment exceeds the maximum size of 25 MB"
+            if sys.version_info.major < 3:
+                datastream = StringIO(pcap_file)
             else:
-                if sys.version_info.major < 3:
-                    datastream = StringIO(pcap_file)
-                else:
-                    datastream = BytesIO(pcap_file)
-                log.debug("pcap_file: %s", pcap_file)
+                datastream = BytesIO(pcap_file)
+            log.debug("pcap_file: %s", pcap_file)
 
-                write_file_attachment(rest_client, file_name, datastream, incident_id, None)
-                yield StatusMessage("PCAP file added as attachment to Incident {}"\
-                    .format(str(incident_id)))
+            write_file_attachment(rest_client, file_name, datastream, incident_id, None)
+            yield StatusMessage("PCAP file added as attachment to Incident {}"\
+                .format(str(incident_id)))
 
             yield StatusMessage("Done...")
             log.debug("RESULTS: %s", results)
