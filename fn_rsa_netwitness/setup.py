@@ -14,7 +14,7 @@ setup(
     long_description="Resilient Circuits Components to query for"\
         "NetWitness metadata and retrieve pcap/log data 'fn_rsa_netwitness'",
     install_requires=[
-        'resilient_circuits>=30.0.0',
+        'resilient_circuits>=41.0.0',
         'resilient-lib>=32.0.0; python_version<"3"',
         'pytz'
     ],

@@ -83,4 +83,4 @@ def get_meta_values(url, user, passw, cafile, id1, id2, req_common, size=""):
     request_url = "{}/sdk?msg=query&force-content-type=application/"\
         "json&id1={}&id2={}&query=select%20*{}".format(url, id1, id2, size)
 
-    return req_common.execute_call_v2("GET", request_url, verify=cafile, headers=headers).json()
+    return req_common.execute("GET", request_url, verify=cafile, headers=headers).json()

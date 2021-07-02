@@ -90,7 +90,7 @@ class FunctionComponent(ResilientComponent):
                 datastream = StringIO(pcap_file)
             else:
                 datastream = BytesIO(pcap_file)
-            log.debug("pcap_file: %s", pcap_file)
+            log.debug("pcap_file: %s", pcap_file[1000:])
 
             write_file_attachment(rest_client, file_name, datastream, incident_id, None)
             yield StatusMessage("PCAP file added as attachment to Incident {}"\
@@ -109,11 +109,11 @@ def get_nw_session_pcap_file(url, user, passw, cafile, event_session_id, req_com
     headers = get_headers(user, passw)
     request_url = "{}/sdk/packets?sessions={}&render=pcap".format(url, event_session_id)
 
-    return req_common.execute_call_v2("GET", request_url, verify=cafile, headers=headers).content
+    return req_common.execute("GET", request_url, verify=cafile, headers=headers).content
 
 
 def get_nw_session_pcap_file_time(url, user, passw, cafile, start_time, end_time, req_common):
     headers = get_headers(user, passw)
     request_url = "{}/sdk/packets?time1={}&time2={}&render=pcap".format(url, start_time, end_time)
 
-    return req_common.execute_call_v2("GET", request_url, verify=cafile, headers=headers).content
+    return req_common.execute("GET", request_url, verify=cafile, headers=headers).content

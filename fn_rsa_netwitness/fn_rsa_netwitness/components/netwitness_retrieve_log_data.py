@@ -145,7 +145,7 @@ def get_nw_session_logs_file(url, user, passw, cafile, time1, time2,
     request_url = "{}/sdk/packets?time1={}&time2={}&render={}"\
         .format(url, time1, time2, render_format)
 
-    resp = req_common.execute_call_v2("GET", request_url, verify=cafile, headers=headers)
+    resp = req_common.execute("GET", request_url, verify=cafile, headers=headers)
 
     if resp_type == 'json':
         return resp.json()
