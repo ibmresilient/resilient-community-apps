@@ -15,7 +15,6 @@ setup(
         "NetWitness metadata and retrieve pcap/log data 'fn_rsa_netwitness'",
     install_requires=[
         'resilient_circuits>=41.1.0',
-        'python_version<"3"',
         'pytz'
     ],
     packages=find_packages(),
