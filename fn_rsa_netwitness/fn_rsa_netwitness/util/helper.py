@@ -19,13 +19,11 @@ def get_headers(username, password):
     base64_login = base64.b64encode(str.encode(login_string))
     str_base64_login = base64_login.decode("utf-8")
 
-    headers = {
+    return {
         "Authorization": "Basic {}".format(str_base64_login),
         "Content-Type": "application/x-www-form-urlencoded",
         "Cache-Control": "no-cache"
     }
-
-    return headers
 
 def convert_to_nw_time(resilient_time):
     """Converts Resilient epoch time to time format for NetWitness server"""

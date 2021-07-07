@@ -67,3 +67,4 @@ def customization_data(client=None):
     with io.open(res_file, mode='rt') as f:
         b64_data = base64.b64encode(f.read().encode('utf-8'))
         yield ImportDefinition(b64_data)
+        
