@@ -34,8 +34,17 @@
   Specify all changes in this release. Do not remove the release 
   notes of a previous release
 -->
-### v1.0.0
-* Initial Release
+## Release Notes
+<!--
+  Specify all changes in this release. Do not remove the release 
+  notes of a previous release
+-->
+### Release History
+
+| Version | Date | Notes |
+| ------- | ---- | ----- |
+| 1.0.1 | 6/2021 | Incorrect bool to string value fix |
+| 1.0.0  | 11/2020 | Initial Release |
 
 ---
 

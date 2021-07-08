@@ -30,10 +30,10 @@ fn_anomali_staxx
 fn_ansible
 fn_ansible_tower
 fn_apility
+fn_api_void
 fn_aws_iam
 fn_aws_utilities
 fn_bigfix
-fn_bluecoat_site_review
 fn_calendar_invite
 fn_cb_protection
 fn_cisco_amp4ep
@@ -66,7 +66,6 @@ fn_html2pdf
 fn_icdx
 fn_incident_utils
 fn_ioc_parser_v2
-fn_ip_void
 fn_ipinfo
 fn_isitphishing
 fn_jira
@@ -101,8 +100,6 @@ fn_qradar_advisor
 fn_qradar_enhanced_data
 fn_qradar_integration
 fn_query_tor_network
-fn_res_to_icd
-fn_risk_fabric
 fn_rsa_netwitness
 fn_scheduler
 fn_secureworks_ctp
@@ -119,7 +116,6 @@ fn_thug
 fn_twilio
 fn_twitter_most_popular
 fn_url_to_dns
-fn_url_void
 fn_urlhaus
 fn_urlscanio
 fn_utilities
