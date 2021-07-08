@@ -82,7 +82,6 @@ fn_whois
 fn_whois_rdap
 fn_xforce
 fn_zia
-sc_email_parser
 
 #Not_Rebuilt
 #fn_aws_guardduty-failing-test
