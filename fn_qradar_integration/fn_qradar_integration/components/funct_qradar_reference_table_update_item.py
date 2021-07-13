@@ -64,7 +64,7 @@ class FunctionComponent(ResilientComponent):
 
             result = qradar_client.update_ref_table_element(qradar_reference_table_name, qradar_reference_table_item_inner_key, qradar_reference_table_item_outer_key, qradar_reference_table_item_value)
             
-            status_code = bool(result['status_code'] < 300)
+            status_code = bool(result.get('status_code', False) < 300)
             reason = None if status_code else result['content'].get('message', None)
             results = rp.done(success=status_code,
                               content=result,
