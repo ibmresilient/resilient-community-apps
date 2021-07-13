@@ -68,7 +68,8 @@ class FunctionComponent(ResilientComponent):
                                                          qradar_reference_table_item_inner_key,
                                                          qradar_reference_table_item_outer_key,
                                                          qradar_reference_table_item_value)
-            
+
+            # Tests if there is a status code
             status_code = bool(result.get('status_code', False) < 300)
             reason = None if status_code else result['content'].get('message', None)
             results = rp.done(success=status_code,

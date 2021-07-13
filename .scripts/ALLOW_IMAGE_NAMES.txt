@@ -86,7 +86,6 @@ fn_zia
 
 #Not_Rebuilt
 #fn_aws_guardduty-failing-test
-#fn_qradar_integration-failing-test-still-root-group
 #fn_crowdstrike_falcon-still-root-group
 #fn_odbc_query-still-root-group
 #rc-data-feed
