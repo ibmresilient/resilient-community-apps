@@ -33,6 +33,7 @@
 
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 2.0.6   | 7/2021 | pin dependency 'chardet' at v4.0.0 |
 | 2.0.2   | 2/2021 | bug fixes for Shell Command |
 | 2.0.1   | 9/2020 | bug fixes|
 | 2.0.0   | 7/2020 | Numerous fixes, improved Rules and workflows and only Python 3 supported |
