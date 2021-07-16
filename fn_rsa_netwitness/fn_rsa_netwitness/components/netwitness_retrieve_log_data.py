@@ -147,6 +147,11 @@ def get_nw_session_logs_file(url, user, passw, cafile, time1, time2,
 
     resp = req_common.execute_call_v2("GET", request_url, verify=cafile, headers=headers)
 
+    r = resp.text
+
+    if r == '</Logs>\n' or r == '\n]}\n':
+        return ''
+
     if resp_type == 'json':
         return resp.json()
 
