@@ -11,13 +11,16 @@ def config_section_data():
     """Produce the default configuration section for app.config,
        when called by `resilient-circuits config [-c|-u]`
     """ 
-    config_data = u"""[fn_outbound_email]
+    return u"""[fn_outbound_email]
 # SMTP SERVER (IP ADDRESS or FQDN)
 smtp_server=xxx.xxx.xxx.xxx
 
 #Blank for initial selftest, both required for TLS 
 smtp_user=
 smtp_password=
+
+#If smtp_user is not an email address then smtp_user_email should equal the email address
+smtp_user_email
 
 # SMTP PORT NUMBER, 25 or 587/2525
 smtp_port=25
@@ -36,4 +39,3 @@ smtp_ssl_cafile=
 # template_file=data/example_send_email.jinja
 template_file=data/example_send_email.jinja
     """
-    return config_data

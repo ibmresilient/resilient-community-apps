@@ -20,6 +20,7 @@
 ```python
 inputs.mail_to = rule.properties.mail_to
 inputs.mail_cc = rule.properties.mail_cc
+inputs.mail_attachments = rule.properties.mail_attachments
 inputs.mail_incident_id = incident.id
 inputs.mail_from = "changeme@resilientsystems.com"
 inputs.mail_subject = u"[{0}] {1}".format(incident.id, incident.name)
