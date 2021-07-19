@@ -40,7 +40,7 @@
 
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| v1.3.0 | 7/2021 | Username u=in app.config does not need to be an email |
+| v1.3.0 | 7/2021 | Username in app.config does not need to be an email |
 | v1.2.1  | 5/2021 | Bug fix for python 2 |
 | v1.2.0  | 4/2021 | Added capability for task attachments |
 | v1.1.1  | 2/2021 | Bug fixes associated with sending attachments |
