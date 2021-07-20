@@ -19,8 +19,8 @@ smtp_server=xxx.xxx.xxx.xxx
 smtp_user=
 smtp_password=
 
-#If smtp_user is not an email address then smtp_user_email should equal the email address
-smtp_user_email
+#If smtp_user is not an email address then from_email_address should equal the email address
+from_email_address=
 
 # SMTP PORT NUMBER, 25 or 587/2525
 smtp_port=25

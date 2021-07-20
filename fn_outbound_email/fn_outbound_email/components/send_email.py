@@ -32,7 +32,6 @@ class FunctionComponent(ResilientComponent):
 
         self.template_file_path = self.smtp_config_section.get('template_file')
         self.smtp_user = self.smtp_config_section.get("smtp_user")
-        self.smtp_user_email = self.smtp_config_section.get("smtp_user_email")
 
         if self.template_file_path and not os.path.exists(self.template_file_path):
             LOG.error(u"Template file '%s' not found.", self.template_file_path)
