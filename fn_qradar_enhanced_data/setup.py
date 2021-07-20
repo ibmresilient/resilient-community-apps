@@ -29,7 +29,7 @@ setup(
 
     install_requires=[
         'resilient_circuits>=30.0.0',
-        'resilient_lib>=39.0'
+        'resilient_lib>=39.0,<41.0'
     ],
     packages=find_packages(),
     include_package_data=True,
