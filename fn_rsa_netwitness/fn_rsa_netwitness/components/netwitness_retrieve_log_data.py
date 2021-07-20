@@ -43,9 +43,10 @@ class FunctionComponent(ResilientComponent):
     def _netwitness_retrieve_log_data(self, event, *args, **kwargs):
         """Function: Returns back either a log file from Netwitness."""
         try:
-            yield StatusMessage("Retrieving logs...")
             # Get the function parameters:
             nw_data_format = self.get_select_param(kwargs.get("nw_data_format"))  # select
+
+            yield StatusMessage("Retrieving "+str(nw_data_format)+"logs...")
 
             nw_start_time = kwargs.get("nw_start_time")  # int
             if nw_start_time is None:
