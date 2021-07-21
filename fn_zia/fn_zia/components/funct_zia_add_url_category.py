@@ -70,7 +70,9 @@ class FunctionComponent(ResilientComponent):
                 "response": ziacli.add_url_category(**params)
             }
 
-            result["activation"] = ziacli.activate(activate)
+            if not result["response"].get("error_code", False):
+                # Only attempt activation if main request didn't return an error.
+                result["activation"] = ziacli.activate(activate)
 
             yield StatusMessage("Finished '{0}' that was running in workflow '{1}'".format(FN_NAME, wf_instance_id))
 
