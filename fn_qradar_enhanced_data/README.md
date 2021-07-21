@@ -21,13 +21,14 @@
 - [Overview](#overview)
   - [Key Features](#key-features)
 - [Requirements](#requirements)
-  - [Resilient platform](#resilient-platform)
+  - [SOAR platform](#resilient-platform)
   - [Cloud Pak for Security](#cloud-pak-for-security)
   - [Proxy Server](#proxy-server)
   - [QRadar Requirements](#qradar-requirements)
 - [Installation](#installation)
   - [Install](#install)
   - [App Configuration](#app-configuration)
+  - [MSSP Configuration](#mssp-configuration)
   - [Custom Layouts](#custom-layouts)
 - [Function - QRadar Offense Summary](#function---qradar-offense-summary)
 - [Function - QRadar Top Events](#function---qradar-top-events)
@@ -35,12 +36,15 @@
 - [Script - Create Artifact from Source IP info](#script---create-artifact-from-source-ip-info)
 - [Script - Create Artifact from Events info](#script---create-artifact-from-events-info)
 - [Script - Create Artifact from Assets info](#script---create-artifact-from-assets-info)
+- [Script - Create Artifact from Flows info](#script---create-artifact-from-flows-info)
 - [Data Table - QR Destination IPs (First 10 Events)](#data-table---qr-destination-ips-first-10-events)
 - [Data Table - QR Triggered Rules](#data-table---qr-triggered-rules)
 - [Data Table - QR Categories](#data-table---qr-categories)
 - [Data Table - QR Assets](#data-table---qr-assets)
 - [Data Table - QR Source IPs (First 10 Events)](#data-table---qr-source-ips-first-10-events)
 - [Data Table - QR Events (First 10 Events)](#data-table---qr-events-first-10-events)
+- [Data Table - QR Flows](#data-table---qr-flows)
+
 - [Custom Fields](#custom-fields)
 - [Rules](#rules)
 - [Troubleshooting & Support](#troubleshooting--support)
@@ -54,6 +58,7 @@
 | Version | Date | Notes |
 | ------- | ---- | ----- |
 | 1.0.0 | 12/2020 | Initial Release |
+| 1.1.0 | 07/2021 | Support for Flows and QRoc |
 
 ---
 
@@ -80,17 +85,17 @@ This app fetches the data associated with the Qradar Offense and provides live l
 <!--
   List any Requirements 
 -->
-This app supports the IBM Resilient SOAR Platform and the IBM Cloud Pak for Security.
+This app supports the IBM SOAR Platform and the IBM Cloud Pak for Security.
 
-### Resilient platform
-The Resilient platform supports two app deployment mechanisms, App Host and integration server.
+### SOAR platform
+The SOAR platform supports two app deployment mechanisms, App Host and integration server.
 
-If deploying to a Resilient platform with an App Host, the requirements are:
-* Resilient platform >= `37.0.5832`.
+If deploying to a SOAR platform with an App Host, the requirements are:
+* SOAR platform >= `37.0.5832`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
-If deploying to a Resilient platform with an integration server, the requirements are:
-* Resilient platform >= `37.0.5832`.
+If deploying to a SOAR platform with an integration server, the requirements are:
+* SOAR platform >= `37.0.5832`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient_circuits>=30.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions: 
@@ -100,12 +105,12 @@ If deploying to a Resilient platform with an integration server, the requirement
   | Function | Read |
   | Layouts | Read , Edit |
 
-The following Resilient platform guides provide additional information: 
+The following SOAR platform guides provide additional information: 
 * _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
 
-The above guides are available on the IBM Knowledge Center at [ibm.biz/resilient-docs](https://ibm.biz/resilient-docs). On this web page, select your Resilient platform version. On the follow-on page, you can find the _App Host Deployment Guide_ or _Integration Server Guide_ by expanding **Resilient Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
+The above guides are available on the IBM Knowledge Center at [ibm.biz/resilient-docs](https://ibm.biz/resilient-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _App Host Deployment Guide_ or _Integration Server Guide_ by expanding **SOAR Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
 ### Cloud Pak for Security
 If you are deploying to IBM Cloud Pak for Security, the requirements are:
@@ -130,7 +135,7 @@ The app works with QRadar 7.4.0 or higher and requires the QRadar Analayst Workf
 ## Installation
 
 ### Install
-* To install or uninstall an App or Integration on the _Resilient platform_, see the documentation at [ibm.biz/resilient-docs](https://ibm.biz/resilient-docs).
+* To install or uninstall an App or Integration on the _SOAR platform_, see the documentation at [ibm.biz/resilient-docs](https://ibm.biz/resilient-docs).
 * To install or uninstall an App on _IBM Cloud Pak for Security_, see the documentation at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs) and follow the instructions above to navigate to Orchestration and Automation.
 
 ### App Configuration
@@ -142,8 +147,13 @@ The following table provides the settings you need to configure the app. These s
 | **username** | Yes | `admin` | *QRadar account username.* |
 | **qradarpassword** | Yes | `password` | *Password associated with the QRadar account username* |
 | **qradartoken** | Yes | `cb971c75-b2f9-4445-aaae-xxxxxxxxxxxx` | *SEC Token generated in QRadar* |
-| **verify_cert** | No | `/path/to/cert` | *Path to certificate or specify `false` if using self signed certificate* |
+| **verify_cert** | Yes | `/path/to/cert` | *Path to certificate or specify `false` if using self signed certificate* |
 | **search_timeout** | No | `300` | *Timeout for the AQL search to be specified in seconds* |
+
+### MSSP Configuration
+
+For this app, Circuits needs to be run on the config org so that the tab is created in the config org via an API call and then afterwards, the config push is run to push to the child orgs.
+
 ### Custom Layouts
 <!--
   Use this section to provide guidance on where the user should add any custom fields and data tables.
@@ -569,7 +579,53 @@ for type in artifact_types:
 </details>
 
 ---
+## Script - Create Artifact from Flows info
+Create artifact from the Flows info of the selected row.
 
+**Object:** qr_flows
+
+<details><summary>Script Text:</summary>
+<p>
+
+```python
+#
+# We create artifacts according to how they can be mapped to
+# Resilient default artifacts. If you have custom artifacts, and would like
+# to map them as well, please modify the following mapping dict.
+#
+
+type_mapping = {
+    "Source IP": "IP Address",
+    "Destination IP": "IP Address",
+    "Source Port": "Port",
+    "Destination Port": "Port"
+
+}
+
+import re
+
+
+artifact_types = rule.properties.select_to_create_artifact_from_flows_info
+
+for type in artifact_types:
+  if type in type_mapping:
+    artifact_description = "QRadar Offense {0}".format(type)
+    if type=="Source IP":
+      incident.addArtifact(type_mapping[type],row.source_ip["content"], artifact_description)
+    elif type=="Destination IP":
+      incident.addArtifact(type_mapping[type],row.destination_ip["content"], artifact_description)
+    elif type=="Source Port":
+      incident.addArtifact(type_mapping[type],row.source_ip["content"], artifact_description)
+    elif type=="Destination Port":
+      incident.addArtifact(type_mapping[type],row.destination_ip["content"], artifact_description)
+
+
+```
+
+</p>
+</details>
+
+---
 ## Data Table - QR Destination IPs (First 10)
 The following is an example of QRadar Destination IP data table populated with the information related to Destination IPs associated with the Offense.
 
@@ -689,7 +745,29 @@ qr_offense_top_events
 | Username | `username` | `text` | - |
 
 ---
+## Data Table - QR Flows
+The following is an example of QRadar Flows data table populated with the information related to flows associated with the Offense.
 
+ ![screenshot: dt-qr-flows](./doc/screenshots/dt-qr-flows.png)
+
+#### API Name:
+qr_flows
+
+#### Columns:
+| Column Name | API Access Name | Type | Tooltip |
+| ----------- | --------------- | ---- | ------- |
+| Application | `application` | `textarea` | - |
+| Source IP | `source_ip` | `textarea` | - |
+| Source Port | `source_port` | `textarea` | - |
+| Destination IP | `destination_ip` | `textarea` | - |
+| Protocol | `protocol` | `textarea` | - |
+| First Packet Time | `first_packet_time` | `textarea` | - |
+| Source Bytes | `source_bytes` | `number` | - |
+| Source Packets | `source_packets` | `number` | - |
+| Destination Bytes | `destination_bytes` | `number` | - |
+| Destination Packets | `destination_packets` | `number` | - |
+
+---
 ## Custom Fields
 | Label | API Access Name | Type | Prefix | Placeholder | Tooltip |
 | ----- | --------------- | ---- | ------ | ----------- | ------- |
@@ -728,4 +806,4 @@ The rule, QRadar Enhanced Data, is an automatic rule that triggers when a new in
 Refer to the documentation listed in the Requirements section for troubleshooting information.
 
 ### For Support
-This is a IBM Community provided App. Please search the Community https://ibm.biz/resilientcommunity for assistance.
+This is a IBM supported App. For assistance - https://ibm.com/mysupport.
