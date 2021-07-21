@@ -27,7 +27,7 @@ def selftest_function(opts):
         smtp_cafile = smtp_config_section.get("smtp_ssl_cafile", False)
         smtp_user = smtp_config_section.get("smtp_user")
         smtp_password = smtp_config_section.get("smtp_password")
-        from_email_address = smtp_config_section.get("from_email_address", None)
+        from_email_address = smtp_config_section.get("from_email_address", smtp_user)
 
         smtp_conn_timeout = int(smtp_config_section.get("smtp_conn_timeout", SMTP_DEFAULT_CONN_TIMEOUT))
 
@@ -56,10 +56,8 @@ def selftest_function(opts):
                     raise Exception('An SMTP user has been set; the SMTP password from app.config cannot be null')
                 else:
                     smtp_connection.login(user=smtp_user, password=smtp_password)
-                    if "@" not in smtp_user and from_email_address:
-                        smtp_connection.sendmail(smtp_user, from_email_address, 'this is a test email')
-                    else:
-                        smtp_connection.sendmail(smtp_user, smtp_user, 'this is a test email')
+                    if from_email_address:
+                        smtp_connection.sendmail(from_email_address, from_email_address, 'this is a test email')
 
         return {"state": "success"}
     except Exception as err:

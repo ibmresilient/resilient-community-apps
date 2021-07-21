@@ -32,6 +32,7 @@ class FunctionComponent(ResilientComponent):
 
         self.template_file_path = self.smtp_config_section.get('template_file')
         self.smtp_user = self.smtp_config_section.get("smtp_user")
+        self.from_email_address = self.smtp_config_section.get("from_email_address", self.smtp_user)
 
         if self.template_file_path and not os.path.exists(self.template_file_path):
             LOG.error(u"Template file '%s' not found.", self.template_file_path)
@@ -47,8 +48,8 @@ class FunctionComponent(ResilientComponent):
         """Function: Send Email"""
 
         def conditional_parameters(mail_body_text):
-            if self.smtp_config_section.get("smtp_ssl_mode") == DEFAULT_TLS_SMTP and self.smtp_user is not None:
-                mail_from = self.smtp_user
+            if self.smtp_config_section.get("smtp_ssl_mode") == DEFAULT_TLS_SMTP and self.from_email_address is not None:
+                mail_from = self.from_email_address
             else:
                 mail_from = kwargs.get("mail_from")  # text
 
@@ -66,8 +67,8 @@ class FunctionComponent(ResilientComponent):
                     else:
                         jinja = True
 
-            if self.smtp_user and not kwargs.get("mail_to"):
-                mail_to = self.smtp_user
+            if self.from_email_address and not kwargs.get("mail_to"):
+                mail_to = self.from_email_address
             else:
                 mail_to = kwargs.get("mail_to")
             email_message = None
