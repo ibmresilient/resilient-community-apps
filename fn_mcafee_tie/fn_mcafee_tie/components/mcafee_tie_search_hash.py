@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright IBM Corp. 2010, 2020 - Confidential Information
+# Copyright IBM Corp. 2010, 2021 - Confidential Information
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
@@ -11,6 +11,9 @@ from dxlclient.client import DxlClient
 from dxltieclient import TieClient
 from dxltieclient.constants import HashType, ReputationProp, FileProvider, FileEnterpriseAttrib, TrustLevel, \
     FileGtiAttrib, AtdAttrib, AtdTrustLevel, EpochMixin
+from fn_mcafee_tie.lib.mcafee_tie_common import get_trust_level_value, get_mcafee_client, get_tie_client, \
+    get_mcafee_hash_type, PACKAGE_NAME
+from resilient_lib import validate_fields
 
 LOG = logging.getLogger(__name__)
 
@@ -18,40 +21,17 @@ LOG = logging.getLogger(__name__)
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'mcafee_tie_search_hash"""
 
-    config_file = "dxlclient_config"
-
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
-
-        try:
-            config = opts.get("fn_mcafee_tie").get(self.config_file)
-            if config is None:
-                LOG.error(self.config_file + " is not set. You must set this path to run this function")
-                raise ValueError(self.config_file + " is not set. You must set this path to run this function")
-
-            LOG.info("Using %s to create configuration for DxlClient", config)
-
-            # Create configuration from file for DxlClient
-            self.config = DxlClientConfig.create_dxl_config_from_file(config)
-        except AttributeError:
-            LOG.error("There is no [fn_mcafee_tie] section in the config file, "
-                      "please set that by running resilient-circuits config -u")
-            raise AttributeError("[fn_mcafee_tie] section is not set in the config file")
-
-        self.client = DxlClient(self.config)
-        self._connect_client()
-
-    def _connect_client(self):
-        # Connect client
-        if not self.client.connected:
-            self.client.connect()
-            self.tie_client = TieClient(self.client)
+        self.options = opts.get(PACKAGE_NAME, {})
+        self.client = get_mcafee_client(self.options)
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
-        self.options = opts.get("fn_mcafee_tie", {})
+        self.options = opts.get(PACKAGE_NAME, {})
+        self.client = get_mcafee_client(self.options)
 
     @function("mcafee_tie_search_hash")
     def _mcafee_tie_search_hash_function(self, event, *args, **kwargs):
@@ -60,34 +40,26 @@ class FunctionComponent(ResilientComponent):
         yield StatusMessage("Searching Hash...")
         try:
             response_dict = {}
+            validate_fields(["mcafee_tie_hash_type", "mcafee_tie_hash"], kwargs)
             # Get the function parameters:
             mcafee_tie_hash_type = kwargs.get("mcafee_tie_hash_type")  # text
-            if not mcafee_tie_hash_type:
-                yield FunctionError("mcafee_tie_hash_type is required")
             mcafee_tie_hash = kwargs.get("mcafee_tie_hash")  # text
-            if not mcafee_tie_hash:
-                yield FunctionError("mcafee_tie_hash is required")
 
-            LOG.debug("_lookup_hash started for Artifact Type {0} - Artifact Value {1}".format(
-                mcafee_tie_hash_type, mcafee_tie_hash))
+            LOG.debug("_lookup_hash started for Artifact Type {0} - Artifact Value {1}"\
+                      .format(mcafee_tie_hash_type, mcafee_tie_hash))
 
-            if mcafee_tie_hash_type == "md5":
-                resilient_hash = {HashType.MD5: mcafee_tie_hash}
-            elif mcafee_tie_hash_type == "sha1":
-                resilient_hash = {HashType.SHA1: mcafee_tie_hash}
-            elif mcafee_tie_hash_type == "sha256":
-                resilient_hash = {HashType.SHA256: mcafee_tie_hash}
-            else:
-                yield FunctionError("Something went wrong setting the hash value")
+            hash_type = get_mcafee_hash_type(mcafee_tie_hash_type)
+            if not hash_type:
+                yield FunctionError("Unknown hash_type: {}".format(mcafee_tie_hash_type))
+
+            resilient_hash = {hash_type: mcafee_tie_hash}
 
             # Make sure client is connected
-            self._connect_client()
+            tie_client = get_tie_client(self.client)
+            reputations_dict = tie_client.get_file_reputation(resilient_hash)
+            LOG.debug(reputations_dict)
 
-            reputations_dict = \
-                self.tie_client.get_file_reputation(
-                    resilient_hash
-                )
-            system_list = self.tie_client.get_file_first_references(
+            system_list = tie_client.get_file_first_references(
                 resilient_hash
             )
 

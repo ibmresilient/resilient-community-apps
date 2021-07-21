@@ -6,6 +6,7 @@ import pytest
 from mock import patch
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
+from fn_ansible_tower.lib.common import project_pattern_match
 from . import helper
 
 """
@@ -71,3 +72,31 @@ class TestAnsibleTowerListJobTemplates:
         }
         results = call_ansible_tower_list_job_templates_function(circuits_app, function_params)
         assert(len(results['content']) == expected_results)
+
+    def test_common(self):
+        test_results = [
+            {
+                "summary_fields": {
+                    "project": {
+                        "name": "aa"
+                    }
+                }
+            },
+            {
+                "summary_fields": {
+                    "project": {
+                        "name": "ab"
+                    }
+                }
+            }
+        ]
+
+        assert project_pattern_match([], None) == []
+        assert project_pattern_match([], "xx") == []
+        assert len(project_pattern_match(test_results, None)) == 2
+        assert len(project_pattern_match(test_results, "xx")) == 0
+        assert len(project_pattern_match(test_results, "aa")) == 1
+        assert len(project_pattern_match(test_results, "a*")) == 2
+        assert len(project_pattern_match(test_results, "*b")) == 1
+        assert len(project_pattern_match(test_results, "*")) == 2
+        assert len(project_pattern_match(test_results, "x*")) == 0

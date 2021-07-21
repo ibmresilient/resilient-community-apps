@@ -10,6 +10,7 @@ import shutil
 import json
 import base64
 import mailparser
+import re 
 from fn_utilities.util.utils_common import b_to_s, s_to_b
 from resilient_circuits import ResilientComponent, function, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import ResultPayload, validate_fields, get_file_attachment_metadata, get_file_attachment, write_to_tmp_file
@@ -18,6 +19,11 @@ CONFIG_DATA_SECTION = 'fn_utilities'
 EMAIL_ATTACHMENT_ARTIFACT_ID = 7
 ARTIFACT_URI = "/incidents/{0}/artifacts/files"
 
+RE_CONTENT_TYPE = re.compile("Content-Transfer-Encoding:\W+base64")
+RE_BASE64 = re.compile("^[A-Za-z0-9+/\r\n]+={0,2}$")
+RE_START_BASE64 = re.compile("\n\n")
+
+LOG = logging.getLogger(__name__)
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'email_message_parts"""
@@ -28,7 +34,6 @@ class FunctionComponent(ResilientComponent):
         Any attachments found are added to the Incident as Artifacts if 'utilities_parse_email_attachments' is set to True"""
 
         try:
-            log = logging.getLogger(__name__)
 
             # Set variables
             parsed_email = path_tmp_file = path_tmp_dir = reason = results = None
@@ -42,11 +47,10 @@ class FunctionComponent(ResilientComponent):
             # If its just base64content as input, use parse_from_string
             if fn_inputs.get("base64content"):
                 yield StatusMessage("Processing provided base64content")
-                parsed_email = mailparser.parse_from_string(b_to_s(base64.b64decode(fn_inputs.get("base64content"))))
+                parsed_email = mailparser.parse_from_bytes(base64.b64decode(fn_inputs.get("base64content")))
                 yield StatusMessage("Provided base64content processed")
 
             else:
-
                 # Validate that either: (incident_id AND attachment_id OR artifact_id) OR (task_id AND attachment_id) is defined
                 if not (fn_inputs.get("incident_id") and (fn_inputs.get("attachment_id") or fn_inputs.get("artifact_id"))) and \
                    not (fn_inputs.get("task_id") and fn_inputs.get("attachment_id")):
@@ -73,14 +77,15 @@ class FunctionComponent(ResilientComponent):
                     attachment_id=fn_inputs.get("attachment_id")
                 )
 
-                # Write the attachment_contents to a temp file
-                path_tmp_file, path_tmp_dir = write_to_tmp_file(attachment_contents, tmp_file_name=attachment_metadata.get("name"))
-
                 # Get the file_extension
-                file_extension = os.path.splitext(path_tmp_file)[1]
+                file_extension = os.path.splitext(attachment_metadata.get("name"))[1]
 
-                if file_extension == ".msg":
+                if file_extension.lower() == ".msg":
                     yield StatusMessage("Processing MSG File")
+                    # Write the attachment_contents to a temp file
+                    path_tmp_file, path_tmp_dir = write_to_tmp_file(attachment_contents, 
+                                                                    tmp_file_name=attachment_metadata.get("name"))
+
                     try:
                         parsed_email = mailparser.parse_from_file_msg(path_tmp_file)
                         yield StatusMessage("MSG File processed")
@@ -88,18 +93,18 @@ class FunctionComponent(ResilientComponent):
                         reason = u"Could not parse {0} MSG File".format(attachment_metadata.get("name"))
                         yield StatusMessage(reason)
                         results = rp.done(success=False, content=None, reason=reason)
-                        log.error(err)
+                        LOG.error(err)
 
                 else:
-                    yield StatusMessage("Processing Raw Email File")
+                    yield StatusMessage("Processing Raw Email File: {}".format(attachment_metadata.get("name")))
                     try:
-                        parsed_email = mailparser.parse_from_file(path_tmp_file)
+                        parsed_email = mailparser.parse_from_bytes(attachment_contents)
                         yield StatusMessage("Raw Email File processed")
                     except Exception as err:
                         reason = u"Could not parse {0} Email File".format(attachment_metadata.get("name"))
                         yield StatusMessage(reason)
                         results = rp.done(success=False, content=None, reason=reason)
-                        log.error(err)
+                        LOG.error(err)
 
             if parsed_email is not None:
                 if not parsed_email.mail:
@@ -110,7 +115,8 @@ class FunctionComponent(ResilientComponent):
                 else:
                     # Load all parsed email attributes into a Python Dict
                     parsed_email_dict = json.loads(parsed_email.mail_json, encoding="utf-8")
-                    parsed_email_dict["plain_body"] = parsed_email.text_plain_json
+                    parsed_email_dict["body"] = convert_base64_encoding(parsed_email.body)
+                    parsed_email_dict["plain_body"] = ", ".join(convert_base64_encoding(parsed_email.text_plain))
                     parsed_email_dict["html_body"] = parsed_email.text_html_json
                     yield StatusMessage("Email parsed")
 
@@ -147,7 +153,7 @@ class FunctionComponent(ResilientComponent):
                 yield StatusMessage(reason)
                 results = rp.done(success=False, content=None, reason=reason)
 
-            log.info("Done")
+            LOG.info("Done")
 
             yield FunctionResult(results)
         except Exception:
@@ -157,3 +163,36 @@ class FunctionComponent(ResilientComponent):
             # Remove the tmp directory
             if path_tmp_dir and os.path.isdir(path_tmp_dir):
                 shutil.rmtree(path_tmp_dir)
+
+def decode_mail_body(value):
+    """ decode data. There's no guarantee that data is in base64"""
+    try:
+        return base64.b64decode(value)
+    except Exception:
+        return value
+
+def convert_base64_encoding(payload):
+    """ look for base64 mime type and convert the data that follows. 
+    return: payload with the base64 encoded data substituted
+    """
+    if isinstance(payload, list):
+        return [convert_base64_encoding(item) for item in payload]
+
+    result = payload
+    # determine if we have embedded base64
+    match = RE_CONTENT_TYPE.search(payload)
+    if match:
+        LOG.INFO("Found bas64 encoded content")
+        # find the start of the data which is demarked by an empty line
+        match_base64 = RE_START_BASE64.search(payload[match.end():])
+        if match_base64:
+            base64_data = payload[match.end()+match_base64.end():]
+        else:
+            base64_data = payload[match.end():]  # just start where we found the mime information
+        # ensure we are really dealing with base64 data
+        if RE_BASE64.search(base64_data):
+            LOG.debug(base64_data)
+            decoded_data = b_to_s(decode_mail_body(base64_data))
+            # insert where we found it
+            result = "\n".join([payload[:match.end()], decoded_data])
+    return result

@@ -197,4 +197,3 @@ matrix:
         - IMAGE_TO_REBUILD=$(echo $TRAVIS_TAG | cut -d "/" -f 3)
         - REPO_TO_PUSH=$(echo $TRAVIS_TAG | cut -d "/" -f 4)
         - .scripts/rebuild_images.sh "$PYTHON_LIBRARIES_VERSION" "$IMAGE_TO_REBUILD" "$REPO_TO_PUSH"
-

@@ -1,9 +1,11 @@
+# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
 import logging
 from lxml import etree
+from defusedxml import lxml as defused_etree
 import os
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 
@@ -53,12 +55,12 @@ class FunctionComponent(ResilientComponent):
             parser = etree.XMLParser(ns_clean=True, recover=True, encoding="utf-8")
             # read xsl file
             xsl = open(stylesheet, mode="rb").read()
-            xsl_root = etree.fromstring(xsl, parser=parser)
+            xsl_root = defused_etree.fromstring(xsl, parser=parser)
 
             transform = etree.XSLT(xsl_root)
 
             # read xml
-            xml_root = etree.fromstring(xml_source.encode("utf-8"), parser=parser)
+            xml_root = defused_etree.fromstring(xml_source.encode("utf-8"), parser=parser)
 
             # transform xml with xslt
             transformation_doc = transform(xml_root)

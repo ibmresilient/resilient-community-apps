@@ -12,7 +12,7 @@
   ![screenshot: screenshot_1](./screenshots/screenshot_1.png)
 -->
 
-# **User Guide:** fn_datatable_utils_v1.1.0
+# **User Guide:** fn_datatable_utils_v1.2.0
 
 ## Table of Contents
 - [Setup](#setup)
@@ -29,17 +29,13 @@
 ---
 
 ## Release Notes
-### v1.1.0
-* Added support for App Host
-Added Functions:
-* `dt_utils_get_row`
-* `dt_utils_get_rows`
-* `dt_utils_delete_row`
-* `dt_utils_delete_rows`
-* `dt_utils_create_csv_table`
 
-### v1.0.0
-* Initial Release
+| Release | Date | Notes |
+| ------- | ---- | ----- |
+| v1.2.0  | 02/2021 | Functions dt_utils_get_rows and dt_utils_delete_rows can now return or delete all datatable rows |
+| v1.1.0  | 11/2020    | Added support for App Host. New functions: `dt_utils_get_row`, `dt_utils_get_rows`, `dt_utils_delete_row`, `dt_utils_delete_rows`, `dt_utils_create_csv_table`|
+| v1.0.0  | 2/2019     | Initial Release |
+
 
 ---
 **This package contains 6 functions that help you manipulate IBM Resilient Data Tables**
@@ -164,6 +160,7 @@ An example Rule and Workflow exist for searching the example datatable based on 
 | `dt_utils_sort_direction` | `select` | No | `-` | - |
 | `incident_id` | `number` | Yes | `-` | - |
 
+Note: If dt_utils_search_column is left unset, the entire table is returned (unless dt_utils_max_rows is also used).
 </p>
 </details>
 
@@ -455,6 +452,7 @@ An example Rule and Workflow are available for deleting datatable rows based on 
 | `dt_utils_rows_ids` | `text` | No | `-` | The list of internal rows IDs of a Data Table to delete |
 | `dt_utils_search_column` | `text` | No | `-` | The API name of the column to search |
 | `dt_utils_search_value` | `text` | No | `-` | The cell value to search for within the search column |
+| `dt_utils_delete_all_rows` | `bool` | No | `-` | When set to `Yes`, all datatable columns are deleted |
 | `incident_id` | `number` | Yes | `-` | - |
 
 </p>

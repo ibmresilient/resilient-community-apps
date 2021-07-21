@@ -15,6 +15,9 @@
   notes of a previous release
 -->
 
+### v1.0.5
+* Verified on ServiceNow Quebec release
+
 ### v1.0.4
 * Verified on ServiceNow Paris release
 

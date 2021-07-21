@@ -1,3 +1,9 @@
+include apikey_permissions.txt
+include Dockerfile
+include entrypoint.sh
 include README.md
-include fn_pipl/util/*
+include fn_pipl/*
+recursive-include fn_pipl/util *
 include fn_pipl/LICENSE
+include fn_pipl/doc/*
+include fn_pipl/icons/*

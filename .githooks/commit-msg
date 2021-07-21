@@ -1,0 +1,25 @@
+#!/bin/sh
+#
+# A git hook script to check the commit message.
+# Called by "git commit" with one argument, the name of the file
+# that has the commit message.  The hook should exit with non-zero
+# status after issuing an appropriate message if it wants to stop the
+# commit.  The hook is allowed to edit the commit message file.
+# The hook checks for 2 conventions in a commit message:
+# 1: A JIRA Ticket Number; INT-XXXX
+# 2: A package name enclosed in []
+# Full example: INT-123 {fn_utilities} added a new feature
+# 
+# This also accepts a "Merge"
+# Full example: "Merge branch 'master' into story/INT-3104_improve_build"
+# regex to validate in commit msg
+
+commit_regex='(^Merge|INT-\d+ \{?.*\})'
+error_msg="INVALID COMMIT MESSAGE. Your commit message is either missing a JIRA Issue ('INT-1111'), a package name ('{myapp}') or if its a merge should start with ('Merge'). Example: INT-123 {fn_my_package} added new cool action"
+
+# Ensure the commit message contains the ticket 
+if ! grep -iqE "$commit_regex" "$1"; then
+    # else print the error message 
+    echo "$error_msg" >&2
+    exit 1
+fi

@@ -20,7 +20,7 @@ def snake_to_camel(word):
 
 setup(
     name='fn_task_utils',
-    version='1.0.1',
+    version='1.0.2',
     license='MIT',
     author='Resilient Labs',
     author_email='resil.labs@gmail.com',

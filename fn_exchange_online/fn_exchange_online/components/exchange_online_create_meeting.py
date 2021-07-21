@@ -1,4 +1,4 @@
-# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
@@ -13,7 +13,7 @@ from fn_exchange_online.lib.ms_graph_helper import MSGraphHelper, MAX_RETRIES_TO
 
 CONFIG_DATA_SECTION = 'fn_exchange_online'
 LOG = logging.getLogger(__name__)
-
+LOG.info("test")
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'exchange_online_create_meeting"""
 

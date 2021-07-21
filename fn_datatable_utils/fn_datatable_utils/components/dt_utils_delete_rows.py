@@ -49,6 +49,7 @@ class FunctionComponent(ResilientComponent):
                 "dt_utils_rows_ids": get_function_input(kwargs, "dt_utils_rows_ids", optional=True),  # text (optional)
                 "dt_utils_search_column": get_function_input(kwargs, "dt_utils_search_column", optional=True),  # text (optional)
                 "dt_utils_search_value": get_function_input(kwargs, "dt_utils_search_value", optional=True), # text (optional)
+                "dt_utils_delete_all_rows": bool(get_function_input(kwargs, "dt_utils_delete_all_rows", optional=True, default=False)), # bool (optional)
             }
 
             log.info("incident_id: {0}".format(inputs["incident_id"]))
@@ -56,11 +57,13 @@ class FunctionComponent(ResilientComponent):
             log.info("dt_utils_rows_ids: {0}".format(inputs["dt_utils_rows_ids"]))
             log.info("dt_utils_search_column: {0}".format(inputs["dt_utils_search_column"]))
             log.info(u"dt_utils_search_value: {0}".format(inputs["dt_utils_search_value"]))
+            log.info(u"dt_utils_delete_all_rows: {0}".format(inputs["dt_utils_delete_all_rows"]))
 
             # Ensure correct search inputs are defined correctly
             valid_search_inputs = validate_search_inputs(rows_ids=inputs["dt_utils_rows_ids"],
                                                          search_column=inputs["dt_utils_search_column"],
-                                                         search_value=inputs["dt_utils_search_value"])
+                                                         search_value=inputs["dt_utils_search_value"],
+                                                         search_criteria_required=False)
 
             if not valid_search_inputs["valid"]:
                 raise ValueError(valid_search_inputs["msg"])
@@ -82,6 +85,7 @@ class FunctionComponent(ResilientComponent):
             deleted_rows = datatable.delete_rows(payload.inputs["dt_utils_rows_ids"], 
                                                  payload.inputs["dt_utils_search_column"], 
                                                  payload.inputs["dt_utils_search_value"],
+                                                 payload.inputs["dt_utils_delete_all_rows"],
                                                  row_id,
                                                  workflow_id)
 

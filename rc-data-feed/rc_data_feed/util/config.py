@@ -12,11 +12,14 @@ def config_section_data():
     config_data = u"""[feeds]
 # comma separated section names. ex. sqlserver_feed,file_feed
 feed_names=<your feeds>
-reload=True
-# set to true if ElasticSearch errors occur during reload=True
-reload_query_api_method=False
+reload=true
+# set to true if ElasticSearch errors occur during reload=true
+reload_query_api_method=false
 
 # feed_data is the default message destination that will be listened to
 queue=feed_data
+
+# set to true if attachment data should be part of payload send to plugins
+include_attachment_data=false
 """
     return config_data

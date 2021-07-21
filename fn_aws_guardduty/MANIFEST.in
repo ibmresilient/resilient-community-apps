@@ -1,0 +1,11 @@
+include README.md
+include apikey_permissions.txt
+include Dockerfile
+include entrypoint.sh
+recursive-include fn_aws_guardduty/util *
+recursive-include fn_aws_guardduty/data *
+include fn_aws_guardduty/LICENSE
+include doc/*.md
+include doc/screenshots/*
+
+exclude *.bak
