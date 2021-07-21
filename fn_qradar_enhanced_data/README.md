@@ -70,7 +70,7 @@
 **QRadar Enhanced Offense Data Migration**
 
 
-This app fetches the data associated with the Qradar Offense and provides live links back to QRadar, thereby simplifying case management.
+This app fetches the data associated with the QRadar Offense and provides live links back to QRadar, thereby simplifying case management.
 
 ### Key Features
 <!--
