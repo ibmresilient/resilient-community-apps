@@ -152,7 +152,7 @@ The following table provides the settings you need to configure the app. These s
 
 ### MSSP Configuration
 
-For this app, Circuits needs to be run on the config org so that the tab is created in the config org via an API call and then afterwards, the config push is run to push to the child orgs.
+For this app, Circuits needs to be run on the config org so that the tab is created in the config org via an API call and then afterwards, the config push is run to push to the child orgs .
 
 ### Custom Layouts
 <!--
