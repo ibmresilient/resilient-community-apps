@@ -46,7 +46,7 @@ class FunctionComponent(ResilientComponent):
             # Get the function parameters:
             nw_data_format = self.get_select_param(kwargs.get("nw_data_format"))  # select
 
-            yield StatusMessage("Retrieving "+str(nw_data_format)+"logs...")
+            yield StatusMessage("Retrieving "+str(nw_data_format)+" logs...")
 
             nw_start_time = kwargs.get("nw_start_time")  # int
             if nw_start_time is None:
@@ -148,9 +148,7 @@ def get_nw_session_logs_file(url, user, passw, cafile, time1, time2,
 
     resp = req_common.execute_call_v2("GET", request_url, verify=cafile, headers=headers)
 
-    r = resp.text
-
-    if r == '</Logs>\n' or r == '\n]}\n':
+    if resp.text == '</Logs>\n' or resp.text == '\n]}\n':
         return ''
 
     if resp_type == 'json':
