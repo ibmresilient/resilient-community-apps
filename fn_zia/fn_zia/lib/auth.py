@@ -80,7 +80,7 @@ class Auth():
         if isinstance(res, dict):
             error_code = res.get("error_code", None)
             if error_code:
-                if error_code == [401, 409]:
+                if error_code in [401, 409]:
                     raise ZiaException(res)
                 if error_code == 429:
                     raise ZiaRateLimitException(res)
