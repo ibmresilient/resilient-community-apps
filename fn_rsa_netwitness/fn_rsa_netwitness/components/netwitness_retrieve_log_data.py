@@ -46,7 +46,7 @@ class FunctionComponent(ResilientComponent):
             # Get the function parameters:
             nw_data_format = self.get_select_param(kwargs.get("nw_data_format"))  # select
 
-            yield StatusMessage("Retrieving "+str(nw_data_format)+" logs...")
+            yield StatusMessage("Retrieving {} logs...".format(nw_data_format))
 
             nw_start_time = kwargs.get("nw_start_time")  # int
             if nw_start_time is None:
@@ -92,14 +92,22 @@ class FunctionComponent(ResilientComponent):
             # Return log data in json format
             if nw_data_format == "logs_json":
                 data_file = get_nw_session_logs_file(url, username, password, nw_verify, \
-                    start_time, end_time, req_common, \
-                        render_format=render_format_dict[nw_data_format], resp_type="json")
+                    start_time, end_time, req_common, render_format=render_format_dict[nw_data_format], resp_type="json")
+
+                if data_file.text == '\n]}\n':
+                    data_file = data_file.text
+                    data_file = ''
+                else:
+                    data_file = data_file.json()
 
             # Return log data in text format
             else:
                 data_file = get_nw_session_logs_file(url, username, password, nw_verify, \
-                    start_time, end_time, req_common, \
-                        render_format=render_format_dict[nw_data_format])
+                    start_time, end_time, req_common, render_format=render_format_dict[nw_data_format]).text
+
+                if nw_data_format == "logs_xml":
+                    if '<Log timestamp=' not in data_file:
+                        data_file = ''
 
             log.debug("data_file: %s", data_file)
             results = results_payload.done(True, data_file)
@@ -146,16 +154,4 @@ def get_nw_session_logs_file(url, user, passw, cafile, time1, time2,
     request_url = "{}/sdk/packets?time1={}&time2={}&render={}"\
         .format(url, time1, time2, render_format)
 
-    resp = req_common.execute_call_v2("GET", request_url, verify=cafile, headers=headers)
-
-    if resp.text == '</Logs>\n' or resp.text == '\n]}\n':
-        return ''
-
-    if resp_type == 'json':
-        return resp.json()
-
-    if resp_type == 'text':
-        return resp.text
-
-    if resp_type == 'bytes':
-        return resp.content
+    return req_common.execute_call_v2("GET", request_url, verify=cafile, headers=headers)
