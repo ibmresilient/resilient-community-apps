@@ -41,13 +41,13 @@
 | Version | Date | Notes |
 | ------- | ---- | ----- |
 | v1.3.0 | 7/2021 | Username in app.config does not need to be an email |
-| v1.2.1  | 5/2021 | Bug fix for python 2 |
-| v1.2.0  | 4/2021 | Added capability for task attachments |
-| v1.1.1  | 2/2021 | Bug fixes associated with sending attachments |
-| v1.1.0  | 10/2020 | Bug fixes and send all or specific attachments |
+| v1.2.1 | 5/2021 | Bug fix for python 2 |
+| v1.2.0 | 4/2021 | Added capability for task attachments |
+| v1.1.1 | 2/2021 | Bug fixes associated with sending attachments |
+| v1.1.0 | 10/2020 | Bug fixes and send all or specific attachments |
 | v1.0.9 | 5/2020 | App Host compatibility |
 | v1.0.8 | 4/2020 | Initial Release after internal development by Professional Services, no prior release notes |
-
+* For customers upgrading from v1.2.1, the app.config file must be manually edited.
 
 ---
 
