@@ -13,9 +13,7 @@ from resilient_lib import validate_fields, \
     ResultPayload, RequestsCommon, str_to_bool, write_file_attachment
 from fn_rsa_netwitness.util.helper import get_headers, convert_to_nw_time
 
-
 log = logging.getLogger(__name__)
-
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'netwitness_query_event_session"""
@@ -135,7 +133,6 @@ class FunctionComponent(ResilientComponent):
             yield FunctionResult(results)
         except Exception as error:
             yield FunctionError(error)
-
 
 def get_nw_session_logs_file(url, user, passw, cafile, time1, time2,
                              req_common, render_format, resp_type="text"):
