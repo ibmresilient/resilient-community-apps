@@ -21,8 +21,8 @@ def codegen_reload_data():
     return {
         "package": u"fn_rsa_netwitness",
         "message_destinations": [u"rsa_netwitness_message_destination"],
-        "functions": [u"netwitness_get_meta_id_ranges", u"netwitness_get_meta_values", u"netwitness_query", u"netwitness_retrieve_log_data", u"netwitness_retrieve_pcap_data"],
-        "workflows": [u"example_netwitness_get_meta_values", u"example_netwitness_retrieve_log_file", u"example_netwitness_retrieve_pcap_file", u"example_netwitness_retrieve_pcap_file_time"],
+        "functions": [u"netwitness_get_meta_id_ranges", u"netwitness_retrieve_log_data", u"netwitness_get_meta_values", u"netwitness_query", u"netwitness_retrieve_pcap_data"],
+        "workflows": [u"example_netwitness_retrieve_log_file", u"example_netwitness_retrieve_pcap_file", u"example_netwitness_retrieve_pcap_file_time", u"example_netwitness_get_meta_values"],
         "actions": [u"(Example) NetWitness Get Meta Values", u"(Example) NetWitness Retrieve Log File", u"(Example) NetWitness Retrieve PCAP File", u"(Example) NetWitness Retrieve PCAP File (Time)"],
         "incident_fields": [],
         "incident_artifact_types": [],
@@ -37,22 +37,22 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM Resilient Platform Version: 39.0.0
+    IBM Resilient Platform Version: 39.0.6328
 
     Contents:
     - Message Destinations:
         - rsa_netwitness_message_destination
     - Functions:
         - netwitness_get_meta_id_ranges
+        - netwitness_retrieve_log_data
         - netwitness_get_meta_values
         - netwitness_query
-        - netwitness_retrieve_log_data
         - netwitness_retrieve_pcap_data
     - Workflows:
-        - example_netwitness_get_meta_values
         - example_netwitness_retrieve_log_file
         - example_netwitness_retrieve_pcap_file
         - example_netwitness_retrieve_pcap_file_time
+        - example_netwitness_get_meta_values
     - Rules:
         - (Example) NetWitness Get Meta Values
         - (Example) NetWitness Retrieve Log File
@@ -67,4 +67,3 @@ def customization_data(client=None):
     with io.open(res_file, mode='rt') as f:
         b64_data = base64.b64encode(f.read().encode('utf-8'))
         yield ImportDefinition(b64_data)
-        
