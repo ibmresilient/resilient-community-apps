@@ -132,6 +132,7 @@ The following table provides the settings you need to configure the app. These s
 | **smtp_server** | Yes | `xxx.xxx.xxx.xxx` | *IP Address or fully qualified domain name for smpt server* |
 | **smtp_user** | Yes | `` | *smtp authication user* |
 | **smtp_password** | Yes | `` | *smtp authication user password* |
+| **from_email_address** | No | `a@example.com` | *Email address to send emails from* |
 | **smtp_port** | Yes | `25` | *Defaults to unauthenticated, 587/2525 for TLS* |
 | **smtp_conn_timeout** | Yes | `20` | *Timeout value in seconds to wait for a connection* |
 | **smtp_ssl_mode** | Yes | `None` | *set to 'starttls' when using smtp_user and smtp_password* |
