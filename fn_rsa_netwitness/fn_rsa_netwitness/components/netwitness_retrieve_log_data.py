@@ -143,11 +143,11 @@ def get_nw_session_logs_file(url, user, passw, cafile, time1, time2,
 
     resp = req_common.execute_call_v2("GET", request_url, verify=cafile, headers=headers)
 
-    if resp_type == "json" and '"logs":' in resp.text:
-        resp = resp.json()
-    elif '<Log timestamp=' in resp.text:
-        resp = resp.text
-    else:
+    if resp.text == '</Logs>\n' or resp.text == '\n]}\n':
         resp = ''
+    elif resp_type == "json" and '"logs":' in resp.text:
+        resp = resp.json()
+    else:
+        resp = resp.text
 
     return resp
