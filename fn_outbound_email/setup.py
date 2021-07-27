@@ -7,7 +7,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_outbound_email',
-    version='1.3.1',
+    version='1.3.0',
     license='MIT',
     author='IBM Resilient',
     url='https://github.com/ibmresilient/resilient-community-apps/tree/master/fn_outbound_email',

@@ -47,7 +47,7 @@
 | v1.1.0 | 10/2020 | Bug fixes and send all or specific attachments |
 | v1.0.9 | 5/2020 | App Host compatibility |
 | v1.0.8 | 4/2020 | Initial Release after internal development by Professional Services, no prior release notes |
-* For customers upgrading from v1.2.1, the app.config file must be manually edited.
+* For customers upgrading from a pervious release, the app.config file must be manually edited.
 
 ---
 
@@ -82,11 +82,11 @@ This app supports the IBM Resilient SOAR Platform and the IBM Cloud Pak for Secu
 The Resilient platform supports two app deployment mechanisms, App Host and integration server.
 
 If deploying to a Resilient platform with an App Host, the requirements are:
-* Resilient platform >= `37.0.5832`.
+* Resilient platform >= `39.0.6328`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a Resilient platform with an integration server, the requirements are:
-* Resilient platform >= `37.0.5832`.
+* Resilient platform >= `39.0.6328`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient_circuits`.
 * If using an API key account, make sure the account provides the following minimum permissions: 
@@ -132,7 +132,7 @@ The following table provides the settings you need to configure the app. These s
 | **smtp_server** | Yes | `xxx.xxx.xxx.xxx` | *IP Address or fully qualified domain name for smpt server* |
 | **smtp_user** | Yes | `` | *smtp authication user* |
 | **smtp_password** | Yes | `` | *smtp authication user password* |
-| **from_email_address** | No | `a@example.com` | *Email address to send emails from* |
+| **from_email_address** | No | `a@example.com` | *Introduced in 1.3.0. Email address for use as email sender* |
 | **smtp_port** | Yes | `25` | *Defaults to unauthenticated, 587/2525 for TLS* |
 | **smtp_conn_timeout** | Yes | `20` | *Timeout value in seconds to wait for a connection* |
 | **smtp_ssl_mode** | Yes | `None` | *set to 'starttls' when using smtp_user and smtp_password* |
