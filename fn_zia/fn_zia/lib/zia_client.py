@@ -8,6 +8,7 @@ import re
 from .auth import Auth
 from .helpers import filter_by_url, filter_by_category, process_urls
 from .decorators import retry
+from .decorators import RateLimit as ratelimit
 from .exceptions import ZiaException, ZiaRateLimitException
 
 LOG = logging.getLogger(__name__)
@@ -56,7 +57,6 @@ class ZiaClient(Auth):
         }
         super(ZiaClient, self).__init__(opts, fn_opts)
 
-    @retry()
     def _perform_method(self, method, uri, **kwargs):
         """Handle requests to zia endpoints .
 
@@ -107,6 +107,8 @@ class ZiaClient(Auth):
 
         return response
 
+    @retry()
+    @ratelimit(method="get")
     def get_blocklist_urls(self, url_filter=None):
         """Get a list of blocklisted URLs.
 
@@ -126,6 +128,8 @@ class ZiaClient(Auth):
         # Filter result by url name and return.
         return filter_by_url(res, url_filter=url_filter, url_type="blacklistUrls")
 
+    @retry()
+    @ratelimit(method="get")
     def get_allowlist_urls(self, url_filter=None):
         """Get a list of allowlisted URLs.
 
@@ -145,6 +149,8 @@ class ZiaClient(Auth):
         # Filter result by url name and return.
         return filter_by_url(res, url_filter=url_filter, url_type="whitelistUrls")
 
+    @retry()
+    @ratelimit(method="post")
     def blocklist_action(self, blocklisturls=None, action=None):
         """ Perform an add or remove action on a list of URLs to the blocklist.
 
@@ -167,6 +173,8 @@ class ZiaClient(Auth):
 
         return res
 
+    @retry()
+    @ratelimit(method="put")
     def allowlist_action(self, allowlisturls=None, action=None):
         """ Perform an add or remove action on a list of URLs to the allowlist.
 
@@ -205,6 +213,8 @@ class ZiaClient(Auth):
 
         return res
 
+    @retry()
+    @ratelimit(method="get")
     def get_url_categories(self, custom_only=None, category_id=None, name_filter=None, url_filter=None):
         """Get a list of URL categories.
 
@@ -247,6 +257,8 @@ class ZiaClient(Auth):
 
         return result
 
+    @retry()
+    @ratelimit(method="post")
     def add_url_category(self, urls=None, configured_name=None, custom_category=True,
                          super_category=None, keywords=None):
         """Add a new URL category with a list of urls.
@@ -265,6 +277,7 @@ class ZiaClient(Auth):
         if keywords:
             # Convert keywords in comma or newline seperated string to a list.
             keywords = list(filter(None, re.split(r"\s+|,|\n", keywords)))
+            keywords = list(filter(None, re.split(r"\s+|,|\n", keywords)))
 
         payload = {
             "configuredName": configured_name,
@@ -279,6 +292,8 @@ class ZiaClient(Auth):
 
         return res
 
+    @retry()
+    @ratelimit(method="put")
     def category_action(self, category_id=None, configured_name=None, urls=None, action=None):
         """ Perform an add or remove action on a list of URLs to a custom category.
 
@@ -309,6 +324,8 @@ class ZiaClient(Auth):
 
         return res
 
+    @retry()
+    @ratelimit(method="post")
     def url_lookup(self, urls=None):
         """ Lookup categorization on a list of URLs.
 
@@ -329,6 +346,8 @@ class ZiaClient(Auth):
         # Normalize response dict to a list.
         return res
 
+    @retry()
+    @ratelimit(method="post")
     def activate(self, activate=None):
         """Activate configuration.
 
@@ -351,6 +370,8 @@ class ZiaClient(Auth):
 
         return res
 
+    @retry()
+    @ratelimit(method="get")
     def get_sandbox_report(self, md5, full=False):
         """ Get a full (i.e., complete) or summary detail report for an MD5 hash of a
         file that was analyzed by the Sandbox.
