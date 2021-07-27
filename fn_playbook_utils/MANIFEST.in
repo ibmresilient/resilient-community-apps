@@ -1,0 +1,10 @@
+include README.md
+include Dockerfile
+include entrypoint.sh
+recursive-include fn_playbook_utils/util *
+include fn_playbook_utils/LICENSE
+include doc/*.md
+include doc/screenshots/*
+recursive-include payload_samples/*/ *.json
+
+exclude *.bak
