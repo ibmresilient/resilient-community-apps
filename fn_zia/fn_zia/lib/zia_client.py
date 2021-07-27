@@ -7,9 +7,21 @@ import json
 import re
 from .auth import Auth
 from .helpers import filter_by_url, filter_by_category, process_urls
+from .decorators import retry
+from .exceptions import ZiaException, ZiaRateLimitException
 
 LOG = logging.getLogger(__name__)
 
+
+HTTP_ERROR_CODES = {
+    400: "Invalid or bad request",
+    401: "Session is not authenticated or timed out",
+    403: "A permissions error occurred",
+    404: "Resource does not exist",
+    409: "Possible edit conflict occurred",
+    415: "Unsupported media type.",
+    429: "Exceeded the rate limit or quota.",
+}
 
 class ZiaClient(Auth):
     """ Class to support Zscaler Internet Access (Zia) api.
@@ -44,6 +56,7 @@ class ZiaClient(Auth):
         }
         super(ZiaClient, self).__init__(opts, fn_opts)
 
+    @retry()
     def _perform_method(self, method, uri, **kwargs):
         """Handle requests to zia endpoints .
 
@@ -54,19 +67,45 @@ class ZiaClient(Auth):
         """
         result = None
 
-        res = self._req.execute_call_v2(method, uri, proxies=self.proxies, **kwargs)
+        res = self._req.execute_call_v2(method, uri, proxies=self.proxies, callback=self._handle_response, **kwargs)
 
-        if res.content:
-            try:
-                result = res.json()
-            except ValueError:
-                # Default response likely not in json format just return content as is.
-                #return res.content
-                result = res.content
-        else:
-            result = {"status": "OK"}
+
+        if hasattr(res, "content"):
+            if res.content:
+                try:
+                    result = res.json()
+                except ValueError:
+                    # Default response likely not in json format just return content as is.
+                    # return res.content
+                    result = res.content
+            else:
+                result = {"status": "OK"}
+        elif isinstance(res, dict):
+            # A 4XX error was detected (c.f. HTTP_ERROR_CODES for list of errors).
+            error_code = res.get("error_code", None)
+            if error_code:
+                if error_code in [401, 409]:
+                    raise ZiaException(res)
+                if error_code == 429:
+                    raise ZiaRateLimitException(res)
+            result = res
 
         return result
+
+    def _handle_response(self, response):
+
+        if response.status_code in list(HTTP_ERROR_CODES.keys()):
+            error_code = response.status_code
+            # Return status dict for selected codes.
+            return {
+                "error_code": error_code,
+                "status": HTTP_ERROR_CODES[error_code],
+                "text": response.json()
+            }
+
+        response.raise_for_status()
+
+        return response
 
     def get_blocklist_urls(self, url_filter=None):
         """Get a list of blocklisted URLs.
@@ -81,6 +120,9 @@ class ZiaClient(Auth):
         """
         uri = self._endpoints["blocklist"]
         res = self._perform_method("get", uri, headers=self._headers)
+        if isinstance(res, dict) and res.get("error_code", False):
+            # An error was detected return res.
+            return res
         # Filter result by url name and return.
         return filter_by_url(res, url_filter=url_filter, url_type="blacklistUrls")
 
@@ -97,6 +139,9 @@ class ZiaClient(Auth):
         """
         uri = self._endpoints["allowlist"]
         res = self._perform_method("get", uri, headers=self._headers)
+        if isinstance(res, dict) and res.get("error_code", False):
+            # An error was detected return res without filtering.
+            return res
         # Filter result by url name and return.
         return filter_by_url(res, url_filter=url_filter, url_type="whitelistUrls")
 
@@ -138,6 +183,10 @@ class ZiaClient(Auth):
         # Get result for current allowlist query.
         curr_allowlist_res = self.get_allowlist_urls()
 
+        if isinstance(curr_allowlist_res, dict) and curr_allowlist_res.get("error_code", False):
+            # An error was detected return curr_allowlist_res as result.
+            return curr_allowlist_res
+
         # Set current allow list.
         curr_allowlist = curr_allowlist_res.get("whitelistUrls", [])
 
@@ -177,6 +226,10 @@ class ZiaClient(Auth):
             params = {"customOnly": custom_only}
 
         res = self._perform_method("get", uri, headers=self._headers, params=params)
+
+        if isinstance(res, dict) and res.get("error_code", False):
+            # An error was detected return res without filtering.
+            return res
 
         # Normalize response dict to a list.
         result["categories"] = [res] if isinstance(res, dict) else res
@@ -287,8 +340,10 @@ class ZiaClient(Auth):
         if activate:
             # Activate configuration changes.
             res = self._perform_method("post", uri, headers=self._headers)
-
-            if res.get("status").lower() == "active":
+            if isinstance(res, dict) and res.get("error_code", False):
+                # An error was detected set status to error status.
+                res = {"status": res["status"]}
+            elif res.get("status").lower() == "active":
                 res = {"status": "Activated"}
         else:
             # Activate not selected.
