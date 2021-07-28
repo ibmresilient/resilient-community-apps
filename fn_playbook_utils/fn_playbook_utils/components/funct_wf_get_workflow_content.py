@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
-#(c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+#(c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
 #pragma pylint: disable=unused-argument, no-self-use, line-too-long
 
 """AppFunction implementation"""
 import xml.etree.ElementTree as ET
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from resilient_lib import IntegrationError, validate_fields
 from fn_playbook_utils.lib.common import get_workflow
 
 PACKAGE_NAME = "fn_playbook_utils"
@@ -64,10 +63,10 @@ def get_workflow_elements(xml, action_map=ACTION_MAP):
             el.tag = postfix  # strip all namespaces
 
         if el.tag in ACTION_MAP.keys():
-            type = ACTION_MAP[el.tag]
-            if results.get(type):
-                results[type].append(el.attrib['name'])
+            el_type = ACTION_MAP[el.tag]
+            if results.get(el_type):
+                results[el_type].append(el.attrib['name'])
             else:
-                results[type] = [ el.attrib['name'] ]
+                results[el_type] = [ el.attrib['name'] ]
 
     return results

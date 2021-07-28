@@ -1,13 +1,11 @@
 # -*- coding: utf-8 -*-
-#(c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+#(c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
 #pragma pylint: disable=unused-argument, no-self-use, line-too-long
 
 """AppFunction implementation"""
 from cachetools import cached, TTLCache
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from resilient_lib import IntegrationError, validate_fields
 from fn_playbook_utils.lib.common import get_incident_limit
-from resilient.co3base import BasicHTTPException
 
 PACKAGE_NAME = "fn_playbook_utils"
 FN_NAME = "wf_get_workflow_data"

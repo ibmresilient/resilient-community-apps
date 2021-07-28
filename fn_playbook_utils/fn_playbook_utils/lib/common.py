@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#(c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+#(c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
 #pragma pylint: disable=unused-argument, no-self-use, line-too-long
 
 QUERY_PAGED_URL = "/incidents/query_paged?field_handle=-1"
@@ -18,9 +18,9 @@ def get_incident_limit(restclient, sort="desc"):
         [int]: [min or max incident_id]
     """
     inc_id = 0
-    filter = QUERY_PAGED_FILTER.copy()
-    filter['sorts'][0]['type'] = sort
-    results = restclient.post(uri=QUERY_PAGED_URL, payload=filter)
+    query_filter = QUERY_PAGED_FILTER.copy()
+    query_filter['sorts'][0]['type'] = sort
+    results = restclient.post(uri=QUERY_PAGED_URL, payload=query_filter)
 
     if results and results.get('recordsTotal', 0) > 0:
         inc_id = results['data'][0]['id']
