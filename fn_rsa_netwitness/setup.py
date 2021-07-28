@@ -11,7 +11,7 @@ setup(
     author_email='resil.labs@gmail',
     url='https://github.com/ibmresilient/resilient-circuits-packages',
     description="Resilient Circuits Functions for calling NetWitness APIs 'fn_rsa_netwitness'",
-    long_description="Resilient Circuits Components to query for"\
+    long_description="Resilient Circuits Components to query for "\
         "NetWitness metadata and retrieve pcap/log data 'fn_rsa_netwitness'",
     install_requires=[
         'resilient_circuits>=39.0.0',
