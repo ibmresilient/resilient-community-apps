@@ -15,6 +15,7 @@ RETRY_BACKOFF = 2 # Multiplication value for retry exponential backoff.
 # Ratelimit defaults by request type.
 # limit_max: Maximum function invocations for a request method allowed within a time period.
 # reset_max: The amount of time (secs) before the rate limit resets after making initial call within period.
+# Soem non-stan
 RL_DEFS = {
     "get": {
         "limit_max": 1000,
@@ -29,8 +30,14 @@ RL_DEFS = {
         "reset_max": 3600,
     },
 }
-LOCKS = {}
+# Map of endpoint types by method supported by ratelimiter
+EP_MAP = {
+    "get": ["blocklist", "allowlist", "categories", "sandbox_report"],
+    "post": ["authenticate", "blocklist_action", "categories", "activate"],
+    "put": ["allowlist", "categories"]
+}
 # Create RLock object for each request method type.
+LOCKS = {}
 for k in ["get", "post", "put"]:
     LOCKS.setdefault(k, threading.RLock())
 
@@ -84,28 +91,40 @@ class RateLimit():
     """"
     RateLimiter class decorator for ZIA api requests.
     """
-    # Class sttribute Dict to hold ratelimit state for each request method type.
+    #Class attribute Dict to hold ratelimit state for each request method/endpoint type.
+    # The state will be shared by ratelimit threads
+    #Example state dict content:
+    #    {'get': {'blocklist': {'last_reset': 1627481586.467038, 'num_calls': 1},
+    #             'allowlist': {'last_reset': 1627481493.014187, 'num_calls': 1},
+    #             'categories': {'last_reset': 1627481654.963858, 'num_calls': 1},
+    #             'sandbox_report': {'last_reset': None, 'num_calls': 0}},
+    #     'put': {'allowlist': {'last_reset': None}, 'categories': {'last_reset': None, 'num_calls': 0}},
+    #     'post': {'authenticate': {'last_reset': 1627481487.153119, 'num_calls': 3},
+    #              'blocklist_action': {'last_reset': None}, 'categories': {'last_reset': None},
+    #              'activate': {'last_reset': None, 'num_calls': 0}}}
     states = {
         "get": {},
         "put": {},
         "post": {},
     }
-    def __init__(self, init=False, method="get"):
+    def __init__(self, init=False, method="get", ep="allowlist", limit_max=None):
         """
         The ratelimiter will be share by multiple threads. The class will be imported
         by each function to ensure it is shared across the threads.
 
         :param init: Initialize the settings on startup of a function.
+        :param ep: A string with endpoint type e.g. "allowlist", "blocklist" etc
         :param method: A string with request method should be one of "get","post" or "put".
         """
-        self.method = method
         self.init = init
+        self.method = method
+        self.ep = ep
 
         if init:
             with LOCKS[method]:
                 # Set the initial state for the method for the decorator in a
                 # thread safe way.
-                self._set_init_state(method, init=True)
+                self._set_init_state(method, ep, limit_max=limit_max, init=True)
 
     def __call__(self, func):
         """
@@ -124,34 +143,36 @@ class RateLimit():
             :raises: ZiaRateLimitException
             """
             method = self.method
+            ep = self.ep
+
             if not self.init:
                 with LOCKS[method]:
-                    if RateLimit.states[method]["last_reset"] is None:
+                    if RateLimit.states[method][ep]["last_reset"] is None:
                         # Set initial state if 1st run.
-                        self._set_init_state(method)
-                        RateLimit.states[method]["num_calls"] += 1
+                        self._set_init_state(method, ep)
+                        RateLimit.states[method][ep]["num_calls"] += 1
                     else:
-                        time_left = self._window_time_remaining(method)
+                        time_left = self._window_time_remaining(method, ep)
                         # If the time window has elapsed then reset state.
                         if time_left <= 0:
-                            self._set_init_state(method)
+                            self._set_init_state(method, ep)
 
-                        # Get the number of calls already processed for the request method.
-                        num_calls = RateLimit.states[method]["num_calls"]
+                        # Get the number of calls already processed for the request method and endpoint.
+                        num_calls = RateLimit.states[method][ep]["num_calls"]
 
                         try:
                             # Calculate the latest interval between calls.
-                            interval = float(time_left / (RL_DEFS[method]["limit_max"] - num_calls))
+                            interval = float(time_left / (self.limit_max - num_calls))
                         except ZeroDivisionError:
                             # Got here if denominator is zero, something went wrong..
                             raise ValueError("Zero value detected setting 'interval'.")
 
                         # Increase the count of number of attempts to call the function.
-                        RateLimit.states[method]["num_calls"] += 1
+                        RateLimit.states[method][ep]["num_calls"] += 1
 
                         # If the number of attempts to call the function exceeds the
                         # maximum then raise a ZiaRateLimitException exception.
-                        if RateLimit.states[method]["num_calls"] > RL_DEFS[method]["limit_max"]:
+                        if RateLimit.states[method][ep]["num_calls"] > self.limit_max:
                             err_msg = {"error_code": 429,
                                         "status": "Exceeded the rate limit or quota.",
                                         "text": {"message": "Rate Limit (1000/HOUR) exceeded",
@@ -166,25 +187,39 @@ class RateLimit():
             return func(*args, **kargs)
         return func_wrapper
 
-    def _window_time_remaining(self, method):
+    def _window_time_remaining(self, method, ep):
         """
         Get the time left in the current rate limit window.
         :param method: A string with request method can be one of "get","post" or "put"
+        :param ep: A string with endpoint type e.g. "allowlist", "blocklist" etc
         :return: The remaing time.
         """
-        elapsed = time.time() - RateLimit.states[self.method]["last_reset"]
-        return RL_DEFS[self.method]["reset_max"] - elapsed
+        elapsed = time.time() - RateLimit.states[method][ep]["last_reset"]
+        return self.limit_max - elapsed
 
-    def _set_init_state(self, method, init=False):
+    def _set_init_state(self, method, ep=None, limit_max=None, init=False):
         """
         Set the initial state of the RateLimit class for a request method.
         :param method: A string with request method can be one of "get","post" or "put"
+        :param ep: A string with endpoint type e.g. "allowlist", "blocklist" etc
+        :param limit_max: Override max limit if set.
         :param init: A boolean to determine if the decorator is in the setup mode.
         """
-        RateLimit.states[method]["num_calls"] = 0
         if init:
-            if "last_reset" not in RateLimit.states[method]:
-                RateLimit.states[method]["last_reset"] = None
+            # Setup state dict in ratelimit class attribute for a request method.
+            if method not in RateLimit.states:
+                RateLimit.states[method] = {}
+            for end_pt in EP_MAP[method]:
+                if end_pt not in RateLimit.states[method]:
+                    RateLimit.states[method][end_pt] = {}
+                if "last_reset" not in RateLimit.states[method][end_pt]:
+                    RateLimit.states[method][end_pt]["last_reset"] = None
+                if "num_calls" not in RateLimit.states[method][end_pt]:
+                    RateLimit.states[method][end_pt]["num_calls"] = 0
         else:
-            RateLimit.states[method]["last_reset"] = time.time()
-            RateLimit.states[method]["calls_remaining"] = RL_DEFS[method]["limit_max"]
+            RateLimit.states[method][ep]["last_reset"] = time.time()
+            RateLimit.states[method][ep]["num_calls"] = 0
+            if limit_max:
+                self.limit_max = limit_max
+            else:
+                self.limit_max = RL_DEFS[method]["limit_max"]

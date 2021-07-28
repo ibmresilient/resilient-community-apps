@@ -59,7 +59,7 @@ class Auth():
         pass
 
     @retry(raise_on_max=True)
-    @ratelimit(method="post")
+    @ratelimit(method="post", ep="authenticate")
     def _set_jsession_header(self):
         """ Setup headers to allow authentication to Zia server.
 
