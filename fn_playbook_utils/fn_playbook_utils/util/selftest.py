@@ -1,8 +1,12 @@
 # -*- coding: utf-8 -*-
+#(c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+#pragma pylint: disable=unused-argument, no-self-use, line-too-long
+
+from resilient import get_client
 
 """
 Function implementation test.
-Usage: 
+Usage:
     resilient-circuits selftest -l fn_playbook_utils
     resilient-circuits selftest --print-env -l fn_playbook_utils
 
@@ -24,15 +28,19 @@ log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
 log.addHandler(logging.StreamHandler())
 
-
 def selftest_function(opts):
     """
-    Placeholder for selftest function. An example use would be to test package api connectivity.
-    Suggested return values are be unimplemented, success, or failure.
+    Test connectivity back to SOAR
     """
-    app_configs = opts.get("fn_playbook_utils", {})
+    try:
+        rest_client = get_client(opts)
 
-    return {
-        "state": "unimplemented",
-        "reason": None
-    }
+        return {
+            "state": "success",
+            "reason": None
+        }
+    except Exception as err:
+        return {
+            "state": "failure",
+            "reason": str(err)
+        }

@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+#(c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+#pragma pylint: disable=unused-argument, no-self-use, line-too-long
 
 """AppFunction implementation"""
 from cachetools import cached, TTLCache
@@ -31,35 +33,6 @@ class FunctionComponent(AppFunctionComponent):
         """
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
-
-        # determine the scope of the incident data to return
-
-        # Example getting access to self.get_fn_msg()
-        # fn_msg = self.get_fn_msg()
-        # self.LOG.info("fn_msg: %s", fn_msg)
-
-        # Example raising an exception
-        # raise IntegrationError("Example raising custom error")
-
-        ##############################################
-        # PUT YOUR FUNCTION IMPLEMENTATION CODE HERE #
-        ##############################################
-
-        # Call API implemtation example:
-        # params = {
-        #     "api_key": self.app_configs.api_key,
-        #     "ip_address": fn_inputs.artifact_value
-        # }
-        #
-        # response = self.rc.execute(
-        #     method="get",
-        #     url=self.app_configs.api_base_url,
-        #     params=params
-        # )
-        #
-        # results = response.json()
-
-        ##############################################
 
         min_id = fn_inputs.wf_min_incident_id if hasattr(fn_inputs, 'wf_min_incident_id') else None
         max_id = fn_inputs.wf_max_incident_id if hasattr(fn_inputs, 'wf_max_incident_id') else None

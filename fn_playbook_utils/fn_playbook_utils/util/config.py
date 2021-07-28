@@ -8,9 +8,5 @@ def config_section_data():
     Produce add the default configuration section to app.config,
     for fn_playbook_utils when called by `resilient-circuits config [-c|-u]`
     """
-    config_data = None
 
-#    config_data = u"""[fn_playbook_utils]
-#setting=xxx
-#"""
-    return config_data
+    return None

@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+#(c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+#pragma pylint: disable=unused-argument, no-self-use, line-too-long
 
 """AppFunction implementation"""
 import xml.etree.ElementTree as ET
@@ -33,61 +35,39 @@ class FunctionComponent(AppFunctionComponent):
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
 
-        # Example validating app_configs
-        # validate_fields([
-        #     {"name": "api_key", "placeholder": "<your-api-key>"},
-        #     {"name": "base_url", "placeholder": "<api-base-url>"}],
-        #     self._app_configs_as_dict)
-
-        # Example getting access to self.get_fn_msg()
-        # fn_msg = self.get_fn_msg()
-        # self.LOG.info("fn_msg: %s", fn_msg)
-
-        # Example raising an exception
-        # raise IntegrationError("Example raising custom error")
-
-        ##############################################
-        # PUT YOUR FUNCTION IMPLEMENTATION CODE HERE #
-        ##############################################
-
-        # Call API implemtation example:
-        # params = {
-        #     "api_key": self.app_configs.api_key,
-        #     "ip_address": fn_inputs.artifact_value
-        # }
-        #
-        # response = self.rc.execute(
-        #     method="get",
-        #     url=self.app_configs.api_base_url,
-        #     params=params
-        # )
-        #
-        # results = response.json()
-
-        ##############################################
-
         workflow_xml = get_workflow(self.rest_client(), fn_inputs.wf_workflow_id)
         if not workflow_xml:
             msg = "workflow_id not found: {}".format(fn_inputs.wf_workflow_id)
             yield self.status_message(msg)
             yield FunctionResult({}, success=False, reason=msg)
+        else:
+            results = get_workflow_elements(workflow_xml)
+            yield FunctionResult(results)
 
-        # parse the xml
-        tree = ET.ElementTree(ET.fromstring(workflow_xml))
+def get_workflow_elements(xml, action_map=ACTION_MAP):
+    """[parse the xml for a workflow and extract the names of it's elements: artifacts,
+        tasks, attachements, scripts, sub-workflows]
 
-        results = {}
-        # walk the xml looking for the content we want
-        for el in tree.find('{http://www.omg.org/spec/BPMN/20100524/MODEL}process').iter():
-            # remove the name space
-            _, has_namespace, postfix = el.tag.partition('}')
-            if has_namespace:
-                el.tag = postfix  # strip all namespaces
+    Args:
+        xml ([string]): [xml data for workflow]
+        action_map ([list], optional): [list of elements to extract]. Defaults to ACTION_MAP.
+    """
+    # parse the xml
+    tree = ET.ElementTree(ET.fromstring(xml))
 
-            if el.tag in ACTION_MAP.keys():
-                type = ACTION_MAP[el.tag]
-                if results.get(type):
-                    results[type].append(el.attrib['name'])
-                else:
-                    results[type] = [ el.attrib['name'] ]
+    results = {}
+    # walk the xml looking for the content we want
+    for el in tree.find('{http://www.omg.org/spec/BPMN/20100524/MODEL}process').iter():
+        # remove the name space
+        _, has_namespace, postfix = el.tag.partition('}')
+        if has_namespace:
+            el.tag = postfix  # strip all namespaces
 
-        yield FunctionResult(results)
+        if el.tag in ACTION_MAP.keys():
+            type = ACTION_MAP[el.tag]
+            if results.get(type):
+                results[type].append(el.attrib['name'])
+            else:
+                results[type] = [ el.attrib['name'] ]
+
+    return results
