@@ -119,12 +119,13 @@ class RateLimit():
         self.init = init
         self.method = method
         self.ep = ep
+        self.limit_max = limit_max
 
         if init:
             with LOCKS[method]:
                 # Set the initial state for the method for the decorator in a
                 # thread safe way.
-                self._set_init_state(method, ep, limit_max=limit_max, init=True)
+                self._set_init_state(method, ep, init=True)
 
     def __call__(self, func):
         """
@@ -144,6 +145,8 @@ class RateLimit():
             """
             method = self.method
             ep = self.ep
+            if not self.limit_max:
+                self.limit_max = RL_DEFS[method]["limit_max"]
 
             if not self.init:
                 with LOCKS[method]:
@@ -197,12 +200,11 @@ class RateLimit():
         elapsed = time.time() - RateLimit.states[method][ep]["last_reset"]
         return self.limit_max - elapsed
 
-    def _set_init_state(self, method, ep=None, limit_max=None, init=False):
+    def _set_init_state(self, method, ep=None, init=False):
         """
         Set the initial state of the RateLimit class for a request method.
         :param method: A string with request method can be one of "get","post" or "put"
         :param ep: A string with endpoint type e.g. "allowlist", "blocklist" etc
-        :param limit_max: Override max limit if set.
         :param init: A boolean to determine if the decorator is in the setup mode.
         """
         if init:
@@ -219,7 +221,4 @@ class RateLimit():
         else:
             RateLimit.states[method][ep]["last_reset"] = time.time()
             RateLimit.states[method][ep]["num_calls"] = 0
-            if limit_max:
-                self.limit_max = limit_max
-            else:
-                self.limit_max = RL_DEFS[method]["limit_max"]
+
