@@ -34,6 +34,12 @@ class FunctionComponent(ResilientComponent):
         self.smtp_user = self.smtp_config_section.get("smtp_user")
         self.from_email_address = self.smtp_config_section.get("from_email_address", self.smtp_user)
 
+        if "@" not in self.from_email_address:
+            if "@" not in self.smtp_user:
+                raise IntegrationError("no sender address specified")
+            else:
+                self.from_email_address = self.smtp_user
+
         if self.template_file_path and not os.path.exists(self.template_file_path):
             LOG.error(u"Template file '%s' not found.", self.template_file_path)
             self.template_file_path = None
@@ -48,7 +54,7 @@ class FunctionComponent(ResilientComponent):
         """Function: Send Email"""
 
         def conditional_parameters(mail_body_text):
-            if self.smtp_config_section.get("smtp_ssl_mode") == DEFAULT_TLS_SMTP and self.from_email_address is not None:
+            if self.smtp_config_section.get("smtp_ssl_mode") == DEFAULT_TLS_SMTP:
                 mail_from = self.from_email_address
             else:
                 mail_from = kwargs.get("mail_from")  # text
