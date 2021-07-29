@@ -8,13 +8,38 @@ from resilient_circuits import AppFunctionComponent, app_function, FunctionResul
 from fn_playbook_utils.lib.common import get_incident_limit
 
 PACKAGE_NAME = "fn_playbook_utils"
-FN_NAME = "wf_get_workflow_data"
+FN_NAME = "wf_get_playbook_data"
 
-WORKFLOW_INSTANCES_URL = "/incidents/{}/workflow_instances"
+PLAYBOOKS_URL = "/playbooks/execution/query_paged"
+PLAYBOOK_FILTER = {
+  "sorts": [
+    {
+      "field_name": "status",
+      "type": "asc"
+    },
+    {
+      "field_name": "start_time",
+      "type": "asc"
+    }
+  ],
+  "filters": [
+    {
+      "conditions": [
+        {
+          "method": "equals",
+          "field_name": "incident_id",
+          "value": None
+        }
+      ]
+    }
+  ],
+  "start": 0,
+  "length": 10
+}
 
 
 class FunctionComponent(AppFunctionComponent):
-    """Component that implements function 'wf_get_workflow_data'"""
+    """Component that implements function 'wf_get_playbook_data'"""
 
     def __init__(self, opts):
         super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
@@ -45,29 +70,30 @@ class FunctionComponent(AppFunctionComponent):
             yield self.status_message("Using '{0}' for wf_max_incident_id".format(sys_max_id))
             max_id = sys_max_id
 
-        result_data = self.get_all_incident_workflows(min_id, max_id)
+        result_data = self.get_all_incident_playbooks(min_id, max_id)
 
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
 
         yield FunctionResult(result_data)
 
     @cached(cache=TTLCache(maxsize=10000, ttl=60))
-    def get_incident_workflow(self, incident_id):
-        url = WORKFLOW_INSTANCES_URL.format(incident_id)
-        return self.restclient.get(uri=url)
+    def get_incident_playbook(self, incident_id):
+        query_filter = PLAYBOOK_FILTER.copy()
+        query_filter['filters'][0]['conditions'][0]['value'] = incident_id
+        return self.restclient.post(uri=PLAYBOOKS_URL, payload=query_filter)
 
     @cached(cache=TTLCache(maxsize=30, ttl=60))
-    def get_all_incident_workflows(self, min_id, max_id):
+    def get_all_incident_playbooks(self, min_id, max_id):
         # get all the incident data to return
         result_dict = {}
         result_data = {
             "org_id" : self.restclient.org_id,
-            "workflow_content": result_dict
+            "playload_content": result_dict
         }
         for inc_id in range(min_id, max_id+1):
             try:
-                inc_workflows = self.get_incident_workflow(inc_id)
-                result_dict[inc_id] = inc_workflows
+                inc_playbooks = self.get_incident_playbook(inc_id)
+                result_dict[inc_id] = inc_playbooks
             except BaseException:
                 pass
 
