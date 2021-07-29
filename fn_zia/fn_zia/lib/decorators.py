@@ -12,22 +12,19 @@ LOG = logging.getLogger(__name__)
 NUM_TRIES = 4 # No of request tries to attempt request.
 RETRY_DELAY = 3 # Delay before retrying request.
 RETRY_BACKOFF = 2 # Multiplication value for retry exponential backoff.
-# Ratelimit defaults by request type.
-# limit_max: Maximum function invocations for a request method allowed within a time period.
-# reset_max: The amount of time (secs) before the rate limit resets after making initial call within period.
-# Soem non-stan
+# Ratelimit settings.
+# RESET_MAX: The amount of time (secs) before the rate limit resets after making initial call within 1 hour period.
+RESET_MAX = 3600
+# limit_max: Maximum function default invocations for a request method allowed within a time period.
 RL_DEFS = {
     "get": {
         "limit_max": 1000,
-        "reset_max": 3600,
     },
     "put": {
         "limit_max": 400,
-        "reset_max": 3600,
     },
     "post": {
         "limit_max": 400,
-        "reset_max": 3600,
     },
 }
 # Map of endpoint types by method supported by ratelimiter
@@ -40,6 +37,7 @@ EP_MAP = {
 LOCKS = {}
 for k in ["get", "post", "put"]:
     LOCKS.setdefault(k, threading.RLock())
+
 
 def retry(num_tries=NUM_TRIES, retry_delay=RETRY_DELAY, retry_backoff=RETRY_BACKOFF,
           raise_on_max=False):
@@ -185,6 +183,7 @@ class RateLimit():
                             raise ZiaRateLimitException(err_msg)
 
                         # Add a delay to throttle the request.
+                        LOG.info("{}: {}: {}: {}: {}".format(self.limit_max - num_calls,time_left, num_calls, self.limit_max, interval))
                         time.sleep(interval)
 
             return func(*args, **kargs)
@@ -198,7 +197,7 @@ class RateLimit():
         :return: The remaing time.
         """
         elapsed = time.time() - RateLimit.states[method][ep]["last_reset"]
-        return self.limit_max - elapsed
+        return RESET_MAX - elapsed
 
     def _set_init_state(self, method, ep=None, init=False):
         """
