@@ -143,8 +143,12 @@ class RateLimit():
             """
             method = self.method
             ep = self.ep
+
             if not self.limit_max:
                 self.limit_max = RL_DEFS[method]["limit_max"]
+
+            # Get default interval between calls.
+            def_interval = self._calculate_interval(RESET_MAX, self.limit_max)
 
             if not self.init:
                 with LOCKS[method]:
@@ -154,19 +158,13 @@ class RateLimit():
                         RateLimit.states[method][ep]["num_calls"] += 1
                     else:
                         time_left = self._window_time_remaining(method, ep)
+
                         # If the time window has elapsed then reset state.
                         if time_left <= 0:
                             self._set_init_state(method, ep)
 
                         # Get the number of calls already processed for the request method and endpoint.
                         num_calls = RateLimit.states[method][ep]["num_calls"]
-
-                        try:
-                            # Calculate the latest interval between calls.
-                            interval = float(time_left / (self.limit_max - num_calls))
-                        except ZeroDivisionError:
-                            # Got here if denominator is zero, something went wrong..
-                            raise ValueError("Zero value detected setting 'interval'.")
 
                         # Increase the count of number of attempts to call the function.
                         RateLimit.states[method][ep]["num_calls"] += 1
@@ -182,9 +180,15 @@ class RateLimit():
                                         }
                             raise ZiaRateLimitException(err_msg)
 
-                        # Add a delay to throttle the request.
-                        LOG.info("{}: {}: {}: {}: {}".format(self.limit_max - num_calls,time_left, num_calls, self.limit_max, interval))
-                        time.sleep(interval)
+                        # Get expected time left in window.
+                        expected_time_left = RESET_MAX - (num_calls * def_interval)
+
+                        # Calculate the delay to use to throttle.
+                        delay = time_left - expected_time_left
+
+                        # Throttle the request.
+                        if delay > 0:
+                            time.sleep(delay)
 
             return func(*args, **kargs)
         return func_wrapper
@@ -221,3 +225,17 @@ class RateLimit():
             RateLimit.states[method][ep]["last_reset"] = time.time()
             RateLimit.states[method][ep]["num_calls"] = 0
 
+    def _calculate_interval(self, period, calls):
+        """
+        Calculate an interval value.
+        :param period: Time over which to calculate interval
+        :param calls: Number of calls withing time period.
+        :return: Interval value (float).
+        """
+        try:
+            # Calculate the latest interval between calls.
+            interval = float(period/calls)
+        except ZeroDivisionError:
+            # Got here if denominator is zero, something went wrong..
+            raise ValueError("Zero value detected setting 'interval'.")
+        return interval
