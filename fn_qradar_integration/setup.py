@@ -19,7 +19,7 @@ def snake_to_camel(word):
 
 setup(
     name='fn_qradar_integration',
-    version='2.1.0',
+    version='2.2.0',
     license='MIT License',
     author='IBM Resilient',
     author_email='support@resilientsystems.com',
@@ -27,9 +27,10 @@ setup(
     description="Resilient Circuits Components for 'fn_qradar_integration'",
     long_description="fn_qradar_integration supports performing ariel search to retrieve data from QRadar. It also provide functions to find/add/delete reference set items.",
     install_requires=[
-        'resilient_circuits>=30.0.0',
+        'resilient_circuits>=39.0.0',
         'resilient_lib'
     ],
+    python_requires='>=3',
     packages=find_packages(),
     include_package_data=True,
     platforms='any',

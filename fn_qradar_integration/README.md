@@ -55,6 +55,8 @@
 
 | Version | Publication | Notes |
 | ------- | ----------- | ----- |
+| 2.2.0 | July. 2021 | Allow multiple QRadar instances |
+| 2.1.1 | July. 2021 | Fixed selftest failing when using cafile |
 | 2.1.0 | Feb. 2021 | Additional functions for reference table mapping. |
 | 2.0.9 | Feb. 2021 | Bug fixes associated with require input field validation. |
 | 2.0.8 | Nov. 2020 | Fixed a bug failing search function when used with token. | 
@@ -63,6 +65,7 @@
 | 2.0.4 | April 2020 | Additional configuration notes. |
 | 2.0 | March 2019 | Supports the 2.0 release. |
 | 1.0 | July 2018 | Initial publication. |
+* For customers upgrading from a pervious release, the app.config file must be manually edited.
 
 ---
 
@@ -101,13 +104,13 @@ This app supports the IBM Resilient SOAR Platform and the IBM Cloud Pak for Secu
 The Resilient platform supports two app deployment mechanisms, App Host and integration server.
 
 If deploying to a Resilient platform with an App Host, the requirements are:
-* Resilient platform >= `37.0.5832`.
+* Resilient platform >= `39.0.6328`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a Resilient platform with an integration server, the requirements are:
-* Resilient platform >= `37.0.5832`.
+* Resilient platform >= `39.0.6328`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient_circuits>=30.0.0`.
+* Integration server is running `resilient_circuits>=39.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions: 
   | Name | Permissions |
   | ---- | ----------- |
