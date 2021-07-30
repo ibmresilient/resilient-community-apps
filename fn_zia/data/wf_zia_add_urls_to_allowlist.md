@@ -39,21 +39,29 @@ def main():
     urls = INPUTS.get("zia_allowlisturls")
     if CONTENT:
         response = CONTENT.get("response")
-        activation = CONTENT.get("activation")
-        # In order to test all urls have been successfully added, convert string of urls
-        # to a list and convert urls to the format used by ZIA. e.g. https://user:password@domain.com:port/index.html ->
-        # domain.com:port/index.html
-        allowlist_urls = [re.sub(r'^.*\/\/(.*@)*(.*)', r'\2', u) for u in re.split("\s+|,", urls)]
-        updated_allowlist = response.get("whitelistUrls")
-        if all(a in updated_allowlist for a in allowlist_urls):
-            note_text = u"ZIA Integration: Workflow <b>{0}</b>: Successfully added URLs <b>{1}</b> to allowlist " \
-                        u"for SOAR function <b>{2}</b>.".format(WF_NAME, urls, FN_NAME)
-            note_text += u" Activation status: <b>{0}</b>.".format(activation["status"])
-        
+        if "error_code" not in response:
+            activation = CONTENT.get("activation")
+            # In order to test all urls have been successfully added, convert string of urls
+            # to a list and convert urls to the format used by ZIA. e.g. https://user:password@domain.com:port/index.html ->
+            # domain.com:port/index.html
+            allowlist_urls = [re.sub(r'^.*\/\/(.*@)*(.*)', r'\2', u) for u in re.split("\s+|,", urls)]
+            updated_allowlist = response.get("whitelistUrls")
+            if all(a in updated_allowlist for a in allowlist_urls):
+                note_text = u"ZIA Integration: Workflow <b>{0}</b>: Successfully added URLs <b>{1}</b> to allowlist " \
+                            u"for SOAR function <b>{2}</b>.".format(WF_NAME, urls, FN_NAME)
+                note_text += u" Activation status: <b>{0}</b>.".format(activation["status"])
+            
+            else:
+                note_text = u"ZIA Integration: Workflow <b>{0}</b>: Not all URIs added while attempting " \
+                            u"to add URLs <b>{2}</b> to allowlist for SOAR function <b>{2}</b>."\
+                    .format(WF_NAME, urls, FN_NAME)
         else:
-            note_text = u"ZIA Integration: Workflow <b>{0}</b>: Not all URIs added while attempting " \
-                        u"to add URLs <b>{2}</b> to allowlist for SOAR function <b>{2}</b>."\
+            note_text += u"ZIA Integration: Workflow <b>{0}</b>: There was an error returned while attempting " \
+                         u"to add URLs <b>{1}</b> to allowlist for SOAR function <b>{2}</b>."\
                 .format(WF_NAME, urls, FN_NAME)
+            note_text += u"<br>Error code: <b>{0}</b>, Error code: <b>{1}</b>, Details: <b>{2}</b>."\
+                .format(response["error_code"], response["status"], response["text"] )
+
     else:
         note_text += u"ZIA Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
                      u"to add URLs <b>{1}</b> to allowlist for SOAR function <b>{2}</b>."\

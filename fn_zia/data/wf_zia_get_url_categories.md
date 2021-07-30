@@ -71,34 +71,39 @@ DATA_TBL_FIELDS = ["configuredName", "urls", "customCategory", "editable", "type
 #Processing
 def main():
     note_text = u''
+    custom_only = INPUTS.get("zia_custom_only")
+    name_filter = INPUTS.get("zia_name_filter")
+    url_filter = INPUTS.get("zia_url_filter")
     if CONTENT:
-        categories = CONTENT.get("categories")
-        cat_counts = CONTENT.get("category_counts")
-        custom_only = INPUTS.get("zia_custom_only")
-        name_filter = INPUTS.get("zia_name_filter")
-        url_filter = INPUTS.get("zia_url_filter")
-        note_text += u"ZIA Integration: Workflow <b>{0}</b>: There were <b>{1}</b> URL categories out of a total of "\
-                     u"<b>{2}</b> returned with 'custom_only' set to <b>{3}</b>, category name filter "\
-                     u"<b>{4}</b> and URL filter <b>{5}</b> for SOAR function <b>{6}</b>."\
-        .format(WF_NAME, cat_counts["filtered"], cat_counts["total"], custom_only, name_filter, url_filter, FN_NAME)
-        if categories:
-            note_text += u"<br>The data table <b>{0}</b> has been updated".format("Zscaler Internet Access - URL Categories")
-        for cat in categories:
-            newrow = incident.addRow("zia_url_categories")
-            newrow.query_execution_date = QUERY_EXECUTION_DATE
-            newrow.cat_id = cat["id"]
-            for f in DATA_TBL_FIELDS:
-              if cat[f] is None:
-                  newrow[f]  = cat[f]
-              if isinstance(cat[f], list):
-                  newrow[f]  = "{}".format(", ".join(cat[f]))
-              elif isinstance(cat[f], bool):
-                  newrow[f]  = str(cat[f])
-              else:
-                  newrow[f]  = "{}".format(cat[f])
-            newrow.url_filter = url_filter
-            newrow.name_filter = name_filter
-            
+        if "error_code" not in CONTENT:
+            categories = CONTENT.get("categories")
+            cat_counts = CONTENT.get("category_counts")
+            note_text += u"ZIA Integration: Workflow <b>{0}</b>: There were <b>{1}</b> URL categories out of a total of "\
+                         u"<b>{2}</b> returned with 'custom_only' set to <b>{3}</b>, category name filter "\
+                         u"<b>{4}</b> and URL filter <b>{5}</b> for SOAR function <b>{6}</b>."\
+            .format(WF_NAME, cat_counts["filtered"], cat_counts["total"], custom_only, name_filter, url_filter, FN_NAME)
+            if categories:
+                note_text += u"<br>The data table <b>{0}</b> has been updated".format("Zscaler Internet Access - URL Categories")
+            for cat in categories:
+                newrow = incident.addRow("zia_url_categories")
+                newrow.query_execution_date = QUERY_EXECUTION_DATE
+                newrow.cat_id = cat["id"]
+                for f in DATA_TBL_FIELDS:
+                  if cat[f] is None:
+                      newrow[f]  = cat[f]
+                  if isinstance(cat[f], list):
+                      newrow[f]  = "{}".format(", ".join(cat[f]))
+                  elif isinstance(cat[f], bool):
+                      newrow[f]  = str(cat[f])
+                  else:
+                      newrow[f]  = "{}".format(cat[f])
+                newrow.url_filter = url_filter
+                newrow.name_filter = name_filter
+        else:
+            note_text += u"ZIA Integration: Workflow <b>{0}</b>: There was an error returned returned with 'custom_only' set to " \
+                         u"<b>{1}</b> configured name filter <b>{2}</b> and url filter <b>{3}</b> for SOAR function <b>{4}</b>."\
+                .format(WF_NAME, custom_only, url_filter, name_filter, FN_NAME)
+           
     else:
         note_text += u"ZIA Integration: Workflow <b>{0}</b>: There were <b>no</b> results returned with 'custom_only' set to " \
                      u"<b>{1}</b> configured name filter <b>{2}</b> and url filter <b>{3}</b> for SOAR function <b>{4}</b>."\

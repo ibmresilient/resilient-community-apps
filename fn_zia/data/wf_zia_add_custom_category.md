@@ -44,24 +44,32 @@ def main():
 
     if CONTENT:
         response = CONTENT.get("response")
-        activation = CONTENT.get("activation")
-        id = response.get("id")
-        super_cat = response.get("superCategory")
-        # In order to test all urls have been successfully added, convert string of urls
-        # to a list and convert urls to the format used by ZIA. e.g. https://user:password@domain.com:port/index.html ->
-        # domain.com:port/index.html
-        list_urls = [re.sub(r'^.*\/\/(.*@)*(.*)', r'\2', u) for u in re.split("\s+|,", urls)]
-        category_list = response.get("urls")
-        if all(a in category_list for a in list_urls):
-            note_text = u"ZIA Integration: Workflow <b>{0}</b>: Successfully Created category <b>{1}</b> with id "\
-                        u"<b>{2}</b> and with urls <b>{3}</b> in super category <b>{4}</b> for SOAR function <b>{5}</b>."\
-            .format(WF_NAME, configured_name, id, urls, super_cat, FN_NAME)
-            note_text += u" Activation status: <b>{0}</b>.".format(activation["status"])
-        
+        if "error_code" not in response:
+            activation = CONTENT.get("activation")
+            id = response.get("id")
+            super_cat = response.get("superCategory")
+            # In order to test all urls have been successfully added, convert string of urls
+            # to a list and convert urls to the format used by ZIA. e.g. https://user:password@domain.com:port/index.html ->
+            # domain.com:port/index.html
+            list_urls = [re.sub(r'^.*\/\/(.*@)*(.*)', r'\2', u) for u in re.split("\s+|,", urls)]
+            category_list = response.get("urls")
+            if all(a in category_list for a in list_urls):
+                note_text = u"ZIA Integration: Workflow <b>{0}</b>: Successfully Created category <b>{1}</b> with id "\
+                            u"<b>{2}</b> and with urls <b>{3}</b> in super category <b>{4}</b> for SOAR function <b>{5}</b>."\
+                .format(WF_NAME, configured_name, id, urls, super_cat, FN_NAME)
+                note_text += u" Activation status: <b>{0}</b>.".format(activation["status"])
+            
+            else:
+                note_text = u"ZIA Integration: Workflow <b>{0}</b>: Category <b>{1}</b> creation not successfull " \
+                            u"with URLs <b>{2}</b>  for SOAR function <b>{3}</b>."\
+                    .format(WF_NAME, configured_name, urls, FN_NAME)
         else:
-            note_text = u"ZIA Integration: Workflow <b>{0}</b>: Category <b>{1}</b> creation not successfull " \
-                        u"with URLs <b>{2}</b>  for SOAR function <b>{3}</b>."\
+            note_text += u"ZIA Integration: Workflow <b>{0}</b>: There was an error returned while attempting " \
+                         u"to create category <b>{1}</b> with URLS <b>{2}</b> for SOAR function <b>{3}</b>."\
                 .format(WF_NAME, configured_name, urls, FN_NAME)
+            note_text += u"<br>Error code: <b>{0}</b>, Error code: <b>{1}</b>, Details: <b>{2}</b>."\
+                .format(response["error_code"], response["status"], response["text"] )
+
     else:
         note_text += u"ZIA Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
                      u"to create category <b>{1}</b> with URLS <b>{2}</b> for SOAR function <b>{3}</b>."\
@@ -70,8 +78,6 @@ def main():
     incident.addNote(helper.createRichText(note_text))
 
 main()
-
-
 
 ```
 
