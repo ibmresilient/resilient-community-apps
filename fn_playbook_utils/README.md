@@ -29,9 +29,9 @@
   - [Install](#install)
   - [App Configuration](#app-configuration)
   - [Custom Layouts](#custom-layouts)
-- [Function - WF: Get Workflow content](#function---wf-get-workflow-content)
-- [Function - WF: Get workflow data](#function---wf-get-workflow-data)
-- [Data Table - Workflow Usage](#data-table---workflow-usage)
+- [Function - PB: Get Workflow content](#function---wf-get-workflow-content)
+- [Function - PB: Get workflow data](#function---wf-get-workflow-data)
+- [Data Table - Playbook Usage](#data-table---playbook-usage)
 - [Rules](#rules)
 - [Troubleshooting & Support](#troubleshooting--support)
 ---
@@ -138,7 +138,7 @@ No application specific configuration settings are required.
   You may wish to recommend a new incident tab.
   You should save a screenshot "custom_layouts.png" in the doc/screenshots directory and reference it here
 -->
-* Import the 'Workflow Usage' datatable to the tab of your choice. Here's an example of adding to your artifact tab:
+* Import the 'Playbook Usage' datatable to the tab of your choice. Here's an example of adding to your artifact tab:
 
   ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png)
 
@@ -147,20 +147,20 @@ No application specific configuration settings are required.
 ## Functions
 ![screenshot: custom_layouts](./doc/screenshots/functions.png)
 
-### Function - WF: Get workflow data
-Get information on workflows run on a given incident or for a range of incidents. The results populate the 'Workflow usage' datatable.
+### Function - PB: Get workflow data
+Get information on workflows run on a given incident or for a range of incidents. The results populate the 'Playbook usage' datatable.
 
  ![screenshot: fn-wf-get-workflow-data ](./doc/screenshots/fn-wf-get-workflow-data.png)
 
  This function is used in several rules and workflows:
  | Rule | Level | Note |
  | ---: | ----: | :--- |
- | WF: Get workflow usage at incident close | Incident | Enable this rule if you want to capture workflow stats when an incident closes. |
-| WF: Get workflow frequency | Incident | List the frequency of workflows used at the incident, artifact, attachment and task level. |
-| WF: Get workflows by artifact value | Artifact | |
-| WF: Get workflows by attachment name | Attachment | |
-| WF: Get workflows by task name | Task | |
-| WF: Get workflow usage | Incident | Get all workflows run across the range of incidents specified. |
+ | PB: Get workflow usage at incident close | Incident | Enable this rule if you want to capture workflow stats when an incident closes. |
+ | PB: Get workflow frequency | Incident | List the frequency of workflows used at the incident, artifact, attachment and task level. |
+ | PB: Get workflows by artifact value | Artifact | |
+ | PB: Get workflows by attachment name | Attachment | |
+ | PB: Get workflows by task name | Task | |
+ | PB: Get workflow usage | Incident | Get all workflows run across the range of incidents specified. |
 
  NOTE: This function makes an API for every incident the analysis is performed on. If you have a large number of incidents, it's best to limit the range of incidents specified to reduce performance and the API counts incurred.
 
@@ -169,8 +169,8 @@ Get information on workflows run on a given incident or for a range of incidents
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `wf_min_incident_id` | `number` | No | `-` | Min incident to review. If None the IBM SOAR playform min incident is used. |
-| `wf_max_incident_id` | `number` | No | `-` | Max incident to review. If None the IBM SOAR playform max incident is used. |
+| `pb_min_incident_id` | `number` | No | `-` | Min incident to review. If None the IBM SOAR playform min incident is used. |
+| `pb_max_incident_id` | `number` | No | `-` | Max incident to review. If None the IBM SOAR playform max incident is used. |
 
 
 </p>
@@ -282,8 +282,8 @@ results = {
   },
   'raw': None,
   'inputs': {
-    'wf_min_incident_id': 2100,
-    'wf_max_incident_id': 2111
+    'pb_min_incident_id': 2100,
+    'pb_max_incident_id': 2111
   },
   'metrics': {
     'version': '1.0',
@@ -303,8 +303,8 @@ results = {
 <p>
 
 ```python
-inputs.wf_max_incident_id = rule.properties.wf_max_incident_id
-inputs.wf_min_incident_id = rule.properties.wf_min_incident_id
+inputs.pb_max_incident_id = rule.properties.pb_max_incident_id
+inputs.pb_min_incident_id = rule.properties.pb_min_incident_id
 ```
 
 </p>
@@ -316,7 +316,7 @@ inputs.wf_min_incident_id = rule.properties.wf_min_incident_id
 ```python
 INCIDENT_URL = "<a href='/#incidents/{0}'>{0}</a>"
 OBJECT_TYPES = ['incident', 'task', 'artifact', 'attachment']
-wf_stats = {}
+pb_stats = {}
 object_stats = { object: {} for object in OBJECT_TYPES }
 
 
@@ -328,14 +328,14 @@ def update_workflow_stats(workflow_name, workflow_id, workflow_type):
     workflow_id ([int]): [id of workflow]
     workflow_type ([str]): [artifact, incident, task, or attachment]
   """
-  if workflow_id not in wf_stats:
-    wf_stats[workflow_id] = {
+  if workflow_id not in pb_stats:
+    pb_stats[workflow_id] = {
       "name": workflow_name,
       "type": workflow_type,
       "workflows": 0
     }
 
-  wf_stats[workflow_id]['workflows'] += 1
+  pb_stats[workflow_id]['workflows'] += 1
 
 def update_object_stats(workflow_name, object_name, object_type):
   """[track what workflows are run on a given attachment, task or artifact]
@@ -350,20 +350,20 @@ def update_object_stats(workflow_name, object_name, object_type):
 
   object_stats[object_type][object_name].append(workflow_name)
 
-def sort_wf_stats(wf_stats):
+def sort_pb_stats(pb_stats):
   """[sort worflow stats by most frequent]
 
   Args:
-    wf_stats ([dict]): [dictionary of workflows keyed by id]
+    pb_stats ([dict]): [dictionary of workflows keyed by id]
 
   Returns:
     [list]: [list of workflows sorted by most frequent]
   """
-  wf_list = []
-  for _, wf in wf_stats.items():
-    wf_list.append((wf['name'], wf['type'], wf['workflows']))
+  pb_list = []
+  for _, wf in pb_stats.items():
+    pb_list.append((wf['name'], wf['type'], wf['workflows']))
 
-  return sorted(wf_list, key=lambda wf: wf[2], reverse=True)
+  return sorted(pb_list, key=lambda PB: wf[2], reverse=True)
 
 def count_items_in_tuple_list(tuple_list, ndx):
   """[count the repeat items in the workflow list and dedup the list]
@@ -406,14 +406,14 @@ if results['success']:
   for inc_id, entities in results['content']['workflow_content'].items():
     for entity in entities['entities']:
       # filter out these workflows to get content
-      if "WF: Get workflow" not in entity.get('workflow', {}).get('name'):
+      if "PB: Get workflow" not in entity.get('workflow', {}).get('name'):
         update_workflow_stats(entity.get('workflow', {}).get('name'), entity.get('workflow', {}).get('workflow_id'), entity.get('object', {}).get('type_name'))
         update_object_stats(entity.get('workflow', {}).get('name'), entity.get('object', {}).get('object_name'), entity.get('object', {}).get('type_name'))
 
   # make tuples so we can sort
-  wf_list = sort_wf_stats(wf_stats)
-  msg.append("Top 10 Workflows for incidents: {} to {}".format(results['inputs']['wf_min_incident_id'], results['inputs']['wf_max_incident_id']))
-  msg.extend(["  {2}: {0} ({1})".format(wf_list[x][0], wf_list[x][1], wf_list[x][2]) for x in range(0, 10) if x < len(wf_list)])
+  pb_list = sort_pb_stats(pb_stats)
+  msg.append("Top 10 Workflows for incidents: {} to {}".format(results['inputs']['pb_min_incident_id'], results['inputs']['pb_max_incident_id']))
+  msg.extend(["  {2}: {0} ({1})".format(pb_list[x][0], pb_list[x][1], pb_list[x][2]) for x in range(0, 10) if x < len(pb_list)])
 
   for obj in OBJECT_TYPES:
     msg.append("\nTop 10 Workflows for {}s".format(obj))
@@ -425,7 +425,7 @@ if results['success']:
 
   incident.addNote(helper.createPlainText("\n".join(msg)))
 else:
-  incident.addNote("WF: Get workflow frequency failed: {}".format(results.reason))
+  incident.addNote("PB: Get workflow frequency failed: {}".format(results.reason))
 
 ```
 
@@ -434,8 +434,8 @@ else:
 
 ---
 
-### Function - WF: Get Workflow content
-Get a list of functions, scripts, tasks and sub-workflows used within a workflow. The results populate the 'Workflow content' datatable column in the 'Workflow usage' datatable.
+### Function - PB: Get Workflow content
+Get a list of functions, scripts, tasks and sub-workflows used within a workflow. The results populate the 'Workflow content' datatable column in the 'Playbook usage' datatable.
 
  ![screenshot: fn-wf-get-workflow-content ](./doc/screenshots/fn-wf-get-workflow-content.png)
 
@@ -444,7 +444,7 @@ Get a list of functions, scripts, tasks and sub-workflows used within a workflow
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `wf_workflow_id` | `number` | No | `-` |  workflow id from the datatable populated by any WF function. |
+| `pb_id` | `number` | No | `-` |  workflow id from the datatable populated by any WF function. |
 
 </p>
 </details>
@@ -476,7 +476,7 @@ results = {
   },
   'raw': None,
   'inputs': {
-    'wf_workflow_id': 98
+    'pb_id': 98
   },
   'metrics': {
     'version': '1.0',
@@ -496,7 +496,7 @@ results = {
 <p>
 
 ```python
-inputs.wf_workflow_id = row['workflow_id']
+inputs.pb_id = row['workflow_id']
 ```
 
 </p>
@@ -514,7 +514,7 @@ if results.success:
 
   row['workflow_content'] = helper.createRichText("<br><br>".join(content))
 else:
-  incident.addNote("WF: Get workflow content failed: {}".format(results.reason))
+  incident.addNote("PB: Get workflow content failed: {}".format(results.reason))
 
 ```
 
@@ -523,7 +523,7 @@ else:
 
 ---
 
-## Data Table - Workflow Usage
+## Data Table - Playbook usage
 
  ![screenshot: dt-workflow-usage](./doc/screenshots/dt-workflow-usage.png)
 
@@ -539,24 +539,24 @@ workflow_usage
 | Execution date | `execution_date` | `datetimepicker` | - |
 | Incident | `incident` | `textarea` | - |
 | Report date | `report_date` | `datetimepicker` | - |
-| Workflow | `workflow` | `textarea` | - |
-| Workflow content | `workflow_content` | `textarea` | - |
-| Workflow Id | `workflow_id` | `number` | - |
+| Workflow/Playbook | `workflow` | `textarea` | - |
+| Workflow/Playbook content | `workflow_content` | `textarea` | - |
+| Id | `workflow_id` | `number` | - |
 
 ---
 
 
 
 ## Rules
-| Rule Name | Object | Workflow Triggered |
+| Rule Name | Object | Workflow/Playbook Triggered |
 | --------- | ------ | ------------------ |
-| WF: Get workflow usage | incident | `wf_get_workflow_data` |
-| WF: Get workflow usage at incident close | incident | `wf_get_workflow_usage_at_incident_close` |
-| WF: Get workflows by attachment name | attachment | `wf_get_workflows_by_attachment_filename` |
-| WF: Get workflow content | workflow_usage | `wf_get_workflow_content` |
-| WF: Get workflows by task name | task | `wf_get_workflows_by_task_name` |
-| WF: Get workflow frequency | incident | `wf_get_workflow_frequency` |
-| WF: Get workflows by artifact value | artifact | `wf_get_workflows_by_artifact_value` |
+| PB: Get workflow usage | incident | `pb_get_workflow_data` |
+| PB: Get workflow usage at incident close | incident | `pb_get_workflow_usage_at_incident_close` |
+| PB: Get workflows by attachment name | attachment | `pb_get_workflows_by_attachment_filename` |
+| PB: Get workflow content | workflow_usage | `pb_get_workflow_content` |
+| PB: Get workflows by task name | task | `pb_get_workflows_by_task_name` |
+| PB: Get workflow frequency | incident | `pb_get_workflow_frequency` |
+| PB: Get workflows by artifact value | artifact | `pb_get_workflows_by_artifact_value` |
 
 ---
 

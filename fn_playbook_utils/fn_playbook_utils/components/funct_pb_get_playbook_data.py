@@ -8,7 +8,7 @@ from resilient_circuits import AppFunctionComponent, app_function, FunctionResul
 from fn_playbook_utils.lib.common import get_incident_limit
 
 PACKAGE_NAME = "fn_playbook_utils"
-FN_NAME = "wf_get_playbook_data"
+FN_NAME = "pb_get_playbook_data"
 
 PLAYBOOKS_URL = "/playbooks/execution/query_paged"
 PLAYBOOK_FILTER = {
@@ -39,7 +39,7 @@ PLAYBOOK_FILTER = {
 
 
 class FunctionComponent(AppFunctionComponent):
-    """Component that implements function 'wf_get_playbook_data'"""
+    """Component that implements function 'pb_get_playbook_data'"""
 
     def __init__(self, opts):
         super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
@@ -50,24 +50,24 @@ class FunctionComponent(AppFunctionComponent):
         """
         Function: Get information on workflows run for this incident or for a range of incidents
         Inputs:
-            -   fn_inputs.wf_min_incident_id
-            -   fn_inputs.wf_max_incident_id
+            -   fn_inputs.pb_min_incident_id
+            -   fn_inputs.pb_max_incident_id
         """
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
 
-        min_id = fn_inputs.wf_min_incident_id if hasattr(fn_inputs, 'wf_min_incident_id') else None
-        max_id = fn_inputs.wf_max_incident_id if hasattr(fn_inputs, 'wf_max_incident_id') else None
+        min_id = fn_inputs.pb_min_incident_id if hasattr(fn_inputs, 'pb_min_incident_id') else None
+        max_id = fn_inputs.pb_max_incident_id if hasattr(fn_inputs, 'pb_max_incident_id') else None
 
         # don't make excessive API calls, use system limits if customer provided values are out of range
         sys_min_id  = get_incident_limit(self.restclient, sort="asc")
         if not min_id or min_id < sys_min_id:
-            yield self.status_message("Using '{0}' for wf_min_incident_id".format(sys_min_id))
+            yield self.status_message("Using '{0}' for pb_min_incident_id".format(sys_min_id))
             min_id = sys_min_id
 
         sys_max_id = get_incident_limit(self.restclient, sort="desc")
         if not max_id or max_id > sys_max_id:
-            yield self.status_message("Using '{0}' for wf_max_incident_id".format(sys_max_id))
+            yield self.status_message("Using '{0}' for pb_max_incident_id".format(sys_max_id))
             max_id = sys_max_id
 
         result_data = self.get_all_incident_playbooks(min_id, max_id)
