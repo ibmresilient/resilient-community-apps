@@ -14,7 +14,7 @@ class QRadarServers():
         servers = {}
         server_name_list = self._get_server_name_list(opts)
         for server in server_name_list:
-            server_name = u"{}:{}".format(PACKAGE_NAME, server)
+            server_name = u"{}".format(server)
             server_data = opts.get(server_name)
             if not server_data:
                 raise KeyError(u"Unable to find QRadar server: {}".format(server_name))
@@ -30,7 +30,7 @@ class QRadarServers():
         server_list = []
         for key in opts.keys():
             if key.startswith("fn_qradar_integration:"):
-                server_name = re.sub(r'^fn_qradar_integration:', '', key)
+                server_name = key
                 if len(server_name):
                     server_list.append(server_name)
         return server_list

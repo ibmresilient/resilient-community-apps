@@ -9,7 +9,7 @@ def config_section_data():
     """Produce the default configuration section for app.config,
        when called by `resilient-circuits config [-c|-u]`
     """
-    config_data = u'''[fn_qradar_integration]
+    config_data = u'''[fn_qradar_integration:ServerName1]
 host=localhost
 username=admin
 qradarpassword=changeme
@@ -17,5 +17,15 @@ qradarpassword=changeme
 qradartoken=changeme
 #verify_cert=[true|false]
 #search_timeout=
+
+[fn_qradar_integration:ServerName2]
+host=localhost
+username=admin
+qradarpassword=changeme
+#Note, if both qradarpassword and qradartoken are given, password will be used
+qradartoken=changeme
+#verify_cert=[true|false]
+#search_timeout=
+
 '''
     return config_data
