@@ -156,6 +156,7 @@ Get information on workflows run on a given incident or for a range of incidents
  | Rule | Level | Note |
  | ---: | ----: | :--- |
  | PB: Get workflow usage at incident close | Incident | Enable this rule if you want to capture workflow stats when an incident closes. |
+ | PB: Get workflows by artifact value for last 30 days | Artifact | Enable this rule if you want to review workflows for a given artifact over the last 30 days |
  | PB: Get workflow frequency | Incident | List the frequency of workflows used at the incident, artifact, attachment and task level. |
  | PB: Get workflows by artifact value | Artifact | |
  | PB: Get workflows by attachment name | Attachment | |
@@ -169,8 +170,10 @@ Get information on workflows run on a given incident or for a range of incidents
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `pb_min_incident_id` | `number` | No | `-` | Min incident to review. If None the IBM SOAR playform min incident is used. |
-| `pb_max_incident_id` | `number` | No | `-` | Max incident to review. If None the IBM SOAR playform max incident is used. |
+| `pb_min_incident_id` | `number` | No | `-` | Min incident to review. If None, the IBM SOAR playform min incident is used or `pb_min_incident_data`. |
+| `pb_max_incident_id` | `number` | No | `-` | Max incident to review. If None, the IBM SOAR playform max incident is used or `pb_max_incident_data`. |
+| `pb_min_incident_data` | `number` | `-` | Timestamp (in milliseonds) of minimum incident to use. |
+| `pb_max_incident_data` | `number` | `-` | Timestamp (in milliseonds) of maximum incident to use. |
 
 
 </p>
@@ -557,6 +560,7 @@ workflow_usage
 | PB: Get workflows by task name | task | `pb_get_workflows_by_task_name` |
 | PB: Get workflow frequency | incident | `pb_get_workflow_frequency` |
 | PB: Get workflows by artifact value | artifact | `pb_get_workflows_by_artifact_value` |
+| PB: Get workflows by artifact value for last 30 days | artifact | 'pb_get_workflows_by_artifact_value_for_last_30_days |
 
 ---
 

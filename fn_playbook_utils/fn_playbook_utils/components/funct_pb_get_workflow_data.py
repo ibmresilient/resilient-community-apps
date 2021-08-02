@@ -5,7 +5,7 @@
 """AppFunction implementation"""
 from cachetools import cached, TTLCache
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from fn_playbook_utils.lib.common import get_incident_limit
+from fn_playbook_utils.lib.common import parse_inputs
 
 PACKAGE_NAME = "fn_playbook_utils"
 FN_NAME = "pb_get_workflow_data"
@@ -27,24 +27,15 @@ class FunctionComponent(AppFunctionComponent):
         Inputs:
             -   fn_inputs.pb_min_incident_id
             -   fn_inputs.pb_max_incident_id
+            -   fn_inputs.pb_min_incident_date
+            -   fn_inputs.pb_max_incident_date
         """
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
 
-        min_id = fn_inputs.pb_min_incident_id if hasattr(fn_inputs, 'pb_min_incident_id') else None
-        max_id = fn_inputs.pb_max_incident_id if hasattr(fn_inputs, 'pb_max_incident_id') else None
+        min_id, max_id = parse_inputs(self.restclient, fn_inputs)
 
-        # don't make excessive API calls, use system limits if customer provided values are out of range
-        sys_min_id  = get_incident_limit(self.restclient, sort="asc")
-        if not min_id or min_id < sys_min_id:
-            yield self.status_message("Using '{0}' for pb_min_incident_id".format(sys_min_id))
-            min_id = sys_min_id
-
-        sys_max_id = get_incident_limit(self.restclient, sort="desc")
-        if not max_id or max_id > sys_max_id:
-            yield self.status_message("Using '{0}' for pb_max_incident_id".format(sys_max_id))
-            max_id = sys_max_id
-
+        yield self.status_message("Using min_incident: {} max_incident: {}".format(min_id, max_id))
         result_data = self.get_all_incident_workflows(min_id, max_id)
 
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
@@ -62,6 +53,8 @@ class FunctionComponent(AppFunctionComponent):
         result_dict = {}
         result_data = {
             "org_id" : self.restclient.org_id,
+            "min_id": min_id,
+            "max_id": max_id,
             "workflow_content": result_dict
         }
         for inc_id in range(min_id, max_id+1):

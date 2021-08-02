@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 #(c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
 #pragma pylint: disable=unused-argument, no-self-use, line-too-long
+import logging
 import xml.etree.ElementTree as ET
 
+LOG = logging.getLogger(__name__)
 QUERY_PAGED_URL = "/incidents/query_paged?field_handle=-1"
 QUERY_PAGED_FILTER = {"filters":[],"sorts":[{"field_name":"id","type":"desc"}],"start":0,"length":10}
 
@@ -27,6 +29,38 @@ PLAYBOOKS_QUERY_PAGED_FILTER = {
   "start": 0,
   "length": 10
 }
+
+def parse_inputs(restclient, fn_inputs):
+    """[parse inputs, determinging the platform min and max incident id]
+
+    Args:
+        restclient ([class]): [resilient client to make API calls]
+        fn_inputs ([dict]): [function input dictionary]
+
+    Returns:
+        [int, int]: [min_id and max_id]
+    """
+    min_id = fn_inputs.pb_min_incident_id if hasattr(fn_inputs, 'pb_min_incident_id') else None
+    max_id = fn_inputs.pb_max_incident_id if hasattr(fn_inputs, 'pb_max_incident_id') else None
+
+    min_date = fn_inputs.pb_min_incident_date if hasattr(fn_inputs, 'pb_min_incident_date') else None
+    max_date = fn_inputs.pb_max_incident_date if hasattr(fn_inputs, 'pb_max_incident_date') else None
+
+    if not (min_id and max_id) and (min_date or max_date):
+        if max_date:
+            max_date += 60*60*24*1000   # search for date based on midnight
+        min_id, max_id = get_incidents_by_date(restclient, min_date, max_date)
+    else:
+        # don't make excessive API calls, use system limits if customer provided values are out of range
+        sys_min_id  = get_incident_limit(restclient, sort="asc")
+        if not min_id or min_id < sys_min_id:
+            min_id = sys_min_id
+
+        sys_max_id = get_incident_limit(restclient, sort="desc")
+        if not max_id or max_id > sys_max_id:
+            max_id = sys_max_id
+
+    return min_id, max_id
 
 def get_incident_limit(restclient, sort="desc"):
     """[get incidents sorted either ascending or descending in order to get the min or max incident id]
@@ -67,6 +101,45 @@ def get_workflow(rest_client, workflow_id):
             break
 
     return workflow_xml
+
+def get_incidents_by_date(rest_client, min_incident_date, max_incident_date):
+    filter_conditions = {
+        "filters": [
+            {
+                "conditions": [
+                ]
+            }
+        ],
+        "sorts": [
+            {
+                "field_name": "id",
+                "type": "asc"
+            }
+        ]
+    }
+
+    if min_incident_date:
+        filter_conditions['filters'][0]['conditions'].append({
+                        "method": "gte",
+                        "field_name": "create_date",
+                        "value": min_incident_date
+                    })
+
+    if max_incident_date:
+        filter_conditions['filters'][0]['conditions'].append({
+                        "method": "lte",
+                        "field_name": "create_date",
+                        "value": max_incident_date
+                    })
+
+    search_results = rest_client.post(QUERY_PAGED_URL, filter_conditions)
+    min_incident_id = max_incident_id = None
+    LOG.debug(search_results)
+    if search_results.get('data'):
+        min_incident_id = search_results['data'][0]['id']
+        max_incident_id = search_results['data'][-1]['id']
+
+    return min_incident_id, max_incident_id
 
 def get_playbook(rest_client, playbook_id):
     """[get a specific playbook from all playbooks]
