@@ -69,20 +69,29 @@ class FunctionComponent(ResilientComponent):
             LOG.info("qradar_reference_set_name: %s", qradar_reference_set_name)
             LOG.info("qradar_reference_set_item_value: %s", qradar_reference_set_item_value)
 
+            qradar_label = kwargs.get("qradar_label")
+            if qradar_label and PACKAGE_NAME+":"+qradar_label in self.servers_list:
+                options = self.servers_list[PACKAGE_NAME+":"+qradar_label]
+            elif len(self.servers_list) == 1:
+                for server_name in self.servers_list:
+                    options = self.servers_list[server_name]
+            else:
+                raise Exception("qradar_label did not match labels given in the app.config")
+
             qradar_verify_cert = True
-            if "verify_cert" in self.options and self.options["verify_cert"].lower() == "false":
+            if "verify_cert" in options and options["verify_cert"].lower() == "false":
                 qradar_verify_cert = False
 
-            LOG.debug("Connection to {} using {}".format(self.options["host"],
-                                                         self.options.get("username") or "service token"))
+            LOG.debug("Connection to {} using {}".format(options["host"],
+                                                         options.get("username") or "service token"))
 
             yield StatusMessage("starting...")
-            qradar_client = QRadarClient(host=self.options["host"],
-                                         username=self.options.get("username", None),
-                                         password=self.options.get("qradarpassword", None),
-                                         token=self.options.get("qradartoken", None),
+            qradar_client = QRadarClient(host=options["host"],
+                                         username=options.get("username", None),
+                                         password=options.get("qradarpassword", None),
+                                         token=options.get("qradartoken", None),
                                          cafile=qradar_verify_cert,
-                                         opts=self.opts, function_opts=self.options)
+                                         opts=self.opts, function_opts=options)
 
             result = qradar_client.delete_ref_element(qradar_reference_set_name,
                                                    qradar_reference_set_item_value)
