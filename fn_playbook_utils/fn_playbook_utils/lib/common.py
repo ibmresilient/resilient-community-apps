@@ -5,6 +5,7 @@ import logging
 import xml.etree.ElementTree as ET
 
 LOG = logging.getLogger(__name__)
+
 QUERY_PAGED_URL = "/incidents/query_paged?field_handle=-1"
 QUERY_PAGED_FILTER = {"filters":[],"sorts":[{"field_name":"id","type":"desc"}],"start":0,"length":10}
 
@@ -17,17 +18,31 @@ ACTION_MAP = {
     'userTask': 'Tasks'
 }
 
-PLAYBOOKS_QUERY_PAGED_URL = "/playbooks/query_paged?return_level=full"
-PLAYBOOKS_QUERY_PAGED_FILTER = {
-  "query": None,
-  "sorts": [
+PLAYBOOK_QUERY_PAGED_URL = "/playbooks/query_paged?return_level=full"
+PLAYBOOK_QUERY_PAGED_FILTER = {
+  "filters": [
     {
-      "field_name": "display_name",
-      "type": "asc"
+      "conditions": [
+        {
+          "method": "equals",
+          "field_name": "id",
+          "value": None
+        }
+      ]
     }
+  ]
+}
+
+PLAYBOOK_EXECUTION_QUERY_PAGED_FILTER_URL = "/playbooks/execution/query_paged"
+PLAYBOOK_EXECUTION_QUERY_PAGED_FILTER = {
+  "sorts": [
   ],
-  "start": 0,
-  "length": 10
+  "filters": [
+    {
+      "conditions": [
+      ]
+    }
+  ]
 }
 
 def parse_inputs(restclient, fn_inputs):
@@ -151,15 +166,41 @@ def get_playbook(rest_client, playbook_id):
     Returns:
         [str]: [xml document for the found workflow or None]
     """
-    playbooks = rest_client.post(uri=PLAYBOOKS_QUERY_PAGED_FILTER, payload=PLAYBOOKS_QUERY_PAGED_FILTER)
+    filter_conditions = PLAYBOOK_QUERY_PAGED_FILTER.copy()
+    filter_conditions['filters'][0]['conditions'][0]['value'] = playbook_id
+    playbooks = rest_client.post(uri=PLAYBOOK_QUERY_PAGED_URL, payload=filter_conditions)
     # find our specific workflow
     playbook_xml = None
-    for entity in playbooks['entities']:
-        if entity['workflow_id'] == playbook_id:
-            playbook_xml = entity['content']['xml']
-            break
+    if playbooks.get('data'):
+        playbook_xml = playbooks['data'][0]['content']['xml']
 
     return playbook_xml
+
+def get_playbooks_by_incident_id(rest_client, min_incident_id, max_incident_id):
+    """[summary]
+
+    Args:
+        rest_client ([type]): [description]
+        min_id ([type]): [description]
+        max_id ([type]): [description]
+    """
+    filter_conditions = PLAYBOOK_EXECUTION_QUERY_PAGED_FILTER.copy()
+    if min_incident_id:
+        filter_conditions['filters'][0]['conditions'].append({
+                        "method": "gte",
+                        "field_name": "incident_id",
+                        "value": min_incident_id
+                    })
+
+    if max_incident_id:
+        filter_conditions['filters'][0]['conditions'].append({
+                        "method": "lte",
+                        "field_name": "incident_id",
+                        "value": max_incident_id
+                    })
+
+    LOG.debug(filter_conditions)
+    return rest_client.post(PLAYBOOK_EXECUTION_QUERY_PAGED_FILTER_URL, filter_conditions)
 
 def get_process_elements(xml, action_map=ACTION_MAP):
     """[parse the xml for a workflow and extract the names of it's elements: artifacts,

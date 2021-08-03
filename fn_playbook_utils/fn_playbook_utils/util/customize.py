@@ -22,8 +22,8 @@ def codegen_reload_data():
         "package": u"fn_playbook_utils",
         "message_destinations": [u"fn_playbook_utils"],
         "functions": [u"pb_get_playbook_content", u"pb_get_playbook_data", u"pb_get_workflow_content", u"pb_get_workflow_data"],
-        "workflows": [u"pb_get_workflows_by_artifact_value_for_last_30_days", u"wf_get_workflow_content", u"wf_get_workflow_data", u"wf_get_workflow_frequency", u"wf_get_workflow_usage_at_incident_close", u"wf_get_workflows_by_artifact_value", u"wf_get_workflows_by_attachment_filename", u"wf_get_workflows_by_task_name"],
-        "actions": [u"PB: Get workflow content", u"PB: Get workflow frequency", u"PB: Get workflow usage", u"PB: Get workflow usage at incident close", u"PB: Get workflows by artifact value", u"PB: Get workflows by artifact value for last 30 days", u"PB: Get workflows by attachment name", u"PB: Get workflows by task name"],
+        "workflows": [u"pb_get_playbook_content", u"pb_get_playbook_frequency", u"pb_get_playbook_usage", u"pb_get_workflows_by_artifact_value_for_last_30_days", u"wf_get_workflow_content", u"wf_get_workflow_data", u"wf_get_workflow_frequency", u"wf_get_workflow_usage_at_incident_close", u"wf_get_workflows_by_artifact_value", u"wf_get_workflows_by_attachment_filename", u"wf_get_workflows_by_task_name"],
+        "actions": [u"PB: Get playbook content", u"PB: Get playbook frequency", u"PB: Get playbook usage", u"PB: Get workflow content", u"PB: Get workflow frequency", u"PB: Get workflow usage", u"PB: Get workflow usage at incident close", u"PB: Get workflows by artifact value", u"PB: Get workflows by artifact value for last 30 days", u"PB: Get workflows by attachment name", u"PB: Get workflows by task name"],
         "incident_fields": [],
         "incident_artifact_types": [],
         "incident_types": [],
@@ -49,6 +49,9 @@ def customization_data(client=None):
         - pb_get_workflow_content
         - pb_get_workflow_data
     - Workflows:
+        - pb_get_playbook_content
+        - pb_get_playbook_frequency
+        - pb_get_playbook_usage
         - pb_get_workflows_by_artifact_value_for_last_30_days
         - wf_get_workflow_content
         - wf_get_workflow_data
@@ -58,6 +61,9 @@ def customization_data(client=None):
         - wf_get_workflows_by_attachment_filename
         - wf_get_workflows_by_task_name
     - Rules:
+        - PB: Get playbook content
+        - PB: Get playbook frequency
+        - PB: Get playbook usage
         - PB: Get workflow content
         - PB: Get workflow frequency
         - PB: Get workflow usage

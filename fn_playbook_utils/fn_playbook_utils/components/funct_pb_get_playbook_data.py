@@ -5,38 +5,10 @@
 """AppFunction implementation"""
 from cachetools import cached, TTLCache
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from fn_playbook_utils.lib.common import get_incident_limit
+from fn_playbook_utils.lib.common import get_playbooks_by_incident_id, parse_inputs
 
 PACKAGE_NAME = "fn_playbook_utils"
 FN_NAME = "pb_get_playbook_data"
-
-PLAYBOOKS_URL = "/playbooks/execution/query_paged"
-PLAYBOOK_FILTER = {
-  "sorts": [
-    {
-      "field_name": "status",
-      "type": "asc"
-    },
-    {
-      "field_name": "start_time",
-      "type": "asc"
-    }
-  ],
-  "filters": [
-    {
-      "conditions": [
-        {
-          "method": "equals",
-          "field_name": "incident_id",
-          "value": None
-        }
-      ]
-    }
-  ],
-  "start": 0,
-  "length": 10
-}
-
 
 class FunctionComponent(AppFunctionComponent):
     """Component that implements function 'pb_get_playbook_data'"""
@@ -52,23 +24,15 @@ class FunctionComponent(AppFunctionComponent):
         Inputs:
             -   fn_inputs.pb_min_incident_id
             -   fn_inputs.pb_max_incident_id
+            -   fn_inputs.pb_min_incident_date
+            -   fn_inputs.pb_max_incident_date
         """
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
 
-        min_id = fn_inputs.pb_min_incident_id if hasattr(fn_inputs, 'pb_min_incident_id') else None
-        max_id = fn_inputs.pb_max_incident_id if hasattr(fn_inputs, 'pb_max_incident_id') else None
+        min_id, max_id = parse_inputs(self.restclient, fn_inputs)
 
-        # don't make excessive API calls, use system limits if customer provided values are out of range
-        sys_min_id  = get_incident_limit(self.restclient, sort="asc")
-        if not min_id or min_id < sys_min_id:
-            yield self.status_message("Using '{0}' for pb_min_incident_id".format(sys_min_id))
-            min_id = sys_min_id
-
-        sys_max_id = get_incident_limit(self.restclient, sort="desc")
-        if not max_id or max_id > sys_max_id:
-            yield self.status_message("Using '{0}' for pb_max_incident_id".format(sys_max_id))
-            max_id = sys_max_id
+        yield self.status_message("Using min_incident: {} max_incident: {}".format(min_id, max_id))
 
         result_data = self.get_all_incident_playbooks(min_id, max_id)
 
@@ -76,25 +40,22 @@ class FunctionComponent(AppFunctionComponent):
 
         yield FunctionResult(result_data)
 
-    @cached(cache=TTLCache(maxsize=10000, ttl=60))
-    def get_incident_playbook(self, incident_id):
-        query_filter = PLAYBOOK_FILTER.copy()
-        query_filter['filters'][0]['conditions'][0]['value'] = incident_id
-        return self.restclient.post(uri=PLAYBOOKS_URL, payload=query_filter)
-
     @cached(cache=TTLCache(maxsize=30, ttl=60))
     def get_all_incident_playbooks(self, min_id, max_id):
         # get all the incident data to return
         result_dict = {}
         result_data = {
             "org_id" : self.restclient.org_id,
-            "playload_content": result_dict
+            "min_id": min_id,
+            "max_id": max_id,
+            "playbook_content": result_dict
         }
-        for inc_id in range(min_id, max_id+1):
-            try:
-                inc_playbooks = self.get_incident_playbook(inc_id)
-                result_dict[inc_id] = inc_playbooks
-            except BaseException:
-                pass
+
+        search_results = get_playbooks_by_incident_id(self.restclient, min_id, max_id)
+        for pb in search_results['data']:
+          if pb['incident_id'] in result_dict:
+            result_dict[pb['incident_id']].append(pb)
+          else:
+            result_dict[pb['incident_id']] = [pb]
 
         return result_data
