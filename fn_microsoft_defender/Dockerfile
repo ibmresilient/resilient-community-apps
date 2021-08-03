@@ -4,7 +4,7 @@
 FROM registry.access.redhat.com/ubi8/python-36:latest
 
 ARG APPLICATION=fn_microsoft_defender
-ARG RESILIENT_CIRCUITS_VERSION=39
+ARG RESILIENT_CIRCUITS_VERSION=41.1
 ARG PATH_RESILIENT_CIRCUITS=rescircuits
 
 # Environment variable for any app to check if running in a container
@@ -44,22 +44,18 @@ RUN pip install /tmp/packages/${APPLICATION}-*.tar.gz
 RUN mkdir /etc/${PATH_RESILIENT_CIRCUITS}
 ENV APP_CONFIG_FILE /etc/${PATH_RESILIENT_CIRCUITS}/app.config
 
+# create arbitrary group for user 1001
+RUN groupadd -g 1001 default && usermod -g 1001 default
+
 # create directory for logs and set to be root group to allow access by non root processes
 # See https://docs.openshift.com/container-platform/4.2/openshift_images/create-images.html#images-create-guide-openshift_create-images
 RUN mkdir /var/log/${PATH_RESILIENT_CIRCUITS} && \
-    chgrp -R 0 /var/log/${PATH_RESILIENT_CIRCUITS} && \
+    chgrp -R 1001 /var/log/${PATH_RESILIENT_CIRCUITS} && \
     chmod -R g=u /var/log/${PATH_RESILIENT_CIRCUITS}
 ENV APP_LOG_DIR /var/log/${PATH_RESILIENT_CIRCUITS}
 
 # setup entrypoint for read-only enterprise data used by integration, if needed
 RUN mkdir /var/${PATH_RESILIENT_CIRCUITS}
-
-# ansible directory structure
-RUN mkdir -p /var/${PATH_RESILIENT_CIRCUITS}/ansible/env && \
-    chgrp -R 0 /var/${PATH_RESILIENT_CIRCUITS}/ansible && \
-    chmod -R g=u /var/${PATH_RESILIENT_CIRCUITS}/ansible
-# ansible artifacts
-RUN mkdir /tmp/artifacts
 
 # entrypoint for resilient-circuits.  Use /opt, the conventional location for optional software on Linux
 RUN mkdir /opt/${PATH_RESILIENT_CIRCUITS}
