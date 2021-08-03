@@ -4,7 +4,11 @@ include entrypoint.sh
 recursive-include fn_guardium_insights_integration/util *
 include fn_guardium_insights_integration/LICENSE
 include doc/*.md
+include doc/*.pdf
 include doc/screenshots/*
+include apikey_permissions.txt
+include icons/*
+include tox.ini
 recursive-include payload_samples/*/ *.json
 
 exclude *.bak
