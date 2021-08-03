@@ -20,6 +20,7 @@ class FunctionComponent(ResilientComponent):
         super(FunctionComponent, self).__init__(opts)
         self.opts = opts
         self.options = opts.get("fn_qradar_integration", {})
+        
         required_fields = ["host", "verify_cert"]
         validate_fields(required_fields, self.options)
 

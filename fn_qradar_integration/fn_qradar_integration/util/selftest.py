@@ -18,33 +18,39 @@ def selftest_function(opts):
     Suggested return values are be unimplemented, success, or failure.
     """
 
+    servers_list = {}
+
     options = opts.get("fn_qradar_integration", {})
-    server_list = ["fn_qradar_integration"]
 
     if not options:
         servers = QRadarServers(opts, options)
         server_list = servers.get_server_name_list()
+    else:
+        server_list = {"fn_qradar_integration"}
+
+    for server_name in server_list:
+        servers_list[server_name] = opts.get(server_name, {})
 
     try:
-        for server_name in server_list:
-            options = opts.get(server_name, {})
+        for server_name in servers_list:
+            server = servers_list[server_name]
 
             log.info("Verifying app.config values for fn_qradar_integration")
 
-            cafile = False if options.get("verify_cert", "").lower() == "false" else options["verify_cert"]
-            qradar_client = QRadarClient(host=options["host"],
-                                        username=options.get("username", None),
-                                        password=options.get("qradarpassword", None),
-                                        token=options.get("qradartoken", None),
+            cafile = False if server.get("verify_cert", "").lower() == "false" else server["verify_cert"]
+            qradar_client = QRadarClient(host=server["host"],
+                                        username=server.get("username", None),
+                                        password=server.get("qradarpassword", None),
+                                        token=server.get("qradartoken", None),
                                         cafile=cafile,
                                         opts=opts,
-                                        function_opts=options)
+                                        function_opts=server)
 
             connected = qradar_client.verify_connect()
 
             log.info("Verifying QRadar connection...")
 
-            log.info("Test for {} was successful".format(options["host"]))
+            log.info("Test for {} was successful".format(server["host"]))
 
         return {
             "state" : "success"
@@ -59,8 +65,8 @@ def selftest_function(opts):
                 host: {1}
                 credentials: {2}\n""".format(
                 err,
-                options["host"],
-                options.get("username") or "service token"
+                server["host"],
+                server.get("username") or "service token"
             )
 
             log.error(err_reason_msg)

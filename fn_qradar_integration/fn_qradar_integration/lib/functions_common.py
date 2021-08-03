@@ -44,6 +44,7 @@ class QRadarServers():
         Returns:
             [dict]: [settings for a QRadar server]
         """
+        server_name = "fn_qradar_integration"+server_name
         if not server_name in self.servers:
             raise KeyError(u"Unable to find server: {}".format(server_name))
 
