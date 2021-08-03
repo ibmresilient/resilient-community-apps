@@ -277,7 +277,6 @@ class ZiaClient(Auth):
         if keywords:
             # Convert keywords in comma or newline seperated string to a list.
             keywords = list(filter(None, re.split(r"\s+|,|\n", keywords)))
-            keywords = list(filter(None, re.split(r"\s+|,|\n", keywords)))
 
         payload = {
             "configuredName": configured_name,
