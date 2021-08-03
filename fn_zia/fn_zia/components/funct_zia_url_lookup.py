@@ -15,7 +15,7 @@ FN_NAME = "funct_zia_url_lookup"
 LOG = logging.getLogger(__name__)
 
 # Initialize the ratelimit decorator.
-ratelimit(init=True, method="get")
+ratelimit(init=True, method="post")
 
 
 class FunctionComponent(ResilientComponent):

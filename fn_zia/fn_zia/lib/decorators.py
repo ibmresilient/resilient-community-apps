@@ -30,7 +30,7 @@ RL_DEFS = {
 # Map of endpoint types by method supported by ratelimiter
 EP_MAP = {
     "get": ["blocklist", "allowlist", "categories", "sandbox_report"],
-    "post": ["authenticate", "blocklist_action", "categories", "activate"],
+    "post": ["authenticate", "blocklist_action", "categories", "activate", "url_lookup"],
     "put": ["allowlist", "categories"]
 }
 # Create RLock object for each request method type.
