@@ -20,6 +20,9 @@
 ```python
 inputs.pb_max_incident_id = rule.properties.pb_max_incident_id
 inputs.pb_min_incident_id = rule.properties.pb_min_incident_id
+
+inputs.pb_min_incident_date = rule.properties.pb_min_incident_date
+inputs.pb_max_incident_date = rule.properties.pb_max_incident_date
 ```
 
 ### Post-Processing Script
@@ -122,7 +125,7 @@ if results['success']:
 
   # make tuples so we can sort
   wf_list = sort_wf_stats(wf_stats)
-  msg.append("Top 10 Workflows for incidents: {} to {}".format(results['inputs']['pb_min_incident_id'], results['inputs']['pb_max_incident_id']))
+  msg.append("Top 10 Workflows for incidents: {} to {}".format(results['content']['min_id'], results['content']['max_id']))
   msg.extend(["  {2}: {0} ({1})".format(wf_list[x][0], wf_list[x][1], wf_list[x][2]) for x in range(0, 10) if x < len(wf_list)])
 
   for obj in OBJECT_TYPES:

@@ -20,6 +20,9 @@
 ```python
 inputs.pb_max_incident_id = rule.properties.pb_max_incident_id
 inputs.pb_min_incident_id = rule.properties.pb_min_incident_id
+
+inputs.pb_min_incident_date = rule.properties.pb_min_incident_date
+inputs.pb_max_incident_date = rule.properties.pb_max_incident_date
 ```
 
 ### Post-Processing Script
@@ -52,12 +55,15 @@ if results.success:
         row = incident.addRow('workflow_usage')
         row['report_date'] = int(time.time())*1000
         row['incident'] = helper.createRichText(make_url(org_id, key_incident, 'incident', entity.get("object", {}).get("object_id"), entity.get("object", {}).get("object_name")))
+        row['type'] = 'workflow'
         row['workflow'] = helper.createRichText(make_url(org_id, key_incident, 'workflow', entity.get("workflow", {}).get("workflow_id"), entity.get("workflow", {}).get("name")))
         row['workflow_id'] = entity.get("workflow", {}).get("workflow_id")
         row['execution_date'] = entity.get("start_date")
         row['element_type'] = entity.get("object", {}).get("type_name")
         row['element_value'] = helper.createRichText(make_url(org_id, key_incident, entity.get("object", {}).get("type_name"), entity.get("object", {}).get("object_id"), entity.get("object", {}).get("object_name")))
         row['element_id'] =  entity.get("object", {}).get("object_id")
+  else:
+    incident.addNote("PB: Get workflows by task name ({}) returned no results for incident range: {}-{}".format(task.name, results.content['min_id'], results.content['max_id']))
 else:
   incident.addNote("PB: Get workflows by task name failed: {}".format(results.reason))
 ```

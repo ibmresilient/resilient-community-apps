@@ -20,6 +20,9 @@
 ```python
 inputs.pb_max_incident_id = incident.id
 inputs.pb_min_incident_id = incident.id
+
+inputs.pb_min_incident_date = None
+inputs.pb_max_incident_date = None
 ```
 
 ### Post-Processing Script
@@ -51,6 +54,7 @@ if results.success:
       row = incident.addRow('workflow_usage')
       row['report_date'] = int(time.time())*1000
       row['incident'] = helper.createRichText(make_url(org_id, key_incident, 'incident', entity.get("object", {}).get("object_id"), entity.get("object", {}).get("object_name")))
+      row['type'] = 'workflow'
       row['workflow'] = helper.createRichText(make_url(org_id, key_incident, 'workflow', entity.get("workflow", {}).get("workflow_id"), entity.get("workflow", {}).get("name")))
       row['workflow_id'] = entity.get("workflow", {}).get("workflow_id")
       row['execution_date'] = entity.get("start_date")
