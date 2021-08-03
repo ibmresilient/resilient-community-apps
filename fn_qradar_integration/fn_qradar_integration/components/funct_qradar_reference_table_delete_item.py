@@ -8,6 +8,7 @@ import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import validate_fields, ResultPayload
 from fn_qradar_integration.util.qradar_utils import QRadarClient
+from fn_qradar_integration.lib.functions_common import QRadarServers
 
 PACKAGE_NAME = "fn_qradar_integration"
 
@@ -19,12 +20,40 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get(PACKAGE_NAME, {})
+        self.opts = opts
+        self.servers_list = {}
+
+        options = opts.get(PACKAGE_NAME, {})
+
+        if options:
+            server_list = {PACKAGE_NAME}
+        else:
+            servers = QRadarServers(opts, options)
+            server_list = servers.get_server_name_list()
+
+        for server_name in server_list:
+            self.servers_list[server_name] = opts.get(server_name, {})
+            options = self.servers_list[server_name]
+
+            required_fields = ["host", "verify_cert"]
+            validate_fields(required_fields, options)
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
-        self.options = opts.get(PACKAGE_NAME, {})
+        self.opts = opts
+        self.servers_list = {}
+
+        options = opts.get(PACKAGE_NAME, {})
+
+        if options:
+            server_list = {PACKAGE_NAME}
+        else:
+            servers = QRadarServers(opts, options)
+            server_list = servers.get_server_name_list()
+
+        for server_name in server_list:
+            self.servers_list[server_name] = opts.get(server_name, {})
 
     @function("qradar_reference_table_delete_item")
     def _qradar_reference_table_delete_item_function(self, event, *args, **kwargs):
