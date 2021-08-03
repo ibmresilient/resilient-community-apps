@@ -9,7 +9,7 @@
   If you make manual edits and run docgen again, a .bak file will be created
 
   Store any screenshots in the "doc/screenshots" directory and reference them like:
-  ![screenshot: screenshot_1](./screenshots/screenshot_1.png)
+  ![screenshot: screenshot_1](./doc/screenshots/screenshot_1.png)
 
   NOTE: If your app is available in the container-format only, there is no need to mention the integration server in this readme.
 -->
@@ -49,7 +49,7 @@
 
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.0.0 | MM/YYYY | Initial Release |
+| 1.0.0 | 08/2021 | Initial Release |
 
 ---
 
@@ -61,7 +61,7 @@
 -->
 **Resilient Circuits Components for 'fn_guardium_insights_integration'**
 
-![screenshot: main](screenshots/gi_all_rules.png)
+![screenshot: main](doc/screenshots/gi_all_rules.png)
 
 Resilient Circuits Components for 'fn_guardium_insights_integration'
 
@@ -273,7 +273,7 @@ authentication.* |
 
 * Import the Data Tables and Custom Fields like the screenshot below:
 
-  ![screenshot: custom_layouts](screenshots/custom_layouts.png)
+  ![screenshot: custom_layouts](doc/screenshots/custom_layouts.png)
 
 ---
 
@@ -281,7 +281,7 @@ authentication.* |
 
 A Function to Block User From Guardium Insights.
 
-![screenshot: fn-function-guardium-insights-block-user ](screenshots/fn-function-guardium-insights-block-user.png)
+![screenshot: fn-function-guardium-insights-block-user ](doc/screenshots/fn-function-guardium-insights-block-user.png)
 
 <details><summary>Inputs:</summary>
 <table border="1">
@@ -351,7 +351,7 @@ incident.addNote(notes_string)
 
 A function to get classification report data.
 
-![screenshot: fn-function-guardium-insights-classification-report ](screenshots/fn-function-guardium-insights-classification-report.png)
+![screenshot: fn-function-guardium-insights-classification-report ](doc/screenshots/fn-function-guardium-insights-classification-report.png)
 
 <details><summary>Inputs:</summary>
 <table>
@@ -409,7 +409,7 @@ incident.addNote(report_st)
 
 ## Data Table - Guardium Insights Classification Report
 
-![screenshot: dt-guardium-insights-classification-report](screenshots/dt-guardium-insights-classification-report.png)
+![screenshot: dt-guardium-insights-classification-report](doc/screenshots/dt-guardium-insights-classification-report.png)
 
 #### API Name:
 

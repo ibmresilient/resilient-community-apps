@@ -1,9 +1,22 @@
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, no-self-use
-"""Function implementation
-   test with: resilient-circuits selftest -l fn_guardium_insights_integration
-"""
 
+"""
+Function implementation test.
+Usage: 
+    resilient-circuits selftest -l fn_guardium_insights_integration
+    resilient-circuits selftest --print-env -l fn_guardium_insights_integration
+
+Return examples:
+    return {
+        "state": "success",
+        "reason": "Successful connection to third party endpoint"
+    }
+
+    return {
+        "state": "failure",
+        "reason": "Failed to connect to third party endpoint"
+    }
+"""
 import logging
 from fn_guardium_insights_integration.lib.insights_services import InsightsServices
 import resilient
@@ -28,7 +41,7 @@ def selftest_function(opts):
         log.info("Checking Resilient Appliance connectivity and credentials")
         resilient.get_client(opts)
         log.info("Checking Resilient Appliance connectivity and credentials...OK")
-        return {"state": "success"}
+        return {"state": "success", "reason": "Successful connection to third party endpoint"}
     except Exception as er:
         log.error(repr(er))
-        return {"state": "failure"}
+        return {"state": "failure", "reason": repr(er)}

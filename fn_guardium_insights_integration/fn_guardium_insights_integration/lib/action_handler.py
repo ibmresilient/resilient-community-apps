@@ -53,6 +53,7 @@ def thread_controller(function_object, data, *args, **kwargs):
     __tmp_threads_list = []
     output_holder = []
 
+    # Iterating over each passed data with given function to get it process
     for d_in in data:
         thread_object = ActionHandlerThread(lambda r: function_object(d_in, *args, **kwargs))
         if six.PY2:

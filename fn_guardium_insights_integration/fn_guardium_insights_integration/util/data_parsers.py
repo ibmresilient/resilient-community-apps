@@ -13,6 +13,8 @@ def map_details_assets(event_data, asset_data):
     asset_affected = event_data.get("record").get("asset_affected").lower()
     _data_map["asset_affected"] = asset_affected
     _event_details = event_data.get("record").get("event_details")
+
+    # iterating through each anomalies event data to get details and asset information.
     for each_details in _event_details:
         _sub_map = dict()
         _assets = asset_data.get("assets", [])

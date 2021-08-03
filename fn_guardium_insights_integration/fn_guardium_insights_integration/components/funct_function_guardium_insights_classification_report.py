@@ -119,7 +119,7 @@ class FunctionComponent(ResilientComponent):
 
                 # adding report data to the resilient table
                 log.info("Adding report data to the resilient table...")
-                data = report_data.get("result").get("data", {})
+                data = report_data.get("result", {}).get("data", {})
                 if data:
                     cell_data_list = []
                     for each_data in data:
@@ -140,11 +140,7 @@ class FunctionComponent(ResilientComponent):
 
             fun_result = res_pay.done(res_status, {}, reason)
 
-            results = {
-                "value": fun_result
-            }
-            print(json.dumps(results))
             # Produce a FunctionResult with the results
-            yield FunctionResult(results)
+            yield FunctionResult(fun_result)
         except Exception as fn_err:
             yield FunctionError(fn_err)

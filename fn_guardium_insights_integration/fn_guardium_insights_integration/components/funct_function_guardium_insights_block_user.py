@@ -71,11 +71,8 @@ class FunctionComponent(ResilientComponent):
             response = gi_service.block_user(_payload)
             function_res = res_payload.done(success=True, content=response)
 
-            results = {
-                "value": function_res
-            }
             yield StatusMessage("Blocking user action for: {} completed...".format(input_field_guardium_insights_who))
             # Produce a FunctionResult with the results
-            yield FunctionResult(results)
+            yield FunctionResult(function_res)
         except Exception as funct_msg:
             yield FunctionError(funct_msg)

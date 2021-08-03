@@ -1,9 +1,10 @@
 include README.md
-include fn_guardium_insights_integration/util/*
-include fn_guardium_insights_integration/LICENSE
-include doc/*
-include screenshots/*
-include apikey_permissions.txt
 include Dockerfile
 include entrypoint.sh
-include icons/*
+recursive-include fn_guardium_insights_integration/util *
+include fn_guardium_insights_integration/LICENSE
+include doc/*.md
+include doc/screenshots/*
+recursive-include payload_samples/*/ *.json
+
+exclude *.bak
