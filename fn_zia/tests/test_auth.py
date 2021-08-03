@@ -8,10 +8,15 @@ from mock import patch
 import pytest
 from fn_zia.lib.auth import *
 from .mock_artifacts import mocked_requests
-
+from fn_zia.lib.decorators import RateLimit as ratelimit
 """
 Suite of tests to test Zia client class
 """
+# Initialize the ratelimit decorator.
+METHOD="post"
+EP="authenticate"
+
+ratelimit(init=True, method=METHOD)
 
 def assert_keys_in(json_obj, *keys):
     for key in keys:
@@ -34,6 +39,7 @@ class TestZia:
         ("JSESSIONID=971F40D46FE1A27AB4E2783BA77A1C76")
     ])
     def test_set_jsession_header(self, mock_req, expected_result):
+        ratelimit(method=METHOD, ep=EP)
         opts = {}
         auth = Auth(opts, get_fn_opts())
 
@@ -43,6 +49,7 @@ class TestZia:
         ("JSESSIONID=971F40D46FE1A27AB4E2783BA77A1C76")
     ])
     def test_set_jsession_header(self, mock_req, expected_result):
+        ratelimit(method=METHOD, ep=EP)
         opts = {}
         auth = Auth(opts, get_fn_opts())
         auth._set_jsession_header()
@@ -55,6 +62,7 @@ class TestZia:
         ("1620836100899", "baakllCJCIIM")
     ])
     def test_obfuscate_api_key(self, mock_req, timestamp, expected_result):
+        ratelimit(method=METHOD, ep=EP)
         opts = {}
         auth = Auth(opts, get_fn_opts())
         auth._timestamp = timestamp
@@ -67,6 +75,7 @@ class TestZia:
         ("1620837564418", "FIeebke0eeCM")
     ])
     def test_obfuscate_api_key_with_new_timestamp(self, mock_req, timestamp, expected_result):
+        ratelimit(method=METHOD, ep=EP)
         opts = {}
         auth = Auth(opts, get_fn_opts())
         auth._timestamp = timestamp
@@ -82,6 +91,7 @@ class TestZia:
         "JSESSIONID=6C42F97B950DE134775BCAC65F16F614")
     ])
     def test_obfuscate_parse_jsessionid(self, mock_req, set_cookie, expected_result):
+        ratelimit(method=METHOD, ep=EP)
         opts = {}
         auth = Auth(opts, get_fn_opts())
         result = auth._parse_jsessionid(set_cookie)
@@ -97,6 +107,7 @@ class TestZia:
 
     ])
     def test_obfuscate_parse_jsessionid_missing_id(self, mock_req, set_cookie, expected_result):
+        ratelimit(method=METHOD, ep=EP)
         opts = {}
         auth = Auth(opts, get_fn_opts())
         with pytest.raises(ValueError) as e:
