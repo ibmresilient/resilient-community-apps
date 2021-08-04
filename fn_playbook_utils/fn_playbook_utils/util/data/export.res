@@ -3,143 +3,32 @@
   "actions": [
     {
       "automations": [],
-      "conditions": [
-        {
-          "evaluation_id": null,
-          "field_name": "workflow_usage.type",
-          "method": "equals",
-          "type": null,
-          "value": "playbook"
-        }
-      ],
+      "conditions": [],
       "enabled": true,
-      "export_key": "PB: Get playbook content",
-      "id": 127,
+      "export_key": "PB: Get workflow/playbook content",
+      "id": 129,
       "logic_type": "all",
       "message_destinations": [],
-      "name": "PB: Get playbook content",
+      "name": "PB: Get workflow/playbook content",
       "object_type": "workflow_usage",
       "tags": [],
       "timeout_seconds": 86400,
       "type": 1,
-      "uuid": "f1629c45-ce12-466c-a7df-950fd5d01a26",
+      "uuid": "d9386432-9536-4aac-b24a-ed7bb961c182",
       "view_items": [],
       "workflows": [
-        "pb_get_playbook_content"
+        "pb_get_workflowplaybook_content"
       ]
     },
     {
       "automations": [],
       "conditions": [],
       "enabled": true,
-      "export_key": "PB: Get playbook frequency",
-      "id": 128,
-      "logic_type": "all",
-      "message_destinations": [],
-      "name": "PB: Get playbook frequency",
-      "object_type": "incident",
-      "tags": [],
-      "timeout_seconds": 86400,
-      "type": 1,
-      "uuid": "2fa2b30c-a80e-4898-a905-38148e3f74a2",
-      "view_items": [
-        {
-          "content": "e5b835b6-6ad9-4537-88eb-1d741208b95b",
-          "element": "field_uuid",
-          "field_type": "actioninvocation",
-          "show_if": null,
-          "show_link_header": false,
-          "step_label": null
-        },
-        {
-          "content": "ede550e6-8394-489c-9a0d-cd0d9456771f",
-          "element": "field_uuid",
-          "field_type": "actioninvocation",
-          "show_if": null,
-          "show_link_header": false,
-          "step_label": null
-        },
-        {
-          "content": "7dc54f82-cee6-4c3f-9093-4bf5ab95e873",
-          "element": "field_uuid",
-          "field_type": "actioninvocation",
-          "show_if": null,
-          "show_link_header": false,
-          "step_label": null
-        },
-        {
-          "content": "d82c4e9f-7163-428a-b1fe-169df253d35f",
-          "element": "field_uuid",
-          "field_type": "actioninvocation",
-          "show_if": null,
-          "show_link_header": false,
-          "step_label": null
-        }
-      ],
-      "workflows": [
-        "pb_get_playbook_frequency"
-      ]
-    },
-    {
-      "automations": [],
-      "conditions": [],
-      "enabled": true,
-      "export_key": "PB: Get playbook usage",
-      "id": 126,
-      "logic_type": "all",
-      "message_destinations": [],
-      "name": "PB: Get playbook usage",
-      "object_type": "incident",
-      "tags": [],
-      "timeout_seconds": 86400,
-      "type": 1,
-      "uuid": "168faba4-ab0a-44a8-9b47-8ec73cd802f4",
-      "view_items": [],
-      "workflows": [
-        "pb_get_playbook_usage"
-      ]
-    },
-    {
-      "automations": [],
-      "conditions": [
-        {
-          "evaluation_id": null,
-          "field_name": "workflow_usage.type",
-          "method": "equals",
-          "type": null,
-          "value": "workflow"
-        }
-      ],
-      "enabled": true,
-      "export_key": "PB: Get workflow content",
-      "id": 118,
-      "logic_type": "all",
-      "message_destinations": [],
-      "name": "PB: Get workflow content",
-      "object_type": "workflow_usage",
-      "tags": [
-        {
-          "tag_handle": "fn_playbook_utils",
-          "value": null
-        }
-      ],
-      "timeout_seconds": 86400,
-      "type": 1,
-      "uuid": "06bbb735-fdb3-49e8-a712-25af7c3a8986",
-      "view_items": [],
-      "workflows": [
-        "wf_get_workflow_content"
-      ]
-    },
-    {
-      "automations": [],
-      "conditions": [],
-      "enabled": true,
-      "export_key": "PB: Get workflow frequency",
+      "export_key": "PB: Get workflow/playbook frequency",
       "id": 119,
       "logic_type": "all",
       "message_destinations": [],
-      "name": "PB: Get workflow frequency",
+      "name": "PB: Get workflow/playbook frequency",
       "object_type": "incident",
       "tags": [
         {
@@ -192,209 +81,11 @@
       "automations": [],
       "conditions": [],
       "enabled": true,
-      "export_key": "PB: Get workflows by artifact value",
-      "id": 111,
-      "logic_type": "all",
-      "message_destinations": [],
-      "name": "PB: Get workflows by artifact value",
-      "object_type": "artifact",
-      "tags": [
-        {
-          "tag_handle": "fn_playbook_utils",
-          "value": null
-        }
-      ],
-      "timeout_seconds": 86400,
-      "type": 1,
-      "uuid": "5c7bd4ee-ef5b-4adb-998a-95c25397c981",
-      "view_items": [
-        {
-          "content": "e5b835b6-6ad9-4537-88eb-1d741208b95b",
-          "element": "field_uuid",
-          "field_type": "actioninvocation",
-          "show_if": null,
-          "show_link_header": false,
-          "step_label": null
-        },
-        {
-          "content": "ede550e6-8394-489c-9a0d-cd0d9456771f",
-          "element": "field_uuid",
-          "field_type": "actioninvocation",
-          "show_if": null,
-          "show_link_header": false,
-          "step_label": null
-        },
-        {
-          "content": "7dc54f82-cee6-4c3f-9093-4bf5ab95e873",
-          "element": "field_uuid",
-          "field_type": "actioninvocation",
-          "show_if": null,
-          "show_link_header": false,
-          "step_label": null
-        },
-        {
-          "content": "d82c4e9f-7163-428a-b1fe-169df253d35f",
-          "element": "field_uuid",
-          "field_type": "actioninvocation",
-          "show_if": null,
-          "show_link_header": false,
-          "step_label": null
-        }
-      ],
-      "workflows": [
-        "wf_get_workflows_by_artifact_value"
-      ]
-    },
-    {
-      "automations": [],
-      "conditions": [
-        {
-          "evaluation_id": null,
-          "field_name": null,
-          "method": "object_added",
-          "type": null,
-          "value": null
-        }
-      ],
-      "enabled": false,
-      "export_key": "PB: Get workflows by artifact value for last 30 days",
-      "id": 125,
-      "logic_type": "all",
-      "message_destinations": [],
-      "name": "PB: Get workflows by artifact value for last 30 days",
-      "object_type": "artifact",
-      "tags": [],
-      "timeout_seconds": 86400,
-      "type": 0,
-      "uuid": "279b6bec-f67b-4c90-9baa-4b74f998d18b",
-      "view_items": [],
-      "workflows": [
-        "pb_get_workflows_by_artifact_value_for_last_30_days"
-      ]
-    },
-    {
-      "automations": [],
-      "conditions": [],
-      "enabled": true,
-      "export_key": "PB: Get workflows by attachment name",
-      "id": 113,
-      "logic_type": "all",
-      "message_destinations": [],
-      "name": "PB: Get workflows by attachment name",
-      "object_type": "attachment",
-      "tags": [
-        {
-          "tag_handle": "fn_playbook_utils",
-          "value": null
-        }
-      ],
-      "timeout_seconds": 86400,
-      "type": 1,
-      "uuid": "e2e9a810-b1c5-45c2-add2-1b611db01b43",
-      "view_items": [
-        {
-          "content": "e5b835b6-6ad9-4537-88eb-1d741208b95b",
-          "element": "field_uuid",
-          "field_type": "actioninvocation",
-          "show_if": null,
-          "show_link_header": false,
-          "step_label": null
-        },
-        {
-          "content": "ede550e6-8394-489c-9a0d-cd0d9456771f",
-          "element": "field_uuid",
-          "field_type": "actioninvocation",
-          "show_if": null,
-          "show_link_header": false,
-          "step_label": null
-        },
-        {
-          "content": "7dc54f82-cee6-4c3f-9093-4bf5ab95e873",
-          "element": "field_uuid",
-          "field_type": "actioninvocation",
-          "show_if": null,
-          "show_link_header": false,
-          "step_label": null
-        },
-        {
-          "content": "d82c4e9f-7163-428a-b1fe-169df253d35f",
-          "element": "field_uuid",
-          "field_type": "actioninvocation",
-          "show_if": null,
-          "show_link_header": false,
-          "step_label": null
-        }
-      ],
-      "workflows": [
-        "wf_get_workflows_by_attachment_filename"
-      ]
-    },
-    {
-      "automations": [],
-      "conditions": [],
-      "enabled": true,
-      "export_key": "PB: Get workflows by task name",
-      "id": 112,
-      "logic_type": "all",
-      "message_destinations": [],
-      "name": "PB: Get workflows by task name",
-      "object_type": "task",
-      "tags": [
-        {
-          "tag_handle": "fn_playbook_utils",
-          "value": null
-        }
-      ],
-      "timeout_seconds": 86400,
-      "type": 1,
-      "uuid": "f4cb4afc-51d6-474f-a296-df59cd666b33",
-      "view_items": [
-        {
-          "content": "e5b835b6-6ad9-4537-88eb-1d741208b95b",
-          "element": "field_uuid",
-          "field_type": "actioninvocation",
-          "show_if": null,
-          "show_link_header": false,
-          "step_label": null
-        },
-        {
-          "content": "ede550e6-8394-489c-9a0d-cd0d9456771f",
-          "element": "field_uuid",
-          "field_type": "actioninvocation",
-          "show_if": null,
-          "show_link_header": false,
-          "step_label": null
-        },
-        {
-          "content": "7dc54f82-cee6-4c3f-9093-4bf5ab95e873",
-          "element": "field_uuid",
-          "field_type": "actioninvocation",
-          "show_if": null,
-          "show_link_header": false,
-          "step_label": null
-        },
-        {
-          "content": "d82c4e9f-7163-428a-b1fe-169df253d35f",
-          "element": "field_uuid",
-          "field_type": "actioninvocation",
-          "show_if": null,
-          "show_link_header": false,
-          "step_label": null
-        }
-      ],
-      "workflows": [
-        "wf_get_workflows_by_task_name"
-      ]
-    },
-    {
-      "automations": [],
-      "conditions": [],
-      "enabled": true,
-      "export_key": "PB: Get workflow usage",
+      "export_key": "PB: Get workflow/playbook usage",
       "id": 110,
       "logic_type": "all",
       "message_destinations": [],
-      "name": "PB: Get workflow usage",
+      "name": "PB: Get workflow/playbook usage",
       "object_type": "incident",
       "tags": [
         {
@@ -454,12 +145,12 @@
           "value": "Closed"
         }
       ],
-      "enabled": false,
-      "export_key": "PB: Get workflow usage at incident close",
+      "enabled": true,
+      "export_key": "PB: Get workflow/playbook usage at incident close",
       "id": 116,
       "logic_type": "all",
       "message_destinations": [],
-      "name": "PB: Get workflow usage at incident close",
+      "name": "PB: Get workflow/playbook usage at incident close",
       "object_type": "incident",
       "tags": [
         {
@@ -474,11 +165,209 @@
       "workflows": [
         "wf_get_workflow_usage_at_incident_close"
       ]
+    },
+    {
+      "automations": [],
+      "conditions": [],
+      "enabled": true,
+      "export_key": "PB: Get workflows/playbooks by artifact value",
+      "id": 111,
+      "logic_type": "all",
+      "message_destinations": [],
+      "name": "PB: Get workflows/playbooks by artifact value",
+      "object_type": "artifact",
+      "tags": [
+        {
+          "tag_handle": "fn_playbook_utils",
+          "value": null
+        }
+      ],
+      "timeout_seconds": 86400,
+      "type": 1,
+      "uuid": "5c7bd4ee-ef5b-4adb-998a-95c25397c981",
+      "view_items": [
+        {
+          "content": "e5b835b6-6ad9-4537-88eb-1d741208b95b",
+          "element": "field_uuid",
+          "field_type": "actioninvocation",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "ede550e6-8394-489c-9a0d-cd0d9456771f",
+          "element": "field_uuid",
+          "field_type": "actioninvocation",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "7dc54f82-cee6-4c3f-9093-4bf5ab95e873",
+          "element": "field_uuid",
+          "field_type": "actioninvocation",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "d82c4e9f-7163-428a-b1fe-169df253d35f",
+          "element": "field_uuid",
+          "field_type": "actioninvocation",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        }
+      ],
+      "workflows": [
+        "wf_get_workflows_by_artifact_value"
+      ]
+    },
+    {
+      "automations": [],
+      "conditions": [
+        {
+          "evaluation_id": null,
+          "field_name": null,
+          "method": "object_added",
+          "type": null,
+          "value": null
+        }
+      ],
+      "enabled": true,
+      "export_key": "PB: Get workflows/playbooks by artifact value for last 30 days",
+      "id": 125,
+      "logic_type": "all",
+      "message_destinations": [],
+      "name": "PB: Get workflows/playbooks by artifact value for last 30 days",
+      "object_type": "artifact",
+      "tags": [],
+      "timeout_seconds": 86400,
+      "type": 0,
+      "uuid": "279b6bec-f67b-4c90-9baa-4b74f998d18b",
+      "view_items": [],
+      "workflows": [
+        "pb_get_workflows_by_artifact_value_for_last_30_days"
+      ]
+    },
+    {
+      "automations": [],
+      "conditions": [],
+      "enabled": true,
+      "export_key": "PB: Get workflows/playbooks by attachment name",
+      "id": 113,
+      "logic_type": "all",
+      "message_destinations": [],
+      "name": "PB: Get workflows/playbooks by attachment name",
+      "object_type": "attachment",
+      "tags": [
+        {
+          "tag_handle": "fn_playbook_utils",
+          "value": null
+        }
+      ],
+      "timeout_seconds": 86400,
+      "type": 1,
+      "uuid": "e2e9a810-b1c5-45c2-add2-1b611db01b43",
+      "view_items": [
+        {
+          "content": "e5b835b6-6ad9-4537-88eb-1d741208b95b",
+          "element": "field_uuid",
+          "field_type": "actioninvocation",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "ede550e6-8394-489c-9a0d-cd0d9456771f",
+          "element": "field_uuid",
+          "field_type": "actioninvocation",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "7dc54f82-cee6-4c3f-9093-4bf5ab95e873",
+          "element": "field_uuid",
+          "field_type": "actioninvocation",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "d82c4e9f-7163-428a-b1fe-169df253d35f",
+          "element": "field_uuid",
+          "field_type": "actioninvocation",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        }
+      ],
+      "workflows": [
+        "wf_get_workflows_by_attachment_filename"
+      ]
+    },
+    {
+      "automations": [],
+      "conditions": [],
+      "enabled": true,
+      "export_key": "PB: Get workflows/playbooks by task name",
+      "id": 112,
+      "logic_type": "all",
+      "message_destinations": [],
+      "name": "PB: Get workflows/playbooks by task name",
+      "object_type": "task",
+      "tags": [
+        {
+          "tag_handle": "fn_playbook_utils",
+          "value": null
+        }
+      ],
+      "timeout_seconds": 86400,
+      "type": 1,
+      "uuid": "f4cb4afc-51d6-474f-a296-df59cd666b33",
+      "view_items": [
+        {
+          "content": "e5b835b6-6ad9-4537-88eb-1d741208b95b",
+          "element": "field_uuid",
+          "field_type": "actioninvocation",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "ede550e6-8394-489c-9a0d-cd0d9456771f",
+          "element": "field_uuid",
+          "field_type": "actioninvocation",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "7dc54f82-cee6-4c3f-9093-4bf5ab95e873",
+          "element": "field_uuid",
+          "field_type": "actioninvocation",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "d82c4e9f-7163-428a-b1fe-169df253d35f",
+          "element": "field_uuid",
+          "field_type": "actioninvocation",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        }
+      ],
+      "workflows": [
+        "wf_get_workflows_by_task_name"
+      ]
     }
   ],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1627994960008,
+  "export_date": 1628095230361,
   "export_format_version": 2,
   "fields": [
     {
@@ -576,6 +465,64 @@
       "tooltip": "",
       "type_id": 11,
       "uuid": "2aefc15a-903d-4d35-95b9-fb33903d788c",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "__function/pb_object_type",
+      "hide_notification": false,
+      "id": 698,
+      "input_type": "text",
+      "internal": false,
+      "is_tracked": false,
+      "name": "pb_object_type",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": null,
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "pb_object_type",
+      "tooltip": "",
+      "type_id": 11,
+      "uuid": "5cce9a2b-2be8-49e9-b375-2bcfc8f176e3",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "__function/pb_object_name",
+      "hide_notification": false,
+      "id": 697,
+      "input_type": "text",
+      "internal": false,
+      "is_tracked": false,
+      "name": "pb_object_name",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": null,
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "pb_object_name",
+      "tooltip": "",
+      "type_id": 11,
+      "uuid": "70e912c6-af8a-464e-98e4-dde1a8cac210",
       "values": []
     },
     {
@@ -801,11 +748,11 @@
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1627931404705,
+      "last_modified_time": 1628015654966,
       "name": "pb_get_playbook_content",
       "tags": [],
       "uuid": "688cc0f8-85c5-4033-b9bf-66f01b35698c",
-      "version": 3,
+      "version": 5,
       "view_items": [
         {
           "content": "d63b66e3-a0e2-4538-950a-84dd352a4e7f",
@@ -820,12 +767,12 @@
         {
           "actions": [],
           "description": null,
-          "name": "PB: Get playbook content",
-          "object_type": "incident",
-          "programmatic_name": "pb_get_playbook_content",
+          "name": "PB: Get workflow/playbook content",
+          "object_type": "workflow_usage",
+          "programmatic_name": "pb_get_workflowplaybook_content",
           "tags": [],
           "uuid": null,
-          "workflow_id": 110
+          "workflow_id": 119
         }
       ]
     },
@@ -850,11 +797,11 @@
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1627913459142,
+      "last_modified_time": 1628015721852,
       "name": "pb_get_playbook_data",
       "tags": [],
       "uuid": "d3b215fc-8c94-45eb-97d9-0c1b3a71e3a5",
-      "version": 3,
+      "version": 4,
       "view_items": [
         {
           "content": "2aefc15a-903d-4d35-95b9-fb33903d788c",
@@ -887,38 +834,124 @@
           "show_if": null,
           "show_link_header": false,
           "step_label": null
+        },
+        {
+          "content": "70e912c6-af8a-464e-98e4-dde1a8cac210",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "5cce9a2b-2be8-49e9-b375-2bcfc8f176e3",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
         }
       ],
       "workflows": [
         {
           "actions": [],
           "description": null,
-          "name": "PB: Get playbook data",
+          "name": "PB: Get workflow/playbook usage",
           "object_type": "incident",
-          "programmatic_name": "pb_get_playbook_data",
-          "tags": [],
+          "programmatic_name": "wf_get_workflow_data",
+          "tags": [
+            {
+              "tag_handle": "fn_playbook_utils",
+              "value": null
+            }
+          ],
           "uuid": null,
-          "workflow_id": 112
+          "workflow_id": 94
         },
         {
           "actions": [],
           "description": null,
-          "name": "PB: Get playbook frequency",
+          "name": "PB: Get workflow/playbook usage at incident close",
           "object_type": "incident",
-          "programmatic_name": "pb_get_playbook_frequency",
-          "tags": [],
+          "programmatic_name": "wf_get_workflow_usage_at_incident_close",
+          "tags": [
+            {
+              "tag_handle": "fn_playbook_utils",
+              "value": null
+            }
+          ],
           "uuid": null,
-          "workflow_id": 115
+          "workflow_id": 100
         },
         {
           "actions": [],
           "description": null,
-          "name": "PB: Get playbook usage",
+          "name": "PB: Get workflow/playbooks frequency",
           "object_type": "incident",
-          "programmatic_name": "pb_get_playbook_usage",
+          "programmatic_name": "wf_get_workflow_frequency",
+          "tags": [
+            {
+              "tag_handle": "fn_playbook_utils",
+              "value": null
+            }
+          ],
+          "uuid": null,
+          "workflow_id": 104
+        },
+        {
+          "actions": [],
+          "description": null,
+          "name": "PB: Get workflows/playbooks by artifact value",
+          "object_type": "artifact",
+          "programmatic_name": "wf_get_workflows_by_artifact_value",
+          "tags": [
+            {
+              "tag_handle": "fn_playbook_utils",
+              "value": null
+            }
+          ],
+          "uuid": null,
+          "workflow_id": 95
+        },
+        {
+          "actions": [],
+          "description": null,
+          "name": "PB: Get workflows/playbooks by artifact value for last 30 days",
+          "object_type": "artifact",
+          "programmatic_name": "pb_get_workflows_by_artifact_value_for_last_30_days",
           "tags": [],
           "uuid": null,
-          "workflow_id": 114
+          "workflow_id": 113
+        },
+        {
+          "actions": [],
+          "description": null,
+          "name": "PB: Get workflows/playbooks by attachment filename",
+          "object_type": "attachment",
+          "programmatic_name": "wf_get_workflows_by_attachment_filename",
+          "tags": [
+            {
+              "tag_handle": "fn_playbook_utils",
+              "value": null
+            }
+          ],
+          "uuid": null,
+          "workflow_id": 97
+        },
+        {
+          "actions": [],
+          "description": null,
+          "name": "PB: Get workflows/playbooks by task name",
+          "object_type": "task",
+          "programmatic_name": "wf_get_workflows_by_task_name",
+          "tags": [
+            {
+              "tag_handle": "fn_playbook_utils",
+              "value": null
+            }
+          ],
+          "uuid": null,
+          "workflow_id": 96
         }
       ]
     },
@@ -967,17 +1000,12 @@
         {
           "actions": [],
           "description": null,
-          "name": "PB: Get workflow content",
+          "name": "PB: Get workflow/playbook content",
           "object_type": "workflow_usage",
-          "programmatic_name": "wf_get_workflow_content",
-          "tags": [
-            {
-              "tag_handle": "fn_playbook_utils",
-              "value": null
-            }
-          ],
+          "programmatic_name": "pb_get_workflowplaybook_content",
+          "tags": [],
           "uuid": null,
-          "workflow_id": 102
+          "workflow_id": 119
         }
       ]
     },
@@ -1002,7 +1030,7 @@
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1627913637710,
+      "last_modified_time": 1628015747079,
       "name": "pb_get_workflow_data",
       "tags": [
         {
@@ -1011,7 +1039,7 @@
         }
       ],
       "uuid": "ece3eb1b-2c95-4f0b-b00e-c610d418264a",
-      "version": 8,
+      "version": 9,
       "view_items": [
         {
           "content": "2aefc15a-903d-4d35-95b9-fb33903d788c",
@@ -1044,28 +1072,29 @@
           "show_if": null,
           "show_link_header": false,
           "step_label": null
+        },
+        {
+          "content": "70e912c6-af8a-464e-98e4-dde1a8cac210",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "5cce9a2b-2be8-49e9-b375-2bcfc8f176e3",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
         }
       ],
       "workflows": [
         {
           "actions": [],
           "description": null,
-          "name": "PB: Get workflow frequency",
-          "object_type": "incident",
-          "programmatic_name": "wf_get_workflow_frequency",
-          "tags": [
-            {
-              "tag_handle": "fn_playbook_utils",
-              "value": null
-            }
-          ],
-          "uuid": null,
-          "workflow_id": 104
-        },
-        {
-          "actions": [],
-          "description": null,
-          "name": "PB: Get workflow usage",
+          "name": "PB: Get workflow/playbook usage",
           "object_type": "incident",
           "programmatic_name": "wf_get_workflow_data",
           "tags": [
@@ -1080,7 +1109,7 @@
         {
           "actions": [],
           "description": null,
-          "name": "PB: Get workflow usage at incident close",
+          "name": "PB: Get workflow/playbook usage at incident close",
           "object_type": "incident",
           "programmatic_name": "wf_get_workflow_usage_at_incident_close",
           "tags": [
@@ -1095,7 +1124,22 @@
         {
           "actions": [],
           "description": null,
-          "name": "PB: Get workflows by artifact value",
+          "name": "PB: Get workflow/playbooks frequency",
+          "object_type": "incident",
+          "programmatic_name": "wf_get_workflow_frequency",
+          "tags": [
+            {
+              "tag_handle": "fn_playbook_utils",
+              "value": null
+            }
+          ],
+          "uuid": null,
+          "workflow_id": 104
+        },
+        {
+          "actions": [],
+          "description": null,
+          "name": "PB: Get workflows/playbooks by artifact value",
           "object_type": "artifact",
           "programmatic_name": "wf_get_workflows_by_artifact_value",
           "tags": [
@@ -1110,7 +1154,7 @@
         {
           "actions": [],
           "description": null,
-          "name": "PB: Get workflows by artifact value for last 30 days",
+          "name": "PB: Get workflows/playbooks by artifact value for last 30 days",
           "object_type": "artifact",
           "programmatic_name": "pb_get_workflows_by_artifact_value_for_last_30_days",
           "tags": [],
@@ -1120,7 +1164,7 @@
         {
           "actions": [],
           "description": null,
-          "name": "PB: Get workflows by attachment filename",
+          "name": "PB: Get workflows/playbooks by attachment filename",
           "object_type": "attachment",
           "programmatic_name": "wf_get_workflows_by_attachment_filename",
           "tags": [
@@ -1135,7 +1179,7 @@
         {
           "actions": [],
           "description": null,
-          "name": "PB: Get workflows by task name",
+          "name": "PB: Get workflows/playbooks by task name",
           "object_type": "task",
           "programmatic_name": "wf_get_workflows_by_task_name",
           "tags": [
@@ -1152,12 +1196,12 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 44,
+  "id": 57,
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1627994959397,
+      "create_date": 1628095230605,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -1166,7 +1210,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1627994959397,
+      "update_date": 1628095230605,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -1200,7 +1244,53 @@
   "phases": [],
   "regulators": null,
   "roles": [],
-  "scripts": [],
+  "scripts": [
+    {
+      "actions": [],
+      "creator_id": "a@example.com",
+      "description": "Display usage data for playbooks\nThis script relies on the workflow property: playbook_data",
+      "export_key": "PB: Display playbook data",
+      "id": 9,
+      "language": "python3",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1628078901121,
+      "name": "PB: Display playbook data",
+      "object_type": "incident",
+      "script_text": "import time\n\nURL_MAP  = {\n  \u0027incident\u0027: \"\u003ca href=\u0027/#incidents/{0}\u0027\u003e{0}\u003c/a\u003e\",\n  \u0027task\u0027: \"\u003ca href=\u0027/#incidents/{0}?taskId={1}\u0026tabName=details\u0026org_id={2}\u0027\u003e{3}\u003c/a\u003e\",\n  \u0027artifact\u0027: \"\u003ca href=\u0027/#incidents/{0}/artifact/{1}?org_id={2}\u0027\u003e{3}\u003c/a\u003e\",\n  \u0027workflow\u0027: \"\u003ca href=\u0027/#customize?tab=workflows\u0026workflow={1}\u0027\u003e{3}\u003c/a\u003e\",\n  \u0027playbook\u0027: \"\u003ca href=\u0027/#playbooks/designer/{1}\u0027\u003e{3}\u003c/a\u003e\"\n}\n\ndef make_url(org_id, inc_id, element_type, element_id, element_name):\n  if element_type in URL_MAP:\n    return URL_MAP[element_type].format(inc_id, element_id, org_id, element_name)\n\n  return str(element_name)\n\n# --- S T A R T\nresults = workflow.properties.playbook_data\n\nif results.success:\n  org_id = results.content[\u0027org_id\u0027]\n  data_flg = None\n  for key_incident, value_playbooks in results.content[\u0027playbook_content\u0027].items():\n    data_flg = False\n    for entity in value_playbooks:\n      # skip these workflows/playbooks\n      if \"PB: Get\" in entity.get(\"playbook\", {}).get(\"display_name\"):\n        continue\n\n      if (results.inputs.get(\u0027pb_object_name\u0027) and results.inputs[\u0027pb_object_name\u0027] == entity.get(\"object\", {}).get(\"object_name\")) or not results.inputs.get(\u0027pb_object_name\u0027):\n        row = incident.addRow(\u0027workflow_usage\u0027)\n        row[\u0027report_date\u0027] = int(time.time())*1000\n        row[\u0027incident\u0027] = helper.createRichText(make_url(org_id, key_incident, \u0027incident\u0027, entity.get(\"object\", {}).get(\"object_id\"), entity.get(\"object\", {}).get(\"object_name\")))\n        row[\u0027type\u0027] = \u0027playbook\u0027\n        row[\u0027workflow\u0027] = helper.createRichText(make_url(org_id, key_incident, \u0027playbook\u0027, entity.get(\"playbook\", {}).get(\"id\"), entity.get(\"playbook\", {}).get(\"display_name\")))\n        row[\u0027workflow_id\u0027] = entity.get(\"playbook\", {}).get(\"id\")\n        row[\u0027execution_date\u0027] = entity.get(\"start_time\")\n        row[\u0027element_type\u0027] = entity.get(\"object\", {}).get(\"type_name\")\n        row[\u0027element_value\u0027] =  helper.createRichText(make_url(org_id, key_incident, entity.get(\"object\", {}).get(\"type_name\"), entity.get(\"object\", {}).get(\"object_id\"), entity.get(\"object\", {}).get(\"object_name\")))\n        row[\u0027element_id\u0027] =  entity.get(\"object\", {}).get(\"object_id\")\n        data_flg = True\n  \n  if data_flg == False:\n    incident.addNote(\"PB: Get playbook usage ({}) returned no results for incident range: {}-{}\".format(results.inputs.get(\u0027pb_object_name\u0027), results.content[\u0027min_id\u0027], results.content[\u0027max_id\u0027]))\nelse:\n  incident.addNote(\"PB: Get playbook usage ({}) failed: {}\".format(results.inputs.get(\u0027pb_object_name\u0027), results.reason))\n",
+      "tags": [],
+      "uuid": "fadb0f23-7415-4029-a502-552ccb523002"
+    },
+    {
+      "actions": [],
+      "creator_id": "a@example.com",
+      "description": "Display usage data for workflows\nThis script relies on the workflow property: workflow_data",
+      "export_key": "PB: Display workflow data",
+      "id": 10,
+      "language": "python3",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1628078914059,
+      "name": "PB: Display workflow data",
+      "object_type": "incident",
+      "script_text": "import time\n\nURL_MAP  = {\n  \u0027incident\u0027: \"\u003ca href=\u0027/#incidents/{0}\u0027\u003e{0}\u003c/a\u003e\",\n  \u0027task\u0027: \"\u003ca href=\u0027/#incidents/{0}?taskId={1}\u0026tabName=details\u0026org_id={2}\u0027\u003e{3}\u003c/a\u003e\",\n  \u0027artifact\u0027: \"\u003ca href=\u0027/#incidents/{0}/artifact/{1}?org_id={2}\u0027\u003e{3}\u003c/a\u003e\",\n  \u0027workflow\u0027: \"\u003ca href=\u0027/#customize?tab=workflows\u0026workflow={1}\u0027\u003e{3}\u003c/a\u003e\",\n  \u0027playbook\u0027: \"\u003ca href=\u0027/#playbooks/designer/{1}\u0027\u003e{3}\u003c/a\u003e\"\n}\n\ndef make_url(org_id, inc_id, element_type, element_id, element_name):\n  if element_type in URL_MAP:\n    return URL_MAP[element_type].format(inc_id, element_id, org_id, element_name)\n\n  return str(element_name)\n\n# --- S T A R T\nresults = workflow.properties.workflow_data\n\nif results.success:\n  org_id = results.content[\u0027org_id\u0027]\n  data_flg = False\n  for key_incident, value_workflow in results.content[\u0027workflow_content\u0027].items():\n    for entity in value_workflow[\u0027entities\u0027]:\n      # skip these workflows/playbooks\n      if \"PB: Get\" in entity.get(\"workflow\", {}).get(\"name\"):\n        continue\n\n      if (results.inputs.get(\u0027pb_object_name\u0027) and results.inputs[\u0027pb_object_name\u0027] == entity.get(\"object\", {}).get(\"object_name\")) or not results.inputs.get(\u0027pb_object_name\u0027):\n        row = incident.addRow(\u0027workflow_usage\u0027)\n        row[\u0027report_date\u0027] = int(time.time())*1000\n        row[\u0027incident\u0027] = helper.createRichText(make_url(org_id, key_incident, \u0027incident\u0027, entity.get(\"object\", {}).get(\"object_id\"), entity.get(\"object\", {}).get(\"object_name\")))\n        row[\u0027type\u0027] = \u0027workflow\u0027\n        row[\u0027workflow\u0027] = helper.createRichText(make_url(org_id, key_incident, \u0027workflow\u0027, entity.get(\"workflow\", {}).get(\"workflow_id\"), entity.get(\"workflow\", {}).get(\"name\")))\n        row[\u0027workflow_id\u0027] = entity.get(\"workflow\", {}).get(\"workflow_id\")\n        row[\u0027execution_date\u0027] = entity.get(\"start_date\")\n        row[\u0027element_type\u0027] = entity.get(\"object\", {}).get(\"type_name\")\n        row[\u0027element_value\u0027] =  helper.createRichText(make_url(org_id, key_incident, entity.get(\"object\", {}).get(\"type_name\"), entity.get(\"object\", {}).get(\"object_id\"), entity.get(\"object\", {}).get(\"object_name\")))\n        row[\u0027element_id\u0027] =  entity.get(\"object\", {}).get(\"object_id\")\n        data_flg = True\n  \n  if not data_flg:\n    incident.addNote(\"PB: Get workflow usage ({}) returned no results for incident range: {}-{}\".format(results.inputs.get(\u0027pb_object_name\u0027), results.content[\u0027min_id\u0027], results.content[\u0027max_id\u0027]))\nelse:\n  incident.addNote(\"PB: Get workflow usage ({}) failed: {}\".format(results.inputs.get(\u0027pb_object_name\u0027), results.reason))\n",
+      "tags": [],
+      "uuid": "52b3f960-ee96-4fff-80bb-71744f6f9a2c"
+    },
+    {
+      "actions": [],
+      "creator_id": "a@example.com",
+      "description": "Display the contents of a workflow or playbook: functions, tasks, scripts and sub-workflows",
+      "export_key": "PB: Display workflow/playbook content",
+      "id": 8,
+      "language": "python3",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1628094748577,
+      "name": "PB: Display workflow/playbook content",
+      "object_type": "workflow_usage",
+      "script_text": "results = workflow.properties.playbook_content if workflow.properties.playbook_content else workflow.properties.workflow_content\n\nif results.success:\n  content = []\n  if results.content:\n    for k in sorted(results.content.keys()):\n      lizt = [v for v in results.content[k]]\n      content.append(\"{}:\u003cbr\u003e\u0026nbsp;\u0026nbsp;{}\".format(k, \"\u003cbr\u003e\u0026nbsp;\u0026nbsp;\".join(lizt)))\n  else:\n    content.append(\"None\")\n      \n  row[\u0027workflow_content\u0027] = helper.createRichText(\"\u003cbr\u003e\u003cbr\u003e\".join(content))\nelse:\n  incident.addNote(\"PB: Get workflow/playbook content failed: {}\".format(results.reason))\n",
+      "tags": [],
+      "uuid": "168e5688-9cb8-42c4-9b95-ec77dfa7565d"
+    }
+  ],
   "server_version": {
     "build_number": 6328,
     "major": 39,
@@ -1556,87 +1646,17 @@
     {
       "actions": [],
       "content": {
-        "version": 34,
-        "workflow_id": "wf_get_workflow_frequency",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_get_workflow_frequency\" isExecutable=\"true\" name=\"PB: Get workflow frequency\"\u003e\u003cdocumentation\u003eProvide a summary of workflows runs across a range of incidents\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1mgeiob\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0kd0k0p\" name=\"PB: Get workflow data\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"ece3eb1b-2c95-4f0b-b00e-c610d418264a\"\u003e{\"inputs\":{},\"post_processing_script\":\"INCIDENT_URL = \\\"\u0026lt;a href=\u0027/#incidents/{0}\u0027\u0026gt;{0}\u0026lt;/a\u0026gt;\\\"\\nOBJECT_TYPES = [\u0027incident\u0027, \u0027task\u0027, \u0027artifact\u0027, \u0027attachment\u0027]\\nwf_stats = {}\\nobject_stats = { object: {} for object in OBJECT_TYPES }\\n\\n\\ndef update_workflow_stats(workflow_name, workflow_id, workflow_type):\\n  \\\"\\\"\\\"[tracking frequency of workflows by workflow id]\\n\\n  Args:\\n    workflow_name ([str]): [workflow name]\\n    workflow_id ([int]): [id of workflow]\\n    workflow_type ([str]): [artifact, incident, task, or attachment]\\n  \\\"\\\"\\\"\\n  if workflow_id not in wf_stats:\\n    wf_stats[workflow_id] = {\\n      \\\"name\\\": workflow_name,\\n      \\\"type\\\": workflow_type,\\n      \\\"workflows\\\": 0\\n    }\\n\\n  wf_stats[workflow_id][\u0027workflows\u0027] += 1\\n\\ndef update_object_stats(workflow_name, object_name, object_type):\\n  \\\"\\\"\\\"[track what workflows are run on a given attachment, task or artifact]\\n\\n  Args:\\n    workflow_name ([str]): [workflow name]\\n    object_name ([str]): [value of artifact or name to attachment/task]\\n    object_type ([str]): [artifact, incident, task, or attachment]\\n  \\\"\\\"\\\"\\n  if object_name not in object_stats[object_type]:\\n    object_stats[object_type][object_name] = []\\n\\n  object_stats[object_type][object_name].append(workflow_name)\\n\\ndef sort_wf_stats(wf_stats):\\n  \\\"\\\"\\\"[sort worflow stats by most frequent]\\n\\n  Args:\\n    wf_stats ([dict]): [dictionary of workflows keyed by id]\\n\\n  Returns:\\n    [list]: [list of workflows sorted by most frequent]\\n  \\\"\\\"\\\"\\n  wf_list = []\\n  for _, wf in wf_stats.items():\\n    wf_list.append((wf[\u0027name\u0027], wf[\u0027type\u0027], wf[\u0027workflows\u0027]))\\n\\n  return sorted(wf_list, key=lambda wf: wf[2], reverse=True)\\n\\ndef count_items_in_tuple_list(tuple_list, ndx):\\n  \\\"\\\"\\\"[count the repeat items in the workflow list and dedup the list]\\n  \\\"\\\"\\\"\\n  # count the list\\n  counted_objects = []\\n  for items in tuple_list:\\n    counted_wfs = []\\n    for wf in items[ndx]:\\n      counted_wfs.append(\\\"{1}- {0}\\\".format(wf, items[ndx].count(wf)))\\n      \\n    new_tuple = items[:ndx]\\n    new_tuple += tuple([list(set(counted_wfs))])\\n    \\n    counted_objects.append(new_tuple)\\n    \\n  return counted_objects\\n\\ndef sort_object_stats(object_list):\\n  \\\"\\\"\\\"[sort workflow frequency by specific artifact, task, incident, attachment]\\n\\n  Args:\\n    object_list ([dict]): [dictionary of object types and the workflows used within each object]\\n\\n  Returns:\\n    [list]: [description]\\n  \\\"\\\"\\\"\\n  sort_list = []\\n  for k, v in object_list.items():\\n    sort_list.append((k, len(v), v))\\n\\n  sorted_objects = sorted(sort_list, key=lambda obj: obj[1], reverse=True)\\n  # count the list\\n  return count_items_in_tuple_list(sorted_objects, 2)\\n\\n# MAIN\\nif results[\u0027success\u0027]:\\n  msg = []\\n  # get all workflows grouped by incident\\n  for inc_id, entities in results[\u0027content\u0027][\u0027workflow_content\u0027].items():\\n    for entity in entities[\u0027entities\u0027]:\\n      # filter out these workflows to get content\\n      if \\\"PB: Get workflow\\\" not in entity.get(\u0027workflow\u0027, {}).get(\u0027name\u0027):\\n        update_workflow_stats(entity.get(\u0027workflow\u0027, {}).get(\u0027name\u0027), entity.get(\u0027workflow\u0027, {}).get(\u0027workflow_id\u0027), entity.get(\u0027object\u0027, {}).get(\u0027type_name\u0027))\\n        update_object_stats(entity.get(\u0027workflow\u0027, {}).get(\u0027name\u0027), entity.get(\u0027object\u0027, {}).get(\u0027object_name\u0027), entity.get(\u0027object\u0027, {}).get(\u0027type_name\u0027))\\n\\n  # make tuples so we can sort\\n  wf_list = sort_wf_stats(wf_stats)\\n  msg.append(\\\"Top 10 Workflows for incidents: {} to {}\\\".format(results[\u0027content\u0027][\u0027min_id\u0027], results[\u0027content\u0027][\u0027max_id\u0027]))\\n  msg.extend([\\\"  {2}: {0} ({1})\\\".format(wf_list[x][0], wf_list[x][1], wf_list[x][2]) for x in range(0, 10) if x \u0026lt; len(wf_list)])\\n\\n  for obj in OBJECT_TYPES:\\n    msg.append(\\\"\\\\nTop 10 Workflows for {}s\\\".format(obj))\\n    obj_list = sort_object_stats(object_stats[obj])\\n    if obj_list:\\n      msg.extend([\\\"  {1}: {0}\\\\n  {2}\\\".format(obj_list[x][0], obj_list[x][1], obj_list[x][2])  for x in range(0, 10) if x \u0026lt; len(obj_list)])\\n    else:\\n      msg.append(\\\"  None\\\")\\n\\n  incident.addNote(helper.createPlainText(\\\"\\\\n\\\".join(msg)))\\nelse:\\n  incident.addNote(\\\"PB: Get workflow frequency failed: {}\\\".format(results.reason))\\n\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.pb_max_incident_id = rule.properties.pb_max_incident_id\\ninputs.pb_min_incident_id = rule.properties.pb_min_incident_id\\n\\ninputs.pb_min_incident_date = rule.properties.pb_min_incident_date\\ninputs.pb_max_incident_date = rule.properties.pb_max_incident_date\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1mgeiob\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0taijrv\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1mgeiob\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0kd0k0p\"/\u003e\u003cendEvent id=\"EndEvent_0fco8ag\"\u003e\u003cincoming\u003eSequenceFlow_0taijrv\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0taijrv\" sourceRef=\"ServiceTask_0kd0k0p\" targetRef=\"EndEvent_0fco8ag\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1nnedv0\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned in an incident note\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1erm5lh\" sourceRef=\"ServiceTask_0kd0k0p\" targetRef=\"TextAnnotation_1nnedv0\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0kd0k0p\" id=\"ServiceTask_0kd0k0p_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"285\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1mgeiob\" id=\"SequenceFlow_1mgeiob_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"285\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"241.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0fco8ag\" id=\"EndEvent_0fco8ag_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"455\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"473\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0taijrv\" id=\"SequenceFlow_0taijrv_di\"\u003e\u003comgdi:waypoint x=\"385\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"455\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"420\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1nnedv0\" id=\"TextAnnotation_1nnedv0_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181\" x=\"378\" y=\"58\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1erm5lh\" id=\"Association_1erm5lh_di\"\u003e\u003comgdi:waypoint x=\"377\" xsi:type=\"omgdc:Point\" y=\"168\"/\u003e\u003comgdi:waypoint x=\"440\" xsi:type=\"omgdc:Point\" y=\"110\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 34,
-      "creator_id": "a@example.com",
-      "description": "Provide a summary of workflows runs across a range of incidents",
-      "export_key": "wf_get_workflow_frequency",
-      "last_modified_by": "a@example.com",
-      "last_modified_time": 1627923638752,
-      "name": "PB: Get workflow frequency",
-      "object_type": "incident",
-      "programmatic_name": "wf_get_workflow_frequency",
-      "tags": [
-        {
-          "tag_handle": "fn_playbook_utils",
-          "value": null
-        }
-      ],
-      "uuid": "ca7bc04f-f527-4d4b-a23f-fea3a90c6175",
-      "workflow_id": 104
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 1,
-        "workflow_id": "pb_get_playbook_frequency",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"pb_get_playbook_frequency\" isExecutable=\"true\" name=\"PB: Get playbook frequency\"\u003e\u003cdocumentation\u003eProvide a summary of playbooks runs across a range of incidents\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0ysqc0e\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1lhs8lr\" name=\"PB: Get playbook data\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d3b215fc-8c94-45eb-97d9-0c1b3a71e3a5\"\u003e{\"inputs\":{},\"post_processing_script\":\"INCIDENT_URL = \\\"\u0026lt;a href=\u0027/#incidents/{0}\u0027\u0026gt;{0}\u0026lt;/a\u0026gt;\\\"\\nOBJECT_TYPES = [\u0027incident\u0027, \u0027task\u0027, \u0027artifact\u0027, \u0027attachment\u0027]\\npb_stats = {}\\nobject_stats = { object: {} for object in OBJECT_TYPES }\\n\\n\\ndef update_playbook_stats(playbook_name, playbook_id, playbook_type):\\n  \\\"\\\"\\\"[tracking frequency of playbooks by playbook id]\\n\\n  Args:\\n    playbook_name ([str]): [playbook name]\\n    playbook_id ([int]): [id of playbook]\\n    playbook_type ([str]): [artifact, incident, task, or attachment]\\n  \\\"\\\"\\\"\\n  if playbook_id not in pb_stats:\\n    pb_stats[playbook_id] = {\\n      \\\"name\\\": playbook_name,\\n      \\\"type\\\": playbook_type,\\n      \\\"playbooks\\\": 0\\n    }\\n\\n  pb_stats[playbook_id][\u0027playbooks\u0027] += 1\\n\\ndef update_object_stats(playbook_name, object_name, object_type):\\n  \\\"\\\"\\\"[track what playbooks are run on a given attachment, task or artifact]\\n\\n  Args:\\n    playbook_name ([str]): [playbook name]\\n    object_name ([str]): [value of artifact or name to attachment/task]\\n    object_type ([str]): [artifact, incident, task, or attachment]\\n  \\\"\\\"\\\"\\n  if object_name not in object_stats[object_type]:\\n    object_stats[object_type][object_name] = []\\n\\n  object_stats[object_type][object_name].append(playbook_name)\\n\\ndef sort_pb_stats(pb_stats):\\n  \\\"\\\"\\\"[sort playbook stats by most frequent]\\n\\n  Args:\\n    pb_stats ([dict]): [dictionary of playbooks keyed by id]\\n\\n  Returns:\\n    [list]: [list of playbooks sorted by most frequent]\\n  \\\"\\\"\\\"\\n  pb_list = []\\n  for _, pb in pb_stats.items():\\n    pb_list.append((pb[\u0027name\u0027], pb[\u0027type\u0027], pb[\u0027playbooks\u0027]))\\n\\n  return sorted(pb_list, key=lambda pb: pb[2], reverse=True)\\n\\ndef count_items_in_tuple_list(tuple_list, ndx):\\n  \\\"\\\"\\\"[count the repeat items in the playbook list and dedup the list]\\n  \\\"\\\"\\\"\\n  # count the list\\n  counted_objects = []\\n  for items in tuple_list:\\n    counted_pbs = []\\n    for pb in items[ndx]:\\n      counted_pbs.append(\\\"{1}- {0}\\\".format(pb, items[ndx].count(pb)))\\n      \\n    new_tuple = items[:ndx]\\n    new_tuple += tuple([list(set(counted_pbs))])\\n    \\n    counted_objects.append(new_tuple)\\n    \\n  return counted_objects\\n\\ndef sort_object_stats(object_list):\\n  \\\"\\\"\\\"[sort playbook frequency by specific artifact, task, incident, attachment]\\n\\n  Args:\\n    object_list ([dict]): [dictionary of object types and the playbooks used within each object]\\n\\n  Returns:\\n    [list]: [description]\\n  \\\"\\\"\\\"\\n  sort_list = []\\n  for k, v in object_list.items():\\n    sort_list.append((k, len(v), v))\\n\\n  sorted_objects = sorted(sort_list, key=lambda obj: obj[1], reverse=True)\\n  # count the list\\n  return count_items_in_tuple_list(sorted_objects, 2)\\n\\n# MAIN\\nif results[\u0027success\u0027]:\\n  msg = []\\n  # get all playbooks grouped by incident\\n  for inc_id, entities in results[\u0027content\u0027][\u0027playbook_content\u0027].items():\\n    for entity in entities:\\n      # filter out these playbooks to get content\\n      if \\\"PB: Get\\\" not in entity.get(\u0027playbook\u0027, {}).get(\u0027display_name\u0027):\\n        update_playbook_stats(entity.get(\u0027playbook\u0027, {}).get(\u0027display_name\u0027), entity.get(\u0027playbook\u0027, {}).get(\u0027id\u0027), entity.get(\u0027object\u0027, {}).get(\u0027type_name\u0027))\\n        update_object_stats(entity.get(\u0027playbook\u0027, {}).get(\u0027display_name\u0027), entity.get(\u0027object\u0027, {}).get(\u0027object_name\u0027), entity.get(\u0027object\u0027, {}).get(\u0027type_name\u0027))\\n\\n  # make tuples so we can sort\\n  pb_list = sort_pb_stats(pb_stats)\\n  msg.append(\\\"Top 10 Playbooks for incidents: {} to {}\\\".format(results[\u0027content\u0027][\u0027min_id\u0027], results[\u0027content\u0027][\u0027max_id\u0027]))\\n  msg.extend([\\\"  {2}: {0} ({1})\\\".format(pb_list[x][0], pb_list[x][1], pb_list[x][2]) for x in range(0, 10) if x \u0026lt; len(pb_list)])\\n\\n  for obj in OBJECT_TYPES:\\n    msg.append(\\\"\\\\nTop 10 Playbooks for {}s\\\".format(obj))\\n    obj_list = sort_object_stats(object_stats[obj])\\n    if obj_list:\\n      msg.extend([\\\"  {1}: {0}\\\\n  {2}\\\".format(obj_list[x][0], obj_list[x][1], obj_list[x][2])  for x in range(0, 10) if x \u0026lt; len(obj_list)])\\n    else:\\n      msg.append(\\\"  None\\\")\\n\\n  incident.addNote(helper.createPlainText(\\\"\\\\n\\\".join(msg)))\\nelse:\\n  incident.addNote(\\\"PB: Get playbook frequency failed: {}\\\".format(results.reason))\\n\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.pb_max_incident_id = rule.properties.pb_max_incident_id\\ninputs.pb_min_incident_id = rule.properties.pb_min_incident_id\\n\\ninputs.pb_min_incident_date = rule.properties.pb_min_incident_date\\ninputs.pb_max_incident_date = rule.properties.pb_max_incident_date\\n\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0ysqc0e\u003c/incoming\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0ysqc0e\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1lhs8lr\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1lhs8lr\" id=\"ServiceTask_1lhs8lr_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"261\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0ysqc0e\" id=\"SequenceFlow_0ysqc0e_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"261\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"229.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 1,
-      "creator_id": "a@example.com",
-      "description": "Provide a summary of playbooks runs across a range of incidents",
-      "export_key": "pb_get_playbook_frequency",
-      "last_modified_by": "a@example.com",
-      "last_modified_time": 1627939343300,
-      "name": "PB: Get playbook frequency",
-      "object_type": "incident",
-      "programmatic_name": "pb_get_playbook_frequency",
-      "tags": [],
-      "uuid": "de7ac952-5d50-4728-92c9-4a9dd7be1ea9",
-      "workflow_id": 115
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 23,
-        "workflow_id": "wf_get_workflow_content",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_get_workflow_content\" isExecutable=\"true\" name=\"PB: Get workflow content\"\u003e\u003cdocumentation\u003eGet functions, tasks, scripts and sub-workflows of a workflow\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1mqw0w1\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0hkvdcp\" name=\"PB: Get Workflow content\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"a3b3eba1-03e6-4e97-b3f5-57d21f1454fc\"\u003e{\"inputs\":{},\"post_processing_script\":\"if results.success:\\n  content = []\\n  for k in sorted(results.content.keys()):\\n    lizt = [v for v in results.content[k]]\\n    content.append(\\\"{}:\u0026lt;br\u0026gt;\u0026amp;nbsp;\u0026amp;nbsp;{}\\\".format(k, \\\"\u0026lt;br\u0026gt;\u0026amp;nbsp;\u0026amp;nbsp;\\\".join(lizt)))\\n    \\n  row[\u0027workflow_content\u0027] = helper.createRichText(\\\"\u0026lt;br\u0026gt;\u0026lt;br\u0026gt;\\\".join(content))\\nelse:\\n  incident.addNote(\\\"PB: Get workflow content failed: {}\\\".format(results.reason))\\n\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.pb_id = row[\u0027workflow_id\u0027]\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1mqw0w1\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0ib87iz\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1mqw0w1\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0hkvdcp\"/\u003e\u003cendEvent id=\"EndEvent_1q7w4kj\"\u003e\u003cincoming\u003eSequenceFlow_0ib87iz\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0ib87iz\" sourceRef=\"ServiceTask_0hkvdcp\" targetRef=\"EndEvent_1q7w4kj\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1rnzxgr\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned in the same datatable row\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1kv5o8t\" sourceRef=\"ServiceTask_0hkvdcp\" targetRef=\"TextAnnotation_1rnzxgr\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0hkvdcp\" id=\"ServiceTask_0hkvdcp_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"276\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1mqw0w1\" id=\"SequenceFlow_1mqw0w1_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"276\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"237\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1q7w4kj\" id=\"EndEvent_1q7w4kj_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"462\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"480\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0ib87iz\" id=\"SequenceFlow_0ib87iz_di\"\u003e\u003comgdi:waypoint x=\"376\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"462\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"419\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1rnzxgr\" id=\"TextAnnotation_1rnzxgr_di\"\u003e\u003comgdc:Bounds height=\"42\" width=\"198\" x=\"366\" y=\"62\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1kv5o8t\" id=\"Association_1kv5o8t_di\"\u003e\u003comgdi:waypoint x=\"368\" xsi:type=\"omgdc:Point\" y=\"168\"/\u003e\u003comgdi:waypoint x=\"441\" xsi:type=\"omgdc:Point\" y=\"104\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 23,
-      "creator_id": "a@example.com",
-      "description": "Get functions, tasks, scripts and sub-workflows of a workflow",
-      "export_key": "wf_get_workflow_content",
-      "last_modified_by": "a@example.com",
-      "last_modified_time": 1627590107065,
-      "name": "PB: Get workflow content",
-      "object_type": "workflow_usage",
-      "programmatic_name": "wf_get_workflow_content",
-      "tags": [
-        {
-          "tag_handle": "fn_playbook_utils",
-          "value": null
-        }
-      ],
-      "uuid": "26a5830b-3c91-4c52-9e8c-fe46f8af8567",
-      "workflow_id": 102
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 22,
+        "version": 27,
         "workflow_id": "wf_get_workflows_by_task_name",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_get_workflows_by_task_name\" isExecutable=\"true\" name=\"PB: Get workflows by task name\"\u003e\u003cdocumentation\u003eFind all the workflows run on a specific task\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1t5c7t5\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1spb4jp\" name=\"PB: Get workflow data\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"ece3eb1b-2c95-4f0b-b00e-c610d418264a\"\u003e{\"inputs\":{},\"post_processing_script\":\"import time\\n\\nURL_MAP  = {\\n  \u0027incident\u0027: \\\"\u0026lt;a href=\u0027/#incidents/{0}\u0027\u0026gt;{0}\u0026lt;/a\u0026gt;\\\",\\n  \u0027task\u0027: \\\"\u0026lt;a href=\u0027/#incidents/{0}?taskId={1}\u0026amp;tabName=details\u0026amp;org_id={2}\u0027\u0026gt;{3}\u0026lt;/a\u0026gt;\\\",\\n  \u0027artifact\u0027: \\\"\u0026lt;a href=\u0027/#incidents/{0}/artifact/{1}?org_id={2}\u0027\u0026gt;{3}\u0026lt;/a\u0026gt;\\\",\\n  \u0027workflow\u0027: \\\"\u0026lt;a href=\u0027/#customize?tab=workflows\u0026amp;workflow={1}\u0027\u0026gt;{3}\u0026lt;/a\u0026gt;\\\"\\n}\\n\\ndef make_url(org_id, inc_id, element_type, element_id, element_name):\\n  if element_type in URL_MAP:\\n    return URL_MAP[element_type].format(inc_id, element_id, org_id, element_name)\\n\\n  return str(element_name)\\n\\n\\nif results.success:\\n  org_id = results.content[\u0027org_id\u0027]\\n  for key_incident, value_workflows in results.content[\u0027workflow_content\u0027].items():\\n    for entity in value_workflows[\u0027entities\u0027]:\\n      # skip these workflows\\n      if \\\"PB: Get\\\" in entity.get(\\\"workflow\\\", {}).get(\\\"name\\\"):\\n        continue\\n\\n      if entity.get(\\\"object\\\", {}).get(\\\"type_name\\\") == \u0027task\u0027 and entity.get(\\\"object\\\", {}).get(\\\"object_name\\\") == task.name:\\n        row = incident.addRow(\u0027workflow_usage\u0027)\\n        row[\u0027report_date\u0027] = int(time.time())*1000\\n        row[\u0027incident\u0027] = helper.createRichText(make_url(org_id, key_incident, \u0027incident\u0027, entity.get(\\\"object\\\", {}).get(\\\"object_id\\\"), entity.get(\\\"object\\\", {}).get(\\\"object_name\\\")))\\n        row[\u0027type\u0027] = \u0027workflow\u0027\\n        row[\u0027workflow\u0027] = helper.createRichText(make_url(org_id, key_incident, \u0027workflow\u0027, entity.get(\\\"workflow\\\", {}).get(\\\"workflow_id\\\"), entity.get(\\\"workflow\\\", {}).get(\\\"name\\\")))\\n        row[\u0027workflow_id\u0027] = entity.get(\\\"workflow\\\", {}).get(\\\"workflow_id\\\")\\n        row[\u0027execution_date\u0027] = entity.get(\\\"start_date\\\")\\n        row[\u0027element_type\u0027] = entity.get(\\\"object\\\", {}).get(\\\"type_name\\\")\\n        row[\u0027element_value\u0027] = helper.createRichText(make_url(org_id, key_incident, entity.get(\\\"object\\\", {}).get(\\\"type_name\\\"), entity.get(\\\"object\\\", {}).get(\\\"object_id\\\"), entity.get(\\\"object\\\", {}).get(\\\"object_name\\\")))\\n        row[\u0027element_id\u0027] =  entity.get(\\\"object\\\", {}).get(\\\"object_id\\\")\\n  else:\\n    incident.addNote(\\\"PB: Get workflows by task name ({}) returned no results for incident range: {}-{}\\\".format(task.name, results.content[\u0027min_id\u0027], results.content[\u0027max_id\u0027]))\\nelse:\\n  incident.addNote(\\\"PB: Get workflows by task name failed: {}\\\".format(results.reason))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.pb_max_incident_id = rule.properties.pb_max_incident_id\\ninputs.pb_min_incident_id = rule.properties.pb_min_incident_id\\n\\ninputs.pb_min_incident_date = rule.properties.pb_min_incident_date\\ninputs.pb_max_incident_date = rule.properties.pb_max_incident_date\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1t5c7t5\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0fwgw8x\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1t5c7t5\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1spb4jp\"/\u003e\u003cendEvent id=\"EndEvent_1v1dbm5\"\u003e\u003cincoming\u003eSequenceFlow_0fwgw8x\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0fwgw8x\" sourceRef=\"ServiceTask_1spb4jp\" targetRef=\"EndEvent_1v1dbm5\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_15x3ja3\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned to the \u0027Workflow usage\u0027 datatable\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1472kzp\" sourceRef=\"ServiceTask_1spb4jp\" targetRef=\"TextAnnotation_15x3ja3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1spb4jp\" id=\"ServiceTask_1spb4jp_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"276\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1t5c7t5\" id=\"SequenceFlow_1t5c7t5_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"276\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"237\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1v1dbm5\" id=\"EndEvent_1v1dbm5_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"454\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"472\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0fwgw8x\" id=\"SequenceFlow_0fwgw8x_di\"\u003e\u003comgdi:waypoint x=\"376\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"454\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"415\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_15x3ja3\" id=\"TextAnnotation_15x3ja3_di\"\u003e\u003comgdc:Bounds height=\"54\" width=\"205\" x=\"363\" y=\"80\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1472kzp\" id=\"Association_1472kzp_di\"\u003e\u003comgdi:waypoint x=\"373\" xsi:type=\"omgdc:Point\" y=\"173\"/\u003e\u003comgdi:waypoint x=\"428\" xsi:type=\"omgdc:Point\" y=\"134\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_get_workflows_by_task_name\" isExecutable=\"true\" name=\"PB: Get workflows/playbooks by task name\"\u003e\u003cdocumentation\u003eFind all the workflows and playbooks run on a specific task\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1t5c7t5\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1spb4jp\" name=\"PB: Get workflow data\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"ece3eb1b-2c95-4f0b-b00e-c610d418264a\"\u003e{\"inputs\":{},\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.pb_max_incident_id = rule.properties.pb_max_incident_id\\ninputs.pb_min_incident_id = rule.properties.pb_min_incident_id\\n\\ninputs.pb_min_incident_date = rule.properties.pb_min_incident_date\\ninputs.pb_max_incident_date = rule.properties.pb_max_incident_date\\n\\ninputs.pb_object_name = task.name\\ninputs.pb_object_type = \u0027task\u0027\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"workflow_data\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1t5c7t5\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0fwgw8x\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1t5c7t5\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1spb4jp\"/\u003e\u003cendEvent id=\"EndEvent_1v1dbm5\"\u003e\u003cincoming\u003eSequenceFlow_0dwmf23\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0fwgw8x\" sourceRef=\"ServiceTask_1spb4jp\" targetRef=\"ScriptTask_1eakgyn\"/\u003e\u003cscriptTask id=\"ScriptTask_1eakgyn\" name=\"PB: Display workflow data\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"52b3f960-ee96-4fff-80bb-71744f6f9a2c\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0fwgw8x\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1ueznch\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"SequenceFlow_1ueznch\" sourceRef=\"ScriptTask_1eakgyn\" targetRef=\"ServiceTask_1ll519b\"/\u003e\u003cserviceTask id=\"ServiceTask_1ll519b\" name=\"PB: Get playbook data\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d3b215fc-8c94-45eb-97d9-0c1b3a71e3a5\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.pb_max_incident_id = rule.properties.pb_max_incident_id\\ninputs.pb_min_incident_id = rule.properties.pb_min_incident_id\\n\\ninputs.pb_min_incident_date = rule.properties.pb_min_incident_date\\ninputs.pb_max_incident_date = rule.properties.pb_max_incident_date\\n\\ninputs.pb_object_name = task.name\\ninputs.pb_object_type = \u0027task\u0027\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"playbook_data\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1ueznch\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_024a1jr\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_024a1jr\" sourceRef=\"ServiceTask_1ll519b\" targetRef=\"ScriptTask_0ndvump\"/\u003e\u003cscriptTask id=\"ScriptTask_0ndvump\" name=\"PB: Display playbook data\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"fadb0f23-7415-4029-a502-552ccb523002\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_024a1jr\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0dwmf23\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"SequenceFlow_0dwmf23\" sourceRef=\"ScriptTask_0ndvump\" targetRef=\"EndEvent_1v1dbm5\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1p37hid\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned to the \u0027Playbook usage\u0027 datatable\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0kihjst\" sourceRef=\"ScriptTask_1eakgyn\" targetRef=\"TextAnnotation_1p37hid\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0q8ukxs\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned to the \u0027Workflow usage\u0027 datatable\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_189nn4o\" sourceRef=\"ScriptTask_0ndvump\" targetRef=\"TextAnnotation_0q8ukxs\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1spb4jp\" id=\"ServiceTask_1spb4jp_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"276\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1t5c7t5\" id=\"SequenceFlow_1t5c7t5_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"276\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"237\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1v1dbm5\" id=\"EndEvent_1v1dbm5_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"963\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"90\" x=\"936\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0fwgw8x\" id=\"SequenceFlow_0fwgw8x_di\"\u003e\u003comgdi:waypoint x=\"376\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"447\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"90\" x=\"366.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_1eakgyn\" id=\"ScriptTask_1eakgyn_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"447\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1ueznch\" id=\"SequenceFlow_1ueznch_di\"\u003e\u003comgdi:waypoint x=\"547\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"616\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"581.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1p37hid\" id=\"TextAnnotation_1p37hid_di\"\u003e\u003comgdc:Bounds height=\"50\" width=\"165\" x=\"533\" y=\"71\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0kihjst\" id=\"Association_0kihjst_di\"\u003e\u003comgdi:waypoint x=\"539\" xsi:type=\"omgdc:Point\" y=\"168\"/\u003e\u003comgdi:waypoint x=\"589\" xsi:type=\"omgdc:Point\" y=\"121\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1ll519b\" id=\"ServiceTask_1ll519b_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"616\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_024a1jr\" id=\"SequenceFlow_024a1jr_di\"\u003e\u003comgdi:waypoint x=\"716\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"791\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"753.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_0ndvump\" id=\"ScriptTask_0ndvump_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"791\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0dwmf23\" id=\"SequenceFlow_0dwmf23_di\"\u003e\u003comgdi:waypoint x=\"891\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"963\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"927\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0q8ukxs\" id=\"TextAnnotation_0q8ukxs_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"162\" x=\"888\" y=\"70\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_189nn4o\" id=\"Association_189nn4o_di\"\u003e\u003comgdi:waypoint x=\"884\" xsi:type=\"omgdc:Point\" y=\"169\"/\u003e\u003comgdi:waypoint x=\"940\" xsi:type=\"omgdc:Point\" y=\"122\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 22,
+      "content_version": 27,
       "creator_id": "a@example.com",
-      "description": "Find all the workflows run on a specific task",
+      "description": "Find all the workflows and playbooks run on a specific task",
       "export_key": "wf_get_workflows_by_task_name",
       "last_modified_by": "a@example.com",
-      "last_modified_time": 1627994784356,
-      "name": "PB: Get workflows by task name",
+      "last_modified_time": 1628080382868,
+      "name": "PB: Get workflows/playbooks by task name",
       "object_type": "task",
       "programmatic_name": "wf_get_workflows_by_task_name",
       "tags": [
@@ -1651,107 +1671,17 @@
     {
       "actions": [],
       "content": {
-        "version": 60,
-        "workflow_id": "wf_get_workflow_data",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_get_workflow_data\" isExecutable=\"true\" name=\"PB: Get workflow usage\"\u003e\u003cdocumentation\u003eGet workflows for one or a range of incidents\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_12rs1ep\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_179cb3k\" name=\"PB: Get workflow data\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"ece3eb1b-2c95-4f0b-b00e-c610d418264a\"\u003e{\"inputs\":{},\"post_processing_script\":\"import time\\n\\nURL_MAP  = {\\n  \u0027incident\u0027: \\\"\u0026lt;a href=\u0027/#incidents/{0}\u0027\u0026gt;{0}\u0026lt;/a\u0026gt;\\\",\\n  \u0027task\u0027: \\\"\u0026lt;a href=\u0027/#incidents/{0}?taskId={1}\u0026amp;tabName=details\u0026amp;org_id={2}\u0027\u0026gt;{3}\u0026lt;/a\u0026gt;\\\",\\n  \u0027artifact\u0027: \\\"\u0026lt;a href=\u0027/#incidents/{0}/artifact/{1}?org_id={2}\u0027\u0026gt;{3}\u0026lt;/a\u0026gt;\\\",\\n  \u0027workflow\u0027: \\\"\u0026lt;a href=\u0027/#customize?tab=workflows\u0026amp;workflow={1}\u0027\u0026gt;{3}\u0026lt;/a\u0026gt;\\\"\\n}\\n\\ndef make_url(org_id, inc_id, element_type, element_id, element_name):\\n  if element_type in URL_MAP:\\n    return URL_MAP[element_type].format(inc_id, element_id, org_id, element_name)\\n\\n  return str(element_name)\\n\\n\\nif results.success:\\n  org_id = results.content[\u0027org_id\u0027]\\n  for key_incident, value_workflows in results.content[\u0027workflow_content\u0027].items():\\n    for entity in value_workflows[\u0027entities\u0027]:\\n      # skip these workflows\\n      if \\\"PB: Get\\\" in entity.get(\\\"workflow\\\", {}).get(\\\"name\\\"):\\n        continue\\n\\n      row = incident.addRow(\u0027workflow_usage\u0027)\\n      row[\u0027report_date\u0027] = int(time.time())*1000\\n      row[\u0027incident\u0027] = helper.createRichText(make_url(org_id, key_incident, \u0027incident\u0027, entity.get(\\\"object\\\", {}).get(\\\"object_id\\\"), entity.get(\\\"object\\\", {}).get(\\\"object_name\\\")))\\n      row[\u0027type\u0027] = \u0027workflow\u0027\\n      row[\u0027workflow\u0027] = helper.createRichText(make_url(org_id, key_incident, \u0027workflow\u0027, entity.get(\\\"workflow\\\", {}).get(\\\"workflow_id\\\"), entity.get(\\\"workflow\\\", {}).get(\\\"name\\\")))\\n      row[\u0027workflow_id\u0027] = entity.get(\\\"workflow\\\", {}).get(\\\"workflow_id\\\")\\n      row[\u0027execution_date\u0027] = entity.get(\\\"start_date\\\")\\n      row[\u0027element_type\u0027] = entity.get(\\\"object\\\", {}).get(\\\"type_name\\\")\\n      row[\u0027element_value\u0027] =  helper.createRichText(make_url(org_id, key_incident, entity.get(\\\"object\\\", {}).get(\\\"type_name\\\"), entity.get(\\\"object\\\", {}).get(\\\"object_id\\\"), entity.get(\\\"object\\\", {}).get(\\\"object_name\\\")))\\n      row[\u0027element_id\u0027] =  entity.get(\\\"object\\\", {}).get(\\\"object_id\\\")\\n  else:\\n    incident.addNote(\\\"PB: Get workflow usage returned no results for incident range: {}-{}\\\".format(results.content[\u0027min_id\u0027], results.content[\u0027max_id\u0027]))\\nelse:\\n  incident.addNote(\\\"PB: Get workflow usage failed: {}\\\".format(results.reason))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.pb_max_incident_id = rule.properties.pb_max_incident_id\\ninputs.pb_min_incident_id = rule.properties.pb_min_incident_id\\n\\ninputs.pb_min_incident_date = rule.properties.pb_min_incident_date\\ninputs.pb_max_incident_date = rule.properties.pb_max_incident_date\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_12rs1ep\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1t49ggr\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_12rs1ep\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_179cb3k\"/\u003e\u003cendEvent id=\"EndEvent_0lsb71q\"\u003e\u003cincoming\u003eSequenceFlow_1t49ggr\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1t49ggr\" sourceRef=\"ServiceTask_179cb3k\" targetRef=\"EndEvent_0lsb71q\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0b3n7dz\"\u003e\u003ctext\u003e\u003c![CDATA[results returned in the \u0027Workflow Usage\u0027 datatable\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_16ddwx1\" sourceRef=\"ServiceTask_179cb3k\" targetRef=\"TextAnnotation_0b3n7dz\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_179cb3k\" id=\"ServiceTask_179cb3k_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"277\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_12rs1ep\" id=\"SequenceFlow_12rs1ep_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"277\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"237.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0lsb71q\" id=\"EndEvent_0lsb71q_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"444\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"462\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1t49ggr\" id=\"SequenceFlow_1t49ggr_di\"\u003e\u003comgdi:waypoint x=\"377\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"444\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"410.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0b3n7dz\" id=\"TextAnnotation_0b3n7dz_di\"\u003e\u003comgdc:Bounds height=\"53\" width=\"186\" x=\"384\" y=\"83\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_16ddwx1\" id=\"Association_16ddwx1_di\"\u003e\u003comgdi:waypoint x=\"376\" xsi:type=\"omgdc:Point\" y=\"175\"/\u003e\u003comgdi:waypoint x=\"436\" xsi:type=\"omgdc:Point\" y=\"136\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 60,
-      "creator_id": "a@example.com",
-      "description": "Get workflows for one or a range of incidents",
-      "export_key": "wf_get_workflow_data",
-      "last_modified_by": "a@example.com",
-      "last_modified_time": 1627994807866,
-      "name": "PB: Get workflow usage",
-      "object_type": "incident",
-      "programmatic_name": "wf_get_workflow_data",
-      "tags": [
-        {
-          "tag_handle": "fn_playbook_utils",
-          "value": null
-        }
-      ],
-      "uuid": "468bdecf-4136-47d6-9b39-321e1f2927e9",
-      "workflow_id": 94
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 8,
-        "workflow_id": "pb_get_playbook_usage",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"pb_get_playbook_usage\" isExecutable=\"true\" name=\"PB: Get playbook usage\"\u003e\u003cdocumentation\u003eGet playbooks for one or a range of incidents\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0696gbu\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_04iiw3y\" name=\"PB: Get playbook data\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d3b215fc-8c94-45eb-97d9-0c1b3a71e3a5\"\u003e{\"inputs\":{},\"post_processing_script\":\"import time\\n\\nURL_MAP  = {\\n  \u0027incident\u0027: \\\"\u0026lt;a href=\u0027/#incidents/{0}\u0027\u0026gt;{0}\u0026lt;/a\u0026gt;\\\",\\n  \u0027task\u0027: \\\"\u0026lt;a href=\u0027/#incidents/{0}?taskId={1}\u0026amp;tabName=details\u0026amp;org_id={2}\u0027\u0026gt;{3}\u0026lt;/a\u0026gt;\\\",\\n  \u0027artifact\u0027: \\\"\u0026lt;a href=\u0027/#incidents/{0}/artifact/{1}?org_id={2}\u0027\u0026gt;{3}\u0026lt;/a\u0026gt;\\\",\\n  \u0027workflow\u0027: \\\"\u0026lt;a href=\u0027/#customize?tab=workflows\u0026amp;workflow={1}\u0027\u0026gt;{3}\u0026lt;/a\u0026gt;\\\",\\n  \u0027playbook\u0027: \\\"\u0026lt;a href=\u0027/#playbooks/designer/{1}\u0027\u0026gt;{3}\u0026lt;/a\u0026gt;\\\"\\n}\\n\\ndef make_url(org_id, inc_id, element_type, element_id, element_name):\\n  if element_type in URL_MAP:\\n    return URL_MAP[element_type].format(inc_id, element_id, org_id, element_name)\\n\\n  return str(element_name)\\n\\n\\nif results.success:\\n  org_id = results.content[\u0027org_id\u0027]\\n  data_flg = False\\n  for key_incident, value_playbooks in results.content[\u0027playbook_content\u0027].items():\\n    for entity in value_playbooks:\\n      # skip these workflows\\n      if \\\"PB: Get\\\" in entity.get(\\\"playbook\\\", {}).get(\\\"display_name\\\"):\\n        continue\\n\\n      row = incident.addRow(\u0027workflow_usage\u0027)\\n      row[\u0027report_date\u0027] = int(time.time())*1000\\n      row[\u0027incident\u0027] = helper.createRichText(make_url(org_id, key_incident, \u0027incident\u0027, entity.get(\\\"object\\\", {}).get(\\\"object_id\\\"), entity.get(\\\"object\\\", {}).get(\\\"object_name\\\")))\\n      row[\u0027type\u0027] = \u0027playbook\u0027\\n      row[\u0027workflow\u0027] = helper.createRichText(make_url(org_id, key_incident, \u0027playbook\u0027, entity.get(\\\"playbook\\\", {}).get(\\\"id\\\"), entity.get(\\\"playbook\\\", {}).get(\\\"display_name\\\")))\\n      row[\u0027workflow_id\u0027] = entity.get(\\\"playbook\\\", {}).get(\\\"id\\\")\\n      row[\u0027execution_date\u0027] = entity.get(\\\"start_time\\\")\\n      row[\u0027element_type\u0027] = entity.get(\\\"object\\\", {}).get(\\\"type_name\\\")\\n      row[\u0027element_value\u0027] =  helper.createRichText(make_url(org_id, key_incident, entity.get(\\\"object\\\", {}).get(\\\"type_name\\\"), entity.get(\\\"object\\\", {}).get(\\\"object_id\\\"), entity.get(\\\"object\\\", {}).get(\\\"object_name\\\")))\\n      row[\u0027element_id\u0027] =  entity.get(\\\"object\\\", {}).get(\\\"object_id\\\")\\n      data_flg = True\\n  \\n  if not data_flg:\\n    incident.addNote(\\\"PB: Get playbook usage returned no results for incident range: {}-{}\\\".format(results.content[\u0027min_id\u0027], results.content[\u0027max_id\u0027]))\\nelse:\\n  incident.addNote(\\\"PB: Get playbook usage failed: {}\\\".format(results.reason))\\n\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.pb_min_incident_id = rule.properties.pb_min_incident_id\\ninputs.pb_max_incident_id = rule.properties.pb_max_incident_id\\n\\ninputs.pb_min_incident_date = rule.properties.pb_min_incident_date\\ninputs.pb_max_incident_date = rule.properties.pb_max_incident_date\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0696gbu\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_18xyct0\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0696gbu\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_04iiw3y\"/\u003e\u003cendEvent id=\"EndEvent_0chjag3\"\u003e\u003cincoming\u003eSequenceFlow_18xyct0\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_18xyct0\" sourceRef=\"ServiceTask_04iiw3y\" targetRef=\"EndEvent_0chjag3\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0qx534y\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned in the Playbook usage datatable\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0s1i6bu\" sourceRef=\"ServiceTask_04iiw3y\" targetRef=\"TextAnnotation_0qx534y\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_04iiw3y\" id=\"ServiceTask_04iiw3y_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"261\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0696gbu\" id=\"SequenceFlow_0696gbu_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"261\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"229.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0chjag3\" id=\"EndEvent_0chjag3_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"424\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"442\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_18xyct0\" id=\"SequenceFlow_18xyct0_di\"\u003e\u003comgdi:waypoint x=\"361\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"424\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"392.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0qx534y\" id=\"TextAnnotation_0qx534y_di\"\u003e\u003comgdc:Bounds height=\"48\" width=\"145\" x=\"346\" y=\"78\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0s1i6bu\" id=\"Association_0s1i6bu_di\"\u003e\u003comgdi:waypoint x=\"352\" xsi:type=\"omgdc:Point\" y=\"167\"/\u003e\u003comgdi:waypoint x=\"394\" xsi:type=\"omgdc:Point\" y=\"126\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 8,
-      "creator_id": "a@example.com",
-      "description": "Get playbooks for one or a range of incidents",
-      "export_key": "pb_get_playbook_usage",
-      "last_modified_by": "a@example.com",
-      "last_modified_time": 1627938553269,
-      "name": "PB: Get playbook usage",
-      "object_type": "incident",
-      "programmatic_name": "pb_get_playbook_usage",
-      "tags": [],
-      "uuid": "8898eef3-dac0-452c-8445-21bee9eff1da",
-      "workflow_id": 114
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 21,
-        "workflow_id": "wf_get_workflows_by_artifact_value",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_get_workflows_by_artifact_value\" isExecutable=\"true\" name=\"PB: Get workflows by artifact value\"\u003e\u003cdocumentation\u003eFind all the workflows across incidents which have been run on a specific artifact value\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1rcehd3\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0itsgbv\" name=\"PB: Get workflow data\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"ece3eb1b-2c95-4f0b-b00e-c610d418264a\"\u003e{\"inputs\":{},\"post_processing_script\":\"import time\\n\\nURL_MAP  = {\\n  \u0027incident\u0027: \\\"\u0026lt;a href=\u0027/#incidents/{0}\u0027\u0026gt;{0}\u0026lt;/a\u0026gt;\\\",\\n  \u0027task\u0027: \\\"\u0026lt;a href=\u0027/#incidents/{0}?taskId={1}\u0026amp;tabName=details\u0026amp;org_id={2}\u0027\u0026gt;{3}\u0026lt;/a\u0026gt;\\\",\\n  \u0027artifact\u0027: \\\"\u0026lt;a href=\u0027/#incidents/{0}/artifact/{1}?org_id={2}\u0027\u0026gt;{3}\u0026lt;/a\u0026gt;\\\",\\n  \u0027workflow\u0027: \\\"\u0026lt;a href=\u0027/#customize?tab=workflows\u0026amp;workflow={1}\u0027\u0026gt;{3}\u0026lt;/a\u0026gt;\\\"\\n}\\n\\ndef make_url(org_id, inc_id, element_type, element_id, element_name):\\n  if element_type in URL_MAP:\\n    return URL_MAP[element_type].format(inc_id, element_id, org_id, element_name)\\n\\n  return str(element_name)\\n\\n\\nif results.success:\\n  org_id = results.content[\u0027org_id\u0027]\\n  for key_incident, value_workflows in results.content[\u0027workflow_content\u0027].items():\\n    for entity in value_workflows[\u0027entities\u0027]:\\n      # skip these workflows\\n      if \\\"PB: Get\\\" in entity.get(\\\"workflow\\\", {}).get(\\\"name\\\"):\\n        continue\\n      \\n      if entity.get(\\\"object\\\", {}).get(\\\"type_name\\\") == \u0027artifact\u0027 and entity.get(\\\"object\\\", {}).get(\\\"object_name\\\") == artifact.value:\\n        row = incident.addRow(\u0027workflow_usage\u0027)\\n        row[\u0027report_date\u0027] = int(time.time())*1000\\n        row[\u0027incident\u0027] = helper.createRichText(make_url(org_id, key_incident, \u0027incident\u0027, entity.get(\\\"object\\\", {}).get(\\\"object_id\\\"), entity.get(\\\"object\\\", {}).get(\\\"object_name\\\")))\\n        row[\u0027type\u0027] = \u0027workflow\u0027\\n        row[\u0027workflow\u0027] = helper.createRichText(make_url(org_id, key_incident, \u0027workflow\u0027, entity.get(\\\"workflow\\\", {}).get(\\\"workflow_id\\\"), entity.get(\\\"workflow\\\", {}).get(\\\"name\\\")))\\n        row[\u0027workflow_id\u0027] = entity.get(\\\"workflow\\\", {}).get(\\\"workflow_id\\\")\\n        row[\u0027execution_date\u0027] = entity.get(\\\"start_date\\\")\\n        row[\u0027element_type\u0027] = entity.get(\\\"object\\\", {}).get(\\\"type_name\\\")\\n        row[\u0027element_value\u0027] =  helper.createRichText(make_url(org_id, key_incident, entity.get(\\\"object\\\", {}).get(\\\"type_name\\\"), entity.get(\\\"object\\\", {}).get(\\\"object_id\\\"), entity.get(\\\"object\\\", {}).get(\\\"object_name\\\")))\\n        row[\u0027element_id\u0027] =  entity.get(\\\"object\\\", {}).get(\\\"object_id\\\")\\n  else:\\n    incident.addNote(\\\"PB: Get workflows by artifact value ({}) returned no results for incident range: {}-{}\\\".format(artifact.value, results.content[\u0027min_id\u0027], results.content[\u0027max_id\u0027]))\\nelse:\\n  incident.addNote(\\\"PB: Get workflows by artifact value failed: {}\\\".format(results.reason))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.pb_max_incident_id = rule.properties.pb_max_incident_id\\ninputs.pb_min_incident_id = rule.properties.pb_min_incident_id\\n\\ninputs.pb_min_incident_date = rule.properties.pb_min_incident_date\\ninputs.pb_max_incident_date = rule.properties.pb_max_incident_date\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1rcehd3\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1tna49c\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1rcehd3\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0itsgbv\"/\u003e\u003cendEvent id=\"EndEvent_0zw51b5\"\u003e\u003cincoming\u003eSequenceFlow_1tna49c\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1tna49c\" sourceRef=\"ServiceTask_0itsgbv\" targetRef=\"EndEvent_0zw51b5\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_03bpbrt\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned to the \u0027Workflow Usage\u0027 datatable\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_13b44qn\" sourceRef=\"ServiceTask_0itsgbv\" targetRef=\"TextAnnotation_03bpbrt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0itsgbv\" id=\"ServiceTask_0itsgbv_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"276\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1rcehd3\" id=\"SequenceFlow_1rcehd3_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"276\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"237\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0zw51b5\" id=\"EndEvent_0zw51b5_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"462\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"480\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1tna49c\" id=\"SequenceFlow_1tna49c_di\"\u003e\u003comgdi:waypoint x=\"376\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"462\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"419\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_03bpbrt\" id=\"TextAnnotation_03bpbrt_di\"\u003e\u003comgdc:Bounds height=\"56\" width=\"252\" x=\"358\" y=\"77\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_13b44qn\" id=\"Association_13b44qn_di\"\u003e\u003comgdi:waypoint x=\"375\" xsi:type=\"omgdc:Point\" y=\"175\"/\u003e\u003comgdi:waypoint x=\"440\" xsi:type=\"omgdc:Point\" y=\"133\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 21,
-      "creator_id": "a@example.com",
-      "description": "Find all the workflows across incidents which have been run on a specific artifact value",
-      "export_key": "wf_get_workflows_by_artifact_value",
-      "last_modified_by": "a@example.com",
-      "last_modified_time": 1627994638689,
-      "name": "PB: Get workflows by artifact value",
-      "object_type": "artifact",
-      "programmatic_name": "wf_get_workflows_by_artifact_value",
-      "tags": [
-        {
-          "tag_handle": "fn_playbook_utils",
-          "value": null
-        }
-      ],
-      "uuid": "1c00217c-5716-47a4-b7d9-5505e8f639ac",
-      "workflow_id": 95
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 2,
-        "workflow_id": "pb_get_playbook_content",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"pb_get_playbook_content\" isExecutable=\"true\" name=\"PB: Get playbook content\"\u003e\u003cdocumentation\u003eGet a list of functions, scripts, tasks and sub-playbooks used within a playbook\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1igp9g1\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_033e6lg\" name=\"PB: Get playbook content\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"688cc0f8-85c5-4033-b9bf-66f01b35698c\"\u003e{\"inputs\":{},\"post_processing_script\":\"if results.success:\\n  content = []\\n  for k in sorted(results.content.keys()):\\n    lizt = [v for v in results.content[k]]\\n    content.append(\\\"{}:\u0026lt;br\u0026gt;\u0026amp;nbsp;\u0026amp;nbsp;{}\\\".format(k, \\\"\u0026lt;br\u0026gt;\u0026amp;nbsp;\u0026amp;nbsp;\\\".join(lizt)))\\n    \\n  row[\u0027workflow_content\u0027] = helper.createRichText(\\\"\u0026lt;br\u0026gt;\u0026lt;br\u0026gt;\\\".join(content))\\nelse:\\n  incident.addNote(\\\"PB: Get workflow content failed: {}\\\".format(results.reason))\\n\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.pb_id = row[\u0027workflow_id\u0027]\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1igp9g1\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1gf2o7h\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1igp9g1\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_033e6lg\"/\u003e\u003cendEvent id=\"EndEvent_0pry6z9\"\u003e\u003cincoming\u003eSequenceFlow_1gf2o7h\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1gf2o7h\" sourceRef=\"ServiceTask_033e6lg\" targetRef=\"EndEvent_0pry6z9\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0py70lm\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned in the Workflow Usage datatable\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0aya91v\" sourceRef=\"ServiceTask_033e6lg\" targetRef=\"TextAnnotation_0py70lm\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_033e6lg\" id=\"ServiceTask_033e6lg_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"264\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1igp9g1\" id=\"SequenceFlow_1igp9g1_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"264\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"231\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0pry6z9\" id=\"EndEvent_0pry6z9_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"434\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"452\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1gf2o7h\" id=\"SequenceFlow_1gf2o7h_di\"\u003e\u003comgdi:waypoint x=\"364\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"434\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"399\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0py70lm\" id=\"TextAnnotation_0py70lm_di\"\u003e\u003comgdc:Bounds height=\"46\" width=\"167\" x=\"356\" y=\"59\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0aya91v\" id=\"Association_0aya91v_di\"\u003e\u003comgdi:waypoint x=\"354\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"417\" xsi:type=\"omgdc:Point\" y=\"105\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 2,
-      "creator_id": "a@example.com",
-      "description": "Get a list of functions, scripts, tasks and sub-playbooks used within a playbook",
-      "export_key": "pb_get_playbook_content",
-      "last_modified_by": "a@example.com",
-      "last_modified_time": 1627938236991,
-      "name": "PB: Get playbook content",
-      "object_type": "incident",
-      "programmatic_name": "pb_get_playbook_content",
-      "tags": [],
-      "uuid": "001c4d5a-042e-4a7a-9f53-d3894d776f43",
-      "workflow_id": 110
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 19,
+        "version": 27,
         "workflow_id": "wf_get_workflows_by_attachment_filename",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_get_workflows_by_attachment_filename\" isExecutable=\"true\" name=\"PB: Get workflows by attachment filename\"\u003e\u003cdocumentation\u003eFind all workflows run on a specific attachment filename\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0cgocx1\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_06stk11\" name=\"PB: Get workflow data\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"ece3eb1b-2c95-4f0b-b00e-c610d418264a\"\u003e{\"inputs\":{},\"post_processing_script\":\"import time\\n\\nURL_MAP  = {\\n  \u0027incident\u0027: \\\"\u0026lt;a href=\u0027/#incidents/{0}\u0027\u0026gt;{0}\u0026lt;/a\u0026gt;\\\",\\n  \u0027task\u0027: \\\"\u0026lt;a href=\u0027/#incidents/{0}?taskId={1}\u0026amp;tabName=details\u0026amp;org_id={2}\u0027\u0026gt;{3}\u0026lt;/a\u0026gt;\\\",\\n  \u0027artifact\u0027: \\\"\u0026lt;a href=\u0027/#incidents/{0}/artifact/{1}?org_id={2}\u0027\u0026gt;{3}\u0026lt;/a\u0026gt;\\\",\\n  \u0027workflow\u0027: \\\"\u0026lt;a href=\u0027/#customize?tab=workflows\u0026amp;workflow={1}\u0027\u0026gt;{3}\u0026lt;/a\u0026gt;\\\"\\n}\\n\\ndef make_url(org_id, inc_id, element_type, element_id, element_name):\\n  if element_type in URL_MAP:\\n    return URL_MAP[element_type].format(inc_id, element_id, org_id, element_name)\\n\\n  return str(element_name)\\n\\n\\nif results.success:\\n  org_id = results.content[\u0027org_id\u0027]\\n  for key_incident, value_workflows in results.content[\u0027workflow_content\u0027].items():\\n    for entity in value_workflows[\u0027entities\u0027]:\\n      # skip these workflows\\n      if \\\"PB: Get\\\" in entity.get(\\\"workflow\\\", {}).get(\\\"name\\\"):\\n        continue\\n\\n      if entity.get(\\\"object\\\", {}).get(\\\"type_name\\\") == \u0027attachment\u0027 and entity.get(\\\"object\\\", {}).get(\\\"object_name\\\") == attachment.name:\\n        row = incident.addRow(\u0027workflow_usage\u0027)\\n        row[\u0027report_date\u0027] = int(time.time())*1000\\n        row[\u0027incident\u0027] = helper.createRichText(make_url(org_id, key_incident, \u0027incident\u0027, entity.get(\\\"object\\\", {}).get(\\\"object_id\\\"), entity.get(\\\"object\\\", {}).get(\\\"object_name\\\")))\\n        row[\u0027type\u0027] = \u0027workflow\u0027\\n        row[\u0027workflow\u0027] = helper.createRichText(make_url(org_id, key_incident, \u0027workflow\u0027, entity.get(\\\"workflow\\\", {}).get(\\\"workflow_id\\\"), entity.get(\\\"workflow\\\", {}).get(\\\"name\\\")))\\n        row[\u0027workflow_id\u0027] = entity.get(\\\"workflow\\\", {}).get(\\\"workflow_id\\\")\\n        row[\u0027execution_date\u0027] = entity.get(\\\"start_date\\\")\\n        row[\u0027element_type\u0027] = entity.get(\\\"object\\\", {}).get(\\\"type_name\\\")\\n        row[\u0027element_value\u0027] =  helper.createRichText(make_url(org_id, key_incident, entity.get(\\\"object\\\", {}).get(\\\"type_name\\\"), entity.get(\\\"object\\\", {}).get(\\\"object_id\\\"), entity.get(\\\"object\\\", {}).get(\\\"object_name\\\")))\\n        row[\u0027element_id\u0027] =  entity.get(\\\"object\\\", {}).get(\\\"object_id\\\")\\n  else:\\n    incident.addNote(\\\"PB: Get workflows by attachment filename ({}) returned no results for indicent range: {}-{}\\\".format(attachment.name, results.content[\u0027min_id\u0027], results.content[\u0027max_id\u0027]))\\nelse:\\n  incident.addNote(\\\"PB: Get workflows by attachment filename failed: {}\\\".format(results.reason))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.pb_max_incident_id = rule.properties.pb_max_incident_id\\ninputs.pb_min_incident_id = rule.properties.pb_min_incident_id\\n\\ninputs.pb_min_incident_date = rule.properties.pb_min_incident_date\\ninputs.pb_max_incident_date = rule.properties.pb_max_incident_date\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0cgocx1\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0t4vykg\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0cgocx1\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_06stk11\"/\u003e\u003cendEvent id=\"EndEvent_1on4ur3\"\u003e\u003cincoming\u003eSequenceFlow_0t4vykg\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0t4vykg\" sourceRef=\"ServiceTask_06stk11\" targetRef=\"EndEvent_1on4ur3\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0fni8ne\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned to the \u0027Playbook usage\u0027 datatable\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1ba1rzh\" sourceRef=\"ServiceTask_06stk11\" targetRef=\"TextAnnotation_0fni8ne\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_06stk11\" id=\"ServiceTask_06stk11_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"278\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0cgocx1\" id=\"SequenceFlow_0cgocx1_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"278\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"238\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1on4ur3\" id=\"EndEvent_1on4ur3_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"450\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"468\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0t4vykg\" id=\"SequenceFlow_0t4vykg_di\"\u003e\u003comgdi:waypoint x=\"378\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"450\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"414\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0fni8ne\" id=\"TextAnnotation_0fni8ne_di\"\u003e\u003comgdc:Bounds height=\"58\" width=\"168\" x=\"362\" y=\"61\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1ba1rzh\" id=\"Association_1ba1rzh_di\"\u003e\u003comgdi:waypoint x=\"368\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"416\" xsi:type=\"omgdc:Point\" y=\"119\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_get_workflows_by_attachment_filename\" isExecutable=\"true\" name=\"PB: Get workflows/playbooks by attachment filename\"\u003e\u003cdocumentation\u003eFind all workflows and playbooks run on a specific attachment filename\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0cgocx1\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_06stk11\" name=\"PB: Get workflow data\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"ece3eb1b-2c95-4f0b-b00e-c610d418264a\"\u003e{\"inputs\":{},\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.pb_max_incident_id = rule.properties.pb_max_incident_id\\ninputs.pb_min_incident_id = rule.properties.pb_min_incident_id\\n\\ninputs.pb_min_incident_date = rule.properties.pb_min_incident_date\\ninputs.pb_max_incident_date = rule.properties.pb_max_incident_date\\n\\ninputs.pb_object_name = attachment.name\\ninputs.pb_object_type = \u0027attachment\u0027\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"workflow_data\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0cgocx1\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0t4vykg\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0cgocx1\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_06stk11\"/\u003e\u003cendEvent id=\"EndEvent_1on4ur3\"\u003e\u003cincoming\u003eSequenceFlow_1t5mqzn\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0t4vykg\" sourceRef=\"ServiceTask_06stk11\" targetRef=\"ScriptTask_13xfvec\"/\u003e\u003cscriptTask id=\"ScriptTask_13xfvec\" name=\"PB: Display workflow data\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"52b3f960-ee96-4fff-80bb-71744f6f9a2c\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0t4vykg\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0sod6hl\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"SequenceFlow_0sod6hl\" sourceRef=\"ScriptTask_13xfvec\" targetRef=\"ServiceTask_1nzh41v\"/\u003e\u003cserviceTask id=\"ServiceTask_1nzh41v\" name=\"PB: Get playbook data\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d3b215fc-8c94-45eb-97d9-0c1b3a71e3a5\"\u003e{\"inputs\":{},\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.pb_max_incident_id = rule.properties.pb_max_incident_id\\ninputs.pb_min_incident_id = rule.properties.pb_min_incident_id\\n\\ninputs.pb_min_incident_date = rule.properties.pb_min_incident_date\\ninputs.pb_max_incident_date = rule.properties.pb_max_incident_date\\n\\ninputs.pb_object_name = attachment.name\\ninputs.pb_object_type = \u0027attachment\u0027\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"playbook_data\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0sod6hl\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0hewqjh\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0hewqjh\" sourceRef=\"ServiceTask_1nzh41v\" targetRef=\"ScriptTask_1byfs4r\"/\u003e\u003cscriptTask id=\"ScriptTask_1byfs4r\" name=\"PB: Display playbook data\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"fadb0f23-7415-4029-a502-552ccb523002\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0hewqjh\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1t5mqzn\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"SequenceFlow_1t5mqzn\" sourceRef=\"ScriptTask_1byfs4r\" targetRef=\"EndEvent_1on4ur3\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_135sy8d\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned to the \u0027Playbook usage\u0027 datatable\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_05ewxev\" sourceRef=\"ScriptTask_13xfvec\" targetRef=\"TextAnnotation_135sy8d\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_11tz2gz\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned to the \u0027Playbook usage\u0027 datatable\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0iza15n\" sourceRef=\"ScriptTask_1byfs4r\" targetRef=\"TextAnnotation_11tz2gz\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_06stk11\" id=\"ServiceTask_06stk11_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"278\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0cgocx1\" id=\"SequenceFlow_0cgocx1_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"278\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"238\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1on4ur3\" id=\"EndEvent_1on4ur3_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"973\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"90\" x=\"946\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0t4vykg\" id=\"SequenceFlow_0t4vykg_di\"\u003e\u003comgdi:waypoint x=\"378\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"448\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"90\" x=\"368\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_13xfvec\" id=\"ScriptTask_13xfvec_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"448\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0sod6hl\" id=\"SequenceFlow_0sod6hl_di\"\u003e\u003comgdi:waypoint x=\"548\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"628\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"588\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_135sy8d\" id=\"TextAnnotation_135sy8d_di\"\u003e\u003comgdc:Bounds height=\"46\" width=\"182\" x=\"530\" y=\"72\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_05ewxev\" id=\"Association_05ewxev_di\"\u003e\u003comgdi:waypoint x=\"540\" xsi:type=\"omgdc:Point\" y=\"168\"/\u003e\u003comgdi:waypoint x=\"596\" xsi:type=\"omgdc:Point\" y=\"118\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1nzh41v\" id=\"ServiceTask_1nzh41v_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"628\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0hewqjh\" id=\"SequenceFlow_0hewqjh_di\"\u003e\u003comgdi:waypoint x=\"728\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"804\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"766\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_1byfs4r\" id=\"ScriptTask_1byfs4r_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"804\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1t5mqzn\" id=\"SequenceFlow_1t5mqzn_di\"\u003e\u003comgdi:waypoint x=\"904\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"936\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"936\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"973\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"951\" y=\"199\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_11tz2gz\" id=\"TextAnnotation_11tz2gz_di\"\u003e\u003comgdc:Bounds height=\"50\" width=\"176\" x=\"895\" y=\"80\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0iza15n\" id=\"Association_0iza15n_di\"\u003e\u003comgdi:waypoint x=\"899\" xsi:type=\"omgdc:Point\" y=\"171\"/\u003e\u003comgdi:waypoint x=\"953\" xsi:type=\"omgdc:Point\" y=\"130\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 19,
+      "content_version": 27,
       "creator_id": "a@example.com",
-      "description": "Find all workflows run on a specific attachment filename",
+      "description": "Find all workflows and playbooks run on a specific attachment filename",
       "export_key": "wf_get_workflows_by_attachment_filename",
       "last_modified_by": "a@example.com",
-      "last_modified_time": 1627994742000,
-      "name": "PB: Get workflows by attachment filename",
+      "last_modified_time": 1628094609350,
+      "name": "PB: Get workflows/playbooks by attachment filename",
       "object_type": "attachment",
       "programmatic_name": "wf_get_workflows_by_attachment_filename",
       "tags": [
@@ -1766,37 +1696,37 @@
     {
       "actions": [],
       "content": {
-        "version": 12,
-        "workflow_id": "pb_get_workflows_by_artifact_value_for_last_30_days",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"pb_get_workflows_by_artifact_value_for_last_30_days\" isExecutable=\"true\" name=\"PB: Get workflows by artifact value for last 30 days\"\u003e\u003cdocumentation\u003eRetrieve workflows associated with this artifact run over the last 30 days\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1xxdd8t\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1cxqtfx\" name=\"PB: Get workflow data\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"ece3eb1b-2c95-4f0b-b00e-c610d418264a\"\u003e{\"inputs\":{},\"post_processing_script\":\"import time\\n\\nURL_MAP  = {\\n  \u0027incident\u0027: \\\"\u0026lt;a href=\u0027/#incidents/{0}\u0027\u0026gt;{0}\u0026lt;/a\u0026gt;\\\",\\n  \u0027task\u0027: \\\"\u0026lt;a href=\u0027/#incidents/{0}?taskId={1}\u0026amp;tabName=details\u0026amp;org_id={2}\u0027\u0026gt;{3}\u0026lt;/a\u0026gt;\\\",\\n  \u0027artifact\u0027: \\\"\u0026lt;a href=\u0027/#incidents/{0}/artifact/{1}?org_id={2}\u0027\u0026gt;{3}\u0026lt;/a\u0026gt;\\\",\\n  \u0027workflow\u0027: \\\"\u0026lt;a href=\u0027/#customize?tab=workflows\u0026amp;workflow={1}\u0027\u0026gt;{3}\u0026lt;/a\u0026gt;\\\"\\n}\\n\\ndef make_url(org_id, inc_id, element_type, element_id, element_name):\\n  if element_type in URL_MAP:\\n    return URL_MAP[element_type].format(inc_id, element_id, org_id, element_name)\\n\\n  return str(element_name)\\n\\n\\nif results.success:\\n  org_id = results.content[\u0027org_id\u0027]\\n  for key_incident, value_workflows in results.content[\u0027workflow_content\u0027].items():\\n    for entity in value_workflows[\u0027entities\u0027]:\\n      # skip these workflows\\n      if \\\"PB: Get\\\" in entity.get(\\\"workflow\\\", {}).get(\\\"name\\\"):\\n        continue\\n      \\n      if entity.get(\\\"object\\\", {}).get(\\\"type_name\\\") == \u0027artifact\u0027 and entity.get(\\\"object\\\", {}).get(\\\"object_name\\\") == artifact.value:\\n        row = incident.addRow(\u0027workflow_usage\u0027)\\n        row[\u0027report_date\u0027] = int(time.time())*1000\\n        row[\u0027incident\u0027] = helper.createRichText(make_url(org_id, key_incident, \u0027incident\u0027, entity.get(\\\"object\\\", {}).get(\\\"object_id\\\"), entity.get(\\\"object\\\", {}).get(\\\"object_name\\\")))\\n        row[\u0027type\u0027] = \u0027workflow\u0027\\n        row[\u0027workflow\u0027] = helper.createRichText(make_url(org_id, key_incident, \u0027workflow\u0027, entity.get(\\\"workflow\\\", {}).get(\\\"workflow_id\\\"), entity.get(\\\"workflow\\\", {}).get(\\\"name\\\")))\\n        row[\u0027workflow_id\u0027] = entity.get(\\\"workflow\\\", {}).get(\\\"workflow_id\\\")\\n        row[\u0027execution_date\u0027] = entity.get(\\\"start_date\\\")\\n        row[\u0027element_type\u0027] = entity.get(\\\"object\\\", {}).get(\\\"type_name\\\")\\n        row[\u0027element_value\u0027] =  helper.createRichText(make_url(org_id, key_incident, entity.get(\\\"object\\\", {}).get(\\\"type_name\\\"), entity.get(\\\"object\\\", {}).get(\\\"object_id\\\"), entity.get(\\\"object\\\", {}).get(\\\"object_name\\\")))\\n        row[\u0027element_id\u0027] =  entity.get(\\\"object\\\", {}).get(\\\"object_id\\\")\\n  else:\\n    incident.addNote(\\\"PB: Get workflows by artifact value returned no results for incident range: {}-{}\\\".format(results.contents[\u0027min_id\u0027], results.contents[\u0027max_id\u0027]))\\nelse:\\n  incident.addNote(\\\"PB: Get workflows by artifact value failed: {}\\\".format(results.reason))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"import time\\n\\nTHIRTY_DAYS = 60*60*24*30*1000\\n\\ninputs.pb_min_incident_id = None\\ninputs.pb_max_incident_id = None\\ninputs.pb_min_incident_date = int(time.time()*1000) - THIRTY_DAYS\\ninputs.pb_max_incident_date = None\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1xxdd8t\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_112b03o\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1xxdd8t\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1cxqtfx\"/\u003e\u003cendEvent id=\"EndEvent_1ngcv42\"\u003e\u003cincoming\u003eSequenceFlow_112b03o\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_112b03o\" sourceRef=\"ServiceTask_1cxqtfx\" targetRef=\"EndEvent_1ngcv42\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0knebqn\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned in the Playbook usage datatable\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1f97puu\" sourceRef=\"ServiceTask_1cxqtfx\" targetRef=\"TextAnnotation_0knebqn\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1cxqtfx\" id=\"ServiceTask_1cxqtfx_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"255\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1xxdd8t\" id=\"SequenceFlow_1xxdd8t_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"255\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"226.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0knebqn\" id=\"TextAnnotation_0knebqn_di\"\u003e\u003comgdc:Bounds height=\"51\" width=\"183\" x=\"333\" y=\"65\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1f97puu\" id=\"Association_1f97puu_di\"\u003e\u003comgdi:waypoint x=\"346\" xsi:type=\"omgdc:Point\" y=\"167\"/\u003e\u003comgdi:waypoint x=\"399\" xsi:type=\"omgdc:Point\" y=\"116\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1ngcv42\" id=\"EndEvent_1ngcv42_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"426\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"444\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_112b03o\" id=\"SequenceFlow_112b03o_di\"\u003e\u003comgdi:waypoint x=\"355\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"426\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"390.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "version": 5,
+        "workflow_id": "pb_get_workflowplaybook_content",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"pb_get_workflowplaybook_content\" isExecutable=\"true\" name=\"PB: Get workflow/playbook content\"\u003e\u003cdocumentation\u003eGet the contents of a workflow or playbook: functions, scripts, tasks and sub-workflows\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0ug56l7\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cexclusiveGateway id=\"ExclusiveGateway_034npde\"\u003e\u003cincoming\u003eSequenceFlow_0ug56l7\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0b6vw66\u003c/outgoing\u003e\u003coutgoing\u003eSequenceFlow_1m09ruh\u003c/outgoing\u003e\u003c/exclusiveGateway\u003e\u003csequenceFlow id=\"SequenceFlow_0ug56l7\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ExclusiveGateway_034npde\"/\u003e\u003cserviceTask id=\"ServiceTask_1kjomi0\" name=\"PB: Get playbook content\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"688cc0f8-85c5-4033-b9bf-66f01b35698c\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.pb_id = row[\u0027workflow_id\u0027]\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"playbook_content\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0b6vw66\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1lve3wz\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0b6vw66\" name=\"playbook row\" sourceRef=\"ExclusiveGateway_034npde\" targetRef=\"ServiceTask_1kjomi0\"\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e\u003c![CDATA[{\"conditions\":[{\"evaluation_id\":1,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"final_expression_text\":\"row[\u0027type\u0027] == \u0027playbook\u0027\",\"language\":\"python3\"}}],\"custom_condition\":\"\",\"logic_type\":\"all\",\"script_language\":\"python3\"}]]\u003e\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003cserviceTask id=\"ServiceTask_10lwt8d\" name=\"PB: Get workflow content\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"a3b3eba1-03e6-4e97-b3f5-57d21f1454fc\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.pb_id = row[\u0027workflow_id\u0027]\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"workflow_content\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1m09ruh\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1vt7iop\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1m09ruh\" name=\"workflow row\" sourceRef=\"ExclusiveGateway_034npde\" targetRef=\"ServiceTask_10lwt8d\"\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e\u003c![CDATA[{\"conditions\":[{\"evaluation_id\":1,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"script_text\":\"#Enter supplemental script\\n#Variables instantiated in this editor are available\\n#for use in the expression above\",\"final_expression_text\":\"row[\u0027type\u0027] == \u0027workflow\u0027\",\"language\":\"python3\"}}],\"custom_condition\":\"\",\"logic_type\":\"all\",\"script_language\":\"python3\"}]]\u003e\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003cendEvent id=\"EndEvent_006it3h\"\u003e\u003cincoming\u003eSequenceFlow_06js54u\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_1i3fbne\" name=\"PB: Display workflow/playbook con...\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"168e5688-9cb8-42c4-9b95-ec77dfa7565d\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1lve3wz\u003c/incoming\u003e\u003cincoming\u003eSequenceFlow_1vt7iop\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_06js54u\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"SequenceFlow_1lve3wz\" sourceRef=\"ServiceTask_1kjomi0\" targetRef=\"ScriptTask_1i3fbne\"/\u003e\u003csequenceFlow id=\"SequenceFlow_1vt7iop\" sourceRef=\"ServiceTask_10lwt8d\" targetRef=\"ScriptTask_1i3fbne\"/\u003e\u003csequenceFlow id=\"SequenceFlow_06js54u\" sourceRef=\"ScriptTask_1i3fbne\" targetRef=\"EndEvent_006it3h\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_18fv8zn\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned in the execution row\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0qrtmzq\" sourceRef=\"ScriptTask_1i3fbne\" targetRef=\"TextAnnotation_18fv8zn\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ExclusiveGateway_034npde\" id=\"ExclusiveGateway_034npde_di\" isMarkerVisible=\"true\"\u003e\u003comgdc:Bounds height=\"50\" width=\"50\" x=\"262\" y=\"181\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"287\" y=\"234\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0ug56l7\" id=\"SequenceFlow_0ug56l7_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"262\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"230\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1kjomi0\" id=\"ServiceTask_1kjomi0_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"373\" y=\"71\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0b6vw66\" id=\"SequenceFlow_0b6vw66_di\"\u003e\u003comgdi:waypoint x=\"287\" xsi:type=\"omgdc:Point\" y=\"181\"/\u003e\u003comgdi:waypoint x=\"287\" xsi:type=\"omgdc:Point\" y=\"111\"/\u003e\u003comgdi:waypoint x=\"373\" xsi:type=\"omgdc:Point\" y=\"111\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"69\" x=\"268\" y=\"139\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_10lwt8d\" id=\"ServiceTask_10lwt8d_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"373\" y=\"281\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1m09ruh\" id=\"SequenceFlow_1m09ruh_di\"\u003e\u003comgdi:waypoint x=\"287\" xsi:type=\"omgdc:Point\" y=\"231\"/\u003e\u003comgdi:waypoint x=\"287\" xsi:type=\"omgdc:Point\" y=\"321\"/\u003e\u003comgdi:waypoint x=\"373\" xsi:type=\"omgdc:Point\" y=\"321\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"67\" x=\"269\" y=\"269\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_006it3h\" id=\"EndEvent_006it3h_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"717.0359572400389\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"735.0359572400389\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_1i3fbne\" id=\"ScriptTask_1i3fbne_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"542\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1lve3wz\" id=\"SequenceFlow_1lve3wz_di\"\u003e\u003comgdi:waypoint x=\"473\" xsi:type=\"omgdc:Point\" y=\"111\"/\u003e\u003comgdi:waypoint x=\"508\" xsi:type=\"omgdc:Point\" y=\"111\"/\u003e\u003comgdi:waypoint x=\"508\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"542\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"523\" y=\"151.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1vt7iop\" id=\"SequenceFlow_1vt7iop_di\"\u003e\u003comgdi:waypoint x=\"473\" xsi:type=\"omgdc:Point\" y=\"321\"/\u003e\u003comgdi:waypoint x=\"508\" xsi:type=\"omgdc:Point\" y=\"321\"/\u003e\u003comgdi:waypoint x=\"508\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"542\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"523\" y=\"256.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_06js54u\" id=\"SequenceFlow_06js54u_di\"\u003e\u003comgdi:waypoint x=\"642\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"717\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"679.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_18fv8zn\" id=\"TextAnnotation_18fv8zn_di\"\u003e\u003comgdc:Bounds height=\"35\" width=\"170\" x=\"631\" y=\"96\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0qrtmzq\" id=\"Association_0qrtmzq_di\"\u003e\u003comgdi:waypoint x=\"638\" xsi:type=\"omgdc:Point\" y=\"172\"/\u003e\u003comgdi:waypoint x=\"693\" xsi:type=\"omgdc:Point\" y=\"131\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 12,
+      "content_version": 5,
       "creator_id": "a@example.com",
-      "description": "Retrieve workflows associated with this artifact run over the last 30 days",
-      "export_key": "pb_get_workflows_by_artifact_value_for_last_30_days",
+      "description": "Get the contents of a workflow or playbook: functions, scripts, tasks and sub-workflows",
+      "export_key": "pb_get_workflowplaybook_content",
       "last_modified_by": "a@example.com",
-      "last_modified_time": 1627994723907,
-      "name": "PB: Get workflows by artifact value for last 30 days",
-      "object_type": "artifact",
-      "programmatic_name": "pb_get_workflows_by_artifact_value_for_last_30_days",
+      "last_modified_time": 1628094461920,
+      "name": "PB: Get workflow/playbook content",
+      "object_type": "workflow_usage",
+      "programmatic_name": "pb_get_workflowplaybook_content",
       "tags": [],
-      "uuid": "258d9d41-9d5e-42fb-b95b-ad5de773e5ee",
-      "workflow_id": 113
+      "uuid": "2e29f16d-5bce-4136-8167-60668e1e97a2",
+      "workflow_id": 119
     },
     {
       "actions": [],
       "content": {
-        "version": 25,
+        "version": 29,
         "workflow_id": "wf_get_workflow_usage_at_incident_close",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_get_workflow_usage_at_incident_close\" isExecutable=\"true\" name=\"PB: Get workflow usage at incident close\"\u003e\u003cdocumentation\u003eCapture all workflows run on a incident when the incident is closed\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_10epyhv\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1qcmmk4\" name=\"PB: Get workflow data\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"ece3eb1b-2c95-4f0b-b00e-c610d418264a\"\u003e{\"inputs\":{},\"post_processing_script\":\"import time\\n\\nURL_MAP  = {\\n  \u0027incident\u0027: \\\"\u0026lt;a href=\u0027/#incidents/{0}\u0027\u0026gt;{0}\u0026lt;/a\u0026gt;\\\",\\n  \u0027task\u0027: \\\"\u0026lt;a href=\u0027/#incidents/{0}?taskId={1}\u0026amp;tabName=details\u0026amp;org_id={2}\u0027\u0026gt;{3}\u0026lt;/a\u0026gt;\\\",\\n  \u0027artifact\u0027: \\\"\u0026lt;a href=\u0027/#incidents/{0}/artifact/{1}?org_id={2}\u0027\u0026gt;{3}\u0026lt;/a\u0026gt;\\\",\\n  \u0027workflow\u0027: \\\"\u0026lt;a href=\u0027/#customize?tab=workflows\u0026amp;workflow={1}\u0027\u0026gt;{3}\u0026lt;/a\u0026gt;\\\"\\n}\\n\\ndef make_url(org_id, inc_id, element_type, element_id, element_name):\\n  if element_type in URL_MAP:\\n    return URL_MAP[element_type].format(inc_id, element_id, org_id, element_name)\\n\\n  return str(element_name)\\n\\n\\nif results.success:\\n  org_id = results.content[\u0027org_id\u0027]\\n  for key_incident, value_workflows in results.content[\u0027workflow_content\u0027].items():\\n    for entity in value_workflows[\u0027entities\u0027]:\\n      # skip these workflows\\n      if \\\"PB: Get\\\" in entity.get(\\\"workflow\\\", {}).get(\\\"name\\\"):\\n        continue\\n\\n      row = incident.addRow(\u0027workflow_usage\u0027)\\n      row[\u0027report_date\u0027] = int(time.time())*1000\\n      row[\u0027incident\u0027] = helper.createRichText(make_url(org_id, key_incident, \u0027incident\u0027, entity.get(\\\"object\\\", {}).get(\\\"object_id\\\"), entity.get(\\\"object\\\", {}).get(\\\"object_name\\\")))\\n      row[\u0027type\u0027] = \u0027workflow\u0027\\n      row[\u0027workflow\u0027] = helper.createRichText(make_url(org_id, key_incident, \u0027workflow\u0027, entity.get(\\\"workflow\\\", {}).get(\\\"workflow_id\\\"), entity.get(\\\"workflow\\\", {}).get(\\\"name\\\")))\\n      row[\u0027workflow_id\u0027] = entity.get(\\\"workflow\\\", {}).get(\\\"workflow_id\\\")\\n      row[\u0027execution_date\u0027] = entity.get(\\\"start_date\\\")\\n      row[\u0027element_type\u0027] = entity.get(\\\"object\\\", {}).get(\\\"type_name\\\")\\n      row[\u0027element_value\u0027] =  helper.createRichText(make_url(org_id, key_incident, entity.get(\\\"object\\\", {}).get(\\\"type_name\\\"), entity.get(\\\"object\\\", {}).get(\\\"object_id\\\"), entity.get(\\\"object\\\", {}).get(\\\"object_name\\\")))\\n      row[\u0027element_id\u0027] =  entity.get(\\\"object\\\", {}).get(\\\"object_id\\\")\\nelse:\\n  incident.addNote(\\\"PB: Get workflow usage at incident close failed: {}\\\".format(results.reason))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.pb_max_incident_id = incident.id\\ninputs.pb_min_incident_id = incident.id\\n\\ninputs.pb_min_incident_date = None\\ninputs.pb_max_incident_date = None\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_10epyhv\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0jsegx4\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_10epyhv\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1qcmmk4\"/\u003e\u003cendEvent id=\"EndEvent_1qqwo3o\"\u003e\u003cincoming\u003eSequenceFlow_0jsegx4\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0jsegx4\" sourceRef=\"ServiceTask_1qcmmk4\" targetRef=\"EndEvent_1qqwo3o\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_106tayq\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned in the \u0027workflow usage\u0027 datatable\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_138hjrp\" sourceRef=\"ServiceTask_1qcmmk4\" targetRef=\"TextAnnotation_106tayq\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1qcmmk4\" id=\"ServiceTask_1qcmmk4_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"258\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_10epyhv\" id=\"SequenceFlow_10epyhv_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"258\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"228\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1qqwo3o\" id=\"EndEvent_1qqwo3o_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"433\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"451\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0jsegx4\" id=\"SequenceFlow_0jsegx4_di\"\u003e\u003comgdi:waypoint x=\"358\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"433\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"395.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_106tayq\" id=\"TextAnnotation_106tayq_di\"\u003e\u003comgdc:Bounds height=\"65\" width=\"181\" x=\"355\" y=\"85\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_138hjrp\" id=\"Association_138hjrp_di\"\u003e\u003comgdi:waypoint x=\"357\" xsi:type=\"omgdc:Point\" y=\"175\"/\u003e\u003comgdi:waypoint x=\"396\" xsi:type=\"omgdc:Point\" y=\"150\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_get_workflow_usage_at_incident_close\" isExecutable=\"true\" name=\"PB: Get workflow/playbook usage at incident close\"\u003e\u003cdocumentation\u003eCapture all workflows and playbooks run on an incident when the incident is closed\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_10epyhv\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1qcmmk4\" name=\"PB: Get workflow data\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"ece3eb1b-2c95-4f0b-b00e-c610d418264a\"\u003e{\"inputs\":{},\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.pb_max_incident_id = incident.id\\ninputs.pb_min_incident_id = incident.id\\n\\ninputs.pb_min_incident_date = None\\ninputs.pb_max_incident_date = None\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"workflow_data\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_10epyhv\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0jsegx4\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_10epyhv\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1qcmmk4\"/\u003e\u003cendEvent id=\"EndEvent_1qqwo3o\"\u003e\u003cincoming\u003eSequenceFlow_1wrqrkq\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0jsegx4\" sourceRef=\"ServiceTask_1qcmmk4\" targetRef=\"ScriptTask_0xqpmjg\"/\u003e\u003cscriptTask id=\"ScriptTask_0xqpmjg\" name=\"PB: Display workflow data\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"52b3f960-ee96-4fff-80bb-71744f6f9a2c\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0jsegx4\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1byclef\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"SequenceFlow_1byclef\" sourceRef=\"ScriptTask_0xqpmjg\" targetRef=\"ServiceTask_1bhxchq\"/\u003e\u003cserviceTask id=\"ServiceTask_1bhxchq\" name=\"PB: Get playbook data\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d3b215fc-8c94-45eb-97d9-0c1b3a71e3a5\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.pb_max_incident_id = incident.id\\ninputs.pb_min_incident_id = incident.id\\n\\ninputs.pb_min_incident_date = None\\ninputs.pb_max_incident_date = None\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"playbook_data\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1byclef\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0hjno1i\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0hjno1i\" sourceRef=\"ServiceTask_1bhxchq\" targetRef=\"ScriptTask_08uznym\"/\u003e\u003cscriptTask id=\"ScriptTask_08uznym\" name=\"PB: Display playbook data\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"fadb0f23-7415-4029-a502-552ccb523002\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0hjno1i\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1wrqrkq\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"SequenceFlow_1wrqrkq\" sourceRef=\"ScriptTask_08uznym\" targetRef=\"EndEvent_1qqwo3o\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1i4f0dj\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned in the \u0027Playbook usage\u0027 datatable\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1lvmfjc\" sourceRef=\"ScriptTask_0xqpmjg\" targetRef=\"TextAnnotation_1i4f0dj\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1bwlbuf\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned in the \u0027workflow usage\u0027 datatable\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0uqrer5\" sourceRef=\"ScriptTask_08uznym\" targetRef=\"TextAnnotation_1bwlbuf\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1qcmmk4\" id=\"ServiceTask_1qcmmk4_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"258\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_10epyhv\" id=\"SequenceFlow_10epyhv_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"258\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"228\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1qqwo3o\" id=\"EndEvent_1qqwo3o_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"918\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"90\" x=\"891\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0jsegx4\" id=\"SequenceFlow_0jsegx4_di\"\u003e\u003comgdi:waypoint x=\"358\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"422\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"90\" x=\"345\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_0xqpmjg\" id=\"ScriptTask_0xqpmjg_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"422\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1byclef\" id=\"SequenceFlow_1byclef_di\"\u003e\u003comgdi:waypoint x=\"522\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"584\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"553\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1bhxchq\" id=\"ServiceTask_1bhxchq_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"584\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0hjno1i\" id=\"SequenceFlow_0hjno1i_di\"\u003e\u003comgdi:waypoint x=\"684\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"751\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"717.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_08uznym\" id=\"ScriptTask_08uznym_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"751\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1wrqrkq\" id=\"SequenceFlow_1wrqrkq_di\"\u003e\u003comgdi:waypoint x=\"851\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"918\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"884.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1i4f0dj\" id=\"TextAnnotation_1i4f0dj_di\"\u003e\u003comgdc:Bounds height=\"45\" width=\"169\" x=\"502\" y=\"74\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1lvmfjc\" id=\"Association_1lvmfjc_di\"\u003e\u003comgdi:waypoint x=\"513\" xsi:type=\"omgdc:Point\" y=\"167\"/\u003e\u003comgdi:waypoint x=\"564\" xsi:type=\"omgdc:Point\" y=\"119\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1bwlbuf\" id=\"TextAnnotation_1bwlbuf_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"160\" x=\"827\" y=\"71\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0uqrer5\" id=\"Association_0uqrer5_di\"\u003e\u003comgdi:waypoint x=\"840\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"882\" xsi:type=\"omgdc:Point\" y=\"123\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 25,
+      "content_version": 29,
       "creator_id": "a@example.com",
-      "description": "Capture all workflows run on a incident when the incident is closed",
+      "description": "Capture all workflows and playbooks run on an incident when the incident is closed",
       "export_key": "wf_get_workflow_usage_at_incident_close",
       "last_modified_by": "a@example.com",
-      "last_modified_time": 1627994834393,
-      "name": "PB: Get workflow usage at incident close",
+      "last_modified_time": 1628080341845,
+      "name": "PB: Get workflow/playbook usage at incident close",
       "object_type": "incident",
       "programmatic_name": "wf_get_workflow_usage_at_incident_close",
       "tags": [
@@ -1807,6 +1737,101 @@
       ],
       "uuid": "46f6eb99-5cb9-4642-a933-799552db2e31",
       "workflow_id": 100
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 45,
+        "workflow_id": "wf_get_workflow_frequency",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_get_workflow_frequency\" isExecutable=\"true\" name=\"PB: Get workflow/playbooks frequency\"\u003e\u003cdocumentation\u003eProvide a summary of workflows and playbooks runs across a range of incidents\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1mgeiob\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0kd0k0p\" name=\"PB: Get workflow data\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"ece3eb1b-2c95-4f0b-b00e-c610d418264a\"\u003e{\"inputs\":{},\"post_processing_script\":\"INCIDENT_URL = \\\"\u0026lt;a href=\u0027/#incidents/{0}\u0027\u0026gt;{0}\u0026lt;/a\u0026gt;\\\"\\nOBJECT_TYPES = [\u0027incident\u0027, \u0027task\u0027, \u0027artifact\u0027, \u0027attachment\u0027]\\nwf_stats = {}\\nobject_stats = { object: {} for object in OBJECT_TYPES }\\n\\n\\ndef update_workflow_stats(workflow_name, workflow_id, workflow_type):\\n  \\\"\\\"\\\"[tracking frequency of workflows by workflow id]\\n\\n  Args:\\n    workflow_name ([str]): [workflow name]\\n    workflow_id ([int]): [id of workflow]\\n    workflow_type ([str]): [artifact, incident, task, or attachment]\\n  \\\"\\\"\\\"\\n  if workflow_id not in wf_stats:\\n    wf_stats[workflow_id] = {\\n      \\\"name\\\": workflow_name,\\n      \\\"type\\\": workflow_type,\\n      \\\"workflows\\\": 0\\n    }\\n\\n  wf_stats[workflow_id][\u0027workflows\u0027] += 1\\n\\ndef update_object_stats(workflow_name, object_name, object_type):\\n  \\\"\\\"\\\"[track what workflows are run on a given attachment, task or artifact]\\n\\n  Args:\\n    workflow_name ([str]): [workflow name]\\n    object_name ([str]): [value of artifact or name to attachment/task]\\n    object_type ([str]): [artifact, incident, task, or attachment]\\n  \\\"\\\"\\\"\\n  if object_name not in object_stats[object_type]:\\n    object_stats[object_type][object_name] = []\\n\\n  object_stats[object_type][object_name].append(workflow_name)\\n\\ndef sort_wf_stats(wf_stats):\\n  \\\"\\\"\\\"[sort worflow stats by most frequent]\\n\\n  Args:\\n    wf_stats ([dict]): [dictionary of workflows keyed by id]\\n\\n  Returns:\\n    [list]: [list of workflows sorted by most frequent]\\n  \\\"\\\"\\\"\\n  wf_list = []\\n  for _, wf in wf_stats.items():\\n    wf_list.append((wf[\u0027name\u0027], wf[\u0027type\u0027], wf[\u0027workflows\u0027]))\\n\\n  return sorted(wf_list, key=lambda wf: wf[2], reverse=True)\\n\\ndef count_items_in_tuple_list(tuple_list, ndx):\\n  \\\"\\\"\\\"[count the repeat items in the workflow list and dedup the list]\\n  \\\"\\\"\\\"\\n  # count the list\\n  counted_objects = []\\n  for items in tuple_list:\\n    counted_wfs = []\\n    for wf in items[ndx]:\\n      counted_wfs.append(\\\"{1}- {0}\\\".format(wf, items[ndx].count(wf)))\\n      \\n    new_tuple = items[:ndx]\\n    new_tuple += tuple([list(set(counted_wfs))])\\n    \\n    counted_objects.append(new_tuple)\\n    \\n  return counted_objects\\n\\ndef sort_object_stats(object_list):\\n  \\\"\\\"\\\"[sort workflow frequency by specific artifact, task, incident, attachment]\\n\\n  Args:\\n    object_list ([dict]): [dictionary of object types and the workflows used within each object]\\n\\n  Returns:\\n    [list]: [description]\\n  \\\"\\\"\\\"\\n  sort_list = []\\n  for k, v in object_list.items():\\n    sort_list.append((k, len(v), v))\\n\\n  sorted_objects = sorted(sort_list, key=lambda obj: obj[1], reverse=True)\\n  # count the list\\n  return count_items_in_tuple_list(sorted_objects, 2)\\n\\n# MAIN\\nif results[\u0027success\u0027]:\\n  msg = []\\n  # get all workflows grouped by incident\\n  for inc_id, entities in results[\u0027content\u0027][\u0027workflow_content\u0027].items():\\n    for entity in entities[\u0027entities\u0027]:\\n      # filter out these workflows to get content\\n      if \\\"PB: Get\\\" not in entity.get(\u0027workflow\u0027, {}).get(\u0027name\u0027):\\n        update_workflow_stats(entity.get(\u0027workflow\u0027, {}).get(\u0027name\u0027), entity.get(\u0027workflow\u0027, {}).get(\u0027workflow_id\u0027), entity.get(\u0027object\u0027, {}).get(\u0027type_name\u0027))\\n        update_object_stats(entity.get(\u0027workflow\u0027, {}).get(\u0027name\u0027), entity.get(\u0027object\u0027, {}).get(\u0027object_name\u0027), entity.get(\u0027object\u0027, {}).get(\u0027type_name\u0027))\\n\\n  # make tuples so we can sort\\n  wf_list = sort_wf_stats(wf_stats)\\n  msg.append(\\\"Top 10 workflows. Incidents {} to {}\\\".format(results[\u0027content\u0027][\u0027min_id\u0027], results[\u0027content\u0027][\u0027max_id\u0027]))\\n  msg.extend([\\\"  {2}: {0} ({1})\\\".format(wf_list[x][0], wf_list[x][1], wf_list[x][2]) for x in range(0, 10) if x \u0026lt; len(wf_list)])\\n\\n  for obj in OBJECT_TYPES:\\n    msg.append(\\\"\\\\nTop 10 workflows by {}\\\".format(obj))\\n    obj_list = sort_object_stats(object_stats[obj])\\n    if obj_list:\\n      msg.extend([\\\"  {1}: {0}\\\\n  {2}\\\".format(obj_list[x][0], obj_list[x][1], obj_list[x][2])  for x in range(0, 10) if x \u0026lt; len(obj_list)])\\n    else:\\n      msg.append(\\\"  None\\\")\\n\\n  incident.addNote(helper.createPlainText(\\\"\\\\n\\\".join(msg)))\\nelse:\\n  incident.addNote(\\\"PB: Get workflow frequency failed: {}\\\".format(results.reason))\\n\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.pb_max_incident_id = rule.properties.pb_max_incident_id\\ninputs.pb_min_incident_id = rule.properties.pb_min_incident_id\\n\\ninputs.pb_min_incident_date = rule.properties.pb_min_incident_date\\ninputs.pb_max_incident_date = rule.properties.pb_max_incident_date\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1mgeiob\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0taijrv\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1mgeiob\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0kd0k0p\"/\u003e\u003cendEvent id=\"EndEvent_0fco8ag\"\u003e\u003cincoming\u003eSequenceFlow_0qct073\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0taijrv\" sourceRef=\"ServiceTask_0kd0k0p\" targetRef=\"ServiceTask_1r7m2z6\"/\u003e\u003cserviceTask id=\"ServiceTask_1r7m2z6\" name=\"PB: Get playbook data\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d3b215fc-8c94-45eb-97d9-0c1b3a71e3a5\"\u003e{\"inputs\":{},\"post_processing_script\":\"INCIDENT_URL = \\\"\u0026lt;a href=\u0027/#incidents/{0}\u0027\u0026gt;{0}\u0026lt;/a\u0026gt;\\\"\\nOBJECT_TYPES = [\u0027incident\u0027, \u0027task\u0027, \u0027artifact\u0027, \u0027attachment\u0027]\\nwf_stats = {}\\nobject_stats = { object: {} for object in OBJECT_TYPES }\\n\\n\\ndef update_workflow_stats(workflow_name, workflow_id, workflow_type):\\n  \\\"\\\"\\\"[tracking frequency of workflows by workflow id]\\n\\n  Args:\\n    workflow_name ([str]): [workflow name]\\n    workflow_id ([int]): [id of workflow]\\n    workflow_type ([str]): [artifact, incident, task, or attachment]\\n  \\\"\\\"\\\"\\n  if workflow_id not in wf_stats:\\n    wf_stats[workflow_id] = {\\n      \\\"name\\\": workflow_name,\\n      \\\"type\\\": workflow_type,\\n      \\\"workflows\\\": 0\\n    }\\n\\n  wf_stats[workflow_id][\u0027workflows\u0027] += 1\\n\\ndef update_object_stats(workflow_name, object_name, object_type):\\n  \\\"\\\"\\\"[track what workflows are run on a given attachment, task or artifact]\\n\\n  Args:\\n    workflow_name ([str]): [workflow name]\\n    object_name ([str]): [value of artifact or name to attachment/task]\\n    object_type ([str]): [artifact, incident, task, or attachment]\\n  \\\"\\\"\\\"\\n  if object_name not in object_stats[object_type]:\\n    object_stats[object_type][object_name] = []\\n\\n  object_stats[object_type][object_name].append(workflow_name)\\n\\ndef sort_wf_stats(wf_stats):\\n  \\\"\\\"\\\"[sort worflow stats by most frequent]\\n\\n  Args:\\n    wf_stats ([dict]): [dictionary of workflows keyed by id]\\n\\n  Returns:\\n    [list]: [list of workflows sorted by most frequent]\\n  \\\"\\\"\\\"\\n  wf_list = []\\n  for _, wf in wf_stats.items():\\n    wf_list.append((wf[\u0027name\u0027], wf[\u0027type\u0027], wf[\u0027workflows\u0027]))\\n\\n  return sorted(wf_list, key=lambda wf: wf[2], reverse=True)\\n\\ndef count_items_in_tuple_list(tuple_list, ndx):\\n  \\\"\\\"\\\"[count the repeat items in the workflow list and dedup the list]\\n  \\\"\\\"\\\"\\n  # count the list\\n  counted_objects = []\\n  for items in tuple_list:\\n    counted_wfs = []\\n    for wf in items[ndx]:\\n      counted_wfs.append(\\\"{1}- {0}\\\".format(wf, items[ndx].count(wf)))\\n      \\n    new_tuple = items[:ndx]\\n    new_tuple += tuple([list(set(counted_wfs))])\\n    \\n    counted_objects.append(new_tuple)\\n    \\n  return counted_objects\\n\\ndef sort_object_stats(object_list):\\n  \\\"\\\"\\\"[sort workflow frequency by specific artifact, task, incident, attachment]\\n\\n  Args:\\n    object_list ([dict]): [dictionary of object types and the workflows used within each object]\\n\\n  Returns:\\n    [list]: [description]\\n  \\\"\\\"\\\"\\n  sort_list = []\\n  for k, v in object_list.items():\\n    sort_list.append((k, len(v), v))\\n\\n  sorted_objects = sorted(sort_list, key=lambda obj: obj[1], reverse=True)\\n  # count the list\\n  return count_items_in_tuple_list(sorted_objects, 2)\\n\\n# MAIN\\nif results[\u0027success\u0027]:\\n  msg = []\\n  # get all workflows grouped by incident\\n  for inc_id, entities in results[\u0027content\u0027][\u0027playbook_content\u0027].items():\\n    for entity in entities:\\n      # filter out these workflows to get content\\n      if \\\"PB: Get\\\" not in entity.get(\u0027playbook\u0027, {}).get(\u0027display_name\u0027):\\n        update_workflow_stats(entity.get(\u0027playbook\u0027, {}).get(\u0027display_name\u0027), entity.get(\u0027playbook\u0027, {}).get(\u0027id\u0027), entity.get(\u0027object\u0027, {}).get(\u0027type_name\u0027))\\n        update_object_stats(entity.get(\u0027playbook\u0027, {}).get(\u0027display_name\u0027), entity.get(\u0027object\u0027, {}).get(\u0027object_name\u0027), entity.get(\u0027object\u0027, {}).get(\u0027type_name\u0027))\\n\\n  # make tuples so we can sort\\n  wf_list = sort_wf_stats(wf_stats)\\n  msg.append(\\\"Top 10 playbooks. Incidents {} to {}\\\".format(results[\u0027content\u0027][\u0027min_id\u0027], results[\u0027content\u0027][\u0027max_id\u0027]))\\n  msg.extend([\\\"  {2}: {0} ({1})\\\".format(wf_list[x][0], wf_list[x][1], wf_list[x][2]) for x in range(0, 10) if x \u0026lt; len(wf_list)])\\n\\n  for obj in OBJECT_TYPES:\\n    msg.append(\\\"\\\\nTop 10 playbooks by {}\\\".format(obj))\\n    obj_list = sort_object_stats(object_stats[obj])\\n    if obj_list:\\n      msg.extend([\\\"  {1}: {0}\\\\n  {2}\\\".format(obj_list[x][0], obj_list[x][1], obj_list[x][2])  for x in range(0, 10) if x \u0026lt; len(obj_list)])\\n    else:\\n      msg.append(\\\"  None\\\")\\n\\n  incident.addNote(helper.createPlainText(\\\"\\\\n\\\".join(msg)))\\nelse:\\n  incident.addNote(\\\"PB: Get playbook frequency failed: {}\\\".format(results.reason))\\n\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.pb_max_incident_id = rule.properties.pb_max_incident_id\\ninputs.pb_min_incident_id = rule.properties.pb_min_incident_id\\n\\ninputs.pb_min_incident_date = rule.properties.pb_min_incident_date\\ninputs.pb_max_incident_date = rule.properties.pb_max_incident_date\\n\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0taijrv\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0qct073\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0qct073\" sourceRef=\"ServiceTask_1r7m2z6\" targetRef=\"EndEvent_0fco8ag\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1nnedv0\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned in an incident note\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1erm5lh\" sourceRef=\"ServiceTask_0kd0k0p\" targetRef=\"TextAnnotation_1nnedv0\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0nejpq6\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned in an incident note\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_191nyn8\" sourceRef=\"ServiceTask_1r7m2z6\" targetRef=\"TextAnnotation_0nejpq6\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0kd0k0p\" id=\"ServiceTask_0kd0k0p_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"285\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1mgeiob\" id=\"SequenceFlow_1mgeiob_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"285\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"241.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0fco8ag\" id=\"EndEvent_0fco8ag_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"620\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"90\" x=\"593\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0taijrv\" id=\"SequenceFlow_0taijrv_di\"\u003e\u003comgdi:waypoint x=\"385\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"459\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"90\" x=\"377\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1nnedv0\" id=\"TextAnnotation_1nnedv0_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"165\" x=\"378\" y=\"58\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1erm5lh\" id=\"Association_1erm5lh_di\"\u003e\u003comgdi:waypoint x=\"376\" xsi:type=\"omgdc:Point\" y=\"167\"/\u003e\u003comgdi:waypoint x=\"434\" xsi:type=\"omgdc:Point\" y=\"110\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1r7m2z6\" id=\"ServiceTask_1r7m2z6_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"459\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0qct073\" id=\"SequenceFlow_0qct073_di\"\u003e\u003comgdi:waypoint x=\"559\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"620\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"589.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0nejpq6\" id=\"TextAnnotation_0nejpq6_di\"\u003e\u003comgdc:Bounds height=\"50\" width=\"143\" x=\"601\" y=\"60\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_191nyn8\" id=\"Association_191nyn8_di\"\u003e\u003comgdi:waypoint x=\"555\" xsi:type=\"omgdc:Point\" y=\"172\"/\u003e\u003comgdi:waypoint x=\"640\" xsi:type=\"omgdc:Point\" y=\"110\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 45,
+      "creator_id": "a@example.com",
+      "description": "Provide a summary of workflows and playbooks runs across a range of incidents",
+      "export_key": "wf_get_workflow_frequency",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1628080328742,
+      "name": "PB: Get workflow/playbooks frequency",
+      "object_type": "incident",
+      "programmatic_name": "wf_get_workflow_frequency",
+      "tags": [
+        {
+          "tag_handle": "fn_playbook_utils",
+          "value": null
+        }
+      ],
+      "uuid": "ca7bc04f-f527-4d4b-a23f-fea3a90c6175",
+      "workflow_id": 104
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 24,
+        "workflow_id": "pb_get_workflows_by_artifact_value_for_last_30_days",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"pb_get_workflows_by_artifact_value_for_last_30_days\" isExecutable=\"true\" name=\"PB: Get workflows/playbooks by artifact value for last 30 days\"\u003e\u003cdocumentation\u003eRetrieve workflows and playbooks associated with this artifact run over the last 30 days\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1xxdd8t\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1cxqtfx\" name=\"PB: Get workflow data\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"ece3eb1b-2c95-4f0b-b00e-c610d418264a\"\u003e{\"inputs\":{},\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"import time\\n\\nTHIRTY_DAYS = 60*60*24*30*1000\\n\\ninputs.pb_min_incident_id = None\\ninputs.pb_max_incident_id = None\\ninputs.pb_min_incident_date = int(time.time()*1000) - THIRTY_DAYS\\ninputs.pb_max_incident_date = None\\n\\ninputs.pb_object_name = artifact.value\\ninputs.pb_object_type = \u0027artifact\u0027\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"workflow_data\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1xxdd8t\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_112b03o\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1xxdd8t\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1cxqtfx\"/\u003e\u003cendEvent id=\"EndEvent_1ngcv42\"\u003e\u003cincoming\u003eSequenceFlow_0z71v18\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_112b03o\" sourceRef=\"ServiceTask_1cxqtfx\" targetRef=\"ScriptTask_1atc3bo\"/\u003e\u003cscriptTask id=\"ScriptTask_1atc3bo\" name=\"PB: Display workflow data\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"52b3f960-ee96-4fff-80bb-71744f6f9a2c\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_112b03o\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_17t2z68\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"SequenceFlow_17t2z68\" sourceRef=\"ScriptTask_1atc3bo\" targetRef=\"ServiceTask_03gy3b0\"/\u003e\u003cserviceTask id=\"ServiceTask_03gy3b0\" name=\"PB: Get playbook data\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d3b215fc-8c94-45eb-97d9-0c1b3a71e3a5\"\u003e{\"inputs\":{},\"pre_processing_script\":\"import time\\n\\nTHIRTY_DAYS = 60*60*24*30*1000\\n\\ninputs.pb_min_incident_id = None\\ninputs.pb_max_incident_id = None\\ninputs.pb_min_incident_date = int(time.time()*1000) - THIRTY_DAYS\\ninputs.pb_max_incident_date = None\\n\\ninputs.pb_object_name = artifact.value\\ninputs.pb_object_type = \u0027artifact\u0027\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"playbook_data\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_17t2z68\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_16jfo1r\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_16jfo1r\" sourceRef=\"ServiceTask_03gy3b0\" targetRef=\"ScriptTask_0jpgbb1\"/\u003e\u003cscriptTask id=\"ScriptTask_0jpgbb1\" name=\"PB: Display playbook data\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"fadb0f23-7415-4029-a502-552ccb523002\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_16jfo1r\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0z71v18\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"SequenceFlow_0z71v18\" sourceRef=\"ScriptTask_0jpgbb1\" targetRef=\"EndEvent_1ngcv42\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1sc6hqp\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned in the \u0027Playbook usage\u0027 datatable\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_15fn24g\" sourceRef=\"ScriptTask_1atc3bo\" targetRef=\"TextAnnotation_1sc6hqp\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1v5es7b\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned in the \u0027Playbook usage\u0027 datatable\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0h5ha5z\" sourceRef=\"ScriptTask_0jpgbb1\" targetRef=\"TextAnnotation_1v5es7b\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1cxqtfx\" id=\"ServiceTask_1cxqtfx_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"255\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1xxdd8t\" id=\"SequenceFlow_1xxdd8t_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"255\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"226.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1ngcv42\" id=\"EndEvent_1ngcv42_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"920\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"90\" x=\"893\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_112b03o\" id=\"SequenceFlow_112b03o_di\"\u003e\u003comgdi:waypoint x=\"355\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"408\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"90\" x=\"336.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_1atc3bo\" id=\"ScriptTask_1atc3bo_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"408\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_17t2z68\" id=\"SequenceFlow_17t2z68_di\"\u003e\u003comgdi:waypoint x=\"508\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"562\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"535\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1sc6hqp\" id=\"TextAnnotation_1sc6hqp_di\"\u003e\u003comgdc:Bounds height=\"43\" width=\"168\" x=\"537\" y=\"76\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_15fn24g\" id=\"Association_15fn24g_di\"\u003e\u003comgdi:waypoint x=\"506\" xsi:type=\"omgdc:Point\" y=\"174\"/\u003e\u003comgdi:waypoint x=\"590\" xsi:type=\"omgdc:Point\" y=\"119\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_03gy3b0\" id=\"ServiceTask_03gy3b0_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"562\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_16jfo1r\" id=\"SequenceFlow_16jfo1r_di\"\u003e\u003comgdi:waypoint x=\"662\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"731\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"696.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_0jpgbb1\" id=\"ScriptTask_0jpgbb1_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"731\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0z71v18\" id=\"SequenceFlow_0z71v18_di\"\u003e\u003comgdi:waypoint x=\"831\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"920\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"875.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1v5es7b\" id=\"TextAnnotation_1v5es7b_di\"\u003e\u003comgdc:Bounds height=\"39\" width=\"184\" x=\"836\" y=\"83\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0h5ha5z\" id=\"Association_0h5ha5z_di\"\u003e\u003comgdi:waypoint x=\"828\" xsi:type=\"omgdc:Point\" y=\"173\"/\u003e\u003comgdi:waypoint x=\"901\" xsi:type=\"omgdc:Point\" y=\"122\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 24,
+      "creator_id": "a@example.com",
+      "description": "Retrieve workflows and playbooks associated with this artifact run over the last 30 days",
+      "export_key": "pb_get_workflows_by_artifact_value_for_last_30_days",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1628080363124,
+      "name": "PB: Get workflows/playbooks by artifact value for last 30 days",
+      "object_type": "artifact",
+      "programmatic_name": "pb_get_workflows_by_artifact_value_for_last_30_days",
+      "tags": [],
+      "uuid": "258d9d41-9d5e-42fb-b95b-ad5de773e5ee",
+      "workflow_id": 113
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 66,
+        "workflow_id": "wf_get_workflow_data",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_get_workflow_data\" isExecutable=\"true\" name=\"PB: Get workflow/playbook usage\"\u003e\u003cdocumentation\u003eGet workflows and playbooks for one or a range of incidents\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_12rs1ep\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_179cb3k\" name=\"PB: Get workflow data\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"ece3eb1b-2c95-4f0b-b00e-c610d418264a\"\u003e{\"inputs\":{},\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.pb_max_incident_id = rule.properties.pb_max_incident_id\\ninputs.pb_min_incident_id = rule.properties.pb_min_incident_id\\n\\ninputs.pb_min_incident_date = rule.properties.pb_min_incident_date\\ninputs.pb_max_incident_date = rule.properties.pb_max_incident_date\\n\\ninputs.pb_object_name = inputs.pb_object_type = None\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"workflow_data\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_12rs1ep\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1t49ggr\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_12rs1ep\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_179cb3k\"/\u003e\u003cendEvent id=\"EndEvent_0lsb71q\"\u003e\u003cincoming\u003eSequenceFlow_1xfpxs2\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1t49ggr\" sourceRef=\"ServiceTask_179cb3k\" targetRef=\"ScriptTask_1qiws89\"/\u003e\u003cscriptTask id=\"ScriptTask_1qiws89\" name=\"PB: Display workflow data\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"52b3f960-ee96-4fff-80bb-71744f6f9a2c\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1t49ggr\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_02ja9q7\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"SequenceFlow_02ja9q7\" sourceRef=\"ScriptTask_1qiws89\" targetRef=\"ServiceTask_17mehun\"/\u003e\u003cserviceTask id=\"ServiceTask_17mehun\" name=\"PB: Get playbook data\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d3b215fc-8c94-45eb-97d9-0c1b3a71e3a5\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.pb_max_incident_id = rule.properties.pb_max_incident_id\\ninputs.pb_min_incident_id = rule.properties.pb_min_incident_id\\n\\ninputs.pb_min_incident_date = rule.properties.pb_min_incident_date\\ninputs.pb_max_incident_date = rule.properties.pb_max_incident_date\\n\\ninputs.pb_object_name = inputs.pb_object_type = None\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"playbook_data\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_02ja9q7\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1t1jh5v\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1t1jh5v\" sourceRef=\"ServiceTask_17mehun\" targetRef=\"ScriptTask_02drekp\"/\u003e\u003cscriptTask id=\"ScriptTask_02drekp\" name=\"PB: Display playbook data\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"fadb0f23-7415-4029-a502-552ccb523002\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1t1jh5v\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1xfpxs2\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"SequenceFlow_1xfpxs2\" sourceRef=\"ScriptTask_02drekp\" targetRef=\"EndEvent_0lsb71q\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0dsjioy\"\u003e\u003ctext\u003e\u003c![CDATA[results returned in the \u0027Playbook usage\u0027 datatable]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0vejugd\" sourceRef=\"ScriptTask_1qiws89\" targetRef=\"TextAnnotation_0dsjioy\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0bf9io7\"\u003e\u003ctext\u003e\u003c![CDATA[\u00a0results returned in the \u0027Playbook usage\u0027 datatable]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_034vcht\" sourceRef=\"ScriptTask_02drekp\" targetRef=\"TextAnnotation_0bf9io7\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_179cb3k\" id=\"ServiceTask_179cb3k_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"277\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_12rs1ep\" id=\"SequenceFlow_12rs1ep_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"277\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"237.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0lsb71q\" id=\"EndEvent_0lsb71q_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"929\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"90\" x=\"902\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1t49ggr\" id=\"SequenceFlow_1t49ggr_di\"\u003e\u003comgdi:waypoint x=\"377\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"450\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"90\" x=\"368.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_1qiws89\" id=\"ScriptTask_1qiws89_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"450\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_02ja9q7\" id=\"SequenceFlow_02ja9q7_di\"\u003e\u003comgdi:waypoint x=\"550\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"616\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"90\" x=\"538\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0dsjioy\" id=\"TextAnnotation_0dsjioy_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"190\" x=\"550\" y=\"83\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0vejugd\" id=\"Association_0vejugd_di\"\u003e\u003comgdi:waypoint x=\"548\" xsi:type=\"omgdc:Point\" y=\"174\"/\u003e\u003comgdi:waypoint x=\"606\" xsi:type=\"omgdc:Point\" y=\"135\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_17mehun\" id=\"ServiceTask_17mehun_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"616\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1t1jh5v\" id=\"SequenceFlow_1t1jh5v_di\"\u003e\u003comgdi:waypoint x=\"716\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"771\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"743.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_02drekp\" id=\"ScriptTask_02drekp_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"771\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1xfpxs2\" id=\"SequenceFlow_1xfpxs2_di\"\u003e\u003comgdi:waypoint x=\"871\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"929\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"900\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0bf9io7\" id=\"TextAnnotation_0bf9io7_di\"\u003e\u003comgdc:Bounds height=\"45\" width=\"165\" x=\"880\" y=\"91\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_034vcht\" id=\"Association_034vcht_di\"\u003e\u003comgdi:waypoint x=\"870\" xsi:type=\"omgdc:Point\" y=\"175\"/\u003e\u003comgdi:waypoint x=\"930\" xsi:type=\"omgdc:Point\" y=\"136\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 66,
+      "creator_id": "a@example.com",
+      "description": "Get workflows and playbooks for one or a range of incidents",
+      "export_key": "wf_get_workflow_data",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1628079864585,
+      "name": "PB: Get workflow/playbook usage",
+      "object_type": "incident",
+      "programmatic_name": "wf_get_workflow_data",
+      "tags": [
+        {
+          "tag_handle": "fn_playbook_utils",
+          "value": null
+        }
+      ],
+      "uuid": "468bdecf-4136-47d6-9b39-321e1f2927e9",
+      "workflow_id": 94
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 29,
+        "workflow_id": "wf_get_workflows_by_artifact_value",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_get_workflows_by_artifact_value\" isExecutable=\"true\" name=\"PB: Get workflows/playbooks by artifact value\"\u003e\u003cdocumentation\u003eFind all the workflows and playbooks across incidents which have been run on a specific artifact value\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1rcehd3\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0itsgbv\" name=\"PB: Get workflow data\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"ece3eb1b-2c95-4f0b-b00e-c610d418264a\"\u003e{\"inputs\":{},\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.pb_max_incident_id = rule.properties.pb_max_incident_id\\ninputs.pb_min_incident_id = rule.properties.pb_min_incident_id\\n\\ninputs.pb_min_incident_date = rule.properties.pb_min_incident_date\\ninputs.pb_max_incident_date = rule.properties.pb_max_incident_date\\n\\ninputs.pb_object_name = artifact.value\\ninputs.pb_object_type = \u0027artifact\u0027\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"workflow_data\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1rcehd3\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1tna49c\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1rcehd3\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0itsgbv\"/\u003e\u003cendEvent id=\"EndEvent_0zw51b5\"\u003e\u003cincoming\u003eSequenceFlow_0oqgvol\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1tna49c\" sourceRef=\"ServiceTask_0itsgbv\" targetRef=\"ScriptTask_1pc2emd\"/\u003e\u003cscriptTask id=\"ScriptTask_1pc2emd\" name=\"PB: Display workflow data\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"52b3f960-ee96-4fff-80bb-71744f6f9a2c\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1tna49c\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0lgsnb0\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"SequenceFlow_0lgsnb0\" sourceRef=\"ScriptTask_1pc2emd\" targetRef=\"ServiceTask_0hvy9nv\"/\u003e\u003cserviceTask id=\"ServiceTask_0hvy9nv\" name=\"PB: Get playbook data\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d3b215fc-8c94-45eb-97d9-0c1b3a71e3a5\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.pb_max_incident_id = rule.properties.pb_max_incident_id\\ninputs.pb_min_incident_id = rule.properties.pb_min_incident_id\\n\\ninputs.pb_min_incident_date = rule.properties.pb_min_incident_date\\ninputs.pb_max_incident_date = rule.properties.pb_max_incident_date\\n\\ninputs.pb_object_name = artifact.value\\ninputs.pb_object_type = \u0027artifact\u0027\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"playbook_data\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0lgsnb0\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1hthweg\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1hthweg\" sourceRef=\"ServiceTask_0hvy9nv\" targetRef=\"ScriptTask_041ocss\"/\u003e\u003cscriptTask id=\"ScriptTask_041ocss\" name=\"PB: Display playbook data\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"fadb0f23-7415-4029-a502-552ccb523002\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1hthweg\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0oqgvol\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"SequenceFlow_0oqgvol\" sourceRef=\"ScriptTask_041ocss\" targetRef=\"EndEvent_0zw51b5\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_052tcaa\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned to the \u0027Playbook usage\u0027 datatable\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_18df6ci\" sourceRef=\"ScriptTask_1pc2emd\" targetRef=\"TextAnnotation_052tcaa\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_15qgqlh\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned to the \u0027Workflow usage\u0027 datatable\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1sd5o3t\" sourceRef=\"ScriptTask_041ocss\" targetRef=\"TextAnnotation_15qgqlh\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0itsgbv\" id=\"ServiceTask_0itsgbv_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"276\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1rcehd3\" id=\"SequenceFlow_1rcehd3_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"276\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"237\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0zw51b5\" id=\"EndEvent_0zw51b5_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"953\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"90\" x=\"926\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1tna49c\" id=\"SequenceFlow_1tna49c_di\"\u003e\u003comgdi:waypoint x=\"376\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"451\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"90\" x=\"368.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_1pc2emd\" id=\"ScriptTask_1pc2emd_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"451\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0lgsnb0\" id=\"SequenceFlow_0lgsnb0_di\"\u003e\u003comgdi:waypoint x=\"551\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"622\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"90\" x=\"541.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_052tcaa\" id=\"TextAnnotation_052tcaa_di\"\u003e\u003comgdc:Bounds height=\"47\" width=\"163\" x=\"511\" y=\"77\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_18df6ci\" id=\"Association_18df6ci_di\"\u003e\u003comgdi:waypoint x=\"536\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"573\" xsi:type=\"omgdc:Point\" y=\"124\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0hvy9nv\" id=\"ServiceTask_0hvy9nv_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"622\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1hthweg\" id=\"SequenceFlow_1hthweg_di\"\u003e\u003comgdi:waypoint x=\"722\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"783\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"90\" x=\"707.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_041ocss\" id=\"ScriptTask_041ocss_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"783\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0oqgvol\" id=\"SequenceFlow_0oqgvol_di\"\u003e\u003comgdi:waypoint x=\"883\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"953\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"918\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_15qgqlh\" id=\"TextAnnotation_15qgqlh_di\"\u003e\u003comgdc:Bounds height=\"48\" width=\"163\" x=\"881\" y=\"80\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1sd5o3t\" id=\"Association_1sd5o3t_di\"\u003e\u003comgdi:waypoint x=\"878\" xsi:type=\"omgdc:Point\" y=\"171\"/\u003e\u003comgdi:waypoint x=\"932\" xsi:type=\"omgdc:Point\" y=\"128\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 29,
+      "creator_id": "a@example.com",
+      "description": "Find all the workflows and playbooks across incidents which have been run on a specific artifact value",
+      "export_key": "wf_get_workflows_by_artifact_value",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1628080352948,
+      "name": "PB: Get workflows/playbooks by artifact value",
+      "object_type": "artifact",
+      "programmatic_name": "wf_get_workflows_by_artifact_value",
+      "tags": [
+        {
+          "tag_handle": "fn_playbook_utils",
+          "value": null
+        }
+      ],
+      "uuid": "1c00217c-5716-47a4-b7d9-5505e8f639ac",
+      "workflow_id": 95
     }
   ],
   "workspaces": []

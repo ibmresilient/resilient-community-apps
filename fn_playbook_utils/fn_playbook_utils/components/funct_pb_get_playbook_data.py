@@ -26,6 +26,8 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.pb_max_incident_id
             -   fn_inputs.pb_min_incident_date
             -   fn_inputs.pb_max_incident_date
+            -   fn_inputs.pb_object_name
+            -   fn_inputs.pb_object_type
         """
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
@@ -51,11 +53,13 @@ class FunctionComponent(AppFunctionComponent):
             "playbook_content": result_dict
         }
 
-        search_results = get_playbooks_by_incident_id(self.restclient, min_id, max_id)
-        for pb in search_results['data']:
-          if pb['incident_id'] in result_dict:
-            result_dict[pb['incident_id']].append(pb)
-          else:
-            result_dict[pb['incident_id']] = [pb]
+        # don't continue if no values
+        if bool(min_id and max_id):
+          search_results = get_playbooks_by_incident_id(self.restclient, min_id, max_id)
+          for pb in search_results.get('data', []):
+            if pb['incident_id'] in result_dict:
+              result_dict[pb['incident_id']].append(pb)
+            else:
+              result_dict[pb['incident_id']] = [pb]
 
         return result_data

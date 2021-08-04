@@ -29,6 +29,8 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.pb_max_incident_id
             -   fn_inputs.pb_min_incident_date
             -   fn_inputs.pb_max_incident_date
+            -   fn_inputs.pb_object_name
+            -   fn_inputs.pb_object_type
         """
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
@@ -57,11 +59,13 @@ class FunctionComponent(AppFunctionComponent):
             "max_id": max_id,
             "workflow_content": result_dict
         }
-        for inc_id in range(min_id, max_id+1):
-            try:
-                inc_workflows = self.get_incident_workflow(inc_id)
-                result_dict[inc_id] = inc_workflows
-            except BaseException:
-                pass
+        # don't continue if no values
+        if bool(min_id and max_id):
+            for inc_id in range(min_id, max_id+1):
+                try:
+                    inc_workflows = self.get_incident_workflow(inc_id)
+                    result_dict[inc_id] = inc_workflows
+                except BaseException:
+                    pass
 
         return result_data

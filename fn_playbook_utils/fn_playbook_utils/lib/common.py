@@ -3,6 +3,7 @@
 #pragma pylint: disable=unused-argument, no-self-use, line-too-long
 import logging
 import xml.etree.ElementTree as ET
+from resilient import SimpleHTTPException
 
 LOG = logging.getLogger(__name__)
 
@@ -61,6 +62,7 @@ def parse_inputs(restclient, fn_inputs):
     min_date = fn_inputs.pb_min_incident_date if hasattr(fn_inputs, 'pb_min_incident_date') else None
     max_date = fn_inputs.pb_max_incident_date if hasattr(fn_inputs, 'pb_max_incident_date') else None
 
+    # if ids are missing and at least one date is available
     if not (min_id and max_id) and (min_date or max_date):
         if max_date:
             max_date += 60*60*24*1000   # search for date based on midnight
@@ -147,6 +149,8 @@ def get_incidents_by_date(rest_client, min_incident_date, max_incident_date):
                         "value": max_incident_date
                     })
 
+    LOG.debug(filter_conditions)
+
     search_results = rest_client.post(QUERY_PAGED_URL, filter_conditions)
     min_incident_id = max_incident_id = None
     LOG.debug(search_results)
@@ -200,7 +204,10 @@ def get_playbooks_by_incident_id(rest_client, min_incident_id, max_incident_id):
                     })
 
     LOG.debug(filter_conditions)
-    return rest_client.post(PLAYBOOK_EXECUTION_QUERY_PAGED_FILTER_URL, filter_conditions)
+    try:
+        return rest_client.post(PLAYBOOK_EXECUTION_QUERY_PAGED_FILTER_URL, filter_conditions)
+    except SimpleHTTPException:
+        return {}
 
 def get_process_elements(xml, action_map=ACTION_MAP):
     """[parse the xml for a workflow and extract the names of it's elements: artifacts,
