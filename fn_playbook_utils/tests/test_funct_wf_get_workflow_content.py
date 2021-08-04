@@ -2,9 +2,7 @@
 """Tests using pytest_resilient_circuits"""
 
 import pytest
-from fn_playbook_utils.components.funct_wf_get_workflow_content import get_workflow_elements
-from resilient_circuits.util import get_config_data, get_function_definition
-from resilient_circuits import SubmitTestFunction, FunctionResult
+from fn_playbook_utils.components.funct_pb_get_workflow_content import get_process_elements
 
 COMPLEX_XML = """<?xml version="1.0" encoding="UTF-8"?>
 <definitions
@@ -336,7 +334,7 @@ class TestWfGetWorkflowContent:
     def test_complex(self):
         """ Test calling with sample values for the parameters """
 
-        results = get_workflow_elements(COMPLEX_XML)
+        results = get_process_elements(COMPLEX_XML)
         assert(results.get('Tasks'))
         assert("Initial Triage" in results.get('Tasks', []))
 
@@ -351,7 +349,7 @@ class TestWfGetWorkflowContent:
         assert("Example: Kafka Send" in results.get('Workflows', []))
 
     def test_simple(self):
-        results = get_workflow_elements(SIMPLE_XML)
+        results = get_process_elements(SIMPLE_XML)
         assert(not results.get('Tasks'))
         assert(not results.get('Scripts'))
         assert(not results.get('Workflows'))
