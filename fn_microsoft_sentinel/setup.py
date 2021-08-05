@@ -50,7 +50,7 @@ setup(
             "AddIncidentCommentFunctionComponent = fn_microsoft_sentinel.components.funct_sentinel_add_incident_comment:FunctionComponent",
             "GetIncidentCommentsFunctionComponent = fn_microsoft_sentinel.components.funct_sentinel_get_incident_comments:FunctionComponent",
             "GetIncidentEntitiesFunctionComponent = fn_microsoft_sentinel.components.funct_sentinel_get_incident_entities:FunctionComponent",
-            "UpdateIncidentFunctionComponent = fn_microsoft_sentinel.components.funct_sentinel_update_incident:ResilientComponent"
+            "UpdateIncidentFunctionComponent = fn_microsoft_sentinel.components.funct_sentinel_update_incident:FeedComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_microsoft_sentinel.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_microsoft_sentinel.util.customize:customization_data"],

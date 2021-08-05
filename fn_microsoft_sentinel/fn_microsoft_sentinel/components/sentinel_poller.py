@@ -9,7 +9,7 @@ import json
 import logging
 from circuits import Event, Timer
 from resilient_circuits import ResilientComponent, handler
-from resilient_lib import validate_fields
+from resilient_lib import validate_fields, IntegrationError
 from fn_microsoft_sentinel.lib.function_common import PACKAGE_NAME, SentinelProfiles,\
         DEFAULT_INCIDENT_CREATION_TEMPLATE,\
         DEFAULT_INCIDENT_UPDATE_TEMPLATE,\
@@ -54,7 +54,6 @@ class SentinelPollerComponent(ResilientComponent):
             LOG.info(u"Sentinel poller interval is not configured.  Automated escalation is disabled.")
             return
 
-        #self._test_create() # TODO
         LOG.info(u"Sentinel poller initiated, polling interval %s", self.polling_interval)
         Timer(self.polling_interval, Poll(), persist=False).register(self)
 
@@ -97,110 +96,61 @@ class SentinelPollerComponent(ResilientComponent):
 
         self.resilient_common = ResilientCommon(self.rest_client())
 
-
-    def _test_create(self):
-        ## TODO - seed the incident list
-        # create incident
-        now = datetime.datetime.now()
-        """
-        classification="Undetermined",
-        classificationComment="Some comment",
-        classificationReason="SuspiciousActivity",
-        """
-        payload = {
-            "properties": {
-                "title": "incident "+ str(now),
-                "description": "new description "+ str(now),
-                "severity": "Medium",
-                "status": "New",
-                "firstActivityTimeUtc": now.strftime("%Y-%m-%dT%H:%M:%SZ"),
-                "createdTimeUtc": now.strftime("%Y-%m-%dT%H:%M:%SZ")
-            }
-        }
-        profile_data = self.sentinel_profiles.get_profile("profile_a")
-        result, status, reason = self.sentinel_client.create_update_incident(profile_data,
-                                                                             None,
-                                                                             payload)
-        LOG.debug("Creating an incident: %s %s %s", status, reason, result)
-        ## TODO
-
     def _escalate(self):
         """ This is the main logic of the poller
             Search for Sentinel Incidents and create associated cases in Resilient SOAR
         """
-        #try:
-        # call Sentinel for each profile to get the incident list
-        for profile_name, profile_data in self.sentinel_profiles.get_profiles().items():
-            try:
-                result, status, reason  = self.sentinel_client.query_incidents(profile_data)
+        try:
+            # call Sentinel for each profile to get the incident list
+            for profile_name, profile_data in self.sentinel_profiles.get_profiles().items():
+                try:
+                    LOG.info("polling profile: %s", profile_name)
+                    result, status, reason  = self.sentinel_client.query_incidents(profile_data)
 
-                # filter the incident list returned based on the criteria in a filter
-                if not status:
-                    LOG.error("Error querying for incidents: %s, %s", reason, result)
-                else:
-                    for sentinel_incident in result.get("value", []):
-                        # determine if an incident already exists, used to know if create or update
-                        sentinel_incident_id = get_sentinel_incident_id(sentinel_incident)
-                        resilient_incident = self.resilient_common.find_incident(sentinel_incident_id)
+                    # filter the incident list returned based on the criteria in a filter
+                    if not status:
+                        LOG.error("Error querying for incidents: %s, %s", reason, result)
+                    else:
+                        for sentinel_incident in result.get("value", []):
+                            # determine if an incident already exists, used to know if create or update
+                            sentinel_incident_id = get_sentinel_incident_id(sentinel_incident)
+                            resilient_incident = self.resilient_common.find_incident(sentinel_incident_id)
 
-                        new_incident_filters = get_profile_filters(profile_data['new_incident_filters'])
-                        result_resilient_incident = self._create_update_incident(profile_name, profile_data,
-                                                                    sentinel_incident, resilient_incident,
-                                                                    new_incident_filters)
+                            new_incident_filters = get_profile_filters(profile_data['new_incident_filters'])
+                            result_resilient_incident = self._create_update_incident(profile_name, profile_data,
+                                                                        sentinel_incident, resilient_incident,
+                                                                        new_incident_filters)
 
-                        if result_resilient_incident:
-                            incident_id = result_resilient_incident['id']
-                            # get the sentinel comments and add to Resilient.
-                            # need to ensure not adding the comment more than once
-                            result, status, reason = self.sentinel_client.get_comments(
-                                                                               profile_data,
-                                                                               sentinel_incident_id
-                                                                          )
-                            new_comments = []
-                            if status:
-                                new_comments = self.resilient_common.filter_resilient_comments(
-                                                                        incident_id,
-                                                                        result['value']
-                                                                     )
-                                for comment in new_comments:
-                                    self.resilient_common.create_incident_comment(
-                                                                          incident_id,
-                                                                          sentinel_incident_id,
-                                                                          comment['properties']['message']
-                                                          )
-                            """
-                            {
-                                "value": [
-                                    {
-                                    "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/incidents/73e01a99-5cd7-4139-a149-9f2736ff2ab5/comments/4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014",
-                                    "name": "4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014",
-                                    "type": "Microsoft.SecurityInsights/incidents/comments",
-                                    "properties": {
-                                        "message": "Some message",
-                                        "createdTimeUtc": "2019-01-01T13:15:30Z",
-                                        "author": {
-                                        "objectId": "2046feea-040d-4a46-9e2b-91c2941bfa70",
-                                        "email": "john.doe@contoso.com",
-                                        "userPrincipalName": "john@contoso.com",
-                                        "name": "john doe"
-                                        }
-                                    }
-                                    }
-                                ]
-                            }
-                            """
-            finally:
-                # set the last poller time for next cycle
-                profile_data['last_poller_time'] = datetime.datetime.utcnow()
+                            if result_resilient_incident:
+                                incident_id = result_resilient_incident['id']
+                                # get the sentinel comments and add to Resilient.
+                                # need to ensure not adding the comment more than once
+                                result, status, reason = self.sentinel_client.get_comments(
+                                                                                profile_data,
+                                                                                sentinel_incident_id
+                                                                            )
+                                new_comments = []
+                                if status:
+                                    new_comments = self.resilient_common.filter_resilient_comments(
+                                                                            incident_id,
+                                                                            result['value']
+                                                                        )
+                                    for comment in new_comments:
+                                        self.resilient_common.create_incident_comment(
+                                                                            incident_id,
+                                                                            sentinel_incident_id,
+                                                                            comment['properties']['message']
+                                                            )
 
-        # We always want to reset the timer to wake up, no matter failure or success
-        self.fire(PollCompleted())
+                finally:
+                    # set the last poller time for next cycle
+                    profile_data['last_poller_time'] = datetime.datetime.utcnow()
 
-        '''
         except Exception as err:
             raise IntegrationError(err)
         finally:
-        '''
+            # We always want to reset the timer to wake up, no matter failure or success
+            self.fire(PollCompleted())
 
     def _create_update_incident(self, profile_name, profile_data,\
                                 sentinel_incident, resilient_incident, new_incident_filters):

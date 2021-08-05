@@ -62,145 +62,6 @@ ENTITY_TYPE_LOOKUP = {
 
 LOG = logging.getLogger(__name__)
 
-## TODO
-new_result = {
-  "value": [
-    {
-      "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/incidents/73e01a99-5cd7-4139-a149-9f2736ff2ab5",
-      "name": "73e01a99-5cd7-4139-a149-9f2736ff2ab5",
-      "type": "Microsoft.SecurityInsights/incidents",
-      "etag": "\"0300bf09-0000-0000-0000-5c37296e0000\"",
-      "properties": {
-        "lastModifiedTimeUtc": "2019-01-01T13:15:30Z",
-        "createdTimeUtc": "2019-01-01T13:15:30Z",
-        "lastActivityTimeUtc": "2019-01-01T13:05:30Z",
-        "firstActivityTimeUtc": "2019-01-01T13:00:30Z",
-        "description": "This is a demo incident",
-        "title": "My incident",
-        "owner": {
-          "objectId": "2046feea-040d-4a46-9e2b-91c2941bfa70",
-          "email": "john.doe@contoso.com",
-          "userPrincipalName": "john@contoso.com",
-          "assignedTo": "john doe"
-        },
-        "severity": "Informational",
-        "classification": "FalsePositive",
-        "classificationComment": "Not a malicious activity",
-        "classificationReason": "IncorrectAlertLogic",
-        "status": "New",
-        "incidentUrl": "https://portal.azure.com/#asset/Microsoft_Azure_Security_Insights/Incident/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/incidents/73e01a99-5cd7-4139-a149-9f2736ff2ab5",
-        "incidentNumber": 3177,
-        "labels": [],
-        "relatedAnalyticRuleIds": [
-          "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/alertRules/fab3d2d4-747f-46a7-8ef0-9c0be8112bf7",
-          "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/alertRules/8deb8303-e94d-46ff-96e0-5fd94b33df1a"
-        ],
-        "additionalData": {
-          "alertsCount": 0,
-          "bookmarksCount": 0,
-          "commentsCount": 3,
-          "alertProductNames": [],
-          "tactics": [
-            "Persistence"
-          ]
-        }
-      }
-    }
-  ]
-}
-
-update_result = {
-  "value": [
-    {
-      "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/incidents/73e01a99-5cd7-4139-a149-9f2736ff2ab5",
-      "name": "73e01a99-5cd7-4139-a149-9f2736ff2ab5",
-      "type": "Microsoft.SecurityInsights/incidents",
-      "etag": "\"0300bf09-0000-0000-0000-5c37296e0000\"",
-      "properties": {
-        "lastModifiedTimeUtc": "2019-01-01T13:15:30Z",
-        "createdTimeUtc": "2019-01-01T13:15:30Z",
-        "lastActivityTimeUtc": "2019-01-01T13:05:30Z",
-        "firstActivityTimeUtc": "2019-01-01T13:00:30Z",
-        "description": "This is a demo incident",
-        "title": "My incident",
-        "owner": {
-          "objectId": "2046feea-040d-4a46-9e2b-91c2941bfa70",
-          "email": "john.doe@contoso.com",
-          "userPrincipalName": "john@contoso.com",
-          "assignedTo": "john doe"
-        },
-        "severity": "Medium",
-        "classification": "FalseNegative",
-        "classificationComment": "Not a malicious activity",
-        "classificationReason": "IncorrectAlertLogic",
-        "status": "Active",
-        "incidentUrl": "https://portal.azure.com/#asset/Microsoft_Azure_Security_Insights/Incident/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/incidents/73e01a99-5cd7-4139-a149-9f2736ff2ab5",
-        "incidentNumber": 3177,
-        "labels": [],
-        "relatedAnalyticRuleIds": [
-          "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/alertRules/fab3d2d4-747f-46a7-8ef0-9c0be8112bf7",
-          "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/alertRules/8deb8303-e94d-46ff-96e0-5fd94b33df1a"
-        ],
-        "additionalData": {
-          "alertsCount": 0,
-          "bookmarksCount": 0,
-          "commentsCount": 3,
-          "alertProductNames": [],
-          "tactics": [
-            "Persistence"
-          ]
-        }
-      }
-    }
-  ]
-}
-
-close_result = {
-  "value": [
-    {
-      "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/incidents/73e01a99-5cd7-4139-a149-9f2736ff2ab5",
-      "name": "73e01a99-5cd7-4139-a149-9f2736ff2ab5",
-      "type": "Microsoft.SecurityInsights/incidents",
-      "etag": "\"0300bf09-0000-0000-0000-5c37296e0000\"",
-      "properties": {
-        "lastModifiedTimeUtc": "2019-01-01T13:15:30Z",
-        "createdTimeUtc": "2019-01-01T13:15:30Z",
-        "lastActivityTimeUtc": "2019-01-01T13:05:30Z",
-        "firstActivityTimeUtc": "2019-01-01T13:00:30Z",
-        "description": "This is a demo incident",
-        "title": "My incident",
-        "owner": {
-          "objectId": "2046feea-040d-4a46-9e2b-91c2941bfa70",
-          "email": "john.doe@contoso.com",
-          "userPrincipalName": "john@contoso.com",
-          "assignedTo": "john doe"
-        },
-        "severity": "Low",
-        "classification": "FalsePositive",
-        "classificationComment": "Not a malicious activity",
-        "classificationReason": "IncorrectAlertLogic",
-        "status": "Closed",
-        "incidentUrl": "https://portal.azure.com/#asset/Microsoft_Azure_Security_Insights/Incident/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/incidents/73e01a99-5cd7-4139-a149-9f2736ff2ab5",
-        "incidentNumber": 3177,
-        "labels": [],
-        "relatedAnalyticRuleIds": [
-          "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/alertRules/fab3d2d4-747f-46a7-8ef0-9c0be8112bf7",
-          "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/alertRules/8deb8303-e94d-46ff-96e0-5fd94b33df1a"
-        ],
-        "additionalData": {
-          "alertsCount": 0,
-          "bookmarksCount": 0,
-          "commentsCount": 3,
-          "alertProductNames": [],
-          "tactics": [
-            "Persistence"
-          ]
-        }
-      }
-    }
-  ]
-}
-
 class SentinelAPI():
     """[class to manage authentication and API calls to Sentinel]
     """
@@ -222,11 +83,6 @@ class SentinelAPI():
         self.app_secret = app_secret
 
         self.access_token = None
-
-        # TODO
-        self.test_counter = 0
-        self.test_payloads = [new_result, update_result, close_result]
-        # TODO
 
     def _authenticate(self, app_scope=AUTH_SCOPE):
         """[authenticate to azure and get the access token]
@@ -348,11 +204,6 @@ class SentinelAPI():
         if status:
             result = self._filter_by_last_modified_date(result, last_poller_datetime)
 
-        ## TODO
-        #status = True
-        #result = self.test_payloads[self.test_counter]
-        #self.test_counter += 1
-        ## TODO
         LOG.debug("%s:%s:%s", status, reason, result)
         return result, status, reason
 
@@ -400,47 +251,7 @@ class SentinelAPI():
         Returns:
             [dict]: [alert list from API call]
         """
-        #
-        """
-        mock_result = {
-            "value": [
-                {
-                    "id": "/subscriptions/##SUBSCRIPTIONID##/resourceGroups/jn-sentineltest/providers/Microsoft.OperationalInsights/workspaces/cybtgmu6sxcvk/providers/Microsoft.SecurityInsights/Incidents/ad7cb03c-37c8-4f98-a34a-c76951b8683e/relations/ad7cb03c-37c8-4f98-a34a-c76951b8683e_fe3ca9f0-0765-b792-cd03-d3aa100571d8",
-                    "name": "ad7cb03c-37c8-4f98-a34a-c76951b8683e_fe3ca9f0-0765-b792-cd03-d3aa100571d8",
-                    "type": "Microsoft.SecurityInsights/Incidents/relations",
-                    "properties": {
-                        "relatedResourceId": "/subscriptions/a7be6876-1523-4cd2-b50c-75c5d041da61/resourceGroups/jn-sentineltest/providers/Microsoft.OperationalInsights/workspaces/cybtgmu6sxcvk/providers/Microsoft.SecurityInsights/entities/fe3ca9f0-0765-b792-cd03-d3aa100571d8",
-                        "relatedResourceName": "fe3ca9f0-0765-b792-cd03-d3aa100571d8",
-                        "relatedResourceType": "Microsoft.SecurityInsights/entities",
-                        "relatedResourceKind": "SecurityAlert"
-                    }
-                },
-                {
-                    "id": "/subscriptions/##SUBSCRIPTIONID##/resourceGroups/jn-sentineltest/providers/Microsoft.OperationalInsights/workspaces/cybtgmu6sxcvk/providers/Microsoft.SecurityInsights/Incidents/ad7cb03c-37c8-4f98-a34a-c76951b8683e/relations/ad7cb03c-37c8-4f98-a34a-c76951b8683e_fe3ca9f0-0765-b792-cd03-d3aa100571d8",
-                    "name": "ad7cb03c-37c8-4f98-a34a-c76951b8683e_fe3ca9f0-0765-b792-cd03-d3aa100571d9",
-                    "type": "Microsoft.SecurityInsights/Incidents/relations",
-                    "properties": {
-                        "relatedResourceId": "/subscriptions/a7be6876-1523-4cd2-b50c-75c5d041da61/resourceGroups/jn-sentineltest/providers/Microsoft.OperationalInsights/workspaces/cybtgmu6sxcvk/providers/Microsoft.SecurityInsights/entities/fe3ca9f0-0765-b792-cd03-d3aa100571d8",
-                        "relatedResourceName": "fe3ca9f0-0765-b792-cd03-d3aa100571d8",
-                        "relatedResourceType": "Microsoft.SecurityInsights/entities",
-                        "relatedResourceKind": "SecurityAlert"
-                    }
-                }
-            ]
-        }
 
-        {
-            "id": "/subscriptions/67d6179d-a99d-4aad-8c11-4d3ff2e12249/resourceGroups/azsec-corporate-rg/providers/Microsoft.OperationalInsights/workspaces/azsec-shared-workspace/providers/Microsoft.SecurityInsights/Incidents/52668a53-85df-4bc2-90fe-c94ed40adc69/relations/52668a53-85af-4cc1-00fe-c94ed40adc69_63ad2c2a-555f-6714-e989-328faa684c1d",
-            "name": "52668a53-85af-4cc1-00fe-c94ed40adc69_63ad2c2a-555f-6714-e989-328faa684c1d",
-            "type": "Microsoft.SecurityInsights/Incidents/relations",
-            "properties": {
-                "relatedResourceId": "/subscriptions/67d6179d-a99d-4aad-8c11-4d3ff2e12249/resourceGroups/azsec-corporate-rg/providers/Microsoft.OperationalInsights/workspaces/azsec-shared-workspace/providers/Microsoft.SecurityInsights/entities/63ad2c2a-555f-6714-e989-328faa684c1d",
-                "relatedResourceName": "63ad2c2a-555f-6714-e989-328faa684c1d",
-                "relatedResourceType": "Microsoft.SecurityInsights/entities",
-                "relatedResourceKind": "SecurityAlert"
-            }
-        }
-        """
         relations_url = "/".join([INCIDENTS_URL, str(sentinel_incident_id),
                                   RELATIONS_URL])
 
@@ -451,11 +262,6 @@ class SentinelAPI():
                                      api_version=PREVIEW_API_VERSION)
 
         result, status, reason = self._call(url)
-
-        ## TODO
-        #status = True
-        #result = mock_result
-        ## TODO
 
         LOG.debug("%s:%s:%s", status, reason, result)
         return result, status, reason
@@ -485,68 +291,11 @@ class SentinelAPI():
         The return of this API call will be:
 
         """
-        mock_result = {
-  "value": {
-    "entities": [
-      {
-        "id": "/subscriptions/##SUBSCRIPTIONID##/resourceGroups/jn-sentineltest/providers/Microsoft.OperationalInsights/workspaces/cybtgmu6sxcvk/providers/Microsoft.SecurityInsights/entities/2e269cb7-3810-1601-eaa5-c8c3f3665898",
-        "name": "2e269cb7-3810-1601-eaa5-c8c3f3665898",
-        "type": "Microsoft.SecurityInsights/entities",
-        "kind": "Ip",
-        "properties": {
-          "address": "83.84.75.154",
-          "friendlyName": "83.84.75.154"
-        }
-      },
-      {
-        "id": "/subscriptions/##SUBSCRIPTIONID##/resourceGroups/jn-sentineltest/providers/Microsoft.OperationalInsights/workspaces/cybtgmu6sxcvk/providers/Microsoft.SecurityInsights/entities/0862214e-677f-cd12-bd65-d27628097200",
-        "name": "0862214e-677f-cd12-bd65-d27628097200",
-        "type": "Microsoft.SecurityInsights/entities",
-        "kind": "Account",
-        "properties": {
-          "accountName": "jeroen",
-          "upnSuffix": "niesen.nl",
-          "isDomainJoined": True,
-          "friendlyName": "jeroen"
-        },
-      },
-      {
-        "id": "/subscriptions/##SUBSCRIPTIONID##/resourceGroups/jn-sentineltest/providers/Microsoft.OperationalInsights/workspaces/cybtgmu6sxcvk/providers/Microsoft.SecurityInsights/entities/2e269cb7-3810-1601-eaa5-c8c3f3665898",
-        "name": "2e269cb7-3810-1601-eaa5-c8c3f3665800",
-        "type": "Microsoft.SecurityInsights/entities",
-        "kind": "FileHash",
-        "properties": {
-          "address": "12345678901234567890123456789012",
-          "friendlyName": "12345678901234567890123456789012"
-        }
-      }
-    ],
-    "edges": [
-    ]
-  },
-  "metaData": {
-    "aggregations": [
-      {
-        "entityKind": "Ip",
-        "count": 1
-      },
-      {
-        "entityKind": "Account",
-        "count": 1
-      }
-    ]
-  }
-}
 
         url = "{}{}/expand?{}".format(self.base_url, alert_url, PREVIEW_API_VERSION)
 
         result, status, reason = self._call(url, payload=ENTITY_BODY, oper="POST")
         LOG.debug("%s:%s:%s", status, reason, result)
-
-        ## TODO
-        #status = True
-        #result = mock_result
-        ## TODO
 
         # convert entity types to artifact types, adding 'resilient_artifact_type' property
         if status:

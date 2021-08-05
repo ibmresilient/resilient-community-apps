@@ -21,12 +21,13 @@ def codegen_reload_data():
     return {
         "package": u"fn_microsoft_sentinel",
         "message_destinations": [u"fn_microsoft_sentinel"],
-        "functions": [u"sentinel_update_incident", u"sentinel_get_incident_entities", u"sentinel_get_incident_comments", u"sentinel_add_incident_comment"],
-        "workflows": [u"sentinel_update_incident", u"sentinel_get_incident_entities", u"sentinel_comment_sync", u"sentinel_get_incident_comments"],
-        "actions": [u"Sentinel Comment Sync", u"Sentinel Get Incident Entities", u"Sentinel Update Incident", u"Sentinel Get Incident Comments", u"Sentinel Incident Entity Sync"],
-        "incident_fields": [u"sentinel_incident_url", u"sentinel_incident_classification", u"sentinel_incident_classification_comment", u"sentinel_incident_id", u"sentinel_incident_labels", u"sentinel_incident_classification_reason", u"sentinel_incident_status", u"sentinel_profile", u"sentinel_incident_tactics", u"sentinel_incident_assigned_to"],
+        "functions": [u"sentinel_add_incident_comment", u"sentinel_get_incident_comments", u"sentinel_get_incident_entities", u"sentinel_update_incident"],
+        "workflows": [u"sentinel_comment_sync", u"sentinel_get_incident_comments", u"sentinel_get_incident_entities", u"sentinel_update_incident"],
+        "actions": [u"Sentinel Comment Sync", u"Sentinel Get Incident Comments", u"Sentinel Get Incident Entities", u"Sentinel Incident Entity Sync", u"Sentinel Update Incident"],
+        "incident_fields": [u"sentinel_incident_assigned_to", u"sentinel_incident_classification", u"sentinel_incident_classification_comment", u"sentinel_incident_classification_reason", u"sentinel_incident_id", u"sentinel_incident_labels", u"sentinel_incident_number", u"sentinel_incident_status", u"sentinel_incident_tactics", u"sentinel_incident_url", u"sentinel_profile"],
         "incident_artifact_types": [],
-        "datatables": [u"sentinel_incident_entities", u"sentinel_comment_ids"],
+        "incident_types": [],
+        "datatables": [u"sentinel_comment_ids", u"sentinel_incident_entities"],
         "automatic_tasks": [],
         "scripts": []
     }
@@ -37,41 +38,42 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM Resilient Platform Version: 37.2.38
+    IBM Resilient Platform Version: 39.0.6328
 
     Contents:
     - Message Destinations:
         - fn_microsoft_sentinel
     - Functions:
-        - sentinel_update_incident
-        - sentinel_get_incident_entities
-        - sentinel_get_incident_comments
         - sentinel_add_incident_comment
-    - Workflows:
-        - sentinel_update_incident
+        - sentinel_get_incident_comments
         - sentinel_get_incident_entities
+        - sentinel_update_incident
+    - Workflows:
         - sentinel_comment_sync
         - sentinel_get_incident_comments
+        - sentinel_get_incident_entities
+        - sentinel_update_incident
     - Rules:
         - Sentinel Comment Sync
-        - Sentinel Get Incident Entities
-        - Sentinel Update Incident
         - Sentinel Get Incident Comments
+        - Sentinel Get Incident Entities
         - Sentinel Incident Entity Sync
+        - Sentinel Update Incident
     - Incident Fields:
-        - sentinel_incident_url
+        - sentinel_incident_assigned_to
         - sentinel_incident_classification
         - sentinel_incident_classification_comment
+        - sentinel_incident_classification_reason
         - sentinel_incident_id
         - sentinel_incident_labels
-        - sentinel_incident_classification_reason
+        - sentinel_incident_number
         - sentinel_incident_status
-        - sentinel_profile
         - sentinel_incident_tactics
-        - sentinel_incident_assigned_to
+        - sentinel_incident_url
+        - sentinel_profile
     - Data Tables:
-        - sentinel_incident_entities
         - sentinel_comment_ids
+        - sentinel_incident_entities
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)

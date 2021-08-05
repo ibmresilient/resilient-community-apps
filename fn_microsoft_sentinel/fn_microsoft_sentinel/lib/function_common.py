@@ -3,7 +3,8 @@
 # (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
 from resilient_lib import validate_fields
 
-DEFAULT_SENTINEL_INCIDENT_TEMPLATE = "data/sentinel_incident_template.jinja"
+DEFAULT_SENTINEL_UPDATE_INCIDENT_TEMPLATE = "data/sentinel_update_incident_template.jinja"
+DEFAULT_SENTINEL_CLOSE_INCIDENT_TEMPLATE = "data/sentinel_close_incident_template.jinja"
 
 DEFAULT_INCIDENT_CREATION_TEMPLATE = "data/incident_creation_template.jinja"
 DEFAULT_INCIDENT_UPDATE_TEMPLATE = "data/incident_update_template.jinja"

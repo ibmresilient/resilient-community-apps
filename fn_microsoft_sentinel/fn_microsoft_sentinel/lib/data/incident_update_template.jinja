@@ -1,9 +1,9 @@
 {
-  {# JINJA template for creating a new Resilient incident from a Sentinel incident. #}
-  "name": "Sentinel Incident - {{ properties.title|e }}",
+  {# JINJA template for updating a new Resilient incident from a Sentinel incident. #}
+  "name": "Sentinel Incident - {{ properties.title|replace('Sentinel Incident - ', '')|replace('"', '\"') }}",
   "description": {
     "format": "text",
-    "content": "{{ properties.description|e }}"
+    "content": "{{ properties.description|replace('"', '\"') }}"
   },
   "plan_status": "{{ properties.status|resilient_substitute('{"Closed": "C", "Active": "A", "New": "A"}') }}",
   "severity_code": "{{ properties.severity|resilient_substitute('{"Informational": "Low"}') }}",
@@ -11,7 +11,7 @@
     "sentinel_incident_status": "{{ properties.status }}",
     "sentinel_incident_classification": "{{ properties.classification }}",
     "sentinel_incident_classification_reason": "{{ properties.classificationReason }}",
-    "sentinel_incident_classification_comment": "{{ properties.classificationComment|e }}",
+    "sentinel_incident_classification_comment": "{{ properties.classificationComment|replace('"', '\"') }}",
     "sentinel_incident_assigned_to": "{{ properties.owner.assignedTo }}",
     "sentinel_incident_labels": "{{ properties.labels|join(' ') }}",
     "sentinel_incident_tactics": "{{ properties.additionalData.tactics|join(' ') }}"
