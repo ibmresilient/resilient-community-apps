@@ -96,7 +96,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Example: QRadar - Get all Reference Tables",
-      "id": 87,
+      "id": 100,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: QRadar - Get all Reference Tables",
@@ -132,7 +132,7 @@
       ],
       "enabled": true,
       "export_key": "Example: QRadar - Update this Reference Table Item",
-      "id": 88,
+      "id": 101,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: QRadar - Update this Reference Table Item",
@@ -160,16 +160,33 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Find All QRadar Reference Sets",
-      "id": 89,
+      "id": 108,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Find All QRadar Reference Sets",
-      "object_type": "artifact",
+      "object_type": "incident",
       "tags": [],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "6b1a37e0-8dbc-4a7b-8143-da095a13b1ee",
-      "view_items": [],
+      "view_items": [
+        {
+          "content": "04e83f93-0f11-45b2-bfa3-617b36c031ae",
+          "element": "field_uuid",
+          "field_type": "actioninvocation",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "69a95edd-b20f-488a-9a9d-ef01aae3b740",
+          "element": "field_uuid",
+          "field_type": "actioninvocation",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        }
+      ],
       "workflows": [
         "qradar_find_reference_sets_artifact"
       ]
@@ -179,109 +196,107 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Find in QRadar Reference Set",
-      "id": 90,
+      "id": 109,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Find in QRadar Reference Set",
-      "object_type": "artifact",
+      "object_type": "incident",
       "tags": [],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "2c1c9fe3-d0a3-4c49-b0b0-54a21d86f09e",
-      "view_items": [],
+      "view_items": [
+        {
+          "content": "019abb8f-71e1-44a5-aaf0-1d7fd606d749",
+          "element": "field_uuid",
+          "field_type": "actioninvocation",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "04e83f93-0f11-45b2-bfa3-617b36c031ae",
+          "element": "field_uuid",
+          "field_type": "actioninvocation",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "69a95edd-b20f-488a-9a9d-ef01aae3b740",
+          "element": "field_uuid",
+          "field_type": "actioninvocation",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        }
+      ],
       "workflows": [
         "qradar_find_reference_set_item"
       ]
     },
     {
       "automations": [],
-      "conditions": [
-        {
-          "evaluation_id": null,
-          "field_name": "artifact.type",
-          "method": "equals",
-          "type": null,
-          "value": "IP Address"
-        }
-      ],
+      "conditions": [],
       "enabled": true,
       "export_key": "QRadar Add to Reference Set",
-      "id": 91,
+      "id": 110,
       "logic_type": "all",
       "message_destinations": [],
       "name": "QRadar Add to Reference Set",
-      "object_type": "artifact",
+      "object_type": "incident",
       "tags": [],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "2b852b18-616d-4a6f-9648-9b04eee6df68",
-      "view_items": [],
+      "view_items": [
+        {
+          "content": "019abb8f-71e1-44a5-aaf0-1d7fd606d749",
+          "element": "field_uuid",
+          "field_type": "actioninvocation",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "04e83f93-0f11-45b2-bfa3-617b36c031ae",
+          "element": "field_uuid",
+          "field_type": "actioninvocation",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "69a95edd-b20f-488a-9a9d-ef01aae3b740",
+          "element": "field_uuid",
+          "field_type": "actioninvocation",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        }
+      ],
       "workflows": [
         "qradar_add_reference_set_item"
       ]
     },
     {
       "automations": [],
-      "conditions": [],
-      "enabled": true,
-      "export_key": "QRadar Add to Reference Table",
-      "id": 92,
-      "logic_type": "all",
-      "message_destinations": [],
-      "name": "QRadar Add to Reference Table",
-      "object_type": "artifact",
-      "tags": [],
-      "timeout_seconds": 86400,
-      "type": 1,
-      "uuid": "f844c873-52de-4c2a-ac1f-d0bbd5efed2d",
-      "view_items": [
-        {
-          "content": "add40aef-9607-4160-ab9d-846a88e1be20",
-          "element": "field_uuid",
-          "field_type": "actioninvocation",
-          "show_if": null,
-          "show_link_header": false,
-          "step_label": null
-        },
-        {
-          "content": "3db539de-c782-4327-be2e-6a16367616a9",
-          "element": "field_uuid",
-          "field_type": "actioninvocation",
-          "show_if": null,
-          "show_link_header": false,
-          "step_label": null
-        },
-        {
-          "content": "f1268a24-803e-4165-8167-7c7210775a13",
-          "element": "field_uuid",
-          "field_type": "actioninvocation",
-          "show_if": null,
-          "show_link_header": false,
-          "step_label": null
-        }
-      ],
-      "workflows": [
-        "add_a_reference_table_item"
-      ]
-    },
-    {
-      "automations": [],
       "conditions": [
         {
           "evaluation_id": null,
-          "field_name": "artifact.type",
+          "field_name": "incident.addr",
           "method": "equals",
           "type": null,
-          "value": "IP Address"
+          "value": "1"
         }
       ],
       "enabled": true,
       "export_key": "QRadar Move from Sample Blocked to Sample Suspected",
-      "id": 93,
+      "id": 112,
       "logic_type": "all",
       "message_destinations": [],
       "name": "QRadar Move from Sample Blocked to Sample Suspected",
-      "object_type": "artifact",
+      "object_type": "incident",
       "tags": [],
       "timeout_seconds": 86400,
       "type": 1,
@@ -293,15 +308,7 @@
     },
     {
       "automations": [],
-      "conditions": [
-        {
-          "evaluation_id": null,
-          "field_name": "incident.properties.qradar_id",
-          "method": "has_a_value",
-          "type": null,
-          "value": null
-        }
-      ],
+      "conditions": [],
       "enabled": true,
       "export_key": "Search QRadar for offense id",
       "id": 94,
@@ -321,6 +328,14 @@
           "show_if": null,
           "show_link_header": false,
           "step_label": null
+        },
+        {
+          "content": "69a95edd-b20f-488a-9a9d-ef01aae3b740",
+          "element": "field_uuid",
+          "field_type": "actioninvocation",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
         }
       ],
       "workflows": [
@@ -330,7 +345,7 @@
   ],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1628175338750,
+  "export_date": 1628249582854,
   "export_format_version": 2,
   "fields": [
     {
@@ -951,40 +966,6 @@
       "chosen": false,
       "default_chosen_by_server": false,
       "deprecated": false,
-      "export_key": "actioninvocation/qradar_reference_table_name",
-      "hide_notification": false,
-      "id": 349,
-      "input_type": "text",
-      "internal": false,
-      "is_tracked": false,
-      "name": "qradar_reference_table_name",
-      "operation_perms": {},
-      "operations": [],
-      "placeholder": "",
-      "prefix": "properties",
-      "read_only": false,
-      "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_qradar_integration",
-          "value": null
-        }
-      ],
-      "templates": [],
-      "text": "Reference Table Name",
-      "tooltip": "",
-      "type_id": 6,
-      "uuid": "add40aef-9607-4160-ab9d-846a88e1be20",
-      "values": []
-    },
-    {
-      "allow_default_value": false,
-      "blank_option": false,
-      "calculated": false,
-      "changeable": true,
-      "chosen": false,
-      "default_chosen_by_server": false,
-      "deprecated": false,
       "export_key": "actioninvocation/qradar_query_all_results",
       "hide_notification": false,
       "id": 350,
@@ -1062,6 +1043,66 @@
       "tooltip": "",
       "type_id": 6,
       "uuid": "f1268a24-803e-4165-8167-7c7210775a13",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "actioninvocation/qradar_reference_set_name",
+      "hide_notification": false,
+      "id": 490,
+      "input_type": "text",
+      "internal": false,
+      "is_tracked": false,
+      "name": "qradar_reference_set_name",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": "properties",
+      "read_only": false,
+      "required": "always",
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "QRadar Reference Set name",
+      "tooltip": "Name of QRadar reference set",
+      "type_id": 6,
+      "uuid": "019abb8f-71e1-44a5-aaf0-1d7fd606d749",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "actioninvocation/qradar_reference_set_item_value",
+      "hide_notification": false,
+      "id": 488,
+      "input_type": "text",
+      "internal": false,
+      "is_tracked": false,
+      "name": "qradar_reference_set_item_value",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": "properties",
+      "read_only": false,
+      "required": "always",
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "QRadar reference set item value",
+      "tooltip": "Value of QRadar reference set item",
+      "type_id": 6,
+      "uuid": "04e83f93-0f11-45b2-bfa3-617b36c031ae",
       "values": []
     },
     {
@@ -1217,18 +1258,18 @@
       "destination_handle": "fn_qradar_integration",
       "display_name": "QRadar Add Reference Set Item",
       "export_key": "qradar_add_reference_set_item",
-      "id": 67,
+      "id": 77,
       "last_modified_by": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
-        "type": "user"
+        "display_name": "local",
+        "id": 6,
+        "name": "77a37273-a484-4fd1-8d02-2c28513d5343",
+        "type": "apikey"
       },
-      "last_modified_time": 1628174508532,
+      "last_modified_time": 1628183339863,
       "name": "qradar_add_reference_set_item",
       "tags": [],
       "uuid": "30b6899a-d015-48c3-8fd9-500788d4b437",
-      "version": 2,
+      "version": 1,
       "view_items": [
         {
           "content": "aa5e211d-b5e0-4289-88bb-47595afac385",
@@ -1260,21 +1301,21 @@
           "actions": [],
           "description": null,
           "name": "Example of adding an item to QRadar reference set",
-          "object_type": "artifact",
+          "object_type": "incident",
           "programmatic_name": "qradar_add_reference_set_item",
           "tags": [],
           "uuid": null,
-          "workflow_id": 73
+          "workflow_id": 91
         },
         {
           "actions": [],
           "description": null,
           "name": "Example of moving QRadar item from one reference set to another",
-          "object_type": "artifact",
+          "object_type": "incident",
           "programmatic_name": "qradar_move_item_to_different_ref_set",
           "tags": [],
           "uuid": null,
-          "workflow_id": 72
+          "workflow_id": 95
         }
       ]
     },
@@ -1292,18 +1333,18 @@
       "destination_handle": "fn_qradar_integration",
       "display_name": "QRadar Delete Reference Set Item",
       "export_key": "qradar_delete_reference_set_item",
-      "id": 68,
+      "id": 78,
       "last_modified_by": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
-        "type": "user"
+        "display_name": "local",
+        "id": 6,
+        "name": "77a37273-a484-4fd1-8d02-2c28513d5343",
+        "type": "apikey"
       },
-      "last_modified_time": 1628174513751,
+      "last_modified_time": 1628183339968,
       "name": "qradar_delete_reference_set_item",
       "tags": [],
       "uuid": "a7dc3d26-ab97-44a3-b56a-e367315b08e0",
-      "version": 2,
+      "version": 1,
       "view_items": [
         {
           "content": "aa5e211d-b5e0-4289-88bb-47595afac385",
@@ -1335,11 +1376,11 @@
           "actions": [],
           "description": null,
           "name": "Example of moving QRadar item from one reference set to another",
-          "object_type": "artifact",
+          "object_type": "incident",
           "programmatic_name": "qradar_move_item_to_different_ref_set",
           "tags": [],
           "uuid": null,
-          "workflow_id": 72
+          "workflow_id": 95
         }
       ]
     },
@@ -1357,18 +1398,18 @@
       "destination_handle": "fn_qradar_integration",
       "display_name": "QRadar Find Reference Set Item",
       "export_key": "qradar_find_reference_set_item",
-      "id": 69,
+      "id": 79,
       "last_modified_by": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
-        "type": "user"
+        "display_name": "local",
+        "id": 6,
+        "name": "77a37273-a484-4fd1-8d02-2c28513d5343",
+        "type": "apikey"
       },
-      "last_modified_time": 1628174519197,
+      "last_modified_time": 1628183340078,
       "name": "qradar_find_reference_set_item",
       "tags": [],
       "uuid": "9d817ee3-a8cf-4a0a-a8a6-969f6090f276",
-      "version": 2,
+      "version": 1,
       "view_items": [
         {
           "content": "aa5e211d-b5e0-4289-88bb-47595afac385",
@@ -1400,11 +1441,11 @@
           "actions": [],
           "description": null,
           "name": "Example of finding an item from a QRadar reference set",
-          "object_type": "artifact",
+          "object_type": "incident",
           "programmatic_name": "qradar_find_reference_set_item",
           "tags": [],
           "uuid": null,
-          "workflow_id": 76
+          "workflow_id": 92
         }
       ]
     },
@@ -1422,18 +1463,18 @@
       "destination_handle": "fn_qradar_integration",
       "display_name": "QRadar Find Reference Sets",
       "export_key": "qradar_find_reference_sets",
-      "id": 70,
+      "id": 80,
       "last_modified_by": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
-        "type": "user"
+        "display_name": "local",
+        "id": 6,
+        "name": "77a37273-a484-4fd1-8d02-2c28513d5343",
+        "type": "apikey"
       },
-      "last_modified_time": 1628174528159,
+      "last_modified_time": 1628183340196,
       "name": "qradar_find_reference_sets",
       "tags": [],
       "uuid": "09885813-f640-45bc-8892-d1a741a7d53e",
-      "version": 2,
+      "version": 1,
       "view_items": [
         {
           "content": "db5af2ee-cb1a-46c7-82ff-c6f88a5aa7e9",
@@ -1457,11 +1498,11 @@
           "actions": [],
           "description": null,
           "name": "Example of finding all QRadar reference sets for artifact",
-          "object_type": "artifact",
+          "object_type": "incident",
           "programmatic_name": "qradar_find_reference_sets_artifact",
           "tags": [],
           "uuid": null,
-          "workflow_id": 79
+          "workflow_id": 93
         }
       ]
     },
@@ -1583,16 +1624,6 @@
         }
       ],
       "workflows": [
-        {
-          "actions": [],
-          "description": null,
-          "name": "Add a Reference Table Item",
-          "object_type": "artifact",
-          "programmatic_name": "add_a_reference_table_item",
-          "tags": [],
-          "uuid": null,
-          "workflow_id": 78
-        },
         {
           "actions": [],
           "description": null,
@@ -1948,12 +1979,12 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 26,
+  "id": 35,
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1628175337747,
+      "create_date": 1628249581804,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -1962,7 +1993,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1628175337747,
+      "update_date": 1628249581804,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -2233,7 +2264,7 @@
           "name": "item_value",
           "operation_perms": {},
           "operations": [],
-          "order": 1,
+          "order": 2,
           "placeholder": "",
           "prefix": null,
           "read_only": false,
@@ -2264,7 +2295,7 @@
           "name": "qradar_label",
           "operation_perms": {},
           "operations": [],
-          "order": 3,
+          "order": 4,
           "placeholder": "",
           "prefix": null,
           "read_only": false,
@@ -2295,7 +2326,7 @@
           "name": "reference_set",
           "operation_perms": {},
           "operations": [],
-          "order": 0,
+          "order": 1,
           "placeholder": "",
           "prefix": null,
           "read_only": false,
@@ -2308,6 +2339,37 @@
           "uuid": "0c0a0482-2e19-49e8-b63b-8eb912ed8f8e",
           "values": [],
           "width": 258
+        },
+        "searched_value": {
+          "allow_default_value": false,
+          "blank_option": false,
+          "calculated": false,
+          "changeable": true,
+          "chosen": false,
+          "default_chosen_by_server": false,
+          "deprecated": false,
+          "export_key": "qradar_reference_set/searched_value",
+          "hide_notification": false,
+          "id": 489,
+          "input_type": "text",
+          "internal": false,
+          "is_tracked": false,
+          "name": "searched_value",
+          "operation_perms": {},
+          "operations": [],
+          "order": 0,
+          "placeholder": "",
+          "prefix": null,
+          "read_only": false,
+          "rich_text": false,
+          "tags": [],
+          "templates": [],
+          "text": "Searched Value",
+          "tooltip": "",
+          "type_id": 1012,
+          "uuid": "fdd03799-6ce6-4823-89f6-de62579b64c9",
+          "values": [],
+          "width": 72
         },
         "source": {
           "allow_default_value": false,
@@ -2326,7 +2388,7 @@
           "name": "source",
           "operation_perms": {},
           "operations": [],
-          "order": 2,
+          "order": 3,
           "placeholder": "",
           "prefix": null,
           "read_only": false,
@@ -2758,156 +2820,16 @@
     {
       "actions": [],
       "content": {
-        "version": 7,
-        "workflow_id": "add_a_reference_table_item",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"add_a_reference_table_item\" isExecutable=\"true\" name=\"Add a Reference Table Item\"\u003e\u003cdocumentation\u003eAdd a reference table item based on an artifact value\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1hxp5oj\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1lti73u\" name=\"QRadar Reference Table Add Item\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"2843283c-4d98-4c71-b2e3-b0636c7a0df8\"\u003e{\"inputs\":{},\"post_processing_script\":\"note = u\\\"\\\"\\\"Outer key: {}\\nInner key: {}\\nEntry: {}\\nReference table: {}\\\"\\\"\\\".format(results.inputs.qradar_reference_table_item_outer_key,\\n                              results.inputs.qradar_reference_table_item_inner_key,\\n                              results.inputs.qradar_reference_table_item_value, \\n                              results.inputs.qradar_reference_table_name)\\nif results.success:\\n    incident.addNote(u\\\"Successful add\\\\n{}\\\".format(note))\\nelse:\\n    incident.addNote(u\\\"Failure to add item: {}\\\\n{}\\\".format(results[\u0027reason\u0027], note))\",\"pre_processing_script\":\"inputs.qradar_reference_table_item_value = artifact.value\\ninputs.qradar_reference_table_item_inner_key = rule.properties.qradar_ref_table_inner_key\\ninputs.qradar_reference_table_item_outer_key = rule.properties.qradar_ref_table_outer_key\\ninputs.qradar_reference_table_name = rule.properties.qradar_reference_table_name\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1hxp5oj\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0wqf8zp\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1hxp5oj\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1lti73u\"/\u003e\u003cendEvent id=\"EndEvent_0dltpyz\"\u003e\u003cincoming\u003eSequenceFlow_0wqf8zp\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0wqf8zp\" sourceRef=\"ServiceTask_1lti73u\" targetRef=\"EndEvent_0dltpyz\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1gggr6q\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned in a note\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0bf5vjo\" sourceRef=\"ServiceTask_1lti73u\" targetRef=\"TextAnnotation_1gggr6q\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1lti73u\" id=\"ServiceTask_1lti73u_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"274\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1hxp5oj\" id=\"SequenceFlow_1hxp5oj_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"274\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"236\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0dltpyz\" id=\"EndEvent_0dltpyz_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"452\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"470\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0wqf8zp\" id=\"SequenceFlow_0wqf8zp_di\"\u003e\u003comgdi:waypoint x=\"374\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"452\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"413\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1gggr6q\" id=\"TextAnnotation_1gggr6q_di\"\u003e\u003comgdc:Bounds height=\"51\" width=\"136\" x=\"370\" y=\"73\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0bf5vjo\" id=\"Association_0bf5vjo_di\"\u003e\u003comgdi:waypoint x=\"365\" xsi:type=\"omgdc:Point\" y=\"167\"/\u003e\u003comgdi:waypoint x=\"411\" xsi:type=\"omgdc:Point\" y=\"124\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 7,
-      "creator_id": "77a37273-a484-4fd1-8d02-2c28513d5343",
-      "description": "Add a reference table item based on an artifact value",
-      "export_key": "add_a_reference_table_item",
-      "last_modified_by": "77a37273-a484-4fd1-8d02-2c28513d5343",
-      "last_modified_time": 1628174414779,
-      "name": "Add a Reference Table Item",
-      "object_type": "artifact",
-      "programmatic_name": "add_a_reference_table_item",
-      "tags": [],
-      "uuid": "aae134f9-54ad-4d48-a4e8-aa156974be1e",
-      "workflow_id": 78
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 9,
-        "workflow_id": "example_qradar__add_reference_table_item_dt",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_qradar__add_reference_table_item_dt\" isExecutable=\"true\" name=\"Example: QRadar - Add Reference Table Item DT\"\u003e\u003cdocumentation\u003eAdd a reference table item based on an existing named reference table\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1yzers7\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1ovaala\" name=\"QRadar Reference Table Add Item\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"2843283c-4d98-4c71-b2e3-b0636c7a0df8\"\u003e{\"inputs\":{},\"post_processing_script\":\"note = u\\\"\\\"\\\"QRadar Label: {}\\nOuter key: {}\\nInner key: {}\\nEntry: {}\\nReference table: {}\\\"\\\"\\\".format(results.inputs.qradar_label,\\n                              results.inputs.qradar_reference_table_item_outer_key,\\n                              results.inputs.qradar_reference_table_item_inner_key,\\n                              results.inputs.qradar_reference_table_item_value, \\n                              results.inputs.qradar_reference_table_name)\\nif results.success:\\n    incident.addNote(u\\\"Successful add\\\\n{}\\\".format(note))\\n    row.number_of_elements = str(results[\\\"content\\\"][\\\"content\\\"][\\\"number_of_elements\\\"])\\nelse:\\n    incident.addNote(u\\\"Failure to add item: {}\\\\n{}\\\".format(results[\u0027reason\u0027], note))\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"\\n# Example inputs \\ninputs.qradar_reference_table_name = row.reference_table\\ninputs.qradar_reference_table_item_outer_key = rule.properties.qradar_ref_table_outer_key or \\\"1\\\"\\ninputs.qradar_reference_table_item_inner_key = rule.properties.qradar_ref_table_inner_key or \\\"city\\\"\\ninputs.qradar_reference_table_item_value = rule.properties.qradar_ref_table_update\\ninputs.qradar_label = row.qradar_label\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1yzers7\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1jnyry3\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1yzers7\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1ovaala\"/\u003e\u003cendEvent id=\"EndEvent_0kkxsgk\"\u003e\u003cincoming\u003eSequenceFlow_1jnyry3\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1jnyry3\" sourceRef=\"ServiceTask_1ovaala\" targetRef=\"EndEvent_0kkxsgk\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0n4muq5\"\u003e\u003ctext\u003e\u003c![CDATA[Result placed in a note\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0rhmzw8\" sourceRef=\"ServiceTask_1ovaala\" targetRef=\"TextAnnotation_0n4muq5\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1ovaala\" id=\"ServiceTask_1ovaala_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"318\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1yzers7\" id=\"SequenceFlow_1yzers7_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"318\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"213\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0kkxsgk\" id=\"EndEvent_0kkxsgk_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"526\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"499\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1jnyry3\" id=\"SequenceFlow_1jnyry3_di\"\u003e\u003comgdi:waypoint x=\"418\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"526\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"472\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0n4muq5\" id=\"TextAnnotation_0n4muq5_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"410\" y=\"81\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0rhmzw8\" id=\"Association_0rhmzw8_di\"\u003e\u003comgdi:waypoint x=\"401\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"447\" xsi:type=\"omgdc:Point\" y=\"111\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 9,
-      "creator_id": "77a37273-a484-4fd1-8d02-2c28513d5343",
-      "description": "Add a reference table item based on an existing named reference table",
-      "export_key": "example_qradar__add_reference_table_item_dt",
-      "last_modified_by": "admin@example.com",
-      "last_modified_time": 1628175199006,
-      "name": "Example: QRadar - Add Reference Table Item DT",
-      "object_type": "qradar_reference_table",
-      "programmatic_name": "example_qradar__add_reference_table_item_dt",
-      "tags": [],
-      "uuid": "b6056f90-c979-417a-b18e-dfaa661e24f0",
-      "workflow_id": 74
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 7,
-        "workflow_id": "qradar_add_reference_set_item",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"qradar_add_reference_set_item\" isExecutable=\"true\" name=\"Example of adding an item to QRadar reference set\"\u003e\u003cdocumentation\u003eAdd an IP address artifact to the QRadar reference set, \u201cSample Blocked IPs\u201d.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0drmuq6\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1tys7ps\" name=\"QRadar Add Reference Set Item\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"30b6899a-d015-48c3-8fd9-500788d4b437\"\u003e{\"inputs\":{\"aa5e211d-b5e0-4289-88bb-47595afac385\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"Sample Blocked IPs\"}}},\"post_processing_script\":\"if results.status_code == 200:\\n  incident.addNote(u\\\"IP: {} added to blocked IPs reference set: {}\\\".format(artifact.value, results[\u0027content\u0027][\u0027name\u0027]))\\nelse:\\n  incident.addNote(u\\\"Failed to add IP: {} to reference set. Status Code: {}, message: {}\\\".format(artifact.value, results.status_code, results[\u0027content\u0027][\u0027message\u0027]))\",\"pre_processing_script\":\"inputs.qradar_reference_set_item_value = artifact.value\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0drmuq6\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0dhxmmd\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0drmuq6\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1tys7ps\"/\u003e\u003cendEvent id=\"EndEvent_06sofyi\"\u003e\u003cincoming\u003eSequenceFlow_0dhxmmd\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0dhxmmd\" sourceRef=\"ServiceTask_1tys7ps\" targetRef=\"EndEvent_06sofyi\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0xiyl1t\"\u003e\u003ctext\u003e\u003c![CDATA[Add results as an incident note\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_19xkql8\" sourceRef=\"ServiceTask_1tys7ps\" targetRef=\"TextAnnotation_0xiyl1t\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"205\" y=\"166\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"200\" y=\"201\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"209\" xsi:type=\"omgdc:Point\" y=\"195\"/\u003e\u003comgdi:waypoint x=\"159\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1tys7ps\" id=\"ServiceTask_1tys7ps_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"303\" y=\"144\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0drmuq6\" id=\"SequenceFlow_0drmuq6_di\"\u003e\u003comgdi:waypoint x=\"241\" xsi:type=\"omgdc:Point\" y=\"184\"/\u003e\u003comgdi:waypoint x=\"303\" xsi:type=\"omgdc:Point\" y=\"184\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"272\" y=\"162\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_06sofyi\" id=\"EndEvent_06sofyi_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"473\" y=\"166\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"446\" y=\"205\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0dhxmmd\" id=\"SequenceFlow_0dhxmmd_di\"\u003e\u003comgdi:waypoint x=\"403\" xsi:type=\"omgdc:Point\" y=\"184\"/\u003e\u003comgdi:waypoint x=\"473\" xsi:type=\"omgdc:Point\" y=\"184\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"393\" y=\"162.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0xiyl1t\" id=\"TextAnnotation_0xiyl1t_di\"\u003e\u003comgdc:Bounds height=\"47\" width=\"124\" x=\"403\" y=\"71\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_19xkql8\" id=\"Association_19xkql8_di\"\u003e\u003comgdi:waypoint x=\"398\" xsi:type=\"omgdc:Point\" y=\"149\"/\u003e\u003comgdi:waypoint x=\"436\" xsi:type=\"omgdc:Point\" y=\"118\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 7,
-      "creator_id": "77a37273-a484-4fd1-8d02-2c28513d5343",
-      "description": "Add an IP address artifact to the QRadar reference set, \u201cSample Blocked IPs\u201d.",
-      "export_key": "qradar_add_reference_set_item",
-      "last_modified_by": "77a37273-a484-4fd1-8d02-2c28513d5343",
-      "last_modified_time": 1628174413276,
-      "name": "Example of adding an item to QRadar reference set",
-      "object_type": "artifact",
-      "programmatic_name": "qradar_add_reference_set_item",
-      "tags": [],
-      "uuid": "928190bc-cf9e-49e5-9c95-cd0bae9d9ac6",
-      "workflow_id": 73
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 9,
-        "workflow_id": "example_qradar__delete_reference_table_item_dt",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_qradar__delete_reference_table_item_dt\" isExecutable=\"true\" name=\"Example: QRadar - Delete Reference Table Item DT\"\u003e\u003cdocumentation\u003eAn example workflow that takes in a Reference Table name, an inner key, an outer key and a value to delete for the table\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1fpmqih\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0737k88\" name=\"QRadar Reference Table Delete Ite...\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"10b6522f-ffc5-4742-8174-06ffe108aaf7\"\u003e{\"inputs\":{},\"post_processing_script\":\"note = u\\\"\\\"\\\"QRadar Label: {}\\nOuter key: {}\\nInner key: {}\\nEntry: {}\\nReference table: {}\\\"\\\"\\\".format(results.inputs.qradar_label,\\n                              results.inputs.qradar_reference_table_item_outer_key,\\n                              results.inputs.qradar_reference_table_item_inner_key,\\n                              results.inputs.qradar_reference_table_item_value, \\n                              results.inputs.qradar_reference_table_name)\\nif results.success:\\n    incident.addNote(u\\\"Successful delete\\\\n{}\\\".format(note))\\n    row[\u0027status\u0027] = \\\"deleted\\\"\\nelse:\\n    incident.addNote(u\\\"Failure to delete item: {}\\\\n{}\\\".format(results[\u0027reason\u0027], note))\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.qradar_reference_table_name = row.table\\ninputs.qradar_reference_table_item_outer_key = row.outer_key\\ninputs.qradar_reference_table_item_inner_key = row.inner_key\\ninputs.qradar_reference_table_item_value = row.value\\ninputs.qradar_label = row.qradar_label\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1fpmqih\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1dw21s8\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1fpmqih\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0737k88\"/\u003e\u003cendEvent id=\"EndEvent_0tt8h3e\"\u003e\u003cincoming\u003eSequenceFlow_1dw21s8\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1dw21s8\" sourceRef=\"ServiceTask_0737k88\" targetRef=\"EndEvent_0tt8h3e\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0nykfdr\"\u003e\u003ctext\u003e\u003c![CDATA[Result placed in a row and datatable row is set to \u0027deleted\u0027\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0dgavrh\" sourceRef=\"ServiceTask_0737k88\" targetRef=\"TextAnnotation_0nykfdr\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0737k88\" id=\"ServiceTask_0737k88_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"258\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1fpmqih\" id=\"SequenceFlow_1fpmqih_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"258\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"228\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0tt8h3e\" id=\"EndEvent_0tt8h3e_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"416\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"434\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1dw21s8\" id=\"SequenceFlow_1dw21s8_di\"\u003e\u003comgdi:waypoint x=\"358\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"416\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"387\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0nykfdr\" id=\"TextAnnotation_0nykfdr_di\"\u003e\u003comgdc:Bounds height=\"53\" width=\"242\" x=\"347\" y=\"76\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0dgavrh\" id=\"Association_0dgavrh_di\"\u003e\u003comgdi:waypoint x=\"357\" xsi:type=\"omgdc:Point\" y=\"175\"/\u003e\u003comgdi:waypoint x=\"428\" xsi:type=\"omgdc:Point\" y=\"129\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 9,
-      "creator_id": "77a37273-a484-4fd1-8d02-2c28513d5343",
-      "description": "An example workflow that takes in a Reference Table name, an inner key, an outer key and a value to delete for the table",
-      "export_key": "example_qradar__delete_reference_table_item_dt",
-      "last_modified_by": "admin@example.com",
-      "last_modified_time": 1628175131071,
-      "name": "Example: QRadar - Delete Reference Table Item DT",
-      "object_type": "qradar_reference_table_queried_rows",
-      "programmatic_name": "example_qradar__delete_reference_table_item_dt",
-      "tags": [],
-      "uuid": "6338645d-3f08-4acb-b49d-f46fede6d8cd",
-      "workflow_id": 80
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 9,
-        "workflow_id": "example_qradar__update_this_reference_table_item",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_qradar__update_this_reference_table_item\" isExecutable=\"true\" name=\"Example: Qradar - Update this Reference Table Item DT\"\u003e\u003cdocumentation\u003eUpdate an existing reference table item. If it does not exist, it will be added\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_16hfg6o\u003c/outgoing\u003e\u003c/startEvent\u003e\u003csequenceFlow id=\"SequenceFlow_16hfg6o\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1gd7hlv\"/\u003e\u003cendEvent id=\"EndEvent_0s8l4hf\"\u003e\u003cincoming\u003eSequenceFlow_1nnixb6\u003c/incoming\u003e\u003c/endEvent\u003e\u003cserviceTask id=\"ServiceTask_1gd7hlv\" name=\"QRadar Reference Table Update Ite...\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"2f0ec2b9-0266-42bc-ac4c-71ddfe593344\"\u003e{\"inputs\":{},\"post_processing_script\":\"note = u\\\"\\\"\\\"QRadar Label: {}\\nOuter key: {}\\nInner key: {}\\nEntry: {}\\nReference table: {}\\\"\\\"\\\".format(results.inputs.qradar_label,\\n                              results.inputs.qradar_reference_table_item_outer_key,\\n                              results.inputs.qradar_reference_table_item_inner_key,\\n                              results.inputs.qradar_reference_table_item_value, \\n                              results.inputs.qradar_reference_table_name)\\nif results.success:\\n    incident.addNote(u\\\"Successful updated\\\\n{}\\\".format(note))\\n    row[\u0027status\u0027] = \u0027updated\u0027\\n    row[\u0027value\u0027] = results.inputs.qradar_reference_table_item_value\\nelse:\\n    incident.addNote(u\\\"Failure to updated item: {}\\\\n{}\\\".format(results[\u0027reason\u0027], note))\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"\\n\\n\\ninputs.qradar_reference_table_name = row.table\\ninputs.qradar_reference_table_item_outer_key = row.outer_key\\ninputs.qradar_reference_table_item_inner_key = row.inner_key\\ninputs.qradar_label = row.qradar_label\\n\\nif rule.properties.qradar_ref_table_update:\\n  inputs.qradar_reference_table_item_value = rule.properties.qradar_ref_table_update\\nelse:\\n  inputs.qradar_reference_table_item_value = \\\"This is an example\\\"\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_16hfg6o\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1nnixb6\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1nnixb6\" sourceRef=\"ServiceTask_1gd7hlv\" targetRef=\"EndEvent_0s8l4hf\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0bzrivy\"\u003e\u003ctext\u003e\u003c![CDATA[Result added as a note\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0jp4p4y\" sourceRef=\"ServiceTask_1gd7hlv\" targetRef=\"TextAnnotation_0bzrivy\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_16hfg6o\" id=\"SequenceFlow_16hfg6o_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"311\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"209.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0s8l4hf\" id=\"EndEvent_0s8l4hf_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"491\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"464\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1gd7hlv\" id=\"ServiceTask_1gd7hlv_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"311\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1nnixb6\" id=\"SequenceFlow_1nnixb6_di\"\u003e\u003comgdi:waypoint x=\"411\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"491\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"406\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0bzrivy\" id=\"TextAnnotation_0bzrivy_di\"\u003e\u003comgdc:Bounds height=\"42\" width=\"119\" x=\"403\" y=\"71\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0jp4p4y\" id=\"Association_0jp4p4y_di\"\u003e\u003comgdi:waypoint x=\"397\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"444\" xsi:type=\"omgdc:Point\" y=\"113\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 9,
-      "creator_id": "77a37273-a484-4fd1-8d02-2c28513d5343",
-      "description": "Update an existing reference table item. If it does not exist, it will be added",
-      "export_key": "example_qradar__update_this_reference_table_item",
-      "last_modified_by": "admin@example.com",
-      "last_modified_time": 1628175257392,
-      "name": "Example: Qradar - Update this Reference Table Item DT",
-      "object_type": "qradar_reference_table_queried_rows",
-      "programmatic_name": "example_qradar__update_this_reference_table_item",
-      "tags": [],
-      "uuid": "4f260795-608f-431c-a851-ef39679e2f60",
-      "workflow_id": 82
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 7,
-        "workflow_id": "qradar_search_event_offense",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"qradar_search_event_offense\" isExecutable=\"true\" name=\"Example of searching QRadar events using offense id\"\u003e\u003cdocumentation\u003eUse the qradar_id field of the incident to search qradar events, and update the data table, qradar_offense_event, with the first 5 results.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_026bbbi\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1gto8k0\" name=\"QRadar Search\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"c3e6f6cc-8905-41e6-9841-ebe99845d778\"\u003e{\"inputs\":{\"048ba39a-ab94-4d1f-a0f8-2462de3c044c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_content_value\":{\"format\":\"text\",\"content\":\"SELECT %param1% FROM events WHERE INOFFENSE(%param2%) LAST %param3% MINUTES\"}}},\"01ed4652-fe61-4dbf-bc83-f81c62c5563c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"DATEFORMAT(starttime, \u0027YYYY-MM-dd HH:mm\u0027) as StartTime, CATEGORYNAME(category), LOGSOURCENAME(logsourceid), PROTOCOLNAME(protocolid), RULENAME(creeventlist)\"}},\"b6053690-d7b2-4204-b48a-f86503b419d9\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"43320\"}},\"c33fbe1d-125c-4a79-82e8-6608d1c7bb5e\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"number_value\":1}},\"d7a544ff-689b-4f15-b3c1-a7ebd20bbf3b\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"54c4eb52-d955-4e05-9f76-c3819853ff68\"}}},\"post_processing_script\":\"for event in results.events:\\n  qradar_event = incident.addRow(\\\"qradar_offense_event\\\")\\n  qradar_event.start_time = event.StartTime\\n  qradar_event.category = event.categoryname_category\\n  qradar_event.log_source = event.logsourcename_logsourceid\\n  qradar_event.protocol = event.protocolname_protocolid\\n  qradar_event.rule = event.rulename_creeventlist\",\"pre_processing_script\":\"inputs.qradar_query_param2 = incident.properties.qradar_id\\nif rule.properties.qradar_query_all_results:\\n  inputs.qradar_query_all_results = rule.properties.qradar_query_all_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_026bbbi\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0cs0bcr\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_026bbbi\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1gto8k0\"/\u003e\u003cendEvent id=\"EndEvent_0ehbn4w\"\u003e\u003cincoming\u003eSequenceFlow_0cs0bcr\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0cs0bcr\" sourceRef=\"ServiceTask_1gto8k0\" targetRef=\"EndEvent_0ehbn4w\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0xq6ex9\"\u003e\u003ctext\u003e\u003c![CDATA[Return results in qradar_offense_event datatable\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0fkdkst\" sourceRef=\"ServiceTask_1gto8k0\" targetRef=\"TextAnnotation_0xq6ex9\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"366\" y=\"174\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"361\" y=\"209\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"247\" y=\"239\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"369\" xsi:type=\"omgdc:Point\" y=\"201\"/\u003e\u003comgdi:waypoint x=\"316\" xsi:type=\"omgdc:Point\" y=\"239\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1gto8k0\" id=\"ServiceTask_1gto8k0_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"482.0945157526254\" y=\"152\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_026bbbi\" id=\"SequenceFlow_026bbbi_di\"\u003e\u003comgdi:waypoint x=\"402\" xsi:type=\"omgdc:Point\" y=\"192\"/\u003e\u003comgdi:waypoint x=\"482\" xsi:type=\"omgdc:Point\" y=\"192\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"442\" y=\"170\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0ehbn4w\" id=\"EndEvent_0ehbn4w_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"662\" y=\"174\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"635\" y=\"213\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0cs0bcr\" id=\"SequenceFlow_0cs0bcr_di\"\u003e\u003comgdi:waypoint x=\"582\" xsi:type=\"omgdc:Point\" y=\"192\"/\u003e\u003comgdi:waypoint x=\"662\" xsi:type=\"omgdc:Point\" y=\"192\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"577\" y=\"170.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0xq6ex9\" id=\"TextAnnotation_0xq6ex9_di\"\u003e\u003comgdc:Bounds height=\"59\" width=\"136\" x=\"589\" y=\"67\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0fkdkst\" id=\"Association_0fkdkst_di\"\u003e\u003comgdi:waypoint x=\"577\" xsi:type=\"omgdc:Point\" y=\"157\"/\u003e\u003comgdi:waypoint x=\"619\" xsi:type=\"omgdc:Point\" y=\"126\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 7,
-      "creator_id": "77a37273-a484-4fd1-8d02-2c28513d5343",
-      "description": "Use the qradar_id field of the incident to search qradar events, and update the data table, qradar_offense_event, with the first 5 results.",
-      "export_key": "qradar_search_event_offense",
-      "last_modified_by": "77a37273-a484-4fd1-8d02-2c28513d5343",
-      "last_modified_time": 1628174414529,
-      "name": "Example of searching QRadar events using offense id",
-      "object_type": "incident",
-      "programmatic_name": "qradar_search_event_offense",
-      "tags": [],
-      "uuid": "e37d2dae-a71f-4b2f-8830-b03ed320fdff",
-      "workflow_id": 77
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 10,
-        "workflow_id": "qradar_get_reference_table_data",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"qradar_get_reference_table_data\" isExecutable=\"true\" name=\"Example QRadar: Get Reference Table Data\"\u003e\u003cdocumentation\u003eMake a query on a reference table and return its results into another datatable\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1nxvqxc\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_07x3ec6\" name=\"QRadar Reference Table Get Table ...\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"6450077b-708a-4e65-9eda-6e403a3f4410\"\u003e{\"inputs\":{},\"post_processing_script\":\"if results.success:\\n  for outer_key, item in results.content.get(\u0027data\u0027,[]).items():\\n    for inner_key, inner_item in item.items():\\n      row = incident.addRow(\u0027qradar_reference_table_queried_rows\u0027)\\n      row[\u0027table\u0027] = results.inputs.qradar_reference_table_name\\n      row[\u0027outer_key\u0027] = outer_key\\n      row[\u0027inner_key\u0027] = inner_key\\n      \\n      row[\u0027value\u0027] = inner_item[\u0027value\u0027]\\n      row[\u0027status\u0027] = \u0027active\u0027\\n      row[\u0027qradar_label\u0027] = row[\u0027qradar_label\u0027]\\nelse:\\n  incident.addNote(\\\"An error occurred getting the reference table data: {}\\\".format(results.reason))\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.qradar_reference_table_name = row[\u0027reference_table\u0027]\\ninputs.qradar_label = row[\u0027qradar_label\u0027]\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1nxvqxc\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0z0k0dh\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1nxvqxc\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_07x3ec6\"/\u003e\u003cendEvent id=\"EndEvent_1nux67n\"\u003e\u003cincoming\u003eSequenceFlow_0z0k0dh\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0z0k0dh\" sourceRef=\"ServiceTask_07x3ec6\" targetRef=\"EndEvent_1nux67n\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0sh11kc\"\u003e\u003ctext\u003e\u003c![CDATA[Results added to the \u0027qradar_reference_table_queried_rows\u0027 datatable\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_06q1lrf\" sourceRef=\"ServiceTask_07x3ec6\" targetRef=\"TextAnnotation_0sh11kc\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_07x3ec6\" id=\"ServiceTask_07x3ec6_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"329\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1nxvqxc\" id=\"SequenceFlow_1nxvqxc_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"329\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"218.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1nux67n\" id=\"EndEvent_1nux67n_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"569\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"542\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0z0k0dh\" id=\"SequenceFlow_0z0k0dh_di\"\u003e\u003comgdi:waypoint x=\"429\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"569\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"454\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0sh11kc\" id=\"TextAnnotation_0sh11kc_di\"\u003e\u003comgdc:Bounds height=\"61\" width=\"239\" x=\"423\" y=\"61\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_06q1lrf\" id=\"Association_06q1lrf_di\"\u003e\u003comgdi:waypoint x=\"426\" xsi:type=\"omgdc:Point\" y=\"173\"/\u003e\u003comgdi:waypoint x=\"500\" xsi:type=\"omgdc:Point\" y=\"122\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 10,
-      "creator_id": "77a37273-a484-4fd1-8d02-2c28513d5343",
-      "description": "Make a query on a reference table and return its results into another datatable",
-      "export_key": "qradar_get_reference_table_data",
-      "last_modified_by": "admin@example.com",
-      "last_modified_time": 1628175003206,
-      "name": "Example QRadar: Get Reference Table Data",
-      "object_type": "qradar_reference_table",
-      "programmatic_name": "qradar_get_reference_table_data",
-      "tags": [],
-      "uuid": "0d7e5d45-b9d1-48cb-ab2c-9d148f5a0e22",
-      "workflow_id": 75
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 9,
+        "version": 11,
         "workflow_id": "example_qradar__get_all_reference_tables",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_qradar__get_all_reference_tables\" isExecutable=\"true\" name=\"Example: QRadar - Get all Reference Tables\"\u003e\u003cdocumentation\u003eAn example workflow that returns a list of all Reference Tables on the QRadar instance.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1t8h3gi\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1pqewrv\" name=\"QRadar Reference Table Get All Ta...\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"0abff118-314e-4728-964d-03558088a62a\"\u003e{\"inputs\":{},\"post_processing_script\":\"\\\"\\\"\\\"\\n  Sample data:\\n  [{u\u0027creation_time\u0027: 1464119408489L, u\u0027collection_id\u0027: 186, u\u0027key_name_types\u0027: {u\u0027First Seen Date\u0027: u\u0027DATE\u0027, u\u0027Confidence\u0027: u\u0027NUM\u0027, u\u0027Last Seen Date\u0027: u\u0027DATE\u0027, u\u0027Provider\u0027: u\u0027ALN\u0027}, u\u0027timeout_type\u0027: u\u0027LAST_SEEN\u0027, u\u0027name\u0027: u\u0027Phishing Senders Data\u0027, u\u0027namespace\u0027: u\u0027SHARED\u0027, u\u0027element_type\u0027: u\u0027ALNIC\u0027, u\u0027number_of_elements\u0027: 0}, {u\u0027creation_time\u0027: 1464119422432L, u\u0027collection_id\u0027: 182, u\u0027key_name_types\u0027: {u\u0027First Seen Date\u0027: u\u0027DATE\u0027, u\u0027Confidence\u0027: u\u0027NUM\u0027, u\u0027Last Seen Date\u0027: u\u0027DATE\u0027, u\u0027Provider\u0027: u\u0027ALN\u0027}, u\u0027timeout_type\u0027: u\u0027LAST_SEEN\u0027, u\u0027name\u0027: u\u0027Rogue Process Names Data\u0027, u\u0027namespace\u0027: u\u0027SHARED\u0027, u\u0027element_type\u0027: u\u0027ALNIC\u0027, u\u0027number_of_elements\u0027: 0}]\\n\\\"\\\"\\\"\\nif results.success:\\n  if results.content:\\n    for item in results.content:\\n      item_row = incident.addRow(\\\"qradar_reference_table\\\")\\n      item_row[\\\"reference_table\\\"] = item[\\\"name\\\"]\\n      item_row[\\\"collection_id\\\"] = item[\\\"collection_id\\\"]\\n      item_row[\\\"number_of_elements\\\"] = item[\\\"number_of_elements\\\"]\\n      item_row[\\\"namespace\\\"] = item[\\\"namespace\\\"]\\n      item_row[\\\"qradar_label\\\"] = rule.properties.qradar_label\\n  else:\\n    incident.addNote(\\\"No reference tables found\\\")\\nelse:\\n  incident.addNote(\\\"An error occurred getting the reference tables: {}\\\".formt(results.reason))\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.qradar_label = rule.properties.qradar_label\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1t8h3gi\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_14yvkmi\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1t8h3gi\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1pqewrv\"/\u003e\u003cendEvent id=\"EndEvent_1dyzz8a\"\u003e\u003cincoming\u003eSequenceFlow_14yvkmi\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_14yvkmi\" sourceRef=\"ServiceTask_1pqewrv\" targetRef=\"EndEvent_1dyzz8a\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1spxsxs\"\u003e\u003ctext\u003e\u003c![CDATA[Results are populated in\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1ilmxvo\" sourceRef=\"ServiceTask_1pqewrv\" targetRef=\"TextAnnotation_1spxsxs\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1pqewrv\" id=\"ServiceTask_1pqewrv_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"326\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1t8h3gi\" id=\"SequenceFlow_1t8h3gi_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"326\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"217\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1dyzz8a\" id=\"EndEvent_1dyzz8a_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"547\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"520\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_14yvkmi\" id=\"SequenceFlow_14yvkmi_di\"\u003e\u003comgdi:waypoint x=\"426\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"547\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"441.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1spxsxs\" id=\"TextAnnotation_1spxsxs_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"425\" y=\"69\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1ilmxvo\" id=\"Association_1ilmxvo_di\"\u003e\u003comgdi:waypoint x=\"408\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"463\" xsi:type=\"omgdc:Point\" y=\"99\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_qradar__get_all_reference_tables\" isExecutable=\"true\" name=\"Example: QRadar - Get all Reference Tables\"\u003e\u003cdocumentation\u003eAn example workflow that returns a list of all Reference Tables on the QRadar instance.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1t8h3gi\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1pqewrv\" name=\"QRadar Reference Table Get All Ta...\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"0abff118-314e-4728-964d-03558088a62a\"\u003e{\"inputs\":{},\"post_processing_script\":\"\\\"\\\"\\\"\\n  Sample data:\\n  [{u\u0027creation_time\u0027: 1464119408489L, u\u0027collection_id\u0027: 186, u\u0027key_name_types\u0027: {u\u0027First Seen Date\u0027: u\u0027DATE\u0027, u\u0027Confidence\u0027: u\u0027NUM\u0027, u\u0027Last Seen Date\u0027: u\u0027DATE\u0027, u\u0027Provider\u0027: u\u0027ALN\u0027}, u\u0027timeout_type\u0027: u\u0027LAST_SEEN\u0027, u\u0027name\u0027: u\u0027Phishing Senders Data\u0027, u\u0027namespace\u0027: u\u0027SHARED\u0027, u\u0027element_type\u0027: u\u0027ALNIC\u0027, u\u0027number_of_elements\u0027: 0}, {u\u0027creation_time\u0027: 1464119422432L, u\u0027collection_id\u0027: 182, u\u0027key_name_types\u0027: {u\u0027First Seen Date\u0027: u\u0027DATE\u0027, u\u0027Confidence\u0027: u\u0027NUM\u0027, u\u0027Last Seen Date\u0027: u\u0027DATE\u0027, u\u0027Provider\u0027: u\u0027ALN\u0027}, u\u0027timeout_type\u0027: u\u0027LAST_SEEN\u0027, u\u0027name\u0027: u\u0027Rogue Process Names Data\u0027, u\u0027namespace\u0027: u\u0027SHARED\u0027, u\u0027element_type\u0027: u\u0027ALNIC\u0027, u\u0027number_of_elements\u0027: 0}]\\n\\\"\\\"\\\"\\nif results.success:\\n  if results.content:\\n    for item in results.content:\\n      item_row = incident.addRow(\\\"qradar_reference_table\\\")\\n      item_row[\\\"reference_table\\\"] = item[\\\"name\\\"]\\n      item_row[\\\"collection_id\\\"] = item[\\\"collection_id\\\"]\\n      item_row[\\\"number_of_elements\\\"] = item[\\\"number_of_elements\\\"]\\n      item_row[\\\"namespace\\\"] = item[\\\"namespace\\\"]\\n      item_row[\\\"qradar_label\\\"] = str(rule.properties.qradar_label)\\n  else:\\n    incident.addNote(\\\"No reference tables found\\\")\\nelse:\\n  incident.addNote(\\\"An error occurred getting the reference tables: {}\\\".formt(results.reason))\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.qradar_label = rule.properties.qradar_label\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1t8h3gi\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_14yvkmi\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1t8h3gi\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1pqewrv\"/\u003e\u003cendEvent id=\"EndEvent_1dyzz8a\"\u003e\u003cincoming\u003eSequenceFlow_14yvkmi\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_14yvkmi\" sourceRef=\"ServiceTask_1pqewrv\" targetRef=\"EndEvent_1dyzz8a\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1spxsxs\"\u003e\u003ctext\u003e\u003c![CDATA[Results are populated in\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1ilmxvo\" sourceRef=\"ServiceTask_1pqewrv\" targetRef=\"TextAnnotation_1spxsxs\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1pqewrv\" id=\"ServiceTask_1pqewrv_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"326\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1t8h3gi\" id=\"SequenceFlow_1t8h3gi_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"326\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"217\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1dyzz8a\" id=\"EndEvent_1dyzz8a_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"547\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"520\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_14yvkmi\" id=\"SequenceFlow_14yvkmi_di\"\u003e\u003comgdi:waypoint x=\"426\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"547\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"441.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1spxsxs\" id=\"TextAnnotation_1spxsxs_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"425\" y=\"69\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1ilmxvo\" id=\"Association_1ilmxvo_di\"\u003e\u003comgdi:waypoint x=\"408\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"463\" xsi:type=\"omgdc:Point\" y=\"99\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 9,
+      "content_version": 11,
       "creator_id": "77a37273-a484-4fd1-8d02-2c28513d5343",
       "description": "An example workflow that returns a list of all Reference Tables on the QRadar instance.",
       "export_key": "example_qradar__get_all_reference_tables",
       "last_modified_by": "admin@example.com",
-      "last_modified_time": 1628174987326,
+      "last_modified_time": 1628188980648,
       "name": "Example: QRadar - Get all Reference Tables",
       "object_type": "incident",
       "programmatic_name": "example_qradar__get_all_reference_tables",
@@ -2918,62 +2840,182 @@
     {
       "actions": [],
       "content": {
-        "version": 7,
-        "workflow_id": "qradar_find_reference_sets_artifact",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"qradar_find_reference_sets_artifact\" isExecutable=\"true\" name=\"Example of finding all QRadar reference sets for artifact\"\u003e\u003cdocumentation\u003eFind all the QRadar reference sets that contain the given artifact\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_19eoq7v\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1kxsf5d\" name=\"QRadar Find Reference Sets\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"09885813-f640-45bc-8892-d1a741a7d53e\"\u003e{\"inputs\":{},\"post_processing_script\":\"items = results.reference_items\\n\\\"\\\"\\\"\\n  Sample data:\\n  [{u\u0027name\u0027: u\u0027RF Risklist\u0027, u\u0027timeout_type\u0027: u\u0027FIRST_SEEN\u0027, u\u0027creation_time\u0027: 1549376859164, u\u0027element_type\u0027: u\u0027IP\u0027, u\u0027number_of_elements\u0027: 5, u\u0027data\u0027: [{u\u0027source\u0027: u\u0027admin\u0027, u\u0027first_seen\u0027: 1549477737993, u\u0027value\u0027: u\u002746.21.147.161\u0027, u\u0027last_seen\u0027: 1549477737993}]}]\\n\\n\\\"\\\"\\\"\\nif items:\\n  for item in items:\\n      item_row = incident.addRow(\\\"qradar_reference_set\\\")\\n      item_row[\\\"reference_set\\\"] = item[\\\"name\\\"]\\n      item_row[\\\"item_value\\\"] = item[\\\"data\\\"][0][\\\"value\\\"]\\n      item_row[\\\"source\\\"] = item[\\\"data\\\"][0][\\\"source\\\"]\\nelse:\\n  incident.addNote(\\\"No reference sets contain artifact: {}\\\".format(artifact.value))\",\"pre_processing_script\":\"inputs.qradar_reference_set_item_value = artifact.value\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_19eoq7v\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_053lo0r\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_19eoq7v\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1kxsf5d\"/\u003e\u003cendEvent id=\"EndEvent_11r54f4\"\u003e\u003cincoming\u003eSequenceFlow_053lo0r\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_053lo0r\" sourceRef=\"ServiceTask_1kxsf5d\" targetRef=\"EndEvent_11r54f4\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_09m9uvu\"\u003e\u003ctext\u003e\u003c![CDATA[Input:\nqradar_reference_set_item_value\n\nFind all the reference sets that contain this item\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_03l6keq\" sourceRef=\"ServiceTask_1kxsf5d\" targetRef=\"TextAnnotation_09m9uvu\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxtwn8\"\u003e\u003ctext\u003e\u003c![CDATA[Output:\nResults added to datatable: qradar_reference_set\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1jhw24k\" sourceRef=\"ServiceTask_1kxsf5d\" targetRef=\"TextAnnotation_1kxtwn8\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"181\" y=\"181\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"176\" y=\"216\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"186\" xsi:type=\"omgdc:Point\" y=\"211\"/\u003e\u003comgdi:waypoint x=\"156\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1kxsf5d\" id=\"ServiceTask_1kxsf5d_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"273\" y=\"159\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_19eoq7v\" id=\"SequenceFlow_19eoq7v_di\"\u003e\u003comgdi:waypoint x=\"217\" xsi:type=\"omgdc:Point\" y=\"199\"/\u003e\u003comgdi:waypoint x=\"273\" xsi:type=\"omgdc:Point\" y=\"199\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"200\" y=\"177.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_11r54f4\" id=\"EndEvent_11r54f4_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"423\" y=\"181\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"396\" y=\"220\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_053lo0r\" id=\"SequenceFlow_053lo0r_di\"\u003e\u003comgdi:waypoint x=\"373\" xsi:type=\"omgdc:Point\" y=\"199\"/\u003e\u003comgdi:waypoint x=\"423\" xsi:type=\"omgdc:Point\" y=\"199\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"353\" y=\"177.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_09m9uvu\" id=\"TextAnnotation_09m9uvu_di\"\u003e\u003comgdc:Bounds height=\"70\" width=\"200\" x=\"49\" y=\"29\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_03l6keq\" id=\"Association_03l6keq_di\"\u003e\u003comgdi:waypoint x=\"278\" xsi:type=\"omgdc:Point\" y=\"164\"/\u003e\u003comgdi:waypoint x=\"193\" xsi:type=\"omgdc:Point\" y=\"99\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxtwn8\" id=\"TextAnnotation_1kxtwn8_di\"\u003e\u003comgdc:Bounds height=\"68\" width=\"309\" x=\"412\" y=\"30\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1jhw24k\" id=\"Association_1jhw24k_di\"\u003e\u003comgdi:waypoint x=\"373\" xsi:type=\"omgdc:Point\" y=\"171\"/\u003e\u003comgdi:waypoint x=\"505\" xsi:type=\"omgdc:Point\" y=\"98\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "version": 13,
+        "workflow_id": "qradar_get_reference_table_data",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"qradar_get_reference_table_data\" isExecutable=\"true\" name=\"Example QRadar: Get Reference Table Data\"\u003e\u003cdocumentation\u003eMake a query on a reference table and return its results into another datatable\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1nxvqxc\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_07x3ec6\" name=\"QRadar Reference Table Get Table ...\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"6450077b-708a-4e65-9eda-6e403a3f4410\"\u003e{\"inputs\":{},\"post_processing_script\":\"if results.success:\\n  for outer_key, item in results.content.get(\u0027data\u0027,[]).items():\\n    for inner_key, inner_item in item.items():\\n      section = incident.addRow(\u0027qradar_reference_table_queried_rows\u0027)\\n      section[\u0027table\u0027] = results.inputs.qradar_reference_table_name\\n      section[\u0027outer_key\u0027] = outer_key\\n      section[\u0027inner_key\u0027] = inner_key\\n      \\n      section[\u0027value\u0027] = inner_item[\u0027value\u0027]\\n      section[\u0027status\u0027] = \u0027active\u0027\\n      section[\u0027qradar_label\u0027] = row.qradar_label\\nelse:\\n  incident.addNote(\\\"An error occurred getting the reference table data: {}\\\".format(results.reason))\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.qradar_reference_table_name = row[\u0027reference_table\u0027]\\ninputs.qradar_label = row[\u0027qradar_label\u0027]\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1nxvqxc\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0z0k0dh\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1nxvqxc\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_07x3ec6\"/\u003e\u003cendEvent id=\"EndEvent_1nux67n\"\u003e\u003cincoming\u003eSequenceFlow_0z0k0dh\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0z0k0dh\" sourceRef=\"ServiceTask_07x3ec6\" targetRef=\"EndEvent_1nux67n\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0sh11kc\"\u003e\u003ctext\u003e\u003c![CDATA[Results added to the \u0027qradar_reference_table_queried_rows\u0027 datatable\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_06q1lrf\" sourceRef=\"ServiceTask_07x3ec6\" targetRef=\"TextAnnotation_0sh11kc\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_07x3ec6\" id=\"ServiceTask_07x3ec6_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"329\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1nxvqxc\" id=\"SequenceFlow_1nxvqxc_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"329\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"218.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1nux67n\" id=\"EndEvent_1nux67n_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"569\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"542\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0z0k0dh\" id=\"SequenceFlow_0z0k0dh_di\"\u003e\u003comgdi:waypoint x=\"429\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"569\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"454\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0sh11kc\" id=\"TextAnnotation_0sh11kc_di\"\u003e\u003comgdc:Bounds height=\"61\" width=\"239\" x=\"423\" y=\"61\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_06q1lrf\" id=\"Association_06q1lrf_di\"\u003e\u003comgdi:waypoint x=\"426\" xsi:type=\"omgdc:Point\" y=\"173\"/\u003e\u003comgdi:waypoint x=\"500\" xsi:type=\"omgdc:Point\" y=\"122\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 7,
+      "content_version": 13,
+      "creator_id": "77a37273-a484-4fd1-8d02-2c28513d5343",
+      "description": "Make a query on a reference table and return its results into another datatable",
+      "export_key": "qradar_get_reference_table_data",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1628188994660,
+      "name": "Example QRadar: Get Reference Table Data",
+      "object_type": "qradar_reference_table",
+      "programmatic_name": "qradar_get_reference_table_data",
+      "tags": [],
+      "uuid": "0d7e5d45-b9d1-48cb-ab2c-9d148f5a0e22",
+      "workflow_id": 75
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 13,
+        "workflow_id": "qradar_find_reference_sets_artifact",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"qradar_find_reference_sets_artifact\" isExecutable=\"true\" name=\"Example of finding all QRadar reference sets for artifact\"\u003e\u003cdocumentation\u003eFind all the QRadar reference sets that contain the given artifact\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_19eoq7v\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1kxsf5d\" name=\"QRadar Find Reference Sets\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"09885813-f640-45bc-8892-d1a741a7d53e\"\u003e{\"inputs\":{},\"post_processing_script\":\"items = results.reference_items\\n\\\"\\\"\\\"\\n  Sample data:\\n  [{u\u0027name\u0027: u\u0027RF Risklist\u0027, u\u0027timeout_type\u0027: u\u0027FIRST_SEEN\u0027, u\u0027creation_time\u0027: 1549376859164, u\u0027element_type\u0027: u\u0027IP\u0027, u\u0027number_of_elements\u0027: 5, u\u0027data\u0027: [{u\u0027source\u0027: u\u0027admin\u0027, u\u0027first_seen\u0027: 1549477737993, u\u0027value\u0027: u\u002746.21.147.161\u0027, u\u0027last_seen\u0027: 1549477737993}]}]\\n\\n\\\"\\\"\\\"\\nif items:\\n  for item in items:\\n      item_row = incident.addRow(\\\"qradar_reference_set\\\")\\n      item_row[\\\"reference_set\\\"] = item[\\\"name\\\"]\\n      item_row[\\\"item_value\\\"] = item[\\\"data\\\"][0][\\\"value\\\"]\\n      item_row[\\\"source\\\"] = item[\\\"data\\\"][0][\\\"source\\\"]\\n      item_row[\\\"qradar_label\\\"] = rule.properties.qradar_label\\n      item_row[\\\"searched_value\\\"] = rule.properties.qradar_reference_set_item_value\\nelse:\\n  incident.addNote(\\\"No reference sets contain artifact: {}\\\".format(rule.properties.qradar_reference_set_item_value))\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.qradar_reference_set_item_value = rule.properties.qradar_reference_set_item_value\\ninputs.qradar_label = rule.properties.qradar_label\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_19eoq7v\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_053lo0r\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_19eoq7v\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1kxsf5d\"/\u003e\u003cendEvent id=\"EndEvent_11r54f4\"\u003e\u003cincoming\u003eSequenceFlow_053lo0r\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_053lo0r\" sourceRef=\"ServiceTask_1kxsf5d\" targetRef=\"EndEvent_11r54f4\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_09m9uvu\"\u003e\u003ctext\u003e\u003c![CDATA[Input:\nqradar_reference_set_item_value\n\nFind all the reference sets that contain this item\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_03l6keq\" sourceRef=\"ServiceTask_1kxsf5d\" targetRef=\"TextAnnotation_09m9uvu\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxtwn8\"\u003e\u003ctext\u003e\u003c![CDATA[Output:\nResults added to datatable: qradar_reference_set\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1jhw24k\" sourceRef=\"ServiceTask_1kxsf5d\" targetRef=\"TextAnnotation_1kxtwn8\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"181\" y=\"181\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"176\" y=\"216\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"186\" xsi:type=\"omgdc:Point\" y=\"211\"/\u003e\u003comgdi:waypoint x=\"156\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1kxsf5d\" id=\"ServiceTask_1kxsf5d_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"273\" y=\"159\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_19eoq7v\" id=\"SequenceFlow_19eoq7v_di\"\u003e\u003comgdi:waypoint x=\"217\" xsi:type=\"omgdc:Point\" y=\"199\"/\u003e\u003comgdi:waypoint x=\"273\" xsi:type=\"omgdc:Point\" y=\"199\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"200\" y=\"177.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_11r54f4\" id=\"EndEvent_11r54f4_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"423\" y=\"181\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"396\" y=\"220\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_053lo0r\" id=\"SequenceFlow_053lo0r_di\"\u003e\u003comgdi:waypoint x=\"373\" xsi:type=\"omgdc:Point\" y=\"199\"/\u003e\u003comgdi:waypoint x=\"423\" xsi:type=\"omgdc:Point\" y=\"199\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"353\" y=\"177.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_09m9uvu\" id=\"TextAnnotation_09m9uvu_di\"\u003e\u003comgdc:Bounds height=\"70\" width=\"200\" x=\"49\" y=\"29\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_03l6keq\" id=\"Association_03l6keq_di\"\u003e\u003comgdi:waypoint x=\"278\" xsi:type=\"omgdc:Point\" y=\"164\"/\u003e\u003comgdi:waypoint x=\"193\" xsi:type=\"omgdc:Point\" y=\"99\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxtwn8\" id=\"TextAnnotation_1kxtwn8_di\"\u003e\u003comgdc:Bounds height=\"68\" width=\"309\" x=\"412\" y=\"30\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1jhw24k\" id=\"Association_1jhw24k_di\"\u003e\u003comgdi:waypoint x=\"373\" xsi:type=\"omgdc:Point\" y=\"171\"/\u003e\u003comgdi:waypoint x=\"505\" xsi:type=\"omgdc:Point\" y=\"98\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 13,
       "creator_id": "77a37273-a484-4fd1-8d02-2c28513d5343",
       "description": "Find all the QRadar reference sets that contain the given artifact",
       "export_key": "qradar_find_reference_sets_artifact",
-      "last_modified_by": "77a37273-a484-4fd1-8d02-2c28513d5343",
-      "last_modified_time": 1628174415019,
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1628188839299,
       "name": "Example of finding all QRadar reference sets for artifact",
-      "object_type": "artifact",
+      "object_type": "incident",
       "programmatic_name": "qradar_find_reference_sets_artifact",
       "tags": [],
       "uuid": "6cea6ac1-1b7c-4ff5-8404-d0d886954460",
-      "workflow_id": 79
+      "workflow_id": 93
     },
     {
       "actions": [],
       "content": {
-        "version": 7,
+        "version": 9,
         "workflow_id": "qradar_move_item_to_different_ref_set",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"qradar_move_item_to_different_ref_set\" isExecutable=\"true\" name=\"Example of moving QRadar item from one reference set to another\"\u003e\u003cdocumentation\u003eRemove an item from the QRadar reference set, \u201cSample Blocked IPs\u201d, and add it to reference set, \u201cSample Suspect IPs\u201d. Add a note to the Incident after completing each step.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1hanlo3\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0s8cvaw\" name=\"QRadar Delete Reference Set Item\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"a7dc3d26-ab97-44a3-b56a-e367315b08e0\"\u003e{\"inputs\":{\"aa5e211d-b5e0-4289-88bb-47595afac385\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"Sample Blocked IPs\"}}},\"post_processing_script\":\"if results.status_code == 200:\\n  #Add a note\\n  incident.addNote(\\\"IP \\\" + artifact.value + \\\" removed successfully from Blocked list\\\")\\nelse:\\n  incident.addNote(u\\\"Failed to remove {} from Blocked list, message: {}\\\".format(artifact.value, results[\u0027content\u0027][\u0027message\u0027]))\",\"pre_processing_script\":\"inputs.qradar_reference_set_item_value = artifact.value\",\"result_name\":\"delete_opr\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1hanlo3\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0fmnoop\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1hanlo3\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0s8cvaw\"/\u003e\u003cserviceTask id=\"ServiceTask_0sdg8b5\" name=\"QRadar Add Reference Set Item\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"30b6899a-d015-48c3-8fd9-500788d4b437\"\u003e{\"inputs\":{\"aa5e211d-b5e0-4289-88bb-47595afac385\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"Sample Suspect IPs\"}}},\"post_processing_script\":\"if results.status_code == 200:\\n  incident.addNote(u\\\"Successfully added {} to Suspected IPs\\\".format(artifact.value))\\nelse:\\n  incident.addNote(u\\\"Failed to add {} to Suspected IPs. Status code: {}, message: {}\\\".format(artifact.value, results.status_code, results[\u0027content\u0027][\u0027message\u0027]))\\n  \",\"pre_processing_script\":\"inputs.qradar_reference_set_item_value = artifact.value\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0l9sl39\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0mtlrkh\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0fmnoop\" sourceRef=\"ServiceTask_0s8cvaw\" targetRef=\"ExclusiveGateway_0bgk3zp\"/\u003e\u003cendEvent id=\"EndEvent_0a7jg66\"\u003e\u003cincoming\u003eSequenceFlow_0mtlrkh\u003c/incoming\u003e\u003cincoming\u003eSequenceFlow_0fx5xnt\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0mtlrkh\" sourceRef=\"ServiceTask_0sdg8b5\" targetRef=\"EndEvent_0a7jg66\"/\u003e\u003cexclusiveGateway id=\"ExclusiveGateway_0bgk3zp\"\u003e\u003cincoming\u003eSequenceFlow_0fmnoop\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0l9sl39\u003c/outgoing\u003e\u003coutgoing\u003eSequenceFlow_0fx5xnt\u003c/outgoing\u003e\u003c/exclusiveGateway\u003e\u003csequenceFlow id=\"SequenceFlow_0l9sl39\" name=\"Success\" sourceRef=\"ExclusiveGateway_0bgk3zp\" targetRef=\"ServiceTask_0sdg8b5\"\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e\u003c![CDATA[{\"conditions\":[{\"evaluation_id\":1,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"script_text\":\"#Enter supplemental script\\n#Variables instantiated in this editor are available\\n#for use in the expression above\",\"final_expression_text\":\"workflow.properties.delete_opr[\u0027status_code\u0027] == 200\",\"language\":\"python\"}}],\"custom_condition\":\"\",\"logic_type\":\"all\",\"script_language\":null}]]\u003e\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003csequenceFlow id=\"SequenceFlow_0fx5xnt\" name=\"Fail\" sourceRef=\"ExclusiveGateway_0bgk3zp\" targetRef=\"EndEvent_0a7jg66\"\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e\u003c![CDATA[{\"conditions\":[{\"evaluation_id\":1,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"final_expression_text\":\"workflow.properties.delete_opr[\u0027status_code\u0027] != 200\",\"language\":\"python\"}}],\"custom_condition\":\"\",\"logic_type\":\"all\",\"script_language\":null}]]\u003e\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0xudfmv\"\u003e\u003ctext\u003e\u003c![CDATA[Remove it from the Suspect list\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0k0dbb6\" sourceRef=\"ServiceTask_0s8cvaw\" targetRef=\"TextAnnotation_0xudfmv\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1hyf96d\"\u003e\u003ctext\u003e\u003c![CDATA[Add it to the Blocked list\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_00ofrue\" sourceRef=\"ServiceTask_0sdg8b5\" targetRef=\"TextAnnotation_1hyf96d\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"202\" y=\"168\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"197\" y=\"203\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"207\" xsi:type=\"omgdc:Point\" y=\"197\"/\u003e\u003comgdi:waypoint x=\"159\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0s8cvaw\" id=\"ServiceTask_0s8cvaw_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"323.36354056902\" y=\"146\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1hanlo3\" id=\"SequenceFlow_1hanlo3_di\"\u003e\u003comgdi:waypoint x=\"238\" xsi:type=\"omgdc:Point\" y=\"186\"/\u003e\u003comgdi:waypoint x=\"323\" xsi:type=\"omgdc:Point\" y=\"186\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"280.5\" y=\"164.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0sdg8b5\" id=\"ServiceTask_0sdg8b5_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"588\" y=\"146\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0fmnoop\" id=\"SequenceFlow_0fmnoop_di\"\u003e\u003comgdi:waypoint x=\"423\" xsi:type=\"omgdc:Point\" y=\"186\"/\u003e\u003comgdi:waypoint x=\"457\" xsi:type=\"omgdc:Point\" y=\"186\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"395\" y=\"164.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0a7jg66\" id=\"EndEvent_0a7jg66_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"762\" y=\"168\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"735\" y=\"207\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0mtlrkh\" id=\"SequenceFlow_0mtlrkh_di\"\u003e\u003comgdi:waypoint x=\"688\" xsi:type=\"omgdc:Point\" y=\"186\"/\u003e\u003comgdi:waypoint x=\"762\" xsi:type=\"omgdc:Point\" y=\"186\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"680\" y=\"164.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0xudfmv\" id=\"TextAnnotation_0xudfmv_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"323\" y=\"51.117705242334324\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0k0dbb6\" id=\"Association_0k0dbb6_di\"\u003e\u003comgdi:waypoint x=\"373\" xsi:type=\"omgdc:Point\" y=\"146\"/\u003e\u003comgdi:waypoint x=\"373\" xsi:type=\"omgdc:Point\" y=\"81\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1hyf96d\" id=\"TextAnnotation_1hyf96d_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"550\" y=\"51\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_00ofrue\" id=\"Association_00ofrue_di\"\u003e\u003comgdi:waypoint x=\"625\" xsi:type=\"omgdc:Point\" y=\"146\"/\u003e\u003comgdi:waypoint x=\"605\" xsi:type=\"omgdc:Point\" y=\"81\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ExclusiveGateway_0bgk3zp\" id=\"ExclusiveGateway_0bgk3zp_di\" isMarkerVisible=\"true\"\u003e\u003comgdc:Bounds height=\"50\" width=\"50\" x=\"457\" y=\"161\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"482\" y=\"214\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0l9sl39\" id=\"SequenceFlow_0l9sl39_di\"\u003e\u003comgdi:waypoint x=\"507\" xsi:type=\"omgdc:Point\" y=\"186\"/\u003e\u003comgdi:waypoint x=\"588\" xsi:type=\"omgdc:Point\" y=\"186\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"43\" x=\"526\" y=\"164\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0fx5xnt\" id=\"SequenceFlow_0fx5xnt_di\"\u003e\u003comgdi:waypoint x=\"482\" xsi:type=\"omgdc:Point\" y=\"211\"/\u003e\u003comgdi:waypoint x=\"482\" xsi:type=\"omgdc:Point\" y=\"292\"/\u003e\u003comgdi:waypoint x=\"780\" xsi:type=\"omgdc:Point\" y=\"292\"/\u003e\u003comgdi:waypoint x=\"780\" xsi:type=\"omgdc:Point\" y=\"204\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"20\" x=\"621\" y=\"270\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"qradar_move_item_to_different_ref_set\" isExecutable=\"true\" name=\"Example of moving QRadar item from one reference set to another\"\u003e\u003cdocumentation\u003eRemove an item from the QRadar reference set, \u201cSample Blocked IPs\u201d, and add it to reference set, \u201cSample Suspect IPs\u201d. Add a note to the Incident after completing each step.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1hanlo3\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0s8cvaw\" name=\"QRadar Delete Reference Set Item\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"a7dc3d26-ab97-44a3-b56a-e367315b08e0\"\u003e{\"inputs\":{},\"post_processing_script\":\"if results.status_code == 200:\\n  #Add a note\\n  incident.addNote(\\\"IP \\\" + artifact.value + \\\" removed successfully from Blocked list\\\")\\nelse:\\n  incident.addNote(u\\\"Failed to remove {} from Blocked list, message: {}\\\".format(artifact.value, results[\u0027content\u0027][\u0027message\u0027]))\",\"pre_processing_script\":\"inputs.qradar_reference_set_item_value = artifact.value\",\"result_name\":\"delete_opr\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1hanlo3\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0fmnoop\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1hanlo3\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0s8cvaw\"/\u003e\u003cserviceTask id=\"ServiceTask_0sdg8b5\" name=\"QRadar Add Reference Set Item\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"30b6899a-d015-48c3-8fd9-500788d4b437\"\u003e{\"inputs\":{},\"post_processing_script\":\"if results.status_code == 200:\\n  incident.addNote(u\\\"Successfully added {} to Suspected IPs\\\".format(artifact.value))\\nelse:\\n  incident.addNote(u\\\"Failed to add {} to Suspected IPs. Status code: {}, message: {}\\\".format(artifact.value, results.status_code, results[\u0027content\u0027][\u0027message\u0027]))\\n  \",\"pre_processing_script\":\"inputs.qradar_reference_set_item_value = artifact.value\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0l9sl39\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0mtlrkh\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0fmnoop\" sourceRef=\"ServiceTask_0s8cvaw\" targetRef=\"ExclusiveGateway_0bgk3zp\"/\u003e\u003cendEvent id=\"EndEvent_0a7jg66\"\u003e\u003cincoming\u003eSequenceFlow_0mtlrkh\u003c/incoming\u003e\u003cincoming\u003eSequenceFlow_0fx5xnt\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0mtlrkh\" sourceRef=\"ServiceTask_0sdg8b5\" targetRef=\"EndEvent_0a7jg66\"/\u003e\u003cexclusiveGateway id=\"ExclusiveGateway_0bgk3zp\"\u003e\u003cincoming\u003eSequenceFlow_0fmnoop\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0l9sl39\u003c/outgoing\u003e\u003coutgoing\u003eSequenceFlow_0fx5xnt\u003c/outgoing\u003e\u003c/exclusiveGateway\u003e\u003csequenceFlow id=\"SequenceFlow_0l9sl39\" name=\"Success\" sourceRef=\"ExclusiveGateway_0bgk3zp\" targetRef=\"ServiceTask_0sdg8b5\"\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e\u003c![CDATA[{\"conditions\":[{\"evaluation_id\":1,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"script_text\":\"#Enter supplemental script\\n#Variables instantiated in this editor are available\\n#for use in the expression above\",\"final_expression_text\":\"workflow.properties.delete_opr[\u0027status_code\u0027] == 200\",\"language\":\"python\"}}],\"custom_condition\":\"\",\"logic_type\":\"all\",\"script_language\":null}]]\u003e\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003csequenceFlow id=\"SequenceFlow_0fx5xnt\" name=\"Fail\" sourceRef=\"ExclusiveGateway_0bgk3zp\" targetRef=\"EndEvent_0a7jg66\"\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e\u003c![CDATA[{\"conditions\":[{\"evaluation_id\":1,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"final_expression_text\":\"workflow.properties.delete_opr[\u0027status_code\u0027] != 200\",\"language\":\"python\"}}],\"custom_condition\":\"\",\"logic_type\":\"all\",\"script_language\":null}]]\u003e\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0xudfmv\"\u003e\u003ctext\u003e\u003c![CDATA[Remove it from the Suspect list\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0k0dbb6\" sourceRef=\"ServiceTask_0s8cvaw\" targetRef=\"TextAnnotation_0xudfmv\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1hyf96d\"\u003e\u003ctext\u003e\u003c![CDATA[Add it to the Blocked list\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_00ofrue\" sourceRef=\"ServiceTask_0sdg8b5\" targetRef=\"TextAnnotation_1hyf96d\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"202\" y=\"168\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"197\" y=\"203\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"207\" xsi:type=\"omgdc:Point\" y=\"197\"/\u003e\u003comgdi:waypoint x=\"159\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0s8cvaw\" id=\"ServiceTask_0s8cvaw_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"323.36354056902\" y=\"146\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1hanlo3\" id=\"SequenceFlow_1hanlo3_di\"\u003e\u003comgdi:waypoint x=\"238\" xsi:type=\"omgdc:Point\" y=\"186\"/\u003e\u003comgdi:waypoint x=\"323\" xsi:type=\"omgdc:Point\" y=\"186\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"280.5\" y=\"164.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0sdg8b5\" id=\"ServiceTask_0sdg8b5_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"588\" y=\"146\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0fmnoop\" id=\"SequenceFlow_0fmnoop_di\"\u003e\u003comgdi:waypoint x=\"423\" xsi:type=\"omgdc:Point\" y=\"186\"/\u003e\u003comgdi:waypoint x=\"457\" xsi:type=\"omgdc:Point\" y=\"186\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"395\" y=\"164.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0a7jg66\" id=\"EndEvent_0a7jg66_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"762\" y=\"168\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"735\" y=\"207\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0mtlrkh\" id=\"SequenceFlow_0mtlrkh_di\"\u003e\u003comgdi:waypoint x=\"688\" xsi:type=\"omgdc:Point\" y=\"186\"/\u003e\u003comgdi:waypoint x=\"762\" xsi:type=\"omgdc:Point\" y=\"186\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"680\" y=\"164.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0xudfmv\" id=\"TextAnnotation_0xudfmv_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"323\" y=\"51.117705242334324\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0k0dbb6\" id=\"Association_0k0dbb6_di\"\u003e\u003comgdi:waypoint x=\"373\" xsi:type=\"omgdc:Point\" y=\"146\"/\u003e\u003comgdi:waypoint x=\"373\" xsi:type=\"omgdc:Point\" y=\"81\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1hyf96d\" id=\"TextAnnotation_1hyf96d_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"550\" y=\"51\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_00ofrue\" id=\"Association_00ofrue_di\"\u003e\u003comgdi:waypoint x=\"625\" xsi:type=\"omgdc:Point\" y=\"146\"/\u003e\u003comgdi:waypoint x=\"605\" xsi:type=\"omgdc:Point\" y=\"81\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ExclusiveGateway_0bgk3zp\" id=\"ExclusiveGateway_0bgk3zp_di\" isMarkerVisible=\"true\"\u003e\u003comgdc:Bounds height=\"50\" width=\"50\" x=\"457\" y=\"161\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"482\" y=\"214\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0l9sl39\" id=\"SequenceFlow_0l9sl39_di\"\u003e\u003comgdi:waypoint x=\"507\" xsi:type=\"omgdc:Point\" y=\"186\"/\u003e\u003comgdi:waypoint x=\"588\" xsi:type=\"omgdc:Point\" y=\"186\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"43\" x=\"526\" y=\"164\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0fx5xnt\" id=\"SequenceFlow_0fx5xnt_di\"\u003e\u003comgdi:waypoint x=\"482\" xsi:type=\"omgdc:Point\" y=\"211\"/\u003e\u003comgdi:waypoint x=\"482\" xsi:type=\"omgdc:Point\" y=\"292\"/\u003e\u003comgdi:waypoint x=\"780\" xsi:type=\"omgdc:Point\" y=\"292\"/\u003e\u003comgdi:waypoint x=\"780\" xsi:type=\"omgdc:Point\" y=\"204\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"20\" x=\"621\" y=\"270\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 7,
+      "content_version": 9,
       "creator_id": "77a37273-a484-4fd1-8d02-2c28513d5343",
       "description": "Remove an item from the QRadar reference set, \u201cSample Blocked IPs\u201d, and add it to reference set, \u201cSample Suspect IPs\u201d. Add a note to the Incident after completing each step.",
       "export_key": "qradar_move_item_to_different_ref_set",
-      "last_modified_by": "77a37273-a484-4fd1-8d02-2c28513d5343",
-      "last_modified_time": 1628174412984,
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1628188888770,
       "name": "Example of moving QRadar item from one reference set to another",
-      "object_type": "artifact",
+      "object_type": "incident",
       "programmatic_name": "qradar_move_item_to_different_ref_set",
       "tags": [],
       "uuid": "e50114e6-576d-40ca-a56b-20a2a8c38800",
-      "workflow_id": 72
+      "workflow_id": 95
     },
     {
       "actions": [],
       "content": {
-        "version": 7,
-        "workflow_id": "qradar_find_reference_set_item",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"qradar_find_reference_set_item\" isExecutable=\"true\" name=\"Example of finding an item from a QRadar reference set\"\u003e\u003cdocumentation\u003e\u003c![CDATA[Look for an item in the QRadar reference set \"Sample Blocked IPs\", and add a note to the Incident.]]\u003e\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0nhi3vv\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1t6axxy\" name=\"QRadar Find Reference Set Item\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"9d817ee3-a8cf-4a0a-a8a6-969f6090f276\"\u003e{\"inputs\":{\"aa5e211d-b5e0-4289-88bb-47595afac385\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"Sample Blocked IPs\"}}},\"post_processing_script\":\"if results.found == \\\"True\\\":\\n  incident.addNote(u\\\"Found IP: {} in list: {}.\\\".format(artifact.value, results[\u0027content\u0027][\u0027name\u0027]))\\nelse:\\n  incident.addNote(\\\"IP:{} not found in list.\\\".format(artifact.value))\\n  \\n\\\"\\\"\\\"\\n{\\n  \u0027status_code\u0027: 200,\\n  \u0027found\u0027: \u0027True\u0027,\\n  \u0027content\u0027: {\\n    \u0027time_to_live\u0027: \u002720 years 4 mons 22 days 0 hours 0 mins 0.00 secs\u0027,\\n    \u0027timeout_type\u0027: \u0027FIRST_SEEN\u0027,\\n    \u0027number_of_elements\u0027: 2,\\n    \u0027data\u0027: [\\n      {\\n        \u0027last_seen\u0027: 1594386447789,\\n        \u0027first_seen\u0027: 1594386447789,\\n        \u0027source\u0027: \u0027reference data api\u0027,\\n        \u0027value\u0027: \u0027169.254.3.2\u0027,\\n        \u0027domain_id\u0027: None\\n      },\\n      {\\n        \u0027last_seen\u0027: 1595364392956,\\n        \u0027first_seen\u0027: 1595364392956,\\n        \u0027source\u0027: \u0027reference data api\u0027,\\n        \u0027value\u0027: \u00271.2.3.4\u0027,\\n        \u0027domain_id\u0027: None\\n      }\\n    ],\\n    \u0027creation_time\u0027: 1587585219697,\\n    \u0027name\u0027: \u0027Sample Blocked IPs\u0027,\\n    \u0027namespace\u0027: \u0027SHARED\u0027,\\n    \u0027element_type\u0027: \u0027IP\u0027,\\n    \u0027collection_id\u0027: 32\\n  }\\n}\\n\\\"\\\"\\\"\",\"pre_processing_script\":\"inputs.qradar_reference_set_item_value = artifact.value\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0nhi3vv\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0d0pa4v\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0nhi3vv\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1t6axxy\"/\u003e\u003cendEvent id=\"EndEvent_1c46ba2\"\u003e\u003cincoming\u003eSequenceFlow_0d0pa4v\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0d0pa4v\" sourceRef=\"ServiceTask_1t6axxy\" targetRef=\"EndEvent_1c46ba2\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"265\" y=\"183\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"260\" y=\"218\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"267\" xsi:type=\"omgdc:Point\" y=\"207\"/\u003e\u003comgdi:waypoint x=\"175\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1t6axxy\" id=\"ServiceTask_1t6axxy_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"356\" y=\"161\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0nhi3vv\" id=\"SequenceFlow_0nhi3vv_di\"\u003e\u003comgdi:waypoint x=\"301\" xsi:type=\"omgdc:Point\" y=\"201\"/\u003e\u003comgdi:waypoint x=\"356\" xsi:type=\"omgdc:Point\" y=\"201\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"283.5\" y=\"179.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1c46ba2\" id=\"EndEvent_1c46ba2_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"507\" y=\"183\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"480\" y=\"222\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0d0pa4v\" id=\"SequenceFlow_0d0pa4v_di\"\u003e\u003comgdi:waypoint x=\"456\" xsi:type=\"omgdc:Point\" y=\"201\"/\u003e\u003comgdi:waypoint x=\"507\" xsi:type=\"omgdc:Point\" y=\"201\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"436.5\" y=\"179.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "version": 10,
+        "workflow_id": "qradar_search_event_offense",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"qradar_search_event_offense\" isExecutable=\"true\" name=\"Example of searching QRadar events using offense id\"\u003e\u003cdocumentation\u003eUse the qradar_id field of the incident to search qradar events, and update the data table, qradar_offense_event, with the first 5 results.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_026bbbi\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1gto8k0\" name=\"QRadar Search\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"c3e6f6cc-8905-41e6-9841-ebe99845d778\"\u003e{\"inputs\":{\"048ba39a-ab94-4d1f-a0f8-2462de3c044c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_content_value\":{\"format\":\"text\",\"content\":\"SELECT %param1% FROM events WHERE INOFFENSE(%param2%) LAST %param3% MINUTES\"}}},\"01ed4652-fe61-4dbf-bc83-f81c62c5563c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"DATEFORMAT(starttime, \u0027YYYY-MM-dd HH:mm\u0027) as StartTime, CATEGORYNAME(category), LOGSOURCENAME(logsourceid), PROTOCOLNAME(protocolid), RULENAME(creeventlist)\"}},\"b6053690-d7b2-4204-b48a-f86503b419d9\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"43320\"}},\"c33fbe1d-125c-4a79-82e8-6608d1c7bb5e\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"number_value\":1}},\"d7a544ff-689b-4f15-b3c1-a7ebd20bbf3b\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"54c4eb52-d955-4e05-9f76-c3819853ff68\"}}},\"post_processing_script\":\"for event in results.events:\\n  qradar_event = incident.addRow(\\\"qradar_offense_event\\\")\\n  qradar_event.start_time = event.StartTime\\n  qradar_event.category = event.categoryname_category\\n  qradar_event.log_source = event.logsourcename_logsourceid\\n  qradar_event.protocol = event.protocolname_protocolid\\n  qradar_event.rule = event.rulename_creeventlist\\n  qradar_event.qradar_label = rule.properties.qradar_label\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.qradar_query_param2 = incident.properties.qradar_id\\ninputs.qradar_label = rule.properties.qradar_label\\ninputs.qradar_query_all_results = rule.properties.qradar_query_all_results\\nif rule.properties.qradar_query_all_results:\\n  inputs.qradar_query_all_results = rule.properties.qradar_query_all_results\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_026bbbi\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0cs0bcr\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_026bbbi\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1gto8k0\"/\u003e\u003cendEvent id=\"EndEvent_0ehbn4w\"\u003e\u003cincoming\u003eSequenceFlow_0cs0bcr\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0cs0bcr\" sourceRef=\"ServiceTask_1gto8k0\" targetRef=\"EndEvent_0ehbn4w\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0xq6ex9\"\u003e\u003ctext\u003e\u003c![CDATA[Return results in qradar_offense_event datatable\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0fkdkst\" sourceRef=\"ServiceTask_1gto8k0\" targetRef=\"TextAnnotation_0xq6ex9\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"366\" y=\"174\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"361\" y=\"209\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"247\" y=\"239\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"369\" xsi:type=\"omgdc:Point\" y=\"201\"/\u003e\u003comgdi:waypoint x=\"316\" xsi:type=\"omgdc:Point\" y=\"239\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1gto8k0\" id=\"ServiceTask_1gto8k0_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"482.0945157526254\" y=\"152\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_026bbbi\" id=\"SequenceFlow_026bbbi_di\"\u003e\u003comgdi:waypoint x=\"402\" xsi:type=\"omgdc:Point\" y=\"192\"/\u003e\u003comgdi:waypoint x=\"482\" xsi:type=\"omgdc:Point\" y=\"192\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"442\" y=\"170\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0ehbn4w\" id=\"EndEvent_0ehbn4w_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"662\" y=\"174\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"635\" y=\"213\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0cs0bcr\" id=\"SequenceFlow_0cs0bcr_di\"\u003e\u003comgdi:waypoint x=\"582\" xsi:type=\"omgdc:Point\" y=\"192\"/\u003e\u003comgdi:waypoint x=\"662\" xsi:type=\"omgdc:Point\" y=\"192\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"577\" y=\"170.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0xq6ex9\" id=\"TextAnnotation_0xq6ex9_di\"\u003e\u003comgdc:Bounds height=\"59\" width=\"136\" x=\"589\" y=\"67\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0fkdkst\" id=\"Association_0fkdkst_di\"\u003e\u003comgdi:waypoint x=\"577\" xsi:type=\"omgdc:Point\" y=\"157\"/\u003e\u003comgdi:waypoint x=\"619\" xsi:type=\"omgdc:Point\" y=\"126\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 7,
+      "content_version": 10,
       "creator_id": "77a37273-a484-4fd1-8d02-2c28513d5343",
-      "description": "Look for an item in the QRadar reference set \"Sample Blocked IPs\", and add a note to the Incident.",
+      "description": "Use the qradar_id field of the incident to search qradar events, and update the data table, qradar_offense_event, with the first 5 results.",
+      "export_key": "qradar_search_event_offense",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1628188911013,
+      "name": "Example of searching QRadar events using offense id",
+      "object_type": "incident",
+      "programmatic_name": "qradar_search_event_offense",
+      "tags": [],
+      "uuid": "e37d2dae-a71f-4b2f-8830-b03ed320fdff",
+      "workflow_id": 77
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 11,
+        "workflow_id": "example_qradar__delete_reference_table_item_dt",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_qradar__delete_reference_table_item_dt\" isExecutable=\"true\" name=\"Example: QRadar - Delete Reference Table Item DT\"\u003e\u003cdocumentation\u003eAn example workflow that takes in a Reference Table name, an inner key, an outer key and a value to delete for the table\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1fpmqih\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0737k88\" name=\"QRadar Reference Table Delete Ite...\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"10b6522f-ffc5-4742-8174-06ffe108aaf7\"\u003e{\"inputs\":{},\"post_processing_script\":\"note = u\\\"\\\"\\\"QRadar Label: {}\\nOuter key: {}\\nInner key: {}\\nEntry: {}\\nReference table: {}\\\"\\\"\\\".format(results.inputs.qradar_label,\\n                              results.inputs.qradar_reference_table_item_outer_key,\\n                              results.inputs.qradar_reference_table_item_inner_key,\\n                              results.inputs.qradar_reference_table_item_value, \\n                              results.inputs.qradar_reference_table_name)\\nif results.success:\\n    incident.addNote(u\\\"Successful delete\\\\n{}\\\".format(note))\\n    row[\u0027status\u0027] = \\\"deleted\\\"\\nelse:\\n    incident.addNote(u\\\"Failure to delete item: {}\\\\n{}\\\".format(results[\u0027reason\u0027], note))\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.qradar_reference_table_name = row.table\\ninputs.qradar_reference_table_item_outer_key = row.outer_key\\ninputs.qradar_reference_table_item_inner_key = row.inner_key\\ninputs.qradar_reference_table_item_value = row.value\\ninputs.qradar_label = row.qradar_label\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1fpmqih\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1dw21s8\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1fpmqih\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0737k88\"/\u003e\u003cendEvent id=\"EndEvent_0tt8h3e\"\u003e\u003cincoming\u003eSequenceFlow_1dw21s8\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1dw21s8\" sourceRef=\"ServiceTask_0737k88\" targetRef=\"EndEvent_0tt8h3e\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0nykfdr\"\u003e\u003ctext\u003e\u003c![CDATA[Result placed in a row and datatable row is set to \u0027deleted\u0027\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0dgavrh\" sourceRef=\"ServiceTask_0737k88\" targetRef=\"TextAnnotation_0nykfdr\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0737k88\" id=\"ServiceTask_0737k88_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"258\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1fpmqih\" id=\"SequenceFlow_1fpmqih_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"258\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"228\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0tt8h3e\" id=\"EndEvent_0tt8h3e_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"416\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"434\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1dw21s8\" id=\"SequenceFlow_1dw21s8_di\"\u003e\u003comgdi:waypoint x=\"358\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"416\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"387\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0nykfdr\" id=\"TextAnnotation_0nykfdr_di\"\u003e\u003comgdc:Bounds height=\"53\" width=\"242\" x=\"347\" y=\"76\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0dgavrh\" id=\"Association_0dgavrh_di\"\u003e\u003comgdi:waypoint x=\"357\" xsi:type=\"omgdc:Point\" y=\"175\"/\u003e\u003comgdi:waypoint x=\"428\" xsi:type=\"omgdc:Point\" y=\"129\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 11,
+      "creator_id": "77a37273-a484-4fd1-8d02-2c28513d5343",
+      "description": "An example workflow that takes in a Reference Table name, an inner key, an outer key and a value to delete for the table",
+      "export_key": "example_qradar__delete_reference_table_item_dt",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1628188967793,
+      "name": "Example: QRadar - Delete Reference Table Item DT",
+      "object_type": "qradar_reference_table_queried_rows",
+      "programmatic_name": "example_qradar__delete_reference_table_item_dt",
+      "tags": [],
+      "uuid": "6338645d-3f08-4acb-b49d-f46fede6d8cd",
+      "workflow_id": 80
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 11,
+        "workflow_id": "qradar_add_reference_set_item",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"qradar_add_reference_set_item\" isExecutable=\"true\" name=\"Example of adding an item to QRadar reference set\"\u003e\u003cdocumentation\u003eAdd an IP address artifact to the QRadar reference set.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0drmuq6\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1tys7ps\" name=\"QRadar Add Reference Set Item\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"30b6899a-d015-48c3-8fd9-500788d4b437\"\u003e{\"inputs\":{},\"post_processing_script\":\"if results.status_code == 200:\\n  incident.addNote(u\\\"IP: {} added to reference set: {} on QRadar server: {}\\\".format(rule.properties.qradar_reference_set_item_value, results[\u0027content\u0027][\u0027name\u0027], rule.properties.qradar_label))\\nelse:\\n  incident.addNote(u\\\"Failed to add IP: {} to reference set on QRadar server: {}. Status Code: {}, message: {}\\\".format(rule.properties.qradar_reference_set_item_value, rule.properties.qradar_label, results.status_code, results[\u0027content\u0027][\u0027message\u0027]))\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.qradar_reference_set_item_value = rule.properties.qradar_reference_set_item_value\\ninputs.qradar_reference_set_name = rule.properties.qradar_reference_set_name\\ninputs.qradar_label = rule.properties.qradar_label\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0drmuq6\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0dhxmmd\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0drmuq6\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1tys7ps\"/\u003e\u003cendEvent id=\"EndEvent_06sofyi\"\u003e\u003cincoming\u003eSequenceFlow_0dhxmmd\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0dhxmmd\" sourceRef=\"ServiceTask_1tys7ps\" targetRef=\"EndEvent_06sofyi\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0xiyl1t\"\u003e\u003ctext\u003e\u003c![CDATA[Add results as an incident note\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_19xkql8\" sourceRef=\"ServiceTask_1tys7ps\" targetRef=\"TextAnnotation_0xiyl1t\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"205\" y=\"166\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"200\" y=\"201\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"209\" xsi:type=\"omgdc:Point\" y=\"195\"/\u003e\u003comgdi:waypoint x=\"159\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1tys7ps\" id=\"ServiceTask_1tys7ps_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"303\" y=\"144\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0drmuq6\" id=\"SequenceFlow_0drmuq6_di\"\u003e\u003comgdi:waypoint x=\"241\" xsi:type=\"omgdc:Point\" y=\"184\"/\u003e\u003comgdi:waypoint x=\"303\" xsi:type=\"omgdc:Point\" y=\"184\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"272\" y=\"162\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_06sofyi\" id=\"EndEvent_06sofyi_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"473\" y=\"166\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"446\" y=\"205\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0dhxmmd\" id=\"SequenceFlow_0dhxmmd_di\"\u003e\u003comgdi:waypoint x=\"403\" xsi:type=\"omgdc:Point\" y=\"184\"/\u003e\u003comgdi:waypoint x=\"473\" xsi:type=\"omgdc:Point\" y=\"184\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"393\" y=\"162.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0xiyl1t\" id=\"TextAnnotation_0xiyl1t_di\"\u003e\u003comgdc:Bounds height=\"47\" width=\"124\" x=\"403\" y=\"71\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_19xkql8\" id=\"Association_19xkql8_di\"\u003e\u003comgdi:waypoint x=\"398\" xsi:type=\"omgdc:Point\" y=\"149\"/\u003e\u003comgdi:waypoint x=\"436\" xsi:type=\"omgdc:Point\" y=\"118\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 11,
+      "creator_id": "77a37273-a484-4fd1-8d02-2c28513d5343",
+      "description": "Add an IP address artifact to the QRadar reference set.",
+      "export_key": "qradar_add_reference_set_item",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1628188822064,
+      "name": "Example of adding an item to QRadar reference set",
+      "object_type": "incident",
+      "programmatic_name": "qradar_add_reference_set_item",
+      "tags": [],
+      "uuid": "928190bc-cf9e-49e5-9c95-cd0bae9d9ac6",
+      "workflow_id": 91
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 13,
+        "workflow_id": "example_qradar__add_reference_table_item_dt",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_qradar__add_reference_table_item_dt\" isExecutable=\"true\" name=\"Example: QRadar - Add Reference Table Item DT\"\u003e\u003cdocumentation\u003eAdd a reference table item based on an existing named reference table\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1yzers7\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1ovaala\" name=\"QRadar Reference Table Add Item\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"2843283c-4d98-4c71-b2e3-b0636c7a0df8\"\u003e{\"inputs\":{},\"post_processing_script\":\"note = u\\\"\\\"\\\"QRadar Label: {}\\nOuter key: {}\\nInner key: {}\\nEntry: {}\\nReference table: {}\\\"\\\"\\\".format(results.inputs.qradar_label,\\n                              results.inputs.qradar_reference_table_item_outer_key,\\n                              results.inputs.qradar_reference_table_item_inner_key,\\n                              results.inputs.qradar_reference_table_item_value, \\n                              results.inputs.qradar_reference_table_name)\\nif results.success:\\n    incident.addNote(u\\\"Successful add\\\\n{}\\\".format(note))\\n    row.number_of_elements = str(results[\\\"content\\\"][\\\"content\\\"][\\\"number_of_elements\\\"])\\nelse:\\n    incident.addNote(u\\\"Failure to add item: {}\\\\n{}\\\".format(results[\u0027reason\u0027], note))\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"\\n# Example inputs \\ninputs.qradar_reference_table_name = row.reference_table\\ninputs.qradar_reference_table_item_outer_key = rule.properties.qradar_ref_table_outer_key or \\\"1\\\"\\ninputs.qradar_reference_table_item_inner_key = rule.properties.qradar_ref_table_inner_key or \\\"city\\\"\\ninputs.qradar_reference_table_item_value = rule.properties.qradar_ref_table_update\\ninputs.qradar_label = row.qradar_label\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1yzers7\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1jnyry3\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1yzers7\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1ovaala\"/\u003e\u003cendEvent id=\"EndEvent_0kkxsgk\"\u003e\u003cincoming\u003eSequenceFlow_1jnyry3\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1jnyry3\" sourceRef=\"ServiceTask_1ovaala\" targetRef=\"EndEvent_0kkxsgk\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0n4muq5\"\u003e\u003ctext\u003e\u003c![CDATA[Result placed in a note\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0rhmzw8\" sourceRef=\"ServiceTask_1ovaala\" targetRef=\"TextAnnotation_0n4muq5\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1ovaala\" id=\"ServiceTask_1ovaala_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"318\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1yzers7\" id=\"SequenceFlow_1yzers7_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"318\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"213\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0kkxsgk\" id=\"EndEvent_0kkxsgk_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"526\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"499\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1jnyry3\" id=\"SequenceFlow_1jnyry3_di\"\u003e\u003comgdi:waypoint x=\"418\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"526\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"472\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0n4muq5\" id=\"TextAnnotation_0n4muq5_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"410\" y=\"81\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0rhmzw8\" id=\"Association_0rhmzw8_di\"\u003e\u003comgdi:waypoint x=\"401\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"447\" xsi:type=\"omgdc:Point\" y=\"111\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 13,
+      "creator_id": "77a37273-a484-4fd1-8d02-2c28513d5343",
+      "description": "Add a reference table item based on an existing named reference table",
+      "export_key": "example_qradar__add_reference_table_item_dt",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1628188954065,
+      "name": "Example: QRadar - Add Reference Table Item DT",
+      "object_type": "qradar_reference_table",
+      "programmatic_name": "example_qradar__add_reference_table_item_dt",
+      "tags": [],
+      "uuid": "b6056f90-c979-417a-b18e-dfaa661e24f0",
+      "workflow_id": 74
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 14,
+        "workflow_id": "qradar_find_reference_set_item",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"qradar_find_reference_set_item\" isExecutable=\"true\" name=\"Example of finding an item from a QRadar reference set\"\u003e\u003cdocumentation\u003eLook for an item in the QRadar reference set, and add a note to the Incident.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0nhi3vv\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1t6axxy\" name=\"QRadar Find Reference Set Item\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"9d817ee3-a8cf-4a0a-a8a6-969f6090f276\"\u003e{\"inputs\":{},\"post_processing_script\":\"if results.found == \\\"True\\\":\\n  incident.addNote(u\\\"Found IP: {} in list: {} on QRadar server: {}.\\\".format(rule.properties.qradar_reference_set_item_value, results[\u0027content\u0027][\u0027name\u0027], rule.properties.qradar_label))\\nelse:\\n  incident.addNote(\\\"IP: {} not found in list on QRadar server: {}.\\\".format(rule.properties.qradar_reference_set_item_value, rule.properties.qradar_label))\\n  \\n\\\"\\\"\\\"\\n{\\n  \u0027status_code\u0027: 200,\\n  \u0027found\u0027: \u0027True\u0027,\\n  \u0027content\u0027: {\\n    \u0027time_to_live\u0027: \u002720 years 4 mons 22 days 0 hours 0 mins 0.00 secs\u0027,\\n    \u0027timeout_type\u0027: \u0027FIRST_SEEN\u0027,\\n    \u0027number_of_elements\u0027: 2,\\n    \u0027data\u0027: [\\n      {\\n        \u0027last_seen\u0027: 1594386447789,\\n        \u0027first_seen\u0027: 1594386447789,\\n        \u0027source\u0027: \u0027reference data api\u0027,\\n        \u0027value\u0027: \u0027169.254.3.2\u0027,\\n        \u0027domain_id\u0027: None\\n      },\\n      {\\n        \u0027last_seen\u0027: 1595364392956,\\n        \u0027first_seen\u0027: 1595364392956,\\n        \u0027source\u0027: \u0027reference data api\u0027,\\n        \u0027value\u0027: \u00271.2.3.4\u0027,\\n        \u0027domain_id\u0027: None\\n      }\\n    ],\\n    \u0027creation_time\u0027: 1587585219697,\\n    \u0027name\u0027: \u0027Sample Blocked IPs\u0027,\\n    \u0027namespace\u0027: \u0027SHARED\u0027,\\n    \u0027element_type\u0027: \u0027IP\u0027,\\n    \u0027collection_id\u0027: 32\\n  }\\n}\\n\\\"\\\"\\\"\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.qradar_reference_set_item_value = rule.properties.qradar_reference_set_item_value\\ninputs.qradar_label = rule.properties.qradar_label\\ninputs.qradar_reference_set_name = rule.properties.qradar_reference_set_name\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0nhi3vv\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0d0pa4v\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0nhi3vv\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1t6axxy\"/\u003e\u003cendEvent id=\"EndEvent_1c46ba2\"\u003e\u003cincoming\u003eSequenceFlow_0d0pa4v\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0d0pa4v\" sourceRef=\"ServiceTask_1t6axxy\" targetRef=\"EndEvent_1c46ba2\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"265\" y=\"183\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"260\" y=\"218\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"267\" xsi:type=\"omgdc:Point\" y=\"207\"/\u003e\u003comgdi:waypoint x=\"175\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1t6axxy\" id=\"ServiceTask_1t6axxy_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"356\" y=\"161\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0nhi3vv\" id=\"SequenceFlow_0nhi3vv_di\"\u003e\u003comgdi:waypoint x=\"301\" xsi:type=\"omgdc:Point\" y=\"201\"/\u003e\u003comgdi:waypoint x=\"356\" xsi:type=\"omgdc:Point\" y=\"201\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"283.5\" y=\"179.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1c46ba2\" id=\"EndEvent_1c46ba2_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"507\" y=\"183\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"480\" y=\"222\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0d0pa4v\" id=\"SequenceFlow_0d0pa4v_di\"\u003e\u003comgdi:waypoint x=\"456\" xsi:type=\"omgdc:Point\" y=\"201\"/\u003e\u003comgdi:waypoint x=\"507\" xsi:type=\"omgdc:Point\" y=\"201\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"436.5\" y=\"179.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 14,
+      "creator_id": "77a37273-a484-4fd1-8d02-2c28513d5343",
+      "description": "Look for an item in the QRadar reference set, and add a note to the Incident.",
       "export_key": "qradar_find_reference_set_item",
-      "last_modified_by": "77a37273-a484-4fd1-8d02-2c28513d5343",
-      "last_modified_time": 1628174414251,
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1628188882063,
       "name": "Example of finding an item from a QRadar reference set",
-      "object_type": "artifact",
+      "object_type": "incident",
       "programmatic_name": "qradar_find_reference_set_item",
       "tags": [],
       "uuid": "798045eb-cf7d-4ad6-b8fd-dce910b3192e",
-      "workflow_id": 76
+      "workflow_id": 92
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 11,
+        "workflow_id": "example_qradar__update_this_reference_table_item",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_qradar__update_this_reference_table_item\" isExecutable=\"true\" name=\"Example: Qradar - Update this Reference Table Item DT\"\u003e\u003cdocumentation\u003eUpdate an existing reference table item. If it does not exist, it will be added\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_16hfg6o\u003c/outgoing\u003e\u003c/startEvent\u003e\u003csequenceFlow id=\"SequenceFlow_16hfg6o\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1gd7hlv\"/\u003e\u003cendEvent id=\"EndEvent_0s8l4hf\"\u003e\u003cincoming\u003eSequenceFlow_1nnixb6\u003c/incoming\u003e\u003c/endEvent\u003e\u003cserviceTask id=\"ServiceTask_1gd7hlv\" name=\"QRadar Reference Table Update Ite...\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"2f0ec2b9-0266-42bc-ac4c-71ddfe593344\"\u003e{\"inputs\":{},\"post_processing_script\":\"note = u\\\"\\\"\\\"QRadar Label: {}\\nOuter key: {}\\nInner key: {}\\nEntry: {}\\nReference table: {}\\\"\\\"\\\".format(results.inputs.qradar_label,\\n                              results.inputs.qradar_reference_table_item_outer_key,\\n                              results.inputs.qradar_reference_table_item_inner_key,\\n                              results.inputs.qradar_reference_table_item_value, \\n                              results.inputs.qradar_reference_table_name)\\nif results.success:\\n    incident.addNote(u\\\"Successful updated\\\\n{}\\\".format(note))\\n    row[\u0027status\u0027] = \u0027updated\u0027\\n    row[\u0027value\u0027] = results.inputs.qradar_reference_table_item_value\\nelse:\\n    incident.addNote(u\\\"Failure to updated item: {}\\\\n{}\\\".format(results[\u0027reason\u0027], note))\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.qradar_reference_table_name = row.table\\ninputs.qradar_reference_table_item_outer_key = row.outer_key\\ninputs.qradar_reference_table_item_inner_key = row.inner_key\\ninputs.qradar_label = row.qradar_label\\n\\nif rule.properties.qradar_ref_table_update:\\n  inputs.qradar_reference_table_item_value = rule.properties.qradar_ref_table_update\\nelse:\\n  inputs.qradar_reference_table_item_value = \\\"This is an example\\\"\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_16hfg6o\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1nnixb6\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1nnixb6\" sourceRef=\"ServiceTask_1gd7hlv\" targetRef=\"EndEvent_0s8l4hf\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0bzrivy\"\u003e\u003ctext\u003e\u003c![CDATA[Result added as a note\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0jp4p4y\" sourceRef=\"ServiceTask_1gd7hlv\" targetRef=\"TextAnnotation_0bzrivy\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_16hfg6o\" id=\"SequenceFlow_16hfg6o_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"311\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"209.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0s8l4hf\" id=\"EndEvent_0s8l4hf_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"491\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"464\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1gd7hlv\" id=\"ServiceTask_1gd7hlv_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"311\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1nnixb6\" id=\"SequenceFlow_1nnixb6_di\"\u003e\u003comgdi:waypoint x=\"411\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"491\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"406\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0bzrivy\" id=\"TextAnnotation_0bzrivy_di\"\u003e\u003comgdc:Bounds height=\"42\" width=\"119\" x=\"403\" y=\"71\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0jp4p4y\" id=\"Association_0jp4p4y_di\"\u003e\u003comgdi:waypoint x=\"397\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"444\" xsi:type=\"omgdc:Point\" y=\"113\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 11,
+      "creator_id": "77a37273-a484-4fd1-8d02-2c28513d5343",
+      "description": "Update an existing reference table item. If it does not exist, it will be added",
+      "export_key": "example_qradar__update_this_reference_table_item",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1628189016705,
+      "name": "Example: Qradar - Update this Reference Table Item DT",
+      "object_type": "qradar_reference_table_queried_rows",
+      "programmatic_name": "example_qradar__update_this_reference_table_item",
+      "tags": [],
+      "uuid": "4f260795-608f-431c-a851-ef39679e2f60",
+      "workflow_id": 82
     }
   ],
   "workspaces": []
