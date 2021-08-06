@@ -96,7 +96,7 @@ If deploying to a Resilient platform with an integration server, the requirement
   | ---- | ----------- |
   | Org Data | Read |
   | Function | Read |
-  | Incident | Read, Edit, Create |
+  | Incident | Read, Edit, Create, Owner, Status |
   | Incident Notes | Edit |
 
 The following Resilient platform guides provide additional information:
@@ -132,6 +132,7 @@ Python package dependencies. Additional packages dependencies may exist for each
 "simplejson"
 ```
 
+This package supports Python 3.6+ environments.
 ---
 
 ## Sentinel Configuration
@@ -582,6 +583,21 @@ sentinel_incident_entities
 ## Custom Templates
 Below are examples of templates for creating, updating, and closing Resilient incidents. Customize these templates and refer to them in our app.config file.
 
+Each template should be reviewed for correctness in your enterprise.
+For instance, closing a SOAR incident may include additional custom fields which the default template
+does not include. Or, remove the `owner_id` mapping entry entirely.
+
+In addition, the `incident_creation_template` and `incident_update_template` includes the following
+mapping:
+
+```
+  {# if Sentinel users are different than SOAR users, consider using a mapping table using resilient_substitute: #}
+  {# {{ properties.owner.assignedTo|resilient_substitute('{"sentinel_user1@co.com": "soar_user1@ent.com", "sentinel_user2@co.com": "soar_user2@ent.com"}') }} #}
+  "owner_id": "{{ properties.owner.assignedTo }}",
+```
+
+If your Sentinel login users differ from SOAR users, modify the `owner_id` mapping to use a substitution map as indicated in the jinja comment.
+
 ### incident_create_template.jinja
 ```
 {
@@ -593,6 +609,9 @@ Below are examples of templates for creating, updating, and closing Resilient in
     "format": "text",
     "content": "{{ properties.description|replace('"', '\"') }}"
   },
+  {# if Sentinel users are different than SOAR users, consider using a mapping table using resilient_substitute: #}
+  {# "owner_id": "{{ properties.owner.userPrincipalName|resilient_substitute('{"sentinel_user1@co.com": "soar_user1@ent.com", "sentinel_user2@co.com": "soar_user2@ent.com", "DEFAULT": "default_user@ent.com" }') }}", #}
+  "owner_id": "{{ properties.owner.assignedTo }}",
   "plan_status": "{{ properties.status|resilient_substitute('{"Closed": "C", "Active": "A", "New": "A"}') }}",
   "severity_code": "{{ properties.severity|resilient_substitute('{"Informational": "Low"}') }}",
   "properties": {
@@ -620,6 +639,9 @@ Below are examples of templates for creating, updating, and closing Resilient in
     "format": "text",
     "content": "{{ properties.description|replace('"', '\"') }}"
   },
+  {# if Sentinel users are different than SOAR users, consider using a mapping table using resilient_substitute: #}
+  {# "owner_id": "{{ properties.owner.userPrincipalName|resilient_substitute('{"sentinel_user1@co.com": "soar_user1@ent.com", "sentinel_user2@co.com": "soar_user2@ent.com", "DEFAULT": "default_user@ent.com" }') }}", #}
+  "owner_id": "{{ properties.owner.assignedTo }}",
   "plan_status": "{{ properties.status|resilient_substitute('{"Closed": "C", "Active": "A", "New": "A"}') }}",
   "severity_code": "{{ properties.severity|resilient_substitute('{"Informational": "Low"}') }}",
   "properties": {

@@ -101,4 +101,8 @@ def jinja_resilient_substitute(value, json_str):
     if value in replace_dict:
         return replace_dict[value]
 
+    # use a default value if specific match is missing
+    if 'DEFAULT' in replace_dict:
+        return replace_dict['DEFAULT']
+
     return value

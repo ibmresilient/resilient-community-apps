@@ -147,7 +147,7 @@ class SentinelPollerComponent(ResilientComponent):
                     profile_data['last_poller_time'] = datetime.datetime.utcnow()
 
         except Exception as err:
-            raise IntegrationError(err)
+            LOG.error(str(err))
         finally:
             # We always want to reset the timer to wake up, no matter failure or success
             self.fire(PollCompleted())
