@@ -71,6 +71,7 @@ Resilient Circuits Components for 'fn_microsoft_sentinel'
 * Automatically keep Incidents and Cases synchronized
 * Retrieve Sentinel Incident alert entities as artifacts
 * Sync comments to and from Sentinel Incidents
+* Support editable templates for field mapping between the two systems
 
 ---
 
