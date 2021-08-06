@@ -90,7 +90,7 @@ class FunctionComponent(ResilientComponent):
             qradar_label = kwargs.get("qradar_label")
             if qradar_label and PACKAGE_NAME+":"+qradar_label in self.servers_list:
                 options = self.servers_list[PACKAGE_NAME+":"+qradar_label]
-            elif len(self.servers_list) == 1:
+            elif len(self.servers_list) == 1 or qradar_label == PACKAGE_NAME:
                 for server_name in self.servers_list:
                     options = self.servers_list[server_name]
             else:

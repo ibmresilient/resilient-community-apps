@@ -1,4 +1,3 @@
 include README.md
 recursive-include fn_qradar_integration/util *
 include fn_qradar_integration/LICENSE
-include fn_qradar_integration/util/data
