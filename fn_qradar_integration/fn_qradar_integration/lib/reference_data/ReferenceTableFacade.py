@@ -107,7 +107,7 @@ class ReferenceTableFacade(ReferenceObjectBase):
         except Exception as e:
             LOG.error(str(e))
             raise RequestError(
-                url, "delete_ref_element failed with exception {}".format(str(e)))
+                url, "update_ref_element failed with exception {}".format(str(e)))
 
         return ret
 
