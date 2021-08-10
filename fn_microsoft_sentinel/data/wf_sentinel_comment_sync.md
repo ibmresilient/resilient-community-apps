@@ -20,12 +20,14 @@
 ```python
 inputs.sentinel_incident_comment = note.text.content
 inputs.sentinel_incident_id = incident.properties.sentinel_incident_id
-
+inputs.sentinel_profile = incident.properties.sentinel_profile
 ```
 
 ### Post-Processing Script
 ```python
-None
+if results.success:
+  row = incident.addRow("sentinel_comment_ids")
+  row['comment_id'] = results.content['name']
 ```
 
 ---

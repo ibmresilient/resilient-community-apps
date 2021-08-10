@@ -18,13 +18,28 @@
 
 ### Pre-Processing Script
 ```python
-inputs.incident_id = incident.id
 inputs.sentinel_incident_id = incident.properties.sentinel_incident_id
+inputs.sentinel_profile = incident.properties.sentinel_profile
 ```
 
 ### Post-Processing Script
 ```python
-None
+if results.success:
+  for alert in results.content.keys():
+      for entity in results.content[alert]:
+        row = incident.addRow("sentinel_incident_entities")
+        row['alert_id'] = alert
+        row['entity_id'] = entity['name']
+        row['entity_type'] = entity['kind']
+        row['entity_value'] = entity['properties']['friendlyName']
+        row['entity_properties'] = "<br>".join(["<b>{}</b>: {}".format(k, v) for k, v in entity['properties'].items()])
+        
+        # create an artifact
+        desc = ["created from Sentinel entity: {}".format(entity['name'])]
+        if entity['properties'].get('azureID'):
+          desc.append(entity['properties']['azureID'])
+        incident.addArtifact(entity['resilient_artifact_type'][0], entity['resilient_artifact_type'][1], "\n".join(desc))
+
 ```
 
 ---

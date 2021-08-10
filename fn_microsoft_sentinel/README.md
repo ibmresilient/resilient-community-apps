@@ -24,6 +24,7 @@
   - [Resilient platform](#resilient-platform)
   - [Cloud Pak for Security](#cloud-pak-for-security)
   - [Proxy Server](#proxy-server)
+  - [Python Environment](#python-environment)
 - [Sentinel Configuration](#sentinel-configuration)
 - [Installation](#installation)
   - [Install](#install)
@@ -32,7 +33,7 @@
 - [Function - Sentinel Get Incident Entities](#function---sentinel-get-incident-entities)
 - [Function - Sentinel Add Incident Comment](#function---sentinel-add-incident-comment)
 - [Function - Sentinel Get Incident Comments](#function---sentinel-get-incident-comments)
-- [Action - Update Sentinel Incident](#action---update-sentinel-incident)
+- [Function - Sentinel Update Incident](#function---sentinel-update-incident)
 - [Data Table - Sentinel Comment IDs](#data-table---sentinel-comment-ids)
 - [Data Table - Sentinel Incident Entities](#data-table---sentinel-incident-entities)
 - [Custom Fields](#custom-fields)
@@ -61,7 +62,9 @@
 
  ![screenshot: main](./doc/screenshots/main.png)
 
-Resilient Circuits Components for 'fn_microsoft_sentinel'
+This app allows bi-directional synchronization between IBM SOAR and Microsoft Sentinel.
+Sentinel entities are exposed as artifacts for further investigation.
+
 
 ### Key Features
 <!--
@@ -123,17 +126,13 @@ These guides are available on the IBM Knowledge Center at [ibm.biz/cp4s-docs](ht
 The app **does** support a proxy server.
 
 ### Python Environment
-Both python 2 and python 3 are support.
+Python 3.6 is supported.
+Additional package dependencies may exist for each of these packages:
+* jinja2
+* resilient-lib
+* resilient_circuits>=30.0.0
+* simplejson
 
-Python package dependencies. Additional packages dependencies may exist for each of these packages.
-```
-"resilient_circuits>=30.0.0",
-"resilient-lib",
-"jinja2",
-"simplejson"
-```
-
-This package supports Python 3.6+ environments.
 ---
 
 ## Sentinel Configuration
@@ -146,7 +145,7 @@ Several steps are necessary to enable API access to Sentinel. Below is a brief l
 
  ![screenshot: app client_id](./doc/screenshots/app_client_id.png)
  ![screenshot: app permissions](./doc/screenshots/app_permissions.png)
-  ![screenshot: app secret](./doc/screenshots/app_secret.png)
+ ![screenshot: app secret](./doc/screenshots/app_secret.png)
 
 2. For your subscription, specify the app with the Sentinel Responder role.
 
@@ -158,6 +157,7 @@ Several steps are necessary to enable API access to Sentinel. Below is a brief l
 
 4. Add your tenant_id (Under `Tenant properties`) and subscription_id to the app.config file.
 
+---
 
 ## Installation
 
@@ -221,8 +221,9 @@ The screenshot below shows an added condition for the comment's `user` set to be
  ![screenshot: fn-sentinel-get-incident-entities ](./doc/screenshots/function_list.png)
 
 ## Function - Sentinel Get Incident Entities
-Get the Entities associated with a Sentinel Incident.
+Get the Entities associated with a Sentinel Incident
 
+ ![screenshot: fn-sentinel-get-incident-entities ](./doc/screenshots/fn-sentinel-get-incident-entities.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -293,12 +294,14 @@ if results.success:
         row['entity_id'] = entity['name']
         row['entity_type'] = entity['kind']
         row['entity_value'] = entity['properties']['friendlyName']
-        row['entity_properties'] = str(entity['properties'])
+        row['entity_properties'] = "<br>".join(["<b>{}</b>: {}".format(k, v) for k, v in entity['properties'].items()])
+
         # create an artifact
         desc = ["created from Sentinel entity: {}".format(entity['name'])]
         if entity['properties'].get('azureID'):
           desc.append(entity['properties']['azureID'])
         incident.addArtifact(entity['resilient_artifact_type'][0], entity['resilient_artifact_type'][1], "\n".join(desc))
+
 ```
 
 </p>
@@ -381,7 +384,9 @@ inputs.sentinel_profile = incident.properties.sentinel_profile
 <p>
 
 ```python
-None
+if results.success:
+  row = incident.addRow("sentinel_comment_ids")
+  row['comment_id'] = results.content['name']
 ```
 
 </p>
@@ -497,32 +502,63 @@ if results.success:
 </details>
 
 ---
-## Action - Update Sentinel Incident
-This is an action module used to synchronize changes from the Resilient SOAR incident to the
-corresponding Sentinel incident. The default template will synchronize the follow Sentinel fields:
+## Function - Sentinel Update Incident
+Update / Close a Sentinel incident based on Sentinel field changes in the Resilient Incident
 
+ ![screenshot: fn-sentinel-update-incident ](./doc/screenshots/fn-sentinel-update-incident.png)
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `incident_id` | `number` | Yes | `-` | - |
+| `sentinel_incident_id` | `text` | No | `-` | - |
+| `sentinel_profile` | `text` | Yes | `-` | - |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+```python
+results = {
+    # TODO: Copy and paste an example of the Function Output within this code block.
+    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function.
+    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+}
 ```
-title
-description
-severity
-status
-classification
-classificationComment
-classificationReason
-labels
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.sentinel_incident_id = incident.properties.sentinel_incident_id
+inputs.sentinel_profile = incident.properties.sentinel_profile
 ```
-Changes to the synchronization fields are possible by using the app.config profile setting: `sentinel_close_incident_template` and providing a mapping table. This is the default mapping table is [sentinel_update_incident_template](#sentinel_update_incident_template.jinja)
 
+</p>
+</details>
 
-If the SOAR incident is closed, the cooresponding Sentinel incident is closed. A template is used to map the required fields in Sentinel. See `sentinel_close_incident_template.jinja`. Modifications to the template can be made and referenced by `sentinel_close_incident_template` app.config setting.
+<details><summary>Example Post-Process Script:</summary>
+<p>
 
-This is the default mapping is [sentinel_close_incident_template](#sentinel_close_incident_template.jinja)
+```python
+None
+```
 
+</p>
+</details>
 
----
 ## Data Table - Sentinel Comment IDs
-This is a reference table of synchronized Sentinel Comment ids. It is an internal table to ensure
-comments are not synchronized more than once. This table does not need to be added to a layout.
+This is a reference table of synchronized Sentinel Comment ids. It is an internal table to
+ensure comments are not synchronized more than once. This table does not need to be added to a layout.
+
+ ![screenshot: dt-sentinel-comment-ids](./doc/screenshots/dt-sentinel-comment-ids.png)
 
 #### API Name:
 sentinel_comment_ids
@@ -574,10 +610,11 @@ sentinel_incident_entities
 ## Rules
 | Rule Name | Object | Workflow Triggered |
 | --------- | ------ | ------------------ |
-| Sentinel Get Incident Entities | incident | `sentinel_get_incident_entities` |
-| Sentinel Incident Entity Sync | incident | `sentinel_get_incident_entities` |
+| Sentinel Update Incident | incident | `-` |
 | Sentinel Comment Sync | note | `sentinel_comment_sync` |
 | Sentinel Get Incident Comments | incident | `sentinel_get_incident_comments` |
+| Sentinel Incident Entity Sync | incident | `sentinel_get_incident_entities` |
+| Sentinel Get Incident Entities | incident | `sentinel_get_incident_entities` |
 
 ---
 

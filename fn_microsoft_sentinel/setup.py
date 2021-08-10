@@ -28,10 +28,16 @@ setup(
     version="1.0.0",
     license="MIT",
     author="IBM Resilient",
-    author_email="you@example.com",
+    author_email="",
     url="https://github.com/ibmresilient/fn_microsoft_sentinel",
     description="Resilient Circuits Components for 'fn_microsoft_sentinel'",
-    long_description="""Resilient Circuits Components for 'fn_microsoft_sentinel'""",
+    long_description="""This app allows bi-directional synchronization between IBM SOAR and Microsoft Sentinel.
+    Key features:
+    * Escalate Microsoft Sentinel Incidents to IBM Resilient SOAR Cases
+    * Automatically keep Incidents and Cases synchronized
+    * Retrieve Sentinel Incident alert entities as artifacts
+    * Sync comments to and from Sentinel Incidents
+    * Support editable templates for field mapping between the two systems""",
     install_requires=[
         "resilient_circuits>=30.0.0",
         "resilient-lib",

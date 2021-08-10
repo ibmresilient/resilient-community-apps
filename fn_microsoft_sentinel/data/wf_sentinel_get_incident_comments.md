@@ -5,10 +5,10 @@
 
 # Sentinel Get Incident Comments
 
-## Function - Senintel Get Incident Comments
+## Function - Sentinel Get Incident Comments
 
 ### API Name
-`senintel_get_incident_comments`
+`sentinel_get_incident_comments`
 
 ### Output Name
 `None`
@@ -19,11 +19,20 @@
 ### Pre-Processing Script
 ```python
 inputs.sentinel_incident_id = incident.properties.sentinel_incident_id
+inputs.incident_id = incident.id
+inputs.sentinel_profile = incident.properties.sentinel_profile
 ```
 
 ### Post-Processing Script
 ```python
-None
+if results.success:
+  for comment in results.content['value']:
+    incident.addNote(helper.createRichText(comment['properties']['message']))
+      
+    # remember the comment in our datatable
+    row = incident.addRow('sentinel_comment_ids')
+    row['comment_id'] = comment['name']
+
 ```
 
 ---
