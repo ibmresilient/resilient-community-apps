@@ -13,6 +13,9 @@ PACKAGE_NAME = "fn_microsoft_defender"
 INDICATOR_URL = "api/indicators"
 MACHINES_URL = "api/machines"
 FILES_URL = "api/files/{}/machines"
+MACHINES_FILTER = {
+     "filter_by_name": "startswith(computerDnsName,'{}')"
+}
 ALERTS_URL = "api/alerts"
 
 AUTH_URL = "https://login.microsoftonline.com/{tenant_id}" # /v2.0  https://login.microsoftonline.com/82319d65-80f7-431f-8ee7-57bae5b231c2/oauth2/token
@@ -26,18 +29,23 @@ LOG = logging.getLogger(__name__)
 class DefenderAPI():
     """[class to manage authentication and API calls to Defender ATP]
     """
-    def __init__(self, tenant_id, client_id, app_secret, opts, options):
+    def __init__(self, tenant_id, client_id, app_secret, opts, options, rc=None):
         """build the connection class for Defender ATP
 
         Args:
             tenant_id ([type]): [description]
             client_id ([type]): [description]
             app_secret ([type]): [description]
-            opts ([type]): [description]
-            options ([type]): [description]
+            opts ([dict]): [description]
+            options ([dict]): [description]
+            rc ([object]): RequestCommon if passed in
         """
         self.api_url = options.get("api_url")
-        self.rc = RequestsCommon(opts, options)
+        if rc:
+            self.rc = rc
+        else:
+            self.rc = RequestsCommon(opts, options)
+
         authority = AUTH_URL.format(tenant_id=tenant_id)
         self.access_token = None
         self.app = ConfidentialClientApplication(
@@ -161,3 +169,18 @@ def convert_date(value):
     # strip milliseconds as 7 characters cannot be parsed by %f
     utc_time = time.strptime(value[:value.rfind('.')], "%Y-%m-%dT%H:%M:%S")
     return calendar.timegm(utc_time)*1000
+
+def make_filter_url(url, filter_template, value):
+    """[make an api call using odata filters]
+
+    Args:
+        url ([str]): [base url]
+        filter_template ([str]): [filter template]
+        value ([str]): [substitution value]
+    Return:
+        update url ([str])
+    """
+    if filter_template in MACHINES_FILTER:
+        return "?$filter=".join([url, MACHINES_FILTER[filter_template].format(value)])
+    else:
+        raise ValueError("{} is invalid filter template name".format(filter_template))

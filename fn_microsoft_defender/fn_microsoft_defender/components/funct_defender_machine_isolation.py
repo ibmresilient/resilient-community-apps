@@ -34,7 +34,6 @@ class FunctionComponent(ResilientComponent):
             validate_fields(["tenant_id", "client_id", "app_secret"], self.options)
             validate_fields(["defender_machine_id",
                              "defender_description",
-                             "defender_isolation_type",
                              "defender_isolation_action"], kwargs)
 
             # Get the function parameters:
@@ -58,9 +57,11 @@ class FunctionComponent(ResilientComponent):
             rp = ResultPayload(PACKAGE_NAME, **kwargs)
 
             payload = {
-                "Comment": action_description,
-                "IsolationType": defender_isolation_type
+                "Comment": action_description
             }
+            if defender_isolation_type:
+                payload["IsolationType"] = defender_isolation_type
+
             log.debug(payload)
 
             # build the url
