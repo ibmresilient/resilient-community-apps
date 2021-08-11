@@ -5,16 +5,16 @@
 
 # Defender ATP Delete Indicator
 
-## Function - 
+## Function - Defender Delete Indicator
 
 ### API Name
-``
+`defender_delete_indicator`
 
 ### Output Name
 `None`
 
 ### Message Destination
-``
+`fn_msdefender`
 
 ### Pre-Processing Script
 ```python
@@ -23,7 +23,20 @@ inputs.defender_indicator_id = row['ind_id']
 
 ### Post-Processing Script
 ```python
-None
+import time
+
+msg = u"Defender ATP Action {}.\nAction: Delete Indicator\nIndicator: {}"\
+   .format("successful" if results.success else "unsuccessful",
+           row['ind_value'],
+           )
+           
+if results.success:
+  row['report_date'] = int(time.time()*1000)
+else:
+  msg = u"{}\nReason: {}".format(msg, results.reason)
+
+incident.addNote(helper.createPlainText(msg))
+
 ```
 
 ---

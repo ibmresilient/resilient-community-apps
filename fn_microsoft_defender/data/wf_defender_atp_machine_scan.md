@@ -20,13 +20,26 @@
 ```python
 inputs.defender_machine_id = row['machine_id']
 inputs.defender_description = rule.properties.defender_action_comment
-inputs.defender_scantype = str(rule.properties.defender_machine_scantype
+inputs.defender_machine_scantype = str(rule.properties.defender_machine_scantype)
 
 ```
 
 ### Post-Processing Script
 ```python
-None
+msg = u"Defender ATP Action {}.\nAction: Antivirus Scan\nMachine: {} ({})\nScan Type: {}\nComment: {}\nScan ID: {}"\
+   .format("successful" if results.success else "unsuccessful",
+           results.content.get('computerDnsName'), row['machine_id'],
+           str(rule.properties.defender_machine_scantype),
+           rule.properties.defender_action_comment,
+           results.content.get('id'))
+           
+if results.success:
+  row['report_date'] = int(time.time()*1000)
+else:
+  msg = u"{}\nReason: {}".format(msg, results.reason)
+
+incident.addNote(helper.createPlainText(msg))
+
 ```
 
 ---

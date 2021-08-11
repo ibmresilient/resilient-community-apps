@@ -5,23 +5,23 @@
 
 # Defender ATP Update Indicator
 
-## Function - 
+## Function - Defender Set Indicator
 
 ### API Name
-``
+`defender_set_indicator`
 
 ### Output Name
 `None`
 
 ### Message Destination
-``
+`fn_msdefender`
 
 ### Pre-Processing Script
 ```python
 inputs.defender_description = rule.properties.indicator_description
 inputs.defender_title = rule.properties.indicator_title
 inputs.defender_indicator_action = str(rule.properties.indicator_action)
-inputs.defender_expiration_time = rule.properties.defender_expiration_time
+inputs.defender_expiration_time = rule.properties.indicator_expiration
 inputs.defender_severity = str(rule.properties.indicator_severity)
 inputs.defender_indicator_type = row['ind_type']
 inputs.defender_indicator_value = row['ind_value']
@@ -29,6 +29,20 @@ inputs.defender_indicator_value = row['ind_value']
 
 ### Post-Processing Script
 ```python
+msg = u"Action {}.\nAction: {}\nArtifact: {}\nTitle: {}\nComment: {}\nSeverity: {}\nExpiration: {}"\
+   .format("successful" if results.success else "unsuccessful",
+           str(rule.properties.indicator_action),
+           row['ind_value'],
+           rule.properties.indicator_title,
+           rule.properties.indicator_description,
+           str(rule.properties.indicator_severity),
+           rule.properties.indicator_expiration)
+           
+if not results.success:
+    msg = u"{}\nReason: {}".format(msg, results.reason)
+
+incident.addNote(msg)
+
 if results.success:
     row['ind_title'] = results.content['title']
     row['ind_description'] = results.content['description']

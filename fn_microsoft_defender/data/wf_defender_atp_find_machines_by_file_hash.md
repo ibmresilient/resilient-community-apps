@@ -23,7 +23,26 @@ inputs.defender_indicator_value = artifact.value
 
 ### Post-Processing Script
 ```python
-None
+import time
+
+if results.success:
+    for machine in results.content['value']:
+        row = incident.addRow("defender_atp_machines")
+        row['report_date'] = int(time.time()*1000)
+        row['machine_id'] = machine['id']
+        row['machine_name'] = machine['computerDnsName']
+        row['machine_platform'] = machine['osPlatform']
+        row['machine_firstseen'] = machine['firstSeen_ts']
+        row['machine_lastseen'] = machine['lastSeen_ts']
+        row['machine_ip'] = machine['lastIpAddress']
+        row['machine_file_hash'] = artifact.value
+        row['machine_health_status'] = machine.get('healthStatus')
+        row['machine_risk_score'] = machine.get('riskScore')
+        row['machine_exposure_level'] = machine.get('exposureLevel')
+        row['machine_tags'] = ', '.join(machine.get('machineTags', []))
+else:
+    msg = u"Defender ATP Action unsuccessful.\nAction: Find machines by file hash\nReason: {}".format(results.reason)
+    incident.addNote(helper.createPlainText(msg))
 ```
 
 ---

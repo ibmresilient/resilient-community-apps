@@ -21,22 +21,26 @@
 inputs.defender_machine_id = row['machine_id']
 inputs.defender_isolation_type = str(rule.properties.defender_isolation_type)
 inputs.defender_description = rule.properties.defender_action_comment
-inputs.defender_isolation_action = str(rule.properties.defender_machine_action)
+inputs.defender_isolation_action = 'isolate'
 ```
 
 ### Post-Processing Script
 ```python
-msg = u"Action {}.\nAction: {}\nMachine: {}\nType: {}\nComment: {}"\
-   .format("successful" if results.success else "unsuccessfull",
-           str(rule.properties.defender_isolation_action),
-           row['machine_id'],
+import time
+
+msg = u"Defender ATP Isolate Action {}.\nMachine: {} ({})\nType: {}\nComment: {}"\
+   .format("successful" if results.success else "unsuccessful",
+           results.content.get('computerDnsName'), row['machine_id'],
            str(rule.properties.defender_isolation_type),
            rule.properties.defender_action_comment)
            
-if not results.success:
+if results.success:
+  row['report_date'] = int(time.time()*1000)
+  row['machine_health_status'] = 'Isolate {}'.format(results.content.get('status'))
+else:
     msg = u"{}\nReason: {}".format(msg, results.reason)
 
-incident.addNote(msg)
+incident.addNote(helper.createPlainText(msg))
 
 ```
 

@@ -19,16 +19,38 @@
 ### Pre-Processing Script
 ```python
 inputs.defender_alert_id = row['alert_id']
-inputs.defender_alert_classification = str(rule.properties.defender_alert_classification)
-inputs.defender_alert_determination = str(rule.properties.defender_alert_determination)
-inputs.defender_alert_status = str(rule.properties.defender_alert_status)
+if rule.properties.defender_alert_classification:
+    inputs.defender_alert_classification = str(rule.properties.defender_alert_classification)
+if rule.properties.defender_alert_determination:
+    inputs.defender_alert_determination = str(rule.properties.defender_alert_determination)
+if rule.properties.defender_alert_status:
+    inputs.defender_alert_status = str(rule.properties.defender_alert_status)
 inputs.defender_description = rule.properties.defender_action_comment
 inputs.defender_alert_assigned_to = rule.properties.defender_alert_assigned_to
 ```
 
 ### Post-Processing Script
 ```python
-if results.status:
+msg = u"Action {}.\nAction: Update Alert\nAlert: {}\nMachine: {}\nComment: {}"\
+   .format("successful" if results.success else "unsuccessful",
+           row['alert_id'],
+           row['machine_name'],
+           rule.properties.defender_action_comment)
+if rule.properties.defender_alert_assigned_to:
+    msg = u"{}\nAssigned to: {}".format(msg, rule.properties.defender_alert_assigned_to)
+if rule.properties.defender_alert_status:
+    msg = u"{}\nStatus: {}".format(msg, str(rule.properties.defender_alert_status))
+if rule.properties.defender_alert_classification:
+    msg = u"{}\nClassification: {}".format(msg, str(rule.properties.defender_alert_classification))
+if rule.properties.defender_alert_determination:
+    msg = u"{}\nDetermination: {}".format(msg, str(rule.properties.defender_alert_determination))
+
+if not results.success:
+    msg = u"{}\nReason: {}".format(msg, results.reason)
+
+incident.addNote(msg)
+
+if results.success:
     row['classification'] = str(rule.properties.defender_alert_classification)
     row['determination'] = str(rule.properties.defender_alert_determination)
     row['status'] = str(rule.properties.defender_alert_status)

@@ -26,16 +26,20 @@ inputs.defender_machine_id = row['machine_id']
 
 ### Post-Processing Script
 ```python
+import time
+
 msg = u"Action {}.\nAction: Quarantine File\nIndicator: {}\nMachine: {} ({})"\
    .format("successful" if results.success else "unsuccessful",
            row['machine_file_hash'],
            row['machine_name'], row['machine_id']
            )
 
-if not results.success:
-    msg = u"{}\nReason: {}".format(msg, results.reason)
+if results.success:
+  row['report_date'] = int(time.time()*1000)
+else:
+  msg = u"{}\nReason: {}".format(msg, results.reason)
 
-incident.addNote(msg)
+incident.addNote(helper.createPlainText(msg))
 
 ```
 

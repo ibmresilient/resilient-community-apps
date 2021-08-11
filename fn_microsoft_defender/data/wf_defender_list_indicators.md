@@ -5,16 +5,16 @@
 
 # Defender ATP List Indicators
 
-## Function - 
+## Function - Defender List Indicators
 
 ### API Name
-``
+`defender_list_indicators`
 
 ### Output Name
 `None`
 
 ### Message Destination
-``
+`fn_msdefender`
 
 ### Pre-Processing Script
 ```python
@@ -23,7 +23,7 @@ None
 
 ### Post-Processing Script
 ```python
-if results.content.get("value"):
+if results.success and results.content.get("value"):
     for indicator in results.content.get("value"):
         row = incident.addRow("defender_atp_indicators")
         row['ind_id'] = indicator['id']
@@ -36,7 +36,9 @@ if results.content.get("value"):
         row['ind_created_by'] = indicator['createdByDisplayName']
         row['ind_creation_date'] = indicator['creationTimeDateTimeUtc_ts']
         row['ind_expiration_date'] = indicator['expirationTime_ts']
-
+else:
+    msg = u"Defender ATP Action unsuccessful.\nAction: List indicators\nReason: {}".format(results.reason)
+    incident.addNote(msg)
 ```
 
 ---
