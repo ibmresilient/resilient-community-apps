@@ -207,6 +207,28 @@ class SentinelAPI():
         LOG.debug("%s:%s:%s", status, reason, result)
         return result, status, reason
 
+    def query_next_incidents(self, profile_data, nextlink):
+        """[get the next set of incident data]
+
+        Args:
+            profile_data ([dickt]): [app settings for this profile]
+            nextlink ([str]): [url]
+
+        Returns:
+            result [dict]: API results
+            status [bool]: True if API call was successful
+            reason [str]: Reason of error when status=False
+        """
+        last_poller_datetime = self._get_last_poller_date(profile_data)
+
+        result, status, reason = self._call(nextlink)
+        if status:
+            result = self._filter_by_last_modified_date(result, last_poller_datetime)
+
+        LOG.debug("%s:%s:%s", status, reason, result)
+        return result, status, reason
+
+
     def _filter_by_last_modified_date(self, result, poller_last_modified_date, field="lastModifiedTimeUtc", \
                                       date_format="%Y-%m-%dT%H:%M:%S"):
         """this logic is unnecessary of the $filters capability is workin in the query API call.
@@ -239,7 +261,7 @@ class SentinelAPI():
             except ValueError as err:
                 LOG.error(str(err))
 
-        return { "value": filtered }
+        return { "value": filtered, "nextLink": result.get("nextLink") }
 
     def get_incident_alerts(self, profile_data, sentinel_incident_id):
         """Query for alerts associated with a sentinel incident
@@ -476,12 +498,20 @@ class SentinelAPI():
         return url
 
 def get_sentinel_incident_id(sentinel_incident):
+    """
+    Returns:
+        [str]: [sentinel_indident_id or None if not found]
+    """
     if not sentinel_incident:
         return None
 
     return sentinel_incident['name']
 
 def make_uuid():
+    """
+    Returns:
+        [str]: [created uuid]
+    """
     return str(uuid.uuid1())
 
 

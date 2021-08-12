@@ -107,40 +107,21 @@ class SentinelPollerComponent(ResilientComponent):
                     LOG.info("polling profile: %s", profile_name)
                     result, status, reason  = self.sentinel_client.query_incidents(profile_data)
 
+                    while status:
+                        self._parse_results(result, profile_name, profile_data)
+
+                        # more results? continue
+                        if result.get("nextLink"):
+                            LOG.debug("running nextLink")
+                            result, status, reason  = self.sentinel_client.query_next_incidents(profile_data,
+                                                                                                result.get("nextLink")
+                                                                                               )
+                        else:
+                            break
+
                     # filter the incident list returned based on the criteria in a filter
                     if not status:
                         LOG.error("Error querying for incidents: %s, %s", reason, result)
-                    else:
-                        for sentinel_incident in result.get("value", []):
-                            # determine if an incident already exists, used to know if create or update
-                            sentinel_incident_id = get_sentinel_incident_id(sentinel_incident)
-                            resilient_incident = self.resilient_common.find_incident(sentinel_incident_id)
-
-                            new_incident_filters = get_profile_filters(profile_data['new_incident_filters'])
-                            result_resilient_incident = self._create_update_incident(profile_name, profile_data,
-                                                                        sentinel_incident, resilient_incident,
-                                                                        new_incident_filters)
-
-                            if result_resilient_incident:
-                                incident_id = result_resilient_incident['id']
-                                # get the sentinel comments and add to Resilient.
-                                # need to ensure not adding the comment more than once
-                                result, status, reason = self.sentinel_client.get_comments(
-                                                                                profile_data,
-                                                                                sentinel_incident_id
-                                                                            )
-                                new_comments = []
-                                if status:
-                                    new_comments = self.resilient_common.filter_resilient_comments(
-                                                                            incident_id,
-                                                                            result['value']
-                                                                        )
-                                    for comment in new_comments:
-                                        self.resilient_common.create_incident_comment(
-                                                                            incident_id,
-                                                                            sentinel_incident_id,
-                                                                            comment['properties']['message']
-                                                            )
 
                 finally:
                     # set the last poller time for next cycle
@@ -151,6 +132,49 @@ class SentinelPollerComponent(ResilientComponent):
         finally:
             # We always want to reset the timer to wake up, no matter failure or success
             self.fire(PollCompleted())
+
+
+    def _parse_results(self, result, profile_name, profile_data):
+        """[create resilient incidents if the result set hasn't already by created]
+
+        Args:
+            result ([dict]): [results for getting sentinel incidents]
+            profile_name ([str]): [name of profile running]
+            profile_data ([dict]): [profile settings]
+        """
+        for sentinel_incident in result.get("value", []):
+            # determine if an incident already exists, used to know if create or update
+            sentinel_incident_id = get_sentinel_incident_id(sentinel_incident)
+            resilient_incident = self.resilient_common.find_incident(sentinel_incident_id)
+
+            new_incident_filters = get_profile_filters(profile_data['new_incident_filters'])
+            result_resilient_incident = self._create_update_incident(profile_name, profile_data,
+                                                        sentinel_incident, resilient_incident,
+                                                        new_incident_filters)
+
+            if result_resilient_incident:
+                incident_id = result_resilient_incident['id']
+                # get the sentinel comments and add to Resilient.
+                # need to ensure not adding the comment more than once
+                result, status, reason = self.sentinel_client.get_comments(
+                                                                profile_data,
+                                                                sentinel_incident_id
+                                                        )
+                new_comments = []
+                if status:
+                    new_comments = self.resilient_common.filter_resilient_comments(
+                                                            incident_id,
+                                                            result['value']
+                                                        )
+                    for comment in new_comments:
+                        self.resilient_common.create_incident_comment(
+                                                            incident_id,
+                                                            sentinel_incident_id,
+                                                            comment['properties']['message']
+                                                        )
+                else:
+                    LOG.error("Error getting comments: %s", reason)
+
 
     def _create_update_incident(self, profile_name, profile_data,\
                                 sentinel_incident, resilient_incident, new_incident_filters):
