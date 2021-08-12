@@ -26,19 +26,26 @@ inputs.defender_machine_scantype = str(rule.properties.defender_machine_scantype
 
 ### Post-Processing Script
 ```python
-msg = u"Defender ATP Action {}.\nAction: Antivirus Scan\nMachine: {} ({})\nScan Type: {}\nComment: {}\nScan ID: {}"\
-   .format("successful" if results.success else "unsuccessful",
-           results.content.get('computerDnsName'), row['machine_id'],
-           str(rule.properties.defender_machine_scantype),
-           rule.properties.defender_action_comment,
-           results.content.get('id'))
-           
+import time
+
 if results.success:
   row['report_date'] = int(time.time()*1000)
+  action_msg = "Action: {}\nComment: {}\nStatus: {}\nStart Date: {}".format(
+    results.content['type'],
+    results.content['requestorComment'],
+    results.content['status'],
+    results.content['creationDateTimeUtc']
+    )
+  row['machine_last_action'] = helper.createPlainText(action_msg)
 else:
-  msg = u"{}\nReason: {}".format(msg, results.reason)
+  msg = u"Defender ATP Scan Action {}.\nMachine: {} ({})\nType: {}\nComment: {}\nReason: {}"\
+   .format("successful" if results.success else "unsuccessful",
+           results.content.get('computerDnsName'), row['machine_id'],
+           str(rule.properties.defender_isolation_type),
+           rule.properties.defender_action_comment,
+           results.reason)
 
-incident.addNote(helper.createPlainText(msg))
+  incident.addNote(helper.createPlainText(msg))
 
 ```
 

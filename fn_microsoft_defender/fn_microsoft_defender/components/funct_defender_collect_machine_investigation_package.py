@@ -3,8 +3,9 @@
 """AppFunction implementation"""
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from resilient_lib import IntegrationError, validate_fields
-from fn_microsoft_defender.lib.defender_common import DefenderAPI, convert_date, MACHINES_URL, PACKAGE_NAME, make_filter_url
+from resilient_lib import validate_fields
+from fn_microsoft_defender.lib.defender_common import DefenderAPI, MACHINES_URL, PACKAGE_NAME, \
+    MACHINE_ACTIONS_URL, PACKAGE_URI
 
 FN_NAME = "defender_collect_machine_investigation_package"
 COLLECT_PACKAGE = "collectInvestigationPackage"
@@ -60,16 +61,16 @@ class FunctionComponent(AppFunctionComponent):
         ##############################################
 
         validate_fields([{"name": "tenant_id"}, {"name": "client_id"}, {"name": "app_secret"}], self._app_configs_as_dict)
-        validate_fields([{"name": "defender_machine_id"}, {"name": "defender_description"}], fn_inputs)
+        #validate_fields([{"name": "defender_machine_id"}, {"name": "defender_description"}], fn_inputs)
 
         # Get the function parameters:
         defender_machine_id = fn_inputs.defender_machine_id  # text
         action_description = fn_inputs.defender_description  # text
 
-        defender_api = DefenderAPI(self._app_configs_as_dict.tenant_id,
-                                   self._app_configs_as_dict.client_id,
-                                   self._app_configs_as_dict.app_secret,
-                                   None, None,
+        defender_api = DefenderAPI(self.app_configs.tenant_id,
+                                   self.app_configs.client_id,
+                                   self.app_configs.app_secret,
+                                   None, {"api_url": self.app_configs.api_url},
                                    self.rc)
 
         payload = {
@@ -81,7 +82,14 @@ class FunctionComponent(AppFunctionComponent):
         url = "/".join([MACHINES_URL, defender_machine_id, COLLECT_PACKAGE])
         package_result, status, reason = defender_api.call(url, payload=payload, oper="POST")
 
-        if not status:
+        # if 201, run GET https://api.securitycenter.microsoft.com/api/machineactions/7327b54fd718525cbca07dacde913b5ac3c85673/GetPackageUri
+
+        if status:
+            # get the uri for the report
+            url = "/".join([MACHINE_ACTIONS_URL, package_result['id']])
+            package_result, status, reason = defender_api.wait_for_action(url)
+
+        else:
             yield self.status_message(u"{} failure. Status: {} Reason: {}".format(FN_NAME, status, reason))
 
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))

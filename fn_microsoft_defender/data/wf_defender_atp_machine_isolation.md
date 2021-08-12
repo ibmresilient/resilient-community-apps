@@ -27,20 +27,26 @@ inputs.defender_isolation_action = 'isolate'
 ### Post-Processing Script
 ```python
 import time
-
-msg = u"Defender ATP Isolate Action {}.\nMachine: {} ({})\nType: {}\nComment: {}"\
-   .format("successful" if results.success else "unsuccessful",
-           results.content.get('computerDnsName'), row['machine_id'],
-           str(rule.properties.defender_isolation_type),
-           rule.properties.defender_action_comment)
            
 if results.success:
   row['report_date'] = int(time.time()*1000)
-  row['machine_health_status'] = 'Isolate {}'.format(results.content.get('status'))
+  
+  action_msg = "Action: {}\nComment: {}\nStatus: {}\nStart Date: {}".format(
+    results.content['type'],
+    results.content['requestorComment'],
+    results.content['status'],
+    results.content['creationDateTimeUtc']
+    )
+  row['machine_last_action'] = helper.createPlainText(action_msg)
 else:
-    msg = u"{}\nReason: {}".format(msg, results.reason)
+  msg = u"Defender ATP Isolate Action {}.\nMachine: {} ({})\nType: {}\nComment: {}\nReason: {}"\
+   .format("successful" if results.success else "unsuccessful",
+           results.content.get('computerDnsName'), row['machine_id'],
+           str(rule.properties.defender_isolation_type),
+           rule.properties.defender_action_comment,
+           results.reason)
 
-incident.addNote(helper.createPlainText(msg))
+  incident.addNote(helper.createPlainText(msg))
 
 ```
 

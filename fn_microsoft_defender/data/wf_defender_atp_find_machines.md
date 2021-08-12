@@ -36,6 +36,10 @@ import time
 ]
 """
 if results.success:
+  if not results.content['value']:
+    msg = u"Defender ATP Find machines by IP Address unsuccessful.\nNothing found for {}".format(artifact.value)
+    incident.addNote(helper.createPlainText(msg))
+  else:
     for machine in results.content['value']:
         row = incident.addRow("defender_atp_machines")
         row['report_date'] = int(time.time()*1000)

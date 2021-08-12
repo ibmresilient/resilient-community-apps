@@ -7,7 +7,7 @@
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import ResultPayload, validate_fields
-from fn_microsoft_defender.lib.defender_common import DefenderAPI, MACHINES_URL, PACKAGE_NAME
+from fn_microsoft_defender.lib.defender_common import DefenderAPI, MACHINES_URL, PACKAGE_NAME, MACHINE_ACTIONS_URL
 
 FUNCTION = "defender_machine_scan"
 
@@ -33,8 +33,9 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Starting 'defender_machine_scan'")
             validate_fields(["tenant_id", "client_id", "app_secret"], self.options)
             validate_fields(["defender_machine_id",
-                             "defender_description",
-                             "defender_machine_scantype"], kwargs)
+                            "defender_description",
+                            "defender_machine_scantype"
+                           ], kwargs)
 
             # Get the function parameters:
             action_description = kwargs.get("defender_description")  # text
@@ -63,6 +64,11 @@ class FunctionComponent(ResilientComponent):
             # build the url
             url = "/".join([MACHINES_URL, defender_machine_id, "runAntiVirusScan"])
             scan_result, status, reason = defender_api.call(url, payload=payload, oper="POST")
+
+            if status:
+                # get the uri for the report
+                url = "/".join([MACHINE_ACTIONS_URL, scan_result['id']])
+                scan_result, status, reason = defender_api.wait_for_action(url)
 
             if not status:
                 yield StatusMessage(u"{} failure. Status: {} Reason: {}"\

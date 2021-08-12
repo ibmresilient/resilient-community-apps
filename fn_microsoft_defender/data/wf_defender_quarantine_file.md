@@ -28,18 +28,24 @@ inputs.defender_machine_id = row['machine_id']
 ```python
 import time
 
-msg = u"Action {}.\nAction: Quarantine File\nIndicator: {}\nMachine: {} ({})"\
-   .format("successful" if results.success else "unsuccessful",
-           row['machine_file_hash'],
-           row['machine_name'], row['machine_id']
-           )
-
 if results.success:
   row['report_date'] = int(time.time()*1000)
+  action_msg = "Action: {}\nComment: {}\nStatus: {}\nStart Date: {}".format(
+    results.content['type'],
+    results.content['requestorComment'],
+    results.content['status'],
+    results.content['creationDateTimeUtc']
+    )
+  row['machine_last_action'] = helper.createPlainText(action_msg)
 else:
-  msg = u"{}\nReason: {}".format(msg, results.reason)
+  msg = u"Defender ATP Quarantine file Action {}.\nMachine: {} ({})\nType: {}\nComment: {}\nReason: {}"\
+   .format("successful" if results.success else "unsuccessful",
+           results.content.get('computerDnsName'), row['machine_id'],
+           str(rule.properties.defender_isolation_type),
+           rule.properties.defender_action_comment,
+           results.reason)
 
-incident.addNote(helper.createPlainText(msg))
+  incident.addNote(helper.createPlainText(msg))
 
 ```
 

@@ -18,12 +18,36 @@
 
 ### Pre-Processing Script
 ```python
-inputs.defender_machine_id = row
+inputs.defender_machine_id = row['machine_id']
+inputs.defender_description = rule.properties.defender_action_comment
 ```
 
 ### Post-Processing Script
 ```python
-None
+import time
+
+if results.success:
+  msg = "Action: {}\nComment: {}\nStatus: {}\nStart Date: {}".format(
+    results.content['type'],
+    results.content['requestorComment'],
+    results.content['status'],
+    results.content['creationDateTimeUtc']
+    )
+  row['machine_last_action'] = helper.createPlainText(msg)
+  row['report_date'] = int(time.time()*1000)
+  
+"""
+    'type': 'CollectInvestigationPackage',
+    'title': None,
+    'requestor': 'f0dc3f88-f617-449c-960c-6b54818cd110',
+    'requestorComment': 'ss',
+    'status': 'Succeeded',
+    'machineId': '2a94aaf80aa31094790ce40da6fdfc03a9a145c5',
+    'computerDnsName': 'windowsvmos',
+    'creationDateTimeUtc': '2021-08-12T18:53:06.5259227Z',
+    'lastUpdateDateTimeUtc': '2021-08-12T18:54:20.4259984Z',
+"""
+  
 ```
 
 ---

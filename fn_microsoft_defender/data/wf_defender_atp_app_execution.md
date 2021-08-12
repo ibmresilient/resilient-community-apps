@@ -36,6 +36,13 @@ msg = u"Defender ATP Action {}.\nAction: {}\nMachine: {}\nComment: {}"\
            
 if results.success:
   row['report_date'] = int(time.time()*1000)
+  action_msg = "Action: {}\nComment: {}\nStatus: {}\nStart Date: {}".format(
+    results.content['type'],
+    results.content['requestorComment'],
+    results.content['status'],
+    results.content['creationDateTimeUtc']
+    )
+  row['machine_last_action'] = helper.createPlainText(action_msg)
 else:
   msg = u"{}\nReason: {}".format(msg, results.reason)
 

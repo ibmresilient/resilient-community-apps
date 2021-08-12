@@ -12,6 +12,8 @@ from simplejson.errors import JSONDecodeError
 PACKAGE_NAME = "fn_microsoft_defender"
 INDICATOR_URL = "api/indicators"
 MACHINES_URL = "api/machines"
+MACHINE_ACTIONS_URL = "api/machineactions"
+PACKAGE_URI = "GetPackageUri"
 FILES_URL = "api/files/{}/machines"
 MACHINES_FILTER = {
      "filter_by_name": "startswith(computerDnsName,'{}')"
@@ -122,6 +124,22 @@ class DefenderAPI():
         reason = None
         if not status:
             reason = result['error'].get('message')
+
+        return result, status, reason
+
+    def wait_for_action(self, url, iter=10, wait=30):
+        """[summary]
+
+        Args:
+            url ([type]): [description]
+            iter (int, optional): [description]. Defaults to 10.
+            wait (int, optional): [description]. Defaults to 30.
+        """
+        for _ in range(0, iter):
+            time.sleep(wait)
+            result, status, reason = self.call(url, oper="GET")
+            if not status or (status and result.get('status') != 'Pending'):
+                break
 
         return result, status, reason
 
