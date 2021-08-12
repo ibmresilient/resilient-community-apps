@@ -335,21 +335,6 @@ class QRadarClient(object):
         ret = []
         try:
             response = auth_info.make_call("GET", url)
-            #
-            # Sample return:
-            """
-            [
-                {
-                    "timeout_type": "FIRST_SEEN",
-                    "number_of_elements": 0,
-                    "creation_time": 1516812810600,
-                    "name": "Watson Advisor: File Action Blocked",
-                    "element_type": "ALNIC"
-                },
-                ...
-            ]
-            """
-            #
             ret = response.json()
         except Exception as e:
             LOG.error(str(e))
@@ -513,7 +498,7 @@ class QRadarClient(object):
         auth_info = AuthInfo.get_authInfo()
         ref_set_link = quote(ref_set, '')
         value = quote(value, '')
-        url = u"{}{}/{}/{}".format(auth_info.api_url, reference_endpoint,
+        url = u"{}{}/{}?value={}".format(auth_info.api_url, reference_endpoint,
                                    ref_set_link, value)
 
         ret = {}

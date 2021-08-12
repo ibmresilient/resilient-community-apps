@@ -68,10 +68,7 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("Finished 'qradar_get_all_servers' that was running in workflow '{0}'".format(wf_instance_id))
 
-            results = {
-                "Server_names" : self.server_list,
-                "content" : self.servers_list
-                }
+            results = {"content" : self.servers_list}
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

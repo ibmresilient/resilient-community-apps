@@ -4,7 +4,7 @@
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import validate_fields
+from resilient_lib import validate_fields, ResultPayload
 from fn_qradar_integration.util.qradar_utils import QRadarClient
 from fn_qradar_integration.lib.functions_common import QRadarServers
 
@@ -62,6 +62,7 @@ class FunctionComponent(ResilientComponent):
             wf_instance_id = event.message["workflow_instance"]["workflow_instance_id"]
 
             yield StatusMessage("Starting 'qradar_find_all_reference_sets' running in workflow '{0}'".format(wf_instance_id))
+            rp = ResultPayload(PACKAGE_NAME, **kwargs)
 
             # Get the function parameters:
             qradar_label = kwargs.get("qradar_label")  # text
@@ -91,15 +92,15 @@ class FunctionComponent(ResilientComponent):
                                          cafile=qradar_verify_cert,
                                          opts=self.opts, function_opts=options)
 
-            ref_sets = qradar_client.get_all_ref_set()
+            result = qradar_client.get_all_ref_set()
+            
+            status_code = isinstance(result, list)
+            reason = None if status_code else result.get('http_response', {}).get('message', 'unknown')
+            results = rp.done(success=status_code, 
+                              content=result,
+                              reason=reason)
 
             yield StatusMessage("Finished 'qradar_find_all_reference_sets' that was running in workflow '{0}'".format(wf_instance_id))
-            
-            results = {"content": ref_sets}
-            if ref_sets:
-                results["success"] = True
-            else:
-                results["success"] = False
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

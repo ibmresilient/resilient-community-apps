@@ -7,7 +7,7 @@
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import validate_fields
+from resilient_lib import validate_fields, ResultPayload
 from fn_qradar_integration.util.qradar_utils import QRadarClient
 from fn_qradar_integration.lib.functions_common import QRadarServers
 
@@ -60,6 +60,9 @@ class FunctionComponent(ResilientComponent):
     def _qradar_delete_reference_set_item_function(self, event, *args, **kwargs):
         """Function: Delete an item from a given QRadar reference set"""
         try:
+
+            rp = ResultPayload(PACKAGE_NAME, **kwargs)
+
             required_fields = ["qradar_reference_set_name", "qradar_reference_set_item_value"]
             validate_fields(required_fields, kwargs)
             # Get the function parameters:
@@ -95,10 +98,17 @@ class FunctionComponent(ResilientComponent):
 
             result = qradar_client.delete_ref_element(qradar_reference_set_name,
                                                    qradar_reference_set_item_value)
+
+            status_code = isinstance(result, list)
+            reason = None if status_code else result.get('http_response', {}).get('message', 'unknown')
+            results = rp.done(success=status_code, 
+                              content=result,
+                              reason=reason)
+
             yield StatusMessage("done...")
 
             # Produce a FunctionResult with the results
-            yield FunctionResult(result)
+            yield FunctionResult(results)
         except Exception as e:
             LOG.error(str(e))
             yield FunctionError()

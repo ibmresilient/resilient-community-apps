@@ -65,10 +65,10 @@ class FunctionComponent(ResilientComponent):
             validate_fields(required_fields, kwargs)
             # Get the function parameters:
             qradar_query = self.get_textarea_param(kwargs.get("qradar_query"))  # textarea
-            qradar_select_param = kwargs.get("qradar_select_param")  # text
-            qradar_source_ip = kwargs.get("qradar_source_ip")  # text
-            qradar_time_length = kwargs.get("qradar_time_length")  # text
-            qradar_time_type = kwargs.get("qradar_time_type")  # text
+            qradar_search_param1 = kwargs.get("qradar_search_param1")  # text
+            qradar_search_param2 = kwargs.get("qradar_search_param2")  # text
+            qradar_search_param3 = kwargs.get("qradar_search_param3")  # text
+            qradar_search_param4 = kwargs.get("qradar_search_param4")  # text
             qradar_query_range_start = kwargs.get("qradar_query_range_start")  # number
             qradar_query_range_end = kwargs.get("qradar_query_range_end")  # number
 
@@ -77,10 +77,10 @@ class FunctionComponent(ResilientComponent):
                 qradar_query_all_results = True
 
             LOG.info("qradar_query: %s", qradar_query)
-            LOG.info("qradar_select_param: %s", qradar_select_param)
-            LOG.info("qradar_source_ip: %s", qradar_source_ip)
-            LOG.info("qradar_time_length: %s", qradar_time_length)
-            LOG.info("qradar_time_type: %s", qradar_time_type)
+            LOG.info("qradar_search_param1: %s", qradar_search_param1)
+            LOG.info("qradar_search_param2: %s", qradar_search_param2)
+            LOG.info("qradar_search_param3: %s", qradar_search_param3)
+            LOG.info("qradar_search_param4: %s", qradar_search_param4)
             LOG.info("qradar_query_range_start: %s", qradar_query_range_start)
             LOG.info("qradar_query_range_end: %s", qradar_query_range_end)
             LOG.info("qradar_query_all_results: %s", qradar_query_all_results)
@@ -109,10 +109,10 @@ class FunctionComponent(ResilientComponent):
                                                          options.get("username") or "service token"))
 
             query_string = function_utils.make_query_string(qradar_query,
-                                                            [qradar_select_param,
-                                                             qradar_source_ip,
-                                                             qradar_time_length,
-                                                             qradar_time_type])
+                                                            [qradar_search_param1,
+                                                             qradar_search_param2,
+                                                             qradar_search_param3,
+                                                             qradar_search_param4])
 
             LOG.info("Running query: " + query_string)
 
