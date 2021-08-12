@@ -1,11 +1,11 @@
 {
   {# JINJA template for creating a new Resilient incident from a Sentinel incident. #}
-  "name": "Sentinel Incident - {{ properties.title|replace('"', '\"') }}",
+  "name": "Sentinel Incident - {{ properties.title|replace('"', '\\"') }}",
   "discovered_date": {{ properties.createdTimeUtc|resilient_datetimeformat }},
   "start_date": {{ properties.firstActivityTimeUtc|resilient_datetimeformat }},
   "description": {
     "format": "text",
-    "content": "{{ properties.description|replace('"', '\"') }}"
+    "content": "{{ properties.description|replace('"', '\\"') }}"
   },
   {# if Sentinel users are different than SOAR users, consider using a mapping table using resilient_substitute: #}
   {# "owner_id": "{{ properties.owner.userPrincipalName|resilient_substitute('{"sentinel_user1@co.com": "soar_user1@ent.com", "sentinel_user2@co.com": "soar_user2@ent.com", "DEFAULT": "default_user@ent.com" }') }}", #}
