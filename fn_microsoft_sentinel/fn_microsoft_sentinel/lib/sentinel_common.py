@@ -195,7 +195,7 @@ class SentinelAPI():
         # build filter information
         last_poller_datetime = self._get_last_poller_date(profile_data)
         payload = {
-            "$filters": self._make_createdate_filter(last_poller_datetime)
+            "$filter": self._make_createdate_filter(last_poller_datetime)
         }
 
         result, status, reason = self._call(url, payload=payload)
@@ -231,7 +231,7 @@ class SentinelAPI():
 
     def _filter_by_last_modified_date(self, result, poller_last_modified_date, field="lastModifiedTimeUtc", \
                                       date_format="%Y-%m-%dT%H:%M:%S"):
-        """this logic is unnecessary of the $filters capability is workin in the query API call.
+        """this logic is unnecessary of the $filter capability is workin in the query API call.
              loop through all incidents results and reapply the logic to filter the list based on
              the last poller window time.
 
@@ -328,7 +328,7 @@ class SentinelAPI():
         return result, status, reason
 
     def _make_createdate_filter(self, last_poller_datetime):
-        """build the $filters parameter to find incidents by last poller run datetime
+        """build the $filter parameter to find incidents by last poller run datetime
 
         Args:
             last_poller_datetime ([datetime]): [last poller time]
@@ -339,7 +339,7 @@ class SentinelAPI():
         last_poller_datetime_iso = last_poller_datetime.isoformat()
 
         # remove milliseconds
-        return "lastModifiedTimeUtc ge {lookback_date}"\
+        return "properties/lastModifiedTimeUtc ge {lookback_date}Z"\
                     .format(lookback_date=last_poller_datetime_iso[:last_poller_datetime_iso.rfind('.')])
 
     def _get_last_poller_date(self, profile_data):
