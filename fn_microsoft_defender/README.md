@@ -24,25 +24,27 @@
   - [Resilient platform](#resilient-platform)
   - [Cloud Pak for Security](#cloud-pak-for-security)
   - [Proxy Server](#proxy-server)
+  - [Python Environment](#python-environment)
 - [Installation](#installation)
   - [Install](#install)
   - [App Configuration](#app-configuration)
   - [Custom Layouts](#custom-layouts)
-  - [Azure App Configuration](#azure-app-configuration)
-- [Function - Defender Machine Scan](#function---defender-machine-scan)
-- [Function - Defender Machine Isolation](#function---defender-machine-isolation)
-- [Function - Defender App Execution](#function---defender-app-execution)
-- [Function - Defender Quarantine File](#function---defender-quarantine-file)
+- [Function - Defender Find machines by filter](#function---defender-find-machines-by-filter)
 - [Function - Defender Set Indicator](#function---defender-set-indicator)
-- [Function - Defender Find Machines by IP](#function---defender-find-machines-by-ip)
-- [Function - Defender List Indicators](#function---defender-list-indicators)
-- [Function - Defender Delete Indicator](#function---defender-delete-indicator)
+- [Function - Defender Machine Scan](#function---defender-machine-scan)
+- [Function - Defender Alert Search](#function---defender-alert-search)
 - [Function - Defender Find Machines by File](#function---defender-find-machines-by-file)
-- [Function - Defender Search Alerts](#function---defender-search-alerts)
 - [Function - Defender Update Alert](#function---defender-update-alert)
+- [Function - Defender List Indicators](#function---defender-list-indicators)
+- [Function - Defender App Execution](#function---defender-app-execution)
+- [Function - Defender Collect Machine Investigation Package](#function---defender-collect-machine-investigation-package)
+- [Function - Defender Machine Isolation](#function---defender-machine-isolation)
+- [Function - Defender Find Machines by IP](#function---defender-find-machines-by-ip)
+- [Function - Defender Delete Indicator](#function---defender-delete-indicator)
+- [Function - Defender Quarantine File](#function---defender-quarantine-file)
 - [Script - Create Artifact from Indicator](#script---create-artifact-from-indicator)
-- [Data Table - Defender ATP Machines](#data-table---defender-atp-machines)
 - [Data Table - Defender ATP Indicators](#data-table---defender-atp-indicators)
+- [Data Table - Defender ATP Machines](#data-table---defender-atp-machines)
 - [Data Table - Defender ATP Alerts](#data-table---defender-atp-alerts)
 - [Rules](#rules)
 - [Troubleshooting & Support](#troubleshooting--support)
@@ -50,12 +52,12 @@
 
 ## Release Notes
 <!--
-  Specify all changes in this release. Do not remove the release 
+  Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.0.0 | 02/2021 | Initial Release |
+| 1.0.0 | 08/2021 | Initial Release |
 
 ---
 
@@ -77,16 +79,18 @@ Perform operations against Defender ATP such as set indicators, isolate and quar
 * List, set, update and delete Defender indicators
 * Search for Defender machines by IP address
 * Search for Defender machines by file hash
+* Search for Defender machines by machine name
 * Isolate/unisolate Defender machines
 * Restrict/unrestrict apps on a Defender machine
 * Run an antivirus scan on a Defender machine
 * Quarantine files on a Defender machine
+* Request an Investigation Collection Package
 
 ---
 
 ## Requirements
 <!--
-  List any Requirements 
+  List any Requirements
 -->
 This app supports the IBM Resilient SOAR Platform and the IBM Cloud Pak for Security.
 
@@ -94,23 +98,23 @@ This app supports the IBM Resilient SOAR Platform and the IBM Cloud Pak for Secu
 The Resilient platform supports two app deployment mechanisms, App Host and integration server.
 
 If deploying to a Resilient platform with an App Host, the requirements are:
-* Resilient platform >= `36.0.5634`.
+* Resilient platform >= `39.0.6328`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a Resilient platform with an integration server, the requirements are:
-* Resilient platform >= `36.0.5634`.
+* Resilient platform >= `39.0.6328`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient_circuits>=30.0.0`.
-* If using an API key account, make sure the account provides the following minimum permissions: 
+* If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
   | Org Data | Read |
   | Function | Read |
 
-The following Resilient platform guides provide additional information: 
-* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
+The following Resilient platform guides provide additional information:
+* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
-* _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
+* _System Administrator Guide_: provides the procedure to install, configure and deploy apps.
 
 The above guides are available on the IBM Knowledge Center at [ibm.biz/resilient-docs](https://ibm.biz/resilient-docs). On this web page, select your Resilient platform version. On the follow-on page, you can find the _App Host Deployment Guide_ or _Integration Server Guide_ by expanding **Resilient Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
@@ -120,14 +124,22 @@ If you are deploying to IBM Cloud Pak for Security, the requirements are:
 * Cloud Pak is configured with an App Host.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
-The following Cloud Pak guides provide additional information: 
+The following Cloud Pak guides provide additional information:
 * _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
 * _System Administrator Guide_: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security Knowledge Center table of contents, select Case Management and Orchestration & Automation > **System administrator**.
 
 These guides are available on the IBM Knowledge Center at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs). From this web page, select your IBM Cloud Pak for Security version. From the version-specific Knowledge Center page, select Case Management and Orchestration & Automation.
 
 ### Proxy Server
-The app supports a proxy server via the https_proxy and http_proxy app.config settings.
+The app **does** support a proxy server.
+
+### Python Environment
+Python 3.6+ environments are supported.
+Additional package dependencies may exist for each of these packages:
+* msal
+* resilient_circuits>=30.0.0
+* resilient_lib
+* simplejson
 
 ---
 
@@ -153,9 +165,11 @@ The following table provides the settings you need to configure the app. These s
   You may wish to recommend a new incident tab.
   You should save a screenshot "custom_layouts.png" in the doc/screenshots directory and reference it here
 -->
-* Import the Data Tables and Custom Fields like the screenshot below. Your use of custom tabs may vary:
+* Import the Data Tables and Custom Fields like the screenshot below:
 
   ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png)
+
+---
 
 ---
 
@@ -163,12 +177,13 @@ The following table provides the settings you need to configure the app. These s
 
 In order to use this app, an Azure app needs to be registered with the proper permissions for Defender ATP and a client secret generated. Settings, in general are:
 
-Application Type: Daemon with api calls enabled 
+Application Type: Daemon with api calls enabled
 
 API Permissions (Application type):
 
     Machine.Read.All
     Machine.ReadWrite.All
+    Machine.CollectForensics
     Machine.Isolate
     Machine.RestrictExecution
     Machine.Scan
@@ -185,21 +200,18 @@ API Permissions (Application type):
 
 ![screenshot: Azure App Secrets](./doc/screenshots/azure_app_secrets.png)
 
---
+## Function - Defender Find machines by filter
+Find machines based on the OData filter capability of Defender
 
-## Function - Defender Machine Scan
-Perform an antivirus scan on a Defender Machine.
-
- ![screenshot: fn-defender-machine-isolation ](./doc/screenshots/fn-defender-machine-isolation.png)
+ ![screenshot: fn-defender-find-machines-by-filter ](./doc/screenshots/fn-defender-find-machines-by-filter.png)
 
 <details><summary>Inputs:</summary>
 <p>
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `defender_description` | `text` | Yes | `-` | Commend on scan action |
-| `defender_machine_scantype` | `Full|Quick` | Yes | `-` | Type of antivirus scan to perform |
-| `defender_machine_id` | `text` | Yes | `-` | Defender Machine ID |
+| `defender_filter_name` | `text` | No | `-` | - |
+| `defender_filter_value` | `text` | No | `-` | - |
 
 </p>
 </details>
@@ -209,17 +221,72 @@ Perform an antivirus scan on a Defender Machine.
 
 ```python
 results = {
-    "id": "5382f7ea-7557-4ab7-9782-d50480024a4e",
-    "type": "Full",
-    "scope": "Selective",
-    "requestor": "Analyst@TestPrd.onmicrosoft.com",
-    "requestorComment": "test for docs",
-    "status": "Succeeded",
-    "machineId": "7b1f4967d9728e5aa3c06a9e617a22a4a5a17378",
-    "computerDnsName": "desktop-test",
-    "creationDateTimeUtc": "2019-01-02T14:39:38.2262283Z",
-    "lastUpdateDateTimeUtc": "2019-01-02T14:40:44.6596267Z",
-    "relatedFileInfo": None
+  'version': '1.0',
+  'success': True,
+  'reason': None,
+  'content': {
+    '@odata.context': 'https://api.securitycenter.microsoft.com/api/$metadata#Machines',
+    'value': [
+      {
+        'id': 'abc123',
+        'computerDnsName': 'windowsvmos',
+        'firstSeen': '2021-08-11T13:36:43.1619242Z',
+        'lastSeen': '2021-08-12T13:52:09.8444175Z',
+        'osPlatform': 'Windows10',
+        'osVersion': None,
+        'osProcessor': 'x64',
+        'version': '20H2',
+        'lastIpAddress': '10.0.0.5',
+        'lastExternalIpAddress': '22.22.22.22',
+        'agentVersion': '10.7740.1.1',
+        'osBuild': 19042,
+        'healthStatus': 'Active',
+        'deviceValue': 'Normal',
+        'rbacGroupId': 0,
+        'rbacGroupName': None,
+        'riskScore': 'High',
+        'exposureLevel': 'Low',
+        'isAadJoined': False,
+        'aadDeviceId': None,
+        'machineTags': [
+
+        ],
+        'defenderAvStatus': 'Updated',
+        'onboardingStatus': 'Onboarded',
+        'osArchitecture': '64-bit',
+        'ipAddresses': [
+          {
+            'ipAddress': '10.0.0.5',
+            'macAddress': '000000',
+            'type': 'Ethernet',
+            'operationalStatus': 'Up'
+          },
+          {
+            'ipAddress': 'fe80::844e:e65d:ffff:ffff',
+            'macAddress': '00000',
+            'type': 'Ethernet',
+            'operationalStatus': 'Up'
+          }
+        ],
+        'vmMetadata': None,
+        'firstSeen_ts': 1628689003000,
+        'lastSeen_ts': 1628776329000
+      }
+    ]
+  },
+  'raw': '',
+  'inputs': {
+    'defender_filter_value': 'WindowsVMOS',
+    'defender_filter_name': 'filter_by_name'
+  },
+  'metrics': {
+    'version': '1.0',
+    'package': 'fn-microsoft-defender',
+    'package_version': '1.0.0',
+    'host': 'Marks-MacBook-Pro.local',
+    'execution_time_ms': 445,
+    'timestamp': '2021-08-12 17:20:28'
+  }
 }
 ```
 
@@ -230,9 +297,8 @@ results = {
 <p>
 
 ```python
-inputs.defender_machine_id = row['machine_id']
-inputs.defender_machine_scantype = str(rule.properties.defender_machine_scantype)
-inputs.defender_description = rule.properties.defender_action_comment
+inputs.defender_filter_name = "filter_by_name"
+inputs.defender_filter_value = artifact.value
 ```
 
 </p>
@@ -242,216 +308,35 @@ inputs.defender_description = rule.properties.defender_action_comment
 <p>
 
 ```python
-msg = u"Defender ATP Action {}.\nAction: Antivirus Scan\nMachine: {} ({})\nScan Type: {}\nComment: {}\nScan ID: {}"\
-   .format("successful" if results.success else "unsuccessful",
-           results.content.get('computerDnsName'), row['machine_id'],
-           str(rule.properties.defender_machine_scantype),
-           rule.properties.defender_action_comment,
-           results.content.get('id'))
-           
-if not results.success:
-    msg = u"{}\nReason: {}".format(msg, results.reason)
+import time
 
-incident.addNote(msg)
-
-```
-
-</p>
-</details>
-
----
-
-## Function - Defender Machine Isolation
-Perform either an 'isolate' or 'unisolate' operation on a MS defender machine. A note is created with the operation results.
-
- ![screenshot: fn-defender-machine-isolation ](./doc/screenshots/fn-defender-machine-isolation.png)
-
-<details><summary>Inputs:</summary>
-<p>
-
-| Name | Type | Required | Example | Tooltip |
-| ---- | :--: | :------: | ------- | ------- |
-| `defender_description` | `text` | No | `-` | Commend on Isolation action |
-| `defender_isolation_action` | `AlertAndBlock|Alert|Allowed` | Yes | `-` | Selective – Restrict only limited set of applications from accessing the network |
-| `defender_isolation_type` | `Selective|Full` | Yes | `-` | Type of isolation operation to perform |
-| `defender_machine_id` | `text` | Yes | `-` | Defender Machine ID |
-
-</p>
-</details>
-
-<details><summary>Outputs:</summary>
-<p>
-
-```python
-results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
-}
-```
-
-</p>
-</details>
-
-<details><summary>Example Pre-Process Script:</summary>
-<p>
-
-```python
-inputs.defender_machine_id = row['machine_id']
-inputs.defender_isolation_type = str(rule.properties.defender_isolation_type)
-inputs.defender_description = rule.properties.defender_action_comment
-inputs.defender_isolation_action = str(rule.properties.defender_machine_action)
-```
-
-</p>
-</details>
-
-<details><summary>Example Post-Process Script:</summary>
-<p>
-
-```python
-msg = u"Defender ATP Action {}.\nAction: {}\nMachine: {}\nType: {}\nComment: {}"\
-   .format("successful" if results.success else "unsuccessful",
-           str(rule.properties.defender_isolation_action),
-           row['machine_id'],
-           str(rule.properties.defender_isolation_type),
-           rule.properties.defender_action_comment)
-           
-if not results.success:
-    msg = u"{}\nReason: {}".format(msg, results.reason)
-
-incident.addNote(msg)
-
-```
-
-</p>
-</details>
-
----
-## Function - Defender App Execution
-Perform app restriction actions on a Microsoft Defender machine. A note is created with the operation results.
-
- ![screenshot: fn-defender-app-execution ](./doc/screenshots/fn-defender-machine-isolation.png)
-
-<details><summary>Inputs:</summary>
-<p>
-
-| Name | Type | Required | Example | Tooltip |
-| ---- | :--: | :------: | ------- | ------- |
-| `defender_description` | `text` | No | `-` | Comment on restriction operation |
-| `defender_machine_id` | `text` | Yes | `-` | Defender Machine Id |
-| `defender_restriction_type` | `restrictCodeExecution|unrestrictCodeExecution` | Yes | `-` | - |
-
-</p>
-</details>
-
-<details><summary>Outputs:</summary>
-<p>
-
-```python
-results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
-}
-```
-
-</p>
-</details>
-
-<details><summary>Example Pre-Process Script:</summary>
-<p>
-
-```python
-inputs.defender_description = rule.properties.defender_action_comment
-inputs.defender_machine_id = row['machine_id']
-inputs.defender_restriction_type = str(rule.properties.defender_app_execution_action)
-
-```
-
-</p>
-</details>
-
-<details><summary>Example Post-Process Script:</summary>
-<p>
-
-```python
-msg = u"Defender ATP Action {}.\nAction: {}\nMachine: {}\nComment: {}"\
-   .format("successful" if results.success else "unsuccessful",
-           rule.properties.defender_app_execution_action,
-           row['machine_id'],
-           rule.properties.defender_action_comment)
-           
-if not results.success:
-    msg = u"{}\nReason: {}".format(msg, results.reason)
-
-incident.addNote(msg)
-
-```
-
-</p>
-</details>
-
----
-## Function - Defender Quarantine File
-Quarantine a SHA-1 File. A note is created with the operation results.
-
- ![screenshot: fn-defender-quarantine-file ](./doc/screenshots/fn-defender-machine-isolation.png)
-
-<details><summary>Inputs:</summary>
-<p>
-
-| Name | Type | Required | Example | Tooltip |
-| ---- | :--: | :------: | ------- | ------- |
-| `defender_description` | `text` | No | `-` | Comment on quarantine operation |
-| `defender_indicator_value` | `text` | No | `-` | SHA-1 file hash |
-| `defender_machine_id` | `text` | Yes | `-` | Defender machine ID |
-
-</p>
-</details>
-
-<details><summary>Outputs:</summary>
-<p>
-
-```python
-results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
-}
-```
-
-</p>
-</details>
-
-<details><summary>Example Pre-Process Script:</summary>
-<p>
-
-```python
-inputs.defender_description = rule.properties.defender_action_comment
-inputs.defender_indicator_value = row['machine_file_hash']
-inputs.defender_machine_id = row['machine_id']
-
-```
-
-</p>
-</details>
-
-<details><summary>Example Post-Process Script:</summary>
-<p>
-
-```python
-msg = u"Action {}.\nAction: Quarantine File\nIndicator: {}\nMachine: {} ({})"\
-   .format("successful" if results.success else "unsuccessful",
-           row['machine_file_hash'],
-           row['machine_name'], row['machine_id']
-           )
-
-if not results.success:
-    msg = u"{}\nReason: {}".format(msg, results.reason)
-
-incident.addNote(msg)
-
+"""
+"value": [
+    {
+        "id": "04c99d46599f078f1c3da3783cf5b95f01ac61bb",
+        "computerDnsName": "",
+        "firstSeen": "2017-07-06T01:25:04.9480498Z",
+        "osPlatform": "Windows10",
+    }
+]
+"""
+if results.success:
+    for machine in results.content['value']:
+      row = incident.addRow("defender_atp_machines")
+      row['report_date'] = int(time.time()*1000)
+      row['machine_id'] = machine['id']
+      row['machine_ip'] = machine['lastExternalIpAddress']
+      row['machine_name'] = machine['computerDnsName']
+      row['machine_platform'] = machine['osPlatform']
+      row['machine_firstseen'] = machine['firstSeen_ts']
+      row['machine_lastseen'] = machine['lastSeen_ts']
+      row['machine_health_status'] = machine.get('healthStatus')
+      row['machine_risk_score'] = machine.get('riskScore')
+      row['machine_exposure_level'] = machine.get('exposureLevel')
+      row['machine_tags'] = ', '.join(machine.get('machineTags', []))
+else:
+  msg = u"Defender ATP Action unsuccessful.\nAction: Find machines by filter\nReason: {}".format(results.reason)
+  incident.addNote(helper.createPlainText(msg))
 ```
 
 </p>
@@ -459,7 +344,7 @@ incident.addNote(msg)
 
 ---
 ## Function - Defender Set Indicator
-Set an indicator on an artifact. A row in the defender_atp_indicators table is created and a note is created with the operation results.
+Set or update an indicator with exposure values
 
  ![screenshot: fn-defender-set-indicator ](./doc/screenshots/fn-defender-set-indicator.png)
 
@@ -468,14 +353,14 @@ Set an indicator on an artifact. A row in the defender_atp_indicators table is c
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `defender_description` | `text` | No | `-` | Common on indicator operation |
-| `defender_expiration_time` | `datetimepicker` | No | `-` | Optional expiration date for indicator |
-| `defender_indicator_action` | `AlertAndBlock|Alert|Allowed` | No | `-` | - |
-| `defender_indicator_id` | `text` | No | `-` | Used when updating an existing indicator |
-| `defender_indicator_type` | `text` | No | `-` | artifact type or indicator type |
-| `defender_indicator_value` | `text` | No | `-` | artifact value |
-| `defender_severity` | `Informational|Low|Medium|High` | No | `-` | - |
-| `defender_title` | `text` | No | `-` | Title for indicator |
+| `defender_description` | `text` | No | `-` | - |
+| `defender_expiration_time` | `datetimepicker` | No | `-` | - |
+| `defender_indicator_action` | `select` | No | `-` | - |
+| `defender_indicator_id` | `text` | No | `-` | - |
+| `defender_indicator_type` | `text` | No | `-` | - |
+| `defender_indicator_value` | `text` | No | `-` | - |
+| `defender_severity` | `select` | No | `-` | - |
+| `defender_title` | `text` | No | `-` | - |
 
 </p>
 </details>
@@ -486,7 +371,7 @@ Set an indicator on an artifact. A row in the defender_atp_indicators table is c
 ```python
 results = {
     # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
+    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function.
     # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
 }
 ```
@@ -522,7 +407,7 @@ msg = u"Action {}.\nAction: {}\nArtifact: {}\nTitle: {}\nComment: {}\nSeverity: 
            rule.properties.indicator_description,
            str(rule.properties.indicator_severity),
            rule.properties.indicator_expiration)
-           
+
 if not results.success:
     msg = u"{}\nReason: {}".format(msg, results.reason)
 
@@ -547,18 +432,19 @@ if results.success:
 </details>
 
 ---
-## Function - Defender Find Machines by IP
-Find Defender Machine(s) by IP address. Results are populated in the defender_atp_machines datatable.
+## Function - Defender Machine Scan
+Start a Defender ATP Machine antivirus scan
 
- ![screenshot: fn-defender-find-machines-by-ip ](./doc/screenshots/fn-defender-find-machines-by-ip.png)
+ ![screenshot: fn-defender-machine-scan ](./doc/screenshots/fn-defender-machine-scan.png)
 
 <details><summary>Inputs:</summary>
 <p>
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `defender_indicator_value` | `text` | No | `-` | artifact IP address |
-| `defender_lookback_timeframe` | `datepicker` | Yes | `-` | This value must be within 30 days of current date |
+| `defender_description` | `text` | No | `-` | - |
+| `defender_machine_id` | `text` | Yes | `-` | - |
+| `defender_machine_scantype` | `select` | Yes | `-` | antivirus scan type |
 
 </p>
 </details>
@@ -568,9 +454,17 @@ Find Defender Machine(s) by IP address. Results are populated in the defender_at
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+    "id": "5382f7ea-7557-4ab7-9782-d50480024a4e",
+    "type": "Full",
+    "scope": "Selective",
+    "requestor": "Analyst@TestPrd.onmicrosoft.com",
+    "requestorComment": "test for docs",
+    "status": "Succeeded",
+    "machineId": "7b1f4967d9728e5aa3c06a9e617a22a4a5a17378",
+    "computerDnsName": "desktop-test",
+    "creationDateTimeUtc": "2019-01-02T14:39:38.2262283Z",
+    "lastUpdateDateTimeUtc": "2019-01-02T14:40:44.6596267Z",
+    "relatedFileInfo": None
 }
 ```
 
@@ -581,8 +475,10 @@ results = {
 <p>
 
 ```python
-inputs.defender_indicator_value = artifact.value
-inputs.defender_lookback_timeframe = rule.properties.defender_lookback_timeframe
+inputs.defender_machine_id = row['machine_id']
+inputs.defender_description = rule.properties.defender_action_comment
+inputs.defender_machine_scantype = str(rule.properties.defender_machine_scantype)
+
 ```
 
 </p>
@@ -592,153 +488,26 @@ inputs.defender_lookback_timeframe = rule.properties.defender_lookback_timeframe
 <p>
 
 ```python
-"""
-"value": [
-    {
-        "id": "04c99d46599f078f1c3da3783cf5b95f01ac61bb",
-        "computerDnsName": "",
-        "firstSeen": "2017-07-06T01:25:04.9480498Z",
-        "osPlatform": "Windows10",
-    }
-]
-"""
+import time
+
 if results.success:
-    for machine in results.content['value']:
-        row = incident.addRow("defender_atp_machines")
-        row['machine_id'] = machine['id']
-        row['machine_name'] = machine['computerDnsName']
-        row['machine_platform'] = machine['osPlatform']
-        row['machine_firstseen'] = machine['firstSeen_ts']
-        row['machine_lastseen'] = machine['lastSeen_ts']
-        row['machine_health_status'] = machine.get('healthStatus')
-        row['machine_risk_score'] = machine.get('riskScore')
-        row['machine_exposure_level'] = machine.get('exposureLevel')
-        row['machine_tags'] = |.join(machine.get('machineTags', []))
+  row['report_date'] = int(time.time()*1000)
+  action_msg = "Action: {}\nComment: {}\nStatus: {}\nStart Date: {}".format(
+    results.content['type'],
+    results.content['requestorComment'],
+    results.content['status'],
+    results.content['creationDateTimeUtc']
+    )
+  row['machine_last_action'] = helper.createPlainText(action_msg)
 else:
-    msg = u"Defender ATP Action unsuccessful.\nAction: Find machines by IP Address\nReason: {}".format(results.reason)
-    incident.addNote(msg)
-```
-
-</p>
-</details>
-
----
-## Function - Defender List Indicators
-List all indicators defined in Defender. The results are added to the defender_atp_indicators datatable.
-
- ![screenshot: fn-defender-list-indicators ](./doc/screenshots/fn-defender-set-indicator.png)
-
-<details><summary>Inputs:</summary>
-<p>
-
-| Name | Type | Required | Example | Tooltip |
-| ---- | :--: | :------: | ------- | ------- |
-
-</p>
-</details>
-
-<details><summary>Outputs:</summary>
-<p>
-
-```python
-results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
-}
-```
-
-</p>
-</details>
-
-<details><summary>Example Pre-Process Script:</summary>
-<p>
-
-```python
-None
-```
-
-</p>
-</details>
-
-<details><summary>Example Post-Process Script:</summary>
-<p>
-
-```python
-if results.success and results.content.get("value"):
-    for indicator in results.content.get("value"):
-        row = incident.addRow("defender_atp_indicators")
-        row['ind_id'] = indicator['id']
-        row['ind_value'] = indicator['indicatorValue']
-        row['ind_type'] = indicator['indicatorType']
-        row['ind_title'] = indicator['title']
-        row['ind_description'] = indicator['description']
-        row['ind_action'] = indicator['action']
-        row['ind_severity'] = indicator['severity']
-        row['ind_created_by'] = indicator['createdByDisplayName']
-        row['ind_creation_date'] = indicator['creationTimeDateTimeUtc_ts']
-        row['ind_expiration_date'] = indicator['expirationTime_ts']
-else:
-    msg = u"Defender ATP Action unsuccessful.\nAction: List indicators\nReason: {}".format(results.reason)
-    incident.addNote(msg)
-```
-
-</p>
-</details>
-
----
-## Function - Defender Delete Indicator
-Delete an indicator from Defender. A note is created with the operation results.
-
- ![screenshot: fn-defender-delete-indicator ](./doc/screenshots/fn-defender-set-indicator.png)
-
-<details><summary>Inputs:</summary>
-<p>
-
-| Name | Type | Required | Example | Tooltip |
-| ---- | :--: | :------: | ------- | ------- |
-| `defender_indicator_id` | `text` | No | `-` | Indicator Id provided by the List Indicators operation |
-
-</p>
-</details>
-
-<details><summary>Outputs:</summary>
-<p>
-
-```python
-results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
-}
-```
-
-</p>
-</details>
-
-<details><summary>Example Pre-Process Script:</summary>
-<p>
-
-```python
-inputs.defender_indicator_id = row['ind_id']
-```
-
-</p>
-</details>
-
-<details><summary>Example Post-Process Script:</summary>
-<p>
-
-```python
-msg = u"Defender ATP Action {}.\nAction: Delete Indicator\nIndicator: {}"\
+  msg = u"Defender ATP Scan Action {}.\nMachine: {} ({})\nType: {}\nComment: {}\nReason: {}"\
    .format("successful" if results.success else "unsuccessful",
-           row['ind_value'],
-           )
-           
-if not results.success:
-    msg = u"{}\nReason: {}".format(msg, results.reason)
+           results.content.get('computerDnsName'), row['machine_id'],
+           str(rule.properties.defender_isolation_type),
+           rule.properties.defender_action_comment,
+           results.reason)
 
-incident.addNote(msg)
+  incident.addNote(helper.createPlainText(msg))
 
 ```
 
@@ -746,87 +515,21 @@ incident.addNote(msg)
 </details>
 
 ---
-## Function - Defender Find Machines by File
-Find machines which match a given file hash. Results are populated in the defender_atp_machines datatable.
+## Function - Defender Alert Search
+Return Defender alerts based on a set of search criteria
 
- ![screenshot: fn-defender-find-machines-by-file ](./doc/screenshots/fn-defender-find-machines-by-file.png)
-
-<details><summary>Inputs:</summary>
-<p>
-
-| Name | Type | Required | Example | Tooltip |
-| ---- | :--: | :------: | ------- | ------- |
-| `defender_indicator_value` | `text` | No | `-` | - |
-
-</p>
-</details>
-
-<details><summary>Outputs:</summary>
-<p>
-
-```python
-results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
-}
-```
-
-</p>
-</details>
-
-<details><summary>Example Pre-Process Script:</summary>
-<p>
-
-```python
-inputs.defender_indicator_value = artifact.value
-```
-
-</p>
-</details>
-
-<details><summary>Example Post-Process Script:</summary>
-<p>
-
-```python
-if results.success:
-    for machine in results.content['value']:
-        row = incident.addRow("defender_atp_machines")
-        row['machine_id'] = machine['id']
-        row['machine_name'] = machine['computerDnsName']
-        row['machine_platform'] = machine['osPlatform']
-        row['machine_firstseen'] = machine['firstSeen_ts']
-        row['machine_lastseen'] = machine['lastSeen_ts']
-        row['machine_ip'] = machine['lastIpAddress']
-        row['machine_file_hash'] = artifact.value
-        row['machine_health_status'] = machine.get('healthStatus')
-        row['machine_risk_score'] = machine.get('riskScore')
-        row['machine_exposure_level'] = machine.get('exposureLevel')
-        row['machine_tags'] = |.join(machine.get('machineTags', []))
-else:
-    msg = u"Defender ATP Action unsuccessful.\nAction: Find machines by file hash\nReason: {}".format(results.reason)
-    incident.addNote(msg)
-```
-
-</p>
-</details>
-
----
-## Function - Defender Search Alerts
-Return Defender alerts based on a set of search criteria. Filtering criteria exist based on alert severity, last seen date, and last updated date.
-
- ![screenshot: fn-defender-find-machines-by-file ](./doc/screenshots/fn-defender-find-machines-by-file.png)
+ ![screenshot: fn-defender-alert-search ](./doc/screenshots/fn-defender-alert-search.png)
 
 <details><summary>Inputs:</summary>
 <p>
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `defender_machine_id` | `text` | Yes | `-` | Filter alerts to a Defender Machine |
-| `defender_alert_severity` | `Informational|Low|Medium|High` | No | `-` | Filter on alert status |
-| `defender_alert_lastseen` | `datetime` | No | `-` | Filter on alert last seen date |
-| `defender_alert_lastupdatetime` | `datetime` | No | `-` | Filter on alert last update time |
-| `defender_alert_result_max` | `number` | No | `-` | Limit alert results returned |
+| `defender_alert_lastseen` | `datetimepicker` | No | `-` | Last Seen Alert Date |
+| `defender_alert_lastupdatetime` | `datetimepicker` | No | `-` | Date when alert was last updated |
+| `defender_alert_result_max` | `number` | No | `5` | Number of top results to return |
+| `defender_alert_severity` | `select` | No | `-` | - |
+| `defender_machine_id` | `text` | Yes | `-` | - |
 
 </p>
 </details>
@@ -891,6 +594,7 @@ inputs.defender_alert_lastseen = rule.properties.defender_alert_last_seen
 inputs.defender_alert_lastupdatetime = rule.properties.defender_alert_lastupdatetime
 inputs.defender_alert_severity = str(rule.properties.defender_alert_severity)
 inputs.defender_alert_result_max = rule.properties.defender_max_results
+
 ```
 
 </p>
@@ -900,6 +604,50 @@ inputs.defender_alert_result_max = rule.properties.defender_max_results
 <p>
 
 ```python
+"""
+"value" = {
+    "@odata.context": "https://api.securitycenter.microsoft.com/api/$metadata#Alerts",
+    "value": [
+        {
+            "id": "da637308392288907382_-880718168",
+            "incidentId": 7587,
+            "investigationId": 723156,
+            "assignedTo": "secop123@contoso.com",
+            "severity": "Low",
+            "status": "New",
+            "classification": "TruePositive",
+            "determination": null,
+            "investigationState": "Queued",
+            "detectionSource": "WindowsDefenderAv",
+            "category": "SuspiciousActivity",
+            "threatFamilyName": "Meterpreter",
+            "title": "Suspicious 'Meterpreter' behavior was detected",
+            "description": "Malware and unwanted software are undesirable applications that perform annoying, disruptive, or harmful actions on affected machines. Some of these undesirable applications can replicate and spread from one machine to another. Others are able to receive commands from remote attackers and perform activities associated with cyber attacks.\n\nA malware is considered active if it is found running on the machine or it already has persistence mechanisms in place. Active malware detections are assigned higher severity ratings.\n\nBecause this malware was active, take precautionary measures and check for residual signs of infection.",
+            "alertCreationTime": "2020-07-20T10:53:48.7657932Z",
+            "firstEventTime": "2020-07-20T10:52:17.6654369Z",
+            "lastEventTime": "2020-07-20T10:52:18.1362905Z",
+            "lastUpdateTime": "2020-07-20T10:53:50.19Z",
+            "resolvedTime": null,
+            "machineId": "12ee6dd8c833c8a052ea231ec1b19adaf497b625",
+            "computerDnsName": "temp123.middleeast.corp.microsoft.com",
+            "rbacGroupName": "MiddleEast",
+            "aadTenantId": "a839b112-1253-6432-9bf6-94542403f21c",
+            "relatedUser": {
+                "userName": "temp123",
+                "domainName": "MIDDLEEAST"
+            },
+			"comments": [
+				{
+					"comment": "test comment for docs",
+					"createdBy": "secop123@contoso.com",
+					"createdTime": "2020-07-21T01:00:37.8404534Z"
+				}
+			],
+            "evidence": []
+		}
+	]
+}
+"""
 if results.success:
     for alert in results.content['value']:
         row = incident.addRow("defender_atp_alerts")
@@ -920,6 +668,76 @@ if results.success:
 else:
     msg = u"Defender ATP Action unsuccessful.\nAction: Find alerts by machine\nReason: {}".format(results.reason)
     incident.addNote(msg)
+
+```
+
+</p>
+</details>
+
+---
+## Function - Defender Find Machines by File
+Find machines which match a given file hash
+
+ ![screenshot: fn-defender-find-machines-by-file ](./doc/screenshots/fn-defender-find-machines-by-file.png)
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `defender_indicator_value` | `text` | No | `-` | - |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+```python
+results = {
+    # TODO: Copy and paste an example of the Function Output within this code block.
+    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function.
+    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.defender_indicator_value = artifact.value
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+import time
+
+if results.success:
+    for machine in results.content['value']:
+        row = incident.addRow("defender_atp_machines")
+        row['report_date'] = int(time.time()*1000)
+        row['machine_id'] = machine['id']
+        row['machine_name'] = machine['computerDnsName']
+        row['machine_platform'] = machine['osPlatform']
+        row['machine_firstseen'] = machine['firstSeen_ts']
+        row['machine_lastseen'] = machine['lastSeen_ts']
+        row['machine_ip'] = machine['lastIpAddress']
+        row['machine_file_hash'] = artifact.value
+        row['machine_health_status'] = machine.get('healthStatus')
+        row['machine_risk_score'] = machine.get('riskScore')
+        row['machine_exposure_level'] = machine.get('exposureLevel')
+        row['machine_tags'] = ', '.join(machine.get('machineTags', []))
+else:
+    msg = u"Defender ATP Action unsuccessful.\nAction: Find machines by file hash\nReason: {}".format(results.reason)
+    incident.addNote(helper.createPlainText(msg))
 ```
 
 </p>
@@ -927,21 +745,21 @@ else:
 
 ---
 ## Function - Defender Update Alert
-Update a Defender Alert. This is used with alerts populated from the Defender Search Alerts Function in the defender_atp_alerts table.
+Update a Defender Alert
 
- ![screenshot: fn-defender-find-machines-by-file ](./doc/screenshots/fn-defender-update-alerts.png)
+ ![screenshot: fn-defender-update-alert ](./doc/screenshots/fn-defender-update-alert.png)
 
 <details><summary>Inputs:</summary>
 <p>
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
+| `defender_alert_assigned_to` | `text` | No | `-` | - |
+| `defender_alert_classification` | `select` | No | `-` | - |
+| `defender_alert_determination` | `select` | No | `-` | - |
 | `defender_alert_id` | `text` | Yes | `-` | - |
-| `defender_alert_classification` | `FalsePositive|TruePositive|Unknown` | No | `-` | - |
-| `defender_alert_determination` | `Apt|Malware|NotAvailable|SecurityPersonnel|SecurityTesting|UnwantedSoftware|Other` | No | `-` | - |
-| `defender_alert_status` | `Informational|Low|Medium|High` | No | `-` | - |
-| `defender_alert_assigned_to` | `text` | No | `-` | Defender Incident Assignment |
-| `defender_description` | `text` | Yes | `-` | Description of change |
+| `defender_alert_status` | `select` | No | `-` | - |
+| `defender_description` | `text` | No | `-` | - |
 
 </p>
 </details>
@@ -1038,6 +856,582 @@ if results.success:
     row['determination'] = str(rule.properties.defender_alert_determination)
     row['status'] = str(rule.properties.defender_alert_status)
     row['assigned_to'] = rule.properties.defender_alert_assigned_to
+
+```
+
+</p>
+</details>
+
+---
+## Function - Defender List Indicators
+Get a list of all Defender indicators
+
+ ![screenshot: fn-defender-list-indicators ](./doc/screenshots/fn-defender-list-indicators.png)
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+```python
+results = {
+    # TODO: Copy and paste an example of the Function Output within this code block.
+    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function.
+    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+None
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+if results.success and results.content.get("value"):
+    for indicator in results.content.get("value"):
+        row = incident.addRow("defender_atp_indicators")
+        row['ind_id'] = indicator['id']
+        row['ind_value'] = indicator['indicatorValue']
+        row['ind_type'] = indicator['indicatorType']
+        row['ind_title'] = indicator['title']
+        row['ind_description'] = indicator['description']
+        row['ind_action'] = indicator['action']
+        row['ind_severity'] = indicator['severity']
+        row['ind_created_by'] = indicator['createdByDisplayName']
+        row['ind_creation_date'] = indicator['creationTimeDateTimeUtc_ts']
+        row['ind_expiration_date'] = indicator['expirationTime_ts']
+else:
+    msg = u"Defender ATP Action unsuccessful.\nAction: List indicators\nReason: {}".format(results.reason)
+    incident.addNote(msg)
+```
+
+</p>
+</details>
+
+---
+## Function - Defender App Execution
+Perform app restriction actions on a Microsoft Defender machine
+
+ ![screenshot: fn-defender-app-execution ](./doc/screenshots/fn-defender-app-execution.png)
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `defender_description` | `text` | No | `-` | - |
+| `defender_machine_id` | `text` | Yes | `-` | - |
+| `defender_restriction_type` | `select` | Yes | `-` | - |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+```python
+results = {
+    # TODO: Copy and paste an example of the Function Output within this code block.
+    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function.
+    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.defender_description = rule.properties.defender_action_comment
+inputs.defender_machine_id = row['machine_id']
+inputs.defender_restriction_type = str(rule.properties.defender_app_execution_action)
+
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+import time
+
+msg = u"Defender ATP Action {}.\nAction: {}\nMachine: {}\nComment: {}"\
+   .format("successful" if results.success else "unsuccessful",
+           rule.properties.defender_app_execution_action,
+           row['machine_id'],
+           rule.properties.defender_action_comment)
+
+if results.success:
+  row['report_date'] = int(time.time()*1000)
+  action_msg = "Action: {}\nComment: {}\nStatus: {}\nStart Date: {}".format(
+    results.content['type'],
+    results.content['requestorComment'],
+    results.content['status'],
+    results.content['creationDateTimeUtc']
+    )
+  row['machine_last_action'] = helper.createPlainText(action_msg)
+else:
+  msg = u"{}\nReason: {}".format(msg, results.reason)
+
+incident.addNote(helper.createPlainText(msg))
+
+```
+
+</p>
+</details>
+
+---
+## Function - Defender Collect Machine Investigation Package
+Collect the machine investigation package
+
+ ![screenshot: fn-defender-collect-machine-investigation-package ](./doc/screenshots/fn-defender-collect-machine-investigation-package.png)
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `defender_description` | `text` | No | `-` | - |
+| `defender_machine_id` | `text` | Yes | `-` | - |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+```python
+results = {
+    # TODO: Copy and paste an example of the Function Output within this code block.
+    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function.
+    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.defender_machine_id = row['machine_id']
+inputs.defender_description = rule.properties.defender_action_comment
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+import time
+
+if results.success:
+  msg = "Action: {}\nComment: {}\nStatus: {}\nStart Date: {}".format(
+    results.content['type'],
+    results.content['requestorComment'],
+    results.content['status'],
+    results.content['creationDateTimeUtc']
+    )
+  row['machine_last_action'] = helper.createPlainText(msg)
+  row['report_date'] = int(time.time()*1000)
+
+"""
+    'type': 'CollectInvestigationPackage',
+    'title': None,
+    'requestor': 'f0dc3f88-f617-449c-960c-6b54818cd110',
+    'requestorComment': 'ss',
+    'status': 'Succeeded',
+    'machineId': '2a94aaf80aa31094790ce40da6fdfc03a9a145c5',
+    'computerDnsName': 'windowsvmos',
+    'creationDateTimeUtc': '2021-08-12T18:53:06.5259227Z',
+    'lastUpdateDateTimeUtc': '2021-08-12T18:54:20.4259984Z',
+"""
+
+```
+
+</p>
+</details>
+
+---
+## Function - Defender Machine Isolation
+Perform either an 'isolate' or 'unisolate' operation on a MS defender machine
+
+ ![screenshot: fn-defender-machine-isolation ](./doc/screenshots/fn-defender-machine-isolation.png)
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `defender_description` | `text` | No | `-` | - |
+| `defender_isolation_action` | `text` | Yes | `-` | 'isolate' or 'unisolate' |
+| `defender_isolation_type` | `select` | No | `-` | Type of operation to perform |
+| `defender_machine_id` | `text` | Yes | `-` | - |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+```python
+results = {
+    # TODO: Copy and paste an example of the Function Output within this code block.
+    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function.
+    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.defender_machine_id = row['machine_id']
+inputs.defender_isolation_type = str(rule.properties.defender_isolation_type)
+inputs.defender_description = rule.properties.defender_action_comment
+inputs.defender_isolation_action = 'isolate'
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+import time
+
+if results.success:
+  row['report_date'] = int(time.time()*1000)
+
+  action_msg = "Action: {}\nComment: {}\nStatus: {}\nStart Date: {}".format(
+    results.content['type'],
+    results.content['requestorComment'],
+    results.content['status'],
+    results.content['creationDateTimeUtc']
+    )
+  row['machine_last_action'] = helper.createPlainText(action_msg)
+else:
+  msg = u"Defender ATP Isolate Action {}.\nMachine: {} ({})\nType: {}\nComment: {}\nReason: {}"\
+   .format("successful" if results.success else "unsuccessful",
+           results.content.get('computerDnsName'), row['machine_id'],
+           str(rule.properties.defender_isolation_type),
+           rule.properties.defender_action_comment,
+           results.reason)
+
+  incident.addNote(helper.createPlainText(msg))
+
+```
+
+</p>
+</details>
+
+---
+## Function - Defender Find Machines by IP
+Find Defender Machine(s) by IP address
+
+ ![screenshot: fn-defender-find-machines-by-ip ](./doc/screenshots/fn-defender-find-machines-by-ip.png)
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `defender_indicator_value` | `text` | No | `-` | - |
+| `defender_lookback_timeframe` | `datepicker` | Yes | `-` | This value must be within 30 days of current date |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+```python
+results = {
+  'version': '1.0',
+  'success': True,
+  'reason': None,
+  'content': {
+    '@odata.context': 'https://api.securitycenter.microsoft.com/api/$metadata#Machines',
+    'value': [
+      {
+        'id': 'abc123',
+        'computerDnsName': 'windowsvmos',
+        'firstSeen': '2021-08-11T13:36:43.1619242Z',
+        'lastSeen': '2021-08-12T13:52:09.8444175Z',
+        'osPlatform': 'Windows10',
+        'osVersion': None,
+        'osProcessor': 'x64',
+        'version': '20H2',
+        'lastIpAddress': '10.0.0.5',
+        'lastExternalIpAddress': '22.22.22.22',
+        'agentVersion': '10.7740.1.1',
+        'osBuild': 19042,
+        'healthStatus': 'Active',
+        'deviceValue': 'Normal',
+        'rbacGroupId': 0,
+        'rbacGroupName': None,
+        'riskScore': 'High',
+        'exposureLevel': 'Low',
+        'isAadJoined': False,
+        'aadDeviceId': None,
+        'machineTags': [
+
+        ],
+        'defenderAvStatus': 'Updated',
+        'onboardingStatus': 'Onboarded',
+        'osArchitecture': '64-bit',
+        'ipAddresses': [
+          {
+            'ipAddress': '10.0.0.5',
+            'macAddress': '000000',
+            'type': 'Ethernet',
+            'operationalStatus': 'Up'
+          },
+          {
+            'ipAddress': 'fe80::844e:e65d:ffff:ffff',
+            'macAddress': '00000',
+            'type': 'Ethernet',
+            'operationalStatus': 'Up'
+          }
+        ],
+        'vmMetadata': None,
+        'firstSeen_ts': 1628689003000,
+        'lastSeen_ts': 1628776329000
+      }
+    ]
+  },
+  'raw': '',
+  'inputs': {
+    'defender_filter_value': 'WindowsVMOS',
+    'defender_filter_name': 'filter_by_name'
+  },
+  'metrics': {
+    'version': '1.0',
+    'package': 'fn-microsoft-defender',
+    'package_version': '1.0.0',
+    'host': 'Marks-MacBook-Pro.local',
+    'execution_time_ms': 445,
+    'timestamp': '2021-08-12 17:20:28'
+  }
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.defender_indicator_value = artifact.value
+inputs.defender_lookback_timeframe = rule.properties.defender_lookback_timeframe
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+import time
+"""
+"value": [
+    {
+        "id": "04c99d46599f078f1c3da3783cf5b95f01ac61bb",
+        "computerDnsName": "",
+        "firstSeen": "2017-07-06T01:25:04.9480498Z",
+        "osPlatform": "Windows10",
+    }
+]
+"""
+if results.success:
+  if not results.content['value']:
+    msg = u"Defender ATP Find machines by IP Address unsuccessful.\nNothing found for {}".format(artifact.value)
+    incident.addNote(helper.createPlainText(msg))
+  else:
+    for machine in results.content['value']:
+        row = incident.addRow("defender_atp_machines")
+        row['report_date'] = int(time.time()*1000)
+        row['machine_id'] = machine['id']
+        row['machine_name'] = machine['computerDnsName']
+        row['machine_platform'] = machine['osPlatform']
+        row['machine_firstseen'] = machine['firstSeen_ts']
+        row['machine_lastseen'] = machine['lastSeen_ts']
+        row['machine_health_status'] = machine.get('healthStatus')
+        row['machine_risk_score'] = machine.get('riskScore')
+        row['machine_exposure_level'] = machine.get('exposureLevel')
+        row['machine_tags'] = ', '.join(machine.get('machineTags', []))
+else:
+    msg = u"Defender ATP Action unsuccessful.\nAction: Find machines by IP Address\nReason: {}".format(results.reason)
+    incident.addNote(helper.createPlainText(msg))
+```
+
+</p>
+</details>
+
+---
+## Function - Defender Delete Indicator
+Delete an indicator from Defender ATP
+
+ ![screenshot: fn-defender-delete-indicator ](./doc/screenshots/fn-defender-delete-indicator.png)
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `defender_indicator_id` | `text` | No | `-` | - |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+```python
+results = {
+    # TODO: Copy and paste an example of the Function Output within this code block.
+    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function.
+    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.defender_indicator_id = row['ind_id']
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+import time
+
+msg = u"Defender ATP Action {}.\nAction: Delete Indicator\nIndicator: {}"\
+   .format("successful" if results.success else "unsuccessful",
+           row['ind_value'],
+           )
+
+if results.success:
+  row['report_date'] = int(time.time()*1000)
+else:
+  msg = u"{}\nReason: {}".format(msg, results.reason)
+
+incident.addNote(helper.createPlainText(msg))
+
+```
+
+</p>
+</details>
+
+---
+## Function - Defender Quarantine File
+Quarantine a SHA-1 file
+
+ ![screenshot: fn-defender-quarantine-file ](./doc/screenshots/fn-defender-quarantine-file.png)
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `defender_description` | `text` | No | `-` | - |
+| `defender_indicator_value` | `text` | No | `-` | - |
+| `defender_machine_id` | `text` | Yes | `-` | - |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+```python
+results = {
+    # TODO: Copy and paste an example of the Function Output within this code block.
+    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function.
+    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.defender_description = rule.properties.defender_action_comment
+inputs.defender_indicator_value = row['machine_file_hash']
+inputs.defender_machine_id = row['machine_id']
+
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+import time
+
+if results.success:
+  row['report_date'] = int(time.time()*1000)
+  action_msg = "Action: {}\nComment: {}\nStatus: {}\nStart Date: {}".format(
+    results.content['type'],
+    results.content['requestorComment'],
+    results.content['status'],
+    results.content['creationDateTimeUtc']
+    )
+  row['machine_last_action'] = helper.createPlainText(action_msg)
+else:
+  msg = u"Defender ATP Quarantine file Action {}.\nMachine: {} ({})\nType: {}\nComment: {}\nReason: {}"\
+   .format("successful" if results.success else "unsuccessful",
+           results.content.get('computerDnsName'), row['machine_id'],
+           str(rule.properties.defender_isolation_type),
+           rule.properties.defender_action_comment,
+           results.reason)
+
+  incident.addNote(helper.createPlainText(msg))
+
 ```
 
 </p>
@@ -1046,7 +1440,7 @@ if results.success:
 ---
 
 ## Script - Create Artifact from Indicator
-Convert an indicator to an Artifact for further enrichment or remediation. A new artifact is created.
+Convert an indicator to an Artifact for further enrichment or remediation
 
 **Object:** defender_atp_indicators
 
@@ -1055,7 +1449,7 @@ Convert an indicator to an Artifact for further enrichment or remediation. A new
 
 ```python
 # Convert a Defender ATP indicator to an artifact_type
-# lookup table for Defender indicator types to artifact types
+# lookup for Defender indicator types to arttfact types
 type_lookup = {
         "FileSha1": "Malware SHA-1 Hash",
         "FileSha256": "Malware SHA-256 Hash",
@@ -1063,7 +1457,7 @@ type_lookup = {
         "DomainName": "DNS Name",
         "Url": "URL"
     }
-    
+
 artifact_type = type_lookup.get(row['ind_type'], "String")
 artifact_description = u"{}\n{}".format(row['ind_title'], row['ind_description'])
 incident.addArtifact(artifact_type, row['ind_value'], artifact_description)
@@ -1077,32 +1471,9 @@ incident.addNote(msg)
 
 ---
 
-## Data Table - Defender ATP Machines
-
- ![screenshot: dt-defender-atp-machines](./doc/screenshots/fn-defender-machine-isolation.png)
-
-#### API Name:
-defender_atp_machines
-
-#### Columns:
-| Column Name | API Access Name | Type | Tooltip |
-| ----------- | --------------- | ---- | ------- |
-| Exposure Level | `machine_exposure_level` | `Low|Medium|High` | - |
-| File hash | `machine_file_hash` | `text` | Populated from the 'Find Machines by file hash' operation |
-| First seen | `machine_firstseen` | `datetimepicker` | - |
-| Health Status | `machine_health_status` | `Active|Inactive` | - |
-| Machine ID | `machine_id` | `text` | - |
-| IP Address | `machine_ip` | `text` | - |
-| Last seen | `machine_lastseen` | `datetimepicker` | - |
-| Machine Name | `machine_name` | `text` | - |
-| Platform | `machine_platform` | `text` | - |
-| Risk Score | `machine_risk_score` | `Low|Medium|High` | - |
-| Machine tags | `machine_tags` | `text` | List of tags applied to a machine |
-
----
 ## Data Table - Defender ATP Indicators
 
- ![screenshot: dt-defender-atp-indicators](./doc/screenshots/fn-defender-set-indicator.png)
+ ![screenshot: dt-defender-atp-indicators](./doc/screenshots/dt-defender-atp-indicators.png)
 
 #### API Name:
 defender_atp_indicators
@@ -1110,21 +1481,46 @@ defender_atp_indicators
 #### Columns:
 | Column Name | API Access Name | Type | Tooltip |
 | ----------- | --------------- | ---- | ------- |
-| Action | `ind_action` | `AlertAndBlock|Alert|Allowed` | - |
+| Action | `ind_action` | `text` | - |
 | Created By | `ind_created_by` | `text` | - |
 | Creation Date | `ind_creation_date` | `datetimepicker` | - |
 | Description | `ind_description` | `text` | - |
 | Expiration Date | `ind_expiration_date` | `datetimepicker` | - |
 | Indicator ID | `ind_id` | `text` | - |
-| Severity | `ind_severity` | `Informational|Low|Medium|High` | - |
+| Severity | `ind_severity` | `text` | - |
 | Title | `ind_title` | `text` | - |
-| Type | `ind_type` | `DomainName|Ip Address|FileSha1|Url` | Defender Indication type |
-| Value | `ind_value` | `text` | Indicator Value |
+| Type | `ind_type` | `text` | - |
+| Value | `ind_value` | `text` | - |
+
+---
+## Data Table - Defender ATP Machines
+
+ ![screenshot: dt-defender-atp-machines](./doc/screenshots/dt-defender-atp-machines.png)
+
+#### API Name:
+defender_atp_machines
+
+#### Columns:
+| Column Name | API Access Name | Type | Tooltip |
+| ----------- | --------------- | ---- | ------- |
+| Exposure Level | `machine_exposure_level` | `text` | - |
+| File Hash | `machine_file_hash` | `text` | - |
+| First Seen | `machine_firstseen` | `datetimepicker` | - |
+| Health Status | `machine_health_status` | `text` | - |
+| Machine ID | `machine_id` | `text` | - |
+| IP Address | `machine_ip` | `text` | - |
+| Last Action | `machine_last_action` | `textarea` | - |
+| Last Seen | `machine_lastseen` | `datetimepicker` | - |
+| Machine Name | `machine_name` | `text` | - |
+| Platform | `machine_platform` | `text` | - |
+| Risk Score | `machine_risk_score` | `text` | - |
+| Machine Tags | `machine_tags` | `text` | - |
+| Report Date | `report_date` | `datetimepicker` | - |
 
 ---
 ## Data Table - Defender ATP Alerts
 
- ![screenshot: dt-defender-update-alerts](./doc/screenshots/fn-defender-update-alerts.png)
+ ![screenshot: dt-defender-atp-alerts](./doc/screenshots/dt-defender-atp-alerts.png)
 
 #### API Name:
 defender_atp_alerts
@@ -1132,37 +1528,43 @@ defender_atp_alerts
 #### Columns:
 | Column Name | API Access Name | Type | Tooltip |
 | ----------- | --------------- | ---- | ------- |
-| Azure Incident ID | `azure_incident_id` | `number` | - |
-| Computer Name | `computer_name` | `text` | - |
-| Title | `title` | `text` | Alert title |
-| Description | `alert_description` | `text` | Alert description |
-| Assigned To | `assigned_to` | `text` | - |
-| Status | `status` | `New|InProgress|Resolved` | - |
-| Severity | `severity` | `Informational|Low|Medium|High` | - |
-| Classification | `classification` | `Unknown|FalsePositive|TruePositive` | - |
-| Determination | `determination` | `NotAvailable|Apt|Malware|SecurityPersonnel|SecurityTesting|UnwantedSoftware|Other` | -- |
-| Last Event | `last_event` | `datetimepicker` | Last Event Date |
-| Last Updated | `last_updated` | `datetimepicker` | Last Updated Date |
-| Machine ID | `machine_id` | `text` | - |
+| Description | `alert_description` | `text` | - |
 | Alert ID | `alert_id` | `text` | - |
+| Assigned To | `assigned_to` | `text` | - |
+| Azure Incident ID | `azure_incident_id` | `number` | - |
+| Category | `category` | `text` | - |
+| Classification | `classification` | `text` | - |
+| Computer Name | `computer_name` | `text` | - |
+| Determination | `determination` | `text` | - |
+| Last Event | `last_event` | `datetimepicker` | - |
+| Last Updated | `last_updated` | `datetimepicker` | - |
+| Machine ID | `machine_id` | `text` | - |
+| Severity | `severity` | `text` | - |
+| Status | `status` | `text` | - |
+| Title | `title` | `text` | - |
 
 ---
+
+
 
 ## Rules
 | Rule Name | Object | Workflow Triggered |
 | --------- | ------ | ------------------ |
-| Defender ATP Set Indicator | artifact | `defender_atp_set_indicator` |
 | Defender ATP Find Machines | artifact | `defender_atp_find_machines` |
-| Defender ATP App Execution Restriction | defender_atp_machines | `defender_atp_app_execution` |
+| Defender ATP Machine Scan | defender_atp_machines | `defender_atp_machine_scan` |
+| Create Artifact from Indicator | defender_atp_indicators | `-` |
 | Defender ATP Machine Isolate Action | defender_atp_machines | `defender_atp_machine_isolation` |
-| Defender ATP Alerts by Machine | defender_atp_machines | `defender_atp_alerts_by_machine` |
-| Defender ATP Quarantine Machine File | defender_atp_machines | `defender_quarantine_file` |
+| Defender ATP Find machine by DNS name | artifact | `defender_find_machines_by_filter` |
 | Update Indicator | defender_atp_indicators | `defender_atp_update_indicator` |
-| Defender ATP Find Machines by File Hash | artifact | `defender_atp_find_machines_by_file_hash` |
 | Defender ATP List Indicators | incident | `defender_list_indicators` |
 | Delete Indicator | defender_atp_indicators | `defender_atp_delete_indicator` |
+| Defender ATP Set Indicator | artifact | `defender_atp_set_indicator` |
 | Defender ATP Update Alert | defender_atp_alerts | `defender_atp_update_alert` |
-
+| Defender ATP Alerts by Machine | defender_atp_machines | `defender_atp_alerts_by_machine` |
+| Defender ATP Quarantine Machine File | defender_atp_machines | `defender_quarantine_file` |
+| Defender ATP Find Machines by File Hash | artifact | `defender_atp_find_machines_by_file_hash` |
+| Defender ATP Collect Machine Investigation Package | defender_atp_machines | `defender_atp_collect_machine_investigation_package` |
+| Defender ATP App Execution Restriction | defender_atp_machines | `defender_atp_app_execution` |
 
 ---
 
