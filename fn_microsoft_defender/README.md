@@ -201,9 +201,8 @@ API Permissions (Application type):
 ![screenshot: Azure App Secrets](./doc/screenshots/azure_app_secrets.png)
 
 ## Function - Defender Find machines by filter
-Find machines based on the OData filter capability of Defender
+Find machines based on the OData filter capability of Defender. Presently only the `computerDnsName` filter is supported.
 
- ![screenshot: fn-defender-find-machines-by-filter ](./doc/screenshots/fn-defender-find-machines-by-filter.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -344,7 +343,7 @@ else:
 
 ---
 ## Function - Defender Set Indicator
-Set or update an indicator with exposure values
+Set or update an indicator with exposure values.
 
  ![screenshot: fn-defender-set-indicator ](./doc/screenshots/fn-defender-set-indicator.png)
 
@@ -370,9 +369,76 @@ Set or update an indicator with exposure values
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function.
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+  'version': '1.0',
+  'success': True,
+  'reason': None,
+  'content': {
+    '@odata.context': 'https://api.securitycenter.microsoft.com/api/$metadata#Indicators/$entity',
+    'id': '2',
+    'indicatorValue': '52.188.18.0',
+    'indicatorType': 'IpAddress',
+    'action': 'AlertAndBlock',
+    'createdBy': 'f0dc3f88-f617-449c-960c-fffffff',
+    'severity': 'High',
+    'category': None,
+    'application': None,
+    'educateUrl': None,
+    'bypassDurationHours': None,
+    'title': 'Potential Bad IP Address',
+    'description': 'Investigate for potential risk',
+    'recommendedActions': None,
+    'creationTimeDateTimeUtc': '2021-08-13T12:55:29.5601303Z',
+    'expirationTime': None,
+    'lastUpdateTime': '2021-08-13T12:55:29.5672691Z',
+    'lastUpdatedBy': None,
+    'rbacGroupNames': [
+
+    ],
+    'rbacGroupIds': [
+
+    ],
+    'notificationId': None,
+    'notificationBody': None,
+    'version': None,
+    'mitreTechniques': [
+
+    ],
+    'historicalDetection': False,
+    'lookBackPeriod': None,
+    'generateAlert': False,
+    'additionalInfo': None,
+    'createdByDisplayName': 'Sentinel',
+    'externalId': None,
+    'createdBySource': 'PublicApi',
+    'certificateInfo': None,
+    'creationTimeDateTimeUtc_ts': 1628859329000,
+    'expirationTime_ts': None,
+    'lastUpdateTime_ts': 1628859329000
+  },
+  'raw': '',
+  'inputs': {
+    'defender_indicator_type': 'IP Address',
+    'defender_title': 'Potential Bad IP Address',
+    'defender_description': 'Investigate for potential risk',
+    'defender_expiration_time': None,
+    'defender_indicator_action': {
+      'id': 546,
+      'name': 'AlertAndBlock'
+    },
+    'defender_severity': {
+      'id': 564,
+      'name': 'High'
+    },
+    'defender_indicator_value': '52.188.18.234'
+  },
+  'metrics': {
+    'version': '1.0',
+    'package': 'fn-microsoft-defender',
+    'package_version': '1.0.0',
+    'host': 'Marks-MacBook-Pro.local',
+    'execution_time_ms': 769,
+    'timestamp': '2021-08-13 08:55:29'
+  }
 }
 ```
 
@@ -516,9 +582,7 @@ else:
 
 ---
 ## Function - Defender Alert Search
-Return Defender alerts based on a set of search criteria
-
- ![screenshot: fn-defender-alert-search ](./doc/screenshots/fn-defender-alert-search.png)
+Return Defender alerts based on a set of search criteria.
 
 <details><summary>Inputs:</summary>
 <p>
@@ -676,9 +740,8 @@ else:
 
 ---
 ## Function - Defender Find Machines by File
-Find machines which match a given file hash
+Find machines which match a given file hash.
 
- ![screenshot: fn-defender-find-machines-by-file ](./doc/screenshots/fn-defender-find-machines-by-file.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -864,15 +927,13 @@ if results.success:
 
 ---
 ## Function - Defender List Indicators
-Get a list of all Defender indicators
+Get a list of all Defender indicators.
 
  ![screenshot: fn-defender-list-indicators ](./doc/screenshots/fn-defender-list-indicators.png)
 
 <details><summary>Inputs:</summary>
 <p>
 
-| Name | Type | Required | Example | Tooltip |
-| ---- | :--: | :------: | ------- | ------- |
 
 </p>
 </details>
@@ -882,9 +943,67 @@ Get a list of all Defender indicators
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function.
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+  'version': '1.0',
+  'success': True,
+  'reason': None,
+  'content': {
+    '@odata.context': 'https://api.securitycenter.microsoft.com/api/$metadata#Indicators',
+    'value': [
+      {
+        'id': '2',
+        'indicatorValue': '52.188.18.234',
+        'indicatorType': 'IpAddress',
+        'action': 'AlertAndBlock',
+        'createdBy': 'f0dc3f88-f617-449c-960c-ffffff',
+        'severity': 'High',
+        'category': 1,
+        'application': None,
+        'educateUrl': None,
+        'bypassDurationHours': None,
+        'title': 'Potential Bad IP Address',
+        'description': 'Investigate for potential risk',
+        'recommendedActions': None,
+        'creationTimeDateTimeUtc': '2021-08-13T12:55:29.5601303Z',
+        'expirationTime': None,
+        'lastUpdateTime': '2021-08-13T12:55:29.5672691Z',
+        'lastUpdatedBy': None,
+        'rbacGroupNames': [
+
+        ],
+        'rbacGroupIds': [
+
+        ],
+        'notificationId': None,
+        'notificationBody': None,
+        'version': None,
+        'mitreTechniques': [
+
+        ],
+        'historicalDetection': False,
+        'lookBackPeriod': None,
+        'generateAlert': True,
+        'additionalInfo': None,
+        'createdByDisplayName': 'Sentinel',
+        'externalId': None,
+        'createdBySource': 'PublicApi',
+        'certificateInfo': None,
+        'creationTimeDateTimeUtc_ts': 1628859329000,
+        'expirationTime_ts': None
+      }
+    ]
+  },
+  'raw': '',
+  'inputs': {
+
+  },
+  'metrics': {
+    'version': '1.0',
+    'package': 'fn-microsoft-defender',
+    'package_version': '1.0.0',
+    'host': 'Marks-MacBook-Pro.local',
+    'execution_time_ms': 2601,
+    'timestamp': '2021-08-13 09:05:33'
+  }
 }
 ```
 
@@ -1412,7 +1531,7 @@ inputs.defender_machine_id = row['machine_id']
 
 ```python
 import time
-
+`
 if results.success:
   row['report_date'] = int(time.time()*1000)
   action_msg = "Action: {}\nComment: {}\nStatus: {}\nStart Date: {}".format(
