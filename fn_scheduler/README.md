@@ -34,15 +34,16 @@
 
 ## Release Notes
 <!--
-  Specify all changes in this release. Do not remove the release 
+  Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
 | Version | Date | Notes |
 | ------: | ---: | ----: |
+| 1.1.1   | Aug. 2021 | remove SOAR credentials from saved rules in db |
 | 1.1.0   | Apr. 2021 | app.config setting for optional note creation |
 | 1.0.3   | Oct. 2020 | Conditional PostgreSQL dependency |
 | 1.0.2   | Sept. 2020 | PostgreSQL support |
-| 1.0.1   | May 2020 | App Host support | 
+| 1.0.1   | May 2020 | App Host support |
 | 1.0.0   | Nov. 2019 | Initial Release |
 
 ---
@@ -75,7 +76,7 @@ Functions available include:
 
 ## Requirements
 <!--
-  List any Requirements 
+  List any Requirements
 -->
 * Resilient platform >= `v33.0.5087`
 * An Integration Server running `resilient_circuits>=30.0.0`
@@ -101,7 +102,7 @@ To install,
   | **db_url** | No | postgresql+pypostgresql://res_test:res_test@192.168.1.215:5432/res_test | *Specify a PostgreSQL db to retain the schedules. Uncomment and remove the setting datastore_dir.* |
   | disable_notes | No | True|False | Set to True to disable creating a note when a rule is triggered. Default is False |
 
-  
+
 ### Integration Server
 * Download the `app-fn_scheduler.zip`.
 * Copy the `.zip` to your Integration Server and SSH into it.
