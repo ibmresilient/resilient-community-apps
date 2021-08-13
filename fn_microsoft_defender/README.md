@@ -499,7 +499,7 @@ if results.success:
 
 ---
 ## Function - Defender Machine Scan
-Start a Defender ATP Machine antivirus scan
+Start a Defender ATP Machine antivirus scan.
 
  ![screenshot: fn-defender-machine-scan ](./doc/screenshots/fn-defender-machine-scan.png)
 
@@ -808,7 +808,7 @@ else:
 
 ---
 ## Function - Defender Update Alert
-Update a Defender Alert
+Update a Defender Alert.
 
  ![screenshot: fn-defender-update-alert ](./doc/screenshots/fn-defender-update-alert.png)
 
@@ -929,7 +929,7 @@ if results.success:
 ## Function - Defender List Indicators
 Get a list of all Defender indicators.
 
- ![screenshot: fn-defender-list-indicators ](./doc/screenshots/fn-defender-list-indicators.png)
+ ![screenshot: fn-defender-list-indicators ](./doc/screenshots/dt-defender-atp-indicators.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -1047,7 +1047,7 @@ else:
 
 ---
 ## Function - Defender App Execution
-Perform app restriction actions on a Microsoft Defender machine
+Perform app restriction actions on a Microsoft Defender machine.
 
  ![screenshot: fn-defender-app-execution ](./doc/screenshots/fn-defender-app-execution.png)
 
@@ -1123,9 +1123,8 @@ incident.addNote(helper.createPlainText(msg))
 
 ---
 ## Function - Defender Collect Machine Investigation Package
-Collect the machine investigation package
+Collect the machine investigation package.
 
- ![screenshot: fn-defender-collect-machine-investigation-package ](./doc/screenshots/fn-defender-collect-machine-investigation-package.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -1143,9 +1142,47 @@ Collect the machine investigation package
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function.
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+  'version': 2.0,
+  'success': True,
+  'reason': None,
+  'content': {
+    '@odata.context': 'https://api.securitycenter.microsoft.com/api/$metadata#MachineActions/$entity',
+    'id': 'a68c6a92-3be6-441e-98c9-7153b6000000',
+    'type': 'CollectInvestigationPackage',
+    'title': None,
+    'requestor': 'f0dc3f88-f617-449c-960c-6b54818cd110',
+    'requestorComment': 'start investigation',
+    'status': 'Succeeded',
+    'machineId': '2a94aaf80aa31094790ce40da6fdfc03a000000',
+    'computerDnsName': 'windowsvmos',
+    'creationDateTimeUtc': '2021-08-12T20:40:55.5836137Z',
+    'lastUpdateDateTimeUtc': '2021-08-12T20:43:48.2006779Z',
+    'cancellationRequestor': None,
+    'cancellationComment': None,
+    'cancellationDateTimeUtc': None,
+    'errorHResult': 0,
+    'scope': None,
+    'externalId': None,
+    'requestSource': 'PublicApi',
+    'relatedFileInfo': None,
+    'commands': [
+
+    ],
+    'troubleshootInfo': None
+  },
+  'raw': None,
+  'inputs': {
+    'defender_description': 'start investigation',
+    'defender_machine_id': '2a94aaf80aa31094790ce40da6fdfc03a000000'
+  },
+  'metrics': {
+    'version': '1.0',
+    'package': 'fn-microsoft-defender',
+    'package_version': '1.0.0',
+    'host': 'Marks-MacBook-Pro.local',
+    'execution_time_ms': 182828,
+    'timestamp': '2021-08-12 16:43:57'
+  }
 }
 ```
 
@@ -1198,7 +1235,7 @@ if results.success:
 
 ---
 ## Function - Defender Machine Isolation
-Perform either an 'isolate' or 'unisolate' operation on a MS defender machine
+Perform either an 'isolate' or 'unisolate' operation on a MS defender machine.
 
  ![screenshot: fn-defender-machine-isolation ](./doc/screenshots/fn-defender-machine-isolation.png)
 
@@ -1220,9 +1257,49 @@ Perform either an 'isolate' or 'unisolate' operation on a MS defender machine
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function.
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+  'version': '1.0',
+  'success': True,
+  'reason': None,
+  'content': {
+    '@odata.context': 'https://api.securitycenter.microsoft.com/api/$metadata#MachineActions/$entity',
+    'id': 'ceb8e7f5-680d-4ab5-804a-2a484000000',
+    'type': 'Unisolate',
+    'title': None,
+    'requestor': 'f0dc3f88-f617-449c-960c-6b548100000',
+    'requestorComment': 'unisolate',
+    'status': 'Pending',
+    'machineId': '2a94aaf80aa31094790ce40da6fdfc03000000',
+    'computerDnsName': 'windowsvmos',
+    'creationDateTimeUtc': '2021-08-12T19:53:15.784603Z',
+    'lastUpdateDateTimeUtc': '2021-08-12T19:53:15.784603Z',
+    'cancellationRequestor': None,
+    'cancellationComment': None,
+    'cancellationDateTimeUtc': None,
+    'errorHResult': 0,
+    'scope': None,
+    'externalId': None,
+    'requestSource': 'PublicApi',
+    'relatedFileInfo': None,
+    'commands': [
+
+    ],
+    'troubleshootInfo': None
+  },
+  'raw': '',
+  'inputs': {
+    'defender_isolation_type': None,
+    'defender_description': 'unisolate',
+    'defender_machine_id': '2a94aaf80aa31094790ce40da6fdfc03a9a145c5',
+    'defender_isolation_action': 'unisolate'
+  },
+  'metrics': {
+    'version': '1.0',
+    'package': 'fn-microsoft-defender',
+    'package_version': '1.0.0',
+    'host': 'Marks-MacBook-Pro.local',
+    'execution_time_ms': 912,
+    'timestamp': '2021-08-12 15:53:16'
+  }
 }
 ```
 
@@ -1275,7 +1352,7 @@ else:
 
 ---
 ## Function - Defender Find Machines by IP
-Find Defender Machine(s) by IP address
+Find Defender Machine(s) by IP address.
 
  ![screenshot: fn-defender-find-machines-by-ip ](./doc/screenshots/fn-defender-find-machines-by-ip.png)
 
@@ -1420,7 +1497,7 @@ else:
 
 ---
 ## Function - Defender Delete Indicator
-Delete an indicator from Defender ATP
+Delete an indicator from Defender ATP.
 
  ![screenshot: fn-defender-delete-indicator ](./doc/screenshots/fn-defender-delete-indicator.png)
 
@@ -1483,9 +1560,8 @@ incident.addNote(helper.createPlainText(msg))
 
 ---
 ## Function - Defender Quarantine File
-Quarantine a SHA-1 file
+Quarantine a SHA-1 file.
 
- ![screenshot: fn-defender-quarantine-file ](./doc/screenshots/fn-defender-quarantine-file.png)
 
 <details><summary>Inputs:</summary>
 <p>
