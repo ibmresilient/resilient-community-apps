@@ -69,14 +69,16 @@ class TestQradarReferenceTableDeleteItem:
 
     mock_inputs_1 = {
         "qradar_reference_table_name": "sample text",
-        "qradar_reference_table_item_value": "sample text"
+        "qradar_reference_table_item_value": "sample text",
+        "qradar_label": "QRadar.label1"
     }
 
     expected_results_1 = MOCK_DELETE_RESPONSE
 
     mock_inputs_2 = {
         "qradar_reference_table_name": "sample text",
-        "qradar_reference_table_item_value": "sample text"
+        "qradar_reference_table_item_value": "sample text",
+        "qradar_label": "QRadar.label2"
     }
 
     expected_results_2 = MOCK_DELETE_RESPONSE_UNICODE
