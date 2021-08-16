@@ -124,14 +124,14 @@ class FunctionComponent(ResilientComponent):
                                          cafile=qradar_verify_cert,
                                          opts=self.opts, function_opts=options)
 
-            result = qradar_client.ariel_search(query_string,
+            results = qradar_client.ariel_search(query_string,
                                                 qradar_query_all_results,
                                                 range_start=qradar_query_range_start,
                                                 range_end=qradar_query_range_end,
                                                 timeout=timeout)
 
             yield StatusMessage("done...")
-            yield FunctionResult(result)
+            yield FunctionResult(results)
         except Exception as e:
             LOG.error(str(e))
             yield FunctionError()

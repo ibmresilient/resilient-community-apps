@@ -99,8 +99,9 @@ class FunctionComponent(ResilientComponent):
             result = qradar_client.delete_ref_element(qradar_reference_set_name,
                                                    qradar_reference_set_item_value)
 
-            status_code = isinstance(result, list)
-            reason = None if status_code else result.get('http_response', {}).get('message', 'unknown')
+            # status_code = isinstance(result, list)
+            status_code = True if result["status_code"] == 200 else False
+            reason = None if status_code else result["content"]["http_response"].get("message")
             results = rp.done(success=status_code, 
                               content=result,
                               reason=reason)

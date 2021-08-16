@@ -496,9 +496,9 @@ class QRadarClient(object):
         :return:
         """
         auth_info = AuthInfo.get_authInfo()
-        ref_set_link = quote(ref_set, '')
-        value = quote(value, '')
-        url = u"{}{}/{}?value={}".format(auth_info.api_url, reference_endpoint,
+        ref_set_link = quote(ref_set, '').replace("%20", "%2520")
+        value = quote(value, '').replace("%20", "%2520")
+        url = u"{}{}/{}/{}".format(auth_info.api_url, reference_endpoint,
                                    ref_set_link, value)
 
         ret = {}

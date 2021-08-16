@@ -84,7 +84,6 @@ class FunctionComponent(ResilientComponent):
             LOG.debug("Connection to {} using {}".format(options["host"],
                                                          options.get("username") or "service token"))
 
-            yield StatusMessage("starting...")
             qradar_client = QRadarClient(host=options["host"],
                                          username=options.get("username", None),
                                          password=options.get("qradarpassword", None),
@@ -95,7 +94,7 @@ class FunctionComponent(ResilientComponent):
             result = qradar_client.get_all_ref_set()
             
             status_code = isinstance(result, list)
-            reason = None if status_code else result.get('http_response', {}).get('message', 'unknown')
+            reason = None if status_code else result["content"]["http_response"].get("message")
             results = rp.done(success=status_code, 
                               content=result,
                               reason=reason)

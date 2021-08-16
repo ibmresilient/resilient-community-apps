@@ -62,7 +62,7 @@ class FunctionComponent(ResilientComponent):
             # Get the wf_instance_id of the workflow this Function was called in, if not found return a backup string
             wf_instance_id = event.message.get("workflow_instance", {}).get("workflow_instance_id", "no instance id found")
 
-            yield StatusMessage("Starting 'qradar_get_reference_table' that was running in workflow '{0}'".format(wf_instance_id))
+            yield StatusMessage("Starting 'qradar_get_all_reference_table' that was running in workflow '{0}'".format(wf_instance_id))
             rp = ResultPayload(PACKAGE_NAME, **kwargs)
 
             qradar_label = kwargs.get("qradar_label")
@@ -90,11 +90,11 @@ class FunctionComponent(ResilientComponent):
             result = qradar_client.get_all_ref_tables()
 
             status_code = isinstance(result, list)
-            reason = None if status_code else result.get('http_response', {}).get('message', 'unknown')
+            reason = None if status_code else result["content"]["http_response"].get("message")
             results = rp.done(success=status_code, 
                               content=result,
                               reason=reason)
-            yield StatusMessage("Finished 'qradar_get_reference_table' that was running in workflow '{0}'".format(wf_instance_id))
+            yield StatusMessage("Finished 'qradar_get_all_reference_table' that was running in workflow '{0}'".format(wf_instance_id))
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
