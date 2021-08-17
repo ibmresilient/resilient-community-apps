@@ -6,7 +6,7 @@
 """Function implementation"""
 
 import logging
-from fn_qradar_integration.components.funct_qradar_get_reference_tables import PACKAGE_NAME
+from fn_qradar_integration.components.funct_qradar_get_all_reference_tables import PACKAGE_NAME
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import validate_fields
 from fn_qradar_integration.util.qradar_utils import QRadarClient

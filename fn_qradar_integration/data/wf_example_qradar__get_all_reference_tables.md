@@ -8,7 +8,7 @@
 ## Function - QRadar Reference Table Get All Tables
 
 ### API Name
-`qradar_get_reference_tables`
+`qradar_get_all_reference_tables`
 
 ### Output Name
 `None`

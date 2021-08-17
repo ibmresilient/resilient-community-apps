@@ -7,7 +7,7 @@ from resilient_circuits import SubmitTestFunction, FunctionResult
 from mock import patch 
 
 PACKAGE_NAME = "fn_qradar_integration"
-FUNCTION_NAME = "qradar_get_reference_tables"
+FUNCTION_NAME = "qradar_get_all_reference_tables"
 
 # Read the default configuration-data section from the package
 config_data = get_config_data(PACKAGE_NAME)
@@ -59,9 +59,9 @@ MOCK_GET_TABLE_RESPONSE = [
     "collection_id": 190
   }]
 
-def call_qradar_get_reference_tables_function(circuits, function_params, timeout=5):
+def call_qradar_get_all_reference_tables_function(circuits, function_params, timeout=5):
     # Create the submitTestFunction event
-    evt = SubmitTestFunction("qradar_get_reference_tables", function_params)
+    evt = SubmitTestFunction("qradar_get_all_reference_tables", function_params)
 
     # Fire a message to the function
     circuits.manager.fire(evt)
@@ -76,15 +76,15 @@ def call_qradar_get_reference_tables_function(circuits, function_params, timeout
 
     # else return the FunctionComponent's results
     else:
-        event = circuits.watcher.wait("qradar_get_reference_tables_result", parent=evt, timeout=timeout)
+        event = circuits.watcher.wait("qradar_get_all_reference_tables_result", parent=evt, timeout=timeout)
         assert event
         assert isinstance(event.kwargs["result"], FunctionResult)
         pytest.wait_for(event, "complete", True)
         return event.kwargs["result"].value
 
 
-class TestQradarGetReferenceTables:
-    """ Tests for the qradar_get_reference_tables function"""
+class TestQradarGetAllReferenceTables:
+    """ Tests for the qradar_get_all_reference_tables function"""
 
     def test_function_definition(self):
         """ Test that the package provides customization_data that defines the function """
@@ -109,7 +109,7 @@ class TestQradarGetReferenceTables:
     def test_live_success(self, circuits_app, mock_inputs, expected_results):
         """ Test calling with sample values for the parameters """
 
-        results = call_qradar_get_reference_tables_function(circuits_app, mock_inputs)
+        results = call_qradar_get_all_reference_tables_function(circuits_app, mock_inputs)
         assert results
         assert results['content'] # Ensure we have some results
         for entry in results['content']:
@@ -126,7 +126,7 @@ class TestQradarGetReferenceTables:
 
         with patch('fn_qradar_integration.lib.reference_data.ReferenceTableFacade.ReferenceTableFacade.get_all_reference_tables') as patched_add_element:
             patched_add_element.return_value = expected_results
-            results = call_qradar_get_reference_tables_function(circuits_app, mock_inputs)
+            results = call_qradar_get_all_reference_tables_function(circuits_app, mock_inputs)
             assert results
             assert results['content'] # Ensure we have some results
             for entry in results['content']:

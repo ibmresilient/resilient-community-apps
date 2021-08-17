@@ -14,7 +14,7 @@ PACKAGE_NAME = "fn_qradar_integration"
 LOG = logging.getLogger(__name__)
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'qradar_get_reference_tables''"""
+    """Component that implements Resilient function 'qradar_get_all_reference_tables''"""
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
@@ -54,8 +54,8 @@ class FunctionComponent(ResilientComponent):
         for server_name in server_list:
             self.servers_list[server_name] = opts.get(server_name, {})
 
-    @function("qradar_get_reference_tables")
-    def _qradar_get_reference_tables_function(self, event, *args, **kwargs):
+    @function("qradar_get_all_reference_tables")
+    def _qradar_get_all_reference_tables_function(self, event, *args, **kwargs):
         """Function: Get all reference tables from a QRadar instance"""
         try:
 
