@@ -21,26 +21,17 @@ def selftest_function(opts):
     try:
 
         options = opts.get("fn_qradar_integration", {})
-        res_options = opts.get("resilient", {})
 
         log.info("Verifying app.config values for fn_qradar_integration")
 
-        if res_options["cafile"].lower() == "false":
-            qradar_client = QRadarClient(host=options["host"],
-                                         username=options.get("username", None),
-                                         password=options.get("qradarpassword", None),
-                                         token=options.get("qradartoken", None),
-                                         cafile=False,
-                                         opts=opts,
-                                         function_opts=options)
-        else:
-            qradar_client = QRadarClient(host=options["host"],
-                                         username=options.get("username", None),
-                                         password=options.get("qradarpassword", None),
-                                         token=options.get("qradartoken", None),
-                                         cafile=res_options["cafile"],
-                                         opts=opts,
-                                         function_opts=options)
+        cafile = False if options.get("verify_cert", "").lower() == "false" else options["verify_cert"]
+        qradar_client = QRadarClient(host=options["host"],
+                                     username=options.get("username", None),
+                                     password=options.get("qradarpassword", None),
+                                     token=options.get("qradartoken", None),
+                                     cafile=cafile,
+                                     opts=opts,
+                                     function_opts=options)
 
         connected = qradar_client.verify_connect()
 

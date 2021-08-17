@@ -56,6 +56,7 @@ fn_proofpoint_trap
 fn_pulsedive
 fn_qradar_advisor
 fn_qradar_enhanced_data
+fn_qradar_integration
 fn_query_tor_network
 fn_remedy
 fn_rsa_netwitness
@@ -86,7 +87,6 @@ fn_zia
 
 #Not_Rebuilt
 #fn_aws_guardduty-failing-test
-#fn_qradar_integration-failing-test-still-root-group
 #fn_crowdstrike_falcon-still-root-group
 #fn_odbc_query-still-root-group
 #rc-data-feed
