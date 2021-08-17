@@ -62,6 +62,7 @@ class FunctionComponent(ResilientComponent):
             wf_instance_id = event.message.get("workflow_instance", {}).get("workflow_instance_id", "no instance id found")
 
             yield StatusMessage("Starting 'qradar_reference_table_get_table' running in workflow '{0}'".format(wf_instance_id))
+            
             rp = ResultPayload(PACKAGE_NAME, **kwargs)
 
             # Get the function parameters:

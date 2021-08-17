@@ -61,6 +61,12 @@ class FunctionComponent(ResilientComponent):
     def _qradar_search_function(self, event, *args, **kwargs):
         """Function: Search QRadar"""
         try:
+
+            # Get the wf_instance_id of the workflow this Function was called in, if not found return a backup string
+            wf_instance_id = event.message.get("workflow_instance", {}).get("workflow_instance_id", "no instance id found")
+
+            yield StatusMessage("Starting 'qradar_search' that was running in workflow '{0}'".format(wf_instance_id))
+
             required_fields = ["qradar_query", "qradar_query_all_results"]
             validate_fields(required_fields, kwargs)
             # Get the function parameters:
@@ -116,7 +122,6 @@ class FunctionComponent(ResilientComponent):
 
             LOG.info("Running query: " + query_string)
 
-            yield StatusMessage("starting...")
             qradar_client = QRadarClient(host=options["host"],
                                          username=options.get("username", None),
                                          password=options.get("qradarpassword", None),
@@ -130,7 +135,8 @@ class FunctionComponent(ResilientComponent):
                                                 range_end=qradar_query_range_end,
                                                 timeout=timeout)
 
-            yield StatusMessage("done...")
+            yield StatusMessage("Finished 'qradar_search' that was running in workflow '{0}'".format(wf_instance_id))
+
             yield FunctionResult(results)
         except Exception as e:
             LOG.error(str(e))

@@ -62,6 +62,7 @@ class FunctionComponent(ResilientComponent):
             wf_instance_id = event.message["workflow_instance"]["workflow_instance_id"]
 
             yield StatusMessage("Starting 'qradar_find_all_reference_sets' running in workflow '{0}'".format(wf_instance_id))
+            
             rp = ResultPayload(PACKAGE_NAME, **kwargs)
 
             # Get the function parameters:

@@ -63,6 +63,7 @@ class FunctionComponent(ResilientComponent):
             wf_instance_id = event.message.get("workflow_instance", {}).get("workflow_instance_id", "no instance id found")
 
             yield StatusMessage("Starting 'qradar_get_all_reference_table' that was running in workflow '{0}'".format(wf_instance_id))
+            
             rp = ResultPayload(PACKAGE_NAME, **kwargs)
 
             qradar_label = kwargs.get("qradar_label")
@@ -94,6 +95,7 @@ class FunctionComponent(ResilientComponent):
             results = rp.done(success=status_code, 
                               content=result,
                               reason=reason)
+
             yield StatusMessage("Finished 'qradar_get_all_reference_table' that was running in workflow '{0}'".format(wf_instance_id))
 
             # Produce a FunctionResult with the results

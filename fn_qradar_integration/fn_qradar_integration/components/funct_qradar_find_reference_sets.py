@@ -64,6 +64,12 @@ class FunctionComponent(ResilientComponent):
     def _qradar_find_reference_sets_function(self, event, *args, **kwargs):
         """Function: Find reference sets that contain a given item value, together with information about this item in those reference sets. Information includes whether this item is added to the reference set manually or by a rule."""
         try:
+
+            # Get the wf_instance_id of the workflow this Function was called in, if not found return a backup string
+            wf_instance_id = event.message.get("workflow_instance", {}).get("workflow_instance_id", "no instance id found")
+
+            yield StatusMessage("Starting 'qradar_find_reference_sets' that was running in workflow '{0}'".format(wf_instance_id))
+
             required_fields = ["qradar_reference_set_item_value"]
             validate_fields(required_fields, kwargs)
             # Get the function parameters:
@@ -87,7 +93,6 @@ class FunctionComponent(ResilientComponent):
             LOG.debug("Connection to {} using {}".format(options["host"],
                                                          options.get("username") or "service token"))
 
-            yield StatusMessage("starting...")
             qradar_client = QRadarClient(host=options["host"],
                                          username=options.get("username", None),
                                          password=options.get("qradarpassword", None),
@@ -97,7 +102,7 @@ class FunctionComponent(ResilientComponent):
 
             r_items = qradar_client.find_all_ref_set_contains(qradar_reference_set_item_value)
 
-            yield StatusMessage("done...")
+            yield StatusMessage("Finished 'qradar_find_reference_sets' that was running in workflow '{0}'".format(wf_instance_id))
 
             results = {
                 "reference_items": r_items
