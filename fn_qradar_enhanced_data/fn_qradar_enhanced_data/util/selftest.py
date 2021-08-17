@@ -24,6 +24,9 @@ def selftest_function(opts):
 
         log.info("Verifying app.config values for fn_qradar_integration config section")
 
+        # if bool(options.get("verify_cert")) == False:
+        #     raise Exception("fn-qradar-enhanced-data: Verifying app.config values for fn_qradar_integration config section Error while calling selftest. Exception: 'verify_cert'")
+
         cafile = False if options.get("verify_cert", "").lower() == "false" else options["verify_cert"]
         qradar_client = QRadarClient(host=options["host"],
                                      username=options.get("username", None),
@@ -60,11 +63,13 @@ def selftest_function(opts):
             Current Configs in app.config file::
             ---------
             host: {1}
-            username: {2}
-            qradarpassword: {3}
-            qradartoken: {4}\n""".format(
+            verify_cert: {2}
+            username: {3}
+            qradarpassword: {4}
+            qradartoken: {5}\n""".format(
             err,
             options["host"],
+            options["verify_cert"],
             options["username"],
             options["qradarpassword"],
             options["qradartoken"])
