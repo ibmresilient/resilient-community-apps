@@ -18,7 +18,7 @@ qradartoken=changeme
 verify_cert=false
 #search_timeout=
 
-[fn_qradar_integration:QRadar.Label2]
+[fn_qradar_integration:QRadar.label2]
 host=localhost
 username=admin
 qradarpassword=changeme

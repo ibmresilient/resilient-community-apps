@@ -80,7 +80,7 @@ class FunctionComponent(ResilientComponent):
                 for server_name in self.servers_list:
                     options = self.servers_list[server_name]
             else:
-                raise Exception("qradar_label did not match labels given in the app.config")
+                raise Exception("{} did not match labels given in the app.config".format(qradar_label))
 
             qradar_verify_cert = True
             if "verify_cert" in options and options["verify_cert"].lower() == "false":
