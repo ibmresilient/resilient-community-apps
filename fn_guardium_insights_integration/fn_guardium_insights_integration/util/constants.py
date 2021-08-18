@@ -14,6 +14,7 @@ RUN_REPORT = "https://{host}:{port}/api/" + API_VERSION + "/reports/run"
 # Resilient Incident Restful Endpoints
 ADD_INCIDENT = "/incidents?want_full_data=false&want_tasks=false&handle_format=names"
 INCIDENT_URL = "/incidents/{}?handle_format=names"
+
 # Resilient Table Restful Endpoints
 GET_TABLE_DATA = '/incidents/{inc_id}/table_data?handle_format=names'
 TABLE_ADD_ROW = "/incidents/{inc_id}/table_data/{table_id}/row_data?handle_format=names"
@@ -384,4 +385,23 @@ CLASSIFICATION_REPORT_BODY = {
         }
     ],
     "without_limit": False
+}
+
+BREACH_DATA_MAP = {
+    "Credit card password / access code": "Credit Card Password / Security Code",
+    "Date of birth": "Date of Birth", "Driver's license number": "Driver's License Number",
+    "SSN or SIN": "SSN or SIN", "State ID number": "State ID Number", "Tax ID number": "Tax ID Number",
+    "Tribal ID number": "Tribal ID Number", "Employee ID number": "Employee ID Number",
+    "Military ID number": "Military ID Number", "Student ID Number": "Student ID Number",
+    "ID Theft Protection PIN issued by US IRS": " ID Theft Protection PIN Issued by US IRS",
+    "Personal ID for financial accounts": "Personal ID for Financial Accounts",
+    "Credit card CVV code": "Credit Card CVV Code", "Debit card CVV code": "Debit Card CVV Code",
+    "Health insurer ID": "Health Insurer ID",
+    "Healthcare payment, eligibility or entitlement information": "Healthcare Payment, Eligibility or Entitlement Information",
+    "CPNI/Communications Data": "CPNI/Communications Data", "License information and status": "License Information and Status",
+    "Parent's legal surname prior to marriage": "Parent's Legal Surname Prior to Marriage",
+    "Security question and answer": "Security Question and Answer",
+    "Graphic, photographic or acoustic": "Graphic, Photographic or Acoustic",
+    "Other information relating to an identified or identifiable person": "Other Information Relating to an Identified or Identifiable Person",
+    "Religious or philosophical beliefs": "Religious or Philosophical Beliefs"
 }

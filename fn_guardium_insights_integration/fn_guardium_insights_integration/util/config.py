@@ -38,8 +38,8 @@ report_period=Now minus 7 days
 # Maximum report records size.
 report_fetch_size=500
 
-# Incident member to be added, for new created anomaly incidents. value can be group name, individual user account.
-# If multiple value specified each should be separated by comma ex: user@domain.com, group_name
+# This field is optional, To add incident member for created anomaly incidents value can be group name, individual user account.
+# If multiple values are specified each should be separated by comma ex: user@domain.com, group_name.
 incident_member=
 
 # Guardium http/https proxy server address, leave blank for no proxy

@@ -9,7 +9,7 @@ from resilient import NoChange
 
 from fn_guardium_insights_integration.lib.custom_exceptions import ResilientRestfulServiceError
 from fn_guardium_insights_integration.lib.time_conversions import convert_utc_date_time_milli_seconds
-from fn_guardium_insights_integration.util.constants import ADD_INCIDENT, INCIDENT_URL
+from fn_guardium_insights_integration.util.constants import ADD_INCIDENT, INCIDENT_URL, BREACH_DATA_MAP
 
 
 class ResilientIncidentHelper:
@@ -72,11 +72,14 @@ class ResilientIncidentHelper:
         _conv_time = convert_utc_date_time_milli_seconds(event.get("trigger_event_timestamp"))
         payload = {"name": _name, "discovered_date": _conv_time, "start_date": _conv_time,
                    "create_date": milli_sec, "description": {"format": "html", "content": __desc},
-                   "severity_code": {"name": "Low"}, "plan_status": "Active", "members": args[0],
+                   "severity_code": {"name": "Low"}, "plan_status": "Active",
                    "properties": {"guardium_insights_event_id": event.get("event_id"),
                                   "field_guardium_insights_config_id": event.get("config_id", ""),
                                   "field_guardium_insights_global_id": event.get("global_id", "")},
                    "artifacts": []}
+        # If Incident Member is given then add to the payload else no member info added.
+        if args[0][0] != "":
+            payload["members"] = args[0]
         return payload
 
     def populate_breach_data_types(self, incident_id, report_data):
@@ -92,8 +95,11 @@ class ResilientIncidentHelper:
                 classification_rules = set(classification_rules)
 
                 for rule in classification_rules:
-                    if rule == "Credit card password / access code":
-                        rule = "Credit card password / security code"
+                    if rule in BREACH_DATA_MAP:
+                        rule = BREACH_DATA_MAP.get(rule)
+                    else:
+                        rule = rule.title()
+                    print("$$$$$$$$$$$$$$$$$$$$$$$$$$", rule)
                     payload["dtm"][rule] = True
                 return payload
             else:

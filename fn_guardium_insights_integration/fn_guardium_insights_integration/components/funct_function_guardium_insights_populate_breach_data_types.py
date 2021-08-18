@@ -15,6 +15,7 @@ from fn_guardium_insights_integration.lib.resilient_incident_operations import R
 from fn_guardium_insights_integration.lib.time_conversions import compute_start_stop_times
 
 
+
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'function_guardium_insights_populate_breach_data_types"""
 
