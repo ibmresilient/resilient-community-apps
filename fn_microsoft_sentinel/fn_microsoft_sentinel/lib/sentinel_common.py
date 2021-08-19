@@ -13,7 +13,7 @@ from simplejson.errors import JSONDecodeError
 INDICATOR_URL = "api/indicators"
 MACHINES_URL = "api/machines"
 FILES_URL = "api/files/{}/machines"
-ALERTS_URL = "api/alerts"
+ALERTS_URL = "incidents/{}/alerts"
 
 DEFAULT_POLLER_LOOBACK_MINUTES = 120
 
@@ -263,15 +263,15 @@ class SentinelAPI():
 
         return { "value": filtered, "nextLink": result.get("nextLink") }
 
-    def get_incident_alerts(self, profile_data, sentinel_incident_id):
-        """Query for alerts associated with a sentinel incident
+    def get_incident_entities(self, profile_data, sentinel_incident_id):
+        """Query for entities associated with a sentinel incident
 
         Args:
             profile_name ([str]): [profile name with incident access parameters]
             sentinel_incident_id ([str]): [sentinel incident id]
 
         Returns:
-            [dict]: [alert list from API call]
+            [dict]: [entity list from API call]
         """
 
         relations_url = "/".join([INCIDENTS_URL, str(sentinel_incident_id),
@@ -284,6 +284,30 @@ class SentinelAPI():
                                      api_version=PREVIEW_API_VERSION)
 
         result, status, reason = self._call(url)
+
+        LOG.debug("%s:%s:%s", status, reason, result)
+        return result, status, reason
+
+    def get_incident_alerts(self, profile_data, sentinel_incident_id):
+        """Query for alerts associated with a sentinel incident
+
+        Args:
+            profile_name ([str]): [profile name with incident access parameters]
+            sentinel_incident_id ([str]): [sentinel incident id]
+
+        Returns:
+            [dict]: [alert list from API call]
+        """
+
+        alerts_url = ALERTS_URL.format(str(sentinel_incident_id))
+
+        url = self._get_base_payload(profile_data['subscription_id'],
+                                     profile_data['resource_groupname'],
+                                     profile_data['workspace_name'],
+                                     extra_url=alerts_url,
+                                     api_version=PREVIEW_API_VERSION)
+
+        result, status, reason = self._call(url, oper="POST")
 
         LOG.debug("%s:%s:%s", status, reason, result)
         return result, status, reason

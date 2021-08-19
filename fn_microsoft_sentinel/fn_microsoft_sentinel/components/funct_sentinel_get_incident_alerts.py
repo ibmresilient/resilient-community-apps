@@ -11,7 +11,7 @@ from fn_microsoft_sentinel.lib.sentinel_common import SentinelAPI
 
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'sentinel_get_incident_entities''"""
+    """Component that implements Resilient function 'sentinel_get_incident_alerts''"""
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
@@ -25,16 +25,16 @@ class FunctionComponent(ResilientComponent):
         self.options = opts.get(PACKAGE_NAME, {})
         self.sentinel_profiles = SentinelProfiles(opts, self.options)
 
-    @function("sentinel_get_incident_entities")
-    def _sentinel_get_incident_entities_function(self, event, *args, **kwargs):
-        """Function: Get the Entities associated with a Sentinel Incident"""
+    @function("sentinel_get_incident_alerts")
+    def _sentinel_get_incident_alerts_function(self, event, *args, **kwargs):
+        """Function: Get the alerts associated with a Sentinel Incident"""
         try:
             validate_fields(
                 ["sentinel_profile", "sentinel_incident_id"],
                 kwargs
             )
 
-            yield StatusMessage("Starting 'sentinel_get_incident_entities'")
+            yield StatusMessage("Starting 'sentinel_get_incident_alerts'")
 
             rc = ResultPayload(PACKAGE_NAME, **kwargs)
 
@@ -52,27 +52,15 @@ class FunctionComponent(ResilientComponent):
                                        self.opts, self.options)
 
             profile_data = self.sentinel_profiles.get_profile(sentinel_profile)
-            # read all entities associated with a Sentinel incident
-            result, status, reason = sentinel_api.get_incident_entities(profile_data,
-                                                                        sentinel_incident_id)
+            # read all alerts associated with a Sentinel incident
+            result, status, reason = sentinel_api.get_incident_alerts(profile_data,
+                                                                      sentinel_incident_id)
 
-            log.debug(result)
-            # iterate over the alerts and get all the entities
-            entities = {}
-            if status:
-                for alert in result['value']:
-                    log.debug("Alert: %s", alert['name'])
-                    entity_result, entity_status, entity_reason = \
-                        sentinel_api.get_incident_alert_entities(alert['properties']['relatedResourceId'])
-                    # organize entities using the key of the alert_id
-                    if entity_status:
-                        entities[alert['name']] = entity_result['value']['entities']
-                    else:
-                        reason = entity_reason
+            log.debug(result) #TODO
 
-            yield StatusMessage("Finished 'sentinel_get_incident_entities'")
+            yield StatusMessage("Finished 'sentinel_get_incident_alerts'")
 
-            results = rc.done(status, entities, reason=reason)
+            results = rc.done(status, result, reason=reason)
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
