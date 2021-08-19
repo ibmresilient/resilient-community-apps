@@ -64,7 +64,7 @@ class FunctionComponent(ResilientComponent):
 
             LOG.info("Servers found in app.config:")
             for server in self.server_list:
-                LOG.info(server)
+                LOG.info(server[server.index(":")+1:])
 
             yield StatusMessage("Finished 'qradar_get_all_servers' that was running in workflow '{0}'".format(wf_instance_id))
 
