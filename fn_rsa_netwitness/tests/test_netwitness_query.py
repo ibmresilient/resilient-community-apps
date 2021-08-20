@@ -2,11 +2,12 @@
 """Tests using pytest_resilient_circuits"""
 
 from __future__ import print_function
+import datetime
 import pytest
-import os
+import pytz
 from resilient_circuits.util import get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
-from fn_rsa_netwitness.util.helper import get_headers, create_tmp_file, remove_dir, convert_to_nw_time
+from fn_rsa_netwitness.util.helper import get_headers, convert_to_nw_time
 
 
 PACKAGE_NAME = "fn_rsa_netwitness"
@@ -16,7 +17,7 @@ FUNCTION_NAME = "netwitness_query"
 # config_data = get_config_data(PACKAGE_NAME)
 
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
-# resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
+resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
 
 
 def call_netwitness_query_function(circuits, function_params, timeout=10):
@@ -38,8 +39,10 @@ class TestNetwitnessQuery:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
+    @pytest.mark.livetest
     @pytest.mark.parametrize("nw_query, nw_results_size, expected_results", [
-        ("select sessionid where time='2019-Feb-26 08:00:00'-'2019-Feb-27 08:00:00'", 10, {"value": "xyz"})
+        ("select sessionid where time='2019-Feb-26 "\
+            "08:00:00'-'2019-Feb-27 08:00:00'", 10, {"value": "xyz"})
         # expected_results doesn't matter in this case since this
         # is going to just check that a value exists
     ])
@@ -65,16 +68,9 @@ class TestNetwitnessQuery:
 
     def test_convert_to_nw_time(self):
         expected_nw_time = "2018-Dec-18 13:28:45"
-        nw_time = convert_to_nw_time(int("1545157725000"))
+        nw_time = datetime.datetime.strptime(convert_to_nw_time(1545157725000),\
+            '%Y-%b-%d %H:%M:%S')
+        nw_time_timezone = nw_time.astimezone(pytz.timezone("America/New_York"))\
+            .strftime('%Y-%b-%d %H:%M:%S')
 
-        assert nw_time == expected_nw_time
-
-    def test_creating_and_removing_tmp_dir_and_file(self):
-        new_file_contents = "Some new file contents"
-        temp_d, temp_f = create_tmp_file(new_file_contents)
-
-        with open(temp_f, "r") as f:
-            assert f.read() == new_file_contents
-
-        remove_dir(temp_d)
-        assert not os.path.exists(temp_d)
+        assert nw_time_timezone == expected_nw_time
