@@ -33,6 +33,8 @@ sentinel_profiles=profile_a
 subscription_id=aaa-bbb-fff
 workspace_name=
 resource_groupname=
+# limit the number of alerts returned, in ascending order
+max_alerts=
 # comma separated list of fields to filter incidents to create
 #   format: "field1": value: "field2": ["list_value1", "list_value2"]
 new_incident_filters="status": ["New", "Active"],"severity": ["High", "Medium","Low"]

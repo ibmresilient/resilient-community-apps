@@ -141,6 +141,7 @@ Several steps are necessary to enable API access to Sentinel. Below is a brief l
 1. Define an App under `App registration`,  for Sentinel access. The Application (client) ID will be used as the app.config `client_id`.
 
     a. Configure API Permissions as the diagram below.
+
     b. Specify a client secret. This will be used in the app.config file as `api_secret`.
 
  ![screenshot: app client_id](./doc/screenshots/app_client_id.png)
@@ -187,7 +188,7 @@ For each profile:
 | **workspace_name** | Yes | `` | *workspace name for incident access.* |
 | **resource_groupname** | Yes | `` | *resource group for incident access.* |
 | **new_incident_filters** | Yes | `"status": ["New", "Active"],"severity": ["High", "Medium","Low"]` | *Set of filters to apply when escalating incidents to Resilient SOAR. Incidents not matching the criteria are not synchronized* |
-|
+| **max_alerts** | 10 | *limit the number of alerts returned to the first n alerts or leave blank for all alerts* |
 | **create_incident_template** | /user/path/to/create_incident_template.jinja | Customer supplied template for mapping Sentinel Incident fields to an Resilient incident. If not specified, a default template is used. |
 | **update_incident_template** | /user/path/to/update_incident_template.jinja | Customer supplied template for mapping Sentinel Incident fields to an Resilient incident. If not specified, a default template is used. |
 | **close_incident_template** | /user/path/to/close_incident_template.jinja | Customer supplied template for mapping Sentinel Incident fields to an Resilient incident. If not specified, a default template is used. This is useful when a customer customizes the fields used when closing an incident. |

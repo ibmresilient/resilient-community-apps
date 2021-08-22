@@ -294,6 +294,7 @@ class SentinelAPI():
         Args:
             profile_name ([str]): [profile name with incident access parameters]
             sentinel_incident_id ([str]): [sentinel incident id]
+            max_alerts: number of alerts to return (in descending order) or all if set to None
 
         Returns:
             [dict]: [alert list from API call]
@@ -308,6 +309,10 @@ class SentinelAPI():
                                      api_version=PREVIEW_API_VERSION)
 
         result, status, reason = self._call(url, oper="POST")
+
+        # limit the number of alerts returned
+        if profile_data.get('max_alerts'):
+            result['value'] = result['value'][:int(profile_data.get('max_alerts'))]
 
         LOG.debug("%s:%s:%s", status, reason, result)
         return result, status, reason
