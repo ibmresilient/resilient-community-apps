@@ -100,13 +100,12 @@ class FunctionComponent(ResilientComponent):
                                          cafile=qradar_verify_cert,
                                          opts=self.opts, function_opts=options)
 
-            r_items = qradar_client.find_all_ref_set_contains(qradar_reference_set_item_value)
+            results = {
+                "reference_items": qradar_client.find_all_ref_set_contains(qradar_reference_set_item_value),
+                "inputs": {"qradar_label": qradar_label, "qradar_reference_set_item_value": qradar_reference_set_item_value}
+            }
 
             yield StatusMessage("Finished 'qradar_find_reference_sets' that was running in workflow '{0}'".format(wf_instance_id))
-
-            results = {
-                "reference_items": r_items
-            }
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

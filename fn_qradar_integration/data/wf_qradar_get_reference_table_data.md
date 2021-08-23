@@ -23,20 +23,18 @@ inputs.qradar_reference_table_name = row['reference_table']
 
 ### Post-Processing Script
 ```python
-
-
-
-for outer_key, item in results.content.get('data',[]).items():
-  
-  for inner_key, inner_item in item.items():
-    row = incident.addRow('qradar_reference_table_queried_rows')
-    row['table'] = results.inputs.qradar_reference_table_name
-    row['outer_key'] = outer_key
-    row['inner_key'] = inner_key
-    
-    row['value'] = inner_item['value']
-    incident.addNote("Debug Outer key {} Inner key{} Value{} ".format(outer_key, inner_key, inner_item['value']))
-
+if results.success:
+  for outer_key, item in results.content.get('data',[]).items():
+    for inner_key, inner_item in item.items():
+      row = incident.addRow('qradar_reference_table_queried_rows')
+      row['table'] = results.inputs.qradar_reference_table_name
+      row['outer_key'] = outer_key
+      row['inner_key'] = inner_key
+      
+      row['value'] = inner_item['value']
+      row['status'] = 'active'
+else:
+  incident.addNote("An error occurred getting the reference table data: {}".format(results.reason))
 ```
 
 ---

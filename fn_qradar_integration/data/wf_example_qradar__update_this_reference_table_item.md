@@ -34,13 +34,19 @@ else:
 
 ### Post-Processing Script
 ```python
-
-
-if results.success and results.get('content', False):
-  if results['content']['status_code'] == 200:
-    incident.addNote(u"Entry: {} updated in reference table: {}".format(results.inputs.qradar_reference_table_item_value, results.inputs.qradar_reference_table_name))
-  else:
-    incident.addNote(u"Failed to update entry: {} in reference table. Status Code: {}".format(results.inputs.qradar_reference_table_item_value, results['content']['status_code']))
+note = u"""Outer key: {}
+Inner key: {}
+Entry: {}
+Reference table: {}""".format(results.inputs.qradar_reference_table_item_outer_key,
+                              results.inputs.qradar_reference_table_item_inner_key,
+                              results.inputs.qradar_reference_table_item_value, 
+                              results.inputs.qradar_reference_table_name)
+if results.success:
+    incident.addNote(u"Successful updated\n{}".format(note))
+    row['status'] = 'updated'
+    row['value'] = results.inputs.qradar_reference_table_item_value
+else:
+    incident.addNote(u"Failure to updated item: {}\n{}".format(results['reason'], note))
 ```
 
 ---

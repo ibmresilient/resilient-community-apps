@@ -102,6 +102,12 @@ class FunctionComponent(ResilientComponent):
             result = qradar_client.add_ref_element(qradar_reference_set_name,
                                                    qradar_reference_set_item_value)
 
+            result["inputs"] = {
+                "qradar_label": qradar_label,
+                "qradar_reference_set_name": qradar_reference_set_name,
+                "qradar_reference_set_item_value": qradar_reference_set_item_value
+            }
+
             yield StatusMessage("Finished 'qradar_add_reference_set_item' that was running in workflow '{0}'".format(wf_instance_id))
 
             # Produce a FunctionResult with the results

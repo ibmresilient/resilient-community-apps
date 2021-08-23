@@ -28,11 +28,18 @@ inputs.qradar_reference_table_item_value = rule.properties.qradar_ref_table_upda
 
 ### Post-Processing Script
 ```python
-if results.success and results.get('content', False):
-  if results['content']['status_code'] == 200:
-    incident.addNote(u"Entry: {} added to reference table: {}".format(results.inputs.qradar_reference_table_item_value, results.inputs.qradar_reference_table_name))
-  else:
-    incident.addNote(u"Failed to add entry: {} from reference table. Status Code: {}".format(results.inputs.qradar_reference_table_item_value, results['content']['status_code']))
+note = u"""Outer key: {}
+Inner key: {}
+Entry: {}
+Reference table: {}""".format(results.inputs.qradar_reference_table_item_outer_key,
+                              results.inputs.qradar_reference_table_item_inner_key,
+                              results.inputs.qradar_reference_table_item_value, 
+                              results.inputs.qradar_reference_table_name)
+if results.success:
+    incident.addNote(u"Successful add\n{}".format(note))
+    row.number_of_elements = str(results["content"]["content"]["number_of_elements"])
+else:
+    incident.addNote(u"Failure to add item: {}\n{}".format(results['reason'], note))
 ```
 
 ---

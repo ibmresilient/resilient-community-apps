@@ -105,7 +105,7 @@ class FunctionComponent(ResilientComponent):
 
             # status_code = isinstance(result, list)
             status_code = True if result["status_code"] == 200 else False
-            reason = None if status_code else result["content"]["http_response"].get("message")
+            reason = None if status_code else result["content"]["http_response"]["message"]
             results = rp.done(success=status_code, 
                               content=result,
                               reason=reason)

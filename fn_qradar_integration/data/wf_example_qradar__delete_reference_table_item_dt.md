@@ -18,17 +18,26 @@
 
 ### Pre-Processing Script
 ```python
-None
+inputs.qradar_reference_table_name = row.table
+inputs.qradar_reference_table_item_outer_key = row.outer_key
+inputs.qradar_reference_table_item_inner_key = row.inner_key
+inputs.qradar_reference_table_item_value = row.value
 ```
 
 ### Post-Processing Script
 ```python
-
-if results.success and results.get('content', False):
-  if results['content']['status_code'] == 200:
-    incident.addNote(u"Entry: {} deleted from reference table: {}".format(results.inputs.qradar_reference_table_item_value, results.inputs.qradar_reference_table_name))
-  else:
-    incident.addNote(u"Failed to delete entry: {} from reference table. Status Code: {}".format(results.inputs.qradar_reference_table_item_value, results['content']['status_code']))
+note = u"""Outer key: {}
+Inner key: {}
+Entry: {}
+Reference table: {}""".format(results.inputs.qradar_reference_table_item_outer_key,
+                              results.inputs.qradar_reference_table_item_inner_key,
+                              results.inputs.qradar_reference_table_item_value, 
+                              results.inputs.qradar_reference_table_name)
+if results.success:
+    incident.addNote(u"Successful delete\n{}".format(note))
+    row['status'] = "deleted"
+else:
+    incident.addNote(u"Failure to delete item: {}\n{}".format(results['reason'], note))
 ```
 
 ---
