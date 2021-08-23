@@ -77,9 +77,7 @@ Perform operations against Defender ATP such as set indicators, isolate and quar
   List the Key Features of the Integration
 -->
 * List, set, update and delete Defender indicators
-* Search for Defender machines by IP address
-* Search for Defender machines by file hash
-* Search for Defender machines by machine name
+* Search for Defender machines by IP address, file hash, or machine name
 * Isolate/unisolate Defender machines
 * Restrict/unrestrict apps on a Defender machine
 * Run an antivirus scan on a Defender machine
