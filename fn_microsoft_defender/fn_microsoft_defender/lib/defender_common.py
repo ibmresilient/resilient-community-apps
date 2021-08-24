@@ -127,6 +127,27 @@ class DefenderAPI():
 
         return result, status, reason
 
+    def query_alerts(self, last_poller_datetime):
+        """Query Defender for all alerts created within the last polling window. If first time,
+              then use a lookback value.
+        Args:
+            last_poller_datetime ([number]): [epoch value of last time poller ran]
+        Returns:
+            result [dict]: API results
+            status [bool]: True if API call was successful
+            reason [str]: Reason of error when status=False
+        """
+
+        # build filter information
+        payload = {
+            "$filter": self._make_createdate_filter(last_poller_datetime)
+        }
+
+        result, status, reason = self._call(ALERTS_URL, payload=payload)
+
+        LOG.debug("%s:%s:%s", status, reason, result)
+        return result, status, reason
+
     def wait_for_action(self, url, iter=10, wait=30):
         """[summary]
 
