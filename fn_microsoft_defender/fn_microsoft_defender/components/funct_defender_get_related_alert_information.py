@@ -28,28 +28,30 @@ class FunctionComponent(AppFunctionComponent):
         """
         Function: Get a Defender ATP machine alert details
         Inputs:
-            -   fn_inputs.alert_info
+            -   fn_inputs.defender_alert_info
             -   fn_inputs.defender_alert_id
         """
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
 
         alert_id = fn_inputs.defender_alert_id
-        alert_info = fn_inputs.alert_info
+        alert_info = fn_inputs.defender_alert_info
 
-        defender_api = DefenderAPI(self.options['tenant_id'],
-                                       self.options['client_id'],
-                                       self.options['app_secret'],
-                                       self.opts,
-                                       self.options)
+        defender_api = DefenderAPI(self._app_configs_as_dict['tenant_id'],
+                                   self._app_configs_as_dict['client_id'],
+                                   self._app_configs_as_dict['app_secret'],
+                                   self._app_configs_as_dict,
+                                   self._app_configs_as_dict)
 
         if 'All' in alert_info:
             alert_info = ALERT_TYPES.keys()
 
+        result = {}
         for type in alert_info:
-            url = '/'.join([alert_id, ALERT_TYPES, ALERT_TYPES.get(type)])
-            alert_payload, status, reason = defender_api.call(ALERTS_URL)
+            url = '/'.join([ALERTS_URL, alert_id, ALERT_TYPES.get(type)])
+            alert_payload, status, reason = defender_api.call(url)
             self.LOG.debug(alert_payload)
+            result[type] = alert_payload.get('value') if alert_payload.get('value') else alert_payload
 
 
         # Example validating app_configs
@@ -87,5 +89,5 @@ class FunctionComponent(AppFunctionComponent):
 
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
 
-        yield FunctionResult(alert_payload)
+        yield FunctionResult(result)
         # yield FunctionResult({}, success=False, reason="Bad call")
