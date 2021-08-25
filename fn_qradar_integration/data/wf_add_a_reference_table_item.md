@@ -11,7 +11,7 @@
 `qradar_reference_table_add_item`
 
 ### Output Name
-`None`
+``
 
 ### Message Destination
 `fn_qradar_integration`
@@ -22,6 +22,11 @@ inputs.qradar_reference_table_item_value = artifact.value
 inputs.qradar_reference_table_item_inner_key = rule.properties.qradar_ref_table_inner_key
 inputs.qradar_reference_table_item_outer_key = rule.properties.qradar_ref_table_outer_key
 inputs.qradar_reference_table_name = rule.properties.qradar_reference_table_name
+
+if incident.properties.qradar_server and not rule.properties.qradar_label:
+  inputs.qradar_label = incident.properties.qradar_server
+else:
+  inputs.qradar_label = rule.properties.qradar_label
 ```
 
 ### Post-Processing Script
@@ -29,10 +34,12 @@ inputs.qradar_reference_table_name = rule.properties.qradar_reference_table_name
 note = u"""Outer key: {}
 Inner key: {}
 Entry: {}
-Reference table: {}""".format(results.inputs.qradar_reference_table_item_outer_key,
+Reference table: {}
+QRadar Server: {}""".format(results.inputs.qradar_reference_table_item_outer_key,
                               results.inputs.qradar_reference_table_item_inner_key,
                               results.inputs.qradar_reference_table_item_value, 
-                              results.inputs.qradar_reference_table_name)
+                              results.inputs.qradar_reference_table_name,
+                              results.inputs["qradar_label"])
 if results.success:
     incident.addNote(u"Successful add\n{}".format(note))
 else:

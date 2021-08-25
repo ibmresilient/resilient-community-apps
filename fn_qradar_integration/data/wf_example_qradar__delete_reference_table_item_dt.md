@@ -11,7 +11,7 @@
 `qradar_reference_table_delete_item`
 
 ### Output Name
-`None`
+``
 
 ### Message Destination
 `fn_qradar_integration`
@@ -22,6 +22,7 @@ inputs.qradar_reference_table_name = row.table
 inputs.qradar_reference_table_item_outer_key = row.outer_key
 inputs.qradar_reference_table_item_inner_key = row.inner_key
 inputs.qradar_reference_table_item_value = row.value
+inputs.qradar_label = row["qradar_server"]
 ```
 
 ### Post-Processing Script
@@ -29,15 +30,17 @@ inputs.qradar_reference_table_item_value = row.value
 note = u"""Outer key: {}
 Inner key: {}
 Entry: {}
-Reference table: {}""".format(results.inputs.qradar_reference_table_item_outer_key,
+Reference table: {}
+QRadar Server: {}""".format(results.inputs.qradar_reference_table_item_outer_key,
                               results.inputs.qradar_reference_table_item_inner_key,
                               results.inputs.qradar_reference_table_item_value, 
-                              results.inputs.qradar_reference_table_name)
+                              results.inputs.qradar_reference_table_name,
+                              row["qradar_server"])
 if results.success:
     incident.addNote(u"Successful delete\n{}".format(note))
     row['status'] = "deleted"
 else:
-    incident.addNote(u"Failure to delete item: {}\n{}".format(results['reason'], note))
+    incident.addNote(u"Failure to delete item: {}\n{}".format(results.reason, note))
 ```
 
 ---

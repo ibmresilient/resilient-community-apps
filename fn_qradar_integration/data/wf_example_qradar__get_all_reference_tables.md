@@ -8,36 +8,37 @@
 ## Function - QRadar Reference Table Get All Tables
 
 ### API Name
-`qradar_get_reference_tables`
+`qradar_get_all_reference_tables`
 
 ### Output Name
-`None`
+``
 
 ### Message Destination
 `fn_qradar_integration`
 
 ### Pre-Processing Script
 ```python
-None
+if incident.properties.qradar_server and not rule.properties.qradar_label:
+  inputs.qradar_label = incident.properties.qradar_server
+else:
+  inputs.qradar_label = rule.properties.qradar_label
 ```
 
 ### Post-Processing Script
 ```python
-"""
-  Sample data:
-  [{u'creation_time': 1464119408489L, u'collection_id': 186, u'key_name_types': {u'First Seen Date': u'DATE', u'Confidence': u'NUM', u'Last Seen Date': u'DATE', u'Provider': u'ALN'}, u'timeout_type': u'LAST_SEEN', u'name': u'Phishing Senders Data', u'namespace': u'SHARED', u'element_type': u'ALNIC', u'number_of_elements': 0}, {u'creation_time': 1464119422432L, u'collection_id': 182, u'key_name_types': {u'First Seen Date': u'DATE', u'Confidence': u'NUM', u'Last Seen Date': u'DATE', u'Provider': u'ALN'}, u'timeout_type': u'LAST_SEEN', u'name': u'Rogue Process Names Data', u'namespace': u'SHARED', u'element_type': u'ALNIC', u'number_of_elements': 0}]
-"""
 if results.success:
-  for item in results.content:
-        item_row = incident.addRow("qradar_reference_table")
-        item_row["reference_table"] = item["name"]
-        item_row["collection_id"] = item["collection_id"]
-        item_row["number_of_elements"] = item["number_of_elements"]
-        item_row["namespace"] = item["namespace"]
+  if results.content:
+    for item in results.content:
+      item_row = incident.addRow("qradar_reference_table")
+      item_row["qradar_server"] = results.inputs["qradar_label"]
+      item_row["reference_table"] = item["name"]
+      item_row["collection_id"] = item["collection_id"]
+      item_row["number_of_elements"] = item["number_of_elements"]
+      item_row["namespace"] = item["namespace"]
   else:
     incident.addNote("No reference tables found")
 else:
-  incident.addNote("An error occurred getting the reference tables: {}".formt(results.reason))
+  incident.addNote("An error occurred getting the reference tables: {} from QRadar server: {}".format(results.reason, rule.properties.qradar_label))
 
 ```
 

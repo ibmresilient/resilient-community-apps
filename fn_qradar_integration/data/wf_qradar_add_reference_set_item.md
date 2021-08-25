@@ -19,14 +19,20 @@
 ### Pre-Processing Script
 ```python
 inputs.qradar_reference_set_item_value = artifact.value
+inputs.qradar_reference_set_name  = rule.properties.qradar_reference_set_name
+
+if incident.properties.qradar_server and not rule.properties.qradar_label:
+  inputs.qradar_label = incident.properties.qradar_server
+else:
+  inputs.qradar_label = rule.properties.qradar_label
 ```
 
 ### Post-Processing Script
 ```python
-if results.status_code == 200:
-  incident.addNote(u"IP: {} added to blocked IPs reference set: {}".format(artifact.value, results['content']['name']))
+if results["status_code"] == 200:
+  incident.addNote(u"IP: {} added to reference set: {} on QRadar server: {}".format(artifact.value, results.inputs["qradar_reference_set_name"], results.inputs["qradar_label"]))
 else:
-  incident.addNote(u"Failed to add IP: {} to reference set. Status Code: {}, message: {}".format(artifact.value, results.status_code, results['content']['message']))
+  incident.addNote(u"Failed to add IP: {} to reference set on QRadar server: {}. Status Code: {}, message: {}".format(artifact.value, results.inputs["qradar_label"], str(results["status_code"]), results.inputs["qradar_reference_set_name"]))
 ```
 
 ---

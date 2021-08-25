@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
+# (c) Copyright IBM Corp. 2021. All Rights Reserved.
 """Function implementation"""
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import validate_fields
-from fn_qradar_integration.lib.functions_common import QRadarServers
-
-PACKAGE_NAME = "fn_qradar_integration"
+from fn_qradar_integration.util.qradar_utils import QRadarServers
+import fn_qradar_integration.util.qradar_constants as qradar_constants
 
 LOG = logging.getLogger(__name__)
 
@@ -20,10 +20,10 @@ class FunctionComponent(ResilientComponent):
         self.servers_list = {}
         self.server_list = {}
 
-        options = opts.get(PACKAGE_NAME, {})
+        options = opts.get(qradar_constants.PACKAGE_NAME, {})
 
         if options:
-            self.server_list = {PACKAGE_NAME}
+            self.server_list = {qradar_constants.PACKAGE_NAME}
         else:
             servers = QRadarServers(opts, options)
             self.server_list = servers.get_server_name_list()
@@ -41,10 +41,10 @@ class FunctionComponent(ResilientComponent):
         self.servers_list = {}
         self.server_list = {}
 
-        options = opts.get(PACKAGE_NAME, {})
+        options = opts.get(qradar_constants.PACKAGE_NAME, {})
 
         if options:
-            self.server_list = {PACKAGE_NAME}
+            self.server_list = {qradar_constants.PACKAGE_NAME}
         else:
             servers = QRadarServers(opts, options)
             self.erver_list = servers.get_server_name_list()

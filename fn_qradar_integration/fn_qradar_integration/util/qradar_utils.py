@@ -1,20 +1,20 @@
 # -*- coding: utf-8 -*-
 #
-# (c) Copyright IBM Corp. 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2021. All Rights Reserved.
 #
 #   Util classes for qradar
 #
 
-import fn_qradar_integration.util.qradar_constants as qradar_constants
 import base64
 import logging
 import six
 from fn_qradar_integration.util.SearchWaitCommand import SearchWaitCommand, SearchFailure, SearchJobFailure
 import fn_qradar_integration.util.function_utils as function_utils
 from resilient_lib import RequestsCommon
+import fn_qradar_integration.util.qradar_constants as qradar_constants
 
-from fn_qradar_integration.util.exceptions.custom_exceptions import RequestError, DeleteError
-from ..lib.reference_data.ReferenceTableFacade import ReferenceTableFacade
+from fn_qradar_integration.util.exceptions.custom_exceptions import RequestError, DeleteError, LabelError
+from fn_qradar_integration.lib.reference_data.ReferenceTableFacade import ReferenceTableFacade
 # handle python2 and 3
 try:
     from urllib import quote as quote_func  # Python 2.X
@@ -39,6 +39,69 @@ def quote(input_v, safe=None):
         return quote_func(input_v, safe)
     return quote_func(input_v)
 
+class QRadarServers():
+    def __init__(self, opts, options):
+        self.servers, self.server_name_list = self._load_servers(opts, options)
+
+    def _load_servers(self, opts, options):
+        servers = {}
+        server_name_list = self._get_server_name_list(opts)
+        for server in server_name_list:
+            server_name = u"{}".format(server)
+            server_data = opts.get(server_name)
+            if not server_data:
+                raise KeyError(u"Unable to find QRadar server: {}".format(server_name))
+            
+            servers[server] = server_data
+        
+        return servers, server_name_list
+
+    def qradar_label_test(qradar_label, servers_list):
+        if qradar_label and qradar_constants.PACKAGE_NAME+":"+qradar_label in servers_list:
+            options = servers_list[qradar_constants.PACKAGE_NAME+":"+qradar_label]
+        elif len(servers_list) == 1 or qradar_label == qradar_constants.PACKAGE_NAME:
+            options = servers_list[list(servers_list.keys())[0]]
+        else:
+            raise LabelError(qradar_label)
+
+        return options
+
+    def _get_server_name_list(self, opts):
+        """
+        Return the list of QRadar server names defined in the app.config in fn_qradar_integration. 
+        """
+        server_list = []
+        for key in opts.keys():
+            if key.startswith("{}:".format(qradar_constants.PACKAGE_NAME)):
+                server_list.append(key)
+        return server_list
+
+    def get_server(self, server_name):
+        """collect the settings for a QRadar server: host, username, password
+        Args:
+            server_name ([str]): [name of server in app.config]
+        Raises:
+            KeyError: [server not found]
+        Returns:
+            [dict]: [settings for a QRadar server]
+        """
+        server_name = "{}{}".format(qradar_constants.PACKAGE_NAME, server_name)
+        if not server_name in self.servers:
+            raise KeyError(u"Unable to find server: {}".format(server_name))
+
+        return self.servers[server_name]
+
+    def get_servers(self):
+        """
+        Return all servers
+        """
+        return self.servers
+
+    def get_server_name_list(self):
+        """
+        Return list of all server names
+        """
+        return self.server_name_list
 
 class AuthInfo(object):
     # Singleton
@@ -100,7 +163,6 @@ class AuthInfo(object):
                 return response
 
         return self.rc.execute_call_v2(method, url, data=data, headers=my_headers, verify=self.cafile, callback=make_call_callback)
-
 
 class ArielSearch(SearchWaitCommand):
     """
@@ -544,8 +606,6 @@ class QRadarClient(object):
         :return:
         """
         return cls.reference_tables.delete_ref_element(AuthInfo.get_authInfo(), ref_table, inner_key, outer_key, value)
-
-    
 
     def get_all_ref_tables(self):
         return self.reference_tables.get_all_reference_tables(AuthInfo.get_authInfo())

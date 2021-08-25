@@ -1,23 +1,24 @@
 # -*- coding: utf-8 -*-
 #
-# (c) Copyright IBM Corp. 2019. All Rights Reserved.
+# (c) Copyright IBM Corp. 2021. All Rights Reserved.
 #
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
 import logging
-from fn_qradar_integration.components.funct_qradar_get_all_reference_tables import PACKAGE_NAME
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import validate_fields
-from fn_qradar_integration.util.qradar_utils import QRadarClient
-from fn_qradar_integration.lib.functions_common import QRadarServers
+from fn_qradar_integration.util.qradar_utils import QRadarClient, QRadarServers
+import fn_qradar_integration.util.qradar_constants as qradar_constants
 
-PACKAGE_NAME = "fn_qradar_integration"
+"""
+    For a given (artifact) value, find all the QRadar reference sets that contain it.
+"""
 
 LOG = logging.getLogger(__name__)
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'qradar_add_reference_set_item"""
+    """Component that implements Resilient function 'qradar_find_reference_sets"""
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
@@ -25,10 +26,10 @@ class FunctionComponent(ResilientComponent):
         self.opts = opts
         self.servers_list = {}
 
-        options = opts.get(PACKAGE_NAME, {})
+        options = opts.get(qradar_constants.PACKAGE_NAME, {})
 
         if options:
-            server_list = {PACKAGE_NAME}
+            server_list = {qradar_constants.PACKAGE_NAME}
         else:
             servers = QRadarServers(opts, options)
             server_list = servers.get_server_name_list()
@@ -46,10 +47,10 @@ class FunctionComponent(ResilientComponent):
         self.opts = opts
         self.servers_list = {}
 
-        options = opts.get(PACKAGE_NAME, {})
+        options = opts.get(qradar_constants.PACKAGE_NAME, {})
 
         if options:
-            server_list = {PACKAGE_NAME}
+            server_list = {qradar_constants.PACKAGE_NAME}
         else:
             servers = QRadarServers(opts, options)
             server_list = servers.get_server_name_list()
@@ -57,33 +58,26 @@ class FunctionComponent(ResilientComponent):
         for server_name in server_list:
             self.servers_list[server_name] = opts.get(server_name, {})
 
-    @function("qradar_add_reference_set_item")
-    def _qradar_add_reference_set_item_function(self, event, *args, **kwargs):
-        """Function: Add an item to the given QRadar reference set"""
+    @function("qradar_find_reference_sets")
+    def _qradar_find_reference_sets_function(self, event, *args, **kwargs):
+        """Function: Find reference sets that contain a given item value, together with information about this item in those reference sets. Information includes whether this item is added to the reference set manually or by a rule."""
         try:
 
             # Get the wf_instance_id of the workflow this Function was called in, if not found return a backup string
             wf_instance_id = event.message.get("workflow_instance", {}).get("workflow_instance_id", "no instance id found")
 
-            yield StatusMessage("Starting 'qradar_add_reference_set_item' that was running in workflow '{0}'".format(wf_instance_id))
+            yield StatusMessage("Starting 'qradar_find_reference_sets' that was running in workflow '{0}'".format(wf_instance_id))
 
-            required_fields = ["qradar_reference_set_name", "qradar_reference_set_item_value"]
+            required_fields = ["qradar_reference_set_item_value"]
             validate_fields(required_fields, kwargs)
             # Get the function parameters:
-            qradar_reference_set_name = kwargs.get("qradar_reference_set_name")  # text
             qradar_reference_set_item_value = kwargs.get("qradar_reference_set_item_value")  # text
+            qradar_label = kwargs.get("qradar_label")  # text
 
-            LOG.info("qradar_reference_set_name: %s", qradar_reference_set_name)
             LOG.info("qradar_reference_set_item_value: %s", qradar_reference_set_item_value)
+            LOG.info("qradar_label: %s", qradar_label)
 
-            qradar_label = kwargs.get("qradar_label")
-            if qradar_label and PACKAGE_NAME+":"+qradar_label in self.servers_list:
-                options = self.servers_list[PACKAGE_NAME+":"+qradar_label]
-            elif len(self.servers_list) == 1 or qradar_label == PACKAGE_NAME:
-                for server_name in self.servers_list:
-                    options = self.servers_list[server_name]
-            else:
-                raise Exception("{} did not match labels given in the app.config".format(qradar_label))
+            options = QRadarServers.qradar_label_test(qradar_label, self.servers_list)
 
             qradar_verify_cert = True
             if "verify_cert" in options and options["verify_cert"].lower() == "false":
@@ -99,19 +93,15 @@ class FunctionComponent(ResilientComponent):
                                          cafile=qradar_verify_cert,
                                          opts=self.opts, function_opts=options)
 
-            result = qradar_client.add_ref_element(qradar_reference_set_name,
-                                                   qradar_reference_set_item_value)
-
-            result["inputs"] = {
-                "qradar_label": qradar_label,
-                "qradar_reference_set_name": qradar_reference_set_name,
-                "qradar_reference_set_item_value": qradar_reference_set_item_value
+            results = {
+                "reference_items": qradar_client.find_all_ref_set_contains(qradar_reference_set_item_value),
+                "inputs": {"qradar_label": qradar_label, "qradar_reference_set_item_value": qradar_reference_set_item_value}
             }
 
-            yield StatusMessage("Finished 'qradar_add_reference_set_item' that was running in workflow '{0}'".format(wf_instance_id))
+            yield StatusMessage("Finished 'qradar_find_reference_sets' that was running in workflow '{0}'".format(wf_instance_id))
 
             # Produce a FunctionResult with the results
-            yield FunctionResult(result)
+            yield FunctionResult(results)
         except Exception as e:
-            LOG.error(str(e))
+            LOG.exception(e)
             yield FunctionError()

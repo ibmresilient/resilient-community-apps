@@ -1,10 +1,14 @@
 # -*- coding: utf-8 -*-
 #
-# (c) Copyright IBM Corp. 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2021. All Rights Reserved.
 #
-# Util functions
-import six
+#   Util functions
+#
 
+import six
+from resilient_lib import validate_fields
+from fn_qradar_integration.util.qradar_utils import QRadarServers
+import fn_qradar_integration.util.qradar_constants as qradar_constants
 
 def make_query_string(query, params):
     """
@@ -40,3 +44,31 @@ def fix_dict_value(events):
                     event[key] = u"{}".format(event[key])
 
     return events
+
+
+def get_servers_list(opts, choose):
+    """
+    Used for initilizing or reloading the options variable
+    :param opts: list of options
+    :param choose: either init or reload
+    :return:
+    """
+    servers_list = {}
+
+    options = opts.get(qradar_constants.PACKAGE_NAME, {})
+
+    if options:
+        server_list = {qradar_constants.PACKAGE_NAME}
+    else:
+        servers = QRadarServers(opts, options)
+        server_list = servers.get_server_name_list()
+
+    for server_name in server_list:
+        servers_list[server_name] = opts.get(server_name, {})
+        if choose == "init":
+            options = servers_list[server_name]
+
+            required_fields = ["host", "verify_cert"]
+            validate_fields(required_fields, options)
+
+    return servers_list

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# (c) Copyright IBM Corp. 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2021. All Rights Reserved.
 #
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
@@ -8,11 +8,9 @@
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import validate_fields
-from fn_qradar_integration.util.qradar_utils import QRadarClient
+from fn_qradar_integration.util.qradar_utils import QRadarClient, QRadarServers
 from fn_qradar_integration.util import function_utils
-from fn_qradar_integration.lib.functions_common import QRadarServers
-
-PACKAGE_NAME = "fn_qradar_integration"
+import fn_qradar_integration.util.qradar_constants as qradar_constants
 
 LOG = logging.getLogger(__name__)
 
@@ -25,10 +23,10 @@ class FunctionComponent(ResilientComponent):
         self.opts = opts
         self.servers_list = {}
 
-        options = opts.get(PACKAGE_NAME, {})
+        options = opts.get(qradar_constants.PACKAGE_NAME, {})
 
         if options:
-            server_list = {PACKAGE_NAME}
+            server_list = {qradar_constants.PACKAGE_NAME}
         else:
             servers = QRadarServers(opts, options)
             server_list = servers.get_server_name_list()
@@ -46,10 +44,10 @@ class FunctionComponent(ResilientComponent):
         self.opts = opts
         self.servers_list = {}
 
-        options = opts.get(PACKAGE_NAME, {})
+        options = opts.get(qradar_constants.PACKAGE_NAME, {})
 
         if options:
-            server_list = {PACKAGE_NAME}
+            server_list = {qradar_constants.PACKAGE_NAME}
         else:
             servers = QRadarServers(opts, options)
             server_list = servers.get_server_name_list()
@@ -75,8 +73,10 @@ class FunctionComponent(ResilientComponent):
             qradar_search_param2 = kwargs.get("qradar_search_param2")  # text
             qradar_search_param3 = kwargs.get("qradar_search_param3")  # text
             qradar_search_param4 = kwargs.get("qradar_search_param4")  # text
+            qradar_search_param5 = kwargs.get("qradar_search_param5")  # text
             qradar_query_range_start = kwargs.get("qradar_query_range_start")  # number
             qradar_query_range_end = kwargs.get("qradar_query_range_end")  # number
+            qradar_label = kwargs.get("qradar_label")  # text
 
             qradar_query_all_results = False
             if "Yes" in kwargs.get("qradar_query_all_results")["name"]:
@@ -87,18 +87,13 @@ class FunctionComponent(ResilientComponent):
             LOG.info("qradar_search_param2: %s", qradar_search_param2)
             LOG.info("qradar_search_param3: %s", qradar_search_param3)
             LOG.info("qradar_search_param4: %s", qradar_search_param4)
+            LOG.info("qradar_search_param5: %s", qradar_search_param5)
             LOG.info("qradar_query_range_start: %s", qradar_query_range_start)
             LOG.info("qradar_query_range_end: %s", qradar_query_range_end)
             LOG.info("qradar_query_all_results: %s", qradar_query_all_results)
+            LOG.info("qradar_label: %s", qradar_label)
 
-            qradar_label = kwargs.get("qradar_label")
-            if qradar_label and PACKAGE_NAME+":"+qradar_label in self.servers_list:
-                options = self.servers_list[PACKAGE_NAME+":"+qradar_label]
-            elif len(self.servers_list) == 1 or qradar_label == PACKAGE_NAME:
-                for server_name in self.servers_list:
-                    options = self.servers_list[server_name]
-            else:
-                raise Exception("{} did not match labels given in the app.config".format(qradar_label))
+            options = QRadarServers.qradar_label_test(qradar_label, self.servers_list)
 
             qradar_verify_cert = True
             if "verify_cert" in options and options["verify_cert"].lower() == "false":
@@ -118,7 +113,8 @@ class FunctionComponent(ResilientComponent):
                                                             [qradar_search_param1,
                                                              qradar_search_param2,
                                                              qradar_search_param3,
-                                                             qradar_search_param4])
+                                                             qradar_search_param4,
+                                                             qradar_search_param5])
 
             LOG.info("Running query: " + query_string)
 
@@ -134,6 +130,8 @@ class FunctionComponent(ResilientComponent):
                                                 range_start=qradar_query_range_start,
                                                 range_end=qradar_query_range_end,
                                                 timeout=timeout)
+
+            results["inputs"] = {"qradar_query": qradar_query, "qradar_query_all_results": qradar_query_all_results, "qradar_search_param1": qradar_search_param1, "qradar_search_param2": qradar_search_param2, "qradar_search_param3": qradar_search_param3, "qradar_search_param4": qradar_search_param4, "qradar_search_param5": qradar_search_param5, "qradar_label": qradar_label}
 
             yield StatusMessage("Finished 'qradar_search' that was running in workflow '{0}'".format(wf_instance_id))
 

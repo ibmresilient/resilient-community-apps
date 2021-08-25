@@ -11,27 +11,34 @@
 `qradar_search`
 
 ### Output Name
-`None`
+``
 
 ### Message Destination
 `fn_qradar_integration`
 
 ### Pre-Processing Script
 ```python
-inputs.qradar_query_param2 = incident.properties.qradar_id
+inputs.qradar_search_param2 = incident.properties.qradar_id
+
+if incident.properties.qradar_server and not rule.properties.qradar_label:
+  inputs.qradar_label = incident.properties.qradar_server
+else:
+  inputs.qradar_label = rule.properties.qradar_label
+  
 if rule.properties.qradar_query_all_results:
   inputs.qradar_query_all_results = rule.properties.qradar_query_all_results
 ```
 
 ### Post-Processing Script
 ```python
-for event in results.events:
+for event in results["events"]:
   qradar_event = incident.addRow("qradar_offense_event")
-  qradar_event.start_time = event.StartTime
-  qradar_event.category = event.categoryname_category
-  qradar_event.log_source = event.logsourcename_logsourceid
-  qradar_event.protocol = event.protocolname_protocolid
-  qradar_event.rule = event.rulename_creeventlist
+  qradar_event.qradar_server = results.inputs.get("qradar_label")
+  qradar_event.start_time = event["StartTime"]
+  qradar_event.category = event["categoryname_category"]
+  qradar_event.log_source = event["logsourcename_logsourceid"]
+  qradar_event.protocol = event["protocolname_protocolid"]
+  qradar_event.rule = event["rulename_creeventlist"]
 ```
 
 ---

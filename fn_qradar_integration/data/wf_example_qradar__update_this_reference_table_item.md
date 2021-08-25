@@ -18,13 +18,10 @@
 
 ### Pre-Processing Script
 ```python
-
-
-
+inputs.qradar_label = row["qradar_server"]
 inputs.qradar_reference_table_name = row.table
 inputs.qradar_reference_table_item_outer_key = row.outer_key
 inputs.qradar_reference_table_item_inner_key = row.inner_key
-
 
 if rule.properties.qradar_ref_table_update:
   inputs.qradar_reference_table_item_value = rule.properties.qradar_ref_table_update
@@ -37,10 +34,12 @@ else:
 note = u"""Outer key: {}
 Inner key: {}
 Entry: {}
-Reference table: {}""".format(results.inputs.qradar_reference_table_item_outer_key,
+Reference table: {}
+QRadar Server: {}""".format(results.inputs.qradar_reference_table_item_outer_key,
                               results.inputs.qradar_reference_table_item_inner_key,
                               results.inputs.qradar_reference_table_item_value, 
-                              results.inputs.qradar_reference_table_name)
+                              results.inputs.qradar_reference_table_name,
+                              row["qradar_server"])
 if results.success:
     incident.addNote(u"Successful updated\n{}".format(note))
     row['status'] = 'updated'

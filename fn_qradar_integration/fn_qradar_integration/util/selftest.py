@@ -5,8 +5,8 @@
 """
 
 import logging
-from fn_qradar_integration.lib.functions_common import QRadarServers
-from fn_qradar_integration.util.qradar_utils import QRadarClient
+from fn_qradar_integration.util.qradar_utils import QRadarClient, QRadarServers
+import fn_qradar_integration.util.qradar_constants as qradar_constants
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
@@ -20,13 +20,13 @@ def selftest_function(opts):
 
     servers_list = {}
 
-    options = opts.get("fn_qradar_integration", {})
+    options = opts.get(qradar_constants.PACKAGE_NAME, {})
 
     if not options:
         servers = QRadarServers(opts, options)
         server_list = servers.get_server_name_list()
     else:
-        server_list = {"fn_qradar_integration"}
+        server_list = {qradar_constants.PACKAGE_NAME}
 
     for server_name in server_list:
         servers_list[server_name] = opts.get(server_name, {})
@@ -35,7 +35,7 @@ def selftest_function(opts):
         for server_name in servers_list:
             server = servers_list[server_name]
 
-            log.info("Verifying app.config values for fn_qradar_integration")
+            log.info("Verifying app.config values for {}".format(qradar_constants.PACKAGE_NAME))
 
             cafile = False if server.get("verify_cert", "").lower() == "false" else server["verify_cert"]
             qradar_client = QRadarClient(host=server["host"],

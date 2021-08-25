@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
+# (c) Copyright IBM Corp. 2021. All Rights Reserved.
 """Function implementation"""
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import validate_fields, ResultPayload
-from fn_qradar_integration.util.qradar_utils import QRadarClient
-from fn_qradar_integration.lib.functions_common import QRadarServers
-
-PACKAGE_NAME = "fn_qradar_integration"
+from fn_qradar_integration.util.qradar_utils import QRadarClient, QRadarServers
+import fn_qradar_integration.util.qradar_constants as qradar_constants
+import fn_qradar_integration.util.function_utils as function_utils
 
 LOG = logging.getLogger(__name__)
 
@@ -21,10 +21,12 @@ class FunctionComponent(ResilientComponent):
         self.opts = opts
         self.servers_list = {}
 
-        options = opts.get(PACKAGE_NAME, {})
+        function_utils.get_server_options(opts)
+
+        options = opts.get(qradar_constants.PACKAGE_NAME, {})
 
         if options:
-            server_list = {PACKAGE_NAME}
+            server_list = {qradar_constants.PACKAGE_NAME}
         else:
             servers = QRadarServers(opts, options)
             server_list = servers.get_server_name_list()
@@ -42,10 +44,10 @@ class FunctionComponent(ResilientComponent):
         self.opts = opts
         self.servers_list = {}
 
-        options = opts.get(PACKAGE_NAME, {})
+        options = opts.get(qradar_constants.PACKAGE_NAME, {})
 
         if options:
-            server_list = {PACKAGE_NAME}
+            server_list = {qradar_constants.PACKAGE_NAME}
         else:
             servers = QRadarServers(opts, options)
             server_list = servers.get_server_name_list()
@@ -63,20 +65,14 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("Starting 'qradar_find_all_reference_sets' running in workflow '{0}'".format(wf_instance_id))
             
-            rp = ResultPayload(PACKAGE_NAME, **kwargs)
+            rp = ResultPayload(qradar_constants.PACKAGE_NAME, **kwargs)
 
             # Get the function parameters:
             qradar_label = kwargs.get("qradar_label")  # text
 
             LOG.info("qradar_label: %s", qradar_label)
 
-            if qradar_label and PACKAGE_NAME+":"+qradar_label in self.servers_list:
-                options = self.servers_list[PACKAGE_NAME+":"+qradar_label]
-            elif len(self.servers_list) == 1 or qradar_label == PACKAGE_NAME:
-                for server_name in self.servers_list:
-                    options = self.servers_list[server_name]
-            else:
-                raise Exception("{} did not match labels given in the app.config".format(qradar_label))
+            options = QRadarServers.qradar_label_test(qradar_label, self.servers_list)
 
             qradar_verify_cert = True
             if "verify_cert" in options and options["verify_cert"].lower() == "false":

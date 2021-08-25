@@ -11,7 +11,7 @@
 `qradar_find_reference_set_item`
 
 ### Output Name
-`None`
+``
 
 ### Message Destination
 `fn_qradar_integration`
@@ -19,47 +19,20 @@
 ### Pre-Processing Script
 ```python
 inputs.qradar_reference_set_item_value = artifact.value
+inputs.qradar_reference_set_name = rule.properties.qradar_reference_set_name
+
+if incident.properties.qradar_server and not rule.properties.qradar_label:
+  inputs.qradar_label = incident.properties.qradar_server
+else:
+  inputs.qradar_label = rule.properties.qradar_label
 ```
 
 ### Post-Processing Script
 ```python
 if results.found == "True":
-  incident.addNote(u"Found IP: {} in list: {}.".format(artifact.value, results['content']['name']))
+  incident.addNote(u"Found IP: {} in list: {} on QRadar server: {}.".format(artifact.value, results.inputs["qradar_reference_set_name"], results.inputs["qradar_label"]))
 else:
-  incident.addNote("IP:{} not found in list.".format(artifact.value))
-  
-"""
-{
-  'status_code': 200,
-  'found': 'True',
-  'content': {
-    'time_to_live': '20 years 4 mons 22 days 0 hours 0 mins 0.00 secs',
-    'timeout_type': 'FIRST_SEEN',
-    'number_of_elements': 2,
-    'data': [
-      {
-        'last_seen': 1594386447789,
-        'first_seen': 1594386447789,
-        'source': 'reference data api',
-        'value': '169.254.3.2',
-        'domain_id': None
-      },
-      {
-        'last_seen': 1595364392956,
-        'first_seen': 1595364392956,
-        'source': 'reference data api',
-        'value': '1.2.3.4',
-        'domain_id': None
-      }
-    ],
-    'creation_time': 1587585219697,
-    'name': 'Sample Blocked IPs',
-    'namespace': 'SHARED',
-    'element_type': 'IP',
-    'collection_id': 32
-  }
-}
-"""
+  incident.addNote("IP:{} not found in list: {} on QRadar server: {}.".format(artifact.value, results.inputs["qradar_reference_set_name"], results.inputs["qradar_label"]))
 ```
 
 ---
