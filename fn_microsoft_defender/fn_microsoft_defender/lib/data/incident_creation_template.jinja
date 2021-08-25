@@ -1,0 +1,182 @@
+{
+  {# JINJA template for creating a new Resilient incident from a Sentinel incident. #}
+  "name": "Defender Alert - {{ title|replace('"', '\\"') }}",
+  "discovered_date": {{ alertCreationTime|resilient_datetimeformat }},
+  "start_date": {{ firstEventTime|resilient_datetimeformat }},
+  "description": {
+    "format": "text",
+    "content": "{{ description|replace('"', '\\"') }}"
+  },
+  {# if Sentinel users are different than SOAR users, consider using a mapping table using resilient_substitute: #}
+  {# "owner_id": "{{ assignedTo|resilient_substitute('{"Automation": "soar_user1@ent.com", "sentinel_user2@co.com": "soar_user2@ent.com", "DEFAULT": "default_user@ent.com" }') }}", #}
+  "owner_id": {% if assignedTo %} "{{ assignedTo|resilient_substitute('{"Automation": "a@example.com", "sentinel_user2@co.com": "soar_user2@ent.com", "DEFAULT": "default_user@ent.com" }') }}", {% else %} null, {% endif %}
+  "plan_status": "{{ status|resilient_substitute('{"Resolved": "C", "Active": "A", "New": "A"}') }}",
+  "severity_code": "{{ severity|resilient_substitute('{"Informational": "Low"}') }}",
+  "properties": {
+    "defender_incident_id": {{ incidentId }},
+    "defender_alert_id": "{{ id }}",
+    "defender_classification": "{{ classification|replace('"', '\\"') }}",
+    "defender_determination": "{{ determination|replace('"', '\\"') }}",
+    "defender_category": "{{ category|replace('"', '\\"') }}"
+  },
+  "comments": [
+    {% for comment in comments %}
+    {
+      "text": {
+        "format": "text",
+        "content": "{{ comment.comment|replace('"', '\\"') }}\ncreated by: {{ comment.createdBy }}\ncreation date: {{ comment.createdTime }}"
+      }
+    }
+    {% if not loop.last %},{% endif %}
+    {% endfor %}
+  ],
+  "artifacts": [
+    {% for item in evidence %}
+      {% set artifactFlg = False %}
+      {% if item.entityType == 'Ip' %}
+      {% set artifactFlg = True %}
+      {
+        "type": {
+          "name": "IP Address"
+        },
+        "value": "{{ item.ipAddress }}",
+        "description": {
+          "format": "text",
+          "content": "creation date: {{ item.evidenceCreationTime }}"
+        }
+      }
+      {% elif item.entityType == 'User' %}
+      {% set artifactFlg = True %}
+      {
+        "type": {
+          "name": "User Account"
+        },
+        "value": "{{ item.userPrincipalName }}",
+        "description": {
+          "format": "text",
+          "content": "creation date: {{ item.evidenceCreationTime }}"
+        }
+      }
+      {% elif item.entityType == 'Process' and item.processCommandLine %}
+      {% set artifactFlg = True %}
+      {
+        "type": {
+          "name": "Process Name"
+        },
+        "value": "{{ item.processCommandLine[:100]|replace('\\', '\\\\')|replace('"', '\\"') }}",
+        "description": {
+          "format": "text",
+          "content": "creation date: {{ item.evidenceCreationTime }}"
+        }
+      }
+      {% elif item.entityType == 'Process' and not item.processCommandLine and item.fileName %}
+      {% set artifactFlg = True %}
+      {
+        "type": {
+          "name": "File Name"
+        },
+        "value": "{{ item.fileName|replace('\\', '\\\\')|replace('"', '\\"') }}",
+        "description": {
+          "format": "text",
+          "content": "creation date: {{ item.evidenceCreationTime }}\nFile Path: {{ item.filePath|replace('\\', '\\\\')|replace('"', '\\"') }}"
+        }
+      }
+      {% elif item.entityType == 'Url' %}
+      {% set artifactFlg = True %}
+      {
+        "type": {
+          "name": "URL"
+        },
+        "value": "{{ item.url }}",
+        "description": {
+          "format": "text",
+          "content": "creation date: {{ item.evidenceCreationTime }}"
+        }
+      }
+      {% elif item.entityType == 'File' %}
+      {% set artifactFlg = True %}
+      {
+        "type": {
+          "name": "File Name"
+        },
+        "value": "{{ item.fileName }}",
+        "description": {
+          "format": "text",
+          "content": "creation date: {{ item.evidenceCreationTime }}\nfile path: {{ item.filePath|replace('\\', '\\\\') }}"
+        }
+      },
+      {
+        "type": {
+          "name": "Malware SHA-1 Hash"
+        },
+        "value": "{{ item.sha1 }}",
+        "description": {
+          "format": "text",
+          "content": "creation date: {{ item.evidenceCreationTime }}\nfile name: {{ item.fileName }}"
+        }
+      },
+      {
+        "type": {
+          "name": "Malware SHA-256 Hash"
+        },
+        "value": "{{ item.sha256 }}",
+        "description": {
+          "format": "text",
+          "content": "creation date: {{ item.evidenceCreationTime }}\nfile name: {{ item.fileName }}"
+        }
+      }
+      {% elif item.entityType == 'Registry' %}
+      {% set artifactFlg = True %}
+      {
+        "type": {
+          "name": "Registry Key"
+        },
+        "value": "{{ item.registryHive|lower }}\\{{ item.registryKey|replace('\\', '\\\\') }}",
+        "description": {
+          "format": "text",
+          "content": "creation date: {{ item.evidenceCreationTime }} }}"
+        },
+        "properties":[
+          {
+            "name": "{{ item.registryKey|replace('\\', '\\\\') }}",
+            "value": "{{ item.registryValue|replace('\\', '\\\\')|replace('"', '\\"') }}"
+          }
+        ]
+      }
+      {% elif item.entityType == 'MailMessage' %}
+      {% set artifactFlg = True %}
+      {
+        "type": {
+          "name": "Email Sender"
+        },
+        "value": "{{ item.sender|replace('"', '\\"') }}",
+        "description": {
+          "format": "text",
+          "content": "creation date: {{ item.evidenceCreationTime }}"
+        }
+      },
+      {
+        "type": {
+          "name": "Email Recipient"
+        },
+        "value": "{{ item.recipient|replace('"', '\\"') }}",
+        "description": {
+          "format": "text",
+          "content": "creation date: {{ item.evidenceCreationTime }}"
+        }
+      },
+      {
+        "type": {
+          "name": "Email Subject"
+        },
+        "value": "{{ item.subject|replace('"', '\\"') }}",
+        "description": {
+          "format": "text",
+          "content": "creation date: {{ item.evidenceCreationTime }}"
+        }
+      }
+      {% endif %}
+      {% if artifactFlg and not loop.last %},{% endif %}
+    {% endfor %}
+  ]
+}

@@ -24,7 +24,7 @@ def codegen_reload_data():
         "functions": [u"defender_alert_search", u"defender_app_execution", u"defender_collect_machine_investigation_package", u"defender_delete_indicator", u"defender_find_machines", u"defender_find_machines_by_file", u"defender_find_machines_by_filter", u"defender_get_related_alert_information", u"defender_list_indicators", u"defender_machine_isolation", u"defender_machine_scan", u"defender_quarantine_file", u"defender_set_indicator", u"defender_update_alert", u"fn_test"],
         "workflows": [u"defender_atp_alerts_by_machine", u"defender_atp_app_execution", u"defender_atp_collect_machine_investigation_package", u"defender_atp_delete_indicator", u"defender_atp_find_machines", u"defender_atp_find_machines_by_file_hash", u"defender_atp_machine_isolation", u"defender_atp_machine_scan", u"defender_atp_machine_unisolate", u"defender_atp_set_indicator", u"defender_atp_update_alert", u"defender_atp_update_indicator", u"defender_find_machines_by_filter", u"defender_get_related_alert_information", u"defender_list_indicators", u"defender_quarantine_file", u"example_get_incident_contact_info"],
         "actions": [u"Create Artifact from Indicator", u"Defender ATP Alerts by Machine", u"Defender ATP App Execution Restriction", u"Defender ATP Collect Machine Investigation Package", u"Defender ATP Find machine by DNS name", u"Defender ATP Find Machines", u"Defender ATP Find Machines by File Hash", u"Defender ATP List Indicators", u"Defender ATP Machine Isolate Action", u"Defender ATP Machine Scan", u"Defender ATP Quarantine Machine File", u"Defender ATP Set Indicator", u"Defender ATP Update Alert", u"Defender Get Related Alert Information", u"Delete Indicator", u"Update Indicator"],
-        "incident_fields": [],
+        "incident_fields": [u"defender_alert_id", u"defender_category", u"defender_classification", u"defender_determination", u"defender_incident_id"],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [u"defender_atp_alerts", u"defender_atp_indicators", u"defender_atp_machines"],
@@ -94,6 +94,12 @@ def customization_data(client=None):
         - Defender Get Related Alert Information
         - Delete Indicator
         - Update Indicator
+    - Incident Fields:
+        - defender_alert_id
+        - defender_category
+        - defender_classification
+        - defender_determination
+        - defender_incident_id
     - Data Tables:
         - defender_atp_alerts
         - defender_atp_indicators

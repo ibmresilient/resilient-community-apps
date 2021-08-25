@@ -16,7 +16,6 @@ ALERT_TYPES = {
     'Users': 'user'
 }
 
-
 class FunctionComponent(AppFunctionComponent):
     """Component that implements function 'defender_get_related_alert_information'"""
 

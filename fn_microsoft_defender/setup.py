@@ -45,8 +45,9 @@ setup(
     entry_points={
         "resilient.circuits.components": [
             # When setup.py is executed, loop through the .py files in the components directory and create the entry points.
-            "{}FunctionComponent = fn_microsoft_defender.components.{}:FunctionComponent".format(snake_to_camel(get_module_name(filename)), get_module_name(filename)) for filename in glob.glob("./fn_microsoft_defender/components/[a-zA-Z]*.py")
-        ],
+            "{}FunctionComponent = fn_microsoft_defender.components.{}:FunctionComponent".format(snake_to_camel(get_module_name(filename)), get_module_name(filename)) for filename in glob.glob("./fn_microsoft_defender/components/f[a-zA-Z]*.py")
+        ]+
+        [ "PollerComponent = fn_microsoft_defender.components.defender_poller:DefenderPollerComponent" ],
         "resilient.circuits.configsection": ["gen_config = fn_microsoft_defender.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_microsoft_defender.util.customize:customization_data"],
         "resilient.circuits.selftest": ["selftest = fn_microsoft_defender.util.selftest:selftest_function"]

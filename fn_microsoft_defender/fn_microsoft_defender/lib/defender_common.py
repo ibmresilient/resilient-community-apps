@@ -3,6 +3,7 @@
 # (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
 
 import calendar
+import datetime
 import logging
 import time
 from msal import ConfidentialClientApplication
@@ -10,6 +11,7 @@ from resilient_lib import RequestsCommon, IntegrationError
 from simplejson.errors import JSONDecodeError
 
 PACKAGE_NAME = "fn_microsoft_defender"
+
 INDICATOR_URL = "api/indicators"
 MACHINES_URL = "api/machines"
 MACHINE_ACTIONS_URL = "api/machineactions"
@@ -18,13 +20,21 @@ FILES_URL = "api/files/{}/machines"
 MACHINES_FILTER = {
      "filter_by_name": "startswith(computerDnsName,'{}')"
 }
-ALERTS_URL = "api/alerts"
+ALERTS_URL = "api/alerts?$expand=evidence"
 
 AUTH_URL = "https://login.microsoftonline.com/{tenant_id}" # /v2.0  https://login.microsoftonline.com/82319d65-80f7-431f-8ee7-57bae5b231c2/oauth2/token
 RESOURCE_URI = "https://api.securitycenter.windows.com"
 DEFENDER_SCOPE = [
     "https://securitycenter.onmicrosoft.com/windowsatpservice/.default"
 ]
+
+
+DEFAULT_DEFENDER_UPDATE_ALERT_TEMPLATE = "data/defender_update_alert_template.jinja"
+DEFAULT_DEFENDER_CLOSE_ALERT_TEMPLATE = "data/defender_close_alert_template.jinja"
+
+DEFAULT_INCIDENT_CREATION_TEMPLATE = "data/incident_creation_template.jinja"
+DEFAULT_INCIDENT_UPDATE_TEMPLATE = "data/incident_update_template.jinja"
+DEFAULT_INCIDENT_CLOSE_TEMPLATE = "data/incident_close_template.jinja"
 
 LOG = logging.getLogger(__name__)
 
@@ -117,9 +127,9 @@ class DefenderAPI():
         headers = self.make_header(content_type)
 
         if oper in ["POST", "PATCH"]:
-            result, status = self.rc.execute_call_v2(oper, url, json=payload, headers=headers, callback=callback_response)
+            result, status = self.rc.execute(oper, url, json=payload, headers=headers, callback=callback_response)
         else:
-            result, status = self.rc.execute_call_v2(oper, url, params=payload, headers=headers, callback=callback_response)
+            result, status = self.rc.execute(oper, url, params=payload, headers=headers, callback=callback_response)
 
         reason = None
         if not status:
@@ -143,10 +153,23 @@ class DefenderAPI():
             "$filter": self._make_createdate_filter(last_poller_datetime)
         }
 
-        result, status, reason = self._call(ALERTS_URL, payload=payload)
+        result, status, reason = self.call(ALERTS_URL, payload=payload)
 
         LOG.debug("%s:%s:%s", status, reason, result)
         return result, status, reason
+
+    def _make_createdate_filter(self, last_poller_datetime):
+        """build the $filter parameter to find alerts by last poller run datetime
+        Args:
+            last_poller_datetime ([datetime]): [last poller time]
+        Returns:
+            [str]: [$filter string to use]
+        """
+        last_poller_datetime_iso = last_poller_datetime.isoformat()
+
+        # remove milliseconds
+        return "lastUpdateTime ge {lookback_date}Z"\
+                    .format(lookback_date=last_poller_datetime_iso[:last_poller_datetime_iso.rfind('.')])
 
     def wait_for_action(self, url, iter=10, wait=30):
         """[summary]
@@ -163,7 +186,6 @@ class DefenderAPI():
                 break
 
         return result, status, reason
-
 
 def callback_response(response):
     """call back routine to review HTTP status code
@@ -221,5 +243,5 @@ def make_filter_url(url, filter_template, value):
     """
     if filter_template in MACHINES_FILTER:
         return "?$filter=".join([url, MACHINES_FILTER[filter_template].format(value)])
-    else:
-        raise ValueError("{} is invalid filter template name".format(filter_template))
+
+    raise ValueError("{} is invalid filter template name".format(filter_template))

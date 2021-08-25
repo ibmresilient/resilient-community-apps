@@ -20,19 +20,20 @@ app_secret=xxx
 #   api-uk.securitycenter.microsoft.com
 api_url=https://api.securitycenter.microsoft.com
 # poller settings
-# poller timeback time first time, in minutes
+#   poller timeback time first time, in minutes
 polling_lookback=120
-# poller internal in seconds. Comment out to disable poller
+#   poller internal in seconds. Comment out to disable poller
 polling_interval=60
 # comma separated list of fields to filter incidents to create
+#  if more than one field is specified, all fields need to pass
 #   format: "field1": value: "field2": ["list_value1", "list_value2"]
 new_incident_filters="status": ["New", "Active"],"severity": ["High", "Medium","Low"]
 # custom templates to replace the default map of sentinel fields to resilient incident fields
 #create_incident_template=
 #update_incident_template=
 #close_incident_template=
-#update_sentinel_incident_template=
-#close_sentinel_incident_template=
+#update_defender_alert_template=
+#close_defender_alert_template=
 # uncomment as necessary for proxies
 #http_proxy=http://yourproxy.com
 #https_proxy=https://yourproxy.com

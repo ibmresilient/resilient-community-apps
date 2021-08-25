@@ -7,16 +7,16 @@
 import datetime
 import json
 import logging
+import traceback
 from circuits import Event, Timer
 from resilient_circuits import ResilientComponent, handler
 from resilient_lib import validate_fields, IntegrationError
-from fn_microsoft_sentinel.lib.function_common import PACKAGE_NAME, SentinelProfiles,\
-        DEFAULT_INCIDENT_CREATION_TEMPLATE,\
-        DEFAULT_INCIDENT_UPDATE_TEMPLATE,\
-        DEFAULT_INCIDENT_CLOSE_TEMPLATE
 from fn_microsoft_defender.lib.jinja_common import JinjaEnvironment
 from fn_microsoft_defender.lib.resilient_common import ResilientCommon
-from fn_microsoft_defender.lib.defender_common import DefenderAPI
+from fn_microsoft_defender.lib.defender_common import DefenderAPI, PACKAGE_NAME, \
+    DEFAULT_INCIDENT_CREATION_TEMPLATE,\
+    DEFAULT_INCIDENT_UPDATE_TEMPLATE,\
+    DEFAULT_INCIDENT_CLOSE_TEMPLATE
 
 POLLER_CHANNEL = "defender_poller"
 TICKET_ID_FIELDNAME = "defender_alert_id"
@@ -81,12 +81,16 @@ class DefenderPollerComponent(ResilientComponent):
         self.options = opts.get(PACKAGE_NAME, {})
 
         # Validate required fields in app.config are set
-        required_fields = ["azure_url", "client_id", "tenant_id", "app_secret"]
+        required_fields = ["api_url", "client_id", "tenant_id", "app_secret"]
         validate_fields(required_fields, self.options)
 
         self.polling_interval = int(self.options.get("polling_interval", 0))
         if not self.polling_interval:
             return
+
+        self.last_poller_time = self._get_last_poller_date(int(self.options.get('polling_lookback', DEFAULT_POLLER_LOOBACK_MINUTES)))
+
+        self.new_incident_filters = get_profile_filters(self.options.get('new_incident_filters'))
 
         # Create api client
         self.defender_client = DefenderAPI(self.options['tenant_id'],
@@ -101,19 +105,28 @@ class DefenderPollerComponent(ResilientComponent):
             Search for Defender alerts and create associated cases in Resilient SOAR
         """
         try:
-            last_poller_time = self.options.get('polling_lookback', DEFAULT_POLLER_LOOBACK_MINUTES)
             # call Defender for recently updated/created alerts
-            result, status, reason  = self.defender_client.query_alerts(last_poller_time)
+            result, status, reason  = self.defender_client.query_alerts(self.last_poller_time)
 
             self._parse_results(result)
 
         except Exception as err:
             LOG.error(str(err))
+            LOG.error(traceback.format_exc())
         finally:
             # set the last poller time for next cycle
-            last_poller_time = datetime.datetime.utcnow()
+            self.last_poller_time = datetime.datetime.utcnow()
             # We always want to reset the timer to wake up, no matter failure or success
             self.fire(PollCompleted())
+
+    def _get_last_poller_date(self, polling_lookback):
+        """get the last poller datetime based on a lookback time
+        Args:
+            polling_lookback ([number]): # of minutes to lookback
+        Returns:
+            [datetime]: [datetime to use for last poller run time]
+        """
+        return datetime.datetime.utcnow() - datetime.timedelta(minutes=polling_lookback)
 
     def _parse_results(self, result):
         """[create resilient incidents if the result alerts haven't already by been created]
@@ -126,9 +139,10 @@ class DefenderPollerComponent(ResilientComponent):
             defender_alert_id = get_defender_alert_id(defender_alert)
             resilient_incident = self.resilient_common.find_incident(defender_alert_id)
 
-            new_incident_filters = self.options['new_incident_filters']
             result_resilient_incident = self._create_update_incident(defender_alert, resilient_incident,
-                                                                     new_incident_filters)
+                                                                     self.new_incident_filters)
+
+            #TODO template to include loop for comments and artfiacts
 
 
     def _create_update_incident(self, defender_alert, resilient_incident, new_incident_filters):
@@ -150,7 +164,7 @@ class DefenderPollerComponent(ResilientComponent):
             if resilient_incident["plan_status"] == "C":
                 LOG.info("Bypassing update to closed incident %s from Defender alert %s",
                             resilient_incident_id, defender_alert_id)
-            elif defender_alert['status'] == "Closed":
+            elif defender_alert['status'] == "Resolved":
                 # close the incident
                 incident_payload = self.jinja_env.make_payload_from_template(
                                                     self.options.get("close_incident_template"),
@@ -186,7 +200,7 @@ class DefenderPollerComponent(ResilientComponent):
                 LOG.info("Created incident %s from Defender alert %s",
                          updated_resilient_incident['id'], defender_alert_id)
             else:
-                LOG.info("Defender incident %s bypassed due to new_incident_filters",
+                LOG.info("Defender alert %s bypassed due to new_incident_filters",
                          defender_alert_id)
                 updated_resilient_incident = None
 
@@ -224,6 +238,7 @@ def check_incident_filters(defender_alert, new_incident_filters):
     if not new_incident_filters:
         return True
     result = False
+    result_list = []
 
     for filter_name, filter_value in new_incident_filters.items():
         if filter_name in defender_alert:
@@ -233,12 +248,15 @@ def check_incident_filters(defender_alert, new_incident_filters):
                         result = bool(value in defender_alert[filter_name])
                     else:
                         result = bool(value == defender_alert[filter_name])
+
                     # just need one to match for one pass
                     if result:
+                        result_list.append(result)
                         break
             else:
                 result = (filter_value == defender_alert[filter_name])
-    return result
+            result_list.append(result)
+    return all(result_list)
 
 def get_defender_alert_id(defender_alert):
     """

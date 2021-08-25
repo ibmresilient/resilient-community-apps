@@ -1,0 +1,11 @@
+{
+    {# JINJA template for closing a new Sentinel incident from a Resilient incident. #}
+    "properties": {
+        "severity": "{{ severity|string|resilient_substitute('{"4": "Low", "5": "Medium", "6": "High"}') }}",
+        "status": "Closed",
+        "classification": "{{ resolution_id|string|resilient_substitute('{"7": "Undetermined", "8": "Undetermined", "9": "FalsePositive", "10": "TruePositive"}') }}",
+        "classificationComment": "{{ resolution_summary|striptags|safe }}",
+        {# modify as necessary #}
+        "classificationReason": "{{ resolution_id|string|resilient_substitute('{"7": "", "8": "", "9": "InaccurateData", "10": "SuspiciousActivity"}') }}"
+    }
+}
