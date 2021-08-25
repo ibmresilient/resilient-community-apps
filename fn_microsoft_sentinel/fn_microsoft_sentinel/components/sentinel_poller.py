@@ -273,7 +273,9 @@ def check_incident_filters(sentinel_incident, new_incident_filters):
     """
     if not new_incident_filters:
         return True
+
     result = False
+    result_list = []
     # flatten the sentinel payload dictionary
     flattened_sentinel_incident = flatten(sentinel_incident)
     for filter_name, filter_value in new_incident_filters.items():
@@ -286,10 +288,13 @@ def check_incident_filters(sentinel_incident, new_incident_filters):
                         result = bool(value == flattened_sentinel_incident[filter_name])
                     # just need one to match for one pass
                     if result:
+                        result_list.append(result)
                         break
             else:
                 result = (filter_value == flattened_sentinel_incident[filter_name])
-    return result
+
+        result_list.append(result)
+    return all(result)
 
 
 def flatten(json_payload):

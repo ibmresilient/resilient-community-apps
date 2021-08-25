@@ -52,13 +52,10 @@ setup(
     ],
     entry_points={
         "resilient.circuits.components": [
-            "PollerComponent = fn_microsoft_sentinel.components.sentinel_poller:SentinelPollerComponent",
-            "AddIncidentCommentFunctionComponent = fn_microsoft_sentinel.components.funct_sentinel_add_incident_comment:FunctionComponent",
-            "GetIncidentCommentsFunctionComponent = fn_microsoft_sentinel.components.funct_sentinel_get_incident_comments:FunctionComponent",
-            "GetIncidentEntitiesFunctionComponent = fn_microsoft_sentinel.components.funct_sentinel_get_incident_entities:FunctionComponent",
-            "GetIncidentAlertsFunctionComponent = fn_microsoft_sentinel.components.funct_sentinel_get_incident_alerts:FunctionComponent",
-            "UpdateIncidentFunctionComponent = fn_microsoft_sentinel.components.funct_sentinel_update_incident:FeedComponent"
-        ],
+                # When setup.py is executed, loop through the .py files in the components directory and create the entry points.
+                "{}FunctionComponent = fn_microsoft_sentinel.components.{}:FunctionComponent".format(snake_to_camel(get_module_name(filename)), get_module_name(filename)) for filename in glob.glob("./fn_microsoft_sentinel/components/f[a-zA-Z]*.py")
+            ]+
+            [ "PollerComponent = fn_microsoft_sentinel.components.sentinel_poller:SentinelPollerComponent" ],
         "resilient.circuits.configsection": ["gen_config = fn_microsoft_sentinel.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_microsoft_sentinel.util.customize:customization_data"],
         "resilient.circuits.selftest": ["selftest = fn_microsoft_sentinel.util.selftest:selftest_function"]
