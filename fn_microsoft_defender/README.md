@@ -46,6 +46,7 @@
 - [Data Table - Defender ATP Indicators](#data-table---defender-atp-indicators)
 - [Data Table - Defender ATP Machines](#data-table---defender-atp-machines)
 - [Data Table - Defender ATP Alerts](#data-table---defender-atp-alerts)
+- [Custom Templates](#custom-templates)
 - [Rules](#rules)
 - [Troubleshooting & Support](#troubleshooting--support)
 ---
@@ -70,7 +71,9 @@
 
  ![screenshot: main](./doc/screenshots/main.png)
 
-Perform operations against Defender ATP such as set indicators, isolate and quarantine machines, and block file execution
+This app allows bi-directional synchronization between IBM SOAR and Microsoft Defender ATP for Endpoints.
+Defender entities are exposed as artifacts for further investigation.
+Perform operations against Defender ATP such as set indicators, isolate and quarantine machines, and block file execution.
 
 ### Key Features
 <!--
@@ -108,6 +111,8 @@ If deploying to a Resilient platform with an integration server, the requirement
   | ---- | ----------- |
   | Org Data | Read |
   | Function | Read |
+  | Incident | Read, Edit, Create, Owner, Status |
+  | Incident Notes | Edit |
 
 The following Resilient platform guides provide additional information:
 * _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
@@ -156,6 +161,15 @@ The following table provides the settings you need to configure the app. These s
 | **client_id** | Yes | `244ad4-...-3564fc4` | *Azure app id (client id).* |
 | **app_secret** | Yes | `940c4d2-...-9d32e1b` | *Azure app secret.* |
 | **api_url** | Yes | `https://api.securitycenter.microsoft.com` | *API utl. This can be customized per Azure region.* |
+**polling_lookback** | Yes | `120` | *# of minutes to look back for alert changes. This is used only the first time the app starts* |
+| **polling_interval** | Yes | `60` | *# of seconds to wait until checking for changes in Defender. Comment out to disable the poller* |
+| **new_incident_filters** | Yes | `"status": ["New", "Active"],"severity": ["High", "Medium","Low"]` | *Set of filters to apply when escalating alerts to Resilient SOAR. Alerts not matching the criteria are not synchronized* |
+| **create_incident_template** | /user/path/to/create_incident_template.jinja | Customer supplied template for mapping Defender alert fields to an Resilient incident. If not specified, a default template is used. |
+| **update_incident_template** | /user/path/to/update_incident_template.jinja | Customer supplied template for mapping Defender alert fields to an Resilient incident. If not specified, a default template is used. |
+| **close_incident_template** | /user/path/to/close_incident_template.jinja | Customer supplied template for mapping Defender alert fields to an Resilient incident. If not specified, a default template is used. This is useful when a customer customizes the fields used when closing an incident. |
+| **defender_update_alert_template** | /user/path/to/update_sentinel_incident_template.jinja | Customer supplied template for updating a Defender alert when the Resilient SOAR incident is updated |
+| **defender_close_alert_template** | /user/path/to/update_sentinel_incident_template.jinja | Customer supplied template for closing a Defender alert when the Resilient SOAR incident is closed |
+
 
 ### Custom Layouts
 <!--
@@ -1738,6 +1752,282 @@ defender_atp_alerts
 
 ---
 
+## Custom Templates
+Below are examples of templates for creating, updating, and closing Resilient incidents. Customize these templates and refer to them in our app.config file.
+
+Each template should be reviewed for correctness in your enterprise.
+For instance, closing a SOAR incident may include additional custom fields which the default template
+does not include. Or, remove the `owner_id` mapping entry entirely.
+
+In addition, the `incident_creation_template` and `incident_update_template` includes the following
+mapping:
+
+```
+  {# if Defender alert users are different than SOAR users, consider using a mapping table using resilient_substitute: #}
+  {# "owner_id": "{{ assignedTo|resilient_substitute('{"Automation": "soar_user1@ent.com", "sentinel_user2@co.com": "soar_user2@ent.com", "DEFAULT": "default_user@ent.com" }') }}", #}
+  "owner_id": {% if assignedTo %} "{{ assignedTo|resilient_substitute('{"Automation": "a@example.com", "sentinel_user2@co.com": "soar_user2@ent.com", "DEFAULT": "default_user@ent.com" }') }}", {% else %} null, {% endif %}
+
+```
+
+If your Defender login users differ from SOAR users, modify the `owner_id` mapping to use a substitution map as indicated in the jinja comment.
+
+### incident_create_template.jinja
+```
+{
+  {# JINJA template for creating a new Resilient incident from a Sentinel incident. #}
+  "name": "Defender Alert - {{ title|replace('"', '\\"') }}",
+  "discovered_date": {{ alertCreationTime|resilient_datetimeformat }},
+  "start_date": {{ firstEventTime|resilient_datetimeformat }},
+  "description": {
+    "format": "text",
+    "content": "{{ description|replace('"', '\\"') }}"
+  },
+  {# if Defender alert users are different than SOAR users, consider using a mapping table using resilient_substitute: #}
+  {# "owner_id": "{{ assignedTo|resilient_substitute('{"Automation": "soar_user1@ent.com", "sentinel_user2@co.com": "soar_user2@ent.com", "DEFAULT": "default_user@ent.com" }') }}", #}
+  "owner_id": {% if assignedTo %} "{{ assignedTo|resilient_substitute('{"Automation": "a@example.com", "sentinel_user2@co.com": "soar_user2@ent.com", "DEFAULT": "default_user@ent.com" }') }}", {% else %} null, {% endif %}
+  "plan_status": "{{ status|resilient_substitute('{"Resolved": "C", "Active": "A", "New": "A"}') }}",
+  "severity_code": "{{ severity|resilient_substitute('{"Informational": "Low"}') }}",
+  "properties": {
+    "defender_incident_id": {{ incidentId }},
+    "defender_alert_id": "{{ id }}",
+    "defender_classification": "{{ classification|replace('"', '\\"') }}",
+    "defender_determination": "{{ determination|replace('"', '\\"') }}",
+    "defender_category": "{{ category|replace('"', '\\"') }}"
+  },
+  "comments": [
+    {% for comment in comments %}
+    {
+      "text": {
+        "format": "text",
+        "content": "{{ comment.comment|replace('"', '\\"') }}\ncreated by: {{ comment.createdBy }}\ncreation date: {{ comment.createdTime }}"
+      }
+    }
+    {% if not loop.last %},{% endif %}
+    {% endfor %}
+  ],
+  "artifacts": [
+    {% for item in evidence %}
+      {% set artifactFlg = False %}
+      {% if item.entityType == 'Ip' %}
+      {% set artifactFlg = True %}
+      {
+        "type": {
+          "name": "IP Address"
+        },
+        "value": "{{ item.ipAddress }}",
+        "description": {
+          "format": "text",
+          "content": "creation date: {{ item.evidenceCreationTime }}"
+        }
+      }
+      {% elif item.entityType == 'User' %}
+      {% set artifactFlg = True %}
+      {
+        "type": {
+          "name": "User Account"
+        },
+        "value": "{{ item.userPrincipalName }}",
+        "description": {
+          "format": "text",
+          "content": "creation date: {{ item.evidenceCreationTime }}"
+        }
+      }
+      {% elif item.entityType == 'Process' and item.processCommandLine %}
+      {% set artifactFlg = True %}
+      {
+        "type": {
+          "name": "Process Name"
+        },
+        "value": "{{ item.processCommandLine[:100]|replace('\\', '\\\\')|replace('"', '\\"') }}",
+        "description": {
+          "format": "text",
+          "content": "creation date: {{ item.evidenceCreationTime }}"
+        }
+      }
+      {% elif item.entityType == 'Process' and not item.processCommandLine and item.fileName %}
+      {% set artifactFlg = True %}
+      {
+        "type": {
+          "name": "File Name"
+        },
+        "value": "{{ item.fileName|replace('\\', '\\\\')|replace('"', '\\"') }}",
+        "description": {
+          "format": "text",
+          "content": "creation date: {{ item.evidenceCreationTime }}\nFile Path: {{ item.filePath|replace('\\', '\\\\')|replace('"', '\\"') }}"
+        }
+      }
+      {% elif item.entityType == 'Url' %}
+      {% set artifactFlg = True %}
+      {
+        "type": {
+          "name": "URL"
+        },
+        "value": "{{ item.url }}",
+        "description": {
+          "format": "text",
+          "content": "creation date: {{ item.evidenceCreationTime }}"
+        }
+      }
+      {% elif item.entityType == 'File' %}
+      {% set artifactFlg = True %}
+      {
+        "type": {
+          "name": "File Name"
+        },
+        "value": "{{ item.fileName }}",
+        "description": {
+          "format": "text",
+          "content": "creation date: {{ item.evidenceCreationTime }}\nfile path: {{ item.filePath|replace('\\', '\\\\') }}"
+        }
+      },
+      {
+        "type": {
+          "name": "Malware SHA-1 Hash"
+        },
+        "value": "{{ item.sha1 }}",
+        "description": {
+          "format": "text",
+          "content": "creation date: {{ item.evidenceCreationTime }}\nfile name: {{ item.fileName }}"
+        }
+      },
+      {
+        "type": {
+          "name": "Malware SHA-256 Hash"
+        },
+        "value": "{{ item.sha256 }}",
+        "description": {
+          "format": "text",
+          "content": "creation date: {{ item.evidenceCreationTime }}\nfile name: {{ item.fileName }}"
+        }
+      }
+      {% elif item.entityType == 'Registry' %}
+      {% set artifactFlg = True %}
+      {
+        "type": {
+          "name": "Registry Key"
+        },
+        "value": "{{ item.registryHive|lower }}\\{{ item.registryKey|replace('\\', '\\\\') }}",
+        "description": {
+          "format": "text",
+          "content": "creation date: {{ item.evidenceCreationTime }} }}"
+        },
+        "properties":[
+          {
+            "name": "{{ item.registryKey|replace('\\', '\\\\') }}",
+            "value": "{{ item.registryValue|replace('\\', '\\\\')|replace('"', '\\"') }}"
+          }
+        ]
+      }
+      {% elif item.entityType == 'MailMessage' %}
+      {% set artifactFlg = True %}
+      {
+        "type": {
+          "name": "Email Sender"
+        },
+        "value": "{{ item.sender|replace('"', '\\"') }}",
+        "description": {
+          "format": "text",
+          "content": "creation date: {{ item.evidenceCreationTime }}"
+        }
+      },
+      {
+        "type": {
+          "name": "Email Recipient"
+        },
+        "value": "{{ item.recipient|replace('"', '\\"') }}",
+        "description": {
+          "format": "text",
+          "content": "creation date: {{ item.evidenceCreationTime }}"
+        }
+      },
+      {
+        "type": {
+          "name": "Email Subject"
+        },
+        "value": "{{ item.subject|replace('"', '\\"') }}",
+        "description": {
+          "format": "text",
+          "content": "creation date: {{ item.evidenceCreationTime }}"
+        }
+      }
+      {% endif %}
+      {% if artifactFlg and not loop.last %},{% endif %}
+    {% endfor %}
+  ]
+}
+```
+
+### incident_update_template.jinja
+```
+{
+  {# JINJA template for creating a new Resilient incident from a Sentinel incident. #}
+  "name": "Defender Alert - {{ title|replace('"', '\\"') }}",
+  "description": {
+    "format": "text",
+    "content": "{{ description|replace('"', '\\"') }}"
+  },
+  {# if Defender users are different than SOAR users, consider using a mapping table using resilient_substitute: #}
+  {# "owner_id": "{{ assignedTo|resilient_substitute('{"Automation": "soar_user1@ent.com", "sentinel_user2@co.com": "soar_user2@ent.com", "DEFAULT": "default_user@ent.com" }') }}", #}
+  "owner_id": {% if assignedTo %} "{{ assignedTo|resilient_substitute('{"Automation": "a@example.com", "sentinel_user2@co.com": "soar_user2@ent.com", "DEFAULT": "default_user@ent.com" }') }}", {% else %} null, {% endif %}
+  "plan_status": "{{ status|resilient_substitute('{"Resolved": "C", "Active": "A", "New": "A"}') }}",
+  "severity_code": "{{ severity|resilient_substitute('{"Informational": "Low"}') }}",
+  "properties": {
+    "defender_classification": "{{ classification|replace('"', '\\"') }}",
+    "defender_determination": "{{ determination|replace('"', '\\"') }}",
+    "defender_category": "{{ category|replace('"', '\\"') }}"
+  }
+}
+```
+
+### incident_close_template.jinja
+```
+{
+  {# JINJA template for closing a new Resilient incident from a Defender alert. #}
+  "plan_status": "C",
+  "resolution_id": "Resolved",
+  "resolution_summary": "Closed from Defender: {{ investigationState }}",
+  "severity_code": "{{ severity|resilient_substitute('{"Informational": "Low"}') }}",
+  "properties": {
+    "defender_classification": "{{ classification|replace('"', '\\"') }}",
+    "defender_determination": "{{ determination|replace('"', '\\"') }}",
+    "defender_category": "{{ category|replace('"', '\\"') }}"
+  }
+}
+```
+
+### sentinel_close_incident_template.jinja
+```
+{
+    {# JINJA template for closing a new Sentinel incident from a Resilient incident. #}
+    "properties": {
+        "severity": "{{ severity_code|string|resilient_substitute('{"4": "Low", "5": "Medium", "6": "High"}') }}",
+        "status": "Closed",
+        "title": "{{ name|replace('Sentinel Incident - ', '')|safe }}",
+        "classification": "{{ resolution_id|string|resilient_substitute('{"7": "Undetermined", "8": "Undetermined", "9": "FalsePositive", "10": "TruePositive"}') }}",
+        "classificationComment": "{{ resolution_summary|striptags|safe }}",
+        {# modify as necessary #}
+        "classificationReason": "{{ resolution_id|string|resilient_substitute('{"7": "", "8": "", "9": "InaccurateData", "10": "SuspiciousActivity"}') }}"
+    }
+}
+```
+
+### sentinel_update_incident_template.jinja
+```
+{
+    {# JINJA template for updating a new Sentinel incident from a Resilient incident. #}
+    "properties": {
+        "severity": "{{ severity_code|string|resilient_substitute('{"4": "Low", "5": "Medium", "6": "High"}') }}",
+        "status": "{{ properties.sentinel_incident_status }}",
+        "title": "{{ name|replace('Sentinel Incident - ', '')|safe }}",
+        "classification": "{{ properties.sentinel_incident_classification }}",
+        "classificationComment": "{{ properties.sentinel_incident_classification_comment|safe }}",
+        "classificationReason": "{{ properties.sentinel_incident_classification_reason }}",
+        "description": "{{ description|striptags|safe }}",
+        "labels": "{{ properties.sentinel_incident_labels }}"
+    }
+}
+```
+---
 
 
 ## Rules
