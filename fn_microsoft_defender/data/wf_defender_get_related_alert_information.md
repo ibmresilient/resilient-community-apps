@@ -18,7 +18,7 @@
 
 ### Pre-Processing Script
 ```python
-inputs.defender_alert_id = row['defender_machine_id']
+inputs.defender_alert_id = row['alert_id']
 # inputs.defender_alert_info = ['Devices', 'Domains', 'IPs', 'Users', 'Files']
 ```
 
