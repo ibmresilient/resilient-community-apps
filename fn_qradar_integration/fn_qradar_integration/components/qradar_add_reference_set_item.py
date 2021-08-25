@@ -9,7 +9,7 @@ import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import validate_fields
 from fn_qradar_integration.util.qradar_utils import QRadarClient, QRadarServers
-import fn_qradar_integration.util.qradar_constants as qradar_constants
+import fn_qradar_integration.util.function_utils as function_utils
 
 LOG = logging.getLogger(__name__)
 
@@ -20,39 +20,13 @@ class FunctionComponent(ResilientComponent):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         self.opts = opts
-        self.servers_list = {}
-
-        options = opts.get(qradar_constants.PACKAGE_NAME, {})
-
-        if options:
-            server_list = {qradar_constants.PACKAGE_NAME}
-        else:
-            servers = QRadarServers(opts, options)
-            server_list = servers.get_server_name_list()
-
-        for server_name in server_list:
-            self.servers_list[server_name] = opts.get(server_name, {})
-            options = self.servers_list[server_name]
-
-            required_fields = ["host", "verify_cert"]
-            validate_fields(required_fields, options)
+        self.servers_list = function_utils.get_servers_list(opts, "init")
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
         self.opts = opts
-        self.servers_list = {}
-
-        options = opts.get(qradar_constants.PACKAGE_NAME, {})
-
-        if options:
-            server_list = {qradar_constants.PACKAGE_NAME}
-        else:
-            servers = QRadarServers(opts, options)
-            server_list = servers.get_server_name_list()
-
-        for server_name in server_list:
-            self.servers_list[server_name] = opts.get(server_name, {})
+        self.servers_list = function_utils.get_servers_list(opts, "reload")
 
     @function("qradar_add_reference_set_item")
     def _qradar_add_reference_set_item_function(self, event, *args, **kwargs):

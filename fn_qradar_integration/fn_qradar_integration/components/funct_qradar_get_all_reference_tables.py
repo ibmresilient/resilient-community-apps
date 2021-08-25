@@ -5,7 +5,7 @@
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import validate_fields, ResultPayload
+from resilient_lib import ResultPayload
 from fn_qradar_integration.util.qradar_utils import QRadarClient, QRadarServers
 import fn_qradar_integration.util.qradar_constants as qradar_constants
 import fn_qradar_integration.util.function_utils as function_utils
