@@ -89,7 +89,7 @@ fn_zia
 #fn_aws_guardduty-failing-test
 #fn_crowdstrike_falcon-still-root-group
 #fn_odbc_query-still-root-group
-#rc-data-feed
+rc-data-feed
 #rc-data-feed-plugin-elasticfeed
 #rc-data-feed-plugin-kafkafeed
 #rc-data-feed-plugin-odbcfeed
