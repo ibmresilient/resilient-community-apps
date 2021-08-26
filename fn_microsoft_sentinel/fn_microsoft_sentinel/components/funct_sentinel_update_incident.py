@@ -18,12 +18,12 @@ INCIDENT_TYPE = 0
 
 LOG = logging.getLogger(__name__)
 
-class FeedComponent(ResilientComponent):
+class FunctionComponent(ResilientComponent):
     """This component handles initial population of a feed and ongoing
     modifications from the associated queue."""
 
     def __init__(self, opts):
-        super(FeedComponent, self).__init__(opts)
+        super(FunctionComponent, self).__init__(opts)
 
         try:
             self.options = opts.get(PACKAGE_NAME, {})
