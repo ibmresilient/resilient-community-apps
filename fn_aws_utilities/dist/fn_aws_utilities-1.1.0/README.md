@@ -1,1 +1,0 @@
-This package contains a set of utility functions that integrate with AWS for use by Resilient workflows. Refer to the documentation for further details.

@@ -32,8 +32,7 @@ setup(
     long_description="Resilient Circuits Components for 'fn_aws_utilities'",
     install_requires=[
         'resilient_circuits>=30.0.0',
-        'boto3',
-        'fn_utilities'
+        'boto3'
     ],
     packages=find_packages(),
     include_package_data=True,

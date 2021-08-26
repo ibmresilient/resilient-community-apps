@@ -27,14 +27,10 @@ RUN pip install "resilient-circuits>=${RESILIENT_CIRCUITS_VERSION}"
 
 # install the base package
 COPY ./dist /tmp/packages
-RUN pip install /tmp/packages/fn_utilities-*.tar.gz
 RUN pip install /tmp/packages/${APPLICATION}-*.tar.gz
 
 # uncomment and replicate if additional pypi packages are needed
 #RUN pip install <package>
-
-# uncomment and replicate if additional local packages are needed
-# COPY /Users/bobleckel/soar/resilient-community-apps/fn_utilities/dist /tmp/packages
 
 # uncomment to expose port only if a custom threat feed
 #EXPOSE 9000
