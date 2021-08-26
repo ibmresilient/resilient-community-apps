@@ -61,7 +61,7 @@ class TestFnWatsonTranslateE2E:
                                   {"translations": [{"translation": "txet"}]},
                                   {"languages": [{"language": "su", "confidence": 0.7}]}),
                                  # check that html is stripped
-                                 (None, "su", "<div>text</div>", {"value": "txet", "confidence": 0.7, "language": "su"},
+                                 ("en", "su", "<div>text</div>", {"value": "txet", "confidence": 0.7, "language": "su"},
                                   {"translations": [{"translation": "txet"}]},
                                   {"languages": [{"language": "su", "confidence": 0.7}]}),
                              ])

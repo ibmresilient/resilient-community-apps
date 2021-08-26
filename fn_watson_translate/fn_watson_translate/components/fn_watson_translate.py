@@ -69,7 +69,7 @@ class FunctionComponent(ResilientComponent):
                 return
 
             # if the translation went through, but nothing was returned
-            if len(translation.result['translations']) == 0:
+            if not hasattr(translation, 'result') or len(translation.result['translations']) == 0:
                 raise ValueError("Wasn't translated.")
 
             yield StatusMessage("Finished translating.")
@@ -83,7 +83,7 @@ class FunctionComponent(ResilientComponent):
             yield FunctionResult(results)
         except Exception as e:
             log.error(e)
-            yield FunctionError("An error occurred."+str(e))
+            yield FunctionError("An error occurred. {}".format(str(e)))
 
     def _get_text_from_html(self, input):
         """
@@ -121,7 +121,10 @@ class FunctionComponent(ResilientComponent):
         """
         source_lang_query = language_translator.identify(text)
 
-        source_lang = source_lang_query.result['languages']
+        source_lang = []
+        if hasattr(source_lang_query, 'result'):
+            source_lang = source_lang_query.result['languages']
+
         if len(source_lang) > 0:
             confidence = source_lang[0]['confidence']
             source_lang = source_lang[0]['language']

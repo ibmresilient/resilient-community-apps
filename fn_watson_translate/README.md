@@ -199,6 +199,89 @@ note.addNote("Translated by Watson: \n" + results.value)
 
 ---
 
+## Languages Supported:
+
+Use the two character representation for your source and target language:
+
+```
+af:Afrikaans
+ar:Arabic
+az:Azerbaijani
+ba:Bashkir
+be:Belarusian
+bg:Bulgarian
+bn:Bengali
+ca:Catalan
+cs:Czech
+cv:Chuvash
+cy:Welsh
+da:Danish
+de:German
+el:Greek
+en:English
+eo:Esperanto
+es:Spanish
+et:Estonian
+eu:Basque
+fa:Persian
+fi:Finnish
+fr:French
+ga:Irish
+gu:Gujarati
+he:Hebrew
+hi:Hindi
+hr:Croatian
+ht:Haitian
+hu:Hungarian
+hy:Armenian
+is:Icelandic
+it:Italian
+ja:Japanese
+ka:Georgian
+kk:Kazakh
+km:Central Khmer
+ko:Korean
+ku:Kurdish
+ky:Kirghiz
+lo:Lao
+lt:Lithuanian
+lv:Latvian
+ml:Malayalam
+mn:Mongolian
+mr:Marathi
+ms:Malay
+mt:Maltese
+my:Burmese
+nb:Norwegian Bokmal
+ne:Nepali
+nl:Dutch
+nn:Norwegian Nynorsk
+pa:Punjabi
+pa-PK:Punjabi (Shahmukhi script, Pakistan)
+pl:Polish
+ps:Pushto
+pt:Portuguese
+ro:Romanian
+ru:Russian
+si:Sinhala
+sk:Slovakian
+sl:Slovenian
+so:Somali
+sq:Albanian
+sr:Serbian
+sv:Swedish
+ta:Tamil
+te:Telugu
+th:Thai
+tl:Tagalog
+tr:Turkish
+uk:Ukrainian
+ur:Urdu
+vi:Vietnamese
+zh:Simplified Chinese
+zh-TW:Traditional Chinese
+```
+
 ## Troubleshooting & Support
 Refer to the documentation listed in the Requirements section for troubleshooting information.
 
