@@ -1,0 +1,13 @@
+Metadata-Version: 2.1
+Name: fn_aws_utilities
+Version: 1.1.0
+Summary: Resilient Circuits Components for 'fn_aws_utilities'
+Home-page: http://ibm.biz/soarcommunity
+Author: IBM SOAR
+Author-email: 
+License: MIT
+Platform: any
+Classifier: Programming Language :: Python
+
+Resilient Circuits Components for 'fn_aws_utilities'
+

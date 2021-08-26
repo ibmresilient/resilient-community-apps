@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 
-# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 """Function implementation"""
 
 import logging
@@ -51,6 +51,8 @@ class FunctionComponent(ResilientComponent):
                 yield FunctionResult({"response_payload": None})
 
             payload_string = str(payload.read())
+
+            log.info("payload: %s", payload_string)
 
             yield FunctionResult({"response_payload": payload_string})
         except Exception:

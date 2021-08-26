@@ -3,5 +3,6 @@ include apikey_permissions.txt
 include Dockerfile
 include entrypoint.sh
 recursive-include fn_aws_utilities/util *
+recursive-include ../fn_utilities/fn_utilities/*
 include fn_aws_utilities/LICENSE
 include doc/screeshots/*
