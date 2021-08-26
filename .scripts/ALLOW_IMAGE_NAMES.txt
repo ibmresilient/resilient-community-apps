@@ -79,6 +79,7 @@ fn_urlscanio
 fn_utilities
 fn_virustotal
 fn_vmray_analyzer
+fn_watson_translate
 fn_wiki
 fn_whois
 fn_whois_rdap
@@ -118,4 +119,4 @@ fn_zia
 #fn_rsa_netwitness
 #fn_symantec_dlp
 #fn_thug
-#fn_watson_translate
+

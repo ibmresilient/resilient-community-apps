@@ -25,7 +25,8 @@ setup(
     author_email='',
     url='http://ibm.biz/soarcommunity',
     description="Resilient Circuits Components for 'fn_watson_translate'",
-    long_description="This function integrates with IBM Watson Translator to provide translation services for text based content.",
+    long_description="""This function integrates with IBM Watson Translator to provide translation services for text based content.
+Machine learning is incorporated to understand the source language for translation.""",
     install_requires=[
         'resilient_circuits>=39.0.0',
         'watson_developer_cloud>=2.3.0',

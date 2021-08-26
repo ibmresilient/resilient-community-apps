@@ -1,3 +1,4 @@
 include README.md
 recursive-include fn_watson_translate/util *
 include fn_watson_translate/LICENSE
+include apikey_permissions.txt
