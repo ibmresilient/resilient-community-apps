@@ -5,11 +5,16 @@
 
 import logging
 from bs4 import BeautifulSoup
-
+from ibm_watson import LanguageTranslatorV3
+from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 
-from watson_developer_cloud import LanguageTranslatorV3
-from watson_developer_cloud.watson_service import WatsonApiException
+
+authenticator = IAMAuthenticator('your_api_key')
+language_translator = LanguageTranslatorV3(
+    version='2018-05-01',
+    authenticator=authenticator)
+language_translator.set_service_url('https://gateway.watsonplatform.net/language-translator/api')
 
 
 class FunctionComponent(ResilientComponent):

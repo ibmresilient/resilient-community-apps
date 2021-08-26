@@ -13,7 +13,8 @@ setup(
     long_description="Resilient Circuits Components for 'fn_watson_translate'",
     install_requires=[
         'resilient_circuits>=30.0.0',
-        'watson_developer_cloud>=2.3.0',
+        'ibm-watson',
+        'ibm_cloud_sdk_core',
         'bs4'
     ],
     packages=find_packages(),
