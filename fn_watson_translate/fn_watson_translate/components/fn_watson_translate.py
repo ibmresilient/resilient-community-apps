@@ -5,12 +5,13 @@
 
 import logging
 from bs4 import BeautifulSoup
-
+from ibm_watson import LanguageTranslatorV3
+from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
+from ibm_cloud_sdk_core import ApiException
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from resilient_lib import validate_fields
 
-from watson_developer_cloud import LanguageTranslatorV3
-from watson_developer_cloud.watson_service import WatsonApiException
-
+OK = 200
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'fn_watson_translate"""
@@ -33,13 +34,15 @@ class FunctionComponent(ResilientComponent):
         try:
             language_translator = self._get_translator()
 
+            validate_fields(['fn_watson_translate_api', 'fn_watson_translate_version', 'fn_watson_translate_url'],
+                           self.options)
+            validate_fields(['fn_watson_translate_source_text', 'fn_watson_translate_target_lang'],
+                           kwargs)
+
             # Get the function parameters:
             source_lang = kwargs.get("fn_watson_translate_source_lang", None)  # text
             target_lang = kwargs.get("fn_watson_translate_target_lang", None)  # text
             source_text = kwargs.get("fn_watson_translate_source_text", None)  # text
-
-            if source_text is None or target_lang is None:
-                raise ValueError("source_text and target_lang are required.")
 
             # get rid of the HTML tags that notes can have.
             source_text = self._get_text_from_html(source_text)
@@ -61,7 +64,7 @@ class FunctionComponent(ResilientComponent):
                     source=source_lang,
                     target=target_lang
                 )
-            except WatsonApiException as e:
+            except ApiException as e:
                 # if it couldn't be translated, return this message
                 log.error(str(e))
                 yield FunctionResult({"value": "Couldn't translate from {} to {}".format(source_lang, target_lang),
@@ -69,12 +72,12 @@ class FunctionComponent(ResilientComponent):
                 return
 
             # if the translation went through, but nothing was returned
-            if not hasattr(translation, 'result') or len(translation.result['translations']) == 0:
+            if translation.get_status_code() != OK:
                 raise ValueError("Wasn't translated.")
 
             yield StatusMessage("Finished translating.")
             results = {
-                "value": translation.result["translations"][0]["translation"],
+                "value": translation.get_result()["translations"][0]["translation"],
                 "confidence": confidence,
                 "language": target_lang,
                 "source_lang": source_lang
@@ -100,14 +103,14 @@ class FunctionComponent(ResilientComponent):
         Uses provided value in the config value to authenticate to Watson Translate API
         :return:  LanguageTranslatorV3
         """
-        if not self.options["fn_watson_translate_api"] or not self.options["fn_watson_translate_version"] or \
-                not self.options["fn_watson_translate_url"]:
-            raise ValueError("Options do not have necessary information")
-        return LanguageTranslatorV3(
-                version=self.options["fn_watson_translate_version"],
-                iam_apikey=self.options["fn_watson_translate_api"],
-                url=self.options["fn_watson_translate_url"]
-            )
+        authenticator = IAMAuthenticator(self.options["fn_watson_translate_api"])
+        language_translator = LanguageTranslatorV3(
+                                    version=self.options["fn_watson_translate_version"],
+                                    authenticator=authenticator)
+        language_translator.set_service_url(self.options["fn_watson_translate_url"])
+
+        return language_translator
+        #'https://gateway.watsonplatform.net/language-translator/api')
 
     @staticmethod
     def _identify_language(text, language_translator):
@@ -121,13 +124,10 @@ class FunctionComponent(ResilientComponent):
         """
         source_lang_query = language_translator.identify(text)
 
-        source_lang = []
-        if hasattr(source_lang_query, 'result'):
-            source_lang = source_lang_query.result['languages']
-
-        if len(source_lang) > 0:
-            confidence = source_lang[0]['confidence']
-            source_lang = source_lang[0]['language']
+        if source_lang_query.get_status_code() == OK:
+            query_result = source_lang_query.get_result()['languages'][0]
+            confidence = query_result['confidence']
+            source_lang = query_result['language']
+            return source_lang, confidence
         else:
             raise ValueError("The language wasn't identified. Rerun and specify source language")
-        return source_lang, confidence

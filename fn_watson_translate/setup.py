@@ -29,7 +29,8 @@ setup(
 Machine learning is incorporated to understand the source language for translation.""",
     install_requires=[
         'resilient_circuits>=39.0.0',
-        'watson_developer_cloud>=2.3.0',
+        'resilient_lib>=39.0.0',
+        'ibm-watson',
         'bs4'
     ],
     packages=find_packages(),
