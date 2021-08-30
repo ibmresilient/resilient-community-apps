@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """Tests using pytest_resilient_circuits"""
 
-from fn_aws_utilities.util.aws_step_function_api import AwsStepFunction
 import pytest
 from mock import patch
 from resilient_circuits.util import get_config_data, get_function_definition
@@ -53,7 +52,7 @@ class TestFnInvokeStepFunction:
     mock_inputs_1 = {
         "state_machine_async": True,
         "state_machine_name": "0000",
-        "state_machine_payload": "\{\"test\": \"test_val\"\}"
+        "state_machine_payload": u"{\"test\": \"test_val\"}"
     }
 
     expected_results_1 = {
@@ -64,7 +63,7 @@ class TestFnInvokeStepFunction:
     mock_inputs_2 = {
         "state_machine_async": True,
         "state_machine_name": "1111",
-        "state_machine_payload": "\{\"test\": \"test_val\"\}"
+        "state_machine_payload": u"{\"test\": \"test_val\"}"
     }
 
     expected_results_2 = {
