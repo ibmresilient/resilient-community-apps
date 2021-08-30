@@ -25,7 +25,7 @@ class AwsStepFunction(AWSCommon):
 
         return execution_description
 
-    def invoke_step_function(self, step_function_name, async, payload):
+    def invoke_step_function(self, step_function_name, async_bool, payload):
         """Invoke a step function aka a state machine"""
         next_token = None
         state_machine_arn = None
@@ -71,7 +71,7 @@ class AwsStepFunction(AWSCommon):
 
         execution_status = execution_description.get("status")
 
-        if async is False:
+        if async_bool is False:
             while execution_description.get("output") is None:
                 execution_description = self.aws_client.describe_execution(executionArn=execution_arn)
                 execution_status = execution_description.get("status")
