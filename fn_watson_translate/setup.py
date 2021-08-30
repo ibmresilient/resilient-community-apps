@@ -31,6 +31,7 @@ Machine learning is incorporated to understand the source language for translati
         'resilient_circuits>=39.0.0',
         'resilient_lib>=39.0.0',
         'ibm-watson',
+        'ibm_cloud_sdk_core',
         'bs4'
     ],
     packages=find_packages(),
