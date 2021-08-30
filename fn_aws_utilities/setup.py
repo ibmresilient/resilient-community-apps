@@ -34,6 +34,7 @@ setup(
         'resilient_circuits>=30.0.0',
         'boto3'
     ],
+    python_requires='>=3',
     packages=find_packages(),
     include_package_data=True,
     platforms='any',
