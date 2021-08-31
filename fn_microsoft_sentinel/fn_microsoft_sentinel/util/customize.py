@@ -21,13 +21,13 @@ def codegen_reload_data():
     return {
         "package": u"fn_microsoft_sentinel",
         "message_destinations": [u"fn_microsoft_sentinel"],
-        "functions": [u"sentinel_add_incident_comment", u"sentinel_get_incident_alerts", u"sentinel_get_incident_bookmarks", u"sentinel_get_incident_comments", u"sentinel_get_incident_entities", u"sentinel_update_incident"],
+        "functions": [u"sentinel_add_incident_comment", u"sentinel_get_incident_alerts", u"sentinel_get_incident_comments", u"sentinel_get_incident_entities", u"sentinel_update_incident"],
         "workflows": [u"sentinel_comment_sync", u"sentinel_get_incident_alerts", u"sentinel_get_incident_comments", u"sentinel_get_incident_entities", u"sentinel_update_incident"],
         "actions": [u"Sentinel Comment Sync", u"Sentinel Get Incident Alerts", u"Sentinel Get Incident Comments", u"Sentinel Get Incident Entities", u"Sentinel Incident Sync", u"Sentinel Update Incident"],
         "incident_fields": [u"sentinel_incident_assigned_to", u"sentinel_incident_classification", u"sentinel_incident_classification_comment", u"sentinel_incident_classification_reason", u"sentinel_incident_id", u"sentinel_incident_labels", u"sentinel_incident_number", u"sentinel_incident_status", u"sentinel_incident_tactics", u"sentinel_incident_url", u"sentinel_profile"],
         "incident_artifact_types": [],
         "incident_types": [],
-        "datatables": [u"sentinel_comment_ids", u"sentinel_incident_entities"],
+        "datatables": [u"sentinel_comment_ids", u"sentinel_incident_alerts", u"sentinel_incident_entities"],
         "automatic_tasks": [],
         "scripts": []
     }
@@ -46,7 +46,6 @@ def customization_data(client=None):
     - Functions:
         - sentinel_add_incident_comment
         - sentinel_get_incident_alerts
-        - sentinel_get_incident_bookmarks
         - sentinel_get_incident_comments
         - sentinel_get_incident_entities
         - sentinel_update_incident
@@ -77,6 +76,7 @@ def customization_data(client=None):
         - sentinel_profile
     - Data Tables:
         - sentinel_comment_ids
+        - sentinel_incident_alerts
         - sentinel_incident_entities
     """
 
