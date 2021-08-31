@@ -41,7 +41,7 @@ notifications:
 
 stages:
   - name: run all tests
-    # if: tag IS present OR (branch = master AND type = cron)
+    if: tag IS present OR (branch = master AND type = cron)
   - name: run package tests
     if: tag IS blank AND type != cron
   # Every commit not on master performs static analysis
@@ -67,29 +67,29 @@ matrix:
 
   include:
 
-    # - stage: run all tests
-    #   name: Python 2.7 Unit Tests - Main - PyPi
-    #   python: 2.7
-    #   env:
-    #     - RUN_TYPE=unit_test_main_pp TOXENV=py27
-    #   install:
-    #     - pip install -U -r "$PATH_PIP_REQ_MAIN"
-    #     - pip install -U -r "$PATH_PIP_REQ_TESTS"
-    #   script:
-    #     - echo "Starting Python 2.7 Unit Tests - Main"
-    #     - .scripts/run_tests.sh "ALL" "$PYPI_INDEX"
+    - stage: run all tests
+      name: Python 2.7 Unit Tests - Main - PyPi
+      python: 2.7
+      env:
+        - RUN_TYPE=unit_test_main_pp TOXENV=py27
+      install:
+        - pip install -U -r "$PATH_PIP_REQ_MAIN"
+        - pip install -U -r "$PATH_PIP_REQ_TESTS"
+      script:
+        - echo "Starting Python 2.7 Unit Tests - Main - PyPi"
+        - .scripts/run_tests.sh "ALL" "$PYPI_INDEX"
 
-    # - stage: run all tests
-    #   name: Python 3.6 Unit Tests - Main - PyPi
-    #   python: 3.6
-    #   env:
-    #     - RUN_TYPE=unit_test_main_pp TOXENV=py36
-    #   install:
-    #     - pip install -U -r "$PATH_PIP_REQ_MAIN"
-    #     - pip install -U -r "$PATH_PIP_REQ_TESTS"
-    #   script:
-    #     - echo "Starting Python 3.6 Unit Tests - Main"
-    #     - .scripts/run_tests.sh "ALL" "$PYPI_INDEX"
+    - stage: run all tests
+      name: Python 3.6 Unit Tests - Main - PyPi
+      python: 3.6
+      env:
+        - RUN_TYPE=unit_test_main_pp TOXENV=py36
+      install:
+        - pip install -U -r "$PATH_PIP_REQ_MAIN"
+        - pip install -U -r "$PATH_PIP_REQ_TESTS"
+      script:
+        - echo "Starting Python 3.6 Unit Tests - Main - PyPi"
+        - .scripts/run_tests.sh "ALL" "$PYPI_INDEX"
 
     - stage: run all tests
       name: Python 2.7 Unit Tests - Main - Artifactory
@@ -100,7 +100,7 @@ matrix:
         - pip install -U -r "$PATH_PIP_REQ_MAIN"
         - pip install -U -r "$PATH_PIP_REQ_TESTS"
       script:
-        - echo "Starting Python 2.7 Unit Tests - Main"
+        - echo "Starting Python 2.7 Unit Tests - Main - Artifactory"
         - .scripts/run_tests.sh "ALL" "$ARTIFACTORY_PYPI_INDEX"
 
     - stage: run all tests
@@ -112,7 +112,7 @@ matrix:
         - pip install -U -r "$PATH_PIP_REQ_MAIN"
         - pip install -U -r "$PATH_PIP_REQ_TESTS"
       script:
-        - echo "Starting Python 3.6 Unit Tests - Main"
+        - echo "Starting Python 3.6 Unit Tests - Main - Artifactory"
         - .scripts/run_tests.sh "ALL" "$ARTIFACTORY_PYPI_INDEX"
 
     - stage: run package tests
