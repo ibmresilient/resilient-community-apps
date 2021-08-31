@@ -130,8 +130,8 @@ The following table provides the settings you need to configure the app. These s
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
 | **smtp_server** | Yes | `xxx.xxx.xxx.xxx` | *IP Address or fully qualified domain name for smpt server* |
-| **smtp_user** | Yes | `` | *smtp authication user* |
-| **smtp_password** | Yes | `` | *smtp authication user password* |
+| **smtp_user** | Yes | `` | *smtp authentication user* |
+| **smtp_password** | Yes | `` | *smtp authentication user password* |
 | **from_email_address** | No | `a@example.com` | *Introduced in 1.3.0. Email address for use as email sender* |
 | **smtp_port** | Yes | `25` | *Defaults to unauthenticated, 587/2525 for TLS* |
 | **smtp_conn_timeout** | Yes | `20` | *Timeout value in seconds to wait for a connection* |
