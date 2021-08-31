@@ -130,4 +130,4 @@ class FunctionComponent(ResilientComponent):
             source_lang = query_result['language']
             return source_lang, confidence
         else:
-            raise ValueError("The language wasn't identified. Rerun and specify source language")
+            raise ValueError(u"The language wasn't identified for text '{}'. Rerun and specify source language".format(text))
