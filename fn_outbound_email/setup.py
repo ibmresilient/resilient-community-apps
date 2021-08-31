@@ -17,8 +17,7 @@ setup(
         'resilient_circuits>=39.0.0',
         'resilient_lib>=32.0.0',
         'Jinja2>=2.9.6',
-        'six',
-        'smtplib'
+        'six'
     ],
     packages=find_packages(),
     include_package_data=True,

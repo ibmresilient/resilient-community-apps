@@ -11,7 +11,6 @@ from resilient_lib.components.resilient_common import validate_fields
 from fn_outbound_email.lib.smtp_mailer import SendSMTPEmail
 
 LOG = logging.getLogger(__name__)
-LOG.addHandler(logging.StreamHandler())
 
 CONFIG_DATA_SECTION = 'fn_outbound_email'
 SMTP_DEFAULT_CONN_TIMEOUT = 20
@@ -46,7 +45,7 @@ def selftest_function(opts):
             smtp_connection = smtplib.SMTP(host=smtp_server,
                                                 port=smtp_port,
                                                 timeout=smtp_conn_timeout)
-            if smtp_config_section.get("smtp_ssl_mode") == "starttls" and smtp_user is not None:
+            if smtp_config_section.get("smtp_ssl_mode") == "starttls" and smtp_user:
                 LOG.info("Starting TLS...")
                 smtp_connection.ehlo()
                 smtp_connection.starttls()
