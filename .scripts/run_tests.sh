@@ -36,6 +36,7 @@ print_msg () {
 ###########
 print_msg "\
 PACKAGE_NAME:\t$PACKAGE_NAME \n\
+PYPI_INDEX_TO_USE:\t$PYPI_INDEX_TO_USE \n\
 "
 
 if [ "$PACKAGE_NAME" == "MERGE" ] ; then
