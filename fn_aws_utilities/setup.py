@@ -29,11 +29,19 @@ setup(
     author_email="",
     url="http://ibm.biz/soarcommunity",
     description="Resilient Circuits Components for 'fn_aws_utilities'",
-    long_description="Resilient Circuits Components for 'fn_aws_utilities'",
+    long_description="""This app provides access to three AWS utility functions: lambdas, step functions, and SNS. 
+        <br>
+        This functionality manifests in four SOAR functions: 
+        <br>
+        * Get AWS Step Function Execution
+        <br>
+        * Invoke AWS Lambda
+        <br>
+        * Invoke AWS Step Function
+        <br>
+        * Send SMS using AWS SNS""",
     install_requires=[
-        'resilient_circuits>=30.0.0,<42.0.0',
-        'resilient_lib<42.0.0',
-        'resilient<42.0.0',
+        'resilient_circuits>=30.0.0',
         'boto3'
     ],
     python_requires='>=3',
