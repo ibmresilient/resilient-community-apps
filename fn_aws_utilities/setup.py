@@ -31,7 +31,7 @@ setup(
     description="Resilient Circuits Components for 'fn_aws_utilities'",
     long_description="Resilient Circuits Components for 'fn_aws_utilities'",
     install_requires=[
-        'resilient_circuits>=30.0.0',
+        'resilient_circuits>=30.0.0,<42.0.0',
         'boto3'
     ],
     # python_requires='>=3',
