@@ -117,7 +117,8 @@ Both Python 2.7 and Python 3.6 are supported.
 Additional package dependencies may exist for each of these packages:
 * bs4
 * resilient_circuits>=39.0.0
-* watson_developer_cloud>=2.3.0
+* ibm-watson
+* ibm_cloud_sdk_core
 
 ---
 
