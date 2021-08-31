@@ -23,17 +23,16 @@ smtp_password=
 from_email_address=
 
 # SMTP PORT NUMBER, 25 or 587/2525
-smtp_port=25
+smtp_port=587
 
 # SMTP CONNECTION TIMEOUT IN SECONDS
 smtp_conn_timeout=20
 
 # SMTP SSL MODE = (starttls, ssl, None)
-smtp_ssl_mode=None
+smtp_ssl_mode=starttls
 
 # SSL Cert (not supported)
-smtp_ssl_cafile=
-
+#smtp_ssl_cafile=
 # Optional - Path to a custom template file for formatting HTML email.
 # The integration will use this template out of the box. If removed, it will default to the pre-processing script.
 # template_file=data/example_send_email.jinja
