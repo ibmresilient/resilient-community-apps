@@ -42,4 +42,4 @@ def selftest_function(opts):
             return {"state": "failure", "reason": "Could not retrieve account settings for AWS client"}
 
     except Exception as e:
-        return {"state": "failure", "status_code": e}
+        return {"state": "failure", "status_code": str(e)}
