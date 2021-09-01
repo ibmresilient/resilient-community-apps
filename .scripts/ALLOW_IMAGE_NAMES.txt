@@ -28,7 +28,6 @@ fn_hibp
 fn_icdx
 fn_incident_utils
 fn_ioc_parser_v2
-fn_ip_void
 fn_ipinfo
 fn_isitphishing
 fn_jira
@@ -57,14 +56,17 @@ fn_proofpoint_trap
 fn_pulsedive
 fn_qradar_advisor
 fn_qradar_enhanced_data
+fn_qradar_integration
 fn_query_tor_network
 fn_remedy
+fn_rsa_netwitness
 fn_scheduler
 fn_secureworks_ctp
 fn_sep
 fn_service_now
 fn_shodan
 fn_slack
+fn_splunk_integration
 fn_spamhaus_query
 fn_task_utils
 fn_teams
@@ -79,21 +81,20 @@ fn_virustotal
 fn_vmray_analyzer
 fn_wiki
 fn_whois
+fn_whois_rdap
 fn_xforce
+fn_zia
 
 #Not_Rebuilt
 #fn_aws_guardduty-failing-test
-#fn_qradar_integration-failing-test
-#fn_whois_rdap-failing-test
-#fn_crowdstrike_falcon
-#fn_odbc_query
+#fn_crowdstrike_falcon-still-root-group
+#fn_odbc_query-still-root-group
 #rc-data-feed
 #rc-data-feed-plugin-elasticfeed
 #rc-data-feed-plugin-kafkafeed
 #rc-data-feed-plugin-odbcfeed
 #rc-data-feed-plugin-resilientfeed
 #rc-data-feed-plugin-splunkfeed
-
 
 #No_Related_image
 #fn_apility
@@ -118,6 +119,3 @@ fn_xforce
 #fn_symantec_dlp
 #fn_thug
 #fn_watson_translate
-
-#Not_on_AppX
-#fn_res_to_icd

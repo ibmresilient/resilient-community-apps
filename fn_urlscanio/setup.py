@@ -19,7 +19,7 @@ def snake_to_camel(word):
 
 setup(
     name='fn_urlscanio',
-    version='1.1.4',
+    version='1.1.5',
     license='MIT',
     author='IBM Resilient',
     url='http://ibm.biz/resilientcommunity',

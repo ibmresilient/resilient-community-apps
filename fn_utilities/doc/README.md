@@ -12,7 +12,7 @@
   ![screenshot: screenshot_1](./screenshots/screenshot_1.png)
 -->
 
-# **User Guide:** fn_utilities_v2.0.3
+# **User Guide:** fn_utilities_v2.0.6
 
 ## Table of Contents
 - [App Host Setup](#app-host-setup)
@@ -46,6 +46,7 @@
 
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 2.0.6   | 7/2021 | pin dependency 'chardet' at v4.0.0 |
 | 2.0.3   | 2/2021 | bug fix for email parser |
 | 2.0.2   | 2/2021 | bug fixes for Shell Command |
 | 2.0.1   | 9/2020 | bug fixes|

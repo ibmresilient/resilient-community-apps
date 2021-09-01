@@ -24,6 +24,7 @@ class QRadarTab(Tab):
         Field("qr_relevance"),
         Field("qr_severity"),
         Datatable("qr_offense_top_events"),
+        Datatable("qr_flows"),
         Datatable("qr_triggered_rules"),
         Datatable("qr_top_destination_ips"),
         Datatable("qr_top_source_ips"),
