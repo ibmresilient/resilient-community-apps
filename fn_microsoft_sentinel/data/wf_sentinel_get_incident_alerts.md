@@ -25,6 +25,7 @@ inputs.sentinel_profile = incident.properties.sentinel_profile
 ### Post-Processing Script
 ```python
 import datetime
+import time
 
 if results['success']:
   for alert in results['content']['value']:
@@ -32,6 +33,7 @@ if results['success']:
     row = incident.addRow("sentinel_incident_alerts")
     time_generated = properties['timeGenerated'][:properties['timeGenerated'].find('.')]
     dt = datetime.datetime.strptime(time_generated, '%Y-%m-%dT%H:%M:%S')
+    row['report_date'] = int(time.time()*1000)
     row['alert_date'] = int(dt.strftime('%s'))*1000
     row['alert_name'] = properties.get('alertDisplayName')
     row['alert_description'] = properties.get('description')
@@ -42,6 +44,7 @@ if results['success']:
     row['alert_tactics'] = ",".join(properties.get('tactics', []))
     row['alert_compromised_entity'] = properties.get('compromisedEntity')
     row['alert_remediation_steps'] = helper.createPlainText('\n'.join(properties.get('remediationSteps', [])))
+    row['alert_id'] = properties.get('systemAlertId')
     if properties.get('alertLink'):
         row['alert_url'] = helper.createRichText("<a target='blank' href='{}'>Alert Link</a>".format(properties['alertLink']))
 

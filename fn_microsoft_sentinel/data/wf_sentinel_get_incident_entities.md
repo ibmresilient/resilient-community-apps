@@ -24,10 +24,13 @@ inputs.sentinel_profile = incident.properties.sentinel_profile
 
 ### Post-Processing Script
 ```python
+import time
+
 if results.success:
   for alert in results.content.keys():
       for entity in results.content[alert]:
         row = incident.addRow("sentinel_incident_entities")
+        row['report_date'] = int(time.time()*1000)
         row['alert_id'] = alert
         row['entity_id'] = entity['name']
         row['entity_type'] = entity['kind']

@@ -26,9 +26,10 @@ sentinel_profiles=profile_a
 #https_proxy=
 #http_proxy=
 
+[fn_microsoft_sentinel:profile_a]
 # copy this profile template for each different incident environment
 # the name of the profile, (ex: profile_a) is anything of your choosing
-[fn_microsoft_sentinel:profile_a]
+#
 # enter your subscription_id, workspace name and resource_groupname
 subscription_id=aaa-bbb-fff
 workspace_name=
