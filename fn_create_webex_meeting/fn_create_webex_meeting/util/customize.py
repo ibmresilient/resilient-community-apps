@@ -37,7 +37,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM Resilient Platform Version: 36.0.5634
+    IBM Resilient Platform Version: 40.0.0
 
     Contents:
     - Message Destinations:
