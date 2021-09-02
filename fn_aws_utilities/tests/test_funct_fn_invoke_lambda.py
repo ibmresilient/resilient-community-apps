@@ -5,7 +5,7 @@ import pytest
 from mock import patch
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
-from tests.mock_artifacts import mocked_aws_lambda
+from .mock_artifacts import mocked_aws_lambda
 
 PACKAGE_NAME = "fn_aws_utilities"
 FUNCTION_NAME = "fn_invoke_lambda"

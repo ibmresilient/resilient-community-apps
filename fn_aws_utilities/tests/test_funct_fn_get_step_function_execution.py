@@ -6,7 +6,7 @@ from mock import patch
 import pytest
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
-from tests.mock_artifacts import mock_constants, mocked_aws_step_function
+from .mock_artifacts import mock_constants, mocked_aws_step_function
 
 PACKAGE_NAME = "fn_aws_utilities"
 FUNCTION_NAME = "fn_get_step_function_execution"

@@ -5,7 +5,7 @@ from mock import patch
 import pytest
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
-from tests.mock_artifacts import mocked_aws_sns
+from .mock_artifacts import mocked_aws_sns
 
 PACKAGE_NAME = "fn_aws_utilities"
 FUNCTION_NAME = "fn_send_sms_via_sns"

@@ -1,9 +1,11 @@
 from datetime import datetime
+import pytest
 
 mock_constants = {
     "DATE_TIME_MOCK_OBJ": datetime(2015, 1, 1)
 }
 
+@pytest.mark.livetest
 def mocked_aws_step_function(*args, **kwargs):
     class MockAwsStepFunction:
         def __init__(self, aws_access_key_id, aws_secret_access_key, region_name):
@@ -31,6 +33,7 @@ def mocked_aws_step_function(*args, **kwargs):
 
     return MockAwsStepFunction(*args, **kwargs)
 
+@pytest.mark.livetest
 def mocked_aws_lambda(*args, **kwargs):
     class MockAWSLambda:
         def __init__(self, aws_access_key_id, aws_secret_access_key, region_name):
@@ -63,6 +66,7 @@ def mocked_aws_lambda(*args, **kwargs):
 
     return MockAWSLambda(*args, **kwargs)
 
+@pytest.mark.livetest
 def mocked_aws_sns(*args, **kwargs):
     class AwsSns:
         def __init__(self, aws_access_key_id, aws_secret_access_key, region_name, topic_name):
@@ -76,6 +80,3 @@ def mocked_aws_sns(*args, **kwargs):
             }
     
     return AwsSns(*args, **kwargs)
-
-def test():
-    return "****** DEBUG TEST"
