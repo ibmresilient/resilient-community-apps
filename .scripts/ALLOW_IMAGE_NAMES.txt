@@ -95,6 +95,7 @@ fn_zia
 #rc-data-feed-plugin-odbcfeed
 #rc-data-feed-plugin-resilientfeed
 #rc-data-feed-plugin-splunkfeed
+rc-cts-passivetotal
 rc-cts-shadowserver
 rc-cts-urlscanio
 
