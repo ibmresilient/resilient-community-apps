@@ -237,25 +237,31 @@ def check_incident_filters(defender_alert, new_incident_filters):
     """
     if not new_incident_filters:
         return True
+
     result = False
     result_list = []
 
     for filter_name, filter_value in new_incident_filters.items():
+        result = None
         if filter_name in defender_alert:
             if isinstance(filter_value, list):
+                result = False
                 for value in filter_value:
                     if isinstance(defender_alert[filter_name], list):
                         result = bool(value in defender_alert[filter_name])
                     else:
                         result = bool(value == defender_alert[filter_name])
-
                     # just need one to match for one pass
                     if result:
-                        result_list.append(result)
                         break
+            elif isinstance(defender_alert[filter_name], list):
+                result = bool(filter_value in defender_alert[filter_name])
             else:
-                result = (filter_value == defender_alert[filter_name])
+                result = bool(filter_value == defender_alert[filter_name])
+
+        if result != None:
             result_list.append(result)
+
     return all(result_list)
 
 def get_defender_alert_id(defender_alert):
