@@ -19,7 +19,7 @@ ignore_white_listed=True
 class TestAbuseIPDBCustomThreatService(object):
     """ System tests """
 
-    LOG=logging.getLogger(__name__)
+    LOG = logging.getLogger(__name__)
 
     @pytest.mark.livetest
     def test_server_up(self, circuits_app):
@@ -60,3 +60,6 @@ class TestAbuseIPDBCustomThreatService(object):
         content = json.loads(response.text)
         # assert no hit objects
         assert len(content["hits"]) == 0
+
+    def test_mock_non_live_test(self):
+        pass
