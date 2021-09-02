@@ -68,28 +68,52 @@ matrix:
   include:
 
     - stage: run all tests
-      name: Python 2.7 Unit Tests - Main
+      name: Python 2.7 Unit Tests - Main - PyPi
       python: 2.7
       env:
-        - RUN_TYPE=unit_test_main TOXENV=py27
+        - RUN_TYPE=unit_test_main_pp TOXENV=py27
       install:
         - pip install -U -r "$PATH_PIP_REQ_MAIN"
         - pip install -U -r "$PATH_PIP_REQ_TESTS"
       script:
-        - echo "Starting Python 2.7 Unit Tests - Main"
-        - .scripts/run_tests.sh "ALL" "$PYPI_INDEX_TO_USE"
+        - echo "Starting Python 2.7 Unit Tests - Main - PyPi"
+        - .scripts/run_tests.sh "ALL" "$PYPI_INDEX"
 
     - stage: run all tests
-      name: Python 3.6 Unit Tests - Main
+      name: Python 3.6 Unit Tests - Main - PyPi
       python: 3.6
       env:
-        - RUN_TYPE=unit_test_main TOXENV=py36
+        - RUN_TYPE=unit_test_main_pp TOXENV=py36
       install:
         - pip install -U -r "$PATH_PIP_REQ_MAIN"
         - pip install -U -r "$PATH_PIP_REQ_TESTS"
       script:
-        - echo "Starting Python 3.6 Unit Tests - Main"
-        - .scripts/run_tests.sh "ALL" "$PYPI_INDEX_TO_USE"
+        - echo "Starting Python 3.6 Unit Tests - Main - PyPi"
+        - .scripts/run_tests.sh "ALL" "$PYPI_INDEX"
+
+    - stage: run all tests
+      name: Python 2.7 Unit Tests - Main - Artifactory
+      python: 2.7
+      env:
+        - RUN_TYPE=unit_test_main_af TOXENV=py27
+      install:
+        - pip install -U -r "$PATH_PIP_REQ_MAIN"
+        - pip install -U -r "$PATH_PIP_REQ_TESTS"
+      script:
+        - echo "Starting Python 2.7 Unit Tests - Main - Artifactory"
+        - .scripts/run_tests.sh "ALL" "$ARTIFACTORY_PYPI_INDEX"
+
+    - stage: run all tests
+      name: Python 3.6 Unit Tests - Main - Artifactory
+      python: 3.6
+      env:
+        - RUN_TYPE=unit_test_main_af TOXENV=py36
+      install:
+        - pip install -U -r "$PATH_PIP_REQ_MAIN"
+        - pip install -U -r "$PATH_PIP_REQ_TESTS"
+      script:
+        - echo "Starting Python 3.6 Unit Tests - Main - Artifactory"
+        - .scripts/run_tests.sh "ALL" "$ARTIFACTORY_PYPI_INDEX"
 
     - stage: run package tests
       name: Python 2.7 Unit Tests - Package
