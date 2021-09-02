@@ -96,6 +96,7 @@ fn_zia
 #rc-data-feed-plugin-resilientfeed
 #rc-data-feed-plugin-splunkfeed
 rc-cts-shadowserver
+rc-cts-urlscanio
 
 #No_Related_image
 #fn_apility
