@@ -41,9 +41,9 @@ notifications:
 
 stages:
   - name: run all tests
-    if: tag IS present OR (branch = master AND type = cron)
+    if: tag IS blank AND branch = master AND type = cron
   - name: run package tests
-    if: tag IS blank AND type != cron
+    if: type != cron
   # Every commit not on master performs static analysis
   - name: static analysis
     if: tag IS blank AND type != cron
@@ -192,7 +192,9 @@ matrix:
         - sudo apt-get install jq
       script:
         # This will take split the git tag on '/'
-        # E.g.: tag is 'rebuild/40.1.1880/fn_utilities/ARTIFACTORY' OR rebuild/40.1.1880/ALL/QUAY
+        # E.g.:
+        #  - to rebuild ALL images; tag with 'rebuild/40.1.1880/ALL/QUAY' and commit message 'INT-0001 {rebuild} <reason>'
+        #  - to rebuild single image; tag with 'rebuild/40.1.1880/fn_utilities/ARTIFACTORY' and commit message 'INT-0001 {fn_utilities} <reason>'
         - PYTHON_LIBRARIES_VERSION=$(echo $TRAVIS_TAG | cut -d "/" -f 2)
         - IMAGE_TO_REBUILD=$(echo $TRAVIS_TAG | cut -d "/" -f 3)
         - REPO_TO_PUSH=$(echo $TRAVIS_TAG | cut -d "/" -f 4)
