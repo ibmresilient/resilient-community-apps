@@ -4,7 +4,7 @@
 FROM registry.access.redhat.com/ubi8/python-36:latest
 
 ARG APPLICATION=fn_microsoft_defender
-ARG RESILIENT_CIRCUITS_VERSION=41.1
+ARG RESILIENT_CIRCUITS_VERSION=41
 ARG PATH_RESILIENT_CIRCUITS=rescircuits
 
 # Environment variable for any app to check if running in a container

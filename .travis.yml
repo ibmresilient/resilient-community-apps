@@ -1,13 +1,30 @@
 language: python
-python: 2.7
+python: 3.6
 os: linux
 env:
   global:
-  - TEST_RESILIENT_APPLIANCE=staging2.internal.resilientsystems.com
-  - OCTOKIT_API_ENDPOINT="https://github.ibm.com/api/v3/"
-  - PIP_FIND_LINKS="$TRAVIS_BUILD_DIR/pkgs"
-  - secure: VU1PL2bWOE+E3ieBz/0Oa2hIRXGeSFYubE9SYh3dH541h8V8FWE0kGt8P6xdZOGmf9xNsDL/O+rKqrq5TCKTdUQqFXm7RCD//iQrHUcbu2YU38XPpBQrWxSZs29sR3R6UkUypZahHmn/ghjgZnRxQIWGscYPvvNCiOP9X85ckmVaKLYPwW0HPH7vIKs9zcT8tEyRDANokc0BQDjeVu0s29FeKGyy9JVbuye8/1TmVkQWBvutvcQ/z/mOQ7dOO3fW0wkVwOHPF9FtBc79WzjK5w/Ej30EWHC5zdRG46+2FLcqKSHvkyuV59f0ojxLzRmeR1ueS37pNncmXfVMREwtiIYN/Dd3isLsg14RK1leu/JHiPxfQtz2TV4+yeVO4aZk+Bs/JLf1ZbXAE+A71hIH6rTUpEBq1S8qjKsfTPEWLg1cuq1ujf2WOAumdIf8rSOnQ9EbEfBlm3N8Wo9RjXbEx6hq+UHr7L28tw0u00gcAex6Ky2eRk+USFnXBHs/Kf5i29CWzw4Lcnb2hPa0bup3yNQuss/Yy+cQO5tDW8jJPP8joR5Fvr8fJZVtGlTGp09odHcrDGKvbdlf0gVmVDYawKi0v4m0URCKVy0vYAbzVOgZF46nW+VfcexiLxomwYpKeltigk+L52aV5DIodfuxS9aB6IJtEYSTO8Mf+Yo2x8Q=
-  - secure: kr5Zz5frfrGOeuAylefGbDhY5s/YwyRhktuAly1ovOn/7Q3OJYjTq6h7wvnt1KQ/YeSdA+bxwOhWKbYHPQHAhovyo/5gsII7LruSs7VjdcD9tDoaYEoDBP7nki+NGr+dBVwrooGJ3f7TbuZs+4OSyPWD2FdN4PsOYLof4soDEW7C0cTP2KZ/wNGDjBGB2stOb6a5h4MQSohx+7B795noUoK5ojmygZObIGSDWmahR4kzCm+rEVLlMV0ptDCBXvn4xmJLCz5UOZhR27ckuiW342vNxShlms+rwWcvoxwbj61Qn3MEf9S9D59aJ+n4+u9Kb3VD4HJjlQ3rWZ/DADPfp7h6XOmfrQq3Xj3sQ4K2+8RMSFHdxWPsmhWd/Aty+YmWjoOnewoBfFaDUzFRURqwO3K+oh1H0IALTOTYQSYEeuVfi/+mwJRkKh0+IgvgscL5/bo+nVnQBk4FpWJRHV0x2fWiG8DHCKmInkkFSDHax3dHc9pYZXQTdNdfvsJRtc0rEn6GyVnRMia1TKLpB1joRhb7mkyc7pgDSatvV9W6+v6+evplHFxS7lkm9gqlW/ygJzPVYx7UaFuqo9cOi/c8sR6qf7NUTUi9Aa4aqY6qHNrkxfh7+5ck7wLTWmE0WL+0r3Z09Zg746SIGYqLrFQJZPn+JanFEy0q7kAU2Zr8vgE=
+    - PATH_ALLOW_IMAGE_NAMES="$TRAVIS_BUILD_DIR/.scripts/ALLOW_IMAGE_NAMES.txt"
+    - PATH_PIP_REQ_MAIN="$TRAVIS_BUILD_DIR/.scripts/requirements_main.txt"
+    - PATH_PIP_REQ_TESTS="$TRAVIS_BUILD_DIR/.scripts/requirements_tests.txt"
+    - SCRIPTS_DIR="$TRAVIS_BUILD_DIR/.scripts"
+
+    - ARTIFACTORY_BASE_URL="https://na.$ARTIFACTORY_URL/artifactory"
+    - ARTIFACTORY_GENERIC_STORAGE="$ARTIFACTORY_BASE_URL/$ARTIFACTORY_GENERIC_STORAGE"
+    - ARTIFACTORY_DOCKER_REPO="$ARTIFACTORY_DOCKER_REPO_NAME.$ARTIFACTORY_URL"
+    - ARTIFACTORY_PYPI_INDEX="https://$ARTIFACTORY_USERNAME:$ARTIFACTORY_PASSWORD@na.artifactory.swg-devops.com/artifactory/api/pypi/sec-resilient-team-integrations-pypi-virtual/simple"
+
+    - PYPI_INDEX="https://pypi.org/simple"
+
+    - PACKAGE_NAME=`python .scripts/get_package_name_from_cmt_msg.py "$TRAVIS_COMMIT_MESSAGE"`
+
+    - KEYWORD_BUILD_DEV_APP="[build-dev-app]"
+    - BUILD_DEV_APP=$([[ "$TRAVIS_COMMIT_MESSAGE" != *"$KEYWORD_BUILD_DEV_APP"* ]]; echo $?)
+    - BUILD_TYPE=`if [ $BUILD_DEV_APP == 1 ]; then echo "DEV"; else echo "MAIN"; fi`
+
+    - KEYWORD_DEV_DEPS='[dev-deps]'
+    - USE_ARTIFACTORY_DEPS=`[[ "$TRAVIS_COMMIT_MESSAGE" != *"$KEYWORD_DEV_DEPS"* ]]; echo $?`
+    - PYPI_INDEX_TO_USE=`if [ $USE_ARTIFACTORY_DEPS == 1 ]; then echo "$ARTIFACTORY_PYPI_INDEX"; else echo "$PYPI_INDEX"; fi`
+    - DEV_DEPS=`[[ ( -z $TRAVIS_TAG && "$LATEST_COMMIT_MSG" =~ "$DEV_DEPS_KEYWORD" ) || "$TAG_MSG" =~ "$DEV_DEPS_KEYWORD" ]]; echo $?`
 
 # Exclude these branches from having jobs ran.
 branches:
@@ -15,104 +32,168 @@ branches:
     - public
     - /^_.*$/
 
+notifications:
+  slack:
+    rooms:
+      - secure: "OnC0Emkl5zxS0lWkoly700RI3oaMyn/QVNjFgYy3GHtX44cynlGYmrKiWU1oN12QBVdt6GcVsN+9IW/dovORfZQWtgaLdbVwNClL5MZkVUS3/PrFiA56Sx38zsrlKWVNNPg1ktPtlKSvZ36NwRwTKq5C7eyVWJ9uc3Kx0E5lI7MWP3n+pfAMXpiJ3r9tAuuXKT07YUTtxN+bev8yhSjj9hLWZvfobXVuWLhJHCPp6vWH2ME55GD9cqtxCJtPE0I7jElqUQZQ+ubHdHWpnFGySM+af+45kkE7NwavbdpkB57FQrCjXOeRCZ4Znei7r+iAet/ADQOXyOk6dXUAI9wccevORQnRTvPiyBan62apV/xvEIr4mqXPilD6EGMUAhi7rAWVyWwQeCFGNYHbX7EbHm7Tv30PF1CSjGxV3YYiZWLzjLSwNrCzwSZ0AnqN857WWygNfoe3h5PV6tGz9a12oFjaS3VvX61Ow93C5FeRWZMKkZHZuouZ68a4yGM99Gr3mJ9vffyhbV1b/SfGmfWdZs50ThBbyw1gEn/Hvq5L9uBOEktq9iVhzhWmWG0zpGL0HDCTvANvAoVK5EWUBfEymjpxL46ieK5lOV7e/QA1XSiM7YSgkPnz9wJx3/25WHOHLYLslKlXdwukwZwYhwT1JYGpZmWbT2nLsm7NBcC5fMQ="
+  on_success: never
+  on_failure: always
+
 stages:
-  - name: latest push
-    if: branch != master AND type=push AND tag !~ ^(container|rebuild)/.+
-  - name: mock tests
-    if: branch = master AND type = cron # for now only trigger tests on cron
-  - name: build a container
-    if: (branch = master AND type IN (push)) OR tag =~ ^container/.+
-  - name: rebuild images
+  - name: run all tests
+    if: tag IS present OR (branch = master AND type = cron)
+  - name: run package tests
+    if: tag IS blank AND type != cron
+  # Every commit not on master performs static analysis
+  - name: static analysis
+    if: tag IS blank AND type != cron
+  - name: build image and app zip
+    if: tag IS blank AND type = push
+  # Rebuild all images
+  - name: rebuild all images
     if: tag =~ ^rebuild/.+
-  - name: successful notification
-    if: tag !~ ^rebuild/.+
 
 matrix:
+
+  # Specification of jobs which may fail but should not fail the build
+  # TODO: Review
+  allow_failures:
+    # The safety checker job is likely to fail often in its initial usage
+    # Rather than explicity setting it to always pass
+    # Allow failures of the job to still gather the useful info
+    - name: Safety Checker
+
   fast_finish: true
+
   include:
-  # Jobs below this line are reserved for push contributions i.e when someone pushes changes
-  # ==========
-  # Below jobs are used to run tests against the most recently modified integration.
-  # We determine the most recent one using git diff and then ensure to only run tests against a package once. 
-  - stage: latest push
-    name: Python 2.7 Build and Run Tests
-    python: 2.7
-    env:
-    - TOXENV=py27 TEST_RESILIENT_ORG="Resilient Integrations - Test"
-    install:
-      - .scripts/install_tests_deps.sh
-    script:
-    - echo "2.7 push test" && .scripts/run_most_recent_tests.sh
-  - stage: latest push
-    name: Python 3.6 Build and Run Tests
-    python: 3.6
-    env:
-    - TOXENV=py36 TEST_RESILIENT_ORG="Resilient Integrations - Test"
-    install:
-      - .scripts/install_tests_deps.sh
-    script:
-    - echo "3.6 push test" && .scripts/run_most_recent_tests.sh
-  # Jobs below this line are reserved for master branch
-  # Master branch is where all the integrations should be tested, its okay if it takes a while
-  # As we have the push jobs above to handle individual commits
-  - stage: mock tests
-    python: 2.7
-    name: Py27 Master Build and Run tests
-    env:
-    - TOXENV=py27 TEST_RESILIENT_ORG="Resilient Integrations - Test"
-    install:
-      - .scripts/install_tests_deps.sh
-    script:
-    - echo "2.7 Master Build" && .scripts/run_tests.sh
-  - stage: mock tests
-    python: 3.6
-    name: Py36 Master Build and Run tests
-    env:
-    - TOXENV=py36 TEST_RESILIENT_ORG="Resilient Integrations - Test"
-    install:
-      - .scripts/install_tests_deps.sh
-    script:
-    - echo "3.6 Master Build" && .scripts/run_tests.sh
-  # Next job is started when a tag is pushed of the form container/<name> 
-  # where <name> is a name of an integration directory whose container
-  # will be build and pushed to artifactory with label :latest and :<version>
-  # ARTIFACTORY_URL should be sec-resilient-docker-local.artifactory.swg-devops.com
-  - stage: build a container
-    name: Building containers
-    services:
-      - docker
-    install: skip
-    script:
-      - source .scripts/set_up_container_build_data.sh
-      # if there are failed containers send a message with their list
-      - if [[ -n "${FAILED_CONTAINERS[*]}" ]]; then .scripts/send_notification.sh "Containers not built ${FAILED_CONTAINERS[*]}" failure; return 1; fi
 
-  - stage: rebuild images
-    python: 3.6
-    services:
-      - docker
-    install:
-      - sudo apt-get install jq
-      - pip install resilient-sdk
-    script:
-      # This will take split the git tag on '/'
-      # E.g.: tag is 'rebuild/40.0.0,!=38.0.76/QUAY'
-      # - the version of resilient-circuits installed will be >=40.0.0 and NOT 38.0.76
-      # - it will only push the image to the quay.io repository. If REPO_TO_PUSH is blank, it will push the image to quay.io and artifactory
-      - RESILIENT_CIRCUITS_VERSION=$(echo $TRAVIS_TAG | cut -d "/" -f 2)
-      - REPO_TO_PUSH=$(echo $TRAVIS_TAG | cut -d "/" -f 3)
-      - .scripts/rebuild_container_images.sh $RESILIENT_CIRCUITS_VERSION $REPO_TO_PUSH
+    - stage: run all tests
+      name: Python 2.7 Unit Tests - Main
+      python: 2.7
+      env:
+        - RUN_TYPE=unit_test_main TOXENV=py27
+      install:
+        - pip install -U -r "$PATH_PIP_REQ_MAIN"
+        - pip install -U -r "$PATH_PIP_REQ_TESTS"
+      script:
+        - echo "Starting Python 2.7 Unit Tests - Main"
+        - .scripts/run_tests.sh "ALL" "$PYPI_INDEX_TO_USE"
 
-  - stage: successful notification
-    # To make sure that success is sent once per job we create a separate stage for it
-    install: skip
-    script:
-      - .scripts/send_notification.sh
+    - stage: run all tests
+      name: Python 3.6 Unit Tests - Main
+      python: 3.6
+      env:
+        - RUN_TYPE=unit_test_main TOXENV=py36
+      install:
+        - pip install -U -r "$PATH_PIP_REQ_MAIN"
+        - pip install -U -r "$PATH_PIP_REQ_TESTS"
+      script:
+        - echo "Starting Python 3.6 Unit Tests - Main"
+        - .scripts/run_tests.sh "ALL" "$PYPI_INDEX_TO_USE"
 
-# If one job fails the whole build fails, so we can send it here
-after_failure:
-- .scripts/send_notification.sh "" failure
+    - stage: run package tests
+      name: Python 2.7 Unit Tests - Package
+      python: 2.7
+      env:
+        - RUN_TYPE=unit_test_package TOXENV=py27
+      install:
+        - pip install -U -r "$PATH_PIP_REQ_MAIN"
+        - pip install -U -r "$PATH_PIP_REQ_TESTS"
+      script:
+        - echo "$TRAVIS_COMMIT_MESSAGE"
+        - echo "Starting Python 2.7 Unit Tests - Package"
+        - .scripts/run_tests.sh "$PACKAGE_NAME" "$PYPI_INDEX_TO_USE"
 
-before_install:
-  - pip install --upgrade pip
-  - pip install setuptools
+    - stage: run package tests
+      name: Python 3.6 Unit Tests - Package
+      python: 3.6
+      env:
+        - RUN_TYPE=unit_test_package TOXENV=py36
+      install:
+        - pip install -U -r "$PATH_PIP_REQ_MAIN"
+        - pip install -U -r "$PATH_PIP_REQ_TESTS"
+      script:
+        - echo "Starting Python 3.6 Unit Tests - Package"
+        - .scripts/run_tests.sh "$PACKAGE_NAME" "$PYPI_INDEX_TO_USE"
+
+    # Jobs that perform static analysis; code quality, security scans etc
+    - stage: static analysis
+      name: Py2.7 Bandit Security Scan
+      python: 2.7
+      env:
+        - ANALYSIS_NAME="Py2.7 Bandit Security Scan"
+      install:
+        - pip install bandit==1.6.2
+      script:
+        - .scripts/run_bandit_scan.sh "$PACKAGE_NAME"
+
+    - stage: static analysis
+      name: Py3.6 Bandit Security Scan
+      python: 3.6
+      env:
+        - ANALYSIS_NAME="Py3.6 Bandit Security Scan"
+      install:
+        - pip install bandit
+      script:
+        - .scripts/run_bandit_scan.sh "$PACKAGE_NAME"
+
+    - stage: static analysis
+      name: Pylint
+      python: 3.6
+      env:
+        - ANALYSIS_NAME="Pylint"
+      install:
+        - pip install pylint
+      script:
+        - .scripts/pylint.sh "$PACKAGE_NAME"
+
+    - stage: static analysis
+      name: Safety Checker
+      python: 3.6
+      env:
+        - ANALYSIS_NAME="CVE Search against dependancies"
+      install:
+        - pip install safety
+      script:
+        - .scripts/run_safety_scan_for_cve.sh "$PACKAGE_NAME"
+
+    - stage: build image and app zip
+      name: Build Image and App zip
+      python: 3.6
+      services:
+        - docker
+      install: skip
+      script: skip
+      before_deploy:
+        - pip install resilient-sdk -i $PYPI_INDEX_TO_USE
+      deploy:
+        - provider: script
+          script: .scripts/build_image_and_app_zip.sh "$PACKAGE_NAME" "DEV" "$PYPI_INDEX_TO_USE";
+          on:
+            all_branches: true
+            condition: "$BUILD_DEV_APP = 1"
+        - provider: script
+          script: .scripts/build_image_and_app_zip.sh "$PACKAGE_NAME" "MAIN" "$PYPI_INDEX_TO_USE";
+          on:
+            branch: master
+      after_deploy:
+        - PATH_APP_ZIP=`cat "$TRAVIS_BUILD_DIR/PATH_APP_ZIP.txt"`;
+        - echo "PATH_APP_ZIP=$PATH_APP_ZIP";
+        - FILE_NAME=$(basename $PATH_APP_ZIP);
+        - .scripts/send_slack_notification.sh "Built $BUILD_TYPE version of [$PACKAGE_NAME] \n Artifactory App.zip - <$PATH_APP_ZIP|$FILE_NAME>" "success";
+
+    - stage: rebuild all images
+      python: 3.6
+      services:
+        - docker
+      install:
+        - pip install -U -r "$PATH_PIP_REQ_MAIN"
+        - pip install resilient-sdk
+        - sudo apt-get install jq
+      script:
+        # This will take split the git tag on '/'
+        # E.g.: tag is 'rebuild/40.1.1880/fn_utilities/ARTIFACTORY' OR rebuild/40.1.1880/ALL/QUAY
+        - PYTHON_LIBRARIES_VERSION=$(echo $TRAVIS_TAG | cut -d "/" -f 2)
+        - IMAGE_TO_REBUILD=$(echo $TRAVIS_TAG | cut -d "/" -f 3)
+        - REPO_TO_PUSH=$(echo $TRAVIS_TAG | cut -d "/" -f 4)
+        - .scripts/rebuild_images.sh "$PYTHON_LIBRARIES_VERSION" "$IMAGE_TO_REBUILD" "$REPO_TO_PUSH"
