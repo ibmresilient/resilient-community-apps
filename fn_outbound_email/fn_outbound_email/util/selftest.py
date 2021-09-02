@@ -27,13 +27,14 @@ def selftest_function(opts):
         smtp_user = smtp_config_section.get("smtp_user")
         smtp_password = smtp_config_section.get("smtp_password")
         from_email_address = smtp_config_section.get("from_email_address", smtp_user)
+        smtp_ssl_mode = smtp_config_section.get("smtp_ssl_mode")
 
         smtp_conn_timeout = int(smtp_config_section.get("smtp_conn_timeout", SMTP_DEFAULT_CONN_TIMEOUT))
 
         validate_fields(["smtp_server", "smtp_port"], smtp_config_section)
         LOG.info("Validating connection to mail server")
 
-        if smtp_config_section.get("smtp_ssl_mode") == "ssl":
+        if smtp_ssl_mode == "ssl":
             LOG.info("Building SSL connection object")
             smtp_connection = smtplib.SMTP_SSL(host=smtp_server,
                                                port=smtp_port,
@@ -45,7 +46,7 @@ def selftest_function(opts):
             smtp_connection = smtplib.SMTP(host=smtp_server,
                                                 port=smtp_port,
                                                 timeout=smtp_conn_timeout)
-            if smtp_config_section.get("smtp_ssl_mode") == "starttls" and smtp_user:
+            if smtp_ssl_mode == "starttls" and smtp_user:
                 LOG.info("Starting TLS...")
                 smtp_connection.ehlo()
                 smtp_connection.starttls()
@@ -53,10 +54,10 @@ def selftest_function(opts):
                 LOG.info("Logging in to SMTP...")
                 if not smtp_password:
                     raise Exception('An SMTP user has been set; the SMTP password from app.config cannot be null')
-                else:
-                    smtp_connection.login(user=smtp_user, password=smtp_password)
-                    if from_email_address:
-                        smtp_connection.sendmail(from_email_address, from_email_address, 'this is a test email')
+                
+                smtp_connection.login(user=smtp_user, password=smtp_password)
+                if from_email_address:
+                    smtp_connection.sendmail(from_email_address, from_email_address, 'this is a test email')
 
         return {"state": "success"}
     except Exception as err:
