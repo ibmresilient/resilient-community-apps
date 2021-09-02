@@ -43,7 +43,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.1.0 | 09/2021 | App Host support |
+| 1.1.0 | 09/2021 | Add App Host support; remove support for python 2.7 |
 | 1.0.0 | 12/2018 | Initial Release |
 
 ---
@@ -54,8 +54,7 @@
   The text below is parsed from the "description" and "long_description" attributes in the setup.py file
 -->
 **Resilient Circuits Components for 'fn_aws_utilities'**
-
-This app provides access to three AWS utility functions: lambdas, step functions, and SNS. 
+The AWS Utilities integration package contains several useful functions for common AWS services.
 
 ### Key Features
 <!--

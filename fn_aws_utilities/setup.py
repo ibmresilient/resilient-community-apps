@@ -28,7 +28,7 @@ setup(
     author="IBM SOAR",
     author_email="",
     url="http://ibm.biz/soarcommunity",
-    description="Resilient Circuits Components for 'fn_aws_utilities'",
+    description="The AWS Utilities integration package contains several useful functions for common AWS services.",
     long_description="""This app provides access to three AWS utility functions: lambdas, step functions, and SNS. 
         <br>
         This functionality manifests in four SOAR functions: 
