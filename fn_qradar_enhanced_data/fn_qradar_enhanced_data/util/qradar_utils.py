@@ -231,7 +231,7 @@ class ArielSearch(SearchWaitCommand):
         ret = {}
         if response.status_code == 200:
             res = response.json()
-            events = res["events"] if "events" in res else res["other"]
+            events = res["events"] if "events" in res else res["flows"] if "flows" in res else res["other"]
             events = function_utils.fix_dict_value(events)
             ret = {"events": events}
 
@@ -517,10 +517,13 @@ class QRadarClient(object):
 
         try:
             auth_info = AuthInfo.get_authInfo()
-            res = requests.get("{0}console/logon.jsp".format(host), verify=auth_info.cafile)
-            cookies = res.cookies.get_dict()
 
-            if auth_info.username and auth_info.password:
+            if not auth_info.username and not auth_info.password:
+                cookies={"SEC":auth_info.qradar_token}
+            else:
+                res = requests.get("{0}console/logon.jsp".format(host), verify=auth_info.cafile)
+                cookies = res.cookies.get_dict()
+
                 res = requests.post("{0}{1}".format(host, qradar_constants.GRAPHQL_BASICAUTH), data={"j_username":auth_info.username,"j_password":auth_info.password,"LoginCSRF":requests.post("{0}{1}".format(host, qradar_constants.GRAPHQL_BASICAUTH), data={"get_csrf": ""}, headers={"Cookie": "JSESSIONID="+cookies["JSESSIONID"]}, verify=auth_info.cafile).text}, headers={"Cookie": "JSESSIONID="+cookies["JSESSIONID"]}, verify=auth_info.cafile)
                 cookies = res.cookies.get_dict()
         except Exception as e:

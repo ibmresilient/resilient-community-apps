@@ -3,7 +3,6 @@
 
 """Tests using pytest_resilient_circuits"""
 
-from __future__ import print_function
 import pytest
 from mock import patch
 
@@ -13,11 +12,30 @@ from resilient_circuits import SubmitTestFunction, FunctionResult
 PACKAGE_NAME = "fn_xforce"
 FUNCTION_NAME = "xforce_query_collection"
 
-# Read the default configuration-data section from the package
-config_data = get_config_data(PACKAGE_NAME)
+# Use mock config_data
+config_data = """[{0}]
+xforce_apikey = abc
+xforce_password = 1234
+#xforce_https_proxy = <YOUR_PROXY_URL>
+#xforce_http_proxy = <YOUR_PROXY_URL>
+xforce_baseurl = https://example.com
+""".format(PACKAGE_NAME)
 
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
+
+class MockedResponse:
+    def __init__(self, success=True):
+        if success:
+            self.status_code = 200
+            self.json_data = {'casefiles': [{"case1":"mock"},{"case2":"mock2"}]}
+
+        else:
+            self.status_code = 400
+            self.json_data = {}
+
+    def json(self):
+        return self.json_data
 
 
 def call_xforce_query_collection_function(circuits, function_params, timeout=10):
@@ -29,21 +47,7 @@ def call_xforce_query_collection_function(circuits, function_params, timeout=10)
     assert isinstance(event.kwargs["result"], FunctionResult)
     pytest.wait_for(event, "complete", True)
     return event.kwargs["result"].value
-# This method will be used by the mock to replace requests.get
-def mocked_requests_get(*args, **kwargs):
-    class MockResponse:
-        def __init__(self, json_data, status_code):
-            self.json_data = json_data
-            self.status_code = status_code
 
-        def json(self):
-            print(self.json_data)
-            return self.json_data
-
-    if kwargs.get('success') == True:
-        return MockResponse(json_data={'contents': [{"test1":"test"},{"test2":"test"}]},status_code=200)
-    else:
-        return MockResponse(json_data={}, status_code=400)
 
 class TestXforceQueryCollection:
     """ Tests for the xforce_query_collection function"""
@@ -64,8 +68,8 @@ class TestXforceQueryCollection:
             "xforce_collection_type": xforce_collection_type,
             "xforce_query": xforce_query
         }
-        with patch('requests.get') as mock:
-            mock.side_effect = mocked_requests_get(success=True)
+        with patch('fn_xforce.components.xforce_query_collection.RequestsCommon.execute_call_v2') as mock:
+            mock.return_value = MockedResponse(True)
             results = call_xforce_query_collection_function(circuits_app, function_params)
             assert(expected_results["success"] == results["success"])
 
@@ -81,8 +85,8 @@ class TestXforceQueryCollection:
             "xforce_collection_type": xforce_collection_type,
             "xforce_query": xforce_query
         }
-        with patch('requests.get') as mock:
-            mock.side_effect = mocked_requests_get()
+        with patch('fn_xforce.components.xforce_query_collection.RequestsCommon.execute_call_v2') as mock:
+            mock.return_value = MockedResponse(False)
             results = call_xforce_query_collection_function(circuits_app, function_params)
             assert(expected_results["success"] == results["success"])
 
@@ -96,8 +100,8 @@ class TestXforceQueryCollection:
             "xforce_collection_type": xforce_collection_type,
             "xforce_query": xforce_query
         }
-        with patch('requests.get') as mock:
-            mock.side_effect = mocked_requests_get()
+        with patch('fn_xforce.components.xforce_query_collection.RequestsCommon.execute_call_v2') as mock:
+            mock.return_value = MockedResponse(True)
             results = call_xforce_query_collection_function(circuits_app, function_params)
             assert(expected_results["success"] == results["success"])
             assert(results["num_of_casefiles"] >= 1)

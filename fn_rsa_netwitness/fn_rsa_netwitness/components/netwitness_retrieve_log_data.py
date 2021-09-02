@@ -3,15 +3,17 @@
 # Copyright © IBM Corporation 2010, 2019
 """Function implementation"""
 
-import logging
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import validate_fields, ResultPayload, RequestsCommon, str_to_bool, write_file_attachment
-from fn_rsa_netwitness.util.helper import get_headers, convert_to_nw_time
-from io import BytesIO, StringIO
 import sys
+import json
+import logging
+from io import BytesIO, StringIO
+from resilient_circuits import ResilientComponent, function, \
+    handler, StatusMessage, FunctionResult, FunctionError
+from resilient_lib import validate_fields, \
+    ResultPayload, RequestsCommon, str_to_bool, write_file_attachment
+from fn_rsa_netwitness.util.helper import get_headers, convert_to_nw_time
 
 log = logging.getLogger(__name__)
-
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'netwitness_query_event_session"""
@@ -22,7 +24,8 @@ class FunctionComponent(ResilientComponent):
         self.options = opts.get("fn_rsa_netwitness", {})
 
         # Validate app.config fields
-        validate_fields(["nw_log_server_url", "nw_log_server_user", "nw_log_server_password"], self.options)
+        validate_fields(["nw_log_server_url", "nw_log_server_user", \
+            "nw_log_server_password"], self.options)
 
         self.options["nw_log_server_verify"] = str_to_bool(self.options.get("nw_log_server_verify"))
 
@@ -31,15 +34,17 @@ class FunctionComponent(ResilientComponent):
         """Configuration options have changed, save new values"""
         self.options = opts.get("fn_rsa_netwitness", {})
         # Validate app.config fields
-        validate_fields(["nw_log_server_url", "nw_log_server_user", "nw_log_server_password"], self.options)
+        validate_fields(["nw_log_server_url", "nw_log_server_user", \
+            "nw_log_server_password"], self.options)
 
     @function("netwitness_retrieve_log_data")
     def _netwitness_retrieve_log_data(self, event, *args, **kwargs):
         """Function: Returns back either a log file from Netwitness."""
         try:
-            yield StatusMessage("Retrieving logs...")
             # Get the function parameters:
             nw_data_format = self.get_select_param(kwargs.get("nw_data_format"))  # select
+
+            yield StatusMessage("Retrieving {} logs...".format(nw_data_format))
 
             nw_start_time = kwargs.get("nw_start_time")  # int
             if nw_start_time is None:
@@ -52,7 +57,7 @@ class FunctionComponent(ResilientComponent):
             incident_id = kwargs.get("incident_id")     # number
 
             # Initialize resilient_lib objects (handles the select input)
-            rp = ResultPayload("fn_rsa_netwitness", **kwargs)
+            results_payload = ResultPayload("fn_rsa_netwitness", **kwargs)
             req_common = RequestsCommon(self.opts)
 
             log.info("nw_data_format: %s", nw_data_format)
@@ -79,25 +84,26 @@ class FunctionComponent(ResilientComponent):
 
             # Make sure format is a supported case
             if nw_data_format not in render_format_dict:
-                raise FunctionError("{} is not a supported format to retrieve logs".format(nw_data_format))
+                raise FunctionError("{} is not a supported format to retrieve logs"\
+                    .format(nw_data_format))
 
             # Return log data in json format
             if nw_data_format == "logs_json":
-                data_file = get_nw_session_logs_file(url, username, password, nw_verify, start_time, end_time,
-                                                     req_common, render_format=render_format_dict.get("nw_data_format"),
-                                                     resp_type="json")
+                data_file = get_nw_session_logs_file(url, username, password, nw_verify, \
+                    start_time, end_time, req_common, render_format=render_format_dict[nw_data_format], resp_type="json")
 
             # Return log data in text format
             else:
-                data_file = get_nw_session_logs_file(url, username, password, nw_verify, start_time, end_time,
-                                                     req_common, render_format=render_format_dict.get("nw_data_format"))
+                data_file = get_nw_session_logs_file(url, username, password, nw_verify, \
+                    start_time, end_time, req_common, render_format=render_format_dict[nw_data_format])
 
-            log.debug("data_file: {}".format(data_file))
-            results = rp.done(True, data_file)
+            log.debug("data_file: %s", data_file)
+            results = results_payload.done(True, data_file)
             log.debug("RESULTS: %s", results)
 
             # Check for empty log files
-            # (if empty, no log file will be attached and a note will be added in the workflow post-process)
+            # (if empty, no log file will be attached and a note will
+            # be added in the workflow post-process)
             if results["content"]:
                 yield StatusMessage("Logs found, creating attachment...")
                 # Get client, attachment name, and content of log files from netwitness
@@ -111,23 +117,37 @@ class FunctionComponent(ResilientComponent):
 
                 attachment_name = u"Log file for {} - {}.{}".format(nw_start_time, nw_end_time, ext)
 
-                if sys.version_info.major < 3:
+                if nw_data_format == "logs_json":
+                    datastream = BytesIO(json.dumps(results['content'], indent = 4).encode('utf-8'))
+                elif sys.version_info.major < 3:
                     datastream = StringIO(results["content"])
                 else:
                     datastream = BytesIO(results["content"].encode("utf-8"))
 
-                write_file_attachment(rest_client, attachment_name, datastream, incident_id, None)
+                write_file_attachment(rest_client, attachment_name,\
+                    datastream, incident_id, None)
 
             yield StatusMessage("Done...")
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
-        except Exception as e:
-            yield FunctionError(e)
+        except Exception as error:
+            yield FunctionError(error)
 
+def get_nw_session_logs_file(url, user, passw, cafile, time1, time2,
+                             req_common, render_format, resp_type="text"):
 
-def get_nw_session_logs_file(url, user, pw, cafile, time1, time2, req_common, render_format, resp_type="text"):
-    headers = get_headers(user, pw)
-    request_url = "{}/sdk/packets?time1={}&time2={}&render={}".format(url, time1, time2, render_format)
+    headers = get_headers(user, passw)
+    request_url = "{}/sdk/packets?time1={}&time2={}&render={}"\
+        .format(url, time1, time2, render_format)
 
-    return req_common.execute_call("GET", request_url, verify_flag=cafile, headers=headers, resp_type=resp_type)
+    resp = req_common.execute_call_v2("GET", request_url, verify=cafile, headers=headers)
+
+    if resp.text == '</Logs>\n' or resp.text == '\n]}\n':
+        resp = ''
+    elif resp_type == "json" and '"logs":' in resp.text:
+        resp = resp.json()
+    else:
+        resp = resp.text
+
+    return resp

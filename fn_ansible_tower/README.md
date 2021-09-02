@@ -26,14 +26,15 @@
 
 ## Release Notes
 <!--
-  Specify all changes in this release. Do not remove the release 
+  Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
-### v1.0.1
-* App Host Support
-
-### v1.0.0
-* Initial Release
+| Release | Date | Notes |
+| ------- | ---- | ----- |
+| v1.0.3  | 7/2021 | Bug fix to handle results data |
+| v1.0.2  | 2/2021 | Bug fix for paged results from templates, jobs, etc. |
+| v1.0.1  | 12/2020 | App Host support |
+| v1.0.0  | 2/2020 | Initial release |
 
 ---
 
@@ -44,7 +45,7 @@
 -->
 **Resilient Circuits Components for 'fn_ansible_tower'**
 
-This integration provides the capability to execute jobs and return job results from Ansible Tower. 
+This integration provides the capability to execute jobs and return job results from Ansible Tower.
 
 Specific features include:
 
@@ -62,7 +63,7 @@ Specific features include:
 
 ## Requirements
 <!--
-  List any Requirements 
+  List any Requirements
 -->
 * Resilient platform >= `v36.0`
 * An Integration Server running `resilient_circuits>=30.0.0`

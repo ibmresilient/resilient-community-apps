@@ -4,7 +4,8 @@
 """Function implementation"""
 
 import logging
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from resilient_circuits import ResilientComponent, function, handler, \
+    StatusMessage, FunctionResult, FunctionError
 from resilient_lib import ResultPayload, RequestsCommon
 from fn_rsa_netwitness.util.helper import get_headers
 
@@ -27,7 +28,8 @@ class FunctionComponent(ResilientComponent):
 
     @function("netwitness_query")
     def _netwitness_query_function(self, event, *args, **kwargs):
-        """Function: Queries NetWitness and returns back a list of session IDs based on the provided query"""
+        """Function: Queries NetWitness and returns back a list of session \
+            IDs based on the provided query"""
         try:
             yield StatusMessage("Querying NetWitness...")
             # Get the function parameters:
@@ -39,7 +41,8 @@ class FunctionComponent(ResilientComponent):
                 raise FunctionError("nw_query must be set in order to run this function.")
 
             # Initialize resilient_lib objects
-            rp = ResultPayload("fn_rsa_netwitness", **{"nw_query": nw_query, "nw_results_size": nw_results_size})
+            results_payload = ResultPayload("fn_rsa_netwitness", **{"nw_query": nw_query, \
+                "nw_results_size": nw_results_size})
             req_common = RequestsCommon(self.opts)
 
             log.info("nw_query: %s", nw_query)
@@ -60,19 +63,22 @@ class FunctionComponent(ResilientComponent):
             else:
                 StatusMessage("No query results found")
             yield StatusMessage("Complete...")
-            results = rp.done(True, nw_query_results)
+
+            results = results_payload.done(True, \
+                nw_query_results.json() if nw_query_results else None)
             log.debug("RESULTS: %s", results)
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
-        except Exception as e:
-            yield FunctionError(e)
+        except Exception as error:
+            yield FunctionError(error)
 
 
-def query_netwitness(url, user, pw, cafile, query, req_common, size=""):
-    headers = get_headers(user, pw)
+def query_netwitness(url, user, passw, cafile, query, req_common, size=""):
+    headers = get_headers(user, passw)
     if size:
         size = "&size={}".format(size)
-    request_url = "{}/sdk?msg=query&query={}&force-content-type=application/json{}".format(url, query, size)
+    request_url = "{}/sdk?msg=query&query={}&force-content-type=application/json{}"\
+        .format(url, query, size)
 
-    return req_common.execute_call("GET", request_url, verify_flag=cafile, headers=headers)
+    return req_common.execute_call_v2("GET", request_url, verify=cafile, headers=headers)

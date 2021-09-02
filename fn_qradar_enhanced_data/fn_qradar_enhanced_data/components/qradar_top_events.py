@@ -72,11 +72,11 @@ class FunctionComponent(ResilientComponent):
             temp_table = "offense-{0}-events-{1}-1000-{2}".format(qradar_query_param3, qradar_fn_type,
                                                                   str(time.time()))
 
-            qradar_temp_query = re.sub("FROM\s+{}".format(qradar_constants.ARIEL_SEARCH_EVENTS),
-                                       "FROM {} INTO \"{}\"".format(qradar_constants.ARIEL_SEARCH_EVENTS, temp_table),
+            qradar_temp_query = re.sub("FROM\s+{}".format(qradar_constants.ARIEL_SEARCH_EVENTS if re.search(qradar_constants.ARIEL_SEARCH_EVENTS,qradar_query, flags=re.IGNORECASE) else qradar_constants.ARIEL_SEARCH_FLOWS),
+                                       "FROM {} INTO \"{}\"".format(qradar_constants.ARIEL_SEARCH_EVENTS if re.search(qradar_constants.ARIEL_SEARCH_EVENTS,qradar_query, flags=re.IGNORECASE) else qradar_constants.ARIEL_SEARCH_FLOWS, temp_table),
                                        qradar_query, flags=re.IGNORECASE)
 
-            qradar_search_query = re.sub("FROM\s+{}".format(qradar_constants.ARIEL_SEARCH_EVENTS),
+            qradar_search_query = re.sub("FROM\s+{}".format(qradar_constants.ARIEL_SEARCH_EVENTS if re.search(qradar_constants.ARIEL_SEARCH_EVENTS,qradar_query, flags=re.IGNORECASE) else qradar_constants.ARIEL_SEARCH_FLOWS),
                                          "FROM \"{}\"".format(temp_table),
                                          qradar_query, flags=re.IGNORECASE)
 

@@ -17,7 +17,7 @@ pwd=<pwd>
 
 #[oracle_feed]
 #class=ODBCFeed
-#odbc_connect=Driver={Oracle 12c ODBC driver};DBQ=ORCLCDB
+#odbc_connect=<service_name> or (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=<host>)(PORT=<port>))(CONNECT_DATA=(SID=<sid>)))
 #sql_dialect=OracleDialect
 #uid=<acct>
 #pwd=<pwd>
@@ -52,4 +52,6 @@ reload=False
 reload_query_api_method=False
 # feed_data is the default message destination that will be listened to
 queue=feed_data
+# change setting to true to capture contents of an attachment 
+include_attachment_data = false
 """

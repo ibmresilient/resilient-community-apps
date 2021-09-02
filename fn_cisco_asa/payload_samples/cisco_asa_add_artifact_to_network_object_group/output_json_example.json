@@ -1,0 +1,35 @@
+{
+    "content":{
+       "firewall":"firewall_1",
+       "network_object_description":"None",
+       "network_object_group":"BLOCKLIST_IN",
+       "network_object_kind":"IPv4Address",
+       "network_object_name":"None",
+       "network_object_value":"7.7.7.0",
+       "reason":"Object Kind: IPv4Address, Object Value: 7.7.7.0, Object Name: None, is added to Firewall: firewall_1, Group: BLOCKLIST_IN"
+    },
+    "inputs":{
+       "cisco_asa_artifact_type":"IP Address",
+       "cisco_asa_end_range":"None",
+       "cisco_asa_firewall":"firewall_1",
+       "cisco_asa_fqdn_ip_version":{
+          "id":138,
+          "name":"IPv4FQDN"
+       },
+       "cisco_asa_network_object_group":"BLOCKLIST_IN",
+       "cisco_asa_network_object_name":"None",
+       "cisco_asa_network_object_value":"7.7.7.0"
+    },
+    "metrics":{
+       "execution_time_ms":27793,
+       "host":"MacBook-Pro.local",
+       "package":"fn-cisco-asa",
+       "package_version":"1.0.0",
+       "timestamp":"2021-04-07 16:53:29",
+       "version":"1.0"
+    },
+    "raw":"{\"firewall\": \"firewall_1\", \"network_object_group\": \"BLOCKLIST_IN\", \"network_object_name\": null, \"network_object_description\": null, \"network_object_kind\": \"IPv4Address\", \"network_object_value\": \"7.7.7.0\", \"reason\": \"Object Kind: IPv4Address, Object Value: 7.7.7.0, Object Name: None, is added to Firewall: firewall_1, Group: BLOCKLIST_IN\"}",
+    "reason":"None",
+    "success":true,
+    "version":"1.0"
+ }

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 
 """Function implementation"""
@@ -9,7 +9,7 @@ import json
 import logging
 import base64
 import tempfile
-from fn_utilities.util.pdfid import PDFiD, PDFiD2JSON
+from pdfid.pdfid import PDFiD, PDFiD2JSON
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 
 

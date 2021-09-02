@@ -9,7 +9,8 @@ from resilient_lib.components.requests_common import RequestsCommon
 
 
 log = logging.getLogger(__name__)
-URI_PATH = "restapi/9.0"
+DEFAULT_API_VERSION="9.0"
+URI_PATH = "restapi"
 
 
 class PanoramaClient:
@@ -25,6 +26,7 @@ class PanoramaClient:
 
         self.__key = pan_config["api_key"]
         self.__location = pan_config["location"]
+        self.__url_path = "/".join([URI_PATH, pan_config.get("api_version", DEFAULT_API_VERSION)])
         self.__vsys = vsys
         self.__output_format = "json"
 
@@ -45,24 +47,28 @@ class PanoramaClient:
 
     def __get(self, resource_uri, parameters):
         """Generic GET"""
-        uri = u"{}/{}/{}".format(self.host, URI_PATH, resource_uri)
+        uri = self.__build_url(resource_uri)
         response = self.rc.execute_call_v2("GET", uri, params=parameters, verify=self.verify)
-        log.debug("Response: {}".format(response))
+        log.debug("Response: %s", response)
         return response.json()
 
     def __post(self, resource_uri, params, payload):
         """Generic POST"""
-        uri = u"{}/{}/{}".format(self.host, URI_PATH, resource_uri)
+        uri = self.__build_url(resource_uri)
         response = self.rc.execute_call_v2("POST", uri, params=params, json=json.loads(payload), verify=self.verify)
-        log.debug("Status code: {}, Response: {}".format(response.status_code, response.content))
+        log.debug("Status code: %s, Response: %s", response.status_code, response.content)
         return response.json()
 
     def __put(self, resource_uri, params, payload):
         """Generic PUT"""
-        uri = u"{}/{}/{}".format(self.host, URI_PATH, resource_uri)
+        uri = self.__build_url(resource_uri)
         response = self.rc.execute_call_v2("PUT", uri, params=params, json=json.loads(payload), verify=self.verify)
-        log.debug("Status code: {}, Response: {}".format(response.status_code, response.content))
+        log.debug("Status code: %s, Response: %s", response.status_code, response.content)
         return response.json()
+
+    def __build_url(self, resource_uri):
+        "build url for api calls"
+        return u"/".join([self.host, self.__url_path, resource_uri])
 
     def get_addresses(self):
         """Get list of addresses"""

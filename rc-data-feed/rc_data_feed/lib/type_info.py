@@ -70,6 +70,10 @@ class TypeInfo(object):
     NOTE_ATTACHMENT_INCLUDE_FIELDS = [
         (None, "task_id", "number")
     ]
+    # adding content field for attachments
+    CONTENT_ATTACHMENT_INCLUDE_FIELDS = [
+        (None, "content", "blob")
+    ]
 
 
     def __init__(self, type_id, rest_client_helper):
@@ -121,8 +125,10 @@ class TypeInfo(object):
         # some fields for an incident are not part of the /types/0/fields api call, so add them
         if self.type_id == 0:
             fields = self.add_schema_fields(fields, TypeInfo.INCIDENT_INCLUDE_FIELDS)
-        if self.type_id in (2,5):  # notes and attachments can be part of a task
+        if self.type_id in (2, 5):  # notes and attachments can be part of a task
             fields = self.add_schema_fields(fields, TypeInfo.NOTE_ATTACHMENT_INCLUDE_FIELDS)
+        if self.type_id in (4, 5): # artifact and attachment
+            fields = self.add_schema_fields(fields, TypeInfo.CONTENT_ATTACHMENT_INCLUDE_FIELDS)
 
         TypeInfo.fields_cache[self.type_id] = fields
 
@@ -350,50 +356,99 @@ class TypeInfo(object):
             if prefix is not None:
                 obj = payload.get(prefix)
 
-            if obj is not None:
+            if obj is not None and isinstance(obj, dict):
                 obj = obj.get(field['name'])
 
         return obj
 
     @staticmethod
+    def translate_value_select(type_info, field, value):
+        return type_info.get_select_value(value, field)
+
+    @staticmethod
+    def translate_value_multiselect(type_info, field, value):
+        return [type_info.get_select_value(v, field) for v in value]
+
+    @staticmethod
+    def translate_value_datetimepicker(type_info, field, value):
+        # Server returns date as milliseconds since epoch (1/1/1970), but Python
+        # wants it as seconds.  Then, convert to an ISO formatted string
+        # representation.
+        #
+        d = datetime.utcfromtimestamp(value/1000)
+        if field['input_type'] == 'datetimepicker':
+            d = pytz.timezone('UTC').localize(d)
+
+        return d.isoformat()
+
+    @staticmethod
+    def translate_value_list(type_info, field, value):
+        # For now, squash lists into a joined string.  May need to actually
+        # return the list if the callers are going to need to do something
+        # else with it (like write data to a join table).
+        #
+        try:
+            value = u', '.join(value)
+        except:
+            value = json.dumps(value)
+
+        return value
+
+    @staticmethod
+    def translate_value_textarea(type_info, field, value):
+        if isinstance(value, dict):
+            return value['content']
+
+        return value
+
+    @staticmethod
+    def translate_value_number(type_info, field, value):
+        if isinstance(value, dict):
+            return value['id']
+
+        return value
+
+    @staticmethod
+    def translate_value_blob(type_info, field, value):
+        return value
+
+    @staticmethod
+    def translate_nested_collection(type_info, field, value):
+        if isinstance(value, dict):
+            return value.get("name", None)
+
+        return value
+
+    @staticmethod
+    def get_default_mapping():
+        return {
+            "select_owner": TypeInfo.translate_value_select,
+            "select_user": TypeInfo.translate_value_select,
+            "select": TypeInfo.translate_value_select,
+            "multiselect": TypeInfo.translate_value_multiselect,
+            "multiselect_members": TypeInfo.translate_value_multiselect,
+            "multiselect_tagref": TypeInfo.translate_value_list,
+            "nested_collection": TypeInfo.translate_nested_collection,
+            "datepicker": TypeInfo.translate_value_datetimepicker,
+            "datetimepicker": TypeInfo.translate_value_datetimepicker,
+            "textarea": TypeInfo.translate_value_textarea,
+            "number": TypeInfo.translate_value_number,
+            "blob": TypeInfo.translate_value_blob,
+            "list": TypeInfo.translate_value_list
+        }
+
+    @staticmethod
     def translate_value(type_info, field, value):
-        """Translates the value that we want in the 'flattened' output."""
+        mapping = TypeInfo.get_default_mapping()
+
         if value is not None:
             input_type = field['input_type']
-
-            if input_type in TypeInfo.SELECT_INPUT_TYPES:
-                value = type_info.get_select_value(value, field)
-            elif input_type in TypeInfo.MULTISELECT_INPUT_TYPES:
-                value = [type_info.get_select_value(v, field) for v in value]
-            elif input_type in ['datetimepicker', 'datepicker']:
-                # Server returns date as milliseconds since epoch (1/1/1970), but Python
-                # wants it as seconds.  Then, convert to an ISO formatted string
-                # representation.
-                #
-                d = datetime.utcfromtimestamp(value/1000)
-
-                if input_type == 'datetimepicker':
-                    d = pytz.timezone('UTC').localize(d)
-                value = d.isoformat()
+            if input_type in mapping:
+                rule_function = mapping[input_type]
+                value = rule_function(type_info, field, value)
 
             if isinstance(value, list):
-                # For now, squash lists into a joined string.  May need to actually
-                # return the list if the callers are going to need to do something
-                # else with it (like write data to a join table).
-                #
-                try:
-                    value = ', '.join(value)
-                except:
-                    value = json.dumps(value)
-
-            if input_type == 'textarea' and isinstance(value, dict):
-                value = value['content']
-
-            if input_type == 'number' and isinstance(value, dict):
-                # TODO This is working around a server issue where the server specifies
-                #  a 'number' type for a field that is really a select list.
-                #
-                value = value['id']
+                value = mapping["list"](type_info, field, value)
 
         return value
 
@@ -424,6 +479,7 @@ class ActionMessageTypeInfo(TypeInfo):
         type_name = self.get_type_name(self.type_id, pretty=False)
 
         if type_name not in self.type_info_map:
+            LOG.warning(u"%s not found in %s. Returning raw_value: %s", type_name, self.type_info_map, raw_value)
             return raw_value
 
         field_name = field['name']
@@ -451,6 +507,7 @@ class ActionMessageTypeInfo(TypeInfo):
 
         if raw_value not in values_map:
             # Must be a NUMBER field.
+            LOG.warning(u"%s not found in %s. Returning raw_value", raw_value, values_map)
             return raw_value
 
         # if the entry isn't in the values dict then we're really confused (and this
@@ -468,7 +525,7 @@ class FullTypeInfo(TypeInfo):
     """
     def __init__(self, type_id, rest_client_helper, refresh, all_fields=None):
         """
-        Constructs a new FullTypeInfo ojbect.
+        Constructs a new FullTypeInfo object.
 
         :param type_id: The type ID of interest.
         :param rest_client_helper: The Resilient SimpleClient object wrapper.

@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """Tests using pytest_resilient_circuits"""
 
-from __future__ import print_function
 import pytest
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
@@ -41,6 +40,7 @@ class TestTeamsPostMessage:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
+    @pytest.mark.livetest
     @pytest.mark.parametrize("incident_id, task_id, teams_channel, teams_payload, teams_mrkdown, expected_results", [
         (123, None, "selftest", '{"title": "titleЀЄЏ"}', False, None),
         (123, None, "selftest", '{"title": "title", "summary": "summaryЀЄЏ"}', False, None),

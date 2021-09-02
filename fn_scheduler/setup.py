@@ -19,7 +19,7 @@ def snake_to_camel(word):
 
 setup(
     name='fn_scheduler',
-    version='1.0.3',
+    version='1.1.1',
     license='MIT',
     author='Resilient Labs',
     author_email='resil@gmail.com',

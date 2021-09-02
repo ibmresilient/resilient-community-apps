@@ -1,4 +1,4 @@
-# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
 # -*- coding: utf-8 -*-
 import logging
 import sys
@@ -14,6 +14,9 @@ from resilient_lib import OAuth2ClientCredentialsSession
 from requests.packages.urllib3.util import Retry
 from requests.adapters import HTTPAdapter
 from resilient_lib.components.integration_errors import IntegrationError
+from resilient_lib import get_file_attachment_metadata
+from fn_exchange_online.lib.resilient_helper import get_incident_file_attachment
+from fn_exchange_online.lib.resilient_helper import create_incident_comment
 
 LOG = logging.getLogger(__name__)
 DEFAULT_SCOPE = 'https://graph.microsoft.com/.default'
@@ -257,13 +260,46 @@ class MSGraphHelper(object):
 
         return response
 
+    def build_attachments(self, attachment_names, incident_id, resilient_client):
+        """
+        Get attachment data from Resilient and format it for Exchange Online.
+        :param attachment_name: name of the attachment in Resilient
+        :param incident_id: ID of Resilient incident
+        :param resilient_client: Resilient REST API client
+        :return: formatted attachment data
+        """
+        attachments = []
+        failed_attached = []
 
-    def send_message(self, sender_address, recipients, subject, body):
+        attachment_names = [item.strip() for item in attachment_names.split(",")]
+        for attachment_name in attachment_names:
+            base64content, attachment_id = get_incident_file_attachment(resilient_client, incident_id, attachment_name)
+            if not attachment_id:
+                failed_attached.append(attachment_name)
+                LOG.info(u"Failed to attach %s. No matching incident attachment found.", attachment_name)
+                continue
+            contentType = get_file_attachment_metadata(resilient_client, incident_id, attachment_id=attachment_id)["content_type"]
+            attachment = {
+                    "@odata.type": "#microsoft.graph.fileAttachment",
+                    "name": attachment_name,
+                    "contentType": contentType,
+                    "contentBytes": base64content
+                }
+
+            attachments.append(attachment)
+            LOG.info(u"Successfully attached %s", attachment_name)
+
+        return attachments , failed_attached
+
+    def send_message(self, sender_address, recipients, subject, body, attachment_names=None, incident_id=None, resilient_client=None):
         """
         Call MS Graph to send message.
         :param sender_address: email address of the message sender
         :param recipients: comma separated list of users to send message to
         :param subject: message subject text
+        :param attachment_names: comma seperated names of incident attachment to send with the message
+        :param incident_id: ID of Resilient incident
+        :param resilient_client: Resilient REST API client
         :param body: message body text
         :return: requests response from post.
         """
@@ -280,9 +316,16 @@ class MSGraphHelper(object):
                                     "toRecipients": recipient_list},
                         "saveToSentItems": "true"}
 
+        # Build attachment data
+        failed_attachments = None
+        if attachment_names:
+            attachments, failed_attachments = self.build_attachments(attachment_names, incident_id, resilient_client)
+            message_json["message"]["attachments"] = attachments
+
         response = self.ms_graph_session.post(ms_graph_create_message_url,
                                               headers={'Content-Type': 'application/json'},
                                               json=message_json)
+        response.failed_attachments = failed_attachments
 
         self.check_ms_graph_response_code(response.status_code)
 
@@ -292,7 +335,7 @@ class MSGraphHelper(object):
     def create_meeting(self, email_address, start_time, end_time, subject, body, required_attendees, optional_attendees,
                        location):
         """
-         create_meeting will create an event in the specified email_address user's calandar and send email to the
+         create_meeting will create an event in the specified email_address user's calendar and send email to the
          required and optional attendee email addresses.
         :param email_address: meeting organizer
         :param start_time: start time of the meeting
