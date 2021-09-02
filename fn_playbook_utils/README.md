@@ -94,7 +94,7 @@ If deploying to a IBM SOAR platform with an integration server, the requirements
   | Incidents | Read |
   | Workflows | Read |
 
-  Note: If using with IBM SOAR 41.0+, add the following permission to the app's apikey to read playbook data. This is necessary when using the App Host environment:
+  Note: If using with IBM SOAR 40.0+, add the following permission to the app's apikey to read playbook data. This is necessary when using the App Host environment:
   | Playbooks | Read |
 
 The following IBM SOAR platform guides provide additional information:
