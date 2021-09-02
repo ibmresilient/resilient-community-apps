@@ -41,6 +41,7 @@ fn_mcafee_esm
 fn_mcafee_opendxl
 fn_mcafee_tie
 fn_microsoft_security_graph
+fn_microsoft_sentinel
 fn_misp
 fn_mitre_integration
 fn_mxtoolbox
@@ -79,6 +80,7 @@ fn_urlscanio
 fn_utilities
 fn_virustotal
 fn_vmray_analyzer
+fn_watson_translate
 fn_wiki
 fn_whois
 fn_whois_rdap
@@ -95,6 +97,11 @@ fn_zia
 #rc-data-feed-plugin-odbcfeed
 #rc-data-feed-plugin-resilientfeed
 #rc-data-feed-plugin-splunkfeed
+rc-cts-haveibeenpwned
+rc-cts-mcafeetie
+rc-cts-passivetotal
+rc-cts-shadowserver
+rc-cts-urlscanio
 
 #No_Related_image
 #fn_apility
@@ -118,4 +125,3 @@ fn_zia
 #fn_rsa_netwitness
 #fn_symantec_dlp
 #fn_thug
-#fn_watson_translate

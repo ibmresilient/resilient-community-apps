@@ -29,8 +29,7 @@ class HaveIBeenPwnedSearcher(BaseComponent):
 
     def __init__(self, opts):
         super(HaveIBeenPwnedSearcher, self).__init__(opts)
-        LOG.debug(opts)
-
+    
     # Register this as an async searcher for the URL /<root>/example
     channel = searcher_channel("have_i_been_pwned_threat_service")
 
