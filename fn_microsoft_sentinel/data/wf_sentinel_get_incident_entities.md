@@ -18,7 +18,7 @@
 
 ### Pre-Processing Script
 ```python
-inputs.sentinel_incident_id = incident.properties.sentinel_incident_id
+inputs.sentinel_incident_id = incident.properties.sentinel_incident_number
 inputs.sentinel_profile = incident.properties.sentinel_profile
 ```
 

@@ -2,7 +2,7 @@
   {# JINJA template for creating a new Resilient incident from a Sentinel incident. #}
   "name": "Sentinel Incident {{ name|e }} - {{ properties.title|replace('"', '\\"') }}",
   "discovered_date": {{ properties.createdTimeUtc|resilient_datetimeformat }},
-  "start_date": {{ properties.firstActivityTimeUtc|resilient_datetimeformat }},
+  "start_date": {% if properties.firstActivityTimeUtc %} {{ properties.firstActivityTimeUtc|resilient_datetimeformat }} {% else %} {{ properties.createdTimeUtc|resilient_datetimeformat }} {%endif %},
   "description": {
     "format": "text",
     "content": "{{ properties.description|replace('"', '\\"') }}"
@@ -13,7 +13,7 @@
   "plan_status": "{{ properties.status|resilient_substitute('{"Closed": "C", "Active": "A", "New": "A"}') }}",
   "severity_code": "{{ properties.severity|resilient_substitute('{"Informational": "Low"}') }}",
   "properties": {
-    "sentinel_incident_number": {{ name|e }},
+    "sentinel_incident_number": "{{ name|e }}",
     "sentinel_incident_id": "{{ properties.incidentNumber }}",
     "sentinel_incident_status": "{{ properties.status }}",
     "sentinel_incident_url": "<a target='blank' href='{{ properties.incidentUrl }}'>Sentinel Incident</a>",

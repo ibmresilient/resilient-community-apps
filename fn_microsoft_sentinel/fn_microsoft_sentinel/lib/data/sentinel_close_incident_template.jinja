@@ -3,7 +3,6 @@
     "properties": {
         "severity": "{{ severity_code|string|resilient_substitute('{"4": "Low", "5": "Medium", "6": "High"}') }}",
         "status": "Closed",
-        "title": "{{ name|replace('Sentinel Incident - ', '')|safe }}",
         "classification": "{{ resolution_id|string|resilient_substitute('{"7": "Undetermined", "8": "Undetermined", "9": "FalsePositive", "10": "TruePositive"}') }}",
         "classificationComment": "{{ resolution_summary|striptags|safe }}",
         {# modify as necessary #}
