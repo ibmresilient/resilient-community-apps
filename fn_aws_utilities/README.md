@@ -118,6 +118,8 @@ Additional package dependencies may exist for each of these packages:
 * boto3
 * resilient_circuits>=30.0.0
 
+**Prior to installing this app, `fn_utilities` must be installed.**
+
 ---
 
 ## Installation

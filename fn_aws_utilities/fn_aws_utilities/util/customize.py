@@ -26,7 +26,6 @@ def codegen_reload_data():
         "actions": [u"Example: Invoke AWS Lambda: Python Addition", u"Example: Invoke AWS Step Function: Asynchronous", u"Example: Invoke AWS Step Function: Synchronous", u"Example: Send AWS SMS"],
         "incident_fields": [],
         "incident_artifact_types": [],
-        "incident_types": [],
         "datatables": [],
         "automatic_tasks": [],
         "scripts": []

@@ -5,16 +5,16 @@
 
 # Example: Send SMS: Incident
 
-## Function - 
+## Function - Utilities: Get Contact Info
 
 ### API Name
-``
+`utilities_get_contact_info`
 
 ### Output Name
 `incident_members`
 
 ### Message Destination
-``
+`fn_utilities`
 
 ### Pre-Processing Script
 ```python
