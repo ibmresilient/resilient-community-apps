@@ -8,11 +8,15 @@ from resilient_circuits import ResilientComponent, function, handler, StatusMess
 from resilient_lib import ResultPayload, validate_fields
 import fn_zia.util.config as config
 from fn_zia.lib.zia_client import ZiaClient
+from fn_zia.lib.decorators import RateLimit as ratelimit
 
 PACKAGE_NAME = "fn_zia"
 FN_NAME = "funct_zia_add_to_url_category"
 LOG = logging.getLogger(__name__)
 
+
+# Initialize the ratelimit decorator.
+ratelimit(init=True, method="put")
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'funct_zia_add_to_url_category''"""

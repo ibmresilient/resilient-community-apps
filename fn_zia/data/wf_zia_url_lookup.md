@@ -37,10 +37,17 @@ def main():
     note_text = u''
     urls = INPUTS.get("zia_urls")
     if CONTENT:
-        note_text = u"ZIA Integration: Workflow <b>{0}</b>: There were <b>{1}</b> Results (s) returned for " \
-                        u"URL <b>{2}</b> SOAR function <b>{3}</b>.".format(WF_NAME, len(CONTENT), urls, FN_NAME)
-        note_text += u"<br><b>{}</b>".format(CONTENT)
-
+        if "error_code" not in CONTENT:
+            note_text = u"ZIA Integration: Workflow <b>{0}</b>: There were <b>{1}</b> Results (s) returned for " \
+                            u"URL <b>{2}</b> SOAR function <b>{3}</b>.".format(WF_NAME, len(CONTENT), urls, FN_NAME)
+            note_text += u"<br><b>{}</b>".format(CONTENT)
+        else:
+            note_text += u"ZIA Integration: Workflow <b>{0}</b>: There was an error returned returned " \
+                         u"for SOAR function <b>{1}</b>."\
+                .format(WF_NAME, FN_NAME)
+            note_text += u"<br>Error code: <b>{0}</b>, Error code: <b>{1}</b>, Details: <b>{2}</b>."\
+                .format(CONTENT["error_code"], CONTENT["status"], CONTENT["text"] )
+           
     else:
         note_text += u"ZIA Integration: Workflow <b>{0}</b>: There were <b>no</b> results returned " \
                      u"for SOAR function <b>{1}</b>."\
@@ -49,7 +56,6 @@ def main():
     incident.addNote(helper.createRichText(note_text))
 
 main()
-
 
 ```
 

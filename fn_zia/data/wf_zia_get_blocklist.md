@@ -63,21 +63,29 @@ def main():
     note_text = u''
     url_filter = INPUTS.get("zia_url_filter")
     if CONTENT:
-        blocklist_urls = CONTENT.blacklistUrls
-        url_counts = CONTENT.url_counts
-        note_text = u"ZIA Integration: Workflow <b>{0}</b>: There were <b>{1}</b> blocklist URLS(s) out of a total of "\
-                    u"<b>{2}</b> using URL filter <b>{3}</b> returned for SOAR function <b>{4}</b>."\
-        .format(WF_NAME, url_counts["filtered"], url_counts["total"], url_filter, FN_NAME)
-        if blocklist_urls:
-            if url_counts["filtered"] <= 50:
-                note_text += u"<br>The data table <b>{0}</b> has been updated".format("Zscaler Internet Access - Blocklist")
-                for url in blocklist_urls:
-                    newrow = incident.addRow("zia_blocklist")
-                    newrow.query_execution_date = QUERY_EXECUTION_DATE
-                    newrow.blocklist_url = url
-                    newrow.query_filter = url_filter
-            else:
-                note_text += "<br>Blocklisted URLS: <b>{0}</b>".format(", ".join(blocklist_urls))
+        if "error_code" not in CONTENT:
+            blocklist_urls = CONTENT.blacklistUrls
+            url_counts = CONTENT.url_counts
+            note_text = u"ZIA Integration: Workflow <b>{0}</b>: There were <b>{1}</b> blocklist URLS(s) out of a total of "\
+                        u"<b>{2}</b> using URL filter <b>{3}</b> returned for SOAR function <b>{4}</b>."\
+            .format(WF_NAME, url_counts["filtered"], url_counts["total"], url_filter, FN_NAME)
+            if blocklist_urls:
+                if url_counts["filtered"] <= 50:
+                    note_text += u"<br>The data table <b>{0}</b> has been updated".format("Zscaler Internet Access - Blocklist")
+                    for url in blocklist_urls:
+                        newrow = incident.addRow("zia_blocklist")
+                        newrow.query_execution_date = QUERY_EXECUTION_DATE
+                        newrow.blocklist_url = url
+                        newrow.query_filter = url_filter
+                else:
+                    note_text += "<br>Blocklisted URLS: <b>{0}</b>".format(", ".join(blocklist_urls))
+        else:
+            note_text += u"ZIA Integration: Workflow <b>{0}</b>: There was an error returned using URL filter <b>{1}</b> "\
+                         u"returned for SOAR function <b>{2}</b>."\
+                .format(WF_NAME, url_filter, FN_NAME)
+            note_text += u"<br>Error code: <b>{0}</b>, Error code: <b>{1}</b>, Details: <b>{2}</b>."\
+                .format(CONTENT["error_code"], CONTENT["status"], CONTENT["text"] )
+
     else:
         note_text += u"ZIA Integration: Workflow <b>{0}</b>: There were <b>no</b> results using URL filter <b>{1}</b> "\
                      u"returned for SOAR function <b>{2}</b>."\

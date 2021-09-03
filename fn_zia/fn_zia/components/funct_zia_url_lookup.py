@@ -8,10 +8,14 @@ from resilient_circuits import ResilientComponent, function, handler, StatusMess
 from resilient_lib import ResultPayload, validate_fields
 import fn_zia.util.config as config
 from fn_zia.lib.zia_client import ZiaClient
+from fn_zia.lib.decorators import RateLimit as ratelimit
 
 PACKAGE_NAME = "fn_zia"
 FN_NAME = "funct_zia_url_lookup"
 LOG = logging.getLogger(__name__)
+
+# Initialize the ratelimit decorator.
+ratelimit(init=True, method="post")
 
 
 class FunctionComponent(ResilientComponent):

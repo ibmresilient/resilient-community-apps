@@ -9,6 +9,7 @@ import json
 from resilient_lib import RequestsCommon
 from resilient_lib import IntegrationError
 from .decorators import retry
+from .decorators import RateLimit as ratelimit
 from .exceptions import ZiaException, ZiaRateLimitException
 
 LOG = logging.getLogger(__name__)
@@ -58,6 +59,7 @@ class Auth():
         pass
 
     @retry(raise_on_max=True)
+    @ratelimit(method="post", ep="authenticate")
     def _set_jsession_header(self):
         """ Setup headers to allow authentication to Zia server.
 
