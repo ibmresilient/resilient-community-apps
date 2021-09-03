@@ -16,7 +16,7 @@ from fn_microsoft_sentinel.lib.function_common import PACKAGE_NAME, SentinelProf
         DEFAULT_INCIDENT_CLOSE_TEMPLATE
 from fn_microsoft_sentinel.lib.jinja_common import JinjaEnvironment
 from fn_microsoft_sentinel.lib.resilient_common import ResilientCommon
-from fn_microsoft_sentinel.lib.sentinel_common import SentinelAPI, get_sentinel_incident_id
+from fn_microsoft_sentinel.lib.sentinel_common import SentinelAPI, get_sentinel_incident_ids
 
 POLLER_CHANNEL = "sentinel_poller"
 
@@ -143,7 +143,7 @@ class SentinelPollerComponent(ResilientComponent):
         """
         for sentinel_incident in result.get("value", []):
             # determine if an incident already exists, used to know if create or update
-            sentinel_incident_id = get_sentinel_incident_id(sentinel_incident)
+            sentinel_incident_id, sentinel_incident_number = get_sentinel_incident_ids(sentinel_incident)
             resilient_incident = self.resilient_common.find_incident(sentinel_incident_id)
 
             new_incident_filters = get_profile_filters(profile_data['new_incident_filters'])
@@ -188,14 +188,14 @@ class SentinelPollerComponent(ResilientComponent):
         Returns:
             resilient_incident ([dict])
         """
-        sentinel_incident_id = get_sentinel_incident_id(sentinel_incident)
+        sentinel_incident_id, sentinel_incident_number = get_sentinel_incident_ids(sentinel_incident)
         # resilient incident found
         updated_resilient_incident = None
         if resilient_incident:
             resilient_incident_id = resilient_incident['id']
             if resilient_incident["plan_status"] == "C":
                 LOG.info("Bypassing update to closed incident %s from Sentinel incident %s",
-                            resilient_incident_id, sentinel_incident_id)
+                            resilient_incident_id, sentinel_incident_number)
             elif sentinel_incident['properties']['status'] == "Closed":
                 # close the incident
                 incident_payload = self.jinja_env.make_payload_from_template(
@@ -207,7 +207,7 @@ class SentinelPollerComponent(ResilientComponent):
                                                                 incident_payload
                                                             )
                 LOG.info("Closed incident %s from Sentinel incident %s",
-                         resilient_incident_id, sentinel_incident_id)
+                         resilient_incident_id, sentinel_incident_number)
             else:
                 # update an incident incident
                 incident_payload = self.jinja_env.make_payload_from_template(
@@ -219,7 +219,7 @@ class SentinelPollerComponent(ResilientComponent):
                                                     incident_payload
                                                 )
                 LOG.info("Updated incident %s from Sentinel incident %s",
-                         resilient_incident_id, sentinel_incident_id)
+                         resilient_incident_id, sentinel_incident_number)
         else:
             # apply filters to only escalate certain incidents
             if check_incident_filters(sentinel_incident, new_incident_filters):
@@ -233,10 +233,10 @@ class SentinelPollerComponent(ResilientComponent):
                                                     sentinel_incident)
                 updated_resilient_incident = self.resilient_common.create_incident(incident_payload)
                 LOG.info("Created incident %s from Sentinel incident %s",
-                         updated_resilient_incident['id'], sentinel_incident_id)
+                         updated_resilient_incident['id'], sentinel_incident_number)
             else:
                 LOG.info("Sentinel incident %s bypassed due to new_incident_filters",
-                         sentinel_incident_id)
+                         sentinel_incident_number)
                 updated_resilient_incident = None
 
         return updated_resilient_incident

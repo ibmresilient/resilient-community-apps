@@ -83,12 +83,13 @@ class FunctionComponent(ResilientComponent):
                                 default_template,
                                 resilient_incident)
 
-        _, status, reason = sentinel_api.create_update_incident(
+        result, status, reason = sentinel_api.create_update_incident(
                                                 profile_data,
                                                 sentinel_incident_id,
                                                 incident_payload
                                               )
+
         if status:
-            log.info("Sentinel incident updated. incident: %s", sentinel_incident_id)
+            log.info("Sentinel incident updated. incident: %s", result['properties']['incidentNumber'])
         else:
             log.error("Sentinel incident failure for incident %s: %s", sentinel_incident_id, reason)

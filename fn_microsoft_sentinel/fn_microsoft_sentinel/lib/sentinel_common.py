@@ -253,10 +253,10 @@ class SentinelAPI():
                 incident_last_modified_date = datetime.datetime.strptime(str_date[:str_date.rfind('.')], date_format)
                 if incident_last_modified_date >= poller_last_modified_date:
                     filtered.append(inc)
-                    LOG.debug("Allowing incident:%s %s", inc['properties']['incidentNumber'],
+                    LOG.debug("Allowing incident:%s %s", inc['name'],
                               incident_last_modified_date.isoformat())
                 else:
-                    LOG.debug("Filtering incident:%s %s", inc['properties']['incidentNumber'],
+                    LOG.debug("Filtering incident:%s %s", inc['name'],
                               incident_last_modified_date.isoformat())
 
             except ValueError as err:
@@ -527,7 +527,7 @@ class SentinelAPI():
 
         return url
 
-def get_sentinel_incident_id(sentinel_incident):
+def get_sentinel_incident_ids(sentinel_incident):
     """
     Returns:
         [str]: [sentinel_indident_id or None if not found]
@@ -535,7 +535,7 @@ def get_sentinel_incident_id(sentinel_incident):
     if not sentinel_incident:
         return None
 
-    return sentinel_incident['name']
+    return sentinel_incident['name'], sentinel_incident['properties']['incidentNumber']
 
 def make_uuid():
     """
