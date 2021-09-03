@@ -9,6 +9,7 @@ import time
 import uuid
 from resilient_lib import RequestsCommon, IntegrationError
 from simplejson.errors import JSONDecodeError
+from fn_microsoft_sentinel.lib.constants import FROM_SOAR_COMMENT_HDR
 
 INDICATOR_URL = "api/indicators"
 MACHINES_URL = "api/machines"
@@ -464,7 +465,7 @@ class SentinelAPI():
 
         payload = {
             "properties": {
-                "message": note
+                "message": "{}:\n{}".format(FROM_SOAR_COMMENT_HDR, note)
             }
         }
 

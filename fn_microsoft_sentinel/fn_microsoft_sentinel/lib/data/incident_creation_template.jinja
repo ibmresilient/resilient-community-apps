@@ -1,6 +1,6 @@
 {
   {# JINJA template for creating a new Resilient incident from a Sentinel incident. #}
-  "name": "Sentinel Incident {{ name|e }} - {{ properties.title|replace('"', '\\"') }}",
+  "name": "Sentinel Incident {{ properties.incidentNumber|e }} - {{ properties.title|replace('"', '\\"') }}",
   "discovered_date": {{ properties.createdTimeUtc|resilient_datetimeformat }},
   "start_date": {% if properties.firstActivityTimeUtc %} {{ properties.firstActivityTimeUtc|resilient_datetimeformat }} {% else %} {{ properties.createdTimeUtc|resilient_datetimeformat }} {%endif %},
   "description": {

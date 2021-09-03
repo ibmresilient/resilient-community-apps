@@ -1,6 +1,5 @@
 {
   {# JINJA template for updating a new Resilient incident from a Sentinel incident. #}
-  "name": "Sentinel Incident {{ name|e }} - {{ properties.title|replace('Sentinel Incident - ', '')|replace('"', '\\"') }}",
   "description": {
     "format": "text",
     "content": "{{ properties.description|replace('"', '\\"') }}"

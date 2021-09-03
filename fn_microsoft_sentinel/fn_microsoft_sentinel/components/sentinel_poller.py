@@ -9,7 +9,7 @@ import json
 import logging
 from circuits import Event, Timer
 from resilient_circuits import ResilientComponent, handler
-from resilient_lib import validate_fields, IntegrationError
+from resilient_lib import validate_fields
 from fn_microsoft_sentinel.lib.function_common import PACKAGE_NAME, SentinelProfiles,\
         DEFAULT_INCIDENT_CREATION_TEMPLATE,\
         DEFAULT_INCIDENT_UPDATE_TEMPLATE,\
@@ -19,7 +19,6 @@ from fn_microsoft_sentinel.lib.resilient_common import ResilientCommon
 from fn_microsoft_sentinel.lib.sentinel_common import SentinelAPI, get_sentinel_incident_id
 
 POLLER_CHANNEL = "sentinel_poller"
-TICKET_ID_FIELDNAME = "sentinel_incident_id"
 
 DEFAULT_POLLER_SECONDS = 600
 LOG = logging.getLogger(__name__)
@@ -169,7 +168,7 @@ class SentinelPollerComponent(ResilientComponent):
                     for comment in new_comments:
                         self.resilient_common.create_incident_comment(
                                                             incident_id,
-                                                            sentinel_incident_id,
+                                                            comment['name'],
                                                             comment['properties']['message']
                                                         )
                 else:

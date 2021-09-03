@@ -5,10 +5,9 @@
 import logging
 import resilient
 from resilient import SimpleHTTPException
-from resilient_lib import IntegrationError
+from resilient_lib import IntegrationError, clean_html
 from cachetools import cached, LRUCache
-
-SENTINEL_INC_ID_FIELD = "sentinel_incident_id"
+from fn_microsoft_sentinel.lib.constants import FROM_SENTINEL_COMMENT_HDR, FROM_SOAR_COMMENT_HDR, SENTINEL_INCIDENT_NUMBER
 
 COMMENT_ID_DATATABLE = "sentinel_comment_ids"
 COMMENT_FIELD_SENTINEL_ID = "comment_id"
@@ -37,7 +36,7 @@ class ResilientCommon():
             'filters': [{
                 'conditions': [
                     {
-                        'field_name': 'properties.{0}'.format(SENTINEL_INC_ID_FIELD),
+                        'field_name': 'properties.{0}'.format(SENTINEL_INCIDENT_NUMBER),
                         'method': 'equals',
                         'value': "{}".format(sentinel_incident_id)
                     }
@@ -150,14 +149,14 @@ class ResilientCommon():
             uri = u'/incidents/{0}/comments'.format(incident_id)
             note_json = {
                 'format': 'html',
-                'content': note
+                'content': "<b>{} ({}):</b><br>{}".format(FROM_SENTINEL_COMMENT_HDR, sentinel_comment_id, note)
             }
             payload = {'text': note_json}
 
             comment_response = self.rest_client.post(uri=uri, payload=payload)
-            if comment_response:
-                # create a datatable reference to this comment
-                self._update_comment_datatable(incident_id, sentinel_comment_id)
+            # if comment_response:
+            #     # create a datatable reference to this comment
+            #     self._update_comment_datatable(incident_id, sentinel_comment_id)
 
             return comment_response
 
@@ -177,9 +176,8 @@ class ResilientCommon():
     def filter_resilient_comments(self, incident_id, sentinel_comments):
         """
             need to avoid creating same comments over and over
-              this logic will read a datatable of sentinel incident comment_ids
+              this logic will read all comments from an incident
               and remove those comments which have already sync
-            WARNING: This logic will not update an existing comment (which may have been updated)
 
         Args:
             incident_id ([str]): [resilient incident id]
@@ -187,18 +185,28 @@ class ResilientCommon():
         Returns:
             new_comments ([list])
         """
-        new_comments = []
-        # get incident comments and filter out those already sync'd
-        incident_comments = self.get_comment_datatable(incident_id)
+        soar_comments = self.get_incident_comments(incident_id)
+        soar_comment_list = [comment['text'] for comment in soar_comments]
 
-        if incident_comments:
-            for comment in sentinel_comments:
-                if comment['name'] not in incident_comments:
-                    new_comments.append(comment)
-        else:
-            new_comments = sentinel_comments
+        # filter comments with our SOAR header
+        sentinel_comments_filtered = [comment for comment in sentinel_comments if not FROM_SOAR_COMMENT_HDR in comment['properties']['message']]
 
-        LOG.info("Filtered new comments %s out of %s", len(new_comments), len(sentinel_comments))
+        # filter out the comments already sync'd
+        new_comments = [comment for comment in sentinel_comments_filtered \
+            if not any([bool(comment['name'] in soar_comment_list)])]
+
+        # new_comments = []
+        # # get incident comments and filter out those already sync'd
+        # incident_comments = self.get_comment_datatable(incident_id)
+
+        # if incident_comments:
+        #     for comment in sentinel_comments:
+        #         if comment['name'] not in incident_comments:
+        #             new_comments.append(comment)
+        # else:
+        #     new_comments = sentinel_comments
+
+        # LOG.info("Filtered new comments %s out of %s", len(new_comments), len(sentinel_comments))
 
         return new_comments
 

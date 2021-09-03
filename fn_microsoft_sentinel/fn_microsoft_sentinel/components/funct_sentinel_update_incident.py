@@ -11,6 +11,7 @@ from fn_microsoft_sentinel.lib.function_common import PACKAGE_NAME, SentinelProf
   DEFAULT_SENTINEL_CLOSE_INCIDENT_TEMPLATE
 from fn_microsoft_sentinel.lib.sentinel_common import SentinelAPI
 from fn_microsoft_sentinel.lib.jinja_common import JinjaEnvironment
+from fn_microsoft_sentinel.lib.constants import SENTINEL_INCIDENT_NUMBER
 
 CHANNEL = "fn_microsoft_sentinel"
 
@@ -51,11 +52,11 @@ class FunctionComponent(ResilientComponent):
         # get the incident data
         resilient_incident = event.message['incident']
 
-        validate_fields(["sentinel_profile", "sentinel_incident_id"], resilient_incident['properties'])
+        validate_fields(["sentinel_profile", SENTINEL_INCIDENT_NUMBER], resilient_incident['properties'])
 
         # Get the function parameters:
         sentinel_profile = resilient_incident['properties'].get("sentinel_profile")  # text
-        sentinel_incident_id = resilient_incident['properties'].get("sentinel_incident_id")  # text
+        sentinel_incident_id = resilient_incident['properties'].get(SENTINEL_INCIDENT_NUMBER)  # text
 
         log = logging.getLogger(__name__)
         log.info("sentinel_profile: %s", sentinel_profile)
