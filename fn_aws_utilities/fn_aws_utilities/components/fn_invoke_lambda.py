@@ -50,7 +50,7 @@ class FunctionComponent(ResilientComponent):
             if payload is None:
                 yield FunctionResult({"response_payload": None})
 
-            payload_string = str(payload.read())
+            payload_string = str(payload.read().decode('utf-8'))
 
             yield FunctionResult({"response_payload": payload_string})
         except Exception:

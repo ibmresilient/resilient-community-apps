@@ -135,8 +135,8 @@ The following table provides the settings you need to configure the app. These s
 | ------ | :------: | ------- | ----------- |
 | **aws_access_key_id** | Yes | `ABCD1234...` | *An access key ID from AWS* |
 | **aws_secret_access_key** | Yes | `5EF6/GHIJK...` | *The AWS secret access key associated with the above access key ID* |
-| **aws_region_name** | Yes | `us-east-1` | *Enter a description of the config here.* |
-| **aws_sms_topic_name** | No |  | *Enter a description of the config here.* |
+| **aws_region_name** | Yes | `us-east-1` | *AWS region that your account is configured in* |
+| **aws_sms_topic_name** | No |  | |
 
 
 ---
