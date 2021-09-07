@@ -116,6 +116,12 @@ for image_name in "${IMAGE_NAMES[@]}"; do
         int_version=$(python "$package_path/setup.py" --version)
         print_msg "package_path:\t\t\t$package_path\npath_current_requirements:\t$path_current_requirements\npath_new_requirements:\t\t$path_new_requirements\npath_dockerfile:\t\t$path_dockerfile\nint_version:\t\t\t$int_version"
 
+        # Check if package has extra travis script
+        if [ -f "$package_path/$FILE_NAME_EXTRA_SETUP" ] ; then
+            print_msg "Executing extra .sh travis setup file found at $package_path/$FILE_NAME_EXTRA_SETUP"
+            sh $package_path/$FILE_NAME_EXTRA_SETUP
+        fi
+
         docker_tag="$image_name:$int_version"
         quay_io_tag="$QUAY_URL/$QUAY_USERNAME/$docker_tag"
 
