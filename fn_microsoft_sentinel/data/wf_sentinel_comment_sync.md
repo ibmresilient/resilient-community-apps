@@ -29,9 +29,6 @@ inputs.sentinel_profile = incident.properties.sentinel_profile
 from java.util import Date
 
 if results.success:
-  row = incident.addRow("sentinel_comment_ids")
-  row['comment_id'] = results.content['name']
-  
   # Get the current time
   dt_now = Date()
   note.text = u"<b>Sent to Sentinel at {0}</b><br>{1}".format(dt_now, unicode(note.text.content))

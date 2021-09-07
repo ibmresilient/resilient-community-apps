@@ -9,6 +9,7 @@ from resilient_circuits import ResilientComponent, function, handler, StatusMess
                                FunctionResult, FunctionError
 from fn_microsoft_sentinel.lib.function_common import PACKAGE_NAME, SentinelProfiles
 from fn_microsoft_sentinel.lib.sentinel_common import SentinelAPI
+from fn_microsoft_sentinel.lib.constants import FROM_SENTINEL_COMMENT_HDR, SENT_TO_SENTINEL_HDR
 
 
 class FunctionComponent(ResilientComponent):
@@ -53,16 +54,23 @@ class FunctionComponent(ResilientComponent):
                                        self.options['app_secret'],
                                        self.opts, self.options)
 
-            profile_data = self.sentinel_profiles.get_profile(sentinel_profile)
-            result, status, reason = sentinel_api.create_comment(profile_data,
-                                                                 sentinel_incident_id,
-                                                                 clean_html(sentinel_incident_comment))
-            if status:
-                yield StatusMessage("Sentinel comment added to incident: {}"\
-                    .format(sentinel_incident_id))
+            # do not resync comments originating from Sentinel
+            if FROM_SENTINEL_COMMENT_HDR in sentinel_incident_comment or SENT_TO_SENTINEL_HDR in sentinel_incident_comment:
+                yield StatusMessage("Bypassing synchronization of note: {}".format(sentinel_incident_comment))
+                result = {}
+                reason = None
+                status = False
             else:
-                yield StatusMessage("Sentinel comment failure for incident {}: {}"\
-                    .format(sentinel_incident_id, reason))
+                profile_data = self.sentinel_profiles.get_profile(sentinel_profile)
+                result, status, reason = sentinel_api.create_comment(profile_data,
+                                                                    sentinel_incident_id,
+                                                                    clean_html(sentinel_incident_comment))
+                if status:
+                    yield StatusMessage("Sentinel comment added to incident: {}"\
+                        .format(sentinel_incident_id))
+                else:
+                    yield StatusMessage("Sentinel comment failure for incident {}: {}"\
+                        .format(sentinel_incident_id, reason))
 
             yield StatusMessage("Finished 'sentinel_add_incident_comment'")
 

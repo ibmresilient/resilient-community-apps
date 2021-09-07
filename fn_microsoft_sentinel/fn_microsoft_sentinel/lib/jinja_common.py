@@ -16,11 +16,13 @@ class JinjaEnvironment():
         env = environment()
         env.globals.update({
             "resilient_datetimeformat": jinja_resilient_datetimeformat,
-            "resilient_substitute": jinja_resilient_substitute
+            "resilient_substitute": jinja_resilient_substitute,
+            "resilient_splitpart": jinja_resilient_splitpart
             })
         env.filters.update({
             "resilient_datetimeformat": jinja_resilient_datetimeformat,
-            "resilient_substitute": jinja_resilient_substitute
+            "resilient_substitute": jinja_resilient_substitute,
+            "resilient_splitpart": jinja_resilient_splitpart
             })
 
     def make_payload_from_template(self, template_override, default_template, payload):
@@ -106,3 +108,20 @@ def jinja_resilient_substitute(value, json_str):
         return replace_dict['DEFAULT']
 
     return value
+
+def jinja_resilient_splitpart (value, index, split_chars=' - '):
+    """[split a string and return the index]
+
+    Args:
+        value ([str]): [string to split]
+        index ([int]): [index to return]
+        split_chars (str, optional): [split characters]. Defaults to ' - '.
+
+    Returns:
+        [str]: [index of string. if index is out of bounds, the original string is returned]
+    """
+    splits = value.split(split_chars)
+    if len(splits) > index:
+        return splits[index]
+    else:
+        return value

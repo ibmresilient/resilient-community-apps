@@ -27,7 +27,7 @@ def codegen_reload_data():
         "incident_fields": [u"sentinel_incident_assigned_to", u"sentinel_incident_classification", u"sentinel_incident_classification_comment", u"sentinel_incident_classification_reason", u"sentinel_incident_id", u"sentinel_incident_labels", u"sentinel_incident_number", u"sentinel_incident_status", u"sentinel_incident_tactics", u"sentinel_incident_url", u"sentinel_profile"],
         "incident_artifact_types": [],
         "incident_types": [],
-        "datatables": [u"sentinel_comment_ids", u"sentinel_incident_alerts", u"sentinel_incident_entities"],
+        "datatables": [u"sentinel_incident_alerts", u"sentinel_incident_entities"],
         "automatic_tasks": [],
         "scripts": []
     }
@@ -75,7 +75,6 @@ def customization_data(client=None):
         - sentinel_incident_url
         - sentinel_profile
     - Data Tables:
-        - sentinel_comment_ids
         - sentinel_incident_alerts
         - sentinel_incident_entities
     """

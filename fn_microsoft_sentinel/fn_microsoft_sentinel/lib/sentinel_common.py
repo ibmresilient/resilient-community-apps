@@ -9,6 +9,7 @@ import time
 import uuid
 from resilient_lib import RequestsCommon, IntegrationError
 from simplejson.errors import JSONDecodeError
+from fn_microsoft_sentinel.lib.constants import FROM_SOAR_COMMENT_HDR
 
 INDICATOR_URL = "api/indicators"
 MACHINES_URL = "api/machines"
@@ -252,10 +253,10 @@ class SentinelAPI():
                 incident_last_modified_date = datetime.datetime.strptime(str_date[:str_date.rfind('.')], date_format)
                 if incident_last_modified_date >= poller_last_modified_date:
                     filtered.append(inc)
-                    LOG.debug("Allowing incident:%s %s", inc['properties']['incidentNumber'],
+                    LOG.debug("Allowing incident:%s %s", inc['name'],
                               incident_last_modified_date.isoformat())
                 else:
-                    LOG.debug("Filtering incident:%s %s", inc['properties']['incidentNumber'],
+                    LOG.debug("Filtering incident:%s %s", inc['name'],
                               incident_last_modified_date.isoformat())
 
             except ValueError as err:
@@ -352,7 +353,7 @@ class SentinelAPI():
         if status:
             for entity in result['value']['entities']:
                 entity['resilient_artifact_type'] = convert_entity_type(entity['kind'],
-                                                            entity['properties']['friendlyName'])
+                                                                        entity['properties'].get('friendlyName', 'Unknown'))
 
         return result, status, reason
 
@@ -464,7 +465,7 @@ class SentinelAPI():
 
         payload = {
             "properties": {
-                "message": note
+                "message": "{}:\n{}".format(FROM_SOAR_COMMENT_HDR, note)
             }
         }
 
@@ -526,7 +527,7 @@ class SentinelAPI():
 
         return url
 
-def get_sentinel_incident_id(sentinel_incident):
+def get_sentinel_incident_ids(sentinel_incident):
     """
     Returns:
         [str]: [sentinel_indident_id or None if not found]
@@ -534,7 +535,7 @@ def get_sentinel_incident_id(sentinel_incident):
     if not sentinel_incident:
         return None
 
-    return sentinel_incident['name']
+    return sentinel_incident['name'], sentinel_incident['properties']['incidentNumber']
 
 def make_uuid():
     """
