@@ -16,7 +16,7 @@ IMAGE_TO_REBUILD=$2
 REPO_TO_PUSH=$3
 QUAY_API_URL="$QUAY_URL/api/v1"
 PACKAGES_TO_CHANGE="[{\"name\":\"resilient\",\"version\":\"$PYTHON_LIBRARIES_VERSION\"},{\"name\":\"resilient-circuits\",\"version\":\"$PYTHON_LIBRARIES_VERSION\"},{\"name\":\"resilient-lib\",\"version\":\"$PYTHON_LIBRARIES_VERSION\"},{\"name\":\"requests\",\"version\":\"2.26.0\"}]"
-DOCKERFILE_KEYWORD="registry.access.redhat.com"
+DOCKERFILE_KEYWORD="RUN pip install /tmp/packages/\${APPLICATION}-*.tar.gz"
 DOCKERFILE_WORDS_TO_INSERT="[\"\\n\", \"RUN pip install --upgrade pip\\n\", \"COPY ./new_requirements.txt /tmp/new_requirements.txt\\n\", \"RUN pip install -r /tmp/new_requirements.txt\\n\"]"
 quay_io_tags=()
 artifactory_tags=()
@@ -147,7 +147,7 @@ for image_name in "${IMAGE_NAMES[@]}"; do
         print_msg "$image_name:: New requirements:\n$(cat $path_new_requirements)"
 
         print_msg "$image_name:: Overwriting Dockerfile"
-        python $SCRIPTS_DIR/insert_into_Dockerfile.py $path_dockerfile $DOCKERFILE_KEYWORD "$DOCKERFILE_WORDS_TO_INSERT"
+        python $SCRIPTS_DIR/insert_into_Dockerfile.py $path_dockerfile "$DOCKERFILE_KEYWORD" "$DOCKERFILE_WORDS_TO_INSERT"
 
         print_msg "$image_name:: Packaging $image_name with resilient-sdk"
         resilient-sdk package -p $package_path || resilient_sdk_package_pass=$?
