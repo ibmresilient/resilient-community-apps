@@ -56,7 +56,7 @@ def mocked_aws_lambda(*args, **kwargs):
 
     class _MockResponse:
         def __init__(self, val):
-            self.val = val
+            self.val = bytes(str(val), 'utf-8')
         
         def read(self):
             return self.val
