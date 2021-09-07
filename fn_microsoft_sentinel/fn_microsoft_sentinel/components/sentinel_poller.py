@@ -206,6 +206,7 @@ class SentinelPollerComponent(ResilientComponent):
                                                                 resilient_incident_id,
                                                                 incident_payload
                                                             )
+                _ = self.resilient_common.create_incident_comment(resilient_incident_id, None, "Close synchronized from Sentinel")
                 LOG.info("Closed incident %s from Sentinel incident %s",
                          resilient_incident_id, sentinel_incident_number)
             else:
@@ -218,6 +219,7 @@ class SentinelPollerComponent(ResilientComponent):
                                                     resilient_incident_id,
                                                     incident_payload
                                                 )
+                _ = self.resilient_common.create_incident_comment(resilient_incident_id, None, "Updates synchronized from Sentinel")
                 LOG.info("Updated incident %s from Sentinel incident %s",
                          resilient_incident_id, sentinel_incident_number)
         else:

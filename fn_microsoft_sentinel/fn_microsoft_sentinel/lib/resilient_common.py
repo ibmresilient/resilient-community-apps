@@ -143,18 +143,15 @@ class ResilientCommon():
         """
         try:
             uri = u'/incidents/{0}/comments'.format(incident_id)
+            comment = "<b>{} ({}):</b><br>{}".format(FROM_SENTINEL_COMMENT_HDR, sentinel_comment_id, note)
+
             note_json = {
                 'format': 'html',
-                'content': "<b>{} ({}):</b><br>{}".format(FROM_SENTINEL_COMMENT_HDR, sentinel_comment_id, note)
+                'content': comment
             }
             payload = {'text': note_json}
 
-            comment_response = self.rest_client.post(uri=uri, payload=payload)
-            # if comment_response:
-            #     # create a datatable reference to this comment
-            #     self._update_comment_datatable(incident_id, sentinel_comment_id)
-
-            return comment_response
+            return self.rest_client.post(uri=uri, payload=payload)
 
         except Exception as err:
             raise IntegrationError(err)

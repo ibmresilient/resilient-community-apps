@@ -353,7 +353,7 @@ class SentinelAPI():
         if status:
             for entity in result['value']['entities']:
                 entity['resilient_artifact_type'] = convert_entity_type(entity['kind'],
-                                                            entity['properties']['friendlyName'])
+                                                                        entity['properties'].get('friendlyName', 'Unknown'))
 
         return result, status, reason
 
