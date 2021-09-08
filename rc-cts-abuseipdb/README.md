@@ -6,6 +6,7 @@ This CTS needs an AbuseIPDB account and an v2 api key to work.
 
 ## Revision History
 
+* v2.0.1 - minor bug fix
 * v2.0.0 - support for abuseipdb v2 api
 * v1.0.0 - initial implementation
 
@@ -31,7 +32,7 @@ ignore_white_listed=True
 Run with: `resilient-circuits run`.
 
 ## Upgrade Instructions
-Uninstall the previous pip package and install the new new package. 
+Uninstall the previous pip package and install the new new package.
 When upgrading from v1.0.0, change your app.config `abuseipdb_url` key to reference the v2 api URL:
 ```
 abuseipdb_url=https://api.abuseipdb.com/api/v2/check

@@ -98,6 +98,7 @@ fn_zia
 #rc-data-feed-plugin-odbcfeed
 #rc-data-feed-plugin-resilientfeed
 #rc-data-feed-plugin-splunkfeed
+rc-cts-abuseipdb
 rc-cts-haveibeenpwned
 rc-cts-mcafeetie
 rc-cts-passivetotal
