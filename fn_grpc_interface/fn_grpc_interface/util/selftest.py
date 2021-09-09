@@ -20,6 +20,8 @@ Return examples:
 
 import logging
 
+from fn_grpc_interface.util.grpc_helper import GrpcHelperClass
+
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
 log.addHandler(logging.StreamHandler())
@@ -32,7 +34,63 @@ def selftest_function(opts):
     """
     app_configs = opts.get("fn_grpc_interface", {})
 
-    return {
-        "state": "unimplemented",
-        "reason": None
-    }
+    try:
+        grpc_helper_obj = GrpcHelperClass(logger_object=log)
+
+        package_names, _grpc_interface_file_dir = _check_config_data(app_configs)
+        _check_files(grpc_helper_obj, _grpc_interface_file_dir, package_names)
+    except Exception as e:
+        return {
+            "state": "failure",
+            "reason": str(e)
+        }
+        
+    return { "state": "success" }
+
+
+def _check_config_data(app_configs):
+    # Parsing the service configuration data
+
+    # get package_name list from config
+    package_names = list(app_configs.keys())
+    
+    # remove 'interface_dir' from config list to isolate package names
+    _i = package_names.index('interface_dir')
+    package_names = package_names[0:_i] + package_names[_i+1:]
+
+    if len(package_names) == 0:
+        raise ValueError("No configurations found in the app.config file")
+
+    for _grpc_package_name in package_names:
+        service_config_data = app_configs.get(_grpc_package_name)
+        
+        try:
+            # check in correct csv format
+            config_file_data = service_config_data.split(',')
+            _grpc_secure_connection = config_file_data[1]
+            _grpc_communication_type = config_file_data[0]
+            _grpc_certificate_path = config_file_data[2]
+        except Exception:
+            raise ValueError("""Failed to parse the configurations for '{0}' in the app.config file. Ensure it is in the correct CSV format. e.g. {0}=unary,None,None""".format(_grpc_package_name))
+
+    _grpc_interface_file_dir = app_configs.get('interface_dir')
+    if not _grpc_interface_file_dir:
+        raise ValueError("'interface_dir' is not defined in the app.config file")
+
+    return package_names, _grpc_interface_file_dir
+
+def _check_files(grpc_helper_obj, _grpc_interface_file_dir, package_names):
+    for _grpc_package_name in package_names:
+        module_files = grpc_helper_obj.get_interface_file_names(_grpc_interface_file_dir, _grpc_package_name)
+
+        # Removing __pycache__ directory from module list since it's not required
+        if "__pycache__" in module_files:
+            pycache_index = module_files.index("__pycache__")
+            module_files.pop(pycache_index)
+
+        if not module_files:
+            raise ValueError("No gRPC protocol buffer files found in your interface_dir for the service '{0}'. Please copy the {0}_pb2.py and {0}_pb2_grpc.py files to your interface_dir".format(_grpc_package_name))
+        else:
+            for file_name in module_files:
+                if not (file_name.endswith('.py') or file_name.endswith('.pyc')) and 'pb' not in file_name:
+                    raise ValueError("Invalid file '{0}' found in your interface_dir for the service '{1}'.Please only copy the {1}_pb2.py and {1}_pb2_grpc.py files to your interface_dir".format(file_name, _grpc_package_name))
