@@ -73,7 +73,7 @@ class ResilientCommon():
 
         Args:
             incident ([dict]): [Resilient incident data]
-            sentinel_incident ([dict]): [Senintel incident data]
+            sentinel_incident ([dict]): [Sentinel incident data]
             incident_close_template ([str]): [path to template to apply for close operation]
 
         Raises:
