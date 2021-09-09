@@ -2,14 +2,20 @@
 """Tests using pytest_resilient_circuits"""
 
 import pytest
-from resilient_circuits.util import get_config_data, get_function_definition
-from resilient_circuits import SubmitTestFunction, FunctionResult
+from mock import patch
+from resilient_circuits import FunctionResult, SubmitTestFunction
+from resilient_circuits.util import get_function_definition
 
 PACKAGE_NAME = "fn_grpc_interface"
 FUNCTION_NAME = "function_grpc"
 
 # Read the default configuration-data section from the package
-config_data = get_config_data(PACKAGE_NAME)
+config_data = """[fn_grpc_interface]
+interface_dir=fn_grpc_interface/tests/data/
+grpc_channel=localhost:50051
+grpc_function=helloworld:SayHello(HelloRequest)
+helloworld=unary,None,None
+"""
 
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
@@ -48,21 +54,24 @@ class TestFunctionGrpc:
         assert func is not None
 
     mock_inputs_1 = {
-        "grpc_function_data": "sample text",
-        "grpc_function": "sample text",
-        "grpc_channel": "sample text"
+        "grpc_function_data": "{\"name\": \"tester\"}"
     }
-
-    expected_results_1 = {"value": "xyz"}
+    expected_results_1 = {
+        "content": {"message": "Hello, tester!"}, 
+        "channel": "localhost:50051"
+    }
 
     mock_inputs_2 = {
-        "grpc_function_data": "sample text",
-        "grpc_function": "sample text",
-        "grpc_channel": "sample text"
+        "grpc_channel": "localhost:50051",
+        "grpc_function": "helloworld:SayHello(HelloRequest)",
+        "grpc_function_data": "{\"name\": \"Jon Snow\"}"
+    }
+    expected_results_2 = {
+        "content": {"message": "Hello, Jon Snow!"}, 
+        "channel": "localhost:50051"
     }
 
-    expected_results_2 = {"value": "xyz"}
-
+    @pytest.mark.livetest
     @pytest.mark.parametrize("mock_inputs, expected_results", [
         (mock_inputs_1, expected_results_1),
         (mock_inputs_2, expected_results_2)

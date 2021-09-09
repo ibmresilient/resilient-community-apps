@@ -39,10 +39,15 @@ class FunctionComponent(ResilientComponent):
             # Initialising grpc helper class
             grpc_helper_obj = GrpcHelperClass(logger_object=log)
 
-            # Get the function parameters:
-            grpc_channel = kwargs.get("grpc_channel")  # text
-            grpc_function = kwargs.get("grpc_function")  # text
-            grpc_function_data = kwargs.get("grpc_function_data")  # text
+            # Get the function parameters (function params take precedence, take from config if not)
+            grpc_channel = kwargs.get("grpc_channel")  # channel info
+            grpc_function = kwargs.get("grpc_function")  # function name
+            if not grpc_channel:
+                grpc_channel = self.options.get("grpc_channel")
+            if not grpc_function:
+                grpc_function = self.options.get("grpc_function")
+
+            grpc_function_data = kwargs.get("grpc_function_data")  # function data
 
             # Supported Communication types
             SUPPORTED_COMM_METHODS = ["unary"]
@@ -135,7 +140,7 @@ class FunctionComponent(ResilientComponent):
 
             # Checking Communication type
             if _grpc_communication_type.lower().strip() not in SUPPORTED_COMM_METHODS:
-                raise ValueError("{0} is not a supported Communication Type.Supported types are: {1}".format(_grpc_communication_type, SUPPORTED_COMM_METHODS))
+                raise ValueError("{0} is not a supported Communication Type. Supported types are: {1}".format(_grpc_communication_type, SUPPORTED_COMM_METHODS))
             try:
                 # Connecting to gRPC Server with given Authentication type
                 stub_class_obj, grpc_channel_obj = grpc_helper_obj.gRPC_Connect_Server(_grpc_secure_connection,

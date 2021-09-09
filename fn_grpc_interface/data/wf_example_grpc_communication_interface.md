@@ -60,13 +60,7 @@ def dict_to_json_str(d):
 
   return u'{0} {1} {2}'.format(u'{', ','.join(entries), u'}')
 
-# Define Inputs
-
-# The gRPC Channel to use
-inputs.grpc_channel = "localhost:50051"
-
-# The gRPC Function to call
-inputs.grpc_function = "helloworld:SayHello(HelloRequest)"
+# Define Inputs assuming grpc_channel and grpc_function are defined in app.config
 
 # The gRPC Function Request Data
 inputs.grpc_function_data = dict_to_json_str({"name": artifact.value})
