@@ -108,6 +108,5 @@ def _check_connection(channel):
     if channel:
         try:
             channel_object = grpc.insecure_channel(channel)
-            log.info(channel_object)
         except Exception as e:
             raise ValueError("Given channel '{0}' failed to connect. Make sure 'grpc_channel' details are correct.")
