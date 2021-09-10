@@ -3,8 +3,8 @@
 """
 Function implementation test.
 Usage: 
-    resilient-circuits selftest -l fn_grpc_interface
-    resilient-circuits selftest --print-env -l fn_grpc_interface
+    resilient-circuits selftest -l fn-grpc-interface
+    resilient-circuits selftest --print-env -l fn-grpc-interface
 
 Return examples:
     return {
@@ -19,6 +19,7 @@ Return examples:
 """
 
 import logging
+import grpc
 
 from fn_grpc_interface.util.grpc_helper import GrpcHelperClass
 
@@ -37,8 +38,9 @@ def selftest_function(opts):
     try:
         grpc_helper_obj = GrpcHelperClass(logger_object=log)
 
-        package_names, _grpc_interface_file_dir = _check_config_data(app_configs)
+        package_names, _grpc_interface_file_dir, _grpc_channel = _check_config_data(app_configs)
         _check_files(grpc_helper_obj, _grpc_interface_file_dir, package_names)
+        _check_connection(_grpc_channel)
     except Exception as e:
         return {
             "state": "failure",
@@ -51,12 +53,23 @@ def selftest_function(opts):
 def _check_config_data(app_configs):
     # Parsing the service configuration data
 
+    _grpc_interface_file_dir = app_configs.get('interface_dir')
+    if not _grpc_interface_file_dir:
+        raise ValueError("'interface_dir' is not defined in the app.config file")
+    _grpc_channel = app_configs.get('grpc_channel')
+
     # get package_name list from config
     package_names = list(app_configs.keys())
     
     # remove 'interface_dir' from config list to isolate package names
     _i = package_names.index('interface_dir')
     package_names = package_names[0:_i] + package_names[_i+1:]
+
+    if _grpc_channel:
+        _i = package_names.index('grpc_channel')
+        package_names = package_names[0:_i] + package_names[_i+1:]
+    else:
+        log.info("No grpc_channel config found. Make sure you enter the channel info when invoking the grpc function.")
 
     if len(package_names) == 0:
         raise ValueError("No configurations found in the app.config file")
@@ -73,11 +86,7 @@ def _check_config_data(app_configs):
         except Exception:
             raise ValueError("""Failed to parse the configurations for '{0}' in the app.config file. Ensure it is in the correct CSV format. e.g. {0}=unary,None,None""".format(_grpc_package_name))
 
-    _grpc_interface_file_dir = app_configs.get('interface_dir')
-    if not _grpc_interface_file_dir:
-        raise ValueError("'interface_dir' is not defined in the app.config file")
-
-    return package_names, _grpc_interface_file_dir
+    return package_names, _grpc_interface_file_dir, _grpc_channel
 
 def _check_files(grpc_helper_obj, _grpc_interface_file_dir, package_names):
     for _grpc_package_name in package_names:
@@ -94,3 +103,11 @@ def _check_files(grpc_helper_obj, _grpc_interface_file_dir, package_names):
             for file_name in module_files:
                 if not (file_name.endswith('.py') or file_name.endswith('.pyc')) and 'pb' not in file_name:
                     raise ValueError("Invalid file '{0}' found in your interface_dir for the service '{1}'.Please only copy the {1}_pb2.py and {1}_pb2_grpc.py files to your interface_dir".format(file_name, _grpc_package_name))
+
+def _check_connection(channel):
+    if channel:
+        try:
+            channel_object = grpc.insecure_channel(channel)
+            log.info(channel_object)
+        except Exception as e:
+            raise ValueError("Given channel '{0}' failed to connect. Make sure 'grpc_channel' details are correct.")

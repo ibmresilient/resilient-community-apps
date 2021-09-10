@@ -30,7 +30,6 @@ interface_dir=<<path to the parent directory of your Protocol Buffer (pb2) files
 # [fn_grpc_interface]
 # interface_dir=/home/admin/integrations/grpc_interface_files
 # grpc_channel=localhost:50051
-# grpc_function=helloworld:SayHello(HelloRequest)
 # helloworld=unary, None, None
 # ------- #"""
     return config_data
