@@ -21,15 +21,14 @@ def codegen_reload_data():
     return {
         "package": u"fn_playbook_utils",
         "message_destinations": [u"fn_playbook_utils"],
-        "functions": [u"pb_get_playbook_content", u"pb_get_playbook_data", u"pb_get_workflow_content", u"pb_get_workflow_data"],
-        "workflows": [u"pb_get_workflowplaybook_content", u"pb_get_workflows_by_artifact_value_for_last_30_days", u"wf_get_workflow_data", u"wf_get_workflow_frequency", u"wf_get_workflow_usage_at_incident_close", u"wf_get_workflows_by_artifact_value", u"wf_get_workflows_by_attachment_filename", u"wf_get_workflows_by_task_name"],
-        "actions": [u"PB: Get workflow/playbook content", u"PB: Get workflow/playbook frequency", u"PB: Get workflow/playbook usage", u"PB: Get workflow/playbook usage at incident close", u"PB: Get workflows/playbooks by artifact value", u"PB: Get workflows/playbooks by artifact value for last 30 days", u"PB: Get workflows/playbooks by attachment name", u"PB: Get workflows/playbooks by task name"],
+        "functions": [u"pb_get_playbook_data", u"pb_get_workflow_data"],
+        "workflows": [u"pb_get_workflows_by_artifact_value_for_last_30_days", u"wf_get_workflow_data", u"wf_get_workflow_frequency", u"wf_get_workflow_usage_at_incident_close", u"wf_get_workflows_by_artifact_value", u"wf_get_workflows_by_attachment_filename", u"wf_get_workflows_by_task_name"],
+        "actions": [u"PB: Get workflow/playbook frequency", u"PB: Get workflow/playbook usage", u"PB: Get workflow/playbook usage at incident close", u"PB: Get workflows/playbooks by artifact value", u"PB: Get workflows/playbooks by artifact value for last 30 days", u"PB: Get workflows/playbooks by attachment name", u"PB: Get workflows/playbooks by task name"],
         "incident_fields": [],
         "incident_artifact_types": [],
-        "incident_types": [],
         "datatables": [u"workflow_usage"],
         "automatic_tasks": [],
-        "scripts": [u"PB: Display playbook data", u"PB: Display workflow data", u"PB: Display workflow/playbook content"],
+        "scripts": [u"PB: Display playbook data", u"PB: Display workflow data"],
     }
 
 
@@ -44,12 +43,9 @@ def customization_data(client=None):
     - Message Destinations:
         - fn_playbook_utils
     - Functions:
-        - pb_get_playbook_content
         - pb_get_playbook_data
-        - pb_get_workflow_content
         - pb_get_workflow_data
     - Workflows:
-        - pb_get_workflowplaybook_content
         - pb_get_workflows_by_artifact_value_for_last_30_days
         - wf_get_workflow_data
         - wf_get_workflow_frequency
@@ -58,7 +54,6 @@ def customization_data(client=None):
         - wf_get_workflows_by_attachment_filename
         - wf_get_workflows_by_task_name
     - Rules:
-        - PB: Get workflow/playbook content
         - PB: Get workflow/playbook frequency
         - PB: Get workflow/playbook usage
         - PB: Get workflow/playbook usage at incident close
@@ -71,7 +66,6 @@ def customization_data(client=None):
     - Scripts:
         - PB: Display playbook data
         - PB: Display workflow data
-        - PB: Display workflow/playbook content
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)

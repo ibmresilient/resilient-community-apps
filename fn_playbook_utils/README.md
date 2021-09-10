@@ -29,7 +29,6 @@
   - [Install](#install)
   - [App Configuration](#app-configuration)
   - [Custom Layouts](#custom-layouts)
-- [Function - PB: Get Workflow content](#function---wf-get-workflow-content)
 - [Function - PB: Get workflow data](#function---wf-get-workflow-data)
 - [Function - PB: Get playbook data](#function---wf-get-playbook-data)
 - [Data Table - Playbook Usage](#data-table---playbook-usage)
@@ -95,6 +94,9 @@ If deploying to a IBM SOAR platform with an integration server, the requirements
   | Workflows | Read |
 
   Note: If using with IBM SOAR 40.0+, add the following permission to the app's apikey to read playbook data. This is necessary when using the App Host environment:
+
+  | Name | Permissions |
+  | ---- | ----------- |
   | Playbooks | Read |
 
 The following IBM SOAR platform guides provide additional information:
@@ -504,95 +506,6 @@ See the `PB: Display playbook data` script.
 
 ---
 
-### Function - PB: Get Workflow content
-Get a list of functions, scripts, tasks and sub-workflows used within a workflow. The results populate the 'Workflow/Playbook content' datatable column in the 'Playbook usage' datatable.
-
- ![screenshot: fn-wf-get-workflow-content ](./doc/screenshots/fn-wf-get-workflow-content.png)
-
-<details><summary>Inputs:</summary>
-<p>
-
-| Name | Type | Required | Example | Tooltip |
-| ---- | :--: | :------: | ------- | ------- |
-| `pb_id` | `number` | No | `-` |  workflow id from the datatable populated by any WF function. |
-
-</p>
-</details>
-
-<details><summary>Outputs:</summary>
-<p>
-
-```python
-results = {
-  'version': 2.0,
-  'success': True,
-  'reason': None,
-  'content': {
-    'Functions': [
-      'DNSDB Flex',
-      'DNSDB Pivot',
-      'DNSDB RData',
-      'DNSDB Rate Limit'
-    ],
-    'Scripts': [
-      'Convert JSON to rich text v1.1'
-    ],
-    'Tasks': [
-      'Initial Triage'
-    ],
-    'Workflows': [
-      'Example: Kafka Send'
-    ]
-  },
-  'raw': None,
-  'inputs': {
-    'pb_id': 98
-  },
-  'metrics': {
-    'version': '1.0',
-    'package': 'fn-playbook-utils',
-    'package_version': '1.0.0',
-    'host': '2719e63c-5beb-4d88-8e97-83b4cbf637a5-667b94c68b-8p8z5',
-    'execution_time_ms': 225,
-    'timestamp': '2021-07-27 20:09:32'
-  }
-}
-```
-
-</p>
-</details>
-
-<details><summary>Example Pre-Process Script:</summary>
-<p>
-
-```python
-inputs.pb_id = row['workflow_id']
-```
-
-</p>
-</details>
-
-<details><summary>Example Post-Process Script:</summary>
-<p>
-
-```python
-if results.success:
-  content = []
-  for k in sorted(results.content.keys()):
-    lizt = [v for v in results.content[k]]
-    content.append("{}:<br>&nbsp;&nbsp;{}".format(k, "<br>&nbsp;&nbsp;".join(lizt)))
-
-  row['workflow_content'] = helper.createRichText("<br><br>".join(content))
-else:
-  incident.addNote("PB: Get workflow content failed: {}".format(results.reason))
-
-```
-
-</p>
-</details>
-
----
-
 ## Data Table - Playbook usage
 
  ![screenshot: dt-workflow-usage](./doc/screenshots/dt-workflow-usage.png)
@@ -611,8 +524,6 @@ workflow_usage
 | Execution date | `execution_date` | `datetimepicker` | `date when the workflow or playbook was run` |
 | Element type | `element_type` | `text` | - |
 | Element value | `element_value` | `textarea` | - |
-| Element Id | `element_id` | `number` | - |
-| Workflow/Playbook content | `workflow_content` | `textarea` | `list of tasks, functions, scripts and sub-workflows that make up the workflow or playbook` |
 
 ---
 
@@ -626,8 +537,10 @@ workflow_usage
 | PB: Get workflows/playbooks by task name | task | `pb_get_workflows_by_task_name` |
 | PB: Get workflows/playbooks by artifact value | artifact | `pb_get_workflows_by_artifact_value` |
 | PB: Get workflows/playbooks by artifact value for last 30 days | artifact | 'pb_get_workflows_by_artifact_value_for_last_30_days |
-| PB: Get workflow/playbook content | workflow_usage | `pb_get_workflow_content` |
 
+Notes:
+1. The rule, PB: Get workflows/playbooks by artifact value for last 30 days, is an automatic rule which can be used to get workflow and playbook insights when an artifact is created. This rule is disabled by default and can be enabled by going to the Customization Settings and the Rules tab.
+2. The rule, PB: Get workflow/playbook usage at incident close, is an automatic rule which can be used to preserve a searchable record of the workflows and playbooks associated with an incident. This rule is disabled by default and can be enabled by going to the Customization Settings and the Rules tab.
 ---
 
 ## Troubleshooting & Support

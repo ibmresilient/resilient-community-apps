@@ -29,7 +29,7 @@ setup(
     author_email="",
     url="https://github.com/ibmresilient/resilient-community-apps",
     description="Tools to mine information about workflow and playbook usage",
-    long_description="""Resilient Circuits Components for 'fn_playbook_utils'""",
+    long_description="""This app includes functions to mine information about workflow and playbook usage across incidents so that an enterprise can learn the best practices on past threat intelligence and actions performed.""",
     install_requires=[
         "resilient-circuits>=41.0.0",
         "cachetools"
