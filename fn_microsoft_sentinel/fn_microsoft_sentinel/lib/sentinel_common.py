@@ -315,6 +315,10 @@ class SentinelAPI():
         if profile_data.get('max_alerts'):
             result['value'] = result['value'][:int(profile_data.get('max_alerts'))]
 
+        # build epoch values for time stamps
+        for alert in result['value']:
+            alert['properties']['timeGenerated_ms'] = convert_date(alert['properties']['timeGenerated'])
+
         LOG.debug("%s:%s:%s", status, reason, result)
         return result, status, reason
 
@@ -352,8 +356,10 @@ class SentinelAPI():
         # convert entity types to artifact types, adding 'resilient_artifact_type' property
         if status:
             for entity in result['value']['entities']:
-                entity['resilient_artifact_type'] = convert_entity_type(entity['kind'],
-                                                                        entity['properties'].get('friendlyName', 'Unknown'))
+                artifact_type, artifact_value = convert_entity_type(entity['kind'],
+                                                                    entity['properties'].get('friendlyName', 'Unknown'))
+                entity['resilient_artifact_type']  = artifact_type
+                entity['resilient_artifact_value']  = artifact_value
 
         return result, status, reason
 
@@ -572,7 +578,7 @@ def callback_response(response):
 
     return result, status
 
-def convert_date(value):
+def convert_date(value, date_format="%Y-%m-%dT%H:%M:%S"):
     """convert UTC formatted timestamp to epoch value
 
     Args:
@@ -584,9 +590,9 @@ def convert_date(value):
     if not value:
         return value
 
-    # Defender can return 7 millisecond characters which time.strptime cannot parse
+    # Sentinel can return 7 millisecond characters which time.strptime cannot parse
     # strip milliseconds as 7 characters cannot be parsed by %f
-    utc_time = time.strptime(value[:value.rfind('.')], "%Y-%m-%dT%H:%M:%S")
+    utc_time = time.strptime(value[:value.rfind('.')], date_format)
     return calendar.timegm(utc_time)*1000
 
 
