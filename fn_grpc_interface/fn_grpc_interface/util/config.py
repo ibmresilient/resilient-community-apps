@@ -15,9 +15,8 @@ def config_section_data():
     config_data = u"""[fn_grpc_interface]
 interface_dir=<<path to the parent directory of your Protocol Buffer (pb2) files>>
 
-# The following are all OPTIONAL if filled in by function parameters the function values take precendence over these config values
+# The channel is OPTIONAL if filled in by function parameters the function value takes precendence over the config value
 # grpc_channel=<<host>>:<<port>> 
-# grpc_function=<<the name of the package>>:<<the function to call>>
 
 # 'package_name' is a CSV list of length 3, where each possible value is described in the documentation
 # <<package_name>>=<<communication_type>>, <<secure connection type>>, <<certificate_path or google API token>>

@@ -39,14 +39,12 @@ class FunctionComponent(ResilientComponent):
             # Initialising grpc helper class
             grpc_helper_obj = GrpcHelperClass(logger_object=log)
 
-            # Get the function parameters (function params take precedence, take from config if not)
+            # Get the function parameters (function params take precedencefor channel, take from config if not present)
             grpc_channel = kwargs.get("grpc_channel")  # channel info
-            grpc_function = kwargs.get("grpc_function")  # function name
             if not grpc_channel:
                 grpc_channel = self.options.get("grpc_channel")
-            if not grpc_function:
-                grpc_function = self.options.get("grpc_function")
 
+            grpc_function = kwargs.get("grpc_function")  # function name
             grpc_function_data = kwargs.get("grpc_function_data")  # function data
 
             # Supported Communication types

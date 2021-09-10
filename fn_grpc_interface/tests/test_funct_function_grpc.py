@@ -13,7 +13,6 @@ FUNCTION_NAME = "function_grpc"
 config_data = """[fn_grpc_interface]
 interface_dir=fn_grpc_interface/tests/data/
 grpc_channel=localhost:50051
-grpc_function=helloworld:SayHello(HelloRequest)
 helloworld=unary,None,None
 """
 
@@ -54,6 +53,7 @@ class TestFunctionGrpc:
         assert func is not None
 
     mock_inputs_1 = {
+        "grpc_function": "helloworld:SayHello(HelloRequest)",
         "grpc_function_data": "{\"name\": \"tester\"}"
     }
     expected_results_1 = {
