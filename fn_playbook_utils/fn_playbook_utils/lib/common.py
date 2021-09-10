@@ -64,7 +64,7 @@ def parse_inputs(restclient, fn_inputs):
 
     # need at least min_id or min_date to avoid excessive calls
     if not (min_id or min_date):
-        raise ValueError("Either pb_min_incident_id or pb_min_incident_date required")
+        raise ValueError("Either 'Min Incident Id' or 'Min Incident Date' is required")
 
     # if ids are missing and at least one date is available
     if not (min_id and max_id) and (min_date or max_date):
