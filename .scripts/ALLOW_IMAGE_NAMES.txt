@@ -47,6 +47,7 @@ fn_microsoft_sentinel
 fn_misp
 fn_mitre_integration
 fn_mxtoolbox
+fn_odbc_query
 fn_outbound_email
 fn_pa_panorama
 fn_pagerduty
@@ -92,7 +93,6 @@ fn_zia
 #Not_Rebuilt
 #fn_aws_guardduty-failing-test
 #fn_crowdstrike_falcon-still-root-group
-#fn_odbc_query-still-root-group
 #rc-data-feed
 #rc-data-feed-plugin-elasticfeed
 #rc-data-feed-plugin-kafkafeed
