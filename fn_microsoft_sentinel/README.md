@@ -65,7 +65,6 @@
 This app allows bi-directional synchronization between IBM SOAR and Microsoft Sentinel.
 Sentinel entities are exposed as artifacts for further investigation.
 
-
 ### Key Features
 <!--
   List the Key Features of the Integration
