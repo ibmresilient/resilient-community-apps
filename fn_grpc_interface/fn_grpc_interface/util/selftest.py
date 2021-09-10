@@ -53,28 +53,20 @@ def selftest_function(opts):
 def _check_config_data(app_configs):
     # Parsing the service configuration data
 
-    _grpc_interface_file_dir = app_configs.get('interface_dir')
-    if not _grpc_interface_file_dir:
+    try:
+        _grpc_interface_file_dir = app_configs.pop("interface_dir")
+    except Exception as e:
         raise ValueError("'interface_dir' is not defined in the app.config file")
-    _grpc_channel = app_configs.get('grpc_channel')
 
-    # get package_name list from config
-    package_names = list(app_configs.keys())
-    
-    # remove 'interface_dir' from config list to isolate package names
-    _i = package_names.index('interface_dir')
-    package_names = package_names[0:_i] + package_names[_i+1:]
-
-    if _grpc_channel:
-        _i = package_names.index('grpc_channel')
-        package_names = package_names[0:_i] + package_names[_i+1:]
-    else:
+    try:
+        _grpc_channel = app_configs.pop("grpc_channel")
+    except Exception as e:
         log.info("No grpc_channel config found. Make sure you enter the channel info when invoking the grpc function.")
 
-    if len(package_names) == 0:
+    if len(app_configs) == 0:
         raise ValueError("No configurations found in the app.config file")
 
-    for _grpc_package_name in package_names:
+    for _grpc_package_name in app_configs:
         service_config_data = app_configs.get(_grpc_package_name)
         
         try:
@@ -86,7 +78,7 @@ def _check_config_data(app_configs):
         except Exception:
             raise ValueError("""Failed to parse the configurations for '{0}' in the app.config file. Ensure it is in the correct CSV format. e.g. {0}=unary,None,None""".format(_grpc_package_name))
 
-    return package_names, _grpc_interface_file_dir, _grpc_channel
+    return app_configs.keys(), _grpc_interface_file_dir, _grpc_channel
 
 def _check_files(grpc_helper_obj, _grpc_interface_file_dir, package_names):
     for _grpc_package_name in package_names:
