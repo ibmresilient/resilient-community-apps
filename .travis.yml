@@ -6,6 +6,7 @@ env:
     - PATH_ALLOW_IMAGE_NAMES="$TRAVIS_BUILD_DIR/.scripts/ALLOW_IMAGE_NAMES.txt"
     - PATH_PIP_REQ_MAIN="$TRAVIS_BUILD_DIR/.scripts/requirements_main.txt"
     - PATH_PIP_REQ_TESTS="$TRAVIS_BUILD_DIR/.scripts/requirements_tests.txt"
+    - FILE_NAME_EXTRA_SETUP=".travis_extra_setup.sh"
     - SCRIPTS_DIR="$TRAVIS_BUILD_DIR/.scripts"
 
     - ARTIFACTORY_BASE_URL="https://na.$ARTIFACTORY_URL/artifactory"

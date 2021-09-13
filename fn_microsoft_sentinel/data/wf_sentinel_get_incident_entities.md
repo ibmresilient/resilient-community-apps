@@ -24,13 +24,15 @@ inputs.sentinel_profile = incident.properties.sentinel_profile
 
 ### Post-Processing Script
 ```python
-import time
+from java.util import Date
+
+current_dt = Date().getTime()
 
 if results.success:
   for alert in results.content.keys():
       for entity in results.content[alert]:
         row = incident.addRow("sentinel_incident_entities")
-        row['report_date'] = int(time.time()*1000)
+        row['report_date'] = current_dt
         row['alert_id'] = alert
         row['entity_id'] = entity['name']
         row['entity_type'] = entity['kind']
@@ -41,7 +43,7 @@ if results.success:
         desc = ["created from Sentinel entity: {}".format(entity['name'])]
         if entity['properties'].get('azureID'):
           desc.append(entity['properties']['azureID'])
-        incident.addArtifact(entity['resilient_artifact_type'][0], entity['resilient_artifact_type'][1], "\n".join(desc))
+        incident.addArtifact(entity['resilient_artifact_type'], entity['resilient_artifact_value'], "\n".join(desc))
 
 ```
 

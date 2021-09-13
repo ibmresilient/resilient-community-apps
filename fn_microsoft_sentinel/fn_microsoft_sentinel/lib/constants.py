@@ -3,7 +3,7 @@
 # (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
 
 # headers for comments
-FROM_SENTINEL_COMMENT_HDR = "From Senintel"
+FROM_SENTINEL_COMMENT_HDR = "From Sentinel"
 FROM_SOAR_COMMENT_HDR = "From IBM SOAR"
 
 SENT_TO_SENTINEL_HDR = "Sent to Sentinel"

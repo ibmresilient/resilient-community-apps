@@ -32,6 +32,13 @@ class FunctionComponent(ResilientComponent):
 
         self.template_file_path = self.smtp_config_section.get('template_file')
         self.smtp_user = self.smtp_config_section.get("smtp_user")
+        self.from_email_address = self.smtp_config_section.get("from_email_address", self.smtp_user)
+
+        if "@" not in self.from_email_address:
+            if "@" not in self.smtp_user:
+                raise IntegrationError("no sender address specified")
+            else:
+                self.from_email_address = self.smtp_user
 
         if self.template_file_path and not os.path.exists(self.template_file_path):
             LOG.error(u"Template file '%s' not found.", self.template_file_path)
@@ -47,8 +54,8 @@ class FunctionComponent(ResilientComponent):
         """Function: Send Email"""
 
         def conditional_parameters(mail_body_text):
-            if self.smtp_config_section.get("smtp_ssl_mode") == DEFAULT_TLS_SMTP and self.smtp_user is not None:
-                mail_from = self.smtp_user
+            if self.smtp_config_section.get("smtp_ssl_mode") == DEFAULT_TLS_SMTP:
+                mail_from = self.from_email_address
             else:
                 mail_from = kwargs.get("mail_from")  # text
 
@@ -66,8 +73,8 @@ class FunctionComponent(ResilientComponent):
                     else:
                         jinja = True
 
-            if self.smtp_user and not kwargs.get("mail_to"):
-                mail_to = self.smtp_user
+            if self.from_email_address and not kwargs.get("mail_to"):
+                mail_to = self.from_email_address
             else:
                 mail_to = kwargs.get("mail_to")
             email_message = None
@@ -227,7 +234,6 @@ class FunctionComponent(ResilientComponent):
         all_attach and LOG.debug(u"Attachments to include: %s", u",".join(all_attach))
 
         return all_attach
-
 
 class SimpleSendEmailException(Exception):
     """Exception for Send Email errors"""
