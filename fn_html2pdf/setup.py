@@ -2,19 +2,37 @@
 # -*- coding: utf-8 -*-
 
 from setuptools import setup, find_packages
+import glob
+import ntpath
+
+
+def get_module_name(module_path):
+    """
+    Return the module name of the module path
+    """
+    return ntpath.split(module_path)[1].split(".")[0]
+
+
+def snake_to_camel(word):
+    """
+    Convert a word from snake_case to CamelCase
+    """
+    return ''.join(x.capitalize() or '_' for x in word.split('_'))
+
 
 setup(
     name='fn_html2pdf',
-    version='1.0.0',
+    version='1.1.0',
     license='MIT',
-    author='Resilient Labs',
-    author_email='resil.labs@gmail.com',
-    description="Resilient Circuits Components for 'fn_html2pdf'",
+    author='IBM SOAR',
+    author_email='',
+    url="http://ibm.biz/soarcommunity",
+    description="Convert HTML to a PDF",
     long_description="Convert HTML data into a base64 encoded PDF documnent. Alternatively, provide a URL to a website.",
     install_requires=[
         'resilient_circuits>=30.0.0',
         'pika',
-        'weasyprint'
+        'weasyprint<53.0'
     ],
     packages=find_packages(),
     include_package_data=True,
@@ -24,9 +42,10 @@ setup(
     ],
     entry_points={
         "resilient.circuits.components": [
-            "Html2PdfFunctionComponent = fn_html2pdf.components.html2pdf:FunctionComponent"
+            "{}FunctionComponent = fn_html2pdf.components.{}:FunctionComponent".format(snake_to_camel(get_module_name(filename)), get_module_name(filename)) for filename in glob.glob("./fn_html2pdf/components/[a-zA-Z]*.py")
         ],
         "resilient.circuits.configsection": ["gen_config = fn_html2pdf.util.config:config_section_data"],
-        "resilient.circuits.customize": ["customize = fn_html2pdf.util.customize:customization_data"]
+        "resilient.circuits.customize": ["customize = fn_html2pdf.util.customize:customization_data"],
+        "resilient.circuits.selftest": ["selftest = fn_html2pdf.util.selftest:selftest_function"]
     }
 )

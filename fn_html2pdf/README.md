@@ -13,6 +13,8 @@ To import into Resilient, run:
 
 	resilient-circuits customize -l fn_html2pdf
 
+This function relies on weasyprint, a python library. This will be installed with the steps above, however, that library requires OS specific software to run. See details [here](https://doc.courtbouillon.org/weasyprint/stable/first_steps.html) for your integration server's operating system to install.
+
 After installation, the function will be available by running 
 
 	resilient-circuits run

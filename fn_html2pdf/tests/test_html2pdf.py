@@ -6,6 +6,7 @@ import os
 import pytest
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
+from difflib import SequenceMatcher
 
 PACKAGE_NAME = "fn_html2pdf"
 FUNCTION_NAME = "fn_html2pdf"
@@ -51,4 +52,5 @@ class TestUtilitiesHtml2Pdf:
             expected = file.read()
 
         print (results)
-        assert expected == results.get('content')
+        ratio = SequenceMatcher(a=expected, b=results.get('content')).ratio()
+        assert ratio > 0.95 # weasyprint can render files slightly differently from run to run. thus must check for over 95% match
