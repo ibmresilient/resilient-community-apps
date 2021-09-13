@@ -62,7 +62,7 @@ def dict_to_json_str(d):
 
 # Define Inputs assuming grpc_channel is defined in app.config
 
-# The gRPC Function
+# The gRPC Function to call
 inputs.grpc_function = "helloworld:SayHello(HelloRequest)"
 
 # The gRPC Function Request Data
