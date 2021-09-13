@@ -228,7 +228,6 @@
   "geos": null,
   "groups": null,
   "id": 23,
-  "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
