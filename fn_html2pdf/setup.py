@@ -34,6 +34,7 @@ setup(
         'pika',
         'weasyprint<53.0'
     ],
+    python_requires='>=3', # weasyprint no longer supports python27 so we're moving to py3 only
     packages=find_packages(),
     include_package_data=True,
     platforms='any',

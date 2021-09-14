@@ -32,6 +32,7 @@ def call_utilities_html2pdf_function(circuits, function_params, timeout=10):
 class TestUtilitiesHtml2Pdf:
     """ Tests for the utilities_html2pdf function"""
 
+    @pytest.mark.livetest
     @pytest.mark.parametrize("html2pdf_data, html2pdf_data_type, html2pdf_stylesheet, expected_results", [
         ("<table border=\"1\"><tr><th>key10</th><td><table border=\"1\"><tr><th>key20</th><td><table border=\"1\"><tr><th>a</th><td>a1</td></tr><tr><th>b</th><td>b1</td></tr><tr><th>key30</th><td><ul><li>1</li><li>2</li><li>3</li><li>4</li></ul></td></tr></table></td></tr></table></td></tr></table>",
          "string", None, "data/html2pdf/no_stylesheet.b64"),
