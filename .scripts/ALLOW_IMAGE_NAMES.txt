@@ -25,6 +25,7 @@ fn_email_header_validation
 fn_exchange
 fn_exchange_online
 fn_geocoding
+fn_google_cloud_dlp
 fn_greynoise
 fn_hibp
 fn_icdx
@@ -113,7 +114,6 @@ rc-cts-urlscanio
 #fn_digital_shadows_search
 #fn_docker
 #fn_floss
-#fn_google_cloud_dlp
 #fn_google_cloud_functions
 #fn_google_maps_directions
 #fn_grpc_interface
