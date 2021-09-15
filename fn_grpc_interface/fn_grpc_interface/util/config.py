@@ -14,22 +14,10 @@ def config_section_data():
 
     config_data = u"""[fn_grpc_interface]
 interface_dir=<<path to the parent directory of your Protocol Buffer (pb2) files>>
-
 # The channel is OPTIONAL if filled in by function parameters the function value takes precendence over the config value
-# grpc_channel=<<host>>:<<port>> 
-
+#grpc_channel=<<host>>:<<port>> 
 # 'package_name' is a CSV list of length 3, where each possible value is described in the documentation
-# <<package_name>>=<<communication_type>>, <<secure connection type>>, <<certificate_path or google API token>>
+#<<package_name>>=<<communication_type>>, <<secure connection type>>, <<certificate_path or google API token>>
 
-# ------- #
-# Note: to setup, in your interface_dir, create a sub-directory that has
-# the same name as your package, and copy the Protocol Buffer pb2 files
-# into that directory.
-#
-# If the package_name was 'helloworld', your app.config would look like:
-# [fn_grpc_interface]
-# interface_dir=/home/admin/integrations/grpc_interface_files
-# grpc_channel=localhost:50051
-# helloworld=unary, None, None
-# ------- #"""
+"""
     return config_data

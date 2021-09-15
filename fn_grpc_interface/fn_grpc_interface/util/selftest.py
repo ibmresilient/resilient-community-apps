@@ -61,10 +61,10 @@ def _check_config_data(app_configs):
     try:
         _grpc_channel = app_configs.pop("grpc_channel")
     except Exception as e:
-        log.info("No grpc_channel config found. Make sure you enter the channel info when invoking the grpc function.")
+        raise ValueError("'grpc_channel' is not defined in the app.config file. Make sure you enter the channel info when invoking the grpc function.")
 
     if len(app_configs) == 0:
-        raise ValueError("No configurations found in the app.config file")
+        raise ValueError("No package configurations found in the app.config file")
 
     for _grpc_package_name in app_configs:
         service_config_data = app_configs.get(_grpc_package_name)
@@ -84,11 +84,6 @@ def _check_files(grpc_helper_obj, _grpc_interface_file_dir, package_names):
     for _grpc_package_name in package_names:
         module_files = grpc_helper_obj.get_interface_file_names(_grpc_interface_file_dir, _grpc_package_name)
 
-        # Removing __pycache__ directory from module list since it's not required
-        if "__pycache__" in module_files:
-            pycache_index = module_files.index("__pycache__")
-            module_files.pop(pycache_index)
-
         if not module_files:
             raise ValueError("No gRPC protocol buffer files found in your interface_dir for the service '{0}'. Please copy the {0}_pb2.py and {0}_pb2_grpc.py files to your interface_dir".format(_grpc_package_name))
         else:
@@ -97,8 +92,7 @@ def _check_files(grpc_helper_obj, _grpc_interface_file_dir, package_names):
                     raise ValueError("Invalid file '{0}' found in your interface_dir for the service '{1}'.Please only copy the {1}_pb2.py and {1}_pb2_grpc.py files to your interface_dir".format(file_name, _grpc_package_name))
 
 def _check_connection(channel):
-    if channel:
-        try:
-            channel_object = grpc.insecure_channel(channel)
-        except Exception as e:
-            raise ValueError("Given channel '{0}' failed to connect. Make sure 'grpc_channel' details are correct.")
+    try:
+        channel_object = grpc.insecure_channel(channel)
+    except Exception as e:
+        raise ValueError("Given channel '{0}' failed to connect. Make sure 'grpc_channel' details are correct.")

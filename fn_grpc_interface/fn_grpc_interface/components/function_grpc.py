@@ -43,6 +43,9 @@ class FunctionComponent(ResilientComponent):
             grpc_channel = kwargs.get("grpc_channel")  # channel info
             if not grpc_channel:
                 grpc_channel = self.options.get("grpc_channel")
+                
+            if not grpc_channel:
+                raise ValueError("No configuration for grpc_channel found in function arguments nor app configuration settings.")
 
             grpc_function = kwargs.get("grpc_function")  # function name
             grpc_function_data = kwargs.get("grpc_function_data")  # function data
