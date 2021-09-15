@@ -150,7 +150,7 @@ Function that allows you to call a gRPC Service that is being served on your Int
 | ---- | :--: | :------: | ------- | ------- |
 | `grpc_function` | `text` | Yes | `"helloworld:SayHello(HelloRequest)"` | This fields contains data from .proto file i.e package_name : rpc function name(grpc request function) ex: helloword : SayHello(HelloRequest).|
 | `grpc_function_data` | `JSON String` | Yes | `'{ "name": "Joe Bloggs" }'` | Additional data Fields to send data from client to server. data format will be in json and key should match the request function parameter. |
-| `grpc_channel` | `text` | No | `"localhost:50051"` | this field contain the channel info of the GRPC Server Running ex:hostIP:Port. This value takes precendence over value set in app.config |
+| `grpc_channel` | `text` | No | `"<host>:<port>"` | this field contain the channel info of the GRPC Server Running ex:hostIP:Port. This value takes precendence over value set in app.config |
 
 >**NOTE:** the `grpc_function` is derived from your `.proto` files like the `helloworld.proto` example:
 >
