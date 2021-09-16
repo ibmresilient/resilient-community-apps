@@ -26,6 +26,7 @@ fn_exchange
 fn_exchange_online
 fn_geocoding
 fn_greynoise
+fn_grpc_interface
 fn_hibp
 fn_html2pdf
 fn_icdx
@@ -118,7 +119,6 @@ rc-cts-urlscanio
 #fn_google_cloud_dlp
 #fn_google_cloud_functions
 #fn_google_maps_directions
-#fn_grpc_interface
 #fn_grr_search
 #fn_log_capture
 #fn_machine_learning
