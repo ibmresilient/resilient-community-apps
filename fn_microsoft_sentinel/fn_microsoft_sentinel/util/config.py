@@ -38,7 +38,7 @@ resource_groupname=
 max_alerts=
 # comma separated list of fields to filter incidents to create
 #  if more than one field is specified, all fields need to pass
-#   format: "field1": value: "field2": ["list_value1", "list_value2"]
+#   format: "field1": "value", "field2": ["list_value1", "list_value2"]
 new_incident_filters="status": ["New", "Active"],"severity": ["High", "Medium","Low"]
 # custom templates to replace the default map of sentinel fields to resilient incident fields
 #create_incident_template=

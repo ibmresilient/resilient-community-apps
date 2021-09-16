@@ -259,7 +259,7 @@ def get_profile_filters(str_filters):
     try:
         return json.loads(u"{{ {0} }}".format(str_filters))
     except json.decoder.JSONDecodeError as err:
-        LOG.error('Incorrect format for new_incident_filters, syntax: "field1": "value, "field2": ["value1", "value2"] :%s',
+        LOG.error('Incorrect format for new_incident_filters, syntax: "field1": "value", "field2": ["value1", "value2"] :%s',
                   err)
 
 def check_incident_filters(sentinel_incident, new_incident_filters):
