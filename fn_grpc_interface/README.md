@@ -135,7 +135,7 @@ The following table provides the settings you need to configure the app. These s
 | ------ | :------: | ------- | ----------- |
 | `interface_dir=<<path_to_dir>>` | Yes | interface_dir=/var/rescircuits/interface_dir | The path to the parent directory of your Protocol Buffer (pb2) files. There must be a directory with name `package_name` within your `interface_dir` for the function to execute properly.|
 |`<<package_name>>=<<communication_type>>, <<secure_connection_type>>,<<certificate_path or google_API_token>>`| Yes |helloworld=unary,None,None| *package_name:* Define one `package_name` per line. Within the `interface_dir`, create a directory with the same name as `package_name` where the client Protocol Buffer files will reside. <br><br>*communication_type:* Currently we only support Unary RPCs so this value must be - `unary`. For further information, refer to https://grpc.io/docs/guides/concepts.html <br><br>*secure_connection:* We currently support `SSL` or `TLS` secure connections. This value can be `SSL`, `TLS` or `None`. If SSL/TLS, ensure you provide a `certificate_path`<br><br>*certificate_path/google token:* If `secure_connection` is defined, specify either a path to the certificate file or the token provided by Google|
-|`grpc_channel`| No | `grpc_channel=<>:<>` | The channel for grpc to listen on. This value is superceeded by any value passed to the function. If the value is omitted from the function call the value in the configuration is used. |
+|`grpc_channel`| No | `grpc_channel=<host>:<port>` | The channel for grpc to listen on. This value is superceeded by any value passed to the function. If the value is omitted from the function call the value in the configuration is used. |
 
 > Note: The structure of the directories is very rigid. Please read the descriptions above carefully before installing. If installing on App Host use the "Configurations" page to add in your package files. If installing on App Host you must host your gRPC server somewhere other than `localhost`.
 ---
@@ -150,7 +150,7 @@ Function that allows you to call a gRPC Service that is being served on your Int
 | ---- | :--: | :------: | ------- | ------- |
 | `grpc_function` | `text` | Yes | `"helloworld:SayHello(HelloRequest)"` | This fields contains data from .proto file i.e package_name : rpc function name(grpc request function) ex: helloword : SayHello(HelloRequest).|
 | `grpc_function_data` | `JSON String` | Yes | `'{ "name": "Joe Bloggs" }'` | Additional data Fields to send data from client to server. data format will be in json and key should match the request function parameter. |
-| `grpc_channel` | `text` | No | `"<host>:<port>"` | this field contain the channel info of the GRPC Server Running ex:hostIP:Port. This value takes precendence over value set in app.config |
+| `grpc_channel` | `text` | No | `"<host>:<port>"` | this field contain the channel info of the GRPC Server Running ex: hostIP:Port. This value takes precendence over value set in app.config |
 
 >**NOTE:** the `grpc_function` is derived from your `.proto` files like the `helloworld.proto` example:
 >
