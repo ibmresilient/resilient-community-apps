@@ -665,6 +665,11 @@ If your Sentinel login users differ from SOAR users, modify the `owner_id` mappi
     "sentinel_incident_tactics": "{{ properties.additionalData.tactics|join(' ') }}",
     "sentinel_profile": "{{ resilient_profile }}"
   }
+  {% if properties.status == "Closed" %}
+  ,
+  "resolution_id": "Resolved",
+  "resolution_summary": "Closed by Sentinel"
+  {%endif %}
 }
 ```
 

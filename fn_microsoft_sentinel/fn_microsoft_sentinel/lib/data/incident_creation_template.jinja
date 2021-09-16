@@ -24,4 +24,9 @@
     "sentinel_incident_tactics": "{{ properties.additionalData.tactics|join(' ') }}",
     "sentinel_profile": "{{ resilient_profile }}"
   }
+  {% if properties.status == "Closed" %}
+  ,
+  "resolution_id": "Resolved",
+  "resolution_summary": "Closed by Sentinel"
+  {%endif %}
 }
