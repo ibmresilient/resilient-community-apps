@@ -183,6 +183,8 @@ Get information on workflows run on a given incident or for a range of incidents
 | `pb_object_type` | `string` | `-` | type of object which the analysis is performed: 'artifact', 'attachment' and 'task'. |
 | `pb_object_name` | `string` | `-` | name of object which the analysis is performed. |
 
+Notes:
+* pb_min_incident_data and pb_max_incient_data are in GMT time and comparisons to an incident's create date are also performed using GMT timestamps.
 
 </p>
 </details>
