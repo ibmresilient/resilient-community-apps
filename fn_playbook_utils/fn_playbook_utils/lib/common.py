@@ -2,7 +2,7 @@
 #(c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
 #pragma pylint: disable=unused-argument, no-self-use, line-too-long
 import logging
-import defusedxml as ET
+import defusedxml.ElementTree as ET
 from resilient import SimpleHTTPException
 
 LOG = logging.getLogger(__name__)
@@ -222,7 +222,7 @@ def get_process_elements(xml, action_map=ACTION_MAP):
         action_map ([list], optional): [list of elements to extract]. Defaults to ACTION_MAP.
     """
     # parse the xml
-    tree = ET.ElementTree.fromstring(xml)
+    tree = ET.fromstring(xml)
 
     results = {}
     # walk the xml looking for the content we want
