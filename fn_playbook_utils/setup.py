@@ -32,7 +32,8 @@ setup(
     long_description="""This app includes functions to mine information about workflow and playbook usage across incidents so that an enterprise can learn the best practices on past threat intelligence and actions performed.""",
     install_requires=[
         "resilient-circuits>=41.0.0",
-        "cachetools"
+        "cachetools",
+        "defusedxml"
     ],
     python_requires='>=3.6',
     packages=find_packages(),
