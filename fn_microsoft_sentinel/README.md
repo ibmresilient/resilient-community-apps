@@ -187,7 +187,7 @@ For each profile:
 | **workspace_name** | Yes | `` | *workspace name for incident access.* |
 | **resource_groupname** | Yes | `` | *resource group for incident access.* |
 | **new_incident_filters** | Yes | `"status": ["New", "Active"],"severity": ["High", "Medium","Low"]` | *Set of filters to apply when escalating incidents to Resilient SOAR. Incidents not matching the criteria are not synchronized. In this example, both a match of status and severity would be required. * |
-| **max_alerts** | 10 | *limit the number of incident alerts returned to the first n alerts or leave blank for all alerts* |
+| **max_alerts** | 10 | *limit the number of alerts per sentinel incident to the first n alerts or leave blank for all alerts* |
 | **create_incident_template** | /user/path/to/create_incident_template.jinja | Customer supplied template for mapping Sentinel Incident fields to an Resilient incident. If not specified, a default template is used. |
 | **update_incident_template** | /user/path/to/update_incident_template.jinja | Customer supplied template for mapping Sentinel Incident fields to an Resilient incident. If not specified, a default template is used. |
 | **close_incident_template** | /user/path/to/close_incident_template.jinja | Customer supplied template for mapping Sentinel Incident fields to an Resilient incident. If not specified, a default template is used. This is useful when a customer customizes the fields used when closing an incident. |
