@@ -43,6 +43,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 1.0.1 | 09/2021 | Datatable presentation fixes |
 | 1.0.0 | 08/2021 | Initial Release |
 
 ---
