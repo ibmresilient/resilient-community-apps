@@ -15,6 +15,7 @@ PACKAGE_NAME = "fn_microsoft_defender"
 INDICATOR_URL = "api/indicators"
 MACHINES_URL = "api/machines"
 MACHINE_ACTIONS_URL = "api/machineactions"
+MACHINE_RECOMMENDATIONS_URL = "api/machines/{}/vulnerabilities"
 PACKAGE_URI = "GetPackageUri"
 FILES_URL = "api/files/{}/machines"
 MACHINES_FILTER = {

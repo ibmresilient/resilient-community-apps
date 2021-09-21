@@ -29,6 +29,8 @@ inputs.defender_indicator_action = str(rule.properties.indicator_action)
 
 ### Post-Processing Script
 ```python
+import java.util.Date as Date
+
 msg = u"Action {}.\nAction: {}\nArtifact: {}\nTitle: {}\nComment: {}\nSeverity: {}\nExpiration: {}"\
    .format("successful" if results.success else "unsuccessful",
            str(rule.properties.indicator_action),
@@ -45,6 +47,7 @@ incident.addNote(msg)
 
 if results.success:
     row = incident.addRow("defender_atp_indicators")
+    row['report_date'] = Date().getTime()
     row['ind_id'] = results.content['id']
     row['ind_value'] = results.content['indicatorValue']
     row['ind_type'] = results.content['indicatorType']
@@ -55,6 +58,7 @@ if results.success:
     row['ind_created_by'] = results.content['createdByDisplayName']
     row['ind_creation_date'] = results.content['creationTimeDateTimeUtc_ts']
     row['ind_expiration_date'] = results.content['expirationTime_ts']
+    row['status'] = 'Active'
 
 ```
 

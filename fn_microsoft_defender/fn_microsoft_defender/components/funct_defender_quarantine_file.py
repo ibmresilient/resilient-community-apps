@@ -33,8 +33,8 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Starting 'defender_quarantine_file'")
             validate_fields(["tenant_id", "client_id", "app_secret"], self.options)
             validate_fields(["defender_machine_id",
-                             "defender_description",
-                             "defender_indicator_value"], kwargs)
+                            "defender_description",
+                            "defender_indicator_value"], kwargs)
 
             # Get the function parameters:
             defender_description = kwargs.get("defender_description")  # text

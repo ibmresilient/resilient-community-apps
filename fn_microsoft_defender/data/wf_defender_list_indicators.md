@@ -23,9 +23,12 @@ None
 
 ### Post-Processing Script
 ```python
+import java.util.Date as Date
+
 if results.success and results.content.get("value"):
     for indicator in results.content.get("value"):
         row = incident.addRow("defender_atp_indicators")
+        row['report_date'] = Date().getTime()
         row['ind_id'] = indicator['id']
         row['ind_value'] = indicator['indicatorValue']
         row['ind_type'] = indicator['indicatorType']
@@ -36,6 +39,7 @@ if results.success and results.content.get("value"):
         row['ind_created_by'] = indicator['createdByDisplayName']
         row['ind_creation_date'] = indicator['creationTimeDateTimeUtc_ts']
         row['ind_expiration_date'] = indicator['expirationTime_ts']
+        row['status'] = 'Active'
 else:
     msg = u"Defender ATP Action unsuccessful.\nAction: List indicators\nReason: {}".format(results.reason)
     incident.addNote(msg)

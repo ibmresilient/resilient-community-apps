@@ -29,6 +29,8 @@ inputs.defender_indicator_value = row['ind_value']
 
 ### Post-Processing Script
 ```python
+import java.util.Date as Date
+
 msg = u"Action {}.\nAction: {}\nArtifact: {}\nTitle: {}\nComment: {}\nSeverity: {}\nExpiration: {}"\
    .format("successful" if results.success else "unsuccessful",
            str(rule.properties.indicator_action),
@@ -44,6 +46,7 @@ if not results.success:
 incident.addNote(msg)
 
 if results.success:
+    row['report_date'] = Date().getTime()
     row['ind_title'] = results.content['title']
     row['ind_description'] = results.content['description']
     row['ind_action'] = results.content['action']

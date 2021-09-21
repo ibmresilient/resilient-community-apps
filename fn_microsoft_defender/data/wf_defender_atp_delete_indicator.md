@@ -23,7 +23,7 @@ inputs.defender_indicator_id = row['ind_id']
 
 ### Post-Processing Script
 ```python
-import time
+import java.util.Date as Date
 
 msg = u"Defender ATP Action {}.\nAction: Delete Indicator\nIndicator: {}"\
    .format("successful" if results.success else "unsuccessful",
@@ -31,7 +31,8 @@ msg = u"Defender ATP Action {}.\nAction: Delete Indicator\nIndicator: {}"\
            )
            
 if results.success:
-  row['report_date'] = int(time.time()*1000)
+  row['report_date'] = Date().getTime()
+  row['status'] = 'Inactive'
 else:
   msg = u"{}\nReason: {}".format(msg, results.reason)
 
