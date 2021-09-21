@@ -104,6 +104,7 @@ class DefenderPollerComponent(ResilientComponent):
         """ This is the main logic of the poller
             Search for Defender alerts and create associated cases in Resilient SOAR
         """
+        poller_start = datetime.datetime.utcnow()
         try:
             # call Defender for recently updated/created alerts
             result, status, reason  = self.defender_client.query_alerts(self.last_poller_time)
@@ -115,7 +116,7 @@ class DefenderPollerComponent(ResilientComponent):
             LOG.error(traceback.format_exc())
         finally:
             # set the last poller time for next cycle
-            self.last_poller_time = datetime.datetime.utcnow()
+            self.last_poller_time = poller_start
             # We always want to reset the timer to wake up, no matter failure or success
             self.fire(PollCompleted())
 
