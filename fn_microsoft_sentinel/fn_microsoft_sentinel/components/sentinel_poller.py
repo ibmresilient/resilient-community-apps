@@ -102,6 +102,7 @@ class SentinelPollerComponent(ResilientComponent):
         try:
             # call Sentinel for each profile to get the incident list
             for profile_name, profile_data in self.sentinel_profiles.get_profiles().items():
+                poller_start = datetime.datetime.utcnow()
                 try:
                     LOG.info("polling profile: %s", profile_name)
                     result, status, reason  = self.sentinel_client.query_incidents(profile_data)
@@ -124,7 +125,7 @@ class SentinelPollerComponent(ResilientComponent):
 
                 finally:
                     # set the last poller time for next cycle
-                    profile_data['last_poller_time'] = datetime.datetime.utcnow()
+                    profile_data['last_poller_time'] = poller_start
 
         except Exception as err:
             LOG.error(str(err))

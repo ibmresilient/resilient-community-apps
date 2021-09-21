@@ -26,6 +26,7 @@ def codegen_reload_data():
         "actions": [u"Sentinel Comment Sync", u"Sentinel Get Incident Alerts", u"Sentinel Get Incident Comments", u"Sentinel Get Incident Entities", u"Sentinel Incident Sync", u"Sentinel Update Incident"],
         "incident_fields": [u"sentinel_incident_assigned_to", u"sentinel_incident_classification", u"sentinel_incident_classification_comment", u"sentinel_incident_classification_reason", u"sentinel_incident_id", u"sentinel_incident_labels", u"sentinel_incident_number", u"sentinel_incident_status", u"sentinel_incident_tactics", u"sentinel_incident_url", u"sentinel_profile"],
         "incident_artifact_types": [],
+        "incident_types": [],
         "datatables": [u"sentinel_incident_alerts", u"sentinel_incident_entities"],
         "automatic_tasks": [],
         "scripts": []

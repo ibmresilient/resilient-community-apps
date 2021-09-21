@@ -34,7 +34,7 @@ sentinel_profiles=profile_a
 subscription_id=aaa-bbb-fff
 workspace_name=
 resource_groupname=
-# limit the number of incident alerts returned, in ascending order
+# limit the number of alerts per sentinel incident returned, in ascending order
 max_alerts=
 # comma separated list of fields to filter incidents to create
 #  if more than one field is specified, all fields need to pass
