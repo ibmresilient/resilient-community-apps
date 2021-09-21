@@ -26,7 +26,6 @@ class PassiveTotalSearcher(BaseComponent):
 
     def __init__(self, opts):
         super(PassiveTotalSearcher, self).__init__(opts)
-        LOG.debug(opts)
         self.options = opts.get(self.CONFIG_SECTION, {})
 
     # Register this as an async searcher for the URL /<root>/example

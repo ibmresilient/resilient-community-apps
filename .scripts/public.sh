@@ -30,6 +30,7 @@ fn_anomali_staxx
 fn_ansible
 fn_ansible_tower
 fn_apility
+fn_aws_guardduty
 fn_api_void
 fn_aws_iam
 fn_aws_utilities

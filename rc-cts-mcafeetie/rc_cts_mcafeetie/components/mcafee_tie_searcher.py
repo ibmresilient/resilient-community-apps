@@ -46,8 +46,7 @@ class McAfeeTieSearcher(BaseComponent):
 
     def __init__(self, opts):
         super(McAfeeTieSearcher, self).__init__(opts)
-        LOG.debug(opts)
-
+        
         try:
             config = opts.get("mcafee").get(self.config_file)
             if config is None:

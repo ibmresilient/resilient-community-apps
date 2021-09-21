@@ -5,8 +5,9 @@
 """
 
 import logging
-from watson_developer_cloud import LanguageTranslatorV3
-from watson_developer_cloud.watson_service import WatsonApiException
+from ibm_watson import LanguageTranslatorV3
+from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
+from ibm_cloud_sdk_core import ApiException
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
@@ -20,18 +21,17 @@ def selftest_function(opts):
     """
     options = opts.get("fn_watson_translate", {})
 
-    language_translator = LanguageTranslatorV3(
-        version=options["fn_watson_translate_version"],
-        iam_apikey=options["fn_watson_translate_api"],
-        url=options["fn_watson_translate_url"]
-    )
+    authenticator = IAMAuthenticator(options["fn_watson_translate_api"])
+    language_translator = LanguageTranslatorV3(version=options["fn_watson_translate_version"],
+                                               authenticator=authenticator)
+    language_translator.set_service_url(options["fn_watson_translate_url"])
 
     try:
         source_lang_query = language_translator.identify("hello world")
 
-        if source_lang_query.status_code == 200:
+        if source_lang_query.get_status_code() == 200:
             return {"state": "success", "status_code": source_lang_query.status_code }
         else:
             return {"state": "failure", "status_code": source_lang_query.status_code }
-    except WatsonApiException as e:
-        return {"state": "failure", "status_code": e}
+    except ApiException as e:
+        return {"state": "failure", "status_code": str(e)}

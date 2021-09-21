@@ -7,15 +7,15 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_outbound_email',
-    version='1.2.1',
+    version='1.3.0',
     license='MIT',
     author='IBM Resilient',
     url='https://github.com/ibmresilient/resilient-community-apps/tree/master/fn_outbound_email',
     description="Resilient Circuits Components for 'fn_outbound_email'",
     long_description="Resilient Circuits Components for 'fn_outbound_email'",
     install_requires=[
-        'resilient_circuits',
-        'resilient_lib',
+        'resilient_circuits>=39.0.0',
+        'resilient_lib>=32.0.0',
         'Jinja2>=2.9.6',
         'six'
     ],
