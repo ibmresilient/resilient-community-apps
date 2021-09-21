@@ -171,7 +171,7 @@ inputs.pb_max_incident_date = rule.properties.pb_max_incident_date
 ### Post-Processing Script
 ```python
 INCIDENT_URL = "<a href='/#incidents/{0}'>{0}</a>"
-OBJECT_TYPES = ['incident', 'task', 'artifact', 'attachment']
+OBJECT_TYPES = ['incident', 'task', 'artifact', 'attachment', 'note', 'milestone']
 wf_stats = {}
 object_stats = { object: {} for object in OBJECT_TYPES }
 

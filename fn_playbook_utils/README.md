@@ -31,6 +31,7 @@
   - [Custom Layouts](#custom-layouts)
 - [Function - PB: Get workflow data](#function---wf-get-workflow-data)
 - [Function - PB: Get playbook data](#function---wf-get-playbook-data)
+- [Adding Usage Data for Datatables](#adding-usage-data-for-datatables)
 - [Data Table - Playbook Usage](#data-table---playbook-usage)
 - [Rules](#rules)
 - [Troubleshooting & Support](#troubleshooting--support)
@@ -507,6 +508,19 @@ See the `PB: Display playbook data` script.
 </p>
 </details>
 
+---
+
+## Adding Usage Data for Datatables
+
+It's possible to create rules to get usage data on your custom datatables following these steps:
+1. Create a rule for your datatable. It can run from incident actions or from the referenced datable. If run from the datatable, the rule's  `Object type` and `Data table` will reflect which datatable.
+2. Add the rule properties for min/max incident id and min/max incident data, as necessary.
+![screenshot: dt-workflow-usage](./doc/screenshots/datatable_rule.png)
+3. Create a workflow to collect the workflow and playbook usage information. See the screenshot of the functions and scripts to add. For the pre-processor script in each function, refer to the datatable API name in the `inputs.pb_object_name` field. Finally, the `Output` tab will retain the function results in a workflow properties field called `workflow_data` and `playbook_data` for the respective `PB: Get Workflow Data` and `PB: Get Playbook Data` functions.
+![screenshot: dt-workflow-usage](./doc/screenshots/datatable_workflow.png)
+![screenshot: dt-workflow-usage](./doc/screenshots/datatable_pre_processing.png)
+![screenshot: dt-workflow-usage](./doc/screenshots/datatable_output.png)
+4. Make sure to reference your completed workflow in the rule created in step 1.
 ---
 
 ## Data Table - Playbook usage
