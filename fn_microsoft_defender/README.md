@@ -42,6 +42,7 @@
 - [Function - Defender Find Machines by IP](#function---defender-find-machines-by-ip)
 - [Function - Defender Delete Indicator](#function---defender-delete-indicator)
 - [Function - Defender Quarantine File](#function---defender-quarantine-file)
+- [Function - Defender Machine Vulnerabilities](#function---defender-machine Vulnerabilities)
 - [Script - Create Artifact from Indicator](#script---create-artifact-from-indicator)
 - [Data Table - Defender ATP Indicators](#data-table---defender-atp-indicators)
 - [Data Table - Defender ATP Machines](#data-table---defender-atp-machines)
@@ -183,8 +184,6 @@ The following table provides the settings you need to configure the app. These s
 
 ---
 
----
-
 ## Azure App Configuration
 
 In order to use this app, an Azure app needs to be registered with the proper permissions for Defender ATP and a client secret generated. Settings, in general are:
@@ -319,7 +318,7 @@ inputs.defender_filter_value = artifact.value
 <p>
 
 ```python
-import time
+import java.util.Date as Date
 
 """
 "value": [
@@ -334,7 +333,7 @@ import time
 if results.success:
     for machine in results.content['value']:
       row = incident.addRow("defender_atp_machines")
-      row['report_date'] = int(time.time()*1000)
+      row['report_date'] = Date().getTime()
       row['machine_id'] = machine['id']
       row['machine_ip'] = machine['lastExternalIpAddress']
       row['machine_name'] = machine['computerDnsName']
@@ -566,10 +565,10 @@ inputs.defender_machine_scantype = str(rule.properties.defender_machine_scantype
 <p>
 
 ```python
-import time
+import java.util.Date as Date
 
 if results.success:
-  row['report_date'] = int(time.time()*1000)
+  row['report_date'] = Date().getTime()
   action_msg = "Action: {}\nComment: {}\nStatus: {}\nStart Date: {}".format(
     results.content['type'],
     results.content['requestorComment'],
@@ -793,12 +792,12 @@ inputs.defender_indicator_value = artifact.value
 <p>
 
 ```python
-import time
+import java.util.Date as Date
 
 if results.success:
     for machine in results.content['value']:
         row = incident.addRow("defender_atp_machines")
-        row['report_date'] = int(time.time()*1000)
+        row['report_date'] = Date().getTime()
         row['machine_id'] = machine['id']
         row['machine_name'] = machine['computerDnsName']
         row['machine_platform'] = machine['osPlatform']
@@ -1106,7 +1105,7 @@ inputs.defender_restriction_type = str(rule.properties.defender_app_execution_ac
 <p>
 
 ```python
-import time
+import java.util.Date as Date
 
 msg = u"Defender ATP Action {}.\nAction: {}\nMachine: {}\nComment: {}"\
    .format("successful" if results.success else "unsuccessful",
@@ -1115,7 +1114,7 @@ msg = u"Defender ATP Action {}.\nAction: {}\nMachine: {}\nComment: {}"\
            rule.properties.defender_action_comment)
 
 if results.success:
-  row['report_date'] = int(time.time()*1000)
+  row['report_date'] = Date().getTime()
   action_msg = "Action: {}\nComment: {}\nStatus: {}\nStart Date: {}".format(
     results.content['type'],
     results.content['requestorComment'],
@@ -1216,7 +1215,7 @@ inputs.defender_description = rule.properties.defender_action_comment
 <p>
 
 ```python
-import time
+import java.util.Date as Date
 
 if results.success:
   msg = "Action: {}\nComment: {}\nStatus: {}\nStart Date: {}".format(
@@ -1226,7 +1225,7 @@ if results.success:
     results.content['creationDateTimeUtc']
     )
   row['machine_last_action'] = helper.createPlainText(msg)
-  row['report_date'] = int(time.time()*1000)
+  row['report_date'] = Date().getTime()
 
 """
     'type': 'CollectInvestigationPackage',
@@ -1335,10 +1334,10 @@ inputs.defender_isolation_action = 'isolate'
 <p>
 
 ```python
-import time
+import java.util.Date as Date
 
 if results.success:
-  row['report_date'] = int(time.time()*1000)
+  row['report_date'] = Date().getTime()
 
   action_msg = "Action: {}\nComment: {}\nStatus: {}\nStart Date: {}".format(
     results.content['type'],
@@ -1471,7 +1470,7 @@ inputs.defender_lookback_timeframe = rule.properties.defender_lookback_timeframe
 <p>
 
 ```python
-import time
+import java.util.Date as Date
 """
 "value": [
     {
@@ -1489,7 +1488,7 @@ if results.success:
   else:
     for machine in results.content['value']:
         row = incident.addRow("defender_atp_machines")
-        row['report_date'] = int(time.time()*1000)
+        row['report_date'] = Date().getTime()
         row['machine_id'] = machine['id']
         row['machine_name'] = machine['computerDnsName']
         row['machine_platform'] = machine['osPlatform']
@@ -1551,7 +1550,7 @@ inputs.defender_indicator_id = row['ind_id']
 <p>
 
 ```python
-import time
+import java.util.Date as Date
 
 msg = u"Defender ATP Action {}.\nAction: Delete Indicator\nIndicator: {}"\
    .format("successful" if results.success else "unsuccessful",
@@ -1559,7 +1558,7 @@ msg = u"Defender ATP Action {}.\nAction: Delete Indicator\nIndicator: {}"\
            )
 
 if results.success:
-  row['report_date'] = int(time.time()*1000)
+  row['report_date'] = Date().getTime()
 else:
   msg = u"{}\nReason: {}".format(msg, results.reason)
 
@@ -1618,10 +1617,10 @@ inputs.defender_machine_id = row['machine_id']
 <p>
 
 ```python
-import time
-`
+import java.util.Date as Date
+
 if results.success:
-  row['report_date'] = int(time.time()*1000)
+  row['report_date'] = Date().getTime()
   action_msg = "Action: {}\nComment: {}\nStatus: {}\nStart Date: {}".format(
     results.content['type'],
     results.content['requestorComment'],
@@ -1638,7 +1637,95 @@ else:
            results.reason)
 
   incident.addNote(helper.createPlainText(msg))
+```
 
+</p>
+</details>
+
+## Function - Defender Machine Vulnerabilities
+List any machine vulernabilities.
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `defender_machine_id` | `text` | Yes | `-` | - |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+```python
+results = {
+    "success": True,
+    "content": {
+      "value":  [
+        {
+            "id": "CVE-2019-1348",
+            "name": "CVE-2019-1348",
+            "description": "Git could allow a remote attacker to bypass security restrictions, caused by a flaw in the --export-marks option of git fast-import. By persuading a victim to import specially-crafted content, an attacker could exploit this vulnerability to overwrite arbitrary paths.",
+            "severity": "Medium",
+            "cvssV3": 4.3,
+            "exposedMachines": 1,
+            "publishedOn": "2019-12-13T00:00:00Z",
+            "updatedOn": "2019-12-13T00:00:00Z",
+            "publicExploit": False,
+            "exploitVerified": False,
+            "exploitInKit": False,
+            "exploitTypes": [],
+            "exploitUris": []
+        }
+      ]
+    }
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.defender_machine_id = row['machine_id']
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+def mk_note(list_of_notes):
+    return "<br>---<br><br>".join(["<br>".join(note) for note in list_of_notes])
+
+def format_line(k, v):
+    return "<b>{}</b>: {}".format(k, v)
+
+vulnerabilities = results.content['value']
+if results['success']:
+    if not vulnerabilities:
+        incident.addNote("No machine vulnerabilities for: {}".format(row['machine_name']))
+    else:
+        note = []
+        for risk in vulnerabilities:
+            note_info = []
+            note_info.append(format_line("Machine", row['machine_name']))
+            note_info.append(format_line("Machine Id", row['machine_id']))
+            note_info.append(format_line("Vulnerability", risk['name']))
+            note_info.append(format_line("Description", risk['description']))
+            note_info.append(format_line("Severity", risk['severity']))
+            note_info.append(format_line("Published", risk['publishedOn']))
+            note_info.append(format_line("Updated", risk['updatedOn']))
+
+            note.append(note_info)
+        incident.addNote(helper.createRichText(mk_note(note)))
+else:
+    incident.addNote("Defender ATP Machine Vulnerabilities failed: {}".format(results.reason))
 ```
 
 </p>
@@ -2048,6 +2135,7 @@ If your Defender login users differ from SOAR users, modify the `owner_id` mappi
 | Defender ATP Find Machines by File Hash | artifact | `defender_atp_find_machines_by_file_hash` |
 | Defender ATP Collect Machine Investigation Package | defender_atp_machines | `defender_atp_collect_machine_investigation_package` |
 | Defender ATP App Execution Restriction | defender_atp_machines | `defender_atp_app_execution` |
+| Defender Machine Vulnerabilities | defender_atp_machines | `defender_atp_machine_vulnerabilities` |
 
 ---
 
