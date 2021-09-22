@@ -12,7 +12,7 @@ packages.urllib3.disable_warnings()
 
 
 # noinspection StrFormat
-def firewall_authenticate(bso_ip, bso_user, bso_password, log, cert=False):
+def firewall_authenticate(bso_ip, bso_user, bso_password, log, cert=False, proxies={}):
     """
     A Method to Authenticate BSO firewall.
     :param bso_ip: Firewall IP Address/DNS
@@ -23,7 +23,7 @@ def firewall_authenticate(bso_ip, bso_user, bso_password, log, cert=False):
     :return:
     """
     try:
-        get_response = requests.get(F_URL.format(bso_ip=bso_ip), verify=cert)
+        get_response = requests.get(F_URL.format(bso_ip=bso_ip), verify=cert, proxies=proxies)
         redirected_url = get_response.url
         redirected_ip_dns = redirected_url.split("/")[2].split(":")[0]
         if get_response.ok:
@@ -31,12 +31,12 @@ def firewall_authenticate(bso_ip, bso_user, bso_password, log, cert=False):
                 sid = redirected_url.split('=')[-1]
                 log.debug(u"Firewall Redirected URL: {}, Session ID: {}".format(redirected_url, sid))
                 res2 = requests.post(F_URL.format(bso_ip=redirected_ip_dns), data={"sid": sid, "login": "Log+In+Now"},
-                                     verify=cert)
+                                     verify=cert, proxies=proxies)
                 if res2.ok:
                     try:
                         res3 = requests.post(F_LOGIN_URL.format(bso_ip=redirected_ip_dns),
                                              data={"sid": sid, "username": bso_user, "password": bso_password},
-                                             verify=cert)
+                                             verify=cert, proxies=proxies)
                         if res3.ok:
                             log.debug(res3.text)
                     except Exception:
@@ -49,7 +49,7 @@ def firewall_authenticate(bso_ip, bso_user, bso_password, log, cert=False):
                 _headers = {'Content-Type': 'application/x-www-form-urlencoded'}
                 try:
                     response = requests.post("https://{}/".format(redirected_ip_dns), headers=_headers, data=_payload,
-                                             verify=cert)
+                                             verify=cert, proxies=proxies)
                     log.debug(response.content)
                 except Exception as er_msg:
                     log.debug("Firewall Authentication : {}".format(er_msg))

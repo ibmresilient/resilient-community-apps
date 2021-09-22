@@ -112,7 +112,7 @@ class GuardiumInsightsAPI(object):
         except SSLError:
             if self.enable_firewall_auth:
                 self.log.info(u"Authentication with firewall")
-                firewall_authenticate(self.bso_ip, self.bso_user, self.bso_password, self.log)
+                firewall_authenticate(self.bso_ip, self.bso_user, self.bso_password, self.log, proxies=self.proxy)
                 response = invoke_request(self)
         if response.status_code == 200:
             try:
