@@ -33,6 +33,7 @@
     - [Custom Layouts](#custom-layouts)
 - [Function - Function Guardium Insights Block User](#function---function-guardium-insights-block-user)
 - [Function - Function Guardium Insights Classification Report](#function---function-guardium-insights-classification-report)
+- [Function - Function Guardium Insights populate breach data types](#function---function-guardium-insights-populate-breach-data-types)
 - [Data Table - Guardium Insights Classification Report](#data-table---guardium-insights-classification-report)
 - [Custom Fields](#custom-fields)
 - [Rules](#rules)
@@ -194,13 +195,10 @@ configured in seconds.* |
 | **report_period** | yes | `Now minus 7 days`| *classification report period, to populate breach data types data.
 values can be `Now minus 3 hours`,`Now minus 24 hours`, `Now minus 7 days`,`Now minus 14 days`*|
 | **report_fetch_size** | yes | 500 | *Maximum classification report records size.*|
-| **incident_member** | Yes | `` | *Incident member to be added, for new created anomaly incidents. value can be group
-name, individual user account. If multiple value specified each should be separated by comma ex: user@domain.com,
-group_name.* |
+| **incident_member** | Yes |``| *Incident member to be added, for new created anomaly incidents. value can be group name, individual user account. If multiple value specified each should be separated by comma ex: user@domain.com, group_name.* |
 | **proxy** | Yes | `` | *Guardium http/https proxy server address, leave blank for no proxy.* |
 | **insights_ca_file** | Yes | `false` | *Mention certificate path for SSL/TSL. Default Disabled.* |
-| **enable_firewall_auth** | Yes | `false` | *false - disable firewall authentication, true - enable firewall
-authentication.* |
+| **enable_firewall_auth** | Yes | `false` | *false - disable firewall authentication, true - enable firewall authentication.* |
 | **bso_ip** | Yes | `` | *Firewall Server IP Address.* |
 | **bso_user** | Yes | `` | *Firewall Auth User Name, should be given if `enable_firewall_auth=true`.* |
 | **bso_password** | Yes | `` | *irewall Auth Password, should be given if `enable_firewall_auth=true`.* |
@@ -244,9 +242,14 @@ configured in seconds.* |
 | **report_period** | yes | `Now minus 7 days`| *classification report period, to populate breach data types data.
 values can be `Now minus 3 hours`,`Now minus 24 hours`, `Now minus 7 days`,`Now minus 14 days`*|
 | **report_fetch_size** | yes | 500 | *Maximum classification report records size.*|
-| **incident_member** | Yes | `` | *Incident member to be added, for new created anomaly incidents. value can be group
+| **incident_member** | Yes | `` |*Incident member to be added, for new created anomaly incidents. value can be group
 name, individual user account. If multiple value specified each should be separated by comma ex: user@domain.com,
-group_name.* |
+group_name.* 
+
+
+
+
+
 | **proxy** | Yes | `` | *Guardium http/https proxy server address, leave blank for no proxy.* |
 | **insights_ca_file** | Yes | `false` | *Mention certificate path for SSL/TSL. Default Disabled.* |
 | **enable_firewall_auth** | Yes | `false` | *false - disable firewall authentication, true - enable firewall
@@ -284,15 +287,16 @@ A Function to Block User From Guardium Insights.
 ![screenshot: fn-function-guardium-insights-block-user ](doc/screenshots/fn-function-guardium-insights-block-user.png)
 
 <details><summary>Inputs:</summary>
-<table border="1">
-<tr> <th>Name </th><th>Type </th><th> Required </th> <th>Example </th> <th>Tooltip </th></tr> 
-<tr><td>`input_field_guardium_insights_config_id` </td> <td>`text` </td> <td>YES </td> <td>`-` </td><td> - </td> </tr>
-<tr><td>`input_field_guardium_insights_guardium_id` </td> <td>`text` </td> <td>YES </td> <td>`-` </td><td> - </td> </tr>
-<tr><td>`input_field_guardium_insights_what` </td> <td>`text` </td> <td>YES </td> <td>`-` </td><td> - </td> </tr>
-<tr><td>`input_field_guardium_insights_who` </td> <td>`text` </td> <td>YES </td> <td>`-` </td><td> - </td> </tr>
+<p>
 
-</table>
+| Name | Type | Required | Example | Tooltip |
+| ------ | :------: | ------- | ----------- |--------|
+|`input_field_guardium_insights_config_id`| `text` | YES | `-` | - |
+|`input_field_guardium_insights_guardium_id` | `text` | YES | `-` |  - |
+|`input_field_guardium_insights_what` | `text` | YES | `-` |  - |
+|`input_field_guardium_insights_who` | `text` | YES | `-`| - |
 
+</p>
 </details>
 
 <details><summary>Outputs:</summary>
@@ -354,15 +358,17 @@ A function to get classification report data.
 ![screenshot: fn-function-guardium-insights-classification-report ](doc/screenshots/fn-function-guardium-insights-classification-report.png)
 
 <details><summary>Inputs:</summary>
-<table>
-<tr><td> Name <td> Type</td> <td> Required</td> <td> Example</td> <td> Tooltip</td></tr>
-<tr><td> `incident_id` </td><td> `number`</td><td> Yes</td> <td> `-`</td> <td> - </td></tr>
-<tr><td> `input_field_guardium_insights_fetch_size`</td> <td> `number`</td> <td> Yes</td> <td> `-`</td> <td> - </td></tr>
-<tr><td> `input_field_guardium_insights_from_date`</td> <td> `datetimepicker`</td> <td> Yes</td> <td> `-`</td> <td> - </td></tr>
-<tr><td> `input_field_guardium_insights_to_date`</td> <td> `datetimepicker`</td> <td> Yes</td> <td> `-`</td> <td> - </td> </tr>
-<tr><td> `input_field_guardium_insights_what`</td><td> `text`</td> <td> No</td> <td> `-`</td> <td> -</td> </tr>
-<tr><td> `input_field_guardium_insights_who`</td> <td> `text`</td> <td> No</td> <td> `-`</td> <td> - </td></tr>
-</table>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ------ | :------: | ------- | ----------- |--------|
+|`incident_id` | `number`| Yes| `-`| - |
+| `input_field_guardium_insights_fetch_size`| `number`| Yes| `-`| - |
+| `input_field_guardium_insights_from_date`| `datetimepicker`| Yes| `-`| - |
+|  `input_field_guardium_insights_to_date`| `datetimepicker`| Yes| `-`| - |
+| `input_field_guardium_insights_what`| `text`| No| `-`| - |
+| `input_field_guardium_insights_who`| `text`| No| `-`| - |
+</p>
 </details>
 
 <details><summary>Outputs:</summary>
@@ -406,6 +412,62 @@ incident.addNote(report_st)
 </details>
 
 ---
+
+## Function - Function Guardium Insights populate breach data types
+A function to populate the incident breach data types.
+
+ ![screenshot: fn-function-guardium-insights-populate-breach-data-types ](./doc/screenshots/fn-function-guardium-insights-populate-breach-data-types.png)
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ------ | :------: | ------- | ----------- |----|
+| `incident_id` | `number` | Yes | `-` | - |
+| `input_field_guardium_insights_what` | `text` | No | `-` | - |
+| `input_field_guardium_insights_who` | `text` | No | `-` | - |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+```python
+results = {
+    # TODO: Copy and paste an example of the Function Output within this code block.
+    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
+    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.incident_id = incident.id
+inputs.input_field_guardium_insights_who = incident.properties.field_guardium_insights_who
+inputs.input_field_guardium_insights_what = incident.properties.field_guardium_insights_what
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+None
+```
+
+</p>
+</details>
+
+---
+
 
 ## Data Table - Guardium Insights Classification Report
 

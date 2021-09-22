@@ -99,7 +99,6 @@ class ResilientIncidentHelper:
                         rule = BREACH_DATA_MAP.get(rule)
                     else:
                         rule = rule.title()
-                    print("$$$$$$$$$$$$$$$$$$$$$$$$$$", rule)
                     payload["dtm"][rule] = True
                 return payload
             else:
