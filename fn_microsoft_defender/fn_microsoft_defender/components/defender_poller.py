@@ -10,7 +10,7 @@ import logging
 import traceback
 from circuits import Event, Timer
 from resilient_circuits import ResilientComponent, handler
-from resilient_lib import validate_fields, IntegrationError
+from resilient_lib import validate_fields
 from fn_microsoft_defender.lib.jinja_common import JinjaEnvironment
 from fn_microsoft_defender.lib.resilient_common import ResilientCommon
 from fn_microsoft_defender.lib.defender_common import DefenderAPI, PACKAGE_NAME, \
@@ -200,6 +200,36 @@ class DefenderPollerComponent(ResilientComponent):
                 updated_resilient_incident = self.resilient_common.create_incident(incident_payload)
                 LOG.info("Created incident %s from Defender alert %s",
                          updated_resilient_incident['id'], defender_alert_id)
+
+                # TODO populate datatable with machine info
+                """
+                "id": "da637679199636775248_57704348",
+      "incidentId": 19,
+      "investigationId": 14,
+      "assignedTo": null,
+      "severity": "Medium",
+      "status": "New",
+      "classification": null,
+      "determination": null,
+      "investigationState": "PendingResource",
+      "detectionSource": "WindowsDefenderAtp",
+      "detectorId": "61de2f3d-e308-48e1-bf83-0cc8a2a2c89f",
+      "category": "InitialAccess",
+      "threatFamilyName": null,
+      "title": "Powershell dropped a suspicious file on the machine",
+      "description": "Powershell dropped a suspicious file on the machine and executed it.",
+      "alertCreationTime": "2021-09-22T15:06:03.6775463Z",
+      "firstEventTime": "2021-09-22T15:02:30.7369213Z",
+      "lastEventTime": "2021-09-22T15:02:30.7369213Z",
+      "lastUpdateTime": "2021-09-22T15:42:01.2633333Z",
+      "resolvedTime": null,
+      "machineId": "2a94aaf80aa31094790ce40da6fdfc03a9a145c5",
+      "computerDnsName": "windowsvmos",
+      "rbacGroupName": null,
+      "aadTenantId": "50ad7d3e-b889-434d-802d-13b87c68047b",
+      "threatName": null,
+      "mitreTechniques": [
+                """
             else:
                 LOG.info("Defender alert %s bypassed due to new_incident_filters",
                          defender_alert_id)

@@ -3,8 +3,7 @@
 """AppFunction implementation"""
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from resilient_lib import IntegrationError, validate_fields
-from fn_microsoft_defender.lib.defender_common import DefenderAPI, convert_date, ALERTS_URL, PACKAGE_NAME
+from fn_microsoft_defender.lib.defender_common import DefenderAPI, ALERTS_URL, ALERTS_EXPAND_PARAMS, PACKAGE_NAME
 
 FN_NAME = "defender_get_related_alert_information"
 ALERT_TYPES = {
@@ -48,7 +47,7 @@ class FunctionComponent(AppFunctionComponent):
         result = {}
         for type in alert_info:
             url = '/'.join([ALERTS_URL, alert_id, ALERT_TYPES.get(type)])
-            alert_payload, status, reason = defender_api.call(url)
+            alert_payload, status, reason = defender_api.call(url, payload=ALERTS_EXPAND_PARAMS)
             self.LOG.debug(alert_payload)
             result[type] = alert_payload.get('value') if alert_payload.get('value') else alert_payload
 

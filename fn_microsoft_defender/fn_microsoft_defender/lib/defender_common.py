@@ -21,7 +21,10 @@ FILES_URL = "api/files/{}/machines"
 MACHINES_FILTER = {
      "filter_by_name": "startswith(computerDnsName,'{}')"
 }
-ALERTS_URL = "api/alerts?$expand=evidence"
+ALERTS_URL = "api/alerts"
+ALERTS_EXPAND_PARAMS = {
+    "$expand": "evidence"
+}
 
 AUTH_URL = "https://login.microsoftonline.com/{tenant_id}" # /v2.0  https://login.microsoftonline.com/82319d65-80f7-431f-8ee7-57bae5b231c2/oauth2/token
 RESOURCE_URI = "https://api.securitycenter.windows.com"
@@ -153,6 +156,7 @@ class DefenderAPI():
         payload = {
             "$filter": self._make_createdate_filter(last_poller_datetime)
         }
+        payload = {**payload, **ALERTS_EXPAND_PARAMS}
 
         result, status, reason = self.call(ALERTS_URL, payload=payload)
 

@@ -7,7 +7,7 @@
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import ResultPayload, validate_fields
-from fn_microsoft_defender.lib.defender_common import DefenderAPI, ALERTS_URL, PACKAGE_NAME
+from fn_microsoft_defender.lib.defender_common import DefenderAPI, ALERTS_URL, ALERTS_EXPAND_PARAMS, PACKAGE_NAME
 
 FUNCTION = "defender_update_alert"
 
