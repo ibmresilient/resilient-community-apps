@@ -26,10 +26,10 @@ inputs.defender_isolation_action = 'isolate'
 
 ### Post-Processing Script
 ```python
-import time
+import Java.util.Date as Date
            
 if results.success:
-  row['report_date'] = int(time.time()*1000)
+  row['report_date'] = Date().getTime()
   
   action_msg = "Action: {}\nComment: {}\nStatus: {}\nStart Date: {}".format(
     results.content['type'],

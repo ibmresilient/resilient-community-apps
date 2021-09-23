@@ -16,7 +16,9 @@
     "defender_alert_id": "{{ id }}",
     "defender_classification": "{{ classification|replace('"', '\\"') }}",
     "defender_determination": "{{ determination|replace('"', '\\"') }}",
-    "defender_category": "{{ category|replace('"', '\\"') }}"
+    "defender_category": "{{ category|replace('"', '\\"') }}",
+    "defender_machine_name": "{{ computerDnsName }}",
+    "defender_machine_id": "{{ machineId }}"
   },
   "comments": [
     {% for comment in comments %}
