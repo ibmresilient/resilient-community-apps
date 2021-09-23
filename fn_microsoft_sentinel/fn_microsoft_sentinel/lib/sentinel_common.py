@@ -356,10 +356,11 @@ class SentinelAPI():
         # convert entity types to artifact types, adding 'resilient_artifact_type' property
         if status:
             for entity in result['value']['entities']:
-                artifact_type, artifact_value = convert_entity_type(entity['kind'],
-                                                                    entity['properties'].get('friendlyName', 'Unknown'))
-                entity['resilient_artifact_type']  = artifact_type
-                entity['resilient_artifact_value']  = artifact_value
+                if entity['properties'].get('friendlyName'):
+                    artifact_type, artifact_value = convert_entity_type(entity['kind'],
+                                                                        entity['properties']['friendlyName'])
+                    entity['resilient_artifact_type']  = artifact_type
+                    entity['resilient_artifact_value'] = artifact_value
 
         return result, status, reason
 
@@ -613,13 +614,12 @@ def convert_entity_type(entity_type, entity_value):
 
     resilient_artifact_type = ENTITY_TYPE_LOOKUP.get(entity_type.lower(), "String")
     if isinstance(resilient_artifact_type, dict):
-        new_value = None
-        for label in resilient_artifact_type:
+        # find the specific type of entity
+        for label in resilient_artifact_type.keys():
             if label in entity_value:
-                new_value = entity_value.replace(label, "")
+                # return just the hash value without the label
                 return resilient_artifact_type[label], entity_value.replace(label, "")
 
-        if not new_value:
-            return resilient_artifact_type["default"], entity_value
+        return resilient_artifact_type["default"], entity_value
 
     return resilient_artifact_type, entity_value
