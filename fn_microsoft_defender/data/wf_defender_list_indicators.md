@@ -18,7 +18,8 @@
 
 ### Pre-Processing Script
 ```python
-None
+inputs.defender_indicator_filter = rule.properties.defender_indicator_filter
+inputs.defender_indicator_field = rule.properties.defender_indicator_field
 ```
 
 ### Post-Processing Script
