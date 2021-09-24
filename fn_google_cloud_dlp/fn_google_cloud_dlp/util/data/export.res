@@ -45,9 +45,15 @@
         {
           "evaluation_id": null,
           "field_name": "artifact.type",
-          "method": "equals",
+          "method": "in",
           "type": null,
-          "value": "String"
+          "value": [
+            "Email Attachment",
+            "Malware Sample",
+            "Other File",
+            "String",
+            "X509 Certificate File"
+          ]
         }
       ],
       "enabled": true,
@@ -69,7 +75,7 @@
   ],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1631565176553,
+  "export_date": 1631807978902,
   "export_format_version": 2,
   "fields": [
     {
@@ -94,7 +100,12 @@
       "read_only": false,
       "required": "always",
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_utilities",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "incident_id",
       "tooltip": "",
@@ -110,25 +121,30 @@
       "chosen": false,
       "default_chosen_by_server": false,
       "deprecated": false,
-      "export_key": "__function/task_id",
+      "export_key": "__function/artifact_id",
       "hide_notification": false,
-      "id": 230,
+      "id": 235,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
-      "name": "task_id",
+      "name": "artifact_id",
       "operation_perms": {},
       "operations": [],
       "placeholder": "",
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_utilities",
+          "value": null
+        }
+      ],
       "templates": [],
-      "text": "task_id",
+      "text": "artifact_id",
       "tooltip": "",
       "type_id": 11,
-      "uuid": "ba318261-ed6a-4a38-a187-9e0b68d1604f",
+      "uuid": "da8b8ba4-28a3-4ad0-b35a-354b1bc59fd6",
       "values": []
     },
     {
@@ -997,6 +1013,40 @@
       "chosen": false,
       "default_chosen_by_server": false,
       "deprecated": false,
+      "export_key": "__function/task_id",
+      "hide_notification": false,
+      "id": 230,
+      "input_type": "number",
+      "internal": false,
+      "is_tracked": false,
+      "name": "task_id",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": null,
+      "read_only": false,
+      "rich_text": false,
+      "tags": [
+        {
+          "tag_handle": "fn_utilities",
+          "value": null
+        }
+      ],
+      "templates": [],
+      "text": "task_id",
+      "tooltip": "",
+      "type_id": 11,
+      "uuid": "f934cf75-e9f3-4d1c-bf64-9e4f66f16d7f",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
       "export_key": "__function/attachment_id",
       "hide_notification": false,
       "id": 231,
@@ -1010,41 +1060,17 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_utilities",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "attachment_id",
       "tooltip": "",
       "type_id": 11,
-      "uuid": "1677716a-a95e-4f55-8e3e-5399e6d3bd96",
-      "values": []
-    },
-    {
-      "allow_default_value": false,
-      "blank_option": false,
-      "calculated": false,
-      "changeable": true,
-      "chosen": false,
-      "default_chosen_by_server": false,
-      "deprecated": false,
-      "export_key": "__function/artifact_id",
-      "hide_notification": false,
-      "id": 235,
-      "input_type": "number",
-      "internal": false,
-      "is_tracked": false,
-      "name": "artifact_id",
-      "operation_perms": {},
-      "operations": [],
-      "placeholder": "",
-      "prefix": null,
-      "read_only": false,
-      "rich_text": false,
-      "tags": [],
-      "templates": [],
-      "text": "artifact_id",
-      "tooltip": "",
-      "type_id": 11,
-      "uuid": "62d93105-705d-4876-9813-e60ee43e19ed",
+      "uuid": "17c3e652-6559-4935-9f95-74374ca37a7b",
       "values": []
     },
     {
@@ -1107,19 +1133,19 @@
       "export_key": "google_cloud_dlp_deidentify_content",
       "id": 2,
       "last_modified_by": {
-        "display_name": "Chris\u0027 Integration Server v40",
-        "id": 6,
-        "name": "05c96997-7401-4089-a039-df21d0e54b07",
-        "type": "apikey"
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
       },
-      "last_modified_time": 1631288902024,
+      "last_modified_time": 1631736377947,
       "name": "google_cloud_dlp_deidentify_content",
       "tags": [],
       "uuid": "1dd74d85-887d-4d5c-beda-640630d317c1",
-      "version": 1,
+      "version": 2,
       "view_items": [
         {
-          "content": "62d93105-705d-4876-9813-e60ee43e19ed",
+          "content": "da8b8ba4-28a3-4ad0-b35a-354b1bc59fd6",
           "element": "field_uuid",
           "field_type": "__function",
           "show_if": null,
@@ -1127,7 +1153,7 @@
           "step_label": null
         },
         {
-          "content": "1677716a-a95e-4f55-8e3e-5399e6d3bd96",
+          "content": "17c3e652-6559-4935-9f95-74374ca37a7b",
           "element": "field_uuid",
           "field_type": "__function",
           "show_if": null,
@@ -1143,7 +1169,7 @@
           "step_label": null
         },
         {
-          "content": "ba318261-ed6a-4a38-a187-9e0b68d1604f",
+          "content": "f934cf75-e9f3-4d1c-bf64-9e4f66f16d7f",
           "element": "field_uuid",
           "field_type": "__function",
           "show_if": null,
@@ -1208,19 +1234,19 @@
       "export_key": "google_cloud_dlp_inspect_content",
       "id": 3,
       "last_modified_by": {
-        "display_name": "Chris\u0027 Integration Server v40",
-        "id": 6,
-        "name": "05c96997-7401-4089-a039-df21d0e54b07",
-        "type": "apikey"
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
       },
-      "last_modified_time": 1631288902175,
+      "last_modified_time": 1631736377947,
       "name": "google_cloud_dlp_inspect_content",
       "tags": [],
       "uuid": "eca925ca-bea4-4f76-9afd-cc4b02a2083a",
-      "version": 1,
+      "version": 2,
       "view_items": [
         {
-          "content": "62d93105-705d-4876-9813-e60ee43e19ed",
+          "content": "da8b8ba4-28a3-4ad0-b35a-354b1bc59fd6",
           "element": "field_uuid",
           "field_type": "__function",
           "show_if": null,
@@ -1228,7 +1254,7 @@
           "step_label": null
         },
         {
-          "content": "1677716a-a95e-4f55-8e3e-5399e6d3bd96",
+          "content": "17c3e652-6559-4935-9f95-74374ca37a7b",
           "element": "field_uuid",
           "field_type": "__function",
           "show_if": null,
@@ -1244,7 +1270,7 @@
           "step_label": null
         },
         {
-          "content": "ba318261-ed6a-4a38-a187-9e0b68d1604f",
+          "content": "f934cf75-e9f3-4d1c-bf64-9e4f66f16d7f",
           "element": "field_uuid",
           "field_type": "__function",
           "show_if": null,
@@ -1284,12 +1310,12 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 1,
+  "id": 2,
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1631565175227,
+      "create_date": 1631807977647,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -1298,7 +1324,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1631565175227,
+      "update_date": 1631807977647,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -1360,6 +1386,26 @@
     {
       "actions": [],
       "content": {
+        "version": 2,
+        "workflow_id": "gcp_dlp_deidentify_artifact",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"gcp_dlp_deidentify_artifact\" isExecutable=\"true\" name=\"Example: Google Cloud DLP - De-Identify Artifact\"\u003e\u003cdocumentation\u003e\u003c![CDATA[An example workflow ran at an attachment level that sends the artifact data to Google Cloud\u0027s DLP Service and aims to de-identify the types of  personal information specified. By default 14 types are selected out of 50+ types. The return result is a new artifact with the PII removed.]]\u003e\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0ilcc5g\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0zpzzxc\" name=\"Google Cloud DLP: De-Identify Con...\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"1dd74d85-887d-4d5c-beda-640630d317c1\"\u003e{\"inputs\":{\"dac1b61a-dc30-403e-804c-079398551459\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[\"e37d895d-fed3-4a7e-8f30-a33ff6903968\",\"6c6b51dc-88f0-4f1d-bae8-3c01daf4a46d\",\"00a4bbe7-c3b1-4a4d-adfe-0e0eeb9696ca\",\"9e96cde2-9496-40f5-a408-96b42199f320\",\"7cf7ad56-3469-485f-aea8-509c4679790b\",\"ebd94a3b-2a44-47cf-bec6-503424ab7a6c\",\"06a86258-ea5e-431d-ba80-b991b0e317e8\",\"473e24d1-5835-42a4-a13c-f97ba236b4e9\",\"8228a825-bdde-437b-9b62-3fce9330f235\",\"1f486b27-1b3d-42eb-aca2-56e256200a4b\",\"f0b19eee-24b0-4dff-9d5f-8f8136fba7e8\",\"c31de861-11a1-4f51-b081-8d7763921515\",\"a7dfc1b4-49eb-478d-a30f-40e2bfdc13aa\",\"0f0ba9bc-a573-4385-bcff-05e71e2b3772\"]}}},\"post_processing_script\":\"\\\"\\\"\\\"\\nIf the integration was successful in operation, upload a new artifact containing the now de-identified text. \\n\\\"\\\"\\\"\\nif results.success:\\n  incident.addArtifact(\u0027String\u0027, results.content[\\\"de_identified_text\\\"], \\\"De-Identified using Google Cloud DLP\\\")\",\"pre_processing_script\":\"inputs.incident_id = incident.id\\nif artifact.type == \\\"string\\\":\\n  inputs.gcp_artifact_input = artifact.value\\nelse:\\n  inputs.artifact_id = artifact.id\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0ilcc5g\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1ewcngu\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0ilcc5g\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0zpzzxc\"/\u003e\u003cendEvent id=\"EndEvent_1636vpj\"\u003e\u003cincoming\u003eSequenceFlow_1ewcngu\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1ewcngu\" sourceRef=\"ServiceTask_0zpzzxc\" targetRef=\"EndEvent_1636vpj\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0zpzzxc\" id=\"ServiceTask_0zpzzxc_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"456\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0ilcc5g\" id=\"SequenceFlow_0ilcc5g_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"456\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"327\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1636vpj\" id=\"EndEvent_1636vpj_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"769\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"787\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1ewcngu\" id=\"SequenceFlow_1ewcngu_di\"\u003e\u003comgdi:waypoint x=\"556\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"769\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"662.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 2,
+      "creator_id": "05c96997-7401-4089-a039-df21d0e54b07",
+      "description": "An example workflow ran at an attachment level that sends the artifact data to Google Cloud\u0027s DLP Service and aims to de-identify the types of  personal information specified. By default 14 types are selected out of 50+ types. The return result is a new artifact with the PII removed.",
+      "export_key": "gcp_dlp_deidentify_artifact",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1631807844421,
+      "name": "Example: Google Cloud DLP - De-Identify Artifact",
+      "object_type": "artifact",
+      "programmatic_name": "gcp_dlp_deidentify_artifact",
+      "tags": [],
+      "uuid": "735701cc-a569-4589-afdb-7d6f6a97e0bc",
+      "workflow_id": 5
+    },
+    {
+      "actions": [],
+      "content": {
         "version": 1,
         "workflow_id": "gcp_dlp_inspect_attachment",
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"gcp_dlp_inspect_attachment\" isExecutable=\"true\" name=\"Example: Google Cloud DLP - Inspect Attachment for PII\"\u003e\u003cdocumentation\u003e\u003c![CDATA[An example workflow ran at an attachment level that sends the attachment data to Google Cloud\u0027s DLP Service and aims to de-identify the types of  personal information specified. By default 14 types are selected out of 50+ types. Returned results include a list of findings generated from the input including the finding itself, what type of info it was matched against and the likelihood that the match is accurate.]]\u003e\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1u824h5\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0k4g9bu\" name=\"Google Cloud DLP: Inspect Content\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"eca925ca-bea4-4f76-9afd-cc4b02a2083a\"\u003e{\"inputs\":{\"dac1b61a-dc30-403e-804c-079398551459\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[\"e37d895d-fed3-4a7e-8f30-a33ff6903968\",\"6c6b51dc-88f0-4f1d-bae8-3c01daf4a46d\",\"00a4bbe7-c3b1-4a4d-adfe-0e0eeb9696ca\",\"9e96cde2-9496-40f5-a408-96b42199f320\",\"7cf7ad56-3469-485f-aea8-509c4679790b\",\"ebd94a3b-2a44-47cf-bec6-503424ab7a6c\",\"06a86258-ea5e-431d-ba80-b991b0e317e8\",\"473e24d1-5835-42a4-a13c-f97ba236b4e9\",\"8228a825-bdde-437b-9b62-3fce9330f235\",\"1f486b27-1b3d-42eb-aca2-56e256200a4b\",\"f0b19eee-24b0-4dff-9d5f-8f8136fba7e8\",\"c31de861-11a1-4f51-b081-8d7763921515\",\"a7dfc1b4-49eb-478d-a30f-40e2bfdc13aa\",\"0f0ba9bc-a573-4385-bcff-05e71e2b3772\"]}}},\"post_processing_script\":\"if results.success:\\n  \\\"\\\"\\\"Print all the findings as a richtext note. This note may be very long if you run the integration on a large file with lots of PII. In these cases you may want to limit how many findings are put into the note.\\\"\\\"\\\"\\n  if results.content[\u0027findings\u0027] != None:\\n    note_text = u\\\"\\\"\\\"Findings were found from attachment \u0026lt;b\u0026gt;{}\u0026lt;/b\u0026gt;\u0026lt;br\u0026gt;\u0026lt;br\u0026gt; Findings: \u0026lt;br\u0026gt;\\\"\\\"\\\".format(results.content[\\\"attachment_name\\\"])\\n    for finding in results.content[\u0027findings\u0027]:\\n      note_text += u\\\"\\\"\\\"Text Quote: \u0026lt;b\u0026gt;{}\u0026lt;/b\u0026gt;\\n                      \u0026lt;br\u0026gt; Information Type Suspected: \u0026lt;b\u0026gt;{}\u0026lt;/b\u0026gt;\\n                      \u0026lt;br\u0026gt; Likelihood / Confidence: \u0026lt;b\u0026gt;{}\u0026lt;/b\u0026gt;\u0026lt;br\u0026gt;\u0026lt;br\u0026gt;\\\"\\\"\\\".format(finding[\\\"quote\\\"],finding[\\\"info_type\\\"],finding[\\\"likelihood\\\"])\\n                      \\n    incident.addNote(helper.createRichText(note_text))\",\"pre_processing_script\":\"inputs.incident_id = incident.id \\n\\n# If this workflow has the task_id available, gather it incase we need it.\\nif task:\\n  inputs.task_id = task.id\\n# If this workflow has the attachment_id available, gather it incase we need it.\\nif attachment:\\n  inputs.attachment_id = attachment.id\\n\\n# If this workflow has the artifact_id available, gather it incase we need it.\\ntry: \\n  if artifact:\\n    inputs.artifact_id = artifact.id\\nexcept:\\n  pass\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1u824h5\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0c53ji1\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_10gh3ua\"\u003e\u003cincoming\u003eSequenceFlow_0c53ji1\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0c53ji1\" sourceRef=\"ServiceTask_0k4g9bu\" targetRef=\"EndEvent_10gh3ua\"/\u003e\u003csequenceFlow id=\"SequenceFlow_1u824h5\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0k4g9bu\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0k4g9bu\" id=\"ServiceTask_0k4g9bu_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"463\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_10gh3ua\" id=\"EndEvent_10gh3ua_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"781\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"799\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0c53ji1\" id=\"SequenceFlow_0c53ji1_di\"\u003e\u003comgdi:waypoint x=\"563\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"781\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"672\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1u824h5\" id=\"SequenceFlow_1u824h5_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"463\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"330.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
@@ -1376,26 +1422,6 @@
       "tags": [],
       "uuid": "bcc81226-69fa-457f-8853-a1961de9e8e1",
       "workflow_id": 4
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 1,
-        "workflow_id": "gcp_dlp_deidentify_artifact",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"gcp_dlp_deidentify_artifact\" isExecutable=\"true\" name=\"Example: Google Cloud DLP - De-Identify Artifact\"\u003e\u003cdocumentation\u003e\u003c![CDATA[An example workflow ran at an attachment level that sends the artifact data to Google Cloud\u0027s DLP Service and aims to de-identify the types of  personal information specified. By default 14 types are selected out of 50+ types. The return result is a new artifact with the PII removed.]]\u003e\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0ilcc5g\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0zpzzxc\" name=\"Google Cloud DLP: De-Identify Con...\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"1dd74d85-887d-4d5c-beda-640630d317c1\"\u003e{\"inputs\":{\"dac1b61a-dc30-403e-804c-079398551459\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[\"e37d895d-fed3-4a7e-8f30-a33ff6903968\",\"6c6b51dc-88f0-4f1d-bae8-3c01daf4a46d\",\"00a4bbe7-c3b1-4a4d-adfe-0e0eeb9696ca\",\"9e96cde2-9496-40f5-a408-96b42199f320\",\"7cf7ad56-3469-485f-aea8-509c4679790b\",\"ebd94a3b-2a44-47cf-bec6-503424ab7a6c\",\"06a86258-ea5e-431d-ba80-b991b0e317e8\",\"473e24d1-5835-42a4-a13c-f97ba236b4e9\",\"8228a825-bdde-437b-9b62-3fce9330f235\",\"1f486b27-1b3d-42eb-aca2-56e256200a4b\",\"f0b19eee-24b0-4dff-9d5f-8f8136fba7e8\",\"c31de861-11a1-4f51-b081-8d7763921515\",\"a7dfc1b4-49eb-478d-a30f-40e2bfdc13aa\",\"0f0ba9bc-a573-4385-bcff-05e71e2b3772\"]}}},\"post_processing_script\":\"\\\"\\\"\\\"\\nIf the integration was successful in operation, upload a new artifact containing the now de-identified text. \\n\\\"\\\"\\\"\\nif results.success:\\n  incident.addArtifact(\u0027String\u0027, results.content[\\\"de_identified_text\\\"], \\\"De-Identified using Google Cloud DLP\\\")\",\"pre_processing_script\":\"inputs.incident_id = incident.id\\ninputs.gcp_artifact_input = artifact.value\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0ilcc5g\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1ewcngu\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0ilcc5g\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0zpzzxc\"/\u003e\u003cendEvent id=\"EndEvent_1636vpj\"\u003e\u003cincoming\u003eSequenceFlow_1ewcngu\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1ewcngu\" sourceRef=\"ServiceTask_0zpzzxc\" targetRef=\"EndEvent_1636vpj\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0zpzzxc\" id=\"ServiceTask_0zpzzxc_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"456\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0ilcc5g\" id=\"SequenceFlow_0ilcc5g_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"456\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"327\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1636vpj\" id=\"EndEvent_1636vpj_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"769\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"787\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1ewcngu\" id=\"SequenceFlow_1ewcngu_di\"\u003e\u003comgdi:waypoint x=\"556\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"769\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"662.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 1,
-      "creator_id": "05c96997-7401-4089-a039-df21d0e54b07",
-      "description": "An example workflow ran at an attachment level that sends the artifact data to Google Cloud\u0027s DLP Service and aims to de-identify the types of  personal information specified. By default 14 types are selected out of 50+ types. The return result is a new artifact with the PII removed.",
-      "export_key": "gcp_dlp_deidentify_artifact",
-      "last_modified_by": "05c96997-7401-4089-a039-df21d0e54b07",
-      "last_modified_time": 1631288903206,
-      "name": "Example: Google Cloud DLP - De-Identify Artifact",
-      "object_type": "artifact",
-      "programmatic_name": "gcp_dlp_deidentify_artifact",
-      "tags": [],
-      "uuid": "735701cc-a569-4589-afdb-7d6f6a97e0bc",
-      "workflow_id": 5
     }
   ],
   "workspaces": []

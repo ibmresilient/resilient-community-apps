@@ -33,7 +33,8 @@ setup(
         'resilient-lib>=32.0.140',
         'google-cloud-dlp>=0.10.0,<2.0.0',
         'PyPDF2>=1.26.0',
-        'python-docx>=0.8.10'
+        'python-docx>=0.8.10',
+        'defusedxml'
     ],
     packages=find_packages(),
     include_package_data=True,

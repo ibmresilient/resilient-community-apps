@@ -3,3 +3,7 @@ recursive-include fn_google_cloud_dlp/util *
 include fn_google_cloud_dlp/LICENSE
 include doc/screenshots/*
 include doc/*
+include Dockerfile
+include entrypoint.sh
+include apikey_permissions.txt
+include fn_google_cloud_dlp/icons/*
