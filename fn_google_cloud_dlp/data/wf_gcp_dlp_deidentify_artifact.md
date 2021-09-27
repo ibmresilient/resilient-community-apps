@@ -31,7 +31,7 @@ else:
 If the integration was successful in operation, upload a new artifact containing the now de-identified text. 
 """
 if results.success:
-  incident.addArtifact('String', results.content["de_identified_text"], "De-Identified using Google Cloud DLP")
+  incident.addNote(u"""De-Identified using Google Cloud DLP<b>{}""".format(results.content["de_identified_text"]))
 ```
 
 ---
