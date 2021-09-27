@@ -187,7 +187,8 @@ matrix:
       python: 3.6
       services:
         - docker
-      install: skip
+      install:
+        - ./.scripts/install_ibmcli.sh
       script: skip
       before_deploy:
         - pip install resilient-sdk -i $PYPI_INDEX_TO_USE
@@ -215,11 +216,14 @@ matrix:
         - pip install -U -r "$PATH_PIP_REQ_MAIN"
         - pip install resilient-sdk
         - sudo apt-get install jq
+        - ./.scripts/install_ibmcli.sh
       script:
         # This will take split the git tag on '/'
         # E.g.:
-        #  - to rebuild ALL images; tag with 'rebuild/40.1.1880/ALL/QUAY' and commit message 'INT-0001 {rebuild} <reason>'
-        #  - to rebuild single image; tag with 'rebuild/40.1.1880/fn_utilities/ARTIFACTORY' and commit message 'INT-0001 {fn_utilities} <reason>'
+        #  - to rebuild ALL images and push back to Quay; tag with 'rebuild/42.1.2116/ALL/QUAY' and commit message 'INT-0001 {rebuild} <reason>'
+        #  - to rebuild single image on Artifactory; tag with 'rebuild/42.1.2116/fn_utilities/ARTIFACTORY' and commit message 'INT-0001 {fn_utilities} <reason>'
+        #  - to rebuild ALL images and push to ICR; tag with 'rebuild/42.1.2116/ALL/ICR' and commit message 'INT-0001 {rebuild} <reason>'
+        #  - to rebuild ALL images and push to ALL; tag with 'rebuild/42.1.2116/ALL/ALL' and commit message 'INT-0001 {rebuild} <reason>'
         - PYTHON_LIBRARIES_VERSION=$(echo $TRAVIS_TAG | cut -d "/" -f 2)
         - IMAGE_TO_REBUILD=$(echo $TRAVIS_TAG | cut -d "/" -f 3)
         - REPO_TO_PUSH=$(echo $TRAVIS_TAG | cut -d "/" -f 4)
