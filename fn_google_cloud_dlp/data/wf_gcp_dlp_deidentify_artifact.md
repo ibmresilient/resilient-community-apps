@@ -18,17 +18,13 @@
 
 ### Pre-Processing Script
 ```python
-inputs.incident_id = incident.id
-if artifact.type == "string":
-  inputs.gcp_artifact_input = artifact.value
-else:
-  inputs.artifact_id = artifact.id
+None
 ```
 
 ### Post-Processing Script
 ```python
 """
-If the integration was successful in operation, upload a new artifact containing the now de-identified text. 
+If the integration was successful in operation, return a note with the now de-identified text. 
 """
 if results.success:
   incident.addNote(u"""De-Identified using Google Cloud DLP<b>{}""".format(results.content["de_identified_text"]))
