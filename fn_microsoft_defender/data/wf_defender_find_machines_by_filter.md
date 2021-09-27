@@ -14,7 +14,7 @@
 `None`
 
 ### Message Destination
-`fn_msdefender`
+`fn_microsoft_defender`
 
 ### Pre-Processing Script
 ```python

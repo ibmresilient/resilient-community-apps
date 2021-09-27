@@ -17,7 +17,8 @@ MACHINES_URL = "api/machines"
 MACHINE_ACTIONS_URL = "api/machineactions"
 MACHINE_RECOMMENDATIONS_URL = "api/machines/{}/vulnerabilities"
 PACKAGE_URI = "GetPackageUri"
-FILES_URL = "api/files/{}/machines"
+FILES_URL = "api/files/{}"
+FILES_URL_BY_MACHINE = "/".join([FILES_URL, "machines"])
 MACHINES_FILTER = {
      "filter_by_name": "startswith(computerDnsName,'{}')"
 }
