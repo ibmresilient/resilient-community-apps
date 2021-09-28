@@ -18,7 +18,11 @@
 
 ### Pre-Processing Script
 ```python
-None
+inputs.incident_id = incident.id
+if artifact.type == "string":
+  inputs.gcp_artifact_input = artifact.value
+else:
+  inputs.artifact_id = artifact.id
 ```
 
 ### Post-Processing Script

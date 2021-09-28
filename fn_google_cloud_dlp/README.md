@@ -23,6 +23,7 @@
 - [Requirements](#requirements)
   - [Resilient platform](#resilient-platform)
   - [Cloud Pak for Security](#cloud-pak-for-security)
+  - [Authenticating to Google Cloud](#authenticating-to-google-cloud) 
   - [Proxy Server](#proxy-server)
   - [Python Environment](#python-environment)
 - [Installation](#installation)
@@ -114,11 +115,11 @@ These guides are available on the IBM Knowledge Center at [ibm.biz/cp4s-docs](ht
 Application Default Credentials:
 Application Default Credentials are the prefered way to authenticate when using a client library to interface with Google Cloud.
 
-Services using ADC look for credentials within a GOOGLE_APPLICATION_CREDENTIALS environment variable. Unless you specifically want to have ADC use other credentials (for example, user credentials), set this environment variable to point to your service account key file.
-It is recommended to create a new service or user account with the `DLP.User` permission in the IAM tab. You will then be given a keyfile which you can set as the GOOGLE_APPLICATION_CREDENTIALS bash value which will be the absolute path to your Keyfile. To use in App Host, create a new file in the "Configuration" tab. Name the file "service_account_key.json" and have the path be "/var/rescircuits". Paste in the contents of your GOOGLE_APPLICATION_CREDENTIALS bash value here.
+Services using ADC look for credentials within a `GOOGLE_APPLICATION_CREDENTIALS` environment variable. Unless you specifically want to have ADC use other credentials (for example, user credentials), set this environment variable to point to your service account key file.
+It is required to create a new service or user account with the `DLP User` permission in the service accounts tab. You will then be given a keyfile which you can set as the `GOOGLE_APPLICATION_CREDENTIALS` bash value which will be the absolute path to your Keyfile. To use in App Host, create a new file in the "Configuration" tab. Name the file "service_account_key.json" and have the path be "/var/rescircuits". Paste in the contents of your `GOOGLE_APPLICATION_CREDENTIALS` bash value here.
 
 ### Proxy Server
-The app **does/does not** support a proxy server.
+The app does support a proxy server.
 
 ### Python Environment
 Both Python 2.7 and Python 3.6 are supported.
@@ -172,8 +173,7 @@ None
 <details><summary>Outputs:</summary>
 <p>
 
-No output
-
+{'version': '1.0', 'success': True, 'reason': None, 'content': {'de_identified_text': '\ufeffSSN,gender,birthdat...##########'}, 'raw': '{"de_identified_text...########"}', 'inputs': {'gcp_dlp_info_types': [...], 'incident_id': 2114, 'attachment_id': 22}, 'metrics': {'version': '1.0', 'package': 'fn-google-cloud-dlp', 'package_version': '1.1.0', 'host': [hostname], 'execution_time_ms': 2740086, 'timestamp': '2021-09-28 17:34:07'}}
 </p>
 </details>
 
@@ -229,7 +229,7 @@ None
 <details><summary>Outputs:</summary>
 <p>
 
-No output
+{'version': '1.0', 'success': True, 'reason': None, 'content': {'findings': [...], 'attachment_name': '[PII Removed]sample-...ta.csv.txt'}, 'raw': '{"findings": [], "at....csv.txt"}', 'inputs': {'gcp_dlp_info_types': [...], 'incident_id': 2114, 'attachment_id': 38}, 'metrics': {'version': '1.0', 'package': 'fn-google-cloud-dlp', 'package_version': '1.1.0', 'host': [hostname], 'execution_time_ms': 11913, 'timestamp': '2021-09-28 19:03:18'}}
 
 </p>
 </details>
