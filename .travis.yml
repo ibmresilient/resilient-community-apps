@@ -4,11 +4,13 @@ os: linux
 env:
   global:
     - PATH_ALLOW_IMAGE_NAMES="$TRAVIS_BUILD_DIR/.scripts/ALLOW_IMAGE_NAMES.txt"
+    - PATH_EXTERNAL_ALLOW_IMAGE_NAMES="$TRAVIS_BUILD_DIR/.scripts/EXTERNAL_ALLOW_IMAGE_NAMES.txt"
     - PATH_PIP_REQ_MAIN="$TRAVIS_BUILD_DIR/.scripts/requirements_main.txt"
     - PATH_PIP_REQ_TESTS="$TRAVIS_BUILD_DIR/.scripts/requirements_tests.txt"
     - FILE_NAME_EXTRA_SETUP=".travis_extra_setup.sh"
     - SCRIPTS_DIR="$TRAVIS_BUILD_DIR/.scripts"
 
+    - QUAY_API_URL="$QUAY_URL/api/v1"
     - ARTIFACTORY_BASE_URL="https://na.$ARTIFACTORY_URL/artifactory"
     - ARTIFACTORY_GENERIC_STORAGE="$ARTIFACTORY_BASE_URL/$ARTIFACTORY_GENERIC_STORAGE"
     - ARTIFACTORY_DOCKER_REPO="$ARTIFACTORY_DOCKER_REPO_NAME.$ARTIFACTORY_URL"
@@ -41,18 +43,21 @@ notifications:
   on_failure: always
 
 stages:
-  - name: run all tests
-    if: tag IS blank AND branch = master AND type = cron
-  - name: run package tests
-    if: type != cron
-  # Every commit not on master performs static analysis
-  - name: static analysis
-    if: tag IS blank AND type != cron
-  - name: build image and app zip
-    if: tag IS blank AND type = push
-  # Rebuild all images
-  - name: rebuild all images
-    if: tag =~ ^rebuild/.+
+  # - name: run all tests
+  #   if: tag IS blank AND branch = master AND type = cron
+  # - name: run package tests
+  #   if: type != cron
+  # # Every commit not on master performs static analysis
+  # - name: static analysis
+  #   if: tag IS blank AND type != cron
+  # - name: build image and app zip
+  #   if: tag IS blank AND type = push
+  # # Rebuild all images
+  # - name: rebuild all images
+  #   if: tag =~ ^rebuild/.+
+  # Sync all images
+  - name: sync all images
+    if: tag =~ ^sync/.+
 
 matrix:
 
@@ -68,163 +73,179 @@ matrix:
 
   include:
 
-    - stage: run all tests
-      name: Python 2.7 Unit Tests - Main - PyPi
-      python: 2.7
-      env:
-        - RUN_TYPE=unit_test_main_pp TOXENV=py27
-      install:
-        - pip install -U -r "$PATH_PIP_REQ_MAIN"
-        - pip install -U -r "$PATH_PIP_REQ_TESTS"
-      script:
-        - echo "Starting Python 2.7 Unit Tests - Main - PyPi"
-        - .scripts/run_tests.sh "ALL" "$PYPI_INDEX"
+    # - stage: run all tests
+    #   name: Python 2.7 Unit Tests - Main - PyPi
+    #   python: 2.7
+    #   env:
+    #     - RUN_TYPE=unit_test_main_pp TOXENV=py27
+    #   install:
+    #     - pip install -U -r "$PATH_PIP_REQ_MAIN"
+    #     - pip install -U -r "$PATH_PIP_REQ_TESTS"
+    #   script:
+    #     - echo "Starting Python 2.7 Unit Tests - Main - PyPi"
+    #     - .scripts/run_tests.sh "ALL" "$PYPI_INDEX"
 
-    - stage: run all tests
-      name: Python 3.6 Unit Tests - Main - PyPi
-      python: 3.6
-      env:
-        - RUN_TYPE=unit_test_main_pp TOXENV=py36
-      install:
-        - pip install -U -r "$PATH_PIP_REQ_MAIN"
-        - pip install -U -r "$PATH_PIP_REQ_TESTS"
-      script:
-        - echo "Starting Python 3.6 Unit Tests - Main - PyPi"
-        - .scripts/run_tests.sh "ALL" "$PYPI_INDEX"
+    # - stage: run all tests
+    #   name: Python 3.6 Unit Tests - Main - PyPi
+    #   python: 3.6
+    #   env:
+    #     - RUN_TYPE=unit_test_main_pp TOXENV=py36
+    #   install:
+    #     - pip install -U -r "$PATH_PIP_REQ_MAIN"
+    #     - pip install -U -r "$PATH_PIP_REQ_TESTS"
+    #   script:
+    #     - echo "Starting Python 3.6 Unit Tests - Main - PyPi"
+    #     - .scripts/run_tests.sh "ALL" "$PYPI_INDEX"
 
-    - stage: run all tests
-      name: Python 2.7 Unit Tests - Main - Artifactory
-      python: 2.7
-      env:
-        - RUN_TYPE=unit_test_main_af TOXENV=py27
-      install:
-        - pip install -U -r "$PATH_PIP_REQ_MAIN"
-        - pip install -U -r "$PATH_PIP_REQ_TESTS"
-      script:
-        - echo "Starting Python 2.7 Unit Tests - Main - Artifactory"
-        - .scripts/run_tests.sh "ALL" "$ARTIFACTORY_PYPI_INDEX"
+    # - stage: run all tests
+    #   name: Python 2.7 Unit Tests - Main - Artifactory
+    #   python: 2.7
+    #   env:
+    #     - RUN_TYPE=unit_test_main_af TOXENV=py27
+    #   install:
+    #     - pip install -U -r "$PATH_PIP_REQ_MAIN"
+    #     - pip install -U -r "$PATH_PIP_REQ_TESTS"
+    #   script:
+    #     - echo "Starting Python 2.7 Unit Tests - Main - Artifactory"
+    #     - .scripts/run_tests.sh "ALL" "$ARTIFACTORY_PYPI_INDEX"
 
-    - stage: run all tests
-      name: Python 3.6 Unit Tests - Main - Artifactory
-      python: 3.6
-      env:
-        - RUN_TYPE=unit_test_main_af TOXENV=py36
-      install:
-        - pip install -U -r "$PATH_PIP_REQ_MAIN"
-        - pip install -U -r "$PATH_PIP_REQ_TESTS"
-      script:
-        - echo "Starting Python 3.6 Unit Tests - Main - Artifactory"
-        - .scripts/run_tests.sh "ALL" "$ARTIFACTORY_PYPI_INDEX"
+    # - stage: run all tests
+    #   name: Python 3.6 Unit Tests - Main - Artifactory
+    #   python: 3.6
+    #   env:
+    #     - RUN_TYPE=unit_test_main_af TOXENV=py36
+    #   install:
+    #     - pip install -U -r "$PATH_PIP_REQ_MAIN"
+    #     - pip install -U -r "$PATH_PIP_REQ_TESTS"
+    #   script:
+    #     - echo "Starting Python 3.6 Unit Tests - Main - Artifactory"
+    #     - .scripts/run_tests.sh "ALL" "$ARTIFACTORY_PYPI_INDEX"
 
-    - stage: run package tests
-      name: Python 2.7 Unit Tests - Package
-      python: 2.7
-      env:
-        - RUN_TYPE=unit_test_package TOXENV=py27
-      install:
-        - pip install -U -r "$PATH_PIP_REQ_MAIN"
-        - pip install -U -r "$PATH_PIP_REQ_TESTS"
-      script:
-        - echo "$TRAVIS_COMMIT_MESSAGE"
-        - echo "Starting Python 2.7 Unit Tests - Package"
-        - .scripts/run_tests.sh "$PACKAGE_NAME" "$PYPI_INDEX_TO_USE"
+    # - stage: run package tests
+    #   name: Python 2.7 Unit Tests - Package
+    #   python: 2.7
+    #   env:
+    #     - RUN_TYPE=unit_test_package TOXENV=py27
+    #   install:
+    #     - pip install -U -r "$PATH_PIP_REQ_MAIN"
+    #     - pip install -U -r "$PATH_PIP_REQ_TESTS"
+    #   script:
+    #     - echo "$TRAVIS_COMMIT_MESSAGE"
+    #     - echo "Starting Python 2.7 Unit Tests - Package"
+    #     - .scripts/run_tests.sh "$PACKAGE_NAME" "$PYPI_INDEX_TO_USE"
 
-    - stage: run package tests
-      name: Python 3.6 Unit Tests - Package
-      python: 3.6
-      env:
-        - RUN_TYPE=unit_test_package TOXENV=py36
-      install:
-        - pip install -U -r "$PATH_PIP_REQ_MAIN"
-        - pip install -U -r "$PATH_PIP_REQ_TESTS"
-      script:
-        - echo "Starting Python 3.6 Unit Tests - Package"
-        - .scripts/run_tests.sh "$PACKAGE_NAME" "$PYPI_INDEX_TO_USE"
+    # - stage: run package tests
+    #   name: Python 3.6 Unit Tests - Package
+    #   python: 3.6
+    #   env:
+    #     - RUN_TYPE=unit_test_package TOXENV=py36
+    #   install:
+    #     - pip install -U -r "$PATH_PIP_REQ_MAIN"
+    #     - pip install -U -r "$PATH_PIP_REQ_TESTS"
+    #   script:
+    #     - echo "Starting Python 3.6 Unit Tests - Package"
+    #     - .scripts/run_tests.sh "$PACKAGE_NAME" "$PYPI_INDEX_TO_USE"
 
-    # Jobs that perform static analysis; code quality, security scans etc
-    - stage: static analysis
-      name: Py2.7 Bandit Security Scan
-      python: 2.7
-      env:
-        - ANALYSIS_NAME="Py2.7 Bandit Security Scan"
-      install:
-        - pip install bandit==1.6.2
-      script:
-        - .scripts/run_bandit_scan.sh "$PACKAGE_NAME"
+    # # Jobs that perform static analysis; code quality, security scans etc
+    # - stage: static analysis
+    #   name: Py2.7 Bandit Security Scan
+    #   python: 2.7
+    #   env:
+    #     - ANALYSIS_NAME="Py2.7 Bandit Security Scan"
+    #   install:
+    #     - pip install bandit==1.6.2
+    #   script:
+    #     - .scripts/run_bandit_scan.sh "$PACKAGE_NAME"
 
-    - stage: static analysis
-      name: Py3.6 Bandit Security Scan
-      python: 3.6
-      env:
-        - ANALYSIS_NAME="Py3.6 Bandit Security Scan"
-      install:
-        - pip install bandit
-      script:
-        - .scripts/run_bandit_scan.sh "$PACKAGE_NAME"
+    # - stage: static analysis
+    #   name: Py3.6 Bandit Security Scan
+    #   python: 3.6
+    #   env:
+    #     - ANALYSIS_NAME="Py3.6 Bandit Security Scan"
+    #   install:
+    #     - pip install bandit
+    #   script:
+    #     - .scripts/run_bandit_scan.sh "$PACKAGE_NAME"
 
-    - stage: static analysis
-      name: Pylint
-      python: 3.6
-      env:
-        - ANALYSIS_NAME="Pylint"
-      install:
-        - pip install pylint
-      script:
-        - .scripts/pylint.sh "$PACKAGE_NAME"
+    # - stage: static analysis
+    #   name: Pylint
+    #   python: 3.6
+    #   env:
+    #     - ANALYSIS_NAME="Pylint"
+    #   install:
+    #     - pip install pylint
+    #   script:
+    #     - .scripts/pylint.sh "$PACKAGE_NAME"
 
-    - stage: static analysis
-      name: Safety Checker
-      python: 3.6
-      env:
-        - ANALYSIS_NAME="CVE Search against dependancies"
-      install:
-        - pip install safety
-      script:
-        - .scripts/run_safety_scan_for_cve.sh "$PACKAGE_NAME"
+    # - stage: static analysis
+    #   name: Safety Checker
+    #   python: 3.6
+    #   env:
+    #     - ANALYSIS_NAME="CVE Search against dependancies"
+    #   install:
+    #     - pip install safety
+    #   script:
+    #     - .scripts/run_safety_scan_for_cve.sh "$PACKAGE_NAME"
 
-    - stage: build image and app zip
-      name: Build Image and App zip
+    # - stage: build image and app zip
+    #   name: Build Image and App zip
+    #   python: 3.6
+    #   services:
+    #     - docker
+    #   install:
+    #     - ./.scripts/install_ibmcli.sh
+    #   script: skip
+    #   before_deploy:
+    #     - pip install resilient-sdk -i $PYPI_INDEX_TO_USE
+    #   deploy:
+    #     - provider: script
+    #       script: .scripts/build_image_and_app_zip.sh "$PACKAGE_NAME" "DEV" "$PYPI_INDEX_TO_USE";
+    #       on:
+    #         all_branches: true
+    #         condition: "$BUILD_DEV_APP = 1"
+    #     - provider: script
+    #       script: .scripts/build_image_and_app_zip.sh "$PACKAGE_NAME" "MAIN" "$PYPI_INDEX_TO_USE";
+    #       on:
+    #         branch: master
+    #   after_deploy:
+    #     - PATH_APP_ZIP=`cat "$TRAVIS_BUILD_DIR/PATH_APP_ZIP.txt"`;
+    #     - echo "PATH_APP_ZIP=$PATH_APP_ZIP";
+    #     - FILE_NAME=$(basename $PATH_APP_ZIP);
+    #     - .scripts/send_slack_notification.sh "Built $BUILD_TYPE version of [$PACKAGE_NAME] \n Artifactory App.zip - <$PATH_APP_ZIP|$FILE_NAME>" "success";
+
+    # - stage: rebuild all images
+    #   python: 3.6
+    #   services:
+    #     - docker
+    #   install:
+    #     - pip install -U -r "$PATH_PIP_REQ_MAIN"
+    #     - pip install resilient-sdk
+    #     - sudo apt-get install jq
+    #     - ./.scripts/install_ibmcli.sh
+    #   script:
+    #     # This will take split the git tag on '/'
+    #     # E.g.:
+    #     #  - to rebuild ALL images and push back to Quay; tag with 'rebuild/42.1.2116/ALL/QUAY' and commit message 'INT-0001 {rebuild} <reason>'
+    #     #  - to rebuild single image on Artifactory; tag with 'rebuild/42.1.2116/fn_utilities/ARTIFACTORY' and commit message 'INT-0001 {fn_utilities} <reason>'
+    #     #  - to rebuild ALL images and push to ICR; tag with 'rebuild/42.1.2116/ALL/ICR' and commit message 'INT-0001 {rebuild} <reason>'
+    #     #  - to rebuild ALL images and push to ALL; tag with 'rebuild/42.1.2116/ALL/ALL' and commit message 'INT-0001 {rebuild} <reason>'
+    #     - PYTHON_LIBRARIES_VERSION=$(echo $TRAVIS_TAG | cut -d "/" -f 2)
+    #     - IMAGE_TO_REBUILD=$(echo $TRAVIS_TAG | cut -d "/" -f 3)
+    #     - REPO_TO_PUSH=$(echo $TRAVIS_TAG | cut -d "/" -f 4)
+    #     - .scripts/rebuild_images.sh "$PYTHON_LIBRARIES_VERSION" "$IMAGE_TO_REBUILD" "$REPO_TO_PUSH"
+
+    - stage: sync all images
       python: 3.6
       services:
         - docker
       install:
-        - ./.scripts/install_ibmcli.sh
-      script: skip
-      before_deploy:
-        - pip install resilient-sdk -i $PYPI_INDEX_TO_USE
-      deploy:
-        - provider: script
-          script: .scripts/build_image_and_app_zip.sh "$PACKAGE_NAME" "DEV" "$PYPI_INDEX_TO_USE";
-          on:
-            all_branches: true
-            condition: "$BUILD_DEV_APP = 1"
-        - provider: script
-          script: .scripts/build_image_and_app_zip.sh "$PACKAGE_NAME" "MAIN" "$PYPI_INDEX_TO_USE";
-          on:
-            branch: master
-      after_deploy:
-        - PATH_APP_ZIP=`cat "$TRAVIS_BUILD_DIR/PATH_APP_ZIP.txt"`;
-        - echo "PATH_APP_ZIP=$PATH_APP_ZIP";
-        - FILE_NAME=$(basename $PATH_APP_ZIP);
-        - .scripts/send_slack_notification.sh "Built $BUILD_TYPE version of [$PACKAGE_NAME] \n Artifactory App.zip - <$PATH_APP_ZIP|$FILE_NAME>" "success";
-
-    - stage: rebuild all images
-      python: 3.6
-      services:
-        - docker
-      install:
-        - pip install -U -r "$PATH_PIP_REQ_MAIN"
-        - pip install resilient-sdk
         - sudo apt-get install jq
         - ./.scripts/install_ibmcli.sh
       script:
-        # This will take split the git tag on '/'
+        # This will take split the git tag on '/'. The Date is optional but recommended so that syncs can be tracked
         # E.g.:
-        #  - to rebuild ALL images and push back to Quay; tag with 'rebuild/42.1.2116/ALL/QUAY' and commit message 'INT-0001 {rebuild} <reason>'
-        #  - to rebuild single image on Artifactory; tag with 'rebuild/42.1.2116/fn_utilities/ARTIFACTORY' and commit message 'INT-0001 {fn_utilities} <reason>'
-        #  - to rebuild ALL images and push to ICR; tag with 'rebuild/42.1.2116/ALL/ICR' and commit message 'INT-0001 {rebuild} <reason>'
-        #  - to rebuild ALL images and push to ALL; tag with 'rebuild/42.1.2116/ALL/ALL' and commit message 'INT-0001 {rebuild} <reason>'
-        - PYTHON_LIBRARIES_VERSION=$(echo $TRAVIS_TAG | cut -d "/" -f 2)
-        - IMAGE_TO_REBUILD=$(echo $TRAVIS_TAG | cut -d "/" -f 3)
-        - REPO_TO_PUSH=$(echo $TRAVIS_TAG | cut -d "/" -f 4)
-        - .scripts/rebuild_images.sh "$PYTHON_LIBRARIES_VERSION" "$IMAGE_TO_REBUILD" "$REPO_TO_PUSH"
+        #  - to sync ALL images from ICR to QUAY: tag with 'sync/ICR/QUAY/<DATE>' and commit message 'INT-0001 {sync} ICR to QUAY <reason>'
+        #  - to sync ALL images from QUAY to ICR: tag with 'sync/QUAY/ICR/<DATE>' and commit message 'INT-0001 {sync} QUAY to ICR <reason>'
+        - SOURCE_REPO=$(echo $TRAVIS_TAG | cut -d "/" -f 2)
+        - DEST_REPO=$(echo $TRAVIS_TAG | cut -d "/" -f 3)
+        - .scripts/sync_registries.sh "$SOURCE_REPO" "$DEST_REPO"
