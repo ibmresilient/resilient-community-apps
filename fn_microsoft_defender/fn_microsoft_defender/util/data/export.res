@@ -17,7 +17,12 @@
       "message_destinations": [],
       "name": "Create Artifact from Indicator",
       "object_type": "defender_atp_indicators",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "b236d1f4-7fff-491f-8029-61ec317745f9",
@@ -42,7 +47,12 @@
       "message_destinations": [],
       "name": "Defender ATP Alert App Execution Restriction",
       "object_type": "incident",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "222e9ad5-9065-4478-b2eb-c06bf5a589bf",
@@ -86,7 +96,12 @@
       "message_destinations": [],
       "name": "Defender ATP Alert Collect Machine Investigation Package",
       "object_type": "incident",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "b3c53e42-8a08-4089-87b9-cf9bbcdbcbc2",
@@ -122,7 +137,12 @@
       "message_destinations": [],
       "name": "Defender ATP Alert Machine Isolate Action ",
       "object_type": "incident",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "66ccb8fa-a873-4755-a38e-e114327bf7d1",
@@ -166,7 +186,12 @@
       "message_destinations": [],
       "name": "Defender ATP Alert Machine Scan",
       "object_type": "incident",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "b12293b4-3dc5-44cd-ad67-e72bca3aa14e",
@@ -210,7 +235,12 @@
       "message_destinations": [],
       "name": "Defender ATP Alert Machine Unisolate Action",
       "object_type": "incident",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "356ca2b6-d2ad-4f0f-9e1e-dbab49221b11",
@@ -246,7 +276,12 @@
       "message_destinations": [],
       "name": "Defender ATP Alert Machine Vulnerabilities",
       "object_type": "incident",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "5d6cf16e-39ac-47ee-912b-37e095d4c1f5",
@@ -265,7 +300,12 @@
       "message_destinations": [],
       "name": "Defender ATP Alerts by Machine",
       "object_type": "defender_atp_machines",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "73a696b2-c634-4baa-90ef-a139327014ed",
@@ -317,7 +357,12 @@
       "message_destinations": [],
       "name": "Defender ATP App Execution Restriction",
       "object_type": "defender_atp_machines",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "66f07535-cdff-4d87-9314-69880b741675",
@@ -353,7 +398,12 @@
       "message_destinations": [],
       "name": "Defender ATP Collect Machine Investigation Package",
       "object_type": "defender_atp_machines",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "661bbcf6-10a1-495b-bec3-d3e0f85c9a31",
@@ -392,7 +442,12 @@
       "message_destinations": [],
       "name": "Defender ATP Find Machine by DNS name",
       "object_type": "artifact",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "b718970d-69ac-4f45-b34c-5e5122d32ce9",
@@ -419,7 +474,12 @@
       "message_destinations": [],
       "name": "Defender ATP Find Machines",
       "object_type": "artifact",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "a36f4ac6-4447-41c2-a56d-f088494bb3c2",
@@ -458,7 +518,12 @@
       "message_destinations": [],
       "name": "Defender ATP Find Machines by File Hash",
       "object_type": "artifact",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "5e65eae4-994d-4115-9fb7-b250999e1c2b",
@@ -488,7 +553,12 @@
       "message_destinations": [],
       "name": "Defender ATP Get File Information",
       "object_type": "artifact",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "fea94eb0-6acb-4cac-beab-c64785ef7b4c",
@@ -507,7 +577,12 @@
       "message_destinations": [],
       "name": "Defender ATP List Indicators",
       "object_type": "incident",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "00ce94b8-d948-4cf7-8dc2-9c814ab304f1",
@@ -551,7 +626,12 @@
       "message_destinations": [],
       "name": "Defender ATP Machine Isolate Action",
       "object_type": "defender_atp_machines",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "ecefbfd0-e63f-4e9c-8ae8-ae9d11bd2551",
@@ -587,7 +667,12 @@
       "message_destinations": [],
       "name": "Defender ATP Machine Scan",
       "object_type": "defender_atp_machines",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "7a5413a6-83b7-477e-afed-82ff31b6fef2",
@@ -623,7 +708,12 @@
       "message_destinations": [],
       "name": "Defender ATP Machine Vulnerabilities",
       "object_type": "defender_atp_machines",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "10eb2d59-cdc6-4420-8f5f-632d675db062",
@@ -650,7 +740,12 @@
       "message_destinations": [],
       "name": "Defender ATP Quarantine Machine File",
       "object_type": "defender_atp_machines",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "c7bcd5a6-a26e-47b9-834b-917a9a888fd7",
@@ -681,9 +776,7 @@
             "DNS Name",
             "URL",
             "Malware SHA-1 Hash",
-            "User Account",
             "System Name",
-            "String",
             "Malware SHA-256 Hash",
             "URL Referer"
           ]
@@ -696,7 +789,12 @@
       "message_destinations": [],
       "name": "Defender ATP Set Indicator",
       "object_type": "artifact",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "4fd3a0c6-e4e5-4b93-94e2-9c98f9ee588c",
@@ -771,7 +869,12 @@
       "message_destinations": [],
       "name": "Defender ATP Sync Incident Close",
       "object_type": "incident",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "timeout_seconds": 86400,
       "type": 0,
       "uuid": "d0039fb0-ece7-453e-8ea4-4adeb3bbca74",
@@ -790,7 +893,12 @@
       "message_destinations": [],
       "name": "Defender ATP Update Alert",
       "object_type": "defender_atp_alerts",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "ad59a4dc-3460-4066-a930-e02d3e3d7140",
@@ -850,7 +958,12 @@
       "message_destinations": [],
       "name": "Defender Get Related Alert Information",
       "object_type": "defender_atp_alerts",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "d36ab9d8-7268-4ba7-a748-0fce2b5f207d",
@@ -877,7 +990,12 @@
       "message_destinations": [],
       "name": "Delete Indicator",
       "object_type": "defender_atp_indicators",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "4c5c773a-5d76-47e0-b01f-ec17b36d72e1",
@@ -904,7 +1022,12 @@
       "message_destinations": [],
       "name": "Update Indicator",
       "object_type": "defender_atp_indicators",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "27ab5187-5394-4054-a15b-e3ca430fcd0b",
@@ -957,7 +1080,7 @@
   ],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1632748657427,
+  "export_date": 1632918195770,
   "export_format_version": 2,
   "fields": [
     {
@@ -981,7 +1104,12 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "defender_indicator_field",
       "tooltip": "Select which field to filter on",
@@ -1047,7 +1175,12 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "defender_indicator_type",
       "tooltip": "",
@@ -1076,7 +1209,12 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "defender_alert_lastseen",
       "tooltip": "Last Seen Alert Date",
@@ -1105,7 +1243,12 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "defender_alert_lastupdatetime",
       "tooltip": "Date when alert was last updated",
@@ -1134,7 +1277,12 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "defender_alert_severity",
       "tooltip": "",
@@ -1201,7 +1349,12 @@
       "read_only": false,
       "required": "always",
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "defender_restriction_type",
       "tooltip": "",
@@ -1249,7 +1402,12 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "defender_indicator_value",
       "tooltip": "",
@@ -1278,7 +1436,12 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "defender_indicator_id",
       "tooltip": "",
@@ -1307,7 +1470,12 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "defender_alert_status",
       "tooltip": "",
@@ -1365,7 +1533,12 @@
       "read_only": false,
       "required": "always",
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "defender_alert_id",
       "tooltip": "",
@@ -1395,7 +1568,12 @@
       "read_only": false,
       "required": "always",
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "defender_machine_id",
       "tooltip": "",
@@ -1424,7 +1602,12 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "defender_indicator_action",
       "tooltip": "",
@@ -1482,7 +1665,12 @@
       "read_only": false,
       "required": "always",
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "defender_machine_scantype",
       "tooltip": "antivirus scan type",
@@ -1530,7 +1718,12 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "defender_alert_assigned_to",
       "tooltip": "",
@@ -1559,7 +1752,12 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "defender_filter_value",
       "tooltip": "",
@@ -1588,7 +1786,12 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "defender_alert_classification",
       "tooltip": "",
@@ -1645,7 +1848,12 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "defender_filter_name",
       "tooltip": "",
@@ -1674,7 +1882,12 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "defender_description",
       "tooltip": "",
@@ -1703,7 +1916,12 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "defender_title",
       "tooltip": "",
@@ -1732,7 +1950,12 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "defender_alert_determination",
       "tooltip": "",
@@ -1825,7 +2048,12 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "defender_severity",
       "tooltip": "",
@@ -1892,7 +2120,12 @@
       "read_only": false,
       "required": "always",
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "defender_lookback_timeframe",
       "tooltip": "This value must be within 30 days of current date",
@@ -1921,7 +2154,12 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "defender_expiration_time",
       "tooltip": "",
@@ -1950,7 +2188,12 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "defender_isolation_type",
       "tooltip": "Type of operation to perform",
@@ -1999,7 +2242,12 @@
       "read_only": false,
       "required": "always",
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "defender_isolation_action",
       "tooltip": "\u0027isolate\u0027 or \u0027unisolate\u0027",
@@ -2028,7 +2276,12 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "defender_alert_info",
       "tooltip": "",
@@ -2112,7 +2365,12 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "defender_alert_result_max",
       "tooltip": "Number of top results to return",
@@ -2141,7 +2399,12 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "defender_indicator_filter",
       "tooltip": "regex capability to limit list. ie: a.* for indicators starting with \u0027a\u0027",
@@ -2170,7 +2433,12 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "defender_file_hash",
       "tooltip": "SHA1 or SHA256",
@@ -2199,7 +2467,12 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "Indicator Expiration",
       "tooltip": "",
@@ -2229,7 +2502,12 @@
       "read_only": false,
       "required": "always",
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "Indicator Description",
       "tooltip": "",
@@ -2258,7 +2536,12 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "Defender Alert Last Update Time",
       "tooltip": "Refers to a 30 day range",
@@ -2288,7 +2571,12 @@
       "read_only": false,
       "required": "always",
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "Isolation Type",
       "tooltip": "",
@@ -2337,7 +2625,12 @@
       "read_only": false,
       "required": "always",
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "Indicator Action",
       "tooltip": "",
@@ -2395,7 +2688,12 @@
       "read_only": false,
       "required": "always",
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "Defender Lookback Timeframe",
       "tooltip": "Date must be within 30 days of current date",
@@ -2424,7 +2722,12 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "Indicator Field",
       "tooltip": "field to apply the filter",
@@ -2490,7 +2793,12 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "Defender Alert Determination",
       "tooltip": "",
@@ -2583,7 +2891,12 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "Defender Alert Status",
       "tooltip": "",
@@ -2641,7 +2954,12 @@
       "read_only": false,
       "required": "always",
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "Indicator Title",
       "tooltip": "",
@@ -2670,7 +2988,12 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "Defender Alert Last Seen",
       "tooltip": "Refers to a 30 day range",
@@ -2699,7 +3022,12 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "Indicator Severity",
       "tooltip": "",
@@ -2765,7 +3093,12 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "Defender Alert Severity",
       "tooltip": "",
@@ -2831,7 +3164,12 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "Indicator Filter",
       "tooltip": "regex to apply ",
@@ -2860,7 +3198,12 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "Defender Alert Classification",
       "tooltip": "",
@@ -2917,7 +3260,12 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "Defender Max Results",
       "tooltip": "Max number of results to return",
@@ -2947,7 +3295,12 @@
       "read_only": false,
       "required": "always",
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "Scan Type",
       "tooltip": "",
@@ -2996,7 +3349,12 @@
       "read_only": false,
       "required": "always",
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "Action Comment",
       "tooltip": "",
@@ -3025,7 +3383,12 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "Defender Assigned To",
       "tooltip": "",
@@ -3055,7 +3418,12 @@
       "read_only": false,
       "required": "always",
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "App Execution Action",
       "tooltip": "",
@@ -3103,7 +3471,12 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "Defender Machine ID",
       "tooltip": "",
@@ -3132,7 +3505,12 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "Defender Alert Id",
       "tooltip": "",
@@ -3161,7 +3539,12 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "Defender Incident Id",
       "tooltip": "",
@@ -3190,7 +3573,12 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "Defender Determination",
       "tooltip": "",
@@ -3219,7 +3607,12 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "Defender Category",
       "tooltip": "",
@@ -3248,7 +3641,12 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "Defender Machine Name",
       "tooltip": "",
@@ -3277,7 +3675,12 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "Defender Classification",
       "tooltip": "",
@@ -3319,11 +3722,16 @@
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1632746666604,
+      "last_modified_time": 1632914822661,
       "name": "defender_alert_search",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "uuid": "b84ee1e6-d4de-4fef-8ed4-4418b87d53d5",
-      "version": 1,
+      "version": 2,
       "view_items": [
         {
           "content": "c4707a3e-777e-4bc8-a9b9-5f9e54b7058a",
@@ -3373,7 +3781,12 @@
           "name": "Defender ATP Alerts by Machine",
           "object_type": "defender_atp_machines",
           "programmatic_name": "defender_atp_alerts_by_machine",
-          "tags": [],
+          "tags": [
+            {
+              "tag_handle": "fn_microsoft_defender",
+              "value": null
+            }
+          ],
           "uuid": null,
           "workflow_id": 58
         }
@@ -3400,11 +3813,16 @@
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1632746666652,
+      "last_modified_time": 1632914822661,
       "name": "defender_app_execution",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "uuid": "92906dbe-9be4-4277-8f50-c6f15fb5dcbc",
-      "version": 1,
+      "version": 2,
       "view_items": [
         {
           "content": "b35bd7fe-d52a-483e-ab06-16f8131ce093",
@@ -3438,7 +3856,12 @@
           "name": "Defender ATP Alert App Execution Restriction",
           "object_type": "incident",
           "programmatic_name": "defender_atp_alert_app_execution",
-          "tags": [],
+          "tags": [
+            {
+              "tag_handle": "fn_microsoft_defender",
+              "value": null
+            }
+          ],
           "uuid": null,
           "workflow_id": 38
         },
@@ -3448,7 +3871,12 @@
           "name": "Defender ATP App Execution Restriction",
           "object_type": "defender_atp_machines",
           "programmatic_name": "defender_atp_app_execution",
-          "tags": [],
+          "tags": [
+            {
+              "tag_handle": "fn_microsoft_defender",
+              "value": null
+            }
+          ],
           "uuid": null,
           "workflow_id": 54
         }
@@ -3475,11 +3903,16 @@
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1632746666696,
+      "last_modified_time": 1632914822661,
       "name": "defender_collect_machine_investigation_package",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "uuid": "bfa88004-c394-4504-92ad-d3e1cb717b20",
-      "version": 1,
+      "version": 2,
       "view_items": [
         {
           "content": "c4707a3e-777e-4bc8-a9b9-5f9e54b7058a",
@@ -3505,7 +3938,12 @@
           "name": "Defender ATP Alert Collect Machine Investigation Package",
           "object_type": "incident",
           "programmatic_name": "defender_atp_alert_collect_machine_investigation_package",
-          "tags": [],
+          "tags": [
+            {
+              "tag_handle": "fn_microsoft_defender",
+              "value": null
+            }
+          ],
           "uuid": null,
           "workflow_id": 42
         },
@@ -3515,7 +3953,12 @@
           "name": "Defender ATP Collect Machine Investigation Package",
           "object_type": "defender_atp_machines",
           "programmatic_name": "defender_atp_collect_machine_investigation_package",
-          "tags": [],
+          "tags": [
+            {
+              "tag_handle": "fn_microsoft_defender",
+              "value": null
+            }
+          ],
           "uuid": null,
           "workflow_id": 48
         }
@@ -3542,11 +3985,16 @@
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1632746666741,
+      "last_modified_time": 1632914822661,
       "name": "defender_delete_indicator",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "uuid": "f13cf24d-612b-47c7-aa51-3748d3c3520e",
-      "version": 1,
+      "version": 2,
       "view_items": [
         {
           "content": "bf1e212e-9f0d-4c67-9679-0792f1223b94",
@@ -3564,7 +4012,12 @@
           "name": "Defender ATP Delete Indicator",
           "object_type": "defender_atp_indicators",
           "programmatic_name": "defender_atp_delete_indicator",
-          "tags": [],
+          "tags": [
+            {
+              "tag_handle": "fn_microsoft_defender",
+              "value": null
+            }
+          ],
           "uuid": null,
           "workflow_id": 47
         }
@@ -3591,11 +4044,16 @@
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1632746666785,
+      "last_modified_time": 1632914822661,
       "name": "defender_find_machines",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "uuid": "11f82831-e4a8-4764-8ccd-f303c63caaf4",
-      "version": 1,
+      "version": 2,
       "view_items": [
         {
           "content": "bdbb9226-ec7b-48be-ac04-ae19ddb32b27",
@@ -3621,7 +4079,12 @@
           "name": "Defender ATP Find Machines by IP Address",
           "object_type": "artifact",
           "programmatic_name": "defender_atp_find_machines",
-          "tags": [],
+          "tags": [
+            {
+              "tag_handle": "fn_microsoft_defender",
+              "value": null
+            }
+          ],
           "uuid": null,
           "workflow_id": 52
         }
@@ -3648,11 +4111,16 @@
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1632746666830,
+      "last_modified_time": 1632914822661,
       "name": "defender_find_machines_by_file",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "uuid": "adcb85db-0dc3-4a63-8875-4f325919dc3d",
-      "version": 1,
+      "version": 2,
       "view_items": [
         {
           "content": "bdbb9226-ec7b-48be-ac04-ae19ddb32b27",
@@ -3670,7 +4138,12 @@
           "name": "Defender ATP Find Machines by File Hash",
           "object_type": "artifact",
           "programmatic_name": "defender_atp_find_machines_by_file_hash",
-          "tags": [],
+          "tags": [
+            {
+              "tag_handle": "fn_microsoft_defender",
+              "value": null
+            }
+          ],
           "uuid": null,
           "workflow_id": 49
         }
@@ -3697,11 +4170,16 @@
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1632746666875,
+      "last_modified_time": 1632914822661,
       "name": "defender_find_machines_by_filter",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "uuid": "3ed5fa56-77c6-464e-b0c2-f5ea81d08370",
-      "version": 1,
+      "version": 2,
       "view_items": [
         {
           "content": "e13612f7-f7ed-45ce-b968-99a367f8d644",
@@ -3727,7 +4205,12 @@
           "name": "Defender ATP Find Machines by filter",
           "object_type": "artifact",
           "programmatic_name": "defender_find_machines_by_filter",
-          "tags": [],
+          "tags": [
+            {
+              "tag_handle": "fn_microsoft_defender",
+              "value": null
+            }
+          ],
           "uuid": null,
           "workflow_id": 46
         }
@@ -3754,11 +4237,16 @@
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1632748631420,
+      "last_modified_time": 1632914822662,
       "name": "defender_get_file_information",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "uuid": "1121d8e5-07e7-4506-8e87-9badef1cbcae",
-      "version": 2,
+      "version": 3,
       "view_items": [
         {
           "content": "615b32d0-ab72-48a0-a624-9043ff55dba2",
@@ -3776,7 +4264,12 @@
           "name": "Defender ATP Get File Information",
           "object_type": "artifact",
           "programmatic_name": "defender_atp_get_file_information",
-          "tags": [],
+          "tags": [
+            {
+              "tag_handle": "fn_microsoft_defender",
+              "value": null
+            }
+          ],
           "uuid": null,
           "workflow_id": 60
         }
@@ -3803,11 +4296,16 @@
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1632746666964,
+      "last_modified_time": 1632914822662,
       "name": "defender_get_related_alert_information",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "uuid": "4517e61a-240f-4026-94f7-7867f81373ee",
-      "version": 1,
+      "version": 2,
       "view_items": [
         {
           "content": "c0d41921-0099-4e06-89de-4fbf3c3bda2c",
@@ -3833,7 +4331,12 @@
           "name": "Defender ATP Get Related Alert Information",
           "object_type": "defender_atp_alerts",
           "programmatic_name": "defender_get_related_alert_information",
-          "tags": [],
+          "tags": [
+            {
+              "tag_handle": "fn_microsoft_defender",
+              "value": null
+            }
+          ],
           "uuid": null,
           "workflow_id": 50
         }
@@ -3860,11 +4363,16 @@
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1632746667011,
+      "last_modified_time": 1632914822662,
       "name": "defender_list_indicators",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "uuid": "77e866e9-9c78-41d7-b13d-4feea72d59b7",
-      "version": 1,
+      "version": 2,
       "view_items": [
         {
           "content": "5a160310-4284-43fa-88b4-97bde9f7ce73",
@@ -3890,7 +4398,12 @@
           "name": "Defender ATP List Indicators",
           "object_type": "incident",
           "programmatic_name": "defender_list_indicators",
-          "tags": [],
+          "tags": [
+            {
+              "tag_handle": "fn_microsoft_defender",
+              "value": null
+            }
+          ],
           "uuid": null,
           "workflow_id": 56
         }
@@ -3917,11 +4430,16 @@
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1632746667061,
+      "last_modified_time": 1632914822662,
       "name": "defender_machine_isolation",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "uuid": "0afc74fe-8301-4801-a162-9e0dbd984e1a",
-      "version": 1,
+      "version": 2,
       "view_items": [
         {
           "content": "4f112eb2-0f5e-44b4-a240-d2feca9189c9",
@@ -3963,7 +4481,12 @@
           "name": "Defender ATP Alert Machine Isolation",
           "object_type": "incident",
           "programmatic_name": "defender_atp_alert_machine_isolation",
-          "tags": [],
+          "tags": [
+            {
+              "tag_handle": "fn_microsoft_defender",
+              "value": null
+            }
+          ],
           "uuid": null,
           "workflow_id": 39
         },
@@ -3973,7 +4496,12 @@
           "name": "Defender ATP Alert Machine Unisolate",
           "object_type": "incident",
           "programmatic_name": "defender_atp_alert_machine_unisolate",
-          "tags": [],
+          "tags": [
+            {
+              "tag_handle": "fn_microsoft_defender",
+              "value": null
+            }
+          ],
           "uuid": null,
           "workflow_id": 45
         },
@@ -3983,7 +4511,12 @@
           "name": "Defender ATP Machine Isolation",
           "object_type": "defender_atp_machines",
           "programmatic_name": "defender_atp_machine_isolation",
-          "tags": [],
+          "tags": [
+            {
+              "tag_handle": "fn_microsoft_defender",
+              "value": null
+            }
+          ],
           "uuid": null,
           "workflow_id": 36
         },
@@ -3993,7 +4526,12 @@
           "name": "Defender ATP Machine Unisolate",
           "object_type": "defender_atp_machines",
           "programmatic_name": "defender_atp_machine_unisolate",
-          "tags": [],
+          "tags": [
+            {
+              "tag_handle": "fn_microsoft_defender",
+              "value": null
+            }
+          ],
           "uuid": null,
           "workflow_id": 44
         }
@@ -4020,11 +4558,16 @@
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1632746667105,
+      "last_modified_time": 1632914822662,
       "name": "defender_machine_scan",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "uuid": "3e8950d3-1f51-4bcb-b9ac-26e28e7f1704",
-      "version": 1,
+      "version": 2,
       "view_items": [
         {
           "content": "c4707a3e-777e-4bc8-a9b9-5f9e54b7058a",
@@ -4058,7 +4601,12 @@
           "name": "Defender ATP Alert Machine Scan",
           "object_type": "incident",
           "programmatic_name": "defender_atp_alert_machine_scan",
-          "tags": [],
+          "tags": [
+            {
+              "tag_handle": "fn_microsoft_defender",
+              "value": null
+            }
+          ],
           "uuid": null,
           "workflow_id": 59
         },
@@ -4068,7 +4616,12 @@
           "name": "Defender ATP Machine Scan",
           "object_type": "defender_atp_machines",
           "programmatic_name": "defender_atp_machine_scan",
-          "tags": [],
+          "tags": [
+            {
+              "tag_handle": "fn_microsoft_defender",
+              "value": null
+            }
+          ],
           "uuid": null,
           "workflow_id": 53
         }
@@ -4095,11 +4648,16 @@
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1632746667151,
+      "last_modified_time": 1632914822662,
       "name": "defender_machine_vulnerabilities",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "uuid": "b0e17c3e-ef30-46ed-bb0b-3862990314ed",
-      "version": 1,
+      "version": 2,
       "view_items": [
         {
           "content": "c4707a3e-777e-4bc8-a9b9-5f9e54b7058a",
@@ -4117,7 +4675,12 @@
           "name": "Defender ATP Alert Machine Vulnerabilities",
           "object_type": "incident",
           "programmatic_name": "defender_atp_alert_machine_vulnerabilities",
-          "tags": [],
+          "tags": [
+            {
+              "tag_handle": "fn_microsoft_defender",
+              "value": null
+            }
+          ],
           "uuid": null,
           "workflow_id": 40
         },
@@ -4127,7 +4690,12 @@
           "name": "Defender ATP Machine Vulnerabilities",
           "object_type": "defender_atp_machines",
           "programmatic_name": "defender_atp_machine_vulnerabilities",
-          "tags": [],
+          "tags": [
+            {
+              "tag_handle": "fn_microsoft_defender",
+              "value": null
+            }
+          ],
           "uuid": null,
           "workflow_id": 51
         }
@@ -4154,11 +4722,16 @@
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1632746667196,
+      "last_modified_time": 1632914822662,
       "name": "defender_quarantine_file",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "uuid": "656a8125-f55f-4047-a1b8-86e7dc5b05f0",
-      "version": 1,
+      "version": 2,
       "view_items": [
         {
           "content": "bdbb9226-ec7b-48be-ac04-ae19ddb32b27",
@@ -4192,7 +4765,12 @@
           "name": "Defender ATP Quarantine File",
           "object_type": "defender_atp_machines",
           "programmatic_name": "defender_quarantine_file",
-          "tags": [],
+          "tags": [
+            {
+              "tag_handle": "fn_microsoft_defender",
+              "value": null
+            }
+          ],
           "uuid": null,
           "workflow_id": 37
         }
@@ -4219,11 +4797,16 @@
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1632746667243,
+      "last_modified_time": 1632914822662,
       "name": "defender_set_indicator",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "uuid": "faf52947-0e1a-4e2b-9dfb-ed5ef1605667",
-      "version": 1,
+      "version": 2,
       "view_items": [
         {
           "content": "c8b53f87-e1f7-49df-bfaa-5c72c1168d69",
@@ -4297,7 +4880,12 @@
           "name": "Defender ATP Set Indicator",
           "object_type": "artifact",
           "programmatic_name": "defender_atp_set_indicator",
-          "tags": [],
+          "tags": [
+            {
+              "tag_handle": "fn_microsoft_defender",
+              "value": null
+            }
+          ],
           "uuid": null,
           "workflow_id": 43
         },
@@ -4307,7 +4895,12 @@
           "name": "Defender ATP Update Indicator",
           "object_type": "defender_atp_indicators",
           "programmatic_name": "defender_atp_update_indicator",
-          "tags": [],
+          "tags": [
+            {
+              "tag_handle": "fn_microsoft_defender",
+              "value": null
+            }
+          ],
           "uuid": null,
           "workflow_id": 55
         }
@@ -4334,11 +4927,16 @@
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1632746667289,
+      "last_modified_time": 1632914822663,
       "name": "defender_update_alert",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "uuid": "7666e80b-6eb0-4bef-88cc-e3bf095caad9",
-      "version": 1,
+      "version": 2,
       "view_items": [
         {
           "content": "c0d41921-0099-4e06-89de-4fbf3c3bda2c",
@@ -4396,7 +4994,12 @@
           "name": "Defender ATP Sync Incident Close",
           "object_type": "incident",
           "programmatic_name": "defender_atp_sync_incident_close",
-          "tags": [],
+          "tags": [
+            {
+              "tag_handle": "fn_microsoft_defender",
+              "value": null
+            }
+          ],
           "uuid": null,
           "workflow_id": 57
         },
@@ -4406,7 +5009,12 @@
           "name": "Defender ATP Update Alert",
           "object_type": "defender_atp_alerts",
           "programmatic_name": "defender_atp_update_alert",
-          "tags": [],
+          "tags": [
+            {
+              "tag_handle": "fn_microsoft_defender",
+              "value": null
+            }
+          ],
           "uuid": null,
           "workflow_id": 41
         }
@@ -4433,11 +5041,16 @@
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1632746667341,
+      "last_modified_time": 1632914822663,
       "name": "fn_test",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "uuid": "4452ce45-23d1-4af2-8781-a243369441b5",
-      "version": 1,
+      "version": 2,
       "view_items": [
         {
           "content": "c0d41921-0099-4e06-89de-4fbf3c3bda2c",
@@ -4453,12 +5066,12 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 1,
+  "id": 3,
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1632748656230,
+      "create_date": 1632918194645,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -4467,7 +5080,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1632748656230,
+      "update_date": 1632918194645,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -4476,13 +5089,20 @@
   "locale": null,
   "message_destinations": [
     {
-      "api_keys": [],
+      "api_keys": [
+        "4ff79a78-ac36-4ec6-8fa3-27da39d44142"
+      ],
       "destination_type": 0,
       "expect_ack": true,
       "export_key": "fn_microsoft_defender",
       "name": "fn_microsoft_defender",
       "programmatic_name": "fn_microsoft_defender",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "users": [
         "a@example.com"
       ],
@@ -4507,7 +5127,12 @@
       "name": "Create Artifact from Indicator",
       "object_type": "defender_atp_indicators",
       "script_text": "# Convert a Defender ATP indicator to an artifact_type\n# lookup for Defender indicator types to arttfact types\ntype_lookup = {\n        \"FileSha1\": \"Malware SHA-1 Hash\",\n        \"FileSha256\": \"Malware SHA-256 Hash\",\n        \"IpAddress\": \"IP Address\",\n        \"DomainName\": \"DNS Name\",\n        \"Url\": \"URL\"\n    }\n    \nartifact_type = type_lookup.get(row[\u0027ind_type\u0027], \"String\")\nartifact_description = u\"{}\\n{}\".format(row[\u0027ind_title\u0027], row[\u0027ind_description\u0027])\nincident.addArtifact(artifact_type, row[\u0027ind_value\u0027], artifact_description)\n\nmsg = u\"Defender ATP Action successful.\\nIndicator: {}\\nAction: Create Artifact\".format(row[\u0027ind_value\u0027])\nincident.addNote(msg)",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "uuid": "cd4205de-0466-4797-b03f-2469de7d1c34"
     }
   ],
@@ -4975,7 +5600,12 @@
         "for_who": []
       },
       "scripts": [],
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "type_id": 8,
       "type_name": "defender_atp_alerts",
       "uuid": "06eb7acb-21a6-4469-bb6a-0f202c1973c7"
@@ -5372,7 +6002,12 @@
         "for_who": []
       },
       "scripts": [],
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "type_id": 8,
       "type_name": "defender_atp_indicators",
       "uuid": "f0f643e0-7984-4d62-b0f3-66b75aa44b04"
@@ -5800,7 +6435,12 @@
         "for_who": []
       },
       "scripts": [],
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "type_id": 8,
       "type_name": "defender_atp_machines",
       "uuid": "6c3b8c98-688a-4172-a861-1ae5c89a4e5f"
@@ -5810,502 +6450,627 @@
     {
       "actions": [],
       "content": {
-        "version": 2,
-        "workflow_id": "defender_atp_alert_machine_unisolate",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"defender_atp_alert_machine_unisolate\" isExecutable=\"true\" name=\"Defender ATP Alert Machine Unisolate\"\u003e\u003cdocumentation\u003eUnisolate a Defender ATP Machine\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1ef1m11\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_05ovt1b\" name=\"Defender Machine Isolation\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"0afc74fe-8301-4801-a162-9e0dbd984e1a\"\u003e{\"inputs\":{\"46ccbdc2-0d49-4e72-9310-49494aa1d4e0\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"11fcc5e8-b795-4719-8320-c99d323d10a6\"}}},\"post_processing_script\":\"if results.success:\\n  msg = \\\"Action: {}\\\\nComment: {}\\\\nStatus: {}\\\\nStart Date: {}\\\".format(\\n    results.content[\u0027type\u0027],\\n    results.content[\u0027requestorComment\u0027],\\n    results.content[\u0027status\u0027],\\n    results.content[\u0027creationDateTimeUtc\u0027]\\n  )\\nelse:\\n  msg = u\\\"Defender ATP Unisolate Action {}.\\\\nMachine: {} ({})\\\\nType: {}\\\\nComment: {}\\\\nReason: {}\\\"\\\\\\n   .format(\\\"successful\\\" if results.success else \\\"unsuccessful\\\",\\n           results.content.get(\u0027computerDnsName\u0027), incident.properties.defender_machine_id,\\n           str(rule.properties.defender_isolation_type),\\n           rule.properties.defender_action_comment,\\n           results.reason)\\n\\nincident.addNote(helper.createPlainText(msg))\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.defender_machine_id = incident.properties.defender_machine_id\\ninputs.defender_isolation_type = None\\ninputs.defender_description = rule.properties.defender_action_comment\\ninputs.defender_isolation_action = \u0027unisolate\u0027\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1ef1m11\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1um34wx\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1ef1m11\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_05ovt1b\"/\u003e\u003cendEvent id=\"EndEvent_0p2fw9g\"\u003e\u003cincoming\u003eSequenceFlow_1um34wx\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1um34wx\" sourceRef=\"ServiceTask_05ovt1b\" targetRef=\"EndEvent_0p2fw9g\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1m6nlwt\"\u003e\u003ctext\u003e\u003c![CDATA[\u0027Defender ATP Machines\u0027 datatable last action update\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1m5vey2\" sourceRef=\"ServiceTask_05ovt1b\" targetRef=\"TextAnnotation_1m6nlwt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_05ovt1b\" id=\"ServiceTask_05ovt1b_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"268\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1ef1m11\" id=\"SequenceFlow_1ef1m11_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"268\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"233\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0p2fw9g\" id=\"EndEvent_0p2fw9g_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"434\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"452\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1um34wx\" id=\"SequenceFlow_1um34wx_di\"\u003e\u003comgdi:waypoint x=\"368\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"434\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"401\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1m6nlwt\" id=\"TextAnnotation_1m6nlwt_di\"\u003e\u003comgdc:Bounds height=\"73\" width=\"185\" x=\"356\" y=\"76\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1m5vey2\" id=\"Association_1m5vey2_di\"\u003e\u003comgdi:waypoint x=\"365\" xsi:type=\"omgdc:Point\" y=\"173\"/\u003e\u003comgdi:waypoint x=\"398\" xsi:type=\"omgdc:Point\" y=\"149\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 2,
-      "creator_id": "a@example.com",
-      "description": "Unisolate a Defender ATP Machine",
-      "export_key": "defender_atp_alert_machine_unisolate",
-      "last_modified_by": "a@example.com",
-      "last_modified_time": 1632747141803,
-      "name": "Defender ATP Alert Machine Unisolate",
-      "object_type": "incident",
-      "programmatic_name": "defender_atp_alert_machine_unisolate",
-      "tags": [],
-      "uuid": "c6ffa4ce-f0bc-45a8-94c1-160872c3ff24",
-      "workflow_id": 45
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 2,
-        "workflow_id": "defender_find_machines_by_filter",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"defender_find_machines_by_filter\" isExecutable=\"true\" name=\"Defender ATP Find Machines by filter\"\u003e\u003cdocumentation\u003eUse Microsoft OData filters to find machines controlled by Defender. See app documentation for the filters supported.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_14cy2rx\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0ipvdp3\" name=\"Defender Find machines by filter\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"3ed5fa56-77c6-464e-b0c2-f5ea81d08370\"\u003e{\"inputs\":{},\"post_processing_script\":\"import time\\n\\n\\\"\\\"\\\"\\n\\\"value\\\": [\\n    {\\n        \\\"id\\\": \\\"04c99d46599f078f1c3da3783cf5b95f01ac61bb\\\",\\n        \\\"computerDnsName\\\": \\\"\\\",\\n        \\\"firstSeen\\\": \\\"2017-07-06T01:25:04.9480498Z\\\",\\n        \\\"osPlatform\\\": \\\"Windows10\\\",\\n    }\\n]\\n\\\"\\\"\\\"\\nif results.success:\\n    for machine in results.content[\u0027value\u0027]:\\n      row = incident.addRow(\\\"defender_atp_machines\\\")\\n      row[\u0027report_date\u0027] = int(time.time()*1000)\\n      row[\u0027machine_id\u0027] = machine[\u0027id\u0027]\\n      row[\u0027machine_ip\u0027] = machine[\u0027lastExternalIpAddress\u0027]\\n      row[\u0027machine_name\u0027] = machine[\u0027computerDnsName\u0027]\\n      row[\u0027machine_platform\u0027] = machine[\u0027osPlatform\u0027]\\n      row[\u0027machine_firstseen\u0027] = machine[\u0027firstSeen_ts\u0027]\\n      row[\u0027machine_lastseen\u0027] = machine[\u0027lastSeen_ts\u0027]\\n      row[\u0027machine_health_status\u0027] = machine.get(\u0027healthStatus\u0027)\\n      row[\u0027machine_risk_score\u0027] = machine.get(\u0027riskScore\u0027)\\n      row[\u0027machine_exposure_level\u0027] = machine.get(\u0027exposureLevel\u0027)\\n      row[\u0027machine_tags\u0027] = \u0027, \u0027.join(machine.get(\u0027machineTags\u0027, []))\\nelse:\\n  msg = u\\\"Defender ATP Action unsuccessful.\\\\nAction: Find machines by filter\\\\nReason: {}\\\".format(results.reason)\\n  incident.addNote(helper.createPlainText(msg))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.defender_filter_name = \\\"filter_by_name\\\"\\ninputs.defender_filter_value = artifact.value\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_14cy2rx\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_11xdamh\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_14cy2rx\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0ipvdp3\"/\u003e\u003cendEvent id=\"EndEvent_19rgdwa\"\u003e\u003cincoming\u003eSequenceFlow_11xdamh\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_11xdamh\" sourceRef=\"ServiceTask_0ipvdp3\" targetRef=\"EndEvent_19rgdwa\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_08elm2v\"\u003e\u003ctext\u003e\u003c![CDATA[Results placed in the Defender ATP Machines datatable\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0c1ejsi\" sourceRef=\"ServiceTask_0ipvdp3\" targetRef=\"TextAnnotation_08elm2v\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0ipvdp3\" id=\"ServiceTask_0ipvdp3_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"276\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_14cy2rx\" id=\"SequenceFlow_14cy2rx_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"276\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"237\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_19rgdwa\" id=\"EndEvent_19rgdwa_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"445\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"463\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_11xdamh\" id=\"SequenceFlow_11xdamh_di\"\u003e\u003comgdi:waypoint x=\"376\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"445\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"410.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_08elm2v\" id=\"TextAnnotation_08elm2v_di\"\u003e\u003comgdc:Bounds height=\"48\" width=\"193\" x=\"374\" y=\"80\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0c1ejsi\" id=\"Association_0c1ejsi_di\"\u003e\u003comgdi:waypoint x=\"373\" xsi:type=\"omgdc:Point\" y=\"173\"/\u003e\u003comgdi:waypoint x=\"437\" xsi:type=\"omgdc:Point\" y=\"128\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 2,
-      "creator_id": "a@example.com",
-      "description": "Use Microsoft OData filters to find machines controlled by Defender. See app documentation for the filters supported.",
-      "export_key": "defender_find_machines_by_filter",
-      "last_modified_by": "a@example.com",
-      "last_modified_time": 1632747140103,
-      "name": "Defender ATP Find Machines by filter",
-      "object_type": "artifact",
-      "programmatic_name": "defender_find_machines_by_filter",
-      "tags": [],
-      "uuid": "dd1069b4-3100-4e7c-97e8-a80c4816331f",
-      "workflow_id": 46
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 2,
-        "workflow_id": "defender_atp_find_machines",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"defender_atp_find_machines\" isExecutable=\"true\" name=\"Defender ATP Find Machines by IP Address\"\u003e\u003cdocumentation\u003eFind Machines by IP address. Results returned in Defender ATP Machines datatable\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0fpszeo\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1ass6wf\" name=\"Defender Find Machines by IP\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"11f82831-e4a8-4764-8ccd-f303c63caaf4\"\u003e{\"inputs\":{},\"post_processing_script\":\"import time\\n\\\"\\\"\\\"\\n\\\"value\\\": [\\n    {\\n        \\\"id\\\": \\\"04c99d46599f078f1c3da3783cf5b95f01ac61bb\\\",\\n        \\\"computerDnsName\\\": \\\"\\\",\\n        \\\"firstSeen\\\": \\\"2017-07-06T01:25:04.9480498Z\\\",\\n        \\\"osPlatform\\\": \\\"Windows10\\\",\\n    }\\n]\\n\\\"\\\"\\\"\\nif results.success:\\n  if not results.content[\u0027value\u0027]:\\n    msg = u\\\"Defender ATP Find machines by IP Address unsuccessful.\\\\nNothing found for {}\\\".format(artifact.value)\\n    incident.addNote(helper.createPlainText(msg))\\n  else:\\n    for machine in results.content[\u0027value\u0027]:\\n        row = incident.addRow(\\\"defender_atp_machines\\\")\\n        row[\u0027report_date\u0027] = int(time.time()*1000)\\n        row[\u0027machine_id\u0027] = machine[\u0027id\u0027]\\n        row[\u0027machine_name\u0027] = machine[\u0027computerDnsName\u0027]\\n        row[\u0027machine_platform\u0027] = machine[\u0027osPlatform\u0027]\\n        row[\u0027machine_firstseen\u0027] = machine[\u0027firstSeen_ts\u0027]\\n        row[\u0027machine_lastseen\u0027] = machine[\u0027lastSeen_ts\u0027]\\n        row[\u0027machine_health_status\u0027] = machine.get(\u0027healthStatus\u0027)\\n        row[\u0027machine_risk_score\u0027] = machine.get(\u0027riskScore\u0027)\\n        row[\u0027machine_exposure_level\u0027] = machine.get(\u0027exposureLevel\u0027)\\n        row[\u0027machine_tags\u0027] = \u0027, \u0027.join(machine.get(\u0027machineTags\u0027, []))\\nelse:\\n    msg = u\\\"Defender ATP Action unsuccessful.\\\\nAction: Find machines by IP Address\\\\nReason: {}\\\".format(results.reason)\\n    incident.addNote(helper.createPlainText(msg))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.defender_indicator_value = artifact.value\\ninputs.defender_lookback_timeframe = rule.properties.defender_lookback_timeframe\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0fpszeo\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_00r14wq\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0fpszeo\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1ass6wf\"/\u003e\u003cendEvent id=\"EndEvent_1oagaje\"\u003e\u003cincoming\u003eSequenceFlow_00r14wq\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_00r14wq\" sourceRef=\"ServiceTask_1ass6wf\" targetRef=\"EndEvent_1oagaje\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1t7jpqu\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned in Defender ATP Machine datatable\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1lg7u8d\" sourceRef=\"ServiceTask_1ass6wf\" targetRef=\"TextAnnotation_1t7jpqu\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1ass6wf\" id=\"ServiceTask_1ass6wf_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"268\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0fpszeo\" id=\"SequenceFlow_0fpszeo_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"268\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"233\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1oagaje\" id=\"EndEvent_1oagaje_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"431\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"449\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_00r14wq\" id=\"SequenceFlow_00r14wq_di\"\u003e\u003comgdi:waypoint x=\"368\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"431\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"399.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1t7jpqu\" id=\"TextAnnotation_1t7jpqu_di\"\u003e\u003comgdc:Bounds height=\"50\" width=\"170\" x=\"358\" y=\"87\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1lg7u8d\" id=\"Association_1lg7u8d_di\"\u003e\u003comgdi:waypoint x=\"364\" xsi:type=\"omgdc:Point\" y=\"172\"/\u003e\u003comgdi:waypoint x=\"410\" xsi:type=\"omgdc:Point\" y=\"137\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 2,
-      "creator_id": "a@example.com",
-      "description": "Find Machines by IP address. Results returned in Defender ATP Machines datatable",
-      "export_key": "defender_atp_find_machines",
-      "last_modified_by": "a@example.com",
-      "last_modified_time": 1632747141691,
-      "name": "Defender ATP Find Machines by IP Address",
-      "object_type": "artifact",
-      "programmatic_name": "defender_atp_find_machines",
-      "tags": [],
-      "uuid": "0e24252b-bfe6-4576-b9b7-ea7d8eb2d260",
-      "workflow_id": 52
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 2,
-        "workflow_id": "defender_atp_machine_vulnerabilities",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"defender_atp_machine_vulnerabilities\" isExecutable=\"true\" name=\"Defender ATP Machine Vulnerabilities\"\u003e\u003cdocumentation\u003eGet Defender ATP machine vulnerabilities\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0w27m0u\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0zisxlv\" name=\"Defender Machine Vulnerabilities\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"b0e17c3e-ef30-46ed-bb0b-3862990314ed\"\u003e{\"inputs\":{},\"post_processing_script\":\"\\\"\\\"\\\"\\n [\\n        {\\n            \\\"id\\\": \\\"CVE-2019-1348\\\",\\n            \\\"name\\\": \\\"CVE-2019-1348\\\",\\n            \\\"description\\\": \\\"Git could allow a remote attacker to bypass security restrictions, caused by a flaw in the --export-marks option of git fast-import. By persuading a victim to import specially-crafted content, an attacker could exploit this vulnerability to overwrite arbitrary paths.\\\",\\n            \\\"severity\\\": \\\"Medium\\\",\\n            \\\"cvssV3\\\": 4.3,\\n            \\\"exposedMachines\\\": 1,\\n            \\\"publishedOn\\\": \\\"2019-12-13T00:00:00Z\\\",\\n            \\\"updatedOn\\\": \\\"2019-12-13T00:00:00Z\\\",\\n            \\\"publicExploit\\\": False,\\n            \\\"exploitVerified\\\": False,\\n            \\\"exploitInKit\\\": False,\\n            \\\"exploitTypes\\\": [],\\n            \\\"exploitUris\\\": []\\n        },\\n        {\\n            \\\"id\\\": \\\"CVE-2019-1348\\\",\\n            \\\"name\\\": \\\"CVE-2019-1348-2\\\",\\n            \\\"description\\\": \\\"Git could allow a remote attacker to bypass security restrictions, caused by a flaw in the --export-marks option of git fast-import. By persuading a victim to import specially-crafted content, an attacker could exploit this vulnerability to overwrite arbitrary paths.\\\",\\n            \\\"severity\\\": \\\"Medium\\\",\\n            \\\"cvssV3\\\": 4.3,\\n            \\\"exposedMachines\\\": 1,\\n            \\\"publishedOn\\\": \\\"2019-12-13T00:00:00Z\\\",\\n            \\\"updatedOn\\\": \\\"2019-12-13T00:00:00Z\\\",\\n            \\\"publicExploit\\\": False,\\n            \\\"exploitVerified\\\": False,\\n            \\\"exploitInKit\\\": False,\\n            \\\"exploitTypes\\\": [],\\n            \\\"exploitUris\\\": []\\n        }\\n    ]\\n\\\"\\\"\\\"\\n\\n\\ndef mk_note(list_of_notes):\\n    return \\\"\u0026lt;br\u0026gt;---\u0026lt;br\u0026gt;\u0026lt;br\u0026gt;\\\".join([\\\"\u0026lt;br\u0026gt;\\\".join(note) for note in list_of_notes])\\n\\ndef format_line(k, v):\\n    return \\\"\u0026lt;b\u0026gt;{}\u0026lt;/b\u0026gt;: {}\\\".format(k, v)\\n\\nvulnerabilities = results.content[\u0027value\u0027]\\nif results[\u0027success\u0027]:\\n    if not vulnerabilities:\\n        incident.addNote(\\\"No machine vulnerabilities for: {}\\\".format(row[\u0027machine_name\u0027]))\\n    else:\\n        note = []\\n        for risk in vulnerabilities:\\n            note_info = []\\n            note_info.append(format_line(\\\"Machine\\\", row[\u0027machine_name\u0027]))\\n            note_info.append(format_line(\\\"Machine Id\\\", row[\u0027machine_id\u0027]))\\n            note_info.append(format_line(\\\"Vulnerability\\\", risk[\u0027name\u0027]))\\n            note_info.append(format_line(\\\"Description\\\", risk[\u0027description\u0027]))\\n            note_info.append(format_line(\\\"Severity\\\", risk[\u0027severity\u0027]))\\n            note_info.append(format_line(\\\"Published\\\", risk[\u0027publishedOn\u0027]))\\n            note_info.append(format_line(\\\"Updated\\\", risk[\u0027updatedOn\u0027]))\\n    \\n            note.append(note_info)\\n        incident.addNote(helper.createRichText(mk_note(note)))\\nelse:\\n    incident.addNote(\\\"Defender ATP Machine Vulnerabilities failed: {}\\\".format(results.reason))\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.defender_machine_id = row[\u0027machine_id\u0027]\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0w27m0u\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1gely5i\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0w27m0u\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0zisxlv\"/\u003e\u003cendEvent id=\"EndEvent_1nhwyxe\"\u003e\u003cincoming\u003eSequenceFlow_1gely5i\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1gely5i\" sourceRef=\"ServiceTask_0zisxlv\" targetRef=\"EndEvent_1nhwyxe\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1jpdcnq\"\u003e\u003ctext\u003eResults returned in a note\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1njp61g\" sourceRef=\"ServiceTask_0zisxlv\" targetRef=\"TextAnnotation_1jpdcnq\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0zisxlv\" id=\"ServiceTask_0zisxlv_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"273\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0w27m0u\" id=\"SequenceFlow_0w27m0u_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"273\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"235.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1nhwyxe\" id=\"EndEvent_1nhwyxe_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"448\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"466\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1gely5i\" id=\"SequenceFlow_1gely5i_di\"\u003e\u003comgdi:waypoint x=\"373\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"448\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"410.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1jpdcnq\" id=\"TextAnnotation_1jpdcnq_di\"\u003e\u003comgdc:Bounds height=\"51\" width=\"197\" x=\"356\" y=\"58\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1njp61g\" id=\"Association_1njp61g_di\"\u003e\u003comgdi:waypoint x=\"365\" xsi:type=\"omgdc:Point\" y=\"168\"/\u003e\u003comgdi:waypoint x=\"428\" xsi:type=\"omgdc:Point\" y=\"109\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 2,
-      "creator_id": "a@example.com",
-      "description": "Get Defender ATP machine vulnerabilities",
-      "export_key": "defender_atp_machine_vulnerabilities",
-      "last_modified_by": "a@example.com",
-      "last_modified_time": 1632747141135,
-      "name": "Defender ATP Machine Vulnerabilities",
-      "object_type": "defender_atp_machines",
-      "programmatic_name": "defender_atp_machine_vulnerabilities",
-      "tags": [],
-      "uuid": "1ac26ae2-bae4-41c5-ba50-c0aa44a54e64",
-      "workflow_id": 51
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 2,
-        "workflow_id": "defender_atp_app_execution",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"defender_atp_app_execution\" isExecutable=\"true\" name=\"Defender ATP App Execution Restriction\"\u003e\u003cdocumentation\u003eRestrict/un-restrict App execution on a Defender managed machine\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1uaynxc\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_010kd60\" name=\"Defender App Execution\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"92906dbe-9be4-4277-8f50-c6f15fb5dcbc\"\u003e{\"inputs\":{\"b35bd7fe-d52a-483e-ab06-16f8131ce093\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"c099160c-f83c-461d-9b8e-4d0edd66716d\"}}},\"post_processing_script\":\"import time\\n\\nmsg = u\\\"Defender ATP Action {}.\\\\nAction: {}\\\\nMachine: {}\\\\nComment: {}\\\"\\\\\\n   .format(\\\"successful\\\" if results.success else \\\"unsuccessful\\\",\\n           rule.properties.defender_app_execution_action,\\n           row[\u0027machine_id\u0027],\\n           rule.properties.defender_action_comment)\\n           \\nif results.success:\\n  row[\u0027report_date\u0027] = int(time.time()*1000)\\n  action_msg = \\\"Action: {}\\\\nComment: {}\\\\nStatus: {}\\\\nStart Date: {}\\\".format(\\n    results.content[\u0027type\u0027],\\n    results.content[\u0027requestorComment\u0027],\\n    results.content[\u0027status\u0027],\\n    results.content[\u0027creationDateTimeUtc\u0027]\\n    )\\n  row[\u0027machine_last_action\u0027] = helper.createPlainText(action_msg)\\nelse:\\n  msg = u\\\"{}\\\\nReason: {}\\\".format(msg, results.reason)\\n\\nincident.addNote(helper.createPlainText(msg))\\n\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.defender_description = rule.properties.defender_action_comment\\ninputs.defender_machine_id = row[\u0027machine_id\u0027]\\ninputs.defender_restriction_type = str(rule.properties.defender_app_execution_action)\\n\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1uaynxc\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0xrr3iw\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1uaynxc\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_010kd60\"/\u003e\u003cendEvent id=\"EndEvent_15voo0u\"\u003e\u003cincoming\u003eSequenceFlow_0xrr3iw\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0xrr3iw\" sourceRef=\"ServiceTask_010kd60\" targetRef=\"EndEvent_15voo0u\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1rdpuzw\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned in a note\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_001o3hz\" sourceRef=\"ServiceTask_010kd60\" targetRef=\"TextAnnotation_1rdpuzw\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_010kd60\" id=\"ServiceTask_010kd60_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"272\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1uaynxc\" id=\"SequenceFlow_1uaynxc_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"272\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"235\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_15voo0u\" id=\"EndEvent_15voo0u_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"429\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"447\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0xrr3iw\" id=\"SequenceFlow_0xrr3iw_di\"\u003e\u003comgdi:waypoint x=\"372\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"429\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"400.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1rdpuzw\" id=\"TextAnnotation_1rdpuzw_di\"\u003e\u003comgdc:Bounds height=\"40\" width=\"152\" x=\"369\" y=\"84\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_001o3hz\" id=\"Association_001o3hz_di\"\u003e\u003comgdi:waypoint x=\"366\" xsi:type=\"omgdc:Point\" y=\"170\"/\u003e\u003comgdi:waypoint x=\"421\" xsi:type=\"omgdc:Point\" y=\"124\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 2,
-      "creator_id": "a@example.com",
-      "description": "Restrict/un-restrict App execution on a Defender managed machine",
-      "export_key": "defender_atp_app_execution",
-      "last_modified_by": "a@example.com",
-      "last_modified_time": 1632747139093,
-      "name": "Defender ATP App Execution Restriction",
-      "object_type": "defender_atp_machines",
-      "programmatic_name": "defender_atp_app_execution",
-      "tags": [],
-      "uuid": "5e9ea009-7afd-4394-882a-15609bffa82d",
-      "workflow_id": 54
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 2,
-        "workflow_id": "defender_atp_machine_scan",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"defender_atp_machine_scan\" isExecutable=\"true\" name=\"Defender ATP Machine Scan\"\u003e\u003cdocumentation\u003eStart an antivirus scan on a Defender machine\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0w46f4k\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_174h93d\" name=\"Defender Machine Scan\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"3e8950d3-1f51-4bcb-b9ac-26e28e7f1704\"\u003e{\"inputs\":{\"d2234b4a-1677-42f9-89dc-a2dcca236948\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"f80596f3-dc40-4c52-a014-cf9cf299cc28\"}}},\"post_processing_script\":\"import time\\n\\nif results.success:\\n  row[\u0027report_date\u0027] = int(time.time()*1000)\\n  action_msg = \\\"Action: {}\\\\nComment: {}\\\\nStatus: {}\\\\nStart Date: {}\\\".format(\\n    results.content[\u0027type\u0027],\\n    results.content[\u0027requestorComment\u0027],\\n    results.content[\u0027status\u0027],\\n    results.content[\u0027creationDateTimeUtc\u0027]\\n    )\\n  row[\u0027machine_last_action\u0027] = helper.createPlainText(action_msg)\\nelse:\\n  msg = u\\\"Defender ATP Scan Action {}.\\\\nMachine: {} ({})\\\\nType: {}\\\\nComment: {}\\\\nReason: {}\\\"\\\\\\n   .format(\\\"successful\\\" if results.success else \\\"unsuccessful\\\",\\n           results.content.get(\u0027computerDnsName\u0027), row[\u0027machine_id\u0027],\\n           str(rule.properties.defender_isolation_type),\\n           rule.properties.defender_action_comment,\\n           results.reason)\\n\\n  incident.addNote(helper.createPlainText(msg))\\n\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.defender_machine_id = row[\u0027machine_id\u0027]\\ninputs.defender_description = rule.properties.defender_action_comment\\ninputs.defender_machine_scantype = str(rule.properties.defender_machine_scantype)\\n\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0w46f4k\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0vgb3q6\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0w46f4k\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_174h93d\"/\u003e\u003cendEvent id=\"EndEvent_12zqo78\"\u003e\u003cincoming\u003eSequenceFlow_0vgb3q6\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0vgb3q6\" sourceRef=\"ServiceTask_174h93d\" targetRef=\"EndEvent_12zqo78\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0ga004d\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned in a Note\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0757krv\" sourceRef=\"ServiceTask_174h93d\" targetRef=\"TextAnnotation_0ga004d\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_174h93d\" id=\"ServiceTask_174h93d_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"258\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0w46f4k\" id=\"SequenceFlow_0w46f4k_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"258\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"228\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_12zqo78\" id=\"EndEvent_12zqo78_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"414\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"432\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0vgb3q6\" id=\"SequenceFlow_0vgb3q6_di\"\u003e\u003comgdi:waypoint x=\"358\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"414\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"386\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0ga004d\" id=\"TextAnnotation_0ga004d_di\"\u003e\u003comgdc:Bounds height=\"37\" width=\"164\" x=\"350\" y=\"78\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0757krv\" id=\"Association_0757krv_di\"\u003e\u003comgdi:waypoint x=\"351\" xsi:type=\"omgdc:Point\" y=\"169\"/\u003e\u003comgdi:waypoint x=\"412\" xsi:type=\"omgdc:Point\" y=\"115\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 2,
-      "creator_id": "a@example.com",
-      "description": "Start an antivirus scan on a Defender machine",
-      "export_key": "defender_atp_machine_scan",
-      "last_modified_by": "a@example.com",
-      "last_modified_time": 1632747141461,
-      "name": "Defender ATP Machine Scan",
-      "object_type": "defender_atp_machines",
-      "programmatic_name": "defender_atp_machine_scan",
-      "tags": [],
-      "uuid": "fc9556a5-d88c-4ca8-84be-3e84b3da8b6a",
-      "workflow_id": 53
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 2,
-        "workflow_id": "defender_atp_find_machines_by_file_hash",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"defender_atp_find_machines_by_file_hash\" isExecutable=\"true\" name=\"Defender ATP Find Machines by File Hash\"\u003e\u003cdocumentation\u003eFind Defender machines by SHA1 file hash. Results are returned in the defender_atp_machines datatable.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0p9eh4w\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_05yolnv\" name=\"Defender Find Machines by File\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"adcb85db-0dc3-4a63-8875-4f325919dc3d\"\u003e{\"inputs\":{},\"post_processing_script\":\"import time\\n\\nif results.success:\\n    for machine in results.content[\u0027value\u0027]:\\n        row = incident.addRow(\\\"defender_atp_machines\\\")\\n        row[\u0027report_date\u0027] = int(time.time()*1000)\\n        row[\u0027machine_id\u0027] = machine[\u0027id\u0027]\\n        row[\u0027machine_name\u0027] = machine[\u0027computerDnsName\u0027]\\n        row[\u0027machine_platform\u0027] = machine[\u0027osPlatform\u0027]\\n        row[\u0027machine_firstseen\u0027] = machine[\u0027firstSeen_ts\u0027]\\n        row[\u0027machine_lastseen\u0027] = machine[\u0027lastSeen_ts\u0027]\\n        row[\u0027machine_ip\u0027] = machine[\u0027lastIpAddress\u0027]\\n        row[\u0027machine_file_hash\u0027] = artifact.value\\n        row[\u0027machine_health_status\u0027] = machine.get(\u0027healthStatus\u0027)\\n        row[\u0027machine_risk_score\u0027] = machine.get(\u0027riskScore\u0027)\\n        row[\u0027machine_exposure_level\u0027] = machine.get(\u0027exposureLevel\u0027)\\n        row[\u0027machine_tags\u0027] = \u0027, \u0027.join(machine.get(\u0027machineTags\u0027, []))\\nelse:\\n    msg = u\\\"Defender ATP Action unsuccessful.\\\\nAction: Find machines by file hash\\\\nReason: {}\\\".format(results.reason)\\n    incident.addNote(helper.createPlainText(msg))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.defender_indicator_value = artifact.value\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0p9eh4w\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1tev9bq\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0p9eh4w\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_05yolnv\"/\u003e\u003cendEvent id=\"EndEvent_0th3eo9\"\u003e\u003cincoming\u003eSequenceFlow_1tev9bq\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1tev9bq\" sourceRef=\"ServiceTask_05yolnv\" targetRef=\"EndEvent_0th3eo9\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0ygjqnv\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned to the Defender Machine datatable\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0fs2rib\" sourceRef=\"ServiceTask_05yolnv\" targetRef=\"TextAnnotation_0ygjqnv\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_05yolnv\" id=\"ServiceTask_05yolnv_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"255\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0p9eh4w\" id=\"SequenceFlow_0p9eh4w_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"255\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"226.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0th3eo9\" id=\"EndEvent_0th3eo9_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"416\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"434\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1tev9bq\" id=\"SequenceFlow_1tev9bq_di\"\u003e\u003comgdi:waypoint x=\"355\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"416\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"385.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0ygjqnv\" id=\"TextAnnotation_0ygjqnv_di\"\u003e\u003comgdc:Bounds height=\"31\" width=\"174\" x=\"347\" y=\"79\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0fs2rib\" id=\"Association_0fs2rib_di\"\u003e\u003comgdi:waypoint x=\"348\" xsi:type=\"omgdc:Point\" y=\"169\"/\u003e\u003comgdi:waypoint x=\"417\" xsi:type=\"omgdc:Point\" y=\"110\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 2,
-      "creator_id": "a@example.com",
-      "description": "Find Defender machines by SHA1 file hash. Results are returned in the defender_atp_machines datatable.",
-      "export_key": "defender_atp_find_machines_by_file_hash",
-      "last_modified_by": "a@example.com",
-      "last_modified_time": 1632747139236,
-      "name": "Defender ATP Find Machines by File Hash",
-      "object_type": "artifact",
-      "programmatic_name": "defender_atp_find_machines_by_file_hash",
-      "tags": [],
-      "uuid": "123c4514-de3d-475f-ad7e-b04a5ae0f401",
-      "workflow_id": 49
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 2,
+        "version": 3,
         "workflow_id": "defender_atp_alert_machine_scan",
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"defender_atp_alert_machine_scan\" isExecutable=\"true\" name=\"Defender ATP Alert Machine Scan\"\u003e\u003cdocumentation\u003eStart an antivirus scan on a Defender machine\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0w46f4k\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_174h93d\" name=\"Defender Machine Scan\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"3e8950d3-1f51-4bcb-b9ac-26e28e7f1704\"\u003e{\"inputs\":{\"d2234b4a-1677-42f9-89dc-a2dcca236948\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"f80596f3-dc40-4c52-a014-cf9cf299cc28\"}}},\"post_processing_script\":\"if results.success:\\n  msg = \\\"Defender ATP Alert Machine Scan Action: {}\\\\nComment: {}\\\\nStatus: {}\\\\nStart Date: {}\\\".format(\\n    results.content[\u0027type\u0027],\\n    results.content[\u0027requestorComment\u0027],\\n    results.content[\u0027status\u0027],\\n    results.content[\u0027creationDateTimeUtc\u0027]\\n    )\\nelse:\\n  msg = u\\\"Defender ATP Scan Action {}.\\\\nMachine: {} ({})\\\\nType: {}\\\\nComment: {}\\\\nReason: {}\\\"\\\\\\n   .format(\\\"successful\\\" if results.success else \\\"unsuccessful\\\",\\n           results.content.get(\u0027computerDnsName\u0027), incident.properties.defender_machine_id,\\n           str(rule.properties.defender_isolation_type),\\n           rule.properties.defender_action_comment,\\n           results.reason)\\n\\nincident.addNote(helper.createPlainText(msg))\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.defender_machine_id = incident.properties.defender_machine_id\\ninputs.defender_description = rule.properties.defender_action_comment\\ninputs.defender_machine_scantype = str(rule.properties.defender_machine_scantype)\\n\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0w46f4k\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0vgb3q6\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0w46f4k\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_174h93d\"/\u003e\u003cendEvent id=\"EndEvent_12zqo78\"\u003e\u003cincoming\u003eSequenceFlow_0vgb3q6\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0vgb3q6\" sourceRef=\"ServiceTask_174h93d\" targetRef=\"EndEvent_12zqo78\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0ga004d\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned in a Note\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0757krv\" sourceRef=\"ServiceTask_174h93d\" targetRef=\"TextAnnotation_0ga004d\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_174h93d\" id=\"ServiceTask_174h93d_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"258\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0w46f4k\" id=\"SequenceFlow_0w46f4k_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"258\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"228\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_12zqo78\" id=\"EndEvent_12zqo78_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"414\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"432\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0vgb3q6\" id=\"SequenceFlow_0vgb3q6_di\"\u003e\u003comgdi:waypoint x=\"358\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"414\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"386\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0ga004d\" id=\"TextAnnotation_0ga004d_di\"\u003e\u003comgdc:Bounds height=\"37\" width=\"164\" x=\"350\" y=\"78\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0757krv\" id=\"Association_0757krv_di\"\u003e\u003comgdi:waypoint x=\"351\" xsi:type=\"omgdc:Point\" y=\"169\"/\u003e\u003comgdi:waypoint x=\"412\" xsi:type=\"omgdc:Point\" y=\"115\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 2,
+      "content_version": 3,
       "creator_id": "a@example.com",
       "description": "Start an antivirus scan on a Defender machine",
       "export_key": "defender_atp_alert_machine_scan",
       "last_modified_by": "a@example.com",
-      "last_modified_time": 1632747141574,
+      "last_modified_time": 1632914824404,
       "name": "Defender ATP Alert Machine Scan",
       "object_type": "incident",
       "programmatic_name": "defender_atp_alert_machine_scan",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "uuid": "f2a652f6-9afb-4bfd-92a2-34332ef45417",
       "workflow_id": 59
     },
     {
       "actions": [],
       "content": {
-        "version": 2,
-        "workflow_id": "defender_atp_set_indicator",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"defender_atp_set_indicator\" isExecutable=\"true\" name=\"Defender ATP Set Indicator\"\u003e\u003cdocumentation\u003eSet an indicator on an artifact\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0rdnsyf\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_03n9acz\" name=\"Defender Set Indicator\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"faf52947-0e1a-4e2b-9dfb-ed5ef1605667\"\u003e{\"inputs\":{\"c8b53f87-e1f7-49df-bfaa-5c72c1168d69\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"79c1a5bb-b168-4868-922b-54eb17365f9b\"}},\"0e17bb0b-6ef9-4bac-b3d7-e5e37eaa7ffa\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"a3216414-9c8b-49d4-9714-2b728e14f8c5\"}}},\"post_processing_script\":\"import java.util.Date as Date\\n\\nmsg = u\\\"Action {}.\\\\nAction: {}\\\\nArtifact: {}\\\\nTitle: {}\\\\nComment: {}\\\\nSeverity: {}\\\\nExpiration: {}\\\"\\\\\\n   .format(\\\"successful\\\" if results.success else \\\"unsuccessful\\\",\\n           str(rule.properties.indicator_action),\\n           artifact.value,\\n           rule.properties.indicator_title,\\n           rule.properties.indicator_description,\\n           str(rule.properties.indicator_severity),\\n           rule.properties.indicator_expiration)\\n           \\nif not results.success:\\n    msg = u\\\"{}\\\\nReason: {}\\\".format(msg, results.reason)\\n\\nincident.addNote(msg)\\n\\nif results.success:\\n    row = incident.addRow(\\\"defender_atp_indicators\\\")\\n    row[\u0027report_date\u0027] = Date().getTime()\\n    row[\u0027ind_id\u0027] = results.content[\u0027id\u0027]\\n    row[\u0027ind_value\u0027] = results.content[\u0027indicatorValue\u0027]\\n    row[\u0027ind_type\u0027] = results.content[\u0027indicatorType\u0027]\\n    row[\u0027ind_title\u0027] = results.content[\u0027title\u0027]\\n    row[\u0027ind_description\u0027] = results.content[\u0027description\u0027]\\n    row[\u0027ind_action\u0027] = results.content[\u0027action\u0027]\\n    row[\u0027ind_severity\u0027] = results.content[\u0027severity\u0027]\\n    row[\u0027ind_created_by\u0027] = results.content[\u0027createdByDisplayName\u0027]\\n    row[\u0027ind_creation_date\u0027] = results.content[\u0027creationTimeDateTimeUtc_ts\u0027]\\n    row[\u0027ind_expiration_date\u0027] = results.content[\u0027expirationTime_ts\u0027]\\n    row[\u0027status\u0027] = \u0027Active\u0027\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.defender_indicator_type = artifact.type\\ninputs.defender_indicator_value = artifact.value\\ninputs.defender_description = rule.properties.indicator_description\\ninputs.defender_expiration_time = rule.properties.indicator_expiration\\ninputs.defender_title = rule.properties.indicator_title\\ninputs.defender_severity = str(rule.properties.indicator_severity)\\ninputs.defender_indicator_action = str(rule.properties.indicator_action)\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0rdnsyf\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0r0i2ak\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0rdnsyf\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_03n9acz\"/\u003e\u003cendEvent id=\"EndEvent_0z3geyv\"\u003e\u003cincoming\u003eSequenceFlow_0r0i2ak\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0r0i2ak\" sourceRef=\"ServiceTask_03n9acz\" targetRef=\"EndEvent_0z3geyv\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0njcuna\"\u003e\u003ctext\u003e\u003c![CDATA[Adds a row to the Defender Indicators datatable\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0prfwhg\" sourceRef=\"ServiceTask_03n9acz\" targetRef=\"TextAnnotation_0njcuna\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_03n9acz\" id=\"ServiceTask_03n9acz_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"264\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0rdnsyf\" id=\"SequenceFlow_0rdnsyf_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"264\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"231\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0z3geyv\" id=\"EndEvent_0z3geyv_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"450\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"468\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0r0i2ak\" id=\"SequenceFlow_0r0i2ak_di\"\u003e\u003comgdi:waypoint x=\"364\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"450\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"407\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0njcuna\" id=\"TextAnnotation_0njcuna_di\"\u003e\u003comgdc:Bounds height=\"45\" width=\"195\" x=\"350\" y=\"79\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0prfwhg\" id=\"Association_0prfwhg_di\"\u003e\u003comgdi:waypoint x=\"359\" xsi:type=\"omgdc:Point\" y=\"171\"/\u003e\u003comgdi:waypoint x=\"420\" xsi:type=\"omgdc:Point\" y=\"124\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "version": 3,
+        "workflow_id": "defender_atp_find_machines_by_file_hash",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"defender_atp_find_machines_by_file_hash\" isExecutable=\"true\" name=\"Defender ATP Find Machines by File Hash\"\u003e\u003cdocumentation\u003eFind Defender machines by SHA1 file hash. Results are returned in the defender_atp_machines datatable.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0p9eh4w\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_05yolnv\" name=\"Defender Find Machines by File\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"adcb85db-0dc3-4a63-8875-4f325919dc3d\"\u003e{\"inputs\":{},\"post_processing_script\":\"import time\\n\\nif results.success:\\n    for machine in results.content[\u0027value\u0027]:\\n        row = incident.addRow(\\\"defender_atp_machines\\\")\\n        row[\u0027report_date\u0027] = int(time.time()*1000)\\n        row[\u0027machine_id\u0027] = machine[\u0027id\u0027]\\n        row[\u0027machine_name\u0027] = machine[\u0027computerDnsName\u0027]\\n        row[\u0027machine_platform\u0027] = machine[\u0027osPlatform\u0027]\\n        row[\u0027machine_firstseen\u0027] = machine[\u0027firstSeen_ts\u0027]\\n        row[\u0027machine_lastseen\u0027] = machine[\u0027lastSeen_ts\u0027]\\n        row[\u0027machine_ip\u0027] = machine[\u0027lastIpAddress\u0027]\\n        row[\u0027machine_file_hash\u0027] = artifact.value\\n        row[\u0027machine_health_status\u0027] = machine.get(\u0027healthStatus\u0027)\\n        row[\u0027machine_risk_score\u0027] = machine.get(\u0027riskScore\u0027)\\n        row[\u0027machine_exposure_level\u0027] = machine.get(\u0027exposureLevel\u0027)\\n        row[\u0027machine_tags\u0027] = \u0027, \u0027.join(machine.get(\u0027machineTags\u0027, []))\\nelse:\\n    msg = u\\\"Defender ATP Action unsuccessful.\\\\nAction: Find machines by file hash\\\\nReason: {}\\\".format(results.reason)\\n    incident.addNote(helper.createPlainText(msg))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.defender_indicator_value = artifact.value\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0p9eh4w\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1tev9bq\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0p9eh4w\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_05yolnv\"/\u003e\u003cendEvent id=\"EndEvent_0th3eo9\"\u003e\u003cincoming\u003eSequenceFlow_1tev9bq\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1tev9bq\" sourceRef=\"ServiceTask_05yolnv\" targetRef=\"EndEvent_0th3eo9\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0ygjqnv\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned to the Defender Machine datatable\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0fs2rib\" sourceRef=\"ServiceTask_05yolnv\" targetRef=\"TextAnnotation_0ygjqnv\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_05yolnv\" id=\"ServiceTask_05yolnv_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"255\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0p9eh4w\" id=\"SequenceFlow_0p9eh4w_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"255\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"226.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0th3eo9\" id=\"EndEvent_0th3eo9_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"416\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"434\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1tev9bq\" id=\"SequenceFlow_1tev9bq_di\"\u003e\u003comgdi:waypoint x=\"355\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"416\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"385.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0ygjqnv\" id=\"TextAnnotation_0ygjqnv_di\"\u003e\u003comgdc:Bounds height=\"31\" width=\"174\" x=\"347\" y=\"79\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0fs2rib\" id=\"Association_0fs2rib_di\"\u003e\u003comgdi:waypoint x=\"348\" xsi:type=\"omgdc:Point\" y=\"169\"/\u003e\u003comgdi:waypoint x=\"417\" xsi:type=\"omgdc:Point\" y=\"110\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 2,
+      "content_version": 3,
       "creator_id": "a@example.com",
-      "description": "Set an indicator on an artifact",
-      "export_key": "defender_atp_set_indicator",
+      "description": "Find Defender machines by SHA1 file hash. Results are returned in the defender_atp_machines datatable.",
+      "export_key": "defender_atp_find_machines_by_file_hash",
       "last_modified_by": "a@example.com",
-      "last_modified_time": 1632747142103,
-      "name": "Defender ATP Set Indicator",
+      "last_modified_time": 1632914824264,
+      "name": "Defender ATP Find Machines by File Hash",
       "object_type": "artifact",
-      "programmatic_name": "defender_atp_set_indicator",
-      "tags": [],
-      "uuid": "7c81cda4-39a6-4071-b1d9-26da710d0526",
-      "workflow_id": 43
+      "programmatic_name": "defender_atp_find_machines_by_file_hash",
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
+      "uuid": "123c4514-de3d-475f-ad7e-b04a5ae0f401",
+      "workflow_id": 49
     },
     {
       "actions": [],
       "content": {
-        "version": 2,
-        "workflow_id": "defender_atp_machine_unisolate",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"defender_atp_machine_unisolate\" isExecutable=\"true\" name=\"Defender ATP Machine Unisolate\"\u003e\u003cdocumentation\u003eUnisolate a Defender ATP Machine\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1ef1m11\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_05ovt1b\" name=\"Defender Machine Isolation\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"0afc74fe-8301-4801-a162-9e0dbd984e1a\"\u003e{\"inputs\":{\"46ccbdc2-0d49-4e72-9310-49494aa1d4e0\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"11fcc5e8-b795-4719-8320-c99d323d10a6\"}}},\"post_processing_script\":\"import Java.util.Date as Date\\n           \\nif results.success:\\n  row[\u0027report_date\u0027] = Date().getTime()\\n  action_msg = \\\"Action: {}\\\\nComment: {}\\\\nStatus: {}\\\\nStart Date: {}\\\".format(\\n    results.content[\u0027type\u0027],\\n    results.content[\u0027requestorComment\u0027],\\n    results.content[\u0027status\u0027],\\n    results.content[\u0027creationDateTimeUtc\u0027]\\n    )\\n  row[\u0027machine_last_action\u0027] = helper.createPlainText(action_msg)\\nelse:\\n  msg = u\\\"Defender ATP Unisolate Action {}.\\\\nMachine: {} ({})\\\\nType: {}\\\\nComment: {}\\\\nReason: {}\\\"\\\\\\n   .format(\\\"successful\\\" if results.success else \\\"unsuccessful\\\",\\n           results.content.get(\u0027computerDnsName\u0027), row[\u0027machine_id\u0027],\\n           str(rule.properties.defender_isolation_type),\\n           rule.properties.defender_action_comment,\\n           results.reason)\\n\\n  incident.addNote(helper.createPlainText(msg))\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.defender_machine_id = row[\u0027machine_id\u0027]\\ninputs.defender_isolation_type = None\\ninputs.defender_description = rule.properties.defender_action_comment\\ninputs.defender_isolation_action = \u0027unisolate\u0027\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1ef1m11\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1um34wx\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1ef1m11\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_05ovt1b\"/\u003e\u003cendEvent id=\"EndEvent_0p2fw9g\"\u003e\u003cincoming\u003eSequenceFlow_1um34wx\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1um34wx\" sourceRef=\"ServiceTask_05ovt1b\" targetRef=\"EndEvent_0p2fw9g\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1m6nlwt\"\u003e\u003ctext\u003e\u003c![CDATA[\u0027Defender ATP Machines\u0027 datatable last action update\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1m5vey2\" sourceRef=\"ServiceTask_05ovt1b\" targetRef=\"TextAnnotation_1m6nlwt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_05ovt1b\" id=\"ServiceTask_05ovt1b_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"268\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1ef1m11\" id=\"SequenceFlow_1ef1m11_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"268\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"233\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0p2fw9g\" id=\"EndEvent_0p2fw9g_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"434\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"452\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1um34wx\" id=\"SequenceFlow_1um34wx_di\"\u003e\u003comgdi:waypoint x=\"368\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"434\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"401\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1m6nlwt\" id=\"TextAnnotation_1m6nlwt_di\"\u003e\u003comgdc:Bounds height=\"73\" width=\"185\" x=\"356\" y=\"76\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1m5vey2\" id=\"Association_1m5vey2_di\"\u003e\u003comgdi:waypoint x=\"365\" xsi:type=\"omgdc:Point\" y=\"173\"/\u003e\u003comgdi:waypoint x=\"398\" xsi:type=\"omgdc:Point\" y=\"149\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 2,
-      "creator_id": "a@example.com",
-      "description": "Unisolate a Defender ATP Machine",
-      "export_key": "defender_atp_machine_unisolate",
-      "last_modified_by": "a@example.com",
-      "last_modified_time": 1632747139861,
-      "name": "Defender ATP Machine Unisolate",
-      "object_type": "defender_atp_machines",
-      "programmatic_name": "defender_atp_machine_unisolate",
-      "tags": [],
-      "uuid": "68312cce-01e0-43cd-8442-15fc14c6613f",
-      "workflow_id": 44
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 2,
-        "workflow_id": "defender_atp_alert_collect_machine_investigation_package",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"defender_atp_alert_collect_machine_investigation_package\" isExecutable=\"true\" name=\"Defender ATP Alert Collect Machine Investigation Package\"\u003e\u003cdocumentation\u003eStart a process to collect an investigation report\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_15fnm73\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0zt2o7y\" name=\"Defender Collect Machine Investig...\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"bfa88004-c394-4504-92ad-d3e1cb717b20\"\u003e{\"inputs\":{},\"post_processing_script\":\"if results.success:\\n  msg = \\\"Defender ATP Collect Machine Investigation Report Action: {}\\\\nComment: {}\\\\nStatus: {}\\\\nStart Date: {}\\\".format(\\n    results.content[\u0027type\u0027],\\n    results.content[\u0027requestorComment\u0027],\\n    results.content[\u0027status\u0027],\\n    results.content[\u0027creationDateTimeUtc\u0027]\\n    )\\nelse:\\n  msg = \\\"Defender ATP Collect Machine Investigation Report Failure: {}\\\".format(results.reason)\\n\\nincident.addNote(helper.createPlainText(msg))\\n\\\"\\\"\\\"\\n    \u0027type\u0027: \u0027CollectInvestigationPackage\u0027,\\n    \u0027title\u0027: None,\\n    \u0027requestor\u0027: \u0027f0dc3f88-f617-449c-960c-6b54818cd110\u0027,\\n    \u0027requestorComment\u0027: \u0027ss\u0027,\\n    \u0027status\u0027: \u0027Succeeded\u0027,\\n    \u0027machineId\u0027: \u00272a94aaf80aa31094790ce40da6fdfc03a9a145c5\u0027,\\n    \u0027computerDnsName\u0027: \u0027windowsvmos\u0027,\\n    \u0027creationDateTimeUtc\u0027: \u00272021-08-12T18:53:06.5259227Z\u0027,\\n    \u0027lastUpdateDateTimeUtc\u0027: \u00272021-08-12T18:54:20.4259984Z\u0027,\\n\\\"\\\"\\\"\\n  \",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.defender_machine_id = incident.properties.defender_machine_id\\ninputs.defender_description = rule.properties.defender_action_comment\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_15fnm73\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_05j8mjf\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_15fnm73\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0zt2o7y\"/\u003e\u003cendEvent id=\"EndEvent_0nl0i8a\"\u003e\u003cincoming\u003eSequenceFlow_05j8mjf\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_05j8mjf\" sourceRef=\"ServiceTask_0zt2o7y\" targetRef=\"EndEvent_0nl0i8a\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1ntlx1f\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned in the Defender ATP Machines datatable\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0yjv0vh\" sourceRef=\"ServiceTask_0zt2o7y\" targetRef=\"TextAnnotation_1ntlx1f\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0zt2o7y\" id=\"ServiceTask_0zt2o7y_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"274\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_15fnm73\" id=\"SequenceFlow_15fnm73_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"274\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"236\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0nl0i8a\" id=\"EndEvent_0nl0i8a_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"458\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"476\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_05j8mjf\" id=\"SequenceFlow_05j8mjf_di\"\u003e\u003comgdi:waypoint x=\"374\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"458\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"416\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1ntlx1f\" id=\"TextAnnotation_1ntlx1f_di\"\u003e\u003comgdc:Bounds height=\"53\" width=\"204\" x=\"362\" y=\"81\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0yjv0vh\" id=\"Association_0yjv0vh_di\"\u003e\u003comgdi:waypoint x=\"371\" xsi:type=\"omgdc:Point\" y=\"173\"/\u003e\u003comgdi:waypoint x=\"427\" xsi:type=\"omgdc:Point\" y=\"134\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 2,
-      "creator_id": "a@example.com",
-      "description": "Start a process to collect an investigation report",
-      "export_key": "defender_atp_alert_collect_machine_investigation_package",
-      "last_modified_by": "a@example.com",
-      "last_modified_time": 1632747142041,
-      "name": "Defender ATP Alert Collect Machine Investigation Package",
-      "object_type": "incident",
-      "programmatic_name": "defender_atp_alert_collect_machine_investigation_package",
-      "tags": [],
-      "uuid": "390c2f23-f3dc-433c-bfd0-194fca5bde17",
-      "workflow_id": 42
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 2,
-        "workflow_id": "defender_atp_alert_app_execution",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"defender_atp_alert_app_execution\" isExecutable=\"true\" name=\"Defender ATP Alert App Execution Restriction\"\u003e\u003cdocumentation\u003eRestrict/un-restrict App execution on a Defender managed machine\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1uaynxc\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_010kd60\" name=\"Defender App Execution\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"92906dbe-9be4-4277-8f50-c6f15fb5dcbc\"\u003e{\"inputs\":{\"b35bd7fe-d52a-483e-ab06-16f8131ce093\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"c099160c-f83c-461d-9b8e-4d0edd66716d\"}}},\"post_processing_script\":\"msg = u\\\"Defender ATP Action {}.\\\\nAction: {}\\\\nMachine: {}\\\\nComment: {}\\\"\\\\\\n   .format(\\\"successful\\\" if results.success else \\\"unsuccessful\\\",\\n           rule.properties.defender_app_execution_action,\\n           incident.properties.defender_machine_id,\\n           rule.properties.defender_action_comment)\\n           \\nif results.success:\\n  action_msg = \\\"Action: {}\\\\nComment: {}\\\\nStatus: {}\\\\nStart Date: {}\\\".format(\\n    results.content[\u0027type\u0027],\\n    results.content[\u0027requestorComment\u0027],\\n    results.content[\u0027status\u0027],\\n    results.content[\u0027creationDateTimeUtc\u0027]\\n    )\\nelse:\\n  msg = u\\\"{}\\\\nReason: {}\\\".format(msg, results.reason)\\n\\nincident.addNote(helper.createPlainText(msg))\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.defender_description = rule.properties.defender_action_comment\\ninputs.defender_machine_id = incident.properties.defender_machine_id\\ninputs.defender_restriction_type = str(rule.properties.defender_app_execution_action)\\n\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1uaynxc\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0xrr3iw\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1uaynxc\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_010kd60\"/\u003e\u003cendEvent id=\"EndEvent_15voo0u\"\u003e\u003cincoming\u003eSequenceFlow_0xrr3iw\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0xrr3iw\" sourceRef=\"ServiceTask_010kd60\" targetRef=\"EndEvent_15voo0u\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1rdpuzw\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned in a note\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_001o3hz\" sourceRef=\"ServiceTask_010kd60\" targetRef=\"TextAnnotation_1rdpuzw\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_010kd60\" id=\"ServiceTask_010kd60_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"272\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1uaynxc\" id=\"SequenceFlow_1uaynxc_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"272\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"235\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_15voo0u\" id=\"EndEvent_15voo0u_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"429\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"447\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0xrr3iw\" id=\"SequenceFlow_0xrr3iw_di\"\u003e\u003comgdi:waypoint x=\"372\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"429\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"400.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1rdpuzw\" id=\"TextAnnotation_1rdpuzw_di\"\u003e\u003comgdc:Bounds height=\"40\" width=\"152\" x=\"369\" y=\"84\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_001o3hz\" id=\"Association_001o3hz_di\"\u003e\u003comgdi:waypoint x=\"366\" xsi:type=\"omgdc:Point\" y=\"170\"/\u003e\u003comgdi:waypoint x=\"421\" xsi:type=\"omgdc:Point\" y=\"124\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 2,
-      "creator_id": "a@example.com",
-      "description": "Restrict/un-restrict App execution on a Defender managed machine",
-      "export_key": "defender_atp_alert_app_execution",
-      "last_modified_by": "a@example.com",
-      "last_modified_time": 1632747141012,
-      "name": "Defender ATP Alert App Execution Restriction",
-      "object_type": "incident",
-      "programmatic_name": "defender_atp_alert_app_execution",
-      "tags": [],
-      "uuid": "a58f1bf6-c6be-42ed-924d-c31098342dd2",
-      "workflow_id": 38
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 2,
-        "workflow_id": "defender_atp_alerts_by_machine",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"defender_atp_alerts_by_machine\" isExecutable=\"true\" name=\"Defender ATP Alerts by Machine\"\u003e\u003cdocumentation\u003eReturn alerts associated with a Defender machine\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0r2m4k0\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0hj665d\" name=\"Defender Alert Search\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"b84ee1e6-d4de-4fef-8ed4-4418b87d53d5\"\u003e{\"inputs\":{\"aa552c13-07fb-438d-bff8-310eb7d20b4b\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"5159f7f0-06b3-4d79-8e5e-f3cb7d6e3c4c\"}}},\"post_processing_script\":\"\\\"\\\"\\\"\\n\\\"value\\\" = {\\n    \\\"@odata.context\\\": \\\"https://api.securitycenter.microsoft.com/api/$metadata#Alerts\\\",\\n    \\\"value\\\": [\\n        {\\n            \\\"id\\\": \\\"da637308392288907382_-880718168\\\",\\n            \\\"incidentId\\\": 7587,\\n            \\\"investigationId\\\": 723156,\\n            \\\"assignedTo\\\": \\\"secop123@contoso.com\\\",\\n            \\\"severity\\\": \\\"Low\\\",\\n            \\\"status\\\": \\\"New\\\",\\n            \\\"classification\\\": \\\"TruePositive\\\",\\n            \\\"determination\\\": null,\\n            \\\"investigationState\\\": \\\"Queued\\\",\\n            \\\"detectionSource\\\": \\\"WindowsDefenderAv\\\",\\n            \\\"category\\\": \\\"SuspiciousActivity\\\",\\n            \\\"threatFamilyName\\\": \\\"Meterpreter\\\",\\n            \\\"title\\\": \\\"Suspicious \u0027Meterpreter\u0027 behavior was detected\\\",\\n            \\\"description\\\": \\\"Malware and unwanted software are undesirable applications that perform annoying, disruptive, or harmful actions on affected machines. Some of these undesirable applications can replicate and spread from one machine to another. Others are able to receive commands from remote attackers and perform activities associated with cyber attacks.\\\\n\\\\nA malware is considered active if it is found running on the machine or it already has persistence mechanisms in place. Active malware detections are assigned higher severity ratings.\\\\n\\\\nBecause this malware was active, take precautionary measures and check for residual signs of infection.\\\",\\n            \\\"alertCreationTime\\\": \\\"2020-07-20T10:53:48.7657932Z\\\",\\n            \\\"firstEventTime\\\": \\\"2020-07-20T10:52:17.6654369Z\\\",\\n            \\\"lastEventTime\\\": \\\"2020-07-20T10:52:18.1362905Z\\\",\\n            \\\"lastUpdateTime\\\": \\\"2020-07-20T10:53:50.19Z\\\",\\n            \\\"resolvedTime\\\": null,\\n            \\\"machineId\\\": \\\"12ee6dd8c833c8a052ea231ec1b19adaf497b625\\\",\\n            \\\"computerDnsName\\\": \\\"temp123.middleeast.corp.microsoft.com\\\",\\n            \\\"rbacGroupName\\\": \\\"MiddleEast\\\",\\n            \\\"aadTenantId\\\": \\\"a839b112-1253-6432-9bf6-94542403f21c\\\",\\n            \\\"relatedUser\\\": {\\n                \\\"userName\\\": \\\"temp123\\\",\\n                \\\"domainName\\\": \\\"MIDDLEEAST\\\"\\n            },\\n\\t\\t\\t\\\"comments\\\": [\\n\\t\\t\\t\\t{\\n\\t\\t\\t\\t\\t\\\"comment\\\": \\\"test comment for docs\\\",\\n\\t\\t\\t\\t\\t\\\"createdBy\\\": \\\"secop123@contoso.com\\\",\\n\\t\\t\\t\\t\\t\\\"createdTime\\\": \\\"2020-07-21T01:00:37.8404534Z\\\"\\n\\t\\t\\t\\t}\\n\\t\\t\\t],\\n            \\\"evidence\\\": []\\n\\t\\t}\\n\\t]\\n}\\n\\\"\\\"\\\"\\nif results.success:\\n    for alert in results.content[\u0027value\u0027]:\\n        row = incident.addRow(\\\"defender_atp_alerts\\\")\\n        row[\u0027alert_id\u0027] = alert[\u0027id\u0027]\\n        row[\u0027azure_incident_id\u0027] = alert[\u0027incidentId\u0027]\\n        row[\u0027assigned_to\u0027] = alert[\u0027assignedTo\u0027]\\n        row[\u0027severity\u0027] = alert[\u0027severity\u0027]\\n        row[\u0027status\u0027] = alert[\u0027status\u0027]\\n        row[\u0027title\u0027] = alert[\u0027title\u0027]\\n        row[\u0027alert_description\u0027] = alert[\u0027description\u0027]\\n        row[\u0027classification\u0027] = alert[\u0027classification\u0027]\\n        row[\u0027determination\u0027] = alert[\u0027determination\u0027]\\n        row[\u0027category\u0027] = alert[\u0027category\u0027]\\n        row[\u0027computer_name\u0027] = alert[\u0027computerDnsName\u0027]\\n        row[\u0027machine_id\u0027] = alert[\u0027machineId\u0027]\\n        row[\u0027last_event\u0027] = alert[\u0027lastEventTime_ts\u0027]\\n        row[\u0027last_updated\u0027] = alert[\u0027lastUpdateTime_ts\u0027]\\nelse:\\n    msg = u\\\"Defender ATP Action unsuccessful.\\\\nAction: Find alerts by machine\\\\nReason: {}\\\".format(results.reason)\\n    incident.addNote(msg)\\n\",\"pre_processing_script\":\"inputs.defender_machine_id = row[\u0027machine_id\u0027]\\ninputs.defender_alert_lastseen = rule.properties.defender_alert_last_seen\\ninputs.defender_alert_lastupdatetime = rule.properties.defender_alert_lastupdatetime\\ninputs.defender_alert_severity = str(rule.properties.defender_alert_severity)\\ninputs.defender_alert_result_max = rule.properties.defender_max_results\\n\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0r2m4k0\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1ggn1uk\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0r2m4k0\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0hj665d\"/\u003e\u003cendEvent id=\"EndEvent_18vbtk3\"\u003e\u003cincoming\u003eSequenceFlow_1ggn1uk\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1ggn1uk\" sourceRef=\"ServiceTask_0hj665d\" targetRef=\"EndEvent_18vbtk3\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1rgyx7d\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned in defender_atp_alerts datatable\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0t0c5un\" sourceRef=\"ServiceTask_0hj665d\" targetRef=\"TextAnnotation_1rgyx7d\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0hj665d\" id=\"ServiceTask_0hj665d_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"273\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0r2m4k0\" id=\"SequenceFlow_0r2m4k0_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"273\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"235.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_18vbtk3\" id=\"EndEvent_18vbtk3_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"446\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"464\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1ggn1uk\" id=\"SequenceFlow_1ggn1uk_di\"\u003e\u003comgdi:waypoint x=\"373\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"446\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"409.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1rgyx7d\" id=\"TextAnnotation_1rgyx7d_di\"\u003e\u003comgdc:Bounds height=\"44\" width=\"207\" x=\"360\" y=\"75\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0t0c5un\" id=\"Association_0t0c5un_di\"\u003e\u003comgdi:waypoint x=\"368\" xsi:type=\"omgdc:Point\" y=\"171\"/\u003e\u003comgdi:waypoint x=\"436\" xsi:type=\"omgdc:Point\" y=\"119\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 2,
-      "creator_id": "a@example.com",
-      "description": "Return alerts associated with a Defender machine",
-      "export_key": "defender_atp_alerts_by_machine",
-      "last_modified_by": "a@example.com",
-      "last_modified_time": 1632747139358,
-      "name": "Defender ATP Alerts by Machine",
-      "object_type": "defender_atp_machines",
-      "programmatic_name": "defender_atp_alerts_by_machine",
-      "tags": [],
-      "uuid": "c580edc4-a699-473e-abda-96a5919f2b3b",
-      "workflow_id": 58
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 2,
-        "workflow_id": "defender_atp_update_indicator",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"defender_atp_update_indicator\" isExecutable=\"true\" name=\"Defender ATP Update Indicator\"\u003e\u003cdocumentation\u003eModify an existing indicator\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_08m8yww\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0qfzuck\" name=\"Defender Set Indicator\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"faf52947-0e1a-4e2b-9dfb-ed5ef1605667\"\u003e{\"inputs\":{\"c8b53f87-e1f7-49df-bfaa-5c72c1168d69\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"79c1a5bb-b168-4868-922b-54eb17365f9b\"}},\"0e17bb0b-6ef9-4bac-b3d7-e5e37eaa7ffa\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"a3216414-9c8b-49d4-9714-2b728e14f8c5\"}}},\"post_processing_script\":\"import java.util.Date as Date\\n\\nmsg = u\\\"Action {}.\\\\nAction: {}\\\\nArtifact: {}\\\\nTitle: {}\\\\nComment: {}\\\\nSeverity: {}\\\\nExpiration: {}\\\"\\\\\\n   .format(\\\"successful\\\" if results.success else \\\"unsuccessful\\\",\\n           str(rule.properties.indicator_action),\\n           row[\u0027ind_value\u0027],\\n           rule.properties.indicator_title,\\n           rule.properties.indicator_description,\\n           str(rule.properties.indicator_severity),\\n           rule.properties.indicator_expiration)\\n           \\nif not results.success:\\n    msg = u\\\"{}\\\\nReason: {}\\\".format(msg, results.reason)\\n\\nincident.addNote(msg)\\n\\nif results.success:\\n    row[\u0027report_date\u0027] = Date().getTime()\\n    row[\u0027ind_title\u0027] = results.content[\u0027title\u0027]\\n    row[\u0027ind_description\u0027] = results.content[\u0027description\u0027]\\n    row[\u0027ind_action\u0027] = results.content[\u0027action\u0027]\\n    row[\u0027ind_severity\u0027] = results.content[\u0027severity\u0027]\\n    row[\u0027ind_expiration_date\u0027] = results.content[\u0027expirationTime_ts\u0027]\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.defender_description = rule.properties.indicator_description\\ninputs.defender_title = rule.properties.indicator_title\\ninputs.defender_indicator_action = str(rule.properties.indicator_action)\\ninputs.defender_expiration_time = rule.properties.indicator_expiration\\ninputs.defender_severity = str(rule.properties.indicator_severity)\\ninputs.defender_indicator_type = row[\u0027ind_type\u0027]\\ninputs.defender_indicator_value = row[\u0027ind_value\u0027]\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_08m8yww\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_16osyai\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_08m8yww\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0qfzuck\"/\u003e\u003cendEvent id=\"EndEvent_1m8cg1z\"\u003e\u003cincoming\u003eSequenceFlow_16osyai\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_16osyai\" sourceRef=\"ServiceTask_0qfzuck\" targetRef=\"EndEvent_1m8cg1z\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0wmpc10\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned in a note and datatable row updated upon success.\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0827dlu\" sourceRef=\"ServiceTask_0qfzuck\" targetRef=\"TextAnnotation_0wmpc10\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0qfzuck\" id=\"ServiceTask_0qfzuck_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"275\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_08m8yww\" id=\"SequenceFlow_08m8yww_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"275\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"236.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1m8cg1z\" id=\"EndEvent_1m8cg1z_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"449\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"467\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_16osyai\" id=\"SequenceFlow_16osyai_di\"\u003e\u003comgdi:waypoint x=\"375\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"449\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"412\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0wmpc10\" id=\"TextAnnotation_0wmpc10_di\"\u003e\u003comgdc:Bounds height=\"48\" width=\"257\" x=\"370\" y=\"80\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0827dlu\" id=\"Association_0827dlu_di\"\u003e\u003comgdi:waypoint x=\"375\" xsi:type=\"omgdc:Point\" y=\"177\"/\u003e\u003comgdi:waypoint x=\"459\" xsi:type=\"omgdc:Point\" y=\"128\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 2,
-      "creator_id": "a@example.com",
-      "description": "Modify an existing indicator",
-      "export_key": "defender_atp_update_indicator",
-      "last_modified_by": "a@example.com",
-      "last_modified_time": 1632747141929,
-      "name": "Defender ATP Update Indicator",
-      "object_type": "defender_atp_indicators",
-      "programmatic_name": "defender_atp_update_indicator",
-      "tags": [],
-      "uuid": "b5764dd7-1214-4f4c-9c40-67a7b7338f34",
-      "workflow_id": 55
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 2,
-        "workflow_id": "defender_quarantine_file",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"defender_quarantine_file\" isExecutable=\"true\" name=\"Defender ATP Quarantine File\"\u003e\u003cdocumentation\u003eQuarantine a file on a given Defender ATP machine\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1wasesh\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1l4hotc\" name=\"Defender Quarantine File\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"656a8125-f55f-4047-a1b8-86e7dc5b05f0\"\u003e{\"inputs\":{},\"post_processing_script\":\"import time\\n\\nif results.success:\\n  row[\u0027report_date\u0027] = int(time.time()*1000)\\n  action_msg = \\\"Action: {}\\\\nComment: {}\\\\nStatus: {}\\\\nStart Date: {}\\\".format(\\n    results.content[\u0027type\u0027],\\n    results.content[\u0027requestorComment\u0027],\\n    results.content[\u0027status\u0027],\\n    results.content[\u0027creationDateTimeUtc\u0027]\\n    )\\n  row[\u0027machine_last_action\u0027] = helper.createPlainText(action_msg)\\nelse:\\n  msg = u\\\"Defender ATP Quarantine file Action {}.\\\\nMachine: {} ({})\\\\nType: {}\\\\nComment: {}\\\\nReason: {}\\\"\\\\\\n   .format(\\\"successful\\\" if results.success else \\\"unsuccessful\\\",\\n           results.content.get(\u0027computerDnsName\u0027), row[\u0027machine_id\u0027],\\n           str(rule.properties.defender_isolation_type),\\n           rule.properties.defender_action_comment,\\n           results.reason)\\n\\n  incident.addNote(helper.createPlainText(msg))\\n\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.defender_description = rule.properties.defender_action_comment\\ninputs.defender_indicator_value = row[\u0027machine_file_hash\u0027]\\ninputs.defender_machine_id = row[\u0027machine_id\u0027]\\n\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1wasesh\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_04ttxgc\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1wasesh\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1l4hotc\"/\u003e\u003cendEvent id=\"EndEvent_05gfdcs\"\u003e\u003cincoming\u003eSequenceFlow_04ttxgc\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_04ttxgc\" sourceRef=\"ServiceTask_1l4hotc\" targetRef=\"EndEvent_05gfdcs\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1d133ml\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned in a note\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0h09n0s\" sourceRef=\"ServiceTask_1l4hotc\" targetRef=\"TextAnnotation_1d133ml\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1l4hotc\" id=\"ServiceTask_1l4hotc_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"271\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1wasesh\" id=\"SequenceFlow_1wasesh_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"271\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"234.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_05gfdcs\" id=\"EndEvent_05gfdcs_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"444\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"462\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_04ttxgc\" id=\"SequenceFlow_04ttxgc_di\"\u003e\u003comgdi:waypoint x=\"371\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"444\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"407.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1d133ml\" id=\"TextAnnotation_1d133ml_di\"\u003e\u003comgdc:Bounds height=\"40\" width=\"162\" x=\"352\" y=\"86\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0h09n0s\" id=\"Association_0h09n0s_di\"\u003e\u003comgdi:waypoint x=\"363\" xsi:type=\"omgdc:Point\" y=\"168\"/\u003e\u003comgdi:waypoint x=\"411\" xsi:type=\"omgdc:Point\" y=\"126\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 2,
-      "creator_id": "a@example.com",
-      "description": "Quarantine a file on a given Defender ATP machine",
-      "export_key": "defender_quarantine_file",
-      "last_modified_by": "a@example.com",
-      "last_modified_time": 1632747140353,
-      "name": "Defender ATP Quarantine File",
-      "object_type": "defender_atp_machines",
-      "programmatic_name": "defender_quarantine_file",
-      "tags": [],
-      "uuid": "2299d542-4139-4138-9587-f8c900d7b898",
-      "workflow_id": 37
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 2,
-        "workflow_id": "defender_atp_alert_machine_vulnerabilities",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"defender_atp_alert_machine_vulnerabilities\" isExecutable=\"true\" name=\"Defender ATP Alert Machine Vulnerabilities\"\u003e\u003cdocumentation\u003eGet Defender ATP machine vulnerabilities\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0w27m0u\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0zisxlv\" name=\"Defender Machine Vulnerabilities\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"b0e17c3e-ef30-46ed-bb0b-3862990314ed\"\u003e{\"inputs\":{},\"post_processing_script\":\"\\\"\\\"\\\"\\n [\\n        {\\n            \\\"id\\\": \\\"CVE-2019-1348\\\",\\n            \\\"name\\\": \\\"CVE-2019-1348\\\",\\n            \\\"description\\\": \\\"Git could allow a remote attacker to bypass security restrictions, caused by a flaw in the --export-marks option of git fast-import. By persuading a victim to import specially-crafted content, an attacker could exploit this vulnerability to overwrite arbitrary paths.\\\",\\n            \\\"severity\\\": \\\"Medium\\\",\\n            \\\"cvssV3\\\": 4.3,\\n            \\\"exposedMachines\\\": 1,\\n            \\\"publishedOn\\\": \\\"2019-12-13T00:00:00Z\\\",\\n            \\\"updatedOn\\\": \\\"2019-12-13T00:00:00Z\\\",\\n            \\\"publicExploit\\\": False,\\n            \\\"exploitVerified\\\": False,\\n            \\\"exploitInKit\\\": False,\\n            \\\"exploitTypes\\\": [],\\n            \\\"exploitUris\\\": []\\n        },\\n        {\\n            \\\"id\\\": \\\"CVE-2019-1348\\\",\\n            \\\"name\\\": \\\"CVE-2019-1348-2\\\",\\n            \\\"description\\\": \\\"Git could allow a remote attacker to bypass security restrictions, caused by a flaw in the --export-marks option of git fast-import. By persuading a victim to import specially-crafted content, an attacker could exploit this vulnerability to overwrite arbitrary paths.\\\",\\n            \\\"severity\\\": \\\"Medium\\\",\\n            \\\"cvssV3\\\": 4.3,\\n            \\\"exposedMachines\\\": 1,\\n            \\\"publishedOn\\\": \\\"2019-12-13T00:00:00Z\\\",\\n            \\\"updatedOn\\\": \\\"2019-12-13T00:00:00Z\\\",\\n            \\\"publicExploit\\\": False,\\n            \\\"exploitVerified\\\": False,\\n            \\\"exploitInKit\\\": False,\\n            \\\"exploitTypes\\\": [],\\n            \\\"exploitUris\\\": []\\n        }\\n    ]\\n\\\"\\\"\\\"\\n\\n\\ndef mk_note(list_of_notes):\\n    return \\\"\u0026lt;br\u0026gt;---\u0026lt;br\u0026gt;\u0026lt;br\u0026gt;\\\".join([\\\"\u0026lt;br\u0026gt;\\\".join(note) for note in list_of_notes])\\n\\ndef format_line(k, v):\\n    return \\\"\u0026lt;b\u0026gt;{}\u0026lt;/b\u0026gt;: {}\\\".format(k, v)\\n\\nvulnerabilities = results.content[\u0027value\u0027]\\nif results[\u0027success\u0027]:\\n    if not vulnerabilities:\\n        incident.addNote(\\\"No machine vulnerabilities for: {}\\\".format(incident.properties.defender_machine_id))\\n    else:\\n        note = []\\n        for risk in vulnerabilities:\\n            note_info = []\\n            note_info.append(format_line(\\\"Machine\\\", row[\u0027machine_name\u0027]))\\n            note_info.append(format_line(\\\"Machine Id\\\", row[\u0027machine_id\u0027]))\\n            note_info.append(format_line(\\\"Vulnerability\\\", risk[\u0027name\u0027]))\\n            note_info.append(format_line(\\\"Description\\\", risk[\u0027description\u0027]))\\n            note_info.append(format_line(\\\"Severity\\\", risk[\u0027severity\u0027]))\\n            note_info.append(format_line(\\\"Published\\\", risk[\u0027publishedOn\u0027]))\\n            note_info.append(format_line(\\\"Updated\\\", risk[\u0027updatedOn\u0027]))\\n    \\n            note.append(note_info)\\n        incident.addNote(helper.createRichText(mk_note(note)))\\nelse:\\n    incident.addNote(\\\"Defender ATP Machine Vulnerabilities failed: {}\\\".format(results.reason))\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.defender_machine_id = incident.properties.defender_machine_id\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0w27m0u\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1gely5i\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0w27m0u\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0zisxlv\"/\u003e\u003cendEvent id=\"EndEvent_1nhwyxe\"\u003e\u003cincoming\u003eSequenceFlow_1gely5i\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1gely5i\" sourceRef=\"ServiceTask_0zisxlv\" targetRef=\"EndEvent_1nhwyxe\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1jpdcnq\"\u003e\u003ctext\u003eResults returned in a note\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1njp61g\" sourceRef=\"ServiceTask_0zisxlv\" targetRef=\"TextAnnotation_1jpdcnq\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0zisxlv\" id=\"ServiceTask_0zisxlv_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"273\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0w27m0u\" id=\"SequenceFlow_0w27m0u_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"273\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"235.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1nhwyxe\" id=\"EndEvent_1nhwyxe_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"448\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"466\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1gely5i\" id=\"SequenceFlow_1gely5i_di\"\u003e\u003comgdi:waypoint x=\"373\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"448\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"410.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1jpdcnq\" id=\"TextAnnotation_1jpdcnq_di\"\u003e\u003comgdc:Bounds height=\"51\" width=\"197\" x=\"356\" y=\"58\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1njp61g\" id=\"Association_1njp61g_di\"\u003e\u003comgdi:waypoint x=\"365\" xsi:type=\"omgdc:Point\" y=\"168\"/\u003e\u003comgdi:waypoint x=\"428\" xsi:type=\"omgdc:Point\" y=\"109\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 2,
-      "creator_id": "a@example.com",
-      "description": "Get Defender ATP machine vulnerabilities",
-      "export_key": "defender_atp_alert_machine_vulnerabilities",
-      "last_modified_by": "a@example.com",
-      "last_modified_time": 1632747140229,
-      "name": "Defender ATP Alert Machine Vulnerabilities",
-      "object_type": "incident",
-      "programmatic_name": "defender_atp_alert_machine_vulnerabilities",
-      "tags": [],
-      "uuid": "d856404b-7d3e-4fd2-9aba-f70c5814dabc",
-      "workflow_id": 40
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 2,
-        "workflow_id": "defender_atp_delete_indicator",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"defender_atp_delete_indicator\" isExecutable=\"true\" name=\"Defender ATP Delete Indicator\"\u003e\u003cdocumentation\u003eRemove an indicator from Defender ATP\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1tvjnhc\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0g9n58t\" name=\"Defender Delete Indicator\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"f13cf24d-612b-47c7-aa51-3748d3c3520e\"\u003e{\"inputs\":{},\"post_processing_script\":\"import java.util.Date as Date\\n\\nmsg = u\\\"Defender ATP Action {}.\\\\nAction: Delete Indicator\\\\nIndicator: {}\\\"\\\\\\n   .format(\\\"successful\\\" if results.success else \\\"unsuccessful\\\",\\n           row[\u0027ind_value\u0027],\\n           )\\n           \\nif results.success:\\n  row[\u0027report_date\u0027] = Date().getTime()\\n  row[\u0027status\u0027] = \u0027Inactive\u0027\\nelse:\\n  msg = u\\\"{}\\\\nReason: {}\\\".format(msg, results.reason)\\n\\nincident.addNote(helper.createPlainText(msg))\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.defender_indicator_id = row[\u0027ind_id\u0027]\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1tvjnhc\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0wb4sn4\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1tvjnhc\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0g9n58t\"/\u003e\u003cendEvent id=\"EndEvent_0lvmxfm\"\u003e\u003cincoming\u003eSequenceFlow_0wb4sn4\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0wb4sn4\" sourceRef=\"ServiceTask_0g9n58t\" targetRef=\"EndEvent_0lvmxfm\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_10npj1n\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned in a note\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0y4nfg5\" sourceRef=\"ServiceTask_0g9n58t\" targetRef=\"TextAnnotation_10npj1n\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0g9n58t\" id=\"ServiceTask_0g9n58t_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"279\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1tvjnhc\" id=\"SequenceFlow_1tvjnhc_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"279\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"238.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0lvmxfm\" id=\"EndEvent_0lvmxfm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"449\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"467\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0wb4sn4\" id=\"SequenceFlow_0wb4sn4_di\"\u003e\u003comgdi:waypoint x=\"379\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"449\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"414\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_10npj1n\" id=\"TextAnnotation_10npj1n_di\"\u003e\u003comgdc:Bounds height=\"47\" width=\"171\" x=\"369\" y=\"80\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0y4nfg5\" id=\"Association_0y4nfg5_di\"\u003e\u003comgdi:waypoint x=\"373\" xsi:type=\"omgdc:Point\" y=\"170\"/\u003e\u003comgdi:waypoint x=\"427\" xsi:type=\"omgdc:Point\" y=\"127\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 2,
-      "creator_id": "a@example.com",
-      "description": "Remove an indicator from Defender ATP",
-      "export_key": "defender_atp_delete_indicator",
-      "last_modified_by": "a@example.com",
-      "last_modified_time": 1632747141249,
-      "name": "Defender ATP Delete Indicator",
-      "object_type": "defender_atp_indicators",
-      "programmatic_name": "defender_atp_delete_indicator",
-      "tags": [],
-      "uuid": "bc4c92be-854c-4fa4-a13c-6a0d4550d5ff",
-      "workflow_id": 47
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 2,
-        "workflow_id": "defender_list_indicators",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"defender_list_indicators\" isExecutable=\"true\" name=\"Defender ATP List Indicators\"\u003e\u003cdocumentation\u003eGet a list of the indicators defined in Defender ATP.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1jfth66\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_01kd4oz\" name=\"Defender List Indicators\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"77e866e9-9c78-41d7-b13d-4feea72d59b7\"\u003e{\"inputs\":{\"83ef8d59-9b4a-405a-bc7b-2978a214bdbf\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"15ca01c7-cab9-44d7-b9b8-7506130a43f1\"}}},\"post_processing_script\":\"import java.util.Date as Date\\n\\nif results.success and results.content.get(\\\"value\\\"):\\n    for indicator in results.content.get(\\\"value\\\"):\\n        row = incident.addRow(\\\"defender_atp_indicators\\\")\\n        row[\u0027report_date\u0027] = Date().getTime()\\n        row[\u0027ind_id\u0027] = indicator[\u0027id\u0027]\\n        row[\u0027ind_value\u0027] = indicator[\u0027indicatorValue\u0027]\\n        row[\u0027ind_type\u0027] = indicator[\u0027indicatorType\u0027]\\n        row[\u0027ind_title\u0027] = indicator[\u0027title\u0027]\\n        row[\u0027ind_description\u0027] = indicator[\u0027description\u0027]\\n        row[\u0027ind_action\u0027] = indicator[\u0027action\u0027]\\n        row[\u0027ind_severity\u0027] = indicator[\u0027severity\u0027]\\n        row[\u0027ind_created_by\u0027] = indicator[\u0027createdByDisplayName\u0027]\\n        row[\u0027ind_creation_date\u0027] = indicator[\u0027creationTimeDateTimeUtc_ts\u0027]\\n        row[\u0027ind_expiration_date\u0027] = indicator[\u0027expirationTime_ts\u0027]\\n        row[\u0027status\u0027] = \u0027Active\u0027\\nelse:\\n    msg = u\\\"Defender ATP Action unsuccessful.\\\\nAction: List indicators\\\\nReason: {}\\\".format(results.reason)\\n    incident.addNote(msg)\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.defender_indicator_filter = rule.properties.defender_indicator_filter\\ninputs.defender_indicator_field = rule.properties.defender_indicator_field\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1jfth66\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0nljrkv\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1jfth66\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_01kd4oz\"/\u003e\u003cendEvent id=\"EndEvent_06bj4jw\"\u003e\u003cincoming\u003eSequenceFlow_0nljrkv\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0nljrkv\" sourceRef=\"ServiceTask_01kd4oz\" targetRef=\"EndEvent_06bj4jw\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_14xpgky\"\u003e\u003ctext\u003e\u003c![CDATA[Results presented in the Defender ATP datatable\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1cy0g4l\" sourceRef=\"ServiceTask_01kd4oz\" targetRef=\"TextAnnotation_14xpgky\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_01kd4oz\" id=\"ServiceTask_01kd4oz_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"260\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1jfth66\" id=\"SequenceFlow_1jfth66_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"260\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"229\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_06bj4jw\" id=\"EndEvent_06bj4jw_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"426\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"444\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0nljrkv\" id=\"SequenceFlow_0nljrkv_di\"\u003e\u003comgdi:waypoint x=\"360\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"426\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"393\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_14xpgky\" id=\"TextAnnotation_14xpgky_di\"\u003e\u003comgdc:Bounds height=\"54\" width=\"204\" x=\"351\" y=\"79\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1cy0g4l\" id=\"Association_1cy0g4l_di\"\u003e\u003comgdi:waypoint x=\"357\" xsi:type=\"omgdc:Point\" y=\"173\"/\u003e\u003comgdi:waypoint x=\"414\" xsi:type=\"omgdc:Point\" y=\"133\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 2,
-      "creator_id": "a@example.com",
-      "description": "Get a list of the indicators defined in Defender ATP.",
-      "export_key": "defender_list_indicators",
-      "last_modified_by": "a@example.com",
-      "last_modified_time": 1632747140868,
-      "name": "Defender ATP List Indicators",
-      "object_type": "incident",
-      "programmatic_name": "defender_list_indicators",
-      "tags": [],
-      "uuid": "fe689986-cc3a-4f35-918a-a33de3286365",
-      "workflow_id": 56
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 8,
-        "workflow_id": "defender_atp_get_file_information",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"defender_atp_get_file_information\" isExecutable=\"true\" name=\"Defender ATP Get File Information\"\u003e\u003cdocumentation\u003e\u003c![CDATA[Get more information about a file based on it\u0027s SHA1 or SHA256 hash]]\u003e\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_143gc3m\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_06fhjd4\" name=\"Defender Get File Information\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"1121d8e5-07e7-4506-8e87-9badef1cbcae\"\u003e{\"inputs\":{},\"post_processing_script\":\"if not results.success:\\n    msg = u\\\"Defender Get File Information failed: {}\\\".format(results.reason)\\nelse:\\n    info = [u\\\"{}: {}\\\".format(k, v) for k, v in results.content.items()]\\n    msg = u\\\"Defender Get File Information:\\\\n\\\\n{}\\\".format(\\\"\\\\n\\\".join(info))\\n\\nif artifact.description:\\n    artifact.description = u\\\"{}\\\\n\\\\n{}\\\".format(artifact.description.content, msg)\\nelse:\\n    artifact.description = msg\\n    \\n    \\n\\\"\\\"\\\"\\n{\\n    \\\"@odata.context\\\": \\\"https://api.securitycenter.microsoft.com/api/$metadata#Files/$entity\\\",\\n    \\\"sha1\\\": \\\"4388963aaa83afe2042a46a3c017ad50bdcdafb3\\\",\\n    \\\"sha256\\\": \\\"413c58c8267d2c8648d8f6384bacc2ae9c929b2b96578b6860b5087cd1bd6462\\\",\\n    \\\"globalPrevalence\\\": 180022,\\n    \\\"globalFirstObserved\\\": \\\"2017-09-19T03:51:27.6785431Z\\\",\\n    \\\"globalLastObserved\\\": \\\"2020-01-06T03:59:21.3229314Z\\\",\\n    \\\"size\\\": 22139496,\\n    \\\"fileType\\\": \\\"APP\\\",\\n    \\\"isPeFile\\\": true,\\n    \\\"filePublisher\\\": \\\"CHENGDU YIWO Tech Development Co., Ltd.\\\",\\n    \\\"fileProductName\\\": \\\"EaseUS MobiSaver for Android\\\",\\n    \\\"signer\\\": \\\"CHENGDU YIWO Tech Development Co., Ltd.\\\",\\n    \\\"issuer\\\": \\\"VeriSign Class 3 Code Signing 2010 CA\\\",\\n    \\\"signerHash\\\": \\\"6c3245d4a9bc0244d99dff27af259cbbae2e2d16\\\",\\n    \\\"isValidCertificate\\\": false,\\n    \\\"determinationType\\\": \\\"Pua\\\",\\n    \\\"determinationValue\\\": \\\"PUA:Win32/FusionCore\\\"\\n}\\n\\\"\\\"\\\"\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.defender_file_hash = artifact.value\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_143gc3m\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1cbp0ss\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_143gc3m\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_06fhjd4\"/\u003e\u003cendEvent id=\"EndEvent_084ozeq\"\u003e\u003cincoming\u003eSequenceFlow_1cbp0ss\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1cbp0ss\" sourceRef=\"ServiceTask_06fhjd4\" targetRef=\"EndEvent_084ozeq\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0i6nq8h\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned in the artifact description\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1smf91i\" sourceRef=\"ServiceTask_06fhjd4\" targetRef=\"TextAnnotation_0i6nq8h\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_06fhjd4\" id=\"ServiceTask_06fhjd4_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"289\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_143gc3m\" id=\"SequenceFlow_143gc3m_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"289\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"243.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_084ozeq\" id=\"EndEvent_084ozeq_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"458\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"476\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1cbp0ss\" id=\"SequenceFlow_1cbp0ss_di\"\u003e\u003comgdi:waypoint x=\"389\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"458\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"423.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0i6nq8h\" id=\"TextAnnotation_0i6nq8h_di\"\u003e\u003comgdc:Bounds height=\"54\" width=\"189\" x=\"395\" y=\"79\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1smf91i\" id=\"Association_1smf91i_di\"\u003e\u003comgdi:waypoint x=\"387\" xsi:type=\"omgdc:Point\" y=\"174\"/\u003e\u003comgdi:waypoint x=\"449\" xsi:type=\"omgdc:Point\" y=\"133\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 8,
-      "creator_id": "a@example.com",
-      "description": "Get more information about a file based on it\u0027s SHA1 or SHA256 hash",
-      "export_key": "defender_atp_get_file_information",
-      "last_modified_by": "a@example.com",
-      "last_modified_time": 1632748565673,
-      "name": "Defender ATP Get File Information",
-      "object_type": "artifact",
-      "programmatic_name": "defender_atp_get_file_information",
-      "tags": [],
-      "uuid": "c209745d-4d8c-41ea-ae22-0048ca310f76",
-      "workflow_id": 60
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 2,
-        "workflow_id": "defender_atp_update_alert",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"defender_atp_update_alert\" isExecutable=\"true\" name=\"Defender ATP Update Alert\"\u003e\u003cdocumentation\u003eUpdate a Defender Alert: Status, Classification, Assigned to, and Determination\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0j9rkvs\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_10d04cr\" name=\"Defender Update Alert\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"7666e80b-6eb0-4bef-88cc-e3bf095caad9\"\u003e{\"inputs\":{\"c0c321ad-ed0a-4a1c-b5b9-a8c7387c58b0\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"2fead575-cda4-4ea4-837c-73ff0563ec6a\"}},\"dddcd251-6cb1-4fd7-a6a8-0f4890e87049\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"b8bef116-f5e1-4bbb-9dd8-cd28d4706b9d\"}},\"0b54ef2d-c209-479a-863a-46df39ec94e6\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"7f6c5ad6-f742-43db-b94c-4881d93b99da\"}}},\"post_processing_script\":\"msg = u\\\"Action {}.\\\\nAction: Update Alert\\\\nAlert: {}\\\\nMachine: {}\\\\nComment: {}\\\"\\\\\\n   .format(\\\"successful\\\" if results.success else \\\"unsuccessful\\\",\\n           row[\u0027alert_id\u0027],\\n           row[\u0027machine_name\u0027],\\n           rule.properties.defender_action_comment)\\nif rule.properties.defender_alert_assigned_to:\\n    msg = u\\\"{}\\\\nAssigned to: {}\\\".format(msg, rule.properties.defender_alert_assigned_to)\\nif rule.properties.defender_alert_status:\\n    msg = u\\\"{}\\\\nStatus: {}\\\".format(msg, str(rule.properties.defender_alert_status))\\nif rule.properties.defender_alert_classification:\\n    msg = u\\\"{}\\\\nClassification: {}\\\".format(msg, str(rule.properties.defender_alert_classification))\\nif rule.properties.defender_alert_determination:\\n    msg = u\\\"{}\\\\nDetermination: {}\\\".format(msg, str(rule.properties.defender_alert_determination))\\n\\nif not results.success:\\n    msg = u\\\"{}\\\\nReason: {}\\\".format(msg, results.reason)\\n\\nincident.addNote(msg)\\n\\nif results.success:\\n    row[\u0027classification\u0027] = str(rule.properties.defender_alert_classification)\\n    row[\u0027determination\u0027] = str(rule.properties.defender_alert_determination)\\n    row[\u0027status\u0027] = str(rule.properties.defender_alert_status)\\n    row[\u0027assigned_to\u0027] = rule.properties.defender_alert_assigned_to\\n\",\"pre_processing_script\":\"inputs.defender_alert_id = row[\u0027alert_id\u0027]\\nif rule.properties.defender_alert_classification:\\n    inputs.defender_alert_classification = str(rule.properties.defender_alert_classification)\\nif rule.properties.defender_alert_determination:\\n    inputs.defender_alert_determination = str(rule.properties.defender_alert_determination)\\nif rule.properties.defender_alert_status:\\n    inputs.defender_alert_status = str(rule.properties.defender_alert_status)\\ninputs.defender_description = rule.properties.defender_action_comment\\ninputs.defender_alert_assigned_to = rule.properties.defender_alert_assigned_to\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0j9rkvs\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1byqvvp\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0j9rkvs\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_10d04cr\"/\u003e\u003cendEvent id=\"EndEvent_0bs2mo8\"\u003e\u003cincoming\u003eSequenceFlow_1byqvvp\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1byqvvp\" sourceRef=\"ServiceTask_10d04cr\" targetRef=\"EndEvent_0bs2mo8\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1fzo0dn\"\u003e\u003ctext\u003e\u003c![CDATA[Results update the defender_atp_alerts datatable and a note is created.\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0ms2kom\" sourceRef=\"ServiceTask_10d04cr\" targetRef=\"TextAnnotation_1fzo0dn\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_10d04cr\" id=\"ServiceTask_10d04cr_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"252\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0j9rkvs\" id=\"SequenceFlow_0j9rkvs_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"252\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"225\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0bs2mo8\" id=\"EndEvent_0bs2mo8_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"405\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"423\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1byqvvp\" id=\"SequenceFlow_1byqvvp_di\"\u003e\u003comgdi:waypoint x=\"352\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"405\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"378.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1fzo0dn\" id=\"TextAnnotation_1fzo0dn_di\"\u003e\u003comgdc:Bounds height=\"47\" width=\"187\" x=\"331\" y=\"50\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0ms2kom\" id=\"Association_0ms2kom_di\"\u003e\u003comgdi:waypoint x=\"339\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"404\" xsi:type=\"omgdc:Point\" y=\"97\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 2,
-      "creator_id": "a@example.com",
-      "description": "Update a Defender Alert: Status, Classification, Assigned to, and Determination",
-      "export_key": "defender_atp_update_alert",
-      "last_modified_by": "a@example.com",
-      "last_modified_time": 1632747139620,
-      "name": "Defender ATP Update Alert",
-      "object_type": "defender_atp_alerts",
-      "programmatic_name": "defender_atp_update_alert",
-      "tags": [],
-      "uuid": "0da47896-a15a-47f3-9746-0527cc01b0fd",
-      "workflow_id": 41
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 2,
-        "workflow_id": "defender_atp_alert_machine_isolation",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"defender_atp_alert_machine_isolation\" isExecutable=\"true\" name=\"Defender ATP Alert Machine Isolation\"\u003e\u003cdocumentation\u003eIsolate a Defender ATP Machine\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0yu2usv\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0vx43uk\" name=\"Defender Machine Isolation\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"0afc74fe-8301-4801-a162-9e0dbd984e1a\"\u003e{\"inputs\":{\"46ccbdc2-0d49-4e72-9310-49494aa1d4e0\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"11fcc5e8-b795-4719-8320-c99d323d10a6\"}}},\"post_processing_script\":\"if results.success:\\n  msg = \\\"Defender ATP Isolate Action: {}\\\\nComment: {}\\\\nStatus: {}\\\\nStart Date: {}\\\".format(\\n    results.content[\u0027type\u0027],\\n    results.content[\u0027requestorComment\u0027],\\n    results.content[\u0027status\u0027],\\n    results.content[\u0027creationDateTimeUtc\u0027]\\n  )\\nelse:\\n  msg = u\\\"Defender ATP Isolate Action {}.\\\\nMachine: {} ({})\\\\nType: {}\\\\nComment: {}\\\\nReason: {}\\\"\\\\\\n   .format(\\\"successful\\\" if results.success else \\\"unsuccessful\\\",\\n           results.content.get(\u0027computerDnsName\u0027), incident.properties.defender_machine_id,\\n           str(rule.properties.defender_isolation_type),\\n           rule.properties.defender_action_comment,\\n           results.reason)\\n\\nincident.addNote(helper.createPlainText(msg))\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.defender_machine_id = incident.properties.defender_machine_id\\ninputs.defender_isolation_type = str(rule.properties.defender_isolation_type)\\ninputs.defender_description = rule.properties.defender_action_comment\\ninputs.defender_isolation_action = \u0027isolate\u0027\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0yu2usv\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0x9zzb1\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0yu2usv\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0vx43uk\"/\u003e\u003cendEvent id=\"EndEvent_1bmmobf\"\u003e\u003cincoming\u003eSequenceFlow_0x9zzb1\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0x9zzb1\" sourceRef=\"ServiceTask_0vx43uk\" targetRef=\"EndEvent_1bmmobf\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1q6d49f\"\u003e\u003ctext\u003e\u003c![CDATA[\u0027Defender ATP Machines\u0027 datatable action status update\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1y18pzl\" sourceRef=\"ServiceTask_0vx43uk\" targetRef=\"TextAnnotation_1q6d49f\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0vx43uk\" id=\"ServiceTask_0vx43uk_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"279\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0yu2usv\" id=\"SequenceFlow_0yu2usv_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"279\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"238.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1bmmobf\" id=\"EndEvent_1bmmobf_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"454\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"472\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0x9zzb1\" id=\"SequenceFlow_0x9zzb1_di\"\u003e\u003comgdi:waypoint x=\"379\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"454\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"416.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1q6d49f\" id=\"TextAnnotation_1q6d49f_di\"\u003e\u003comgdc:Bounds height=\"49\" width=\"196\" x=\"372\" y=\"79\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1y18pzl\" id=\"Association_1y18pzl_di\"\u003e\u003comgdi:waypoint x=\"375\" xsi:type=\"omgdc:Point\" y=\"172\"/\u003e\u003comgdi:waypoint x=\"437\" xsi:type=\"omgdc:Point\" y=\"128\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 2,
-      "creator_id": "a@example.com",
-      "description": "Isolate a Defender ATP Machine",
-      "export_key": "defender_atp_alert_machine_isolation",
-      "last_modified_by": "a@example.com",
-      "last_modified_time": 1632747139485,
-      "name": "Defender ATP Alert Machine Isolation",
-      "object_type": "incident",
-      "programmatic_name": "defender_atp_alert_machine_isolation",
-      "tags": [],
-      "uuid": "9ac75380-e244-48f3-9d18-f40482afdb7e",
-      "workflow_id": 39
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 2,
-        "workflow_id": "defender_atp_collect_machine_investigation_package",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"defender_atp_collect_machine_investigation_package\" isExecutable=\"true\" name=\"Defender ATP Collect Machine Investigation Package\"\u003e\u003cdocumentation\u003eStart a process to collect an investigation report\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_15fnm73\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0zt2o7y\" name=\"Defender Collect Machine Investig...\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"bfa88004-c394-4504-92ad-d3e1cb717b20\"\u003e{\"inputs\":{},\"post_processing_script\":\"import time\\n\\nif results.success:\\n  msg = \\\"Action: {}\\\\nComment: {}\\\\nStatus: {}\\\\nStart Date: {}\\\".format(\\n    results.content[\u0027type\u0027],\\n    results.content[\u0027requestorComment\u0027],\\n    results.content[\u0027status\u0027],\\n    results.content[\u0027creationDateTimeUtc\u0027]\\n    )\\n  row[\u0027machine_last_action\u0027] = helper.createPlainText(msg)\\n  row[\u0027report_date\u0027] = int(time.time()*1000)\\n  \\n\\\"\\\"\\\"\\n    \u0027type\u0027: \u0027CollectInvestigationPackage\u0027,\\n    \u0027title\u0027: None,\\n    \u0027requestor\u0027: \u0027f0dc3f88-f617-449c-960c-6b54818cd110\u0027,\\n    \u0027requestorComment\u0027: \u0027ss\u0027,\\n    \u0027status\u0027: \u0027Succeeded\u0027,\\n    \u0027machineId\u0027: \u00272a94aaf80aa31094790ce40da6fdfc03a9a145c5\u0027,\\n    \u0027computerDnsName\u0027: \u0027windowsvmos\u0027,\\n    \u0027creationDateTimeUtc\u0027: \u00272021-08-12T18:53:06.5259227Z\u0027,\\n    \u0027lastUpdateDateTimeUtc\u0027: \u00272021-08-12T18:54:20.4259984Z\u0027,\\n\\\"\\\"\\\"\\n  \",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.defender_machine_id = row[\u0027machine_id\u0027]\\ninputs.defender_description = rule.properties.defender_action_comment\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_15fnm73\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_05j8mjf\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_15fnm73\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0zt2o7y\"/\u003e\u003cendEvent id=\"EndEvent_0nl0i8a\"\u003e\u003cincoming\u003eSequenceFlow_05j8mjf\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_05j8mjf\" sourceRef=\"ServiceTask_0zt2o7y\" targetRef=\"EndEvent_0nl0i8a\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1ntlx1f\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned in the Defender ATP Machines datatable\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0yjv0vh\" sourceRef=\"ServiceTask_0zt2o7y\" targetRef=\"TextAnnotation_1ntlx1f\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0zt2o7y\" id=\"ServiceTask_0zt2o7y_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"274\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_15fnm73\" id=\"SequenceFlow_15fnm73_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"274\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"236\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0nl0i8a\" id=\"EndEvent_0nl0i8a_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"458\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"476\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_05j8mjf\" id=\"SequenceFlow_05j8mjf_di\"\u003e\u003comgdi:waypoint x=\"374\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"458\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"416\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1ntlx1f\" id=\"TextAnnotation_1ntlx1f_di\"\u003e\u003comgdc:Bounds height=\"53\" width=\"204\" x=\"362\" y=\"81\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0yjv0vh\" id=\"Association_0yjv0vh_di\"\u003e\u003comgdi:waypoint x=\"371\" xsi:type=\"omgdc:Point\" y=\"173\"/\u003e\u003comgdi:waypoint x=\"427\" xsi:type=\"omgdc:Point\" y=\"134\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 2,
-      "creator_id": "a@example.com",
-      "description": "Start a process to collect an investigation report",
-      "export_key": "defender_atp_collect_machine_investigation_package",
-      "last_modified_by": "a@example.com",
-      "last_modified_time": 1632747140465,
-      "name": "Defender ATP Collect Machine Investigation Package",
-      "object_type": "defender_atp_machines",
-      "programmatic_name": "defender_atp_collect_machine_investigation_package",
-      "tags": [],
-      "uuid": "a0b66455-8de8-4c99-be15-1b75a1c0e72e",
-      "workflow_id": 48
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 2,
+        "version": 3,
         "workflow_id": "defender_atp_sync_incident_close",
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"defender_atp_sync_incident_close\" isExecutable=\"true\" name=\"Defender ATP Sync Incident Close\"\u003e\u003cdocumentation\u003eClose the Defender ATP Alert when the SOAR incident closes\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_09pz6cz\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_16m6tbj\" name=\"Defender Update Alert\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"7666e80b-6eb0-4bef-88cc-e3bf095caad9\"\u003e{\"inputs\":{},\"post_processing_script\":\"if results.success:\\n    incident.addNote(\\\"Alert {} successfully closed\\\".format(incident.properties.defender_alert_id))\\nelse:\\n    incident.addNote(\\\"Alert {} update failed: {}\\\".format(incident.properties.defender_alert_id, results.reason))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.defender_alert_id = incident.properties.defender_alert_id\\ninputs.defender_alert_classification = \u0027Unknown\u0027\\ninputs.defender_alert_determination =  \u0027Other\u0027\\ninputs.defender_alert_status = \\\"Resolved\\\"\\ninputs.defender_description = incident.resolution_summary.content\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_09pz6cz\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1py786g\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_09pz6cz\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_16m6tbj\"/\u003e\u003cendEvent id=\"EndEvent_1jkjszi\"\u003e\u003cincoming\u003eSequenceFlow_1py786g\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1py786g\" sourceRef=\"ServiceTask_16m6tbj\" targetRef=\"EndEvent_1jkjszi\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1tv9583\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned in a note\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0hm62az\" sourceRef=\"ServiceTask_16m6tbj\" targetRef=\"TextAnnotation_1tv9583\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"305\" y=\"212\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"300\" y=\"247\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"195\" y=\"293\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"309\" xsi:type=\"omgdc:Point\" y=\"240\"/\u003e\u003comgdi:waypoint x=\"257\" xsi:type=\"omgdc:Point\" y=\"293\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_16m6tbj\" id=\"ServiceTask_16m6tbj_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"422\" y=\"190\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_09pz6cz\" id=\"SequenceFlow_09pz6cz_di\"\u003e\u003comgdi:waypoint x=\"341\" xsi:type=\"omgdc:Point\" y=\"230\"/\u003e\u003comgdi:waypoint x=\"422\" xsi:type=\"omgdc:Point\" y=\"230\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"381.5\" y=\"208\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1jkjszi\" id=\"EndEvent_1jkjszi_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"596.2931596091205\" y=\"212\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"614.2931596091205\" y=\"251\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1py786g\" id=\"SequenceFlow_1py786g_di\"\u003e\u003comgdi:waypoint x=\"522\" xsi:type=\"omgdc:Point\" y=\"230\"/\u003e\u003comgdi:waypoint x=\"596\" xsi:type=\"omgdc:Point\" y=\"230\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"559\" y=\"208\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1tv9583\" id=\"TextAnnotation_1tv9583_di\"\u003e\u003comgdc:Bounds height=\"47\" width=\"145\" x=\"520\" y=\"117\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0hm62az\" id=\"Association_0hm62az_di\"\u003e\u003comgdi:waypoint x=\"518\" xsi:type=\"omgdc:Point\" y=\"196\"/\u003e\u003comgdi:waypoint x=\"561\" xsi:type=\"omgdc:Point\" y=\"164\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 2,
+      "content_version": 3,
       "creator_id": "a@example.com",
       "description": "Close the Defender ATP Alert when the SOAR incident closes",
       "export_key": "defender_atp_sync_incident_close",
       "last_modified_by": "a@example.com",
-      "last_modified_time": 1632747139740,
+      "last_modified_time": 1632914826234,
       "name": "Defender ATP Sync Incident Close",
       "object_type": "incident",
       "programmatic_name": "defender_atp_sync_incident_close",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "uuid": "ced5ba92-af93-4eda-aee1-8e0bd2461dc4",
       "workflow_id": 57
     },
     {
       "actions": [],
       "content": {
-        "version": 2,
+        "version": 3,
+        "workflow_id": "defender_get_related_alert_information",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"defender_get_related_alert_information\" isExecutable=\"true\" name=\"Defender ATP Get Related Alert Information\"\u003e\u003cdocumentation\u003eGet Defender ATP alert details such as IP Addresses, Files, Devices, Domains, Users\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1tlp1ji\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_13b8o88\" name=\"Defender Get Related Alert Inform...\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"4517e61a-240f-4026-94f7-7867f81373ee\"\u003e{\"inputs\":{\"530a270d-338e-49e9-b877-3cfb5e89ecfa\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[\"4bd4b656-7e96-4b74-80a2-3f3df542dd73\"]}}},\"pre_processing_script\":\"inputs.defender_alert_id = row[\u0027alert_id\u0027]\\n# inputs.defender_alert_info = [\u0027Devices\u0027, \u0027Domains\u0027, \u0027IPs\u0027, \u0027Users\u0027, \u0027Files\u0027]\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1tlp1ji\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_01m50yc\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1tlp1ji\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_13b8o88\"/\u003e\u003cendEvent id=\"EndEvent_0hlbxec\"\u003e\u003cincoming\u003eSequenceFlow_01m50yc\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_01m50yc\" sourceRef=\"ServiceTask_13b8o88\" targetRef=\"EndEvent_0hlbxec\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0pd15hj\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned as artifacts\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1g6v9lf\" sourceRef=\"ServiceTask_13b8o88\" targetRef=\"TextAnnotation_0pd15hj\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_13b8o88\" id=\"ServiceTask_13b8o88_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"264\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1tlp1ji\" id=\"SequenceFlow_1tlp1ji_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"264\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"231\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0hlbxec\" id=\"EndEvent_0hlbxec_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"428\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"446\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_01m50yc\" id=\"SequenceFlow_01m50yc_di\"\u003e\u003comgdi:waypoint x=\"364\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"428\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"396\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0pd15hj\" id=\"TextAnnotation_0pd15hj_di\"\u003e\u003comgdc:Bounds height=\"61\" width=\"185\" x=\"348\" y=\"66\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1g6v9lf\" id=\"Association_1g6v9lf_di\"\u003e\u003comgdi:waypoint x=\"357\" xsi:type=\"omgdc:Point\" y=\"169\"/\u003e\u003comgdi:waypoint x=\"406\" xsi:type=\"omgdc:Point\" y=\"127\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 3,
+      "creator_id": "a@example.com",
+      "description": "Get Defender ATP alert details such as IP Addresses, Files, Devices, Domains, Users",
+      "export_key": "defender_get_related_alert_information",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1632914826431,
+      "name": "Defender ATP Get Related Alert Information",
+      "object_type": "defender_atp_alerts",
+      "programmatic_name": "defender_get_related_alert_information",
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
+      "uuid": "f246ba84-dce2-4b9f-a299-ee1a87b5b9c1",
+      "workflow_id": 50
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 3,
+        "workflow_id": "defender_atp_alert_machine_isolation",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"defender_atp_alert_machine_isolation\" isExecutable=\"true\" name=\"Defender ATP Alert Machine Isolation\"\u003e\u003cdocumentation\u003eIsolate a Defender ATP Machine\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0yu2usv\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0vx43uk\" name=\"Defender Machine Isolation\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"0afc74fe-8301-4801-a162-9e0dbd984e1a\"\u003e{\"inputs\":{\"46ccbdc2-0d49-4e72-9310-49494aa1d4e0\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"11fcc5e8-b795-4719-8320-c99d323d10a6\"}}},\"post_processing_script\":\"if results.success:\\n  msg = \\\"Defender ATP Isolate Action: {}\\\\nComment: {}\\\\nStatus: {}\\\\nStart Date: {}\\\".format(\\n    results.content[\u0027type\u0027],\\n    results.content[\u0027requestorComment\u0027],\\n    results.content[\u0027status\u0027],\\n    results.content[\u0027creationDateTimeUtc\u0027]\\n  )\\nelse:\\n  msg = u\\\"Defender ATP Isolate Action {}.\\\\nMachine: {} ({})\\\\nType: {}\\\\nComment: {}\\\\nReason: {}\\\"\\\\\\n   .format(\\\"successful\\\" if results.success else \\\"unsuccessful\\\",\\n           results.content.get(\u0027computerDnsName\u0027), incident.properties.defender_machine_id,\\n           str(rule.properties.defender_isolation_type),\\n           rule.properties.defender_action_comment,\\n           results.reason)\\n\\nincident.addNote(helper.createPlainText(msg))\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.defender_machine_id = incident.properties.defender_machine_id\\ninputs.defender_isolation_type = str(rule.properties.defender_isolation_type)\\ninputs.defender_description = rule.properties.defender_action_comment\\ninputs.defender_isolation_action = \u0027isolate\u0027\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0yu2usv\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0x9zzb1\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0yu2usv\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0vx43uk\"/\u003e\u003cendEvent id=\"EndEvent_1bmmobf\"\u003e\u003cincoming\u003eSequenceFlow_0x9zzb1\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0x9zzb1\" sourceRef=\"ServiceTask_0vx43uk\" targetRef=\"EndEvent_1bmmobf\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1q6d49f\"\u003e\u003ctext\u003e\u003c![CDATA[\u0027Defender ATP Machines\u0027 datatable action status update\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1y18pzl\" sourceRef=\"ServiceTask_0vx43uk\" targetRef=\"TextAnnotation_1q6d49f\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0vx43uk\" id=\"ServiceTask_0vx43uk_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"279\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0yu2usv\" id=\"SequenceFlow_0yu2usv_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"279\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"238.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1bmmobf\" id=\"EndEvent_1bmmobf_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"454\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"472\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0x9zzb1\" id=\"SequenceFlow_0x9zzb1_di\"\u003e\u003comgdi:waypoint x=\"379\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"454\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"416.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1q6d49f\" id=\"TextAnnotation_1q6d49f_di\"\u003e\u003comgdc:Bounds height=\"49\" width=\"196\" x=\"372\" y=\"79\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1y18pzl\" id=\"Association_1y18pzl_di\"\u003e\u003comgdi:waypoint x=\"375\" xsi:type=\"omgdc:Point\" y=\"172\"/\u003e\u003comgdi:waypoint x=\"437\" xsi:type=\"omgdc:Point\" y=\"128\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 3,
+      "creator_id": "a@example.com",
+      "description": "Isolate a Defender ATP Machine",
+      "export_key": "defender_atp_alert_machine_isolation",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1632914825996,
+      "name": "Defender ATP Alert Machine Isolation",
+      "object_type": "incident",
+      "programmatic_name": "defender_atp_alert_machine_isolation",
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
+      "uuid": "9ac75380-e244-48f3-9d18-f40482afdb7e",
+      "workflow_id": 39
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 3,
+        "workflow_id": "defender_list_indicators",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"defender_list_indicators\" isExecutable=\"true\" name=\"Defender ATP List Indicators\"\u003e\u003cdocumentation\u003eGet a list of the indicators defined in Defender ATP.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1jfth66\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_01kd4oz\" name=\"Defender List Indicators\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"77e866e9-9c78-41d7-b13d-4feea72d59b7\"\u003e{\"inputs\":{\"83ef8d59-9b4a-405a-bc7b-2978a214bdbf\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"15ca01c7-cab9-44d7-b9b8-7506130a43f1\"}}},\"post_processing_script\":\"import java.util.Date as Date\\n\\nif results.success and results.content.get(\\\"value\\\"):\\n    for indicator in results.content.get(\\\"value\\\"):\\n        row = incident.addRow(\\\"defender_atp_indicators\\\")\\n        row[\u0027report_date\u0027] = Date().getTime()\\n        row[\u0027ind_id\u0027] = indicator[\u0027id\u0027]\\n        row[\u0027ind_value\u0027] = indicator[\u0027indicatorValue\u0027]\\n        row[\u0027ind_type\u0027] = indicator[\u0027indicatorType\u0027]\\n        row[\u0027ind_title\u0027] = indicator[\u0027title\u0027]\\n        row[\u0027ind_description\u0027] = indicator[\u0027description\u0027]\\n        row[\u0027ind_action\u0027] = indicator[\u0027action\u0027]\\n        row[\u0027ind_severity\u0027] = indicator[\u0027severity\u0027]\\n        row[\u0027ind_created_by\u0027] = indicator[\u0027createdByDisplayName\u0027]\\n        row[\u0027ind_creation_date\u0027] = indicator[\u0027creationTimeDateTimeUtc_ts\u0027]\\n        row[\u0027ind_expiration_date\u0027] = indicator[\u0027expirationTime_ts\u0027]\\n        row[\u0027status\u0027] = \u0027Active\u0027\\nelse:\\n    msg = u\\\"Defender ATP Action unsuccessful.\\\\nAction: List indicators\\\\nReason: {}\\\".format(results.reason)\\n    incident.addNote(msg)\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.defender_indicator_filter = rule.properties.defender_indicator_filter\\ninputs.defender_indicator_field = rule.properties.defender_indicator_field\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1jfth66\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0nljrkv\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1jfth66\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_01kd4oz\"/\u003e\u003cendEvent id=\"EndEvent_06bj4jw\"\u003e\u003cincoming\u003eSequenceFlow_0nljrkv\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0nljrkv\" sourceRef=\"ServiceTask_01kd4oz\" targetRef=\"EndEvent_06bj4jw\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_14xpgky\"\u003e\u003ctext\u003e\u003c![CDATA[Results presented in the Defender ATP datatable\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1cy0g4l\" sourceRef=\"ServiceTask_01kd4oz\" targetRef=\"TextAnnotation_14xpgky\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_01kd4oz\" id=\"ServiceTask_01kd4oz_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"260\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1jfth66\" id=\"SequenceFlow_1jfth66_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"260\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"229\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_06bj4jw\" id=\"EndEvent_06bj4jw_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"426\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"444\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0nljrkv\" id=\"SequenceFlow_0nljrkv_di\"\u003e\u003comgdi:waypoint x=\"360\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"426\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"393\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_14xpgky\" id=\"TextAnnotation_14xpgky_di\"\u003e\u003comgdc:Bounds height=\"54\" width=\"204\" x=\"351\" y=\"79\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1cy0g4l\" id=\"Association_1cy0g4l_di\"\u003e\u003comgdi:waypoint x=\"357\" xsi:type=\"omgdc:Point\" y=\"173\"/\u003e\u003comgdi:waypoint x=\"414\" xsi:type=\"omgdc:Point\" y=\"133\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 3,
+      "creator_id": "a@example.com",
+      "description": "Get a list of the indicators defined in Defender ATP.",
+      "export_key": "defender_list_indicators",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1632914825634,
+      "name": "Defender ATP List Indicators",
+      "object_type": "incident",
+      "programmatic_name": "defender_list_indicators",
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
+      "uuid": "fe689986-cc3a-4f35-918a-a33de3286365",
+      "workflow_id": 56
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 3,
+        "workflow_id": "defender_atp_update_alert",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"defender_atp_update_alert\" isExecutable=\"true\" name=\"Defender ATP Update Alert\"\u003e\u003cdocumentation\u003eUpdate a Defender Alert: Status, Classification, Assigned to, and Determination\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0j9rkvs\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_10d04cr\" name=\"Defender Update Alert\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"7666e80b-6eb0-4bef-88cc-e3bf095caad9\"\u003e{\"inputs\":{\"c0c321ad-ed0a-4a1c-b5b9-a8c7387c58b0\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"2fead575-cda4-4ea4-837c-73ff0563ec6a\"}},\"dddcd251-6cb1-4fd7-a6a8-0f4890e87049\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"b8bef116-f5e1-4bbb-9dd8-cd28d4706b9d\"}},\"0b54ef2d-c209-479a-863a-46df39ec94e6\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"7f6c5ad6-f742-43db-b94c-4881d93b99da\"}}},\"post_processing_script\":\"msg = u\\\"Action {}.\\\\nAction: Update Alert\\\\nAlert: {}\\\\nMachine: {}\\\\nComment: {}\\\"\\\\\\n   .format(\\\"successful\\\" if results.success else \\\"unsuccessful\\\",\\n           row[\u0027alert_id\u0027],\\n           row[\u0027machine_name\u0027],\\n           rule.properties.defender_action_comment)\\nif rule.properties.defender_alert_assigned_to:\\n    msg = u\\\"{}\\\\nAssigned to: {}\\\".format(msg, rule.properties.defender_alert_assigned_to)\\nif rule.properties.defender_alert_status:\\n    msg = u\\\"{}\\\\nStatus: {}\\\".format(msg, str(rule.properties.defender_alert_status))\\nif rule.properties.defender_alert_classification:\\n    msg = u\\\"{}\\\\nClassification: {}\\\".format(msg, str(rule.properties.defender_alert_classification))\\nif rule.properties.defender_alert_determination:\\n    msg = u\\\"{}\\\\nDetermination: {}\\\".format(msg, str(rule.properties.defender_alert_determination))\\n\\nif not results.success:\\n    msg = u\\\"{}\\\\nReason: {}\\\".format(msg, results.reason)\\n\\nincident.addNote(msg)\\n\\nif results.success:\\n    row[\u0027classification\u0027] = str(rule.properties.defender_alert_classification)\\n    row[\u0027determination\u0027] = str(rule.properties.defender_alert_determination)\\n    row[\u0027status\u0027] = str(rule.properties.defender_alert_status)\\n    row[\u0027assigned_to\u0027] = rule.properties.defender_alert_assigned_to\\n\",\"pre_processing_script\":\"inputs.defender_alert_id = row[\u0027alert_id\u0027]\\nif rule.properties.defender_alert_classification:\\n    inputs.defender_alert_classification = str(rule.properties.defender_alert_classification)\\nif rule.properties.defender_alert_determination:\\n    inputs.defender_alert_determination = str(rule.properties.defender_alert_determination)\\nif rule.properties.defender_alert_status:\\n    inputs.defender_alert_status = str(rule.properties.defender_alert_status)\\ninputs.defender_description = rule.properties.defender_action_comment\\ninputs.defender_alert_assigned_to = rule.properties.defender_alert_assigned_to\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0j9rkvs\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1byqvvp\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0j9rkvs\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_10d04cr\"/\u003e\u003cendEvent id=\"EndEvent_0bs2mo8\"\u003e\u003cincoming\u003eSequenceFlow_1byqvvp\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1byqvvp\" sourceRef=\"ServiceTask_10d04cr\" targetRef=\"EndEvent_0bs2mo8\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1fzo0dn\"\u003e\u003ctext\u003e\u003c![CDATA[Results update the defender_atp_alerts datatable and a note is created.\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0ms2kom\" sourceRef=\"ServiceTask_10d04cr\" targetRef=\"TextAnnotation_1fzo0dn\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_10d04cr\" id=\"ServiceTask_10d04cr_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"252\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0j9rkvs\" id=\"SequenceFlow_0j9rkvs_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"252\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"225\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0bs2mo8\" id=\"EndEvent_0bs2mo8_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"405\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"423\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1byqvvp\" id=\"SequenceFlow_1byqvvp_di\"\u003e\u003comgdi:waypoint x=\"352\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"405\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"378.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1fzo0dn\" id=\"TextAnnotation_1fzo0dn_di\"\u003e\u003comgdc:Bounds height=\"47\" width=\"187\" x=\"331\" y=\"50\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0ms2kom\" id=\"Association_0ms2kom_di\"\u003e\u003comgdi:waypoint x=\"339\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"404\" xsi:type=\"omgdc:Point\" y=\"97\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 3,
+      "creator_id": "a@example.com",
+      "description": "Update a Defender Alert: Status, Classification, Assigned to, and Determination",
+      "export_key": "defender_atp_update_alert",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1632914825872,
+      "name": "Defender ATP Update Alert",
+      "object_type": "defender_atp_alerts",
+      "programmatic_name": "defender_atp_update_alert",
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
+      "uuid": "0da47896-a15a-47f3-9746-0527cc01b0fd",
+      "workflow_id": 41
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 3,
+        "workflow_id": "defender_atp_collect_machine_investigation_package",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"defender_atp_collect_machine_investigation_package\" isExecutable=\"true\" name=\"Defender ATP Collect Machine Investigation Package\"\u003e\u003cdocumentation\u003eStart a process to collect an investigation report\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_15fnm73\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0zt2o7y\" name=\"Defender Collect Machine Investig...\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"bfa88004-c394-4504-92ad-d3e1cb717b20\"\u003e{\"inputs\":{},\"post_processing_script\":\"import time\\n\\nif results.success:\\n  msg = \\\"Action: {}\\\\nComment: {}\\\\nStatus: {}\\\\nStart Date: {}\\\".format(\\n    results.content[\u0027type\u0027],\\n    results.content[\u0027requestorComment\u0027],\\n    results.content[\u0027status\u0027],\\n    results.content[\u0027creationDateTimeUtc\u0027]\\n    )\\n  row[\u0027machine_last_action\u0027] = helper.createPlainText(msg)\\n  row[\u0027report_date\u0027] = int(time.time()*1000)\\n  \\n\\\"\\\"\\\"\\n    \u0027type\u0027: \u0027CollectInvestigationPackage\u0027,\\n    \u0027title\u0027: None,\\n    \u0027requestor\u0027: \u0027f0dc3f88-f617-449c-960c-6b54818cd110\u0027,\\n    \u0027requestorComment\u0027: \u0027ss\u0027,\\n    \u0027status\u0027: \u0027Succeeded\u0027,\\n    \u0027machineId\u0027: \u00272a94aaf80aa31094790ce40da6fdfc03a9a145c5\u0027,\\n    \u0027computerDnsName\u0027: \u0027windowsvmos\u0027,\\n    \u0027creationDateTimeUtc\u0027: \u00272021-08-12T18:53:06.5259227Z\u0027,\\n    \u0027lastUpdateDateTimeUtc\u0027: \u00272021-08-12T18:54:20.4259984Z\u0027,\\n\\\"\\\"\\\"\\n  \",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.defender_machine_id = row[\u0027machine_id\u0027]\\ninputs.defender_description = rule.properties.defender_action_comment\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_15fnm73\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_05j8mjf\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_15fnm73\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0zt2o7y\"/\u003e\u003cendEvent id=\"EndEvent_0nl0i8a\"\u003e\u003cincoming\u003eSequenceFlow_05j8mjf\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_05j8mjf\" sourceRef=\"ServiceTask_0zt2o7y\" targetRef=\"EndEvent_0nl0i8a\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1ntlx1f\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned in the Defender ATP Machines datatable\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0yjv0vh\" sourceRef=\"ServiceTask_0zt2o7y\" targetRef=\"TextAnnotation_1ntlx1f\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0zt2o7y\" id=\"ServiceTask_0zt2o7y_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"274\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_15fnm73\" id=\"SequenceFlow_15fnm73_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"274\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"236\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0nl0i8a\" id=\"EndEvent_0nl0i8a_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"458\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"476\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_05j8mjf\" id=\"SequenceFlow_05j8mjf_di\"\u003e\u003comgdi:waypoint x=\"374\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"458\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"416\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1ntlx1f\" id=\"TextAnnotation_1ntlx1f_di\"\u003e\u003comgdc:Bounds height=\"53\" width=\"204\" x=\"362\" y=\"81\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0yjv0vh\" id=\"Association_0yjv0vh_di\"\u003e\u003comgdi:waypoint x=\"371\" xsi:type=\"omgdc:Point\" y=\"173\"/\u003e\u003comgdi:waypoint x=\"427\" xsi:type=\"omgdc:Point\" y=\"134\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 3,
+      "creator_id": "a@example.com",
+      "description": "Start a process to collect an investigation report",
+      "export_key": "defender_atp_collect_machine_investigation_package",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1632914826134,
+      "name": "Defender ATP Collect Machine Investigation Package",
+      "object_type": "defender_atp_machines",
+      "programmatic_name": "defender_atp_collect_machine_investigation_package",
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
+      "uuid": "a0b66455-8de8-4c99-be15-1b75a1c0e72e",
+      "workflow_id": 48
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 3,
+        "workflow_id": "defender_atp_find_machines",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"defender_atp_find_machines\" isExecutable=\"true\" name=\"Defender ATP Find Machines by IP Address\"\u003e\u003cdocumentation\u003eFind Machines by IP address. Results returned in Defender ATP Machines datatable\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0fpszeo\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1ass6wf\" name=\"Defender Find Machines by IP\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"11f82831-e4a8-4764-8ccd-f303c63caaf4\"\u003e{\"inputs\":{},\"post_processing_script\":\"import time\\n\\\"\\\"\\\"\\n\\\"value\\\": [\\n    {\\n        \\\"id\\\": \\\"04c99d46599f078f1c3da3783cf5b95f01ac61bb\\\",\\n        \\\"computerDnsName\\\": \\\"\\\",\\n        \\\"firstSeen\\\": \\\"2017-07-06T01:25:04.9480498Z\\\",\\n        \\\"osPlatform\\\": \\\"Windows10\\\",\\n    }\\n]\\n\\\"\\\"\\\"\\nif results.success:\\n  if not results.content[\u0027value\u0027]:\\n    msg = u\\\"Defender ATP Find machines by IP Address unsuccessful.\\\\nNothing found for {}\\\".format(artifact.value)\\n    incident.addNote(helper.createPlainText(msg))\\n  else:\\n    for machine in results.content[\u0027value\u0027]:\\n        row = incident.addRow(\\\"defender_atp_machines\\\")\\n        row[\u0027report_date\u0027] = int(time.time()*1000)\\n        row[\u0027machine_id\u0027] = machine[\u0027id\u0027]\\n        row[\u0027machine_name\u0027] = machine[\u0027computerDnsName\u0027]\\n        row[\u0027machine_platform\u0027] = machine[\u0027osPlatform\u0027]\\n        row[\u0027machine_firstseen\u0027] = machine[\u0027firstSeen_ts\u0027]\\n        row[\u0027machine_lastseen\u0027] = machine[\u0027lastSeen_ts\u0027]\\n        row[\u0027machine_health_status\u0027] = machine.get(\u0027healthStatus\u0027)\\n        row[\u0027machine_risk_score\u0027] = machine.get(\u0027riskScore\u0027)\\n        row[\u0027machine_exposure_level\u0027] = machine.get(\u0027exposureLevel\u0027)\\n        row[\u0027machine_tags\u0027] = \u0027, \u0027.join(machine.get(\u0027machineTags\u0027, []))\\nelse:\\n    msg = u\\\"Defender ATP Action unsuccessful.\\\\nAction: Find machines by IP Address\\\\nReason: {}\\\".format(results.reason)\\n    incident.addNote(helper.createPlainText(msg))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.defender_indicator_value = artifact.value\\ninputs.defender_lookback_timeframe = rule.properties.defender_lookback_timeframe\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0fpszeo\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_00r14wq\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0fpszeo\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1ass6wf\"/\u003e\u003cendEvent id=\"EndEvent_1oagaje\"\u003e\u003cincoming\u003eSequenceFlow_00r14wq\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_00r14wq\" sourceRef=\"ServiceTask_1ass6wf\" targetRef=\"EndEvent_1oagaje\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1t7jpqu\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned in Defender ATP Machine datatable\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1lg7u8d\" sourceRef=\"ServiceTask_1ass6wf\" targetRef=\"TextAnnotation_1t7jpqu\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1ass6wf\" id=\"ServiceTask_1ass6wf_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"268\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0fpszeo\" id=\"SequenceFlow_0fpszeo_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"268\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"233\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1oagaje\" id=\"EndEvent_1oagaje_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"431\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"449\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_00r14wq\" id=\"SequenceFlow_00r14wq_di\"\u003e\u003comgdi:waypoint x=\"368\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"431\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"399.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1t7jpqu\" id=\"TextAnnotation_1t7jpqu_di\"\u003e\u003comgdc:Bounds height=\"50\" width=\"170\" x=\"358\" y=\"87\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1lg7u8d\" id=\"Association_1lg7u8d_di\"\u003e\u003comgdi:waypoint x=\"364\" xsi:type=\"omgdc:Point\" y=\"172\"/\u003e\u003comgdi:waypoint x=\"410\" xsi:type=\"omgdc:Point\" y=\"137\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 3,
+      "creator_id": "a@example.com",
+      "description": "Find Machines by IP address. Results returned in Defender ATP Machines datatable",
+      "export_key": "defender_atp_find_machines",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1632914823528,
+      "name": "Defender ATP Find Machines by IP Address",
+      "object_type": "artifact",
+      "programmatic_name": "defender_atp_find_machines",
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
+      "uuid": "0e24252b-bfe6-4576-b9b7-ea7d8eb2d260",
+      "workflow_id": 52
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 3,
+        "workflow_id": "defender_atp_machine_vulnerabilities",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"defender_atp_machine_vulnerabilities\" isExecutable=\"true\" name=\"Defender ATP Machine Vulnerabilities\"\u003e\u003cdocumentation\u003eGet Defender ATP machine vulnerabilities\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0w27m0u\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0zisxlv\" name=\"Defender Machine Vulnerabilities\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"b0e17c3e-ef30-46ed-bb0b-3862990314ed\"\u003e{\"inputs\":{},\"post_processing_script\":\"\\\"\\\"\\\"\\n [\\n        {\\n            \\\"id\\\": \\\"CVE-2019-1348\\\",\\n            \\\"name\\\": \\\"CVE-2019-1348\\\",\\n            \\\"description\\\": \\\"Git could allow a remote attacker to bypass security restrictions, caused by a flaw in the --export-marks option of git fast-import. By persuading a victim to import specially-crafted content, an attacker could exploit this vulnerability to overwrite arbitrary paths.\\\",\\n            \\\"severity\\\": \\\"Medium\\\",\\n            \\\"cvssV3\\\": 4.3,\\n            \\\"exposedMachines\\\": 1,\\n            \\\"publishedOn\\\": \\\"2019-12-13T00:00:00Z\\\",\\n            \\\"updatedOn\\\": \\\"2019-12-13T00:00:00Z\\\",\\n            \\\"publicExploit\\\": False,\\n            \\\"exploitVerified\\\": False,\\n            \\\"exploitInKit\\\": False,\\n            \\\"exploitTypes\\\": [],\\n            \\\"exploitUris\\\": []\\n        },\\n        {\\n            \\\"id\\\": \\\"CVE-2019-1348\\\",\\n            \\\"name\\\": \\\"CVE-2019-1348-2\\\",\\n            \\\"description\\\": \\\"Git could allow a remote attacker to bypass security restrictions, caused by a flaw in the --export-marks option of git fast-import. By persuading a victim to import specially-crafted content, an attacker could exploit this vulnerability to overwrite arbitrary paths.\\\",\\n            \\\"severity\\\": \\\"Medium\\\",\\n            \\\"cvssV3\\\": 4.3,\\n            \\\"exposedMachines\\\": 1,\\n            \\\"publishedOn\\\": \\\"2019-12-13T00:00:00Z\\\",\\n            \\\"updatedOn\\\": \\\"2019-12-13T00:00:00Z\\\",\\n            \\\"publicExploit\\\": False,\\n            \\\"exploitVerified\\\": False,\\n            \\\"exploitInKit\\\": False,\\n            \\\"exploitTypes\\\": [],\\n            \\\"exploitUris\\\": []\\n        }\\n    ]\\n\\\"\\\"\\\"\\n\\n\\ndef mk_note(list_of_notes):\\n    return \\\"\u0026lt;br\u0026gt;---\u0026lt;br\u0026gt;\u0026lt;br\u0026gt;\\\".join([\\\"\u0026lt;br\u0026gt;\\\".join(note) for note in list_of_notes])\\n\\ndef format_line(k, v):\\n    return \\\"\u0026lt;b\u0026gt;{}\u0026lt;/b\u0026gt;: {}\\\".format(k, v)\\n\\nvulnerabilities = results.content[\u0027value\u0027]\\nif results[\u0027success\u0027]:\\n    if not vulnerabilities:\\n        incident.addNote(\\\"No machine vulnerabilities for: {}\\\".format(row[\u0027machine_name\u0027]))\\n    else:\\n        note = []\\n        for risk in vulnerabilities:\\n            note_info = []\\n            note_info.append(format_line(\\\"Machine\\\", row[\u0027machine_name\u0027]))\\n            note_info.append(format_line(\\\"Machine Id\\\", row[\u0027machine_id\u0027]))\\n            note_info.append(format_line(\\\"Vulnerability\\\", risk[\u0027name\u0027]))\\n            note_info.append(format_line(\\\"Description\\\", risk[\u0027description\u0027]))\\n            note_info.append(format_line(\\\"Severity\\\", risk[\u0027severity\u0027]))\\n            note_info.append(format_line(\\\"Published\\\", risk[\u0027publishedOn\u0027]))\\n            note_info.append(format_line(\\\"Updated\\\", risk[\u0027updatedOn\u0027]))\\n    \\n            note.append(note_info)\\n        incident.addNote(helper.createRichText(mk_note(note)))\\nelse:\\n    incident.addNote(\\\"Defender ATP Machine Vulnerabilities failed: {}\\\".format(results.reason))\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.defender_machine_id = row[\u0027machine_id\u0027]\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0w27m0u\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1gely5i\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0w27m0u\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0zisxlv\"/\u003e\u003cendEvent id=\"EndEvent_1nhwyxe\"\u003e\u003cincoming\u003eSequenceFlow_1gely5i\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1gely5i\" sourceRef=\"ServiceTask_0zisxlv\" targetRef=\"EndEvent_1nhwyxe\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1jpdcnq\"\u003e\u003ctext\u003eResults returned in a note\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1njp61g\" sourceRef=\"ServiceTask_0zisxlv\" targetRef=\"TextAnnotation_1jpdcnq\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0zisxlv\" id=\"ServiceTask_0zisxlv_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"273\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0w27m0u\" id=\"SequenceFlow_0w27m0u_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"273\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"235.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1nhwyxe\" id=\"EndEvent_1nhwyxe_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"448\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"466\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1gely5i\" id=\"SequenceFlow_1gely5i_di\"\u003e\u003comgdi:waypoint x=\"373\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"448\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"410.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1jpdcnq\" id=\"TextAnnotation_1jpdcnq_di\"\u003e\u003comgdc:Bounds height=\"51\" width=\"197\" x=\"356\" y=\"58\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1njp61g\" id=\"Association_1njp61g_di\"\u003e\u003comgdi:waypoint x=\"365\" xsi:type=\"omgdc:Point\" y=\"168\"/\u003e\u003comgdi:waypoint x=\"428\" xsi:type=\"omgdc:Point\" y=\"109\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 3,
+      "creator_id": "a@example.com",
+      "description": "Get Defender ATP machine vulnerabilities",
+      "export_key": "defender_atp_machine_vulnerabilities",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1632914823724,
+      "name": "Defender ATP Machine Vulnerabilities",
+      "object_type": "defender_atp_machines",
+      "programmatic_name": "defender_atp_machine_vulnerabilities",
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
+      "uuid": "1ac26ae2-bae4-41c5-ba50-c0aa44a54e64",
+      "workflow_id": 51
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 3,
+        "workflow_id": "defender_atp_machine_scan",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"defender_atp_machine_scan\" isExecutable=\"true\" name=\"Defender ATP Machine Scan\"\u003e\u003cdocumentation\u003eStart an antivirus scan on a Defender machine\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0w46f4k\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_174h93d\" name=\"Defender Machine Scan\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"3e8950d3-1f51-4bcb-b9ac-26e28e7f1704\"\u003e{\"inputs\":{\"d2234b4a-1677-42f9-89dc-a2dcca236948\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"f80596f3-dc40-4c52-a014-cf9cf299cc28\"}}},\"post_processing_script\":\"import time\\n\\nif results.success:\\n  row[\u0027report_date\u0027] = int(time.time()*1000)\\n  action_msg = \\\"Action: {}\\\\nComment: {}\\\\nStatus: {}\\\\nStart Date: {}\\\".format(\\n    results.content[\u0027type\u0027],\\n    results.content[\u0027requestorComment\u0027],\\n    results.content[\u0027status\u0027],\\n    results.content[\u0027creationDateTimeUtc\u0027]\\n    )\\n  row[\u0027machine_last_action\u0027] = helper.createPlainText(action_msg)\\nelse:\\n  msg = u\\\"Defender ATP Scan Action {}.\\\\nMachine: {} ({})\\\\nType: {}\\\\nComment: {}\\\\nReason: {}\\\"\\\\\\n   .format(\\\"successful\\\" if results.success else \\\"unsuccessful\\\",\\n           results.content.get(\u0027computerDnsName\u0027), row[\u0027machine_id\u0027],\\n           str(rule.properties.defender_isolation_type),\\n           rule.properties.defender_action_comment,\\n           results.reason)\\n\\n  incident.addNote(helper.createPlainText(msg))\\n\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.defender_machine_id = row[\u0027machine_id\u0027]\\ninputs.defender_description = rule.properties.defender_action_comment\\ninputs.defender_machine_scantype = str(rule.properties.defender_machine_scantype)\\n\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0w46f4k\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0vgb3q6\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0w46f4k\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_174h93d\"/\u003e\u003cendEvent id=\"EndEvent_12zqo78\"\u003e\u003cincoming\u003eSequenceFlow_0vgb3q6\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0vgb3q6\" sourceRef=\"ServiceTask_174h93d\" targetRef=\"EndEvent_12zqo78\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0ga004d\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned in a Note\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0757krv\" sourceRef=\"ServiceTask_174h93d\" targetRef=\"TextAnnotation_0ga004d\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_174h93d\" id=\"ServiceTask_174h93d_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"258\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0w46f4k\" id=\"SequenceFlow_0w46f4k_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"258\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"228\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_12zqo78\" id=\"EndEvent_12zqo78_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"414\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"432\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0vgb3q6\" id=\"SequenceFlow_0vgb3q6_di\"\u003e\u003comgdi:waypoint x=\"358\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"414\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"386\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0ga004d\" id=\"TextAnnotation_0ga004d_di\"\u003e\u003comgdc:Bounds height=\"37\" width=\"164\" x=\"350\" y=\"78\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0757krv\" id=\"Association_0757krv_di\"\u003e\u003comgdi:waypoint x=\"351\" xsi:type=\"omgdc:Point\" y=\"169\"/\u003e\u003comgdi:waypoint x=\"412\" xsi:type=\"omgdc:Point\" y=\"115\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 3,
+      "creator_id": "a@example.com",
+      "description": "Start an antivirus scan on a Defender machine",
+      "export_key": "defender_atp_machine_scan",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1632914824116,
+      "name": "Defender ATP Machine Scan",
+      "object_type": "defender_atp_machines",
+      "programmatic_name": "defender_atp_machine_scan",
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
+      "uuid": "fc9556a5-d88c-4ca8-84be-3e84b3da8b6a",
+      "workflow_id": 53
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 3,
+        "workflow_id": "defender_atp_alert_machine_vulnerabilities",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"defender_atp_alert_machine_vulnerabilities\" isExecutable=\"true\" name=\"Defender ATP Alert Machine Vulnerabilities\"\u003e\u003cdocumentation\u003eGet Defender ATP machine vulnerabilities\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0w27m0u\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0zisxlv\" name=\"Defender Machine Vulnerabilities\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"b0e17c3e-ef30-46ed-bb0b-3862990314ed\"\u003e{\"inputs\":{},\"post_processing_script\":\"\\\"\\\"\\\"\\n [\\n        {\\n            \\\"id\\\": \\\"CVE-2019-1348\\\",\\n            \\\"name\\\": \\\"CVE-2019-1348\\\",\\n            \\\"description\\\": \\\"Git could allow a remote attacker to bypass security restrictions, caused by a flaw in the --export-marks option of git fast-import. By persuading a victim to import specially-crafted content, an attacker could exploit this vulnerability to overwrite arbitrary paths.\\\",\\n            \\\"severity\\\": \\\"Medium\\\",\\n            \\\"cvssV3\\\": 4.3,\\n            \\\"exposedMachines\\\": 1,\\n            \\\"publishedOn\\\": \\\"2019-12-13T00:00:00Z\\\",\\n            \\\"updatedOn\\\": \\\"2019-12-13T00:00:00Z\\\",\\n            \\\"publicExploit\\\": False,\\n            \\\"exploitVerified\\\": False,\\n            \\\"exploitInKit\\\": False,\\n            \\\"exploitTypes\\\": [],\\n            \\\"exploitUris\\\": []\\n        },\\n        {\\n            \\\"id\\\": \\\"CVE-2019-1348\\\",\\n            \\\"name\\\": \\\"CVE-2019-1348-2\\\",\\n            \\\"description\\\": \\\"Git could allow a remote attacker to bypass security restrictions, caused by a flaw in the --export-marks option of git fast-import. By persuading a victim to import specially-crafted content, an attacker could exploit this vulnerability to overwrite arbitrary paths.\\\",\\n            \\\"severity\\\": \\\"Medium\\\",\\n            \\\"cvssV3\\\": 4.3,\\n            \\\"exposedMachines\\\": 1,\\n            \\\"publishedOn\\\": \\\"2019-12-13T00:00:00Z\\\",\\n            \\\"updatedOn\\\": \\\"2019-12-13T00:00:00Z\\\",\\n            \\\"publicExploit\\\": False,\\n            \\\"exploitVerified\\\": False,\\n            \\\"exploitInKit\\\": False,\\n            \\\"exploitTypes\\\": [],\\n            \\\"exploitUris\\\": []\\n        }\\n    ]\\n\\\"\\\"\\\"\\n\\n\\ndef mk_note(list_of_notes):\\n    return \\\"\u0026lt;br\u0026gt;---\u0026lt;br\u0026gt;\u0026lt;br\u0026gt;\\\".join([\\\"\u0026lt;br\u0026gt;\\\".join(note) for note in list_of_notes])\\n\\ndef format_line(k, v):\\n    return \\\"\u0026lt;b\u0026gt;{}\u0026lt;/b\u0026gt;: {}\\\".format(k, v)\\n\\nvulnerabilities = results.content[\u0027value\u0027]\\nif results[\u0027success\u0027]:\\n    if not vulnerabilities:\\n        incident.addNote(\\\"No machine vulnerabilities for: {}\\\".format(incident.properties.defender_machine_id))\\n    else:\\n        note = []\\n        for risk in vulnerabilities:\\n            note_info = []\\n            note_info.append(format_line(\\\"Machine\\\", row[\u0027machine_name\u0027]))\\n            note_info.append(format_line(\\\"Machine Id\\\", row[\u0027machine_id\u0027]))\\n            note_info.append(format_line(\\\"Vulnerability\\\", risk[\u0027name\u0027]))\\n            note_info.append(format_line(\\\"Description\\\", risk[\u0027description\u0027]))\\n            note_info.append(format_line(\\\"Severity\\\", risk[\u0027severity\u0027]))\\n            note_info.append(format_line(\\\"Published\\\", risk[\u0027publishedOn\u0027]))\\n            note_info.append(format_line(\\\"Updated\\\", risk[\u0027updatedOn\u0027]))\\n    \\n            note.append(note_info)\\n        incident.addNote(helper.createRichText(mk_note(note)))\\nelse:\\n    incident.addNote(\\\"Defender ATP Machine Vulnerabilities failed: {}\\\".format(results.reason))\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.defender_machine_id = incident.properties.defender_machine_id\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0w27m0u\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1gely5i\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0w27m0u\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0zisxlv\"/\u003e\u003cendEvent id=\"EndEvent_1nhwyxe\"\u003e\u003cincoming\u003eSequenceFlow_1gely5i\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1gely5i\" sourceRef=\"ServiceTask_0zisxlv\" targetRef=\"EndEvent_1nhwyxe\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1jpdcnq\"\u003e\u003ctext\u003eResults returned in a note\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1njp61g\" sourceRef=\"ServiceTask_0zisxlv\" targetRef=\"TextAnnotation_1jpdcnq\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0zisxlv\" id=\"ServiceTask_0zisxlv_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"273\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0w27m0u\" id=\"SequenceFlow_0w27m0u_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"273\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"235.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1nhwyxe\" id=\"EndEvent_1nhwyxe_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"448\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"466\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1gely5i\" id=\"SequenceFlow_1gely5i_di\"\u003e\u003comgdi:waypoint x=\"373\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"448\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"410.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1jpdcnq\" id=\"TextAnnotation_1jpdcnq_di\"\u003e\u003comgdc:Bounds height=\"51\" width=\"197\" x=\"356\" y=\"58\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1njp61g\" id=\"Association_1njp61g_di\"\u003e\u003comgdi:waypoint x=\"365\" xsi:type=\"omgdc:Point\" y=\"168\"/\u003e\u003comgdi:waypoint x=\"428\" xsi:type=\"omgdc:Point\" y=\"109\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 3,
+      "creator_id": "a@example.com",
+      "description": "Get Defender ATP machine vulnerabilities",
+      "export_key": "defender_atp_alert_machine_vulnerabilities",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1632914825410,
+      "name": "Defender ATP Alert Machine Vulnerabilities",
+      "object_type": "incident",
+      "programmatic_name": "defender_atp_alert_machine_vulnerabilities",
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
+      "uuid": "d856404b-7d3e-4fd2-9aba-f70c5814dabc",
+      "workflow_id": 40
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 3,
+        "workflow_id": "defender_atp_delete_indicator",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"defender_atp_delete_indicator\" isExecutable=\"true\" name=\"Defender ATP Delete Indicator\"\u003e\u003cdocumentation\u003eRemove an indicator from Defender ATP\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1tvjnhc\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0g9n58t\" name=\"Defender Delete Indicator\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"f13cf24d-612b-47c7-aa51-3748d3c3520e\"\u003e{\"inputs\":{},\"post_processing_script\":\"import java.util.Date as Date\\n\\nmsg = u\\\"Defender ATP Action {}.\\\\nAction: Delete Indicator\\\\nIndicator: {}\\\"\\\\\\n   .format(\\\"successful\\\" if results.success else \\\"unsuccessful\\\",\\n           row[\u0027ind_value\u0027],\\n           )\\n           \\nif results.success:\\n  row[\u0027report_date\u0027] = Date().getTime()\\n  row[\u0027status\u0027] = \u0027Inactive\u0027\\nelse:\\n  msg = u\\\"{}\\\\nReason: {}\\\".format(msg, results.reason)\\n\\nincident.addNote(helper.createPlainText(msg))\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.defender_indicator_id = row[\u0027ind_id\u0027]\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1tvjnhc\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0wb4sn4\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1tvjnhc\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0g9n58t\"/\u003e\u003cendEvent id=\"EndEvent_0lvmxfm\"\u003e\u003cincoming\u003eSequenceFlow_0wb4sn4\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0wb4sn4\" sourceRef=\"ServiceTask_0g9n58t\" targetRef=\"EndEvent_0lvmxfm\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_10npj1n\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned in a note\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0y4nfg5\" sourceRef=\"ServiceTask_0g9n58t\" targetRef=\"TextAnnotation_10npj1n\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0g9n58t\" id=\"ServiceTask_0g9n58t_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"279\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1tvjnhc\" id=\"SequenceFlow_1tvjnhc_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"279\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"238.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0lvmxfm\" id=\"EndEvent_0lvmxfm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"449\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"467\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0wb4sn4\" id=\"SequenceFlow_0wb4sn4_di\"\u003e\u003comgdi:waypoint x=\"379\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"449\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"414\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_10npj1n\" id=\"TextAnnotation_10npj1n_di\"\u003e\u003comgdc:Bounds height=\"47\" width=\"171\" x=\"369\" y=\"80\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0y4nfg5\" id=\"Association_0y4nfg5_di\"\u003e\u003comgdi:waypoint x=\"373\" xsi:type=\"omgdc:Point\" y=\"170\"/\u003e\u003comgdi:waypoint x=\"427\" xsi:type=\"omgdc:Point\" y=\"127\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 3,
+      "creator_id": "a@example.com",
+      "description": "Remove an indicator from Defender ATP",
+      "export_key": "defender_atp_delete_indicator",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1632914825525,
+      "name": "Defender ATP Delete Indicator",
+      "object_type": "defender_atp_indicators",
+      "programmatic_name": "defender_atp_delete_indicator",
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
+      "uuid": "bc4c92be-854c-4fa4-a13c-6a0d4550d5ff",
+      "workflow_id": 47
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 3,
+        "workflow_id": "defender_quarantine_file",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"defender_quarantine_file\" isExecutable=\"true\" name=\"Defender ATP Quarantine File\"\u003e\u003cdocumentation\u003eQuarantine a file on a given Defender ATP machine\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1wasesh\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1l4hotc\" name=\"Defender Quarantine File\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"656a8125-f55f-4047-a1b8-86e7dc5b05f0\"\u003e{\"inputs\":{},\"post_processing_script\":\"import time\\n\\nif results.success:\\n  row[\u0027report_date\u0027] = int(time.time()*1000)\\n  action_msg = \\\"Action: {}\\\\nComment: {}\\\\nStatus: {}\\\\nStart Date: {}\\\".format(\\n    results.content[\u0027type\u0027],\\n    results.content[\u0027requestorComment\u0027],\\n    results.content[\u0027status\u0027],\\n    results.content[\u0027creationDateTimeUtc\u0027]\\n    )\\n  row[\u0027machine_last_action\u0027] = helper.createPlainText(action_msg)\\nelse:\\n  msg = u\\\"Defender ATP Quarantine file Action {}.\\\\nMachine: {} ({})\\\\nType: {}\\\\nComment: {}\\\\nReason: {}\\\"\\\\\\n   .format(\\\"successful\\\" if results.success else \\\"unsuccessful\\\",\\n           results.content.get(\u0027computerDnsName\u0027), row[\u0027machine_id\u0027],\\n           str(rule.properties.defender_isolation_type),\\n           rule.properties.defender_action_comment,\\n           results.reason)\\n\\n  incident.addNote(helper.createPlainText(msg))\\n\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.defender_description = rule.properties.defender_action_comment\\ninputs.defender_indicator_value = row[\u0027machine_file_hash\u0027]\\ninputs.defender_machine_id = row[\u0027machine_id\u0027]\\n\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1wasesh\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_04ttxgc\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1wasesh\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1l4hotc\"/\u003e\u003cendEvent id=\"EndEvent_05gfdcs\"\u003e\u003cincoming\u003eSequenceFlow_04ttxgc\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_04ttxgc\" sourceRef=\"ServiceTask_1l4hotc\" targetRef=\"EndEvent_05gfdcs\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1d133ml\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned in a note\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0h09n0s\" sourceRef=\"ServiceTask_1l4hotc\" targetRef=\"TextAnnotation_1d133ml\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1l4hotc\" id=\"ServiceTask_1l4hotc_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"271\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1wasesh\" id=\"SequenceFlow_1wasesh_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"271\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"234.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_05gfdcs\" id=\"EndEvent_05gfdcs_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"444\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"462\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_04ttxgc\" id=\"SequenceFlow_04ttxgc_di\"\u003e\u003comgdi:waypoint x=\"371\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"444\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"407.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1d133ml\" id=\"TextAnnotation_1d133ml_di\"\u003e\u003comgdc:Bounds height=\"40\" width=\"162\" x=\"352\" y=\"86\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0h09n0s\" id=\"Association_0h09n0s_di\"\u003e\u003comgdi:waypoint x=\"363\" xsi:type=\"omgdc:Point\" y=\"168\"/\u003e\u003comgdi:waypoint x=\"411\" xsi:type=\"omgdc:Point\" y=\"126\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 3,
+      "creator_id": "a@example.com",
+      "description": "Quarantine a file on a given Defender ATP machine",
+      "export_key": "defender_quarantine_file",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1632914825264,
+      "name": "Defender ATP Quarantine File",
+      "object_type": "defender_atp_machines",
+      "programmatic_name": "defender_quarantine_file",
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
+      "uuid": "2299d542-4139-4138-9587-f8c900d7b898",
+      "workflow_id": 37
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 3,
+        "workflow_id": "defender_find_machines_by_filter",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"defender_find_machines_by_filter\" isExecutable=\"true\" name=\"Defender ATP Find Machines by filter\"\u003e\u003cdocumentation\u003eUse Microsoft OData filters to find machines controlled by Defender. See app documentation for the filters supported.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_14cy2rx\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0ipvdp3\" name=\"Defender Find machines by filter\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"3ed5fa56-77c6-464e-b0c2-f5ea81d08370\"\u003e{\"inputs\":{},\"post_processing_script\":\"import time\\n\\n\\\"\\\"\\\"\\n\\\"value\\\": [\\n    {\\n        \\\"id\\\": \\\"04c99d46599f078f1c3da3783cf5b95f01ac61bb\\\",\\n        \\\"computerDnsName\\\": \\\"\\\",\\n        \\\"firstSeen\\\": \\\"2017-07-06T01:25:04.9480498Z\\\",\\n        \\\"osPlatform\\\": \\\"Windows10\\\",\\n    }\\n]\\n\\\"\\\"\\\"\\nif results.success:\\n    for machine in results.content[\u0027value\u0027]:\\n      row = incident.addRow(\\\"defender_atp_machines\\\")\\n      row[\u0027report_date\u0027] = int(time.time()*1000)\\n      row[\u0027machine_id\u0027] = machine[\u0027id\u0027]\\n      row[\u0027machine_ip\u0027] = machine[\u0027lastExternalIpAddress\u0027]\\n      row[\u0027machine_name\u0027] = machine[\u0027computerDnsName\u0027]\\n      row[\u0027machine_platform\u0027] = machine[\u0027osPlatform\u0027]\\n      row[\u0027machine_firstseen\u0027] = machine[\u0027firstSeen_ts\u0027]\\n      row[\u0027machine_lastseen\u0027] = machine[\u0027lastSeen_ts\u0027]\\n      row[\u0027machine_health_status\u0027] = machine.get(\u0027healthStatus\u0027)\\n      row[\u0027machine_risk_score\u0027] = machine.get(\u0027riskScore\u0027)\\n      row[\u0027machine_exposure_level\u0027] = machine.get(\u0027exposureLevel\u0027)\\n      row[\u0027machine_tags\u0027] = \u0027, \u0027.join(machine.get(\u0027machineTags\u0027, []))\\nelse:\\n  msg = u\\\"Defender ATP Action unsuccessful.\\\\nAction: Find machines by filter\\\\nReason: {}\\\".format(results.reason)\\n  incident.addNote(helper.createPlainText(msg))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.defender_filter_name = \\\"filter_by_name\\\"\\ninputs.defender_filter_value = artifact.value\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_14cy2rx\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_11xdamh\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_14cy2rx\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0ipvdp3\"/\u003e\u003cendEvent id=\"EndEvent_19rgdwa\"\u003e\u003cincoming\u003eSequenceFlow_11xdamh\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_11xdamh\" sourceRef=\"ServiceTask_0ipvdp3\" targetRef=\"EndEvent_19rgdwa\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_08elm2v\"\u003e\u003ctext\u003e\u003c![CDATA[Results placed in the Defender ATP Machines datatable\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0c1ejsi\" sourceRef=\"ServiceTask_0ipvdp3\" targetRef=\"TextAnnotation_08elm2v\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0ipvdp3\" id=\"ServiceTask_0ipvdp3_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"276\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_14cy2rx\" id=\"SequenceFlow_14cy2rx_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"276\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"237\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_19rgdwa\" id=\"EndEvent_19rgdwa_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"445\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"463\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_11xdamh\" id=\"SequenceFlow_11xdamh_di\"\u003e\u003comgdi:waypoint x=\"376\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"445\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"410.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_08elm2v\" id=\"TextAnnotation_08elm2v_di\"\u003e\u003comgdc:Bounds height=\"48\" width=\"193\" x=\"374\" y=\"80\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0c1ejsi\" id=\"Association_0c1ejsi_di\"\u003e\u003comgdi:waypoint x=\"373\" xsi:type=\"omgdc:Point\" y=\"173\"/\u003e\u003comgdi:waypoint x=\"437\" xsi:type=\"omgdc:Point\" y=\"128\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 3,
+      "creator_id": "a@example.com",
+      "description": "Use Microsoft OData filters to find machines controlled by Defender. See app documentation for the filters supported.",
+      "export_key": "defender_find_machines_by_filter",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1632914823390,
+      "name": "Defender ATP Find Machines by filter",
+      "object_type": "artifact",
+      "programmatic_name": "defender_find_machines_by_filter",
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
+      "uuid": "dd1069b4-3100-4e7c-97e8-a80c4816331f",
+      "workflow_id": 46
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 3,
+        "workflow_id": "defender_atp_app_execution",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"defender_atp_app_execution\" isExecutable=\"true\" name=\"Defender ATP App Execution Restriction\"\u003e\u003cdocumentation\u003eRestrict/un-restrict App execution on a Defender managed machine\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1uaynxc\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_010kd60\" name=\"Defender App Execution\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"92906dbe-9be4-4277-8f50-c6f15fb5dcbc\"\u003e{\"inputs\":{\"b35bd7fe-d52a-483e-ab06-16f8131ce093\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"c099160c-f83c-461d-9b8e-4d0edd66716d\"}}},\"post_processing_script\":\"import time\\n\\nmsg = u\\\"Defender ATP Action {}.\\\\nAction: {}\\\\nMachine: {}\\\\nComment: {}\\\"\\\\\\n   .format(\\\"successful\\\" if results.success else \\\"unsuccessful\\\",\\n           rule.properties.defender_app_execution_action,\\n           row[\u0027machine_id\u0027],\\n           rule.properties.defender_action_comment)\\n           \\nif results.success:\\n  row[\u0027report_date\u0027] = int(time.time()*1000)\\n  action_msg = \\\"Action: {}\\\\nComment: {}\\\\nStatus: {}\\\\nStart Date: {}\\\".format(\\n    results.content[\u0027type\u0027],\\n    results.content[\u0027requestorComment\u0027],\\n    results.content[\u0027status\u0027],\\n    results.content[\u0027creationDateTimeUtc\u0027]\\n    )\\n  row[\u0027machine_last_action\u0027] = helper.createPlainText(action_msg)\\nelse:\\n  msg = u\\\"{}\\\\nReason: {}\\\".format(msg, results.reason)\\n\\nincident.addNote(helper.createPlainText(msg))\\n\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.defender_description = rule.properties.defender_action_comment\\ninputs.defender_machine_id = row[\u0027machine_id\u0027]\\ninputs.defender_restriction_type = str(rule.properties.defender_app_execution_action)\\n\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1uaynxc\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0xrr3iw\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1uaynxc\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_010kd60\"/\u003e\u003cendEvent id=\"EndEvent_15voo0u\"\u003e\u003cincoming\u003eSequenceFlow_0xrr3iw\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0xrr3iw\" sourceRef=\"ServiceTask_010kd60\" targetRef=\"EndEvent_15voo0u\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1rdpuzw\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned in a note\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_001o3hz\" sourceRef=\"ServiceTask_010kd60\" targetRef=\"TextAnnotation_1rdpuzw\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_010kd60\" id=\"ServiceTask_010kd60_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"272\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1uaynxc\" id=\"SequenceFlow_1uaynxc_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"272\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"235\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_15voo0u\" id=\"EndEvent_15voo0u_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"429\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"447\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0xrr3iw\" id=\"SequenceFlow_0xrr3iw_di\"\u003e\u003comgdi:waypoint x=\"372\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"429\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"400.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1rdpuzw\" id=\"TextAnnotation_1rdpuzw_di\"\u003e\u003comgdc:Bounds height=\"40\" width=\"152\" x=\"369\" y=\"84\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_001o3hz\" id=\"Association_001o3hz_di\"\u003e\u003comgdi:waypoint x=\"366\" xsi:type=\"omgdc:Point\" y=\"170\"/\u003e\u003comgdi:waypoint x=\"421\" xsi:type=\"omgdc:Point\" y=\"124\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 3,
+      "creator_id": "a@example.com",
+      "description": "Restrict/un-restrict App execution on a Defender managed machine",
+      "export_key": "defender_atp_app_execution",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1632914823976,
+      "name": "Defender ATP App Execution Restriction",
+      "object_type": "defender_atp_machines",
+      "programmatic_name": "defender_atp_app_execution",
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
+      "uuid": "5e9ea009-7afd-4394-882a-15609bffa82d",
+      "workflow_id": 54
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 3,
+        "workflow_id": "defender_atp_alert_collect_machine_investigation_package",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"defender_atp_alert_collect_machine_investigation_package\" isExecutable=\"true\" name=\"Defender ATP Alert Collect Machine Investigation Package\"\u003e\u003cdocumentation\u003eStart a process to collect an investigation report\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_15fnm73\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0zt2o7y\" name=\"Defender Collect Machine Investig...\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"bfa88004-c394-4504-92ad-d3e1cb717b20\"\u003e{\"inputs\":{},\"post_processing_script\":\"if results.success:\\n  msg = \\\"Defender ATP Collect Machine Investigation Report Action: {}\\\\nComment: {}\\\\nStatus: {}\\\\nStart Date: {}\\\".format(\\n    results.content[\u0027type\u0027],\\n    results.content[\u0027requestorComment\u0027],\\n    results.content[\u0027status\u0027],\\n    results.content[\u0027creationDateTimeUtc\u0027]\\n    )\\nelse:\\n  msg = \\\"Defender ATP Collect Machine Investigation Report Failure: {}\\\".format(results.reason)\\n\\nincident.addNote(helper.createPlainText(msg))\\n\\\"\\\"\\\"\\n    \u0027type\u0027: \u0027CollectInvestigationPackage\u0027,\\n    \u0027title\u0027: None,\\n    \u0027requestor\u0027: \u0027f0dc3f88-f617-449c-960c-6b54818cd110\u0027,\\n    \u0027requestorComment\u0027: \u0027ss\u0027,\\n    \u0027status\u0027: \u0027Succeeded\u0027,\\n    \u0027machineId\u0027: \u00272a94aaf80aa31094790ce40da6fdfc03a9a145c5\u0027,\\n    \u0027computerDnsName\u0027: \u0027windowsvmos\u0027,\\n    \u0027creationDateTimeUtc\u0027: \u00272021-08-12T18:53:06.5259227Z\u0027,\\n    \u0027lastUpdateDateTimeUtc\u0027: \u00272021-08-12T18:54:20.4259984Z\u0027,\\n\\\"\\\"\\\"\\n  \",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.defender_machine_id = incident.properties.defender_machine_id\\ninputs.defender_description = rule.properties.defender_action_comment\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_15fnm73\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_05j8mjf\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_15fnm73\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0zt2o7y\"/\u003e\u003cendEvent id=\"EndEvent_0nl0i8a\"\u003e\u003cincoming\u003eSequenceFlow_05j8mjf\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_05j8mjf\" sourceRef=\"ServiceTask_0zt2o7y\" targetRef=\"EndEvent_0nl0i8a\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1ntlx1f\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned in the Defender ATP Machines datatable\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0yjv0vh\" sourceRef=\"ServiceTask_0zt2o7y\" targetRef=\"TextAnnotation_1ntlx1f\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0zt2o7y\" id=\"ServiceTask_0zt2o7y_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"274\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_15fnm73\" id=\"SequenceFlow_15fnm73_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"274\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"236\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0nl0i8a\" id=\"EndEvent_0nl0i8a_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"458\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"476\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_05j8mjf\" id=\"SequenceFlow_05j8mjf_di\"\u003e\u003comgdi:waypoint x=\"374\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"458\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"416\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1ntlx1f\" id=\"TextAnnotation_1ntlx1f_di\"\u003e\u003comgdc:Bounds height=\"53\" width=\"204\" x=\"362\" y=\"81\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0yjv0vh\" id=\"Association_0yjv0vh_di\"\u003e\u003comgdi:waypoint x=\"371\" xsi:type=\"omgdc:Point\" y=\"173\"/\u003e\u003comgdi:waypoint x=\"427\" xsi:type=\"omgdc:Point\" y=\"134\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 3,
+      "creator_id": "a@example.com",
+      "description": "Start a process to collect an investigation report",
+      "export_key": "defender_atp_alert_collect_machine_investigation_package",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1632914824763,
+      "name": "Defender ATP Alert Collect Machine Investigation Package",
+      "object_type": "incident",
+      "programmatic_name": "defender_atp_alert_collect_machine_investigation_package",
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
+      "uuid": "390c2f23-f3dc-433c-bfd0-194fca5bde17",
+      "workflow_id": 42
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 3,
+        "workflow_id": "defender_atp_machine_unisolate",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"defender_atp_machine_unisolate\" isExecutable=\"true\" name=\"Defender ATP Machine Unisolate\"\u003e\u003cdocumentation\u003eUnisolate a Defender ATP Machine\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1ef1m11\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_05ovt1b\" name=\"Defender Machine Isolation\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"0afc74fe-8301-4801-a162-9e0dbd984e1a\"\u003e{\"inputs\":{\"46ccbdc2-0d49-4e72-9310-49494aa1d4e0\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"11fcc5e8-b795-4719-8320-c99d323d10a6\"}}},\"post_processing_script\":\"import Java.util.Date as Date\\n           \\nif results.success:\\n  row[\u0027report_date\u0027] = Date().getTime()\\n  action_msg = \\\"Action: {}\\\\nComment: {}\\\\nStatus: {}\\\\nStart Date: {}\\\".format(\\n    results.content[\u0027type\u0027],\\n    results.content[\u0027requestorComment\u0027],\\n    results.content[\u0027status\u0027],\\n    results.content[\u0027creationDateTimeUtc\u0027]\\n    )\\n  row[\u0027machine_last_action\u0027] = helper.createPlainText(action_msg)\\nelse:\\n  msg = u\\\"Defender ATP Unisolate Action {}.\\\\nMachine: {} ({})\\\\nType: {}\\\\nComment: {}\\\\nReason: {}\\\"\\\\\\n   .format(\\\"successful\\\" if results.success else \\\"unsuccessful\\\",\\n           results.content.get(\u0027computerDnsName\u0027), row[\u0027machine_id\u0027],\\n           str(rule.properties.defender_isolation_type),\\n           rule.properties.defender_action_comment,\\n           results.reason)\\n\\n  incident.addNote(helper.createPlainText(msg))\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.defender_machine_id = row[\u0027machine_id\u0027]\\ninputs.defender_isolation_type = None\\ninputs.defender_description = rule.properties.defender_action_comment\\ninputs.defender_isolation_action = \u0027unisolate\u0027\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1ef1m11\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1um34wx\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1ef1m11\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_05ovt1b\"/\u003e\u003cendEvent id=\"EndEvent_0p2fw9g\"\u003e\u003cincoming\u003eSequenceFlow_1um34wx\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1um34wx\" sourceRef=\"ServiceTask_05ovt1b\" targetRef=\"EndEvent_0p2fw9g\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1m6nlwt\"\u003e\u003ctext\u003e\u003c![CDATA[\u0027Defender ATP Machines\u0027 datatable last action update\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1m5vey2\" sourceRef=\"ServiceTask_05ovt1b\" targetRef=\"TextAnnotation_1m6nlwt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_05ovt1b\" id=\"ServiceTask_05ovt1b_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"268\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1ef1m11\" id=\"SequenceFlow_1ef1m11_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"268\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"233\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0p2fw9g\" id=\"EndEvent_0p2fw9g_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"434\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"452\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1um34wx\" id=\"SequenceFlow_1um34wx_di\"\u003e\u003comgdi:waypoint x=\"368\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"434\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"401\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1m6nlwt\" id=\"TextAnnotation_1m6nlwt_di\"\u003e\u003comgdc:Bounds height=\"73\" width=\"185\" x=\"356\" y=\"76\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1m5vey2\" id=\"Association_1m5vey2_di\"\u003e\u003comgdi:waypoint x=\"365\" xsi:type=\"omgdc:Point\" y=\"173\"/\u003e\u003comgdi:waypoint x=\"398\" xsi:type=\"omgdc:Point\" y=\"149\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 3,
+      "creator_id": "a@example.com",
+      "description": "Unisolate a Defender ATP Machine",
+      "export_key": "defender_atp_machine_unisolate",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1632914824642,
+      "name": "Defender ATP Machine Unisolate",
+      "object_type": "defender_atp_machines",
+      "programmatic_name": "defender_atp_machine_unisolate",
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
+      "uuid": "68312cce-01e0-43cd-8442-15fc14c6613f",
+      "workflow_id": 44
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 3,
+        "workflow_id": "defender_atp_set_indicator",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"defender_atp_set_indicator\" isExecutable=\"true\" name=\"Defender ATP Set Indicator\"\u003e\u003cdocumentation\u003eSet an indicator on an artifact\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0rdnsyf\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_03n9acz\" name=\"Defender Set Indicator\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"faf52947-0e1a-4e2b-9dfb-ed5ef1605667\"\u003e{\"inputs\":{\"c8b53f87-e1f7-49df-bfaa-5c72c1168d69\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"79c1a5bb-b168-4868-922b-54eb17365f9b\"}},\"0e17bb0b-6ef9-4bac-b3d7-e5e37eaa7ffa\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"a3216414-9c8b-49d4-9714-2b728e14f8c5\"}}},\"post_processing_script\":\"import java.util.Date as Date\\n\\nmsg = u\\\"Action {}.\\\\nAction: {}\\\\nArtifact: {}\\\\nTitle: {}\\\\nComment: {}\\\\nSeverity: {}\\\\nExpiration: {}\\\"\\\\\\n   .format(\\\"successful\\\" if results.success else \\\"unsuccessful\\\",\\n           str(rule.properties.indicator_action),\\n           artifact.value,\\n           rule.properties.indicator_title,\\n           rule.properties.indicator_description,\\n           str(rule.properties.indicator_severity),\\n           rule.properties.indicator_expiration)\\n           \\nif not results.success:\\n    msg = u\\\"{}\\\\nReason: {}\\\".format(msg, results.reason)\\n\\nincident.addNote(msg)\\n\\nif results.success:\\n    row = incident.addRow(\\\"defender_atp_indicators\\\")\\n    row[\u0027report_date\u0027] = Date().getTime()\\n    row[\u0027ind_id\u0027] = results.content[\u0027id\u0027]\\n    row[\u0027ind_value\u0027] = results.content[\u0027indicatorValue\u0027]\\n    row[\u0027ind_type\u0027] = results.content[\u0027indicatorType\u0027]\\n    row[\u0027ind_title\u0027] = results.content[\u0027title\u0027]\\n    row[\u0027ind_description\u0027] = results.content[\u0027description\u0027]\\n    row[\u0027ind_action\u0027] = results.content[\u0027action\u0027]\\n    row[\u0027ind_severity\u0027] = results.content[\u0027severity\u0027]\\n    row[\u0027ind_created_by\u0027] = results.content[\u0027createdByDisplayName\u0027]\\n    row[\u0027ind_creation_date\u0027] = results.content[\u0027creationTimeDateTimeUtc_ts\u0027]\\n    row[\u0027ind_expiration_date\u0027] = results.content[\u0027expirationTime_ts\u0027]\\n    row[\u0027status\u0027] = \u0027Active\u0027\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.defender_indicator_type = artifact.type\\ninputs.defender_indicator_value = artifact.value\\ninputs.defender_description = rule.properties.indicator_description\\ninputs.defender_expiration_time = rule.properties.indicator_expiration\\ninputs.defender_title = rule.properties.indicator_title\\ninputs.defender_severity = str(rule.properties.indicator_severity)\\ninputs.defender_indicator_action = str(rule.properties.indicator_action)\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0rdnsyf\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0r0i2ak\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0rdnsyf\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_03n9acz\"/\u003e\u003cendEvent id=\"EndEvent_0z3geyv\"\u003e\u003cincoming\u003eSequenceFlow_0r0i2ak\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0r0i2ak\" sourceRef=\"ServiceTask_03n9acz\" targetRef=\"EndEvent_0z3geyv\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0njcuna\"\u003e\u003ctext\u003e\u003c![CDATA[Adds a row to the Defender Indicators datatable\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0prfwhg\" sourceRef=\"ServiceTask_03n9acz\" targetRef=\"TextAnnotation_0njcuna\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_03n9acz\" id=\"ServiceTask_03n9acz_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"264\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0rdnsyf\" id=\"SequenceFlow_0rdnsyf_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"264\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"231\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0z3geyv\" id=\"EndEvent_0z3geyv_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"450\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"468\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0r0i2ak\" id=\"SequenceFlow_0r0i2ak_di\"\u003e\u003comgdi:waypoint x=\"364\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"450\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"407\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0njcuna\" id=\"TextAnnotation_0njcuna_di\"\u003e\u003comgdc:Bounds height=\"45\" width=\"195\" x=\"350\" y=\"79\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0prfwhg\" id=\"Association_0prfwhg_di\"\u003e\u003comgdi:waypoint x=\"359\" xsi:type=\"omgdc:Point\" y=\"171\"/\u003e\u003comgdi:waypoint x=\"420\" xsi:type=\"omgdc:Point\" y=\"124\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 3,
+      "creator_id": "a@example.com",
+      "description": "Set an indicator on an artifact",
+      "export_key": "defender_atp_set_indicator",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1632914824524,
+      "name": "Defender ATP Set Indicator",
+      "object_type": "artifact",
+      "programmatic_name": "defender_atp_set_indicator",
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
+      "uuid": "7c81cda4-39a6-4071-b1d9-26da710d0526",
+      "workflow_id": 43
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 3,
+        "workflow_id": "defender_atp_alert_app_execution",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"defender_atp_alert_app_execution\" isExecutable=\"true\" name=\"Defender ATP Alert App Execution Restriction\"\u003e\u003cdocumentation\u003eRestrict/un-restrict App execution on a Defender managed machine\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1uaynxc\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_010kd60\" name=\"Defender App Execution\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"92906dbe-9be4-4277-8f50-c6f15fb5dcbc\"\u003e{\"inputs\":{\"b35bd7fe-d52a-483e-ab06-16f8131ce093\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"c099160c-f83c-461d-9b8e-4d0edd66716d\"}}},\"post_processing_script\":\"msg = u\\\"Defender ATP Action {}.\\\\nAction: {}\\\\nMachine: {}\\\\nComment: {}\\\"\\\\\\n   .format(\\\"successful\\\" if results.success else \\\"unsuccessful\\\",\\n           rule.properties.defender_app_execution_action,\\n           incident.properties.defender_machine_id,\\n           rule.properties.defender_action_comment)\\n           \\nif results.success:\\n  action_msg = \\\"Action: {}\\\\nComment: {}\\\\nStatus: {}\\\\nStart Date: {}\\\".format(\\n    results.content[\u0027type\u0027],\\n    results.content[\u0027requestorComment\u0027],\\n    results.content[\u0027status\u0027],\\n    results.content[\u0027creationDateTimeUtc\u0027]\\n    )\\nelse:\\n  msg = u\\\"{}\\\\nReason: {}\\\".format(msg, results.reason)\\n\\nincident.addNote(helper.createPlainText(msg))\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.defender_description = rule.properties.defender_action_comment\\ninputs.defender_machine_id = incident.properties.defender_machine_id\\ninputs.defender_restriction_type = str(rule.properties.defender_app_execution_action)\\n\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1uaynxc\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0xrr3iw\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1uaynxc\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_010kd60\"/\u003e\u003cendEvent id=\"EndEvent_15voo0u\"\u003e\u003cincoming\u003eSequenceFlow_0xrr3iw\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0xrr3iw\" sourceRef=\"ServiceTask_010kd60\" targetRef=\"EndEvent_15voo0u\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1rdpuzw\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned in a note\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_001o3hz\" sourceRef=\"ServiceTask_010kd60\" targetRef=\"TextAnnotation_1rdpuzw\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_010kd60\" id=\"ServiceTask_010kd60_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"272\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1uaynxc\" id=\"SequenceFlow_1uaynxc_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"272\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"235\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_15voo0u\" id=\"EndEvent_15voo0u_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"429\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"447\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0xrr3iw\" id=\"SequenceFlow_0xrr3iw_di\"\u003e\u003comgdi:waypoint x=\"372\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"429\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"400.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1rdpuzw\" id=\"TextAnnotation_1rdpuzw_di\"\u003e\u003comgdc:Bounds height=\"40\" width=\"152\" x=\"369\" y=\"84\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_001o3hz\" id=\"Association_001o3hz_di\"\u003e\u003comgdi:waypoint x=\"366\" xsi:type=\"omgdc:Point\" y=\"170\"/\u003e\u003comgdi:waypoint x=\"421\" xsi:type=\"omgdc:Point\" y=\"124\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 3,
+      "creator_id": "a@example.com",
+      "description": "Restrict/un-restrict App execution on a Defender managed machine",
+      "export_key": "defender_atp_alert_app_execution",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1632914824871,
+      "name": "Defender ATP Alert App Execution Restriction",
+      "object_type": "incident",
+      "programmatic_name": "defender_atp_alert_app_execution",
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
+      "uuid": "a58f1bf6-c6be-42ed-924d-c31098342dd2",
+      "workflow_id": 38
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 9,
+        "workflow_id": "defender_atp_get_file_information",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"defender_atp_get_file_information\" isExecutable=\"true\" name=\"Defender ATP Get File Information\"\u003e\u003cdocumentation\u003e\u003c![CDATA[Get more information about a file based on it\u0027s SHA1 or SHA256 hash]]\u003e\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_143gc3m\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_06fhjd4\" name=\"Defender Get File Information\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"1121d8e5-07e7-4506-8e87-9badef1cbcae\"\u003e{\"inputs\":{},\"post_processing_script\":\"if not results.success:\\n    msg = u\\\"Defender Get File Information failed: {}\\\".format(results.reason)\\nelse:\\n    info = [u\\\"{}: {}\\\".format(k, v) for k, v in results.content.items()]\\n    msg = u\\\"Defender Get File Information:\\\\n\\\\n{}\\\".format(\\\"\\\\n\\\".join(info))\\n\\nif artifact.description:\\n    artifact.description = u\\\"{}\\\\n\\\\n{}\\\".format(artifact.description.content, msg)\\nelse:\\n    artifact.description = msg\\n    \\n    \\n\\\"\\\"\\\"\\n{\\n    \\\"@odata.context\\\": \\\"https://api.securitycenter.microsoft.com/api/$metadata#Files/$entity\\\",\\n    \\\"sha1\\\": \\\"4388963aaa83afe2042a46a3c017ad50bdcdafb3\\\",\\n    \\\"sha256\\\": \\\"413c58c8267d2c8648d8f6384bacc2ae9c929b2b96578b6860b5087cd1bd6462\\\",\\n    \\\"globalPrevalence\\\": 180022,\\n    \\\"globalFirstObserved\\\": \\\"2017-09-19T03:51:27.6785431Z\\\",\\n    \\\"globalLastObserved\\\": \\\"2020-01-06T03:59:21.3229314Z\\\",\\n    \\\"size\\\": 22139496,\\n    \\\"fileType\\\": \\\"APP\\\",\\n    \\\"isPeFile\\\": true,\\n    \\\"filePublisher\\\": \\\"CHENGDU YIWO Tech Development Co., Ltd.\\\",\\n    \\\"fileProductName\\\": \\\"EaseUS MobiSaver for Android\\\",\\n    \\\"signer\\\": \\\"CHENGDU YIWO Tech Development Co., Ltd.\\\",\\n    \\\"issuer\\\": \\\"VeriSign Class 3 Code Signing 2010 CA\\\",\\n    \\\"signerHash\\\": \\\"6c3245d4a9bc0244d99dff27af259cbbae2e2d16\\\",\\n    \\\"isValidCertificate\\\": false,\\n    \\\"determinationType\\\": \\\"Pua\\\",\\n    \\\"determinationValue\\\": \\\"PUA:Win32/FusionCore\\\"\\n}\\n\\\"\\\"\\\"\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.defender_file_hash = artifact.value\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_143gc3m\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1cbp0ss\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_143gc3m\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_06fhjd4\"/\u003e\u003cendEvent id=\"EndEvent_084ozeq\"\u003e\u003cincoming\u003eSequenceFlow_1cbp0ss\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1cbp0ss\" sourceRef=\"ServiceTask_06fhjd4\" targetRef=\"EndEvent_084ozeq\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0i6nq8h\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned in the artifact description\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1smf91i\" sourceRef=\"ServiceTask_06fhjd4\" targetRef=\"TextAnnotation_0i6nq8h\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_06fhjd4\" id=\"ServiceTask_06fhjd4_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"289\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_143gc3m\" id=\"SequenceFlow_143gc3m_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"289\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"243.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_084ozeq\" id=\"EndEvent_084ozeq_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"458\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"476\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1cbp0ss\" id=\"SequenceFlow_1cbp0ss_di\"\u003e\u003comgdi:waypoint x=\"389\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"458\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"423.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0i6nq8h\" id=\"TextAnnotation_0i6nq8h_di\"\u003e\u003comgdc:Bounds height=\"54\" width=\"189\" x=\"395\" y=\"79\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1smf91i\" id=\"Association_1smf91i_di\"\u003e\u003comgdi:waypoint x=\"387\" xsi:type=\"omgdc:Point\" y=\"174\"/\u003e\u003comgdi:waypoint x=\"449\" xsi:type=\"omgdc:Point\" y=\"133\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 9,
+      "creator_id": "a@example.com",
+      "description": "Get more information about a file based on it\u0027s SHA1 or SHA256 hash",
+      "export_key": "defender_atp_get_file_information",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1632914825760,
+      "name": "Defender ATP Get File Information",
+      "object_type": "artifact",
+      "programmatic_name": "defender_atp_get_file_information",
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
+      "uuid": "c209745d-4d8c-41ea-ae22-0048ca310f76",
+      "workflow_id": 60
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 3,
+        "workflow_id": "defender_atp_update_indicator",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"defender_atp_update_indicator\" isExecutable=\"true\" name=\"Defender ATP Update Indicator\"\u003e\u003cdocumentation\u003eModify an existing indicator\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_08m8yww\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0qfzuck\" name=\"Defender Set Indicator\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"faf52947-0e1a-4e2b-9dfb-ed5ef1605667\"\u003e{\"inputs\":{\"c8b53f87-e1f7-49df-bfaa-5c72c1168d69\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"79c1a5bb-b168-4868-922b-54eb17365f9b\"}},\"0e17bb0b-6ef9-4bac-b3d7-e5e37eaa7ffa\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"a3216414-9c8b-49d4-9714-2b728e14f8c5\"}}},\"post_processing_script\":\"import java.util.Date as Date\\n\\nmsg = u\\\"Action {}.\\\\nAction: {}\\\\nArtifact: {}\\\\nTitle: {}\\\\nComment: {}\\\\nSeverity: {}\\\\nExpiration: {}\\\"\\\\\\n   .format(\\\"successful\\\" if results.success else \\\"unsuccessful\\\",\\n           str(rule.properties.indicator_action),\\n           row[\u0027ind_value\u0027],\\n           rule.properties.indicator_title,\\n           rule.properties.indicator_description,\\n           str(rule.properties.indicator_severity),\\n           rule.properties.indicator_expiration)\\n           \\nif not results.success:\\n    msg = u\\\"{}\\\\nReason: {}\\\".format(msg, results.reason)\\n\\nincident.addNote(msg)\\n\\nif results.success:\\n    row[\u0027report_date\u0027] = Date().getTime()\\n    row[\u0027ind_title\u0027] = results.content[\u0027title\u0027]\\n    row[\u0027ind_description\u0027] = results.content[\u0027description\u0027]\\n    row[\u0027ind_action\u0027] = results.content[\u0027action\u0027]\\n    row[\u0027ind_severity\u0027] = results.content[\u0027severity\u0027]\\n    row[\u0027ind_expiration_date\u0027] = results.content[\u0027expirationTime_ts\u0027]\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.defender_description = rule.properties.indicator_description\\ninputs.defender_title = rule.properties.indicator_title\\ninputs.defender_indicator_action = str(rule.properties.indicator_action)\\ninputs.defender_expiration_time = rule.properties.indicator_expiration\\ninputs.defender_severity = str(rule.properties.indicator_severity)\\ninputs.defender_indicator_type = row[\u0027ind_type\u0027]\\ninputs.defender_indicator_value = row[\u0027ind_value\u0027]\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_08m8yww\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_16osyai\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_08m8yww\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0qfzuck\"/\u003e\u003cendEvent id=\"EndEvent_1m8cg1z\"\u003e\u003cincoming\u003eSequenceFlow_16osyai\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_16osyai\" sourceRef=\"ServiceTask_0qfzuck\" targetRef=\"EndEvent_1m8cg1z\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0wmpc10\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned in a note and datatable row updated upon success.\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0827dlu\" sourceRef=\"ServiceTask_0qfzuck\" targetRef=\"TextAnnotation_0wmpc10\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0qfzuck\" id=\"ServiceTask_0qfzuck_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"275\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_08m8yww\" id=\"SequenceFlow_08m8yww_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"275\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"236.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1m8cg1z\" id=\"EndEvent_1m8cg1z_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"449\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"467\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_16osyai\" id=\"SequenceFlow_16osyai_di\"\u003e\u003comgdi:waypoint x=\"375\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"449\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"412\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0wmpc10\" id=\"TextAnnotation_0wmpc10_di\"\u003e\u003comgdc:Bounds height=\"48\" width=\"257\" x=\"370\" y=\"80\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0827dlu\" id=\"Association_0827dlu_di\"\u003e\u003comgdi:waypoint x=\"375\" xsi:type=\"omgdc:Point\" y=\"177\"/\u003e\u003comgdi:waypoint x=\"459\" xsi:type=\"omgdc:Point\" y=\"128\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 3,
+      "creator_id": "a@example.com",
+      "description": "Modify an existing indicator",
+      "export_key": "defender_atp_update_indicator",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1632914825139,
+      "name": "Defender ATP Update Indicator",
+      "object_type": "defender_atp_indicators",
+      "programmatic_name": "defender_atp_update_indicator",
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
+      "uuid": "b5764dd7-1214-4f4c-9c40-67a7b7338f34",
+      "workflow_id": 55
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 3,
+        "workflow_id": "defender_atp_alert_machine_unisolate",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"defender_atp_alert_machine_unisolate\" isExecutable=\"true\" name=\"Defender ATP Alert Machine Unisolate\"\u003e\u003cdocumentation\u003eUnisolate a Defender ATP Machine\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1ef1m11\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_05ovt1b\" name=\"Defender Machine Isolation\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"0afc74fe-8301-4801-a162-9e0dbd984e1a\"\u003e{\"inputs\":{\"46ccbdc2-0d49-4e72-9310-49494aa1d4e0\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"11fcc5e8-b795-4719-8320-c99d323d10a6\"}}},\"post_processing_script\":\"if results.success:\\n  msg = \\\"Action: {}\\\\nComment: {}\\\\nStatus: {}\\\\nStart Date: {}\\\".format(\\n    results.content[\u0027type\u0027],\\n    results.content[\u0027requestorComment\u0027],\\n    results.content[\u0027status\u0027],\\n    results.content[\u0027creationDateTimeUtc\u0027]\\n  )\\nelse:\\n  msg = u\\\"Defender ATP Unisolate Action {}.\\\\nMachine: {} ({})\\\\nType: {}\\\\nComment: {}\\\\nReason: {}\\\"\\\\\\n   .format(\\\"successful\\\" if results.success else \\\"unsuccessful\\\",\\n           results.content.get(\u0027computerDnsName\u0027), incident.properties.defender_machine_id,\\n           str(rule.properties.defender_isolation_type),\\n           rule.properties.defender_action_comment,\\n           results.reason)\\n\\nincident.addNote(helper.createPlainText(msg))\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.defender_machine_id = incident.properties.defender_machine_id\\ninputs.defender_isolation_type = None\\ninputs.defender_description = rule.properties.defender_action_comment\\ninputs.defender_isolation_action = \u0027unisolate\u0027\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1ef1m11\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1um34wx\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1ef1m11\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_05ovt1b\"/\u003e\u003cendEvent id=\"EndEvent_0p2fw9g\"\u003e\u003cincoming\u003eSequenceFlow_1um34wx\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1um34wx\" sourceRef=\"ServiceTask_05ovt1b\" targetRef=\"EndEvent_0p2fw9g\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1m6nlwt\"\u003e\u003ctext\u003e\u003c![CDATA[\u0027Defender ATP Machines\u0027 datatable last action update\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1m5vey2\" sourceRef=\"ServiceTask_05ovt1b\" targetRef=\"TextAnnotation_1m6nlwt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_05ovt1b\" id=\"ServiceTask_05ovt1b_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"268\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1ef1m11\" id=\"SequenceFlow_1ef1m11_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"268\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"233\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0p2fw9g\" id=\"EndEvent_0p2fw9g_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"434\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"452\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1um34wx\" id=\"SequenceFlow_1um34wx_di\"\u003e\u003comgdi:waypoint x=\"368\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"434\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"401\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1m6nlwt\" id=\"TextAnnotation_1m6nlwt_di\"\u003e\u003comgdc:Bounds height=\"73\" width=\"185\" x=\"356\" y=\"76\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1m5vey2\" id=\"Association_1m5vey2_di\"\u003e\u003comgdi:waypoint x=\"365\" xsi:type=\"omgdc:Point\" y=\"173\"/\u003e\u003comgdi:waypoint x=\"398\" xsi:type=\"omgdc:Point\" y=\"149\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 3,
+      "creator_id": "a@example.com",
+      "description": "Unisolate a Defender ATP Machine",
+      "export_key": "defender_atp_alert_machine_unisolate",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1632914823230,
+      "name": "Defender ATP Alert Machine Unisolate",
+      "object_type": "incident",
+      "programmatic_name": "defender_atp_alert_machine_unisolate",
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
+      "uuid": "c6ffa4ce-f0bc-45a8-94c1-160872c3ff24",
+      "workflow_id": 45
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 3,
         "workflow_id": "defender_atp_machine_isolation",
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"defender_atp_machine_isolation\" isExecutable=\"true\" name=\"Defender ATP Machine Isolation\"\u003e\u003cdocumentation\u003eIsolate a Defender ATP Machine\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0yu2usv\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0vx43uk\" name=\"Defender Machine Isolation\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"0afc74fe-8301-4801-a162-9e0dbd984e1a\"\u003e{\"inputs\":{\"46ccbdc2-0d49-4e72-9310-49494aa1d4e0\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"11fcc5e8-b795-4719-8320-c99d323d10a6\"}}},\"post_processing_script\":\"import Java.util.Date as Date\\n           \\nif results.success:\\n  row[\u0027report_date\u0027] = Date().getTime()\\n  \\n  action_msg = \\\"Action: {}\\\\nComment: {}\\\\nStatus: {}\\\\nStart Date: {}\\\".format(\\n    results.content[\u0027type\u0027],\\n    results.content[\u0027requestorComment\u0027],\\n    results.content[\u0027status\u0027],\\n    results.content[\u0027creationDateTimeUtc\u0027]\\n    )\\n  row[\u0027machine_last_action\u0027] = helper.createPlainText(action_msg)\\nelse:\\n  msg = u\\\"Defender ATP Isolate Action {}.\\\\nMachine: {} ({})\\\\nType: {}\\\\nComment: {}\\\\nReason: {}\\\"\\\\\\n   .format(\\\"successful\\\" if results.success else \\\"unsuccessful\\\",\\n           results.content.get(\u0027computerDnsName\u0027), row[\u0027machine_id\u0027],\\n           str(rule.properties.defender_isolation_type),\\n           rule.properties.defender_action_comment,\\n           results.reason)\\n\\n  incident.addNote(helper.createPlainText(msg))\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.defender_machine_id = row[\u0027machine_id\u0027]\\ninputs.defender_isolation_type = str(rule.properties.defender_isolation_type)\\ninputs.defender_description = rule.properties.defender_action_comment\\ninputs.defender_isolation_action = \u0027isolate\u0027\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0yu2usv\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0x9zzb1\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0yu2usv\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0vx43uk\"/\u003e\u003cendEvent id=\"EndEvent_1bmmobf\"\u003e\u003cincoming\u003eSequenceFlow_0x9zzb1\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0x9zzb1\" sourceRef=\"ServiceTask_0vx43uk\" targetRef=\"EndEvent_1bmmobf\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1q6d49f\"\u003e\u003ctext\u003e\u003c![CDATA[\u0027Defender ATP Machines\u0027 datatable action status update\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1y18pzl\" sourceRef=\"ServiceTask_0vx43uk\" targetRef=\"TextAnnotation_1q6d49f\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0vx43uk\" id=\"ServiceTask_0vx43uk_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"279\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0yu2usv\" id=\"SequenceFlow_0yu2usv_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"279\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"238.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1bmmobf\" id=\"EndEvent_1bmmobf_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"454\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"472\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0x9zzb1\" id=\"SequenceFlow_0x9zzb1_di\"\u003e\u003comgdi:waypoint x=\"379\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"454\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"416.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1q6d49f\" id=\"TextAnnotation_1q6d49f_di\"\u003e\u003comgdc:Bounds height=\"49\" width=\"196\" x=\"372\" y=\"79\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1y18pzl\" id=\"Association_1y18pzl_di\"\u003e\u003comgdi:waypoint x=\"375\" xsi:type=\"omgdc:Point\" y=\"172\"/\u003e\u003comgdi:waypoint x=\"437\" xsi:type=\"omgdc:Point\" y=\"128\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 2,
+      "content_version": 3,
       "creator_id": "a@example.com",
       "description": "Isolate a Defender ATP Machine",
       "export_key": "defender_atp_machine_isolation",
       "last_modified_by": "a@example.com",
-      "last_modified_time": 1632747139983,
+      "last_modified_time": 1632914826356,
       "name": "Defender ATP Machine Isolation",
       "object_type": "defender_atp_machines",
       "programmatic_name": "defender_atp_machine_isolation",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
       "uuid": "54c99f35-1269-456e-b1c3-ccfcb7441f0d",
       "workflow_id": 36
     },
     {
       "actions": [],
       "content": {
-        "version": 2,
-        "workflow_id": "defender_get_related_alert_information",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"defender_get_related_alert_information\" isExecutable=\"true\" name=\"Defender ATP Get Related Alert Information\"\u003e\u003cdocumentation\u003eGet Defender ATP alert details such as IP Addresses, Files, Devices, Domains, Users\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1tlp1ji\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_13b8o88\" name=\"Defender Get Related Alert Inform...\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"4517e61a-240f-4026-94f7-7867f81373ee\"\u003e{\"inputs\":{\"530a270d-338e-49e9-b877-3cfb5e89ecfa\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[\"4bd4b656-7e96-4b74-80a2-3f3df542dd73\"]}}},\"pre_processing_script\":\"inputs.defender_alert_id = row[\u0027alert_id\u0027]\\n# inputs.defender_alert_info = [\u0027Devices\u0027, \u0027Domains\u0027, \u0027IPs\u0027, \u0027Users\u0027, \u0027Files\u0027]\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1tlp1ji\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_01m50yc\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1tlp1ji\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_13b8o88\"/\u003e\u003cendEvent id=\"EndEvent_0hlbxec\"\u003e\u003cincoming\u003eSequenceFlow_01m50yc\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_01m50yc\" sourceRef=\"ServiceTask_13b8o88\" targetRef=\"EndEvent_0hlbxec\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0pd15hj\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned as artifacts\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1g6v9lf\" sourceRef=\"ServiceTask_13b8o88\" targetRef=\"TextAnnotation_0pd15hj\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_13b8o88\" id=\"ServiceTask_13b8o88_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"264\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1tlp1ji\" id=\"SequenceFlow_1tlp1ji_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"264\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"231\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0hlbxec\" id=\"EndEvent_0hlbxec_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"428\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"446\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_01m50yc\" id=\"SequenceFlow_01m50yc_di\"\u003e\u003comgdi:waypoint x=\"364\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"428\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"396\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0pd15hj\" id=\"TextAnnotation_0pd15hj_di\"\u003e\u003comgdc:Bounds height=\"61\" width=\"185\" x=\"348\" y=\"66\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1g6v9lf\" id=\"Association_1g6v9lf_di\"\u003e\u003comgdi:waypoint x=\"357\" xsi:type=\"omgdc:Point\" y=\"169\"/\u003e\u003comgdi:waypoint x=\"406\" xsi:type=\"omgdc:Point\" y=\"127\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "version": 3,
+        "workflow_id": "defender_atp_alerts_by_machine",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"defender_atp_alerts_by_machine\" isExecutable=\"true\" name=\"Defender ATP Alerts by Machine\"\u003e\u003cdocumentation\u003eReturn alerts associated with a Defender machine\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0r2m4k0\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0hj665d\" name=\"Defender Alert Search\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"b84ee1e6-d4de-4fef-8ed4-4418b87d53d5\"\u003e{\"inputs\":{\"aa552c13-07fb-438d-bff8-310eb7d20b4b\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"5159f7f0-06b3-4d79-8e5e-f3cb7d6e3c4c\"}}},\"post_processing_script\":\"\\\"\\\"\\\"\\n\\\"value\\\" = {\\n    \\\"@odata.context\\\": \\\"https://api.securitycenter.microsoft.com/api/$metadata#Alerts\\\",\\n    \\\"value\\\": [\\n        {\\n            \\\"id\\\": \\\"da637308392288907382_-880718168\\\",\\n            \\\"incidentId\\\": 7587,\\n            \\\"investigationId\\\": 723156,\\n            \\\"assignedTo\\\": \\\"secop123@contoso.com\\\",\\n            \\\"severity\\\": \\\"Low\\\",\\n            \\\"status\\\": \\\"New\\\",\\n            \\\"classification\\\": \\\"TruePositive\\\",\\n            \\\"determination\\\": null,\\n            \\\"investigationState\\\": \\\"Queued\\\",\\n            \\\"detectionSource\\\": \\\"WindowsDefenderAv\\\",\\n            \\\"category\\\": \\\"SuspiciousActivity\\\",\\n            \\\"threatFamilyName\\\": \\\"Meterpreter\\\",\\n            \\\"title\\\": \\\"Suspicious \u0027Meterpreter\u0027 behavior was detected\\\",\\n            \\\"description\\\": \\\"Malware and unwanted software are undesirable applications that perform annoying, disruptive, or harmful actions on affected machines. Some of these undesirable applications can replicate and spread from one machine to another. Others are able to receive commands from remote attackers and perform activities associated with cyber attacks.\\\\n\\\\nA malware is considered active if it is found running on the machine or it already has persistence mechanisms in place. Active malware detections are assigned higher severity ratings.\\\\n\\\\nBecause this malware was active, take precautionary measures and check for residual signs of infection.\\\",\\n            \\\"alertCreationTime\\\": \\\"2020-07-20T10:53:48.7657932Z\\\",\\n            \\\"firstEventTime\\\": \\\"2020-07-20T10:52:17.6654369Z\\\",\\n            \\\"lastEventTime\\\": \\\"2020-07-20T10:52:18.1362905Z\\\",\\n            \\\"lastUpdateTime\\\": \\\"2020-07-20T10:53:50.19Z\\\",\\n            \\\"resolvedTime\\\": null,\\n            \\\"machineId\\\": \\\"12ee6dd8c833c8a052ea231ec1b19adaf497b625\\\",\\n            \\\"computerDnsName\\\": \\\"temp123.middleeast.corp.microsoft.com\\\",\\n            \\\"rbacGroupName\\\": \\\"MiddleEast\\\",\\n            \\\"aadTenantId\\\": \\\"a839b112-1253-6432-9bf6-94542403f21c\\\",\\n            \\\"relatedUser\\\": {\\n                \\\"userName\\\": \\\"temp123\\\",\\n                \\\"domainName\\\": \\\"MIDDLEEAST\\\"\\n            },\\n\\t\\t\\t\\\"comments\\\": [\\n\\t\\t\\t\\t{\\n\\t\\t\\t\\t\\t\\\"comment\\\": \\\"test comment for docs\\\",\\n\\t\\t\\t\\t\\t\\\"createdBy\\\": \\\"secop123@contoso.com\\\",\\n\\t\\t\\t\\t\\t\\\"createdTime\\\": \\\"2020-07-21T01:00:37.8404534Z\\\"\\n\\t\\t\\t\\t}\\n\\t\\t\\t],\\n            \\\"evidence\\\": []\\n\\t\\t}\\n\\t]\\n}\\n\\\"\\\"\\\"\\nif results.success:\\n    for alert in results.content[\u0027value\u0027]:\\n        row = incident.addRow(\\\"defender_atp_alerts\\\")\\n        row[\u0027alert_id\u0027] = alert[\u0027id\u0027]\\n        row[\u0027azure_incident_id\u0027] = alert[\u0027incidentId\u0027]\\n        row[\u0027assigned_to\u0027] = alert[\u0027assignedTo\u0027]\\n        row[\u0027severity\u0027] = alert[\u0027severity\u0027]\\n        row[\u0027status\u0027] = alert[\u0027status\u0027]\\n        row[\u0027title\u0027] = alert[\u0027title\u0027]\\n        row[\u0027alert_description\u0027] = alert[\u0027description\u0027]\\n        row[\u0027classification\u0027] = alert[\u0027classification\u0027]\\n        row[\u0027determination\u0027] = alert[\u0027determination\u0027]\\n        row[\u0027category\u0027] = alert[\u0027category\u0027]\\n        row[\u0027computer_name\u0027] = alert[\u0027computerDnsName\u0027]\\n        row[\u0027machine_id\u0027] = alert[\u0027machineId\u0027]\\n        row[\u0027last_event\u0027] = alert[\u0027lastEventTime_ts\u0027]\\n        row[\u0027last_updated\u0027] = alert[\u0027lastUpdateTime_ts\u0027]\\nelse:\\n    msg = u\\\"Defender ATP Action unsuccessful.\\\\nAction: Find alerts by machine\\\\nReason: {}\\\".format(results.reason)\\n    incident.addNote(msg)\\n\",\"pre_processing_script\":\"inputs.defender_machine_id = row[\u0027machine_id\u0027]\\ninputs.defender_alert_lastseen = rule.properties.defender_alert_last_seen\\ninputs.defender_alert_lastupdatetime = rule.properties.defender_alert_lastupdatetime\\ninputs.defender_alert_severity = str(rule.properties.defender_alert_severity)\\ninputs.defender_alert_result_max = rule.properties.defender_max_results\\n\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0r2m4k0\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1ggn1uk\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0r2m4k0\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0hj665d\"/\u003e\u003cendEvent id=\"EndEvent_18vbtk3\"\u003e\u003cincoming\u003eSequenceFlow_1ggn1uk\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1ggn1uk\" sourceRef=\"ServiceTask_0hj665d\" targetRef=\"EndEvent_18vbtk3\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1rgyx7d\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned in defender_atp_alerts datatable\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0t0c5un\" sourceRef=\"ServiceTask_0hj665d\" targetRef=\"TextAnnotation_1rgyx7d\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0hj665d\" id=\"ServiceTask_0hj665d_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"273\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0r2m4k0\" id=\"SequenceFlow_0r2m4k0_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"273\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"235.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_18vbtk3\" id=\"EndEvent_18vbtk3_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"446\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"464\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1ggn1uk\" id=\"SequenceFlow_1ggn1uk_di\"\u003e\u003comgdi:waypoint x=\"373\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"446\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"409.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1rgyx7d\" id=\"TextAnnotation_1rgyx7d_di\"\u003e\u003comgdc:Bounds height=\"44\" width=\"207\" x=\"360\" y=\"75\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0t0c5un\" id=\"Association_0t0c5un_di\"\u003e\u003comgdi:waypoint x=\"368\" xsi:type=\"omgdc:Point\" y=\"171\"/\u003e\u003comgdi:waypoint x=\"436\" xsi:type=\"omgdc:Point\" y=\"119\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 2,
+      "content_version": 3,
       "creator_id": "a@example.com",
-      "description": "Get Defender ATP alert details such as IP Addresses, Files, Devices, Domains, Users",
-      "export_key": "defender_get_related_alert_information",
+      "description": "Return alerts associated with a Defender machine",
+      "export_key": "defender_atp_alerts_by_machine",
       "last_modified_by": "a@example.com",
-      "last_modified_time": 1632747140729,
-      "name": "Defender ATP Get Related Alert Information",
-      "object_type": "defender_atp_alerts",
-      "programmatic_name": "defender_get_related_alert_information",
-      "tags": [],
-      "uuid": "f246ba84-dce2-4b9f-a299-ee1a87b5b9c1",
-      "workflow_id": 50
+      "last_modified_time": 1632914824993,
+      "name": "Defender ATP Alerts by Machine",
+      "object_type": "defender_atp_machines",
+      "programmatic_name": "defender_atp_alerts_by_machine",
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_defender",
+          "value": null
+        }
+      ],
+      "uuid": "c580edc4-a699-473e-abda-96a5919f2b3b",
+      "workflow_id": 58
     }
   ],
   "workspaces": []
