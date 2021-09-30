@@ -38,6 +38,10 @@ RUN pip install /tmp/packages/${APPLICATION}-*.tar.gz
 
 # uncomment to expose port only if a custom threat feed
 #EXPOSE 9000
+
+# set environment variable for authentication
+ENV GOOGLE_APPLICATION_CREDENTIALS=/var/rescircuits/service_account_key.json
+
 ## ---- end section for changes ----
 
 # set up configuration and log locations using /etc and /var/log, the conventional locations for config and logs
@@ -56,9 +60,6 @@ ENV APP_LOG_DIR /var/log/${PATH_RESILIENT_CIRCUITS}
 
 # setup entrypoint for read-only enterprise data used by integration, if needed
 RUN mkdir /var/${PATH_RESILIENT_CIRCUITS}
-
-# set environment variable for authentication
-ENV GOOGLE_APPLICATION_CREDENTIALS=/var/rescircuits/service_account_key.json
 
 # entrypoint for resilient-circuits.  Use /opt, the conventional location for optional software on Linux
 RUN mkdir /opt/${PATH_RESILIENT_CIRCUITS}

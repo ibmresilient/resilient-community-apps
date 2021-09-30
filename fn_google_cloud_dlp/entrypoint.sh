@@ -4,7 +4,6 @@
 # container in the Pod and this new container will use the new configuration
 # In a plain old docker system the container will exit
 APP_CONFIG_SHA=`sha256sum /etc/rescircuits/app.config`
-export GOOGLE_APPLICATION_CREDENTIALS=/var/rescircuits/service_account_key.json
 resilient-circuits run & CIRCUITS_PID=`echo $!`
 while true
 do
