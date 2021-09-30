@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
 """Function implementation"""
 
 import logging
@@ -15,12 +15,18 @@ from fn_scheduler.lib.resilient_helper import get_incident, get_rule_by_id, get_
 
 log = logging.getLogger(__name__)
 
+# credentials for API calls back to resiient when a schedule is triggered
+RESILIENT_CONNECTION = None
+
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'create_a_scheduled_job"""
 
     def __init__(self, opts):
+        global RESILIENT_CONNECTION
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
+
+        RESILIENT_CONNECTION = opts.get(SECTION_RESILIENT, {})
 
         options = opts.get(SECTION_SCHEDULER, {})
 
@@ -95,7 +101,7 @@ class FunctionComponent(ResilientComponent):
             incident_data = [incident_id, object_id, row_id,
                              scheduler_label_prefix,
                              scheduler_rule_name, rule_id, rule_object_type_id, rule_params,
-                             self.opts[SECTION_RESILIENT],
+                             None,
                              self.opts[SECTION_SCHEDULER]]
 
             # validate the type and type_value
@@ -158,7 +164,7 @@ def triggered_job(incident_id, object_id, row_id,
     :param rule_id:
     :param rule_object_type_id: internal id referring to incident, task, artifact, etc.
     :param rule_params:
-    :param opts: contains [resilient] parameters needed to connect back to Resilient for API calls
+    :param opts: **DEPRECATED** contains [resilient] parameters needed to connect back to Resilient for API calls
     :param options: contains [fn_scheduler] parameters
     :param kwargs: catch all for additional arguments as necessary
     :return: None
@@ -173,7 +179,7 @@ def triggered_job(incident_id, object_id, row_id,
     log.debug(disable_notes)
 
     # get the rest client
-    rest_client = get_resilient_client(opts)
+    rest_client = get_resilient_client(RESILIENT_CONNECTION)
     scheduler = ResilientScheduler.get_scheduler()
 
     # make sure the incident is still open and not deleted

@@ -59,6 +59,7 @@
 | ------- | ---- | ----- |
 | 1.0.0 | 12/2020 | Initial Release |
 | 1.1.0 | 07/2021 | Support for Flows and QRoc |
+| 1.1.1 | 07/2021 | Fixed selftest failing when using cafile |
 
 ---
 
