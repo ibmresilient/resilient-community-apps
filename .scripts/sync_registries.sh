@@ -5,7 +5,6 @@
 
 # Dependencies on:
 # sudo apt-get install jq
-# pip install resilient-sdk
 # curl -fsSL https://clis.cloud.ibm.com/install/linux | sh 
 # ibmcloud plugin install container-registry -r 'IBM Cloud'
 
@@ -14,8 +13,10 @@
 ###############
 SOURCE=$1
 DEST=$2
-dest_tags=()
-skipped_packages=()
+DEST_TAGS=()
+IMAGE_NAMES=()
+SOURCE_URL=""
+DEST_URL=""
 
 ##################
 ## Check params ##
@@ -46,13 +47,13 @@ repo_login () {
 # logs in to ICR repo using $IBMCLOUD_API_KEY env variable
 # Args: none
 icr_login () {
-    ibmcloud login --no-region -a https://cloud.ibm.com
+    ibmcloud login --no-region -a https://$IBMCLOUD_URL
     ibmcloud cr region-set global
     ibmcloud cr login
 }
 
 source_is_quay() {
-    if [ "$SOURCE" == "QUAY" ] && [ "$DEST" == "ICR" ]; then
+    if [ "$1" == "QUAY" ] && [ "$2" == "ICR" ]; then
         return 0
     else
         return 1
@@ -60,7 +61,7 @@ source_is_quay() {
 }
 
 source_is_icr() {
-    if [ "$SOURCE" == "ICR" ] && [ "$DEST" == "QUAY" ]; then
+    if [ "$1" == "ICR" ] && [ "$2" == "QUAY" ]; then
         return 0
     else
         return 1
@@ -71,46 +72,36 @@ source_is_icr() {
 ## Start ##
 ###########
 print_msg "\
+Sync Stage\n\
 SOURCE:\t\t\t\t$SOURCE \n\
 DEST:\t\t\t\t$DEST \n\
 QUAY_URL:\t\t\t$QUAY_URL \n\
 QUAY_API_URL:\t\t\t$QUAY_API_URL \n\
 QUAY_USERNAME:\t\t\t$QUAY_USERNAME \n\
-IBMCLOUD_URL:\t\t\t$IBMCLOUD_URL \n\
+ICR_URL:\t\t\t$ICR_URL \n\
 REGISTRY_NAMESPACE:\t\t$REGISTRY_NAMESPACE \n\
-PATH_ALLOW_IMAGE_NAMES:\t\t$PATH_ALLOW_IMAGE_NAMES \n\
-PATH_EXTERNAL_ALLOW_IMAGE_NAMES:$PATH_EXTERNAL_ALLOW_IMAGE_NAMES \n\
 "
-
-ALLOW_IMAGE_NAMES=( $(<$PATH_ALLOW_IMAGE_NAMES) )
-print_msg "ALLOW_IMAGE_NAMES:\n${ALLOW_IMAGE_NAMES[*]}"
-
-EXTERNAL_ALLOW_IMAGE_NAMES=( $(<$PATH_EXTERNAL_ALLOW_IMAGE_NAMES) )
-print_msg "EXTERNAL_ALLOW_IMAGE_NAMES:\n${EXTERNAL_ALLOW_IMAGE_NAMES[*]}"
 
 # Login to quay.io
 print_msg "Logging into $QUAY_URL as $QUAY_USERNAME"
 repo_login $QUAY_URL $QUAY_USERNAME $QUAY_PASSWORD
 
 # Login to icr.io
-print_msg "Logging into $IBMCLOUD_URL using API key"
+print_msg "Logging into $ICR_URL using API key"
 icr_login
 
-IMAGE_NAMES=()
-source_url=""
-dest_url=""
-if source_is_quay; then
+if source_is_quay $SOURCE $DEST; then
     # Make array of image names public on quay.io to rebuild
-    print_msg "Getting list of IMAGE_NAMES at 'https://$QUAY_API_URL/repository?namespace=$QUAY_USERNAME&public=true'"
-    IMAGE_NAMES=( $(curl "https://$QUAY_API_URL/repository?namespace=$QUAY_USERNAME&public=true" | jq -r ".repositories[].name") )
-    source_url="$QUAY_URL"
-    dest_url="$IBMCLOUD_URL"
-elif source_is_icr; then
+    print_msg "Getting list of IMAGE_NAMES at 'https://$QUAY_IMAGES_API_URL'"
+    IMAGE_NAMES=( $(curl "https://$QUAY_IMAGES_API_URL" | jq -r ".repositories[].name") )
+    SOURCE_URL="$QUAY_URL"
+    DEST_URL="$ICR_URL"
+elif source_is_icr $SOURCE $DEST; then
     # Make array of image names on icr.io to rebuild
     print_msg "Getting list of IMAGE_NAMES from IBM Container Registry in namespace '$REGISTRY_NAMESPACE'"
     IMAGE_NAMES=( $(ibmcloud cr images --restrict ibmresilient -q) )
-    source_url="$IBMCLOUD_URL"
-    dest_url="$QUAY_URL"
+    SOURCE_URL="$ICR_URL"
+    DEST_URL="$QUAY_URL"
 else
     print_msg "Must provide QUAY or ICR as source and destination parameters"
     exit 1
@@ -122,45 +113,34 @@ print_msg "IMAGE_NAMES:\n${IMAGE_NAMES[*]}"
 for image_name in "${IMAGE_NAMES[@]}"; do
 
     int_version="0.0.0"
-    if source_is_quay; then
+    if source_is_quay $SOURCE $DEST; then
         # grab image version from quay api
-        int_version=$(curl "https://$QUAY_API_URL/repository/ibmresilient/$image_name/tag/" | jq -r ".tags[].name" | head -1)
-    elif source_is_icr; then
+        int_version=$(curl "https://$QUAY_API_URL/repository/$QUAY_USERNAME/$image_name/tag/" | jq -r ".tags[].name" | head -1)
+    elif source_is_icr $SOURCE $DEST; then
         # grab image version and image name from ICR by chopping up $image_name 
         # which will be in format: "icr.io/ibmresilient/<image_name>:<image_tag>"
         int_version=$(echo $image_name | cut -d ":" -f 2)
         image_name=$(echo $image_name | cut -d "/" -f 3 | cut -d ":" -f 1)
     fi
 
-    # If in our allowed list
-    if [[ " ${ALLOW_IMAGE_NAMES[@]} " =~ " ${image_name} " || " ${EXTERNAL_ALLOW_IMAGE_NAMES[@]} " =~ " ${image_name} " ]]; then
+    print_msg "::$image_name:: \nint_version:\t\t\t$int_version \nSOURCE_URL:\t\t\t$SOURCE_URL \nDEST_URL:\t\t\t$DEST_URL"
+    
+    source_tag="$SOURCE_URL/$REGISTRY_NAMESPACE/$image_name:$int_version"
 
-        print_msg "::$image_name:: \nint_version:\t\t\t$int_version \nsource_url:\t\t\t$source_url \ndest_url:\t\t\t$dest_url"
-        
-        source_tag="$source_url/$REGISTRY_NAMESPACE/$image_name:$int_version"
+    print_msg "$image_name:: Pull image with tag $source_tag from $SOURCE_URL"
+    docker pull $source_tag
 
-        print_msg "$image_name:: Pull image with tag $source_tag from $source_url"
-        docker pull $source_tag
-
-        # tag the image for icr.io
-        dest_tag="$dest_url/$REGISTRY_NAMESPACE/$image_name:$int_version"
-        print_msg "$image_name:: Tagging $image_name for $dest_url/$REGISTRY_NAMESPACE with: $dest_tag"
-        docker tag $source_tag $dest_tag
-        dest_tags+=($dest_tag)
-
-    else
-        print_msg "$image_name:: $image_name is NOT in $PATH_ALLOW_IMAGE_NAMES or $PATH_EXTERNAL_ALLOW_IMAGE_NAMES\nAdding it to list of skipped_packages"
-        skipped_packages+=($image_name)
-    fi
+    # tag the image for icr.io
+    dest_tag="$DEST_URL/$REGISTRY_NAMESPACE/$image_name:$int_version"
+    print_msg "$image_name:: Tagging $image_name for $DEST_URL/$REGISTRY_NAMESPACE with: $dest_tag"
+    docker tag $source_tag $dest_tag
+    DEST_TAGS+=($dest_tag)
 
 done
 
-print_msg "List of images to be pushed to $DEST:\n${dest_tags[*]}"
+print_msg "List of images to be pushed to $DEST:\n${DEST_TAGS[*]}"
 
-for t in "${dest_tags[@]}"; do
+for t in "${DEST_TAGS[@]}"; do
     print_msg "Pushing $t to $DEST"
     docker push $t
 done
-
-
-print_msg "Skipped Packages found on $SOURCE:\n${skipped_packages[*]}"

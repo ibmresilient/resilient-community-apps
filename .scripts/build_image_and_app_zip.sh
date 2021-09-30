@@ -53,7 +53,7 @@ repo_login () {
 # logs in to ICR repo using $IBMCLOUD_API_KEY env variable
 # Args: none
 icr_login () {
-    ibmcloud login --no-region -a https://cloud.ibm.com
+    ibmcloud login --no-region -a https://$IBMCLOUD_URL
     ibmcloud cr region-set global
     ibmcloud cr login
 }
@@ -81,7 +81,7 @@ if [ "$BUILD_TYPE" == "MAIN" ] ; then
     print_msg "Logging into $QUAY_URL as $QUAY_USERNAME"
     repo_login $QUAY_URL $QUAY_USERNAME $QUAY_PASSWORD
 
-    print_msg "Logging into $IBMCLOUD_URL using \$IBMCLOUD_API_KEY"
+    print_msg "Logging into $ICR_URL using \$IBMCLOUD_API_KEY"
     icr_login
 fi
 
@@ -132,8 +132,8 @@ print_msg "Tagging $PACKAGE_NAME for $QUAY_URL/$QUAY_USERNAME with: $quay_io_tag
 docker tag $docker_tag $quay_io_tag
 
 # tag the image for icr.io
-icr_io_tag="$IBMCLOUD_URL/$REGISTRY_NAMESPACE/$PACKAGE_NAME:$version_to_use"
-print_msg "Tagging $PACKAGE_NAME for $IBMCLOUD_URL/$REGISTRY_NAMESPACE with: $icr_io_tag"
+icr_io_tag="$ICR_URL/$REGISTRY_NAMESPACE/$PACKAGE_NAME:$version_to_use"
+print_msg "Tagging $PACKAGE_NAME for $ICR_URL/$REGISTRY_NAMESPACE with: $icr_io_tag"
 docker tag $docker_tag $icr_io_tag
 
 # tag the image for artifactory

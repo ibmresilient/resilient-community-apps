@@ -58,7 +58,7 @@ repo_login () {
 # logs in to ICR repo using $IBMCLOUD_API_KEY env variable
 # Args: none
 icr_login () {
-    ibmcloud login --no-region -a https://cloud.ibm.com
+    ibmcloud login --no-region -a https://$IBMCLOUD_URL
     ibmcloud cr region-set global
     ibmcloud cr login
 }
@@ -73,7 +73,7 @@ REPO_TO_PUSH:\t\t\t$REPO_TO_PUSH \n\
 QUAY_URL:\t\t\t$QUAY_URL \n\
 QUAY_API_URL:\t\t\t$QUAY_API_URL \n\
 QUAY_USERNAME:\t\t\t$QUAY_USERNAME \n\
-IBMCLOUD_URL:\t\t\t$IBMCLOUD_URL \n\
+ICR_URL:\t\t\t$ICR_URL \n\
 REGISTRY_NAMESPACE:\t\t$REGISTRY_NAMESPACE \n\
 ARTIFACTORY_URL:\t\t$ARTIFACTORY_URL \n\
 ARTIFACTORY_DOCKER_REPO:\t\t$ARTIFACTORY_DOCKER_REPO \n\
@@ -86,8 +86,8 @@ DOCKERFILE_WORDS_TO_INSERT:\t$DOCKERFILE_WORDS_TO_INSERT \n\
 
 if [ "$IMAGE_TO_REBUILD" == "ALL" ] ; then
     # Make array of image names public on quay.io to rebuild
-    print_msg "Getting list of IMAGE_NAMES at 'https://$QUAY_API_URL/repository?namespace=$QUAY_USERNAME&public=true'"
-    IMAGE_NAMES=( $(curl "https://$QUAY_API_URL/repository?namespace=$QUAY_USERNAME&public=true" | jq -r ".repositories[].name") )
+    print_msg "Getting list of IMAGE_NAMES at 'https://$QUAY_IMAGES_API_URL'"
+    IMAGE_NAMES=( $(curl "https://$QUAY_IMAGES_API_URL" | jq -r ".repositories[].name") )
 
 else
     IMAGE_NAMES=$IMAGE_TO_REBUILD
@@ -106,7 +106,7 @@ fi
 
 # Login to icr.io
 if [ "$REPO_TO_PUSH" == "ALL" ] || [ "$REPO_TO_PUSH" == "ICR" ] ; then
-    print_msg "Logging into $IBMCLOUD_URL using API key"
+    print_msg "Logging into $ICR_URL using API key"
     icr_login
 fi
 
@@ -190,8 +190,8 @@ for image_name in "${IMAGE_NAMES[@]}"; do
                 quay_io_tags+=($quay_io_tag)
 
                 # tag the image for icr.io
-                icr_io_tag="$IBMCLOUD_URL/$REGISTRY_NAMESPACE/$image_name:$int_version"
-                print_msg "$image_name:: Tagging $image_name for $IBMCLOUD_URL/$REGISTRY_NAMESPACE with: $icr_io_tag"
+                icr_io_tag="$ICR_URL/$REGISTRY_NAMESPACE/$image_name:$int_version"
+                print_msg "$image_name:: Tagging $image_name for $ICR_URL/$REGISTRY_NAMESPACE with: $icr_io_tag"
                 docker tag $docker_tag $icr_io_tag
                 icr_io_tags+=($icr_io_tag)
 
