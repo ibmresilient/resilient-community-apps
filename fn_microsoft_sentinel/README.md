@@ -196,6 +196,18 @@ For each profile:
 
 See the section below for examples of the templates.
 
+### Automatic Rules
+Several rules are configurated to automatically synchronize a SOAR incident with the Sentinel incident. Those automatic rules are:
+
+| Rule Name | Object | Behavior |
+| --------- | ------ | ------------------ |
+| Sentinel Comment Sync | note | Synchronize SOAR notes with Sentinel incidents |
+| Sentinel Incident Sync | incident | Get Sentinel incident alerts and entities when the SOAR incident is created |
+| Sentinel Update Incident | incident | Synchronize SOAR incident changes (changes in status, severity, etc) with Sentinel |
+
+These rules are disabled when the app is first installed. If you wish to use this app to automatically synchronize with Sentinel, enable each rule using the Enable slider found on the Rules tab in Customization Settings.
+
+![screenshot: subscription role](./doc/screenshots/automatic_rules.png)
 ### Custom Layouts
 <!--
   Use this section to provide guidance on where the user should add any custom fields and data tables.
@@ -208,17 +220,9 @@ See the section below for examples of the templates.
 
   The Sentinel fields are used to capture information specific on a Sentinel Incident, including close incident information (Classification). The datatable, Sentintel Entities, is used to capture specific entity information. Another datatable, Sentinel Comment IDs, is used for tracking purposes and need not be added to a layout.
 
-#### Sentinel Comment Sync
-
-A Rule exists to automatically link Resilient SOAR comments with Sentinel: `Sentinel Comment Sync`.
-This rule needs to be modified to reference the user account or API Key used for app communication.
-The screenshot below shows an added condition for the comment's `user` set to be `not equal to` the app account used. `Please make this manual change.`
-
-![screenshot: Sentinel Comment Sync ](./doc/screenshots/sync_comment.png)
-
 ---
 
- ![screenshot: fn-sentinel-get-incident-entities ](./doc/screenshots/function_list.png)
+ ![screenshot: function-list ](./doc/screenshots/function_list.png)
 
 ## Function - Sentinel Get Incident Entities
 Get the Entities associated with a Sentinel Incident
@@ -505,8 +509,6 @@ if results.success:
 ## Function - Sentinel Update Incident
 Update / Close a Sentinel incident based on Sentinel field changes in the Resilient Incident
 
- ![screenshot: fn-sentinel-update-incident ](./doc/screenshots/fn-sentinel-update-incident.png)
-
 <details><summary>Inputs:</summary>
 <p>
 
@@ -553,21 +555,6 @@ None
 
 </p>
 </details>
-
-## Data Table - Sentinel Comment IDs
-This is a reference table of synchronized Sentinel Comment ids. It is an internal table to
-ensure comments are not synchronized more than once. This table does not need to be added to a layout.
-
- ![screenshot: dt-sentinel-comment-ids](./doc/screenshots/dt-sentinel-comment-ids.png)
-
-#### API Name:
-sentinel_comment_ids
-
-#### Columns:
-| Column Name | API Access Name | Type | Tooltip |
-| ----------- | --------------- | ---- | ------- |
-| sentinel_comment_id | `comment_id` | `text` | - |
-| resilient_comment_id | `resilient_comment_id` | `text` | - |
 
 ---
 ## Data Table - Sentinel Incident Entities
