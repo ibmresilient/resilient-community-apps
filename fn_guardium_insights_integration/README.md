@@ -62,6 +62,8 @@
 -->
 **Resilient Circuits Components for 'fn_guardium_insights_integration'**
 
+**This Resilient component support Guardum Insights version >= 3.0.**
+
 ![screenshot: main](doc/screenshots/gi_all_rules.png)
 
 Resilient Circuits Components for 'fn_guardium_insights_integration'
@@ -100,12 +102,12 @@ The Resilient platform supports two app deployment mechanisms, App Host and inte
 
 If deploying to a Resilient platform with an App Host, the requirements are:
 
-* Resilient platform >= `36.0.5634`.
+* Resilient platform > `36.0.5634`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a Resilient platform with an integration server, the requirements are:
 
-* Resilient platform >= `36.0.5634`.
+* Resilient platform > `36.0.5634`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz`
   file).
 * Integration server is running `resilient_circuits>=37.0.0`.
@@ -239,17 +241,9 @@ report data* |
 | **insights_encoded_token** | Yes | `` | *Guardium Insights Restful service API Key Configuration.* |
 | **analytics_poll_time** | Yes | `` | *Periodic time interval to fetch anomalies from GI, poll time should be
 configured in seconds.* |
-| **report_period** | yes | `Now minus 7 days`| *classification report period, to populate breach data types data.
-values can be `Now minus 3 hours`,`Now minus 24 hours`, `Now minus 7 days`,`Now minus 14 days`*|
+| **report_period** | yes | `Now minus 7 days`| *classification report period, to populate breach data types data. values can be `Now minus 3 hours`,`Now minus 24 hours`, `Now minus 7 days`,`Now minus 14 days`*|
 | **report_fetch_size** | yes | 500 | *Maximum classification report records size.*|
-| **incident_member** | Yes | `` |*Incident member to be added, for new created anomaly incidents. value can be group
-name, individual user account. If multiple value specified each should be separated by comma ex: user@domain.com,
-group_name.* 
-
-
-
-
-
+| **incident_member** | Yes | `` |*Incident member to be added, for new created anomaly incidents. value can be group name, individual user account. If multiple value specified each should be separated by comma ex: user@domain.com, group_name.* |
 | **proxy** | Yes | `` | *Guardium http/https proxy server address, leave blank for no proxy.* |
 | **insights_ca_file** | Yes | `false` | *Mention certificate path for SSL/TSL. Default Disabled.* |
 | **enable_firewall_auth** | Yes | `false` | *false - disable firewall authentication, true - enable firewall
@@ -304,10 +298,34 @@ A Function to Block User From Guardium Insights.
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
-  
+  "version": "1.0",
+  "success": True,
+  "reason": None,
+  "content": {
+    "block_result": True,
+    "err": "no error"
+  },
+  "raw": "{\"block_result\": true, \"err\": \"no error\"}",
+  "inputs": {
+    "guardium_id": "grd_id",
+    "config_id": "0",
+    "database_user/actor/who": "DB_USER",
+    "what": {
+      "database_name": "SAMPLE",
+      "server_port": "PORT",
+      "service_name": "SERVICE_NAME",
+      "sever_hostname": "HOST_NAME",
+      "server_ip": "SERVER_IP"
+    }
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-guardium-insights-integration",
+    "package_version": "1.0.0",
+    "host": "host_dns",
+    "execution_time_ms": 2671,
+    "timestamp": "2021-09-30 20:04:23"
+  }
 }
 ```
 
@@ -376,9 +394,27 @@ A function to get classification report data.
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+  "version": "1.0",
+  "success": True,
+  "reason": "Classification report generated successfully...",
+  "content": {},
+  "raw": "{}",
+  "inputs": {
+    "incident_id": 3805,
+    "input_field_guardium_insights_to_date": 1632940200000,
+    "input_field_guardium_insights_who": "Finance_GOE",
+    "input_field_guardium_insights_fetch_size": 5,
+    "input_field_guardium_insights_from_date": 1630434600000,
+    "input_field_guardium_insights_what": "{\"database_name\": \"database_name\", \"server_port\": \"server_port\", \"service_name\": \"service_name\", \"sever_hostname\": \"sever_hostname\", \"server_ip\": \"server_ip\"}"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-guardium-insights-integration",
+    "package_version": "1.0.0",
+    "host": "host",
+    "execution_time_ms": 11151,
+    "timestamp": "2021-09-30 20:26:48"
+  }
 }
 ```
 
@@ -435,9 +471,24 @@ A function to populate the incident breach data types.
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+  "version": "1.0",
+  "success": False,
+  "reason": "populating breach data types completed: incident ID3810",
+  "content": {},
+  "raw": "{}",
+  "inputs": {
+    "incident_id": 3810,
+    "input_field_guardium_insights_who": "Finance_GOE",
+    "input_field_guardium_insights_what": "{\"database_name\": \"database_name\", \"server_port\": \"server_port\", \"service_name\": \"service_name\", \"sever_hostname\": \"sever_hostname\", \"server_ip\": \"server_ip\"}"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-guardium-insights-integration",
+    "package_version": "1.0.0",
+    "host": "host",
+    "execution_time_ms": 6250,
+    "timestamp": "2021-09-30 20:36:00"
+  }
 }
 ```
 

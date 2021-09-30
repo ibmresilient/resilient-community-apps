@@ -103,6 +103,7 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("populating breach data types completed: incident ID{}".format(incident_id))
 
             fun_result = res_pay.done(res_status, {}, reason)
+            
             # Produce a FunctionResult with the results
             yield FunctionResult(fun_result)
         except Exception as fn_err:
