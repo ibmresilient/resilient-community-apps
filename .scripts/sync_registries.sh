@@ -112,33 +112,39 @@ print_msg "IMAGE_NAMES:\n${IMAGE_NAMES[*]}"
 # Loop all image names
 for image_name in "${IMAGE_NAMES[@]}"; do
 
-    int_version="0.0.0"
+    version_tags=()
     if source_is_quay $SOURCE $DEST; then
-        # grab image version from quay api
-        int_version=$(curl "https://$QUAY_API_URL/repository/$QUAY_USERNAME/$image_name/tag/" | jq -r ".tags[].name" | head -1)
+        # grab image versions from quay api
+        # these tags are put in an array to be looped over and all pulled then tagged for dest
+        version_tags=( $(curl "https://$QUAY_API_URL/repository/$QUAY_USERNAME/$image_name/tag/" | jq -r ".tags[].name") )
     elif source_is_icr $SOURCE $DEST; then
         # grab image version and image name from ICR by chopping up $image_name 
         # which will be in format: "icr.io/ibmresilient/<image_name>:<image_tag>"
-        int_version=$(echo $image_name | cut -d ":" -f 2)
+        # note: to keep logic relatively similar between quay and icr as source, 
+        #       the one tag from icr image is added to an array but will only ever have one element
+        version_tags=( $(echo $image_name | cut -d ":" -f 2) )
         image_name=$(echo $image_name | cut -d "/" -f 3 | cut -d ":" -f 1)
     fi
 
-    print_msg "::$image_name:: \nint_version:\t\t\t$int_version \nSOURCE_URL:\t\t\t$SOURCE_URL \nDEST_URL:\t\t\t$DEST_URL"
-    
-    source_tag="$SOURCE_URL/$REGISTRY_NAMESPACE/$image_name:$int_version"
+    print_msg "::$image_name:: \nversion_tags:\t\t\t${version_tags[*]} \nSOURCE_URL:\t\t\t$SOURCE_URL \nDEST_URL:\t\t\t$DEST_URL"
 
-    print_msg "$image_name:: Pull image with tag $source_tag from $SOURCE_URL"
-    docker pull $source_tag
+    for int_version in "${version_tags[@]}"; do
+        
+        source_tag="$SOURCE_URL/$REGISTRY_NAMESPACE/$image_name:$int_version"
 
-    # tag the image for icr.io
-    dest_tag="$DEST_URL/$REGISTRY_NAMESPACE/$image_name:$int_version"
-    print_msg "$image_name:: Tagging $image_name for $DEST_URL/$REGISTRY_NAMESPACE with: $dest_tag"
-    docker tag $source_tag $dest_tag
-    DEST_TAGS+=($dest_tag)
+        print_msg "$image_name:: Pull image with tag $source_tag from $SOURCE_URL"
+        docker pull $source_tag
+
+        # tag the image for icr.io
+        dest_tag="$DEST_URL/$REGISTRY_NAMESPACE/$image_name:$int_version"
+        print_msg "$image_name:: Tagging $image_name for $DEST_URL/$REGISTRY_NAMESPACE with: $dest_tag"
+        docker tag $source_tag $dest_tag
+        DEST_TAGS+=($dest_tag)
+    done
 
 done
 
-print_msg "List of images to be pushed to $DEST:\n${DEST_TAGS[*]}"
+print_msg "List of images to be pushed to $DEST:\n${DEST_TAGS[*]}"1
 
 for t in "${DEST_TAGS[@]}"; do
     print_msg "Pushing $t to $DEST"
