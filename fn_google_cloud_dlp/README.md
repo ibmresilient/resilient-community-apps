@@ -99,7 +99,7 @@ The above guides are available on the IBM Knowledge Center at [ibm.biz/resilient
 
 ### Cloud Pak for Security
 If you are deploying to IBM Cloud Pak for Security, the requirements are:
-* IBM Cloud Pak for Security >= 1.4.
+* IBM Cloud Pak for Security >= 1.7.
 * Cloud Pak is configured with an App Host.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
@@ -110,14 +110,16 @@ The following Cloud Pak guides provide additional information:
 These guides are available on the IBM Knowledge Center at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs). From this web page, select your IBM Cloud Pak for Security version. From the version-specific Knowledge Center page, select Case Management and Orchestration & Automation.
 
 ### Authenticating to Google Cloud 
+Google Cloud requires an environment variable named `GOOGLE_APPLICATION_CREDENTIALS` in order to authenticate. To get the contents of this variable, you need to create a new service account with the `DLP User` permission in the service accounts tab. Then, under the actions column of the service accounts, select the Manage keys option and create a new key that is a JSON type.
 
+#### Using an Integration Server:
+You will need to use the export command in terminal using the path to the json file and with whatever name you'd like.
 
-Application Default Credentials:
-Application Default Credentials are the prefered way to authenticate when using a client library to interface with Google Cloud.
+`export GOOGLE_APPLICATION_CREDENTIALS="/Path/to/json/whatever_name_you_want.json"` 
 
-Services using ADC look for credentials within a `GOOGLE_APPLICATION_CREDENTIALS` environment variable. Unless you specifically want to have ADC use other credentials (for example, user credentials), set this environment variable to point to your service account key file.
-It is required to create a new service or user account with the `DLP User` permission in the service accounts tab. You will then be given a keyfile which you can set as the `GOOGLE_APPLICATION_CREDENTIALS` bash value which will be the absolute path to your Keyfile. To use in App Host, create a new file in the "Configuration" tab. Name the file "service_account_key.json" and have the path be "/var/rescircuits". Paste in the contents of your `GOOGLE_APPLICATION_CREDENTIALS` bash value here.
-
+#### Using App Host:
+When configuring the app after installing, you must create a new file in the "Configuration" tab. Name the file "service_account_key.json" and have the path be "/var/rescircuits". Paste in the contents of the json file here.
+![screenshot: authenticating to google cloud ](./doc/screenshots/authenticating_to_google_cloud.png)
 ### Proxy Server
 The app does support a proxy server.
 
