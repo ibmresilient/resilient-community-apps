@@ -188,11 +188,11 @@ For each profile:
 | **resource_groupname** | Yes | `` | *resource group for incident access.* |
 | **new_incident_filters** | Yes | `"status": ["New", "Active"],"severity": ["High", "Medium","Low"]` | *Set of filters to apply when escalating incidents to Resilient SOAR. Incidents not matching the criteria are not synchronized. In this example, both a match of status and severity would be required. * |
 | **max_alerts** | 10 | *limit the number of alerts per sentinel incident to the first n alerts or leave blank for all alerts* |
-| **create_incident_template** | /user/path/to/create_incident_template.jinja | Customer supplied template for mapping Sentinel Incident fields to an Resilient incident. If not specified, a default template is used. |
-| **update_incident_template** | /user/path/to/update_incident_template.jinja | Customer supplied template for mapping Sentinel Incident fields to an Resilient incident. If not specified, a default template is used. |
-| **close_incident_template** | /user/path/to/close_incident_template.jinja | Customer supplied template for mapping Sentinel Incident fields to an Resilient incident. If not specified, a default template is used. This is useful when a customer customizes the fields used when closing an incident. |
-| **sentinel_update_incident_template** | /user/path/to/update_sentinel_incident_template.jinja | Customer supplied template for updating a sentinel incident when the Resilient SOAR incident is updated |
-| **sentinel_close_incident_template** | /user/path/to/update_sentinel_incident_template.jinja | Customer supplied template for closing a sentinel incident when the Resilient SOAR incident is closed |
+| **create_incident_template** | /var/rescircuits/create_incident_template.jinja | Customer supplied template for mapping Sentinel Incident fields to an Resilient incident. If not specified, a default template is used. |
+| **update_incident_template** | /var/rescircuits/update_incident_template.jinja | Customer supplied template for mapping Sentinel Incident fields to an Resilient incident. If not specified, a default template is used. |
+| **close_incident_template** | /var/rescircuits/close_incident_template.jinja | Customer supplied template for mapping Sentinel Incident fields to an Resilient incident. If not specified, a default template is used. This is useful when a customer customizes the fields used when closing an incident. |
+| **sentinel_update_incident_template** | /var/rescircuits/update_sentinel_incident_template.jinja | Customer supplied template for updating a sentinel incident when the Resilient SOAR incident is updated |
+| **sentinel_close_incident_template** | /var/rescircuits/update_sentinel_incident_template.jinja | Customer supplied template for closing a sentinel incident when the Resilient SOAR incident is closed |
 
 See the section below for examples of the templates.
 
@@ -627,21 +627,20 @@ If your Sentinel login users differ from SOAR users, modify the `owner_id` mappi
 ```
 {
   {# JINJA template for creating a new Resilient incident from a Sentinel incident. #}
-  "name": "Sentinel Incident - {{ properties.title|replace('"', '\"') }}",
+  "name": "Sentinel Incident {{ properties.incidentNumber|e }} - {{ properties.title|replace('"', '\\"') }}",
   "discovered_date": {{ properties.createdTimeUtc|resilient_datetimeformat }},
-  "start_date": {{ properties.firstActivityTimeUtc|resilient_datetimeformat }},
+  "start_date": {% if properties.firstActivityTimeUtc %} {{ properties.firstActivityTimeUtc|resilient_datetimeformat }} {% else %} {{ properties.createdTimeUtc|resilient_datetimeformat }} {%endif %},
   "description": {
     "format": "text",
-    "content": "{{ properties.description|replace('"', '\"') }}"
+    "content": "{{ properties.description|replace('"', '\\"') }}"
   },
   {# if Sentinel users are different than SOAR users, consider using a mapping table using resilient_substitute: #}
   {# "owner_id": "{{ properties.owner.userPrincipalName|resilient_substitute('{"sentinel_user1@co.com": "soar_user1@ent.com", "sentinel_user2@co.com": "soar_user2@ent.com", "DEFAULT": "default_user@ent.com" }') }}", #}
-  "owner_id": "{{ properties.owner.assignedTo }}",
   "plan_status": "{{ properties.status|resilient_substitute('{"Closed": "C", "Active": "A", "New": "A"}') }}",
   "severity_code": "{{ properties.severity|resilient_substitute('{"Informational": "Low"}') }}",
   "properties": {
-    "sentinel_incident_number": {{ properties.incidentNumber }},
-    "sentinel_incident_id": "{{ name|e }}",
+    "sentinel_incident_number": "{{ name|e }}",
+    "sentinel_incident_id": "{{ properties.incidentNumber }}",
     "sentinel_incident_status": "{{ properties.status }}",
     "sentinel_incident_url": "<a target='blank' href='{{ properties.incidentUrl }}'>Sentinel Incident</a>",
     "sentinel_incident_classification": "{{ properties.classification }}",
@@ -664,14 +663,12 @@ If your Sentinel login users differ from SOAR users, modify the `owner_id` mappi
 ```
 {
   {# JINJA template for updating a new Resilient incident from a Sentinel incident. #}
-  "name": "Sentinel Incident - {{ properties.title|replace('Sentinel Incident - ', '')|replace('"', '\"') }}",
   "description": {
     "format": "text",
-    "content": "{{ properties.description|replace('"', '\"') }}"
+    "content": "{{ properties.description|replace('"', '\\"') }}"
   },
   {# if Sentinel users are different than SOAR users, consider using a mapping table using resilient_substitute: #}
   {# "owner_id": "{{ properties.owner.userPrincipalName|resilient_substitute('{"sentinel_user1@co.com": "soar_user1@ent.com", "sentinel_user2@co.com": "soar_user2@ent.com", "DEFAULT": "default_user@ent.com" }') }}", #}
-  "owner_id": "{{ properties.owner.assignedTo }}",
   "plan_status": "{{ properties.status|resilient_substitute('{"Closed": "C", "Active": "A", "New": "A"}') }}",
   "severity_code": "{{ properties.severity|resilient_substitute('{"Informational": "Low"}') }}",
   "properties": {
@@ -692,7 +689,7 @@ If your Sentinel login users differ from SOAR users, modify the `owner_id` mappi
   {# JINJA template for closing a new Resilient incident from a Sentinel incident. #}
   "plan_status": "C",
   "resolution_id": "Resolved",
-  "resolution_summary": "Closed from Sentinel",
+  "resolution_summary": "Closed by Sentinel",
   "properties": {
     "sentinel_incident_status": "{{ properties.status }}",
     "sentinel_incident_classification": "{{ properties.classification }}",
@@ -710,13 +707,13 @@ If your Sentinel login users differ from SOAR users, modify the `owner_id` mappi
 {
     {# JINJA template for closing a new Sentinel incident from a Resilient incident. #}
     "properties": {
+        "title": "{{ name|resilient_splitpart(1)}}",
         "severity": "{{ severity_code|string|resilient_substitute('{"4": "Low", "5": "Medium", "6": "High"}') }}",
         "status": "Closed",
-        "title": "{{ name|replace('Sentinel Incident - ', '')|safe }}",
-        "classification": "{{ resolution_id|string|resilient_substitute('{"7": "Undetermined", "8": "Undetermined", "9": "FalsePositive", "10": "TruePositive"}') }}",
+        "classification": "{{ resolution_id|string|resilient_substitute('{"7": "Undetermined", "8": "Undetermined", "9": "FalsePositive", "10": "TruePositive", "DEFAULT": "Undetermined"}') }}",
         "classificationComment": "{{ resolution_summary|striptags|safe }}",
         {# modify as necessary #}
-        "classificationReason": "{{ resolution_id|string|resilient_substitute('{"7": "", "8": "", "9": "InaccurateData", "10": "SuspiciousActivity"}') }}"
+        "classificationReason": "{{ resolution_id|string|resilient_substitute('{"7": "", "8": "", "9": "InaccurateData", "10": "SuspiciousActivity", "DEFAULT": ""}') }}"
     }
 }
 ```
@@ -726,9 +723,9 @@ If your Sentinel login users differ from SOAR users, modify the `owner_id` mappi
 {
     {# JINJA template for updating a new Sentinel incident from a Resilient incident. #}
     "properties": {
+        "title": "{{ name|resilient_splitpart(1)}}",
         "severity": "{{ severity_code|string|resilient_substitute('{"4": "Low", "5": "Medium", "6": "High"}') }}",
         "status": "{{ properties.sentinel_incident_status }}",
-        "title": "{{ name|replace('Sentinel Incident - ', '')|safe }}",
         "classification": "{{ properties.sentinel_incident_classification }}",
         "classificationComment": "{{ properties.sentinel_incident_classification_comment|safe }}",
         "classificationReason": "{{ properties.sentinel_incident_classification_reason }}",
