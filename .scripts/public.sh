@@ -94,6 +94,7 @@ fn_pastebin
 fn_phish_ai
 fn_phish_tank
 fn_pipl
+fn_playbook_utils
 fn_proofpoint_tap
 fn_proofpoint_trap
 fn_pulsedive
