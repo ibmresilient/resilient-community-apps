@@ -82,6 +82,7 @@ fn_mcafee_esm
 fn_mcafee_opendxl
 fn_mcafee_tie
 fn_microsoft_security_graph
+fn_microsoft_sentinel
 fn_misp
 fn_mitre_integration
 fn_mxtoolbox
