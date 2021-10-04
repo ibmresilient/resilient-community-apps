@@ -1,7 +1,9 @@
+# docker build -t ibmresilient/fn_google_cloud_dlp:1.1.0 -t ibmresilient/fn_google_cloud_dlp:latest .
+
 # Base image using Red Hat's universal base image (rhel 8) for python
 FROM registry.access.redhat.com/ubi8/python-36:latest
 
-ARG APPLICATION=fn_qradar_integration
+ARG APPLICATION=fn_google_cloud_dlp
 ARG RESILIENT_CIRCUITS_VERSION=39
 ARG PATH_RESILIENT_CIRCUITS=rescircuits
 
@@ -36,6 +38,10 @@ RUN pip install /tmp/packages/${APPLICATION}-*.tar.gz
 
 # uncomment to expose port only if a custom threat feed
 #EXPOSE 9000
+
+# set environment variable for authentication
+ENV GOOGLE_APPLICATION_CREDENTIALS=/var/rescircuits/service_account_key.json
+
 ## ---- end section for changes ----
 
 # set up configuration and log locations using /etc and /var/log, the conventional locations for config and logs
