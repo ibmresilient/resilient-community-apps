@@ -38,6 +38,7 @@ class TestFuncAwsGuarddutyPoller:
     @patch('fn_aws_guardduty.lib.aws_gd_cli_man.AwsGdClient', side_effect=mocked_gd_client)
     @patch('fn_aws_guardduty.lib.aws_gd_poller.ResSvc', side_effect=mocked_ResSvc)
     def test_run(self, mock_svc, mock_cli, mock_res):
+        mock_res.names = ("MagicMock",)
         aws_gd_poller = FuncAwsGuarddutyPoller(get_opt())
         time.sleep(1)
         threads = [t for t in aws_gd_poller.threads if t.is_alive()]

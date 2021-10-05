@@ -6,6 +6,7 @@ fn_anomali_staxx
 fn_ansible
 fn_ansible_tower
 fn_api_void
+fn_aws_guardduty
 fn_aws_iam
 fn_aws_utilities
 fn_bigfix
@@ -95,7 +96,6 @@ fn_xforce
 fn_zia
 
 #Not_Rebuilt
-#fn_aws_guardduty-failing-test
 #fn_crowdstrike_falcon-still-root-group
 #rc-data-feed
 #rc-data-feed-plugin-elasticfeed
