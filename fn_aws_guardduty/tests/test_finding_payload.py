@@ -3,6 +3,7 @@
 # pragma pylint: disable=unused-argument, no-self-use
 """ Test AWS GuardDuty poller class. """
 import sys
+from collections import OrderedDict
 from threading import Thread
 
 from mock import patch, MagicMock
@@ -85,7 +86,7 @@ class TestParseFinding:
         for table_id in const.DATA_TABLE_IDS:
             assert "query_execution_date" in result.data_tables[table_id][0]["cells"]
             result.data_tables[table_id][0]["cells"]["query_execution_date"] = {"value": time_stamp}
-        assert result.data_tables == expected_results_2
+        assert OrderedDict(sorted(result.data_tables.items())) == OrderedDict(sorted(expected_results_2.items()))
 
     @pytest.mark.parametrize("finding, expected_results", [
         (get_cli_raw_responses("get_findings")["Findings"][0], get_mocked_results("replace_datetime"))
