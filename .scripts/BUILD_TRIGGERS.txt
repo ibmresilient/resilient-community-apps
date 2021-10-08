@@ -1,2 +1,1 @@
 #
-# build fn_qradar_enhanced_data
