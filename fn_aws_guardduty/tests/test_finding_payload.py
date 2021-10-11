@@ -84,16 +84,13 @@ class TestParseFinding:
         keys = ["gd_finding_overview", "gd_instance_details", "gd_access_key_details", "gd_resource_affected",
                 "gd_action_details", "gd_s3_bucket_details"]
         result =  ParseFinding(**mock_inputs)
-        print(mock_inputs)
         assert_attribs_in(result, *expected_attribs)
         assert sorted(result.payload) == sorted(expected_results_1)
         for table_id in const.DATA_TABLE_IDS:
             assert "query_execution_date" in result.data_tables[table_id][0]["cells"]
             result.data_tables[table_id][0]["cells"]["query_execution_date"] = {"value": time_stamp}
-        for k in keys:
-            assert_keys_in(result.data_tables, *keys)
+        assert_keys_in(result.data_tables, *keys)
         if version_info.major == 3:
-            pytest.skip("testing assertion for python 3 only", allow_module_level=True)
             assert result.data_tables == expected_results_2
 
     @pytest.mark.parametrize("finding, expected_results", [
