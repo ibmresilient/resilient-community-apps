@@ -116,7 +116,7 @@ for image_name in "${IMAGE_NAMES[@]}"; do
     if source_is_quay $SOURCE $DEST; then
         # grab image versions from quay api
         # these tags are put in an array to be looped over and all pulled then tagged for dest
-        version_tags=( $(curl "https://$QUAY_API_URL/repository/$QUAY_USERNAME/$image_name/tag/" | jq -r ".tags[].name") )
+        version_tags=( $(curl "https://$QUAY_API_URL/repository/$QUAY_USERNAME/$image_name/tag/?onlyActiveTags=true" | jq -r ".tags[].name") )
     elif source_is_icr $SOURCE $DEST; then
         # grab image version and image name from ICR by chopping up $image_name 
         # which will be in format: "icr.io/ibmresilient/<image_name>:<image_tag>"
