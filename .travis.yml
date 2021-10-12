@@ -218,6 +218,7 @@ matrix:
       services:
         - docker
       install:
+        - sudo apt-get update
         - pip install -U -r "$PATH_PIP_REQ_MAIN"
         - pip install resilient-sdk
         - sudo apt-get install jq
@@ -239,6 +240,7 @@ matrix:
       services:
         - docker
       install:
+        - sudo apt-get update
         - sudo apt-get install jq
         - ./.scripts/install_ibmcli.sh
       script:
