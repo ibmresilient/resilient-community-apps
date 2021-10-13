@@ -51,6 +51,7 @@ fn_microsoft_sentinel
 fn_misp
 fn_mitre_integration
 fn_mxtoolbox
+fn_netdevice
 fn_odbc_query
 fn_outbound_email
 fn_pa_panorama
@@ -123,7 +124,6 @@ rc-cts-urlscanio
 #fn_log_capture
 #fn_machine_learning
 #fn_machine_learning_nlp
-#fn_netdevice
 #fn_rsa_netwitness
 #fn_symantec_dlp
 #fn_thug
