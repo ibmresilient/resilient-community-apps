@@ -15,7 +15,7 @@ ENV APP_HOST_CONTAINER=${APP_HOST_CONTAINER}
 USER 0
 
 # Update to latest pip
-RUN pip install -U pip==21.1.3
+RUN pip install --upgrade pip
 
 # install resilient-circuits
 RUN pip install "resilient-circuits>=${RESILIENT_CIRCUITS_VERSION}"

@@ -190,7 +190,7 @@ matrix:
       install: skip
       script: skip
       before_deploy:
-         - pip install resilient-sdk -i $PYPI_INDEX_TO_USE
+        - pip install resilient-sdk -i $PYPI_INDEX_TO_USE
       deploy:
         - provider: script
           script: .scripts/build_image_and_app_zip.sh "$PACKAGE_NAME" "DEV" "$PYPI_INDEX_TO_USE";
