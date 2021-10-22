@@ -8,7 +8,7 @@ from resilient import SimpleHTTPException
 from resilient_lib import IntegrationError
 from cachetools import cached, LRUCache
 
-DEFENDER_ALERT_ID_FIELD = "defender_alert_id"
+DEFENDER_INCIDENT_ID = "defender_incident_id"
 
 COMMENT_ID_DATATABLE = "sentinel_comment_ids"
 COMMENT_FIELD_SENTINEL_ID = "comment_id"
@@ -21,11 +21,11 @@ class ResilientCommon():
     def __init__(self, rest_client):
         self.rest_client = rest_client
 
-    def find_incident(self, defender_alert_id):
+    def find_incident(self, defender_incident_id):
         """Find a Resilient incident which contains a custom field associated with a Defender
              alert
         Args:
-            defender_alert_id ([str]): [defender alert id]
+            defender_incident_id ([str]): [defender incident id]
         Returns:
             [dict]: [API results of the first incident found]
         """
@@ -35,9 +35,9 @@ class ResilientCommon():
             'filters': [{
                 'conditions': [
                     {
-                        'field_name': 'properties.{0}'.format(DEFENDER_ALERT_ID_FIELD),
+                        'field_name': 'properties.{0}'.format(DEFENDER_INCIDENT_ID),
                         'method': 'equals',
-                        'value': "{}".format(defender_alert_id)
+                        'value': defender_incident_id
                     }
                 ]
             }],

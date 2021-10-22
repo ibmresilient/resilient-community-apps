@@ -19,7 +19,7 @@ from fn_microsoft_defender.lib.defender_common import DefenderAPI, PACKAGE_NAME,
     DEFAULT_INCIDENT_CLOSE_TEMPLATE
 
 POLLER_CHANNEL = "defender_poller"
-TICKET_ID_FIELDNAME = "defender_alert_id"
+TICKET_ID_FIELDNAME = "defender_incident_id"
 
 DEFAULT_POLLER_LOOBACK_MINUTES = 120
 
@@ -102,12 +102,12 @@ class DefenderPollerComponent(ResilientComponent):
 
     def _escalate(self):
         """ This is the main logic of the poller
-            Search for Defender alerts and create associated cases in Resilient SOAR
+            Search for Defender incidents and create associated cases in Resilient SOAR
         """
         poller_start = datetime.datetime.utcnow()
         try:
-            # call Defender for recently updated/created alerts
-            result, status, reason  = self.defender_client.query_alerts(self.last_poller_time)
+            # call Defender for recently updated/created incidents
+            result, _status, _reason  = self.defender_client.query_incidents(self.last_poller_time)
 
             self._parse_results(result)
 
@@ -130,77 +130,77 @@ class DefenderPollerComponent(ResilientComponent):
         return datetime.datetime.utcnow() - datetime.timedelta(minutes=polling_lookback)
 
     def _parse_results(self, result):
-        """[create resilient incidents if the result alerts haven't already by been created]
+        """[create resilient incidents if the result defender incidents haven't already by been created]
 
         Args:
-            result ([dict]): [results for getting defender alerts]
+            result ([dict]): [results for getting defender incidents]
         """
-        for defender_alert in result.get("value", []):
+        for defender_incident in result.get("value", []):
             # determine if an incident already exists, used to know if create or update
-            defender_alert_id = get_defender_alert_id(defender_alert)
-            resilient_incident = self.resilient_common.find_incident(defender_alert_id)
+            defender_incident_id = get_defender_incident_id(defender_incident)
+            resilient_incident = self.resilient_common.find_incident(defender_incident_id)
 
-            result_resilient_incident = self._create_update_incident(defender_alert, resilient_incident,
+            result_resilient_incident = self._create_update_incident(defender_incident, resilient_incident,
                                                                      self.new_incident_filters)
 
 
-    def _create_update_incident(self, defender_alert, resilient_incident, new_incident_filters):
-        """[perform the operations on the defender alert: create, update or close]
+    def _create_update_incident(self, defender_incident, resilient_incident, new_incident_filters):
+        """[perform the operations on the defender incident: create, update or close]
 
         Args:
-            defender_alert ([dict]): [defender to act upon]
+            defender_incident ([dict]): [defender to act upon]
             resilient_incident ([dict]): [existing resilient or none]
             new_incident_filters ([dict]): [filter to apply to new incidents]
 
         Returns:
             resilient_incident ([dict])
         """
-        defender_alert_id = get_defender_alert_id(defender_alert)
+        defender_incident_id = get_defender_incident_id(defender_incident)
         # resilient incident found
         updated_resilient_incident = None
         if resilient_incident:
             resilient_incident_id = resilient_incident['id']
             if resilient_incident["plan_status"] == "C":
-                LOG.info("Bypassing update to closed incident %s from Defender alert %s",
-                            resilient_incident_id, defender_alert_id)
-            elif defender_alert['status'] == "Resolved":
+                LOG.info("Bypassing update to closed incident %s from Defender incident %s",
+                            resilient_incident_id, defender_incident_id)
+            elif defender_incident['status'] == "Resolved":
                 # close the incident
                 incident_payload = self.jinja_env.make_payload_from_template(
                                                     self.options.get("close_incident_template"),
                                                     DEFAULT_INCIDENT_CLOSE_TEMPLATE,
-                                                    defender_alert)
+                                                    defender_incident)
                 updated_resilient_incident = self.resilient_common.close_incident(
                                                     resilient_incident_id,
                                                     incident_payload
                                                 )
-                LOG.info("Closed incident %s from Defender alert %s",
-                         resilient_incident_id, defender_alert_id)
+                LOG.info("Closed incident %s from Defender incident %s",
+                         resilient_incident_id, defender_incident_id)
             else:
                 # update an defender incident
                 incident_payload = self.jinja_env.make_payload_from_template(
                                                     self.options.get("update_incident_template"),
                                                     DEFAULT_INCIDENT_UPDATE_TEMPLATE,
-                                                    defender_alert)
+                                                    defender_incident)
                 updated_resilient_incident = self.resilient_common.update_incident(
                                                     resilient_incident_id,
                                                     incident_payload
                                                 )
-                LOG.info("Updated incident %s from Defender alert %s",
-                         resilient_incident_id, defender_alert_id)
+                LOG.info("Updated incident %s from Defender incident %s",
+                         resilient_incident_id, defender_incident_id)
         else:
             # apply filters to only escalate certain alerts
-            if check_incident_filters(defender_alert, new_incident_filters):
+            if check_incident_filters(defender_incident, new_incident_filters):
                 # create a new incident
                 incident_payload = self.jinja_env.make_payload_from_template(
                                                     self.options.get("create_incident_template"),
                                                     DEFAULT_INCIDENT_CREATION_TEMPLATE,
-                                                    defender_alert)
+                                                    defender_incident)
                 updated_resilient_incident = self.resilient_common.create_incident(incident_payload)
-                LOG.info("Created incident %s from Defender alert %s",
-                         updated_resilient_incident['id'], defender_alert_id)
+                LOG.info("Created incident %s from Defender incident %s",
+                         updated_resilient_incident['id'], defender_incident_id)
             else:
-                LOG.info("Defender alert %s bypassed due to new_incident_filters",
-                         defender_alert_id)
+                LOG.info("Defender incident %s bypassed due to new_incident_filters",
+                         defender_incident_id)
                 updated_resilient_incident = None
 
         return updated_resilient_incident
@@ -224,11 +224,11 @@ def get_profile_filters(str_filters):
         LOG.error('Incorrect format for new_incident_filters, syntax: "field1": "value, "field2": ["value1", "value2"] :%s',
                   err)
 
-def check_incident_filters(defender_alert, new_incident_filters):
+def check_incident_filters(defender_incident, new_incident_filters):
     """apply the app.config profile filters to determine which incidents to escalate
 
     Args:
-        defender_alert ([dict]): [sentinel incident fields]
+        defender_incident ([dict]): [sentinel incident fields]
         new_incident_filters ([dict]): [filters to apply]
 
     Returns:
@@ -242,33 +242,33 @@ def check_incident_filters(defender_alert, new_incident_filters):
 
     for filter_name, filter_value in new_incident_filters.items():
         result = None
-        if filter_name in defender_alert:
+        if filter_name in defender_incident:
             if isinstance(filter_value, list):
                 result = False
                 for value in filter_value:
-                    if isinstance(defender_alert[filter_name], list):
-                        result = bool(value in defender_alert[filter_name])
+                    if isinstance(defender_incident[filter_name], list):
+                        result = bool(value in defender_incident[filter_name])
                     else:
-                        result = bool(value == defender_alert[filter_name])
+                        result = bool(value == defender_incident[filter_name])
                     # just need one to match for one pass
                     if result:
                         break
-            elif isinstance(defender_alert[filter_name], list):
-                result = bool(filter_value in defender_alert[filter_name])
+            elif isinstance(defender_incident[filter_name], list):
+                result = bool(filter_value in defender_incident[filter_name])
             else:
-                result = bool(filter_value == defender_alert[filter_name])
+                result = bool(filter_value == defender_incident[filter_name])
 
-        if result != None:
+        if result is not None:
             result_list.append(result)
 
     return all(result_list)
 
-def get_defender_alert_id(defender_alert):
+def get_defender_incident_id(defender_incident):
     """
     Returns:
-        [str]: [defender_alert_id or None if not found]
+        [str]: [defender_incident_id or None if not found]
     """
-    if not defender_alert:
+    if not defender_incident:
         return None
 
-    return defender_alert['id']
+    return defender_incident['incidentId']

@@ -7,7 +7,7 @@
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import ResultPayload, readable_datetime, validate_fields
-from fn_microsoft_defender.lib.defender_common import DefenderAPI, convert_date, ALERTS_URL, ALERTS_EXPAND_PARAMS, PACKAGE_NAME
+from fn_microsoft_defender.lib.defender_common import DefenderAPI, convert_date, ALERTS_URL, EXPAND_PARAMS, PACKAGE_NAME
 
 FUNCTION = "defender_alert_search"
 
@@ -72,7 +72,7 @@ class FunctionComponent(ResilientComponent):
             if filters:
                 params['$filter'] = "+and+".join(filters)
 
-            params = {**params, **ALERTS_EXPAND_PARAMS}
+            params = {**params, **EXPAND_PARAMS}
             log.debug(params)
 
             alert_payload, status, reason = defender_api.call(ALERTS_URL, payload=params)

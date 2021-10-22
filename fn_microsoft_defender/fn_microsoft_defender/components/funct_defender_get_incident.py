@@ -3,20 +3,14 @@
 """AppFunction implementation"""
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from fn_microsoft_defender.lib.defender_common import DefenderAPI, ALERTS_URL, EXPAND_PARAMS, PACKAGE_NAME
+from resilient_lib import IntegrationError, validate_fields
+from fn_microsoft_defender.lib.defender_common import DefenderAPI, INCIDENTS_URL, PACKAGE_NAME
 
-FN_NAME = "defender_get_related_alert_information"
-ALERT_TYPES = {
-    'Files': 'files',
-    'Devices': 'machine',
-    'Domains': 'domains',
-    'Files': 'files',
-    'IPs': 'ips',
-    'Users': 'user'
-}
+FN_NAME = "defender_get_incident"
+
 
 class FunctionComponent(AppFunctionComponent):
-    """Component that implements function 'defender_get_related_alert_information'"""
+    """Component that implements function 'defender_get_incident'"""
 
     def __init__(self, opts):
         super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
@@ -24,16 +18,14 @@ class FunctionComponent(AppFunctionComponent):
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """
-        Function: Get a Defender ATP machine alert details
+        Function: Get a Defender 365 Incident
         Inputs:
-            -   fn_inputs.defender_alert_info
-            -   fn_inputs.defender_alert_id
+            -   fn_inputs.defender_incident_id
         """
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
 
-        alert_id = fn_inputs.defender_alert_id
-        alert_info = fn_inputs.defender_alert_info
+        incident_id = fn_inputs.defender_incident_id
 
         defender_api = DefenderAPI(self._app_configs_as_dict['tenant_id'],
                                    self._app_configs_as_dict['client_id'],
@@ -41,22 +33,16 @@ class FunctionComponent(AppFunctionComponent):
                                    self.opts,
                                    self._app_configs_as_dict)
 
-        if 'All' in alert_info:
-            alert_info = ALERT_TYPES.keys()
-
-        result = {}
-        for type in alert_info:
-            url = '/'.join([ALERTS_URL, alert_id, ALERT_TYPES.get(type)])
-            alert_payload, status, reason = defender_api.call(url, payload=EXPAND_PARAMS)
-            self.LOG.debug(alert_payload)
-            result[type] = alert_payload.get('value') if alert_payload.get('value') else alert_payload
-
+        url = '/'.join([INCIDENTS_URL, str(incident_id)])
+        incident_payload, status, reason = defender_api.call(url)
+        self.LOG.debug(incident_payload)
+        results = incident_payload
 
         # Example validating app_configs
         # validate_fields([
         #     {"name": "api_key", "placeholder": "<your-api-key>"},
         #     {"name": "base_url", "placeholder": "<api-base-url>"}],
-        #     self._app_configs_as_dict)
+        #     self.options)
 
         # Example getting access to self.get_fn_msg()
         # fn_msg = self.get_fn_msg()
@@ -87,5 +73,5 @@ class FunctionComponent(AppFunctionComponent):
 
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
 
-        yield FunctionResult(result)
+        yield FunctionResult(results)
         # yield FunctionResult({}, success=False, reason="Bad call")

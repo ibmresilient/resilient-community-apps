@@ -3,13 +3,15 @@
 # (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
 import calendar
 import logging
-import json
+import rapidjson
+import re
 import os
 import time
-from resilient_circuits.template_functions import render_json, environment
+from resilient_circuits.template_functions import environment, render
 
 LOG = logging.getLogger(__name__)
 
+DUPLICATE_COMMAS = re.compile(r',\s*,')
 class JinjaEnvironment():
     def __init__(self):
         # Add the timestamp-parse function to the global JINJA environment
@@ -89,7 +91,7 @@ def jinja_resilient_substitute(value, json_str):
     Returns:
         [str]: [replacement value or original value if no replacement found]
     """
-    replace_dict = json.loads(json_str)
+    replace_dict = rapidjson.loads(json_str)
     if value in replace_dict:
         return replace_dict[value]
 
@@ -97,4 +99,28 @@ def jinja_resilient_substitute(value, json_str):
     if 'DEFAULT' in replace_dict:
         return replace_dict['DEFAULT']
 
+    return value
+
+def render_json(template, data):
+    """Render data into a template, producing a JSON result
+       Also clean up any "really bad" control characters to avoid failure.
+
+       >>> d = {"value": "the" + chr(10) + "new" + chr(10) + "thing"}
+       >>> render_json('{"result":"{{value}}"}', d)
+       {u'result': u'the new thing'}
+
+       >>> d = {"value": "the" + chr(1) + "new" + chr(9) + "thing"}
+       >>> render_json('{"result":"{{value}}"}', d)
+       {u'result': u'the new thing'}
+    """
+    result = render(template, data)
+    for n in range(1, 32):
+        result = result.replace(chr(n), " ")
+    try:
+        # remove duplicate commas
+        result = DUPLICATE_COMMAS.sub(',', result)
+        value = rapidjson.loads(result, parse_mode=rapidjson.PM_TRAILING_COMMAS)
+    except:
+        LOG.info(result)
+        raise
     return value

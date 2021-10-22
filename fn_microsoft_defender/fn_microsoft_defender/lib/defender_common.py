@@ -12,6 +12,7 @@ from simplejson.errors import JSONDecodeError
 
 PACKAGE_NAME = "fn_microsoft_defender"
 
+INCIDENTS_URL = "api/incidents"
 INDICATOR_URL = "api/indicators"
 MACHINES_URL = "api/machines"
 MACHINE_ACTIONS_URL = "api/machineactions"
@@ -20,18 +21,22 @@ PACKAGE_URI = "GetPackageUri"
 FILES_URL = "api/files/{}"
 FILES_URL_BY_MACHINE = "/".join([FILES_URL, "machines"])
 MACHINES_FILTER = {
-     "filter_by_name": "startswith(computerDnsName,'{}')"
+     "filter_by_name": "startswith(computerDnsName,'{}')",
+     "filter_by_id": "id+eq+'{}'"
 }
 ALERTS_URL = "api/alerts"
-ALERTS_EXPAND_PARAMS = {
+EXPAND_PARAMS = {
     "$expand": "evidence"
 }
 
+# authentication
 AUTH_URL = "https://login.microsoftonline.com/{tenant_id}" # /v2.0  https://login.microsoftonline.com/82319d65-80f7-431f-8ee7-57bae5b231c2/oauth2/token
-RESOURCE_URI = "https://api.securitycenter.windows.com"
+RESOURCE_URI = "https://api.security.microsoft.com"
 DEFENDER_SCOPE = [
-    "https://securitycenter.onmicrosoft.com/windowsatpservice/.default"
+    "offline_access https://security.microsoft.com/mtp/.default"
 ]
+# "https://securitycenter.onmicrosoft.com/windowsatpservice/.default" "https://graph.microsoft.com/.default"
+DEFENDER_AUTH_URL = "https://login.windows.net/{tenant_id}/oauth2/token"
 
 
 DEFAULT_DEFENDER_UPDATE_ALERT_TEMPLATE = "data/defender_update_alert_template.jinja"
@@ -142,6 +147,27 @@ class DefenderAPI():
 
         return result, status, reason
 
+    def query_incidents(self, last_poller_datetime):
+        """Query Defender for all incidents created within the last polling window. If first time,
+              then use a lookback value.
+        Args:
+            last_poller_datetime ([number]): [epoch value of last time poller ran]
+        Returns:
+            result [dict]: API results
+            status [bool]: True if API call was successful
+            reason [str]: Reason of error when status=False
+        """
+
+        # build filter information
+        payload = {
+            "$filter": self._make_createdate_filter(last_poller_datetime)
+        }
+
+        result, status, reason = self.call(INCIDENTS_URL, payload=payload)
+
+        LOG.debug("%s:%s:%s", status, reason, result)
+        return result, status, reason
+
     def query_alerts(self, last_poller_datetime):
         """Query Defender for all alerts created within the last polling window. If first time,
               then use a lookback value.
@@ -157,7 +183,7 @@ class DefenderAPI():
         payload = {
             "$filter": self._make_createdate_filter(last_poller_datetime)
         }
-        payload = {**payload, **ALERTS_EXPAND_PARAMS}
+        payload = {**payload, **EXPAND_PARAMS}
 
         result, status, reason = self.call(ALERTS_URL, payload=payload)
 
