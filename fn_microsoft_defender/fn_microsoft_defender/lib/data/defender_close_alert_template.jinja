@@ -1,5 +1,5 @@
 {
-    {# JINJA template for closing a new Sentinel incident from a Resilient incident. #}
+    {# JINJA template for closing a new Defender alert #}
     "properties": {
         "severity": "{{ severity|string|resilient_substitute('{"4": "Low", "5": "Medium", "6": "High"}') }}",
         "status": "Closed",

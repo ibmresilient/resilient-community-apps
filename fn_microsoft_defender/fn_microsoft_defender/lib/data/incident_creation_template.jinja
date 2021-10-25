@@ -29,6 +29,11 @@
   "artifacts": [
     {% for alert in alerts %}
      {% for item in alert.entities %}
+      {% if item.deviceId %}
+        {% set machine_comment = 'Associated with machine id: ' + item.deviceId %}
+      {% else %}
+        {% set machine_comment = '' %}
+      {% endif %}
       {% set artifactFlg = False %}
       {% if item.entityType == 'Ip' %}
       {% set artifactFlg = True %}
@@ -39,7 +44,7 @@
         "value": "{{ item.ipAddress }}",
         "description": {
           "format": "text",
-          "content": "creation date: {{ item.evidenceCreationTime }}"
+          "content": "creation date: {{ item.evidenceCreationTime }}\n{{ machine_comment }}"
         }
       }
       {% elif item.entityType == 'User' and item.userPrincipalName %}
@@ -51,7 +56,7 @@
         "value": "{{ item.userPrincipalName }}",
         "description": {
           "format": "text",
-          "content": "creation date: {{ item.evidenceCreationTime }}"
+          "content": "creation date: {{ item.evidenceCreationTime }}\n{{ machine_comment }}"
         }
       }
       {% elif item.entityType == 'Process' and item.processCommandLine %}
@@ -63,7 +68,7 @@
         "value": "{{ item.processCommandLine[:100]|replace('\\', '\\\\')|replace('"', '\\"') }}",
         "description": {
           "format": "text",
-          "content": "creation date: {{ item.evidenceCreationTime }}"
+          "content": "creation date: {{ item.evidenceCreationTime }}\n{{ machine_comment }}"
         }
       }
       {% elif item.entityType == 'Process' and not item.processCommandLine and item.fileName %}
@@ -75,7 +80,7 @@
         "value": "{{ item.fileName|replace('\\', '\\\\')|replace('"', '\\"') }}",
         "description": {
           "format": "text",
-          "content": "creation date: {{ item.evidenceCreationTime }}\nFile Path: {{ item.filePath|replace('\\', '\\\\')|replace('"', '\\"') }}"
+          "content": "creation date: {{ item.evidenceCreationTime }}\nFile Path: {{ item.filePath|replace('\\', '\\\\')|replace('"', '\\"') }}\n{{ machine_comment }}"
         }
       }
       {% elif item.entityType == 'Url' and item.url %}
@@ -87,7 +92,7 @@
         "value": "{{ item.url }}",
         "description": {
           "format": "text",
-          "content": "creation date: {{ item.evidenceCreationTime }}"
+          "content": "creation date: {{ item.evidenceCreationTime }}\n{{ machine_comment }}"
         }
       }
       {% elif item.entityType == 'File' %}
@@ -99,7 +104,7 @@
         "value": "{{ item.fileName }}",
         "description": {
           "format": "text",
-          "content": "creation date: {{ item.evidenceCreationTime }}\nfile path: {{ item.filePath|replace('\\', '\\\\') }}"
+          "content": "creation date: {{ item.evidenceCreationTime }}\nfile path: {{ item.filePath|replace('\\', '\\\\') }}\n{{ machine_comment }}"
         }
       }
       {% if item.sha1 %}
@@ -110,7 +115,7 @@
         "value": "{{ item.sha1 }}",
         "description": {
           "format": "text",
-          "content": "creation date: {{ item.evidenceCreationTime }}\nfile name: {{ item.fileName }}"
+          "content": "creation date: {{ item.evidenceCreationTime }}\nfile name: {{ item.fileName }}\n{{ machine_comment }}"
         }
       }
       {% endif %}
@@ -122,7 +127,7 @@
         "value": "{{ item.sha256 }}",
         "description": {
           "format": "text",
-          "content": "creation date: {{ item.evidenceCreationTime }}\nfile name: {{ item.fileName }}"
+          "content": "creation date: {{ item.evidenceCreationTime }}\nfile name: {{ item.fileName }}\n{{ machine_comment }}"
         }
       }
       {% endif %}
@@ -135,7 +140,7 @@
         "value": "{{ item.registryHive|lower }}\\{{ item.registryKey|replace('\\', '\\\\') }}",
         "description": {
           "format": "text",
-          "content": "creation date: {{ item.evidenceCreationTime }} }}"
+          "content": "creation date: {{ item.evidenceCreationTime }} }}\n{{ machine_comment }}"
         },
         "properties":[
           {
@@ -153,7 +158,7 @@
         "value": "{{ item.sender|replace('"', '\\"') }}",
         "description": {
           "format": "text",
-          "content": "creation date: {{ item.evidenceCreationTime }}"
+          "content": "creation date: {{ item.evidenceCreationTime }}\n{{ machine_comment }}"
         }
       },
       {
@@ -163,7 +168,7 @@
         "value": "{{ item.recipient|replace('"', '\\"') }}",
         "description": {
           "format": "text",
-          "content": "creation date: {{ item.evidenceCreationTime }}"
+          "content": "creation date: {{ item.evidenceCreationTime }}\n{{ machine_comment }}"
         }
       },
       {
@@ -173,13 +178,24 @@
         "value": "{{ item.subject|replace('"', '\\"') }}",
         "description": {
           "format": "text",
-          "content": "creation date: {{ item.evidenceCreationTime }}"
+          "content": "creation date: {{ item.evidenceCreationTime }}\n{{ machine_comment }}"
         }
       }
       {% endif %}
       ,
      {% endfor %}
      {% if artifactFlg and not loop.last %},{% endif %}
+    {% endfor %}
+  ],
+  "comments": [
+    {% for comment in comments %}
+      {
+        "text": {
+          "format": "text",
+          "content": "Defender Incident comment: {{ comment.createdTime }}\n{{ comment.comment }}"
+        }
+      }
+      {% if not loop.last %},{% endif %}
     {% endfor %}
   ]
 }

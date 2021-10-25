@@ -12,5 +12,18 @@
   "properties": {
     "defender_classification": "{{ classification|replace('"', '\\"') }}",
     "defender_determination": "{{ determination|replace('"', '\\"') }}"
-  }
+  },
+  "comments": [
+    {# doesn't work for poller restarts #}
+    {% for comment in comments %}
+      {% if resilient_datetimeformat(comment.createdTime) > soar_poller_time %}
+        {
+          "text": {
+            "format": "text",
+            "content": "string"
+          }
+        },
+      {% endif %}
+    {%
+  ]
 }

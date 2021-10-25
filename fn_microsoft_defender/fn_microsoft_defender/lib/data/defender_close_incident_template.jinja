@@ -1,0 +1,21 @@
+{
+    {# JINJA template for closing a new Defender incident from a Resilient incident. #}
+    "status": "{{ defender_incident_status }}",
+    {% if defender_classification %}
+    "classification": "{{ defender_classification }}",
+    {% endif %}
+    {# "determine" is set only when classification is TruePositive. Change as necessary #}
+    {% if defender_classification == "TruePositive" %}
+      {% if defender_determination %}
+        "determination": "{{ defender_determination }}",
+      {% endif %}
+    {% endif %}
+    "comments": [
+          {
+              "comment": "Closed by IBM SOAR"
+          },
+          {
+              "comment": "{{ defender_comment|striptags|safe }}"
+          }
+      ]
+}

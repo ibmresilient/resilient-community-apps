@@ -32,13 +32,22 @@ EXPAND_PARAMS = {
 # authentication
 AUTH_URL = "https://login.microsoftonline.com/{tenant_id}" # /v2.0  https://login.microsoftonline.com/82319d65-80f7-431f-8ee7-57bae5b231c2/oauth2/token
 RESOURCE_URI = "https://api.security.microsoft.com"
+# "offline_access https://security.microsoft.com/mtp/.default"
 DEFENDER_SCOPE = [
+    "offline_access https://api.securitycenter.windows.com/.default"
+]
+DEFENDER_INCIDENT_SCOPE = [
     "offline_access https://security.microsoft.com/mtp/.default"
 ]
-# "https://securitycenter.onmicrosoft.com/windowsatpservice/.default" "https://graph.microsoft.com/.default"
+"""
+"offline_access https://graph.microsoft.com/mtp/.default",
+"offline_access https://api.securitycenter.windows.com/.default",
+"offline_access https://securitycenter.onmicrosoft.com/windowsatpservice/.default"
+"""
+
 DEFENDER_AUTH_URL = "https://login.windows.net/{tenant_id}/oauth2/token"
 
-
+DEFAULT_DEFENDER_CLOSE_INCIDENT_TEMPLATE = "data/defender_close_incident_template.jinja"
 DEFAULT_DEFENDER_UPDATE_ALERT_TEMPLATE = "data/defender_update_alert_template.jinja"
 DEFAULT_DEFENDER_CLOSE_ALERT_TEMPLATE = "data/defender_close_alert_template.jinja"
 
@@ -51,7 +60,7 @@ LOG = logging.getLogger(__name__)
 class DefenderAPI():
     """[class to manage authentication and API calls to Defender ATP]
     """
-    def __init__(self, tenant_id, client_id, app_secret, opts, options, rc=None):
+    def __init__(self, tenant_id, client_id, app_secret, opts, options, scope=DEFENDER_SCOPE, rc=None):
         """build the connection class for Defender ATP
 
         Args:
@@ -60,6 +69,7 @@ class DefenderAPI():
             app_secret ([type]): [description]
             opts ([dict]): [description]
             options ([dict]): [description]
+            scope (list): [scope to use for API calls]
             rc ([object]): RequestCommon if passed in
         """
         self.api_url = options.get("api_url")
@@ -68,6 +78,7 @@ class DefenderAPI():
         else:
             self.rc = RequestsCommon(opts, options)
 
+        self.scope = scope
         authority = AUTH_URL.format(tenant_id=tenant_id)
         self.access_token = None
         self.app = ConfidentialClientApplication(
@@ -78,7 +89,7 @@ class DefenderAPI():
             timeout=self.rc.get_timeout()
         )
 
-    def defender_authenticate(self, app_scope=DEFENDER_SCOPE):
+    def defender_authenticate(self):
         """[authenticate to defender and get the access token]
 
         Args:
@@ -90,10 +101,10 @@ class DefenderAPI():
         Returns:
             [str]: [access token]
         """
-        result = self.app.acquire_token_silent(app_scope, account=None)
+        result = self.app.acquire_token_silent(self.scope, account=None)
 
         if not result:
-            result = self.app.acquire_token_for_client(scopes=app_scope)
+            result = self.app.acquire_token_for_client(scopes=self.scope)
 
         if "access_token" in result:
             self.access_token = result['access_token']

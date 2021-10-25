@@ -21,13 +21,13 @@ def codegen_reload_data():
     return {
         "package": u"fn_microsoft_defender",
         "message_destinations": [u"fn_microsoft_defender"],
-        "functions": [u"defender_alert_search", u"defender_app_execution", u"defender_collect_machine_investigation_package", u"defender_delete_indicator", u"defender_find_machines", u"defender_find_machines_by_file", u"defender_find_machines_by_filter", u"defender_get_file_information", u"defender_get_incident", u"defender_get_related_alert_information", u"defender_list_indicators", u"defender_machine_isolation", u"defender_machine_scan", u"defender_machine_vulnerabilities", u"defender_quarantine_file", u"defender_set_indicator", u"defender_update_alert", u"fn_test"],
-        "workflows": [u"defender_atp_alert_app_execution", u"defender_atp_alert_collect_machine_investigation_package", u"defender_atp_alert_machine_isolation", u"defender_atp_alert_machine_scan", u"defender_atp_alert_machine_unisolate", u"defender_atp_alert_machine_vulnerabilities", u"defender_atp_alerts_by_machine", u"defender_atp_app_execution", u"defender_atp_collect_machine_investigation_package", u"defender_atp_delete_indicator", u"defender_atp_find_machines", u"defender_atp_find_machines_by_file_hash", u"defender_atp_get_file_information", u"defender_atp_machine_isolation", u"defender_atp_machine_scan", u"defender_atp_machine_unisolate", u"defender_atp_machine_vulnerabilities", u"defender_atp_set_indicator", u"defender_atp_sync_incident_close", u"defender_atp_update_alert", u"defender_atp_update_indicator", u"defender_find_machines_by_filter", u"defender_get_incident", u"defender_get_related_alert_information", u"defender_list_indicators", u"defender_quarantine_file"],
-        "actions": [u"Create Artifact from Indicator", u"Defender ATP Alert App Execution Restriction", u"Defender ATP Alert Collect Machine Investigation Package", u"Defender ATP Alert Machine Isolate Action ", u"Defender ATP Alert Machine Scan", u"Defender ATP Alert Machine Unisolate Action", u"Defender ATP Alert Machine Vulnerabilities", u"Defender ATP Alerts by Machine", u"Defender ATP App Execution Restriction", u"Defender ATP Collect Machine Investigation Package", u"Defender ATP Find Machine by DNS name", u"Defender ATP Find Machines", u"Defender ATP Find Machines by File Hash", u"Defender ATP Get File Information", u"Defender ATP List Indicators", u"Defender ATP Machine Isolate Action", u"Defender ATP Machine Scan", u"Defender ATP Machine Vulnerabilities", u"Defender ATP Quarantine Machine File", u"Defender ATP Set Indicator", u"Defender ATP Sync Incident Close", u"Defender ATP Update Alert", u"Defender Get Incident", u"Defender Get Related Alert Information", u"Delete Indicator", u"Update Indicator"],
+        "functions": [u"defender_alert_search", u"defender_app_execution", u"defender_collect_machine_investigation_package", u"defender_delete_indicator", u"defender_find_machines", u"defender_find_machines_by_file", u"defender_find_machines_by_filter", u"defender_get_file_information", u"defender_get_incident", u"defender_get_related_alert_information", u"defender_list_indicators", u"defender_machine_isolation", u"defender_machine_scan", u"defender_machine_vulnerabilities", u"defender_quarantine_file", u"defender_set_indicator", u"defender_update_alert", u"defender_update_incident"],
+        "workflows": [u"defender_atp_alert_app_execution", u"defender_atp_alert_collect_machine_investigation_package", u"defender_atp_alert_machine_isolation", u"defender_atp_alert_machine_scan", u"defender_atp_alert_machine_unisolate", u"defender_atp_alerts_by_machine", u"defender_atp_app_execution", u"defender_atp_collect_machine_investigation_package", u"defender_atp_delete_indicator", u"defender_atp_find_machines", u"defender_atp_find_machines_by_file_hash", u"defender_atp_get_file_information", u"defender_atp_machine_isolation", u"defender_atp_machine_scan", u"defender_atp_machine_unisolate", u"defender_atp_machine_vulnerabilities", u"defender_atp_set_indicator", u"defender_atp_sync_incident_close", u"defender_atp_update_alert", u"defender_atp_update_indicator", u"defender_close_incident", u"defender_find_machines_by_filter", u"defender_get_incident", u"defender_get_related_alert_information", u"defender_list_indicators", u"defender_quarantine_file"],
+        "actions": [u"Create Artifact from Indicator", u"Defender Alerts by Machine", u"Defender App Execution Restriction", u"Defender Close Incident", u"Defender Collect Machine Investigation Package", u"Defender Find Machine by DNS name", u"Defender Find Machines", u"Defender Find Machines by File Hash", u"Defender Get File Information", u"Defender Get Incident", u"Defender Get Related Alert Information", u"Defender List Indicators", u"Defender Machine Isolate Action", u"Defender Machine Scan", u"Defender Machine Vulnerabilities", u"Defender Quarantine Machine File", u"Defender Set Indicator", u"Defender Update Alert", u"Delete Indicator", u"Update Indicator"],
         "incident_fields": [u"defender_alert_id", u"defender_category", u"defender_classification", u"defender_determination", u"defender_incident_id"],
         "incident_artifact_types": [],
         "incident_types": [],
-        "datatables": [u"defender_atp_alerts", u"defender_atp_indicators", u"defender_atp_machines"],
+        "datatables": [u"defender_alerts", u"defender_indicators", u"defender_machines"],
         "automatic_tasks": [],
         "scripts": [u"Create Artifact from Indicator"],
     }
@@ -61,14 +61,13 @@ def customization_data(client=None):
         - defender_quarantine_file
         - defender_set_indicator
         - defender_update_alert
-        - fn_test
+        - defender_update_incident
     - Workflows:
         - defender_atp_alert_app_execution
         - defender_atp_alert_collect_machine_investigation_package
         - defender_atp_alert_machine_isolation
         - defender_atp_alert_machine_scan
         - defender_atp_alert_machine_unisolate
-        - defender_atp_alert_machine_vulnerabilities
         - defender_atp_alerts_by_machine
         - defender_atp_app_execution
         - defender_atp_collect_machine_investigation_package
@@ -84,6 +83,7 @@ def customization_data(client=None):
         - defender_atp_sync_incident_close
         - defender_atp_update_alert
         - defender_atp_update_indicator
+        - defender_close_incident
         - defender_find_machines_by_filter
         - defender_get_incident
         - defender_get_related_alert_information
@@ -91,29 +91,23 @@ def customization_data(client=None):
         - defender_quarantine_file
     - Rules:
         - Create Artifact from Indicator
-        - Defender ATP Alert App Execution Restriction
-        - Defender ATP Alert Collect Machine Investigation Package
-        - Defender ATP Alert Machine Isolate Action
-        - Defender ATP Alert Machine Scan
-        - Defender ATP Alert Machine Unisolate Action
-        - Defender ATP Alert Machine Vulnerabilities
-        - Defender ATP Alerts by Machine
-        - Defender ATP App Execution Restriction
-        - Defender ATP Collect Machine Investigation Package
-        - Defender ATP Find Machine by DNS name
-        - Defender ATP Find Machines
-        - Defender ATP Find Machines by File Hash
-        - Defender ATP Get File Information
-        - Defender ATP List Indicators
-        - Defender ATP Machine Isolate Action
-        - Defender ATP Machine Scan
-        - Defender ATP Machine Vulnerabilities
-        - Defender ATP Quarantine Machine File
-        - Defender ATP Set Indicator
-        - Defender ATP Sync Incident Close
-        - Defender ATP Update Alert
+        - Defender Alerts by Machine
+        - Defender App Execution Restriction
+        - Defender Close Incident
+        - Defender Collect Machine Investigation Package
+        - Defender Find Machine by DNS name
+        - Defender Find Machines
+        - Defender Find Machines by File Hash
+        - Defender Get File Information
         - Defender Get Incident
         - Defender Get Related Alert Information
+        - Defender List Indicators
+        - Defender Machine Isolate Action
+        - Defender Machine Scan
+        - Defender Machine Vulnerabilities
+        - Defender Quarantine Machine File
+        - Defender Set Indicator
+        - Defender Update Alert
         - Delete Indicator
         - Update Indicator
     - Incident Fields:
@@ -122,12 +116,10 @@ def customization_data(client=None):
         - defender_classification
         - defender_determination
         - defender_incident_id
-        - defender_machine_id
-        - defender_machine_name
     - Data Tables:
-        - defender_atp_alerts
-        - defender_atp_indicators
-        - defender_atp_machines
+        - defender_alerts
+        - defender_indicators
+        - defender_machines
     - Scripts:
         - Create Artifact from Indicator
     """

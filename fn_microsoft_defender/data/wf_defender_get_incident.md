@@ -11,7 +11,7 @@
 `defender_get_incident`
 
 ### Output Name
-`None`
+``
 
 ### Message Destination
 `fn_microsoft_defender`
@@ -19,11 +19,61 @@
 ### Pre-Processing Script
 ```python
 inputs.defender_incident_id = incident.properties.defender_incident_id
+
 ```
 
 ### Post-Processing Script
 ```python
-None
+import java.util.Date as Date
+
+now = Date().getTime()
+
+resultz = results
+
+if resultz.success:
+    # get max alert setting
+    max_alerts = int(resultz.inputs.get('defender_alert_result_max', 0))
+    row_count = 0
+    machine_list = []
+    for alert in resultz.content.get('alerts', {}):
+        for device in alert.get('devices', {}):
+            if device['mdatpDeviceId'] not in machine_list:
+                machine_list.append(device['mdatpDeviceId'])
+                row = incident.addRow('defender_machines')
+                row['report_date'] = int(Date().getTime())
+                row['machine_id'] = device['mdatpDeviceId']
+                row['machine_name'] = device['deviceDnsName']
+                row['machine_platform'] = device['osPlatform']
+                row['machine_firstseen'] = device['firstSeen_ts']
+                row['machine_health_status'] = device.get('healthStatus')
+                row['machine_risk_score'] = device.get('riskScore')
+                row['machine_tags'] = ', '.join(device.get('tags', []))
+
+            if row_count < max_alerts or not max_alerts:
+                row = incident.addRow("defender_alerts")
+                row['report_date'] = now
+                row['alert_id'] = alert['alertId']
+                row['assigned_to'] = alert['assignedTo']
+                row['severity'] = alert['severity']
+                row['status'] = alert['status']
+                row['title'] = alert['title']
+                row['alert_description'] = alert['description']
+                row['classification'] = alert['classification']
+                row['determination'] = alert['determination']
+                row['category'] = alert['category']
+                row['mitre_techniques'] = str(' '.join(alert['mitreTechniques']))
+    
+                # include the machine inform
+                row['computer_name'] = device['deviceDnsName']
+                row['machine_id'] = device['mdatpDeviceId']
+                row['risk_score'] = device['riskScore']
+                row['first_seen'] = device['firstSeen']
+            row_count += 1
+
+else:
+    msg = u"Defender Get Incident unsuccessful.\nReason: {}".format(resultz.reason)
+    incident.addNote(msg)
+
 ```
 
 ---

@@ -16,7 +16,8 @@ from fn_microsoft_defender.lib.resilient_common import ResilientCommon
 from fn_microsoft_defender.lib.defender_common import DefenderAPI, PACKAGE_NAME, \
     DEFAULT_INCIDENT_CREATION_TEMPLATE,\
     DEFAULT_INCIDENT_UPDATE_TEMPLATE,\
-    DEFAULT_INCIDENT_CLOSE_TEMPLATE
+    DEFAULT_INCIDENT_CLOSE_TEMPLATE, \
+    DEFENDER_INCIDENT_SCOPE
 
 POLLER_CHANNEL = "defender_poller"
 TICKET_ID_FIELDNAME = "defender_incident_id"
@@ -96,7 +97,8 @@ class DefenderPollerComponent(ResilientComponent):
         self.defender_client = DefenderAPI(self.options['tenant_id'],
                                            self.options['client_id'],
                                            self.options['app_secret'],
-                                           self.opts, self.options)
+                                           self.opts, self.options,
+                                           scope=DEFENDER_INCIDENT_SCOPE)
 
         self.resilient_common = ResilientCommon(self.rest_client())
 
