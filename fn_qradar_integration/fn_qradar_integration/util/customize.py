@@ -24,7 +24,7 @@ def codegen_reload_data():
         "functions": [u"qradar_add_reference_set_item", u"qradar_delete_reference_set_item", u"qradar_find_all_reference_sets", u"qradar_find_reference_set_item", u"qradar_find_reference_sets", u"qradar_get_all_reference_tables", u"qradar_get_all_servers", u"qradar_get_reference_set_data", u"qradar_reference_set_update_item", u"qradar_reference_table_add_item", u"qradar_reference_table_delete_item", u"qradar_reference_table_get_table", u"qradar_reference_table_update_item", u"qradar_search"],
         "workflows": [u"add_a_reference_table_item", u"example_qradar__add_reference_table_item_dt", u"example_qradar__delete_reference_table_item_dt", u"example_qradar__get_all_reference_tables", u"example_qradar__update_this_reference_table_item", u"qradar_add_reference_set_item", u"qradar_find_reference_set_item", u"qradar_find_reference_sets_artifact", u"qradar_get_reference_table_data", u"qradar_move_item_to_different_ref_set", u"qradar_search_event_offense"],
         "actions": [u"Example: QRadar - Add Item to this Reference Table", u"Example: QRadar - Delete this Reference Table Item", u"Example: QRadar - Gather Reference Table Data", u"Example: QRadar - Get all Reference Tables", u"Example: QRadar - Update this Reference Table Item", u"Find All QRadar Reference Sets", u"Find in QRadar Reference Set", u"QRadar Add to Reference Set", u"QRadar Add to Reference Table", u"QRadar Move from Sample Blocked to Sample Suspected", u"Search QRadar for offense id"],
-        "incident_fields": [u"qradar_id", u"qradar_server"],
+        "incident_fields": [u"qradar_destination", u"qradar_id"],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [u"qradar_offense_event", u"qradar_reference_set", u"qradar_reference_table", u"qradar_reference_table_queried_rows"],
@@ -83,8 +83,8 @@ def customization_data(client=None):
         - QRadar Move from Sample Blocked to Sample Suspected
         - Search QRadar for offense id
     - Incident Fields:
+        - qradar_destination
         - qradar_id
-        - qradar_server
     - Data Tables:
         - qradar_offense_event
         - qradar_reference_set
