@@ -91,12 +91,12 @@ class TestQradarGetAllReferenceTables:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
-    mock_inputs_1 = {"qradar_label": "QRadar.label1"
+    mock_inputs_1 = {"qradar_label": "qradar_1_1_1_1"
     }
 
     expected_results_1 = MOCK_GET_TABLE_RESPONSE
 
-    mock_inputs_2 = {"qradar_label": "QRadar.label2"
+    mock_inputs_2 = {"qradar_label": "qradar_192_168_0_3"
     }
 
     expected_results_2 = MOCK_GET_TABLE_RESPONSE
