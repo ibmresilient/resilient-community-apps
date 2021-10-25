@@ -6,7 +6,6 @@ import logging
 import resilient
 from resilient import SimpleHTTPException
 from resilient_lib import IntegrationError
-from cachetools import cached, LRUCache
 
 DEFENDER_INCIDENT_ID = "defender_incident_id"
 
@@ -133,7 +132,7 @@ class ResilientCommon():
         except Exception as err:
             raise IntegrationError(err)
 
-    def create_incident_comment(self, incident_id, sentinel_comment_id, note):
+    def create_incident_comment(self, incident_id, note):
         """
         Add a comment to the specified Resilient Incident by ID
         :param incident_id:  Resilient Incident ID
@@ -143,15 +142,12 @@ class ResilientCommon():
         try:
             uri = u'/incidents/{0}/comments'.format(incident_id)
             note_json = {
-                'format': 'html',
+                'format': 'text',
                 'content': note
             }
             payload = {'text': note_json}
 
             comment_response = self.rest_client.post(uri=uri, payload=payload)
-            if comment_response:
-                # create a datatable reference to this comment
-                self._update_comment_datatable(incident_id, sentinel_comment_id)
 
             return comment_response
 
@@ -164,107 +160,6 @@ class ResilientCommon():
 
             comment_response = self.rest_client.get(uri=uri)
             return comment_response
-
-        except Exception as err:
-            raise IntegrationError(err)
-
-    def filter_resilient_comments(self, incident_id, sentinel_comments):
-        """
-            need to avoid creating same comments over and over
-              this logic will read a datatable of sentinel incident comment_ids
-              and remove those comments which have already sync
-            WARNING: This logic will not update an existing comment (which may have been updated)
-        Args:
-            incident_id ([str]): [resilient incident id]
-            sentinel_comments ([list]): [description]
-        Returns:
-            new_comments ([list])
-        """
-        new_comments = []
-        # get incident comments and filter out those already sync'd
-        incident_comments = self.get_comment_datatable(incident_id)
-
-        if incident_comments:
-            for comment in sentinel_comments:
-                if comment['name'] not in incident_comments:
-                    new_comments.append(comment)
-        else:
-            new_comments = sentinel_comments
-
-        LOG.info("Filtered new comments %s out of %s", len(new_comments), len(sentinel_comments))
-
-        return new_comments
-
-
-    def get_comment_datatable(self, incident_id, sort_by=COMMENT_FIELD_SENTINEL_ID):
-        """read contents of datatable containing references of sentinel incident comments
-             already sync'd
-        Args:
-            incident_id ([str]): [resilient incident id]
-            sort_by ([str], optional): [field of datatable to build the dictionary of results].
-                    Defaults to COMMENT_FIELD_SENTINEL_ID.
-        Raises:
-            IntegrationError: [description]
-        Returns:
-            [dict]: [dictionary of datatable results]
-        """
-        try:
-            # get table information of sentinel to resilient comment ids
-            uri = u'/incidents/{0}/table_data/{1}'.format(incident_id, COMMENT_ID_DATATABLE)
-            comment_response = self.rest_client.get(uri=uri)
-            # get type information of datatable
-            table_lookup = self._get_comment_datatable_fields()
-            LOG.debug(table_lookup)
-
-            response = {}
-
-            # convert datatable IDs to api names
-            for row in comment_response['rows']:
-                for cell, cell_data in row['cells'].items():
-                    if cell in table_lookup:
-                        if table_lookup[cell] == sort_by:
-                            key = cell_data.get('value')
-                        else:
-                            value = cell_data.get('value')
-                if 'key' in locals() and key:
-                    response[key] = value
-
-            return response
-        except Exception as err:
-            raise IntegrationError(err)
-
-    def _update_comment_datatable(self, incident_id, sentinel_comment_id,\
-                                  datatable_name=COMMENT_ID_DATATABLE,\
-                                  field_name=COMMENT_FIELD_SENTINEL_ID):
-        try:
-            # get table information of sentinel to resilient comment ids
-            uri = u'/incidents/{0}/table_data/{1}/row_data'.format(incident_id,
-                                                          datatable_name)
-            payload = {
-                "cells": {
-                    field_name: { "value": sentinel_comment_id }
-                }
-            }
-
-            comment_response = self.rest_client.post(uri, payload)
-        except Exception as err:
-            raise IntegrationError(err)
-
-    @cached(cache=LRUCache(maxsize=100))
-    def _get_comment_datatable_fields(self):
-        """get the datatable field information
-        Raises:
-            IntegrationError: [description]
-        Returns:
-            [dict]: [data definition of datatable]
-        """
-        try:
-            uri = u'/types/{0}/fields'.format(COMMENT_ID_DATATABLE)
-
-            comment_response = self.rest_client.get(uri=uri)
-            table_lookup = { str(field['id']): field['name'] for field in comment_response }
-
-            return table_lookup
 
         except Exception as err:
             raise IntegrationError(err)

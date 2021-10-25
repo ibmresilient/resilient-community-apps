@@ -11,7 +11,7 @@ import traceback
 from circuits import Event, Timer
 from resilient_circuits import ResilientComponent, handler
 from resilient_lib import validate_fields
-from fn_microsoft_defender.lib.jinja_common import JinjaEnvironment
+from fn_microsoft_defender.lib.jinja_common import JinjaEnvironment, jinja_resilient_datetimeformat
 from fn_microsoft_defender.lib.resilient_common import ResilientCommon
 from fn_microsoft_defender.lib.defender_common import DefenderAPI, PACKAGE_NAME, \
     DEFAULT_INCIDENT_CREATION_TEMPLATE,\
@@ -189,6 +189,10 @@ class DefenderPollerComponent(ResilientComponent):
                                                 )
                 LOG.info("Updated incident %s from Defender incident %s",
                          resilient_incident_id, defender_incident_id)
+
+                # add any recently added comments
+                self.add_comments(resilient_incident_id, defender_incident,
+                                  int(self.last_poller_time.timestamp()*1000))
         else:
             # apply filters to only escalate certain alerts
             if check_incident_filters(defender_incident, new_incident_filters):
@@ -207,6 +211,13 @@ class DefenderPollerComponent(ResilientComponent):
 
         return updated_resilient_incident
 
+    def add_comments(self, incident_id, defender_incident, last_poller_time_ms):
+        for comment in defender_incident.get("comments", {}):
+            comment_create_time = jinja_resilient_datetimeformat(comment['createdTime'])
+            LOG.debug("%s >= %s", comment_create_time, last_poller_time_ms)
+            if comment_create_time >= last_poller_time_ms:
+                note = "Defender Incident comment: {}\n{}".format(comment['createdTime'], comment['comment'])
+                self.resilient_common.create_incident_comment(incident_id, note)
 
 def get_profile_filters(str_filters):
     """convert str representation of filters into a dictionary
