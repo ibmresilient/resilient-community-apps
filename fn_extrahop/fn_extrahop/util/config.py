@@ -1,0 +1,22 @@
+# -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
+# pragma pylint: disable=unused-argument, no-self-use
+
+"""Generate a default configuration-file section for fn_extrahop"""
+
+
+def config_section_data():
+    """
+    Produce add the default configuration section to app.config,
+    for fn_extrahop when called by `resilient-circuits config [-c|-u]`
+    """
+    config_data = u"""[fn_extrahop]
+extrahop_rx_host_url = <EXTRAHOP_RX_HOST_URL>
+extrahop_rx_key_id = <EXTRAHOP_RX_API_KEY_ID>
+extrahop_rx_key_secret = <EXTRAHOP_RX_API_KEY_SECRET>
+extrahop_rx_api_version = v1
+#http_proxy=http://proxy:80
+#https_proxy=https://proxy:443
+"""
+    return config_data
+
