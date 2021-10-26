@@ -1,7 +1,10 @@
 {
     {# JINJA template for updating a Defender incident from a Resilient incident. #}
+    {% if defender_incident_status %}
+      "status": "{{ defender_incident_status }}"
+    {% endif %}
     {% if defender_classification %}
-        "classification": "{{ defender_classification }}"
+        ,"classification": "{{ defender_classification }}"
     {% endif %}
     {# "determine" is set only when classification is TruePositive. Change as necessary #}
     {% if defender_classification == "TruePositive" %}
@@ -11,7 +14,7 @@
     {% endif %}
     {% if defender_tags %}
         {% set tag_list = defender_tags.split(',') %}
-        ,"tags": {{ tag_list }}
+        ,"tags": {{ tag_list| tojson }}
     {% endif %}
     {% if defender_comment %}
         ,"comment": "Created by IBM SOAR<br>{{ defender_comment|striptags|safe }}"

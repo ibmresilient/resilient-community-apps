@@ -1,11 +1,11 @@
 {
-    {# JINJA template for updating a Defender alert from a Resilient incident. #}
+    {# JINJA template for updating a Defender alert #}
     "properties": {
         "severity": "{{ severity_code|string|resilient_substitute('{"4": "Low", "5": "Medium", "6": "High"}') }}",
-        "status": "{{ properties.sentinel_incident_status }}",
-        "classification": "{{ properties.defender_classification }}",
-        "classificationReason": "{{ properties.sentinel_incident_classification_reason }}",
-        "description": "{{ description|striptags|safe }}",
-        "labels": "{{ properties.sentinel_incident_labels }}"
+        "status": "{{ status }}",
+        "classification": "{{ classification }}",
+        "determination": "{{ determination }}",
+        "assignedTo": "{{ assignedTo }}",
+        "comment": "{{ comment }}"
     }
 }

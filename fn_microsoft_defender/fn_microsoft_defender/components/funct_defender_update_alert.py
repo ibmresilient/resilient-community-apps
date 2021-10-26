@@ -59,9 +59,10 @@ class FunctionComponent(ResilientComponent):
 
             rp = ResultPayload(PACKAGE_NAME, **kwargs)
 
-            payload = {
-                "comment": defender_description
-            }
+            payload = {}
+
+            if defender_description:
+                payload['comment'] = defender_description
             if defender_alert_status:
                 payload['status'] = defender_alert_status
             if defender_alert_assigned_to:

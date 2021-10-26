@@ -241,11 +241,11 @@ def check_incident_filters(defender_incident, new_incident_filters):
     """apply the app.config profile filters to determine which incidents to escalate
 
     Args:
-        defender_incident ([dict]): [sentinel incident fields]
+        defender_incident ([dict]): [defender incident fields]
         new_incident_filters ([dict]): [filters to apply]
 
     Returns:
-        [bool]: [True if sentinel incident should be escalated]
+        [bool]: [True if defender incident should be escalated]
     """
     if not new_incident_filters:
         return True

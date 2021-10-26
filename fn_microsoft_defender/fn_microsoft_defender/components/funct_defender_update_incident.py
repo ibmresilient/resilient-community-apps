@@ -51,19 +51,15 @@ class FunctionComponent(AppFunctionComponent):
 
         self.jinja_env = JinjaEnvironment()
         if fn_inputs.defender_incident_status == "C":  # close action
-            update_payload = self.jinja_env.make_payload_from_template(
-                                                        self.options.get("close_defender_alert_template"),
-                                                        DEFAULT_DEFENDER_CLOSE_INCIDENT_TEMPLATE,
-                                                        defender_incident)
-        else:
-            update_payload = self.jinja_env.make_payload_from_template(
+            defender_incident['defender_incident_status'] = 'Resolved'
+
+        update_payload = self.jinja_env.make_payload_from_template(
                                                         self.options.get("update_defender_alert_template"),
                                                         DEFAULT_DEFENDER_UPDATE_INCIDENT_TEMPLATE,
                                                         defender_incident)
 
         self.LOG.debug(update_payload)
         incident_payload, status, reason = defender_api.call(url, oper='PATCH', payload=update_payload)
-        self.LOG.debug(incident_payload)
 
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
 

@@ -1,12 +1,12 @@
 {
-  {# JINJA template for creating a new Resilient incident from a Sentinel incident. #}
+  {# JINJA template for creating a new Resilient incident from a Defender incident. #}
   "name": "Defender Incident - {{ incidentName|replace('"', '\\"') }}",
   "description": {
     "format": "text",
     "content": "{{ description|replace('"', '\\"') }}"
   },
   {# if Defender users are different than SOAR users, consider using a mapping table using resilient_substitute: #}
-  {# "owner_id": "{{ assignedTo|resilient_substitute('{"Automation": "soar_user1@ent.com", "sentinel_user2@co.com": "soar_user2@ent.com", "DEFAULT": "default_user@ent.com" }') }}", #}
+  {# "owner_id": "{{ assignedTo|resilient_substitute('{"Automation": "soar_user1@ent.com", "defender_user2@co.com": "soar_user2@ent.com", "DEFAULT": "default_user@ent.com" }') }}", #}
   "plan_status": "{{ status|resilient_substitute('{"Resolved": "C", "Active": "A", "New": "A"}') }}",
   "severity_code": "{{ severity|resilient_substitute('{"Informational": "Low"}') }}",
   "properties": {

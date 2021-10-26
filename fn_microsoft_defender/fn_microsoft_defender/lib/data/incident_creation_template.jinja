@@ -4,12 +4,12 @@
   "discovered_date": {{ createdTime|resilient_datetimeformat }},
   "start_date": {{ createdTime|resilient_datetimeformat }},
   {# if Defender alert users are different than SOAR users, consider using a mapping table using resilient_substitute: #}
-  {# "owner_id": "{{ assignedTo|resilient_substitute('{"Automation": "soar_user1@ent.com", "sentinel_user2@co.com": "soar_user2@ent.com", "DEFAULT": "default_user@ent.com" }') }}", #}
+  {# "owner_id": "{{ assignedTo|resilient_substitute('{"Automation": "soar_user1@ent.com", "defender_user2@co.com": "soar_user2@ent.com", "DEFAULT": "default_user@ent.com" }') }}", #}
   "plan_status": "{{ status|resilient_substitute('{"Resolved": "C", "Active": "A", "New": "A"}') }}",
   "severity_code": "{{ severity|resilient_substitute('{"Informational": "Low"}') }}",
   "properties": {
     "defender_incident_id": {{ incidentId }},
-    "defender_incident_url": "<a target='blank' href='{{ incidentUri }}'>Defender Incident link</a>",
+    "defender_incident_url": "<a target='blank' href='{{ incidentUri }}'>Defender Incident</a>",
     "defender_classification": "{{ classification|replace('"', '\\"') }}",
     "defender_determination": "{{ determination|replace('"', '\\"') }}",
     "defender_incident_createtime": {{ createdTime|resilient_datetimeformat }},

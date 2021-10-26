@@ -28,12 +28,13 @@ polling_interval=60
 #  if more than one field is specified, all fields need to pass
 #   format: "field1": value: "field2": ["list_value1", "list_value2"]
 new_incident_filters="status": ["New", "Active"],"severity": ["High", "Medium","Low"]
-# custom templates to replace the default map of sentinel fields to resilient incident fields
+# custom templates to replace the default map of defender incident fields to SOAR incident fields
 #create_incident_template=
 #update_incident_template=
 #close_incident_template=
 #update_defender_alert_template=
-#close_defender_alert_template=
+#update_defender_incident_template=
+#close_defender_incident_template=
 # uncomment as necessary for proxies
 #http_proxy=http://yourproxy.com
 #https_proxy=https://yourproxy.com

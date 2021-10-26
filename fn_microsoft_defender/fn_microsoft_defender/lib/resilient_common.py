@@ -9,10 +9,6 @@ from resilient_lib import IntegrationError
 
 DEFENDER_INCIDENT_ID = "defender_incident_id"
 
-COMMENT_ID_DATATABLE = "sentinel_comment_ids"
-COMMENT_FIELD_SENTINEL_ID = "comment_id"
-COMMENT_FIELD_RESILIENT_ID = "resilient_comment_id"
-
 LOG = logging.getLogger(__name__)
 
 IBM_SOAR_LABEL = "IBM SOAR"
@@ -60,7 +56,7 @@ class ResilientCommon():
     def create_incident(self, incident_payload):
         """
         Create a new Resilient incident by rendering a jinja2 template
-        :param sentinel_incident: sentinel_incident (json object)
+        :param defender_incident: defender_incident (json object)
         :return: Resilient incident
         """
         try:
@@ -70,31 +66,12 @@ class ResilientCommon():
         except Exception as err:
             raise IntegrationError(str(err))
 
-    def close_incident(self, incident_id, incident_payload):
-        """Close an incident, applying a template for the required and optional fields needed
-              during the close process
-        Args:
-            incident ([dict]): [Resilient incident data]
-            sentinel_incident ([dict]): [Senintel incident data]
-            incident_close_template ([str]): [path to template to apply for close operation]
-        Raises:
-            IntegrationError: [catch any errors]
-        Returns:
-            [dict]: [returned Resilient data]
-        """
-
-        try:
-            result = self._patch_incident(incident_id, incident_payload)
-            return result
-
-        except Exception as err:
-            raise IntegrationError(err)
-
     def update_incident(self, incident_id, incident_payload):
         """
         Update a Resilient incident by rendering a jinja2 template
-        :param sentinel_incident: Secureworks CTP sentinel_incident (json object)
-        :return: Resilient incident
+        :param incident_id: incident to modify
+        :param incident_payload: [dict] of patched fields
+        :return: Resilient incident updated
         """
 
         try:
