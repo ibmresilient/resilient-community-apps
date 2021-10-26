@@ -15,6 +15,8 @@ COMMENT_FIELD_RESILIENT_ID = "resilient_comment_id"
 
 LOG = logging.getLogger(__name__)
 
+IBM_SOAR_LABEL = "IBM SOAR"
+
 class ResilientCommon():
 
     def __init__(self, rest_client):

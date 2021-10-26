@@ -6,7 +6,9 @@
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import IntegrationError, validate_fields
-from fn_microsoft_defender.lib.defender_common import DefenderAPI, INCIDENTS_URL, PACKAGE_NAME, DEFAULT_DEFENDER_CLOSE_INCIDENT_TEMPLATE
+from fn_microsoft_defender.lib.defender_common import DefenderAPI, INCIDENTS_URL, PACKAGE_NAME, \
+            DEFAULT_DEFENDER_UPDATE_INCIDENT_TEMPLATE, DEFAULT_DEFENDER_CLOSE_INCIDENT_TEMPLATE, \
+            DEFENDER_INCIDENT_SCOPE
 from fn_microsoft_defender.lib.jinja_common import JinjaEnvironment
 
 PACKAGE_NAME = "fn_microsoft_defender"
@@ -39,7 +41,8 @@ class FunctionComponent(AppFunctionComponent):
                                    self._app_configs_as_dict['client_id'],
                                    self._app_configs_as_dict['app_secret'],
                                    self.opts,
-                                   self._app_configs_as_dict)
+                                   self._app_configs_as_dict,
+                                   scope=DEFENDER_INCIDENT_SCOPE)
 
         url = '/'.join([INCIDENTS_URL, str(incident_id)])
 
@@ -47,12 +50,19 @@ class FunctionComponent(AppFunctionComponent):
         defender_incident = fn_inputs._asdict()    # convert tuple data to dictionary
 
         self.jinja_env = JinjaEnvironment()
-        close_payload = self.jinja_env.make_payload_from_template(
-                                                    self.options.get("defender_close_incident_template"),
-                                                    DEFAULT_DEFENDER_CLOSE_INCIDENT_TEMPLATE,
-                                                    defender_incident)
-        self.LOG.debug(close_payload)
-        incident_payload, status, reason = defender_api.call(url, payload=close_payload)
+        if fn_inputs.defender_incident_status == "C":  # close action
+            update_payload = self.jinja_env.make_payload_from_template(
+                                                        self.options.get("close_defender_alert_template"),
+                                                        DEFAULT_DEFENDER_CLOSE_INCIDENT_TEMPLATE,
+                                                        defender_incident)
+        else:
+            update_payload = self.jinja_env.make_payload_from_template(
+                                                        self.options.get("update_defender_alert_template"),
+                                                        DEFAULT_DEFENDER_UPDATE_INCIDENT_TEMPLATE,
+                                                        defender_incident)
+
+        self.LOG.debug(update_payload)
+        incident_payload, status, reason = defender_api.call(url, oper='PATCH', payload=update_payload)
         self.LOG.debug(incident_payload)
 
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))

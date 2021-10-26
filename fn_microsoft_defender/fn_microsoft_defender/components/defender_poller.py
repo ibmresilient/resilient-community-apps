@@ -12,7 +12,7 @@ from circuits import Event, Timer
 from resilient_circuits import ResilientComponent, handler
 from resilient_lib import validate_fields
 from fn_microsoft_defender.lib.jinja_common import JinjaEnvironment, jinja_resilient_datetimeformat
-from fn_microsoft_defender.lib.resilient_common import ResilientCommon
+from fn_microsoft_defender.lib.resilient_common import ResilientCommon, IBM_SOAR_LABEL
 from fn_microsoft_defender.lib.defender_common import DefenderAPI, PACKAGE_NAME, \
     DEFAULT_INCIDENT_CREATION_TEMPLATE,\
     DEFAULT_INCIDENT_UPDATE_TEMPLATE,\
@@ -215,7 +215,7 @@ class DefenderPollerComponent(ResilientComponent):
         for comment in defender_incident.get("comments", {}):
             comment_create_time = jinja_resilient_datetimeformat(comment['createdTime'])
             LOG.debug("%s >= %s", comment_create_time, last_poller_time_ms)
-            if comment_create_time >= last_poller_time_ms:
+            if comment_create_time >= last_poller_time_ms and IBM_SOAR_LABEL not in comment['comment']:
                 note = "Defender Incident comment: {}\n{}".format(comment['createdTime'], comment['comment'])
                 self.resilient_common.create_incident_comment(incident_id, note)
 

@@ -13,7 +13,8 @@
     "defender_classification": "{{ classification|replace('"', '\\"') }}",
     "defender_determination": "{{ determination|replace('"', '\\"') }}",
     "defender_incident_createtime": {{ createdTime|resilient_datetimeformat }},
-    "defender_incident_lastupdatetime": {{ lastUpdateTime|resilient_datetimeformat }}
+    "defender_incident_lastupdatetime": {{ lastUpdateTime|resilient_datetimeformat }},
+    "defender_tags": "{{ tags | join(',') }}"
   },
   "comments": [
     {% for comment in comments %}

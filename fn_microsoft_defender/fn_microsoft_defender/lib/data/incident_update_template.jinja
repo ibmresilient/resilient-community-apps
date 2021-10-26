@@ -11,6 +11,7 @@
   "severity_code": "{{ severity|resilient_substitute('{"Informational": "Low"}') }}",
   "properties": {
     "defender_classification": "{{ classification|replace('"', '\\"') }}",
-    "defender_determination": "{{ determination|replace('"', '\\"') }}"
+    "defender_determination": "{{ determination|replace('"', '\\"') }}",
+    "defender_tags": "{{ tags | join(',') }}"
   }
 }

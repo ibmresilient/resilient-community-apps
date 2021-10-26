@@ -48,6 +48,7 @@ DEFENDER_INCIDENT_SCOPE = [
 DEFENDER_AUTH_URL = "https://login.windows.net/{tenant_id}/oauth2/token"
 
 DEFAULT_DEFENDER_CLOSE_INCIDENT_TEMPLATE = "data/defender_close_incident_template.jinja"
+DEFAULT_DEFENDER_UPDATE_INCIDENT_TEMPLATE = "data/defender_update_incident_template.jinja"
 DEFAULT_DEFENDER_UPDATE_ALERT_TEMPLATE = "data/defender_update_alert_template.jinja"
 DEFAULT_DEFENDER_CLOSE_ALERT_TEMPLATE = "data/defender_close_alert_template.jinja"
 
