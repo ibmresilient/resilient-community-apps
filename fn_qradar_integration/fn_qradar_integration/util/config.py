@@ -10,7 +10,7 @@ def config_section_data():
        when called by `resilient-circuits config [-c|-u]`
     """
     config_data = u'''
-#Note, QRadar.label must equal the QRadar Destination Name that is set in the SOAR plugin
+#Note, qradar_1_1_1_1 must equal the QRadar Destination Name that is set in the SOAR plugin
 [fn_qradar_integration:qradar_1_1_1_1]
 host=localhost
 username=admin
@@ -20,7 +20,7 @@ qradartoken=changeme
 verify_cert=false
 #search_timeout=
 
-#Note, QRadar.label must equal the QRadar Destination Name that is set in the SOAR plugin
+#Note, qradar_192_168_0_3 must equal the QRadar Destination Name that is set in the SOAR plugin
 [fn_qradar_integration:qradar_192_168_0_3]
 host=localhost
 username=admin
