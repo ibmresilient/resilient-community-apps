@@ -24,6 +24,8 @@ if inputs.extrahop_search_filter is None:
 for prop in ["filter", "field", "operator", "operand"]:
   if prop not in inputs.extrahop_search_filter:
     raise ValueError("The search filter is missing property '{}'".format(prop))
+inputs.extrahop_limit = 100
+inputs.extrahop_offset = 100
 
 
 ```
