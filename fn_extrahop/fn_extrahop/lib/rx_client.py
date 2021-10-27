@@ -60,22 +60,32 @@ class RxClient():
 
         return r.json()["access_token"]
 
-    def get_devices(self, device_id=None):
+    def get_devices(self, active_from=None, active_until=None, limit=None, offset=None, device_id=None):
         """Get information about devices or a specific computer by device id
 
         For more details on api, see https://docs.extrahop.com/8.6/rx360-rest-api/
 
         :param device_id: device_id (str)
+        :param active_from: (Optional) The beginning timestamp (in millisecs) for the request. Default 0 (int)
+        :param active_until: (Optional) The ending timestamp (in millisecs) for the request. Default 0 (int)
+        :param limit(int): (Optional) Limit the number of devices returned to the specified maximum number (int).
+        :param offset: (Optional) Skip the specified number of devices (int).
         :return Result in json format.
 
         """
         # Set default uri
         uri = self._endpoints["devices"].format('')
+        data = {"filter": {}}
+
+        data["active_from"] = active_from if active_from else 0
+        data["active_until"] = active_until if active_until else 0
+        data["limit"] = int(limit) if limit else 0
+        data["offset"] = int(offset) if offset else 0
 
         if device_id:
             uri = self._endpoints["devices"].format(device_id)
 
-        r = self.rc.execute_call_v2("get", uri, headers=self._headers, proxies=self.proxies)
+        r = self.rc.execute_call_v2("get", uri, headers=self._headers)
 
         return r
 
@@ -90,7 +100,6 @@ class RxClient():
         :param offset: (Optional) Skip the specified number of devices (int).
         :param search_filter: Search filter (json str)
         :return Result in json format.`
-
         """
         uri = self._endpoints["search_devices"]
         data = {"filter": {}}

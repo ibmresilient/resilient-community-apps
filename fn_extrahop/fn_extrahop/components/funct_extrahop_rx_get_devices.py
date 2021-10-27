@@ -21,9 +21,14 @@ class FunctionComponent(AppFunctionComponent):
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """
-        Function: Get or search for devices information from Extrahop Reveal(x) . Optional parameter extrahop_device_id
+        Function: Get devices information from Extrahop Reveal(x).
+                  Optional parameters  device_id, active_from, active_util, limit and offset
         Inputs:
             -   fn_inputs.extrahop_device_id
+            -   fn_inputs.extrahop_active_until
+            -   fn_inputs.extrahop_active_from
+            -   fn_inputs.extrahop_limit
+            -   fn_inputs.extrahop_offset
         """
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
@@ -46,8 +51,12 @@ class FunctionComponent(AppFunctionComponent):
         # Set params dict:
         params = {}
         self.LOG.info("fn_inputs: %s", fn_inputs)
-        if hasattr(fn_inputs, "extrahop_device_id"):
-            params.update({"device_id": fn_inputs.extrahop_device_id})
+        for i in ["extrahop_device_id", "extrahop_active_from",
+                  "extrahop_active_until", "extrahop_limit",
+                  "extrahop_offset"]:
+            if hasattr(fn_inputs, i):
+                params.update({i.split('_', 1)[1]: getattr(fn_inputs, i)})
+
         # Call 3rd party API :
         rx_cli = RxClient(self.opts, self.options)
         response = rx_cli.get_devices(**params)
@@ -57,7 +66,6 @@ class FunctionComponent(AppFunctionComponent):
         ##############################################
 
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
-
 
         yield FunctionResult(results)
 

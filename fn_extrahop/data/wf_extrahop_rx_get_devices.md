@@ -11,7 +11,7 @@
 `funct_extrahop_rx_get_devices`
 
 ### Output Name
-`None`
+``
 
 ### Message Destination
 `extrahop`
