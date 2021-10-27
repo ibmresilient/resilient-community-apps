@@ -21,9 +21,9 @@ def codegen_reload_data():
     return {
         "package": u"fn_extrahop",
         "message_destinations": [u"extrahop"],
-        "functions": [u"funct_extrahop_rx_get_devices"],
-        "workflows": [u"wf_extrahop_rx_get_devices"],
-        "actions": [u"Example: Extrahop revealx get devices"],
+        "functions": [u"funct_extrahop_rx_get_devices", u"funct_extrahop_rx_search_devices"],
+        "workflows": [u"wf_extrahop_rx_get_devices", u"wf_extrahop_rx_search_devices"],
+        "actions": [u"Example: Extrahop revealx get devices", u"Example: Extrahop revealx search devices"],
         "incident_fields": [],
         "incident_artifact_types": [],
         "incident_types": [],
@@ -45,10 +45,13 @@ def customization_data(client=None):
         - extrahop
     - Functions:
         - funct_extrahop_rx_get_devices
+        - funct_extrahop_rx_search_devices
     - Workflows:
         - wf_extrahop_rx_get_devices
+        - wf_extrahop_rx_search_devices
     - Rules:
         - Example: Extrahop revealx get devices
+        - Example: Extrahop revealx search devices
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)
