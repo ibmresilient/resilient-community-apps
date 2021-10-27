@@ -59,7 +59,7 @@ class FunctionComponent(ResilientComponent):
             payload = {
                 "Comment": action_description
             }
-            if defender_isolation_type:
+            if defender_isolation_action == 'isolate':
                 payload["IsolationType"] = defender_isolation_type
 
             log.debug(payload)

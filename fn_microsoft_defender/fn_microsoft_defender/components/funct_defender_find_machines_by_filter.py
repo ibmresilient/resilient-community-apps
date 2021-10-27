@@ -59,8 +59,8 @@ class FunctionComponent(ResilientComponent):
 
             # convert the timestamp
             if status:
-                yield StatusMessage("Machines found: {}".format(len(machines_result['value'])))
-                for machine in machines_result['value']:
+                yield StatusMessage("Machines found: {}".format(len(machines_result.get('value', []))))
+                for machine in machines_result.get('value', []):
                     machine['firstSeen_ts'] = convert_date(machine['firstSeen'])
                     machine['lastSeen_ts'] = convert_date(machine['lastSeen'])
             else:

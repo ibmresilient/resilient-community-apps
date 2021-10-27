@@ -25,7 +25,6 @@ inputs.defender_filter_value = row['machine_id']
 ### Post-Processing Script
 ```python
 import java.util.Date as Date
-
 now = Date().getTime()
 
 """
@@ -39,7 +38,7 @@ now = Date().getTime()
 ]
 """
 if results.success:
-    for machine in results.content['value']:
+    for machine in results.content.get('value', []):
         row['report_date'] = now
         row['machine_ip'] = machine['lastExternalIpAddress']
         row['machine_lastseen'] = machine['lastSeen_ts']

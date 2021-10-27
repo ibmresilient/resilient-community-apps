@@ -18,8 +18,8 @@
 
 ### Pre-Processing Script
 ```python
-inputs.defender_description = rule.properties.indicator_description
-inputs.defender_title = rule.properties.indicator_title
+inputs.defender_description = rule.properties.defender_updated_indicator_description if rule.properties.defender_updated_indicator_description else row['ind_description']
+inputs.defender_title = rule.properties.defender_updated_indicator_title if rule.properties.defender_updated_indicator_title else row['ind_title']
 inputs.defender_indicator_action = str(rule.properties.indicator_action)
 inputs.defender_expiration_time = rule.properties.indicator_expiration
 inputs.defender_severity = str(rule.properties.indicator_severity)

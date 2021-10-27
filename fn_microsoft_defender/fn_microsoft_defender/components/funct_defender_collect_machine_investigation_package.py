@@ -29,41 +29,7 @@ class FunctionComponent(AppFunctionComponent):
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
 
-        # Example validating app_configs
-        # validate_fields([
-        #     {"name": "api_key", "placeholder": "<your-api-key>"},
-        #     {"name": "base_url", "placeholder": "<api-base-url>"}],
-        #     self._app_configs_as_dict)
-
-        # Example getting access to self.get_fn_msg()
-        # fn_msg = self.get_fn_msg()
-        # self.LOG.info("fn_msg: %s", fn_msg)
-
-        # Example raising an exception
-        # raise IntegrationError("Example raising custom error")
-
-        ##############################################
-        # PUT YOUR FUNCTION IMPLEMENTATION CODE HERE #
-        ##############################################
-
-        # Call API implemtation example:
-        # params = {
-        #     "api_key": self.app_configs.api_key,
-        #     "ip_address": fn_inputs.artifact_value
-        # }
-        #
-        # response = self.rc.execute(
-        #     method="get",
-        #     url=self.app_configs.api_base_url,
-        #     params=params
-        # )
-        #
-        # results = response.json()
-
-        ##############################################
-
         validate_fields([{"name": "tenant_id"}, {"name": "client_id"}, {"name": "app_secret"}], self._app_configs_as_dict)
-        #validate_fields([{"name": "defender_machine_id"}, {"name": "defender_description"}], fn_inputs)
 
         # Get the function parameters:
         defender_machine_id = fn_inputs.defender_machine_id  # text
@@ -72,8 +38,8 @@ class FunctionComponent(AppFunctionComponent):
         defender_api = DefenderAPI(self.app_configs.tenant_id,
                                    self.app_configs.client_id,
                                    self.app_configs.app_secret,
-                                   None, {"api_url": self.app_configs.api_url},
-                                   self.rc)
+                                   self.opts,
+                                   self._app_configs_as_dict)
 
         payload = {
             "Comment": action_description

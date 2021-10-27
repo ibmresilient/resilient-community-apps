@@ -34,7 +34,6 @@ new_incident_filters="status": ["New", "Active"],"severity": ["High", "Medium","
 #close_incident_template=
 #update_defender_alert_template=
 #update_defender_incident_template=
-#close_defender_incident_template=
 # uncomment as necessary for proxies
 #http_proxy=http://yourproxy.com
 #https_proxy=https://yourproxy.com

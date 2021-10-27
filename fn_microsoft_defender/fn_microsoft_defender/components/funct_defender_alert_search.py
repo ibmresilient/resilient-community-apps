@@ -80,7 +80,7 @@ class FunctionComponent(ResilientComponent):
             # filter on machine id and convert dates to timestamps
             filtered_alerts = []
             if status:
-                for alert in alert_payload['value']:
+                for alert in alert_payload.get('value', []):
                     # filter on machine_id
                     if alert['machineId'] == defender_machine_id:
                         filtered_alert = alert.copy()

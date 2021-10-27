@@ -60,11 +60,11 @@ class FunctionComponent(ResilientComponent):
             indicator_payload, status, reason = defender_api.call(INDICATOR_URL, content_type=None)
 
             if status:
-                yield StatusMessage("Indicators found: {}".format(len(indicator_payload['value'])))
+                yield StatusMessage("Indicators found: {}".format(len(indicator_payload.get('value', []))))
                 filtered_payload = filter_indicators(indicator_payload, indicator_field, indicator_filter)
 
                 # convert dates to timestamps
-                for indicator in filtered_payload['value']:
+                for indicator in filtered_payload.get('value', []):
                     indicator['creationTimeDateTimeUtc_ts'] = convert_date(indicator['creationTimeDateTimeUtc'])
                     indicator['expirationTime_ts'] = convert_date(indicator['expirationTime'])
             else:
@@ -96,7 +96,7 @@ def filter_indicators(indicator_payload, indicator_field, indicator_filter):
 
     reg = re.compile(indicator_filter)
     filtered_indicators = []
-    for indicator in indicator_payload['value']:
+    for indicator in indicator_payload.get('value', []):
         if reg.match(indicator[indicator_field]):
             filtered_indicators.append(indicator)
 

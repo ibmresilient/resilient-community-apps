@@ -41,6 +41,7 @@ if resultz.success:
                 machine_list.append(device['mdatpDeviceId'])
                 row = incident.addRow('defender_machines')
                 row['report_date'] = int(Date().getTime())
+                row['machine_link'] = "<a target='blank' href='https://security.microsoft.com/machines/{}/overview'>machine</a>".format(device['mdatpDeviceId'])
                 row['machine_id'] = device['mdatpDeviceId']
                 row['machine_name'] = device['deviceDnsName']
                 row['machine_platform'] = device['osPlatform']
@@ -52,6 +53,7 @@ if resultz.success:
             if row_count < max_alerts or not max_alerts:
                 row = incident.addRow("defender_alerts")
                 row['report_date'] = now
+                row['alert_link'] = "<a target='blank' href='https://security.microsoft.com/alerts/{}'>Alert</a>".format(alert['alertId'])
                 row['alert_id'] = alert['alertId']
                 row['assigned_to'] = alert['assignedTo']
                 row['severity'] = alert['severity']

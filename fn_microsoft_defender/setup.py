@@ -35,7 +35,7 @@ setup(
         "resilient_lib",
         "msal",
         "simplejson",
-        "rapidjson"
+        "python-rapidjson"
     ],
     packages=find_packages(),
     include_package_data=True,
