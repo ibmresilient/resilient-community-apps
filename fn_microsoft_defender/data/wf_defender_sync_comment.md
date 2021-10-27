@@ -22,7 +22,6 @@ inputs.defender_incident_id = incident.properties.defender_incident_id
 inputs.defender_classification = incident.properties.defender_classification
 inputs.defender_determination = incident.properties.defender_determination
 inputs.defender_comment = note.text.content
-#inputs.defender_incident_status = incident.plan_status
 inputs.defender_tags = incident.properties.defender_tags
 ```
 

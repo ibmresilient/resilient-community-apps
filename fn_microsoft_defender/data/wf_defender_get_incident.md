@@ -25,7 +25,6 @@ inputs.defender_incident_id = incident.properties.defender_incident_id
 ### Post-Processing Script
 ```python
 import java.util.Date as Date
-
 now = Date().getTime()
 
 resultz = results

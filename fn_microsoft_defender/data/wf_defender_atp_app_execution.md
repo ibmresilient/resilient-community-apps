@@ -30,7 +30,7 @@ import java.util.Date as Date
 
 now = Date().getTime()
 
-msg = u"Defender ATP Action {}.\nAction: {}\nMachine: {}\nComment: {}"\
+msg = u"Defender Action {}.\nAction: {}\nMachine: {}\nComment: {}"\
    .format("successful" if results.success else "unsuccessful",
            rule.properties.defender_app_execution_action,
            row['machine_id'],

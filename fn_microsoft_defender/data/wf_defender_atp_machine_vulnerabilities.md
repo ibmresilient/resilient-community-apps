@@ -68,11 +68,11 @@ def format_line(k, v):
 vulnerabilities = results.content.get('value', [])
 if results['success']:
     if not vulnerabilities:
-        incident.addNote("No machine vulnerabilities for: {}".format(row['machine_name']))
+        incident.addNote("Defender No machine vulnerabilities for: {}".format(row['machine_name']))
     else:
         note = []
         for risk in vulnerabilities:
-            note_info = []
+            note_info = ["Defender Machine Vulnerabilities:"]
             note_info.append(format_line("Machine", row['machine_name']))
             note_info.append(format_line("Machine Id", row['machine_id']))
             note_info.append(format_line("Vulnerability", risk['name']))
@@ -84,7 +84,7 @@ if results['success']:
             note.append(note_info)
         incident.addNote(helper.createRichText(mk_note(note)))
 else:
-    incident.addNote("Defender ATP Machine Vulnerabilities failed: {}".format(results.reason))
+    incident.addNote("Defender Machine Vulnerabilities failed: {}".format(results.reason))
 
 ```
 

@@ -25,7 +25,7 @@ inputs.defender_indicator_id = row['ind_id']
 ```python
 import java.util.Date as Date
 
-msg = u"Defender ATP Action {}.\nAction: Delete Indicator\nIndicator: {}"\
+msg = u"Defender Action {}.\nAction: Delete Indicator\nIndicator: {}"\
    .format("successful" if results.success else "unsuccessful",
            row['ind_value'],
            )

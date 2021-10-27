@@ -31,7 +31,7 @@ inputs.defender_alert_assigned_to = rule.properties.defender_alert_assigned_to
 
 ### Post-Processing Script
 ```python
-msg = u"Action {}.\nAction: Update Alert\nAlert: {}\nMachine: {}\nComment: {}"\
+msg = u"Defender Action {}.\nAction: Update Alert\nAlert: {}\nMachine: {}\nComment: {}"\
    .format("successful" if results.success else "unsuccessful",
            row['alert_id'],
            row['computer_name'],

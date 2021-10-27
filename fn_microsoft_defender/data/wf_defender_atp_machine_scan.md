@@ -39,7 +39,7 @@ if results.success:
     )
   row['machine_last_action'] = helper.createPlainText(action_msg)
 else:
-  msg = u"Defender ATP Scan Action {}.\nMachine: {} ({})\nType: {}\nComment: {}\nReason: {}"\
+  msg = u"Defender Scan Action {}.\nMachine: {} ({})\nType: {}\nComment: {}\nReason: {}"\
    .format("successful" if results.success else "unsuccessful",
            results.content.get('computerDnsName'), row['machine_id'],
            str(rule.properties.defender_isolation_type),

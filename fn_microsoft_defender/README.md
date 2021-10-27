@@ -14,7 +14,7 @@
   NOTE: If your app is available in the container-format only, there is no need to mention the integration server in this readme.
 -->
 
-# Microsoft Defender ATP Functions
+# Microsoft Defender Functions
 
 ## Table of Contents
 - [Release Notes](#release-notes)
@@ -76,7 +76,7 @@
 
  ![screenshot: main](./doc/screenshots/main.png)
 
-Perform operations against Defender ATP such as set indicators, isolate and quarantine machines, and block file execution
+Perform operations against Defender such as set indicators, isolate and quarantine machines, and block file execution
 
 ### Key Features
 <!--
@@ -191,7 +191,7 @@ The following table provides the settings you need to configure the app. These s
 
 ## Azure App Configuration
 
-In order to use this app, an Azure app needs to be registered with the proper permissions for Defender ATP and a client secret generated. Settings, in general are:
+In order to use this app, an Azure app needs to be registered with the proper permissions for Defender and a client secret generated. Settings, in general are:
 
 Application Type: Daemon with api calls enabled
 
@@ -507,7 +507,7 @@ inputs.defender_restriction_type = str(rule.properties.defender_app_execution_ac
 ```python
 import time
 
-msg = u"Defender ATP Action {}.\nAction: {}\nMachine: {}\nComment: {}"\
+msg = u"Defender Action {}.\nAction: {}\nMachine: {}\nComment: {}"\
    .format("successful" if results.success else "unsuccessful",
            rule.properties.defender_app_execution_action,
            row['machine_id'],
@@ -626,7 +626,7 @@ if results.success:
         row['machine_exposure_level'] = machine.get('exposureLevel')
         row['machine_tags'] = ', '.join(machine.get('machineTags', []))
 else:
-    msg = u"Defender ATP Action unsuccessful.\nAction: Find machines by file hash\nReason: {}".format(results.reason)
+    msg = u"Defender Action unsuccessful.\nAction: Find machines by file hash\nReason: {}".format(results.reason)
     incident.addNote(helper.createPlainText(msg))
 ```
 
@@ -755,7 +755,7 @@ if results['success']:
             note.append(note_info)
         incident.addNote(helper.createRichText(mk_note(note)))
 else:
-    incident.addNote("Defender ATP Machine Vulnerabilities failed: {}".format(results.reason))
+    incident.addNote("Defender Machine Vulnerabilities failed: {}".format(results.reason))
 
 ```
 
@@ -867,7 +867,7 @@ if results.success:
     )
   row['machine_last_action'] = helper.createPlainText(action_msg)
 else:
-  msg = u"Defender ATP Unisolate Action {}.\nMachine: {} ({})\nType: {}\nComment: {}\nReason: {}"\
+  msg = u"Defender Unisolate Action {}.\nMachine: {} ({})\nType: {}\nComment: {}\nReason: {}"\
    .format("successful" if results.success else "unsuccessful",
            results.content.get('computerDnsName'), row['machine_id'],
            str(rule.properties.defender_isolation_type),
@@ -1059,7 +1059,7 @@ if results.success and results.content.get("value"):
         row['ind_expiration_date'] = indicator['expirationTime_ts']
         row['status'] = 'Active'
 else:
-    msg = u"Defender ATP Action unsuccessful.\nAction: List indicators\nReason: {}".format(results.reason)
+    msg = u"Defender Action unsuccessful.\nAction: List indicators\nReason: {}".format(results.reason)
     incident.addNote(msg)
 ```
 
@@ -1167,7 +1167,7 @@ if results.success:
     )
   row['machine_last_action'] = helper.createPlainText(action_msg)
 else:
-  msg = u"Defender ATP Quarantine file Action {}.\nMachine: {} ({})\nType: {}\nComment: {}\nReason: {}"\
+  msg = u"Defender Quarantine file Action {}.\nMachine: {} ({})\nType: {}\nComment: {}\nReason: {}"\
    .format("successful" if results.success else "unsuccessful",
            results.content.get('computerDnsName'), row['machine_id'],
            str(rule.properties.defender_isolation_type),
@@ -1183,7 +1183,7 @@ else:
 
 ---
 ## Function - Defender Get Related Alert Information
-Get a Defender ATP machine alert details
+Get a Defender machine alert details
 
 <details><summary>Inputs:</summary>
 <p>
@@ -1232,7 +1232,7 @@ None
 
 ---
 ## Function - Defender Machine Scan
-Start a Defender ATP Machine antivirus scan
+Start a Defender Machine antivirus scan
 
  ![screenshot: fn-defender-machine-scan ](./doc/screenshots/fn-defender-machine-scan.png)
 
@@ -1333,7 +1333,7 @@ if results.success:
     )
   row['machine_last_action'] = helper.createPlainText(action_msg)
 else:
-  msg = u"Defender ATP Scan Action {}.\nMachine: {} ({})\nType: {}\nComment: {}\nReason: {}"\
+  msg = u"Defender Scan Action {}.\nMachine: {} ({})\nType: {}\nComment: {}\nReason: {}"\
    .format("successful" if results.success else "unsuccessful",
            results.content.get('computerDnsName'), row['machine_id'],
            str(rule.properties.defender_isolation_type),
@@ -1762,7 +1762,7 @@ if results.success:
       row['machine_exposure_level'] = machine.get('exposureLevel')
       row['machine_tags'] = ', '.join(machine.get('machineTags', []))
 else:
-  msg = u"Defender ATP Action unsuccessful.\nAction: Find machines by filter\nReason: {}".format(results.reason)
+  msg = u"Defender Action unsuccessful.\nAction: Find machines by filter\nReason: {}".format(results.reason)
   incident.addNote(helper.createPlainText(msg))
 ```
 
@@ -1771,7 +1771,7 @@ else:
 
 ---
 ## Function - Defender Delete Indicator
-Delete an indicator from Defender ATP
+Delete an indicator from Defender
 
  ![screenshot: fn-defender-delete-indicator ](./doc/screenshots/fn-defender-delete-indicator.png)
 
@@ -1830,7 +1830,7 @@ inputs.defender_indicator_id = row['ind_id']
 ```python
 import java.util.Date as Date
 
-msg = u"Defender ATP Action {}.\nAction: Delete Indicator\nIndicator: {}"\
+msg = u"Defender Action {}.\nAction: Delete Indicator\nIndicator: {}"\
    .format("successful" if results.success else "unsuccessful",
            row['ind_value'],
            )
@@ -2131,7 +2131,7 @@ import time
 """
 if results.success:
   if not results.content['value']:
-    msg = u"Defender ATP Find machines by IP Address unsuccessful.\nNothing found for {}".format(artifact.value)
+    msg = u"Defender Find machines by IP Address unsuccessful.\nNothing found for {}".format(artifact.value)
     incident.addNote(helper.createPlainText(msg))
   else:
     for machine in results.content['value']:
@@ -2147,7 +2147,7 @@ if results.success:
         row['machine_exposure_level'] = machine.get('exposureLevel')
         row['machine_tags'] = ', '.join(machine.get('machineTags', []))
 else:
-    msg = u"Defender ATP Action unsuccessful.\nAction: Find machines by IP Address\nReason: {}".format(results.reason)
+    msg = u"Defender Action unsuccessful.\nAction: Find machines by IP Address\nReason: {}".format(results.reason)
     incident.addNote(helper.createPlainText(msg))
 ```
 
@@ -2490,7 +2490,7 @@ Convert a Defender indicator to an Artifact for further enrichment or remediatio
 <p>
 
 ```python
-# Convert a Defender ATP indicator to an artifact_type
+# Convert a Defender indicator to an artifact_type
 # lookup for Defender indicator types to arttfact types
 type_lookup = {
         "FileSha1": "Malware SHA-1 Hash",

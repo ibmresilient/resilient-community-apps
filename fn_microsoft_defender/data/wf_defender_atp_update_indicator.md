@@ -31,7 +31,7 @@ inputs.defender_indicator_value = row['ind_value']
 ```python
 import java.util.Date as Date
 
-msg = u"Action {}.\nAction: {}\nArtifact: {}\nTitle: {}\nComment: {}\nSeverity: {}\nExpiration: {}"\
+msg = u"Defender Action {}.\nAction: {}\nArtifact: {}\nTitle: {}\nComment: {}\nSeverity: {}\nExpiration: {}"\
    .format("successful" if results.success else "unsuccessful",
            str(rule.properties.indicator_action),
            row['ind_value'],

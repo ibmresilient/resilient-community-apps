@@ -47,7 +47,7 @@ if results.success:
         row['machine_exposure_level'] = machine.get('exposureLevel')
         row['machine_tags'] = ', '.join(machine.get('machineTags', []))
 else:
-  msg = u"Defender Find machines by filter unsucessful\nReason: {}".format(results.reason)
+  msg = u"Defender find machines by filter unsucessful\nReason: {}".format(results.reason)
   incident.addNote(helper.createPlainText(msg))
 ```
 

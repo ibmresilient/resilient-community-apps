@@ -42,7 +42,7 @@ if results.success:
         row['machine_exposure_level'] = machine.get('exposureLevel')
         row['machine_tags'] = ', '.join(machine.get('machineTags', []))
 else:
-    msg = u"Defender ATP Action unsuccessful.\nAction: Find machines by file hash\nReason: {}".format(results.reason)
+    msg = u"Defender Action unsuccessful.\nAction: Find machines by file hash\nReason: {}".format(results.reason)
     incident.addNote(helper.createPlainText(msg))
 ```
 
