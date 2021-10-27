@@ -2,6 +2,7 @@
 # (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 """ Reveal(x) client class for SOAR app supporting Extrahop integration"""
+import json
 import logging
 import base64
 from resilient_lib import RequestsCommon
@@ -75,5 +76,37 @@ class RxClient():
             uri = self._endpoints["devices"].format(device_id)
 
         r = self.rc.execute_call_v2("get", uri, headers=self._headers, proxies=self.proxies)
+
+        return r
+
+    def search_devices(self, active_from=None, active_until=None, limit=None, offset=None, search_filter=None):
+        """Get information about devices or a specific computer by device id
+
+        For more details on api, see https://docs.extrahop.com/8.6/rx360-rest-api/
+
+        :param active_from: (Optional) The beginning timestamp (in millisecs) for the request. Default 0 (int)
+        :param active_until: (Optional) The ending timestamp (in millisecs) for the request. Default 0 (int)
+        :param limit(int): (Optional) Limit the number of devices returned to the specified maximum number (int).
+        :param offset: (Optional) Skip the specified number of devices (int).
+        :param search_filter: Search filter (json str)
+        :return Result in json format.`
+
+        """
+        uri = self._endpoints["search_devices"]
+        data = {"filter": {}}
+
+        if search_filter:
+            try:
+                filter_data = json.loads(search_filter)
+            except ValueError:
+                raise ValueError("The search filter is not valid json content")
+        if filter_data.get("filter"):
+            data["filter"] = filter_data.get("filter")
+        data["active_from"] = active_from if active_from else 0
+        data["active_until"] = active_until if active_until else 0
+        data["limit"] = int(limit) if limit else 0
+        data["offset"] = int(offset) if offset else 0
+
+        r = self.rc.execute_call_v2("post", uri, headers=self._headers, data=json.dumps(data))
 
         return r
