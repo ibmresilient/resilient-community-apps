@@ -19,12 +19,12 @@ class FunctionComponent(AppFunctionComponent):
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """
-        Function: Search for devices information from Extrahop Reveal(x)
-        using a filter. Parameter extrahop_search_filter.
+        Function: Search for devices information from Extrahop Reveal(x).
+                  Optional parameter search_filter, active_from, active_util, limit and offset
         Inputs:
             -   fn_inputs.extrahop_search_filter
-            -   fn_inputs.extrahop_active_from
             -   fn_inputs.extrahop_active_until
+            -   fn_inputs.extrahop_active_from
             -   fn_inputs.extrahop_limit
             -   fn_inputs.extrahop_offset
         """
@@ -44,11 +44,11 @@ class FunctionComponent(AppFunctionComponent):
         # Set params dict:
         params = {}
         self.LOG.info("fn_inputs: %s", fn_inputs)
-        for i in ["extrahop_active_from", "extrahop_active_until",
-                  "extrahop_limit", "extrahop_offset",
-                  "extrahop_search_filter"]:
+        for i in ["extrahop_search_filter", "extrahop_active_from",
+                  "extrahop_active_until", "extrahop_limit",
+                  "extrahop_offset"]:
             if hasattr(fn_inputs, i):
-                params.update({"search_filter": getattr(fn_inputs, i)})
+                params.update({i.split('_', 1)[1]: getattr(fn_inputs, i)})
 
         # Call 3rd party API :
         rx_cli = RxClient(self.opts, self.options)
