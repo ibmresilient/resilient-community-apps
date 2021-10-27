@@ -2,14 +2,20 @@
 """Tests using pytest_resilient_circuits"""
 
 import pytest
+from mock import patch
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
+from .mock_artifacts import *
 
 PACKAGE_NAME = "fn_extrahop"
 FUNCTION_NAME = "funct_extrahop_rx_search_devices"
 
-# Read the default configuration-data section from the package
-config_data = get_config_data(PACKAGE_NAME)
+# Read the mock configuration-data section from the package
+config_data = get_mock_config()
+
+def assert_keys_in(json_obj, *keys):
+    for key in keys:
+        assert key in json_obj
 
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
@@ -48,31 +54,33 @@ class TestFunctExtrahopRxSearchDevices:
         assert func is not None
 
     mock_inputs_1 = {
-        "extrahop_search_filter": "sample text",
+        "extrahop_search_filter": '{"filter": {"field": "is_active","operand": true,"operator": "="}}',
         "extrahop_active_from": 123,
         "extrahop_active_until": 123,
-        "extrahop_limit": "sample text",
-        "extrahop_offset": "sample text"
+        "extrahop_offset": 123,
+        "extrahop_limit": 123
     }
 
-    expected_results_1 = {"value": "xyz"}
+    expected_results_1 = {"search_result": []}
 
     mock_inputs_2 = {
-        "extrahop_search_filter": "sample text",
+        "extrahop_search_filter": '{"filter": {"field": "ipaddr","operator": "=","operand": "192.168.1.2"}}',
         "extrahop_active_from": 123,
         "extrahop_active_until": 123,
-        "extrahop_limit": "sample text",
-        "extrahop_offset": "sample text"
+        "extrahop_offset": 123,
+        "extrahop_limit": 123
     }
 
-    expected_results_2 = {"value": "xyz"}
+    expected_results_2 = {"search_result": []}
 
+    @patch('fn_extrahop.components.funct_extrahop_rx_search_devices.RxClient', side_effect=mocked_rx_client)
     @pytest.mark.parametrize("mock_inputs, expected_results", [
         (mock_inputs_1, expected_results_1),
         (mock_inputs_2, expected_results_2)
     ])
-    def test_success(self, circuits_app, mock_inputs, expected_results):
+    def test_success(self, mock_cli, circuits_app, mock_inputs, expected_results):
         """ Test calling with sample values for the parameters """
-
+        keys = ["content", "inputs", "metrics", "raw", "reason", "success", "version"]
         results = call_funct_extrahop_rx_search_devices_function(circuits_app, mock_inputs)
-        assert(expected_results == results)
+        assert_keys_in(results, *keys)
+        assert(expected_results == results["content"])
