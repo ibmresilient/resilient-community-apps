@@ -29,7 +29,7 @@ def selftest_function(opts):
     app_configs = opts.get("fn_extrahop", {})
     try:
         rxcli = RxClient(opts, app_configs)
-        result = rxcli.get_devices(device_id=0)
+        result = rxcli.get_devices(limit=1)
         if isinstance(result.json(), list):
             return {
                 "state": "success",
