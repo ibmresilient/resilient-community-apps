@@ -22,14 +22,14 @@ def snake_to_camel(word):
 
 setup(
     name="fn_microsoft_defender",
-    display_name="Microsoft Defender ATP Functions",
+    display_name="Microsoft Defender Functions",
     version="1.0.0",
     license="MIT",
     author="IBM Resilient",
     author_email="mscherfling@ibm.com",
     url="https://github.com/ibmresilient/resilient-community-apps",
     description="Resilient Circuits Components for 'fn_microsoft_defender'",
-    long_description="""Perform operations against Defender ATP such as set indicators, isolate and quarantine machines, and block file execution""",
+    long_description="""Perform operations against Defender such as synchronize incidents and alerts, set indicators, isolate and quarantine machines, and block file execution""",
     install_requires=[
         "resilient_circuits>=30.0.0",
         "resilient_lib",

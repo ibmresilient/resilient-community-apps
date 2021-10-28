@@ -29,6 +29,8 @@
   - [Install](#install)
   - [App Configuration](#app-configuration)
   - [Custom Layouts](#custom-layouts)
+  - [Azure App Configuration](#azure-app-configuration)
+  - [Template files](#template-files)
 - [Function - Defender Update Incident](#function---defender-update-incident)
 - [Function - Defender App Execution](#function---defender-app-execution)
 - [Function - Defender Find Machines by File](#function---defender-find-machines-by-file)
@@ -54,6 +56,7 @@
 - [Custom Fields](#custom-fields)
 - [Rules](#rules)
 - [Troubleshooting & Support](#troubleshooting--support)
+- [Template Appendix](#template-appendix)
 ---
 
 ## Release Notes
@@ -189,7 +192,7 @@ The following table provides the settings you need to configure the app. These s
 
 ---
 
-## Azure App Configuration
+### Azure App Configuration
 
 In order to use this app, an Azure app needs to be registered with the proper permissions for Defender and a client secret generated. Settings, in general are:
 
@@ -226,6 +229,23 @@ API Permissions (Application type):
 ![screenshot: Azure App Secrets](./doc/screenshots/azure_app_secrets.png)
 
 ---
+
+### Template files
+Templates are used during the syncronization of incidents and comments between Defender and IBM SOAR.
+These templates provide the mapping between Defender incident and SOAR incident fields. The templates cover these scenarios:
+
+* create a SOAR incident from a Defender incident
+* update an existing SOAR incident
+* close a SOAR incident when the cooresponding Defender incident closes
+* create a Defender incident comment
+* update a Defender incident alert
+
+There are cases where these template need to be modified for your environment. For instance, customers can
+customize their close incident process with different required fields. In this example, the incident_close_template.jinja file needs to be updated and referenced in your app.config file as:
+
+close_incident_template=/path/to/your/custom/close_incident_template.jinja
+
+See the [Template Appendix](#template-appendix) for copies of the existing templates which you can use to modify for your environment requirements.
 
 ## Function - Defender Update Incident
 Update a Defender Incident
@@ -855,7 +875,7 @@ inputs.defender_isolation_action = 'unisolate'
 <p>
 
 ```python
-import Java.util.Date as Date
+import java.util.Date as Date
 
 if results.success:
   row['report_date'] = Date().getTime()
@@ -2636,3 +2656,290 @@ Refer to the documentation listed in the Requirements section for troubleshootin
 
 ### For Support
 This is a IBM Community provided App. Please search the Community https://ibm.biz/resilientcommunity for assistance.
+
+## Template Appendix
+
+<details><summary>incident_creation_template</summary>
+<pre>
+{
+  {# JINJA template for creating a new Resilient incident from a Defender incident. #}
+  "name": "Defender Incident - {{ incidentName|replace('"', '\\"') }}",
+  "discovered_date": {{ createdTime|resilient_datetimeformat }},
+  "start_date": {{ createdTime|resilient_datetimeformat }},
+  {# if Defender alert users are different than SOAR users, consider using a mapping table using resilient_substitute: #}
+  {# "owner_id": "{{ assignedTo|resilient_substitute('{"Automation": "soar_user1@ent.com", "defender_user2@co.com": "soar_user2@ent.com", "DEFAULT": "default_user@ent.com" }') }}", #}
+  "plan_status": "{{ status|resilient_substitute('{"Resolved": "C", "Active": "A", "New": "A"}') }}",
+  "severity_code": "{{ severity|resilient_substitute('{"Informational": "Low"}') }}",
+  "properties": {
+    "defender_incident_id": {{ incidentId }},
+    "defender_incident_url": "<a target='blank' href='{{ incidentUri }}'>Defender Incident</a>",
+    "defender_classification": "{{ classification|replace('"', '\\"') }}",
+    "defender_determination": "{{ determination|replace('"', '\\"') }}",
+    "defender_incident_createtime": {{ createdTime|resilient_datetimeformat }},
+    "defender_incident_lastupdatetime": {{ lastUpdateTime|resilient_datetimeformat }},
+    "defender_tags": "{{ tags | join(',') }}"
+  },
+  "comments": [
+    {% for comment in comments %}
+    {
+      "text": {
+        "format": "text",
+        "content": "{{ comment.comment|replace('"', '\\"') }}\ncreated by: {{ comment.createdBy }}\ncreation date: {{ comment.createdTime }}"
+      }
+    }
+    {% if not loop.last %},{% endif %}
+    {% endfor %}
+  ],
+  "artifacts": [
+    {% for alert in alerts %}
+     {% for item in alert.entities %}
+      {% if item.deviceId %}
+        {% set machine_comment = 'Associated with machine id: ' + item.deviceId %}
+      {% else %}
+        {% set machine_comment = '' %}
+      {% endif %}
+      {% set artifactFlg = False %}
+      {% if item.entityType == 'Ip' %}
+      {% set artifactFlg = True %}
+      {
+        "type": {
+          "name": "IP Address"
+        },
+        "value": "{{ item.ipAddress }}",
+        "description": {
+          "format": "text",
+          "content": "creation date: {{ item.evidenceCreationTime }}\n{{ machine_comment }}"
+        }
+      }
+      {% elif item.entityType == 'User' and item.userPrincipalName %}
+      {% set artifactFlg = True %}
+      {
+        "type": {
+          "name": "User Account"
+        },
+        "value": "{{ item.userPrincipalName }}",
+        "description": {
+          "format": "text",
+          "content": "creation date: {{ item.evidenceCreationTime }}\n{{ machine_comment }}"
+        }
+      }
+      {% elif item.entityType == 'Process' and item.processCommandLine %}
+      {% set artifactFlg = True %}
+      {
+        "type": {
+          "name": "Process Name"
+        },
+        "value": "{{ item.processCommandLine[:100]|replace('\\', '\\\\')|replace('"', '\\"') }}",
+        "description": {
+          "format": "text",
+          "content": "creation date: {{ item.evidenceCreationTime }}\n{{ machine_comment }}"
+        }
+      }
+      {% elif item.entityType == 'Process' and not item.processCommandLine and item.fileName %}
+      {% set artifactFlg = True %}
+      {
+        "type": {
+          "name": "File Name"
+        },
+        "value": "{{ item.fileName|replace('\\', '\\\\')|replace('"', '\\"') }}",
+        "description": {
+          "format": "text",
+          "content": "creation date: {{ item.evidenceCreationTime }}\nFile Path: {{ item.filePath|replace('\\', '\\\\')|replace('"', '\\"') }}\n{{ machine_comment }}"
+        }
+      }
+      {% elif item.entityType == 'Url' and item.url %}
+      {% set artifactFlg = True %}
+      {
+        "type": {
+          "name": "URL"
+        },
+        "value": "{{ item.url }}",
+        "description": {
+          "format": "text",
+          "content": "creation date: {{ item.evidenceCreationTime }}\n{{ machine_comment }}"
+        }
+      }
+      {% elif item.entityType == 'File' %}
+      {% set artifactFlg = True %}
+      {
+        "type": {
+          "name": "File Name"
+        },
+        "value": "{{ item.fileName }}",
+        "description": {
+          "format": "text",
+          "content": "creation date: {{ item.evidenceCreationTime }}\nfile path: {{ item.filePath|replace('\\', '\\\\') }}\n{{ machine_comment }}"
+        }
+      }
+      {% if item.sha1 %}
+      ,{
+        "type": {
+          "name": "Malware SHA-1 Hash"
+        },
+        "value": "{{ item.sha1 }}",
+        "description": {
+          "format": "text",
+          "content": "creation date: {{ item.evidenceCreationTime }}\nfile name: {{ item.fileName }}\n{{ machine_comment }}"
+        }
+      }
+      {% endif %}
+      {% if item.sha256 %}
+      ,{
+        "type": {
+          "name": "Malware SHA-256 Hash"
+        },
+        "value": "{{ item.sha256 }}",
+        "description": {
+          "format": "text",
+          "content": "creation date: {{ item.evidenceCreationTime }}\nfile name: {{ item.fileName }}\n{{ machine_comment }}"
+        }
+      }
+      {% endif %}
+      {% elif item.entityType == 'Registry' %}
+      {% set artifactFlg = True %}
+      {
+        "type": {
+          "name": "Registry Key"
+        },
+        "value": "{{ item.registryHive|lower }}\\{{ item.registryKey|replace('\\', '\\\\') }}",
+        "description": {
+          "format": "text",
+          "content": "creation date: {{ item.evidenceCreationTime }} }}\n{{ machine_comment }}"
+        },
+        "properties":[
+          {
+            "name": "{{ item.registryKey|replace('\\', '\\\\') }}",
+            "value": "{{ item.registryValue|replace('\\', '\\\\')|replace('"', '\\"') }}"
+          }
+        ]
+      }
+      {% elif item.entityType == 'MailMessage' %}
+      {% set artifactFlg = True %}
+      {
+        "type": {
+          "name": "Email Sender"
+        },
+        "value": "{{ item.sender|replace('"', '\\"') }}",
+        "description": {
+          "format": "text",
+          "content": "creation date: {{ item.evidenceCreationTime }}\n{{ machine_comment }}"
+        }
+      },
+      {
+        "type": {
+          "name": "Email Recipient"
+        },
+        "value": "{{ item.recipient|replace('"', '\\"') }}",
+        "description": {
+          "format": "text",
+          "content": "creation date: {{ item.evidenceCreationTime }}\n{{ machine_comment }}"
+        }
+      },
+      {
+        "type": {
+          "name": "Email Subject"
+        },
+        "value": "{{ item.subject|replace('"', '\\"') }}",
+        "description": {
+          "format": "text",
+          "content": "creation date: {{ item.evidenceCreationTime }}\n{{ machine_comment }}"
+        }
+      }
+      {% endif %}
+      ,
+     {% endfor %}
+     {% if artifactFlg and not loop.last %},{% endif %}
+    {% endfor %}
+  ],
+  "comments": [
+    {% for comment in comments %}
+      {
+        "text": {
+          "format": "text",
+          "content": "Defender Incident comment: {{ comment.createdTime }}\n{{ comment.comment }}"
+        }
+      }
+      {% if not loop.last %},{% endif %}
+    {% endfor %}
+  ]
+}
+</pre>
+</details>
+<details><summary>incident_update_template</summary>
+<pre>
+{
+  {# JINJA template for creating a new Resilient incident from a Defender incident. #}
+  "name": "Defender Incident - {{ incidentName|replace('"', '\\"') }}",
+  "description": {
+    "format": "text",
+    "content": "{{ description|replace('"', '\\"') }}"
+  },
+  {# if Defender users are different than SOAR users, consider using a mapping table using resilient_substitute: #}
+  {# "owner_id": "{{ assignedTo|resilient_substitute('{"Automation": "soar_user1@ent.com", "defender_user2@co.com": "soar_user2@ent.com", "DEFAULT": "default_user@ent.com" }') }}", #}
+  "plan_status": "{{ status|resilient_substitute('{"Resolved": "C", "Active": "A", "New": "A"}') }}",
+  "severity_code": "{{ severity|resilient_substitute('{"Informational": "Low"}') }}",
+  "properties": {
+    "defender_classification": "{{ classification|replace('"', '\\"') }}",
+    "defender_determination": "{{ determination|replace('"', '\\"') }}",
+    "defender_tags": "{{ tags | join(',') }}"
+  }
+}
+</pre>
+</details>
+<details><summary>incident_close_template</summary>
+<pre>
+{
+  {# JINJA template for closing a new Resilient incident from a Defender alert. #}
+  "plan_status": "C",
+  "resolution_id": "Resolved",
+  "resolution_summary": "Closed from Defender: {{ investigationState }}",
+  "severity_code": "{{ severity|resilient_substitute('{"Informational": "Low"}') }}",
+  "properties": {
+    "defender_classification": "{{ classification|replace('"', '\\"') }}",
+    "defender_determination": "{{ determination|replace('"', '\\"') }}",
+    "defender_category": "{{ category|replace('"', '\\"') }}"
+  }
+}
+</pre>
+</details>
+<details><summary>defender_update_alert_template</summary>
+<pre>
+{
+    {# JINJA template for updating a Defender alert #}
+    "properties": {
+        "severity": "{{ severity_code|string|resilient_substitute('{"4": "Low", "5": "Medium", "6": "High"}') }}",
+        "status": "{{ status }}",
+        "classification": "{{ classification }}",
+        "determination": "{{ determination }}",
+        "assignedTo": "{{ assignedTo }}",
+        "comment": "{{ comment }}"
+    }
+}
+</pre>
+</details>
+<details><summary>defender_update_incident_template</summary>
+<pre>
+{
+    {# JINJA template for updating a Defender incident from a Resilient incident. #}
+    {% if defender_incident_status %}
+      "status": "{{ defender_incident_status }}"
+    {% endif %}
+    {% if defender_classification %}
+        ,"classification": "{{ defender_classification }}"
+    {% endif %}
+    {# "determine" is set only when classification is TruePositive. Change as necessary #}
+    {% if defender_classification == "TruePositive" %}
+      {% if defender_determination %}
+        ,"determination": "{{ defender_determination }}"
+      {% endif %}
+    {% endif %}
+    {% if defender_tags %}
+        {% set tag_list = defender_tags.split(',') %}
+        ,"tags": {{ tag_list| tojson }}
+    {% endif %}
+    {% if defender_comment %}
+        ,"comment": "Created by IBM SOAR<br>{{ defender_comment|striptags|safe }}"
+    {% endif %}
+}
+</pre>
+</details>

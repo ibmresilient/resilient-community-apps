@@ -26,7 +26,7 @@ inputs.defender_isolation_action = str(rule.properties.defender_isolation_action
 
 ### Post-Processing Script
 ```python
-import Java.util.Date as Date
+import java.util.Date as Date
            
 if results.success:
   row['report_date'] = Date().getTime()
