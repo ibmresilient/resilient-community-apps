@@ -1,24 +1,15 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
+# pragma pylint: disable=unused-argument, no-self-use
 
 """
-Function implementation test.
-Usage: 
+Selftest utility for Extrahop revealx
+Usage:
     resilient-circuits selftest -l fn-extrahop
     resilient-circuits selftest --print-env -l fn-extrahop
-
-Return examples:
-    return {
-        "state": "success",
-        "reason": "Successful connection to third party endpoint"
-    }
-
-    return {
-        "state": "failure",
-        "reason": "Failed to connect to third party endpoint"
-    }
 """
-
 import logging
+from fn_extrahop.lib.rx_client import RxClient
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
@@ -32,7 +23,26 @@ def selftest_function(opts):
     """
     app_configs = opts.get("fn_extrahop", {})
 
-    return {
-        "state": "unimplemented",
-        "reason": None
-    }
+    """
+    Simple test to verify Extrahop revealx connectivity.
+    """
+    app_configs = opts.get("fn_extrahop", {})
+    try:
+        rxcli = RxClient(opts, app_configs)
+        result = rxcli.get_devices(device_id=0)
+        if isinstance(result.json(), list):
+            return {
+                "state": "success",
+                "reason": "Successful connection to Extrahop revealx"
+            }
+        else:
+            return {
+                "state": "failure",
+                "reason": "Failed to connect to Extrahop revealx"
+            }
+
+    except Exception as e:
+        return {
+            "state": "failure",
+            "status_code": e
+        }
