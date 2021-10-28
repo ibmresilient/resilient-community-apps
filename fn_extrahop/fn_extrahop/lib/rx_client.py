@@ -75,17 +75,17 @@ class RxClient():
         """
         # Set default uri
         uri = self._endpoints["devices"].format('')
-        data = {"filter": {}}
+        params = {}
 
-        data["active_from"] = active_from if active_from else 0
-        data["active_until"] = active_until if active_until else 0
-        data["limit"] = int(limit) if limit else 0
-        data["offset"] = int(offset) if offset else 0
+        params["active_from"] = active_from if active_from else 0
+        params["active_until"] = active_until if active_until else 0
+        params["limit"] = int(limit) if limit else 0
+        params["offset"] = int(offset) if offset else 0
 
         if device_id:
             uri = self._endpoints["devices"].format(device_id)
 
-        r = self.rc.execute_call_v2("get", uri, headers=self._headers)
+        r = self.rc.execute_call_v2("get", uri, headers=self._headers, params=params)
 
         return r
 
