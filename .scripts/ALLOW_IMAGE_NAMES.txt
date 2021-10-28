@@ -19,6 +19,7 @@ fn_clamav
 fn_cloud_foundry
 fn_components
 fn_create_webex_meeting
+fn_create_zoom_meeting
 fn_cve_search
 fn_datatable_utils
 fn_elasticsearch
@@ -114,7 +115,6 @@ rc-cts-urlscanio
 #No_Related_image
 #fn_apility
 #fn_cb_protection
-#fn_create_zoom_meeting
 #fn_digital_shadows_search
 #fn_docker
 #fn_floss
