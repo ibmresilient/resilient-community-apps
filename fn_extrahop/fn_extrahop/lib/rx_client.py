@@ -60,11 +60,13 @@ class RxClient():
 
         return r.json()["access_token"]
 
-    def get_devices(self, active_from=None, active_until=None, limit=None, offset=None, device_id=None):
+    def get_devices(self, active_from=None, active_until=None, limit=None, offset=None, device_id=None,
+                    search_type=None):
         """Get information about devices or a specific computer by device id
 
         For more details on api, see https://docs.extrahop.com/8.6/rx360-rest-api/
 
+        :param search_type: Search type (str)
         :param device_id: device_id (str)
         :param active_from: (Optional) The beginning timestamp (in millisecs) for the request. Default 0 (int)
         :param active_until: (Optional) The ending timestamp (in millisecs) for the request. Default 0 (int)
@@ -81,6 +83,7 @@ class RxClient():
         params["active_until"] = active_until if active_until else 0
         params["limit"] = int(limit) if limit else 0
         params["offset"] = int(offset) if offset else 0
+        params["search_type"] = search_type if offset else "any"
 
         if device_id:
             uri = self._endpoints["devices"].format(device_id)

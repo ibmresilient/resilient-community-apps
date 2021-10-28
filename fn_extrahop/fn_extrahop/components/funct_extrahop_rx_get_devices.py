@@ -25,6 +25,7 @@ class FunctionComponent(AppFunctionComponent):
                   Optional parameters  device_id, active_from, active_util, limit and offset
         Inputs:
             -   fn_inputs.extrahop_device_id
+            -   fn_inputs.extrahop_search_type
             -   fn_inputs.extrahop_active_until
             -   fn_inputs.extrahop_active_from
             -   fn_inputs.extrahop_limit
@@ -40,20 +41,15 @@ class FunctionComponent(AppFunctionComponent):
             {"name": "extrahop_rx_api_version"}],
         self.options)
 
-        # Example getting access to self.get_fn_msg()
         fn_msg = self.get_fn_msg()
         self.LOG.info("fn_msg: %s", fn_msg)
-
-        ##############################################
-        # PUT YOUR FUNCTION IMPLEMENTATION CODE HERE #
-        ##############################################
 
         # Set params dict:
         params = {}
         self.LOG.info("fn_inputs: %s", fn_inputs)
-        for i in ["extrahop_device_id", "extrahop_active_from",
-                  "extrahop_active_until", "extrahop_limit",
-                  "extrahop_offset"]:
+        for i in ["extrahop_device_id", "extrahop_search_type",
+                  "extrahop_active_from", "extrahop_active_until",
+                  "extrahop_limit", "extrahop_offset"]:
             if hasattr(fn_inputs, i):
                 params.update({i.split('_', 1)[1]: getattr(fn_inputs, i)})
 
@@ -62,8 +58,6 @@ class FunctionComponent(AppFunctionComponent):
         response = rx_cli.get_devices(**params)
 
         results = response.json()
-
-        ##############################################
 
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
 
