@@ -33,10 +33,11 @@ class RxClient():
         # Define api endpoints
         self._endpoints = {
             # Devices
-            "token":          "/".join([self.host_url, "oauth2/token"]),
-            "devices":        "/".join([self.api_base_url, "devices/{}"]),
-            "search_devices": "/".join([self.api_base_url, "devices/search"]),
-            "detections":     "/".join([self.api_base_url, "detections/{}"])
+            "token":             "/".join([self.host_url, "oauth2/token"]),
+            "devices":           "/".join([self.api_base_url, "devices/{}"]),
+            "search_devices":    "/".join([self.api_base_url, "devices/search"]),
+            "detections":        "/".join([self.api_base_url, "detections/{}"]),
+            "search_detections": "/".join([self.api_base_url, "detections/search"]),
         }
         self.rc = RequestsCommon(opts=opts, function_opts=fn_opts)
         self._headers = {"Authorization": "Bearer " + self.get_token()}
@@ -143,5 +144,50 @@ class RxClient():
             uri = self._endpoints["detections"].format(detection_id)
 
         r = self.rc.execute_call_v2("get", uri, headers=self._headers, params=params)
+
+        return r
+
+    def search_detections(self, search_filter=None, active_from=None, active_until=None, limit=None, offset=None,
+                          update_time=None, sort=None):
+        """Get information about devices or a specific computer by device id
+
+        For more details on api, see https://docs.extrahop.com/8.6/rx360-rest-api/
+
+        :param search_filter: (Optional) Search filter (json str)
+        :param active_from: (Optional)  Get Detections that occurred after the specified timestamp (in millisecs).
+        Default 0 (int)
+        :param active_until: (Optional) Get detections that ended before the specified timestamp (in millisecs).
+        Default 0 (int)
+        :param limit: (Optional) Limit the number of devices returned to the specified maximum number (int).
+        :param offset: (Optional) Skip the specified number of devices (int).
+        :param update_time: (Optional) Get detections that were updated on or after the specified date (int).
+        :param sort: (Optional) Sorts returned detections by the specified fields. (int).
+        :return Result in json format.`
+        """
+        uri = self._endpoints["search_detections"]
+        data = {"filter": {}}
+
+        if search_filter:
+            try:
+                filter_data = json.loads(search_filter)
+            except ValueError:
+                raise ValueError("The search filter is not valid json content")
+
+        if filter_data.get("filter"):
+            data["filter"] = filter_data.get("filter")
+
+        if sort:
+            try:
+                sort_data = json.loads(sort)
+            except ValueError:
+                raise ValueError("The sort parameter is not valid json content")
+            data["sort"] = sort_data
+        data["from"] = active_from if active_from else 0
+        data["until"] = active_until if active_until else 0
+        data["limit"] = int(limit) if limit else 0
+        data["offset"] = int(offset) if offset else 0
+        data["update_time"] = int(update_time) if update_time else 0
+
+        r = self.rc.execute_call_v2("post", uri, headers=self._headers, data=json.dumps(data))
 
         return r
