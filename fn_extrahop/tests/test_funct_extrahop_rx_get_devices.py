@@ -54,11 +54,13 @@ class TestFunctExtrahopRxGetDevices:
         assert func is not None
 
     mock_inputs_1 = {
+
         "extrahop_active_from": 123,
         "extrahop_active_until": 123,
         "extrahop_device_id": 0,
         "extrahop_offset": 123,
-        "extrahop_limit": 123
+        "extrahop_limit": 123,
+        "extrahop_search_type": "any"
     }
 
     expected_results_1 = {}
@@ -68,7 +70,8 @@ class TestFunctExtrahopRxGetDevices:
         "extrahop_active_until": 123,
         "extrahop_device_id": 1,
         "extrahop_offset": 123,
-        "extrahop_limit": 123
+        "extrahop_limit": 123,
+        "extrahop_search_type": "any"
     }
 
     expected_results_2 = {}

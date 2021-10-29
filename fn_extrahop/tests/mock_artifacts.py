@@ -19,7 +19,8 @@ def mocked_rx_client(*args, **kwargs):
         def __init__(self, *args, **kwargs):
             pass
 
-        def get_devices(self, active_from=None, active_until=None, limit=None, offset=None, device_id=None):
+        def get_devices(self, active_from=None, active_until=None, limit=None, offset=None, device_id=None,
+                        search_type="any"):
             return MockGetResponse("{}", 200)
 
         def search_devices(self, active_from=None, active_until=None, limit=None, offset=None, search_filter=None):
