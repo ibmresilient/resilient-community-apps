@@ -1,0 +1,97 @@
+# -*- coding: utf-8 -*-
+#
+# (c) Copyright IBM Corp. 2021. All Rights Reserved.
+#
+#   Resilient Utils
+#
+
+from resilient_circuits import ResilientComponent
+import logging
+from fn_qradar_integration.util.exceptions.custom_exceptions import ResilientActionError
+import resilient_circuits
+
+UPDATE_FIELD = "/types/actioninvocation/fields/{}"
+CREATE_ACTION_FIELD = "/types/actioninvocation/fields?handle_format=names"
+GET_ALL_FIELDS = "/types/actioninvocation/fields?include_principals=true"
+GET_FIELD = "/types/actioninvocation/fields/{}?include_principals=true"
+
+LOG = logging.getLogger(__name__)
+
+class resilient_utils(ResilientComponent):
+    def __init__(self, opts):
+        super(resilient_utils, self).__init__(opts)
+        self.res_rest_client = self.rest_client()
+
+    def get_all_fields(self):
+        return self.res_rest_client.get(GET_ALL_FIELDS)
+
+    def create_payload(self, field_name, field_text, field_values=None, default_qradar_server=None):
+        """
+        Create payload to be sent to resilient
+        """
+        if field_values is None:
+            field_values = []
+        param_values = []
+        payload = {"name": "", "text": "", "prefix": "properties", "tooltip": "", "placeholder": "",
+                        "input_type": "multiselect", "blank_option": False, "values": [], "allow_default_value": False
+                        }
+        
+        for each_value in field_values:
+            default = False
+            if default_qradar_server and str(each_value) == default_qradar_server:
+                default = True
+            param_values.append({"label": str(each_value), "enabled": True, "hidden": False, "default": default})
+
+        payload["name"] = field_name
+        payload["text"] = field_text
+        payload["values"] = param_values
+        return payload
+
+    def update_rule_action_field_values(self, field_name, field_text, field_values=None, default_qradar_server=None):
+        """
+        :param field_name: activity field name
+        :param field_value: values to add to the activity field object
+        :param default_qradar_server: the default qradar server defined in resilient
+        :return:
+        """
+        fields = self.res_rest_client.get(GET_FIELD.format(field_name))
+        in_use_values = []
+        fields_to_add = []
+
+        for tmp in fields.get("values"):
+            in_use_values.append(tmp.get("label"))
+
+        for value in field_values:
+            if value not in in_use_values:
+                fields_to_add.append(value)
+                LOG.info(value+" added to QRadar Servers mulit select field")
+
+        payload = self.create_payload(field_name, field_text, field_values, default_qradar_server)
+
+        try:
+            self.res_rest_client.put(UPDATE_FIELD.format(field_name), payload, timeout=1000)
+            return True
+        except Exception as err_msg:
+            LOG.warning("Action filed: {} create error: {}".format(field_name, err_msg))
+            if str(err_msg).find("already exists in the type actioninvocation") != -1:
+                return False
+            raise ResilientActionError("Error while creating action field: {}".format(field_name))
+
+    def create_rule_action_select_field(self, field_name, field_text, field_values=None, default_qradar_server=None):
+        """
+        Function to Create new rule action select filed with given name & values.
+        :param field_name: Resilient field name to be created
+        :param field_value: List of Resilient filed value to added to field.
+        :return: True on success, False on already exists
+        {"label": "", "enabled": True, "hidden": False}
+        """
+        payload = self.create_payload(field_name, field_text, field_values, default_qradar_server)
+
+        try:
+            self.res_rest_client.post(CREATE_ACTION_FIELD, payload=payload, timeout=1000)
+            return True
+        except Exception as err_msg:
+            LOG.warning("Action filed: {} create error: {}".format(field_name, err_msg))
+            if str(err_msg).find("already exists in the type actioninvocation") != -1:
+                return False
+            raise ResilientActionError("Error while creating action field: {}".format(field_name))

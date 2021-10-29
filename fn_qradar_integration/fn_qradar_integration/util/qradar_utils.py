@@ -9,7 +9,7 @@ import base64
 import logging
 import six
 from fn_qradar_integration.util.SearchWaitCommand import SearchWaitCommand, SearchFailure, SearchJobFailure
-import fn_qradar_integration.util.function_utils as function_utils
+from fn_qradar_integration.util import function_utils
 from resilient_lib import RequestsCommon
 import fn_qradar_integration.util.qradar_constants as qradar_constants
 

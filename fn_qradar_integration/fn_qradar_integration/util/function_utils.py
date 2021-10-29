@@ -51,7 +51,7 @@ def get_servers_list(opts, choose):
     Used for initilizing or reloading the options variable
     :param opts: list of options
     :param choose: either init or reload
-    :return:
+    :return: list of qradar servers
     """
     servers_list = {}
 
@@ -72,3 +72,18 @@ def get_servers_list(opts, choose):
             validate_fields(required_fields, options)
 
     return servers_list
+
+def get_resilient_opts(opts):
+    """
+    Used for initilizing or reloading the res_opts variable
+    :param opts: list of options
+    :return: dictionary of resilient configuration
+    """
+    res_opts = opts.get("resilient", {})
+    res_opts["proxies"] = opts.get("proxy")
+    res_opts["org_id"] = opts.get("org_id")
+    res_opts["timeout"] = 30
+    if opts.get("timeout"):
+        res_opts["timeout"] = opts.get("timeout")
+    
+    return res_opts

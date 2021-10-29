@@ -17,7 +17,7 @@ read_function
 #edit_all_incidents_status
 #
 ## incident fields, artifacts, attachments, milestones, datatables
-#edit_all_incidents_fields
+edit_all_incidents_fields
 #
 ## notes permissions
 #edit_all_incident_notes
@@ -69,4 +69,5 @@ read_function
 #edit_privacy_data
 #read_stats
 #edit_workflow
-#read_all_action_invocations
+read_all_action_invocations
+edit_data

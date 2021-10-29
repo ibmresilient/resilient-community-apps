@@ -6,11 +6,14 @@
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 import fn_qradar_integration.util.function_utils as function_utils
+from fn_qradar_integration.util.resilient_utils import resilient_utils
+
+GET_FIELDS = "/types/actioninvocation/fields?include_principals=true"
 
 LOG = logging.getLogger(__name__)
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'qradar_get_all_servers''"""
+    """Component that implements Resilient function 'qradar_create_server_multi_select''"""
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
@@ -24,21 +27,30 @@ class FunctionComponent(ResilientComponent):
         self.opts = opts
         self.servers_list = function_utils.get_servers_list(opts, "reload")
 
-    @function("qradar_get_all_servers")
-    def _qradar_get_all_servers_function(self, event, *args, **kwargs):
+    @function("qradar_create_server_multi_select")
+    def _qradar_create_server_multi_select(self, event, *args, **kwargs):
         """Function: Return all of the servers in the app.config"""
         try:
 
             # Get the wf_instance_id of the workflow this Function was called in
             wf_instance_id = event.message["workflow_instance"]["workflow_instance_id"]
 
-            yield StatusMessage("Starting 'qradar_get_all_servers' running in workflow '{0}'".format(wf_instance_id))
+            yield StatusMessage("Starting 'qradar_create_server_multi_select' running in workflow '{0}'".format(wf_instance_id))
+
+            # Get the function parameters:
+            default_qradar_server = kwargs.get("qradar_label")  # text
 
             LOG.info("Servers found in app.config:")
+            server_name_list = []
             for server in self.servers_list:
                 LOG.info(server[server.index(":")+1:])
+                server_name_list.append(server[server.index(":")+1:])
 
-            yield StatusMessage("Finished 'qradar_get_all_servers' that was running in workflow '{0}'".format(wf_instance_id))
+            resilient_utils(self.opts).update_rule_action_field_values("qradar_servers", "QRadar Servers", server_name_list, default_qradar_server)
+
+            # resilient_utils(self.opts).create_rule_action_select_field("qradar_servers", "QRadar Servers", server_name_list, default_qradar_server)
+
+            yield StatusMessage("Finished 'qradar_create_server_multi_select' that was running in workflow '{0}'".format(wf_instance_id))
 
             results = {"content" : self.servers_list}
 

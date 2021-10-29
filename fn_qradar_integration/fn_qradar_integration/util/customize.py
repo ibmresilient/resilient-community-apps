@@ -21,7 +21,7 @@ def codegen_reload_data():
     return {
         "package": u"fn_qradar_integration",
         "message_destinations": [u"fn_qradar_integration"],
-        "functions": [u"qradar_add_reference_set_item", u"qradar_delete_reference_set_item", u"qradar_find_all_reference_sets", u"qradar_find_reference_set_item", u"qradar_find_reference_sets", u"qradar_get_all_reference_tables", u"qradar_get_all_servers", u"qradar_get_reference_set_data", u"qradar_reference_set_update_item", u"qradar_reference_table_add_item", u"qradar_reference_table_delete_item", u"qradar_reference_table_get_table", u"qradar_reference_table_update_item", u"qradar_search"],
+        "functions": [u"qradar_add_reference_set_item", u"qradar_create_server_multi_select", u"qradar_delete_reference_set_item", u"qradar_find_all_reference_sets", u"qradar_find_reference_set_item", u"qradar_find_reference_sets", u"qradar_get_all_reference_tables", u"qradar_get_all_servers", u"qradar_get_reference_set_data", u"qradar_reference_set_update_item", u"qradar_reference_table_add_item", u"qradar_reference_table_delete_item", u"qradar_reference_table_get_table", u"qradar_reference_table_update_item", u"qradar_search"],
         "workflows": [u"add_a_reference_table_item", u"example_qradar__add_reference_table_item_dt", u"example_qradar__delete_reference_table_item_dt", u"example_qradar__get_all_reference_tables", u"example_qradar__update_this_reference_table_item", u"qradar_add_reference_set_item", u"qradar_find_reference_set_item", u"qradar_find_reference_sets_artifact", u"qradar_get_reference_table_data", u"qradar_move_item_to_different_ref_set", u"qradar_search_event_offense"],
         "actions": [u"Example: QRadar - Add Item to this Reference Table", u"Example: QRadar - Delete this Reference Table Item", u"Example: QRadar - Gather Reference Table Data", u"Example: QRadar - Get all Reference Tables", u"Example: QRadar - Update this Reference Table Item", u"Find All QRadar Reference Sets", u"Find in QRadar Reference Set", u"QRadar Add to Reference Set", u"QRadar Add to Reference Table", u"QRadar Move from Sample Blocked to Sample Suspected", u"Search QRadar for offense id"],
         "incident_fields": [u"qradar_destination", u"qradar_id"],
@@ -45,6 +45,7 @@ def customization_data(client=None):
         - fn_qradar_integration
     - Functions:
         - qradar_add_reference_set_item
+        - qradar_create_server_multi_select
         - qradar_delete_reference_set_item
         - qradar_find_all_reference_sets
         - qradar_find_reference_set_item
