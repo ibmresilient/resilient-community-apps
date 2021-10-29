@@ -26,6 +26,13 @@ def mocked_rx_client(*args, **kwargs):
         def search_devices(self, active_from=None, active_until=None, limit=None, offset=None, search_filter=None):
             return MockGetResponse("[]", 200)
 
+        def get_detections(self, detection_id=None, limit=None):
+            return MockGetResponse("{}", 200)
+
+        def search_detections(self, search_filter=None, active_from=None, active_until=None, limit=None, offset=None,
+                              update_time=None, sort=None):
+            return MockGetResponse("[]", 200)
+
     return MockSession(*args, **kwargs)
 
 class MockGetResponse:
