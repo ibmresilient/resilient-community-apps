@@ -36,6 +36,7 @@ class RxClient():
             "token":          "/".join([self.host_url, "oauth2/token"]),
             "devices":        "/".join([self.api_base_url, "devices/{}"]),
             "search_devices": "/".join([self.api_base_url, "devices/search"]),
+            "detections":     "/".join([self.api_base_url, "detections/{}"])
         }
         self.rc = RequestsCommon(opts=opts, function_opts=fn_opts)
         self._headers = {"Authorization": "Bearer " + self.get_token()}
@@ -120,5 +121,27 @@ class RxClient():
         data["offset"] = int(offset) if offset else 0
 
         r = self.rc.execute_call_v2("post", uri, headers=self._headers, data=json.dumps(data))
+
+        return r
+
+    def get_detections(self, detection_id=None, limit=None):
+        """Get information about detections or a specific detection by device id
+
+        For more details on api, see https://docs.extrahop.com/8.6/rx360-rest-api/
+
+        :param detection_id: Detection id (str)
+        :param limit(int): (Optional) Limit the number of devices returned to the specified maximum number (int).
+        :return Result in json format.
+        """
+        # Set default uri
+        uri = self._endpoints["detections"].format('')
+        params = {}
+
+        params["limit"] = int(limit) if limit else 0
+
+        if detection_id is not None:
+            uri = self._endpoints["detections"].format(detection_id)
+
+        r = self.rc.execute_call_v2("get", uri, headers=self._headers, params=params)
 
         return r
