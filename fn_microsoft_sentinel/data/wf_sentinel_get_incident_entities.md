@@ -40,11 +40,10 @@ if results.success:
         row['entity_properties'] = "<br>".join(["<b>{}</b>: {}".format(k, v) for k, v in entity['properties'].items()])
         
         # create an artifact
-        if entity.get('resilient_artifact_value'):
-            desc = ["created from Sentinel entity: {}".format(entity['name'])]
-            if entity['properties'].get('azureID'):
-                desc.append(entity['properties']['azureID'])
-
+        desc = ["created from Sentinel entity: {}".format(entity['name'])]
+        if entity['properties'].get('azureID'):
+          desc.append(entity['properties']['azureID'])
+        if entity['resilient_artifact_type']:
             incident.addArtifact(entity['resilient_artifact_type'], entity['resilient_artifact_value'], "\n".join(desc))
 
 ```
