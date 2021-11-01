@@ -466,6 +466,7 @@ TYPE_INFO_MAP = {
 
 TYPE_INFO = ActionMessageTypeInfo(0, TYPE_INFO_MAP, None)
 
+
 class TestDataFeederSyncIncidents:
     """ Tests for the data_feeder_sync_incidents function"""
 
