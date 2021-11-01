@@ -79,6 +79,12 @@ fi
 
 package_path="$TRAVIS_BUILD_DIR/$PACKAGE_NAME"
 
+# Check if package has extra travis script
+if [ -f "$package_path/$FILE_NAME_EXTRA_SETUP" ] ; then
+    print_msg "Executing extra .sh travis setup file found at $package_path/$FILE_NAME_EXTRA_SETUP"
+    sh $package_path/$FILE_NAME_EXTRA_SETUP
+fi
+
 # Update setup.py with new version
 path_setup_py_file="$package_path/setup.py"
 current_version=$(python $path_setup_py_file --version)

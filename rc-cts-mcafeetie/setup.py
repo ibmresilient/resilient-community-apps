@@ -6,7 +6,7 @@ from setuptools import setup, find_packages
 from setuptools.command.test import test as TestCommand
 
 
-PUBLISH_VERSION = "1.0.0"
+PUBLISH_VERSION = "1.0.1"
 
 class PyTest(TestCommand):
     user_options = [('pytestargs=', 'a', "Resilient Environment Arguments")]
