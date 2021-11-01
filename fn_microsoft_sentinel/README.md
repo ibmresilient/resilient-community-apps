@@ -49,6 +49,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 1.0.1 | 11/2021 | minor bug fixes and datatable improvements |
 | 1.0.0 | 08/2021 | Initial Release |
 
 ---
