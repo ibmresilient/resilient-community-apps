@@ -131,7 +131,6 @@ class FeedComponent(ResilientComponent):
 
         try:
             self.options = opts.get("feeds", {})
-            LOG.debug(self.options)
 
             self.channel = "actions." + self.options.get("queue", "feed_data")
 
