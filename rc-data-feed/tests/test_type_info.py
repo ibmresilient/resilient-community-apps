@@ -14,11 +14,11 @@ TYPE_INFO_MAP = {
           "id": 9,
           "values": {
             "1": {
-              "default": true,
-              "enabled": true,
-              "hidden": false,
+              "default": True,
+              "enabled": True,
+              "hidden": False,
               "label": "Default workspace",
-              "properties": null,
+              "properties": None,
               "uuid": "47350579-3795-4d7f-907f-c2d1fd329816",
               "value": 1
             }
@@ -32,11 +32,11 @@ TYPE_INFO_MAP = {
           "id": 58,
           "values": {
             "3": {
-              "default": false,
-              "enabled": true,
-              "hidden": false,
+              "default": False,
+              "enabled": True,
+              "hidden": False,
               "label": "Resilient Sysadmin (a@example.com)",
-              "properties": null,
+              "properties": None,
               "uuid": "ec5f0df2-132a-46f5-8ec1-08dbfaaf59c9",
               "value": 3
             }
@@ -58,11 +58,11 @@ TYPE_INFO_MAP = {
           "id": 62,
           "values": {
             "4": {
-              "default": true,
-              "enabled": true,
-              "hidden": false,
+              "default": True,
+              "enabled": True,
+              "hidden": False,
               "label": "Low",
-              "properties": null,
+              "properties": None,
               "uuid": "97cae239-963d-4e36-be34-07e47ef2cc86",
               "value": 4
             }
@@ -196,11 +196,11 @@ TYPE_INFO_MAP = {
           "id": 68,
           "values": {
             "3": {
-              "default": false,
-              "enabled": true,
-              "hidden": false,
+              "default": False,
+              "enabled": True,
+              "hidden": False,
               "label": "Resilient Sysadmin (a@example.com)",
-              "properties": null,
+              "properties": None,
               "uuid": "ec5f0df2-132a-46f5-8ec1-08dbfaaf59c9",
               "value": 3
             }
@@ -210,12 +210,12 @@ TYPE_INFO_MAP = {
           "id": 60,
           "values": {
             "5": {
-              "default": false,
-              "enabled": true,
-              "hidden": false,
+              "default": False,
+              "enabled": True,
+              "hidden": False,
               "label": "Unknown",
-              "properties": null,
-              "uuid": null,
+              "properties": None,
+              "uuid": None,
               "value": 5
             }
           }
@@ -236,14 +236,14 @@ TYPE_INFO_MAP = {
           "id": 73,
           "values": {
             "201": {
-              "default": false,
-              "enabled": true,
-              "hidden": false,
+              "default": False,
+              "enabled": True,
+              "hidden": False,
               "label": "resilient",
               "properties": {
                 "configuration_type": "standard"
               },
-              "uuid": null,
+              "uuid": None,
               "value": 201
             }
           }
@@ -252,12 +252,12 @@ TYPE_INFO_MAP = {
           "id": 11,
           "values": {
             "A": {
-              "default": false,
-              "enabled": true,
-              "hidden": false,
+              "default": False,
+              "enabled": True,
+              "hidden": False,
               "label": "Active",
-              "properties": null,
-              "uuid": null,
+              "properties": None,
+              "uuid": None,
               "value": "A"
             }
           }
@@ -298,11 +298,11 @@ TYPE_INFO_MAP = {
           "id": 19,
           "values": {
             "1005": {
-              "default": false,
-              "enabled": true,
-              "hidden": false,
+              "default": False,
+              "enabled": True,
+              "hidden": False,
               "label": "Respond",
-              "properties": null,
+              "properties": None,
               "uuid": "ebad851d-5b5e-4d19-af79-fae53cc1f659",
               "value": 1005
             }
@@ -328,12 +328,12 @@ TYPE_INFO_MAP = {
           "id": 56,
           "values": {
             "2": {
-              "default": false,
-              "enabled": true,
-              "hidden": false,
+              "default": False,
+              "enabled": True,
+              "hidden": False,
               "label": "Unknown",
-              "properties": null,
-              "uuid": null,
+              "properties": None,
+              "uuid": None,
               "value": 2
             }
           }
@@ -422,12 +422,12 @@ TYPE_INFO_MAP = {
           "id": 5,
           "values": {
             "1": {
-              "default": false,
-              "enabled": true,
-              "hidden": false,
+              "default": False,
+              "enabled": True,
+              "hidden": False,
               "label": "Unknown",
-              "properties": null,
-              "uuid": null,
+              "properties": None,
+              "uuid": None,
               "value": 1
             }
           }
@@ -464,7 +464,7 @@ TYPE_INFO_MAP = {
       "type_id": 0
     }
 
-TYPE_INFO = ActionMessageTypeInfo(0, TYPE_INFO_MAP, None))
+TYPE_INFO = ActionMessageTypeInfo(0, TYPE_INFO_MAP, None)
 
 class TestDataFeederSyncIncidents:
     """ Tests for the data_feeder_sync_incidents function"""
