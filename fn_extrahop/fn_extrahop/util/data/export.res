@@ -3,6 +3,61 @@
   "actions": [
     {
       "automations": [],
+      "conditions": [
+        {
+          "evaluation_id": null,
+          "field_name": "artifact.type",
+          "method": "equals",
+          "type": null,
+          "value": "extrahop_device_id"
+        }
+      ],
+      "enabled": true,
+      "export_key": "Example: Extrahop revealx assign tag",
+      "id": 34,
+      "logic_type": "all",
+      "message_destinations": [],
+      "name": "Example: Extrahop revealx assign tag",
+      "object_type": "artifact",
+      "tags": [],
+      "timeout_seconds": 86400,
+      "type": 1,
+      "uuid": "6ad4aaa4-74cd-4193-8211-e6c5ae27792c",
+      "view_items": [],
+      "workflows": [
+        "wf_extrahop_rx_assign_tag"
+      ]
+    },
+    {
+      "automations": [],
+      "conditions": [],
+      "enabled": true,
+      "export_key": "Example: Extrahop revealx create tag",
+      "id": 32,
+      "logic_type": "all",
+      "message_destinations": [],
+      "name": "Example: Extrahop revealx create tag",
+      "object_type": "incident",
+      "tags": [],
+      "timeout_seconds": 86400,
+      "type": 1,
+      "uuid": "a7953d43-3649-41db-8fe7-3dd6a4b40c56",
+      "view_items": [
+        {
+          "content": "3330c34e-1480-424c-86f9-f06842ffe347",
+          "element": "field_uuid",
+          "field_type": "actioninvocation",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        }
+      ],
+      "workflows": [
+        "wf_extrahop_rx_create_tag"
+      ]
+    },
+    {
+      "automations": [],
       "conditions": [],
       "enabled": true,
       "export_key": "Example: Extrahop revealx get detections",
@@ -37,6 +92,25 @@
       "view_items": [],
       "workflows": [
         "wf_extrahop_rx_get_devices"
+      ]
+    },
+    {
+      "automations": [],
+      "conditions": [],
+      "enabled": true,
+      "export_key": "Example: Extrahop revealx get tags",
+      "id": 31,
+      "logic_type": "all",
+      "message_destinations": [],
+      "name": "Example: Extrahop revealx get tags",
+      "object_type": "incident",
+      "tags": [],
+      "timeout_seconds": 86400,
+      "type": 1,
+      "uuid": "30b32c9c-4258-4b9d-a18a-3c88c91bfe9b",
+      "view_items": [],
+      "workflows": [
+        "wf_extrahop_rx_get_tags"
       ]
     },
     {
@@ -98,9 +172,38 @@
   ],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1635440806292,
+  "export_date": 1635856097914,
   "export_format_version": 2,
   "fields": [
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "__function/extrahop_tag_name",
+      "hide_notification": false,
+      "id": 563,
+      "input_type": "text",
+      "internal": false,
+      "is_tracked": false,
+      "name": "extrahop_tag_name",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": null,
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "extrahop_tag_name",
+      "tooltip": "The string value for an Etrahop  tag name.",
+      "type_id": 11,
+      "uuid": "9274ccb1-cebb-4be8-b7f1-f768f0eabbcf",
+      "values": []
+    },
     {
       "allow_default_value": false,
       "blank_option": false,
@@ -186,6 +289,35 @@
       "tooltip": "(Optional) Skip the specified number of devices. This parameter is often combined with the limit parameter to paginate result sets.",
       "type_id": 11,
       "uuid": "cb078829-0c0e-426f-b1d6-850e9396f070",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "__function/extrahop_device_ids",
+      "hide_notification": false,
+      "id": 565,
+      "input_type": "text",
+      "internal": false,
+      "is_tracked": false,
+      "name": "extrahop_device_ids",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": null,
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "extrahop_device_ids",
+      "tooltip": "Comma or newline seperated list of device ids.",
+      "type_id": 11,
+      "uuid": "f7117970-a76c-4505-87b3-5dbcc35eabdc",
       "values": []
     },
     {
@@ -399,6 +531,35 @@
       "chosen": false,
       "default_chosen_by_server": false,
       "deprecated": false,
+      "export_key": "__function/extrahop_tag_id",
+      "hide_notification": false,
+      "id": 562,
+      "input_type": "text",
+      "internal": false,
+      "is_tracked": false,
+      "name": "extrahop_tag_id",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": null,
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "extrahop_tag_id",
+      "tooltip": "The unique identifier for the tag.",
+      "type_id": 11,
+      "uuid": "7cdee050-dccf-4d54-aa17-97442856ce7d",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
       "export_key": "actioninvocation/extrahop_detection_search_filter",
       "hide_notification": false,
       "id": 560,
@@ -408,7 +569,7 @@
       "name": "extrahop_detection_search_filter",
       "operation_perms": {},
       "operations": [],
-      "placeholder": "{\"filter\": {\"category\": \"string\",\"assignee\": [], \"ticket_id\": [], \"status\": [], \"resolution\": []},}",
+      "placeholder": "{\"filter\": {\"category\": \"string\",\"assignee\": [], \"ticket_id\": [], \"status\": [], \"resolution\": []}}",
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
@@ -450,6 +611,35 @@
       "values": []
     },
     {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "actioninvocation/extrahop_tag_name",
+      "hide_notification": false,
+      "id": 564,
+      "input_type": "text",
+      "internal": false,
+      "is_tracked": false,
+      "name": "extrahop_tag_name",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "\u003cTAG_NAME\u003e",
+      "prefix": "properties",
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "Extrahop tag name",
+      "tooltip": "",
+      "type_id": 6,
+      "uuid": "3330c34e-1480-424c-86f9-f06842ffe347",
+      "values": []
+    },
+    {
       "export_key": "incident/internal_customizations_field",
       "id": 0,
       "input_type": "text",
@@ -463,6 +653,114 @@
   ],
   "functions": [
     {
+      "created_date": 1635785099361,
+      "creator": {
+        "display_name": "Resilient Sysadmin",
+        "id": 4,
+        "name": "a@a.com",
+        "type": "user"
+      },
+      "description": {
+        "content": "Assign a tag to a list of devices ids forExtrahop Reveal(x). Optional parameters tag_id. devices_ids.",
+        "format": "text"
+      },
+      "destination_handle": "extrahop",
+      "display_name": "Extrahop revealx assign tag",
+      "export_key": "funct_extrahop_rx_assign_tag",
+      "id": 39,
+      "last_modified_by": {
+        "display_name": "Resilient Sysadmin",
+        "id": 4,
+        "name": "a@a.com",
+        "type": "user"
+      },
+      "last_modified_time": 1635856058249,
+      "name": "funct_extrahop_rx_assign_tag",
+      "tags": [],
+      "uuid": "f0d2fc8c-20ab-440c-b4f5-46776a0b561e",
+      "version": 4,
+      "view_items": [
+        {
+          "content": "7cdee050-dccf-4d54-aa17-97442856ce7d",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "f7117970-a76c-4505-87b3-5dbcc35eabdc",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        }
+      ],
+      "workflows": [
+        {
+          "actions": [],
+          "description": null,
+          "name": "Example: Extrahop revealx assign tag",
+          "object_type": "artifact",
+          "programmatic_name": "wf_extrahop_rx_assign_tag",
+          "tags": [],
+          "uuid": null,
+          "workflow_id": 9
+        }
+      ]
+    },
+    {
+      "created_date": 1635526394849,
+      "creator": {
+        "display_name": "Resilient Sysadmin",
+        "id": 4,
+        "name": "a@a.com",
+        "type": "user"
+      },
+      "description": {
+        "content": "Create a new tag for  Extrahop Reveal(x). Optional parameters tag_id.",
+        "format": "text"
+      },
+      "destination_handle": "extrahop",
+      "display_name": "Extrahop revealx create tag",
+      "export_key": "funct_extrahop_rx_create_tag",
+      "id": 38,
+      "last_modified_by": {
+        "display_name": "Resilient Sysadmin",
+        "id": 4,
+        "name": "a@a.com",
+        "type": "user"
+      },
+      "last_modified_time": 1635769059563,
+      "name": "funct_extrahop_rx_create_tag",
+      "tags": [],
+      "uuid": "d566e4b3-6692-4599-a351-7530cdb4874e",
+      "version": 6,
+      "view_items": [
+        {
+          "content": "9274ccb1-cebb-4be8-b7f1-f768f0eabbcf",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        }
+      ],
+      "workflows": [
+        {
+          "actions": [],
+          "description": null,
+          "name": "Example: Extrahop revealx create tag",
+          "object_type": "incident",
+          "programmatic_name": "wf_extrahop_rx_create_tag",
+          "tags": [],
+          "uuid": null,
+          "workflow_id": 7
+        }
+      ]
+    },
+    {
       "created_date": 1634748855771,
       "creator": {
         "display_name": "Resilient Sysadmin",
@@ -471,7 +769,7 @@
         "type": "user"
       },
       "description": {
-        "content": "Get detections information from Extrahop Reveal(x) . Optional parameters extrahop_detecion_id",
+        "content": "Get detections information from Extrahop Reveal(x) . Optional parameters extrahop_detecion_id.",
         "format": "text"
       },
       "destination_handle": "extrahop",
@@ -484,11 +782,11 @@
         "name": "a@a.com",
         "type": "user"
       },
-      "last_modified_time": 1635434948773,
+      "last_modified_time": 1635768783227,
       "name": "funct_extrahop_rx_get_detections",
       "tags": [],
       "uuid": "fc71fc68-991e-4825-bc07-2191e58745f3",
-      "version": 8,
+      "version": 9,
       "view_items": [
         {
           "content": "2cd40098-aebb-4efd-8b30-eca7edfb8438",
@@ -529,7 +827,7 @@
         "type": "user"
       },
       "description": {
-        "content": "Get devices information from Extrahop Reveal(x) . Optional parameters  device_id, active_from, active_util, limit and offset",
+        "content": "Get devices information from Extrahop Reveal(x) . Optional parameters  device_id, active_from, active_util, limit and offset.",
         "format": "text"
       },
       "destination_handle": "extrahop",
@@ -542,11 +840,11 @@
         "name": "a@a.com",
         "type": "user"
       },
-      "last_modified_time": 1635435161655,
+      "last_modified_time": 1635768794624,
       "name": "funct_extrahop_rx_get_devices",
       "tags": [],
       "uuid": "75447029-32ca-4363-b753-bc970cee66d5",
-      "version": 15,
+      "version": 16,
       "view_items": [
         {
           "content": "77f58f54-c4a9-4720-ab05-34e2beb94521",
@@ -611,6 +909,56 @@
       ]
     },
     {
+      "created_date": 1635520990181,
+      "creator": {
+        "display_name": "Resilient Sysadmin",
+        "id": 4,
+        "name": "a@a.com",
+        "type": "user"
+      },
+      "description": {
+        "content": "Get tags information from Extrahop Reveal(x) . Optional parameters tag_id.",
+        "format": "text"
+      },
+      "destination_handle": "extrahop",
+      "display_name": "Extrahop revealx get tags",
+      "export_key": "funct_extrahop_rx_get_tags",
+      "id": 37,
+      "last_modified_by": {
+        "display_name": "Resilient Sysadmin",
+        "id": 4,
+        "name": "a@a.com",
+        "type": "user"
+      },
+      "last_modified_time": 1635768804009,
+      "name": "funct_extrahop_rx_get_tags",
+      "tags": [],
+      "uuid": "55ced5bd-cd23-4212-b661-956fed40722b",
+      "version": 6,
+      "view_items": [
+        {
+          "content": "7cdee050-dccf-4d54-aa17-97442856ce7d",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        }
+      ],
+      "workflows": [
+        {
+          "actions": [],
+          "description": null,
+          "name": "Example: Extrahop revealx get tags",
+          "object_type": "incident",
+          "programmatic_name": "wf_extrahop_rx_get_tags",
+          "tags": [],
+          "uuid": null,
+          "workflow_id": 6
+        }
+      ]
+    },
+    {
       "created_date": 1635417902829,
       "creator": {
         "display_name": "Resilient Sysadmin",
@@ -619,7 +967,7 @@
         "type": "user"
       },
       "description": {
-        "content": "Search for detections information from Extrahop Reveal(x). Optional parameter search_filter, active_from, active_util, limit , offset, update_time and sort",
+        "content": "Search for detections information from Extrahop Reveal(x). Optional parameter search_filter, active_from, active_util, limit , offset, update_time and sort.",
         "format": "text"
       },
       "destination_handle": "extrahop",
@@ -632,11 +980,11 @@
         "name": "a@a.com",
         "type": "user"
       },
-      "last_modified_time": 1635435266742,
+      "last_modified_time": 1635768814946,
       "name": "funct_extrahop_rx_search_detections",
       "tags": [],
       "uuid": "b70037a5-fcaf-4e78-a1e2-6acdc4dff239",
-      "version": 7,
+      "version": 8,
       "view_items": [
         {
           "content": "0c8318d9-cc79-4f1b-b500-ea84d2b40371",
@@ -717,7 +1065,7 @@
         "type": "user"
       },
       "description": {
-        "content": "Search for devices information from Extrahop Reveal(x). Optional parameter search_filter, active_from, active_util, limit and offset",
+        "content": "Search for devices information from Extrahop Reveal(x). Optional parameter search_filter, active_from, active_util, limit and offset.",
         "format": "text"
       },
       "destination_handle": "extrahop",
@@ -730,11 +1078,11 @@
         "name": "a@a.com",
         "type": "user"
       },
-      "last_modified_time": 1635350072177,
+      "last_modified_time": 1635768823701,
       "name": "funct_extrahop_rx_search_devices",
       "tags": [],
       "uuid": "e7384abd-0046-4b46-97af-d34d8cc9c711",
-      "version": 10,
+      "version": 11,
       "view_items": [
         {
           "content": "0c8318d9-cc79-4f1b-b500-ea84d2b40371",
@@ -793,13 +1141,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 53,
+  "id": 62,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1635440786881,
+      "create_date": 1635856111137,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -808,7 +1156,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1635440786881,
+      "update_date": 1635856111137,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -850,62 +1198,82 @@
     {
       "actions": [],
       "content": {
-        "version": 5,
-        "workflow_id": "wf_extrahop_rx_get_detections",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_extrahop_rx_get_detections\" isExecutable=\"true\" name=\"Example: Extrahop revealx get detections\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0o3iz5f\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_084ezxp\" name=\"Extrahop revealx get detections\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"fc71fc68-991e-4825-bc07-2191e58745f3\"\u003e{\"inputs\":{},\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0o3iz5f\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1ordt64\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0o3iz5f\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_084ezxp\"/\u003e\u003cendEvent id=\"EndEvent_0itl0u4\"\u003e\u003cincoming\u003eSequenceFlow_1ordt64\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1ordt64\" sourceRef=\"ServiceTask_084ezxp\" targetRef=\"EndEvent_0itl0u4\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_084ezxp\" id=\"ServiceTask_084ezxp_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"238\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0o3iz5f\" id=\"SequenceFlow_0o3iz5f_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"238\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"218\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0itl0u4\" id=\"EndEvent_0itl0u4_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"396\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"414\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1ordt64\" id=\"SequenceFlow_1ordt64_di\"\u003e\u003comgdi:waypoint x=\"338\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"396\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"367\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "version": 6,
+        "workflow_id": "wf_extrahop_rx_assign_tag",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_extrahop_rx_assign_tag\" isExecutable=\"true\" name=\"Example: Extrahop revealx assign tag\"\u003e\u003cdocumentation\u003eAssign a tag to a devices id for Extrahop Reveal(x).\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_00jmg5k\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0twwdja\" name=\"Extrahop revealx asssign tag\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"f0d2fc8c-20ab-440c-b4f5-46776a0b561e\"\u003e{\"inputs\":{},\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.extrahop_device_ids = artifact.value\\ninputs.extrahop_tag_id = 1\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_00jmg5k\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1ydkfof\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_05plo24\"\u003e\u003cincoming\u003eSequenceFlow_1ydkfof\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1ydkfof\" sourceRef=\"ServiceTask_0twwdja\" targetRef=\"EndEvent_05plo24\"/\u003e\u003csequenceFlow id=\"SequenceFlow_00jmg5k\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0twwdja\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0twwdja\" id=\"ServiceTask_0twwdja_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"327\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_05plo24\" id=\"EndEvent_05plo24_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"547\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"520\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1ydkfof\" id=\"SequenceFlow_1ydkfof_di\"\u003e\u003comgdi:waypoint x=\"427\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"547\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"442\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_00jmg5k\" id=\"SequenceFlow_00jmg5k_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"327\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"217.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 5,
+      "content_version": 6,
       "creator_id": "a@a.com",
-      "description": "",
-      "export_key": "wf_extrahop_rx_get_detections",
+      "description": "Assign a tag to a devices id for Extrahop Reveal(x).",
+      "export_key": "wf_extrahop_rx_assign_tag",
       "last_modified_by": "a@a.com",
-      "last_modified_time": 1635434005463,
-      "name": "Example: Extrahop revealx get detections",
-      "object_type": "incident",
-      "programmatic_name": "wf_extrahop_rx_get_detections",
+      "last_modified_time": 1635855521423,
+      "name": "Example: Extrahop revealx assign tag",
+      "object_type": "artifact",
+      "programmatic_name": "wf_extrahop_rx_assign_tag",
       "tags": [],
-      "uuid": "3415df1f-b5af-47e3-aea9-c7e22b11c854",
-      "workflow_id": 4
+      "uuid": "224f8e6a-eb3f-4263-b8b1-4ccdadddcdb2",
+      "workflow_id": 9
     },
     {
       "actions": [],
       "content": {
-        "version": 4,
-        "workflow_id": "wf_extrahop_rx_search_detections",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_extrahop_rx_search_detections\" isExecutable=\"true\" name=\"Example: Extrahop revealx search detections\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0v0udss\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1bnujpl\" name=\"Extrahop revealx search detection...\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"b70037a5-fcaf-4e78-a1e2-6acdc4dff239\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.extrahop_search_filter = rule.properties.extrahop_detection_search_filter.content\\nif inputs.extrahop_search_filter is None:\\n    raise ValueError(\\\"The search filter is not set\\\")\\nfor prop in [\\\"filter\\\", \\\"category\\\", \\\"assignee\\\", \\\"ticket_id\\\", \\\"status\\\", \\\"resolution\\\"]:\\n  if prop not in inputs.extrahop_search_filter:\\n    raise ValueError(\\\"The search filter is missing property \u0027{}\u0027\\\".format(prop))\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0v0udss\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_17ve9fh\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0v0udss\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1bnujpl\"/\u003e\u003cendEvent id=\"EndEvent_0jhirff\"\u003e\u003cincoming\u003eSequenceFlow_17ve9fh\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_17ve9fh\" sourceRef=\"ServiceTask_1bnujpl\" targetRef=\"EndEvent_0jhirff\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1bnujpl\" id=\"ServiceTask_1bnujpl_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"242\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0v0udss\" id=\"SequenceFlow_0v0udss_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"242\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"220\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0jhirff\" id=\"EndEvent_0jhirff_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"378\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"396\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_17ve9fh\" id=\"SequenceFlow_17ve9fh_di\"\u003e\u003comgdi:waypoint x=\"342\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"378\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"360\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "version": 2,
+        "workflow_id": "wf_extrahop_rx_get_tags",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_extrahop_rx_get_tags\" isExecutable=\"true\" name=\"Example: Extrahop revealx get tags\"\u003e\u003cdocumentation\u003eGet tags information from Extrahop Reveal(x)\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1dns9ig\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_189ulsl\" name=\"Extrahop revealx get tags\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"55ced5bd-cd23-4212-b661-956fed40722b\"\u003e{\"inputs\":{},\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1dns9ig\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0vd5haa\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1dns9ig\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_189ulsl\"/\u003e\u003cendEvent id=\"EndEvent_0y9myii\"\u003e\u003cincoming\u003eSequenceFlow_0vd5haa\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0vd5haa\" sourceRef=\"ServiceTask_189ulsl\" targetRef=\"EndEvent_0y9myii\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_189ulsl\" id=\"ServiceTask_189ulsl_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"244\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1dns9ig\" id=\"SequenceFlow_1dns9ig_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"244\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"221\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0y9myii\" id=\"EndEvent_0y9myii_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"388\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"406\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0vd5haa\" id=\"SequenceFlow_0vd5haa_di\"\u003e\u003comgdi:waypoint x=\"344\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"388\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"366\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 4,
+      "content_version": 2,
       "creator_id": "a@a.com",
-      "description": "",
-      "export_key": "wf_extrahop_rx_search_detections",
+      "description": "Get tags information from Extrahop Reveal(x)",
+      "export_key": "wf_extrahop_rx_get_tags",
       "last_modified_by": "a@a.com",
-      "last_modified_time": 1635439971847,
-      "name": "Example: Extrahop revealx search detections",
+      "last_modified_time": 1635768666400,
+      "name": "Example: Extrahop revealx get tags",
       "object_type": "incident",
-      "programmatic_name": "wf_extrahop_rx_search_detections",
+      "programmatic_name": "wf_extrahop_rx_get_tags",
       "tags": [],
-      "uuid": "7e68a246-23c6-40bd-8f0a-77217f69a01c",
-      "workflow_id": 5
+      "uuid": "3385d752-805c-4275-9092-4af1c3e9abe4",
+      "workflow_id": 6
     },
     {
       "actions": [],
       "content": {
-        "version": 7,
+        "version": 8,
         "workflow_id": "wf_extrahop_rx_get_devices",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_extrahop_rx_get_devices\" isExecutable=\"true\" name=\"Example: Extrahop revealx get devices\"\u003e\u003cdocumentation\u003eGet devices information from Extrahop Reveal(x) .\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1lf3pjh\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_16ic9ye\" name=\"Extrahop revealx get devices\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"75447029-32ca-4363-b753-bc970cee66d5\"\u003e{\"inputs\":{},\"post_processing_script_language\":\"python3\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1lf3pjh\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_10jo0yc\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1lf3pjh\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_16ic9ye\"/\u003e\u003cendEvent id=\"EndEvent_1tnn5yc\"\u003e\u003cincoming\u003eSequenceFlow_10jo0yc\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_10jo0yc\" sourceRef=\"ServiceTask_16ic9ye\" targetRef=\"EndEvent_1tnn5yc\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_16ic9ye\" id=\"ServiceTask_16ic9ye_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"255\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1lf3pjh\" id=\"SequenceFlow_1lf3pjh_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"255\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"226.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1tnn5yc\" id=\"EndEvent_1tnn5yc_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"427\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"445\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_10jo0yc\" id=\"SequenceFlow_10jo0yc_di\"\u003e\u003comgdi:waypoint x=\"355\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"427\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"391\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_extrahop_rx_get_devices\" isExecutable=\"true\" name=\"Example: Extrahop revealx get devices\"\u003e\u003cdocumentation\u003eGet devices information from Extrahop Reveal(x) .\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1lf3pjh\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_16ic9ye\" name=\"Extrahop revealx get devices\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"75447029-32ca-4363-b753-bc970cee66d5\"\u003e{\"inputs\":{},\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.extrahop_search_type =\\\"any\\\"\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1lf3pjh\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_10jo0yc\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1lf3pjh\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_16ic9ye\"/\u003e\u003cendEvent id=\"EndEvent_1tnn5yc\"\u003e\u003cincoming\u003eSequenceFlow_10jo0yc\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_10jo0yc\" sourceRef=\"ServiceTask_16ic9ye\" targetRef=\"EndEvent_1tnn5yc\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_16ic9ye\" id=\"ServiceTask_16ic9ye_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"255\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1lf3pjh\" id=\"SequenceFlow_1lf3pjh_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"255\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"226.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1tnn5yc\" id=\"EndEvent_1tnn5yc_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"427\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"445\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_10jo0yc\" id=\"SequenceFlow_10jo0yc_di\"\u003e\u003comgdi:waypoint x=\"355\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"427\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"391\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 7,
+      "content_version": 8,
       "creator_id": "a@a.com",
       "description": "Get devices information from Extrahop Reveal(x) .",
       "export_key": "wf_extrahop_rx_get_devices",
       "last_modified_by": "a@a.com",
-      "last_modified_time": 1635349708067,
+      "last_modified_time": 1635505781701,
       "name": "Example: Extrahop revealx get devices",
       "object_type": "incident",
       "programmatic_name": "wf_extrahop_rx_get_devices",
       "tags": [],
       "uuid": "c0ea7fdb-37a1-4f70-92a1-2c427ea93232",
       "workflow_id": 2
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 5,
+        "workflow_id": "wf_extrahop_rx_search_detections",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_extrahop_rx_search_detections\" isExecutable=\"true\" name=\"Example: Extrahop revealx search detections\"\u003e\u003cdocumentation\u003eSearch for detections information from Extrahop Reveal(x).\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0v0udss\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1bnujpl\" name=\"Extrahop revealx search detection...\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"b70037a5-fcaf-4e78-a1e2-6acdc4dff239\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.extrahop_search_filter = rule.properties.extrahop_detection_search_filter.content\\nif inputs.extrahop_search_filter is None:\\n    raise ValueError(\\\"The search filter is not set\\\")\\nfor prop in [\\\"filter\\\", \\\"category\\\", \\\"assignee\\\", \\\"ticket_id\\\", \\\"status\\\", \\\"resolution\\\"]:\\n  if prop not in inputs.extrahop_search_filter:\\n    raise ValueError(\\\"The search filter is missing property \u0027{}\u0027\\\".format(prop))\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0v0udss\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_17ve9fh\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0v0udss\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1bnujpl\"/\u003e\u003cendEvent id=\"EndEvent_0jhirff\"\u003e\u003cincoming\u003eSequenceFlow_17ve9fh\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_17ve9fh\" sourceRef=\"ServiceTask_1bnujpl\" targetRef=\"EndEvent_0jhirff\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1bnujpl\" id=\"ServiceTask_1bnujpl_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"242\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0v0udss\" id=\"SequenceFlow_0v0udss_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"242\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"220\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0jhirff\" id=\"EndEvent_0jhirff_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"378\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"396\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_17ve9fh\" id=\"SequenceFlow_17ve9fh_di\"\u003e\u003comgdi:waypoint x=\"342\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"378\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"360\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 5,
+      "creator_id": "a@a.com",
+      "description": "Search for detections information from Extrahop Reveal(x).",
+      "export_key": "wf_extrahop_rx_search_detections",
+      "last_modified_by": "a@a.com",
+      "last_modified_time": 1635768729288,
+      "name": "Example: Extrahop revealx search detections",
+      "object_type": "incident",
+      "programmatic_name": "wf_extrahop_rx_search_detections",
+      "tags": [],
+      "uuid": "7e68a246-23c6-40bd-8f0a-77217f69a01c",
+      "workflow_id": 5
     },
     {
       "actions": [],
@@ -926,6 +1294,46 @@
       "tags": [],
       "uuid": "7d82fa2a-339c-4306-9a2c-ab4886101e2e",
       "workflow_id": 3
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 5,
+        "workflow_id": "wf_extrahop_rx_create_tag",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_extrahop_rx_create_tag\" isExecutable=\"true\" name=\"Example: Extrahop revealx create tag\"\u003e\u003cdocumentation\u003eCreate a new tag for  Extrahop Reveal(x).\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0dto6o1\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1km27wt\" name=\"Extrahop revealx create tag\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d566e4b3-6692-4599-a351-7530cdb4874e\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.extrahop_tag_name = rule.properties.extrahop_tag_name\\nif inputs.extrahop_tag_name is None:\\n    raise ValueError(\\\"The tag name is not set\\\")\\n\\n\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0dto6o1\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0lqhvgt\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0dto6o1\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1km27wt\"/\u003e\u003cendEvent id=\"EndEvent_1fv39zp\"\u003e\u003cincoming\u003eSequenceFlow_0lqhvgt\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0lqhvgt\" sourceRef=\"ServiceTask_1km27wt\" targetRef=\"EndEvent_1fv39zp\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1km27wt\" id=\"ServiceTask_1km27wt_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"259\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0dto6o1\" id=\"SequenceFlow_0dto6o1_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"259\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"228.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1fv39zp\" id=\"EndEvent_1fv39zp_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"396\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"414\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0lqhvgt\" id=\"SequenceFlow_0lqhvgt_di\"\u003e\u003comgdi:waypoint x=\"359\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"396\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"377.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 5,
+      "creator_id": "a@a.com",
+      "description": "Create a new tag for  Extrahop Reveal(x).",
+      "export_key": "wf_extrahop_rx_create_tag",
+      "last_modified_by": "a@a.com",
+      "last_modified_time": 1635852565044,
+      "name": "Example: Extrahop revealx create tag",
+      "object_type": "incident",
+      "programmatic_name": "wf_extrahop_rx_create_tag",
+      "tags": [],
+      "uuid": "ceb2ade6-72f4-490d-bae2-7824953d3c91",
+      "workflow_id": 7
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 6,
+        "workflow_id": "wf_extrahop_rx_get_detections",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_extrahop_rx_get_detections\" isExecutable=\"true\" name=\"Example: Extrahop revealx get detections\"\u003e\u003cdocumentation\u003eGet detections information from Extrahop Reveal(x)\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0o3iz5f\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_084ezxp\" name=\"Extrahop revealx get detections\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"fc71fc68-991e-4825-bc07-2191e58745f3\"\u003e{\"inputs\":{},\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0o3iz5f\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1ordt64\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0o3iz5f\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_084ezxp\"/\u003e\u003cendEvent id=\"EndEvent_0itl0u4\"\u003e\u003cincoming\u003eSequenceFlow_1ordt64\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1ordt64\" sourceRef=\"ServiceTask_084ezxp\" targetRef=\"EndEvent_0itl0u4\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_084ezxp\" id=\"ServiceTask_084ezxp_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"238\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0o3iz5f\" id=\"SequenceFlow_0o3iz5f_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"238\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"218\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0itl0u4\" id=\"EndEvent_0itl0u4_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"396\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"414\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1ordt64\" id=\"SequenceFlow_1ordt64_di\"\u003e\u003comgdi:waypoint x=\"338\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"396\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"367\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 6,
+      "creator_id": "a@a.com",
+      "description": "Get detections information from Extrahop Reveal(x)",
+      "export_key": "wf_extrahop_rx_get_detections",
+      "last_modified_by": "a@a.com",
+      "last_modified_time": 1635768691520,
+      "name": "Example: Extrahop revealx get detections",
+      "object_type": "incident",
+      "programmatic_name": "wf_extrahop_rx_get_detections",
+      "tags": [],
+      "uuid": "3415df1f-b5af-47e3-aea9-c7e22b11c854",
+      "workflow_id": 4
     }
   ],
   "workspaces": []
