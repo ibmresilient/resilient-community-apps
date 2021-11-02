@@ -5,6 +5,8 @@
 import json
 import logging
 import base64
+import re
+
 from resilient_lib import RequestsCommon
 
 LOG = logging.getLogger(__name__)
@@ -38,6 +40,7 @@ class RxClient():
             "search_devices":    "/".join([self.api_base_url, "devices/search"]),
             "detections":        "/".join([self.api_base_url, "detections/{}"]),
             "search_detections": "/".join([self.api_base_url, "detections/search"]),
+            "tags":              "/".join([self.api_base_url, "tags"])
         }
         self.rc = RequestsCommon(opts=opts, function_opts=fn_opts)
         self._headers = {"Authorization": "Bearer " + self.get_token()}
@@ -189,5 +192,24 @@ class RxClient():
         data["update_time"] = int(update_time) if update_time else 0
 
         r = self.rc.execute_call_v2("post", uri, headers=self._headers, data=json.dumps(data))
+
+        return r
+
+    def get_tags(self, tag_id=None):
+        """Get information about tags or a specific tag by tag id.
+
+        For more details on api, see https://docs.extrahop.com/8.6/rx360-rest-api/
+
+        :param tag_id: Tag id (int)
+        :return Result request response.
+
+        """
+        # Set default uri
+        uri = self._endpoints["tags"].format('')
+
+        if tag_id is not None:
+            uri = self._endpoints["tags"].format(tag_id)
+
+        r = self.rc.execute_call_v2("get", uri, headers=self._headers)
 
         return r
