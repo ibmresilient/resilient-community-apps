@@ -2,6 +2,8 @@
 # (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 """Generate Mock responses to simulate ZIA for Unit and function tests """
+import json
+
 from requests.models import Response
 
 def get_mock_config():
@@ -12,6 +14,18 @@ extrahop_rx_key_secret = "123456789abcdefg987654321abcdefg"
 extrahop_rx_api_version = v1
 """
     return config_data
+
+def get_tags():
+    return [
+        {
+            "mod_time": 1635771586176,
+            "id": 1,
+            "name": "test_tag_1"},
+        {
+            "mod_time": 1635784783991,
+            "id": 2,
+            "name": "test_tag_2"}
+    ]
 
 def mocked_rx_client(*args, **kwargs):
     class MockSession:
@@ -33,6 +47,18 @@ def mocked_rx_client(*args, **kwargs):
                               update_time=None, sort=None):
             return MockGetResponse("[]", 200)
 
+        def get_tags(self, tag_id=None):
+            if tag_id == 0:
+                return MockGetResponse([get_tags()[0]], 200)
+            else:
+                return MockGetResponse(get_tags(), 200)
+
+        def create_tag(self, tag_name=None):
+            return MockGetResponse({}, 200)
+
+        def assign_tag(self, tag_id=None, device_ids=None):
+            return MockGetResponse({}, 200)
+
     return MockSession(*args, **kwargs)
 
 class MockGetResponse:
@@ -40,7 +66,7 @@ class MockGetResponse:
     def __init__(self, *args, **kwargs):
         self.headers = {}
         self.r = Response()
-        self.r._content = (args[0]).encode()
+        self.r._content = json.dumps(args[0]).encode('utf-8')
         self.status_code = args[1]
         self.r.status_code = args[1]
         if len(args) == 3:
