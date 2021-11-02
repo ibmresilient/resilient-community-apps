@@ -40,7 +40,8 @@ class RxClient():
             "search_devices":    "/".join([self.api_base_url, "devices/search"]),
             "detections":        "/".join([self.api_base_url, "detections/{}"]),
             "search_detections": "/".join([self.api_base_url, "detections/search"]),
-            "tags":              "/".join([self.api_base_url, "tags"])
+            "tags":              "/".join([self.api_base_url, "tags"]),
+            "create_tag":        "/".join([self.api_base_url, "tags"])
         }
         self.rc = RequestsCommon(opts=opts, function_opts=fn_opts)
         self._headers = {"Authorization": "Bearer " + self.get_token()}
@@ -211,5 +212,25 @@ class RxClient():
             uri = self._endpoints["tags"].format(tag_id)
 
         r = self.rc.execute_call_v2("get", uri, headers=self._headers)
+
+        return r
+
+    def create_tag(self, tag_name=None):
+        """Create a tag.
+
+        For more details on api, see https://docs.extrahop.com/8.6/rx360-rest-api/
+
+        :param tag_name: Tag name (str)
+        :return Result request response.
+
+        """
+        if tag_name is None:
+            raise ValueError("Missing 'tag_name' parameter")
+
+        uri = self._endpoints["create_tag"].format(tag_name)
+
+        data = {"name": tag_name}
+
+        r = self.rc.execute_call_v2("post", uri, headers=self._headers, data=json.dumps(data))
 
         return r
