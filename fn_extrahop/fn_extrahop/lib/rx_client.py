@@ -41,7 +41,8 @@ class RxClient():
             "detections":        "/".join([self.api_base_url, "detections/{}"]),
             "search_detections": "/".join([self.api_base_url, "detections/search"]),
             "tags":              "/".join([self.api_base_url, "tags"]),
-            "create_tag":        "/".join([self.api_base_url, "tags"])
+            "create_tag":        "/".join([self.api_base_url, "tags"]),
+            "assign_tag":        "/".join([self.api_base_url, "tags/{}/devices"]),
         }
         self.rc = RequestsCommon(opts=opts, function_opts=fn_opts)
         self._headers = {"Authorization": "Bearer " + self.get_token()}
@@ -230,6 +231,33 @@ class RxClient():
         uri = self._endpoints["create_tag"].format(tag_name)
 
         data = {"name": tag_name}
+
+        r = self.rc.execute_call_v2("post", uri, headers=self._headers, data=json.dumps(data))
+
+        return r
+
+    def assign_tag(self, tag_id=None, device_ids=None):
+        """Assign a tag to a list of devices.
+
+        For more details on api, see https://docs.extrahop.com/8.6/rx360-rest-api/
+
+        :param tag_id: Tag id (int)
+        :param device_ids: Comma or newline separated list of device ids (str)
+        :return Result request response.
+
+        """
+        if tag_id is None:
+            raise ValueError("Missing 'tag_id' parameter")
+
+        if not device_ids:
+            raise ValueError("Missing 'device_ids' parameter")
+
+        # Convert keywords in comma or newline seperated string to a list.
+        device_ids = list(filter(None, re.split(r"\s+|,|\n", device_ids)))
+
+        uri = self._endpoints["assign_tag"].format(tag_id)
+
+        data = {"assign": device_ids}
 
         r = self.rc.execute_call_v2("post", uri, headers=self._headers, data=json.dumps(data))
 
