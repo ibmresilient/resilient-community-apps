@@ -1,0 +1,18 @@
+{
+    "version": 2.0,
+    "success": True,
+    "reason": None,
+    "content": {},
+    "raw": None,
+    "inputs": {
+        "extrahop_tag_name": "tag_1"
+    }, 
+    "metrics": {
+        "version": "1.0",
+        "package": "fn-extrahop",
+        "package_version": "1.0.0",
+        "host": "Johnp-MacBook-Pro-2.galway.ie.ibm.com",
+        "execution_time_ms": 25646,
+        "timestamp": "2021-11-01 17:30:00"
+    }
+}

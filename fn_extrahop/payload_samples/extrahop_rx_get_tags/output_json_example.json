@@ -1,0 +1,25 @@
+{
+    "version": 2.0,
+    "success": True,
+    "reason": None,
+    "content": [
+        {
+            "mod_time": 1635771586176,
+            "id": 1,
+            "name": "test_tag_1"},
+        {
+            "mod_time": 1635784783991,
+            "id": 2,
+            "name": "test_tag_2"}
+    ],
+    "raw": None,
+    "inputs": {},
+    "metrics": {
+        "version": "1.0",
+        "package": "fn-extrahop",
+        "package_version": "1.0.0",
+        "host": "host.ibm.com",
+        "execution_time_ms": 2175,
+        "timestamp": "2021-11-01 16:49:30"
+    }
+}
