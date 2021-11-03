@@ -22,11 +22,7 @@ inputs.qradar_reference_table_item_value = artifact.value
 inputs.qradar_reference_table_item_inner_key = rule.properties.qradar_ref_table_inner_key
 inputs.qradar_reference_table_item_outer_key = rule.properties.qradar_ref_table_outer_key
 inputs.qradar_reference_table_name = rule.properties.qradar_reference_table_name
-
-if incident.properties.qradar_destination and not rule.properties.qradar_label:
-  inputs.qradar_label = incident.properties.qradar_destination
-else:
-  inputs.qradar_label = rule.properties.qradar_label
+inputs.qradar_label = rule.properties.qradar_servers
 ```
 
 ### Post-Processing Script

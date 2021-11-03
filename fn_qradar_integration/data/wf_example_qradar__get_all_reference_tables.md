@@ -18,10 +18,7 @@
 
 ### Pre-Processing Script
 ```python
-if incident.properties.qradar_destination and not rule.properties.qradar_label:
-  inputs.qradar_label = incident.properties.qradar_destination
-else:
-  inputs.qradar_label = rule.properties.qradar_label
+inputs.qradar_label = rule.properties.qradar_servers
 ```
 
 ### Post-Processing Script

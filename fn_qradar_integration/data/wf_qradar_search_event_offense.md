@@ -20,10 +20,7 @@
 ```python
 inputs.qradar_search_param2 = incident.properties.qradar_id
 
-if incident.properties.qradar_destination and not rule.properties.qradar_label:
-  inputs.qradar_label = incident.properties.qradar_destination
-else:
-  inputs.qradar_label = rule.properties.qradar_label
+inputs.qradar_label = rule.properties.qradar_servers
   
 if rule.properties.qradar_query_all_results:
   inputs.qradar_query_all_results = rule.properties.qradar_query_all_results
