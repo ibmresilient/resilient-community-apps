@@ -25,7 +25,7 @@ setup(
     display_name="Microsoft Defender Functions",
     version="1.0.0",
     license="MIT",
-    author="IBM Resilient",
+    author="IBM SOAR",
     author_email="mscherfling@ibm.com",
     url="https://github.com/ibmresilient/resilient-community-apps",
     description="Resilient Circuits Components for 'fn_microsoft_defender'",
