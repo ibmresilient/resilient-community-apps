@@ -40,9 +40,11 @@ if resultz.success:
                 machine_list.append(device['mdatpDeviceId'])
                 row = incident.addRow('defender_machines')
                 row['report_date'] = int(Date().getTime())
-                row['machine_link'] = "<a target='blank' href='https://security.microsoft.com/machines/{}/overview'>machine</a>".format(device['mdatpDeviceId'])
+                row['machine_link'] = "<a target='blank' href='https://security.microsoft.com/machines/{}/overview'>Machine</a>".format(device['mdatpDeviceId'])
                 row['machine_id'] = device['mdatpDeviceId']
                 row['machine_name'] = device['deviceDnsName']
+                row['machine_ip'] = device['lastExternalIpAddress']
+                row['machine_internal_ip'] = device['lastIpAddress']
                 row['machine_platform'] = device['osPlatform']
                 row['machine_firstseen'] = device['firstSeen_ts']
                 row['machine_health_status'] = device.get('healthStatus')

@@ -40,6 +40,7 @@ now = Date().getTime()
 if results.success:
     for machine in results.content.get('value', []):
         row['report_date'] = now
+        row['machine_internal_ip'] = machine['lastIpAddress']
         row['machine_ip'] = machine['lastExternalIpAddress']
         row['machine_lastseen'] = machine['lastSeen_ts']
         row['machine_health_status'] = machine.get('healthStatus')
@@ -47,7 +48,7 @@ if results.success:
         row['machine_exposure_level'] = machine.get('exposureLevel')
         row['machine_tags'] = ', '.join(machine.get('machineTags', []))
 else:
-  msg = u"Defender find machines by filter unsucessful\nReason: {}".format(results.reason)
+  msg = u"Defender find machines by filter unsuccessful\nReason: {}".format(results.reason)
   incident.addNote(helper.createPlainText(msg))
 ```
 

@@ -39,10 +39,12 @@ now = Date().getTime()
 """
 if results.success:
     for machine in results.content.get('value', []):
-      row = incident.addRow("defender_atp_machines")
+      row = incident.addRow("defender_machines")
       row['report_date'] = now
+      row['machine_link'] = "<a target='blank' href='https://security.microsoft.com/machines/{}/overview'>Machine</a>".format(machine['mdatpDeviceId'])
       row['machine_id'] = machine['id']
       row['machine_ip'] = machine['lastExternalIpAddress']
+      row['machine_internal_ip'] = machine['lastIpAddress']
       row['machine_name'] = machine['computerDnsName']
       row['machine_platform'] = machine['osPlatform']
       row['machine_firstseen'] = machine['firstSeen_ts']
@@ -52,7 +54,7 @@ if results.success:
       row['machine_exposure_level'] = machine.get('exposureLevel')
       row['machine_tags'] = ', '.join(machine.get('machineTags', []))
 else:
-  msg = u"Defender Action unsuccessful.\nAction: Find machines by filter\nReason: {}".format(results.reason)
+  msg = u"Defender Action unsuccessful.\nAction: Find Machines by filter\nReason: {}".format(results.reason)
   incident.addNote(helper.createPlainText(msg))
 ```
 

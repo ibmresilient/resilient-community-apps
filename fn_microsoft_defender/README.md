@@ -207,9 +207,9 @@ API Permissions (Application type):
     Incident.ReadWrite.All
     Ip.Read.All
     Machine.CollectForensics
+    Machine.Isolate
     Machine.Read.All
     Machine.ReadWrite.All
-    Machine.Isolate
     Machine.RestrictExecution
     Machine.Scan
     Machine.StopAndQuarantine
@@ -252,7 +252,6 @@ Update a Defender Incident
 
 <details><summary>Inputs:</summary>
 <p>
-
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `defender_classification` | `select` | No | `TruePositive` | Unknown, FalsePositive, TruePositive. |
@@ -786,7 +785,7 @@ else:
 ## Function - Defender Machine Isolation
 Perform either an 'isolate' or 'unisolate' operation on a MS defender machine
 
- ![screenshot: fn-defender-machine-isolation ](./doc/screenshots/fn-defender-machine-isolation.png)
+ ![screenshot: fn-defender-machine-isolation ](./doc/screenshots/fn-defender-app-execution.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -1254,7 +1253,7 @@ None
 ## Function - Defender Machine Scan
 Start a Defender Machine antivirus scan
 
- ![screenshot: fn-defender-machine-scan ](./doc/screenshots/fn-defender-machine-scan.png)
+ ![screenshot: fn-defender-machine-scan ](./doc/screenshots/fn-defender-app-execution.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -2093,8 +2092,8 @@ else:
 </details>
 
 ---
-## Function - Defender Find Machines by IP
-Find Defender Machine(s) by IP address
+## Function - Defender Find Machines by Internal IP
+Find Defender Machine(s) by Internal IP address
 
  ![screenshot: fn-defender-find-machines-by-ip ](./doc/screenshots/fn-defender-find-machines-by-ip.png)
 

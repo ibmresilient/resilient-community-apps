@@ -28,14 +28,16 @@ now = Date().getTime()
 
 if results.success:
     for machine in results.content.get('value', []):
-        row = incident.addRow("defender_atp_machines")
+        row = incident.addRow("defender_machines")
         row['report_date'] = now
+        row['machine_link'] = "<a target='blank' href='https://security.microsoft.com/machines/{}/overview'>Machine</a>".format(machine['mdatpDeviceId'])
         row['machine_id'] = machine['id']
         row['machine_name'] = machine['computerDnsName']
         row['machine_platform'] = machine['osPlatform']
         row['machine_firstseen'] = machine['firstSeen_ts']
         row['machine_lastseen'] = machine['lastSeen_ts']
-        row['machine_ip'] = machine['lastIpAddress']
+        row['machine_ip'] = machine['lastExternalIpAddress']
+        row['machine_internal_ip'] = machine['lastIpAddress']
         row['machine_file_hash'] = artifact.value
         row['machine_health_status'] = machine.get('healthStatus')
         row['machine_risk_score'] = machine.get('riskScore')
