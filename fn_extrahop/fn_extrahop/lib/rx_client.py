@@ -43,10 +43,10 @@ class RxClient():
             "tags":              "/".join([self.api_base_url, "tags"]),
             "create_tag":        "/".join([self.api_base_url, "tags"]),
             "assign_tag":        "/".join([self.api_base_url, "tags/{}/devices"]),
+            "watchlist":         "/".join([self.api_base_url, "watchlist/devices"])
         }
         self.rc = RequestsCommon(opts=opts, function_opts=fn_opts)
         self._headers = {"Authorization": "Bearer " + self.get_token()}
-
 
     def get_token(self):
         """
@@ -260,5 +260,42 @@ class RxClient():
         data = {"assign": device_ids}
 
         r = self.rc.execute_call_v2("post", uri, headers=self._headers, data=json.dumps(data))
+
+        return r
+
+    def get_watchlist(self):
+        """Retrieve all devices that are in the watchlist.
+
+        For more details on api, see https://docs.extrahop.com/8.6/rx360-rest-api/
+
+        :return Result request response.
+        """
+        uri = self._endpoints["watchlist"]
+
+        r = self.rc.execute_call_v2("get", uri, headers=self._headers)
+
+        return r
+
+    def update_watchlist(self, assign=None, unassign=None):
+        """Retrieve all devices that are in the watchlist.
+
+        For more details on api, see https://docs.extrahop.com/8.6/rx360-rest-api/
+
+        :param assign: Comma or newline separated list of device ids to assign to a watchlist (str)
+        :param unassign: Comma or newline separated list of device ids to unassign from a watchlist(str)
+        :return Result request response.
+        """
+        uri = self._endpoints["watchlist"]
+        data = {}
+
+        if assign is not None:
+            assign_ids = list(filter(None, re.split(r"\s+|,|\n", assign)))
+            data = {"assign": assign_ids}
+
+        if unassign is not None:
+            unassign_ids = list(filter(None, re.split(r"\s+|,|\n", assign)))
+            data = {"assign": unassign_ids}
+
+        r = self.rc.execute_call_v2("get", uri, headers=self._headers, data=json.dumps(data))
 
         return r
