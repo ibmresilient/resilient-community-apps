@@ -59,6 +59,12 @@ def mocked_rx_client(*args, **kwargs):
         def assign_tag(self, tag_id=None, device_ids=None):
             return MockGetResponse({}, 200)
 
+        def get_watchlist(self):
+            return MockGetResponse([], 200)
+
+        def update_watchlist(self, assign=None, unassign=None):
+            return MockGetResponse([], 200)
+
     return MockSession(*args, **kwargs)
 
 class MockGetResponse:
@@ -69,10 +75,6 @@ class MockGetResponse:
         self.r._content = json.dumps(args[0]).encode('utf-8')
         self.status_code = args[1]
         self.r.status_code = args[1]
-        if len(args) == 3:
-            self.url = args[2]
-            self.headers["Retry-After"] = 2
-        test=1
 
     def json(self):
         return self.r.json()
