@@ -21,9 +21,9 @@ def codegen_reload_data():
     return {
         "package": u"fn_extrahop",
         "message_destinations": [u"extrahop"],
-        "functions": [u"funct_extrahop_rx_assign_tag", u"funct_extrahop_rx_create_tag", u"funct_extrahop_rx_get_detections", u"funct_extrahop_rx_get_devices", u"funct_extrahop_rx_get_tags", u"funct_extrahop_rx_search_detections", u"funct_extrahop_rx_search_devices"],
-        "workflows": [u"wf_extrahop_rx_assign_tag", u"wf_extrahop_rx_create_tag", u"wf_extrahop_rx_get_detections", u"wf_extrahop_rx_get_devices", u"wf_extrahop_rx_get_tags", u"wf_extrahop_rx_search_detections", u"wf_extrahop_rx_search_devices"],
-        "actions": [u"Example: Extrahop revealx assign tag", u"Example: Extrahop revealx create tag", u"Example: Extrahop revealx get detections", u"Example: Extrahop revealx get devices", u"Example: Extrahop revealx get tags", u"Example: Extrahop revealx search detections", u"Example: Extrahop revealx search devices"],
+        "functions": [u"funct_extrahop_rx_assign_tag", u"funct_extrahop_rx_create_tag", u"funct_extrahop_rx_get_detections", u"funct_extrahop_rx_get_devices", u"funct_extrahop_rx_get_tags", u"funct_extrahop_rx_get_watchlist", u"funct_extrahop_rx_search_detections", u"funct_extrahop_rx_search_devices", u"funct_extrahop_rx_update_watchlist"],
+        "workflows": [u"wf_extrahop_rx_assign_tag", u"wf_extrahop_rx_create_tag", u"wf_extrahop_rx_get_detections", u"wf_extrahop_rx_get_devices", u"wf_extrahop_rx_get_tags", u"wf_extrahop_rx_get_watchlist", u"wf_extrahop_rx_search_detections", u"wf_extrahop_rx_search_devices", u"wf_extrahop_rx_update_watchlist"],
+        "actions": [u"Example: Extrahop revealx assign tag", u"Example: Extrahop revealx create tag", u"Example: Extrahop revealx get detections", u"Example: Extrahop revealx get devices", u"Example: Extrahop revealx get tags", u"Example: Extrahop revealx get watchlist", u"Example: Extrahop revealx search detections", u"Example: Extrahop revealx search devices", u"Example: Extrahop revealx update watchlist"],
         "incident_fields": [],
         "incident_artifact_types": [],
         "incident_types": [],
@@ -49,24 +49,30 @@ def customization_data(client=None):
         - funct_extrahop_rx_get_detections
         - funct_extrahop_rx_get_devices
         - funct_extrahop_rx_get_tags
+        - funct_extrahop_rx_get_watchlist
         - funct_extrahop_rx_search_detections
         - funct_extrahop_rx_search_devices
+        - funct_extrahop_rx_update_watchlist
     - Workflows:
         - wf_extrahop_rx_assign_tag
         - wf_extrahop_rx_create_tag
         - wf_extrahop_rx_get_detections
         - wf_extrahop_rx_get_devices
         - wf_extrahop_rx_get_tags
+        - wf_extrahop_rx_get_watchlist
         - wf_extrahop_rx_search_detections
         - wf_extrahop_rx_search_devices
+        - wf_extrahop_rx_update_watchlist
     - Rules:
         - Example: Extrahop revealx assign tag
         - Example: Extrahop revealx create tag
         - Example: Extrahop revealx get detections
         - Example: Extrahop revealx get devices
         - Example: Extrahop revealx get tags
+        - Example: Extrahop revealx get watchlist
         - Example: Extrahop revealx search detections
         - Example: Extrahop revealx search devices
+        - Example: Extrahop revealx update watchlist
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)
