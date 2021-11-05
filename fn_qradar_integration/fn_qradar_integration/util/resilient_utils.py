@@ -19,7 +19,7 @@ class resilient_utils(ResilientComponent):
         super(resilient_utils, self).__init__(opts)
         self.res_rest_client = self.rest_client()
 
-    def create_payload(self, field_name, field_text, field_values=None, default_qradar_server=None):
+    def create_payload(self, field_name, field_text, enabled=True, hidden=False, field_values=None, default_qradar_server=None):
         """
         Create payload to be sent to resilient
         """
@@ -27,14 +27,13 @@ class resilient_utils(ResilientComponent):
             field_values = []
         param_values = []
         payload = {"name": "", "text": "", "prefix": "properties", "tooltip": "", "placeholder": "",
-                        "input_type": "select", "blank_option": False, "values": [], "allow_default_value": False
-                        }
+                        "input_type": "select", "blank_option": False, "values": [], "allow_default_value": False}
         
-        for each_value in field_values:
+        for value in field_values:
             default = False
-            if default_qradar_server and str(each_value) == default_qradar_server:
+            if default_qradar_server and str(value) == default_qradar_server:
                 default = True
-            param_values.append({"label": str(each_value), "enabled": True, "hidden": False, "default": default})
+            param_values.append({"label": str(value), "enabled": enabled, "hidden": hidden})
 
         payload["name"] = field_name
         payload["text"] = field_text
@@ -48,25 +47,34 @@ class resilient_utils(ResilientComponent):
         :param default_qradar_server: the default qradar server defined in resilient
         :return:
         """
-        fields = self.res_rest_client.get(GET_FIELD.format(field_name))
-        in_use_values = []
-        fields_to_add = []
-
-        for tmp in fields.get("values"):
-            in_use_values.append(tmp.get("label"))
-
-        for value in field_values:
-            if value not in in_use_values:
-                fields_to_add.append(value)
-                LOG.info(value+" added to QRadar Servers select field")
-
-        payload = self.create_payload(field_name, field_text, field_values, default_qradar_server)
-
         try:
-            self.res_rest_client.put(UPDATE_FIELD.format(field_name), payload, timeout=1000)
-            return True
+            fields = self.res_rest_client.get(GET_FIELD.format(field_name))
+
+            in_use_values = [
+                value.get("label")
+                for value in fields.get("values")
+            ]
+
+            fields_to_add = [
+                value
+                for value in field_values
+                if value not in in_use_values
+            ]
+
+            fields_to_remove = [
+                value
+                for value in in_use_values
+                if value not in field_values
+            ]
+
+            if fields_to_add:
+                payload = self.create_payload(field_name, field_text, True, False, fields_to_add, default_qradar_server)
+                self.res_rest_client.put(UPDATE_FIELD.format(field_name), payload, timeout=1000)
+            
+            if fields_to_remove:
+                payload = self.create_payload(field_name, field_text, False, True, fields_to_remove, default_qradar_server)
+                self.res_rest_client.put(UPDATE_FIELD.format(field_name), payload, timeout=1000)
+
         except Exception as err_msg:
             LOG.warning("Action filed: {} create error: {}".format(field_name, err_msg))
-            if str(err_msg).find("already exists in the type actioninvocation") != -1:
-                return False
             raise ResilientActionError("Error while updating action field: {}".format(field_name))

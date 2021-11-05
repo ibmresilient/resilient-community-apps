@@ -18,7 +18,7 @@
 
 ### Pre-Processing Script
 ```python
-inputs.qradar_label = rule.properties.qradar_servers
+inputs.qradar_label = fields.incident.qradar_destination
 ```
 
 ### Post-Processing Script
