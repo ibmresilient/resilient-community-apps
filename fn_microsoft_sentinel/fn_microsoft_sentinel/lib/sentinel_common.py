@@ -7,7 +7,7 @@ import datetime
 import logging
 import time
 import uuid
-from resilient_lib import RequestsCommon, IntegrationError
+from resilient_lib import RequestsCommon, IntegrationError, str_to_bool
 from simplejson.errors import JSONDecodeError
 from fn_microsoft_sentinel.lib.constants import FROM_SOAR_COMMENT_HDR
 
@@ -61,6 +61,12 @@ ENTITY_TYPE_LOOKUP = {
     "submission mail": "Email Body"
 }
 
+# extra parameters possible in sentinel section for requests calls
+REQUEST_PARAMS = {
+    'verify': str_to_bool,
+    'cert': str
+}
+
 LOG = logging.getLogger(__name__)
 
 class SentinelAPI():
@@ -75,6 +81,7 @@ class SentinelAPI():
             app_secret ([type]): [description]
             opts ([type]): [description]
             options ([type]): [description]
+            **kwargs ([dict]): [additional parameters used during the REST API call]
         """
         self.polling_lookback = int(options.get("polling_lookback", DEFAULT_POLLER_LOOBACK_MINUTES))
         self.base_url = options.get("azure_url")
@@ -82,8 +89,22 @@ class SentinelAPI():
         self.tenant_id = tenant_id
         self.client_id = client_id
         self.app_secret = app_secret
+        self.kwargs = self.get_requests_kwargs(REQUEST_PARAMS, options)
 
         self.access_token = None
+
+    def get_requests_kwargs(self, params_list, options):
+        """[create dictionary of addl parameters to send to the requests call]
+
+        Args:
+            params_list ([dict]): [parameters to include if specificied in [function_section]]
+            options ([dict]): [function_section parameters]
+
+        Returns:
+            [dict]: [returned values, with any conversion is necessary]
+        """
+        kwargs = { k:opr(options[k]) for k, opr in params_list.items() if k in options }
+        return kwargs
 
     def _authenticate(self, app_scope=AUTH_SCOPE):
         """[authenticate to azure and get the access token]
@@ -111,7 +132,7 @@ class SentinelAPI():
             "client_secret": self.app_secret,
             "grant_type": "client_credentials"
         }
-        result = self.rc.execute_call_v2("POST", authenticate_url, data=post_data)
+        result = self.rc.execute("POST", authenticate_url, data=post_data, **self.kwargs)
         result_json = result.json()
 
         if "access_token" in result_json:
@@ -157,9 +178,13 @@ class SentinelAPI():
 
         try:
             if oper in ["PUT", "POST", "PATCH"]:
-                result, status = self.rc.execute_call_v2(oper, url_endpoint, json=payload, headers=headers, callback=callback_response)
+                result, status = self.rc.execute(oper, url_endpoint, json=payload, headers=headers,
+                                                 callback=callback_response,
+                                                 **self.kwargs)
             else:
-                result, status = self.rc.execute_call_v2(oper, url_endpoint, params=payload, headers=headers, callback=callback_response)
+                result, status = self.rc.execute(oper, url_endpoint, params=payload, headers=headers,
+                                                 callback=callback_response,
+                                                 **self.kwargs)
         except Exception as err:
             LOG.error(str(err))
             status = False
@@ -231,7 +256,7 @@ class SentinelAPI():
 
 
     def _filter_by_last_modified_date(self, result, poller_last_modified_date, field="lastModifiedTimeUtc", \
-                                      date_format="%Y-%m-%dT%H:%M:%S"):
+                                    date_format="%Y-%m-%dT%H:%M:%S"):
         """this logic is unnecessary of the $filter capability is workin in the query API call.
              loop through all incidents results and reapply the logic to filter the list based on
              the last poller window time.

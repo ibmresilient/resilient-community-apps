@@ -49,7 +49,8 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.0.1 | 11/2021 | minor bug fixes and datatable improvements |
+| 1.0.2 | 11/2021 | Support for app.config verify and cert parameters |
+| 1.0.1 | 11/2021 | Minor bug fixes and datatable improvements |
 | 1.0.0 | 08/2021 | Initial Release |
 
 ---
@@ -130,7 +131,7 @@ Python 3.6 is supported.
 Additional package dependencies may exist for each of these packages:
 * jinja2
 * resilient-lib
-* resilient_circuits>=30.0.0
+* resilient_circuits>=37.0.0
 * simplejson
 
 ---
@@ -177,6 +178,7 @@ The following table provides the settings you need to configure the app. These s
 | **sentinel_profiles** | Yes | `profile_a` | *Comma separated list of profile(s) to access based on subscription id, resource group name and workspace * |
 | **https_proxy**| No | `https:/your.proxy.com` | - |
 | **http_proxy** | No | `http:/your.proxy.com` | - |
+| **verify** | No | `false` | *verify= false or /path/to/client_certificate.pem* |
 
 For each profile:
 | Config | Required | Example | Description |

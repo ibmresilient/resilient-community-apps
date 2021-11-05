@@ -25,7 +25,7 @@ def get_function_list():
 setup(
     name="fn_microsoft_sentinel",
     display_name="Microsoft Sentinel",
-    version="1.0.1",
+    version="1.0.2",
     license="MIT",
     author="IBM Resilient",
     author_email="",
@@ -39,7 +39,7 @@ setup(
     * Sync comments to and from Sentinel Incidents
     * Support editable templates for field mapping between the two systems""",
     install_requires=[
-        "resilient_circuits>=30.0.0",
+        "resilient_circuits>=37.0.0",
         "resilient-lib",
         "jinja2",
         "simplejson"
