@@ -142,8 +142,8 @@ class DefenderPollerComponent(ResilientComponent):
             defender_incident_id = get_defender_incident_id(defender_incident)
             resilient_incident = self.resilient_common.find_incident(defender_incident_id)
 
-            result_resilient_incident = self._create_update_incident(defender_incident, resilient_incident,
-                                                                     self.new_incident_filters)
+            _result_resilient_incident = self._create_update_incident(defender_incident, resilient_incident,
+                                                                      self.new_incident_filters)
 
 
     def _create_update_incident(self, defender_incident, resilient_incident, new_incident_filters):
@@ -171,7 +171,7 @@ class DefenderPollerComponent(ResilientComponent):
                                                     self.options.get("close_incident_template"),
                                                     DEFAULT_INCIDENT_CLOSE_TEMPLATE,
                                                     defender_incident)
-                updated_resilient_incident = self.resilient_common.close_incident(
+                updated_resilient_incident = self.resilient_common.update_incident(
                                                     resilient_incident_id,
                                                     incident_payload
                                                 )
