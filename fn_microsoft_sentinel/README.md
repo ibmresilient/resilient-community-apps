@@ -53,6 +53,10 @@
 | 1.0.1 | 11/2021 | Minor bug fixes and datatable improvements |
 | 1.0.0 | 08/2021 | Initial Release |
 
+### v1.0.2
+
+When upgrading from a previous version to v1.0.2, manually update your app.config file to add the `verify` parameter to your `[fn_microsoft_sentinel]` section. The documentation on it's use is in [App Configuration](#app-configuration).
+
 ---
 
 ## Overview
