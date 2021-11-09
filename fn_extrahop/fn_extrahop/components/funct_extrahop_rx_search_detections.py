@@ -59,7 +59,7 @@ class FunctionComponent(AppFunctionComponent):
         rx_cli = RxClient(self.opts, self.options)
         response = rx_cli.search_detections(**params)
         # Response is a list, returned result needs to be a dict
-        results = {"search_result": response.json()}
+        results = {"result": response.json()}
 
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
 
