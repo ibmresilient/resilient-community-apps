@@ -18,7 +18,7 @@
 
 ### Pre-Processing Script
 ```python
-None
+inputs.extrahop_search_type ="any"
 ```
 
 ### Post-Processing Script
