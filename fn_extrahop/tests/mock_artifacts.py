@@ -35,17 +35,17 @@ def mocked_rx_client(*args, **kwargs):
 
         def get_devices(self, active_from=None, active_until=None, limit=None, offset=None, device_id=None,
                         search_type="any"):
-            return MockGetResponse("{}", 200)
+            return MockGetResponse({}, 200)
 
         def search_devices(self, active_from=None, active_until=None, limit=None, offset=None, search_filter=None):
-            return MockGetResponse("[]", 200)
+            return MockGetResponse([], 200)
 
         def get_detections(self, detection_id=None, limit=None):
-            return MockGetResponse("{}", 200)
+            return MockGetResponse({}, 200)
 
         def search_detections(self, search_filter=None, active_from=None, active_until=None, limit=None, offset=None,
                               update_time=None, sort=None):
-            return MockGetResponse("[]", 200)
+            return MockGetResponse([], 200)
 
         def get_tags(self, tag_id=None):
             if tag_id == 0:
@@ -68,6 +68,9 @@ def mocked_rx_client(*args, **kwargs):
         def update_detection(self, detection_id=None, incident_id=None, plan_status=None, owner_id=None,
                              resolution_id=None, participants=None):
             return MockGetResponse({}, 200)
+
+        def get_activitymaps(self, activitymap_id=None):
+            return MockGetResponse([], 200)
 
     return MockSession(*args, **kwargs)
 
