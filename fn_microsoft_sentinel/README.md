@@ -99,7 +99,7 @@ If deploying to a Resilient platform with an App Host, the requirements are:
 If deploying to a Resilient platform with an integration server, the requirements are:
 * Resilient platform >= `39.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient_circuits>=30.0.0`.
+* Integration server is running `resilient_circuits>=37.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
@@ -134,7 +134,7 @@ The app **does** support a proxy server.
 Python 3.6 is supported.
 Additional package dependencies may exist for each of these packages:
 * jinja2
-* resilient-lib
+* resilient-lib>=37.0.0
 * resilient_circuits>=37.0.0
 * simplejson
 
