@@ -43,7 +43,8 @@ class RxClient():
             "tags":              "/".join([self.api_base_url, "tags"]),
             "create_tag":        "/".join([self.api_base_url, "tags"]),
             "assign_tag":        "/".join([self.api_base_url, "tags/{}/devices"]),
-            "watchlist":         "/".join([self.api_base_url, "watchlist/devices"])
+            "watchlist":         "/".join([self.api_base_url, "watchlist/devices"]),
+            "activitymaps":      "/".join([self.api_base_url, "activitymaps/{}"])
         }
         self.rc = RequestsCommon(opts=opts, function_opts=fn_opts)
         self._headers = {"Authorization": "Bearer " + self.get_token()}
@@ -335,5 +336,24 @@ class RxClient():
             data = {"assign": unassign_ids}
 
         r = self.rc.execute_call_v2("get", uri, headers=self._headers, data=json.dumps(data))
+
+        return r
+
+    def get_activitymaps(self, activitymap_id=None):
+        """Get information about activitymaps or a specific activitymap by id
+
+        For more details on api, see https://docs.extrahop.com/8.6/rx360-rest-api/
+
+        :param activitymap_id: Activitymap id (str)
+        :return Result in json format.
+        """
+        # Set default uri
+        uri = self._endpoints["activitymaps"].format('')
+        params = {}
+
+        if activitymap_id is not None:
+            uri = self._endpoints["activitymaps"].format(activitymap_id)
+
+        r = self.rc.execute_call_v2("get", uri, headers=self._headers)
 
         return r
