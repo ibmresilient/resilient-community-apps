@@ -9,6 +9,7 @@ import six
 from resilient_lib import validate_fields
 import fn_qradar_integration.util.qradar_constants as qradar_constants
 from fn_qradar_integration.util import qradar_utils
+from fn_qradar_integration.util.resilient_utils import resilient_utils
 
 def make_query_string(query, params):
     """
@@ -28,7 +29,6 @@ def make_query_string(query, params):
 
     return query_string
 
-
 def fix_dict_value(events):
     """
     When the returned data from QRadar is used to update a datatable, we need to
@@ -44,7 +44,6 @@ def fix_dict_value(events):
                     event[key] = u"{}".format(event[key])
 
     return events
-
 
 def get_servers_list(opts, choose):
     """
@@ -73,17 +72,15 @@ def get_servers_list(opts, choose):
 
     return servers_list
 
-def get_resilient_opts(opts):
+def update_qradar_servers_select_list(opts, servers_list):
     """
-    Used for initilizing or reloading the res_opts variable
+    Populate the qradar_servers select list
     :param opts: list of options
-    :return: dictionary of resilient configuration
+    :param servers_list: list of qradar servers in app.config
+    :return: None
     """
-    res_opts = opts.get("resilient", {})
-    res_opts["proxies"] = opts.get("proxy")
-    res_opts["org_id"] = opts.get("org_id")
-    res_opts["timeout"] = 30
-    if opts.get("timeout"):
-        res_opts["timeout"] = opts.get("timeout")
-    
-    return res_opts
+    server_name_list = [
+        server[server.index(":")+1:]
+        for server in servers_list
+    ]
+    resilient_utils(opts).update_rule_action_field_values("qradar_servers", "QRadar Servers", server_name_list)

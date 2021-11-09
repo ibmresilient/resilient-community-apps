@@ -19,32 +19,32 @@ class resilient_utils(ResilientComponent):
         super(resilient_utils, self).__init__(opts)
         self.res_rest_client = self.rest_client()
 
-    def create_payload(self, field_name, field_text, enabled=True, hidden=False, field_values=None, default_qradar_server=None):
+    def create_payload(self, field_name, field_text, field_values=None):
         """
         Create payload to be sent to resilient
+        :param field_name: activity field name
+        :param field_value: values to add to the activity field object
+        :return: payload
         """
         if field_values is None:
             field_values = []
         param_values = []
         payload = {"name": "", "text": "", "prefix": "properties", "tooltip": "", "placeholder": "",
-                        "input_type": "select", "blank_option": False, "values": [], "allow_default_value": False}
+                        "input_type": "select", "blank_option": False, "values": []}
         
         for value in field_values:
-            default = False
-            if default_qradar_server and str(value) == default_qradar_server:
-                default = True
-            param_values.append({"label": str(value), "enabled": enabled, "hidden": hidden})
+            param_values.append({"label": str(value), "enabled": "True", "hidden": "False"})
 
         payload["name"] = field_name
         payload["text"] = field_text
         payload["values"] = param_values
         return payload
 
-    def update_rule_action_field_values(self, field_name, field_text, field_values=None, default_qradar_server=None):
+    def update_rule_action_field_values(self, field_name, field_text, field_values=None):
         """
+        Update values in qradar_servers select field
         :param field_name: activity field name
         :param field_value: values to add to the activity field object
-        :param default_qradar_server: the default qradar server defined in resilient
         :return:
         """
         try:
@@ -61,18 +61,8 @@ class resilient_utils(ResilientComponent):
                 if value not in in_use_values
             ]
 
-            fields_to_remove = [
-                value
-                for value in in_use_values
-                if value not in field_values
-            ]
-
             if fields_to_add:
-                payload = self.create_payload(field_name, field_text, True, False, fields_to_add, default_qradar_server)
-                self.res_rest_client.put(UPDATE_FIELD.format(field_name), payload, timeout=1000)
-            
-            if fields_to_remove:
-                payload = self.create_payload(field_name, field_text, False, True, fields_to_remove, default_qradar_server)
+                payload = self.create_payload(field_name, field_text, fields_to_add)
                 self.res_rest_client.put(UPDATE_FIELD.format(field_name), payload, timeout=1000)
 
         except Exception as err_msg:

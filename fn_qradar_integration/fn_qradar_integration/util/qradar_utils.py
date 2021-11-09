@@ -24,7 +24,6 @@ except ImportError:
 LOG = logging.getLogger(__name__)
 FORWARD_SLASH = b'%2F'
 
-
 def quote(input_v, safe=None):
     """
     To make sure that integration on Python 2 works with unicode we will wrap quote
@@ -75,27 +74,6 @@ class QRadarServers():
             if key.startswith("{}:".format(qradar_constants.PACKAGE_NAME)):
                 server_list.append(key)
         return server_list
-
-    def get_server(self, server_name):
-        """collect the settings for a QRadar server: host, username, password
-        Args:
-            server_name ([str]): [name of server in app.config]
-        Raises:
-            KeyError: [server not found]
-        Returns:
-            [dict]: [settings for a QRadar server]
-        """
-        server_name = "{}{}".format(qradar_constants.PACKAGE_NAME, server_name)
-        if not server_name in self.servers:
-            raise KeyError(u"Unable to find server: {}".format(server_name))
-
-        return self.servers[server_name]
-
-    def get_servers(self):
-        """
-        Return all servers
-        """
-        return self.servers
 
     def get_server_name_list(self):
         """
@@ -292,8 +270,6 @@ class ArielSearch(SearchWaitCommand):
             raise SearchFailure(search_id, status)
 
         return status
-
-
 
 class QRadarClient(object):
 
@@ -619,4 +595,3 @@ class QRadarClient(object):
         :return:
         """
         return cls.reference_tables.add_ref_element(AuthInfo.get_authInfo(), ref_table, inner_key, outer_key, value)
-        
