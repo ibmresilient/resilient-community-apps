@@ -197,6 +197,44 @@ class RxClient():
 
         return r
 
+    def update_detection(self, detection_id=None, incident_id=None, plan_status=None, owner_id=None,
+                         resolution_id=None, participants=None):
+        """Update a detection with information from a Resilient incident.
+
+        For more details on api, see https://docs.extrahop.com/8.6/rx360-rest-api/
+
+        :param detection_id: Detection id (int)
+        :param incident_id: SOAR incident ID (int)
+        :param plan_status: SOAR incident status (str)
+        :param owner_id: SOAR incident owner ID (str)
+        :param resolution_id: SOAR incident resolution (str)
+        :return Result in json format.
+        """
+        uri = self._endpoints["detections"].format(detection_id)
+        status_map = {
+            "A": 'in_progress',  # active
+            "C": 'closed',  # done
+        }
+        resolution_map = {
+            "Unresolved": "no_action_taken",
+            "Duplicate": "no_action_taken",
+            "Not an Issue": "no_action_taken",
+            "Resolved": "action_taken",
+        }
+        data = {
+            "detection_id": detection_id,
+            "ticket_id": incident_id,
+            "assignee": owner_id
+        }
+        data["status"] = status_map[plan_status]
+
+        if plan_status == 'C':
+            data["resolution"] = resolution_map[resolution_id]
+
+        r = self.rc.execute_call_v2("patch", uri, headers=self._headers, data=json.dumps(data))
+
+        return r
+
     def get_tags(self, tag_id=None):
         """Get information about tags or a specific tag by tag id.
 
