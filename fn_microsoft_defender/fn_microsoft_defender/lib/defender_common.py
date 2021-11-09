@@ -7,7 +7,7 @@ import datetime
 import logging
 import time
 from msal import ConfidentialClientApplication
-from resilient_lib import RequestsCommon, IntegrationError
+from resilient_lib import RequestsCommon, IntegrationError, str_to_bool
 from simplejson.errors import JSONDecodeError
 
 PACKAGE_NAME = "fn_microsoft_defender"
@@ -27,6 +27,12 @@ MACHINES_FILTER = {
 ALERTS_URL = "api/alerts"
 EXPAND_PARAMS = {
     "$expand": "evidence"
+}
+
+# extra parameters possible in sentinel section for requests calls
+REQUEST_PARAMS = {
+    'verify': str_to_bool,
+    'cert': str
 }
 
 # authentication
@@ -81,13 +87,28 @@ class DefenderAPI():
         self.scope = scope
         authority = AUTH_URL.format(tenant_id=tenant_id)
         self.access_token = None
+        self.kwargs = self.get_requests_kwargs(REQUEST_PARAMS, options)
         self.app = ConfidentialClientApplication(
             client_id,
             authority=authority,
             client_credential=app_secret,
             proxies=self.rc.get_proxies(),
-            timeout=self.rc.get_timeout()
+            timeout=self.rc.get_timeout(),
+            **self.kwargs
         )
+
+    def get_requests_kwargs(self, params_list, options):
+        """[create dictionary of addl parameters to send to the requests call]
+
+        Args:
+            params_list ([dict]): [parameters to include if specificied in [function_section]]
+            options ([dict]): [function_section parameters]
+
+        Returns:
+            [dict]: [returned values, with any conversion is necessary]
+        """
+        kwargs = { k:opr(options[k]) for k, opr in params_list.items() if k in options }
+        return kwargs
 
     def defender_authenticate(self):
         """[authenticate to defender and get the access token]
@@ -148,9 +169,9 @@ class DefenderAPI():
         headers = self.make_header(content_type)
 
         if oper in ["POST", "PATCH"]:
-            result, status = self.rc.execute(oper, url, json=payload, headers=headers, callback=callback_response)
+            result, status = self.rc.execute(oper, url, json=payload, headers=headers, callback=callback_response, **self.kwargs)
         else:
-            result, status = self.rc.execute(oper, url, params=payload, headers=headers, callback=callback_response)
+            result, status = self.rc.execute(oper, url, params=payload, headers=headers, callback=callback_response, **self.kwargs)
 
         reason = None
         if not status:

@@ -148,8 +148,8 @@ Python 3.6+ is supported.
 Additional package dependencies may exist for each of these packages:
 * msal
 * rapidjson
-* resilient_circuits>=30.0.0
-* resilient_lib
+* resilient_circuits>=37.0.0
+* resilient_lib>=37.0.0
 * simplejson
 
 ---
@@ -176,6 +176,7 @@ The following table provides the settings you need to configure the app. These s
 | **update_incident_template** | No | /path/to/incident_update_template.jinja | *custom template for incident updates* |
 | **close_incident_template** | No | /path/to/incident_close_template.jinja | *custom template for closing a incident* |
 | **update_defender_alert_template** | No | /path/to/defender_update_alert_template.jinja | *custom template for updating an alert* |
+| **verify** | No | false | *'false' to disable certificate verification or /path/to/client_certificate.pem* |
 | **update_defender_incident_template** | No | /path/to/defender_update_incident_template.jinja | *custom template for updating an alert* |
 | **http_proxy https_proxy** | No | https//proxy.com | *url for proxy settings* |
 

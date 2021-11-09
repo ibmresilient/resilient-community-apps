@@ -31,8 +31,8 @@ setup(
     description="Resilient Circuits Components for 'fn_microsoft_defender'",
     long_description="""Perform operations against Defender such as synchronize incidents and alerts, set indicators, isolate and quarantine machines, and block file execution""",
     install_requires=[
-        "resilient_circuits>=30.0.0",
-        "resilient_lib",
+        "resilient_circuits>=37.0.0",
+        "resilient_lib>=37.0.0",
         "msal",
         "simplejson",
         "python-rapidjson"
