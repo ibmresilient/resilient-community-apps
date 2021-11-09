@@ -65,6 +65,10 @@ def mocked_rx_client(*args, **kwargs):
         def update_watchlist(self, assign=None, unassign=None):
             return MockGetResponse([], 200)
 
+        def update_detection(self, detection_id=None, incident_id=None, plan_status=None, owner_id=None,
+                             resolution_id=None, participants=None):
+            return MockGetResponse({}, 200)
+
     return MockSession(*args, **kwargs)
 
 class MockGetResponse:
