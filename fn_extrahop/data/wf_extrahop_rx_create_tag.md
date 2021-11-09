@@ -18,7 +18,11 @@
 
 ### Pre-Processing Script
 ```python
-None
+inputs.extrahop_tag_name = rule.properties.extrahop_tag_name
+if inputs.extrahop_tag_name is None:
+    raise ValueError("The tag name is not set")
+
+
 ```
 
 ### Post-Processing Script
