@@ -61,7 +61,7 @@ class TestFunctExtrahopRxSearchDevices:
         "extrahop_limit": 123
     }
 
-    expected_results_1 = {"search_result": []}
+    expected_results_1 = {"result": []}
 
     mock_inputs_2 = {
         "extrahop_search_filter": '{"filter": {"field": "ipaddr","operator": "=","operand": "192.168.1.2"}}',
@@ -71,7 +71,7 @@ class TestFunctExtrahopRxSearchDevices:
         "extrahop_limit": 123
     }
 
-    expected_results_2 = {"search_result": []}
+    expected_results_2 = {"result": []}
 
     @patch('fn_extrahop.components.funct_extrahop_rx_search_devices.RxClient', side_effect=mocked_rx_client)
     @pytest.mark.parametrize("mock_inputs, expected_results", [
