@@ -1,0 +1,18 @@
+{
+  {# JINJA template for creating a new Resilient incident from a SentinelOne threat. #}
+  "name": "SentinelOne Alert - {{ agentRealtimeInfo.accountName }} - {{ agentRealtimeInfo.agentComputerName }} - {{ threatInfo.threatName }}",
+  "discovered_date": {{ threatInfo.identifiedAt|resilient_datetimeformat }},
+  "start_date": {{ threatInfo.createdAt|resilient_datetimeformat }},
+  "description": {
+    "format": "text",
+    "content": "{{ threatInfo.threatName }}"
+  },
+  {# if SentinelOne users are different than SOAR users, consider using a mapping table using resilient_substitute: #}
+  {# "owner_id": "{{ properties.owner.userPrincipalName|resilient_substitute('{"sentinel_user1@co.com": "soar_user1@ent.com", "sentinel_user2@co.com": "soar_user2@ent.com", "DEFAULT": "default_user@ent.com" }') }}", #}
+  "plan_status": "{{ threatInfo.incidentStatus|resilient_substitute('{"Closed": "C", "unresolved": "A", "Active": "A", "New": "A"}') }}",
+  "severity_code": "{{ threatInfo.confidenceLevel|resilient_substitute('{"malicious": "High", "suspicious": "Medium"}') }}",
+  "properties": {
+    "sentinelone_threat_id": "{{ threatInfo.threatId }}",
+    "sentinelone_threat_name": "{{ threatInfo.threatName }}"
+  }
+}

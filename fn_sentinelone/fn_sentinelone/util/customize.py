@@ -21,15 +21,15 @@ def codegen_reload_data():
     return {
         "package": u"fn_sentinelone",
         "message_destinations": [u"fn_sentinelone"],
-        "functions": [u"senitinelone_get_agents"],
-        "workflows": [u"sentinelone_get_agents"],
-        "actions": [u"SentinelOne: Get Agents"],
+        "functions": [u"sentinelone_connect_to_network", u"sentinelone_get_agent_details", u"sentinelone_get_agents"],
+        "workflows": [u"sentinelone_connect_to_network", u"sentinelone_get_agents", u"sentinelone_write_agent_details_to_note"],
+        "actions": [u"SentinelOne: Connect to Network", u"SentinelOne: Get Agents", u"SentinelOne: Write Agent Details to Note"],
         "incident_fields": [],
         "incident_artifact_types": [],
         "incident_types": [],
-        "datatables": [],
+        "datatables": [u"sentinelone_agents_dt"],
         "automatic_tasks": [],
-        "scripts": []
+        "scripts": [u"Convert JSON to rich text v1.1"],
     }
 
 
@@ -44,11 +44,21 @@ def customization_data(client=None):
     - Message Destinations:
         - fn_sentinelone
     - Functions:
-        - senitinelone_get_agents
-    - Workflows:
+        - sentinelone_connect_to_network
+        - sentinelone_get_agent_details
         - sentinelone_get_agents
+    - Workflows:
+        - sentinelone_connect_to_network
+        - sentinelone_get_agents
+        - sentinelone_write_agent_details_to_note
     - Rules:
+        - SentinelOne: Connect to Network
         - SentinelOne: Get Agents
+        - SentinelOne: Write Agent Details to Note
+    - Data Tables:
+        - sentinelone_agents_dt
+    - Scripts:
+        - Convert JSON to rich text v1.1
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)

@@ -22,16 +22,19 @@ def snake_to_camel(word):
 
 setup(
     name="fn_sentinelone",
-    display_name="<<display name of your app here>>",
+    display_name="SentinelOne",
     version="1.0.0",
-    license="<<insert here>>",
-    author="<<your name here>>",
-    author_email="you@example.com",
-    url="<<your company url>>",
+    license="MIT",
+    author="IBM Resilient",
+    author_email="",
+    url="https://github.com/ibmresilient/fn_sentinelone",
     description="Resilient Circuits Components for 'fn_sentinelone'",
-    long_description="""Resilient Circuits Components for 'fn_sentinelone'""",
+    long_description="""Escalate SentinelOne Threats into IBM Security SOAR as a case.'""",
     install_requires=[
-        "resilient-circuits>=42.0.0"
+        "resilient-circuits>=37.0.0",
+                "resilient-lib",
+                "jinja2",
+                "simplejson"
     ],
     python_requires='>=3.6',
     packages=find_packages(),
@@ -43,8 +46,9 @@ setup(
     entry_points={
         "resilient.circuits.components": [
             # When setup.py is executed, loop through the .py files in the components directory and create the entry points.
-            "{}FunctionComponent = fn_sentinelone.components.{}:FunctionComponent".format(snake_to_camel(get_module_name(filename)), get_module_name(filename)) for filename in glob.glob("./fn_sentinelone/components/[a-zA-Z]*.py")
-        ],
+            "{}FunctionComponent = fn_sentinelone.components.{}:FunctionComponent".format(snake_to_camel(get_module_name(filename)), get_module_name(filename)) for filename in glob.glob("./fn_sentinelone/components/f[a-zA-Z]*.py")
+            ]+
+            [ "PollerComponent = fn_sentinelone.components.sentinelone_poller:SentinelOnePollerComponent" ],
         "resilient.circuits.configsection": ["gen_config = fn_sentinelone.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_sentinelone.util.customize:customization_data"],
         "resilient.circuits.selftest": ["selftest = fn_sentinelone.util.selftest:selftest_function"]

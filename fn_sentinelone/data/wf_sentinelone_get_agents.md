@@ -5,10 +5,10 @@
 
 # SentinelOne: Get Agents
 
-## Function - SenitinelOne: Get Agents
+## Function - SentinelOne: Get Agents
 
 ### API Name
-`senitinelone_get_agents`
+`sentinelone_get_agents`
 
 ### Output Name
 `None`
@@ -23,7 +23,38 @@ None
 
 ### Post-Processing Script
 ```python
-None
+from java.util import Date
+
+note = u"<b>SentinelOne: Get Agents: </b> \n"
+content = results.get("content")
+if content:
+  data = content.get("data")
+  if data:
+    data_len = len(data)
+    note = u"{0} {1} agents added to SentinelOne Agents data table.".format(note, data_len)
+    for agent in data:
+      agent_row = incident.addRow("sentinelone_agents_dt")
+      agent_row.sentinelone_dt_query_date = Date()
+      agent_row.sentinelone_dt_agent_id = agent.get("id")
+      agent_row.sentinelone_dt_network_status = agent.get("networkStatus")
+      agent_row.sentinelone_dt_computername = agent.get("computerName")
+      agent_row.sentinelone_dt_external_ip = agent.get("externalIp")
+      agent_row.sentinelone_dt_site = agent.get("siteName")
+      agent_row.sentinelone_dt_agent_version = agent.get("agentVersion")
+      agent_row.sentinelone_dt_threat_count = agent.get("activeThreats")
+      agent_row.sentinelone_dt_domain = agent.get("domain")
+      agent_row.sentinelone_dt_os_name = agent.get("osName")
+      agent_row.sentinelone_dt_uuid = agent.get("uuid")
+      agent_row.sentinelone_dt_is_active = agent.get("isActive")
+      agent_row.sentinelone_dt_is_decommissioned = agent.get("isDecommissioned")
+      agent_row.sentinelone_dt_registered = agent.get("registeredAt")
+      agent_row.sentinelone_dt_created = agent.get("createdAt")
+  else:
+    note = u"{0} No data returned from function.".format(note)
+else:
+  note = u"{0} No content data returned from function.".format(note)
+  
+incident.addNote(helper.createRichText(note))
 ```
 
 ---
