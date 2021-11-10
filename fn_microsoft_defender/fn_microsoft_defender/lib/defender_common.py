@@ -197,7 +197,6 @@ class DefenderAPI():
 
         result, status, reason = self.call(INCIDENTS_URL, payload=payload)
 
-        LOG.debug("%s:%s:%s", status, reason, result)
         return result, status, reason
 
     def query_alerts(self, last_poller_datetime):
@@ -219,7 +218,6 @@ class DefenderAPI():
 
         result, status, reason = self.call(ALERTS_URL, payload=payload)
 
-        LOG.debug("%s:%s:%s", status, reason, result)
         return result, status, reason
 
     def _make_createdate_filter(self, last_poller_datetime):

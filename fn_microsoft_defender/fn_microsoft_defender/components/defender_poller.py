@@ -214,7 +214,7 @@ class DefenderPollerComponent(ResilientComponent):
     def add_comments(self, incident_id, defender_incident, last_poller_time_ms):
         for comment in defender_incident.get("comments", {}):
             comment_create_time = jinja_resilient_datetimeformat(comment['createdTime'])
-            LOG.debug("%s >= %s", comment_create_time, last_poller_time_ms)
+
             if comment_create_time >= last_poller_time_ms and IBM_SOAR_LABEL not in comment['comment']:
                 note = "Defender Incident comment: {}\n{}".format(comment['createdTime'], comment['comment'])
                 self.resilient_common.create_incident_comment(incident_id, note)
