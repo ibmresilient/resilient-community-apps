@@ -33,7 +33,7 @@ class resilient_utils(ResilientComponent):
                         "input_type": "select", "blank_option": False, "values": []}
         
         for value in field_values:
-            param_values.append({"label": str(value), "enabled": "True", "hidden": "False"})
+            param_values.append({"label": str(value), "enabled": "true", "hidden": "false"})
 
         payload["name"] = field_name
         payload["text"] = field_text
@@ -50,12 +50,13 @@ class resilient_utils(ResilientComponent):
         try:
             fields = self.res_rest_client.get(GET_FIELD.format(field_name))
 
-            in_use_values = []
-            for val in fields:
-                if val.get("value"):
-                    value = val.get("value")
-                    if value.get("label"):
-                        in_use_values.append(value.get("label"))
+            if type(fields) == list:
+                return None
+
+            in_use_values = [
+                value.get("value")
+                for value in fields.get("label")
+            ]
 
             fields_to_add = [
                 value
