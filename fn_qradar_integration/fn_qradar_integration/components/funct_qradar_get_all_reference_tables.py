@@ -20,7 +20,6 @@ class FunctionComponent(ResilientComponent):
         super(FunctionComponent, self).__init__(opts)
         self.opts = opts
         self.servers_list = function_utils.get_servers_list(opts, "init")
-        function_utils.update_qradar_servers_select_list(self.opts, self.servers_list)
 
     @handler("reload")
     def _reload(self, event, opts):

@@ -9,7 +9,7 @@ def config_section_data():
     """Produce the default configuration section for app.config,
        when called by `resilient-circuits config [-c|-u]`
     """
-    config_data = u'''
+    return u'''
 #Note, qradar_1_1_1_1 must equal the QRadar Destination Name that is set in the SOAR plugin
 [fn_qradar_integration:qradar_1_1_1_1]
 host=localhost
@@ -31,4 +31,3 @@ verify_cert=false
 #search_timeout=
 
 '''
-    return config_data
