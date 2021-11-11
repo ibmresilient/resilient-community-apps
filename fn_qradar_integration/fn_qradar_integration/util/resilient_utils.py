@@ -50,10 +50,10 @@ class resilient_utils(ResilientComponent):
         try:
             fields = self.res_rest_client.get(GET_FIELD.format(field_name))
 
+            LOG.debug(str(fields))
+
             if type(fields) == list or fields.get("input_type") != "select":
                 return None
-
-            print("\n\n\n"+str(fields)+"\n\n\n")
 
             in_use_values = [
                 value.get("label")
