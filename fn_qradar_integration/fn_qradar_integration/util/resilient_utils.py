@@ -9,7 +9,7 @@ from resilient_circuits import ResilientComponent
 import logging
 from fn_qradar_integration.util.exceptions.custom_exceptions import ResilientActionError
 
-UPDATE_FIELD = "/types/actioninvocation/fields/{}"
+UPDATE_FIELD = "/types/actioninvocation/fields/{}?handle_format=names&include_principals=false"
 
 LOG = logging.getLogger(__name__)
 
@@ -28,7 +28,7 @@ class resilient_utils(ResilientComponent):
         try:
             def update_actioninvocation_field(payload):
                 if type(payload) == list:
-                    return payload
+                    raise Exception("GET did not return information")
 
                 if payload.get("values"):
                     for each_value in payload.get("values"):
