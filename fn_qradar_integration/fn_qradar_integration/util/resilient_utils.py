@@ -30,10 +30,10 @@ class resilient_utils(ResilientComponent):
             field_values = []
         param_values = []
         payload = {"name": "", "text": "", "prefix": "properties", "tooltip": "", "placeholder": "",
-                        "input_type": "select", "blank_option": False, "values": []}
+                        "input_type": "select", "blank_option": False, "values": [], "allow_default_value": False}
         
         for value in field_values:
-            param_values.append({"label": str(value), "enabled": "true", "hidden": "false"})
+            param_values.append({"label": str(value), "enabled": True, "hidden": False})
 
         payload["name"] = field_name
         payload["text"] = field_text
@@ -73,7 +73,7 @@ class resilient_utils(ResilientComponent):
 
             if fields_to_add:
                 payload = self.create_payload(field_name, field_text, fields_to_add)
-                self.res_rest_client.put(UPDATE_FIELD.format(field_name), payload, timeout=1000)
+                self.res_rest_client.get_put(UPDATE_FIELD.format(field_name), payload, timeout=1000)
 
         except Exception as err_msg:
             LOG.warning("Action filed: {} error: {}".format(field_name, err_msg))
