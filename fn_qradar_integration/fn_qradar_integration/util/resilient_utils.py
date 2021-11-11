@@ -57,8 +57,9 @@ class resilient_utils(ResilientComponent):
 
             if fields.get("value"):
                 select_field_name = "value"
-            if fields.get("values"):
+            else:
                 select_field_name = "values"
+            
             in_use_values = [
                 value.get("label")
                 for value in fields.get(select_field_name)
