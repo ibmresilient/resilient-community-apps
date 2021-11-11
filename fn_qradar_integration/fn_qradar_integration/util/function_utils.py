@@ -83,4 +83,4 @@ def update_qradar_servers_select_list(opts, servers_list):
         server[server.index(":")+1:]
         for server in servers_list
     ]
-    resilient_utils(opts).update_rule_action_field_values("qradar_servers", "QRadar Servers", server_name_list)
+    resilient_utils(opts).update_rule_action_field_values("qradar_servers", server_name_list)

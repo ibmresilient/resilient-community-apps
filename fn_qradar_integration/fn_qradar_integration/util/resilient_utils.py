@@ -9,7 +9,8 @@ from resilient_circuits import ResilientComponent
 import logging
 from fn_qradar_integration.util.exceptions.custom_exceptions import ResilientActionError
 
-UPDATE_FIELD = "/types/actioninvocation/fields/{}"
+# UPDATE_FIELD = "/types/actioninvocation/fields/{}"
+UPDATE_FIELD = "/types/actioninvocation/fields/{}?handle_format=names&include_principals=false"
 GET_FIELD = "/types/actioninvocation/fields/{}?include_principals=true"
 
 LOG = logging.getLogger(__name__)
@@ -19,7 +20,7 @@ class resilient_utils(ResilientComponent):
         super(resilient_utils, self).__init__(opts)
         self.res_rest_client = self.rest_client()
 
-    def update_rule_action_field_values(self, field_name, field_text, field_values=None):
+    def update_rule_action_field_values(self, field_name, field_values=None):
         """
         Update values in qradar_servers select field
         :param field_name: activity field name
@@ -27,34 +28,22 @@ class resilient_utils(ResilientComponent):
         :return:
         """
         try:
-            fields = self.res_rest_client.get(GET_FIELD.format(field_name))
+            def update_actioninvocation_field(payload):
+                if payload.get("values"):
+                    for each_value in payload.get("values"):
+                        if each_value.get("label") in field_values:
+                            field_values.remove(each_value.get("label"))
 
-            LOG.debug(str(fields))
-
-            if type(fields) == list or fields.get("input_type") != "select":
-                return None
-
-            in_use_values = [
-                value.get("label")
-                for value in fields.get("values")
-            ]
-
-            fields_to_add = [
-                value
-                for value in field_values
-                if value not in in_use_values
-            ]
-
-            if fields_to_add:
-                payload = fields
                 param_values = [
                     {"label": str(value), "enabled": True, "hidden": False}
-                    for value in fields_to_add
+                    for value in field_values
                 ]
 
                 payload["values"] = param_values
 
-                self.res_rest_client.put(UPDATE_FIELD.format(field_name), payload, timeout=1000)
+                return payload
+
+            self.res_rest_client.get_put(UPDATE_FIELD.format(field_name), lambda payload: update_actioninvocation_field(payload), timeout=1000)
 
         except Exception as err_msg:
             LOG.warning("Action filed: {} error: {}".format(field_name, err_msg))
