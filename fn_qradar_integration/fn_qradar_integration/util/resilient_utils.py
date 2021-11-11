@@ -9,9 +9,7 @@ from resilient_circuits import ResilientComponent
 import logging
 from fn_qradar_integration.util.exceptions.custom_exceptions import ResilientActionError
 
-# UPDATE_FIELD = "/types/actioninvocation/fields/{}"
-UPDATE_FIELD = "/types/actioninvocation/fields/{}?handle_format=names&include_principals=false"
-GET_FIELD = "/types/actioninvocation/fields/{}?include_principals=true"
+UPDATE_FIELD = "/types/actioninvocation/fields/{}?include_principals=false"
 
 LOG = logging.getLogger(__name__)
 
