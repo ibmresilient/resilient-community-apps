@@ -53,6 +53,8 @@ class resilient_utils(ResilientComponent):
             if type(fields) == list or fields.get("input_type") != "select":
                 return None
 
+            print("\n\n\n"+str(fields)+"\n\n\n")
+
             in_use_values = [
                 value.get("label")
                 for value in fields.get("value")
@@ -69,5 +71,5 @@ class resilient_utils(ResilientComponent):
                 self.res_rest_client.put(UPDATE_FIELD.format(field_name), payload, timeout=1000)
 
         except Exception as err_msg:
-            LOG.warning("Action filed: {} create error: {}".format(field_name, err_msg))
+            LOG.warning("Action filed: {} error: {}".format(field_name, err_msg))
             raise ResilientActionError("Error while updating action field: {}".format(field_name))
