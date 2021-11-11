@@ -29,6 +29,9 @@ class resilient_utils(ResilientComponent):
         """
         try:
             def update_actioninvocation_field(payload):
+                if type(payload) == list:
+                    return payload
+
                 if payload.get("values"):
                     for each_value in payload.get("values"):
                         if each_value.get("label") in field_values:
