@@ -55,9 +55,13 @@ class resilient_utils(ResilientComponent):
             if type(fields) == list or fields.get("input_type") != "select":
                 return None
 
+            if fields.get("value"):
+                select_field_name = "value"
+            if fields.get("values"):
+                select_field_name = "values"
             in_use_values = [
                 value.get("label")
-                for value in fields.get("value")
+                for value in fields.get(select_field_name)
             ]
 
             fields_to_add = [
