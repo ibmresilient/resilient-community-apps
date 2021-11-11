@@ -9,7 +9,8 @@ from resilient_circuits import ResilientComponent
 import logging
 from fn_qradar_integration.util.exceptions.custom_exceptions import ResilientActionError
 
-UPDATE_FIELD = "/types/actioninvocation/fields/{}?handle_format=names&include_principals=false"
+UPDATE_FIELD = "/types/actioninvocation/fields/{}"
+GET_FIELD = "/types/actioninvocation/fields/{}?include_principals=true"
 
 LOG = logging.getLogger(__name__)
 
@@ -26,15 +27,18 @@ class resilient_utils(ResilientComponent):
         :return:
         """
         try:
-            def update_actioninvocation_field(payload):
-                if type(payload) == list:
-                    raise Exception("GET did not return information")
+            fields = self.res_rest_client.get(GET_FIELD.format(field_name))
 
-                if payload.get("values"):
-                    for each_value in payload.get("values"):
-                        if each_value.get("label") in field_values:
-                            field_values.remove(each_value.get("label"))
+            if type(fields) == list or fields.get("input_type") != "select":
+                return None
 
+            if fields.get("values"):
+                for each_value in fields.get("values"):
+                    if each_value.get("label") in field_values:
+                        field_values.remove(each_value.get("label"))
+
+            if field_values:
+                payload = fields
                 param_values = [
                     {"label": str(value), "enabled": True, "hidden": False}
                     for value in field_values
@@ -42,9 +46,7 @@ class resilient_utils(ResilientComponent):
 
                 payload["values"] = param_values
 
-                return payload
-
-            self.res_rest_client.get_put(UPDATE_FIELD.format(field_name), lambda payload: update_actioninvocation_field(payload), timeout=1000)
+                self.res_rest_client.put(UPDATE_FIELD.format(field_name), payload, timeout=1000)
 
         except Exception as err_msg:
             LOG.warning("Action filed: {} error: {}".format(field_name, err_msg))
