@@ -19,25 +19,6 @@ class resilient_utils(ResilientComponent):
         super(resilient_utils, self).__init__(opts)
         self.res_rest_client = self.rest_client()
 
-    def create_payload(self, field_name, field_text, field_values=None):
-        """
-        Create payload to be sent to resilient
-        :param field_name: activity field name
-        :param field_value: values to add to the activity field object
-        :return: payload
-        """
-        if field_values is None:
-            field_values = []
-        param_values = []
-        payload = {"name": field_name, "text": field_text, "prefix": "properties", "tooltip": "", "placeholder": "",
-                        "input_type": "select", "blank_option": False, "values": [], "allow_default_value": False}
-        
-        for value in field_values:
-            param_values.append({"label": str(value), "enabled": True, "hidden": False})
-
-        payload["values"] = param_values
-        return payload
-
     def update_rule_action_field_values(self, field_name, field_text, field_values=None):
         """
         Update values in qradar_servers select field
@@ -65,7 +46,14 @@ class resilient_utils(ResilientComponent):
             ]
 
             if fields_to_add:
-                payload = self.create_payload(field_name, field_text, fields_to_add)
+                payload = fields
+                param_values = [
+                    {"label": str(value), "enabled": True, "hidden": False}
+                    for value in fields_to_add
+                ]
+
+                payload["values"] = param_values
+
                 self.res_rest_client.put(UPDATE_FIELD.format(field_name), payload, timeout=1000)
 
         except Exception as err_msg:
