@@ -50,12 +50,12 @@ class resilient_utils(ResilientComponent):
         try:
             fields = self.res_rest_client.get(GET_FIELD.format(field_name))
 
-            if type(fields) == list:
+            if type(fields) == list or fields.get("input_type") != "select":
                 return None
 
             in_use_values = [
-                value.get("value")
-                for value in fields.get("label")
+                value.get("label")
+                for value in fields.get("value")
             ]
 
             fields_to_add = [
