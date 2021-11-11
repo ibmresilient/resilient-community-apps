@@ -889,7 +889,7 @@ if results.success:
 else:
   msg = u"Defender Unisolate Action {}.\nMachine: {} ({})\nType: {}\nComment: {}\nReason: {}"\
    .format("successful" if results.success else "unsuccessful",
-           results.content.get('computerDnsName'), row['machine_id'],
+           row['machine_name'], row['machine_id'],
            str(rule.properties.defender_isolation_type),
            rule.properties.defender_action_comment,
            results.reason)
@@ -1189,7 +1189,7 @@ if results.success:
 else:
   msg = u"Defender Quarantine file Action {}.\nMachine: {} ({})\nType: {}\nComment: {}\nReason: {}"\
    .format("successful" if results.success else "unsuccessful",
-           results.content.get('computerDnsName'), row['machine_id'],
+           row['machine_name'], row['machine_id'],
            str(rule.properties.defender_isolation_type),
            rule.properties.defender_action_comment,
            results.reason)
@@ -1355,7 +1355,7 @@ if results.success:
 else:
   msg = u"Defender Scan Action {}.\nMachine: {} ({})\nType: {}\nComment: {}\nReason: {}"\
    .format("successful" if results.success else "unsuccessful",
-           results.content.get('computerDnsName'), row['machine_id'],
+           row['machine_name'], row['machine_id'],
            str(rule.properties.defender_isolation_type),
            rule.properties.defender_action_comment,
            results.reason)
@@ -2655,7 +2655,7 @@ defender_indicators
 Refer to the documentation listed in the Requirements section for troubleshooting information.
 
 ### For Support
-This is a IBM Community provided App. Please search the Community https://ibm.biz/resilientcommunity for assistance.
+This is a IBM Supported provided App. Use the SOAR Community https://ibm.biz/soarcommunity for app assistance and IBM Support for issue tracking https://ibm.com/mysupport.
 
 ## Template Appendix
 
