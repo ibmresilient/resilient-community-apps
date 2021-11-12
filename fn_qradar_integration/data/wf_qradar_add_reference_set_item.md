@@ -20,7 +20,7 @@
 ```python
 inputs.qradar_reference_set_item_value = artifact.value
 inputs.qradar_reference_set_name  = rule.properties.qradar_reference_set_name
-inputs.qradar_label = rule.properties.qradar_servers
+inputs.qradar_label = incident.properties.qradar_destination
 ```
 
 ### Post-Processing Script

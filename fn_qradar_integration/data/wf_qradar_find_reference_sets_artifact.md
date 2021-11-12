@@ -19,7 +19,7 @@
 ### Pre-Processing Script
 ```python
 inputs.qradar_reference_set_item_value = artifact.value
-inputs.qradar_label = fields.incident.qradar_destination
+inputs.qradar_label = incident.properties.qradar_destination
 ```
 
 ### Post-Processing Script
