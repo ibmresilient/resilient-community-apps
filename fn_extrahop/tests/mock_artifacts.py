@@ -3,8 +3,12 @@
 # pragma pylint: disable=unused-argument, no-self-use
 """Generate Mock responses to simulate ZIA for Unit and function tests """
 import json
+import os
 
 from requests.models import Response
+TESTS_DIR = os.path.dirname(os.path.realpath(__file__))
+PCAP_FILE = os.path.join(TESTS_DIR, "example.pcap")
+PCAP_FILE_NAME = "example.pcap"
 
 def get_mock_config():
     config_data = u"""[fn_extrahop]
@@ -26,6 +30,10 @@ def get_tags():
             "id": 2,
             "name": "test_tag_2"}
     ]
+def get_test_pcap():
+    with open(PCAP_FILE, 'rb') as mockzip:
+        data = mockzip.read()
+    return data
 
 def mocked_rx_client(*args, **kwargs):
     class MockSession:
@@ -72,16 +80,34 @@ def mocked_rx_client(*args, **kwargs):
         def get_activitymaps(self, activitymap_id=None):
             return MockGetResponse([], 200)
 
+        def search_packets(self, output=None, always_return_body=False, active_from=None, active_until=None,
+                           limit_bytes=None, limit_search_duration=None, bpf=None, ip1=None, port1=None, ip2=None,
+                           port2=None):
+
+            return MockGetResponse(output, 200)
+
     return MockSession(*args, **kwargs)
+
 
 class MockGetResponse:
     """Class will be used by the mock to replace get and post requests in standalone tests"""
     def __init__(self, *args, **kwargs):
         self.headers = {}
         self.r = Response()
-        self.r._content = json.dumps(args[0]).encode('utf-8')
         self.status_code = args[1]
         self.r.status_code = args[1]
+        self.r._content = json.dumps(args[0]).encode('utf-8')
+        if args[0] == "keylog_txt":
+            self.content = json.dumps("").encode('utf-8')
+            self.r._content = json.dumps("").encode('utf-8')
+        elif args[0] == "zip":
+            self.status_code = 204
+            self.r.status_code = 204
+        elif args[0] == "pcap":
+            self.headers["Content-Disposition"] = 'attachment; filename="' + PCAP_FILE_NAME + '"'
+            self.content = get_test_pcap()
+            self.r._content = get_test_pcap()
+
 
     def json(self):
         return self.r.json()
