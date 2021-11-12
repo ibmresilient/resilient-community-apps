@@ -10,6 +10,10 @@ import logging
 from circuits import Event, Timer
 from resilient_circuits import ResilientComponent, handler
 from resilient_lib import validate_fields, RequestsCommon
+from fn_sentinelone.lib.function_common import PACKAGE_NAME, SentinelOneProfiles,\
+        DEFAULT_INCIDENT_CREATION_TEMPLATE,\
+        DEFAULT_INCIDENT_UPDATE_TEMPLATE,\
+        DEFAULT_INCIDENT_CLOSE_TEMPLATE
 from fn_sentinelone.lib.jinja_common import JinjaEnvironment
 from fn_sentinelone.lib.resilient_common import ResilientCommon
 from fn_sentinelone.lib.sentinelone_common import SentinelOneClient
@@ -18,9 +22,9 @@ DEFAULT_INCIDENT_CREATION_TEMPLATE = "data/incident_creation_template.jinja"
 DEFAULT_INCIDENT_UPDATE_TEMPLATE = "data/incident_update_template.jinja"
 DEFAULT_INCIDENT_CLOSE_TEMPLATE = "data/incident_close_template.jinja"
 
-PACKAGE_NAME = "fn_sentinelone"
 POLLER_CHANNEL = "sentinelone_poller"
 
+DEFAULT_POLLER_LOOKBACK_MINUTES = 120
 DEFAULT_POLLER_SECONDS = 600
 LOG = logging.getLogger(__name__)
 
@@ -52,6 +56,11 @@ class SentinelOnePollerComponent(ResilientComponent):
         if self.polling_interval == 0:
             LOG.info(u"Sentinel poller interval is not configured.  Automated escalation is disabled.")
             return
+
+        # Set last_poller_time to the specified polling_lookback in minutes to pick up extra threats
+        # the first time polling. 
+        self.polling_lookback = int(self.options.get("polling_lookback", DEFAULT_POLLER_LOOKBACK_MINUTES))
+        self.last_poller_time = datetime.datetime.utcnow() - datetime.timedelta(minutes=self.polling_lookback)
 
         LOG.info(u"Sentinel poller initiated, polling interval %s", self.polling_interval)
         Timer(self.polling_interval, Poll(), persist=False).register(self)
@@ -92,30 +101,94 @@ class SentinelOnePollerComponent(ResilientComponent):
 
         self.resilient_common = ResilientCommon(self.rest_client())
 
+    def _profileescalate(self):
+        """ This is the main logic of the poller
+            Search for SentinelOne Threats (incidents) and create associated cases in Resilient SOAR
+        """
+        try:
+            # call Sentinel for each profile to get the incident list
+            for profile_name, profile_data in self.sentinelone_profiles.get_profiles().items():
+                poller_start = datetime.datetime.utcnow()
+                try:
+                    LOG.info("polling profile: %s", profile_name)
+                    result, status, reason  = self.sentinelone_client.query_incidents(profile_data)
+                    threats = result.get("data")
+                    while status:
+                        self._parse_results(result, profile_name, profile_data)
+
+                        # more results? continue
+                        if result.get("nextLink"):
+                            LOG.debug("running nextLink")
+                            result, status, reason  = self.sentinelone_client.query_next_incidents(profile_data,
+                                                                                                result.get("nextLink")
+                                                                                               )
+                        else:
+                            break
+
+                    # filter the incident list returned based on the criteria in a filter
+                    if not status:
+                        LOG.error("Error querying for incidents: %s, %s", reason, result)
+
+                finally:
+                    # set the last poller time for next cycle
+                    profile_data['last_poller_time'] = poller_start
+
+        except Exception as err:
+            LOG.error(str(err))
+        finally:
+            # We always want to reset the timer to wake up, no matter failure or success
+            self.fire(PollCompleted())
+
     def _escalate(self):
         """ This is the main logic of the poller
             Search for SentinelOne Threats and create associated cases in Resilient SOAR
         """
         try:
             poller_start = datetime.datetime.utcnow()
-            # Cal SentinelOne to get latest threats
-            result = self.sentinelone_client.get_threats()
+ 
+            # Call SentinelOne to get latest threats since last poller time
+            result = self.sentinelone_client.get_threats(self.last_poller_time)
 
             threats = result.get("data")
             for threat in threats:
                 threat_info = threat.get("threatInfo")
                 threat_id = threat_info.get("threatId")
+
                 resilient_incident = self.resilient_common.find_incident(threat_id)
+                incident_created = False
                 if resilient_incident is None:
                     # create a new incident
                     incident_payload = self.jinja_env.make_payload_from_template(
                                                     None,
                                                     DEFAULT_INCIDENT_CREATION_TEMPLATE,
                                                     threat)
-                    updated_resilient_incident = self.resilient_common.create_incident(incident_payload)
+                    resilient_incident = self.resilient_common.create_incident(incident_payload)
                     LOG.info("Created incident %s from SentinelOne Threat %s",
-                             updated_resilient_incident['id'], threat_id)
-            
+                             resilient_incident['id'], threat_id)
+                    incident_created = True
+
+
+                incident_id = resilient_incident['id']
+                # get the sentinel comments and add to Resilient.
+                # need to ensure not adding the comment more than once
+                result_notes = self.sentinelone_client.get_threat_notes(threat_id)
+                sentinelone_notes = result_notes.get("data")
+
+                new_comments = self.resilient_common.filter_resilient_comments(
+                                                            incident_id,
+                                                            sentinelone_notes
+                                                        )
+                for comment in new_comments:
+                    self.resilient_common.create_incident_comment(
+                                                            incident_id,
+                                                            comment['id'],
+                                                            comment['text']
+                                                        )
+
+                #for note in sentinelone_notes:
+                #    self.resilient_common.add_
+            self.last_poller_time = poller_start
+
         except Exception as err:
             LOG.error(str(err))
         finally:

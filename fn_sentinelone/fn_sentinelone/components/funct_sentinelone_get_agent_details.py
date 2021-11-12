@@ -21,16 +21,15 @@ class FunctionComponent(AppFunctionComponent):
         """
         Function: None
         Inputs:
-            -   fn_inputs.sentinelone_id
+            -   fn_inputs.sentinelone_agent_id
         """
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
 
         sentinelOne_client = SentinelOneClient(self.options, self.rc)
-        agent_id = fn_inputs.sentinelone_id
+        agent_id = fn_inputs.sentinelone_agent_id
         results = sentinelOne_client.get_agent_details(agent_id)
 
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
 
         yield FunctionResult(results)
-        # yield FunctionResult({}, success=False, reason="Bad call")

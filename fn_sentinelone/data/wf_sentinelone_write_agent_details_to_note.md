@@ -18,7 +18,7 @@
 
 ### Pre-Processing Script
 ```python
-inputs.sentinelone_id = row.sentinelone_dt_agent_id
+inputs.sentinelone_agent_id = row.sentinelone_dt_agent_id
 ```
 
 ### Post-Processing Script

@@ -17,8 +17,8 @@ class ResilientCommon():
         self.rest_client = rest_client
 
     def find_incident(self, sentinelone_threat_id):
-        """Find a Resilient incident which contains a custom field associated with a Sentinel
-             incident
+        """Find a Resilient incident which contains a custom field associated with a SentinelOne
+             threat
 
         Args:
             sentinelone_threat_id ([str]): [sentinelone threat id]
@@ -56,7 +56,7 @@ class ResilientCommon():
     def create_incident(self, incident_payload):
         """
         Create a new Resilient incident by rendering a jinja2 template
-        :param sentinel_incident: sentinel_incident (json object)
+        :param sentinelone_incident: sentinelone_incident (json object)
 
         :return: Resilient incident
         """
@@ -73,7 +73,7 @@ class ResilientCommon():
 
         Args:
             incident ([dict]): [Resilient incident data]
-            sentinel_incident ([dict]): [Sentinel incident data]
+            sentinelone_incident ([dict]): [SentinelOne incident data]
             incident_close_template ([str]): [path to template to apply for close operation]
 
         Raises:
@@ -93,7 +93,7 @@ class ResilientCommon():
     def update_incident(self, incident_id, incident_payload):
         """
         Update a Resilient incident by rendering a jinja2 template
-        :param sentinel_incident: Secureworks CTP sentinel_incident (json object)
+        :param sentinelone_incident: sentinelone_incident (json object)
         :return: Resilient incident
         """
 
@@ -182,12 +182,12 @@ class ResilientCommon():
         soar_comment_list = [comment['text'] for comment in soar_comments]
 
         # filter comments with our SOAR header
-        new_comments = [comment for comment in sentinel_comments if not FROM_SOAR_COMMENT_HDR in comment['properties']['message']]
+        new_comments = [comment for comment in sentinel_comments if not FROM_SOAR_COMMENT_HDR in comment['text']]
 
         # filter out the comments already sync'd
         if soar_comment_list:
             new_comments = [comment for comment in new_comments \
-                if not any([comment['name'] in already_syncd for already_syncd in soar_comment_list])]
+                if not any([comment['id'] in already_syncd for already_syncd in soar_comment_list])]
 
         return new_comments
 

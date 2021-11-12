@@ -1,0 +1,9 @@
+{
+  {# JINJA template for closing a new Resilient incident from a Sentinel incident. #}
+  "plan_status": "C",
+  "resolution_id": "Resolved",
+  "resolution_summary": "Closed by SentinelOne",
+  "properties": {
+    "sentinelone_incident_status": "{{ threatInfo.incidentStatus }}",
+  }
+}

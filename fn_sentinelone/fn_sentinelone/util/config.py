@@ -15,8 +15,10 @@ def config_section_data():
 sentinelone_server=usea1-partners.sentinelone.net
 # SentinelOne REST API version
 api_version=2.1
-# SentinelOne site token
+# SentinelOne API token
 api_token=bkhAs8WdkRfxVA3jsBT7CIOsgrBqFeWVsMVJwio8FsQ9YwKYPnMcA3JOtTTBgjze3gz7goz72rNY8NLl
+# Site ids to poll - comma seperated list
+polling_site_ids=
 # poller timeback time first time, in minutes
 polling_lookback=120
 # Poller settings
