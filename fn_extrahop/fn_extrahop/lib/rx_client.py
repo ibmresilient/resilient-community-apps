@@ -44,7 +44,8 @@ class RxClient():
             "create_tag":        "/".join([self.api_base_url, "tags"]),
             "assign_tag":        "/".join([self.api_base_url, "tags/{}/devices"]),
             "watchlist":         "/".join([self.api_base_url, "watchlist/devices"]),
-            "activitymaps":      "/".join([self.api_base_url, "activitymaps/{}"])
+            "activitymaps":      "/".join([self.api_base_url, "activitymaps/{}"]),
+            "search_packets":    "/".join([self.api_base_url, "packets/search"]),
         }
         self.rc = RequestsCommon(opts=opts, function_opts=fn_opts)
         self._headers = {"Authorization": "Bearer " + self.get_token()}
@@ -355,5 +356,53 @@ class RxClient():
             uri = self._endpoints["activitymaps"].format(activitymap_id)
 
         r = self.rc.execute_call_v2("get", uri, headers=self._headers)
+
+        return r
+
+    def search_packets(self, output=None, always_return_body=False, active_from=None, active_until=None, limit_bytes=None,
+                       limit_search_duration=None, bpf=None, ip1=None, port1=None, ip2=None, port2=None):
+        """Search for and download packets stored on the ExtraHop system
+
+        For more details on api, see https://docs.extrahop.com/8.6/rx360-rest-api/
+
+        :param output: (Optional) The output format. The following values are valid pcap, keylog_txt, zip(str)
+        :param always_return_body: (Optional) If search does not match any packets, returns an empty packet capture
+                                              file and an HTTP status of 200.(boolean)
+        :param active_from: (Optional)  Get packets that occurred after the specified timestamp (in millisecs).
+        Default 0 (int)
+        :param active_until: (Optional) Get packets that ended before the specified timestamp (in millisecs).
+        Default 0 (int)
+        :param limit_bytes: (Optional) The maximum number of bytes to return. (str).
+        :param limit_search_duration: (Optional) The maximum amount of time to run the packet search. (int).
+        :param bpf:  (Optional) The Berkeley Packet Filter (BPF) syntax for the packet search. (str)
+        :param ip1: (Optional) Returns packets sent to or received by the specified IP address. (str)
+        :param port1: (Optional) Returns packets sent from or received on the specified port. (str)
+        :param ip2: (Optional) Returns packets sent to or received by the specified IP address.
+        :param port2: (Optional) Returns packets sent from or received on the specified port.
+        :return Result in json format.`
+        """
+        uri = self._endpoints["search_packets"]
+        params = {}
+
+        params["from"] = active_from if active_from else 0
+        params["until"] = active_until if active_until else 0
+        params["limit_search_duration:"] = int(limit_search_duration) if limit_search_duration else 0
+        params["always_return_body"] = "{}".format(always_return_body).lower()
+        if output:
+            params["output"] = output
+        if limit_bytes:
+            params["limit_bytes"] = int(limit_bytes)
+        if bpf:
+            params["bpf"] = bpf
+        if ip1:
+            params["ip1"] = ip1
+        if port1:
+            params["port1"] = port1
+        if ip2:
+            params["ip2"] = ip2
+        if port2:
+            params["port2"] = port2
+
+        r = self.rc.execute_call_v2("get", uri, headers=self._headers, params=params)
 
         return r
