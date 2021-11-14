@@ -167,7 +167,6 @@ class SentinelOnePollerComponent(ResilientComponent):
                              resilient_incident['id'], threat_id)
                     incident_created = True
 
-
                 incident_id = resilient_incident['id']
                 # get the sentinel comments and add to Resilient.
                 # need to ensure not adding the comment more than once

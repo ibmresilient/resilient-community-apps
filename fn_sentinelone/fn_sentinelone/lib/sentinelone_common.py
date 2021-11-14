@@ -6,7 +6,7 @@
 import os
 import datetime
 import logging 
-from resilient_lib import validate_fields, IntegrationError
+from resilient_lib import validate_fields, IntegrationError, str_to_bool
 
 LOG = logging.getLogger(__name__)
 
@@ -22,9 +22,19 @@ class SentinelOneClient(object):
         self.server = options.get("sentinelone_server")
         self.base_url = u"https://{0}/web/api/v{1}".format(self.server, self.api_version)
         self.api_token = options.get("api_token")
-        self.cafile = options.get("cafile")
-        self.bundle = os.path.expanduser(self.cafile) if self.cafile else False
+
+        self.verify = str_to_bool(options.get("verify", "true"))
+
         self.polling_lookback = int(options.get("polling_lookback", DEFAULT_POLLER_LOOKBACK_MINUTES))
+        if options.get("site_ids") is None:
+            self.site_ids = []
+        else:
+            self.site_ids = options.get("site_ids").split(",")
+        if options.get("account_ids") is None:
+            self.account_ids = []
+        else:
+            self.account_ids = options.get("account_ids").split(",")
+        self.query_param = options.get("query_param", None)
 
         self.headers = self.get_headers(self.api_token)
     
@@ -45,7 +55,7 @@ class SentinelOneClient(object):
         url = u"{0}/agents".format(self.base_url)
 
         response = self.rc.execute("GET", url, headers=self.headers, params=params, 
-                                    verify=self.bundle, proxies=self.rc.get_proxies())
+                                    verify=self.verify, proxies=self.rc.get_proxies())
         response.raise_for_status()
         return response.json()
 
@@ -59,7 +69,7 @@ class SentinelOneClient(object):
         }
 
         response = self.rc.execute("GET", url, headers=self.headers, params=params, 
-                                    verify=self.bundle, proxies=self.rc.get_proxies())
+                                    verify=self.verify, proxies=self.rc.get_proxies())
         response.raise_for_status()
         return response.json()
 
@@ -75,13 +85,15 @@ class SentinelOneClient(object):
         LOG.debug("last_poller_time: %s", last_poller_datetime_string)
 
         params = {
-            'siteIds': ["607447413779893818"],
+            'accountIds': self.account_ids,
+            'siteIds': self.site_ids,
+            'query': self.query_param,
             'createdAt__gte': last_poller_datetime_string,
             'updatedAt__gte': last_poller_datetime_string
         }
 
         response = self.rc.execute("GET", url, headers=self.headers, params=params, 
-                                    verify=self.bundle, proxies=self.rc.get_proxies())
+                                    verify=self.verify, proxies=self.rc.get_proxies())
         response.raise_for_status()
         return response.json()
 
@@ -94,7 +106,7 @@ class SentinelOneClient(object):
         }
 
         response = self.rc.execute("GET", url, headers=self.headers, params=params, 
-                                    verify=self.bundle, proxies=self.rc.get_proxies())
+                                    verify=self.verify, proxies=self.rc.get_proxies())
         response.raise_for_status()
         return response.json()
 
@@ -111,7 +123,7 @@ class SentinelOneClient(object):
         }
 
         response = self.rc.execute("POST", url, headers=self.headers, json=payload, 
-                                    verify=self.bundle, proxies=self.rc.get_proxies())
+                                    verify=self.verify, proxies=self.rc.get_proxies())
         response.raise_for_status()
         return response.json()
 
@@ -128,7 +140,7 @@ class SentinelOneClient(object):
         }
 
         response = self.rc.execute("POST", url, headers=self.headers, json=payload, 
-                                    verify=self.bundle, proxies=self.rc.get_proxies())
+                                    verify=self.verify, proxies=self.rc.get_proxies())
         response.raise_for_status()
         return response.json()
 
@@ -145,41 +157,9 @@ class SentinelOneClient(object):
         }
 
         response = self.rc.execute("POST", url, headers=self.headers, json=payload, 
-                                    verify=self.bundle, proxies=self.rc.get_proxies())
+                                    verify=self.verify, proxies=self.rc.get_proxies())
         response.raise_for_status()
         return response.json()
-
-    def query_threats(self, profile_data):
-        """Query SentinelOne for all threats created within the last polling window. If first time,
-              then use a lookback value.
-
-        Args:
-            profile_data ([dict]): [profile to query incidents]
-
-        Returns:
-            result [dict]: API results
-            status [bool]: True if API call was successful
-            reason [str]: Reason of error when status=False
-        """
-
-        url = u"{0}/threats".format(self.base_url)
-
-        # build filter information
-        last_poller_datetime = self._get_last_poller_date(profile_data)
-        last_poller_datetime_string = self._make_createdate_filter(last_poller_datetime)
-
-        params = {
-            'siteIds': ["607447413779893818"],
-            'createdAt__gte': last_poller_datetime_string
-        }
-
-        response = self.rc.execute("GET", url, headers=self.headers, params=params, 
-                                    verify=self.bundle, proxies=self.rc.get_proxies())
-        response.raise_for_status()
-        return response.json()
-
-
-
 
     def _make_createdate_filter(self, last_poller_datetime):
         """build the $filter parameter to find incidents by last poller run datetime

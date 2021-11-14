@@ -12,20 +12,25 @@ def config_section_data():
 
     config_data = u"""[fn_sentinelone]
 # SentinelOne server
-sentinelone_server=usea1-partners.sentinelone.net
+sentinelone_server=
 # SentinelOne REST API version
 api_version=2.1
 # SentinelOne API token
-api_token=bkhAs8WdkRfxVA3jsBT7CIOsgrBqFeWVsMVJwio8FsQ9YwKYPnMcA3JOtTTBgjze3gz7goz72rNY8NLl
-# Site ids to poll - comma seperated list
-polling_site_ids=
-# poller timeback time first time, in minutes
+api_token=
+
+# SentinelOne poller settings
+# Poller interval in seconds, comment out or set to 0 to disable poller
+polling_interval=10
+# Poller timeback time first time, in minutes
 polling_lookback=120
-# Poller settings
-# poller interval in seconds, comment out or set to 0 to disable poller
-polling_interval=60
-#cafile=<path to certificate file>
-#http_proxy=http://proxy:80
-#https_proxy=https://proxy:443
+# Comma separated list of SentinelOne account Ids to query for threats by poller
+account_ids=
+# Comma separated list of SentinelOne site Ids to query for threats by poller
+site_ids=
+# Optional "query" parameter for querying threats in SentinelOne
+query_param=
+#verify=false | /path/toclient_certificate.pem
+#http_proxy=
+#https_proxy=
 """
     return config_data
