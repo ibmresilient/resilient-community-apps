@@ -2633,6 +2633,7 @@ defender_indicators
 | Defender Update Alert | defender_alerts | `defender_atp_update_alert` |
 | Defender Close Incident | incident | `defender_close_incident` |
 | Defender Get Incident | incident | `defender_get_incident` |
+| Defender Refresh Incident | incident | `defender_refresh_incident` |
 | Create Artifact from Indicator | defender_indicators | `-` |
 | Defender List Indicators | incident | `defender_list_indicators` |
 | Delete Indicator | defender_indicators | `defender_atp_delete_indicator` |
