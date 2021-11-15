@@ -22,7 +22,7 @@ def snake_to_camel(word):
 
 setup(
     name="fn_microsoft_defender",
-    display_name="Microsoft Defender Functions",
+    display_name="Microsoft Defender",
     version="1.0.0",
     license="MIT",
     author="IBM SOAR",
