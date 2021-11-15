@@ -26,14 +26,10 @@ class SentinelOneClient(object):
         self.verify = str_to_bool(options.get("verify", "true"))
 
         self.polling_lookback = int(options.get("polling_lookback", DEFAULT_POLLER_LOOKBACK_MINUTES))
-        if options.get("site_ids") is None:
-            self.site_ids = []
-        else:
-            self.site_ids = options.get("site_ids").split(",")
-        if options.get("account_ids") is None:
-            self.account_ids = []
-        else:
-            self.account_ids = options.get("account_ids").split(",")
+        site_ids = options.get("site_ids")
+        self.site_ids = site_ids.split(",") if site_ids else []
+        account_ids = options.get("account_ids")
+        self.account_ids = account_ids.split(",") if account_ids else []        
         self.query_param = options.get("query_param", None)
 
         self.headers = self.get_headers(self.api_token)
@@ -73,6 +69,16 @@ class SentinelOneClient(object):
         response.raise_for_status()
         return response.json()
 
+    def get_agents_passphrases(self):
+        """ Return the list of agents matching the filter 
+        """
+        url = u"{0}/agents/passphrases".format(self.base_url)
+
+        response = self.rc.execute("GET", url, headers=self.headers, params=params, 
+                                    verify=self.verify, proxies=self.rc.get_proxies())
+        response.raise_for_status()
+        return response.json()
+
     def get_threats(self, last_poller_time):
         """ Return the SentinelOne threats that have been created or updated
             since the last poll time
@@ -101,6 +107,20 @@ class SentinelOneClient(object):
         """ Get threat notes for a given threat
         """
         url = u"{0}/threats/{1}/notes".format(self.base_url, threat_id)
+
+        params = {
+        }
+
+        response = self.rc.execute("GET", url, headers=self.headers, params=params, 
+                                    verify=self.verify, proxies=self.rc.get_proxies())
+        response.raise_for_status()
+        return response.json()
+
+
+    def get_system_info(self):
+        """ Get threat notes for a given threat
+        """
+        url = u"{0}/system/info".format(self.base_url)
 
         params = {
         }

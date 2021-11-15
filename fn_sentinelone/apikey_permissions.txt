@@ -9,18 +9,18 @@ read_function
 # Add additional permissions below, one per line.
 #
 ## incident permissions
-#create_incident
-#read_all_incidents
+create_incident
+read_all_incidents
 #delete_all_incidents
 #edit_all_incidents_members
 #edit_all_incidents_owner
 #edit_all_incidents_status
 #
 ## incident fields, artifacts, attachments, milestones, datatables
-#edit_all_incidents_fields
+edit_all_incidents_fields
 #
 ## notes permissions
-#edit_all_incident_notes
+edit_all_incident_notes
 #
 ## tasks permissions
 #edit_incident_public_task_fields
@@ -70,4 +70,4 @@ read_function
 #read_stats
 #read_all_action_invocations
 #read_workspace
-#edit_data
+edit_data

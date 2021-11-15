@@ -24,7 +24,7 @@ def codegen_reload_data():
         "functions": [u"sentinelone_connect_to_network", u"sentinelone_get_agent_details", u"sentinelone_get_agents"],
         "workflows": [u"sentinelone_connect_to_network", u"sentinelone_get_agents", u"sentinelone_write_agent_details_to_note"],
         "actions": [u"SentinelOne: Connect to Network", u"SentinelOne: Get Agents", u"SentinelOne: Write Agent Details to Note"],
-        "incident_fields": [],
+        "incident_fields": [u"sentinelone_classification", u"sentinelone_confidence_level", u"sentinelone_incident_status", u"sentinelone_mitigation_status", u"sentinelone_threat_id", u"sentinelone_threat_overview_url"],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [u"sentinelone_agents_dt"],
@@ -55,6 +55,13 @@ def customization_data(client=None):
         - SentinelOne: Connect to Network
         - SentinelOne: Get Agents
         - SentinelOne: Write Agent Details to Note
+    - Incident Fields:
+        - sentinelone_classification
+        - sentinelone_confidence_level
+        - sentinelone_incident_status
+        - sentinelone_mitigation_status
+        - sentinelone_threat_id
+        - sentinelone_threat_overview_url
     - Data Tables:
         - sentinelone_agents_dt
     - Scripts:

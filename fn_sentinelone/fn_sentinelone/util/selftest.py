@@ -1,4 +1,5 @@
-# -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+# # -*- coding: utf-8 -*-
 
 """
 Function implementation test.
@@ -19,6 +20,8 @@ Return examples:
 """
 
 import logging
+from resilient_lib import validate_fields, IntegrationError, RequestsCommon
+from fn_sentinelone.lib.sentinelone_common import SentinelOneClient
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
@@ -32,7 +35,21 @@ def selftest_function(opts):
     """
     app_configs = opts.get("fn_sentinelone", {})
 
+    required_fields = ["sentinelone_server", "api_token", "api_version"]
+    validate_fields(required_fields, app_configs)
+
+    # Create api client
+    rc = RequestsCommon(opts, app_configs)
+    sentinelone_client = SentinelOneClient(app_configs, rc)
+
+    reason = None
+    try:
+        state = "success" if sentinelone_client.get_system_info() else "failure"
+    except IntegrationError as err:
+        state = "failure"
+        reason = str(err)
+
     return {
-        "state": "unimplemented",
-        "reason": None
+        "state": state,
+        "reason": reason
     }
