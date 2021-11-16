@@ -10,8 +10,9 @@ def config_section_data():
        when called by `resilient-circuits config [-c|-u]`
     """
     return u'''
-#Note, qradar_1_1_1_1 must equal the QRadar Destination Name that is set in the SOAR plugin
-[fn_qradar_integration:qradar_1_1_1_1]
+# Note: the QRadar instance name that you want to communicate with, must equal the
+# QRadar Destination Name that is set when configuring the SOAR Plugin
+[fn_qradar_integration:SOAR_Plugin_Destination_Name1]
 host=localhost
 username=admin
 qradarpassword=changeme
@@ -20,8 +21,9 @@ qradartoken=changeme
 verify_cert=false
 #search_timeout=
 
-#Note, qradar_192_168_0_3 must equal the QRadar Destination Name that is set in the SOAR plugin
-[fn_qradar_integration:qradar_192_168_0_3]
+# Note: the QRadar instance name that you want to communicate with, must equal the
+# QRadar Destination Name that is set when configuring the SOAR Plugin
+[fn_qradar_integration:SOAR_Plugin_Destination_Name2]
 host=localhost
 username=admin
 qradarpassword=changeme

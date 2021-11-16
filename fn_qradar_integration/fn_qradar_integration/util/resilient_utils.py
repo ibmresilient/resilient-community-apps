@@ -7,7 +7,7 @@
 
 from resilient_circuits import ResilientComponent
 import logging
-from fn_qradar_integration.util.exceptions.custom_exceptions import ResilientActionError
+from resilient_lib import IntegrationError
 
 UPDATE_FIELD = "/types/actioninvocation/fields/{}"
 GET_FIELD = "/types/actioninvocation/fields/{}?include_principals=true"
@@ -50,4 +50,4 @@ class resilient_utils(ResilientComponent):
 
         except Exception as err_msg:
             LOG.warning("Action filed: {} error: {}".format(field_name, err_msg))
-            raise ResilientActionError("Error while updating action field: {}".format(field_name))
+            raise IntegrationError("Error while updating action field: {}".format(field_name))

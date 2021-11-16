@@ -12,9 +12,8 @@ from fn_qradar_integration.util.SearchWaitCommand import SearchWaitCommand, Sear
 from fn_qradar_integration.util import function_utils
 from resilient_lib import RequestsCommon
 import fn_qradar_integration.util.qradar_constants as qradar_constants
-
-from fn_qradar_integration.util.exceptions.custom_exceptions import RequestError, DeleteError, LabelError
 from fn_qradar_integration.lib.reference_data.ReferenceTableFacade import ReferenceTableFacade
+from resilient_lib import IntegrationError
 # handle python2 and 3
 try:
     from urllib import quote as quote_func  # Python 2.X
@@ -61,7 +60,7 @@ class QRadarServers():
         elif len(servers_list) == 1 or qradar_label == qradar_constants.PACKAGE_NAME:
             options = servers_list[list(servers_list.keys())[0]]
         else:
-            raise LabelError(qradar_label)
+            raise IntegrationError("{} did not match labels given in the app.config".format(qradar_label))
 
         return options
 
@@ -376,9 +375,7 @@ class QRadarClient(object):
             ret = response.json()
         except Exception as e:
             LOG.error(str(e))
-            raise RequestError(
-                url, "get_all_ref_set call failed with exception {}".format(str(e)))
-
+            raise IntegrationError("Request to url [{}] throws exception. Error [get_all_ref_set call failed with exception {}]".format(url, str(e)))
         return ret
 
     @staticmethod
@@ -394,8 +391,7 @@ class QRadarClient(object):
             ret = response.json()
         except Exception as e:
             LOG.error(str(e))
-            raise RequestError(
-                url, "get_ref_set_elements call failed with exception {}".format(str(e)))
+            raise IntegrationError("Request to url [{}] throws exception. Error [get_ref_set_elements call failed with exception {}]".format(url, str(e)))
 
         return ret
 
@@ -419,8 +415,7 @@ class QRadarClient(object):
 
         except Exception as e:
             LOG.error(str(e))
-            raise RequestError(
-                url, "update_ref_set_elements call failed with exception {}".format(str(e)))
+            raise IntegrationError("Request to url [{}] throws exception. Error [update_ref_set_elements call failed with exception {}]".format(url, str(e)))
 
         return ret
 
@@ -492,8 +487,7 @@ class QRadarClient(object):
 
         except Exception as e:
             LOG.error(str(e))
-            raise RequestError(
-                url, "search_ref_set call failed with exception {}".format(str(e)))
+            raise IntegrationError("Request to url [{}] throws exception. Error [search_ref_set call failed with exception {}]".format(url, str(e)))
 
         return ret
 
@@ -520,8 +514,7 @@ class QRadarClient(object):
 
         except Exception as e:
             LOG.error(str(e))
-            raise RequestError(
-                url, "add_ref_element call failed with exception {}".format(str(e)))
+            raise IntegrationError("Request to url [{}] throws exception. Error [add_ref_element call failed with exception {}]".format(url, str(e)))
 
         return ret
 
@@ -548,8 +541,7 @@ class QRadarClient(object):
 
         except Exception as e:
             LOG.error(str(e))
-            raise DeleteError(
-                url, "delete_ref_element failed with exception {}".format(str(e)))
+            raise IntegrationError("Delete request to url [{}] throws exception. Error [delete_ref_element failed with exception {}]".format(url, str(e)))
 
         return ret
 

@@ -8,7 +8,7 @@ from requests.compat import urljoin, quote
 
 from .ReferenceObjectsBase import ReferenceObjectBase
 import fn_qradar_integration.util.qradar_constants as qradar_constants
-from fn_qradar_integration.util.exceptions.custom_exceptions import RequestError, DeleteError
+from resilient_lib import IntegrationError
 
 LOG = logging.getLogger(__name__)
 REF_TABLE_ENDPOINT = qradar_constants.REFERENCE_TABLE_URL
@@ -69,7 +69,7 @@ class ReferenceTableFacade(ReferenceObjectBase):
 
         except Exception as e:
             LOG.error(str(e))
-            raise RequestError(url, "add_ref_element call failed with exception {}".format(str(e)))
+            raise IntegrationError("Request to url [{}] throws exception. Error [add_ref_element call failed with exception {}]".format(url, str(e)))
 
         else:
             return ret
@@ -106,8 +106,7 @@ class ReferenceTableFacade(ReferenceObjectBase):
 
         except Exception as e:
             LOG.error(str(e))
-            raise RequestError(
-                url, "update_ref_element failed with exception {}".format(str(e)))
+            raise IntegrationError("Request to url [{}] throws exception. Error [update_ref_element call failed with exception {}]".format(url, str(e)))
 
         return ret
 
@@ -145,8 +144,7 @@ class ReferenceTableFacade(ReferenceObjectBase):
 
         except Exception as e:
             LOG.error(str(e))
-            raise DeleteError(
-                url, "delete_ref_element failed with exception {}".format(str(e)))
+            raise IntegrationError("Delete request to url [{}] throws exception. Error [delete_ref_element failed with exception {}]".format(url, str(e)))
 
         return ret
 
@@ -196,8 +194,7 @@ class ReferenceTableFacade(ReferenceObjectBase):
 
         except Exception as e:
             LOG.error(str(e))
-            raise RequestError(
-                url, "get_one_ref_table call failed with exception {}".format(str(e)))
+            raise IntegrationError("Request to url [{}] throws exception. Error [get_one_ref_teble call failed with exception {}]".format(url, str(e)))
         else:
             return response.json()
 
@@ -227,7 +224,6 @@ class ReferenceTableFacade(ReferenceObjectBase):
 
         except Exception as e:
             LOG.error(str(e))
-            raise RequestError(
-                url, "get_all_ref_tables call failed with exception {}".format(str(e)))
+            raise IntegrationError("Request to url [{}] throws exception. Error [get_all_ref_tables call failed with exception {}]".format(url, str(e)))
         else:
             return response.json()

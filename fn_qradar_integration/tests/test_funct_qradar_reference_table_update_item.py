@@ -71,7 +71,7 @@ class TestQradarReferenceTableUpdateItem:
     mock_inputs_1 = {
         "qradar_reference_table_name": "sample text",
         "qradar_reference_table_item_value": "sample text",
-        "qradar_label": "qradar_1_1_1_1"
+        "qradar_label": "SOAR_Plugin_Destination_Name1"
     }
 
     expected_results_1 = MOCK_UPDATE_RESPONSE
@@ -79,7 +79,7 @@ class TestQradarReferenceTableUpdateItem:
     mock_inputs_2 = {
         "qradar_reference_table_name": "sample text",
         "qradar_reference_table_item_value": "sample text",
-        "qradar_label": "qradar_192_168_0_3"
+        "qradar_label": "SOAR_Plugin_Destination_Name2"
     }
 
     expected_results_2 = MOCK_UPDATE_RESPONSE_UNICODE
