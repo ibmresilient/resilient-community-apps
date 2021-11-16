@@ -116,11 +116,26 @@ def render_json(template, data):
     result = render(template, data)
     for n in range(1, 32):
         result = result.replace(chr(n), " ")
-    try:
-        # remove duplicate commas
-        result = DUPLICATE_COMMAS.sub(',', result)
-        value = rapidjson.loads(result, parse_mode=rapidjson.PM_TRAILING_COMMAS)
-    except:
-        LOG.info(result)
-        raise
+
+    # remove duplicate commas
+    result = DUPLICATE_COMMAS.sub(',', result)
+
+    # continue to parse the json, attempting to look for escape characters to fix
+    attempt_counter = 0
+    value = {}
+    while attempt_counter < 500:
+        try:
+            value = rapidjson.loads(result, parse_mode=rapidjson.PM_TRAILING_COMMAS)
+            break                    # parsing worked -> exit loop
+        except rapidjson.JSONDecodeError as e:
+            # Parse error at offset 6946: Invalid escape character in string.
+            if "Invalid escape character" in str(e):
+                offset = int(re.findall(r'offset (\d+)', str(e))[0])
+                if result[offset] != '\\':
+                    raise e
+                # position of unescaped '\' before that
+                result = result[:offset] + r'\\' + result[offset+1:]
+            else:
+                raise e
+            attempt_counter += 1
     return value
