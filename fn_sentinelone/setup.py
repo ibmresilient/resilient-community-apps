@@ -28,8 +28,8 @@ setup(
     author="IBM Resilient",
     author_email="",
     url="https://github.com/ibmresilient/fn_sentinelone",
-    description="Resilient Circuits Components for 'fn_sentinelone'",
-    long_description="""Escalate SentinelOne Threats into IBM Security SOAR as a case.'""",
+    description="IBM Security SOAR app for SentinelOne",
+    long_description="""Escalate SentinelOne Threats into IBM Security SOAR as an incident/case.'""",
     install_requires=[
         "resilient-circuits>=37.0.0",
                 "resilient-lib",

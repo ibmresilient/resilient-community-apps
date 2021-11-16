@@ -73,7 +73,10 @@ class SentinelOneClient(object):
         """ Return the list of agents matching the filter 
         """
         url = u"{0}/agents/passphrases".format(self.base_url)
-
+        params = {
+            'accountIds': self.account_ids,
+            'siteIds': self.site_ids
+        }
         response = self.rc.execute("GET", url, headers=self.headers, params=params, 
                                     verify=self.verify, proxies=self.rc.get_proxies())
         response.raise_for_status()
@@ -83,25 +86,69 @@ class SentinelOneClient(object):
         """ Return the SentinelOne threats that have been created or updated
             since the last poll time
         """
-        url = u"{0}/threats".format(self.base_url)
-
-        # build filter information
-
+        # Build filter information
         last_poller_datetime_string = self._make_createdate_filter(last_poller_time)
         LOG.debug("last_poller_time: %s", last_poller_datetime_string)
 
+        # Get the newly created threats
         params = {
             'accountIds': self.account_ids,
             'siteIds': self.site_ids,
             'query': self.query_param,
-            'createdAt__gte': last_poller_datetime_string,
+            'createdAt__gte': last_poller_datetime_string
+        }
+
+        threats = []
+        new_threat_ids = []
+        threats = (self._get_threats(params))
+
+        # Create a list of new threat ids to compare against updated threat ids so there are no duplicates
+        for threat in threats:
+            threat_info = threat.get("threatInfo")
+            threat_id = threat_info.get("threatId")
+            new_threat_ids.append(threat_id)
+
+        # Get the updated threats
+        params = {
+            'accountIds': self.account_ids,
+            'siteIds': self.site_ids,
+            'query': self.query_param,
             'updatedAt__gte': last_poller_datetime_string
         }
 
-        response = self.rc.execute("GET", url, headers=self.headers, params=params, 
-                                    verify=self.verify, proxies=self.rc.get_proxies())
-        response.raise_for_status()
-        return response.json()
+        updated_threats = self._get_threats(params)
+
+        for updated_threat in updated_threats:
+            threat_info = updated_threat.get("threatInfo")
+            threat_id = threat_info.get("threatId")
+            if threat_id not in new_threat_ids:
+                threats.append(updated_threat)
+        return threats
+
+    def _get_threats(self, params):
+        """ Return the SentinelOne threats that match the filter
+        """
+        url = u"{0}/threats".format(self.base_url)
+        threats = []
+
+        # nextCursor is a pagination field that points to the next page of threats
+        # Set it to non null string so we go through the while loop at least once
+        nextCursor = "true"
+
+        while nextCursor:
+            response = self.rc.execute("GET", url, headers=self.headers, params=params, 
+                                        verify=self.verify, proxies=self.rc.get_proxies())
+            response.raise_for_status()
+            response_json = response.json()
+            pagination = response_json.get("pagination")
+            nextCursor = pagination.get("nextCursor")
+            # Update the url to get the next page of threats next time through the loop
+            if nextCursor:
+                url = u"{0}/threats?cursor={1}".format(self.base_url, nextCursor)
+            data = response_json.get("data")
+            for threat in data:
+                threats.append(threat)
+        return threats
 
     def get_threat_notes(self, threat_id):
         """ Get threat notes for a given threat

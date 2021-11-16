@@ -32,11 +32,12 @@
   - [Install](#install)
   - [App Configuration](#app-configuration)
   - [Custom Layouts](#custom-layouts)
-- [Function - SentinelOne: Connect to Network](#function---sentinelone-connect-to-network)
-- [Function - SentinelOne: Get Agent Details](#function---sentinelone-get-agent-details)
 - [Function - SentinelOne: Get Agents](#function---sentinelone-get-agents)
+- [Function - SentinelOne: Get Agent Details](#function---sentinelone-get-agent-details)
+- [Function - SentinelOne: Connect to Network](#function---sentinelone-connect-to-network)
 - [Script - Convert JSON to rich text v1.1](#script---convert-json-to-rich-text-v11)
-- [Data Table - SentinelOne Agents](#data-table---sentinelone-agents)
+- [Data Table - SentinelOne Agent](#data-table---sentinelone-agent)
+- [Custom Fields](#custom-fields)
 - [Rules](#rules)
 - [Troubleshooting & Support](#troubleshooting--support)
 ---
@@ -57,11 +58,11 @@
   Provide a high-level description of the function itself and its remote software or application.
   The text below is parsed from the "description" and "long_description" attributes in the setup.py file
 -->
-**Resilient Circuits Components for 'fn_sentinelone'**
+**IBM Security SOAR app for SentinelOne**
 
  ![screenshot: main](./doc/screenshots/main.png) <!-- ::CHANGE_ME:: -->
 
-Escalate SentinelOne Threats into IBM Security SOAR as a case.'
+Escalate SentinelOne Threats into IBM Security SOAR as an incident/case.'
 
 ### Key Features
 <!--
@@ -133,7 +134,7 @@ Additional package dependencies may exist for each of these packages:
 This app has been implemented using:
 | Product Name | Product Version | API URL | API Version |
 | ------------ | --------------- | ------- | ----------- |
-| SentinelOne | 1.0.beta |  | 2.1 |
+| <!-- ::CHANGE_ME:: --> | <!-- ::CHANGE_ME:: --> | <!-- ::CHANGE_ME:: --> | <!-- ::CHANGE_ME:: --> |
 
 #### Prerequisites
 <!--
@@ -195,141 +196,6 @@ The following table provides the settings you need to configure the app. These s
 
 ---
 
-## Function - SentinelOne: Connect to Network
-Connect a an endpoint managed by Sentinel to the network.
-
- ![screenshot: fn-sentinelone-connect-to-network ](./doc/screenshots/fn-sentinelone-connect-to-network.png) <!-- ::CHANGE_ME:: -->
-
-<details><summary>Inputs:</summary>
-<p>
-
-| Name | Type | Required | Example | Tooltip |
-| ---- | :--: | :------: | ------- | ------- |
-| `sentinelone_agent_id` | `text` | Yes | `-` | - |
-
-</p>
-</details>
-
-<details><summary>Outputs:</summary>
-<p>
-
-<!-- ::CHANGE_ME:: -->
-```python
-results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
-} 
-```
-
-</p>
-</details>
-
-<details><summary>Example Pre-Process Script:</summary>
-<p>
-
-```python
-inputs.sentinelone_id = row.sentinelone_dt_agent_id
-```
-
-</p>
-</details>
-
-<details><summary>Example Post-Process Script:</summary>
-<p>
-
-```python
-so_inputs = results.get("inputs")
-sentinelone_id = so_inputs.get("sentinelone_id")
-note = u"<b>SentinelOne: Connect to Network </b><br>  SentinelOne Agent Id: {0}".format(sentinelone_id)
-content = results.get("content")
-if content:
-  data = content.get("data")
-  if data:
-    if data.get("affected") <= 0:
-      note = u"{0} is NOT connected to network".format(note)
-    else:
-      note = u"{0} is connected to network".format(note)
-  else:
-    note = u"{0} no data returned from function".format(note)
-else:
-    note = u"{0} no content data returned from function".format(note)  
-
-incident.addNote(helper.createRichText(note))
-
-```
-
-</p>
-</details>
-
----
-## Function - SentinelOne: Get Agent Details
-None
-
- ![screenshot: fn-sentinelone-get-agent-details ](./doc/screenshots/fn-sentinelone-get-agent-details.png) <!-- ::CHANGE_ME:: -->
-
-<details><summary>Inputs:</summary>
-<p>
-
-| Name | Type | Required | Example | Tooltip |
-| ---- | :--: | :------: | ------- | ------- |
-| `sentinelone_agent_id` | `text` | Yes | `-` | - |
-
-</p>
-</details>
-
-<details><summary>Outputs:</summary>
-<p>
-
-<!-- ::CHANGE_ME:: -->
-```python
-results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
-} 
-```
-
-</p>
-</details>
-
-<details><summary>Example Pre-Process Script:</summary>
-<p>
-
-```python
-inputs.sentinelone_agent_id = row.sentinelone_dt_agent_id
-```
-
-</p>
-</details>
-
-<details><summary>Example Post-Process Script:</summary>
-<p>
-
-```python
-# Put the results json into a workflow property so we can call the 
-# convert_json_to_rich_text script to print readable formatted json in an incident note.
-inputs = results.get("inputs")
-sentinelone_id = inputs.get("sentinelone_id")
-content = results.get("content")
-data = content.get("data")
-
-header = u"SentinelOne Id: {0} Details:".format(sentinelone_id)
-
-json_note = {
-              "version": "1.1",
-              "header": header, 
-              "json": data,
-              "sort": False
-            }
-
-workflow.addProperty('convert_json_to_rich_text', json_note)
-```
-
-</p>
-</details>
-
----
 ## Function - SentinelOne: Get Agents
 None
 
@@ -405,6 +271,156 @@ else:
   note = u"{0} No content data returned from function.".format(note)
   
 incident.addNote(helper.createRichText(note))
+```
+
+</p>
+</details>
+
+---
+## Function - SentinelOne: Get Agent Details
+Get details of a SentinelOne managed agent.
+
+ ![screenshot: fn-sentinelone-get-agent-details ](./doc/screenshots/fn-sentinelone-get-agent-details.png) <!-- ::CHANGE_ME:: -->
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `sentinelone_agent_id` | `text` | Yes | `-` | - |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+<!-- ::CHANGE_ME:: -->
+```python
+results = {
+    # TODO: Copy and paste an example of the Function Output within this code block.
+    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
+    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+} 
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.sentinelone_agent_id = incident.properties.sentinelone_agent_id
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+from java.util import Date
+
+note = u"<b>SentinelOne: Add Agent to Data Table: </b> \n"
+content = results.get("content")
+if content:
+  data = content.get("data")
+  if data:
+    data_len = len(data)
+    note = u"{0} {1} agents added to SentinelOne Agents data table.".format(note, data_len)
+    for agent in data:
+      agent_row = incident.addRow("sentinelone_agents_dt")
+      agent_row.sentinelone_dt_query_date = Date()
+      agent_row.sentinelone_dt_agent_id = agent.get("id")
+      agent_row.sentinelone_dt_network_status = agent.get("networkStatus")
+      agent_row.sentinelone_dt_computername = agent.get("computerName")
+      agent_row.sentinelone_dt_external_ip = agent.get("externalIp")
+      agent_row.sentinelone_dt_site = agent.get("siteName")
+      agent_row.sentinelone_dt_agent_version = agent.get("agentVersion")
+      agent_row.sentinelone_dt_threat_count = agent.get("activeThreats")
+      agent_row.sentinelone_dt_domain = agent.get("domain")
+      agent_row.sentinelone_dt_os_name = agent.get("osName")
+      agent_row.sentinelone_dt_uuid = agent.get("uuid")
+      agent_row.sentinelone_dt_is_active = agent.get("isActive")
+      agent_row.sentinelone_dt_is_decommissioned = agent.get("isDecommissioned")
+      agent_row.sentinelone_dt_registered = agent.get("registeredAt")
+      agent_row.sentinelone_dt_created = agent.get("createdAt")
+  else:
+    note = u"{0} No data returned from function.".format(note)
+else:
+  note = u"{0} No content data returned from function.".format(note)
+  
+incident.addNote(helper.createRichText(note))
+```
+
+</p>
+</details>
+
+---
+## Function - SentinelOne: Connect to Network
+Connect a an endpoint managed by Sentinel to the network.
+
+ ![screenshot: fn-sentinelone-connect-to-network ](./doc/screenshots/fn-sentinelone-connect-to-network.png) <!-- ::CHANGE_ME:: -->
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `sentinelone_agent_id` | `text` | Yes | `-` | - |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+<!-- ::CHANGE_ME:: -->
+```python
+results = {
+    # TODO: Copy and paste an example of the Function Output within this code block.
+    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
+    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+} 
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.sentinelone_id = row.sentinelone_dt_agent_id
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+so_inputs = results.get("inputs")
+sentinelone_id = so_inputs.get("sentinelone_id")
+note = u"<b>SentinelOne: Connect to Network </b><br>  SentinelOne Agent Id: {0}".format(sentinelone_id)
+content = results.get("content")
+if content:
+  data = content.get("data")
+  if data:
+    if data.get("affected") <= 0:
+      note = u"{0} is NOT connected to network".format(note)
+    else:
+      note = u"{0} is connected to network".format(note)
+  else:
+    note = u"{0} no data returned from function".format(note)
+else:
+    note = u"{0} no content data returned from function".format(note)  
+
+incident.addNote(helper.createRichText(note))
+
 ```
 
 </p>
@@ -666,9 +682,9 @@ if 'workflow' in globals():
 
 ---
 
-## Data Table - SentinelOne Agents
+## Data Table - SentinelOne Agent
 
- ![screenshot: dt-sentinelone-agents](./doc/screenshots/dt-sentinelone-agents.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: dt-sentinelone-agent](./doc/screenshots/dt-sentinelone-agent.png) <!-- ::CHANGE_ME:: -->
 
 #### API Name:
 sentinelone_agents_dt
@@ -694,13 +710,26 @@ sentinelone_agents_dt
 
 ---
 
+## Custom Fields
+| Label | API Access Name | Type | Prefix | Placeholder | Tooltip |
+| ----- | --------------- | ---- | ------ | ----------- | ------- |
+| SentinelOne Mitigation Status | `sentinelone_mitigation_status` | `text` | `properties` | - | - |
+| SentinelOne Classification | `sentinelone_classification` | `text` | `properties` | - | - |
+| SentinelOne Incident Status | `sentinelone_incident_status` | `text` | `properties` | - | - |
+| SentinelOne Threat Overview URL | `sentinelone_threat_overview_url` | `textarea` | `properties` | - | - |
+| SentinelOne Threat Id | `sentinelone_threat_id` | `text` | `properties` | - | - |
+| SentinelOne Agent Id | `sentinelone_agent_id` | `text` | `properties` | - | - |
+| SentinelOne Threat Confidence Level | `sentinelone_confidence_level` | `text` | `properties` | - | - |
+
+---
 
 
 ## Rules
 | Rule Name | Object | Workflow Triggered |
 | --------- | ------ | ------------------ |
-| SentinelOne: Write Agent Details to Note | sentinelone_agents_dt | `sentinelone_write_agent_details_to_note` |
+| SentinelOne: Add Agent to Data Table | incident | `sentinelone_add_agent_to_data_table` |
 | SentinelOne: Connect to Network | sentinelone_agents_dt | `sentinelone_connect_to_network` |
+| SentinelOne: Write Agent Details to Note | sentinelone_agents_dt | `sentinelone_write_agent_details_to_note` |
 | SentinelOne: Get Agents | incident | `sentinelone_get_agents` |
 
 ---

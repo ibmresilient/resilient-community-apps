@@ -107,11 +107,11 @@ class SentinelOnePollerComponent(ResilientComponent):
         """
         try:
             poller_start = datetime.datetime.utcnow()
- 
-            # Call SentinelOne to get latest threats since last poller time
-            result = self.sentinelone_client.get_threats(self.last_poller_time)
+            LOG.debug("Poll start = %s ", poller_start)
 
-            threats = result.get("data")
+            # Call SentinelOne to get latest threats since last poller time
+            threats = self.sentinelone_client.get_threats(self.last_poller_time)
+
             for threat in threats:
                 threat_info = threat.get("threatInfo")
                 threat_id = threat_info.get("threatId")

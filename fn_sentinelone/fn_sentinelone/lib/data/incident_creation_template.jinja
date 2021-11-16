@@ -12,6 +12,7 @@
   "plan_status": "{{ threatInfo.incidentStatus|resilient_substitute('{"Closed": "C", "unresolved": "A", "Active": "A", "New": "A"}') }}",
   "severity_code": "{{ threatInfo.confidenceLevel|resilient_substitute('{"malicious": "High", "suspicious": "Medium"}') }}",
   "properties": {
+    "sentinelone_agent_id": "{{ agentRealtimeInfo.agentId }}",
     "sentinelone_confidence_level": "{{ threatInfo.confidenceLevel }}",
     "sentinelone_classification": "{{ threatInfo.classification }}",
     "sentinelone_threat_id": "{{ threatInfo.threatId }}",

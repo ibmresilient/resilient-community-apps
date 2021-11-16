@@ -3,6 +3,47 @@
   "actions": [
     {
       "automations": [],
+      "conditions": [
+        {
+          "evaluation_id": null,
+          "field_name": "incident.properties.sentinelone_agent_id",
+          "method": "has_a_value",
+          "type": null,
+          "value": null
+        },
+        {
+          "evaluation_id": null,
+          "field_name": "incident.properties.sentinelone_threat_id",
+          "method": "has_a_value",
+          "type": null,
+          "value": null
+        },
+        {
+          "evaluation_id": null,
+          "field_name": null,
+          "method": "object_added",
+          "type": null,
+          "value": null
+        }
+      ],
+      "enabled": true,
+      "export_key": "SentinelOne: Add Agent to Data Table",
+      "id": 17,
+      "logic_type": "all",
+      "message_destinations": [],
+      "name": "SentinelOne: Add Agent to Data Table",
+      "object_type": "incident",
+      "tags": [],
+      "timeout_seconds": 86400,
+      "type": 0,
+      "uuid": "07fecdc0-b5ab-4add-9e09-f43925d60db3",
+      "view_items": [],
+      "workflows": [
+        "sentinelone_add_agent_to_data_table"
+      ]
+    },
+    {
+      "automations": [],
       "conditions": [],
       "enabled": true,
       "export_key": "SentinelOne: Connect to Network",
@@ -69,7 +110,7 @@
   ],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1637005310196,
+  "export_date": 1637100098716,
   "export_format_version": 2,
   "fields": [
     {
@@ -226,6 +267,35 @@
       "chosen": false,
       "default_chosen_by_server": false,
       "deprecated": false,
+      "export_key": "incident/sentinelone_agent_id",
+      "hide_notification": false,
+      "id": 264,
+      "input_type": "text",
+      "internal": false,
+      "is_tracked": false,
+      "name": "sentinelone_agent_id",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": "properties",
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "SentinelOne Agent Id",
+      "tooltip": "",
+      "type_id": 0,
+      "uuid": "6b4ec4a9-2dc7-463a-aa64-d1bbfa36be43",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
       "export_key": "incident/sentinelone_threat_overview_url",
       "hide_notification": false,
       "id": 260,
@@ -350,7 +420,7 @@
         "type": "user"
       },
       "description": {
-        "content": null,
+        "content": "Get details of a SentinelOne managed agent.",
         "format": "text"
       },
       "destination_handle": "fn_sentinelone",
@@ -363,11 +433,11 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1636049666345,
+      "last_modified_time": 1637099899759,
       "name": "sentinelone_get_agent_details",
       "tags": [],
       "uuid": "3bc833b4-0545-4db6-8ede-515d7439279a",
-      "version": 1,
+      "version": 2,
       "view_items": [
         {
           "content": "dbfe950b-d843-4105-ae4d-a586a96850f8",
@@ -379,6 +449,16 @@
         }
       ],
       "workflows": [
+        {
+          "actions": [],
+          "description": null,
+          "name": "SentinelOne: Add Agent to Data Table",
+          "object_type": "incident",
+          "programmatic_name": "sentinelone_add_agent_to_data_table",
+          "tags": [],
+          "uuid": null,
+          "workflow_id": 4
+        },
         {
           "actions": [],
           "description": null,
@@ -436,12 +516,12 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 37,
+  "id": 46,
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1637005307910,
+      "create_date": 1637100095534,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -450,7 +530,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1637005307910,
+      "update_date": 1637100095534,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -506,7 +586,7 @@
   "types": [
     {
       "actions": [],
-      "display_name": "SentinelOne Agents",
+      "display_name": "SentinelOne Agent",
       "export_key": "sentinelone_agents_dt",
       "fields": {
         "sentinelone_dt_agent_id": {
@@ -999,26 +1079,6 @@
     {
       "actions": [],
       "content": {
-        "version": 23,
-        "workflow_id": "sentinelone_get_agents",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"sentinelone_get_agents\" isExecutable=\"true\" name=\"SentinelOne: Get Agents\"\u003e\u003cdocumentation\u003eGet specified agents managed by SentinelOne and place them in the SentinelOne agents data table.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0zu1d90\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_022e7nj\" name=\"SentinelOne: Get Agents\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"efbfb628-1bfb-4ec3-a7c1-7acfeb079246\"\u003e{\"inputs\":{},\"post_processing_script\":\"from java.util import Date\\n\\nnote = u\\\"\u0026lt;b\u0026gt;SentinelOne: Get Agents: \u0026lt;/b\u0026gt; \\\\n\\\"\\ncontent = results.get(\\\"content\\\")\\nif content:\\n  data = content.get(\\\"data\\\")\\n  if data:\\n    data_len = len(data)\\n    note = u\\\"{0} {1} agents added to SentinelOne Agents data table.\\\".format(note, data_len)\\n    for agent in data:\\n      agent_row = incident.addRow(\\\"sentinelone_agents_dt\\\")\\n      agent_row.sentinelone_dt_query_date = Date()\\n      agent_row.sentinelone_dt_agent_id = agent.get(\\\"id\\\")\\n      agent_row.sentinelone_dt_network_status = agent.get(\\\"networkStatus\\\")\\n      agent_row.sentinelone_dt_computername = agent.get(\\\"computerName\\\")\\n      agent_row.sentinelone_dt_external_ip = agent.get(\\\"externalIp\\\")\\n      agent_row.sentinelone_dt_site = agent.get(\\\"siteName\\\")\\n      agent_row.sentinelone_dt_agent_version = agent.get(\\\"agentVersion\\\")\\n      agent_row.sentinelone_dt_threat_count = agent.get(\\\"activeThreats\\\")\\n      agent_row.sentinelone_dt_domain = agent.get(\\\"domain\\\")\\n      agent_row.sentinelone_dt_os_name = agent.get(\\\"osName\\\")\\n      agent_row.sentinelone_dt_uuid = agent.get(\\\"uuid\\\")\\n      agent_row.sentinelone_dt_is_active = agent.get(\\\"isActive\\\")\\n      agent_row.sentinelone_dt_is_decommissioned = agent.get(\\\"isDecommissioned\\\")\\n      agent_row.sentinelone_dt_registered = agent.get(\\\"registeredAt\\\")\\n      agent_row.sentinelone_dt_created = agent.get(\\\"createdAt\\\")\\n  else:\\n    note = u\\\"{0} No data returned from function.\\\".format(note)\\nelse:\\n  note = u\\\"{0} No content data returned from function.\\\".format(note)\\n  \\nincident.addNote(helper.createRichText(note))\",\"post_processing_script_language\":\"python\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0zu1d90\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1nmzvb4\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0zu1d90\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_022e7nj\"/\u003e\u003cendEvent id=\"EndEvent_1sq3bx9\"\u003e\u003cincoming\u003eSequenceFlow_1nmzvb4\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1nmzvb4\" sourceRef=\"ServiceTask_022e7nj\" targetRef=\"EndEvent_1sq3bx9\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_022e7nj\" id=\"ServiceTask_022e7nj_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"448\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0zu1d90\" id=\"SequenceFlow_0zu1d90_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"328\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"328\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"448\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"90\" x=\"298\" y=\"199\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1sq3bx9\" id=\"EndEvent_1sq3bx9_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"810.2401847575057\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"828.2401847575057\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1nmzvb4\" id=\"SequenceFlow_1nmzvb4_di\"\u003e\u003comgdi:waypoint x=\"548\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"684\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"684\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"810\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"90\" x=\"654\" y=\"199\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 23,
-      "creator_id": "admin@example.com",
-      "description": "Get specified agents managed by SentinelOne and place them in the SentinelOne agents data table.",
-      "export_key": "sentinelone_get_agents",
-      "last_modified_by": "admin@example.com",
-      "last_modified_time": 1636388694610,
-      "name": "SentinelOne: Get Agents",
-      "object_type": "incident",
-      "programmatic_name": "sentinelone_get_agents",
-      "tags": [],
-      "uuid": "c279ab29-8782-452c-8fe4-6e5e324cf2ca",
-      "workflow_id": 1
-    },
-    {
-      "actions": [],
-      "content": {
         "version": 8,
         "workflow_id": "sentinelone_connect_to_network",
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"sentinelone_connect_to_network\" isExecutable=\"true\" name=\"SentinelOne: Connect to Network\"\u003e\u003cdocumentation\u003eConnect a SentinelOne managed endpoint to the network.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_152nr8l\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0lgkwfc\" name=\"SentinelOne: Connect to Network\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"517e7712-cf4f-42da-91a2-06d028dad318\"\u003e{\"inputs\":{},\"post_processing_script\":\"so_inputs = results.get(\\\"inputs\\\")\\nsentinelone_id = so_inputs.get(\\\"sentinelone_id\\\")\\nnote = u\\\"\u0026lt;b\u0026gt;SentinelOne: Connect to Network \u0026lt;/b\u0026gt;\u0026lt;br\u0026gt;  SentinelOne Agent Id: {0}\\\".format(sentinelone_id)\\ncontent = results.get(\\\"content\\\")\\nif content:\\n  data = content.get(\\\"data\\\")\\n  if data:\\n    if data.get(\\\"affected\\\") \u0026lt;= 0:\\n      note = u\\\"{0} is NOT connected to network\\\".format(note)\\n    else:\\n      note = u\\\"{0} is connected to network\\\".format(note)\\n  else:\\n    note = u\\\"{0} no data returned from function\\\".format(note)\\nelse:\\n    note = u\\\"{0} no content data returned from function\\\".format(note)  \\n\\nincident.addNote(helper.createRichText(note))\\n\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.sentinelone_id = row.sentinelone_dt_agent_id\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_152nr8l\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_16w4ax5\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_152nr8l\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0lgkwfc\"/\u003e\u003cendEvent id=\"EndEvent_0oiezap\"\u003e\u003cincoming\u003eSequenceFlow_16w4ax5\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_16w4ax5\" sourceRef=\"ServiceTask_0lgkwfc\" targetRef=\"EndEvent_0oiezap\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0lgkwfc\" id=\"ServiceTask_0lgkwfc_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"502\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_152nr8l\" id=\"SequenceFlow_152nr8l_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"502\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"350\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0oiezap\" id=\"EndEvent_0oiezap_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"865\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"883\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_16w4ax5\" id=\"SequenceFlow_16w4ax5_di\"\u003e\u003comgdi:waypoint x=\"602\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"865\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"733.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
@@ -1035,6 +1095,46 @@
       "tags": [],
       "uuid": "c6745c6a-3649-4941-91ed-7faca74c1de4",
       "workflow_id": 2
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 7,
+        "workflow_id": "sentinelone_add_agent_to_data_table",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"sentinelone_add_agent_to_data_table\" isExecutable=\"true\" name=\"SentinelOne: Add Agent to Data Table\"\u003e\u003cdocumentation\u003eAdd information from an agent managed by SentinelOne to the SentinelOne Agent data table.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0xs67fy\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0i9nhcf\" name=\"SentinelOne: Get Agent Details\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"3bc833b4-0545-4db6-8ede-515d7439279a\"\u003e{\"inputs\":{},\"post_processing_script\":\"from java.util import Date\\n\\nnote = u\\\"\u0026lt;b\u0026gt;SentinelOne: Add Agent to Data Table: \u0026lt;/b\u0026gt; \\\\n\\\"\\ncontent = results.get(\\\"content\\\")\\nif content:\\n  data = content.get(\\\"data\\\")\\n  if data:\\n    data_len = len(data)\\n    note = u\\\"{0} {1} agents added to SentinelOne Agents data table.\\\".format(note, data_len)\\n    for agent in data:\\n      agent_row = incident.addRow(\\\"sentinelone_agents_dt\\\")\\n      agent_row.sentinelone_dt_query_date = Date()\\n      agent_row.sentinelone_dt_agent_id = agent.get(\\\"id\\\")\\n      agent_row.sentinelone_dt_network_status = agent.get(\\\"networkStatus\\\")\\n      agent_row.sentinelone_dt_computername = agent.get(\\\"computerName\\\")\\n      agent_row.sentinelone_dt_external_ip = agent.get(\\\"externalIp\\\")\\n      agent_row.sentinelone_dt_site = agent.get(\\\"siteName\\\")\\n      agent_row.sentinelone_dt_agent_version = agent.get(\\\"agentVersion\\\")\\n      agent_row.sentinelone_dt_threat_count = agent.get(\\\"activeThreats\\\")\\n      agent_row.sentinelone_dt_domain = agent.get(\\\"domain\\\")\\n      agent_row.sentinelone_dt_os_name = agent.get(\\\"osName\\\")\\n      agent_row.sentinelone_dt_uuid = agent.get(\\\"uuid\\\")\\n      agent_row.sentinelone_dt_is_active = agent.get(\\\"isActive\\\")\\n      agent_row.sentinelone_dt_is_decommissioned = agent.get(\\\"isDecommissioned\\\")\\n      agent_row.sentinelone_dt_registered = agent.get(\\\"registeredAt\\\")\\n      agent_row.sentinelone_dt_created = agent.get(\\\"createdAt\\\")\\n  else:\\n    note = u\\\"{0} No data returned from function.\\\".format(note)\\nelse:\\n  note = u\\\"{0} No content data returned from function.\\\".format(note)\\n  \\nincident.addNote(helper.createRichText(note))\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.sentinelone_agent_id = incident.properties.sentinelone_agent_id\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0xs67fy\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_06orzrw\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0xs67fy\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0i9nhcf\"/\u003e\u003cendEvent id=\"EndEvent_1hac1ij\"\u003e\u003cincoming\u003eSequenceFlow_06orzrw\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_06orzrw\" sourceRef=\"ServiceTask_0i9nhcf\" targetRef=\"EndEvent_1hac1ij\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0i9nhcf\" id=\"ServiceTask_0i9nhcf_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"517\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0xs67fy\" id=\"SequenceFlow_0xs67fy_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"517\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"357.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1hac1ij\" id=\"EndEvent_1hac1ij_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"888\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"906\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_06orzrw\" id=\"SequenceFlow_06orzrw_di\"\u003e\u003comgdi:waypoint x=\"617\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"888\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"752.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 7,
+      "creator_id": "admin@example.com",
+      "description": "Add information from an agent managed by SentinelOne to the SentinelOne Agent data table.",
+      "export_key": "sentinelone_add_agent_to_data_table",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1637099816550,
+      "name": "SentinelOne: Add Agent to Data Table",
+      "object_type": "incident",
+      "programmatic_name": "sentinelone_add_agent_to_data_table",
+      "tags": [],
+      "uuid": "bb1dc479-5577-4699-b073-ffcac119edc5",
+      "workflow_id": 4
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 24,
+        "workflow_id": "sentinelone_get_agents",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"sentinelone_get_agents\" isExecutable=\"true\" name=\"SentinelOne: Get Agents\"\u003e\u003cdocumentation\u003eGet specified agents managed by SentinelOne and place them in the SentinelOne agents data table.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0zu1d90\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_022e7nj\" name=\"SentinelOne: Get Agents\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"efbfb628-1bfb-4ec3-a7c1-7acfeb079246\"\u003e{\"inputs\":{},\"post_processing_script\":\"from java.util import Date\\n\\nnote = u\\\"\u0026lt;b\u0026gt;SentinelOne: Get Agents: \u0026lt;/b\u0026gt; \\\\n\\\"\\ncontent = results.get(\\\"content\\\")\\nif content:\\n  data = content.get(\\\"data\\\")\\n  if data:\\n    data_len = len(data)\\n    note = u\\\"{0} {1} agents added to SentinelOne Agents data table.\\\".format(note, data_len)\\n    for agent in data:\\n      agent_row = incident.addRow(\\\"sentinelone_agents_dt\\\")\\n      agent_row.sentinelone_dt_query_date = Date()\\n      agent_row.sentinelone_dt_agent_id = agent.get(\\\"id\\\")\\n      agent_row.sentinelone_dt_network_status = agent.get(\\\"networkStatus\\\")\\n      agent_row.sentinelone_dt_computername = agent.get(\\\"computerName\\\")\\n      agent_row.sentinelone_dt_external_ip = agent.get(\\\"externalIp\\\")\\n      agent_row.sentinelone_dt_site = agent.get(\\\"siteName\\\")\\n      agent_row.sentinelone_dt_agent_version = agent.get(\\\"agentVersion\\\")\\n      agent_row.sentinelone_dt_threat_count = agent.get(\\\"activeThreats\\\")\\n      agent_row.sentinelone_dt_domain = agent.get(\\\"domain\\\")\\n      agent_row.sentinelone_dt_os_name = agent.get(\\\"osName\\\")\\n      agent_row.sentinelone_dt_uuid = agent.get(\\\"uuid\\\")\\n      agent_row.sentinelone_dt_is_active = agent.get(\\\"isActive\\\")\\n      agent_row.sentinelone_dt_is_decommissioned = agent.get(\\\"isDecommissioned\\\")\\n      agent_row.sentinelone_dt_registered = agent.get(\\\"registeredAt\\\")\\n      agent_row.sentinelone_dt_created = agent.get(\\\"createdAt\\\")\\n  else:\\n    note = u\\\"{0} No data returned from function.\\\".format(note)\\nelse:\\n  note = u\\\"{0} No content data returned from function.\\\".format(note)\\n  \\nincident.addNote(helper.createRichText(note))\",\"post_processing_script_language\":\"python\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0zu1d90\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1nmzvb4\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0zu1d90\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_022e7nj\"/\u003e\u003cendEvent id=\"EndEvent_1sq3bx9\"\u003e\u003cincoming\u003eSequenceFlow_1nmzvb4\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1nmzvb4\" sourceRef=\"ServiceTask_022e7nj\" targetRef=\"EndEvent_1sq3bx9\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_022e7nj\" id=\"ServiceTask_022e7nj_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"448\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0zu1d90\" id=\"SequenceFlow_0zu1d90_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"328\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"328\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"448\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"90\" x=\"298\" y=\"199\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1sq3bx9\" id=\"EndEvent_1sq3bx9_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"810.2401847575057\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"828.2401847575057\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1nmzvb4\" id=\"SequenceFlow_1nmzvb4_di\"\u003e\u003comgdi:waypoint x=\"548\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"684\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"684\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"810\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"90\" x=\"654\" y=\"199\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 24,
+      "creator_id": "admin@example.com",
+      "description": "Get specified agents managed by SentinelOne and place them in the SentinelOne agents data table.",
+      "export_key": "sentinelone_get_agents",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1637100034816,
+      "name": "SentinelOne: Get Agents",
+      "object_type": "incident",
+      "programmatic_name": "sentinelone_get_agents",
+      "tags": [],
+      "uuid": "c279ab29-8782-452c-8fe4-6e5e324cf2ca",
+      "workflow_id": 1
     },
     {
       "actions": [],
