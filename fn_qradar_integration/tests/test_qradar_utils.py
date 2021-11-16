@@ -118,7 +118,7 @@ def test_qradar_client():
         try:
             ret = qradar_client.search_ref_set(ref_set_name, "1.1.1.1")
             assert False
-        except qradar_utils.RequestError:
+        except qradar_utils.IntegrationError:
             assert True
 
     # 4. normal add_ref_element
@@ -141,7 +141,7 @@ def test_qradar_client():
         mocked_post_call.side_effect = Exception("Failed")
         try:
             qradar_client.add_ref_element(ref_set_name, "8.8.8.8")
-        except qradar_utils.RequestError:
+        except qradar_utils.IntegrationError:
             assert True
 
     # 6. normal delete_ref_element
@@ -164,7 +164,7 @@ def test_qradar_client():
         mocked_delete_call.side_effect = Exception("Failed")
         try:
             qradar_client.delete_ref_element(ref_set_name, "8.8.8.8")
-        except qradar_utils.DeleteError:
+        except qradar_utils.IntegrationError:
             assert True
 
 
@@ -346,7 +346,7 @@ def test_get_ref_set(mocked_make_call):
     try:
         ret = qradar_client.get_all_ref_set()
         assert False
-    except qradar_utils.RequestError:
+    except qradar_utils.IntegrationError:
         assert True
 
 
