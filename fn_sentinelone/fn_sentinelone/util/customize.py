@@ -66,6 +66,7 @@ def customization_data(client=None):
         - sentinelone_incident_status
         - sentinelone_mitigation_status
         - sentinelone_threat_id
+        - sentinelone_threat_name
         - sentinelone_threat_overview_url
     - Data Tables:
         - sentinelone_agents_dt
