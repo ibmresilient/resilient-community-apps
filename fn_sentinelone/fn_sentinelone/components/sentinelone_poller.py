@@ -5,7 +5,6 @@
 """Function implementation"""
 
 import datetime
-import json
 import logging
 from circuits import Event, Timer
 from resilient_circuits import ResilientComponent, handler
@@ -184,8 +183,8 @@ class SentinelOnePollerComponent(ResilientComponent):
         """Create a link link back to the SentinelOne threat in a custom incident field
 
         Args:
-            threat_id ([type]): [description]
-            payload (dict): [description]
+            threat_id ([type]): [SentinelOne Threat Id]
+            payload (dict): [Resilient new incident payload]
 
         Returns:
             [dict]: [incident payload]
