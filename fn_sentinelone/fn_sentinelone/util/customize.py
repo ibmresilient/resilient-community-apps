@@ -23,7 +23,7 @@ def codegen_reload_data():
         "message_destinations": [u"fn_sentinelone"],
         "functions": [u"sentinelone_connect_to_network", u"sentinelone_get_agent_details", u"sentinelone_get_agents", u"sentinelone_get_threat_details"],
         "workflows": [u"sentinelone_add_agent_to_data_table", u"sentinelone_connect_to_network", u"sentinelone_get_agents", u"sentinelone_write_agent_details_to_note", u"sentinelone_write_threat_details_to_note"],
-        "actions": [u"SentinelOne: Add Agent to Data Table", u"SentinelOne: Write Agent Details to Note", u"SentinelOne: Write Threat Details to Note"],
+        "actions": [u"SentinelOne: Add Agent to Data Table", u"SentinelOne: Update Agent in Data table", u"SentinelOne: Write Agent Details to Note", u"SentinelOne: Write Threat Details to Note"],
         "incident_fields": [u"sentinelone_agent_id", u"sentinelone_classification", u"sentinelone_confidence_level", u"sentinelone_incident_status", u"sentinelone_mitigation_status", u"sentinelone_threat_id", u"sentinelone_threat_overview_url"],
         "incident_artifact_types": [],
         "incident_types": [],
@@ -56,6 +56,7 @@ def customization_data(client=None):
         - sentinelone_write_threat_details_to_note
     - Rules:
         - SentinelOne: Add Agent to Data Table
+        - SentinelOne: Update Agent in Data table
         - SentinelOne: Write Agent Details to Note
         - SentinelOne: Write Threat Details to Note
     - Incident Fields:
