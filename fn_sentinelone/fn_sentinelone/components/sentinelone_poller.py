@@ -10,13 +10,11 @@ import logging
 from circuits import Event, Timer
 from resilient_circuits import ResilientComponent, handler
 from resilient_lib import validate_fields, RequestsCommon
-from fn_sentinelone.lib.function_common import PACKAGE_NAME, SentinelOneProfiles,\
-        DEFAULT_INCIDENT_CREATION_TEMPLATE,\
-        DEFAULT_INCIDENT_UPDATE_TEMPLATE,\
-        DEFAULT_INCIDENT_CLOSE_TEMPLATE
 from fn_sentinelone.lib.jinja_common import JinjaEnvironment
 from fn_sentinelone.lib.resilient_common import ResilientCommon
 from fn_sentinelone.lib.sentinelone_common import SentinelOneClient
+
+PACKAGE_NAME = "fn_sentinelone"
 
 DEFAULT_INCIDENT_CREATION_TEMPLATE = "data/incident_creation_template.jinja"
 DEFAULT_INCIDENT_UPDATE_TEMPLATE = "data/incident_update_template.jinja"

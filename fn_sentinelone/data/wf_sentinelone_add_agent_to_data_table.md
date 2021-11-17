@@ -31,7 +31,7 @@ if content:
   data = content.get("data")
   if data:
     data_len = len(data)
-    note = u"{0} {1} agents added to SentinelOne Agents data table.".format(note, data_len)
+    note = u"{0} {1} agent added to SentinelOne Agent data table.".format(note, data_len)
     for agent in data:
       agent_row = incident.addRow("sentinelone_agents_dt")
       agent_row.sentinelone_dt_query_date = Date()
@@ -49,6 +49,7 @@ if content:
       agent_row.sentinelone_dt_is_decommissioned = agent.get("isDecommissioned")
       agent_row.sentinelone_dt_registered = agent.get("registeredAt")
       agent_row.sentinelone_dt_created = agent.get("createdAt")
+      agent_row.sentinelone_dt_updated = agent.get("updatedAt")
   else:
     note = u"{0} No data returned from function.".format(note)
 else:

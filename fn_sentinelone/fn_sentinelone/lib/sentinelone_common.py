@@ -82,6 +82,20 @@ class SentinelOneClient(object):
         response.raise_for_status()
         return response.json()
 
+    def get_threat_details(self, threat_id):
+        """ Return the details of a threat
+        """
+        url = u"{0}/threats".format(self.base_url)
+
+        params = {
+            'ids': threat_id
+        }
+
+        response = self.rc.execute("GET", url, headers=self.headers, params=params, 
+                                    verify=self.verify, proxies=self.rc.get_proxies())
+        response.raise_for_status()
+        return response.json()
+
     def get_threats(self, last_poller_time):
         """ Return the SentinelOne threats that have been created or updated
             since the last poll time
@@ -241,22 +255,3 @@ class SentinelOneClient(object):
 
         # remove milliseconds
         return "{lookback_date}Z".format(lookback_date=last_poller_datetime_iso[:last_poller_datetime_iso.rfind('.')])
-
-    def _get_last_poller_date(self, profile_data):
-        """get the last poller datetime based on a profile. If first time, use the lookback
-             parameter to calculate it from the current datetime.
-
-        Args:
-            profile_data ([str]): profile to get last poller runtime
-
-        Returns:
-            [datetime]: [datetime to use for last poller run time]
-        """
-        if profile_data.get('last_poller_time'):
-            last_poller_datetime = profile_data['last_poller_time']
-            LOG.debug("last_poller_time: %s", last_poller_datetime.isoformat())
-        else:
-            # use lookback value
-            last_poller_datetime = datetime.datetime.utcnow() - datetime.timedelta(minutes=self.polling_lookback)
-
-        return last_poller_datetime
