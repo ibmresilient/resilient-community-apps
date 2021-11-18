@@ -93,8 +93,7 @@ class SentinelOnePollerComponent(ResilientComponent):
             return
 
         # Create api client
-        self.rc = RequestsCommon(opts, self.options)
-        self.sentinelone_client = SentinelOneClient(self.options, self.rc)
+        self.sentinelone_client = SentinelOneClient(self.opts, self.options)
 
         self.resilient_common = ResilientCommon(self.rest_client())
 
@@ -107,77 +106,92 @@ class SentinelOnePollerComponent(ResilientComponent):
             LOG.debug("Poll start = %s ", poller_start)
 
             # Call SentinelOne to get latest threats since last poller time
-            threats = self.sentinelone_client.get_threats(self.last_poller_time)
+            threats = self.sentinelone_client.get_threats_by_time(self.last_poller_time)
+            try:
+                for threat in threats:
+                    incident_payload = self._process_threat(threat)
 
-            for threat in threats:
-                threat_info = threat.get("threatInfo")
-                threat_id = threat_info.get("threatId")
-
-                resilient_incident = self.resilient_common.find_incident(threat_id)
-                if resilient_incident is None:         
-                    # create a new incident
-                    incident_payload = self.jinja_env.make_payload_from_template(
-                                                    self.options.get("create_incident_template"),
-                                                    DEFAULT_INCIDENT_CREATION_TEMPLATE,
-                                                    threat)
-                    incident_payload = self._add_threat_url_to_payload(threat_id, incident_payload)
-                    resilient_incident = self.resilient_common.create_incident(incident_payload)
-                    LOG.info("Created incident %s from SentinelOne Threat %s",
-                             resilient_incident['id'], threat_id)
-                else:
-                    resilient_incident_id = resilient_incident['id']
-                    if resilient_incident["plan_status"] == "C":
-                        LOG.info("Bypassing update to closed incident %s from SentinelOne threat %s",
-                            resilient_incident_id, threat_id)
-                    elif threat_info.get("incidentStatus") == "resolved":
-                        # close the incident
-                        incident_payload = self.jinja_env.make_payload_from_template(
-                                                    self.options.get("close_incident_template"),
-                                                    DEFAULT_INCIDENT_CLOSE_TEMPLATE,
-                                                    threat)
-                        updated_resilient_incident = self.resilient_common.close_incident(
-                                                                resilient_incident_id,
-                                                                incident_payload
-                                                            )
-                        _ = self.resilient_common.create_incident_comment(resilient_incident_id, None, "Close synchronized from SentinelOne")
-                        LOG.info("Closed incident %s from SentinelOne threat %s", resilient_incident_id, threat_id)
-                    else:
-                        # update an incident incident
-                        incident_payload = self.jinja_env.make_payload_from_template(
-                                                    self.options.get("update_incident_template"),
-                                                    DEFAULT_INCIDENT_UPDATE_TEMPLATE,
-                                                    threat)
-                        updated_resilient_incident = self.resilient_common.update_incident(
-                                                    resilient_incident_id,
-                                                    incident_payload
-                                                )
-                        _ = self.resilient_common.create_incident_comment(resilient_incident_id, None, "Updates synchronized from SentinelOne")
-                        LOG.info("Updated incident %s from SentinelOne threat %s", resilient_incident_id, threat_id)
-
-                incident_id = resilient_incident['id']
-                # get the SentinelOne comments and add to Resilient.
-                # need to ensure not adding the comment more than once
-                result_notes = self.sentinelone_client.get_threat_notes(threat_id)
-                sentinelone_notes = result_notes.get("data")
-
-                new_comments = self.resilient_common.filter_resilient_comments(
-                                                            incident_id,
-                                                            sentinelone_notes
-                                                        )
-                for comment in new_comments:
-                    self.resilient_common.create_incident_comment(
-                                                            incident_id,
-                                                            comment['id'],
-                                                            comment['text']
-                                                        )
-
-            self.last_poller_time = poller_start
+            finally:
+                self.last_poller_time = poller_start
 
         except Exception as err:
             LOG.error(str(err))
         finally:
             # We always want to reset the timer to wake up, no matter failure or success
             self.fire(PollCompleted())
+
+    def _process_threat(self, threat):
+        """Process the threat found in SentinelOne.  Use jinja templates to create, update
+           or close the incident in SOAR.
+
+        Args:
+            threat ([type]): [SentinelOne Threat object]
+        """
+        try:
+            threat_info = threat.get("threatInfo")
+            threat_id = threat_info.get("threatId")
+        
+            resilient_incident = self.resilient_common.find_incident(threat_id)
+            if resilient_incident is None:         
+                # create a new incident
+                incident_payload = self.jinja_env.make_payload_from_template(
+                                                    self.options.get("create_incident_template"),
+                                                    DEFAULT_INCIDENT_CREATION_TEMPLATE,
+                                                    threat)
+                incident_payload = self._add_threat_url_to_payload(threat_id, incident_payload)
+                resilient_incident = self.resilient_common.create_incident(incident_payload)
+                LOG.info("Created incident %s from SentinelOne Threat %s",
+                             resilient_incident['id'], threat_id)
+            else:
+                resilient_incident_id = resilient_incident['id']
+                if resilient_incident["plan_status"] == "C":
+                    LOG.info("Bypassing update to closed incident %s from SentinelOne threat %s",
+                            resilient_incident_id, threat_id)
+                elif threat_info.get("incidentStatus") == "resolved":
+                    # close the incident
+                    incident_payload = self.jinja_env.make_payload_from_template(
+                                                    self.options.get("close_incident_template"),
+                                                    DEFAULT_INCIDENT_CLOSE_TEMPLATE,
+                                                    threat)
+                    updated_resilient_incident = self.resilient_common.close_incident(
+                                                                resilient_incident_id,
+                                                                incident_payload)
+                    _ = self.resilient_common.create_incident_comment(resilient_incident_id, None, 
+                                                                      "Close synchronized from SentinelOne")
+                    LOG.info("Closed incident %s from SentinelOne threat %s", resilient_incident_id, threat_id)
+                else:
+                    # update an incident incident
+                    incident_payload = self.jinja_env.make_payload_from_template(
+                                                    self.options.get("update_incident_template"),
+                                                    DEFAULT_INCIDENT_UPDATE_TEMPLATE,
+                                                    threat)
+                    updated_resilient_incident = self.resilient_common.update_incident(
+                                                    resilient_incident_id,
+                                                    incident_payload)
+                    _ = self.resilient_common.create_incident_comment(resilient_incident_id, None, 
+                                                                      "Updates synchronized from SentinelOne")
+                    LOG.info("Updated incident %s from SentinelOne threat %s", resilient_incident_id, threat_id)
+
+            incident_id = resilient_incident['id']
+            self._update_notes(incident_id, threat_id)
+        except Exception as err:
+            LOG.error(str(err))
+
+    def _update_notes(self, incident_id, threat_id):
+        """Update the SOAR incident with any threat notes from SentinelOne.
+        """
+        # get the SentinelOne threat notes and add to Resilient.
+        # need to ensure not adding the comment more than once
+        sentinelone_notes  = self.sentinelone_client.get_threat_notes(threat_id)
+
+        new_comments = self.resilient_common.filter_resilient_comments(
+                                                            incident_id,
+                                                            sentinelone_notes)
+        for comment in new_comments:
+            self.resilient_common.create_incident_comment(incident_id,
+                                                          comment['id'],
+                                                          comment['text'])
+        return len(new_comments)
 
     def _add_threat_url_to_payload (self, threat_id, payload):
         """Create a link link back to the SentinelOne threat in a custom incident field

@@ -6,18 +6,18 @@
 import os
 import datetime
 import logging 
-from resilient_lib import validate_fields, IntegrationError, str_to_bool
+from resilient_lib import RequestsCommon, IntegrationError, validate_fields, str_to_bool
 
 LOG = logging.getLogger(__name__)
 
 DEFAULT_POLLER_LOOKBACK_MINUTES = 120
 
 class SentinelOneClient(object):
-    def __init__(self, options, rc):
+    def __init__(self, opts, options):
         # Read the configuration options
         required_fields = ["sentinelone_server", "api_token", "api_version"]
         validate_fields(required_fields, options)
-        self.rc = rc
+        self.rc = RequestsCommon(opts, options)
         self.api_version = options.get("api_version")
         self.server = options.get("sentinelone_server")
         self.base_url = u"https://{0}/web/api/v{1}".format(self.server, self.api_version)
@@ -31,6 +31,7 @@ class SentinelOneClient(object):
         account_ids = options.get("account_ids")
         self.account_ids = account_ids.split(",") if account_ids else []        
         self.query_param = options.get("query_param", None)
+        self.resolved = str_to_bool(options.get("resolved", "False"))
 
         self.headers = self.get_headers(self.api_token)
     
@@ -96,50 +97,57 @@ class SentinelOneClient(object):
         response.raise_for_status()
         return response.json()
 
-    def get_threats(self, last_poller_time):
-        """ Return the SentinelOne threats that have been created or updated
-            since the last poll time
+    def get_threats_by_time(self, last_poller_time):
+        """ Return the a list of SentinelOne threats that have been created or updated
+            since the last poll time.
         """
         # Build filter information
         last_poller_datetime_string = self._make_createdate_filter(last_poller_time)
         LOG.debug("last_poller_time: %s", last_poller_datetime_string)
 
-        # Get the newly created threats
-        params = {
-            'accountIds': self.account_ids,
-            'siteIds': self.site_ids,
-            'query': self.query_param,
-            'createdAt__gte': last_poller_datetime_string
-        }
-
-        threats = []
-        new_threat_ids = []
-        threats = (self._get_threats(params))
-
-        # Create a list of new threat ids to compare against updated threat ids so there are no duplicates
-        for threat in threats:
-            threat_info = threat.get("threatInfo")
-            threat_id = threat_info.get("threatId")
-            new_threat_ids.append(threat_id)
+        # Return newly created and updated threats in a single update_threats list.
+        # Seems like we need to make two separate API calls to get both lists.
+        updated_threats = []
 
         # Get the updated threats
         params = {
             'accountIds': self.account_ids,
             'siteIds': self.site_ids,
             'query': self.query_param,
+            'resolved': self.resolved,
             'updatedAt__gte': last_poller_datetime_string
         }
 
-        updated_threats = self._get_threats(params)
+        updated_threats = self.get_threats(params)
 
-        for updated_threat in updated_threats:
-            threat_info = updated_threat.get("threatInfo")
+        # Get the newly created threats
+        params = {
+            'accountIds': self.account_ids,
+            'siteIds': self.site_ids,
+            'query': self.query_param,
+            'resolved': self.resolved,
+            'createdAt__gte': last_poller_datetime_string
+        }
+
+        created_threats = self.get_threats(params)
+
+        updated_threat_ids = []
+        # Create a list of updated threat ids to compare against created threat ids so 
+        # there are no duplicates
+        for threat in updated_threats:
+            threat_info = threat.get("threatInfo")
             threat_id = threat_info.get("threatId")
-            if threat_id not in new_threat_ids:
-                threats.append(updated_threat)
-        return threats
+            updated_threat_ids.append(threat_id)
 
-    def _get_threats(self, params):
+        # Add created threats to the update threats list
+        for threat in created_threats:
+            threat_info = threat.get("threatInfo")
+            threat_id = threat_info.get("threatId")
+            if threat_id not in updated_threat_ids:
+                updated_threats.append(threat)
+        return updated_threats
+
+    def get_threats(self, params):
         """ Return the SentinelOne threats that match the filter
         """
         url = u"{0}/threats".format(self.base_url)
@@ -172,11 +180,23 @@ class SentinelOneClient(object):
         params = {
         }
 
-        response = self.rc.execute("GET", url, headers=self.headers, params=params, 
-                                    verify=self.verify, proxies=self.rc.get_proxies())
-        response.raise_for_status()
-        return response.json()
+        threat_notes = []
+        nextCursor = "true"
 
+        while nextCursor:
+            response = self.rc.execute("GET", url, headers=self.headers, params=params, 
+                                        verify=self.verify, proxies=self.rc.get_proxies())
+            response.raise_for_status()
+            response_json = response.json()
+            pagination = response_json.get("pagination")
+            nextCursor = pagination.get("nextCursor")
+            # Update the url to get the next page of threat notes next time through the loop
+            if nextCursor:
+                url = u"{0}/threats/{1}/notes?cursor={1}".format(self.base_url, nextCursor)
+            data = response_json.get("data")
+            for note in data:
+                threat_notes.append(note)
+        return threat_notes
 
     def get_system_info(self):
         """ Get threat notes for a given threat

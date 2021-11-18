@@ -26,7 +26,7 @@ class FunctionComponent(AppFunctionComponent):
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
 
-        sentinelOne_client = SentinelOneClient(self.options, self.rc)
+        sentinelOne_client = SentinelOneClient(self.opts, self.options)
         agent_id = fn_inputs.sentinelone_agent_id
         results = sentinelOne_client.get_agent_details(agent_id)
 

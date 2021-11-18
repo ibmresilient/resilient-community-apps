@@ -26,7 +26,7 @@ class FunctionComponent(AppFunctionComponent):
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
 
-        sentinelOne_client = SentinelOneClient(self.options, self.rc)
+        sentinelOne_client = SentinelOneClient(self.opts, self.options)
         threat_id = fn_inputs.sentinelone_threat_id
         results = sentinelOne_client.get_threat_details(threat_id)
 

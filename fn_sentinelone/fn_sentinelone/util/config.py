@@ -20,7 +20,7 @@ api_token=
 
 # SentinelOne poller settings
 # Poller interval in seconds, comment out or set to 0 to disable poller
-polling_interval=10
+polling_interval=60
 # Poller timeback time first time, in minutes
 polling_lookback=120
 # Comma separated list of SentinelOne account Ids to query for threats by poller
@@ -29,6 +29,9 @@ account_ids=
 site_ids=
 # Optional "query" parameter for querying threats in SentinelOne
 query_param=
+# Optional "resolved" parameter for querying threats from SentinelOne
+# If set to False "resolved" threats will not be escalated to SOAR 
+resolved=False
 #verify=false | /path/toclient_certificate.pem
 #http_proxy=
 #https_proxy=
