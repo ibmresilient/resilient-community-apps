@@ -25,6 +25,7 @@ inputs.defender_expiration_time = rule.properties.indicator_expiration
 inputs.defender_severity = str(rule.properties.indicator_severity)
 inputs.defender_indicator_type = row['ind_type']
 inputs.defender_indicator_value = row['ind_value']
+inputs.defender_indicator_id = row['ind_id']
 ```
 
 ### Post-Processing Script
@@ -35,8 +36,8 @@ msg = u"Defender Action {}.\nAction: {}\nArtifact: {}\nTitle: {}\nComment: {}\nS
    .format("successful" if results.success else "unsuccessful",
            str(rule.properties.indicator_action),
            row['ind_value'],
-           rule.properties.indicator_title,
-           rule.properties.indicator_description,
+           rule.properties.indicator_title if rule.properties.indicator_title else row['ind_title'],
+           rule.properties.indicator_description if rule.properties.indicator_description else row['ind_description'],
            str(rule.properties.indicator_severity),
            rule.properties.indicator_expiration)
            

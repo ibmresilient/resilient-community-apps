@@ -89,8 +89,6 @@ class FunctionComponent(ResilientComponent):
                 "description": defender_description
             }
 
-            if defender_indicator_id:
-                payload["id"] = defender_indicator_id
             if defender_indicator_type:
                 payload["indicatorType"] = lookup_artifact_type(defender_indicator_type)
                 payload["indicatorValue"] = defender_indicator_value
@@ -100,9 +98,11 @@ class FunctionComponent(ResilientComponent):
                 payload["severity"] = defender_severity
             log.debug(payload)
 
-            indicator_payload, status, reason = defender_api.call(INDICATOR_URL,
+            url = '/'.join([INDICATOR_URL, defender_indicator_id]) if defender_indicator_id else INDICATOR_URL
+            oper = "PATCH" if defender_indicator_id else "POST"
+            indicator_payload, status, reason = defender_api.call(url,
                                                                   payload=payload,
-                                                                  oper="POST")
+                                                                  oper=oper)
             # convert dates to timestamps
             if status:
                 indicator_payload['creationTimeDateTimeUtc_ts'] = convert_date(indicator_payload['creationTimeDateTimeUtc'])
