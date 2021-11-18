@@ -18,7 +18,8 @@
     "sentinelone_threat_id": "{{ threatInfo.threatId }}",
     "sentinelone_threat_name": "{{ threatInfo.threatName }}",
     "sentinelone_incident_status": "{{ threatInfo.incidentStatus }}",
-    "sentinelone_mitigation_status": "{{ threatInfo.mitigationStatus }}"
+    "sentinelone_mitigation_status": "{{ threatInfo.mitigationStatus }}",
+    "sentinelone_mitigation_status_description": "{{ threatInfo.mitigationStatusDescription }}"
   },
   "artifacts": [
     {% if agentRealtimeInfo.agentComputerName %}
