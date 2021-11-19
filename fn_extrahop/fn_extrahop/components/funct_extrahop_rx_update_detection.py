@@ -56,10 +56,12 @@ class FunctionComponent(AppFunctionComponent):
         params.update({"incident_id": fn_inputs.incident_id})
 
         for i in ["soar_inc_owner_id", "soar_inc_resolution_id", "soar_inc_plan_status"]:
+            # Strip off "soar_inc_" prefix from input paramter value before adding to params.
             params.update({i.split('_', 2)[2]: getattr(fn_inputs, i)})
 
         if hasattr(fn_inputs, i):
             for i in ["extrahop_detection_id", "extrahop_participants"]:
+                # Strip off "extrahop_" prefix from input paramter value before adding to params.
                 params.update({i.split('_', 1)[1]: getattr(fn_inputs, i)})
 
         # Call 3rd party API :

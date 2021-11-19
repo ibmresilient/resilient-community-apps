@@ -48,6 +48,7 @@ class FunctionComponent(AppFunctionComponent):
                   "extrahop_active_until", "extrahop_limit",
                   "extrahop_offset"]:
             if hasattr(fn_inputs, i):
+                # Strip off "extrahop_" prefix from input paramter value before adding to params.
                 params.update({i.split('_', 1)[1]: getattr(fn_inputs, i)})
 
         # Call 3rd party API :

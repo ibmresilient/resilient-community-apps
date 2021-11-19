@@ -120,7 +120,7 @@ class RxClient():
             try:
                 filter_data = json.loads(search_filter)
             except ValueError:
-                raise ValueError("The search filter is not valid json content")
+                raise ValueError("The search filter is not valid json content: '{}'".format(search_filter))
         if filter_data.get("filter"):
             data["filter"] = filter_data.get("filter")
         data["active_from"] = active_from if active_from else 0
@@ -178,7 +178,7 @@ class RxClient():
             try:
                 filter_data = json.loads(search_filter)
             except ValueError:
-                raise ValueError("The search filter is not valid json content")
+                raise ValueError("The search filter is not valid json content: '{}'".format(search_filter))
 
         if filter_data.get("filter"):
             data["filter"] = filter_data.get("filter")
@@ -187,8 +187,9 @@ class RxClient():
             try:
                 sort_data = json.loads(sort)
             except ValueError:
-                raise ValueError("The sort parameter is not valid json content")
+                raise ValueError("The sort parameter is not valid json content: '{}'".format(sort))
             data["sort"] = sort_data
+
         data["from"] = active_from if active_from else 0
         data["until"] = active_until if active_until else 0
         data["limit"] = int(limit) if limit else 0
@@ -235,9 +236,9 @@ class RxClient():
             try:
                 p_data = json.loads(participants)
             except ValueError:
-                raise ValueError("The participant parameter is not valid json content")
-        if p_data.get("participants"):
-            data["participants"] = p_data.get("participants")
+                raise ValueError("The participants parameter is not valid json content: '{}'".format(participants))
+            if p_data.get("participants"):
+                data["participants"] = p_data.get("participants")
 
         if plan_status == 'C':
             data["resolution"] = resolution_map[resolution_id]

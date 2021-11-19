@@ -44,6 +44,7 @@ class FunctionComponent(AppFunctionComponent):
         for i in ["extrahop_tag_id", "extrahop_device_ids"]:
             if not hasattr(fn_inputs, i):
                 raise ValueError("Missing '{}' function parameter".format(i))
+            # Strip off "extrahop_" prefix from input paramter value before adding to params.
             params.update({i.split('_', 1)[1]: getattr(fn_inputs, i)})
 
         # Call 3rd party API :

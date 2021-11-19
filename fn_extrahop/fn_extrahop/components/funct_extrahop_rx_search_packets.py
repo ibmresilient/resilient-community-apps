@@ -59,6 +59,7 @@ class FunctionComponent(AppFunctionComponent):
                   "extrahop_limit_search_duration", "extrahop_limit_bytes",
                   "extrahop_ip1",]:
             if hasattr(fn_inputs, i):
+                # Strip off "extrahop_" prefix from input paramter value before adding to params.
                 params.update({i.split('_', 1)[1]: getattr(fn_inputs, i)})
 
         # Call 3rd party API :
