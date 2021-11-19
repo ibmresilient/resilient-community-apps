@@ -28,7 +28,38 @@ inputs.soar_inc_plan_status = incident.plan_status
 
 ### Post-Processing Script
 ```python
-None
+##  ExtraHop - wf_extrahop_rx_update_detections post processing script ##
+#  Globals
+FN_NAME = "funct_extrahop_rx_update_detection"
+WF_NAME = "Example: Extrahop revealx update detection"
+CONTENT = results.content
+INPUTS = results.inputs
+
+# Processing
+def main():
+    note_text = u''
+    detection_id = INPUTS.get("extrahop_detection_id")
+    if CONTENT:
+        result = CONTENT.result
+        if result == "success":
+            tag = INPUTS.get("extrahop_tag_name")
+            note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Successfully updated detection <b>{1}</b> for SOAR " \
+                        u"function <b>{2}</b>.".format(WF_NAME, detection_id, FN_NAME)
+        elif result == "failed":
+            note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Failed to update detection <b>{1}</b> for " \
+                        u"SOAR function <b>{2}</b>.".format(WF_NAME, detection_id, FN_NAME)
+        else:
+            note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Update detection <b>{1}</b> failed with unexpected " \
+                        u"response for SOAR function <b>{2}</b>.".format(WF_NAME, detection_id, FN_NAME)
+    else:
+        note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
+                     u"to update a detection <b>{1}</b>."\
+            .format(WF_NAME, detection_id, FN_NAME)
+
+    incident.addNote(helper.createRichText(note_text))
+
+main()
+
 ```
 
 ---
