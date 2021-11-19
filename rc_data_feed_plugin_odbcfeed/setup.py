@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='rc_data_feed_plugin_odbcfeed',
-    version='1.0.5',
+    version='1.0.6',
     license='MIT',
     author='IBM Resilient Labs',
     author_email='resil.labs@gmail.com',
@@ -14,7 +14,7 @@ setup(
     long_description="Resilient Circuits Components for sending data feeds to other (BI) systems",
     install_requires=[
         'cx_Oracle',
-        'rc_data_feed>=2.1.0',
+        'rc_data_feed>=2.1.1',
         'resilient',
         'pyodbc',
         'six',

@@ -10,7 +10,7 @@ def config_section_data():
     """
     config_data = u"""[postgres_feed]
 class=ODBCFeed
-odbc_connect=Driver={PostresSQL Driver};Server=127.0.0.1;DB=<db>;Port=5432;connectTimeout=0
+odbc_connect=Driver={PostresSQL};Server=127.0.0.1;DB=<db>;Port=5432;connectTimeout=0
 sql_dialect=PostgreSQL96Dialect
 uid=<acct>
 pwd=<pwd>
@@ -52,6 +52,6 @@ reload=False
 reload_query_api_method=False
 # feed_data is the default message destination that will be listened to
 queue=feed_data
-# change setting to true to capture contents of an attachment 
+# change setting to true to capture contents of an attachment
 include_attachment_data = false
 """
