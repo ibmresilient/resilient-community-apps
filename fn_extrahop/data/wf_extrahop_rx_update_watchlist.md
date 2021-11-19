@@ -27,7 +27,37 @@ elif action == "remove":
 
 ### Post-Processing Script
 ```python
-None
+##  ExtraHop - wf_extrahop_rx_update_watchlist post processing script ##
+#  Globals
+FN_NAME = "funct_extrahop_rx_update_watchlist"
+WF_NAME = "Example: Extrahop revealx update watchlist"
+CONTENT = results.content
+INPUTS = results.inputs
+
+# Processing
+def main():
+    note_text = u''
+    if CONTENT:
+        result = CONTENT.result
+        if result == "success":
+            tag = INPUTS.get("extrahop_tag_name")
+            note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Successfully updated the watchlist for SOAR " \
+                        u"function <b>{1}</b>.".format(WF_NAME, FN_NAME)
+        elif result == "failed":
+            note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Failed to update the watchlist for " \
+                        u"SOAR function <b>{1}</b>.".format(WF_NAME, FN_NAME)
+        else:
+            note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Update watchlist failed with unexpected " \
+                        u"response for SOAR function <b>{1}</b>.".format(WF_NAME, FN_NAME)
+    else:
+        note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
+                     u"to update the watchlist <b>{1}</b>."\
+            .format(WF_NAME, FN_NAME)
+
+    incident.addNote(helper.createRichText(note_text))
+
+main()
+
 ```
 
 ---

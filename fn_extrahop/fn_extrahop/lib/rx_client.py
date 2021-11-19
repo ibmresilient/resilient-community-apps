@@ -336,7 +336,7 @@ class RxClient():
             unassign_ids = list(filter(None, re.split(r"\s+|,|\n", assign)))
             data = {"assign": unassign_ids}
 
-        r = self.rc.execute_call_v2("get", uri, headers=self._headers, data=json.dumps(data))
+        r = self.rc.execute_call_v2("post", uri, headers=self._headers, data=json.dumps(data))
 
         return r
 

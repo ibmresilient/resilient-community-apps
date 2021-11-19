@@ -51,8 +51,14 @@ class FunctionComponent(AppFunctionComponent):
         # Call 3rd party API :
         rx_cli = RxClient(self.opts, self.options)
         response = rx_cli.update_watchlist(**params)
-        # Response can be a list, returned result needs to be a dict
-        results = {"result": response.json()}
+
+        if response.status_code == 201:
+            # Action succeeded with empty response message
+            result = "success"
+        else:
+            result = "failed"
+
+        results = {"result": result}
 
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
 
