@@ -35,7 +35,6 @@ def test_query_string():
 
 def test_fix_dict():
     """
-
     :return:
     """
     input_dict = {"key1": 10,

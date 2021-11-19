@@ -5,13 +5,12 @@
 """
 
 import logging
-from fn_qradar_enhanced_data.util.qradar_utils import QRadarClient
-
+from fn_qradar_enhanced_data.util.qradar_utils import QRadarClient, QRadarServers
+import fn_qradar_enhanced_data.util.qradar_constants as qradar_constants
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
 log.addHandler(logging.StreamHandler())
-
 
 def selftest_function(opts):
     """
@@ -22,35 +21,43 @@ def selftest_function(opts):
 
         options = opts.get("fn_qradar_integration", {})
 
-        log.info("Verifying app.config values for fn_qradar_integration config section")
+        if not options:
+            servers = QRadarServers(opts, options)
+            server_list = servers.get_server_name_list()
+        else:
+            server_list = {qradar_constants.PACKAGE_NAME}
 
-        # if bool(options.get("verify_cert")) == False:
-        #     raise Exception("fn-qradar-enhanced-data: Verifying app.config values for fn_qradar_integration config section Error while calling selftest. Exception: 'verify_cert'")
+        for server_name in server_list:
+            server = opts.get(server_name, {})
 
-        cafile = False if options.get("verify_cert", "").lower() == "false" else options["verify_cert"]
-        qradar_client = QRadarClient(host=options["host"],
-                                     username=options.get("username", None),
-                                     password=options.get("qradarpassword", None),
-                                     token=options.get("qradartoken", None),
-                                     cafile=cafile,
-                                     opts=opts,
-                                     function_opts=options)
+            log.info("Verifying app.config values for {} config section".format(qradar_constants.PACKAGE_NAME))
 
-        log.info("Verifying QRadar connection...")
+            # if bool(server.get("verify_cert")) == False:
+            #     raise Exception("fn-qradar-enhanced-data: Verifying app.config values for fn_qradar_integration config section Error while calling selftest. Exception: 'verify_cert'")
 
-        connected = qradar_client.verify_connect()
+            cafile = False if server.get("verify_cert", "").lower() == "false" else server["verify_cert"]
+            qradar_client = QRadarClient(host=server["host"],
+                                        username=server.get("username", None),
+                                        password=server.get("qradarpassword", None),
+                                        token=server.get("qradartoken", None),
+                                        cafile=cafile,
+                                        opts=opts,
+                                        function_opts=server)
 
-        if connected:
-            log.info("Verifying QRadar GraphQL connection...")
+            log.info("Verifying QRadar connection...")
 
-            graphql_installed = qradar_client.verify_graphql_connect()
+            connected = qradar_client.verify_connect()
 
-            if not graphql_installed:
-                log.warning("QRadar GraphQL connection check failed. This is needed for qradar_enhanced data. "
-                            "Check for QRadar Analyst workflow installation ")
-            else:
-                log.info("Test was successful")
+            if connected:
+                log.info("Verifying QRadar GraphQL connection...")
 
+                graphql_installed = qradar_client.verify_graphql_connect()
+
+                if not graphql_installed:
+                    log.warning("QRadar GraphQL connection check failed. This is needed for qradar_enhanced_data. "
+                                "Check for QRadar Analyst workflow installation ")
+                else:
+                    log.info("Test was successful")
 
         return {
             "state": "success"
@@ -68,11 +75,11 @@ def selftest_function(opts):
             qradarpassword: {4}
             qradartoken: {5}\n""".format(
             err,
-            options["host"],
-            options["verify_cert"],
-            options["username"],
-            options["qradarpassword"],
-            options["qradartoken"])
+            server["host"],
+            server["verify_cert"],
+            server["username"],
+            server["qradarpassword"],
+            server["qradartoken"])
 
         log.error(err_reason_msg)
 

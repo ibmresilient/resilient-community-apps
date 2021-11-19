@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# (c) Copyright IBM Corp. 2020. All Rights Reserved.
+# (c) Copyright IBM Corp. 2021. All Rights Reserved.
 #
 # Template Method Design Pattern for a search-and-wait-for-result command
 #
@@ -10,7 +10,6 @@ import time
 import logging
 LOG = logging.getLogger(__name__)
 
-
 class SearchTimeout(Exception):
     """ Query failed to complete in time specified """
     def __init__(self, search_id, search_status):
@@ -18,13 +17,11 @@ class SearchTimeout(Exception):
         super(SearchTimeout, self).__init__(fail_msg)
         self.search_status = search_status
 
-
 class SearchJobFailure(Exception):
     """ Search job creation failure"""
     def __init__(self, query):
         fail_msg = "Failed to create search job for query [{}] ".format(query)
         super(SearchJobFailure, self).__init__(fail_msg)
-
 
 class SearchFailure(Exception):
     """ Search failed to execute """
@@ -32,7 +29,6 @@ class SearchFailure(Exception):
         fail_msg = "Query [{}] failed with status [{}]".format(search_id, search_status)
         super(SearchFailure, self).__init__(fail_msg)
         self.search_status = search_status
-
 
 class SearchWaitCommand(object):
     # Constants
@@ -43,7 +39,6 @@ class SearchWaitCommand(object):
 
     def __init__(self, timeout=600, period=5):
         """
-
         :param timeout: Time out in secs
         :param polling: polling period in secs
         """
@@ -117,4 +112,3 @@ class SearchWaitCommand(object):
             result=None
 
         return result
-

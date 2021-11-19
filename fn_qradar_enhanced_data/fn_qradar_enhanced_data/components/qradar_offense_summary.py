@@ -1,22 +1,18 @@
 # -*- coding: utf-8 -*-
 #
-# (c) Copyright IBM Corp. 2020. All Rights Reserved.
+# (c) Copyright IBM Corp. 2021. All Rights Reserved.
 #
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
-import datetime
 import logging
 import fn_qradar_enhanced_data.util.qradar_constants as qradar_constants
 from resilient_lib import validate_fields
-from fn_qradar_enhanced_data.util.qradar_utils import QRadarClient
+from fn_qradar_enhanced_data.util.qradar_utils import QRadarClient, QRadarServers
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+import fn_qradar_enhanced_data.util.function_utils as function_utils
 
-
-"""
-    For a given Offense ID , get the offense summary.
-"""
-
+#For a given Offense ID , get the offense summary.
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'qradar_offense_summary"""
@@ -25,46 +21,48 @@ class FunctionComponent(ResilientComponent):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         self.opts = opts
-        self.options = opts.get("fn_qradar_integration", {})
-        required_fields = ["host", "verify_cert"]
-        validate_fields(required_fields, self.options)
+        self.servers_list = function_utils.get_servers_list(opts, "init")
+        function_utils.update_qradar_servers_select_list(self.opts, self.servers_list)
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
         self.opts = opts
-        self.options = opts.get("fn_qradar_integration", {})
+        self.servers_list = function_utils.get_servers_list(opts, "reload")
 
     @function("qradar_offense_summary")
     def _qradar_offense_summary(self, event, *args, **kwargs):
         """Function: QRadar Offense "summary"""
         log = logging.getLogger(__name__)
         try:
-            required_fields = ["qradar_query_type","qradar_offense_id"]
-            validate_fields(required_fields, kwargs)
+            validate_fields(["qradar_query_type","qradar_offense_id"], kwargs)
             # Get the function parameters:
             qradar_offenseid = kwargs.get("qradar_offense_id")  # QRadar Offense ID
             qradar_fn_type = kwargs.get("qradar_query_type")  # Function type based on the datatable/fields to populate
+            qradar_label = kwargs.get("qradar_label") # QRadar server to connect to
 
             log.info("qradar_offenseid: %s", qradar_offenseid)
+            log.info("qradar_label: %s"), qradar_label
+
+            options = QRadarServers.qradar_label_test(qradar_label, self.servers_list)
 
             qradar_verify_cert = True
-            if "verify_cert" in self.options and self.options["verify_cert"].lower() == "false":
+            if "verify_cert" in options and options["verify_cert"].lower() == "false":
                 qradar_verify_cert = False
 
-            log.debug("Connection to {} using {}".format(self.options["host"],
-                                                         self.options.get("username", None) or self.options.get("qradartoken", None) ))
+            log.debug("Connection to {} using {}".format(options["host"],
+                                                         options.get("username", None) or options.get("qradartoken", None)))
 
             yield StatusMessage("starting...")
-            qradar_client = QRadarClient(host=self.options["host"],
-                                         username=self.options.get("username", None),
-                                         password=self.options.get("qradarpassword", None),
-                                         token=self.options.get("qradartoken", None),
+            qradar_client = QRadarClient(host=options["host"],
+                                         username=options.get("username", None),
+                                         password=options.get("qradarpassword", None),
+                                         token=options.get("qradartoken", None),
                                          cafile=qradar_verify_cert,
-                                         opts=self.opts, function_opts=self.options)
+                                         opts=self.opts, function_opts=options)
 
             results = {
-                "qrhost": self.options["host"],
+                "qrhost": options["host"],
                 "offenseid": qradar_offenseid
             }
 
@@ -115,4 +113,3 @@ class FunctionComponent(ResilientComponent):
         except Exception as e:
             log.error(str(e))
             yield FunctionError()
-

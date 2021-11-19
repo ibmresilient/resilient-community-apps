@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-#
-# (c) Copyright IBM Corp. 2020. All Rights Reserved.
+# (c) Copyright IBM Corp. 2021. All Rights Reserved.
 from resilient_lib.ui import Datatable, Tab, Field, create_tab
 from resilient_circuits.app import AppArgumentParser
-
 
 class QRadarTab(Tab):
     SECTION = "fn_qradar_integration"
@@ -11,6 +10,7 @@ class QRadarTab(Tab):
     UUID = "d1ca8936-897b-4a83-8225-01c58db0470b"
     CONTAINS = [
         Field("qradar_id"),
+        Field("qradar_destination"),
         Field("qr_offense_index_type"),
         Field("qr_offense_index_value"),
         Field("qr_offense_source"),
@@ -35,6 +35,5 @@ class QRadarTab(Tab):
     SHOW_IF = [
         Field("qradar_id").conditions.has_value()
     ]
-
 
 create_tab(QRadarTab, AppArgumentParser().parse_args(), update_existing=True)

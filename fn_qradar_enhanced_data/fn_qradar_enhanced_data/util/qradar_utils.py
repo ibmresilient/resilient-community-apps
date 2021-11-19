@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 #
-# (c) Copyright IBM Corp. 2020. All Rights Reserved.
+# (c) Copyright IBM Corp. 2021. All Rights Reserved.
 #
 #   Util classes for qradar
-#
 
 import base64
 import json
@@ -13,9 +12,8 @@ import six
 import fn_qradar_enhanced_data.util.qradar_constants as qradar_constants
 import fn_qradar_enhanced_data.util.function_utils as function_utils
 import fn_qradar_enhanced_data.util.qradar_graphql_queries as qradar_graphql_queries
-from resilient_lib import RequestsCommon
+from resilient_lib import RequestsCommon, IntegrationError
 from fn_qradar_enhanced_data.util.SearchWaitCommand import SearchWaitCommand, SearchFailure, SearchJobFailure
-
 
 # handle python2 and 3
 try:
@@ -24,7 +22,6 @@ except ImportError:
     from urllib.parse import quote as quote_func  # Python 3+
 
 LOG = logging.getLogger(__name__)
-
 
 def quote(input_v, safe=None):
     """
@@ -38,21 +35,6 @@ def quote(input_v, safe=None):
     if safe:
         return quote_func(input_v, safe)
     return quote_func(input_v)
-
-
-class RequestError(Exception):
-    """ Request error"""
-    def __init__(self, url, message):
-        fail_msg = "Request to url [{}] throws exception. Error [{}]".format(url, message)
-        super(RequestError, self).__init__(fail_msg)
-
-
-class DeleteError(Exception):
-    """ Request error"""
-    def __init__(self, url, message):
-        fail_msg = "Delete request to url [{}] throws exception. Error [{}]".format(url, message)
-        super(DeleteError, self).__init__(fail_msg)
-
 
 class AuthInfo(object):
     # Singleton
@@ -118,7 +100,6 @@ class AuthInfo(object):
 
         return self.rc.execute_call_v2(method, url, data=data, headers=my_headers, verify=self.cafile, callback=make_call_callback)
 
-
 class ArielSearch(SearchWaitCommand):
     """
     Subclass of SearchWaitCommand.
@@ -147,6 +128,7 @@ class ArielSearch(SearchWaitCommand):
         :return:
         """
         self.range_end = end
+
     def set_timeout(self, timeout):
         """
         Set timeout
@@ -154,6 +136,7 @@ class ArielSearch(SearchWaitCommand):
         :return:
         """
         self.search_timeout = timeout
+
     def set_query_all(self, query_all):
         """
         Set bool to determine if range header is necessary
@@ -263,7 +246,6 @@ class ArielSearch(SearchWaitCommand):
             raise SearchFailure(search_id, status)
 
         return status
-
 
 class QRadarClient(object):
 
@@ -387,10 +369,9 @@ class QRadarClient(object):
 
         except Exception as e:
             LOG.error(str(e))
-            raise RequestError(url, "get_offense_summary_data call failed with exception {}".format(str(e)))
+            raise IntegrationError("Request to url [{}] throws exception. Error [get_offense_summary_data call failed with exception {}]".format(url, str(e)))
 
         return ret
-
 
     @staticmethod
     def get_rules_data(offenseid):
@@ -416,10 +397,9 @@ class QRadarClient(object):
 
         except Exception as e:
             LOG.error(str(e))
-            raise RequestError(url, "get_rules_data call failed with exception {}".format(str(e)))
+            raise IntegrationError("Request to url [{}] throws exception. Error [get_rules_data call failed with exception {}]".format(url, str(e)))
 
         return ret
-
 
     @staticmethod
     def get_sourceip_data(event):
@@ -445,7 +425,7 @@ class QRadarClient(object):
 
         except Exception as e:
             LOG.error(str(e))
-            raise RequestError(url, "get_sourceip_data call failed with exception {}".format(str(e)))
+            raise IntegrationError("Request to url [{}] throws exception. Error [get_sourceip_data call failed with exception {}]".format(url, str(e)))
 
         return ret
 
@@ -473,7 +453,7 @@ class QRadarClient(object):
 
         except Exception as e:
             LOG.error(str(e))
-            raise RequestError(url, "get_offense_source call failed with exception {}".format(str(e)))
+            raise IntegrationError("Request to url [{}] throws exception. Error [get_offense_source call failed with exception {}]".format(url, str(e)))
 
         return ret
 
@@ -503,7 +483,7 @@ class QRadarClient(object):
 
         except Exception as e:
             LOG.error(str(e))
-            raise RequestError(url, "get_offense_asset_data call failed with exception {}".format(str(e)))
+            raise IntegrationError("Request to url [{}] throws exception. Error [get_offense_asset_data call failed with exception {}]".format(url, str(e)))
 
         return ret
 
@@ -530,3 +510,46 @@ class QRadarClient(object):
             LOG.error(str(e))
 
         return "; ".join([x+"="+cookies[x] for x in cookies.keys()])
+
+class QRadarServers():
+    def __init__(self, opts, options):
+        self.servers, self.server_name_list = self._load_servers(opts, options)
+
+    def _load_servers(self, opts, options):
+        servers = {}
+        server_name_list = self._get_server_name_list(opts)
+        for server in server_name_list:
+            server_name = u"{}".format(server)
+            server_data = opts.get(server_name)
+            if not server_data:
+                raise KeyError(u"Unable to find QRadar server: {}".format(server_name))
+            
+            servers[server] = server_data
+        
+        return servers, server_name_list
+
+    def qradar_label_test(qradar_label, servers_list):
+        if qradar_label and qradar_constants.PACKAGE_NAME+":"+qradar_label in servers_list:
+            options = servers_list[qradar_constants.PACKAGE_NAME+":"+qradar_label]
+        elif len(servers_list) == 1 or qradar_label == qradar_constants.PACKAGE_NAME:
+            options = servers_list[list(servers_list.keys())[0]]
+        else:
+            raise IntegrationError("{} did not match labels given in the app.config".format(qradar_label))
+
+        return options
+
+    def _get_server_name_list(self, opts):
+        """
+        Return the list of QRadar server names defined in the app.config in fn_qradar_integration. 
+        """
+        server_list = []
+        for key in opts.keys():
+            if key.startswith("{}:".format(qradar_constants.PACKAGE_NAME)):
+                server_list.append(key)
+        return server_list
+
+    def get_server_name_list(self):
+        """
+        Return list of all server names
+        """
+        return self.server_name_list

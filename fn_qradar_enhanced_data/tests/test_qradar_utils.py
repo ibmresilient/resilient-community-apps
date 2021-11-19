@@ -2,18 +2,12 @@
 #
 # Unit tests for fn_qradar_enhanced_data/util/qradar_utils.py
 #
-from fn_qradar_enhanced_data.util import qradar_utils
-from fn_qradar_enhanced_data.util import qradar_constants
+from fn_qradar_enhanced_data.util import qradar_utils, qradar_constants
 from fn_qradar_enhanced_data.util.SearchWaitCommand import SearchWaitCommand, SearchFailure, SearchJobFailure
 import base64
-import requests
-from mock import Mock
 from mock import patch
-import mock
-import urllib
 import six
 import pytest
-
 
 # Util function to generate simulated requests response
 def _generateResponse(content, status):
@@ -27,7 +21,6 @@ def _generateResponse(content, status):
 
     return simResponse(content, status)
 
-
 # Global test data
 host = "qradar.instance.com"
 username = "admin"
@@ -36,12 +29,10 @@ token = "FakeSecreteToken"
 cafile = True
 search_id = "FakeSearch_id"
 
-
 @pytest.mark.parametrize("val", [ "test", u"test", "ç", u"ç" ])
 def test_quote_return(val):
     result = qradar_utils.quote(val)
     assert isinstance(result, six.string_types)
-
 
 @patch("fn_qradar_enhanced_data.util.qradar_utils.quote_func")
 def test_quote_passing_args(mocked_func):
@@ -51,13 +42,11 @@ def test_quote_passing_args(mocked_func):
     qradar_utils.quote("test", "test")
     mocked_func.assert_called_with("test".encode("utf-8"), "test")
 
-
 def test_auth_info():
     """
     Test singleton AuthInfo
     :return:
     """
-
 
     auth_info = qradar_utils.AuthInfo.get_authInfo()
     auth_info.create(host,
@@ -80,7 +69,6 @@ def test_auth_info():
                      cafile=cafile)
     assert auth_info.headers["SEC"] == token
 
-
 def test_qradar_client():
     with patch("fn_qradar_enhanced_data.util.qradar_utils.AuthInfo.make_call") as mocked_get_call:
         # 1. Test connection
@@ -96,7 +84,6 @@ def test_qradar_client():
 
         connected = qradar_client.verify_connect()
         assert connected == True
-
 
 def test_ariel_graphql_search():
     timeout = 10
@@ -170,7 +157,6 @@ def test_ariel_graphql_search():
         except SearchFailure:
             assert True
 
-
 @patch("fn_qradar_enhanced_data.util.qradar_utils.QRadarClient.get_qr_sessionid")
 @patch("fn_qradar_enhanced_data.util.qradar_utils.AuthInfo.make_call")
 def test_get_offense_summary_data(mocked_make_call, mocked_qr_call):
@@ -202,7 +188,6 @@ def test_get_offense_summary_data(mocked_make_call, mocked_qr_call):
     assert ret["content"]["offenseType"]["name"] == offense_summary["data"]["getOffense"]["offenseType"]["name"]
 
     mocked_make_call.side_effect = Exception("Error!")
-
 
 @patch("fn_qradar_enhanced_data.util.qradar_utils.QRadarClient.get_qr_sessionid")
 @patch("fn_qradar_enhanced_data.util.qradar_utils.AuthInfo.make_call")
@@ -236,7 +221,6 @@ def test_get_rules_data(mocked_make_call, mocked_qr_call):
     assert ret["content"]["rules"][0]["name"] == rules_data["data"]["getOffense"]["rules"][0]["name"]
 
     mocked_make_call.side_effect = Exception("Error!")
-
 
 @patch("fn_qradar_enhanced_data.util.qradar_utils.QRadarClient.get_qr_sessionid")
 @patch("fn_qradar_enhanced_data.util.qradar_utils.AuthInfo.make_call")
@@ -277,7 +261,6 @@ def test_get_sourceip_data(mocked_make_call, mocked_qr_call):
 
     mocked_make_call.side_effect = Exception("Error!")
 
-
 @patch("fn_qradar_enhanced_data.util.qradar_utils.QRadarClient.get_qr_sessionid")
 @patch("fn_qradar_enhanced_data.util.qradar_utils.AuthInfo.make_call")
 def test_get_offense_source(mocked_make_call, mocked_qr_call):
@@ -310,7 +293,6 @@ def test_get_offense_source(mocked_make_call, mocked_qr_call):
     assert ret["content"][0]["sourceIp"] == offense_source_data["data"]["getOffense"]["sourceAddresses"][0]["sourceIp"]
 
     mocked_make_call.side_effect = Exception("Error!")
-
 
 @patch("fn_qradar_enhanced_data.util.qradar_utils.QRadarClient.get_qr_sessionid")
 @patch("fn_qradar_enhanced_data.util.qradar_utils.AuthInfo.make_call")

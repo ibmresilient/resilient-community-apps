@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# (c) Copyright IBM Corp. 2020. All Rights Reserved.
+# (c) Copyright IBM Corp. 2021. All Rights Reserved.
 #
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
@@ -9,11 +9,10 @@ import time
 import logging
 import re
 import fn_qradar_enhanced_data.util.qradar_constants as qradar_constants
-from fn_qradar_enhanced_data.util import function_utils
-from fn_qradar_enhanced_data.util.qradar_utils import QRadarClient
+import fn_qradar_enhanced_data.util.function_utils as function_utils
+from fn_qradar_enhanced_data.util.qradar_utils import QRadarClient, QRadarServers
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import validate_fields
-
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'qradar_top_events"""
@@ -22,15 +21,13 @@ class FunctionComponent(ResilientComponent):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         self.opts = opts
-        self.options = opts.get("fn_qradar_integration", {})
-        required_fields = ["host", "verify_cert"]
-        validate_fields(required_fields, self.options)
+        self.servers_list = function_utils.get_servers_list(opts, "init")
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
         self.opts = opts
-        self.options = opts.get("fn_qradar_integration", {})
+        self.servers_list = function_utils.get_servers_list(opts, "reload")
 
     @function("qradar_top_events")
     def _qradar_top_events(self, event, *args, **kwargs):
@@ -50,6 +47,7 @@ class FunctionComponent(ResilientComponent):
             qradar_query_param4 = kwargs.get("qradar_query_param4")  # text
             qradar_query_param5 = kwargs.get("qradar_query_param5")  # text
             qradar_query_param6 = kwargs.get("qradar_query_param6")  # text
+            qradar_label = kwargs.get("qradar_label") # QRadar server to connect to
 
             log.info("qradar_query: %s", qradar_query)
             log.info("qradar_query_param1: %s", qradar_query_param1)
@@ -58,15 +56,18 @@ class FunctionComponent(ResilientComponent):
             log.info("qradar_query_param4: %s", qradar_query_param4)
             log.info("qradar_query_param5: %s", qradar_query_param5)
             log.info("qradar_query_param6: %s", qradar_query_param6)
+            log.info("qradar_label: %s"), qradar_label
+
+            options = QRadarServers.qradar_label_test(qradar_label, self.servers_list)
 
             qradar_verify_cert = True
-            if "verify_cert" in self.options and self.options["verify_cert"].lower() == "false":
+            if "verify_cert" in options and options["verify_cert"].lower() == "false":
                 qradar_verify_cert = False
 
-            timeout = float(self.options.get("search_timeout",600))  # Default timeout to 10 minutes
+            timeout = float(options.get("search_timeout",600))  # Default timeout to 10 minutes
 
-            log.debug("Connection to {} using {}".format(self.options["host"],
-                                                         self.options.get("username", None) or self.options.get(
+            log.debug("Connection to {} using {}".format(options["host"],
+                                                         options.get("username", None) or options.get(
                                                              "qradartoken", None)))
 
             temp_table = "offense-{0}-events-{1}-1000-{2}".format(qradar_query_param3, qradar_fn_type,
@@ -79,7 +80,6 @@ class FunctionComponent(ResilientComponent):
             qradar_search_query = re.sub("FROM\s+{}".format(qradar_constants.ARIEL_SEARCH_EVENTS if re.search(qradar_constants.ARIEL_SEARCH_EVENTS,qradar_query, flags=re.IGNORECASE) else qradar_constants.ARIEL_SEARCH_FLOWS),
                                          "FROM \"{}\"".format(temp_table),
                                          qradar_query, flags=re.IGNORECASE)
-
 
             temp_query_string = function_utils.make_query_string(qradar_temp_query,
                                                                  ["*",
@@ -102,12 +102,12 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("starting...")
 
-            qradar_client = QRadarClient(host=self.options["host"],
-                                         username=self.options.get("username", None),
-                                         password=self.options.get("qradarpassword", None),
-                                         token=self.options.get("qradartoken", None),
+            qradar_client = QRadarClient(host=options["host"],
+                                         username=options.get("username", None),
+                                         password=options.get("qradarpassword", None),
+                                         token=options.get("qradartoken", None),
                                          cafile=qradar_verify_cert,
-                                         opts=self.opts, function_opts=self.options)
+                                         opts=self.opts, function_opts=options)
 
             result = qradar_client.ariel_graphql_search(temp_query_string,
                                                         search_query_string,
@@ -128,7 +128,7 @@ class FunctionComponent(ResilientComponent):
                     event["domain"] = data["content"]["domain"]["name"] if data["content"] and  data["content"]["domain"]["name"] else "Default Domain"
 
             results = {
-                "qrhost": self.options["host"],
+                "qrhost": options["host"],
                 "offenseid": qradar_query_param3,
                 "events": result["events"]
             }

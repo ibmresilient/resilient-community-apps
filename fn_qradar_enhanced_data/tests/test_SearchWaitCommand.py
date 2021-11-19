@@ -7,11 +7,7 @@
 #
 from fn_qradar_enhanced_data.util import SearchWaitCommand
 import time
-from mock import Mock
 from mock import patch
-import mock
-
-
 from fn_qradar_enhanced_data.util.qradar_utils import ArielSearch
 
 @patch("fn_qradar_enhanced_data.util.qradar_utils.ArielSearch.get_search_result")

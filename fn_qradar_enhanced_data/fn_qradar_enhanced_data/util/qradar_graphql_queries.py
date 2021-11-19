@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# (c) Copyright IBM Corp. 2020. All Rights Reserved.
+# (c) Copyright IBM Corp. 2021. All Rights Reserved.
 #
 #   QRadar graph queries
 
@@ -33,8 +33,6 @@ GRAPHQL_OFFENSEQUERY = '''query offenseQuery($id: ID!) {
                             }
                         }
                        '''
-
-
 
 # Contributing rules query to populate Rules table.
 GRAPHQL_RULESQUERY = '''query ruleQuery($id: ID!) {
@@ -203,7 +201,6 @@ GRAPHQL_OFFENSEASSETS = '''query assetQuery($ipAddress: String, $domainId: Int) 
                     }
                     '''
 
-
 # Source IP data query for Source IP table.
 GRAPHQL_SOURCEIP='''query assetQuery($ipAddress: String, $domainId: Int) {
                         getAsset(ipAddress: $ipAddress, domainId: $domainId) {
@@ -239,7 +236,6 @@ GRAPHQL_SOURCEIP='''query assetQuery($ipAddress: String, $domainId: Int) {
                         }
                     }
                     '''
-
 
 # Get System Date for GraphQL test
 GRAPHQL_SYSTEMDATE ='''query getSystemDate{
