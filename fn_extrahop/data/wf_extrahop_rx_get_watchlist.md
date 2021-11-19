@@ -23,7 +23,50 @@ None
 
 ### Post-Processing Script
 ```python
-None
+##  ExtraHop - wf_extrahop_rx_get_watchlist post processing script ##
+#  Globals
+FN_NAME = "funct_extrahop_rx_get_watchlist"
+WF_NAME = "Example: Extrahop revealx get watchlist"
+CONTENT = results.content
+INPUTS = results.inputs
+QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
+# Display subset of fields
+DATA_TBL_FIELDS = ["display_name", "ipaddr4", "ipaddr6", "macaddr", "extrahop_id"]
+
+# Processing
+def main():
+    note_text = u''
+    if CONTENT:
+        devs = CONTENT.result
+        note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: There were <b>{1}</b> devices returned in the Watchlist" \
+                    u" for SOAR function <b>{2}</b>.".format(WF_NAME, len(devs), FN_NAME)
+        if devs:
+            for dev in devs:
+                newrow = incident.addRow("extrahops_watchlist")
+                newrow.query_execution_date = QUERY_EXECUTION_DATE
+                for f1 in DATA_TBL_FIELDS:
+                  f2 = f1
+                  if f1.startswith("dev_"):
+                      f2 = f1.split('_', 1)[1]
+                if dev[f1] is None:
+                    newrow[f1] = dev[f2]
+                if isinstance(dev[f1], list):
+                    newrow[f1] = "{}".format(", ".join(dev[f2]))
+                elif isinstance(dev[f1], bool):
+                    newrow[f1] = str(dev[f2])
+                else:
+                    newrow[f1] = "{}".format(dev[f2])
+            note_text += u"<br>The data table <b>{0}</b> has been updated".format("Extrahop Detections")
+
+    else:
+        note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
+                     u"to get the watchlist." \
+            .format(WF_NAME, FN_NAME)
+
+    incident.addNote(helper.createRichText(note_text))
+
+main()
+
 ```
 
 ---
