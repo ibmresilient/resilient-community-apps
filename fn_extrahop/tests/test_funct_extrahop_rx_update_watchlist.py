@@ -55,17 +55,17 @@ class TestFunctExtrahopRxUpdateWatchlist:
 
     mock_inputs_1 = {
         "extrahop_unassign": "0",
-        "extrahop_assign": ""
+        "extrahop_assign": "0"
     }
 
-    expected_results_1 = {"result": []}
+    expected_results_1 = {"result": "success"}
 
     mock_inputs_2 = {
         "extrahop_unassign": "0",
         "extrahop_assign": "1"
     }
 
-    expected_results_2 = {"result": []}
+    expected_results_2 = {"result": "failed"}
 
     @patch('fn_extrahop.components.funct_extrahop_rx_update_watchlist.RxClient', side_effect=mocked_rx_client)
     @pytest.mark.parametrize("mock_inputs, expected_results", [
