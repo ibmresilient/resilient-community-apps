@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='rc_data_feed',
-    version='2.1.0',
+    version='2.1.1',
     license='MIT',
     author='IBM Resilient Labs',
     author_email='resil.labs@gmail.com',
@@ -13,8 +13,8 @@ setup(
     description="Resilient Circuits Components for sending data feeds to other (BI) systems",
     long_description="Resilient Circuits Components for sending data feeds to other (BI) systems",
     install_requires=[
-        'resilient_circuits>=30.0.84',
-        'resilient>=30.0.84',
+        'resilient_circuits>=39',
+        'resilient>=39',
         'resilient_lib'
     ],
     packages=find_packages(),

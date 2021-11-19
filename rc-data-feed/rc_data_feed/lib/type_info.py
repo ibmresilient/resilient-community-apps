@@ -217,15 +217,15 @@ class TypeInfo(object):
             all_fields = self.get_all_fields(refresh=True)
 
         try:
-            values = self._get_field_values(payload, all_fields, translate_func)
+            values = self._get_field_values(payload, all_fields, translate_func, bypass=False)
         except ValueError:
             # this will trigger when a field ID is not found
             all_fields = self.get_all_fields(refresh=True)
-            values = self._get_field_values(payload, all_fields, translate_func)
+            values = self._get_field_values(payload, all_fields, translate_func, bypass=True)
 
         return values
 
-    def _get_field_values(self, payload, all_fields, translate_func):
+    def _get_field_values(self, payload, all_fields, translate_func, bypass=False):
         values = {}
 
         if self.is_data_table():
@@ -235,14 +235,20 @@ class TypeInfo(object):
             values['id'] = payload['id']
 
         for field in all_fields:
-            raw_value = self._get_raw_value_for_field(payload, field)
+            try:
+                raw_value = self._get_raw_value_for_field(payload, field)
 
-            if translate_func:
-                value = translate_func(self, field, raw_value)
-            else:
-                value = raw_value
+                if translate_func:
+                    value = translate_func(self, field, raw_value)
+                else:
+                    value = raw_value
 
-            values[field["name"]] = value
+                values[field["name"]] = value
+            except ValueError:
+                if bypass:
+                    continue # this field will be skipped
+                else:
+                    raise
 
         return values
 
@@ -313,7 +319,7 @@ class TypeInfo(object):
 
         if type_str is None:
             msg = "Unable to find type name from object type of {} ({})".format(type_id,
-                                                                                type(type_id))
+                                                                               type(type_id))
             raise LookupError(msg)
 
         if pretty:
@@ -420,6 +426,10 @@ class TypeInfo(object):
         return value
 
     @staticmethod
+    def no_translate(type_info, field, value):
+        return value
+
+    @staticmethod
     def get_default_mapping():
         return {
             "select_owner": TypeInfo.translate_value_select,
@@ -434,7 +444,9 @@ class TypeInfo(object):
             "textarea": TypeInfo.translate_value_textarea,
             "number": TypeInfo.translate_value_number,
             "blob": TypeInfo.translate_value_blob,
-            "list": TypeInfo.translate_value_list
+            "list": TypeInfo.translate_value_list,
+            "text": TypeInfo.no_translate,
+            "bool": TypeInfo.no_translate
         }
 
     @staticmethod

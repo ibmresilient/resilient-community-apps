@@ -473,6 +473,7 @@ class TestDataFeederSyncIncidents:
     @pytest.mark.parametrize("typeinfo, field, value, expected_result", [
         (None, {'input_type': 'text'}, None, None),
         (None, {'input_type': 'text'}, "abc", "abc"),
+        (None, {'input_type': 'bool'}, False, False),
         (None, {'input_type': 'text'}, ["abc","def"], "abc, def"),
         (None, {'input_type': 'text'}, ["abc","def"], "abc, def"),
         (None, {'input_type': 'textarea'}, {"content": "abc"}, "abc"),
