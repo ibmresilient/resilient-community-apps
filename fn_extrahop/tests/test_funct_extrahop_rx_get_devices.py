@@ -63,7 +63,7 @@ class TestFunctExtrahopRxGetDevices:
         "extrahop_search_type": "any"
     }
 
-    expected_results_1 = {}
+    expected_results_1 = {"result": []}
 
     mock_inputs_2 = {
         "extrahop_active_from": 123,
@@ -74,7 +74,7 @@ class TestFunctExtrahopRxGetDevices:
         "extrahop_search_type": "any"
     }
 
-    expected_results_2 = {}
+    expected_results_2 = {"result": []}
 
     @patch('fn_extrahop.components.funct_extrahop_rx_get_devices.RxClient', side_effect=mocked_rx_client)
     @pytest.mark.parametrize("mock_inputs, expected_results", [

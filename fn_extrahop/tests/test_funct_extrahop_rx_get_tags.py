@@ -57,14 +57,14 @@ class TestFunctExtrahopRxGetTags:
         "extrahop_tag_id": None
     }
 
-    expected_results_1 = [{'id': 1, 'mod_time': 1635771586176, 'name': 'test_tag_1'},
-                          {'id': 2, 'mod_time': 1635784783991, 'name': 'test_tag_2'}]
+    expected_results_1 = {"result": [{"id": 1, "mod_time": 1635771586176, "name": "test_tag_1"},
+                                     {"id": 2, "mod_time": 1635784783991, "name": "test_tag_2"}]}
 
     mock_inputs_2 = {
         "extrahop_tag_id": 0
     }
 
-    expected_results_2 = [{'id': 1, 'mod_time': 1635771586176, 'name': 'test_tag_1'}]
+    expected_results_2 = {"result": [{"id": 1, "mod_time": 1635771586176, "name": "test_tag_1"}]}
 
     @patch('fn_extrahop.components.funct_extrahop_rx_get_tags.RxClient', side_effect=mocked_rx_client)
     @pytest.mark.parametrize("mock_inputs, expected_results", [

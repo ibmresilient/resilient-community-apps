@@ -56,24 +56,24 @@ class TestFunctExtrahopRxUpdateDetection:
     mock_inputs_1 = {
         "soar_inc_owner_id": "1",
         "soar_inc_resolution_id": "Unresolved",
-        "extrahop_detection_id": 123,
+        "extrahop_detection_id": 0,
         "incident_id": 123,
         "soar_inc_plan_status": "A",
         "extrahop_participants": "sample text"
     }
 
-    expected_results_1 = {}
+    expected_results_1 = {"result": "success"}
 
     mock_inputs_2 = {
         "soar_inc_owner_id": "2",
         "soar_inc_resolution_id": "Resolved",
-        "extrahop_detection_id": 123,
+        "extrahop_detection_id": 1,
         "incident_id": 123,
         "soar_inc_plan_status": "C",
         "extrahop_participants": "sample text"
     }
 
-    expected_results_2 = {}
+    expected_results_2 = {"result": "failed"}
 
     @patch('fn_extrahop.components.funct_extrahop_rx_update_detection.RxClient', side_effect=mocked_rx_client)
     @pytest.mark.parametrize("mock_inputs, expected_results", [

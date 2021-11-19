@@ -58,14 +58,14 @@ class TestFunctExtrahopRxGetDetections:
         "extrahop_limit": 123
     }
 
-    expected_results_1 = {}
+    expected_results_1 = {"result": []}
 
     mock_inputs_2 = {
         "extrahop_detection_id": 123,
         "extrahop_limit": 123
     }
 
-    expected_results_2 = {}
+    expected_results_2 = {"result": []}
 
     @patch('fn_extrahop.components.funct_extrahop_rx_get_detections.RxClient', side_effect=mocked_rx_client)
     @pytest.mark.parametrize("mock_inputs, expected_results", [

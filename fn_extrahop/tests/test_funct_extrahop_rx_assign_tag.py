@@ -58,11 +58,27 @@ class TestFunctExtrahopRxAssignTag:
         "extrahop_device_ids": "1"
     }
 
-    expected_results_1 = {}
+    expected_results_1 = {"result": "success"}
+
+    mock_inputs_2 = {
+        "extrahop_tag_id": "1",
+        "extrahop_device_ids": "2"
+    }
+
+    expected_results_2 = {"result": "limited_success"}
+
+    mock_inputs_3 = {
+        "extrahop_tag_id": "2",
+        "extrahop_device_ids": "2"
+    }
+
+    expected_results_3 = {"result": "failed"}
 
     @patch('fn_extrahop.components.funct_extrahop_rx_assign_tag.RxClient', side_effect=mocked_rx_client)
     @pytest.mark.parametrize("mock_inputs, expected_results", [
-        (mock_inputs_1, expected_results_1)
+        (mock_inputs_1, expected_results_1),
+        (mock_inputs_2, expected_results_2),
+        (mock_inputs_3, expected_results_3)
     ])
     def test_success(self, mock_cli, circuits_app, mock_inputs, expected_results):
         """ Test calling with sample values for the parameters """

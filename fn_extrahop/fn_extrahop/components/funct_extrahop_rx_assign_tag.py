@@ -50,7 +50,6 @@ class FunctionComponent(AppFunctionComponent):
         rx_cli = RxClient(self.opts, self.options)
         response = rx_cli.assign_tag(**params)
 
-        results = response.json()
         if response.status_code == 204:
             result = "success"
         elif response.status_code == 207:

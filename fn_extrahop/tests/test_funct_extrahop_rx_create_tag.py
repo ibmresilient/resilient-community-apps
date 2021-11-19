@@ -57,11 +57,19 @@ class TestFunctExtrahopRxCreateTag:
         "extrahop_tag_name": "sample text"
     }
 
-    expected_results_1 = {}
+    expected_results_1 = {"result": "success"}
+
+    mock_inputs_2 = {
+        "extrahop_tag_name": "failed"
+    }
+
+    expected_results_2 = {"result": "failed"}
+
 
     @patch('fn_extrahop.components.funct_extrahop_rx_create_tag.RxClient', side_effect=mocked_rx_client)
     @pytest.mark.parametrize("mock_inputs, expected_results", [
-        (mock_inputs_1, expected_results_1)
+        (mock_inputs_1, expected_results_1),
+        (mock_inputs_2, expected_results_2),
     ])
     def test_success(self, mock_cli, circuits_app, mock_inputs, expected_results):
         """ Test calling with sample values for the parameters """
