@@ -446,7 +446,7 @@ class TypeInfo(object):
             "blob": TypeInfo.translate_value_blob,
             "list": TypeInfo.translate_value_list,
             "text": TypeInfo.no_translate,
-            "bool": TypeInfo.no_translate
+            "boolean": TypeInfo.no_translate
         }
 
     @staticmethod
