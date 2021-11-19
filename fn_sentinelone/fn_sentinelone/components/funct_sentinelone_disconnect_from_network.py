@@ -7,11 +7,11 @@ from resilient_lib import IntegrationError, validate_fields
 from fn_sentinelone.lib.sentinelone_common import SentinelOneClient
 
 PACKAGE_NAME = "fn_sentinelone"
-FN_NAME = "sentinelone_connect_to_network"
+FN_NAME = "sentinelone_disconnect_from_network"
 
 
 class FunctionComponent(AppFunctionComponent):
-    """Component that implements function 'sentinelone_connect_to_network'"""
+    """Component that implements function 'sentinelone_disconnect_from_network'"""
 
     def __init__(self, opts):
         super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
@@ -28,9 +28,8 @@ class FunctionComponent(AppFunctionComponent):
 
         sentinelOne_client = SentinelOneClient(self.opts, self.options)
         agent_id = fn_inputs.sentinelone_agent_id
-        results = sentinelOne_client.connect_to_network(agent_id)
+        results = sentinelOne_client.disconnect_from_network(agent_id)
 
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
 
         yield FunctionResult(results)
-

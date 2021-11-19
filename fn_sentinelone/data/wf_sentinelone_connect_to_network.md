@@ -18,14 +18,14 @@
 
 ### Pre-Processing Script
 ```python
-inputs.sentinelone_id = row.sentinelone_dt_agent_id
+inputs.sentinelone_agent_id = row.sentinelone_dt_agent_id
 ```
 
 ### Post-Processing Script
 ```python
 so_inputs = results.get("inputs")
-sentinelone_id = so_inputs.get("sentinelone_id")
-note = u"<b>SentinelOne: Connect to Network </b><br>  SentinelOne Agent Id: {0}".format(sentinelone_id)
+agent_id = so_inputs.get("sentinelone_agent_id")
+note = u"<b>SentinelOne: Connect to Network </b><br>  SentinelOne Agent Id: {0}".format(agent_id)
 content = results.get("content")
 if content:
   data = content.get("data")

@@ -32,6 +32,8 @@ query_param=
 # Optional "resolved" parameter for querying threats from SentinelOne
 # If set to False "resolved" threats will not be escalated to SOAR 
 resolved=False
+# Optional timeout in seconds for downloading threat file from SentinelOne
+# timeout=300
 #verify=false | /path/toclient_certificate.pem
 #http_proxy=
 #https_proxy=

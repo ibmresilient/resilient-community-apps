@@ -7,6 +7,7 @@ import os
 import datetime
 import logging 
 from resilient_lib import RequestsCommon, IntegrationError, validate_fields, str_to_bool
+from resilient_lib.components.requests_common import DEFAULT_TIMEOUT
 
 LOG = logging.getLogger(__name__)
 
@@ -32,7 +33,7 @@ class SentinelOneClient(object):
         self.account_ids = account_ids.split(",") if account_ids else []        
         self.query_param = options.get("query_param", None)
         self.resolved = str_to_bool(options.get("resolved", "False"))
-
+        self.timeout = options.get("timeout", DEFAULT_TIMEOUT)
         self.headers = self.get_headers(self.api_token)
     
 
@@ -199,9 +200,22 @@ class SentinelOneClient(object):
         return threat_notes
 
     def get_system_info(self):
-        """ Get threat notes for a given threat
+        """ Get SentinelOne management console sytem info.
         """
         url = u"{0}/system/info".format(self.base_url)
+
+        params = {
+        }
+
+        response = self.rc.execute("GET", url, headers=self.headers, params=params, 
+                                    verify=self.verify, proxies=self.rc.get_proxies())
+        response.raise_for_status()
+        return response.json()
+
+    def download_from_cloud(self, threat_id):
+        """ Get download a threat file from cloud
+        """
+        url = u"{0}/threats/{1}/download-from-cloud".format(self.base_url, threat_id)
 
         params = {
         }
@@ -258,6 +272,19 @@ class SentinelOneClient(object):
         }
 
         response = self.rc.execute("POST", url, headers=self.headers, json=payload, 
+                                    verify=self.verify, proxies=self.rc.get_proxies())
+        response.raise_for_status()
+        return response.json()
+
+    def get_hash_reputation(self, hash):
+        """ Disconnect the endpoint from the network
+        """
+        url = u"{0}/hashes/{1}/reputation".format(self.base_url, hash)
+
+        params = {
+        }
+
+        response = self.rc.execute("GET", url, headers=self.headers, params=params, 
                                     verify=self.verify, proxies=self.rc.get_proxies())
         response.raise_for_status()
         return response.json()
