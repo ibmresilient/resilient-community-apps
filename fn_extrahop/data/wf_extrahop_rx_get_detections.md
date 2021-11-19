@@ -23,7 +23,51 @@ None
 
 ### Post-Processing Script
 ```python
-None
+##  ExtraHop - wf_extrahop_rx_get_detections post processing script ##
+#  Globals
+FN_NAME = "funct_extrahop_rx_get_detections"
+WF_NAME = "Example: Extrahop revealx get detections"
+CONTENT = results.content
+INPUTS = results.inputs
+QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
+DATA_TBL_FIELDS = ["appliance_id", "assignee", "categories", "det_description", "end_time", "det_id", "is_user_created",
+                   "mitre_tactics", "mitre_techniques", "participants", "properties", "resolution", "risk_score",
+                   "start_time", "status", "ticket_id", "ticket_url", "title", "type", "update_time"]
+# Processing
+def main():
+    note_text = u''
+    if CONTENT:
+        dets = CONTENT.result
+        note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: There were <b>{1}</b> Activitymaps returned for SOAR " \
+                    u"function <b>{2}</b>.".format(WF_NAME, len(dets), FN_NAME)
+        if dets:
+            for det in dets:
+                newrow = incident.addRow("extrahops_detections")
+                newrow.query_execution_date = QUERY_EXECUTION_DATE
+                for f1 in DATA_TBL_FIELDS:
+                    f2 = f1
+                    if f1.startswith("det_"):
+                        f2 = f1.split('_', 1)[1]
+                    if det[f1] is None:
+                            newrow[f1] = det[f2]
+                    if isinstance(det[f1], list):
+                        newrow[f1] = "{}".format(", ".join(det[f2]))
+                    elif isinstance(det[f1], bool):
+                        newrow[f1] = str(det[f2])
+                    else:
+                        newrow[f1] = "{}".format(det[f2])
+            note_text += u"<br>The data table <b>{0}</b> has been updated".format("Extrahop Detections")
+
+    else:
+        note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
+                     u"to get detections." \
+            .format(WF_NAME, FN_NAME)
+
+    incident.addNote(helper.createRichText(note_text))
+
+main()
+
+
 ```
 
 ---

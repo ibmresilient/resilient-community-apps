@@ -24,11 +24,64 @@ if inputs.extrahop_search_filter is None:
 for prop in ["filter", "category", "assignee", "ticket_id", "status", "resolution"]:
   if prop not in inputs.extrahop_search_filter:
     raise ValueError("The search filter is missing property '{}'".format(prop))
+if rule.properties.extrahop_active_from:
+  inputs.extrahop_active_from = rule.properties.extrahop_active_from
+if rule.properties.extrahop_active_until:
+  inputs.extrahop_active_until = rule.properties.extrahop_active_until
+if rule.properties.extrahop_limit:
+  inputs.extrahop_limit = rule.properties.extrahop_limit
+if rule.properties.extrahop_offset:
+  inputs.extrahop_offset = rule.properties.extrahop_offset
+if rule.properties.extrahop_update_time:
+  inputs.extrahop_update_time = rule.properties.extrahop_update_time
 ```
 
 ### Post-Processing Script
 ```python
-None
+##  ExtraHop - wf_extrahop_rx_search_detections post processing script ##
+#  Globals
+FN_NAME = "funct_extrahop_rx_search_detections"
+WF_NAME = "Example: Extrahop revealx search detections"
+CONTENT = results.content
+INPUTS = results.inputs
+QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
+DATA_TBL_FIELDS = ["appliance_id", "assignee", "categories", "det_description", "end_time", "det_id", "is_user_created",
+                   "mitre_tactics", "mitre_techniques", "participants", "properties", "resolution", "risk_score",
+                   "start_time", "status", "ticket_id", "ticket_url", "title", "type", "update_time"]
+# Processing
+def main():
+    note_text = u''
+    if CONTENT:
+        dets = CONTENT.result
+        note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: There were <b>{1}</b> Detections returned for SOAR " \
+                    u"function <b>{2}</b>.".format(WF_NAME, len(dets), FN_NAME)
+        if dets:
+            for det in dets:
+                newrow = incident.addRow("extrahops_detections")
+                newrow.query_execution_date = QUERY_EXECUTION_DATE
+                for f1 in DATA_TBL_FIELDS:
+                    f2 = f1
+                    if f1.startswith("det_"):
+                      f2 = f1.split('_', 1)[1]
+                    if det[f1] is None:
+                        newrow[f1] = det[f2]
+                    if isinstance(det[f1], list):
+                        newrow[f1] = "{}".format(", ".join(det[f2]))
+                    elif isinstance(det[f1], bool):
+                        newrow[f1] = str(det[f2])
+                    else:
+                        newrow[f1] = "{}".format(det[f2])
+            note_text += u"<br>The data table <b>{0}</b> has been updated".format("Extrahop Detections")
+
+    else:
+        note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
+                     u"to search detections." \
+            .format(WF_NAME, FN_NAME)
+
+    incident.addNote(helper.createRichText(note_text))
+
+main()
+
 ```
 
 ---
