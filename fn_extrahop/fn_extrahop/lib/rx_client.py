@@ -210,6 +210,7 @@ class RxClient():
         :param plan_status: SOAR incident status (str)
         :param owner_id: SOAR incident owner ID (str)
         :param resolution_id: SOAR incident resolution (str)
+        :param participants: (Optional) Participants (json str)
         :return Result in json format.
         """
         uri = self._endpoints["detections"].format(detection_id)
@@ -229,6 +230,14 @@ class RxClient():
             "assignee": owner_id
         }
         data["status"] = status_map[plan_status]
+
+        if participants:
+            try:
+                p_data = json.loads(participants)
+            except ValueError:
+                raise ValueError("The participant parameter is not valid json content")
+        if p_data.get("participants"):
+            data["participants"] = p_data.get("participants")
 
         if plan_status == 'C':
             data["resolution"] = resolution_map[resolution_id]
@@ -350,7 +359,6 @@ class RxClient():
         """
         # Set default uri
         uri = self._endpoints["activitymaps"].format('')
-        params = {}
 
         if activitymap_id is not None:
             uri = self._endpoints["activitymaps"].format(activitymap_id)
