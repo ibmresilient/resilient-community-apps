@@ -18,7 +18,7 @@
 
 ### Pre-Processing Script
 ```python
-inputs.incident_id = incident_id
+inputs.incident_id = incident.id
 inputs.extrahop_bpf = "host {}".format(artifact.value)
 inputs.extrahop_active_from = rule.properties.extrahop_active_from
 inputs.extrahop_active_until = rule.properties.extrahop_active_until
@@ -27,7 +27,27 @@ inputs.extrahop_output = rule.properties.extrahop_output
 
 ### Post-Processing Script
 ```python
-None
+##  ExtraHop - wf_extrahop_rx_search_packets post processing script ##
+#  Globals
+FN_NAME = "funct_extrahop_rx_search_packets"
+WF_NAME = "Example: Extrahop revealx search packets"
+CONTENT = results.content
+INPUTS = results.inputs
+
+# Processing
+def main():
+    note_text = u''
+    if CONTENT:
+        pass
+    else:
+        note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
+                     u"to search packets."\
+            .format(WF_NAME, urls, FN_NAME)
+
+    incident.addNote(helper.createRichText(note_text))
+
+main()
+
 ```
 
 ---
