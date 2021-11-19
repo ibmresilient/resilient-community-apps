@@ -5,7 +5,7 @@
 """AppFunction implementation"""
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from resilient_lib import IntegrationError, validate_fields
+from resilient_lib import validate_fields
 from fn_extrahop.lib.rx_client import RxClient
 
 PACKAGE_NAME = "fn_extrahop"
@@ -63,4 +63,3 @@ class FunctionComponent(AppFunctionComponent):
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
 
         yield FunctionResult(results)
-

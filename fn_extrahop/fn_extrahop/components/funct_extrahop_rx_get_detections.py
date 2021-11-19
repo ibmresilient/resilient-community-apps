@@ -5,7 +5,7 @@
 """AppFunction implementation"""
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from resilient_lib import IntegrationError, validate_fields
+from resilient_lib import validate_fields
 from fn_extrahop.lib.rx_client import RxClient
 
 PACKAGE_NAME = "fn_extrahop"
@@ -21,7 +21,8 @@ class FunctionComponent(AppFunctionComponent):
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """
-        Function: Get detections information from Extrahop Reveal(x) . Optional parameters extrahop_detecion_id
+        Function: Get detections information from Extrahop Reveal(x).
+                  Optional parameters extrahop_detecion_id
         Inputs:
             -   fn_inputs.extrahop_limit
             -   fn_inputs.extrahop_detection_id
@@ -57,4 +58,3 @@ class FunctionComponent(AppFunctionComponent):
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
 
         yield FunctionResult(results)
-

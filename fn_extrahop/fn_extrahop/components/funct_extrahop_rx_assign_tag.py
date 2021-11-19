@@ -3,7 +3,7 @@
 """AppFunction implementation"""
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from resilient_lib import IntegrationError, validate_fields
+from resilient_lib import validate_fields
 from fn_extrahop.lib.rx_client import RxClient
 
 PACKAGE_NAME = "fn_extrahop"
@@ -19,7 +19,8 @@ class FunctionComponent(AppFunctionComponent):
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """
-        Function: Assign a tag to a list of devices ids forExtrahop Reveal(x). Optional parameters tag_id. devices_ids.
+        Function: Assign a tag to a list of devices ids forExtrahop Reveal(x).
+                  Optional parameters tag_id. devices_ids.
         Inputs:
             -   fn_inputs.extrahop_tag_id
             -   fn_inputs.extrahop_device_ids
@@ -43,8 +44,7 @@ class FunctionComponent(AppFunctionComponent):
         for i in ["extrahop_tag_id", "extrahop_device_ids"]:
             if not hasattr(fn_inputs, i):
                 raise ValueError("Missing '{}' function parameter".format(i))
-            else:
-                params.update({i.split('_', 1)[1]: getattr(fn_inputs, i)})
+            params.update({i.split('_', 1)[1]: getattr(fn_inputs, i)})
 
         # Call 3rd party API :
         rx_cli = RxClient(self.opts, self.options)

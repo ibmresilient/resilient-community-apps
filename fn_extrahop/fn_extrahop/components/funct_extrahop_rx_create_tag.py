@@ -3,7 +3,7 @@
 """AppFunction implementation"""
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from resilient_lib import IntegrationError, validate_fields
+from resilient_lib import validate_fields
 from fn_extrahop.lib.rx_client import RxClient
 
 PACKAGE_NAME = "fn_extrahop"
@@ -39,10 +39,11 @@ class FunctionComponent(AppFunctionComponent):
         # Set params dict:
         params = {}
         self.LOG.info("fn_inputs: %s", fn_inputs)
+
         if not hasattr(fn_inputs, "extrahop_tag_name"):
             raise ValueError("Missing 'extrahop_tag_name' function parameter")
-        else:
-            params.update({"tag_name": getattr(fn_inputs, "extrahop_tag_name")})
+
+        params.update({"tag_name": getattr(fn_inputs, "extrahop_tag_name")})
 
         # Call 3rd party API :
         rx_cli = RxClient(self.opts, self.options)
