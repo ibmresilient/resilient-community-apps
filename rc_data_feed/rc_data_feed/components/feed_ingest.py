@@ -4,6 +4,7 @@
 
 """Feed component implementation."""
 
+import ast
 import logging
 import sys
 import traceback
@@ -12,6 +13,7 @@ from pydoc import locate
 from resilient_circuits import ResilientComponent, handler, ActionMessage
 from resilient_lib import str_to_bool, get_file_attachment
 from resilient import SimpleHTTPException
+
 
 from rc_data_feed.lib.type_info import FullTypeInfo, ActionMessageTypeInfo
 from rc_data_feed.lib.feed import FeedContext
@@ -38,7 +40,7 @@ def build_feed_outputs(rest_client_helper, opts, feed_names):
     """
     feed_config_names = [name.strip() for name in feed_names.split(',')]
 
-    feed_outputs = list()
+    feed_outputs = {}
 
     for feed_config_name in feed_config_names:
         feed_options = opts.get(feed_config_name, {})
@@ -49,7 +51,7 @@ def build_feed_outputs(rest_client_helper, opts, feed_names):
         LOG.debug(namespace)
         obj = locate(namespace)(rest_client_helper, feed_options)
 
-        feed_outputs.append(obj)
+        feed_outputs[feed_config_name] = obj
 
     return feed_outputs
 
@@ -73,7 +75,7 @@ def range_chunks(chunk_range, chunk_size):
         start += chunk_size
 
 def send_data(type_info, inc_id, rest_client_helper, payload,\
-              feed_outputs, is_deleted, incl_attachment_data):
+              feed_outputs, workspaces, is_deleted, incl_attachment_data):
     """
     perform the sync to the different datastores
     :param type_info:
@@ -81,6 +83,7 @@ def send_data(type_info, inc_id, rest_client_helper, payload,\
     :param rest_client:
     :param payload:
     :param feed_outputs:
+    :param workspaces: mapping of workspace to feeds
     :param is_deleted: true/false
     :param incl_attachment_data: true/false
     :return: None
@@ -106,11 +109,14 @@ def send_data(type_info, inc_id, rest_client_helper, payload,\
         payload['content'] = get_file_attachment(rest_client_helper.inst_rest_client, inc_id,
                                                  artifact_id=payload['id'])
 
-    for feed_output in feed_outputs:
+    # get the incident workspace for this data
+    workspace = type_info.get_workspace()
+    for feed_name, feed_output in feed_outputs.items():
         # don't let a failure in one feed break all the rest
         try:
-            LOG.debug("Calling feed %s", feed_output.__class__.__name__)
-            feed_output.send_data(context, payload)
+            if not workspaces or (workspace in workspaces and feed_name in workspaces[workspace]):
+                LOG.debug("Calling feed %s", feed_output.__class__.__name__)
+                feed_output.send_data(context, payload)
         except Exception as err:
             LOG.error("Failure in update to %s %s", feed_output.__class__.__name__, err)
             error_trace = traceback.format_exc()
@@ -140,7 +146,8 @@ class FeedComponent(ResilientComponent):
                 rest_client_helper = RestClientHelper(self.rest_client)
 
                 self.feed_outputs = build_feed_outputs(rest_client_helper, opts, self.options.get("feed_names", None))
-
+                # build the list workspaces to plugin, if present
+                self.workspaces = ast.literal_eval("{{ {0} }}".format(self.options.get("workspaces", "")))
                 # expose attachment content setting
                 self.incl_attachment_data = str_to_bool(self.options.get("include_attachment_data", 'false'))
 
@@ -148,7 +155,7 @@ class FeedComponent(ResilientComponent):
                 if str_to_bool(self.options.get('reload', 'false')):
                     query_api_method = str_to_bool(self.options.get("reload_query_api_method", 'false'))
 
-                    reload_feeds = Reload(rest_client_helper, self.feed_outputs,
+                    reload_feeds = Reload(rest_client_helper, self.feed_outputs, self.workspaces,
                                     query_api_method=query_api_method,
                                     incl_attachment_data=self.incl_attachment_data)
                     reload_feeds.reload_all()
@@ -186,7 +193,7 @@ class FeedComponent(ResilientComponent):
                 payload = event.message[type_name]
 
             send_data(type_info, inc_id, rest_client_helper, payload,
-                      self.feed_outputs, is_deleted, self.incl_attachment_data)
+                      self.feed_outputs, self.workspaces, is_deleted, self.incl_attachment_data)
 
         except Exception as err:
             error_trace = traceback.format_exc()
@@ -196,17 +203,19 @@ class FeedComponent(ResilientComponent):
 
 
 class Reload(object):
-    def __init__(self, rest_client_helper, feed_outputs,\
+    def __init__(self, rest_client_helper, feed_outputs, workspaces, \
                  query_api_method=False, incl_attachment_data=False):
         """
 
         :param rest_client: not the instance as we may need to refresh the client at a later point
-        :param feed_outputs:
+        :param feed_outputs: dict of plugins installed: { 'feed_name': plugin_object }
+        :param workspace: dict of workspaces and the feeds to use: { 'workspace': ['workspaceA', 'workspaceB'] }
         :param query_api_method:
         :param incl_attachment_data: true/false
         """
         self.rest_client_helper = rest_client_helper
         self.feed_outputs = feed_outputs
+        self.workspaces = workspaces
         self.query_api_method = query_api_method
         self.incl_attachment_data = incl_attachment_data
 
@@ -285,7 +294,7 @@ class Reload(object):
                 type_info = type_info_index[FeedComponent.INCIDENT_TYPE_ID]
 
                 send_data(type_info, inc_id, self.rest_client_helper, incident,
-                          self.feed_outputs, False, self.incl_attachment_data)
+                          self.feed_outputs, self.workspaces, False, self.incl_attachment_data)
 
                 # query api call should be done now
                 if query_api_method:
@@ -334,7 +343,7 @@ class Reload(object):
             inc_id = result['inc_id']
 
             send_data(type_info, inc_id, self.rest_client_helper, result_data,
-                      self.feed_outputs, False, self.incl_attachment_data)
+                      self.feed_outputs, self.workspaces, False, self.incl_attachment_data)
 
     def _populate_others_query(self,
                          inc_id,
@@ -364,7 +373,7 @@ class Reload(object):
         item_list = rest_client_helper.get(query)
         for item in item_list:
             send_data(type_info, inc_id, rest_client_helper,
-                      item, self.feed_outputs, False, self.incl_attachment_data)
+                      item, self.feed_outputs, self.workspaces, False, self.incl_attachment_data)
 
         return len(item_list)
 
@@ -373,7 +382,7 @@ class Reload(object):
         item_list = rest_client_helper.get(query)
         for item in item_list:
             send_data(type_info, inc_id, rest_client_helper, item,
-                      self.feed_outputs, False, self.incl_attachment_data)
+                      self.feed_outputs, self.workspaces, False, self.incl_attachment_data)
 
         return len(item_list)
 
@@ -382,7 +391,7 @@ class Reload(object):
         item_list = rest_client_helper.get(query)
         for item in item_list:
             send_data(type_info, inc_id, rest_client_helper, item,
-            self.feed_outputs, False, self.incl_attachment_data)
+            self.feed_outputs, self.workspaces, False, self.incl_attachment_data)
 
         return len(item_list)
 
@@ -391,7 +400,7 @@ class Reload(object):
         item_list = rest_client_helper.get(query)
         for item in item_list:
             send_data(type_info, inc_id, rest_client_helper, item,
-                      self.feed_outputs, False, self.incl_attachment_data)
+                      self.feed_outputs, self.workspaces, False, self.incl_attachment_data)
 
         return len(item_list)
 
@@ -400,7 +409,7 @@ class Reload(object):
         item_list = rest_client_helper.post(query, None)
         for item in item_list['attachments']:
             send_data(type_info, inc_id, rest_client_helper, item,
-                      self.feed_outputs, False, self.incl_attachment_data)
+                      self.feed_outputs, self.workspaces, False, self.incl_attachment_data)
 
         return len(item_list)
 
@@ -414,7 +423,7 @@ class Reload(object):
 
             for row in table['rows']:
                 send_data(type_info, inc_id, rest_client_helper, row,
-                          self.feed_outputs, False, self.incl_attachment_data)
+                          self.feed_outputs, self.workspaces, False, self.incl_attachment_data)
 
         return len(item_list)
 

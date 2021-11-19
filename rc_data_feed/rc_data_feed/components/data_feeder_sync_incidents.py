@@ -3,6 +3,7 @@
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
+import ast
 import logging
 import sys
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
@@ -56,11 +57,13 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("starting...")
             rest_client_helper = RestClientHelper(self.rest_client)
             feed_outputs = build_feed_outputs(rest_client_helper, self.opts, self.options.get("feed_names", None))
+            # build the list workspaces to plugin, if present
+            self.workspaces = ast.literal_eval("{{ {} }}".format(self.options.get("workspaces", "")))
 
             # expose attachment content setting
             self.incl_attachment_data = str_to_bool(self.options.get("include_attachment_data", 'false'))
 
-            df = Reload(rest_client_helper, feed_outputs, 
+            df = Reload(rest_client_helper, feed_outputs, self.workspaces,
                         query_api_method=df_query_api_method,
                         incl_attachment_data=self.incl_attachment_data)
             reloaded_incidents = df.reload_all(min_inc_id=df_min_incident_id, max_inc_id=df_max_incident_id)

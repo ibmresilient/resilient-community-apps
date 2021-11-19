@@ -21,5 +21,8 @@ queue=feed_data
 
 # set to true if attachment data should be part of payload send to plugins
 include_attachment_data=false
+# if necessary, specify the supported workspace and the list of feeds associated with it
+# ex: 'workspaceA': ['sqlserver_feed'], 'workspaceB': ['kafka_feed', 'resilient_feed']
+workspaces=
 """
     return config_data

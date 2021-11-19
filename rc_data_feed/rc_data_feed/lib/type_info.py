@@ -482,6 +482,13 @@ class ActionMessageTypeInfo(TypeInfo):
 
         self.type_info_map = type_info_map
 
+    def get_workspace(self):
+        if self.type_info_map.get('incident'):
+            for workspace in self.type_info_map['incident'].get('fields', {}).get('workspace', {}).get('values', {}).values():
+                return workspace.get('label', None)
+
+        return None
+
     def get_select_value(self, raw_value, field):
         if isinstance(raw_value, dict):
             # Handle case where the select item is an object (we want to index into the field def
