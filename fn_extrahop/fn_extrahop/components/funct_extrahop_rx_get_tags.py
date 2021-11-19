@@ -48,7 +48,8 @@ class FunctionComponent(AppFunctionComponent):
         rx_cli = RxClient(self.opts, self.options)
         response = rx_cli.get_tags(**params)
 
-        results = response.json()
+        # Response can be a list, returned result needs to be a dict
+        results = {"result": response.json()}
 
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
 

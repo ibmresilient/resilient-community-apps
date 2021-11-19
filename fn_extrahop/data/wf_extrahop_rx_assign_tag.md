@@ -24,7 +24,27 @@ inputs.extrahop_tag_id = 1
 
 ### Post-Processing Script
 ```python
-None
+##  ExtraHop - wf_extrahop_rx_assign_tag post processing script ##
+#  Globals
+FN_NAME = "funct_extrahop_rx_assign_tag"
+WF_NAME = "Example: Extrahop revealx assign tag"
+CONTENT = results.content
+INPUTS = results.inputs
+
+# Processing
+def main():
+    note_text = u''
+    if CONTENT:
+        pass
+    else:
+        note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
+                     u"to assign a tag."\
+            .format(WF_NAME, FN_NAME)
+
+    incident.addNote(helper.createRichText(note_text))
+
+main()
+
 ```
 
 ---

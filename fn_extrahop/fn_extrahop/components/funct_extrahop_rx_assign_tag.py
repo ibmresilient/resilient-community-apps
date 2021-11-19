@@ -51,6 +51,14 @@ class FunctionComponent(AppFunctionComponent):
         response = rx_cli.assign_tag(**params)
 
         results = response.json()
+        if response.status_code == 204:
+            result = "success"
+        elif response.status_code == 207:
+            result = "limited_success"
+        else:
+            result = "failed"
+
+        results = {"result": result}
 
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
 

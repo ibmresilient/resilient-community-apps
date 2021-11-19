@@ -27,7 +27,43 @@ if inputs.extrahop_tag_name is None:
 
 ### Post-Processing Script
 ```python
-None
+##  ExtraHop - wf_extrahop_rx_create_tag post processing script ##
+#  Globals
+FN_NAME = "funct_extrahop_rx_create_tag"
+WF_NAME = "Example: Extrahop revealx create tag"
+CONTENT = results.content
+INPUTS = results.inputs
+QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
+
+# Processing
+def main():
+    note_text = u''
+    tag = INPUTS.get("extrahop_tag_name")
+    if CONTENT:
+        result = CONTENT.result
+        if result == "success":
+            tag = INPUTS.get("extrahop_tag_name")
+            note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Successfully created tag <b>{1}</b> for SOAR " \
+                        u"function <b>{2}</b>.".format(WF_NAME, tag, FN_NAME)
+            newrow = incident.addRow("extrahop_tags")
+            newrow.query_execution_date = QUERY_EXECUTION_DATE
+            newrow.tag = tag
+            note_text += u"<br>The data table <b>{0}</b> has been updated".format("Extrahop Tags")
+        elif result == "failed":
+            note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Failed to create tag <b>{1}</b> for " \
+                        u"SOAR function <b>{2}</b>.".format(WF_NAME, tag, FN_NAME)
+        else:
+            note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Create tag <b>{1}</b> failed with unexpected " \
+                        u"response for SOAR function <b>{2}</b>.".format(WF_NAME, tag, FN_NAME)
+    else:
+        note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
+                     u"to create a tag <b>{1}</b>."\
+            .format(WF_NAME, tag, FN_NAME)
+
+    incident.addNote(helper.createRichText(note_text))
+
+main()
+
 ```
 
 ---
