@@ -36,7 +36,13 @@ if content:
       agent_row = incident.addRow("sentinelone_agents_dt")
       agent_row.sentinelone_dt_query_date = Date()
       agent_row.sentinelone_dt_agent_id = agent.get("id")
-      agent_row.sentinelone_dt_network_status = agent.get("networkStatus")
+      networkStatus = agent.get("networkStatus")
+      if networkStatus == "connected":
+        display_color = "green"
+      else:
+        display_color = "red"
+      networkStatus = u"""<p style= "color:{color}">{status}</p>""".format(color=display_color, status=networkStatus)
+      agent_row.sentinelone_dt_network_status = helper.createRichText(networkStatus)
       agent_row.sentinelone_dt_computername = agent.get("computerName")
       agent_row.sentinelone_dt_external_ip = agent.get("externalIp")
       agent_row.sentinelone_dt_site = agent.get("siteName")

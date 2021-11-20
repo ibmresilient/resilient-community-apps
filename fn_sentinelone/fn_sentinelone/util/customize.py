@@ -21,9 +21,9 @@ def codegen_reload_data():
     return {
         "package": u"fn_sentinelone",
         "message_destinations": [u"fn_sentinelone"],
-        "functions": [u"sentinelone_connect_to_network", u"sentinelone_disconnect_from_network", u"sentinelone_download_from_cloud", u"sentinelone_get_agent_details", u"sentinelone_get_hash_reputation", u"sentinelone_get_threat_details", u"sentinelone_update_notes_from_sentinelone"],
-        "workflows": [u"sentinelone_add_agent_to_data_table", u"sentinelone_connect_to_network", u"sentinelone_disconnect_from_network", u"sentinelone_download_threat_from_cloud", u"sentinelone_get_hash_reputation", u"sentinelone_update_notes_from_sentinelone", u"sentinelone_write_agent_details_to_note", u"sentinelone_write_threat_details_to_note"],
-        "actions": [u"SentinelOne: Add Agent to Data Table", u"SentinelOne: Connect Agent to Network", u"SentinelOne: Disconnect Agent From Network", u"SentinelOne: Download From Cloud", u"SentinelOne: Get Hash Reputation", u"SentinelOne: Update Agent in Data table", u"SentinelOne: Update Notes from SentinelOne", u"SentinelOne: Write Agent Details to Note", u"SentinelOne: Write Threat Details to Note"],
+        "functions": [u"sentinelone_abort_disk_scan", u"sentinelone_connect_to_network", u"sentinelone_disconnect_from_network", u"sentinelone_download_from_cloud", u"sentinelone_get_agent_details", u"sentinelone_get_agents", u"sentinelone_get_hash_reputation", u"sentinelone_get_threat_details", u"sentinelone_initiate_disk_scan", u"sentinelone_shutdown_agent", u"sentinelone_update_notes_from_sentinelone"],
+        "workflows": [u"sentinelone_add_agent_to_data_table", u"sentinelone_connect_to_network", u"sentinelone_disconnect_from_network", u"sentinelone_download_threat_from_cloud", u"sentinelone_get_hash_reputation", u"sentinelone_initiate_disk_scan", u"sentinelone_shutdown_agent", u"sentinelone_update_notes_from_sentinelone", u"sentinelone_write_agent_details_to_note", u"sentinelone_write_threat_details_to_note"],
+        "actions": [u"SentinelOne: Add Agent to Data Table", u"SentinelOne: Connect Agent to Network", u"SentinelOne: Disconnect Agent From Network", u"SentinelOne: Download From Cloud", u"SentinelOne: Get Hash Reputation", u"SentinelOne: Initiate Disk Scan", u"SentinelOne: Shutdown Agent", u"SentinelOne: Update Agent in Data table", u"SentinelOne: Update Notes from SentinelOne", u"SentinelOne: Write Agent Details to Note", u"SentinelOne: Write Threat Details to Note"],
         "incident_fields": [u"sentinelone_agent_id", u"sentinelone_classification", u"sentinelone_confidence_level", u"sentinelone_incident_status", u"sentinelone_mitigation_status", u"sentinelone_mitigation_status_description", u"sentinelone_threat_id", u"sentinelone_threat_name", u"sentinelone_threat_overview_url"],
         "incident_artifact_types": [],
         "incident_types": [],
@@ -44,6 +44,7 @@ def customization_data(client=None):
     - Message Destinations:
         - fn_sentinelone
     - Functions:
+        - sentinelone_abort_disk_scan
         - sentinelone_connect_to_network
         - sentinelone_disconnect_from_network
         - sentinelone_download_from_cloud
@@ -51,14 +52,17 @@ def customization_data(client=None):
         - sentinelone_get_agents
         - sentinelone_get_hash_reputation
         - sentinelone_get_threat_details
+        - sentinelone_initiate_disk_scan
+        - sentinelone_shutdown_agent
         - sentinelone_update_notes_from_sentinelone
     - Workflows:
         - sentinelone_add_agent_to_data_table
         - sentinelone_connect_to_network
         - sentinelone_disconnect_from_network
         - sentinelone_download_threat_from_cloud
-        - sentinelone_get_agents
         - sentinelone_get_hash_reputation
+        - sentinelone_initiate_disk_scan
+        - sentinelone_shutdown_agent
         - sentinelone_update_notes_from_sentinelone
         - sentinelone_write_agent_details_to_note
         - sentinelone_write_threat_details_to_note
@@ -68,6 +72,8 @@ def customization_data(client=None):
         - SentinelOne: Disconnect Agent From Network
         - SentinelOne: Download From Cloud
         - SentinelOne: Get Hash Reputation
+        - SentinelOne: Initiate Disk Scan
+        - SentinelOne: Shutdown Agent
         - SentinelOne: Update Agent in Data table
         - SentinelOne: Update Notes from SentinelOne
         - SentinelOne: Write Agent Details to Note

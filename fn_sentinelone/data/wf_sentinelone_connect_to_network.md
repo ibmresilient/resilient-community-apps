@@ -30,9 +30,11 @@ content = results.get("content")
 if content:
   data = content.get("data")
   if data:
-    if data.get("affected") <= 0:
+    if int(data.get("affected")) <= 0:
       note = u"{0} is NOT connected to network".format(note)
     else:
+      networkStatus = u"""<p style= "color:{color}">{status}</p>""".format(color="green", status="connected")
+      row["sentinelone_dt_network_status"] = helper.createRichText(networkStatus)
       note = u"{0} is connected to network".format(note)
   else:
     note = u"{0} no data returned from function".format(note)

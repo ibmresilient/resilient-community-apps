@@ -259,10 +259,44 @@ class SentinelOneClient(object):
         response.raise_for_status()
         return response.json()
 
+    def abort_scan(self, agents_id):
+        """ Abort disk scan of the agent
+        """
+        url = u"{0}/agents/actions/abort-scan".format(self.base_url)
+
+        payload = {
+            "filter": {
+                "ids": agents_id
+            },
+            "data": {}
+        }
+
+        response = self.rc.execute("POST", url, headers=self.headers, json=payload, 
+                                    verify=self.verify, proxies=self.rc.get_proxies())
+        response.raise_for_status()
+        return response.json()
+
     def initiate_scan(self, agents_id):
-        """ Disconnect the endpoint from the network
+        """ Initiate Full Disk Scan of the agent
         """
         url = u"{0}/agents/actions/initiate-scan".format(self.base_url)
+
+        payload = {
+            "filter": {
+                "ids": agents_id
+            },
+            "data": {}
+        }
+
+        response = self.rc.execute("POST", url, headers=self.headers, json=payload, 
+                                    verify=self.verify, proxies=self.rc.get_proxies())
+        response.raise_for_status()
+        return response.json()
+
+    def shutdown_agent(self, agents_id):
+        """ Initiate shutdown of the agent
+        """
+        url = u"{0}/agents/actions/shutdown".format(self.base_url)
 
         payload = {
             "filter": {

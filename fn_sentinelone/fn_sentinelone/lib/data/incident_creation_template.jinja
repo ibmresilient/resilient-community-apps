@@ -2,8 +2,8 @@
   {%- set comma = joiner(",") -%}
   {# JINJA template for creating a new SOAR incident from a SentinelOne threat. #}
   "name": "SentinelOne Alert - {{ agentRealtimeInfo.accountName }} - {{ agentRealtimeInfo.agentComputerName }} - {{ threatInfo.threatName }}",
-  "discovered_date": {{ threatInfo.createdAt|resilient_datetimeformat }},
-  "start_date": {{ threatInfo.createdAt|resilient_datetimeformat }},
+   "start_date": {{ threatInfo.createdAt|resilient_datetimeformat }},
+   "discovered_date": {{ threatInfo.createdAt|resilient_datetimeformat }},
   "description": {
     "format": "text",
     "content": "{{ threatInfo.threatName }}"
