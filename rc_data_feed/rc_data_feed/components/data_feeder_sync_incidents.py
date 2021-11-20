@@ -66,7 +66,8 @@ class FunctionComponent(ResilientComponent):
             df = Reload(rest_client_helper, feed_outputs, self.workspaces,
                         query_api_method=df_query_api_method,
                         incl_attachment_data=self.incl_attachment_data)
-            reloaded_incidents = df.reload_all(min_inc_id=df_min_incident_id, max_inc_id=df_max_incident_id)
+            reloaded_incidents = df.reload_all(self.options.get("reload_types", ""),
+                                               min_inc_id=df_min_incident_id, max_inc_id=df_max_incident_id)
 
             result_payload = result.done(True, {"num_of_sync_incidents": reloaded_incidents})
 

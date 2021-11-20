@@ -115,7 +115,7 @@ def send_data(type_info, inc_id, rest_client_helper, payload,\
         # don't let a failure in one feed break all the rest
         try:
             if not workspaces or (workspace in workspaces and feed_name in workspaces[workspace]):
-                LOG.debug("Calling feed %s for workspace %s", feed_output.__class__.__name__, workspace)
+                LOG.debug("Calling feed %s for workspace: %s", feed_output.__class__.__name__, workspace)
                 feed_output.send_data(context, payload)
         except Exception as err:
             LOG.error("Failure in update to %s %s", feed_output.__class__.__name__, err)
@@ -147,8 +147,13 @@ class FeedComponent(ResilientComponent):
 
                 self.feed_outputs = build_feed_outputs(rest_client_helper, opts, self.options.get("feed_names", None))
                 # build the list workspaces to plugin, if present
-                self.workspaces = ast.literal_eval("{{ {0} }}".format(self.options.get("workspaces", "")))
-                LOG.debug(self.workspaces)
+                try:
+                    self.workspaces = ast.literal_eval("{{ {0} }}".format(self.options.get("workspaces", "")))
+                    LOG.debug(self.workspaces)
+                except SyntaxError as e:
+                    LOG.error("Review syntax for workspaces: %s", str(e))
+                    self.workspaces = {}
+
                 # expose attachment content setting
                 self.incl_attachment_data = str_to_bool(self.options.get("include_attachment_data", 'false'))
 
@@ -159,7 +164,7 @@ class FeedComponent(ResilientComponent):
                     reload_feeds = Reload(rest_client_helper, self.feed_outputs, self.workspaces,
                                     query_api_method=query_api_method,
                                     incl_attachment_data=self.incl_attachment_data)
-                    reload_feeds.reload_all()
+                    reload_feeds.reload_all(self.options.get("reload_types", ""))
 
         except Exception as err:
             LOG.error("exception: %s", err)
@@ -257,20 +262,27 @@ class Reload(object):
                 if type_id not in [FeedComponent.DATATABLE_TYPE_ID, FeedComponent.INCIDENT_TYPE_ID]:
                     self.search_type_names.append(name)
 
-    def reload_all(self, min_inc_id=0, max_inc_id=sys.maxsize):
+    def reload_all(self, reload_types, min_inc_id=0, max_inc_id=sys.maxsize):
         """
         load incidents and related notes, tasks, artifacts, etc based on min and max values
+        :param reload_types: comma separated list of object types to reload. datatables can be specified
         :param min_inc_id: defaults to 0 for all incidents
         :param max_inc_id: defaults to max number for all incidents
         :return: # of incidents sync'd
         """
+
+        reload_types = [ type.strip() for type in reload_types.split(",")]
+        # only load valid types found in the system
+        reload_types = set(self.search_type_names).intersection(reload_types) \
+                    if reload_types else self.search_type_names
+        LOG.debug("reload_types filtered: %s", reload_types)
 
         actual_max_inc_id, actual_min_inc_id = self._populate_incidents(self.type_info_index, min_inc_id, max_inc_id,
                                                                         self.query_api_method)
 
         if not self.query_api_method:
             rng = range(actual_min_inc_id, actual_max_inc_id)
-            self._populate_others(rng, self.search_type_names, self.type_info_index)
+            self._populate_others(rng, reload_types, self.type_info_index)
 
         return 0 if actual_max_inc_id == 0 else (actual_max_inc_id - actual_min_inc_id) + 1
 

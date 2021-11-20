@@ -247,8 +247,8 @@ class TypeInfo(object):
             except ValueError:
                 if bypass:
                     continue # this field will be skipped
-                else:
-                    raise
+
+                raise
 
         return values
 

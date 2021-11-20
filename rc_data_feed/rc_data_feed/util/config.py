@@ -13,6 +13,9 @@ def config_section_data():
 # comma separated section names. ex. sqlserver_feed,file_feed
 feed_names=<your feeds>
 reload=true
+# use reload_types to limit the types of objects when reload=true.
+# Ex: incident,task,note,artifact,attachment,<data_table_api_name>
+reload_types=
 # set to true if ElasticSearch errors occur during reload=true
 reload_query_api_method=false
 
