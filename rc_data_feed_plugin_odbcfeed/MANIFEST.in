@@ -1,4 +1,4 @@
 include README.md
-include rc_data-feed_plugin-elasticfeed/*
-include rc_data-feed_plugin-elasticfeed/LICENSE
+recursive-include data_feeder_plugins *
+include LICENSE
 exclude drivers
