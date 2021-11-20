@@ -115,7 +115,7 @@ def send_data(type_info, inc_id, rest_client_helper, payload,\
         # don't let a failure in one feed break all the rest
         try:
             if not workspaces or (workspace in workspaces and feed_name in workspaces[workspace]):
-                LOG.debug("Calling feed %s", feed_output.__class__.__name__)
+                LOG.debug("Calling feed %s for workspace %s", feed_output.__class__.__name__, workspace)
                 feed_output.send_data(context, payload)
         except Exception as err:
             LOG.error("Failure in update to %s %s", feed_output.__class__.__name__, err)
@@ -148,6 +148,7 @@ class FeedComponent(ResilientComponent):
                 self.feed_outputs = build_feed_outputs(rest_client_helper, opts, self.options.get("feed_names", None))
                 # build the list workspaces to plugin, if present
                 self.workspaces = ast.literal_eval("{{ {0} }}".format(self.options.get("workspaces", "")))
+                LOG.debug(self.workspaces)
                 # expose attachment content setting
                 self.incl_attachment_data = str_to_bool(self.options.get("include_attachment_data", 'false'))
 
