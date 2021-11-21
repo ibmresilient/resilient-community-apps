@@ -2,7 +2,7 @@
   {%- set comma = joiner(",") -%}
   {# JINJA template for creating a new SOAR incident from a SentinelOne threat. #}
   "name": "SentinelOne Alert - {{ agentRealtimeInfo.accountName }} - {{ agentRealtimeInfo.agentComputerName }} - {{ threatInfo.threatName }}",
-   "start_date": {{ threatInfo.createdAt|resilient_datetimeformat }},
+   "start_date": {{ threatInfo.identifiedAt|resilient_datetimeformat }},
    "discovered_date": {{ threatInfo.createdAt|resilient_datetimeformat }},
   "description": {
     "format": "text",
@@ -17,6 +17,7 @@
     "sentinelone_classification": "{{ threatInfo.classification }}",
     "sentinelone_threat_id": "{{ threatInfo.threatId }}",
     "sentinelone_threat_name": "{{ threatInfo.threatName }}",
+    "sentinelone_threat_analyst_verdict": "{{ threatInfo.analystVerdict }}",
     "sentinelone_incident_status": "{{ threatInfo.incidentStatus }}",
     "sentinelone_mitigation_status": "{{ threatInfo.mitigationStatus }}",
     "sentinelone_mitigation_status_description": "{{ threatInfo.mitigationStatusDescription }}"

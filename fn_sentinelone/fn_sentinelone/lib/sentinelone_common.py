@@ -310,6 +310,26 @@ class SentinelOneClient(object):
         response.raise_for_status()
         return response.json()
 
+    def update_threat_analyst_verdict(self, threat_id, analyst_verdict):
+        """ Initiate shutdown of the agent
+        """
+        url = u"{0}/threats/analyst-verdict".format(self.base_url)
+
+        payload = {
+            "filter": {
+                "ids": threat_id
+            },
+            "data": {
+                "analystVerdict": analyst_verdict
+            }
+        }
+
+        response = self.rc.execute("POST", url, headers=self.headers, json=payload, 
+                                    verify=self.verify, proxies=self.rc.get_proxies())
+        response.raise_for_status()
+        return response.json()
+
+
     def get_hash_reputation(self, hash):
         """ Disconnect the endpoint from the network
         """
