@@ -8,7 +8,6 @@ from mock_artifact import ArtifactMock
 from fn_utilities.util.utils_common import b_to_s
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
-from pytest_resilient_circuits import verify_subset
 
 PACKAGE_NAME = "fn_utilities"
 FUNCTION_NAME = "utilities_email_parse"
@@ -57,7 +56,7 @@ class TestArtifactEmailParse:
             ]
         }),
         (ArtifactMock.test_data_b64("email_sample_3.eml"), {
-            "html_body": u'["<div dir=\\"ltr\\">see this<div><br></div></div>"]',
+            "html_body": u'["<div dir=\\"ltr\\">see this<div><br></div></div>',
             "attachments": [
                 {
                     "mail_content_type": "application/pdf",
@@ -74,3 +73,17 @@ class TestArtifactEmailParse:
         }
         result = call_email_parse_function(circuits_app, function_params)
         verify_subset(expected_result, result["content"])
+
+
+def verify_subset(expected, actual):
+    """Test that the values match, where expected can be a subset of actual"""
+    if isinstance(expected, dict):
+        assert isinstance(actual, dict)
+        for (key, value) in expected.items():
+            verify_subset(value, actual.get(key))
+    elif isinstance(expected, list):
+        assert isinstance(actual, list)
+        for evalue, avalue in zip(expected, actual):
+            verify_subset(evalue, avalue)
+    else:
+        assert actual.startswith(expected)

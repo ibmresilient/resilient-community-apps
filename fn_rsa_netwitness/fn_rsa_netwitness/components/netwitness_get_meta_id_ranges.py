@@ -4,7 +4,8 @@
 """Function implementation"""
 
 import logging
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from resilient_circuits import ResilientComponent, function, handler, \
+    StatusMessage, FunctionResult, FunctionError
 from resilient_lib import validate_fields, ResultPayload, RequestsCommon
 from fn_rsa_netwitness.util.helper import get_headers
 
@@ -20,14 +21,16 @@ class FunctionComponent(ResilientComponent):
         self.options = opts.get("fn_rsa_netwitness", {})
 
         # Validate app.config fields
-        validate_fields(["nw_packet_server_url", "nw_packet_server_user", "nw_packet_server_password"], self.options)
+        validate_fields(["nw_packet_server_url", "nw_packet_server_user",
+                         "nw_packet_server_password"], self.options)
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
         self.options = opts.get("fn_rsa_netwitness", {})
         # Validate app.config fields
-        validate_fields(["nw_packet_server_url", "nw_packet_server_user", "nw_packet_server_password"], self.options)
+        validate_fields(["nw_packet_server_url", "nw_packet_server_user",
+                         "nw_packet_server_password"], self.options)
 
     @function("netwitness_get_meta_id_ranges")
     def _netwitness_get_meta_id_ranges(self, event, *args, **kwargs):
@@ -40,7 +43,7 @@ class FunctionComponent(ResilientComponent):
             nw_results_size = str(kwargs.get("nw_results_size", ''))  # number
 
             # Initialize resilient_lib objects
-            rp = ResultPayload("fn_rsa_netwitness", **kwargs)
+            result_payload = ResultPayload("fn_rsa_netwitness", **kwargs)
             req_common = RequestsCommon(self.opts)
 
             log.info("nw_event_session_id1: %s", nw_session_id1)
@@ -62,19 +65,21 @@ class FunctionComponent(ResilientComponent):
             else:
                 StatusMessage("No meta ID ranges found")
             yield StatusMessage("Complete...")
-            results = rp.done(True, nw_query_metadata)
+            results = result_payload.done(True,\
+                nw_query_metadata.json() if nw_query_metadata else None)
             log.debug("RESULTS: %s", results)
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
-        except Exception as e:
-            yield FunctionError(e)
+        except Exception as error:
+            yield FunctionError(error)
 
 
-def get_meta_id_ranges(url, user, pw, cafile, id1, id2, req_common, size=""):
-    headers = get_headers(user, pw)
+def get_meta_id_ranges(url, user, passw, cafile, id1, id2, req_common, size=""):
+    headers = get_headers(user, passw)
     if size:
         size = "&size={}".format(size)
-    request_url = "{}/sdk?msg=session&id1={}&id2={}&force-content-type=application/json{}".format(url, id1, id2, size)
+    request_url = "{}/sdk?msg=session&id1={}&id2={}&force-content-type=application/json{}" \
+        .format(url, id1, id2, size)
 
-    return req_common.execute_call("GET", request_url, verify_flag=cafile, headers=headers)
+    return req_common.execute_call_v2("GET", request_url, verify=cafile, headers=headers)

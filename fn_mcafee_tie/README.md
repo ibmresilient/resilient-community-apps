@@ -10,23 +10,30 @@
 
   Store any screenshots in the "doc/screenshots" directory and reference them like:
   ![screenshot: screenshot_1](./screenshots/screenshot_1.png)
+
+  NOTE: If your app is available in the container-format only, there is no need to mention the integration server in this readme.
 -->
 
-# McAfee Threat Intelligence Exchange (TIE) Functions for IBM Resilient
+# None
 
 ## Table of Contents
 - [Release Notes](#release-notes)
 - [Overview](#overview)
   - [Key Features](#key-features)
+- [Requirements](#requirements)
+  - [Resilient platform](#resilient-platform)
+  - [Cloud Pak for Security](#cloud-pak-for-security)
+  - [Proxy Server](#proxy-server)
 - [Installation](#installation)
-  - [Requirements](#requirements)
   - [Install](#install)
   - [App Configuration](#app-configuration)
   - [Custom Layouts](#custom-layouts)
+- [Function - McAfee TIE: Set File Reputation](#function---mcafee-tie-set-file-reputation)
+  - [Support for External Reputations](#support-for-external-reputations)
 - [Function - McAfee TIE search hash](#function---mcafee-tie-search-hash)
 - [Data Table - TIE Results](#data-table---tie-results)
 - [Rules](#rules)
-- [Troubleshooting & Support](#troubleshooting-&-support)
+- [Troubleshooting & Support](#troubleshooting--support)
 ---
 
 ## Release Notes
@@ -34,14 +41,12 @@
   Specify all changes in this release. Do not remove the release 
   notes of a previous release
 -->
-### v1.0.2
-* Support added for App Host.
-
-### v1.0.1
-* Support added for App Host.
-
-### v1.0.0
-* Initial Release
+| Version | Date | Notes |
+| ------- | ---- | ----- |
+| 1.1.0 | 1/2021 | Added Feature: Get, Set Reputation |
+| 1.0.2 | 09/2020 | Bug fixes |
+| 1.0.1 | 05/2020 | App Host support |
+| 1.0.0 | 05/2018 | Initial Release |
 
 ---
 
@@ -52,10 +57,9 @@
 -->
 **Resilient Circuits Components for McAfee TIE Functions**
 
+ ![screenshot: main](./doc/screenshots/main.png)
 
-
-<p>
-The  McAfee TIE Functions for IBM Resilient provides the ability to search McAfee Threat Intelliegence Exchange (TIE) server for information on a specific file hash.  This information can come from any of the providers:
+The  McAfee TIE Functions for IBM Resilient provides the ability to search and set file reputation within McAfee Threat Intelligence Exchange (TIE) server for information on a specific file hash.  This information can come from any of the providers:
 
 *  Enterprise
 *  GTI
@@ -64,61 +68,83 @@ The  McAfee TIE Functions for IBM Resilient provides the ability to search McAfe
 
 In addition, a system list is returned by the function.
 
+### Key Features
+<!--
+  List the Key Features of the Integration
+-->
+* Search for hashes in McAfee TIE
+* Set file reputation trust levels on file hashes
+
+---
+
+## Requirements
+<!--
+  List any Requirements 
+-->
+This app supports the IBM Resilient SOAR Platform and the IBM Cloud Pak for Security.
+
+### Resilient platform
+The Resilient platform supports two app deployment mechanisms, App Host and integration server.
+
+If deploying to a Resilient platform with an App Host, the requirements are:
+* Resilient platform >= `36.0.5634`.
+* The app is in a container-based format (available from the AppExchange as a `zip` file).
+
+If deploying to a Resilient platform with an integration server, the requirements are:
+* Resilient platform >= `36.0.5634`.
+* The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
+* Integration server is running `resilient_circuits>=30.0.0`.
+* If using an API key account, make sure the account provides the following minimum permissions: 
+  | Name | Permissions |
+  | ---- | ----------- |
+  | Org Data | Read |
+  | Function | Read |
+
+The following Resilient platform guides provide additional information: 
+* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
+* _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
+* _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
+
+The above guides are available on the IBM Knowledge Center at [ibm.biz/resilient-docs](https://ibm.biz/resilient-docs). On this web page, select your Resilient platform version. On the follow-on page, you can find the _App Host Deployment Guide_ or _Integration Server Guide_ by expanding **Resilient Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
+
+### Cloud Pak for Security
+If you are deploying to IBM Cloud Pak for Security, the requirements are:
+* IBM Cloud Pak for Security >= 1.4.
+* Cloud Pak is configured with an App Host.
+* The app is in a container-based format (available from the AppExchange as a `zip` file).
+
+The following Cloud Pak guides provide additional information: 
+* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
+* _System Administrator Guide_: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security Knowledge Center table of contents, select Case Management and Orchestration & Automation > **System administrator**.
+
+These guides are available on the IBM Knowledge Center at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs). From this web page, select your IBM Cloud Pak for Security version. From the version-specific Knowledge Center page, select Case Management and Orchestration & Automation.
+
+### Proxy Server
+The app supports a proxy server. See the DXL Configuration file for settings.
+
 ---
 
 ## Installation
 
-### Requirements
-<!--
-  List any Requirements 
--->
-* Resilient platform >= `v35.0.0`
-  * To setup up an App Host see:  [ibm.biz/res-app-host-setup](https://ibm.biz/res-app-host-setup)
-* An Integration Server running `resilient_circuits>=30.0.0` (if using an Integration Server)
-  * To set up an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
-  * If using an API key account, minimum required permissions are:
-    | Name | Permissions |
-    | ---- | ----------- |
-    | Org Data | Read |
-    | Function | Read |
-* Proxy supported: No (OpenDXL does not support proxy in on-prem installations)
----
-
 ### Install
-* To install or uninstall an App using the App Host see [ibm.biz/res-install-app](https://ibm.biz/res-install-app)
-
-* To install or uninstall an Integration using the Integration Server see the [ibm.biz/res-install-int](https://ibm.biz/res-install-int)
----
+* To install or uninstall an App or Integration on the _Resilient platform_, see the documentation at [ibm.biz/resilient-docs](https://ibm.biz/resilient-docs).
+* To install or uninstall an App on _IBM Cloud Pak for Security_, see the documentation at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs) and follow the instructions above to navigate to Orchestration and Automation.
 
 ### App Configuration
-The following table describes the settings you need to configure in the app.config file. If using App Host, see the Resilient System Administrator Guide. If using the integration server, see the Integration Server Guide.
+The following table provides the settings you need to configure the app. These settings are made in the app.config file. See the documentation discussed in the Requirements section for the procedure.
 
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
-| **dxlclient_config** | Yes | `/home/integration/.resilient/mcafee_tie/dxlclient.config` | *Path to the dxlclient.config file* |
+| **dxlclient_config** | Yes | `/var/rescircuits/fn_mcafee_tie/dxlclient.config` | *DXLClient configuration file. See the [OpenDXL documentation](https://opendxl.github.io/opendxl-client-python/pydoc/updatingconfigfromcli.html) for instructions on how to set.* |
 
-<p>
-In addition to updating the app.config file and before running the McAfee TIE functions, you need to generate the dxlclient.config, certificates and key files using an OpenDXL client provisioning command. More information on the dxlclient.config file and provisioning the system can be found here: 
+#### App Host Configuration
+Since McAfee TIE references it's own configuration file, this file needs to be added to the files available to the container running this app for App Host. This is done by referring to the location of config file as `/var/rescircuits/fn_mcafee_tie/dxlclient.config` within the container and then including that file in the files available to the app. See the snapshot below for an example. 
 
-[https://opendxl.github.io/opendxl-client-python/pydoc/provisioningoverview.html](https://opendxl.github.io/opendxl-client-python/pydoc/provisioningoverview.html)
-[https://opendxl.github.io/opendxl-client-python/pydoc/basiccliprovisioning.html#basiccliprovisioning](https://opendxl.github.io/opendxl-client-python/pydoc/basiccliprovisioning.html#basiccliprovisioning)
+![screenshot: app.config](./doc/screenshots/app_config.png)
 
-Here is an example of the OpenDXL client provisioning command:
+In addition to the dxlclient.config file, three certificate files need to be added to the app: ca-bundle.crt, client.crt, client.key. These files were built when you generated the dxlclient.config file and will be included in the same folder location. Be aware that all references to the folder (ex. `/var/rescircuits/fn_mcafee_tie/`) must be specified the same way. That is, all references to the file path should contain the trailing slash or all references should leave it off.
 
-```python -m dxlclient -vv provisionconfig /home/integration/.resilient/fn_mcafee_tie X.X.X.X client1 -u admin -p password```
-
-In this example, ```X.X.X.X``` is the IP address of the McAfee ePO server or OpenDXL Broker. 
-
- The generated files are created in the /home/integration/.resilient/fn_mcafee_tie directory.
-
-If installing the app on an integration server, set the dxlclient_config app.config parameter to the location of the created dxlclient.config file.
- ``` [fn_mcafee_tie]
-   dxlclient_config=/home/integration/.resilient/fn_mcafee_tie/dxlclient.config
-```
-
-If installing the app directly to the Resilient platform (App Host environment), you need to use the New File button to create each file that was created by the provisioning command. As you create each file, copy the contents of the file into your new file. Make sure to enter /etc/rescircuits/fn_mcafee_tie as the File Path. See the Resilient Platform System Administrator Guide for the detailed procedure.
-
----
+![screenshot: mcafee_tie_config.png](./doc/screenshots/mcafee_tie_config.png)
 
 ### Custom Layouts
 <!--
@@ -126,28 +152,38 @@ If installing the app directly to the Resilient platform (App Host environment),
   You may wish to recommend a new incident tab.
   You should save a screenshot "custom_layouts.png" in the doc/screenshots directory and reference it here
 -->
-* Customize the Artifacts Tab page by dragging the TIE Results data table on to it as pictured below or create your own McAfee TIE incident tab and drag the TIE Results on to it:
+* Import the Data Table, TIE Results, like the screenshot below. Your setup may use a different tab:
 
-![screenshot: custom_layouts](./doc/screenshots/McAfee-TIE-Datatable.png)
+  ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png)
+
+
+#### Custom Artifact Type
+
+A new artifact type is provided, `Certificate SHA-1 Hash`. This can be used to create new artifacts
+which are different than Malware SHA-1 Hash artifacts. The latter are used for getting and 
+setting reputations.
+
 ---
 
-## Function - McAfee TIE search hash
-A function which takes two inputs:
+## Function - McAfee TIE: Set File Reputation
+Set a file's reputation. This works on MD5, SH1 and SHA256 hashes. Either 'Enterprise' or 'External'
+reputations can be set.
 
-mcafee_tie_hash_type: The type of file hash (md5, sha1, sha256).
-mcafee_tie_hash: The value of the hash.
+Manual action rules are available from an artifact or from the TIE Results datatable.
 
-The function returns a JSON object containing the available information from the different file providers (Enterprise, GTI, ATD, MWG) along with the list of systems related to it.
-
- ![screenshot: fn-mcafee-tie-search-hash](./doc/screenshots/McAfee-TIE-Function.png)
+ ![screenshot: fn-mcafee-tie-set-file-reputation ](./doc/screenshots/fn-mcafee-tie-set-file-reputation.png)
 
 <details><summary>Inputs:</summary>
 <p>
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `mcafee_tie_hash` | `text` | No | `-` | The value of the hash |
-| `mcafee_tie_hash_type` | `text` | No | `-` | The type of file hash (md5, sha1, sha256) |
+| `mcafee_tie_reputation_type` | `text` | Yes | `External | Enterprise` | - |
+| `mcafee_tie_comment` | `text` | No | `-` | - |
+| `mcafee_tie_filename` | `text` | No | `-` | Used for new reputation entries |
+| `mcafee_tie_hash` | `text` | Yes | `D5DD920BE5BCFEB904E95DA4B6D0CCCA0727D692` | The value of the hash |
+| `mcafee_tie_hash_type` | `text` | Yes | `md5` | The type of file hash (md5, sha1, sha256) |
+| `mcafee_tie_trust_level` | `select` | Yes | `Most Likely Malicious` | - |
 
 </p>
 </details>
@@ -156,60 +192,209 @@ The function returns a JSON object containing the available information from the
 <p>
 
 ```python
-results = {  
- "GTI":{  
-    "File Provider":"GTI",
-    "Attributes":{  
-
+results = {
+  'version': '1.0',
+  'success': True,
+  'reason': None,
+  'content': {
+    'hashes': {
+      'sha1': 'd5dd920be5bcfeb904e95da4b6d0ccca0727d692'
     },
-    "Create Date":"2018-02-21 12:17:10",
-    "Trust Level":"Known Malicious"
- },
- "ATD":{  
-    "File Provider":"ATD",
-    "Create Date":"2018-03-14 11:53:09",
-    "Trust Level":"Most Likely Malicious"
- },
- "MWG":{  
-    "File Provider":"MWG",
-    "Create Date":"2018-03-14 11:53:55",
-    "Trust Level":"Most Likely Malicious"
- },
- "Enterprise":{  
-    "File Provider":"Enterprise",
-    "Attributes":{  
-       "Average Local Rep":"Most Likely Malicious",
-       "First Contact":"2018-02-21 12:17:10",
-       "Min Local Rep":"Most Likely Malicious",
-       "Is Prevalent":"0",
-       "File Name Count":"1",
-       "Max Local Rep":"Most Likely Malicious"
+    'oldReputations': {
+      3: {
+        'createDate': 1608652058,
+        'providerId': 3,
+        'trustLevel': 50,
+        'attributes': {
+          '2101652': '1',
+          '2123156': '0',
+          '2098277': '0',
+          '2102165': '1608652058',
+          '2114965': '1',
+          '2111893': '4',
+          '2139285': '216172786408751223'
+        }
+      },
+      1: {
+        'createDate': 1608652105,
+        'providerId': 1,
+        'trustLevel': 1,
+        'attributes': {
+          '2120340': '2134902792'
+        }
+      }
     },
-    "Create Date":"2018-02-21 12:17:10",
-    "Trust Level":"Most Likely Malicious"
- }
- "system_list":[{
-   "date": 1519233563,
-   "agentGuid": {a00728ff-3187-46c1-97d2-8e0f26ea940b}
- }]
+    'newReputations': {
+      3: {
+        'createDate': 1608652058,
+        'providerId': 3,
+        'trustLevel': 99,
+        'attributes': {
+          '2101652': '1',
+          '2123156': '0',
+          '2098277': '0',
+          '2102165': '1608652058',
+          '2114965': '1',
+          '2111893': '4',
+          '2139285': '216172786408751223'
+        }
+      },
+      1: {
+        'createDate': 1608652105,
+        'providerId': 1,
+        'trustLevel': 1,
+        'attributes': {
+          '2120340': '2134902792'
+        }
+      }
+    },
+    'updateTime': 1608669082
+  },
+  'raw': '{"hashes": {"sha1": "d5dd920be5bcfeb904e95da4b6d0ccca0727d692"}, "oldReputations": {"3": {"createDate": 1608652058, "providerId": 3, "trustLevel": 50, "attributes": {"2101652": "1", "2123156": "0", "2098277": "0", "2102165": "1608652058", "2114965": "1", "2111893": "4", "2139285": "216172786408751223"}}, "1": {"createDate": 1608652105, "providerId": 1, "trustLevel": 1, "attributes": {"2120340": "2134902792"}}}, "newReputations": {"3": {"createDate": 1608652058, "providerId": 3, "trustLevel": 99, "attributes": {"2101652": "1", "2123156": "0", "2098277": "0", "2102165": "1608652058", "2114965": "1", "2111893": "4", "2139285": "216172786408751223"}}, "1": {"createDate": 1608652105, "providerId": 1, "trustLevel": 1, "attributes": {"2120340": "2134902792"}}}, "updateTime": 1608669082}',
+  'inputs': {
+    'mcafee_tie_hash_type': 'Malware SHA-1 Hash',
+    'mcafee_tie_hash': 'D5DD920BE5BCFEB904E95DA4B6D0CCCA0727D692',
+    'mcafee_tie_trust_level': {
+      'id': 880,
+      'name': 'Known Trusted'
+    },
+    'mcafee_tie_comment': None
+  },
+  'metrics': {
+    'version': '1.0',
+    'package': 'fn-mcafee-tie',
+    'package_version': '1.1.0',
+    'host': 'Marks-MacBook-Pro.local',
+    'execution_time_ms': 5048,
+    'timestamp': '2020-12-22 15:31:27'
+  }
 }
 ```
 
 </p>
 </details>
 
-<details><summary>Workflows:</summary>
-
+<details><summary>Example Pre-Process Script:</summary>
 <p>
 
- ![screenshot: McAfee-TIE-workflow](./doc/screenshots/McAfee-TIE-workflow.png)
+```python
+inputs.mcafee_tie_reputation_type = str(rule.properties.mcafee_tie_reputation_type)
+inputs.mcafee_tie_trust_level = str(rule.properties.mcafee_tie_trust_level)
+inputs.mcafee_tie_comment = rule.properties.mcafee_tie_comment.content
+inputs.mcafee_tie_filename = rule.properties.mcafee_tie_filename
+inputs.mcafee_tie_hash_type = artifact.type
+inputs.mcafee_tie_hash = artifact.value
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+note = u"McAfee TIE File Reputation: {}\nReputation Type: {}\nHash: {} ({})\nFile Name: {}\nComment: {}"\
+            .format(results.inputs['mcafee_tie_trust_level']['name'],
+                    results.inputs['mcafee_tie_reputation_type']['name'],
+                    results.inputs['mcafee_tie_hash'],
+                    artifact.type,
+                    results.inputs['mcafee_tie_filename'],
+                    results.inputs['mcafee_tie_comment'])
+
+if results.content:
+    incident.addNote("Set reputation successful\n{}".format(note))
+else:
+    incident.addNote("Set reputation unsuccessful. An internal McAfee error has occurred.\n{}".format(note))
+```
+
+</p>
+</details>
 
 
-  <details><summary>Example Pre-Process Script:</summary>
-  <p>
+### Support for External Reputations
+It's possible to configure your workflows to use `External` reputations as well as `Enterprise` reputations. One solution would be to add a selection field to your action rule with the values 'External' and 'Enterprise'. Then, in your workflow, you can alter the pre-processing script to reference the reputation type from the rule properties:
 
-  ```python
-  if artifact.type == "Malware MD5 Hash":
+```
+inputs.mcafee_tie_reputation_type = str(rule.properties.mcafee_tie_reputation_type)
+```
+
+Creating a new activity field as type Select with Enterprise and External values.
+ ![screenshot: creating a new activity field ](./doc/screenshots/creating_activity_field.png)
+
+Adding the activity field to the rule.
+  ![screenshot: Adding the activity field to the rule ](./doc/screenshots/rule_activity_field.png)
+
+---
+## Function - McAfee TIE search hash
+A function which takes two inputs:
+
+mcafee_tie_hash_type: The type of file hash (md5, sha1, sha256).
+mcafee_tie_hash: The value of the hash.
+
+The function returns back a dict of all the available information from the different file providers (Enterprise, GTI, ATD, MWG) along with the list of systems related to it.
+
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `mcafee_tie_hash` | `text` | Yes | `DB1AEC5222075800EDA75D7205267569679B424E5C58A28102417F46D3B5790D` | The value of the hash |
+| `mcafee_tie_hash_type` | `text` | Yes | `sha-256` | The type of file hash (md5, sha1, sha256) |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+```python
+results = {
+  'version': '1.0',
+  'success': True,
+  'reason': None,
+  'content': {
+    'mcafee_topic_name': '/mcafee/event/epo/threat/response',
+    'mcafee_dxl_payload': '{"hashes": [{"type": "md5", "value": "Dk0TzJrwTMZLaPw4/goNrA=="}], "providerId": 3, "trustLevel": 1}',
+    'mcafee_publish_method': 'Service',
+    'mcafee_wait_for_response': 'No'
+  },
+  'raw': '{"mcafee_topic_name": "/mcafee/event/epo/threat/response", "mcafee_dxl_payload": "{\\"hashes\\": [{\\"type\\": \\"md5\\", \\"value\\": \\"Dk0TzJrwTMZLaPw4/goNrA==\\"}], \\"providerId\\": 3, \\"trustLevel\\": 1}", "mcafee_publish_method": "Service", "mcafee_wait_for_response": "No"}',
+  'inputs': {
+    'mcafee_publish_method': {
+      'id': 205,
+      'name': 'Service'
+    },
+    'mcafee_topic_name': '/mcafee/event/epo/threat/response',
+    'mcafee_dxl_payload': '{"hashes": [{"type": "md5", "value": "Dk0TzJrwTMZLaPw4/goNrA=="}], "providerId": 3, "trustLevel": 1}',
+    'mcafee_wait_for_response': {
+      'id': 203,
+      'name': 'No'
+    }
+  },
+  'metrics': {
+    'version': '1.0',
+    'package': 'fn-mcafee-opendxl',
+    'package_version': '1.2.0',
+    'host': 'Marks-MacBook-Pro.local',
+    'execution_time_ms': 0,
+    'timestamp': '2020-12-22 15:31:49'
+  },
+  'mcafee_topic_name': '/mcafee/event/epo/threat/response',
+  'mcafee_dxl_payload': '{"hashes": [{"type": "md5", "value": "Dk0TzJrwTMZLaPw4/goNrA=="}], "providerId": 3, "trustLevel": 1}',
+  'mcafee_publish_method': 'Service',
+  'mcafee_wait_for_response': 'No'
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+if artifact.type == "Malware MD5 Hash":
   inputs.mcafee_tie_hash_type = "md5"
   inputs.mcafee_tie_hash = artifact.value
 elif artifact.type == "Malware SHA-1 Hash":
@@ -221,16 +406,16 @@ elif artifact.type == "Malware SHA-256 Hash":
 else:
   helper.fail("Artifact hash was not set correctly")
 
-  ```
+```
 
-  </p>
-  </details>
+</p>
+</details>
 
-  <details><summary>Example Post-Process Script:</summary>
-  <p>
+<details><summary>Example Post-Process Script:</summary>
+<p>
 
-  ```python
-  """
+```python
+"""
 Data returned will be in the following structure
 
 
@@ -273,25 +458,22 @@ Data returned will be in the following structure
 }
 """
 
-row = incident.addRow("tie_results")
-row["hash_type"] = artifact.type
-row["hash"] = artifact.value
-row["file_provider"] = results["Enterprise"]["File Provider"]
-row["trust_level"] = results["Enterprise"]["Trust Level"]
-row["tie_create_date"] = results["Enterprise"]["Create Date"]
+import java.util.Date as Date
 
+if results.get("Enterprise"):
+    row = incident.addRow("tie_results")
+    row['results_date'] = str(Date())
+    row["hash_type"] = artifact.type
+    row["hash"] = artifact.value
+    row["ent_trust_level"] = results["Enterprise"].get("Trust Level")
+    row["tie_create_date"] = results["Enterprise"].get("Create Date")
+    row["gti_trust_level"] = results["GTI"].get("Trust Level")
+    row["atd_trust_level"] = results["ATD"].get("Trust Level")
+    row["mwg_trust_level"] = results["MWG"].get("Trust Level")
 
+```
 
-
-
-  ```
-
-  </p>
-  </details>
-
-</details>
-
- </p>
+</p>
 </details>
 
 ---
@@ -299,7 +481,7 @@ row["tie_create_date"] = results["Enterprise"]["Create Date"]
 
 ## Data Table - TIE Results
 
- ![screenshot: main](./doc/screenshots/McAfee-TIE-Results.png)
+ ![screenshot: dt-tie-results](./doc/screenshots/McAfee-TIE-Results.png)
 
 #### API Name:
 tie_results
@@ -307,11 +489,15 @@ tie_results
 #### Columns:
 | Column Name | API Access Name | Type | Tooltip |
 | ----------- | --------------- | ---- | ------- |
-| File Provider | `file_provider` | `text` | - |
+| Results Date | `results_date` | `text` | - |
+| File Name | `file_name` | `text` | - |
 | Hash | `hash` | `text` | - |
 | Hash Type | `hash_type` | `text` | - |
 | Create Date | `tie_create_date` | `text` | - |
-| Trust Level | `trust_level` | `text` | - |
+| Enterprise Trust Level | `trust_level` | `text` | - |
+| GTI Trust Level | `trust_level` | `text` | - |
+| ATD Trust Level | `trust_level` | `text` | - |
+| MWG Trust Level | `trust_level` | `text` | - |
 
 ---
 
@@ -320,23 +506,15 @@ tie_results
 ## Rules
 | Rule Name | Object | Workflow Triggered |
 | --------- | ------ | ------------------ |
-| (Example) McAfee artifact hash search | artifact | `mcafee_tie_hash_search_workflow` |
-
-<details><summary>Rules:</summary>
-
-<p>
-
- ![screenshot: McAfee-TIE-rule](./doc/screenshots/McAfee-TIE-rule.png)
-
-</p>
-</details>
+| McAfee TIE Set File Reputation | artifact | `mcafee_tie_set_file_reputation` |
+| McAfee TIE Set File Reputation - Datatable | tie_results | `mcafee_tie_set_reputation__datatable` |
+| McAfee TIE Get File Reputation | artifact | `mcafee_tie_get_file_reputation` |
+| McAfee TIE Get Latest Reputation | Datatable | `mcafee_tie_get_lastest_reputation` |
 
 ---
 
 ## Troubleshooting & Support
-If using the app with an App Host, see the Resilient System Administrator Guide and the App Host Deployment Guide for troubleshooting procedures. You can find these guides on the [IBM Knowledge Center](https://www.ibm.com/support/knowledgecenter/SSBRUQ), where you can select which version of the Resilient platform you are using.
-
-If using the app with an integration server, see the [Integration Server Guide](https://ibm.biz/res-int-server-guide)
+Refer to the documentation listed in the Requirements section for troubleshooting information.
 
 ### For Support
-This is an IBM Supported app. Please search https://ibm.com/mysupport for assistance.
+This is an IBM supported app. Please search https://ibm.com/mysupport for assistance.

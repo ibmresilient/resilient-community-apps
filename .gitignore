@@ -23,5 +23,6 @@ resilient_circuits_lockfile
 *.tar.gz
 *.pytest_cache
 *.bak
-
 .python-version
+
+!fn_odbc_query/.drivers/**

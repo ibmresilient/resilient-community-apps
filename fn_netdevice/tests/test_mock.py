@@ -73,6 +73,7 @@ class TestNetMiko:
         with pytest.raises(Exception) as e_info:
             results = call_netdevice_function(circuits_app, function_params)
 
+    @pytest.mark.livetest
     @pytest.mark.parametrize("netdevice_ids, netdevice_send_cmd, netdevice_config_cmd,  netdevice_use_textfsm, expected_results", [
         ('ansible-linux', 'df', None, False,
         'Filesystem              1K-blocks   Used Available Use% Mounted on\n/dev/mapper/centos-root   6486016 935832   5550184  15%/\n'

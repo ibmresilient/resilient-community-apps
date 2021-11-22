@@ -23,6 +23,8 @@ SEARCH_STATUS_SORTING = "SORTING"
 
 ARIEL_SEARCH_EVENTS ="events"
 
+ARIEL_SEARCH_FLOWS ="flows"
+
 TOP_EVENTS="topevents"
 SOURCE_IP="sourceip"
 DESTINATION_IP="destinationip"

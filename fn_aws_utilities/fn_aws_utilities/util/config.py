@@ -14,6 +14,7 @@ aws_access_key_id=
 aws_secret_access_key=
 # aws region identifier
 aws_region_name=us-east-1
+aws_sms_topic_name=
 """
 
     return config_data

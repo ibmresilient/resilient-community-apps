@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-#
 # (c) Copyright IBM Corp. 2020. All Rights Reserved.
 from resilient_lib.ui import Datatable, Tab, Field, create_tab
+from resilient_circuits.app import AppArgumentParser
 
 
 class QRadarTab(Tab):
@@ -23,6 +24,7 @@ class QRadarTab(Tab):
         Field("qr_relevance"),
         Field("qr_severity"),
         Datatable("qr_offense_top_events"),
+        Datatable("qr_flows"),
         Datatable("qr_triggered_rules"),
         Datatable("qr_top_destination_ips"),
         Datatable("qr_top_source_ips"),
@@ -35,4 +37,4 @@ class QRadarTab(Tab):
     ]
 
 
-create_tab(QRadarTab, update_existing=True)
+create_tab(QRadarTab, AppArgumentParser().parse_args(), update_existing=True)

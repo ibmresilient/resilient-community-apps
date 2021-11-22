@@ -1,0 +1,26 @@
+#!/bin/sh
+
+# A git hook script to check the branch name
+# The branch name must adhere to the format:
+# JIRA Type/JIRA Number/Package Name/Brief description
+
+# Example 1: 'epic/INT-0000/fn_my_package'
+# Example 2: 'story/INT-0000/fn_my_package/new_feature'
+# Example 3: 'bug/INT-0000/fn_my_package/fix_unicode_error'
+# Example 4: 'task/INT-0000/fn_my_package/update_docs'
+# Example 5: 'rebuild/INT-0000/ALL'
+
+LC_ALL=C
+
+local_branch="$(git rev-parse --abbrev-ref HEAD)"
+
+valid_branch_regex="^[a-z]+\/INT-[0-9]+\/[a-zA-Z_]+"
+
+message="INVALID BRANCH NAME. Branch names must adhere to this contract: $valid_branch_regex with the 3rd segment being the package_name. You should rename your branch to a valid name and try again. Example 1: 'story/INT-0000/fn_my_package/new_feature'. Example 2: 'epic/INT-0000/fn_my_package'"
+
+if [[ ! $local_branch =~ $valid_branch_regex ]] ; then
+    echo "$message"
+    exit 1
+fi
+
+exit 0

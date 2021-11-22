@@ -19,7 +19,7 @@ def snake_to_camel(word):
 
 setup(
     name='fn_qradar_enhanced_data',
-    version='1.0.0',
+    version='1.1.2',
     license='MIT License',
     author='IBM Resilient',
     author_email='support@resilientsystems.com',
@@ -28,8 +28,7 @@ setup(
     long_description="This app fetches the data associated with the QRadar Offense and provides live links back to QRadar, thereby simplifying case management.",
 
     install_requires=[
-        'resilient_circuits>=30.0.0',
-        'resilient_lib>=39.0'
+        'resilient_circuits>=41.1.0'
     ],
     packages=find_packages(),
     include_package_data=True,

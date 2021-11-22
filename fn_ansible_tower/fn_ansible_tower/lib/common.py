@@ -32,7 +32,7 @@ def get_job_template_by_name(opts, options, filter_by_name):
     next_url = "/".join((TOWER_API_BASE, LIST_URL))
     # continue as long as paged results exist
     while next_url:
-        url = "/".join((clean_url(options.get('url')), next_url))
+        url = "/".join((clean_url(options.get('url')), clean_url(next_url, leading_slash=True)))
         results = rc.execute_call_v2("get", url, auth=basic_auth,
                                      verify=cafile)
         json_results = results.json()
@@ -65,7 +65,7 @@ def get_job_template_by_project(opts, options, filter_by_project, template_patte
     next_url = "/".join((TOWER_API_BASE, LIST_URL))
     result_templates = []
     while next_url:
-        url = "/".join((clean_url(clean_url(options.get('url'))), next_url))
+        url = "/".join((clean_url(clean_url(options.get('url'))), clean_url(next_url, leading_slash=True)))
         results = rc.execute_call_v2("get", url, auth=basic_auth,
                                      verify=cafile)
         json_results = results.json()
@@ -93,7 +93,8 @@ def project_pattern_match(results, project_pattern):
         # convert wildcard "*" to regex format ".*"
         pattern = project_pattern.replace("*", ".*")
         compiled = re.compile(pattern)
-        return [project for project in results if compiled.match(project['summary_fields']['project']['name'])]
+        return [project for project in results if project.get("summary_fields", {}).get("project", {}).get("name", None) \
+            and compiled.match(project['summary_fields']['project']['name'])]
 
     return results
 
@@ -164,10 +165,14 @@ def save_as_attachment(res_client, incident_id, results):
 
     return file_name, attachment_json
 
-def clean_url(url):
+def clean_url(url, leading_slash=False):
     """
     remove trailing slash if it exists
     :param url:
     :return: url without training slash
     """
-    return url[:-1] if url.endswith("/") else url
+    new_url = url[:-1] if url.endswith("/") else url
+    if leading_slash:
+        new_url = new_url[1:] if new_url.startswith("/") else new_url
+
+    return new_url

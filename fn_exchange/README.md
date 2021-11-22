@@ -27,11 +27,12 @@
 
 ## Release Notes
 <!--
-  Specify all changes in this release. Do not remove the release 
+  Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
 | Version | Date | Notes |
 | ------: | ---: | ----: |
+| v1.0.2 | June 2021 | Fix for selftest |
 | v1.0.1 | December 2020 | Added App Host support, Added proxy support. |
 | v1.0.0 | August 2018 | Initial Release. |
 
@@ -61,7 +62,7 @@ The functions provided have the following capabilities:
 
 ## Requirements
 <!--
-  List any Requirements 
+  List any Requirements
 -->
 This app supports the IBM Resilient SOAR Platform and the IBM Cloud Pak for Security.
 
@@ -76,15 +77,15 @@ If deploying to a Resilient platform with an integration server, the requirement
 * Resilient platform >= `31.0.4035`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient_circuits>=30.0.0`.
-* If using an API key account, make sure the account provides the following minimum permissions: 
+* If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
   | Org Data | Read, Edit |
 
-The following Resilient platform guides provide additional information: 
-* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
+The following Resilient platform guides provide additional information:
+* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
-* _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
+* _System Administrator Guide_: provides the procedure to install, configure and deploy apps.
 
 The above guides are available on the IBM Knowledge Center at [ibm.biz/resilient-docs](https://ibm.biz/resilient-docs). On this web page, select your Resilient platform version. On the follow-on page, you can find the _App Host Deployment Guide_ or _Integration Server Guide_ by expanding **Resilient Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
@@ -94,7 +95,7 @@ If you are deploying to IBM Cloud Pak for Security, the requirements are:
 * Cloud Pak is configured with an App Host.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
-The following Cloud Pak guides provide additional information: 
+The following Cloud Pak guides provide additional information:
 * _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
 * _System Administrator Guide_: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security Knowledge Center table of contents, select Case Management and Orchestration & Automation > **System administrator**.
 
@@ -191,10 +192,10 @@ exchange_sender
 exchange_start_date
 ```
 
-### Message Destination: 
+### Message Destination:
 `fn_exchange`
 
----        
+---
 
 ## Troubleshooting & Support
 Refer to the documentation listed in the Requirements section for troubleshooting information.

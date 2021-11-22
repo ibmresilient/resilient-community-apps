@@ -1,10 +1,10 @@
-# docker build -t ibmresilient/fn_ansible_tower:1.0.0 -t ibmresilient/fn_ansible_tower:latest .
+# docker build -t ibmresilient/fn_ansible_tower:1.0.3 -t ibmresilient/fn_ansible_tower:latest .
 
 # Base image using Red Hat's universal base image (rhel 8) for python
 FROM registry.access.redhat.com/ubi8/python-36:latest
 
 ARG APPLICATION=fn_ansible_tower
-ARG RESILIENT_CIRCUITS_VERSION=37
+ARG RESILIENT_CIRCUITS_VERSION=41
 ARG PATH_RESILIENT_CIRCUITS=rescircuits
 
 # Environment variable for any app to check if running in a container
@@ -44,10 +44,13 @@ RUN pip install /tmp/packages/${APPLICATION}-*.tar.gz
 RUN mkdir /etc/${PATH_RESILIENT_CIRCUITS}
 ENV APP_CONFIG_FILE /etc/${PATH_RESILIENT_CIRCUITS}/app.config
 
+# create arbitrary group for user 1001
+RUN groupadd -g 1001 default && usermod -g 1001 default
+
 # create directory for logs and set to be root group to allow access by non root processes
 # See https://docs.openshift.com/container-platform/4.2/openshift_images/create-images.html#images-create-guide-openshift_create-images
 RUN mkdir /var/log/${PATH_RESILIENT_CIRCUITS} && \
-    chgrp -R 0 /var/log/${PATH_RESILIENT_CIRCUITS} && \
+    chgrp -R 1001 /var/log/${PATH_RESILIENT_CIRCUITS} && \
     chmod -R g=u /var/log/${PATH_RESILIENT_CIRCUITS}
 ENV APP_LOG_DIR /var/log/${PATH_RESILIENT_CIRCUITS}
 

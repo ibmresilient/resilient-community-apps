@@ -14,8 +14,12 @@ from fn_twilio.components.twilio_send_sms import FunctionComponent
 PACKAGE_NAME = "fn_twilio"
 FUNCTION_NAME = "twilio_send_sms"
 
-# Read the default configuration-data section from the package
-config_data = get_config_data(PACKAGE_NAME)
+# Use mock config data
+config_data = """[fn_twilio_send_sms]
+twilio_account_sid=123
+twilio_auth_token=ABCDEF1234
+twilio_src_address=example.com/mock
+"""
 
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"

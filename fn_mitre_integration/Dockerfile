@@ -3,8 +3,9 @@
 # Base image using Red Hat's universal base image (rhel 8) for python
 FROM registry.access.redhat.com/ubi8/python-36:latest
 
+ARG PYPI_INDEX=https://pypi.org/simple
 ARG APPLICATION=fn_mitre_integration
-ARG RESILIENT_CIRCUITS_VERSION=37
+ARG RESILIENT_CIRCUITS_VERSION=39.0
 ARG PATH_RESILIENT_CIRCUITS=rescircuits
 # Environment variable for any app to check if running in a container
 ARG APP_HOST_CONTAINER=1
@@ -17,7 +18,7 @@ USER 0
 RUN pip install --upgrade pip
 
 # install resilient-circuits
-RUN pip install "resilient-circuits>=${RESILIENT_CIRCUITS_VERSION}"
+RUN pip install "resilient-circuits>=${RESILIENT_CIRCUITS_VERSION}" -i ${PYPI_INDEX}
 
 ## ---- section for changes ----
 # uncomment and replicate if additional os libraries are needed
@@ -26,7 +27,7 @@ RUN pip install "resilient-circuits>=${RESILIENT_CIRCUITS_VERSION}"
 
 # install the base package
 COPY ./dist /tmp/packages
-RUN pip install /tmp/packages/${APPLICATION}-*.tar.gz
+RUN pip install /tmp/packages/${APPLICATION}-*.tar.gz -i ${PYPI_INDEX}
 
 # uncomment and replicate if additional pypi packages are needed
 #RUN pip install <package>
@@ -43,10 +44,13 @@ RUN pip install /tmp/packages/${APPLICATION}-*.tar.gz
 RUN mkdir /etc/${PATH_RESILIENT_CIRCUITS}
 ENV APP_CONFIG_FILE /etc/${PATH_RESILIENT_CIRCUITS}/app.config
 
+# create arbitrary group for user 1001
+RUN groupadd -g 1001 default && usermod -g 1001 default
+
 # create directory for logs and set to be root group to allow access by non root processes
 # See https://docs.openshift.com/container-platform/4.2/openshift_images/create-images.html#images-create-guide-openshift_create-images
 RUN mkdir /var/log/${PATH_RESILIENT_CIRCUITS} && \
-    chgrp -R 0 /var/log/${PATH_RESILIENT_CIRCUITS} && \
+    chgrp -R 1001 /var/log/${PATH_RESILIENT_CIRCUITS} && \
     chmod -R g=u /var/log/${PATH_RESILIENT_CIRCUITS}
 ENV APP_LOG_DIR /var/log/${PATH_RESILIENT_CIRCUITS}
 

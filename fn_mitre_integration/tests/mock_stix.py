@@ -1,6 +1,15 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 # (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
+import uuid
+
+class MockCollection(object):
+    can_read = True
+    title = "test title"
+
+    def __init__(self):
+        self.title = str(uuid.uuid4())
+
 
 class MitreQueryMocker(object):
     """

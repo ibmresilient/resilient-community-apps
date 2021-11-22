@@ -1,3 +1,10 @@
 include README.md
-include fn_pastebin/util/*
+include Dockerfile
+include entrypoint.sh
+recursive-include fn_pastebin/util *
 include fn_pastebin/LICENSE
+include doc/*.md
+include doc/*.pdf
+include doc/screenshots/*
+
+exclude *.bak
