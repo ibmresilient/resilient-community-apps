@@ -1641,7 +1641,7 @@ else:
 </details>
 
 ---
-## Function - Defender Find machines by filter
+## Function - Defender Find Machines by filter
 Find machines based on the OData filter capability of Defender.
 
  ![screenshot: fn-defender-find-machines-by-filter ](./doc/screenshots/dt-defender-machines.png)
@@ -2680,17 +2680,6 @@ This is a IBM Supported provided App. Use the SOAR Community https://ibm.biz/soa
     "defender_incident_lastupdatetime": {{ lastUpdateTime|resilient_datetimeformat }},
     "defender_tags": "{{ tags | join(',') }}"
   },
-  "comments": [
-    {% for comment in comments %}
-    {
-      "text": {
-        "format": "text",
-        "content": "{{ comment.comment|replace('"', '\\"') }}\ncreated by: {{ comment.createdBy }}\ncreation date: {{ comment.createdTime }}"
-      }
-    }
-    {% if not loop.last %},{% endif %}
-    {% endfor %}
-  ],
   "artifacts": [
     {% for alert in alerts %}
      {% for item in alert.entities %}
@@ -2854,16 +2843,19 @@ This is a IBM Supported provided App. Use the SOAR Community https://ibm.biz/soa
   ],
   "comments": [
     {% for comment in comments %}
+      {% if "Created by IBM SOAR" not in comment.comment %}
       {
         "text": {
           "format": "text",
-          "content": "Defender Incident comment: {{ comment.createdTime }}\n{{ comment.comment }}"
+          "content": "Defender Incident comment: {{ comment.createdTime }}\n{{ comment.comment|replace("<br>", "\n")|replace('"', '\\"') }}"
         }
       }
       {% if not loop.last %},{% endif %}
+      {% endif %}
     {% endfor %}
   ]
 }
+
 </pre>
 </details>
 <details><summary>incident_update_template</summary>
