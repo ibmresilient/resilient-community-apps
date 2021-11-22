@@ -110,6 +110,7 @@ def send_data(type_info, inc_id, rest_client_helper, payload,\
                                                  artifact_id=payload['id'])
 
     # get the incident workspace for this data
+    # TODO doesn't workf or reload=True
     workspace = type_info.get_workspace()
     for feed_name, feed_output in feed_outputs.items():
         # don't let a failure in one feed break all the rest
@@ -273,8 +274,8 @@ class Reload(object):
 
         reload_types = [ type.strip() for type in reload_types.split(",")]
         # only load valid types found in the system
-        reload_types = set(self.search_type_names).intersection(reload_types) \
-                    if reload_types else self.search_type_names
+        reload_types = list(set(self.search_type_names).intersection(reload_types) \
+                    if reload_types else self.search_type_names)
         LOG.debug("reload_types filtered: %s", reload_types)
 
         actual_max_inc_id, actual_min_inc_id = self._populate_incidents(self.type_info_index, min_inc_id, max_inc_id,
