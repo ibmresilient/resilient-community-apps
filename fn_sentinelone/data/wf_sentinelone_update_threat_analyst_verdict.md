@@ -18,7 +18,6 @@
 
 ### Pre-Processing Script
 ```python
-inputs.incident_id = incident.id
 inputs.sentinelone_threat_id = incident.properties.sentinelone_threat_id
 inputs.sentinelone_threat_analyst_verdict = rule.properties.sentinelone_threat_analyst_verdict
 ```
