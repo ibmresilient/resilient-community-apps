@@ -47,6 +47,7 @@ fn_mcafee_epo
 fn_mcafee_esm
 fn_mcafee_opendxl
 fn_mcafee_tie
+fn_microsoft_defender
 fn_microsoft_security_graph
 fn_microsoft_sentinel
 fn_misp
