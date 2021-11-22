@@ -27,7 +27,7 @@ def codegen_reload_data():
         "incident_fields": [u"extrahop_detection_id"],
         "incident_artifact_types": [],
         "incident_types": [],
-        "datatables": [],
+        "datatables": [u"extrahop_activitymaps", u"extrahop_detections", u"extrahop_devices", u"extrahop_tags", u"extrahop_watchlist"],
         "automatic_tasks": [],
         "scripts": []
     }
@@ -82,6 +82,12 @@ def customization_data(client=None):
         - Example: Extrahop revealx update watchlist
     - Incident Fields:
         - extrahop_detection_id
+    - Data Tables:
+        - extrahop_activitymaps
+        - extrahop_detections
+        - extrahop_devices
+        - extrahop_tags
+        - extrahop_watchlist
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)
