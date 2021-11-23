@@ -7,7 +7,6 @@ import six
 from resilient_lib import validate_fields
 import fn_qradar_enhanced_data.util.qradar_constants as qradar_constants
 from fn_qradar_enhanced_data.util import qradar_utils
-from fn_qradar_enhanced_data.util.resilient_utils import resilient_utils
 
 def make_query_string(query, params):
     """
@@ -67,16 +66,3 @@ def get_servers_list(opts, choose):
             validate_fields(["host", "verify_cert"], options)
 
     return servers_list
-
-def update_qradar_servers_select_list(opts, servers_list):
-    """
-    Populate the qradar_servers select list
-    :param opts: list of options
-    :param servers_list: list of qradar servers in app.config
-    :return: None
-    """
-    server_name_list = [
-        server[server.index(":")+1:]
-        for server in servers_list
-    ]
-    resilient_utils(opts).update_rule_action_field_values("qradar_servers", server_name_list)
