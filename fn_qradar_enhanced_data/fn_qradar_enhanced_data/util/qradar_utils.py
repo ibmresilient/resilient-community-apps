@@ -278,7 +278,6 @@ class QRadarClient(object):
 
     def ariel_graphql_search(self, temp_query, search_query, query_all=False, range_start=None,
                              range_end=None, timeout=None):
-
         """
         Perform an Ariel search
         :param query_all: bool used to decide if Range header is included in query
@@ -460,10 +459,10 @@ class QRadarClient(object):
     @staticmethod
     def get_offense_asset_data(asset):
         """
-                Get assests data for the Offense
-                :param asset: dict of sourceip and domainid
-                :return:
-                """
+        Get assests data for the Offense
+        :param asset: dict of sourceip and domainid
+        :return:
+        """
         auth_info = AuthInfo.get_authInfo()
         headers = auth_info.headers.copy()
         headers["Content-Type"] = "application/json"
@@ -529,6 +528,9 @@ class QRadarServers():
         return servers, server_name_list
 
     def qradar_label_test(qradar_label, servers_list):
+        """
+        Check if the given qradar_label is in the app.config
+        """
         if qradar_label and qradar_constants.PACKAGE_NAME+":"+qradar_label in servers_list:
             options = servers_list[qradar_constants.PACKAGE_NAME+":"+qradar_label]
         elif len(servers_list) == 1 or qradar_label == qradar_constants.PACKAGE_NAME:

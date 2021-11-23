@@ -36,4 +36,8 @@ class QRadarTab(Tab):
         Field("qradar_id").conditions.has_value()
     ]
 
-create_tab(QRadarTab, AppArgumentParser().parse_args(), update_existing=True)
+# Continues if exception is thrown
+try:
+    create_tab(QRadarTab, AppArgumentParser().parse_args(), update_existing=True)
+except SystemExit:
+    pass
