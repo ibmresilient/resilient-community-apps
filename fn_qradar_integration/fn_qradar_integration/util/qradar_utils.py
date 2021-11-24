@@ -379,47 +379,6 @@ class QRadarClient(object):
         return ret
 
     @staticmethod
-    def get_ref_set_elements(ref_set):
-        """
-        :param ref_set: Reference set name 
-        :return: Elements in the given reference set
-        """
-        auth_info = AuthInfo.get_authInfo()
-        url = u"{}{}/{}".format(auth_info.api_url, qradar_constants.REFERENCE_SET_URL, ref_set)
-        try:
-            response = auth_info.make_call("GET", url)
-            ret = response.json()
-        except Exception as e:
-            LOG.error(str(e))
-            raise IntegrationError("Request to url [{}] throws exception. Error [get_ref_set_elements call failed with exception {}]".format(url, str(e)))
-
-        return ret
-
-    @staticmethod
-    def update_ref_set_elements(ref_set, value):
-        """
-        :param ref_set: Reference set name
-        :return: Updated Elements in the given reference set
-        """
-        auth_info = AuthInfo.get_authInfo()
-        ref_set_link = quote(ref_set, '')
-        value = quote(value, '')
-        url = u"{}{}/{}?value={}".format(auth_info.api_url, qradar_constants.REFERENCE_SET_URL, ref_set_link, value)
-        
-        ret = {}
-        try:
-            response = auth_info.make_call("POST", url)
-
-            ret = {"status_code": response.status_code,
-                   "content": response.json()}
-
-        except Exception as e:
-            LOG.error(str(e))
-            raise IntegrationError("Request to url [{}] throws exception. Error [update_ref_set_elements call failed with exception {}]".format(url, str(e)))
-
-        return ret
-
-    @staticmethod
     def find_all_ref_set_contains(value):
         """
         :param value:
