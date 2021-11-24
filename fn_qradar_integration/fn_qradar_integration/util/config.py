@@ -31,5 +31,4 @@ qradarpassword=changeme
 qradartoken=changeme
 verify_cert=false
 #search_timeout=
-
 '''

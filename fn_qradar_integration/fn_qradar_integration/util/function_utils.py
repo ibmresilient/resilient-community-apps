@@ -79,8 +79,10 @@ def update_qradar_servers_select_list(opts, servers_list):
     :param servers_list: list of qradar servers in app.config
     :return: None
     """
-    server_name_list = [
-        server[server.index(":")+1:]
-        for server in servers_list
-    ]
+
+    server_name_list = []
+    for server in servers_list:
+        if ":" in server:
+            server_name_list.append(server[server.index(":")+1:])
+
     resilient_utils(opts).update_rule_action_field_values("qradar_servers", server_name_list)

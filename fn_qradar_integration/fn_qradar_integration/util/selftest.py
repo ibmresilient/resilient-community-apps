@@ -18,8 +18,6 @@ def selftest_function(opts):
     Suggested return values are be unimplemented, success, or failure.
     """
 
-    servers_list = {}
-
     options = opts.get(qradar_constants.PACKAGE_NAME, {})
 
     if not options:
@@ -28,12 +26,9 @@ def selftest_function(opts):
     else:
         server_list = {qradar_constants.PACKAGE_NAME}
 
-    for server_name in server_list:
-        servers_list[server_name] = opts.get(server_name, {})
-
     try:
-        for server_name in servers_list:
-            server = servers_list[server_name]
+        for server_name in server_list:
+            server = opts.get(server_name, {})
 
             log.info("Verifying app.config values for {}".format(qradar_constants.PACKAGE_NAME))
 

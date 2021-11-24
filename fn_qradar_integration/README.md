@@ -104,17 +104,17 @@ This app supports the IBM Resilient SOAR Platform and the IBM Cloud Pak for Secu
 The Resilient platform supports two app deployment mechanisms, App Host and integration server.
 
 If deploying to a Resilient platform with an App Host, the requirements are:
-* Resilient platform >= `39.0.6328`.
+* Resilient platform >= `40.0.6554`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a Resilient platform with an integration server, the requirements are:
-* Resilient platform >= `39.0.6328`.
+* Resilient platform >= `40.0.6554`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient_circuits>=39.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions: 
   | Name | Permissions |
   | ---- | ----------- |
-  | Org Data | Read |
+  | Org Data | Read, edit |
   | Function | Read |
 
 The following Resilient platform guides provide additional information: 
@@ -142,8 +142,8 @@ The app **does/does not** support a proxy server.
 ---
 
 ## Package Dependencies
-- resilient_circuits version 30 or later
-- python version 2.7.10 or later, or 3.6 or later
+- resilient_circuits version 39 or later
+- python version 3.6 or later
 
 ## Installation
 
