@@ -32,6 +32,12 @@ query_param=
 # Optional "resolved" parameter for querying threats from SentinelOne
 # If set to False "resolved" threats will not be escalated to SOAR 
 resolved=False
+# Optional "limit" parameter: limit the number of threats returned from querying threats from SentinelOne
+limit=25
+# Optional sortBy parameter used when querying SentinelOne threats
+sort_by=createdDate
+# Optional sortOrder for SentinelOne threat query results. Possible values: asc or desc
+sort_order=desc
 # Optional timeout in seconds for downloading threat file from SentinelOne
 # timeout=300
 #verify=false | /path/toclient_certificate.pem

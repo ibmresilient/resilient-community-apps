@@ -12,6 +12,9 @@ from resilient_lib.components.requests_common import DEFAULT_TIMEOUT
 LOG = logging.getLogger(__name__)
 
 DEFAULT_POLLER_LOOKBACK_MINUTES = 120
+DEFAULT_LIMIT = 25
+DEFAULT_SORT_BY = "createdDate"
+DEFAULT_SORT_ORDER = "desc"
 
 class SentinelOneClient(object):
     def __init__(self, opts, options):
@@ -28,9 +31,12 @@ class SentinelOneClient(object):
 
         self.polling_lookback = int(options.get("polling_lookback", DEFAULT_POLLER_LOOKBACK_MINUTES))
         site_ids = options.get("site_ids")
-        self.site_ids = site_ids.split(",") if site_ids else []
+        self.site_ids = site_ids if site_ids else []
         account_ids = options.get("account_ids")
-        self.account_ids = account_ids.split(",") if account_ids else []        
+        self.account_ids = account_ids if account_ids else []
+        self.limit = options.get("limit", DEFAULT_LIMIT)
+        self.sort_by = options.get("sort_by", DEFAULT_SORT_BY)
+        self.sort_order = options.get("sort_order", DEFAULT_SORT_ORDER)
         self.query_param = options.get("query_param", None)
         self.resolved = str_to_bool(options.get("resolved", "False"))
         self.timeout = options.get("timeout", DEFAULT_TIMEOUT)
@@ -115,6 +121,9 @@ class SentinelOneClient(object):
             'accountIds': self.account_ids,
             'siteIds': self.site_ids,
             'query': self.query_param,
+            'limit': self.limit,
+            'sortBy': self.sort_by,
+            'sortOrder': self.sort_order,
             'resolved': self.resolved,
             'updatedAt__gte': last_poller_datetime_string
         }
@@ -126,6 +135,9 @@ class SentinelOneClient(object):
             'accountIds': self.account_ids,
             'siteIds': self.site_ids,
             'query': self.query_param,
+            'limit': self.limit,
+            'sortBy': self.sort_by,
+            'sortOrder': self.sort_order,
             'resolved': self.resolved,
             'createdAt__gte': last_poller_datetime_string
         }

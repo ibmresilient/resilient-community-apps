@@ -6,7 +6,6 @@ import logging
 import resilient
 from resilient import SimpleHTTPException
 from resilient_lib import IntegrationError
-from cachetools import LRUCache
 from fn_sentinelone.lib.constants import FROM_SENTINELONE_COMMENT_HDR, FROM_SOAR_COMMENT_HDR, SENTINELONE_THREAT_ID
 
 LOG = logging.getLogger(__name__)
