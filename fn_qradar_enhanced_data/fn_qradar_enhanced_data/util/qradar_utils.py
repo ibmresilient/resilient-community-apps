@@ -531,9 +531,10 @@ class QRadarServers():
         """
         Check if the given qradar_label is in the app.config
         """
-        if qradar_label and qradar_constants.PACKAGE_NAME+":"+qradar_label in servers_list:
-            options = servers_list[qradar_constants.PACKAGE_NAME+":"+qradar_label]
-        elif len(servers_list) == 1 or qradar_label == qradar_constants.PACKAGE_NAME:
+        label = qradar_constants.PACKAGE_NAME+":"+qradar_label
+        if qradar_label and label in servers_list:
+            options = servers_list[label]
+        elif (servers_list == 1 and qradar_label == qradar_constants.PACKAGE_NAME) or servers_list == 1:
             options = servers_list[list(servers_list.keys())[0]]
         else:
             raise IntegrationError("{} did not match labels given in the app.config".format(qradar_label))
