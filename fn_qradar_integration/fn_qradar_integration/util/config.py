@@ -18,7 +18,7 @@ username=admin
 qradarpassword=changeme
 #Note, if both qradarpassword and qradartoken are given, password will be used
 qradartoken=changeme
-verify_cert=false
+verify_cert=false|/path/to/cert
 #search_timeout=
 
 # Note: the QRadar instance name that you want to communicate with, must equal the
@@ -29,6 +29,6 @@ username=admin
 qradarpassword=changeme
 #Note, if both qradarpassword and qradartoken are given, password will be used
 qradartoken=changeme
-verify_cert=false
+verify_cert=false|/path/to/cert
 #search_timeout=
 '''
