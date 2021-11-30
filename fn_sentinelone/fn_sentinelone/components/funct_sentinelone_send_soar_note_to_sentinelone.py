@@ -3,7 +3,7 @@
 """AppFunction implementation"""
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from resilient_lib import IntegrationError, validate_fields, clean_html
+from resilient_lib import IntegrationError, clean_html
 from fn_sentinelone.lib.constants import FROM_SENTINELONE_COMMENT_HDR, SENT_TO_SENTINELONE_HDR
 from fn_sentinelone.lib.sentinelone_common import SentinelOneClient
 
@@ -31,29 +31,34 @@ class FunctionComponent(AppFunctionComponent):
         threat_id = fn_inputs.sentinelone_threat_id
 
         result = {}
+        reason = None
         if FROM_SENTINELONE_COMMENT_HDR in note_text or SENT_TO_SENTINELONE_HDR in note_text:
             yield self.status_message("Bypassing synchronization of note: {}".format(note_text))
-
-            reason = None
-            status = False
+            status = "success"
         else:
-            sentinelone_api = SentinelOneClient(self.opts, self.options)
-            response = sentinelone_api.add_threat_note(threat_id, clean_html(note_text))
+            try:
+                sentinelone_api = SentinelOneClient(self.opts, self.options)
+                response = sentinelone_api.add_threat_note(threat_id, clean_html(note_text))
 
-            data = response.get("data")
-            affected = int(data.get("affected"))
-            if affected:
-                status = True
-                yield self.status_message("Sentinel comment added to threatId: {}"\
+                data = response.get("data")
+                affected = int(data.get("affected"))
+                if affected:
+                    status = "success"
+                    yield self.status_message("Sentinel comment added to threatId: {}"\
                                     .format(threat_id))
-            else:
-                status = False
-                errors = response.get("errors")
-                errors_type = errors.get("type")
-                yield self.status_message("Sentinel comment failure for threatId {}: {}"\
-                                    .format(threat_id, errors_type))
+                else:
+                    status = "failure"
+                    errors = response.get("errors")
+                    reason = errors.get("type")
+                    yield self.status_message("Sentinel comment failure for threatId {}: {}"\
+                                    .format(threat_id, reason))
+            except IntegrationError as err:
+                status = "failure"
+                reason = str(err)
 
-        results = {"status": status}
+        results = {"status": status,
+                   "reason:": reason}
+
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
 
         yield FunctionResult(results)

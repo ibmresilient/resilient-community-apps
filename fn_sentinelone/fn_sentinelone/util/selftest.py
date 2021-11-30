@@ -40,7 +40,7 @@ def selftest_function(opts):
 
     # Create api client
     rc = RequestsCommon(opts, app_configs)
-    sentinelone_client = SentinelOneClient(app_configs, rc)
+    sentinelone_client = SentinelOneClient(opts, app_configs)
 
     reason = None
     try:

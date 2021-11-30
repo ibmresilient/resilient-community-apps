@@ -60,7 +60,7 @@ class SentinelOneClient(object):
 
         response = self.rc.execute("GET", url, headers=self.headers, params=params, 
                                     verify=self.verify, proxies=self.rc.get_proxies())
-        response.raise_for_status()
+
         return response.json()
 
     def get_agent_details(self, agent_id):
@@ -74,7 +74,7 @@ class SentinelOneClient(object):
 
         response = self.rc.execute("GET", url, headers=self.headers, params=params, 
                                     verify=self.verify, proxies=self.rc.get_proxies())
-        response.raise_for_status()
+
         return response.json()
 
     def get_agents_passphrases(self):
@@ -87,7 +87,7 @@ class SentinelOneClient(object):
         }
         response = self.rc.execute("GET", url, headers=self.headers, params=params, 
                                     verify=self.verify, proxies=self.rc.get_proxies())
-        response.raise_for_status()
+
         return response.json()
 
     def get_threat_details(self, threat_id):
@@ -101,7 +101,7 @@ class SentinelOneClient(object):
 
         response = self.rc.execute("GET", url, headers=self.headers, params=params, 
                                     verify=self.verify, proxies=self.rc.get_proxies())
-        response.raise_for_status()
+
         return response.json()
 
     def get_threats_by_time(self, last_poller_time):
@@ -173,7 +173,7 @@ class SentinelOneClient(object):
         while nextCursor:
             response = self.rc.execute("GET", url, headers=self.headers, params=params, 
                                         verify=self.verify, proxies=self.rc.get_proxies())
-            response.raise_for_status()
+
             response_json = response.json()
             pagination = response_json.get("pagination")
             nextCursor = pagination.get("nextCursor")
@@ -199,7 +199,7 @@ class SentinelOneClient(object):
         while nextCursor:
             response = self.rc.execute("GET", url, headers=self.headers, params=params, 
                                         verify=self.verify, proxies=self.rc.get_proxies())
-            response.raise_for_status()
+
             response_json = response.json()
             pagination = response_json.get("pagination")
             nextCursor = pagination.get("nextCursor")
@@ -227,7 +227,6 @@ class SentinelOneClient(object):
 
         response = self.rc.execute("POST", url, headers=self.headers, json=payload, 
                                     verify=self.verify, proxies=self.rc.get_proxies())
-        response.raise_for_status()
         return response.json()
 
     def get_system_info(self):
@@ -240,7 +239,7 @@ class SentinelOneClient(object):
 
         response = self.rc.execute("GET", url, headers=self.headers, params=params, 
                                     verify=self.verify, proxies=self.rc.get_proxies())
-        response.raise_for_status()
+
         return response.json()
 
     def download_from_cloud(self, threat_id):
@@ -253,7 +252,7 @@ class SentinelOneClient(object):
 
         response = self.rc.execute("GET", url, headers=self.headers, params=params, 
                                     verify=self.verify, proxies=self.rc.get_proxies())
-        response.raise_for_status()
+
         return response.json()
 
     def connect_to_network(self, agents_id):
@@ -270,7 +269,7 @@ class SentinelOneClient(object):
 
         response = self.rc.execute("POST", url, headers=self.headers, json=payload, 
                                     verify=self.verify, proxies=self.rc.get_proxies())
-        response.raise_for_status()
+
         return response.json()
 
     def disconnect_from_network(self, agents_id):
@@ -287,7 +286,7 @@ class SentinelOneClient(object):
 
         response = self.rc.execute("POST", url, headers=self.headers, json=payload, 
                                     verify=self.verify, proxies=self.rc.get_proxies())
-        response.raise_for_status()
+
         return response.json()
 
     def abort_scan(self, agents_id):
@@ -304,7 +303,7 @@ class SentinelOneClient(object):
 
         response = self.rc.execute("POST", url, headers=self.headers, json=payload, 
                                     verify=self.verify, proxies=self.rc.get_proxies())
-        response.raise_for_status()
+
         return response.json()
 
     def initiate_scan(self, agents_id):
@@ -321,7 +320,7 @@ class SentinelOneClient(object):
 
         response = self.rc.execute("POST", url, headers=self.headers, json=payload, 
                                     verify=self.verify, proxies=self.rc.get_proxies())
-        response.raise_for_status()
+
         return response.json()
 
     def shutdown_agent(self, agents_id):
@@ -338,7 +337,7 @@ class SentinelOneClient(object):
 
         response = self.rc.execute("POST", url, headers=self.headers, json=payload, 
                                     verify=self.verify, proxies=self.rc.get_proxies())
-        response.raise_for_status()
+
         return response.json()
 
     def update_threat_analyst_verdict(self, threat_id, analyst_verdict):
@@ -357,7 +356,7 @@ class SentinelOneClient(object):
 
         response = self.rc.execute("POST", url, headers=self.headers, json=payload, 
                                     verify=self.verify, proxies=self.rc.get_proxies())
-        response.raise_for_status()
+
         return response.json()
 
     def update_threat_status(self, threat_id, threat_status):
@@ -376,7 +375,6 @@ class SentinelOneClient(object):
 
         response = self.rc.execute("POST", url, headers=self.headers, json=payload, 
                                     verify=self.verify, proxies=self.rc.get_proxies())
-        response.raise_for_status()
         return response.json()
 
     def get_hash_reputation(self, hash):
@@ -389,7 +387,7 @@ class SentinelOneClient(object):
 
         response = self.rc.execute("GET", url, headers=self.headers, params=params, 
                                     verify=self.verify, proxies=self.rc.get_proxies())
-        response.raise_for_status()
+
         return response.json()
 
     def _make_createdate_filter(self, last_poller_datetime):
