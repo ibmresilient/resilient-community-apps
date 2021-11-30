@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_splunk_integration',
-    version='1.0.3',
+    version='1.1.0',
     license='MIT License',
     author='IBM Resilient',
     author_email='support@resilientsystems.com',
@@ -13,7 +13,7 @@ setup(
     long_description="Several functions to operate with Splunk ES intel collections, including updates to SplunkES notable events and add, search and delete operations to intel collections based on artifact type values.",
     url="https://github.com/ibmresilient/resilient-community-apps",
     install_requires=[
-        'resilient_circuits>=30.0.0',
+        'resilient_circuits>=40.0.0',
         'resilient_lib',
         'splunk-sdk'
     ],

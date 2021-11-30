@@ -10,7 +10,7 @@ This function package provides the following features to be used in a workflow:
 4. Update a Splunk ES notable event
 
 ## System Requirements
-- Resilient Server version 35 or later
+- Resilient Server version 40 or later
 - Splunk version 7.0 or later, or Splunk Cloud
 - Splunk ES 4.7.2 or later, or Splunk ES Cloud
 - Ability to connect to Resilient server with HTTPS on port 443 and 65001
@@ -20,7 +20,7 @@ This function package provides the following features to be used in a workflow:
 - python requests
 - resilient-lib
 - Splunk SDK
-- resilient_circuits version 30 or later
+- resilient_circuits version 40 or later
 
 ### App Host Installation
 All the components for running this integration in a container already exist when using the App Host app.

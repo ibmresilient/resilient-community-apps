@@ -8,9 +8,11 @@
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import ResultPayload
-from fn_splunk_integration.util import splunk_utils
+from fn_splunk_integration.util import splunk_utils, function_utils
+import fn_splunk_integration.util.splunk_constants as splunk_constants
+from fn_splunk_integration.util.splunk_utils import SplunkServers
 
-SECTION_HDR = "fn_splunk_integration"
+log = logging.getLogger(__name__)
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'splunk_delete_threat_intel_item"""
@@ -18,12 +20,12 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get(SECTION_HDR, {})
+        self.servers_list = function_utils.get_servers_list(opts, "init")
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
-        self.options = opts.get(SECTION_HDR, {})
+        self.servers_list = function_utils.get_servers_list(opts, "reload")
 
     @function("splunk_delete_threat_intel_item")
     def _splunk_delete_threat_intel_item_function(self, event, *args, **kwargs):
@@ -34,31 +36,34 @@ class FunctionComponent(ResilientComponent):
         try:
             # Get the function parameters:
             splunk_threat_intel_type = kwargs.get("splunk_threat_intel_type")  # text
-            splunk_threat_intel_key = kwargs.get("splunk_threat_intel_key")  # text
-            splunk_verify_cert = kwargs.get("splunk_verify_cert")  # boolean
+            splunk_threat_intel_key = kwargs.get("splunk_threat_intel_key")    # text
+            splunk_verify_cert = kwargs.get("splunk_verify_cert")              # boolean
+            splunk_label = kwargs.get("splunk_label")                          # text
+
+            options = SplunkServers.splunk_label_test(splunk_label, self.servers_list)
 
             splunk_verify_cert = True
-            if "verify_cert" in self.options and self.options["verify_cert"] == "false":
+            if "verify_cert" in options and options["verify_cert"] == "false":
                 splunk_verify_cert = False
 
             # Log all the info
-            log = logging.getLogger(__name__)
             log.info("splunk_threat_intel_type: %s", splunk_threat_intel_type)
             log.info("splunk_threat_intel_key: %s", splunk_threat_intel_key)
             log.info("splunk_verify_cert: " + str(splunk_verify_cert))
+            log.info("splunk_label: %s", splunk_label)
 
             # Log the splunk server we are using
             log.info("Splunk host: %s, port: %s, username: %s",
-                     self.options["host"], self.options["port"], self.options["username"])
+                     options["host"], options["port"], options["username"])
 
             yield StatusMessage("starting...")
 
-            result_payload = ResultPayload(SECTION_HDR, **kwargs)
+            result_payload = ResultPayload(splunk_constants.PACKAGE_NAME, **kwargs)
 
-            splnk_utils = splunk_utils.SplunkUtils(host=self.options["host"],
-                                                   port=self.options["port"],
-                                                   username=self.options["username"],
-                                                   password=self.options["splunkpassword"],
+            splnk_utils = splunk_utils.SplunkUtils(host=options["host"],
+                                                   port=options["port"],
+                                                   username=options["username"],
+                                                   password=options["splunkpassword"],
                                                    verify=splunk_verify_cert)
 
             splunk_result = splnk_utils.delete_threat_intel_item(threat_type=splunk_threat_intel_type,

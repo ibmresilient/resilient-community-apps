@@ -12,7 +12,6 @@ LOG = logging.getLogger(__name__)
 LOG.setLevel(logging.INFO)
 LOG.addHandler(logging.StreamHandler())
 
-
 def selftest_function(opts):
     """
     This test uses configs in the app.config file to call attempt a splunk connect

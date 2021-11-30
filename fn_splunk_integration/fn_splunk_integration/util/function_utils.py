@@ -3,6 +3,10 @@
 # (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 #
 import logging
+import fn_splunk_integration.util.splunk_constants as splunk_constants
+from resilient_lib import validate_fields
+from fn_splunk_integration.util.resilient_utils import resilient_utils
+from fn_splunk_integration.util import splunk_utils
 LOG = logging.getLogger(__name__)
 
 class ItemDataError(Exception):
@@ -28,7 +32,6 @@ def make_query_string(query, params):
 
     return query_string
 
-
 def make_item_dict(params):
     """
     Use the params list to build a dict
@@ -53,3 +56,47 @@ def make_item_dict(params):
         index += 2
 
     return ret
+
+def get_servers_list(opts, choose):
+    """
+    Used for initilizing or reloading the options variable
+    :param opts: list of options
+    :param choose: either init or reload
+    :return: list of splunk servers
+    """
+    servers_list = {}
+
+    options = opts.get(splunk_constants.PACKAGE_NAME, {})
+
+    if options:
+        server_list = {splunk_constants.PACKAGE_NAME}
+    else:
+        servers = splunk_utils.SplunkServers(opts, options)
+        server_list = servers.get_server_name_list()
+
+    for server_name in server_list:
+        servers_list[server_name] = opts.get(server_name, {})
+        if choose == "init":
+            options = servers_list[server_name]
+
+            required_fields = ["host", "port", "verify_cert"]
+            validate_fields(required_fields, options)
+
+    return servers_list
+
+def update_splunk_servers_select_list(opts, servers_list):
+    """
+    Populate the splunk_servers select list
+    :param opts: list of options
+    :param servers_list: list of splunk servers in app.config
+    :return: None
+    """
+
+    server_name_list = []
+    for server in servers_list:
+        if ":" in server:
+            server_name_list.append(server[server.index(":")+1:])
+        else:
+            server_name_list.append(server)
+
+    resilient_utils(opts).update_rule_action_field_values("splunk_servers", server_name_list)

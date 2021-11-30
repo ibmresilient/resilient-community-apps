@@ -12,6 +12,8 @@ import requests
 from xml.dom import minidom
 import json
 import sys
+import fn_splunk_integration.util.splunk_constants as splunk_constants
+from resilient_lib import IntegrationError
 
 if sys.version_info.major < 3:
     import urllib as urlparse
@@ -24,14 +26,12 @@ LOG = logging.getLogger(__name__)
 # Constants
 SPLUNK_SECTION="splunk_integration"
 
-
 class SearchFailure(Exception):
     """ Search failed to execute """
     def __init__(self, search_id, search_status):
         fail_msg = "Query [{}] failed with status [{}]".format(search_id, search_status)
         super(SearchFailure, self).__init__(fail_msg)
         self.search_status = search_status
-
 
 class SearchTimeout(Exception):
     """ Query failed to complete in time specified """
@@ -40,13 +40,11 @@ class SearchTimeout(Exception):
         super(SearchTimeout, self).__init__(fail_msg)
         self.search_status = search_status
 
-
 class SearchJobFailure(Exception):
     """ Search job creation failure"""
     def __init__(self, query):
         fail_msg = u"Failed to create search job for query [{}] ".format(query)
         super(SearchJobFailure, self).__init__(fail_msg)
-
 
 class RequestError(Exception):
     """ Request error"""
@@ -54,13 +52,11 @@ class RequestError(Exception):
         fail_msg = u"Request to url [{}] throws exception. Error [{}]".format(url, message)
         super(RequestError, self).__init__(fail_msg)
 
-
 class DeleteError(Exception):
     """ Request error"""
     def __init__(self, url, message):
         fail_msg = u"Delete request to url [{}] throws exception. Error [{}]".format(url, message)
         super(DeleteError, self).__init__(fail_msg)
-
 
 class SplunkClient(object):
     """ Wrapper of splunklib.client"""
@@ -182,7 +178,6 @@ class SplunkClient(object):
         result = {"events": list([dict(row) for row in reader])}
 
         return result
-
 
 class SplunkUtils(object):
     """ Use python requests to call Splunk REST API"""
@@ -354,3 +349,50 @@ class SplunkUtils(object):
         except requests.RequestException as e:
             raise RequestError(url, "Ambiguous exception when handling request. " + str(e))
         return ret
+
+class SplunkServers():
+    def __init__(self, opts, options):
+        self.servers, self.server_name_list = self._load_servers(opts, options)
+
+    def _load_servers(self, opts, options):
+        servers = {}
+        server_name_list = self._get_server_name_list(opts)
+        for server in server_name_list:
+            server_name = u"{}".format(server)
+            server_data = opts.get(server_name)
+            if not server_data:
+                raise KeyError(u"Unable to find Splunk server: {}".format(server_name))
+            
+            servers[server] = server_data
+        
+        return servers, server_name_list
+
+    def splunk_label_test(splunk_label, servers_list):
+        """
+        Check if the given splunk_label is in the app.config
+        """
+        label = splunk_constants.PACKAGE_NAME+":"+splunk_label
+        if splunk_label and label in servers_list:
+            options = servers_list[label]
+        elif (len(servers_list) == 1 and splunk_label == splunk_constants.PACKAGE_NAME) or servers_list == 1:
+            options = servers_list[list(servers_list.keys())[0]]
+        else:
+            raise IntegrationError("{} did not match labels given in the app.config".format(splunk_label))
+
+        return options
+
+    def _get_server_name_list(self, opts):
+        """
+        Return the list of Splunk server names defined in the app.config in fn_splunk_integration. 
+        """
+        server_list = []
+        for key in opts.keys():
+            if key.startswith("{}:".format(splunk_constants.PACKAGE_NAME)):
+                server_list.append(key)
+        return server_list
+
+    def get_server_name_list(self):
+        """
+        Return list of all server names
+        """
+        return self.server_name_list
