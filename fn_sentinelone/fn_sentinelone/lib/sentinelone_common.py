@@ -211,6 +211,25 @@ class SentinelOneClient(object):
                 threat_notes.append(note)
         return threat_notes
 
+    def add_threat_note(self, threat_id, note_text):
+        """ Get threat notes for a given threat
+        """
+        url = u"{0}/threats/notes".format(self.base_url, threat_id)
+
+        payload = {
+            "filter": {
+                "ids": threat_id
+            },
+            "data": {
+                "text": note_text
+            }
+        }
+
+        response = self.rc.execute("POST", url, headers=self.headers, json=payload, 
+                                    verify=self.verify, proxies=self.rc.get_proxies())
+        response.raise_for_status()
+        return response.json()
+
     def get_system_info(self):
         """ Get SentinelOne management console sytem info.
         """
