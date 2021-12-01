@@ -130,7 +130,7 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
                             self._rollback_transaction(cursor)
                         raise err
                     except Exception:
-                        pass
+                        pass # nosec
 
 
     def _add_field_to_table(self, cursor, type_name, field):
@@ -255,4 +255,4 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
                             self._rollback_transaction(cursor)
                         raise err
                     except Exception:
-                        pass
+                        pass # nosec
