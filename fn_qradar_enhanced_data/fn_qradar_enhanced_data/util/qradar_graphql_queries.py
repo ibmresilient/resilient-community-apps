@@ -30,6 +30,14 @@ GRAPHQL_OFFENSEQUERY = '''query offenseQuery($id: ID!) {
                                 eventCount
                                 flowCount
                                 __typename
+                                status
+                                domain {
+                                    id
+                                    name
+                                    __typename
+                                }
+                                startTime
+                                lastUpdatedTime
                             }
                         }
                        '''
