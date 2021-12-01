@@ -12,4 +12,4 @@ include icons/*.png
 include tox.ini
 recursive-include tests/ *
 
-exclude *.bak
+global-exclude *.bak
