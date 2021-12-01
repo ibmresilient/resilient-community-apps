@@ -30,7 +30,6 @@ class FunctionComponent(AppFunctionComponent):
         note_text = fn_inputs.sentinelone_note_text
         threat_id = fn_inputs.sentinelone_threat_id
 
-        result = {}
         reason = None
         if FROM_SENTINELONE_COMMENT_HDR in note_text or SENT_TO_SENTINELONE_HDR in note_text:
             yield self.status_message("Bypassing synchronization of note: {}".format(note_text))

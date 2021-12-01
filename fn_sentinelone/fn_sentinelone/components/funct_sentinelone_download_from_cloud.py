@@ -32,34 +32,25 @@ class FunctionComponent(AppFunctionComponent):
         incident_id = fn_inputs.incident_id
         threat_id = fn_inputs.sentinelone_threat_id
 
-        # Call SentinelOne to get the threat download URL
-        results = sentinelOne_client.download_from_cloud(threat_id)
+        # Call SentinelOne to get the threat download URL and download the threat file.
+        download_results = sentinelOne_client.download_from_cloud(threat_id)
 
-        data = results.get("data")
-        downloadUrl = data.get("downloadUrl")
-        threat_filename = data.get("fileName")
+        threat_filename = download_results.get("threat_filename")
+        datastream = download_results.get("datastream")
+        download_url = download_results.get("download_url")
 
-        response = self.rc.execute("GET", downloadUrl, self.timeout, callback=report_callback)
-
-        datastream = BytesIO(response.content)
         attachment_name = u"SentinelOne--{0}".format(threat_filename)
 
         # Write the file as an attachment
         write_file_attachment(self.rest_client(), attachment_name, datastream, incident_id, None)
+
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
 
-        results = {"attachment_name": attachment_name,
-                   "downloadUrl": downloadUrl}
+        results = { "status": "success",
+                    "attachment_name": attachment_name,
+                    "threat_filename": threat_filename,
+                    "downloadUrl": download_url
+                    }
 
         yield FunctionResult(results)
 
-def report_callback(response):
-    """
-    callback to review status code, 200 - report ready, 404 - report not ready
-    :param response:
-    :return: response
-    """
-    if response.status_code in [200, 400, 404]:
-        return response
-    else:
-        raise IntegrationError(response.content)

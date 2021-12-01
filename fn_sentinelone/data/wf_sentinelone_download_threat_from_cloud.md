@@ -24,7 +24,14 @@ inputs.sentinelone_threat_id = incident.properties.sentinelone_threat_id
 
 ### Post-Processing Script
 ```python
-None
+success = results.get("success")
+content = results.get("content")
+if success and content:
+  attachment_name = content.get("attachment_name")
+  note_text = "<b>SentinelOne: Download from Cloud</b><br>  Incident attachment added: <b>{0}</b>".format(attachment_name)
+else:
+  note_text = "<b>SentinelOne: Download from Cloud</b><br>  ERROR adding attachment"
+incident.addNote(helper.createRichText(note_text))
 ```
 
 ---

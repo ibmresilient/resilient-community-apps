@@ -3,8 +3,7 @@
 
 """SentinelOne REST API client"""
 
-import os
-import datetime
+from io import BytesIO
 import logging 
 from resilient_lib import RequestsCommon, IntegrationError, validate_fields, str_to_bool
 from resilient_lib.components.requests_common import DEFAULT_TIMEOUT
@@ -247,13 +246,36 @@ class SentinelOneClient(object):
         """
         url = u"{0}/threats/{1}/download-from-cloud".format(self.base_url, threat_id)
 
-        params = {
-        }
-
-        response = self.rc.execute("GET", url, headers=self.headers, params=params, 
+        response = self.rc.execute("GET", url, headers=self.headers,
                                     verify=self.verify, proxies=self.rc.get_proxies())
+        
+        response_json = response.json()
+        
+        data = response_json.get("data")
+        download_url = data.get("downloadUrl")
+        threat_filename = data.get("fileName")
 
-        return response.json()
+        response = self.rc.execute("GET", download_url, timeout=self.timeout, headers=self.headers, 
+                                    verify=self.verify, proxies=self.rc.get_proxies(),
+                                    callback=self._download_callback)
+
+        datastream = BytesIO(response.content)
+
+        return {"threat_filename": threat_filename,
+                "datastream": datastream,
+                "download_url": download_url 
+            }
+
+    def _download_callback(response):
+        """
+        callback to review status code, 200 - Success
+        :param response:
+        :return: response
+        """
+        if response.status_code in [200]:
+            return response
+        else:
+            raise IntegrationError(response.content)
 
     def connect_to_network(self, agents_id):
         """ Connect the endpoint to the network
