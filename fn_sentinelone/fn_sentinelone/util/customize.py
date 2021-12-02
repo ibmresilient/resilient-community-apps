@@ -22,8 +22,8 @@ def codegen_reload_data():
         "package": u"fn_sentinelone",
         "message_destinations": [u"fn_sentinelone"],
         "functions": [u"sentinelone_abort_disk_scan", u"sentinelone_connect_to_network", u"sentinelone_disconnect_from_network", u"sentinelone_download_from_cloud", u"sentinelone_get_agent_details", u"sentinelone_get_agents", u"sentinelone_get_hash_reputation", u"sentinelone_get_threat_details", u"sentinelone_initiate_disk_scan", u"sentinelone_send_soar_note_to_sentinelone", u"sentinelone_shutdown_agent", u"sentinelone_update_notes_from_sentinelone", u"sentinelone_update_threat_analyst_verdict", u"sentinelone_update_threat_status"],
-        "workflows": [u"sentinelone_add_agent_to_data_table", u"sentinelone_connect_to_network", u"sentinelone_disconnect_from_network", u"sentinelone_download_threat_from_cloud", u"sentinelone_get_hash_reputation", u"sentinelone_initiate_disk_scan", u"sentinelone_send_soar_note_to_sentinelone", u"sentinelone_shutdown_agent", u"sentinelone_update_notes_from_sentinelone", u"sentinelone_update_threat_analyst_verdict", u"sentinelone_update_threat_status", u"sentinelone_write_agent_details_to_note", u"sentinelone_write_threat_details_to_note"],
-        "actions": [u"SentinelOne: Add Agent to Data Table", u"SentinelOne: Connect Agent to Network", u"SentinelOne: Disconnect Agent From Network", u"SentinelOne: Download From Cloud", u"SentinelOne: Get Hash Reputation", u"SentinelOne: Initiate Disk Scan", u"SentinelOne: Send Note to SentinelOne Threat", u"SentinelOne: Send SOAR note to SentinelOne", u"SentinelOne: Shutdown Agent", u"SentinelOne: Update Agent in Data table", u"SentinelOne: Update Notes from SentinelOne", u"SentinelOne: Update Threat Analyst Verdict", u"SentinelOne: Update Threat Status", u"SentinelOne: Write Agent Details to Note", u"SentinelOne: Write Threat Details to Note"],
+        "workflows": [u"sentinelone_abort_disk_scan", u"sentinelone_add_agent_to_data_table", u"sentinelone_connect_to_network", u"sentinelone_disconnect_from_network", u"sentinelone_download_threat_from_cloud", u"sentinelone_get_hash_reputation", u"sentinelone_initiate_disk_scan", u"sentinelone_send_soar_note_to_sentinelone", u"sentinelone_shutdown_agent", u"sentinelone_update_notes_from_sentinelone", u"sentinelone_update_threat_analyst_verdict", u"sentinelone_update_threat_status", u"sentinelone_write_agent_details_to_note", u"sentinelone_write_threat_details_to_note"],
+        "actions": [u"SentinelOne: Abort Disk Scan", u"SentinelOne: Add Agent to Data Table", u"SentinelOne: Connect Agent to Network", u"SentinelOne: Disconnect Agent From Network", u"SentinelOne: Download From Cloud", u"SentinelOne: Get Hash Reputation", u"SentinelOne: Initiate Disk Scan", u"SentinelOne: Send Note to SentinelOne Threat", u"SentinelOne: Send SOAR note to SentinelOne", u"SentinelOne: Shutdown Agent", u"SentinelOne: Update Agent in Data table", u"SentinelOne: Update Notes from SentinelOne", u"SentinelOne: Update Threat Analyst Verdict", u"SentinelOne: Update Threat Status", u"SentinelOne: Write Agent Details to Note", u"SentinelOne: Write Threat Details to Note"],
         "incident_fields": [u"sentinelone_agent_id", u"sentinelone_classification", u"sentinelone_confidence_level", u"sentinelone_incident_status", u"sentinelone_mitigation_status", u"sentinelone_mitigation_status_description", u"sentinelone_threat_analyst_verdict", u"sentinelone_threat_id", u"sentinelone_threat_name", u"sentinelone_threat_overview_url"],
         "incident_artifact_types": [],
         "incident_types": [],
@@ -59,6 +59,7 @@ def customization_data(client=None):
         - sentinelone_update_threat_analyst_verdict
         - sentinelone_update_threat_status
     - Workflows:
+        - sentinelone_abort_disk_scan
         - sentinelone_add_agent_to_data_table
         - sentinelone_connect_to_network
         - sentinelone_disconnect_from_network
@@ -73,6 +74,7 @@ def customization_data(client=None):
         - sentinelone_write_agent_details_to_note
         - sentinelone_write_threat_details_to_note
     - Rules:
+        - SentinelOne: Abort Disk Scan
         - SentinelOne: Add Agent to Data Table
         - SentinelOne: Connect Agent to Network
         - SentinelOne: Disconnect Agent From Network

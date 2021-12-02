@@ -5,10 +5,10 @@
 
 # SentinelOne: Abort Disk Scan
 
-## Function - SentinelOne: Initiate Disk Scan
+## Function - SentinelOne: Abort Disk Scan
 
 ### API Name
-`sentinelone_initiate_disk_scan`
+`sentinelone_abort_disk_scan`
 
 ### Output Name
 `None`
