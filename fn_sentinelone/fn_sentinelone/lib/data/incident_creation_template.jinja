@@ -36,6 +36,19 @@
         }
       }
       {% endif %}
+    {% if agentDetectionInfo.externalIp %}
+      {{- comma() }}
+      {
+        "type": {
+          "name": "IP Address"
+        },
+        "value": "{{ agentDetectionInfo.externalIp }}",
+        "description": {
+          "format": "text",
+          "content": "creation date: {{ threatInfo.createdAt|resilient_datetimeformat  }}"
+        }
+      }
+      {% endif %}
     {% if threatInfo.processUser %}
       {{- comma() }}
       {

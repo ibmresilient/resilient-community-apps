@@ -345,6 +345,23 @@ class SentinelOneClient(object):
 
         return response.json()
 
+    def restart_agent(self, agents_id):
+        """ Restart an agent
+        """
+        url = u"{0}/agents/actions/restart-machine".format(self.base_url)
+
+        payload = {
+            "filter": {
+                "ids": agents_id
+            },
+            "data": {}
+        }
+
+        response = self.rc.execute("POST", url, headers=self.headers, json=payload, 
+                                    verify=self.verify, proxies=self.rc.get_proxies())
+
+        return response.json()
+
     def shutdown_agent(self, agents_id):
         """ Initiate shutdown of the agent
         """

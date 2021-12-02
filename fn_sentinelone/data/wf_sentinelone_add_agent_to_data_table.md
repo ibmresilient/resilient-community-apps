@@ -52,7 +52,6 @@ if content:
       agent_row.sentinelone_dt_os_name = agent.get("osName")
       agent_row.sentinelone_dt_uuid = agent.get("uuid")
       agent_row.sentinelone_dt_is_active = agent.get("isActive")
-      agent_row.sentinelone_dt_is_decommissioned = agent.get("isDecommissioned")
       agent_row.sentinelone_dt_registered = agent.get("registeredAt")
       agent_row.sentinelone_dt_created = agent.get("createdAt")
       agent_row.sentinelone_dt_updated = agent.get("updatedAt")
