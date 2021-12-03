@@ -110,8 +110,8 @@ def send_data(type_info, inc_id, rest_client_helper, payload,\
                                                  artifact_id=payload['id'])
 
     # get the incident workspace for this data
-    # TODO doesn't workf or reload=True
-    workspace = type_info.get_workspace()
+    # reload=true will not work as type_info is the wrong object type
+    workspace = type_info.get_workspace() if getattr(type_info, "get_workspace", None) else None
     for feed_name, feed_output in feed_outputs.items():
         # don't let a failure in one feed break all the rest
         try:
