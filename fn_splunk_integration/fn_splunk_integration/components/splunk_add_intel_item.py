@@ -9,7 +9,7 @@ import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import ResultPayload
 from fn_splunk_integration.util import function_utils, splunk_utils
-import fn_splunk_integration.util.splunk_constants as splunk_constants
+from fn_splunk_integration.util.splunk_constants import QUERY_PARAM, PACKAGE_NAME
 from fn_splunk_integration.util.splunk_utils import SplunkServers
 
 log = logging.getLogger(__name__)
@@ -37,18 +37,14 @@ class FunctionComponent(ResilientComponent):
         splunk_query_param4: field2 value;
         ....."""
         try:
+            params_list = []
             # Get the function parameters:
             splunk_threat_intel_type = kwargs.get("splunk_threat_intel_type")  # text
-            splunk_query_param1 = kwargs.get("splunk_query_param1")            # text
-            splunk_query_param2 = kwargs.get("splunk_query_param2")            # text
-            splunk_query_param3 = kwargs.get("splunk_query_param3")            # text
-            splunk_query_param4 = kwargs.get("splunk_query_param4")            # text
-            splunk_query_param5 = kwargs.get("splunk_query_param5")            # text
-            splunk_query_param6 = kwargs.get("splunk_query_param6")            # text
-            splunk_query_param7 = kwargs.get("splunk_query_param7")            # text
-            splunk_query_param8 = kwargs.get("splunk_query_param8")            # text
-            splunk_query_param9 = kwargs.get("splunk_query_param9")            # text
-            splunk_query_param10 = kwargs.get("splunk_query_param10")          # text
+            # splunk_query_param1-10
+            for i in range(1,11):
+                locals()[f'{QUERY_PARAM}{i}'] = kwargs.get(QUERY_PARAM+str(i))
+                params_list.append(locals()[f'{QUERY_PARAM}{i}'])
+
             splunk_label = kwargs.get("splunk_label")                          # text
 
             options = SplunkServers.splunk_label_test(splunk_label, self.servers_list)
@@ -59,34 +55,19 @@ class FunctionComponent(ResilientComponent):
 
             # Log all the info
             log.info("splunk_threat_intel_type: %s", splunk_threat_intel_type)
-            log.info("splunk_query_param1: %s", splunk_query_param1)
-            log.info("splunk_query_param2: %s", splunk_query_param2)
-            log.info("splunk_query_param3: %s", splunk_query_param3)
-            log.info("splunk_query_param4: %s", splunk_query_param4)
-            log.info("splunk_query_param5: %s", splunk_query_param5)
-            log.info("splunk_query_param6: %s", splunk_query_param6)
-            log.info("splunk_query_param7: %s", splunk_query_param7)
-            log.info("splunk_query_param8: %s", splunk_query_param8)
-            log.info("splunk_query_param9: %s", splunk_query_param9)
-            log.info("splunk_query_param10: %s", splunk_query_param10)
+            # Log splunk_query_param1-10
+            for i in range(1,11):
+                log.info("{}{}: {}".format(QUERY_PARAM, str(i), locals().get(QUERY_PARAM+str(i))))
             log.info("splunk_verify_cert: %s", str(splunk_verify_cert))
             log.info("splunk_label: %s", splunk_label)
 
-            yield StatusMessage("starting...")
+            wf_instance_id = event.message.get("workflow_instance", {}).get("workflow_instance_id", "no instance id found")
+            yield StatusMessage("Starting 'splunk_add_intel_item' that was running in workflow '{}'".format(wf_instance_id))
 
-            result_payload = ResultPayload(splunk_constants.PACKAGE_NAME, **kwargs)
+            result_payload = ResultPayload(PACKAGE_NAME, **kwargs)
 
             # build the dict used to add threat intel item
-            item_dict = function_utils.make_item_dict([splunk_query_param1,
-                                                       splunk_query_param2,
-                                                       splunk_query_param3,
-                                                       splunk_query_param4,
-                                                       splunk_query_param5,
-                                                       splunk_query_param6,
-                                                       splunk_query_param7,
-                                                       splunk_query_param8,
-                                                       splunk_query_param9,
-                                                       splunk_query_param10])
+            item_dict = function_utils.make_item_dict(params_list)
             # log it for debug
             log.debug("item dict: {}".format(str(item_dict)))
 
@@ -100,7 +81,7 @@ class FunctionComponent(ResilientComponent):
                                                        threat_dict=item_dict,
                                                        cafile=splunk_verify_cert)
 
-            yield StatusMessage("done...")
+            yield StatusMessage("Finished 'splunk_add_intel_item' that was running in workflow '{}'".format(wf_instance_id))
 
             # Produce a FunctionResult with the results
             yield FunctionResult(result_payload.done(True, splunk_result.get('content', {})))

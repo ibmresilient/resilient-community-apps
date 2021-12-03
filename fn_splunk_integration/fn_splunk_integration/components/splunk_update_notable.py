@@ -41,7 +41,7 @@ class FunctionComponent(ResilientComponent):
             event_id = kwargs.get("event_id")                          # text
             comment = kwargs.get("comment")                            # text
             notable_event_status = kwargs.get("notable_event_status")  # number
-            splunk_label = kwargs.get("splunk")                        # text
+            splunk_label = kwargs.get("splunk_label")                        # text
 
             options = SplunkServers.splunk_label_test(splunk_label, self.servers_list)
 
@@ -59,7 +59,8 @@ class FunctionComponent(ResilientComponent):
             log.info("Splunk host: %s, port: %s, username: %s",
                      options["host"], options["port"], options["username"])
 
-            yield StatusMessage("starting...")
+            wf_instance_id = event.message.get("workflow_instance", {}).get("workflow_instance_id", "no instance id found")
+            yield StatusMessage("Starting 'splunk_update_notable' that was running in workflow '{}'".format(wf_instance_id))
 
             result_payload = ResultPayload(splunk_constants.PACKAGE_NAME, **kwargs)
 
@@ -74,7 +75,7 @@ class FunctionComponent(ResilientComponent):
                                                  status=notable_event_status,
                                                  cafile=splunk_verify_cert)
 
-            yield StatusMessage("done...")
+            yield StatusMessage("Finished 'splunk_update_notable' that was running in workflow '{}'".format(wf_instance_id))
 
             # Produce a FunctionResult with the return value
             yield FunctionResult(result_payload.done(True, splunk_result.get('content', {})))

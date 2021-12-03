@@ -56,7 +56,8 @@ class FunctionComponent(ResilientComponent):
             log.info("Splunk host: %s, port: %s, username: %s",
                      options["host"], options["port"], options["username"])
 
-            yield StatusMessage("starting...")
+            wf_instance_id = event.message.get("workflow_instance", {}).get("workflow_instance_id", "no instance id found")
+            yield StatusMessage("Starting 'splunk_delete_threate_intel_item' that was running in workflow '{}'".format(wf_instance_id))
 
             result_payload = ResultPayload(splunk_constants.PACKAGE_NAME, **kwargs)
 
@@ -70,7 +71,7 @@ class FunctionComponent(ResilientComponent):
                                                           item_key=splunk_threat_intel_key,
                                                           cafile=splunk_verify_cert)
 
-            yield StatusMessage("done...")
+            yield StatusMessage("Finished 'splunk_delete_threate_intel_item' that was running in workflow '{}'".format(wf_instance_id))
             yield FunctionResult(result_payload.done(True, splunk_result.get('content', {})))
         except Exception as e:
             log.error("Function execution throws exception {}".format(str(e)))
