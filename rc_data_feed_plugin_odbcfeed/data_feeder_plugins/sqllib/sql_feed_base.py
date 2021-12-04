@@ -5,6 +5,7 @@
 import abc
 import logging
 
+from cachetools import cached, LRUCache
 from rc_data_feed.lib.feed import FeedDestinationBase
 from rc_data_feed.lib.type_info import TypeInfo
 from .sql_dialect import PostgreSQL96Dialect, SqliteDialect, MySqlDialect, SqlServerDialect, OracleDialect
@@ -81,6 +82,18 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
     def _reinit(self, connect_str, uid, pwd, dialect=None):
         raise NotImplementedError
 
+    def cache_key(self, type_name, all_fields):
+        # serialize the fields so that we can create a hash key
+        # new fields in an object will produce a new hash key which will trigger the new field to be
+        #   added to the db table schema
+        field_list = [item['name'] for item in all_fields]
+        field_list.append(type_name)
+
+        hash_key = abs(hash(frozenset(field_list)))
+        LOG.debug("hash_key (%s): %s", type_name, hash_key)
+        return hash_key
+
+    @cached(cache=LRUCache(100), key=cache_key)
     def _create_or_update_table(self, type_name, all_fields):
 
         for retry in range(2):

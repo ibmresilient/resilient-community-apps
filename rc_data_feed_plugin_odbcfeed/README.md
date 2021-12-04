@@ -1,6 +1,6 @@
 ## Release Notes
 
-* v1.0.6 Fixes for removed datatable columns
+* v1.0.6 Fixes for removed datatable columns, added caching for db schema updates - improving performance
 * v1.0.5 Support for attachment content
 * v1.0.4 Oracle definitions for AppHost
 * v1.0.3 AppHost configurations for Postresql, MS SQL Server, MySql, SQLite
