@@ -15,7 +15,7 @@ setup(
     install_requires=[
         'cachetools',
         'cx_Oracle',
-        'rc_data_feed>=2.1.1',
+        'rc_data_feed>=2.2.0',
         'resilient',
         'pyodbc',
         'six',
