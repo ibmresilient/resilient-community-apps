@@ -217,15 +217,26 @@ class TypeInfo(object):
             all_fields = self.get_all_fields(refresh=True)
 
         try:
-            values = self._get_field_values(payload, all_fields, translate_func, bypass=False)
+            values = self._get_field_values(payload, all_fields, translate_func, bypass_error=False)
         except ValueError:
             # this will trigger when a field ID is not found
             all_fields = self.get_all_fields(refresh=True)
-            values = self._get_field_values(payload, all_fields, translate_func, bypass=True)
+            values = self._get_field_values(payload, all_fields, translate_func, bypass_error=True)
 
         return values
 
-    def _get_field_values(self, payload, all_fields, translate_func, bypass=False):
+    def _get_field_values(self, payload, all_fields, translate_func, bypass_error=False):
+        """[convert object values based on a supplied conversion method]
+
+        Args:
+            payload ([dict]): [data to convert]
+            all_fields ([dict]): [schema of object]
+            translate_func ([object]): [method to convert the data based on it's type (int, text, date, etc.)]
+            bypass_error (bool, optional): [bypass conversion errors]. Defaults to False.
+
+        Returns:
+            [dict]: [converted fields]
+        """
         values = {}
 
         if self.is_data_table():
@@ -245,7 +256,7 @@ class TypeInfo(object):
 
                 values[field["name"]] = value
             except ValueError:
-                if bypass:
+                if bypass_error:
                     continue # this field will be skipped
 
                 raise
@@ -483,6 +494,11 @@ class ActionMessageTypeInfo(TypeInfo):
         self.type_info_map = type_info_map
 
     def get_workspace(self):
+        """[find the workspace associated with an incident]
+
+        Returns:
+            [str]: [incident workspace name or None is not set]
+        """
         if self.type_info_map.get('incident'):
             for workspace in self.type_info_map['incident'].get('fields', {}).get('workspace', {}).get('values', {}).values():
                 return workspace.get('label', None)

@@ -152,7 +152,7 @@ class FeedComponent(ResilientComponent):
                     self.workspaces = ast.literal_eval("{{ {0} }}".format(self.options.get("workspaces", "")))
                     LOG.debug(self.workspaces)
                 except SyntaxError as e:
-                    LOG.error("Review syntax for workspaces: %s", str(e))
+                    LOG.error("Unable to use workspaces. Review syntax for workspaces: %s", str(e))
                     self.workspaces = {}
 
                 # expose attachment content setting
