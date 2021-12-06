@@ -171,14 +171,9 @@ class ArielSearch(SearchWaitCommand):
         auth_info = AuthInfo.get_authInfo()
         headers = auth_info.headers.copy()
 
-        if self.graphql:
-            url = auth_info.api_url.replace("api/","")+qradar_constants.GRAPHQL_ARIEL_SEARCHES+"?query_expression="+query
-            data={}
-            headers["Cookie"] = QRadarClient.get_qr_sessionid(auth_info.api_url.replace("api/", ""))
-        else:
-            url = auth_info.api_url + qradar_constants.ARIEL_SEARCHES
-            utf8 = query.encode("utf-8")
-            data = {"query_expression": utf8}
+        url = auth_info.api_url + qradar_constants.ARIEL_SEARCHES
+        utf8 = query.encode("utf-8")
+        data = {"query_expression": utf8}
 
         search_id = ""
         try:
@@ -205,11 +200,7 @@ class ArielSearch(SearchWaitCommand):
         """
         auth_info = AuthInfo.get_authInfo()
 
-        if self.graphql:
-            url = auth_info.api_url.replace("api/","")+qradar_constants.GRAPHQL_ARIEL_SEARCHES_RESULT.format(search_id)
-
-        else:
-            url = auth_info.api_url + qradar_constants.ARIEL_SEARCHES_RESULT.format(search_id)
+        url = auth_info.api_url + qradar_constants.ARIEL_SEARCHES_RESULT.format(search_id)
 
         headers = auth_info.headers.copy()
         # if the # of returned items is big, this call will take a long time!
