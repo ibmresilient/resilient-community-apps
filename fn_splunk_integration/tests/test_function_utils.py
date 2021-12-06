@@ -7,7 +7,8 @@
 #
 
 import unittest
-from fn_splunk_integration.util.function_utils import make_query_string, make_item_dict, ItemDataError
+from fn_splunk_integration.util.function_utils import make_query_string, make_item_dict
+from resilient_lib import IntegrationError
 
 def test_query_string():
     print("Testing query string substitution....")
@@ -31,7 +32,7 @@ def test_make_item_dict():
     try:
         make_item_dict(["p1","p2","p3"])
         assert False
-    except ItemDataError:
+    except IntegrationError:
         assert True
 
     # Test null key
@@ -41,7 +42,7 @@ def test_make_item_dict():
                         "p5", "p6"])
         assert item_dict["p1"] == "p2" and item_dict["p5"] == "p6"
         assert "p4" not in item_dict
-    except ItemDataError:
+    except IntegrationError:
         assert False
 
     # Test null value
