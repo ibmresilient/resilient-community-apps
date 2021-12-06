@@ -49,11 +49,14 @@ class FunctionComponent(ResilientComponent):
             if "verify_cert" in options and options["verify_cert"].lower() == "false":
                 qradar_verify_cert = False
 
-            log.debug("Connection to {} using {}".format(options["host"],
+            log.debug("Connection to {} using {}".format(options.get("host"),
                                                          options.get("username", None) or options.get("qradartoken", None)))
 
-            yield StatusMessage("starting...")
-            qradar_client = QRadarClient(host=options["host"],
+            # Get the wf_instance_id of the workflow this Function was called in, if not found return a backup string
+            wf_instance_id = event.message.get("workflow_instance", {}).get("workflow_instance_id", "no instance id found")
+            yield StatusMessage("Starting 'qradar_offense_summary' that was running in workflow '{0}'".format(wf_instance_id))
+
+            qradar_client = QRadarClient(host=options.get("host"),
                                          username=options.get("username", None),
                                          password=options.get("qradarpassword", None),
                                          token=options.get("qradartoken", None),
@@ -61,7 +64,7 @@ class FunctionComponent(ResilientComponent):
                                          opts=self.opts, function_opts=options)
 
             results = {
-                "qrhost": options["host"],
+                "qrhost": options.get("host"),
                 "offenseid": qradar_offenseid
             }
 
@@ -105,7 +108,7 @@ class FunctionComponent(ResilientComponent):
                         offense_assets["name"] = asset_prop[0]["value"] if len(asset_prop) > 0 else ""
                         results["assets"].append(offense_assets)
 
-            yield StatusMessage("done...")
+            yield StatusMessage("Finished 'qradar_offense_summary' that was running in workflow '{0}'".format(wf_instance_id))
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

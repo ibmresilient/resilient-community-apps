@@ -14,12 +14,7 @@ import fn_qradar_enhanced_data.util.function_utils as function_utils
 import fn_qradar_enhanced_data.util.qradar_graphql_queries as qradar_graphql_queries
 from resilient_lib import RequestsCommon, IntegrationError
 from fn_qradar_enhanced_data.util.SearchWaitCommand import SearchWaitCommand, SearchFailure, SearchJobFailure
-
-# handle python2 and 3
-try:
-    from urllib import quote as quote_func  # Python 2.X
-except ImportError:
-    from urllib.parse import quote as quote_func  # Python 3+
+from urllib.parse import quote as quote_func  # Python 3+
 
 LOG = logging.getLogger(__name__)
 
@@ -224,7 +219,7 @@ class ArielSearch(SearchWaitCommand):
         """
         Check the search status associated with search_id
         :param search_id:
-        :return:
+        :return: search status
         """
         auth_info = AuthInfo.get_authInfo()
         url = "{}{}/{}".format(auth_info.api_url, qradar_constants.ARIEL_SEARCHES, search_id)
@@ -404,8 +399,8 @@ class QRadarClient(object):
     def get_sourceip_data(event):
         """
         Get Source IP for the Offense
-        :param offenseid: Id of the QRadar Offense
-        :return:
+        :param event: Id of the QRadar event
+        :return: Data of source ip
         """
         auth_info = AuthInfo.get_authInfo()
         headers = auth_info.headers.copy()
@@ -530,6 +525,9 @@ class QRadarServers():
     def qradar_label_test(qradar_label, servers_list):
         """
         Check if the given qradar_label is in the app.config
+        :param qradar_label: User selected server
+        :param servers_list: list of qradar servers
+        :return: dictionary of options for choosen server
         """
         label = qradar_constants.PACKAGE_NAME+":"+qradar_label
         if qradar_label and label in servers_list:
@@ -543,7 +541,9 @@ class QRadarServers():
 
     def _get_server_name_list(self, opts):
         """
-        Return the list of QRadar server names defined in the app.config in fn_qradar_integration. 
+        Return the list of QRadar server names defined in the app.config in fn_qradar_integration.
+        :param opts: list of options
+        :return: list of servers
         """
         server_list = []
         for key in opts.keys():

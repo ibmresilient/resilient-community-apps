@@ -30,13 +30,13 @@ def selftest_function(opts):
         for server_name in server_list:
             server = opts.get(server_name, {})
 
-            log.info("Verifying app.config values for {} config section".format(qradar_constants.PACKAGE_NAME))
+            log.info("Verifying app.config values for {} config section".format(str(server.get("host"))))
 
             # if bool(server.get("verify_cert")) == False:
             #     raise Exception("fn-qradar-enhanced-data: Verifying app.config values for fn_qradar_integration config section Error while calling selftest. Exception: 'verify_cert'")
 
-            cafile = False if server.get("verify_cert", "").lower() == "false" else server["verify_cert"]
-            qradar_client = QRadarClient(host=server["host"],
+            cafile = False if server.get("verify_cert", "").lower() == "false" else server.get("verify_cert")
+            qradar_client = QRadarClient(host=server.get("host"),
                                         username=server.get("username", None),
                                         password=server.get("qradarpassword", None),
                                         token=server.get("qradartoken", None),
@@ -55,9 +55,9 @@ def selftest_function(opts):
 
                 if not graphql_installed:
                     log.warning("QRadar GraphQL connection check failed. This is needed for qradar_enhanced_data. "
-                                "Check for QRadar Analyst workflow installation ")
+                                "Check for QRadar Analyst workflow installation\n")
                 else:
-                    log.info("Test was successful")
+                    log.info("Test was successful\n")
 
         return {
             "state": "success"
@@ -75,11 +75,11 @@ def selftest_function(opts):
             qradarpassword: {4}
             qradartoken: {5}\n""".format(
             err,
-            server["host"],
-            server["verify_cert"],
-            server["username"],
-            server["qradarpassword"],
-            server["qradartoken"])
+            server.get("host"),
+            server.get("verify_cert"),
+            server.get("username"),
+            server.get("qradarpassword"),
+            server.get("qradartoken"))
 
         log.error(err_reason_msg)
 

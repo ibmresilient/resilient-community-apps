@@ -2,6 +2,9 @@
 # (c) Copyright IBM Corp. 2021. All Rights Reserved.
 from resilient_lib.ui import Datatable, Tab, Field, create_tab
 from resilient_circuits.app import AppArgumentParser
+import logging
+
+LOG = logging.getLogger(__name__)
 
 class QRadarTab(Tab):
     SECTION = "fn_qradar_integration"
@@ -39,5 +42,5 @@ class QRadarTab(Tab):
 # Continues if exception is thrown
 try:
     create_tab(QRadarTab, AppArgumentParser().parse_args(), update_existing=True)
-except SystemExit:
-    pass
+except SystemExit as e:
+    LOG.warning("Failed trying to create_tab.\nERROR: %s", e)

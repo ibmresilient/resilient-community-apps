@@ -66,7 +66,7 @@ class FunctionComponent(ResilientComponent):
 
             timeout = float(options.get("search_timeout",600))  # Default timeout to 10 minutes
 
-            log.debug("Connection to {} using {}".format(options["host"],
+            log.debug("Connection to {} using {}".format(options.get("host"),
                                                          options.get("username", None) or options.get(
                                                              "qradartoken", None)))
 
@@ -100,9 +100,11 @@ class FunctionComponent(ResilientComponent):
 
             log.info("Running query: " + temp_query_string)
 
-            yield StatusMessage("starting...")
+            # Get the wf_instance_id of the workflow this Function was called in, if not found return a backup string
+            wf_instance_id = event.message.get("workflow_instance", {}).get("workflow_instance_id", "no instance id found")
+            yield StatusMessage("Starting 'qradar_top_events' that was running in workflow '{0}'".format(wf_instance_id))
 
-            qradar_client = QRadarClient(host=options["host"],
+            qradar_client = QRadarClient(host=options.get("host"),
                                          username=options.get("username", None),
                                          password=options.get("qradarpassword", None),
                                          token=options.get("qradartoken", None),
@@ -128,11 +130,11 @@ class FunctionComponent(ResilientComponent):
                     event["domain"] = data["content"]["domain"]["name"] if data["content"] and  data["content"]["domain"]["name"] else "Default Domain"
 
             results = {
-                "qrhost": options["host"],
+                "qrhost": options.get("host"),
                 "offenseid": qradar_query_param3,
                 "events": result["events"]
             }
-            yield StatusMessage("done...")
+            yield StatusMessage("Finished 'qradar_top_events' that was running in workflow '{0}'".format(wf_instance_id))
             yield FunctionResult(results)
         except Exception as e:
             log.error(str(e))
