@@ -7,13 +7,7 @@
 #
 
 import unittest
-
-import sys
-sys.path.append("../fn_splunk_integration/util")
-sys.path.append("fn_splunk_integration/util")
-from function_utils import make_query_string
-from function_utils import make_item_dict
-from function_utils import ItemDataError
+from fn_splunk_integration.util.function_utils import make_query_string, make_item_dict, ItemDataError
 
 def test_query_string():
     print("Testing query string substitution....")

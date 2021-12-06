@@ -7,12 +7,9 @@ import fn_splunk_integration.util.splunk_constants as splunk_constants
 from resilient_lib import validate_fields
 from fn_splunk_integration.util.resilient_utils import resilient_utils
 from fn_splunk_integration.util import splunk_utils
-LOG = logging.getLogger(__name__)
 
-class ItemDataError(Exception):
-    """ Search failed to execute """
-    def __init__(self, msg):
-        super(ItemDataError, self).__init__(msg)
+from fn_pagerduty.fn_pagerduty.lib.errors import IntegrationError
+LOG = logging.getLogger(__name__)
 
 def make_query_string(query, params):
     """
@@ -42,7 +39,7 @@ def make_item_dict(params):
 
     list_len = len(params)
     if list_len%2 != 0:
-        raise ItemDataError(str(params))
+        raise IntegrationError(str(params))
 
     index = 0
     while index < list_len:

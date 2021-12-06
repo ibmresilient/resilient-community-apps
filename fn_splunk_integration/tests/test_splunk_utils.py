@@ -11,17 +11,14 @@ import mock
 
 import json
 import sys
-sys.path.append("../fn_splunk_integration/util")
-sys.path.append("fn_splunk_integration/util")
-import splunk_utils
 import splunklib
+import fn_splunk_integration.util.splunk_utils as splunk_utils
+from resilient_lib import IntegrationError
 
 if sys.version_info.major < 3:
     import urllib as urlparse
 else:
     import urllib.parse as urlparse
-
-
 
 class TestSplunkUtils:
     #
@@ -107,7 +104,7 @@ class TestSplunkUtils:
                                                     headers=headers,
                                                     data=post_data,
                                                     verify=self.verify)
-        except splunk_utils.RequestError as e:
+        except IntegrationError as e:
             assert True
 
         assert not ret_key
@@ -201,7 +198,7 @@ class TestSplunkUtils:
             #
             #
             assert False
-        except splunk_utils.RequestError as e:
+        except IntegrationError as e:
             assert True
             assert "Ambiguous exception when handling request" in str(e)
 
@@ -230,7 +227,7 @@ class TestSplunkUtils:
             # request post throws exception
             #
             assert False
-        except splunk_utils.RequestError as e:
+        except IntegrationError as e:
             assert True
             # Our code does not rely on this. Shoudl not assert
             # assert "Connection error" in str(e)
@@ -260,7 +257,7 @@ class TestSplunkUtils:
             # request post throws exception
             #
             assert False
-        except splunk_utils.RequestError as e:
+        except IntegrationError as e:
             assert True
             #assert "An HTTP error" in str(e)
 
@@ -289,7 +286,7 @@ class TestSplunkUtils:
             # request post throws exception
             #
             assert False
-        except splunk_utils.RequestError as e:
+        except IntegrationError as e:
             assert True
             #assert "An HTTP error" in str(e)
 
@@ -318,7 +315,7 @@ class TestSplunkUtils:
             # request post throws exception
             #
             assert False
-        except splunk_utils.RequestError as e:
+        except IntegrationError as e:
             assert True
 
     @patch("requests.post")
@@ -346,7 +343,7 @@ class TestSplunkUtils:
             # request post throws exception
             #
             assert False
-        except splunk_utils.RequestError as e:
+        except IntegrationError as e:
             assert True
 
     @patch("splunklib.client.connect")
@@ -490,7 +487,7 @@ class TestSplunkUtils:
                 #
                 mocked_job.cancel.assert_called_with()
 
-        except splunk_utils.SearchTimeout:
+        except IntegrationError:
             time_used = time.time() - start_time
             print("Search times out after {} secs with time out set to {} secs".format(time_used, time_out))
             assert True
@@ -556,7 +553,7 @@ class TestSplunkUtils:
                 #
                 mocked_job.refresh.assert_called_with()
 
-        except splunk_utils.SearchFailure as e:
+        except IntegrationError as e:
             print("Failed search throws SearchFailure as expected")
             assert True
         except Exception as e:
@@ -595,7 +592,7 @@ class TestSplunkUtils:
                 # The code should not get here.
                 #
                 assert False
-        except splunk_utils.SearchJobFailure as e:
+        except IntegrationError as e:
             print("Failure in creating search job throws SearchJobFailure exception")
             assert True
         except Exception as e:
@@ -662,7 +659,7 @@ class TestSplunkUtils:
         # 2. Simulate wrong intel type
         try:
             splnk_utils.add_threat_intel_item("Fake type", {}, False)
-        except splunk_utils.RequestError as e:
+        except IntegrationError as e:
             print("Fake intel type causes exception as expected.")
             assert(True)
 
@@ -671,35 +668,35 @@ class TestSplunkUtils:
         mocked_requests_post.side_effect = requests.RequestException(Mock(status=404), "Ambiguous excetpion.")
         try:
             splnk_utils.add_threat_intel_item(threat_type, {}, False)
-        except splunk_utils.RequestError:
+        except IntegrationError:
             assert True
 
         # 4. Simulate ConnectionError
         mocked_requests_post.side_effect = requests.ConnectionError(Mock(status=404), "Ambiguous excetpion.")
         try:
             splnk_utils.add_threat_intel_item(threat_type, {}, False)
-        except splunk_utils.RequestError:
+        except IntegrationError:
             assert True
 
         # 5. Simulate HttpError
         mocked_requests_post.side_effect = requests.HTTPError(Mock(status=404), "Ambiguous excetpion.")
         try:
             splnk_utils.add_threat_intel_item(threat_type, {}, False)
-        except splunk_utils.RequestError:
+        except IntegrationError:
             assert True
 
         # 6. Simulate URLRequired
         mocked_requests_post.side_effect = requests.URLRequired(Mock(status=404), "Ambiguous excetpion.")
         try:
             splnk_utils.add_threat_intel_item(threat_type, {}, False)
-        except splunk_utils.RequestError:
+        except IntegrationError:
             assert True
 
         # 7. Simulate TooManyRedirects
         mocked_requests_post.side_effect = requests.TooManyRedirects(Mock(status=404), "Ambiguous excetpion.")
         try:
             splnk_utils.add_threat_intel_item(threat_type, {}, False)
-        except splunk_utils.RequestError:
+        except IntegrationError:
             assert True
 
     @patch("requests.delete")
@@ -750,7 +747,7 @@ class TestSplunkUtils:
         threat_type="fake_intel"
         try:
             ret = splnk_utils.delete_threat_intel_item(threat_type, item_key, self.verify)
-        except splunk_utils.RequestError:
+        except IntegrationError:
             print("Delete with fake type caused exception as expected")
             assert True
 

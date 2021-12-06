@@ -35,7 +35,7 @@ class FunctionComponent(ResilientComponent):
             splunk_query_param = []
             # Get the function parameters:
             splunk_query = self.get_textarea_param(kwargs.get("splunk_query"))  # textarea
-            # splunk_query_param1-6
+            # splunk_query_param1-5
             for i in range(1,6):
                 locals()[f'{QUERY_PARAM}{i}'] = kwargs.get(QUERY_PARAM+str(i))
                 splunk_query_param.append(locals()[f'{QUERY_PARAM}{i}'])
