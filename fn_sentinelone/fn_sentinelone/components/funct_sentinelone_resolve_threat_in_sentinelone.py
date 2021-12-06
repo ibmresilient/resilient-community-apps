@@ -1,0 +1,67 @@
+# -*- coding: utf-8 -*-
+
+"""AppFunction implementation"""
+
+from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
+from resilient_lib import IntegrationError, validate_fields
+from fn_sentinelone.lib.sentinelone_common import SentinelOneClient
+
+PACKAGE_NAME = "fn_sentinelone"
+FN_NAME = "sentinelone_resolve_threat_in_sentinelone"
+
+
+class FunctionComponent(AppFunctionComponent):
+    """Component that implements function 'sentinelone_resolve_threat_in_sentinelone'"""
+
+    def __init__(self, opts):
+        super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
+
+    @app_function(FN_NAME)
+    def _app_function(self, fn_inputs):
+        """
+        Function: Resolve (close) a threat in SentinelOne.
+        Inputs:
+            -   fn_inputs.incident_id
+        """
+
+        yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
+
+        sentinelOne_client = SentinelOneClient(self.opts, self.options)
+        incident_id = fn_inputs.incident_id
+
+        # Get the incident
+        uri = u"/incidents/{}?handle_format=names".format(incident_id)
+        incident = self.rest_client().get(uri)
+
+        if not incident:
+            IntegrationError("SentinelOne Resolve Threat: Incident {0} not found".format(incident_id))
+
+        # Make sure there is an SentinelOne threat associated with this incident
+        threat_id = incident.get('properties', {}).get('sentinelone_threat_id', None)
+        if not threat_id:
+            IntegrationError("SentinelOne Resolve Threat: sentinelone_threat_id {0} not found".format(threat_id))
+
+        # Make sure there is an SentinelOne threat associated with this incident
+        threat_analyst_verdict= incident.get('properties', {}).get('sentinelone_threat_analyst_verdict', None)
+
+        verdict_response = sentinelOne_client.update_threat_analyst_verdict(threat_id, threat_analyst_verdict)
+
+        verdict_data = verdict_response.get("data")
+        if int(verdict_data.get("affected")) <= 0:
+            success = False
+            IntegrationError("SentinelOne Resolve Threat: unable to update analystVerdict in SentinelOne threat: {0}".format(threat_id))
+        else:
+            status_response = sentinelOne_client.update_threat_status(threat_id, "resolved")
+            status_data = status_response.get("data")
+            if int(status_data.get("affected")) <= 0:
+                success = False
+                IntegrationError("SentinelOne Resolve Threat: unable to update incidentStatus in SentinelOne threat: {0}".format(threat_id))
+            else:
+                
+                success = True
+
+        yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
+
+        results = {"success": success}
+        yield FunctionResult(results)
+

@@ -29,9 +29,8 @@ account_ids=
 site_ids=
 # Optional "query" parameter for querying threats in SentinelOne
 query_param=
-# Optional "resolved" parameter for querying threats from SentinelOne
-# If set to False "resolved" threats will not be escalated to SOAR 
-resolved=False
+# Optional incidentStatuses parameter for querying threats from SentinelOne
+incident_statuses=resolved,in_progress,unresolved
 # Optional "limit" parameter: limit the number of threats returned from querying threats from SentinelOne
 limit=25
 # Optional sortBy parameter used when querying SentinelOne threats
@@ -39,7 +38,7 @@ sort_by=createdDate
 # Optional sortOrder for SentinelOne threat query results. Possible values: asc or desc
 sort_order=desc
 # Optional timeout in seconds for downloading threat file from SentinelOne
-timeout=300
+download_timeout=300
 #verify=false | /path/toclient_certificate.pem
 #http_proxy=
 #https_proxy=

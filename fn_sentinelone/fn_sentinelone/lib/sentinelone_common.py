@@ -37,8 +37,8 @@ class SentinelOneClient(object):
         self.sort_by = options.get("sort_by", DEFAULT_SORT_BY)
         self.sort_order = options.get("sort_order", DEFAULT_SORT_ORDER)
         self.query_param = options.get("query_param", None)
-        self.resolved = str_to_bool(options.get("resolved", "False"))
-        self.timeout = options.get("timeout", DEFAULT_TIMEOUT)
+        self.incident_statuses = options.get("incident_statuses", "in_progress,unresolved")
+        self.download_timeout = options.get("download_timeout", DEFAULT_TIMEOUT)
         self.headers = self.get_headers(self.api_token)
     
 
@@ -123,7 +123,7 @@ class SentinelOneClient(object):
             'limit': self.limit,
             'sortBy': self.sort_by,
             'sortOrder': self.sort_order,
-            'resolved': self.resolved,
+            'incidentStatuses': self.incident_statuses,
             'updatedAt__gte': last_poller_datetime_string
         }
 
@@ -137,7 +137,7 @@ class SentinelOneClient(object):
             'limit': self.limit,
             'sortBy': self.sort_by,
             'sortOrder': self.sort_order,
-            'resolved': self.resolved,
+            'incidentStatuses': self.incident_statuses,
             'createdAt__gte': last_poller_datetime_string
         }
 
@@ -255,7 +255,7 @@ class SentinelOneClient(object):
         download_url = data.get("downloadUrl")
         threat_filename = data.get("fileName")
 
-        response = self.rc.execute("GET", download_url, timeout=self.timeout, headers=self.headers, 
+        response = self.rc.execute("GET", download_url, timeout=self.download_timeout, headers=self.headers, 
                                     verify=self.verify, proxies=self.rc.get_proxies(),
                                     callback=self._download_callback)
 

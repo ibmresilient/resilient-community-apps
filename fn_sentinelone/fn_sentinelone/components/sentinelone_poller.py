@@ -160,7 +160,7 @@ class SentinelOnePollerComponent(ResilientComponent):
                                                                       "Close synchronized from SentinelOne")
                     LOG.info("Closed incident %s from SentinelOne threat %s", resilient_incident_id, threat_id)
                 else:
-                    # update an incident incident
+                    # update an incident
                     incident_payload = self.jinja_env.make_payload_from_template(
                                                     self.options.get("update_incident_template"),
                                                     DEFAULT_INCIDENT_UPDATE_TEMPLATE,

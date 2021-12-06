@@ -2,14 +2,18 @@
   {%- set comma = joiner(",") -%}
   {# JINJA template for creating a new SOAR incident from a SentinelOne threat. #}
   "name": "SentinelOne Alert - {{ agentRealtimeInfo.accountName }} - {{ agentRealtimeInfo.agentComputerName }} - {{ threatInfo.threatName }}",
-   "start_date": {{ threatInfo.identifiedAt|resilient_datetimeformat }},
-   "discovered_date": {{ threatInfo.createdAt|resilient_datetimeformat }},
+  "start_date": {{ threatInfo.identifiedAt|resilient_datetimeformat }},
+  "discovered_date": {{ threatInfo.createdAt|resilient_datetimeformat }},
   "description": {
     "format": "text",
     "content": "{{ threatInfo.threatName }}"
   },
   {# if SentinelOne users are different than SOAR users, consider using a mapping table using resilient_substitute: #}
-  "plan_status": "{{ threatInfo.incidentStatus|resilient_substitute('{"Closed": "C", "unresolved": "A", "In_progress": "A", "in_progress": "A"}') }}",
+  "plan_status": "{{ threatInfo.incidentStatus|resilient_substitute('{"resolved": "C", "unresolved": "A", "In_progress": "A", "in_progress": "A"}') }}",
+  {% if threatInfo.incidentStatus == "resolved" %}
+    "resolution_id": "Resolved",
+    "resolution_summary": "Closed by SentinelOne",
+  {% endif %}
   "severity_code": "{{ threatInfo.confidenceLevel|resilient_substitute('{"malicious": "High", "suspicious": "Medium"}') }}",
   "properties": {
     "sentinelone_agent_id": "{{ agentRealtimeInfo.agentId }}",
@@ -30,19 +34,6 @@
           "name": "System Name"
         },
         "value": "{{ agentRealtimeInfo.agentComputerName|replace('\\', '\\\\')|replace('"', '\\"') }}",
-        "description": {
-          "format": "text",
-          "content": "creation date: {{ threatInfo.createdAt|resilient_datetimeformat  }}"
-        }
-      }
-      {% endif %}
-    {% if agentDetectionInfo.externalIp %}
-      {{- comma() }}
-      {
-        "type": {
-          "name": "IP Address"
-        },
-        "value": "{{ agentDetectionInfo.externalIp }}",
         "description": {
           "format": "text",
           "content": "creation date: {{ threatInfo.createdAt|resilient_datetimeformat  }}"
