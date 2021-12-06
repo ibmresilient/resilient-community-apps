@@ -122,7 +122,6 @@ def test_ariel_graphql_search():
         utf8 = query_str.encode("utf-8")
         data = {"query_expression": utf8}
         headers =  qradar_utils.AuthInfo.get_authInfo().headers.copy()
-        headers["Cookie"] = ""
         mocked_post_call.assert_called_with("POST", expected_url,
                                             data=data, headers=headers)
 
