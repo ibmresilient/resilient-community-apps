@@ -118,7 +118,7 @@ def test_ariel_graphql_search():
         mocked_post_call.return_value = _generateResponse({"cursor_id": search_id}, 200)
 
         sid = search_cmd.get_search_id(query_str)
-        expected_url = "https://" + host + "/" + qradar_constants.ARIEL_SEARCHES
+        expected_url = "https://" + host + "/api/" + qradar_constants.ARIEL_SEARCHES
         utf8 = query_str.encode("utf-8")
         data = {"query_expression": utf8}
         headers =  qradar_utils.AuthInfo.get_authInfo().headers.copy()
