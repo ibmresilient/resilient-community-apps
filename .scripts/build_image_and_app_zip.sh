@@ -101,7 +101,7 @@ docker_tag="$PACKAGE_NAME:$version_to_use"
 
 print_msg "Packaging $PACKAGE_NAME with resilient-sdk"
 resilient-sdk package -p $package_path
-app_zip_path=$(ls $package_path/dist/*.zip)
+app_zip_path=$(ls $package_path/dist/*.zip | grep $version_to_use)
 
 print_msg "Building $PACKAGE_NAME with docker"
 image_sha_digest=`docker build \
