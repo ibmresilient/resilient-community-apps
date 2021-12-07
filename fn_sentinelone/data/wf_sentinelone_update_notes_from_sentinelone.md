@@ -24,9 +24,7 @@ inputs.sentinelone_threat_id = incident.properties.sentinelone_threat_id
 
 ### Post-Processing Script
 ```python
-if results.success:
-  for comment in results.content['value']:
-    incident.addNote(helper.createRichText(comment['properties']['message']))
+None
 ```
 
 ---
