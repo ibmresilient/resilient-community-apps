@@ -4,27 +4,16 @@
 #   100% code coverage
 #
 import requests
-
 from mock import Mock
 from mock import patch
 import mock
-
-import json
-import sys
-import splunklib
-import fn_splunk_integration.util.splunk_utils as splunk_utils
 from resilient_lib import IntegrationError
-
-if sys.version_info.major < 3:
-    import urllib as urlparse
-else:
-    import urllib.parse as urlparse
+import json
+import fn_splunk_integration.util.splunk_utils as splunk_utils
+import urllib.parse as urlparse
 
 class TestSplunkUtils:
-    #
     # Test data
-    #
-    # test data
     fake_host = "mysplunk_url.com"
     fake_port = 8089
     fake_url = "https://"+fake_host + ":" + str(fake_port)

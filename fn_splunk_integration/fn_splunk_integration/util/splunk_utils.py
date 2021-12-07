@@ -14,13 +14,9 @@ import json
 import sys
 import fn_splunk_integration.util.splunk_constants as splunk_constants
 from resilient_lib import IntegrationError
-
-if sys.version_info.major < 3:
-    import urllib as urlparse
-else:
-    import urllib.parse as urlparse
-
+import urllib.parse as urlparse
 import logging
+
 LOG = logging.getLogger(__name__)
 
 class SplunkClient(object):

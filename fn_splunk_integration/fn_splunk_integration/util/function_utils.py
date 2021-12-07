@@ -4,11 +4,10 @@
 #
 import logging
 import fn_splunk_integration.util.splunk_constants as splunk_constants
-from resilient_lib import validate_fields
+from resilient_lib import validate_fields, IntegrationError
 from fn_splunk_integration.util.resilient_utils import resilient_utils
 from fn_splunk_integration.util import splunk_utils
 
-from fn_pagerduty.fn_pagerduty.lib.errors import IntegrationError
 LOG = logging.getLogger(__name__)
 
 def make_query_string(query, params):

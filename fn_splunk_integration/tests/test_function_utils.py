@@ -1,14 +1,10 @@
-
 #
 # Unit tests for fn_splunk_integration/components/function_utils.py
 #
 #   100% code coverage
 #
-#
-
-import unittest
-from fn_splunk_integration.util.function_utils import make_query_string, make_item_dict
 from resilient_lib import IntegrationError
+from fn_splunk_integration.util.function_utils import make_query_string, make_item_dict
 
 def test_query_string():
     print("Testing query string substitution....")
@@ -16,8 +12,9 @@ def test_query_string():
     params = ["_internal", "*splunkd*", "clientip", "127.0.0.1"]
 
     query = make_query_string(input_string, params)
+    expect = "index = _internal source=*splunkd* AND clientip=127.0.0.1"
 
-    assert query == "index = _internal source=*splunkd* AND clientip=127.0.0.1"
+    assert query == expect
 
 def test_make_item_dict():
     print("Testing make_item_dict")
@@ -26,7 +23,7 @@ def test_make_item_dict():
               "field3", "value3"]
 
     item_dict = make_item_dict(params)
-    assert item_dict["field1"] == "value1" and item_dict["field2"] == "value2" and item_dict["field3"] == "value3"
+    assert item_dict["field1"] == params[1] and item_dict["field2"] == params[3] and item_dict["field3"] == params[5]
 
     # Test wrong number of params
     try:
