@@ -26,6 +26,8 @@ class TestSplunkUtils:
     simSessionKey = "MySessionKeyxxxyyyyyzzzz"
     simEventId = "MyEventIdabdaldfaldafdjalf"
     simComment = "My Comment"
+    ret_events=[{"host":"host1", "clientip":"127.0.0.1"},
+                {"host":"host2", "clientip":"0.0.0.0"}]
 
     # Util function to generate simulated requests response
     def _generateResponse(self, content, status):
@@ -55,7 +57,7 @@ class TestSplunkUtils:
         headers = dict()
         headers["Accept"] = "application/html"
         post_data = urlparse.urlencode({"username": self.fake_username,
-                                            "password": self.fake_password})
+                                        "password": self.fake_password})
 
         # Assert that username and password are used as required
         mocked_requests_post.assert_called_with(self.auth_url,
@@ -71,10 +73,8 @@ class TestSplunkUtils:
         ret_key = None
         try:
             simContent = "Login failure"
-            #
             # If the post response has status = 401, it means login failed.
             # The getSessionKey call shall throw an exception
-            #
             mocked_requests_post.return_value = self._generateResponse(simContent, 401)
 
             splnk_utils = splunk_utils.SplunkUtils(host=self.fake_host,
@@ -141,11 +141,7 @@ class TestSplunkUtils:
 
         print("Testing wrong URL or connection issue...")
         try:
-            sim_status = 1
-
-            #
             # Simulate connection error
-            #
             mocked_requests_post.side_effect = requests.ConnectionError(Mock(status=404), "Max retries exceed.")
             splnk_utils = splunk_utils.SplunkUtils(host=self.fake_host,
                                                    port=self.fake_port,
@@ -153,9 +149,7 @@ class TestSplunkUtils:
                                                    password=self.fake_password,
                                                    verify=self.verify)
 
-            #
             # Failed to connect during login will throw exception
-            #
             assert False
 
         except requests.ConnectionError as e:
@@ -183,9 +177,6 @@ class TestSplunkUtils:
                                              comment=self.simComment,
                                              status=sim_status,
                                              cafile=self.verify)
-            #
-            #
-            #
             assert False
         except IntegrationError as e:
             assert True
@@ -212,14 +203,10 @@ class TestSplunkUtils:
                                              comment=self.simComment,
                                              status=sim_status,
                                              cafile=self.verify)
-            #
             # request post throws exception
-            #
             assert False
         except IntegrationError as e:
             assert True
-            # Our code does not rely on this. Shoudl not assert
-            # assert "Connection error" in str(e)
 
     @patch("requests.post")
     def test_update_notable_connect_error(self, mocked_requests_post):
@@ -242,13 +229,10 @@ class TestSplunkUtils:
                                              comment=self.simComment,
                                              status=sim_status,
                                              cafile=self.verify)
-            #
             # request post throws exception
-            #
             assert False
         except IntegrationError as e:
             assert True
-            #assert "An HTTP error" in str(e)
 
     @patch("requests.post")
     def test_update_notable_http_error(self, mocked_requests_post):
@@ -271,13 +255,10 @@ class TestSplunkUtils:
                                              comment=self.simComment,
                                              status=sim_status,
                                              cafile=self.verify)
-            #
             # request post throws exception
-            #
             assert False
         except IntegrationError as e:
             assert True
-            #assert "An HTTP error" in str(e)
 
     @patch("requests.post")
     def test_update_notable_invalid_url(self, mocked_requests_post):
@@ -300,9 +281,7 @@ class TestSplunkUtils:
                                              comment=self.simComment,
                                              status=sim_status,
                                              cafile=self.verify)
-            #
             # request post throws exception
-            #
             assert False
         except IntegrationError as e:
             assert True
@@ -328,9 +307,7 @@ class TestSplunkUtils:
                                              comment=self.simComment,
                                              status=sim_status,
                                              cafile=self.verify)
-            #
             # request post throws exception
-            #
             assert False
         except IntegrationError as e:
             assert True
@@ -366,9 +343,6 @@ class TestSplunkUtils:
             splunk_client.set_polling_interval(1)
             assert splunk_client.polling_interval == 1
 
-            ret_events=[{"host":"host1", "clientip":"127.0.0.1"},
-                        {"host":"host2", "clientip":"0.0.0.0"}]
-
             with patch("splunklib.client.Service.jobs",  new_callable=mock.PropertyMock) as mocked_jobs_call:
                 mocked_jobs_call.create.return_value = mocked_job
                 ret_dict = {"dispatchState": "DONE",
@@ -380,19 +354,14 @@ class TestSplunkUtils:
                 #https://stackoverflow.com/questions/30340170/how-to-let-magicmock-behave-like-a-dict
                 mocked_job.__getitem__.side_effect = ret_dict.__getitem__
                 mocked_job.__iter__.side_effect = ret_dict.__iter__
-                mocked_result_reader.return_value = ret_events
+                mocked_result_reader.return_value = self.ret_events
 
                 ret = splunk_client.execute_query(query=fake_query_string)
-                #
                 # Assert that we get the return from ResultsReader
-                #
-                assert ret["events"] == ret_events
+                assert ret["events"] == self.ret_events
 
-                #
                 # Is this important? Asserting we call job.refresh first
-                #
                 mocked_job.refresh.assert_called_with()
-
 
         except Exception as e:
             assert False
@@ -429,9 +398,6 @@ class TestSplunkUtils:
             splunk_client.set_polling_interval(1)
             assert splunk_client.polling_interval == 1
 
-            ret_events = [{"host": "host1", "clientip": "127.0.0.1"},
-                          {"host": "host2", "clientip": "0.0.0.0"}]
-
             with patch("splunklib.client.Service.jobs", new_callable=mock.PropertyMock) as mocked_jobs_call:
                 mocked_jobs_call.create.return_value = mocked_job
                 ret_dict = {"dispatchState": "PENDING",
@@ -444,7 +410,6 @@ class TestSplunkUtils:
                 mocked_job.__getitem__.side_effect = ret_dict.__getitem__
                 mocked_job.__iter__.side_effect = ret_dict.__iter__
 
-                #
                 # The job is not already always, this will force it to timeout
                 # We set time out to be 3 sec above and we poll every second
                 # so we will call job.is_ready() 3 times. Put 5 here for sure.
@@ -456,24 +421,18 @@ class TestSplunkUtils:
 
                 mocked_job.cancel.return_value = mocked_job
 
-                mocked_result_reader.return_value = ret_events
+                mocked_result_reader.return_value = self.ret_events
 
                 start_time = time.time()
                 ret = splunk_client.execute_query(query=fake_query_string)
-                #
                 # Assert that we get the return from ResultsReader
-                #
-                assert ret["events"] == ret_events
+                assert ret["events"] == self.ret_events
 
-                #
                 # Is this important? Asserting we call job.refresh first
-                #
                 mocked_job.refresh.assert_called_with()
 
-                #
                 # This one is important. Assert that we cancel the
                 # search job when it times out
-                #
                 mocked_job.cancel.assert_called_with()
 
         except IntegrationError:
@@ -514,9 +473,6 @@ class TestSplunkUtils:
             splunk_client.set_polling_interval(1)
             assert splunk_client.polling_interval == 1
 
-            ret_events = [{"host": "host1", "clientip": "127.0.0.1"},
-                          {"host": "host2", "clientip": "0.0.0.0"}]
-
             with patch("splunklib.client.Service.jobs", new_callable=mock.PropertyMock) as mocked_jobs_call:
                 mocked_jobs_call.create.return_value = mocked_job
                 ret_dict = {"dispatchState": "FAILED",      #Indicate that the search failed
@@ -529,17 +485,13 @@ class TestSplunkUtils:
                 # https://stackoverflow.com/questions/30340170/how-to-let-magicmock-behave-like-a-dict
                 mocked_job.__getitem__.side_effect = ret_dict.__getitem__
                 mocked_job.__iter__.side_effect = ret_dict.__iter__
-                mocked_result_reader.return_value = ret_events
+                mocked_result_reader.return_value = self.ret_events
 
                 ret = splunk_client.execute_query(query=fake_query_string)
-                #
                 # Assert that we get the return from ResultsReader
-                #
-                assert ret["events"] == ret_events
+                assert ret["events"] == self.ret_events
 
-                #
                 # Is this important? Asserting we call job.refresh first
-                #
                 mocked_job.refresh.assert_called_with()
 
         except IntegrationError as e:
@@ -569,17 +521,12 @@ class TestSplunkUtils:
                                                       username=self.fake_username,
                                                       password=self.fake_password)
 
-            ret_events = [{"host": "host1", "clientip": "127.0.0.1"},
-                          {"host": "host2", "clientip": "0.0.0.0"}]
-
             with patch("splunklib.client.Service.jobs", new_callable=mock.PropertyMock) as mocked_jobs_call:
                 mocked_jobs_call.create.return_value = mocked_job
                 mocked_job.set_ttl.side_effect = Exception("Failed!")
                 ret = splunk_client.start_search(query=fake_query_string, job_ttl=100)
-                #
                 # If the search job can not be created, exception shall be thrown.
                 # The code should not get here.
-                #
                 assert False
         except IntegrationError as e:
             print("Failure in creating search job throws SearchJobFailure exception")
@@ -632,8 +579,7 @@ class TestSplunkUtils:
                                                 data=item,
                                                 verify=splunk_verify)
 
-        assert ret["status_code"]==201
-
+        assert ret["status_code"] == 201
 
     @patch("requests.post")
     def test_add_threat_intel_item_errors(self, mocked_requests_post):
@@ -701,7 +647,7 @@ class TestSplunkUtils:
                                                verify=self.verify)
         # 2. Call delete
         threat_type = "ip_intel"
-        item_key="FakeItemKeyForItemToDelete"
+        item_key = "FakeItemKeyForItemToDelete"
 
         content_dict = {"success": True, "message": "Create operation successful."}
         sim_content = json.dumps(content_dict)
@@ -716,8 +662,7 @@ class TestSplunkUtils:
         mocked_requests_delete.assert_called_with(post_url,
                                                   headers=headers,
                                                   verify=self.verify)
-        assert ret["status_code"]==200
-
+        assert ret["status_code"] == 200
 
     @patch("requests.delete")
     @patch("requests.post")
@@ -732,8 +677,8 @@ class TestSplunkUtils:
                                                verify=self.verify)
 
         # 2. Call delete with wrong threat_type
-        item_key="FakeKeyDoesNotExist"
-        threat_type="fake_intel"
+        item_key = "FakeKeyDoesNotExist"
+        threat_type = "fake_intel"
         try:
             ret = splnk_utils.delete_threat_intel_item(threat_type, item_key, self.verify)
         except IntegrationError:
