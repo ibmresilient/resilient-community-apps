@@ -26,8 +26,8 @@ class TestSplunkUtils:
     simSessionKey = "MySessionKeyxxxyyyyyzzzz"
     simEventId = "MyEventIdabdaldfaldafdjalf"
     simComment = "My Comment"
-    ret_events=[{"host":"host1", "clientip":"127.0.0.1"},
-                {"host":"host2", "clientip":"0.0.0.0"}]
+    ret_events=[{"host":"host1", "clientip":"127.0.0.1"}, # nosec
+                {"host":"host2", "clientip":"0.0.0.0"}] # nosec
 
     # Util function to generate simulated requests response
     def _generateResponse(self, content, status):
