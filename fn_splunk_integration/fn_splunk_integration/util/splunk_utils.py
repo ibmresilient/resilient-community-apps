@@ -4,7 +4,6 @@
 #
 #   Util classes for Splunk
 #
-
 import splunklib.client as splunk_client
 import splunklib.results as splunk_results
 import time
@@ -74,9 +73,7 @@ class SplunkClient(object):
                 job.set_ttl(job_ttl)
         except Exception as e:
             LOG.exception("Search job creation failed")
-            #
             # If we failed to create a search job, it does not make sense to go further
-            #
             raise IntegrationError("Failed to create search job for query [{}] ".format(query))
 
         return job
@@ -119,21 +116,13 @@ class SplunkClient(object):
             if not done:
                 if self.time_out!= 0:
                     if time.time() - start_time > self.time_out:
-                        #
-                        # old sdk
-                        #splunk_client.cancel_search(splunk_job)
-                        #
                         splunk_job.cancel()
                         raise IntegrationError("Query [{}] timed out. Final Status was [{}]".format(splunk_job.name, splunk_job["dispatchState"]))
                 LOG.debug("Sleeping for %s", self.polling_interval)
                 time.sleep(self.polling_interval)
 
         if splunk_job["dispatchState"] != "DONE" or splunk_job["isFailed"] == True:
-            if sys.version_info.major < 3:
-                raise IntegrationError("Query [{}] failed with status [{}], {}".format(splunk_job.name, splunk_job["dispatchState"], unicode(splunk_job["messages"])))
-            else:
-                # strings in python3 are unicode
-                raise IntegrationError("Query [{}] failed with status [{}], {}".format(splunk_job.name, splunk_job["dispatchState"], str(splunk_job["messages"])))
+            raise IntegrationError("Query [{}] failed with status [{}], {}".format(splunk_job.name, splunk_job["dispatchState"], str(splunk_job["messages"])))
 
         reader = splunk_results.ResultsReader(splunk_job.results())
         result = {"events": list([dict(row) for row in reader])}
@@ -172,13 +161,11 @@ class SplunkUtils(object):
                                  data=urlparse.urlencode({"username": username,
                                                           "password": password}),
                                  verify=verify)
-            #
             # This one we only allows 200. Otherwise login failed
-            #
             if resp.status_code == 200:
                 # docs.splunk.com/Documentation/Splunk/7.0.2/RESTTUT/RESTsearches
-                self.session_key = minidom.parseString(resp.content).getElementsByTagName("sessionKey")[0].childNodes[
-                    0].nodeValue
+                session_key = resp.content.decode()
+                self.session_key = session_key[session_key.index("<sessionKey>")+12:session_key.index("</sessionKey>")]
             else:
                 error_msg = "Splunk login failed for user {} with status {}".format(username, resp.status_code)
                 raise IntegrationError("Request to url [{}] throws exception. Error [{}]".format(url, error_msg))
@@ -210,10 +197,8 @@ class SplunkUtils(object):
 
         try:
             resp = requests.post(url, headers=headers, data=args, verify=cafile)
-            #
             # We shall just return the response in json and let the post process
             # to make decision.
-            #
             ret = {"status_code": resp.status_code,
                    "content": resp.json()}
 
@@ -249,10 +234,8 @@ class SplunkUtils(object):
         ret = {}
         try:
             resp = requests.delete(url, headers=headers, verify=cafile)
-            #
             # We shall just return the response in json and let the post process
             # to make decision.
-            #
             ret = {"status_code": resp.status_code,
                    "content": resp.json()}
 
@@ -281,10 +264,8 @@ class SplunkUtils(object):
 
         try:
             resp = requests.post(url, headers=headers, data=item, verify=cafile)
-            #
             # We shall just return the response in json and let the post process
             # to make decision.
-            #
             ret = {"status_code": resp.status_code,
                    "content": resp.json()}
 
