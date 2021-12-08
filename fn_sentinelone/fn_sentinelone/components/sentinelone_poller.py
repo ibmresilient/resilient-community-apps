@@ -8,7 +8,7 @@ import datetime
 import logging
 from circuits import Event, Timer
 from resilient_circuits import ResilientComponent, handler
-from resilient_lib import validate_fields, RequestsCommon
+from resilient_lib import validate_fields
 from fn_sentinelone.lib.jinja_common import JinjaEnvironment
 from fn_sentinelone.lib.resilient_common import ResilientCommon
 from fn_sentinelone.lib.sentinelone_common import SentinelOneClient
@@ -109,7 +109,7 @@ class SentinelOnePollerComponent(ResilientComponent):
             threats = self.sentinelone_client.get_threats_by_time(self.last_poller_time)
             try:
                 for threat in threats:
-                    incident_payload = self._process_threat(threat)
+                    self._process_threat(threat)
 
             finally:
                 self.last_poller_time = poller_start

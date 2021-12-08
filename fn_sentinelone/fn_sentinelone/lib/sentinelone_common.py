@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# pragma pylint: disable=unused-argument, no-self-use
 # (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
 
 """SentinelOne REST API client"""
@@ -257,7 +258,7 @@ class SentinelOneClient(object):
 
         response = self.rc.execute("GET", download_url, timeout=self.download_timeout, headers=self.headers, 
                                     verify=self.verify, proxies=self.rc.get_proxies(),
-                                    callback=self._download_callback)
+                                    callback=_download_callback)
 
         datastream = BytesIO(response.content)
 
@@ -265,17 +266,6 @@ class SentinelOneClient(object):
                 "datastream": datastream,
                 "download_url": download_url 
             }
-
-    def _download_callback(response):
-        """
-        callback to review status code, 200 - Success
-        :param response:
-        :return: response
-        """
-        if response.status_code in [200]:
-            return response
-        else:
-            raise IntegrationError(response.content)
 
     def connect_to_network(self, agents_id):
         """ Connect the endpoint to the network
@@ -416,10 +406,10 @@ class SentinelOneClient(object):
                                     verify=self.verify, proxies=self.rc.get_proxies())
         return response.json()
 
-    def get_hash_reputation(self, hash):
+    def get_hash_reputation(self, s1_hash):
         """ Disconnect the endpoint from the network
         """
-        url = u"{0}/hashes/{1}/reputation".format(self.base_url, hash)
+        url = u"{0}/hashes/{1}/reputation".format(self.base_url, s1_hash)
 
         params = {
         }
@@ -442,3 +432,14 @@ class SentinelOneClient(object):
 
         # remove milliseconds
         return "{lookback_date}Z".format(lookback_date=last_poller_datetime_iso[:last_poller_datetime_iso.rfind('.')])
+
+def _download_callback(self, response):
+    """
+    callback to review status code, 200 - Success
+    :param response:
+    :return: response
+    """
+    if response.status_code in [200]:
+        return response.json()
+    
+    raise IntegrationError(response.content)

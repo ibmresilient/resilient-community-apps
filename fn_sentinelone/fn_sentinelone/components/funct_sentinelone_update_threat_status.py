@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
+# pragma pylint: disable=unused-argument, no-self-use
+# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
 
 """AppFunction implementation"""
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from resilient_lib import IntegrationError, validate_fields
 from fn_sentinelone.lib.sentinelone_common import SentinelOneClient
 
 PACKAGE_NAME = "fn_sentinelone"
@@ -27,11 +28,11 @@ class FunctionComponent(AppFunctionComponent):
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
 
-        sentinelOne_client = SentinelOneClient(self.opts, self.options)
+        sentinelone_client = SentinelOneClient(self.opts, self.options)
         threat_id = fn_inputs.sentinelone_threat_id
         threat_status = fn_inputs.sentinelone_threat_status
-        results = sentinelOne_client.update_threat_status(threat_id, threat_status)
-            
+        results = sentinelone_client.update_threat_status(threat_id, threat_status)
+
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
 
         yield FunctionResult(results)

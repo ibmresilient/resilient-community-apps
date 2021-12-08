@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
+# pragma pylint: disable=unused-argument, no-self-use
+# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
 
 """AppFunction implementation"""
-from io import BytesIO
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from resilient_lib import IntegrationError, validate_fields, write_file_attachment
-from fn_sentinelone.lib.resilient_common import ResilientCommon
+from resilient_lib import write_file_attachment
 from fn_sentinelone.lib.sentinelone_common import SentinelOneClient
 
 PACKAGE_NAME = "fn_sentinelone"
@@ -28,12 +28,12 @@ class FunctionComponent(AppFunctionComponent):
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
 
-        sentinelOne_client = SentinelOneClient(self.opts, self.options)
+        sentinelone_client = SentinelOneClient(self.opts, self.options)
         incident_id = fn_inputs.incident_id
         threat_id = fn_inputs.sentinelone_threat_id
 
         # Call SentinelOne to get the threat download URL and download the threat file.
-        download_results = sentinelOne_client.download_from_cloud(threat_id)
+        download_results = sentinelone_client.download_from_cloud(threat_id)
 
         threat_filename = download_results.get("threat_filename")
         datastream = download_results.get("datastream")

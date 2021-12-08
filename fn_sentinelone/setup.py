@@ -29,7 +29,13 @@ setup(
     author_email="",
     url="https://github.com/ibmresilient/fn_sentinelone",
     description="IBM Security SOAR app for SentinelOne",
-    long_description="""Escalate SentinelOne Threats into IBM Security SOAR as an incident/case.'""",
+    long_description="""This app allows bi-directional synchronization between IBM SOAR and SentinelOne.
+    Key features:
+    * Escalate SentinelOne Threats to IBM Resilient SOAR Cases
+    * Automatically keep Threats and Cases synchronized
+    * Retrieve SentinelOne Threat entities as artifacts
+    * Sync notes to and from SentinelOne Threats
+    * Support editable templates for field mapping between the two systems""",
     install_requires=[
         "resilient-circuits>=37.0.0",
                 "resilient-lib",

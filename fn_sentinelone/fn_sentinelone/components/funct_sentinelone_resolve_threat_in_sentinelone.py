@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
+# pragma pylint: disable=unused-argument, no-self-use
+# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
 
 """AppFunction implementation"""
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from resilient_lib import IntegrationError, validate_fields
+from resilient_lib import IntegrationError
 from fn_sentinelone.lib.sentinelone_common import SentinelOneClient
 
 PACKAGE_NAME = "fn_sentinelone"
@@ -26,7 +28,7 @@ class FunctionComponent(AppFunctionComponent):
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
 
-        sentinelOne_client = SentinelOneClient(self.opts, self.options)
+        sentinelone_client = SentinelOneClient(self.opts, self.options)
         incident_id = fn_inputs.incident_id
 
         # Get the incident
@@ -44,20 +46,19 @@ class FunctionComponent(AppFunctionComponent):
         # Make sure there is an SentinelOne threat associated with this incident
         threat_analyst_verdict= incident.get('properties', {}).get('sentinelone_threat_analyst_verdict', None)
 
-        verdict_response = sentinelOne_client.update_threat_analyst_verdict(threat_id, threat_analyst_verdict)
+        verdict_response = sentinelone_client.update_threat_analyst_verdict(threat_id, threat_analyst_verdict)
 
         verdict_data = verdict_response.get("data")
         if int(verdict_data.get("affected")) <= 0:
             success = False
             IntegrationError("SentinelOne Resolve Threat: unable to update analystVerdict in SentinelOne threat: {0}".format(threat_id))
         else:
-            status_response = sentinelOne_client.update_threat_status(threat_id, "resolved")
+            status_response = sentinelone_client.update_threat_status(threat_id, "resolved")
             status_data = status_response.get("data")
             if int(status_data.get("affected")) <= 0:
                 success = False
                 IntegrationError("SentinelOne Resolve Threat: unable to update incidentStatus in SentinelOne threat: {0}".format(threat_id))
             else:
-                
                 success = True
 
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
