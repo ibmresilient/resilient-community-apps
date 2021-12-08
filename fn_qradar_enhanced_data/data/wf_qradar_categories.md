@@ -29,7 +29,6 @@ link = "<a href=\"https://"+results.qrhost+"/console/ui/offenses/{0}/events?filt
 
 for event in results.events:
   qradar_event = incident.addRow("qr_categories")
-  qradar_event.qradar_server = incident.properties.qradar_destination
   qradar_event.category_name = link.format(results.offenseid,"category_name",event.categoryname,event.categoryname)
   qradar_event.magnitude = link.format(results.offenseid,"category_name",event.categoryname,event.magnitude)
   qradar_event.event_count = link.format(results.offenseid,"category_name",event.categoryname,event.eventcount)
@@ -65,7 +64,6 @@ link = "<a href=\"https://"+results.qrhost+"/console/ui/offenses/{0}/events?filt
 
 for event in results.events:
   qradar_event = incident.addRow("qr_categories")
-  qradar_event.qradar_server = incident.properties.qradar_destination
   qradar_event.category_name = event.categoryname
   qradar_event.flow_count = event.flowcount
   qradar_event.last_packet_time =  int(event.lastpackettime)

@@ -30,7 +30,6 @@ link = "<a href=\"https://"+results.qrhost+"/console/ui/offenses/{0}/events?filt
 
 for event in results.events:
   qradar_event = incident.addRow("qr_offense_top_events")
-  qradar_event.qradar_server = incident.properties.qradar_destination
   qradar_event.event_name = link.format(results.offenseid,"event_name",event.event_name,event.event_name)
   qradar_event.category = link.format(results.offenseid,"category_name",event.category_name,event.category_name)
   qradar_event.source_ip = link.format(results.offenseid,"sourceip",event.sourceip,event.sourceip)

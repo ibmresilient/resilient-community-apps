@@ -28,7 +28,6 @@ inputs.qradar_label = incident.properties.qradar_destination
 
 for event in results.assets:
   qradar_event = incident.addRow("qr_assets")
-  qradar_event.qradar_server = incident.properties.qradar_destination
   qradar_event.asset_id = event.id
   qradar_event.asset_name = event.name
   qradar_event.ip_address = event.sourceip

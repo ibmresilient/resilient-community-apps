@@ -29,7 +29,6 @@ inputs.qradar_label = incident.properties.qradar_destination
 
 for flow in results.events:
   qradar_event = incident.addRow("qr_flows")
-  qradar_event.qradar_server = incident.properties.qradar_destination
   qradar_event.application = flow.Application
   qradar_event.source_ip = flow.sourceip
   qradar_event.source_port = flow.sourceport

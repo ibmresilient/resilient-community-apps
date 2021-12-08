@@ -29,7 +29,6 @@ link = "<a href=\"https://"+results.qrhost+"/console/ui/offenses?filter={0}%3B%3
 
 for event in results.rules_data:
   qradar_event = incident.addRow("qr_triggered_rules")
-  qradar_event.qradar_server = incident.properties.qradar_destination
   qradar_event.rule_name = link.format("rules",event.id,event.name)
   qradar_event.rule_group = ", ".join(list(map(lambda x:x.name,list(filter(lambda x:x.name is not None,event.groups))))) if len(event.groups)>0 else ""
   qradar_event.rule_type = event.type

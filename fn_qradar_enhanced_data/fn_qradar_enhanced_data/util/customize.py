@@ -13,6 +13,7 @@ except ImportError:
 
 RES_FILE = "data/export.res"
 
+
 def codegen_reload_data():
     """
     Parameters required reload codegen for the fn_qradar_enhanced_data package
@@ -30,6 +31,7 @@ def codegen_reload_data():
         "automatic_tasks": [],
         "scripts": [u"Create Artifact from Assets info", u"Create Artifact from Destination IP info", u"Create Artifact from Events info", u"Create Artifact from Flows info", u"Create Artifact from Source IP info"],
     }
+
 
 def customization_data(client=None):
     """

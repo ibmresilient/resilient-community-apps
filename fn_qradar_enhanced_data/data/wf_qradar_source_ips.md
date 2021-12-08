@@ -29,7 +29,6 @@ link = "<a href=\"https://"+results.qrhost+"/console/ui/offenses/{0}/events?filt
 
 for event in results.events:
   qradar_event = incident.addRow("qr_top_source_ips")
-  qradar_event.qradar_server = incident.properties.qradar_destination
   qradar_event.source_ip = link.format(results.offenseid,"sourceip",event.sourceip,event.sourceip)
   qradar_event.vulnerability_count = event.vulnerabilityCount
   qradar_event.mac = event.macAddress
@@ -66,7 +65,6 @@ link = "<a href=\"https://"+results.qrhost+"/console/ui/offenses/{0}/events?filt
 
 for event in results.events:
   qradar_event = incident.addRow("qr_top_source_ips")
-  qradar_event.qradar_server = incident.properties.qradar_destination
   qradar_event.source_ip = event.sourceip
   qradar_event.vulnerability_count = event.vulnerabilityCount
   qradar_event.mac = event.macAddress
