@@ -8,7 +8,6 @@ import splunklib.client as splunk_client
 import splunklib.results as splunk_results
 import time
 import requests
-from xml.dom import minidom
 import json
 import sys
 import fn_splunk_integration.util.splunk_constants as splunk_constants
@@ -164,7 +163,7 @@ class SplunkUtils(object):
             # This one we only allows 200. Otherwise login failed
             if resp.status_code == 200:
                 # docs.splunk.com/Documentation/Splunk/7.0.2/RESTTUT/RESTsearches
-                session_key = resp.content.decode()
+                session_key = str(resp.content)
                 self.session_key = session_key[session_key.index("<sessionKey>")+12:session_key.index("</sessionKey>")]
             else:
                 error_msg = "Splunk login failed for user {} with status {}".format(username, resp.status_code)
