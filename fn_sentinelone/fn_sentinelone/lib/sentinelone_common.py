@@ -91,7 +91,7 @@ class SentinelOneClient(object):
         return response.json()
 
     def get_threat_details(self, threat_id):
-        """ Return the details of a threat
+        """ Return the details (JSON object) of a threat
         """
         url = u"{0}/threats".format(self.base_url)
 
@@ -212,7 +212,7 @@ class SentinelOneClient(object):
         return threat_notes
 
     def add_threat_note(self, threat_id, note_text):
-        """ Get threat notes for a given threat
+        """ Add threat note to a threat
         """
         url = u"{0}/threats/notes".format(self.base_url, threat_id)
 
@@ -370,7 +370,7 @@ class SentinelOneClient(object):
         return response.json()
 
     def update_threat_analyst_verdict(self, threat_id, analyst_verdict):
-        """ Initiate shutdown of the agent
+        """ Update analystVerdict of a threat
         """
         url = u"{0}/threats/analyst-verdict".format(self.base_url)
 
@@ -389,7 +389,7 @@ class SentinelOneClient(object):
         return response.json()
 
     def update_threat_status(self, threat_id, threat_status):
-        """ Initiate shutdown of the agent
+        """ Update the incidentStatus of a threat
         """
         url = u"{0}/threats/incident".format(self.base_url)
 
@@ -407,7 +407,7 @@ class SentinelOneClient(object):
         return response.json()
 
     def get_hash_reputation(self, s1_hash):
-        """ Disconnect the endpoint from the network
+        """ Get the SentinelOne reputation value for a hash
         """
         url = u"{0}/hashes/{1}/reputation".format(self.base_url, s1_hash)
 
@@ -420,13 +420,7 @@ class SentinelOneClient(object):
         return response.json()
 
     def _make_createdate_filter(self, last_poller_datetime):
-        """build the $filter parameter to find incidents by last poller run datetime
-
-        Args:
-            last_poller_datetime ([datetime]): [last poller time]
-
-        Returns:
-            [str]: [$filter string to use]
+        """Convert epoch to iso format "Z" time.
         """
         last_poller_datetime_iso = last_poller_datetime.isoformat()
 
