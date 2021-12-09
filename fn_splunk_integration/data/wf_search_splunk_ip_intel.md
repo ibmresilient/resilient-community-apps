@@ -58,8 +58,8 @@ lookup_map = {
   "User Agent": ("http_intel", "http_user_agent")
 }
 
-if artifact.type in lookup_map and lookup_map[artifact.type]:
-  threat_type, threat_field_name = lookup_map[artifact.type]
+if artifact.type in lookup_map and lookup_map.get(artifact.type):
+  threat_type, threat_field_name = lookup_map.get(artifact.type)
   inputs.splunk_query_param1 = threat_type
   inputs.splunk_query_param2 = threat_field_name
   inputs.splunk_query_param3 = artifact.value

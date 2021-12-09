@@ -21,12 +21,12 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
-        self.servers_list = function_utils.get_servers_list(opts, "init")
+        self.servers_list = function_utils.get_servers_list(opts)
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
-        self.servers_list = function_utils.get_servers_list(opts, "reload")
+        self.servers_list = function_utils.get_servers_list(opts)
 
     @function("splunk_search")
     def _splunk_search_function(self, event, *args, **kwargs):
@@ -54,9 +54,7 @@ class FunctionComponent(ResilientComponent):
 
             result_payload = ResultPayload(PACKAGE_NAME, **kwargs)
 
-            splunk_verify_cert = True
-            if "verify_cert" in options and options["verify_cert"] == "false":
-                splunk_verify_cert = False
+            splunk_verify_cert = False if options.get("verify_cert", "").lower() != "true" else True
 
             query_string = make_query_string(splunk_query, splunk_query_param)
 

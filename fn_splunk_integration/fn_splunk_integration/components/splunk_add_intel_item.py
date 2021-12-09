@@ -19,13 +19,13 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
-        self.servers_list = function_utils.get_servers_list(opts, "init")
+        self.servers_list = function_utils.get_servers_list(opts)
         function_utils.update_splunk_servers_select_list(opts, self.servers_list)
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
-        self.servers_list = function_utils.get_servers_list(opts, "reload")
+        self.servers_list = function_utils.get_servers_list(opts)
 
     @function("splunk_add_intel_item")
     def _splunk_add_intel_item_function(self, event, *args, **kwargs):
@@ -49,9 +49,7 @@ class FunctionComponent(ResilientComponent):
 
             options = SplunkServers.splunk_label_test(splunk_label, self.servers_list)
 
-            splunk_verify_cert = True
-            if "verify_cert" in options and options["verify_cert"] == "false":
-                splunk_verify_cert = False
+            splunk_verify_cert = False if options.get("verify_cert", "").lower() != "true" else True
 
             # Log all the info
             log.info("splunk_threat_intel_type: %s", splunk_threat_intel_type)

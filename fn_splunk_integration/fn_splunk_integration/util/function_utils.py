@@ -5,7 +5,7 @@
 import logging
 import fn_splunk_integration.util.splunk_constants as splunk_constants
 from resilient_lib import validate_fields, IntegrationError
-from fn_splunk_integration.util.resilient_utils import resilient_utils
+from fn_splunk_integration.util.resilient_utils import Resilient_utils
 from fn_splunk_integration.util import splunk_utils
 
 LOG = logging.getLogger(__name__)
@@ -53,7 +53,7 @@ def make_item_dict(params):
 
     return ret
 
-def get_servers_list(opts, choose):
+def get_servers_list(opts):
     """
     Used for initilizing or reloading the options variable
     :param opts: list of options
@@ -64,19 +64,20 @@ def get_servers_list(opts, choose):
 
     options = opts.get(splunk_constants.PACKAGE_NAME, {})
 
-    if options:
+    if options: # If no labels given [splunk_integration]
         server_list = {splunk_constants.PACKAGE_NAME}
-    else:
+    else: # If labels given [splunk_integration:label]
         servers = splunk_utils.SplunkServers(opts, options)
         server_list = servers.get_server_name_list()
 
+    # Creates a dictionary that is filled with the splunk servers
+    # and there configurations 
     for server_name in server_list:
         servers_list[server_name] = opts.get(server_name, {})
-        if choose == "init":
-            options = servers_list[server_name]
+        options = servers_list[server_name]
 
-            required_fields = ["host", "port", "verify_cert"]
-            validate_fields(required_fields, options)
+        required_fields = ["host", "port", "verify_cert"]
+        validate_fields(required_fields, options)
 
     return servers_list
 
@@ -95,4 +96,4 @@ def update_splunk_servers_select_list(opts, servers_list):
         else:
             server_name_list.append(server)
 
-    resilient_utils(opts).update_rule_action_field_values("splunk_servers", server_name_list)
+    Resilient_utils(opts).update_rule_action_field_values("splunk_servers", server_name_list)

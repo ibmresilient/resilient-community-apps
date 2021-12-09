@@ -14,9 +14,9 @@ GET_FIELD = "/types/actioninvocation/fields/{}?include_principals=true"
 
 LOG = logging.getLogger(__name__)
 
-class resilient_utils(ResilientComponent):
+class Resilient_utils(ResilientComponent):
     def __init__(self, opts):
-        super(resilient_utils, self).__init__(opts)
+        super(Resilient_utils, self).__init__(opts)
         self.res_rest_client = self.rest_client()
 
     def update_rule_action_field_values(self, field_name, field_values=None):
