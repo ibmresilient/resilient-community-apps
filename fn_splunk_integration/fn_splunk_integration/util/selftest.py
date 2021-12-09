@@ -6,9 +6,8 @@
 """
 
 import logging
-from .splunk_utils import SplunkClient
-import fn_splunk_integration.util.splunk_constants as splunk_constants
-from fn_splunk_integration.util.splunk_utils import SplunkServers
+from fn_splunk_integration.util.splunk_constants import PACKAGE_NAME
+from fn_splunk_integration.util.splunk_utils import SplunkServers, SplunkClient
 
 LOG = logging.getLogger(__name__)
 LOG.setLevel(logging.INFO)
@@ -19,27 +18,29 @@ def selftest_function(opts):
     This test uses configs in the app.config file to call attempt a splunk connect
     To try and get a status_code=200, else its a failure
     """
-    options = opts.get(splunk_constants.PACKAGE_NAME, {})
+    options = opts.get(PACKAGE_NAME, {})
 
-    if not options:
+    if options: # If no labels given [fn_splunk_integration]
+        server_list = {PACKAGE_NAME}
+    else: # If labels given [fn_splunk_integration:label]
         servers = SplunkServers(opts, options)
         server_list = servers.get_server_name_list()
-    else:
-        server_list = {splunk_constants.PACKAGE_NAME}
 
     try:
         for server_name in server_list:
             server = opts.get(server_name, {})
 
-            LOG.info("Trying to connect to %s", server["host"])
+            splunk_verify_cert = False if options.get("verify_cert", "").lower() != "true" else True
 
-            SplunkClient.connect(host=server["host"],
-                                port=server.get("port"),
-                                username=server.get("username"),
-                                password=server.get("splunkpassword"),
-                                verify=False)
+            LOG.info("Trying to connect to %s", server.get("host"))
 
-            LOG.info("Test for {} was successful\n".format(server["host"]))
+            SplunkClient.connect(host=server.get("host"),
+                                 port=server.get("port"),
+                                 username=server.get("username"),
+                                 password=server.get("splunkpassword"),
+                                 verify=splunk_verify_cert)
+
+            LOG.info("Test for {} was successful\n".format(server.get("host")))
 
         return {"state": "success"}
 
@@ -48,7 +49,10 @@ def selftest_function(opts):
             error: {0}
             ---------
             host: {1}
-            username: {2}\n""".format(err, server["host"], server.get("username"))
+            username: {2}\n""".format(
+            err,
+            server.get("host"),
+            server.get("username"))
 
         LOG.error(err_reason_msg)
 

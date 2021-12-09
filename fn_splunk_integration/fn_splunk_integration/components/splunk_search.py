@@ -8,10 +8,9 @@
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import ResultPayload
-from fn_splunk_integration.util.function_utils import make_query_string as make_query_string
-from fn_splunk_integration.util import splunk_utils, function_utils
+from fn_splunk_integration.util.function_utils import make_query_string, get_servers_list
 from fn_splunk_integration.util.splunk_constants import QUERY_PARAM, PACKAGE_NAME
-from fn_splunk_integration.util.splunk_utils import SplunkServers
+from fn_splunk_integration.util.splunk_utils import SplunkServers, SplunkClient
 
 log = logging.getLogger(__name__)
 
@@ -21,12 +20,12 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
-        self.servers_list = function_utils.get_servers_list(opts)
+        self.servers_list = get_servers_list(opts)
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
-        self.servers_list = function_utils.get_servers_list(opts)
+        self.servers_list = get_servers_list(opts)
 
     @function("splunk_search")
     def _splunk_search_function(self, event, *args, **kwargs):
@@ -60,16 +59,16 @@ class FunctionComponent(ResilientComponent):
 
             log.info("Splunk query to be executed: %s" % query_string)
             log.info("Splunk host: %s, port: %s, username: %s",
-                     options["host"], options["port"], options["username"])
+                     options.get("host"), options.get("port"), options.get("username"))
 
             wf_instance_id = event.message.get("workflow_instance", {}).get("workflow_instance_id", "no instance id found")
             yield StatusMessage("Starting 'splunk_search' that was running in workflow '{}'".format(wf_instance_id))
 
-            splunk_client = splunk_utils.SplunkClient(options["host"],
-                                                      port=int(options["port"]),
-                                                      username=options["username"],
-                                                      password=options["splunkpassword"],
-                                                      verify=splunk_verify_cert)
+            splunk_client = SplunkClient(options.get("host"),
+                                         port=options.get("port"),
+                                         username=options.get("username"),
+                                         password=options.get("splunkpassword"),
+                                         verify=splunk_verify_cert)
             if splunk_max_return:
                 splunk_client.set_max_return(splunk_max_return)
 

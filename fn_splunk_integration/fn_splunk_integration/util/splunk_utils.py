@@ -6,11 +6,10 @@
 #
 import splunklib.client as splunk_client
 import splunklib.results as splunk_results
-import time
+from time import time, sleep
 import requests
-import json
-import sys
-import fn_splunk_integration.util.splunk_constants as splunk_constants
+from json import dumps
+from fn_splunk_integration.util.splunk_constants import PACKAGE_NAME
 from resilient_lib import IntegrationError
 import urllib.parse as urlparse
 import logging
@@ -90,7 +89,7 @@ class SplunkClient(object):
         splunk_job = self.start_search(query)
 
         # Poll Splunk for result
-        start_time = time.time()
+        start_time = time()
         done = False
 
         while not done:
@@ -114,11 +113,11 @@ class SplunkClient(object):
 
             if not done:
                 if self.time_out!= 0:
-                    if time.time() - start_time > self.time_out:
+                    if time() - start_time > self.time_out:
                         splunk_job.cancel()
                         raise IntegrationError("Query [{}] timed out. Final Status was [{}]".format(splunk_job.name, splunk_job["dispatchState"]))
                 LOG.debug("Sleeping for %s", self.polling_interval)
-                time.sleep(self.polling_interval)
+                sleep(self.polling_interval)
 
         if splunk_job["dispatchState"] != "DONE" or splunk_job["isFailed"] == True:
             raise IntegrationError("Query [{}] failed with status [{}], {}".format(splunk_job.name, splunk_job["dispatchState"], str(splunk_job["messages"])))
@@ -259,7 +258,7 @@ class SplunkUtils(object):
         if threat_type not in self.SUPPORTED_THREAT_TYPE:
             raise IntegrationError("Request to url [{}] throws exception. Error [{}]".format(url, "{} is not supported"))
 
-        item = {"item": json.dumps(threat_dict)}
+        item = {"item": dumps(threat_dict)}
 
         try:
             resp = requests.post(url, headers=headers, data=item, verify=cafile)
@@ -301,10 +300,10 @@ class SplunkServers():
         """
         Check if the given splunk_label is in the app.config
         """
-        label = splunk_constants.PACKAGE_NAME+":"+splunk_label
+        label = PACKAGE_NAME+":"+splunk_label
         if splunk_label and label in servers_list:
             options = servers_list[label]
-        elif (len(servers_list) == 1 and splunk_label == splunk_constants.PACKAGE_NAME) or len(servers_list) == 1:
+        elif (len(servers_list) == 1 and splunk_label == PACKAGE_NAME) or len(servers_list) == 1:
             options = servers_list[list(servers_list.keys())[0]]
         else:
             raise IntegrationError("{} did not match labels given in the app.config".format(splunk_label))
@@ -317,7 +316,7 @@ class SplunkServers():
         """
         server_list = []
         for key in opts.keys():
-            if key.startswith("{}:".format(splunk_constants.PACKAGE_NAME)):
+            if key.startswith("{}:".format(PACKAGE_NAME)):
                 server_list.append(key)
         return server_list
 

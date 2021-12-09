@@ -8,9 +8,9 @@
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import ResultPayload
-from fn_splunk_integration.util import function_utils, splunk_utils
+from fn_splunk_integration.util import function_utils
 from fn_splunk_integration.util.splunk_constants import QUERY_PARAM, PACKAGE_NAME
-from fn_splunk_integration.util.splunk_utils import SplunkServers
+from fn_splunk_integration.util.splunk_utils import SplunkServers, SplunkUtils
 
 log = logging.getLogger(__name__)
 
@@ -20,7 +20,7 @@ class FunctionComponent(ResilientComponent):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         self.servers_list = function_utils.get_servers_list(opts)
-        function_utils.update_splunk_servers_select_list(opts, self.servers_list)
+        function_utils.update_splunk_servers_select_list(self.servers_list, self.rest_client(), "splunk_servers")
 
     @handler("reload")
     def _reload(self, event, opts):
@@ -30,7 +30,7 @@ class FunctionComponent(ResilientComponent):
     @function("splunk_add_intel_item")
     def _splunk_add_intel_item_function(self, event, *args, **kwargs):
         """Function: Add a new splunk es threat intelligence item to the collections
-        splunk_thread_intel_type: ip_intel, user_intel,...., or registry_intel
+        splunk_thread_intel_type: ip_intel, user_intel, ...., or registry_intel
         splunk_query_param1: field1 name of the dict used to create the item;
         splunk_query_param2: field1 value;
         splunk_query_param3: field2 name;
@@ -69,15 +69,15 @@ class FunctionComponent(ResilientComponent):
             # log it for debug
             log.debug("item dict: {}".format(str(item_dict)))
 
-            splnk_utils = splunk_utils.SplunkUtils(host=options["host"],
-                                                   port=options["port"],
-                                                   username=options["username"],
-                                                   password=options["splunkpassword"],
-                                                   verify=splunk_verify_cert)
+            splnk_utils = SplunkUtils(host=options.get("host"),
+                                      port=options.get("port"),
+                                      username=options.get("username"),
+                                      password=options.get("splunkpassword"),
+                                      verify=splunk_verify_cert)
 
             splunk_result = splnk_utils.add_threat_intel_item(threat_type=splunk_threat_intel_type,
-                                                       threat_dict=item_dict,
-                                                       cafile=splunk_verify_cert)
+                                                              threat_dict=item_dict,
+                                                              cafile=splunk_verify_cert)
 
             yield StatusMessage("Finished 'splunk_add_intel_item' that was running in workflow '{}'".format(wf_instance_id))
 

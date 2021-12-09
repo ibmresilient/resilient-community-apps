@@ -8,9 +8,9 @@
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import ResultPayload
-from fn_splunk_integration.util import splunk_utils, function_utils
-import fn_splunk_integration.util.splunk_constants as splunk_constants
-from fn_splunk_integration.util.splunk_utils import SplunkServers
+from fn_splunk_integration.util.function_utils import get_servers_list
+from fn_splunk_integration.util.splunk_constants import PACKAGE_NAME
+from fn_splunk_integration.util.splunk_utils import SplunkServers, SplunkUtils
 
 log = logging.getLogger(__name__)
 
@@ -20,12 +20,12 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
-        self.servers_list = function_utils.get_servers_list(opts)
+        self.servers_list = get_servers_list(opts)
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
-        self.servers_list = function_utils.get_servers_list(opts)
+        self.servers_list = get_servers_list(opts)
 
     @function("splunk_update_notable")
     def _splunk_update_notable_function(self, event, *args, **kwargs):
@@ -55,23 +55,23 @@ class FunctionComponent(ResilientComponent):
             log.info("splunk_label: %s", splunk_label)
 
             log.info("Splunk host: %s, port: %s, username: %s",
-                     options["host"], options["port"], options["username"])
+                     options.get("host"), options.get("port"), options.get("username"))
 
             wf_instance_id = event.message.get("workflow_instance", {}).get("workflow_instance_id", "no instance id found")
             yield StatusMessage("Starting 'splunk_update_notable' that was running in workflow '{}'".format(wf_instance_id))
 
-            result_payload = ResultPayload(splunk_constants.PACKAGE_NAME, **kwargs)
+            result_payload = ResultPayload(PACKAGE_NAME, **kwargs)
 
-            splnk_utils = splunk_utils.SplunkUtils(host=options["host"],
-                                                   port=options["port"],
-                                                   username=options["username"],
-                                                   password=options["splunkpassword"],
-                                                   verify=splunk_verify_cert)
+            splnk_utils = SplunkUtils(host=options.get("host"),
+                                      port=options.get("port"),
+                                      username=options.get("username"),
+                                      password=options.get("splunkpassword"),
+                                      verify=splunk_verify_cert)
 
             splunk_result = splnk_utils.update_notable(event_id=event_id,
-                                                 comment=comment,
-                                                 status=notable_event_status,
-                                                 cafile=splunk_verify_cert)
+                                                       comment=comment,
+                                                       status=notable_event_status,
+                                                       cafile=splunk_verify_cert)
 
             yield StatusMessage("Finished 'splunk_update_notable' that was running in workflow '{}'".format(wf_instance_id))
 

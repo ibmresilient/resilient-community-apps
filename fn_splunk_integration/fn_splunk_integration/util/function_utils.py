@@ -3,10 +3,9 @@
 # (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 #
 import logging
-import fn_splunk_integration.util.splunk_constants as splunk_constants
+from fn_splunk_integration.util.splunk_constants import PACKAGE_NAME, GET_FIELD, UPDATE_FIELD
 from resilient_lib import validate_fields, IntegrationError
-from fn_splunk_integration.util.resilient_utils import Resilient_utils
-from fn_splunk_integration.util import splunk_utils
+from fn_splunk_integration.util.splunk_utils import SplunkServers
 
 LOG = logging.getLogger(__name__)
 
@@ -62,33 +61,32 @@ def get_servers_list(opts):
     """
     servers_list = {}
 
-    options = opts.get(splunk_constants.PACKAGE_NAME, {})
+    options = opts.get(PACKAGE_NAME, {})
 
-    if options: # If no labels given [splunk_integration]
-        server_list = {splunk_constants.PACKAGE_NAME}
-    else: # If labels given [splunk_integration:label]
-        servers = splunk_utils.SplunkServers(opts, options)
+    if options: # If no labels given [fn_splunk_integration]
+        server_list = {PACKAGE_NAME}
+    else: # If labels given [fn_splunk_integration:label]
+        servers = SplunkServers(opts, options)
         server_list = servers.get_server_name_list()
 
     # Creates a dictionary that is filled with the splunk servers
     # and there configurations 
     for server_name in server_list:
         servers_list[server_name] = opts.get(server_name, {})
-        options = servers_list[server_name]
-
-        required_fields = ["host", "port", "verify_cert"]
-        validate_fields(required_fields, options)
+        validate_fields(["host", "port", "verify_cert"], servers_list[server_name])
 
     return servers_list
 
-def update_splunk_servers_select_list(opts, servers_list):
+def update_splunk_servers_select_list(servers_list, res_rest_client, field_name):
     """
-    Populate the splunk_servers select list
-    :param opts: list of options
+    Update values in splunk_servers select field
     :param servers_list: list of splunk servers in app.config
+    :param res_rest_client: resilient rest client connection
+    :param field_name: activity field name
     :return: None
     """
 
+    # Create list of splunk server labels
     server_name_list = []
     for server in servers_list:
         if ":" in server:
@@ -96,4 +94,27 @@ def update_splunk_servers_select_list(opts, servers_list):
         else:
             server_name_list.append(server)
 
-    Resilient_utils(opts).update_rule_action_field_values("splunk_servers", server_name_list)
+    try:
+        payload = res_rest_client.get(GET_FIELD.format(field_name))
+
+        if type(payload) == list or payload.get("input_type") != "select":
+            return None
+
+        # Create list of servers to add to the Splunk Servers select list
+        if payload.get("values"):
+            for each_value in payload.get("values"):
+                if each_value.get("label") in server_name_list:
+                    server_name_list.remove(each_value.get("label"))
+
+        # Create payload 
+        if server_name_list:
+            payload["values"] = [
+                {"label": str(value), "enabled": True, "hidden": False}
+                for value in server_name_list
+            ]
+
+            res_rest_client.put(UPDATE_FIELD.format(field_name), payload, timeout=1000)
+
+    except Exception as err_msg:
+        LOG.warning("Action filed: {} error: {}".format(field_name, err_msg))
+        raise IntegrationError("Error while updating action field: {}".format(field_name))
