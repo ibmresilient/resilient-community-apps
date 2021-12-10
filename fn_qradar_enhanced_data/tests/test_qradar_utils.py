@@ -4,9 +4,9 @@
 #
 from fn_qradar_enhanced_data.util import qradar_utils, qradar_constants
 from fn_qradar_enhanced_data.util.SearchWaitCommand import SearchWaitCommand, SearchFailure, SearchJobFailure
-import base64
+from base64 import b64encode
 from mock import patch
-import six
+from six import string_types
 import pytest
 
 # Util function to generate simulated requests response
@@ -32,7 +32,7 @@ search_id = "FakeSearch_id"
 @pytest.mark.parametrize("val", [ "test", u"test", "ç", u"ç" ])
 def test_quote_return(val):
     result = qradar_utils.quote(val)
-    assert isinstance(result, six.string_types)
+    assert isinstance(result, string_types)
 
 @patch("fn_qradar_enhanced_data.util.qradar_utils.quote_func")
 def test_quote_passing_args(mocked_func):
@@ -58,7 +58,7 @@ def test_auth_info():
     assert auth_info.api_url == "https://{}/api/".format(host)
     assert auth_info.cafile == cafile
     assert auth_info.qradar_token == None
-    assert auth_info.headers["Authorization"] == b"Basic " + base64.b64encode((username + ':' + password).encode("ascii"))
+    assert auth_info.headers["Authorization"] == b"Basic " + b64encode((username + ':' + password).encode("ascii"))
     assert auth_info.headers["Accept"] == "application/json"
 
     # use token to auth
@@ -210,7 +210,6 @@ def test_get_rules_data(mocked_make_call, mocked_qr_call):
                 ]
             }
         }
-
     }
 
     mocked_make_call.return_value = _generateResponse(rules_data, 200)
@@ -244,7 +243,6 @@ def test_get_sourceip_data(mocked_make_call, mocked_qr_call):
                     "vulnerabilityCount":2
             }
         }
-
     }
 
     mocked_make_call.return_value = _generateResponse(sourceip_data, 200)
@@ -316,7 +314,6 @@ def get_offense_asset_data(mocked_make_call, mocked_qr_call):
                 ]
             }
         }
-
     }
 
     mocked_make_call.return_value = _generateResponse(asset_data, 200)

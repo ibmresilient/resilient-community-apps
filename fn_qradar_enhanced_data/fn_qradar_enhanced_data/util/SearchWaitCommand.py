@@ -6,7 +6,7 @@
 #
 # This file can be reused for composite commands.
 #
-import time
+from time import time, sleep
 import logging
 LOG = logging.getLogger(__name__)
 
@@ -79,7 +79,7 @@ class SearchWaitCommand(object):
 
         if search_id:
             # store the start time
-            start_time = time.time()
+            start_time = time()
             done = False
 
             while not done:
@@ -98,10 +98,10 @@ class SearchWaitCommand(object):
                     # time_out is default to 10 minutes. If customer overrides it to 0, it
                     # will never timeout
                     if self.search_timeout != 0:
-                        if time.time() - start_time > self.search_timeout:
+                        if time() - start_time > self.search_timeout:
                             raise SearchTimeout(search_id, status)
                     # polling_interval is defaulted to 5 sec
-                    time.sleep(self.polling_period)
+                    sleep(self.polling_period)
         else:
             LOG.error("search_id is None")
             raise SearchJobFailure(query)

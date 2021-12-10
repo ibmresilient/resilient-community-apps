@@ -10,7 +10,7 @@ import fn_qradar_enhanced_data.util.qradar_constants as qradar_constants
 from resilient_lib import validate_fields
 from fn_qradar_enhanced_data.util.qradar_utils import QRadarClient, QRadarServers
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-import fn_qradar_enhanced_data.util.function_utils as function_utils
+from fn_qradar_enhanced_data.util.function_utils import get_servers_list
 
 #For a given Offense ID , get the offense summary.
 
@@ -21,13 +21,13 @@ class FunctionComponent(ResilientComponent):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         self.opts = opts
-        self.servers_list = function_utils.get_servers_list(opts, "init")
+        self.servers_list = get_servers_list(opts)
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
         self.opts = opts
-        self.servers_list = function_utils.get_servers_list(opts, "reload")
+        self.servers_list = get_servers_list(opts)
 
     @function("qradar_offense_summary")
     def _qradar_offense_summary(self, event, *args, **kwargs):
@@ -44,10 +44,7 @@ class FunctionComponent(ResilientComponent):
             log.info("qradar_label: %s"), qradar_label
 
             options = QRadarServers.qradar_label_test(qradar_label, self.servers_list)
-
-            qradar_verify_cert = True
-            if "verify_cert" in options and options["verify_cert"].lower() == "false":
-                qradar_verify_cert = False
+            qradar_verify_cert = False if options.get("verify_cert", "false").lower() == "false" else options.get("verify_cert")
 
             log.debug("Connection to {} using {}".format(options.get("host"),
                                                          options.get("username", None) or options.get("qradartoken", None)))
@@ -72,21 +69,21 @@ class FunctionComponent(ResilientComponent):
             if qradar_fn_type == qradar_constants.OFFENSE_SUMMARY:
 
                 offense_summary = qradar_client.get_offense_summary_data(qradar_offenseid)
-                results["offense"]= offense_summary["content"]
+                results["offense"] = offense_summary["content"]
 
             # Fetch the Contributing Rules if function type is OFFENSE_RULES
             elif qradar_fn_type == qradar_constants.OFFENSE_RULES:
 
                 rules_data = qradar_client.get_rules_data(qradar_offenseid)
                 rules_data = rules_data["content"]["rules"]
-                results["rules_data"]=rules_data
+                results["rules_data"] = rules_data
 
             # Fetch the Assets Info if function type is OFFENSE_ASSETS
             elif qradar_fn_type == qradar_constants.OFFENSE_ASSETS:
 
                 # Get all sources for the given Offense ID
                 offense_source = qradar_client.get_offense_source(qradar_offenseid)
-                results["assets"]=[]
+                results["assets"] = []
 
                 # Get Asset Info for each source
                 for source in offense_source["content"]:
@@ -95,7 +92,7 @@ class FunctionComponent(ResilientComponent):
                     if offense_assets:
                         offense_assets["sourceip"] = source["sourceIp"]
                         # Sorting the asset users list based on the last seen time
-                        offense_assets["users"].sort(key=lambda x:int(x["lastSeenProfiler"]),reverse=True)
+                        offense_assets["users"].sort(key=lambda x:int(x["lastSeenProfiler"]), reverse=True)
 
                         # Get the Operating System ID for the Asset
                         asset_prop = list(filter(lambda x:x["propertyType"]["name"] == "Primary OS ID",

@@ -2,7 +2,7 @@
 #
 #   Unit tests for function_utils.py
 #
-from fn_qradar_enhanced_data.util import function_utils
+from fn_qradar_enhanced_data.util.function_utils import make_query_string, fix_dict_value
 
 def test_query_string():
     """
@@ -14,7 +14,7 @@ def test_query_string():
     params = ["DATEFORMAT(starttime, 'YYYY-MM-dd HH:mm') as StartTime, CATEGORYNAME(category), LOGSOURCENAME(logsourceid), PROTOCOLNAME(protocolid), RULENAME(creeventlist)",
               "38",
               "100"]
-    query_str = function_utils.make_query_string(input_string, params)
+    query_str = make_query_string(input_string, params)
     str_expect = "SELECT DATEFORMAT(starttime, 'YYYY-MM-dd HH:mm') as StartTime, CATEGORYNAME(category), LOGSOURCENAME(logsourceid), PROTOCOLNAME(protocolid), RULENAME(creeventlist)" \
                  " FROM events WHERE INOFFENSE(38) LAST 100 MINUTES"
 
@@ -29,7 +29,7 @@ def test_query_string():
 
     input_string = str1 + "%param1%" + str2 + "%param2%" + str3 + "%param3%" + str4 + "%param4%" + str5
     params = ["Param1", "Param2", "Param3", "Param4"]
-    query_str = function_utils.make_query_string(input_string, params=params)
+    query_str = make_query_string(input_string, params=params)
     str_expect = str1 + params[0] + str2 + params[1] + str3 + params[2] + str4 + params[3] + str5
     assert query_str == str_expect
 
@@ -45,7 +45,7 @@ def test_fix_dict():
                   "key5": "çø∂",
                   "key6": u"çø∂",
                   "key7": [u"çø∂", "çø∂"]}
-    ret_dicts = function_utils.fix_dict_value([input_dict])
+    ret_dicts = fix_dict_value([input_dict])
 
     assert ret_dicts[0]["key1"] == "10"
     assert ret_dicts[0]["key2"] == "string"

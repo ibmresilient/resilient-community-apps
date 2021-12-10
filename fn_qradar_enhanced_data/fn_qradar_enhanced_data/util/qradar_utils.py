@@ -4,17 +4,17 @@
 #
 #   Util classes for qradar
 
-import base64
-import json
+from base64 import b64encode
+from json import dumps
 import logging
 import requests
-import six
+from six import binary_type
 import fn_qradar_enhanced_data.util.qradar_constants as qradar_constants
-import fn_qradar_enhanced_data.util.function_utils as function_utils
+from fn_qradar_enhanced_data.util.function_utils import fix_dict_value
 import fn_qradar_enhanced_data.util.qradar_graphql_queries as qradar_graphql_queries
 from resilient_lib import RequestsCommon, IntegrationError
 from fn_qradar_enhanced_data.util.SearchWaitCommand import SearchWaitCommand, SearchFailure, SearchJobFailure
-from urllib.parse import quote as quote_func  # Python 3+
+from urllib.parse import quote as quote_func
 
 LOG = logging.getLogger(__name__)
 
@@ -23,7 +23,7 @@ def quote(input_v, safe=None):
     To make sure that integration on Python 2 works with unicode we will wrap quote
     to always pass bytes to it.
     """
-    if not isinstance(input_v, six.binary_type):
+    if not isinstance(input_v, binary_type):
         input_v = input_v.encode('utf-8')
 
     # No need to re-define the default for safe
@@ -69,7 +69,7 @@ class AuthInfo(object):
         if username and password:
             self.username = username
             self.password = password
-            self.qradar_auth = base64.b64encode((username + ':' + password).encode('ascii'))
+            self.qradar_auth = b64encode((username + ':' + password).encode('ascii'))
             self.headers['Authorization'] = b"Basic " + self.qradar_auth
         elif token:
             self.qradar_token = token
@@ -150,8 +150,8 @@ class ArielSearch(SearchWaitCommand):
         headers = auth_info.headers.copy()
 
         if self.graphql:
-            url = auth_info.api_url.replace("api/","")+qradar_constants.GRAPHQL_ARIEL_SEARCHES+"?query_expression="+query
-            data={}
+            url = auth_info.api_url.replace("api/","") + qradar_constants.GRAPHQL_ARIEL_SEARCHES + "?query_expression=" + query
+            data = {}
             headers["Cookie"] = QRadarClient.get_qr_sessionid(auth_info.api_url.replace("api/", ""))
         else:
             url = auth_info.api_url + qradar_constants.ARIEL_SEARCHES
@@ -184,7 +184,7 @@ class ArielSearch(SearchWaitCommand):
         auth_info = AuthInfo.get_authInfo()
 
         if self.graphql:
-            url = auth_info.api_url.replace("api/","")+qradar_constants.GRAPHQL_ARIEL_SEARCHES_RESULT.format(search_id)
+            url = auth_info.api_url.replace("api/","") + qradar_constants.GRAPHQL_ARIEL_SEARCHES_RESULT.format(search_id)
 
         else:
             url = auth_info.api_url + qradar_constants.ARIEL_SEARCHES_RESULT.format(search_id)
@@ -210,7 +210,7 @@ class ArielSearch(SearchWaitCommand):
         if response.status_code == 200:
             res = response.json()
             events = res["events"] if "events" in res else res["flows"] if "flows" in res else res["other"]
-            events = function_utils.fix_dict_value(events)
+            events = fix_dict_value(events)
             ret = {"events": events}
 
         return ret
@@ -334,7 +334,7 @@ class QRadarClient(object):
         data = {"operationName":"getSystemDate","variables":{},"query":qradar_graphql_queries.GRAPHQL_SYSTEMDATE}
 
         try:
-            response = auth_info.make_call("POST", url, data=json.dumps(data), headers=headers)
+            response = auth_info.make_call("POST", url, data=dumps(data), headers=headers)
         except Exception as e:
             pass
 
@@ -356,7 +356,7 @@ class QRadarClient(object):
         data = {"operationName":"offenseQuery","variables":{"id":offenseid},"query":qradar_graphql_queries.GRAPHQL_OFFENSEQUERY}
         ret = {}
         try:
-            response = auth_info.make_call("POST", url,data=json.dumps(data),headers=headers)
+            response = auth_info.make_call("POST", url,data=dumps(data),headers=headers)
 
             ret = {"status_code": response.status_code,
                    "content": response.json()["data"]["getOffense"]}
@@ -383,7 +383,7 @@ class QRadarClient(object):
         data = {"operationName":"ruleQuery","variables":{"id":offenseid},"query":qradar_graphql_queries.GRAPHQL_RULESQUERY}
         ret = {}
         try:
-            response = auth_info.make_call("POST", url,data=json.dumps(data),headers=headers)
+            response = auth_info.make_call("POST", url,data=dumps(data),headers=headers)
             res = response.json()
 
             ret = {"status_code": response.status_code,
@@ -411,7 +411,7 @@ class QRadarClient(object):
         data = {"operationName":"assetQuery","variables":{"domainId":event["domainid"],"ipAddress":event["sourceip"]},"query":qradar_graphql_queries.GRAPHQL_SOURCEIP}
         ret = {}
         try:
-            response = auth_info.make_call("POST", url,data=json.dumps(data),headers=headers)
+            response = auth_info.make_call("POST", url,data=dumps(data),headers=headers)
             res = response.json()
 
             ret = {"status_code": response.status_code,
@@ -439,7 +439,7 @@ class QRadarClient(object):
         data = {"operationName":"offenseSourceQuery","variables":{"id":offenseid}, "query":qradar_graphql_queries.GRAPHQL_OFFENSESOURCE}
         ret = {}
         try:
-            response = auth_info.make_call("POST", url,data=json.dumps(data),headers=headers)
+            response = auth_info.make_call("POST", url,data=dumps(data),headers=headers)
             res = response.json()
 
             ret = {"status_code": response.status_code,
@@ -469,7 +469,7 @@ class QRadarClient(object):
                 "query": qradar_graphql_queries.GRAPHQL_OFFENSEASSETS}
         ret = {}
         try:
-            response = auth_info.make_call("POST", url, data=json.dumps(data), headers=headers)
+            response = auth_info.make_call("POST", url, data=dumps(data), headers=headers)
             res = response.json()
 
             ret = {"status_code": response.status_code,
@@ -493,7 +493,7 @@ class QRadarClient(object):
             auth_info = AuthInfo.get_authInfo()
 
             if not auth_info.username and not auth_info.password:
-                cookies={"SEC":auth_info.qradar_token}
+                cookies = {"SEC":auth_info.qradar_token}
             else:
                 res = requests.get("{0}console/logon.jsp".format(host), verify=auth_info.cafile)
                 cookies = res.cookies.get_dict()

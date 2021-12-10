@@ -6,7 +6,7 @@
 
 import logging
 from fn_qradar_enhanced_data.util.qradar_utils import QRadarClient, QRadarServers
-import fn_qradar_enhanced_data.util.qradar_constants as qradar_constants
+from fn_qradar_enhanced_data.util.qradar_constants import PACKAGE_NAME
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
@@ -25,17 +25,14 @@ def selftest_function(opts):
             servers = QRadarServers(opts, options)
             server_list = servers.get_server_name_list()
         else:
-            server_list = {qradar_constants.PACKAGE_NAME}
+            server_list = {PACKAGE_NAME}
 
         for server_name in server_list:
             server = opts.get(server_name, {})
 
             log.info("Verifying app.config values for {} config section".format(str(server.get("host"))))
 
-            # if bool(server.get("verify_cert")) == False:
-            #     raise Exception("fn-qradar-enhanced-data: Verifying app.config values for fn_qradar_integration config section Error while calling selftest. Exception: 'verify_cert'")
-
-            cafile = False if server.get("verify_cert", "").lower() == "false" else server.get("verify_cert")
+            cafile = False if server.get("verify_cert", "false").lower() == "false" else server.get("verify_cert")
             qradar_client = QRadarClient(host=server.get("host"),
                                         username=server.get("username", None),
                                         password=server.get("qradarpassword", None),

@@ -5,14 +5,16 @@
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
-import time
+from time import time
 import logging
-import re
-import fn_qradar_enhanced_data.util.qradar_constants as qradar_constants
-import fn_qradar_enhanced_data.util.function_utils as function_utils
+from re import sub, search, IGNORECASE
+from fn_qradar_enhanced_data.util.qradar_constants import ARIEL_SEARCH_EVENTS, ARIEL_SEARCH_FLOWS, SOURCE_IP
+from fn_qradar_enhanced_data.util.function_utils import make_query_string, get_servers_list
 from fn_qradar_enhanced_data.util.qradar_utils import QRadarClient, QRadarServers
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import validate_fields
+
+log = logging.getLogger(__name__)
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'qradar_top_events"""
@@ -21,19 +23,17 @@ class FunctionComponent(ResilientComponent):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         self.opts = opts
-        self.servers_list = function_utils.get_servers_list(opts, "init")
+        self.servers_list = get_servers_list(opts)
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
         self.opts = opts
-        self.servers_list = function_utils.get_servers_list(opts, "reload")
+        self.servers_list = get_servers_list(opts)
 
     @function("qradar_top_events")
     def _qradar_top_events(self, event, *args, **kwargs):
         """Function: QRadar Top Events"""
-
-        log = logging.getLogger(__name__)
 
         try:
             required_fields = ["qradar_query_type", "qradar_query"]
@@ -59,10 +59,7 @@ class FunctionComponent(ResilientComponent):
             log.info("qradar_label: %s"), qradar_label
 
             options = QRadarServers.qradar_label_test(qradar_label, self.servers_list)
-
-            qradar_verify_cert = True
-            if "verify_cert" in options and options["verify_cert"].lower() == "false":
-                qradar_verify_cert = False
+            qradar_verify_cert = False if options.get("verify_cert", "false").lower() == "false" else options.get("verify_cert")
 
             timeout = float(options.get("search_timeout",600))  # Default timeout to 10 minutes
 
@@ -71,17 +68,17 @@ class FunctionComponent(ResilientComponent):
                                                              "qradartoken", None)))
 
             temp_table = "offense-{0}-events-{1}-1000-{2}".format(qradar_query_param3, qradar_fn_type,
-                                                                  str(time.time()))
+                                                                  str(time()))
 
-            qradar_temp_query = re.sub("FROM\s+{}".format(qradar_constants.ARIEL_SEARCH_EVENTS if re.search(qradar_constants.ARIEL_SEARCH_EVENTS,qradar_query, flags=re.IGNORECASE) else qradar_constants.ARIEL_SEARCH_FLOWS),
-                                       "FROM {} INTO \"{}\"".format(qradar_constants.ARIEL_SEARCH_EVENTS if re.search(qradar_constants.ARIEL_SEARCH_EVENTS,qradar_query, flags=re.IGNORECASE) else qradar_constants.ARIEL_SEARCH_FLOWS, temp_table),
-                                       qradar_query, flags=re.IGNORECASE)
+            qradar_temp_query = sub("FROM\s+{}".format(ARIEL_SEARCH_EVENTS if search(ARIEL_SEARCH_EVENTS,qradar_query, flags=IGNORECASE) else ARIEL_SEARCH_FLOWS),
+                                       "FROM {} INTO \"{}\"".format(ARIEL_SEARCH_EVENTS if search(ARIEL_SEARCH_EVENTS,qradar_query, flags=IGNORECASE) else ARIEL_SEARCH_FLOWS, temp_table),
+                                       qradar_query, flags=IGNORECASE)
 
-            qradar_search_query = re.sub("FROM\s+{}".format(qradar_constants.ARIEL_SEARCH_EVENTS if re.search(qradar_constants.ARIEL_SEARCH_EVENTS,qradar_query, flags=re.IGNORECASE) else qradar_constants.ARIEL_SEARCH_FLOWS),
+            qradar_search_query = sub("FROM\s+{}".format(ARIEL_SEARCH_EVENTS if search(ARIEL_SEARCH_EVENTS,qradar_query, flags=IGNORECASE) else ARIEL_SEARCH_FLOWS),
                                          "FROM \"{}\"".format(temp_table),
-                                         qradar_query, flags=re.IGNORECASE)
+                                         qradar_query, flags=IGNORECASE)
 
-            temp_query_string = function_utils.make_query_string(qradar_temp_query,
+            temp_query_string = make_query_string(qradar_temp_query,
                                                                  ["*",
                                                                   qradar_query_param2,
                                                                   qradar_query_param3,
@@ -89,7 +86,7 @@ class FunctionComponent(ResilientComponent):
                                                                   " ",
                                                                   " "])
 
-            search_query_string = function_utils.make_query_string(qradar_search_query,
+            search_query_string = make_query_string(qradar_search_query,
                                                                    [qradar_query_param1,
                                                                     " ",
                                                                     " ",
@@ -116,7 +113,7 @@ class FunctionComponent(ResilientComponent):
                                                         timeout=timeout)
 
             # Enrich sourceip data by getting additional props using a graphql call to QRadar
-            if qradar_fn_type == qradar_constants.SOURCE_IP:
+            if qradar_fn_type == SOURCE_IP:
 
                 offense_source = qradar_client.get_offense_source(qradar_query_param3)
 
