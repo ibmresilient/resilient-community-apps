@@ -72,11 +72,11 @@
 -->
 **IBM Security SOAR app for SentinelOne**
 
- ![screenshot: main](./doc/screenshots/main.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: main](./doc/screenshots/main.png)
 
 The SentinelOne platform provides AI-powered prevention, detection, response, and threat hunting across user endpoints, containers, cloud workloads, and IoT devices. 
 
-Escalate SentinelOne Threats into IBM Security SOAR as an incident/case.'
+Escalate SentinelOne threat incidents into IBM Security SOAR as an incident/case.
 
 ### Key Features
 <!--
@@ -169,31 +169,27 @@ Additional package dependencies may exist for each of these packages:
 This app has been implemented using:
 | Product Name | Product Version | API URL | API Version |
 | ------------ | --------------- | ------- | ----------- |
-| <!-- ::CHANGE_ME:: --> | <!-- ::CHANGE_ME:: --> | <!-- ::CHANGE_ME:: --> | <!-- ::CHANGE_ME:: --> |
+| SentinelOne  | Queensland#11 | https://SentinelOne-server/web/api/v2.1 | 2.1 |
 
 #### Prerequisites
 <!--
 List any prerequisites that are needed to use with this endpoint solution. Remove any section that is unnecessary.
 -->
-* Prereq A <!-- ::CHANGE_ME:: -->
-* Prereq B <!-- ::CHANGE_ME:: -->
-* Prereq C <!-- ::CHANGE_ME:: -->
+* A SentinelOne cloud account.
+
 
 #### Configuration
 <!--
 List any steps that are needed to configure the endpoint to use this app.
 -->
-* Config A <!-- ::CHANGE_ME:: -->
-* Config B <!-- ::CHANGE_ME:: -->
-* Config C <!-- ::CHANGE_ME:: -->
+* To run the app, obtain an API token from the SentinelOne **My User** menu item in the **Options** menu and place in the app.config file. 
 
 #### Permissions
 <!--
 List any user permissions that are needed to use this endpoint. For example, list the API key permissions.
 -->
 * Permission A <!-- ::CHANGE_ME:: -->
-* Permission B <!-- ::CHANGE_ME:: -->
-* Permission C <!-- ::CHANGE_ME:: -->
+
 
 
 ---
@@ -209,19 +205,19 @@ The following table provides the settings you need to configure the app. These s
 
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
-| **sentinelone_server** | Yes | `` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
-| **api_version** | Yes | `2.1` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
-| **api_token** | Yes | `` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
-| **polling_interval** | Yes | `60` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
-| **polling_lookback** | Yes | `120` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
-| **account_ids** | Yes | `` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
-| **site_ids** | Yes | `` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
-| **query_param** | Yes | `` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
-| **incident_statuses** | Yes | `resolved,in_progress,unresolved` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
-| **limit** | Yes | `25` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
-| **sort_by** | Yes | `createdDate` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
-| **sort_order** | Yes | `desc` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
-| **download_timeout** | Yes | `300` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
+| **sentinelone_server** | Yes | `xxx.sentinelone.net` | *SentinelOne server* |
+| **api_version** | Yes | `2.1` | *SentinelOne REST API version* |
+| **api_token** | Yes | `xxxxxx` | *SentinelOne user API token* |
+| **polling_interval** | Yes | `60` | *Poller interval time in seconds. Value of zero to turn poller off*|
+| **polling_lookback** | Yes | `120` | *Number of minutes to lookback for incident changes. Value is only used on the first time polling when the app starts* |
+| **account_ids** | No | `123456789012345678` | *Comma seperated list of SentinelOne accountId to query for threats* |
+| **site_ids** | No | `987654321098765432` | *Comma seperated list of SentinelOne siteIds to query for threats* |
+| **incident_statuses** | No | `resolved,in_progress,unresolved` | *Comma seperated list of SentinelOne incidentStatuses to query for threats* |
+| **limit** | No | `25` | *Limit number of threats to return from query* |
+| **sort_by** | No | `createdDate` | *The column to sort results by when querying threats* |
+| **sort_order** | No | `desc` | *Sort direction to return threat query results: 'asc' or 'desc'* |
+| **query_param** | No | `threat details` | *Full text search for fields when querying threats* |
+| **download_timeout** | No | `300` | *Seconds to timeout when downloading threat file from cloud* |
 
 ### Custom Layouts
 <!--
@@ -257,10 +253,27 @@ Disconnect an endpoint managed by SentinelOne from the network.
 <!-- ::CHANGE_ME:: -->
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
-} 
+ "version":2.0,
+   "success":true,
+   "reason":"None",
+   "content":{
+      "data":{
+         "affected":1
+      }
+   },
+   "raw":"None",
+   "inputs":{
+      "sentinelone_agent_id":"1275282318251495460"
+   },
+   "metrics":{
+      "version":"1.0",
+      "package":"fn-sentinelone",
+      "package_version":"1.0.10989",
+      "host":"7f1c82b6-e3e5-4a6c-a2b9-71a7b8e75f2c-855748d88f-sb5qh",
+      "execution_time_ms":492,
+      "timestamp":"2021-12
+    } 
+}
 ```
 
 </p>
@@ -326,10 +339,35 @@ Initiate a Full Disk scan on an agent managed by SentinelOne.
 <!-- ::CHANGE_ME:: -->
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
-} 
+   "version":2.0,
+   "success":true,
+   "reason":"None",
+   "content":{
+      "data":{
+         "affected":1
+      }
+   },
+   "raw":"None",
+   "inputs":{
+      "sentinelone_agent_id":"1212121212121212121"
+   },
+   "metrics":{
+      "version":"1.0",
+      "package":"fn-sentinelone",
+      "package_version":"1.0.10989",
+      "host":"7f1c82b6-e3e5-4a6c-a2b9-71a7b8e75f2c-855748d88f-asdfg",
+      "execution_time_ms":572,
+      "timestamp":"2021-12-10 21:57:13"
+   }
+}
+
+About
+
+The JSON Formatter was created to help folks with debugging. As JSON data is often output without line breaks to save space, it can be extremely difficult to actually read and make sense of it. This tool hoped to solve the problem by formatting and beautifying the JSON data so that it is easy to read and debug by human beings.
+
+To further expand the debugging capabilities, advanced JSON validation was soon added following the description set out by Douglas Crockford of json.org in RFC 4627. It has since been updated to allow validation of multiple JSON standards, including both current specifications RFC 8259 and ECMA-404.
+
+Most recently, the capability to fix common JSON errors was added. If enabled, it will replace incorrect quotes, add missing quotes, correct n
 ```
 
 </p>
@@ -497,13 +535,30 @@ Get the SentinelOne reputation of a hash.
 <details><summary>Outputs:</summary>
 <p>
 
-<!-- ::CHANGE_ME:: -->
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
-} 
+    "version":2.0,
+    "success":true,
+    "reason":"None",
+    "content":{
+       "data":{
+          "rank":"0"
+       }
+    },
+    "raw":"None",
+    "inputs":{
+       "sentinelone_hash":"1641df58c1027a00f670d41491a2eecff931604c"
+    },
+    "metrics":{
+       "version":"1.0",
+       "package":"fn-sentinelone",
+       "package_version":"1.0.10989",
+       "host":"7f1c82b6-e3e5-4a6c-a2b9-71a7b8e75f2c-855748d88f-qwert",
+       "execution_time_ms":536,
+       "timestamp":"2021-12-10 21:58:38"
+    }
+}
+
 ```
 
 </p>
@@ -566,10 +621,145 @@ Get details of a SentinelOne managed agent.
 <!-- ::CHANGE_ME:: -->
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
-} 
+    "version":2.0,
+    "success":true,
+    "reason":"None",
+    "content":{
+       "data":[
+          {
+             "accountId":"4333333333333333333",
+             "accountName":"SentinelOne",
+             "activeDirectory":{
+                "computerDistinguishedName":"None",
+                "computerMemberOf":[
+                   
+                ],
+                "lastUserDistinguishedName":"None",
+                "lastUserMemberOf":[
+                   
+                ]
+             },
+             "activeThreats":0,
+             "agentVersion":"21.10.1.6",
+             "allowRemoteShell":false,
+             "appsVulnerabilityStatus":"not_applicable",
+             "cloudProviders":{
+                
+             },
+             "computerName":"myhost.com",
+             "consoleMigrationStatus":"N/A",
+             "coreCount":2,
+             "cpuCount":2,
+             "cpuId":"AMD EPYC Processor (with IBPB)",
+             "createdAt":"2021-10-26T13:18:19.135249Z",
+             "detectionState":"None",
+             "domain":"unknown",
+             "encryptedApplications":false,
+             "externalId":"",
+             "externalIp":"1.2.3.4",
+             "firewallEnabled":true,
+             "firstFullModeTime":"None",
+             "groupId":"607447413805059643",
+             "groupIp":"1.2.3.x",
+             "groupName":"Default Group",
+             "id":"1212121212121212120",
+             "inRemoteShellSession":false,
+             "infected":false,
+             "installerType":".rpm",
+             "isActive":true,
+             "isDecommissioned":false,
+             "isPendingUninstall":false,
+             "isUninstalled":false,
+             "isUpToDate":true,
+             "lastActiveDate":"2021-12-10T21:33:26.639846Z",
+             "lastIpToMgmt":"10.21.10.88",
+             "lastLoggedInUserName":"",
+             "licenseKey":"",
+             "locationEnabled":false,
+             "locationType":"not_supported",
+             "locations":"None",
+             "machineType":"server",
+             "mitigationMode":"protect",
+             "mitigationModeSuspicious":"detect",
+             "modelName":"QEMU Standard PC (i440FX + PIIX, 1996)",
+             "networkInterfaces":[
+                {
+                   "gatewayIp":"None",
+                   "gatewayMacAddress":"None",
+                   "id":"1275282318259884069",
+                   "inet":[
+                      "10.21.10.88"
+                   ],
+                   "inet6":[
+                      
+                   ],
+                   "name":"eth0",
+                   "physical":"00:00:0A:15:0A:58"
+                },
+                {
+                   "gatewayIp":"9.46.92.1",
+                   "gatewayMacAddress":"00:00:0c:9f:f0:01",
+                   "id":"1275282318268272678",
+                   "inet":[
+                      "9.46.92.211"
+                   ],
+                   "inet6":[
+                      
+                   ],
+                   "name":"eth1",
+                   "physical":"00:00:09:2E:5C:D3"
+                }
+             ],
+             "networkQuarantineEnabled":false,
+             "networkStatus":"connected",
+             "operationalState":"na",
+             "operationalStateExpiration":"None",
+             "osArch":"64 bit",
+             "osName":"Linux",
+             "osRevision":"CentOS release 7.9.2009 (Core) 3.10.0-1160.45.1.el7.x86_64",
+             "osStartTime":"2021-11-17T21:10:31Z",
+             "osType":"linux",
+             "osUsername":"root",
+             "rangerStatus":"NotApplicable",
+             "rangerVersion":"None",
+             "registeredAt":"2021-10-26T13:18:19.132188Z",
+             "remoteProfilingState":"disabled",
+             "remoteProfilingStateExpiration":"None",
+             "scanAbortedAt":"2021-11-20T17:51:00.793271Z",
+             "scanFinishedAt":"2021-12-10T02:33:00.768224Z",
+             "scanStartedAt":"2021-12-10T02:25:56.663183Z",
+             "scanStatus":"finished",
+             "siteId":"18181818181818181818",
+             "siteName":"MySite",
+             "storageName":"None",
+             "storageType":"None",
+             "threatRebootRequired":false,
+             "totalMemory":3789,
+             "updatedAt":"2021-12-10T21:33:26.640067Z",
+             "userActionsNeeded":[
+                
+             ],
+             "uuid":"8329e587-bbe9-b906-a6a5-646e2686eba9"
+          }
+       ],
+       "pagination":{
+          "nextCursor":"None",
+          "totalItems":1
+       }
+    },
+    "raw":"None",
+    "inputs":{
+       "sentinelone_agent_id":"1275282318251495460"
+    },
+    "metrics":{
+       "version":"1.0",
+       "package":"fn-sentinelone",
+       "package_version":"1.0.10989",
+       "host":"7f1c82b6-e3e5-4a6c-a2b9-71a7b8e75f2c-855748d88f-sb5qh",
+       "execution_time_ms":504,
+       "timestamp":"2021-12-10 21:33:36"
+    }
+ }
 ```
 
 </p>
@@ -764,13 +954,29 @@ Connect a an endpoint managed by Sentinel to the network.
 <details><summary>Outputs:</summary>
 <p>
 
-<!-- ::CHANGE_ME:: -->
 ```python
-results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
-} 
+results ={
+    "version":2.0,
+    "success":true,
+    "reason":"None",
+    "content":{
+       "data":{
+          "affected":1
+       }
+    },
+    "raw":"None",
+    "inputs":{
+       "sentinelone_agent_id":"1275282318251495460"
+    },
+    "metrics":{
+       "version":"1.0",
+       "package":"fn-sentinelone",
+       "package_version":"1.0.10989",
+       "host":"7f1c82b6-e3e5-4a6c-a2b9-71a7b8e75f2c-855748d88f-sb5qh",
+       "execution_time_ms":476,
+       "timestamp":"2021-12-10 21:33:25"
+    }
+ }
 ```
 
 </p>
@@ -1044,10 +1250,27 @@ Initiate a Full Disk Scan on an agent managed by SentinelOne.
 <!-- ::CHANGE_ME:: -->
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
-} 
+   "version":2.0,
+   "success":true,
+   "reason":"None",
+   "content":{
+      "data":{
+         "affected":1
+      }
+   },
+   "raw":"None",
+   "inputs":{
+      "sentinelone_agent_id":"1275282318251495460"
+   },
+   "metrics":{
+      "version":"1.0",
+      "package":"fn-sentinelone",
+      "package_version":"1.0.10989",
+      "host":"7f1c82b6-e3e5-4a6c-a2b9-71a7b8e75f2c-855748d88f-sb5qh",
+      "execution_time_ms":580,
+      "timestamp":"2021-12-10 21:57:41"
+   }
+}
 ```
 
 </p>
@@ -1111,10 +1334,233 @@ Get the details of a threat detected by SentinelOne.
 <!-- ::CHANGE_ME:: -->
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
-} 
+   "version":2.0,
+   "success":true,
+   "reason":"None",
+   "content":{
+      "data":[
+         {
+            "agentDetectionInfo":{
+               "accountId":"43434343434343434343",
+               "accountName":"SentinelOne",
+               "agentDetectionState":"None",
+               "agentDomain":"unknown",
+               "agentIpV4":"9.46.92.2,10.21.10.8",
+               "agentIpV6":"",
+               "agentLastLoggedInUserName":"",
+               "agentMitigationMode":"detect",
+               "agentOsName":"Linux",
+               "agentOsRevision":"CentOS release 7.9.2009 (Core) 3.10.0-1160.45.1.el7.x86_64",
+               "agentRegisteredAt":"2021-10-26T13:18:19.132188Z",
+               "agentUuid":"8329e587-bbe9-b906-a6a5-646e2686vvvvv",
+               "agentVersion":"21.10.1.6",
+               "externalIp":"1.4.8.3",
+               "groupId":"607447413805059643",
+               "groupName":"Default Group",
+               "siteId":"60606060606060606",
+               "siteName":"MySite"
+            },
+            "agentRealtimeInfo":{
+               "accountId":"43434343434343434343",
+               "accountName":"SentinelOne",
+               "activeThreats":0,
+               "agentComputerName":"myhost.com",
+               "agentDecommissionedAt":"None",
+               "agentDomain":"unknown",
+               "agentId":"12121212121212121212",
+               "agentInfected":false,
+               "agentIsActive":true,
+               "agentIsDecommissioned":false,
+               "agentMachineType":"server",
+               "agentMitigationMode":"detect",
+               "agentNetworkStatus":"connected",
+               "agentOsName":"Linux",
+               "agentOsRevision":"CentOS release 7.9.2009 (Core) 3.10.0-1160.45.1.el7.x86_64",
+               "agentOsType":"linux",
+               "agentUuid":"8329e587-bbe9-b906-a6a5-646e2686qwert",
+               "agentVersion":"21.10.1.6",
+               "groupId":"607447413805059643",
+               "groupName":"Default Group",
+               "networkInterfaces":[
+                  {
+                     "id":"1275282318268272678",
+                     "inet":[
+                        "9.46.92.211"
+                     ],
+                     "inet6":[
+                        
+                     ],
+                     "name":"eth1",
+                     "physical":"00:00:09:2E:5C:D3"
+                  },
+                  {
+                     "id":"1275282318259884069",
+                     "inet":[
+                        "10.21.10.88"
+                     ],
+                     "inet6":[
+                        
+                     ],
+                     "name":"eth0",
+                     "physical":"00:00:0A:15:0A:58"
+                  }
+               ],
+               "operationalState":"na",
+               "rebootRequired":false,
+               "scanAbortedAt":"2021-12-10T21:57:56.711226Z",
+               "scanFinishedAt":"2021-12-10T02:33:00.768224Z",
+               "scanStartedAt":"2021-12-10T21:57:26.665306Z",
+               "scanStatus":"aborted",
+               "siteId":"607447413779893818",
+               "siteName":"mySite",
+               "storageName":"None",
+               "storageType":"None",
+               "userActionsNeeded":[
+                  
+               ]
+            },
+            "containerInfo":{
+               "id":"None",
+               "image":"None",
+               "labels":"None",
+               "name":"None"
+            },
+            "id":"1278187227695576856",
+            "indicators":[
+               {
+                  "category":"Persistence",
+                  "description":"Unsigned kernel module was loaded.",
+                  "ids":[
+                     384
+                  ],
+                  "tactics":[
+                     {
+                        "name":"Persistence",
+                        "source":"MITRE",
+                        "techniques":[
+                           {
+                              "link":"https://attack.mitre.org/techniques/T1547/006/",
+                              "name":"T1547.006"
+                           }
+                        ]
+                     }
+                  ]
+               },
+               {
+                  "category":"Persistence",
+                  "description":"New kernel module was added.",
+                  "ids":[
+                     399
+                  ],
+                  "tactics":[
+                     {
+                        "name":"Persistence",
+                        "source":"MITRE",
+                        "techniques":[
+                           {
+                              "link":"https://attack.mitre.org/techniques/T1547/006/",
+                              "name":"T1547.006"
+                           }
+                        ]
+                     }
+                  ]
+               }
+            ],
+            "kubernetesInfo":{
+               "cluster":"None",
+               "controllerKind":"None",
+               "controllerLabels":"None",
+               "controllerName":"None",
+               "namespace":"None",
+               "namespaceLabels":"None",
+               "node":"None",
+               "pod":"None",
+               "podLabels":"None"
+            },
+            "mitigationStatus":[
+               
+            ],
+            "threatInfo":{
+               "analystVerdict":"undefined",
+               "analystVerdictDescription":"Undefined",
+               "automaticallyResolved":false,
+               "browserType":"None",
+               "certificateId":"None",
+               "classification":"Malware",
+               "classificationSource":"Static",
+               "cloudFilesHashVerdict":"provider_unknown",
+               "collectionId":"114002478435555555551",
+               "confidenceLevel":"suspicious",
+               "createdAt":"2021-10-30T13:29:51.326339Z",
+               "detectionEngines":[
+                  {
+                     "key":"executables",
+                     "title":"Behavioral AI"
+                  }
+               ],
+               "detectionType":"dynamic",
+               "engines":[
+                  "DBT - Executables"
+               ],
+               "externalTicketExists":false,
+               "externalTicketId":"None",
+               "failedActions":false,
+               "fileExtension":"None",
+               "fileExtensionType":"None",
+               "filePath":"/opt/CrowdStrike/falcon-sensor12704",
+               "fileSize":1560048,
+               "fileVerificationType":"None",
+               "identifiedAt":"2021-10-30T13:29:51.252920Z",
+               "incidentStatus":"in_progress",
+               "incidentStatusDescription":"In progress",
+               "initiatedBy":"agent_policy",
+               "initiatedByDescription":"Agent Policy",
+               "initiatingUserId":"None",
+               "initiatingUsername":"None",
+               "isFileless":false,
+               "isValidCertificate":"None",
+               "maliciousProcessArguments":" falcon-sensor",
+               "md5":"None",
+               "mitigatedPreemptively":false,
+               "mitigationStatus":"not_mitigated",
+               "mitigationStatusDescription":"Not mitigated",
+               "originatorProcess":"systemd",
+               "pendingActions":false,
+               "processUser":"root",
+               "publisherName":"None",
+               "reachedEventsLimit":"None",
+               "rebootRequired":false,
+               "sha1":"1641df58c1027a00f670d41491a2eecff931604c",
+               "sha256":"None",
+               "storyline":"3ab3fbbd-029f-aa62-d617-1abc7d3eacfc",
+               "threatId":"1278187227695576856",
+               "threatName":"falcon-sensor12704",
+               "updatedAt":"2021-11-25T20:45:36.388848Z"
+            },
+            "whiteningOptions":[
+               "path",
+               "hash"
+            ]
+         }
+      ],
+      "pagination":{
+         "nextCursor":"None",
+         "totalItems":1
+      }
+   },
+   "raw":"None",
+   "inputs":{
+      "sentinelone_threat_id":"1278187227695576856"
+   },
+   "metrics":{
+      "version":"1.0",
+      "package":"fn-sentinelone",
+      "package_version":"1.0.10989",
+      "host":"7f1c82b6-e3e5-4a6c-a2b9-71a7b8e75f2c-855748d88f-qwert",
+      "execution_time_ms":553,
+      "timestamp":"2021-12-10 21:58:10"
+   }
+}
 ```
 
 </p>

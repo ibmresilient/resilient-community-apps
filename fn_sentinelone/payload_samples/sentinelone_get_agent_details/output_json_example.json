@@ -1,3 +1,140 @@
 {
-    
-}
+    "version":2.0,
+    "success":true,
+    "reason":"None",
+    "content":{
+       "data":[
+          {
+             "accountId":"4333333333333333333",
+             "accountName":"SentinelOne",
+             "activeDirectory":{
+                "computerDistinguishedName":"None",
+                "computerMemberOf":[
+                   
+                ],
+                "lastUserDistinguishedName":"None",
+                "lastUserMemberOf":[
+                   
+                ]
+             },
+             "activeThreats":0,
+             "agentVersion":"21.10.1.6",
+             "allowRemoteShell":false,
+             "appsVulnerabilityStatus":"not_applicable",
+             "cloudProviders":{
+                
+             },
+             "computerName":"myhost.com",
+             "consoleMigrationStatus":"N/A",
+             "coreCount":2,
+             "cpuCount":2,
+             "cpuId":"AMD EPYC Processor (with IBPB)",
+             "createdAt":"2021-10-26T13:18:19.135249Z",
+             "detectionState":"None",
+             "domain":"unknown",
+             "encryptedApplications":false,
+             "externalId":"",
+             "externalIp":"1.2.3.4",
+             "firewallEnabled":true,
+             "firstFullModeTime":"None",
+             "groupId":"607447413805059643",
+             "groupIp":"1.2.3.x",
+             "groupName":"Default Group",
+             "id":"1212121212121212120",
+             "inRemoteShellSession":false,
+             "infected":false,
+             "installerType":".rpm",
+             "isActive":true,
+             "isDecommissioned":false,
+             "isPendingUninstall":false,
+             "isUninstalled":false,
+             "isUpToDate":true,
+             "lastActiveDate":"2021-12-10T21:33:26.639846Z",
+             "lastIpToMgmt":"10.21.10.88",
+             "lastLoggedInUserName":"",
+             "licenseKey":"",
+             "locationEnabled":false,
+             "locationType":"not_supported",
+             "locations":"None",
+             "machineType":"server",
+             "mitigationMode":"protect",
+             "mitigationModeSuspicious":"detect",
+             "modelName":"QEMU Standard PC (i440FX + PIIX, 1996)",
+             "networkInterfaces":[
+                {
+                   "gatewayIp":"None",
+                   "gatewayMacAddress":"None",
+                   "id":"1275282318259884069",
+                   "inet":[
+                      "10.21.10.88"
+                   ],
+                   "inet6":[
+                      
+                   ],
+                   "name":"eth0",
+                   "physical":"00:00:0A:15:0A:58"
+                },
+                {
+                   "gatewayIp":"9.46.92.1",
+                   "gatewayMacAddress":"00:00:0c:9f:f0:01",
+                   "id":"1275282318268272678",
+                   "inet":[
+                      "9.46.92.211"
+                   ],
+                   "inet6":[
+                      
+                   ],
+                   "name":"eth1",
+                   "physical":"00:00:09:2E:5C:D3"
+                }
+             ],
+             "networkQuarantineEnabled":false,
+             "networkStatus":"connected",
+             "operationalState":"na",
+             "operationalStateExpiration":"None",
+             "osArch":"64 bit",
+             "osName":"Linux",
+             "osRevision":"CentOS release 7.9.2009 (Core) 3.10.0-1160.45.1.el7.x86_64",
+             "osStartTime":"2021-11-17T21:10:31Z",
+             "osType":"linux",
+             "osUsername":"root",
+             "rangerStatus":"NotApplicable",
+             "rangerVersion":"None",
+             "registeredAt":"2021-10-26T13:18:19.132188Z",
+             "remoteProfilingState":"disabled",
+             "remoteProfilingStateExpiration":"None",
+             "scanAbortedAt":"2021-11-20T17:51:00.793271Z",
+             "scanFinishedAt":"2021-12-10T02:33:00.768224Z",
+             "scanStartedAt":"2021-12-10T02:25:56.663183Z",
+             "scanStatus":"finished",
+             "siteId":"18181818181818181818",
+             "siteName":"MySite",
+             "storageName":"None",
+             "storageType":"None",
+             "threatRebootRequired":false,
+             "totalMemory":3789,
+             "updatedAt":"2021-12-10T21:33:26.640067Z",
+             "userActionsNeeded":[
+                
+             ],
+             "uuid":"8329e587-bbe9-b906-a6a5-646e2686eba9"
+          }
+       ],
+       "pagination":{
+          "nextCursor":"None",
+          "totalItems":1
+       }
+    },
+    "raw":"None",
+    "inputs":{
+       "sentinelone_agent_id":"1275282318251495460"
+    },
+    "metrics":{
+       "version":"1.0",
+       "package":"fn-sentinelone",
+       "package_version":"1.0.10989",
+       "host":"7f1c82b6-e3e5-4a6c-a2b9-71a7b8e75f2c-855748d88f-sb5qh",
+       "execution_time_ms":504,
+       "timestamp":"2021-12-10 21:33:36"
+    }
+ }
