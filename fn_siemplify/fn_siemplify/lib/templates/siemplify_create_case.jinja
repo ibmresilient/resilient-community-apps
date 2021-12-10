@@ -1,0 +1,127 @@
+{%- set artifact_types = {
+    "DNS Name": "HOSTNAME",
+    "Port": "ADDRESS",
+    "MAC Address": "MacAddress",
+    "Process Name": "PROCESS",
+    "Service": "PROCESS",
+    "File Name": "FILENAME",
+    "Log File": "FILENAME",
+    "File Path": "FILENAME",
+    "Malware MD5 Hash": "FILEHASH",
+    "Malware SHA-1 Hash": "FILEHASH",
+    "Malware SHA-256 Hash": "FILEHASH",
+    "Malware Sample Fuzzy Hash": "FILEHASH",
+    "URI PATH": "DestinationURL",
+    "URL": "DestinationURL",
+    "URL Referer": "DestinationURL",
+    "Email Subject": "EMAILSUBJECT",
+    "Threat CVE ID": "CVEID",
+    "String": "GENERICENTITY",
+    "DNS Name": "DESTINATIONDOMAIN",
+    "IP Address": "IPSET",
+    "User Agent": "USERUNIQNAME",
+    "User Account": "USERUNIQNAME",
+    "Registry Key": "GENERICENTITY",
+    "Password" : "GENERICENTITY",
+    "Observed Data": "GENERICENTITY",
+    "Network CIDR Range": "IPSET",
+    "Mutex": "THREATSIGNATURE",
+    "Malware Family/Variant": "GENERICENTITY",
+    "HTTP Response Header": "GENERICENTITY",
+    "HTTP Request Header": "GENERICENTITY",
+    "Email Sender Name": "USERUNIQNAME",
+    "Email Sender": "USERUNIQNAME",
+    "Email Recipient": "USERUNIQNAME",
+    "Email Body": "GENERICENTITY",
+    "Email Attachment Name": "FILENAME",
+    "Email Attachment": None,
+    "Log File": None,
+    "Malware Sample": None,
+    "Other File": None,
+    "RFC 822 Email Message File": None,
+    "X509 Certificate File": None
+}
+-%}
+{
+  "title": "IBM SOAR - {{ name }}",
+  "assignedUser": {% if siemplify_assigned_user %} "{{ siemplify_assigned_user }}" {% else %} null {% endif %},
+  "reason": {% if description %} "{{ description }}" {% else %} "" {% endif %},
+  "priority": {{ severity | string | resilient_substitute('{"4": 25, "5": 50, "6": 75, "DEFAULT": 50}') }},
+  "environment": "{{ siemplify_environment if siemplify_environment else 'Default Environment'}}",
+  "isImportant": {{ confirmed | tojson }},
+  "alertName": "IBM SOAR Case",
+  "occurenceTime": "{{ discovered_date | resilient_display_datetimeformat(milliseconds=True) }}",
+  "slaExpirationDateTime": null,
+  "entities": [
+    {%- for artifact in artifacts %}
+    {%- if artifact.type in artifact_types and artifact_types[artifact.type] %}
+    {
+      "caseId": 0,
+      "identifier": "{{ artifact.value }}",
+      "entityType": "{{ artifact_types[artifact.type] }}",
+      "isInternal": true,
+      "isSuspicious": false,
+      "isArtifact": true,
+      "isEnriched": false,
+      "isVulnerable": false,
+      "isPivot": false,
+      "environment": "{{ siemplify_environment if siemplify_environment else 'Default Environment'}}",
+      "fields": [
+        {
+          "isHighlight": false,
+          "groupName": "Default",
+          "isManuallyCreated": true,
+          "isCustom": true,
+          "id": "{{ artifact_value | replace(' ', '_') }}_{{ artifact_types[artifact.type] }}"
+          "items": [
+            {
+              "originalName": "Type",
+              "name": "Type",
+              "value": "{{ artifact_types[artifact.type] }}"
+            },
+            {
+              "originalName": "IsInternalAsset",
+              "name": "IsInternalAsset",
+              "value": "True"
+            },
+            {
+              "originalName": "IsSuspicious",
+              "name": "IsSuspicious",
+              "value": "False"
+            },
+            {
+              "originalName": "IsEnriched",
+              "name": "IsEnriched",
+              "value": "False"
+            },
+            {
+              "originalName": "IsVulnerable",
+              "name": "IsVulnerable",
+              "value": "False"
+            },
+            {
+              "originalName": "IsArtifact",
+              "name": "IsArtifact",
+              "value": "True"
+            },
+            {
+              "originalName": "IsManuallyCreated",
+              "name": "IsManuallyCreated",
+              "value": "True"
+            },
+            {
+              "originalName": "Environment",
+              "name": "Environment",
+              "value": "{{ siemplify_environment if siemplify_environment else 'Default Environment'}}"
+            }
+          ]
+        }
+        {%- endif %}
+    {%- if not loop.last %},{% endif %}
+    {%- endfor %}
+  ],
+  "playbooks": [ ],
+  "tags": [
+    "Phishing"
+  ]
+}
