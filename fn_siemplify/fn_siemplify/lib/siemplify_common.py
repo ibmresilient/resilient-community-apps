@@ -4,6 +4,7 @@
 
 import logging
 import json
+from typing import NamedTuple
 from urllib.parse import urljoin
 from .jinja_common import JinjaEnvironment
 
@@ -14,17 +15,18 @@ DEFAULT_CREATE_CASE = "templates/siemplify_create_case.jinja"
 BASE_URL = "/api/external/v1/"
 CREATE_CASE_URL = urljoin(BASE_URL, "cases/CreateManualCase")
 GET_CASE_URL = urljoin(BASE_URL, "cases/GetCaseFullDetails/{}")
+BLOCKLIST_URL = urljoin(BASE_URL, "settings/GetAllModelBlackRecords")
 
 class SiemplifyCommon():
     def __init__(self, rc, options):
-        self.options = options
-        self.base_url = options.base_url
-        self.api_key = options.api_key
-        LOG.info(self.api_key)
+        self.options = options._asdict() if isinstance(options, NamedTuple) else options
+        self.base_url = self.options.get('base_url')
+        self.api_key = self.options.get('api_key')
+
         self.headers = _make_headers(self.api_key)
         self.jina_env = JinjaEnvironment()
         self.rc = rc
-        self.verify = False if options.cafile.lower() == "false" else options.cafile
+        self.verify = False if options.get('cafile').lower() == "false" else options.get('cafile')
 
     def sync_case(self, incident_info):
         # perform an update to an existing incident
@@ -35,7 +37,7 @@ class SiemplifyCommon():
 
     def create_case(self, incident_info):
         incident_payload = self.jina_env.make_payload_from_template(
-            self.options.siemplify_create_case_template,
+            self.options.get('siemplify_create_case_template'),
             DEFAULT_CREATE_CASE,
             incident_info)
 
@@ -56,6 +58,10 @@ class SiemplifyCommon():
         url = urljoin(self.base_url, GET_CASE_URL.format(incident_info["siemplify_case_id"]))
         case_info = self._make_call("GET", url)
         LOG.info(case_info)
+
+    def get_blocklist(self):
+        url = urljoin(self.base_url, BLOCKLIST_URL)
+        return self._make_call("GET", url)
 
     def _make_call(self, method, url, payload=None):
         if payload:

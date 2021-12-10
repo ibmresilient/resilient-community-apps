@@ -2,7 +2,7 @@
 
 """
 Function implementation test.
-Usage: 
+Usage:
     resilient-circuits selftest -l fn-siemplify
     resilient-circuits selftest --print-env -l fn-siemplify
 
@@ -19,6 +19,8 @@ Return examples:
 """
 
 import logging
+from resilient_lib import RequestsCommon
+from fn_siemplify.lib.siemplify_common import SiemplifyCommon
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
@@ -32,7 +34,18 @@ def selftest_function(opts):
     """
     app_configs = opts.get("fn_siemplify", {})
 
-    return {
-        "state": "unimplemented",
-        "reason": None
-    }
+    rc = RequestsCommon(opts, app_configs)
+
+    try:
+        sc = SiemplifyCommon(rc, app_configs)
+        result = sc.get_blocklist()
+
+        return {
+            "state": "success",
+            "reason": None
+        }
+    except Exception as err:
+        return {
+            "state": "failure",
+            "reason": str(err)
+        }
