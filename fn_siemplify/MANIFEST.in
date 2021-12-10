@@ -3,6 +3,7 @@ include Dockerfile
 include apikey_permissions.txt
 include entrypoint.sh
 recursive-include fn_siemplify/util *
+recursive-include fn_siemplify/lib *
 include fn_siemplify/LICENSE
 include doc/*.md
 include doc/screenshots/*
