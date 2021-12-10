@@ -30,6 +30,7 @@ class FunctionComponent(AppFunctionComponent):
 
         sentinelone_client = SentinelOneClient(self.opts, self.options)
         incident_id = fn_inputs.incident_id
+        success = False
 
         # Get the incident
         uri = u"/incidents/{}?handle_format=names".format(incident_id)
@@ -52,13 +53,11 @@ class FunctionComponent(AppFunctionComponent):
 
         verdict_data = verdict_response.get("data")
         if int(verdict_data.get("affected")) <= 0:
-            success = False
             IntegrationError("SentinelOne Resolve Threat: unable to update analystVerdict in SentinelOne threat: {0}".format(threat_id))
         else:
             status_response = sentinelone_client.update_threat_status(threat_id, "resolved")
             status_data = status_response.get("data")
             if int(status_data.get("affected")) <= 0:
-                success = False
                 IntegrationError("SentinelOne Resolve Threat: unable to update incidentStatus in SentinelOne threat: {0}".format(threat_id))
             else:
                 success = True
