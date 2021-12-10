@@ -43,8 +43,10 @@ class FunctionComponent(AppFunctionComponent):
         if not threat_id:
             IntegrationError("SentinelOne Resolve Threat: sentinelone_threat_id {0} not found".format(threat_id))
 
-        # Make sure there is an SentinelOne threat associated with this incident
-        threat_analyst_verdict= incident.get('properties', {}).get('sentinelone_threat_analyst_verdict', None)
+        threat_analyst_verdict = incident.get('properties', {}).get('sentinelone_threat_analyst_verdict', None)
+
+        if not threat_analyst_verdict:
+            IntegrationError("SentinelOne Resolve Threat: threat_analyst_verdict {0} is None")
 
         verdict_response = sentinelone_client.update_threat_analyst_verdict(threat_id, threat_analyst_verdict)
 

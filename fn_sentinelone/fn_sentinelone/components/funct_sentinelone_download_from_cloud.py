@@ -46,7 +46,7 @@ class FunctionComponent(AppFunctionComponent):
 
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
 
-        results = { "status": "success",
+        results = { "success": True,
                     "attachment_name": attachment_name,
                     "threat_filename": threat_filename,
                     "downloadUrl": download_url

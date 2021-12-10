@@ -37,7 +37,7 @@ setup(
     * Sync notes to and from SentinelOne Threats
     * Support editable templates for field mapping between the two systems""",
     install_requires=[
-        "resilient-circuits>=37.0.0",
+        "resilient-circuits>=40.0.0",
                 "resilient-lib",
                 "jinja2",
                 "simplejson"

@@ -29,7 +29,7 @@ class FunctionComponent(AppFunctionComponent):
 
         sentinelone_client = SentinelOneClient(self.opts, self.options)
         agent_id = fn_inputs.sentinelone_agent_id
-        results = sentinelone_client.shutdown_agent(agent_id)
+        results = sentinelone_client.restart_agent(agent_id)
 
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
 

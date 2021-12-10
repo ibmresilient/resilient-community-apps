@@ -33,9 +33,10 @@ class FunctionComponent(AppFunctionComponent):
         threat_id = fn_inputs.sentinelone_threat_id
 
         reason = None
+        success = False
         if FROM_SENTINELONE_COMMENT_HDR in note_text or SENT_TO_SENTINELONE_HDR in note_text:
             yield self.status_message("Bypassing synchronization of note: {}".format(note_text))
-            status = "success"
+            success = True
         else:
             try:
                 sentinelone_api = SentinelOneClient(self.opts, self.options)
@@ -43,21 +44,21 @@ class FunctionComponent(AppFunctionComponent):
 
                 data = response.get("data")
                 affected = int(data.get("affected"))
-                if affected:
-                    status = "success"
+                if affected >= 1:
+                    success = True
                     yield self.status_message("Sentinel comment added to threatId: {}"\
                                     .format(threat_id))
                 else:
-                    status = "failure"
+                    success = False
                     errors = response.get("errors")
                     reason = errors.get("type")
                     yield self.status_message("Sentinel comment failure for threatId {}: {}"\
                                     .format(threat_id, reason))
             except IntegrationError as err:
-                status = "failure"
+                success = False
                 reason = str(err)
 
-        results = {"status": status,
+        results = {"success": success,
                    "reason:": reason}
 
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
