@@ -1,8 +1,9 @@
 # encoding: utf-8
 #
-# Unit tests for fn_qradar_enhanced_data/util/qradar_utils.py
+# Unit tests for fn_qradar_enhanced_data/util/py
 #
-from fn_qradar_enhanced_data.util import qradar_utils, qradar_constants
+from fn_qradar_enhanced_data.util.qradar_constants import GRAPHQL_ARIEL_SEARCHES, SEARCH_STATUS_COMPLETED, SEARCH_STATUS_WAIT
+from fn_qradar_enhanced_data.util import qradar_utils
 from fn_qradar_enhanced_data.util.SearchWaitCommand import SearchWaitCommand, SearchFailure, SearchJobFailure
 from base64 import b64encode
 from mock import patch
@@ -105,7 +106,7 @@ def test_ariel_graphql_search():
         mocked_post_call.return_value = _generateResponse({"cursor_id": search_id}, 200)
 
         sid = search_cmd.get_search_id(query_str)
-        expected_url = "https://" + host + "/"+ qradar_constants.GRAPHQL_ARIEL_SEARCHES+"?query_expression=" + query_str
+        expected_url = "https://" + host + "/" + GRAPHQL_ARIEL_SEARCHES + "?query_expression=" + query_str
         headers =  qradar_utils.AuthInfo.get_authInfo().headers.copy()
         headers["Cookie"] = ""
         mocked_post_call.assert_called_with("POST", expected_url,
@@ -125,12 +126,12 @@ def test_ariel_graphql_search():
     with patch("fn_qradar_enhanced_data.util.qradar_utils.AuthInfo.make_call") as mocked_get_call:
         # 3. Test check_status
         # 3.1 Complete status
-        mocked_get_call.return_value = _generateResponse({"status": qradar_constants.SEARCH_STATUS_COMPLETED}, 200)
+        mocked_get_call.return_value = _generateResponse({"status": SEARCH_STATUS_COMPLETED}, 200)
         status = search_cmd.check_status(search_id)
         assert status == SearchWaitCommand.SEARCH_STATUS_COMPLETED
 
         # 3.2 WAIT status
-        mocked_get_call.return_value = _generateResponse({"status": qradar_constants.SEARCH_STATUS_WAIT}, 200)
+        mocked_get_call.return_value = _generateResponse({"status": SEARCH_STATUS_WAIT}, 200)
         status = search_cmd.check_status(search_id)
         assert status == SearchWaitCommand.SEARCH_STATUS_WAITING
 

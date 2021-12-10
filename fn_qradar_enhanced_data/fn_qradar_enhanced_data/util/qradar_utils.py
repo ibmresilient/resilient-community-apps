@@ -10,7 +10,7 @@ import logging
 import requests
 from six import binary_type
 import fn_qradar_enhanced_data.util.qradar_constants as qradar_constants
-from fn_qradar_enhanced_data.util.function_utils import fix_dict_value
+import fn_qradar_enhanced_data.util.function_utils as function_utils
 import fn_qradar_enhanced_data.util.qradar_graphql_queries as qradar_graphql_queries
 from resilient_lib import RequestsCommon, IntegrationError
 from fn_qradar_enhanced_data.util.SearchWaitCommand import SearchWaitCommand, SearchFailure, SearchJobFailure
@@ -39,8 +39,8 @@ class AuthInfo(object):
         self.headers = {}
         self.qradar_auth = None
         self.qradar_token = None
-        self.username=None
-        self.password=None
+        self.username = None
+        self.password = None
         self.api_url = None
         self.cafile = True
         self.rc = None
@@ -210,7 +210,7 @@ class ArielSearch(SearchWaitCommand):
         if response.status_code == 200:
             res = response.json()
             events = res["events"] if "events" in res else res["flows"] if "flows" in res else res["other"]
-            events = fix_dict_value(events)
+            events = function_utils.fix_dict_value(events)
             ret = {"events": events}
 
         return ret

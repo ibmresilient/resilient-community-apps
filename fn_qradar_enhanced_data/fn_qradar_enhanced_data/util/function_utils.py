@@ -6,7 +6,7 @@
 import six
 from resilient_lib import validate_fields
 from fn_qradar_enhanced_data.util.qradar_constants import PACKAGE_NAME
-from fn_qradar_enhanced_data.util.qradar_utils import QRadarServers
+from fn_qradar_enhanced_data.util import qradar_utils
 
 def make_query_string(query, params):
     """
@@ -55,7 +55,7 @@ def get_servers_list(opts):
     if options: # If no labels given [fn_qradar_integration]
         server_list = {PACKAGE_NAME}
     else: # If labels given [fn_qradar_integration:label]
-        servers = QRadarServers(opts, options)
+        servers = qradar_utils.QRadarServers(opts, options)
         server_list = servers.get_server_name_list()
 
     # Creates a dictionary that is filled with the QRadar servers
