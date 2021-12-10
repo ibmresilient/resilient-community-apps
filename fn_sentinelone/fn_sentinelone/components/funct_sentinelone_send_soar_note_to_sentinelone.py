@@ -49,13 +49,11 @@ class FunctionComponent(AppFunctionComponent):
                     yield self.status_message("Sentinel comment added to threatId: {}"\
                                     .format(threat_id))
                 else:
-                    success = False
                     errors = response.get("errors")
                     reason = errors.get("type")
                     yield self.status_message("Sentinel comment failure for threatId {}: {}"\
                                     .format(threat_id, reason))
             except IntegrationError as err:
-                success = False
                 reason = str(err)
 
         results = {"success": success,
