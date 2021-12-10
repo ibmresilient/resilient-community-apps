@@ -5,7 +5,8 @@ import pytest
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 from mock import patch
-PACKAGE_NAME = "fn_qradar_integration"
+from fn_qradar_integration.util.qradar_constants import PACKAGE_NAME
+
 FUNCTION_NAME = "qradar_reference_table_delete_item"
 
 # Read the default configuration-data section from the package
@@ -24,6 +25,7 @@ MOCK_DELETE_RESPONSE = {
   "element_type": "ALN",
   "collection_id": 86
 }
+
 MOCK_DELETE_RESPONSE_UNICODE = {
   "time_to_live": "999 years 0 mons 0 days 0 hours 0 mins 0.00 secs",
   "timeout_type": "LAST_SEEN",
@@ -57,7 +59,6 @@ def call_qradar_reference_table_delete_item_function(circuits, function_params, 
         assert isinstance(event.kwargs["result"], FunctionResult)
         pytest.wait_for(event, "complete", True)
         return event.kwargs["result"].value
-
 
 class TestQradarReferenceTableDeleteItem:
     """ Tests for the qradar_reference_table_delete_item function"""

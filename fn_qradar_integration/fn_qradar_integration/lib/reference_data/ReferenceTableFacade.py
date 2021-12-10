@@ -1,25 +1,21 @@
 # -*- coding: utf-8 -*-
 # pylint: disable=W0221
 # (c) Copyright IBM Corp. 2021. All Rights Reserved.
-from json import dumps
-import json
+from json import dumps, JSONEncoder
 import logging
 from requests.compat import urljoin, quote
-
 from .ReferenceObjectsBase import ReferenceObjectBase
-import fn_qradar_integration.util.qradar_constants as qradar_constants
+from fn_qradar_integration.util.qradar_constants import REFERENCE_TABLE_URL
 from resilient_lib import IntegrationError
 
 LOG = logging.getLogger(__name__)
-REF_TABLE_ENDPOINT = qradar_constants.REFERENCE_TABLE_URL
+REF_TABLE_ENDPOINT = REFERENCE_TABLE_URL
 
-
-class ByteEncoder(json.JSONEncoder):
+class ByteEncoder(JSONEncoder):
     def default(self, obj):
         if isinstance(obj, bytes):
             return str(obj, encoding='utf-8', errors='backslashreplace')
-        return json.JSONEncoder.default(self, obj)
-
+        return JSONEncoder.default(self, obj)
 
 def get_as_str(a_str):
     """
@@ -28,7 +24,6 @@ def get_as_str(a_str):
     if not isinstance(a_str, str):
         return a_str.decode('utf-8')
     return a_str
-
 
 class ReferenceTableFacade(ReferenceObjectBase):
 
@@ -39,8 +34,6 @@ class ReferenceTableFacade(ReferenceObjectBase):
     def add_ref_element(client, ref_table, inner_key, outer_key, value):
         """
         Add the value to the given ref_table
-
-
         :param client: An instantiated rest client for QRadar 
         :type client: AuthInfo
         :param ref_table: the name of the reference table
@@ -78,7 +71,6 @@ class ReferenceTableFacade(ReferenceObjectBase):
     def update_ref_element(client, ref_table, inner_key, outer_key, value):
         """
         Update the value of an entry for the given ref_table
-
         :param client: An instantiated rest client for QRadar 
         :type client: AuthInfo
         :param ref_table: the name of the reference table
@@ -114,7 +106,6 @@ class ReferenceTableFacade(ReferenceObjectBase):
     def delete_ref_element(client, ref_table, inner_key, outer_key, value):
         """
         Delete a value from an entry in the given ref_table
-
         :param client: An instantiated rest client for QRadar 
         :type client: AuthInfo
         :param ref_table: the name of the reference table

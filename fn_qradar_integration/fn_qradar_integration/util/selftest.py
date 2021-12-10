@@ -6,7 +6,7 @@
 
 import logging
 from fn_qradar_integration.util.qradar_utils import QRadarClient, QRadarServers
-import fn_qradar_integration.util.qradar_constants as qradar_constants
+from fn_qradar_integration.util.qradar_constants import PACKAGE_NAME
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
@@ -18,22 +18,22 @@ def selftest_function(opts):
     Suggested return values are be unimplemented, success, or failure.
     """
 
-    options = opts.get(qradar_constants.PACKAGE_NAME, {})
+    options = opts.get(PACKAGE_NAME, {})
 
     if not options:
         servers = QRadarServers(opts, options)
         server_list = servers.get_server_name_list()
     else:
-        server_list = {qradar_constants.PACKAGE_NAME}
+        server_list = {PACKAGE_NAME}
 
     try:
         for server_name in server_list:
             server = opts.get(server_name, {})
 
-            log.info("Verifying app.config values for {}".format(qradar_constants.PACKAGE_NAME))
+            log.info("Verifying app.config values for {}".format(PACKAGE_NAME))
 
-            cafile = False if server.get("verify_cert", "").lower() == "false" else server["verify_cert"]
-            qradar_client = QRadarClient(host=server["host"],
+            cafile = False if server.get("verify_cert", "").lower() == "false" else server.get("verify_cert")
+            qradar_client = QRadarClient(host=server.get("host"),
                                         username=server.get("username", None),
                                         password=server.get("qradarpassword", None),
                                         token=server.get("qradartoken", None),
@@ -45,7 +45,7 @@ def selftest_function(opts):
 
             log.info("Verifying QRadar connection...")
 
-            log.info("Test for {} was successful".format(server["host"]))
+            log.info("Test for {} was successful".format(server.get("host")))
 
         return {
             "state" : "success"
@@ -60,7 +60,7 @@ def selftest_function(opts):
                 host: {1}
                 credentials: {2}\n""".format(
                 err,
-                server["host"],
+                server.get("host"),
                 server.get("username") or "service token"
             )
 

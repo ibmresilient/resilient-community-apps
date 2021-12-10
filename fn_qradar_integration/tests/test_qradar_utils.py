@@ -5,15 +5,10 @@
 from fn_qradar_integration.util import qradar_utils
 from fn_qradar_integration.util import qradar_constants
 from fn_qradar_integration.util.SearchWaitCommand import SearchWaitCommand, SearchFailure, SearchJobFailure
-import base64
-import requests
-from mock import Mock
+from base64 import b64encode
 from mock import patch
-import mock
-import urllib
-import six
+from six import string_types
 import pytest
-
 
 # Util function to generate simulated requests response
 def _generateResponse(content, status):
@@ -27,7 +22,6 @@ def _generateResponse(content, status):
 
     return simResponse(content, status)
 
-
 # Global test data
 host = "qradar.instance.com"
 username = "admin"
@@ -36,12 +30,10 @@ token = "FakeSecreteToken"
 cafile = True
 search_id = "FakeSearch_id"
 
-
 @pytest.mark.parametrize("val", [ "test", u"test", "ç", u"ç" ])
 def test_quote_return(val):
     result = qradar_utils.quote(val)
-    assert isinstance(result, six.string_types)
-
+    assert isinstance(result, string_types)
 
 @patch("fn_qradar_integration.util.qradar_utils.quote_func")
 def test_quote_passing_args(mocked_func):
@@ -51,14 +43,11 @@ def test_quote_passing_args(mocked_func):
     qradar_utils.quote("test", "test")
     mocked_func.assert_called_with("test".encode("utf-8"), "test")
 
-
 def test_auth_info():
     """
     Test singleton AuthInfo
     :return:
     """
-
-
     auth_info = qradar_utils.AuthInfo.get_authInfo()
     auth_info.create(host,
                      username=username,
@@ -69,7 +58,7 @@ def test_auth_info():
     assert auth_info.api_url == "https://{}/api/".format(host)
     assert auth_info.cafile == cafile
     assert auth_info.qradar_token == None
-    assert auth_info.headers["Authorization"] == b"Basic " + base64.b64encode((username + ':' + password).encode("ascii"))
+    assert auth_info.headers["Authorization"] == b"Basic " + b64encode((username + ':' + password).encode("ascii"))
     assert auth_info.headers["Accept"] == "application/json"
 
     # use token to auth
@@ -79,7 +68,6 @@ def test_auth_info():
                      token=token,
                      cafile=cafile)
     assert auth_info.headers["SEC"] == token
-
 
 def test_qradar_client():
     with patch("fn_qradar_integration.util.qradar_utils.AuthInfo.make_call") as mocked_get_call:
@@ -124,7 +112,7 @@ def test_qradar_client():
     # 4. normal add_ref_element
     with patch("fn_qradar_integration.util.qradar_utils.AuthInfo.make_call") as mocked_post_call:
         mocked_post_call.return_value = _generateResponse({"creation_time": 1523020929069,
-                                                             "timeout_type": "FIRST_SEEN",
+                                                            "timeout_type": "FIRST_SEEN",
                                                              "number_of_elements": 2,
                                                              "data": [
                                                                  {"last_seen": 1523020984874,
@@ -167,7 +155,6 @@ def test_qradar_client():
         except qradar_utils.IntegrationError:
             assert True
 
-
 @patch("fn_qradar_integration.util.SearchWaitCommand.SearchWaitCommand.perform_search")
 def test_ariel_search_more(mocked_perform_search):
     qradar_client = qradar_utils.QRadarClient(host,
@@ -189,9 +176,7 @@ def test_ariel_search_more(mocked_perform_search):
     mocked_perform_search.return_value = ret_events
     ret = qradar_client.ariel_search(query_string, query_all_results, range_start, range_end, time_out)
 
-
     assert ret == ret_events
-
 
 def test_ariel_search():
     timeout = 10
@@ -232,8 +217,6 @@ def test_ariel_search():
         except SearchJobFailure as e:
             assert True
 
-
-
     with patch("fn_qradar_integration.util.qradar_utils.AuthInfo.make_call") as mocked_get_call:
         # 3. Test check_status
         # 3.1 Complete status
@@ -268,7 +251,6 @@ def test_ariel_search():
             assert False
         except SearchFailure:
             assert True
-
 
 @patch("fn_qradar_integration.util.qradar_utils.QRadarClient.get_all_ref_set")
 @patch("fn_qradar_integration.util.qradar_utils.QRadarClient.search_ref_set")
@@ -314,7 +296,6 @@ def test_find_all_ref_set_contains(mocked_search_ref_set, mocked_get_all_ref_set
     assert len(ret) == 1
     assert ret[0] == content
 
-
 @patch("fn_qradar_integration.util.qradar_utils.AuthInfo.make_call")
 def test_get_ref_set(mocked_make_call):
     qradar_client = qradar_utils.QRadarClient(host,
@@ -348,7 +329,6 @@ def test_get_ref_set(mocked_make_call):
         assert False
     except qradar_utils.IntegrationError:
         assert True
-
 
 def test_quote():
     """

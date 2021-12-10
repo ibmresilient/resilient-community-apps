@@ -4,9 +4,9 @@
 import pytest
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
-from mock import patch 
+from fn_qradar_integration.util.qradar_constants import PACKAGE_NAME
+from mock import patch
 
-PACKAGE_NAME = "fn_qradar_integration"
 FUNCTION_NAME = "qradar_get_all_reference_tables"
 
 # Read the default configuration-data section from the package
@@ -81,7 +81,6 @@ def call_qradar_get_all_reference_tables_function(circuits, function_params, tim
         assert isinstance(event.kwargs["result"], FunctionResult)
         pytest.wait_for(event, "complete", True)
         return event.kwargs["result"].value
-
 
 class TestQradarGetAllReferenceTables:
     """ Tests for the qradar_get_all_reference_tables function"""

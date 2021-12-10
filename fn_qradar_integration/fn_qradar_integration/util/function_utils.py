@@ -5,11 +5,13 @@
 #   Util functions
 #
 
-import six
-from resilient_lib import validate_fields
-import fn_qradar_integration.util.qradar_constants as qradar_constants
+from six import string_types
+import logging
+from resilient_lib import validate_fields, IntegrationError
+from fn_qradar_integration.util.qradar_constants import PACKAGE_NAME, UPDATE_FIELD, GET_FIELD
 from fn_qradar_integration.util import qradar_utils
-from fn_qradar_integration.util.resilient_utils import resilient_utils
+
+LOG = logging.getLogger(__name__)
 
 def make_query_string(query, params):
     """
@@ -40,49 +42,73 @@ def fix_dict_value(events):
         # event is a dict
         if isinstance(event, dict):
             for key in event:
-                if not isinstance(event[key], six.string_types):
+                if not isinstance(event[key], string_types):
                     event[key] = u"{}".format(event[key])
 
     return events
 
-def get_servers_list(opts, choose):
+def get_servers_list(opts):
     """
     Used for initilizing or reloading the options variable
     :param opts: list of options
-    :param choose: either init or reload
     :return: list of qradar servers
     """
     servers_list = {}
 
-    options = opts.get(qradar_constants.PACKAGE_NAME, {})
+    options = opts.get(PACKAGE_NAME, {})
 
-    if options:
-        server_list = {qradar_constants.PACKAGE_NAME}
-    else:
+    if options: # If no labels given [fn_qradar_integration]
+        server_list = {PACKAGE_NAME}
+    else: # If labels given [fn_qradar_integration:label]
         servers = qradar_utils.QRadarServers(opts, options)
         server_list = servers.get_server_name_list()
 
+    # Creates a dictionary that is filled with the QRadar servers
+    # and there configurations
     for server_name in server_list:
         servers_list[server_name] = opts.get(server_name, {})
-        if choose == "init":
-            options = servers_list[server_name]
-
-            required_fields = ["host", "verify_cert"]
-            validate_fields(required_fields, options)
+        validate_fields(["host", "verify_cert"], servers_list[server_name])
 
     return servers_list
 
-def update_qradar_servers_select_list(opts, servers_list):
+def update_qradar_servers_select_list(servers_list, res_rest_client, field_name):
     """
-    Populate the qradar_servers select list
-    :param opts: list of options
+    Update values in qradar_servers select field
     :param servers_list: list of qradar servers in app.config
+    :param res_rest_client: resilient rest client connection
+    :param field_name: activity field name
     :return: None
     """
 
+    # Create list of qradar server labels
     server_name_list = []
     for server in servers_list:
         if ":" in server:
             server_name_list.append(server[server.index(":")+1:])
+        else:
+            server_name_list.append(server)
 
-    resilient_utils(opts).update_rule_action_field_values("qradar_servers", server_name_list)
+    try:
+        payload = res_rest_client.get(GET_FIELD.format(field_name))
+
+        if type(payload) == list or payload.get("input_type") != "select":
+            return None
+
+        # Create list of servers to add to the QRadar Servers select list
+        if payload.get("values"):
+            for each_value in payload.get("values"):
+                if each_value.get("label") in server_name_list:
+                    server_name_list.remove(each_value.get("label"))
+
+        # Create payload 
+        if server_name_list:
+            payload["values"] = [
+                {"label": str(value), "enabled": True, "hidden": False}
+                for value in server_name_list
+            ]
+
+            res_rest_client.put(UPDATE_FIELD.format(field_name), payload, timeout=1000)
+
+    except Exception as err_msg:
+        LOG.warning("Action filed: {} error: {}".format(field_name, err_msg))
+        raise IntegrationError("Error while updating action field: {}".format(field_name))

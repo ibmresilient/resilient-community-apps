@@ -8,7 +8,7 @@ import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import validate_fields, ResultPayload
 from fn_qradar_integration.util.qradar_utils import QRadarClient, QRadarServers
-import fn_qradar_integration.util.qradar_constants as qradar_constants
+from fn_qradar_integration.util.qradar_constants import PACKAGE_NAME
 import fn_qradar_integration.util.function_utils as function_utils
 
 LOG = logging.getLogger(__name__)
@@ -20,28 +20,25 @@ class FunctionComponent(ResilientComponent):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         self.opts = opts
-        self.servers_list = function_utils.get_servers_list(opts, "init")
+        self.servers_list = function_utils.get_servers_list(opts)
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
         self.opts = opts
-        self.servers_list = function_utils.get_servers_list(opts, "reload")
+        self.servers_list = function_utils.get_servers_list(opts)
 
     @function("qradar_reference_table_add_item")
     def _qradar_reference_table_add_item_function(self, event, *args, **kwargs):
         """Function: Add an item to a given QRadar reference table"""
         try:
-
             # Get the wf_instance_id of the workflow this Function was called in, if not found return a backup string
             wf_instance_id = event.message.get("workflow_instance", {}).get("workflow_instance_id", "no instance id found")
-
             yield StatusMessage("Starting 'qradar_reference_table_add_item' running in workflow '{0}'".format(wf_instance_id))
 
-            required_fields = ["qradar_reference_table_name", "qradar_reference_table_item_value"]
-            validate_fields(required_fields, kwargs)
+            validate_fields(["qradar_reference_table_name", "qradar_reference_table_item_value"], kwargs)
 
-            rp = ResultPayload(qradar_constants.PACKAGE_NAME, **kwargs)
+            rp = ResultPayload(PACKAGE_NAME, **kwargs)
             # Get the function parameters:
             qradar_reference_table_name = kwargs.get("qradar_reference_table_name")  # text
             qradar_reference_table_item_value = kwargs.get("qradar_reference_table_item_value")  # text
@@ -56,14 +53,11 @@ class FunctionComponent(ResilientComponent):
             LOG.info("qradar_label: %s", qradar_label)
 
             options = QRadarServers.qradar_label_test(qradar_label, self.servers_list)
+            qradar_verify_cert = False if options.get("verify_cert", "false").lower() == "false" else options.get("verify_cert")
 
-            qradar_verify_cert = True
-            if "verify_cert" in options and options["verify_cert"].lower() == "false":
-                qradar_verify_cert = False
+            LOG.debug("Connecting to QRadar instance @ {}".format(options.get("host")))
 
-            LOG.debug("Connecting to QRadar instance @ {}".format(options["host"]))
-
-            qradar_client = QRadarClient(host=options["host"],
+            qradar_client = QRadarClient(host=options.get("host"),
                                          username=options.get("username", None),
                                          password=options.get("qradarpassword", None),
                                          token=options.get("qradartoken", None),

@@ -16,3 +16,6 @@ SEARCH_STATUS_COMPLETED = "COMPLETED"
 SEARCH_STATUS_EXECUTE = "EXECUTE"
 SEARCH_STATUS_WAIT = "WAIT"
 SEARCH_STATUS_SORTING = "SORTING"
+
+UPDATE_FIELD = "/types/actioninvocation/fields/{}"
+GET_FIELD = "/types/actioninvocation/fields/{}?include_principals=true"

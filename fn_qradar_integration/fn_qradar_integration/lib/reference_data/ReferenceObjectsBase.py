@@ -12,7 +12,6 @@ if sys.version_info >= (3, 4):
 else:
     ABC = abc.ABCMeta('ABC', (), {})
 
-
 class ReferenceObjectBase(ABC):
 
     @abc.abstractmethod

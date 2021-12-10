@@ -5,20 +5,16 @@
 #   Util classes for qradar
 #
 
-import base64
+from base64 import b64encode
 import logging
-import six
+from six import binary_type
 from fn_qradar_integration.util.SearchWaitCommand import SearchWaitCommand, SearchFailure, SearchJobFailure
 from fn_qradar_integration.util import function_utils
 from resilient_lib import RequestsCommon
 import fn_qradar_integration.util.qradar_constants as qradar_constants
 from fn_qradar_integration.lib.reference_data.ReferenceTableFacade import ReferenceTableFacade
 from resilient_lib import IntegrationError
-# handle python2 and 3
-try:
-    from urllib import quote as quote_func  # Python 2.X
-except ImportError:
-    from urllib.parse import quote as quote_func  # Python 3+
+from urllib.parse import quote as quote_func
 
 LOG = logging.getLogger(__name__)
 FORWARD_SLASH = b'%2F'
@@ -28,7 +24,7 @@ def quote(input_v, safe=None):
     To make sure that integration on Python 2 works with unicode we will wrap quote
     to always pass bytes to it.
     """
-    if not isinstance(input_v, six.binary_type):
+    if not isinstance(input_v, binary_type):
         input_v = input_v.encode('utf-8')
 
     input_v = input_v.replace(b'/', FORWARD_SLASH)
@@ -115,7 +111,7 @@ class AuthInfo(object):
         """
         self.headers = {'Accept': 'application/json'}
         if username and password:
-            self.qradar_auth = base64.b64encode(
+            self.qradar_auth = b64encode(
                 (username + ':' + password).encode('ascii'))
             self.headers['Authorization'] = b"Basic " + self.qradar_auth
         elif token:
@@ -272,7 +268,6 @@ class ArielSearch(SearchWaitCommand):
         return status
 
 class QRadarClient(object):
-
     # QRadarClient has-a ReferenceTableFacade
     reference_tables = ReferenceTableFacade()
     auth_info = AuthInfo.get_authInfo()
@@ -377,14 +372,15 @@ class QRadarClient(object):
         except Exception as e:
             LOG.error(str(e))
             raise IntegrationError("Request to url [{}] throws exception. Error [get_all_ref_set call failed with exception {}]".format(url, str(e)))
+
         return ret
 
     @staticmethod
     def find_all_ref_set_contains(value):
         """
-        :param value:
-        :param type:
-        :return:
+        Find all reference sets that contain user given value
+        :param value: Value given by user
+        :return: List of reference sets that contain the user given value
         """
         ref_sets = QRadarClient.get_all_ref_set()
         LOG.debug(u"All reference sets: {}".format(ref_sets))
@@ -417,7 +413,7 @@ class QRadarClient(object):
         ret = None
         try:
             if filter:
-                if not isinstance(filter, six.binary_type):
+                if not isinstance(filter, binary_type):
                     filter = filter.encode('utf-8')
                 parameter = quote('?value="{}"'.format(filter))
                 url = url + parameter
@@ -456,7 +452,7 @@ class QRadarClient(object):
         """
         Add the value to the given ref_set
         :param ref_set: Name of reference set.
-        :param value:
+        :param value: Value given by user
         :return:
         """
         auth_info = AuthInfo.get_authInfo()
@@ -536,6 +532,9 @@ class QRadarClient(object):
         return cls.reference_tables.delete_ref_element(AuthInfo.get_authInfo(), ref_table, inner_key, outer_key, value)
 
     def get_all_ref_tables(self):
+        """
+        :return: All reference tables
+        """
         return self.reference_tables.get_all_reference_tables(AuthInfo.get_authInfo())
 
     @classmethod
