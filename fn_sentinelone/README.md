@@ -34,7 +34,6 @@
   - [Custom Layouts](#custom-layouts)
 - [Function - SentinelOne: Disconnect From Network](#function---sentinelone-disconnect-from-network)
 - [Function - SentinelOne: Initiate Disk Scan](#function---sentinelone-initiate-disk-scan)
-- [Function - SentinelOne: Get Agents](#function---sentinelone-get-agents)
 - [Function - SentinelOne: Restart Agent](#function---sentinelone-restart-agent)
 - [Function - SentinelOne: Resolve Threat in SentinelOne](#function---sentinelone-resolve-threat-in-sentinelone)
 - [Function - SentinelOne: Get Hash Reputation](#function---sentinelone-get-hash-reputation)
@@ -367,56 +366,6 @@ else:
     note = u"{0} Full Disk Scan was NOT initiated. No content returned from function".format(note)  
 
 incident.addNote(helper.createRichText(note))
-```
-
-</p>
-</details>
-
----
-## Function - SentinelOne: Get Agents
-None
-
- ![screenshot: fn-sentinelone-get-agents ](./doc/screenshots/fn-sentinelone-get-agents.png) <!-- ::CHANGE_ME:: -->
-
-<details><summary>Inputs:</summary>
-<p>
-
-| Name | Type | Required | Example | Tooltip |
-| ---- | :--: | :------: | ------- | ------- |
-
-</p>
-</details>
-
-<details><summary>Outputs:</summary>
-<p>
-
-<!-- ::CHANGE_ME:: -->
-```python
-results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
-} 
-```
-
-</p>
-</details>
-
-<details><summary>Example Pre-Process Script:</summary>
-<p>
-
-```python
-None
-```
-
-</p>
-</details>
-
-<details><summary>Example Post-Process Script:</summary>
-<p>
-
-```python
-None
 ```
 
 </p>
