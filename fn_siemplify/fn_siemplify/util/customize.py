@@ -21,10 +21,10 @@ def codegen_reload_data():
     return {
         "package": u"fn_siemplify",
         "message_destinations": [u"fn_siemplify"],
-        "functions": [u"siemplify_sync_case"],
-        "workflows": [u"siemplify_m_sync_case", u"siemplify_sync_case"],
-        "actions": [u"Siemplify Auto Sync Case", u"Siemplify Sync Case"],
-        "incident_fields": [u"siemplify_case_id"],
+        "functions": [u"siemplify_sync_artifact", u"siemplify_sync_attachment", u"siemplify_sync_case", u"siemplify_sync_comment"],
+        "workflows": [u"siemplify_add_comment", u"siemplify_m_sync_case", u"siemplify_sync_artifact", u"siemplify_sync_case"],
+        "actions": [u"Siemplify Auto Sync Case", u"Siemplify Sync Artifact", u"Siemplify Sync Case", u"Siemplify Sync Comment"],
+        "incident_fields": [u"siemplify_alert_id", u"siemplify_case_id", u"siemplify_case_link"],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [],
@@ -44,15 +44,24 @@ def customization_data(client=None):
     - Message Destinations:
         - fn_siemplify
     - Functions:
+        - siemplify_sync_artifact
+        - siemplify_sync_attachment
         - siemplify_sync_case
+        - siemplify_sync_comment
     - Workflows:
+        - siemplify_add_comment
         - siemplify_m_sync_case
+        - siemplify_sync_artifact
         - siemplify_sync_case
     - Rules:
         - Siemplify Auto Sync Case
+        - Siemplify Sync Artifact
         - Siemplify Sync Case
+        - Siemplify Sync Comment
     - Incident Fields:
+        - siemplify_alert_id
         - siemplify_case_id
+        - siemplify_case_link
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)

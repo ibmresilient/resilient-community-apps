@@ -14,6 +14,8 @@ base_url=<changeme>
 api_key=<changeme>
 # false|/path/to/certificate
 cafile=
+# specify the environment for creating cases and entities
+default_case_environment=Default Environment
 # override default Siemplify and SOAR templates as necessary
 siemplify_create_case_template=
 siemplify_close_case_template=

@@ -20,13 +20,21 @@
 ```python
 inputs.siemplify_incident_id = incident.id
 inputs.siemplify_assigned_user = None
-inputs.siemplify_environment = "Default Environment"
+inputs.siemplify_environment = None
 inputs.siemplify_case_id = incident.properties.siemplify_case_id
+inputs.siemplify_alert_id = incident.properties.siemplify_alert_id
 ```
 
 ### Post-Processing Script
 ```python
-None
+if results.success:
+  incident.properties.siemplify_case_id = results.content.get('id')
+  incident.properties.siemplify_case_link = helper.createRichText("<a target='blank' href='{}'>{}</a>".format(results.content.get('siemplify_case_url'), results.content.get('title')))
+  if results.content.get('alerts'):
+    incident.properties.siemplify_alert_id = results.content['alerts'][0]['identifier']
+  incident.addNote("Siemplify Case {} created".format(results.content.get('id')))
+else:
+  incident.addNote("Siemplify Auto Sync Case failed: {}".format(str(results.content)))
 ```
 
 ---

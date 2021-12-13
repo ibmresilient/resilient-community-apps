@@ -12,21 +12,70 @@ LOG = logging.getLogger(__name__)
 
 DEFAULT_CREATE_CASE = "templates/siemplify_create_case.jinja"
 
-BASE_URL = "/api/external/v1/"
-CREATE_CASE_URL = urljoin(BASE_URL, "cases/CreateManualCase")
-GET_CASE_URL = urljoin(BASE_URL, "cases/GetCaseFullDetails/{}")
-BLOCKLIST_URL = urljoin(BASE_URL, "settings/GetAllModelBlackRecords")
+API_VERSION = "api/external/v1"
+CREATE_CASE_URL = "cases/CreateManualCase"
+GET_CASE_URL = "cases/GetCaseFullDetails/{}"
+BLOCKLIST_URL = "settings/GetAllModelBlackRecords"
+CREATE_ENTITY_URL = "cases/CreateCaseEntity"
+CREATE_COMMENT_URL = "cases/AddCaseComment"
+CREATE_ARTIFACT_URL = "cases/CreateCaseEntity"
+CREATE_ATTACHMENT_URL = "cases/AddEvidence"
+
+COMMENT_HEADER = "IBM SOAR"
+
+ARTIFACT_TYPE_LOOKUPS = {
+    "Port": "ADDRESS",
+    "MAC Address": "MacAddress",
+    "Process Name": "PROCESS",
+    "Service": "PROCESS",
+    "File Name": "FILENAME",
+    "File Path": "FILENAME",
+    "Malware MD5 Hash": "FILEHASH",
+    "Malware SHA-1 Hash": "FILEHASH",
+    "Malware SHA-256 Hash": "FILEHASH",
+    "Malware Sample Fuzzy Hash": "FILEHASH",
+    "URI PATH": "DestinationURL",
+    "URL": "DestinationURL",
+    "URL Referer": "DestinationURL",
+    "Email Subject": "EMAILSUBJECT",
+    "Threat CVE ID": "CVEID",
+    "String": "GENERICENTITY",
+    "DNS Name": "DESTINATIONDOMAIN",
+    "IP Address": "IPSET",
+    "User Agent": "USERUNIQNAME",
+    "User Account": "USERUNIQNAME",
+    "Registry Key": "GENERICENTITY",
+    "Password" : "GENERICENTITY",
+    "Observed Data": "GENERICENTITY",
+    "Network CIDR Range": "IPSET",
+    "Mutex": "THREATSIGNATURE",
+    "Malware Family/Variant": "GENERICENTITY",
+    "HTTP Response Header": "GENERICENTITY",
+    "HTTP Request Header": "GENERICENTITY",
+    "Email Sender Name": "USERUNIQNAME",
+    "Email Sender": "USERUNIQNAME",
+    "Email Recipient": "USERUNIQNAME",
+    "Email Body": "GENERICENTITY",
+    "Email Attachment Name": "FILENAME",
+    "Email Attachment": None,
+    "Log File": None,
+    "Malware Sample": None,
+    "Other File": None,
+    "RFC 822 Email Message File": None,
+    "X509 Certificate File": None
+}
+
 
 class SiemplifyCommon():
     def __init__(self, rc, options):
-        self.options = options._asdict() if isinstance(options, NamedTuple) else options
+        self.options = options._asdict() if isinstance(options, tuple) else options
         self.base_url = self.options.get('base_url')
         self.api_key = self.options.get('api_key')
 
         self.headers = _make_headers(self.api_key)
         self.jina_env = JinjaEnvironment()
         self.rc = rc
-        self.verify = False if options.get('cafile').lower() == "false" else options.get('cafile')
+        self.verify = False if self.options.get('cafile').lower() == "false" else self.options.get('cafile')
 
     def sync_case(self, incident_info):
         # perform an update to an existing incident
@@ -41,8 +90,7 @@ class SiemplifyCommon():
             DEFAULT_CREATE_CASE,
             incident_info)
 
-        url = urljoin(self.base_url, CREATE_CASE_URL)
-        return self._make_call("POST", url, incident_payload)
+        return self._make_call("POST", CREATE_CASE_URL, incident_payload)
 
     def update_case(self, incident_info):
         # get the existing case to start reviewing changes
@@ -53,21 +101,162 @@ class SiemplifyCommon():
         #_diff_attachments(incident_info)
         return None
 
+    def get_case(self, case_id):
+        uri = GET_CASE_URL.format(case_id)
+        return self._make_call("GET", uri)
+
     def _diff_case_info(self, incident_info):
         # get the existing case
-        url = urljoin(self.base_url, GET_CASE_URL.format(incident_info["siemplify_case_id"]))
-        case_info = self._make_call("GET", url)
+        case_info = self.get_case(incident_info["siemplify_case_id"])
         LOG.info(case_info)
 
     def get_blocklist(self):
-        url = urljoin(self.base_url, BLOCKLIST_URL)
-        return self._make_call("GET", url)
+        return self._make_call("GET", BLOCKLIST_URL)
 
-    def _make_call(self, method, url, payload=None):
+    def sync_comment(self, inputs):
+        """[summary]
+
+        Args:
+            inputs ([dict]): [data to create a comment]
+
+        """
+        payload = {
+            "caseId": str(inputs['siemplify_case_id']),
+            "alertIdentifier": inputs.get('siemplify_alert_id'),
+            "comment": "{}\n{}".format(COMMENT_HEADER, inputs['siemplify_comment'])
+        }
+
+        return self._make_call("POST", CREATE_COMMENT_URL, payload)
+
+    def sync_artifact(self, inputs):
+        """[summary]
+
+        Args:
+            inputs ([dict]): [data to create a comment]
+
+        """
+        siemplify_entity_type = ARTIFACT_TYPE_LOOKUPS.get(inputs['siemplify_artifact_type'])
+        if not siemplify_entity_type:
+            LOG.warning("No matching entity type for Artifact type: %s, value: %s",
+                    inputs['siemplify_artifact_type'], inputs['siemplify_artifact_value'])
+            return None
+
+        payload = {
+            "caseId": inputs['siemplify_case_id'],
+            "alertIdentifier": inputs['siemplify_alert_id'],
+            "entities": [
+                {
+                "caseId": 0,
+                "identifier": inputs['siemplify_artifact_value'],
+                "entityType": siemplify_entity_type,
+                "isInternal": True,
+                "isSuspicious": False,
+                "isArtifact": True,
+                "isEnriched": False,
+                "isVulnerable": False,
+                "isPivot": False,
+                "environment": inputs['siemplify_environment'],
+                "fields": [
+                    {
+                    "isHighlight": False,
+                    "groupName": "Default",
+                    "items": [
+                        {
+                        "originalName": "Type",
+                        "name": "Type",
+                        "value": siemplify_entity_type
+                        },
+                        {
+                        "originalName": "IsInternalAsset",
+                        "name": "IsInternalAsset",
+                        "value": "True"
+                        },
+                        {
+                        "originalName": "IsSuspicious",
+                        "name": "IsSuspicious",
+                        "value": "False"
+                        },
+                        {
+                        "originalName": "IsEnriched",
+                        "name": "IsEnriched",
+                        "value": "False"
+                        },
+                        {
+                        "originalName": "IsVulnerable",
+                        "name": "IsVulnerable",
+                        "value": "False"
+                        },
+                        {
+                        "originalName": "IsArtifact",
+                        "name": "IsArtifact",
+                        "value": "True"
+                        },
+                        {
+                        "originalName": "IsManuallyCreated",
+                        "name": "IsManuallyCreated",
+                        "value": "True"
+                        },
+                        {
+                        "originalName": "Environment",
+                        "name": "Environment",
+                        "value": inputs['siemplify_environment']
+                        }
+                    ]
+                    },
+                    {
+                    "isHighlight": False,
+                    "groupName": "Entity",
+                    "items": [
+                        {
+                        "originalName": "IsPivot",
+                        "name": "Is Pivot",
+                        "value": "False"
+                        }
+                    ]
+                    }
+                ],
+                "isManuallyCreated": True,
+                "isCustom": True,
+                "id": "{}_{}".format(inputs['siemplify_artifact_value'].replace(' ', '_'), inputs['siemplify_environment'])
+                }
+            ]
+        }
+
+        return self._make_call("POST", CREATE_ARTIFACT_URL, payload)
+
+    def sync_attachment(self, case_id, alert_id, b64content, filename, isImportant=False):
+        filetype = None
+        if '.' in filename:
+            filetype = filename[filename.find('.'): ]
+            filename = filename[: filename.find('.')]
+
+        #  "AlertIdentifier": alert_id,
+        payload = {
+            "caseIdentifier": str(case_id),
+            "base64Blob": b64content,
+            "name": filename,
+            "description": "created by IBM SOAR",
+            "isImportant": isImportant
+        }
+        if filetype:
+            payload['type'] = filetype
+
+        LOG.debug(payload)
+
+        return self._make_call("POST", CREATE_ATTACHMENT_URL, payload)
+
+    def _make_call(self, method, uri, payload=None):
+
+        url = "/".join([self.base_url, API_VERSION, uri])
         if payload:
-            return self.rc.execute(method, url, data=json.dumps(payload), headers=self.headers, verify=self.verify)
+            response = self.rc.execute(method, url, data=json.dumps(payload), headers=self.headers, verify=self.verify)
         else:
-            return self.rc.execute(method, url, headers=self.headers, verify=self.verify)
+            response = self.rc.execute(method, url, headers=self.headers, verify=self.verify)
+
+        if response.json():
+            return response.json()
+
+        return response.text
 
 def _make_headers(api_key):
     return {

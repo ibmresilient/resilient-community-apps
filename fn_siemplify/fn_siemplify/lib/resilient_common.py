@@ -2,10 +2,12 @@
 # pragma pylint: disable=unused-argument, no-self-use
 # (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
 
+import base64
 import logging
 import resilient
 from resilient import SimpleHTTPException
 from resilient_lib import IntegrationError, clean_html
+from resilient_lib import get_file_attachment, get_file_attachment_name
 from cachetools import cached, LRUCache
 #from fn_siemlify.lib.constants import FROM_SENTINEL_COMMENT_HDR, FROM_SOAR_COMMENT_HDR, SENTINEL_INCIDENT_NUMBER
 
@@ -162,6 +164,14 @@ class ResilientCommon():
     def get_incident_attachments(self, incident_id):
         pass
 
+    def get_incident_attachment(self, incident_id, artifact_id=None, task_id=None, attachment_id=None, return_base64=True):
+        file_content = get_file_attachment(self.rest_client, incident_id, artifact_id=artifact_id, task_id=task_id, attachment_id=attachment_id)
+        if return_base64:
+            file_content = b_to_s(base64.b64encode(file_content))
+
+        file_name = get_file_attachment_name(self.rest_client, incident_id, artifact_id=artifact_id, task_id=task_id, attachment_id=attachment_id)
+        return file_name, file_content
+
     def get_incident_artifacts(self, incident_id):
         return self._get_incident_info(incident_id, "artifacts")
 
@@ -223,3 +233,17 @@ class ResilientCommon():
             return resp.json()
 
         return {}
+
+
+def s_to_b(value):
+    try:
+        return bytes(value, 'utf-8')
+    except:
+        return value
+
+def b_to_s(value):
+    """[binary to string]"""
+    try:
+        return value.decode()
+    except:
+        return value

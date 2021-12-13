@@ -27,7 +27,8 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.siemplify_sync_artifacts
             -   fn_inputs.siemplify_environment
             -   fn_inputs.siemplify_assigned_user
-            -   fn_inputs.siemplufy_case_id
+            -   fn_inputs.siemplify_case_id
+            -   fn_inputs.siemplify_alert_id
         """
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
@@ -35,7 +36,8 @@ class FunctionComponent(AppFunctionComponent):
         # validate app.config settings
         validate_fields([
                 {"name": "api_key"},
-                {"name": "base_url"}
+                {"name": "base_url"},
+                {"name": "default_environment"}
             ],
             self.app_configs._asdict())
 
@@ -63,8 +65,9 @@ class FunctionComponent(AppFunctionComponent):
 
         # assemble all the data for Siemplify incident creation
         incident_info['siemplify_assigned_user'] = fn_inputs.siemplify_assigned_user
-        incident_info['siemplify_environment'] = fn_inputs.siemplify_environment
+        incident_info['siemplify_environment'] = fn_inputs.siemplify_environment if fn_inputs.siemplify_environment else self.app_configs.default_environment
         incident_info['siemplify_case_id'] = fn_inputs.siemplify_case_id
+        incident_info['siemplify_alert_id'] = fn_inputs.siemplify_alert_id
 
         self.LOG.debug(incident_info)
 
@@ -73,10 +76,13 @@ class FunctionComponent(AppFunctionComponent):
 
         # get the results based on the data returned
         if isinstance(results, int):
+            # get the full case information
+            case_results = siemplify_env.get_case(results)
+            case_results['siemplify_case_url'] = "{}/#/main/cases/classic-view/{}".format(self.app_configs.base_url, results)
             status = True
-            results = { "case_id": results }
+            results = case_results
         else:
             status = False
 
         yield self.status_message("Endpoint reached successfully and returning results for App Function: '{0}'".format(FN_NAME))
-        yield FunctionResult(results, status=status)
+        yield FunctionResult(results, success=status)
