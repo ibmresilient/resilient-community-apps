@@ -1,3 +1,714 @@
 {
-    
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {
+      "type": "null"
+    },
+    "content": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "agentDetectionInfo": {
+                "type": "object",
+                "properties": {
+                  "accountId": {
+                    "type": "string"
+                  },
+                  "accountName": {
+                    "type": "string"
+                  },
+                  "agentDetectionState": {
+                    "type": "null"
+                  },
+                  "agentDomain": {
+                    "type": "string"
+                  },
+                  "agentIpV4": {
+                    "type": "string"
+                  },
+                  "agentIpV6": {
+                    "type": "string"
+                  },
+                  "agentLastLoggedInUserName": {
+                    "type": "string"
+                  },
+                  "agentMitigationMode": {
+                    "type": "string"
+                  },
+                  "agentOsName": {
+                    "type": "string"
+                  },
+                  "agentOsRevision": {
+                    "type": "string"
+                  },
+                  "agentRegisteredAt": {
+                    "type": "string"
+                  },
+                  "agentUuid": {
+                    "type": "string"
+                  },
+                  "agentVersion": {
+                    "type": "string"
+                  },
+                  "externalIp": {
+                    "type": "string"
+                  },
+                  "groupId": {
+                    "type": "string"
+                  },
+                  "groupName": {
+                    "type": "string"
+                  },
+                  "siteId": {
+                    "type": "string"
+                  },
+                  "siteName": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "accountId",
+                  "accountName",
+                  "agentDetectionState",
+                  "agentDomain",
+                  "agentIpV4",
+                  "agentIpV6",
+                  "agentLastLoggedInUserName",
+                  "agentMitigationMode",
+                  "agentOsName",
+                  "agentOsRevision",
+                  "agentRegisteredAt",
+                  "agentUuid",
+                  "agentVersion",
+                  "externalIp",
+                  "groupId",
+                  "groupName",
+                  "siteId",
+                  "siteName"
+                ]
+              },
+              "agentRealtimeInfo": {
+                "type": "object",
+                "properties": {
+                  "accountId": {
+                    "type": "string"
+                  },
+                  "accountName": {
+                    "type": "string"
+                  },
+                  "activeThreats": {
+                    "type": "integer"
+                  },
+                  "agentComputerName": {
+                    "type": "string"
+                  },
+                  "agentDecommissionedAt": {
+                    "type": "null"
+                  },
+                  "agentDomain": {
+                    "type": "string"
+                  },
+                  "agentId": {
+                    "type": "string"
+                  },
+                  "agentInfected": {
+                    "type": "boolean"
+                  },
+                  "agentIsActive": {
+                    "type": "boolean"
+                  },
+                  "agentIsDecommissioned": {
+                    "type": "boolean"
+                  },
+                  "agentMachineType": {
+                    "type": "string"
+                  },
+                  "agentMitigationMode": {
+                    "type": "string"
+                  },
+                  "agentNetworkStatus": {
+                    "type": "string"
+                  },
+                  "agentOsName": {
+                    "type": "string"
+                  },
+                  "agentOsRevision": {
+                    "type": "string"
+                  },
+                  "agentOsType": {
+                    "type": "string"
+                  },
+                  "agentUuid": {
+                    "type": "string"
+                  },
+                  "agentVersion": {
+                    "type": "string"
+                  },
+                  "groupId": {
+                    "type": "string"
+                  },
+                  "groupName": {
+                    "type": "string"
+                  },
+                  "networkInterfaces": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "inet": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "inet6": {
+                          "type": "array"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "physical": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "inet",
+                        "inet6",
+                        "name",
+                        "physical"
+                      ]
+                    }
+                  },
+                  "operationalState": {
+                    "type": "string"
+                  },
+                  "rebootRequired": {
+                    "type": "boolean"
+                  },
+                  "scanAbortedAt": {
+                    "type": "string"
+                  },
+                  "scanFinishedAt": {
+                    "type": "string"
+                  },
+                  "scanStartedAt": {
+                    "type": "string"
+                  },
+                  "scanStatus": {
+                    "type": "string"
+                  },
+                  "siteId": {
+                    "type": "string"
+                  },
+                  "siteName": {
+                    "type": "string"
+                  },
+                  "storageName": {
+                    "type": "null"
+                  },
+                  "storageType": {
+                    "type": "null"
+                  },
+                  "userActionsNeeded": {
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "accountId",
+                  "accountName",
+                  "activeThreats",
+                  "agentComputerName",
+                  "agentDecommissionedAt",
+                  "agentDomain",
+                  "agentId",
+                  "agentInfected",
+                  "agentIsActive",
+                  "agentIsDecommissioned",
+                  "agentMachineType",
+                  "agentMitigationMode",
+                  "agentNetworkStatus",
+                  "agentOsName",
+                  "agentOsRevision",
+                  "agentOsType",
+                  "agentUuid",
+                  "agentVersion",
+                  "groupId",
+                  "groupName",
+                  "networkInterfaces",
+                  "operationalState",
+                  "rebootRequired",
+                  "scanAbortedAt",
+                  "scanFinishedAt",
+                  "scanStartedAt",
+                  "scanStatus",
+                  "siteId",
+                  "siteName",
+                  "storageName",
+                  "storageType",
+                  "userActionsNeeded"
+                ]
+              },
+              "containerInfo": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "null"
+                  },
+                  "image": {
+                    "type": "null"
+                  },
+                  "labels": {
+                    "type": "null"
+                  },
+                  "name": {
+                    "type": "null"
+                  }
+                },
+                "required": [
+                  "id",
+                  "image",
+                  "labels",
+                  "name"
+                ]
+              },
+              "id": {
+                "type": "string"
+              },
+              "indicators": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "category": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "ids": {
+                      "type": "array",
+                      "items": {
+                        "type": "integer"
+                      }
+                    },
+                    "tactics": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string"
+                          },
+                          "source": {
+                            "type": "string"
+                          },
+                          "techniques": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "link": {
+                                  "type": "string"
+                                },
+                                "name": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "link",
+                                "name"
+                              ]
+                            }
+                          }
+                        },
+                        "required": [
+                          "name",
+                          "source",
+                          "techniques"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "category",
+                    "description",
+                    "ids",
+                    "tactics"
+                  ]
+                }
+              },
+              "kubernetesInfo": {
+                "type": "object",
+                "properties": {
+                  "cluster": {
+                    "type": "null"
+                  },
+                  "controllerKind": {
+                    "type": "null"
+                  },
+                  "controllerLabels": {
+                    "type": "null"
+                  },
+                  "controllerName": {
+                    "type": "null"
+                  },
+                  "namespace": {
+                    "type": "null"
+                  },
+                  "namespaceLabels": {
+                    "type": "null"
+                  },
+                  "node": {
+                    "type": "null"
+                  },
+                  "pod": {
+                    "type": "null"
+                  },
+                  "podLabels": {
+                    "type": "null"
+                  }
+                },
+                "required": [
+                  "cluster",
+                  "controllerKind",
+                  "controllerLabels",
+                  "controllerName",
+                  "namespace",
+                  "namespaceLabels",
+                  "node",
+                  "pod",
+                  "podLabels"
+                ]
+              },
+              "mitigationStatus": {
+                "type": "array"
+              },
+              "threatInfo": {
+                "type": "object",
+                "properties": {
+                  "analystVerdict": {
+                    "type": "string"
+                  },
+                  "analystVerdictDescription": {
+                    "type": "string"
+                  },
+                  "automaticallyResolved": {
+                    "type": "boolean"
+                  },
+                  "browserType": {
+                    "type": "null"
+                  },
+                  "certificateId": {
+                    "type": "null"
+                  },
+                  "classification": {
+                    "type": "string"
+                  },
+                  "classificationSource": {
+                    "type": "string"
+                  },
+                  "cloudFilesHashVerdict": {
+                    "type": "string"
+                  },
+                  "collectionId": {
+                    "type": "string"
+                  },
+                  "confidenceLevel": {
+                    "type": "string"
+                  },
+                  "createdAt": {
+                    "type": "string"
+                  },
+                  "detectionEngines": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "key": {
+                          "type": "string"
+                        },
+                        "title": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "key",
+                        "title"
+                      ]
+                    }
+                  },
+                  "detectionType": {
+                    "type": "string"
+                  },
+                  "engines": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "externalTicketExists": {
+                    "type": "boolean"
+                  },
+                  "externalTicketId": {
+                    "type": "null"
+                  },
+                  "failedActions": {
+                    "type": "boolean"
+                  },
+                  "fileExtension": {
+                    "type": "null"
+                  },
+                  "fileExtensionType": {
+                    "type": "null"
+                  },
+                  "filePath": {
+                    "type": "string"
+                  },
+                  "fileSize": {
+                    "type": "integer"
+                  },
+                  "fileVerificationType": {
+                    "type": "null"
+                  },
+                  "identifiedAt": {
+                    "type": "string"
+                  },
+                  "incidentStatus": {
+                    "type": "string"
+                  },
+                  "incidentStatusDescription": {
+                    "type": "string"
+                  },
+                  "initiatedBy": {
+                    "type": "string"
+                  },
+                  "initiatedByDescription": {
+                    "type": "string"
+                  },
+                  "initiatingUserId": {
+                    "type": "null"
+                  },
+                  "initiatingUsername": {
+                    "type": "null"
+                  },
+                  "isFileless": {
+                    "type": "boolean"
+                  },
+                  "isValidCertificate": {
+                    "type": "null"
+                  },
+                  "maliciousProcessArguments": {
+                    "type": "string"
+                  },
+                  "md5": {
+                    "type": "null"
+                  },
+                  "mitigatedPreemptively": {
+                    "type": "boolean"
+                  },
+                  "mitigationStatus": {
+                    "type": "string"
+                  },
+                  "mitigationStatusDescription": {
+                    "type": "string"
+                  },
+                  "originatorProcess": {
+                    "type": "string"
+                  },
+                  "pendingActions": {
+                    "type": "boolean"
+                  },
+                  "processUser": {
+                    "type": "string"
+                  },
+                  "publisherName": {
+                    "type": "null"
+                  },
+                  "reachedEventsLimit": {
+                    "type": "null"
+                  },
+                  "rebootRequired": {
+                    "type": "boolean"
+                  },
+                  "sha1": {
+                    "type": "string"
+                  },
+                  "sha256": {
+                    "type": "null"
+                  },
+                  "storyline": {
+                    "type": "string"
+                  },
+                  "threatId": {
+                    "type": "string"
+                  },
+                  "threatName": {
+                    "type": "string"
+                  },
+                  "updatedAt": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "analystVerdict",
+                  "analystVerdictDescription",
+                  "automaticallyResolved",
+                  "browserType",
+                  "certificateId",
+                  "classification",
+                  "classificationSource",
+                  "cloudFilesHashVerdict",
+                  "collectionId",
+                  "confidenceLevel",
+                  "createdAt",
+                  "detectionEngines",
+                  "detectionType",
+                  "engines",
+                  "externalTicketExists",
+                  "externalTicketId",
+                  "failedActions",
+                  "fileExtension",
+                  "fileExtensionType",
+                  "filePath",
+                  "fileSize",
+                  "fileVerificationType",
+                  "identifiedAt",
+                  "incidentStatus",
+                  "incidentStatusDescription",
+                  "initiatedBy",
+                  "initiatedByDescription",
+                  "initiatingUserId",
+                  "initiatingUsername",
+                  "isFileless",
+                  "isValidCertificate",
+                  "maliciousProcessArguments",
+                  "md5",
+                  "mitigatedPreemptively",
+                  "mitigationStatus",
+                  "mitigationStatusDescription",
+                  "originatorProcess",
+                  "pendingActions",
+                  "processUser",
+                  "publisherName",
+                  "reachedEventsLimit",
+                  "rebootRequired",
+                  "sha1",
+                  "sha256",
+                  "storyline",
+                  "threatId",
+                  "threatName",
+                  "updatedAt"
+                ]
+              },
+              "whiteningOptions": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "agentDetectionInfo",
+              "agentRealtimeInfo",
+              "containerInfo",
+              "id",
+              "indicators",
+              "kubernetesInfo",
+              "mitigationStatus",
+              "threatInfo",
+              "whiteningOptions"
+            ]
+          }
+        },
+        "pagination": {
+          "type": "object",
+          "properties": {
+            "nextCursor": {
+              "type": "null"
+            },
+            "totalItems": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "nextCursor",
+            "totalItems"
+          ]
+        }
+      },
+      "required": [
+        "data",
+        "pagination"
+      ]
+    },
+    "raw": {
+      "type": "null"
+    },
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "sentinelone_threat_id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "sentinelone_threat_id"
+      ]
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "execution_time_ms",
+        "host",
+        "package",
+        "package_version",
+        "timestamp",
+        "version"
+      ]
+    }
+  },
+  "required": [
+    "content",
+    "inputs",
+    "metrics",
+    "raw",
+    "reason",
+    "success",
+    "version"
+  ]
 }

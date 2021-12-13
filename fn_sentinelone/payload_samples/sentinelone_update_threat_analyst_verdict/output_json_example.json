@@ -1,23 +1,23 @@
 {
-    "version":2.0,
-    "success":true,
-    "reason":"None",
-    "content":{
-       "data":{
-          "affected":1
-       }
-    },
-    "raw":"None",
-    "inputs":{
-       "sentinelone_threat_id":"121212121212121212",
-       "sentinelone_threat_analyst_verdict":"suspicious"
-    },
-    "metrics":{
-       "version":"1.0",
-       "package":"fn-sentinelone",
-       "package_version":"1.0.10989",
-       "host":"7f1c82b6-e3e5-4a6c-a2b9-71a7b8e75f2c-ff7b4bc4c-qwert",
-       "execution_time_ms":520,
-       "timestamp":"2021-12-13 13:45:34"
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "data": {
+      "affected": 1
     }
-} 
+  },
+  "raw": null,
+  "inputs": {
+    "sentinelone_threat_id": "13089053556305131313",
+    "sentinelone_threat_analyst_verdict": "true_positive"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-sentinelone",
+    "package_version": "1.0.0",
+    "host": "myHost",
+    "execution_time_ms": 6673,
+    "timestamp": "2021-12-13 11:25:37"
+  }
+}
