@@ -23,10 +23,13 @@ inputs.incident_id = incident.id
 
 ### Post-Processing Script
 ```python
-if results.success:
-  noteText = u'SentinelOne threat {0} resolved.'.format(results.content['threat_id'])
-elif:
-  noteText = u'ERROR: unable to resolve SentinelOne threat {0}.'.format(results.content['threat_id']) 
+content = results.get("content")
+success = content.get("success", False)
+threat_id = content.get("threat_id", None)
+if success:
+  noteText = u'SentinelOne threat {0} resolved.'.format(threat_id)
+else:
+  noteText = u'ERROR: unable to resolve SentinelOne threat {0}.'.format(threat_id)
 
 incident.addNote(noteText)
 ```

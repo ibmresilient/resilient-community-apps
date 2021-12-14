@@ -64,6 +64,7 @@ class FunctionComponent(AppFunctionComponent):
 
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
 
-        results = {"success": success}
+        results = {"success": success,
+                   "threat_id": threat_id}
         yield FunctionResult(results)
 
