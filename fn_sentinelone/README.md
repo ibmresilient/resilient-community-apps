@@ -32,21 +32,21 @@
   - [Install](#install)
   - [App Configuration](#app-configuration)
   - [Custom Layouts](#custom-layouts)
-- [Function - SentinelOne: Disconnect From Network](#function---sentinelone-disconnect-from-network)
-- [Function - SentinelOne: Initiate Disk Scan](#function---sentinelone-initiate-disk-scan)
-- [Function - SentinelOne: Restart Agent](#function---sentinelone-restart-agent)
-- [Function - SentinelOne: Resolve Threat in SentinelOne](#function---sentinelone-resolve-threat-in-sentinelone)
-- [Function - SentinelOne: Get Hash Reputation](#function---sentinelone-get-hash-reputation)
-- [Function - SentinelOne: Get Agent Details](#function---sentinelone-get-agent-details)
-- [Function - SentinelOne: Update Notes From SentinelOne](#function---sentinelone-update-notes-from-sentinelone)
-- [Function - SentinelOne: Send SOAR Note to SentinelOne](#function---sentinelone-send-soar-note-to-sentinelone)
-- [Function - SentinelOne: Connect to Network](#function---sentinelone-connect-to-network)
-- [Function - SentinelOne: Shutdown Agent](#function---sentinelone-shutdown-agent)
-- [Function - Sentinelone: Update Threat Status](#function---sentinelone-update-threat-status)
-- [Function - SentinelOne: Update Threat Analyst Verdict](#function---sentinelone-update-threat-analyst-verdict)
 - [Function - SentinelOne: Abort Disk Scan](#function---sentinelone-abort-disk-scan)
-- [Function - SentinelOne: Get Threat Details](#function---sentinelone-get-threat-details)
+- [Function - SentinelOne: Connect to Network](#function---sentinelone-connect-to-network)
+- [Function - SentinelOne: Disconnect From Network](#function---sentinelone-disconnect-from-network)
 - [Function - SentinelOne: Download From Cloud](#function---sentinelone-download-from-cloud)
+- [Function - SentinelOne: Get Agent Details](#function---sentinelone-get-agent-details)
+- [Function - SentinelOne: Get Hash Reputation](#function---sentinelone-get-hash-reputation)
+- [Function - SentinelOne: Get Threat Details](#function---sentinelone-get-threat-details)
+- [Function - SentinelOne: Initiate Disk Scan](#function---sentinelone-initiate-disk-scan)
+- [Function - SentinelOne: Resolve Threat in SentinelOne](#function---sentinelone-resolve-threat-in-sentinelone)
+- [Function - SentinelOne: Restart Agent](#function---sentinelone-restart-agent)
+- [Function - SentinelOne: Send SOAR Note to SentinelOne](#function---sentinelone-send-soar-note-to-sentinelone)
+- [Function - SentinelOne: Shutdown Agent](#function---sentinelone-shutdown-agent)
+- [Function - SentinelOne: Update Notes From SentinelOne](#function---sentinelone-update-notes-from-sentinelone)
+- [Function - SentinelOne: Update Threat Analyst Verdict](#function---sentinelone-update-threat-analyst-verdict)
+- [Function - Sentinelone: Update Threat Status](#function---sentinelone-update-threat-status)
 - [Script - Convert JSON to rich text v1.1](#script---convert-json-to-rich-text-v11)
 - [Data Table - SentinelOne Agent](#data-table---sentinelone-agent)
 - [Custom Fields](#custom-fields)
@@ -54,7 +54,7 @@
 - [Troubleshooting & Support](#troubleshooting--support)
 ---
 
-## Release Notes
+### Release Notes
 <!--
   Specify all changes in this release. Do not remove the release 
   notes of a previous release
@@ -125,7 +125,7 @@ If deploying to a Resilient platform with an App Host, the requirements are:
 If deploying to a Resilient platform with an integration server, the requirements are:
 * Resilient platform >= `40.0.6554`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient-circuits>=37.0.0`.
+* Integration server is running `resilient-circuits>=40.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions: 
   | Name | Permissions |
   | ---- | ----------- |
@@ -160,7 +160,7 @@ The app **does** support a proxy server.
 Both Python 2.7 and Python 3.6 are supported.
 Additional package dependencies may exist for each of these packages:
 * jinja2
-* resilient-circuits>=37.0.0
+* resilient-circuits>=40.0.0
 * resilient-lib
 * simplejson
 
@@ -189,8 +189,6 @@ List any steps that are needed to configure the endpoint to use this app.
 List any user permissions that are needed to use this endpoint. For example, list the API key permissions.
 -->
 * Permission A <!-- ::CHANGE_ME:: -->
-
-
 
 ---
 
@@ -232,6 +230,179 @@ The following table provides the settings you need to configure the app. These s
 
 ---
 
+## Function - SentinelOne: Abort Disk Scan
+Initiate a Full Disk Scan on an agent managed by SentinelOne.
+
+ ![screenshot: fn-sentinelone-abort-disk-scan ](./doc/screenshots/fn-sentinelone-abort-disk-scan.png) <!-- ::CHANGE_ME:: -->
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `sentinelone_agent_id` | `text` | Yes | `-` | - |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** this example may be in JSON format, yet on the SOAR Platform `results` will be a Python Dictionary
+
+```python
+results = {
+  "content": {
+    "data": {
+      "affected": 1
+    }
+  },
+  "inputs": {
+    "sentinelone_agent_id": "1212121212121212121"
+  },
+  "metrics": {
+    "execution_time_ms": 4108,
+    "host": "myHost",
+    "package": "fn-sentinelone",
+    "package_version": "1.0.0",
+    "timestamp": "2021-12-13 11:22:36",
+    "version": "1.0"
+  },
+  "raw": null,
+  "reason": null,
+  "success": true,
+  "version": 2.0
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.sentinelone_agent_id = row.sentinelone_dt_agent_id
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+so_inputs = results.get("inputs")
+agent_id = so_inputs.get("sentinelone_agent_id")
+note = u"<b>SentinelOne: Abort Full Disk Scan </b><br>  SentinelOne Agent Id: {0}".format(agent_id)
+content = results.get("content")
+if content:
+  data = content.get("data")
+  if data:
+    if int(data.get("affected")) <= 0:
+      note = u"{0} Full Disk Scan was NOT aborted.".format(note)
+    else:
+      note = u"{0} Full Disk Scan aborted.".format(note)
+  else:
+    note = u"{0} Full Disk Scan was NOT aborted. No 'data' returned from function".format(note)
+else:
+    note = u"{0} Full Disk Scan was NOT aborted. No content returned from function".format(note)  
+
+incident.addNote(helper.createRichText(note))
+```
+
+</p>
+</details>
+
+---
+## Function - SentinelOne: Connect to Network
+Connect a an endpoint managed by Sentinel to the network.
+
+ ![screenshot: fn-sentinelone-connect-to-network ](./doc/screenshots/fn-sentinelone-connect-to-network.png) <!-- ::CHANGE_ME:: -->
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `sentinelone_agent_id` | `text` | Yes | `-` | - |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** this example may be in JSON format, yet on the SOAR Platform `results` will be a Python Dictionary
+
+```python
+results = {
+  "content": {
+    "data": {
+      "affected": 1
+    }
+  },
+  "inputs": {
+    "sentinelone_agent_id": "1212121212121212121"
+  },
+  "metrics": {
+    "execution_time_ms": 226,
+    "host": "myHost",
+    "package": "fn-sentinelone",
+    "package_version": "1.0.0",
+    "timestamp": "2021-12-13 11:21:53",
+    "version": "1.0"
+  },
+  "raw": null,
+  "reason": null,
+  "success": true,
+  "version": 2.0
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.sentinelone_agent_id = row.sentinelone_dt_agent_id
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+so_inputs = results.get("inputs")
+agent_id = so_inputs.get("sentinelone_agent_id")
+note = u"<b>SentinelOne: Connect to Network </b><br>  SentinelOne Agent Id: {0}".format(agent_id)
+content = results.get("content")
+if content:
+  data = content.get("data")
+  if data:
+    if int(data.get("affected")) <= 0:
+      note = u"{0} is NOT connected to network".format(note)
+    else:
+      networkStatus = u"""<p style= "color:{color}">{status}</p>""".format(color="green", status="connected")
+      row["sentinelone_dt_network_status"] = helper.createRichText(networkStatus)
+      note = u"{0} is connected to network".format(note)
+  else:
+    note = u"{0} no data returned from function".format(note)
+else:
+    note = u"{0} no content data returned from function".format(note)  
+
+incident.addNote(helper.createRichText(note))
+
+```
+
+</p>
+</details>
+
+---
 ## Function - SentinelOne: Disconnect From Network
 Disconnect an endpoint managed by SentinelOne from the network.
 
@@ -250,29 +421,30 @@ Disconnect an endpoint managed by SentinelOne from the network.
 <details><summary>Outputs:</summary>
 <p>
 
-<!-- ::CHANGE_ME:: -->
+> **NOTE:** this example may be in JSON format, yet on the SOAR Platform `results` will be a Python Dictionary
+
 ```python
 results = {
- "version":2.0,
-   "success":true,
-   "reason":"None",
-   "content":{
-      "data":{
-         "affected":1
-      }
-   },
-   "raw":"None",
-   "inputs":{
-      "sentinelone_agent_id":"1275282318251495460"
-   },
-   "metrics":{
-      "version":"1.0",
-      "package":"fn-sentinelone",
-      "package_version":"1.0.10989",
-      "host":"7f1c82b6-e3e5-4a6c-a2b9-71a7b8e75f2c-855748d88f-sb5qh",
-      "execution_time_ms":492,
-      "timestamp":"2021-12
-    } 
+  "content": {
+    "data": {
+      "affected": 1
+    }
+  },
+  "inputs": {
+    "sentinelone_agent_id": "1275282318251495460"
+  },
+  "metrics": {
+    "execution_time_ms": 242,
+    "host": "myHost",
+    "package": "fn-sentinelone",
+    "package_version": "1.0.0",
+    "timestamp": "2021-12-13 11:21:08",
+    "version": "1.0"
+  },
+  "raw": null,
+  "reason": null,
+  "success": true,
+  "version": 2.0
 }
 ```
 
@@ -318,153 +490,10 @@ incident.addNote(helper.createRichText(note))
 </details>
 
 ---
-## Function - SentinelOne: Initiate Disk Scan
-Initiate a Full Disk scan on an agent managed by SentinelOne.
+## Function - SentinelOne: Download From Cloud
+Download a threat from SentinelOne.
 
- ![screenshot: fn-sentinelone-initiate-disk-scan ](./doc/screenshots/fn-sentinelone-initiate-disk-scan.png) <!-- ::CHANGE_ME:: -->
-
-<details><summary>Inputs:</summary>
-<p>
-
-| Name | Type | Required | Example | Tooltip |
-| ---- | :--: | :------: | ------- | ------- |
-| `sentinelone_agent_id` | `text` | Yes | `-` | - |
-
-</p>
-</details>
-
-<details><summary>Outputs:</summary>
-<p>
-
-<!-- ::CHANGE_ME:: -->
-```python
-results = {
-   "version":2.0,
-   "success":true,
-   "reason":"None",
-   "content":{
-      "data":{
-         "affected":1
-      }
-   },
-   "raw":"None",
-   "inputs":{
-      "sentinelone_agent_id":"1212121212121212121"
-   },
-   "metrics":{
-      "version":"1.0",
-      "package":"fn-sentinelone",
-      "package_version":"1.0.10989",
-      "host":"7f1c82b6-e3e5-4a6c-a2b9-71a7b8e75f2c-855748d88f-asdfg",
-      "execution_time_ms":572,
-      "timestamp":"2021-12-10 21:57:13"
-   }
-}
-
-About
-
-The JSON Formatter was created to help folks with debugging. As JSON data is often output without line breaks to save space, it can be extremely difficult to actually read and make sense of it. This tool hoped to solve the problem by formatting and beautifying the JSON data so that it is easy to read and debug by human beings.
-
-To further expand the debugging capabilities, advanced JSON validation was soon added following the description set out by Douglas Crockford of json.org in RFC 4627. It has since been updated to allow validation of multiple JSON standards, including both current specifications RFC 8259 and ECMA-404.
-
-Most recently, the capability to fix common JSON errors was added. If enabled, it will replace incorrect quotes, add missing quotes, correct n
-```
-
-</p>
-</details>
-
-<details><summary>Example Pre-Process Script:</summary>
-<p>
-
-```python
-inputs.sentinelone_agent_id = row.sentinelone_dt_agent_id
-```
-
-</p>
-</details>
-
-<details><summary>Example Post-Process Script:</summary>
-<p>
-
-```python
-so_inputs = results.get("inputs")
-agent_id = so_inputs.get("sentinelone_agent_id")
-note = u"<b>SentinelOne: Initiate Full Disk Scan </b><br>  SentinelOne Agent Id: {0}".format(agent_id)
-content = results.get("content")
-if content:
-  data = content.get("data")
-  if data:
-    if int(data.get("affected")) <= 0:
-      note = u"{0} Full Disk Scan was NOT initiated.".format(note)
-    else:
-      note = u"{0} Full Disk Scan initiated.".format(note)
-  else:
-    note = u"{0} Full Disk Scan was NOT initiated. No 'data' returned from function".format(note)
-else:
-    note = u"{0} Full Disk Scan was NOT initiated. No content returned from function".format(note)  
-
-incident.addNote(helper.createRichText(note))
-```
-
-</p>
-</details>
-
----
-## Function - SentinelOne: Restart Agent
-Restart a endpoint managed by SentinelOne.
-
- ![screenshot: fn-sentinelone-restart-agent ](./doc/screenshots/fn-sentinelone-restart-agent.png) <!-- ::CHANGE_ME:: -->
-
-<details><summary>Inputs:</summary>
-<p>
-
-| Name | Type | Required | Example | Tooltip |
-| ---- | :--: | :------: | ------- | ------- |
-| `sentinelone_agent_id` | `text` | Yes | `-` | - |
-
-</p>
-</details>
-
-<details><summary>Outputs:</summary>
-<p>
-
-<!-- ::CHANGE_ME:: -->
-```python
-results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
-} 
-```
-
-</p>
-</details>
-
-<details><summary>Example Pre-Process Script:</summary>
-<p>
-
-```python
-inputs.sentinelone_agent_id = incident.properties.sentinelone_agent_id
-```
-
-</p>
-</details>
-
-<details><summary>Example Post-Process Script:</summary>
-<p>
-
-```python
-None
-```
-
-</p>
-</details>
-
----
-## Function - SentinelOne: Resolve Threat in SentinelOne
-Resolve (close) a threat in SentinelOne.
-
- ![screenshot: fn-sentinelone-resolve-threat-in-sentinelone ](./doc/screenshots/fn-sentinelone-resolve-threat-in-sentinelone.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-sentinelone-download-from-cloud ](./doc/screenshots/fn-sentinelone-download-from-cloud.png) <!-- ::CHANGE_ME:: -->
 
 <details><summary>Inputs:</summary>
 <p>
@@ -472,12 +501,15 @@ Resolve (close) a threat in SentinelOne.
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `incident_id` | `number` | No | `-` | - |
+| `sentinelone_threat_id` | `text` | No | `-` | - |
 
 </p>
 </details>
 
 <details><summary>Outputs:</summary>
 <p>
+
+> **NOTE:** this example may be in JSON format, yet on the SOAR Platform `results` will be a Python Dictionary
 
 <!-- ::CHANGE_ME:: -->
 ```python
@@ -496,6 +528,7 @@ results = {
 
 ```python
 inputs.incident_id = incident.id
+inputs.sentinelone_threat_id = incident.properties.sentinelone_threat_id
 ```
 
 </p>
@@ -505,95 +538,14 @@ inputs.incident_id = incident.id
 <p>
 
 ```python
-if results.success:
-  noteText = u'SentinelOne threat {0} resolved.'.format(results.content['threat_id'])
-elif:
-  noteText = u'ERROR: unable to resolve SentinelOne threat {0}.'.format(results.content['threat_id']) 
-
-incident.addNote(noteText)
-```
-
-</p>
-</details>
-
----
-## Function - SentinelOne: Get Hash Reputation
-Get the SentinelOne reputation of a hash.
-
- ![screenshot: fn-sentinelone-get-hash-reputation ](./doc/screenshots/fn-sentinelone-get-hash-reputation.png) <!-- ::CHANGE_ME:: -->
-
-<details><summary>Inputs:</summary>
-<p>
-
-| Name | Type | Required | Example | Tooltip |
-| ---- | :--: | :------: | ------- | ------- |
-| `sentinelone_hash` | `text` | No | `-` | - |
-
-</p>
-</details>
-
-<details><summary>Outputs:</summary>
-<p>
-
-```python
-results = {
-    "version":2.0,
-    "success":true,
-    "reason":"None",
-    "content":{
-       "data":{
-          "rank":"0"
-       }
-    },
-    "raw":"None",
-    "inputs":{
-       "sentinelone_hash":"1641df58c1027a00f670d41491a2eecff931604c"
-    },
-    "metrics":{
-       "version":"1.0",
-       "package":"fn-sentinelone",
-       "package_version":"1.0.10989",
-       "host":"7f1c82b6-e3e5-4a6c-a2b9-71a7b8e75f2c-855748d88f-qwert",
-       "execution_time_ms":536,
-       "timestamp":"2021-12-10 21:58:38"
-    }
-}
-
-```
-
-</p>
-</details>
-
-<details><summary>Example Pre-Process Script:</summary>
-<p>
-
-```python
-inputs.sentinelone_hash = artifact.value
-```
-
-</p>
-</details>
-
-<details><summary>Example Post-Process Script:</summary>
-<p>
-
-```python
-
-note = u"<b>SentinelOne: Get Hash Reputation: </b><br>"
+success = results.get("success")
 content = results.get("content")
-inputs = results.get("inputs")
-hash_value = inputs.get("sentinelone_hash")
-if content:
-  data = content.get("data")
-  if data:
-    rank = data.get("rank")
-    note = u"{0} Hash <b>{1}</b> has rank: <b>{2}</b>".format(note, hash_value, rank)
-  else:
-    note = u"{0} No data returned from function.".format(note)
+if success and content:
+  attachment_name = content.get("attachment_name")
+  note_text = "<b>SentinelOne: Download from Cloud</b><br>  Incident attachment added: <b>{0}</b>".format(attachment_name)
 else:
-  note = u"{0} No content data returned from function.".format(note)
-  
-incident.addNote(helper.createRichText(note))
+  note_text = "<b>SentinelOne: Download from Cloud</b><br>  ERROR adding attachment"
+incident.addNote(helper.createRichText(note_text))
 ```
 
 </p>
@@ -618,148 +570,137 @@ Get details of a SentinelOne managed agent.
 <details><summary>Outputs:</summary>
 <p>
 
-<!-- ::CHANGE_ME:: -->
+> **NOTE:** this example may be in JSON format, yet on the SOAR Platform `results` will be a Python Dictionary
+
 ```python
 results = {
-    "version":2.0,
-    "success":true,
-    "reason":"None",
-    "content":{
-       "data":[
+  "content": {
+    "data": [
+      {
+        "accountId": "434343434343434343",
+        "accountName": "SentinelOne",
+        "activeDirectory": {
+          "computerDistinguishedName": null,
+          "computerMemberOf": [],
+          "lastUserDistinguishedName": null,
+          "lastUserMemberOf": []
+        },
+        "activeThreats": 0,
+        "agentVersion": "21.10.1.6",
+        "allowRemoteShell": false,
+        "appsVulnerabilityStatus": "not_applicable",
+        "cloudProviders": {},
+        "computerName": "computerName",
+        "consoleMigrationStatus": "N/A",
+        "coreCount": 2,
+        "cpuCount": 2,
+        "cpuId": "AMD EPYC Processor (with IBPB)",
+        "createdAt": "2021-10-26T13:18:19.135249Z",
+        "detectionState": null,
+        "domain": "unknown",
+        "encryptedApplications": false,
+        "externalId": "",
+        "externalIp": "12.4.8.3",
+        "firewallEnabled": true,
+        "firstFullModeTime": null,
+        "groupId": "607447413805059643",
+        "groupIp": "12.4.8.x",
+        "groupName": "Default Group",
+        "id": "1275282318251495460",
+        "inRemoteShellSession": false,
+        "infected": false,
+        "installerType": ".rpm",
+        "isActive": true,
+        "isDecommissioned": false,
+        "isPendingUninstall": false,
+        "isUninstalled": false,
+        "isUpToDate": true,
+        "lastActiveDate": "2021-12-13T16:23:27.067226Z",
+        "lastIpToMgmt": "10.21.10.88",
+        "lastLoggedInUserName": "",
+        "licenseKey": "",
+        "locationEnabled": false,
+        "locationType": "not_supported",
+        "locations": null,
+        "machineType": "server",
+        "mitigationMode": "protect",
+        "mitigationModeSuspicious": "detect",
+        "modelName": "QEMU Standard PC (i440FX + PIIX, 1996)",
+        "networkInterfaces": [
           {
-             "accountId":"4333333333333333333",
-             "accountName":"SentinelOne",
-             "activeDirectory":{
-                "computerDistinguishedName":"None",
-                "computerMemberOf":[
-                   
-                ],
-                "lastUserDistinguishedName":"None",
-                "lastUserMemberOf":[
-                   
-                ]
-             },
-             "activeThreats":0,
-             "agentVersion":"21.10.1.6",
-             "allowRemoteShell":false,
-             "appsVulnerabilityStatus":"not_applicable",
-             "cloudProviders":{
-                
-             },
-             "computerName":"myhost.com",
-             "consoleMigrationStatus":"N/A",
-             "coreCount":2,
-             "cpuCount":2,
-             "cpuId":"AMD EPYC Processor (with IBPB)",
-             "createdAt":"2021-10-26T13:18:19.135249Z",
-             "detectionState":"None",
-             "domain":"unknown",
-             "encryptedApplications":false,
-             "externalId":"",
-             "externalIp":"1.2.3.4",
-             "firewallEnabled":true,
-             "firstFullModeTime":"None",
-             "groupId":"607447413805059643",
-             "groupIp":"1.2.3.x",
-             "groupName":"Default Group",
-             "id":"1212121212121212120",
-             "inRemoteShellSession":false,
-             "infected":false,
-             "installerType":".rpm",
-             "isActive":true,
-             "isDecommissioned":false,
-             "isPendingUninstall":false,
-             "isUninstalled":false,
-             "isUpToDate":true,
-             "lastActiveDate":"2021-12-10T21:33:26.639846Z",
-             "lastIpToMgmt":"10.21.10.88",
-             "lastLoggedInUserName":"",
-             "licenseKey":"",
-             "locationEnabled":false,
-             "locationType":"not_supported",
-             "locations":"None",
-             "machineType":"server",
-             "mitigationMode":"protect",
-             "mitigationModeSuspicious":"detect",
-             "modelName":"QEMU Standard PC (i440FX + PIIX, 1996)",
-             "networkInterfaces":[
-                {
-                   "gatewayIp":"None",
-                   "gatewayMacAddress":"None",
-                   "id":"1275282318259884069",
-                   "inet":[
-                      "10.21.10.88"
-                   ],
-                   "inet6":[
-                      
-                   ],
-                   "name":"eth0",
-                   "physical":"00:00:0A:15:0A:58"
-                },
-                {
-                   "gatewayIp":"9.46.92.1",
-                   "gatewayMacAddress":"00:00:0c:9f:f0:01",
-                   "id":"1275282318268272678",
-                   "inet":[
-                      "9.46.92.211"
-                   ],
-                   "inet6":[
-                      
-                   ],
-                   "name":"eth1",
-                   "physical":"00:00:09:2E:5C:D3"
-                }
-             ],
-             "networkQuarantineEnabled":false,
-             "networkStatus":"connected",
-             "operationalState":"na",
-             "operationalStateExpiration":"None",
-             "osArch":"64 bit",
-             "osName":"Linux",
-             "osRevision":"CentOS release 7.9.2009 (Core) 3.10.0-1160.45.1.el7.x86_64",
-             "osStartTime":"2021-11-17T21:10:31Z",
-             "osType":"linux",
-             "osUsername":"root",
-             "rangerStatus":"NotApplicable",
-             "rangerVersion":"None",
-             "registeredAt":"2021-10-26T13:18:19.132188Z",
-             "remoteProfilingState":"disabled",
-             "remoteProfilingStateExpiration":"None",
-             "scanAbortedAt":"2021-11-20T17:51:00.793271Z",
-             "scanFinishedAt":"2021-12-10T02:33:00.768224Z",
-             "scanStartedAt":"2021-12-10T02:25:56.663183Z",
-             "scanStatus":"finished",
-             "siteId":"18181818181818181818",
-             "siteName":"MySite",
-             "storageName":"None",
-             "storageType":"None",
-             "threatRebootRequired":false,
-             "totalMemory":3789,
-             "updatedAt":"2021-12-10T21:33:26.640067Z",
-             "userActionsNeeded":[
-                
-             ],
-             "uuid":"8329e587-bbe9-b906-a6a5-646e2686eba9"
+            "gatewayIp": null,
+            "gatewayMacAddress": null,
+            "id": "1275282318259884069",
+            "inet": [
+              "10.21.10.88"
+            ],
+            "inet6": [],
+            "name": "eth0",
+            "physical": "00:00:0A:15:0A:58"
+          },
+          {
+            "gatewayIp": "9.46.92.1",
+            "gatewayMacAddress": "00:00:0c:9f:f0:01",
+            "id": "1275282318268272678",
+            "inet": [
+              "9.46.92.211"
+            ],
+            "inet6": [],
+            "name": "eth1",
+            "physical": "00:00:09:2E:5C:D3"
           }
-       ],
-       "pagination":{
-          "nextCursor":"None",
-          "totalItems":1
-       }
-    },
-    "raw":"None",
-    "inputs":{
-       "sentinelone_agent_id":"1275282318251495460"
-    },
-    "metrics":{
-       "version":"1.0",
-       "package":"fn-sentinelone",
-       "package_version":"1.0.10989",
-       "host":"7f1c82b6-e3e5-4a6c-a2b9-71a7b8e75f2c-855748d88f-sb5qh",
-       "execution_time_ms":504,
-       "timestamp":"2021-12-10 21:33:36"
+        ],
+        "networkQuarantineEnabled": false,
+        "networkStatus": "connected",
+        "operationalState": "na",
+        "operationalStateExpiration": null,
+        "osArch": "64 bit",
+        "osName": "Linux",
+        "osRevision": "CentOS release 7.9.2009 (Core) 3.10.0-1160.49.1.el7.x86_64",
+        "osStartTime": "2021-12-11T22:40:32Z",
+        "osType": "linux",
+        "osUsername": "root",
+        "rangerStatus": "NotApplicable",
+        "rangerVersion": null,
+        "registeredAt": "2021-10-26T13:18:19.132188Z",
+        "remoteProfilingState": "disabled",
+        "remoteProfilingStateExpiration": null,
+        "scanAbortedAt": "2021-12-10T21:57:56.711226Z",
+        "scanFinishedAt": "2021-12-10T02:33:00.768224Z",
+        "scanStartedAt": "2021-12-13T16:22:40.612822Z",
+        "scanStatus": "started",
+        "siteId": "607447413779893818",
+        "siteName": "mySite",
+        "storageName": null,
+        "storageType": null,
+        "threatRebootRequired": false,
+        "totalMemory": 3789,
+        "updatedAt": "2021-12-13T16:22:40.616308Z",
+        "userActionsNeeded": [],
+        "uuid": "8329e587-bbe9-b906-a6a5-646e2686eba9"
+      }
+    ],
+    "pagination": {
+      "nextCursor": null,
+      "totalItems": 1
     }
- }
+  },
+  "inputs": {
+    "sentinelone_agent_id": "12121212121212121"
+  },
+  "metrics": {
+    "execution_time_ms": 277,
+    "host": "myHost",
+    "package": "fn-sentinelone",
+    "package_version": "1.0.0",
+    "timestamp": "2021-12-13 11:23:55",
+    "version": "1.0"
+  },
+  "raw": null,
+  "reason": null,
+  "success": true,
+  "version": 2.0
+}
 ```
 
 </p>
@@ -823,17 +764,100 @@ incident.addNote(helper.createRichText(note))
 </details>
 
 ---
-## Function - SentinelOne: Update Notes From SentinelOne
-Query SentinelOne threat and add any new threat notes to the SOAR incident.
+## Function - SentinelOne: Get Hash Reputation
+Get the SentinelOne reputation of a hash.
 
- ![screenshot: fn-sentinelone-update-notes-from-sentinelone ](./doc/screenshots/fn-sentinelone-update-notes-from-sentinelone.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-sentinelone-get-hash-reputation ](./doc/screenshots/fn-sentinelone-get-hash-reputation.png) <!-- ::CHANGE_ME:: -->
 
 <details><summary>Inputs:</summary>
 <p>
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `incident_id` | `number` | No | `-` | - |
+| `sentinelone_hash` | `text` | No | `-` | - |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** this example may be in JSON format, yet on the SOAR Platform `results` will be a Python Dictionary
+
+```python
+results = {
+  "content": {
+    "data": {
+      "rank": "0"
+    }
+  },
+  "inputs": {
+    "sentinelone_hash": "1641df58c1027a00f670d41491a2eecff931604c"
+  },
+  "metrics": {
+    "execution_time_ms": 202,
+    "host": "myHost",
+    "package": "fn-sentinelone",
+    "package_version": "1.0.0",
+    "timestamp": "2021-12-13 11:27:14",
+    "version": "1.0"
+  },
+  "raw": null,
+  "reason": null,
+  "success": true,
+  "version": 2.0
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.sentinelone_hash = artifact.value
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+
+note = u"<b>SentinelOne: Get Hash Reputation: </b><br>"
+content = results.get("content")
+inputs = results.get("inputs")
+hash_value = inputs.get("sentinelone_hash")
+if content:
+  data = content.get("data")
+  if data:
+    rank = data.get("rank")
+    note = u"{0} Hash <b>{1}</b> has rank: <b>{2}</b>".format(note, hash_value, rank)
+  else:
+    note = u"{0} No data returned from function.".format(note)
+else:
+  note = u"{0} No content data returned from function.".format(note)
+  
+incident.addNote(helper.createRichText(note))
+```
+
+</p>
+</details>
+
+---
+## Function - SentinelOne: Get Threat Details
+Get the details of a threat detected by SentinelOne.
+
+ ![screenshot: fn-sentinelone-get-threat-details ](./doc/screenshots/fn-sentinelone-get-threat-details.png) <!-- ::CHANGE_ME:: -->
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
 | `sentinelone_threat_id` | `text` | No | `-` | - |
 
 </p>
@@ -841,6 +865,376 @@ Query SentinelOne threat and add any new threat notes to the SOAR incident.
 
 <details><summary>Outputs:</summary>
 <p>
+
+> **NOTE:** this example may be in JSON format, yet on the SOAR Platform `results` will be a Python Dictionary
+
+```python
+results = {
+  "content": {
+    "data": [
+      {
+        "agentDetectionInfo": {
+          "accountId": "433241117337583618",
+          "accountName": "SentinelOne",
+          "agentDetectionState": null,
+          "agentDomain": "unknown",
+          "agentIpV4": "10.21.10.88,9.46.92.211",
+          "agentIpV6": "",
+          "agentLastLoggedInUserName": "",
+          "agentMitigationMode": "detect",
+          "agentOsName": "Linux",
+          "agentOsRevision": "CentOS release 7.9.2009 (Core) 3.10.0-1160.49.1.el7.x86_64",
+          "agentRegisteredAt": "2021-10-26T13:18:19.132188Z",
+          "agentUuid": "8329e587-bbe9-b906-a6a5-646e2686eba9",
+          "agentVersion": "21.10.1.6",
+          "externalIp": "129.41.87.3",
+          "groupId": "607447413805059643",
+          "groupName": "Default Group",
+          "siteId": "606060606060606060",
+          "siteName": "mySite"
+        },
+        "agentRealtimeInfo": {
+          "accountId": "43434343434343434343434343",
+          "accountName": "SentinelOne",
+          "activeThreats": 1,
+          "agentComputerName": "SplunkHF1.fyre.ibm.com",
+          "agentDecommissionedAt": null,
+          "agentDomain": "unknown",
+          "agentId": "1275282318251495460",
+          "agentInfected": true,
+          "agentIsActive": true,
+          "agentIsDecommissioned": false,
+          "agentMachineType": "server",
+          "agentMitigationMode": "detect",
+          "agentNetworkStatus": "connected",
+          "agentOsName": "Linux",
+          "agentOsRevision": "CentOS release 7.9.2009 (Core) 3.10.0-1160.49.1.el7.x86_64",
+          "agentOsType": "linux",
+          "agentUuid": "8329e587-bbe9-b906-a6a5-646e2686eba9",
+          "agentVersion": "21.10.1.6",
+          "groupId": "6060606060606060606",
+          "groupName": "Default Group",
+          "networkInterfaces": [
+            {
+              "id": "1275282318268272678",
+              "inet": [
+                "9.46.92.211"
+              ],
+              "inet6": [],
+              "name": "eth1",
+              "physical": "00:00:09:2E:5C:D3"
+            },
+            {
+              "id": "1275282318259884069",
+              "inet": [
+                "10.21.10.88"
+              ],
+              "inet6": [],
+              "name": "eth0",
+              "physical": "00:00:0A:15:0A:58"
+            }
+          ],
+          "operationalState": "na",
+          "rebootRequired": false,
+          "scanAbortedAt": "2021-12-10T21:57:56.711226Z",
+          "scanFinishedAt": "2021-12-10T02:33:00.768224Z",
+          "scanStartedAt": "2021-12-13T16:22:40.612822Z",
+          "scanStatus": "started",
+          "siteId": "606060606060606060",
+          "siteName": "IBM",
+          "storageName": null,
+          "storageType": null,
+          "userActionsNeeded": []
+        },
+        "containerInfo": {
+          "id": null,
+          "image": null,
+          "labels": null,
+          "name": null
+        },
+        "id": "1308905355630511064",
+        "indicators": [
+          {
+            "category": "Persistence",
+            "description": "Unsigned kernel module was loaded.",
+            "ids": [
+              384
+            ],
+            "tactics": [
+              {
+                "name": "Persistence",
+                "source": "MITRE",
+                "techniques": [
+                  {
+                    "link": "https://attack.mitre.org/techniques/T1547/006/",
+                    "name": "T1547.006"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "category": "Persistence",
+            "description": "New kernel module was added.",
+            "ids": [
+              399
+            ],
+            "tactics": [
+              {
+                "name": "Persistence",
+                "source": "MITRE",
+                "techniques": [
+                  {
+                    "link": "https://attack.mitre.org/techniques/T1547/006/",
+                    "name": "T1547.006"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "kubernetesInfo": {
+          "cluster": null,
+          "controllerKind": null,
+          "controllerLabels": null,
+          "controllerName": null,
+          "namespace": null,
+          "namespaceLabels": null,
+          "node": null,
+          "pod": null,
+          "podLabels": null
+        },
+        "mitigationStatus": [],
+        "threatInfo": {
+          "analystVerdict": "true_positive",
+          "analystVerdictDescription": "True positive",
+          "automaticallyResolved": false,
+          "browserType": null,
+          "certificateId": null,
+          "classification": "Malware",
+          "classificationSource": "Static",
+          "cloudFilesHashVerdict": "provider_unknown",
+          "collectionId": "1140024784343285701",
+          "confidenceLevel": "suspicious",
+          "createdAt": "2021-12-11T22:41:17.533077Z",
+          "detectionEngines": [
+            {
+              "key": "executables",
+              "title": "Behavioral AI"
+            }
+          ],
+          "detectionType": "dynamic",
+          "engines": [
+            "DBT - Executables"
+          ],
+          "externalTicketExists": false,
+          "externalTicketId": null,
+          "failedActions": false,
+          "fileExtension": null,
+          "fileExtensionType": null,
+          "filePath": "/opt/CrowdStrike/falcon-sensor12803",
+          "fileSize": 1617904,
+          "fileVerificationType": null,
+          "identifiedAt": "2021-12-11T22:41:17.461397Z",
+          "incidentStatus": "in_progress",
+          "incidentStatusDescription": "In progress",
+          "initiatedBy": "agent_policy",
+          "initiatedByDescription": "Agent Policy",
+          "initiatingUserId": null,
+          "initiatingUsername": null,
+          "isFileless": false,
+          "isValidCertificate": null,
+          "maliciousProcessArguments": " falcon-sensor",
+          "md5": null,
+          "mitigatedPreemptively": false,
+          "mitigationStatus": "not_mitigated",
+          "mitigationStatusDescription": "Not mitigated",
+          "originatorProcess": "systemd",
+          "pendingActions": false,
+          "processUser": "root",
+          "publisherName": null,
+          "reachedEventsLimit": null,
+          "rebootRequired": false,
+          "sha1": "1641df58c1027a00f670d41491a2eecff931604c",
+          "sha256": null,
+          "storyline": "2588b11a-e3cd-1677-7746-3f85cd99c850",
+          "threatId": "1308905355630511064",
+          "threatName": "falcon-sensor12803",
+          "updatedAt": "2021-12-13T16:25:55.851553Z"
+        },
+        "whiteningOptions": [
+          "path",
+          "hash"
+        ]
+      }
+    ],
+    "pagination": {
+      "nextCursor": null,
+      "totalItems": 1
+    }
+  },
+  "inputs": {
+    "sentinelone_threat_id": "1308905355630511064"
+  },
+  "metrics": {
+    "execution_time_ms": 260,
+    "host": "myHost",
+    "package": "fn-sentinelone",
+    "package_version": "1.0.0",
+    "timestamp": "2021-12-13 11:26:02",
+    "version": "1.0"
+  },
+  "raw": null,
+  "reason": null,
+  "success": true,
+  "version": 2.0
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.sentinelone_threat_id = incident.properties.sentinelone_threat_id
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+# Put the results json into a workflow property so we can call the 
+# convert_json_to_rich_text script to print readable formatted json in an incident note.
+inputs = results.get("inputs")
+threat_id = inputs.get("sentinelone_threat_id")
+content = results.get("content")
+data = content.get("data")
+
+header = u"SentinelOne Threat Id: {0} Details:".format(threat_id)
+
+json_note = {
+              "version": "1.1",
+              "header": header, 
+              "json": data,
+              "sort": False
+            }
+
+workflow.addProperty('convert_json_to_rich_text', json_note)
+```
+
+</p>
+</details>
+
+---
+## Function - SentinelOne: Initiate Disk Scan
+Initiate a Full Disk scan on an agent managed by SentinelOne.
+
+ ![screenshot: fn-sentinelone-initiate-disk-scan ](./doc/screenshots/fn-sentinelone-initiate-disk-scan.png) <!-- ::CHANGE_ME:: -->
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `sentinelone_agent_id` | `text` | Yes | `-` | - |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** this example may be in JSON format, yet on the SOAR Platform `results` will be a Python Dictionary
+
+```python
+results = {
+  "content": {
+    "data": {
+      "affected": 1
+    }
+  },
+  "inputs": {
+    "sentinelone_agent_id": "1275282318251495460"
+  },
+  "metrics": {
+    "execution_time_ms": 5678,
+    "host": "myHost",
+    "package": "fn-sentinelone",
+    "package_version": "1.0.0",
+    "timestamp": "2021-12-13 11:22:20",
+    "version": "1.0"
+  },
+  "raw": null,
+  "reason": null,
+  "success": true,
+  "version": 2.0
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.sentinelone_agent_id = row.sentinelone_dt_agent_id
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+so_inputs = results.get("inputs")
+agent_id = so_inputs.get("sentinelone_agent_id")
+note = u"<b>SentinelOne: Initiate Full Disk Scan </b><br>  SentinelOne Agent Id: {0}".format(agent_id)
+content = results.get("content")
+if content:
+  data = content.get("data")
+  if data:
+    if int(data.get("affected")) <= 0:
+      note = u"{0} Full Disk Scan was NOT initiated.".format(note)
+    else:
+      note = u"{0} Full Disk Scan initiated.".format(note)
+  else:
+    note = u"{0} Full Disk Scan was NOT initiated. No 'data' returned from function".format(note)
+else:
+    note = u"{0} Full Disk Scan was NOT initiated. No content returned from function".format(note)  
+
+incident.addNote(helper.createRichText(note))
+```
+
+</p>
+</details>
+
+---
+## Function - SentinelOne: Resolve Threat in SentinelOne
+Resolve (close) a threat in SentinelOne.
+
+ ![screenshot: fn-sentinelone-resolve-threat-in-sentinelone ](./doc/screenshots/fn-sentinelone-resolve-threat-in-sentinelone.png) <!-- ::CHANGE_ME:: -->
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `incident_id` | `number` | No | `-` | - |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** this example may be in JSON format, yet on the SOAR Platform `results` will be a Python Dictionary
 
 <!-- ::CHANGE_ME:: -->
 ```python
@@ -859,7 +1253,80 @@ results = {
 
 ```python
 inputs.incident_id = incident.id
-inputs.sentinelone_threat_id = incident.properties.sentinelone_threat_id
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+if results.success:
+  noteText = u'SentinelOne threat {0} resolved.'.format(results.content['threat_id'])
+elif:
+  noteText = u'ERROR: unable to resolve SentinelOne threat {0}.'.format(results.content['threat_id']) 
+
+incident.addNote(noteText)
+```
+
+</p>
+</details>
+
+---
+## Function - SentinelOne: Restart Agent
+Restart a endpoint managed by SentinelOne.
+
+ ![screenshot: fn-sentinelone-restart-agent ](./doc/screenshots/fn-sentinelone-restart-agent.png) <!-- ::CHANGE_ME:: -->
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `sentinelone_agent_id` | `text` | Yes | `-` | - |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** this example may be in JSON format, yet on the SOAR Platform `results` will be a Python Dictionary
+
+```python
+results = {
+  "content": {
+    "data": {
+      "affected": 0
+    }
+  },
+  "inputs": {
+    "sentinelone_agent_id": "121212121212121212"
+  },
+  "metrics": {
+    "execution_time_ms": 3624,
+    "host": "myHost",
+    "package": "fn-sentinelone",
+    "package_version": "1.0.0",
+    "timestamp": "2021-12-13 11:23:30",
+    "version": "1.0"
+  },
+  "raw": null,
+  "reason": null,
+  "success": true,
+  "version": 2.0
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.sentinelone_agent_id = incident.properties.sentinelone_agent_id
 ```
 
 </p>
@@ -895,13 +1362,31 @@ Send a note created in SOAR to corresponding SentinelOne threat.
 <details><summary>Outputs:</summary>
 <p>
 
-<!-- ::CHANGE_ME:: -->
+> **NOTE:** this example may be in JSON format, yet on the SOAR Platform `results` will be a Python Dictionary
+
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
-} 
+  "content": {
+    "reason:": null,
+    "success": true
+  },
+  "inputs": {
+    "sentinelone_note_text": "\u003cb\u003eSentinelOne: Get Hash Reputation: \u003c/b\u003e\u003cbr /\u003e Hash \u003cb\u003e1641df58c1027a00f670d41491a2eecff931604c\u003c/b\u003e has rank: \u003cb\u003e0\u003c/b\u003e",
+    "sentinelone_threat_id": "1308905355630511064"
+  },
+  "metrics": {
+    "execution_time_ms": 5590,
+    "host": "myHost",
+    "package": "fn-sentinelone",
+    "package_version": "1.0.0",
+    "timestamp": "2021-12-13 11:28:04",
+    "version": "1.0"
+  },
+  "raw": null,
+  "reason": null,
+  "success": true,
+  "version": 2.0
+}
 ```
 
 </p>
@@ -936,92 +1421,6 @@ if results.success:
 </details>
 
 ---
-## Function - SentinelOne: Connect to Network
-Connect a an endpoint managed by Sentinel to the network.
-
- ![screenshot: fn-sentinelone-connect-to-network ](./doc/screenshots/fn-sentinelone-connect-to-network.png) <!-- ::CHANGE_ME:: -->
-
-<details><summary>Inputs:</summary>
-<p>
-
-| Name | Type | Required | Example | Tooltip |
-| ---- | :--: | :------: | ------- | ------- |
-| `sentinelone_agent_id` | `text` | Yes | `-` | - |
-
-</p>
-</details>
-
-<details><summary>Outputs:</summary>
-<p>
-
-```python
-results ={
-    "version":2.0,
-    "success":true,
-    "reason":"None",
-    "content":{
-       "data":{
-          "affected":1
-       }
-    },
-    "raw":"None",
-    "inputs":{
-       "sentinelone_agent_id":"1275282318251495460"
-    },
-    "metrics":{
-       "version":"1.0",
-       "package":"fn-sentinelone",
-       "package_version":"1.0.10989",
-       "host":"7f1c82b6-e3e5-4a6c-a2b9-71a7b8e75f2c-855748d88f-sb5qh",
-       "execution_time_ms":476,
-       "timestamp":"2021-12-10 21:33:25"
-    }
- }
-```
-
-</p>
-</details>
-
-<details><summary>Example Pre-Process Script:</summary>
-<p>
-
-```python
-inputs.sentinelone_agent_id = row.sentinelone_dt_agent_id
-```
-
-</p>
-</details>
-
-<details><summary>Example Post-Process Script:</summary>
-<p>
-
-```python
-so_inputs = results.get("inputs")
-agent_id = so_inputs.get("sentinelone_agent_id")
-note = u"<b>SentinelOne: Connect to Network </b><br>  SentinelOne Agent Id: {0}".format(agent_id)
-content = results.get("content")
-if content:
-  data = content.get("data")
-  if data:
-    if int(data.get("affected")) <= 0:
-      note = u"{0} is NOT connected to network".format(note)
-    else:
-      networkStatus = u"""<p style= "color:{color}">{status}</p>""".format(color="green", status="connected")
-      row["sentinelone_dt_network_status"] = helper.createRichText(networkStatus)
-      note = u"{0} is connected to network".format(note)
-  else:
-    note = u"{0} no data returned from function".format(note)
-else:
-    note = u"{0} no content data returned from function".format(note)  
-
-incident.addNote(helper.createRichText(note))
-
-```
-
-</p>
-</details>
-
----
 ## Function - SentinelOne: Shutdown Agent
 Shutdown an agent managed by SentinelOne.
 
@@ -1040,13 +1439,31 @@ Shutdown an agent managed by SentinelOne.
 <details><summary>Outputs:</summary>
 <p>
 
-<!-- ::CHANGE_ME:: -->
+> **NOTE:** this example may be in JSON format, yet on the SOAR Platform `results` will be a Python Dictionary
+
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
-} 
+  "content": {
+    "data": {
+      "affected": 0
+    }
+  },
+  "inputs": {
+    "sentinelone_agent_id": "1275282318251495460"
+  },
+  "metrics": {
+    "execution_time_ms": 3426,
+    "host": "myHost",
+    "package": "fn-sentinelone",
+    "package_version": "1.0.0",
+    "timestamp": "2021-12-13 11:23:17",
+    "version": "1.0"
+  },
+  "raw": null,
+  "reason": null,
+  "success": true,
+  "version": 2.0
+}
 ```
 
 </p>
@@ -1089,18 +1506,18 @@ incident.addNote(helper.createRichText(note))
 </details>
 
 ---
-## Function - Sentinelone: Update Threat Status
-Update the status of a threat in SentinelOne.
+## Function - SentinelOne: Update Notes From SentinelOne
+Query SentinelOne threat and add any new threat notes to the SOAR incident.
 
- ![screenshot: fn-sentinelone-update-threat-status ](./doc/screenshots/fn-sentinelone-update-threat-status.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-sentinelone-update-notes-from-sentinelone ](./doc/screenshots/fn-sentinelone-update-notes-from-sentinelone.png) <!-- ::CHANGE_ME:: -->
 
 <details><summary>Inputs:</summary>
 <p>
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
+| `incident_id` | `number` | No | `-` | - |
 | `sentinelone_threat_id` | `text` | No | `-` | - |
-| `sentinelone_threat_status` | `select` | No | `-` | - |
 
 </p>
 </details>
@@ -1108,13 +1525,31 @@ Update the status of a threat in SentinelOne.
 <details><summary>Outputs:</summary>
 <p>
 
-<!-- ::CHANGE_ME:: -->
+> **NOTE:** this example may be in JSON format, yet on the SOAR Platform `results` will be a Python Dictionary
+
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
-} 
+  "content": {
+    "notes_created": 1,
+    "success": true
+  },
+  "inputs": {
+    "incident_id": 2334,
+    "sentinelone_threat_id": "1308905355630511064"
+  },
+  "metrics": {
+    "execution_time_ms": 1668,
+    "host": "myHost",
+    "package": "fn-sentinelone",
+    "package_version": "1.0.0",
+    "timestamp": "2021-12-13 11:28:59",
+    "version": "1.0"
+  },
+  "raw": null,
+  "reason": null,
+  "success": true,
+  "version": 2.0
+}
 ```
 
 </p>
@@ -1124,8 +1559,8 @@ results = {
 <p>
 
 ```python
+inputs.incident_id = incident.id
 inputs.sentinelone_threat_id = incident.properties.sentinelone_threat_id
-inputs.sentinelone_threat_status = rule.properties.sentinelone_threat_status
 ```
 
 </p>
@@ -1135,24 +1570,7 @@ inputs.sentinelone_threat_status = rule.properties.sentinelone_threat_status
 <p>
 
 ```python
-so_inputs = results.get("inputs")
-threat_id = so_inputs.get("sentinelone_threat_id")
-status = so_inputs.get("sentinelone_threat_status")
-note = u"<b>SentinelOne: Update Threat Status </b><br>  SentinelOne Threat Id: {0}".format(threat_id)
-content = results.get("content")
-if content:
-  data = content.get("data")
-  if data:
-    if int(data.get("affected")) <= 0:
-      note = u"{0} Threat Status <b>{1}</b> NOT updated in SentinelOne threat.".format(note, status)
-    else:
-      note = u"{0} Threat Status <b>{1}</b> updated in SentinelOne threat".format(note, status)
-  else:
-    note = u"{0} Threat Status <b>{1}</b> NOT updated. No 'data' returned from function".format(note, status)
-else:
-    note = u"{0} Threat Status <b>{1}</b> NOT updated. No content returned from function".format(note, status)  
-
-incident.addNote(helper.createRichText(note))
+None
 ```
 
 </p>
@@ -1178,13 +1596,32 @@ Update the verdict of a threat in SentinelOne.
 <details><summary>Outputs:</summary>
 <p>
 
-<!-- ::CHANGE_ME:: -->
+> **NOTE:** this example may be in JSON format, yet on the SOAR Platform `results` will be a Python Dictionary
+
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
-} 
+  "content": {
+    "data": {
+      "affected": 1
+    }
+  },
+  "inputs": {
+    "sentinelone_threat_analyst_verdict": "true_positive",
+    "sentinelone_threat_id": "13089053556305131313"
+  },
+  "metrics": {
+    "execution_time_ms": 6673,
+    "host": "myHost",
+    "package": "fn-sentinelone",
+    "package_version": "1.0.0",
+    "timestamp": "2021-12-13 11:25:37",
+    "version": "1.0"
+  },
+  "raw": null,
+  "reason": null,
+  "success": true,
+  "version": 2.0
+}
 ```
 
 </p>
@@ -1229,17 +1666,18 @@ incident.addNote(helper.createRichText(note))
 </details>
 
 ---
-## Function - SentinelOne: Abort Disk Scan
-Initiate a Full Disk Scan on an agent managed by SentinelOne.
+## Function - Sentinelone: Update Threat Status
+Update the status of a threat in SentinelOne.
 
- ![screenshot: fn-sentinelone-abort-disk-scan ](./doc/screenshots/fn-sentinelone-abort-disk-scan.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-sentinelone-update-threat-status ](./doc/screenshots/fn-sentinelone-update-threat-status.png) <!-- ::CHANGE_ME:: -->
 
 <details><summary>Inputs:</summary>
 <p>
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `sentinelone_agent_id` | `text` | Yes | `-` | - |
+| `sentinelone_threat_id` | `text` | No | `-` | - |
+| `sentinelone_threat_status` | `select` | No | `-` | - |
 
 </p>
 </details>
@@ -1247,29 +1685,31 @@ Initiate a Full Disk Scan on an agent managed by SentinelOne.
 <details><summary>Outputs:</summary>
 <p>
 
-<!-- ::CHANGE_ME:: -->
+> **NOTE:** this example may be in JSON format, yet on the SOAR Platform `results` will be a Python Dictionary
+
 ```python
 results = {
-   "version":2.0,
-   "success":true,
-   "reason":"None",
-   "content":{
-      "data":{
-         "affected":1
-      }
-   },
-   "raw":"None",
-   "inputs":{
-      "sentinelone_agent_id":"1275282318251495460"
-   },
-   "metrics":{
-      "version":"1.0",
-      "package":"fn-sentinelone",
-      "package_version":"1.0.10989",
-      "host":"7f1c82b6-e3e5-4a6c-a2b9-71a7b8e75f2c-855748d88f-sb5qh",
-      "execution_time_ms":580,
-      "timestamp":"2021-12-10 21:57:41"
-   }
+  "content": {
+    "data": {
+      "affected": 1
+    }
+  },
+  "inputs": {
+    "sentinelone_threat_id": "1308905355630511064",
+    "sentinelone_threat_status": "in_progress"
+  },
+  "metrics": {
+    "execution_time_ms": 5215,
+    "host": "myHost",
+    "package": "fn-sentinelone",
+    "package_version": "1.0.0",
+    "timestamp": "2021-12-13 11:25:54",
+    "version": "1.0"
+  },
+  "raw": null,
+  "reason": null,
+  "success": true,
+  "version": 2.0
 }
 ```
 
@@ -1280,7 +1720,8 @@ results = {
 <p>
 
 ```python
-inputs.sentinelone_agent_id = row.sentinelone_dt_agent_id
+inputs.sentinelone_threat_id = incident.properties.sentinelone_threat_id
+inputs.sentinelone_threat_status = rule.properties.sentinelone_threat_status
 ```
 
 </p>
@@ -1291,372 +1732,23 @@ inputs.sentinelone_agent_id = row.sentinelone_dt_agent_id
 
 ```python
 so_inputs = results.get("inputs")
-agent_id = so_inputs.get("sentinelone_agent_id")
-note = u"<b>SentinelOne: Abort Full Disk Scan </b><br>  SentinelOne Agent Id: {0}".format(agent_id)
+threat_id = so_inputs.get("sentinelone_threat_id")
+status = so_inputs.get("sentinelone_threat_status")
+note = u"<b>SentinelOne: Update Threat Status </b><br>  SentinelOne Threat Id: {0}".format(threat_id)
 content = results.get("content")
 if content:
   data = content.get("data")
   if data:
     if int(data.get("affected")) <= 0:
-      note = u"{0} Full Disk Scan was NOT aborted.".format(note)
+      note = u"{0} Threat Status <b>{1}</b> NOT updated in SentinelOne threat.".format(note, status)
     else:
-      note = u"{0} Full Disk Scan aborted.".format(note)
+      note = u"{0} Threat Status <b>{1}</b> updated in SentinelOne threat".format(note, status)
   else:
-    note = u"{0} Full Disk Scan was NOT aborted. No 'data' returned from function".format(note)
+    note = u"{0} Threat Status <b>{1}</b> NOT updated. No 'data' returned from function".format(note, status)
 else:
-    note = u"{0} Full Disk Scan was NOT aborted. No content returned from function".format(note)  
+    note = u"{0} Threat Status <b>{1}</b> NOT updated. No content returned from function".format(note, status)  
 
 incident.addNote(helper.createRichText(note))
-```
-
-</p>
-</details>
-
----
-## Function - SentinelOne: Get Threat Details
-Get the details of a threat detected by SentinelOne.
-
- ![screenshot: fn-sentinelone-get-threat-details ](./doc/screenshots/fn-sentinelone-get-threat-details.png) <!-- ::CHANGE_ME:: -->
-
-<details><summary>Inputs:</summary>
-<p>
-
-| Name | Type | Required | Example | Tooltip |
-| ---- | :--: | :------: | ------- | ------- |
-| `sentinelone_threat_id` | `text` | No | `-` | - |
-
-</p>
-</details>
-
-<details><summary>Outputs:</summary>
-<p>
-
-<!-- ::CHANGE_ME:: -->
-```python
-results = {
-   "version":2.0,
-   "success":true,
-   "reason":"None",
-   "content":{
-      "data":[
-         {
-            "agentDetectionInfo":{
-               "accountId":"43434343434343434343",
-               "accountName":"SentinelOne",
-               "agentDetectionState":"None",
-               "agentDomain":"unknown",
-               "agentIpV4":"9.46.92.2,10.21.10.8",
-               "agentIpV6":"",
-               "agentLastLoggedInUserName":"",
-               "agentMitigationMode":"detect",
-               "agentOsName":"Linux",
-               "agentOsRevision":"CentOS release 7.9.2009 (Core) 3.10.0-1160.45.1.el7.x86_64",
-               "agentRegisteredAt":"2021-10-26T13:18:19.132188Z",
-               "agentUuid":"8329e587-bbe9-b906-a6a5-646e2686vvvvv",
-               "agentVersion":"21.10.1.6",
-               "externalIp":"1.4.8.3",
-               "groupId":"607447413805059643",
-               "groupName":"Default Group",
-               "siteId":"60606060606060606",
-               "siteName":"MySite"
-            },
-            "agentRealtimeInfo":{
-               "accountId":"43434343434343434343",
-               "accountName":"SentinelOne",
-               "activeThreats":0,
-               "agentComputerName":"myhost.com",
-               "agentDecommissionedAt":"None",
-               "agentDomain":"unknown",
-               "agentId":"12121212121212121212",
-               "agentInfected":false,
-               "agentIsActive":true,
-               "agentIsDecommissioned":false,
-               "agentMachineType":"server",
-               "agentMitigationMode":"detect",
-               "agentNetworkStatus":"connected",
-               "agentOsName":"Linux",
-               "agentOsRevision":"CentOS release 7.9.2009 (Core) 3.10.0-1160.45.1.el7.x86_64",
-               "agentOsType":"linux",
-               "agentUuid":"8329e587-bbe9-b906-a6a5-646e2686qwert",
-               "agentVersion":"21.10.1.6",
-               "groupId":"607447413805059643",
-               "groupName":"Default Group",
-               "networkInterfaces":[
-                  {
-                     "id":"1275282318268272678",
-                     "inet":[
-                        "9.46.92.211"
-                     ],
-                     "inet6":[
-                        
-                     ],
-                     "name":"eth1",
-                     "physical":"00:00:09:2E:5C:D3"
-                  },
-                  {
-                     "id":"1275282318259884069",
-                     "inet":[
-                        "10.21.10.88"
-                     ],
-                     "inet6":[
-                        
-                     ],
-                     "name":"eth0",
-                     "physical":"00:00:0A:15:0A:58"
-                  }
-               ],
-               "operationalState":"na",
-               "rebootRequired":false,
-               "scanAbortedAt":"2021-12-10T21:57:56.711226Z",
-               "scanFinishedAt":"2021-12-10T02:33:00.768224Z",
-               "scanStartedAt":"2021-12-10T21:57:26.665306Z",
-               "scanStatus":"aborted",
-               "siteId":"607447413779893818",
-               "siteName":"mySite",
-               "storageName":"None",
-               "storageType":"None",
-               "userActionsNeeded":[
-                  
-               ]
-            },
-            "containerInfo":{
-               "id":"None",
-               "image":"None",
-               "labels":"None",
-               "name":"None"
-            },
-            "id":"1278187227695576856",
-            "indicators":[
-               {
-                  "category":"Persistence",
-                  "description":"Unsigned kernel module was loaded.",
-                  "ids":[
-                     384
-                  ],
-                  "tactics":[
-                     {
-                        "name":"Persistence",
-                        "source":"MITRE",
-                        "techniques":[
-                           {
-                              "link":"https://attack.mitre.org/techniques/T1547/006/",
-                              "name":"T1547.006"
-                           }
-                        ]
-                     }
-                  ]
-               },
-               {
-                  "category":"Persistence",
-                  "description":"New kernel module was added.",
-                  "ids":[
-                     399
-                  ],
-                  "tactics":[
-                     {
-                        "name":"Persistence",
-                        "source":"MITRE",
-                        "techniques":[
-                           {
-                              "link":"https://attack.mitre.org/techniques/T1547/006/",
-                              "name":"T1547.006"
-                           }
-                        ]
-                     }
-                  ]
-               }
-            ],
-            "kubernetesInfo":{
-               "cluster":"None",
-               "controllerKind":"None",
-               "controllerLabels":"None",
-               "controllerName":"None",
-               "namespace":"None",
-               "namespaceLabels":"None",
-               "node":"None",
-               "pod":"None",
-               "podLabels":"None"
-            },
-            "mitigationStatus":[
-               
-            ],
-            "threatInfo":{
-               "analystVerdict":"undefined",
-               "analystVerdictDescription":"Undefined",
-               "automaticallyResolved":false,
-               "browserType":"None",
-               "certificateId":"None",
-               "classification":"Malware",
-               "classificationSource":"Static",
-               "cloudFilesHashVerdict":"provider_unknown",
-               "collectionId":"114002478435555555551",
-               "confidenceLevel":"suspicious",
-               "createdAt":"2021-10-30T13:29:51.326339Z",
-               "detectionEngines":[
-                  {
-                     "key":"executables",
-                     "title":"Behavioral AI"
-                  }
-               ],
-               "detectionType":"dynamic",
-               "engines":[
-                  "DBT - Executables"
-               ],
-               "externalTicketExists":false,
-               "externalTicketId":"None",
-               "failedActions":false,
-               "fileExtension":"None",
-               "fileExtensionType":"None",
-               "filePath":"/opt/CrowdStrike/falcon-sensor12704",
-               "fileSize":1560048,
-               "fileVerificationType":"None",
-               "identifiedAt":"2021-10-30T13:29:51.252920Z",
-               "incidentStatus":"in_progress",
-               "incidentStatusDescription":"In progress",
-               "initiatedBy":"agent_policy",
-               "initiatedByDescription":"Agent Policy",
-               "initiatingUserId":"None",
-               "initiatingUsername":"None",
-               "isFileless":false,
-               "isValidCertificate":"None",
-               "maliciousProcessArguments":" falcon-sensor",
-               "md5":"None",
-               "mitigatedPreemptively":false,
-               "mitigationStatus":"not_mitigated",
-               "mitigationStatusDescription":"Not mitigated",
-               "originatorProcess":"systemd",
-               "pendingActions":false,
-               "processUser":"root",
-               "publisherName":"None",
-               "reachedEventsLimit":"None",
-               "rebootRequired":false,
-               "sha1":"1641df58c1027a00f670d41491a2eecff931604c",
-               "sha256":"None",
-               "storyline":"3ab3fbbd-029f-aa62-d617-1abc7d3eacfc",
-               "threatId":"1278187227695576856",
-               "threatName":"falcon-sensor12704",
-               "updatedAt":"2021-11-25T20:45:36.388848Z"
-            },
-            "whiteningOptions":[
-               "path",
-               "hash"
-            ]
-         }
-      ],
-      "pagination":{
-         "nextCursor":"None",
-         "totalItems":1
-      }
-   },
-   "raw":"None",
-   "inputs":{
-      "sentinelone_threat_id":"1278187227695576856"
-   },
-   "metrics":{
-      "version":"1.0",
-      "package":"fn-sentinelone",
-      "package_version":"1.0.10989",
-      "host":"7f1c82b6-e3e5-4a6c-a2b9-71a7b8e75f2c-855748d88f-qwert",
-      "execution_time_ms":553,
-      "timestamp":"2021-12-10 21:58:10"
-   }
-}
-```
-
-</p>
-</details>
-
-<details><summary>Example Pre-Process Script:</summary>
-<p>
-
-```python
-inputs.sentinelone_threat_id = incident.properties.sentinelone_threat_id
-```
-
-</p>
-</details>
-
-<details><summary>Example Post-Process Script:</summary>
-<p>
-
-```python
-# Put the results json into a workflow property so we can call the 
-# convert_json_to_rich_text script to print readable formatted json in an incident note.
-inputs = results.get("inputs")
-threat_id = inputs.get("sentinelone_threat_id")
-content = results.get("content")
-data = content.get("data")
-
-header = u"SentinelOne Threat Id: {0} Details:".format(threat_id)
-
-json_note = {
-              "version": "1.1",
-              "header": header, 
-              "json": data,
-              "sort": False
-            }
-
-workflow.addProperty('convert_json_to_rich_text', json_note)
-```
-
-</p>
-</details>
-
----
-## Function - SentinelOne: Download From Cloud
-Download a threat from SentinelOne.
-
- ![screenshot: fn-sentinelone-download-from-cloud ](./doc/screenshots/fn-sentinelone-download-from-cloud.png) <!-- ::CHANGE_ME:: -->
-
-<details><summary>Inputs:</summary>
-<p>
-
-| Name | Type | Required | Example | Tooltip |
-| ---- | :--: | :------: | ------- | ------- |
-| `incident_id` | `number` | No | `-` | - |
-| `sentinelone_threat_id` | `text` | No | `-` | - |
-
-</p>
-</details>
-
-<details><summary>Outputs:</summary>
-<p>
-
-<!-- ::CHANGE_ME:: -->
-```python
-results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
-} 
-```
-
-</p>
-</details>
-
-<details><summary>Example Pre-Process Script:</summary>
-<p>
-
-```python
-inputs.incident_id = incident.id
-inputs.sentinelone_threat_id = incident.properties.sentinelone_threat_id
-```
-
-</p>
-</details>
-
-<details><summary>Example Post-Process Script:</summary>
-<p>
-
-```python
-success = results.get("success")
-content = results.get("content")
-if success and content:
-  attachment_name = content.get("attachment_name")
-  note_text = "<b>SentinelOne: Download from Cloud</b><br>  Incident attachment added: <b>{0}</b>".format(attachment_name)
-else:
-  note_text = "<b>SentinelOne: Download from Cloud</b><br>  ERROR adding attachment"
-incident.addNote(helper.createRichText(note_text))
 ```
 
 </p>
@@ -1949,16 +2041,16 @@ sentinelone_agents_dt
 ## Custom Fields
 | Label | API Access Name | Type | Prefix | Placeholder | Tooltip |
 | ----- | --------------- | ---- | ------ | ----------- | ------- |
-| SentinelOne Mitigation Status | `sentinelone_mitigation_status` | `text` | `properties` | - | - |
-| SentinelOne Incident Status | `sentinelone_incident_status` | `text` | `properties` | - | - |
-| SentinelOne Threat Overview URL | `sentinelone_threat_overview_url` | `textarea` | `properties` | - | - |
-| SentinelOne Classification | `sentinelone_classification` | `text` | `properties` | - | - |
-| SentinelOne Threat Name | `sentinelone_threat_name` | `text` | `properties` | - | - |
-| SentinelOne Threat Id | `sentinelone_threat_id` | `text` | `properties` | - | - |
 | SentinelOne Agent Id | `sentinelone_agent_id` | `text` | `properties` | - | - |
+| SentinelOne Classification | `sentinelone_classification` | `text` | `properties` | - | - |
+| SentinelOne Threat Confidence Level | `sentinelone_confidence_level` | `text` | `properties` | - | - |
+| SentinelOne Incident Status | `sentinelone_incident_status` | `text` | `properties` | - | - |
+| SentinelOne Mitigation Status | `sentinelone_mitigation_status` | `text` | `properties` | - | - |
 | Sentinelone Mitigation Status Description | `sentinelone_mitigation_status_description` | `text` | `properties` | - | - |
 | Sentinelone Threat Analyst Verdict | `sentinelone_threat_analyst_verdict` | `select` | `properties` | - | SentinelOne threat analyst verdict |
-| SentinelOne Threat Confidence Level | `sentinelone_confidence_level` | `text` | `properties` | - | - |
+| SentinelOne Threat Id | `sentinelone_threat_id` | `text` | `properties` | - | - |
+| SentinelOne Threat Name | `sentinelone_threat_name` | `text` | `properties` | - | - |
+| SentinelOne Threat Overview URL | `sentinelone_threat_overview_url` | `textarea` | `properties` | - | - |
 
 ---
 
@@ -1966,24 +2058,24 @@ sentinelone_agents_dt
 ## Rules
 | Rule Name | Object | Workflow Triggered |
 | --------- | ------ | ------------------ |
-| SentinelOne: Restart Agent | sentinelone_agents_dt | `sentinelone_restart_agent` |
-| SentinelOne: Update Threat Status | incident | `sentinelone_update_threat_status` |
-| SentinelOne: Add Agent to Data Table | incident | `sentinelone_add_agent_to_data_table` |
-| SentinelOne: Shutdown Agent | sentinelone_agents_dt | `sentinelone_shutdown_agent` |
 | SentinelOne: Abort Disk Scan | sentinelone_agents_dt | `sentinelone_abort_disk_scan` |
-| SentinelOne: Get Hash Reputation | artifact | `sentinelone_get_hash_reputation` |
+| SentinelOne: Add Agent to Data Table | incident | `sentinelone_add_agent_to_data_table` |
 | SentinelOne: Connect Agent to Network | sentinelone_agents_dt | `sentinelone_connect_to_network` |
-| SentinelOne: Update Notes from SentinelOne | incident | `sentinelone_update_notes_from_sentinelone` |
 | SentinelOne: Disconnect Agent From Network | sentinelone_agents_dt | `sentinelone_disconnect_from_network` |
-| SentinelOne: Update Threat Analyst Verdict | incident | `sentinelone_update_threat_analyst_verdict` |
-| SentinelOne: Send Note to SentinelOne Threat | note | `sentinelone_send_soar_note_to_sentinelone` |
-| SentinelOne: Resolve Threat in SentinelOne | incident | `sentinelone_resolve_threat_in_sentinelone` |
-| SentinelOne: Write Threat Details to Note | incident | `sentinelone_write_threat_details_to_note` |
-| SentinelOne: Initiate Disk Scan | sentinelone_agents_dt | `sentinelone_initiate_disk_scan` |
-| SentinelOne: Send SOAR Note to SentinelOne | note | `sentinelone_send_soar_note_to_sentinelone` |
 | SentinelOne: Download From Cloud | incident | `sentinelone_download_threat_from_cloud` |
-| SentinelOne: Write Agent Details to Note | sentinelone_agents_dt | `sentinelone_write_agent_details_to_note` |
+| SentinelOne: Get Hash Reputation | artifact | `sentinelone_get_hash_reputation` |
+| SentinelOne: Initiate Disk Scan | sentinelone_agents_dt | `sentinelone_initiate_disk_scan` |
+| SentinelOne: Resolve Threat in SentinelOne | incident | `sentinelone_resolve_threat_in_sentinelone` |
+| SentinelOne: Restart Agent | sentinelone_agents_dt | `sentinelone_restart_agent` |
+| SentinelOne: Send Note to SentinelOne Threat | note | `sentinelone_send_soar_note_to_sentinelone` |
+| SentinelOne: Send SOAR Note to SentinelOne | note | `sentinelone_send_soar_note_to_sentinelone` |
+| SentinelOne: Shutdown Agent | sentinelone_agents_dt | `sentinelone_shutdown_agent` |
 | SentinelOne: Update Agent in Data table | sentinelone_agents_dt | `sentinelone_add_agent_to_data_table` |
+| SentinelOne: Update Notes from SentinelOne | incident | `sentinelone_update_notes_from_sentinelone` |
+| SentinelOne: Update Threat Analyst Verdict | incident | `sentinelone_update_threat_analyst_verdict` |
+| SentinelOne: Update Threat Status | incident | `sentinelone_update_threat_status` |
+| SentinelOne: Write Agent Details to Note | sentinelone_agents_dt | `sentinelone_write_agent_details_to_note` |
+| SentinelOne: Write Threat Details to Note | incident | `sentinelone_write_threat_details_to_note` |
 
 ---
 
