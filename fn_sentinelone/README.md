@@ -95,16 +95,6 @@ The SentinelOne app implements the following functionality in the IBM SOAR platf
   - initiate/abort full disk scan
 * Get the agent or threat details and write the JSON returned from SentinelOne as an incident note.
 * Download a threat file from SentinelOne and add as an attachment to the corresponding IBM SOAR threat incident/case. 
-
----
-
-## App Flow for Threat Management
-
-<p>
-The primary use case for the SentinelOne app with the IBM SOAR platform is to
-bring SentinelOne threats into the IBM SOAR platform for further inspection and migitation. Below is a screenshot of a sample SentinelOne incident 
-with the SentinelOne incident tab displayed:
-
 ---
 
 ## Requirements
