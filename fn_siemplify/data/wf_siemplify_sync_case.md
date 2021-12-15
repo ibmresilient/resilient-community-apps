@@ -5,7 +5,7 @@
 
 # Siemplify Auto Sync Case
 
-## Function - Siemplify: Sync Case
+## Function - Siemplify Sync Case
 
 ### API Name
 `siemplify_sync_case`

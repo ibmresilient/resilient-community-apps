@@ -2,11 +2,10 @@
 
 """AppFunction implementation"""
 
-from fn_siemplify.lib.siemplify_common import SiemplifyCommon
+from fn_siemplify.lib.siemplify_common import SiemplifyCommon, PACKAGE_NAME
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import IntegrationError, validate_fields
 
-PACKAGE_NAME = "fn_siemplify"
 FN_NAME = "siemplify_sync_artifact"
 
 

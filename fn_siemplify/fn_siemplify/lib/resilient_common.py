@@ -163,7 +163,18 @@ class ResilientCommon():
             raise IntegrationError(err)
 
     def get_incident(self, incident_id):
-        return self._get_incident_info(incident_id, None)
+        incident = self._get_incident_info(incident_id, None)
+        incident['incident_types'] = self.convert_incident_types(incident['incident_type_ids'])
+        return incident
+
+    def convert_incident_types(self, incident_type_ids):
+        if not incident_type_ids:
+            return incident_type_ids
+
+        incident_type_lookup = self.get_incident_types()
+
+        return [incident_type_lookup[incident_type] for incident_type in incident_type_ids \
+            if incident_type in incident_type_lookup]
 
     def get_incident_attachment(self, incident_id, artifact_id=None, task_id=None, attachment_id=None, return_base64=True):
         file_content = get_file_attachment(self.rest_client, incident_id, artifact_id=artifact_id, task_id=task_id, attachment_id=attachment_id)
@@ -232,6 +243,12 @@ class ResilientCommon():
 
         # create a lookup table based on artifact id
         return { type['value']: type['label'] for type in type_info['fields']['type']['values'] }
+
+    def get_incident_types(self):
+        type_info = self._get_types("incident")
+
+        # create a lookup table based on artifact id
+        return { type['value']: type['label'] for type in type_info['fields']['incident_type_ids']['values'] }
 
     @cached(cache=LRUCache(maxsize=100))
     def _get_types(self, res_type):

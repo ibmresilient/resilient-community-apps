@@ -22,16 +22,18 @@ def snake_to_camel(word):
 
 setup(
     name="fn_siemplify",
-    display_name="<<display name of your app here>>",
+    display_name="Siemplify App for IBM QRadar SOAR",
     version="1.0.0",
-    license="<<insert here>>",
-    author="<<your name here>>",
+    license="MIT",
+    author="IBM QRadar SOAR",
     author_email="you@example.com",
-    url="<<your company url>>",
+    url="https://github.com/ibm/resilient/resilient-community-apps",
     description="Resilient Circuits Components for 'fn_siemplify'",
     long_description="""Resilient Circuits Components for 'fn_siemplify'""",
     install_requires=[
-        "resilient-circuits>=43.0.0"
+        "resilient-circuits>=43.0.0",
+        "resilient_lib",
+        "jinja2"
     ],
     python_requires='>=3.6',
     packages=find_packages(),

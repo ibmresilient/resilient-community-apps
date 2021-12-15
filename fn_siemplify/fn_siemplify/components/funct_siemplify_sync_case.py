@@ -3,12 +3,12 @@
 """AppFunction implementation"""
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from resilient_lib import IntegrationError, validate_fields
+from resilient_lib import IntegrationError, validate_fields, clean_html
 from fn_siemplify.lib.resilient_common import ResilientCommon
-from fn_siemplify.lib.siemplify_common import SiemplifyCommon
+from fn_siemplify.lib.siemplify_common import SiemplifyCommon, PACKAGE_NAME
 
-PACKAGE_NAME = "fn_siemplify"
 FN_NAME = "siemplify_sync_case"
+SIEMPLIFY_CASE_URL = "{}/#/main/cases/classic-view/{}"
 
 class FunctionComponent(AppFunctionComponent):
     """Component that implements function 'siemplify_sync_case'"""
@@ -50,6 +50,7 @@ class FunctionComponent(AppFunctionComponent):
 
         # collect the incident information
         incident_info = resilient_env.get_incident(inputs['siemplify_incident_id'])
+        incident_info['description'] = clean_html(incident_info['description'])
 
         # assemble all the data for Siemplify incident creation
         incident_info['siemplify_assigned_user'] = inputs['siemplify_assigned_user']
@@ -72,7 +73,7 @@ class FunctionComponent(AppFunctionComponent):
             inputs['siemplify_case_id'] = results
             inputs['siemplify_alert_id'] = case_results['alerts'][0]['identifier']
 
-            case_results['siemplify_case_url'] = "{}/#/main/cases/classic-view/{}".format(self.app_configs.base_url, results)
+            case_results['siemplify_case_url'] = SIEMPLIFY_CASE_URL.format(self.app_configs.base_url, results)
             status = True
             results = case_results
 

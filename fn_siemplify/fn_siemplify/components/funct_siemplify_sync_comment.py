@@ -2,10 +2,10 @@
 
 """AppFunction implementation"""
 
+from fn_siemplify.lib.siemplify_common import SiemplifyCommon, PACKAGE_NAME
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import IntegrationError, validate_fields
 
-PACKAGE_NAME = "fn_siemplify"
 FN_NAME = "siemplify_sync_comment"
 
 
@@ -39,13 +39,12 @@ class FunctionComponent(AppFunctionComponent):
         validate_fields([
                 {"name": "siemplify_case_id"},
                 {"name": "siemplify_alert_id"},
-                {"name": "siemplify_artifact_type"},
-                {"name": "siemplify_artifact_value"},
+                {"name": "siemplify_comment"}
             ],
             fn_inputs_dict)
 
         siemplify_env = SiemplifyCommon(self.rc, self.app_configs)
-        results = siemplify_env.sync_artifact(fn_inputs_dict)
+        results = siemplify_env.sync_insight(fn_inputs_dict)
 
         # Example validating app_configs
         # validate_fields([

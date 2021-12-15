@@ -5,17 +5,23 @@
 import logging
 import json
 from .jinja_common import JinjaEnvironment
+from resilient_lib import clean_html
+from simplejson.errors import JSONDecodeError
 
 LOG = logging.getLogger(__name__)
+
+PACKAGE_NAME = "fn_siemplify"
 
 DEFAULT_CREATE_CASE = "templates/siemplify_create_case.jinja"
 
 API_VERSION = "api/external/v1"
 CREATE_CASE_URL = "cases/CreateManualCase"
+UPDATE_CASE_DESCRIPTION_URL = "cases/ChangeCaseDescription"
 GET_CASE_URL = "cases/GetCaseFullDetails/{}"
 BLOCKLIST_URL = "settings/GetAllModelBlackRecords"
 CREATE_ENTITY_URL = "cases/CreateCaseEntity"
 CREATE_COMMENT_URL = "cases/AddCaseComment"
+CREATE_INSIGHT_URL = "cases/CreateCaseInsight"
 CREATE_ARTIFACT_URL = "cases/CreateCaseEntity"
 CREATE_ATTACHMENT_URL = "cases/AddEvidence"
 CREATE_TASK_URL = "cases/AddOrUpdateCaseTask"
@@ -89,7 +95,11 @@ class SiemplifyCommon():
             DEFAULT_CREATE_CASE,
             incident_info)
 
-        return self._make_call("POST", CREATE_CASE_URL, incident_payload)
+        results = self._make_call("POST", CREATE_CASE_URL, incident_payload)
+        if isinstance(results, int) and incident_info['description']:
+            # TODO strip rich text
+            description_results = self.update_case_description(results, incident_info['description'])
+
 
     def update_case(self, incident_info):
         # get the existing case to start reviewing changes
@@ -103,6 +113,15 @@ class SiemplifyCommon():
     def get_case(self, case_id):
         uri = GET_CASE_URL.format(case_id)
         return self._make_call("GET", uri)
+
+    def update_case_description(self, case_id, description):
+        payload = {
+            "caseId": case_id,
+            "description": description.replace('"', '\\"')
+        }
+        LOG.debug(payload)
+
+        return self._make_call("POST", UPDATE_CASE_DESCRIPTION_URL, payload)
 
     def _diff_case_info(self, incident_info):
         # get the existing case
@@ -126,6 +145,44 @@ class SiemplifyCommon():
         }
 
         return self._make_call("POST", CREATE_COMMENT_URL, payload)
+
+    def sync_insight(self, inputs):
+        """[summary]
+
+        Args:
+            inputs ([dict]): [data to create a comment]
+
+        """
+        payload = {
+            "caseId": str(inputs['siemplify_case_id']),
+            "alertIdentifier": inputs.get('siemplify_alert_id'),
+            "triggeredBy": COMMENT_HEADER,
+            "title": COMMENT_HEADER,
+            "content": clean_html(inputs['siemplify_comment']),
+        }
+
+        results = self._make_call("POST", CREATE_INSIGHT_URL, payload)
+        return results if isinstance(results, dict) else {}
+        """
+        {
+            "caseId": "<long>",
+            "isFavorite": "<boolean>",
+            "alertIdentifier": "<string>",
+            "triggeredBy": "<string>",
+            "title": "<string>",
+            "content": "<string>",
+            "entityIdentifier": "<string>",
+            "severity": 2,
+            "type": 0,
+            "additionalDataType": 1,
+            "additionalData": "<string>",
+            "additionalDataTitle": "<string>",
+            "originalRequestingUser": "<string>",
+            "id": "<long>",
+            "creationTimeUnixTimeInMs": "<long>",
+            "modificationTimeUnixTimeInMs": "<long>"
+        }
+        """
 
     def sync_artifact(self, inputs):
         """[summary]
@@ -356,7 +413,10 @@ class SiemplifyCommon():
             response = self.rc.execute(method, url, headers=self.headers, verify=self.verify)
 
         if response.json():
-            return response.json()
+            try:
+                return response.json()
+            except JSONDecodeError:
+                pass  # text will be returned
 
         return response.text
 
