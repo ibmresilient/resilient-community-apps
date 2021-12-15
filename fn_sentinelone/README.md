@@ -45,7 +45,6 @@
 - [Function - SentinelOne: Send SOAR Note to SentinelOne](#function---sentinelone-send-soar-note-to-sentinelone)
 - [Function - SentinelOne: Shutdown Agent](#function---sentinelone-shutdown-agent)
 - [Function - SentinelOne: Update Notes From SentinelOne](#function---sentinelone-update-notes-from-sentinelone)
-- [Function - SentinelOne: Update Threat Analyst Verdict](#function---sentinelone-update-threat-analyst-verdict)
 - [Function - Sentinelone: Update Threat Status](#function---sentinelone-update-threat-status)
 - [Script - Convert JSON to rich text v1.1](#script---convert-json-to-rich-text-v11)
 - [Data Table - SentinelOne Agent](#data-table---sentinelone-agent)
@@ -154,10 +153,10 @@ The following Cloud Pak guides provide additional information:
 These guides are available on the IBM Knowledge Center at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs). From this web page, select your IBM Cloud Pak for Security version. From the version-specific Knowledge Center page, select Case Management and Orchestration & Automation.
 
 ### Proxy Server
-The app **does** support a proxy server.
+The app supports a proxy server via the https_proxy and http_proxy app.config settings.
 
 ### Python Environment
-Both Python 2.7 and Python 3.6 are supported.
+Python 3.6+ is supported.
 Additional package dependencies may exist for each of these packages:
 * jinja2
 * resilient-circuits>=40.0.0
@@ -188,7 +187,8 @@ List any steps that are needed to configure the endpoint to use this app.
 <!--
 List any user permissions that are needed to use this endpoint. For example, list the API key permissions.
 -->
-* Permission A <!-- ::CHANGE_ME:: -->
+* SentinelOne Admin role is required in the SentinelOne account that is 
+* Permission to download a threat file from cloud in the user SentinelOne account is needed for the **SentinelONE: Download from Cloud** function.
 
 ---
 
@@ -316,7 +316,7 @@ incident.addNote(helper.createRichText(note))
 
 ---
 ## Function - SentinelOne: Connect to Network
-Connect a an endpoint managed by Sentinel to the network.
+Connect an endpoint managed by Sentinel to the network.
 
  ![screenshot: fn-sentinelone-connect-to-network ](./doc/screenshots/fn-sentinelone-connect-to-network.png) <!-- ::CHANGE_ME:: -->
 
@@ -1577,95 +1577,6 @@ None
 </details>
 
 ---
-## Function - SentinelOne: Update Threat Analyst Verdict
-Update the verdict of a threat in SentinelOne.
-
- ![screenshot: fn-sentinelone-update-threat-analyst-verdict ](./doc/screenshots/fn-sentinelone-update-threat-analyst-verdict.png) <!-- ::CHANGE_ME:: -->
-
-<details><summary>Inputs:</summary>
-<p>
-
-| Name | Type | Required | Example | Tooltip |
-| ---- | :--: | :------: | ------- | ------- |
-| `sentinelone_threat_analyst_verdict` | `select` | No | `-` | - |
-| `sentinelone_threat_id` | `text` | No | `-` | - |
-
-</p>
-</details>
-
-<details><summary>Outputs:</summary>
-<p>
-
-> **NOTE:** this example may be in JSON format, yet on the SOAR Platform `results` will be a Python Dictionary
-
-```python
-results = {
-  "content": {
-    "data": {
-      "affected": 1
-    }
-  },
-  "inputs": {
-    "sentinelone_threat_analyst_verdict": "true_positive",
-    "sentinelone_threat_id": "13089053556305131313"
-  },
-  "metrics": {
-    "execution_time_ms": 6673,
-    "host": "myHost",
-    "package": "fn-sentinelone",
-    "package_version": "1.0.0",
-    "timestamp": "2021-12-13 11:25:37",
-    "version": "1.0"
-  },
-  "raw": null,
-  "reason": null,
-  "success": true,
-  "version": 2.0
-}
-```
-
-</p>
-</details>
-
-<details><summary>Example Pre-Process Script:</summary>
-<p>
-
-```python
-inputs.sentinelone_threat_id = incident.properties.sentinelone_threat_id
-inputs.sentinelone_threat_analyst_verdict = rule.properties.sentinelone_threat_analyst_verdict
-```
-
-</p>
-</details>
-
-<details><summary>Example Post-Process Script:</summary>
-<p>
-
-```python
-so_inputs = results.get("inputs")
-threat_id = so_inputs.get("sentinelone_threat_id")
-verdict = so_inputs.get("sentinelone_threat_analyst_verdict")
-note = u"<b>SentinelOne: Update Threat Analyst Verdict </b><br>  SentinelOne Threat Id: {0}".format(threat_id)
-content = results.get("content")
-if content:
-  data = content.get("data")
-  if data:
-    if int(data.get("affected")) <= 0:
-      note = u"{0} Analyst Verdict <b>{1}</b> NOT updated in SentinelOne threat.".format(note, verdict)
-    else:
-      note = u"{0} Analyst Verdict <b>{1}</b> updated in SentinelOne threat".format(note, verdict)
-  else:
-    note = u"{0} Analyst Verdict <b>{1}</b> NOT updated. No 'data' returned from function".format(note, verdict)
-else:
-    note = u"{0} Analyst Verdict <b>{1}</b> NOT updated. No content returned from function".format(note, verdict)  
-
-incident.addNote(helper.createRichText(note))
-```
-
-</p>
-</details>
-
----
 ## Function - Sentinelone: Update Threat Status
 Update the status of a threat in SentinelOne.
 
@@ -1676,8 +1587,9 @@ Update the status of a threat in SentinelOne.
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `sentinelone_threat_id` | `text` | No | `-` | - |
-| `sentinelone_threat_status` | `select` | No | `-` | - |
+| `sentinelone_threat_id` | `text` | Yes | `-` | - |
+| `sentinelone_threat_status` | `select` | Yes | `-` | - |
+| `sentinelone_threat_analyst_verdict` | `select` | Yes | `-` | - |
 
 </p>
 </details>
@@ -2072,7 +1984,6 @@ sentinelone_agents_dt
 | SentinelOne: Shutdown Agent | sentinelone_agents_dt | `sentinelone_shutdown_agent` |
 | SentinelOne: Update Agent in Data table | sentinelone_agents_dt | `sentinelone_add_agent_to_data_table` |
 | SentinelOne: Update Notes from SentinelOne | incident | `sentinelone_update_notes_from_sentinelone` |
-| SentinelOne: Update Threat Analyst Verdict | incident | `sentinelone_update_threat_analyst_verdict` |
 | SentinelOne: Update Threat Status | incident | `sentinelone_update_threat_status` |
 | SentinelOne: Write Agent Details to Note | sentinelone_agents_dt | `sentinelone_write_agent_details_to_note` |
 | SentinelOne: Write Threat Details to Note | incident | `sentinelone_write_threat_details_to_note` |

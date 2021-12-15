@@ -20,26 +20,27 @@
 ```python
 inputs.sentinelone_threat_id = incident.properties.sentinelone_threat_id
 inputs.sentinelone_threat_status = rule.properties.sentinelone_threat_status
+inputs.sentinelone_threat_analyst_verdict = rule.properties.sentinelone_threat_analyst_verdict
 ```
 
 ### Post-Processing Script
 ```python
-so_inputs = results.get("inputs")
-threat_id = so_inputs.get("sentinelone_threat_id")
-status = so_inputs.get("sentinelone_threat_status")
+content = results.get("content")
+threat_id = content.get("threat_id")
+success_verdict = content.get("success_verdict")
+success_status = content.get("success_status")
+status = content.get("threat_status")
+verdict = content.get("threat_analyst_verdict")
 note = u"<b>SentinelOne: Update Threat Status </b><br>  SentinelOne Threat Id: {0}".format(threat_id)
 content = results.get("content")
-if content:
-  data = content.get("data")
-  if data:
-    if int(data.get("affected")) <= 0:
-      note = u"{0} Threat Status <b>{1}</b> NOT updated in SentinelOne threat.".format(note, status)
-    else:
-      note = u"{0} Threat Status <b>{1}</b> updated in SentinelOne threat".format(note, status)
-  else:
-    note = u"{0} Threat Status <b>{1}</b> NOT updated. No 'data' returned from function".format(note, status)
+if success_verdict and success_status:
+  note = u"{0} analystVerdict set to <b>{1}</b><br> incidentStatus set to <b>{2}</b> in SentinelOne".format(note, verdict, status)
+elif success_verdict:
+  note = u"{0} analystVerdict set to <b>{1}</b><br> incidentStatus was NOT set to {2} in SentinelOne".format(note, verdict, status)
+elif success_status:
+  note = u"{0} incidentStatus set to <b>{1}</b><br> analystVerdict was NOT set to {2} in SentinelOne".format(note, status, verdict)
 else:
-    note = u"{0} Threat Status <b>{1}</b> NOT updated. No content returned from function".format(note, status)  
+  note = u"{0} analystVerdict: <b>{1}</b> and incidentStatus: <b>{2}</b> were NOT set in SentinelOne".format(note, verdict, status)
 
 incident.addNote(helper.createRichText(note))
 ```
