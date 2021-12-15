@@ -46,6 +46,8 @@ if results['success']:
     row['alert_id'] = properties.get('systemAlertId')
     if properties.get('alertLink'):
         row['alert_url'] = helper.createRichText("<a target='blank' href='{}'>Alert Link</a>".format(properties['alertLink']))
+    else:
+        row['alert_url'] = helper.createRichText("<a target='blank' href='https://security.microsoft.com/alerts/{}'>Alert Link</a>".format(properties.get('systemAlertId')))
 
 ```
 
