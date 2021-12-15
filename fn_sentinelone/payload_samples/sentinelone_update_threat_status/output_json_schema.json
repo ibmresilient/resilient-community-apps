@@ -41,11 +41,15 @@
         },
         "sentinelone_threat_status": {
           "type": "string"
+        },
+        "sentinelone_threat_analyst_verdict": {
+          "type": "string"
         }
       },
       "required": [
         "sentinelone_threat_id",
-        "sentinelone_threat_status"
+        "sentinelone_threat_status",
+        "sentinelone_threat_analyst_verdict"
       ]
     },
     "metrics": {

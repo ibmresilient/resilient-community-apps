@@ -31,7 +31,7 @@ success_verdict = content.get("success_verdict")
 success_status = content.get("success_status")
 status = content.get("threat_status")
 verdict = content.get("threat_analyst_verdict")
-note = u"<b>SentinelOne: Update Threat Status </b><br>  SentinelOne Threat Id: {0}".format(threat_id)
+note = u"<b>SentinelOne: Update Threat Status </b><br>  SentinelOne Threat Id: {0}<br>".format(threat_id)
 content = results.get("content")
 if success_verdict and success_status:
   note = u"{0} analystVerdict set to <b>{1}</b><br> incidentStatus set to <b>{2}</b> in SentinelOne".format(note, verdict, status)

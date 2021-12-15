@@ -10,7 +10,8 @@
   "raw": null,
   "inputs": {
     "sentinelone_threat_id": "1308905355630511064",
-    "sentinelone_threat_status": "in_progress"
+    "sentinelone_threat_status": "in_progress",
+    "sentinelone_threat_analyst_verdict": "suspicious"
   },
   "metrics": {
     "version": "1.0",

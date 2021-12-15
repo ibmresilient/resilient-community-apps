@@ -3,7 +3,7 @@
 # (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
 
 """AppFunction implementation"""
-
+import logging
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import IntegrationError
 from fn_sentinelone.lib.sentinelone_common import SentinelOneClient
@@ -49,16 +49,17 @@ class FunctionComponent(AppFunctionComponent):
         if not threat_analyst_verdict:
             IntegrationError("SentinelOne Resolve Threat: threat_analyst_verdict {0} is None")
 
+        log = logging.getLogger(__name__)
         verdict_response = sentinelone_client.update_threat_analyst_verdict(threat_id, threat_analyst_verdict)
 
         verdict_data = verdict_response.get("data")
         if int(verdict_data.get("affected")) <= 0:
-            IntegrationError("SentinelOne Resolve Threat: unable to update analystVerdict in SentinelOne threat: {0}".format(threat_id))
+            log.info("Unable to update analystVerdict in SentinelOne threat: %s", threat_id)
         else:
             status_response = sentinelone_client.update_threat_status(threat_id, "resolved")
             status_data = status_response.get("data")
             if int(status_data.get("affected")) <= 0:
-                IntegrationError("SentinelOne Resolve Threat: unable to update incidentStatus in SentinelOne threat: {0}".format(threat_id))
+                log.info("Unable to update incidentStatus to resolved in SentinelOne threat: %s", threat_id)
             else:
                 success = True
 
