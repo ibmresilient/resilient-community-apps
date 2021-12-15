@@ -25,8 +25,9 @@ CREATE_INSIGHT_URL = "cases/CreateCaseInsight"
 CREATE_ARTIFACT_URL = "cases/CreateCaseEntity"
 CREATE_ATTACHMENT_URL = "cases/AddEvidence"
 CREATE_TASK_URL = "cases/AddOrUpdateCaseTask"
+CLOSE_CASE = "cases/CloseCase"
 
-COMMENT_HEADER = "IBM SOAR"
+SOAR_HEADER = "IBM SOAR"
 
 ARTIFACT_TYPE_LOOKUPS = {
     "Port": "ADDRESS",
@@ -97,9 +98,9 @@ class SiemplifyCommon():
 
         results = self._make_call("POST", CREATE_CASE_URL, incident_payload)
         if isinstance(results, int) and incident_info['description']:
-            # TODO strip rich text
             description_results = self.update_case_description(results, incident_info['description'])
 
+        return results
 
     def update_case(self, incident_info):
         # get the existing case to start reviewing changes
@@ -113,6 +114,17 @@ class SiemplifyCommon():
     def get_case(self, case_id):
         uri = GET_CASE_URL.format(case_id)
         return self._make_call("GET", uri)
+
+    def close_case(self, inputs):
+        payload = {
+            "caseId": str(inputs.get('siemplify_case_id')),
+            "alertIdentifier": inputs.get('siemplify_alert_id'),
+            "rootCause": inputs.get('siemplify_root_cause'),
+            "reason": inputs.get('siemplify_reason'),
+            "comment": inputs.get('siemplify_comment') if inputs.get('siemplify_comment') else "Closed by {}".format(SOAR_HEADER)
+        }
+
+        return self._make_call("POST", CLOSE_CASE, payload)
 
     def update_case_description(self, case_id, description):
         payload = {
@@ -141,7 +153,7 @@ class SiemplifyCommon():
         payload = {
             "caseId": str(inputs['siemplify_case_id']),
             "alertIdentifier": inputs.get('siemplify_alert_id'),
-            "comment": "{}\n{}".format(COMMENT_HEADER, inputs['siemplify_comment'])
+            "comment": "{}\n{}".format(SOAR_HEADER, inputs['siemplify_comment'])
         }
 
         return self._make_call("POST", CREATE_COMMENT_URL, payload)
@@ -156,8 +168,8 @@ class SiemplifyCommon():
         payload = {
             "caseId": str(inputs['siemplify_case_id']),
             "alertIdentifier": inputs.get('siemplify_alert_id'),
-            "triggeredBy": COMMENT_HEADER,
-            "title": COMMENT_HEADER,
+            "triggeredBy": SOAR_HEADER,
+            "title": SOAR_HEADER,
             "content": clean_html(inputs['siemplify_comment']),
         }
 
@@ -412,13 +424,11 @@ class SiemplifyCommon():
         else:
             response = self.rc.execute(method, url, headers=self.headers, verify=self.verify)
 
-        if response.json():
-            try:
-                return response.json()
-            except JSONDecodeError:
-                pass  # text will be returned
+        try:
+            return response.json()
+        except JSONDecodeError:
+            return response.text
 
-        return response.text
 
 def _make_headers(api_key):
     return {

@@ -18,10 +18,18 @@
 
 ### Pre-Processing Script
 ```python
+# change as necessary. Value Siemplify values are:  Malicious, Non Malicious, Maintenance, Inconclusive
+LOOKUP_STATUS = {
+    "7": "Inconclusive", # Unresolved
+    "8": "Inconclusive", # Duplicate
+    "9": "Non Malicious", # Not an Issue
+    "10": "Malicious" # Resolved
+}
+
 inputs.siemplify_alert_id = incident.properties.siemplify_alert_id
 inputs.siemplify_case_id = incident.properties.siemplify_case_id
-inputs.siemplify_comment = incident.resolution_summary
-inputs.siemplify_reason = incident.resolution_id
+inputs.siemplify_root_cause = incident.resolution_summary.content
+inputs.siemplify_reason = LOOKUP_STATUS.get(incident.resolution_id, 'Inconclusive')
 ```
 
 ### Post-Processing Script

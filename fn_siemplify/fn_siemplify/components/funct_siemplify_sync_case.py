@@ -4,7 +4,7 @@
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import IntegrationError, validate_fields, clean_html
-from fn_siemplify.lib.resilient_common import ResilientCommon
+from fn_siemplify.lib.resilient_common import ResilientCommon, b_to_s
 from fn_siemplify.lib.siemplify_common import SiemplifyCommon, PACKAGE_NAME
 
 FN_NAME = "siemplify_sync_case"
@@ -63,7 +63,7 @@ class FunctionComponent(AppFunctionComponent):
         results = siemplify_env.sync_case(incident_info)
 
         # get the results based on the data returned
-        if not isinstance(results, int):
+        if isinstance(results, dict):
             status = False
         else:
             # get the full case information

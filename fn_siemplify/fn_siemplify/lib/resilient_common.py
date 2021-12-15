@@ -239,16 +239,19 @@ class ResilientCommon():
         return None
 
     def get_artifact_types(self):
-        type_info = self._get_types("artifact")
-
-        # create a lookup table based on artifact id
-        return { type['value']: type['label'] for type in type_info['fields']['type']['values'] }
+        return self.get_types("artifact", "type")
 
     def get_incident_types(self):
-        type_info = self._get_types("incident")
+        return self.get_types("incident", "incident_type_ids")
+
+    def get_resolution_types(self):
+        return self.get_types("incident", "resolution_id")
+
+    def get_types(self, obj_type, field):
+        type_info = self._get_types(obj_type)
 
         # create a lookup table based on artifact id
-        return { type['value']: type['label'] for type in type_info['fields']['incident_type_ids']['values'] }
+        return { type['value']: type['label'] for type in type_info['fields'][field]['values'] }
 
     @cached(cache=LRUCache(maxsize=100))
     def _get_types(self, res_type):

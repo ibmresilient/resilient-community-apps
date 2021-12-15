@@ -28,12 +28,13 @@ setup(
     author="IBM QRadar SOAR",
     author_email="you@example.com",
     url="https://github.com/ibm/resilient/resilient-community-apps",
-    description="Resilient Circuits Components for 'fn_siemplify'",
-    long_description="""Resilient Circuits Components for 'fn_siemplify'""",
+    description="Siemplify App for IBM QRadar SOAR",
+    long_description="""Bi-directional synchronization with Siemplify Cases, Entities, Attachments and Insights""",
     install_requires=[
         "resilient-circuits>=43.0.0",
         "resilient_lib",
-        "jinja2"
+        "jinja2",
+        "simplejson"
     ],
     python_requires='>=3.6',
     packages=find_packages(),

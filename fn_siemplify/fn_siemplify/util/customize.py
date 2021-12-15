@@ -22,8 +22,8 @@ def codegen_reload_data():
         "package": u"fn_siemplify",
         "message_destinations": [u"fn_siemplify"],
         "functions": [u"siemplify_close_case", u"siemplify_sync_artifact", u"siemplify_sync_attachment", u"siemplify_sync_case", u"siemplify_sync_comment", u"siemplify_sync_task"],
-        "workflows": [u"siemplify_add_comment", u"siemplify_close_case", u"siemplify_m_sync_case", u"siemplify_sync_artifact", u"siemplify_sync_case", u"siemplify_sync_task"],
-        "actions": [u"Siemplify Auto Sync Case", u"Siemplify Close Case", u"Siemplify Sync Artifact", u"Siemplify Sync Case", u"Siemplify Sync Comment", u"Siemplify Sync Task"],
+        "workflows": [u"siemplify_close_case", u"siemplify_m_sync_case", u"siemplify_sync_artifact", u"siemplify_sync_attachment", u"siemplify_sync_case", u"siemplify_sync_comment", u"siemplify_sync_task"],
+        "actions": [u"Siemplify Auto Close Case", u"Siemplify Auto Sync Artifact", u"Siemplify Auto Sync Attachment", u"Siemplify Auto Sync Case", u"Siemplify Auto Sync Comment", u"Siemplify Sync Artifact", u"Siemplify Sync Case", u"Siemplify Sync Comment", u"Siemplify Sync Task"],
         "incident_fields": [u"siemplify_alert_id", u"siemplify_case_id", u"siemplify_case_link"],
         "incident_artifact_types": [],
         "incident_types": [],
@@ -51,15 +51,19 @@ def customization_data(client=None):
         - siemplify_sync_comment
         - siemplify_sync_task
     - Workflows:
-        - siemplify_add_comment
         - siemplify_close_case
         - siemplify_m_sync_case
         - siemplify_sync_artifact
+        - siemplify_sync_attachment
         - siemplify_sync_case
+        - siemplify_sync_comment
         - siemplify_sync_task
     - Rules:
+        - Siemplify Auto Close Case
+        - Siemplify Auto Sync Artifact
+        - Siemplify Auto Sync Attachment
         - Siemplify Auto Sync Case
-        - Siemplify Close Case
+        - Siemplify Auto Sync Comment
         - Siemplify Sync Artifact
         - Siemplify Sync Case
         - Siemplify Sync Comment
