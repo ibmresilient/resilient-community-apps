@@ -2,16 +2,15 @@
 
 """AppFunction implementation"""
 
-from fn_siemplify.lib.siemplify_common import SiemplifyCommon
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import IntegrationError, validate_fields
 
 PACKAGE_NAME = "fn_siemplify"
-FN_NAME = "siemplify_add_comment"
+FN_NAME = "siemplify_sync_comment"
 
 
 class FunctionComponent(AppFunctionComponent):
-    """Component that implements function 'siemplify_add_comment'"""
+    """Component that implements function 'siemplify_sync_comment'"""
 
     def __init__(self, opts):
         super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)

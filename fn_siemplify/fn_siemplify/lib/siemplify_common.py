@@ -4,8 +4,6 @@
 
 import logging
 import json
-from typing import NamedTuple
-from urllib.parse import urljoin
 from .jinja_common import JinjaEnvironment
 
 LOG = logging.getLogger(__name__)
@@ -20,6 +18,7 @@ CREATE_ENTITY_URL = "cases/CreateCaseEntity"
 CREATE_COMMENT_URL = "cases/AddCaseComment"
 CREATE_ARTIFACT_URL = "cases/CreateCaseEntity"
 CREATE_ATTACHMENT_URL = "cases/AddEvidence"
+CREATE_TASK_URL = "cases/AddOrUpdateCaseTask"
 
 COMMENT_HEADER = "IBM SOAR"
 
@@ -224,7 +223,7 @@ class SiemplifyCommon():
 
         return self._make_call("POST", CREATE_ARTIFACT_URL, payload)
 
-    def sync_attachment(self, case_id, alert_id, b64content, filename, isImportant=False):
+    def sync_attachment(self, case_id, b64content, filename, isImportant=False):
         filetype = None
         if '.' in filename:
             filetype = filename[filename.find('.'): ]
@@ -244,6 +243,109 @@ class SiemplifyCommon():
         LOG.debug(payload)
 
         return self._make_call("POST", CREATE_ATTACHMENT_URL, payload)
+
+    def sync_task(self, siemplify_case_id, siemplify_task_assignee,
+                  siemplify_task_id, task_info):
+        """[summary]
+
+        Args:
+            simplify_case_id ([int]): [description]
+            siemplify_task_assignee ([str]): [description]
+            siemplify_task_id ([str]): [description]
+            task_info ([dict]): [description]
+        """
+        """ siemplify task
+        {
+            "caseId": "<long>",
+            "priority": "<integer>",
+            "isImportant": "<boolean>",
+            "status": "<integer>",
+            "ownerComment": "<string>",
+            "name": "<string>",
+            "creatorUserId": "<string>",
+            "owner": "<string>",
+            "dueDateUnixTimeMs": "<long>",
+            "completionComment": "<string>",
+            "completionUnixTimeMs": "<long>",
+            "isFavorite": "<boolean>",
+            "alertIdentifier": "<string>",
+            "id": "<long>",
+            "creationTimeUnixTimeInMs": "<long>",
+            "modificationTimeUnixTimeInMs": "<long>"
+        }
+        """
+        """SOAR Task
+        {
+            "name": "my task",
+            "inc_id": 2298,
+            "inc_owner_id": 3,
+            "due_date": null,
+            "required": true,
+            "owner_id": null,
+            "user_notes": "",
+            "status": "O",
+            "frozen": false,
+            "owner_fname": null,
+            "owner_lname": null,
+            "init_date": 1639515019386,
+            "active": true,
+            "src_name": null,
+            "inc_name": "sync27",
+            "instr_text": "<div class=\"rte\"><div>this is the content</div></div>",
+            "instructions": {
+                "format": "html",
+                "content": "<div class=\"rte\"><div>this is the content</div></div>"
+            },
+            "form": null,
+            "members": null,
+            "perms": {
+            },
+            "notes": [
+
+            ],
+            "closed_date": null,
+            "actions": [
+            ],
+            "phase_id": 1002,
+            "category_id": null,
+            "notes_count": 2,
+            "attachments_count": 0,
+            "task_layout": [
+
+            ],
+            "auto_deactivate": true,
+            "creator_principal": {
+                "id": 3,
+                "type": "user",
+                "name": "a@example.com",
+                "display_name": "Resilient Sysadmin"
+            },
+            "regs": {
+
+            },
+            "custom": true,
+            "id": 1552,
+            "inc_training": false,
+            "cat_name": "Initial",
+            "description": null,
+            "at_id": null,
+            "private": null
+            }
+        """
+
+        payload = {
+            "caseId": siemplify_case_id,
+            "owner": siemplify_task_assignee,
+            "name": "IBM SOAR: {}".format(task_info['name']),
+            "dueDateUnixTimeMs": task_info.get('due_date'),
+            "ownerComment": task_info.get('instr_text'),
+        }
+        if siemplify_task_id:
+            payload['id'] = siemplify_task_id
+
+        LOG.debug(payload)
+
+        return self._make_call("POST", CREATE_TASK_URL, payload)
 
     def _make_call(self, method, uri, payload=None):
 

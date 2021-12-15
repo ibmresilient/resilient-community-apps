@@ -4,14 +4,18 @@
 
 import base64
 import logging
-import resilient
-from resilient import SimpleHTTPException
-from resilient_lib import IntegrationError, clean_html
+import re
+from resilient import SimpleHTTPException, Patch
+from resilient_lib import IntegrationError
 from resilient_lib import get_file_attachment, get_file_attachment_name
 from cachetools import cached, LRUCache
-#from fn_siemlify.lib.constants import FROM_SENTINEL_COMMENT_HDR, FROM_SOAR_COMMENT_HDR, SENTINEL_INCIDENT_NUMBER
 
 LOG = logging.getLogger(__name__)
+
+SIEMPLIFY_SEARCH_QUERY = "Siemplify Task Id"
+SIEMPLIFY_SEARCH_REGEX = re.compile(r"{}: (\d+)".format(SIEMPLIFY_SEARCH_QUERY))
+
+TYPES_URI = "/types"
 
 class ResilientCommon():
 
@@ -116,7 +120,7 @@ class ResilientCommon():
             # Update incident
             incident_url = "/incidents/{0}".format(incident_id)
             incident = self.rest_client.get(incident_url)
-            patch = resilient.Patch(incident)
+            patch = Patch(incident)
 
             # Iterate over payload dict.
             for name, _ in incident_payload.items():
@@ -161,9 +165,6 @@ class ResilientCommon():
     def get_incident(self, incident_id):
         return self._get_incident_info(incident_id, None)
 
-    def get_incident_attachments(self, incident_id):
-        pass
-
     def get_incident_attachment(self, incident_id, artifact_id=None, task_id=None, attachment_id=None, return_base64=True):
         file_content = get_file_attachment(self.rest_client, incident_id, artifact_id=artifact_id, task_id=task_id, attachment_id=attachment_id)
         if return_base64:
@@ -177,6 +178,65 @@ class ResilientCommon():
 
     def get_incident_comments(self, incident_id):
         return self._get_incident_info(incident_id, "comments")
+
+    def get_incident_attachments(self, incident_id):
+        attachments =  self._get_incident_info(incident_id, "attachments")
+        for attachment in attachments:
+            _, attachment['content'] = self.get_incident_attachment(incident_id, attachment_id=attachment['id'])
+
+        return attachments
+
+    def get_incident_task(self, task_id):
+        uri = "/tasks/{}".format(task_id)
+        task_info = self.rest_client.get(uri=uri)
+
+        # get the comments and search for the siemlify task id
+        siemplify_task_id = self.get_siemplify_task_id(task_id)
+
+        return task_info, siemplify_task_id
+
+    def get_siemplify_task_id(self, task_id):
+        uri = "/tasks/{}/comments/query".format(task_id)
+        query = {
+            "conditions":
+            [
+                {
+                    "field_name": "text",
+                    "method": "contains",
+                    "value": SIEMPLIFY_SEARCH_QUERY
+                }
+            ]
+        }
+
+        # {"root_comments":[{"type":"task","id":253,"parent_id":null,"user_id":3,"user_fname":"Resilient","user_lname":"Sysadmin","text":{"format":"html","content":"<div class=\"rte\"><div>Siemplify Task Id: 15</div></div>"},"create_date":1639517174903,"modify_date":1639517174903,"children":[],"mentioned_users":[],"is_deleted":false,"modify_user":{"id":3,"first_name":"Resilient","last_name":"Sysadmin"},"actions":[{"id":155,"name":"Siemplify Sync Comment","enabled":true}],"inc_id":2298,"inc_name":"sync27","task_id":1552,"task_name":"my task","task_custom":true,"task_members":null,"task_at_id":null,"inc_owner":3,"user_name":"Resilient Sysadmin","modify_principal":{"id":3,"type":"user","name":"a@example.com","display_name":"Resilient Sysadmin"},"comment_perms":{"update":true,"delete":true}},{"type":"task","id":254,"parent_id":null,"user_id":3,"user_fname":"Resilient","user_lname":"Sysadmin","text":{"format":"html","content":"<div class=\"rte\"><div>Siemplify Task Id: 15</div></div>"},"create_date":1639517207320,"modify_date":1639517207320,"children":[],"mentioned_users":[],"is_deleted":false,"modify_user":{"id":3,"first_name":"Resilient","last_name":"Sysadmin"},"actions":[{"id":155,"name":"Siemplify Sync Comment","enabled":true}],"inc_id":2298,"inc_name":"sync27","task_id":1552,"task_name":"my task","task_custom":true,"task_members":null,"task_at_id":null,"inc_owner":3,"user_name":"Resilient Sysadmin","modify_principal":{"id":3,"type":"user","name":"a@example.com","display_name":"Resilient Sysadmin"},"comment_perms":{"update":true,"delete":true}}],"incident_comment_match_ids":[],"task_comment_match_ids":[253,254],"max_results_exceeded":false}"
+        # get the siemplify_task_id if it exists
+        search_results = self.rest_client.post(uri=uri, payload=query)
+        LOG.debug(search_results)
+
+        siemplify_task_id = None
+        if search_results.get("root_comments"):
+            m = SIEMPLIFY_SEARCH_REGEX.search(search_results["root_comments"][0]["text"])
+            if m:
+                siemplify_task_id = m.group(1)
+
+        return siemplify_task_id
+
+    def lookup_artifact_type(self, artifact_type):
+        types = self.get_artifact_types()
+        if artifact_type in types:
+            return types[artifact_type]
+        return None
+
+    def get_artifact_types(self):
+        type_info = self._get_types("artifact")
+
+        # create a lookup table based on artifact id
+        return { type['value']: type['label'] for type in type_info['fields']['type']['values'] }
+
+    @cached(cache=LRUCache(maxsize=100))
+    def _get_types(self, res_type):
+        uri = "/".join([TYPES_URI, res_type])
+        return self.rest_client.get(uri)
 
     def _get_incident_info(self, incident_id, child_uri):
         try:

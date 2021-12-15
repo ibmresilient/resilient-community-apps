@@ -33,6 +33,8 @@ class FunctionComponent(AppFunctionComponent):
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
 
+        inputs = fn_inputs._asdict()
+
         # validate app.config settings
         validate_fields([
                 {"name": "api_key"},
@@ -41,33 +43,18 @@ class FunctionComponent(AppFunctionComponent):
             ],
             self.app_configs._asdict())
 
+        # set the default if the default isn't set
+        inputs['siemplify_environment'] = inputs['siemplify_environment'] if inputs.get('siemplify_environment') else self.app_configs.default_environment
+
         resilient_env = ResilientCommon(self.rest_client())
 
         # collect the incident information
-        incident_info = resilient_env.get_incident(fn_inputs.siemplify_incident_id)
-        # add placeholders
-        incident_info["comments"] = []
-        incident_info["artifacts"] = []
-        incident_info["attachments"] = []
-
-        # collect the incident comments
-        if fn_inputs.siemplify_sync_comments:
-            incident_info["comments"] = resilient_env.get_incident_comments(fn_inputs.siemplify_incident_id)
-
-        # collect the incident artifacts
-        if fn_inputs.siemplify_sync_artifacts:
-            incident_info['artifacts'] = resilient_env.get_incident_artifacts(fn_inputs.siemplify_incident_id)
-
-        # collect the incident attachments
-        if fn_inputs.siemplify_sync_attachments:
-            # incident_info['attachments'] = resilient_env.get_incident_attachments(fn_inputs.siemplify_incident_id)
-            pass
+        incident_info = resilient_env.get_incident(inputs['siemplify_incident_id'])
 
         # assemble all the data for Siemplify incident creation
-        incident_info['siemplify_assigned_user'] = fn_inputs.siemplify_assigned_user
-        incident_info['siemplify_environment'] = fn_inputs.siemplify_environment if fn_inputs.siemplify_environment else self.app_configs.default_environment
-        incident_info['siemplify_case_id'] = fn_inputs.siemplify_case_id
-        incident_info['siemplify_alert_id'] = fn_inputs.siemplify_alert_id
+        incident_info['siemplify_assigned_user'] = inputs['siemplify_assigned_user']
+        incident_info['siemplify_environment'] = inputs['siemplify_environment']
+        incident_info['siemplify_alert_id'] = inputs['siemplify_alert_id']
 
         self.LOG.debug(incident_info)
 
@@ -75,14 +62,60 @@ class FunctionComponent(AppFunctionComponent):
         results = siemplify_env.sync_case(incident_info)
 
         # get the results based on the data returned
-        if isinstance(results, int):
+        if not isinstance(results, int):
+            status = False
+        else:
             # get the full case information
             case_results = siemplify_env.get_case(results)
+
+            # save the case_id and alert_id
+            inputs['siemplify_case_id'] = results
+            inputs['siemplify_alert_id'] = case_results['alerts'][0]['identifier']
+
             case_results['siemplify_case_url'] = "{}/#/main/cases/classic-view/{}".format(self.app_configs.base_url, results)
             status = True
             results = case_results
-        else:
-            status = False
+
+            # S Y N C   A L L   O T H E R S
+            # collect the incident comments
+            if fn_inputs.siemplify_sync_comments:
+                self.sync_comments(resilient_env, siemplify_env, inputs)
+
+            # collect the incident artifacts
+            if fn_inputs.siemplify_sync_artifacts:
+                self.sync_artifacts(resilient_env, siemplify_env, inputs)
+
+            # collect the incident attachments
+            if fn_inputs.siemplify_sync_attachments:
+                self.sync_attachments(resilient_env, siemplify_env, inputs)
 
         yield self.status_message("Endpoint reached successfully and returning results for App Function: '{0}'".format(FN_NAME))
         yield FunctionResult(results, success=status)
+
+
+    def sync_comments(self, resilient_env, siemplify_env, fn_inputs):
+        for comment in resilient_env.get_incident_comments(fn_inputs['siemplify_incident_id']):
+            inputs = {
+                'siemplify_case_id': fn_inputs['siemplify_case_id'],
+                'siemplify_alert_id': fn_inputs['siemplify_alert_id'],
+                'siemplify_comment': comment['text']
+            }
+            siemplify_env.sync_comment(inputs)
+
+    def sync_artifacts(self, resilient_env, siemplify_env, fn_inputs):
+        for artifact in resilient_env.get_incident_artifacts(fn_inputs['siemplify_incident_id']):
+            if not artifact.get('attachment'):
+                inputs = {
+                    'siemplify_case_id': fn_inputs['siemplify_case_id'],
+                    'siemplify_alert_id': fn_inputs['siemplify_alert_id'],
+                    'siemplify_artifact_type': resilient_env.lookup_artifact_type(artifact['type']),
+                    'siemplify_artifact_value': artifact['value'],
+                    'siemplify_environment': fn_inputs['siemplify_environment'],
+                }
+                siemplify_env.sync_artifact(inputs)
+
+    def sync_attachments(self, resilient_env, siemplify_env, fn_inputs):
+        for attachment in resilient_env.get_incident_attachments(fn_inputs['siemplify_incident_id']):
+            siemplify_env.sync_attachment(fn_inputs['siemplify_case_id'],
+                                          attachment['content'],
+                                          attachment['name'])
