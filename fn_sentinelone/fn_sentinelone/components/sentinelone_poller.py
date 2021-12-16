@@ -8,7 +8,7 @@ import datetime
 import logging
 from circuits import Event, Timer
 from resilient_circuits import ResilientComponent, handler
-from resilient_lib import validate_fields
+from resilient_lib import validate_fields, build_incident_url, build_resilient_url, IntegrationError
 from fn_sentinelone.lib.jinja_common import JinjaEnvironment
 from fn_sentinelone.lib.resilient_common import ResilientCommon
 from fn_sentinelone.lib.sentinelone_common import SentinelOneClient
@@ -142,6 +142,7 @@ class SentinelOnePollerComponent(ResilientComponent):
                 resilient_incident = self.resilient_common.create_incident(incident_payload)
                 LOG.info("Created incident %s from SentinelOne Threat %s",
                              resilient_incident['id'], threat_id)
+                resilient_incident_url = self._send_incident_url_to_sentinelone(resilient_incident, threat_id)
             else:
                 resilient_incident_id = resilient_incident['id']
                 if resilient_incident["plan_status"] == "C":
@@ -209,3 +210,29 @@ class SentinelOnePollerComponent(ResilientComponent):
         threat_url_link = "<a target='blank' href='{0}'>SentinelOne Threat</a>".format(threat_url)
         payload["properties"]["sentinelone_threat_overview_url"] = threat_url_link
         return payload
+
+    def _send_incident_url_to_sentinelone(self, incident, threat_id):
+        """[summary]
+
+        Args:
+            incident (dict): [Resilient incident payload]
+            threat_id (string): [SentinelOne threat Id]
+
+        Returns:
+            [string]: [URLto Resilient incident corresponding to the the SentinelOne threat Id]
+        """
+        try: 
+            # Build the Resilient incident URL
+            host = self.opts.get('host')
+            port = self.opts.get('port')
+            incident_id = incident.get("id")
+            resilient_incident_url = build_incident_url(build_resilient_url(host, port), incident_id)
+
+            # Send a threat note containing the incident URL to SentinelOne 
+            resilient_url_link = "IBM SOAR created incident {0}: {1}".format(incident_id, resilient_incident_url)
+            self.sentinelone_client.add_threat_note(threat_id, resilient_url_link)
+
+            return resilient_incident_url
+
+        except Exception as err:
+            raise IntegrationError(str(err))

@@ -1972,7 +1972,7 @@ sentinelone_agents_dt
 | SentinelOne: Send Note to SentinelOne Threat | note | `sentinelone_send_soar_note_to_sentinelone` |
 | SentinelOne: Send SOAR Note to SentinelOne | note | `sentinelone_send_soar_note_to_sentinelone` |
 | SentinelOne: Shutdown Agent | sentinelone_agents_dt | `sentinelone_shutdown_agent` |
-| SentinelOne: Update Agent in Data table | sentinelone_agents_dt | `sentinelone_add_agent_to_data_table` |
+| SentinelOne: Update Agent in Data table | sentinelone_agents_dt | `sentinelone_update_agent_in_data_table` |
 | SentinelOne: Update Notes from SentinelOne | incident | `sentinelone_update_notes_from_sentinelone` |
 | SentinelOne: Update Threat Status | incident | `sentinelone_update_threat_status` |
 | SentinelOne: Write Agent Details to Note | sentinelone_agents_dt | `sentinelone_write_agent_details_to_note` |
