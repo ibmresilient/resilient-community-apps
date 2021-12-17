@@ -35,7 +35,6 @@
 - [Function - SentinelOne: Abort Disk Scan](#function---sentinelone-abort-disk-scan)
 - [Function - SentinelOne: Connect to Network](#function---sentinelone-connect-to-network)
 - [Function - SentinelOne: Disconnect From Network](#function---sentinelone-disconnect-from-network)
-- [Function - SentinelOne: Download From Cloud](#function---sentinelone-download-from-cloud)
 - [Function - SentinelOne: Get Agent Details](#function---sentinelone-get-agent-details)
 - [Function - SentinelOne: Get Hash Reputation](#function---sentinelone-get-hash-reputation)
 - [Function - SentinelOne: Get Threat Details](#function---sentinelone-get-threat-details)
@@ -94,7 +93,6 @@ The SentinelOne app implements the following functionality in the IBM SOAR platf
   - shutdown/restart agent
   - initiate/abort full disk scan
 * Get the agent or threat details and write the JSON returned from SentinelOne as an incident note.
-* Download a threat file from SentinelOne and add as an attachment to the corresponding IBM SOAR threat incident/case. 
 ---
 
 ## Requirements
@@ -164,7 +162,7 @@ This app has been implemented using:
 <!--
 List any prerequisites that are needed to use with this endpoint solution. Remove any section that is unnecessary.
 -->
-* A SentinelOne cloud account.
+* A SentinelOne cloud account with Admin role.
 
 
 #### Configuration
@@ -177,8 +175,7 @@ List any steps that are needed to configure the endpoint to use this app.
 <!--
 List any user permissions that are needed to use this endpoint. For example, list the API key permissions.
 -->
-* SentinelOne Admin role is required in the SentinelOne account that is 
-* Permission to download a threat file from cloud in the user SentinelOne account is needed for the **SentinelONE: Download from Cloud** function.
+* SentinelOne Admin role is required in the SentinelOne account that is IBM SOAR is communicating with as specified in the App configration file.
 
 ---
 
@@ -205,7 +202,6 @@ The following table provides the settings you need to configure the app. These s
 | **sort_by** | No | `createdDate` | *The column to sort results by when querying threats* |
 | **sort_order** | No | `desc` | *Sort direction to return threat query results: 'asc' or 'desc'* |
 | **query_param** | No | `threat details` | *Full text search for fields when querying threats* |
-| **download_timeout** | No | `300` | *Seconds to timeout when downloading threat file from cloud* |
 
 ### Custom Layouts
 <!--
@@ -480,66 +476,6 @@ incident.addNote(helper.createRichText(note))
 </details>
 
 ---
-## Function - SentinelOne: Download From Cloud
-Download a threat from SentinelOne.
-
- ![screenshot: fn-sentinelone-download-from-cloud ](./doc/screenshots/fn-sentinelone-download-from-cloud.png) <!-- ::CHANGE_ME:: -->
-
-<details><summary>Inputs:</summary>
-<p>
-
-| Name | Type | Required | Example | Tooltip |
-| ---- | :--: | :------: | ------- | ------- |
-| `incident_id` | `number` | No | `-` | - |
-| `sentinelone_threat_id` | `text` | No | `-` | - |
-
-</p>
-</details>
-
-<details><summary>Outputs:</summary>
-<p>
-
-> **NOTE:** this example may be in JSON format, yet on the SOAR Platform `results` will be a Python Dictionary
-
-<!-- ::CHANGE_ME:: -->
-```python
-results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
-} 
-```
-
-</p>
-</details>
-
-<details><summary>Example Pre-Process Script:</summary>
-<p>
-
-```python
-inputs.incident_id = incident.id
-inputs.sentinelone_threat_id = incident.properties.sentinelone_threat_id
-```
-
-</p>
-</details>
-
-<details><summary>Example Post-Process Script:</summary>
-<p>
-
-```python
-success = results.get("success")
-content = results.get("content")
-if success and content:
-  attachment_name = content.get("attachment_name")
-  note_text = "<b>SentinelOne: Download from Cloud</b><br>  Incident attachment added: <b>{0}</b>".format(attachment_name)
-else:
-  note_text = "<b>SentinelOne: Download from Cloud</b><br>  ERROR adding attachment"
-incident.addNote(helper.createRichText(note_text))
-```
-
-</p>
-</details>
 
 ---
 ## Function - SentinelOne: Get Agent Details
@@ -1964,7 +1900,6 @@ sentinelone_agents_dt
 | SentinelOne: Add Agent to Data Table | incident | `sentinelone_add_agent_to_data_table` |
 | SentinelOne: Connect Agent to Network | sentinelone_agents_dt | `sentinelone_connect_to_network` |
 | SentinelOne: Disconnect Agent From Network | sentinelone_agents_dt | `sentinelone_disconnect_from_network` |
-| SentinelOne: Download From Cloud | incident | `sentinelone_download_threat_from_cloud` |
 | SentinelOne: Get Hash Reputation | artifact | `sentinelone_get_hash_reputation` |
 | SentinelOne: Initiate Disk Scan | sentinelone_agents_dt | `sentinelone_initiate_disk_scan` |
 | SentinelOne: Resolve Threat in SentinelOne | incident | `sentinelone_resolve_threat_in_sentinelone` |

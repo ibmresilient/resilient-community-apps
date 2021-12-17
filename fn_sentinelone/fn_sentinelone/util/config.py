@@ -37,8 +37,6 @@ limit=25
 sort_by=createdDate
 # Optional sortOrder for SentinelOne threat query results. Possible values: asc or desc
 sort_order=desc
-# Optional timeout in seconds for downloading threat file from SentinelOne
-download_timeout=300
 #verify=false | /path/toclient_certificate.pem
 #http_proxy=
 #https_proxy=
