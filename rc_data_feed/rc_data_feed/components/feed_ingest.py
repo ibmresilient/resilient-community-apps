@@ -112,16 +112,21 @@ def send_data(type_info, inc_id, rest_client_helper, payload,\
     # get the incident workspace for this data
     # reload=true will not work as type_info is the wrong object type
     workspace = type_info.get_workspace() if getattr(type_info, "get_workspace", None) else None
+    item_sent = False
     for feed_name, feed_output in feed_outputs.items():
         # don't let a failure in one feed break all the rest
         try:
             if not workspaces or (workspace in workspaces and feed_name in workspaces[workspace]):
                 LOG.debug("Calling feed %s for workspace: %s", feed_output.__class__.__name__, workspace)
                 feed_output.send_data(context, payload)
+                item_sent = True
         except Exception as err:
             LOG.error("Failure in update to %s %s", feed_output.__class__.__name__, err)
             error_trace = traceback.format_exc()
             LOG.error("Traceback %s", error_trace)
+
+    if not item_sent:
+        LOG.warning("No workspace found to satisfy data feed for %s (%s)", type_name, payload.get('id'))
 
 class FeedComponent(ResilientComponent):
     """This component handles initial population of a feed and ongoing
