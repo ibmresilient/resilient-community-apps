@@ -172,6 +172,13 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
     def send_data(self, context, payload):
         # We'll use the type's name as the table name.
         #
+
+        # Create a flattened map where each key of the map is the field name.
+        #
+        flat_payload = context.type_info.flatten(payload,
+                                               translate_func=getattr(self.dialect,
+                                                                      'mapped_translate_value',
+                                                                      TypeInfo.translate_value))
         table_name = context.type_info.get_pretty_type_name()
 
         all_fields = context.type_info.get_all_fields(refresh=False)
@@ -179,13 +186,6 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
         self._create_or_update_table(table_name, all_fields)
 
         all_field_names = [field['name'] for field in all_fields]
-
-        # Create a flattened map where each key of the map is the field name.
-        #
-        flat_payload = context.type_info.flatten(payload,
-                                                 translate_func=getattr(self.dialect,
-                                                                        'mapped_translate_value',
-                                                                        TypeInfo.translate_value))
 
         # some data types, such as datetime, will need a conversion routine
         all_field_types = dict()
