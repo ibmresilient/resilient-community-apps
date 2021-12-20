@@ -222,6 +222,10 @@ class SentinelOnePollerComponent(ResilientComponent):
             [string]: [URLto Resilient incident corresponding to the the SentinelOne threat Id]
         """
         try: 
+            # If app.config setting says don't sent threat note to SentinelOne then return None
+            if not self.options.get("send_soar_link_to_sentinelone"):
+                return None
+
             # Build the Resilient incident URL
             host = self.opts.get('host')
             port = self.opts.get('port')

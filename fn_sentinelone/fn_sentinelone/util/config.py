@@ -37,7 +37,11 @@ limit=25
 sort_by=createdDate
 # Optional sortOrder for SentinelOne threat query results. Possible values: asc or desc
 sort_order=desc
+# Optional: send SOAR incident URL live link via threat note to SentinelOne
+send_soar_link_to_sentinelone=true
+# Optional path to SSL certificate
 #verify=false | /path/toclient_certificate.pem
+# Optional proxy settings
 #http_proxy=
 #https_proxy=
 """

@@ -39,7 +39,7 @@ class SentinelOneClient(object):
         self.sort_order = options.get("sort_order", DEFAULT_SORT_ORDER)
         self.query_param = options.get("query_param", None)
         self.incident_statuses = options.get("incident_statuses", "in_progress,unresolved")
-        self.download_timeout = options.get("download_timeout", DEFAULT_TIMEOUT)
+        self.send_soar_link_to_sentinelone = str_to_bool(options.get("send_soar_link_to_sentinelone", "true"))
         self.headers = self.get_headers(self.api_token)
     
 
