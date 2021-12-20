@@ -141,11 +141,11 @@ class SentinelOnePollerComponent(ResilientComponent):
                 incident_payload = self._add_threat_url_to_payload(threat_id, incident_payload)
                 resilient_incident = self.resilient_common.create_incident(incident_payload)
                 LOG.info("Created incident %s from SentinelOne Threat %s",
-                             resilient_incident['id'], threat_id)
+                             resilient_incident.get('id'), threat_id)
                 resilient_incident_url = self._send_incident_url_to_sentinelone(resilient_incident, threat_id)
             else:
-                resilient_incident_id = resilient_incident['id']
-                if resilient_incident["plan_status"] == "C":
+                resilient_incident_id = resilient_incident.get('id')
+                if resilient_incident.get("plan_status") == "C":
                     LOG.info("Bypassing update to closed incident %s from SentinelOne threat %s",
                             resilient_incident_id, threat_id)
                 elif threat_info.get("incidentStatus") == "resolved":
@@ -173,7 +173,7 @@ class SentinelOnePollerComponent(ResilientComponent):
                                                                       "Updates synchronized from SentinelOne")
                     LOG.info("Updated incident %s from SentinelOne threat %s", resilient_incident_id, threat_id)
 
-            incident_id = resilient_incident['id']
+            incident_id = resilient_incident.get('id')
             self._update_notes(incident_id, threat_id)
         except Exception as err:
             LOG.error(str(err))
