@@ -26,8 +26,10 @@ CREATE_ARTIFACT_URL = "cases/CreateCaseEntity"
 CREATE_ATTACHMENT_URL = "cases/AddEvidence"
 CREATE_TASK_URL = "cases/AddOrUpdateCaseTask"
 CLOSE_CASE = "cases/CloseCase"
+SEARCH_CASE_URL = "search/CaseSearchEverything"
 
 SOAR_HEADER = "IBM SOAR"
+IBMSOAR_TAGS = ['IBMSOAR']
 
 ARTIFACT_TYPE_LOOKUPS = {
     "Port": "ADDRESS",
@@ -98,7 +100,7 @@ class SiemplifyCommon():
 
         results = self._make_call("POST", CREATE_CASE_URL, incident_payload)
         if isinstance(results, int) and incident_info['description']:
-            description_results = self.update_case_description(results, incident_info['description'])
+            _description_results = self.update_case_description(results, incident_info['description'])
 
         return results
 
@@ -114,6 +116,17 @@ class SiemplifyCommon():
     def get_case(self, case_id):
         uri = GET_CASE_URL.format(case_id)
         return self._make_call("GET", uri)
+
+    def get_cases(self, case_list):
+        payload = {
+            "tags": IBMSOAR_TAGS,
+            "title": "Caseids:{}".format(",".join(case_list)),
+            "requestedPage": 0,
+            "timeRangeFilter": 0
+        }
+        LOG.debug(payload)
+
+        return self._make_call("POST", SEARCH_CASE_URL, payload)
 
     def close_case(self, inputs):
         payload = {

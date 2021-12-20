@@ -46,8 +46,9 @@ setup(
     entry_points={
         "resilient.circuits.components": [
             # When setup.py is executed, loop through the .py files in the components directory and create the entry points.
-            "{}FunctionComponent = fn_siemplify.components.{}:FunctionComponent".format(snake_to_camel(get_module_name(filename)), get_module_name(filename)) for filename in glob.glob("./fn_siemplify/components/[a-zA-Z]*.py")
-        ],
+            "{}FunctionComponent = fn_siemplify.components.{}:FunctionComponent".format(snake_to_camel(get_module_name(filename)), get_module_name(filename)) for filename in glob.glob("./fn_siemplify/components/funct_[a-zA-Z]*.py")
+        ]+
+        [ "PollerComponent = fn_siemplify.components.siemplify_poller:SiemplifyPollerComponent" ],
         "resilient.circuits.configsection": ["gen_config = fn_siemplify.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_siemplify.util.customize:customization_data"],
         "resilient.circuits.selftest": ["selftest = fn_siemplify.util.selftest:selftest_function"]

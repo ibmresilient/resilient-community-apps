@@ -15,12 +15,40 @@ LOG = logging.getLogger(__name__)
 SIEMPLIFY_SEARCH_QUERY = "Siemplify Task Id"
 SIEMPLIFY_SEARCH_REGEX = re.compile(r"{}: (\d+)".format(SIEMPLIFY_SEARCH_QUERY))
 
+SIEMPLIFY_CASE_ID = "siemplify_case_id"
+
 TYPES_URI = "/types"
 
 class ResilientCommon():
 
     def __init__(self, rest_client):
         self.rest_client = rest_client
+
+    def get_open_siemplify_incidents(self):
+        query = {
+            "filters": [{
+                "conditions": [
+                    {
+                        "field_name": "properties.{0}".format(SIEMPLIFY_CASE_ID),
+                        "method": "has_a_value"
+                    },
+                    {
+                        "field_name": "plan_status",
+                        "method": "equals",
+                        "value": "A"
+                    }
+                ]
+            }],
+            "sorts": [{
+                "field_name": "create_date",
+                "type": "desc"
+            }]
+        }
+
+        incidents = self._query_incidents(query)
+        # return dictionary of incidents indexed by siemplify case id
+        return { incident['properties'][SIEMPLIFY_CASE_ID]: incident['id'] for incident in incidents }
+
 
     def find_incident(self, siemplify_case_id):
         """Find a Resilient incident which contains a custom field associated with a Sentinel
@@ -32,15 +60,13 @@ class ResilientCommon():
         Returns:
             [dict]: [API results of the first incident found]
         """
-        r_incidents = []
-        query_uri = "/incidents/query?return_level=partial"
         query = {
-            'filters': [{
-                'conditions': [
+            "filters": [{
+                "conditions": [
                     {
-                        'field_name': 'properties.{0}'.format(None),
-                        'method': 'equals',
-                        'value': "{}".format(siemplify_case_id)
+                        "field_name": "properties.{0}".format(SIEMPLIFY_CASE_ID),
+                        "method": "equals",
+                        "value": "{}".format(siemplify_case_id)
                     }
                 ]
             }],
@@ -49,15 +75,20 @@ class ResilientCommon():
                 "type": "desc"
             }]
         }
-        LOG.debug(query)
-
-        try:
-            r_incidents = self.rest_client.post(query_uri, query)
-        except SimpleHTTPException as err:
-            LOG.error(str(err))
-            r_incidents = None
+        r_incidents = self._query_incidents(query)
 
         return r_incidents[0] if r_incidents else None
+
+    def _query_incidents(self, query):
+        LOG.debug(query)
+
+        query_uri = "/incidents/query?return_level=normal"
+
+        try:
+            return self.rest_client.post(query_uri, query)
+        except SimpleHTTPException as err:
+            LOG.error(str(err))
+            return None
 
     def create_incident(self, incident_payload):
         """

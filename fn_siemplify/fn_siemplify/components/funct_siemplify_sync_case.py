@@ -5,7 +5,7 @@
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import IntegrationError, validate_fields, clean_html
 from fn_siemplify.lib.resilient_common import ResilientCommon, b_to_s
-from fn_siemplify.lib.siemplify_common import SiemplifyCommon, PACKAGE_NAME
+from fn_siemplify.lib.siemplify_common import SiemplifyCommon, PACKAGE_NAME, IBMSOAR_TAGS
 
 FN_NAME = "siemplify_sync_case"
 SIEMPLIFY_CASE_URL = "{}/#/main/cases/classic-view/{}"
@@ -56,6 +56,7 @@ class FunctionComponent(AppFunctionComponent):
         incident_info['siemplify_assigned_user'] = inputs['siemplify_assigned_user']
         incident_info['siemplify_environment'] = inputs['siemplify_environment']
         incident_info['siemplify_alert_id'] = inputs['siemplify_alert_id']
+        incident_info['siemplify_tags'] = IBMSOAR_TAGS
 
         self.LOG.debug(incident_info)
 

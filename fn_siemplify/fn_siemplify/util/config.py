@@ -18,5 +18,6 @@ cafile=
 default_case_environment=Default Environment
 # override default Siemplify and SOAR templates as necessary
 siemplify_create_case_template=
+soar_close_case_template=
 """
     return config_data

@@ -9,5 +9,5 @@
   "occurenceTime": "{{ discovered_date | resilient_display_datetimeformat(milliseconds=True) }}",
   "slaExpirationDateTime": null,
   "playbooks": [ ],
-  "tags": {{ incident_types|tojson }}
+  "tags": {{ simeplify_tags|tojson }}
 }
