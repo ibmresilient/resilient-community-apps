@@ -34,8 +34,7 @@ setup(
     install_requires=[
         "resilient-circuits>=40.0.0",
                 "resilient-lib",
-                "jinja2",
-                "simplejson"
+                "jinja2"
     ],
     python_requires='>=3.6',
     packages=find_packages(),

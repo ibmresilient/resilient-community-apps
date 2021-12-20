@@ -149,7 +149,6 @@ Additional package dependencies may exist for each of these packages:
 * jinja2
 * resilient-circuits>=40.0.0
 * resilient-lib
-* simplejson
 
 ### Endpoint Developed With
 
