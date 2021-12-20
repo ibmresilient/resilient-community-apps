@@ -99,7 +99,6 @@ The SentinelOne app implements the following functionality in the IBM SOAR platf
 <!--
   List any Requirements 
 --> 
-<!-- ::CHANGE_ME:: -->
 This app supports the IBM Resilient SOAR Platform and the IBM Cloud Pak for Security.
 
 ### Resilient platform
@@ -174,7 +173,7 @@ List any steps that are needed to configure the endpoint to use this app.
 <!--
 List any user permissions that are needed to use this endpoint. For example, list the API key permissions.
 -->
-* SentinelOne Admin role is required in the SentinelOne account that is IBM SOAR is communicating with as specified in the App configration file.
+* SentinelOne Admin role is required in the SentinelOne account that IBM SOAR is communicating with as specified in the App configration file.
 
 ---
 
@@ -193,8 +192,8 @@ The following table provides the settings you need to configure the app. These s
 | **api_version** | Yes | `2.1` | *SentinelOne REST API version* |
 | **api_token** | Yes | `xxxxxx` | *SentinelOne user API token* |
 | **polling_interval** | Yes | `60` | *Poller interval time in seconds. Value of zero to turn poller off*|
-| **polling_lookback** | Yes | `120` | *Number of minutes to lookback for incident changes. Value is only used on the first time polling when the app starts* |
-| **account_ids** | No | `123456789012345678` | *Comma seperated list of SentinelOne accountId to query for threats* |
+| **polling_lookback** | Yes | `120` | *Number of minutes to lookback for threat updates. Value is only used on the first time polling when the app starts* |
+| **account_ids** | No | `123456789012345678` | *Comma seperated list of SentinelOne accountIds to query for threats* |
 | **site_ids** | No | `987654321098765432` | *Comma seperated list of SentinelOne siteIds to query for threats* |
 | **incident_statuses** | No | `resolved,in_progress,unresolved` | *Comma seperated list of SentinelOne incidentStatuses to query for threats* |
 | **limit** | No | `25` | *Limit number of threats to return from query* |
@@ -208,17 +207,19 @@ The following table provides the settings you need to configure the app. These s
   You may wish to recommend a new incident tab.
   You should save a screenshot "custom_layouts.png" in the doc/screenshots directory and reference it here
 -->
-* Import the Data Tables and Custom Fields like the screenshot below:
+* Create a SentinelOne incident tab and import the Data Table and Custom Fields like the screenshot below:
 
-  ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png) <!-- ::CHANGE_ME:: -->
+  ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png) 
 
-
+* Create a Close Incident tab so that when a SOAR incident corresponding to a SentinelOne threat is closed in SOAR, the user can select a SentinelOne Threat Analyst Verdict to send to SentinelOne when the incident it closed.  The SentinelOne threat cannot be closed if the Analyst Verdict is undefined.  
+  ![screenshot: custom_layouts_close](./doc/screenshots/custom_layouts_close.png) 
+ NOTE: If a Close incident tab is created, all non-SentinelOne incidents also contain the SentinelOne Threat Analyst Verdict select field.  Alternatively, there is an incident menu item rule **SentinelOne: Update Analyst Verdict and Threat Status** that can be manually run to update the Analyst Verdict and Threat status in SentinelOne.  When the rule is run to **resolve** a SentinelOne threat, choose an Analyst Verdict and set the Threat Status to **resolved**.  SOAR updates the SentinelOne threat which in turn causes the incident to be closed in IBM SOAR on the next poll.
 ---
 
 ## Function - SentinelOne: Abort Disk Scan
 Initiate a Full Disk Scan on an agent managed by SentinelOne.
 
- ![screenshot: fn-sentinelone-abort-disk-scan ](./doc/screenshots/fn-sentinelone-abort-disk-scan.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-sentinelone-abort-disk-scan ](./doc/screenshots/fn-sentinelone-abort-disk-scan.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -303,7 +304,7 @@ incident.addNote(helper.createRichText(note))
 ## Function - SentinelOne: Connect to Network
 Connect an endpoint managed by Sentinel to the network.
 
- ![screenshot: fn-sentinelone-connect-to-network ](./doc/screenshots/fn-sentinelone-connect-to-network.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-sentinelone-connect-to-network ](./doc/screenshots/fn-sentinelone-abort-disk-scan.png) 
 
 <details><summary>Inputs:</summary>
 <p>
@@ -391,7 +392,7 @@ incident.addNote(helper.createRichText(note))
 ## Function - SentinelOne: Disconnect From Network
 Disconnect an endpoint managed by SentinelOne from the network.
 
- ![screenshot: fn-sentinelone-disconnect-from-network ](./doc/screenshots/fn-sentinelone-disconnect-from-network.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-sentinelone-disconnect-from-network ](./doc/screenshots/fn-sentinelone-disconnect-from-network.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -478,9 +479,9 @@ incident.addNote(helper.createRichText(note))
 
 ---
 ## Function - SentinelOne: Get Agent Details
-Get details of a SentinelOne managed agent.
+Get details of a SentinelOne managed agent. The example workflow writes the SentinelOne agent JSON details to a nicely formated incident note.
 
- ![screenshot: fn-sentinelone-get-agent-details ](./doc/screenshots/fn-sentinelone-get-agent-details.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-sentinelone-get-agent-details ](./doc/screenshots/fn-sentinelone-get-agent-details.png) 
 
 <details><summary>Inputs:</summary>
 <p>
@@ -690,9 +691,9 @@ incident.addNote(helper.createRichText(note))
 
 ---
 ## Function - SentinelOne: Get Hash Reputation
-Get the SentinelOne reputation of a hash.
+Get the SentinelOne reputation of a hash.  The example workflow writes the results to in incident note.
 
- ![screenshot: fn-sentinelone-get-hash-reputation ](./doc/screenshots/fn-sentinelone-get-hash-reputation.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-sentinelone-get-hash-reputation ](./doc/screenshots/fn-sentinelone-get-hash-reputation.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -774,9 +775,9 @@ incident.addNote(helper.createRichText(note))
 
 ---
 ## Function - SentinelOne: Get Threat Details
-Get the details of a threat detected by SentinelOne.
+Get the details of a threat detected by SentinelOne. Results are written to an incident note in the example workflow.
 
- ![screenshot: fn-sentinelone-get-threat-details ](./doc/screenshots/fn-sentinelone-get-threat-details.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-sentinelone-get-threat-details ](./doc/screenshots/fn-sentinelone-get-threat-details.png) 
 
 <details><summary>Inputs:</summary>
 <p>
@@ -1059,7 +1060,7 @@ workflow.addProperty('convert_json_to_rich_text', json_note)
 ## Function - SentinelOne: Initiate Disk Scan
 Initiate a Full Disk scan on an agent managed by SentinelOne.
 
- ![screenshot: fn-sentinelone-initiate-disk-scan ](./doc/screenshots/fn-sentinelone-initiate-disk-scan.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-sentinelone-initiate-disk-scan ](./doc/screenshots/fn-sentinelone-abort-disk-scan.png) 
 
 <details><summary>Inputs:</summary>
 <p>
@@ -1144,7 +1145,7 @@ incident.addNote(helper.createRichText(note))
 ## Function - SentinelOne: Resolve Threat in SentinelOne
 Resolve (close) a threat in SentinelOne.
 
- ![screenshot: fn-sentinelone-resolve-threat-in-sentinelone ](./doc/screenshots/fn-sentinelone-resolve-threat-in-sentinelone.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-sentinelone-resolve-threat-in-sentinelone ](./doc/screenshots/fn-sentinelone-resolve-threat-in-sentinelone.png) 
 
 <details><summary>Inputs:</summary>
 <p>
@@ -1161,13 +1162,28 @@ Resolve (close) a threat in SentinelOne.
 
 > **NOTE:** this example may be in JSON format, yet on the SOAR Platform `results` will be a Python Dictionary
 
-<!-- ::CHANGE_ME:: -->
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
-} 
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "success": true,
+    "threat_id": "131313131313131313"
+  },
+  "raw": null,
+  "inputs": {
+    "incident_id": 2338
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-sentinelone",
+    "package_version": "1.0.0",
+    "host": "myHost",
+    "execution_time_ms": 1208,
+    "timestamp": "2021-12-14 11:21:41"
+  }
+}
 ```
 
 </p>
@@ -1202,7 +1218,7 @@ incident.addNote(noteText)
 ## Function - SentinelOne: Restart Agent
 Restart a endpoint managed by SentinelOne.
 
- ![screenshot: fn-sentinelone-restart-agent ](./doc/screenshots/fn-sentinelone-restart-agent.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-sentinelone-restart-agent ](./doc/screenshots/fn-sentinelone-abort-disk-scan.png) 
 
 <details><summary>Inputs:</summary>
 <p>
@@ -1269,9 +1285,9 @@ None
 
 ---
 ## Function - SentinelOne: Send SOAR Note to SentinelOne
-Send a note created in SOAR to corresponding SentinelOne threat.
+Send a note created in SOAR to corresponding SentinelOne threat. The example rule it a menu item run off a note in SOAR.
 
- ![screenshot: fn-sentinelone-send-soar-note-to-sentinelone ](./doc/screenshots/fn-sentinelone-send-soar-note-to-sentinelone.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-sentinelone-send-soar-note-to-sentinelone ](./doc/screenshots/fn-sentinelone-send-soar-note-to-sentinelone.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -1349,7 +1365,7 @@ if results.success:
 ## Function - SentinelOne: Shutdown Agent
 Shutdown an agent managed by SentinelOne.
 
- ![screenshot: fn-sentinelone-shutdown-agent ](./doc/screenshots/fn-sentinelone-shutdown-agent.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-sentinelone-shutdown-agent ](./doc/screenshots/fn-sentinelone-abort-disk-scan.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -1434,7 +1450,7 @@ incident.addNote(helper.createRichText(note))
 ## Function - SentinelOne: Update Notes From SentinelOne
 Query SentinelOne threat and add any new threat notes to the SOAR incident.
 
- ![screenshot: fn-sentinelone-update-notes-from-sentinelone ](./doc/screenshots/fn-sentinelone-update-notes-from-sentinelone.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-sentinelone-update-notes-from-sentinelone ](./doc/screenshots/fn-sentinelone-get-threat-details.png) 
 
 <details><summary>Inputs:</summary>
 <p>
@@ -1503,9 +1519,9 @@ None
 
 ---
 ## Function - Sentinelone: Update Threat Status
-Update the status of a threat in SentinelOne.
+Update the analyst verdict and the status of a threat in SentinelOne.
 
- ![screenshot: fn-sentinelone-update-threat-status ](./doc/screenshots/fn-sentinelone-update-threat-status.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-sentinelone-update-threat-status ](./doc/screenshots/fn-sentinelone-update-analyst-verdict-and-threat-status.png) 
 
 <details><summary>Inputs:</summary>
 <p>
@@ -1849,7 +1865,8 @@ if 'workflow' in globals():
 
 ## Data Table - SentinelOne Agent
 
- ![screenshot: dt-sentinelone-agent](./doc/screenshots/dt-sentinelone-agent.png) <!-- ::CHANGE_ME:: -->
+Here is an example of the SentinelOne Agent data table:
+ ![screenshot: dt-sentinelone-agent](./doc/screenshots/dt-sentinelone-agent.png)
 
 #### API Name:
 sentinelone_agents_dt
@@ -1908,7 +1925,7 @@ sentinelone_agents_dt
 | SentinelOne: Shutdown Agent | sentinelone_agents_dt | `sentinelone_shutdown_agent` |
 | SentinelOne: Update Agent in Data table | sentinelone_agents_dt | `sentinelone_update_agent_in_data_table` |
 | SentinelOne: Update Notes from SentinelOne | incident | `sentinelone_update_notes_from_sentinelone` |
-| SentinelOne: Update Threat Status | incident | `sentinelone_update_threat_status` |
+| SentinelOne: Update Analyst Verdict and Threat Status | incident | `sentinelone_update_threat_status` |
 | SentinelOne: Write Agent Details to Note | sentinelone_agents_dt | `sentinelone_write_agent_details_to_note` |
 | SentinelOne: Write Threat Details to Note | incident | `sentinelone_write_threat_details_to_note` |
 
