@@ -47,7 +47,10 @@ class FunctionComponent(AppFunctionComponent):
         threat_analyst_verdict = incident.get('properties', {}).get('sentinelone_threat_analyst_verdict', None)
 
         if not threat_analyst_verdict:
-            IntegrationError("SentinelOne Resolve Threat: threat_analyst_verdict {0} is None")
+            IntegrationError("SentinelOne Resolve Threat: threat_analyst_verdict is None")
+
+        if threat_analyst_verdict == "undefined":
+            IntegrationError("SentinelOne Resolve Threat: incident {0} is not closed due to 'analystVerdict' set to 'undefined'.".format(incident_id))
 
         log = logging.getLogger(__name__)
         verdict_response = sentinelone_client.update_threat_analyst_verdict(threat_id, threat_analyst_verdict)
