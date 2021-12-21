@@ -57,7 +57,7 @@ def build_feed_outputs(rest_client_helper, opts, feed_names):
 
 def range_chunks(chunk_range, chunk_size):
     """
-    build array of lists to break of queries into smaller chunks
+    build array of lists to break the queries into smaller chunks
     :param chunk_range:
     :param chunk_size:
     :return:
@@ -169,9 +169,11 @@ class FeedComponent(ResilientComponent):
                     query_api_method = str_to_bool(self.options.get("reload_query_api_method", 'false'))
 
                     reload_feeds = Reload(rest_client_helper, self.feed_outputs, self.workspaces,
+                                    [ type.strip() for type in self.options.get("reload_types", "").split(",") \
+                                        if type ],
                                     query_api_method=query_api_method,
                                     incl_attachment_data=self.incl_attachment_data)
-                    reload_feeds.reload_all(self.options.get("reload_types", ""))
+                    reload_feeds.reload_all()
 
         except Exception as err:
             LOG.error("exception: %s", err)
@@ -217,12 +219,14 @@ class FeedComponent(ResilientComponent):
 
 class Reload(object):
     def __init__(self, rest_client_helper, feed_outputs, workspaces, \
+                 reload_types,
                  query_api_method=False, incl_attachment_data=False):
         """
 
         :param rest_client: not the instance as we may need to refresh the client at a later point
         :param feed_outputs: dict of plugins installed: { 'feed_name': plugin_object }
         :param workspace: dict of workspaces and the feeds to use: { 'workspace': ['workspaceA', 'workspaceB'] }
+        :param reload_types: comma separated list of object types to reload. datatables can be specified
         :param query_api_method:
         :param incl_attachment_data: true/false
         """
@@ -231,8 +235,9 @@ class Reload(object):
         self.workspaces = workspaces
         self.query_api_method = query_api_method
         self.incl_attachment_data = incl_attachment_data
-
-        self.init_type_info()
+        self.type_info_index = {}
+        self.search_type_names = []
+        self.datatable_search_type_names = {}
 
         self.lookup = {
             "attachment": self._query_attachment,
@@ -244,12 +249,17 @@ class Reload(object):
             "__emailmessage": None
         }
 
-    def init_type_info(self):
-        # We want to search all of the types that have incident or task as a parent.
-        self.type_info_index = {}
-        self.search_type_names = ['datatable']
+        self.init_type_info(reload_types)
 
-        for (type_name, type_dto) in list(self.rest_client_helper.get("/types").items()):
+    def init_type_info(self, reload_types):
+        # We want to search all of the types that have incident or task as a parent.
+
+        type_list = list(self.rest_client_helper.get("/types").items())
+        # sync everything if nothing specified from app.config
+        if not reload_types:
+            reload_types = [type_name for (type_name, _type_dto) in type_list]
+
+        for (type_name, type_dto) in type_list:
             parent_types = set(type_dto['parent_types'])
 
             if type_name == 'incident' or _is_incident_or_task(parent_types):
@@ -266,39 +276,49 @@ class Reload(object):
                 self.type_info_index[real_id] = info
                 self.type_info_index[name] = info
 
-                if type_id not in [FeedComponent.DATATABLE_TYPE_ID, FeedComponent.INCIDENT_TYPE_ID]:
-                    self.search_type_names.append(name)
+                if type_name in reload_types:
+                    # datatables all have the same type_id, so need to capture the specific table name
+                    if type_id == FeedComponent.DATATABLE_TYPE_ID:
+                        self.search_type_names.append('datatable')
+                        self.datatable_search_type_names[real_id] = type_dto['display_name']
+                    else:
+                        self.search_type_names.append(type_name)
 
-    def reload_all(self, reload_types, min_inc_id=0, max_inc_id=sys.maxsize):
+        self.search_type_names = list(dict.fromkeys(self.search_type_names))  # dedup list
+        LOG.debug("reload_types allowed: %s", self.search_type_names)
+        LOG.debug("reload_types datatables allowed: %s", self.datatable_search_type_names)
+
+    def reload_all(self, min_inc_id=0, max_inc_id=sys.maxsize):
         """
         load incidents and related notes, tasks, artifacts, etc based on min and max values
-        :param reload_types: comma separated list of object types to reload. datatables can be specified
         :param min_inc_id: defaults to 0 for all incidents
         :param max_inc_id: defaults to max number for all incidents
         :return: # of incidents sync'd
         """
+        search_all_type_names = self.search_type_names.copy()
 
-        reload_types = [ type.strip() for type in reload_types.split(",")]
-        # only load valid types found in the system
-        reload_types = list(set(self.search_type_names).intersection(reload_types) \
-                    if reload_types else self.search_type_names)
-        LOG.debug("reload_types filtered: %s", reload_types)
-
-        actual_max_inc_id, actual_min_inc_id = self._populate_incidents(self.type_info_index, min_inc_id, max_inc_id,
-                                                                        self.query_api_method)
+        # get the actual min and max values
+        actual_max_inc_id, actual_min_inc_id = self._populate_incidents(self.type_info_index,
+                                                                            min_inc_id,
+                                                                            max_inc_id,
+                                                                            self.query_api_method,
+                                                                            ('incident' in search_all_type_names))
+        if 'incident' in search_all_type_names:
+            search_all_type_names.remove('incident')
 
         if not self.query_api_method:
             rng = range(actual_min_inc_id, actual_max_inc_id)
-            self._populate_others(rng, reload_types, self.type_info_index)
+            self._populate_others(rng, search_all_type_names, self.type_info_index)
 
         return 0 if actual_max_inc_id == 0 else (actual_max_inc_id - actual_min_inc_id) + 1
 
-    def _populate_incidents(self, type_info_index, min_inc_id, max_inc_id, query_api_method):
+    def _populate_incidents(self, type_info_index, min_inc_id, max_inc_id, query_api_method, sync_incident):
         """
         :param type_info_index:
         :param min_inc_id:
         :param max_inc_id:
         :param query_api_method:
+        :param sync_incident: boolean to send incident to plugins
         :return:
         """
         actual_min_inc_id = sys.maxsize
@@ -313,8 +333,9 @@ class Reload(object):
 
                 type_info = type_info_index[FeedComponent.INCIDENT_TYPE_ID]
 
-                send_data(type_info, inc_id, self.rest_client_helper, incident,
-                          self.feed_outputs, self.workspaces, False, self.incl_attachment_data)
+                if sync_incident:
+                    send_data(type_info, inc_id, self.rest_client_helper, incident,
+                              self.feed_outputs, self.workspaces, False, self.incl_attachment_data)
 
                 # query api call should be done now
                 if query_api_method:
@@ -354,6 +375,10 @@ class Reload(object):
             result_data = result['result']
 
             if type_name == 'datatable':
+                # skip any datatable not intended to sync
+                if result['obj_name'] not in self.datatable_search_type_names.values():
+                    continue
+
                 # We need the ID of the table, not the ID for the generic "datatable" type.
                 type_id = result_data['type_id']
                 type_info = type_info_index[type_id]
@@ -366,9 +391,9 @@ class Reload(object):
                       self.feed_outputs, self.workspaces, False, self.incl_attachment_data)
 
     def _populate_others_query(self,
-                         inc_id,
-                         object_type_names,
-                         type_info_index):
+                               inc_id,
+                               object_type_names,
+                               type_info_index):
 
         # ensure the incident is found
         try:
@@ -381,7 +406,7 @@ class Reload(object):
                         type_info = type_info_index.get(object_type, None)  # datatables will not have a type_info object at this time
 
                         sync_count = self.lookup[object_type](self.rest_client_helper, inc_id, type_info)
-                        LOG.debug("inc_id: %s %s : %s", inc_id, object_type, sync_count)
+                        LOG.debug("inc_id: %s %s: %s", inc_id, object_type, sync_count)
                     except AttributeError:
                         LOG.error("Query error for synchronization method: %s", object_type)
         except SimpleHTTPException:
@@ -437,13 +462,15 @@ class Reload(object):
         query = "/incidents/{}/table_data".format(inc_id)
         item_list = rest_client_helper.get(query)
         for _, table in item_list.items():
-            # We need the ID of the table, not the ID for the generic "datatable" type.
-            type_id = table['id']
-            type_info = self.type_info_index[type_id]
+            datatable_id = table['id']
+            # only sync datatables expressed in app.config
+            if datatable_id in self.datatable_search_type_names.keys():
+                # We need the ID of the table, not the ID for the generic "datatable" type.
+                type_info = self.type_info_index[datatable_id]
 
-            for row in table['rows']:
-                send_data(type_info, inc_id, rest_client_helper, row,
-                          self.feed_outputs, self.workspaces, False, self.incl_attachment_data)
+                for row in table['rows']:
+                    send_data(type_info, inc_id, rest_client_helper, row,
+                            self.feed_outputs, self.workspaces, False, self.incl_attachment_data)
 
         return len(item_list)
 
