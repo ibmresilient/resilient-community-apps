@@ -50,6 +50,7 @@
 - [Custom Fields](#custom-fields)
 - [Rules](#rules)
 - [Troubleshooting & Support](#troubleshooting--support)
+- [Template Appendix](#templates)
 ---
 
 ### Release Notes
@@ -1936,3 +1937,160 @@ Refer to the documentation listed in the Requirements section for troubleshootin
 
 ### For Support
 This is a IBM Community provided App. Please search the Community [ibm.biz/soarcommunity](https://ibm.biz/soarcommunity) for assistance.
+
+## Template Appendix
+Below are examples of templates for creating, updating, and closing IBM SOAR incidents. Customize these templates and refer to them in the app.config file.
+These default jinja templates map IBM SOAR fields to SentinelOne threat and agent fields.
+
+Each template should be reviewed for correctness in your enterprise.
+For instance, closing a SOAR incident may include additional custom fields which the default template
+does not include.
+
+<details><summary>incident_creation_template</summary>
+<pre>
+{
+  {%- set comma = joiner(",") -%}
+  {# JINJA template for creating a new SOAR incident from a SentinelOne threat. #}
+  "name": "SentinelOne Alert - {{ agentRealtimeInfo.agentComputerName }} - {{ threatInfo.threatName }}",
+  "start_date": {{ threatInfo.identifiedAt|resilient_datetimeformat }},
+  "discovered_date": {{ threatInfo.createdAt|resilient_datetimeformat }},
+  "description": {
+    "format": "text",
+    "content": "{{ threatInfo.threatName }}"
+  },
+  {# if SentinelOne users are different than SOAR users, consider using a mapping table using resilient_substitute: #}
+  "plan_status": "{{ threatInfo.incidentStatus|resilient_substitute('{"resolved": "C", "unresolved": "A", "In_progress": "A", "in_progress": "A"}') }}",
+  {% if threatInfo.incidentStatus == "resolved" %}
+    "resolution_id": "Resolved",
+    "resolution_summary": "Closed by SentinelOne",
+  {% endif %}
+  "severity_code": "{{ threatInfo.confidenceLevel|resilient_substitute('{"malicious": "High", "suspicious": "Medium"}') }}",
+  "properties": {
+    "sentinelone_agent_id": "{{ agentRealtimeInfo.agentId }}",
+    "sentinelone_confidence_level": "{{ threatInfo.confidenceLevel }}",
+    "sentinelone_classification": "{{ threatInfo.classification }}",
+    "sentinelone_threat_id": "{{ threatInfo.threatId }}",
+    "sentinelone_threat_name": "{{ threatInfo.threatName }}",
+    "sentinelone_threat_analyst_verdict": "{{ threatInfo.analystVerdict }}",
+    "sentinelone_incident_status": "{{ threatInfo.incidentStatus }}",
+    "sentinelone_mitigation_status": "{{ threatInfo.mitigationStatus }}",
+    "sentinelone_mitigation_status_description": "{{ threatInfo.mitigationStatusDescription }}"
+  },
+  "artifacts": [
+    {% if agentRealtimeInfo.agentComputerName %}
+      {{- comma() }}
+      {
+        "type": {
+          "name": "System Name"
+        },
+        "value": "{{ agentRealtimeInfo.agentComputerName|replace('\\', '\\\\')|replace('"', '\\"') }}",
+        "description": {
+          "format": "text",
+          "content": "creation date: {{ threatInfo.createdAt|resilient_datetimeformat  }}"
+        }
+      }
+      {% endif %}
+    {% if agentDetectionInfo.externalIp %}
+      {{- comma() }}
+      {
+        "type": {
+          "name": "IP Address"
+        },
+        "value": "{{ agentDetectionInfo.externalIp }}",
+        "description": {
+          "format": "text",
+          "content": "creation date: {{ threatInfo.createdAt|resilient_datetimeformat  }}"
+        }
+      }
+      {% endif %}
+    {% if threatInfo.processUser %}
+      {{- comma() }}
+      {
+        "type": {
+          "name": "Process Name"
+        },
+        "value": "{{ threatInfo.processUser|replace('\\', '\\\\')|replace('"', '\\"') }}",
+        "description": {
+          "format": "text",
+          "content": "creation date: {{ threatInfo.createdAt|resilient_datetimeformat  }}"
+        }
+      }
+      {% endif %}
+    {% if threatInfo.sha1 %}
+      {{- comma() }}
+      {
+        "type": {
+          "name": "Malware SHA-1 Hash"
+        },
+        "value": "{{ threatInfo.sha1 }}",
+        "description": {
+          "format": "text",
+          "content": "creation date: {{ threatInfo.createdAt|resilient_datetimeformat  }}"
+        }
+      }
+      {% endif %}
+    {% if threatInfo.filePath %}
+      {{- comma() }}
+      {
+        "type": {
+          "name": "File Path"
+        },
+        "value": "{{ threatInfo.filePath|replace('\\', '\\\\')|replace('"', '\\"') }}",
+        "description": {
+          "format": "text",
+          "content": "creation date: {{ threatInfo.createdAt|resilient_datetimeformat  }}"
+        }
+      }
+      {% endif %}
+    {% if threatInfo.threatName %}
+      {{- comma() }}
+      {
+        "type": {
+          "name": "File Name"
+        },
+        "value": "{{ threatInfo.threatName|replace('\\', '\\\\')|replace('"', '\\"') }}",
+        "description": {
+          "format": "text",
+          "content": "creation date: {{ threatInfo.createdAt|resilient_datetimeformat  }}"
+        }
+      }
+      {% endif %}
+  ]
+}
+</pre>
+</details>
+<details><summary>incident_close_template</summary>
+<pre>
+{
+  {# JINJA template for closing a new Resilient incident from a Sentinel incident. #}
+  "plan_status": "C",
+  "resolution_id": {
+    "name": "Resolved"
+  },
+  "resolution_summary": {
+    "format": "text",
+    "content": "Closed by SentinelOne"
+  },
+  "properties": {
+    "sentinelone_incident_status": "{{ threatInfo.incidentStatus }}",
+    "sentinelone_threat_analyst_verdict": "{{ threatInfo.analystVerdict }}",
+    "sentinelone_mitigation_status": "{{ threatInfo.mitigationStatus }}",
+    "sentinelone_mitigation_status_description": "{{ threatInfo.mitigationStatusDescription }}"
+  }
+}
+</pre>
+</details>
+<details><summary>incident_update_template</summary>
+<pre>
+{
+  {# JINJA template for updating a SOAR incident from a SentinelOne threat. #}
+  "properties": {
+    "sentinelone_confidence_level": "{{ threatInfo.confidenceLevel }}",
+    "sentinelone_classification": "{{ threatInfo.classification }}",
+    "sentinelone_incident_status": "{{ threatInfo.incidentStatus }}",
+    "sentinelone_threat_analyst_verdict": "{{ threatInfo.analystVerdict }}",
+    "sentinelone_mitigation_status": "{{ threatInfo.mitigationStatus }}",
+    "sentinelone_mitigation_status_description": "{{ threatInfo.mitigationStatusDescription }}"
+  }
+}
+```
