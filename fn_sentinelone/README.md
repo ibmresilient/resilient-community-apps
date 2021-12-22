@@ -50,7 +50,7 @@
 - [Custom Fields](#custom-fields)
 - [Rules](#rules)
 - [Troubleshooting & Support](#troubleshooting--support)
-- [Template Appendix](#templates)
+- [Template Appendix](#template--appendix)
 ---
 
 ### Release Notes
@@ -75,7 +75,7 @@
 
 The SentinelOne platform provides AI-powered prevention, detection, response, and threat hunting across user endpoints, containers, cloud workloads, and IoT devices. 
 
-Escalate SentinelOne threat incidents into IBM Security SOAR as an incident/case.
+This app escalates SentinelOne threat incidents into IBM Security SOAR as an incident/case.
 
 ### Key Features
 <!--
@@ -106,11 +106,11 @@ This app supports the IBM Resilient SOAR Platform and the IBM Cloud Pak for Secu
 The Resilient platform supports two app deployment mechanisms, App Host and integration server.
 
 If deploying to a Resilient platform with an App Host, the requirements are:
-* Resilient platform >= `40.0.6554`.
+* Resilient platform >= `40.2.81`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a Resilient platform with an integration server, the requirements are:
-* Resilient platform >= `40.0.6554`.
+* Resilient platform >= `40.2.81`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient-circuits>=40.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions: 
@@ -196,11 +196,19 @@ The following table provides the settings you need to configure the app. These s
 | **polling_lookback** | Yes | `120` | *Number of minutes to lookback for threat updates. Value is only used on the first time polling when the app starts* |
 | **account_ids** | No | `123456789012345678` | *Comma seperated list of SentinelOne accountIds to query for threats* |
 | **site_ids** | No | `987654321098765432` | *Comma seperated list of SentinelOne siteIds to query for threats* |
-| **incident_statuses** | No | `resolved,in_progress,unresolved` | *Comma seperated list of SentinelOne incidentStatuses to query for threats* |
+| **incident_statuses** | No | `resolved,in_progress,unresolved` | *Comma seperated list of SentinelOne incidentStatuses to query for threats[^1]* |
 | **limit** | No | `25` | *Limit number of threats to return from query* |
 | **sort_by** | No | `createdDate` | *The column to sort results by when querying threats* |
 | **sort_order** | No | `desc` | *Sort direction to return threat query results: 'asc' or 'desc'* |
 | **query_param** | No | `threat details` | *Full text search for fields when querying threats* |
+| **send_soar_link_to_sentinelone** | No | true | *Send SOAR incident URL live link via threat note to SentinelOne* |
+| **create_incident_template** | No | /path/create_incident_template.jinja | *Path to custom create incident jinja template* |
+| **close_incident_template** | No | /path/close_incident_template.jinja | *Path to custom close incident jinja template* |
+| **update_incident_template** | No | /path/update_incident_template.jinja | *Path to custom update incident jinja template* |
+| **verify** | No | /path/toclient_certificate.pem | *Path to client SSL certificate* |
+___
+
+[^1]: Make sure to include incidentStatus **resolved**  if the poller should close SOAR incidents that are marked as **resolved** in SentinelOne. 
 
 ### Custom Layouts
 <!--
@@ -212,9 +220,9 @@ The following table provides the settings you need to configure the app. These s
 
   ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png) 
 
-* Create a Close Incident tab so that when a SOAR incident corresponding to a SentinelOne threat is closed in SOAR, the user can select a SentinelOne Threat Analyst Verdict to send to SentinelOne when the incident it closed.  The SentinelOne threat cannot be closed if the Analyst Verdict is undefined.  
+* Create a Close Incident tab so that when a SOAR incident corresponding to a SentinelOne threat is closed in SOAR, the user can select a SentinelOne Threat Analyst Verdict to send to SentinelOne when the incident it closed.  The SentinelOne threat cannot be closed if the Analyst Verdict is **undefined**.  
   ![screenshot: custom_layouts_close](./doc/screenshots/custom_layouts_close.png) 
- NOTE: If a Close incident tab is created, all non-SentinelOne incidents also contain the SentinelOne Threat Analyst Verdict select field.  Alternatively, there is an incident menu item rule **SentinelOne: Update Analyst Verdict and Threat Status** that can be manually run to update the Analyst Verdict and Threat status in SentinelOne.  When the rule is run to **resolve** a SentinelOne threat, choose an Analyst Verdict and set the Threat Status to **resolved**.  SOAR updates the SentinelOne threat which in turn causes the incident to be closed in IBM SOAR on the next poll.
+ NOTE: If a Close incident tab is created, all non-SentinelOne incidents also contain the SentinelOne Threat Analyst Verdict select field in the Close menu pop-up.  Alternatively, an incident menu item rule **SentinelOne: Update Analyst Verdict and Threat Status** is provided that can be run manually to update the Analyst Verdict and Threat status in SentinelOne.  When the rule is run to **resolve** a SentinelOne threat, choose an Analyst Verdict and set the Threat Status to **resolved**.  SOAR updates the SentinelOne threat which in turn causes the incident to be closed in IBM SOAR on the next poll.
 ---
 
 ## Function - SentinelOne: Abort Disk Scan
@@ -303,7 +311,7 @@ incident.addNote(helper.createRichText(note))
 
 ---
 ## Function - SentinelOne: Connect to Network
-Connect an endpoint managed by Sentinel to the network.
+Connect an endpoint managed by Sentinel to the network.  If the agent *isActive* field is **No**, the agent action to connect is not an option.
 
  ![screenshot: fn-sentinelone-connect-to-network ](./doc/screenshots/fn-sentinelone-abort-disk-scan.png) 
 
@@ -391,7 +399,7 @@ incident.addNote(helper.createRichText(note))
 
 ---
 ## Function - SentinelOne: Disconnect From Network
-Disconnect an endpoint managed by SentinelOne from the network.
+Disconnect an endpoint managed by SentinelOne from the network. If the agent *isActive* field is **No**, the agent action to disconnect is not an option.
 
  ![screenshot: fn-sentinelone-disconnect-from-network ](./doc/screenshots/fn-sentinelone-disconnect-from-network.png)
 
@@ -480,7 +488,7 @@ incident.addNote(helper.createRichText(note))
 
 ---
 ## Function - SentinelOne: Get Agent Details
-Get details of a SentinelOne managed agent. The example workflow writes the SentinelOne agent JSON details to a nicely formated incident note.
+Get details of a SentinelOne managed agent. The example workflow writes the SentinelOne agent JSON details to a formatted incident note.
 
  ![screenshot: fn-sentinelone-get-agent-details ](./doc/screenshots/fn-sentinelone-get-agent-details.png) 
 
@@ -692,7 +700,7 @@ incident.addNote(helper.createRichText(note))
 
 ---
 ## Function - SentinelOne: Get Hash Reputation
-Get the SentinelOne reputation of a hash.  The example workflow writes the results to in incident note.
+Get the SentinelOne reputation of a hash.  The example workflow writes the results to an incident note.
 
  ![screenshot: fn-sentinelone-get-hash-reputation ](./doc/screenshots/fn-sentinelone-get-hash-reputation.png)
 
@@ -776,7 +784,7 @@ incident.addNote(helper.createRichText(note))
 
 ---
 ## Function - SentinelOne: Get Threat Details
-Get the details of a threat detected by SentinelOne. Results are written to an incident note in the example workflow.
+Get the details of a threat detected by SentinelOne. Results are written to a formatted incident note in the example workflow.
 
  ![screenshot: fn-sentinelone-get-threat-details ](./doc/screenshots/fn-sentinelone-get-threat-details.png) 
 
@@ -1059,7 +1067,7 @@ workflow.addProperty('convert_json_to_rich_text', json_note)
 
 ---
 ## Function - SentinelOne: Initiate Disk Scan
-Initiate a Full Disk scan on an agent managed by SentinelOne.
+Initiate a Full Disk scan on an agent managed by SentinelOne.  If the agent *isActive* field is **No**, the agent action to initiate a full disk scan is not an option.
 
  ![screenshot: fn-sentinelone-initiate-disk-scan ](./doc/screenshots/fn-sentinelone-abort-disk-scan.png) 
 
@@ -1218,7 +1226,7 @@ incident.addNote(noteText)
 ---
 ## Function - SentinelOne: Restart Agent
 Restart a endpoint managed by SentinelOne.
-
+ If the agent *isActive* field is **No**, the agent action to restart is not an option.
  ![screenshot: fn-sentinelone-restart-agent ](./doc/screenshots/fn-sentinelone-abort-disk-scan.png) 
 
 <details><summary>Inputs:</summary>
@@ -1365,6 +1373,7 @@ if results.success:
 ---
 ## Function - SentinelOne: Shutdown Agent
 Shutdown an agent managed by SentinelOne.
+ If the agent *isActive* field is **No**, the agent action to shutdown is not an option.
 
  ![screenshot: fn-sentinelone-shutdown-agent ](./doc/screenshots/fn-sentinelone-abort-disk-scan.png)
 
