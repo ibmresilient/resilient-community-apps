@@ -83,7 +83,7 @@ Escalate SentinelOne threat incidents into IBM Security SOAR as an incident/case
 The SentinelOne app implements the following functionality in the IBM SOAR platform:
 
 * Poll SentinelOne for threats and create a corresponding incident/case in the IBM SOAR platform for each threat.
-* Get SentinelOne threat notes add them as notes in corresponding IBM SOAR incident/case.
+* Get SentinelOne threat notes and add them as notes in corresponding IBM SOAR incident/case.
 * Resolve a SentinelOne threat when the corresponding IBM SOAR incident is closed.
 * Close an IBM SOAR incident/case when the corresponding SentinelOne threat is resolved in SentinelOne.
 * Create artifacts from the SentinelOne threat in the IBM SOAR platform.
@@ -92,7 +92,7 @@ The SentinelOne app implements the following functionality in the IBM SOAR platf
   - connect/disconnect agent from network
   - shutdown/restart agent
   - initiate/abort full disk scan
-* Get the agent or threat details and write the JSON returned from SentinelOne as an incident note.
+* Get the agent or threat details and write the JSON returned from SentinelOne in a formatted incident note.
 ---
 
 ## Requirements
