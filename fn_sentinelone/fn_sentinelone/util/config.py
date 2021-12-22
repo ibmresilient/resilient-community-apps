@@ -39,6 +39,10 @@ sort_by=createdDate
 sort_order=desc
 # Optional: send SOAR incident URL live link via threat note to SentinelOne
 send_soar_link_to_sentinelone=true
+# Custom templates to replace the default map of SentinelOne threat fields to SOAR incident fields
+#create_incident_template=
+#update_incident_template=
+#close_incident_template=
 # Optional path to SSL certificate
 #verify=false | /path/toclient_certificate.pem
 # Optional proxy settings
