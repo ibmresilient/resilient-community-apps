@@ -221,7 +221,10 @@ ___
   ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png) 
 
 * Create a Close Incident tab so that when a SOAR incident corresponding to a SentinelOne threat is closed in SOAR, the user can select a SentinelOne Threat Analyst Verdict to send to SentinelOne when the incident it closed.  The SentinelOne threat cannot be closed if the Analyst Verdict is **undefined**.  
-  ![screenshot: custom_layouts_close](./doc/screenshots/custom_layouts_close.png) 
+    ![screenshot: custom_layouts_close](./doc/screenshots/custom_layouts_close.png)
+Here is a screenshot of the SentinelOne custom Close Incident popup:
+
+    ![screenshot: custom_close_popup](./doc/screenshots/custom_close_popup.png)
  NOTE: If a Close incident tab is created, all non-SentinelOne incidents also contain the SentinelOne Threat Analyst Verdict select field in the Close menu pop-up.  Alternatively, an incident menu item rule **SentinelOne: Update Analyst Verdict and Threat Status** is provided that can be run manually to update the Analyst Verdict and Threat status in SentinelOne.  When the rule is run to **resolve** a SentinelOne threat, choose an Analyst Verdict and set the Threat Status to **resolved**.  SOAR updates the SentinelOne threat which in turn causes the incident to be closed in IBM SOAR on the next poll.
 ---
 
