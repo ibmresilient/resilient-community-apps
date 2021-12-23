@@ -229,7 +229,7 @@ Here is a screenshot of the SentinelOne custom Close Incident popup:
 ---
 
 ## Function - SentinelOne: Abort Disk Scan
-Initiate a Full Disk Scan on an agent managed by SentinelOne.
+Initiate a Full Disk Scan on an agent managed by SentinelOne. If the agent *isActive* field is **No**, the agent action to abort a disk scan is not an option.
 
  ![screenshot: fn-sentinelone-abort-disk-scan ](./doc/screenshots/fn-sentinelone-abort-disk-scan.png)
 
