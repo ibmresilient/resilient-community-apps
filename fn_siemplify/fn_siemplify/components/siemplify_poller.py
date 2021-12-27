@@ -120,7 +120,7 @@ class SiemplifyPollerComponent(ResilientComponent):
             return
 
         # get the list of siemplify cases linked to soar to check for closed statuses
-        seimplify_case_list = self.siemplify_env.get_cases(soar_incident_list.keys())
+        seimplify_case_list = self.siemplify_env.get_cases([ str(key) for key in soar_incident_list.keys() ])
         LOG.debug(seimplify_case_list)
         for case in seimplify_case_list['results']:
             if case.get("isCaseClosed"):

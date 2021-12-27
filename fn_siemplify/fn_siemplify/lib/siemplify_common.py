@@ -322,8 +322,6 @@ class SiemplifyCommon():
         if filetype:
             payload['type'] = filetype
 
-        LOG.debug(payload)
-
         return self._make_call("POST", CREATE_ATTACHMENT_URL, payload)
 
     def sync_task(self, siemplify_case_id, siemplify_task_assignee,

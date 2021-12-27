@@ -5,9 +5,9 @@
   "priority": {{ severity | string | resilient_substitute('{"4": 25, "5": 50, "6": 75, "DEFAULT": 50}') }},
   "environment": "{{ siemplify_environment if siemplify_environment else 'Default Environment'}}",
   "isImportant": {{ confirmed | tojson }},
-  "alertName": "IBM SOAR Case",
+  "alertName": "IBM SOAR Alert {{ id }}",
   "occurenceTime": "{{ discovered_date | resilient_display_datetimeformat(milliseconds=True) }}",
   "slaExpirationDateTime": null,
   "playbooks": [ ],
-  "tags": {{ simeplify_tags|tojson }}
+  "tags": {{ siemplify_tags|tojson }}
 }

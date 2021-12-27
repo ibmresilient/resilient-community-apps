@@ -80,7 +80,6 @@ class ResilientCommon():
         return r_incidents[0] if r_incidents else None
 
     def _query_incidents(self, query):
-        LOG.debug(query)
 
         query_uri = "/incidents/query?return_level=normal"
 
@@ -88,6 +87,7 @@ class ResilientCommon():
             return self.rest_client.post(query_uri, query)
         except SimpleHTTPException as err:
             LOG.error(str(err))
+            LOG.error(query)
             return None
 
     def create_incident(self, incident_payload):
