@@ -27,9 +27,9 @@ inputs.siemplify_task_assignee = "@Administrator"
 ### Post-Processing Script
 ```python
 if results.success:
-  task.addNote("Siemplify Sync Task Id: {}".format(results.content.get('id')))
+  task.addNote("Siemplify Sync Task: {}".format(task.name))
 else:
-  task.addNote("Siemplify Sync Task failed: {}".format(results.reason))
+  task.addNote("Siemplify Sync Task: {} failed: {}".format(task.name, results.reason))
 ```
 
 ---

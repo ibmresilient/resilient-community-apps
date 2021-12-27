@@ -29,12 +29,16 @@ LOOKUP_STATUS = {
 inputs.siemplify_alert_id = incident.properties.siemplify_alert_id
 inputs.siemplify_case_id = incident.properties.siemplify_case_id
 inputs.siemplify_root_cause = incident.resolution_summary.content
-inputs.siemplify_reason = LOOKUP_STATUS.get(incident.resolution_id, 'Inconclusive')
+inputs.siemplify_reason = LOOKUP_STATUS.get(str(incident.resolution_id), 'Inconclusive')
 ```
 
 ### Post-Processing Script
 ```python
-None
+if results.success:
+  note = "Siemplify Sync cased {} closed".format(incident.properties.siemplify_case_id)
+else:
+  note = "Siemplify Sync cased {} failed to close: {}".format(incident.properties.siemplify_case_id, results.reason)
+incident.addNote(helper.createPlainText(note))
 ```
 
 ---

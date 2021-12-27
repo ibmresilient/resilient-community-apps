@@ -25,7 +25,10 @@ inputs.siemplify_comment = note.text.content
 
 ### Post-Processing Script
 ```python
-None
+if results.success:
+  note.text = "<b>Siemplify Sync complete</b><br>"+note.text.content
+else:
+  incident.addNote(helper.createRichText("Siemplify Sync for note failed. Reason: {}".format(results.reason)))
 ```
 
 ---

@@ -11,7 +11,7 @@
 `siemplify_sync_artifact`
 
 ### Output Name
-`None`
+``
 
 ### Message Destination
 `fn_siemplify`
@@ -30,9 +30,9 @@ inputs.siemplify_artifact_id = artifact.id
 ### Post-Processing Script
 ```python
 if results.success:
-  incident.addNote("Artifact: {} ({}) created in Siemplify".format(artifact.value, artifact.type))
+  incident.addNote("Siemplify Sync Artifact: {} ({}) created".format(artifact.value, artifact.type))
 else:
-  incident.addNote("Artifact: {} ({}) sync failed to Siemplify".format(artifact.value, artifact.type))
+  incident.addNote("Simeplify Sync Artifact: {} ({}) failed".format(artifact.value, artifact.type))
   
 ```
 

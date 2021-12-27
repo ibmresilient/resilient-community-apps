@@ -11,7 +11,7 @@
 `siemplify_sync_case`
 
 ### Output Name
-`None`
+``
 
 ### Message Destination
 `fn_siemplify`

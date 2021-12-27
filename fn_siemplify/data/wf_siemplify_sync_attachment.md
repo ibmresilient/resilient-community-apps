@@ -26,7 +26,11 @@ inputs.siemplify_attachment_id = attachment.id
 
 ### Post-Processing Script
 ```python
-None
+if results.success:
+  incident.addNote("Siemplify Sync Attachment: {} created".format(attachment.name))
+else:
+  incident.addNote("Simeplify Sync Attachment: {} failed. Reason: {}".format(attachment.name, results.reason))
+
 ```
 
 ---
