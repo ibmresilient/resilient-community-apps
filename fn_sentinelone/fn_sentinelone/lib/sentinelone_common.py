@@ -167,7 +167,8 @@ class SentinelOneClient(object):
         threats = []
 
         # nextCursor is a pagination field that points to the next page of threats
-        # Set it to non null string so we go through the while loop at least once
+        # Set it to non null string so we go through the while loop at least once.
+        # nextCursor will equal null when list of threats is complete. 
         nextCursor = "true"
 
         while nextCursor:
@@ -177,12 +178,13 @@ class SentinelOneClient(object):
             response_json = response.json()
             pagination = response_json.get("pagination")
             nextCursor = pagination.get("nextCursor")
-            # Update the url to get the next page of threats next time through the loop
-            if nextCursor:
-                url = u"{0}/threats?cursor={1}".format(self.base_url, nextCursor)
             data = response_json.get("data")
             for threat in data:
                 threats.append(threat)
+            # Update the url to get the next page of threats next time through the loop
+            if nextCursor:
+                url = u"{0}/threats?cursor={1}".format(self.base_url, nextCursor)
+
         return threats
 
     def get_threat_notes(self, threat_id):
@@ -195,7 +197,8 @@ class SentinelOneClient(object):
 
         threat_notes = []
         nextCursor = "true"
-
+        
+        # nextCursor will be null when the list of threat notes is complete.
         while nextCursor:
             response = self.rc.execute("GET", url, headers=self.headers, params=params, 
                                         verify=self.verify, proxies=self.rc.get_proxies())
@@ -203,12 +206,13 @@ class SentinelOneClient(object):
             response_json = response.json()
             pagination = response_json.get("pagination")
             nextCursor = pagination.get("nextCursor")
-            # Update the url to get the next page of threat notes next time through the loop
-            if nextCursor:
-                url = u"{0}/threats/{1}/notes?cursor={1}".format(self.base_url, nextCursor)
             data = response_json.get("data")
             for note in data:
                 threat_notes.append(note)
+            # Update the url to get the next page of threat notes next time through the loop
+            if nextCursor:
+                url = u"{0}/threats/{1}/notes?cursor={2}".format(self.base_url, threat_id, nextCursor)
+
         return threat_notes
 
     def add_threat_note(self, threat_id, note_text):
