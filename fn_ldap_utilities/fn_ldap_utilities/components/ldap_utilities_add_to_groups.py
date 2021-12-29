@@ -38,9 +38,6 @@ class FunctionComponent(ResilientComponent):
             input_ldap_multiple_group_dn_asString = helper.get_function_input(kwargs, "ldap_multiple_group_dn") # text (required) [string repersentation of an array]
             yield StatusMessage("Function Inputs OK")
 
-            #if not helper.LDAP_IS_ACTIVE_DIRECTORY:
-            #  raise FunctionError("This function only supports an Active Directory connection. Make sure ldap_is_active_directory is set to True in the app.config file")
-
             try:
               # Try converting input to an array
               input_ldap_multiple_user_dn = literal_eval(input_ldap_multiple_user_dn_asString)

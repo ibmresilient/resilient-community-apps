@@ -32,7 +32,8 @@ setup(
 * Change user group (add or remove group)
 * Set user attributes
 * Toggle access
-* LDAP search""",
+* LDAP search
+* Add users, groups, OUs, etc.""",
     install_requires=[
         'resilient_circuits>=30.0.0',
         'ldap3>=2.0.0'
