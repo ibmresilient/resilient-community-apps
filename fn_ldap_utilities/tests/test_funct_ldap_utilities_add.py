@@ -11,7 +11,7 @@ PACKAGE_NAME = "fn_ldap_utilities"
 FUNCTION_NAME = "ldap_utilities_add"
 
 # Read the default configuration-data section from the package
-config_data = get_config_data(PACKAGE_NAME)
+config_data = get_mock_config_data()
 
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
