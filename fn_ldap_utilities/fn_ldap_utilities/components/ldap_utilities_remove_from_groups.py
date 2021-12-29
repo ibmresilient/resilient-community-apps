@@ -36,11 +36,11 @@ class FunctionComponent(ResilientComponent):
 
             # Get function inputs
             input_ldap_multiple_user_dn_asString = helper.get_function_input(kwargs, "ldap_multiple_user_dn") # text (required) [string repersentation of an array]
-            input_ldap_multiple_group_dn_asString = helper.get_function_input(kwargs, "ldap_multiple_group_dn") # text (required) [string repersentation of an array]            
+            input_ldap_multiple_group_dn_asString = helper.get_function_input(kwargs, "ldap_multiple_group_dn") # text (required) [string repersentation of an array]
             yield StatusMessage("Function Inputs OK")
 
-            if not helper.LDAP_IS_ACTIVE_DIRECTORY:
-              raise FunctionError("This function only supports an Active Directory connection. Make sure ldap_is_active_directory is set to True in the app.config file")
+            #if not helper.LDAP_IS_ACTIVE_DIRECTORY:
+            #  raise FunctionError("This function only supports an Active Directory connection. Make sure ldap_is_active_directory is set to True in the app.config file")
 
             try:
               # Try converting input to an array
@@ -59,7 +59,7 @@ class FunctionComponent(ResilientComponent):
             except Exception as err:
               raise ValueError("Cannot connect to LDAP Server. Ensure credentials are correct\n Error: {0}".format(err))
 
-            
+
             # Inform user
             msg = "Connected to {0}".format("Active Directory")
             yield StatusMessage(msg)
@@ -71,7 +71,7 @@ class FunctionComponent(ResilientComponent):
               yield StatusMessage("Attempting to remove user(s) from group(s)")
               # perform the removeMermbersFromGroups operation
               res = ad_remove_members_from_groups(c, input_ldap_multiple_user_dn, input_ldap_multiple_group_dn, True)
-              
+
               # Return list of users that were removed, and ignore users that do not exist, not valid, or not member of group
               if res and "changes" in c.request:
                 users_dn = c.request["changes"][0]["attribute"]["value"]

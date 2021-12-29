@@ -70,14 +70,14 @@ class FunctionComponent(AppFunctionComponent):
             c.add(fn_inputs.ldap_dn, attributes=attribute_list)
             result = c.result
         except Exception as err:
-            raise ValueError("Unable to add user: %s", fn_inputs.ldap_dn)
+            raise ValueError("Unable to add: %s", fn_inputs.ldap_dn)
 
         try:
             if result.get('description', '') == 'success' and group_list:
                 yield self.status_message("Attempting to execute group add")
                 ad_add_members_to_groups(c, [fn_inputs.ldap_dn], group_list, True)
         except Exception as err:
-            raise ValueError("Unable to add user: %s to group(s): %s", fn_inputs.ldap_dn, group_list)
+            raise ValueError("Unable to add: %s to group(s): %s", fn_inputs.ldap_dn, group_list)
 
         finally:
             # Unbind connection

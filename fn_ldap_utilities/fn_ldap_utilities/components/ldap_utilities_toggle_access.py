@@ -25,7 +25,7 @@ class FunctionComponent(ResilientComponent):
     def _ldap_utilities_toggle_access_function(self, event, *args, **kwargs):
         """Function: A function that allows an LDAP user, with the correct privileges to enable or disable another user given their DN"""
         log = logging.getLogger(__name__)
-        
+
         try:
             yield StatusMessage("Starting ldap_utilities_toggle_access")
 
@@ -57,7 +57,7 @@ class FunctionComponent(ResilientComponent):
 
             # Instansiate LDAP Server and Connection
             c = helper.get_ldap_connection()
-            
+
             try:
               # Bind to the connection
               c.bind()
@@ -80,7 +80,7 @@ class FunctionComponent(ResilientComponent):
               res = c.modify(input_ldap_dn, {ldap_user_account_control_attribute: [(MODIFY_REPLACE, [ldap_user_accout_control_value])]})
 
             except Exception:
-              raise ValueError("Could not toggle access for this user. Ensue ldap_dn is valid")
+              raise ValueError("Could not toggle access for this user. Ensure ldap_dn is valid")
 
             finally:
               # Unbind connection

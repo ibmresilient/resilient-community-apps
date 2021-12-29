@@ -2,7 +2,7 @@
 
 """
 Function implementation test.
-Usage: 
+Usage:
     resilient-circuits selftest -l fn-ldap-utilities
     resilient-circuits selftest --print-env -l fn-ldap-utilities
 
@@ -23,6 +23,7 @@ import logging
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
 log.addHandler(logging.StreamHandler())
+from fn_ldap_utilities.util.helper import LDAPUtilitiesHelper
 
 
 def selftest_function(opts):
@@ -32,7 +33,22 @@ def selftest_function(opts):
     """
     app_configs = opts.get("fn_ldap_utilities", {})
 
+    helper = LDAPUtilitiesHelper(app_configs)
+
+    status = "success"
+    reason = None
+    try:
+        c = helper.get_ldap_connection()
+        # Bind to the connection
+        c.bind()
+    except Exception as err:
+        status = "failure"
+        reason = str(err)
+    finally:
+        # Unbind connection
+        c.unbind()
+
     return {
-        "state": "unimplemented",
-        "reason": None
+        "state": status,
+        "reason": reason
     }
