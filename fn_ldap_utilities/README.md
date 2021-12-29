@@ -413,8 +413,10 @@ if(results.success):
 
 ---
 ## Function - LDAP Utilities: Set Password
-A function that allows you to set a new password for an LDAP entry given the entry's DN
+A function that allows you to set a new password for an LDAP entry given the entry's DN.
 
+Notes:
+* Some LDAP environments will require the app.config setting `ldap_use_ssl=True` to change passwords in  addition to write permissions on the OU associated with the user.
 <details><summary>Inputs:</summary>
 <p>
 
@@ -647,6 +649,8 @@ if (results.success):
 ## Function - LDAP Utilities: Toggle Access
 A function that allows an LDAP user, with the correct privileges to enable or disable another account given their DN. This is an Active Directory `only` function.
 
+Notes:
+* Sufficient permissions may be necessary for the OU containing users to read all properties and write all properties.
 <details><summary>Inputs:</summary>
 <p>
 
