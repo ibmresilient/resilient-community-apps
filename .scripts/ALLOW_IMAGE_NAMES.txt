@@ -77,6 +77,7 @@ fn_secureworks_ctp
 fn_sep
 fn_service_now
 fn_shodan
+fn_siemplify
 fn_slack
 fn_splunk_integration
 fn_spamhaus_query
