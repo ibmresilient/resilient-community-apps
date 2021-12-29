@@ -27,6 +27,7 @@ CREATE_ATTACHMENT_URL = "cases/AddEvidence"
 CREATE_TASK_URL = "cases/AddOrUpdateCaseTask"
 CLOSE_CASE = "cases/CloseCase"
 SEARCH_CASE_URL = "search/CaseSearchEverything"
+CASES_MODIFIED_URL = "cases/IsCaseUpdated"
 
 SOAR_HEADER = "IBM SOAR"
 IBMSOAR_TAGS = ['IBMSOAR']
@@ -426,6 +427,16 @@ class SiemplifyCommon():
         LOG.debug(payload)
 
         return self._make_call("POST", CREATE_TASK_URL, payload)
+
+    def is_case_modified(self, case_id, modified_ts):
+        payload = {
+            "caseId": str(case_id),
+            "currentModificationTimeUnixTimeInMs": str(modified_ts)
+        }
+
+        LOG.debug(payload)
+
+        return self._make_call("POST", CASES_MODIFIED_URL, payload)
 
     def _make_call(self, method, uri, payload=None):
 

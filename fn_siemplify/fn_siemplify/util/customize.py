@@ -24,7 +24,7 @@ def codegen_reload_data():
         "functions": [u"siemplify_close_case", u"siemplify_sync_artifact", u"siemplify_sync_attachment", u"siemplify_sync_case", u"siemplify_sync_comment", u"siemplify_sync_task"],
         "workflows": [u"siemplify_close_case", u"siemplify_m_sync_case", u"siemplify_sync_artifact", u"siemplify_sync_attachment", u"siemplify_sync_case", u"siemplify_sync_comment", u"siemplify_sync_task"],
         "actions": [u"Siemplify Auto Close Case", u"Siemplify Auto Sync Artifact", u"Siemplify Auto Sync Attachment", u"Siemplify Auto Sync Case", u"Siemplify Auto Sync Comment", u"Siemplify Sync Artifact", u"Siemplify Sync Case", u"Siemplify Sync Comment", u"Siemplify Sync Task"],
-        "incident_fields": [u"siemplify_alert_id", u"siemplify_case_id", u"siemplify_case_link"],
+        "incident_fields": [u"siemplify_alert_id", u"siemplify_assignee", u"siemplify_case_id", u"siemplify_case_link", u"siemplify_is_important", u"siemplify_priority", u"siemplify_stage"],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [],
@@ -70,8 +70,12 @@ def customization_data(client=None):
         - Siemplify Sync Task
     - Incident Fields:
         - siemplify_alert_id
+        - siemplify_assignee
         - siemplify_case_id
         - siemplify_case_link
+        - siemplify_is_important
+        - siemplify_priority
+        - siemplify_stage
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)

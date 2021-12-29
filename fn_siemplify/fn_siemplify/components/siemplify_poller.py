@@ -103,7 +103,7 @@ class SiemplifyPollerComponent(ResilientComponent):
         poller_start = datetime.datetime.utcnow()
         try:
             # call Siemplify for closed incidents
-            self.process_closed_cases()
+            self.process_cases(int(self.last_poller_time.timestamp()*1000))
         except Exception as err:
             LOG.error(str(err))
             LOG.error(traceback.format_exc())
@@ -113,15 +113,17 @@ class SiemplifyPollerComponent(ResilientComponent):
             # We always want to reset the timer to wake up, no matter failure or success
             self.fire(PollCompleted())
 
-    def process_closed_cases(self):
+    def process_cases(self, last_poller_time):
         # get all open siemplify linked incidents
         soar_incident_list = self.res_common.get_open_siemplify_incidents()
         if not soar_incident_list:
+            LOG.info("IBM SOAR open incidents: 0")
             return
 
         # get the list of siemplify cases linked to soar to check for closed statuses
         seimplify_case_list = self.siemplify_env.get_cases([ str(key) for key in soar_incident_list.keys() ])
         LOG.debug(seimplify_case_list)
+        cases_closed = 0
         for case in seimplify_case_list['results']:
             if case.get("isCaseClosed"):
                 # close the soar incident
@@ -133,9 +135,17 @@ class SiemplifyPollerComponent(ResilientComponent):
                                                     soar_incident_list[case['id']],
                                                     incident_close_payload
                                                 )
-
+                cases_closed += 1
                 LOG.info("Closed incident %s from Siemplify case %s",
                          soar_incident_list[case['id']], case['id'])
+            else:
+                # check if the case has been modified
+                if self.siemplify_env.is_case_modified(case['id'], last_poller_time):
+                    LOG.debug("Case Changed: %s", case['id'])
+                    # TODO get case and update resilient with changes
+                    # TODO title, description, tags, priority, assignee, stage, important
+
+        LOG.info("IBM SOAR open incidents: %s, Cases closed: %s", len(soar_incident_list), cases_closed)
 
     def _get_last_poller_date(self, polling_lookback):
         """get the last poller datetime based on a lookback time

@@ -326,7 +326,7 @@
   ],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1640624994293,
+  "export_date": 1640812236335,
   "export_format_version": 2,
   "fields": [
     {
@@ -1011,6 +1011,122 @@
       "values": []
     },
     {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "incident/siemplify_stage",
+      "hide_notification": false,
+      "id": 901,
+      "input_type": "text",
+      "internal": false,
+      "is_tracked": false,
+      "name": "siemplify_stage",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": "properties",
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "Siemplify Stage",
+      "tooltip": "",
+      "type_id": 0,
+      "uuid": "d95e044e-b05b-414b-8915-6a0be0325fb4",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "incident/siemplify_priority",
+      "hide_notification": false,
+      "id": 904,
+      "input_type": "number",
+      "internal": false,
+      "is_tracked": false,
+      "name": "siemplify_priority",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": "properties",
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "Siemplify Priority",
+      "tooltip": "",
+      "type_id": 0,
+      "uuid": "e9dcff8a-16e8-4988-a7bd-ad9d281c7f20",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "incident/siemplify_assignee",
+      "hide_notification": false,
+      "id": 902,
+      "input_type": "text",
+      "internal": false,
+      "is_tracked": false,
+      "name": "siemplify_assignee",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": "properties",
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "Siemplify Assignee",
+      "tooltip": "",
+      "type_id": 0,
+      "uuid": "fd406227-4433-4735-b2a5-e2d5c55374e6",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "incident/siemplify_is_important",
+      "hide_notification": false,
+      "id": 903,
+      "input_type": "boolean",
+      "internal": false,
+      "is_tracked": false,
+      "name": "siemplify_is_important",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": "properties",
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "Siemplify Is Important",
+      "tooltip": "",
+      "type_id": 0,
+      "uuid": "7a5a8552-bfea-48f0-8d3f-e173753a441f",
+      "values": []
+    },
+    {
       "export_key": "incident/internal_customizations_field",
       "id": 0,
       "input_type": "text",
@@ -1585,12 +1701,12 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 6,
+  "id": 15,
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1640624993786,
+      "create_date": 1640812235922,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -1599,7 +1715,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1640624993786,
+      "update_date": 1640812235922,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -1645,81 +1761,6 @@
   "timeframes": null,
   "types": [],
   "workflows": [
-    {
-      "actions": [],
-      "content": {
-        "version": 5,
-        "workflow_id": "siemplify_m_sync_case",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"siemplify_m_sync_case\" isExecutable=\"true\" name=\"Siemplify Sync Case\"\u003e\u003cdocumentation\u003eSynchronize an incident, artifacts, comments and attachments with a Siemplify Case. An existing case is updated if the custom field Siemplify_case_id is not set.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0aytvve\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0w67d7h\" name=\"Siemplify Sync Case\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"bf1b6ee8-4853-4a6a-8c21-808446de4c80\"\u003e{\"inputs\":{\"ab66d425-a3e0-4fed-b99e-0fd7ce3e1b97\":{\"input_type\":\"static\",\"static_input\":{\"boolean_value\":true,\"multiselect_value\":[]}},\"dd93eb58-531b-4807-8ea8-4471b70e204d\":{\"input_type\":\"static\",\"static_input\":{\"boolean_value\":true,\"multiselect_value\":[]}},\"7b6dde8b-b1f0-476c-a442-f8e7cd706a34\":{\"input_type\":\"static\",\"static_input\":{\"boolean_value\":true,\"multiselect_value\":[]}}},\"post_processing_script\":\"if results.success:\\n  incident.properties.siemplify_case_id = results.content.get(\u0027id\u0027)\\n  incident.properties.siemplify_case_link = helper.createRichText(\\\"\u0026lt;a target=\u0027blank\u0027 href=\u0027{}\u0027\u0026gt;{}\u0026lt;/a\u0026gt;\\\".format(results.content.get(\u0027siemplify_case_url\u0027), results.content.get(\u0027title\u0027)))\\n  if results.content.get(\u0027alerts\u0027):\\n    incident.properties.siemplify_alert_id = results.content[\u0027alerts\u0027][0][\u0027identifier\u0027]\\n  incident.addNote(\\\"Siemplify Sync Case {} created\\\".format(results.content.get(\u0027id\u0027)))\\nelse:\\n  incident.addNote(\\\"Siemplify Sync Case failed: {}\\\".format(str(results.content)))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.siemplify_incident_id = incident.id\\ninputs.siemplify_assigned_user = \\\"@Administrator\\\"\\ninputs.siemplify_environment = \\\"Default Environment\\\"\\ninputs.siemplify_case_id = incident.properties.siemplify_case_id\\ninputs.siemplify_alert_id = incident.properties.siemplify_alert_id\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0aytvve\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1hhztx1\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0aytvve\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0w67d7h\"/\u003e\u003cendEvent id=\"EndEvent_0p32n4t\"\u003e\u003cincoming\u003eSequenceFlow_1hhztx1\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1hhztx1\" sourceRef=\"ServiceTask_0w67d7h\" targetRef=\"EndEvent_0p32n4t\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1dq6ysr\"\u003e\u003ctext\u003e\u003c![CDATA[Sync results returned in a note\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1afda0h\" sourceRef=\"ServiceTask_0w67d7h\" targetRef=\"TextAnnotation_1dq6ysr\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0w67d7h\" id=\"ServiceTask_0w67d7h_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"254\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0aytvve\" id=\"SequenceFlow_0aytvve_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"254\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"226\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0p32n4t\" id=\"EndEvent_0p32n4t_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"423\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"441\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1hhztx1\" id=\"SequenceFlow_1hhztx1_di\"\u003e\u003comgdi:waypoint x=\"354\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"423\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"388.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1dq6ysr\" id=\"TextAnnotation_1dq6ysr_di\"\u003e\u003comgdc:Bounds height=\"41\" width=\"161\" x=\"343\" y=\"78\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1afda0h\" id=\"Association_1afda0h_di\"\u003e\u003comgdi:waypoint x=\"346\" xsi:type=\"omgdc:Point\" y=\"168\"/\u003e\u003comgdi:waypoint x=\"402\" xsi:type=\"omgdc:Point\" y=\"119\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 5,
-      "creator_id": "a@example.com",
-      "description": "Synchronize an incident, artifacts, comments and attachments with a Siemplify Case. An existing case is updated if the custom field Siemplify_case_id is not set.",
-      "export_key": "siemplify_m_sync_case",
-      "last_modified_by": "a@example.com",
-      "last_modified_time": 1640624082861,
-      "name": "Siemplify Sync Case",
-      "object_type": "incident",
-      "programmatic_name": "siemplify_m_sync_case",
-      "tags": [
-        {
-          "tag_handle": "fn_siemplify",
-          "value": null
-        }
-      ],
-      "uuid": "4f78e937-238b-4e31-86f5-095e3dc02efe",
-      "workflow_id": 96
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 7,
-        "workflow_id": "siemplify_sync_task",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"siemplify_sync_task\" isExecutable=\"true\" name=\"Siemplify Sync Task\"\u003e\u003cdocumentation\u003eSync a SOAR incident task to Siemplify\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1igd3a2\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0o6ht79\" name=\"Siemplify Sync Task\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d8b35373-e80d-42cc-9120-e0073847252a\"\u003e{\"inputs\":{},\"post_processing_script\":\"if results.success:\\n  task.addNote(\\\"Siemplify Sync Task: {}\\\".format(task.name))\\nelse:\\n  task.addNote(\\\"Siemplify Sync Task: {} failed: {}\\\".format(task.name, results.reason))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.siemplify_case_id = incident.properties.siemplify_case_id\\ninputs.siemplify_soar_task_id = task.id\\ninputs.siemplify_task_assignee = \\\"@Administrator\\\"\\n\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1igd3a2\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1s0qzhm\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1igd3a2\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0o6ht79\"/\u003e\u003cendEvent id=\"EndEvent_0is86cj\"\u003e\u003cincoming\u003eSequenceFlow_1s0qzhm\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1s0qzhm\" sourceRef=\"ServiceTask_0o6ht79\" targetRef=\"EndEvent_0is86cj\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1ynurxt\"\u003e\u003ctext\u003e\u003c![CDATA[Sync results returned in a task note\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1tfbar0\" sourceRef=\"ServiceTask_0o6ht79\" targetRef=\"TextAnnotation_1ynurxt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0o6ht79\" id=\"ServiceTask_0o6ht79_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"263\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1igd3a2\" id=\"SequenceFlow_1igd3a2_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"263\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"230.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0is86cj\" id=\"EndEvent_0is86cj_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"431\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"449\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1s0qzhm\" id=\"SequenceFlow_1s0qzhm_di\"\u003e\u003comgdi:waypoint x=\"363\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"431\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"397\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1ynurxt\" id=\"TextAnnotation_1ynurxt_di\"\u003e\u003comgdc:Bounds height=\"46\" width=\"162\" x=\"342\" y=\"85\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1tfbar0\" id=\"Association_1tfbar0_di\"\u003e\u003comgdi:waypoint x=\"355\" xsi:type=\"omgdc:Point\" y=\"168\"/\u003e\u003comgdi:waypoint x=\"397\" xsi:type=\"omgdc:Point\" y=\"131\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 7,
-      "creator_id": "a@example.com",
-      "description": "Sync a SOAR incident task to Siemplify",
-      "export_key": "siemplify_sync_task",
-      "last_modified_by": "a@example.com",
-      "last_modified_time": 1640624787532,
-      "name": "Siemplify Sync Task",
-      "object_type": "task",
-      "programmatic_name": "siemplify_sync_task",
-      "tags": [
-        {
-          "tag_handle": "fn_siemplify",
-          "value": null
-        }
-      ],
-      "uuid": "bc450264-e7eb-48e7-8bd3-2039ee9287df",
-      "workflow_id": 97
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 10,
-        "workflow_id": "siemplify_sync_artifact",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"siemplify_sync_artifact\" isExecutable=\"true\" name=\"Siemplify Sync Artifact\"\u003e\u003cdocumentation\u003eSync a SOAR Incident artifact to a Siemplify Case alert and entity\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1lp0b0i\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0bvtpg3\" name=\"Siemplify Sync Artifact\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"f5320892-50c9-4aae-8d08-45bc25b6e682\"\u003e{\"inputs\":{},\"post_processing_script\":\"if results.success:\\n  incident.addNote(\\\"Siemplify Sync Artifact: {} ({}) created\\\".format(artifact.value, artifact.type))\\nelse:\\n  incident.addNote(\\\"Simeplify Sync Artifact: {} ({}) failed\\\".format(artifact.value, artifact.type))\\n  \",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.siemplify_case_id = incident.properties.siemplify_case_id\\ninputs.siemplify_alert_id = incident.properties.siemplify_alert_id\\ninputs.siemplify_artifact_type = artifact.type\\ninputs.siemplify_artifact_value = artifact.value\\ninputs.siemplify_environment = None\\ninputs.siemplify_artifact_id = artifact.id\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1lp0b0i\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1n8bleh\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1lp0b0i\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0bvtpg3\"/\u003e\u003cendEvent id=\"EndEvent_1wew0w9\"\u003e\u003cincoming\u003eSequenceFlow_1n8bleh\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1n8bleh\" sourceRef=\"ServiceTask_0bvtpg3\" targetRef=\"EndEvent_1wew0w9\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1ypf2yo\"\u003e\u003ctext\u003eCreates a note with sync status\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_133e51o\" sourceRef=\"ServiceTask_0bvtpg3\" targetRef=\"TextAnnotation_1ypf2yo\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0bvtpg3\" id=\"ServiceTask_0bvtpg3_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"286\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1lp0b0i\" id=\"SequenceFlow_1lp0b0i_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"286\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"242\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1wew0w9\" id=\"EndEvent_1wew0w9_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"486\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"90\" x=\"459\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1n8bleh\" id=\"SequenceFlow_1n8bleh_di\"\u003e\u003comgdi:waypoint x=\"386\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"486\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"90\" x=\"391\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1ypf2yo\" id=\"TextAnnotation_1ypf2yo_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"371\" y=\"72\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_133e51o\" id=\"Association_133e51o_di\"\u003e\u003comgdi:waypoint x=\"365\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"410\" xsi:type=\"omgdc:Point\" y=\"102\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 10,
-      "creator_id": "a@example.com",
-      "description": "Sync a SOAR Incident artifact to a Siemplify Case alert and entity",
-      "export_key": "siemplify_sync_artifact",
-      "last_modified_by": "a@example.com",
-      "last_modified_time": 1640623885555,
-      "name": "Siemplify Sync Artifact",
-      "object_type": "artifact",
-      "programmatic_name": "siemplify_sync_artifact",
-      "tags": [
-        {
-          "tag_handle": "fn_siemplify",
-          "value": null
-        }
-      ],
-      "uuid": "4f23c3cb-c55d-4d3a-bf9f-f1f0c7b55afe",
-      "workflow_id": 93
-    },
     {
       "actions": [],
       "content": {
@@ -1774,26 +1815,26 @@
       "actions": [],
       "content": {
         "version": 7,
-        "workflow_id": "siemplify_sync_case",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"siemplify_sync_case\" isExecutable=\"true\" name=\"Siemplify Auto Sync Case\"\u003e\u003cdocumentation\u003eSync a SOAR Case to Siemplify, specifying the additional synchronization of artifacts, attachments and comments\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_133ewo1\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0ao7iqd\" name=\"Siemplify Sync Case\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"bf1b6ee8-4853-4a6a-8c21-808446de4c80\"\u003e{\"inputs\":{\"ab66d425-a3e0-4fed-b99e-0fd7ce3e1b97\":{\"input_type\":\"static\",\"static_input\":{\"boolean_value\":true,\"multiselect_value\":[]}},\"dd93eb58-531b-4807-8ea8-4471b70e204d\":{\"input_type\":\"static\",\"static_input\":{\"boolean_value\":true,\"multiselect_value\":[]}},\"7b6dde8b-b1f0-476c-a442-f8e7cd706a34\":{\"input_type\":\"static\",\"static_input\":{\"boolean_value\":true,\"multiselect_value\":[]}}},\"post_processing_script\":\"if results.success:\\n  incident.properties.siemplify_case_id = results.content.get(\u0027id\u0027)\\n  incident.properties.siemplify_case_link = helper.createRichText(\\\"\u0026lt;a target=\u0027blank\u0027 href=\u0027{}\u0027\u0026gt;{}\u0026lt;/a\u0026gt;\\\".format(results.content.get(\u0027siemplify_case_url\u0027), results.content.get(\u0027title\u0027)))\\n  if results.content.get(\u0027alerts\u0027):\\n    incident.properties.siemplify_alert_id = results.content[\u0027alerts\u0027][0][\u0027identifier\u0027]\\n  incident.addNote(\\\"Siemplify Sync Case {} created\\\".format(results.content.get(\u0027id\u0027)))\\nelse:\\n  incident.addNote(\\\"Siemplify Sync Case failed: {}\\\".format(str(results.content)))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.siemplify_incident_id = incident.id\\ninputs.siemplify_assigned_user = None\\ninputs.siemplify_environment = None\\ninputs.siemplify_case_id = incident.properties.siemplify_case_id\\ninputs.siemplify_alert_id = incident.properties.siemplify_alert_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_133ewo1\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_14vcfso\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_133ewo1\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0ao7iqd\"/\u003e\u003cendEvent id=\"EndEvent_04a6awv\"\u003e\u003cincoming\u003eSequenceFlow_14vcfso\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_14vcfso\" sourceRef=\"ServiceTask_0ao7iqd\" targetRef=\"EndEvent_04a6awv\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_02eb4gg\"\u003e\u003ctext\u003eCreates a note with sync status\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0a4pfoi\" sourceRef=\"ServiceTask_0ao7iqd\" targetRef=\"TextAnnotation_02eb4gg\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0ao7iqd\" id=\"ServiceTask_0ao7iqd_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"274\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_133ewo1\" id=\"SequenceFlow_133ewo1_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"274\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"236\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_04a6awv\" id=\"EndEvent_04a6awv_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"452\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"425\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_14vcfso\" id=\"SequenceFlow_14vcfso_di\"\u003e\u003comgdi:waypoint x=\"374\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"452\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"368\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_02eb4gg\" id=\"TextAnnotation_02eb4gg_di\"\u003e\u003comgdc:Bounds height=\"31\" width=\"202\" x=\"362\" y=\"76\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0a4pfoi\" id=\"Association_0a4pfoi_di\"\u003e\u003comgdi:waypoint x=\"368\" xsi:type=\"omgdc:Point\" y=\"170\"/\u003e\u003comgdi:waypoint x=\"446\" xsi:type=\"omgdc:Point\" y=\"107\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "workflow_id": "siemplify_sync_task",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"siemplify_sync_task\" isExecutable=\"true\" name=\"Siemplify Sync Task\"\u003e\u003cdocumentation\u003eSync a SOAR incident task to Siemplify\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1igd3a2\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0o6ht79\" name=\"Siemplify Sync Task\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d8b35373-e80d-42cc-9120-e0073847252a\"\u003e{\"inputs\":{},\"post_processing_script\":\"if results.success:\\n  task.addNote(\\\"Siemplify Sync Task: {}\\\".format(task.name))\\nelse:\\n  task.addNote(\\\"Siemplify Sync Task: {} failed: {}\\\".format(task.name, results.reason))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.siemplify_case_id = incident.properties.siemplify_case_id\\ninputs.siemplify_soar_task_id = task.id\\ninputs.siemplify_task_assignee = \\\"@Administrator\\\"\\n\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1igd3a2\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1s0qzhm\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1igd3a2\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0o6ht79\"/\u003e\u003cendEvent id=\"EndEvent_0is86cj\"\u003e\u003cincoming\u003eSequenceFlow_1s0qzhm\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1s0qzhm\" sourceRef=\"ServiceTask_0o6ht79\" targetRef=\"EndEvent_0is86cj\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1ynurxt\"\u003e\u003ctext\u003e\u003c![CDATA[Sync results returned in a task note\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1tfbar0\" sourceRef=\"ServiceTask_0o6ht79\" targetRef=\"TextAnnotation_1ynurxt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0o6ht79\" id=\"ServiceTask_0o6ht79_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"263\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1igd3a2\" id=\"SequenceFlow_1igd3a2_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"263\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"230.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0is86cj\" id=\"EndEvent_0is86cj_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"431\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"449\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1s0qzhm\" id=\"SequenceFlow_1s0qzhm_di\"\u003e\u003comgdi:waypoint x=\"363\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"431\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"397\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1ynurxt\" id=\"TextAnnotation_1ynurxt_di\"\u003e\u003comgdc:Bounds height=\"46\" width=\"162\" x=\"342\" y=\"85\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1tfbar0\" id=\"Association_1tfbar0_di\"\u003e\u003comgdi:waypoint x=\"355\" xsi:type=\"omgdc:Point\" y=\"168\"/\u003e\u003comgdi:waypoint x=\"397\" xsi:type=\"omgdc:Point\" y=\"131\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "content_version": 7,
       "creator_id": "a@example.com",
-      "description": "Sync a SOAR Case to Siemplify, specifying the additional synchronization of artifacts, attachments and comments",
-      "export_key": "siemplify_sync_case",
+      "description": "Sync a SOAR incident task to Siemplify",
+      "export_key": "siemplify_sync_task",
       "last_modified_by": "a@example.com",
-      "last_modified_time": 1640623855405,
-      "name": "Siemplify Auto Sync Case",
-      "object_type": "incident",
-      "programmatic_name": "siemplify_sync_case",
+      "last_modified_time": 1640624787532,
+      "name": "Siemplify Sync Task",
+      "object_type": "task",
+      "programmatic_name": "siemplify_sync_task",
       "tags": [
         {
           "tag_handle": "fn_siemplify",
           "value": null
         }
       ],
-      "uuid": "43ab935d-a6dd-4c48-b44f-00b059891799",
-      "workflow_id": 94
+      "uuid": "bc450264-e7eb-48e7-8bd3-2039ee9287df",
+      "workflow_id": 97
     },
     {
       "actions": [],
@@ -1819,6 +1860,81 @@
       ],
       "uuid": "9bc3cee3-3540-400c-8f39-90d19d448032",
       "workflow_id": 98
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 11,
+        "workflow_id": "siemplify_sync_case",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"siemplify_sync_case\" isExecutable=\"true\" name=\"Siemplify Auto Sync Case\"\u003e\u003cdocumentation\u003eSync a SOAR Case to Siemplify, specifying the additional synchronization of artifacts, attachments and comments\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_133ewo1\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0ao7iqd\" name=\"Siemplify Sync Case\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"bf1b6ee8-4853-4a6a-8c21-808446de4c80\"\u003e{\"inputs\":{\"ab66d425-a3e0-4fed-b99e-0fd7ce3e1b97\":{\"input_type\":\"static\",\"static_input\":{\"boolean_value\":true,\"multiselect_value\":[]}},\"dd93eb58-531b-4807-8ea8-4471b70e204d\":{\"input_type\":\"static\",\"static_input\":{\"boolean_value\":true,\"multiselect_value\":[]}},\"7b6dde8b-b1f0-476c-a442-f8e7cd706a34\":{\"input_type\":\"static\",\"static_input\":{\"boolean_value\":true,\"multiselect_value\":[]}}},\"post_processing_script\":\"if results.success:\\n  incident.properties.siemplify_case_id = results.content.get(\u0027id\u0027)\\n  incident.properties.siemplify_case_link = helper.createRichText(\\\"\u0026lt;a target=\u0027blank\u0027 href=\u0027{}\u0027\u0026gt;{}\u0026lt;/a\u0026gt;\\\".format(results.content.get(\u0027siemplify_case_url\u0027), results.content.get(\u0027title\u0027)))\\n  incident.properties.siemplify_is_important = results.content.get(\u0027isImportant\u0027)\\n  incident.properties.siemplify_stage = results.content.get(\u0027stage\u0027)\\n  incident.properties.siemplify_assignee = results.content.get(\u0027assignedUserName\u0027)\\n  incident.properties.siemplify_priority = results.content.get(\u0027priority\u0027)\\n  incident.properties.siemplify_tags = \\\", \\\".join([tag[\u0027tag\u0027] for tag in results.content.get(\u0027tags\u0027)])\\n  \\n  if results.content.get(\u0027alerts\u0027):\\n    incident.properties.siemplify_alert_id = results.content[\u0027alerts\u0027][0][\u0027identifier\u0027]\\n  incident.addNote(\\\"Siemplify Sync Case {} created\\\".format(results.content.get(\u0027id\u0027)))\\nelse:\\n  incident.addNote(\\\"Siemplify Sync Case failed: {}\\\".format(str(results.content)))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.siemplify_incident_id = incident.id\\ninputs.siemplify_assigned_user = None\\ninputs.siemplify_environment = None\\ninputs.siemplify_case_id = incident.properties.siemplify_case_id\\ninputs.siemplify_alert_id = incident.properties.siemplify_alert_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_133ewo1\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_14vcfso\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_133ewo1\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0ao7iqd\"/\u003e\u003cendEvent id=\"EndEvent_04a6awv\"\u003e\u003cincoming\u003eSequenceFlow_14vcfso\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_14vcfso\" sourceRef=\"ServiceTask_0ao7iqd\" targetRef=\"EndEvent_04a6awv\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_02eb4gg\"\u003e\u003ctext\u003eCreates a note with sync status\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0a4pfoi\" sourceRef=\"ServiceTask_0ao7iqd\" targetRef=\"TextAnnotation_02eb4gg\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0ao7iqd\" id=\"ServiceTask_0ao7iqd_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"274\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_133ewo1\" id=\"SequenceFlow_133ewo1_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"274\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"236\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_04a6awv\" id=\"EndEvent_04a6awv_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"452\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"425\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_14vcfso\" id=\"SequenceFlow_14vcfso_di\"\u003e\u003comgdi:waypoint x=\"374\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"452\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"368\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_02eb4gg\" id=\"TextAnnotation_02eb4gg_di\"\u003e\u003comgdc:Bounds height=\"31\" width=\"202\" x=\"362\" y=\"76\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0a4pfoi\" id=\"Association_0a4pfoi_di\"\u003e\u003comgdi:waypoint x=\"368\" xsi:type=\"omgdc:Point\" y=\"170\"/\u003e\u003comgdi:waypoint x=\"446\" xsi:type=\"omgdc:Point\" y=\"107\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 11,
+      "creator_id": "a@example.com",
+      "description": "Sync a SOAR Case to Siemplify, specifying the additional synchronization of artifacts, attachments and comments",
+      "export_key": "siemplify_sync_case",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1640812202341,
+      "name": "Siemplify Auto Sync Case",
+      "object_type": "incident",
+      "programmatic_name": "siemplify_sync_case",
+      "tags": [
+        {
+          "tag_handle": "fn_siemplify",
+          "value": null
+        }
+      ],
+      "uuid": "43ab935d-a6dd-4c48-b44f-00b059891799",
+      "workflow_id": 94
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 5,
+        "workflow_id": "siemplify_m_sync_case",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"siemplify_m_sync_case\" isExecutable=\"true\" name=\"Siemplify Sync Case\"\u003e\u003cdocumentation\u003eSynchronize an incident, artifacts, comments and attachments with a Siemplify Case. An existing case is updated if the custom field Siemplify_case_id is not set.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0aytvve\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0w67d7h\" name=\"Siemplify Sync Case\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"bf1b6ee8-4853-4a6a-8c21-808446de4c80\"\u003e{\"inputs\":{\"ab66d425-a3e0-4fed-b99e-0fd7ce3e1b97\":{\"input_type\":\"static\",\"static_input\":{\"boolean_value\":true,\"multiselect_value\":[]}},\"dd93eb58-531b-4807-8ea8-4471b70e204d\":{\"input_type\":\"static\",\"static_input\":{\"boolean_value\":true,\"multiselect_value\":[]}},\"7b6dde8b-b1f0-476c-a442-f8e7cd706a34\":{\"input_type\":\"static\",\"static_input\":{\"boolean_value\":true,\"multiselect_value\":[]}}},\"post_processing_script\":\"if results.success:\\n  incident.properties.siemplify_case_id = results.content.get(\u0027id\u0027)\\n  incident.properties.siemplify_case_link = helper.createRichText(\\\"\u0026lt;a target=\u0027blank\u0027 href=\u0027{}\u0027\u0026gt;{}\u0026lt;/a\u0026gt;\\\".format(results.content.get(\u0027siemplify_case_url\u0027), results.content.get(\u0027title\u0027)))\\n  if results.content.get(\u0027alerts\u0027):\\n    incident.properties.siemplify_alert_id = results.content[\u0027alerts\u0027][0][\u0027identifier\u0027]\\n  incident.addNote(\\\"Siemplify Sync Case {} created\\\".format(results.content.get(\u0027id\u0027)))\\nelse:\\n  incident.addNote(\\\"Siemplify Sync Case failed: {}\\\".format(str(results.content)))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.siemplify_incident_id = incident.id\\ninputs.siemplify_assigned_user = \\\"@Administrator\\\"\\ninputs.siemplify_environment = \\\"Default Environment\\\"\\ninputs.siemplify_case_id = incident.properties.siemplify_case_id\\ninputs.siemplify_alert_id = incident.properties.siemplify_alert_id\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0aytvve\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1hhztx1\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0aytvve\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0w67d7h\"/\u003e\u003cendEvent id=\"EndEvent_0p32n4t\"\u003e\u003cincoming\u003eSequenceFlow_1hhztx1\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1hhztx1\" sourceRef=\"ServiceTask_0w67d7h\" targetRef=\"EndEvent_0p32n4t\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1dq6ysr\"\u003e\u003ctext\u003e\u003c![CDATA[Sync results returned in a note\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1afda0h\" sourceRef=\"ServiceTask_0w67d7h\" targetRef=\"TextAnnotation_1dq6ysr\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0w67d7h\" id=\"ServiceTask_0w67d7h_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"254\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0aytvve\" id=\"SequenceFlow_0aytvve_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"254\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"226\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0p32n4t\" id=\"EndEvent_0p32n4t_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"423\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"441\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1hhztx1\" id=\"SequenceFlow_1hhztx1_di\"\u003e\u003comgdi:waypoint x=\"354\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"423\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"388.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1dq6ysr\" id=\"TextAnnotation_1dq6ysr_di\"\u003e\u003comgdc:Bounds height=\"41\" width=\"161\" x=\"343\" y=\"78\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1afda0h\" id=\"Association_1afda0h_di\"\u003e\u003comgdi:waypoint x=\"346\" xsi:type=\"omgdc:Point\" y=\"168\"/\u003e\u003comgdi:waypoint x=\"402\" xsi:type=\"omgdc:Point\" y=\"119\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 5,
+      "creator_id": "a@example.com",
+      "description": "Synchronize an incident, artifacts, comments and attachments with a Siemplify Case. An existing case is updated if the custom field Siemplify_case_id is not set.",
+      "export_key": "siemplify_m_sync_case",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1640624082861,
+      "name": "Siemplify Sync Case",
+      "object_type": "incident",
+      "programmatic_name": "siemplify_m_sync_case",
+      "tags": [
+        {
+          "tag_handle": "fn_siemplify",
+          "value": null
+        }
+      ],
+      "uuid": "4f78e937-238b-4e31-86f5-095e3dc02efe",
+      "workflow_id": 96
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 10,
+        "workflow_id": "siemplify_sync_artifact",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"siemplify_sync_artifact\" isExecutable=\"true\" name=\"Siemplify Sync Artifact\"\u003e\u003cdocumentation\u003eSync a SOAR Incident artifact to a Siemplify Case alert and entity\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1lp0b0i\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0bvtpg3\" name=\"Siemplify Sync Artifact\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"f5320892-50c9-4aae-8d08-45bc25b6e682\"\u003e{\"inputs\":{},\"post_processing_script\":\"if results.success:\\n  incident.addNote(\\\"Siemplify Sync Artifact: {} ({}) created\\\".format(artifact.value, artifact.type))\\nelse:\\n  incident.addNote(\\\"Simeplify Sync Artifact: {} ({}) failed\\\".format(artifact.value, artifact.type))\\n  \",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.siemplify_case_id = incident.properties.siemplify_case_id\\ninputs.siemplify_alert_id = incident.properties.siemplify_alert_id\\ninputs.siemplify_artifact_type = artifact.type\\ninputs.siemplify_artifact_value = artifact.value\\ninputs.siemplify_environment = None\\ninputs.siemplify_artifact_id = artifact.id\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1lp0b0i\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1n8bleh\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1lp0b0i\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0bvtpg3\"/\u003e\u003cendEvent id=\"EndEvent_1wew0w9\"\u003e\u003cincoming\u003eSequenceFlow_1n8bleh\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1n8bleh\" sourceRef=\"ServiceTask_0bvtpg3\" targetRef=\"EndEvent_1wew0w9\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1ypf2yo\"\u003e\u003ctext\u003eCreates a note with sync status\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_133e51o\" sourceRef=\"ServiceTask_0bvtpg3\" targetRef=\"TextAnnotation_1ypf2yo\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0bvtpg3\" id=\"ServiceTask_0bvtpg3_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"286\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1lp0b0i\" id=\"SequenceFlow_1lp0b0i_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"286\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"242\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1wew0w9\" id=\"EndEvent_1wew0w9_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"486\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"90\" x=\"459\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1n8bleh\" id=\"SequenceFlow_1n8bleh_di\"\u003e\u003comgdi:waypoint x=\"386\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"486\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"90\" x=\"391\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1ypf2yo\" id=\"TextAnnotation_1ypf2yo_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"371\" y=\"72\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_133e51o\" id=\"Association_133e51o_di\"\u003e\u003comgdi:waypoint x=\"365\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"410\" xsi:type=\"omgdc:Point\" y=\"102\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 10,
+      "creator_id": "a@example.com",
+      "description": "Sync a SOAR Incident artifact to a Siemplify Case alert and entity",
+      "export_key": "siemplify_sync_artifact",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1640623885555,
+      "name": "Siemplify Sync Artifact",
+      "object_type": "artifact",
+      "programmatic_name": "siemplify_sync_artifact",
+      "tags": [
+        {
+          "tag_handle": "fn_siemplify",
+          "value": null
+        }
+      ],
+      "uuid": "4f23c3cb-c55d-4d3a-bf9f-f1f0c7b55afe",
+      "workflow_id": 93
     }
   ],
   "workspaces": []
