@@ -46,7 +46,7 @@ class FunctionComponent(AppFunctionComponent):
             success_verdict = True
             status_results = sentinelone_client.update_threat_status(threat_id, threat_status)
             status_data = status_results.get("data")
-            if int(status_data.get("affected")) <= 0:
+            if int(status_data.get("affected"), 0) <= 0:
                 IntegrationError("SentinelOne Update Threat Status: unable to update incidentStatus {0} in SentinelOne threat: {1}".format(
                                 threat_status, threat_id))
             else:
