@@ -30,6 +30,7 @@ SEARCH_CASE_URL = "search/CaseSearchEverything"
 CASES_MODIFIED_URL = "cases/IsCaseUpdated"
 
 SOAR_HEADER = "IBM SOAR"
+SIEMPLIFY_HEADER="From Siemplify"
 IBMSOAR_TAGS = ['IBMSOAR']
 
 ARTIFACT_TYPE_LOOKUPS = {

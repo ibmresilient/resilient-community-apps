@@ -5,6 +5,7 @@
 import base64
 import logging
 import re
+from fn_siemplify.lib.siemplify_common import SIEMPLIFY_HEADER, SOAR_HEADER
 from resilient import SimpleHTTPException, Patch
 from resilient_lib import IntegrationError
 from resilient_lib import get_file_attachment, get_file_attachment_name
@@ -173,14 +174,14 @@ class ResilientCommon():
 
     def create_incident_comment(self, incident_id, sentinel_comment_id, note):
         """
-        Add a comment to the specified Resilient Incident by ID
-        :param incident_id:  Resilient Incident ID
+        Add a comment to the specified SOAR Incident by ID
+        :param incident_id:  SOAR Incident ID
         :param note: Content to be added as note
-        :return: Response from Resilient for debug
+        :return: Response from SOAR for debug
         """
         try:
             uri = u'/incidents/{0}/comments'.format(incident_id)
-            comment = "<b>{} ({}):</b><br>{}".format(None, sentinel_comment_id, note)
+            comment = "<b>{} ({}):</b><br>{}".format(SIEMPLIFY_HEADER, sentinel_comment_id, note)
 
             note_json = {
                 'format': 'html',
@@ -301,7 +302,8 @@ class ResilientCommon():
         except Exception as err:
             raise IntegrationError(err)
 
-    def filter_resilient_comments(self, incident_id, sentinel_comments):
+    def filter_resilient_comments(self, incident_id, siemplify_comments, soar_header=SOAR_HEADER, \
+                                 sync_header=SIEMPLIFY_HEADER):
         """
             need to avoid creating same comments over and over
               this logic will read all comments from an incident
@@ -309,7 +311,9 @@ class ResilientCommon():
 
         Args:
             incident_id ([str]): [resilient incident id]
-            sentinel_comments ([list]): [description]
+            siemplify_comments ([list]): [description]
+            soar_header ([str]): [title added to SOAR comment ]
+            sync_header ([str]): [title of siemplify comment already sync'd]
         Returns:
             new_comments ([list])
         """
@@ -317,12 +321,13 @@ class ResilientCommon():
         soar_comment_list = [comment['text'] for comment in soar_comments]
 
         # filter comments with our SOAR header
-        new_comments = [comment for comment in sentinel_comments if not None in comment['properties']['message']]
+        new_comments = [comment for comment in siemplify_comments \
+                            if soar_header not in comment['title']]
 
         # filter out the comments already sync'd
         if soar_comment_list:
             new_comments = [comment for comment in new_comments \
-                if not any([comment['name'] in already_syncd for already_syncd in soar_comment_list])]
+                if not any([comment['content'] in already_syncd for already_syncd in soar_comment_list])]
 
         return new_comments
 

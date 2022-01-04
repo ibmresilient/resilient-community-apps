@@ -1,0 +1,14 @@
+{
+  {% if description %}
+    "description": "{{ description }}",
+  {% endif %}
+  "properties": {
+    {% if tags %}
+      "siemplify_tags": "{{ tags|map(attribute='tag')|list|join(', ') }}",
+    {% endif %}
+    "siemplify_assignee": "{{ assignedUserName }}",
+    "siemplify_stage": "{{ stage }}",
+    "siemplify_is_important": {{ isImportant|tojson }},
+    "siemplify_priority": {{ priority }}
+  }
+}

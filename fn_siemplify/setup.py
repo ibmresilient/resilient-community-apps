@@ -34,6 +34,7 @@ setup(
         "resilient-circuits>=43.0.0",
         "resilient_lib",
         "jinja2",
+        "pytz",
         "simplejson"
     ],
     python_requires='>=3.6',
