@@ -20,7 +20,7 @@ class FunctionComponent(AppFunctionComponent):
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """
-        Function: Connect a an endpoint managed by Sentinel to the network.
+        Function: Connect an endpoint managed by SentinelOne to the network.
         Inputs:
             -   fn_inputs.sentinelone_agent_id
         """

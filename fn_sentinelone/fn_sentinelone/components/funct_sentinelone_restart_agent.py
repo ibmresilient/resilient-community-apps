@@ -20,7 +20,7 @@ class FunctionComponent(AppFunctionComponent):
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """
-        Function: Restart a endpoint managed by SentinelOne.
+        Function: Restart an endpoint managed by SentinelOne.
         Inputs:
             -   fn_inputs.sentinelone_agent_id
         """

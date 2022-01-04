@@ -35,7 +35,7 @@ class FunctionComponent(AppFunctionComponent):
         sentinelone_api = SentinelOneClient(self.opts, self.options)
 
         threat_notes = sentinelone_api.get_threat_notes(threat_id)
-        new_comments = []
+
         new_comments = resilient_api.filter_resilient_comments(incident_id, threat_notes)
 
         for comment in new_comments:
