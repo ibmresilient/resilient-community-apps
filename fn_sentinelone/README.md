@@ -23,7 +23,7 @@
 - [Overview](#overview)
   - [Key Features](#key-features)
 - [Requirements](#requirements)
-  - [Resilient platform](#resilient-platform)
+  - [SOAR platform](#resilient-platform)
   - [Cloud Pak for Security](#cloud-pak-for-security)
   - [Proxy Server](#proxy-server)
   - [Python Environment](#python-environment)
@@ -100,17 +100,17 @@ The SentinelOne app implements the following functionality in the IBM SOAR platf
 <!--
   List any Requirements 
 --> 
-This app supports the IBM Resilient SOAR Platform and the IBM Cloud Pak for Security.
+This app supports the IBM SOAR Platform and the IBM Cloud Pak for Security.
 
-### Resilient platform
-The Resilient platform supports two app deployment mechanisms, App Host and integration server.
+### SOAR platform
+The SOAR platform supports two app deployment mechanisms, App Host and integration server.
 
-If deploying to a Resilient platform with an App Host, the requirements are:
-* Resilient platform >= `40.2.81`.
+If deploying to a SOAR platform with an App Host, the requirements are:
+* SOAR platform >= `40.2.81`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
-If deploying to a Resilient platform with an integration server, the requirements are:
-* Resilient platform >= `40.2.81`.
+If deploying to a SOAR platform with an integration server, the requirements are:
+* SOAR platform >= `40.2.81`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient-circuits>=40.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions: 
@@ -121,12 +121,12 @@ If deploying to a Resilient platform with an integration server, the requirement
   | Incident | Read, Edit, Create, Owner, Status |
   | Incident Notes | Edit |
 
-The following Resilient platform guides provide additional information: 
+The following SOAR platform guides provide additional information: 
 * _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
 
-The above guides are available on the IBM Knowledge Center at [ibm.biz/soar-docs](https://ibm.biz/soar-docs). On this web page, select your Resilient platform version. On the follow-on page, you can find the _App Host Deployment Guide_ or _Integration Server Guide_ by expanding **Resilient Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
+The above guides are available on the IBM Knowledge Center at [ibm.biz/soar-docs](https://ibm.biz/soar-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _App Host Deployment Guide_ or _Integration Server Guide_ by expanding **Resilient Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
 ### Cloud Pak for Security
 If you are deploying to IBM Cloud Pak for Security, the requirements are:
@@ -181,7 +181,7 @@ List any user permissions that are needed to use this endpoint. For example, lis
 ## Installation
 
 ### Install
-* To install or uninstall an App or Integration on the _Resilient platform_, see the documentation at [ibm.biz/soar-docs](https://ibm.biz/soar-docs).
+* To install or uninstall an App or Integration on the _SOAR platform_, see the documentation at [ibm.biz/soar-docs](https://ibm.biz/soar-docs).
 * To install or uninstall an App on _IBM Cloud Pak for Security_, see the documentation at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs) and follow the instructions above to navigate to Orchestration and Automation.
 
 ### App Configuration
@@ -192,23 +192,22 @@ The following table provides the settings you need to configure the app. These s
 | **sentinelone_server** | Yes | `xxx.sentinelone.net` | *SentinelOne server* |
 | **api_version** | Yes | `2.1` | *SentinelOne REST API version* |
 | **api_token** | Yes | `xxxxxx` | *SentinelOne user API token* |
-| **polling_interval** | Yes | `60` | *Poller interval time in seconds. Value of zero to turn poller off*|
-| **polling_lookback** | Yes | `120` | *Number of minutes to lookback for threat updates. Value is only used on the first time polling when the app starts* |
-| **account_ids** | No | `123456789012345678` | *Comma seperated list of SentinelOne accountIds to query for threats* |
-| **site_ids** | No | `987654321098765432` | *Comma seperated list of SentinelOne siteIds to query for threats* |
-| **incident_statuses** | No | `resolved,in_progress,unresolved` | *Comma seperated list of SentinelOne incidentStatuses to query for threats[^1]* |
-| **limit** | No | `25` | *Limit number of threats to return from query* |
-| **sort_by** | No | `createdDate` | *The column to sort results by when querying threats* |
-| **sort_order** | No | `desc` | *Sort direction to return threat query results: 'asc' or 'desc'* |
-| **query_param** | No | `threat details` | *Full text search for fields when querying threats* |
-| **send_soar_link_to_sentinelone** | No | true | *Send SOAR incident URL live link via threat note to SentinelOne* |
-| **create_incident_template** | No | /path/create_incident_template.jinja | *Path to custom create incident jinja template* |
-| **close_incident_template** | No | /path/close_incident_template.jinja | *Path to custom close incident jinja template* |
-| **update_incident_template** | No | /path/update_incident_template.jinja | *Path to custom update incident jinja template* |
-| **verify** | No | /path/toclient_certificate.pem | *Path to client SSL certificate* |
+| **polling_interval** | Yes | `60` | *Poller interval time in seconds. Value of zero to turn poller off.*|
+| **polling_lookback** | Yes | `120` | *Number of minutes to look back for threat updates. Value is only used on the first time polling when the app starts.* |
+| **account_ids** | No | `123456789012345678` | *Comma separated list of SentinelOne accountIds to query for threats.* |
+| **site_ids** | No | `987654321098765432` | *Comma separated list of SentinelOne siteIds to query for threats.* |
+| **incident_statuses** | No | `resolved,in_progress,unresolved` | *Comma separated list of SentinelOne incidentStatuses to query for threats. NOTE: Include incidentStatus **resolved**  if the poller should close SOAR incidents that are marked as **resolved** in SentinelOne.* |
+| **limit** | No | `25` | *Limit number of threats to return from query.* |
+| **sort_by** | No | `createdDate` | *The column to sort results by when querying threats.* |
+| **sort_order** | No | `desc` | *Sort direction to return threat query results: 'asc' or 'desc'.* |
+| **query_param** | No | `threat details` | *Full text search for fields when querying threats.* |
+| **send_soar_link_to_sentinelone** | No | true | *Send SOAR incident URL live link via threat note to SentinelOn.e* |
+| **create_incident_template** | No | /path/create_incident_template.jinja | *Path to custom create incident jinja template.* |
+| **close_incident_template** | No | /path/close_incident_template.jinja | *Path to custom close incident jinja template.* |
+| **update_incident_template** | No | /path/update_incident_template.jinja | *Path to custom update incident jinja template.* |
+| **verify** | No | /path/toclient_certificate.pem | *Path to client SSL certificate.* |
 ___
 
-[^1]: Make sure to include incidentStatus **resolved**  if the poller should close SOAR incidents that are marked as **resolved** in SentinelOne. 
 
 ### Custom Layouts
 <!--
@@ -216,16 +215,16 @@ ___
   You may wish to recommend a new incident tab.
   You should save a screenshot "custom_layouts.png" in the doc/screenshots directory and reference it here
 -->
-* Create a SentinelOne incident tab and import the Data Table and Custom Fields like the screenshot below:
+* Create a SentinelOne incident tab and import the data table and custom fields as shown in the screenshot:
 
   ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png) 
 
-* Create a Close Incident tab so that when a SOAR incident corresponding to a SentinelOne threat is closed in SOAR, the user can select a SentinelOne Threat Analyst Verdict to send to SentinelOne when the incident it closed.  The SentinelOne threat cannot be closed if the Analyst Verdict is **undefined**.  
+* Create a Close Incident tab so that when a SOAR incident corresponding to a SentinelOne threat is closed in SOAR, the user can select a SentinelOne Threat Analyst Verdict to send to SentinelOne. The SentinelOne threat cannot be closed if the Analyst Verdict is **undefined**.  
     ![screenshot: custom_layouts_close](./doc/screenshots/custom_layouts_close.png)
 Here is a screenshot of the SentinelOne custom Close Incident popup:
 
     ![screenshot: custom_close_popup](./doc/screenshots/custom_close_popup.png)
- NOTE: If a Close incident tab is created, all non-SentinelOne incidents also contain the SentinelOne Threat Analyst Verdict select field in the Close menu pop-up.  Alternatively, an incident menu item rule **SentinelOne: Update Analyst Verdict and Threat Status** is provided that can be run manually to update the Analyst Verdict and Threat status in SentinelOne.  When the rule is run to **resolve** a SentinelOne threat, choose an Analyst Verdict and set the Threat Status to **resolved**.  SOAR updates the SentinelOne threat which in turn causes the incident to be closed in IBM SOAR on the next poll.
+ NOTE: If a Close incident tab is created, all non-SentinelOne incidents also contain the SentinelOne Threat Analyst Verdict select field in the Close menu pop-up. To avoid this, you can alternatively, use the provided incident menu item rule **SentinelOne: Update Analyst Verdict and Threat Status**, which a user can run manually to update the Analyst Verdict and Threat status in SentinelOne. When the rule is run to resolve a SentinelOne threat, choose an Analyst Verdict and set the Threat Status to **resolved**. SOAR updates the SentinelOne threat which in turn causes the incident to be closed in IBM SOAR on the next poll.
 ---
 
 ## Function - SentinelOne: Abort Disk Scan
@@ -1297,7 +1296,7 @@ None
 
 ---
 ## Function - SentinelOne: Send SOAR Note to SentinelOne
-Send a note created in SOAR to corresponding SentinelOne threat. The example rule it a menu item run off a note in SOAR.
+Send a note created in SOAR to corresponding SentinelOne threat. The example rule is a menu item rule run off a SOAR note.
 
  ![screenshot: fn-sentinelone-send-soar-note-to-sentinelone ](./doc/screenshots/fn-sentinelone-send-soar-note-to-sentinelone.png)
 
@@ -2074,7 +2073,7 @@ does not include.
 <details><summary>incident_close_template</summary>
 <pre>
 {
-  {# JINJA template for closing a new Resilient incident from a Sentinel incident. #}
+  {# JINJA template for closing a new SOAR incident from a Sentinel incident. #}
   "plan_status": "C",
   "resolution_id": {
     "name": "Resolved"
