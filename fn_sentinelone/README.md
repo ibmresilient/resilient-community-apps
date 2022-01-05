@@ -201,7 +201,7 @@ The following table provides the settings you need to configure the app. These s
 | **sort_by** | No | `createdDate` | *The column to sort results by when querying threats.* |
 | **sort_order** | No | `desc` | *Sort direction to return threat query results: 'asc' or 'desc'.* |
 | **query_param** | No | `threat details` | *Full text search for fields when querying threats.* |
-| **send_soar_link_to_sentinelone** | No | true | *Send SOAR incident URL live link via threat note to SentinelOn.e* |
+| **send_soar_link_to_sentinelone** | No | true | *Send SOAR incident URL live link via threat note to SentinelOne.* |
 | **create_incident_template** | No | /path/create_incident_template.jinja | *Path to custom create incident jinja template.* |
 | **close_incident_template** | No | /path/close_incident_template.jinja | *Path to custom close incident jinja template.* |
 | **update_incident_template** | No | /path/update_incident_template.jinja | *Path to custom update incident jinja template.* |
