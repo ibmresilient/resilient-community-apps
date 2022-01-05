@@ -1,0 +1,84 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {
+      "type": "null"
+    },
+    "content": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "threat_id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "success",
+        "threat_id"
+      ]
+    },
+    "raw": {
+      "type": "null"
+    },
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "incident_id": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "incident_id"
+      ]
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "execution_time_ms",
+        "host",
+        "package",
+        "package_version",
+        "timestamp",
+        "version"
+      ]
+    }
+  },
+  "required": [
+    "content",
+    "inputs",
+    "metrics",
+    "raw",
+    "reason",
+    "success",
+    "version"
+  ]
+}
