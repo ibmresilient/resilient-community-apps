@@ -1,0 +1,7 @@
+{
+    "error":{
+        "code":"ResourceNotFound",
+        "message":"Indicator id: 11 was not found",
+        "target":"13908e4a-410c-4a60-87c2-9f19d23103e2"
+    }
+}
