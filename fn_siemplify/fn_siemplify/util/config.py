@@ -22,6 +22,10 @@ polling_lookback=120
 poller_timezone=Etc/GMT
 # specify the environment for creating cases and entities
 default_case_environment=Default Environment
+# use playbook_mapping to define key/value mappings between soar incident types and playbooks when creating a Siemplify cases
+# If necessary, use DEFAULT to specify playbook(s) when no mapping matches
+#   playbook_mapping='<SOAR Incident Type>': 'playbook1,playbook2','Malware':'playbook3','DEFAULT':'playbook4'
+#playbook_mappings=
 # override default Siemplify and SOAR templates as necessary
 siemplify_create_case_template=
 soar_close_case_template=

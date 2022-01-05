@@ -125,54 +125,50 @@ class SiemplifyPollerComponent(ResilientComponent):
             LOG.info("IBM SOAR open incidents: 0")
             return
 
-        # get the list of siemplify cases linked to soar to check for closed statuses
+        # get the list of siemplify cases linked to SOAR to check for closed statuses
         seimplify_case_list = self.siemplify_env.get_cases([ str(key) for key in soar_incident_list.keys() ])
         LOG.debug(seimplify_case_list)
         cases_closed = cases_updated = 0
         for case in seimplify_case_list['results']:
             case_id = case['id']
 
-            if case_id in soar_incident_list:
-                soar_inc_id = soar_incident_list[case_id]
-                if case.get("isCaseClosed"):
-                    # close the soar incident
-                    incident_close_payload = self.jinja_env.make_payload_from_template(
-                                                        self.options.get("soar_close_case_template"),
-                                                        DEFAULT_SOAR_CLOSE_CASE,
-                                                        case)
-                    _close_resilient_incident = self.res_common.update_incident(
-                                                        soar_inc_id,
-                                                        incident_close_payload
-                                                    )
-                    cases_closed += 1
-                    LOG.info("Closed SOAR incident %s from Siemplify case %s",
-                            soar_inc_id, case_id)
-                else:
-                    # check if the case has been modified
-                    if self.siemplify_env.is_case_modified(case_id, last_poller_time):
-                        case = self.siemplify_env.get_case(case_id)
-
-                        incident_update_payload = self.jinja_env.make_payload_from_template(
-                                                        self.options.get("soar_update_case_template"),
-                                                        DEFAULT_SOAR_UPDATE_CASE,
-                                                        case)
-
-                        LOG.debug("Case changed: %s. Updating SOAR incident: %s", case_id, soar_incident_list[case_id])
-                        cases_updated += 1
-                        # Update description, tags, priority, assignee, stage, important
-                        _update_resilient_incident = self.res_common.update_incident(
-                                                        soar_incident_list[case_id],
-                                                        incident_update_payload
-                                                    )
-
-                        # SYNC Comments
-                        new_comments = self.res_common.filter_resilient_comments(soar_inc_id, case.get('insights', []))
-                        LOG.info(new_comments)
-                        for comment in new_comments:
-                            self.res_common.create_incident_comment(soar_inc_id, comment['title'], comment['content'])
+            soar_inc_id = soar_incident_list[case_id]
+            if case.get("isCaseClosed"):
+                # close the SOAR incident
+                incident_close_payload = self.jinja_env.make_payload_from_template(
+                                                    self.options.get("soar_close_case_template"),
+                                                    DEFAULT_SOAR_CLOSE_CASE,
+                                                    case)
+                _close_resilient_incident = self.res_common.update_incident(
+                                                    soar_inc_id,
+                                                    incident_close_payload
+                                                )
+                cases_closed += 1
+                LOG.info("Closed SOAR incident %s from Siemplify case %s",
+                        soar_inc_id, case_id)
             else:
-                # TODO Siemplify cases not part of IBM SOAR
-                pass
+                # check if the case has been modified
+                if self.siemplify_env.is_case_modified(case_id, last_poller_time):
+                    case = self.siemplify_env.get_case(case_id)
+
+                    incident_update_payload = self.jinja_env.make_payload_from_template(
+                                                    self.options.get("soar_update_case_template"),
+                                                    DEFAULT_SOAR_UPDATE_CASE,
+                                                    case)
+
+                    LOG.debug("Case changed: %s. Updating SOAR incident: %s", case_id, soar_incident_list[case_id])
+                    cases_updated += 1
+                    # Update description, tags, priority, assignee, stage, important
+                    _update_resilient_incident = self.res_common.update_incident(
+                                                    soar_incident_list[case_id],
+                                                    incident_update_payload
+                                                )
+
+                    # SYNC Comments
+                    new_comments = self.res_common.filter_resilient_comments(soar_inc_id, case.get('insights', []))
+                    LOG.info(new_comments)
+                    for comment in new_comments:
+                        self.res_common.create_incident_comment(soar_inc_id, comment['title'], comment['content'])
 
         LOG.info("IBM SOAR open cases: %s, Cases closed: %s, Cases Updated: %s",
                  len(soar_incident_list), cases_closed, cases_updated)

@@ -4,7 +4,7 @@
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import IntegrationError, validate_fields, clean_html
-from fn_siemplify.lib.resilient_common import ResilientCommon, b_to_s
+from fn_siemplify.lib.resilient_common import ResilientCommon, eval_mapping
 from fn_siemplify.lib.siemplify_common import SiemplifyCommon, PACKAGE_NAME, IBMSOAR_TAGS
 
 FN_NAME = "siemplify_sync_case"
@@ -34,6 +34,7 @@ class FunctionComponent(AppFunctionComponent):
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
 
         inputs = fn_inputs._asdict()
+        app_settings = self.app_configs._asdict()
 
         # validate app.config settings
         validate_fields([
@@ -41,7 +42,7 @@ class FunctionComponent(AppFunctionComponent):
                 {"name": "base_url"},
                 {"name": "default_environment"}
             ],
-            self.app_configs._asdict())
+            app_settings)
 
         # set the default if the default isn't set
         inputs['siemplify_environment'] = inputs['siemplify_environment'] if inputs.get('siemplify_environment') else self.app_configs.default_environment
@@ -57,6 +58,10 @@ class FunctionComponent(AppFunctionComponent):
         incident_info['siemplify_environment'] = inputs['siemplify_environment']
         incident_info['siemplify_alert_id'] = inputs['siemplify_alert_id']
         incident_info['siemplify_tags'] = IBMSOAR_TAGS
+
+        incident_info['siemplify_playbooks'] = self._map_playbooks(incident_info['incident_type_ids'],
+                                                                   eval_mapping(app_settings.get('playbook_mappings'), wrapper="{{ {} }}"),
+                                                                   resilient_env.get_incident_types())
 
         self.LOG.debug(incident_info)
 
@@ -94,6 +99,33 @@ class FunctionComponent(AppFunctionComponent):
         yield self.status_message("Endpoint reached successfully and returning results for App Function: '{0}'".format(FN_NAME))
         yield FunctionResult(results, success=status)
 
+
+    def _map_playbooks(self, incident_type_ids, playbook_mapping, incident_type_mapping):
+        """[identify the playbooks to add to the siemplify case]
+
+        Args:
+            incident_type_ids ([list]): [SOAR incident type ids]
+            playbook_mapping ([dict]): [mapping of SOAR incident types to playbook names]
+            incident_type_mapping ([dict]): [mapping of SOAR incident type Ids to their names]
+
+        Returns:
+            [list]: [playbooks to add to a case]
+        """
+
+        siemplify_playbooks = incident_types = []
+        # convert any existing incident type ids
+        if incident_type_ids:
+            incident_types = [incident_type_mapping[id] for id in incident_type_ids \
+                                if id in incident_type_mapping]
+
+        if playbook_mapping and incident_types:
+            siemplify_playbooks = [playbook_mapping[inc_type]  \
+                                    for inc_type in incident_types if inc_type in playbook_mapping]
+            # set default playbook if no mapping found
+            if not siemplify_playbooks and playbook_mapping.get('DEFAULT'):
+                siemplify_playbooks = [ playbook_mapping['DEFAULT'] ]
+
+        return siemplify_playbooks
 
     def sync_comments(self, resilient_env, siemplify_env, fn_inputs):
         for comment in resilient_env.get_incident_comments(fn_inputs['siemplify_incident_id']):

@@ -49,4 +49,3 @@ class FunctionComponent(AppFunctionComponent):
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
 
         yield FunctionResult(results)
-        # yield FunctionResult({}, success=False, reason="Bad call")

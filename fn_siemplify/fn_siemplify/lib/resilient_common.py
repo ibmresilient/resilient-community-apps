@@ -5,6 +5,8 @@
 import base64
 import logging
 import re
+import traceback
+from ast import literal_eval
 from fn_siemplify.lib.siemplify_common import SIEMPLIFY_HEADER, SOAR_HEADER
 from resilient import SimpleHTTPException, Patch
 from resilient_lib import IntegrationError
@@ -282,7 +284,7 @@ class ResilientCommon():
     def get_types(self, obj_type, field):
         type_info = self._get_types(obj_type)
 
-        # create a lookup table based on artifact id
+        # create a lookup table based on field name
         return { type['value']: type['label'] for type in type_info['fields'][field]['values'] }
 
     @cached(cache=LRUCache(maxsize=100))
@@ -363,3 +365,28 @@ def b_to_s(value):
         return value.decode()
     except:
         return value
+
+@cached(cache=LRUCache(maxsize=100))
+def eval_mapping(value, wrapper=None):
+    """
+    Args:
+            value ([str]): [resilient incident id]
+            wrapper ([str]): [values such as '[{}]' or '{{ {} }}']
+        Returns:
+            mapping ([list or dict]): converted data
+    """
+    if not value:
+        return None
+
+    try:
+        if wrapper:
+            value = wrapper.format(value)
+        # Try converting input to a dict or array
+        return literal_eval(value)
+
+    except Exception as err:
+        LOG.error(str(err))
+        LOG.error(traceback.format_exc())
+        LOG.error("""mapping value must be a string representation of a (partial) array or dictionary e.g. "['value1', 'value2']" or "{'key':'value'}" """)
+
+    return None

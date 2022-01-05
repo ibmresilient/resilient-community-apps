@@ -59,50 +59,6 @@ class FunctionComponent(AppFunctionComponent):
         if not isinstance(results, dict):
             results = { "close_case": results }
 
-        # Example validating app_configs
-        # validate_fields([
-        #     {"name": "api_key", "placeholder": "<your-api-key>"},
-        #     {"name": "base_url", "placeholder": "<api-base-url>"}],
-        #     self.app_configs)
-
-        # Example validating required fn_inputs
-        # validate_fields(["required_input_one", "required_input_two"], fn_inputs)
-
-        # Example getting access to self.get_fn_msg()
-        # fn_msg = self.get_fn_msg()
-        # self.LOG.info("fn_msg: %s", fn_msg)
-
-        # Example interacting with REST API
-        # res_client = self.rest_client()
-        # function_details = res_client.get("/functions/{0}?handle_format=names".format(FN_NAME))
-
-        # Example raising an exception
-        # raise IntegrationError("Example raising custom error")
-
-        ##############################################
-        # PUT YOUR FUNCTION IMPLEMENTATION CODE HERE #
-        ##############################################
-
-        # Call API implemtation example:
-        # params = {
-        #     "api_key": self.app_configs.api_key,
-        #     "ip_address": fn_inputs.artifact_value
-        # }
-        #
-        # response = self.rc.execute(
-        #     method="get",
-        #     url=self.app_configs.api_base_url,
-        #     params=params
-        # )
-        #
-        # results = response.json()
-        #
-        # yield self.status_message("Endpoint reached successfully and returning results for App Function: '{0}'".format(FN_NAME))
-        #
-        # yield FunctionResult(results)
-        ##############################################
-
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
 
         yield FunctionResult(results)
-        # yield FunctionResult({}, success=False, reason="Bad call")

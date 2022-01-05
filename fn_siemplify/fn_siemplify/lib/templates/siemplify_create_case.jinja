@@ -8,6 +8,6 @@
   "alertName": "IBM SOAR Alert {{ id }}",
   "occurenceTime": "{{ discovered_date | resilient_display_datetimeformat(milliseconds=True) }}",
   "slaExpirationDateTime": null,
-  "playbooks": [ ],
+  "playbooks": {{ siemplify_playbooks|tojson }},
   "tags": {{ siemplify_tags|tojson }}
 }
