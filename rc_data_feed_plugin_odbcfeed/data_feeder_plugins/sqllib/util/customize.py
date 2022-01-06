@@ -3,25 +3,25 @@
 """Generate the Resilient customizations required for rc-data-feed"""
 
 from __future__ import print_function
-from resilient_circuits.util import ImportDefinition
+from resilient import ImportDefinition
 
 """THIS INFORMATION IS REPLICATED FROM RC-DATA-FEED. IT SHOULD ONLY BE USED FOR APPHOST ENVIRONMENTS"""
 
 def codegen_reload_data():
     """Parameters to codegen used to generate the rc-data-feed package"""
     reload_params = {"package": u"rc-data-feed",
-                    "incident_fields": [], 
-                    "action_fields": [u"data_feeder_maximum_incident_id", u"data_feeder_minimum_incident_id", u"query_api_method"], 
-                    "function_params": [u"df_max_incident_id", u"df_min_incident_id", u"df_query_api_method"], 
-                    "datatables": [], 
-                    "message_destinations": [u"feed_data"], 
-                    "functions": [u"data_feeder_sync_incidents"], 
-                    "phases": [], 
-                    "automatic_tasks": [], 
-                    "scripts": [], 
-                    "workflows": [u"data_feeder_sync_incidents"], 
-                    "actions": [u"Data Feeder: Artifact", u"Data Feeder: Attachment", u"Data Feeder: Incident", u"Data Feeder: Milestone", u"Data Feeder: Note", u"Data Feeder: Sync Incidents", u"Data Feeder: Task"], 
-                    "incident_artifact_types": [] 
+                    "incident_fields": [],
+                    "action_fields": [u"data_feeder_maximum_incident_id", u"data_feeder_minimum_incident_id", u"query_api_method"],
+                    "function_params": [u"df_max_incident_id", u"df_min_incident_id", u"df_query_api_method"],
+                    "datatables": [],
+                    "message_destinations": [u"feed_data"],
+                    "functions": [u"data_feeder_sync_incidents"],
+                    "phases": [],
+                    "automatic_tasks": [],
+                    "scripts": [],
+                    "workflows": [u"data_feeder_sync_incidents"],
+                    "actions": [u"Data Feeder: Artifact", u"Data Feeder: Attachment", u"Data Feeder: Incident", u"Data Feeder: Milestone", u"Data Feeder: Note", u"Data Feeder: Sync Incidents", u"Data Feeder: Task"],
+                    "incident_artifact_types": []
                     }
     return reload_params
 

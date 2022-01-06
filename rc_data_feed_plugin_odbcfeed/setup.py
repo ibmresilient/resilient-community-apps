@@ -5,13 +5,21 @@ from setuptools import setup, find_packages
 
 setup(
     name='rc_data_feed_plugin_odbcfeed',
+    display_name='Data Feeder ODBC Plugin for SOAR',
     version='1.0.6',
     license='MIT',
-    author='IBM Resilient Labs',
-    author_email='resil.labs@gmail.com',
-    url='http://ibm.biz/resilientcommunity',
+    author='IBM SOAR',
+    author_email='',
+    url='http://github.com/ibmresilient/resilient-community-apps',
     description="Resilient Circuits Components for sending data feeds to other (BI) systems",
-    long_description="Resilient Circuits Components for sending data feeds to other (BI) systems",
+    long_description="""This app contains the Data Feed plugin for ODBC-based databases. Updates are performed in near real-time.
+Supported ODBC databases:
+    PostgreSQL,
+    MySQL (MariaDB),
+    Microsoft SQLServer,
+    Oracle,
+    SQLite file/database
+    """,
     install_requires=[
         'cachetools',
         'cx_Oracle',
