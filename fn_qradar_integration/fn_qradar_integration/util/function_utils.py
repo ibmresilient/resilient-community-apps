@@ -110,5 +110,5 @@ def update_qradar_servers_select_list(servers_list, res_rest_client, field_name)
             res_rest_client.put(UPDATE_FIELD.format(field_name), payload, timeout=1000)
 
     except Exception as err_msg:
-        LOG.warning("Action filed: {} error: {}".format(field_name, err_msg))
+        LOG.warning("Action failed: {} error: {}".format(field_name, err_msg))
         raise IntegrationError("Error while updating action field: {}".format(field_name))
