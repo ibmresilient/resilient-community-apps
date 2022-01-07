@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 
 import logging
 import json
@@ -18,7 +18,14 @@ API_VERSION = "api/external/v1"
 CREATE_CASE_URL = "cases/CreateManualCase"
 UPDATE_CASE_DESCRIPTION_URL = "cases/ChangeCaseDescription"
 GET_CASE_URL = "cases/GetCaseFullDetails/{}"
-BLOCKLIST_URL = "settings/GetAllModelBlackRecords"
+
+All_BLOCKLIST_URL = "settings/GetAllModelBlackRecords"
+FILTERED_BLOCKLIST_URL = "settings/GetBlackListDetails"
+ADDUPDATE_BLOCKLIST_URL = "settings/AddOrUpdateModelBlackRecords"
+
+ALL_CUSTOMLIST_URL = "settings/GetTrackingListRecords"
+ADDUPDATE_CUSTOMLIST_URL = "settings/AddOrUpdateTrackingListRecords"
+
 CREATE_ENTITY_URL = "cases/CreateCaseEntity"
 CREATE_COMMENT_URL = "cases/AddCaseComment"
 CREATE_INSIGHT_URL = "cases/CreateCaseInsight"
@@ -28,6 +35,7 @@ CREATE_TASK_URL = "cases/AddOrUpdateCaseTask"
 CLOSE_CASE = "cases/CloseCase"
 SEARCH_CASE_URL = "search/CaseSearchEverything"
 CASES_MODIFIED_URL = "cases/IsCaseUpdated"
+GET_VERSION_URL = "settings/GetSystemVersion"
 
 SOAR_HEADER = "IBM SOAR"
 SIEMPLIFY_HEADER="From Siemplify"
@@ -100,11 +108,11 @@ class SiemplifyCommon():
             DEFAULT_CREATE_CASE,
             incident_info)
 
-        results = self._make_call("POST", CREATE_CASE_URL, incident_payload)
+        results, error_msg = self._make_call("POST", CREATE_CASE_URL, incident_payload)
         if isinstance(results, int) and incident_info['description']:
-            _description_results = self.update_case_description(results, incident_info['description'])
+            _description_results, _ = self.update_case_description(results, incident_info['description'])
 
-        return results
+        return results, error_msg
 
     def update_case(self, incident_info):
         # get the existing case to start reviewing changes
@@ -155,8 +163,45 @@ class SiemplifyCommon():
         case_info = self.get_case(incident_info["siemplify_case_id"])
         LOG.info(case_info)
 
-    def get_blocklist(self):
-        return self._make_call("GET", BLOCKLIST_URL)
+    def get_blocklist(self, inputs):
+
+        if inputs.get("siemplify_search"):
+            payload = {
+                "searchTerm": inputs.get("siemplify_search"),
+                "requestedPage": 0,
+                "pageSize": str(inputs.get("siemplify_limit", 100))
+            }
+            return self._make_call("POST", FILTERED_BLOCKLIST_URL, payload)
+        else:
+            return self._make_call("GET", All_BLOCKLIST_URL)
+
+    def add_update_blocklist(self, inputs):
+
+        payload = {
+            "entityIdentifier": inputs['siemplify_artifact_value'],
+            "entityType": ARTIFACT_TYPE_LOOKUPS.get(inputs['siemplify_artifact_type'], "GENERICENTITY"),
+            "scope": 2,
+            "environments": inputs['siemplify_environment']
+        }
+
+        result, error_msg = self._make_call("POST", ADDUPDATE_BLOCKLIST_URL, payload) # return blank if successful
+        return payload if not error_msg else result, error_msg
+
+    def get_customlist(self):
+        return self._make_call("GET", ALL_CUSTOMLIST_URL)
+
+    def add_update_customlist(self, inputs):
+        category = inputs.get('siemplify_category') if inputs.get('siemplify_category') else \
+            ARTIFACT_TYPE_LOOKUPS.get(inputs['siemplify_artifact_type'], "GENERICENTITY")
+
+        payload = {
+            "entityIdentifier": inputs['siemplify_artifact_value'],
+            "category": category,
+            "environments": inputs['siemplify_environment']
+        }
+
+        result, error_msg = self._make_call("POST", ADDUPDATE_CUSTOMLIST_URL, payload) # return blank if successful
+        return payload if not error_msg else result, error_msg
 
     def sync_comment(self, inputs):
         """[summary]
@@ -188,8 +233,8 @@ class SiemplifyCommon():
             "content": clean_html(inputs['siemplify_comment']),
         }
 
-        results = self._make_call("POST", CREATE_INSIGHT_URL, payload)
-        return results if isinstance(results, dict) else {}
+        results, error_msg = self._make_call("POST", CREATE_INSIGHT_URL, payload)
+        return results if isinstance(results, dict) else {}, error_msg
         """
         {
             "caseId": "<long>",
@@ -429,6 +474,9 @@ class SiemplifyCommon():
 
         return self._make_call("POST", CREATE_TASK_URL, payload)
 
+    def get_version(self):
+        return self._make_call("GET", GET_VERSION_URL)
+
     def is_case_modified(self, case_id, modified_ts):
         payload = {
             "caseId": str(case_id),
@@ -439,18 +487,27 @@ class SiemplifyCommon():
 
         return self._make_call("POST", CASES_MODIFIED_URL, payload)
 
-    def _make_call(self, method, uri, payload=None):
+    def _make_call(self, method, uri, payload=None, ):
 
         url = "/".join([self.base_url, API_VERSION, uri])
         if payload:
-            response = self.rc.execute(method, url, data=json.dumps(payload), headers=self.headers, verify=self.verify)
+            response, error_msg = self.rc.execute(method,
+                                                  url,
+                                                  data=json.dumps(payload),
+                                                  headers=self.headers,
+                                                  verify=self.verify,
+                                                  callback=callback)
         else:
-            response = self.rc.execute(method, url, headers=self.headers, verify=self.verify)
+            response, error_msg = self.rc.execute(method,
+                                                  url,
+                                                  headers=self.headers,
+                                                  verify=self.verify,
+                                                  callback=callback)
 
         try:
-            return response.json()
+            return response.json(), error_msg
         except JSONDecodeError:
-            return response.text
+            return response.text, error_msg
 
 
 def _make_headers(api_key):
@@ -458,3 +515,19 @@ def _make_headers(api_key):
         "Content-Type": "application/json",
         "AppKey": api_key
     }
+
+def callback(response):
+    """
+    callback needed for certain REST API calls to return a formatted error message
+    :param response:
+    :return: response, error_msg
+    """
+    error_msg = None
+    if response.status_code < 300 or response.status_code == 2000:
+        return response, None
+    else:
+        resp = response.json()
+        msg = resp['ErrorMessage']
+        error_msg  = u"Siemplify Error: \n    status code: {0}\n    failure: {1}".format(response.status_code, msg)
+
+        return response, error_msg

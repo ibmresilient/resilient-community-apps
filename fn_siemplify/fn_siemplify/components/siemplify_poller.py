@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 
 """Function implementation"""
 
@@ -126,7 +126,7 @@ class SiemplifyPollerComponent(ResilientComponent):
             return
 
         # get the list of siemplify cases linked to SOAR to check for closed statuses
-        seimplify_case_list = self.siemplify_env.get_cases([ str(key) for key in soar_incident_list.keys() ])
+        seimplify_case_list, error_msg = self.siemplify_env.get_cases([ str(key) for key in soar_incident_list.keys() ])
         LOG.debug(seimplify_case_list)
         cases_closed = cases_updated = 0
         for case in seimplify_case_list['results']:
@@ -149,7 +149,7 @@ class SiemplifyPollerComponent(ResilientComponent):
             else:
                 # check if the case has been modified
                 if self.siemplify_env.is_case_modified(case_id, last_poller_time):
-                    case = self.siemplify_env.get_case(case_id)
+                    case, error_msg = self.siemplify_env.get_case(case_id)
 
                     incident_update_payload = self.jinja_env.make_payload_from_template(
                                                     self.options.get("soar_update_case_template"),

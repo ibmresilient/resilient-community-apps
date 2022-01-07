@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-
+# pragma pylint: disable=unused-argument, no-self-use
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 """
 Function implementation test.
 Usage:
@@ -38,7 +39,7 @@ def selftest_function(opts):
 
     try:
         sc = SiemplifyCommon(rc, app_configs)
-        result = sc.get_blocklist()
+        result, error_msg = sc.get_version()
 
         return {
             "state": "success",

@@ -3,16 +3,15 @@
 # pragma pylint: disable=unused-argument, no-self-use
 """AppFunction implementation"""
 
-from fn_siemplify.lib.resilient_common import ResilientCommon
 from fn_siemplify.lib.siemplify_common import SiemplifyCommon, PACKAGE_NAME
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from resilient_lib import IntegrationError, validate_fields
+from resilient_lib import validate_fields
 
-FN_NAME = "siemplify_sync_task"
+FN_NAME = "siemplify_get_customlist_entities"
 
 
 class FunctionComponent(AppFunctionComponent):
-    """Component that implements function 'siemplify_sync_task'"""
+    """Component that implements function 'siemplify_get_customlist_entities'"""
 
     def __init__(self, opts):
         super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
@@ -20,18 +19,14 @@ class FunctionComponent(AppFunctionComponent):
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """
-        Function: Sync a SOAR Task to Siemplify
+        Function: Get entities from Siemplify's Blacklist
         Inputs:
-            -   fn_inputs.siemplify_case_id
-            -   fn_inputs.siemplify_task_due_date
-            -   fn_inputs.siemlify_task_assignee
-            -   fn_inputs.siemplify_task_content
-            -   fn_inputs.siemplify_task_name
+            -   fn_inputs.siemplify_limit
+            -   fn_inputs.siemplify_search
         """
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
 
-        fn_inputs_dict = fn_inputs._asdict()
         # validate app.config settings
         validate_fields([
                 {"name": "api_key"},
@@ -39,20 +34,10 @@ class FunctionComponent(AppFunctionComponent):
             ],
             self.app_configs._asdict())
 
-        validate_fields([
-                {"name": "siemplify_case_id"},
-                {"name": "siemplify_soar_task_id"}
-            ],
-            fn_inputs_dict)
+        inputs = fn_inputs._asdict()
 
         siemplify_env = SiemplifyCommon(self.rc, self.app_configs)
-
-        # get the contents of the
-        res_common = ResilientCommon(self.rest_client())
-        task_info, siemplify_task_id = res_common.get_incident_task(fn_inputs.siemplify_soar_task_id)
-
-        results, error_msg = siemplify_env.sync_task(fn_inputs.siemplify_case_id, fn_inputs.siemplify_task_assignee,
-                                          siemplify_task_id, task_info)
+        results, error_msg = siemplify_env.get_customlist()
 
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
 

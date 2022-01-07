@@ -29,7 +29,7 @@ inputs.siemplify_attachment_id = attachment.id
 if results.success:
   incident.addNote("Siemplify Sync Attachment: {} created".format(attachment.name))
 else:
-  incident.addNote("Simeplify Sync Attachment: {} failed. Reason: {}".format(attachment.name, results.reason))
+  incident.addNote("Siemplify Sync Attachment: {} failed. Reason: {}".format(attachment.name, results.reason))
 
 ```
 

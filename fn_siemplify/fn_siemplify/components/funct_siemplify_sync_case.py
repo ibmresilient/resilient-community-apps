@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# pragma pylint: disable=unused-argument, no-self-use
 """AppFunction implementation"""
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
@@ -66,21 +67,20 @@ class FunctionComponent(AppFunctionComponent):
         self.LOG.debug(incident_info)
 
         siemplify_env = SiemplifyCommon(self.rc, self.app_configs)
-        results = siemplify_env.sync_case(incident_info)
+        results, error_msg = siemplify_env.sync_case(incident_info)
 
         # get the results based on the data returned
-        if isinstance(results, dict):
+        if error_msg:
             status = False
         else:
             # get the full case information
-            case_results = siemplify_env.get_case(results)
+            case_results, _error_msg = siemplify_env.get_case(results)
 
             # save the case_id and alert_id
             inputs['siemplify_case_id'] = results
             inputs['siemplify_alert_id'] = case_results['alerts'][0]['identifier']
 
             case_results['siemplify_case_url'] = SIEMPLIFY_CASE_URL.format(self.app_configs.base_url, results)
-            status = True
             results = case_results
 
             # S Y N C   A L L   O T H E R S
@@ -97,7 +97,7 @@ class FunctionComponent(AppFunctionComponent):
                 self.sync_attachments(resilient_env, siemplify_env, inputs)
 
         yield self.status_message("Endpoint reached successfully and returning results for App Function: '{0}'".format(FN_NAME))
-        yield FunctionResult(results, success=status)
+        yield FunctionResult(results, success=isinstance(error_msg, type(None)), reason=error_msg)
 
 
     def _map_playbooks(self, incident_type_ids, playbook_mapping, incident_type_mapping):

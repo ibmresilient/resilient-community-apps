@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# pragma pylint: disable=unused-argument, no-self-use
 """AppFunction implementation"""
 
 from fn_siemplify.lib.siemplify_common import SiemplifyCommon, PACKAGE_NAME
@@ -54,11 +55,11 @@ class FunctionComponent(AppFunctionComponent):
         inputs['siemplify_root_cause'] = clean_html(inputs['siemplify_root_cause'])
 
         siemplify_env = SiemplifyCommon(self.rc, self.app_configs)
-        results = siemplify_env.close_case(inputs)
+        results, error_msg = siemplify_env.close_case(inputs)
 
         if not isinstance(results, dict):
             results = { "close_case": results }
 
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
 
-        yield FunctionResult(results)
+        yield FunctionResult(results, success=isinstance(error_msg, type(None)), reason=error_msg)

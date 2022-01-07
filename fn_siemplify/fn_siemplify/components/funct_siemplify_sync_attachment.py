@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# pragma pylint: disable=unused-argument, no-self-use
 """AppFunction implementation"""
 
 import base64
@@ -51,9 +52,9 @@ class FunctionComponent(AppFunctionComponent):
                                                                    fn_inputs.siemplify_attachment_id)
 
         siemplify_env = SiemplifyCommon(self.rc, self.app_configs)
-        results = siemplify_env.sync_attachment(fn_inputs.siemplify_case_id,
+        results, error_msg = siemplify_env.sync_attachment(fn_inputs.siemplify_case_id,
                                                 file_content, file_name)
 
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
 
-        yield FunctionResult(results)
+        yield FunctionResult(results, success=isinstance(error_msg, type(None)), reason=error_msg)
