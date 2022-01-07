@@ -3,10 +3,14 @@
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
-import logging
 import json
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+import logging
+
 from fn_service_now.util.resilient_helper import ResilientHelper
+from resilient_circuits import (FunctionError, FunctionResult,
+                                ResilientComponent, StatusMessage, function,
+                                handler)
+from resilient_lib import RequestsCommon
 
 
 class FunctionPayload(object):
@@ -43,6 +47,7 @@ class FunctionComponent(ResilientComponent):
         try:
             # Instansiate helper (which gets appconfigs from file)
             res_helper = ResilientHelper(self.options)
+            rc = RequestsCommon(self.opts, self.options)
 
             # Get the function inputs:
             inputs = {
@@ -60,7 +65,7 @@ class FunctionComponent(ResilientComponent):
                 payload.inputs.get("sn_table_name"), payload.inputs.get("sn_query_field"), payload.inputs.get("sn_query_value")))
 
             # Call custom endpoint '/get_sys_id' with 3 params
-            get_sys_id_response = res_helper.sn_api_request("GET", "/get_sys_id", params=payload.inputs)
+            get_sys_id_response = res_helper.sn_api_request(rc, "GET", "/get_sys_id", params=payload.inputs)
 
             # Get response text
             response_result = get_sys_id_response.text
