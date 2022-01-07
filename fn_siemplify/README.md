@@ -31,12 +31,18 @@
 - [Installation](#installation)
   - [Install](#install)
   - [App Configuration](#app-configuration)
+  - [Custom Layouts](#custom-layouts)
 - [Function - Siemplify Sync Task](#function---siemplify-sync-task)
 - [Function - Siemplify Sync Attachment](#function---siemplify-sync-attachment)
 - [Function - Siemplify Sync Case](#function---siemplify-sync-case)
 - [Function - Siemplify Sync Artifact](#function---siemplify-sync-artifact)
 - [Function - Siemplify Sync Comment](#function---siemplify-sync-comment)
 - [Function - Siemplify Close Case](#function---siemplify-close-case)
+- [Function - Siemplify Add/Update Entity to Blocklist](#function---siemplify-addupdate-entity-to-blocklist)
+- [Function - Siemplify Add/Update Entity to Custom List](#function---siemplify-addupdate-entity-to-customlist)
+- [Function - Siemplify Get Block List Entities](#function---siemplify-get-blocklist-entities)
+- [Function - Siemplify Get Custom List Entities](#function---siemplify-get-custom-list-entities)
+- [Data Table - Siemplify List Entries](#data-table---siemplify-list-entries)
 - [Custom Fields](#custom-fields)
 - [Rules](#rules)
 - [Troubleshooting & Support](#troubleshooting--support)
@@ -60,7 +66,7 @@
 -->
 **Siemplify App for IBM QRadar SOAR**
 
- ![screenshot: main](./doc/screenshots/main.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: main](./doc/screenshots/main.png)
 
 Bi-directional synchronization with Siemplify Cases from SOAR Incidents. Other Siemplify case components synchronized are:
 * SOAR comments to Siempify case insights
@@ -75,6 +81,8 @@ Bi-directional synchronization with Siemplify Cases from SOAR Incidents. Other S
 * Sync Siemplify case close events with SOAR incidents
 * Sync Siemplify case changes with existing SOAR incidents
 * Flexible templates used allowing modification for your environment
+* Get entities added to the Block or Custom list
+* Add entities to the Block or Custom list
 
 ---
 
@@ -170,13 +178,21 @@ The following table provides the settings you need to configure the app. These s
 | **soar_close_case_template** | Yes | `/path/to/soar_close_case.jinja` | *Use when overriding the default template*  |
 | **soar_update_case_template** | Yes | `/path/to/soar_update_case_case.jinja` | *Use when overriding the default template*  |
 
+### Custom Layouts
+<!--
+  Use this section to provide guidance on where the user should add any custom fields and data tables.
+  You may wish to recommend a new incident tab.
+  You should save a screenshot "custom_layouts.png" in the doc/screenshots directory and reference it here
+-->
+* Import the Data Tables and Custom Fields in a tab like the screenshot below:
+
+  ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png)
+
 
 ---
 
 ## Function - Siemplify Sync Task
 Sync a SOAR Task to Siemplify
-
- ![screenshot: fn-siemplify-sync-task ](./doc/screenshots/fn-siemplify-sync-task.png) <!-- ::CHANGE_ME:: -->
 
 <details><summary>Inputs:</summary>
 <p>
@@ -193,12 +209,43 @@ Sync a SOAR Task to Siemplify
 <details><summary>Outputs:</summary>
 <p>
 
-<!-- ::CHANGE_ME:: -->
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function.
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+  'version': 2.0,
+  'success': True,
+  'reason': None,
+  'content': {
+    'status': 0,
+    'priority': 0,
+    'name': 'IBM SOAR: Investigate Malware',
+    'owner': '@Administrator',
+    'completor': None,
+    'completionComment': None,
+    'completionDateTimeUnixTimeInMs': None,
+    'dueDateUnixTimeInMs': None,
+    'creatorUserId': 'Siemplify automation',
+    'id': 19,
+    'type': 2,
+    'caseId': 60,
+    'isFavorite': False,
+    'modificationTimeUnixTimeInMs': 1641570964725,
+    'creationTimeUnixTimeInMs': 1641570964725,
+    'alertIdentifier': None
+  },
+  'raw': None,
+  'inputs': {
+    'siemplify_task_assignee': '@Administrator',
+    'siemplify_soar_task_id': 802,
+    'siemplify_case_id': 60
+  },
+  'metrics': {
+    'version': '1.0',
+    'package': 'fn-siemplify',
+    'package_version': '1.0.0',
+    'host': 'Marks-MacBook-Pro.local',
+    'execution_time_ms': 551,
+    'timestamp': '2022-01-07 10:56:04'
+  }
 }
 ```
 
@@ -235,8 +282,6 @@ else:
 ## Function - Siemplify Sync Attachment
 Create a Siemplify Attachment from a SOAR Case Attachment
 
- ![screenshot: fn-siemplify-sync-attachment ](./doc/screenshots/fn-siemplify-sync-attachment.png) <!-- ::CHANGE_ME:: -->
-
 <details><summary>Inputs:</summary>
 <p>
 
@@ -253,12 +298,41 @@ Create a Siemplify Attachment from a SOAR Case Attachment
 <details><summary>Outputs:</summary>
 <p>
 
-<!-- ::CHANGE_ME:: -->
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function.
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+  'version': 2.0,
+  'success': True,
+  'reason': None,
+  'content': {
+    'evidenceName': 'app-rc_data_feed_plugin_odbcfeed-1',
+    'description': 'created by IBM SOAR',
+    'evidenceThumbnailBase64': '',
+    'evidenceId': 12,
+    'fileType': '.0.5.zip',
+    'creatorUserId': 'Siemplify automation',
+    'id': 12,
+    'type': 4,
+    'caseId': 60,
+    'isFavorite': False,
+    'modificationTimeUnixTimeInMs': 1641571089125,
+    'creationTimeUnixTimeInMs': 1641571089125,
+    'alertIdentifier': None
+  },
+  'raw': None,
+  'inputs': {
+    'siemplify_incident_id': 2145,
+    'siemplify_alert_id': 'IBM SOAR Alert 2145_f48baf55-3618-4cf4-b2b5-d3b974d71785',
+    'siemplify_case_id': 60,
+    'siemplify_attachment_id': 15
+  },
+  'metrics': {
+    'version': '1.0',
+    'package': 'fn-siemplify',
+    'package_version': '1.0.0',
+    'host': 'Marks-MacBook-Pro.local',
+    'execution_time_ms': 781,
+    'timestamp': '2022-01-07 10:58:09'
+  }
 }
 ```
 
@@ -296,8 +370,6 @@ else:
 ## Function - Siemplify Sync Case
 Sync a SOAR Case to Siemplify
 
- ![screenshot: fn-siemplify-sync-case ](./doc/screenshots/fn-siemplify-sync-case.png) <!-- ::CHANGE_ME:: -->
-
 <details><summary>Inputs:</summary>
 <p>
 
@@ -318,12 +390,292 @@ Sync a SOAR Case to Siemplify
 <details><summary>Outputs:</summary>
 <p>
 
-<!-- ::CHANGE_ME:: -->
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function.
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+  'version': 2.0,
+  'success': True,
+  'reason': None,
+  'content': {
+    'wallData': [
+      {
+        'comment': 'Case creation reason: IBM SOAR Incident 2145',
+        'creatorUserId': 'Siemplify automation',
+        'id': 63,
+        'type': 7,
+        'caseId': 63,
+        'isFavorite': False,
+        'modificationTimeUnixTimeInMs': 1641571162242,
+        'creationTimeUnixTimeInMs': 1641571162242,
+        'alertIdentifier': 'IBM SOAR Alert 2145_38352c92-bf66-4a50-87e2-5875accd7d7b'
+      },
+      {
+        'comment': 'Playbook SentinelOne Threat Remediation attached to case.',
+        'creatorUserId': 'Siemplify automation',
+        'id': 36,
+        'type': 5,
+        'caseId': 63,
+        'isFavorite': False,
+        'modificationTimeUnixTimeInMs': 1641571162382,
+        'creationTimeUnixTimeInMs': 1641571162382,
+        'alertIdentifier': None
+      }
+    ],
+    'alerts': [
+      {
+        'ticketId': '',
+        'identifier': 'IBM SOAR Alert 2145_38352c92-bf66-4a50-87e2-5875accd7d7b',
+        'hasWorkflows': True,
+        'workflowsStatus': 1,
+        'sourceSystemName': '',
+        'securityEventCards': [
+          {
+            'caseId': 63,
+            'eventId': None,
+            'alertIdentifier': 'IBM SOAR Alert 2145_38352c92-bf66-4a50-87e2-5875accd7d7b',
+            'eventName': None,
+            'product': None,
+            'sources': [
+
+            ],
+            'destinations': [
+
+            ],
+            'artificats': [
+
+            ],
+            'port': None,
+            'outcome': None,
+            'time': '2022-01-05T17:52:10Z',
+            'deviceEventClassId': None,
+            'fields': [
+
+            ]
+          }
+        ],
+        'entityCards': [
+
+        ],
+        'productFamilies': [
+          'Default'
+        ],
+        'fields': [
+          {
+            'isHighlight': True,
+            'groupName': 'HIGHLIGHTED FIELDS',
+            'items': [
+              {
+                'originalName': 'AlertName',
+                'name': 'Alert Name',
+                'value': 'IBM SOAR Alert 2145'
+              },
+              {
+                'originalName': 'EndTime',
+                'name': 'End Time',
+                'value': '1641405130000'
+              },
+              {
+                'originalName': 'StartTime',
+                'name': 'Start Time',
+                'value': '1641405130000'
+              }
+            ]
+          },
+          {
+            'isHighlight': False,
+            'groupName': 'Time',
+            'items': [
+              {
+                'originalName': 'DetectionTime',
+                'name': 'Detection Time',
+                'value': '1641405130000'
+              },
+              {
+                'originalName': 'EndTime',
+                'name': 'End Time',
+                'value': '1641405130000'
+              },
+              {
+                'originalName': 'StartTime',
+                'name': 'Start Time',
+                'value': '1641405130000'
+              }
+            ]
+          },
+          {
+            'isHighlight': False,
+            'groupName': 'Case',
+            'items': [
+              {
+                'originalName': 'AlertName',
+                'name': 'Alert Name',
+                'value': 'IBM SOAR Alert 2145'
+              },
+              {
+                'originalName': 'RuleGenerator',
+                'name': 'Rule Generator',
+                'value': 'Manual Case'
+              }
+            ]
+          },
+          {
+            'isHighlight': False,
+            'groupName': 'Default',
+            'items': [
+              {
+                'originalName': 'AlertGroupIdentifier',
+                'name': 'AlertGroupIdentifier',
+                'value': 'Manual Case_af8ee1c9-97de-4e45-a1a7-cb9926a8096d'
+              },
+              {
+                'originalName': 'IsManualAlert',
+                'name': 'IsManualAlert',
+                'value': 'True'
+              }
+            ]
+          },
+          {
+            'isHighlight': False,
+            'groupName': 'Threat',
+            'items': [
+              {
+                'originalName': 'Priority',
+                'name': 'Priority',
+                'value': 'Unchanged'
+              }
+            ]
+          }
+        ],
+        'name': 'IBM SOAR Alert 2145',
+        'product': None,
+        'startTimeUnixTimeInMs': 1641405130000,
+        'apiSlaExpiration': {
+          'slaExpirationTime': None,
+          'criticalExpirationTime': None,
+          'expirationStatus': 2
+        },
+        'isManualAlert': True,
+        'priority': 0,
+        'id': 0,
+        'creationTimeUnixTimeInMs': 0,
+        'modificationTimeUnixTimeInMs': 0,
+        'additionalProperties': {
+          'identifier': 'IBM SOAR Alert 2145_38352c92-bf66-4a50-87e2-5875accd7d7b',
+          'detectionTime': '1641405130000',
+          'alertName': 'IBM SOAR Alert 2145',
+          'ruleGenerator': 'Manual Case',
+          'alertGroupIdentifier': 'Manual Case_af8ee1c9-97de-4e45-a1a7-cb9926a8096d',
+          'isManualAlert': 'True',
+          'priority': 'Unchanged',
+          'endTime': '1641405130000',
+          'startTime': '1641405130000'
+        }
+      }
+    ],
+    'caseRecommendations': {
+      'similarCases': [
+        {
+          'id': 60,
+          'title': 'IBM SOAR - default playbook',
+          'caseRecommendationOutcomeStatus': 0,
+          'priority': '50',
+          'creationTime': '2022-01-05T17:52:28.652Z',
+          'scorePercent': 100,
+          'isClosed': False,
+          'closedRootCause': None,
+          'closedComment': None
+        }
+      ],
+      'relevantAnalysts': [
+        'Admin'
+      ],
+      'relevantTags': [
+
+      ]
+    },
+    'tags': [
+      {
+        'caseId': 63,
+        'tag': 'IBMSOAR',
+        'priority': 0
+      },
+      {
+        'caseId': 63,
+        'tag': 'Manual Case',
+        'priority': 0
+      }
+    ],
+    'insights': [
+
+    ],
+    'productFamilies': [
+
+    ],
+    'summary': {
+      'fields': [
+
+      ]
+    },
+    'entityCards': [
+
+    ],
+    'entities': [
+
+    ],
+    'description': None,
+    'canOpenIncident': False,
+    'hasIncident': False,
+    'title': 'IBM SOAR - default playbook',
+    'isTouched': False,
+    'hasSuspiciousEntity': False,
+    'isMerged': False,
+    'isImportant': True,
+    'isIncident': False,
+    'hasWorkflow': True,
+    'environment': 'Default Environment',
+    'priority': 50,
+    'stage': 'Triage',
+    'assignedUserName': '@Administrator',
+    'apiSlaExpiration': {
+      'slaExpirationTime': None,
+      'criticalExpirationTime': None,
+      'expirationStatus': 2
+    },
+    'apiStageSlaExpiration': {
+      'slaExpirationTime': None,
+      'criticalExpirationTime': None,
+      'expirationStatus': 2
+    },
+    'status': 1,
+    'isTestCase': False,
+    'caseSource': 'User',
+    'isOverflowCase': False,
+    'id': 63,
+    'creationTimeUnixTimeInMs': 1641571162101,
+    'modificationTimeUnixTimeInMs': 1641571162183,
+    'additionalProperties': {
+
+    },
+    'siemplify_case_url': 'https://9.55.194.8/#/main/cases/classic-view/63'
+  },
+  'raw': None,
+  'inputs': {
+    'siemplify_incident_id': 2145,
+    'siemplify_sync_attachments': True,
+    'siemplify_assigned_user': '@Administrator',
+    'siemplify_environment': 'Default Environment',
+    'siemplify_alert_id': 'IBM SOAR Alert 2145_f48baf55-3618-4cf4-b2b5-d3b974d71785',
+    'siemplify_sync_comments': True,
+    'siemplify_sync_artifacts': True,
+    'siemplify_case_id': 60
+  },
+  'metrics': {
+    'version': '1.0',
+    'package': 'fn-siemplify',
+    'package_version': '1.0.0',
+    'host': 'Marks-MacBook-Pro.local',
+    'execution_time_ms': 2809,
+    'timestamp': '2022-01-07 10:59:24'
+  }
 }
 ```
 
@@ -371,7 +723,6 @@ else:
 ## Function - Siemplify Sync Artifact
 Sync a SOAR Incident artifact to a Siemplify CASE alert and entity
 
- ![screenshot: fn-siemplify-sync-artifact ](./doc/screenshots/fn-siemplify-sync-artifact.png) <!-- ::CHANGE_ME:: -->
 
 <details><summary>Inputs:</summary>
 <p>
@@ -391,12 +742,32 @@ Sync a SOAR Incident artifact to a Siemplify CASE alert and entity
 <details><summary>Outputs:</summary>
 <p>
 
-<!-- ::CHANGE_ME:: -->
+
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function.
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+  'version': 2.0,
+  'success': True,
+  'reason': None,
+  'content': {
+
+  },
+  'raw': None,
+  'inputs': {
+    'siemplify_artifact_type': 'IP Address',
+    'siemplify_alert_id': 'IBM SOAR Alert 2145_38352c92-bf66-4a50-87e2-5875accd7d7b',
+    'siemplify_environment': None,
+    'siemplify_artifact_id': 200,
+    'siemplify_artifact_value': '121.24.56.9',
+    'siemplify_case_id': 63
+  },
+  'metrics': {
+    'version': '1.0',
+    'package': 'fn-siemplify',
+    'package_version': '1.0.0',
+    'host': 'Marks-MacBook-Pro.local',
+    'execution_time_ms': 597,
+    'timestamp': '2022-01-07 11:02:05'
+  }
 }
 ```
 
@@ -437,7 +808,6 @@ else:
 ## Function - Siemplify Sync Comment
 Create a Siemplify Case comment
 
- ![screenshot: fn-siemplify-sync-comment ](./doc/screenshots/fn-siemplify-sync-comment.png) <!-- ::CHANGE_ME:: -->
 
 <details><summary>Inputs:</summary>
 <p>
@@ -454,12 +824,28 @@ Create a Siemplify Case comment
 <details><summary>Outputs:</summary>
 <p>
 
-<!-- ::CHANGE_ME:: -->
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function.
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+  'version': 2.0,
+  'success': True,
+  'reason': None,
+  'content': {
+
+  },
+  'raw': None,
+  'inputs': {
+    'siemplify_alert_id': 'IBM SOAR Alert 2145_38352c92-bf66-4a50-87e2-5875accd7d7b',
+    'siemplify_comment': '<div class="rte"><div>Issue appears to be malicious</div></div>',
+    'siemplify_case_id': 63
+  },
+  'metrics': {
+    'version': '1.0',
+    'package': 'fn-siemplify',
+    'package_version': '1.0.0',
+    'host': 'Marks-MacBook-Pro.local',
+    'execution_time_ms': 365,
+    'timestamp': '2022-01-07 11:06:17'
+  }
 }
 ```
 
@@ -495,7 +881,6 @@ else:
 ## Function - Siemplify Close Case
 Close a Siemplify Case
 
- ![screenshot: fn-siemplify-close-case ](./doc/screenshots/fn-siemplify-close-case.png) <!-- ::CHANGE_ME:: -->
 
 <details><summary>Inputs:</summary>
 <p>
@@ -514,12 +899,29 @@ Close a Siemplify Case
 <details><summary>Outputs:</summary>
 <p>
 
-<!-- ::CHANGE_ME:: -->
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function.
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+  'version': 2.0,
+  'success': True,
+  'reason': None,
+  'content': {
+    'close_case': True
+  },
+  'raw': None,
+  'inputs': {
+    'siemplify_root_cause': '<div class="rte"><div>Threat mitigated</div></div>',
+    'siemplify_alert_id': 'IBM SOAR Alert 2145_38352c92-bf66-4a50-87e2-5875accd7d7b',
+    'siemplify_reason': 'Inconclusive',
+    'siemplify_case_id': 63
+  },
+  'metrics': {
+    'version': '1.0',
+    'package': 'fn-siemplify',
+    'package_version': '1.0.0',
+    'host': 'Marks-MacBook-Pro.local',
+    'execution_time_ms': 488,
+    'timestamp': '2022-01-07 11:07:58'
+  }
 }
 ```
 
@@ -562,8 +964,417 @@ incident.addNote(helper.createPlainText(note))
 </details>
 
 ---
+## Function - Siemplify: Add/Update Entity to Blocklist
+Add an artifact to the Siemplify Blacklist
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `siemplify_artifact_type` | `text` | No | `-` | - |
+| `siemplify_artifact_value` | `text` | No | `-` | - |
+| `siemplify_environment` | `text` | No | `Default Environment` | Set environment. See app.config setting for default |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+```python
+results = {
+  'version': 2.0,
+  'success': True,
+  'reason': None,
+  'content': {
+    'entityIdentifier': 'malicious.exe',
+    'entityType': 'FILENAME',
+    'scope': 2,
+    'environments': [
+      'Default Environment'
+    ]
+  },
+  'raw': None,
+  'inputs': {
+    'siemplify_artifact_type': 'File Name',
+    'siemplify_environment': None,
+    'siemplify_artifact_value': 'malicious.exe'
+  },
+  'metrics': {
+    'version': '1.0',
+    'package': 'fn-siemplify',
+    'package_version': '1.0.0',
+    'host': 'Marks-MacBook-Pro.local',
+    'execution_time_ms': 582,
+    'timestamp': '2022-01-07 11:26:32'
+  }
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.siemplify_artifact_type = artifact.type
+inputs.siemplify_artifact_value = artifact.value
+inputs.siemplify_environment = rule.properties.siemplify_environments
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+from java.util import Date
+
+current_dt = Date().getTime()
+
+if results.success:
+    row = incident.addRow('siemplify_list_entries')
+    row['report_date'] = current_dt
+    row['list_name'] = 'Block List'
+    row['entity'] = entity['entityIdentifier']
+    row['entity_type'] = entity['entityType']
+    row['environments'] = ", ".join(entity['environments'])
+else:
+  incident.addNote("Siemplify Add/Update Blocklist Entity failed: {}".format(results.reason))
+
+```
+
+</p>
+</details>
+
+---
+## Function - Siemplify Add/Update Entity to Custom List
+Add an artifact to the Siemplify custom list
 
 
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `siemplify_artifact_type` | `text` | No | `-` | - |
+| `siemplify_artifact_value` | `text` | No | `-` | - |
+| `siemplify_category` | `text` | No | `-` | If left empty, the artifact type is used |
+| `siemplify_environment` | `text` | No | `Default Environment` | Set environment. See app.config setting for default |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+```python
+results = {
+  'version': 2.0,
+  'success': True,
+  'reason': None,
+  'content': {
+    'entityIdentifier': 'malicious.exe',
+    'category': 'Malicious Category',
+    'environments': [
+      'Default Environment'
+    ]
+  },
+  'raw': None,
+  'inputs': {
+    'siemplify_artifact_type': 'File Name',
+    'siemplify_environment': None,
+    'siemplify_category': 'Malicious Category',
+    'siemplify_artifact_value': 'malicious.exe'
+  },
+  'metrics': {
+    'version': '1.0',
+    'package': 'fn-siemplify',
+    'package_version': '1.0.0',
+    'host': 'Marks-MacBook-Pro.local',
+    'execution_time_ms': 293,
+    'timestamp': '2022-01-07 11:25:35'
+  }
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.siemplify_artifact_type = artifact.type
+inputs.siemplify_artifact_value = artifact.value
+inputs.siemplify_category = rule.properties.siemplify_list_category
+inputs.siemplify_environment = rule.properties.siemplify_environments
+
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+from java.util import Date
+
+current_dt = Date().getTime()
+
+if results.success:
+  entity = results.content
+  row = incident.addRow('siemplify_list_entries')
+  row['report_date'] = current_dt
+  row['list_name'] = 'Custom List'
+  row['entity'] = entity['entityIdentifier']
+  row['entity_type'] = entity['category']
+  row['environments'] = ", ".join(entity['environments'])
+else:
+  incident.addNote("Siemplify Add/Update Blocklist Entity failed: {}".format(results.reason))
+
+```
+
+</p>
+</details>
+
+---
+## Function - Siemplify Get Custom List Entities
+Get entities from Siemplify's custom list
+
+ ![screenshot: fn-siemplify-get-custom-list-entities ](./doc/screenshots/custom_layouts.png)
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `siemplify_limit` | `number` | No | `-` | Limit the results returned |
+| `siemplify_search` | `text` | No | `-` | Filter results based on a search entry |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+```python
+results = {
+  'version': 2.0,
+  'success': True,
+  'reason': None,
+  'content': [
+    {
+      'entityIdentifier': 'soar_list',
+      'category': 'soar_category',
+      'forDBMigration': False,
+      'environments': [
+        'Default Environment'
+      ],
+      'id': 1,
+      'creationTimeUnixTimeInMs': 1638827701814,
+      'modificationTimeUnixTimeInMs': 1638827701814
+    },
+    {
+      'entityIdentifier': 'soar2_list',
+      'category': 'soar_category',
+      'forDBMigration': False,
+      'environments': [
+        'Default Environment'
+      ],
+      'id': 2,
+      'creationTimeUnixTimeInMs': 1641490099338,
+      'modificationTimeUnixTimeInMs': 1641490099338
+    }
+  ],
+  'raw': None,
+  'inputs': {
+    'siemplify_search': None,
+    'siemplify_limit': 100
+  },
+  'metrics': {
+    'version': '1.0',
+    'package': 'fn-siemplify',
+    'package_version': '1.0.0',
+    'host': 'Marks-MacBook-Pro.local',
+    'execution_time_ms': 325,
+    'timestamp': '2022-01-07 11:21:31'
+  }
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.siemplify_limit = rule.properties.siemplify_limit_result if rule.properties.siemplify_limit_result else 100
+inputs.siemplify_search = rule.properties.siemplify_search_term
+
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+from java.util import Date
+
+current_dt = Date().getTime()
+
+if results.success:
+  if isinstance(results.content, list):
+    entity_list = results.content
+  else:
+    entity_list = results.content.get("objectsList", {})
+
+  for entity in entity_list:
+    row = incident.addRow('siemplify_list_entries')
+    row['report_date'] = current_dt
+    row['list_name'] = 'Custom List'
+    row['entity'] = entity['entityIdentifier']
+    row['entity_type'] = entity['category']
+    row['environments'] = ", ".join(entity['environments'])
+else:
+  incident.addNote("Siemplify Get Blocklist Entities failed: {}".format(results.reason))
+```
+
+</p>
+</details>
+
+---
+## Function - Siemplify: Get Blocklist Entities
+Get entities from Siemplify's Blacklist
+
+ ![screenshot: fn-siemplify-get-blocklist-entities ](./doc/screenshots/custom_layouts.png)
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `siemplify_limit` | `number` | No | `-` | Limit the results returned |
+| `siemplify_search` | `text` | No | `-` | Filter results based on a search entry |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+```python
+results = {
+  'version': 2.0,
+  'success': True,
+  'reason': None,
+  'content': [
+    {
+      'id': 1,
+      'entityIdentifier': 'https://abc.com',
+      'entityType': 'DestinationURL',
+      'elementType': 0,
+      'scope': 2,
+      'environments': [
+        'Default Environment'
+      ]
+    },
+    {
+      'id': 2,
+      'entityIdentifier': '1.2.3.4',
+      'entityType': 'IPSET',
+      'elementType': 0,
+      'scope': 2,
+      'environments': [
+        'Default Environment'
+      ]
+    }
+  ],
+  'raw': None,
+  'inputs': {
+    'siemplify_search': None,
+    'siemplify_limit': 100
+  },
+  'metrics': {
+    'version': '1.0',
+    'package': 'fn-siemplify',
+    'package_version': '1.0.0',
+    'host': 'Marks-MacBook-Pro.local',
+    'execution_time_ms': 240,
+    'timestamp': '2022-01-07 11:23:21'
+  }
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.siemplify_limit = rule.properties.siemplify_limit_result if rule.properties.siemplify_limit_result else 100
+inputs.siemplify_search = rule.properties.siemplify_search_term
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+from java.util import Date
+
+current_dt = Date().getTime()
+
+if results.success:
+  if isinstance(results.content, list):
+    entity_list = results.content
+  else:
+    entity_list = results.content.get("objectsList", {})
+
+  for entity in entity_list:
+    row = incident.addRow('siemplify_list_entries')
+    row['report_date'] = current_dt
+    row['list_name'] = 'Block List'
+    row['entity'] = entity['entityIdentifier']
+    row['entity_type'] = entity['entityType']
+    row['environments'] = ", ".join(entity['environments'])
+else:
+  incident.addNote("Siemplify Get Blocklist Entities failed: {}".format(results.reason))
+
+```
+
+</p>
+</details>
+
+---
+
+## Data Table - Siemplify List Entries
+
+ ![screenshot: dt-siemplify-list-entries](./doc/screenshots/dt-siemplify-list-entries.png)
+
+#### API Name:
+siemplify_list_entries
+
+#### Columns:
+| Column Name | API Access Name | Type | Tooltip |
+| ----------- | --------------- | ---- | ------- |
+| Entity | `entity` | `text` | - |
+| Entity Type/Category | `entity_type` | `text` | - |
+| Environments | `environments` | `text` | - |
+| List Name | `list_name` | `text` | - |
+| Report Date | `report_date` | `datetimepicker` | - |
+
+---
 
 ## Custom Fields
 | Label | API Access Name | Type | Prefix | Placeholder | Tooltip |
