@@ -16,7 +16,7 @@
   NOTE: If your app is available in the container-format only, there is no need to mention the integration server in this readme.
 -->
 
-# Siemplify App for IBM QRadar SOAR
+# Siemplify App for IBM SOAR
 
 ## Table of Contents
 - [Release Notes](#release-notes)
@@ -64,7 +64,7 @@
   Provide a high-level description of the function itself and its remote software or application.
   The text below is parsed from the "description" and "long_description" attributes in the setup.py file
 -->
-**Siemplify App for IBM QRadar SOAR**
+**Siemplify App for IBM IBM SOAR**
 
  ![screenshot: main](./doc/screenshots/main.png)
 
@@ -72,6 +72,7 @@ Bi-directional synchronization with Siemplify Cases from SOAR Incidents. Other S
 * SOAR comments to Siempify case insights
 * SOAR attachments
 * SOAR case tasks
+* Siemplify closed cases will update IBM SOAR incidents
 
 ### Key Features
 <!--
@@ -141,18 +142,18 @@ Additional package dependencies may exist for each of these packages:
 * resilient_lib
 * simplejson
 
-### Endpoint Developed With
+### Endpoint Developed With Siemplify
 
 This app has been tested using:
 | Product Name | Product Version | API URL | API Version |
 | ------------ | --------------- | ------- | ----------- |
-| Siemplify | 5.6.x | - | v1 |
+| Siemplify | 5.6.x | https://<siemplify_host>/api/external/v1 | v1 |
 
 #### Configuration
 <!--
 List any steps that are needed to configure the endpoint to use this app.
 -->
-* Generate an API Key for use with IBM SOAR. This value will used with the app.config `api_key` setting.
+* Generate an Siemplify API Key for use with IBM SOAR. This value will used with the app.config `api_key` setting.
 
 ---
 
@@ -167,11 +168,11 @@ The following table provides the settings you need to configure the app. These s
 
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
-| **base_url** | Yes | `https://1.2.3.4` | *Base URL for your Siemplify server*|
+| **base_url** | Yes | `https://<siemplify host>` | *Base URL for your Siemplify server*|
 | **api_key** | Yes | `abc-123-def` | *API Generated from Siemplify*  |
-| **cafile** | Yes | `false|/path/to/siemplify.cert` | *Certificate needed to access Simeplify* |
-| **polling_interval** | Yes | `120` | *Seconds to wait between polling intervals. 0 disables poller*  |
-| **polling_lookback** | Yes | `120` | *Minutes to look back for changes first time poller runs* |
+| **cafile** | Yes | `false|/path/to/siemplify.cert` | *Certificate needed to access Siemplify* |
+| **polling_interval** | Yes | `120` | *Seconds to wait between polling intervals. 0 disables poller. This will disable the ability to close an IBM SOAR incient when the Siempify Case closes.*  |
+| **polling_lookback** | Yes | `120` | *Minutes to look back for cased cases the first time poller runs* |
 | **poller_timezone** | Yes | `Etc/GMT` | *Timezone adjustment for Siemplify timestamp comparison*  |
 | **default_case_environment** | Yes | `Default Environment` | *Siemplify environment to use when creating cases does not specify an environment* |
 | **siemplify_create_case_template** | Yes | `/path/to/siemplify_create_case.jinja` | *Use when overriding the default template*  |
@@ -187,7 +188,6 @@ The following table provides the settings you need to configure the app. These s
 * Import the Data Tables and Custom Fields in a tab like the screenshot below:
 
   ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png)
-
 
 ---
 
@@ -359,7 +359,7 @@ inputs.siemplify_attachment_id = attachment.id
 if results.success:
   incident.addNote("Siemplify Sync Attachment: {} created".format(attachment.name))
 else:
-  incident.addNote("Simeplify Sync Attachment: {} failed. Reason: {}".format(attachment.name, results.reason))
+  incident.addNote("Siemplify Sync Attachment: {} failed. Reason: {}".format(attachment.name, results.reason))
 
 ```
 
@@ -797,7 +797,7 @@ inputs.siemplify_artifact_id = artifact.id
 if results.success:
   incident.addNote("Siemplify Sync Artifact: {} ({}) created".format(artifact.value, artifact.type))
 else:
-  incident.addNote("Simeplify Sync Artifact: {} ({}) failed".format(artifact.value, artifact.type))
+  incident.addNote("Siemplify Sync Artifact: {} ({}) failed".format(artifact.value, artifact.type))
 
 ```
 
@@ -1254,7 +1254,7 @@ else:
 ## Function - Siemplify: Get Blocklist Entities
 Get entities from Siemplify's Blacklist
 
- ![screenshot: fn-siemplify-get-blocklist-entities ](./doc/screenshots/custom_layouts.png)
+ ![screenshot: fn-siemplify-get-blocklist-entities ](./doc/screenshots/dt-siemplify-list-entries.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -1368,11 +1368,11 @@ siemplify_list_entries
 #### Columns:
 | Column Name | API Access Name | Type | Tooltip |
 | ----------- | --------------- | ---- | ------- |
+| Report Date | `report_date` | `datetimepicker` | - |
+| List Name | `list_name` | `text` | - |
 | Entity | `entity` | `text` | - |
 | Entity Type/Category | `entity_type` | `text` | - |
 | Environments | `environments` | `text` | - |
-| List Name | `list_name` | `text` | - |
-| Report Date | `report_date` | `datetimepicker` | - |
 
 ---
 
@@ -1402,6 +1402,10 @@ siemplify_list_entries
 | Siemplify Sync Task | task | `siemplify_sync_task` |
 | Siemplify Auto Sync Artifact | artifact | `siemplify_sync_artifact` |
 | Siemplify Sync Case | incident | `siemplify_m_sync_case` |
+| Siemplify: Get Blocklist Entities | incident | siemplify_get_blocklist_entities |
+| Siemplify: Get Custom List Entities | incident | siemplify_get_customlist_entities |
+| Siemplify: Add/Update Entity to Blocklist | artifact | siemplify_addupdate_entity_to_blocklist |
+| Siemplify: Add/Update entity to Custom List  | artifact | siemplify_addupdate_entity_to_customlist |
 
 ---
 
@@ -1409,4 +1413,4 @@ siemplify_list_entries
 Refer to the documentation listed in the Requirements section for troubleshooting information.
 
 ### For Support
-This is a IBM Community provided App. Please search the Community [ibm.biz/soarcommunity](https://ibm.biz/soarcommunity) for assistance.
+This is a IBM Supported App. Please search the Community [ibm.biz/soarcommunity](https://ibm.biz/soarcommunity) for assistance or open a case at [ibm.com/mysupport](https://ibm.com/mysupport).
