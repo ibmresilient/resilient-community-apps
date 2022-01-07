@@ -1,0 +1,108 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": [
+    {
+      "entityIdentifier": "soar_list",
+      "category": "soar_category",
+      "forDBMigration": false,
+      "environments": [
+        "Default Environment"
+      ],
+      "id": 1,
+      "creationTimeUnixTimeInMs": 1638827701814,
+      "modificationTimeUnixTimeInMs": 1638827701814
+    },
+    {
+      "entityIdentifier": "soar2_list",
+      "category": "soar_category",
+      "forDBMigration": false,
+      "environments": [
+        "Default Environment"
+      ],
+      "id": 2,
+      "creationTimeUnixTimeInMs": 1641490099338,
+      "modificationTimeUnixTimeInMs": 1641490099338
+    },
+    {
+      "entityIdentifier": "soar3_list",
+      "category": "aa",
+      "forDBMigration": false,
+      "environments": [
+        "Default Environment"
+      ],
+      "id": 3,
+      "creationTimeUnixTimeInMs": 1641507308926,
+      "modificationTimeUnixTimeInMs": 1641507308926
+    },
+    {
+      "entityIdentifier": "123",
+      "category": "soar_category",
+      "forDBMigration": false,
+      "environments": [
+        "Default Environment"
+      ],
+      "id": 4,
+      "creationTimeUnixTimeInMs": 1641511563361,
+      "modificationTimeUnixTimeInMs": 1641511563361
+    },
+    {
+      "entityIdentifier": "def.com",
+      "category": "new category",
+      "forDBMigration": false,
+      "environments": [
+        "Default Environment"
+      ],
+      "id": 5,
+      "creationTimeUnixTimeInMs": 1641515897058,
+      "modificationTimeUnixTimeInMs": 1641515897058
+    },
+    {
+      "entityIdentifier": "service",
+      "category": "new category",
+      "forDBMigration": false,
+      "environments": [
+        "Default Environment"
+      ],
+      "id": 6,
+      "creationTimeUnixTimeInMs": 1641516046817,
+      "modificationTimeUnixTimeInMs": 1641516046817
+    },
+    {
+      "entityIdentifier": "something",
+      "category": "new category",
+      "forDBMigration": false,
+      "environments": [
+        "Default Environment"
+      ],
+      "id": 7,
+      "creationTimeUnixTimeInMs": 1641516166266,
+      "modificationTimeUnixTimeInMs": 1641516166266
+    },
+    {
+      "entityIdentifier": "malicious.exe",
+      "category": "Malicious Category",
+      "forDBMigration": false,
+      "environments": [
+        "Default Environment"
+      ],
+      "id": 8,
+      "creationTimeUnixTimeInMs": 1641572735756,
+      "modificationTimeUnixTimeInMs": 1641572735756
+    }
+  ],
+  "raw": null,
+  "inputs": {
+    "siemplify_search": null,
+    "siemplify_limit": 100
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-siemplify",
+    "package_version": "1.0.0",
+    "host": "Marks-MacBook-Pro.local",
+    "execution_time_ms": 574,
+    "timestamp": "2022-01-07 14:35:19"
+  }
+}

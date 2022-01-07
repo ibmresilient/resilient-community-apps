@@ -1,0 +1,37 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "status": 0,
+    "priority": 0,
+    "name": "IBM SOAR: Investigate Exposure of Personal Information/Data",
+    "owner": "@Administrator",
+    "completor": null,
+    "completionComment": null,
+    "completionDateTimeUnixTimeInMs": null,
+    "dueDateUnixTimeInMs": null,
+    "creatorUserId": "Siemplify automation",
+    "id": 21,
+    "type": 2,
+    "caseId": 66,
+    "isFavorite": false,
+    "modificationTimeUnixTimeInMs": 1641584072788,
+    "creationTimeUnixTimeInMs": 1641584072788,
+    "alertIdentifier": null
+  },
+  "raw": null,
+  "inputs": {
+    "siemplify_task_assignee": "@Administrator",
+    "siemplify_soar_task_id": 803,
+    "siemplify_case_id": 66
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-siemplify",
+    "package_version": "1.0.0",
+    "host": "Marks-MacBook-Pro.local",
+    "execution_time_ms": 457,
+    "timestamp": "2022-01-07 14:34:32"
+  }
+}

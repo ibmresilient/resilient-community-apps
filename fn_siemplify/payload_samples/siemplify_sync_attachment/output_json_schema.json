@@ -1,0 +1,140 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {
+      "type": "null"
+    },
+    "content": {
+      "type": "object",
+      "properties": {
+        "evidenceName": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "evidenceThumbnailBase64": {
+          "type": "string"
+        },
+        "evidenceId": {
+          "type": "integer"
+        },
+        "fileType": {
+          "type": "string"
+        },
+        "creatorUserId": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "type": {
+          "type": "integer"
+        },
+        "caseId": {
+          "type": "integer"
+        },
+        "isFavorite": {
+          "type": "boolean"
+        },
+        "modificationTimeUnixTimeInMs": {
+          "type": "integer"
+        },
+        "creationTimeUnixTimeInMs": {
+          "type": "integer"
+        },
+        "alertIdentifier": {
+          "type": "null"
+        }
+      },
+      "required": [
+        "alertIdentifier",
+        "caseId",
+        "creationTimeUnixTimeInMs",
+        "creatorUserId",
+        "description",
+        "evidenceId",
+        "evidenceName",
+        "evidenceThumbnailBase64",
+        "fileType",
+        "id",
+        "isFavorite",
+        "modificationTimeUnixTimeInMs",
+        "type"
+      ]
+    },
+    "raw": {
+      "type": "null"
+    },
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "siemplify_incident_id": {
+          "type": "integer"
+        },
+        "siemplify_alert_id": {
+          "type": "string"
+        },
+        "siemplify_case_id": {
+          "type": "integer"
+        },
+        "siemplify_attachment_id": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "siemplify_alert_id",
+        "siemplify_attachment_id",
+        "siemplify_case_id",
+        "siemplify_incident_id"
+      ]
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "execution_time_ms",
+        "host",
+        "package",
+        "package_version",
+        "timestamp",
+        "version"
+      ]
+    }
+  },
+  "required": [
+    "content",
+    "inputs",
+    "metrics",
+    "raw",
+    "reason",
+    "success",
+    "version"
+  ]
+}

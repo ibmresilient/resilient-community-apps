@@ -1,0 +1,114 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {
+      "type": "null"
+    },
+    "content": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "entityIdentifier": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          },
+          "forDBMigration": {
+            "type": "boolean"
+          },
+          "environments": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "id": {
+            "type": "integer"
+          },
+          "creationTimeUnixTimeInMs": {
+            "type": "integer"
+          },
+          "modificationTimeUnixTimeInMs": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "category",
+          "creationTimeUnixTimeInMs",
+          "entityIdentifier",
+          "environments",
+          "forDBMigration",
+          "id",
+          "modificationTimeUnixTimeInMs"
+        ]
+      }
+    },
+    "raw": {
+      "type": "null"
+    },
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "siemplify_search": {
+          "type": "null"
+        },
+        "siemplify_limit": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "siemplify_limit",
+        "siemplify_search"
+      ]
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "execution_time_ms",
+        "host",
+        "package",
+        "package_version",
+        "timestamp",
+        "version"
+      ]
+    }
+  },
+  "required": [
+    "content",
+    "inputs",
+    "metrics",
+    "raw",
+    "reason",
+    "success",
+    "version"
+  ]
+}

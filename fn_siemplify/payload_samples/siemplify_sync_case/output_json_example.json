@@ -1,0 +1,292 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "wallData": [
+      {
+        "comment": "Case creation reason: IBM SOAR Incident 2149",
+        "creatorUserId": "Siemplify automation",
+        "id": 66,
+        "type": 7,
+        "caseId": 66,
+        "isFavorite": false,
+        "modificationTimeUnixTimeInMs": 1641584057814,
+        "creationTimeUnixTimeInMs": 1641584057814,
+        "alertIdentifier": "IBM SOAR Alert 2149_42e7d42f-f307-4f50-8407-98e2eb49f4f3"
+      },
+      {
+        "comment": "Playbook SentinelOne Threat Remediation attached to case.",
+        "creatorUserId": "Siemplify automation",
+        "id": 47,
+        "type": 5,
+        "caseId": 66,
+        "isFavorite": false,
+        "modificationTimeUnixTimeInMs": 1641584057945,
+        "creationTimeUnixTimeInMs": 1641584057945,
+        "alertIdentifier": null
+      },
+      {
+        "description": "Tag 'Manual Case' added",
+        "activityKind": 15,
+        "newValue": "Manual Case",
+        "creatorUserId": "Siemplify automation",
+        "id": 98,
+        "type": 1,
+        "caseId": 66,
+        "isFavorite": false,
+        "modificationTimeUnixTimeInMs": 1641584057852,
+        "creationTimeUnixTimeInMs": 1641584057852,
+        "alertIdentifier": null
+      },
+      {
+        "description": "Case stage set to Triage",
+        "activityKind": 10,
+        "newValue": null,
+        "creatorUserId": "System",
+        "id": 67,
+        "type": 1,
+        "caseId": 66,
+        "isFavorite": false,
+        "modificationTimeUnixTimeInMs": 1641584057714,
+        "creationTimeUnixTimeInMs": 1641584057714,
+        "alertIdentifier": null
+      },
+      {
+        "actionTriggerType": 0,
+        "integration": "Siemplify",
+        "executingUser": null,
+        "playbookName": "SentinelOne Threat Remediation",
+        "playbookIsInDebugMode": false,
+        "status": 5,
+        "actionProvider": "Scripts",
+        "actionIdentifier": "Insight - Threat Information",
+        "actionResult": "Action started",
+        "alertIdentifiers": [
+          "IBM SOAR Alert 2149_42e7d42f-f307-4f50-8407-98e2eb49f4f3"
+        ],
+        "creatorUserId": null,
+        "id": 13,
+        "type": 3,
+        "caseId": 0,
+        "isFavorite": false,
+        "modificationTimeUnixTimeInMs": 1641584058246,
+        "creationTimeUnixTimeInMs": 1641584058246,
+        "alertIdentifier": null
+      }
+    ],
+    "alerts": [
+      {
+        "ticketId": "",
+        "identifier": "IBM SOAR Alert 2149_42e7d42f-f307-4f50-8407-98e2eb49f4f3",
+        "hasWorkflows": true,
+        "workflowsStatus": 1,
+        "sourceSystemName": "",
+        "securityEventCards": [
+          {
+            "caseId": 66,
+            "eventId": null,
+            "alertIdentifier": "IBM SOAR Alert 2149_42e7d42f-f307-4f50-8407-98e2eb49f4f3",
+            "eventName": null,
+            "product": null,
+            "sources": [],
+            "destinations": [],
+            "artificats": [],
+            "port": null,
+            "outcome": null,
+            "time": "2022-01-07T19:32:24Z",
+            "deviceEventClassId": null,
+            "fields": []
+          }
+        ],
+        "entityCards": [],
+        "productFamilies": [
+          "Default"
+        ],
+        "fields": [
+          {
+            "isHighlight": true,
+            "groupName": "HIGHLIGHTED FIELDS",
+            "items": [
+              {
+                "originalName": "AlertName",
+                "name": "Alert Name",
+                "value": "IBM SOAR Alert 2149"
+              },
+              {
+                "originalName": "EndTime",
+                "name": "End Time",
+                "value": "1641583944000"
+              },
+              {
+                "originalName": "StartTime",
+                "name": "Start Time",
+                "value": "1641583944000"
+              }
+            ]
+          },
+          {
+            "isHighlight": false,
+            "groupName": "Time",
+            "items": [
+              {
+                "originalName": "DetectionTime",
+                "name": "Detection Time",
+                "value": "1641583944000"
+              },
+              {
+                "originalName": "EndTime",
+                "name": "End Time",
+                "value": "1641583944000"
+              },
+              {
+                "originalName": "StartTime",
+                "name": "Start Time",
+                "value": "1641583944000"
+              }
+            ]
+          },
+          {
+            "isHighlight": false,
+            "groupName": "Case",
+            "items": [
+              {
+                "originalName": "AlertName",
+                "name": "Alert Name",
+                "value": "IBM SOAR Alert 2149"
+              },
+              {
+                "originalName": "RuleGenerator",
+                "name": "Rule Generator",
+                "value": "Manual Case"
+              }
+            ]
+          },
+          {
+            "isHighlight": false,
+            "groupName": "Default",
+            "items": [
+              {
+                "originalName": "AlertGroupIdentifier",
+                "name": "AlertGroupIdentifier",
+                "value": "Manual Case_0e65479c-d123-4cae-a017-fc38339e42ab"
+              },
+              {
+                "originalName": "IsManualAlert",
+                "name": "IsManualAlert",
+                "value": "True"
+              }
+            ]
+          },
+          {
+            "isHighlight": false,
+            "groupName": "Threat",
+            "items": [
+              {
+                "originalName": "Priority",
+                "name": "Priority",
+                "value": "Unchanged"
+              }
+            ]
+          }
+        ],
+        "name": "IBM SOAR Alert 2149",
+        "product": null,
+        "startTimeUnixTimeInMs": 1641583944000,
+        "apiSlaExpiration": {
+          "slaExpirationTime": null,
+          "criticalExpirationTime": null,
+          "expirationStatus": 2
+        },
+        "isManualAlert": true,
+        "priority": 0,
+        "id": 0,
+        "creationTimeUnixTimeInMs": 0,
+        "modificationTimeUnixTimeInMs": 0,
+        "additionalProperties": {
+          "identifier": "IBM SOAR Alert 2149_42e7d42f-f307-4f50-8407-98e2eb49f4f3",
+          "detectionTime": "1641583944000",
+          "alertName": "IBM SOAR Alert 2149",
+          "ruleGenerator": "Manual Case",
+          "alertGroupIdentifier": "Manual Case_0e65479c-d123-4cae-a017-fc38339e42ab",
+          "isManualAlert": "True",
+          "priority": "Unchanged",
+          "endTime": "1641583944000",
+          "startTime": "1641583944000"
+        }
+      }
+    ],
+    "caseRecommendations": null,
+    "tags": [
+      {
+        "caseId": 66,
+        "tag": "IBMSOAR",
+        "priority": 0
+      },
+      {
+        "caseId": 66,
+        "tag": "Manual Case",
+        "priority": 0
+      }
+    ],
+    "insights": [],
+    "productFamilies": [],
+    "summary": {
+      "fields": []
+    },
+    "entityCards": [],
+    "entities": [],
+    "description": null,
+    "canOpenIncident": false,
+    "hasIncident": false,
+    "title": "IBM SOAR - sync this with siemplify",
+    "isTouched": false,
+    "hasSuspiciousEntity": false,
+    "isMerged": false,
+    "isImportant": true,
+    "isIncident": false,
+    "hasWorkflow": true,
+    "environment": "Default Environment",
+    "priority": 50,
+    "stage": "Triage",
+    "assignedUserName": "@Administrator",
+    "apiSlaExpiration": {
+      "slaExpirationTime": null,
+      "criticalExpirationTime": null,
+      "expirationStatus": 2
+    },
+    "apiStageSlaExpiration": {
+      "slaExpirationTime": null,
+      "criticalExpirationTime": null,
+      "expirationStatus": 2
+    },
+    "status": 1,
+    "isTestCase": false,
+    "caseSource": "User",
+    "isOverflowCase": false,
+    "id": 66,
+    "creationTimeUnixTimeInMs": 1641584057689,
+    "modificationTimeUnixTimeInMs": 1641584057739,
+    "additionalProperties": {},
+    "siemplify_case_url": "https://9.55.194.8/#/main/cases/classic-view/66"
+  },
+  "raw": null,
+  "inputs": {
+    "siemplify_incident_id": 2149,
+    "siemplify_sync_attachments": true,
+    "siemplify_assigned_user": "@Administrator",
+    "siemplify_environment": "Default Environment",
+    "siemplify_alert_id": "IBM SOAR Alert 2149_fab80a96-28cd-4110-ad7b-2d1c9128e864",
+    "siemplify_sync_comments": true,
+    "siemplify_sync_artifacts": true,
+    "siemplify_case_id": 65
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-siemplify",
+    "package_version": "1.0.0",
+    "host": "Marks-MacBook-Pro.local",
+    "execution_time_ms": 1775,
+    "timestamp": "2022-01-07 14:34:18"
+  }
+}

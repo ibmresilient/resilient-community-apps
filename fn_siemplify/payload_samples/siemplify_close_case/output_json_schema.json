@@ -1,0 +1,92 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {
+      "type": "null"
+    },
+    "content": {
+      "type": "object",
+      "properties": {
+        "close_case": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "close_case"
+      ]
+    },
+    "raw": {
+      "type": "null"
+    },
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "siemplify_root_cause": {
+          "type": "string"
+        },
+        "siemplify_alert_id": {
+          "type": "string"
+        },
+        "siemplify_reason": {
+          "type": "string"
+        },
+        "siemplify_case_id": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "siemplify_alert_id",
+        "siemplify_case_id",
+        "siemplify_reason",
+        "siemplify_root_cause"
+      ]
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "execution_time_ms",
+        "host",
+        "package",
+        "package_version",
+        "timestamp",
+        "version"
+      ]
+    }
+  },
+  "required": [
+    "content",
+    "inputs",
+    "metrics",
+    "raw",
+    "reason",
+    "success",
+    "version"
+  ]
+}

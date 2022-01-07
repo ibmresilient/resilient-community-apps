@@ -1,0 +1,631 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {
+      "type": "null"
+    },
+    "content": {
+      "type": "object",
+      "properties": {
+        "wallData": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "comment": {
+                "type": "string"
+              },
+              "creatorUserId": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "id": {
+                "type": "integer"
+              },
+              "type": {
+                "type": "integer"
+              },
+              "caseId": {
+                "type": "integer"
+              },
+              "isFavorite": {
+                "type": "boolean"
+              },
+              "modificationTimeUnixTimeInMs": {
+                "type": "integer"
+              },
+              "creationTimeUnixTimeInMs": {
+                "type": "integer"
+              },
+              "alertIdentifier": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "description": {
+                "type": "string"
+              },
+              "activityKind": {
+                "type": "integer"
+              },
+              "newValue": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "actionTriggerType": {
+                "type": "integer"
+              },
+              "integration": {
+                "type": "string"
+              },
+              "executingUser": {
+                "type": "null"
+              },
+              "playbookName": {
+                "type": "string"
+              },
+              "playbookIsInDebugMode": {
+                "type": "boolean"
+              },
+              "status": {
+                "type": "integer"
+              },
+              "actionProvider": {
+                "type": "string"
+              },
+              "actionIdentifier": {
+                "type": "string"
+              },
+              "actionResult": {
+                "type": "string"
+              },
+              "alertIdentifiers": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "alertIdentifier",
+              "caseId",
+              "creationTimeUnixTimeInMs",
+              "creatorUserId",
+              "id",
+              "isFavorite",
+              "modificationTimeUnixTimeInMs",
+              "type"
+            ]
+          }
+        },
+        "alerts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "ticketId": {
+                "type": "string"
+              },
+              "identifier": {
+                "type": "string"
+              },
+              "hasWorkflows": {
+                "type": "boolean"
+              },
+              "workflowsStatus": {
+                "type": "integer"
+              },
+              "sourceSystemName": {
+                "type": "string"
+              },
+              "securityEventCards": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "caseId": {
+                      "type": "integer"
+                    },
+                    "eventId": {
+                      "type": "null"
+                    },
+                    "alertIdentifier": {
+                      "type": "string"
+                    },
+                    "eventName": {
+                      "type": "null"
+                    },
+                    "product": {
+                      "type": "null"
+                    },
+                    "sources": {
+                      "type": "array"
+                    },
+                    "destinations": {
+                      "type": "array"
+                    },
+                    "artificats": {
+                      "type": "array"
+                    },
+                    "port": {
+                      "type": "null"
+                    },
+                    "outcome": {
+                      "type": "null"
+                    },
+                    "time": {
+                      "type": "string"
+                    },
+                    "deviceEventClassId": {
+                      "type": "null"
+                    },
+                    "fields": {
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "alertIdentifier",
+                    "artificats",
+                    "caseId",
+                    "destinations",
+                    "deviceEventClassId",
+                    "eventId",
+                    "eventName",
+                    "fields",
+                    "outcome",
+                    "port",
+                    "product",
+                    "sources",
+                    "time"
+                  ]
+                }
+              },
+              "entityCards": {
+                "type": "array"
+              },
+              "productFamilies": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "fields": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "isHighlight": {
+                      "type": "boolean"
+                    },
+                    "groupName": {
+                      "type": "string"
+                    },
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "originalName": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "value": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "name",
+                          "originalName",
+                          "value"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "groupName",
+                    "isHighlight",
+                    "items"
+                  ]
+                }
+              },
+              "name": {
+                "type": "string"
+              },
+              "product": {
+                "type": "null"
+              },
+              "startTimeUnixTimeInMs": {
+                "type": "integer"
+              },
+              "apiSlaExpiration": {
+                "type": "object",
+                "properties": {
+                  "slaExpirationTime": {
+                    "type": "null"
+                  },
+                  "criticalExpirationTime": {
+                    "type": "null"
+                  },
+                  "expirationStatus": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "criticalExpirationTime",
+                  "expirationStatus",
+                  "slaExpirationTime"
+                ]
+              },
+              "isManualAlert": {
+                "type": "boolean"
+              },
+              "priority": {
+                "type": "integer"
+              },
+              "id": {
+                "type": "integer"
+              },
+              "creationTimeUnixTimeInMs": {
+                "type": "integer"
+              },
+              "modificationTimeUnixTimeInMs": {
+                "type": "integer"
+              },
+              "additionalProperties": {
+                "type": "object",
+                "properties": {
+                  "identifier": {
+                    "type": "string"
+                  },
+                  "detectionTime": {
+                    "type": "string"
+                  },
+                  "alertName": {
+                    "type": "string"
+                  },
+                  "ruleGenerator": {
+                    "type": "string"
+                  },
+                  "alertGroupIdentifier": {
+                    "type": "string"
+                  },
+                  "isManualAlert": {
+                    "type": "string"
+                  },
+                  "priority": {
+                    "type": "string"
+                  },
+                  "endTime": {
+                    "type": "string"
+                  },
+                  "startTime": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "alertGroupIdentifier",
+                  "alertName",
+                  "detectionTime",
+                  "endTime",
+                  "identifier",
+                  "isManualAlert",
+                  "priority",
+                  "ruleGenerator",
+                  "startTime"
+                ]
+              }
+            },
+            "required": [
+              "additionalProperties",
+              "apiSlaExpiration",
+              "creationTimeUnixTimeInMs",
+              "entityCards",
+              "fields",
+              "hasWorkflows",
+              "id",
+              "identifier",
+              "isManualAlert",
+              "modificationTimeUnixTimeInMs",
+              "name",
+              "priority",
+              "product",
+              "productFamilies",
+              "securityEventCards",
+              "sourceSystemName",
+              "startTimeUnixTimeInMs",
+              "ticketId",
+              "workflowsStatus"
+            ]
+          }
+        },
+        "caseRecommendations": {
+          "type": "null"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "caseId": {
+                "type": "integer"
+              },
+              "tag": {
+                "type": "string"
+              },
+              "priority": {
+                "type": "integer"
+              }
+            },
+            "required": [
+              "caseId",
+              "priority",
+              "tag"
+            ]
+          }
+        },
+        "insights": {
+          "type": "array"
+        },
+        "productFamilies": {
+          "type": "array"
+        },
+        "summary": {
+          "type": "object",
+          "properties": {
+            "fields": {
+              "type": "array"
+            }
+          },
+          "required": [
+            "fields"
+          ]
+        },
+        "entityCards": {
+          "type": "array"
+        },
+        "entities": {
+          "type": "array"
+        },
+        "description": {
+          "type": "null"
+        },
+        "canOpenIncident": {
+          "type": "boolean"
+        },
+        "hasIncident": {
+          "type": "boolean"
+        },
+        "title": {
+          "type": "string"
+        },
+        "isTouched": {
+          "type": "boolean"
+        },
+        "hasSuspiciousEntity": {
+          "type": "boolean"
+        },
+        "isMerged": {
+          "type": "boolean"
+        },
+        "isImportant": {
+          "type": "boolean"
+        },
+        "isIncident": {
+          "type": "boolean"
+        },
+        "hasWorkflow": {
+          "type": "boolean"
+        },
+        "environment": {
+          "type": "string"
+        },
+        "priority": {
+          "type": "integer"
+        },
+        "stage": {
+          "type": "string"
+        },
+        "assignedUserName": {
+          "type": "string"
+        },
+        "apiSlaExpiration": {
+          "type": "object",
+          "properties": {
+            "slaExpirationTime": {
+              "type": "null"
+            },
+            "criticalExpirationTime": {
+              "type": "null"
+            },
+            "expirationStatus": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "criticalExpirationTime",
+            "expirationStatus",
+            "slaExpirationTime"
+          ]
+        },
+        "apiStageSlaExpiration": {
+          "type": "object",
+          "properties": {
+            "slaExpirationTime": {
+              "type": "null"
+            },
+            "criticalExpirationTime": {
+              "type": "null"
+            },
+            "expirationStatus": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "criticalExpirationTime",
+            "expirationStatus",
+            "slaExpirationTime"
+          ]
+        },
+        "status": {
+          "type": "integer"
+        },
+        "isTestCase": {
+          "type": "boolean"
+        },
+        "caseSource": {
+          "type": "string"
+        },
+        "isOverflowCase": {
+          "type": "boolean"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "creationTimeUnixTimeInMs": {
+          "type": "integer"
+        },
+        "modificationTimeUnixTimeInMs": {
+          "type": "integer"
+        },
+        "additionalProperties": {
+          "type": "object"
+        },
+        "siemplify_case_url": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "additionalProperties",
+        "alerts",
+        "apiSlaExpiration",
+        "apiStageSlaExpiration",
+        "assignedUserName",
+        "canOpenIncident",
+        "caseRecommendations",
+        "caseSource",
+        "creationTimeUnixTimeInMs",
+        "description",
+        "entities",
+        "entityCards",
+        "environment",
+        "hasIncident",
+        "hasSuspiciousEntity",
+        "hasWorkflow",
+        "id",
+        "insights",
+        "isImportant",
+        "isIncident",
+        "isMerged",
+        "isOverflowCase",
+        "isTestCase",
+        "isTouched",
+        "modificationTimeUnixTimeInMs",
+        "priority",
+        "productFamilies",
+        "siemplify_case_url",
+        "stage",
+        "status",
+        "summary",
+        "tags",
+        "title",
+        "wallData"
+      ]
+    },
+    "raw": {
+      "type": "null"
+    },
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "siemplify_incident_id": {
+          "type": "integer"
+        },
+        "siemplify_sync_attachments": {
+          "type": "boolean"
+        },
+        "siemplify_assigned_user": {
+          "type": "string"
+        },
+        "siemplify_environment": {
+          "type": "string"
+        },
+        "siemplify_alert_id": {
+          "type": "string"
+        },
+        "siemplify_sync_comments": {
+          "type": "boolean"
+        },
+        "siemplify_sync_artifacts": {
+          "type": "boolean"
+        },
+        "siemplify_case_id": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "siemplify_alert_id",
+        "siemplify_assigned_user",
+        "siemplify_case_id",
+        "siemplify_environment",
+        "siemplify_incident_id",
+        "siemplify_sync_artifacts",
+        "siemplify_sync_attachments",
+        "siemplify_sync_comments"
+      ]
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "execution_time_ms",
+        "host",
+        "package",
+        "package_version",
+        "timestamp",
+        "version"
+      ]
+    }
+  },
+  "required": [
+    "content",
+    "inputs",
+    "metrics",
+    "raw",
+    "reason",
+    "success",
+    "version"
+  ]
+}

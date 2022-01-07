@@ -1,0 +1,20 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {},
+  "raw": null,
+  "inputs": {
+    "siemplify_alert_id": "IBM SOAR Alert 2149_42e7d42f-f307-4f50-8407-98e2eb49f4f3",
+    "siemplify_comment": "<div class=\"rte\"><div>sync with siemplfiy</div></div>",
+    "siemplify_case_id": 66
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-siemplify",
+    "package_version": "1.0.0",
+    "host": "Marks-MacBook-Pro.local",
+    "execution_time_ms": 360,
+    "timestamp": "2022-01-07 14:34:44"
+  }
+}

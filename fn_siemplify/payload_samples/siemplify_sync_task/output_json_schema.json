@@ -1,0 +1,148 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {
+      "type": "null"
+    },
+    "content": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "integer"
+        },
+        "priority": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "owner": {
+          "type": "string"
+        },
+        "completor": {
+          "type": "null"
+        },
+        "completionComment": {
+          "type": "null"
+        },
+        "completionDateTimeUnixTimeInMs": {
+          "type": "null"
+        },
+        "dueDateUnixTimeInMs": {
+          "type": "null"
+        },
+        "creatorUserId": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "type": {
+          "type": "integer"
+        },
+        "caseId": {
+          "type": "integer"
+        },
+        "isFavorite": {
+          "type": "boolean"
+        },
+        "modificationTimeUnixTimeInMs": {
+          "type": "integer"
+        },
+        "creationTimeUnixTimeInMs": {
+          "type": "integer"
+        },
+        "alertIdentifier": {
+          "type": "null"
+        }
+      },
+      "required": [
+        "alertIdentifier",
+        "caseId",
+        "completionComment",
+        "completionDateTimeUnixTimeInMs",
+        "completor",
+        "creationTimeUnixTimeInMs",
+        "creatorUserId",
+        "dueDateUnixTimeInMs",
+        "id",
+        "isFavorite",
+        "modificationTimeUnixTimeInMs",
+        "name",
+        "owner",
+        "priority",
+        "status",
+        "type"
+      ]
+    },
+    "raw": {
+      "type": "null"
+    },
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "siemplify_task_assignee": {
+          "type": "string"
+        },
+        "siemplify_soar_task_id": {
+          "type": "integer"
+        },
+        "siemplify_case_id": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "siemplify_case_id",
+        "siemplify_soar_task_id",
+        "siemplify_task_assignee"
+      ]
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "execution_time_ms",
+        "host",
+        "package",
+        "package_version",
+        "timestamp",
+        "version"
+      ]
+    }
+  },
+  "required": [
+    "content",
+    "inputs",
+    "metrics",
+    "raw",
+    "reason",
+    "success",
+    "version"
+  ]
+}

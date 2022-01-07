@@ -1,0 +1,27 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "entityIdentifier": "abc@example.com",
+    "category": "USERUNIQNAME",
+    "environments": [
+      "Default Environment"
+    ]
+  },
+  "raw": null,
+  "inputs": {
+    "siemplify_artifact_type": "Email Recipient",
+    "siemplify_environment": null,
+    "siemplify_category": null,
+    "siemplify_artifact_value": "abc@example.com"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-siemplify",
+    "package_version": "1.0.0",
+    "host": "Marks-MacBook-Pro.local",
+    "execution_time_ms": 282,
+    "timestamp": "2022-01-07 14:35:57"
+  }
+}

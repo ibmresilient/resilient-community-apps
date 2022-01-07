@@ -1,0 +1,80 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": [
+    {
+      "id": 1,
+      "entityIdentifier": "https://abc.com",
+      "entityType": "DestinationURL",
+      "elementType": 0,
+      "scope": 2,
+      "environments": [
+        "Default Environment"
+      ]
+    },
+    {
+      "id": 2,
+      "entityIdentifier": "1.2.3.4",
+      "entityType": "IPSET",
+      "elementType": 0,
+      "scope": 2,
+      "environments": [
+        "Default Environment"
+      ]
+    },
+    {
+      "id": 3,
+      "entityIdentifier": "5.6.7.8",
+      "entityType": "IPSET",
+      "elementType": 0,
+      "scope": 2,
+      "environments": [
+        "Default Environment"
+      ]
+    },
+    {
+      "id": 4,
+      "entityIdentifier": "a@example.com",
+      "entityType": "USERUNIQNAME",
+      "elementType": 0,
+      "scope": 2,
+      "environments": [
+        "Default Environment"
+      ]
+    },
+    {
+      "id": 5,
+      "entityIdentifier": "aaa.exe",
+      "entityType": "PROCESS",
+      "elementType": 0,
+      "scope": 2,
+      "environments": [
+        "Default Environment"
+      ]
+    },
+    {
+      "id": 6,
+      "entityIdentifier": "malicious.exe",
+      "entityType": "FILENAME",
+      "elementType": 0,
+      "scope": 2,
+      "environments": [
+        "Default Environment"
+      ]
+    }
+  ],
+  "raw": null,
+  "inputs": {
+    "siemplify_search": null,
+    "siemplify_limit": 100
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-siemplify",
+    "package_version": "1.0.0",
+    "host": "Marks-MacBook-Pro.local",
+    "execution_time_ms": 253,
+    "timestamp": "2022-01-07 14:35:14"
+  }
+}

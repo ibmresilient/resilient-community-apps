@@ -1,0 +1,23 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "close_case": true
+  },
+  "raw": null,
+  "inputs": {
+    "siemplify_root_cause": "<div class=\"rte\"><div>msg for siemplify</div></div>",
+    "siemplify_alert_id": "IBM SOAR Alert 2149_42e7d42f-f307-4f50-8407-98e2eb49f4f3",
+    "siemplify_reason": "Inconclusive",
+    "siemplify_case_id": 66
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-siemplify",
+    "package_version": "1.0.0",
+    "host": "Marks-MacBook-Pro.local",
+    "execution_time_ms": 626,
+    "timestamp": "2022-01-07 14:36:29"
+  }
+}
