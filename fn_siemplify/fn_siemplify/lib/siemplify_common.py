@@ -118,6 +118,8 @@ class SiemplifyCommon():
         # get the existing case to start reviewing changes
         self._diff_case_info(incident_info)
 
+        # TODO
+
         #_diff_comments(incident_info)
 
         #_diff_attachments(incident_info)
@@ -162,6 +164,7 @@ class SiemplifyCommon():
         # get the existing case
         case_info = self.get_case(incident_info["siemplify_case_id"])
         LOG.info(case_info)
+        # TODO
 
     def get_blocklist(self, inputs):
 
@@ -235,26 +238,6 @@ class SiemplifyCommon():
 
         results, error_msg = self._make_call("POST", CREATE_INSIGHT_URL, payload)
         return results if isinstance(results, dict) else {}, error_msg
-        """
-        {
-            "caseId": "<long>",
-            "isFavorite": "<boolean>",
-            "alertIdentifier": "<string>",
-            "triggeredBy": "<string>",
-            "title": "<string>",
-            "content": "<string>",
-            "entityIdentifier": "<string>",
-            "severity": 2,
-            "type": 0,
-            "additionalDataType": 1,
-            "additionalData": "<string>",
-            "additionalDataTitle": "<string>",
-            "originalRequestingUser": "<string>",
-            "id": "<long>",
-            "creationTimeUnixTimeInMs": "<long>",
-            "modificationTimeUnixTimeInMs": "<long>"
-        }
-        """
 
     def sync_artifact(self, inputs):
         """[summary]
@@ -380,84 +363,6 @@ class SiemplifyCommon():
             siemplify_task_assignee ([str]): [description]
             siemplify_task_id ([str]): [description]
             task_info ([dict]): [description]
-        """
-        """ siemplify task
-        {
-            "caseId": "<long>",
-            "priority": "<integer>",
-            "isImportant": "<boolean>",
-            "status": "<integer>",
-            "ownerComment": "<string>",
-            "name": "<string>",
-            "creatorUserId": "<string>",
-            "owner": "<string>",
-            "dueDateUnixTimeMs": "<long>",
-            "completionComment": "<string>",
-            "completionUnixTimeMs": "<long>",
-            "isFavorite": "<boolean>",
-            "alertIdentifier": "<string>",
-            "id": "<long>",
-            "creationTimeUnixTimeInMs": "<long>",
-            "modificationTimeUnixTimeInMs": "<long>"
-        }
-        """
-        """SOAR Task
-        {
-            "name": "my task",
-            "inc_id": 2298,
-            "inc_owner_id": 3,
-            "due_date": null,
-            "required": true,
-            "owner_id": null,
-            "user_notes": "",
-            "status": "O",
-            "frozen": false,
-            "owner_fname": null,
-            "owner_lname": null,
-            "init_date": 1639515019386,
-            "active": true,
-            "src_name": null,
-            "inc_name": "sync27",
-            "instr_text": "<div class=\"rte\"><div>this is the content</div></div>",
-            "instructions": {
-                "format": "html",
-                "content": "<div class=\"rte\"><div>this is the content</div></div>"
-            },
-            "form": null,
-            "members": null,
-            "perms": {
-            },
-            "notes": [
-
-            ],
-            "closed_date": null,
-            "actions": [
-            ],
-            "phase_id": 1002,
-            "category_id": null,
-            "notes_count": 2,
-            "attachments_count": 0,
-            "task_layout": [
-
-            ],
-            "auto_deactivate": true,
-            "creator_principal": {
-                "id": 3,
-                "type": "user",
-                "name": "a@example.com",
-                "display_name": "Resilient Sysadmin"
-            },
-            "regs": {
-
-            },
-            "custom": true,
-            "id": 1552,
-            "inc_training": false,
-            "cat_name": "Initial",
-            "description": null,
-            "at_id": null,
-            "private": null
-            }
         """
 
         payload = {

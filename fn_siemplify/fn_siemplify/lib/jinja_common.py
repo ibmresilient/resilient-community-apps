@@ -19,13 +19,15 @@ class JinjaEnvironment():
             "resilient_datetimeformat": jinja_resilient_datetimeformat,
             "resilient_display_datetimeformat": readable_datetime,
             "resilient_substitute": jinja_resilient_substitute,
-            "resilient_splitpart": jinja_resilient_splitpart
+            "resilient_splitpart": jinja_resilient_splitpart,
+            "resilient_trimlist": jinja_resilient_trimlist
             })
         env.filters.update({
             "resilient_datetimeformat": jinja_resilient_datetimeformat,
             "resilient_display_datetimeformat": readable_datetime,
             "resilient_substitute": jinja_resilient_substitute,
-            "resilient_splitpart": jinja_resilient_splitpart
+            "resilient_splitpart": jinja_resilient_splitpart,
+            "resilient_trimlist": jinja_resilient_trimlist
             })
 
     def make_payload_from_template(self, template_override, default_template, payload):
@@ -128,3 +130,15 @@ def jinja_resilient_splitpart (value, index, split_chars=' - '):
         return splits[index]
 
     return value
+
+def jinja_resilient_trimlist(org_list):
+    """[trim whitespace from elements in a list]
+
+    Args:
+        list ([type]): [description]
+    Returns:
+        [list]: [list with elements trimmed of whitespace]
+    """
+    if not isinstance(org_list, list):
+        return org_list
+    return [element.strip() for element in org_list]
