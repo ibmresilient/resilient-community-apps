@@ -34,7 +34,6 @@ setup(
         - Send Attachments from an IBM Resilient Incident/Task to a related ServiceNow Record.""",
     install_requires=[
         "resilient_circuits>=43.0.0",
-        "resilient_lib>=43.0.0",
         "beautifulsoup4>=4.6.3"
     ],
     packages=find_packages(),
