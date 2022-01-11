@@ -3,12 +3,16 @@
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
-import logging
 import json
+import logging
 import time
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+
 from fn_service_now.util.resilient_helper import ResilientHelper
 from fn_service_now.util.sn_records_dt import ServiceNowRecordsDataTable
+from resilient_circuits import (FunctionError, FunctionResult,
+                                ResilientComponent, StatusMessage, function,
+                                handler)
+from resilient_lib import RequestsCommon
 
 
 class FunctionPayload(object):
@@ -49,6 +53,7 @@ class FunctionComponent(ResilientComponent):
         try:
             # Instansiate helper (which gets appconfigs from file)
             res_helper = ResilientHelper(self.options)
+            rc = RequestsCommon(self.opts, self.options)
 
             # Get the function inputs:
             inputs = {
@@ -104,7 +109,7 @@ class FunctionComponent(ResilientComponent):
 
                 try:
                     yield StatusMessage("Closing ServiceNow Record {0}".format(sn_ref_id))
-                    close_in_sn_response = res_helper.sn_api_request("POST", "/close_record", data=json.dumps(request_data))
+                    close_in_sn_response = res_helper.sn_api_request(rc, "POST", "/close_record", data=json.dumps(request_data))
                     payload.sn_ref_id = sn_ref_id
                     payload.sn_record_state = close_in_sn_response["sn_state"]
 

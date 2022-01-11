@@ -1,12 +1,10 @@
 # (c) Copyright IBM Corp. 2019. All Rights Reserved.
 """ResilientHelper Module"""
-import logging
 import base64
-import json
-from bs4 import BeautifulSoup
-import requests
+import logging
+
 import six
-from resilient_circuits import StatusMessage
+from bs4 import BeautifulSoup
 from resilient import SimpleHTTPException
 
 # Handle unicode in 2.x and 3.x
@@ -14,6 +12,8 @@ try:
     unicode
 except NameError:
     unicode = str
+
+CONFIG_DATA_SECTION = "fn_service_now"
 
 # Define an Incident that gets sent to ServiceNow
 class Incident(object):
@@ -430,7 +430,7 @@ class ResilientHelper(object):
             "data": request_data
         }
 
-    def sn_api_request(self, method, endpoint, params=None, data=None, headers=None):
+    def sn_api_request(self, rc, method, endpoint, params=None, data=None, headers=None):
         """Method to handle resquests to our custom APIs in ServiceNow"""
         log = logging.getLogger(__name__)
 
@@ -444,43 +444,23 @@ class ResilientHelper(object):
         headers = self.headers if headers is None else headers
         url = "{0}{1}".format(self.SN_API_URL, endpoint)
 
-        try:
-            log.debug("%s ServiceNow API Request. url: %s headers: %s data: %s", method, url, headers, data)
+        res = rc.execute(
+            method=method,
+            url=url,
+            auth=self.SN_AUTH,
+            headers=headers,
+            params=params,
+            data=data
+        )
 
-            if method is "GET":
-                response = requests.get(url, auth=self.SN_AUTH, headers=headers, params=params)
-                response.raise_for_status()
-                return_value = response
-            
-            elif method is "POST":
-                response = requests.post(url, auth=self.SN_AUTH, headers=headers, data=data)
-                response.raise_for_status()
-                return_value = response.json()['result']
+        log.info("SN REQUEST:\nmethod: %s\nurl: %s\nbody: %s", res.request.method, res.request.url, res.request.body)
 
-            elif method is "PATCH":
-                response = requests.patch(url, auth=self.SN_AUTH, headers=headers, data=data)
-                response.raise_for_status()
-                return_value = response.json()['result']
+        if method is "GET":
+            log.info("SN RESPONSE: %s", res.text)
+            return_value = res
 
-            log.debug("%s Request successful", method)
-
-        except requests.exceptions.Timeout:
-            err_msg = "{0} ServiceNow API Request timed out".format(method)
-            raise ValueError(err_msg)
-
-        except requests.exceptions.TooManyRedirects:
-            err_msg = "Too Many Redirects for: {0}".format(url)
-            raise ValueError(err_msg)
-
-        except requests.exceptions.HTTPError as err:
-            if err.response.content:
-                response_content = json.loads(err.response.content)
-                err_msg = "Error from ServiceNow: {0}".format(response_content["error"]["message"])
-                raise ValueError(err_msg)
-            else:
-                raise ValueError(err)
-
-        except requests.exceptions.RequestException as err:
-            raise ValueError(err)
+        elif method in ("POST", "PATCH"):
+            log.info("SN RESPONSE: %s", res.json())
+            return_value = res.json()["result"]
 
         return return_value

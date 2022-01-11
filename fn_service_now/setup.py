@@ -23,7 +23,7 @@ def snake_to_camel(word):
 setup(
     name='fn_service_now',
     display_name="ServiceNow Functions for IBM Resilient",
-    version="1.0.5",
+    version="2.0.0",
     license="MIT",
     author="IBM Resilient",
     url="https://ibm.com/mysupport",
@@ -33,7 +33,7 @@ setup(
         - Sync notes between a related IBM Resilient Incident/Task and a ServiceNow Record.<br>
         - Send Attachments from an IBM Resilient Incident/Task to a related ServiceNow Record.""",
     install_requires=[
-        "resilient_circuits>=31.0.0",
+        "resilient_circuits>=43.0.0",
         "beautifulsoup4>=4.6.3"
     ],
     packages=find_packages(),

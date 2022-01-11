@@ -5,9 +5,12 @@
    test with: resilient-circuits selftest -l fn_service_now
 """
 
-import logging
 import json
-from fn_service_now.util.resilient_helper import ResilientHelper
+import logging
+
+from fn_service_now.util.resilient_helper import (CONFIG_DATA_SECTION,
+                                                  ResilientHelper)
+from resilient_lib import RequestsCommon
 
 LOG = logging.getLogger(__name__)
 LOG.setLevel(logging.INFO)
@@ -19,15 +22,16 @@ def selftest_function(opts):
     This test uses configs in the app.config file to call the custom '/test_connection' endpoint
     To try and get a status_code=200, else its a failure
     """
-    options = opts.get("fn_service_now", {})
+    app_configs = opts.get(CONFIG_DATA_SECTION, {})
+    rc = RequestsCommon(opts, app_configs)
 
-    res_helper = ResilientHelper(options)
+    res_helper = ResilientHelper(app_configs)
 
     try:
 
         LOG.info("Trying to connect to %s", res_helper.SN_HOST)
 
-        res = res_helper.sn_api_request("GET", "/test_connection")
+        res = res_helper.sn_api_request(rc, "GET", "/test_connection")
 
         status_code = res.status_code
 
