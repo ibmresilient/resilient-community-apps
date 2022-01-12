@@ -8,10 +8,9 @@ import datetime
 import functools
 import logging
 import pytz
-import time
+from threading import Thread, Event
 import traceback
-from circuits import Event, Timer
-from resilient_circuits import ResilientComponent, handler
+from resilient_circuits import ResilientComponent
 from resilient_lib import validate_fields, RequestsCommon
 from resilient import get_client
 from fn_siemplify.lib.jinja_common import JinjaEnvironment
@@ -41,8 +40,9 @@ def poller(named_poller_interval, named_last_poller_time):
         @functools.wraps(func)
         def wrapped(self):
             last_poller_time = getattr(self, named_last_poller_time)
+            exit_event = Event()
 
-            while True:
+            while not exit_event.is_set():
                 try:
                     LOG.info(u"%s polling start.", PACKAGE_NAME)
                     poller_start = datetime.datetime.now()
@@ -58,7 +58,8 @@ def poller(named_poller_interval, named_last_poller_time):
                     last_poller_time = poller_start
 
                     # sleep before the next poller execution
-                    time.sleep(getattr(self, named_poller_interval))
+                    exit_event.wait(getattr(self, named_poller_interval))
+            exit_event.set() # loop complete
 
         return wrapped
     return poller
@@ -71,49 +72,59 @@ class SiemplifyPollerComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(SiemplifyPollerComponent, self).__init__(opts)
-        self.jinja_env = JinjaEnvironment()
-        self.options = opts.get(PACKAGE_NAME, {})
-
-        self._load_options(opts)
-        if self.polling_interval == 0:
-            LOG.info(u"Siemplify poller interval is not configured.  Automated escalation is disabled.")
-            return
-
-        LOG.info(u"Siemplify poller initiated, polling interval %s", self.polling_interval)
-        self.process_cases()
-
-    @handler("reload")
-    def _reload(self, event, opts):
-        """Configuration options have changed, save new values"""
-        self._load_options(opts)
-
-    def _load_options(self, opts):
-        """Read options from config"""
-        self.opts = opts
         self.options = opts.get(PACKAGE_NAME, {})
 
         # Validate required fields in app.config are set
-        required_fields = ["api_key", "base_url"]
-        validate_fields(required_fields, self.options)
+        validate_fields(["api_key", "base_url"], self.options)
 
-        self.polling_interval = int(self.options.get("polling_interval", 0))
-        if not self.polling_interval:
+        if not self._init_env(opts, self.options):
+            LOG.info(u"Siemplify poller interval is not configured.  Automated escalation is disabled.")
             return
 
-        self.timezone = pytz.timezone(self.options.get("polling_timezone", GMT))
-        self.last_poller_time = self._get_last_poller_date(int(self.options.get('polling_lookback', 0)))
+        poller_thread = Thread(target=self.run)
+        poller_thread.daemon = True
+        poller_thread.start()
 
-        rest_client = get_client(self.opts)
+    def _init_env(self, opts, options):
+        """[initialize the environment based on app.config settings]
+
+        Args:
+            opts ([dict]): [all settings include SOAR settings]
+            options ([dict]): [settings specific to Siemplify]
+
+        Returns:
+            [bool]: [True if poller is configured]
+        """
+        self.polling_interval = int(options.get("polling_interval", 0))
+        if not self.polling_interval:
+            return False
+
+        LOG.info(u"Siemplify poller initiated, polling interval %s", self.polling_interval)
+        self.timezone = pytz.timezone(options.get("polling_timezone", GMT))
+        self.last_poller_time = self._get_last_poller_date(int(options.get('polling_lookback', 0)))
+
+        rest_client = get_client(opts)
         self.res_common = ResilientCommon(rest_client)
 
         # Create api client
-        rc = RequestsCommon(self.opts, self.options)
-        self.siemplify_env = SiemplifyCommon(rc, self.options)
+        rc = RequestsCommon(opts, options)
+        self.siemplify_env = SiemplifyCommon(rc, options)
 
+        self.jinja_env = JinjaEnvironment()
+
+        return True
 
     @poller('polling_interval', 'last_poller_time')
-    def process_cases(self, last_poller_time=None):
-        LOG.info(last_poller_time)
+    def run(self, last_poller_time=None):
+        """[Process to query for changes in Siemplify incidents and the cooresponding update SOAR incident]
+           The steps taken are to
+           1) query SOAR for all open incidents associated with Siemplify
+           2) query Siemplify incidents for changes based on these incidents
+           3) determine SOAR actions to take: update incident or close
+
+        Args:
+            last_poller_time ([int]): [time in milliseconds when the last poller ran]
+        """
         # get all open siemplify linked incidents
         soar_incident_list = self.res_common.get_open_siemplify_incidents()
         if not soar_incident_list:
@@ -169,7 +180,7 @@ class SiemplifyPollerComponent(ResilientComponent):
                  len(soar_incident_list), cases_closed, cases_updated)
 
     def _get_last_poller_date(self, polling_lookback):
-        """get the last poller datetime based on a lookback time
+        """get the last poller datetime based on a lookback value
         Args:
             polling_lookback ([number]): # of minutes to lookback
         Returns:
