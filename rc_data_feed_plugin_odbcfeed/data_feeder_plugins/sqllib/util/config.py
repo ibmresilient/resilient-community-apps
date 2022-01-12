@@ -57,7 +57,7 @@ include_attachment_data = false
 # use reload_types to limit the types of objects when reload=true.
 # Ex: incident,task,note,artifact,attachment,<data_table_api_name>
 reload_types=
-# if necessary, specify the supported workspace and the list of feeds associated with it
-# ex: 'workspaceA': ['sqlserver_feed'], 'workspaceB': ['kafka_feed', 'resilient_feed']
+# if necessary, specify the supported workspace (by label, case sensitive) and the list of feeds associated with it
+# ex: 'Default Workspace': ['sqlserver_feed'], 'workspace A': ['kafka_feed', 'resilient_feed']
 workspaces=
 """
