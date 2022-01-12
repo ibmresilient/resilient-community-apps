@@ -155,7 +155,7 @@ class FeedComponent(ResilientComponent):
                 # build the list workspaces to plugin, if present
                 try:
                     self.workspaces = ast.literal_eval("{{ {0} }}".format(self.options.get("workspaces", "")))
-                    LOG.debug("Workspaces: %s", self.workspaces)
+                    LOG.info("Workspaces: %s", self.workspaces)
                 except SyntaxError as e:
                     LOG.error("Unable to use workspaces. Disabling workspace filtering: %s", str(e))
                     LOG.error('Syntax: workspaces="workspaceA": "odbcfeed", "workspaceB": ["odbcfeed", "elasticfeed"]')
