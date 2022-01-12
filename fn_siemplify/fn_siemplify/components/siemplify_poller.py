@@ -5,8 +5,10 @@
 """Function implementation"""
 
 import datetime
+import functools
 import logging
 import pytz
+import time
 import traceback
 from circuits import Event, Timer
 from resilient_circuits import ResilientComponent, handler
@@ -16,10 +18,8 @@ from fn_siemplify.lib.jinja_common import JinjaEnvironment
 from fn_siemplify.lib.resilient_common import ResilientCommon
 from fn_siemplify.lib.siemplify_common import SiemplifyCommon, PACKAGE_NAME
 
-POLLER_CHANNEL = "siemplify_poller"
 TICKET_ID_FIELDNAME = "simplify_case_id"
 
-DEFAULT_POLLER_LOOBACK_MINUTES = 120
 DEFAULT_SOAR_CLOSE_CASE = "templates/soar_close_case.jinja"
 DEFAULT_SOAR_UPDATE_CASE = "templates/soar_update_case.jinja"
 
@@ -28,23 +28,45 @@ GMT = "Etc/GMT"
 DEFAULT_POLLER_SECONDS = 600
 LOG = logging.getLogger(__name__)
 
-class Poll(Event):
-    """A Circuits event to trigger polling"""
-    channels = (POLLER_CHANNEL,)
+def poller(named_poller_interval, named_last_poller_time):
+    """[summary]
 
-class PollCompleted(Event):
-    """A Circuits event to notify that this poll event is completed"""
-    channels = (POLLER_CHANNEL,)
+    Args:
+        named_poller_interval ([str]): [name of instance variable containing the poller interval in seconds]
+        named_last_poller_time ([datetime]): [name of instance variable containing the lookback value in mseconds]
+    """
+    def poller(func):
+        # decorator for running a function forever, passing the ms timestamp of
+        #  when the last poller run to the function it's calling
+        @functools.wraps(func)
+        def wrapped(self):
+            last_poller_time = getattr(self, named_last_poller_time)
 
+            while True:
+                try:
+                    LOG.info(u"%s polling start.", PACKAGE_NAME)
+                    poller_start = datetime.datetime.now()
+                    # function execution with the last poller time in ms
+                    func(self, last_poller_time=int(last_poller_time.timestamp()*1000))
+
+                except Exception as err:
+                    LOG.error(str(err))
+                    LOG.error(traceback.format_exc())
+                finally:
+                    LOG.info(u"%s polling complete.", PACKAGE_NAME)
+                    # set the last poller time for next cycle
+                    last_poller_time = poller_start
+
+                    # sleep before the next poller execution
+                    time.sleep(getattr(self, named_poller_interval))
+
+        return wrapped
+    return poller
 
 class SiemplifyPollerComponent(ResilientComponent):
     """
-    Event-driven polling for Siemplify Incidents
+    poller for Siemplify Incidents
     """
-
-    # This doesn't listen to Action Module, only its internal channel for timer events
-    # But we still inherit from ResilientComponent so we get a REST client etc
-    channel = POLLER_CHANNEL
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
@@ -58,24 +80,12 @@ class SiemplifyPollerComponent(ResilientComponent):
             return
 
         LOG.info(u"Siemplify poller initiated, polling interval %s", self.polling_interval)
-        Timer(self.polling_interval, Poll(), persist=False).register(self)
+        self.process_cases()
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
         self._load_options(opts)
-
-    @handler("Poll")
-    def _poll(self, event):
-        """Handle the timer"""
-        LOG.info(u"Siemplify start polling.")
-        self._escalate()
-
-    @handler("PollCompleted")
-    def _poll_completed(self, event):
-        """Set up the next timer"""
-        LOG.info(u"Siemplify poller complete.")
-        Timer(self.polling_interval, Poll(), persist=False).register(self)
 
     def _load_options(self, opts):
         """Read options from config"""
@@ -91,7 +101,7 @@ class SiemplifyPollerComponent(ResilientComponent):
             return
 
         self.timezone = pytz.timezone(self.options.get("polling_timezone", GMT))
-        self.last_poller_time = self._get_last_poller_date(int(self.options.get('polling_lookback', DEFAULT_POLLER_LOOBACK_MINUTES)))
+        self.last_poller_time = self._get_last_poller_date(int(self.options.get('polling_lookback', 0)))
 
         rest_client = get_client(self.opts)
         self.res_common = ResilientCommon(rest_client)
@@ -101,24 +111,9 @@ class SiemplifyPollerComponent(ResilientComponent):
         self.siemplify_env = SiemplifyCommon(rc, self.options)
 
 
-    def _escalate(self):
-        """ This is the main logic of the poller
-            Search for Siemplify incidents and create associated cases in Resilient SOAR
-        """
-        poller_start = self._get_timestamp()
-        try:
-            # call Siemplify for closed incidents
-            self.process_cases(int(self.last_poller_time.timestamp()*1000))
-        except Exception as err:
-            LOG.error(str(err))
-            LOG.error(traceback.format_exc())
-        finally:
-            # set the last poller time for next cycle
-            self.last_poller_time = poller_start
-            # We always want to reset the timer to wake up, no matter failure or success
-            self.fire(PollCompleted())
-
-    def process_cases(self, last_poller_time):
+    @poller('polling_interval', 'last_poller_time')
+    def process_cases(self, last_poller_time=None):
+        LOG.info(last_poller_time)
         # get all open siemplify linked incidents
         soar_incident_list = self.res_common.get_open_siemplify_incidents()
         if not soar_incident_list:

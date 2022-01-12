@@ -390,7 +390,8 @@ class SiemplifyCommon():
 
         LOG.debug(payload)
 
-        return self._make_call("POST", CASES_MODIFIED_URL, payload)
+        result, err_msg = self._make_call("POST", CASES_MODIFIED_URL, payload)
+        return result if not err_msg else False
 
     def _make_call(self, method, uri, payload=None, ):
 
