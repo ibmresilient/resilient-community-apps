@@ -143,6 +143,11 @@ class FunctionComponent(ResilientComponent):
     def mapEventData(self, event):
         if "eventtime" in event:
             event["eventtime"] = int(float(event["eventtime"]))
+        if "lastpackettime" in event:
+            event["eventtime"] = int(float(event["lastpackettime"]))
+        if "FirstPacketTime" in event:
+            event["eventtime"] = int(float(event["FirstPacketTime"]))
+
 
         return event
 
