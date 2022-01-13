@@ -1,4 +1,4 @@
-// (c) Copyright IBM Corp. 2019. All Rights Reserved.
+// (c) Copyright IBM Corp. 2022. All Rights Reserved.
 
 //Use to convert JavaScript JSON Object to JSON String and back
 var JSON_PARSER = new global.JSON();
@@ -179,7 +179,7 @@ var ResilientAPI = Class.create();
 ResilientAPI.prototype = {
 	type: 'ResilientAPI',
 	
-		initialize: function() {
+	initialize: function() {
 		
 		var hostName, orgName, userEmail, userPassword, snUsername, midServerName, errMsg = null;
 		

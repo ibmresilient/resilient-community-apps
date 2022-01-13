@@ -16,7 +16,7 @@
 		resHelper.addNote(res_reference_id, noteText);
 	}
 	catch (errMsg){
-		current.work_notes = "Failed to add a note in IBM Resilient.\nReason: " + errMsg;
+		current.work_notes = "Failed to add a note in IBM SOAR.\nReason: " + errMsg;
 		gs.error(errMsg);
 	}
 })();
