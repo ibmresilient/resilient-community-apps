@@ -7,6 +7,7 @@ import abc
 import json
 import logging
 import pytz
+from cachetools import cached, TTLCache
 from datetime import datetime
 
 LOG = logging.getLogger(__name__)
@@ -302,6 +303,33 @@ class TypeInfo(object):
 
         return self.org_name_cache
 
+    def get_incident_workspace(self, inc_id):
+        """[get an incident workspace label]
+
+        Args:
+            inc_id ([int]):
+
+        Returns:
+            [str]: [workspace label]
+        """
+        incident = get_incident(self.rest_client_helper, inc_id)
+        if incident:
+            return self.get_workspace_from_id(incident['workspace'])
+
+        return None
+
+    def get_workspace_from_id(self, workspace_id):
+        """ get an incident workspace label from the workspace id """
+
+        incident_type = self.get_type(0) # incident
+        for workspace_value in incident_type['fields']['workspace']['values']:
+            if workspace_value['default']:
+                default_workspace = workspace_value['label']
+            if workspace_id == workspace_value['value']:
+                return workspace_value['label']
+
+        return default_workspace
+
     def get_type_name(self, type_id, pretty=True):
         """
         Gets the type name for the specified type_id value.
@@ -493,18 +521,6 @@ class ActionMessageTypeInfo(TypeInfo):
 
         self.type_info_map = type_info_map
 
-    def get_workspace(self):
-        """[find the workspace associated with an incident]
-
-        Returns:
-            [str]: [incident workspace name or None is not set]
-        """
-        if self.type_info_map.get('incident'):
-            for workspace in self.type_info_map['incident'].get('fields', {}).get('workspace', {}).get('values', {}).values():
-                return workspace.get('label', None)
-
-        return None
-
     def get_select_value(self, raw_value, field):
         if isinstance(raw_value, dict):
             # Handle case where the select item is an object (we want to index into the field def
@@ -598,3 +614,9 @@ class FullTypeInfo(TypeInfo):
             return value_dto['label']
         except StopIteration:
             return None
+
+# cache of incidents based on incident_id
+@cached(cache=TTLCache(maxsize=1000, ttl=60), key=lambda rest_client_helper, inc_id: str(inc_id))
+def get_incident(rest_client_helper, inc_id):
+    """ get an incident based on it's id. Results are cached """
+    return rest_client_helper.get("/incidents/{}".format(inc_id))

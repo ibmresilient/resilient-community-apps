@@ -15,7 +15,7 @@ from resilient_lib import str_to_bool, get_file_attachment
 from resilient import SimpleHTTPException
 
 
-from rc_data_feed.lib.type_info import FullTypeInfo, ActionMessageTypeInfo
+from rc_data_feed.lib.type_info import FullTypeInfo, ActionMessageTypeInfo, get_incident
 from rc_data_feed.lib.feed import FeedContext
 from rc_data_feed.lib.rest_client_helper import RestClientHelper
 
@@ -81,7 +81,7 @@ def send_data(type_info, inc_id, rest_client_helper, payload,\
     :param type_info:
     :param inc_id:
     :param rest_client:
-    :param payload:
+    :param payload of incident, task, artifact, etc.:
     :param feed_outputs:
     :param workspaces: mapping of workspace to feeds
     :param is_deleted: true/false
@@ -111,7 +111,11 @@ def send_data(type_info, inc_id, rest_client_helper, payload,\
 
     # get the incident workspace for this data
     # reload=true will not work as type_info is the wrong object type
-    workspace = type_info.get_workspace() if getattr(type_info, "get_workspace", None) else None
+    if type_name == 'incident':
+        workspace = type_info.get_workspace_from_id(payload['workspace'])
+    else:
+        workspace = type_info.get_incident_workspace(inc_id)
+
     item_sent = False
     for feed_name, feed_output in feed_outputs.items():
         # don't let a failure in one feed break all the rest
@@ -126,7 +130,7 @@ def send_data(type_info, inc_id, rest_client_helper, payload,\
             LOG.error("Traceback %s", error_trace)
 
     if not item_sent:
-        LOG.warning("No workspace found to satisfy data feed for %s (%s)", type_name, payload.get('id'))
+        LOG.debug("No workspace found to satisfy data feed for %s (%s)", type_name, payload.get('id'))
 
 class FeedComponent(ResilientComponent):
     """This component handles initial population of a feed and ongoing
@@ -397,7 +401,7 @@ class Reload(object):
 
         # ensure the incident is found
         try:
-            _incident = self.rest_client_helper.get("/incidents/{}".format(inc_id))
+            _incident = get_incident(self.rest_client_helper, inc_id)
             for object_type in object_type_names:
                 if not self.lookup.get(object_type):
                     LOG.error("Method for synchronization not found: %s", object_type)
