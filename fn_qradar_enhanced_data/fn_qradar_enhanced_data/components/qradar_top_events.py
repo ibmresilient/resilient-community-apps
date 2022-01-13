@@ -144,9 +144,9 @@ class FunctionComponent(ResilientComponent):
         if "eventtime" in event:
             event["eventtime"] = int(float(event["eventtime"]))
         if "lastpackettime" in event:
-            event["eventtime"] = int(float(event["lastpackettime"]))
+            event["lastpackettime"] = int(float(event["lastpackettime"]))
         if "FirstPacketTime" in event:
-            event["eventtime"] = int(float(event["FirstPacketTime"]))
+            event["FirstPacketTime"] = int(float(event["FirstPacketTime"]))
 
 
         return event
