@@ -8,15 +8,11 @@
     "success": {
       "type": "boolean"
     },
-    "reason": {
-      "type": "null"
-    },
+    "reason": {},
     "content": {
       "type": "object"
     },
-    "raw": {
-      "type": "null"
-    },
+    "raw": {},
     "inputs": {
       "type": "object",
       "properties": {
@@ -29,12 +25,7 @@
         "siemplify_case_id": {
           "type": "integer"
         }
-      },
-      "required": [
-        "siemplify_alert_id",
-        "siemplify_case_id",
-        "siemplify_comment"
-      ]
+      }
     },
     "metrics": {
       "type": "object",
@@ -57,24 +48,7 @@
         "timestamp": {
           "type": "string"
         }
-      },
-      "required": [
-        "execution_time_ms",
-        "host",
-        "package",
-        "package_version",
-        "timestamp",
-        "version"
-      ]
+      }
     }
-  },
-  "required": [
-    "content",
-    "inputs",
-    "metrics",
-    "raw",
-    "reason",
-    "success",
-    "version"
-  ]
+  }
 }

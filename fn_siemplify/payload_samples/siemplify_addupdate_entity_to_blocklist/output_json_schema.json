@@ -8,9 +8,7 @@
     "success": {
       "type": "boolean"
     },
-    "reason": {
-      "type": "null"
-    },
+    "reason": {},
     "content": {
       "type": "object",
       "properties": {
@@ -29,35 +27,20 @@
             "type": "string"
           }
         }
-      },
-      "required": [
-        "entityIdentifier",
-        "entityType",
-        "environments",
-        "scope"
-      ]
+      }
     },
-    "raw": {
-      "type": "null"
-    },
+    "raw": {},
     "inputs": {
       "type": "object",
       "properties": {
         "siemplify_artifact_type": {
           "type": "string"
         },
-        "siemplify_environment": {
-          "type": "null"
-        },
+        "siemplify_environment": {},
         "siemplify_artifact_value": {
           "type": "string"
         }
-      },
-      "required": [
-        "siemplify_artifact_type",
-        "siemplify_artifact_value",
-        "siemplify_environment"
-      ]
+      }
     },
     "metrics": {
       "type": "object",
@@ -80,24 +63,7 @@
         "timestamp": {
           "type": "string"
         }
-      },
-      "required": [
-        "execution_time_ms",
-        "host",
-        "package",
-        "package_version",
-        "timestamp",
-        "version"
-      ]
+      }
     }
-  },
-  "required": [
-    "content",
-    "inputs",
-    "metrics",
-    "raw",
-    "reason",
-    "success",
-    "version"
-  ]
+  }
 }

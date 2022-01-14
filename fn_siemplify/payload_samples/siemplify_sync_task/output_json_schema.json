@@ -8,9 +8,7 @@
     "success": {
       "type": "boolean"
     },
-    "reason": {
-      "type": "null"
-    },
+    "reason": {},
     "content": {
       "type": "object",
       "properties": {
@@ -26,18 +24,10 @@
         "owner": {
           "type": "string"
         },
-        "completor": {
-          "type": "null"
-        },
-        "completionComment": {
-          "type": "null"
-        },
-        "completionDateTimeUnixTimeInMs": {
-          "type": "null"
-        },
-        "dueDateUnixTimeInMs": {
-          "type": "null"
-        },
+        "completor": {},
+        "completionComment": {},
+        "completionDateTimeUnixTimeInMs": {},
+        "dueDateUnixTimeInMs": {},
         "creatorUserId": {
           "type": "string"
         },
@@ -59,32 +49,10 @@
         "creationTimeUnixTimeInMs": {
           "type": "integer"
         },
-        "alertIdentifier": {
-          "type": "null"
-        }
-      },
-      "required": [
-        "alertIdentifier",
-        "caseId",
-        "completionComment",
-        "completionDateTimeUnixTimeInMs",
-        "completor",
-        "creationTimeUnixTimeInMs",
-        "creatorUserId",
-        "dueDateUnixTimeInMs",
-        "id",
-        "isFavorite",
-        "modificationTimeUnixTimeInMs",
-        "name",
-        "owner",
-        "priority",
-        "status",
-        "type"
-      ]
+        "alertIdentifier": {}
+      }
     },
-    "raw": {
-      "type": "null"
-    },
+    "raw": {},
     "inputs": {
       "type": "object",
       "properties": {
@@ -97,12 +65,7 @@
         "siemplify_case_id": {
           "type": "integer"
         }
-      },
-      "required": [
-        "siemplify_case_id",
-        "siemplify_soar_task_id",
-        "siemplify_task_assignee"
-      ]
+      }
     },
     "metrics": {
       "type": "object",
@@ -125,24 +88,7 @@
         "timestamp": {
           "type": "string"
         }
-      },
-      "required": [
-        "execution_time_ms",
-        "host",
-        "package",
-        "package_version",
-        "timestamp",
-        "version"
-      ]
+      }
     }
-  },
-  "required": [
-    "content",
-    "inputs",
-    "metrics",
-    "raw",
-    "reason",
-    "success",
-    "version"
-  ]
+  }
 }

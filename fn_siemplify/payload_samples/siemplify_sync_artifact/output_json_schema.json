@@ -8,15 +8,11 @@
     "success": {
       "type": "boolean"
     },
-    "reason": {
-      "type": "null"
-    },
+    "reason": {},
     "content": {
       "type": "object"
     },
-    "raw": {
-      "type": "null"
-    },
+    "raw": {},
     "inputs": {
       "type": "object",
       "properties": {
@@ -26,9 +22,7 @@
         "siemplify_alert_id": {
           "type": "string"
         },
-        "siemplify_environment": {
-          "type": "null"
-        },
+        "siemplify_environment": {},
         "siemplify_artifact_id": {
           "type": "integer"
         },
@@ -38,15 +32,7 @@
         "siemplify_case_id": {
           "type": "integer"
         }
-      },
-      "required": [
-        "siemplify_alert_id",
-        "siemplify_artifact_id",
-        "siemplify_artifact_type",
-        "siemplify_artifact_value",
-        "siemplify_case_id",
-        "siemplify_environment"
-      ]
+      }
     },
     "metrics": {
       "type": "object",
@@ -69,24 +55,7 @@
         "timestamp": {
           "type": "string"
         }
-      },
-      "required": [
-        "execution_time_ms",
-        "host",
-        "package",
-        "package_version",
-        "timestamp",
-        "version"
-      ]
+      }
     }
-  },
-  "required": [
-    "content",
-    "inputs",
-    "metrics",
-    "raw",
-    "reason",
-    "success",
-    "version"
-  ]
+  }
 }

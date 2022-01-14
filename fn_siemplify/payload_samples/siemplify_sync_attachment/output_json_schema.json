@@ -8,9 +8,7 @@
     "success": {
       "type": "boolean"
     },
-    "reason": {
-      "type": "null"
-    },
+    "reason": {},
     "content": {
       "type": "object",
       "properties": {
@@ -50,29 +48,10 @@
         "creationTimeUnixTimeInMs": {
           "type": "integer"
         },
-        "alertIdentifier": {
-          "type": "null"
-        }
-      },
-      "required": [
-        "alertIdentifier",
-        "caseId",
-        "creationTimeUnixTimeInMs",
-        "creatorUserId",
-        "description",
-        "evidenceId",
-        "evidenceName",
-        "evidenceThumbnailBase64",
-        "fileType",
-        "id",
-        "isFavorite",
-        "modificationTimeUnixTimeInMs",
-        "type"
-      ]
+        "alertIdentifier": {}
+      }
     },
-    "raw": {
-      "type": "null"
-    },
+    "raw": {},
     "inputs": {
       "type": "object",
       "properties": {
@@ -88,13 +67,7 @@
         "siemplify_attachment_id": {
           "type": "integer"
         }
-      },
-      "required": [
-        "siemplify_alert_id",
-        "siemplify_attachment_id",
-        "siemplify_case_id",
-        "siemplify_incident_id"
-      ]
+      }
     },
     "metrics": {
       "type": "object",
@@ -117,24 +90,7 @@
         "timestamp": {
           "type": "string"
         }
-      },
-      "required": [
-        "execution_time_ms",
-        "host",
-        "package",
-        "package_version",
-        "timestamp",
-        "version"
-      ]
+      }
     }
-  },
-  "required": [
-    "content",
-    "inputs",
-    "metrics",
-    "raw",
-    "reason",
-    "success",
-    "version"
-  ]
+  }
 }

@@ -8,9 +8,7 @@
     "success": {
       "type": "boolean"
     },
-    "reason": {
-      "type": "null"
-    },
+    "reason": {},
     "content": {
       "type": "object",
       "properties": {
@@ -70,9 +68,7 @@
               "integration": {
                 "type": "string"
               },
-              "executingUser": {
-                "type": "null"
-              },
+              "executingUser": {},
               "playbookName": {
                 "type": "string"
               },
@@ -97,17 +93,7 @@
                   "type": "string"
                 }
               }
-            },
-            "required": [
-              "alertIdentifier",
-              "caseId",
-              "creationTimeUnixTimeInMs",
-              "creatorUserId",
-              "id",
-              "isFavorite",
-              "modificationTimeUnixTimeInMs",
-              "type"
-            ]
+            }
           }
         },
         "alerts": {
@@ -138,18 +124,12 @@
                     "caseId": {
                       "type": "integer"
                     },
-                    "eventId": {
-                      "type": "null"
-                    },
+                    "eventId": {},
                     "alertIdentifier": {
                       "type": "string"
                     },
-                    "eventName": {
-                      "type": "null"
-                    },
-                    "product": {
-                      "type": "null"
-                    },
+                    "eventName": {},
+                    "product": {},
                     "sources": {
                       "type": "array"
                     },
@@ -159,37 +139,16 @@
                     "artificats": {
                       "type": "array"
                     },
-                    "port": {
-                      "type": "null"
-                    },
-                    "outcome": {
-                      "type": "null"
-                    },
+                    "port": {},
+                    "outcome": {},
                     "time": {
                       "type": "string"
                     },
-                    "deviceEventClassId": {
-                      "type": "null"
-                    },
+                    "deviceEventClassId": {},
                     "fields": {
                       "type": "array"
                     }
-                  },
-                  "required": [
-                    "alertIdentifier",
-                    "artificats",
-                    "caseId",
-                    "destinations",
-                    "deviceEventClassId",
-                    "eventId",
-                    "eventName",
-                    "fields",
-                    "outcome",
-                    "port",
-                    "product",
-                    "sources",
-                    "time"
-                  ]
+                  }
                 }
               },
               "entityCards": {
@@ -226,49 +185,28 @@
                           "value": {
                             "type": "string"
                           }
-                        },
-                        "required": [
-                          "name",
-                          "originalName",
-                          "value"
-                        ]
+                        }
                       }
                     }
-                  },
-                  "required": [
-                    "groupName",
-                    "isHighlight",
-                    "items"
-                  ]
+                  }
                 }
               },
               "name": {
                 "type": "string"
               },
-              "product": {
-                "type": "null"
-              },
+              "product": {},
               "startTimeUnixTimeInMs": {
                 "type": "integer"
               },
               "apiSlaExpiration": {
                 "type": "object",
                 "properties": {
-                  "slaExpirationTime": {
-                    "type": "null"
-                  },
-                  "criticalExpirationTime": {
-                    "type": "null"
-                  },
+                  "slaExpirationTime": {},
+                  "criticalExpirationTime": {},
                   "expirationStatus": {
                     "type": "integer"
                   }
-                },
-                "required": [
-                  "criticalExpirationTime",
-                  "expirationStatus",
-                  "slaExpirationTime"
-                ]
+                }
               },
               "isManualAlert": {
                 "type": "boolean"
@@ -315,46 +253,12 @@
                   "startTime": {
                     "type": "string"
                   }
-                },
-                "required": [
-                  "alertGroupIdentifier",
-                  "alertName",
-                  "detectionTime",
-                  "endTime",
-                  "identifier",
-                  "isManualAlert",
-                  "priority",
-                  "ruleGenerator",
-                  "startTime"
-                ]
+                }
               }
-            },
-            "required": [
-              "additionalProperties",
-              "apiSlaExpiration",
-              "creationTimeUnixTimeInMs",
-              "entityCards",
-              "fields",
-              "hasWorkflows",
-              "id",
-              "identifier",
-              "isManualAlert",
-              "modificationTimeUnixTimeInMs",
-              "name",
-              "priority",
-              "product",
-              "productFamilies",
-              "securityEventCards",
-              "sourceSystemName",
-              "startTimeUnixTimeInMs",
-              "ticketId",
-              "workflowsStatus"
-            ]
+            }
           }
         },
-        "caseRecommendations": {
-          "type": "null"
-        },
+        "caseRecommendations": {},
         "tags": {
           "type": "array",
           "items": {
@@ -369,12 +273,7 @@
               "priority": {
                 "type": "integer"
               }
-            },
-            "required": [
-              "caseId",
-              "priority",
-              "tag"
-            ]
+            }
           }
         },
         "insights": {
@@ -389,10 +288,7 @@
             "fields": {
               "type": "array"
             }
-          },
-          "required": [
-            "fields"
-          ]
+          }
         },
         "entityCards": {
           "type": "array"
@@ -400,9 +296,7 @@
         "entities": {
           "type": "array"
         },
-        "description": {
-          "type": "null"
-        },
+        "description": {},
         "canOpenIncident": {
           "type": "boolean"
         },
@@ -445,40 +339,22 @@
         "apiSlaExpiration": {
           "type": "object",
           "properties": {
-            "slaExpirationTime": {
-              "type": "null"
-            },
-            "criticalExpirationTime": {
-              "type": "null"
-            },
+            "slaExpirationTime": {},
+            "criticalExpirationTime": {},
             "expirationStatus": {
               "type": "integer"
             }
-          },
-          "required": [
-            "criticalExpirationTime",
-            "expirationStatus",
-            "slaExpirationTime"
-          ]
+          }
         },
         "apiStageSlaExpiration": {
           "type": "object",
           "properties": {
-            "slaExpirationTime": {
-              "type": "null"
-            },
-            "criticalExpirationTime": {
-              "type": "null"
-            },
+            "slaExpirationTime": {},
+            "criticalExpirationTime": {},
             "expirationStatus": {
               "type": "integer"
             }
-          },
-          "required": [
-            "criticalExpirationTime",
-            "expirationStatus",
-            "slaExpirationTime"
-          ]
+          }
         },
         "status": {
           "type": "integer"
@@ -507,47 +383,9 @@
         "siemplify_case_url": {
           "type": "string"
         }
-      },
-      "required": [
-        "additionalProperties",
-        "alerts",
-        "apiSlaExpiration",
-        "apiStageSlaExpiration",
-        "assignedUserName",
-        "canOpenIncident",
-        "caseRecommendations",
-        "caseSource",
-        "creationTimeUnixTimeInMs",
-        "description",
-        "entities",
-        "entityCards",
-        "environment",
-        "hasIncident",
-        "hasSuspiciousEntity",
-        "hasWorkflow",
-        "id",
-        "insights",
-        "isImportant",
-        "isIncident",
-        "isMerged",
-        "isOverflowCase",
-        "isTestCase",
-        "isTouched",
-        "modificationTimeUnixTimeInMs",
-        "priority",
-        "productFamilies",
-        "siemplify_case_url",
-        "stage",
-        "status",
-        "summary",
-        "tags",
-        "title",
-        "wallData"
-      ]
+      }
     },
-    "raw": {
-      "type": "null"
-    },
+    "raw": {},
     "inputs": {
       "type": "object",
       "properties": {
@@ -575,17 +413,7 @@
         "siemplify_case_id": {
           "type": "integer"
         }
-      },
-      "required": [
-        "siemplify_alert_id",
-        "siemplify_assigned_user",
-        "siemplify_case_id",
-        "siemplify_environment",
-        "siemplify_incident_id",
-        "siemplify_sync_artifacts",
-        "siemplify_sync_attachments",
-        "siemplify_sync_comments"
-      ]
+      }
     },
     "metrics": {
       "type": "object",
@@ -608,24 +436,7 @@
         "timestamp": {
           "type": "string"
         }
-      },
-      "required": [
-        "execution_time_ms",
-        "host",
-        "package",
-        "package_version",
-        "timestamp",
-        "version"
-      ]
+      }
     }
-  },
-  "required": [
-    "content",
-    "inputs",
-    "metrics",
-    "raw",
-    "reason",
-    "success",
-    "version"
-  ]
+  }
 }
