@@ -165,11 +165,12 @@ if [ "$BUILD_TYPE" == "DEV" ] ; then
     echo "$artifactory_path" >> $TRAVIS_BUILD_DIR/PATH_APP_ZIP.txt
 fi
 
-config_path= "$TRAVIS_BUILD_DIR/.environments"
+# config_path= "$TRAVIS_BUILD_DIR/.environments/"
 
 if [ "$UPLOAD_ZIP" == "UPLOAD" ] ; then
     print_msg "Uploading $PACKAGE_NAME to app host"
-    
-    python $SCRIPTS_DIR/upload_and_install_build_to_apphost.py app_zip_path config_path PACKAGE_NAME
+    ls /home/travis/build/Resilient/resilient-community-apps/.environments/fn_whois/
+
+    python $SCRIPTS_DIR/upload_and_install_build_to_apphost.py app_zip_path "$TRAVIS_BUILD_DIR/.environments" $PACKAGE_NAME
 
 fi

@@ -1,23 +1,13 @@
 import resilient
 import json
-import re
 import os,sys
-import argparse
 import time
-import gnupg
 from requests_toolbelt import MultipartEncoder
 from resilient.co3base import BasicHTTPException, ensure_unicode
-from requests.auth import HTTPBasicAuth
-from os.path import exists
-import zipfile
 
-args = sys.argv
-
-assert len(args) == 3
-
-ZIP_PATH = args[0]
-CONFIG_PATH = args[1]
-PACKAGE_NAME = args[2]
+ZIP_PATH = sys.argv[1]
+CONFIG_PATH = sys.argv[2]
+PACKAGE_NAME = sys.argv[3]
 
 def main():
     res_client = setup()
@@ -41,7 +31,7 @@ def main():
 
 def setup():
     soar_config_file = '{}/app.config'.format(CONFIG_PATH)
-    integration_config_file = '{}/{}/{}.config'.format(CONFIG_PATH, PACKAGE_NAME, PACKAGE_NAME)
+    integration_config_file = '/home/travis/build/Resilient/{}.config'.format(PACKAGE_NAME)
 
     if not os.path.exists(soar_config_file):
         print("The app.config with the SOAR credentials is missing. Exiting now")
