@@ -22,6 +22,9 @@ env:
     - BUILD_DEV_APP=$([[ "$TRAVIS_COMMIT_MESSAGE" != *"$KEYWORD_BUILD_DEV_APP"* ]]; echo $?)
     - BUILD_TYPE=`if [ $BUILD_DEV_APP == 1 ]; then echo "DEV"; else echo "MAIN"; fi`
 
+    - KEYWORD_UPLOAD_APP_TO_APPHOST="[deploy-apphost]"
+    - UPLOAD_APP_TO_APPHOST=$([[ "$TRAVIS_COMMIT_MESSAGE" != *"$KEYWORD_UPLOAD_APP_TO_APPHOST"* ]]; echo $?)
+
     - KEYWORD_DEV_DEPS='[dev-deps]'
     - USE_ARTIFACTORY_DEPS=`[[ "$TRAVIS_COMMIT_MESSAGE" != *"$KEYWORD_DEV_DEPS"* ]]; echo $?`
     - PYPI_INDEX_TO_USE=`if [ $USE_ARTIFACTORY_DEPS == 1 ]; then echo "$ARTIFACTORY_PYPI_INDEX"; else echo "$PYPI_INDEX"; fi`
@@ -193,12 +196,20 @@ matrix:
         - pip install resilient-sdk -i $PYPI_INDEX_TO_USE
       deploy:
         - provider: script
-          script: .scripts/build_image_and_app_zip.sh "$PACKAGE_NAME" "DEV" "$PYPI_INDEX_TO_USE";
+          install: pip install python-gnupg
+          script: .scripts/build_image_and_app_zip.sh "$PACKAGE_NAME" "DEV" "$PYPI_INDEX_TO_USE" "UPLOAD";
           on:
             all_branches: true
             condition: "$BUILD_DEV_APP = 1"
+            condition: "$UPLOAD_APP_TO_APPHOST = 1"
         - provider: script
-          script: .scripts/build_image_and_app_zip.sh "$PACKAGE_NAME" "MAIN" "$PYPI_INDEX_TO_USE";
+          script: .scripts/build_image_and_app_zip.sh "$PACKAGE_NAME" "DEV" "$PYPI_INDEX_TO_USE" "DON'T UPLOAD";
+          on:
+            all_branches: true
+            condition: "$BUILD_DEV_APP = 1"
+            condition: "$UPLOAD_APP_TO_APPHOST != 1"
+        - provider: script
+          script: .scripts/build_image_and_app_zip.sh "$PACKAGE_NAME" "MAIN" "$PYPI_INDEX_TO_USE" "DON'T UPLOAD";
           on:
             branch: master
       after_deploy:
