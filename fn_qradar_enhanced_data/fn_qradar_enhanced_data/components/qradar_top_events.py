@@ -141,13 +141,10 @@ class FunctionComponent(ResilientComponent):
             yield FunctionError()
 
     def mapEventData(self, event):
-        if "eventtime" in event:
-            event["eventtime"] = int(float(event["eventtime"]))
-        if "lastpackettime" in event:
-            event["lastpackettime"] = int(float(event["lastpackettime"]))
-        if "FirstPacketTime" in event:
-            event["FirstPacketTime"] = int(float(event["FirstPacketTime"]))
 
+        for key in event.keys():
+            if key in ["eventtime", "lastpackettime", "FirstPacketTime", "sourcebytes", "sourcepackets", "destinationbytes", "destinationpackets"]:
+                event[key] = int(float(event[key]))
 
         return event
 
