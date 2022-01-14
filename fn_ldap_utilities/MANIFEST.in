@@ -11,4 +11,4 @@ recursive-include payload_samples/*/ *.json
 include tox.ini
 recursive-include tests/ *
 
-exclude *.bak
+global-exclude *.bak

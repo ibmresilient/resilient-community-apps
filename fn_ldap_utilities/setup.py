@@ -25,6 +25,7 @@ setup(
     license='MIT',
     author='IBM SOAR',
     author_email='',
+    url='https://github.com/ibmresilient/resilient-community-apps',
     display_name="LDAP Utilities",
     description="LDAP Utilities for IBM SOAR",
     long_description="""Perform several operations on LDAP Server including

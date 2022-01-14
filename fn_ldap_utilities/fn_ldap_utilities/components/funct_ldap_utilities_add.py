@@ -37,7 +37,7 @@ class FunctionComponent(AppFunctionComponent):
             helper = LDAPUtilitiesHelper(self.app_configs._asdict())
 
             try:
-                # Try converting input to an array
+                # Try converting input to an dictionary
                 attribute_list = literal_eval("{{ {0} }}".format(inputs.get("ldap_attribute_name_values"))) \
                     if inputs.get("ldap_attribute_name_values") else {}
             except Exception:

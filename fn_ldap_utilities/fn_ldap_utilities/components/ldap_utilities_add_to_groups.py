@@ -44,7 +44,7 @@ class FunctionComponent(ResilientComponent):
               input_ldap_multiple_group_dn = literal_eval(input_ldap_multiple_group_dn_asString)
 
             except Exception:
-              raise ValueError("""input_ldap_multiple_user_dn and input_ldap_multiple_group_dn must be a string repersenation of an array e.g. "['dn=Accounts Group,dc=example,dc=com', 'dn=IT Group,dc=example,dc=com']" """)
+              raise ValueError("""input_ldap_multiple_user_dn and input_ldap_multiple_group_dn must be a string representation of an array e.g. "['dn=Accounts Group,dc=example,dc=com', 'dn=IT Group,dc=example,dc=com']" """)
 
             # Instansiate LDAP Server and Connection
             c = helper.get_ldap_connection()
