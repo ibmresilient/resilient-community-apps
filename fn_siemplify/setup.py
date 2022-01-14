@@ -26,10 +26,10 @@ setup(
     version="1.0.0",
     license="MIT",
     author="IBM QRadar SOAR",
-    author_email="you@example.com",
+    author_email="",
     url="https://github.com/ibm/resilient/resilient-community-apps",
     description="Siemplify App for IBM QRadar SOAR",
-    long_description="""Bi-directional synchronization with Siemplify Cases, Entities, Attachments and Insights""",
+    long_description="""Bi-directional synchronization with Siemplify Cases, Entities, Attachments and Insights. Additional capabilities exist to list and add entries to the Siemplify Blocklist and Custom List.""",
     install_requires=[
         "resilient-circuits>=43.0.0",
         "resilient_lib",
