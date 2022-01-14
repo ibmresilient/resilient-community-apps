@@ -1,0 +1,9 @@
+{
+  "success": false,
+  "inputs": {
+    "sn_query_field": "email",
+    "sn_table_name": "sys_user",
+    "sn_query_value": "ibmresilient"
+  },
+  "sys_id": {}
+}

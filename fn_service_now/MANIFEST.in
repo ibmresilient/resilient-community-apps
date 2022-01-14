@@ -1,8 +1,14 @@
 include README.md
 include Dockerfile
 include entrypoint.sh
-include fn_service_now/util/*
+recursive-include fn_service_now/util *
+recursive-include docs *
 include fn_service_now/LICENSE
 include appx_docs/*.pdf
+include icons/*.png
+include apikey_permissions.txt
+recursive-include payload_samples/*/ *.json
+include tox.ini
+recursive-include tests/ *
 
-exclude *.bak
+global-exclude *.bak

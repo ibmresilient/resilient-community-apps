@@ -1,0 +1,44 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {
+      "type": "object"
+    },
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "incident_id": {
+          "type": "integer"
+        },
+        "task_id": {
+          "type": "object"
+        },
+        "sn_res_id": {
+          "type": "string"
+        },
+        "sn_record_state": {
+          "type": "integer"
+        },
+        "sn_close_notes": {
+          "type": "string"
+        },
+        "sn_close_code": {
+          "type": "string"
+        },
+        "sn_close_work_note": {
+          "type": "string"
+        }
+      }
+    },
+    "sn_ref_id": {
+      "type": "string"
+    },
+    "sn_record_state": {
+      "type": "string"
+    }
+  }
+}

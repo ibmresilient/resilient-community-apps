@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "success": {
+      "type": "boolean"
+    },
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "sn_query_field": {
+          "type": "string"
+        },
+        "sn_table_name": {
+          "type": "string"
+        },
+        "sn_query_value": {
+          "type": "string"
+        }
+      }
+    },
+    "sys_id": {
+      "type": "object"
+    }
+  }
+}

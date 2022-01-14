@@ -1,0 +1,22 @@
+{
+  "success": true,
+  "reason": {},
+  "inputs": {
+    "incident_id": 2114,
+    "task_id": 74,
+    "sn_init_work_note": "Record created from IBM Resilient Task ID: 74. Associated IBM Resilient Incident ID: 2114.\n\nSub task of 2114",
+    "sn_optional_fields": {
+      "short_description": "RES-2114-74: first task",
+      "assignment_group": "8a4dde73c6112278017a6a4baf547aa7",
+      "caller_id": false
+    }
+  },
+  "row_id": 25,
+  "res_id": "RES-2114-74",
+  "res_link": "https://9.30.213.40/#incidents/2114?task_id=74",
+  "sn_ref_id": "SIR0010021",
+  "sn_sys_id": "3929d6951bc905103351ca2b234bcbb3",
+  "sn_record_state": "Analysis",
+  "sn_record_link": "https://ven02807.service-now.com/nav_to.do?uri=sn_si_incident.do?sysparm_query=number=SIR0010021",
+  "sn_time_created": 1642108044682
+}

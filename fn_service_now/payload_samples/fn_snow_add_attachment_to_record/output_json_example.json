@@ -1,0 +1,12 @@
+{
+  "success": true,
+  "inputs": {
+    "attachment_id": 1,
+    "incident_id": 2113,
+    "task_id": {}
+  },
+  "res_id": "RES-2113",
+  "sn_ref_id": "SIR0010018",
+  "attachment_name": "new-attachment.png",
+  "sn_attachment_sys_id": "79381e551bc905103351ca2b234bcb0a"
+}

@@ -1,0 +1,13 @@
+{
+  "success": true,
+  "inputs": {
+    "incident_id": 2116,
+    "task_id": {},
+    "sn_res_id": {},
+    "sn_update_fields": {
+      "business_criticality": 1
+    }
+  },
+  "sn_ref_id": "SIR0010023",
+  "sn_time_updated": 1642187749465
+}
