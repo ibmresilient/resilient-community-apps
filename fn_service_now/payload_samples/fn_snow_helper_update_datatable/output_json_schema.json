@@ -1,3 +1,29 @@
 {
-    
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "success": {
+      "type": "boolean"
+    },
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "incident_id": {
+          "type": "integer"
+        },
+        "task_id": {
+          "type": "object"
+        },
+        "sn_resilient_status": {
+          "type": "string"
+        }
+      }
+    },
+    "res_id": {
+      "type": "string"
+    },
+    "row_id": {
+      "type": "integer"
+    }
+  }
 }

@@ -1,3 +1,10 @@
 {
-    
+  "success": true,
+  "inputs": {
+    "incident_id": 2116,
+    "task_id": {},
+    "sn_resilient_status": "C"
+  },
+  "res_id": "RES-2116",
+  "row_id": 27
 }
