@@ -20,11 +20,11 @@
 			"3": "Low"
 		};
 
-		//SIR tables call "severity" "business_criticality",
-		//while normal incident tables call it "severity"
+		//SIR tables call severity "business_criticality",
+		//while INC tables call it "severity"
 		//NOTE: the order of this check is important because
 		//the SIR table has a "severity" value that is never used...
-		if (record.getValue("business_criticality") != null) {
+		if (record.getTableName() == "sn_si_incident") {
 			severityMapped = resSeverityMap[record.getValue("business_criticality").toString()];
 		} else {
 			severityMapped = resSeverityMap[record.getValue("severity").toString()];

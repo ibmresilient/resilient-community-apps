@@ -1,4 +1,4 @@
-// (c) Copyright IBM Corp. 2022. All Rights Reserved.
+// (c) Copyright IBM Corp. 2019. All Rights Reserved.
 
 /////////////////
 /// Condition ///
@@ -16,14 +16,14 @@ function promptForResilientIncidentId(){
 	re = /^[0-9]*$/;
 	
 	//Prompt user to enter incidentId
-	incidentId = prompt("Enter SOAR Incident ID to add task to:");
+	incidentId = prompt("Enter Resilient Incident ID to add task to:");
 
 	// IncidentId will be null if the user clicks cancel
 	if(incidentId != null){
 
 		//Validate incidentId
 		if(!re.test(incidentId)){
-			alert("ERROR: "+incidentId+" is NOT a valid SOAR Incident ID");
+			alert("ERROR: "+incidentId+" is NOT a valid Resilient Incident ID");
 		}
 		
 		else{
@@ -42,13 +42,13 @@ function promptForResilientIncidentId(){
 			ga.getXML();
 
 			//Call this UI Action and skip the "onclick" function 
-			gsftSubmit(null, g_form.getFormElement(), "create_new_ibm_soar_task");
+			gsftSubmit(null, g_form.getFormElement(), "inc_createResilientTask");
 		}
 	}
 }
 
 if(typeof window == "undefined"){
-	//This is called from line 45 gsftSubmit... because Action Name == create_new_ibm_soar_task
+	//This is called from line 45 gsftSubmit... because Action Name == inc_createResilientTask
 	action.setRedirectURL(current);
-	gs.addInfoMessage("Creating a Task in SOAR from this record");
+	gs.addInfoMessage("Creating a Task in Resilient from this record");
 }
