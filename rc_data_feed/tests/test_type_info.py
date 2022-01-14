@@ -475,7 +475,6 @@ class TestDataFeederSyncIncidents:
         (None, {'input_type': 'text'}, "abc", "abc"),
         (None, {'input_type': 'bool'}, False, False),
         (None, {'input_type': 'text'}, ["abc","def"], "abc, def"),
-        (None, {'input_type': 'text'}, ["abc","def"], "abc, def"),
         (None, {'input_type': 'textarea'}, {"content": "abc"}, "abc"),
         (None, {'input_type': 'number'}, {"id": 5}, 5),
         (None, {'input_type': 'datepicker'}, 1607107208000, "2020-12-04T18:40:08"),
