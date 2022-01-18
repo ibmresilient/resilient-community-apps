@@ -14,7 +14,15 @@
 			"On Hold": "yellow",
 			"Resolved": "red",
 			"Closed": "red",
-			"Canceled": "red"
+			"Canceled": "red",
+
+			// colors for security incidents states
+			"Draft": "green",
+			"Analysis": "orange",
+			"Contain": "yellow",
+			"Eradicate": "yellow",
+			"Recover": "yellow",
+			"Review": "red"
 		};
 		
 		//Get the required values
@@ -45,7 +53,7 @@
 		}
 	}
 	catch(errMsg){
-		current.work_notes = "Failed to update state in IBM Resilient.\nReason: " + errMsg;
+		current.work_notes = "Failed to update state in IBM SOAR.\nReason: " + errMsg;
 		gs.error(errMsg);
 	}
 })();

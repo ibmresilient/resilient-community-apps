@@ -42,13 +42,13 @@ function promptForResilientIncidentId(){
 			ga.getXML();
 
 			//Call this UI Action and skip the "onclick" function 
-			gsftSubmit(null, g_form.getFormElement(), "create_new_ibm_resilient_task");
+			gsftSubmit(null, g_form.getFormElement(), "inc_createResilientTask");
 		}
 	}
 }
 
 if(typeof window == "undefined"){
-	//This is called from line 45 gsftSubmit... because Action Name == create_new_ibm_resilient_task
+	//This is called from line 45 gsftSubmit... because Action Name == inc_createResilientTask
 	action.setRedirectURL(current);
 	gs.addInfoMessage("Creating a Task in Resilient from this record");
 }

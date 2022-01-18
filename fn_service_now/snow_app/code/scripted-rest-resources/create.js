@@ -1,4 +1,4 @@
-// (c) Copyright IBM Corp. 2019. All Rights Reserved.
+// (c) Copyright IBM Corp. 2022. All Rights Reserved.
 
 (function process(/*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
 	
@@ -59,7 +59,7 @@
 				record.setValue(field.name, field.value);
 			}
 			else{
-				gs.warning(field.name + " is not a valid field in the " + tableName + " table!");
+				gs.warn(field.name + " is not a valid field in the " + tableName + " table!");
 			}
 		}
 	}
