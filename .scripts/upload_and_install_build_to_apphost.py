@@ -16,10 +16,9 @@ def main():
         print("FAILURE!")
         sys.exit()
 
-    upload_all_apps(res_client, app_directory=ZIP_PATH)
+    upload_all_apps(res_client, app_path=ZIP_PATH)
     install_all_apps(res_client)
     deploy_all_apps(res_client)
-    # download_all_app_configurations(res_client, CONFIG_PATH)
     upload_all_app_configurations(res_client)
     
     os.remove('{}/complete_app.config'.format(CONFIG_PATH))
@@ -43,7 +42,8 @@ def setup():
 
     config_file_path='{}/complete_app.config'.format(CONFIG_PATH)
 
-    filenames = [soar_config_file, integration_config_file]
+    # combines the two app configs into a complete usable one
+    filenames = [integration_config_file, soar_config_file]
     with open(config_file_path, 'w') as outfile:
         for fname in filenames:
             with open(fname) as infile:
@@ -53,16 +53,44 @@ def setup():
     resilient_parser = resilient.ArgumentParser(config_file=config_file_path)
     opts = resilient_parser.parse_known_args()[0]
 
+    # creates variables for the opts.keys()
+    # check to see if we are using env variables and change the format to be usable here
     if "email" in opts.keys():
         email = opts["email"]
+        if email[:2] == "{{" and email[-2:] == "}}":
+            email = email.replace("{", "")
+            email = email.replace("}", "") 
+            email = os.environ.get(email)
     if "password" in opts.keys():
         password = opts["password"]
+        if password[:2] == "{{" and password[-2:] == "}}":
+            password = password.replace("{", "")
+            password = password.replace("}", "") 
+            password = os.environ.get(password)
     if "api_key_id" in opts.keys():
-        api_key_id = opts["api_key_id"]  
-    if "api_key_secret" in opts.keys():   
-        api_key_secret = opts["api_key_secret"]     
-    if "host" in opts.keys:
+        if opts["api_key_id"] is not None: 
+            api_key_id = opts["api_key_id"]
+            if api_key_id[:2] == "{{" and api_key_id[-2:] == "}}":
+                api_key_id = api_key_id.replace("{", "")
+                api_key_id = api_key_id.replace("}", "") 
+                api_key_id = os.environ.get(api_key_id)
+        else:
+            api_key_id = None
+    if "api_key_secret" in opts.keys(): 
+        if opts["api_key_secret"] is not None:
+            api_key_secret = opts["api_key_secret"]
+            if api_key_secret[:2] == "{{" and api_key_secret[-2:] == "}}":
+                api_key_secret = api_key_secret.replace("{", "")
+                api_key_secret = api_key_secret.replace("}", "") 
+                api_key_secret = os.environ.get(api_key_secret) 
+        else:
+            api_key_secret = None
+    if "host" in opts.keys():
         host = opts["host"]
+        if host[:2] == "{{" and host[-2:] == "}}":
+            host = host.replace("{", "")
+            host = host.replace("}", "") 
+            host = os.environ.get(host) 
     if "org" in opts.keys():
         org = opts["org"]
     if "cafile" in opts.keys():
@@ -90,8 +118,6 @@ def setup():
     # and prevent the "/apps" API endpoint from being called (since it is not accessible)
     res_client.platform = "SOAR"
 
-    
-    
     if email is not None and password is not None:
         session = res_client.connect(email, password)
     elif api_key_id is not None and api_key_secret is not None:
@@ -276,51 +302,42 @@ def create_AppHost_pairing(res_client,appHost_name="new Host", appHost_descripti
 ########################################
 ### upload, install and deploy apps
 ########################################
-def upload_all_apps(res_client, app_directory):
-    if app_directory is None:
-        print("Please include an app directory!")
+def upload_all_apps(res_client, app_path):
+    if app_path is None:
+        print("Problem getting the app file path.")
         return
 
     if res_client.use_api_key is True:
         print("The client is authenticated via API keys. The requested function uses the '/apps' API endpoint, which is not enabled with this authentication method!")
         return
 
-
-    # get a list of all zip files
-    zipped_apps = [file for file in os.listdir(app_directory) if file.endswith(".zip")]
-
-
     apps = res_client.get("/apps")
     installed_app_names = []
     for app in apps["entities"]:
         installed_app_names.append(app["name"])
 
-    # for each zip file do
-    for app_name in zipped_apps:
-        # apps downloaded from the X-Force Exchange have the following naming convention:
-        # app-#NAME#-#VERSION#.zip e.g.: app-fn_outbound_email-1.1.0.zip 
-        # we try to extract the #NAME# and check if this app is already installed.
-        # If we don't succeed, the upload will softfail later with a bad request.
-        parts = app_name.split("-")
-        # if there are more than 3 elements in parts, the app name includes hyphens
-        # we therefore concat all but the first and the last element
-        if len(parts)>=3:
-            extracted_name = "-".join(parts[1:-1])
-        elif len(parts)<3:
-            # the file name contains less than 2 hyphens, just continue
-            extracted_name = ""
+    # app downloaded from the X-Force Exchange have the following naming convention:
+    # app-#NAME#-#VERSION#.zip e.g.: app-fn_outbound_email-1.1.0.zip 
+    # we try to extract the #NAME# and check if this app is already installed.
+    # If we don't succeed, the upload will softfail later with a bad request.
+    parts = app_path.split("-")
+    # if there are more than 3 elements in parts, the app name includes hyphens
+    # we therefore concat all but the first and the last element
+    if len(parts)>=3:
+        extracted_name = "-".join(parts[1:-1])
+    elif len(parts)<3:
+        # the file name contains less than 2 hyphens, just continue
+        extracted_name = ""
 
-        if extracted_name in installed_app_names:
-            print("The app {} is already uploaded!".format(extracted_name))
-            continue
+    if extracted_name in installed_app_names:
+        print("The app {} is already uploaded!".format(extracted_name))
 
-        print("Begin upload: {}".format(app_name))
+    print("Begin upload: {}".format(app_path))
 
-        try: 
-            app = res_client.post_attachment(uri="/apps", filepath=app_directory+'/'+app_name)           
-        except resilient.co3.SimpleHTTPException as e:
-            print(e)
-            continue
+    try: 
+        app = res_client.post_attachment(uri="/apps", filepath=app_path)           
+    except resilient.co3.SimpleHTTPException as e:
+        print(e)
 
 def install_all_apps(res_client):
     if res_client.use_api_key is True:
@@ -431,8 +448,9 @@ def track_deployment(res_client, deployment_list):
     # default cutoff time for is 10 minutes
     # other values can be supplied via the "--deployment_cutoff_seconds" argument
     deployment_cutoff_seconds = 10*60
-    if args.deployment_cutoff_seconds is not None:
-        deployment_cutoff_seconds = args.deployment_cutoff_seconds
+
+    # if args.deployment_cutoff_seconds is not None:
+    #     deployment_cutoff_seconds = args.deployment_cutoff_seconds
 
     deployment_status = {}
     print("Started deployment of the following apps:", deployment_list)
@@ -458,50 +476,12 @@ def track_deployment(res_client, deployment_list):
     print("This operation was running for {:.2f} seconds.".format(time.time()-start_time))
     if len(deployment_list) > 0: 
         print("The deployment of the following apps was not completed in time:", deployment_list)
+    else:
+        print("SUCCESS!")
 
 ########################################
-### get and set config files for apps
+### set config files for apps
 ########################################
-
-# saves all config strings in the specified folder
-# will be saved as "app_name.config"
-# Changed to be done in setup
-'''
-def download_all_app_configurations(res_client, config_dir = "..\.environments\\"):
-    if res_client.use_api_key is True:
-        print("The client is authenticated via API keys. The requested function uses the '/apps' API endpoint, which is not enabled with this authentication method!")
-        return
-
-    if config_dir is None:
-        config_dir = "."
-    if not config_dir.endswith("/"):
-        config_dir = config_dir + "/"
-
-    apps = res_client.get("/apps")
-    for app in apps["entities"]:
-        app_name = app["current_installation"]["executables"][0]["name"]
-
-        app_installment = base_get(res_client, "/services_proxy/manager/tenants/{}/apps/{}".format(res_client.tenant_id,app_name))
-
-
-        # All files associated with the app            
-        file_ids = app_installment["file_ids"]
-
-        # search for the app.config file and download the content 
-        for file_id in file_ids:
-
-            f = base_get(res_client, "/services_proxy/manager/app_files/{}".format(file_id))
-            
-            if f["name"] != "app.config.gpg":
-                continue
-            else:
-                config_string = f["content"]
-                break
-
-        
-        with open(config_dir+app_name+".config.gpg","w") as f:
-            f.write(config_string)
-'''
 
 def upload_all_app_configurations(res_client, config_dir = CONFIG_PATH):
     if res_client.use_api_key is True:
@@ -513,7 +493,7 @@ def upload_all_app_configurations(res_client, config_dir = CONFIG_PATH):
     
     if not config_dir.endswith("/"):
         config_dir = config_dir + "/"
-    config_file = ['{}/complete_app.config'.format(CONFIG_PATH)]
+    config_file = '{}/complete_app.config'.format(CONFIG_PATH)
 
     with open(config_file) as f:
         config_string = f.read()
@@ -555,7 +535,6 @@ def upload_all_app_configurations(res_client, config_dir = CONFIG_PATH):
 
                     base_put(res_client, uri="/services_proxy/manager/app_files/{}".format(file_id),
                                             payload=f)
-                    print("SUCCESS!")
                     break
     track_deployment(res_client, changed_apps)
 

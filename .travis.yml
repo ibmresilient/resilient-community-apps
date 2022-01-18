@@ -200,7 +200,6 @@ matrix:
           script: .scripts/build_image_and_app_zip.sh "$PACKAGE_NAME" "DEV" "$PYPI_INDEX_TO_USE" "UPLOAD";
           on:
             all_branches: true
-            condition: "$BUILD_DEV_APP = 1"
             condition: "$UPLOAD_APP_TO_APPHOST = 1"
         - provider: script
           script: .scripts/build_image_and_app_zip.sh "$PACKAGE_NAME" "DEV" "$PYPI_INDEX_TO_USE" "DON'T UPLOAD";
@@ -236,5 +235,5 @@ matrix:
         - REPO_TO_PUSH=$(echo $TRAVIS_TAG | cut -d "/" -f 4)
         - .scripts/rebuild_images.sh "$PYTHON_LIBRARIES_VERSION" "$IMAGE_TO_REBUILD" "$REPO_TO_PUSH"
 before_install:
-- openssl aes-256-cbc -K $encrypted_1abb9c969281_key -iv $encrypted_1abb9c969281_iv -in /home/travis/build/Resilient/resilient-community-apps/.environments/fn_whois/fn_whois.config.enc -out /home/travis/build/Resilient/fn_whois.config -d
+- openssl aes-256-cbc -K $encrypted_1abb9c969281_key -iv $encrypted_1abb9c969281_iv -in .environments/fn_whois/fn_whois.config.enc -out /home/travis/build/Resilient/fn_whois.config -d
   
