@@ -28,6 +28,7 @@ class ResilientCommon():
         self.rest_client = rest_client
 
     def get_open_siemplify_incidents(self):
+        # find all open incidents which are associated with Siemplify cases
         query = {
             "filters": [{
                 "conditions": [
@@ -54,11 +55,11 @@ class ResilientCommon():
 
 
     def find_incident(self, siemplify_case_id):
-        """Find a Resilient incident which contains a custom field associated with a Sentinel
+        """Find a Resilient incident which contains a custom field associated with a siemplify
              incident
 
         Args:
-            siemplify_case_id ([str]): [sentinel incident id]
+            siemplify_case_id ([str]): [siemplify incident id]
 
         Returns:
             [dict]: [API results of the first incident found]
@@ -83,7 +84,7 @@ class ResilientCommon():
         return r_incidents[0] if r_incidents else None
 
     def _query_incidents(self, query):
-
+        # run a query to find incident(s) which match the query string
         query_uri = "/incidents/query?return_level=normal"
 
         try:
@@ -96,7 +97,7 @@ class ResilientCommon():
     def create_incident(self, incident_payload):
         """
         Create a new Resilient incident by rendering a jinja2 template
-        :param sentinel_incident: sentinel_incident (json object)
+        :param incident_payload: fields to use for creating a SOAR incident (json object)
 
         :return: Resilient incident
         """
@@ -112,9 +113,8 @@ class ResilientCommon():
               during the close process
 
         Args:
-            incident ([dict]): [Resilient incident data]
-            sentinel_incident ([dict]): [Sentinel incident data]
-            incident_close_template ([str]): [path to template to apply for close operation]
+            incident_id ([int]): [SOAR incident id]
+            incident_payload ([dict]): [incident data to update for close]
 
         Raises:
             IntegrationError: [catch any errors]
@@ -133,7 +133,7 @@ class ResilientCommon():
     def update_incident(self, incident_id, incident_payload):
         """
         Update a Resilient incident by rendering a jinja2 template
-        :param sentinel_incident: Secureworks CTP sentinel_incident (json object)
+        :param incident_payload: inciednt fields to update (json object)
         :return: Resilient incident
         """
 
@@ -174,16 +174,17 @@ class ResilientCommon():
         except Exception as err:
             raise IntegrationError(err)
 
-    def create_incident_comment(self, incident_id, sentinel_comment_id, note):
+    def create_incident_comment(self, incident_id, siemplify_comment_id, note):
         """
         Add a comment to the specified SOAR Incident by ID
         :param incident_id:  SOAR Incident ID
+        :param siemplify_comment_id: siemplify comment id (or None)
         :param note: Content to be added as note
-        :return: Response from SOAR for debug
+        :return: Response from SOAR
         """
         try:
             uri = u'/incidents/{0}/comments'.format(incident_id)
-            comment = "<b>{} ({}):</b><br>{}".format(SIEMPLIFY_HEADER, sentinel_comment_id, note)
+            comment = "<b>{} ({}):</b><br>{}".format(SIEMPLIFY_HEADER, siemplify_comment_id, note)
 
             note_json = {
                 'format': 'html',
@@ -197,11 +198,13 @@ class ResilientCommon():
             raise IntegrationError(err)
 
     def get_incident(self, incident_id):
+        # get an SOAR incident based on the incident id
         incident = self._get_incident_info(incident_id, None)
         incident['incident_types'] = self.convert_incident_types(incident['incident_type_ids'])
         return incident
 
     def convert_incident_types(self, incident_type_ids):
+        # Convert a SOAR incident type to a Siemplify
         if not incident_type_ids:
             return incident_type_ids
 
@@ -211,6 +214,7 @@ class ResilientCommon():
             if incident_type in incident_type_lookup]
 
     def get_incident_attachment(self, incident_id, artifact_id=None, task_id=None, attachment_id=None, return_base64=True):
+        # get contents of a file attachment
         file_content = get_file_attachment(self.rest_client, incident_id, artifact_id=artifact_id, task_id=task_id, attachment_id=attachment_id)
         if return_base64:
             file_content = b_to_s(base64.b64encode(file_content))
@@ -219,12 +223,15 @@ class ResilientCommon():
         return file_name, file_content
 
     def get_incident_artifacts(self, incident_id):
+        # get all incident artifacts
         return self._get_incident_info(incident_id, "artifacts")
 
     def get_incident_comments(self, incident_id):
+        # get all incident comments
         return self._get_incident_info(incident_id, "comments")
 
     def get_incident_attachments(self, incident_id):
+        # get all incident attachments
         attachments =  self._get_incident_info(incident_id, "attachments")
         for attachment in attachments:
             _, attachment['content'] = self.get_incident_attachment(incident_id, attachment_id=attachment['id'])
@@ -232,6 +239,7 @@ class ResilientCommon():
         return attachments
 
     def get_incident_task(self, task_id):
+        # get a given incident task
         uri = "/tasks/{}".format(task_id)
         task_info = self.rest_client.get(uri=uri)
 
@@ -241,6 +249,14 @@ class ResilientCommon():
         return task_info, siemplify_task_id
 
     def get_siemplify_task_id(self, task_id):
+        """[get the siemplify task id assiocated witha given SOAR task]
+
+        Args:
+            task_id ([int]): [SOAR task to search]
+
+        Returns:
+            [int]: [associated Siemplify task_id]
+        """
         uri = "/tasks/{}/comments/query".format(task_id)
         query = {
             "conditions":
@@ -253,7 +269,6 @@ class ResilientCommon():
             ]
         }
 
-        # {"root_comments":[{"type":"task","id":253,"parent_id":null,"user_id":3,"user_fname":"Resilient","user_lname":"Sysadmin","text":{"format":"html","content":"<div class=\"rte\"><div>Siemplify Task Id: 15</div></div>"},"create_date":1639517174903,"modify_date":1639517174903,"children":[],"mentioned_users":[],"is_deleted":false,"modify_user":{"id":3,"first_name":"Resilient","last_name":"Sysadmin"},"actions":[{"id":155,"name":"Siemplify Sync Comment","enabled":true}],"inc_id":2298,"inc_name":"sync27","task_id":1552,"task_name":"my task","task_custom":true,"task_members":null,"task_at_id":null,"inc_owner":3,"user_name":"Resilient Sysadmin","modify_principal":{"id":3,"type":"user","name":"a@example.com","display_name":"Resilient Sysadmin"},"comment_perms":{"update":true,"delete":true}},{"type":"task","id":254,"parent_id":null,"user_id":3,"user_fname":"Resilient","user_lname":"Sysadmin","text":{"format":"html","content":"<div class=\"rte\"><div>Siemplify Task Id: 15</div></div>"},"create_date":1639517207320,"modify_date":1639517207320,"children":[],"mentioned_users":[],"is_deleted":false,"modify_user":{"id":3,"first_name":"Resilient","last_name":"Sysadmin"},"actions":[{"id":155,"name":"Siemplify Sync Comment","enabled":true}],"inc_id":2298,"inc_name":"sync27","task_id":1552,"task_name":"my task","task_custom":true,"task_members":null,"task_at_id":null,"inc_owner":3,"user_name":"Resilient Sysadmin","modify_principal":{"id":3,"type":"user","name":"a@example.com","display_name":"Resilient Sysadmin"},"comment_perms":{"update":true,"delete":true}}],"incident_comment_match_ids":[],"task_comment_match_ids":[253,254],"max_results_exceeded":false}"
         # get the siemplify_task_id if it exists
         search_results = self.rest_client.post(uri=uri, payload=query)
         LOG.debug(search_results)
@@ -267,21 +282,26 @@ class ResilientCommon():
         return siemplify_task_id
 
     def lookup_artifact_type(self, artifact_type):
+        # return an artifact type based on it's ID. If not found, return None
         types = self.get_artifact_types()
         if artifact_type in types:
             return types[artifact_type]
         return None
 
     def get_artifact_types(self):
+        # get all artifact types labels
         return self.get_types("artifact", "type")
 
     def get_incident_types(self):
+        # get all incident_type_id labels
         return self.get_types("incident", "incident_type_ids")
 
     def get_resolution_types(self):
+        # get incident resolution_types labels
         return self.get_types("incident", "resolution_id")
 
     def get_types(self, obj_type, field):
+        # get a specified SOAR field set of values, based on their ID (ex. status, incident_type)
         type_info = self._get_types(obj_type)
 
         # create a lookup table based on field name
@@ -289,10 +309,12 @@ class ResilientCommon():
 
     @cached(cache=LRUCache(maxsize=100))
     def _get_types(self, res_type):
+        # cached API call to get types information for a given type: incident, artifact, etc.
         uri = "/".join([TYPES_URI, res_type])
         return self.rest_client.get(uri)
 
     def _get_incident_info(self, incident_id, child_uri):
+        # API call for a given incident and it's child objects: tasks, notes, attachments, etc.
         try:
             uri = u'/incidents/{0}'.format(incident_id)
             if child_uri:
@@ -354,12 +376,14 @@ class ResilientCommon():
 
 
 def s_to_b(value):
+    # string to bytes
     try:
         return bytes(value, 'utf-8')
     except:
         return value
 
 def b_to_s(value):
+    # bytes to string
     """[binary to string]"""
     try:
         return value.decode()

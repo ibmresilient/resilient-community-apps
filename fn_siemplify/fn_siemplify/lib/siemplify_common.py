@@ -41,6 +41,7 @@ SOAR_HEADER = "IBM SOAR"
 SIEMPLIFY_HEADER="From Siemplify"
 IBMSOAR_TAGS = ['IBMSOAR']
 
+# lookup take between SOAR artifact types and Simeplify entity types
 ARTIFACT_TYPE_LOOKUPS = {
     "Port": "ADDRESS",
     "MAC Address": "MacAddress",
@@ -95,41 +96,27 @@ class SiemplifyCommon():
         self.rc = rc
         self.verify = False if self.options.get('cafile').lower() == "false" else self.options.get('cafile')
 
-    def sync_case(self, incident_info):
-        # perform an update to an existing incident
-        if incident_info.get('siemplify_case_id'):
-            return self.update_case(incident_info)
-
-        return self.create_case(incident_info)
-
     def create_case(self, incident_info):
+        # create a Siemlify case with a payload of case fields
         incident_payload = self.jina_env.make_payload_from_template(
             self.options.get('siemplify_create_case_template'),
             DEFAULT_CREATE_CASE,
             incident_info)
 
         results, error_msg = self._make_call("POST", CREATE_CASE_URL, incident_payload)
+        # The description field needs to be updated separately
         if isinstance(results, int) and incident_info['description']:
             _description_results, _ = self.update_case_description(results, incident_info['description'])
 
         return results, error_msg
 
-    def update_case(self, incident_info):
-        # get the existing case to start reviewing changes
-        self._diff_case_info(incident_info)
-
-        # TODO
-
-        #_diff_comments(incident_info)
-
-        #_diff_attachments(incident_info)
-        return None
-
     def get_case(self, case_id):
+        # Get a specific Siemplify case based on it case_id
         uri = GET_CASE_URL.format(case_id)
         return self._make_call("GET", uri)
 
     def get_cases(self, case_list):
+        # API call get all Seimplify cases associated with a list of SOAR incidents
         payload = {
             "tags": IBMSOAR_TAGS,
             "title": "Caseids:{}".format(",".join(case_list)),
@@ -141,6 +128,7 @@ class SiemplifyCommon():
         return self._make_call("POST", SEARCH_CASE_URL, payload)
 
     def close_case(self, inputs):
+        # API call to close the Siemplify case
         payload = {
             "caseId": str(inputs.get('siemplify_case_id')),
             "alertIdentifier": inputs.get('siemplify_alert_id'),
@@ -152,6 +140,7 @@ class SiemplifyCommon():
         return self._make_call("POST", CLOSE_CASE, payload)
 
     def update_case_description(self, case_id, description):
+        # API call to update the Siemplify case description
         payload = {
             "caseId": case_id,
             "description": description.replace('"', '\\"')
@@ -160,14 +149,8 @@ class SiemplifyCommon():
 
         return self._make_call("POST", UPDATE_CASE_DESCRIPTION_URL, payload)
 
-    def _diff_case_info(self, incident_info):
-        # get the existing case
-        case_info = self.get_case(incident_info["siemplify_case_id"])
-        LOG.info(case_info)
-        # TODO
-
     def get_blocklist(self, inputs):
-
+        # get the contents of the Siemlify block list
         if inputs.get("siemplify_search"):
             payload = {
                 "searchTerm": inputs.get("siemplify_search"),
@@ -179,7 +162,14 @@ class SiemplifyCommon():
             return self._make_call("GET", All_BLOCKLIST_URL)
 
     def add_update_blocklist(self, inputs):
+        """[add a SOAR artifact to the block list]
 
+        Args:
+            inputs ([dict]): [all fields needed to capture the SOAR artifact]
+
+        Returns:
+            [dict]: [Results of the API call]
+        """
         payload = {
             "entityIdentifier": inputs['siemplify_artifact_value'],
             "entityType": ARTIFACT_TYPE_LOOKUPS.get(inputs['siemplify_artifact_type'], "GENERICENTITY"),
@@ -191,9 +181,18 @@ class SiemplifyCommon():
         return payload if not error_msg else result, error_msg
 
     def get_customlist(self):
+        # get the contents of the Siemlify custom list
         return self._make_call("GET", ALL_CUSTOMLIST_URL)
 
     def add_update_customlist(self, inputs):
+        """[add a SOAR artifact to the custom list]
+
+        Args:
+            inputs ([dict]): [all fields needed to capture the SOAR artifact]
+
+        Returns:
+            [dict]: [Results of the API call]
+        """
         category = inputs.get('siemplify_category') if inputs.get('siemplify_category') else \
             ARTIFACT_TYPE_LOOKUPS.get(inputs['siemplify_artifact_type'], "GENERICENTITY")
 
@@ -207,11 +206,13 @@ class SiemplifyCommon():
         return payload if not error_msg else result, error_msg
 
     def sync_comment(self, inputs):
-        """[summary]
+        """[Sync SOAR incident note with Seimplify as a wall comment]
 
         Args:
             inputs ([dict]): [data to create a comment]
 
+        Returns:
+            [dict]: [Results of API call]
         """
         payload = {
             "caseId": str(inputs['siemplify_case_id']),
@@ -222,11 +223,13 @@ class SiemplifyCommon():
         return self._make_call("POST", CREATE_COMMENT_URL, payload)
 
     def sync_insight(self, inputs):
-        """[summary]
+        """[Sync SOAR incident note with Seimplify as an insight]
 
         Args:
-            inputs ([dict]): [data to create a comment]
+            inputs ([dict]): [data to create an insight]
 
+        Returns:
+            [dict]: [Results of API call]
         """
         payload = {
             "caseId": str(inputs['siemplify_case_id']),
@@ -240,11 +243,13 @@ class SiemplifyCommon():
         return results if isinstance(results, dict) else {}, error_msg
 
     def sync_artifact(self, inputs):
-        """[summary]
+        """[Sync a SOAR artifact with Siemplify]
 
         Args:
-            inputs ([dict]): [data to create a comment]
+            inputs ([dict]): [fields representing the Siemplify Case ID and SOAR artifact to sync]
 
+        Returns:
+            [dict]: [Results of API call]
         """
         siemplify_entity_type = ARTIFACT_TYPE_LOOKUPS.get(inputs['siemplify_artifact_type'])
         if not siemplify_entity_type:
@@ -336,6 +341,17 @@ class SiemplifyCommon():
         return self._make_call("POST", CREATE_ARTIFACT_URL, payload)
 
     def sync_attachment(self, case_id, b64content, filename, isImportant=False):
+        """[Sync the contents of a SOAR attachment with a Siemplify case]
+
+        Args:
+            case_id ([int]): [Siemplify Case]
+            b64content ([bool]): [True if content is in base64 format]
+            filename ([str]): [attachment name]
+            isImportant (bool, optional): [True if attachment should be set as Important]. Defaults to False.
+
+        Returns:
+            [dict]: [Results of Siemplify API call]
+        """
         filetype = None
         if '.' in filename:
             filetype = filename[filename.find('.'): ]
@@ -380,9 +396,20 @@ class SiemplifyCommon():
         return self._make_call("POST", CREATE_TASK_URL, payload)
 
     def get_version(self):
+        # Get the version of the Siemplify platform. Used in Selftest
         return self._make_call("GET", GET_VERSION_URL)
 
     def is_case_modified(self, case_id, modified_ts):
+        """[make a Siemplify API call to determine if the case was modified. Only a small number of
+            Siemplify fields will trigger this check]
+
+        Args:
+            case_id ([int]): [Siemplify case ID]
+            modified_ts ([int]): [timestamp of when to determine if changes have been made]
+
+        Returns:
+            [bool]: [True if the case was recently modified]
+        """
         payload = {
             "caseId": str(case_id),
             "currentModificationTimeUnixTimeInMs": str(modified_ts)
@@ -394,7 +421,7 @@ class SiemplifyCommon():
         return result if not err_msg else False
 
     def _make_call(self, method, uri, payload=None, ):
-
+        # perform a Siemplify API call, returning the results of that call
         url = "/".join([self.base_url, API_VERSION, uri])
         if payload:
             response, error_msg = self.rc.execute(method,
@@ -417,6 +444,7 @@ class SiemplifyCommon():
 
 
 def _make_headers(api_key):
+    # return headers used for Siemply API calls
     return {
         "Content-Type": "application/json",
         "AppKey": api_key

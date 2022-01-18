@@ -150,8 +150,9 @@ class SiemplifyPollerComponent(ResilientComponent):
                                                     incident_close_payload
                                                 )
                 cases_closed += 1
-                LOG.info("Closed SOAR incident %s from Siemplify case %s",
-                        soar_inc_id, case_id)
+                msg = "Closed SOAR incident {} from Siemplify case {}".format(soar_inc_id, case_id)
+                LOG.info(msg)
+                self.res_common.create_incident_comment(soar_inc_id, None, msg)
             else:
                 # check if the case has been modified
                 if self.siemplify_env.is_case_modified(case_id, last_poller_time):

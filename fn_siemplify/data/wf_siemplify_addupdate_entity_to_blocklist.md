@@ -30,12 +30,14 @@ from java.util import Date
 current_dt = Date().getTime()
 
 if results.success:
-    row = incident.addRow('siemplify_list_entries')
-    row['report_date'] = current_dt
-    row['list_name'] = 'Block List'
-    row['entity'] = entity['entityIdentifier']
-    row['entity_type'] = entity['entityType']
-    row['environments'] = ", ".join(entity['environments'])
+  entity = results.content
+  row = incident.addRow('siemplify_list_entries')
+  row['report_date'] = current_dt
+  row['list_name'] = 'Block List'
+  row['entity'] = entity['entityIdentifier']
+  row['entity_type'] = entity['entityType']
+  row['environments'] = ", ".join(entity['environments'])
+  incident.addNote("Siemplify Add/Update Blocklist successful for: {} ({})".format(artifact.value, artifact.type))
 else:
   incident.addNote("Siemplify Add/Update Blocklist Entity failed: {}".format(results.reason))
 
