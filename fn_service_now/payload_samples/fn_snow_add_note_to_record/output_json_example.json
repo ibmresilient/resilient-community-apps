@@ -1,11 +1,33 @@
 {
+  "version": "1.0",
   "success": true,
+  "reason": null,
+  "content": {
+    "success": true,
+    "inputs": {
+      "incident_id": 2117,
+      "task_id": null,
+      "sn_note_text": "The Business Impact of this Incident was updated to High in IBM Resilient",
+      "sn_note_type": "work_note"
+    },
+    "res_id": "RES-2117",
+    "sn_ref_id": "SIR0010024"
+  },
+  "raw": "{\"success\": true, \"inputs\": {\"incident_id\": 2117, \"task_id\": null, \"sn_note_text\": \"The Business Impact of this Incident was updated to High in IBM Resilient\", \"sn_note_type\": \"work_note\"}, \"res_id\": \"RES-2117\", \"sn_ref_id\": \"SIR0010024\"}",
   "inputs": {
-    "incident_id": 2116,
-    "task_id": {},
+    "incident_id": 2117,
+    "task_id": null,
     "sn_note_text": "The Business Impact of this Incident was updated to High in IBM Resilient",
     "sn_note_type": "work_note"
   },
-  "res_id": "RES-2116",
-  "sn_ref_id": "SIR0010023"
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-service-now",
+    "package_version": "2.0.0",
+    "host": "myhost",
+    "execution_time_ms": 1485,
+    "timestamp": "1971-01-01 00:00:00"
+  },
+  "res_id": "RES-2117",
+  "sn_ref_id": "SIR0010024"
 }

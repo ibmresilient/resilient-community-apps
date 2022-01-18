@@ -2,8 +2,44 @@
   "$schema": "http://json-schema.org/draft-06/schema",
   "type": "object",
   "properties": {
+    "version": {
+      "type": "string"
+    },
     "success": {
       "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "inputs": {
+          "type": "object",
+          "properties": {
+            "incident_id": {
+              "type": "integer"
+            },
+            "task_id": {},
+            "sn_note_text": {
+              "type": "string"
+            },
+            "sn_note_type": {
+              "type": "string"
+            }
+          }
+        },
+        "res_id": {
+          "type": "string"
+        },
+        "sn_ref_id": {
+          "type": "string"
+        }
+      }
+    },
+    "raw": {
+      "type": "string"
     },
     "inputs": {
       "type": "object",
@@ -11,13 +47,34 @@
         "incident_id": {
           "type": "integer"
         },
-        "task_id": {
-          "type": "object"
-        },
+        "task_id": {},
         "sn_note_text": {
           "type": "string"
         },
         "sn_note_type": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
           "type": "string"
         }
       }

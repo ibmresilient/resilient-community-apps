@@ -2,8 +2,47 @@
   "$schema": "http://json-schema.org/draft-06/schema",
   "type": "object",
   "properties": {
+    "version": {
+      "type": "string"
+    },
     "success": {
       "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "inputs": {
+          "type": "object",
+          "properties": {
+            "attachment_id": {
+              "type": "integer"
+            },
+            "incident_id": {
+              "type": "integer"
+            },
+            "task_id": {}
+          }
+        },
+        "res_id": {
+          "type": "string"
+        },
+        "sn_ref_id": {
+          "type": "string"
+        },
+        "attachment_name": {
+          "type": "string"
+        },
+        "sn_attachment_sys_id": {
+          "type": "string"
+        }
+      }
+    },
+    "raw": {
+      "type": "string"
     },
     "inputs": {
       "type": "object",
@@ -14,8 +53,29 @@
         "incident_id": {
           "type": "integer"
         },
-        "task_id": {
-          "type": "object"
+        "task_id": {}
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
         }
       }
     },

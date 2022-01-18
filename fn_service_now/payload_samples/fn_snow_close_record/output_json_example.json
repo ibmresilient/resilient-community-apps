@@ -1,15 +1,40 @@
 {
+  "version": "1.0",
   "success": true,
-  "reason": {},
-  "inputs": {
-    "incident_id": 2114,
-    "task_id": {},
-    "sn_res_id": "RES-2114",
-    "sn_record_state": 20,
-    "sn_close_notes": "recover",
-    "sn_close_code": "Investigation completed",
-    "sn_close_work_note": "This record's state has be changed to [SIR] Recover by IBM Resilient"
+  "reason": null,
+  "content": {
+    "success": true,
+    "reason": null,
+    "inputs": {
+      "incident_id": 2117,
+      "task_id": null,
+      "sn_res_id": "RES-2117",
+      "sn_record_state": 100,
+      "sn_close_notes": "Closing from data table",
+      "sn_close_code": "Threat mitigated",
+      "sn_close_work_note": "This record's state has be changed to [SIR] Review by IBM Resilient"
+    },
+    "sn_ref_id": "SIR0010024",
+    "sn_record_state": "Review"
   },
-  "sn_ref_id": "SIR0010020",
-  "sn_record_state": "Recover"
+  "raw": "{\"success\": true, \"reason\": null, \"inputs\": {\"incident_id\": 2117, \"task_id\": null, \"sn_res_id\": \"RES-2117\", \"sn_record_state\": 100, \"sn_close_notes\": \"Closing from data table\", \"sn_close_code\": \"Threat mitigated\", \"sn_close_work_note\": \"This record's state has be changed to [SIR] Review by IBM Resilient\"}, \"sn_ref_id\": \"SIR0010024\", \"sn_record_state\": \"Review\"}",
+  "inputs": {
+    "incident_id": 2117,
+    "task_id": null,
+    "sn_res_id": "RES-2117",
+    "sn_record_state": 100,
+    "sn_close_notes": "Closing from data table",
+    "sn_close_code": "Threat mitigated",
+    "sn_close_work_note": "This record's state has be changed to [SIR] Review by IBM Resilient"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-service-now",
+    "package_version": "2.0.0",
+    "host": "myhost",
+    "execution_time_ms": 1485,
+    "timestamp": "1971-01-01 00:00:00"
+  },
+  "sn_ref_id": "SIR0010024",
+  "sn_record_state": "Review"
 }

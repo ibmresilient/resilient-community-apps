@@ -2,8 +2,38 @@
   "$schema": "http://json-schema.org/draft-06/schema",
   "type": "object",
   "properties": {
+    "version": {
+      "type": "string"
+    },
     "success": {
       "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "inputs": {
+          "type": "object",
+          "properties": {
+            "sn_query_field": {
+              "type": "string"
+            },
+            "sn_table_name": {
+              "type": "string"
+            },
+            "sn_query_value": {
+              "type": "string"
+            }
+          }
+        },
+        "sys_id": {}
+      }
+    },
+    "raw": {
+      "type": "string"
     },
     "inputs": {
       "type": "object",
@@ -19,8 +49,29 @@
         }
       }
     },
-    "sys_id": {
-      "type": "object"
-    }
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    },
+    "sys_id": {}
   }
 }

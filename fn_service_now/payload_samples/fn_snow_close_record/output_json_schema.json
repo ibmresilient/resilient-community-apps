@@ -2,11 +2,54 @@
   "$schema": "http://json-schema.org/draft-06/schema",
   "type": "object",
   "properties": {
+    "version": {
+      "type": "string"
+    },
     "success": {
       "type": "boolean"
     },
-    "reason": {
-      "type": "object"
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "reason": {},
+        "inputs": {
+          "type": "object",
+          "properties": {
+            "incident_id": {
+              "type": "integer"
+            },
+            "task_id": {},
+            "sn_res_id": {
+              "type": "string"
+            },
+            "sn_record_state": {
+              "type": "integer"
+            },
+            "sn_close_notes": {
+              "type": "string"
+            },
+            "sn_close_code": {
+              "type": "string"
+            },
+            "sn_close_work_note": {
+              "type": "string"
+            }
+          }
+        },
+        "sn_ref_id": {
+          "type": "string"
+        },
+        "sn_record_state": {
+          "type": "string"
+        }
+      }
+    },
+    "raw": {
+      "type": "string"
     },
     "inputs": {
       "type": "object",
@@ -14,9 +57,7 @@
         "incident_id": {
           "type": "integer"
         },
-        "task_id": {
-          "type": "object"
-        },
+        "task_id": {},
         "sn_res_id": {
           "type": "string"
         },
@@ -30,6 +71,29 @@
           "type": "string"
         },
         "sn_close_work_note": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
           "type": "string"
         }
       }
