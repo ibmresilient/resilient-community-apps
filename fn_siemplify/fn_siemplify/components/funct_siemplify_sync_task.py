@@ -52,7 +52,7 @@ class FunctionComponent(AppFunctionComponent):
         task_info, siemplify_task_id = res_common.get_incident_task(fn_inputs.siemplify_soar_task_id)
 
         results, error_msg = siemplify_env.sync_task(fn_inputs.siemplify_case_id, fn_inputs.siemplify_task_assignee,
-                                          siemplify_task_id, task_info)
+                                                     siemplify_task_id, task_info)
 
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
 

@@ -57,6 +57,7 @@ class FunctionComponent(AppFunctionComponent):
         siemplify_env = SiemplifyCommon(self.rc, self.app_configs)
         results, error_msg = siemplify_env.close_case(inputs)
 
+        # return a dict if not already a dict
         if not isinstance(results, dict):
             results = { "close_case": results }
 

@@ -5,7 +5,7 @@
 import logging
 import json
 from .jinja_common import JinjaEnvironment
-from resilient_lib import clean_html
+from resilient_lib import clean_html, IntegrationError
 from simplejson.errors import JSONDecodeError
 
 LOG = logging.getLogger(__name__)
@@ -95,6 +95,13 @@ class SiemplifyCommon():
         self.jina_env = JinjaEnvironment()
         self.rc = rc
         self.verify = False if self.options.get('cafile').lower() == "false" else self.options.get('cafile')
+
+    def sync_case(self, incident_info):
+        # perform an update to an existing incident
+        if incident_info.get('siemplify_case_id'):
+            raise IntegrationError("Update Siemplify Case curerntly not supported")
+
+        return self.create_case(incident_info)
 
     def create_case(self, incident_info):
         # create a Siemlify case with a payload of case fields
