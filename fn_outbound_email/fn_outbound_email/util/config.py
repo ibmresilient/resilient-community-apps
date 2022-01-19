@@ -35,6 +35,6 @@ smtp_ssl_mode=starttls
 #smtp_ssl_cafile=
 # Optional - Path to a custom template file for formatting HTML email.
 # The integration will use this template out of the box. If removed, it will default to the pre-processing script.
-# template_file=data/example_send_email.jinja
-template_file=data/example_send_email.jinja
+# template_file=data/templates/example_send_email.jinja
+template_file=data/templates/example_send_email.jinja
     """

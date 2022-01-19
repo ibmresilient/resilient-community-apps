@@ -46,6 +46,7 @@ def selftest_function(opts):
             smtp_connection = smtplib.SMTP(host=smtp_server,
                                                 port=smtp_port,
                                                 timeout=smtp_conn_timeout)
+
             if smtp_ssl_mode == "starttls" and smtp_user:
                 LOG.info("Starting TLS...")
                 smtp_connection.ehlo()
@@ -54,7 +55,7 @@ def selftest_function(opts):
                 LOG.info("Logging in to SMTP...")
                 if not smtp_password:
                     raise Exception('An SMTP user has been set; the SMTP password from app.config cannot be null')
-                
+
                 smtp_connection.login(user=smtp_user, password=smtp_password)
                 if from_email_address:
                     smtp_connection.sendmail(from_email_address, from_email_address, 'this is a test email')

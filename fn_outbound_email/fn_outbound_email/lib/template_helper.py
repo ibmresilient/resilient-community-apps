@@ -3,14 +3,15 @@
 # pragma pylint: disable=unused-argument, no-self-use
 
 import logging
-import re
-import time
+from re import compile, split
+from time import time
+from jinja2 import Environment, FileSystemLoader
+from os import path
 from datetime import datetime
 from operator import itemgetter
 from six import string_types
 
 LOG = logging.getLogger(__name__)
-
 
 class TemplateHelper(object):
     def __init__(self, resilient_component):
@@ -51,8 +52,27 @@ class TemplateHelper(object):
         table_def["fields"] = sorted(field_list, key=itemgetter('order'))
 
         if html:
-            mytemplate = self.component.jinja_env.get_template("datatable.jinja")
-            return mytemplate.render(table_def=table_def, datatable=datatable)
+            #Create path to data/templates on local system
+            cpath = path.dirname(__file__)
+            local_template_file_path = path.join(cpath[0:len(cpath) - cpath[::-1].index("/") - 1], 'data/templates/')
+
+            #Create dictionary named tables that stores the datatable
+            tables = {}
+            for field_name in table_def['fields']:
+                tables[str(field_name.get("name"))] = []
+
+            for header in tables:
+                for row in datatable['rows']:
+                    rows = row.get('cells')
+                    for cells in rows:
+                        if str(cells) == str(header):
+                            cell = rows[cells]
+                            tables[header].insert(datatable['rows'].index(row), cell.get("value"))
+
+            #Load the path to the datatable.jinja file
+            env = Environment(loader=FileSystemLoader(searchpath=local_template_file_path))
+            template = env.get_template('datatable.jinja')
+            return template.render(table_name=datatable_name, headers=table_def['fields'], rows=datatable['rows'], table=tables)
         else:
             return datatable
 
@@ -68,15 +88,14 @@ class TemplateHelper(object):
         row_list = []
 
         for incident in query_result["data"]:
-            if incident["id"] in exclude_incidents:
-                continue
-            incident = self.component.rest_client().get("/incidents/{}".format(incident["id"]))
-            row = {}
-            for want_field in want_fields_list:
-                field_value = self.get_incident_value(incident, want_field)
-                row[want_field] = field_value
+            if incident["id"] not in exclude_incidents:
+                incident = self.component.rest_client().get("/incidents/{}".format(incident["id"]))
+                row = {}
+                for want_field in want_fields_list:
+                    field_value = self.get_incident_value(incident, want_field)
+                    row[want_field] = field_value
 
-            row_list.append(row)
+                row_list.append(row)
 
         mytemplate = self.component.jinja_env.get_template("query_result.jinja")
         field_defs = dict((field["name"], field) for field in self.component.get_incident_fields())
@@ -169,15 +188,16 @@ class TemplateHelper(object):
 
     @staticmethod
     def regex_replace(string, pattern, replace):
-        p = re.compile(pattern)
+        p = compile(pattern)
         return p.sub(replace, string)
 
     @staticmethod
     def get_timestamp(offset=0):
-        return int(round(time.time() + offset))    
+        return int(round(time() + offset))
+
     # format_timestamp() has changed in version 1.0.7.
     # This function now takes EPOCH time in seconds as an argument. If formatting a Resilient date/time field,
-    # divide it by 1000, first, in the JINJA template. 
+    # divide it by 1000, first, in the JINJA template.
     def format_timestamp(self, value):
         # converts resilient epoch timestamp to string
         # 2018-06-03T11:57:02Z
@@ -212,7 +232,7 @@ class TemplateHelper(object):
 
         if isinstance(str_value, string_types):
             list_result = set()
-            for list_value in re.split(r'[,; ]', str_value):
+            for list_value in split(r'[,; ]', str_value):
                 list_value = list_value.strip()
                 if list_value:
                     list_result.add(list_value)

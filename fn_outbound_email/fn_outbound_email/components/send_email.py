@@ -6,12 +6,11 @@
 from __future__ import print_function
 
 import logging
-import os
+from os import path
 import tempfile
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import ResultPayload, validate_fields, IntegrationError
 from fn_outbound_email.lib.smtp_mailer import SendSMTPEmail
-
 
 LOG = logging.getLogger(__name__)
 
@@ -36,13 +35,22 @@ class FunctionComponent(ResilientComponent):
 
         if "@" not in self.from_email_address:
             if "@" not in self.smtp_user:
-                raise IntegrationError("no sender address specified")
+                raise IntegrationError("No sender address specified")
             else:
                 self.from_email_address = self.smtp_user
 
-        if self.template_file_path and not os.path.exists(self.template_file_path):
-            LOG.error(u"Template file '%s' not found.", self.template_file_path)
-            self.template_file_path = None
+        if self.template_file_path: #If a template file path is given in app.config
+
+            #Create path to local template file
+            cpath = path.dirname(__file__)
+            local_template_file_path = path.join(cpath[0:len(cpath) - cpath[::-1].index("/") - 1], self.template_file_path)
+
+            #If template_file in app.config does not have a path
+            if not path.exists(self.template_file_path) and not path.exists(local_template_file_path):
+                LOG.error(u"Template file '%s' not found.", self.template_file_path)
+                self.template_file_path = None
+            elif path.exists(local_template_file_path):
+                self.template_file_path = local_template_file_path
 
     @handler("reload")
     def _reload(self, event, opts):
@@ -59,19 +67,15 @@ class FunctionComponent(ResilientComponent):
             else:
                 mail_from = kwargs.get("mail_from")  # text
 
-            mail_body_html = None
+            mail_body_html = kwargs.get("mail_body_html", None)
             jinja = False
-            if kwargs.get("mail_body_html"):
-                mail_body_html = kwargs.get("mail_body_html")
-                jinja = False
-            elif self.template_file_path and not mail_body_text:
-                with open(self.template_file_path, "r") as definition:
-                    mail_body_html = definition.read()
-                    LOG.info("Using custom jinja template instead of default, path: %s", self.template_file_path)
-                    if definition.name.find("example_send_email.jinja") == -1:
-                        jinja = False
-                    else:
+
+            if mail_body_html:
+                if self.template_file_path:
+                    with open(self.template_file_path, "r") as template:
                         jinja = True
+                        mail_body_html = template.read()
+                        LOG.info("Using jinja template instead of pre-processing script, path: %s", self.template_file_path)
 
             if self.from_email_address and not kwargs.get("mail_to"):
                 mail_to = self.from_email_address
@@ -198,7 +202,7 @@ class FunctionComponent(ResilientComponent):
                     file_contents = self.rest_client().get_content("/tasks/{task_id}/attachments/{attach_id}/contents".
                                                                   format(task_id=incident_attachment["task_id"],
                                                                          attach_id=incident_attachment["id"]))
-                file_path = os.path.join(tempdir, file_name)
+                file_path = path.join(tempdir, file_name)
                 with open(file_path, "wb+") as temp_file:
                     temp_file.write(file_contents)
                 attachment_path.append(file_path)

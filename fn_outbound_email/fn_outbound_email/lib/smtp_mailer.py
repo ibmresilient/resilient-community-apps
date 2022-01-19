@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 
-
 import errno
 import os
 import smtplib
@@ -19,9 +18,8 @@ from fn_outbound_email.lib.template_helper import TemplateHelper
 log = logging.getLogger(__name__)
 
 CONFIG_DATA_SECTION = 'fn_outbound_email'
-SMTP_DEFAULT_CONN_TIMEOUT = 15
+SMTP_DEFAULT_CONN_TIMEOUT = 20
 SMTP_DEFAULT_PORT = '25'
-
 
 class SendSMTPEmail(ResilientComponent):
 
@@ -125,7 +123,6 @@ class SendSMTPEmail(ResilientComponent):
                     smtp_connection.starttls()
                     smtp_connection.ehlo()
 
-
             if self.smtp_user:
                 if not self.smtp_password:
                     raise SimpleSendEmailException('An SMTP user has been set; '
@@ -155,9 +152,6 @@ class SendSMTPEmail(ResilientComponent):
     def process_attachments(attachment_list):
         attachment_result_list = []
         for attachment_path in attachment_list:
-            if not os.path.isfile(attachment_path):
-                continue
-
             with open(attachment_path, 'rb') as fp:
                 mime_object = MIMEApplication(fp.read())
 
@@ -188,7 +182,6 @@ class SendSMTPEmail(ResilientComponent):
     def render_template(self, template_string, incident_data, mail_data):
         template = self.jinja_env.from_string(template_string)
         return template.render(incident=incident_data, mail=mail_data)
-
 
 class SimpleSendEmailException(Exception):
     """Exception for Send Email errors"""
