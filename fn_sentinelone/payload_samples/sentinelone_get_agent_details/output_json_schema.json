@@ -8,9 +8,7 @@
     "success": {
       "type": "boolean"
     },
-    "reason": {
-      "type": "null"
-    },
+    "reason": {},
     "content": {
       "type": "object",
       "properties": {
@@ -28,25 +26,15 @@
               "activeDirectory": {
                 "type": "object",
                 "properties": {
-                  "computerDistinguishedName": {
-                    "type": "null"
-                  },
+                  "computerDistinguishedName": {},
                   "computerMemberOf": {
                     "type": "array"
                   },
-                  "lastUserDistinguishedName": {
-                    "type": "null"
-                  },
+                  "lastUserDistinguishedName": {},
                   "lastUserMemberOf": {
                     "type": "array"
                   }
-                },
-                "required": [
-                  "computerDistinguishedName",
-                  "computerMemberOf",
-                  "lastUserDistinguishedName",
-                  "lastUserMemberOf"
-                ]
+                }
               },
               "activeThreats": {
                 "type": "integer"
@@ -81,9 +69,7 @@
               "createdAt": {
                 "type": "string"
               },
-              "detectionState": {
-                "type": "null"
-              },
+              "detectionState": {},
               "domain": {
                 "type": "string"
               },
@@ -99,9 +85,7 @@
               "firewallEnabled": {
                 "type": "boolean"
               },
-              "firstFullModeTime": {
-                "type": "null"
-              },
+              "firstFullModeTime": {},
               "groupId": {
                 "type": "string"
               },
@@ -156,9 +140,7 @@
               "locationType": {
                 "type": "string"
               },
-              "locations": {
-                "type": "null"
-              },
+              "locations": {},
               "machineType": {
                 "type": "string"
               },
@@ -206,16 +188,7 @@
                     "physical": {
                       "type": "string"
                     }
-                  },
-                  "required": [
-                    "gatewayIp",
-                    "gatewayMacAddress",
-                    "id",
-                    "inet",
-                    "inet6",
-                    "name",
-                    "physical"
-                  ]
+                  }
                 }
               },
               "networkQuarantineEnabled": {
@@ -227,9 +200,7 @@
               "operationalState": {
                 "type": "string"
               },
-              "operationalStateExpiration": {
-                "type": "null"
-              },
+              "operationalStateExpiration": {},
               "osArch": {
                 "type": "string"
               },
@@ -251,18 +222,14 @@
               "rangerStatus": {
                 "type": "string"
               },
-              "rangerVersion": {
-                "type": "null"
-              },
+              "rangerVersion": {},
               "registeredAt": {
                 "type": "string"
               },
               "remoteProfilingState": {
                 "type": "string"
               },
-              "remoteProfilingStateExpiration": {
-                "type": "null"
-              },
+              "remoteProfilingStateExpiration": {},
               "scanAbortedAt": {
                 "type": "string"
               },
@@ -281,12 +248,8 @@
               "siteName": {
                 "type": "string"
               },
-              "storageName": {
-                "type": "null"
-              },
-              "storageType": {
-                "type": "null"
-              },
+              "storageName": {},
+              "storageType": {},
               "threatRebootRequired": {
                 "type": "boolean"
               },
@@ -302,118 +265,28 @@
               "uuid": {
                 "type": "string"
               }
-            },
-            "required": [
-              "accountId",
-              "accountName",
-              "activeDirectory",
-              "activeThreats",
-              "agentVersion",
-              "allowRemoteShell",
-              "appsVulnerabilityStatus",
-              "cloudProviders",
-              "computerName",
-              "consoleMigrationStatus",
-              "coreCount",
-              "cpuCount",
-              "cpuId",
-              "createdAt",
-              "detectionState",
-              "domain",
-              "encryptedApplications",
-              "externalId",
-              "externalIp",
-              "firewallEnabled",
-              "firstFullModeTime",
-              "groupId",
-              "groupIp",
-              "groupName",
-              "id",
-              "inRemoteShellSession",
-              "infected",
-              "installerType",
-              "isActive",
-              "isDecommissioned",
-              "isPendingUninstall",
-              "isUninstalled",
-              "isUpToDate",
-              "lastActiveDate",
-              "lastIpToMgmt",
-              "lastLoggedInUserName",
-              "licenseKey",
-              "locationEnabled",
-              "locationType",
-              "locations",
-              "machineType",
-              "mitigationMode",
-              "mitigationModeSuspicious",
-              "modelName",
-              "networkInterfaces",
-              "networkQuarantineEnabled",
-              "networkStatus",
-              "operationalState",
-              "operationalStateExpiration",
-              "osArch",
-              "osName",
-              "osRevision",
-              "osStartTime",
-              "osType",
-              "osUsername",
-              "rangerStatus",
-              "rangerVersion",
-              "registeredAt",
-              "remoteProfilingState",
-              "remoteProfilingStateExpiration",
-              "scanAbortedAt",
-              "scanFinishedAt",
-              "scanStartedAt",
-              "scanStatus",
-              "siteId",
-              "siteName",
-              "storageName",
-              "storageType",
-              "threatRebootRequired",
-              "totalMemory",
-              "updatedAt",
-              "userActionsNeeded",
-              "uuid"
-            ]
+            }
           }
         },
         "pagination": {
           "type": "object",
           "properties": {
-            "nextCursor": {
-              "type": "null"
-            },
+            "nextCursor": {},
             "totalItems": {
               "type": "integer"
             }
-          },
-          "required": [
-            "nextCursor",
-            "totalItems"
-          ]
+          }
         }
-      },
-      "required": [
-        "data",
-        "pagination"
-      ]
+      }
     },
-    "raw": {
-      "type": "null"
-    },
+    "raw": {},
     "inputs": {
       "type": "object",
       "properties": {
         "sentinelone_agent_id": {
           "type": "string"
         }
-      },
-      "required": [
-        "sentinelone_agent_id"
-      ]
+      }
     },
     "metrics": {
       "type": "object",
@@ -436,24 +309,7 @@
         "timestamp": {
           "type": "string"
         }
-      },
-      "required": [
-        "execution_time_ms",
-        "host",
-        "package",
-        "package_version",
-        "timestamp",
-        "version"
-      ]
+      }
     }
-  },
-  "required": [
-    "content",
-    "inputs",
-    "metrics",
-    "raw",
-    "reason",
-    "success",
-    "version"
-  ]
+  }
 }

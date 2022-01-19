@@ -8,27 +8,17 @@
     "success": {
       "type": "boolean"
     },
-    "reason": {
-      "type": "null"
-    },
+    "reason": {},
     "content": {
       "type": "object",
       "properties": {
         "success": {
           "type": "boolean"
         },
-        "reason:": {
-          "type": "null"
-        }
-      },
-      "required": [
-        "reason:",
-        "success"
-      ]
+        "reason:": {}
+      }
     },
-    "raw": {
-      "type": "null"
-    },
+    "raw": {},
     "inputs": {
       "type": "object",
       "properties": {
@@ -38,11 +28,7 @@
         "sentinelone_note_text": {
           "type": "string"
         }
-      },
-      "required": [
-        "sentinelone_note_text",
-        "sentinelone_threat_id"
-      ]
+      }
     },
     "metrics": {
       "type": "object",
@@ -65,24 +51,7 @@
         "timestamp": {
           "type": "string"
         }
-      },
-      "required": [
-        "execution_time_ms",
-        "host",
-        "package",
-        "package_version",
-        "timestamp",
-        "version"
-      ]
+      }
     }
-  },
-  "required": [
-    "content",
-    "inputs",
-    "metrics",
-    "raw",
-    "reason",
-    "success",
-    "version"
-  ]
+  }
 }
