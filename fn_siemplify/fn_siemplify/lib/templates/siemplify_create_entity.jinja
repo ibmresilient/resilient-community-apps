@@ -6,16 +6,16 @@
       "caseId": 0,
       "identifier": "{{ siemplify_artifact_value }}",
       "entityType": "{{ siemplify_entity_type }}",
-      "isInternal": True,
-      "isSuspicious": False,
-      "isArtifact": True,
-      "isEnriched": False,
-      "isVulnerable": False,
-      "isPivot": False,
+      "isInternal": true,
+      "isSuspicious": false,
+      "isArtifact": true,
+      "isEnriched": false,
+      "isVulnerable": false,
+      "isPivot": false,
       "environment": "{{ siemplify_environment }}",
       "fields": [
         {
-          "isHighlight": False,
+          "isHighlight": false,
           "groupName": "Default",
           "items": [
             {
@@ -61,19 +61,19 @@
           ]
         },
         {
-          "isHighlight": False,
+          "isHighlight": false,
           "groupName": "Entity",
           "items": [
             {
               "originalName": "IsPivot",
               "name": "Is Pivot",
-              "value": "False"
+              "value": "false"
             }
           ]
         }
       ],
-      "isManuallyCreated": True,
-      "isCustom": True,
+      "isManuallyCreated": true,
+      "isCustom": true,
       "id": "{{ siemplify_artifact_value| replace(' ', '_') }}_{{ siemplify_environment| replace(' ', '_') }}"
     }
   ]

@@ -269,7 +269,7 @@ class SiemplifyCommon():
                         inputs['siemplify_artifact_value'])
             return None
 
-        payload = self.jina_env.make_payload_from_template(SIEMPLIFY_CREATE_ENTITY_TEMPLATE, None, inputs)
+        payload = self.jina_env.make_payload_from_template(None, SIEMPLIFY_CREATE_ENTITY_TEMPLATE, inputs)
 
         return self._make_call("POST", CREATE_ARTIFACT_URL, payload)
 
