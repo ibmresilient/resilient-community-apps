@@ -26,24 +26,24 @@ class TemplateHelper(object):
     def get_datatable(self, datatable_name, incident_id, html=True):
         """datatable jinja template"""
         LOG.info(
-            'get_datatable: ({datatable_name}) ({inc_id})'.format(datatable_name=datatable_name, inc_id=incident_id))
+            'get_datatable: ({}) ({})'.format(datatable_name, incident_id))
         try:
             datatable = self.component.rest_client().get(
-                "/incidents/{inc_id}/table_data/{table_name}?"
+                "/incidents/{}/table_data/{}?"
                 "handle_format=names&text_content_output_format=objects_no_convert".format(
-                    inc_id=incident_id, table_name=datatable_name))
+                    incident_id, datatable_name))
         except:
-            LOG.error("the datatable {0} doesn't exist".format(datatable_name))
+            LOG.error("The datatable {} doesn't exist".format(datatable_name))
             return '-'
 
         if not datatable:
             # failed to find the datatable with that name
-            LOG.error("the datatable name {0} doesn't match".format(datatable_name))
+            LOG.error("The datatable name {} doesn't match".format(datatable_name))
             return
 
         table_def = self.component.rest_client().get(
-            "/types/{table_name}?handle_format=objects&text_content_output_format=objects_no_convert".format(
-                table_name=datatable['id']))
+            "/types/{}?handle_format=objects&text_content_output_format=objects_no_convert".format(
+                datatable['id']))
 
         # sort the fields by their display order
         field_list = []
@@ -57,22 +57,21 @@ class TemplateHelper(object):
             local_template_file_path = path.join(cpath[0:len(cpath) - cpath[::-1].index("/") - 1], 'data/templates/')
 
             #Create dictionary named tables that stores the datatable
-            tables = {}
-            for field_name in table_def['fields']:
-                tables[str(field_name.get("name"))] = []
+            tables = { str(field_name.get("text")): [] for field_name in table_def['fields'] }
 
             for header in tables:
                 for row in datatable['rows']:
                     rows = row.get('cells')
                     for cells in rows:
-                        if str(cells) == str(header):
-                            cell = rows[cells]
-                            tables[header].insert(datatable['rows'].index(row), cell.get("value"))
+                        for field_name in field_list:
+                            if str(header) == str(field_name['text']):
+                                if str(field_name['name']) == str(cells).lower():
+                                    tables[header].insert(datatable['rows'].index(row), rows[cells].get("value"))
 
             #Load the path to the datatable.jinja file
             env = Environment(loader=FileSystemLoader(searchpath=local_template_file_path), autoescape=True)
             template = env.get_template('datatable.jinja')
-            return template.render(table_name=datatable_name, headers=table_def['fields'], rows=datatable['rows'], table=tables)
+            return template.render(table_name=table_def['display_name'], headers=table_def['fields'], rows=datatable['rows'], table=tables)
         else:
             return datatable
 
@@ -115,7 +114,7 @@ class TemplateHelper(object):
         field_def = self.get_field_defs('incident').get(field_name)
 
         if not field_def:
-            LOG.error("tried to get invalid field value: " + field_name)
+            LOG.error("Tried to get invalid field value: " + field_name)
             return None
 
         if field_def.get("prefix"):
@@ -128,21 +127,21 @@ class TemplateHelper(object):
     # gets the values for the specified field across all rows and returns as comma-separated list
     def get_datatable_value_array(self, inc_id, datatable_name, field_name):
         LOG.info(
-            'get_datatable_value_array ({inc_id}) ({dt_name}) ({f_name})'.format(inc_id=inc_id, dt_name=datatable_name,
-                                                                                 f_name=field_name))
+            'get_datatable_value_array ({}) ({}) ({})'.format(inc_id, datatable_name,
+                                                                                 field_name))
         try:
             datatable = self.component.rest_client().get(
-                "/incidents/{inc_id}/table_data/{table_name}?"
+                "/incidents/{}/table_data/{}?"
                 "handle_format=names&text_content_output_format=objects_no_convert".format(
-                    inc_id=inc_id, table_name=datatable_name))
+                    inc_id, datatable_name))
         except:
             # if the datatable doesn't "exist", it returns error
-            LOG.error("the datatable {0} doesn't exist".format(datatable_name))
+            LOG.error("The datatable {} doesn't exist".format(datatable_name))
             return '-'
 
         table_def = self.component.rest_client().get(
-            "/types/{table_name}?handle_format=objects&text_content_output_format=objects_no_convert".format(
-                table_name=datatable['id']))
+            "/types/{}?handle_format=objects&text_content_output_format=objects_no_convert".format(
+                datatable['id']))
 
         result = set()
         for table_row in datatable["rows"]:
