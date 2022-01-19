@@ -132,7 +132,7 @@ The above guides are available on the IBM Knowledge Center at [ibm.biz/soar-docs
 ### Cloud Pak for Security
 If you are deploying to IBM Cloud Pak for Security, the requirements are:
 * IBM Cloud Pak for Security >= 1.4.
-* Cloud Pak is configured with an App Host.
+* Cloud Pak is configured with an App Host. 
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 The following Cloud Pak guides provide additional information: 
