@@ -70,7 +70,7 @@ class TemplateHelper(object):
                             tables[header].insert(datatable['rows'].index(row), cell.get("value"))
 
             #Load the path to the datatable.jinja file
-            env = Environment(loader=FileSystemLoader(searchpath=local_template_file_path))
+            env = Environment(loader=FileSystemLoader(searchpath=local_template_file_path), autoescape=True)
             template = env.get_template('datatable.jinja')
             return template.render(table_name=datatable_name, headers=table_def['fields'], rows=datatable['rows'], table=tables)
         else:
