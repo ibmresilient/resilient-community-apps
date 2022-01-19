@@ -8,9 +8,7 @@
     "success": {
       "type": "boolean"
     },
-    "reason": {
-      "type": "null"
-    },
+    "reason": {},
     "content": {
       "type": "object",
       "properties": {
@@ -20,25 +18,16 @@
         "threat_id": {
           "type": "string"
         }
-      },
-      "required": [
-        "success",
-        "threat_id"
-      ]
+      }
     },
-    "raw": {
-      "type": "null"
-    },
+    "raw": {},
     "inputs": {
       "type": "object",
       "properties": {
         "incident_id": {
           "type": "integer"
         }
-      },
-      "required": [
-        "incident_id"
-      ]
+      }
     },
     "metrics": {
       "type": "object",
@@ -61,24 +50,7 @@
         "timestamp": {
           "type": "string"
         }
-      },
-      "required": [
-        "execution_time_ms",
-        "host",
-        "package",
-        "package_version",
-        "timestamp",
-        "version"
-      ]
+      }
     }
-  },
-  "required": [
-    "content",
-    "inputs",
-    "metrics",
-    "raw",
-    "reason",
-    "success",
-    "version"
-  ]
+  }
 }

@@ -8,49 +8,41 @@
     "success": {
       "type": "boolean"
     },
-    "reason": {
-      "type": "null"
-    },
+    "reason": {},
     "content": {
       "type": "object",
       "properties": {
-        "data": {
-          "type": "object",
-          "properties": {
-            "affected": {
-              "type": "integer"
-            }
-          },
-          "required": [
-            "affected"
-          ]
+        "success_verdict": {
+          "type": "boolean"
+        },
+        "success_status": {
+          "type": "boolean"
+        },
+        "threat_id": {
+          "type": "string"
+        },
+        "threat_analyst_verdict": {
+          "type": "string"
+        },
+        "threat_status": {
+          "type": "string"
         }
-      },
-      "required": [
-        "data"
-      ]
+      }
     },
-    "raw": {
-      "type": "null"
-    },
+    "raw": {},
     "inputs": {
       "type": "object",
       "properties": {
         "sentinelone_threat_id": {
           "type": "string"
         },
-        "sentinelone_threat_status": {
-          "type": "string"
-        },
         "sentinelone_threat_analyst_verdict": {
           "type": "string"
+        },
+        "sentinelone_threat_status": {
+          "type": "string"
         }
-      },
-      "required": [
-        "sentinelone_threat_id",
-        "sentinelone_threat_status",
-        "sentinelone_threat_analyst_verdict"
-      ]
+      }
     },
     "metrics": {
       "type": "object",
@@ -73,24 +65,7 @@
         "timestamp": {
           "type": "string"
         }
-      },
-      "required": [
-        "execution_time_ms",
-        "host",
-        "package",
-        "package_version",
-        "timestamp",
-        "version"
-      ]
+      }
     }
-  },
-  "required": [
-    "content",
-    "inputs",
-    "metrics",
-    "raw",
-    "reason",
-    "success",
-    "version"
-  ]
+  }
 }

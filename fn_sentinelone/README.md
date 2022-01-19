@@ -60,6 +60,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 1.0.1 | 1/2022 | Update payload schema files |
 | 1.0.0 | 1/2022 | Initial Release |
 
 ---
