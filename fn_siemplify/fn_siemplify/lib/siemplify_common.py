@@ -13,19 +13,20 @@ LOG = logging.getLogger(__name__)
 PACKAGE_NAME = "fn_siemplify"
 
 DEFAULT_CREATE_CASE = "templates/siemplify_create_case.jinja"
+SIEMPLIFY_CREATE_ENTITY_TEMPLATE = "templates/siemplify_create_entity.jinja"
 
 API_VERSION = "api/external/v1"
-CREATE_CASE_URL = "cases/CreateManualCase"
-UPDATE_CASE_DESCRIPTION_URL = "cases/ChangeCaseDescription"
-GET_CASE_URL = "cases/GetCaseFullDetails/{}"
 
 All_BLOCKLIST_URL = "settings/GetAllModelBlackRecords"
 FILTERED_BLOCKLIST_URL = "settings/GetBlackListDetails"
 ADDUPDATE_BLOCKLIST_URL = "settings/AddOrUpdateModelBlackRecords"
-
 ALL_CUSTOMLIST_URL = "settings/GetTrackingListRecords"
 ADDUPDATE_CUSTOMLIST_URL = "settings/AddOrUpdateTrackingListRecords"
+GET_VERSION_URL = "settings/GetSystemVersion"
 
+CREATE_CASE_URL = "cases/CreateManualCase"
+UPDATE_CASE_DESCRIPTION_URL = "cases/ChangeCaseDescription"
+GET_CASE_URL = "cases/GetCaseFullDetails/{}"
 CREATE_ENTITY_URL = "cases/CreateCaseEntity"
 CREATE_COMMENT_URL = "cases/AddCaseComment"
 CREATE_INSIGHT_URL = "cases/CreateCaseInsight"
@@ -33,13 +34,16 @@ CREATE_ARTIFACT_URL = "cases/CreateCaseEntity"
 CREATE_ATTACHMENT_URL = "cases/AddEvidence"
 CREATE_TASK_URL = "cases/AddOrUpdateCaseTask"
 CLOSE_CASE = "cases/CloseCase"
-SEARCH_CASE_URL = "search/CaseSearchEverything"
 CASES_MODIFIED_URL = "cases/IsCaseUpdated"
-GET_VERSION_URL = "settings/GetSystemVersion"
+
+SEARCH_CASE_URL = "search/CaseSearchEverything"
 
 SOAR_HEADER = "IBM SOAR"
+CREATED_BY_SOAR = "Created by {}".format(SOAR_HEADER)
 SIEMPLIFY_HEADER="From Siemplify"
 IBMSOAR_TAGS = ['IBMSOAR']
+
+GENERICENTITY = "GENERICENTITY"
 
 # lookup take between SOAR artifact types and Simeplify entity types
 ARTIFACT_TYPE_LOOKUPS = {
@@ -58,23 +62,23 @@ ARTIFACT_TYPE_LOOKUPS = {
     "URL Referer": "DestinationURL",
     "Email Subject": "EMAILSUBJECT",
     "Threat CVE ID": "CVEID",
-    "String": "GENERICENTITY",
+    "String": GENERICENTITY,
     "DNS Name": "DESTINATIONDOMAIN",
     "IP Address": "IPSET",
     "User Agent": "USERUNIQNAME",
     "User Account": "USERUNIQNAME",
-    "Registry Key": "GENERICENTITY",
-    "Password" : "GENERICENTITY",
-    "Observed Data": "GENERICENTITY",
+    "Registry Key": GENERICENTITY,
+    "Password" : GENERICENTITY,
+    "Observed Data": GENERICENTITY,
     "Network CIDR Range": "IPSET",
     "Mutex": "THREATSIGNATURE",
-    "Malware Family/Variant": "GENERICENTITY",
-    "HTTP Response Header": "GENERICENTITY",
-    "HTTP Request Header": "GENERICENTITY",
+    "Malware Family/Variant": GENERICENTITY,
+    "HTTP Response Header": GENERICENTITY,
+    "HTTP Request Header": GENERICENTITY,
     "Email Sender Name": "USERUNIQNAME",
     "Email Sender": "USERUNIQNAME",
     "Email Recipient": "USERUNIQNAME",
-    "Email Body": "GENERICENTITY",
+    "Email Body": GENERICENTITY,
     "Email Attachment Name": "FILENAME",
     "Email Attachment": None,
     "Log File": None,
@@ -99,7 +103,7 @@ class SiemplifyCommon():
     def sync_case(self, incident_info):
         # perform an update to an existing incident
         if incident_info.get('siemplify_case_id'):
-            raise IntegrationError("Update Siemplify Case curerntly not supported")
+            raise IntegrationError("Update Siemplify Case currently not supported")
 
         return self.create_case(incident_info)
 
@@ -165,8 +169,8 @@ class SiemplifyCommon():
                 "pageSize": str(inputs.get("siemplify_limit", 100))
             }
             return self._make_call("POST", FILTERED_BLOCKLIST_URL, payload)
-        else:
-            return self._make_call("GET", All_BLOCKLIST_URL)
+
+        return self._make_call("GET", All_BLOCKLIST_URL)
 
     def add_update_blocklist(self, inputs):
         """[add a SOAR artifact to the block list]
@@ -179,7 +183,7 @@ class SiemplifyCommon():
         """
         payload = {
             "entityIdentifier": inputs['siemplify_artifact_value'],
-            "entityType": ARTIFACT_TYPE_LOOKUPS.get(inputs['siemplify_artifact_type'], "GENERICENTITY"),
+            "entityType": ARTIFACT_TYPE_LOOKUPS.get(inputs['siemplify_artifact_type'], GENERICENTITY),
             "scope": 2,
             "environments": inputs['siemplify_environment']
         }
@@ -201,7 +205,7 @@ class SiemplifyCommon():
             [dict]: [Results of the API call]
         """
         category = inputs.get('siemplify_category') if inputs.get('siemplify_category') else \
-            ARTIFACT_TYPE_LOOKUPS.get(inputs['siemplify_artifact_type'], "GENERICENTITY")
+            ARTIFACT_TYPE_LOOKUPS.get(inputs['siemplify_artifact_type'], GENERICENTITY)
 
         payload = {
             "entityIdentifier": inputs['siemplify_artifact_value'],
@@ -258,92 +262,14 @@ class SiemplifyCommon():
         Returns:
             [dict]: [Results of API call]
         """
-        siemplify_entity_type = ARTIFACT_TYPE_LOOKUPS.get(inputs['siemplify_artifact_type'])
-        if not siemplify_entity_type:
+        inputs['siemplify_entity_type'] = ARTIFACT_TYPE_LOOKUPS.get(inputs['siemplify_artifact_type'])
+        if not inputs['siemplify_entity_type']:
             LOG.warning("No matching entity type for Artifact type: %s, value: %s",
-                    inputs['siemplify_artifact_type'], inputs['siemplify_artifact_value'])
+                        inputs['siemplify_artifact_type'],
+                        inputs['siemplify_artifact_value'])
             return None
 
-        payload = {
-            "caseId": inputs['siemplify_case_id'],
-            "alertIdentifier": inputs['siemplify_alert_id'],
-            "entities": [
-                {
-                "caseId": 0,
-                "identifier": inputs['siemplify_artifact_value'],
-                "entityType": siemplify_entity_type,
-                "isInternal": True,
-                "isSuspicious": False,
-                "isArtifact": True,
-                "isEnriched": False,
-                "isVulnerable": False,
-                "isPivot": False,
-                "environment": inputs['siemplify_environment'],
-                "fields": [
-                    {
-                    "isHighlight": False,
-                    "groupName": "Default",
-                    "items": [
-                        {
-                        "originalName": "Type",
-                        "name": "Type",
-                        "value": siemplify_entity_type
-                        },
-                        {
-                        "originalName": "IsInternalAsset",
-                        "name": "IsInternalAsset",
-                        "value": "True"
-                        },
-                        {
-                        "originalName": "IsSuspicious",
-                        "name": "IsSuspicious",
-                        "value": "False"
-                        },
-                        {
-                        "originalName": "IsEnriched",
-                        "name": "IsEnriched",
-                        "value": "False"
-                        },
-                        {
-                        "originalName": "IsVulnerable",
-                        "name": "IsVulnerable",
-                        "value": "False"
-                        },
-                        {
-                        "originalName": "IsArtifact",
-                        "name": "IsArtifact",
-                        "value": "True"
-                        },
-                        {
-                        "originalName": "IsManuallyCreated",
-                        "name": "IsManuallyCreated",
-                        "value": "True"
-                        },
-                        {
-                        "originalName": "Environment",
-                        "name": "Environment",
-                        "value": inputs['siemplify_environment']
-                        }
-                    ]
-                    },
-                    {
-                    "isHighlight": False,
-                    "groupName": "Entity",
-                    "items": [
-                        {
-                        "originalName": "IsPivot",
-                        "name": "Is Pivot",
-                        "value": "False"
-                        }
-                    ]
-                    }
-                ],
-                "isManuallyCreated": True,
-                "isCustom": True,
-                "id": "{}_{}".format(inputs['siemplify_artifact_value'].replace(' ', '_'), inputs['siemplify_environment'])
-                }
-            ]
-        }
+        payload = self.jina_env.make_payload_from_template(SIEMPLIFY_CREATE_ENTITY_TEMPLATE, None, inputs)
 
         return self._make_call("POST", CREATE_ARTIFACT_URL, payload)
 
@@ -369,7 +295,7 @@ class SiemplifyCommon():
             "caseIdentifier": str(case_id),
             "base64Blob": b64content,
             "name": filename,
-            "description": "created by IBM SOAR",
+            "description": CREATED_BY_SOAR,
             "isImportant": isImportant
         }
         if filetype:
@@ -391,7 +317,7 @@ class SiemplifyCommon():
         payload = {
             "caseId": siemplify_case_id,
             "owner": siemplify_task_assignee,
-            "name": "IBM SOAR: {}".format(task_info['name']),
+            "name": "{}: {}".format(SOAR_HEADER, task_info['name']),
             "dueDateUnixTimeMs": task_info.get('due_date'),
             "ownerComment": task_info.get('instr_text'),
         }
@@ -466,9 +392,9 @@ def callback(response):
     error_msg = None
     if response.status_code < 300 or response.status_code == 2000:
         return response, None
-    else:
-        resp = response.json()
-        msg = resp['ErrorMessage']
-        error_msg  = u"Siemplify Error: \n    status code: {0}\n    failure: {1}".format(response.status_code, msg)
 
-        return response, error_msg
+    resp = response.json()
+    msg = resp['ErrorMessage']
+    error_msg  = u"Siemplify Error: \n    status code: {0}\n    failure: {1}".format(response.status_code, msg)
+
+    return response, error_msg

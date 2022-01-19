@@ -1,0 +1,80 @@
+{
+  "caseId": "{{ siemplify_case_id }}",
+  "alertIdentifier": "{{ siemplify_alert_id }}",
+  "entities": [
+    {
+      "caseId": 0,
+      "identifier": "{{ siemplify_artifact_value }}",
+      "entityType": "{{ siemplify_entity_type }}",
+      "isInternal": True,
+      "isSuspicious": False,
+      "isArtifact": True,
+      "isEnriched": False,
+      "isVulnerable": False,
+      "isPivot": False,
+      "environment": "{{ siemplify_environment }}",
+      "fields": [
+        {
+          "isHighlight": False,
+          "groupName": "Default",
+          "items": [
+            {
+              "originalName": "Type",
+              "name": "Type",
+              "value": "{{ siemplify_entity_type }}"
+            },
+            {
+              "originalName": "IsInternalAsset",
+              "name": "IsInternalAsset",
+              "value": "True"
+            },
+            {
+              "originalName": "IsSuspicious",
+              "name": "IsSuspicious",
+              "value": "False"
+            },
+            {
+              "originalName": "IsEnriched",
+              "name": "IsEnriched",
+              "value": "False"
+            },
+            {
+              "originalName": "IsVulnerable",
+              "name": "IsVulnerable",
+              "value": "False"
+            },
+            {
+              "originalName": "IsArtifact",
+              "name": "IsArtifact",
+              "value": "True"
+            },
+            {
+              "originalName": "IsManuallyCreated",
+              "name": "IsManuallyCreated",
+              "value": "True"
+            },
+            {
+              "originalName": "Environment",
+              "name": "Environment",
+              "value": "{{ siemplify_environment }}"
+            }
+          ]
+        },
+        {
+          "isHighlight": False,
+          "groupName": "Entity",
+          "items": [
+            {
+              "originalName": "IsPivot",
+              "name": "Is Pivot",
+              "value": "False"
+            }
+          ]
+        }
+      ],
+      "isManuallyCreated": True,
+      "isCustom": True,
+      "id": "{{ siemplify_artifact_value| replace(' ', '_') }}_{{ siemplify_environment| replace(' ', '_') }}"
+    }
+  ]
+}

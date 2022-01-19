@@ -16,14 +16,14 @@
   NOTE: If your app is available in the container-format only, there is no need to mention the integration server in this readme.
 -->
 
-# Siemplify App for IBM SOAR
+# Siemplify App for IBM QRadar SOAR
 
 ## Table of Contents
 - [Release Notes](#release-notes)
 - [Overview](#overview)
   - [Key Features](#key-features)
 - [Requirements](#requirements)
-  - [Resilient platform](#resilient-platform)
+  - [SOAR platform](#SOAR-platform)
   - [Cloud Pak for Security](#cloud-pak-for-security)
   - [Proxy Server](#proxy-server)
   - [Python Environment](#python-environment)
@@ -64,7 +64,7 @@
   Provide a high-level description of the function itself and its remote software or application.
   The text below is parsed from the "description" and "long_description" attributes in the setup.py file
 -->
-**Siemplify App for IBM IBM SOAR**
+**Siemplify App for IBM QRadar SOAR (SOAR)**
 
  ![screenshot: main](./doc/screenshots/main.png)
 
@@ -91,17 +91,17 @@ Bi-directional synchronization with Siemplify Cases from SOAR Incidents. Other S
 <!--
   List any Requirements
 -->
-This app supports the IBM Resilient SOAR Platform and the IBM Cloud Pak for Security.
+This app supports the IBM QRadar SOAR Platform and the IBM Cloud Pak for Security.
 
-### Resilient platform
-The Resilient platform supports two app deployment mechanisms, App Host and integration server.
+### SOAR platform
+The SOAR platform supports two app deployment mechanisms, App Host and integration server.
 
-If deploying to a Resilient platform with an App Host, the requirements are:
-* Resilient platform >= `40.2.81`.
+If deploying to a SOAR platform with an App Host, the requirements are:
+* SOAR platform >= `40.2.81`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
-If deploying to a Resilient platform with an integration server, the requirements are:
-* Resilient platform >= `40.2.81`.
+If deploying to a SOAR platform with an integration server, the requirements are:
+* SOAR platform >= `40.2.81`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient-circuits>=43.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions:
@@ -111,12 +111,12 @@ If deploying to a Resilient platform with an integration server, the requirement
   | Function | Read |
   | Incident | Read all |
 
-The following Resilient platform guides provide additional information:
+The following SOAR platform guides provide additional information:
 * _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _System Administrator Guide_: provides the procedure to install, configure and deploy apps.
 
-The above guides are available on the IBM Knowledge Center at [ibm.biz/soar-docs](https://ibm.biz/soar-docs). On this web page, select your Resilient platform version. On the follow-on page, you can find the _App Host Deployment Guide_ or _Integration Server Guide_ by expanding **Resilient Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
+The above guides are available on the IBM Knowledge Center at [ibm.biz/soar-docs](https://ibm.biz/soar-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _App Host Deployment Guide_ or _Integration Server Guide_ by expanding **SOAR Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
 ### Cloud Pak for Security
 If you are deploying to IBM Cloud Pak for Security, the requirements are:
@@ -1036,12 +1036,14 @@ from java.util import Date
 current_dt = Date().getTime()
 
 if results.success:
+    entity = results.content
     row = incident.addRow('siemplify_list_entries')
     row['report_date'] = current_dt
     row['list_name'] = 'Block List'
     row['entity'] = entity['entityIdentifier']
     row['entity_type'] = entity['entityType']
     row['environments'] = ", ".join(entity['environments'])
+    incident.addNote("Siemplify Add/Update Blocklist successful for: {} ({})".format(artifact.value, artifact.type))
 else:
   incident.addNote("Siemplify Add/Update Blocklist Entity failed: {}".format(results.reason))
 
@@ -1134,8 +1136,9 @@ if results.success:
   row['entity'] = entity['entityIdentifier']
   row['entity_type'] = entity['category']
   row['environments'] = ", ".join(entity['environments'])
+  incident.addNote("Siemplify Add/Update Custom List successful for: {} ({})".format(artifact.value, artifact.type))
 else:
-  incident.addNote("Siemplify Add/Update Blocklist Entity failed: {}".format(results.reason))
+  incident.addNote("Siemplify Add/Update Custom List Entity failed: {}".format(results.reason))
 
 ```
 
