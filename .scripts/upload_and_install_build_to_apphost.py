@@ -13,7 +13,7 @@ def main():
     res_client = setup()
     
     if res_client is None:
-        print("FAILURE!")
+        print("*******************FAILURE!*******************")
         sys.exit()
 
     upload_all_apps(res_client, app_path=ZIP_PATH)
@@ -477,7 +477,7 @@ def track_deployment(res_client, deployment_list):
     if len(deployment_list) > 0: 
         print("The deployment of the following apps was not completed in time:", deployment_list)
     else:
-        print("SUCCESS!")
+        print("*******************SUCCESS!*******************")
 
 ########################################
 ### set config files for apps
