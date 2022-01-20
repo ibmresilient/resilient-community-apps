@@ -7,7 +7,7 @@ from __future__ import print_function
 
 import logging
 from os import path
-import tempfile
+from tempfile import mkdtemp
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import ResultPayload, validate_fields, IntegrationError
 from fn_outbound_email.lib.smtp_mailer import SendSMTPEmail
@@ -187,7 +187,7 @@ class FunctionComponent(ResilientComponent):
         """
         remaining_attachment_list = requested_attachments[:]
         attachment_path = []
-        tempdir = tempfile.mkdtemp()
+        tempdir = mkdtemp()
 
         for incident_attachment in incident_attachment_list:
             file_name = incident_attachment["name"]
@@ -195,13 +195,12 @@ class FunctionComponent(ResilientComponent):
                 remaining_attachment_list.remove(file_name)
 
                 if incident_attachment['type'] == 'incident':
-                    file_contents = self.rest_client().get_content("/incidents/{inc_id}/attachments/{attach_id}/contents".
-                                                                  format(inc_id=inc_id,
-                                                                         attach_id=incident_attachment["id"]))
+                    file_contents = self.rest_client().get_content("/incidents/{}/attachments/{}/contents".
+                                                                  format(inc_id, incident_attachment["id"]))
                 else:
-                    file_contents = self.rest_client().get_content("/tasks/{task_id}/attachments/{attach_id}/contents".
-                                                                  format(task_id=incident_attachment["task_id"],
-                                                                         attach_id=incident_attachment["id"]))
+                    file_contents = self.rest_client().get_content("/tasks/{}/attachments/{}/contents".
+                                                                  format(incident_attachment["task_id"],
+                                                                         incident_attachment["id"]))
                 file_path = path.join(tempdir, file_name)
                 with open(file_path, "wb+") as temp_file:
                     temp_file.write(file_contents)
@@ -223,8 +222,8 @@ class FunctionComponent(ResilientComponent):
         Returns:
             [set]: [file paths for attachments]
         """
-        incident_attachment_result = self.rest_client().post("/incidents/{inc_id}/attachments/query?include_tasks=true".
-                                                             format(inc_id=inc_id), None)
+        incident_attachment_result = self.rest_client().post("/incidents/{}/attachments/query?include_tasks=true".
+                                                             format(inc_id), None)
         incident_attachment_list = incident_attachment_result['attachments']
         # convert the list of requested attachments
         if attachments and attachments == "*":

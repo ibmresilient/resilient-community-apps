@@ -40,7 +40,7 @@
 
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| v1.3.1 | 1/2022 | Bug fixes for jinja templates |
+| v1.3.1 | 1/2022 | Bug fixes for get_datatable function in template_helper.py |
 | v1.3.0 | 7/2021 | Username in app.config does not need to be an email |
 | v1.2.1 | 5/2021 | Bug fix for python 2 |
 | v1.2.0 | 4/2021 | Added capability for task attachments |
