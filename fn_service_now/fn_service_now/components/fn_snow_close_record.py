@@ -102,7 +102,7 @@ class FunctionComponent(ResilientComponent):
                 # Generate the request_data
                 request_data = {
                     "sn_ref_id": sn_ref_id,
-                    "sn_table_name": res_helper.SN_TABLE_NAME,
+                    "sn_table_name": res_helper.get_table_name(sn_ref_id),
                     "sn_close_code": payload.inputs["sn_close_code"],
                     "sn_close_notes": payload.inputs["sn_close_notes"],
                     "sn_record_state": payload.inputs["sn_record_state"],

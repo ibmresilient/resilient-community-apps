@@ -430,6 +430,13 @@ class ResilientHelper(object):
             "data": request_data
         }
 
+    def get_table_name(self, sn_ref_id):
+
+        if self.SN_TABLE_NAME == "sn_si_incident" and sn_ref_id.startswith("SIT"):
+            return "sn_si_task"
+        
+        return self.SN_TABLE_NAME
+
     def sn_api_request(self, rc, method, endpoint, params=None, data=None, headers=None):
         """Method to handle resquests to our custom APIs in ServiceNow"""
         log = logging.getLogger(__name__)

@@ -117,7 +117,7 @@ class FunctionComponent(ResilientComponent):
 
             request_data = {
                 "sn_ref_id": sn_ref_id,
-                "sn_table_name": res_helper.SN_TABLE_NAME,
+                "sn_table_name": res_helper.get_table_name(sn_ref_id),
                 "sn_update_fields": fields
             }
 
