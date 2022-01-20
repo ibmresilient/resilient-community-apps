@@ -28,7 +28,7 @@ function getAllowedAssignmentGroups(){
 		}
 	}
 	catch (e){
-		errMsg = "Error parsing x_ibmrt_resilient.ResilientAssignmentGroupNames. Ensure in correct CSV format.\n" + e;
+		errMsg = "Error parsing x_ibmrt_resilient.ResilientAssignmentGroupNames. Ensure correct CSV format.\n" + e;
 		throw errMsg;
 	}
 
