@@ -14,6 +14,9 @@ except NameError:
     unicode = str
 
 CONFIG_DATA_SECTION = "fn_service_now"
+SECOPS_TABLE_NAME = "sn_si_incident"
+SECOPS_PLAYBOOK_TASK_TABLE_NAME = "sn_si_task"
+SECOPS_PLAYBOOK_TASK_PREFIX = "SIT"
 
 # Define an Incident that gets sent to ServiceNow
 class Incident(object):
@@ -432,8 +435,8 @@ class ResilientHelper(object):
 
     def get_table_name(self, sn_ref_id):
 
-        if self.SN_TABLE_NAME == "sn_si_incident" and sn_ref_id.startswith("SIT"):
-            return "sn_si_task"
+        if self.SN_TABLE_NAME == SECOPS_TABLE_NAME and sn_ref_id.startswith(SECOPS_PLAYBOOK_TASK_PREFIX):
+            return SECOPS_PLAYBOOK_TASK_TABLE_NAME
         
         return self.SN_TABLE_NAME
 
