@@ -74,40 +74,6 @@ class SendSMTPEmail(ResilientComponent):
             self.get_oauth2_token()
             self.generate_oauth2_string()
 
-    def get_oauth2_token(self):
-        """"Get a new OAuth2 token.
-
-        Args:
-            None
-        Returns:
-            Set OAuth2 access token attribute [str]
-        Raises:
-            IntegrationError: [description]
-        """
-        url = self.token_url
-
-        post_data = {
-            "client_id": self.client_id,
-            "scope": [self.scope],
-            "client_secret": self.client_secret,
-        }
-        if self.refresh_token:
-            post_data.update({"refresh_token": self.refresh_token})
-            post_data.update({"grant_type": "refresh_token"})
-        else:
-            post_data.update({"grant_type": "client_credentials"})
-
-        result = self.rc.execute_call_v2("POST", url, data=post_data)
-        r_json = result.json()
-
-        if "access_token" in r_json:
-            self.oauth2_token = r_json['access_token']
-            return True
-
-        msg = u"Unable to authenticate: Error: {}\nDescription: {}\nCorrelation_id: {}"\
-                .format(r_json.get("error"), r_json.get("error_description"), r_json.get("correlation_id"))
-        raise IntegrationError(msg)
-
     def send(self, body_html="", body_text=""):
         if not self.opts:
             raise SimpleSendEmailException("opts required")
