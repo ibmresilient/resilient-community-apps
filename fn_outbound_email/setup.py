@@ -7,10 +7,10 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_outbound_email',
-    display_name='Outbound Email for SAOR',
+    display_name='Outbound Email for IBM QRadar SOAR',
     version='1.3.1',
     license='MIT',
-    author='IBM Resilient',
+    author='IBM QRadar SOAR',
     url='https://github.com/ibmresilient/resilient-community-apps/tree/master/fn_outbound_email',
     description="Resilient Circuits Components for 'fn_outbound_email'",
     long_description="Resilient Circuits Components for 'fn_outbound_email'",
