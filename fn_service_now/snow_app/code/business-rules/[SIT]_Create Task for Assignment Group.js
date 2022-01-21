@@ -10,17 +10,17 @@ current.isValidField("x_ibmrt_resilient_ibm_resilient_reference_id") && current.
 //////////////////
 (function executeRule(current) {
 
-	var resReferenceId, wfVars, wfId, wf, parent, resHelper = null;
+	var resReferenceId, wfVars, wfId, wf, parent, resHelper, snowHelper = null;
 
 	resHelper = new ResilientHelper();
-	
+	snowHelper = new SNOWRESTHelper();
+
 	//This condition doesn't fit in the condition section so is checked here
-	if (resHelper.assignGroupIsAllowed(current.getDisplayValue("assignment_group"))){
+	//Check that the new assignment group is in the list of groups to auto-sync on
+	if (resHelper.assignGroupIsAllowed(current.getDisplayValue("assignment_group").trim().toLowerCase())){
 
-		parent = new GlideRecord("sn_si_incident");
-		parent.get(current.getValue("parent"));
-
-		resReferenceId = parent.getValue("x_ibmrt_resilient_ibm_resilient_reference_id");
+		//Get the res ID to properly link this new task to a resilient incident
+		resReferenceId = snowHelper.getResReferenceIdFromTaskParent(current, "sn_si_incident");
 
 		//Instantiate new Workflow object (use global. as in Scoped Application)
 		wf = new global.Workflow();

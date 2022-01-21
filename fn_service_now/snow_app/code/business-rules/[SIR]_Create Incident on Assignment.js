@@ -15,7 +15,8 @@ current.isValidField("x_ibmrt_resilient_ibm_resilient_reference_id") && current.
 	resHelper = new ResilientHelper();
 
 	//This condition doesn't fit in the condition section so is checked here
-	if (resHelper.assignGroupIsAllowed(current.getDisplayValue("assignment_group"))) {
+	//Check that the new assignment group is in the list of groups to auto-sync on
+	if (resHelper.assignGroupIsAllowed(current.getDisplayValue("assignment_group").trim().toLowerCase())) {
 
 		workflowId = null;
 

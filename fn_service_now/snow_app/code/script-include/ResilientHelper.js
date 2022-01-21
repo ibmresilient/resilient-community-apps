@@ -1,11 +1,14 @@
-// (c) Copyright IBM Corp. 2019. All Rights Reserved.
+// (c) Copyright IBM Corp. 2022. All Rights Reserved.
 
 var JSON_PARSER = new global.JSON();
 
 function getAllowedAssignmentGroups(){
+	//Gets ResilientAssignmentGroupNames CSV defined in properties
+	//and returns then as a list (all lowercase and whitespace trimmed)
+
 	var assignGroupsCSV, assignGroupsArray, i, errMsg = null;
 	
-	// Get the ServiceNowAllowedTables system property
+	// Get the ResilientAssignmentGroupNames system property
 	try{
 		assignGroupsCSV = gs.getProperty("x_ibmrt_resilient.ResilientAssignmentGroupNames");
 	}
@@ -24,7 +27,7 @@ function getAllowedAssignmentGroups(){
 
 		// Trim whitespace off each table name
 		for(i = 0; i < assignGroupsArray.length; i++){
-			assignGroupsArray[i] = assignGroupsArray[i].trim();
+			assignGroupsArray[i] = assignGroupsArray[i].trim().toLowerCase();
 		}
 	}
 	catch (e){
@@ -312,12 +315,16 @@ ResilientHelper.prototype = {
 
 	assignGroupIsAllowed: function(assignmentGroup){
 
-		var allowedGroups, i = null;
+		var allowedGroups, i, assignmentGroupLower = null;
+
+		//First convert the incoming value to lowercase and trim
+		//for uniformity with values returned from getAllowedAssignmentGroups()
+		assignmentGroupLower = assignmentGroup.trim().toLowerCase();
 
 		allowedGroups = getAllowedAssignmentGroups();
 
 		for (i = 0; i < allowedGroups.length; i++){
-			if(allowedGroups[i] == assignmentGroup){
+			if(allowedGroups[i] == assignmentGroupLower){
 				return true;
 			}
 		}
