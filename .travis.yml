@@ -20,10 +20,11 @@ env:
 
     - KEYWORD_BUILD_DEV_APP="[build-dev-app]"
     - BUILD_DEV_APP=$([[ "$TRAVIS_COMMIT_MESSAGE" != *"$KEYWORD_BUILD_DEV_APP"* ]]; echo $?)
-    - BUILD_TYPE=`if [ $BUILD_DEV_APP == 1 ]; then echo "DEV"; else echo "MAIN"; fi`
 
     - KEYWORD_UPLOAD_APP_TO_APPHOST="[deploy-apphost]"
     - UPLOAD_APP_TO_APPHOST=$([[ "$TRAVIS_COMMIT_MESSAGE" != *"$KEYWORD_UPLOAD_APP_TO_APPHOST"* ]]; echo $?)
+        - BUILD_TYPE=`if [ $BUILD_DEV_APP == 1 ] || [ $UPLOAD_APP_TO_APPHOST == 1]; then echo "DEV"; else echo "MAIN"; fi`
+
 
     - KEYWORD_DEV_DEPS='[dev-deps]'
     - USE_ARTIFACTORY_DEPS=`[[ "$TRAVIS_COMMIT_MESSAGE" != *"$KEYWORD_DEV_DEPS"* ]]; echo $?`
