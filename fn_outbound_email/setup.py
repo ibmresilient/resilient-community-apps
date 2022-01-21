@@ -7,6 +7,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_outbound_email',
+    display_name='Outbound Email for SAOR',
     version='1.3.1',
     license='MIT',
     author='IBM Resilient',
