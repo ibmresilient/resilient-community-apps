@@ -10,6 +10,11 @@ function getPassword(){
 	return gs.getProperty("x_ibmrt_resilient.ResilientUserPassword");
 }
 
+//Function to get Resilient API Key Secret so we don't have to set Variable in Memory
+function getAPISecret(){
+	return gs.getProperty("x_ibmrt_resilient.ResilientAPISecret");
+}
+
 function validateMidServer(midServerName){
 	var errMsg = null;
 	var MID_SERVER_TABLE_NAME = "ecc_agent_capability_m2m";
@@ -24,7 +29,7 @@ function validateMidServer(midServerName){
 			if(gr.agent.status.toLowerCase() == "up" && gr.agent.validated == "true") {
 				gs.debug("Mid-Server '"+midServerName+"' found and is valid.");
 				return true;
-			 }
+			}
 		}
 	}
 	catch (e){
@@ -181,12 +186,14 @@ ResilientAPI.prototype = {
 	
 	initialize: function() {
 		
-		var hostName, orgName, userEmail, userPassword, snUsername, midServerName, errMsg = null;
+		var hostName, orgName, resAPIId, resAPISecret, userEmail, userPassword, snUsername, midServerName, errMsg, authenticateWithAPI = null;
 		
 		//Ensure all the required System Properties are available before continuing
 		try{
 			hostName = gs.getProperty("x_ibmrt_resilient.ResilientHost");
 			orgName = gs.getProperty("x_ibmrt_resilient.ResilientOrgName");
+			resAPIId = gs.getProperty("x_ibmrt_resilient.ResilientAPIId");
+			resAPISecret = gs.getProperty("x_ibmrt_resilient.ResilientAPISecret");
 			userEmail = gs.getProperty("x_ibmrt_resilient.ResilientUserEmail");
 			userPassword = gs.getProperty("x_ibmrt_resilient.ResilientUserPassword");
 			snUsername = gs.getProperty("x_ibmrt_resilient.ServiceNowUsername");
@@ -200,9 +207,21 @@ ResilientAPI.prototype = {
 		errMsg = " property cannot be null. Please update your IBM Resilient Properties";
 		if (!hostName) {throw "Resilient Host" + errMsg;}
 		if (!orgName) {throw "Resilient Organization" + errMsg;}
-		if (!userEmail) {throw "Resilient Email" + errMsg;}
-		if (!userPassword) {throw "Resilient Password" + errMsg;}
 		if (!snUsername) {throw "ServiceNow Username" + errMsg;}
+
+		//Check that either the API Key details or the email/pass details are present
+		//One of the two sets must be provided
+		if (!resAPIId || !resAPISecret) {
+			errMsgStart = "API Key details are missing. ";
+			errMsgEnd = " is required if not authenticating with API Key. Please update your IBM Resilient Properties";
+
+			if (!userEmail) {throw errMsgStart + "Resilient Email" + errMsgEnd;}
+			if (!userPassword) {throw errMsgStart + "Resilient Password" + errMsgEnd;}
+
+			authenticateWithAPI = false;
+		} else {
+			authenticateWithAPI = true;
+		}
 
 		//Setup MID Server
 		midServerName = midServerName.trim();
@@ -213,15 +232,17 @@ ResilientAPI.prototype = {
 
 		//Set Resilient Configuration Settings
 		this.baseURL = "https://" + hostName;
+		this.resAPIId = resAPIId;
 		this.orgName = orgName;
 		this.userEmail = userEmail;
+		this.authenticateWithAPI = authenticateWithAPI;
 
 		//Initialise other class variables that will be set in the connect() method
 		this.XSESSID = null;
 		this.csrfToken = null;
 		this.JSESSIONID = null;
 		this.orgId = null;
-		
+
 		try{
 			this.connect();
 		}
@@ -237,16 +258,28 @@ ResilientAPI.prototype = {
 
 		//Instantiate new REST Message
 		rm = new sn_ws.RESTMessageV2();
-		rm.setHttpMethod("post");
-		rm.setEndpoint(this.baseURL + "/rest/session");
-		rm.setRequestHeader("content-type", "application/json");
 
 		//Set authData for the request
-		authData = { "email": this.userEmail, "password": getPassword() };
+		//If not using API key, set the email/pass and that will
+		//be used to get a JSESSIONID and csrfToken. If using API key, 
+		//that info is provided to each request
+		if (!this.authenticateWithAPI) {
+			authData = { "email": this.userEmail, "password": getPassword() };
 		
-		//Set Request Body
-		requestBody = JSON_PARSER.encode(authData);
-		rm.setRequestBody(requestBody);
+			//Set Request Body
+			requestBody = JSON_PARSER.encode(authData);
+
+			rm.setHttpMethod("post");
+			rm.setRequestBody(requestBody);
+		} else {
+			//Auth with API key uses GET on session rather than POST
+			//and provides the API key details in a header
+			rm.setHttpMethod("get");
+			rm.setBasicAuth(this.resAPIId, getAPISecret());
+		}
+
+		rm.setEndpoint(this.baseURL + "/rest/session");
+		rm.setRequestHeader("content-type", "application/json");
 
 		//If a mid server has been specified, check it is up and validated, then set it in the RESTMessage
 		if (this.midServerName){
@@ -257,11 +290,13 @@ ResilientAPI.prototype = {
 
 		//Execute and get response
 		res = executeRESTMessage(rm, this.midServerName, this.baseURL);
-		
-		//Get csrfToken and JSESSIONID
-		this.csrfToken = res.body.csrf_token;
-		this.JSESSIONID = parseJSESSIONID(res.headers["Set-Cookie"]);
-		
+
+		//Get csrfToken and JSESSIONID if authenticating with email
+		if (!this.authenticateWithAPI) {
+			this.csrfToken = res.body.csrf_token;
+			this.JSESSIONID = parseJSESSIONID(res.headers["Set-Cookie"]);
+		}
+
 		//Get the orgId
 		this.orgId = getOrgId(res.body.orgs, this.orgName);
 	},
@@ -291,8 +326,18 @@ ResilientAPI.prototype = {
 		
 		//Set the headers
 		headers["content-type"] = "application/json";
-		headers["X-sess-id"] = this.csrfToken;
-		headers["Cookie"] = "JSESSIONID=" + this.JSESSIONID + ";";
+
+		//Figure out how authentication will happen
+		//If using API key, set the ID and secret in header
+		//otherwise use session info that was retrieved
+		//using email/pass when connect() was called in init
+		if (this.authenticateWithAPI) {
+			rm.setBasicAuth(this.resAPIId, getAPISecret());
+		} else {
+			headers["X-sess-id"] = this.csrfToken;
+			headers["Cookie"] = "JSESSIONID=" + this.JSESSIONID + ";";
+		}
+
 		rm = setHeaders(rm, headers);
 		
 		//If data, set the body
