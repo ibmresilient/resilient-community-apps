@@ -231,7 +231,7 @@ class SendSMTPEmail(ResilientComponent):
 
         post_data = {
             "client_id": self.client_id,
-            "scope": [self.scope, "https://outlook.office.com/SMTP.Send"],
+            "scope": [self.scope],
             "client_secret": self.client_secret,
         }
         if self.refresh_token:
