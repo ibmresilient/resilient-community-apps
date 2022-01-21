@@ -20,7 +20,7 @@
 ```python
 inputs.qradar_search_param3 = incident.properties.qradar_id
 inputs.qradar_query_type = "sourceip"
-inputs.qradar_server_label = incident.properties.qradar_destination
+inputs.qradar_label = incident.properties.qradar_destination
 ```
 
 ### Post-Processing Script
@@ -56,7 +56,7 @@ for event in results.events:
 ```python
 inputs.qradar_search_param3 = incident.properties.qradar_id
 inputs.qradar_query_type = "sourceip"
-inputs.qradar_server_label = incident.properties.qradar_destination
+inputs.qradar_label = incident.properties.qradar_destination
 ```
 
 ### Post-Processing Script

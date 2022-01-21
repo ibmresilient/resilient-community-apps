@@ -47,7 +47,7 @@ class FunctionComponent(ResilientComponent):
             qradar_search_param4 = kwargs.get("qradar_search_param4")  # text
             qradar_search_param5 = kwargs.get("qradar_search_param5")  # text
             qradar_search_param6 = kwargs.get("qradar_search_param6")  # text
-            qradar_server_label = kwargs.get("qradar_server_label") # QRadar server to connect to
+            qradar_label = kwargs.get("qradar_label") # QRadar server to connect to
 
             log.info("qradar_query: %s", qradar_query)
             log.info("qradar_search_param1: %s", qradar_search_param1)
@@ -56,9 +56,9 @@ class FunctionComponent(ResilientComponent):
             log.info("qradar_search_param4: %s", qradar_search_param4)
             log.info("qradar_search_param5: %s", qradar_search_param5)
             log.info("qradar_search_param6: %s", qradar_search_param6)
-            log.info("qradar_server_label: %s"), qradar_server_label
+            log.info("qradar_label: %s"), qradar_label
 
-            options = QRadarServers.qradar_server_label_test(qradar_server_label, self.servers_list)
+            options = QRadarServers.qradar_label_test(qradar_label, self.servers_list)
             qradar_verify_cert = False if options.get("verify_cert", "false").lower() == "false" else options.get("verify_cert")
 
             timeout = float(options.get("search_timeout",600))  # Default timeout to 10 minutes

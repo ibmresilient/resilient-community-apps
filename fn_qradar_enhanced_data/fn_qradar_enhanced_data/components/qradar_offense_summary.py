@@ -38,12 +38,12 @@ class FunctionComponent(ResilientComponent):
             # Get the function parameters:
             qradar_offenseid = kwargs.get("qradar_offense_id")  # QRadar Offense ID
             qradar_fn_type = kwargs.get("qradar_query_type")  # Function type based on the datatable/fields to populate
-            qradar_server_label = kwargs.get("qradar_server_label") # QRadar server to connect to
+            qradar_label = kwargs.get("qradar_label") # QRadar server to connect to
 
             log.info("qradar_offenseid: %s", qradar_offenseid)
-            log.info("qradar_server_label: %s"), qradar_server_label
+            log.info("qradar_label: %s"), qradar_label
 
-            options = QRadarServers.qradar_server_label_test(qradar_server_label, self.servers_list)
+            options = QRadarServers.qradar_label_test(qradar_label, self.servers_list)
             qradar_verify_cert = False if options.get("verify_cert", "false").lower() == "false" else options.get("verify_cert")
 
             log.debug("Connection to {} using {}".format(options.get("host"),
