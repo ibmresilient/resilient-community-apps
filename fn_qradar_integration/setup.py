@@ -19,6 +19,7 @@ def snake_to_camel(word):
 
 setup(
     name='fn_qradar_integration',
+    display_name="IBM QRadar SOAR Compnents for 'fn_qradar_integration'",
     version='2.2.0',
     license='MIT License',
     author='IBM Resilient',
@@ -30,7 +31,7 @@ setup(
         'resilient_circuits>=39.0.0',
         'resilient_lib'
     ],
-    python_requires='>=3',
+    python_requires='>=3.6',
     packages=find_packages(),
     include_package_data=True,
     platforms='any',
