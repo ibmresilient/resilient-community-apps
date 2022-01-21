@@ -99,7 +99,6 @@ fn_zia
 
 #Not_Rebuilt
 #fn_crowdstrike_falcon-still-root-group
-rc-data-feed
 rc_data_feed
 #rc-data-feed-plugin-elasticfeed
 #rc-data-feed-plugin-kafkafeed
