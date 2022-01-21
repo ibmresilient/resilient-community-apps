@@ -20,7 +20,7 @@
 ```python
 inputs.qradar_offense_id= incident.properties.qradar_id
 inputs.qradar_query_type = "offensesummary"
-inputs.qradar_label = incident.properties.qradar_destination
+inputs.qradar_server_label = incident.properties.qradar_destination
 ```
 
 ### Post-Processing Script

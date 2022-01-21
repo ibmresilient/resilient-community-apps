@@ -18,9 +18,9 @@
 
 ### Pre-Processing Script
 ```python
-inputs.qradar_query_param3 = incident.properties.qradar_id
+inputs.qradar_search_param3 = incident.properties.qradar_id
 inputs.qradar_query_type = "categories"
-inputs.qradar_label = incident.properties.qradar_destination
+inputs.qradar_server_label = incident.properties.qradar_destination
 ```
 
 ### Post-Processing Script
@@ -53,9 +53,9 @@ for event in results.events:
 
 ### Pre-Processing Script
 ```python
-inputs.qradar_query_param3 = incident.properties.qradar_id
+inputs.qradar_search_param3 = incident.properties.qradar_id
 inputs.qradar_query_type = "categories"
-inputs.qradar_label = incident.properties.qradar_destination
+inputs.qradar_server_label = incident.properties.qradar_destination
 ```
 
 ### Post-Processing Script

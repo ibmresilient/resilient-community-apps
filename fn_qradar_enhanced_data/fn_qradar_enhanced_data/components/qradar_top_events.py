@@ -41,24 +41,24 @@ class FunctionComponent(ResilientComponent):
             # Get the function parameters:
             qradar_query = self.get_textarea_param(kwargs.get("qradar_query"))  # textarea
             qradar_fn_type = kwargs.get("qradar_query_type")  # text
-            qradar_query_param1 = kwargs.get("qradar_query_param1")  # text
-            qradar_query_param2 = kwargs.get("qradar_query_param2")  # text
-            qradar_query_param3 = kwargs.get("qradar_query_param3")  # text
-            qradar_query_param4 = kwargs.get("qradar_query_param4")  # text
-            qradar_query_param5 = kwargs.get("qradar_query_param5")  # text
-            qradar_query_param6 = kwargs.get("qradar_query_param6")  # text
-            qradar_label = kwargs.get("qradar_label") # QRadar server to connect to
+            qradar_search_param1 = kwargs.get("qradar_search_param1")  # text
+            qradar_search_param2 = kwargs.get("qradar_search_param2")  # text
+            qradar_search_param3 = kwargs.get("qradar_search_param3")  # text
+            qradar_search_param4 = kwargs.get("qradar_search_param4")  # text
+            qradar_search_param5 = kwargs.get("qradar_search_param5")  # text
+            qradar_search_param6 = kwargs.get("qradar_search_param6")  # text
+            qradar_server_label = kwargs.get("qradar_server_label") # QRadar server to connect to
 
             log.info("qradar_query: %s", qradar_query)
-            log.info("qradar_query_param1: %s", qradar_query_param1)
-            log.info("qradar_query_param2: %s", qradar_query_param2)
-            log.info("qradar_query_param3: %s", qradar_query_param3)
-            log.info("qradar_query_param4: %s", qradar_query_param4)
-            log.info("qradar_query_param5: %s", qradar_query_param5)
-            log.info("qradar_query_param6: %s", qradar_query_param6)
-            log.info("qradar_label: %s"), qradar_label
+            log.info("qradar_search_param1: %s", qradar_search_param1)
+            log.info("qradar_search_param2: %s", qradar_search_param2)
+            log.info("qradar_search_param3: %s", qradar_search_param3)
+            log.info("qradar_search_param4: %s", qradar_search_param4)
+            log.info("qradar_search_param5: %s", qradar_search_param5)
+            log.info("qradar_search_param6: %s", qradar_search_param6)
+            log.info("qradar_server_label: %s"), qradar_server_label
 
-            options = QRadarServers.qradar_label_test(qradar_label, self.servers_list)
+            options = QRadarServers.qradar_server_label_test(qradar_server_label, self.servers_list)
             qradar_verify_cert = False if options.get("verify_cert", "false").lower() == "false" else options.get("verify_cert")
 
             timeout = float(options.get("search_timeout",600))  # Default timeout to 10 minutes
@@ -67,7 +67,7 @@ class FunctionComponent(ResilientComponent):
                                                          options.get("username", None) or options.get(
                                                              "qradartoken", None)))
 
-            temp_table = "offense-{0}-events-{1}-1000-{2}".format(qradar_query_param3, qradar_fn_type,
+            temp_table = "offense-{0}-events-{1}-1000-{2}".format(qradar_search_param3, qradar_fn_type,
                                                                   str(time()))
 
             qradar_temp_query = sub("FROM\s+{}".format(ARIEL_SEARCH_EVENTS if search(ARIEL_SEARCH_EVENTS,qradar_query, flags=IGNORECASE) else ARIEL_SEARCH_FLOWS),
@@ -80,19 +80,19 @@ class FunctionComponent(ResilientComponent):
 
             temp_query_string = make_query_string(qradar_temp_query,
                                                                  ["*",
-                                                                  qradar_query_param2,
-                                                                  qradar_query_param3,
+                                                                  qradar_search_param2,
+                                                                  qradar_search_param3,
                                                                   " ",
                                                                   " ",
                                                                   " "])
 
             search_query_string = make_query_string(qradar_search_query,
-                                                                   [qradar_query_param1,
+                                                                   [qradar_search_param1,
                                                                     " ",
                                                                     " ",
-                                                                    qradar_query_param4 or " ",
-                                                                    qradar_query_param5,
-                                                                    qradar_query_param6
+                                                                    qradar_search_param4 or " ",
+                                                                    qradar_search_param5,
+                                                                    qradar_search_param6
                                                                     ])
 
             log.info("Running query: " + temp_query_string)
@@ -115,7 +115,7 @@ class FunctionComponent(ResilientComponent):
             # Enrich sourceip data by getting additional props using a graphql call to QRadar
             if qradar_fn_type == SOURCE_IP:
 
-                offense_source = qradar_client.get_offense_source(qradar_query_param3)
+                offense_source = qradar_client.get_offense_source(qradar_search_param3)
 
                 for event in result["events"]:
                     domain = list(filter(lambda x: x["sourceIp"]==event["sourceip"], offense_source["content"]))
@@ -128,7 +128,7 @@ class FunctionComponent(ResilientComponent):
 
             results = {
                 "qrhost": options.get("host"),
-                "offenseid": qradar_query_param3,
+                "offenseid": qradar_search_param3,
                 "events": result["events"]
             }
             yield StatusMessage("Finished 'qradar_top_events' that was running in workflow '{0}'".format(wf_instance_id))
