@@ -46,6 +46,7 @@
 - [Custom Fields](#custom-fields)
 - [Rules](#rules)
 - [Troubleshooting & Support](#troubleshooting--support)
+- [Appendix](#appendix)
 ---
 
 ## Release Notes
@@ -139,7 +140,6 @@ Additional package dependencies may exist for each of these packages:
 * jinja2
 * pytz
 * resilient-circuits>=43.0.0
-* resilient_lib
 * simplejson
 
 ### Endpoint Developed With Siemplify
@@ -171,13 +171,14 @@ The following table provides the settings you need to configure the app. These s
 | **base_url** | Yes | `https://<siemplify host>` | *Base URL for your Siemplify server*|
 | **api_key** | Yes | `abc-123-def` | *API Generated from Siemplify*  |
 | **cafile** | Yes | `false|/path/to/siemplify.cert` | *Certificate needed to access Siemplify* |
-| **polling_interval** | Yes | `120` | *Seconds to wait between polling intervals. 0 disables poller. This will disable the ability to close an IBM SOAR incient when the Siempify Case closes.*  |
-| **polling_lookback** | Yes | `120` | *Minutes to look back for cased cases the first time poller runs* |
-| **poller_timezone** | Yes | `Etc/GMT` | *Timezone adjustment for Siemplify timestamp comparison*  |
-| **default_case_environment** | Yes | `Default Environment` | *Siemplify environment to use when creating cases does not specify an environment* |
-| **siemplify_create_case_template** | Yes | `/path/to/siemplify_create_case.jinja` | *Use when overriding the default template*  |
-| **soar_close_case_template** | Yes | `/path/to/soar_close_case.jinja` | *Use when overriding the default template*  |
-| **soar_update_case_template** | Yes | `/path/to/soar_update_case_case.jinja` | *Use when overriding the default template*  |
+| **polling_interval** | No | `120` | *Seconds to wait between polling intervals. 0 disables poller. This will disable the ability to close an IBM SOAR incient when the Siempify Case closes.*  |
+| **polling_lookback** | No | `120` | *Minutes to look back for cased cases the first time poller runs* |
+| **poller_timezone** | No | `Etc/GMT` | *Timezone adjustment for Siemplify timestamp comparison*  |
+| **default_case_environment** | No | `Default Environment` | *Siemplify environment to use when creating cases does not specify an environment* |
+| **siemplify_create_case_template** | No | `/path/to/siemplify_create_case.jinja` | *Use when overriding the default template*  |
+| **soar_close_case_template** | No | `/path/to/soar_close_case.jinja` | *Use when overriding the default template*  |
+| **soar_update_case_template** | No | `/path/to/soar_update_case_case.jinja` | *Use when overriding the default template*  |
+| **artifact_type_lookup** | No | `/path/to/artifact_type_lookup.json` | *Use to specify an override JSON file with a mapping between SOAR artifact types and Siemplify entities* |
 
 ### Custom Layouts
 <!--
@@ -242,7 +243,7 @@ results = {
     'version': '1.0',
     'package': 'fn-siemplify',
     'package_version': '1.0.0',
-    'host': 'Marks-MacBook-Pro.local',
+    'host': 'localhost',
     'execution_time_ms': 551,
     'timestamp': '2022-01-07 10:56:04'
   }
@@ -329,7 +330,7 @@ results = {
     'version': '1.0',
     'package': 'fn-siemplify',
     'package_version': '1.0.0',
-    'host': 'Marks-MacBook-Pro.local',
+    'host': 'localhost',
     'execution_time_ms': 781,
     'timestamp': '2022-01-07 10:58:09'
   }
@@ -672,7 +673,7 @@ results = {
     'version': '1.0',
     'package': 'fn-siemplify',
     'package_version': '1.0.0',
-    'host': 'Marks-MacBook-Pro.local',
+    'host': 'localhost',
     'execution_time_ms': 2809,
     'timestamp': '2022-01-07 10:59:24'
   }
@@ -764,7 +765,7 @@ results = {
     'version': '1.0',
     'package': 'fn-siemplify',
     'package_version': '1.0.0',
-    'host': 'Marks-MacBook-Pro.local',
+    'host': 'localhost',
     'execution_time_ms': 597,
     'timestamp': '2022-01-07 11:02:05'
   }
@@ -842,7 +843,7 @@ results = {
     'version': '1.0',
     'package': 'fn-siemplify',
     'package_version': '1.0.0',
-    'host': 'Marks-MacBook-Pro.local',
+    'host': 'localhost',
     'execution_time_ms': 365,
     'timestamp': '2022-01-07 11:06:17'
   }
@@ -918,7 +919,7 @@ results = {
     'version': '1.0',
     'package': 'fn-siemplify',
     'package_version': '1.0.0',
-    'host': 'Marks-MacBook-Pro.local',
+    'host': 'localhost',
     'execution_time_ms': 488,
     'timestamp': '2022-01-07 11:07:58'
   }
@@ -1005,7 +1006,7 @@ results = {
     'version': '1.0',
     'package': 'fn-siemplify',
     'package_version': '1.0.0',
-    'host': 'Marks-MacBook-Pro.local',
+    'host': 'localhost',
     'execution_time_ms': 582,
     'timestamp': '2022-01-07 11:26:32'
   }
@@ -1096,7 +1097,7 @@ results = {
     'version': '1.0',
     'package': 'fn-siemplify',
     'package_version': '1.0.0',
-    'host': 'Marks-MacBook-Pro.local',
+    'host': 'localhost',
     'execution_time_ms': 293,
     'timestamp': '2022-01-07 11:25:35'
   }
@@ -1203,7 +1204,7 @@ results = {
     'version': '1.0',
     'package': 'fn-siemplify',
     'package_version': '1.0.0',
-    'host': 'Marks-MacBook-Pro.local',
+    'host': 'localhost',
     'execution_time_ms': 325,
     'timestamp': '2022-01-07 11:21:31'
   }
@@ -1309,7 +1310,7 @@ results = {
     'version': '1.0',
     'package': 'fn-siemplify',
     'package_version': '1.0.0',
-    'host': 'Marks-MacBook-Pro.local',
+    'host': 'localhost',
     'execution_time_ms': 240,
     'timestamp': '2022-01-07 11:23:21'
   }
@@ -1417,3 +1418,99 @@ Refer to the documentation listed in the Requirements section for troubleshootin
 
 ### For Support
 This is a IBM Supported App. Please search the Community [ibm.biz/soarcommunity](https://ibm.biz/soarcommunity) for assistance or open a case at [ibm.com/mysupport](https://ibm.com/mysupport).
+
+### Appendix
+These templates can be copied and modified to override the existing templates used for several synchronization operations.
+#### Siemplify Create Case Template
+Used in the `siemplify_create_case_template` app.config parameter.
+```
+{
+  "title": "IBM SOAR - {{ name|e }}",
+  "assignedUser": {% if siemplify_assigned_user %} "{{ siemplify_assigned_user }}" {% else %} null {% endif %},
+  "reason": "IBM SOAR Incident {{ id }}",
+  "priority": {{ severity | string | resilient_substitute('{"4": 25, "5": 50, "6": 75, "DEFAULT": 50}') }},
+  "environment": "{{ siemplify_environment if siemplify_environment else 'Default Environment'}}",
+  "isImportant": {{ confirmed | tojson }},
+  "alertName": "IBM SOAR Alert {{ id }}",
+  "occurenceTime": "{{ discovered_date | resilient_display_datetimeformat(milliseconds=True) }}",
+  "slaExpirationDateTime": null,
+  "playbooks": {{ siemplify_playbooks | tojson }},
+  "tags": {{ siemplify_tags | tojson }}
+}
+```
+#### SOAR Close Case Template
+Used in the `soar_close_case_template` app.config parameter.
+```
+{
+  {# JINJA template for closing a new Resilient incident from a Defender alert. #}
+  "plan_status": "C",
+  "resolution_id": "Resolved",
+  "resolution_summary": "Closed from Siemplify. Root Cause: {{ rootCause }}. Reason: {{ closeReason }}."
+  {# additional fields may be needed. Add as necessary #}
+  {# "properties": { } #}
+}
+```
+#### SOAR Update Case Template
+Used in the `soar_update_case_template` app.config parameter.
+```
+{
+  {% if description %}
+    "description": "{{ description }}",
+  {% endif %}
+  "properties": {
+    {% if tags %}
+      "siemplify_tags": "{{ tags|map(attribute='tag')|list|join(', ') }}",
+    {% endif %}
+    "siemplify_assignee": "{{ assignedUserName }}",
+    "siemplify_stage": "{{ stage }}",
+    "siemplify_is_important": {{ isImportant|tojson }},
+    "siemplify_priority": {{ priority }}
+  }
+}
+```
+#### Artifact Type Lookup
+Used in the `artifact_type_lookup` app.config parameter.
+```json
+{
+    "DEFAULT": "GENERICENTITY",
+    "Port": "ADDRESS",
+    "MAC Address": "MacAddress",
+    "Process Name": "PROCESS",
+    "Service": "PROCESS",
+    "File Name": "FILENAME",
+    "File Path": "FILENAME",
+    "Malware MD5 Hash": "FILEHASH",
+    "Malware SHA-1 Hash": "FILEHASH",
+    "Malware SHA-256 Hash": "FILEHASH",
+    "Malware Sample Fuzzy Hash": "FILEHASH",
+    "URI PATH": "DestinationURL",
+    "URL": "DestinationURL",
+    "URL Referer": "DestinationURL",
+    "Email Subject": "EMAILSUBJECT",
+    "Threat CVE ID": "CVEID",
+    "String": "GENERICENTITY",
+    "DNS Name": "DESTINATIONDOMAIN",
+    "IP Address": "IPSET",
+    "User Agent": "USERUNIQNAME",
+    "User Account": "USERUNIQNAME",
+    "Registry Key": "GENERICENTITY",
+    "Password" : "GENERICENTITY",
+    "Observed Data": "GENERICENTITY",
+    "Network CIDR Range": "IPSET",
+    "Mutex": "THREATSIGNATURE",
+    "Malware Family/Variant": "GENERICENTITY",
+    "HTTP Response Header": "GENERICENTITY",
+    "HTTP Request Header": "GENERICENTITY",
+    "Email Sender Name": "USERUNIQNAME",
+    "Email Sender": "USERUNIQNAME",
+    "Email Recipient": "USERUNIQNAME",
+    "Email Body": "GENERICENTITY",
+    "Email Attachment Name": "FILENAME",
+    "Email Attachment": null,
+    "Log File": null,
+    "Malware Sample": null,
+    "Other File": null,
+    "RFC 822 Email Message File": null,
+    "X509 Certificate File": null
+}
+```

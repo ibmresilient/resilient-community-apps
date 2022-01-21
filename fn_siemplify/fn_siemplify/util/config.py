@@ -26,9 +26,11 @@ default_case_environment=Default Environment
 # If necessary, use DEFAULT to specify playbook(s) when no mapping matches
 #   playbook_mapping='<SOAR Incident Type>': 'playbook1,playbook2','Malware':'playbook3','DEFAULT':'playbook4'
 #playbook_mappings=
-# override default Siemplify and SOAR templates as necessary
+# override default Siemplify and SOAR templates files as necessary
 siemplify_create_case_template=
 soar_close_case_template=
 soar_update_case_template=
+# use artifact_lookup_types to specify a JSON file to override the default settings
+artifact_type_lookup=
 """
     return config_data

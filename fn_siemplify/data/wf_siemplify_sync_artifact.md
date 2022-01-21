@@ -32,7 +32,7 @@ inputs.siemplify_artifact_id = artifact.id
 if results.success:
   incident.addNote("Siemplify Sync Artifact: {} ({}) created".format(artifact.value, artifact.type))
 else:
-  incident.addNote("Simeplify Sync Artifact: {} ({}) failed".format(artifact.value, artifact.type))
+  incident.addNote("Siemplify Sync Artifact: {} ({}) failed".format(artifact.value, artifact.type))
   
 ```
 

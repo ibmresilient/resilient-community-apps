@@ -271,7 +271,6 @@ class ResilientCommon():
 
         # get the siemplify_task_id if it exists
         search_results = self.rest_client.post(uri=uri, payload=query)
-        LOG.debug(search_results)
 
         siemplify_task_id = None
         if search_results.get("root_comments"):

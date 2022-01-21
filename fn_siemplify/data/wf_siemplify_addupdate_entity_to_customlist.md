@@ -41,7 +41,7 @@ if results.success:
   row['environments'] = ", ".join(entity['environments'])
   incident.addNote("Siemplify Add/Update Custom List successful for: {} ({})".format(artifact.value, artifact.type))
 else:
-  incident.addNote("Siemplify Add/Update Blocklist Entity failed: {}".format(results.reason))
+  incident.addNote("Siemplify Add/Update Custom List Entity failed: {}".format(results.reason))
 
 ```
 

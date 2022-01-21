@@ -32,7 +32,6 @@ setup(
     long_description="""Bi-directional synchronization with Siemplify Cases, Entities, Attachments and Insights. Additional capabilities exist to list and add entries to the Siemplify Blocklist and Custom List.""",
     install_requires=[
         "resilient-circuits>=43.0.0",
-        "resilient_lib",
         "jinja2",
         "pytz",
         "simplejson"

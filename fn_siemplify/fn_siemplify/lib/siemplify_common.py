@@ -4,6 +4,7 @@
 
 import logging
 import json
+import os
 from .jinja_common import JinjaEnvironment
 from resilient_lib import clean_html, IntegrationError
 from simplejson.errors import JSONDecodeError
@@ -45,49 +46,8 @@ IBMSOAR_TAGS = ['IBMSOAR']
 
 GENERICENTITY = "GENERICENTITY"
 
-# lookup take between SOAR artifact types and Simeplify entity types
-ARTIFACT_TYPE_LOOKUPS = {
-    "Port": "ADDRESS",
-    "MAC Address": "MacAddress",
-    "Process Name": "PROCESS",
-    "Service": "PROCESS",
-    "File Name": "FILENAME",
-    "File Path": "FILENAME",
-    "Malware MD5 Hash": "FILEHASH",
-    "Malware SHA-1 Hash": "FILEHASH",
-    "Malware SHA-256 Hash": "FILEHASH",
-    "Malware Sample Fuzzy Hash": "FILEHASH",
-    "URI PATH": "DestinationURL",
-    "URL": "DestinationURL",
-    "URL Referer": "DestinationURL",
-    "Email Subject": "EMAILSUBJECT",
-    "Threat CVE ID": "CVEID",
-    "String": GENERICENTITY,
-    "DNS Name": "DESTINATIONDOMAIN",
-    "IP Address": "IPSET",
-    "User Agent": "USERUNIQNAME",
-    "User Account": "USERUNIQNAME",
-    "Registry Key": GENERICENTITY,
-    "Password" : GENERICENTITY,
-    "Observed Data": GENERICENTITY,
-    "Network CIDR Range": "IPSET",
-    "Mutex": "THREATSIGNATURE",
-    "Malware Family/Variant": GENERICENTITY,
-    "HTTP Response Header": GENERICENTITY,
-    "HTTP Request Header": GENERICENTITY,
-    "Email Sender Name": "USERUNIQNAME",
-    "Email Sender": "USERUNIQNAME",
-    "Email Recipient": "USERUNIQNAME",
-    "Email Body": GENERICENTITY,
-    "Email Attachment Name": "FILENAME",
-    "Email Attachment": None,
-    "Log File": None,
-    "Malware Sample": None,
-    "Other File": None,
-    "RFC 822 Email Message File": None,
-    "X509 Certificate File": None
-}
-
+# lookup table between SOAR artifact types and Siemplify entity types
+ARTIFACT_TYPE_LOOKUPS_FILE = "artifact_type_lookup.json"
 
 class SiemplifyCommon():
     def __init__(self, rc, options):
@@ -99,6 +59,28 @@ class SiemplifyCommon():
         self.jina_env = JinjaEnvironment()
         self.rc = rc
         self.verify = False if self.options.get('cafile').lower() == "false" else self.options.get('cafile')
+
+        self.ARTIFACT_TYPE_LOOKUPS = self._init_artifact_type_lookup(self.options.get('artifact_type_lookup'))
+
+    def _init_artifact_type_lookup(self, override_file):
+        # Initialize the artifact type lookup file. Use an optional customer specified file
+        default_lookup = os.path.join(os.path.dirname(__file__), ARTIFACT_TYPE_LOOKUPS_FILE)
+        if override_file:
+            if not os.path.exists(override_file):
+                LOG.warning("app.config file 'artifact_type_lookup' cannot be found: %s. Using default mapping", override_file)
+                lookup_file = default_lookup
+            else:
+                lookup_file = override_file
+        else:
+            lookup_file = default_lookup
+
+        try:
+            with open(lookup_file, 'r') as f:
+                return json.load(f)
+        except JSONDecodeError as err:
+            LOG.error("Unable to use artifact type lookup file: %s. Using default mapping")
+            with open(default_lookup, 'r') as f:
+                return json.load(f)
 
     def sync_case(self, incident_info):
         # perform an update to an existing incident
@@ -127,14 +109,14 @@ class SiemplifyCommon():
         return self._make_call("GET", uri)
 
     def get_cases(self, case_list):
-        # API call get all Seimplify cases associated with a list of SOAR incidents
+        # API call get all siemplify cases associated with a list of SOAR incidents
         payload = {
             "tags": IBMSOAR_TAGS,
             "title": "Caseids:{}".format(",".join(case_list)),
             "requestedPage": 0,
             "timeRangeFilter": 0
         }
-        LOG.debug(payload)
+        LOG.debug("Search case payload: %s", payload)
 
         return self._make_call("POST", SEARCH_CASE_URL, payload)
 
@@ -156,7 +138,6 @@ class SiemplifyCommon():
             "caseId": case_id,
             "description": description.replace('"', '\\"')
         }
-        LOG.debug(payload)
 
         return self._make_call("POST", UPDATE_CASE_DESCRIPTION_URL, payload)
 
@@ -183,7 +164,7 @@ class SiemplifyCommon():
         """
         payload = {
             "entityIdentifier": inputs['siemplify_artifact_value'],
-            "entityType": ARTIFACT_TYPE_LOOKUPS.get(inputs['siemplify_artifact_type'], GENERICENTITY),
+            "entityType": self.ARTIFACT_TYPE_LOOKUPS.get(inputs.get('siemplify_artifact_type'), GENERICENTITY),
             "scope": 2,
             "environments": inputs['siemplify_environment']
         }
@@ -205,7 +186,7 @@ class SiemplifyCommon():
             [dict]: [Results of the API call]
         """
         category = inputs.get('siemplify_category') if inputs.get('siemplify_category') else \
-            ARTIFACT_TYPE_LOOKUPS.get(inputs['siemplify_artifact_type'], GENERICENTITY)
+            self.ARTIFACT_TYPE_LOOKUPS.get(inputs.get('siemplify_artifact_type'), GENERICENTITY)
 
         payload = {
             "entityIdentifier": inputs['siemplify_artifact_value'],
@@ -217,7 +198,7 @@ class SiemplifyCommon():
         return payload if not error_msg else result, error_msg
 
     def sync_comment(self, inputs):
-        """[Sync SOAR incident note with Seimplify as a wall comment]
+        """[Sync SOAR incident note with siemplify as a wall comment]
 
         Args:
             inputs ([dict]): [data to create a comment]
@@ -234,7 +215,7 @@ class SiemplifyCommon():
         return self._make_call("POST", CREATE_COMMENT_URL, payload)
 
     def sync_insight(self, inputs):
-        """[Sync SOAR incident note with Seimplify as an insight]
+        """[Sync SOAR incident note with siemplify as an insight]
 
         Args:
             inputs ([dict]): [data to create an insight]
@@ -262,7 +243,7 @@ class SiemplifyCommon():
         Returns:
             [dict]: [Results of API call]
         """
-        inputs['siemplify_entity_type'] = ARTIFACT_TYPE_LOOKUPS.get(inputs['siemplify_artifact_type'])
+        inputs['siemplify_entity_type'] = self.ARTIFACT_TYPE_LOOKUPS.get(inputs.get('siemplify_artifact_type'))
         if not inputs['siemplify_entity_type']:
             LOG.warning("No matching entity type for Artifact type: %s, value: %s",
                         inputs['siemplify_artifact_type'],
@@ -286,9 +267,10 @@ class SiemplifyCommon():
             [dict]: [Results of Siemplify API call]
         """
         filetype = None
-        if '.' in filename:
-            filetype = filename[filename.find('.'): ]
-            filename = filename[: filename.find('.')]
+        file_info = os.path.splitext(filename)
+        if file_info[1]:
+            filetype = file_info[1]
+            filename = file_info[0]
 
         #  "AlertIdentifier": alert_id,
         payload = {
@@ -305,7 +287,7 @@ class SiemplifyCommon():
 
     def sync_task(self, siemplify_case_id, siemplify_task_assignee,
                   siemplify_task_id, task_info):
-        """[summary]
+        """[Sync a SOAR task with Siemply's Insight]
 
         Args:
             simplify_case_id ([int]): [description]
@@ -317,14 +299,12 @@ class SiemplifyCommon():
         payload = {
             "caseId": siemplify_case_id,
             "owner": siemplify_task_assignee,
-            "name": "{}: {}".format(SOAR_HEADER, task_info['name']),
+            "name": "{}: {}".format(SOAR_HEADER, task_info.get('name')),
             "dueDateUnixTimeMs": task_info.get('due_date'),
             "ownerComment": task_info.get('instr_text'),
         }
         if siemplify_task_id:
             payload['id'] = siemplify_task_id
-
-        LOG.debug(payload)
 
         return self._make_call("POST", CREATE_TASK_URL, payload)
 
@@ -348,7 +328,7 @@ class SiemplifyCommon():
             "currentModificationTimeUnixTimeInMs": str(modified_ts)
         }
 
-        LOG.debug(payload)
+        LOG.debug("is_case_modified payload: %s", payload)
 
         result, err_msg = self._make_call("POST", CASES_MODIFIED_URL, payload)
         return result if not err_msg else False
@@ -394,7 +374,7 @@ def callback(response):
         return response, None
 
     resp = response.json()
-    msg = resp['ErrorMessage']
+    msg = resp.get('ErrorMessage', '')
     error_msg  = u"Siemplify Error: \n    status code: {0}\n    failure: {1}".format(response.status_code, msg)
 
     return response, error_msg

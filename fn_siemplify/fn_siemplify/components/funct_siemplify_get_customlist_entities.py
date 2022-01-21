@@ -19,7 +19,7 @@ class FunctionComponent(AppFunctionComponent):
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """
-        Function: Get entities from Siemplify's Blacklist
+        Function: Get entities from Siemplify's Custom list
         Inputs:
             -   fn_inputs.siemplify_limit
             -   fn_inputs.siemplify_search

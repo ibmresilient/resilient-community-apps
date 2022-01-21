@@ -43,7 +43,7 @@ if results.success:
     row['entity_type'] = entity['category']
     row['environments'] = ", ".join(entity['environments'])
 else:
-  incident.addNote("Siemplify Get Blocklist Entities failed: {}".format(results.reason))
+  incident.addNote("Siemplify Get Custom List Entities failed: {}".format(results.reason))
 ```
 
 ---
