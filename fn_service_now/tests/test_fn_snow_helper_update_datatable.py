@@ -57,4 +57,5 @@ class TestFnSnowHelperUpdateDatatable:
         """ Test calling with sample values for the parameters """
 
         results = call_fn_snow_helper_update_datatable_function(circuits_app, inputs)
-        assert(expected_results == results)
+        for key in expected_results:
+          assert(expected_results[key] == results[key])

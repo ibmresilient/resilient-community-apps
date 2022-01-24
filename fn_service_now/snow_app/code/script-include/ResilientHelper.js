@@ -1,6 +1,42 @@
-// (c) Copyright IBM Corp. 2019. All Rights Reserved.
+// (c) Copyright IBM Corp. 2022. All Rights Reserved.
 
 var JSON_PARSER = new global.JSON();
+
+function getAllowedAssignmentGroups(){
+	//Gets ResilientAssignmentGroupNames CSV defined in properties
+	//and returns then as a list (all lowercase and whitespace trimmed)
+
+	var assignGroupsCSV, assignGroupsArray, i, errMsg = null;
+	
+	// Get the ResilientAssignmentGroupNames system property
+	try{
+		assignGroupsCSV = gs.getProperty("x_ibmrt_resilient.ResilientAssignmentGroupNames");
+	}
+	catch (e){
+		errMsg = "Failed getting x_ibmrt_resilient.ResilientAssignmentGroupNames Property.\n" + e;
+		throw errMsg;
+	}
+	
+	if (!assignGroupsCSV) {
+		return [];
+	}
+
+	try{
+		// Split them on comma
+		assignGroupsArray = assignGroupsCSV.split(",");
+
+		// Trim whitespace off each table name
+		for(i = 0; i < assignGroupsArray.length; i++){
+			assignGroupsArray[i] = assignGroupsArray[i].trim().toLowerCase();
+		}
+	}
+	catch (e){
+		errMsg = "Error parsing x_ibmrt_resilient.ResilientAssignmentGroupNames. Ensure correct CSV format.\n" + e;
+		throw errMsg;
+	}
+
+	return assignGroupsArray;
+}
 
 var ResilientHelper = Class.create();
 ResilientHelper.prototype = {
@@ -275,5 +311,26 @@ ResilientHelper.prototype = {
 			gs.error(errMsg);
 			throw e;
 		}
+	},
+
+	assignGroupIsAllowed: function(assignmentGroup){
+
+		var allowedGroups, i, assignmentGroupLower = null;
+
+		//First convert the incoming value to lowercase and trim
+		//for uniformity with values returned from getAllowedAssignmentGroups()
+		assignmentGroupLower = assignmentGroup.trim().toLowerCase();
+
+		allowedGroups = getAllowedAssignmentGroups();
+
+		for (i = 0; i < allowedGroups.length; i++){
+			if(allowedGroups[i] == assignmentGroupLower){
+				return true;
+			}
+		}
+
+		gs.debug("'" + assignmentGroup + "' is not in the ResilientAssignmentGroupNames CSV list");
+
+		return false;
 	}
 };
