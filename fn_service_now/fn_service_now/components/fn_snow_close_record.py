@@ -7,12 +7,13 @@ import json
 import logging
 import time
 
-from fn_service_now.util.resilient_helper import ResilientHelper
+from fn_service_now.util.resilient_helper import (CONFIG_DATA_SECTION,
+                                                  ResilientHelper)
 from fn_service_now.util.sn_records_dt import ServiceNowRecordsDataTable
 from resilient_circuits import (FunctionError, FunctionResult,
                                 ResilientComponent, StatusMessage, function,
                                 handler)
-from resilient_lib import RequestsCommon
+from resilient_lib import RequestsCommon, ResultPayload
 
 
 class FunctionPayload(object):
@@ -54,6 +55,7 @@ class FunctionComponent(ResilientComponent):
             # Instansiate helper (which gets appconfigs from file)
             res_helper = ResilientHelper(self.options)
             rc = RequestsCommon(self.opts, self.options)
+            rp = ResultPayload(CONFIG_DATA_SECTION)
 
             # Get the function inputs:
             inputs = {
@@ -100,7 +102,7 @@ class FunctionComponent(ResilientComponent):
                 # Generate the request_data
                 request_data = {
                     "sn_ref_id": sn_ref_id,
-                    "sn_table_name": res_helper.SN_TABLE_NAME,
+                    "sn_table_name": res_helper.get_table_name(sn_ref_id),
                     "sn_close_code": payload.inputs["sn_close_code"],
                     "sn_close_notes": payload.inputs["sn_close_notes"],
                     "sn_record_state": payload.inputs["sn_record_state"],
@@ -137,10 +139,13 @@ class FunctionComponent(ResilientComponent):
                     yield StatusMessage(err_msg)
 
             results = payload.as_dict()
-            log.debug("RESULTS: %s", results)
+            rp_results = rp.done(results.get("success"), results)
+            rp_results.update(results) # add in all results for backward-compatibility
+
+            log.debug("RESULTS: %s", rp_results)
             log.info("Complete")
 
-            # Produce a FunctionResult with the results
-            yield FunctionResult(results)
+            # Produce a FunctionResult with the rp_results
+            yield FunctionResult(rp_results)
         except Exception:
             yield FunctionError()

@@ -5,9 +5,14 @@
 
 import logging
 import time
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_service_now.util.resilient_helper import ResilientHelper
+
+from fn_service_now.util.resilient_helper import (CONFIG_DATA_SECTION,
+                                                  ResilientHelper)
 from fn_service_now.util.sn_records_dt import ServiceNowRecordsDataTable
+from resilient_circuits import (FunctionError, FunctionResult,
+                                ResilientComponent, StatusMessage, function,
+                                handler)
+from resilient_lib import RequestsCommon, ResultPayload
 
 
 class FunctionPayload(object):
@@ -48,6 +53,7 @@ class FunctionComponent(ResilientComponent):
         try:
             # Instansiate helper (which gets appconfigs from file)
             res_helper = ResilientHelper(self.options)
+            rp = ResultPayload(CONFIG_DATA_SECTION)
 
             # Get the function inputs:
             inputs = {
@@ -114,11 +120,13 @@ class FunctionComponent(ResilientComponent):
                 yield StatusMessage(err_msg)
 
             results = payload.as_dict()
+            rp_results = rp.done(results.get("success"), results)
+            rp_results.update(results) # add in all results for backward-compatibility
 
-            log.debug("RESULTS: %s", results)
+            log.debug("RESULTS: %s", rp_results)
             log.info("Complete")
 
-            # Produce a FunctionResult with the results
-            yield FunctionResult(results)
+            # Produce a FunctionResult with the rp_results
+            yield FunctionResult(rp_results)
         except Exception:
             yield FunctionError()
