@@ -186,7 +186,7 @@ ResilientAPI.prototype = {
 	
 	initialize: function() {
 		
-		var hostName, orgName, resAPIId, resAPISecret, userEmail, userPassword, snUsername, midServerName, errMsg, authenticateWithAPI = null;
+		var hostName, orgName, resAPIId, resAPISecret, userEmail, userPassword, snUsername, midServerName, errMsg, APIKeysEnabled = null;
 		
 		//Ensure all the required System Properties are available before continuing
 		try{
@@ -218,9 +218,9 @@ ResilientAPI.prototype = {
 			if (!userEmail) {throw errMsgStart + "Resilient Email" + errMsgEnd;}
 			if (!userPassword) {throw errMsgStart + "Resilient Password" + errMsgEnd;}
 
-			authenticateWithAPI = false;
+			APIKeysEnabled = false;
 		} else {
-			authenticateWithAPI = true;
+			APIKeysEnabled = true;
 		}
 
 		//Setup MID Server
@@ -235,7 +235,7 @@ ResilientAPI.prototype = {
 		this.resAPIId = resAPIId;
 		this.orgName = orgName;
 		this.userEmail = userEmail;
-		this.authenticateWithAPI = authenticateWithAPI;
+		this.APIKeysEnabled = APIKeysEnabled;
 
 		//Initialise other class variables that will be set in the connect() method
 		this.XSESSID = null;
@@ -263,7 +263,7 @@ ResilientAPI.prototype = {
 		//If not using API key, set the email/pass and that will
 		//be used to get a JSESSIONID and csrfToken. If using API key, 
 		//that info is provided to each request
-		if (!this.authenticateWithAPI) {
+		if (!this.APIKeysEnabled) {
 			authData = { "email": this.userEmail, "password": getPassword() };
 		
 			//Set Request Body
@@ -292,7 +292,7 @@ ResilientAPI.prototype = {
 		res = executeRESTMessage(rm, this.midServerName, this.baseURL);
 
 		//Get csrfToken and JSESSIONID if authenticating with email
-		if (!this.authenticateWithAPI) {
+		if (!this.APIKeysEnabled) {
 			this.csrfToken = res.body.csrf_token;
 			this.JSESSIONID = parseJSESSIONID(res.headers["Set-Cookie"]);
 		}
@@ -331,7 +331,7 @@ ResilientAPI.prototype = {
 		//If using API key, set the ID and secret in header
 		//otherwise use session info that was retrieved
 		//using email/pass when connect() was called in init
-		if (this.authenticateWithAPI) {
+		if (this.APIKeysEnabled) {
 			rm.setBasicAuth(this.resAPIId, getAPISecret());
 		} else {
 			headers["X-sess-id"] = this.csrfToken;
