@@ -228,7 +228,7 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
                         params
                     )
                 else:
-                    LOG.info("Inserting/updating %s; id = %d", table_name, flat_payload['id'])
+                    LOG.info("Inserting/updating %s; id = %d [%s]", table_name, flat_payload['id'], self.dialect)
 
                     # reduce data of attachments which are empty
                     non_null_payload = {}
