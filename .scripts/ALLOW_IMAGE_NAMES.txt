@@ -47,6 +47,7 @@ fn_mcafee_epo
 fn_mcafee_esm
 fn_mcafee_opendxl
 fn_mcafee_tie
+fn_microsoft_defender
 fn_microsoft_security_graph
 fn_microsoft_sentinel
 fn_misp
@@ -73,6 +74,7 @@ fn_remedy
 fn_rsa_netwitness
 fn_scheduler
 fn_secureworks_ctp
+fn_sentinelone
 fn_sep
 fn_service_now
 fn_shodan
@@ -99,7 +101,7 @@ fn_zia
 
 #Not_Rebuilt
 #fn_crowdstrike_falcon-still-root-group
-rc-data-feed
+rc_data_feed
 #rc-data-feed-plugin-elasticfeed
 #rc-data-feed-plugin-kafkafeed
 #rc-data-feed-plugin-odbcfeed

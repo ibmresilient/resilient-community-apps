@@ -60,7 +60,8 @@
 | 1.0.0 | 12/2020 | Initial Release |
 | 1.1.0 | 07/2021 | Support for Flows and QRoc |
 | 1.1.1 | 07/2021 | Fixed selftest failing when using cafile |
-| 1.1.2 | 09/2020 | Updated version of resilient-circuits to depend on |
+| 1.1.2 | 10/2021 | Update to use latest resilient-circuits |
+| 1.1.3 | 01/2022 | Support for latest Analyst Workflow versions |
 | 1.2.0 | 11/2021 | Add multitenancy |
 
 For customers upgrading from a pervious release, the app.config file must be manually edited.

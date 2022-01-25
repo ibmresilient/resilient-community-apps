@@ -1,0 +1,315 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "accountId": {
+                "type": "string"
+              },
+              "accountName": {
+                "type": "string"
+              },
+              "activeDirectory": {
+                "type": "object",
+                "properties": {
+                  "computerDistinguishedName": {},
+                  "computerMemberOf": {
+                    "type": "array"
+                  },
+                  "lastUserDistinguishedName": {},
+                  "lastUserMemberOf": {
+                    "type": "array"
+                  }
+                }
+              },
+              "activeThreats": {
+                "type": "integer"
+              },
+              "agentVersion": {
+                "type": "string"
+              },
+              "allowRemoteShell": {
+                "type": "boolean"
+              },
+              "appsVulnerabilityStatus": {
+                "type": "string"
+              },
+              "cloudProviders": {
+                "type": "object"
+              },
+              "computerName": {
+                "type": "string"
+              },
+              "consoleMigrationStatus": {
+                "type": "string"
+              },
+              "coreCount": {
+                "type": "integer"
+              },
+              "cpuCount": {
+                "type": "integer"
+              },
+              "cpuId": {
+                "type": "string"
+              },
+              "createdAt": {
+                "type": "string"
+              },
+              "detectionState": {},
+              "domain": {
+                "type": "string"
+              },
+              "encryptedApplications": {
+                "type": "boolean"
+              },
+              "externalId": {
+                "type": "string"
+              },
+              "externalIp": {
+                "type": "string"
+              },
+              "firewallEnabled": {
+                "type": "boolean"
+              },
+              "firstFullModeTime": {},
+              "groupId": {
+                "type": "string"
+              },
+              "groupIp": {
+                "type": "string"
+              },
+              "groupName": {
+                "type": "string"
+              },
+              "id": {
+                "type": "string"
+              },
+              "inRemoteShellSession": {
+                "type": "boolean"
+              },
+              "infected": {
+                "type": "boolean"
+              },
+              "installerType": {
+                "type": "string"
+              },
+              "isActive": {
+                "type": "boolean"
+              },
+              "isDecommissioned": {
+                "type": "boolean"
+              },
+              "isPendingUninstall": {
+                "type": "boolean"
+              },
+              "isUninstalled": {
+                "type": "boolean"
+              },
+              "isUpToDate": {
+                "type": "boolean"
+              },
+              "lastActiveDate": {
+                "type": "string"
+              },
+              "lastIpToMgmt": {
+                "type": "string"
+              },
+              "lastLoggedInUserName": {
+                "type": "string"
+              },
+              "licenseKey": {
+                "type": "string"
+              },
+              "locationEnabled": {
+                "type": "boolean"
+              },
+              "locationType": {
+                "type": "string"
+              },
+              "locations": {},
+              "machineType": {
+                "type": "string"
+              },
+              "mitigationMode": {
+                "type": "string"
+              },
+              "mitigationModeSuspicious": {
+                "type": "string"
+              },
+              "modelName": {
+                "type": "string"
+              },
+              "networkInterfaces": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "gatewayIp": {
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "gatewayMacAddress": {
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "inet": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "inet6": {
+                      "type": "array"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "physical": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "networkQuarantineEnabled": {
+                "type": "boolean"
+              },
+              "networkStatus": {
+                "type": "string"
+              },
+              "operationalState": {
+                "type": "string"
+              },
+              "operationalStateExpiration": {},
+              "osArch": {
+                "type": "string"
+              },
+              "osName": {
+                "type": "string"
+              },
+              "osRevision": {
+                "type": "string"
+              },
+              "osStartTime": {
+                "type": "string"
+              },
+              "osType": {
+                "type": "string"
+              },
+              "osUsername": {
+                "type": "string"
+              },
+              "rangerStatus": {
+                "type": "string"
+              },
+              "rangerVersion": {},
+              "registeredAt": {
+                "type": "string"
+              },
+              "remoteProfilingState": {
+                "type": "string"
+              },
+              "remoteProfilingStateExpiration": {},
+              "scanAbortedAt": {
+                "type": "string"
+              },
+              "scanFinishedAt": {
+                "type": "string"
+              },
+              "scanStartedAt": {
+                "type": "string"
+              },
+              "scanStatus": {
+                "type": "string"
+              },
+              "siteId": {
+                "type": "string"
+              },
+              "siteName": {
+                "type": "string"
+              },
+              "storageName": {},
+              "storageType": {},
+              "threatRebootRequired": {
+                "type": "boolean"
+              },
+              "totalMemory": {
+                "type": "integer"
+              },
+              "updatedAt": {
+                "type": "string"
+              },
+              "userActionsNeeded": {
+                "type": "array"
+              },
+              "uuid": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "pagination": {
+          "type": "object",
+          "properties": {
+            "nextCursor": {},
+            "totalItems": {
+              "type": "integer"
+            }
+          }
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "sentinelone_agent_id": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
