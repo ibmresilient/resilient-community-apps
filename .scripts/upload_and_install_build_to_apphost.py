@@ -13,7 +13,7 @@ def main():
     res_client = setup()
     
     if res_client is None:
-        print("*******************FAILURE!*******************")
+        print("******************* FAILURE! Wasn't able to connect to SOAR! *******************")
         sys.exit()
 
     upload_all_apps(res_client, app_path=ZIP_PATH)
@@ -21,8 +21,6 @@ def main():
     deploy_all_apps(res_client)
     upload_all_app_configurations(res_client)
     
-    os.remove('{}/complete_app.config'.format(CONFIG_PATH))
-
 ########################################
 ### basic setup + helper functions
 ########################################            
@@ -30,27 +28,12 @@ def main():
 
 def setup():
     soar_config_file = '{}/app.config'.format(CONFIG_PATH)
-    integration_config_file = '/home/travis/build/Resilient/{}.config'.format(PACKAGE_NAME)
 
     if not os.path.exists(soar_config_file):
         print("The app.config with the SOAR credentials is missing. Exiting now")
         sys.exit()
 
-    if not os.path.exists(integration_config_file):
-        print("The app.config with the integration information is missing. Exiting now")
-        sys.exit()
-
-    config_file_path='{}/complete_app.config'.format(CONFIG_PATH)
-
-    # combines the two app configs into a complete usable one
-    filenames = [integration_config_file, soar_config_file]
-    with open(config_file_path, 'w') as outfile:
-        for fname in filenames:
-            with open(fname) as infile:
-                outfile.write(infile.read())
-            outfile.write("\n")
-
-    resilient_parser = resilient.ArgumentParser(config_file=config_file_path)
+    resilient_parser = resilient.ArgumentParser(config_file=soar_config_file)
     opts = resilient_parser.parse_known_args()[0]
 
     # creates variables for the opts.keys()
@@ -266,40 +249,6 @@ def base_post_export_config(res_client, uri, co3_context_token=None, timeout=Non
     return response
 
 ########################################
-### create the secret information for 
-### AppHost setup
-########################################
-# Not curently used since we are using one designated app host and SOAR
-
-def create_AppHost_pairing(res_client,appHost_name="new Host", appHost_description= "new Description", toFile = None):
-    payload = {}
-    payload["tenant_id"] = res_client.tenant_id
-    payload["name"] = appHost_name
-    payload["description"] = {"format": "text", "content": appHost_description}
-
-    r = base_post(res_client = res_client, uri = "/services_proxy/manager/controllers", payload = payload)
-    
-
-    # for consistency with clipboard information in the GUI remove some items
-    r.pop("status")
-    r.pop("version")
-
-    clipboard_information = {}
-
-    # base url includes the port number, we remove it for consistency with clipboard information in the GUI
-    base_url_parts = res_client.base_url.split(":")
-    base_url_without_port = ":".join(base_url_parts[:-1]) + "/services_proxy/manager"
-
-    clipboard_information["manager_url"] = base_url_without_port
-    clipboard_information["controller"] = r
-
-    if toFile:
-        with open(toFile,"w") as f:
-            f.write(json.dumps(clipboard_information, indent= 4))
-    else: 
-        print(json.dumps(clipboard_information))
-
-########################################
 ### upload, install and deploy apps
 ########################################
 def upload_all_apps(res_client, app_path):
@@ -375,7 +324,6 @@ def deploy_all_apps(res_client, controller_id=None):
 
     controller_found = False
 
-    
     controllers = base_get(res_client, "/services_proxy/manager/tenants/{}/controllers".format(res_client.tenant_id))
     
     # if no controller_id is supplied, pick the first running controller
@@ -458,7 +406,6 @@ def track_deployment(res_client, deployment_list):
     while (len(deployment_list)>0):
         for name in deployment_list:
 
-            
             r = base_get(res_client,"/services_proxy/manager/tenants/{}/apps/{}".format(res_client.tenant_id,name))
             
             deployment_status[name] = r["deployment"]["status"]
@@ -477,31 +424,27 @@ def track_deployment(res_client, deployment_list):
     if len(deployment_list) > 0: 
         print("The deployment of the following apps was not completed in time:", deployment_list)
     else:
-        print("*******************SUCCESS!*******************")
+        print("******************* SUCCESS! The app was deployed! *******************")
 
 ########################################
 ### set config files for apps
 ########################################
 
-def upload_all_app_configurations(res_client, config_dir = CONFIG_PATH):
+def upload_all_app_configurations(res_client):
     if res_client.use_api_key is True:
         print("The client is authenticated via API keys. The requested function uses the '/apps' API endpoint, which is not enabled with this authentication method!")
         return
     config_dict = {}
-    
-    # collect files to upload
-    
-    if not config_dir.endswith("/"):
-        config_dir = config_dir + "/"
-    config_file = '{}/complete_app.config'.format(CONFIG_PATH)
 
+    config_file = '/home/travis/build/Resilient/{}.config'.format(PACKAGE_NAME)
+    if not os.path.exists(config_file):
+        print("The app.config with the integration information is missing. The app has been deployed but the app.config is not filled out in SOAR. Exiting now.")
+        sys.exit()
+    
     with open(config_file) as f:
         config_string = f.read()
         app_name = PACKAGE_NAME
         config_dict[app_name] = config_string
-
-    print("We have found the following configuration files:")
-    print(json.dumps(config_dict, indent=4))
 
     # get all installment IDs
     apps = res_client.get("/apps")
@@ -531,10 +474,20 @@ def upload_all_app_configurations(res_client, config_dir = CONFIG_PATH):
                 if f["name"] != "app.config":
                     continue
                 else:
+                    # fill out app.config while retaining the Resilient variables
+                    content_string = f["content"]
+                    substring = content_string.find("[resilient]")
+                    end_substring = content_string.find("cafile")
+                    final_string = "\n{}cafile=false\n".format(content_string[substring:end_substring])
+                    substring = content_string.find("host")
+                    final_string = "{}{}".format(final_string, content_string[substring:])
+                    config_dict[name] = config_dict[name] + final_string
+
                     f["content"] = config_dict[name]
 
                     base_put(res_client, uri="/services_proxy/manager/app_files/{}".format(file_id),
                                             payload=f)
+                    print("*******************SUCCESS! The app.config was filled out! *******************")
                     break
     track_deployment(res_client, changed_apps)
 
