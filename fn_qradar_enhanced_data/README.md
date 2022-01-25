@@ -61,8 +61,9 @@
 | 1.1.0 | 07/2021 | Support for Flows and QRoc |
 | 1.1.1 | 07/2021 | Fixed selftest failing when using cafile |
 | 1.1.2 | 09/2020 | Updated version of resilient-circuits to depend on |
-| 1.2.0 | 11/2021 | Allow multiple QRadar instances |
+| 1.2.0 | 11/2021 | Add multitenancy |
 
+For customers upgrading from a pervious release, the app.config file must be manually edited.
 ---
 
 ## Overview
@@ -321,12 +322,12 @@ Search QRadar Top events for the given Offense ID.
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `qradar_query` | `textarea` | No | `-` | A qradar query string with parameters |
-| `qradar_query_param1` | `text` | No | `-` | - |
-| `qradar_query_param2` | `text` | No | `-` | - |
-| `qradar_query_param3` | `text` | No | `-` | - |
-| `qradar_query_param4` | `text` | No | `-` | - |
-| `qradar_query_param5` | `text` | No | `-` | - |
-| `qradar_query_param6` | `text` | No | `-` | - |
+| `qradar_search_param1` | `text` | No | `-` | - |
+| `qradar_search_param2` | `text` | No | `-` | - |
+| `qradar_search_param3` | `text` | No | `-` | - |
+| `qradar_search_param4` | `text` | No | `-` | - |
+| `qradar_search_param5` | `text` | No | `-` | - |
+| `qradar_search_param6` | `text` | No | `-` | - |
 | `qradar_query_type` | `text` | No | `-` | - |
 
 </p>
@@ -393,7 +394,7 @@ results = {
 <p>
 
 ```python
-inputs.qradar_query_param3 = incident.properties.qradar_id
+inputs.qradar_search_param3 = incident.properties.qradar_id
 inputs.qradar_query_type = "categories"
 ```
 
