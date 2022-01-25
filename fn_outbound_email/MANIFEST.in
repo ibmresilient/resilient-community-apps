@@ -12,4 +12,4 @@ include tox.ini
 recursive-include tests/ *
 include fn_outbound_email/data/templates/*
 
-exclude *.bak
+global-exclude *.bak
