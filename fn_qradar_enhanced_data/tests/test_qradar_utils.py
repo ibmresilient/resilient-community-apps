@@ -2,7 +2,7 @@
 #
 # Unit tests for fn_qradar_enhanced_data/util/py
 #
-from fn_qradar_enhanced_data.util.qradar_constants import GRAPHQL_ARIEL_SEARCHES, SEARCH_STATUS_COMPLETED, SEARCH_STATUS_WAIT
+from fn_qradar_enhanced_data.util.qradar_constants import ARIEL_SEARCHES, SEARCH_STATUS_COMPLETED, SEARCH_STATUS_WAIT
 from fn_qradar_enhanced_data.util import qradar_utils
 from fn_qradar_enhanced_data.util.SearchWaitCommand import SearchWaitCommand, SearchFailure, SearchJobFailure
 from base64 import b64encode
@@ -106,7 +106,7 @@ def test_ariel_graphql_search():
         mocked_post_call.return_value = _generateResponse({"cursor_id": search_id}, 200)
 
         sid = search_cmd.get_search_id(query_str)
-        expected_url = "https://" + host + "/api/" + qradar_constants.ARIEL_SEARCHES
+        expected_url = "https://" + host + "/api/" + ARIEL_SEARCHES
         utf8 = query_str.encode("utf-8")
         data = {"query_expression": utf8}
         headers =  qradar_utils.AuthInfo.get_authInfo().headers.copy()
