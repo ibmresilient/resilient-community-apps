@@ -88,6 +88,7 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
         #   added to the db table schema
         field_list = [item['name'] for item in all_fields]
         field_list.append(type_name)
+        field_list.append(id(self)) # needed to make multiple instances of this plugin unique for the cache
 
         hash_key = abs(hash(frozenset(field_list)))
         LOG.debug("hash_key (%s): %s", type_name, hash_key)
