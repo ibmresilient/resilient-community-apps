@@ -299,20 +299,19 @@ class Reload(object):
         :param max_inc_id: defaults to max number for all incidents
         :return: # of incidents sync'd
         """
-        search_all_type_names = self.search_type_names.copy()
 
         # get the actual min and max values
         actual_max_inc_id, actual_min_inc_id = self._populate_incidents(self.type_info_index,
                                                                             min_inc_id,
                                                                             max_inc_id,
                                                                             self.query_api_method,
-                                                                            ('incident' in search_all_type_names))
-        if 'incident' in search_all_type_names:
-            search_all_type_names.remove('incident')
+                                                                            ('incident' in self.search_type_names))
 
         if not self.query_api_method:
             rng = range(actual_min_inc_id, actual_max_inc_id)
-            self._populate_others(rng, search_all_type_names, self.type_info_index)
+            self._populate_others(rng,
+                                  [search_type for search_type in self.search_type_names if search_type != 'incident'],
+                                  self.type_info_index)
 
         return 0 if actual_max_inc_id == 0 else (actual_max_inc_id - actual_min_inc_id) + 1
 
@@ -344,7 +343,7 @@ class Reload(object):
                 # query api call should be done now
                 if query_api_method:
                     self._populate_others_query(inc_id,
-                                                self.search_type_names,
+                                                [search_type for search_type in self.search_type_names if search_type != 'incident'],
                                                 self.type_info_index)
 
         except StopIteration:
