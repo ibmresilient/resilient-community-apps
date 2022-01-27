@@ -1,4 +1,4 @@
-# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 import base64
@@ -79,8 +79,8 @@ class SendSMTPEmail(ResilientComponent):
             raise SimpleSendEmailException("opts required")
         if not self.from_address:
             raise SimpleSendEmailException("from_address required")
-
         log.info("Converting params")
+
         if not self.to_address_list or not isinstance(self.to_address_list, (set, list)):
             self.to_address_list = []
         if not self.cc_address_list or not isinstance(self.cc_address_list, (set, list)):
@@ -154,7 +154,6 @@ class SendSMTPEmail(ResilientComponent):
 
             if self.client_id:
                 # Using OAuth2 authentication.
-                smtp_connection.set_debuglevel(True)
                 smtp_connection.ehlo()
                 log.info("Authenticating with SMTP server...")
                 smtp_connection.docmd('AUTH', 'XOAUTH2 ' + base64.b64encode(bytes(self.oauth2_string, "utf-8"))
@@ -230,16 +229,13 @@ class SendSMTPEmail(ResilientComponent):
         url = self.token_url
 
         post_data = {
-            "client_id": self.client_id,
-            "scope": [self.scope],
-            "client_secret": self.client_secret,
-        }
-        if self.refresh_token:
             # Use refresh token to renew access token.
-            post_data.update({"refresh_token": self.refresh_token})
-            post_data.update({"grant_type": "refresh_token"})
-        else:
-            post_data.update({"grant_type": "client_credentials"})
+            "client_id": self.client_id,
+            "scope": self.scope,
+            "client_secret": self.client_secret,
+            "refresh_token": self.refresh_token,
+            "grant_type": "refresh_token"
+        }
 
         result = self.rc.execute_call_v2("POST", url, data=post_data)
         r_json = result.json()
@@ -261,6 +257,7 @@ class SendSMTPEmail(ResilientComponent):
           Sets the string for the OAuth2 mechanism.
         """
         auth_string = "user={0}\x01auth=Bearer {1}\x01\x01".format(self.smtp_user, self.oauth2_token)
+
         self.oauth2_string = auth_string
 
 class SimpleSendEmailException(Exception):
