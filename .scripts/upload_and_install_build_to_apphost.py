@@ -2,12 +2,14 @@ import resilient
 import json
 import os,sys
 import time
+import re
 from requests_toolbelt import MultipartEncoder
 from resilient.co3base import BasicHTTPException, ensure_unicode
 
 ZIP_PATH = sys.argv[1]
 CONFIG_PATH = sys.argv[2]
 PACKAGE_NAME = sys.argv[3]
+CONFIG_FILE = '/home/travis/build/Resilient/{}.config'.format(PACKAGE_NAME)
 
 def main():
     res_client = setup()
@@ -36,44 +38,13 @@ def setup():
     resilient_parser = resilient.ArgumentParser(config_file=soar_config_file)
     opts = resilient_parser.parse_known_args()[0]
 
-    # creates variables for the opts.keys()
-    # check to see if we are using env variables and change the format to be usable here
-    if "email" in opts.keys():
-        email = opts["email"]
-        if email[:2] == "{{" and email[-2:] == "}}":
-            email = email.replace("{", "")
-            email = email.replace("}", "") 
-            email = os.environ.get(email)
-    if "password" in opts.keys():
-        password = opts["password"]
-        if password[:2] == "{{" and password[-2:] == "}}":
-            password = password.replace("{", "")
-            password = password.replace("}", "") 
-            password = os.environ.get(password)
-    if "api_key_id" in opts.keys():
-        if opts["api_key_id"] is not None: 
-            api_key_id = opts["api_key_id"]
-            if api_key_id[:2] == "{{" and api_key_id[-2:] == "}}":
-                api_key_id = api_key_id.replace("{", "")
-                api_key_id = api_key_id.replace("}", "") 
-                api_key_id = os.environ.get(api_key_id)
-        else:
-            api_key_id = None
-    if "api_key_secret" in opts.keys(): 
-        if opts["api_key_secret"] is not None:
-            api_key_secret = opts["api_key_secret"]
-            if api_key_secret[:2] == "{{" and api_key_secret[-2:] == "}}":
-                api_key_secret = api_key_secret.replace("{", "")
-                api_key_secret = api_key_secret.replace("}", "") 
-                api_key_secret = os.environ.get(api_key_secret) 
-        else:
-            api_key_secret = None
-    if "host" in opts.keys():
-        host = opts["host"]
-        if host[:2] == "{{" and host[-2:] == "}}":
-            host = host.replace("{", "")
-            host = host.replace("}", "") 
-            host = os.environ.get(host) 
+   # removes the brackets from the app config to get the Travis env variable values
+    results = {}
+    for item in ["email", "password", "api_key_id", "api_key_secret", "host"]:
+        if item in opts.keys() and opts[item] is not None:
+            results[item] = re.sub(r"[{}]", "", opts[item]).strip()
+            results[item] = os.environ.get(results[item])
+
     if "org" in opts.keys():
         org = opts["org"]
     if "cafile" in opts.keys():
@@ -88,7 +59,7 @@ def setup():
     else:
         # default ssl port
         port = 443
-    url = "https://{}:{}".format(host,port)
+    url = "https://{}:{}".format(results["host"],port)
 
 
     login_args = {"base_url": url,
@@ -101,11 +72,11 @@ def setup():
     # and prevent the "/apps" API endpoint from being called (since it is not accessible)
     res_client.platform = "SOAR"
 
-    if email is not None and password is not None:
-        session = res_client.connect(email, password)
-    elif api_key_id is not None and api_key_secret is not None:
-        session = res_client.set_api_key(api_key_id=opts["api_key_id"], 
-                                        api_key_secret=opts["api_key_secret"])
+    if results["email"] is not None and results["password"] is not None:
+        session = res_client.connect(results["email"], results["password"])
+    elif results["api_key_id"] is not None and results["api_key_secret"] is not None:
+        session = res_client.set_api_key(api_key_id=results["api_key_id"], 
+                                        api_key_secret=results["api_key_secret"])
     else: 
         print("Neither email/password nor API key id/secret was supplied!")
         print("Provide via app.config. Aborting!")
@@ -140,17 +111,17 @@ def base_get(res_client, uri, co3_context_token=None, timeout=None):
     url = u"{0}{1}".format(res_client.base_url, ensure_unicode(uri))
 
     response = res_client._execute_request(res_client.session.get,
-                                        url,
-                                        proxies=res_client.proxies,
-                                        cookies=res_client.cookies,
-                                        headers=res_client.make_headers(co3_context_token,{"X-ORG-ID": "{}".format(res_client.org_id)   }),
-                                        verify=res_client.verify,
-                                        timeout=timeout)
+                                            url,
+                                            proxies=res_client.proxies,
+                                            cookies=res_client.cookies,
+                                            headers=res_client.make_headers(co3_context_token,{"X-ORG-ID": "{}".format(res_client.org_id)   }),
+                                            verify=res_client.verify,
+                                            timeout=timeout)
     BasicHTTPException.raise_if_error(response)
     return json.loads(response.content)
 
 # helper method to initiate PUT requests to the Resilient servers
-# this is needed, because the standard get method goes to
+# this is needed, because the standard put method goes to
 # https://{url}/rest/orgs/{orgID}
 # but we sometimes need to go just to the url + something
 def base_put(res_client, uri, payload, co3_context_token=None, timeout=None):
@@ -162,18 +133,18 @@ def base_put(res_client, uri, payload, co3_context_token=None, timeout=None):
     
     payload_json = json.dumps(payload)
     response = res_client._execute_request(res_client.session.put,
-                                        url,
-                                        data=payload_json,
-                                        proxies=res_client.proxies,
-                                        cookies=res_client.cookies,
-                                        headers=res_client.make_headers(co3_context_token,{"X-ORG-ID": "{}".format(res_client.org_id)   }),
-                                        verify=res_client.verify,
-                                        timeout=timeout)
+                                            url,
+                                            data=payload_json,
+                                            proxies=res_client.proxies,
+                                            cookies=res_client.cookies,
+                                            headers=res_client.make_headers(co3_context_token,{"X-ORG-ID": "{}".format(res_client.org_id)   }),
+                                            verify=res_client.verify,
+                                            timeout=timeout)
     BasicHTTPException.raise_if_error(response)
     return json.loads(response.text)   
 
 # helper method to initiate POST requests to the Resilient servers
-# this is needed, because the standard get method goes to
+# this is needed, because the standard post method goes to
 # https://{url}/rest/orgs/{orgID}
 # but we sometimes need to go just to the url + something
 def base_post(res_client, uri, payload, co3_context_token=None, timeout=None):
@@ -184,73 +155,20 @@ def base_post(res_client, uri, payload, co3_context_token=None, timeout=None):
 
     payload_json = json.dumps(payload)
     response = res_client._execute_request(res_client.session.post,
-                                        url,
-                                        data=payload_json,
-                                        proxies=res_client.proxies,
-                                        cookies=res_client.cookies,
-                                        headers=res_client.make_headers(co3_context_token,{"X-ORG-ID": "{}".format(res_client.org_id)   }),
-                                        verify=res_client.verify,
-                                        timeout=timeout)
+                                            url,
+                                            data=payload_json,
+                                            proxies=res_client.proxies,
+                                            cookies=res_client.cookies,
+                                            headers=res_client.make_headers(co3_context_token,{"X-ORG-ID": "{}".format(res_client.org_id)   }),
+                                            verify=res_client.verify,
+                                            timeout=timeout)
     BasicHTTPException.raise_if_error(response)
     return json.loads(response.text)     
-
-# For some officially unsupported API calls we have to upload XML files
-# The server expects multipart encoded data, therefore we have to package
-# it ourselves. 
-def base_put_multipart_xml(res_client, uri, payload, co3_context_token=None, timeout=None):
-    workflow_fields = {}
-    workflow_fields["csrf"] = res_client.headers["X-sess-id"]
-    workflow_fields["file"] = payload
-    # Not sure what this does, this may be changed later
-    workflow_fields["object_type"] = '0'
-
-    encoder = MultipartEncoder(fields=workflow_fields)
-
-    url = u"{0}{1}".format(res_client.base_url, ensure_unicode(uri))
-
-    headers = res_client.make_headers(co3_context_token,
-                                additional_headers={'content-type': encoder.content_type, "X-ORG-ID": "{}".format(res_client.org_id) })
-
-    response = res_client._execute_request(res_client.session.put,
-                                        url,
-                                        data=encoder,
-                                        proxies=res_client.proxies,
-                                        cookies=res_client.cookies,
-                                        headers=headers,
-                                        verify=res_client.verify,
-                                        timeout=timeout)
-    BasicHTTPException.raise_if_error(response)
-    return json.loads(response.text)
-
-# For some officially unsupported API calls we have to upload XML files
-# The server expects multipart encoded data, therefore we have to package
-# it ourselves. 
-def base_post_export_config(res_client, uri, co3_context_token=None, timeout=None):
-    fields = {}
-    fields["csrf"] = res_client.headers["X-sess-id"]
-
-    encoder = MultipartEncoder(fields=fields)
-
-    url = u"{0}{1}".format(res_client.base_url, ensure_unicode(uri))
-
-    headers = res_client.make_headers(co3_context_token,
-                                additional_headers={'content-type': encoder.content_type, "X-ORG-ID": "{}".format(res_client.org_id) })
-
-    response = res_client._execute_request(res_client.session.post,
-                                        url,
-                                        data=encoder,
-                                        proxies=res_client.proxies,
-                                        cookies=res_client.cookies,
-                                        headers=headers,
-                                        verify=res_client.verify,
-                                        timeout=timeout)
-    BasicHTTPException.raise_if_error(response)
-
-    return response
 
 ########################################
 ### upload, install and deploy apps
 ########################################
+# uploads the zip file to apphost
 def upload_all_apps(res_client, app_path):
     if app_path is None:
         print("Problem getting the app file path.")
@@ -288,6 +206,7 @@ def upload_all_apps(res_client, app_path):
     except resilient.co3.SimpleHTTPException as e:
         print(e)
 
+# installs pending uploaded app to apphost
 def install_all_apps(res_client):
     if res_client.use_api_key is True:
         print("The client is authenticated via API keys. The requested function uses the '/apps' API endpoint, which is not enabled with this authentication method!")
@@ -317,6 +236,7 @@ def install_all_apps(res_client):
                 print("Error in installation: {}".format(app["name"]))
                 print(r)
 
+# deploys app in apphost
 def deploy_all_apps(res_client, controller_id=None):
     if res_client.use_api_key is True:
         print("The client is authenticated via API keys. The requested function uses the '/apps' API endpoint, which is not enabled with this authentication method!")
@@ -391,7 +311,7 @@ def deploy_all_apps(res_client, controller_id=None):
     # we now have set all apps to the deployment state, track their deployment status
     track_deployment(res_client, deployment_list)
 
-
+# tracks the deployment of the app
 def track_deployment(res_client, deployment_list):
     # default cutoff time for is 10 minutes
     # other values can be supplied via the "--deployment_cutoff_seconds" argument
@@ -417,7 +337,7 @@ def track_deployment(res_client, deployment_list):
         time.sleep(2)
 
         if time.time()-start_time > deployment_cutoff_seconds:
-            print("Cufoff time was reached! Deployment may still be going on, please check in the GUI.")
+            print("Cutoff time was reached! Deployment may still be going on, please check in the GUI.")
             break
 
     print("This operation was running for {:.2f} seconds.".format(time.time()-start_time))
@@ -436,7 +356,7 @@ def upload_all_app_configurations(res_client):
         return
     config_dict = {}
 
-    config_file = '/home/travis/build/Resilient/{}.config'.format(PACKAGE_NAME)
+    config_file = CONFIG_FILE
     if not os.path.exists(config_file):
         print("The app.config with the integration information is missing. The app has been deployed but the app.config is not filled out in SOAR. Exiting now.")
         sys.exit()

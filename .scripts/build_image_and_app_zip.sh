@@ -20,26 +20,11 @@ UPLOAD_ZIP=$4
 ##################
 ## Check params ##
 ##################
-if [ -z "$1" ] ; then
-    echo "ERROR: Must provide PACKAGE_NAME as first parameter"
-    exit 1
-fi
 
-if [ -z "$2" ] ; then
-    echo "ERROR: Must provide BUILD_TYPE as second parameter. Accepted values are DEV or MAIN"
-    exit 1
+if [[ "$#" -ne 4 ]]; then
+echo "Syntax: build_image_and_zip.sh package_name build_type pypi_index_to_use upload.zip"
+exit 1
 fi
-
-if [ -z "$3" ] ; then
-    echo "ERROR: Must provide PYPI_INDEX_TO_USE as third parameter"
-    exit 1
-fi
-
-if [ -z "$4" ] ; then
-    echo "ERROR: Must provide UPLOAD_ZIP as fourth parameter"
-    exit 1
-fi
-
 
 ###############
 ## Functions ##
