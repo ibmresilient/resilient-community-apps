@@ -923,7 +923,7 @@ def translate_value_for_blob(blob_func):
             input_type = field['input_type']
             if input_type in mapping:
                 chged_value = mapping[input_type](type_info, field, chged_value)
-            else:
+            elif input_type != 'none':
                 LOG.warning("Unable to find a mapping for field type: %s", input_type)
 
             if isinstance(chged_value, list):
