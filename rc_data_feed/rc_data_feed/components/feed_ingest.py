@@ -289,8 +289,8 @@ class Reload(object):
                         self.search_type_names.append(type_name)
 
         self.search_type_names = list(dict.fromkeys(self.search_type_names))  # dedup list
-        LOG.debug("reload_types allowed: %s", self.search_type_names)
-        LOG.debug("reload_types datatables allowed: %s", self.datatable_search_type_names)
+        LOG.info("reload_types allowed: %s", self.search_type_names)
+        LOG.info("reload_types datatables allowed: %s", self.datatable_search_type_names)
 
     def reload_all(self, min_inc_id=0, max_inc_id=sys.maxsize):
         """
