@@ -45,16 +45,16 @@ notifications:
   on_failure: always
 
 stages:
-  # - name: run all tests
-  #   if: tag IS blank AND branch = master AND type = cron
-  # - name: run package tests
-  #   if: type != cron
-  # # Every commit not on master performs static analysis
-  # - name: static analysis
-  #   if: tag IS blank AND type != cron
-  # - name: build image and app zip
-  #   if: tag IS blank AND type = push
-  # Rebuild all images
+  - name: run all tests
+    if: tag IS blank AND branch = master AND type = cron
+  - name: run package tests
+    if: type != cron
+  # Every commit not on master performs static analysis
+  - name: static analysis
+    if: tag IS blank AND type != cron
+  - name: build image and app zip
+    if: tag IS blank AND type = push
+  Rebuild all images
   - name: rebuild all images
     if: tag =~ ^rebuild/.+
 
@@ -72,119 +72,119 @@ matrix:
 
   include:
 
-    # - stage: run all tests
-    #   name: Python 2.7 Unit Tests - Main - PyPi
-    #   python: 2.7
-    #   env:
-    #     - RUN_TYPE=unit_test_main_pp TOXENV=py27
-    #   install:
-    #     - pip install -U -r "$PATH_PIP_REQ_MAIN"
-    #     - pip install -U -r "$PATH_PIP_REQ_TESTS"
-    #   script:
-    #     - echo "Starting Python 2.7 Unit Tests - Main - PyPi"
-    #     - .scripts/run_tests.sh "ALL" "$PYPI_INDEX"
+    - stage: run all tests
+      name: Python 2.7 Unit Tests - Main - PyPi
+      python: 2.7
+      env:
+        - RUN_TYPE=unit_test_main_pp TOXENV=py27
+      install:
+        - pip install -U -r "$PATH_PIP_REQ_MAIN"
+        - pip install -U -r "$PATH_PIP_REQ_TESTS"
+      script:
+        - echo "Starting Python 2.7 Unit Tests - Main - PyPi"
+        - .scripts/run_tests.sh "ALL" "$PYPI_INDEX"
 
-    # - stage: run all tests
-    #   name: Python 3.6 Unit Tests - Main - PyPi
-    #   python: 3.6
-    #   env:
-    #     - RUN_TYPE=unit_test_main_pp TOXENV=py36
-    #   install:
-    #     - pip install -U -r "$PATH_PIP_REQ_MAIN"
-    #     - pip install -U -r "$PATH_PIP_REQ_TESTS"
-    #   script:
-    #     - echo "Starting Python 3.6 Unit Tests - Main - PyPi"
-    #     - .scripts/run_tests.sh "ALL" "$PYPI_INDEX"
+    - stage: run all tests
+      name: Python 3.6 Unit Tests - Main - PyPi
+      python: 3.6
+      env:
+        - RUN_TYPE=unit_test_main_pp TOXENV=py36
+      install:
+        - pip install -U -r "$PATH_PIP_REQ_MAIN"
+        - pip install -U -r "$PATH_PIP_REQ_TESTS"
+      script:
+        - echo "Starting Python 3.6 Unit Tests - Main - PyPi"
+        - .scripts/run_tests.sh "ALL" "$PYPI_INDEX"
 
-    # - stage: run all tests
-    #   name: Python 2.7 Unit Tests - Main - Artifactory
-    #   python: 2.7
-    #   env:
-    #     - RUN_TYPE=unit_test_main_af TOXENV=py27
-    #   install:
-    #     - pip install -U -r "$PATH_PIP_REQ_MAIN"
-    #     - pip install -U -r "$PATH_PIP_REQ_TESTS"
-    #   script:
-    #     - echo "Starting Python 2.7 Unit Tests - Main - Artifactory"
-    #     - .scripts/run_tests.sh "ALL" "$ARTIFACTORY_PYPI_INDEX"
+    - stage: run all tests
+      name: Python 2.7 Unit Tests - Main - Artifactory
+      python: 2.7
+      env:
+        - RUN_TYPE=unit_test_main_af TOXENV=py27
+      install:
+        - pip install -U -r "$PATH_PIP_REQ_MAIN"
+        - pip install -U -r "$PATH_PIP_REQ_TESTS"
+      script:
+        - echo "Starting Python 2.7 Unit Tests - Main - Artifactory"
+        - .scripts/run_tests.sh "ALL" "$ARTIFACTORY_PYPI_INDEX"
 
-    # - stage: run all tests
-    #   name: Python 3.6 Unit Tests - Main - Artifactory
-    #   python: 3.6
-    #   env:
-    #     - RUN_TYPE=unit_test_main_af TOXENV=py36
-    #   install:
-    #     - pip install -U -r "$PATH_PIP_REQ_MAIN"
-    #     - pip install -U -r "$PATH_PIP_REQ_TESTS"
-    #   script:
-    #     - echo "Starting Python 3.6 Unit Tests - Main - Artifactory"
-    #     - .scripts/run_tests.sh "ALL" "$ARTIFACTORY_PYPI_INDEX"
+    - stage: run all tests
+      name: Python 3.6 Unit Tests - Main - Artifactory
+      python: 3.6
+      env:
+        - RUN_TYPE=unit_test_main_af TOXENV=py36
+      install:
+        - pip install -U -r "$PATH_PIP_REQ_MAIN"
+        - pip install -U -r "$PATH_PIP_REQ_TESTS"
+      script:
+        - echo "Starting Python 3.6 Unit Tests - Main - Artifactory"
+        - .scripts/run_tests.sh "ALL" "$ARTIFACTORY_PYPI_INDEX"
 
-    # - stage: run package tests
-    #   name: Python 2.7 Unit Tests - Package
-    #   python: 2.7
-    #   env:
-    #     - RUN_TYPE=unit_test_package TOXENV=py27
-    #   install:
-    #     - pip install -U -r "$PATH_PIP_REQ_MAIN"
-    #     - pip install -U -r "$PATH_PIP_REQ_TESTS"
-    #   script:
-    #     - echo "$TRAVIS_COMMIT_MESSAGE"
-    #     - echo "Starting Python 2.7 Unit Tests - Package"
-    #     - .scripts/run_tests.sh "$PACKAGE_NAME" "$PYPI_INDEX_TO_USE"
+    - stage: run package tests
+      name: Python 2.7 Unit Tests - Package
+      python: 2.7
+      env:
+        - RUN_TYPE=unit_test_package TOXENV=py27
+      install:
+        - pip install -U -r "$PATH_PIP_REQ_MAIN"
+        - pip install -U -r "$PATH_PIP_REQ_TESTS"
+      script:
+        - echo "$TRAVIS_COMMIT_MESSAGE"
+        - echo "Starting Python 2.7 Unit Tests - Package"
+        - .scripts/run_tests.sh "$PACKAGE_NAME" "$PYPI_INDEX_TO_USE"
 
-    # - stage: run package tests
-    #   name: Python 3.6 Unit Tests - Package
-    #   python: 3.6
-    #   env:
-    #     - RUN_TYPE=unit_test_package TOXENV=py36
-    #   install:
-    #     - pip install -U -r "$PATH_PIP_REQ_MAIN"
-    #     - pip install -U -r "$PATH_PIP_REQ_TESTS"
-    #   script:
-    #     - echo "Starting Python 3.6 Unit Tests - Package"
-    #     - .scripts/run_tests.sh "$PACKAGE_NAME" "$PYPI_INDEX_TO_USE"
+    - stage: run package tests
+      name: Python 3.6 Unit Tests - Package
+      python: 3.6
+      env:
+        - RUN_TYPE=unit_test_package TOXENV=py36
+      install:
+        - pip install -U -r "$PATH_PIP_REQ_MAIN"
+        - pip install -U -r "$PATH_PIP_REQ_TESTS"
+      script:
+        - echo "Starting Python 3.6 Unit Tests - Package"
+        - .scripts/run_tests.sh "$PACKAGE_NAME" "$PYPI_INDEX_TO_USE"
 
-    # # Jobs that perform static analysis; code quality, security scans etc
-    # - stage: static analysis
-    #   name: Py2.7 Bandit Security Scan
-    #   python: 2.7
-    #   env:
-    #     - ANALYSIS_NAME="Py2.7 Bandit Security Scan"
-    #   install:
-    #     - pip install bandit==1.6.2
-    #   script:
-    #     - .scripts/run_bandit_scan.sh "$PACKAGE_NAME"
+    # Jobs that perform static analysis; code quality, security scans etc
+    - stage: static analysis
+      name: Py2.7 Bandit Security Scan
+      python: 2.7
+      env:
+        - ANALYSIS_NAME="Py2.7 Bandit Security Scan"
+      install:
+        - pip install bandit==1.6.2
+      script:
+        - .scripts/run_bandit_scan.sh "$PACKAGE_NAME"
 
-    # - stage: static analysis
-    #   name: Py3.6 Bandit Security Scan
-    #   python: 3.6
-    #   env:
-    #     - ANALYSIS_NAME="Py3.6 Bandit Security Scan"
-    #   install:
-    #     - pip install bandit
-    #   script:
-    #     - .scripts/run_bandit_scan.sh "$PACKAGE_NAME"
+    - stage: static analysis
+      name: Py3.6 Bandit Security Scan
+      python: 3.6
+      env:
+        - ANALYSIS_NAME="Py3.6 Bandit Security Scan"
+      install:
+        - pip install bandit
+      script:
+        - .scripts/run_bandit_scan.sh "$PACKAGE_NAME"
 
-    # - stage: static analysis
-    #   name: Pylint
-    #   python: 3.6
-    #   env:
-    #     - ANALYSIS_NAME="Pylint"
-    #   install:
-    #     - pip install pylint
-    #   script:
-    #     - .scripts/pylint.sh "$PACKAGE_NAME"
+    - stage: static analysis
+      name: Pylint
+      python: 3.6
+      env:
+        - ANALYSIS_NAME="Pylint"
+      install:
+        - pip install pylint
+      script:
+        - .scripts/pylint.sh "$PACKAGE_NAME"
 
-    # - stage: static analysis
-    #   name: Safety Checker
-    #   python: 3.6
-    #   env:
-    #     - ANALYSIS_NAME="CVE Search against dependancies"
-    #   install:
-    #     - pip install safety
-    #   script:
-    #     - .scripts/run_safety_scan_for_cve.sh "$PACKAGE_NAME"
+    - stage: static analysis
+      name: Safety Checker
+      python: 3.6
+      env:
+        - ANALYSIS_NAME="CVE Search against dependancies"
+      install:
+        - pip install safety
+      script:
+        - .scripts/run_safety_scan_for_cve.sh "$PACKAGE_NAME"
 
     - stage: build image and app zip
       name: Build Image and App zip
@@ -236,5 +236,3 @@ matrix:
         - IMAGE_TO_REBUILD=$(echo $TRAVIS_TAG | cut -d "/" -f 3)
         - REPO_TO_PUSH=$(echo $TRAVIS_TAG | cut -d "/" -f 4)
         - .scripts/rebuild_images.sh "$PYTHON_LIBRARIES_VERSION" "$IMAGE_TO_REBUILD" "$REPO_TO_PUSH"
-  before_install:
-    - openssl aes-256-cbc -K $encrypted_1abb9c969281_key -iv $encrypted_1abb9c969281_iv -in fn_whois.config.enc -out .environments/fn_whois/fn_whois.config -d
