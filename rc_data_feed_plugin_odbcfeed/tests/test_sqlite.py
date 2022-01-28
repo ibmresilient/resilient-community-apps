@@ -26,7 +26,7 @@ order by p.name;"""
 
 app_config = {
     "class": "SQLiteFeed",
-    "file_name": "/tmp/test.sqlite3"
+    "file_name": "/tmp/test.sqlite3" # nosec
 }
 
 result_payload = {  "id":  101,

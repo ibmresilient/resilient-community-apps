@@ -161,7 +161,7 @@ class SQLCommon():
                     assert row_count == 1
 
             # get the row and confirm the values
-            select_stmt = "select * from {} where id = {}".format(self.table_name, payload["id"])
+            select_stmt = "select * from {} where id = {}".format(self.table_name, payload["id"]) # nosec
             select_result = connection._execute_sql(
                 cursor,
                 select_stmt)
@@ -225,7 +225,7 @@ class SQLCommon():
             #assert update_result.rowcount == 1
 
             # get the row and confirm the values
-            select_stmt = "select * from {} where id = {}".format(self.table_name, payload["id"])
+            select_stmt = "select * from {} where id = {}".format(self.table_name, payload["id"]) # nosec
             select_result = connection._execute_sql(
                 cursor,
                 select_stmt)
