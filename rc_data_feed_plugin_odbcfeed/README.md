@@ -1,9 +1,10 @@
 ## Release Notes
 
+* v1.0.6 Fixes for removed datatable columns, added caching for db schema updates - improving performance
 * v1.0.5 Support for attachment content
 * v1.0.4 Oracle definitions for AppHost
 * v1.0.3 AppHost configurations for Postresql, MS SQL Server, MySql, SQLite
-* v1.0.1 Duplication of incident id bug fix 
+* v1.0.1 Duplication of incident id bug fix
 
 ## Notes:
 * Issues exist deleting attachments and artifact attachments for IBM SOAR v39 and v40. A future release is expected to resolve this issue.
@@ -15,7 +16,7 @@ This package contains the odbcfeed Plugin to the Data Feed extension.  This Data
 This plugin allows this replica data to be maintained in a sql-based database.
 
 Refer to the documentation on the Data Feed extension for uses cases support and configuration options. Also refer to the other Data Feed plugins which can be used in combination.
-  
+
 # License
 
 Unless otherwise specified, contents of this repository are published under the MIT open-source
@@ -33,7 +34,7 @@ Version 1.0.5 introduces the ability to include attachment content. When `includ
 | SQLServer | varbinary(max) |
 | Oracle | blob |
 
-Attachment content can be to up 25mb. Plan your DB storage requirements for the `attachment` table accordingly. 
+Attachment content can be to up 25mb. Plan your DB storage requirements for the `attachment` table accordingly.
 
 Refer to the documentation for each database on how to read or process blob data.
 
@@ -45,7 +46,7 @@ odbc_connect=<service_name> or (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=<host>)
 # Installation
   The integration package contains Python components that are called by the Resilient platform. These components run in the Resilient Circuits integration framework. The package also includes Resilient customizations that will be imported into the platform later.
   You perform these installation procedures at the Resilient integration server.
-  
+
 ## Install the Python components
   Complete the following steps to install the Python components:
 * Ensure that the environment is up-to-date, as follows:
@@ -53,15 +54,15 @@ odbc_connect=<service_name> or (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=<host>)
   sudo pip install --upgrade pip
   sudo pip install --upgrade setuptools
   sudo pip install --upgrade resilient-circuits
-```  
+```
 * | Run the following commands to install the package:
 ```
   unzip rc_data_feed-plugin-odbcfeed-<version>.zip
   [sudo] pip install --upgrade rc_data_feed-plugin-odbcfeed-<version>.tar.gz
-```  
+```
 * | Configure Resilient-circuits
 
-  The Resilient Circuits process runs as an unprivileged user, typically named integration. If you do not already have an integration user configured on your appliance, create it now. 
+  The Resilient Circuits process runs as an unprivileged user, typically named integration. If you do not already have an integration user configured on your appliance, create it now.
   Complete the following steps to configure and run the integration:
 * Using sudo, switch to the integration user, as follows:
 
@@ -73,12 +74,12 @@ odbc_connect=<service_name> or (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=<host>)
   resilient-circuits config –u [-l rc-data-feed-plugin-odbcfeed]
 ```
 * Edit the resilient-circuits configuration file, as follows:
-    
+
      - In the [resilient] section, ensure that you provide all the information required to connect to the Resilient platform.
      - In the [postgres_feed] or similar sections, configure the settings for your database environment.
      - In the [feeds] section, define the feed(s) you intend to use and create separate sections for each feed. For example:
 ```
-  
+
   [feeds]
   feed_names=postgres_feed
   reload=True
@@ -121,7 +122,7 @@ odbc_connect=<service_name> or (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=<host>)
 ```
 
 # ODBCFeed Class
-The ODBCFeed class is probably the most flexible and useful of the feeds. It allows you to write all the incoming data to an ODBC database. 
+The ODBCFeed class is probably the most flexible and useful of the feeds. It allows you to write all the incoming data to an ODBC database.
 The following configuration items are supported:
 
 | Key | Values | Description |
@@ -132,10 +133,10 @@ The following configuration items are supported:
 | uid | DB user name | Specify the database user name in this property and not in the connect string. Most DBs support the uid in the connect string but you should specify in this property instead. |
 | pwd | DB password | Specify the database user's password in this property and not in the connect string. Most DBs support the pwd in the connect string but you should specify it in this property instead.  You can use the standard Resilient Circuits mechanism for secure password storage. |
 
-When using a data feed database, IBM Resilient strongly recommends that you create and maintain the database on system separate from the Resilient platform, where queries cannot impact your running Resilient instance. Allowing access to the Resilient platform for a database instance can also compromise security of the platform itself. 
+When using a data feed database, IBM Resilient strongly recommends that you create and maintain the database on system separate from the Resilient platform, where queries cannot impact your running Resilient instance. Allowing access to the Resilient platform for a database instance can also compromise security of the platform itself.
 
 ## Additional connection strings
-The following table lists additional database connection strings for the other supported databases. 
+The following table lists additional database connection strings for the other supported databases.
 
 | Database | Connection Strings |
 | :------- | :----------------- |
@@ -143,7 +144,7 @@ The following table lists additional database connection strings for the other s
 | Oracle | <service_name> or (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=127.0.0.1)(PORT=1521))(CONNECT_DATA=(SID=<youSID>))) |
 | SQLServer | DRIVER={FreeTDS};SERVER=127.0.0.1;PORT=1433;DATABASE=<yourDB>; |
 
-Your naming of the database drivers (Ex. `MySQL`) may vary and is specified in your `odbcinst.ini` file. 
+Your naming of the database drivers (Ex. `MySQL`) may vary and is specified in your `odbcinst.ini` file.
 
 ### Integration Server
 Oracle has the further requirement of specifying the connection string references in a TNSNAMES.ORA file. Setting up the Oracle client environment will include the following environment variables (and may include others):
@@ -154,7 +155,7 @@ export TNS_ADMIN=/path/to/tnsnames/
 ```
 
 ### App Host
-For App Host deployments, the tnsnames.ora file should be added to your app in the configuration section specifying the 
+For App Host deployments, the tnsnames.ora file should be added to your app in the configuration section specifying the
 file name as `tnsnames.ora` and path `/var/rescircuits`. The contents should contain the definitions for your Oracle database. For example:
 
 ```
@@ -169,7 +170,7 @@ ORCLPDB1=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=9.10.11.12)(PORT=1521))
 ![tnsnames.ora](screenshots/tnsnames.png)
 
 ## Integration Server Requirements
-All SQL database datastores are accessible via a python library (pyodbc) which further references a system library (unixodbc). Due to the complexity of the pyodbc package, you will either need an environment with the `gcc compiler` to install it or, for RHEL environments, you can use a .whl file packaged by IBM and available on the public github (https://github.com/ibmresilient/resilient-community-apps/tree/master/fn_odbc_query/lib). 
+All SQL database datastores are accessible via a python library (pyodbc) which further references a system library (unixodbc). Due to the complexity of the pyodbc package, you will either need an environment with the `gcc compiler` to install it or, for RHEL environments, you can use a .whl file packaged by IBM and available on the public github (https://github.com/ibmresilient/resilient-community-apps/tree/master/fn_odbc_query/lib).
 
 Information about pyodbc and installing unixodbc can be found here: https://github.com/mkleehammer/pyodbc/wiki/Install.
 
@@ -222,7 +223,7 @@ CPReuse         =
   | MS SQLServer | varchar(xx) | 4000 |
   | Oracle | nvarchar2(xx) | 2000 |
 
-*	When creating the database user account which will access the defined database, provide the necessary permissions to allow full access to create tables, alter tables by adding columns, and full capability to insert, update and delete records. 
+*	When creating the database user account which will access the defined database, provide the necessary permissions to allow full access to create tables, alter tables by adding columns, and full capability to insert, update and delete records.
 
 * These are the permissions granted when creating a user to reference a SQLServer database:
 
@@ -234,7 +235,7 @@ CPReuse         =
 
 * Some databases have reserve words which cannot be used in tables (such as date and size). If a Resilient custom field is found to be in a database reserve list, the name (for example, the column name) is altered to include a trailing '_'.
 
-*	Deleting a custom field in Resilient will not remove it from the Data Feed datastore. 
+*	Deleting a custom field in Resilient will not remove it from the Data Feed datastore.
 
 *	A custom field changed between Text and TextArea will have no effect in the Data Feed process.
 
@@ -247,7 +248,7 @@ CPReuse         =
 *	No foreign keys are created between tables. However, each table contains the `inc_id` column which can be used to link tables together. Below is a sample SQL query linking an incident with its tasks.
 
 ```
-SELECT * FROM incident 
+SELECT * FROM incident
 INNER JOIN task
 ON incident.inc_id = task.inc_id
 WHERE incident.inc_id=2095;
@@ -269,7 +270,7 @@ Each SQL dialect modifies the database connection with the encoding used to read
 ```
 def configure_connection(self, connection):
     connection.setdecoding(pyodbc.SQL_WCHAR, encoding='utf-8')  # pylint: disable=c-extension-no-member
-    if sys.version_info.major == 2: # to set encoding on python 2  
+    if sys.version_info.major == 2: # to set encoding on python 2
         connection.setencoding(str, encoding='utf-8')
         connection.setencoding(unicode, encoding='utf-8')
     else: # an issue and try encoding without specifying fromtype
@@ -284,7 +285,7 @@ def get_column_type(self, input_type):  # pylint: disable=no-self-use
     """
     Gets the DB column type for the specified Resilient 'input type'
 
-    :param input_type: The Resilient input type value (e.g. datepicker, 
+    :param input_type: The Resilient input type value (e.g. datepicker,
         boolean, number, text, text_area, etc.)
 
     :returns The DB type to use for this dialect.
@@ -306,7 +307,7 @@ def get_column_type(self, input_type):  # pylint: disable=no-self-use
 Text data types can be challenging for some databases based on the data length limits. In those cases, use a constant to define the limit and truncate your data using that value. Be aware that character limits do not account for Unicode characters which are double-byte. This means that a data limit of 64k characters actually translates to 32k Unicode characters.
 
 ```
-MAX_MARIADB_TEXT = 32000 
+MAX_MARIADB_TEXT = 32000
 
 def get_parameters(self, parameter_names, parameters):
     # Need to get a list that contains all the values in the same order as parameter_names.
@@ -319,9 +320,9 @@ def get_parameters(self, parameter_names, parameters):
 ### Modifying dialect reserved words
 Each SQL Dialect contains reserved words which cannot be used in database table and column definitions. To ensure all data fields in Resilient can be stored, a list of reserve words is maintained. When a conflict is found the resulting table or column name has an underscore added to the name. From time to time, new database releases add to this reserved word list. Just add those words to an existing list:
 ```
-RESERVE_LIST = ['all', 'analyse', 'analyze', 'and', 'any', 'array', 'as', 
+RESERVE_LIST = ['all', 'analyse', 'analyze', 'and', 'any', 'array', 'as',
                 'asc', 'asymmetric', 'both', 'case', 'cast',
-                'check', 'collate', 'column', 'constraint', 'create', 
+                'check', 'collate', 'column', 'constraint', 'create',
                 'current_date', 'current_role', 'current_time',
                 'current_timestamp', 'current_user', 'default',
                 …

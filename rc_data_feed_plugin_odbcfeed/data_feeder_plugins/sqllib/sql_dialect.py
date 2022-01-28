@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use, line-too-long
 
 """This module contains all of the SqlDialect implementations that we support."""
@@ -923,7 +923,7 @@ def translate_value_for_blob(blob_func):
             input_type = field['input_type']
             if input_type in mapping:
                 chged_value = mapping[input_type](type_info, field, chged_value)
-            else:
+            elif input_type != 'none':
                 LOG.warning("Unable to find a mapping for field type: %s", input_type)
 
             if isinstance(chged_value, list):

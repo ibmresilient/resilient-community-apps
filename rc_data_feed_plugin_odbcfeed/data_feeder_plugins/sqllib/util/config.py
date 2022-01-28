@@ -10,7 +10,7 @@ def config_section_data():
     """
     config_data = u"""[postgres_feed]
 class=ODBCFeed
-odbc_connect=Driver={PostresSQL Driver};Server=127.0.0.1;DB=<db>;Port=5432;connectTimeout=0
+odbc_connect=Driver={PostgreSQL};Server=127.0.0.1;DB=<db>;Port=5432;connectTimeout=0
 sql_dialect=PostgreSQL96Dialect
 uid=<acct>
 pwd=<pwd>
@@ -52,6 +52,12 @@ reload=False
 reload_query_api_method=False
 # feed_data is the default message destination that will be listened to
 queue=feed_data
-# change setting to true to capture contents of an attachment 
+# change setting to true to capture contents of an attachment
 include_attachment_data = false
+# use reload_types to limit the types of objects when reload=true.
+# Ex: incident,task,note,artifact,attachment,<data_table_api_name>
+reload_types=
+# if necessary, specify the supported workspace (by label, case sensitive) and the list of feeds associated with it
+# ex: 'Default Workspace': ['sqlserver_feed'], 'workspace A': ['kafka_feed', 'resilient_feed']
+workspaces=
 """

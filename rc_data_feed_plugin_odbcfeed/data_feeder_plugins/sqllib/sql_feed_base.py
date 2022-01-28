@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use, line-too-long
 """Module contains SqlFeedDestinationBase, the base class for all SQL feed destinations."""
 import abc
 import logging
 
+from cachetools import cached, LRUCache
 from rc_data_feed.lib.feed import FeedDestinationBase
 from rc_data_feed.lib.type_info import TypeInfo
 from .sql_dialect import PostgreSQL96Dialect, SqliteDialect, MySqlDialect, SqlServerDialect, OracleDialect
@@ -81,6 +82,19 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
     def _reinit(self, connect_str, uid, pwd, dialect=None):
         raise NotImplementedError
 
+    def cache_key(self, type_name, all_fields):
+        # serialize the fields so that we can create a hash key
+        # new fields in an object will produce a new hash key which will trigger the new field to be
+        #   added to the db table schema
+        field_list = [item['name'] for item in all_fields]
+        field_list.append(type_name)
+        field_list.append(id(self)) # needed to make multiple instances of this plugin unique for the cache
+
+        hash_key = abs(hash(frozenset(field_list)))
+        LOG.debug("hash_key (%s): %s", type_name, hash_key)
+        return hash_key
+
+    @cached(cache=LRUCache(100), key=cache_key)
     def _create_or_update_table(self, type_name, all_fields):
 
         for retry in range(2):
@@ -130,7 +144,7 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
                             self._rollback_transaction(cursor)
                         raise err
                     except Exception:
-                        pass
+                        pass # nosec
 
 
     def _add_field_to_table(self, cursor, type_name, field):
@@ -159,6 +173,13 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
     def send_data(self, context, payload):
         # We'll use the type's name as the table name.
         #
+
+        # Create a flattened map where each key of the map is the field name.
+        #
+        flat_payload = context.type_info.flatten(payload,
+                                               translate_func=getattr(self.dialect,
+                                                                      'mapped_translate_value',
+                                                                      TypeInfo.translate_value))
         table_name = context.type_info.get_pretty_type_name()
 
         all_fields = context.type_info.get_all_fields(refresh=False)
@@ -166,13 +187,6 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
         self._create_or_update_table(table_name, all_fields)
 
         all_field_names = [field['name'] for field in all_fields]
-
-        # Create a flattened map where each key of the map is the field name.
-        #
-        flat_payload = context.type_info.flatten(payload,
-                                                 translate_func=getattr(self.dialect,
-                                                                        'mapped_translate_value',
-                                                                        TypeInfo.translate_value))
 
         # some data types, such as datetime, will need a conversion routine
         all_field_types = dict()
@@ -215,7 +229,8 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
                         params
                     )
                 else:
-                    LOG.info("Inserting/updating %s; id = %d", table_name, flat_payload['id'])
+                    LOG.info("Inserting/updating %s; id = %d [%s]",
+                             table_name, flat_payload['id'], type(self.dialect).__name__)
 
                     # reduce data of attachments which are empty
                     non_null_payload = {}
@@ -255,4 +270,4 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
                             self._rollback_transaction(cursor)
                         raise err
                     except Exception:
-                        pass
+                        pass # nosec
