@@ -6,7 +6,7 @@ import pytest
 import sys
 
 from lib.test_sql_common import SQLCommon, blob_fields, BLOB_TABLE_NAME
-from data_feeder_plugins.sqllib.sql_dialect import SQLServerDialect
+from data_feeder_plugins.sqllib.sql_dialect import SqlServerDialect
 
 LOG = logging.getLogger(__name__)
 
@@ -20,7 +20,7 @@ FIND_COLUMNS_STMT = "SELECT column_name, data_type FROM information_schema.colum
 app_config = {
     "class": "ODBCFeed",
     "odbc_connect": "DRIVER={{FreeTDS}};SERVER=192.168.1.215;PORT=1433;DATABASE={db}".format(db=TEST_DB),
-    "sql_dialect": "SQLServerDialect",
+    "sql_dialect": "SqlServerDialect",
     "uid": "res_test",
     "pwd": "R#s_test"
 }
