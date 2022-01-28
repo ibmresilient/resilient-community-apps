@@ -41,7 +41,6 @@ if sys.version_info.major == 2:
 else:
     result_payload['test_datetime'] = datetime.datetime(2019, 2, 13, 15, 55, 47, 448000)
 
-@pytest.mark.livetest
 @pytest.mark.order1
 def test_get_parameters():
     common = SQLCommon(app_config)
