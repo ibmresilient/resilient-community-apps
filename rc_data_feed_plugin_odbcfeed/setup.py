@@ -23,7 +23,7 @@ Supported ODBC databases:
     install_requires=[
         'cachetools',
         'cx_Oracle',
-        'rc_data_feed>=2.2.0',
+        'rc_data_feed>=2.2.1',
         'resilient',
         'pyodbc',
         'six',
