@@ -444,7 +444,7 @@ class ResilientHelper(object):
         """Method to handle resquests to our custom APIs in ServiceNow"""
         log = logging.getLogger(__name__)
 
-        response, return_value = None, None
+        res, return_value = None, None
 
         SUPPORTED_METHODS = ["GET", "POST", "PATCH"]
 
@@ -466,7 +466,7 @@ class ResilientHelper(object):
         log.info("SN REQUEST:\nmethod: %s\nurl: %s\nbody: %s", res.request.method, res.request.url, res.request.body)
 
         if method is "GET":
-            log.info("SN RESPONSE: %s", res.text)
+            log.info("SN RESPONSE: %s", res)
             return_value = res
 
         elif method in ("POST", "PATCH"):
