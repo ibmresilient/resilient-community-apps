@@ -20,7 +20,7 @@ FIND_COLUMNS_STMT = "SELECT column_name, data_type FROM information_schema.colum
 app_config = {
     "class": "ODBCFeed",
     "odbc_connect": "DRIVER={{FreeTDS}};SERVER=192.168.1.215;PORT=1433;DATABASE={db}".format(db=TEST_DB),
-    "sql_dialect": "SqlServerDialect",
+    "sql_dialect": "SQLServerDialect",
     "uid": "res_test",
     "pwd": "R#s_test"
 }
