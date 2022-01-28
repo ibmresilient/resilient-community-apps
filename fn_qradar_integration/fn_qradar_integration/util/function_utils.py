@@ -94,12 +94,6 @@ def update_qradar_servers_select_list(servers_list, res_rest_client, field_name)
         if type(payload) == list or payload.get("input_type") != "select":
             return None
 
-        # Create list of servers to add to the QRadar Servers select list
-        if payload.get("values"):
-            for each_value in payload.get("values"):
-                if each_value.get("label") in server_name_list:
-                    server_name_list.remove(each_value.get("label"))
-
         # Create payload 
         if server_name_list:
             payload["values"] = [
