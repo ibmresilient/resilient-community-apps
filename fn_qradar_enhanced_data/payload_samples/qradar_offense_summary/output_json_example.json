@@ -7,7 +7,7 @@
            "eventAnnotation":"None",
            "offenseAnnotation":"None",
            "credibility":"None",
-           "ensureOffense":True,
+           "ensureOffense":true,
            "offenseMapping":{
               "id":"0",
               "name":"Source IP",
@@ -15,11 +15,11 @@
            },
            "relevance":"None",
            "severity":"None",
-           "drop":False,
+           "drop":false,
            "__typename":"RuleActions"
         },
         "creationDate":"1146812107068",
-        "enabled":True,
+        "enabled":true,
         "groups":[
            {
               "fullName":"Recon",
@@ -39,13 +39,13 @@
               "__typename":"RuleResponseEvent"
            },
            "email":"None",
-           "log":False,
+           "log":false,
            "addToReferenceData":"None",
            "addToReferenceSet":"None",
            "removeFromReferenceData":"None",
            "removeFromReferenceSet":"None",
-           "notify":False,
-           "notifySeverityOverride":False,
+           "notify":false,
+           "notifySeverityOverride":false,
            "selectiveForwardingResponse":"None",
            "customAction":"None",
            "__typename":"RuleResponse"
@@ -53,21 +53,21 @@
         "tests":[
            {
               "group":"Event Property Tests",
-              "negate":False,
+              "negate":false,
               "text":"when the event context is Local to Local, Local to Remote",
               "uid":"1",
               "__typename":"RuleTest"
            },
            {
               "group":"Functions",
-              "negate":False,
+              "negate":false,
               "text":"when an event matches any of the following <BB>BB:PortDefinition: Database Ports</BB>",
               "uid":"3",
               "__typename":"RuleTest"
            },
            {
               "group":"Functions",
-              "negate":False,
+              "negate":false,
               "text":"when any of these <BB>BB:CategoryDefinition: Recon Events</BB> <BB>BB:CategoryDefinition: Suspicious Events with the same source IP more than 5 times</BB> across more than 29 destination IP within 10 minutes",
               "uid":"4",
               "__typename":"RuleTest"

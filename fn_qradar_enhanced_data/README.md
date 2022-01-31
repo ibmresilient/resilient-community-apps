@@ -62,9 +62,9 @@
 | 1.1.1 | 07/2021 | Fixed selftest failing when using cafile |
 | 1.1.2 | 10/2021 | Update to use latest resilient-circuits |
 | 1.1.3 | 01/2022 | Support for latest Analyst Workflow versions |
-| 1.2.0 | 11/2021 | Add multitenancy |
+| 1.2.0 | 01/2022 | Add multitenancy |
 
-For customers upgrading from a pervious release, the app.config file must be manually edited.
+For customers upgrading from a pervious release, the app.config file must be manually edited to add labels to each server configuration
 ---
 
 ## Overview
@@ -183,7 +183,8 @@ Fetch QRadar Offense Details.
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `qradar_offense_id` | `text` | No | `-` | - |
+| `qradar_label` | `text` | No | `-` | Name of QRadar server to use from the app.config |
+| `qradar_offense_id` | `text` | No | `-` | The ID of the given offense |
 | `qradar_query_type` | `text` | No | `-` | - |
 
 </p>
@@ -286,6 +287,7 @@ results = {
 ```python
 inputs.qradar_offense_id= incident.properties.qradar_id
 inputs.qradar_query_type = "offenserules"
+inputs.qradar_label = incident.properties.qradar_destination
 ```
 
 </p>
@@ -304,8 +306,8 @@ for event in results.rules_data:
   qradar_event.rule_type = event.type
   qradar_event.enabled = "True" if event.enabled else "False"
   qradar_event.response = "Yes" if event.responses.newEvents or event.responses.email or event.responses.log or event.responses.addToReferenceData or event.responses.addToReferenceSet or event.responses.removeFromReferenceData or event.responses.removeFromReferenceSet or event.responses.notify or event.responses.notifySeverityOverride or event.responses.selectiveForwardingResponse or event.responses.customAction else "No"
-  qradar_event.date_created = event.creationDate
-  qradar_event.last_modified = event.modificationDate
+  qradar_event.date_created = int(event.creationDate)
+  qradar_event.last_modified = int(event.modificationDate)
 
 ```
 
@@ -322,14 +324,15 @@ Search QRadar Top events for the given Offense ID.
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
+| `qradar_label` | `text` | No | `-` | Name of QRadar server to use from the app.config |
 | `qradar_query` | `textarea` | No | `-` | A qradar query string with parameters |
+| `qradar_query_type` | `text` | No | `-` | - |
 | `qradar_search_param1` | `text` | No | `-` | - |
 | `qradar_search_param2` | `text` | No | `-` | - |
 | `qradar_search_param3` | `text` | No | `-` | - |
 | `qradar_search_param4` | `text` | No | `-` | - |
 | `qradar_search_param5` | `text` | No | `-` | - |
 | `qradar_search_param6` | `text` | No | `-` | - |
-| `qradar_query_type` | `text` | No | `-` | - |
 
 </p>
 </details>
@@ -397,6 +400,7 @@ results = {
 ```python
 inputs.qradar_search_param3 = incident.properties.qradar_id
 inputs.qradar_query_type = "categories"
+inputs.qradar_label = incident.properties.qradar_destination
 ```
 
 </p>
@@ -645,6 +649,7 @@ qr_top_destination_ips
 | Category Count | `category_count` | `textarea` | - |
 | Destination IP | `destination_ip` | `textarea` | - |
 | Event Count | `event_count` | `textarea` | - |
+| Flow Count | `flow_count` | `textarea` | - |
 
 ---
 ## Data Table - QR Triggered Rules
@@ -682,6 +687,8 @@ qr_categories
 | Destination IP | `destinationip_count` | `textarea` | - |
 | Event Count | `event_count` | `textarea` | - |
 | Event Time | `event_time` | `datetimepicker` | - |
+| Flow Count | `flow_count` | `textarea` | - |
+| Last Packet Time | `last_packet_time` | `datetimepicker` | - |
 | Magnitude | `magnitude` | `textarea` | - |
 | Source IP | `sourceip_count` | `textarea` | - |
 
@@ -721,6 +728,7 @@ qr_top_source_ips
 | Category Count | `category_count` | `textarea` | - |
 | Domain | `domain` | `text` | - |
 | Event Count | `event_count` | `textarea` | - |
+| Flow Count | `flow_count` | `textarea` | - |
 | MAC | `mac` | `text` | - |
 | Network | `network` | `text` | - |
 | Source IP | `source_ip` | `textarea` | - |
@@ -762,33 +770,35 @@ qr_flows
 | Column Name | API Access Name | Type | Tooltip |
 | ----------- | --------------- | ---- | ------- |
 | Application | `application` | `textarea` | - |
-| Source IP | `source_ip` | `textarea` | - |
-| Source Port | `source_port` | `textarea` | - |
-| Destination IP | `destination_ip` | `textarea` | - |
-| Protocol | `protocol` | `textarea` | - |
-| First Packet Time | `first_packet_time` | `textarea` | - |
-| Source Bytes | `source_bytes` | `number` | - |
-| Source Packets | `source_packets` | `number` | - |
 | Destination Bytes | `destination_bytes` | `number` | - |
+| Destination IP | `destination_ip` | `textarea` | - |
 | Destination Packets | `destination_packets` | `number` | - |
+| Destination Port | `destination_port` | `textarea` | - |
+| First Packet Time | `first_packet_time` | `datetimepicker` | - |
+| Protocol | `protocol` | `textarea` | - |
+| Source Bytes | `source_bytes` | `number` | - |
+| Source IP | `source_ip` | `textarea` | - |
+| Source Packets | `source_packets` | `number` | - |
+| Source Port | `source_port` | `textarea` | - |
 
 ---
 ## Custom Fields
 | Label | API Access Name | Type | Prefix | Placeholder | Tooltip |
 | ----- | --------------- | ---- | ------ | ----------- | ------- |
-| QR Offense Id | `qradar_id` | `text` | `properties` | - | - |
+| QR Assigned | `qr_assigned` | `textarea` | `properties` | - | The analyst to whom the QRadar Offense is assigned to. |
 | QR Credibility | `qr_credibility` | `textarea` | `properties` | - | Indicates the integrity of the offense as determined by the credibility rating that is configured in the log source. |
-| QR Relevance | `qr_relevance` | `textarea` | `properties` | - | Indicates the importance of the destination.  QRadar determines the relevance by the weight that the administrator assigned to the networks and assets. |
+| QR Destination IP Count | `qr_destination_ip_count` | `textarea` | `properties` | - | The no. of Destination IPs associated with the QRadar Offense |
+| QR Event Count | `qr_event_count` | `textarea` | `properties` | - | The no. of events associated with the QRadar Offense |
+| QR Flow Count | `qr_flow_count` | `textarea` | `properties` | - | The no. of flows associated with the QRadar Offense |
 | QR Magnitude | `qr_magnitude` | `textarea` | `properties` | - | Indicates the relative importance of the offense. This value is calculated based on the relevance, severity, and credibility ratings. |
 | QR Offense Index Type | `qr_offense_index_type` | `text` | `properties` | - | The type on which the QRadar Offense is indexed |
-| QR Offense Source  | `qr_offense_source` | `text` | `properties` | - | The source for the QRadar Offense |
-| QR Event Count | `qr_event_count` | `textarea` | `properties` | - | The no. of events associated with the QRadar Offense |
-| QR Flow Count | `qr_event_count` | `textarea` | `properties` | - | The no. of flows associated with the QRadar Offense |
-| QR Destination IP Count | `qr_destination_ip_count` | `textarea` | `properties` | - | The no. of Destination IPs associated with the QRadar Offense |
 | QR Offense Index Value | `qr_offense_index_value` | `text` | `properties` | - | The value by which QRadar Offense is indexed |
-| QR Assigned | `qr_assigned` | `textarea` | `properties` | - | The analyst to whom the QRadar Offense is assigned to. |
+| QR Offense Source  | `qr_offense_source` | `text` | `properties` | - | The source for the QRadar Offense |
+| QR Relevance | `qr_relevance` | `textarea` | `properties` | - | Indicates the importance of the destination.  QRadar determines the relevance by the weight that the administrator assigned to the networks and assets. |
 | QR Severity | `qr_severity` | `textarea` | `properties` | - | Indicates the threat that an attack poses in relation to how prepared the destination is for the attack. |
 | QR Source IP Count | `qr_source_ip_count` | `textarea` | `properties` | - | The no. of Source IPs associated with the QRadar Offense |
+| qradar_destination | `qradar_destination` | `text` | `properties` | - | QRadar Destination to Sync With |
+| QR Offense Id | `qradar_id` | `text` | `properties` | - | - |
 
 ---
 
@@ -802,7 +812,7 @@ qr_flows
 | Create Artifact from Assets info | qr_assets | `-` |
 | Create artifact from Destination IP info | qr_top_destination_ips | `-` |
 
-The rule, QRadar Enhanced Data, is an automatic rule that triggers when a new incident with a qradar_id value is created, or an existing incident whose qradar_id value is updated. This rule triggers workflows as listed above and populates the Offense information in the custom fields and data tables. The rules for creating artifacts are menu item rules associated with the data tables. These rules can be executed at row level to generate artifacts from the column values. The workflows' input and post processing scripts can be customized for data retrieval and data presentation.
+The rule, QRadar Enhanced Data, is an automatic rule that triggers when a new incident with a qradar_id value and a qradar_destination value is created, or an existing incident whose qradar_id value is updated. This rule triggers workflows as listed above and populates the Offense information in the custom fields and data tables. The rules for creating artifacts are menu item rules associated with the data tables. These rules can be executed at row level to generate artifacts from the column values. The workflows' input and post processing scripts can be customized for data retrieval and data presentation.
 
 
 ---

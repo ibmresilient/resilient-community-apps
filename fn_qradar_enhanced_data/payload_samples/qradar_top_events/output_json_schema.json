@@ -1,3 +1,50 @@
 {
-    
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "qrhost": {
+      "type": "string"
+    },
+    "offenseid": {
+      "type": "string"
+    },
+    "events": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "sourceip": {
+            "type": "string"
+          },
+          "eventcount": {
+            "type": "string"
+          },
+          "categorycount": {
+            "type": "string"
+          },
+          "usernamecount": {
+            "type": "string"
+          },
+          "MAX_starttime": {
+            "type": "string"
+          },
+          "domainid": {
+            "type": "integer"
+          },
+          "vulnerabilityCount": {
+            "type": "integer"
+          },
+          "macAddress": {
+            "type": "string"
+          },
+          "network": {
+            "type": "string"
+          },
+          "domain": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
 }

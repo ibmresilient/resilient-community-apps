@@ -12,7 +12,7 @@ from fn_qradar_enhanced_data.util.qradar_utils import QRadarClient, QRadarServer
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_qradar_enhanced_data.util.function_utils import get_servers_list
 
-#For a given Offense ID , get the offense summary.
+#For a given Offense ID and QRadar Destination, get the offense summary.
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'qradar_offense_summary"""
@@ -41,7 +41,7 @@ class FunctionComponent(ResilientComponent):
             qradar_label = kwargs.get("qradar_label") # QRadar server to connect to
 
             log.info("qradar_offenseid: %s", qradar_offenseid)
-            log.info("qradar_label: %s"), qradar_label
+            log.info("qradar_label: %s", qradar_label)
 
             options = QRadarServers.qradar_label_test(qradar_label, self.servers_list)
             qradar_verify_cert = False if options.get("verify_cert", "false").lower() == "false" else options.get("verify_cert")

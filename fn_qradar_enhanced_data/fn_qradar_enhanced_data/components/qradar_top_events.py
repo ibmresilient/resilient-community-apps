@@ -56,7 +56,7 @@ class FunctionComponent(ResilientComponent):
             log.info("qradar_search_param4: %s", qradar_search_param4)
             log.info("qradar_search_param5: %s", qradar_search_param5)
             log.info("qradar_search_param6: %s", qradar_search_param6)
-            log.info("qradar_label: %s"), qradar_label
+            log.info("qradar_label: %s", qradar_label)
 
             options = QRadarServers.qradar_label_test(qradar_label, self.servers_list)
             qradar_verify_cert = False if options.get("verify_cert", "false").lower() == "false" else options.get("verify_cert")
@@ -146,5 +146,3 @@ class FunctionComponent(ResilientComponent):
                 event[key] = int(float(event[key]))
 
         return event
-
-

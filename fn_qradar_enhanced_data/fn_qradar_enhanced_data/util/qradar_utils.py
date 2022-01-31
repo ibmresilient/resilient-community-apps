@@ -513,7 +513,7 @@ class QRadarServers():
         
         return servers, server_name_list
 
-    def qradar_label_test(qradar_label, servers_list):
+    def qradar_label_test(self, qradar_label, servers_list):
         """
         Check if the given qradar_label is in the app.config
         :param qradar_label: User selected server

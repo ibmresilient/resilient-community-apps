@@ -11,6 +11,7 @@ def config_section_data():
     return u'''
 # Note: the QRadar instance name that you want to communicate with, must equal the
 # QRadar Destination Name that is set when configuring the SOAR Plugin
+# Example: SOAR_Plugin_Destination_Name1
 [fn_qradar_integration:SOAR_Plugin_Destination_Name1]
 host=localhost
 username=admin
@@ -22,6 +23,7 @@ verify_cert=false|/path/to/cert
 
 # Note: the QRadar instance name that you want to communicate with, must equal the
 # QRadar Destination Name that is set when configuring the SOAR Plugin
+# Example: SOAR_Plugin_Destination_Name2
 [fn_qradar_integration:SOAR_Plugin_Destination_Name2]
 host=localhost
 username=admin
