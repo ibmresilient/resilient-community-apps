@@ -106,6 +106,7 @@ fn_query_tor_network
 fn_rsa_netwitness
 fn_scheduler
 fn_secureworks_ctp
+fn_sentinelone
 fn_sep
 fn_service_now
 fn_shodan
