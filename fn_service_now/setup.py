@@ -25,7 +25,7 @@ setup(
     display_name="ServiceNow Functions for IBM SOAR",
     version="2.0.0",
     license="MIT",
-    author="IBM Resilient",
+    author="IBM SOAR",
     url="https://ibm.com/mysupport",
     description="Bi-directional synchronization of Incidents, Tasks, Notes and Attachments with ServiceNow",
     long_description="""- Create an IBM SOAR Incident/Task from a ServiceNow Record in the Incident Table.<br>

@@ -17,7 +17,7 @@
   "inputs": {
     "incident_id": 2117,
     "task_id": null,
-    "sn_note_text": "The Business Impact of this Incident was updated to High in IBM SPAR",
+    "sn_note_text": "The Business Impact of this Incident was updated to High in IBM SOAR",
     "sn_note_type": "work_note"
   },
   "metrics": {
