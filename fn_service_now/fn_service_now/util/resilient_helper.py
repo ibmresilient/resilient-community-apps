@@ -289,12 +289,14 @@ class ResilientHelper(object):
 
         # Get the task_instructions in plaintext
         try:
-            get_url = "/tasks/{0}/instructions".format(task_id)
+            get_url = "/tasks/{0}/instructions_ex".format(task_id)
             log.debug("GET task_instructions for: ID %s URL: %s", task_id, get_url)
             task_instructions = client.get_content(get_url)
             soup = BeautifulSoup(unicode(task_instructions, "utf-8"), 'html.parser')
             soup = soup.get_text()
-            task_instructions = soup.replace(u'\xa0', u' ')
+            # BeautifulSoup decoding of the HTML includes quotation marks and non-breaking spaces
+            # so we need to remove those for the instructions text that will go to SNOW
+            task_instructions = soup.replace(u'\xa0', u' ').replace(u'"',u'')
             log.debug("task_instructions got successfully")
         except Exception as err:
             err_msg = "Error trying to get task_instructions for Task {0}.".format(task_id)
@@ -444,7 +446,7 @@ class ResilientHelper(object):
         """Method to handle resquests to our custom APIs in ServiceNow"""
         log = logging.getLogger(__name__)
 
-        response, return_value = None, None
+        res, return_value = None, None
 
         SUPPORTED_METHODS = ["GET", "POST", "PATCH"]
 
@@ -466,7 +468,7 @@ class ResilientHelper(object):
         log.info("SN REQUEST:\nmethod: %s\nurl: %s\nbody: %s", res.request.method, res.request.url, res.request.body)
 
         if method is "GET":
-            log.info("SN RESPONSE: %s", res.text)
+            log.info("SN RESPONSE: %s", res)
             return_value = res
 
         elif method in ("POST", "PATCH"):
