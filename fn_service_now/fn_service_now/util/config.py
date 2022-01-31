@@ -12,8 +12,9 @@ def config_section_data():
 sn_host=https://instance.service-now.com
 sn_api_uri=/api/x_ibmrt_resilient/api
 
-# Name of the table in ServiceNow to sync with
-# v1.0.0 only supports the incident table
+# Name of the table in ServiceNow to sync with.
+# v2.0.0 supports the incident table and the sn_si_incident
+# table if ServiceNow Security Incident Response module is installed
 sn_table_name=incident
 
 # Username + Password of ServiceNow Integrator user who has the the "x_ibmrt_resilient.integrator" role

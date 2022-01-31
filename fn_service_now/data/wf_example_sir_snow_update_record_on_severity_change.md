@@ -65,7 +65,7 @@ def dict_to_json_str(d):
 
   return u'{0} {1} {2}'.format(u'{', ','.join(entries), u'}')
 
-# Map IBM Resilient severity values to ServiceNow severity values
+# Map IBM SOAR severity values to ServiceNow severity values
 sn_severity_map = {
   "High": 1,
   "Medium": 2,
@@ -90,7 +90,7 @@ inputs.sn_update_fields = dict_to_json_str({
 ```python
 
 # Add a Note to the Incident
-note_text = u"The Business Impact of this Incident was updated to {0} in IBM Resilient".format(incident.severity_code)
+note_text = u"The Business Impact of this Incident was updated to {0} in IBM SOAR".format(incident.severity_code)
 incident.addNote(note_text)
 ```
 
@@ -115,7 +115,7 @@ incident.addNote(note_text)
 
 inputs.incident_id = incident.id
 
-inputs.sn_note_text = u"The Business Impact of this Incident was updated to {0} in IBM Resilient".format(incident.severity_code)
+inputs.sn_note_text = u"The Business Impact of this Incident was updated to {0} in IBM SOAR".format(incident.severity_code)
 ```
 
 ### Post-Processing Script

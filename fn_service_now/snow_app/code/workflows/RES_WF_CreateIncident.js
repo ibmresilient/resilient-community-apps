@@ -32,7 +32,7 @@
 
 		//Initialize options
 		options = {
-			initSnNote: "Incident created in IBM Resilient",
+			initSnNote: "Incident created in IBM SOAR",
 			optionalFields: {
 				"description": record.getValue("description"),
 				"severity_code": severityMapped

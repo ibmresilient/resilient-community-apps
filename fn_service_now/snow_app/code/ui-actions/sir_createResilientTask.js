@@ -16,14 +16,14 @@ function promptForResilientIncidentId(){
 	re = /^[0-9]*$/;
 	
 	//Prompt user to enter incidentId
-	incidentId = prompt("Enter SOAR Incident ID to add task to:");
+	incidentId = prompt("Enter IBM SOAR Incident ID to add task to:");
 
 	// IncidentId will be null if the user clicks cancel
 	if(incidentId != null){
 
 		//Validate incidentId
 		if(!re.test(incidentId)){
-			alert("ERROR: "+incidentId+" is NOT a valid SOAR Incident ID");
+			alert("ERROR: "+incidentId+" is NOT a valid IBM SOAR Incident ID");
 		}
 		
 		else{
@@ -50,5 +50,5 @@ function promptForResilientIncidentId(){
 if(typeof window == "undefined"){
 	//This is called from line 45 gsftSubmit... because Action Name == sir_createResilientTask
 	action.setRedirectURL(current);
-	gs.addInfoMessage("Creating a Task in SOAR from this record");
+	gs.addInfoMessage("Creating a Task in IBM SOAR from this record");
 }
