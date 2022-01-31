@@ -140,11 +140,11 @@ rc-cts-passivetotal
 rc-cts-shadowserver
 rc-cts-urlscanio
 rc-cts-yeti
-rc-data-feed
+rc_data_feed
 rc-data-feed-plugin-elasticfeed
 rc-data-feed-plugin-filefeed
 rc-data-feed-plugin-kafkafeed
-rc-data-feed-plugin-odbcfeed
+rc_data_feed_plugin_odbcfeed
 rc-data-feed-plugin-resilientfeed
 rc-data-feed-plugin-splunkfeed
 res_qraw_mitre

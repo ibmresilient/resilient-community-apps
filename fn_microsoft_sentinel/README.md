@@ -140,21 +140,18 @@ Several steps are necessary to enable API access to Sentinel. Below is a brief l
 
 1. Define an App under `App registration`,  for Sentinel access. The Application (client) ID will be used as the app.config `client_id`.
 
-    a. Configure API Permissions as the diagram below.
-
-    b. Specify a client secret. This will be used in the app.config file as `api_secret`.
+    a. Specify a client secret. This will be used in the app.config file as `api_secret`.
 
  ![screenshot: app client_id](./doc/screenshots/app_client_id.png)
- ![screenshot: app permissions](./doc/screenshots/app_permissions.png)
  ![screenshot: app secret](./doc/screenshots/app_secret.png)
 
-2. For your subscription, specify the app with the Sentinel Responder role.
-
-![screenshot: subscription role](./doc/screenshots/subscription_role.png)
-
-3. Define a workspace and resource group for the subscription. These names will be defined in the app.config file as `workspace_name` and `resource_groupname`.
+2. Define a workspace and resource group for the subscription. These names will be defined in the app.config file as `workspace_name` and `resource_groupname`.
 
 ![screenshot: subscription role](./doc/screenshots/workspace_resource_group.png)
+
+3. For your resource group, specify the app with the Sentinel Responder role.
+
+![screenshot: subscription role](./doc/screenshots/subscription_role.png)
 
 4. Add your tenant_id (Under `Tenant properties`) and subscription_id to the app.config file.
 
