@@ -65,7 +65,8 @@
 | 2.0.4 | April 2020 | Additional configuration notes. |
 | 2.0 | March 2019 | Supports the 2.0 release. |
 | 1.0 | July 2018 | Initial publication. |
-* For customers upgrading from a pervious release, the app.config file must be manually edited.
+
+* For customers upgrading from a pervious release, the app.config file must be manually edited to add labels to each server configuration
 
 ---
 
