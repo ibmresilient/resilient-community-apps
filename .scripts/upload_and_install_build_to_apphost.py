@@ -1,19 +1,36 @@
-import resilient
+# -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2022. All Rights Reserved.
+
+"""
+    Script to upload, install, and deploy a zip file to app host
+    Takes 3 parameters:
+        1: ZIP_PATH
+        2: CONFIG_PATH
+        3: PACKAGE_NAME
+"""
+
 import json
-import os,sys
+import os
+import sys
 import time
 import re
-from requests_toolbelt import MultipartEncoder
+import resilient
 from resilient.co3base import BasicHTTPException, ensure_unicode
+
+if len(sys.argv) != 4:
+    sys.exit()
 
 ZIP_PATH = sys.argv[1]
 CONFIG_PATH = sys.argv[2]
 PACKAGE_NAME = sys.argv[3]
-CONFIG_FILE = '/home/travis/build/Resilient/{}.config'.format(PACKAGE_NAME)
+
+CONFIG_FILE = f'/home/travis/build/Resilient/{PACKAGE_NAME}.config'
+DEPLOYMENT_CUTOFF_SECONDS = 10*60
 
 def main():
+    """runs all the necessary functions"""
     res_client = setup()
-    
+
     if res_client is None:
         print("******************* FAILURE! Wasn't able to connect to SOAR! *******************")
         sys.exit()
@@ -22,14 +39,14 @@ def main():
     install_all_apps(res_client)
     deploy_all_apps(res_client)
     upload_all_app_configurations(res_client)
-    
+
 ########################################
 ### basic setup + helper functions
-########################################            
-#  sets up and returns our SOAR client
-
+########################################
 def setup():
-    soar_config_file = '{}/app.config'.format(CONFIG_PATH)
+    """sets up and returns our SOAR client"""
+
+    soar_config_file = f'{CONFIG_PATH}/app.config'
 
     if not os.path.exists(soar_config_file):
         print("The app.config with the SOAR credentials is missing. Exiting now")
@@ -54,30 +71,30 @@ def setup():
     if cafile is not None and cafile == "false":
         verify = False
 
-    if "port" in opts.keys():
-        port = opts["port"]
-    else:
-        # default ssl port
-        port = 443
-    url = "https://{}:{}".format(results["host"],port)
+    # 443 is the default ssl port
+    port = opts["port"] if opts.get("port") else 443
+
+    url = f'https://{results["host"]}:{port}'
 
 
-    login_args = {"base_url": url,
+    login_args = {
+            "base_url": url,
             "verify": verify,
-            "org_name": org}
+            "org_name": org
+            }
 
     res_client = resilient.SimpleClient(**login_args)
-    
-    # we will need platform information further down (to select platform specific URLs) 
+
+    # we will need platform information further down (to select platform specific URLs)
     # and prevent the "/apps" API endpoint from being called (since it is not accessible)
     res_client.platform = "SOAR"
 
-    if results["email"] is not None and results["password"] is not None:
+    if results["email"] and results["password"]:
         session = res_client.connect(results["email"], results["password"])
-    elif results["api_key_id"] is not None and results["api_key_secret"] is not None:
-        session = res_client.set_api_key(api_key_id=results["api_key_id"], 
+    elif results["api_key_id"] and results["api_key_secret"]:
+        session = res_client.set_api_key(api_key_id=results["api_key_id"],
                                         api_key_secret=results["api_key_secret"])
-    else: 
+    else:
         print("Neither email/password nor API key id/secret was supplied!")
         print("Provide via app.config. Aborting!")
         return None
@@ -87,11 +104,11 @@ def setup():
 
 # helper method for setting the tenant id. session_info is the return of the /session API endpoint
 def set_tenant_id(res_client, session_info):
-    # The session info contains all organizations the user is a member of
-    # The res_client has a field, which specifies the ID of the
-    # chosen organization, so we can extract the correct one.
-    # After that, we can choose the correct tenant_id
-    # (TenantID == UUID of choosen organization)
+    """The session info contains all organizations the user is a member of
+    The res_client has a field, which specifies the ID of the
+    chosen organization, so we can extract the correct one.
+    After that, we can choose the correct tenant_id
+    (TenantID == UUID of choosen organization)"""
     for org in session_info["orgs"]:
         if res_client.org_id == org["id"]:
             res_client.tenant_id = org["uuid"]
@@ -100,58 +117,60 @@ def set_tenant_id(res_client, session_info):
     if res_client.tenant_id is None:
         print("Tenant ID was not extracted")
 
-# helper method to initiate GET requests to the Resilient servers.
-# this is needed, because the standard get method goes to
-# https://{url}/rest/orgs/{orgID}
-# but we sometimes need to go just to the url + something
+
 def base_get(res_client, uri, co3_context_token=None, timeout=None):
+    """helper method to initiate GET requests to the Resilient servers.
+    this is needed, because the standard get method goes to
+    https://{url}/rest/orgs/{orgID}
+    but we sometimes need to go just to the url + something"""
     if res_client is None:
         return "No res_client supplied!"
 
-    url = u"{0}{1}".format(res_client.base_url, ensure_unicode(uri))
+    url = f'{res_client.base_url}{ensure_unicode(uri)}'
 
     response = res_client._execute_request(res_client.session.get,
                                             url,
                                             proxies=res_client.proxies,
                                             cookies=res_client.cookies,
-                                            headers=res_client.make_headers(co3_context_token,{"X-ORG-ID": "{}".format(res_client.org_id)   }),
+                                            headers=res_client.make_headers(co3_context_token,{"X-ORG-ID": f'{res_client.org_id}'}),
                                             verify=res_client.verify,
                                             timeout=timeout)
     BasicHTTPException.raise_if_error(response)
     return json.loads(response.content)
 
-# helper method to initiate PUT requests to the Resilient servers
-# this is needed, because the standard put method goes to
-# https://{url}/rest/orgs/{orgID}
-# but we sometimes need to go just to the url + something
+
 def base_put(res_client, uri, payload, co3_context_token=None, timeout=None):
+    """helper method to initiate PUT requests to the Resilient servers
+    this is needed, because the standard put method goes to
+    https://{url}/rest/orgs/{orgID}
+    but we sometimes need to go just to the url + something"""
     if res_client is None:
         return "No res_client supplied!"
 
-    
-    url = u"{0}{1}".format(res_client.base_url, ensure_unicode(uri))
-    
+    url = f'{res_client.base_url}{ensure_unicode(uri)}'
+
     payload_json = json.dumps(payload)
     response = res_client._execute_request(res_client.session.put,
                                             url,
                                             data=payload_json,
                                             proxies=res_client.proxies,
                                             cookies=res_client.cookies,
-                                            headers=res_client.make_headers(co3_context_token,{"X-ORG-ID": "{}".format(res_client.org_id)   }),
+                                            headers=res_client.make_headers(co3_context_token,{"X-ORG-ID": f'{res_client.org_id}'}),
                                             verify=res_client.verify,
                                             timeout=timeout)
     BasicHTTPException.raise_if_error(response)
-    return json.loads(response.text)   
+    return json.loads(response.text)
 
-# helper method to initiate POST requests to the Resilient servers
-# this is needed, because the standard post method goes to
-# https://{url}/rest/orgs/{orgID}
-# but we sometimes need to go just to the url + something
+
 def base_post(res_client, uri, payload, co3_context_token=None, timeout=None):
+    """helper method to initiate POST requests to the Resilient servers
+    this is needed, because the standard post method goes to
+    https://{url}/rest/orgs/{orgID}
+    but we sometimes need to go just to the url + something"""
     if res_client is None:
         return "No res_client supplied!"
-    
-    url = u"{0}{1}".format(res_client.base_url, ensure_unicode(uri))
+
+    url = f'{res_client.base_url}{ensure_unicode(uri)}'
 
     payload_json = json.dumps(payload)
     response = res_client._execute_request(res_client.session.post,
@@ -159,17 +178,18 @@ def base_post(res_client, uri, payload, co3_context_token=None, timeout=None):
                                             data=payload_json,
                                             proxies=res_client.proxies,
                                             cookies=res_client.cookies,
-                                            headers=res_client.make_headers(co3_context_token,{"X-ORG-ID": "{}".format(res_client.org_id)   }),
+                                            headers=res_client.make_headers(co3_context_token,{"X-ORG-ID": f'{res_client.org_id}'}),
                                             verify=res_client.verify,
                                             timeout=timeout)
     BasicHTTPException.raise_if_error(response)
-    return json.loads(response.text)     
+    return json.loads(response.text)
 
 ########################################
 ### upload, install and deploy apps
 ########################################
-# uploads the zip file to apphost
 def upload_all_apps(res_client, app_path):
+    """uploads the zip file to apphost"""
+
     if app_path is None:
         print("Problem getting the app file path.")
         return
@@ -184,7 +204,7 @@ def upload_all_apps(res_client, app_path):
         installed_app_names.append(app["name"])
 
     # app downloaded from the X-Force Exchange have the following naming convention:
-    # app-#NAME#-#VERSION#.zip e.g.: app-fn_outbound_email-1.1.0.zip 
+    # app-#NAME#-#VERSION#.zip e.g.: app-fn_outbound_email-1.1.0.zip
     # we try to extract the #NAME# and check if this app is already installed.
     # If we don't succeed, the upload will softfail later with a bad request.
     parts = app_path.split("-")
@@ -197,17 +217,18 @@ def upload_all_apps(res_client, app_path):
         extracted_name = ""
 
     if extracted_name in installed_app_names:
-        print("The app {} is already uploaded!".format(extracted_name))
+        print(f'The app {extracted_name} is already uploaded!')
 
-    print("Begin upload: {}".format(app_path))
+    print(f'Begin upload: {app_path}')
 
-    try: 
-        app = res_client.post_attachment(uri="/apps", filepath=app_path)           
-    except resilient.co3.SimpleHTTPException as e:
-        print(e)
+    try:
+        app = res_client.post_attachment(uri="/apps", filepath=app_path)
+    except resilient.co3.SimpleHTTPException as exception:
+        print(exception)
 
-# installs pending uploaded app to apphost
 def install_all_apps(res_client):
+    """installs pending uploaded app to apphost"""
+
     if res_client.use_api_key is True:
         print("The client is authenticated via API keys. The requested function uses the '/apps' API endpoint, which is not enabled with this authentication method!")
         return
@@ -216,38 +237,38 @@ def install_all_apps(res_client):
     for app in apps["entities"]:
         # check if app is in 'pending' state and extract all values needed for installation
         if app["current_installation"]["status"] == 'pending':
-            print("Begin installation: {}".format(app["name"]))
+            print(f'Begin installation: {app["name"]}')
 
             app_handle = app["id"]
-            installation_ID = app["current_installation"]["id"]
-            
+            installation_id = app["current_installation"]["id"]
+
             # set status to installing, this triggers installation
             app["current_installation"]["status"] = 'installing'
 
             # type(r) == AppInstallationDTO
-            r = res_client.put(uri="/apps/{}/installations/{}".format(app_handle,installation_ID),
-                                payload = app["current_installation"])
-            
+            res = res_client.put(uri=f'/apps/{app_handle}/installations/{installation_id}',
+                                 payload = app["current_installation"])
+
 
             # check result
-            if r["status"] == 'installed':
-                print("Installation successfull: {}".format(app["name"]))
+            if res["status"] == 'installed':
+                print(f'Installation successfull: {app["name"]}')
             else:
-                print("Error in installation: {}".format(app["name"]))
-                print(r)
+                print(f'Error in installation: {app["name"]}')
+                print(res)
 
-# deploys app in apphost
 def deploy_all_apps(res_client, controller_id=None):
+    """deploys app in apphost"""
+
     if res_client.use_api_key is True:
         print("The client is authenticated via API keys. The requested function uses the '/apps' API endpoint, which is not enabled with this authentication method!")
         return
 
     controller_found = False
+    controllers = base_get(res_client, f'/services_proxy/manager/tenants/{res_client.tenant_id}/controllers')
 
-    controllers = base_get(res_client, "/services_proxy/manager/tenants/{}/controllers".format(res_client.tenant_id))
-    
     # if no controller_id is supplied, pick the first running controller
-    if controller_id is None:   
+    if controller_id is None:
         for controller in controllers["controllers"]:
             if controller["status"] == "paired":
                 controller_id = controller["id"]
@@ -275,7 +296,7 @@ def deploy_all_apps(res_client, controller_id=None):
                 break
 
     if not controller_found:
-        print("The supplied controller_id {} could not be resolved to a paired AppHost!".format(controller_id))
+        print(f'The supplied controller_id {controller_id} could not be resolved to a paired AppHost!')
         print("Exiting...")
         return
 
@@ -285,13 +306,12 @@ def deploy_all_apps(res_client, controller_id=None):
     deployment_list = []
 
     for app in apps["entities"]:
-        
-        id = app["current_installation"]["executables"][0]["uuid"]
+        app_id = app["current_installation"]["executables"][0]["uuid"]
         name = app["current_installation"]["executables"][0]["name"]
 
-        app_information = base_get(res_client,"/services_proxy/manager/tenants/{}/apps/{}".format(res_client.tenant_id,name))
+        app_information = base_get(res_client, f'/services_proxy/manager/tenants/{res_client.tenant_id}/apps/{name}')
 
-        if "deployment" not in app_information:           
+        if "deployment" not in app_information:
             deploy_body = app_information
 
             deployment = {
@@ -303,19 +323,19 @@ def deploy_all_apps(res_client, controller_id=None):
 
             deployment_list.append(name)
 
-            print("Deployement started: {}".format(name))
+            print(f'Deployement started: {name}')
 
-            base_put(res_client,uri= "/services_proxy/manager/apps/{0}".format(id),
-                                    payload = deploy_body)
-            
+            base_put(res_client,uri= f'/services_proxy/manager/apps/{app_id}',
+                     payload = deploy_body)
+
     # we now have set all apps to the deployment state, track their deployment status
     track_deployment(res_client, deployment_list)
 
-# tracks the deployment of the app
 def track_deployment(res_client, deployment_list):
-    # default cutoff time for is 10 minutes
-    # other values can be supplied via the "--deployment_cutoff_seconds" argument
-    deployment_cutoff_seconds = 10*60
+    """tracks the deployment of the app
+    default cutoff time for is 10 minutes
+    other values can be supplied via the "--deployment_cutoff_seconds" argument"""
+    deployment_cutoff_seconds = DEPLOYMENT_CUTOFF_SECONDS
 
     # if args.deployment_cutoff_seconds is not None:
     #     deployment_cutoff_seconds = args.deployment_cutoff_seconds
@@ -323,12 +343,12 @@ def track_deployment(res_client, deployment_list):
     deployment_status = {}
     print("Started deployment of the following apps:", deployment_list)
     start_time = time.time()
-    while (len(deployment_list)>0):
+    while len(deployment_list) > 0:
         for name in deployment_list:
 
-            r = base_get(res_client,"/services_proxy/manager/tenants/{}/apps/{}".format(res_client.tenant_id,name))
-            
-            deployment_status[name] = r["deployment"]["status"]
+            res = base_get(res_client, f'/services_proxy/manager/tenants/{res_client.tenant_id}/apps/{name}')
+
+            deployment_status[name] = res["deployment"]["status"]
 
             if deployment_status[name] == "ready":
                 deployment_list.remove(name)
@@ -340,8 +360,8 @@ def track_deployment(res_client, deployment_list):
             print("Cutoff time was reached! Deployment may still be going on, please check in the GUI.")
             break
 
-    print("This operation was running for {:.2f} seconds.".format(time.time()-start_time))
-    if len(deployment_list) > 0: 
+    print(f'This operation was running for {time.time()-start_time:.2f} seconds.')
+    if len(deployment_list) > 0:
         print("The deployment of the following apps was not completed in time:", deployment_list)
     else:
         print("******************* SUCCESS! The app was deployed! *******************")
@@ -351,20 +371,18 @@ def track_deployment(res_client, deployment_list):
 ########################################
 
 def upload_all_app_configurations(res_client):
+    """Uploads  and fills out the app config"""
     if res_client.use_api_key is True:
         print("The client is authenticated via API keys. The requested function uses the '/apps' API endpoint, which is not enabled with this authentication method!")
         return
     config_dict = {}
 
-    config_file = CONFIG_FILE
-    if not os.path.exists(config_file):
+    if not os.path.exists(CONFIG_FILE):
         print("The app.config with the integration information is missing. The app has been deployed but the app.config is not filled out in SOAR. Exiting now.")
         sys.exit()
-    
-    with open(config_file) as f:
-        config_string = f.read()
-        app_name = PACKAGE_NAME
-        config_dict[app_name] = config_string
+
+    with open(CONFIG_FILE, encoding="utf-8") as file:
+        config_dict[PACKAGE_NAME] = file.read()
 
     # get all installment IDs
     apps = res_client.get("/apps")
@@ -374,11 +392,11 @@ def upload_all_app_configurations(res_client):
         name = app["current_installation"]["executables"][0]["name"]
 
         if name in config_dict:
-            app_installment = base_get(res_client, "/services_proxy/manager/tenants/{}/apps/{}".format(res_client.tenant_id,name))
-            
+            app_installment = base_get(res_client, f'/services_proxy/manager/tenants/{res_client.tenant_id}/apps/{name}')
+
             # we only want to upload configurations to already deployed apps!
             if "deployment" not in app_installment:
-                print("{} is not yet deployed, we will not upload the configuration!".format(name))
+                print(f'{name} is not yet deployed, we will not upload the configuration!')
                 continue
 
             # Add app name to list, that will be tracked for deployment status
@@ -389,28 +407,25 @@ def upload_all_app_configurations(res_client):
             file_ids = app_installment["file_ids"]
 
             for file_id in file_ids:
-                f = base_get(res_client, "/services_proxy/manager/app_files/{}".format(file_id))
-                
-                if f["name"] != "app.config":
-                    continue
-                else:
+                service_proxy_url = f'/services_proxy/manager/app_files/{file_id}'
+                file = base_get(res_client, service_proxy_url)
+
+                if file["name"] == "app.config":
                     # fill out app.config while retaining the Resilient variables
-                    content_string = f["content"]
+                    content_string = file["content"]
                     substring = content_string.find("[resilient]")
                     end_substring = content_string.find("cafile")
-                    final_string = "\n{}cafile=false\n".format(content_string[substring:end_substring])
+                    final_string = f'\n{content_string[substring:end_substring]}cafile=false\n'
                     substring = content_string.find("host")
-                    final_string = "{}{}".format(final_string, content_string[substring:])
+                    final_string = f'{final_string}{content_string[substring:]}'
                     config_dict[name] = config_dict[name] + final_string
 
-                    f["content"] = config_dict[name]
+                    file["content"] = config_dict[name]
 
-                    base_put(res_client, uri="/services_proxy/manager/app_files/{}".format(file_id),
-                                            payload=f)
+                    base_put(res_client, uri=service_proxy_url, payload=file)
                     print("*******************SUCCESS! The app.config was filled out! *******************")
                     break
     track_deployment(res_client, changed_apps)
 
 if __name__ == "__main__":
     main()
-    

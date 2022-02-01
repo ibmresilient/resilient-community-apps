@@ -22,8 +22,8 @@ UPLOAD_ZIP=$4
 ##################
 
 if [[ "$#" -ne 4 ]]; then
-echo "Syntax: build_image_and_zip.sh package_name build_type pypi_index_to_use upload.zip"
-exit 1
+    echo "Syntax: build_image_and_zip.sh package_name build_type pypi_index_to_use upload.zip"
+    exit 1
 fi
 
 ###############

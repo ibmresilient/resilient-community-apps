@@ -54,7 +54,7 @@ stages:
     if: tag IS blank AND type != cron
   - name: build image and app zip
     if: tag IS blank AND type = push
-  Rebuild all images
+  # Rebuild all images
   - name: rebuild all images
     if: tag =~ ^rebuild/.+
 
