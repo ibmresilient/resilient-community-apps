@@ -58,7 +58,7 @@ inputs.task_id = task.id
 inputs.sn_record_state = map_sn_record_states[rule.properties.sn_record_state]
 
 # The resolution notes that are normally required when you close a ServiceNow record
-# inputs.sn_close_notes = "This incident has been resolved in Resilient. No further action required"
+# inputs.sn_close_notes = "This incident has been resolved in IBM SOAR. No further action required"
 inputs.sn_close_notes = rule.properties.sn_close_notes
 
 # The ServiceNow 'close_code' that you normally select when closing a ServiceNow record
@@ -66,7 +66,7 @@ inputs.sn_close_notes = rule.properties.sn_close_notes
 inputs.sn_close_code = rule.properties.sn_close_code
 
 # Add a Work Note to the Record in ServiceNow
-inputs.sn_close_work_note = u"This record's state has be changed to {0} by IBM Resilient".format(unicode(rule.properties.sn_record_state))
+inputs.sn_close_work_note = u"This record's state has be changed to {0} by IBM SOAR".format(unicode(rule.properties.sn_record_state))
 ```
 
 ### Post-Processing Script

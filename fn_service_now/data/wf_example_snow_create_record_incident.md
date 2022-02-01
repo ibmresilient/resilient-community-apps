@@ -65,7 +65,7 @@ def dict_to_json_str(d):
 
   return u'{0} {1} {2}'.format(u'{', ','.join(entries), u'}')
 
-# Map IBM Resilient severity values to ServiceNow severity values
+# Map IBM SOAR severity values to ServiceNow severity values
 sn_severity_map = {
   "High": 1,
   "Medium": 2,
@@ -77,7 +77,7 @@ sn_severity_map = {
 #####################
 
 # Default text of the initial note added to the ServiceNow Record
-init_snow_note_text = u"""Record created from a IBM Resilient Incident ID: {0}.
+init_snow_note_text = u"""Record created from a IBM SOAR Incident ID: {0}.
                           Severity: {1}
                           Incident Type(s): {2}""".format(incident.id, incident.severity_code, incident.incident_type_ids)
 

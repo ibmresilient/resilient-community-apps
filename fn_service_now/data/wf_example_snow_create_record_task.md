@@ -70,7 +70,7 @@ def dict_to_json_str(d):
 #####################
 
 # Default text of the initial note added to the ServiceNow Record
-init_snow_note_text = u"""Record created from IBM Resilient Task ID: {0}. Associated IBM Resilient Incident ID: {1}.""".format(task.id, incident.id)
+init_snow_note_text = u"""Record created from IBM SOAR Task ID: {0}. Associated IBM SOAR Incident ID: {1}.""".format(task.id, incident.id)
 
 # If the user adds a comment when they invoke the rule, that comment gets concatenated here
 if rule.properties.sn_initial_note.content is not None:

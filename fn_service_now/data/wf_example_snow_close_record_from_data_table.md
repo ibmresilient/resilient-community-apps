@@ -63,14 +63,14 @@ inputs.sn_close_notes = rule.properties.sn_close_notes
 inputs.sn_close_code = rule.properties.sn_close_code
 
 # Add a Work Note to the Record in ServiceNow
-inputs.sn_close_work_note = u"This record's state has be changed to {0} by IBM Resilient".format(unicode(rule.properties.sn_record_state))
+inputs.sn_close_work_note = u"This record's state has be changed to {0} by IBM SOAR".format(unicode(rule.properties.sn_record_state))
 ```
 
 ### Post-Processing Script
 ```python
 # Example: SNOW: Close Record from Data Table post-processing script
 
-# If the Resilient item type is Incident (if it is Task, we run the SNOW Helper: Add Task Note function)
+# If the SOAR item type is Incident (if it is Task, we run the SNOW Helper: Add Task Note function)
 if row.sn_records_dt_type == "Incident":
 
   note_text = None

@@ -8,7 +8,7 @@
     "inputs": {
       "incident_id": 2117,
       "task_id": 103,
-      "sn_init_work_note": "Record created from IBM Resilient Task ID: 103. Associated IBM Resilient Incident ID: 2117.\n\nSync task to SNOW",
+      "sn_init_work_note": "Record created from IBM SOAR Task ID: 103. Associated IBM SOAR Incident ID: 2117.\n\nSync task to SNOW",
       "sn_optional_fields": {
         "short_description": "RES-2117-103: Sample task",
         "assignment_group": "12a586cd0bb23200ecfd818393673a30",
@@ -24,11 +24,11 @@
     "sn_record_link": "https://ven02807.service-now.com/nav_to.do?uri=sn_si_incident.do?sysparm_query=number=SIR0010025",
     "sn_time_created": 1642522089472
   },
-  "raw": "{\"success\": true, \"reason\": null, \"inputs\": {\"incident_id\": 2117, \"task_id\": 103, \"sn_init_work_note\": \"Record created from IBM Resilient Task ID: 103. Associated IBM Resilient Incident ID: 2117.\\n\\nSync task to SNOW\", \"sn_optional_fields\": {\"short_description\": \"RES-2117-103: Sample task\", \"assignment_group\": \"12a586cd0bb23200ecfd818393673a30\", \"caller_id\": false}}, \"row_id\": 29, \"res_id\": \"RES-2117-103\", \"res_link\": \"https://9.30.213.40/#incidents/2117?task_id=103\", \"sn_ref_id\": \"SIR0010025\", \"sn_sys_id\": \"3294cbfa1b4d09103351ca2b234bcbfa\", \"sn_record_state\": \"Analysis\", \"sn_record_link\": \"https://ven02807.service-now.com/nav_to.do?uri=sn_si_incident.do?sysparm_query=number=SIR0010025\", \"sn_time_created\": 1642522089472}",
+  "raw": "{\"success\": true, \"reason\": null, \"inputs\": {\"incident_id\": 2117, \"task_id\": 103, \"sn_init_work_note\": \"Record created from IBM SOAR Task ID: 103. Associated IBM SOAR Incident ID: 2117.\\n\\nSync task to SNOW\", \"sn_optional_fields\": {\"short_description\": \"RES-2117-103: Sample task\", \"assignment_group\": \"12a586cd0bb23200ecfd818393673a30\", \"caller_id\": false}}, \"row_id\": 29, \"res_id\": \"RES-2117-103\", \"res_link\": \"https://9.30.213.40/#incidents/2117?task_id=103\", \"sn_ref_id\": \"SIR0010025\", \"sn_sys_id\": \"3294cbfa1b4d09103351ca2b234bcbfa\", \"sn_record_state\": \"Analysis\", \"sn_record_link\": \"https://ven02807.service-now.com/nav_to.do?uri=sn_si_incident.do?sysparm_query=number=SIR0010025\", \"sn_time_created\": 1642522089472}",
   "inputs": {
     "incident_id": 2117,
     "task_id": 103,
-    "sn_init_work_note": "Record created from IBM Resilient Task ID: 103. Associated IBM Resilient Incident ID: 2117.\n\nSync task to SNOW",
+    "sn_init_work_note": "Record created from IBM SOAR Task ID: 103. Associated IBM SOAR Incident ID: 2117.\n\nSync task to SNOW",
     "sn_optional_fields": {
       "short_description": "RES-2117-103: Sample task",
       "assignment_group": "12a586cd0bb23200ecfd818393673a30",
