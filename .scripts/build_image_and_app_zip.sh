@@ -78,6 +78,8 @@ if [ "$BUILD_TYPE" == "DEV" ] ; then
 fi
 
 package_path="$TRAVIS_BUILD_DIR/$PACKAGE_NAME"
+# Make available externally
+export PACKAGE_PATH=$package_path
 
 # Check if package has extra travis script
 if [ -f "$package_path/$FILE_NAME_EXTRA_SETUP" ] ; then
@@ -101,7 +103,7 @@ docker_tag="$PACKAGE_NAME:$version_to_use"
 
 print_msg "Packaging $PACKAGE_NAME with resilient-sdk"
 resilient-sdk package -p $package_path
-app_zip_path=$(ls $package_path/dist/*.zip)
+app_zip_path="$package_path/dist/app-$PACKAGE_NAME-$version_to_use.zip"
 
 print_msg "Building $PACKAGE_NAME with docker"
 image_sha_digest=`docker build \

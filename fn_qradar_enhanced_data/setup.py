@@ -19,12 +19,11 @@ def snake_to_camel(word):
 
 setup(
     name='fn_qradar_enhanced_data',
-    version='1.1.2',
+    version='1.1.3',
     license='MIT License',
-    author='IBM Resilient',
-    author_email='support@resilientsystems.com',
+    author='IBM SOAR',
     url='https://github.com/ibmresilient/resilient-community-apps/tree/master/fn_qradar_enhanced_data',
-    description="QRadar Enhanced Offense Data Migration",
+    description="QRadar Enhanced Offense Data Migration ",
     long_description="This app fetches the data associated with the QRadar Offense and provides live links back to QRadar, thereby simplifying case management.",
 
     install_requires=[

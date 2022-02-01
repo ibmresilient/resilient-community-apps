@@ -127,6 +127,8 @@ class FunctionComponent(ResilientComponent):
                     event["network"] = data["content"]["interfaces"][0]["currentIpAddress"]["network"]["networkName"] if data["content"] and len(data["content"]["interfaces"])>0 and data["content"]["interfaces"][0]["currentIpAddress"] and data["content"]["interfaces"][0]["currentIpAddress"]["network"] else ""
                     event["domain"] = data["content"]["domain"]["name"] if data["content"] and  data["content"]["domain"]["name"] else "Default Domain"
 
+            result["events"] = list(map(lambda x: self.mapEventData(x), result["events"]))
+
             results = {
                 "qrhost": self.options["host"],
                 "offenseid": qradar_query_param3,
@@ -137,3 +139,13 @@ class FunctionComponent(ResilientComponent):
         except Exception as e:
             log.error(str(e))
             yield FunctionError()
+
+    def mapEventData(self, event):
+
+        for key in event.keys():
+            if key in ["eventtime", "lastpackettime", "FirstPacketTime", "sourcebytes", "sourcepackets", "destinationbytes", "destinationpackets"]:
+                event[key] = int(float(event[key]))
+
+        return event
+
+
