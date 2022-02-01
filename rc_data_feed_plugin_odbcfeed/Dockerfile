@@ -27,8 +27,8 @@ RUN yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.n
 RUN yum -y install freetds
 
 # copy the driver configurations to the container
-COPY ./drivers/drivers.ini /etc/odbc-drivers.ini
-COPY ./drivers/drivers/ /tmp/lib/
+COPY ./.drivers/drivers.ini /etc/odbc-drivers.ini
+COPY ./.drivers/drivers/ /tmp/lib/
 
 # install Oracle DB driver
 RUN yum -y install /tmp/lib/oracle-instantclient19.6-basic-19.6.0.0.0-1.x86_64.rpm
