@@ -1,6 +1,12 @@
 // (c) Copyright IBM Corp. 2022. All Rights Reserved.
 
 var JSON_PARSER = new global.JSON();
+var INC_RES_ID = "x_ibmrt_resilient_ibm_resilient_reference_id";
+var INC_RES_LINK = "x_ibmrt_resilient_ibm_resilient_reference_link";
+var INC_RES_TYPE = "x_ibmrt_resilient_ibm_resilient_type";
+var SIR_RES_ID = "x_ibmrt_resilient_ibm_soar_reference_id";
+var SIR_RES_LINK = "x_ibmrt_resilient_ibm_soar_reference_link";
+var SIR_RES_TYPE = "x_ibmrt_resilient_ibm_soar_type";
 
 function getAllowedAssignmentGroups(){
 	//Gets ResilientAssignmentGroupNames CSV defined in properties
@@ -42,7 +48,7 @@ function hasIncFields(record) {
 	//Helper method to check if a record is a INC record,
 	//which has the x_ibmrt_resilient_ibm_resilient_reference_id column.
 	//Other records that inherit from Task (i.e. sn_si_incident) don't have that column
-	return record.isValidField("x_ibmrt_resilient_ibm_resilient_reference_id");
+	return record.isValidField(INC_RES_ID);
 }
 
 var ResilientHelper = Class.create();
@@ -187,13 +193,13 @@ ResilientHelper.prototype = {
 			//Set required values on SN record
 			//Check whether we're dealing with an INC record or not
 			if (hasIncFields(record)) {
-				record.setValue("x_ibmrt_resilient_ibm_resilient_reference_id", res_reference_id);
-				record.setValue("x_ibmrt_resilient_ibm_resilient_type", res_reference_type);
-				record.setValue("x_ibmrt_resilient_ibm_resilient_reference_link", res_reference_link);
+				record.setValue(INC_RES_ID, res_reference_id);
+				record.setValue(INC_RES_TYPE, res_reference_type);
+				record.setValue(INC_RES_LINK, res_reference_link);
 			} else {
-				record.setValue("x_ibmrt_resilient_ibm_soar_reference_id", res_reference_id);
-				record.setValue("x_ibmrt_resilient_ibm_soar_type", res_reference_type);
-				record.setValue("x_ibmrt_resilient_ibm_soar_reference_link", res_reference_link);
+				record.setValue(SIR_RES_ID, res_reference_id);
+				record.setValue(SIR_RES_TYPE, res_reference_type);
+				record.setValue(SIR_RES_LINK, res_reference_link);
 			}
 
 			//If user specifies initial ServiceNow note, add it
@@ -350,25 +356,25 @@ ResilientHelper.prototype = {
 
 	getResilientReferenceId: function(record){
 		if (hasIncFields(record)) {
-			return record.getValue("x_ibmrt_resilient_ibm_resilient_reference_id");
+			return record.getValue(INC_RES_ID);
 		} else {
-			return record.getValue("x_ibmrt_resilient_ibm_soar_reference_id");
+			return record.getValue(SIR_RES_ID);
 		}
 	},
 
 	getResilientReferenceLink: function(record){
 		if (hasIncFields(record)) {
-			return record.getValue("x_ibmrt_resilient_ibm_resilient_reference_link");
+			return record.getValue(INC_RES_LINK);
 		} else {
-			return record.getValue("x_ibmrt_resilient_ibm_soar_reference_link");
+			return record.getValue(SIR_RES_LINK);
 		}
 	},
 
 	getResilientType: function(record){
 		if (hasIncFields(record)) {
-			return record.getValue("x_ibmrt_resilient_ibm_resilient_type");
+			return record.getValue(INC_RES_TYPE);
 		} else {
-			return record.getValue("x_ibmrt_resilient_ibm_soar_type");
+			return record.getValue(SIR_RES_TYPE);
 		}
 	}
 };

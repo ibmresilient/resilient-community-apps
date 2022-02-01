@@ -25,9 +25,7 @@
 			"Review": "red"
 		};
 		
-		//Get the required values
-		//Note the helper method for getting the Resilient Ref ID
-		//There are also: getResilientReferenceLink and getResilientType available
+		//Get resilient_reference_id depending on what Table the record is in
 		res_reference_id = resHelper.getResilientReferenceId(current);
 		snTicketState = current.state.getChoiceValue();
 		

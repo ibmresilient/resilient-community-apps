@@ -6,9 +6,7 @@
 		//Instantiate new ResilientHelper
 		resHelper = new ResilientHelper();
 	
-		//Get resilient_reference_id
-		//Note the helper method for getting the Resilient Ref ID
-		//There are also: getResilientReferenceLink and getResilientType available
+		//Get resilient_reference_id depending on what Table the record is in
 		res_reference_id = resHelper.getResilientReferenceId(current);
 		
 		//Set noteText to last additional comment added
