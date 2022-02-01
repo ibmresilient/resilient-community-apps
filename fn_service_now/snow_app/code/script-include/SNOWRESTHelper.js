@@ -128,6 +128,10 @@ SNOWRESTHelper.prototype = {
 		parent.get(current.getValue("parent"));
 
 		//Return the value stored in the parent table
-		return parent.getValue("x_ibmrt_resilient_ibm_resilient_reference_id");
+		if (parent.isValidField("x_ibmrt_resilient_ibm_resilient_reference_id"))
+			return parent.getValue("x_ibmrt_resilient_ibm_resilient_reference_id");
+		else {
+			return parent.getValue("x_ibmrt_resilient_ibm_soar_reference_id");
+		}
 	}
 };

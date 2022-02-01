@@ -26,7 +26,9 @@
 		};
 		
 		//Get the required values
-		res_reference_id = current.getValue("x_ibmrt_resilient_ibm_resilient_reference_id");
+		//Note the helper method for getting the Resilient Ref ID
+		//There are also: getResilientReferenceLink and getResilientType available
+		res_reference_id = resHelper.getResilientReferenceId(current);
 		snTicketState = current.state.getChoiceValue();
 		
 		// Try get the snTicketStateColor that matches the snTicketState

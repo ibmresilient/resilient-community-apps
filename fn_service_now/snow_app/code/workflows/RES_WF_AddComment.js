@@ -7,7 +7,9 @@
 		resHelper = new ResilientHelper();
 	
 		//Get resilient_reference_id
-		res_reference_id = current.getValue("x_ibmrt_resilient_ibm_resilient_reference_id");
+		//Note the helper method for getting the Resilient Ref ID
+		//There are also: getResilientReferenceLink and getResilientType available
+		res_reference_id = resHelper.getResilientReferenceId(current);
 		
 		//Set noteText to last additional comment added
 		noteText = current.comments.getJournalEntry(1);

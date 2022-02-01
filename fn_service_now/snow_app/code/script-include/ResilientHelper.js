@@ -38,6 +38,13 @@ function getAllowedAssignmentGroups(){
 	return assignGroupsArray;
 }
 
+function hasIncFields(record) {
+	//Helper method to check if a record is a INC record,
+	//which has the x_ibmrt_resilient_ibm_resilient_reference_id column.
+	//Other records that inherit from Task (i.e. sn_si_incident) don't have that column
+	return record.isValidField("x_ibmrt_resilient_ibm_resilient_reference_id");
+}
+
 var ResilientHelper = Class.create();
 ResilientHelper.prototype = {
 	type: 'ResilientHelper',
@@ -178,9 +185,16 @@ ResilientHelper.prototype = {
 			var record_name = record.getValue("short_description");
 
 			//Set required values on SN record
-			record.setValue("x_ibmrt_resilient_ibm_resilient_reference_id", res_reference_id);
-			record.setValue("x_ibmrt_resilient_ibm_resilient_type", res_reference_type);
-			record.setValue("x_ibmrt_resilient_ibm_resilient_reference_link", res_reference_link);
+			//Check whether we're dealing with an INC record or not
+			if (hasIncFields(record)) {
+				record.setValue("x_ibmrt_resilient_ibm_resilient_reference_id", res_reference_id);
+				record.setValue("x_ibmrt_resilient_ibm_resilient_type", res_reference_type);
+				record.setValue("x_ibmrt_resilient_ibm_resilient_reference_link", res_reference_link);
+			} else {
+				record.setValue("x_ibmrt_resilient_ibm_soar_reference_id", res_reference_id);
+				record.setValue("x_ibmrt_resilient_ibm_soar_type", res_reference_type);
+				record.setValue("x_ibmrt_resilient_ibm_soar_reference_link", res_reference_link);
+			}
 
 			//If user specifies initial ServiceNow note, add it
 			if(initSnNote){
@@ -332,5 +346,29 @@ ResilientHelper.prototype = {
 		gs.debug("'" + assignmentGroup + "' is not in the ResilientAssignmentGroupNames CSV list");
 
 		return false;
+	},
+
+	getResilientReferenceId: function(record){
+		if (hasIncFields(record)) {
+			return record.getValue("x_ibmrt_resilient_ibm_resilient_reference_id");
+		} else {
+			return record.getValue("x_ibmrt_resilient_ibm_soar_reference_id");
+		}
+	},
+
+	getResilientReferenceLink: function(record){
+		if (hasIncFields(record)) {
+			return record.getValue("x_ibmrt_resilient_ibm_resilient_reference_link");
+		} else {
+			return record.getValue("x_ibmrt_resilient_ibm_soar_reference_link");
+		}
+	},
+
+	getResilientType: function(record){
+		if (hasIncFields(record)) {
+			return record.getValue("x_ibmrt_resilient_ibm_resilient_type");
+		} else {
+			return record.getValue("x_ibmrt_resilient_ibm_soar_type");
+		}
 	}
 };

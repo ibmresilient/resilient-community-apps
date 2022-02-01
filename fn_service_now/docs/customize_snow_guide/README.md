@@ -327,6 +327,42 @@ Returns an object with the following keys:
 #### Return:
 *Does not return anything*
 
+### `getResilientReferenceId(GlideRecord record)`
+
+* Gets the IBM SOAR Reference ID for a linked record
+
+#### Parameters:
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| record | `GlideRecord` | `GlideRecord` object of the current table record (usually this is `current` in Workflows) |
+
+#### Returns:
+*A string containing the Reference ID of the SOAR record*
+
+### `getResilientReferenceLink(GlideRecord record)`
+
+* Gets the IBM SOAR Reference Link to directly access the record in SOAR
+
+#### Parameters:
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| record | `GlideRecord` | `GlideRecord` object of the current table record (usually this is `current` in Workflows) |
+
+#### Returns:
+*A string containing the URL link of the SOAR record*
+
+### `getResilientType(GlideRecord record)`
+
+* Gets the IBM SOAR Type for a linked record (i.e. "Incident" or "Task")
+
+#### Parameters:
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| record | `GlideRecord` | `GlideRecord` object of the current table record (usually this is `current` in Workflows) |
+
+#### Returns:
+*A string containing either "Task" or "Incident" indicating the type of record linked in SOAR*
+
 ---
 ## Create Own Custom ServiceNow Workflow
 

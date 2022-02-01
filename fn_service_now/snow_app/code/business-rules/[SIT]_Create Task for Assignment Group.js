@@ -3,14 +3,14 @@
 /////////////////
 /// Condition ///
 /////////////////
-current.isValidField("x_ibmrt_resilient_ibm_resilient_reference_id") && current.getValue("x_ibmrt_resilient_ibm_resilient_reference_id") == null
+current.isValidField("x_ibmrt_resilient_ibm_soar_reference_id") && current.getValue("x_ibmrt_resilient_ibm_soar_reference_id") == null && !current.isValidField("x_ibmrt_resilient_ibm_resilient_reference_id") && current.getTableName() == "sn_si_task"
 
 //////////////////
 ///   Script   ///
 //////////////////
 (function executeRule(current) {
 
-	var resReferenceId, wfVars, wfId, wf, parent, resHelper, snowHelper = null;
+	var resReferenceId, wfVars, wfId, wf, resHelper, snowHelper = null;
 
 	resHelper = new ResilientHelper();
 	snowHelper = new SNOWRESTHelper();
