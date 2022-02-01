@@ -52,7 +52,10 @@ class FunctionComponent(ResilientComponent):
         # get the incident data
         resilient_incident = event.message['incident']
 
-        validate_fields(["sentinel_profile", SENTINEL_INCIDENT_NUMBER], resilient_incident['properties'])
+        # confirm that we have custom fields
+        for confirm_field in ["sentinel_profile", SENTINEL_INCIDENT_NUMBER]:
+          if not resilient_incident['properties'].get(confirm_field):
+            raise ValueError("Custom field: %s and/or value not found", confirm_field)
 
         # Get the function parameters:
         sentinel_profile = resilient_incident['properties'].get("sentinel_profile")  # text
