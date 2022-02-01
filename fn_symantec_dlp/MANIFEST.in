@@ -1,6 +1,16 @@
 include README.md
-include fn_symantec_dlp/util/*
-include fn_symantec_dlp/lib/*
+include Dockerfile
+include entrypoint.sh
+include apikey_permissions.txt
+recursive-include fn_symantec_dlp/util *
+recursive-include fn_symantec_dlp/lib *
 include fn_symantec_dlp/data/templates/*.jinja*
 include fn_symantec_dlp/LICENSE
-include doc/*
+include doc/*.md
+include doc/screenshots/*
+recursive-include payload_samples/*/ *.json
+include icons/*.png
+include tox.ini
+recursive-include tests/ *
+
+global-exclude *.bak

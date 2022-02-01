@@ -1,4 +1,4 @@
-# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
@@ -20,17 +20,15 @@ def snake_to_camel(word):
 
 setup(
     name='fn_symantec_dlp',
-    version='1.0.0',
-    license='MIT',
+    version='2.0.0',
+    license='ILAN',
     author='IBM Resilient',
     author_email='support@resilientsystems.com',
-    url='https://github.com/ibmresilient/resilient-community-apps',
+    url='https://ibm.com/mysupport',
     description="Resilient Circuits Components used to establish DLP as a source of Incidents for Resilient",
     long_description="Included in this package are two main components; a Incident Poller used to gather Incidents from DLP and a Resilient Circuits Function for updating a Symantec DLP Incident from Resilient.",
     install_requires=[
-        'resilient_circuits>=34.0.195',
-        'resilient-lib>=34.0.195',
-        'zeep>=3.4.0',
+        'resilient_circuits>=41.0.0',
         'requests>=2.7.0'
     ],
     packages=find_packages(),
