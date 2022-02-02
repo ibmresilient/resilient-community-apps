@@ -3,7 +3,7 @@
 /////////////////
 /// Condition ///
 /////////////////
-(new ScriptConditionsHelper().sirAddWorkNoteCheck(current)) == true
+gs.getProperty("x_ibmrt_resilient.ServiceNowUsername") != gs.getUserName() && gs.getUserName() != "system" && (new ScriptConditionsHelper().sirAddWorkNoteCheck(current) == true);
 
 //////////////////
 ///   Script   ///
