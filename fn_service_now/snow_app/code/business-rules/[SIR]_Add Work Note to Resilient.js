@@ -3,7 +3,7 @@
 /////////////////
 /// Condition ///
 /////////////////
-current.isValidField("x_ibmrt_resilient_ibm_resilient_reference_id") && current.getValue("x_ibmrt_resilient_ibm_resilient_reference_id") != null && gs.getProperty("x_ibmrt_resilient.ServiceNowUsername") != gs.getUserName() && gs.getUserName() != "system";
+gs.getProperty("x_ibmrt_resilient.ServiceNowUsername") != gs.getUserName() && gs.getUserName() != "system" && (new ScriptConditionsHelper().sirAddWorkNoteCheck(current) == true);
 
 //////////////////
 ///   Script   ///

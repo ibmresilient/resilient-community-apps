@@ -1,5 +1,8 @@
 // (c) Copyright IBM Corp. 2022. All Rights Reserved.
 
+var INC_RES_ID = "x_ibmrt_resilient_ibm_resilient_reference_id";
+var SIR_RES_ID = "x_ibmrt_resilient_ibm_soar_reference_id";
+
 function getAllowedTables(){
 	
 	var tableNamesCSV, tableNamesArray, i, errMsg = null;
@@ -128,6 +131,10 @@ SNOWRESTHelper.prototype = {
 		parent.get(current.getValue("parent"));
 
 		//Return the value stored in the parent table
-		return parent.getValue("x_ibmrt_resilient_ibm_resilient_reference_id");
+		if (parent.isValidField(INC_RES_ID))
+			return parent.getValue(INC_RES_ID);
+		else {
+			return parent.getValue(SIR_RES_ID);
+		}
 	}
 };

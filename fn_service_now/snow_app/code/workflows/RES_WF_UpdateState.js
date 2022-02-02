@@ -25,8 +25,8 @@
 			"Review": "red"
 		};
 		
-		//Get the required values
-		res_reference_id = current.getValue("x_ibmrt_resilient_ibm_resilient_reference_id");
+		//Get resilient_reference_id depending on what Table the record is in
+		res_reference_id = resHelper.getResilientReferenceId(current);
 		snTicketState = current.state.getChoiceValue();
 		
 		// Try get the snTicketStateColor that matches the snTicketState
