@@ -3,6 +3,7 @@
 # param $1: (required) which package_name to build. It MUST be in ALLOW_IMAGE_NAMES.txt
 # param $2: (required) the BUILD_TYPE. Accepted values are: DEV or MAIN
 # param $3: (required) the PYPI_INDEX_TO_USE when building the images with Docker: e.g. "https://pypi.org/simple" or $ARTIFACTORY_PYPI_INDEX
+# param $4: (required) determine whether or not to download, install, and deploy the zip to a lab instance
 
 # Dependencies on:
 # pip install resilient-sdk
@@ -13,26 +14,17 @@
 PACKAGE_NAME=$1
 BUILD_TYPE=$2
 PYPI_INDEX_TO_USE=$3
+UPLOAD_ZIP=$4
 
 
 ##################
 ## Check params ##
 ##################
-if [ -z "$1" ] ; then
-    echo "ERROR: Must provide PACKAGE_NAME as first parameter"
+
+if [[ "$#" -ne 4 ]]; then
+    echo "Syntax: build_image_and_zip.sh package_name build_type pypi_index_to_use upload.zip"
     exit 1
 fi
-
-if [ -z "$2" ] ; then
-    echo "ERROR: Must provide BUILD_TYPE as second parameter. Accepted values are DEV or MAIN"
-    exit 1
-fi
-
-if [ -z "$3" ] ; then
-    echo "ERROR: Must provide PYPI_INDEX_TO_USE as third parameter"
-    exit 1
-fi
-
 
 ###############
 ## Functions ##
@@ -54,6 +46,7 @@ print_msg "\
 PACKAGE_NAME:\t\t$PACKAGE_NAME \n\
 BUILD_TYPE:\t\t$BUILD_TYPE \n\
 PYPI_INDEX_TO_USE:\t$PYPI_INDEX_TO_USE\
+UPLOAD_ZIP:\t$UPLOAD_ZIP\
 "
 
 ALLOW_IMAGE_NAMES=( $(<$PATH_ALLOW_IMAGE_NAMES) )
@@ -155,4 +148,11 @@ if [ "$BUILD_TYPE" == "DEV" ] ; then
 
     echo "$artifactory_path"
     echo "$artifactory_path" >> $TRAVIS_BUILD_DIR/PATH_APP_ZIP.txt
+fi
+
+if [ "$UPLOAD_ZIP" == "UPLOAD" ] ; then
+    print_msg "Uploading $PACKAGE_NAME to app host"
+
+    python $SCRIPTS_DIR/upload_and_install_build_to_apphost.py $app_zip_path "$TRAVIS_BUILD_DIR/.environments" $PACKAGE_NAME
+
 fi
