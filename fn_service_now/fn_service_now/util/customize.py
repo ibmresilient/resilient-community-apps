@@ -23,7 +23,7 @@ def codegen_reload_data():
         "message_destinations": [u"fn_service_now"],
         "functions": [u"fn_snow_add_attachment_to_record", u"fn_snow_add_note_to_record", u"fn_snow_close_record", u"fn_snow_create_record", u"fn_snow_helper_add_task_note", u"fn_snow_helper_update_datatable", u"fn_snow_lookup_sysid", u"fn_snow_update_record"],
         "workflows": [u"example_sir_snow_update_record_on_severity_change", u"example_snow_add_attachment_to_record", u"example_snow_add_comment_to_record", u"example_snow_add_worknote_to_record", u"example_snow_close_record_from_data_table", u"example_snow_close_record_incident", u"example_snow_close_record_task", u"example_snow_create_record_incident", u"example_snow_create_record_task", u"example_snow_update_datatable_on_status_change_incident", u"example_snow_update_datatable_on_status_change_task", u"example_snow_update_record_on_severity_change"],
-        "actions": [u"SNOW: [INC] Update Record on Severity Change", u"SNOW: [SIR] Update Record on Severity Change", u"SNOW: Add Attachment to Record", u"SNOW: Close Record [Incident]", u"SNOW: Close Record [Task]", u"SNOW: Close Record from Data Table", u"SNOW: Create Record [Incident]", u"SNOW: Create Record [Task]", u"SNOW: Send as Additional Comment", u"SNOW: Send as Work Note", u"SNOW: Update Data Table on Status Change [Incident]", u"SNOW: Update Data Table on Status Change [Task]"],
+        "actions": [u"SNOW: [INC] Update Record on Severity Change", u"SNOW: [SIR] Update Record on Severity Change", u"SNOW: Add Attachment to Record", u"SNOW: Create Record [Incident]", u"SNOW: Create Record [Task]", u"SNOW: Send as Additional Comment", u"SNOW: Send as Work Note", u"SNOW: Update Data Table on Status Change [Incident]", u"SNOW: Update Data Table on Status Change [Task]", u"SNOW: Update/Close Record", u"SNOW: Update/Close Record [Incident]", u"SNOW: Update/Close Record [Task]"],
         "incident_fields": [u"sn_snow_record_id", u"sn_snow_record_link"],
         "incident_artifact_types": [],
         "incident_types": [],
@@ -69,15 +69,15 @@ def customization_data(client=None):
         - SNOW: [INC] Update Record on Severity Change
         - SNOW: [SIR] Update Record on Severity Change
         - SNOW: Add Attachment to Record
-        - SNOW: Close Record [Incident]
-        - SNOW: Close Record [Task]
-        - SNOW: Close Record from Data Table
         - SNOW: Create Record [Incident]
         - SNOW: Create Record [Task]
         - SNOW: Send as Additional Comment
         - SNOW: Send as Work Note
         - SNOW: Update Data Table on Status Change [Incident]
         - SNOW: Update Data Table on Status Change [Task]
+        - SNOW: Update/Close Record
+        - SNOW: Update/Close Record [Incident]
+        - SNOW: Update/Close Record [Task]
     - Incident Fields:
         - sn_snow_record_id
         - sn_snow_record_link
