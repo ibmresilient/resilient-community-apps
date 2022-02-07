@@ -4,7 +4,6 @@
 var JSON_PARSER = new global.JSON();
 
 var RES_DATATABLE_NAME = "sn_records_dt";
-var CP4S_ENDPOINT_PREFIX = "cases-rest.";
 
 //Function to get Resilient Password so we don't have to set Variable in Memory
 function getPassword(){
