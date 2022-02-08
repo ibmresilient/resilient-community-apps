@@ -43,7 +43,7 @@ function validateMidServer(midServerName){
 }
 
 //Function to execute a RESTMessage. Handles errors. Returns response if successful
-function executeRESTMessage(rm, midServerName, baseURL){
+function executeRESTMessage(rm, midServerName, restURL){
 	var response, statusCode, responseBody, responseHeaders, errMsg = null;
 
 	//Set timeout to 60s
@@ -61,10 +61,10 @@ function executeRESTMessage(rm, midServerName, baseURL){
 		if (e.message.indexOf("No response for ECC message request") !== -1){
 			errMsg = "Timed out getting response.";
 			if (midServerName){
-				errMsg += "\nCheck Mid Server. Login to the machine hosting your '" +midServerName+ "' Mid-Server and ensure you can ping IBM Resilient at " + baseURL;
+				errMsg += "\nCheck Mid Server. Login to the machine hosting your '" +midServerName+ "' Mid-Server and ensure you can ping IBM SOAR at " + restURL;
 			}
 			else{
-				errMsg += "\nEnsure you can access and login to IBM Resilient at " + baseURL;
+				errMsg += "\nEnsure you can access and login to IBM SOAR at " + restURL;
 			}
 		}
 		else{
@@ -85,14 +85,14 @@ function executeRESTMessage(rm, midServerName, baseURL){
 	}
 	else if (statusCode >= 400){
 		responseBody = JSON_PARSER.decode(response.getBody());
-		errMsg = "Resilient API call FAILED\nStatus Code: " + statusCode + "\nReason: " + responseBody.message;
+		errMsg = "SOAR API call FAILED\nStatus Code: " + statusCode + "\nReason: " + responseBody.message;
 		throw errMsg;
 	}
 	else if (response.haveError()){
 		var reason = response.getErrorMessage();
 		if (reason.toLowerCase().indexOf("unknown host")){
-			reason += "\nYour Resilient Host may be incorrect or not accessible.";
-			reason += "\nCheck your Resilient Host is up and running.";
+			reason += "\nYour SOAR Host may be incorrect or not accessible.";
+			reason += "\nCheck your SOAR Host is up and running.";
 			if(midServerName){
 				reason += "\nCheck your '" +midServerName+ "' Mid-Server is correctly configured";
 			}
@@ -101,7 +101,7 @@ function executeRESTMessage(rm, midServerName, baseURL){
 		throw errMsg;
 	}
 	else {
-		errMsg = "Failed to call Resilient API: Unknown Error";
+		errMsg = "Failed to call SOAR API: Unknown Error";
 		throw errMsg;
 	}
 }
@@ -128,7 +128,7 @@ function parseJSESSIONID(cookie){
 	}
 	//Throw a custom error if anything fails
 	catch (e){
-		errMsg = "JSESSIONID could not be parsed from the Cookie received from ResilientAPI\n" + e;
+		errMsg = "JSESSIONID could not be parsed from the Cookie received from SOAR API\n" + e;
 		throw errMsg;
 	}
 }
@@ -148,7 +148,7 @@ function getOrgId(orgs, orgName, resilientUser){
 
 				//If user does not have permission throw error
 				if (!orgs[i].enabled){
-					errMsg = resilientUser + " does not have permission to access the Resilient Organization: " + orgName;
+					errMsg = resilientUser + " does not have permission to access the SOAR Organization: " + orgName;
 					throw errMsg;
 				}
 				break;
@@ -156,7 +156,7 @@ function getOrgId(orgs, orgName, resilientUser){
 		}
 		//If no orgId found, throw error
 		if (!orgId){
-			errMsg = resilientUser + " is not a member of specified of the Resilient Organization: " + orgName;
+			errMsg = resilientUser + " is not a member of specified of the SOAR Organization: " + orgName;
 			throw errMsg;
 		}
 
@@ -165,7 +165,7 @@ function getOrgId(orgs, orgName, resilientUser){
 
 	//Throw a custom error if anything fails
 	catch (e){
-		errMsg = "Error trying to find the Resilient Organization: " + orgName + ".\n" + e;
+		errMsg = "Error trying to find the SOAR Organization: " + orgName + ".\n" + e;
 		throw errMsg;
 	}
 }
@@ -186,7 +186,7 @@ ResilientAPI.prototype = {
 	
 	initialize: function() {
 		
-		var hostName, orgName, resAPIId, resAPISecret, userEmail, userPassword, snUsername, midServerName, errMsg, APIKeysEnabled = null;
+		var hostName, orgName, resAPIId, resAPISecret, userEmail, userPassword, snUsername, midServerName, errMsg, APIKeysEnabled, restEndpointCP4S = null;
 		
 		//Ensure all the required System Properties are available before continuing
 		try{
@@ -198,25 +198,32 @@ ResilientAPI.prototype = {
 			userPassword = gs.getProperty("x_ibmrt_resilient.ResilientUserPassword");
 			snUsername = gs.getProperty("x_ibmrt_resilient.ServiceNowUsername");
 			midServerName = gs.getProperty("x_ibmrt_resilient.ServiceNowMidServerName");
+			restEndpointCP4S = gs.getProperty("x_ibmrt_resilient.ResilientCP4SRestHost");
+			if (gs.getProperty("x_ibmrt_resilient.ResilientIsCP4S").toLowerCase() == "yes") {
+				this.isCP4S = true;
+			} else {
+				this.isCP4S = false;
+			}
 		}
 		catch (e){
-			errMsg = "Failed getting Resilient Configuration Properties. Check your Properties for IBM Resilient\n" + e;
+			errMsg = "Failed getting SOAR Configuration Properties. Check your Properties for IBM SOAR\n" + e;
 			throw errMsg;
 		}
 
-		errMsg = " property cannot be null. Please update your IBM Resilient Properties";
-		if (!hostName) {throw "Resilient Host" + errMsg;}
-		if (!orgName) {throw "Resilient Organization" + errMsg;}
+		errMsg = " property cannot be null. Please update your IBM SOAR Properties";
+		if (!hostName) {throw "SOAR Host" + errMsg;}
+		if (!orgName) {throw "SOAR Organization" + errMsg;}
 		if (!snUsername) {throw "ServiceNow Username" + errMsg;}
+		if (this.isCP4S && !restEndpointCP4S) {throw "CP4S URL" + errMsg;}
 
 		//Check that either the API Key details or the email/pass details are present
 		//One of the two sets must be provided
 		if (!resAPIId || !resAPISecret) {
 			errMsgStart = "API Key details are missing. ";
-			errMsgEnd = " is required if not authenticating with API Key. Please update your IBM Resilient Properties";
+			errMsgEnd = " is required if not authenticating with API Key. Please update your IBM SOAR Properties";
 
-			if (!userEmail) {throw errMsgStart + "Resilient Email" + errMsgEnd;}
-			if (!userPassword) {throw errMsgStart + "Resilient Password" + errMsgEnd;}
+			if (!userEmail) {throw errMsgStart + "SOAR Email" + errMsgEnd;}
+			if (!userPassword) {throw errMsgStart + "SOAR Password" + errMsgEnd;}
 
 			APIKeysEnabled = false;
 		} else {
@@ -231,6 +238,11 @@ ResilientAPI.prototype = {
 		this.midServerName = midServerName;
 
 		//Set Resilient Configuration Settings
+		if (this.isCP4S) {
+			this.restURL = "https://" + restEndpointCP4S;
+		} else {
+			this.restURL = "https://" + hostName;
+		}
 		this.baseURL = "https://" + hostName;
 		this.resAPIId = resAPIId;
 		this.orgName = orgName;
@@ -247,7 +259,7 @@ ResilientAPI.prototype = {
 			this.connect();
 		}
 		catch (e){
-			errMsg = "Failed to connect to IBM Resilient Host at " + this.baseURL + ".\n" + e;
+			errMsg = "Failed to connect to IBM SOAR Host at " + this.restURL + ".\n" + e;
 			throw errMsg;
 		}
 	},
@@ -278,7 +290,7 @@ ResilientAPI.prototype = {
 			rm.setBasicAuth(this.resAPIId, getAPISecret());
 		}
 
-		rm.setEndpoint(this.baseURL + "/rest/session");
+		rm.setEndpoint(this.restURL + "/rest/session");
 		rm.setRequestHeader("content-type", "application/json");
 
 		//If a mid server has been specified, check it is up and validated, then set it in the RESTMessage
@@ -289,7 +301,7 @@ ResilientAPI.prototype = {
 		}
 
 		//Execute and get response
-		res = executeRESTMessage(rm, this.midServerName, this.baseURL);
+		res = executeRESTMessage(rm, this.midServerName, this.restURL);
 
 		//Get csrfToken and JSESSIONID if authenticating with email
 		if (!this.APIKeysEnabled) {
@@ -306,7 +318,7 @@ ResilientAPI.prototype = {
 		//If headers is null, set to empty object
 		if(!headers){ headers = {}; }
 		
-		var url = this.baseURL + "/rest" + endpoint;
+		var url = this.restURL + "/rest" + endpoint;
 		
 		//Instantiate new REST Message
 		var rm = new sn_ws.RESTMessageV2();
@@ -346,7 +358,7 @@ ResilientAPI.prototype = {
 		}
 		
 		//Execute the request
-		var res = executeRESTMessage(rm, this.midServerName, this.baseURL);
+		var res = executeRESTMessage(rm, this.midServerName, this.restURL);
 		return res.body;
 	},
 	
@@ -445,7 +457,12 @@ ResilientAPI.prototype = {
 	},
 	
 	generateRESlink: function(incident_id, task_id){
-		var link = this.baseURL + "/#incidents/" + String(incident_id);
+		var link = null;
+		if (this.isCP4S){
+			link = this.baseURL + "/app/respond/#cases/" + String(incident_id);
+		} else {
+			link = this.baseURL + "/#incidents/" + String(incident_id);
+		}
 		
 		if(task_id){
 			link += "?task_id=" + String(task_id);
