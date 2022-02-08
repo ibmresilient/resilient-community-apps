@@ -31,9 +31,9 @@ map_sn_record_states = {
   "New": 1,
   "In Progress": 2,
   "On Hold": 3,
-  "Resolved": 6,
-  "Closed": 7,
-  "Canceled": 8,
+  "[INC] Resolved": 6,
+  "[INC] Closed": 7,
+  "[INC] Canceled": 8,
 	"[SIR] Analysis": 16,
 	"[SIR] Contain": 18,
 	"[SIR] Eradicate": 19,
@@ -63,7 +63,7 @@ inputs.sn_close_notes = rule.properties.sn_close_notes
 inputs.sn_close_code = rule.properties.sn_close_code
 
 # Add a Work Note to the Record in ServiceNow
-inputs.sn_close_work_note = u"This record's state has be changed to {0} by IBM SOAR".format(unicode(rule.properties.sn_record_state))
+inputs.sn_close_work_note = u"This record's state has been changed to {0} by IBM SOAR".format(unicode(rule.properties.sn_record_state))
 ```
 
 ### Post-Processing Script
