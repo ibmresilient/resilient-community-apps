@@ -12,9 +12,14 @@ def config_section_data():
     """
     config_data = u"""[fn_extrahop]
 extrahop_rx_host_url = <EXTRAHOP_RX_HOST_URL>
+extrahop_rx_api_version = v1
+# The ExtraHop functions can be executed against the ExtraHop cloud-based service
+# or against an ExtraHop standalone sensor.
+# Authentication settings for ExtraHop Cloud service are an api key id and key secret.
 extrahop_rx_key_id = <EXTRAHOP_RX_API_KEY_ID>
 extrahop_rx_key_secret = <EXTRAHOP_RX_API_KEY_SECRET>
-extrahop_rx_api_version = v1
+# Authentication setting for ExtraHop standalone sensor is a single api key
+extrahop_rx_api_key = <EXTRAHOP_RX_API_KEY>
 #http_proxy=http://proxy:80
 #https_proxy=https://proxy:443
 """

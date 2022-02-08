@@ -29,9 +29,10 @@ class RxClient():
         if not isinstance(fn_opts, dict) and not fn_opts:
             raise ValueError("The 'fn_opts' parameter is not set correctly.")
         self.host_url = fn_opts.get("extrahop_rx_host_url")
+        self.api_version = fn_opts.get("extrahop_rx_api_version")
         self.key_id = fn_opts.get("extrahop_rx_key_id")
         self.key_secret = fn_opts.get("extrahop_rx_key_secret")
-        self.api_version = fn_opts.get("extrahop_rx_api_version")
+        self.api_key = fn_opts.get("extrahop_rx_api_key")
         self.api_base_url = "{}/api/{}".format(self.host_url, self.api_version)
         # Define api endpoints
         self._endpoints = {
@@ -49,7 +50,12 @@ class RxClient():
             "search_packets":    "/".join([self.api_base_url, "packets/search"]),
         }
         self.rc = RequestsCommon(opts=opts, function_opts=fn_opts)
-        self._headers = {"Authorization": "Bearer " + self.get_token()}
+        if fn_opts.get("extrahop_rx_key_id"):
+            # Connection to Cloud-based service.
+            self._headers = {"Authorization": "Bearer " + self.get_token()}
+        else:
+            # Connection to standalone sensor.
+            self._headers = {"Authorization": "ExtraHop apikey=" + self.api_key}
 
     def get_token(self):
         """
