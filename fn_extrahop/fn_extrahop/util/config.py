@@ -24,7 +24,7 @@ extrahop_rx_api_key = <EXTRAHOP_RX_API_KEY>
 # other certificate that is not automatically trusted by your machine,
 # you can set the CA bundle using the extrahop_cafile setting.
 # If you don't want to use a cert you can set extrahop_cafile=false.
-extrahop_cafile=<path to cert file>|false
+#extrahop_cafile=<path to cert file>|false
 #http_proxy=http://proxy:80
 #https_proxy=https://proxy:443
 """

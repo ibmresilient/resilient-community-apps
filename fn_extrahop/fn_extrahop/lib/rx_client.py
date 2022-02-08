@@ -440,7 +440,6 @@ class RxClient():
         """
         validate_fields([
             {"name": "extrahop_rx_host_url", "placeholder": "<EXTRAHOP_RX_HOST_URL>"},
-            {"name": "extrahop_cafile", "placeholder": "<path to cert file>|false"},
             {"name": "extrahop_rx_api_version"}],
         fn_opts)
 
@@ -452,4 +451,9 @@ class RxClient():
         else:
             validate_fields([
                 {"name": "extrahop_rx_api_key", "placeholder": "<EXTRAHOP_RX_API_KEY>"}],
+            fn_opts)
+
+        if fn_opts.get("extrahop_cafile") is not None:
+            validate_fields([
+                {"name": "extrahop_cafile", "placeholder": "<path to cert file>|false"}],
             fn_opts)
