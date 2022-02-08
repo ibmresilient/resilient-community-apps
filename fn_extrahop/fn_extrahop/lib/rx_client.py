@@ -8,6 +8,7 @@ import base64
 import re
 
 from resilient_lib import RequestsCommon
+from resilient_lib import validate_fields
 
 LOG = logging.getLogger(__name__)
 
@@ -415,3 +416,23 @@ class RxClient():
         r = self.rc.execute_call_v2("get", uri, headers=self._headers, params=params)
 
         return r
+
+    def validate_settings(self, fn_opts):
+        """Validate app config settings.
+
+        :param fn_opts: App settings dict.
+        """
+        validate_fields([
+            {"name": "extrahop_rx_host_url", "placeholder": "<EXTRAHOP_RX_HOST_URL>"},
+            {"name": "extrahop_rx_api_version"}],
+        fn_opts)
+
+        if fn_opts.get("extrahop_rx_key_id"):
+            validate_fields([
+                {"name": "extrahop_rx_key_id", "placeholder": "<EXTRAHOP_RX_API_KEY_ID>"},
+                {"name": "extrahop_rx_key_secret", "placeholder": "<EXTRAHOP_RX_API_KEY_SECRET>"}],
+            fn_opts)
+        else:
+            validate_fields([
+                {"name": "extrahop_rx_api_key", "placeholder": "<EXTRAHOP_RX_API_KEY>"}],
+            fn_opts)

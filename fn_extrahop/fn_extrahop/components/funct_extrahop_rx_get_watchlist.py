@@ -24,13 +24,6 @@ class FunctionComponent(AppFunctionComponent):
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
 
-        validate_fields([
-            {"name": "extrahop_rx_host_url", "placeholder": "<EXTRAHOP_RX_HOST_URL>"},
-            {"name": "extrahop_rx_key_id", "placeholder": "<EXTRAHOP_RX_API_KEY_ID>"},
-            {"name": "extrahop_rx_key_secret", "placeholder": "<EXTRAHOP_RX_API_KEY_SECRET>"},
-            {"name": "extrahop_rx_api_version"}],
-        self.options)
-
         fn_msg = self.get_fn_msg()
         self.LOG.info("fn_msg: %s", fn_msg)
 
