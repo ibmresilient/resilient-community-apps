@@ -6,6 +6,7 @@ import json
 import logging
 import base64
 import re
+import requests
 
 from resilient_lib import RequestsCommon
 from resilient_lib import validate_fields
@@ -28,11 +29,19 @@ class RxClient():
             raise ValueError("The 'opts' parameter is not set correctly.")
         if not isinstance(fn_opts, dict) and not fn_opts:
             raise ValueError("The 'fn_opts' parameter is not set correctly.")
+        self.validate_settings(fn_opts)
         self.host_url = fn_opts.get("extrahop_rx_host_url")
         self.api_version = fn_opts.get("extrahop_rx_api_version")
         self.key_id = fn_opts.get("extrahop_rx_key_id")
         self.key_secret = fn_opts.get("extrahop_rx_key_secret")
+        self.key_secret = fn_opts.get("extrahop_rx_key_secret")
         self.api_key = fn_opts.get("extrahop_rx_api_key")
+        # Allow explicit setting "do not verify certificates"
+        self.verify = fn_opts.get("extrahop_cafile")
+        if str(self.verify).lower() == "false":
+            LOG.warning("Unverified HTTPS requests to ExtraHop server (cafile=false).")
+            requests.packages.urllib3.disable_warnings()  # otherwise things get very noisy
+            self.verify = False
         self.api_base_url = "{}/api/{}".format(self.host_url, self.api_version)
         # Define api endpoints
         self._endpoints = {
@@ -72,7 +81,8 @@ class RxClient():
             "Content-Type": "application/x-www-form-urlencoded",
         }
 
-        r = self.rc.execute_call_v2("post", uri, headers=headers, data="grant_type=client_credentials")
+        r = self.rc.execute_call_v2("post", uri, headers=headers, data="grant_type=client_credentials",
+                                    verify=self.verify)
 
         return r.json()["access_token"]
 
@@ -104,7 +114,7 @@ class RxClient():
         if device_id:
             uri = self._endpoints["devices"].format(device_id)
 
-        r = self.rc.execute_call_v2("get", uri, headers=self._headers, params=params)
+        r = self.rc.execute_call_v2("get", uri, headers=self._headers, params=params, verify=self.verify)
 
         return r
 
@@ -135,7 +145,7 @@ class RxClient():
         data["limit"] = int(limit) if limit else 0
         data["offset"] = int(offset) if offset else 0
 
-        r = self.rc.execute_call_v2("post", uri, headers=self._headers, data=json.dumps(data))
+        r = self.rc.execute_call_v2("post", uri, headers=self._headers, data=json.dumps(data), verify=self.verify)
 
         return r
 
@@ -157,7 +167,7 @@ class RxClient():
         if detection_id is not None:
             uri = self._endpoints["detections"].format(detection_id)
 
-        r = self.rc.execute_call_v2("get", uri, headers=self._headers, params=params)
+        r = self.rc.execute_call_v2("get", uri, headers=self._headers, params=params, verify=self.verify)
 
         return r
 
@@ -203,7 +213,7 @@ class RxClient():
         data["offset"] = int(offset) if offset else 0
         data["update_time"] = int(update_time) if update_time else 0
 
-        r = self.rc.execute_call_v2("post", uri, headers=self._headers, data=json.dumps(data))
+        r = self.rc.execute_call_v2("post", uri, headers=self._headers, data=json.dumps(data), verify=self.verify)
 
         return r
 
@@ -250,7 +260,7 @@ class RxClient():
         if plan_status == 'C':
             data["resolution"] = resolution_map[resolution_id]
 
-        r = self.rc.execute_call_v2("patch", uri, headers=self._headers, data=json.dumps(data))
+        r = self.rc.execute_call_v2("patch", uri, headers=self._headers, data=json.dumps(data), verify=self.verify)
 
         return r
 
@@ -269,7 +279,7 @@ class RxClient():
         if tag_id is not None:
             uri = self._endpoints["tags"].format(tag_id)
 
-        r = self.rc.execute_call_v2("get", uri, headers=self._headers)
+        r = self.rc.execute_call_v2("get", uri, headers=self._headers, verify=self.verify)
 
         return r
 
@@ -289,7 +299,7 @@ class RxClient():
 
         data = {"name": tag_name}
 
-        r = self.rc.execute_call_v2("post", uri, headers=self._headers, data=json.dumps(data))
+        r = self.rc.execute_call_v2("post", uri, headers=self._headers, data=json.dumps(data), verify=self.verify)
 
         return r
 
@@ -316,7 +326,7 @@ class RxClient():
 
         data = {"assign": device_ids}
 
-        r = self.rc.execute_call_v2("post", uri, headers=self._headers, data=json.dumps(data))
+        r = self.rc.execute_call_v2("post", uri, headers=self._headers, data=json.dumps(data), verify=self.verify)
 
         return r
 
@@ -329,7 +339,7 @@ class RxClient():
         """
         uri = self._endpoints["watchlist"]
 
-        r = self.rc.execute_call_v2("get", uri, headers=self._headers)
+        r = self.rc.execute_call_v2("get", uri, headers=self._headers, verify=self.verify)
 
         return r
 
@@ -353,7 +363,7 @@ class RxClient():
             unassign_ids = list(filter(None, re.split(r"\s+|,|\n", assign)))
             data = {"assign": unassign_ids}
 
-        r = self.rc.execute_call_v2("post", uri, headers=self._headers, data=json.dumps(data))
+        r = self.rc.execute_call_v2("post", uri, headers=self._headers, data=json.dumps(data), verify=self.verify)
 
         return r
 
@@ -371,7 +381,7 @@ class RxClient():
         if activitymap_id is not None:
             uri = self._endpoints["activitymaps"].format(activitymap_id)
 
-        r = self.rc.execute_call_v2("get", uri, headers=self._headers)
+        r = self.rc.execute_call_v2("get", uri, headers=self._headers, verify=self.verify)
 
         return r
 
@@ -419,7 +429,7 @@ class RxClient():
         if port2:
             params["port2"] = port2
 
-        r = self.rc.execute_call_v2("get", uri, headers=self._headers, params=params)
+        r = self.rc.execute_call_v2("get", uri, headers=self._headers, params=params, verify=self.verify)
 
         return r
 
@@ -430,6 +440,7 @@ class RxClient():
         """
         validate_fields([
             {"name": "extrahop_rx_host_url", "placeholder": "<EXTRAHOP_RX_HOST_URL>"},
+            {"name": "extrahop_cafile", "placeholder": "<path to cert file>|false"},
             {"name": "extrahop_rx_api_version"}],
         fn_opts)
 
