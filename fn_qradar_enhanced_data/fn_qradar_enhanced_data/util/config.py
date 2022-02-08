@@ -18,6 +18,9 @@ username=admin
 qradarpassword=changeme
 #Note, if both qradarpassword and qradartoken are given, password will be used
 qradartoken=changeme
+# Interval to poll QRadar for changes (in minutes)
+# To turn the poller off user value 0
+polling_interval = <POLLING_INTERVAL>
 verify_cert=false|/path/to/cert
 #search_timeout=
 
@@ -30,6 +33,9 @@ username=admin
 qradarpassword=changeme
 #Note, if both qradarpassword and qradartoken are given, password will be used
 qradartoken=changeme
+# Interval to poll QRadar for changes (in minutes)
+# To turn the poller off user value 0
+polling_interval = <POLLING_INTERVAL>
 verify_cert=false|/path/to/cert
 #search_timeout=
 '''
