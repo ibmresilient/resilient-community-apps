@@ -146,9 +146,9 @@ class SymantecDLPPollerComponent(ResilientComponent):
                 port = self.opts.get('port')
                 soar_case_id = soar_case.get("id")
                 soar_case_url = build_incident_url(build_resilient_url(host, port), soar_case_id)
-                status = self.sdlp_env.set_sdlp_update_incident_custom_attribute(sdlp_incident_id, 
-                                                                                 soar_case_id, 
-                                                                                 soar_case_url)
+                status = self.sdlp_env.patch_sdlp_incident_custom_attribute(sdlp_incident_id,
+                                                                            soar_case_id,
+                                                                            soar_case_url)
 
                 
                 LOG.info("IBM SOAR case created %s for DLP incident %s", soar_case_id, sdlp_incident_id)

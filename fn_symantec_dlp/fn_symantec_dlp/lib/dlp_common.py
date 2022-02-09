@@ -4,7 +4,6 @@
 
 import logging
 import base64
-from readline import redisplay
 
 from .jinja_common import JinjaEnvironment
 from resilient_lib import validate_fields
@@ -17,7 +16,7 @@ DEFAULT_POLLER_LOOKBACK_SECONDS=600
 
 SOAR_HEADER = "IBM SOAR"
 CREATED_BY_SOAR = "Created by {}".format(SOAR_HEADER)
-SYMANTEC_DLP_HEADER="From Symantec DLP"
+SYMANTEC_DLP_HEADER="From Symantec DLP:"
 
 
 class SymantecDLPCommon():
@@ -58,7 +57,13 @@ class SymantecDLPCommon():
 
         
     def get_sdlp_incidents_in_save_report(self, saved_report_id, last_poller_time):
-        """ Return the list of ins matching the filter 
+        """ Get the DLP incidents from a saved report query and return a list of DLP incidents 
+            matching the query filter.
+        Args:
+            saved_report_id ([integer]): [ DLP saved report Id (stored in the app.config) ]
+
+        Returns:
+            [list]: [ list of Symantec DLP incident Ids ]
         """
         url = u"{0}/savedReport/{1}".format(self.base_url, saved_report_id)
         response = self.rc.execute("GET", url, headers=self.headers,
@@ -122,7 +127,14 @@ class SymantecDLPCommon():
         return r_json
 
     def get_sdlp_editable_attributes(self, incident_id):
+        """[ Get the Symantec DLP incident editable attributes (for example "severity" is editable)]
 
+        Args:
+            incident_id ([integer]): [ DLP incidentId ]
+
+        Returns:
+            [json]: [ list of editable incident attributes from Symantec DLP ]
+        """
         url = u"{0}/incidents/{1}/editableAttributes".format(self.base_url, incident_id)
 
         response = self.rc.execute("GET", url, headers=self.headers,
@@ -131,7 +143,14 @@ class SymantecDLPCommon():
         return r_json
 
     def get_sdlp_incident_static_attributes(self, incident_id):
+        """[ Get the Symantec DLP incident static attributes (For example "detectionDate" is static.)]
 
+        Args:
+            incident_id ([integer]): [ DLP incidentId ]
+
+        Returns:
+            [json]: [ list of static incident attributes from Symantec DLP ]
+        """
         url = u"{0}/incidents/{1}/staticAttributes".format(self.base_url, incident_id)
 
         response = self.rc.execute("GET", url, headers=self.headers,
@@ -140,6 +159,20 @@ class SymantecDLPCommon():
         return r_json
 
     def get_sdlp_incident_custom_attributes(self):
+        """[ Get the list of Symantec DLP custom attributes.  Custom attributes 
+             ibm_soar_case_id and ibm_soar_case_url are created in DLP by the user 
+             and are initially "unassigned".  After the DLP case is created in SOAR,
+             the app updates these fields in DLP so that the user can get to the 
+             corresponding case.  The custom attributes are also used as a filter 
+             in the "DLP saved report so that only DLP incidents not in SOAR are 
+             escalated. ]
+
+        Args:
+            incident_id ([integer]): [ DLP incidentId ]
+
+        Returns:
+            [list]: [ list of custom attributes from Symantec DLP ]
+        """
 
         url = u"{0}/incidents/customAttributes".format(self.base_url)
 
@@ -150,7 +183,14 @@ class SymantecDLPCommon():
         return  custom_attribute_list
 
     def get_sdlp_incident_history(self, incident_id):
+        """[ Get the Symantec DLP incident history data ]
 
+        Args:
+            incident_id ([integer]): [ DLP incidentId ]
+
+        Returns:
+            [json]: [ list of history data from Symantec DLP ]
+        """
         url = u"{0}/incidents/{1}/history".format(self.base_url, incident_id)
 
         response = self.rc.execute("GET", url, headers=self.headers,
@@ -159,14 +199,22 @@ class SymantecDLPCommon():
         return r_json
 
     def get_sdlp_incident_notes(self, incident_id):
+        """[ Formulate the Symantec DLP incident URL ]
+
+        Args:
+            incident_id ([integer]): [ DLP incidentId ]
+
+        Returns:
+            [list]: [ list of note data from Symantec DLP ]
+        """
         history_list = self.get_sdlp_incident_history(incident_id)
         notes = []
         for history_item in history_list:
             if history_item.get('incidentHistoryAction') == 'ADD_COMMENT':
-                note = u"""<b>Note from Symantec DLP:</b>
+                note = u"""<b>SYMANTEC_DLP_HEADER</b>
                         <br>
-                        <b>User:</b>{user} added note at {time}
-                        <br><br>
+                        <b>User: </b>{user} added note at {time}
+                        <br>
                         <b>Note detail</b>: <p>{detail}</p>
                         """.format(
                             user=history_item['dlpUserName'],
@@ -176,22 +224,43 @@ class SymantecDLPCommon():
                 notes.append(note)
         return notes
 
-    def set_sdlp_update_incident_custom_attribute(self, incident_id, soar_case_id, soar_case_url):
+    def get_custom_attribute_index(self, editable_attributes, custom_attribute_name):
 
+        index = 0
+        custom_attribute_groups = editable_attributes.get('customAttributeGroups')
+        for group in custom_attribute_groups:
+            if group.get('name') == 'custom_attribute_group.default':
+                custom_attributes = group.get('customAttributes')
+                for custom_attribute in custom_attributes:
+                    if custom_attribute.get("name") == custom_attribute_name:
+                        index = custom_attribute.get("index")
+                        return index
+        return index
+
+    def patch_sdlp_incident_custom_attribute(self, incident_id, soar_case_id, soar_case_url):
+
+        # Get the index of the custom attribute.  When updating the attribute the columnIndex needs to be 
+        # sent to the PATCH call...you can't use the name.
+        editable_attributes = self.get_sdlp_editable_attributes(incident_id)
+        soar_case_id_column_index = self.get_custom_attribute_index(editable_attributes, 'ibm_soar_case_id')
+        soar_case_url_column_index = self.get_custom_attribute_index(editable_attributes, 'ibm_soar_case_url')
+
+        attributes_list = []
+        if soar_case_id_column_index > 0:
+            attributes_list.append({
+                                    "columnIndex": soar_case_id_column_index,
+                                    "value": soar_case_id
+                                    })
+        if soar_case_url_column_index > 0:
+            attributes_list.append({
+                                    "columnIndex": soar_case_url_column_index,
+                                    "value": soar_case_url
+                                    })
         url = u"{0}/incidents".format(self.base_url, incident_id)
 
         update_json = {
             "incidentIds":[ incident_id ],
-            "incidentCustomAttributes":[
-                { 
-                    "columnIndex": 18,
-                    "value": soar_case_id
-                },
-                {
-                    "columnIndex": 17,
-                    "value": soar_case_url
-                }
-            ]
+            "incidentCustomAttributes": attributes_list
         }   
         response = self.rc.execute("PATCH", url, headers=self.headers, json=update_json,
                                     verify=self.verify, proxies=self.rc.get_proxies())
@@ -199,10 +268,10 @@ class SymantecDLPCommon():
         return r_json
 
     def get_sdlp_incident_payload(self, incident_id):
-        """[summary]
+        """[Create the incident payload for creating a SOAR case from DLP incident data.]
 
         Args:
-            incident_id ([]): [descrip]
+            incident_id ([]): [ DLP incident Id ]
 
         Returns:
             [json object]: [payload containing information on the Symantec DLP incident]
@@ -213,18 +282,18 @@ class SymantecDLPCommon():
         sdlp_payload['editableIncidentDetails'] = self.get_sdlp_editable_attributes(incident_id)
         sdlp_payload['staticIncidentDetails'] = self.get_sdlp_incident_static_attributes(incident_id)
 
-        # Add the link back to the Symantec incident URL
+        # Add the link back to the Symantec DLP incident URL
         sdlp_payload['sdlp_incident_url'] = self.get_sdlp_incident_url(incident_id)
         return sdlp_payload
 
     def get_sdlp_incident_url(self, incident_id):
-        """[summary]
+        """[ Formulate the Syamntec DLP incident URL ]
 
         Args:
             incident_id ([type]): [DLP incidentId]
 
         Returns:
-            [type]: [URL for DLP incident]
+            [string]: [URL for DLP incident]
         """
 
         return "https://{0}/ProtectManager/IncidentDetail.do?value(variable_1)=incident.id&value(operator_1)=incident.id_in&value(operand_1)={1}".format(self.server, incident_id)
