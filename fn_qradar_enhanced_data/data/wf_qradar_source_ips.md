@@ -21,6 +21,8 @@
 inputs.qradar_search_param3 = incident.properties.qradar_id
 inputs.qradar_query_type = "sourceip"
 inputs.qradar_label = incident.properties.qradar_destination
+inputs.qradar_incident_id = incident.id
+inputs.qradar_table_name = "qr_top_source_ips"
 ```
 
 ### Post-Processing Script
@@ -57,6 +59,8 @@ for event in results.events:
 inputs.qradar_search_param3 = incident.properties.qradar_id
 inputs.qradar_query_type = "sourceip"
 inputs.qradar_label = incident.properties.qradar_destination
+inputs.qradar_incident_id = incident.id
+inputs.qradar_table_name = "qr_top_source_ips"
 ```
 
 ### Post-Processing Script

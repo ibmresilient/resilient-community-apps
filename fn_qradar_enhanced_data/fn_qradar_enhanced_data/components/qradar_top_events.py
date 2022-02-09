@@ -9,7 +9,7 @@ from time import time
 import logging
 from re import sub, search, IGNORECASE
 from fn_qradar_enhanced_data.util.qradar_constants import ARIEL_SEARCH_EVENTS, ARIEL_SEARCH_FLOWS, SOURCE_IP
-from fn_qradar_enhanced_data.util.function_utils import make_query_string, get_servers_list
+from fn_qradar_enhanced_data.util.function_utils import make_query_string, get_servers_list, clear_table
 from fn_qradar_enhanced_data.util.qradar_utils import QRadarClient, QRadarServers
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import validate_fields
@@ -48,6 +48,8 @@ class FunctionComponent(ResilientComponent):
             qradar_search_param5 = kwargs.get("qradar_search_param5")  # text
             qradar_search_param6 = kwargs.get("qradar_search_param6")  # text
             qradar_label = kwargs.get("qradar_label") # QRadar server to connect to
+            qradar_table_name = kwargs.get("qradar_table_name", None) # Name of data table
+            qradar_incident_id = kwargs.get("qradar_incident_id") # ID of incident
 
             log.info("qradar_query: %s", qradar_query)
             log.info("qradar_search_param1: %s", qradar_search_param1)
@@ -133,6 +135,11 @@ class FunctionComponent(ResilientComponent):
                 "offenseid": qradar_search_param3,
                 "events": result["events"]
             }
+
+            if qradar_table_name:
+                clear_table(self.rest_client(), qradar_table_name, qradar_incident_id)
+                log.info("Data in table {} in incident {} has been cleared".format(qradar_table_name, qradar_incident_id))
+
             yield StatusMessage("Finished 'qradar_top_events' that was running in workflow '{0}'".format(wf_instance_id))
             yield FunctionResult(results)
         except Exception as e:
