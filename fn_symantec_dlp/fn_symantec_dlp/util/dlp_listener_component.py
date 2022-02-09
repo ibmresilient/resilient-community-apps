@@ -3,7 +3,7 @@
 # pylint: disable=C0303
 """ Helper Module used to handle all the needed operations for gathering Incidents
 DLPListener is the class which performs all operations needed with DLP such as starting the poller, preparing and sending results.
-It HAS-A instance of DLPSoapClient to delagate any API operations to.
+It HAS-A instance of DLPRestClient to delagate any API operations to.
 """
 import logging
 import os
@@ -18,7 +18,7 @@ from resilient_lib import build_incident_url, build_resilient_url, str_to_bool, 
 
 from zeep.helpers import serialize_object
 from zeep.exceptions import Fault
-from fn_symantec_dlp.lib.dlp_soap_client import DLPSoapClient
+from fn_symantec_dlp.lib.dlp_rest_client import DLPRestClient
 
 LOG = logging.getLogger(__name__)
 DEFAULT_NUM_OF_DAYS = 14
@@ -30,9 +30,9 @@ class DLPListener(ResilientComponent):
 
     def __init__(self, opts):
         super(DLPListener, self).__init__(opts)
-        # A SOAP Client to interface with DLP Incident and Reporting API
+        # A REST Client to interface with DLP Incident and Reporting API
         self.dlp_opts = opts.get("fn_symantec_dlp", {})
-        self.soap_client = DLPSoapClient(app_configs=self.dlp_opts)
+        self.dlp_rest_client = DLPRestClient(app_configs=self.dlp_opts)
         self.should_search_res = str_to_bool(self.dlp_opts.get("sdlp_should_search_res"))
         # A REST Client to interface with Resilient
         self.res_rest_client = ResilientComponent.rest_client(self)
@@ -52,20 +52,20 @@ class DLPListener(ResilientComponent):
         
         try:
             # gather the list of incidents from a saved report
-            res = DLPSoapClient.incident_list(saved_report_id=DLPSoapClient.dlp_saved_report_id,
+            res = DLPRestClient.incident_list(saved_report_id=DLPRestClient.dlp_saved_report_id,
                                             incident_creation_date_later_than=incident_creation_date_later_than)
         except Fault as caught_exc:
             # Log the Connection error to the user
             LOG.error(u"Problem: %s", repr(caught_exc))
-            errMsg = u"[Symantec DLP] Encountered an exception when querying the Incident List with Report ID {}".format(DLPSoapClient.dlp_saved_report_id)
+            errMsg = u"[Symantec DLP] Encountered an exception when querying the Incident List with Report ID {}".format(DLPRestClient.dlp_saved_report_id)
             LOG.error(errMsg)
             raise ValueError(errMsg)
         # gather the incident_details for incidents returned
-        incidents = DLPSoapClient.incident_detail(incident_id=res['incidentLongId'])
+        incidents = DLPRestClient.incident_detail(incident_id=res['incidentLongId'])
         LOG.info("Now filtering out Incidents which already have a Resilient Incident ID")
         LOG.info("Number of Incidents before filtering: %d", len(incidents))
 
-        if 'resilient_incident_id' not in self.soap_client.list_custom_attributes():
+        if 'resilient_incident_id' not in self.dlp_rest_client.list_custom_attributes():
             LOG.warning("The Custom Attribute 'resilient_incident_id' was not found on your DLP Instance, this may result in duplicate Incidents being found in Resilient as no filtering will be done on the DLP Side")
         else:
             # Drop all incidents which have a res_id custom attribute
@@ -101,7 +101,7 @@ class DLPListener(ResilientComponent):
                 self.send_res_id_to_dlp(new_incident, incident['incidentId'])
             else: 
                 LOG.info(u"Incident was found in Resilient with sdlp_incident_id %s field. SDLP Incident will not be imported into Resilient", incident['incidentId'])
-        LOG.info("Finished processing all Incidents in Saved Report %s", self.soap_client.dlp_saved_report_id)
+        LOG.info("Finished processing all Incidents in Saved Report %s", self.dlp_rest_client.dlp_saved_report_id)
 
     def send_res_id_to_dlp(self, new_incident, dlp_incident_id):
         """send_res_id_to_dlp takes a newly created incident from Resilient and attempts to send its Incident ID to the corressponding DLP Incident
@@ -146,7 +146,7 @@ class DLPListener(ResilientComponent):
                             dlp_id=dlp_incident_id, 
                             resilient_url=resilient_incident_url)
 
-        response = DLPSoapClient.session.post(DLPSoapClient.sdlp_incident_endpoint,
+        response = DLPRestClient.session.post(DLPRestClient.sdlp_incident_endpoint,
                                               data=body, headers=headers)
 
         response.raise_for_status()
@@ -164,7 +164,7 @@ class DLPListener(ResilientComponent):
         :type res_incident_id: int
         """
         # Upload remaining parts such as the Attachments
-        binaries = self.soap_client.incident_binaries(incident_id=incident['incidentId'], include_original_message=False)
+        binaries = self.dlp_rest_client.incident_binaries(incident_id=incident['incidentId'], include_original_message=False)
         if binaries:
             for component in binaries['Component']:
                 try:
@@ -218,7 +218,7 @@ class DLPListener(ResilientComponent):
                                "notes": notes_to_be_added,
                                "detection_date": max(incident_dates or [0]),
                                "severity": self.return_res_severity(incident['incident']['severity']),
-                               "dlp_incident_url": self.build_dlp_url(incidentid=incident['incidentId'], host=self.soap_client.host)}})
+                               "dlp_incident_url": self.build_dlp_url(incidentid=incident['incidentId'], host=self.dlp_rest_client.host)}})
         return payload
 
     @staticmethod

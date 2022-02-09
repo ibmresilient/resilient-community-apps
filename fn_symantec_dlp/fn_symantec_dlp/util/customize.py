@@ -21,15 +21,15 @@ def codegen_reload_data():
     return {
         "package": u"fn_symantec_dlp",
         "message_destinations": [u"fn_symantec_dlp"],
-        "functions": [u"fn_symantec_dlp_update_incident"],
-        "workflows": [u"sdlp_send_note_to_incident", u"sdlp_set_incident_status"],
-        "actions": [u"Example: Symantec DLP - Send a note to a DLP Incident", u"Example: Symantec DLP - Update DLP when this Incident is closed "],
+        "functions": [u"fn_symantec_dlp_update_incident", u"symantec_dlp_get_incident_details"],
+        "workflows": [u"sdlp_send_note_to_incident", u"sdlp_set_incident_status", u"symantec_dlp_write_incident_details_to_a_note"],
+        "actions": [u"Symantec DLP: Send a note to a DLP Incident", u"Symantec DLP: Update DLP when this Incident is closed ", u"Symantec DLP: Write DLP Incident Details to Note"],
         "incident_fields": [u"sdlp_incident_id", u"sdlp_incident_url"],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [],
         "automatic_tasks": [],
-        "scripts": []
+        "scripts": [u"Convert JSON to rich text v1.1"],
     }
 
 
@@ -45,15 +45,20 @@ def customization_data(client=None):
         - fn_symantec_dlp
     - Functions:
         - fn_symantec_dlp_update_incident
+        - symantec_dlp_get_incident_details
     - Workflows:
         - sdlp_send_note_to_incident
         - sdlp_set_incident_status
+        - symantec_dlp_write_incident_details_to_a_note
     - Rules:
-        - Example: Symantec DLP - Send a note to a DLP Incident
-        - Example: Symantec DLP - Update DLP when this Incident is closed 
+        - Symantec DLP: Send a note to a DLP Incident
+        - Symantec DLP: Update DLP when this Incident is closed 
+        - Symantec DLP: Write DLP Incident Details to Note
     - Incident Fields:
         - sdlp_incident_id
         - sdlp_incident_url
+    - Scripts:
+        - Convert JSON to rich text v1.1
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)

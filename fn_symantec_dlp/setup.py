@@ -28,8 +28,9 @@ setup(
     description="Resilient Circuits Components used to establish DLP as a source of Incidents for Resilient",
     long_description="Included in this package are two main components; a Incident Poller used to gather Incidents from DLP and a Resilient Circuits Function for updating a Symantec DLP Incident from Resilient.",
     install_requires=[
-        'resilient_circuits>=41.0.0',
-        'requests>=2.7.0'
+        'resilient_circuits>=43.0.0',
+        'jinja2',
+        'pytz'
     ],
     packages=find_packages(),
     include_package_data=True,
@@ -40,8 +41,9 @@ setup(
     entry_points={
         "resilient.circuits.components": [
             # When setup.py is executed, loop through the .py files in the components directory and create the entry points.
-            "{}FunctionComponent = fn_symantec_dlp.components.{}:FunctionComponent".format(snake_to_camel(get_module_name(filename)), get_module_name(filename)) for filename in glob.glob("./fn_symantec_dlp/components/[a-zA-Z]*.py")
-        ],
+            "{}FunctionComponent = fn_symantec_dlp.components.{}:FunctionComponent".format(snake_to_camel(get_module_name(filename)), get_module_name(filename)) for filename in glob.glob("./fn_symantec_dlp/components/funct_[a-zA-Z]*.py")
+        ]+
+            [ "PollerComponent = fn_symantec_dlp.components.dlp_poller:SymantecDLPPollerComponent" ],
         "resilient.circuits.configsection": ["gen_config = fn_symantec_dlp.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_symantec_dlp.util.customize:customization_data"],
         "resilient.circuits.selftest": ["selftest = fn_symantec_dlp.util.selftest:selftest_function"]

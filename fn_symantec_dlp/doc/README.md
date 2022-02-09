@@ -1,7 +1,7 @@
-# **User Guide:** fn_symantec_dlp_v1.0.0
+# **User Guide:** fn_symantec_dlp_v2.0.0
 
 ## Table of Contents
-- [**User Guide:** fn_symantec_dlp_v1.0.0](#user-guide-fnsymantecdlpv100)
+- [**User Guide:** fn_symantec_dlp_v2.0.0](#user-guide-fnsymantecdlpv100)
   - [Table of Contents](#table-of-contents)
   - [Key Features](#key-features)
   - [Poller - Symantec DLP incident Poller](#poller---symantec-dlp-incident-poller)

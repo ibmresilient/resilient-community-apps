@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright © IBM Corporation 2010, 2019
+# Copyright © IBM Corporation 2010, 2022
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation
    test with: resilient-circuits selftest -l fn_symantec_dlp
@@ -9,7 +9,7 @@ import logging
 import traceback
 import datetime
 
-from fn_symantec_dlp.lib.dlp_soap_client import DLPSoapClient
+from fn_symantec_dlp.lib.dlp_rest_client import DLPRestClient
 
 
 log = logging.getLogger(__name__)
@@ -24,16 +24,16 @@ def selftest_function(opts):
     """
     options = opts.get("fn_symantec_dlp", {})
     try:
-        # Ensure the shared class_vars_loaded var is False so the init of DLPSoapClient isin't skipped
-        DLPSoapClient.class_vars_loaded = False
-        # Init the DLPSoapClient, this will try to validate the WSDL
-        soap_client = DLPSoapClient(app_configs=options)
+        # Ensure the shared class_vars_loaded var is False so the init of DLPRestClient isin't skipped
+        DLPRestClient.class_vars_loaded = False
+        # Init the DLPRestClient, this will try to validate the WSDL
+        dlp_rest_client = DLPRestClient(app_configs=options)
 
         # Assert the DLPSoapClient is connected
-        assert soap_client.is_connected
-        # Make the a call to incident_list in the DLPSoapClient.
+        assert dlp_rest_client.is_connected
+        # Make the a call to incident_list in the DLPRestClient.
         # This will validate that the saved report id is provided as well as the authentication pieces.
-        soap_client.incident_list(saved_report_id=options.get("sdlp_savedreportid"), incident_creation_date_later_than=datetime.datetime.now() - datetime.timedelta(
+        dlp_rest_client.incident_list(saved_report_id=options.get("sdlp_savedreportid"), incident_creation_date_later_than=datetime.datetime.now() - datetime.timedelta(
             days=int(options.get("sdlp_incident_creation_date_later_than", 14))))
 
         return {"state": "success"}

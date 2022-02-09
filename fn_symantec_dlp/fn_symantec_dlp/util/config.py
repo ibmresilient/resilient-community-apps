@@ -15,13 +15,10 @@ def config_section_data():
 sdlp_should_poller_run=True
 
 # The URL of the DLP Installation
-sdlp_host=https://<serverip>:<port>
+sdlp_host=<serverip>
 
-# The location of your WSDL file used to construct requests when dealing with the Incident and Reporting API
-sdlp_wsdl=https://<serverip>:<port>/ProtectManager/services/v2011/incidents?wsdl
-
-# The URL of the Incident and Reporting API for your DLP Installation
-sdlp_incident_endpoint=https://<serverip>:<port>/ProtectManager/services/v2011/incidents
+# SentinelOne REST API version
+api_version=v2
 
 # Username for DLP 
 sdlp_username=<SDLP Username>
@@ -29,11 +26,18 @@ sdlp_username=<SDLP Username>
 # Password for DLP
 sdlp_password=<SDLP Password>
 
-# Location of the CA file for DLP, leave Blank or ‘comment out’ for unverified requests
-#sdlp_cafile=./dlp.cer
-
-# Used to set how often the Listener should poll, default is 10 mins (600)
-sdlp_listener_timer=600
+# false|/path/to/certificate
+cafile=
+# Poller interval in seconds, comment out or set to 0 to disable poller
+polling_interval=60
+# Poller lookback time first time, in minutes
+polling_lookback=120000
+# set polling_interval=0 to disable. Otherwise set in seconds
+polling_interval=600
+# polling_lookback in minutes to look back first time poller starts
+polling_lookback=120
+# poller timezone to match Siemplify configuration
+poller_timezone=Etc/GMT
 
 # The Saved Report ID used to query for Incidents, must be set otherwise the integration will fail
 sdlp_savedreportid=0

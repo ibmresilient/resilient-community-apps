@@ -1,10 +1,10 @@
 {
     {%- set comma = joiner(",") -%}
-    "name": "Symantec DLP Incident Id {{incident.incidentId}} escalated from DLP",
+    "name": "Symantec DLP Incident Id {{ incidentId }} escalated from DLP",
     "description": "An incident imported using the Symantec DLP Integration",
     "discovered_date": {%- if incident.get('detection_date', False) -%}{{dt_to_milli_epoch(incident.detection_date)}}{% else %} 0 {%- endif -%},
     "incident_type_ids": [16],
-    "severity_code": "{{incident.severity}}",
+    "severity_code": "{{severityId | string | resilient_substitute('{"1": "High", "2": "Medium", "3": "Low", "4": "Info"}')}}",
     {%- if incident.get('event_date', False) -%} "start_date": {{dt_to_milli_epoch(incident.event_date)}}, {%-endif -%}
     {#  Custom properties for DLP Attributes #}
     "properties": {
