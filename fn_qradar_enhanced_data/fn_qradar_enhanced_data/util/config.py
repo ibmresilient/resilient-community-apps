@@ -20,7 +20,8 @@ qradarpassword=changeme
 qradartoken=changeme
 # Interval to poll QRadar for changes (in minutes)
 # To turn the poller off user value 0
-polling_interval = <POLLING_INTERVAL>
+polling_interval = 120
+poller_lookback = 60
 verify_cert=false|/path/to/cert
 #search_timeout=
 
@@ -35,7 +36,8 @@ qradarpassword=changeme
 qradartoken=changeme
 # Interval to poll QRadar for changes (in minutes)
 # To turn the poller off user value 0
-polling_interval = <POLLING_INTERVAL>
+polling_interval = 120
+poller_lookback = 60
 verify_cert=false|/path/to/cert
 #search_timeout=
 '''
