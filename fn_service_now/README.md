@@ -49,7 +49,7 @@ Bi-directional integration with ServiceNow and IBM Security QRadar SOAR allowing
 
 ## Key Features
 * Bi-directional integration between records in the ServiceNow Incident Table and Incidents and Tasks in the IBM SOAR platform.
-* Bi-directional integration between records in the ServiceNow Security Incident table and Security Incident Response Task table with Incidents and Tasks in the IBM SOAR platform. <!-- TODO check wording here -->
+* Bi-directional integration between records in the ServiceNow Security Incident table and Security Incident Response Task table with Incidents and Tasks in the IBM SOAR platform.
 * Create a SOAR Incident or Task from a ServiceNow Record in the Incident or Security Incident Table.
 * Create a ServiceNow Record in the Incident or Security Incident Table from a SOAR Incident or Task.
 * Sync notes between a related SOAR Incident or Task and a ServiceNow Record.
@@ -61,7 +61,7 @@ Bi-directional integration with ServiceNow and IBM Security QRadar SOAR allowing
 * ServiceNow Instance with ITSM enabled and running `Kingston`, or newer releases
 * The ServiceNow `IBM SOAR App >= v1.0.0` installed on your ServiceNow Instance which you can download from [the ServiceNow Store](http://ibm.biz/get-ibm-resilient-service-now-app)
 * Access to the **Incident Table** in ServiceNow
-* If integrating with ServiceNow Security Incident Table, the Security Incident Response and its dependencies are required. More information [here](https://www.servicenow.com/products/security-incident-response.html).<!-- TODO check wording here -->
+* If integrating with ServiceNow Security Incident Table, `IBM SOAR App >= 2.0.0` and ServiceNow Security Incident Response with its dependencies are required. More information [here](https://www.servicenow.com/products/security-incident-response.html).
 * If IBM SOAR is not publicly accessible (behind firewall) a ServiceNow MID Server is required. See the [Install Guide](./docs/install_guide) for more information
 * IBM SOAR >= `v31.0.0`
 * An App Host >= `v1.0.0` or an Integrations Server running `resilient-circuits >= v31.0.0` with `fn_service_now >= v1.0.0` installed which you can download from our [App Exchange](http://ibm.biz/get-ibm-resilient-service-now-integration)
