@@ -1,18 +1,17 @@
 # IBM Security QRadar SOAR Platform Integration for ServiceNow
 
 ## Table of Contents
-- [App Config Settings](#app-config-settings-app-config)
+- [App Config Settings](#app-config-settings-appconfig)
 - [Functions](#functions)
   - [Function - SNOW: Create Record](#function---snow-create-record)
   - [Function - SNOW: Update Record](#function---snow-update-record)
   - [Function - SNOW: Close Record](#function---snow-close-record)
   - [Function - SNOW: Add Note to Record](#function---snow-add-note-to-record)
   - [Function - SNOW: Add Attachment to Record](#function---snow-add-attachment-to-record)
-  - [Function - SNOW: Lookup sys_id](#function---snow-lookup-sysid)
+  - [Function - SNOW: Lookup sys_id](#function---snow-lookup-sys_id)
   - [Function - SNOW Helper: Update Data Table](#function---snow-helper-update-data-table)
 - [Rules](#rules)
 - [ServiceNow Records Data Table](#servicenow-records)
-  - [Display a Data Table in an Incident](#display-a-data-table-in-an-incident)
 
 ---
 

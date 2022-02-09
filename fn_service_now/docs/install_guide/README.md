@@ -6,7 +6,7 @@
   - [Step 2: *Create a User in ServiceNow and assign it the correct Role*](#step-2-create-a-user-in-servicenow-and-assign-it-the-correct-role)
   - [Step 3: *Create a User on the SOAR Appliance*](#step-3-create-an-api-key-on-the-soar-appliance)
   - [Step 4: *Enter IBM SOAR Configurations in ServiceNow*](#step-4-enter-ibm-soar-configurations)
-  - [Step 5: *Download & Install fn_service_now Integration*](#step-5-download--install-fn-service-now-integration)
+  - [Step 5: *Download & Install fn_service_now Integration*](#step-5-download--install-fn_service_now-integration)
   - [Step 6: *Install and Configure ServiceNow Mid-Server (if needed)*](#step-6-install-and-configure-servicenow-mid-server-if-needed)
   - [Step 7: *Give your ServiceNow users the correct Role*](#step-7-give-your-servicenow-users-the-correct-role)
   - [Step 8: (SIR) Add IBM SOAR tab to Security Incident UI](#step-8-sir-add-ibm-soar-tab-to-security-incident-ui)

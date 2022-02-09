@@ -8,8 +8,8 @@
 - [Pre-Defined ServiceNow Workflows](#pre-defined-servicenow-workflows)
 - [ResilientHelper API](#resilienthelper-api)
   - [`create()`](#creategliderecord-record-string-snrecordid-string-casename-object-options)
-  - [`addNote()`](#addnotestring-resreferenceid-string-notetext-string-noteformat)
-  - [`updateStateInResilient()`](#updatestateinresilientstring-resreferenceid-string-snticketstate-string-snticketstatecolor)
+  - [`addNote()`](#addnotestring-res_reference_id-string-notetext-string-noteformat)
+  - [`updateStateInResilient()`](#updatestateinresilientstring-res_reference_id-string-snticketstate-string-snticketstatecolor)
   - [`getResilientReferenceId()`](#getresilientreferenceidgliderecord-record)
   - [`getResilientReferenceLink()`](#getresilientreferencelinkgliderecord-record)
   - [`getResilientType()`](#getresilienttypegliderecord-record)
@@ -17,7 +17,6 @@
   - [Step 1: *Use Correct Application Scope*](#step-1-use-correct-application-scope)
   - [Step 2: *Create a Copy of Existing RES Workflow*](#step-2-create-a-copy-of-existing-res-workflow)
   - [Step 3: *Modify the Run Script*](#step-3-modify-the-run-script)
-  - [Step 4: *Test Your New Custom Workflow*](#step-4-test-your-new-custom-workflow)
 
 ---
 
