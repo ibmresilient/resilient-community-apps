@@ -319,7 +319,7 @@ The **ResilientHelper API** will help you to create your own ServiceNow `Workflo
 ---
 ## ResilientHelper API
 
-### create(GlideRecord record, String snRecordId, String caseName, Object options)
+### `create(GlideRecord record, String snRecordId, String caseName, Object options)`
 
 * Creates an Incident/Task in IBM SOAR
 * Sets the the following Columns in ServiceNow:
@@ -347,8 +347,9 @@ Returns an object with the following keys:
 | res_reference_type | String | The type of case created in IBM SOAR. Incident/Task |
 | snLink | String | A link to the ServiceNow Record |
 
+---
 
-### addNote(String res_reference_id, String noteText, String noteFormat)
+### `addNote(String res_reference_id, String noteText, String noteFormat)`
 
 * Creates a note in IBM SOAR
 
@@ -362,7 +363,9 @@ Returns an object with the following keys:
 #### Return:
 *Does not return anything*
 
-### updateStateInResilient(String res_reference_id, String snTicketState, String snTicketStateColor)
+---
+
+### `updateStateInResilient(String res_reference_id, String snTicketState, String snTicketStateColor)`
 
 * Updates the `servicenow_status` column in the Data Table in IBM SOAR with the `snTicketState`
 
@@ -376,6 +379,8 @@ Returns an object with the following keys:
 #### Return:
 *Does not return anything*
 
+---
+
 ### `getResilientReferenceId(GlideRecord record)`
 
 * Gets the IBM SOAR Reference ID for a linked record
@@ -388,6 +393,8 @@ Returns an object with the following keys:
 #### Returns:
 *A string containing the Reference ID of the SOAR record*
 
+---
+
 ### `getResilientReferenceLink(GlideRecord record)`
 
 * Gets the IBM SOAR Reference Link to directly access the record in SOAR
@@ -399,6 +406,8 @@ Returns an object with the following keys:
 
 #### Returns:
 *A string containing the URL link of the SOAR record*
+
+---
 
 ### `getResilientType(GlideRecord record)`
 
