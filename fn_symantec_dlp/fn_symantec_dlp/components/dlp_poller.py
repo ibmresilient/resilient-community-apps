@@ -141,7 +141,6 @@ class SymantecDLPPollerComponent(ResilientComponent):
                 soar_case = self.res_common.create_incident(incident_payload)
                 soar_case_id = soar_case.get("id")
 
-                binaries_status = self.sdlp_env.upload_sdlp_binaries(sdlp_incident_id, soar_case_id)
                 # Send ibm_soar_case_id and ibm_soar_case_url custom fields in DLP to then DLP incident
                 # so that it has links back to the SOAR case.
                 host = self.opts.get('host')
