@@ -27,8 +27,6 @@ inputs.qradar_table_name = "qr_flows"
 
 ### Post-Processing Script
 ```python
-
-
 for flow in results.events:
   qradar_event = incident.addRow("qr_flows")
   qradar_event.application = flow.Application
@@ -42,8 +40,7 @@ for flow in results.events:
   qradar_event.source_packets = int(flow.sourcepackets)
   qradar_event.destination_bytes = int(flow.destinationbytes)
   qradar_event.destination_packets = int(flow.destinationpackets)
-   
- 
+
 ```
 
 ---

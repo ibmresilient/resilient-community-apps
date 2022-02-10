@@ -26,7 +26,6 @@ inputs.qradar_label = incident.properties.qradar_destination
 ### Post-Processing Script
 ```python
 link = "<a href=\"https://"+results.qrhost+"/console/ui/offenses/{0}{1}\" target=\"_blank\">{2}</a>"
-
   
 incident.qr_offense_index_type = results.offense.offenseType.name
 incident.qr_offense_index_value = results.offense.offenseSource
@@ -40,6 +39,7 @@ incident.qr_magnitude = link.format(results.offenseid,"",results.offense.magnitu
 incident.qr_credibility = link.format(results.offenseid,"",results.offense.credibility)
 incident.qr_severity = link.format(results.offenseid,"",results.offense.severity)
 incident.qr_relevance = link.format(results.offenseid,"",results.offense.relevance)
+
 ```
 
 ---
