@@ -105,8 +105,8 @@ class RxClient():
         uri = self._endpoints["devices"].format('')
         params = {}
 
-        params["active_from"] = active_from if active_from else None
-        params["active_until"] = active_until if active_until else None
+        params["active_from"] = active_from
+        params["active_until"] = active_until
         params["limit"] = int(limit) if limit else None
         params["offset"] = int(offset) if offset else None
         params["search_type"] = search_type if offset else "any"
@@ -123,8 +123,8 @@ class RxClient():
 
         For more details on api, see https://docs.extrahop.com/8.6/rx360-rest-api/
 
-        :param active_from: (Optional) The beginning timestamp (in millisecs) for the request. Default 0 (int)
-        :param active_until: (Optional) The ending timestamp (in millisecs) for the request. Default 0 (int)
+        :param active_from: (Optional) The beginning timestamp (in millisecs) for the request (int).
+        :param active_until: (Optional) The ending timestamp (in millisecs) for the request (int).
         :param limit(int): (Optional) Limit the number of devices returned to the specified maximum number (int).
         :param offset: (Optional) Skip the specified number of devices (int).
         :param search_filter: Search filter (json str)
@@ -140,10 +140,10 @@ class RxClient():
                 raise ValueError("The search filter is not valid json content: '{}'".format(search_filter))
         if filter_data.get("filter"):
             data["filter"] = filter_data.get("filter")
-        data["active_from"] = active_from if active_from else 0
-        data["active_until"] = active_until if active_until else 0
-        data["limit"] = int(limit) if limit else 0
-        data["offset"] = int(offset) if offset else 0
+        data["active_from"] = active_from
+        data["active_until"] = active_until
+        data["limit"] = int(limit) if limit else None
+        data["offset"] = int(offset) if offset else None
 
         r = self.rc.execute_call_v2("post", uri, headers=self._headers, data=json.dumps(data), verify=self.verify)
 
@@ -320,7 +320,7 @@ class RxClient():
             raise ValueError("Missing 'device_ids' parameter")
 
         # Convert keywords in comma or newline seperated string to a list.
-        device_ids = list(filter(None, re.split(r"\s+|,|\n", device_ids)))
+        device_ids = [int(v) for v in list(filter(None, re.split(r"\s+|,|\n", device_ids)))]
 
         uri = self._endpoints["assign_tag"].format(tag_id)
 
