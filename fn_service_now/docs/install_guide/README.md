@@ -54,6 +54,7 @@
 * Scroll down. Under **Roles**, click **Edit**
 * Give the user the `x_ibmrt_resilient.integrator` role.
  ![screenshot](./screenshots/12.png)
+* **(SIR ONLY)** If integrating with ServiceNow Security Incident Response (SIR) tables, you'll need to add the `sn_si.integration_user` role to the user as well.
 * Click **Save.**
 ---
 
@@ -201,7 +202,6 @@ Once **installed** and **validated:**
  ![screenshot](./screenshots/34.png)
 * Give the user the `x_ibmrt_resilient.user` role
  ![screenshot](./screenshots/35.png)
-* **(SIR ONLY)** If integrating with ServiceNow Security Incident Response (SIR) tables, you'll need to add the `sn_si.integration_user` role to the user as well.
 * Click **Save**
 ---
 
