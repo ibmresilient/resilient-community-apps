@@ -2,16 +2,20 @@
     "version": 2.0,
     "success": True,
     "reason": None,
-    "content": [
-        {
-            "mod_time": 1635771586176,
-            "id": 1,
-            "name": "test_tag_1"},
-        {
-            "mod_time": 1635784783991,
-            "id": 2,
-            "name": "test_tag_2"}
-    ],
+    "content": {
+        "result": [
+            {
+                "mod_time": 1635771586176,
+                "id": 1,
+                "name": "tag_1"
+            },
+            {
+                "mod_time": 1635784783991,
+                "id": 2,
+                "name": "tag_2"
+            }
+        ]
+    },
     "raw": None,
     "inputs": {},
     "metrics": {
