@@ -51,6 +51,14 @@ class FunctionComponent(ResilientComponent):
                 "dt_utils_search_value": get_function_input(kwargs, "dt_utils_search_value", optional=True),  # text (optional)
             }
 
+            # if dt_utils_row_id == 0, use row_id
+            if (dt_utils_row_id == 0):
+                if not row_id:
+                    raise ValueError("Run the workflow from a datatable to get the current row_id.")
+
+                log.info("Using current row_id: %s", row_id)
+                inputs["dt_utils_row_id"] = row_id
+            
             # Ensure correct search inputs are defined correctly
             valid_search_inputs = validate_search_inputs(row_id=inputs["dt_utils_row_id"],
                                                          search_column=inputs["dt_utils_search_column"],
