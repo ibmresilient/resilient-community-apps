@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
-
+import os
 import logging
 import base64
+import shutil
+import traceback
 
 from .jinja_common import JinjaEnvironment
-from resilient_lib import validate_fields
+from resilient_lib import validate_fields, write_to_tmp_file
 
 LOG = logging.getLogger(__name__)
 
@@ -120,6 +122,14 @@ class SymantecDLPCommon():
     def get_sdlp_components(self, incident_id):
 
         url = u"{0}/incidents/{1}/components".format(self.base_url, incident_id)
+
+        response = self.rc.execute("GET", url, headers=self.headers,
+                                    verify=self.verify, proxies=self.rc.get_proxies())
+        r_json = response.json()
+        return r_json
+
+    def get_sdlp_component_data(self, incident_id, component_id):
+        url = u"{0}/incidents/{1}/components/{2}".format(self.base_url, incident_id, component_id)
 
         response = self.rc.execute("GET", url, headers=self.headers,
                                     verify=self.verify, proxies=self.rc.get_proxies())
@@ -266,6 +276,44 @@ class SymantecDLPCommon():
                                     verify=self.verify, proxies=self.rc.get_proxies())
         r_json = response.json()
         return r_json
+
+    def upload_sdlp_binaries(self, sdlp_incident_id, soar_case_id):
+        """upload_dlp_binaries takes an incident and a resilient incident ID and then attempts to query DLP for any incident_binaries
+        Any returning binaries are then sent to Resilient as an Artifact, retaining its name and extension type.
+        
+        :param incident: DLP Incident
+        :type incident: Zeep object
+        :param res_incident_id: A Resilient Incident ID to send the Artifacts too 
+        :type res_incident_id: int
+        """
+        # Upload remaining parts such as the Attachments
+        components = self.get_sdlp_components(sdlp_incident_id)
+
+        for component in components:
+            if component.get('componentType') != 'Attachment':
+                continue
+            component_id = component.get('componentId')
+            component_data = self.get_sdlp_component_data(sdlp_incident_id, component_id)
+            try:
+                path_tmp_file, path_tmp_dir = write_to_tmp_file(component_data.get('content'))
+                    
+                artifact_uri = "/incidents/{}/artifacts/files".format(soar_case_id)
+                self.res_rest_client.post_artifact_file(artifact_uri,
+                                                        self.default_artifact_type_id,
+                                                        path_tmp_file,
+                                                        value=component.get('name'),
+                                                        description="Binary File imported from Symantec DLP")
+
+            except Exception as upload_ex:
+                LOG.debug(traceback.format_exc())
+                # Log the Connection error to the user
+                LOG.error(u"Problem: %s", repr(upload_ex))
+                LOG.error(u"[Symantec DLP] Encountered an exception when uploading a Binary to Resilient.")
+    
+            finally:
+                # # Clean up the tmp_file 
+                if path_tmp_dir and os.path.isdir(path_tmp_dir):
+                    shutil.rmtree(path_tmp_dir)
 
     def get_sdlp_incident_payload(self, incident_id):
         """[Create the incident payload for creating a SOAR case from DLP incident data.]

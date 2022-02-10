@@ -139,18 +139,20 @@ class SymantecDLPPollerComponent(ResilientComponent):
                                                     DEFAULT_CREATE_DLP_CASE,
                                                     sdlp_incident_payload)
                 soar_case = self.res_common.create_incident(incident_payload)
-                
+                soar_case_id = soar_case.get("id")
+
+                binaries_status = self.sdlp_env.upload_sdlp_binaries(sdlp_incident_id, soar_case_id)
                 # Send ibm_soar_case_id and ibm_soar_case_url custom fields in DLP to then DLP incident
                 # so that it has links back to the SOAR case.
                 host = self.opts.get('host')
                 port = self.opts.get('port')
-                soar_case_id = soar_case.get("id")
+
                 soar_case_url = build_incident_url(build_resilient_url(host, port), soar_case_id)
                 status = self.sdlp_env.patch_sdlp_incident_custom_attribute(sdlp_incident_id,
                                                                             soar_case_id,
                                                                             soar_case_url)
 
-                
+
                 LOG.info("IBM SOAR case created %s for DLP incident %s", soar_case_id, sdlp_incident_id)
         # get the list of Symantec DLP cases linked to SOAR to check for closed statuses
         """

@@ -28,14 +28,13 @@ inputs.sdlp_incident_id = incident.properties.sdlp_incident_id
 inputs = results.get("inputs")
 sdlp_incident_id = inputs.get("sdlp_incident_id")
 content = results.get("content")
-data = content.get("data")
 
 header = u"Symantec DLP Incident Id: {0} Details:".format(sdlp_incident_id)
 
 json_note = {
               "version": "1.1",
               "header": header, 
-              "json": data,
+              "json": content,
               "sort": False
             }
 

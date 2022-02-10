@@ -59,7 +59,7 @@ from java.util import Date
 
 # Prepare the payload which will be sent to DLP as an update request
 payload = {
-"note": u"Note Sent via Resilient Integration with DLP. [{}]{}".format(Date(), rule.properties.sdlp_note_to_be_sent or "Default Note from Resilient"),
+"note": u"Created by IBM SOAR. [{}]{}".format(Date(), rule.properties.sdlp_note_to_be_sent or "Default Note from IBM SOAR"),
 "incident_id": incident.properties.sdlp_incident_id
 }
 
