@@ -24,6 +24,7 @@ class FunctionComponent(AppFunctionComponent):
         Function: Upload the Symantec DLP Component binary files and add as artifact files.
         Inputs:
             -   fn_inputs.sdlp_incident_id
+            -   fn_inputs.incident_id
         """
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))

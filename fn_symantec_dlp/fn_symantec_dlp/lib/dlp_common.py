@@ -234,6 +234,20 @@ class SymantecDLPCommon():
                 notes.append(note)
         return notes
 
+    def send_note_to_sdlp(self, incident_id, note_text):
+        url = u"{0}/incidents".format(self.base_url, incident_id)
+        update_json = {
+                        "incidentIds":[ incident_id ],
+                        "incidentNotes":[{
+                            "dateTime":"2022-02-10T20:49:58.47",
+                            "note": note_text
+                        }]
+        }
+        response = self.rc.execute("PATCH", url, headers=self.headers, json=update_json,
+                                    verify=self.verify, proxies=self.rc.get_proxies())
+        r_json = response.json()
+        return r_json
+
     def get_custom_attribute_index(self, editable_attributes, custom_attribute_name):
 
         index = 0
