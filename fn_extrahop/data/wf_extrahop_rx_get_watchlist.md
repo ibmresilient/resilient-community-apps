@@ -46,16 +46,14 @@ def main():
                 newrow.query_execution_date = QUERY_EXECUTION_DATE
                 for f1 in DATA_TBL_FIELDS:
                   f2 = f1
-                  if f1.startswith("dev_"):
-                      f2 = f1.split('_', 1)[1]
-                if dev[f1] is None:
-                    newrow[f1] = dev[f2]
-                if isinstance(dev[f1], list):
-                    newrow[f1] = "{}".format(", ".join(dev[f2]))
-                elif isinstance(dev[f1], bool):
-                    newrow[f1] = str(dev[f2])
-                else:
-                    newrow[f1] = "{}".format(dev[f2])
+                  if dev[f1] is None:
+                      newrow[f1] = dev[f2]
+                  if isinstance(dev[f1], list):
+                      newrow[f1] = "{}".format(", ".join(dev[f2]))
+                  elif isinstance(dev[f1], bool):
+                      newrow[f1] = str(dev[f2])
+                  else:
+                      newrow[f1] = "{}".format(dev[f2])
             note_text += u"<br>The data table <b>{0}</b> has been updated".format("Extrahop Detections")
 
     else:

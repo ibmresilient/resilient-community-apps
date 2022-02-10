@@ -18,11 +18,16 @@
 
 ### Pre-Processing Script
 ```python
+search_devices_content = workflow.properties.search_devices_results.content
 action = rule.properties.extrahop_watchlist_action
-if action == "add":
-    inputs.extrahop_assign = artifact.value
-elif action == "remove":
-    inputs.extrahop_unassign = artifact.value
+devs = search_devices_content.result
+if devs:
+    dev_id = str(devs.pop()["id"])
+    if action == "add":
+        inputs.extrahop_assign = dev_id
+    elif action == "remove":
+        inputs.extrahop_unassign = dev_id
+
 ```
 
 ### Post-Processing Script
@@ -58,6 +63,70 @@ def main():
 
 main()
 
+```
+
+---
+
+## Function - Extrahop revealx search devices
+
+### API Name
+`funct_extrahop_rx_search_devices`
+
+### Output Name
+`search_devices_results`
+
+### Message Destination
+`extrahop`
+
+### Pre-Processing Script
+```python
+ip = artifact.value
+search_filter = {
+  "filter": {
+    "field": "ipaddr",
+    "operand": str(ip),
+    "operator": "="
+  }
+}
+inputs.extrahop_search_filter = str(search_filter).replace("'", '"')
+```
+
+### Post-Processing Script
+```python
+##  ExtraHop - wf_extrahop_rx_search_devices post processing script ##
+#  Globals
+FN_NAME = "funct_extrahop_rx_search_devices"
+WF_NAME = "Example: Extrahop revealx update watchlist"
+CONTENT = results.content
+INPUTS = results.inputs
+QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
+# Display subset of fields
+DATA_TABLE = "extrahop_devices"
+DATA_TBL_FIELDS = ["display_name", "devs_description", "default_name", "dns_name", "ipaddr4", "ipaddr6", "macaddr",
+                   "role", "vendor", "devs_id", "extrahop_id", "activity"]
+# Processing
+def main():
+    note_text = u''
+    if CONTENT:
+        devs = CONTENT.result
+        if devs:
+            if len(devs) > 1:
+                note_text += u"ExtraHop Integration: Workflow: <b>{0}</b> : There were too many results <b>{1}</b> returned " \
+                    u"while attempting to search for a device to add to the watchlist " \
+                    u"for Resilient function <b>{2}</b>".format(WF_NAME, len(devs), FN_NAME)
+            else:
+                workflow.addProperty("device_exists", {})
+        else:
+            note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> device returned while attempting " \
+                  u"to search for a device to add to the watchlist.".format(WF_NAME, FN_NAME)
+    else:
+        note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
+                     u"to search for a device to add to the watchlist." \
+            .format(WF_NAME, FN_NAME)
+
+    incident.addNote(helper.createRichText(note_text))
+
+main()
 ```
 
 ---

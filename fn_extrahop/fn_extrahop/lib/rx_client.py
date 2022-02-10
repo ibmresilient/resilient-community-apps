@@ -356,12 +356,12 @@ class RxClient():
         data = {}
 
         if assign is not None:
-            assign_ids = list(filter(None, re.split(r"\s+|,|\n", assign)))
+            assign_ids = [int(v) for v in list(filter(None, re.split(r"\s+|,|\n", assign)))]
             data = {"assign": assign_ids}
 
         if unassign is not None:
-            unassign_ids = list(filter(None, re.split(r"\s+|,|\n", assign)))
-            data = {"assign": unassign_ids}
+            unassign_ids = [int(v) for v in list(filter(None, re.split(r"\s+|,|\n", unassign)))]
+            data = {"unassign": unassign_ids}
 
         r = self.rc.execute_call_v2("post", uri, headers=self._headers, data=json.dumps(data), verify=self.verify)
 
