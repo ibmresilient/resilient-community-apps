@@ -46,7 +46,7 @@ class FunctionComponent(AppFunctionComponent):
         rx_cli = RxClient(self.opts, self.options)
         response = rx_cli.update_watchlist(**params)
 
-        if response.status_code == 201:
+        if response.status_code in [200, 201, 204]:
             # Action succeeded with empty response message
             result = "success"
         else:
