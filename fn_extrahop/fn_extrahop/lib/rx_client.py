@@ -94,8 +94,8 @@ class RxClient():
 
         :param search_type: Search type (str)
         :param device_id: device_id (str)
-        :param active_from: (Optional) The beginning timestamp (in millisecs) for the request. Default 0 (int)
-        :param active_until: (Optional) The ending timestamp (in millisecs) for the request. Default 0 (int)
+        :param active_from: (Optional) The beginning timestamp (in millisecs) for the request.
+        :param active_until: (Optional) The ending timestamp (in millisecs) for the request.
         :param limit(int): (Optional) Limit the number of devices returned to the specified maximum number (int).
         :param offset: (Optional) Skip the specified number of devices (int).
         :return Result in json format.
@@ -105,10 +105,10 @@ class RxClient():
         uri = self._endpoints["devices"].format('')
         params = {}
 
-        params["active_from"] = active_from if active_from else 0
-        params["active_until"] = active_until if active_until else 0
-        params["limit"] = int(limit) if limit else 0
-        params["offset"] = int(offset) if offset else 0
+        params["active_from"] = active_from if active_from else None
+        params["active_until"] = active_until if active_until else None
+        params["limit"] = int(limit) if limit else None
+        params["offset"] = int(offset) if offset else None
         params["search_type"] = search_type if offset else "any"
 
         if device_id:

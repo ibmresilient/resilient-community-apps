@@ -44,9 +44,11 @@ FN_NAME = "funct_extrahop_rx_search_devices"
 WF_NAME = "Example: Extrahop revealx search devices"
 CONTENT = results.content
 INPUTS = results.inputs
+QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
 # Display subset of fields
-DATA_TBL_FIELDS = ["display_name", "dev_description", "default_name", "dns_name", "ipaddr4", "ipaddr6", "macaddr",
-                   "role", "vendor", "dev_id", "extrahop_id", "activity"]
+DATA_TABLE = "extrahop_devices"
+DATA_TBL_FIELDS = ["display_name", "devs_description", "default_name", "dns_name", "ipaddr4", "ipaddr6", "macaddr",
+                   "role", "vendor", "devs_id", "extrahop_id", "activity"]
 # Processing
 def main():
     note_text = u''
@@ -56,20 +58,20 @@ def main():
                     u"function <b>{2}</b>.".format(WF_NAME, len(devs), FN_NAME)
         if devs:
             for dev in devs:
-                newrow = incident.addRow("extrahops_devices")
+                newrow = incident.addRow(DATA_TABLE)
                 newrow.query_execution_date = QUERY_EXECUTION_DATE
                 for f1 in DATA_TBL_FIELDS:
                     f2 = f1
-                    if f1.startswith("dev_"):
+                    if f1.startswith("devs_"):
                         f2 = f1.split('_', 1)[1]
-                if dev[f1] is None:
-                    newrow[f1] = dev[f2]
-                if isinstance(dev[f1], list):
-                    newrow[f1] = "{}".format(", ".join(dev[f2]))
-                elif isinstance(dev[f1], bool):
-                    newrow[f1] = str(dev[f2])
-                else:
-                    newrow[f1] = "{}".format(dev[f2])
+                    if dev[f1] is None:
+                        newrow[f1] = dev[f2]
+                    if isinstance(dev[f1], list):
+                        newrow[f1] = "{}".format(", ".join(dev[f2]))
+                    elif isinstance(dev[f1], bool):
+                        newrow[f1] = str(dev[f2])
+                    else:
+                        newrow[f1] = "{}".format(dev[f2])
             note_text += u"<br>The data table <b>{0}</b> has been updated".format("Extrahop Detections")
 
     else:
