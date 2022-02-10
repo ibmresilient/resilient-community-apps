@@ -30,7 +30,7 @@ class FunctionComponent(AppFunctionComponent):
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
 
         sdlp_update_payload = fn_inputs.sdlp_update_payload
-        sdlp_client = SymantecDLPCommon(self.rc, self.app_configs)
+        sdlp_client = SymantecDLPCommon(self.rc, self.options)
 
         update_results = sdlp_client.update_sdlp_incident(sdlp_update_payload)
 

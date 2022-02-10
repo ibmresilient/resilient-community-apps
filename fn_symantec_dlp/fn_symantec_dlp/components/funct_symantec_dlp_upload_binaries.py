@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+# pragma pylint: disable=unused-argument, no-self-use
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 
 """AppFunction implementation"""
 
@@ -27,9 +29,10 @@ class FunctionComponent(AppFunctionComponent):
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
 
         sdlp_incident_id = fn_inputs.sdlp_incident_id
-        sdlp_client = SymantecDLPCommon(self.rc, self.app_configs)
+        soar_case_id = fn_inputs.incident_id
+        sdlp_client = SymantecDLPCommon(self.rc, self.options)
 
-        update_results = sdlp_client.upload_sdlp_binaries(sdlp_incident_id)
+        update_results = sdlp_client.upload_sdlp_binaries(sdlp_incident_id, soar_case_id)
 
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
 

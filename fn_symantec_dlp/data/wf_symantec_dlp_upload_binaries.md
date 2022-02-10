@@ -18,7 +18,8 @@
 
 ### Pre-Processing Script
 ```python
-inputs.sdlp_incident_id = rule.properties.sdlp_incident_id
+inputs.sdlp_incident_id = incident.properties.sdlp_incident_id
+inputs.incident_id = incident.id
 ```
 
 ### Post-Processing Script
