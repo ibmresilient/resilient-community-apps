@@ -20,5 +20,10 @@ sn_table_name=incident
 # Username + Password of ServiceNow Integrator user who has the the "x_ibmrt_resilient.integrator" role
 sn_username=<ServiceNow Username>
 sn_password=<ServiceNow Password>
+
+# (ONLY FOR CP4S with custom endpoint) Enter the custom cases-rest prefix of your CP4S instance
+# ex: if host is my-cases-rest.cp4s.ibmsecurity.com, cp4s_cases_prefix=my-cases-rest
+# If you don't have a custom cases rest endpoint there is no need to use this config value
+#cp4s_cases_prefix=<CP4S Cases Rest Custom Prefix>
 """
     return config_data
