@@ -16,7 +16,7 @@
 -->
 
 ### v2.0.0
-* Added support for ServiceNow Security Incident Response (SIR)
+* Support added for ServiceNow Security Incident Response (SIR)
 * Support added for API Key authentication from ServiceNow to IBM SOAR
 * AppHost support for proxies
 * Verified on ServiceNow Rome release
@@ -43,13 +43,13 @@
 ---
 
 ## Overview
-Bi-directional integration with ServiceNow and IBM Security QRadar SOAR allowing SEC Ops Professionals to communicate security incidents in realtime. This integration allows for bi-directional synchronization of Incidents, Tasks, Notes and Attachments enabling the security and operations teams to be aligned during critical security events.
+Bi-directional app with ServiceNow and IBM Security QRadar SOAR allows SEC Ops Professionals to communicate security incidents in realtime. The app allows for bi-directional synchronization of Incidents/Cases, Tasks, Notes and Attachments, which enables the security and operations teams to be aligned during critical security events.
 
 ---
 
 ## Key Features
-* Bi-directional integration between records in the ServiceNow Incident Table and Incidents and Tasks in the IBM SOAR platform.
-* Bi-directional integration between records in the ServiceNow Security Incident table and Security Incident Response Task table with Incidents and Tasks in the IBM SOAR platform.
+* Bi-directional app between records in the ServiceNow Incident Table and Incidents and Tasks in the SOAR platform.
+* Bi-directional app between records in the ServiceNow Security Incident table and Security Incident Response Task table with Incidents and Tasks in the SOAR platform.
 * Create a SOAR Incident or Task from a ServiceNow Record in the Incident or Security Incident Table.
 * Create a ServiceNow Record in the Incident or Security Incident Table from a SOAR Incident or Task.
 * Sync notes between a related SOAR Incident or Task and a ServiceNow Record.
@@ -59,24 +59,26 @@ Bi-directional integration with ServiceNow and IBM Security QRadar SOAR allowing
 
 ## Requirements
 * ServiceNow Instance with ITSM enabled and running `Kingston`, or newer releases
-* The ServiceNow `IBM SOAR App >= v1.0.0` installed on your ServiceNow Instance which you can download from [the ServiceNow Store](http://ibm.biz/get-ibm-resilient-service-now-app)
 * Access to the **Incident Table** in ServiceNow
-* If integrating with ServiceNow Security Incident Table, `IBM SOAR App >= 2.0.0` and ServiceNow Security Incident Response with its dependencies are required. More information [here](https://www.servicenow.com/products/security-incident-response.html).
-* If IBM SOAR is not publicly accessible (behind firewall) a ServiceNow MID Server is required. See the [Install Guide](./docs/install_guide) for more information
-* IBM SOAR >= `v31.0.0`
-* An App Host >= `v1.0.0` or an Integrations Server running `resilient-circuits >= v31.0.0` with `fn_service_now >= v1.0.0` installed which you can download from our [App Exchange](http://ibm.biz/get-ibm-resilient-service-now-integration)
+* ServiceNow `IBM SOAR App >= v1.0.0` installed on your ServiceNow Instance which you can download from [the ServiceNow Store](http://ibm.biz/get-ibm-resilient-service-now-app)
+  * If integrating with ServiceNow Security Incident Table, `IBM SOAR App >= 2.0.0` and ServiceNow Security Incident Response with its dependencies are required. More information [here](https://www.servicenow.com/products/security-incident-response.html).
+* If IBM SOAR is not publicly accessible (behind a firewall), a ServiceNow MID Server is required. See the [Install Guide](./docs/install_guide) for more information
+* IBM Cloud Pak for Security `>= 1.9.0` *or* IBM SOAR `>= v31.0.0`
+* App Host `>= v1.0.0` (recommended) *or* an Integrations Server running `resilient-circuits >= v31.0.0`.
+  - `fn_service_now >= v1.0.0` installed, which you can download from our [App Exchange](http://ibm.biz/get-ibm-resilient-service-now-integration)
+  - If integrating with SIR, `fn_service_now >= v2.0.0` is required
 
 ---
 
 ## Install
-* Follow our [Install Guide](./docs/install_guide) to get up and running. 
+Follow our [Install Guide](./docs/install_guide) to get up and running. 
 
 ---
 
 ## Customize
-* Out-of-the-box we meet a lot of use cases, however to adapt the Integration to suit your Incident Response Workflow follow our Customize guides:
-  - [Customize ServiceNow App Guide](./docs/customize_snow_guide)
-  - [Customize SOAR Functions Guide](./docs/customize_resilient_guide)
+The default configuration satisfies the requirements for a number of use cases. To adapt the app for your specific requirements, see these customization guides:
+- [Customize ServiceNow App Guide](./docs/customize_snow_guide)
+- [Customize SOAR Functions Guide](./docs/customize_resilient_guide)
 
 ---
 

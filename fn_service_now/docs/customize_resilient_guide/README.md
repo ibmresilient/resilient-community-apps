@@ -1,4 +1,4 @@
-# IBM Security QRadar SOAR Platform Integration for ServiceNow
+# IBM Security QRadar SOAR Platform App for ServiceNow
 
 ## Table of Contents
 - [App Config Settings](#app-config-settings-appconfig)
@@ -16,15 +16,15 @@
 ---
 
 # Overview:
-This package contains 8 Functions, 12 Workflows, 12 Rules and 1 Data Table that, when used along side our ServiceNow App help you integrate with your ServiceNow Instance
+This package contains 8 Functions, 12 Workflows, 12 Rules and 1 Data Table that, when used along side our ServiceNow App help you integrate with your ServiceNow Instance.
 
-* [SNOW: Create Record](#function---snow-create-record) gives you the ability to create a Record in ServiceNow from a SOAR Incident or Task
-* [SNOW: Update Record](#function---snow-update-record) allows you to update multiple column fields in a ServiceNow Record
-* [SNOW: Close Record](#function---snow-close-record) lets you close a related Record in ServiceNow from a SOAR Incident or Task
-* [SNOW: Add Note to Record](#function---snow-add-note-to-record) allows you to send a SOAR Note to a ServiceNow Record as a `Work Note` or `Additional Comment`
-* [SNOW: Add Attachment to Record](#function---snow-add-attachment-to-record) gives you the ability to send a SOAR Attachment to a ServiceNow Record
-* [SNOW: Lookup sys_id](#function---snow-lookup-sysid) queries your ServiceNow Instance for a Record and returns the `sys_id` of that Record
-* [SNOW Helper: Update Data Table](#function---snow-helper-update-data-table) helper function that updates the ServiceNow Records Data Table status
+* [SNOW: Create Record](#function---snow-create-record) gives you the ability to create a Record in ServiceNow from a SOAR Case/Incident or Task.
+* [SNOW: Update Record](#function---snow-update-record) allows you to update multiple column fields in a ServiceNow Record.
+* [SNOW: Close Record](#function---snow-close-record) lets you close a related Record in ServiceNow from a SOAR Case/Incident or Task.
+* [SNOW: Add Note to Record](#function---snow-add-note-to-record) allows you to send a SOAR Note to a ServiceNow Record as a `Work Note` or `Additional Comment`.
+* [SNOW: Add Attachment to Record](#function---snow-add-attachment-to-record) gives you the ability to send a SOAR Attachment to a ServiceNow Record.
+* [SNOW: Lookup sys_id](#function---snow-lookup-sysid) queries your ServiceNow Instance for a Record and returns the `sys_id` of that Record.
+* [SNOW Helper: Update Data Table](#function---snow-helper-update-data-table) helper function that updates the ServiceNow Records Data Table status.
 
 ---
 
@@ -53,7 +53,7 @@ sn_password=MyPassword
  ![screenshot](./screenshots/1.png)
 
 ## Function - SNOW: Create Record
-Uses the `/create` custom endpoint in ServiceNow to create a ServiceNow Record from an IBM SOAR Incident or Task.
+Uses the `/create` custom endpoint in ServiceNow to create a ServiceNow Record from an IBM SOAR Case/Incident or Task.
 
  ![screenshot](./screenshots/2.png)
 
@@ -62,7 +62,7 @@ Uses the `/create` custom endpoint in ServiceNow to create a ServiceNow Record f
 
 | Input Name | Type | Required | Example | Info |
 | ---------- | :--: | :-------:| ------- | ---- |
-| `incident_id` | `Number` | Yes | `2105` | ID of the SOAR Incident |
+| `incident_id` | `Number` | Yes | `2105` | ID of the SOAR Case/Incident |
 | `task_id` | `Number` | No | `None` | ID of the SOAR Task |
 | `sn_init_work_note` | `String` | No | `"This Incident originated from our Cyber Security Team using the IBM SOAR platform"` | Initial Work Note to be added to the new ServiceNow Record |
 | `sn_optional_fields` | `JSON String` | No | `'{"assignment_group": "IT Security"}'` | An extensible JSON String of the field names and values to set in the new ServiceNow Record |
@@ -422,7 +422,7 @@ Uses the `/close_record` custom endpoint in ServiceNow to change the state of a 
 | `sn_close_work_note` | `String` | Yes | `"This record's state has be changed to 'Resolved' by IBM SOAR"`  | If defined this text is added as a Work Note to the ServiceNow Record |
 
 >**NOTE:** 
-> * To see your record_state and close_codes value in ServiceNow go to **System Definition** > **Dictionary** > **Table Name** > **Incident** > **Column Name** > **incident state/close_code** and you will see their label and values.
+> * To see your record_state and close_codes value in ServiceNow go to **System Definition** > **Dictionary** > **Table Name** > **Incident** > **Column Name** > **incident state/close_code** and see their label and values.
 > * It is the value that we send from SOAR to ServiceNow.
 >
 > **Record State:**
@@ -654,7 +654,7 @@ note.text = u"<b>Sent to ServiceNow at {0}</b><br>{1}".format(dt_now, unicode(no
 ---
 
 ## Function - SNOW: Add Attachment to Record
-Uses the `/add` custom endpoint in ServiceNow to add a SOAR Attachment to a ServiceNow Record
+Uses the `/add` custom endpoint in ServiceNow to add a SOAR Attachment to a ServiceNow Record.
 
  ![screenshot](./screenshots/7.png)
 
@@ -749,8 +749,8 @@ if results.success:
 ---
 
 ## Function - SNOW: Lookup sys_id
-* Gets the `sys_id` of a ServiceNow Record
-* Used when creating a ServiceNow Record to get the `sys_id` of the `assignment_group` to assign the new Record to
+* Gets the `sys_id` of a ServiceNow Record.
+* Used when creating a ServiceNow Record to get the `sys_id` of the `assignment_group` to assign the new Record to.
 
  ![screenshot](./screenshots/2.png)
 

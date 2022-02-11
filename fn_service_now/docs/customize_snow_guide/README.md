@@ -1,6 +1,6 @@
-# IBM Security QRadar SOAR Platform Integration for ServiceNow - Customization Guide
+# IBM Security QRadar SOAR Platform App for ServiceNow - Customization Guide
 
-*This guide will show you how to adapt the Integration to suit your Incident Response Workflow*
+*This guide shows how to adapt the App to suit your Incident Response Workflow*
 
 - [Prerequisites](#prerequisites)
 - [Architectural Diagram](#architectural-diagram)
@@ -21,13 +21,13 @@
 ---
 
 ## Prerequisites 
-* SOAR Appliance updated to at least `v31.0.0`
-* An Integrations Server setup with `resilient-circuits >= 31.0.0` installed
-* All steps in the **[Installation Guide](../install_guide)** complete
-* ServiceNow Instance with ITSM enabled and running a `Kingston` or later release (last updated on `Rome`)
-* ServiceNow user with an `admin` role
-* A basic understanding of **IBM SOAR Workflows**
-* A basic understanding of **ServiceNow Workflows**
+* SOAR Platform updated to at least `v31.0.0` or Cloud Pak for Security running at least `v1.9.0`.
+* App Host `>= 1.6.0` or an Integration Server setup with `resilient-circuits >= 31.0.0` installed.
+* All steps in the **[Installation Guide](../install_guide)** complete.
+* ServiceNow Instance with ITSM enabled and running a `Kingston` or later release (last updated on `Rome`).
+* ServiceNow user with an `admin` role.
+* A basic understanding of **IBM SOAR Workflows**.
+* A basic understanding of **ServiceNow Workflows**.
 ---
 
 ## Architectural Diagram
@@ -35,9 +35,9 @@
 
 ---
 ## Overview
-When this Integration is installed, on your ServiceNow instance, you will have access to the **ResilientHelper** class in any ServiceNow `Workflow`, `UI Action` or `Script Include`.
+When this App is installed, on your ServiceNow instance, you have access to the **ResilientHelper** class in any ServiceNow `Workflow`, `UI Action` or `Script Include`.
 
-From the architectural diagram above, within ServiceNow, any IBM SOAR action must start with a ServiceNow `Workflow`. ServiceNow `Workflows` are invoked from `UI Actions` or `Business Rules`.
+From the architectural diagram above, within ServiceNow, any SOAR action must start with a ServiceNow `Workflow`. ServiceNow `Workflows` are invoked from `UI Actions` or `Business Rules`.
 
 This app comes with **4 pre-defined ServiceNow Workflows:**
 1. RES_WF_CreateIncident
@@ -46,13 +46,13 @@ This app comes with **4 pre-defined ServiceNow Workflows:**
 4. RES_WF_AddWorkNote
 5. RES_WF_UpdateState
 
-The **ResilientHelper API** will help you to create your own ServiceNow `Workflows` that use the **ResilientHelper** class to call IBM SOAR Actions
+The **ResilientHelper API** helps create your own ServiceNow `Workflows` that use the **ResilientHelper** class to call SOAR Actions.
 
 ---
 
 ## Pre-Defined ServiceNow Workflows
 * Each of the installed 'out-of-the-box' `Workflows` contain a `Run Script`
-* It is in that `Run Script` where we use the **ResilientHelper** class to invoke IBM SOAR Actions
+* It is in that `Run Script` where we use the **ResilientHelper** class to invoke SOAR Actions
 * Following this is the code for each **Run Script** of the pre-defined workflows
 * Use this code for guidance along with the **[ResilientHelper API](#resilienthelper-api)** (below) when creating your own Custom Workflows
 
@@ -323,20 +323,20 @@ The **ResilientHelper API** will help you to create your own ServiceNow `Workflo
 
 ### `create(GlideRecord record, String snRecordId, String caseName, Object options)`
 
-* Creates an Incident/Task in IBM SOAR
+* Creates an Incident/Task in SOAR.
 * Sets the the following Columns in ServiceNow:
-  * `x_ibmrt_resilient_ibm_resilient_reference_id` (INC) OR `x_ibmrt_resilient_ibm_soar_reference_id` (SIR)
-  * `x_ibmrt_resilient_ibm_resilient_type` (INC) OR `x_ibmrt_resilient_ibm_soar_type` (SIR)
-  * `x_ibmrt_resilient_ibm_resilient_reference_link` (INC) OR `x_ibmrt_resilient_ibm_soar_reference_link` (SIR)
-* Adds a new row to the Data Table in IBM SOAR
+  * `x_ibmrt_resilient_ibm_resilient_reference_id` (INC) OR `x_ibmrt_resilient_ibm_soar_reference_id` (SIR).
+  * `x_ibmrt_resilient_ibm_resilient_type` (INC) OR `x_ibmrt_resilient_ibm_soar_type` (SIR).
+  * `x_ibmrt_resilient_ibm_resilient_reference_link` (INC) OR `x_ibmrt_resilient_ibm_soar_reference_link` (SIR).
+* Adds a new row to the Data Table in SOAR.
 
 #### Parameters:
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | record | GlideRecord | The current ServiceNow record |
 | snRecordId | String | Is the ID of the record, unique to its table. E.g. 'INC123456' |
-| caseName | String | The name of the Incident/Task to create in IBM SOAR |
-| options | Object | There are 3 valid options that are all optional: `incidentId`: a String, if defined will create a Task in SOAR. `initSnNote`: a String, if defined will add it as a Work Note to the ServiceNow record. `optionalFields`: an Object, if defined will take each key/value pair and will set those fields in SOAR when creating the Incident/Task |
+| caseName | String | The name of the Incident/Task to create in SOAR |
+| options | Object | There are 3 valid options that are all optional: `incidentId`: a String, if defined creates a Task in SOAR. `initSnNote`: a String, if defined adds it as a Work Note to the ServiceNow record. `optionalFields`: an Object, if defined takes each key/value pair and sets those fields in SOAR when creating the Incident/Task |
 
 
 #### Return:
@@ -344,16 +344,16 @@ Returns an object with the following keys:
 
 | Key | Type | Description |
 | --- | ---- | ----------- |
-| res_reference_id | String | Unique ID relative to the Incident/Task created in IBM SOAR. E.g: RES-1234-100001 |
-| res_reference_link | String | A link to the Incident/Task in IBM SOAR |
-| res_reference_type | String | The type of case created in IBM SOAR. Incident/Task |
+| res_reference_id | String | Unique ID relative to the Incident/Task created in SOAR. E.g: RES-1234-100001 |
+| res_reference_link | String | A link to the Incident/Task in SOAR |
+| res_reference_type | String | The type of case created in SOAR. Incident/Task |
 | snLink | String | A link to the ServiceNow Record |
 
 ---
 
 ### `addNote(String res_reference_id, String noteText, String noteFormat)`
 
-* Creates a note in IBM SOAR
+* Creates a note in SOAR.
 
 #### Parameters:
 | Name | Type | Description |
@@ -363,13 +363,13 @@ Returns an object with the following keys:
 | noteFormat | String | Format of the note to create. Can be `text`/`html`. Use `html` if you want to create a RichText note in IBM SOAR |
 
 #### Return:
-*Does not return anything*
+*Does not return anything*.
 
 ---
 
 ### `updateStateInResilient(String res_reference_id, String snTicketState, String snTicketStateColor)`
 
-* Updates the `servicenow_status` column in the Data Table in IBM SOAR with the `snTicketState`
+* Updates the `servicenow_status` column in the Data Table in IBM SOAR with the `snTicketState`.
 
 #### Parameters:
 | Name | Type | Description |
@@ -379,13 +379,13 @@ Returns an object with the following keys:
 | snTicketStateColor | String | Accepted values: `"green"`, `"orange"`, `"yellow"`, `"red"` or `null` |
 
 #### Return:
-*Does not return anything*
+*Does not return anything*.
 
 ---
 
 ### `getResilientReferenceId(GlideRecord record)`
 
-* Gets the IBM SOAR Reference ID for a linked record
+* Gets the IBM SOAR Reference ID for a linked record.
 
 #### Parameters:
 | Name | Type | Description |
@@ -393,13 +393,13 @@ Returns an object with the following keys:
 | record | `GlideRecord` | `GlideRecord` object of the current table record (usually this is `current` in Workflows) |
 
 #### Returns:
-*A string containing the Reference ID of the SOAR record*
+*A string containing the Reference ID of the SOAR record*.
 
 ---
 
 ### `getResilientReferenceLink(GlideRecord record)`
 
-* Gets the IBM SOAR Reference Link to directly access the record in SOAR
+* Gets the SOAR Reference Link to directly access the record in SOAR.
 
 #### Parameters:
 | Name | Type | Description |
@@ -407,13 +407,13 @@ Returns an object with the following keys:
 | record | `GlideRecord` | `GlideRecord` object of the current table record (usually this is `current` in Workflows) |
 
 #### Returns:
-*A string containing the URL link of the SOAR record*
+*A string containing the URL link of the SOAR record*.
 
 ---
 
 ### `getResilientType(GlideRecord record)`
 
-* Gets the IBM SOAR Type for a linked record (i.e. "Incident" or "Task")
+* Gets the SOAR Type for a linked record (i.e. "Incident" or "Task").
 
 #### Parameters:
 | Name | Type | Description |
@@ -421,41 +421,41 @@ Returns an object with the following keys:
 | record | `GlideRecord` | `GlideRecord` object of the current table record (usually this is `current` in Workflows) |
 
 #### Returns:
-*A string containing either "Task" or "Incident" indicating the type of record linked in SOAR*
+*A string containing either "Task" or "Incident" indicating the type of record linked in SOAR*.
 
 ---
 ## Create Own Custom ServiceNow Workflow
 
-* A Custom Workflow can be created to *overwrite* the above pre-defined workflows
-* To have your custom workflow be invoked instead of a pre-defined workflow, use must use the **correct naming convention**
-* For example, to overwrite the Add Comment workflow, you would create a workflow with the name: **CUSTOM_RES_WF_AddComment**
-* Follow the steps below as a **guide to create your own Custom Workflow**
+* A Custom Workflow can be created to *overwrite* the above pre-defined workflows.
+* To have your custom workflow be invoked instead of a pre-defined workflow, use must use the **correct naming convention**.
+* For example, to overwrite the Add Comment workflow, you would create a workflow with the name: **CUSTOM_RES_WF_AddComment**.
+* Follow the steps below as a **guide to create your own Custom Workflow**.
 
 ### Step 1: *Use Correct Application Scope*
-* In ServiceNow, click the **gear icon** in the top right corner
-* Click **Developer** in the menu
+* In ServiceNow, click the **gear icon** in the top right corner.
+* Click **Developer** in the menu.
 * Ensure:
-  * **Application:** IBM Security QRadar SOAR
-  * **Update Set:** Default [IBM Security QRadar SOAR]
+  * **Application:** IBM Security QRadar SOAR.
+  * **Update Set:** Default [IBM Security QRadar SOAR].
  ![screenshot](./screenshots/1.png)
-* **Close** the popup
+* **Close** the popup.
 ---
 ### Step 2: *Create a Copy of Existing RES Workflow*
-* Using the Navigation Panel, open the **Workflow Editor**
+* Using the Navigation Panel, open the **Workflow Editor**:
  ![screenshot](./screenshots/2.png)
-* On the right-hand side of the Workflow Editor, search for **res_wf**
+* On the right-hand side of the Workflow Editor, search for **res_wf**:
  ![screenshot](./screenshots/3.png)
-* Click the Workflow you want to *overwrite*. The Workflow will open.
-* Click the **Burger Menu** on the top left and then **Copy**
+* Click the Workflow you want to *overwrite*. The Workflow opens.
+* Click the **Burger Menu** on the top left and then **Copy**:
  ![screenshot](./screenshots/4.png)
-* In the popup enter the Workflow Name. Ensure you use the **correct naming convention:** `CUSTOM_<original_workflow_name>`
+* In the popup enter the Workflow Name. Ensure you use the **correct naming convention:** `CUSTOM_<original_workflow_name>`:
  ![screenshot](./screenshots/5.png)
-* Click **OK**
+* Click **OK**.
 
 ---
 
 ### Step 3: *Modify the Run Script*
-* Double click the **Run Script**
+* Double click the **Run Script**:
  ![screenshot](./screenshots/6.png)
 * In the **popup** that appears, copy the below script and paste it into the Script Editor:
     ```javascript
@@ -531,9 +531,9 @@ Returns an object with the following keys:
         }
     })();
     ```
-* Edit the workflow script as fits your needs
-* Click **Submit**
-* **Publish your Workflow,** by clicking the **burger menu** then clicking **Publish**
+* Edit the workflow script as fits your needs.
+* Click **Submit**.
+* **Publish your Workflow,** by clicking the **burger menu** then clicking **Publish**:
  ![screenshot](./screenshots/9.png)
-* **Close** the tab that contains the Workflow Editor
+* **Close** the tab that contains the Workflow Editor.
 ---
