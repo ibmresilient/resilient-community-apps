@@ -17,7 +17,7 @@ CONFIG_DATA_SECTION = "fn_service_now"
 SECOPS_TABLE_NAME = "sn_si_incident"
 SECOPS_PLAYBOOK_TASK_TABLE_NAME = "sn_si_task"
 SECOPS_PLAYBOOK_TASK_PREFIX = "SIT"
-CP4S_CASES_REST_PREFIX = "cases-rest."
+CP4S_CASES_REST_PREFIX = "cases-rest"
 
 # Define an Incident that gets sent to ServiceNow
 class Incident(object):
@@ -197,7 +197,7 @@ class ResilientHelper(object):
 
         # for CP4S cases endpoint, remove the cases-rest prefix (CP4S_CASES_REST_PREFIX)
         if self.CP4S_PREFIX in host:
-            host = host.replace(self.CP4S_PREFIX, "")
+            host = host.replace(self.CP4S_PREFIX + ".", "")
 
         link = "https://{0}/#incidents/{1}".format(host, incident_id)
 
