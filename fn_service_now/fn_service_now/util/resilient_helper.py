@@ -17,6 +17,7 @@ CONFIG_DATA_SECTION = "fn_service_now"
 SECOPS_TABLE_NAME = "sn_si_incident"
 SECOPS_PLAYBOOK_TASK_TABLE_NAME = "sn_si_task"
 SECOPS_PLAYBOOK_TASK_PREFIX = "SIT"
+CP4S_CASES_REST_PREFIX = "cases-rest"
 
 # Define an Incident that gets sent to ServiceNow
 class Incident(object):
@@ -73,12 +74,14 @@ class ResilientHelper(object):
 
         self.SN_AUTH = (self.SN_USERNAME, self.SN_PASSWORD)
 
+        self.CP4S_PREFIX = self.get_config_option("cp4s_cases_prefix", placeholder=CP4S_CASES_REST_PREFIX, optional=True)
+
         # Default headers
         self.headers = {"Content-Type": "application/json", "Accept": "application/json"}
 
         log.debug("ResilientHelper initialized")
-        log.debug("App Configs: sn_host: %s sn_api_uri: %s sn_api_url: %s sn_table_name: %s sn_username: %s",
-            self.SN_HOST, self.SN_API_URI, self.SN_API_URL, self.SN_TABLE_NAME, self.SN_USERNAME)
+        log.debug("App Configs: sn_host: %s sn_api_uri: %s sn_api_url: %s sn_table_name: %s sn_username: %s cp4s_cases_prefix: %s",
+            self.SN_HOST, self.SN_API_URI, self.SN_API_URL, self.SN_TABLE_NAME, self.SN_USERNAME, self.CP4S_PREFIX)
 
     @classmethod
     def _byteify(cls, data):
@@ -136,7 +139,7 @@ class ResilientHelper(object):
 
     def get_config_option(self, option_name, optional=False, placeholder=None):
         """Given option_name, checks if it is in appconfig. Raises ValueError if a mandatory option is missing"""
-        option = self.app_configs.get(option_name)
+        option = self.app_configs.get(option_name, placeholder)
         err = "'{0}' is mandatory and is not set in app.config file. You must set this value to run this function".format(option_name)
 
         if not option and optional is False:
@@ -189,9 +192,12 @@ class ResilientHelper(object):
 
         return {"incident_id": incident_id, "task_id": task_id}
 
-    @staticmethod
-    def generate_res_link(incident_id, host, task_id=None):
+    def generate_res_link(self, incident_id, host, task_id=None):
         """Function that generates a https URL to the incident or task"""
+
+        # for CP4S cases endpoint, remove the cases-rest prefix (CP4S_CASES_REST_PREFIX)
+        if self.CP4S_PREFIX in host:
+            host = host.replace(self.CP4S_PREFIX + ".", "")
 
         link = "https://{0}/#incidents/{1}".format(host, incident_id)
 

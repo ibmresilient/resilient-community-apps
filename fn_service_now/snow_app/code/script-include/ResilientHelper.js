@@ -204,7 +204,7 @@ ResilientHelper.prototype = {
 
 			//If user specifies initial ServiceNow note, add it
 			if(initSnNote){
-				record.work_notes = initSnNote;
+				record.work_notes = initSnNote + " [code]<a href='" + res_reference_link + "' target='_blank'>SOAR Link</a>[/code]";
 			}
 
 			//Add a new row to the Resilient Data Table
@@ -228,7 +228,7 @@ ResilientHelper.prototype = {
 				var gdt = new GlideDateTime();
 				var now = gdt.getNumericValue();
 
-				var links = '<a target="_blank" href="'+res_link+'">SOAR</a>   <a href="'+sn_link+'">SN</a>';
+				var links = '<a target="_blank" href="'+res_link+'">SOAR</a> &nbsp;&nbsp; <a href="'+sn_link+'">SN</a>';
 
 				var resTicketStateRichText = '<div style="color:' + this.getHexColor("green") +'">Active</div>';
 				var snTicketStateRichText = '<div style="color:' + this.getHexColor("green") +'">Sent to Resilient</div>';
