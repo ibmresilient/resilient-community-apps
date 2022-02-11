@@ -1,4 +1,4 @@
-# (c) Copyright IBM Corp. 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2022. All Rights Reserved.
 # -*- coding: utf-8 -*-
 
 """Generate a default configuration-file section for fn_service_now"""
@@ -13,8 +13,8 @@ sn_host=https://instance.service-now.com
 sn_api_uri=/api/x_ibmrt_resilient/api
 
 # Name of the table in ServiceNow to sync with.
-# v2.0.0 supports the incident table and the sn_si_incident
-# table if ServiceNow Security Incident Response module is installed
+# as of v2.0.0 the incident table and the sn_si_incident table are supported
+# (NOTE: ServiceNow Security Incident Response module is required for sn_si_incident)
 sn_table_name=incident
 
 # Username + Password of ServiceNow Integrator user who has the the "x_ibmrt_resilient.integrator" role
