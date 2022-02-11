@@ -24,8 +24,6 @@ inputs.abuseipdb_artifact_value = artifact.value
 
 ### Post-Processing Script
 ```python
-
-
 CATEGORIES= {
   3: "Fraud Orders",
   4: "DDoS Attack",
@@ -50,13 +48,14 @@ CATEGORIES= {
   23: "IoT Targeted",
 }
 
-
 if results.success:
-  resp_data = results.content.data
+  resp_data = results.content['data']
   number_of_reports = resp_data['totalReports']
-  country = resp_data['countryName']
+  country_name = resp_data['countryName']
   most_recent_report = resp_data['lastReportedAt']
   confidence_score = resp_data.get("abuseConfidenceScore", 0)
+  
+  hit = []
   
   # get clean list of de-duped categories
   categories_names = ""
@@ -65,20 +64,40 @@ if results.success:
       for report in resp_data['reports']:
           categories_list.extend(report["categories"])
       categories_set = set(categories_list)  # dedup list
-      categories_names = u', '.join((self.abuseipdb_categories.get(item, 'unknown') for item in categories_set))
+      categories_names = u', '.join(CATEGORIES.get(item, 'unknown') for item in categories_set)
   
   # only return data if there's anything useful
   if number_of_reports or confidence_score:
-      # Return zero or more hits.  Here's one example.
-      hits.append(
-          Hit(
-              NumberProp(name="Confidence Score", value=confidence_score),
-              NumberProp(name="Number of Reports", value=number_of_reports),
-              StringProp(name="Country", value=country),
-              StringProp(name="Most Recent Report", value=most_recent_report),
-              StringProp(name="Categories", value=categories_names)
-              )
-      )
+      hit = [
+        {
+          "name": "Confidence Score",
+          "type": "number",
+          "value": "{}".format(confidence_score)
+        }, 
+        {
+          "name": "Number of Reports",
+          "type": "number",
+          "value": "{}".format(number_of_reports)
+        }, 
+        {
+          "name": "Country",
+          "type": "string",
+          "value": "{}".format(country_name)
+        },
+        {
+          "name": "Most Recent Report",
+          "type": "string",
+          "value": "{}".format(most_recent_report)
+        },
+        {
+          "name": "Categories",
+          "type": "string",
+          "value": "{}".format(categories_names)
+        }
+        ]
+  artifact.addHit("AbuseIPDB Function hits added", hit)
+else:
+  incident.addNote("AbuseIPDB Check IP Address Blocklist failed: {}".format(results.reason))
 
 ```
 

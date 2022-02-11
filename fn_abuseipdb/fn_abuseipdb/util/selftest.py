@@ -19,6 +19,7 @@ Return examples:
 """
 
 import logging
+from resilient_lib import RequestsCommon
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
@@ -30,9 +31,26 @@ def selftest_function(opts):
     Placeholder for selftest function. An example use would be to test package api connectivity.
     Suggested return values are be unimplemented, success, or failure.
     """
-    app_configs = opts.get("fn_abuseipdb", {})
+    app_configs = opts.get('fn_abuseipdb', {})
 
-    return {
-        "state": "unimplemented",
-        "reason": None
-    }
+    try:
+        headers = {
+            'content-type': 'application/json',
+            'X-Auth-Token': app_configs['abuseipdb_key']
+        }
+        url = app_configs["abuseipdb_url"]
+
+        params = {
+                'ipAddress': '',
+                'isWhitelisted': app_configs['ignore_white_listed'],
+                'verbose': True
+            }
+
+        rc = RequestsCommon(opts, app_configs)
+        rc.execute('get', url, params=params, headers=headers)
+        return {"state": "success"}
+    except Exception as e:
+        return {
+            "state": "failure",
+            "reason": e
+        }

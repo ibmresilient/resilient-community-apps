@@ -22,16 +22,17 @@ def snake_to_camel(word):
 
 setup(
     name="fn_abuseipdb",
-    display_name="<<display name of your app here>>",
+    display_name="AbuseIPDB Function for IBM SOAR",
     version="1.0.0",
-    license="<<insert here>>",
-    author="<<your name here>>",
-    author_email="you@example.com",
-    url="<<your company url>>",
-    description="Resilient Circuits Components for 'fn_abuseipdb'",
-    long_description="""Resilient Circuits Components for 'fn_abuseipdb'""",
+    license="MIT",
+    author="IBM SOAR",
+    author_email="",
+    url="https://github.com/ibmresilient/fn_abuseipdb",
+    description="IBM Security SOAR app for AbuseIPDB'",
+    long_description="""This app pulls data from AbuseIPDB (www.abuseipdb.com) and checks if an IP artifact is blacklisted. If so, it will add a hit to the artifact. This app requires an AbuseIPDB account and an v2 api key to work.""",
     install_requires=[
-        "resilient-circuits>=43.0.0"
+        "resilient-circuits>=43.0.0",
+        "resilient_lib>=38.0.0"
     ],
     python_requires='>=3.6',
     packages=find_packages(),

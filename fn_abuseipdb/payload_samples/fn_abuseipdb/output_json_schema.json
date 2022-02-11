@@ -1,3 +1,127 @@
 {
-    
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "ipAddress": {
+              "type": "string"
+            },
+            "isPublic": {
+              "type": "boolean"
+            },
+            "ipVersion": {
+              "type": "integer"
+            },
+            "isWhitelisted": {
+              "type": "boolean"
+            },
+            "abuseConfidenceScore": {
+              "type": "integer"
+            },
+            "countryCode": {
+              "type": "string"
+            },
+            "usageType": {},
+            "isp": {
+              "type": "string"
+            },
+            "domain": {
+              "type": "string"
+            },
+            "hostnames": {
+              "type": "array"
+            },
+            "countryName": {
+              "type": "string"
+            },
+            "totalReports": {
+              "type": "integer"
+            },
+            "numDistinctUsers": {
+              "type": "integer"
+            },
+            "lastReportedAt": {
+              "type": "string"
+            },
+            "reports": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "reportedAt": {
+                    "type": "string"
+                  },
+                  "comment": {
+                    "type": "string"
+                  },
+                  "categories": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer"
+                    }
+                  },
+                  "reporterId": {
+                    "type": "integer"
+                  },
+                  "reporterCountryCode": {
+                    "type": "string"
+                  },
+                  "reporterCountryName": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "abuseipdb_artifact_type": {
+          "type": "string"
+        },
+        "abuseipdb_artifact_value": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
 }
