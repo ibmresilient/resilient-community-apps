@@ -144,7 +144,7 @@ class FunctionComponent(ResilientComponent):
                             payload.sn_ref_id,
                             res_helper.convert_text_to_richtext("Active"),
                             res_helper.convert_text_to_richtext("Sent to ServiceNow"),
-                            """<a href="{0}">SOAR</a>   <a href="{1}">SN</a>""".format(payload.res_link, payload.sn_record_link))
+                            """<a href="{0}">SOAR</a> &nbsp;&nbsp; <a href="{1}">SN</a>""".format(payload.res_link, payload.sn_record_link))
 
                         payload.row_id = add_row_response["id"]
 
