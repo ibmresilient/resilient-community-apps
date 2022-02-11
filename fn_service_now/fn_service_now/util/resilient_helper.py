@@ -17,6 +17,7 @@ CONFIG_DATA_SECTION = "fn_service_now"
 SECOPS_TABLE_NAME = "sn_si_incident"
 SECOPS_PLAYBOOK_TASK_TABLE_NAME = "sn_si_task"
 SECOPS_PLAYBOOK_TASK_PREFIX = "SIT"
+CP4S_CASES_REST_PREFIX = "cases-rest."
 
 # Define an Incident that gets sent to ServiceNow
 class Incident(object):
@@ -192,6 +193,10 @@ class ResilientHelper(object):
     @staticmethod
     def generate_res_link(incident_id, host, task_id=None):
         """Function that generates a https URL to the incident or task"""
+
+        # for CP4S cases endpoint, remove the cases-rest prefix (CP4S_CASES_REST_PREFIX)
+        if CP4S_CASES_REST_PREFIX in host:
+            host = host.replace(CP4S_CASES_REST_PREFIX, "")
 
         link = "https://{0}/#incidents/{1}".format(host, incident_id)
 

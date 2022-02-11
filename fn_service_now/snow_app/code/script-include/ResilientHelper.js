@@ -204,7 +204,7 @@ ResilientHelper.prototype = {
 
 			//If user specifies initial ServiceNow note, add it
 			if(initSnNote){
-				record.work_notes = initSnNote;
+				record.work_notes = initSnNote + " [code]<a href='" + res_reference_link + "' target='_blank'>SOAR Link</a>[/code]";
 			}
 
 			//Add a new row to the Resilient Data Table
