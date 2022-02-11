@@ -22,18 +22,18 @@ def snake_to_camel(word):
 
 setup(
     name='fn_service_now',
-    display_name="ServiceNow Functions for IBM Resilient",
-    version="1.0.5",
+    display_name="ServiceNow Functions for IBM SOAR",
+    version="2.0.0",
     license="MIT",
-    author="IBM Resilient",
+    author="IBM SOAR",
     url="https://ibm.com/mysupport",
     description="Bi-directional synchronization of Incidents, Tasks, Notes and Attachments with ServiceNow",
-    long_description="""- Create an IBM Resilient Incident/Task from a ServiceNow Record in the Incident Table.<br>
-        - Create a ServiceNow Record in the Incident Table from an IBM Resilient Incident/Task.<br>
-        - Sync notes between a related IBM Resilient Incident/Task and a ServiceNow Record.<br>
-        - Send Attachments from an IBM Resilient Incident/Task to a related ServiceNow Record.""",
+    long_description="""- Create an IBM SOAR Incident/Task from a ServiceNow Record in the Incident Table.<br>
+        - Create a ServiceNow Record in the Incident Table from an IBM SOAR Incident/Task.<br>
+        - Sync notes between a related IBM SOAR Incident/Task and a ServiceNow Record.<br>
+        - Send Attachments from an IBM SOAR Incident/Task to a related ServiceNow Record.""",
     install_requires=[
-        "resilient_circuits>=31.0.0",
+        "resilient_circuits>=43.0.0",
         "beautifulsoup4>=4.6.3"
     ],
     packages=find_packages(),

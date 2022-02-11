@@ -1,4 +1,7 @@
-// (c) Copyright IBM Corp. 2019. All Rights Reserved.
+// (c) Copyright IBM Corp. 2022. All Rights Reserved.
+
+var INC_RES_ID = "x_ibmrt_resilient_ibm_resilient_reference_id";
+var SIR_RES_ID = "x_ibmrt_resilient_ibm_soar_reference_id";
 
 function getAllowedTables(){
 	
@@ -116,5 +119,22 @@ SNOWRESTHelper.prototype = {
 		gs.debug("'"+tableName+"' is not in the ServiceNowAllowedTables CSV list");
 
 		return false;
+	},
+
+	getResReferenceIdFromTaskParent: function(current, parentTableName){
+
+		var parent = null;
+
+		//Get the task's parent record so we can grab the res ID
+		//to properly link this new task with the resilient incident
+		parent = new GlideRecord(parentTableName);
+		parent.get(current.getValue("parent"));
+
+		//Return the value stored in the parent table
+		if (parent.isValidField(INC_RES_ID))
+			return parent.getValue(INC_RES_ID);
+		else {
+			return parent.getValue(SIR_RES_ID);
+		}
 	}
 };

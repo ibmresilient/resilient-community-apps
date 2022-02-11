@@ -1,12 +1,10 @@
-# (c) Copyright IBM Corp. 2019. All Rights Reserved.
+# (c) Copyright IBM Corp. 2022. All Rights Reserved.
 """ResilientHelper Module"""
-import logging
 import base64
-import json
-from bs4 import BeautifulSoup
-import requests
+import logging
+
 import six
-from resilient_circuits import StatusMessage
+from bs4 import BeautifulSoup
 from resilient import SimpleHTTPException
 
 # Handle unicode in 2.x and 3.x
@@ -14,6 +12,12 @@ try:
     unicode
 except NameError:
     unicode = str
+
+CONFIG_DATA_SECTION = "fn_service_now"
+SECOPS_TABLE_NAME = "sn_si_incident"
+SECOPS_PLAYBOOK_TASK_TABLE_NAME = "sn_si_task"
+SECOPS_PLAYBOOK_TASK_PREFIX = "SIT"
+CP4S_CASES_REST_PREFIX = "cases-rest"
 
 # Define an Incident that gets sent to ServiceNow
 class Incident(object):
@@ -70,12 +74,14 @@ class ResilientHelper(object):
 
         self.SN_AUTH = (self.SN_USERNAME, self.SN_PASSWORD)
 
+        self.CP4S_PREFIX = self.get_config_option("cp4s_cases_prefix", placeholder=CP4S_CASES_REST_PREFIX, optional=True)
+
         # Default headers
         self.headers = {"Content-Type": "application/json", "Accept": "application/json"}
 
         log.debug("ResilientHelper initialized")
-        log.debug("App Configs: sn_host: %s sn_api_uri: %s sn_api_url: %s sn_table_name: %s sn_username: %s",
-            self.SN_HOST, self.SN_API_URI, self.SN_API_URL, self.SN_TABLE_NAME, self.SN_USERNAME)
+        log.debug("App Configs: sn_host: %s sn_api_uri: %s sn_api_url: %s sn_table_name: %s sn_username: %s cp4s_cases_prefix: %s",
+            self.SN_HOST, self.SN_API_URI, self.SN_API_URL, self.SN_TABLE_NAME, self.SN_USERNAME, self.CP4S_PREFIX)
 
     @classmethod
     def _byteify(cls, data):
@@ -133,7 +139,7 @@ class ResilientHelper(object):
 
     def get_config_option(self, option_name, optional=False, placeholder=None):
         """Given option_name, checks if it is in appconfig. Raises ValueError if a mandatory option is missing"""
-        option = self.app_configs.get(option_name)
+        option = self.app_configs.get(option_name, placeholder)
         err = "'{0}' is mandatory and is not set in app.config file. You must set this value to run this function".format(option_name)
 
         if not option and optional is False:
@@ -186,9 +192,12 @@ class ResilientHelper(object):
 
         return {"incident_id": incident_id, "task_id": task_id}
 
-    @staticmethod
-    def generate_res_link(incident_id, host, task_id=None):
+    def generate_res_link(self, incident_id, host, task_id=None):
         """Function that generates a https URL to the incident or task"""
+
+        # for CP4S cases endpoint, remove the cases-rest prefix (CP4S_CASES_REST_PREFIX)
+        if self.CP4S_PREFIX in host:
+            host = host.replace(self.CP4S_PREFIX + ".", "")
 
         link = "https://{0}/#incidents/{1}".format(host, incident_id)
 
@@ -286,12 +295,14 @@ class ResilientHelper(object):
 
         # Get the task_instructions in plaintext
         try:
-            get_url = "/tasks/{0}/instructions".format(task_id)
+            get_url = "/tasks/{0}/instructions_ex".format(task_id)
             log.debug("GET task_instructions for: ID %s URL: %s", task_id, get_url)
             task_instructions = client.get_content(get_url)
             soup = BeautifulSoup(unicode(task_instructions, "utf-8"), 'html.parser')
             soup = soup.get_text()
-            task_instructions = soup.replace(u'\xa0', u' ')
+            # BeautifulSoup decoding of the HTML includes quotation marks and non-breaking spaces
+            # so we need to remove those for the instructions text that will go to SNOW
+            task_instructions = soup.replace(u'\xa0', u' ').replace(u'"',u'')
             log.debug("task_instructions got successfully")
         except Exception as err:
             err_msg = "Error trying to get task_instructions for Task {0}.".format(task_id)
@@ -430,11 +441,18 @@ class ResilientHelper(object):
             "data": request_data
         }
 
-    def sn_api_request(self, method, endpoint, params=None, data=None, headers=None):
+    def get_table_name(self, sn_ref_id):
+
+        if self.SN_TABLE_NAME == SECOPS_TABLE_NAME and sn_ref_id.startswith(SECOPS_PLAYBOOK_TASK_PREFIX):
+            return SECOPS_PLAYBOOK_TASK_TABLE_NAME
+        
+        return self.SN_TABLE_NAME
+
+    def sn_api_request(self, rc, method, endpoint, params=None, data=None, headers=None):
         """Method to handle resquests to our custom APIs in ServiceNow"""
         log = logging.getLogger(__name__)
 
-        response, return_value = None, None
+        res, return_value = None, None
 
         SUPPORTED_METHODS = ["GET", "POST", "PATCH"]
 
@@ -444,43 +462,23 @@ class ResilientHelper(object):
         headers = self.headers if headers is None else headers
         url = "{0}{1}".format(self.SN_API_URL, endpoint)
 
-        try:
-            log.debug("%s ServiceNow API Request. url: %s headers: %s data: %s", method, url, headers, data)
+        res = rc.execute(
+            method=method,
+            url=url,
+            auth=self.SN_AUTH,
+            headers=headers,
+            params=params,
+            data=data
+        )
 
-            if method is "GET":
-                response = requests.get(url, auth=self.SN_AUTH, headers=headers, params=params)
-                response.raise_for_status()
-                return_value = response
-            
-            elif method is "POST":
-                response = requests.post(url, auth=self.SN_AUTH, headers=headers, data=data)
-                response.raise_for_status()
-                return_value = response.json()['result']
+        log.info("SN REQUEST:\nmethod: %s\nurl: %s\nbody: %s", res.request.method, res.request.url, res.request.body)
 
-            elif method is "PATCH":
-                response = requests.patch(url, auth=self.SN_AUTH, headers=headers, data=data)
-                response.raise_for_status()
-                return_value = response.json()['result']
+        if method is "GET":
+            log.info("SN RESPONSE: %s", res)
+            return_value = res
 
-            log.debug("%s Request successful", method)
-
-        except requests.exceptions.Timeout:
-            err_msg = "{0} ServiceNow API Request timed out".format(method)
-            raise ValueError(err_msg)
-
-        except requests.exceptions.TooManyRedirects:
-            err_msg = "Too Many Redirects for: {0}".format(url)
-            raise ValueError(err_msg)
-
-        except requests.exceptions.HTTPError as err:
-            if err.response.content:
-                response_content = json.loads(err.response.content)
-                err_msg = "Error from ServiceNow: {0}".format(response_content["error"]["message"])
-                raise ValueError(err_msg)
-            else:
-                raise ValueError(err)
-
-        except requests.exceptions.RequestException as err:
-            raise ValueError(err)
+        elif method in ("POST", "PATCH"):
+            log.info("SN RESPONSE: %s", res.json())
+            return_value = res.json()["result"]
 
         return return_value
