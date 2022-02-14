@@ -11,10 +11,11 @@ PACKAGE_NAME = "fn_abuseipdb"
 FUNCTION_NAME = "fn_abuseipdb"
 
 # Read the default configuration-data section from the package
-# Fill in key to run livetests
+# Fill in and uncomment key to run livetests
 config_data = """[fn_abuseipdb]
 abuseipdb_url=https://api.abuseipdb.com/api/v2/check
-abuseipdb_key=$ABUSEIPDB_KEY
+abuseipdb_key=dummykeyusedforthefirsttest
+#abuseipdb_key=$ABUSEIPDB_KEY
 ignore_white_listed=True
 """
 
