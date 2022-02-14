@@ -30,10 +30,9 @@ WF_NAME = "Example: Extrahop revealx get activitymaps"
 CONTENT = results.content
 INPUTS = results.inputs
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
-DATA_TBL_FIELDS = ["am_description", "am_id", "mod_time", "mode", "name", "owner", "rights", "short_code",
+DATA_TABLE = "extrahop_activitymaps"
+DATA_TBL_FIELDS = ["ams_description", "ams_id", "mod_time", "mode", "ams_name", "owner", "rights", "short_code",
                    "show_alert_status", "walks", "weighting"]
-
-
 # Processing
 def main():
     note_text = u''
@@ -43,24 +42,24 @@ def main():
                     u"function <b>{2}</b>.".format(WF_NAME, len(ams), FN_NAME)
         if ams:
             for am in ams:
-                newrow = incident.addRow("extrahop_activitymaps")
+                newrow = incident.addRow(DATA_TABLE)
                 newrow.query_execution_date = QUERY_EXECUTION_DATE
                 for f1 in DATA_TBL_FIELDS:
-                  f2 = f1
-                  if f1.startswith("am_"):
-                      f2 = f1.split('_', 1)[1]
-                    if det[f1] is None:
-                        newrow[f1] = det[f2]
-                    if am[f1] is None:
+                    f2 = f1
+                    if f1.startswith("ams_"):
+                        f2 = f1.split('_', 1)[1]
+                    if am[f2] is None:
                         newrow[f1] = am[f2]
-                    if isinstance(am[f1], list):
-                        newrow[f1] = "{}".format(", ".join(am[f2]))
-                    elif isinstance(am[f1], bool):
+                    if isinstance(am[f2], list):
+                      if f1 in ["walks","steps"]:
+                          newrow[f1] = "{}".format(am[f2])
+                      else:
+                          newrow[f1] = "{}".format(", ".join(am[f2]))
+                    elif isinstance(am[f2], (bool, dict)):
                         newrow[f1] = str(am[f2])
                     else:
                         newrow[f1] = "{}".format(am[f2])
             note_text += u"<br>The data table <b>{0}</b> has been updated".format("Extrahop Activitymaps")
-
     else:
         note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
                      u"to get activitymaps." \
@@ -68,9 +67,7 @@ def main():
 
     incident.addNote(helper.createRichText(note_text))
 
-
 main()
-
 ```
 
 ---
