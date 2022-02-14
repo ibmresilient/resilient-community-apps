@@ -59,7 +59,7 @@ Resilient Circuits Components for 'fn_outbound_email'
 <!--
   List any Requirements 
 -->
-This app supports the IBM Resilient SOAR Platform and the IBM Cloud Pak for Security.
+This app supports the IBM QRadar SOAR Platform and the IBM Cloud Pak for Security.
 
 ### Resilient platform
 The Resilient platform supports two app deployment mechanisms, App Host and integration server.

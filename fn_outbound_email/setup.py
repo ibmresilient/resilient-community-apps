@@ -12,8 +12,8 @@ setup(
     license='MIT',
     author='IBM QRadar SOAR',
     url='https://github.com/ibmresilient/resilient-community-apps/tree/master/fn_outbound_email',
-    description="Resilient Circuits Components for 'fn_outbound_email'",
-    long_description="Resilient Circuits Components for 'fn_outbound_email'",
+    description="IBM Security SOAR app for 'fn_outbound_email'",
+    long_description="IBM Security SOAR app for 'fn_outbound_email'",
     install_requires=[
         'resilient_circuits>=39.0.0',
         'resilient_lib>=32.0.0',
