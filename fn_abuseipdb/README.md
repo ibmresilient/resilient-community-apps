@@ -23,7 +23,7 @@
 - [Overview](#overview)
   - [Key Features](#key-features)
 - [Requirements](#requirements)
-  - [Resilient platform](#resilient-platform)
+  - [SOAR platform](#soar-platform)
   - [Cloud Pak for Security](#cloud-pak-for-security)
   - [Proxy Server](#proxy-server)
   - [Python Environment](#python-environment)
@@ -52,12 +52,11 @@
   Provide a high-level description of the function itself and its remote software or application.
   The text below is parsed from the "description" and "long_description" attributes in the setup.py file
 -->
+**IBM Security SOAR app for AbuseIPDB'**
+
+ ![screenshot: main](./doc/screenshots/main.png)
+
 This app pulls data from AbuseIPDB (www.abuseipdb.com) and checks if an IP artifact is blacklisted. If so, it will add a hit to the artifact. This app requires an AbuseIPDB account and an v2 api key to work.
-**Resilient Circuits Components for 'fn_abuseipdb'**
-
- ![screenshot: main](./doc/screenshots/main.png) 
-
-Resilient Circuits Components for 'fn_abuseipdb'
 
 ### Key Features
 <!--
@@ -72,19 +71,18 @@ Resilient Circuits Components for 'fn_abuseipdb'
   List any Requirements 
 --> 
 * resilient-circuits>=43.0.0
-* resilient_lib>=38.0.0
 
-This app supports the IBM Resilient SOAR Platform and the IBM Cloud Pak for Security.
+This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.
 
-### Resilient platform
-The Resilient platform supports two app deployment mechanisms, App Host and integration server.
+### SOAR platform
+The SOAR platform supports two app deployment mechanisms, App Host and integration server.
 
-If deploying to a Resilient platform with an App Host, the requirements are:
-* Resilient platform >= `43.1.49`.
+If deploying to a SOAR platform with an App Host, the requirements are:
+* SOAR platform >= `43.0.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
-If deploying to a Resilient platform with an integration server, the requirements are:
-* Resilient platform >= `43.1.49`.
+If deploying to a SOAR platform with an integration server, the requirements are:
+* SOAR platform >= `43.0.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient-circuits>=43.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions: 
@@ -94,25 +92,24 @@ If deploying to a Resilient platform with an integration server, the requirement
   | Function | Read |
   | Artifact | Read, Edit |
 
-
-The following Resilient platform guides provide additional information: 
+The following SOAR platform guides provide additional information: 
 * _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
 
-The above guides are available on the IBM Knowledge Center at [ibm.biz/soar-docs](https://ibm.biz/soar-docs). On this web page, select your Resilient platform version. On the follow-on page, you can find the _App Host Deployment Guide_ or _Integration Server Guide_ by expanding **Resilient Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
+The above guides are available on the IBM Documentation website at [ibm.biz/soar-docs](https://ibm.biz/soar-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _App Host Deployment Guide_ or _Integration Server Guide_ by expanding **Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
 ### Cloud Pak for Security
 If you are deploying to IBM Cloud Pak for Security, the requirements are:
-* IBM Cloud Pak for Security >= 1.7.
+* IBM Cloud Pak for Security >= 1.4.
 * Cloud Pak is configured with an App Host.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 The following Cloud Pak guides provide additional information: 
 * _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
-* _System Administrator Guide_: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security Knowledge Center table of contents, select Case Management and Orchestration & Automation > **System administrator**.
+* _System Administrator Guide_: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security IBM Documentation table of contents, select Case Management and Orchestration & Automation > **System administrator**.
 
-These guides are available on the IBM Knowledge Center at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs). From this web page, select your IBM Cloud Pak for Security version. From the version-specific Knowledge Center page, select Case Management and Orchestration & Automation.
+These guides are available on the IBM Documentation website at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs). From this web page, select your IBM Cloud Pak for Security version. From the version-specific IBM Documentation page, select Case Management and Orchestration & Automation.
 
 ### Proxy Server
 The app does support a proxy server.
@@ -121,14 +118,12 @@ The app does support a proxy server.
 Both Python 2.7 and Python 3.6 are supported.
 Additional package dependencies may exist for each of these packages:
 * resilient-circuits>=43.0.0
-* resilient_lib>=38.0.0
 
 ### Endpoint Developed With
 
 This app has been implemented using:
-
 | Product Name | Product Version | API URL | API Version |
-| ------ | :------: | ------- | ----------- |
+| ------------ | --------------- | ------- | ----------- |
 | AbuseIPDB | ------ | https://api.abuseipdb.com/api/v2/check | v2 |
 
 #### Prerequisites
@@ -142,7 +137,7 @@ List any prerequisites that are needed to use with this endpoint solution. Remov
 ## Installation
 
 ### Install
-* To install or uninstall an App or Integration on the _Resilient platform_, see the documentation at [ibm.biz/soar-docs](https://ibm.biz/soar-docs).
+* To install or uninstall an App or Integration on the _SOAR platform_, see the documentation at [ibm.biz/soar-docs](https://ibm.biz/soar-docs).
 * To install or uninstall an App on _IBM Cloud Pak for Security_, see the documentation at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs) and follow the instructions above to navigate to Orchestration and Automation.
 
 ### App Configuration
@@ -160,7 +155,7 @@ The following table provides the settings you need to configure the app. These s
 ## Function - AbuseIPDB
 Pulls data from AbuseIPDB (www.abuseipdb.com) and checks if an IP artifact is blacklisted. Needs an AbuseIPDB account and an v2 api key to work.
 
- ![screenshot: fn-abuseipdb ](./doc/screenshots/fn-abuseipdb.png) 
+ ![screenshot: fn-abuseipdb ](./doc/screenshots/fn-abuseipdb.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -180,48 +175,62 @@ Pulls data from AbuseIPDB (www.abuseipdb.com) and checks if an IP artifact is bl
 
 ```python
 results = {
-    'version': 2.0,
-    'success': True,
-    'reason': None,
-    'content': {
-        'data': {
-            'ipAddress': '110.77.136.226',
-            'isPublic': True,
-            'ipVersion': 4,
-            'isWhitelisted': False,
-            'abuseConfidenceScore': 100,
-            'countryCode': 'TH',
-            'usageType': None,
-            'isp': 'CAT Telecom Public Company Ltd',
-            'domain': 'cattelecom.com',
-            'hostnames': [],
-            'countryName': 'Thailand',
-            'totalReports': 105,
-            'numDistinctUsers': 35,
-            'lastReportedAt': '2022-02-08T17:10:55+00:00',
-            'reports': [{
-                'reportedAt': '2022-02-08T17:10:55+00:00',
-                'comment': 'Attempted Brute Force (dovecot)',
-                'categories': [18],
-                'reporterId': 34703,
-                'reporterCountryCode': 'GB',
-                'reporterCountryName': 'United Kingdom of Great Britain and Northern Ireland'
-            }]
+  "content": {
+    "data": {
+      "abuseConfidenceScore": 100,
+      "countryCode": "TH",
+      "countryName": "Thailand",
+      "domain": "cattelecom.com",
+      "hostnames": [],
+      "ipAddress": "110.77.136.226",
+      "ipVersion": 4,
+      "isPublic": true,
+      "isWhitelisted": false,
+      "isp": "CAT Telecom Public Company Ltd",
+      "lastReportedAt": "2022-02-08T17:10:55+00:00",
+      "numDistinctUsers": 32,
+      "reports": [
+        {
+          "categories": [
+            18
+          ],
+          "comment": "Attempted Brute Force (dovecot)",
+          "reportedAt": "2022-02-08T17:10:55+00:00",
+          "reporterCountryCode": "GB",
+          "reporterCountryName": "United Kingdom of Great Britain and Northern Ireland",
+          "reporterId": 34703
+        },
+        {
+          "categories": [
+            18
+          ],
+          "comment": "Email Auth Brute force attack 1/1 in last day",
+          "reportedAt": "2022-02-06T19:27:40+00:00",
+          "reporterCountryCode": "GB",
+          "reporterCountryName": "United Kingdom of Great Britain and Northern Ireland",
+          "reporterId": 49881
         }
-    },
-    'raw': None,
-    'inputs': {
-        'abuseipdb_artifact_type': 'IP Address',
-        'abuseipdb_artifact_value': '110.77.136.226'
-    },
-    'metrics': {
-        'version': '1.0',
-        'package': 'fn-abuseipdb',
-        'package_version': '1.0.0',
-        'host': 'My Host',
-        'execution_time_ms': 4498,
-        'timestamp': '2022-02-09 13:29:46'
+      ],
+      "totalReports": 2,
+      "usageType": null
     }
+  },
+  "inputs": {
+    "abuseipdb_artifact_type": "IP Address",
+    "abuseipdb_artifact_value": "110.77.136.226"
+  },
+  "metrics": {
+    "execution_time_ms": 298,
+    "host": "My Host",
+    "package": "fn-abuseipdb",
+    "package_version": "1.0.0",
+    "timestamp": "2022-02-11 14:18:53",
+    "version": "1.0"
+  },
+  "raw": null,
+  "reason": null,
+  "success": true,
+  "version": 2.0
 }
 ```
 

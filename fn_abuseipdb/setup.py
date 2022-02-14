@@ -32,7 +32,6 @@ setup(
     long_description="""This app pulls data from AbuseIPDB (www.abuseipdb.com) and checks if an IP artifact is blacklisted. If so, it will add a hit to the artifact. This app requires an AbuseIPDB account and an v2 api key to work.""",
     install_requires=[
         "resilient-circuits>=43.0.0",
-        "resilient_lib>=38.0.0"
     ],
     python_requires='>=3.6',
     packages=find_packages(),
