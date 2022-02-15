@@ -62,7 +62,7 @@ This app pulls data from AbuseIPDB (www.abuseipdb.com) and checks if an IP artif
 <!--
   List the Key Features of the Integration
 -->
-* The workflow creates a hit in the artifact containing information on the IP address.
+* The workflow checks the IP address's reputation and creates a hit in the artifact if AbuseIPDB reports that it is an abusive IP address.
 
 ---
 
@@ -90,7 +90,6 @@ If deploying to a SOAR platform with an integration server, the requirements are
   | ---- | ----------- |
   | Org Data | Read |
   | Function | Read |
-  | Artifact | Read, Edit |
 
 The following SOAR platform guides provide additional information: 
 * _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
@@ -101,7 +100,7 @@ The above guides are available on the IBM Documentation website at [ibm.biz/soar
 
 ### Cloud Pak for Security
 If you are deploying to IBM Cloud Pak for Security, the requirements are:
-* IBM Cloud Pak for Security >= 1.4.
+* IBM Cloud Pak for Security >= 1.9
 * Cloud Pak is configured with an App Host.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
