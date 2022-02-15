@@ -198,8 +198,9 @@ class ResilientHelper(object):
         # for CP4S cases endpoint, remove the cases-rest prefix (CP4S_CASES_REST_PREFIX)
         if self.CP4S_PREFIX in host:
             host = host.replace(self.CP4S_PREFIX + ".", "")
-
-        link = "https://{0}/#incidents/{1}".format(host, incident_id)
+            link = "https://{0}/app/respond/#cases/{1}".format(host, incident_id)
+        else:
+            link = "https://{0}/#incidents/{1}".format(host, incident_id)
 
         if task_id is not None:
             link += "?task_id={0}".format(task_id)
