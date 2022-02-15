@@ -72,7 +72,7 @@ function checkSnUserHasResilientIntegratorRole(snUsername) {
 			throw "ServiceNow Username '" + snUsername + "' does not have the " + RES_INTEGRATOR_ROLE + " role.";
 		}
 	} else {
-		throw "ServiceNow Instance is no correctly configured. Could not find " + RES_INTEGRATOR_ROLE + " role.";
+		throw "ServiceNow instance is not correctly configured. Could not find " + RES_INTEGRATOR_ROLE + " role.";
 	}
 }
 
