@@ -1,0 +1,25 @@
+{
+  {# JINJA template for creating a new SOAR incident from a ReaQta alert. #}
+  "name": "ReaQta Alert - {{ title|replace('"', '\\"') }}, Endpoint: {{ endpoint.name }}",
+  "discovered_date": {{ receivedAt|soar_datetimeformat(split_at='.') }},
+  "start_date": {{ happenedAt|soar_datetimeformat(split_at='.') }},
+  {# if alert users are different than SOAR users, consider using a mapping table using soar_substitute: #}
+  {# "owner_id": "{{ assignedTo|soar_substitute('{"Automation": "soar_user1@ent.com", "defender_user2@co.com": "soar_user2@ent.com", "DEFAULT": "default_user@ent.com" }') }}", #}
+  "plan_status": "{{ closed|string|soar_substitute('{"False": "A", "True": "A"}') }}",
+  "severity_code": "{{ severity|title|soar_substitute('{"Safe": "Low"}') }}",
+  "properties": {
+    "reaqta_id": "{{ id }}",
+    "reaqta_alert_link": "<a target='blank' href='{{ alert_url }}'>ReaQta Alert</a>",
+    "reaqta_tags": "{{ tags | join(', ') }}",
+    "reaqta_machine_id": "{{ endpoint.machineId }}",
+    "reaqta_cpu_info": "{{ endpoint.cpuDescr }} ({{ endpoint.os }})"
+  },
+  "comments": [
+    {
+      "text": {
+          "format": "text",
+          "content": "ReaQta Alert comment:\n{{ notes|replace('"', '\\"') }}"
+      }
+    }
+  ]
+}

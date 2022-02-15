@@ -1,0 +1,282 @@
+# -*- coding: utf-8 -*-
+# pragma pylint: disable=unused-argument, no-self-use
+
+"""Function implementation"""
+
+import datetime
+import logging
+import os
+from threading import Thread
+from resilient_circuits import ResilientComponent
+from resilient_lib import validate_fields, RequestsCommon, make_payload_from_template
+from resilient import get_client
+from fn_reaqta.lib.poller_common import SOARCommon, poller, get_template_dir
+from fn_reaqta.lib.endpoint_common import EndPointCommon
+
+
+PACKAGE_NAME = "fn_reaqta"
+ENTITY_ID = "id"  # name of field in the endpoint entity (alert, case, etc) with the ID value
+SOAR_ENTITY_ID_FIELD = "reaqta_id" # name of custom IBM SOAR case field to retain the endpoint entity_id
+ENTITY_COMMENT_HEADER = "Created by ReaQta" # header used to identify comments create by the endpoint entity
+
+ENTITY_LABEL = "alert" # name to label the case, alert, event, etc. native to your endpoind solution
+LOG = logging.getLogger(__name__)
+
+# C H A N G E   F O R   E N D P O I N T
+LINKBACK_URL = "alerts/{}"   # url to generate back to the entity (case, alert, etc.)
+
+# Default Templates
+CREATE_INCIDENT_TEMPLATE = os.path.join(get_template_dir(), "soar_create_incident.jinja")
+UPDATE_INCIDENT_TEMPLATE = os.path.join(get_template_dir(), "soar_update_incident.jinja")
+CLOSE_INCIDENT_TEMPLATE = os.path.join(get_template_dir(), "soar_close_incident.jinja")
+TRIGGER_EVENTS_TEMPLATE = os.path.join(get_template_dir(), "soar_triggerevents_datatable.jinja")
+
+def init_endpoint(rc, options):
+    """ intialize
+
+    Args:
+        rc (obj): RequestsCommon class for making API calls
+        options (dict): app.config settings for the endpoint
+
+    Returns:
+        obj: class to endpoint class for ongoing API calls
+    """
+    # initialize the class for making API calls to your endpoint
+    endpoint_class = EndPointCommon(rc, options)
+
+    return endpoint_class
+
+def get_entities(endpoint_common, query_field_name, last_poller_time):
+    """[method call to query the endpoint solution for newly created or modified entities for
+        synchronization with IBM SOAR]
+
+    Args:
+        endpoint_common ([obj]): [class ]
+        last_poller_time ([int]): [timestamp in milliseconds to collect the entities (alerts, cases, etc.)]
+
+    Returns:
+        [list]: [list of entities to synchronize with SOAR]
+    """
+    entity_list = []
+
+    # enter the code needed to perform a query to the endpoint platform, using the last_poller_time to
+    # identify entities changed since that timestamp.
+    # use options to collect urls, api_keys, etc. needed for the API call.
+    # use rc.execute() to call your endpoint with your query to return entities changes since the last_poller_time
+    entity_list = endpoint_common.get_entities_since_ts(query_field_name, last_poller_time)
+
+    return entity_list
+
+
+def get_entity_id(entity):
+    """[get the id for the entity returned in your query]
+
+    Args:
+        entity ([dict]): [data structure of an entity]
+
+    Returns:
+        entity_id (str/int): [entity_id to use]
+    """
+    return entity.get(ENTITY_ID)
+
+def is_entity_closed(entity):
+    """[determine if your entity is in a closed state]
+
+    Args:
+        entity ([dict]): [data structure of an entity]
+
+    Returns
+        is_entity ([bool]): [true/false if entity is closed]
+    """
+    return bool(entity.get("closed", False))
+
+class PollerComponent(ResilientComponent):
+    """
+    poller for escalating SOAR incidents and synchronizing changes
+    """
+
+    def __init__(self, opts):
+        """constructor provides access to the configuration options"""
+        super(PollerComponent, self).__init__(opts)
+        self.options = opts.get(PACKAGE_NAME, {})
+
+        # Validate required fields in app.config are set
+        validate_fields(["polling_interval",
+                        "polling_lookback",
+                        "reaqta_url",
+                        "api_version",
+                        "cafile",
+                        "api_key",
+                        "api_secret"],
+                        self.options)
+
+        # collect settings necessary and initialize libraries used by the poller
+        if not self._init_env(opts, self.options):
+            LOG.info(u"Poller interval is not configured.  Automated escalation is disabled.")
+            return
+
+        poller_thread = Thread(target=self.run)
+        poller_thread.daemon = True
+        poller_thread.start()
+
+    def _init_env(self, opts, options):
+        """[initialize the environment based on app.config settings]
+
+        Args:
+            opts ([dict]): [all settings including SOAR settings]
+            options ([dict]): [settings specific to datasource]
+
+        Returns:
+            [bool]: [True if poller is configured]
+        """
+        self.polling_interval = int(options.get("polling_interval", 0))
+        if not self.polling_interval:
+            return False
+
+        LOG.info(u"Poller initiated, polling interval %s", self.polling_interval)
+        self.last_poller_time = self._get_last_poller_date(int(options.get('polling_lookback', 0)))
+        LOG.info(self.last_poller_time)
+
+        # collect the templates to use when creating, updating and closing cases
+        self.soar_create_case_template = options.get("soar_create_case_template")
+        self.soar_update_case_template = options.get("soar_update_case_template")
+        self.soar_close_case_template = options.get("soar_close_case_template")
+
+        # rest_client is used to make IBM SOAR API calls
+        self.rest_client = get_client(opts)
+        self.rc = RequestsCommon(opts, options)
+        self.soar_common = SOARCommon(self.rest_client)
+        self.endpoint_common = init_endpoint(self.rc, options)
+
+        return True
+
+    @poller('polling_interval', 'last_poller_time', PACKAGE_NAME)
+    def run(self, last_poller_time=None):
+        """[Process to query for changes in datasource entities and the cooresponding update SOAR case]
+           The steps taken are to
+           1) query SOAR for all open entities associated with the datasource
+           2) query datasource entities for changes based on these incidents
+           3) determine SOAR actions to take: create, update case or close
+
+        Args:
+            last_poller_time ([int]): [time in milliseconds when the last poller ran]
+        """
+
+        # query for both new and closed alerts
+        for query_field_name in ["receivedAfter", "closedAfter"]:
+            # get the list of entities (alerts, cases, etc.) to insert, update or close as cases in IBM SOAR
+            entity_list = get_entities(self.endpoint_common, query_field_name, last_poller_time)
+            LOG.debug(entity_list)
+
+            while True:
+                self.process_entity_list(entity_list.get('result', []))
+                if not entity_list['nextPage']:
+                    break
+
+                entity_list = self.endpoint_common.get_next_entities(entity_list['nextPage'])
+
+    def process_entity_list(self, entity_list):
+        error_msg = None
+        try:
+            cases_insert = cases_closed = cases_updated = 0
+            for entity in entity_list:
+                entity_id = get_entity_id(entity)
+
+                # create linkback url
+                entity['alert_url'] = self.endpoint_common.make_linkback_url(LINKBACK_URL, entity_id)
+
+                # determine if this is an existing SOAR case
+                soar_case, error_msg = self.soar_common.get_soar_case({ SOAR_ENTITY_ID_FIELD: entity_id })
+                # if case does not exist, create a new one
+                if not soar_case:
+                    # create the SOAR case
+                    soar_create_payload = make_payload_from_template(
+                                                        self.soar_create_case_template,
+                                                        CREATE_INCIDENT_TEMPLATE,
+                                                        entity
+                                                    )
+                    create_soar_case = self.soar_common.create_soar_case(
+                                                        soar_create_payload
+                                                    )
+
+                    soar_case_id = create_soar_case['id']
+                    # update the trigger events data table
+                    triggerevents_list = make_payload_from_template(
+                                                        None,
+                                                        TRIGGER_EVENTS_TEMPLATE,
+                                                        entity
+                                                    )
+
+                    for event_rowdata in triggerevents_list:
+                        self.soar_common.create_datatable_row(soar_case_id, "reaqta_trigger_events", event_rowdata)
+
+                    cases_insert += 1
+                    LOG.info("Created SOAR case %s from %s %s", create_soar_case['id'], ENTITY_LABEL, entity_id)
+                else:
+                    soar_case_id = soar_case['id']
+
+                    if is_entity_closed(entity):
+                        # close the SOAR case
+                        soar_close_payload = make_payload_from_template(
+                                                        self.soar_close_case_template,
+                                                        CLOSE_INCIDENT_TEMPLATE,
+                                                        entity
+                                                    )
+                        _close_soar_case = self.soar_common.update_soar_case(
+                                                        soar_case_id,
+                                                        soar_close_payload
+                                                    )
+
+                        cases_closed += 1
+                        LOG.info("Closed SOAR case %s from %s %s", soar_case_id, ENTITY_LABEL, entity_id)
+                    else:
+                        # perform an update operation on the existing SOAR case
+                        #soar_update_payload = make_payload_from_template(
+                        #                                self.soar_update_case_template,
+                        #                                UPDATE_INCIDENT_TEMPLATE,
+                        #                                soar_case
+                        #                            )
+                        # Update description, tags, priority, assignee, stage, important
+                        #_update_soar_case = self.soar_common.update_soar_case(
+                        #                                soar_case,
+                        #                                soar_update_payload
+                        #                            )
+
+                        cases_updated += 1
+                        LOG.info("Updated SOAR case %s from %s %s", soar_case_id, ENTITY_LABEL, entity_id)
+
+                        # SYNC Comments
+                        #new_comments = self.res_common.filter_soar_comments(soar_case_id, case.get('insights', []))
+                        #LOG.info(new_comments)
+                        #for comment in new_comments:
+                        #    self.res_common.create_case_comment(soar_case_id, comment['title'], comment['content'])
+
+            LOG.info("IBM SOAR cases created: %s, cases closed: %s, cases updated: %s",
+                     cases_insert, cases_closed, cases_updated)
+        except Exception as err:
+            LOG.error("%s poller run failed: %s", PACKAGE_NAME, str(err))
+
+
+    def _get_last_poller_date(self, polling_lookback):
+        """get the last poller datetime based on a lookback value
+        Args:
+            polling_lookback ([number]): # of minutes to lookback
+        Returns:
+            [datetime]: [datetime to use for last poller run time]
+        """
+        return self._get_timestamp() - datetime.timedelta(minutes=polling_lookback)
+
+    def _get_timestamp(self):
+        return datetime.datetime.now()
+
+    def query_changed(self, entity_list):
+        """
+
+        Returns:
+            entity_list [list]: [list of entities (alerts, cases, etc) to escalate to IBM SOAR]
+            error_msg [str]: [error message when errors occur or None]
+        """
+        entity_list = []
+        error_msg = None
+
+        return entity_list, error_msg

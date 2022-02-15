@@ -1,0 +1,27 @@
+[
+  {% for event in triggerEvents %}
+    {
+        "cells": {
+            "received_at": {
+                "value": {{ event.receivedAt|soar_datetimeformat(split_at='.') }}
+            },
+            "category": {
+                "value": "{{ event.category }}"
+            },
+            "relevance": {
+                "value": {{ event.relevance }}
+            },
+            "severity": {
+                "value": "{{ event.severity }}"
+            },
+            "program_path": {
+                "value": "{{ event.process.program.path|replace("\\", "\\\\") }}"
+            },
+            "process_pid": {
+                "value": {{ event.process.pid }}
+            }
+        }
+    }
+    {%- if not loop.last %},{% endif %}
+  {% endfor %}
+]
