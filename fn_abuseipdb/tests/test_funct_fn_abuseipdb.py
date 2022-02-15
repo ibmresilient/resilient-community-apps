@@ -3,7 +3,7 @@
 
 import pytest
 import mock
-from .mock_artifact import mock_successful_result
+from .mock_artifact import MockedResponse
 from resilient_circuits.util import get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 
@@ -66,8 +66,8 @@ class TestFnAbuseipdb:
     ])
     def test_success(self, circuits_app, mock_inputs, expected_results):
         """ Test calling with sample values for the parameters """
-        with mock.patch('fn_abuseipdb.components.funct_fn_abuseipdb.AppFunctionComponent') as mock_execute:
-            mock_execute.rc.execute.return_value = mock_successful_result
+        with mock.patch("resilient_circuits.app_function_component.RequestsCommon.execute") as mock_execute:
+            mock_execute.return_value = MockedResponse()
             results = call_fn_abuseipdb_function(circuits_app, mock_inputs)
             assert(expected_results.get('success') == results.get('success'))
 
