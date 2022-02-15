@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 #-- coding: utf-8 --
-#(c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+#(c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 #pragma pylint: disable=unused-argument, no-self-use, line-too-long
 
 from setuptools import setup, find_packages
 
 setup(
     name='fn_outbound_email',
-    display_name='Outbound Email for IBM QRadar SOAR',
+    display_name='Outbound Email',
     version='1.3.1',
     license='MIT',
     author='IBM QRadar SOAR',

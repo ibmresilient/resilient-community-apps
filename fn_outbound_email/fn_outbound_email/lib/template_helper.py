@@ -1,4 +1,4 @@
-# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 
@@ -66,7 +66,7 @@ class TemplateHelper(object):
                         for field_name in field_list:
                             if str(header) == str(field_name['text']):
                                 if str(field_name['name']) == str(cells).lower():
-                                    tables[header].insert(datatable['rows'].index(row), rows[cells].get("value"))
+                                    tables[header].insert(datatable['rows'].index(row), self.get_value_as_string(field_name, rows[cells].get("value")))
 
             #Load the path to the datatable.jinja file
             env = Environment(loader=FileSystemLoader(searchpath=local_template_file_path), autoescape=True)
