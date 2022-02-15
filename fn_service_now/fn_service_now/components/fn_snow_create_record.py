@@ -90,7 +90,7 @@ class FunctionComponent(ResilientComponent):
             datatable = ServiceNowRecordsDataTable(res_client, payload.inputs["incident_id"])
 
             # Generate the res_link
-            payload.res_link = res_helper.generate_res_link(payload.inputs["incident_id"], self.host, payload.inputs["task_id"])
+            payload.res_link = res_helper.generate_res_link(payload.inputs["incident_id"], self.host, res_client.org_id, payload.inputs["task_id"])
 
             # Generate the request_data
             req = res_helper.generate_sn_request_data(
