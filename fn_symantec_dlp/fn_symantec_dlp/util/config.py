@@ -11,9 +11,6 @@ def config_section_data():
        when called by `resilient-circuits config [-c|-u]`
     """
     config_data = u"""[fn_symantec_dlp]
-# Whether or not to start the listener
-sdlp_should_poller_run=True
-
 # The URL of the DLP Installation
 sdlp_host=<serverip>
 

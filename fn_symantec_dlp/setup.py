@@ -20,13 +20,15 @@ def snake_to_camel(word):
 
 setup(
     name='fn_symantec_dlp',
+    display_name="Symantec DLP",
     version='2.0.0',
     license='ILAN',
-    author='IBM Resilient',
-    author_email='support@resilientsystems.com',
+    author='IBM QRadar SOAR',
+    author_email='',
     url='https://ibm.com/mysupport',
-    description="Resilient Circuits Components used to establish DLP as a source of Incidents for Resilient",
-    long_description="Included in this package are two main components; a Incident Poller used to gather Incidents from DLP and a Resilient Circuits Function for updating a Symantec DLP Incident from Resilient.",
+    description="IBM QRadar SOAR app for Symantec DLP",
+    long_description="""This app allows bi-directional synchronization between IBM SOAR and Symantec DLP.
+    Symantec DLP incident are escalated to IBM SOAR as cases with the creation of artifacts and notes in SOAR from the incident.""",
     install_requires=[
         'resilient_circuits>=43.0.0',
         'jinja2',

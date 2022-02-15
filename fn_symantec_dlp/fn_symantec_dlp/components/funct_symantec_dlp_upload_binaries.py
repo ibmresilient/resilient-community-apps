@@ -6,6 +6,8 @@
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import IntegrationError, validate_fields
+from resilient import get_client
+from fn_symantec_dlp.lib.resilient_common import ResilientCommon
 from fn_symantec_dlp.lib.dlp_common import SymantecDLPCommon
 
 PACKAGE_NAME = "fn_symantec_dlp"
@@ -31,13 +33,17 @@ class FunctionComponent(AppFunctionComponent):
 
         sdlp_incident_id = fn_inputs.sdlp_incident_id
         soar_case_id = fn_inputs.incident_id
+
+        rest_client = get_client(self.opts)
+        res_common = ResilientCommon(rest_client)
         sdlp_client = SymantecDLPCommon(self.rc, self.options)
 
-        update_results = sdlp_client.upload_sdlp_binaries(sdlp_incident_id, soar_case_id)
+        artifact_name_list = sdlp_client.upload_sdlp_binaries(res_common, sdlp_incident_id, soar_case_id)
 
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
 
         results = {
-                   "success_status": update_results
+                   "success": True,
+                   "artifact_name_list": artifact_name_list
                 }
         yield FunctionResult(results)

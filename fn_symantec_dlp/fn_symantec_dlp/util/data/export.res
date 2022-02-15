@@ -13,11 +13,11 @@
         }
       ],
       "enabled": true,
-      "export_key": "Symantec DLP: Send SOAR Note to DLP Incident",
+      "export_key": "Symantec DLP: Send SOAR Note to DLP",
       "id": 50,
       "logic_type": "all",
       "message_destinations": [],
-      "name": "Symantec DLP: Send SOAR Note to DLP Incident",
+      "name": "Symantec DLP: Send SOAR Note to DLP",
       "object_type": "note",
       "tags": [],
       "timeout_seconds": 86400,
@@ -25,19 +25,12 @@
       "uuid": "963231e7-9e0c-4dc1-aa7c-37283df7f178",
       "view_items": [],
       "workflows": [
-        "symantec_dlp_send_soar_note_to_dlp_incident"
+        "sdlp_send_soar_note_to_dlp"
       ]
     },
     {
       "automations": [],
       "conditions": [
-        {
-          "evaluation_id": null,
-          "field_name": "incident.plan_status",
-          "method": "equals",
-          "type": null,
-          "value": "Closed"
-        },
         {
           "evaluation_id": null,
           "field_name": "incident.properties.sdlp_incident_id",
@@ -47,19 +40,28 @@
         }
       ],
       "enabled": true,
-      "export_key": "Symantec DLP: Update DLP when this Incident is closed ",
-      "id": 35,
+      "export_key": "Symantec DLP: Update DLP Incident Status",
+      "id": 51,
       "logic_type": "all",
       "message_destinations": [],
-      "name": "Symantec DLP: Update DLP when this Incident is closed ",
+      "name": "Symantec DLP: Update DLP Incident Status",
       "object_type": "incident",
       "tags": [],
       "timeout_seconds": 86400,
-      "type": 0,
-      "uuid": "4562cf17-6ac6-4a09-b2ee-91dd12fab662",
-      "view_items": [],
+      "type": 1,
+      "uuid": "68fee783-e2fd-4b54-8fdd-ac2092c6967f",
+      "view_items": [
+        {
+          "content": "710445d8-3fcd-4650-8428-3b18cc62b216",
+          "element": "field_uuid",
+          "field_type": "actioninvocation",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        }
+      ],
       "workflows": [
-        "sdlp_set_incident_status"
+        "sdlp_update_incident_status"
       ]
     },
     {
@@ -80,7 +82,7 @@
           "value": null
         }
       ],
-      "enabled": true,
+      "enabled": false,
       "export_key": "Symantec DLP: Upload Binaries",
       "id": 48,
       "logic_type": "all",
@@ -93,7 +95,7 @@
       "uuid": "c05524c1-9356-4c3c-b6d0-cbb9cfd53fc9",
       "view_items": [],
       "workflows": [
-        "symantec_dlp_upload_binaries"
+        "sdlp_upload_binaries"
       ]
     },
     {
@@ -120,7 +122,7 @@
       "uuid": "8af2230a-901a-4d07-99a3-4d0f7965e6ad",
       "view_items": [],
       "workflows": [
-        "symantec_dlp_upload_binaries"
+        "sdlp_upload_binaries"
       ]
     },
     {
@@ -147,13 +149,13 @@
       "uuid": "1cdb703e-4dc7-46e9-aad7-d384b74c2204",
       "view_items": [],
       "workflows": [
-        "symantec_dlp_write_incident_details_to_a_note"
+        "sdlp_write_incident_details_to_note"
       ]
     }
   ],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1644534065906,
+  "export_date": 1644951553396,
   "export_format_version": 2,
   "fields": [
     {
@@ -289,6 +291,158 @@
       "chosen": false,
       "default_chosen_by_server": false,
       "deprecated": false,
+      "export_key": "__function/sdlp_incident_status",
+      "hide_notification": false,
+      "id": 359,
+      "input_type": "select",
+      "internal": false,
+      "is_tracked": false,
+      "name": "sdlp_incident_status",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": null,
+      "read_only": false,
+      "required": "always",
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "sdlp_incident_status",
+      "tooltip": "",
+      "type_id": 11,
+      "uuid": "79413c7b-ad2f-4149-a97b-dd6a70e72afe",
+      "values": [
+        {
+          "default": true,
+          "enabled": true,
+          "hidden": false,
+          "label": "incident.status.New",
+          "properties": null,
+          "uuid": "dd70d539-26fb-40fb-8b8c-92afba3cb3f8",
+          "value": 158
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "Escalated",
+          "properties": null,
+          "uuid": "a3434db8-d0d7-4a4f-9b24-c603a26203e5",
+          "value": 159
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "Investigation",
+          "properties": null,
+          "uuid": "47e781b2-212f-4f6f-97f8-0b32723b2472",
+          "value": 160
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "Resolved",
+          "properties": null,
+          "uuid": "7a8cbfd9-c81c-4a38-952f-f86d3f7b3024",
+          "value": 161
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "Dismissed",
+          "properties": null,
+          "uuid": "fd4ed4d0-35ef-417e-a944-3e2859ba069f",
+          "value": 162
+        }
+      ]
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "actioninvocation/sdlp_incident_status",
+      "hide_notification": false,
+      "id": 358,
+      "input_type": "select",
+      "internal": false,
+      "is_tracked": false,
+      "name": "sdlp_incident_status",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": "properties",
+      "read_only": false,
+      "required": "always",
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "Symantec DLP Incident Status",
+      "tooltip": "",
+      "type_id": 6,
+      "uuid": "710445d8-3fcd-4650-8428-3b18cc62b216",
+      "values": [
+        {
+          "default": true,
+          "enabled": true,
+          "hidden": false,
+          "label": "incident.status.New",
+          "properties": null,
+          "uuid": "a8ce6cd4-26d7-4218-bf83-884cf42be204",
+          "value": 153
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "Escalated",
+          "properties": null,
+          "uuid": "45cf43bd-df22-47ac-ad9e-1f7f77761391",
+          "value": 154
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "Investigation",
+          "properties": null,
+          "uuid": "ecd10a36-d09a-43c6-b212-ef84e8c19e77",
+          "value": 155
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "Resolved",
+          "properties": null,
+          "uuid": "f8cd108a-9ce4-4250-b120-02141ecc7e72",
+          "value": 156
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "Dismissed",
+          "properties": null,
+          "uuid": "a50db2cb-9694-49df-a0f3-47073871959b",
+          "value": 157
+        }
+      ]
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
       "export_key": "incident/sdlp_incident_url",
       "hide_notification": false,
       "id": 295,
@@ -337,6 +491,35 @@
       "tooltip": "The ID of a Symantec DLP Incident",
       "type_id": 0,
       "uuid": "55f35e22-1610-42b0-accc-f65974e86e4e",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "incident/sdlp_incident_status",
+      "hide_notification": false,
+      "id": 357,
+      "input_type": "text",
+      "internal": false,
+      "is_tracked": false,
+      "name": "sdlp_incident_status",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": "properties",
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "Symantec DLP Incident Status",
+      "tooltip": "",
+      "type_id": 0,
+      "uuid": "7cd1095b-07e3-49bd-bf8c-58ea2776e983",
       "values": []
     },
     {
@@ -453,12 +636,12 @@
         {
           "actions": [],
           "description": null,
-          "name": "Symantec DLP: Write Incident Details to a Note",
+          "name": "Symantec DLP: Write Incident Details to Note",
           "object_type": "incident",
-          "programmatic_name": "symantec_dlp_write_incident_details_to_a_note",
+          "programmatic_name": "sdlp_write_incident_details_to_note",
           "tags": [],
           "uuid": null,
-          "workflow_id": 33
+          "workflow_id": 40
         }
       ]
     },
@@ -511,12 +694,70 @@
         {
           "actions": [],
           "description": null,
-          "name": "Symantec DLP: Send SOAR Note to DLP Incident",
+          "name": "Symantec DLP: Send SOAR Note to DLP",
           "object_type": "note",
-          "programmatic_name": "symantec_dlp_send_soar_note_to_dlp_incident",
+          "programmatic_name": "sdlp_send_soar_note_to_dlp",
           "tags": [],
           "uuid": null,
-          "workflow_id": 36
+          "workflow_id": 38
+        }
+      ]
+    },
+    {
+      "created_date": 1644855344845,
+      "creator": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "description": {
+        "content": "Update the incident status of the Symantec DLP incident in DLP.",
+        "format": "text"
+      },
+      "destination_handle": "fn_symantec_dlp",
+      "display_name": "Symantec DLP: Update Incident Status in DLP",
+      "export_key": "symantec_dlp_update_incident_status",
+      "id": 30,
+      "last_modified_by": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1644943184279,
+      "name": "symantec_dlp_update_incident_status",
+      "tags": [],
+      "uuid": "4258886f-e439-41f2-9679-864a3d291add",
+      "version": 6,
+      "view_items": [
+        {
+          "content": "ead214c2-13fe-43f6-a3c7-676a88338dbb",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "79413c7b-ad2f-4149-a97b-dd6a70e72afe",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        }
+      ],
+      "workflows": [
+        {
+          "actions": [],
+          "description": null,
+          "name": "Symantec DLP: Update Incident Status in DLP",
+          "object_type": "incident",
+          "programmatic_name": "sdlp_update_incident_status",
+          "tags": [],
+          "uuid": null,
+          "workflow_id": 41
         }
       ]
     },
@@ -571,22 +812,22 @@
           "description": null,
           "name": "Symantec DLP: Upload Binaries",
           "object_type": "incident",
-          "programmatic_name": "symantec_dlp_upload_binaries",
+          "programmatic_name": "sdlp_upload_binaries",
           "tags": [],
           "uuid": null,
-          "workflow_id": 34
+          "workflow_id": 39
         }
       ]
     }
   ],
   "geos": null,
   "groups": null,
-  "id": 227,
+  "id": 247,
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1644534062485,
+      "create_date": 1644951551030,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -595,7 +836,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1644534062485,
+      "update_date": 1644951551030,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -677,82 +918,82 @@
     {
       "actions": [],
       "content": {
-        "version": 5,
-        "workflow_id": "symantec_dlp_write_incident_details_to_a_note",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"symantec_dlp_write_incident_details_to_a_note\" isExecutable=\"true\" name=\"Symantec DLP: Write Incident Details to a Note\"\u003e\u003cdocumentation\u003eCall the function to get DLP incident details in JSON format and use the convert_json_to_rich_text script to print readable formatted JSON to an incident note.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_15u7h7q\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_13cc5dk\" name=\"Symantec DLP: Get Incident Detail...\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"7e128530-9e09-405b-8f04-d7e23f5fb359\"\u003e{\"inputs\":{},\"post_processing_script\":\"# Put the results json into a workflow property so we can call the \\n# convert_json_to_rich_text script to print readable formatted json in an incident note.\\ninputs = results.get(\\\"inputs\\\")\\nsdlp_incident_id = inputs.get(\\\"sdlp_incident_id\\\")\\ncontent = results.get(\\\"content\\\")\\n\\nheader = u\\\"Symantec DLP Incident Id: {0} Details:\\\".format(sdlp_incident_id)\\n\\njson_note = {\\n              \\\"version\\\": \\\"1.1\\\",\\n              \\\"header\\\": header, \\n              \\\"json\\\": content,\\n              \\\"sort\\\": False\\n            }\\n\\nworkflow.addProperty(\u0027convert_json_to_rich_text\u0027, json_note)\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.sdlp_incident_id = incident.properties.sdlp_incident_id\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_15u7h7q\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0f1dod6\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_15u7h7q\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_13cc5dk\"/\u003e\u003cscriptTask id=\"ScriptTask_038nkue\" name=\"Convert JSON to rich text v1.1\"\u003e\u003cextensionElements\u003e\u003cresilient:script programmaticName=\"convert_json_to_rich_text_v11\" uuid=\"874d929b-7b4c-4f47-983a-58295c93d6bf\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0f1dod6\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_16xnfca\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"SequenceFlow_0f1dod6\" sourceRef=\"ServiceTask_13cc5dk\" targetRef=\"ScriptTask_038nkue\"/\u003e\u003cendEvent id=\"EndEvent_1a5c3zv\"\u003e\u003cincoming\u003eSequenceFlow_16xnfca\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_16xnfca\" sourceRef=\"ScriptTask_038nkue\" targetRef=\"EndEvent_1a5c3zv\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_13cc5dk\" id=\"ServiceTask_13cc5dk_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"385\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_15u7h7q\" id=\"SequenceFlow_15u7h7q_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"385\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"291.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_038nkue\" id=\"ScriptTask_038nkue_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"703.936\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0f1dod6\" id=\"SequenceFlow_0f1dod6_di\"\u003e\u003comgdi:waypoint x=\"485\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"704\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"594.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1a5c3zv\" id=\"EndEvent_1a5c3zv_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"963.936\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"981.936\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_16xnfca\" id=\"SequenceFlow_16xnfca_di\"\u003e\u003comgdi:waypoint x=\"804\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"964\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"884\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "version": 4,
+        "workflow_id": "sdlp_upload_binaries",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"sdlp_upload_binaries\" isExecutable=\"true\" name=\"Symantec DLP: Upload Binaries\"\u003e\u003cdocumentation\u003eCall the function to get the binary files associate with a DLP incident and upload to the corresponding IBM SOAR case.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0u9x6bq\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cendEvent id=\"EndEvent_0y2wmdt\"\u003e\u003cincoming\u003eSequenceFlow_1e1upjv\u003c/incoming\u003e\u003c/endEvent\u003e\u003cserviceTask id=\"ServiceTask_0r6tnd5\" name=\"Symantec DLP: Upload Binaries\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"64c9eafd-e365-4b8b-ba61-33aa6010c601\"\u003e{\"inputs\":{},\"post_processing_script\":\"sdlp_inputs = results.get(\\\"inputs\\\")\\nsdlp_incident_id = sdlp_inputs.get(\\\"sdlp_incident_id\\\")\\n\\nnote = u\\\"\u0026lt;b\u0026gt;Symantec DLP: Upload Binaries for incident Id {0}\u0026lt;/b\u0026gt;\u0026lt;br\u0026gt;\\\".format(sdlp_incident_id)\\nsuccess = results.get(\\\"success\\\")\\nif success:\\n  content = results.get(\u0027artifact_name_list\u0027)\\n  num_artifacts = len(content)\\n  note = u\\\"{0} {1} artifact files added\\\".format(note, num_artifacts)\\nelse\\n  note = u\\\"{0}artifact NOT added\\\".format(note)\\nincident.addNote(helper.createRichText(note))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.sdlp_incident_id = incident.properties.sdlp_incident_id\\ninputs.incident_id = incident.id\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0u9x6bq\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1e1upjv\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0u9x6bq\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0r6tnd5\"/\u003e\u003csequenceFlow id=\"SequenceFlow_1e1upjv\" sourceRef=\"ServiceTask_0r6tnd5\" targetRef=\"EndEvent_0y2wmdt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0y2wmdt\" id=\"EndEvent_0y2wmdt_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"811\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"829\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0r6tnd5\" id=\"ServiceTask_0r6tnd5_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"447\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0u9x6bq\" id=\"SequenceFlow_0u9x6bq_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"447\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"322.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1e1upjv\" id=\"SequenceFlow_1e1upjv_di\"\u003e\u003comgdi:waypoint x=\"547\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"811\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"679\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 5,
-      "creator_id": "admin@example.com",
-      "description": "Call the function to get DLP incident details in JSON format and use the convert_json_to_rich_text script to print readable formatted JSON to an incident note.",
-      "export_key": "symantec_dlp_write_incident_details_to_a_note",
-      "last_modified_by": "admin@example.com",
-      "last_modified_time": 1644423907814,
-      "name": "Symantec DLP: Write Incident Details to a Note",
-      "object_type": "incident",
-      "programmatic_name": "symantec_dlp_write_incident_details_to_a_note",
-      "tags": [],
-      "uuid": "993f3a1e-fd3b-4e4e-92d7-a04c0f497a63",
-      "workflow_id": 33
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 5,
-        "workflow_id": "sdlp_send_note_to_incident",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"sdlp_send_note_to_incident\" isExecutable=\"true\" name=\"Example: Symantec DLP - Send Note to Incident\"\u003e\u003cdocumentation\u003eAn example workflow which can be used to send a Note to a DLP Incident. This workflow gets its note text from an associated Rule which has an activity field. If no value is given with the activity field then it sends a default piece of text.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_04k82tk\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0gjgecb\" name=\"Symantec DLP: Update Incident\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"8962f715-6114-4e8f-a247-29c40623b98c\"\u003e{\"inputs\":{},\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"#######################################\\n### Define pre-processing functions ###\\n#######################################\\ndef dict_to_json_str(d):\\n  \\\"\\\"\\\"Function that converts a dictionary into a JSON stringself.\\n     Supports basestring, bool and int.\\n     If the value is None, it sets it to False\\\"\\\"\\\"\\n\\n  json_str = \u0027\\\"{ {0} }\\\"\u0027\\n  json_entry = \u0027\\\"{0}\\\":{1}\u0027\\n  json_entry_str = \u0027\\\"{0}\\\":\\\"{1}\\\"\u0027\\n  json_entry_unicode = u\u0027\\\"{0}\\\":\\\"{1}\\\"\u0027\\n  entries = [] \\n  \\n  for entry in d:\\n    key = entry\\n    value = d[entry]\\n    \\n      \\n    if value is None:\\n      value = False\\n      \\n    if isinstance(value, unicode):\\n      entries.append(json_entry_unicode.format(key, value))\\n      \\n    elif isinstance(value, basestring):\\n      entries.append(json_entry_str.format(key, value))\\n    \\n    elif isinstance(value, bool):\\n      value = \u0027true\u0027 if value == True else \u0027false\u0027\\n      entries.append(json_entry.format(key, value))\\n    \\n    else:\\n      entries.append(json_entry.format(key, value))\\n  \\n  return \u0027{\u0027 + \u0027,\u0027.join(entries) + \u0027}\u0027\\n\\nfrom java.util import Date\\n\\n# Prepare the payload which will be sent to DLP as an update request\\npayload = {\\n\\\"note\\\": u\\\"Created by IBM SOAR. [{}]{}\\\".format(Date(), rule.properties.sdlp_note_to_be_sent or \\\"Default Note from IBM SOAR\\\"),\\n\\\"incident_id\\\": incident.properties.sdlp_incident_id\\n}\\n\\n\\ninputs.sdlp_update_payload = dict_to_json_str(payload)\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_04k82tk\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1e2bbhi\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_04k82tk\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0gjgecb\"/\u003e\u003cendEvent id=\"EndEvent_1dvnfht\"\u003e\u003cincoming\u003eSequenceFlow_1e2bbhi\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1e2bbhi\" sourceRef=\"ServiceTask_0gjgecb\" targetRef=\"EndEvent_1dvnfht\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0bwojy3\"\u003e\u003ctext\u003eInputs: The SDLP Update Payload takes key:value pairs which represent which parts of the incident we want to update.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0q3ws4z\" sourceRef=\"ServiceTask_0gjgecb\" targetRef=\"TextAnnotation_0bwojy3\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1cpcp9y\"\u003e\u003ctext\u003eThe results of the API call are not returned to the Post-Processing script as all the information we send to DLP is found in the Inputs part of the payload.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0f3swr7\" sourceRef=\"ServiceTask_0gjgecb\" targetRef=\"TextAnnotation_1cpcp9y\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0gjgecb\" id=\"ServiceTask_0gjgecb_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"408\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_04k82tk\" id=\"SequenceFlow_04k82tk_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"408\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"303\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1dvnfht\" id=\"EndEvent_1dvnfht_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"744\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"762\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1e2bbhi\" id=\"SequenceFlow_1e2bbhi_di\"\u003e\u003comgdi:waypoint x=\"508\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"744\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"626\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0bwojy3\" id=\"TextAnnotation_0bwojy3_di\"\u003e\u003comgdc:Bounds height=\"86\" width=\"140\" x=\"234\" y=\"34\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0q3ws4z\" id=\"Association_0q3ws4z_di\"\u003e\u003comgdi:waypoint x=\"414\" xsi:type=\"omgdc:Point\" y=\"170\"/\u003e\u003comgdi:waypoint x=\"355\" xsi:type=\"omgdc:Point\" y=\"120\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1cpcp9y\" id=\"TextAnnotation_1cpcp9y_di\"\u003e\u003comgdc:Bounds height=\"75\" width=\"222\" x=\"595\" y=\"39\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0f3swr7\" id=\"Association_0f3swr7_di\"\u003e\u003comgdi:waypoint x=\"508\" xsi:type=\"omgdc:Point\" y=\"180\"/\u003e\u003comgdi:waypoint x=\"635\" xsi:type=\"omgdc:Point\" y=\"114\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 5,
-      "creator_id": "admin@example.com",
-      "description": "An example workflow which can be used to send a Note to a DLP Incident. This workflow gets its note text from an associated Rule which has an activity field. If no value is given with the activity field then it sends a default piece of text.",
-      "export_key": "sdlp_send_note_to_incident",
-      "last_modified_by": "admin@example.com",
-      "last_modified_time": 1644529501091,
-      "name": "Example: Symantec DLP - Send Note to Incident",
-      "object_type": "incident",
-      "programmatic_name": "sdlp_send_note_to_incident",
-      "tags": [],
-      "uuid": "1f44df54-2d2d-4df9-9583-461947d74dc1",
-      "workflow_id": 22
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 7,
-        "workflow_id": "symantec_dlp_upload_binaries",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"symantec_dlp_upload_binaries\" isExecutable=\"true\" name=\"Symantec DLP: Upload Binaries\"\u003e\u003cdocumentation\u003eCall the function to get the binary files associate with a DLP incident and upload to the corresponding IBM SOAR case.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0u9x6bq\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cendEvent id=\"EndEvent_0y2wmdt\"\u003e\u003cincoming\u003eSequenceFlow_1e1upjv\u003c/incoming\u003e\u003c/endEvent\u003e\u003cserviceTask id=\"ServiceTask_0r6tnd5\" name=\"Symantec DLP: Upload Binaries\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"64c9eafd-e365-4b8b-ba61-33aa6010c601\"\u003e{\"inputs\":{},\"post_processing_script\":\"sdlp_inputs = results.get(\\\"inputs\\\")\\nsdlp_incident_id = sdlp_inputs.get(\\\"sdlp_incident_id\\\")\\n\\nnote = u\\\"\u0026lt;b\u0026gt;Symantec DLP: Upload Binaries for incident Id {0}\u0026lt;/b\u0026gt;\u0026lt;br\u0026gt;\\\".format(sdlp_incident_id)\\nsuccess = results.get(\\\"success\\\")\\nif success:\\n  note = u\\\"{0}artifact added\\\".format(note)\\nelse\\n  note = u\\\"{0}artifact NOT added\\\".format(note)\\nincident.addNote(helper.createRichText(note))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.sdlp_incident_id = incident.properties.sdlp_incident_id\\ninputs.incident_id = incident.id\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0u9x6bq\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1e1upjv\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0u9x6bq\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0r6tnd5\"/\u003e\u003csequenceFlow id=\"SequenceFlow_1e1upjv\" sourceRef=\"ServiceTask_0r6tnd5\" targetRef=\"EndEvent_0y2wmdt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0y2wmdt\" id=\"EndEvent_0y2wmdt_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"811\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"829\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0r6tnd5\" id=\"ServiceTask_0r6tnd5_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"447\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0u9x6bq\" id=\"SequenceFlow_0u9x6bq_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"447\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"322.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1e1upjv\" id=\"SequenceFlow_1e1upjv_di\"\u003e\u003comgdi:waypoint x=\"547\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"811\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"679\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 7,
+      "content_version": 4,
       "creator_id": "admin@example.com",
       "description": "Call the function to get the binary files associate with a DLP incident and upload to the corresponding IBM SOAR case.",
-      "export_key": "symantec_dlp_upload_binaries",
+      "export_key": "sdlp_upload_binaries",
       "last_modified_by": "admin@example.com",
-      "last_modified_time": 1644527620877,
+      "last_modified_time": 1644951478119,
       "name": "Symantec DLP: Upload Binaries",
       "object_type": "incident",
-      "programmatic_name": "symantec_dlp_upload_binaries",
+      "programmatic_name": "sdlp_upload_binaries",
       "tags": [],
-      "uuid": "b7bebe82-7505-4baf-b89b-92b9583439af",
-      "workflow_id": 34
+      "uuid": "18314a54-a9c0-49f7-b1f9-98af37c7ec7d",
+      "workflow_id": 39
     },
     {
       "actions": [],
       "content": {
-        "version": 5,
-        "workflow_id": "symantec_dlp_send_soar_note_to_dlp_incident",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"symantec_dlp_send_soar_note_to_dlp_incident\" isExecutable=\"true\" name=\"Symantec DLP: Send SOAR Note to DLP Incident\"\u003e\u003cdocumentation\u003eSend a SOAR note to the corresponding DLP incident.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0w8abzz\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_19r4cvd\" name=\"Symantec DLP: Send Note to DLP In...\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"1b03031b-cbfc-4ccb-8a01-ab7e109f1a33\"\u003e{\"inputs\":{},\"post_processing_script\":\"# Import Date\\nfrom java.util import Date\\n\\n# Edit note in SOAR to indicate it was sent to SentinelOne\\nif results.success:\\n  # Get the current time\\n  dt_now = Date()\\n  note.text = u\\\"\u0026lt;b\u0026gt;Sent to Symantec DLP at {0}\u0026lt;/b\u0026gt;\u0026lt;br\u0026gt;{1}\\\".format(dt_now, unicode(note.text.content))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.sdlp_incident_id = incident.properties.sdlp_incident_id\\ninputs.sdlp_note_text = note.text.content\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0w8abzz\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0mfe8fq\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0w8abzz\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_19r4cvd\"/\u003e\u003cendEvent id=\"EndEvent_1obxbt6\"\u003e\u003cincoming\u003eSequenceFlow_0mfe8fq\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0mfe8fq\" sourceRef=\"ServiceTask_19r4cvd\" targetRef=\"EndEvent_1obxbt6\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_19r4cvd\" id=\"ServiceTask_19r4cvd_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"485\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0w8abzz\" id=\"SequenceFlow_0w8abzz_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"485\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"341.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1obxbt6\" id=\"EndEvent_1obxbt6_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"756\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"774\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0mfe8fq\" id=\"SequenceFlow_0mfe8fq_di\"\u003e\u003comgdi:waypoint x=\"585\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"756\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"670.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "version": 3,
+        "workflow_id": "sdlp_update_incident_status",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"sdlp_update_incident_status\" isExecutable=\"true\" name=\"Symantec DLP: Update Incident Status in DLP\"\u003e\u003cdocumentation\u003eUpdate the DLP incident status in DLP.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1hgy1g1\u003c/outgoing\u003e\u003c/startEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1hgy1g1\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_085sbtd\"/\u003e\u003cendEvent id=\"EndEvent_0gmht6l\"\u003e\u003cincoming\u003eSequenceFlow_062edc4\u003c/incoming\u003e\u003c/endEvent\u003e\u003cserviceTask id=\"ServiceTask_085sbtd\" name=\"Symantec DLP: Update Incident Sta...\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"4258886f-e439-41f2-9679-864a3d291add\"\u003e{\"inputs\":{\"79413c7b-ad2f-4149-a97b-dd6a70e72afe\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"dd70d539-26fb-40fb-8b8c-92afba3cb3f8\"}}},\"post_processing_script\":\"content = results.get(\\\"content\\\")\\nsuccess = content.get(\\\"success\\\", False)\\nsdlp_incident_id = content.get(\\\"sdlp_incident_id\\\", None)\\nsdlp_incident_status = content.get(\\\"sdlp_incident_status\\\", None)\\nif success:\\n  noteText = u\u0027\u0026lt;b\u0026gt;Symantec DLP: Update Incident Status\u0026lt;/b\u0026gt;\u0026lt;br\u0026gt; DLP incident {0} status set to: {1}.\u0027.format(sdlp_incident_id, sdlp_incident_status)\\nelse:\\n  noteText = u\u0027\u0026lt;b\u0026gt;Symantec DLP: Update Incident Status\u0026lt;/b\u0026gt;\u0026lt;br\u0026gt;Error: Check DLP incidentId {0} status in Symantec DLP.\u0027.format(sdlp_incident_id)\\n\\nincident.addNote(noteText)\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.incident_id = incident.id\\ninputs.sdlp_incident_status = rule.properties.sdlp_incident_status\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1hgy1g1\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_062edc4\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_062edc4\" sourceRef=\"ServiceTask_085sbtd\" targetRef=\"EndEvent_0gmht6l\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1hgy1g1\" id=\"SequenceFlow_1hgy1g1_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"448\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"90\" x=\"278\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0gmht6l\" id=\"EndEvent_0gmht6l_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"784\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"802\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_085sbtd\" id=\"ServiceTask_085sbtd_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"448\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_062edc4\" id=\"SequenceFlow_062edc4_di\"\u003e\u003comgdi:waypoint x=\"548\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"784\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"666\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 5,
+      "content_version": 3,
+      "creator_id": "admin@example.com",
+      "description": "Update the DLP incident status in DLP.",
+      "export_key": "sdlp_update_incident_status",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1644942515246,
+      "name": "Symantec DLP: Update Incident Status in DLP",
+      "object_type": "incident",
+      "programmatic_name": "sdlp_update_incident_status",
+      "tags": [],
+      "uuid": "6347ccec-1997-4af5-a798-702609486951",
+      "workflow_id": 41
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 2,
+        "workflow_id": "sdlp_send_soar_note_to_dlp",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"sdlp_send_soar_note_to_dlp\" isExecutable=\"true\" name=\"Symantec DLP: Send SOAR Note to DLP\"\u003e\u003cdocumentation\u003eSend a SOAR note to the corresponding DLP incident.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0w8abzz\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_19r4cvd\" name=\"Symantec DLP: Send Note to DLP In...\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"1b03031b-cbfc-4ccb-8a01-ab7e109f1a33\"\u003e{\"inputs\":{},\"post_processing_script\":\"# Import Date\\nfrom java.util import Date\\n\\n# Edit note in SOAR to indicate it was sent to SentinelOne\\nif results.success:\\n  # Get the current time\\n  dt_now = Date()\\n  note.text = u\\\"\u0026lt;b\u0026gt;Sent to Symantec DLP at {0}\u0026lt;/b\u0026gt;\u0026lt;br\u0026gt;{1}\\\".format(dt_now, unicode(note.text.content))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.sdlp_incident_id = incident.properties.sdlp_incident_id\\ninputs.sdlp_note_text = note.text.content\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0w8abzz\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0mfe8fq\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0w8abzz\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_19r4cvd\"/\u003e\u003cendEvent id=\"EndEvent_1obxbt6\"\u003e\u003cincoming\u003eSequenceFlow_0mfe8fq\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0mfe8fq\" sourceRef=\"ServiceTask_19r4cvd\" targetRef=\"EndEvent_1obxbt6\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_19r4cvd\" id=\"ServiceTask_19r4cvd_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"485\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0w8abzz\" id=\"SequenceFlow_0w8abzz_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"485\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"341.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1obxbt6\" id=\"EndEvent_1obxbt6_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"756\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"774\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0mfe8fq\" id=\"SequenceFlow_0mfe8fq_di\"\u003e\u003comgdi:waypoint x=\"585\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"756\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"670.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 2,
       "creator_id": "admin@example.com",
       "description": "Send a SOAR note to the corresponding DLP incident.",
-      "export_key": "symantec_dlp_send_soar_note_to_dlp_incident",
+      "export_key": "sdlp_send_soar_note_to_dlp",
       "last_modified_by": "admin@example.com",
-      "last_modified_time": 1644532801229,
-      "name": "Symantec DLP: Send SOAR Note to DLP Incident",
+      "last_modified_time": 1644863094679,
+      "name": "Symantec DLP: Send SOAR Note to DLP",
       "object_type": "note",
-      "programmatic_name": "symantec_dlp_send_soar_note_to_dlp_incident",
+      "programmatic_name": "sdlp_send_soar_note_to_dlp",
       "tags": [],
-      "uuid": "b78fa66f-3afc-4182-9fb4-fe04bc89ab21",
-      "workflow_id": 36
+      "uuid": "6e3f7a89-e689-448d-ad08-ed3c8f1988fc",
+      "workflow_id": 38
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 2,
+        "workflow_id": "sdlp_write_incident_details_to_note",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"sdlp_write_incident_details_to_note\" isExecutable=\"true\" name=\"Symantec DLP: Write Incident Details to Note\"\u003e\u003cdocumentation\u003eCall the function to get DLP incident details in JSON format and use the convert_json_to_rich_text script to print readable formatted JSON to an incident note.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_15u7h7q\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_13cc5dk\" name=\"Symantec DLP: Get Incident Detail...\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"7e128530-9e09-405b-8f04-d7e23f5fb359\"\u003e{\"inputs\":{},\"post_processing_script\":\"# Put the results json into a workflow property so we can call the \\n# convert_json_to_rich_text script to print readable formatted json in an incident note.\\ninputs = results.get(\\\"inputs\\\")\\nsdlp_incident_id = inputs.get(\\\"sdlp_incident_id\\\")\\ncontent = results.get(\\\"content\\\")\\n\\nheader = u\\\"Symantec DLP Incident Id: {0} Details:\\\".format(sdlp_incident_id)\\n\\njson_note = {\\n              \\\"version\\\": \\\"1.1\\\",\\n              \\\"header\\\": header, \\n              \\\"json\\\": content,\\n              \\\"sort\\\": False\\n            }\\n\\nworkflow.addProperty(\u0027convert_json_to_rich_text\u0027, json_note)\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.sdlp_incident_id = incident.properties.sdlp_incident_id\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_15u7h7q\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0f1dod6\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_15u7h7q\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_13cc5dk\"/\u003e\u003cscriptTask id=\"ScriptTask_038nkue\" name=\"Convert JSON to rich text v1.1\"\u003e\u003cextensionElements\u003e\u003cresilient:script programmaticName=\"convert_json_to_rich_text_v11\" uuid=\"874d929b-7b4c-4f47-983a-58295c93d6bf\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0f1dod6\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_16xnfca\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"SequenceFlow_0f1dod6\" sourceRef=\"ServiceTask_13cc5dk\" targetRef=\"ScriptTask_038nkue\"/\u003e\u003cendEvent id=\"EndEvent_1a5c3zv\"\u003e\u003cincoming\u003eSequenceFlow_16xnfca\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_16xnfca\" sourceRef=\"ScriptTask_038nkue\" targetRef=\"EndEvent_1a5c3zv\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_13cc5dk\" id=\"ServiceTask_13cc5dk_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"385\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_15u7h7q\" id=\"SequenceFlow_15u7h7q_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"385\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"291.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_038nkue\" id=\"ScriptTask_038nkue_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"703.936\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0f1dod6\" id=\"SequenceFlow_0f1dod6_di\"\u003e\u003comgdi:waypoint x=\"485\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"704\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"594.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1a5c3zv\" id=\"EndEvent_1a5c3zv_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"963.936\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"981.936\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_16xnfca\" id=\"SequenceFlow_16xnfca_di\"\u003e\u003comgdi:waypoint x=\"804\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"964\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"884\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 2,
+      "creator_id": "admin@example.com",
+      "description": "Call the function to get DLP incident details in JSON format and use the convert_json_to_rich_text script to print readable formatted JSON to an incident note.",
+      "export_key": "sdlp_write_incident_details_to_note",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1644863676057,
+      "name": "Symantec DLP: Write Incident Details to Note",
+      "object_type": "incident",
+      "programmatic_name": "sdlp_write_incident_details_to_note",
+      "tags": [],
+      "uuid": "7887e541-1511-4432-9890-ebeebbc2873c",
+      "workflow_id": 40
     }
   ],
   "workspaces": []

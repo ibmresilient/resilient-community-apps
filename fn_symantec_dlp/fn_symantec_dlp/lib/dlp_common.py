@@ -8,7 +8,7 @@ import shutil
 import traceback
 
 from .jinja_common import JinjaEnvironment
-from resilient_lib import validate_fields, write_to_tmp_file
+from resilient_lib import IntegrationError, validate_fields, write_to_tmp_file
 
 LOG = logging.getLogger(__name__)
 
@@ -208,6 +208,21 @@ class SymantecDLPCommon():
         r_json = response.json()
         return r_json
 
+    def get_sdlp_incident_statuses(self):
+        """[ Get the Symantec DLP incident statuses data ]
+
+        Args:
+
+        Returns:
+            [json]: [ list of history data from Symantec DLP ]
+        """
+        url = u"{0}/incidents/statuses".format(self.base_url)
+
+        response = self.rc.execute("GET", url, headers=self.headers,
+                                    verify=self.verify, proxies=self.rc.get_proxies())
+        r_json = response.json()
+        return r_json
+
     def get_sdlp_incident_notes(self, incident_id):
         """[ Formulate the Symantec DLP incident URL ]
 
@@ -235,7 +250,7 @@ class SymantecDLPCommon():
         return notes
 
     def send_note_to_sdlp(self, incident_id, note_text):
-        url = u"{0}/incidents".format(self.base_url, incident_id)
+        url = u"{0}/incidents".format(self.base_url)
         update_json = {
                         "incidentIds":[ incident_id ],
                         "incidentNotes":[{
@@ -243,6 +258,41 @@ class SymantecDLPCommon():
                             "note": note_text
                         }]
         }
+        response = self.rc.execute("PATCH", url, headers=self.headers, json=update_json,
+                                    verify=self.verify, proxies=self.rc.get_proxies())
+        r_json = response.json()
+        return r_json
+
+    def get_incident_status_index(self, incident_id, incident_status):
+        statuses = self.get_sdlp_incident_statuses()
+        index = 0 
+        for status in statuses:
+            if status.get('name') == incident_status:
+                index = status.get('id')
+        return index
+
+    def update_sdlp_status(self, incident_id, incident_status_name):
+        """[ Patch the Symantec DLP incident status name and status Id in DLP ]
+
+        Args:
+            incident_id ([integer]): [ DLP incidentId ]
+            incident_status_name ([string]): [DLP incident status name]
+        Returns:
+            [json]: [ list of DLP incident ids that were updated ]
+        """
+
+        incident_status_id = self.get_incident_status_index(incident_id, incident_status_name)
+        if incident_status_id <= 0:
+            raise IntegrationError("Symantec DLP incident status name {0} not found in DLP".format(incident_status_name))
+
+        update_json = {
+           "incidentIds":[ incident_id ],
+           "incidentStatusName": incident_status_name,
+           "incidentStatusId": incident_status_id
+        }
+
+        url = u"{0}/incidents".format(self.base_url)
+
         response = self.rc.execute("PATCH", url, headers=self.headers, json=update_json,
                                     verify=self.verify, proxies=self.rc.get_proxies())
         r_json = response.json()
@@ -261,7 +311,7 @@ class SymantecDLPCommon():
                         return index
         return index
 
-    def patch_sdlp_incident_custom_attribute(self, incident_id, soar_case_id, soar_case_url):
+    def patch_sdlp_incident_custom_attribute(self, incident_id, soar_case_id, soar_case_url, ):
 
         # Get the index of the custom attribute.  When updating the attribute the columnIndex needs to be 
         # sent to the PATCH call...you can't use the name.
@@ -280,7 +330,7 @@ class SymantecDLPCommon():
                                     "columnIndex": soar_case_url_column_index,
                                     "value": soar_case_url
                                     })
-        url = u"{0}/incidents".format(self.base_url, incident_id)
+        url = u"{0}/incidents".format(self.base_url)
 
         update_json = {
             "incidentIds":[ incident_id ],
@@ -291,7 +341,7 @@ class SymantecDLPCommon():
         r_json = response.json()
         return r_json
 
-    def upload_sdlp_binaries(self, sdlp_incident_id, soar_case_id):
+    def upload_sdlp_binaries(self, soar_rest_client, sdlp_incident_id, soar_case_id):
         """upload_dlp_binaries takes an incident and a resilient incident ID and then attempts to query DLP for any incident_binaries
         Any returning binaries are then sent to Resilient as an Artifact, retaining its name and extension type.
         
@@ -303,6 +353,7 @@ class SymantecDLPCommon():
         # Upload remaining parts such as the Attachments
         components = self.get_sdlp_components(sdlp_incident_id)
 
+        artifact_name_list = []
         for component in components:
             if component.get('componentType') != 'Attachment':
                 continue
@@ -312,11 +363,12 @@ class SymantecDLPCommon():
                 path_tmp_file, path_tmp_dir = write_to_tmp_file(component_data.get('content'))
                     
                 artifact_uri = "/incidents/{}/artifacts/files".format(soar_case_id)
-                self.res_rest_client.post_artifact_file(artifact_uri,
-                                                        self.default_artifact_type_id,
-                                                        path_tmp_file,
-                                                        value=component.get('name'),
-                                                        description="Binary File imported from Symantec DLP")
+                soar_rest_client.post_artifact_file(artifact_uri,
+                                                    soar_rest_client.get('default_artifact_type_id'),
+                                                    path_tmp_file,
+                                                    value=component.get('name'),
+                                                    description="Binary File imported from Symantec DLP")
+                artifact_name_list.append(component.get('name'))
 
             except Exception as upload_ex:
                 LOG.debug(traceback.format_exc())
@@ -328,6 +380,8 @@ class SymantecDLPCommon():
                 # # Clean up the tmp_file 
                 if path_tmp_dir and os.path.isdir(path_tmp_dir):
                     shutil.rmtree(path_tmp_dir)
+
+        return artifact_name_list
 
     def get_sdlp_incident_payload(self, incident_id):
         """[Create the incident payload for creating a SOAR case from DLP incident data.]
@@ -347,6 +401,14 @@ class SymantecDLPCommon():
         # Add the link back to the Symantec DLP incident URL
         sdlp_payload['sdlp_incident_url'] = self.get_sdlp_incident_url(incident_id)
         return sdlp_payload
+
+    def update_sdlp_incident(self, sdlp_update_payload):
+        url = u"{0}/incidents".format(self.base_url)
+
+        response = self.rc.execute("PATCH", url, headers=self.headers, json=sdlp_update_payload,
+                                    verify=self.verify, proxies=self.rc.get_proxies())
+        r_json = response.json()
+        return r_json
 
     def get_sdlp_incident_url(self, incident_id):
         """[ Formulate the Syamntec DLP incident URL ]

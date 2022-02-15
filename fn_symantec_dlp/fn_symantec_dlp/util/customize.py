@@ -21,10 +21,10 @@ def codegen_reload_data():
     return {
         "package": u"fn_symantec_dlp",
         "message_destinations": [u"fn_symantec_dlp"],
-        "functions": [u"fn_symantec_dlp_update_incident", u"symantec_dlp_get_incident_details", u"symantec_dlp_send_note_to_dlp_incident", u"symantec_dlp_upload_binaries"],
-        "workflows": [u"sdlp_send_note_to_incident", u"sdlp_set_incident_status", u"symantec_dlp_send_soar_note_to_dlp_incident", u"symantec_dlp_upload_binaries", u"symantec_dlp_write_incident_details_to_a_note"],
-        "actions": [u"Symantec DLP: Send SOAR Note to DLP Incident", u"Symantec DLP: Update DLP when this Incident is closed ", u"Symantec DLP: Upload Binaries", u"Symantec DLP: Upload Binaries as Artifact", u"Symantec DLP: Write DLP Incident Details to Note"],
-        "incident_fields": [u"sdlp_incident_id", u"sdlp_incident_url"],
+        "functions": [u"fn_symantec_dlp_update_incident", u"symantec_dlp_get_incident_details", u"symantec_dlp_send_note_to_dlp_incident", u"symantec_dlp_update_incident_status", u"symantec_dlp_upload_binaries"],
+        "workflows": [u"sdlp_send_soar_note_to_dlp", u"sdlp_set_incident_status", u"sdlp_update_incident_status", u"sdlp_upload_binaries", u"sdlp_write_incident_details_to_note"],
+        "actions": [u"Symantec DLP: Send SOAR Note to DLP", u"Symantec DLP: Update DLP Incident Status", u"Symantec DLP: Upload Binaries", u"Symantec DLP: Upload Binaries as Artifact", u"Symantec DLP: Write DLP Incident Details to Note"],
+        "incident_fields": [u"sdlp_incident_id", u"sdlp_incident_status", u"sdlp_incident_url"],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [],
@@ -47,21 +47,23 @@ def customization_data(client=None):
         - fn_symantec_dlp_update_incident
         - symantec_dlp_get_incident_details
         - symantec_dlp_send_note_to_dlp_incident
+        - symantec_dlp_update_incident_status
         - symantec_dlp_upload_binaries
     - Workflows:
-        - sdlp_send_note_to_incident
+        - sdlp_send_soar_note_to_dlp
         - sdlp_set_incident_status
-        - symantec_dlp_send_soar_note_to_dlp_incident
-        - symantec_dlp_upload_binaries
-        - symantec_dlp_write_incident_details_to_a_note
+        - sdlp_update_incident_status
+        - sdlp_upload_binaries
+        - sdlp_write_incident_details_to_note
     - Rules:
-        - Symantec DLP: Send SOAR Note to DLP Incident
-        - Symantec DLP: Update DLP when this Incident is closed 
+        - Symantec DLP: Send SOAR Note to DLP
+        - Symantec DLP: Update DLP Incident Status
         - Symantec DLP: Upload Binaries
         - Symantec DLP: Upload Binaries as Artifact
         - Symantec DLP: Write DLP Incident Details to Note
     - Incident Fields:
         - sdlp_incident_id
+        - sdlp_incident_status
         - sdlp_incident_url
     - Scripts:
         - Convert JSON to rich text v1.1

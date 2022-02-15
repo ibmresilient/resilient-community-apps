@@ -9,6 +9,7 @@
     {#  Custom properties for DLP Attributes #}
     "properties": {
         "sdlp_incident_id": {{ staticIncidentDetails.incidentId }},
+        "sdlp_incident_status": "{{ editableIncidentDetails.infoMap.incidentStatusName }}",
         "sdlp_incident_url": {"format" : "html", "content" : "<a target='blank' href='{{ sdlp_incident_url }}'>Symantec DLP Incident</a>"}
     },
     {# Artifacts which we will try to pull out of the Incident #}

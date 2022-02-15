@@ -16,11 +16,14 @@ LOG = logging.getLogger(__name__)
 
 SYMANTEC_DLP_INCIDENT_ID = "sdlp_incident_id"
 
+TYPES_URI = "/types"
+
 class ResilientCommon():
 
     def __init__(self, rest_client):
         self.rest_client = rest_client
-
+        self.default_artifact_type_id = 16 # When uploading DLP Binaries as attachments, they will be uploaded at 'Other File'
+        
     def get_open_symantec_dlp_incidents(self):
         # find all open incidents which are associated with Symantec DLP incidents
         query = {
@@ -185,60 +188,21 @@ class ResilientCommon():
         except Exception as err:
             raise IntegrationError(err)
 
-    def get_incident(self, incident_id):
-        # get an SOAR incident based on the incident id
-        incident = self._get_incident_info(incident_id, None)
-        incident['incident_types'] = self.convert_incident_types(incident['incident_type_ids'])
-        return incident
+    def _chk_status(self, resp, rc=200):
+        """
+        check the return status. If return code is not met, raise IntegrationError,
+        if success, return the json payload
+        :param resp:
+        :param rc:
+        :return:
+        """
+        if hasattr(resp, "status_code"):
+            if isinstance(rc, list):
+                if resp.status_code < rc[0] or resp.status_code > rc[1]:
+                    raise IntegrationError(u"status code failure: {0}".format(resp.status_code))
+            elif resp.status_code != rc:
+                raise IntegrationError(u"status code failure: {0}".format(resp.status_code))
 
-    def get_incident_types(self):
-        # get all incident_type_id labels
-        return self.get_types("incident", "incident_type_ids")
+            return resp.json()
 
-    def convert_incident_types(self, incident_type_ids):
-        # Convert a SOAR incident type to a Symantec DLP type
-        if not incident_type_ids:
-            return incident_type_ids
-
-        incident_type_lookup = self.get_incident_types()
-
-        return [incident_type_lookup[incident_type] for incident_type in incident_type_ids \
-            if incident_type in incident_type_lookup]
-
-    def get_incident_attachment(self, incident_id, artifact_id=None, task_id=None, attachment_id=None, return_base64=True):
-        # get contents of a file attachment
-        file_content = get_file_attachment(self.rest_client, incident_id, artifact_id=artifact_id, task_id=task_id, attachment_id=attachment_id)
-        if return_base64:
-            file_content = b_to_s(base64.b64encode(file_content))
-
-        file_name = get_file_attachment_name(self.rest_client, incident_id, artifact_id=artifact_id, task_id=task_id, attachment_id=attachment_id)
-        return file_name, file_content
-
-    def get_incident_artifacts(self, incident_id):
-        # get all incident artifacts
-        return self._get_incident_info(incident_id, "artifacts")
-
-    def get_incident_comments(self, incident_id):
-        # get all incident comments
-        return self._get_incident_info(incident_id, "comments")
-
-    def get_incident_attachments(self, incident_id):
-        # get all incident attachments
-        attachments =  self._get_incident_info(incident_id, "attachments")
-        for attachment in attachments:
-            _, attachment['content'] = self.get_incident_attachment(incident_id, attachment_id=attachment['id'])
-
-        return attachments
-
-    def _get_incident_info(self, incident_id, child_uri):
-        # API call for a given incident and it's child objects: tasks, notes, attachments, etc.
-        try:
-            uri = u'/incidents/{0}'.format(incident_id)
-            if child_uri:
-                uri = "/".join([uri, child_uri])
-
-            response = self.rest_client.get(uri=uri)
-            return response
-
-        except Exception as err:
-            raise IntegrationError(err)
+        return {}
