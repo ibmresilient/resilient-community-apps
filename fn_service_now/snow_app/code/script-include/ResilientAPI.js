@@ -4,6 +4,7 @@
 var JSON_PARSER = new global.JSON();
 
 var RES_DATATABLE_NAME = "sn_records_dt";
+var RES_INTEGRATOR_ROLE = "x_ibmrt_resilient.integrator";
 
 //Function to get Resilient Password so we don't have to set Variable in Memory
 function getPassword(){
@@ -40,6 +41,39 @@ function validateMidServer(midServerName){
 	errMsg = "No Active Mid-Server by the name of " + midServerName + " found that is Validated and Active";
 	errMsg += "\nEnsure your Mid-Server is 'Up' and 'Validated'";
 	throw errMsg;
+}
+
+function checkSnUserHasResilientIntegratorRole(snUsername) {
+
+	//Find the sys_id of the RES_INTEGRATOR_ROLE in the sys_user_role table
+	var roleTable = new GlideRecord("sys_user_role");
+	roleTable.addQuery("name", RES_INTEGRATOR_ROLE);
+	roleTable.query();
+
+	//execute query for ibm integrator role sys_id
+	if (roleTable.next()) {
+		var sysIdResIntegratorRole = roleTable.sys_id;
+
+		//Here have to query the sys_user_has_role table to know if the
+		//user has the appropriate role
+		var userRolesTable = new GlideRecord("sys_user_has_role");
+
+		//filter on roles equal to target role
+		userRolesTable.addQuery("role", sysIdResIntegratorRole);
+		//filter on users with sys_id matching snUsername's id
+		userRolesTable.addQuery("user.user_name", snUsername);
+		
+		userRolesTable.query(); //execute query
+
+		if (userRolesTable.next()) {
+			//the query had results - no issue
+			return;
+		} else {
+			throw "ServiceNow Username '" + snUsername + "' does not have the " + RES_INTEGRATOR_ROLE + " role.";
+		}
+	} else {
+		throw "ServiceNow instance is not correctly configured. Could not find " + RES_INTEGRATOR_ROLE + " role.";
+	}
 }
 
 //Function to execute a RESTMessage. Handles errors. Returns response if successful
@@ -229,6 +263,10 @@ ResilientAPI.prototype = {
 		} else {
 			APIKeysEnabled = true;
 		}
+
+		//Check snUsername's permissions - will throw appropriate error if
+		//snUsername doesn't have RES_INTEGRATOR_ROLE role or if can't find the role
+		checkSnUserHasResilientIntegratorRole(snUsername);
 
 		//Setup MID Server
 		midServerName = midServerName.trim();
