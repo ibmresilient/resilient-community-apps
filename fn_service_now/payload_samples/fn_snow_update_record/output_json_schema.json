@@ -26,7 +26,7 @@
             "sn_update_fields": {
               "type": "object",
               "properties": {
-                "business_criticality": {
+                "severity": {
                   "type": "integer"
                 }
               }
@@ -55,7 +55,7 @@
         "sn_update_fields": {
           "type": "object",
           "properties": {
-            "business_criticality": {
+            "severity": {
               "type": "integer"
             }
           }
