@@ -80,9 +80,9 @@ sn_severity_map = {
 inputs.incident_id = incident.id
 
 # List all the fields you want to update in the ServiceNow Record here with the ServiceNow field_name being the key
-# Since this is a SIR example, we use the business_criticality field which is where the severity of the SIR ticket is held
+# The default here is "severity", however if using the SIR Table we recommend switching to the business_criticality field
 inputs.sn_update_fields = dict_to_json_str({
-  "business_criticality": sn_severity_map[incident.severity_code],
+  "severity": sn_severity_map[incident.severity_code],
 })
 ```
 
