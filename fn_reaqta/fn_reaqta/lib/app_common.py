@@ -1,4 +1,6 @@
-#
+# -*- coding: utf-8 -*-
+# pragma pylint: disable=unused-argument, no-self-use
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 import logging
 from urllib.parse import urljoin
 from resilient_lib import str_to_bool, readable_datetime
@@ -7,7 +9,7 @@ LOG = logging.getLogger(__name__)
 
 HEADER = { 'Content-Type': 'application/json' }
 
-class EndPointCommon():
+class AppCommon():
     def __init__(self, rc, options):
         self.api_key = options['api_key']
         self.api_secret = options['api_secret']
@@ -16,7 +18,7 @@ class EndPointCommon():
         self.rc = rc
         self.verify = str_to_bool(options.get("cafile", "false"))
 
-    def authenticate(self, headers):
+    def authenticate(self):
         params = {
             "secret": self.api_secret,
             "id": self.api_key
@@ -24,12 +26,21 @@ class EndPointCommon():
 
         auth_url = self._get_uri('authenticate')
 
-        response = self.rc.execute("POST", auth_url, json=params, headers=headers, verify=self.verify)
+        response = self.rc.execute("POST", auth_url, json=params, headers=HEADER, verify=self.verify)
         return response.json()['token']
 
     def get_entities_since_ts(self, query_field_name, timestamp, **kwargs):
+        """get changed entities since last poller run
+
+        Args:
+            query_field_name (str): field to use for
+            timestamp (datetime): datetime when the last poller ran
+
+        Returns:
+            list: changed entity list
+        """
         query = {
-            query_field_name: readable_datetime(timestamp)
+            query_field_name: readable_datetime(timestamp) # utc datetime format
         }
 
         # add any additional query parameters
@@ -37,21 +48,43 @@ class EndPointCommon():
             for k,v in kwargs:
                 query[k] = v
 
-        self.token = self.authenticate(HEADER)
+        self.token = self.authenticate()
         self.header = self._make_header(self.token)
         response = self.rc.execute("GET", self._get_uri("alerts"), params=query, headers=self.header, verify=self.verify)
-        # "result":[],"nextPage":"","remainingItems":0}
         return response.json()
 
     def get_next_entities(self, next_url):
+        """This endpoint pages result size. This method is used for subsequent calls
+
+        Args:
+            next_url (str): url provided by endpoint API call to get next paged list
+
+        Returns:
+            list: next entity paged result
+        """
         response = self.rc.execute("GET", next_url, headers=self.header, verify=self.verify)
-        # "result":[],"nextPage":"","remainingItems":0}
         return response.json()
 
     def _get_uri(self, cmd):
+        """build API url
+
+        Args:
+            cmd (str): portion of API: alerts, endpoints, policies
+
+        Returns:
+            str: complete URL
+        """
         return urljoin(urljoin(self.reaqta_url, self.api_version), cmd)
 
     def _make_header(self, token):
+        """Build API header using authorization token
+
+        Args:
+            token (str): authorization token
+
+        Returns:
+            dict: complete header
+        """
         header = HEADER.copy()
         header['Authorization'] = "Bearer {}".format(token)
 

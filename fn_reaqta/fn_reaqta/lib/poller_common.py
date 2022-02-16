@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
-
 import base64
 import datetime
 import functools
@@ -17,10 +16,8 @@ from cachetools import cached, LRUCache
 
 LOG = logging.getLogger(__name__)
 
-IBM_SOAR = "IBM SOAR"
+IBM_SOAR = "IBM SOAR" # common label
 SOAR_HEADER = "Created by {}".format(IBM_SOAR)
-ENTITY_SEARCH_QUERY = "______ Task Id"
-ENTITY_SEARCH_REGEX = re.compile(r"{}: (\d+)".format(ENTITY_SEARCH_QUERY))
 
 TYPES_URI = "/types"
 INCIDENTS_URI = "/incidents"
@@ -29,11 +26,12 @@ INCIDENTS_URI = "/incidents"
 TEMPLATE_DIR = os.path.join(os.path.dirname(__file__), "data")
 
 def get_template_dir():
+    # quick property to get template directory
     return TEMPLATE_DIR
 
 # P O L L E R   L O G I C
 def poller(named_poller_interval, named_last_poller_time, package_name):
-    """[summary]
+    """[decorator for poller, manage poller time, calling the customized method for getting the next entities]
 
     Args:
         named_poller_interval ([str]): [name of instance variable containing the poller interval in seconds]
@@ -83,7 +81,7 @@ class SOARCommon():
         Returns:
             soar_case [dict]: returned list is indexed by the first field in search_fields
         """
-        query = self._build_query(search_fields)
+        query = self._build_search_query(search_fields)
 
         cases = self._query_cases(query)
         # return dictionary of cases indexed first field in the list
@@ -99,7 +97,7 @@ class SOARCommon():
             case_info [dict]: [API results of the first case found]
             error_msg [str]: [error message if the query failed]
         """
-        query = self._build_query(search_fields)
+        query = self._build_search_query(search_fields)
 
         r_cases, error_msg = self._query_cases(query)
         if error_msg:
@@ -108,7 +106,7 @@ class SOARCommon():
         # return first case
         return (r_cases[0] if r_cases else None, None)
 
-    def _build_query(self, search_fields):
+    def _build_search_query(self, search_fields):
         """[Build the json structure needed to search for cases]
 
         Args:
@@ -255,6 +253,16 @@ class SOARCommon():
             raise IntegrationError from err
 
     def create_datatable_row(self, case_id, datatable, rowdata):
+        """create a row in a SOAR case datatable
+
+        Args:
+            case_id (int): case containing the datatable
+            datatable (str): name of datatable
+            rowdata (dict): columns and values to add
+
+        Returns:
+            None
+        """
         uri = "/".join([INCIDENTS_URI, str(case_id), "table_data", datatable, "row_data"])
         return self.rest_client.post(uri=uri, payload=rowdata)
 
