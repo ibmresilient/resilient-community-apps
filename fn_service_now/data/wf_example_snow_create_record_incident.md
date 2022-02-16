@@ -93,9 +93,12 @@ inputs.sn_init_work_note = init_snow_note_text
 
 # Any further information you want to send to ServiceNow. Each Key/Value pair is attached to the Request object and accessible in ServiceNow.
 # ServiceNow Example:: setValue('assignment_group', request.body.data.sn_optional_fields.assignment_group)
+# For SIR tables it is recommended to map "business_criticality" to sn_severity_map as that is visible in the SNOW query_builder
+# (see the example commented out below)
 inputs.sn_optional_fields = dict_to_json_str({
   "short_description": u"RES-{0}: {1}".format(incident.id, unicode(incident.name)),
   "severity": sn_severity_map[incident.severity_code],
+  #"business_criticality": sn_severity_map[incident.severity_code],
   "assignment_group": workflow.properties.assignment_group.sys_id,
   "caller_id": workflow.properties.caller_id.sys_id
 })
