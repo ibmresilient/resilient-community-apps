@@ -23,13 +23,13 @@ def snake_to_camel(word):
 setup(
     name='fn_service_now',
     display_name="ServiceNow Functions for IBM SOAR",
-    version="2.0.1",
+    version="2.0.2",
     license="MIT",
     author="IBM SOAR",
     url="https://ibm.com/mysupport",
     description="Bi-directional synchronization of Incidents, Tasks, Notes and Attachments with ServiceNow",
-    long_description="""- Create an IBM SOAR Incident/Task from a ServiceNow Record in the Incident Table.<br>
-        - Create a ServiceNow Record in the Incident Table from an IBM SOAR Incident/Task.<br>
+    long_description="""- Create an IBM SOAR Incident/Task from a ServiceNow Record in the Incident Table or Security Incident Table.<br>
+        - Create a ServiceNow Record in the Incident Table or Security Incident Table from an IBM SOAR Incident/Task.<br>
         - Sync notes between a related IBM SOAR Incident/Task and a ServiceNow Record.<br>
         - Send Attachments from an IBM SOAR Incident/Task to a related ServiceNow Record.""",
     install_requires=[
