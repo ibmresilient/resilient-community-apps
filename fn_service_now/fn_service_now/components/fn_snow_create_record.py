@@ -90,7 +90,7 @@ class FunctionComponent(ResilientComponent):
             datatable = ServiceNowRecordsDataTable(res_client, payload.inputs["incident_id"])
 
             # Generate the res_link
-            payload.res_link = res_helper.generate_res_link(payload.inputs["incident_id"], self.host, payload.inputs["task_id"])
+            payload.res_link = res_helper.generate_res_link(payload.inputs["incident_id"], self.host, res_client.org_id, payload.inputs["task_id"])
 
             # Generate the request_data
             req = res_helper.generate_sn_request_data(
@@ -135,10 +135,14 @@ class FunctionComponent(ResilientComponent):
                     try:
                         yield StatusMessage("Adding a new row to the ServiceNow Records Data Table")
 
+                        # get datatable name if short_description was included
+                        # else set to the incident/task name
+                        dt_name = payload.inputs["sn_optional_fields"]["short_description"] if payload.inputs["sn_optional_fields"].get("short_description", None) is not None else request_data.get("incident_name") if request_data.get("incident_name") is not None else request_data.get("task_name")
+
                         # Add row to the datatable
                         add_row_response = datatable.add_row(
                             payload.sn_time_created,
-                            request_data.get("incident_name") if request_data.get("incident_name") is not None else request_data.get("task_name"),
+                            dt_name,
                             "Incident" if request_data.get("type") is "res_incident" else "Task",
                             payload.res_id,
                             payload.sn_ref_id,

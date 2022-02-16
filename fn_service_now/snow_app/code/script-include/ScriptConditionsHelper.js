@@ -54,6 +54,10 @@ ScriptConditionsHelper.prototype = {
 	sirCreateOnAssignCheck: function(current) {
 		var condition = isSirTable(current) && !sirIsLinkedToRes(current) && isSnSiIncidentTable(current);
 
+		if (!condition) {
+			return condition;
+		}
+
 		var resHelper = new ResilientHelper();
 		var checkGroupAllowed = resHelper.assignGroupIsAllowed(current.getDisplayValue("assignment_group").trim().toLowerCase());
 
@@ -62,6 +66,10 @@ ScriptConditionsHelper.prototype = {
 
 	sitCreateOnAssignCheck: function(current) {
 		var condition = isSirTable(current) && !sirIsLinkedToRes(current) && isSnSiTaskTable(current);
+
+		if (!condition) {
+			return condition;
+		}
 
 		var resHelper = new ResilientHelper();
 		var checkGroupAllowed = resHelper.assignGroupIsAllowed(current.getDisplayValue("assignment_group").trim().toLowerCase());

@@ -192,17 +192,22 @@ class ResilientHelper(object):
 
         return {"incident_id": incident_id, "task_id": task_id}
 
-    def generate_res_link(self, incident_id, host, task_id=None):
+    def generate_res_link(self, incident_id, host, org_id, task_id=None):
         """Function that generates a https URL to the incident or task"""
 
         # for CP4S cases endpoint, remove the cases-rest prefix (CP4S_CASES_REST_PREFIX)
         if self.CP4S_PREFIX in host:
             host = host.replace(self.CP4S_PREFIX + ".", "")
-
-        link = "https://{0}/#incidents/{1}".format(host, incident_id)
+            link = "https://{0}/app/respond/#cases/{1}".format(host, incident_id)
+        else:
+            link = "https://{0}/#incidents/{1}".format(host, incident_id)
 
         if task_id is not None:
             link += "?task_id={0}".format(task_id)
+
+            # if is task AND is CP4S instance add extra filter to link
+            if self.CP4S_PREFIX in host:
+                link += "&tabName=details&orgId={0}".format(org_id)
 
         return link
 
