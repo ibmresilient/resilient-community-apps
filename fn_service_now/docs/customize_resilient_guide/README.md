@@ -215,7 +215,7 @@ sn_severity_map = {
 # Default text of the initial note added to the ServiceNow Record
 init_snow_note_text = u"""Record created from a IBM SOAR Incident ID: {0}.
                           Severity: {1}
-                          Incident Type(s): {2}""".format(incident.id, incident.severity_code, incident.incident_type_ids)
+                          Incident Type(s): {2}""".format(incident.id, incident.severity_code, u", ".join(incident.incident_type_ids))
 
 # If the user adds a comment when they invoke the rule, that comment gets concatenated here
 if rule.properties.sn_initial_note.content is not None:
