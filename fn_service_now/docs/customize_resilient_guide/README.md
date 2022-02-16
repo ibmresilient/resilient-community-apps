@@ -389,6 +389,7 @@ sn_severity_map = {
 inputs.incident_id = incident.id
 
 # List all the fields you want to update in the ServiceNow Record here with the ServiceNow field_name being the key
+# The default here is "severity", however if using the SIR Table we recommend switching to the business_criticality field
 inputs.sn_update_fields = dict_to_json_str({
   "severity": sn_severity_map[incident.severity_code],
 })
@@ -942,4 +943,8 @@ inputs.sn_resilient_status = incident.plan_status
 | Links | `sn_records_dt_links` | `Rich Text` |
 
 # Security Incident Response Specific Customizations
-By default the severity of a SOAR incident/case is mapped to the `severity` field in ServiceNow. This field is available in both the `incident` and `sn_si_incident` tables, however, in Security Incident (SIR) tables have another field labeled `business_criticality`. It is recommend after install to customize your workflows in SOAR and SNOW to handle `business_criticality` rather than `severity` in SNOW. Customize the "\[SIR\] SNOW Update Record on Severity Change" workflow and "SNOW: Create Record \[Incident\]". The "RES_WF_CreateIncident" workflow on SNOW should be customized as well. See the [Customize ServiceNow App Guide](../customize_snow_guide) for more details.
+By default the severity of a SOAR incident/case is mapped to the `severity` field in ServiceNow. 
+This field is available in both the `incident` and `sn_si_incident` tables, however, in Security Incident (SIR) tables have another field labeled `business_criticality`. 
+It is recommend after the install to customize your workflows in SOAR and SNOW to handle `business_criticality` rather than `severity` in SNOW. 
+Customize the "\[SIR\] SNOW Update Record on Severity Change" workflow and "SNOW: Create Record \[Incident\]". The "RES_WF_CreateIncident" workflow on SNOW should be customized as well. 
+See the [Customize ServiceNow App Guide](../customize_snow_guide) for more details.
