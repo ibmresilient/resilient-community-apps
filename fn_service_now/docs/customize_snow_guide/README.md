@@ -81,15 +81,7 @@ The **ResilientHelper API** helps create your own ServiceNow `Workflows` that us
 			"3": "Low"
 		};
 
-		//SIR tables call severity "business_criticality",
-		//while INC tables call it "severity"
-		//NOTE: the order of this check is important because
-		//the SIR table has a "severity" value that is never used...
-		if (record.getTableName() == "sn_si_incident") {
-			severityMapped = resSeverityMap[record.getValue("business_criticality").toString()];
-		} else {
-			severityMapped = resSeverityMap[record.getValue("severity").toString()];
-		}
+		severityMapped = resSeverityMap[record.getValue("severity").toString()];
 
 		//Initialize options
 		options = {
@@ -481,15 +473,7 @@ Returns an object with the following keys:
                 "3": "Low"
             };
 
-            //SIR tables call severity "business_criticality",
-            //while INC tables call it "severity"
-            //NOTE: the order of this check is important because
-            //the SIR table has a "severity" value that is never used...
-            if (record.getTableName() == "sn_si_incident") {
-                severityMapped = resSeverityMap[record.getValue("business_criticality").toString()];
-            } else {
-                severityMapped = resSeverityMap[record.getValue("severity").toString()];
-            }
+            severityMapped = resSeverityMap[record.getValue("severity").toString()];
 
             //Initialize options
             options = {
