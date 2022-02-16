@@ -207,7 +207,7 @@ class ResilientHelper(object):
 
             # if is task AND is CP4S instance add extra filter to link
             if self.CP4S_PREFIX in host:
-                link += "&tabName=detail&orgId={0}".format(org_id)
+                link += "&tabName=details&orgId={0}".format(org_id)
 
         return link
 
