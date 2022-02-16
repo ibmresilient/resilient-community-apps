@@ -1,7 +1,7 @@
 <tr>
     <td colspan="2">
         <br><h3 style="color: rgb(68,114,196)">{{ table_name }}</h3>
-        <hr size="1" width="100%" noshade style="color:#FFDF57" align="center"/>
+        <hr size="1" noshade style="color:#FFDF57" align="center"/>
     </td>
 </tr>
 <tr>
@@ -12,7 +12,11 @@
 {% for rowNum in range(rows | length) %}
     <tr>
         {% for row in table %}
-            <td style="border: 1px black solid; padding: 5px; text-align: center; font-family: sans-serif; color: rgb(31, 73, 125);">{{ table[row][rowNum] }}</td>
+            {% if '<div' in table[row][rowNum] %}
+                <td style="border: 1px black solid; padding: 2px; font-family: sans-serif; color: rgb(31, 73, 125);">{{table[row][rowNum]|safe}}</td>
+            {% else %}
+                <td style="border: 1px black solid; padding: 2px; font-family: sans-serif; color: rgb(31, 73, 125);">{{ table[row][rowNum] }}</td>
+            {% endif %}
         {% endfor %}
     </tr>
 {% endfor %}
