@@ -11,9 +11,19 @@
     "reaqta_id": "{{ id }}",
     "reaqta_alert_link": "<a target='blank' href='{{ alert_url }}'>ReaQta Alert</a>",
     "reaqta_tags": "{{ tags | join(', ') }}",
-    "reaqta_machine_id": "{{ endpoint.machineId }}",
+    "reaqta_endpoint_id": "{{ endpoint.id }}",
     "reaqta_cpu_info": "{{ endpoint.cpuDescr }} ({{ endpoint.os }})"
   },
+  "artifacts": [
+    {
+      "type": "IP Address",
+      "value": "{{ endpoint.localAddr }}",
+      "description": {
+          "format": "text",
+          "content": "Endpoint: {{ endpoint.name }}"
+        }
+    }
+  ],
   "comments": [
     {
       "text": {

@@ -17,6 +17,8 @@ api_version=rqt_api/1/
 #
 poller_interval=60
 poller_lookback=120
+# set filters for the poller. Ex: "alertStatus": "malicious", "severity": ["medium", "high"], "tag": ["hive"]
+#poller_filters="alertStatus": "benign", "severity": ["low", "high"], "tag": ["hive"]
 cafile=/path/to/cafile.crt or false
 # Optional override value for templates used for creating/updating/closing SOAR cases
 #soar_create_case_template=

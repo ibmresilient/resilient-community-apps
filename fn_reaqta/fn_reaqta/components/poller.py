@@ -8,6 +8,7 @@ import logging
 import os
 from threading import Thread
 from resilient_circuits import ResilientComponent
+from resilient_circuits.helpers import is_this_a_selftest
 from resilient_lib import validate_fields, RequestsCommon, make_payload_from_template
 from resilient import get_client
 from fn_reaqta.lib.poller_common import SOARCommon, poller, get_template_dir
@@ -63,7 +64,9 @@ def get_entities(app_common, query_field_name, last_poller_time):
     # identify entities changed since that timestamp.
     # use options to collect urls, api_keys, etc. needed for the API call.
     # use rc.execute() to call your endpoint with your query to return entities changes since the last_poller_time
-    entity_list = app_common.get_entities_since_ts(query_field_name, last_poller_time)
+    entity_list = app_common.get_entities_since_ts(query_field_name,
+                                                   last_poller_time,
+                                                   app_common.get_filters())
 
     return entity_list
 
@@ -182,7 +185,6 @@ class PollerComponent(ResilientComponent):
         Args:
             entity_list (list): list of endpoint entities to check again SOAR cases
         """
-        error_msg = None
         try:
             cases_insert = cases_closed = cases_updated = 0
             for entity in entity_list:

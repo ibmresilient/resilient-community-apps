@@ -4,6 +4,7 @@
 import logging
 from urllib.parse import urljoin
 from resilient_lib import str_to_bool, readable_datetime
+from fn_reaqta.lib.poller_common import eval_mapping
 
 LOG = logging.getLogger(__name__)
 
@@ -18,6 +19,12 @@ class AppCommon():
         self.rc = rc
         self.verify = str_to_bool(options.get("cafile", "false"))
 
+        # set any additional filters to include for alert query
+        self.filters = eval_mapping(options.get('poller_filters', ''), wrapper='{{ {} }}')
+
+    def get_filters(self):
+        return self.filters
+
     def authenticate(self):
         params = {
             "secret": self.api_secret,
@@ -29,12 +36,13 @@ class AppCommon():
         response = self.rc.execute("POST", auth_url, json=params, headers=HEADER, verify=self.verify)
         return response.json()['token']
 
-    def get_entities_since_ts(self, query_field_name, timestamp, **kwargs):
+    def get_entities_since_ts(self, query_field_name, timestamp, optional_filters):
         """get changed entities since last poller run
 
         Args:
             query_field_name (str): field to use for
             timestamp (datetime): datetime when the last poller ran
+            optional_filters (dict): name/value pairs for query criteria
 
         Returns:
             list: changed entity list
@@ -44,10 +52,11 @@ class AppCommon():
         }
 
         # add any additional query parameters
-        if kwargs:
-            for k,v in kwargs:
+        if optional_filters:
+            for k,v in optional_filters.items():
                 query[k] = v
 
+        LOG.debug(query)
         self.token = self.authenticate()
         self.header = self._make_header(self.token)
         response = self.rc.execute("GET", self._get_uri("alerts"), params=query, headers=self.header, verify=self.verify)
