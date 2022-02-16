@@ -2,19 +2,12 @@
 # pragma pylint: disable=unused-argument, no-self-use
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 
-import base64
 import logging
-import re
-import traceback
-from ast import literal_eval
-from fn_symantec_dlp.lib.dlp_common import SYMANTEC_DLP_HEADER, SOAR_HEADER
+from fn_symantec_dlp.lib.constants import SYMANTEC_DLP_INCIDENT_ID, FROM_SYMANTEC_DLP_COMMENT_HDR, FROM_SOAR_COMMENT_HDR
 from resilient import SimpleHTTPException, Patch
 from resilient_lib import IntegrationError
-from resilient_lib import get_file_attachment, get_file_attachment_name
 
 LOG = logging.getLogger(__name__)
-
-SYMANTEC_DLP_INCIDENT_ID = "sdlp_incident_id"
 
 TYPES_URI = "/types"
 
@@ -175,7 +168,7 @@ class ResilientCommon():
         """
         try:
             uri = u'/incidents/{0}/comments'.format(incident_id)
-            comment = "<b>{} ({}):</b><br>{}".format(SYMANTEC_DLP_HEADER, sdlp_comment_id, note)
+            comment = "<b>{} ({}):</b><br>{}".format(FROM_SYMANTEC_DLP_COMMENT_HDR, sdlp_comment_id, note)
 
             note_json = {
                 'format': 'html',
@@ -187,6 +180,41 @@ class ResilientCommon():
 
         except Exception as err:
             raise IntegrationError(err)
+
+    def get_incident_comments(self, incident_id):
+        try:
+            uri = u'/incidents/{0}/comments'.format(incident_id)
+
+            comment_response = self.rest_client.get(uri=uri)
+            return comment_response
+
+        except Exception as err:
+            raise IntegrationError(err)
+
+    def filter_resilient_comments(self, soar_case_id, sdlp_comments):
+        """
+            need to avoid creating same comments over and over
+              this logic will read all comments from an incident
+              and remove those comments which have already sync
+
+        Args:
+            soar_case_id ([str]): [ SOAR case id]
+            sdlp_comments ([list]): [description]
+        Returns:
+            new_comments ([list])
+        """
+        soar_comments = self.get_incident_comments(soar_case_id)
+        soar_comment_list = [comment['text'] for comment in soar_comments]
+
+        # filter comments with our SOAR header
+        new_comments = [comment for comment in sdlp_comments if not FROM_SOAR_COMMENT_HDR in comment['text']]
+
+        # filter out the comments already sync'd
+        if soar_comment_list:
+            new_comments = [comment for comment in new_comments \
+                if not any([comment['id'] in already_syncd for already_syncd in soar_comment_list])]
+
+        return new_comments
 
     def _chk_status(self, resp, rc=200):
         """

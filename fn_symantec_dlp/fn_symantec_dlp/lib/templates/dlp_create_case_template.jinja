@@ -6,6 +6,7 @@
     "start_date": {{ staticIncidentDetails.infoMap.detectionDate|resilient_datetimeformat }},
     "incident_type_ids": [16],
     "severity_code": "{{ editableIncidentDetails.infoMap.severityId|string|resilient_substitute('{"1": "High", "2": "Medium", "3": "Low", "4": "Low"}')}}",
+
     {#  Custom properties for DLP Attributes #}
     "properties": {
         "sdlp_incident_id": {{ staticIncidentDetails.incidentId }},

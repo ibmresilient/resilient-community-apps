@@ -4,14 +4,11 @@
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import IntegrationError, validate_fields, clean_html
+from fn_symantec_dlp.lib.constants import FROM_SYMANTEC_DLP_COMMENT_HDR, SENT_TO_SYMANTEC_DLP_HDR
 from fn_symantec_dlp.lib.dlp_common import SymantecDLPCommon
 
 PACKAGE_NAME = "fn_symantec_dlp"
 FN_NAME = "symantec_dlp_send_note_to_dlp_incident"
-
-FROM_SYMANTEC_DLP_COMMENT_HDR = "From Symantec DLP"
-FROM_SOAR_COMMENT_HDR = "From IBM SOAR"
-SENT_TO_SYMANTEC_DLP_HDR = "Sent to Symantec DLP"
 
 class FunctionComponent(AppFunctionComponent):
     """Component that implements function 'symantec_dlp_send_note_to_dlp_incident'"""
@@ -42,9 +39,9 @@ class FunctionComponent(AppFunctionComponent):
                 sdlp_client = SymantecDLPCommon(self.rc, self.options)
                 response = sdlp_client.send_note_to_sdlp(sdlp_incident_id, clean_html(note_text))
 
-                update_incident_id = response.get("updatedIncidentIds")
+                updated_incident_ids = response.get("updatedIncidentIds")
 
-                if update_incident_id == sdlp_incident_id:
+                if sdlp_incident_id in updated_incident_ids:
                     success = True
                     yield self.status_message("Symantec DLP comment added to DLP incident id: {}"\
                                     .format(sdlp_incident_id))

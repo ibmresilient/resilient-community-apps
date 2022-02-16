@@ -1,0 +1,8 @@
+{
+  {# JINJA template for updating a SOAR case from a Symantec DLP incident. #}
+  "severity_code": "{{ editableIncidentDetails.infoMap.severityId|string|resilient_substitute('{"1": "High", "2": "Medium", "3": "Low", "4": "Low"}')}}",
+
+  "properties": {
+    "sdlp_incident_status": "{{ editableIncidentDetails.infoMap.incidentStatusName }}"
+  }
+}

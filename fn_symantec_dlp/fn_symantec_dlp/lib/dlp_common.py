@@ -2,6 +2,7 @@
 # pragma pylint: disable=unused-argument, no-self-use
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 import os
+import datetime
 import logging
 import base64
 import shutil
@@ -9,16 +10,13 @@ import traceback
 
 from .jinja_common import JinjaEnvironment
 from resilient_lib import IntegrationError, validate_fields, write_to_tmp_file
+from fn_symantec_dlp.lib.constants import FROM_SYMANTEC_DLP_COMMENT_HDR
 
 LOG = logging.getLogger(__name__)
 
 PACKAGE_NAME = "fn_symantec_dlp"
 DEFAULT_POLLER_INTERVAL_SECONDS=60
 DEFAULT_POLLER_LOOKBACK_SECONDS=600
-
-SOAR_HEADER = "IBM SOAR"
-CREATED_BY_SOAR = "Created by {}".format(SOAR_HEADER)
-SYMANTEC_DLP_HEADER="From Symantec DLP:"
 
 
 class SymantecDLPCommon():
@@ -42,6 +40,15 @@ class SymantecDLPCommon():
         self.jina_env = JinjaEnvironment()
 
     def _make_headers(self, username, password):
+        """ Build the header for a Symantec DLP REST API request call using basic auth formatting.
+
+        Args:
+            username ([string]): [ username for DLP Enforce Server account]
+            password ([string]): [ password for DLP Enforce Server account ]
+
+        Returns:
+            [json object]: [ Python requests authorization header]
+        """
         basic_auth  = "{0}:{1}".format(username, password)
 
         b64_basic_auth = base64.b64encode((basic_auth).encode('ascii'))
@@ -170,7 +177,7 @@ class SymantecDLPCommon():
 
     def get_sdlp_incident_custom_attributes(self):
         """[ Get the list of Symantec DLP custom attributes.  Custom attributes 
-             ibm_soar_case_id and ibm_soar_case_url are created in DLP by the user 
+             ibm_case_id and ibm_soar_case_url are created in DLP by the user 
              and are initially "unassigned".  After the DLP case is created in SOAR,
              the app updates these fields in DLP so that the user can get to the 
              corresponding case.  The custom attributes are also used as a filter 
@@ -224,7 +231,7 @@ class SymantecDLPCommon():
         return r_json
 
     def get_sdlp_incident_notes(self, incident_id):
-        """[ Formulate the Symantec DLP incident URL ]
+        """[ Get the list of DLP incident notes and format for posting in SOAR ]
 
         Args:
             incident_id ([integer]): [ DLP incidentId ]
@@ -236,7 +243,7 @@ class SymantecDLPCommon():
         notes = []
         for history_item in history_list:
             if history_item.get('incidentHistoryAction') == 'ADD_COMMENT':
-                note = u"""<b>SYMANTEC_DLP_HEADER</b>
+                note = u"""<b>FROM_SYMANTEC_DLP_COMMENT_HDR</b>
                         <br>
                         <b>User: </b>{user} added note at {time}
                         <br>
@@ -254,7 +261,7 @@ class SymantecDLPCommon():
         update_json = {
                         "incidentIds":[ incident_id ],
                         "incidentNotes":[{
-                            "dateTime":"2022-02-10T20:49:58.47",
+                            "dateTime": datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S"),
                             "note": note_text
                         }]
         }
@@ -263,7 +270,29 @@ class SymantecDLPCommon():
         r_json = response.json()
         return r_json
 
-    def get_incident_status_index(self, incident_id, incident_status):
+    def get_incident_status_name(self, sdlp_incident_payload):
+        """Get the incident status name from DLP incident payload
+
+        Args:
+            sdlp_incident_payload ([json]): [json object containing DLP incident detail and info]
+
+        Returns:
+            [string]: [incidentStatusName field from the 'editableIncidentDetails' json object from DLP]
+        """
+        editable_incident_details = sdlp_incident_payload.get('editableIncidentDetails')
+        info_map = editable_incident_details.get('infoMap')
+        incident_status_name = info_map.get('incidentStatusName')
+        return incident_status_name
+
+    def get_incident_status_index(self, incident_status):
+        """Get the incident status index from DLP incident payload
+
+        Args:
+            incident_status ([string]): [ DLP incident status name ]
+
+        Returns:
+            [string]: ['id' field corresponding to the incident status from the incident/statuses endpoint]
+        """
         statuses = self.get_sdlp_incident_statuses()
         index = 0 
         for status in statuses:
@@ -281,7 +310,7 @@ class SymantecDLPCommon():
             [json]: [ list of DLP incident ids that were updated ]
         """
 
-        incident_status_id = self.get_incident_status_index(incident_id, incident_status_name)
+        incident_status_id = self.get_incident_status_index(incident_status_name)
         if incident_status_id <= 0:
             raise IntegrationError("Symantec DLP incident status name {0} not found in DLP".format(incident_status_name))
 
@@ -312,7 +341,19 @@ class SymantecDLPCommon():
         return index
 
     def patch_sdlp_incident_custom_attribute(self, incident_id, soar_case_id, soar_case_url, ):
+        """ Patch the Symantec DLP incident with the custom attributes containing the SOAR case ID
+            and URL
 
+        Args:
+            incident_id ([integer]): [ DLP incident Id]
+            soar_case_id ([integer]): [ SOAR Case ID]]
+            soar_case_url ([string]): [ URL that links to the SOAR incident ]
+
+        Returns:
+            [json object]: [ json object containing the DLP incidentId of the incident whose 
+            "ibm_soar_case_id" and "ibm_soar_case_url" custom attributes are updated to the specified
+            SOAR values. ]
+        """
         # Get the index of the custom attribute.  When updating the attribute the columnIndex needs to be 
         # sent to the PATCH call...you can't use the name.
         editable_attributes = self.get_sdlp_editable_attributes(incident_id)
@@ -344,11 +385,6 @@ class SymantecDLPCommon():
     def upload_sdlp_binaries(self, soar_rest_client, sdlp_incident_id, soar_case_id):
         """upload_dlp_binaries takes an incident and a resilient incident ID and then attempts to query DLP for any incident_binaries
         Any returning binaries are then sent to Resilient as an Artifact, retaining its name and extension type.
-        
-        :param incident: DLP Incident
-        :type incident: Zeep object
-        :param res_incident_id: A Resilient Incident ID to send the Artifacts too 
-        :type res_incident_id: int
         """
         # Upload remaining parts such as the Attachments
         components = self.get_sdlp_components(sdlp_incident_id)
@@ -384,13 +420,13 @@ class SymantecDLPCommon():
         return artifact_name_list
 
     def get_sdlp_incident_payload(self, incident_id):
-        """[Create the incident payload for creating a SOAR case from DLP incident data.]
+        """[ Create the incident payload for creating a SOAR case from DLP incident data. ]
 
         Args:
-            incident_id ([]): [ DLP incident Id ]
+            incident_id ([integer]): [ DLP incident Id ]
 
         Returns:
-            [json object]: [payload containing information on the Symantec DLP incident]
+            [json object]: [ payload containing information on the Symantec DLP incident ]
         """
         # Get the incident attributes
         sdlp_payload = {}
@@ -400,6 +436,21 @@ class SymantecDLPCommon():
 
         # Add the link back to the Symantec DLP incident URL
         sdlp_payload['sdlp_incident_url'] = self.get_sdlp_incident_url(incident_id)
+        return sdlp_payload
+
+    def get_sdlp_incident_editable_detail_payload(self, incident_id):
+        """[ Create the incident payload for creating a SOAR case from DLP incident data. ]
+
+        Args:
+            incident_id ([integer]): [ DLP incident Id ]
+
+        Returns:
+            [json object]: [ payload containing information on the Symantec DLP incident ]
+        """
+        # Get the incident attributes
+        sdlp_payload = {}
+        sdlp_payload['editableIncidentDetails'] = self.get_sdlp_editable_attributes(incident_id)
+
         return sdlp_payload
 
     def update_sdlp_incident(self, sdlp_update_payload):

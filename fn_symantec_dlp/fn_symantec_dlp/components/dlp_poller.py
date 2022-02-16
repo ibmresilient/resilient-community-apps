@@ -19,7 +19,9 @@ from fn_symantec_dlp.lib.dlp_common import SymantecDLPCommon, PACKAGE_NAME
 
 TICKET_ID_FIELDNAME = "sdlp_incident_id"
 
-DEFAULT_CREATE_DLP_CASE = "templates/dlp_create_incident_template.jinja"
+DEFAULT_CREATE_DLP_CASE = "templates/dlp_create_case_template.jinja"
+DEFAULT_SOAR_CLOSE_CASE = "templates/dlp_close_case_template.jinja"
+DEFAULT_SOAR_UPDATE_CASE = "templates/dlp_update_case_template.jinja"
 
 GMT = "Etc/GMT"
 
@@ -131,9 +133,10 @@ class SymantecDLPPollerComponent(ResilientComponent):
 
         for sdlp_incident_id in sdlp_incident_list:
             soar_case = self.res_common.find_incident(sdlp_incident_id)
+
             if soar_case is None:
+                # Create a new incident
                 sdlp_incident_payload = self.sdlp_env.get_sdlp_incident_payload(sdlp_incident_id)
-                # create a new incident
                 incident_payload = self.jinja_env.make_payload_from_template(
                                                     self.options.get("create_incident_template"),
                                                     DEFAULT_CREATE_DLP_CASE,
@@ -141,7 +144,7 @@ class SymantecDLPPollerComponent(ResilientComponent):
                 soar_case = self.res_common.create_incident(incident_payload)
                 soar_case_id = soar_case.get("id")
 
-                # Send ibm_soar_case_id and ibm_soar_case_url custom fields in DLP to then DLP incident
+                # Send ibm_soar_case_id and ibm_soar_case_url custom attributes in DLP to the DLP incident
                 # so that it has links back to the SOAR case.
                 host = self.opts.get('host')
                 port = self.opts.get('port')
@@ -150,59 +153,48 @@ class SymantecDLPPollerComponent(ResilientComponent):
                 status = self.sdlp_env.patch_sdlp_incident_custom_attribute(sdlp_incident_id,
                                                                             soar_case_id,
                                                                             soar_case_url)
-
-
                 LOG.info("IBM SOAR case created %s for DLP incident %s", soar_case_id, sdlp_incident_id)
-        # get the list of Symantec DLP cases linked to SOAR to check for closed statuses
-        """
-        sdlp_case_list, error_msg = self.sdlp_env.get_cases([ str(key) for key in soar_incident_list.keys() ])
-        LOG.debug(sdlp_case_list)
-        cases_closed = cases_updated = 0
-        for case in sdlp_case_list['results']:
-            case_id = case['id']
+            else: 
+                soar_case_id = soar_case.get("id")
+                sdlp_incident_id = soar_case.get("sdlp_incident_id")
+                sdlp_incident_payload = self.sdlp_env.get_sdlp_incident_editable_detail_payload(sdlp_incident_id)
+                sdlp_incident_status_name = self.sdlp_env.get_incident_status_name(sdlp_incident_payload)
 
-            soar_inc_id = soar_incident_list[case_id]
-            if case.get("isCaseClosed"):
-                # close the SOAR incident
-                incident_close_payload = self.jinja_env.make_payload_from_template(
-                                                    self.options.get("soar_close_case_template"),
+                if sdlp_incident_status_name in ['Resolved', 'Dismissed']:
+                    # Close the case in SOAR
+
+                    incident_close_payload = self.jinja_env.make_payload_from_template(
+                                                    self.options.get("close_case_template"),
                                                     DEFAULT_SOAR_CLOSE_CASE,
-                                                    case)
-                _close_resilient_incident = self.res_common.update_incident(
-                                                    soar_inc_id,
-                                                    incident_close_payload
-                                                )
-                cases_closed += 1
-                msg = "Closed SOAR incident {} from Symantec DLP case {}".format(soar_inc_id, case_id)
-                LOG.info(msg)
-                self.res_common.create_incident_comment(soar_inc_id, None, msg)
-            else:
-                # check if the case has been modified
-                if self.sdlp_env.is_case_modified(case_id, last_poller_time):
-                    case, error_msg = self.sdlp_env.get_case(case_id)
+                                                    sdlp_incident_payload)
 
+                    _close_resilient_incident = self.res_common.update_incident(
+                                                    soar_case_id,
+                                                    incident_close_payload)
+                    msg = "Closed SOAR incident {} from Symantec DLP incident {}".format(soar_case_id, sdlp_incident_id)
+                    LOG.info(msg)
+                    self.res_common.create_incident_comment(soar_case_id, None, msg)                
+                
+                else:
+                    # Update the case in SOAR
                     incident_update_payload = self.jinja_env.make_payload_from_template(
-                                                    self.options.get("soar_update_case_template"),
+                                                    self.options.get("update_case_template"),
                                                     DEFAULT_SOAR_UPDATE_CASE,
-                                                    case)
+                                                    sdlp_incident_payload)
 
-                    LOG.debug("Case changed: %s. Updating SOAR incident: %s", case_id, soar_incident_list[case_id])
-                    cases_updated += 1
-                    # Update description, tags, priority, assignee, stage, important
                     _update_resilient_incident = self.res_common.update_incident(
-                                                    soar_incident_list[case_id],
-                                                    incident_update_payload
-                                                )
-
+                                                    soar_case_id,
+                                                    incident_update_payload)
+                
                     # SYNC Comments
-                    new_comments = self.res_common.filter_resilient_comments(soar_inc_id, case.get('insights', []))
+                    sdlp_notes  = self.sdlp_env.get_sdlp_incident_notes(sdlp_incident_id)
+                    new_comments = self.res_common.filter_resilient_comments(soar_case_id, sdlp_notes)
                     LOG.info(new_comments)
-                    for comment in new_comments:
-                        self.res_common.create_incident_comment(soar_inc_id, comment['title'], comment['content'])
 
-        LOG.info("IBM SOAR open cases: %s, Cases closed: %s, Cases Updated: %s",
-                 len(soar_incident_list), cases_closed, cases_updated)
-"""
+                    for comment in new_comments:
+                        self.res_common.create_incident_comment(soar_case_id, comment['title'], comment['content'])
+
+                    LOG.info("IBM SOAR case updated %s for DLP incident %s", soar_case_id, sdlp_incident_id)
 
     def _get_last_poller_date(self, polling_lookback):
         """get the last poller datetime based on a lookback value
