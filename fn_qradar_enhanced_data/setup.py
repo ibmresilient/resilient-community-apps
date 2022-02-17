@@ -39,8 +39,9 @@ setup(
     entry_points={
         "resilient.circuits.components": [
             # When setup.py is executed, loop through the .py files in the components directory and create the entry points.
-            "{}FunctionComponent = fn_qradar_enhanced_data.components.{}:FunctionComponent".format(snake_to_camel(get_module_name(filename)), get_module_name(filename)) for filename in glob.glob("./fn_qradar_enhanced_data/components/[a-zA-Z]*.py")
-        ],
+            "{}FunctionComponent = fn_qradar_enhanced_data.components.{}:FunctionComponent".format(snake_to_camel(get_module_name(filename)), get_module_name(filename)) for filename in glob.glob("./fn_qradar_enhanced_data/components/qradar_[a-zA-Z]*.py")
+        ] +
+        [ "PollerComponent = fn_qradar_enhanced_data.components.poller:PollerComponent" ],
         "resilient.circuits.configsection": ["gen_config = fn_qradar_enhanced_data.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_qradar_enhanced_data.util.customize:customization_data"],
         "resilient.circuits.selftest": ["selftest = fn_qradar_enhanced_data.util.selftest:selftest_function"]

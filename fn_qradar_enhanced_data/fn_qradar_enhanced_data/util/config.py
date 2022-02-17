@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2021. All Rights Reserved.
+# (c) Copyright IBM Corp. 2022. All Rights Reserved.
 """Generate a default configuration-file section for fn_qradar_integration"""
 
 from __future__ import print_function
@@ -21,7 +21,7 @@ qradartoken=changeme
 # Interval to poll QRadar for changes (in minutes)
 # To turn the poller off user value 0
 polling_interval = 120
-poller_lookback = 60
+polling_lookback = 60
 verify_cert=false|/path/to/cert
 #search_timeout=
 
@@ -37,7 +37,7 @@ qradartoken=changeme
 # Interval to poll QRadar for changes (in minutes)
 # To turn the poller off user value 0
 polling_interval = 120
-poller_lookback = 60
+polling_lookback = 60
 verify_cert=false|/path/to/cert
 #search_timeout=
 '''
