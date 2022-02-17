@@ -57,8 +57,8 @@ class FunctionComponent(ResilientComponent):
             rc = RequestsCommon(self.opts, self.options)
             rp = ResultPayload(CONFIG_DATA_SECTION)
 
-            # if not "closing" or "resolving" ignore the close notes
-            if res_helper.get_function_input(kwargs, "sn_record_state") != 7 and res_helper.get_function_input(kwargs, "sn_record_state") != 6:
+            # if not "closing" or "resolving" ignore the close notes (3,6,7 are closing codes)
+            if res_helper.get_function_input(kwargs, "sn_record_state") not in (3,6,7):
                 kwargs["sn_close_notes"] = ""
 
             # Get the function inputs:
