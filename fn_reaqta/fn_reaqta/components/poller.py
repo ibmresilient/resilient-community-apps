@@ -194,7 +194,7 @@ class PollerComponent(ResilientComponent):
                 entity['alert_url'] = self.app_common.make_linkback_url(LINKBACK_URL, entity_id)
 
                 # determine if this is an existing SOAR case
-                soar_case, error_msg = self.soar_common.get_soar_case({ SOAR_ENTITY_ID_FIELD: entity_id })
+                soar_case, error_msg = self.soar_common.get_soar_case({ SOAR_ENTITY_ID_FIELD: entity_id }, open_cases=False)
                 # if case does not exist, create a new one
                 if not soar_case:
                     # create the SOAR case
@@ -224,19 +224,20 @@ class PollerComponent(ResilientComponent):
                     soar_case_id = soar_case['id']
 
                     if is_entity_closed(entity):
-                        # close the SOAR case
-                        soar_close_payload = make_payload_from_template(
-                                                        self.soar_close_case_template,
-                                                        CLOSE_INCIDENT_TEMPLATE,
-                                                        entity
-                                                    )
-                        _close_soar_case = self.soar_common.update_soar_case(
-                                                        soar_case_id,
-                                                        soar_close_payload
-                                                    )
+                        if soar_case['plan_status'] == "A":
+                            # close the SOAR case
+                            soar_close_payload = make_payload_from_template(
+                                                            self.soar_close_case_template,
+                                                            CLOSE_INCIDENT_TEMPLATE,
+                                                            entity
+                                                        )
+                            _close_soar_case = self.soar_common.update_soar_case(
+                                                            soar_case_id,
+                                                            soar_close_payload
+                                                        )
 
-                        cases_closed += 1
-                        LOG.info("Closed SOAR case %s from %s %s", soar_case_id, ENTITY_LABEL, entity_id)
+                            cases_closed += 1
+                            LOG.info("Closed SOAR case %s from %s %s", soar_case_id, ENTITY_LABEL, entity_id)
                     else:
                         # perform an update operation on the existing SOAR case
                         #soar_update_payload = make_payload_from_template(

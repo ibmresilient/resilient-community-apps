@@ -20,11 +20,11 @@ def codegen_reload_data():
     """
     return {
         "package": u"fn_reaqta",
-        "message_destinations": [],
-        "functions": [],
-        "workflows": [],
-        "actions": [],
-        "incident_fields": [u"reaqta_alert_link", u"reaqta_cpu_info", u"reaqta_endpoint_id", u"reaqta_id", u"reaqta_tags"],
+        "message_destinations": [u"fn_reaqta"],
+        "functions": [u"reaqta_get_processes", u"reaqta_isolate_machine", u"reaqta_kill_process"],
+        "workflows": [u"reaqta_get_processes"],
+        "actions": [u"ReaQta: Get Processes"],
+        "incident_fields": [u"reaqta_alert_link", u"reaqta_endpoint_id", u"reaqta_groups", u"reaqta_id", u"reaqta_machine_info", u"reaqta_tags"],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [u"reaqta_trigger_events"],
@@ -41,11 +41,22 @@ def customization_data(client=None):
     IBM Resilient Platform Version: 41.2.41
 
     Contents:
+    - Message Destinations:
+        - fn_reaqta
+    - Functions:
+        - reaqta_get_processes
+        - reaqta_isolate_machine
+        - reaqta_kill_process
+    - Workflows:
+        - reaqta_get_processes
+    - Rules:
+        - ReaQta: Get Processes
     - Incident Fields:
         - reaqta_alert_link
-        - reaqta_cpu_info
         - reaqta_endpoint_id
+        - reaqta_groups
         - reaqta_id
+        - reaqta_machine_info
         - reaqta_tags
     - Data Tables:
         - reaqta_trigger_events

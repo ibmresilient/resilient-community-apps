@@ -2,8 +2,8 @@
   {% for event in triggerEvents %}
     {
         "cells": {
-            "received_at": {
-                "value": {{ event.receivedAt|soar_datetimeformat(split_at='.') }}
+            "happened_at": {
+                "value": {{ event.happenedAt|soar_datetimeformat(split_at='.') }}
             },
             "category": {
                 "value": "{{ event.category }}"

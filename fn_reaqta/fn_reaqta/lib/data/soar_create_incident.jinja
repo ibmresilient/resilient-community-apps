@@ -1,6 +1,24 @@
 {
   {# JINJA template for creating a new SOAR incident from a ReaQta alert. #}
-  "name": "ReaQta Alert - {{ title|replace('"', '\\"') }}, Endpoint: {{ endpoint.name }}",
+  {% set triggercondition_lookup = '''{
+    "0": "Code Injection",
+    "1": "Process Impersonated",
+    "2": "Signature Forged",
+    "3": "Incident Correlated",
+    "4": "DLL Sideloaded",
+    "5": "Suspicious Script Executed",
+    "6": "Policies Triggered",
+    "7": "Anomalous Behaviour Detected",
+    "8": "Token Stolen",
+    "9": "Ransomware Behavior Detected",
+    "10": "Privilege Escalated",
+    "11": "External Trigger",
+    "12": "Detection Strategy",
+    "13": "Antimalware Detection"
+  }'''
+  %}
+  "name": "ReaQta Alert - {{ triggerCondition | string | soar_substitute(triggercondition_lookup) }}, Endpoint: {{ endpoint.name }}",
+  "description": "{{ title | replace('"', '\\"') }}",
   "discovered_date": {{ receivedAt|soar_datetimeformat(split_at='.') }},
   "start_date": {{ happenedAt|soar_datetimeformat(split_at='.') }},
   {# if alert users are different than SOAR users, consider using a mapping table using soar_substitute: #}
@@ -12,7 +30,8 @@
     "reaqta_alert_link": "<a target='blank' href='{{ alert_url }}'>ReaQta Alert</a>",
     "reaqta_tags": "{{ tags | join(', ') }}",
     "reaqta_endpoint_id": "{{ endpoint.id }}",
-    "reaqta_cpu_info": "{{ endpoint.cpuDescr }} ({{ endpoint.os }})"
+    "reaqta_groups": "{{ endpoint.groups | map(attribute='name') | join(', ') }}",
+    "reaqta_machine_info": "Machine Name: {{ endpoint.name }}\nOS: {{ endpoint.os }}\nDomain: {{ endpoint.domain }}\nCPU: {{ endpoint.cpuDescr }}"
   },
   "artifacts": [
     {

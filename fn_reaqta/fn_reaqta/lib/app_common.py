@@ -10,6 +10,8 @@ LOG = logging.getLogger(__name__)
 
 HEADER = { 'Content-Type': 'application/json' }
 
+ENDPOINT_URI = "endpoint/{}/"
+
 class AppCommon():
     def __init__(self, rc, options):
         self.api_key = options['api_key']
@@ -22,19 +24,24 @@ class AppCommon():
         # set any additional filters to include for alert query
         self.filters = eval_mapping(options.get('poller_filters', ''), wrapper='{{ {} }}')
 
+        self.token = self.header = None
+
     def get_filters(self):
         return self.filters
 
-    def authenticate(self):
-        params = {
-            "secret": self.api_secret,
-            "id": self.api_key
-        }
+    def authenticate(self, refresh=False):
+        if refresh or not self.token:
+            params = {
+                "secret": self.api_secret,
+                "id": self.api_key
+            }
 
-        auth_url = self._get_uri('authenticate')
+            auth_url = self._get_uri('authenticate')
 
-        response = self.rc.execute("POST", auth_url, json=params, headers=HEADER, verify=self.verify)
-        return response.json()['token']
+            response = self.rc.execute("POST", auth_url, json=params, headers=HEADER, verify=self.verify)
+            self.token = response.json()['token']
+            self.header = self._make_header(self.token)
+
 
     def get_entities_since_ts(self, query_field_name, timestamp, optional_filters):
         """get changed entities since last poller run
@@ -57,7 +64,7 @@ class AppCommon():
                 query[k] = v
 
         LOG.debug(query)
-        self.token = self.authenticate()
+        self.token = self.authenticate(refresh=True)
         self.header = self._make_header(self.token)
         response = self.rc.execute("GET", self._get_uri("alerts"), params=query, headers=self.header, verify=self.verify)
         return response.json()
@@ -73,6 +80,32 @@ class AppCommon():
         """
         response = self.rc.execute("GET", next_url, headers=self.header, verify=self.verify)
         return response.json()
+
+    def isolate_machine(self, endpoint_id):
+        url = urljoin(ENDPOINT_URI.format(endpoint_id), "isolate")
+
+        self.authenticate()
+
+    def get_processes(self, endpoint_id):
+        url = urljoin(ENDPOINT_URI.format(endpoint_id), "processes")
+
+        self.authenticate()
+        response = self.rc.execute("GET", self._get_uri(url), headers=self.header, verify=self.verify)
+        return response.json()
+
+    def kill_process(self, endpoint_id, process_pid, start_time):
+        url = urljoin(ENDPOINT_URI.format(endpoint_id), "processes/kill")
+        payload = [
+            {
+                "pid": process_pid,
+                "startTime": start_time
+            }
+        ]
+
+        self.authenticate()
+        response = self.rc.execute("POST", self._get_uri(url), params=payload, headers=self.header, verify=self.verify)
+        return response.json()
+
 
     def _get_uri(self, cmd):
         """build API url
