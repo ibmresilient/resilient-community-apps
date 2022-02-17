@@ -3,6 +3,7 @@
 # (c) Copyright IBM Corp. 2022. All Rights Reserved.
 #
 # Util functions
+
 import six
 import logging
 from resilient_lib import validate_fields
