@@ -3,7 +3,6 @@
 # (c) Copyright IBM Corp. 2022. All Rights Reserved.
 #
 # Util functions
-
 import six
 from resilient_lib import validate_fields, IntegrationError
 from fn_qradar_enhanced_data.util.qradar_constants import PACKAGE_NAME, GLOBAL_SETTINGS
