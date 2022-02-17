@@ -57,6 +57,10 @@ class FunctionComponent(ResilientComponent):
             rc = RequestsCommon(self.opts, self.options)
             rp = ResultPayload(CONFIG_DATA_SECTION)
 
+            # if not "closing" or "resolving" ignore the close notes
+            if "closed" not in str(res_helper.get_function_input(kwargs, "sn_record_state")).lower() and "resolved" not in str(res_helper.get_function_input(kwargs, "sn_record_state")).lower():
+                kwargs["sn_close_notes"] = ""
+
             # Get the function inputs:
             inputs = {
                 "incident_id": res_helper.get_function_input(kwargs, "incident_id"),  # number (required)

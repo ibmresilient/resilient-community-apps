@@ -40,7 +40,9 @@
 		if(params.sn_record_state != record.state){
 			
 			//Set the attributes required to close a record
-			record.close_notes = params.sn_close_notes;
+			if (params.sn_close_notes != "") {
+				record.close_notes = params.sn_close_notes;
+			}
 			record.close_code = params.sn_close_code;
 			record.state = params.sn_record_state;
 

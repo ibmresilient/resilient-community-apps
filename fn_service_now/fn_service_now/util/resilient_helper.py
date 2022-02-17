@@ -273,6 +273,39 @@ class ResilientHelper(object):
         return Incident(incident_id, incident["name"], incident["description"])
 
     @staticmethod
+    def rename_incident(client, incident_id, new_incident_name):
+        """
+        Static function to update the name of a incident.
+        Primarily used for prepending sn_ref_id to the incident's name
+        for easy filtering when viewing incident list
+        """
+
+        log = logging.getLogger(__name__)
+        err_msg = None
+
+        def change_func(data):
+            data["name"] = new_incident_name
+
+        url = "/incidents/{0}?text_content_output_format=always_text&handle_format=names".format(incident_id)
+
+        # Use the get_put option to GET the data, apply the change, and PUT it back to the server
+        try:
+            log.debug("PUT Incident from Resilient: ID: %s URL: %s New Name: %s", incident_id, url, new_incident_name)
+            client.get_put(url, change_func)
+            log.info("Incident was successfully renamed to '%s'", new_incident_name)
+        except Exception as err:
+            err_msg = "Error trying to get Incident {0}.".format(incident_id)
+
+            if err.message and "unable to find incident" in err.message.lower():
+                err_msg = "{0} Could not find Incident with ID {1}".format(err_msg, incident_id)
+            elif isinstance(err, SimpleHTTPException):
+                err_msg = "{0}\nServer Error.\nStatus Code: {1}\nURL: {2}\n{3}".format(err_msg, err.response.status_code, err.response.url, err.message)
+            else:
+                err_msg = "{0} {1}".format(err_msg, err)
+
+            raise ValueError(err_msg)
+
+    @staticmethod
     def get_task(client, task_id, incident_id):
         """Function that gets the task from Resilient. Gets the task's instructions too"""
 
@@ -321,6 +354,40 @@ class ResilientHelper(object):
 
 
         return Task(incident_id, task_id, task["name"], task_instructions)
+
+    @staticmethod
+    def rename_task(client, task_id, new_task_name):
+        """
+        Static function to update the name of a task.
+        Primarily used for prepending sn_ref_id to the task's name
+        for easy filtering when viewing task list
+        """
+
+        log = logging.getLogger(__name__)
+        err_msg = None
+
+        def change_func(data):
+            data["name"] = new_task_name
+
+        url = "/tasks/{0}?text_content_output_format=always_text&handle_format=names".format(task_id)
+
+        # Use the get_put option to GET the data, apply the change, and PUT it back to the server
+        try:
+            log.debug("PUT Task from Resilient: ID: %s URL: %s New Name: %s", task_id, url, new_task_name)
+            client.get_put(url, change_func)
+            log.info("Task was successfully renamed to '%s'", new_task_name)
+        except Exception as err:
+            err_msg = "Error trying to get Task {0}.".format(task_id)
+
+            if err.message and "unable to find task" in err.message.lower():
+                err_msg = "{0} Could not find Task with ID {1}".format(err_msg, task_id)
+            elif isinstance(err, SimpleHTTPException):
+                err_msg = "{0}\nServer Error.\nStatus Code: {1}\nURL: {2}\n{3}".format(err_msg, err.response.status_code, err.response.url, err.message)
+            else:
+                err_msg = "{0} {1}".format(err_msg, err)
+
+            raise ValueError(err_msg)
+
 
     @classmethod
     def get_attachment(cls, res_client, attachment_id, incident_id=None, task_id=None):
