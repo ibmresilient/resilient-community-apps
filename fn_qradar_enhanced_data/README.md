@@ -21,7 +21,7 @@
 - [Overview](#overview)
   - [Key Features](#key-features)
 - [Requirements](#requirements)
-  - [SOAR platform](#resilient-platform)
+  - [SOAR platform](#SOAR-platform)
   - [Cloud Pak for Security](#cloud-pak-for-security)
   - [Proxy Server](#proxy-server)
   - [QRadar Requirements](#qradar-requirements)
