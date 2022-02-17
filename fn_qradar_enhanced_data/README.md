@@ -802,7 +802,6 @@ qr_flows
 
 ---
 
-
 ## Rules
 | Rule Name | Object | Workflow Triggered |
 | --------- | ------ | ------------------ |
@@ -816,6 +815,10 @@ The rule, QRadar Enhanced Data, is an automatic rule that triggers when a new in
 
 
 ---
+
+## For Customers who do not use the QRadar-Plugin
+Custom field QR Offense Id has to contain an ID
+Custom field qradar_destination has to have a destination name for the qradar server
 
 ## Troubleshooting & Support
 Refer to the documentation listed in the Requirements section for troubleshooting information.
