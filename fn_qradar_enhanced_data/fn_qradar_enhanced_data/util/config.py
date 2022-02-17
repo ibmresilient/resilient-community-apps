@@ -10,7 +10,7 @@ def config_section_data():
     """
     return u'''
 #Settings that apply to all QRadar servers
-[fn_qradar_integration:global_settings]
+[fn_qradar_integration:edm_global_settings]
 #search_timeout=
 # Interval to poll QRadar for changes (in minutes)
 # To turn the poller off user value 0

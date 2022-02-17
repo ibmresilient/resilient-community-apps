@@ -16,7 +16,7 @@ RULES_EXPLORER_URL = "console/plugins/{}/app_proxy/api/rules_explorer"
 GRAPHQL_URL = "console/graphql"
 GRAPHQL_BASICAUTH = "console/login"
 PACKAGE_NAME = "fn_qradar_integration"
-GLOBAL_SETTINGS = "fn_qradar_integration:global_settings"
+GLOBAL_SETTINGS = "fn_qradar_integration:edm_global_settings"
 
 SEARCH_STATUS_COMPLETED = "COMPLETED"
 SEARCH_STATUS_EXECUTE = "EXECUTE"
