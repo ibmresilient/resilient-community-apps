@@ -79,6 +79,10 @@ class TestFnSnowCreateRecord:
 
         ServiceNowRecordsDataTable.add_row = MagicMock(return_value=mock_add_row_response)
 
+        mock_rename_task = None
+
+        ResilientHelper.rename_task = MagicMock(return_value=mock_rename_task)
+
         results = call_fn_snow_create_record_function(circuits_app, inputs)
 
         del results["sn_time_created"]
