@@ -39,6 +39,14 @@ ScriptConditionsHelper.prototype = {
 
 	initialize: function() {},
 
+	uiCreateIncidentCheck: function(current) {
+		return isSirTable(current) && !sirIsLinkedToRes(current);
+	},
+
+	uiCreateTaskCheck: function(current) {
+		return isSirTable(current) && !sirIsLinkedToRes(current);
+	},
+
 	sirAddCommentCheck: function(current) {
 		return isSirTable(current) && sirIsLinkedToRes(current);
 	},

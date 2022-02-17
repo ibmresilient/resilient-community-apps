@@ -318,6 +318,11 @@ ResilientHelper.prototype = {
 	},
 	
 	addNote: function(res_reference_id, noteText, noteFormat){
+
+		//ServiceNow notes can have "[code]" sections which include HTML plain text within them
+		//To correclty place this HTML in SOAR, filter out the "[code]" tags
+		noteText = noteText.replaceAll("[code]","").replaceAll("[/code]","");
+
 		try{
 			if(!noteFormat){
 				noteFormat = "text";
