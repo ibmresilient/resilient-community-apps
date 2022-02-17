@@ -95,7 +95,7 @@ if results.success:
           "value": "{}".format(categories_names)
         }
         ]
-  artifact.addHit("AbuseIPDB Function hits added", hit)
+  artifact.addHit("AbuseIPDB Function", hit)
 else:
   incident.addNote("AbuseIPDB Check IP Address Blocklist failed: {}".format(results.reason))
 
