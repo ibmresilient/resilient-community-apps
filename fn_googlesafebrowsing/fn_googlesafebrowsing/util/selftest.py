@@ -19,6 +19,8 @@ Return examples:
 """
 
 import logging
+from resilient_lib import RequestsCommon
+import json
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
@@ -31,8 +33,32 @@ def selftest_function(opts):
     Suggested return values are be unimplemented, success, or failure.
     """
     app_configs = opts.get("fn_googlesafebrowsing", {})
+    SB_CLIENT_ID = "Resilient"
+    SB_CLIENT_VER = "0.0.3"
 
-    return {
-        "state": "unimplemented",
-        "reason": None
-    }
+    reqbody = {
+            'client': {
+                 'clientId': SB_CLIENT_ID,
+                 'clientVersion': SB_CLIENT_VER
+            },
+            'threatInfo': {
+                'threatTypes': ['THREAT_TYPE_UNSPECIFIED',
+                             'MALWARE', 
+                             'SOCIAL_ENGINEERING', 
+                             'UNWANTED_SOFTWARE', 
+                             'POTENTIALLY_HARMFUL_APPLICATION'],
+                'platformTypes': ['ANY_PLATFORM'],
+                'threatEntryTypes': ['URL'],
+                'threatEntries': [{'url': 'https://ibm.com'}]
+            }
+        }
+    try:
+        rc = RequestsCommon(opts, app_configs)
+        rc.execute('post', '{}{}'.format(app_configs['googlesafebrowsing_url'], app_configs['googlesafebrowsing_api_key']), headers={'Content-Type': 'applciation/json'}, data=json.dumps(reqbody))
+        return {"state": "success"}
+
+    except Exception as e:
+        return {
+            "state": "failure",
+            "reason": e
+        }

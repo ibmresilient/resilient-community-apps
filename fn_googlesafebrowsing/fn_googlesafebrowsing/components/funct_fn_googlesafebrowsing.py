@@ -24,15 +24,6 @@ class FunctionComponent(AppFunctionComponent):
 
     @app_function(FN_NAME)
     def lookup_urls(self, fn_inputs):
-        """
-        Utility class to access the Google Safe Browsing Lookup API
-        https://developers.google.com/safe-browsing/v4/get-started
-        >>> sb = SafeBrowsingAPI(os.environ.get("SAFEBROWSING_API_KEY"))
-        # {u'matches': [{u'threatType': u'SOCIAL_ENGINEERING', u'threatEntryType': u'URL', u'platformType': u'ANY_PLATFORM', u'threat': {u'url': u'ihaveaproblem.info'}, u'cacheDuration': u'300s'}]}
-        >>> result = sb.lookup_urls("ihaveaproblem.info")
-        >>> len(result["matches"]) > 0
-        True
-        """
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
 
