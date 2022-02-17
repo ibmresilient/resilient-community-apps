@@ -3,9 +3,10 @@
 # (c) Copyright IBM Corp. 2022. All Rights Reserved.
 #
 # Util functions
+
 import six
-from resilient_lib import validate_fields
-from fn_qradar_enhanced_data.util.qradar_constants import PACKAGE_NAME
+from resilient_lib import validate_fields, IntegrationError
+from fn_qradar_enhanced_data.util.qradar_constants import PACKAGE_NAME, GLOBAL_SETTINGS
 from fn_qradar_enhanced_data.util import qradar_utils
 
 def make_query_string(query, params):
@@ -57,6 +58,12 @@ def get_servers_list(opts):
     else: # If labels given [fn_qradar_integration:label]
         servers = qradar_utils.QRadarServers(opts, options)
         server_list = servers.get_server_name_list()
+        if GLOBAL_SETTINGS not in server_list:
+            IntegrationError('Unable to find [{}]'.format(GLOBAL_SETTINGS))
+        server_list.remove(GLOBAL_SETTINGS)
+
+    # Validate global_settings
+    validate_fields(["polling_interval", "polling_lookback"], opts.get(GLOBAL_SETTINGS, {}))
 
     # Creates a dictionary that is filled with the QRadar servers
     # and there configurations

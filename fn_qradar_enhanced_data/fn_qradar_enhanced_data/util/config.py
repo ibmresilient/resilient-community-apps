@@ -9,6 +9,14 @@ def config_section_data():
        when called by `resilient-circuits config [-c|-u]`
     """
     return u'''
+#Settings that apply to all QRadar servers
+[fn_qradar_integration:edm_global_settings]
+#search_timeout=
+# Interval to poll QRadar for changes (in minutes)
+# To turn the poller off user value 0
+polling_interval = 120
+polling_lookback = 60
+
 # Note: the QRadar instance name that you want to communicate with, must equal the
 # QRadar Destination Name that is set when configuring the SOAR Plugin
 # Example: SOAR_Plugin_Destination_Name1
@@ -18,12 +26,7 @@ username=admin
 qradarpassword=changeme
 #Note, if both qradarpassword and qradartoken are given, password will be used
 qradartoken=changeme
-# Interval to poll QRadar for changes (in minutes)
-# To turn the poller off user value 0
-polling_interval = 120
-polling_lookback = 60
 verify_cert=false|/path/to/cert
-#search_timeout=
 
 # Note: the QRadar instance name that you want to communicate with, must equal the
 # QRadar Destination Name that is set when configuring the SOAR Plugin
@@ -34,10 +37,5 @@ username=admin
 qradarpassword=changeme
 #Note, if both qradarpassword and qradartoken are given, password will be used
 qradartoken=changeme
-# Interval to poll QRadar for changes (in minutes)
-# To turn the poller off user value 0
-polling_interval = 120
-polling_lookback = 60
 verify_cert=false|/path/to/cert
-#search_timeout=
 '''

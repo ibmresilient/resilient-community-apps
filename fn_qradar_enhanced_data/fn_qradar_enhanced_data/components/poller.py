@@ -7,7 +7,7 @@ import datetime
 import logging
 from threading import Thread
 from resilient_circuits import ResilientComponent
-from resilient_lib import validate_fields, RequestsCommon
+from resilient_lib import RequestsCommon
 from resilient import get_client
 from fn_qradar_enhanced_data.lib.poller_common import SOARCommon, poller
 from fn_qradar_enhanced_data.lib.app_common import AppCommon
