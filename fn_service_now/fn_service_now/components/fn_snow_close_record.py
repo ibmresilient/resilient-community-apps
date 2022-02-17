@@ -58,7 +58,7 @@ class FunctionComponent(ResilientComponent):
             rp = ResultPayload(CONFIG_DATA_SECTION)
 
             # if not "closing" or "resolving" ignore the close notes
-            if "closed" not in str(res_helper.get_function_input(kwargs, "sn_record_state")).lower() and "resolved" not in str(res_helper.get_function_input(kwargs, "sn_record_state")).lower():
+            if res_helper.get_function_input(kwargs, "sn_record_state") == 7 or res_helper.get_function_input(kwargs, "sn_record_state") == 6:
                 kwargs["sn_close_notes"] = ""
 
             # Get the function inputs:
