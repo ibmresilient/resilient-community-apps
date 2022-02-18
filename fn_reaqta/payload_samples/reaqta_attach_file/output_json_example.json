@@ -1,0 +1,90 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "type": "incident",
+    "id": 48,
+    "uuid": "50df0c2a-e222-4353-90f0-f4f2a2fad3f5",
+    "name": "notepad.exe",
+    "content_type": "application/x-msdownload",
+    "created": 1645210092202,
+    "creator_id": 3,
+    "size": 334262,
+    "actions": [
+      {
+        "id": 15,
+        "name": "Example: Attachment Hash",
+        "enabled": true
+      },
+      {
+        "id": 16,
+        "name": "Example: Attachment to Base64",
+        "enabled": true
+      },
+      {
+        "id": 20,
+        "name": "Example: Email Parsing (Attachment)",
+        "enabled": true
+      },
+      {
+        "id": 26,
+        "name": "Example: PDFiD",
+        "enabled": true
+      },
+      {
+        "id": 27,
+        "name": "Example: Resilient Search",
+        "enabled": true
+      },
+      {
+        "id": 32,
+        "name": "Example: Use Excel Data",
+        "enabled": false
+      },
+      {
+        "id": 35,
+        "name": "Example: Zip List",
+        "enabled": false
+      },
+      {
+        "id": 34,
+        "name": "Example: Zip Extract",
+        "enabled": false
+      },
+      {
+        "id": 55,
+        "name": "PB: Get workflows/playbooks by attachment name",
+        "enabled": true
+      },
+      {
+        "id": 90,
+        "name": "Example: Virus Total for Attachments",
+        "enabled": true
+      }
+    ],
+    "task_id": null,
+    "task_name": null,
+    "task_custom": null,
+    "task_members": null,
+    "task_at_id": null,
+    "vers": 7,
+    "inc_id": 2377,
+    "inc_name": "ReaQta Alert - Hive alert Title, Endpoint: AUTISTIC1",
+    "inc_owner": 3
+  },
+  "raw": null,
+  "inputs": {
+    "reaqta_program_path": "C:\\Windows\\System32\\notepad.exe",
+    "reaqta_endpoint_id": "831986736375529472",
+    "reaqta_incident_id": 2377
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-reaqta",
+    "package_version": "1.0.0",
+    "host": "Marks-MacBook-Pro.local",
+    "execution_time_ms": 18981,
+    "timestamp": "2022-02-18 13:48:11"
+  }
+}

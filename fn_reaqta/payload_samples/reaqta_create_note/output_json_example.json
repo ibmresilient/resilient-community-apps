@@ -1,0 +1,19 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": "this is a note in the hive alert\nIBM SOAR 18/02/2022 14:04:57\nReaQta Isolate Machine failed: Endpoint offline",
+  "raw": null,
+  "inputs": {
+    "reaqta_alert_id": "830607817638412290",
+    "reaqta_note": "ReaQta Isolate Machine failed: Endpoint offline"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-reaqta",
+    "package_version": "1.0.0",
+    "host": "Marks-MacBook-Pro.local",
+    "execution_time_ms": 738,
+    "timestamp": "2022-02-18 14:04:58"
+  }
+}

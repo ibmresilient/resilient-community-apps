@@ -4,9 +4,11 @@
 import logging
 import ntpath
 import time
+from datetime import datetime
 from io import BytesIO
 from urllib.parse import urljoin
-from resilient_lib import str_to_bool, readable_datetime, write_file_attachment
+from fn_reaqta.lib.poller_common import IBM_SOAR
+from resilient_lib import str_to_bool, readable_datetime, write_file_attachment, clean_html
 from fn_reaqta.lib.poller_common import eval_mapping, s_to_b
 
 LOG = logging.getLogger(__name__)
@@ -15,6 +17,7 @@ HEADER = { 'Content-Type': 'application/json' }
 
 ENDPOINT_URI = "endpoint/{}/"
 ENDPOINT_FILE_URI = "endpoint-file/{}/"
+ALERT_URI = "alert/{}/"
 
 DOWNLOAD_WAIT_SEC = 15  # number of seconds to wait between status checks for a file download
 
@@ -42,7 +45,7 @@ class AppCommon():
                 "id": self.api_key
             }
 
-            response, err_msg = self.api_call("POST", 'authenticate', params)
+            response, err_msg = self.api_call("POST", 'authenticate', params, refresh_authentication=None)
             if not err_msg:
                 self.token = response.json()['token']
                 self.header = self._make_header(self.token)
@@ -70,9 +73,7 @@ class AppCommon():
                 query[k] = v
 
         LOG.debug(query)
-        self.token = self.authenticate(refresh=True)
-        self.header = self._make_header(self.token)
-        response, err_msg = self.api_call("GET", 'alerts', query)
+        response, err_msg = self.api_call("GET", 'alerts', query, refresh_authentication=True)
         return response.json()
 
     def get_next_entities(self, next_url):
@@ -90,14 +91,12 @@ class AppCommon():
     def isolate_machine(self, endpoint_id):
         url = urljoin(ENDPOINT_URI.format(endpoint_id), "isolate")
 
-        self.authenticate()
-        response, err_msg = self.api_call("POST", 'url', None)
+        response, err_msg = self.api_call("POST", url, None)
         return response.json()
 
     def get_processes(self, endpoint_id):
         url = urljoin(ENDPOINT_URI.format(endpoint_id), "processes")
 
-        self.authenticate()
         response, err_msg = self.api_call("GET", url, None)
         return response.json()
 
@@ -110,7 +109,6 @@ class AppCommon():
             }
         ]
 
-        self.authenticate()
         response, err_msg = self.api_call("POST", url, payload)
         return response.json()
 
@@ -123,7 +121,6 @@ class AppCommon():
                 "path": program_path,
             }
 
-        self.authenticate()
         response, err_msg = self.api_call("POST", url, payload)
 
         # go into a spin loop waiting for the request to complete
@@ -149,6 +146,39 @@ class AppCommon():
                 results = write_file_attachment(rest_client, file_name, attachment, incident_id)
 
         return results
+
+    def close_alert(self, alert_id, is_malicious):
+        params = {
+            "alertId": alert_id,
+            "closed": True,
+            "malicious": is_malicious
+            }
+
+        url = urljoin(ALERT_URI.format(alert_id), "close")
+        response, err_msg = self.api_call("POST", url, params)
+
+        return (response.json(), err_msg) if not err_msg else (None, err_msg)
+
+    def get_alert(self, alert_id):
+        url = ALERT_URI.format(alert_id)
+        response, err_msg = self.api_call("GET", url, None)
+
+        return (response.json(), err_msg) if not err_msg else (None, err_msg)
+
+    def create_note(self, alert_id, note, header=IBM_SOAR):
+        # get the existing note so we can append the new content
+        response, err_msg = self.get_alert(alert_id)
+        if not err_msg:
+            existing_note = response.get('notes')
+
+            params = {
+                "notes": make_comment(existing_note, note, header=header)
+            }
+
+            url = urljoin(ALERT_URI.format(alert_id), "notes")
+            response, err_msg = self.api_call("PUT", url, params)
+
+        return (response.json(), err_msg) if not err_msg else (None, err_msg)
 
     def _get_uri(self, cmd):
         """build API url
@@ -187,8 +217,11 @@ class AppCommon():
         """
         return urljoin(self.reaqta_url, template_uri.format(entity_id))
 
-    def api_call(self, method, url, payload):
-        if method == "POST":
+    def api_call(self, method, url, payload, refresh_authentication=False):
+        if refresh_authentication is not None:
+            self.authenticate(refresh=refresh_authentication)
+
+        if method in ["PUT", "POST"]:
             return self.rc.execute(method,
                                    self._get_uri(url),
                                    json=payload,
@@ -209,6 +242,14 @@ class AppCommon():
                                    verify=self.verify,
                                    callback=callback)
 
+def make_comment(existing_note, note, header=IBM_SOAR):
+    # add datestamp
+    now = datetime.now()
+    ts = now.strftime("%d/%m/%Y %H:%M:%S")
+
+    return '\n'.join([existing_note if existing_note else "",
+                      "{} {}".format(header, ts),
+                      clean_html(note)])
 
 def callback(response):
     """
@@ -217,7 +258,7 @@ def callback(response):
     :return: response, error_msg
     """
     error_msg = None
-    if response.status_code >= 300:
+    if response.status_code >= 300 and response.status_code < 500:
         resp = response.json()
         msg = resp.get('messages')
         details = resp.get('details')

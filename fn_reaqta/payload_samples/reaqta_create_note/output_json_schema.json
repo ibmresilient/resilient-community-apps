@@ -10,49 +10,18 @@
     },
     "reason": {},
     "content": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "pid": {
-            "type": "integer"
-          },
-          "ppid": {
-            "type": "integer"
-          },
-          "processName": {
-            "type": "string"
-          },
-          "hasIncident": {
-            "type": "boolean"
-          },
-          "suspended": {
-            "type": "boolean"
-          },
-          "startTime": {
-            "type": "integer"
-          },
-          "privilegeLevel": {
-            "type": "string"
-          },
-          "user": {
-            "type": "string"
-          },
-          "programPath": {
-            "type": "string"
-          }
-        }
-      }
+      "type": "string"
     },
     "raw": {},
     "inputs": {
       "type": "object",
       "properties": {
-        "reaqta_has_incident": {},
-        "reaqta_endpoint_id": {
+        "reaqta_alert_id": {
           "type": "string"
         },
-        "reaqta_suspended": {}
+        "reaqta_note": {
+          "type": "string"
+        }
       }
     },
     "metrics": {

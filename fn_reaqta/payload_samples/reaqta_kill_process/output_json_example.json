@@ -1,3 +1,28 @@
 {
-    
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": [
+    {
+      "pid": 4,
+      "startTime": 1644961331131,
+      "killed": false,
+      "errorCode": -1,
+      "error": "Process not found"
+    }
+  ],
+  "raw": null,
+  "inputs": {
+    "reaqta_starttime": 1644961331131,
+    "reaqta_endpoint_id": "831986736375529472",
+    "reaqta_process_pid": 4
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-reaqta",
+    "package_version": "1.0.0",
+    "host": "Marks-MacBook-Pro.local",
+    "execution_time_ms": 953,
+    "timestamp": "2022-02-18 13:48:08"
+  }
 }

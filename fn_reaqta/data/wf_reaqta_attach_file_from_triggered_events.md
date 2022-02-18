@@ -5,7 +5,7 @@
 
 # ReaQta: Attach File from Triggered Events
 
-## Function - ReaQta Attach File
+## Function - ReaQta: Attach File
 
 ### API Name
 `reaqta_attach_file`

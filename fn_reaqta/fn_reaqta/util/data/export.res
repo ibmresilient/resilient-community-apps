@@ -44,6 +44,88 @@
       "conditions": [
         {
           "evaluation_id": null,
+          "field_name": "incident.properties.reaqta_id",
+          "method": "has_a_value",
+          "type": null,
+          "value": null
+        },
+        {
+          "evaluation_id": null,
+          "field_name": "incident.resolution_id",
+          "method": "changed",
+          "type": null,
+          "value": null
+        }
+      ],
+      "enabled": true,
+      "export_key": "ReaQta: Close Alert",
+      "id": 105,
+      "logic_type": "all",
+      "message_destinations": [],
+      "name": "ReaQta: Close Alert",
+      "object_type": "incident",
+      "tags": [],
+      "timeout_seconds": 86400,
+      "type": 0,
+      "uuid": "acc342e1-a1c7-4eba-aa13-9e00ea753515",
+      "view_items": [],
+      "workflows": [
+        "reaqta_close_alert"
+      ]
+    },
+    {
+      "automations": [],
+      "conditions": [
+        {
+          "evaluation_id": null,
+          "field_name": "incident.properties.reaqta_id",
+          "method": "has_a_value",
+          "type": null,
+          "value": null
+        },
+        {
+          "evaluation_id": null,
+          "field_name": "note.text",
+          "method": "not_contains",
+          "type": null,
+          "value": "Created by ReaQta"
+        },
+        {
+          "evaluation_id": null,
+          "field_name": "note.text",
+          "method": "not_contains",
+          "type": null,
+          "value": "Sent to ReaQta"
+        },
+        {
+          "evaluation_id": null,
+          "field_name": null,
+          "method": "object_added",
+          "type": null,
+          "value": null
+        }
+      ],
+      "enabled": true,
+      "export_key": "ReaQta: Create Note",
+      "id": 106,
+      "logic_type": "all",
+      "message_destinations": [],
+      "name": "ReaQta: Create Note",
+      "object_type": "note",
+      "tags": [],
+      "timeout_seconds": 86400,
+      "type": 0,
+      "uuid": "aff66bed-f73d-427b-b6c5-84c2aaafe503",
+      "view_items": [],
+      "workflows": [
+        "reaqta_create_note"
+      ]
+    },
+    {
+      "automations": [],
+      "conditions": [
+        {
+          "evaluation_id": null,
           "field_name": "incident.properties.reaqta_endpoint_id",
           "method": "has_a_value",
           "type": null,
@@ -82,13 +164,69 @@
       "workflows": [
         "reaqta_get_processes"
       ]
+    },
+    {
+      "automations": [],
+      "conditions": [
+        {
+          "evaluation_id": null,
+          "field_name": "incident.properties.reaqta_endpoint_id",
+          "method": "has_a_value",
+          "type": null,
+          "value": null
+        }
+      ],
+      "enabled": true,
+      "export_key": "ReaQta: Isolate Endpoint",
+      "id": 102,
+      "logic_type": "all",
+      "message_destinations": [],
+      "name": "ReaQta: Isolate Endpoint",
+      "object_type": "incident",
+      "tags": [],
+      "timeout_seconds": 86400,
+      "type": 1,
+      "uuid": "d8450a68-0ff2-46ab-9742-b5b8b857849d",
+      "view_items": [],
+      "workflows": [
+        "reaqta_isolate_endpoint"
+      ]
     }
   ],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1645142917014,
+  "export_date": 1645211360665,
   "export_format_version": 2,
   "fields": [
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "__function/reaqta_note",
+      "hide_notification": false,
+      "id": 1058,
+      "input_type": "text",
+      "internal": false,
+      "is_tracked": false,
+      "name": "reaqta_note",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": null,
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "reaqta_note",
+      "tooltip": "",
+      "type_id": 11,
+      "uuid": "974101e4-0904-4bc8-abd1-a34f163be445",
+      "values": []
+    },
     {
       "allow_default_value": false,
       "blank_option": false,
@@ -117,6 +255,36 @@
       "tooltip": "",
       "type_id": 11,
       "uuid": "a67fc10f-bec1-4915-b4bb-e4b6ce6a8456",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": true,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "__function/reaqta_is_malicious",
+      "hide_notification": false,
+      "id": 1059,
+      "input_type": "boolean",
+      "internal": false,
+      "is_tracked": false,
+      "name": "reaqta_is_malicious",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": null,
+      "read_only": false,
+      "required": "always",
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "reaqta_is_malicious",
+      "tooltip": "",
+      "type_id": 11,
+      "uuid": "cd0bea42-4e4f-46d0-9a68-ad1822a02014",
       "values": []
     },
     {
@@ -237,6 +405,36 @@
       "tooltip": "",
       "type_id": 11,
       "uuid": "57fc46a2-de15-48ea-966c-277c2e5f8cda",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "__function/reaqta_alert_id",
+      "hide_notification": false,
+      "id": 1057,
+      "input_type": "text",
+      "internal": false,
+      "is_tracked": false,
+      "name": "reaqta_alert_id",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": null,
+      "read_only": false,
+      "required": "always",
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "reaqta_alert_id",
+      "tooltip": "",
+      "type_id": 11,
+      "uuid": "66e6a8cc-1c5e-4f72-82cc-1a7198442c91",
       "values": []
     },
     {
@@ -555,7 +753,7 @@
         "format": "text"
       },
       "destination_handle": "fn_reaqta",
-      "display_name": "ReaQta Attach File",
+      "display_name": "ReaQta: Attach File",
       "export_key": "reaqta_attach_file",
       "id": 119,
       "last_modified_by": {
@@ -564,11 +762,11 @@
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1645139868647,
+      "last_modified_time": 1645187357456,
       "name": "reaqta_attach_file",
       "tags": [],
       "uuid": "6cf8dd59-9465-49a4-8ce8-6538f6c61a4b",
-      "version": 3,
+      "version": 4,
       "view_items": [
         {
           "content": "d587ce18-7232-448f-98a7-23babb4b6e62",
@@ -615,6 +813,130 @@
           "tags": [],
           "uuid": null,
           "workflow_id": 78
+        }
+      ]
+    },
+    {
+      "created_date": 1645188369149,
+      "creator": {
+        "display_name": "Resilient Sysadmin",
+        "id": 3,
+        "name": "a@example.com",
+        "type": "user"
+      },
+      "description": {
+        "content": "Close a ReaQta Alert",
+        "format": "text"
+      },
+      "destination_handle": "fn_reaqta",
+      "display_name": "ReaQta: Close Alert",
+      "export_key": "reaqta_close_alert",
+      "id": 120,
+      "last_modified_by": {
+        "display_name": "Resilient Sysadmin",
+        "id": 3,
+        "name": "a@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1645188369186,
+      "name": "reaqta_close_alert",
+      "tags": [],
+      "uuid": "5801a66d-6b78-40dc-8ec4-f6ab0d842d7c",
+      "version": 1,
+      "view_items": [
+        {
+          "content": "66e6a8cc-1c5e-4f72-82cc-1a7198442c91",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "cd0bea42-4e4f-46d0-9a68-ad1822a02014",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "974101e4-0904-4bc8-abd1-a34f163be445",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        }
+      ],
+      "workflows": [
+        {
+          "actions": [],
+          "description": null,
+          "name": "ReaQta: Close Alert",
+          "object_type": "incident",
+          "programmatic_name": "reaqta_close_alert",
+          "tags": [],
+          "uuid": null,
+          "workflow_id": 79
+        }
+      ]
+    },
+    {
+      "created_date": 1645201619950,
+      "creator": {
+        "display_name": "Resilient Sysadmin",
+        "id": 3,
+        "name": "a@example.com",
+        "type": "user"
+      },
+      "description": {
+        "content": "Append a note to the ReaQta notes",
+        "format": "text"
+      },
+      "destination_handle": "fn_reaqta",
+      "display_name": "ReaQta: Create Note",
+      "export_key": "reaqta_create_note",
+      "id": 121,
+      "last_modified_by": {
+        "display_name": "Resilient Sysadmin",
+        "id": 3,
+        "name": "a@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1645201619983,
+      "name": "reaqta_create_note",
+      "tags": [],
+      "uuid": "21db5c06-30af-4619-b1ed-1c78b76f36b7",
+      "version": 1,
+      "view_items": [
+        {
+          "content": "66e6a8cc-1c5e-4f72-82cc-1a7198442c91",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "974101e4-0904-4bc8-abd1-a34f163be445",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        }
+      ],
+      "workflows": [
+        {
+          "actions": [],
+          "description": null,
+          "name": "ReaQta: Create Note",
+          "object_type": "note",
+          "programmatic_name": "reaqta_create_note",
+          "tags": [],
+          "uuid": null,
+          "workflow_id": 80
         }
       ]
     },
@@ -803,13 +1125,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 15,
+  "id": 21,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1645142915714,
+      "create_date": 1645211358135,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -818,7 +1140,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1645142915714,
+      "update_date": 1645211358135,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -1072,22 +1394,22 @@
     {
       "actions": [],
       "content": {
-        "version": 4,
-        "workflow_id": "reaqta_attach_file_from_triggered_events",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"reaqta_attach_file_from_triggered_events\" isExecutable=\"true\" name=\"ReaQta: Attach File from Triggered Events\"\u003e\u003cdocumentation\u003eAttach a file from an endpoint\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1clliwp\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_13gu21v\" name=\"ReaQta Attach File\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"6cf8dd59-9465-49a4-8ce8-6538f6c61a4b\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.reaqta_program_path = row[\u0027program_path\u0027]\\ninputs.reaqta_endpoint_id = incident.properties.reaqta_endpoint_id\\ninputs.reaqta_incident_id = incident.id\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1clliwp\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0z60ooh\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1clliwp\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_13gu21v\"/\u003e\u003cendEvent id=\"EndEvent_0zqfpz5\"\u003e\u003cincoming\u003eSequenceFlow_0z60ooh\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0z60ooh\" sourceRef=\"ServiceTask_13gu21v\" targetRef=\"EndEvent_0zqfpz5\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_13gu21v\" id=\"ServiceTask_13gu21v_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"250\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1clliwp\" id=\"SequenceFlow_1clliwp_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"250\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"224\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0zqfpz5\" id=\"EndEvent_0zqfpz5_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"407.8702611625948\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"425.8702611625948\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0z60ooh\" id=\"SequenceFlow_0z60ooh_di\"\u003e\u003comgdi:waypoint x=\"350\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"408\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"379\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "version": 3,
+        "workflow_id": "reaqta_create_note",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"reaqta_create_note\" isExecutable=\"true\" name=\"ReaQta: Create Note\"\u003e\u003cdocumentation\u003eAdd a note from SOAR to ReaQta\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1eh3gaj\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0f30tsg\" name=\"ReaQta: Create Note\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"21db5c06-30af-4619-b1ed-1c78b76f36b7\"\u003e{\"inputs\":{},\"post_processing_script\":\"from java.util import Date\\n\\nif results.success:\\n  # Get the current time\\n  dt_now = Date()\\n  note.text = u\\\"\u0026lt;b\u0026gt;Sent to ReaQta at {0}\u0026lt;/b\u0026gt;\u0026lt;br\u0026gt;{1}\\\".format(dt_now, unicode(note.text.content))\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.reaqta_alert_id = incident.properties.reaqta_id\\ninputs.reaqta_note = note.text.content\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1eh3gaj\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_008dyky\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1eh3gaj\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0f30tsg\"/\u003e\u003cendEvent id=\"EndEvent_1ef14zp\"\u003e\u003cincoming\u003eSequenceFlow_008dyky\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_008dyky\" sourceRef=\"ServiceTask_0f30tsg\" targetRef=\"EndEvent_1ef14zp\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0f30tsg\" id=\"ServiceTask_0f30tsg_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"265\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1eh3gaj\" id=\"SequenceFlow_1eh3gaj_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"265\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"231.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1ef14zp\" id=\"EndEvent_1ef14zp_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"421\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"439\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_008dyky\" id=\"SequenceFlow_008dyky_di\"\u003e\u003comgdi:waypoint x=\"365\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"421\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"393\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 4,
+      "content_version": 3,
       "creator_id": "a@example.com",
-      "description": "Attach a file from an endpoint",
-      "export_key": "reaqta_attach_file_from_triggered_events",
+      "description": "Add a note from SOAR to ReaQta",
+      "export_key": "reaqta_create_note",
       "last_modified_by": "a@example.com",
-      "last_modified_time": 1645140236073,
-      "name": "ReaQta: Attach File from Triggered Events",
-      "object_type": "reaqta_trigger_events",
-      "programmatic_name": "reaqta_attach_file_from_triggered_events",
+      "last_modified_time": 1645209323174,
+      "name": "ReaQta: Create Note",
+      "object_type": "note",
+      "programmatic_name": "reaqta_create_note",
       "tags": [],
-      "uuid": "b2670fa3-29a7-4e68-9c1a-4586c85f3dec",
-      "workflow_id": 78
+      "uuid": "cbc2998f-8085-4d1c-9a44-3f3a8660b84a",
+      "workflow_id": 80
     },
     {
       "actions": [],
@@ -1112,6 +1434,46 @@
     {
       "actions": [],
       "content": {
+        "version": 4,
+        "workflow_id": "reaqta_attach_file_from_triggered_events",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"reaqta_attach_file_from_triggered_events\" isExecutable=\"true\" name=\"ReaQta: Attach File from Triggered Events\"\u003e\u003cdocumentation\u003eAttach a file from an endpoint\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1clliwp\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_13gu21v\" name=\"ReaQta Attach File\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"6cf8dd59-9465-49a4-8ce8-6538f6c61a4b\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.reaqta_program_path = row[\u0027program_path\u0027]\\ninputs.reaqta_endpoint_id = incident.properties.reaqta_endpoint_id\\ninputs.reaqta_incident_id = incident.id\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1clliwp\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0z60ooh\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1clliwp\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_13gu21v\"/\u003e\u003cendEvent id=\"EndEvent_0zqfpz5\"\u003e\u003cincoming\u003eSequenceFlow_0z60ooh\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0z60ooh\" sourceRef=\"ServiceTask_13gu21v\" targetRef=\"EndEvent_0zqfpz5\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_13gu21v\" id=\"ServiceTask_13gu21v_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"250\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1clliwp\" id=\"SequenceFlow_1clliwp_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"250\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"224\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0zqfpz5\" id=\"EndEvent_0zqfpz5_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"407.8702611625948\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"425.8702611625948\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0z60ooh\" id=\"SequenceFlow_0z60ooh_di\"\u003e\u003comgdi:waypoint x=\"350\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"408\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"379\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 4,
+      "creator_id": "a@example.com",
+      "description": "Attach a file from an endpoint",
+      "export_key": "reaqta_attach_file_from_triggered_events",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1645140236073,
+      "name": "ReaQta: Attach File from Triggered Events",
+      "object_type": "reaqta_trigger_events",
+      "programmatic_name": "reaqta_attach_file_from_triggered_events",
+      "tags": [],
+      "uuid": "b2670fa3-29a7-4e68-9c1a-4586c85f3dec",
+      "workflow_id": 78
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 3,
+        "workflow_id": "reaqta_isolate_endpoint",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"reaqta_isolate_endpoint\" isExecutable=\"true\" name=\"ReaQta Isolate Endpoint\"\u003e\u003cdocumentation\u003eIsolate the endpoint machine from the network\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_12prgk8\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0mv7hpr\" name=\"ReaQta: Isolate Machine\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"79d595f7-b9dc-435c-87bf-e2845fddda94\"\u003e{\"inputs\":{},\"post_processing_script\":\"if results.success and results.content.get(\u0027success\u0027):\\n  msg = \\\"Endpoint Machine Isolated\\\"\\nelif results.reason:\\n  msg = \\\"ReaQta Isolate Machine failed: {}\\\".format(results.reason)\\nelse:\\n  msg = \\\"ReaQta Isolate Machine failed: {}\\\".format(results.content.get(\u0027message\u0027))\\n\\nincident.addNote(msg)\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.reaqta_endpoint_id = incident.properties.reaqta_endpoint_id\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_12prgk8\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0cwboeb\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_12prgk8\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0mv7hpr\"/\u003e\u003cendEvent id=\"EndEvent_0tj4xao\"\u003e\u003cincoming\u003eSequenceFlow_0cwboeb\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0cwboeb\" sourceRef=\"ServiceTask_0mv7hpr\" targetRef=\"EndEvent_0tj4xao\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0mv7hpr\" id=\"ServiceTask_0mv7hpr_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"276\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_12prgk8\" id=\"SequenceFlow_12prgk8_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"276\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"237\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0tj4xao\" id=\"EndEvent_0tj4xao_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"461\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"479\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0cwboeb\" id=\"SequenceFlow_0cwboeb_di\"\u003e\u003comgdi:waypoint x=\"376\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"461\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"418.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 3,
+      "creator_id": "a@example.com",
+      "description": "Isolate the endpoint machine from the network",
+      "export_key": "reaqta_isolate_endpoint",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1645131702954,
+      "name": "ReaQta Isolate Endpoint",
+      "object_type": "incident",
+      "programmatic_name": "reaqta_isolate_endpoint",
+      "tags": [],
+      "uuid": "15b24205-66cf-4cde-957f-fb76e116356c",
+      "workflow_id": 76
+    },
+    {
+      "actions": [],
+      "content": {
         "version": 7,
         "workflow_id": "reaqta_attach_file_from_process_list",
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"reaqta_attach_file_from_process_list\" isExecutable=\"true\" name=\"ReaQta: Attach File from Process List\"\u003e\u003cdocumentation\u003e\u003c![CDATA[Attach a file from an endpoint\u0027s process list]]\u003e\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1oo1nx1\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1imxjev\" name=\"ReaQta Attach File\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"6cf8dd59-9465-49a4-8ce8-6538f6c61a4b\"\u003e{\"inputs\":{},\"post_processing_script\":\"if results.success:\\n  incident.addNote(\\\"ReaQta Attach File created: {} from program path: {}\\\".format(results.content[\u0027name\u0027], results.inputs[\u0027reaqta_program_path\u0027]))\\nelse:\\n  incident.addNote(\\\"ReaQta Attach File failed: {}\\\".format(results.reason))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.reaqta_program_path = row[\u0027process_path\u0027].replace(\\\"\\\\\\\\\\\\\\\\\\\", \\\"\\\\\\\\\\\")\\ninputs.reaqta_endpoint_id = incident.properties.reaqta_endpoint_id\\ninputs.reaqta_incident_id = incident.id\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1oo1nx1\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1db59ip\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1oo1nx1\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1imxjev\"/\u003e\u003cendEvent id=\"EndEvent_1p2fsdk\"\u003e\u003cincoming\u003eSequenceFlow_1db59ip\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1db59ip\" sourceRef=\"ServiceTask_1imxjev\" targetRef=\"EndEvent_1p2fsdk\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0m1lp0i\"\u003e\u003ctext\u003e\u003c![CDATA[Results placed in a note and when successful, an attachment is created\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0wv5eu6\" sourceRef=\"ServiceTask_1imxjev\" targetRef=\"TextAnnotation_0m1lp0i\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1imxjev\" id=\"ServiceTask_1imxjev_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"275\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1oo1nx1\" id=\"SequenceFlow_1oo1nx1_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"275\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"236.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1p2fsdk\" id=\"EndEvent_1p2fsdk_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"437\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"455\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1db59ip\" id=\"SequenceFlow_1db59ip_di\"\u003e\u003comgdi:waypoint x=\"375\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"437\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"406\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0m1lp0i\" id=\"TextAnnotation_0m1lp0i_di\"\u003e\u003comgdc:Bounds height=\"45\" width=\"239\" x=\"361\" y=\"69\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0wv5eu6\" id=\"Association_0wv5eu6_di\"\u003e\u003comgdi:waypoint x=\"371\" xsi:type=\"omgdc:Point\" y=\"172\"/\u003e\u003comgdi:waypoint x=\"451\" xsi:type=\"omgdc:Point\" y=\"114\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
@@ -1128,6 +1490,26 @@
       "tags": [],
       "uuid": "04c60ae1-1d98-464c-bdc6-f2e62506a383",
       "workflow_id": 77
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 5,
+        "workflow_id": "reaqta_close_alert",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"reaqta_close_alert\" isExecutable=\"true\" name=\"ReaQta: Close Alert\"\u003e\u003cdocumentation\u003eClose the ReaQta Alert\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1lyfm85\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0xog9el\" name=\"ReaQta: Close Alert\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"5801a66d-6b78-40dc-8ec4-f6ab0d842d7c\"\u003e{\"inputs\":{},\"pre_processing_script\":\"# Modify this table for custom resolution types\\nIS_MALICIOUS_LOOKUP = {\\n  7: False, # Unresolved\\n  8: False, # Duplicate\\n  9: False, # Not a Issue\\n  10: True  # Resolved\\n}\\n\\ninputs.reaqta_alert_id = incident.properties.reaqta_id\\ninputs.reaqta_note = incident.resolution_summary.content\\ninputs.reaqta_is_malicious = IS_MALICIOUS_LOOKUP.get(incident.resolution_id, False) # if resolution_id is not found, set to not malicious\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1lyfm85\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_191zm33\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1lyfm85\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0xog9el\"/\u003e\u003cendEvent id=\"EndEvent_1a1861k\"\u003e\u003cincoming\u003eSequenceFlow_191zm33\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_191zm33\" sourceRef=\"ServiceTask_0xog9el\" targetRef=\"EndEvent_1a1861k\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0plvu3q\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned in a note\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0cj6l3c\" sourceRef=\"ServiceTask_0xog9el\" targetRef=\"TextAnnotation_0plvu3q\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0xog9el\" id=\"ServiceTask_0xog9el_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"272\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1lyfm85\" id=\"SequenceFlow_1lyfm85_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"237\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"237\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"272\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"252\" y=\"199.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1a1861k\" id=\"EndEvent_1a1861k_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"447\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"465\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_191zm33\" id=\"SequenceFlow_191zm33_di\"\u003e\u003comgdi:waypoint x=\"372\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"447\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"409.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0plvu3q\" id=\"TextAnnotation_0plvu3q_di\"\u003e\u003comgdc:Bounds height=\"43\" width=\"143\" x=\"361\" y=\"73\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0cj6l3c\" id=\"Association_0cj6l3c_di\"\u003e\u003comgdi:waypoint x=\"362\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"412\" xsi:type=\"omgdc:Point\" y=\"116\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 5,
+      "creator_id": "a@example.com",
+      "description": "Close the ReaQta Alert",
+      "export_key": "reaqta_close_alert",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1645190199168,
+      "name": "ReaQta: Close Alert",
+      "object_type": "incident",
+      "programmatic_name": "reaqta_close_alert",
+      "tags": [],
+      "uuid": "7b5db5ff-e109-451b-ad13-1581177d6e5a",
+      "workflow_id": 79
     }
   ],
   "workspaces": []
