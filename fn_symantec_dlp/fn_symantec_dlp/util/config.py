@@ -13,24 +13,20 @@ def config_section_data():
     config_data = u"""[fn_symantec_dlp]
 # The URL of the DLP Installation
 sdlp_host=<serverip>
-
-# SentinelOne REST API version
+# Symantec DLP REST API version
 api_version=v2
-
 # Username for DLP 
 sdlp_username=<SDLP Username>
-
 # Password for DLP
 sdlp_password=<SDLP Password>
-
-# false|/path/to/certificate
-cafile=
+# The Saved Report ID used to query for Incidents, must be set otherwise the integration will fail
+sdlp_savedreportid=0
 # Poller interval in seconds, comment out or set to 0 to disable poller
 polling_interval=60
 # Poller lookback time first time, in minutes
 polling_lookback=12000
+# false|/path/to/certificate
+cafile=
 
-# The Saved Report ID used to query for Incidents, must be set otherwise the integration will fail
-sdlp_savedreportid=0
 """
     return config_data
