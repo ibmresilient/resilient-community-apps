@@ -8,7 +8,7 @@
 from time import time
 import logging
 from re import sub, search, IGNORECASE
-from fn_qradar_enhanced_data.util.qradar_constants import ARIEL_SEARCH_EVENTS, ARIEL_SEARCH_FLOWS, SOURCE_IP
+from fn_qradar_enhanced_data.util.qradar_constants import ARIEL_SEARCH_EVENTS, ARIEL_SEARCH_FLOWS, SOURCE_IP, GLOBAL_SETTINGS
 from fn_qradar_enhanced_data.util.function_utils import make_query_string, get_servers_list, clear_table
 from fn_qradar_enhanced_data.util.qradar_utils import QRadarClient, QRadarServers
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
@@ -24,12 +24,14 @@ class FunctionComponent(ResilientComponent):
         super(FunctionComponent, self).__init__(opts)
         self.opts = opts
         self.servers_list = get_servers_list(opts)
+        self.global_settings = opts.get(GLOBAL_SETTINGS, {})
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
         self.opts = opts
         self.servers_list = get_servers_list(opts)
+        self.global_settings = opts.get(GLOBAL_SETTINGS, {})
 
     @function("qradar_top_events")
     def _qradar_top_events(self, event, *args, **kwargs):
@@ -63,7 +65,7 @@ class FunctionComponent(ResilientComponent):
             options = QRadarServers.qradar_label_test(qradar_label, self.servers_list)
             qradar_verify_cert = False if options.get("verify_cert", "false").lower() == "false" else options.get("verify_cert")
 
-            timeout = float(options.get("search_timeout",600))  # Default timeout to 10 minutes
+            timeout = float(self.global_settings.get("search_timeout",600))  # Default timeout to 10 minutes
 
             log.debug("Connection to {} using {}".format(options.get("host"),
                                                          options.get("username", None) or options.get(
