@@ -10,7 +10,7 @@ import fn_qradar_enhanced_data.util.qradar_constants as qradar_constants
 from resilient_lib import validate_fields
 from fn_qradar_enhanced_data.util.qradar_utils import QRadarClient, QRadarServers
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_qradar_enhanced_data.util.function_utils import get_servers_list
+from fn_qradar_enhanced_data.util.function_utils import get_servers_list, clear_table
 
 #For a given Offense ID and QRadar Destination, get the offense summary.
 
@@ -39,6 +39,8 @@ class FunctionComponent(ResilientComponent):
             qradar_offenseid = kwargs.get("qradar_offense_id")  # QRadar Offense ID
             qradar_fn_type = kwargs.get("qradar_query_type")  # Function type based on the datatable/fields to populate
             qradar_label = kwargs.get("qradar_label") # QRadar server to connect to
+            qradar_table_name = kwargs.get("qradar_table_name", None) # Name of data table
+            qradar_incident_id = kwargs.get("qradar_incident_id") # ID of incident
 
             log.info("qradar_offenseid: %s", qradar_offenseid)
             log.info("qradar_label: %s", qradar_label)
@@ -104,6 +106,10 @@ class FunctionComponent(ResilientComponent):
                                                  offense_assets["properties"]))
                         offense_assets["name"] = asset_prop[0]["value"] if len(asset_prop) > 0 else ""
                         results["assets"].append(offense_assets)
+
+            if qradar_table_name:
+                clear_table(self.rest_client(), qradar_table_name, qradar_incident_id)
+                log.info("Data in table {} in incident {} has been cleared".format(qradar_table_name, qradar_incident_id))
 
             yield StatusMessage("Finished 'qradar_offense_summary' that was running in workflow '{0}'".format(wf_instance_id))
 
