@@ -9,9 +9,11 @@
   - [Step 5: *Download & Install fn_service_now Integration*](#step-5-download--install-fn_service_now-integration)
   - [Step 6: *Install and Configure ServiceNow Mid-Server (if needed)*](#step-6-install-and-configure-servicenow-mid-server-if-needed)
   - [Step 7: *Give your ServiceNow users the correct Role*](#step-7-give-your-servicenow-users-the-correct-role)
-  - [Step 8: (SIR) Add IBM SOAR tab to Security Incident UI](#step-8-sir-add-ibm-soar-tab-to-security-incident-ui)
-  - [Step 9: (SIR) Automatic escalation on group assignment](#step-9-sir-sync-to-soar-automatically-on-group-assignment)
-  - [Step 10: *Test*](#step-10-test)
+  - [Step 8: Security Incident Response (SIR) Configurations](#step-8-security-incident-response-sir-configurations)
+    - [Configure `ServiceNowAllowedTableNames` (SIR only)](#configure-servicenowallowedtablenames-sir-only)
+    - [Add IBM SOAR tab to Security Incident UI (SIR only)](#add-ibm-soar-tab-to-security-incident-ui-sir-only)
+    - [Automatic escalation on group assignment (SIR only)](#sync-to-soar-automatically-on-group-assignment-sir-only)
+  - [Step 9: *Test*](#step-9-test)
 ---
 
 ## Prerequisites 
@@ -208,10 +210,19 @@ Once **installed** and **validated:**
 * Click **Save**.
 ---
 
-## Step 8: (SIR) Add IBM SOAR tab to Security Incident UI
-> *Note: the integration does not currently fully support the "New UI" for SIR tables. We recommend usin the "Classic UI"*
+## Step 8: Security Incident Response (SIR) Configurations
+ServiceNow SecOps module offers the Security Incident Response (SIR) add-on. The IBM SOAR integration is configured to work with the SIR tables, however, they require a few extra manual configurations.
 
-If integrating with ServiceNow Security Incident Response (SIR) related tables, you need to configure the Security Incident table:
+### Configure `ServiceNowAllowedTableNames` (SIR only)
+* In ServiceNow, look for the **IBM Security QRadar SOAR** menu in the navigation panel.
+ ![screenshot](./screenshots/8.png)
+* Click **Properties.** A new tab opens.
+  ![screenshot](./screenshots/11.png)
+
+### Add IBM SOAR tab to Security Incident UI (SIR only)
+> *Note: the integration does not currently fully support the "New UI" for SIR tables. We recommend usin the "Classic UI".*
+
+If integrating with SIR related tables, you need to configure the Security Incident table:
 * Open or create a new Security Incident.
 * Right click in the top of the form or click the hamburger bar then go to **Configure** > **Form Design**.
   ![screenshot](./screenshots/38.jpg)
@@ -222,8 +233,8 @@ If integrating with ServiceNow Security Incident Response (SIR) related tables, 
 * Click **Save**.
 ---
 
-## Step 9: (SIR) Sync to SOAR automatically on group assignment
-When integrating with ServiceNow Security Incident Response (SIR) tables, there is a parameter that can be set in the IBM Security QRadar SOAR Properties section for automatic escalation to SOAR on group assignment. This is most useful for Security Response Tasks but can also be used on the parent Security Incident table.
+## Sync to SOAR automatically on group assignment (SIR only)
+When integrating with SIR tables, there is a parameter that can be set in the IBM Security QRadar SOAR Properties section for automatic escalation to SOAR on group assignment. This is most useful for Security Response Tasks but can also be used on the parent Security Incident table.
 
 By default, this integration includes the "IBM SOAR Response Group" but that needs to be created.
 * In ServiceNow, in the navigation panel, go to **Security Incidents** > **Groups**.
@@ -236,7 +247,7 @@ By default, this integration includes the "IBM SOAR Response Group" but that nee
 * Similarly to as in [Step 7](#step-7-give-your-servicenow-users-the-correct-role), give any user except the user that was created in Step 7 the role `sn_si.analyst` and add them to the response group you created above.
 ---
 
-## Step 10: *Test*
+## Step 9: *Test*
 * In ServiceNow, in the navigation panel, go to **IBM SOAR > Test Connection**. A **new tab** opens.
 * Click the blue **Test Connection** button and wait until you see a page banner.
 * The **page banner** informs you if your Test was successful or not and print any errors you may have.
