@@ -2,7 +2,7 @@
 
 """
 Function implementation test.
-Usage: 
+Usage:
     resilient-circuits selftest -l fn-googlesafebrowsing
     resilient-circuits selftest --print-env -l fn-googlesafebrowsing
 
@@ -17,15 +17,16 @@ Return examples:
         "reason": "Failed to connect to third party endpoint"
     }
 """
-
+import json
 import logging
 from resilient_lib import RequestsCommon
-import json
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
 log.addHandler(logging.StreamHandler())
 
+SB_CLIENT_ID = "Resilient"
+SB_CLIENT_VER = "0.0.3"
 
 def selftest_function(opts):
     """
@@ -33,8 +34,6 @@ def selftest_function(opts):
     Suggested return values are be unimplemented, success, or failure.
     """
     app_configs = opts.get("fn_googlesafebrowsing", {})
-    SB_CLIENT_ID = "Resilient"
-    SB_CLIENT_VER = "0.0.3"
 
     reqbody = {
             'client': {
@@ -43,9 +42,9 @@ def selftest_function(opts):
             },
             'threatInfo': {
                 'threatTypes': ['THREAT_TYPE_UNSPECIFIED',
-                             'MALWARE', 
-                             'SOCIAL_ENGINEERING', 
-                             'UNWANTED_SOFTWARE', 
+                             'MALWARE',
+                             'SOCIAL_ENGINEERING',
+                             'UNWANTED_SOFTWARE',
                              'POTENTIALLY_HARMFUL_APPLICATION'],
                 'platformTypes': ['ANY_PLATFORM'],
                 'threatEntryTypes': ['URL'],
@@ -53,12 +52,14 @@ def selftest_function(opts):
             }
         }
     try:
-        rc = RequestsCommon(opts, app_configs)
-        rc.execute('post', '{}{}'.format(app_configs['googlesafebrowsing_url'], app_configs['googlesafebrowsing_api_key']), headers={'Content-Type': 'applciation/json'}, data=json.dumps(reqbody))
+        req = RequestsCommon(opts, app_configs)
+        req.execute('post', '{}{}'.format(app_configs['googlesafebrowsing_url'],
+        app_configs['googlesafebrowsing_api_key']), headers={'Content-Type': 'applciation/json'}, 
+        data=json.dumps(reqbody))
         return {"state": "success"}
 
-    except Exception as e:
+    except Exception as error:
         return {
             "state": "failure",
-            "reason": e
+            "reason": error
         }

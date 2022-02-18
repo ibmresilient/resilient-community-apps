@@ -2,14 +2,20 @@
 """Tests using pytest_resilient_circuits"""
 
 import pytest
-from resilient_circuits.util import get_config_data, get_function_definition
+import mock
+from .mock_artifact import MockedResponse
+from resilient_circuits.util import get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 
 PACKAGE_NAME = "fn_googlesafebrowsing"
 FUNCTION_NAME = "fn_googlesafebrowsing"
 
-# Read the default configuration-data section from the package
-config_data = get_config_data(PACKAGE_NAME)
+# Fill in and uncomment key to run livetests
+config_data = """[fn_googlesafebrowsing]
+googlesafebrowsing_url=https://safebrowsing.googleapis.com/v4/threatMatches:find?key=
+googlesafebrowsing_api_key=dummykey
+# googlesafebrowsing_api_key=$googlesafebrowsing_api_key
+"""
 
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
@@ -48,21 +54,34 @@ class TestFnGooglesafebrowsing:
         assert func is not None
 
     mock_inputs_1 = {
+        "googlesafebrowsing_artifact_type": "URL",
+        "googlesafebrowsing_artifact_value": "http://malware.testing.google.test/testing/malware/*"
     }
 
-    expected_results_1 = {"value": "xyz"}
-
-    mock_inputs_2 = {
-    }
-
-    expected_results_2 = {"value": "xyz"}
+    expected_results_1 = {"success": True}
 
     @pytest.mark.parametrize("mock_inputs, expected_results", [
-        (mock_inputs_1, expected_results_1),
-        (mock_inputs_2, expected_results_2)
+        (mock_inputs_1, expected_results_1)
     ])
     def test_success(self, circuits_app, mock_inputs, expected_results):
         """ Test calling with sample values for the parameters """
-
+        with mock.patch("resilient_circuits.app_function_component.RequestsCommon.execute") as mock_execute:
+            mock_execute.return_value = MockedResponse()
+            results = call_fn_googlesafebrowsing_function(circuits_app, mock_inputs)
+            assert(expected_results.get('success') == results.get('success'))
+    
+    @pytest.mark.parametrize("mock_inputs, expected_results", [ 
+        (mock_inputs_1, [{
+                    'threatType': 'MALWARE',
+                    'platformType': 'ANY_PLATFORM',
+                    'threat': {
+                        'url': 'http://malware.testing.google.test/testing/malware/*'
+                    },
+                    'cacheDuration': '300s',
+                    'threatEntryType': 'URL'
+                }])
+    ])
+    @pytest.mark.livetest
+    def test_live_isPublic(self, circuits_app, mock_inputs, expected_results):
         results = call_fn_googlesafebrowsing_function(circuits_app, mock_inputs)
-        assert(expected_results == results)
+        assert results.get('content').get('matches') == expected_results

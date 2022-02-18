@@ -22,14 +22,14 @@ def snake_to_camel(word):
 
 setup(
     name="fn_googlesafebrowsing",
-    display_name="<<display name of your app here>>",
+    display_name="Google Safe Browsing Function for IBM SOAR",
     version="1.0.0",
-    license="<<insert here>>",
-    author="<<your name here>>",
-    author_email="you@example.com",
+    license="MIT",
+    author="IBM SOAR",
+    author_email="",
     url="<<your company url>>",
-    description="Resilient Circuits Components for 'fn_googlesafebrowsing'",
-    long_description="""Resilient Circuits Components for 'fn_googlesafebrowsing'""",
+    description="IBM Security SOAR app for 'fn_googlesafebrowsing'",
+    long_description="""This app uses Google Safe Browsing to check artifacts with a URL type and adds a hit if the site is potentially unsafe. The hits contains a link to Google Transparency Report that gives information on the potentially unsafe url.'""",
     install_requires=[
         "resilient-circuits>=43.0.0"
     ],

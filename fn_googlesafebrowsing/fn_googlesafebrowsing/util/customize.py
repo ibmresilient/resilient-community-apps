@@ -22,8 +22,8 @@ def codegen_reload_data():
         "package": u"fn_googlesafebrowsing",
         "message_destinations": [u"googlesafebrowsing"],
         "functions": [u"fn_googlesafebrowsing"],
-        "workflows": [],
-        "actions": [],
+        "workflows": [u"google_safe_browsing_url_lookup"],
+        "actions": [u"GoogleSafeBrowsing URL Lookup"],
         "incident_fields": [],
         "incident_artifact_types": [],
         "incident_types": [],
@@ -45,6 +45,10 @@ def customization_data(client=None):
         - googlesafebrowsing
     - Functions:
         - fn_googlesafebrowsing
+    - Workflows:
+        - google_safe_browsing_url_lookup
+    - Rules:
+        - GoogleSafeBrowsing URL Lookup
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)

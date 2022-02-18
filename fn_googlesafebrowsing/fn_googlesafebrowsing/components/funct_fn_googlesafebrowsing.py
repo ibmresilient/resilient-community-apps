@@ -4,7 +4,6 @@
 
 import logging
 import json
-import re
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import IntegrationError, validate_fields
 
@@ -24,6 +23,7 @@ class FunctionComponent(AppFunctionComponent):
 
     @app_function(FN_NAME)
     def lookup_urls(self, fn_inputs):
+        """Lookup a URL"""
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
 
@@ -41,7 +41,7 @@ class FunctionComponent(AppFunctionComponent):
         LOG.info("Google Safe Browsing lookup started for Artifact Type %s - Artifact Value %s",
                  artifact_type, artifact_value)
 
- 
+
         reqbody = {
             'client': {
                  'clientId': SB_CLIENT_ID,
@@ -49,9 +49,9 @@ class FunctionComponent(AppFunctionComponent):
             },
             'threatInfo': {
                 'threatTypes': ['THREAT_TYPE_UNSPECIFIED',
-                             'MALWARE', 
-                             'SOCIAL_ENGINEERING', 
-                             'UNWANTED_SOFTWARE', 
+                             'MALWARE',
+                             'SOCIAL_ENGINEERING',
+                             'UNWANTED_SOFTWARE',
                              'POTENTIALLY_HARMFUL_APPLICATION'],
                 'platformTypes': ['ANY_PLATFORM'],
                 'threatEntryTypes': ['URL'],
@@ -60,8 +60,10 @@ class FunctionComponent(AppFunctionComponent):
         }
 
         LOG.debug(reqbody)
-        
-        response = self.rc.execute('post', '{}{}'.format(self.app_configs.googlesafebrowsing_url, self.app_configs.googlesafebrowsing_api_key), headers={'Content-Type': 'applciation/json'}, data=json.dumps(reqbody))
+
+        response = self.rc.execute('post', '{}{}'.format(self.app_configs.googlesafebrowsing_url,
+        self.app_configs.googlesafebrowsing_api_key), headers={'Content-Type': 'applciation/json'},
+        data=json.dumps(reqbody))
 
         results = response.json()
 
