@@ -28,7 +28,7 @@ setup(
     long_description="This app fetches the data associated with the QRadar Offense and provides live links back to QRadar, thereby simplifying case management.",
     python_requires='>=3.6',
     install_requires=[
-        'resilient_circuits>=41.1.0'
+        'resilient_circuits>=43.0.0'
     ],
     packages=find_packages(),
     include_package_data=True,

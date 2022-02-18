@@ -72,7 +72,7 @@ def get_servers_list(opts):
     # and there configurations
     for server_name in server_list:
         servers_list[server_name] = opts.get(server_name, {})
-        validate_fields(["host", "verify_cert", "polling_interval", "polling_lookback"], servers_list[server_name])
+        validate_fields(["host", "verify_cert"], servers_list[server_name])
 
     return servers_list
 

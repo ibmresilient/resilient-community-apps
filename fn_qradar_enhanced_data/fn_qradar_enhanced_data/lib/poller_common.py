@@ -8,7 +8,7 @@ import traceback
 from ast import literal_eval
 from threading import Event
 from resilient import SimpleHTTPException, Patch
-from resilient_lib import IntegrationError, get_file_attachment, get_file_attachment_name
+from resilient_lib import IntegrationError
 from cachetools import cached, LRUCache
 
 LOG = logging.getLogger(__name__)

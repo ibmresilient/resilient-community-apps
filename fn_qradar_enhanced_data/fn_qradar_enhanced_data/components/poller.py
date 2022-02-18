@@ -11,8 +11,7 @@ from resilient_lib import RequestsCommon
 from resilient import get_client
 from fn_qradar_enhanced_data.lib.poller_common import SOARCommon, poller
 from fn_qradar_enhanced_data.lib.app_common import AppCommon
-from fn_qradar_enhanced_data.util.qradar_constants import PACKAGE_NAME
-from fn_qradar_enhanced_data.util.function_utils import get_servers_list
+from fn_qradar_enhanced_data.util.qradar_constants import PACKAGE_NAME, GLOBAL_SETTINGS
 
 LOG = logging.getLogger(__name__)
 
@@ -37,7 +36,7 @@ class PollerComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(PollerComponent, self).__init__(opts)
-        self.servers_list = get_servers_list(opts)
+        self.global_settings = opts.get(GLOBAL_SETTINGS, {})
 
         poller_thread = Thread(target=self.run)
         poller_thread.daemon = True
@@ -51,12 +50,12 @@ class PollerComponent(ResilientComponent):
         Returns:
             [bool]: [True if poller is configured]
         """
-        self.polling_interval = int(options.get("polling_interval", 0))
+        self.polling_interval = int(self.global_settings.get("polling_interval", 0))
         if not self.polling_interval:
             return False
 
         LOG.info(u"Poller initiated, polling interval %s", self.polling_interval)
-        self.last_poller_time = self._get_last_poller_date(int(options.get('polling_lookback', 0)))
+        self.last_poller_time = self._get_last_poller_date(int(self.global_settings.get('polling_lookback', 0)))
         LOG.info("Poller lookback: %s", self.last_poller_time)
 
         # rest_client is used to make IBM SOAR API calls
