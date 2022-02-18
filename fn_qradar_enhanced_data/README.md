@@ -63,7 +63,7 @@
 | 1.1.2 | 10/2021 | Update to use latest resilient-circuits |
 | 1.1.3 | 01/2022 | Support for latest Analyst Workflow versions |
 | 1.2.0 | 01/2022 | Add multitenancy |
-| 1.3.0 | 02/2022 | Real time update to the Offense Summary |
+| 2.0.0 | 02/2022 | Real time update to the Offense Summary |
 
 For customers upgrading from a pervious release, the app.config file must be manually edited to add labels to each server configuration
 ---
