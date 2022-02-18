@@ -6,7 +6,6 @@ import datetime
 import functools
 import logging
 import os
-import re
 import traceback
 from ast import Return, literal_eval
 from threading import Event

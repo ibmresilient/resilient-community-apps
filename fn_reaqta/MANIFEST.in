@@ -3,6 +3,7 @@ include Dockerfile
 include apikey_permissions.txt
 include entrypoint.sh
 recursive-include fn_reaqta/util *
+recursive-include fn_reaqta/lib *
 include fn_reaqta/LICENSE
 include doc/*.md
 include doc/screenshots/*

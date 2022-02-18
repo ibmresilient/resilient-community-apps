@@ -22,16 +22,20 @@ def snake_to_camel(word):
 
 setup(
     name="fn_reaqta",
-    display_name="<<display name of your app here>>",
+    display_name="ReaQta for IBM QRadar SOAR",
     version="1.0.0",
-    license="<<insert here>>",
-    author="<<your name here>>",
-    author_email="you@example.com",
-    url="<<your company url>>",
-    description="Resilient Circuits Components for 'fn_reaqta'",
-    long_description="""Resilient Circuits Components for 'fn_reaqta'""",
+    license="MIT",
+    author="IBM SOAR",
+    author_email="",
+    url="https://github.com/resilient/resilient-community-apps",
+    description="IBM SOAR app for ReaQta",
+    long_description="""Bidirectional synchronization of ReaQta Alerts to IBM SOAR.
+    Additional functions exists to list and kill endpoint processes, isolate the endpiont and synchronize notes and close events.""",
     install_requires=[
-        "resilient-circuits>=43.0.0"
+        "resilient-circuits>=43.0.0",
+        "resilient-lib",
+        "cachetools",
+        "functools"
     ],
     python_requires='>=3.6',
     packages=find_packages(),
