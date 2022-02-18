@@ -815,8 +815,11 @@ qr_flows
 
 The rule, QRadar Enhanced Data, is an automatic rule that triggers when a new incident with a qradar_id value and a qradar_destination value is created, or an existing incident whose qradar_id value is updated. This rule triggers workflows as listed above and populates the Offense information in the custom fields and data tables. The rules for creating artifacts are menu item rules associated with the data tables. These rules can be executed at row level to generate artifacts from the column values. The workflows' input and post processing scripts can be customized for data retrieval and data presentation.
 
-
 ---
+
+## For Customers who do not use the QRadar-Plugin
+Make sure at the time of escalation the field qradar_destination is mapped to have the appropriate value ( same as label in app.config).
+If value not present at the time of case creation - have a rule on Incident creation that runs a script to populate the qradar_destination value.
 
 ## Troubleshooting & Support
 Refer to the documentation listed in the Requirements section for troubleshooting information.
