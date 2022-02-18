@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """AppFunction implementation"""
-
+from fn_reaqta.lib.app_common import AppCommon
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import IntegrationError, validate_fields
 
@@ -24,6 +24,22 @@ class FunctionComponent(AppFunctionComponent):
         """
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
+
+        validate_fields(["reaqta_url",
+                        "api_version",
+                        "cafile",
+                        "api_key",
+                        "api_secret"],
+                        self.app_configs)
+
+        validate_fields(["reaqta_endpoint_id"], fn_inputs)
+
+        # Example getting access to self.get_fn_msg()
+        # fn_msg = self.get_fn_msg()
+        # self.LOG.info("fn_msg: %s", fn_msg)
+
+        app_common = AppCommon(self.rc, self.app_configs._asdict())
+        results = app_common.isolate_machine(fn_inputs.reaqta_endpoint_id)
 
         # Example validating app_configs
         # validate_fields([
@@ -69,9 +85,6 @@ class FunctionComponent(AppFunctionComponent):
         ##############################################
 
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
-
-        # Note this is only used for demo purposes! Put your own key/value pairs here that you want to access on the Platform
-        results = {"mock_key": "Mock Value!"}
 
         yield FunctionResult(results)
         # yield FunctionResult({}, success=False, reason="Bad call")

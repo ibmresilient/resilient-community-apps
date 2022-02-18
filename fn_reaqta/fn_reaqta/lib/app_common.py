@@ -2,15 +2,21 @@
 # pragma pylint: disable=unused-argument, no-self-use
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 import logging
+import ntpath
+import time
+from io import BytesIO
 from urllib.parse import urljoin
-from resilient_lib import str_to_bool, readable_datetime
-from fn_reaqta.lib.poller_common import eval_mapping
+from resilient_lib import str_to_bool, readable_datetime, write_file_attachment
+from fn_reaqta.lib.poller_common import eval_mapping, s_to_b
 
 LOG = logging.getLogger(__name__)
 
 HEADER = { 'Content-Type': 'application/json' }
 
 ENDPOINT_URI = "endpoint/{}/"
+ENDPOINT_FILE_URI = "endpoint-file/{}/"
+
+DOWNLOAD_WAIT_SEC = 15  # number of seconds to wait between status checks for a file download
 
 class AppCommon():
     def __init__(self, rc, options):
@@ -36,12 +42,12 @@ class AppCommon():
                 "id": self.api_key
             }
 
-            auth_url = self._get_uri('authenticate')
+            response, err_msg = self.api_call("POST", 'authenticate', params)
+            if not err_msg:
+                self.token = response.json()['token']
+                self.header = self._make_header(self.token)
 
-            response = self.rc.execute("POST", auth_url, json=params, headers=HEADER, verify=self.verify)
-            self.token = response.json()['token']
-            self.header = self._make_header(self.token)
-
+            return err_msg
 
     def get_entities_since_ts(self, query_field_name, timestamp, optional_filters):
         """get changed entities since last poller run
@@ -66,7 +72,7 @@ class AppCommon():
         LOG.debug(query)
         self.token = self.authenticate(refresh=True)
         self.header = self._make_header(self.token)
-        response = self.rc.execute("GET", self._get_uri("alerts"), params=query, headers=self.header, verify=self.verify)
+        response, err_msg = self.api_call("GET", 'alerts', query)
         return response.json()
 
     def get_next_entities(self, next_url):
@@ -85,12 +91,14 @@ class AppCommon():
         url = urljoin(ENDPOINT_URI.format(endpoint_id), "isolate")
 
         self.authenticate()
+        response, err_msg = self.api_call("POST", 'url', None)
+        return response.json()
 
     def get_processes(self, endpoint_id):
         url = urljoin(ENDPOINT_URI.format(endpoint_id), "processes")
 
         self.authenticate()
-        response = self.rc.execute("GET", self._get_uri(url), headers=self.header, verify=self.verify)
+        response, err_msg = self.api_call("GET", url, None)
         return response.json()
 
     def kill_process(self, endpoint_id, process_pid, start_time):
@@ -103,9 +111,44 @@ class AppCommon():
         ]
 
         self.authenticate()
-        response = self.rc.execute("POST", self._get_uri(url), params=payload, headers=self.header, verify=self.verify)
+        response, err_msg = self.api_call("POST", url, payload)
         return response.json()
 
+    def attach_file(self, rest_client, incident_id, endpoint_id, program_path):
+        # collect the file name
+        file_name = ntpath.basename(program_path)
+
+        url = urljoin(ENDPOINT_URI.format(endpoint_id), "request-file")
+        payload = {
+                "path": program_path,
+            }
+
+        self.authenticate()
+        response, err_msg = self.api_call("POST", url, payload)
+
+        # go into a spin loop waiting for the request to complete
+        if response.status_code == 200 and response.json().get('uploadId'):
+            results = response.json()
+            upload_id = results['uploadId']
+            download_id = None
+            url = urljoin(ENDPOINT_FILE_URI.format(upload_id), "status")
+
+            for _ in range(0, 3):
+                time.sleep(DOWNLOAD_WAIT_SEC)
+                response, err_msg = self.api_call("GET", url, None)
+                if response.status_code == 200 and response.json().get("downloadId"):
+                    results = response.json()
+                    download_id = results["downloadId"]
+                    break
+
+            if download_id:
+                url = urljoin(ENDPOINT_FILE_URI.format(download_id), "download")
+                response, err_msg = self.api_call("GET", url, None)
+
+                attachment = BytesIO(s_to_b(response.text))
+                results = write_file_attachment(rest_client, file_name, attachment, incident_id)
+
+        return results
 
     def _get_uri(self, cmd):
         """build API url
@@ -143,3 +186,44 @@ class AppCommon():
             str: completed url for linkback
         """
         return urljoin(self.reaqta_url, template_uri.format(entity_id))
+
+    def api_call(self, method, url, payload):
+        if method == "POST":
+            return self.rc.execute(method,
+                                   self._get_uri(url),
+                                   json=payload,
+                                   headers=self.header,
+                                   verify=self.verify,
+                                   callback=callback)
+        elif payload:
+            return self.rc.execute(method,
+                                   self._get_uri(url),
+                                   params=payload,
+                                   headers=self.header,
+                                   verify=self.verify,
+                                   callback=callback)
+        else:
+            return self.rc.execute(method,
+                                   self._get_uri(url),
+                                   headers=self.header,
+                                   verify=self.verify,
+                                   callback=callback)
+
+
+def callback(response):
+    """
+    callback needed for certain REST API calls to return a formatted error message
+    :param response:
+    :return: response, error_msg
+    """
+    error_msg = None
+    if response.status_code >= 300:
+        resp = response.json()
+        msg = resp.get('messages')
+        details = resp.get('details')
+        error_msg  = u"ReaQta Error: \n    status code: {0}\n    message: {1}\n    details: {2}".format(
+            response.status_code,
+            msg,
+            details)
+
+    return response, error_msg

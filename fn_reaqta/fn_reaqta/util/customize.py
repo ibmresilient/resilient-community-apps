@@ -21,9 +21,9 @@ def codegen_reload_data():
     return {
         "package": u"fn_reaqta",
         "message_destinations": [u"fn_reaqta"],
-        "functions": [u"reaqta_get_processes", u"reaqta_isolate_machine", u"reaqta_kill_process"],
-        "workflows": [u"reaqta_get_processes"],
-        "actions": [u"ReaQta: Get Processes"],
+        "functions": [u"reaqta_attach_file", u"reaqta_get_processes", u"reaqta_isolate_machine", u"reaqta_kill_process"],
+        "workflows": [u"reaqta_attach_file_from_process_list", u"reaqta_attach_file_from_triggered_events", u"reaqta_get_processes"],
+        "actions": [u"ReaQta: Attach File from Process List", u"ReaQta: Attach File from Triggered Events", u"ReaQta: Get Processes"],
         "incident_fields": [u"reaqta_alert_link", u"reaqta_endpoint_id", u"reaqta_groups", u"reaqta_id", u"reaqta_machine_info", u"reaqta_tags"],
         "incident_artifact_types": [],
         "incident_types": [],
@@ -44,12 +44,17 @@ def customization_data(client=None):
     - Message Destinations:
         - fn_reaqta
     - Functions:
+        - reaqta_attach_file
         - reaqta_get_processes
         - reaqta_isolate_machine
         - reaqta_kill_process
     - Workflows:
+        - reaqta_attach_file_from_process_list
+        - reaqta_attach_file_from_triggered_events
         - reaqta_get_processes
     - Rules:
+        - ReaQta: Attach File from Process List
+        - ReaQta: Attach File from Triggered Events
         - ReaQta: Get Processes
     - Incident Fields:
         - reaqta_alert_link
