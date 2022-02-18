@@ -77,7 +77,7 @@ if row.sn_records_dt_type == "Incident":
   
   # And it was a success, set this note_text
   if results.success:
-    note_text = u"""<br>This Incident has been CLOSED in <b>ServiceNow</b>
+    note_text = u"""<br>This Incident has been updated in <b>ServiceNow</b>
                 <br><b>ServiceNow ID:</b> {0}
                 <br><b>ServiceNow Record State:</b> {1}
                 <br><b>ServiceNow Closing Notes:</b> {2}
@@ -116,7 +116,7 @@ note_text = None
 if workflow.properties.close_in_sn.success:
   
   # If we successfully closed the record, set this note_text
-  note_text = u"""<br>This Task has been CLOSED in <b>ServiceNow</b>
+  note_text = u"""<br>This Task has been updated in <b>ServiceNow</b>
               <br><b>ServiceNow ID:</b> {0}
               <br><b>ServiceNow Record State:</b> {1}
               <br><b>ServiceNow Closing Notes:</b> {2}
