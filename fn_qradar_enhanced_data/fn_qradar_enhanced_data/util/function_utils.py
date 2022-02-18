@@ -5,9 +5,12 @@
 # Util functions
 
 import six
+import logging
 from resilient_lib import validate_fields, IntegrationError
 from fn_qradar_enhanced_data.util.qradar_constants import PACKAGE_NAME, GLOBAL_SETTINGS
 from fn_qradar_enhanced_data.util import qradar_utils
+
+LOG = logging.getLogger(__name__)
 
 def make_query_string(query, params):
     """
@@ -59,7 +62,7 @@ def get_servers_list(opts):
         servers = qradar_utils.QRadarServers(opts, options)
         server_list = servers.get_server_name_list()
         if GLOBAL_SETTINGS not in server_list:
-            IntegrationError('Unable to find [{}]'.format(GLOBAL_SETTINGS))
+            raise IntegrationError('Unable to find [{}]'.format(GLOBAL_SETTINGS))
         server_list.remove(GLOBAL_SETTINGS)
 
     # Validate global_settings
@@ -72,3 +75,18 @@ def get_servers_list(opts):
         validate_fields(["host", "verify_cert", "polling_interval", "polling_lookback"], servers_list[server_name])
 
     return servers_list
+
+def clear_table(res_rest_client, table_name, incident_id):
+    """
+    Clear data in given table on SOAR
+    :param res_rest_client: SOAR rest client connection
+    :param table_name: API access name of the table to clear
+    :return: None
+    """
+
+    try:
+        res_rest_client.delete("/incidents/{}/table_data/{}/row_data?handle_format=names".format(incident_id, table_name))
+
+    except Exception as err_msg:
+        LOG.warning("Failed to clear table: {} error: {}".format(table_name, err_msg))
+        raise IntegrationError("Error while clearing table: {}".format(table_name))

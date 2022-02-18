@@ -21,6 +21,8 @@
 inputs.qradar_query_type = "offenseassets"
 inputs.qradar_offense_id = incident.properties.qradar_id
 inputs.qradar_label = incident.properties.qradar_destination
+inputs.qradar_table_name = "qr_assets"
+inputs.qradar_incident_id = incident.id
 ```
 
 ### Post-Processing Script

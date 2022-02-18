@@ -21,6 +21,8 @@
 inputs.qradar_search_param3 = incident.properties.qradar_id
 inputs.qradar_query_type = "topevents"
 inputs.qradar_label = incident.properties.qradar_destination
+inputs.qradar_incident_id = incident.id
+inputs.qradar_table_name = "qr_offense_top_events"
 ```
 
 ### Post-Processing Script
