@@ -63,8 +63,8 @@ class FunctionComponent(ResilientComponent):
                 "task_id": res_helper.get_function_input(kwargs, "task_id", True),  # number (optional)
                 "sn_res_id": res_helper.get_function_input(kwargs, "sn_res_id", True),  # number (optional)
                 "sn_record_state": res_helper.get_function_input(kwargs, "sn_record_state"),  # number (required)
-                "sn_close_notes": res_helper.get_function_input(kwargs, "sn_close_notes"),  # text (required)
-                "sn_close_code": res_helper.get_function_input(kwargs, "sn_close_code"),  # text (required)
+                "sn_close_notes": res_helper.get_function_input(kwargs, "sn_close_notes", True),  # text (optional)
+                "sn_close_code": res_helper.get_function_input(kwargs, "sn_close_code", True),  # text (optional)
                 "sn_close_work_note": res_helper.get_function_input(kwargs, "sn_close_work_note", True),  # text (optional)
             }
 
