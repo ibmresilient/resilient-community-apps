@@ -11,7 +11,7 @@
 `qradar_offense_summary`
 
 ### Output Name
-`None`
+``
 
 ### Message Destination
 `fn_qradar_enhanced_data`
@@ -21,6 +21,8 @@
 inputs.qradar_offense_id= incident.properties.qradar_id
 inputs.qradar_query_type = "offenserules"
 inputs.qradar_label = incident.properties.qradar_destination
+inputs.qradar_table_name = "qr_triggered_rules"
+inputs.qradar_incident_id = incident.id
 ```
 
 ### Post-Processing Script

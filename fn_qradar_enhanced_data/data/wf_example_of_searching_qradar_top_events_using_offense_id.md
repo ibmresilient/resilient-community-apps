@@ -21,12 +21,13 @@
 inputs.qradar_search_param3 = incident.properties.qradar_id
 inputs.qradar_query_type = "topevents"
 inputs.qradar_label = incident.properties.qradar_destination
+inputs.qradar_incident_id = incident.id
+inputs.qradar_table_name = "qr_offense_top_events"
 ```
 
 ### Post-Processing Script
 ```python
 link = "<a href=\"https://"+results.qrhost+"/console/ui/offenses/{0}/events?filter={1}%3B%3D%3B%3B{2}&page=1&pagesize=10\" target=\"_blank\">{3}</a>"
-
 
 for event in results.events:
   qradar_event = incident.addRow("qr_offense_top_events")
@@ -39,6 +40,7 @@ for event in results.events:
   qradar_event.event_time = int(event.event_time)
   qradar_event.magnitude = event.magnitude
   qradar_event.username = event.username
+
 ```
 
 ---

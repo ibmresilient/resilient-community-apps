@@ -21,12 +21,12 @@
 inputs.qradar_search_param3 = incident.properties.qradar_id
 inputs.qradar_query_type = "flows"
 inputs.qradar_label = incident.properties.qradar_destination
+inputs.qradar_incident_id = incident.id
+inputs.qradar_table_name = "qr_flows"
 ```
 
 ### Post-Processing Script
 ```python
-
-
 for flow in results.events:
   qradar_event = incident.addRow("qr_flows")
   qradar_event.application = flow.Application
@@ -40,8 +40,7 @@ for flow in results.events:
   qradar_event.source_packets = int(flow.sourcepackets)
   qradar_event.destination_bytes = int(flow.destinationbytes)
   qradar_event.destination_packets = int(flow.destinationpackets)
-   
- 
+
 ```
 
 ---
