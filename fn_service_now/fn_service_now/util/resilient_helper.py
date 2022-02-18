@@ -19,6 +19,8 @@ SECOPS_PLAYBOOK_TASK_TABLE_NAME = "sn_si_task"
 SECOPS_PLAYBOOK_TASK_PREFIX = "SIT"
 CP4S_CASES_REST_PREFIX = "cases-rest"
 
+LOG = logging.getLogger(__name__)
+
 # Define an Incident that gets sent to ServiceNow
 class Incident(object):
     """Class that represents a Resilient Incident. See API notes for more"""
@@ -280,9 +282,6 @@ class ResilientHelper(object):
         for easy filtering when viewing incident list
         """
 
-        log = logging.getLogger(__name__)
-        err_msg = None
-
         def change_func(data):
             data["name"] = new_incident_name
 
@@ -290,20 +289,11 @@ class ResilientHelper(object):
 
         # Use the get_put option to GET the data, apply the change, and PUT it back to the server
         try:
-            log.debug("PUT Incident from Resilient: ID: %s URL: %s New Name: %s", incident_id, url, new_incident_name)
+            LOG.debug("PUT Incident from Resilient: ID: %s URL: %s New Name: %s", incident_id, url, new_incident_name)
             client.get_put(url, change_func)
-            log.info("Incident was successfully renamed to '%s'", new_incident_name)
+            LOG.info("Incident was successfully renamed to '%s'", new_incident_name)
         except Exception as err:
-            err_msg = "Error trying to get Incident {0}.".format(incident_id)
-
-            if err.message and "unable to find incident" in err.message.lower():
-                err_msg = "{0} Could not find Incident with ID {1}".format(err_msg, incident_id)
-            elif isinstance(err, SimpleHTTPException):
-                err_msg = "{0}\nServer Error.\nStatus Code: {1}\nURL: {2}\n{3}".format(err_msg, err.response.status_code, err.response.url, err.message)
-            else:
-                err_msg = "{0} {1}".format(err_msg, err)
-
-            raise ValueError(err_msg)
+            raise ValueError(str(err))
 
     @staticmethod
     def get_task(client, task_id, incident_id):
@@ -363,9 +353,6 @@ class ResilientHelper(object):
         for easy filtering when viewing task list
         """
 
-        log = logging.getLogger(__name__)
-        err_msg = None
-
         def change_func(data):
             data["name"] = new_task_name
 
@@ -373,20 +360,11 @@ class ResilientHelper(object):
 
         # Use the get_put option to GET the data, apply the change, and PUT it back to the server
         try:
-            log.debug("PUT Task from Resilient: ID: %s URL: %s New Name: %s", task_id, url, new_task_name)
+            LOG.debug("PUT Task from Resilient: ID: %s URL: %s New Name: %s", task_id, url, new_task_name)
             client.get_put(url, change_func)
-            log.info("Task was successfully renamed to '%s'", new_task_name)
+            LOG.info("Task was successfully renamed to '%s'", new_task_name)
         except Exception as err:
-            err_msg = "Error trying to get Task {0}.".format(task_id)
-
-            if err.message and "unable to find task" in err.message.lower():
-                err_msg = "{0} Could not find Task with ID {1}".format(err_msg, task_id)
-            elif isinstance(err, SimpleHTTPException):
-                err_msg = "{0}\nServer Error.\nStatus Code: {1}\nURL: {2}\n{3}".format(err_msg, err.response.status_code, err.response.url, err.message)
-            else:
-                err_msg = "{0} {1}".format(err_msg, err)
-
-            raise ValueError(err_msg)
+            raise ValueError(str(err))
 
 
     @classmethod
