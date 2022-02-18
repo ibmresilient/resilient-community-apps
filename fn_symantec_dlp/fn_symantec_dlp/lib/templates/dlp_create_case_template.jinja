@@ -1,6 +1,6 @@
 {
     {%- set comma = joiner(",") -%}
-    "name": "Symantec DLP Incident Id {{staticIncidentDetails.incidentId}}",
+    "name": "Symantec DLP Incident Id {{ staticIncidentDetails.incidentId }}",
     "description": "An incident imported using the Symantec DLP Integration",
     "discovered_date": {{ staticIncidentDetails.infoMap.creationDate|resilient_datetimeformat }},
     "start_date": {{ staticIncidentDetails.infoMap.detectionDate|resilient_datetimeformat }},
