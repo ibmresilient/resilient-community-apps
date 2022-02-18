@@ -31,8 +31,7 @@ setup(
     Symantec DLP incident are escalated to IBM SOAR as cases with the creation of artifacts and notes in SOAR from the incident.""",
     install_requires=[
         'resilient_circuits>=43.0.0',
-        'jinja2',
-        'pytz'
+        'jinja2'
     ],
     packages=find_packages(),
     include_package_data=True,

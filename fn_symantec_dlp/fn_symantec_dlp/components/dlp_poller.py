@@ -99,7 +99,6 @@ class SymantecDLPPollerComponent(ResilientComponent):
             return False
 
         LOG.info(u"Symantec DLP poller initiated, polling interval %s", self.polling_interval)
-        self.timezone = pytz.timezone(options.get("polling_timezone", GMT))
         self.last_poller_time = self._get_last_poller_date(int(options.get('polling_lookback', 0)))
 
         rest_client = get_client(opts)
@@ -207,5 +206,5 @@ class SymantecDLPPollerComponent(ResilientComponent):
 
 
     def _get_timestamp(self):
-        return datetime.datetime.now().astimezone(self.timezone)
+        return datetime.datetime.now()
 
