@@ -28,7 +28,7 @@ setup(
     author="IBM SOAR",
     author_email="",
     url="https://github.com/resilient/resilient-community-apps",
-    description="IBM SOAR app for ReaQta",
+    description="IBM SOAR app bidirectional synchronization and functions for ReaQta",
     long_description="""Bidirectional synchronization of ReaQta Alerts to IBM SOAR.
     Additional functions exists to list and kill endpoint processes, isolate the endpiont and synchronize notes and close events.""",
     install_requires=[

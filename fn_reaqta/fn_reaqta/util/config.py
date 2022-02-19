@@ -24,5 +24,10 @@ cafile=/path/to/cafile.crt or false
 #soar_create_case_template=
 #soar_update_case_template=
 #soar_close_case_template=
+# For an integration server, specify the proxy settings here.
+# For AppHost, use the manageAppHost proxy capability.
+#http_proxy=
+#https_proxy=
+
 """
     return config_data
