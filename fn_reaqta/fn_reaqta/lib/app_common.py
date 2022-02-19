@@ -178,7 +178,7 @@ class AppCommon():
             url = urljoin(ALERT_URI.format(alert_id), "notes")
             response, err_msg = self.api_call("PUT", url, params)
 
-        return (response.json(), err_msg) if not err_msg else (None, err_msg)
+        return (response.text, err_msg) if not err_msg else (None, err_msg)
 
     def _get_uri(self, cmd):
         """build API url

@@ -34,8 +34,7 @@ setup(
     install_requires=[
         "resilient-circuits>=43.0.0",
         "resilient-lib",
-        "cachetools",
-        "functools"
+        "cachetools"
     ],
     python_requires='>=3.6',
     packages=find_packages(),

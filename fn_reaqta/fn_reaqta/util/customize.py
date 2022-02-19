@@ -27,7 +27,7 @@ def codegen_reload_data():
         "incident_fields": [u"reaqta_alert_link", u"reaqta_endpoint_id", u"reaqta_groups", u"reaqta_id", u"reaqta_machine_info", u"reaqta_tags"],
         "incident_artifact_types": [],
         "incident_types": [],
-        "datatables": [u"reaqta_trigger_events"],
+        "datatables": [u"reaqta_process_list", u"reaqta_trigger_events"],
         "automatic_tasks": [],
         "scripts": []
     }
@@ -72,6 +72,7 @@ def customization_data(client=None):
         - reaqta_machine_info
         - reaqta_tags
     - Data Tables:
+        - reaqta_process_list
         - reaqta_trigger_events
     """
 
