@@ -7,7 +7,6 @@ import datetime
 import logging
 from threading import Thread
 from resilient_circuits import ResilientComponent
-from resilient_lib import RequestsCommon
 from resilient import get_client
 from fn_qradar_enhanced_data.lib.poller_common import SOARCommon, poller
 from fn_qradar_enhanced_data.lib.app_common import AppCommon
@@ -38,15 +37,19 @@ class PollerComponent(ResilientComponent):
         super(PollerComponent, self).__init__(opts)
         self.global_settings = opts.get(GLOBAL_SETTINGS, {})
 
+        # collect settings necessary and initialize libraries used by the poller
+        if not self._init_env(opts):
+            LOG.info(u"Poller interval is not configured.  Automated escalation is disabled.")
+            return
+
         poller_thread = Thread(target=self.run)
         poller_thread.daemon = True
         poller_thread.start()
 
-    def _init_env(self, opts, options):
+    def _init_env(self, opts):
         """[initialize the environment based on app.config settings]
         Args:
             opts ([dict]): [all settings including SOAR settings]
-            options ([dict]): [settings specific to datasource]
         Returns:
             [bool]: [True if poller is configured]
         """
@@ -60,9 +63,7 @@ class PollerComponent(ResilientComponent):
 
         # rest_client is used to make IBM SOAR API calls
         self.rest_client = get_client(opts)
-        self.rc = RequestsCommon(opts, options)
         self.soar_common = SOARCommon(self.rest_client)
-        self.app_common = init_app(self.rc, options)
 
         return True
 
@@ -76,7 +77,7 @@ class PollerComponent(ResilientComponent):
         Args:
             last_poller_time ([int]): [time in milliseconds when the last poller ran]
         """
-        cases_list, error_msg = SOARCommon.get_open_soar_cases({'qradar_id': True})
+        cases_list, error_msg = self.soar_common.get_open_soar_cases(["qradar_id", "qradar_destination"])
         print(cases_list)
 
     def process_entity_list(self, entity_list):

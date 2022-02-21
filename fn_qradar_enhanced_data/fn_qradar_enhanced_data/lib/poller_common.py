@@ -29,7 +29,7 @@ def poller(named_poller_interval, named_last_poller_time, package_name):
     """
     def poller_wrapper(func):
         # decorator for running a function forever, passing the ms timestamp of
-        #  when the last poller run to the function it's calling
+        # when the last poller run to the function it's calling
         @functools.wraps(func)
         def wrapped(self):
             last_poller_time = getattr(self, named_last_poller_time)
@@ -63,29 +63,33 @@ class SOARCommon():
         self.rest_client = rest_client
 
     def get_open_soar_cases(self, search_fields, open_cases=True):
-        """ find all open IBM SOAR cases which are associated with the endpoint platform
+        """ find all IBM SOAR cases which are associated with the endpoint platform
         Args:
-            search_fields [list]: list of field(s) used to track the relationship with a SOAR case
+            search_fields [dict]: list of field(s) used to track the relationship with a SOAR case
+                                 field values can be True/False for 'has_a_value' or 'does_not_have_a_value'
+                                 Otherwise a field will use 'equals' for the value
+            NOTE: search_fields only supports custom fields
         Returns:
-            soar_case [dict]: returned list is indexed by the first field in search_fields
+            soar_cases [list]: returned list of cases
+            error_msg [str]: any error during the query or None
         """
-        query = self._build_search_query(search_fields)
+        query = self._build_search_query(search_fields, open_cases=open_cases)
 
-        cases = self._query_cases(query)
-        # return dictionary of cases indexed first field in the list
-        return { case['properties'][search_fields[0]]: case['id'] for case in cases }
+        return self._query_cases(query)
 
-    def _build_search_query(self, search_fields):
+    def _build_search_query(self, search_fields, open_cases=True):
         """[Build the json structure needed to search for cases]
         Args:
-            search_fields ([dict/list]): [key/value pairs to search custom fields with specific values or
-                                         a list of search fields to ensure they have values]
+            search_fields ([dict/list]): [key/value pairs to search custom fields with specific values. If
+                                         a value contains "*" then a search is used with 'has_a_value']
+            NOTE: search_fields works on custom fields
         Returns:
             query_string ([dict]): [json stucture used for cases searching]
         """
         query = {
             "filters": [{
-                "conditions": [ ]
+                "conditions": [
+                 ]
             }],
             "sorts": [{
                 "field_name": "create_date",
@@ -93,20 +97,25 @@ class SOARCommon():
             }]
         }
 
+        if open_cases:
+            field_search = {
+                            "field_name": "plan_status",
+                            "method": "equals",
+                            "value": "A"
+                          }
+            query['filters'][0]['conditions'].append(field_search)
+
         if isinstance(search_fields, dict):
             for search_field, search_value in search_fields.items():
                 field_search = {
-                            "field_name": "properties.{0}".format(search_field),
-                            "method": "equals",
-                            "value": search_value
+                            "field_name": "properties.{0}".format(search_field)
                         }
-                query['filters'][0]['conditions'].append(field_search)
-        elif isinstance(search_fields, list):
-            for search_field in search_fields:
-                field_search = {
-                            "field_name": "properties.{0}".format(search_field),
-                             "method": "has_a_value"
-                        }
+                if isinstance(search_value, bool):
+                    field_search['method'] = "has_a_value" if search_value else "does_not_have_a_value"
+                else:
+                    field_search['method'] = "equals"
+                    field_search['value'] = search_value
+
                 query['filters'][0]['conditions'].append(field_search)
 
         return query
