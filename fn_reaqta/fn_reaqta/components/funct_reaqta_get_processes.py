@@ -48,38 +48,9 @@ class FunctionComponent(AppFunctionComponent):
         suspended = func_params.get('reaqta_suspended')
 
         for filter, field_name in [(has_incident, 'hasIncident'), (suspended, 'suspended')]:
-            if filter is not None:
+            if filter is not None and isinstance(results, list):
                 results = [proc for proc in results if proc.get(field_name) == filter]
-
-        # function_details = res_client.get("/functions/{0}?handle_format=names".format(FN_NAME))
-
-        # Example raising an exception
-        # raise IntegrationError("Example raising custom error")
-
-        ##############################################
-        # PUT YOUR FUNCTION IMPLEMENTATION CODE HERE #
-        ##############################################
-
-        # Call API implemtation example:
-        # params = {
-        #     "api_key": self.app_configs.api_key,
-        #     "ip_address": fn_inputs.artifact_value
-        # }
-        #
-        # response = self.rc.execute(
-        #     method="get",
-        #     url=self.app_configs.api_base_url,
-        #     params=params
-        # )
-        #
-        # results = response.json()
-        #
-        # yield self.status_message("Endpoint reached successfully and returning results for App Function: '{0}'".format(FN_NAME))
-        #
-        # yield FunctionResult(results)
-        ##############################################
 
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
 
         yield FunctionResult(results)
-        # yield FunctionResult({}, success=False, reason="Bad call")
