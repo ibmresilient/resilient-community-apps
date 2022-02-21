@@ -503,7 +503,7 @@ ResilientAPI.prototype = {
 		}
 		
 		if(task_id){
-			link += "?task_id=" + String(task_id);
+			link += "?taskId=" + String(task_id);
 
 			//If is task AND is CP4S instance add extra filter to link
 			if (this.isCP4S){

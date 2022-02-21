@@ -205,7 +205,7 @@ class ResilientHelper(object):
             link = "https://{0}/#incidents/{1}".format(host, incident_id)
 
         if task_id is not None:
-            link += "?task_id={0}".format(task_id)
+            link += "?taskId={0}".format(task_id)
 
             # if is task AND is CP4S instance add extra filter to link
             if self.CP4S_PREFIX in host:
