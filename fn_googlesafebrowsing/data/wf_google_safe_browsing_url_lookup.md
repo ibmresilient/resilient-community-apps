@@ -24,41 +24,40 @@ inputs.googlesafebrowsing_artifact_value = artifact.value
 
 ### Post-Processing Script
 ```python
+# This link contains further information on the site status of the url that is being checked
 LINK_URL = "https://www.google.com/transparencyreport/safebrowsing/diagnostic/#url={}"
-
-if len(results.content) > 0:
-  resp = results.content
-  hit = []
-  for match in resp.get("matches", []):
-    linkurl = match["threat"]["url"]
-    link = LINK_URL.format(match["threat"]["url"])
-    hit = [
-    {
-      "name": "Threat Type",
-      "type": "string",
-      "value": "{}".format(match["threatType"])
-    }, 
-    {
-      "name": "Report Link",
-      "type": "uri",
-      "value": "{}".format(link)
-    }, 
-    {
-      "name": "Platform Type",
-      "type": "string",
-      "value": "{}".format(match["platformType"])
-    },
-    {
-      "name": "URL Name",
-      "type": "string",
-      "value": "{}".format(linkurl)
-    }
-    ]
-    artifact.addHit("Google Safe Browsing Function", hit)
-
-if not results.success:
-    incident.addNote("Google Safe Browsing url check failed: {}".format(results.reason))
-
+if results.success:
+  if len(results.content) > 0:
+    resp = results.content
+    hit = []
+    for match in resp.get("matches", []):
+      linkurl = match["threat"]["url"]
+      link = LINK_URL.format(match["threat"]["url"])
+      hit = [
+      {
+        "name": "Threat Type",
+        "type": "string",
+        "value": "{}".format(match["threatType"])
+      }, 
+      {
+        "name": "Report Link",
+        "type": "uri",
+        "value": "{}".format(link)
+      }, 
+      {
+        "name": "Platform Type",
+        "type": "string",
+        "value": "{}".format(match["platformType"])
+      },
+      {
+        "name": "URL Name",
+        "type": "string",
+        "value": "{}".format(linkurl)
+      }
+      ]
+      artifact.addHit("Google Safe Browsing Function", hit)
+else:
+  incident.addNote("Google Safe Browsing url check failed: {}".format(results.reason))
 ```
 
 ---

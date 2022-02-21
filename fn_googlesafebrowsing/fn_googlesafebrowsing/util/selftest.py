@@ -20,13 +20,11 @@ Return examples:
 import json
 import logging
 from resilient_lib import RequestsCommon
+from fn_googlesafebrowsing.lib import constants
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
 log.addHandler(logging.StreamHandler())
-
-SB_CLIENT_ID = "Resilient"
-SB_CLIENT_VER = "0.0.3"
 
 def selftest_function(opts):
     """
@@ -37,8 +35,8 @@ def selftest_function(opts):
 
     reqbody = {
             'client': {
-                 'clientId': SB_CLIENT_ID,
-                 'clientVersion': SB_CLIENT_VER
+                 'clientId': constants.SB_CLIENT_ID,
+                 'clientVersion': constants.SB_CLIENT_VER
             },
             'threatInfo': {
                 'threatTypes': ['THREAT_TYPE_UNSPECIFIED',

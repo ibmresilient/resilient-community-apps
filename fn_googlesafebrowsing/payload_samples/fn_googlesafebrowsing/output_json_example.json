@@ -24,7 +24,7 @@
     "version": "1.0",
     "package": "fn-googlesafebrowsing",
     "package_version": "1.0.0",
-    "host": "christophersmbp.cambridge.ibm.com",
+    "host": "My Host",
     "execution_time_ms": 411,
     "timestamp": "2022-02-17 14:05:42"
   }

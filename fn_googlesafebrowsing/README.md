@@ -54,9 +54,9 @@
 -->
 **IBM Security SOAR app for 'fn_googlesafebrowsing'**
 
- ![screenshot: main](./doc/screenshots/main.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: main](./doc/screenshots/main.png)
 
-This app uses Google Safe Browsing to check artifacts with a URL type and adds a hit if the site is potentially unsafe. The hits contains a link to Google Transparency Report that gives information on the potentially unsafe url.'
+This app uses Google Safe Browsing to check artifacts with a URL type and adds a hit if the site is potentially unsafe. The hits contains a link to Google Transparency Report that gives information on the potentially unsafe url.
 
 ### Key Features
 <!--
@@ -151,7 +151,7 @@ The following table provides the settings you need to configure the app. These s
 
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
-| **googlesafebrowsing_api_key** | Yes | `` | From GCP |
+| **googlesafebrowsing_api_key** | Yes | `` | API key retrieved from Google Cloud Platform |
 | **googlesafebrowsing_url** | Yes | `https://safebrowsing.googleapis.com/v4/threatMatches:find?key=` | --- |
 
 ---
@@ -198,7 +198,7 @@ results = {
   },
   "metrics": {
     "execution_time_ms": 411,
-    "host": "christophersmbp.cambridge.ibm.com",
+    "host": "My Host",
     "package": "fn-googlesafebrowsing",
     "package_version": "1.0.0",
     "timestamp": "2022-02-17 14:05:42",
@@ -229,40 +229,40 @@ inputs.googlesafebrowsing_artifact_value = artifact.value
 <p>
 
 ```python
+# This link contains further information on the site status of the url that is being checked
 LINK_URL = "https://www.google.com/transparencyreport/safebrowsing/diagnostic/#url={}"
-
-if len(results.content) > 0:
-  resp = results.content
-  hit = []
-  for match in resp.get("matches", []):
-    linkurl = match["threat"]["url"]
-    link = LINK_URL.format(match["threat"]["url"])
-    hit = [
-    {
-      "name": "Threat Type",
-      "type": "string",
-      "value": "{}".format(match["threatType"])
-    }, 
-    {
-      "name": "Report Link",
-      "type": "uri",
-      "value": "{}".format(link)
-    }, 
-    {
-      "name": "Platform Type",
-      "type": "string",
-      "value": "{}".format(match["platformType"])
-    },
-    {
-      "name": "URL Name",
-      "type": "string",
-      "value": "{}".format(linkurl)
-    }
-    ]
-    artifact.addHit("Google Safe Browsing Function", hit)
-
-if not results.success:
-    incident.addNote("Google Safe Browsing url check failed: {}".format(results.reason))
+if results.success:
+  if len(results.content) > 0:
+    resp = results.content
+    hit = []
+    for match in resp.get("matches", []):
+      linkurl = match["threat"]["url"]
+      link = LINK_URL.format(match["threat"]["url"])
+      hit = [
+      {
+        "name": "Threat Type",
+        "type": "string",
+        "value": "{}".format(match["threatType"])
+      }, 
+      {
+        "name": "Report Link",
+        "type": "uri",
+        "value": "{}".format(link)
+      }, 
+      {
+        "name": "Platform Type",
+        "type": "string",
+        "value": "{}".format(match["platformType"])
+      },
+      {
+        "name": "URL Name",
+        "type": "string",
+        "value": "{}".format(linkurl)
+      }
+      ]
+      artifact.addHit("Google Safe Browsing Function", hit)
+else:
+  incident.addNote("Google Safe Browsing url check failed: {}".format(results.reason))
 
 ```
 

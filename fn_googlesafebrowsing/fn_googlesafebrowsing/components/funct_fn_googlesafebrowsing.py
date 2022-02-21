@@ -5,15 +5,13 @@
 import logging
 import json
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from resilient_lib import IntegrationError, validate_fields
+from resilient_lib import validate_fields
+from fn_googlesafebrowsing.lib import constants
 
 PACKAGE_NAME = "fn_googlesafebrowsing"
 FN_NAME = "fn_googlesafebrowsing"
 
 LOG = logging.getLogger(__name__)
-
-SB_CLIENT_ID = "Resilient"
-SB_CLIENT_VER = "0.0.3"
 
 class FunctionComponent(AppFunctionComponent):
     """Component that implements function 'fn_googlesafebrowsing'"""
@@ -44,8 +42,8 @@ class FunctionComponent(AppFunctionComponent):
 
         reqbody = {
             'client': {
-                 'clientId': SB_CLIENT_ID,
-                 'clientVersion': SB_CLIENT_VER
+                 'clientId': constants.SB_CLIENT_ID,
+                 'clientVersion': constants.SB_CLIENT_VER
             },
             'threatInfo': {
                 'threatTypes': ['THREAT_TYPE_UNSPECIFIED',
@@ -62,7 +60,7 @@ class FunctionComponent(AppFunctionComponent):
         LOG.debug(reqbody)
 
         response = self.rc.execute('post', '{}{}'.format(self.app_configs.googlesafebrowsing_url,
-        self.app_configs.googlesafebrowsing_api_key), headers={'Content-Type': 'applciation/json'},
+        self.app_configs.googlesafebrowsing_api_key), headers={'Content-Type': 'application/json'},
         data=json.dumps(reqbody))
 
         results = response.json()

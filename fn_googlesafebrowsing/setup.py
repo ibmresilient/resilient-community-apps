@@ -27,9 +27,9 @@ setup(
     license="MIT",
     author="IBM SOAR",
     author_email="",
-    url="<<your company url>>",
+    url="https://github.com/resilient/resilient-community-apps",
     description="IBM Security SOAR app for 'fn_googlesafebrowsing'",
-    long_description="""This app uses Google Safe Browsing to check artifacts with a URL type and adds a hit if the site is potentially unsafe. The hits contains a link to Google Transparency Report that gives information on the potentially unsafe url.'""",
+    long_description="""This app uses Google Safe Browsing to check artifacts with a URL type and adds a hit if the site is potentially unsafe. The hit contains a link to Google Transparency Report that gives information on the potentially unsafe url.'""",
     install_requires=[
         "resilient-circuits>=43.0.0"
     ],
