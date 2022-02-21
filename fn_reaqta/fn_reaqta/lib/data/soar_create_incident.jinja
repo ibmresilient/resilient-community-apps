@@ -19,8 +19,10 @@
   %}
   "name": "ReaQta Alert - {{ triggerCondition | string | soar_substitute(triggercondition_lookup) }}, Endpoint: {{ endpoint.name }}",
   "description": "{{ title | replace('"', '\\"') }}",
+  {# start_date cannot be after discovered_date #}
+  {% set start_date = happendedAt if happendedAt <= receivedAt else receivedAt %}
   "discovered_date": {{ receivedAt|soar_datetimeformat(split_at='.') }},
-  "start_date": {{ happenedAt|soar_datetimeformat(split_at='.') }},
+  "start_date": {{ start_date|soar_datetimeformat(split_at='.') }},
   {# if alert users are different than SOAR users, consider using a mapping table using soar_substitute: #}
   {# "owner_id": "{{ assignedTo|soar_substitute('{"Automation": "soar_user1@ent.com", "defender_user2@co.com": "soar_user2@ent.com", "DEFAULT": "default_user@ent.com" }') }}", #}
   "plan_status": "{{ closed|string|soar_substitute('{"False": "A", "True": "A"}') }}",
