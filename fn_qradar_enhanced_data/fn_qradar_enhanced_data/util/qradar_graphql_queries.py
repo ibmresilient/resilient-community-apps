@@ -6,6 +6,14 @@
 
 # URL from https://qradar_instance/console/graphql
 
+# Get last updated time for an offense
+GRAPHQL_OFFENSEUPDATE = '''query offenseUpdate($id:ID!){
+                            getOffense(id: $id){
+                                lastUpdatedTime
+                            }
+                        }
+                        '''
+
 #  Basic offense data query to populate summmary fields.
 GRAPHQL_OFFENSEQUERY = '''query offenseQuery($id: ID!) {
                             getOffense(id: $id) {
@@ -32,7 +40,7 @@ GRAPHQL_OFFENSEQUERY = '''query offenseQuery($id: ID!) {
                                 __typename
                             }
                         }
-                       '''
+                        '''
 
 # Contributing rules query to populate Rules table.
 GRAPHQL_RULESQUERY = '''query ruleQuery($id: ID!) {

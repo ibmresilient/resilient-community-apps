@@ -332,6 +332,33 @@ class QRadarClient(object):
         return response.status_code == 200
 
     @staticmethod
+    def get_offense_last_updated_time(offenseid):
+        """
+        Get the last updated time for the given Offense
+        :param offenseid: Id of the QRadar Offense
+        :return: 
+        """
+        auth_info = AuthInfo.get_authInfo()
+        headers = auth_info.headers.copy()
+        headers["Content-Type"] = "application/json"
+        headers["Cookie"] = QRadarClient.get_qr_sessionid(auth_info.api_url.replace("api/", ""))
+
+        url = u"{}{}".format(auth_info.api_url.replace("api/",""), qradar_constants.GRAPHQL_URL)
+        data = {"operationName":"offenseUpdate","variables":{"id":offenseid},"query":qradar_graphql_queries.GRAPHQL_OFFENSEUPDATE}
+        ret = {}
+        try:
+            response = auth_info.make_call("POST", url,data=dumps(data),headers=headers)
+
+            ret = {"status_code": response.status_code,
+                   "content": response.json()["data"]["getOffense"]}
+
+        except Exception as e:
+            LOG.error(str(e))
+            raise IntegrationError("Request to url [{}] throws exception. Error [get_offense_last_updated_time call failed with exception {}]".format(url, str(e)))
+
+        return ret
+
+    @staticmethod
     def get_offense_summary_data(offenseid):
         """
         Get Offense summary for the given Offense

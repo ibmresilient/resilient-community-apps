@@ -8,9 +8,12 @@ import logging
 from threading import Thread
 from resilient_circuits import ResilientComponent
 from resilient import get_client
+from resilient_lib import IntegrationError
 from fn_qradar_enhanced_data.lib.poller_common import SOARCommon, poller
 from fn_qradar_enhanced_data.lib.app_common import AppCommon
 from fn_qradar_enhanced_data.util.qradar_constants import PACKAGE_NAME, GLOBAL_SETTINGS
+from fn_qradar_enhanced_data.util.function_utils import get_servers_list
+from fn_qradar_enhanced_data.util.qradar_utils import QRadarServers, QRadarClient
 
 LOG = logging.getLogger(__name__)
 
@@ -36,6 +39,7 @@ class PollerComponent(ResilientComponent):
         """constructor provides access to the configuration options"""
         super(PollerComponent, self).__init__(opts)
         self.global_settings = opts.get(GLOBAL_SETTINGS, {})
+        self.servers_list = get_servers_list(opts)
 
         # collect settings necessary and initialize libraries used by the poller
         if not self._init_env(opts):
@@ -77,15 +81,37 @@ class PollerComponent(ResilientComponent):
         Args:
             last_poller_time ([int]): [time in milliseconds when the last poller ran]
         """
-        cases_list, error_msg = self.soar_common.get_open_soar_cases(["qradar_id", "qradar_destination"])
-        print(cases_list)
+        case_list, error_msg = self.soar_common.get_open_soar_cases(["qradar_id", "qradar_destination"])
 
-    def process_entity_list(self, entity_list):
-        """Perform all the processing on the entity list, creating, updating and closing SOAR
-           cases based on the states of the endpoint entities
-        Args:
-            entity_list (list): list of endpoint entities to check again SOAR cases
+        if error_msg:
+            raise IntegrationError(error_msg)
+
+        self.process_case_list(case_list)
+
+    def process_case_list(self, case_list):
         """
+        Process the open cases
+        :param case_list: list of open cases
+        :return:
+        """
+        for case in case_list:
+            qradar_id = case["properties"]["qradar_id"]
+            qradar_destination = case["properties"]["qradar_destination"]
+
+            # Get configuration for server associated with the current case
+            options = QRadarServers.qradar_label_test(qradar_destination, self.servers_list)
+            qradar_verify_cert = False if options.get("verify_cert", "false").lower() == "false" else options.get("verify_cert")
+
+            qradar_client = QRadarClient(host=options.get("host"),
+                                         username=options.get("username", None),
+                                         password=options.get("qradarpassword", None),
+                                         token=options.get("qradartoken", None),
+                                         cafile=qradar_verify_cert,
+                                         opts=self.opts, function_opts=options)
+
+            offense_update = qradar_client.get_offense_last_updated_time(qradar_id)
+            self.soar_common._patch_case
+            pass
 
     def _get_last_poller_date(self, polling_lookback):
         """get the last poller datetime based on a lookback value

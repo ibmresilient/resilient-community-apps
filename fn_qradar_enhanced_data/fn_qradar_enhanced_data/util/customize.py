@@ -77,6 +77,7 @@ def customization_data(client=None):
         - qr_source_ip_count
         - qradar_destination
         - qradar_id
+        - qr_last_updated_time
     - Data Tables:
         - qr_assets
         - qr_categories
