@@ -410,7 +410,7 @@ incident.addNote(note_text)
 </details>
 
 ### Sending SOAR artifacts to SNOW
-It is possible to utilize the `SNOW: Update Record` function to send artifact values to SNOW records. The example above is set to synchronize the severity of a SOAR record to the desired field in SNOW on update. To synchronize on artifact values:
+You can utilize the SNOW: Update Record function to send artifact values to SNOW records. The previous example for update is set to synchronize the severity of a SOAR record to the desired field in SNOW on update. To synchronize on artifact values:
 
 1. Using the resilient-sdk, `clone` the example workflow into a new workflow with `changetype` artifact.
     ```

@@ -14,7 +14,7 @@ read_all_incidents
 #delete_all_incidents
 #edit_all_incidents_members
 #edit_all_incidents_owner
-#edit_all_incidents_status
+edit_all_incidents_status
 #
 ## incident fields, artifacts, attachments, milestones, datatables
 edit_all_incidents_fields
@@ -23,13 +23,13 @@ edit_all_incidents_fields
 #edit_all_incident_notes
 #
 ## tasks permissions
-#edit_incident_public_task_fields
+edit_incident_public_task_fields
 read_all_private_tasks
 #edit_incident_private_task_member
 #edit_all_private_task_notes
 #edit_incident_public_task_member
 #edit_all_public_task_notes
-#edit_incident_private_task_fields
+edit_incident_private_task_fields
 read_incident_public_task
 #
 ## users and groups permissions
