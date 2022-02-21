@@ -26,9 +26,9 @@ inputs.reaqta_incident_id = incident.id
 ### Post-Processing Script
 ```python
 if results.success:
-  incident.addNote("ReaQta Attach File created: {} from program path: {}".format(results.content['name'], results.inputs['reaqta_program_path']))
+  incident.addNote(u"ReaQta Attach File created: {} from program path: {}".format(results.content['name'], results.inputs['reaqta_program_path']))
 else:
-  incident.addNote("ReaQta Attach File failed: {}".format(results.reason))
+  incident.addNote(u"ReaQta Attach File failed: {}".format(results.reason))
 ```
 
 ---
