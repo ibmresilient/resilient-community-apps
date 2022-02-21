@@ -416,7 +416,7 @@ It is possible to utilize the `SNOW: Update Record` function to send artifact va
     ```
     resilient-sdk clone --workflow example_snow_update_record_on_severity_change <new_workflow_name> --changetype artifact
     ```
-    1. More information on the resilient-sdk and the `clone` command can be found [here](https://ibmresilient.github.io/resilient-python-api/pages/resilient-sdk/resilient-sdk.html#clone).
+    More information on the resilient-sdk and the `clone` command can be found [here](https://ibmresilient.github.io/resilient-python-api/pages/resilient-sdk/resilient-sdk.html#clone).
 1. Modify the pre-processing script to map desired artifact values to SNOW record fields using the `sn_update_fields` parameter of the "SNOW: Update Record" function.
     ```python
     inputs.sn_update_fields = dict_to_json_str({
