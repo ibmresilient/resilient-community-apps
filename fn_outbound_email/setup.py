@@ -17,7 +17,9 @@ setup(
         'resilient_circuits>=39.0.0',
         'resilient_lib>=32.0.0',
         'Jinja2>=2.9.6',
-        'six'
+        'six',
+        'flask==1.1.1',
+        'pyOpenssl==21.0.0'
     ],
     packages=find_packages(),
     include_package_data=True,
@@ -28,6 +30,9 @@ setup(
     entry_points={
         "resilient.circuits.components": [
             "SendEmailFunctionComponent = fn_outbound_email.components.send_email:FunctionComponent"
+        ],
+        "console_scripts": [
+            "oauth2_refresh_token=fn_outbound_email.bin.oauth2_refresh_token:main"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_outbound_email.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_outbound_email.util.customize:customization_data"],
