@@ -136,6 +136,20 @@ class SOARCommon():
             LOG.error(query)
             return None, str(err)
 
+    def update_soar_case(self, case_id, case_payload):
+        """
+        Update a IBM SOAR case by rendering a jinja2 template
+        :param case_payload: inciednt fields to update (json object)
+        :return: IBM SOAR case
+        """
+        try:
+            result = self._patch_case(case_id, case_payload)
+            return result
+
+        except Exception as err:
+            LOG.error(str(err))
+            raise IntegrationError from err
+
     def _patch_case(self, case_id, case_payload):
         """ _patch_case will update an case with the specified json payload.
         :param case_id: case ID of case to be updated.

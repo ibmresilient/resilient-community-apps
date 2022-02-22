@@ -332,6 +332,61 @@ class QRadarClient(object):
         return response.status_code == 200
 
     @staticmethod
+    def graphql_query(variables, query_name):
+        """
+
+        :param variables: Dictionary of variables 
+        """
+        auth_info = AuthInfo.get_authInfo()
+        headers = auth_info.headers.copy()
+        headers["Content-Type"] = "application/json"
+        headers["Cookie"] = QRadarClient.get_qr_sessionid(auth_info.api_url.replace("api/", ""))
+
+        query_name = query_name.replace("  ", "")
+        operationName = query_name[query_name.index(" ")+1:query_name.index("(")]
+        query_call = query_name[query_name.index("\n")+1:query_name.index("(", query_name.index("\n")+2)]
+
+        url = u"{}{}".format(auth_info.api_url.replace("api/",""), qradar_constants.GRAPHQL_URL)
+        data = {"operationName":operationName,"variables":variables,"query":query_name}
+        ret = {}
+
+        
+
+        try:
+            response = auth_info.make_call("POST", url, data=dumps(data), headers=headers)
+
+            ret = {"status_code": response.status_code,
+                   "content": response.json()["data"][query_call]}
+
+        except Exception as e:
+            LOG.error(str(e))
+            raise IntegrationError("Request to url [{}] throws exception. Error [{} call failed with exception {}]".format(url, query_call, str(e)))
+
+        return ret
+
+    @staticmethod
+    def get_open_offenses_last_updated_time():
+        auth_info = AuthInfo.get_authInfo()
+        headers = auth_info.headers.copy()
+        headers["Content-Type"] = "application/json"
+        headers["Cookie"] = QRadarClient.get_qr_sessionid(auth_info.api_url.replace("api/", ""))
+
+        url = u"{}{}".format(auth_info.api_url.replace("api/",""), qradar_constants.GRAPHQL_URL)
+        data = {"operationName":"getOpenOffensesUpdate","variables":{"limit": 0,"offset": 0,"orderBy": "LAST_UPDATED_TIME_ASC","filter": "status=OPEN"},"query":qradar_graphql_queries.GRAPHQL_OPENOFFENSESLASTUPDATE}
+        ret = {}
+        try:
+            response = auth_info.make_call("POST", url, data=dumps(data), headers=headers)
+
+            ret = {"status_code": response.status_code,
+                   "content": response.json()["data"]["getOffenses"]}
+
+        except Exception as e:
+            LOG.error(str(e))
+            raise IntegrationError("Request to url [{}] throws exception. Error [get_open_offenses_last_updated_time call failed with exception {}]".format(url, str(e)))
+
+        return ret
+
+    @staticmethod
     def get_offense_last_updated_time(offenseid):
         """
         Get the last updated time for the given Offense
@@ -526,6 +581,17 @@ class QRadarClient(object):
 class QRadarServers():
     def __init__(self, opts, options):
         self.servers, self.server_name_list = self._load_servers(opts, options)
+
+    def get_qradar_client(opts, qradar_destination):
+        options = QRadarServers.qradar_label_test(qradar_destination, function_utils.get_servers_list(opts))
+        qradar_verify_cert = False if options.get("verify_cert", "false").lower() == "false" else options.get("verify_cert")
+
+        return QRadarClient(host=options.get("host"),
+                            username=options.get("username", None),
+                            password=options.get("qradarpassword", None),
+                            token=options.get("qradartoken", None),
+                            cafile=qradar_verify_cert,
+                            opts=opts, function_opts=options)
 
     def _load_servers(self, opts, options):
         servers = {}

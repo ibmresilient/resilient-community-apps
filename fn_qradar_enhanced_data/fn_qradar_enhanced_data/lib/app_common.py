@@ -32,40 +32,6 @@ class AppCommon():
         response = self.rc.execute("POST", auth_url, json=params, headers=HEADER, verify=self.verify)
         return response.json()['token']
 
-    def get_entities_since_ts(self, query_field_name, timestamp, optional_filters):
-        """get changed entities since last poller run
-        Args:
-            query_field_name (str): field to use for
-            timestamp (datetime): datetime when the last poller ran
-            optional_filters (dict): name/value pairs for query criteria
-        Returns:
-            list: changed entity list
-        """
-        query = {
-            query_field_name: readable_datetime(timestamp) # utc datetime format
-        }
-
-        # add any additional query parameters
-        if optional_filters:
-            for k,v in optional_filters.items():
-                query[k] = v
-
-        LOG.debug(query)
-        self.token = self.authenticate()
-        self.header = self._make_header(self.token)
-        response = self.rc.execute("GET", self._get_uri("alerts"), params=query, headers=self.header, verify=self.verify)
-        return response.json()
-
-    def get_next_entities(self, next_url):
-        """This endpoint pages result size. This method is used for subsequent calls
-        Args:
-            next_url (str): url provided by endpoint API call to get next paged list
-        Returns:
-            list: next entity paged result
-        """
-        response = self.rc.execute("GET", next_url, headers=self.header, verify=self.verify)
-        return response.json()
-
     def _get_uri(self, cmd):
         """build API url
         Args:

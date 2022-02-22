@@ -6,6 +6,15 @@
 
 # URL from https://qradar_instance/console/graphql
 
+GRAPHQL_OPENOFFENSESLASTUPDATE = '''query getOpenOffensesUpdate($limit: Int!, $offset: Int!, $orderBy: OffensesOrderBy!, $filter: String){
+                                        getOffenses(limit: $limit, offset: $offset, orderBy: $orderBy, filter: $filter){
+                                            id
+                                            lastUpdatedTime
+                                            status
+                                        }
+                                 }
+                                 '''
+
 # Get last updated time for an offense
 GRAPHQL_OFFENSEUPDATE = '''query offenseUpdate($id:ID!){
                             getOffense(id: $id){

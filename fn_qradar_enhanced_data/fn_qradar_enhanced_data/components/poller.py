@@ -6,6 +6,7 @@
 import datetime
 import logging
 from threading import Thread
+import fn_qradar_enhanced_data.util.qradar_graphql_queries as qradar_graphql_queries
 from resilient_circuits import ResilientComponent
 from resilient import get_client
 from resilient_lib import IntegrationError
@@ -39,7 +40,7 @@ class PollerComponent(ResilientComponent):
         """constructor provides access to the configuration options"""
         super(PollerComponent, self).__init__(opts)
         self.global_settings = opts.get(GLOBAL_SETTINGS, {})
-        self.servers_list = get_servers_list(opts)
+        self.opts = opts
 
         # collect settings necessary and initialize libraries used by the poller
         if not self._init_env(opts):
@@ -94,32 +95,43 @@ class PollerComponent(ResilientComponent):
         :param case_list: list of open cases
         :return:
         """
+
+        #Figure out how to sort to case_list by qradar_server, so that qradar is called as little as possible
+
+        # Connect to the qradar server for the given case
+        # qradar_client = QRadarServers.get_qradar_client(self.opts, qradar_destination)
+
+        # open_offenses_last_updated_times = qradar_client.graphql_query(variables, qradar_graphql_queries.GRAPHQL_OPENOFFENSESLASTUPDATE)
+
+        # for case in case_list:
+        #     for offense in open_offenses_last_updated_times["content"]:
+        #         if case["properties"]["qradar_id"] == offense[""]:
+        #             pass
+
         for case in case_list:
+            # Get variables from the case
             qradar_id = case["properties"]["qradar_id"]
             qradar_destination = case["properties"]["qradar_destination"]
             case_lastUpdatedTime = case["properties"]["qr_offense_last_updated_time"]
+            case_id = case['id']
 
-            # Get configuration for server associated with the current case
-            options = QRadarServers.qradar_label_test(qradar_destination, self.servers_list)
-            qradar_verify_cert = False if options.get("verify_cert", "false").lower() == "false" else options.get("verify_cert")
+            # Connect to the qradar server for the given case
+            qradar_client = QRadarServers.get_qradar_client(self.opts, qradar_destination)
 
-            qradar_client = QRadarClient(host=options.get("host"),
-                                         username=options.get("username", None),
-                                         password=options.get("qradarpassword", None),
-                                         token=options.get("qradartoken", None),
-                                         cafile=qradar_verify_cert,
-                                         opts=self.opts, function_opts=options)
+            variables = {"limit": 0,"offset": 0,"orderBy": "LAST_UPDATED_TIME_ASC","filter": "status=OPEN"}
+            offenses_update = qradar_client.graphql_query(variables, qradar_graphql_queries.GRAPHQL_OPENOFFENSESLASTUPDATE)
 
+            # Query the offense for the last updated time
             offense_update = qradar_client.get_offense_last_updated_time(qradar_id)
-            offense_lastUpdatedTime = offense_update['content']['lastUpdatedTime']
+            offense_lastUpdatedTime = int(offense_update['content']['lastUpdatedTime'])
+            # Compare last updated time of the offense to the case 
             if offense_lastUpdatedTime != case_lastUpdatedTime:
-                        payload = { "changes": [ { 
-                        "field": { "name": "qr_offense_last_updated_time" }, 
-                        "old_value": { "object": str(case_lastUpdatedTime) },
-                        "new_value": { "object": str(offense_lastUpdatedTime) }
-                    } ] }
-                # self.soar_common._patch_case
-            pass
+                # If time is different then update the case
+                payload = { "properties": 
+                            { "qr_offense_last_updated_time": offense_lastUpdatedTime }
+                          }
+                self.soar_common.update_soar_case(case_id, payload)
+                LOG.info("Incident: {} updated field: qr_offense_last_updated_time with value: {}".format(case_id, offense_lastUpdatedTime))
 
     def _get_last_poller_date(self, polling_lookback):
         """get the last poller datetime based on a lookback value
