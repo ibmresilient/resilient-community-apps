@@ -19,6 +19,9 @@
             },
             "process_pid": {
                 "value": {{ event.process.pid }}
+            },
+            "sha256_hash": {
+                "value": "{{ event.process.program.sha256 }}"
             }
         }
     }

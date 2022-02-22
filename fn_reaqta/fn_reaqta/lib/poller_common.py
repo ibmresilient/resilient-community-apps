@@ -20,6 +20,8 @@ SOAR_HEADER = "Created by {}".format(IBM_SOAR)
 
 TYPES_URI = "/types"
 INCIDENTS_URI = "/incidents"
+ARTIFACTS_URI = "/artifacts"
+ARTIFACT_FILE_URI = "/".join([ARTIFACTS_URI, "files"])
 
 # Directory of default templates
 TEMPLATE_DIR = os.path.join(os.path.dirname(__file__), "data")
@@ -275,6 +277,51 @@ class SOARCommon():
         """
         uri = "/".join([INCIDENTS_URI, str(case_id), "table_data", datatable, "row_data"])
         return self.rest_client.post(uri=uri, payload=rowdata)
+
+    def create_artifact(self, rest_client, incident_id, artifact_type, artifact_value, description, send_file=False):
+        """create an artifact"""
+        try:
+            artifact_uri = "/".join([INCIDENTS_URI, incident_id, ARTIFACTS_URI])
+
+            # set up Artifact payload skeleton
+            artifact_payload = {
+                'type': {
+                    'name': artifact_type,
+                },
+                'description': {
+                    'format': description,
+                }
+            }
+
+            if send_file:
+                artifact_uri = "/".join([artifact_uri, "files"])
+                files=(
+                    ('foo', (None, 'bar')),
+                    ('foo', (None, 'baz')),
+                    ('spam', (None, 'eggs')),
+                )
+            else:
+                rest_client.post(artifact_uri, )
+
+
+
+            # find artifacts that are already associated with this Incident
+            existing_artifacts = self._find_resilient_artifacts_for_incident(incident_id)
+
+            # loop through Artifacts provided with this Threat
+            for artifact_id, artifact_type in artifacts.items():
+                # if this Artifact doesn't match an existing value and type
+                if artifact_id not in existing_artifacts or existing_artifacts[artifact_id] != artifact_type:
+                    # populate payload with ID and type
+                    artifact_payload['value'] = artifact_id
+                    artifact_payload['type']['name'] = ARTIFACT_TYPE_API_NAME.get(artifact_type, "String")
+                    artifact_payload['description']['content'] = artifact_type
+                    # attach new Artifact to Incident
+                    resilient_client.post(uri=artifact_uri, payload=artifact_payload)
+
+        except SimpleHTTPException as ex:
+            log.info(u'Something went wrong when attempting to create the Incident: {}'.format(ex))
+            raise ex
 
     def get_case(self, case_id):
         """ get an SOAR case based on the case id """

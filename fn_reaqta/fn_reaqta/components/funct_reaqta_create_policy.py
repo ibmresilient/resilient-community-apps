@@ -1,18 +1,16 @@
 # -*- coding: utf-8 -*-
 
 """AppFunction implementation"""
-import ntpath
 from fn_reaqta.lib.app_common import AppCommon
-from resilient_lib import write_file_attachment
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import IntegrationError, validate_fields
 
 PACKAGE_NAME = "fn_reaqta"
-FN_NAME = "reaqta_attach_file"
+FN_NAME = "reaqta_create_policy"
 
 
 class FunctionComponent(AppFunctionComponent):
-    """Component that implements function 'reaqta_attach_file'"""
+    """Component that implements function 'reaqta_create_policy'"""
 
     def __init__(self, opts):
         super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
@@ -20,9 +18,15 @@ class FunctionComponent(AppFunctionComponent):
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """
-        Function: Attach the file associated with a running process
+        Function: Create an alert trigger based on a program's SHA256 hash
         Inputs:
-            -   fn_inputs.reaqta_program_path
+            -   fn_inputs.reaqta_policy_title
+            -   fn_inputs.reaqta_policy_block
+            -   fn_inputs.reaqta_policy_included_groups
+            -   fn_inputs.reaqta_policy_excluded_groups
+            -   fn_inputs.reaqta_sha256
+            -   fn_inputs.reaqta_policy_description
+            -   fn_inputs.reaqta_policy_enabled
         """
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
@@ -34,23 +38,16 @@ class FunctionComponent(AppFunctionComponent):
                         "api_secret"],
                         self.app_configs)
 
-        validate_fields(["reaqta_endpoint_id", "reaqta_incident_id"], fn_inputs)
-
-        # Example getting access to self.get_fn_msg()
-        # fn_msg = self.get_fn_msg()
-        # self.LOG.info("fn_msg: %s", fn_msg)
+        validate_fields(["reaqta_policy_title",
+                        "reaqta_sha256",
+                        "reaqta_policy_enabled",
+                        "reaqta_policy_block"
+                       ],
+                       fn_inputs)
 
         app_common = AppCommon(self.rc, self.app_configs._asdict())
-        file_contents = app_common.get_program_file(fn_inputs.reaqta_endpoint_id,
-                                                  fn_inputs.reaqta_program_path)
-
-        results = None
-        if file_contents:
-            # collect the file name
-            file_name = ntpath.basename(fn_inputs.reaqta_program_path)
-            results = write_file_attachment(self.rest_client(), file_name, file_contents, fn_inputs.reaqta_incident_id)
+        response, err_msg = app_common.create_policy(fn_inputs._asdict())
 
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
 
-        yield FunctionResult(results)
-
+        yield FunctionResult(response.json(), success=True if not err_msg else False, reason=err_msg)

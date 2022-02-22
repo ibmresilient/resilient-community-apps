@@ -2,13 +2,12 @@
 # pragma pylint: disable=unused-argument, no-self-use
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 import logging
-import ntpath
 import time
 from datetime import datetime
 from io import BytesIO
 from urllib.parse import urljoin
 from fn_reaqta.lib.poller_common import IBM_SOAR
-from resilient_lib import str_to_bool, readable_datetime, write_file_attachment, clean_html
+from resilient_lib import str_to_bool, readable_datetime, clean_html
 from fn_reaqta.lib.poller_common import eval_mapping, s_to_b
 
 LOG = logging.getLogger(__name__)
@@ -18,6 +17,7 @@ HEADER = { 'Content-Type': 'application/json' }
 ENDPOINT_URI = "endpoint/{}/"
 ENDPOINT_FILE_URI = "endpoint-file/{}/"
 ALERT_URI = "alert/{}/"
+POLICY_URI = "policy/"
 
 DOWNLOAD_WAIT_SEC = 15  # number of seconds to wait between status checks for a file download
 
@@ -112,9 +112,7 @@ class AppCommon():
         response, err_msg = self.api_call("POST", url, payload)
         return response.json()
 
-    def attach_file(self, rest_client, incident_id, endpoint_id, program_path):
-        # collect the file name
-        file_name = ntpath.basename(program_path)
+    def get_program_file(self, endpoint_id, program_path):
 
         url = urljoin(ENDPOINT_URI.format(endpoint_id), "request-file")
         payload = {
@@ -142,10 +140,9 @@ class AppCommon():
                 url = urljoin(ENDPOINT_FILE_URI.format(download_id), "download")
                 response, err_msg = self.api_call("GET", url, None)
 
-                attachment = BytesIO(s_to_b(response.text))
-                results = write_file_attachment(rest_client, file_name, attachment, incident_id)
+                return BytesIO(s_to_b(response.text))
 
-        return results
+        return None
 
     def close_alert(self, alert_id, is_malicious):
         params = {
@@ -179,6 +176,40 @@ class AppCommon():
             response, err_msg = self.api_call("PUT", url, params)
 
         return (response.text, err_msg) if not err_msg else (None, err_msg)
+
+    def create_policy(self, fn_inputs):
+        """create a policy based on a file hash
+
+        Args:
+            fn_inputs (dict): inputs to API call
+            -   fn_inputs.reaqta_policy_title
+            -   fn_inputs.reaqta_policy_block
+            -   fn_inputs.reaqta_policy_included_groups
+            -   fn_inputs.reaqta_policy_excluded_groups
+            -   fn_inputs.reaqta_sha256
+            -   fn_inputs.reaqta_policy_description
+            -   fn_inputs.reaqta_policy_enabled
+
+        Returns:
+            (dict, str): API call results and an err_msg, if an error occured
+        """
+        params = {
+            "sha256": fn_inputs.get('reaqta_sha256'),
+            "title": fn_inputs.get('reaqta_policy_title', ''),
+            "description": fn_inputs.get('reaqta_policy_description', ''),
+            "disable": not fn_inputs.get('reaqta_policy_enabled', True),
+            "block": fn_inputs.get('reaqta_policy_block', False)
+        }
+
+        if fn_inputs.get('reaqta_policy_included_groups'):
+            params['enabledGroups'] = [ group.strip() for group in fn_inputs.get('reaqta_policy_included_groups').split(',') ]
+
+        if fn_inputs.get('reaqta_policy_excluded_groups'):
+            params['disabledGroups'] = [ group.strip() for group in fn_inputs.get('reaqta_policy_excluded_groups').split(',') ]
+
+        LOG.debug("create_policy: %s", params)
+        url = urljoin(POLICY_URI, "trigger-on-process-hash")
+        return self.api_call("POST", url, params)
 
     def _get_uri(self, cmd):
         """build API url
@@ -260,7 +291,7 @@ def callback(response):
     error_msg = None
     if response.status_code >= 300 and response.status_code < 500:
         resp = response.json()
-        msg = resp.get('messages')
+        msg = resp.get('messages') or resp.get('message')
         details = resp.get('details')
         error_msg  = u"ReaQta Error: \n    status code: {0}\n    message: {1}\n    details: {2}".format(
             response.status_code,
