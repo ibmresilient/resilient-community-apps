@@ -39,7 +39,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 40.2.81
+    IBM SOAR Platform Version: 42.0.7058
 
     Contents:
     - Message Destinations:

@@ -201,7 +201,7 @@ The following table provides the settings you need to configure the app. These s
 ## Function - Symantec DLP: Get Incident Details
 Get the information on the Symantec DLP incident by calling the DLP REST API incident endpoints and return the information in JSON format.
 
- ![screenshot: fn-symantec-dlp-get-incident-details ](./doc/screenshots/fn-symantec-dlp-get-incident-details.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-symantec-dlp-get-incident-details ](./doc/screenshots/fn-symantec-dlp-get-incident-details.png)
 
 <details><summary>Inputs:</summary>
 <p>
