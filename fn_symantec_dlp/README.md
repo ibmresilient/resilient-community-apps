@@ -73,7 +73,7 @@ This app allows bi-directional synchronization between IBM SOAR and Symantec DLP
 The Symantec DLP app implements the following functionality in the IBM QRadar SOAR platform:
 
 * Poll Symantec DLP for incidents using a DLP saved report search filter and create a corresponding incident/case in the IBM SOAR platform.
-* Add Symantec DLP notes in corresponding IBM SOAR incident/case.
+* Add Symantec DLP notes to corresponding IBM SOAR incident/case.
 * Create artifacts from the Symantec DLP incident in the IBM SOAR incident/case.
 * Resolve a Symantec DLP incident when the corresponding IBM SOAR incident/case is closed.
 * Close an IBM SOAR incident/case when the corresponding Symantec DLP incident is resolved in Symantec DLP.
@@ -91,11 +91,11 @@ This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRa
 The SOAR platform supports two app deployment mechanisms, App Host and integration server.
 
 If deploying to a SOAR platform with an App Host, the requirements are:
-* SOAR platform >= `40.2.81`.
+* SOAR platform >= `42.0.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `40.2.81`.
+* SOAR platform >= `42.0.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient_circuits>=43.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions: 
@@ -184,9 +184,9 @@ The following table provides the settings you need to configure the app. These s
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
 | **api_version** | Yes | `v2` | *Symantec DLP REST API version.* |
-| **cafile** | No| `` | *false|/path/to/certificate.* |
+| **cafile** | No | `` | *false or /path/to/certificate.* |
 | **polling_interval** | Yes | `60` | *Poller interval time in seconds. Value of zero to turn poller off.* |
-| **polling_lookback** | Yes | `12000` | *Number of minutes to look back for threat updates. Value is only used on the first time polling when the app starts.* |
+| **polling_lookback** | Yes | `12000` | *Number of days to look back for DLP incidents. Value is only used on the first time polling when the app starts.* |
 | **sdlp_host** | Yes | `<serverip>` | *Symantec DLP Enforce Server.*  |
 | **sdlp_username** | Yes | `<SDLP Username>` | *Symantec DLP account username.* |
 | **sdlp_password** | Yes | `<SDLP Password>` |  *Symantec DLP account password.* |
