@@ -5,6 +5,7 @@
 - [Functions](#functions)
   - [Function - SNOW: Create Record](#function---snow-create-record)
   - [Function - SNOW: Update Record](#function---snow-update-record)
+    - [Sending SOAR artifacts to SNOW](#sending-soar-artifacts-to-snow)
   - [Function - SNOW: Close Record](#function---snow-close-record)
   - [Function - SNOW: Add Note to Record](#function---snow-add-note-to-record)
   - [Function - SNOW: Add Attachment to Record](#function---snow-add-attachment-to-record)
@@ -407,6 +408,22 @@ incident.addNote(note_text)
 ```
 
 </details>
+
+### Sending SOAR artifacts to SNOW
+You can utilize the SNOW: Update Record function to send artifact values to SNOW records. The previous example for update is set to synchronize the severity of a SOAR record to the desired field in SNOW on update. To synchronize on artifact values:
+
+1. Using the resilient-sdk, `clone` the example workflow into a new workflow with `changetype` artifact.
+    ```
+    resilient-sdk clone --workflow example_snow_update_record_on_severity_change <new_workflow_name> --changetype artifact
+    ```
+    More information on the resilient-sdk and the `clone` command can be found [here](https://ibmresilient.github.io/resilient-python-api/pages/resilient-sdk/resilient-sdk.html#clone).
+1. Modify the pre-processing script to map desired artifact values to SNOW record fields using the `sn_update_fields` parameter of the "SNOW: Update Record" function.
+    ```python
+    inputs.sn_update_fields = dict_to_json_str({
+      "my_snow_column_name": artifact.value # When the artifact type is IP Address the value will be the IP
+    })
+    ```
+1. Create a SOAR Rule to either manually or automatically trigger this new workflow.
 
 ---
 
@@ -944,7 +961,7 @@ inputs.sn_resilient_status = incident.plan_status
 
 # Security Incident Response Specific Customizations
 By default the severity of a SOAR incident/case is mapped to the `severity` field in ServiceNow. 
-This field is available in both the `incident` and `sn_si_incident` tables, however, in Security Incident (SIR) tables have another field labeled `business_criticality`. 
+This field is available in both the `incident` and `sn_si_incident` tables, however, Security Incident (SIR) tables have another field labeled `business_criticality`. 
 It is recommend after the install to customize your workflows in SOAR and SNOW to handle `business_criticality` rather than `severity` in SNOW. 
 Customize the "\[SIR\] SNOW Update Record on Severity Change" workflow and "SNOW: Create Record \[Incident\]". The "RES_WF_CreateIncident" workflow on SNOW should be customized as well. 
 See the [Customize ServiceNow App Guide](../customize_snow_guide) for more details.

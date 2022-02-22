@@ -1,4 +1,4 @@
-# Installation Guide for ServiceNow Integration
+# Installation Guide for ServiceNow App
 
 ## Table of Contents
   - [Prerequisites](#prerequisites)
@@ -6,12 +6,14 @@
   - [Step 2: *Create a User in ServiceNow and assign it the correct Role*](#step-2-create-a-user-in-servicenow-and-assign-it-the-correct-role)
   - [Step 3: *Create a User on the SOAR Platform*](#step-3-create-an-api-key-on-the-soar-platform)
   - [Step 4: *Enter IBM SOAR Configurations in ServiceNow*](#step-4-enter-ibm-soar-configurations)
-  - [Step 5: *Download & Install fn_service_now Integration*](#step-5-download--install-fn_service_now-integration)
+  - [Step 5: *Download & Install fn_service_now App*](#step-5-download--install-fn_service_now-app)
   - [Step 6: *Install and Configure ServiceNow Mid-Server (if needed)*](#step-6-install-and-configure-servicenow-mid-server-if-needed)
   - [Step 7: *Give your ServiceNow users the correct Role*](#step-7-give-your-servicenow-users-the-correct-role)
-  - [Step 8: (SIR) Add IBM SOAR tab to Security Incident UI](#step-8-sir-add-ibm-soar-tab-to-security-incident-ui)
-  - [Step 9: (SIR) Automatic escalation on group assignment](#step-9-sir-sync-to-soar-automatically-on-group-assignment)
-  - [Step 10: *Test*](#step-10-test)
+  - [Step 8: Security Incident Response (SIR) Configurations](#step-8-security-incident-response-sir-configurations)
+    - [Configure `ServiceNowAllowedTableNames` (SIR only)](#configure-servicenowallowedtablenames-sir-only)
+    - [Add IBM SOAR tab to Security Incident UI (SIR only)](#add-ibm-soar-tab-to-security-incident-ui-sir-only)
+    - [Automatic escalation on group assignment (SIR only)](#sync-to-soar-automatically-on-group-assignment-sir-only)
+  - [Step 9: *Test*](#step-9-test)
 ---
 
 ## Prerequisites 
@@ -62,7 +64,7 @@
 
 ## Step 3: *Create an API Key on the SOAR Platform*
 > If not using API Key authentication, follow instructions in [Step 3.1](#step-31-only-if-not-using-api-key-create-a-user-on-the-soar-platform).
-* Get the SOAR Organization name you want to use this integration with. In CP4S this is a UUID.
+* Get the SOAR Organization name you want to use this app with. In CP4S this is a UUID.
 * In the SOAR UI, navigate to **Administrator Settings** > **Users** > **API Keys**.
   * In CP4S, this is located under the **hamburger menu** on the left > **Application Settings** > **Case Management** > **Permissions and access** > **Users** > **API Keys**.
   * For CP4S you will also need to find the REST endpoint of your instance. This is usually `cases-rest.<cp4s_host_url>` but it can be customized.
@@ -97,10 +99,10 @@
   | Email Address | No | (Required if not using API Key) The Email Address you used in **Step 3.1** |
   | Password | No | (Required if not using API Key) The Password you used in **Step 3.1** |
   | ServiceNow Username | Yes | The **User ID** you entered in **Step 2** |
-  | ServiceNow MID Server Name | No | The MID Server to use with this Integration or leave blank if not using a MID Server |
+  | ServiceNow MID Server Name | No | The MID Server to use with this App or leave blank if not using a MID Server |
   | Configure with CP4S? | Yes | Defaults to **No**. Should be changed to **Yes** if you are conencting to a Cloud Pak for Security instance |
   | CP4S Rest URL | No | (Required if configuring with CP4S) The rest URL of the CP4S instance. Usually this is `cases-rest.<host_name>` but sometimes it is a custom prefix. |
-  | ServiceNowAllowedTableNames | Yes | A CSV list of all the **Table Names** in ServiceNow IBM SOAR is allowed to integrate with. *Out-of-the-box this integration requires access to the `incident`, `sys_user` and `sys_user_group` tables.* For integrating with ServiceNow Security Incident Response (SIR) this integration requires `sn_si_incident` and `sn_si_task` |
+  | ServiceNowAllowedTableNames | Yes | A CSV list of all the **Table Names** in ServiceNow IBM SOAR is allowed to integrate with. *Out-of-the-box this app requires access to the `incident`, `sys_user` and `sys_user_group` tables.* For integrating with ServiceNow Security Incident Response (SIR) this app requires `sn_si_incident` and `sn_si_task` |
   | IBM SOAR Assignment Group Names | No | A CSV list of assignment groups that, upon assignment on a SIR incident, will automatically sync the security incident or task to SOAR |
   | Logging Verbosity | Yes | Defaults to **error**. Can be changed to **debug** if needed later. |
   | Logging Destination | Yes | Defaults to **db** (which will print any error logs to the Application Logs Table). Can be changed to **file** if needed later. |
@@ -109,7 +111,7 @@
 * **Close** the tab.
 ---
 
-## Step 5: *Download & Install fn_service_now Integration*
+## Step 5: *Download & Install fn_service_now App*
 You can run this app on either App Host (recommended) or an Integration Server. 
 
 ### Download & Install on App Host
@@ -208,10 +210,19 @@ Once **installed** and **validated:**
 * Click **Save**.
 ---
 
-## Step 8: (SIR) Add IBM SOAR tab to Security Incident UI
-> *Note: the integration does not currently fully support the "New UI" for SIR tables. We recommend usin the "Classic UI"*
+## Step 8: Security Incident Response (SIR) Configurations
+ServiceNow SecOps module offers the Security Incident Response (SIR) add-on. The IBM SOAR app is configured to work with the SIR tables, however, they require a few extra manual configurations.
 
-If integrating with ServiceNow Security Incident Response (SIR) related tables, you need to configure the Security Incident table:
+### Configure `ServiceNowAllowedTableNames` (SIR only)
+* In ServiceNow, look for the **IBM Security QRadar SOAR** menu in the navigation panel.
+ ![screenshot](./screenshots/8.png)
+* Click **Properties.** A new tab opens.
+  ![screenshot](./screenshots/11.png)
+
+### Add IBM SOAR tab to Security Incident UI (SIR only)
+> *Note: the app is fully supported only when using the Security Incident "Classic UI".*
+
+If integrating with SIR related tables, you need to configure the Security Incident table:
 * Open or create a new Security Incident.
 * Right click in the top of the form or click the hamburger bar then go to **Configure** > **Form Design**.
   ![screenshot](./screenshots/38.jpg)
@@ -222,10 +233,10 @@ If integrating with ServiceNow Security Incident Response (SIR) related tables, 
 * Click **Save**.
 ---
 
-## Step 9: (SIR) Sync to SOAR automatically on group assignment
-When integrating with ServiceNow Security Incident Response (SIR) tables, there is a parameter that can be set in the IBM Security QRadar SOAR Properties section for automatic escalation to SOAR on group assignment. This is most useful for Security Response Tasks but can also be used on the parent Security Incident table.
+## Sync to SOAR automatically on group assignment (SIR only)
+When integrating with SIR tables, there is a parameter that can be set in the IBM Security QRadar SOAR Properties section for automatic escalation to SOAR on group assignment. This is most useful for Security Response Tasks but can also be used on the parent Security Incident table.
 
-By default, this integration includes the "IBM SOAR Response Group" but that needs to be created.
+By default, this app includes the "IBM SOAR Response Group" but that needs to be created.
 * In ServiceNow, in the navigation panel, go to **Security Incidents** > **Groups**.
 * Create a new group.
   ![screenshot](./screenshots/36.jpg)
@@ -236,7 +247,7 @@ By default, this integration includes the "IBM SOAR Response Group" but that nee
 * Similarly to as in [Step 7](#step-7-give-your-servicenow-users-the-correct-role), give any user except the user that was created in Step 7 the role `sn_si.analyst` and add them to the response group you created above.
 ---
 
-## Step 10: *Test*
+## Step 9: *Test*
 * In ServiceNow, in the navigation panel, go to **IBM SOAR > Test Connection**. A **new tab** opens.
 * Click the blue **Test Connection** button and wait until you see a page banner.
 * The **page banner** informs you if your Test was successful or not and print any errors you may have.
