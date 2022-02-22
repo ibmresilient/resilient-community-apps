@@ -420,7 +420,7 @@ You can utilize the SNOW: Update Record function to send artifact values to SNOW
 1. Modify the pre-processing script to map desired artifact values to SNOW record fields using the `sn_update_fields` parameter of the "SNOW: Update Record" function.
     ```python
     inputs.sn_update_fields = dict_to_json_str({
-      "my_snow_column_name": artifact.<value> # example: artifact.ip would get the artifact's IP value
+      "my_snow_column_name": artifact.value # When the artifact type is IP Address the value will be the IP
     })
     ```
 1. Create a SOAR Rule to either manually or automatically trigger this new workflow.
@@ -961,7 +961,7 @@ inputs.sn_resilient_status = incident.plan_status
 
 # Security Incident Response Specific Customizations
 By default the severity of a SOAR incident/case is mapped to the `severity` field in ServiceNow. 
-This field is available in both the `incident` and `sn_si_incident` tables, however, in Security Incident (SIR) tables have another field labeled `business_criticality`. 
+This field is available in both the `incident` and `sn_si_incident` tables, however, Security Incident (SIR) tables have another field labeled `business_criticality`. 
 It is recommend after the install to customize your workflows in SOAR and SNOW to handle `business_criticality` rather than `severity` in SNOW. 
 Customize the "\[SIR\] SNOW Update Record on Severity Change" workflow and "SNOW: Create Record \[Incident\]". The "RES_WF_CreateIncident" workflow on SNOW should be customized as well. 
 See the [Customize ServiceNow App Guide](../customize_snow_guide) for more details.

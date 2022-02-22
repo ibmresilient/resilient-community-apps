@@ -1,4 +1,4 @@
-# IBM Security QRadar SOAR Integration for ServiceNow
+# IBM Security QRadar SOAR App for ServiceNow
 
 - [Release Notes](#release-notes)
 - [Overview](#overview)
@@ -19,7 +19,8 @@
 * Support added for ServiceNow Security Incident Response (SIR)
 * Support added for API Key authentication from ServiceNow to IBM SOAR
 * AppHost support for proxies
-* Verified on ServiceNow Rome release
+* App renamed to IBM Security QRadar SOAR App for ServiceNow
+* Verified on ServiceNow San Diego release
 
 ### v1.0.5
 * Verified on ServiceNow Quebec release
