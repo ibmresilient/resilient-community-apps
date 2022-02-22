@@ -97,6 +97,7 @@ class PollerComponent(ResilientComponent):
         for case in case_list:
             qradar_id = case["properties"]["qradar_id"]
             qradar_destination = case["properties"]["qradar_destination"]
+            case_lastUpdatedTime = case["properties"]["qr_offense_last_updated_time"]
 
             # Get configuration for server associated with the current case
             options = QRadarServers.qradar_label_test(qradar_destination, self.servers_list)
@@ -110,7 +111,14 @@ class PollerComponent(ResilientComponent):
                                          opts=self.opts, function_opts=options)
 
             offense_update = qradar_client.get_offense_last_updated_time(qradar_id)
-            self.soar_common._patch_case
+            offense_lastUpdatedTime = offense_update['content']['lastUpdatedTime']
+            if offense_lastUpdatedTime != case_lastUpdatedTime:
+                        payload = { "changes": [ { 
+                        "field": { "name": "qr_offense_last_updated_time" }, 
+                        "old_value": { "object": str(case_lastUpdatedTime) },
+                        "new_value": { "object": str(offense_lastUpdatedTime) }
+                    } ] }
+                # self.soar_common._patch_case
             pass
 
     def _get_last_poller_date(self, polling_lookback):
