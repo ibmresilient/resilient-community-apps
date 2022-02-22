@@ -54,7 +54,7 @@ def cli_authorize(oauth2, auth_url):
     print('To authorize a token, visit this url and follow the directions:')
     print("{}".format(auth_url))
     if sys.version_info[0] == 3:
-        auth_code = input("Enter redirected URL: ")
+        auth_code = input("Enter redirected URL: ") # nosec - Will fail bandit for python2 which uses raw_input.
     else:
         auth_code = raw_input("Enter redirected URL: ")
     params = parse_qs(urlparse(auth_code).query)
