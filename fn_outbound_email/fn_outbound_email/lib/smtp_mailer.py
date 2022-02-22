@@ -17,6 +17,7 @@ from resilient_circuits import ResilientComponent
 from resilient_lib import RequestsCommon
 from resilient_lib.components.integration_errors import IntegrationError
 from fn_outbound_email.lib.template_helper import TemplateHelper
+from fn_outbound_email.lib.oauth2 import OAuth2
 
 log = logging.getLogger(__name__)
 
@@ -52,15 +53,10 @@ class SendSMTPEmail(ResilientComponent):
         self.smtp_user = self.smtp_config_section.get("smtp_user")
         # Basic authentication property
         self.smtp_password = self.smtp_config_section.get("smtp_password")
-        # OAuth2 authentication properties
-        self.refresh_token = self.smtp_config_section.get("refresh_token")
+        # OAuth2 authentication using OAuth2 class
         self.client_id = self.smtp_config_section.get("client_id")
-        self.client_secret = self.smtp_config_section.get("client_secret")
-        self.tenant_id = self.smtp_config_section.get("tenant_id")
-        self.token_url = self.smtp_config_section.get("token_url")
-        if self.tenant_id:
-            self.token_url = self.token_url.format(tenant_id=self.tenant_id)
-        self.scope = self.smtp_config_section.get("scope")
+        if self.client_id:
+            self.oauth2 = OAuth2(opts)
 
         self.smtp_conn_timeout = int(self.smtp_config_section.get("smtp_conn_timeout", SMTP_DEFAULT_CONN_TIMEOUT))
         self.options = opts.get(CONFIG_DATA_SECTION, {})
@@ -71,8 +67,8 @@ class SendSMTPEmail(ResilientComponent):
         self.rc = RequestsCommon(opts=opts, function_opts=opts.get(CONFIG_DATA_SECTION, {}))
         if self.client_id:
             # Using OAuth2 authentication.
-            self.get_oauth2_token()
-            self.generate_oauth2_string()
+            self.oauth2.refresh_token()
+            self.oauth2.generate_oauth2_string()
 
     def send(self, body_html="", body_text=""):
         if not self.opts:
@@ -156,8 +152,7 @@ class SendSMTPEmail(ResilientComponent):
                 # Using OAuth2 authentication.
                 smtp_connection.ehlo()
                 log.info("Authenticating with SMTP server...")
-                smtp_connection.docmd('AUTH', 'XOAUTH2 ' + base64.b64encode(bytes(self.oauth2_string, "utf-8"))
-                                      .decode("utf-8"))
+                smtp_connection.docmd('AUTH', 'XOAUTH2 ' + base64.b64encode(bytes(self.oauth2.oauth2_string, "utf-8")).decode("utf-8"))
 
             log.info("Sending mail")
             smtp_connection.sendmail(self.from_address,
@@ -214,54 +209,7 @@ class SendSMTPEmail(ResilientComponent):
         template = self.jinja_env.from_string(template_string)
         return template.render(incident=incident_data, mail=mail_data)
 
-    def get_oauth2_token(self):
-        """"Get a new OAuth2 token.
-        If a refresh token is defined run the refresh_token flow else
-        use client_credentials flow.
-
-        Args:
-            None
-        Returns:
-            Set OAuth2 access token attribute [str]
-        Raises:
-            IntegrationError: [description]
-        """
-        url = self.token_url
-
-        post_data = {
-            # Use refresh token to renew access token.
-            "client_id": self.client_id,
-            "scope": self.scope,
-            "client_secret": self.client_secret,
-            "refresh_token": self.refresh_token,
-            "grant_type": "refresh_token"
-        }
-
-        result = self.rc.execute_call_v2("POST", url, data=post_data)
-        r_json = result.json()
-
-        if "access_token" in r_json:
-            self.oauth2_token = r_json['access_token']
-            return True
-
-        msg = u"Unable to authenticate: Error: {}\nDescription: {}"\
-            .format(r_json.get("error"), r_json.get("error_description"))
-        raise IntegrationError(msg)
-
-    def generate_oauth2_string(self):
-        """Generate an OAuth2 authentication string.
-
-        Args:
-            None
-        Returns:
-          Sets the string for the OAuth2 mechanism.
-        """
-        auth_string = "user={0}\x01auth=Bearer {1}\x01\x01".format(self.smtp_user, self.oauth2_token)
-
-        self.oauth2_string = auth_string
-
 class SimpleSendEmailException(Exception):
     """Exception for Send Email errors"""
     def __init__(self, message):
         log.error("SimpleSendEmailException %s", message)
-

@@ -14,29 +14,41 @@ def config_section_data():
     return u"""[fn_outbound_email]
 # SMTP SERVER (IP ADDRESS or FQDN)
 smtp_server=xxx.xxx.xxx.xxx
-#Blank for initial selftest, required for TLS
+#Smtp User required for TLS and OAuth2
 smtp_user=
 
 ## OAuth2 authentication settings
+# Leave OAuth2 settings blank or commented out if using Basic Authentication.
+# For common email services from Google amd Microsoft Outlook 365 use the following values: 
+# Gmail: scope=https://mail.google.com/
+# Outlook365: scope=offline_access https://outlook.office365.com/SMTP.Send
 scope=
 client_id=
 client_secret=
-# Note that the token_url below, for some applications e.g. using Microsoft, contains a placeholder 
-# {tenant} for the tenant ID.
+# For common email services from Google amd Microsoft Outlook 365 use the following values: 
+# Gmail: token_url=https://accounts.google.com/o/oauth2/token
+# Outlook365: token_url=https://login.microsoftonline.com/{tenant_id}/oauth2/v2.0/token
+# Note that the token_url, for some applications e.g. using Microsoft, contains a placeholder 
+# {tenant_id} for the tenant ID.
 # Do not place the tenant id in the place holder as the integration will do this at run time.
-# e.g. token_url=https://login.microsoftonline.com/{tenant_id}/oauth2/V2.0/token and 
-# tenant_id=1234567a-abc8-90d1-2efa3-123456789abcd
+# e.g. tenant_id=1234567a-abc8-90d1-2efa3-123456789abcd
 # Do not place '/' at the end of the url strings.
 #
 token_url=
-# Optional setting: A seperate value for the tenant_id parameter see {tenant_id} placeholder above.
+# The auth_url is used in the oauth2_token utility.
+# For common email services from Google amd Microsoft Outlook 365 use the following values: 
+# Gmail: https://accounts.google.com/o/oauth2/auth
+# Outlook365: https://login.microsoftonline.com/{tenant_id}/oauth2/v2.0/authorize
+auth_url=
+# Optional setting: A separate value for the tenant_id parameter see {tenant_id} placeholder above.
 tenant_id=
-# Optional setting: Certain applications may require a refresh_token.
+# Applications require a refresh_token to allow access tokens to be renewed.
 refresh_token=
+## End of OAuth2 authentication settings
 
-##Basic Authentication setting
-#Blank for initial selftest, required for TLS in Basic Authentication mode.
+## Basic Authentication settings
 smtp_password=
+## End of Basic Authentication settings
 
 #If smtp_user is not an email address then from_email_address should equal the email address
 from_email_address=
