@@ -7,7 +7,6 @@
 import datetime
 import functools
 import logging
-import pytz
 from threading import Thread, Event
 import traceback
 from resilient_circuits import ResilientComponent
@@ -22,8 +21,6 @@ TICKET_ID_FIELDNAME = "sdlp_incident_id"
 DEFAULT_CREATE_DLP_CASE = "templates/dlp_create_case_template.jinja"
 DEFAULT_SOAR_CLOSE_CASE = "templates/dlp_close_case_template.jinja"
 DEFAULT_SOAR_UPDATE_CASE = "templates/dlp_update_case_template.jinja"
-
-GMT = "Etc/GMT"
 
 DEFAULT_POLLER_SECONDS = 600
 
@@ -76,7 +73,7 @@ class SymantecDLPPollerComponent(ResilientComponent):
         self.options = opts.get(PACKAGE_NAME, {})
 
         # Validate required fields in app.config are set
-        validate_fields(["sdlp_host", "sdlp_username", "sdlp_password"], self.options)
+        validate_fields(["sdlp_host", "sdlp_username", "sdlp_password", "sdlp_saved_report_id"], self.options)
 
         if not self._init_env(opts, self.options):
             LOG.info(u"Symantec DLP poller interval is not configured.  Automated escalation is disabled.")
@@ -116,17 +113,19 @@ class SymantecDLPPollerComponent(ResilientComponent):
     def run(self, last_poller_time=None):
         """[Process to query for changes in Symantec DLP incidents and the corresponding update SOAR incident]
            The steps taken are to
-           1) query SOAR for all open incidents associated with Symantec DLP
+           1) query SOAR for all open cases associated with Symantec DLP
            2) query Symantec DLP incidents for changes based on these incidents
-           3) determine SOAR actions to take: update incident or close
+           3) determine SOAR actions to take: update or close case
         Args:
             last_poller_time ([int]): [time in milliseconds when the last poller ran]
         """
-        # get all open Symantec DLP linked incidents
+        # Get all open Symantec DLP incidents matching filter from saved report in DLP.
         sdlp_incident_list = self.sdlp_env.get_sdlp_incidents_in_save_report(self.sdlp_env.saved_report_id, last_poller_time)
  
+        # Get the list of custom attributes in DLP (similar to custom fields in SOAR)
         sdlp_custom_attributes = self.sdlp_env.get_sdlp_incident_custom_attributes()
 
+        # Give a warning if the ibm_soar_case_id custom attribute is not created in DLP by the user.
         if 'ibm_soar_case_id' not in sdlp_custom_attributes:
             LOG.warning("The DLP Custom Attribute 'ibm_soar_case_id' was not found on your DLP Instance. This may result in duplicate Incidents found in IBM SOAR as no filtering will be done on the DLP Side")
 
@@ -134,10 +133,10 @@ class SymantecDLPPollerComponent(ResilientComponent):
             soar_case = self.res_common.find_incident(sdlp_incident_id)
 
             if soar_case is None:
-                # Create a new incident
+                # Create a new case
                 sdlp_incident_payload = self.sdlp_env.get_sdlp_incident_payload(sdlp_incident_id)
                 incident_payload = self.jinja_env.make_payload_from_template(
-                                                    self.options.get("create_incident_template"),
+                                                    self.options.get("create_case_template"),
                                                     DEFAULT_CREATE_DLP_CASE,
                                                     sdlp_incident_payload)
                 soar_case = self.res_common.create_incident(incident_payload)
@@ -145,10 +144,8 @@ class SymantecDLPPollerComponent(ResilientComponent):
 
                 # Send ibm_soar_case_id and ibm_soar_case_url custom attributes in DLP to the DLP incident
                 # so that it has links back to the SOAR case.
-                host = self.opts.get('host')
-                port = self.opts.get('port')
-
-                soar_case_url = build_incident_url(build_resilient_url(host, port), soar_case_id)
+                soar_case_url = build_incident_url(build_resilient_url(self.opts.get('host'), self.opts.get('port')),
+                                                   soar_case_id)
                 status = self.sdlp_env.patch_sdlp_incident_custom_attribute(sdlp_incident_id,
                                                                             soar_case_id,
                                                                             soar_case_url)
@@ -161,7 +158,6 @@ class SymantecDLPPollerComponent(ResilientComponent):
 
                 if sdlp_incident_status_name in ['Resolved', 'Dismissed']:
                     # Close the case in SOAR
-
                     incident_close_payload = self.jinja_env.make_payload_from_template(
                                                     self.options.get("close_case_template"),
                                                     DEFAULT_SOAR_CLOSE_CASE,
@@ -170,7 +166,7 @@ class SymantecDLPPollerComponent(ResilientComponent):
                     _close_resilient_incident = self.res_common.update_incident(
                                                     soar_case_id,
                                                     incident_close_payload)
-                    msg = "Closed SOAR incident {} from Symantec DLP incident {}".format(soar_case_id, sdlp_incident_id)
+                    msg = "Closed SOAR incident {0} from Symantec DLP incident {1}".format(soar_case_id, sdlp_incident_id)
                     LOG.info(msg)
                     self.res_common.create_incident_comment(soar_case_id, None, msg)                
                 
@@ -202,7 +198,7 @@ class SymantecDLPPollerComponent(ResilientComponent):
         Returns:
             [datetime]: [datetime to use for last poller run time]
         """
-        return self._get_timestamp() - datetime.timedelta(minutes=polling_lookback)
+        return self._get_timestamp() - datetime.timedelta(days=polling_lookback)
 
 
     def _get_timestamp(self):

@@ -21,8 +21,8 @@ def codegen_reload_data():
     return {
         "package": u"fn_symantec_dlp",
         "message_destinations": [u"fn_symantec_dlp"],
-        "functions": [u"fn_symantec_dlp_update_incident", u"symantec_dlp_get_incident_details", u"symantec_dlp_send_note_to_dlp_incident", u"symantec_dlp_update_incident_status", u"symantec_dlp_upload_binaries"],
-        "workflows": [u"sdlp_send_soar_note_to_dlp", u"sdlp_set_incident_status", u"sdlp_update_incident_status", u"sdlp_upload_binaries", u"sdlp_write_incident_details_to_note"],
+        "functions": [u"symantec_dlp_get_incident_details", u"symantec_dlp_send_note_to_dlp_incident", u"symantec_dlp_update_incident_status", u"symantec_dlp_upload_binaries"],
+        "workflows": [u"sdlp_send_soar_note_to_dlp", u"sdlp_update_incident_status", u"sdlp_upload_binaries", u"sdlp_write_incident_details_to_note"],
         "actions": [u"Symantec DLP: Send SOAR Note to DLP", u"Symantec DLP: Update DLP Incident Status", u"Symantec DLP: Upload Binaries", u"Symantec DLP: Upload Binaries as Artifact", u"Symantec DLP: Write DLP Incident Details to Note"],
         "incident_fields": [u"sdlp_incident_id", u"sdlp_incident_status", u"sdlp_incident_url"],
         "incident_artifact_types": [],
@@ -30,6 +30,7 @@ def codegen_reload_data():
         "datatables": [],
         "automatic_tasks": [],
         "scripts": [u"Convert JSON to rich text v1.1"],
+        "playbooks": []
     }
 
 
@@ -38,20 +39,18 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM Resilient Platform Version: 40.2.81
+    IBM SOAR Platform Version: 40.2.81
 
     Contents:
     - Message Destinations:
         - fn_symantec_dlp
     - Functions:
-        - fn_symantec_dlp_update_incident
         - symantec_dlp_get_incident_details
         - symantec_dlp_send_note_to_dlp_incident
         - symantec_dlp_update_incident_status
         - symantec_dlp_upload_binaries
     - Workflows:
         - sdlp_send_soar_note_to_dlp
-        - sdlp_set_incident_status
         - sdlp_update_incident_status
         - sdlp_upload_binaries
         - sdlp_write_incident_details_to_note

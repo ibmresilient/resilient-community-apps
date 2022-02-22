@@ -23,7 +23,7 @@ def selftest_function(opts):
     options = opts.get("fn_symantec_dlp", {})
 
     # Validate required fields in app.config are set
-    validate_fields(["sdlp_host", "sdlp_username", "sdlp_password", "sdlp_savedreportid"], options)
+    validate_fields(["sdlp_host", "sdlp_username", "sdlp_password", "sdlp_saved_report_id"], options)
 
     sdlp_client = SymantecDLPCommon(RequestsCommon(opts, options), options)
 

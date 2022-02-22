@@ -3,7 +3,7 @@
 """AppFunction implementation"""
 import logging
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from resilient_lib import IntegrationError, validate_fields
+from resilient_lib import IntegrationError
 from fn_symantec_dlp.lib.dlp_common import SymantecDLPCommon
 
 PACKAGE_NAME = "fn_symantec_dlp"

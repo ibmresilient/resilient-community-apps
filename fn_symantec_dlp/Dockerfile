@@ -36,8 +36,6 @@ RUN pip install /tmp/packages/${APPLICATION}-*.tar.gz
 #COPY /path/to/extra_package /tmp/packages/.
 #RUN pip install /tmp/packages/<extra_package>*.tar.gz
 
-# uncomment to expose port only if a custom threat feed
-#EXPOSE 9000
 ## ---- end section for changes ----
 
 # set up configuration and log locations using /etc and /var/log, the conventional locations for config and logs

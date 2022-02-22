@@ -5,7 +5,6 @@
 """AppFunction implementation"""
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from resilient_lib import IntegrationError, validate_fields
 from resilient import get_client
 from fn_symantec_dlp.lib.resilient_common import ResilientCommon
 from fn_symantec_dlp.lib.dlp_common import SymantecDLPCommon

@@ -131,3 +131,4 @@ def jinja_resilient_trimlist(org_list):
     if not isinstance(org_list, list):
         return org_list
     return [element.strip() for element in org_list]
+    

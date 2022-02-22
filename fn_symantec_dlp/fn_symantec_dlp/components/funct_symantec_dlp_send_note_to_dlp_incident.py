@@ -3,7 +3,7 @@
 """AppFunction implementation"""
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from resilient_lib import IntegrationError, validate_fields, clean_html
+from resilient_lib import IntegrationError, clean_html
 from fn_symantec_dlp.lib.constants import FROM_SYMANTEC_DLP_COMMENT_HDR, SENT_TO_SYMANTEC_DLP_HDR
 from fn_symantec_dlp.lib.dlp_common import SymantecDLPCommon
 
