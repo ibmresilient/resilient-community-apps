@@ -20,7 +20,7 @@ sdlp_username=<SDLP Username>
 # Password for DLP account
 sdlp_password=<SDLP Password>
 # The Saved Report ID used to query for Incidents, must be set greater than zero otherwise the integration will fail
-sdlp_savedreportid=0
+sdlp_saved_report_id=0
 # Poller interval in seconds, comment out or set to 0 to disable poller
 polling_interval=60
 # Poller lookback time first time, in days
