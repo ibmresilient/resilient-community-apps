@@ -32,7 +32,7 @@ def poller(named_poller_interval, named_last_poller_time):
         # decorator for running a function forever, passing the ms timestamp of
         #  when the last poller run to the function it's calling
         @functools.wraps(func)
-        def wrapped(self):
+        def wrapped(self, *args):
             last_poller_time = getattr(self, named_last_poller_time)
             exit_event = Event()
 
@@ -41,7 +41,7 @@ def poller(named_poller_interval, named_last_poller_time):
                     LOG.info(u"%s polling start.", PACKAGE_NAME)
                     poller_start = datetime.datetime.now()
                     # function execution with the last poller time in ms
-                    func(self, last_poller_time=int(last_poller_time.timestamp()*1000))
+                    func(self, *args, last_poller_time=int(last_poller_time.timestamp()*1000))
 
                 except Exception as err:
                     LOG.error(str(err))
@@ -111,7 +111,7 @@ class SymantecDLPPollerComponent(ResilientComponent):
         return True
 
     @poller('polling_interval', 'last_poller_time')
-    def run(self, last_poller_time=None):
+    def run(self, *args, **kwargs):
         """[Process to query for changes in Symantec DLP incidents and the corresponding update SOAR incident]
            The steps taken are to
            1) query SOAR for all open cases associated with Symantec DLP
@@ -121,7 +121,7 @@ class SymantecDLPPollerComponent(ResilientComponent):
             last_poller_time ([int]): [time in milliseconds when the last poller ran]
         """
         # Get all open Symantec DLP incidents matching filter from saved report in DLP.
-        sdlp_incident_list = self.sdlp_env.get_sdlp_incidents_in_save_report(self.sdlp_env.saved_report_id, last_poller_time)
+        sdlp_incident_list = self.sdlp_env.get_sdlp_incidents_in_save_report(self.sdlp_env.saved_report_id, kwargs['last_poller_time'])
  
         # Get the list of custom attributes in DLP (similar to custom fields in SOAR)
         sdlp_custom_attributes = self.sdlp_env.get_sdlp_incident_custom_attributes()
