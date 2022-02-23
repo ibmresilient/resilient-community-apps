@@ -12,7 +12,11 @@ INCIDENT1 = {
     'staticIncidentDetails': {  
         'incidentId': 444,
         'infoMap': { 'creationDate': '2022-02-08T18:58:29',
-                     'detectionDate': '2022-02-08T18:58:37'
+                     'detectionDate': '2022-02-08T18:58:37',
+                     'policyGroupId': 5,
+                     'policyId': 16,
+                     'policyGroupName': 'Customer Data Protection',
+                     'policyName': 'Customer Data Protection'
                     }
     },
     'editableIncidentDetails': { 
@@ -37,6 +41,10 @@ RESULT1 = {
     'incident_type_ids': [16],
     'properties': { 'sdlp_incident_id': 444,
                     'sdlp_incident_status': 'incident.status.New',
+                    'sdlp_policy_group_id': 5,
+                    'sdlp_policy_id': 16,
+                    'sdlp_policy_group_name': 'Customer Data Protection',
+                    'sdlp_policy_name': 'Customer Data Protection',
                     'sdlp_incident_url': {'format': "html",
                                           'content': "<a target='blank' href='https://server/#incidents/2444'>Symantec DLP Incident</a>"
                                          }
