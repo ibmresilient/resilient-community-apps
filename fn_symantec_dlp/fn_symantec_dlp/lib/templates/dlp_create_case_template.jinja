@@ -11,7 +11,11 @@
     "properties": {
         "sdlp_incident_id": {{ staticIncidentDetails.incidentId }},
         "sdlp_incident_status": "{{ editableIncidentDetails.infoMap.incidentStatusName }}",
-        "sdlp_incident_url": {"format" : "html", "content" : "<a target='blank' href='{{ sdlp_incident_url }}'>Symantec DLP Incident</a>"}
+        "sdlp_incident_url": {"format" : "html", "content" : "<a target='blank' href='{{ sdlp_incident_url }}'>Symantec DLP Incident</a>"},
+        "sdlp_policy_name": "{{ staticIncidentDetails.infoMap.policyName }}",
+        "sdlp_policy_id": {{ staticIncidentDetails.infoMap.policyId }},
+        "sdlp_policy_group_id": {{ staticIncidentDetails.infoMap.policyGroupId }},
+        "sdlp_policy_group_name": "{{ staticIncidentDetails.infoMap.policyGroupName }}"
     },
     {# Artifacts which we will try to pull out of the Incident #}
     "artifacts": [
@@ -77,7 +81,7 @@
         {    
             "text": {
                 "format": "html",
-                "content": "{{note_text}}"
+                "content": "{{note_text|replace('\\', '\\\\')|replace('"', '\\"')}}"
             }        
         }
         {{ "," if not loop.last else "" }}
