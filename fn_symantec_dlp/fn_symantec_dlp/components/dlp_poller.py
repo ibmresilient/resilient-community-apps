@@ -16,13 +16,9 @@ from fn_symantec_dlp.lib.jinja_common import JinjaEnvironment
 from fn_symantec_dlp.lib.resilient_common import ResilientCommon
 from fn_symantec_dlp.lib.dlp_common import SymantecDLPCommon, PACKAGE_NAME
 
-TICKET_ID_FIELDNAME = "sdlp_incident_id"
-
 DEFAULT_CREATE_DLP_CASE = "templates/dlp_create_case_template.jinja"
 DEFAULT_SOAR_CLOSE_CASE = "templates/dlp_close_case_template.jinja"
 DEFAULT_SOAR_UPDATE_CASE = "templates/dlp_update_case_template.jinja"
-
-DEFAULT_POLLER_SECONDS = 600
 
 LOG = logging.getLogger(__name__)
 

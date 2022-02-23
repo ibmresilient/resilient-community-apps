@@ -77,14 +77,16 @@ class SymantecDLPCommon():
             last_poller_datetime_string = readable_datetime(last_poller_time, milliseconds=True, rtn_format='%Y-%m-%dT%H:%M:%S')
             time_filter = { 'filterType': 'localDateTime', 
                             'operandOne': {'name': 'detectionDate'}, 
-                            'operator': 'GTE', 'operandTwoValues': [ last_poller_datetime_string ]}
-            r_json['filter'].update(time_filter)
-
+                            'operator': 'GTE', 
+                            'operandTwoValues': [ last_poller_datetime_string ]}
+            r_json['filter']['filters'].append(time_filter)
+        
         r_json['select'] = [ {'name': 'incidentID'}, {'name': 'detectionDate'} ]
         r_json['page'] = { 'type': "offset",
                            'pageNumber': page_number,
                            'pageSize': SDLP_DEFAULT_PAGE_SIZE
         }
+        LOG.debug(r_json)
 
         not_complete = True
         dlp_incidents = []
