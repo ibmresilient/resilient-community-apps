@@ -444,6 +444,7 @@ Uses the `/close_record` custom endpoint in ServiceNow to change the state of a 
 | `sn_close_work_note` | `String` | Yes | `"This record's state has be changed to 'Resolved' by IBM SOAR"`  | If defined this text is added as a Work Note to the ServiceNow Record |
 
 >**NOTE:** 
+> * If using the **Security Incident Response** table, the initial state of the created ServiceNow record is the ``Analysis`` state. This state must be changed to the ``Contain`` or other state to allow the ServiceNow Record to be closed otherwise this ``Close`` action will be ignored.
 > * To see your record_state and close_codes value in ServiceNow go to **System Definition** > **Dictionary** > **Table Name** > **Incident** > **Column Name** > **incident state/close_code** and see their label and values.
 > * It is the value that we send from SOAR to ServiceNow.
 >
