@@ -98,6 +98,11 @@ class SymantecDLPPollerComponent(ResilientComponent):
         LOG.info(u"Symantec DLP poller initiated, polling interval %s", self.polling_interval)
         self.last_poller_time = self._get_last_poller_date(int(options.get('polling_lookback', 0)))
 
+        # collect the override templates to use when creating, updating and closing cases
+        self.create_case_template = options.get("create_case_template")
+        self.update_case_template = options.get("update_case_template")
+        self.close_case_template = options.get("close_case_template")
+
         rest_client = get_client(opts)
         self.res_common = ResilientCommon(rest_client)
 

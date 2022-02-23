@@ -74,17 +74,13 @@
     ],
     "comments": [
         {%- for note_text in notes -%}
-        {# If there is more than 1 note we aren't dealing with the very first note, add a comma #}
-        {%- if notes|length > 1 -%}
-        {%- if note_text != notes|first -%}
-        {{- comma() }}
-        {%- endif -%}{%- endif -%}
         {    
             "text": {
                 "format": "html",
                 "content": "{{note_text}}"
             }        
         }
+        {{ "," if not loop.last else "" }}
         {%- endfor -%}
     ]
 }

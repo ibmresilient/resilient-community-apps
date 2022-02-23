@@ -8,7 +8,7 @@ import base64
 import shutil
 import traceback
 
-from resilient_lib import IntegrationError, validate_fields, write_to_tmp_file, readable_datetime
+from resilient_lib import IntegrationError, validate_fields, write_to_tmp_file, readable_datetime, str_to_bool
 from fn_symantec_dlp.lib.constants import FROM_SYMANTEC_DLP_COMMENT_HDR
 from .jinja_common import JinjaEnvironment
 
@@ -29,10 +29,8 @@ class SymantecDLPCommon():
         self.username = options.get("sdlp_username")
         self.password = options.get("sdlp_password")
         self.base_url = u"https://{0}/ProtectManager/webservices/{1}".format(self.server, self.api_version)
-
         self.headers = self._make_headers(self.username, self.password)
-
-        self.verify = False if self.options.get('cafile').lower() == "false" else self.options.get('cafile')
+        self.verify = str_to_bool(options.get("cafile", "false"))
         self.saved_report_id = options.get("sdlp_saved_report_id")
 
         self.jina_env = JinjaEnvironment()
@@ -257,6 +255,8 @@ class SymantecDLPCommon():
                             detail=history_item['incidentHistoryDetail']
                         )
                 notes.append(note)
+        # Reverse the order so older notes are added first
+        notes.reverse()
         return notes
 
     def send_note_to_sdlp(self, incident_id, note_text):
