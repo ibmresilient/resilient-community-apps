@@ -2,10 +2,10 @@
     {%- set comma = joiner(",") -%}
     "name": "Symantec DLP Incident Id {{ staticIncidentDetails.incidentId }}",
     "description": "An incident imported using the Symantec DLP Integration",
-    "discovered_date": {{ staticIncidentDetails.infoMap.creationDate|resilient_datetimeformat }},
-    "start_date": {{ staticIncidentDetails.infoMap.detectionDate|resilient_datetimeformat }},
+    "discovered_date": {{ staticIncidentDetails.infoMap.creationDate|soar_datetimeformat }},
+    "start_date": {{ staticIncidentDetails.infoMap.detectionDate|soar_datetimeformat }},
     "incident_type_ids": [16],
-    "severity_code": "{{ editableIncidentDetails.infoMap.severityId|string|resilient_substitute('{"1": "High", "2": "Medium", "3": "Low", "4": "Low"}')}}",
+    "severity_code": "{{ editableIncidentDetails.infoMap.severityId|string|soar_substitute('{"1": "High", "2": "Medium", "3": "Low", "4": "Low"}')}}",
 
     {#  Custom properties for DLP Attributes #}
     "properties": {

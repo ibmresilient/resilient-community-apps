@@ -16,18 +16,18 @@ class JinjaEnvironment():
         # Add the timestamp-parse function to the global JINJA environment
         env = environment()
         env.globals.update({
-            "resilient_datetimeformat": jinja_resilient_datetimeformat,
-            "resilient_display_datetimeformat": readable_datetime,
-            "resilient_substitute": jinja_resilient_substitute,
-            "resilient_splitpart": jinja_resilient_splitpart,
-            "resilient_trimlist": jinja_resilient_trimlist
+            "soar_datetimeformat": jinja_soar_datetimeformat,
+            "soar_display_datetimeformat": readable_datetime,
+            "soar_substitute": jinja_soar_substitute,
+            "soar_splitpart": jinja_soar_splitpart,
+            "soar_trimlist": jinja_soar_trimlist
             })
         env.filters.update({
-            "resilient_datetimeformat": jinja_resilient_datetimeformat,
-            "resilient_display_datetimeformat": readable_datetime,
-            "resilient_substitute": jinja_resilient_substitute,
-            "resilient_splitpart": jinja_resilient_splitpart,
-            "resilient_trimlist": jinja_resilient_trimlist
+            "soar_datetimeformat": jinja_soar_datetimeformat,
+            "soar_display_datetimeformat": readable_datetime,
+            "soar_substitute": jinja_soar_substitute,
+            "soar_splitpart": jinja_soar_splitpart,
+            "soar_trimlist": jinja_soar_trimlist
             })
 
     def make_payload_from_template(self, template_override, default_template, payload):
@@ -74,7 +74,7 @@ class JinjaEnvironment():
         with open(template_file_path, "r") as definition:
             return definition.read()
 
-def jinja_resilient_datetimeformat(value, date_format="%Y-%m-%dT%H:%M:%S"):
+def jinja_soar_datetimeformat(value, date_format="%Y-%m-%dT%H:%M:%S"):
     """custom jinja filter to convert UTC dates to epoch format
     Args:
         value ([str]): [jinja provided field value]
@@ -88,7 +88,7 @@ def jinja_resilient_datetimeformat(value, date_format="%Y-%m-%dT%H:%M:%S"):
     utc_time = time.strptime(value[:value.rfind('.')], date_format)
     return calendar.timegm(utc_time)*1000
 
-def jinja_resilient_substitute(value, json_str):
+def jinja_soar_substitute(value, json_str):
     """jinja custom filter to replace values based on a lookup dictionary
     Args:
         value ([str]): [original value]
@@ -106,7 +106,7 @@ def jinja_resilient_substitute(value, json_str):
 
     return value
 
-def jinja_resilient_splitpart (value, index, split_chars=' - '):
+def jinja_soar_splitpart (value, index, split_chars=' - '):
     """[split a string and return the index]
     Args:
         value ([str]): [string to split]
@@ -121,7 +121,7 @@ def jinja_resilient_splitpart (value, index, split_chars=' - '):
 
     return value
 
-def jinja_resilient_trimlist(org_list):
+def jinja_soar_trimlist(org_list):
     """[trim whitespace from elements in a list]
     Args:
         list ([type]): [description]
