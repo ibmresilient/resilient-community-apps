@@ -22,7 +22,7 @@ setup(
     name='fn_symantec_dlp',
     display_name="Symantec DLP",
     version='2.0.0',
-    license='ILAN',
+    license='MIT',
     author='IBM QRadar SOAR',
     author_email='',
     url='https://ibm.com/mysupport',
