@@ -18,18 +18,20 @@
 
 ### Pre-Processing Script
 ```python
-None
+inputs.extrahop_limit = rule.properties.extrahop_limit
+
 ```
 
 ### Post-Processing Script
 ```python
-##  ExtraHop - wf_extrahop_rx_get_detections post processing script ##
+##  ExtraHop - wf_extrahop_rx_search_detections post processing script ##
 #  Globals
-FN_NAME = "funct_extrahop_rx_get_detections"
-WF_NAME = "Example: Extrahop revealx get detections"
+FN_NAME = "funct_extrahop_rx_search_detections"
+WF_NAME = "Example: Extrahop revealx search detections"
 CONTENT = results.content
 INPUTS = results.inputs
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
+DATA_TABLE = "extrahop_detections"
 DATA_TBL_FIELDS = ["appliance_id", "assignee", "categories", "det_description", "end_time", "det_id", "is_user_created",
                    "mitre_tactics", "mitre_techniques", "participants", "properties", "resolution", "risk_score",
                    "start_time", "status", "ticket_id", "ticket_url", "title", "type", "update_time"]
@@ -38,21 +40,25 @@ def main():
     note_text = u''
     if CONTENT:
         dets = CONTENT.result
-        note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: There were <b>{1}</b> Activitymaps returned for SOAR " \
+        note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: There were <b>{1}</b> Detections returned for SOAR " \
                     u"function <b>{2}</b>.".format(WF_NAME, len(dets), FN_NAME)
+        note_text += u"<br><b>{}</b>".format(dets)
         if dets:
             for det in dets:
-                newrow = incident.addRow("extrahops_detections")
+                newrow = incident.addRow(DATA_TABLE)
                 newrow.query_execution_date = QUERY_EXECUTION_DATE
                 for f1 in DATA_TBL_FIELDS:
                     f2 = f1
                     if f1.startswith("det_"):
-                        f2 = f1.split('_', 1)[1]
+                      f2 = f1.split('_', 1)[1]
                     if det[f1] is None:
-                            newrow[f1] = det[f2]
+                        newrow[f1] = det[f2]
                     if isinstance(det[f1], list):
-                        newrow[f1] = "{}".format(", ".join(det[f2]))
-                    elif isinstance(det[f1], bool):
+                      if f1 in ["participants", "mitre_tactics", "mitre_techniques"]:
+                          newrow[f1] = "{}".format(det[f2])
+                      else:
+                          newrow[f1] = "{}".format(", ".join(det[f2]))
+                    elif isinstance(det[f2], (bool, dict)):
                         newrow[f1] = str(det[f2])
                     else:
                         newrow[f1] = "{}".format(det[f2])
@@ -60,13 +66,12 @@ def main():
 
     else:
         note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
-                     u"to get detections." \
+                     u"to search detections." \
             .format(WF_NAME, FN_NAME)
 
     incident.addNote(helper.createRichText(note_text))
 
 main()
-
 
 ```
 

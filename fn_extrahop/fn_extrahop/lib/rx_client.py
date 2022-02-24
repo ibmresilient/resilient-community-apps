@@ -49,7 +49,7 @@ class RxClient():
             "token":             "/".join([self.host_url, "oauth2/token"]),
             "devices":           "/".join([self.api_base_url, "devices/{}"]),
             "search_devices":    "/".join([self.api_base_url, "devices/search"]),
-            "detections":        "/".join([self.api_base_url, "detections/{}"]),
+            "detections":        "/".join([self.api_base_url, "detections"]),
             "search_detections": "/".join([self.api_base_url, "detections/search"]),
             "tags":              "/".join([self.api_base_url, "tags"]),
             "create_tag":        "/".join([self.api_base_url, "tags"]),
@@ -159,13 +159,13 @@ class RxClient():
         :return Result in json format.
         """
         # Set default uri
-        uri = self._endpoints["detections"].format('')
+        uri = self._endpoints["detections"]
         params = {}
-
-        params["limit"] = int(limit) if limit else 0
+        if limit:
+            params["limit"] = int(limit)
 
         if detection_id is not None:
-            uri = self._endpoints["detections"].format(detection_id)
+            uri = uri + "/{}".format(detection_id)
 
         r = self.rc.execute_call_v2("get", uri, headers=self._headers, params=params, verify=self.verify)
 
@@ -206,12 +206,16 @@ class RxClient():
             except ValueError:
                 raise ValueError("The sort parameter is not valid json content: '{}'".format(sort))
             data["sort"] = sort_data
-
-        data["from"] = active_from if active_from else 0
-        data["until"] = active_until if active_until else 0
-        data["limit"] = int(limit) if limit else 0
-        data["offset"] = int(offset) if offset else 0
-        data["update_time"] = int(update_time) if update_time else 0
+        if active_from:
+            data["from"] = active_from
+        if active_until:
+            data["until"] = active_until
+        if limit:
+            data["limit"] = int(limit)
+        if offset:
+            data["offset"] = int(offset)
+        if update_time:
+            data["update_time"] = int(update_time)
 
         r = self.rc.execute_call_v2("post", uri, headers=self._headers, data=json.dumps(data), verify=self.verify)
 

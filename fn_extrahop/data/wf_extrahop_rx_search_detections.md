@@ -45,6 +45,7 @@ WF_NAME = "Example: Extrahop revealx search detections"
 CONTENT = results.content
 INPUTS = results.inputs
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
+DATA_TABLE = "extrahop_detections"
 DATA_TBL_FIELDS = ["appliance_id", "assignee", "categories", "det_description", "end_time", "det_id", "is_user_created",
                    "mitre_tactics", "mitre_techniques", "participants", "properties", "resolution", "risk_score",
                    "start_time", "status", "ticket_id", "ticket_url", "title", "type", "update_time"]
@@ -56,8 +57,9 @@ def main():
         note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: There were <b>{1}</b> Detections returned for SOAR " \
                     u"function <b>{2}</b>.".format(WF_NAME, len(dets), FN_NAME)
         if dets:
+            note_text += u"<br><b>{}</b>".format(dets)
             for det in dets:
-                newrow = incident.addRow("extrahops_detections")
+                newrow = incident.addRow(DATA_TABLE)
                 newrow.query_execution_date = QUERY_EXECUTION_DATE
                 for f1 in DATA_TBL_FIELDS:
                     f2 = f1
@@ -66,8 +68,11 @@ def main():
                     if det[f1] is None:
                         newrow[f1] = det[f2]
                     if isinstance(det[f1], list):
-                        newrow[f1] = "{}".format(", ".join(det[f2]))
-                    elif isinstance(det[f1], bool):
+                      if f1 in ["participants", "mitre_tactics", "mitre_techniques"]:
+                          newrow[f1] = "{}".format(det[f2])
+                      else:
+                          newrow[f1] = "{}".format(", ".join(det[f2]))
+                    elif isinstance(det[f2], (bool, dict)):
                         newrow[f1] = str(det[f2])
                     else:
                         newrow[f1] = "{}".format(det[f2])
