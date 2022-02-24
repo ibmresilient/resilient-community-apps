@@ -1,0 +1,136 @@
+{
+  "version": 2.0,
+  "success": True,
+  "reason": None,
+  "content": {
+    "result": [
+      {
+        "id": 36,
+        "start_time": 1645600030945,
+        "update_time": 1645600030945,
+        "end_time": 1645600030945,
+        "title": "CVE-2019-0708 RDP Exploit Attempt",
+        "description": "[Device 02a1d541ff800000](#/metrics/devices/c708d037ae5a46b69ec4dcbf7e4555e5.02a1d541ff800000/overview?from=1645600030&interval_type=DT&until=1645600030) received a Remote Desktop Protocol (RDP) connection request that is consistent with a known vulnerability, also known as BlueKeep, in older versions of Microsoft Windows. This vulnerability allows an unauthenticated attacker to remotely run arbitrary code on an RDP server. The attacker can then tamper with data or install malware that could propagate to other Windows devices across the network. Investigate to determine if [Device 02a1d541ff800000](#/metrics/devices/c708d037ae5a46b69ec4dcbf7e4555e5.02a1d541ff800000/overview?from=1645600030&interval_type=DT&until=1645600030) is hosting a version affected by CVE-2019-0708: Windows 7, Windows XP, Windows Vista, Windows Server 2003, and Windows Server 2008.",
+        "categories": [
+          "sec",
+          "sec.exploit"
+        ],
+        "risk_score": 98,
+        "type": "cve_2019_0708",
+        "participants": [
+          {
+            "object_type": "device",
+            "object_id": 2,
+            "role": "victim",
+            "external": False,
+            "id": 89
+          },
+          {
+            "object_type": "ipaddr",
+            "object_value": "192.168.1.3",
+            "role": "offender",
+            "external": True,
+            "id": 90
+          }
+        ],
+        "ticket_id": None,
+        "assignee": None,
+        "status": None,
+        "resolution": None,
+        "properties": {
+          "client_port": 30438,
+          "server_port": 3389
+        },
+        "mitre_tactics": [
+          {
+            "id": "TA0008",
+            "name": "Lateral Movement",
+            "url": "https://attack.mitre.org/tactics/TA0008"
+          }
+        ],
+        "mitre_techniques": [
+          {
+            "id": "T1210",
+            "name": "Exploitation of Remote Services",
+            "url": "https://attack.mitre.org/techniques/T1210",
+            "legacy_ids": [
+              "T1210"
+            ]
+          }
+        ],
+        "appliance_id": 0,
+        "is_user_created": False
+      },
+      {
+        "id": 34,
+        "start_time": 1645592863597,
+        "update_time": 1645592863597,
+        "end_time": 1645592863597,
+        "title": "CVE-2019-0708 RDP Exploit Attempt",
+        "description": "[Device 02a1d541ff800000](#/metrics/devices/c708d037ae5a46b69ec4dcbf7e4555e5.02a1d541ff800000/overview?from=1645592863&interval_type=DT&until=1645592863) received a Remote Desktop Protocol (RDP) connection request that is consistent with a known vulnerability, also known as BlueKeep, in older versions of Microsoft Windows. This vulnerability allows an unauthenticated attacker to remotely run arbitrary code on an RDP server. The attacker can then tamper with data or install malware that could propagate to other Windows devices across the network. Investigate to determine if [Device 02a1d541ff800000](#/metrics/devices/c708d037ae5a46b69ec4dcbf7e4555e5.02a1d541ff800000/overview?from=1645592863&interval_type=DT&until=1645592863) is hosting a version affected by CVE-2019-0708: Windows 7, Windows XP, Windows Vista, Windows Server 2003, and Windows Server 2008.",
+        "categories": [
+          "sec",
+          "sec.exploit"
+        ],
+        "risk_score": 98,
+        "type": "cve_2019_0708",
+        "participants": [
+          {
+            "object_type": "device",
+            "object_id": 2,
+            "role": "victim",
+            "external": False,
+            "id": 86
+          },
+          {
+            "object_type": "ipaddr",
+            "object_value": "192.168.1.2",
+            "role": "offender",
+            "external": True,
+            "id": 87
+          }
+        ],
+        "ticket_id": None,
+        "assignee": None,
+        "status": None,
+        "resolution": None,
+        "properties": {
+          "client_port": 54810,
+          "server_port": 3389
+        },
+        "mitre_tactics": [
+          {
+            "id": "TA0008",
+            "name": "Lateral Movement",
+            "url": "https://attack.mitre.org/tactics/TA0008"
+          }
+        ],
+        "mitre_techniques": [
+          {
+            "id": "T1210",
+            "name": "Exploitation of Remote Services",
+            "url": "https://attack.mitre.org/techniques/T1210",
+            "legacy_ids": [
+              "T1210"
+            ]
+          }
+        ],
+        "appliance_id": 0,
+        "is_user_created": False
+      }
+    ]
+  },
+  "raw": None,
+  "inputs": {
+    "extrahop_active_from": 1645574400000,
+    "extrahop_search_filter": "{\n  'filter': {\n      'category': 'sec.exploit',\n      'assignee': [\n        '.none'\n      ],\n      'ticket_id': [\n        '.none'\n      ],\n      'status': [\n        '.none'\n      ],\n      'resolution': [\n        '.none'\n      ]\n  }\n}"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-extrahop",
+    "package_version": "1.0.0",
+    "host": "host.ibm.com",
+    "execution_time_ms": 537,
+    "timestamp": "2022-02-24 11:12:54"
+  }
+}
