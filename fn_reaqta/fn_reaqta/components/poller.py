@@ -128,7 +128,7 @@ class PollerComponent(ResilientComponent):
         Returns:
             [bool]: [True if poller is configured]
         """
-        self.polling_interval = int(options.get("polling_interval", 0))
+        self.polling_interval = float(options.get("polling_interval", 0))
         if not self.polling_interval:
             return False
 

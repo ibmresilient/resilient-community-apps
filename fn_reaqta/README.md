@@ -35,6 +35,8 @@
 - [Function - ReaQta: Attach File](#function---reaqta-attach-file)
 - [Function - ReaQta: Close Alert](#function---reaqta-close-alert)
 - [Function - ReaQta: Create Note](#function---reaqta-create-note)
+- [Function - ReaQta: Create Policy](#function---reaqta-create-policy)
+- [Function - ReaQta: Get Alert Information](#function---reaqta-get-alert-information)
 - [Function - ReaQta: Get Processes](#function---reaqta-get-processes)
 - [Function - ReaQta: Isolate Machine](#function---reaqta-isolate-machine)
 - [Function - ReaQta: Kill Process](#function---reaqta-kill-process)
@@ -151,7 +153,6 @@ This app has been implemented using:
 In order to make API calls to ReaQta, create an API Application, prodiving the endpoint group restrictions as appropiate. The API ID and secret will be copied into your app.config file
 
 ![screenshot: custom_layouts](./doc/screenshots/reaqta_configuration.png)
-
 
 ---
 
@@ -290,6 +291,122 @@ else:
 </details>
 
 ---
+
+## Function - ReaQta: Create Policy
+Create a policy based on a file hash
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `reaqta_sha256` | `text` | Yes | `cf8c1b234ad4d72d...` | - |
+| `reaqta_policy_title` | `text` | No | `-` | Title for policy |
+| `reaqta_policy_description` | `text` | No | `-` | Policy description |
+| `reaqta_policy_included_groups` | `text` | No | `groupA,groupB` | Apply policy to these groups. Use either reaqta_policy_included_groups or reaqta_policy_excluded_groups |
+| `reaqta_policy_excluded_groups` | `text` | No | `groupC,groupD` | Bypass policy to these groups. Use either reaqta_policy_included_groups or reaqta_policy_excluded_groups |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
+```python
+results = {
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "type": 2,
+    "id": "834951840876462084",
+    "versionId": "834951840876466181",
+    "title": "test it policy",
+    "description": "",
+    "enabled": true,
+    "deleted": false,
+    "default": false,
+    "matchers": [
+      {
+        "type": 2,
+        "id": "834951840876470278",
+        "hash": "91514e6be3f581a77daa79e2a4905dcbdf6bdcc32ee0f713599a94d453a26fc1",
+        "alg": 1
+      }
+    ],
+    "actions": [
+      2
+    ],
+    "created": "2022-02-24T02:00:31.520Z",
+    "lastModified": "2022-02-24T02:00:31.520Z",
+    "scope": "group",
+    "groups": [
+      {
+        "id": "831820214906650631",
+        "name": "Demo",
+        "enabled": true
+      }
+    ],
+    "policy_url": "https://reaqta.host.com/policies/details/834951840876462084"
+  },
+  "raw": null,
+  "inputs": {
+    "reaqta_policy_title": "test it policy",
+    "reaqta_policy_block": false,
+    "reaqta_policy_excluded_groups": null,
+    "reaqta_policy_enabled": true,
+    "reaqta_policy_description": "",
+    "reaqta_sha256": "91514e6be3f581a77daa79e2a4905dcbdf6bdcc32ee0f713599a94d453a26fc1",
+    "reaqta_policy_included_groups": "Demo"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-reaqta",
+    "package_version": "1.0.0",
+    "host": "local",
+    "execution_time_ms": 1283,
+    "timestamp": "2022-02-23 21:00:29"
+  }
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.reaqta_sha256 = row['sha256_hash']
+inputs.reaqta_policy_title = rule.properties.reaqta_policy_title
+inputs.reaqta_policy_description = rule.properties.reaqta_policy_description or ''
+inputs.reaqta_policy_included_groups = rule.properties.reaqta_policy_included_groups
+inputs.reaqta_policy_excluded_groups = rule.properties.reaqta_policy_excluded_groups
+inputs.reaqta_policy_enabled = rule.properties.reaqta_policy_enabled
+inputs.reaqta_policy_block = rule.properties.reaqta_policy_block_when_triggered
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+if results.success:
+  policy_url = '<a href="{0}" target="blank">{0}</a>'.format(results.content.get("policy_url"))
+  incident.addNote(helper.createRichText("ReaQta Create Policy successful: {}".format(policy_url)))
+else:
+  incident.addNote("ReaQta Create Policy failed: {}".format(results.reason))
+```
+
+</p>
+</details>
+
+---
+
 ## Function - ReaQta: Close Alert
 Close a ReaQta alert. This can be triggered when the SOAR case is closed.
 
@@ -444,6 +561,432 @@ if results.success:
 </details>
 
 ---
+
+## Function - ReaQta: Get Alert Information
+Return details for a ReaQta alert
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `reaqta_alert_id` | `text` | Yes | `-` | - |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
+```python
+results = {
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "id": "834832646071648258",
+    "localId": "834832599212890114",
+    "endpointId": "833847379160465408",
+    "triggerCondition": 7,
+    "endpoint": {
+      "id": "833847379160465408",
+      "machineId": "de64775b529ad34495bc51cd8b227c254d112185cfd06a92e0d5bd8a9ca19124",
+      "osType": 1,
+      "cpuVendor": 1,
+      "arch": 2,
+      "cpuDescr": "Intel(R) Xeon(R) CPU E5-2450 0 @ 2.10GHz",
+      "kernel": "10.0",
+      "os": "Windows 10 Pro",
+      "name": "REAQTAWIN10-CSP",
+      "domain": "csplab.local",
+      "state": 1,
+      "registrationTime": "2022-02-21T00:51:47.330Z",
+      "agentVersion": "3.6.1",
+      "componentsVersions": [
+        {
+          "name": "keeper",
+          "version": "3.6.0",
+          "build": "19.1627291555548.commit"
+        },
+        {
+          "name": "probos",
+          "version": "3.5.0",
+          "build": "3.5.0"
+        },
+        {
+          "name": "rqtsentry",
+          "version": "3.6.1",
+          "build": "119.1632119719010.commit"
+        },
+        {
+          "name": "rqtnetsentry",
+          "version": "3.6.0",
+          "build": "44.1627295520120.commit"
+        },
+        {
+          "name": "installer",
+          "version": "3.6.1",
+          "build": ""
+        }
+      ],
+      "isVirtualMachine": true,
+      "isDomainController": false,
+      "isServer": false,
+      "sessionStart": "2022-02-21T00:51:49.215Z",
+      "sessionEnd": "2022-02-24T01:09:59.043Z",
+      "lastSeenAt": "2022-02-24T01:04:59.043Z",
+      "disconnectionReason": 0,
+      "localAddr": "172.16.253.37",
+      "hvStatus": 19,
+      "macs": [
+        "00:50:56:bf:9f:16"
+      ],
+      "isolated": false,
+      "connected": true,
+      "tags": [
+        "vm"
+      ],
+      "groups": [
+        {
+          "id": "822878129902059527",
+          "name": "Partner Team",
+          "description": "Partner Team Ambassador Rob Fichtel"
+        }
+      ],
+      "avInstalled": false
+    },
+    "triggerEvents": [
+      {
+        "id": "834832645178261505",
+        "category": "hive",
+        "localId": "834832599133194241",
+        "endpointId": "833847379160465408",
+        "receivedAt": "2022-02-23T18:06:53.051Z",
+        "happenedAt": "2022-02-23T18:06:42.073Z",
+        "relevance": 0,
+        "severity": "none",
+        "trigger": true,
+        "manuallyAdded": false,
+        "process": {
+          "id": "833847379160465408:7868:1645639602071",
+          "parentId": "833847379160465408:872:1645639598803",
+          "endpointId": "833847379160465408",
+          "program": {
+            "path": "c:\\users\\melody\\appdata\\local\\temp\\tryme.exe",
+            "filename": "tryme.exe",
+            "md5": "a3ce5c07dc7b7d58740b4407a7d3f9d2",
+            "sha1": "9fa6c5f1cff4ca41c441e428a847a924627210cc",
+            "sha256": "cf8c1b234ad4d72dd6a455b82bf48ff16cd794aaefb682729b0151f0e1c374dd",
+            "size": 84992,
+            "arch": "x32",
+            "fsName": "tryme.exe"
+          },
+          "user": "REAQTAWIN10-CSP\\Melody",
+          "pid": 7868,
+          "startTime": "2022-02-23T18:06:42.071Z",
+          "ppid": 872,
+          "pstartTime": "2022-02-23T18:06:38.803Z",
+          "userSID": "S-1-5-21-2250471729-4061103233-1630355673-1002",
+          "privilegeLevel": "MEDIUM",
+          "noGui": false,
+          "logonId": "0x154d314"
+        },
+        "eventType": 2,
+        "data": {
+          "cmdLine": "C:\\Users\\Melody\\AppData\\Local\\Temp\\tryme.exe",
+          "cmdLineArgs": [
+            "C:\\Users\\Melody\\AppData\\Local\\Temp\\tryme.exe"
+          ],
+          "_t": "l"
+        },
+        "happenedAt_ts": 1645639602000
+      },
+      {
+        "id": "834832645488640001",
+        "category": "hive",
+        "localId": "834832599212886017",
+        "endpointId": "833847379160465408",
+        "receivedAt": "2022-02-23T18:06:53.125Z",
+        "happenedAt": "2022-02-23T18:06:42.092Z",
+        "relevance": 83,
+        "severity": "medium",
+        "trigger": true,
+        "manuallyAdded": false,
+        "process": {
+          "id": "833847379160465408:872:1645639598803",
+          "parentId": "833847379160465408:6580:1645471843080",
+          "endpointId": "833847379160465408",
+          "program": {
+            "path": "c:\\program files\\microsoft office\\root\\office16\\winword.exe",
+            "filename": "winword.exe",
+            "md5": "313009918ec71770c8f2fdcd416a4485",
+            "sha1": "5d36f6ef6d0f76aaf837c4f7e65b611acd92e0ae",
+            "sha256": "d76c3d25eb625a8475488b14b501e775b3186ad4ff77e9c07edb4ec2ff6923d9",
+            "certInfo": {
+              "signer": "Microsoft Corporation",
+              "issuer": "Microsoft Code Signing PCA 2011",
+              "trusted": true,
+              "expired": false
+            },
+            "size": 1638704,
+            "arch": "x64",
+            "fsName": "winword.exe"
+          },
+          "user": "REAQTAWIN10-CSP\\Melody",
+          "pid": 872,
+          "startTime": "2022-02-23T18:06:38.803Z",
+          "ppid": 6580,
+          "pstartTime": "2022-02-21T19:30:43.080Z",
+          "userSID": "S-1-5-21-2250471729-4061103233-1630355673-1002",
+          "privilegeLevel": "MEDIUM",
+          "noGui": false,
+          "logonId": "0x154d314"
+        },
+        "eventType": 31,
+        "data": {
+          "behaviourType": 1,
+          "_t": "l"
+        },
+        "happenedAt_ts": 1645639602000
+      }
+    ],
+    "totalEventCount": 452,
+    "byTypeEventCount": [
+      {
+        "type": 11,
+        "count": 140
+      },
+      {
+        "type": 21,
+        "count": 73
+      },
+      {
+        "type": 10,
+        "count": 59
+      },
+      {
+        "type": 5,
+        "count": 37
+      },
+      {
+        "type": 12,
+        "count": 34
+      },
+      {
+        "type": 65,
+        "count": 29
+      },
+      {
+        "type": 8,
+        "count": 28
+      },
+      {
+        "type": 38,
+        "count": 21
+      },
+      {
+        "type": 2,
+        "count": 8
+      },
+      {
+        "type": 57,
+        "count": 8
+      },
+      {
+        "type": 37,
+        "count": 6
+      },
+      {
+        "type": 6,
+        "count": 3
+      },
+      {
+        "type": 3,
+        "count": 2
+      },
+      {
+        "type": 30,
+        "count": 1
+      },
+      {
+        "type": 31,
+        "count": 1
+      },
+      {
+        "type": 62,
+        "count": 1
+      },
+      {
+        "type": 89,
+        "count": 1
+      }
+    ],
+    "impact": 83,
+    "severity": "medium",
+    "closed": false,
+    "activityState": "inactive",
+    "terminationReason": 1,
+    "receivedAt": "2022-02-23T18:06:53.264Z",
+    "happenedAt": "2022-02-23T18:06:42.092Z",
+    "tags": [],
+    "endpointState": {
+      "osType": 1,
+      "cpuVendor": 1,
+      "arch": 2,
+      "cpuDescr": "Intel(R) Xeon(R) CPU E5-2450 0 @ 2.10GHz",
+      "kernel": "10.0",
+      "os": "Windows 10 Pro",
+      "hvStatus": 19,
+      "name": "REAQTAWIN10-CSP",
+      "domain": "csplab.local",
+      "isolated": false,
+      "localAddr": "172.16.253.37",
+      "macs": [
+        "00:50:56:bf:9f:16"
+      ],
+      "componentsVersions": [
+        {
+          "name": "keeper",
+          "version": "3.6.0",
+          "build": "19.1627291555548.commit"
+        },
+        {
+          "name": "probos",
+          "version": "3.5.0",
+          "build": "3.5.0"
+        },
+        {
+          "name": "rqtsentry",
+          "version": "3.6.1",
+          "build": "119.1632119719010.commit"
+        },
+        {
+          "name": "rqtnetsentry",
+          "version": "3.6.0",
+          "build": "44.1627295520120.commit"
+        },
+        {
+          "name": "installer",
+          "version": "3.6.1",
+          "build": ""
+        }
+      ],
+      "endpointVersion": "3.6.1",
+      "tags": [
+        "vm"
+      ],
+      "groups": [
+        {
+          "id": "822878129902059527",
+          "name": "Partner Team",
+          "description": "Partner Team Ambassador Rob Fichtel"
+        }
+      ]
+    },
+    "alert_url": "https://rhiveam.techzone.ibm.com/alerts/834832646071648258"
+  },
+  "raw": null,
+  "inputs": {
+    "reaqta_alert_id": "834832646071648258"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-reaqta",
+    "package_version": "1.0.0",
+    "host": "Marks-MacBook-Pro.local",
+    "execution_time_ms": 663,
+    "timestamp": "2022-02-23 20:04:58"
+  }
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.reaqta_alert_id = incident.properties.reaqta_id
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+TRIGGERCONDITION_LOOKUP = {
+    0: "Code Injection",
+    1: "Process Impersonated",
+    2: "Signature Forged",
+    3: "Incident Correlated",
+    4: "DLL Sideloaded",
+    5: "Suspicious Script Executed",
+    6: "Policies Triggered",
+    7: "Anomalous Behaviour Detected",
+    8: "Token Stolen",
+    9: "Ransomware Behavior Detected",
+    10: "Privilege Escalated",
+    11: "External Trigger",
+    12: "Detection Strategy",
+    13: "Antimalware Detection"
+  }
+
+if not results.success:
+  incident.addNote("ReaQta: Get Alert Information failed: {}".format(results.reason))
+else:
+  content = results.content
+  alert_url = '<a href="{0}" target="blank">{0}</a>'.format(content.get("alert_url"))
+  incident.properties.reaqta_alert_link = helper.createRichText(alert_url)
+  incident.properties.reaqta_endpoint_id = content.get("endpointId")
+  incident.properties.reaqta_trigger_condition = TRIGGERCONDITION_LOOKUP.get(content.get("triggerCondition"))
+
+  endpoint = content.get("endpoint", {})
+  incident.properties.reaqta_tags = ", ".join(endpoint.get("tags", []))
+  incident.properties.reaqta_groups = ", ".join([ group.get("name") for group in endpoint.get("groups", []) ])
+  incident.properties.reaqta_machine_info = "Machine Name: {}\nOS: {}\nDomain: {}\nCPU: {}"\
+                          .format(endpoint.get('name'),
+                                  endpoint.get('os'),
+                                  endpoint.get('domain'),
+                                  endpoint.get('cpuDescr'))
+
+  # populate datatable with trigger events
+  for event in content.get('triggerEvents', []):
+    row = incident.addRow('reaqta_trigger_events')
+    row['happened_at'] = event.get('happenedAt_ts')
+    row['category'] = event.get('category')
+    row['relevance'] = event.get('relevance')
+    row['severity'] = event.get('severity')
+
+    process = event.get('process', {})
+    program = process.get('program', {})
+    row['process_pid'] = process.get('pid')
+    row['program_path'] = program.get('path')
+    row['sha256_hash'] = program.get('sha256')
+
+    # create artifacts from the trigger event
+    if program:
+      incident.addArtifact("Malware SHA-256 Hash", program.get('sha256'), "")
+      incident.addArtifact("File Path", program.get('path'), "")
+      incident.addArtifact("File Name", program.get('filename'), "")
+    if process:
+      incident.addArtifact("User Account", process.get('user'), "")
+
+  # create artifacts from endpoint
+  endpoint_name = endpoint.get("name")
+  incident.addArtifact("IP Address", endpoint.get("localAddr"), "Endpoint: {}".format(endpoint_name))
+  incident.addArtifact("System Name", endpoint_name, "")
+```
+
+</p>
+</details>
+
+---
+
 ## Function - ReaQta: Get Processes
 Get active processes from a given endpoint and present in the reaqta_process_list datatable. Two filters are available to reduce the size of the process list, as the list can be quite long.
 
