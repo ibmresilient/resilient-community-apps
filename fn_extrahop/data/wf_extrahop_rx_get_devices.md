@@ -51,6 +51,7 @@ def main():
         note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: There were <b>{1}</b> Devices returned for SOAR " \
                     u"function <b>{2}</b>.".format(WF_NAME, len(devs), FN_NAME)
         if devs:
+            note_text += u"<br><b>{}</b>".format(devs)
             for dev in devs:
                 newrow = incident.addRow(DATA_TABLE)
                 newrow.query_execution_date = QUERY_EXECUTION_DATE
@@ -66,7 +67,7 @@ def main():
                       newrow[f1] = str(dev[f2])
                   else:
                       newrow[f1] = "{}".format(dev[f2])
-            note_text += u"<br>The data table <b>{0}</b> has been updated".format("Extrahop Detections")
+            note_text += u"<br>The data table <b>{0}</b> has been updated".format(DATA_TABLE)
 
     else:
         note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
