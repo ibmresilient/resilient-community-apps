@@ -13,7 +13,7 @@ current.isValidField("x_ibmrt_resilient_ibm_resilient_reference_id") && current.
 	action.setRedirectURL(current);
 	
 	//Use the GlideSystem class (gs) to add a 'popup' message
-	gs.addInfoMessage("Creating an Incident in Resilient from this record");
+	gs.addInfoMessage("Creating an Incident in SOAR from this record");
 
 	var workflowId = null;
 	
