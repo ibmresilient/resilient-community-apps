@@ -21,10 +21,10 @@ def codegen_reload_data():
     return {
         "package": u"fn_reaqta",
         "message_destinations": [u"fn_reaqta"],
-        "functions": [u"reaqta_attach_file", u"reaqta_close_alert", u"reaqta_create_artifact", u"reaqta_create_note", u"reaqta_create_policy", u"reaqta_get_processes", u"reaqta_isolate_machine", u"reaqta_kill_process"],
-        "workflows": [u"reaqta_attach_file_from_process_list", u"reaqta_attach_file_from_triggered_events", u"reaqta_close_alert", u"reaqta_create_artifact_from_process_path", u"reaqta_create_note", u"reaqta_get_processes", u"reaqta_isolate_endpoint"],
-        "actions": [u"ReaQta: Attach File from Process List", u"ReaQta: Attach File from Triggered Events", u"ReaQta: Close Alert", u"ReaQta: Create Artifact from Process Path", u"ReaQta: Create Note", u"ReaQta: Get Processes", u"ReaQta: Isolate Endpoint"],
-        "incident_fields": [u"reaqta_alert_link", u"reaqta_endpoint_id", u"reaqta_groups", u"reaqta_id", u"reaqta_machine_info", u"reaqta_tags"],
+        "functions": [u"reaqta_attach_file", u"reaqta_close_alert", u"reaqta_create_artifact", u"reaqta_create_note", u"reaqta_create_policy", u"reaqta_get_alert_information", u"reaqta_get_processes", u"reaqta_isolate_machine", u"reaqta_kill_process"],
+        "workflows": [u"reaqta_attach_file_from_process_list", u"reaqta_attach_file_from_triggered_events", u"reaqta_close_alert", u"reaqta_create_artifact_from_process_path", u"reaqta_create_note", u"reaqta_get_alert_information", u"reaqta_get_processes", u"reaqta_isolate_endpoint"],
+        "actions": [u"ReaQta: Attach File from Process List", u"ReaQta: Attach File from Triggered Events", u"ReaQta: Close Alert", u"ReaQta: Create Artifact from Process Path", u"ReaQta: Create Note", u"ReaQta: Get Alert Information", u"ReaQta: Get Processes", u"ReaQta: Isolate Endpoint"],
+        "incident_fields": [u"reaqta_alert_link", u"reaqta_endpoint_id", u"reaqta_groups", u"reaqta_id", u"reaqta_machine_info", u"reaqta_tags", u"reaqta_trigger_condition"],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [u"reaqta_process_list", u"reaqta_trigger_events"],
@@ -49,6 +49,7 @@ def customization_data(client=None):
         - reaqta_create_artifact
         - reaqta_create_note
         - reaqta_create_policy
+        - reaqta_get_alert_information
         - reaqta_get_processes
         - reaqta_isolate_machine
         - reaqta_kill_process
@@ -58,6 +59,7 @@ def customization_data(client=None):
         - reaqta_close_alert
         - reaqta_create_artifact_from_process_path
         - reaqta_create_note
+        - reaqta_get_alert_information
         - reaqta_get_processes
         - reaqta_isolate_endpoint
     - Rules:
@@ -66,6 +68,7 @@ def customization_data(client=None):
         - ReaQta: Close Alert
         - ReaQta: Create Artifact from Process Path
         - ReaQta: Create Note
+        - ReaQta: Get Alert Information
         - ReaQta: Get Processes
         - ReaQta: Isolate Endpoint
     - Incident Fields:
@@ -75,6 +78,7 @@ def customization_data(client=None):
         - reaqta_id
         - reaqta_machine_info
         - reaqta_tags
+        - reaqta_trigger_condition
     - Data Tables:
         - reaqta_process_list
         - reaqta_trigger_events

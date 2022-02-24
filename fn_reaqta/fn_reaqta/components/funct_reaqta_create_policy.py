@@ -48,6 +48,12 @@ class FunctionComponent(AppFunctionComponent):
         app_common = AppCommon(self.rc, self.app_configs._asdict())
         response, err_msg = app_common.create_policy(fn_inputs._asdict())
 
+        result = response.json() if not err_msg else None
+
+        if result:
+            # create the url for the policy created
+            result['policy_url'] = app_common.make_linkback_url(result.get('id'), linkback_url="policies/details/{}")
+
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
 
-        yield FunctionResult(response.json(), success=True if not err_msg else False, reason=err_msg)
+        yield FunctionResult(result, success=True if not err_msg else False, reason=err_msg)

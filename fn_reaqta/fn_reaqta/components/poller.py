@@ -8,7 +8,6 @@ import logging
 import os
 from threading import Thread
 from resilient_circuits import ResilientComponent
-from resilient_circuits.helpers import is_this_a_selftest
 from resilient_lib import validate_fields, RequestsCommon, make_payload_from_template
 from resilient import get_client
 from fn_reaqta.lib.poller_common import SOARCommon, poller, get_template_dir
@@ -22,9 +21,6 @@ ENTITY_COMMENT_HEADER = "Created by ReaQta" # header used to identify comments c
 
 ENTITY_LABEL = "alert" # name to label the case, alert, event, etc. native to your endpoint solution
 LOG = logging.getLogger(__name__)
-
-# C H A N G E   F O R   E N D P O I N T
-LINKBACK_URL = "alerts/{}"   # url to generate back to the entity (case, alert, etc.)
 
 # Default Templates
 CREATE_INCIDENT_TEMPLATE = os.path.join(get_template_dir(), "soar_create_incident.jinja")
@@ -154,7 +150,7 @@ class PollerComponent(ResilientComponent):
         return True
 
     @poller('polling_interval', 'last_poller_time', PACKAGE_NAME)
-    def run(self, last_poller_time=None):
+    def run(self, *args, **kwargs):
         """[Process to query for changes in datasource entities and the cooresponding update SOAR case]
            The steps taken are to
            1) query SOAR for all open entities associated with the datasource
@@ -168,7 +164,7 @@ class PollerComponent(ResilientComponent):
         # query for both new and closed alerts
         for query_field_name in ["receivedAfter", "closedAfter"]:
             # get the list of entities (alerts, cases, etc.) to insert, update or close as cases in IBM SOAR
-            entity_list = get_entities(self.app_common, query_field_name, last_poller_time)
+            entity_list = get_entities(self.app_common, query_field_name, kwargs['last_poller_time'])
 
             # iterate over all the entities. Some apps have page the results
             while True:
@@ -176,7 +172,7 @@ class PollerComponent(ResilientComponent):
                 if not entity_list['nextPage']:
                     break
 
-                entity_list = self.app_common.get_next_entities(entity_list['nextPage'])
+                entity_list = self.app_common.get_next_page(entity_list['nextPage'])
 
     def process_entity_list(self, entity_list):
         """Perform all the processing on the entity list, creating, updating and closing SOAR
@@ -191,7 +187,7 @@ class PollerComponent(ResilientComponent):
                 entity_id = get_entity_id(entity)
 
                 # create linkback url
-                entity['alert_url'] = self.app_common.make_linkback_url(LINKBACK_URL, entity_id)
+                entity['alert_url'] = self.app_common.make_linkback_url(entity_id)
 
                 # determine if this is an existing SOAR case
                 soar_case, error_msg = self.soar_common.get_soar_case({ SOAR_ENTITY_ID_FIELD: entity_id }, open_cases=False)
@@ -208,15 +204,6 @@ class PollerComponent(ResilientComponent):
                                                     )
 
                     soar_case_id = create_soar_case['id'] # get newly created case_id
-                    # update the trigger events datatable
-                    triggerevents_list = make_payload_from_template(
-                                                        None,
-                                                        TRIGGER_EVENTS_TEMPLATE,
-                                                        entity
-                                                    )
-
-                    for event_rowdata in triggerevents_list:
-                        self.soar_common.create_datatable_row(soar_case_id, "reaqta_trigger_events", event_rowdata)
 
                     cases_insert += 1
                     LOG.info("Created SOAR case %s from %s %s", create_soar_case['id'], ENTITY_LABEL, entity_id)

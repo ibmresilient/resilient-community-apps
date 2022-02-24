@@ -35,10 +35,10 @@
           "privilegeLevel": {
             "type": "string"
           },
-          "user": {
+          "programPath": {
             "type": "string"
           },
-          "programPath": {
+          "user": {
             "type": "string"
           }
         }

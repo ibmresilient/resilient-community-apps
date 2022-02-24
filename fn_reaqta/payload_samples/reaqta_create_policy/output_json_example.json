@@ -1,3 +1,55 @@
 {
-    
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "type": 2,
+    "id": "834951840876462084",
+    "versionId": "834951840876466181",
+    "title": "test it policy",
+    "description": "",
+    "enabled": true,
+    "deleted": false,
+    "default": false,
+    "matchers": [
+      {
+        "type": 2,
+        "id": "834951840876470278",
+        "hash": "91514e6be3f581a77daa79e2a4905dcbdf6bdcc32ee0f713599a94d453a26fc1",
+        "alg": 1
+      }
+    ],
+    "actions": [
+      2
+    ],
+    "created": "2022-02-24T02:00:31.520Z",
+    "lastModified": "2022-02-24T02:00:31.520Z",
+    "scope": "group",
+    "groups": [
+      {
+        "id": "831820214906650631",
+        "name": "Demo",
+        "enabled": true
+      }
+    ],
+    "policy_url": "https://rhiveam.techzone.ibm.com/policies/details/834951840876462084"
+  },
+  "raw": null,
+  "inputs": {
+    "reaqta_policy_title": "test it policy",
+    "reaqta_policy_block": false,
+    "reaqta_policy_excluded_groups": null,
+    "reaqta_policy_enabled": true,
+    "reaqta_policy_description": "",
+    "reaqta_sha256": "91514e6be3f581a77daa79e2a4905dcbdf6bdcc32ee0f713599a94d453a26fc1",
+    "reaqta_policy_included_groups": "Demo"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-reaqta",
+    "package_version": "1.0.0",
+    "host": "Marks-MacBook-Pro.local",
+    "execution_time_ms": 1283,
+    "timestamp": "2022-02-23 21:00:29"
+  }
 }

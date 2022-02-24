@@ -6,9 +6,9 @@ import time
 from datetime import datetime
 from io import BytesIO
 from urllib.parse import urljoin
-from fn_reaqta.lib.poller_common import IBM_SOAR
+from fn_reaqta.lib.poller_common import IBM_SOAR, eval_mapping, s_to_b
 from resilient_lib import str_to_bool, readable_datetime, clean_html
-from fn_reaqta.lib.poller_common import eval_mapping, s_to_b
+from cachetools import cached, LRUCache
 
 LOG = logging.getLogger(__name__)
 
@@ -18,6 +18,9 @@ ENDPOINT_URI = "endpoint/{}/"
 ENDPOINT_FILE_URI = "endpoint-file/{}/"
 ALERT_URI = "alert/{}/"
 POLICY_URI = "policy/"
+ENDPOINT_GROUP_URI = "endpoint-groups"
+
+LINKBACK_URL = "alerts/{}"   # url to generate back to the entity (case, alert, etc.)
 
 DOWNLOAD_WAIT_SEC = 15  # number of seconds to wait between status checks for a file download
 
@@ -52,6 +55,8 @@ class AppCommon():
 
             return err_msg
 
+        return None
+
     def get_entities_since_ts(self, query_field_name, timestamp, optional_filters):
         """get changed entities since last poller run
 
@@ -76,7 +81,7 @@ class AppCommon():
         response, err_msg = self.api_call("GET", 'alerts', query, refresh_authentication=True)
         return response.json()
 
-    def get_next_entities(self, next_url):
+    def get_next_page(self, next_url):
         """This endpoint pages result size. This method is used for subsequent calls
 
         Args:
@@ -88,11 +93,11 @@ class AppCommon():
         response = self.rc.execute("GET", next_url, headers=self.header, verify=self.verify)
         return response.json()
 
-    def isolate_machine(self, endpoint_id):
-        url = urljoin(ENDPOINT_URI.format(endpoint_id), "isolate")
+    def isolate_machine(self, alert_id):
+        url = urljoin(ALERT_URI.format(alert_id), "isolate")
 
         response, err_msg = self.api_call("POST", url, None)
-        return response.json()
+        return response.json(), err_msg
 
     def get_processes(self, endpoint_id):
         url = urljoin(ENDPOINT_URI.format(endpoint_id), "processes")
@@ -198,14 +203,23 @@ class AppCommon():
             "title": fn_inputs.get('reaqta_policy_title', ''),
             "description": fn_inputs.get('reaqta_policy_description', ''),
             "disable": not fn_inputs.get('reaqta_policy_enabled', True),
-            "block": fn_inputs.get('reaqta_policy_block', False)
+            "block": fn_inputs.get('reaqta_policy_block', False),
+            "enabledGroups": [],
+            "disabledGroups": []
         }
 
+        # collect all the group names and find the groupIds
         if fn_inputs.get('reaqta_policy_included_groups'):
-            params['enabledGroups'] = [ group.strip() for group in fn_inputs.get('reaqta_policy_included_groups').split(',') ]
+            group_name_list = [ group.strip() for group in fn_inputs.get('reaqta_policy_included_groups').split(',') ]
+            group_id_list = self.get_group_ids(group_name_list)
+            if group_id_list:
+                params['enabledGroups'] = group_id_list
 
         if fn_inputs.get('reaqta_policy_excluded_groups'):
-            params['disabledGroups'] = [ group.strip() for group in fn_inputs.get('reaqta_policy_excluded_groups').split(',') ]
+            group_name_list = [ group.strip() for group in fn_inputs.get('reaqta_policy_excluded_groups').split(',') ]
+            group_id_list = self.get_group_ids(group_name_list)
+            if group_id_list:
+                params['disabledGroups'] = group_id_list
 
         LOG.debug("create_policy: %s", params)
         url = urljoin(POLICY_URI, "trigger-on-process-hash")
@@ -236,7 +250,7 @@ class AppCommon():
 
         return header
 
-    def make_linkback_url(self, template_uri, entity_id):
+    def make_linkback_url(self, entity_id, linkback_url=LINKBACK_URL):
         """Create a url to link back to the endpoint alert, case, etc.
 
         Args:
@@ -246,7 +260,7 @@ class AppCommon():
         Returns:
             str: completed url for linkback
         """
-        return urljoin(self.reaqta_url, template_uri.format(entity_id))
+        return urljoin(self.reaqta_url, linkback_url.format(entity_id))
 
     def api_call(self, method, url, payload, refresh_authentication=False):
         if refresh_authentication is not None:
@@ -259,19 +273,49 @@ class AppCommon():
                                    headers=self.header,
                                    verify=self.verify,
                                    callback=callback)
-        elif payload:
+        if payload:
             return self.rc.execute(method,
                                    self._get_uri(url),
                                    params=payload,
                                    headers=self.header,
                                    verify=self.verify,
                                    callback=callback)
-        else:
-            return self.rc.execute(method,
-                                   self._get_uri(url),
-                                   headers=self.header,
-                                   verify=self.verify,
-                                   callback=callback)
+
+        return self.rc.execute(method,
+                                self._get_uri(url),
+                                headers=self.header,
+                                verify=self.verify,
+                                callback=callback)
+
+    def get_group_ids(self, group_name_list):
+        group_id_list = []
+        for group_name in group_name_list:
+            response, err_msg = self._get_endpoint_group(group_name)
+            if err_msg:
+                LOG.error("_get_endpoint_group error: %s", err_msg)
+            else:
+                group_result = response.json()
+                if group_result.get("result"):
+                    group_id_list.append(group_result["result"][0]['id'])
+                else:
+                    LOG.warning("Unable to find group: %s", group_name)
+
+        return group_id_list
+
+    @cached(cache=LRUCache(maxsize=100))
+    def _get_endpoint_group(self, group_name):
+        """ cached API call to get group information """
+        params = {
+            "name": group_name
+        }
+
+        response, err_msg = self.api_call("GET", ENDPOINT_GROUP_URI, params)
+        if not err_msg:
+            result = response.json()
+            if result.get("nextPage"):
+                response_next = self.get_next_page(result.get("nextPage"))
+
+        return response, err_msg
 
 def make_comment(existing_note, note, header=IBM_SOAR):
     # add datestamp

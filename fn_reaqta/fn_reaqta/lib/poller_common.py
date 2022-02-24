@@ -7,7 +7,7 @@ import functools
 import logging
 import os
 import traceback
-from ast import Return, literal_eval
+from ast import literal_eval
 from threading import Event
 from resilient import SimpleHTTPException, Patch
 from resilient_lib import IntegrationError, get_file_attachment, get_file_attachment_name
@@ -43,7 +43,7 @@ def poller(named_poller_interval, named_last_poller_time, package_name):
         # decorator for running a function forever, passing the ms timestamp of
         #  when the last poller run to the function it's calling
         @functools.wraps(func)
-        def wrapped(self):
+        def wrapped(self, *args):
             last_poller_time = getattr(self, named_last_poller_time)
             exit_event = Event()
 
@@ -52,7 +52,7 @@ def poller(named_poller_interval, named_last_poller_time, package_name):
                     LOG.info(u"%s polling start.", package_name)
                     poller_start = datetime.datetime.now()
                     # function execution with the last poller time in ms
-                    func(self, last_poller_time=int(last_poller_time.timestamp()*1000))
+                    func(self, *args, last_poller_time=int(last_poller_time.timestamp()*1000))
 
                 except Exception as err:
                     LOG.error(str(err))
@@ -278,6 +278,7 @@ class SOARCommon():
         uri = "/".join([INCIDENTS_URI, str(case_id), "table_data", datatable, "row_data"])
         return self.rest_client.post(uri=uri, payload=rowdata)
 
+    '''
     def create_artifact(self, rest_client, incident_id, artifact_type, artifact_value, description, send_file=False):
         """create an artifact"""
         try:
@@ -322,6 +323,7 @@ class SOARCommon():
         except SimpleHTTPException as ex:
             log.info(u'Something went wrong when attempting to create the Incident: {}'.format(ex))
             raise ex
+    '''
 
     def get_case(self, case_id):
         """ get an SOAR case based on the case id """
@@ -428,7 +430,7 @@ class SOARCommon():
         soar_comment_list = [comment['text'] for comment in soar_comments]
 
         # filter entity comments with our SOAR header
-        return self._filter_comments(self, soar_comment_list, entity_comments, filter_soar_header=soar_header)
+        return self._filter_comments(soar_comment_list, entity_comments, filter_soar_header=soar_header)
 
     def _filter_comments(self, soar_comment_list, entity_comments, filter_soar_header=None):
         """
