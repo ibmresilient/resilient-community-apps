@@ -15,16 +15,15 @@ api_secret=xxx
 reaqta_url=https://xxx/
 api_version=rqt_api/1/
 #
-poller_interval=60
-poller_lookback=120
+polling_interval=60
+polling_lookback=120
 # set filters for the poller. Ex: "alertStatus": "malicious", "severity": ["medium", "high"], "tag": ["hive"]
 #   additional filtering can be done by groups and trigger event relevance (greater or equal to numeric value):
 #      poller_filters="groups": ["groupA", "groupB"], "relevance": 70
-#poller_filters="alertStatus": "benign", "severity": ["low", "high"], "tag": ["hive"]
+#polling_filters="alertStatus": "benign", "severity": ["low", "high"], "tag": ["hive"]
 cafile=/path/to/cafile.crt or false
 # Optional override value for templates used for creating/updating/closing SOAR cases
 #soar_create_case_template=
-#soar_update_case_template=
 #soar_close_case_template=
 # For an integration server, specify the proxy settings here.
 # For AppHost, use the manageAppHost proxy capability.

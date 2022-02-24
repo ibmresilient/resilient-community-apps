@@ -34,7 +34,7 @@ class AppCommon():
         self.verify = str_to_bool(options.get("cafile", "false"))
 
         # set any additional filters to include for alert query
-        self.filters = eval_mapping(options.get('poller_filters', ''), wrapper='{{ {} }}')
+        self.filters = eval_mapping(options.get('polling_filters', ''), wrapper='{{ {} }}')
 
         self.token = self.header = None
 

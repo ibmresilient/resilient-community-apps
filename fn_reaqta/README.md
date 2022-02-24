@@ -42,6 +42,7 @@
 - [Data Table - ReaQta Trigger Events](#data-table---reaqta-trigger-events)
 - [Custom Fields](#custom-fields)
 - [Rules](#rules)
+- [Templates for SOAR Cases](#templates-for-soar-cases)
 - [Troubleshooting & Support](#troubleshooting--support)
 ---
 
@@ -165,13 +166,18 @@ The following table provides the settings you need to configure the app. These s
 
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
+| **reaqta_url** | Yes | `https://xxx/` | *Base URL to ReaQta instance ending in slash '/'*  |
 | **api_key** | Yes | `7411a4da-c770-...` | *API Key ID from your configured ReaQta API application* |
 | **api_secret** | Yes | `P9zPLkcb-...` | *API Key secret from your configured ReaQta API application*  |
-| **api_version** | Yes | `rqt_api/1/` | *url path information ending in slash '/'*  |
-| **cafile** | Yes | `/path/to/cafile.crt or false` | *path to your ReaQta client certification, if needed or false for no certificate verification*  |
-| **poller_interval** | Yes | `60` | *Number of seconds between polling queries for new alerts *  |
-| **poller_lookback** | Yes | `120` | *Number of minutes to look back for new alerts the first time the app starts or restarts*  |
-| **reaqta_url** | Yes | `https://xxx/` | *Base URL to ReaQta instance ending in slash '/'*  |
+| **api_version** | Yes | `rqt_api/1/` | *URL path information ending in slash '/'*  |
+| **cafile** | Yes | `/path/to/cafile.crt or false` | *Path to your ReaQta client certificate, if needed or false for no certificate verification*  |
+| **polling_interval** | Yes | `60` | *Number of seconds between polling queries for new alerts *  |
+| **polling_lookback** | Yes | `120` | *Number of minutes to look back for new alerts the first time the app starts or restarts*  |
+| **polling_filters** | No | `"alertStatus": "benign", "severity": ["low", "high"], "tag": ["hive"]` | *Name/value pairs specifying the criteria to filter incoming alerts for escalation* |
+| **soar_create_case_template** | No | `/path/to/template.jina` | *Override template used to create a SOAR case from the poller. See [Templates for SOAR Cases](#templates-for-soar-cases)* |
+| **soar_close_case_template** | No | `/path/to/template.jina` | *Override template used to close a SOAR case from the poller. See [Templates for SOAR Cases](#templates-for-soar-cases)* |
+| **https_proxy** | No | `https://xxx/` | *Proxy URL for HTTPS connections* |
+| **http_proxy** | No | `http://xxx/` | *Proxy URL for HTTP connections* |
 
 ### Custom Layouts
 <!--
@@ -849,6 +855,86 @@ reaqta_trigger_events
 | ReaQta: Create Note | note | `reaqta_create_note` |
 | ReaQta: Get Processes | incident | `reaqta_get_processes` |
 | ReaQta: Isolate Endpoint | incident | `reaqta_isolate_endpoint` |
+
+---
+## Templates for SOAR Cases
+It may necessary to modify the templates used to create or close SOAR cases based on a customer's required custom fields. Below are the default templates used which can be copied, modified and used with app_config's
+`soar_create_case_template` and `soar_close_case_template` settings to override the default templates.
+
+### soar_create_case_template.jinja
+```
+{
+  {# JINJA template for creating a new SOAR incident from a ReaQta alert. #}
+  {% set triggercondition_lookup = '''{
+    "0": "Code Injection",
+    "1": "Process Impersonated",
+    "2": "Signature Forged",
+    "3": "Incident Correlated",
+    "4": "DLL Sideloaded",
+    "5": "Suspicious Script Executed",
+    "6": "Policies Triggered",
+    "7": "Anomalous Behaviour Detected",
+    "8": "Token Stolen",
+    "9": "Ransomware Behavior Detected",
+    "10": "Privilege Escalated",
+    "11": "External Trigger",
+    "12": "Detection Strategy",
+    "13": "Antimalware Detection"
+  }'''
+  %}
+  "name": "ReaQta Alert - {{ triggerCondition | string | soar_substitute(triggercondition_lookup) }}, Endpoint: {{ endpoint.name }}",
+  "description": "{{ title | replace('"', '\\"') }}",
+  {# start_date cannot be after discovered_date #}
+  {% set start_date = happenedAt if happenedAt <= receivedAt else receivedAt %}
+  "discovered_date": {{ receivedAt|soar_datetimeformat(split_at='.') }},
+  "start_date": {{ start_date|soar_datetimeformat(split_at='.') }},
+  {# if alert users are different than SOAR users, consider using a mapping table using soar_substitute: #}
+  {# "owner_id": "{{ assignedTo|soar_substitute('{"Automation": "soar_user1@ent.com", "defender_user2@co.com": "soar_user2@ent.com", "DEFAULT": "default_user@ent.com" }') }}", #}
+  "plan_status": "{{ closed|string|soar_substitute('{"False": "A", "True": "A"}') }}",
+  "severity_code": "{{ severity|title|soar_substitute('{"Safe": "Low"}') }}",
+  "properties": {
+    "reaqta_id": "{{ id }}",
+    "reaqta_alert_link": "<a target='blank' href='{{ alert_url }}'>ReaQta Alert</a>",
+    "reaqta_tags": "{{ tags | join(', ') }}",
+    "reaqta_endpoint_id": "{{ endpoint.id }}",
+    "reaqta_groups": "{{ endpoint.groups | map(attribute='name') | join(', ') }}",
+    "reaqta_machine_info": "Machine Name: {{ endpoint.name }}\nOS: {{ endpoint.os }}\nDomain: {{ endpoint.domain }}\nCPU: {{ endpoint.cpuDescr }}"
+  },
+  "comments": [
+    {% if notes %}
+    {
+      "text": {
+          "format": "text",
+          "content": "Created by ReaQta:\n{{ notes|replace('"', '\\"') }}"
+      }
+    }
+    {% else %}
+    {
+      "text": {
+          "format": "text",
+          "content": "Created by ReaQta"
+      }
+    }
+    {% endif %}
+  ]
+}
+```
+
+### soar_close_case_template.jinja
+```
+{
+  {# JINJA template for closing a SOAR incident from a ReaQta alert. #}
+  "plan_status": "C",
+  "resolution_id": "{{ alertStatus | soar_substitute('{"benign": "Not an Issue", "malicious": "Resolved"}') }}",
+  "resolution_summary": "Closed by ReaQta, Alert Status: {{ alertStatus }}"
+  {# add additional fields based on your 'on close' field requirements #}
+  {#
+  "properties: {
+      "your_custom_field": "value"
+  }
+  #}
+}
+```
 
 ---
 
