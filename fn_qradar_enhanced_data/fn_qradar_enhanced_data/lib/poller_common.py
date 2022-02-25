@@ -1,23 +1,14 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
-import datetime
+from datetime import datetime
 import functools
-import logging
-import traceback
-from ast import literal_eval
+from logging import getLogger
+from traceback import format_exc
 from threading import Event
-from resilient import SimpleHTTPException, Patch
-from resilient_lib import IntegrationError
-from cachetools import cached, LRUCache
+from resilient import SimpleHTTPException
 
-LOG = logging.getLogger(__name__)
-
-IBM_SOAR = "IBM SOAR" # common label
-SOAR_HEADER = "Created by {}".format(IBM_SOAR)
-
-TYPES_URI = "/types"
-INCIDENTS_URI = "/incidents"
+LOG = getLogger(__name__)
 
 # P O L L E R   L O G I C
 def poller(named_poller_interval, named_last_poller_time, package_name):
@@ -38,13 +29,13 @@ def poller(named_poller_interval, named_last_poller_time, package_name):
             while not exit_event.is_set():
                 try:
                     LOG.info(u"%s polling start.", package_name)
-                    poller_start = datetime.datetime.now()
+                    poller_start = datetime.now()
                     # function execution with the last poller time in ms
                     func(self, last_poller_time=int(last_poller_time.timestamp()*1000))
 
                 except Exception as err:
                     LOG.error(str(err))
-                    LOG.error(traceback.format_exc())
+                    LOG.error(format_exc())
                 finally:
                     LOG.info(u"%s polling complete.", package_name)
                     # set the last poller time for next cycle
@@ -127,106 +118,9 @@ class SOARCommon():
         Returns:
             query_results [list]: List of query results
         """
-        query_uri = "/".join([INCIDENTS_URI, "query?return_level=normal"])
-
         try:
-            return self.rest_client.post(query_uri, query), None
+            return self.rest_client.post('/incidents/query?return_level=normal', query), None
         except SimpleHTTPException as err:
             LOG.error(str(err))
             LOG.error(query)
             return None, str(err)
-
-    def update_soar_case(self, case_id, case_payload):
-        """
-        Update a IBM SOAR case by rendering a jinja2 template
-        :param case_payload: inciednt fields to update (json object)
-        :return: IBM SOAR case
-        """
-        try:
-            result = self._patch_case(case_id, case_payload)
-            return result
-
-        except Exception as err:
-            LOG.error(str(err))
-            raise IntegrationError from err
-
-    def _patch_case(self, case_id, case_payload):
-        """ _patch_case will update an case with the specified json payload.
-        :param case_id: case ID of case to be updated.
-        ;param case_payload: case fields to be updated.
-        :return:
-        """
-        try:
-            # Update case
-            case_url = "/".join([INCIDENTS_URI, str(case_id)])
-            case = self.rest_client.get(case_url)
-            patch = Patch(case)
-
-            # Iterate over payload dict.
-            for name, _ in case_payload.items():
-                if name == 'properties':
-                    for field_name, field_value in case_payload['properties'].items():
-                        patch.add_value(field_name, field_value)
-                else:
-                    payload_value = case_payload.get(name)
-                    patch.add_value(name, payload_value)
-
-            patch_result = self.rest_client.patch(case_url, patch)
-            result = self._chk_status(patch_result)
-            # add back the case id
-            result['id'] = case_id
-            return result
-
-        except Exception as err:
-            LOG.error(str(err))
-            raise IntegrationError from err
-
-    def _chk_status(self, resp, rc=200):
-        """
-        check the return status. If return code is not met, raise IntegrationError,
-        if success, return the json payload
-        :param resp:
-        :param rc:
-        :return:
-        """
-        if hasattr(resp, "status_code"):
-            if isinstance(rc, list):
-                if resp.status_code < rc[0] or resp.status_code > rc[1]:
-                    raise IntegrationError(u"status code failure: {0}".format(resp.status_code))
-            elif resp.status_code != rc:
-                raise IntegrationError(u"status code failure: {0}".format(resp.status_code))
-
-            return resp.json()
-
-        return {}
-
-@cached(cache=LRUCache(maxsize=100))
-def eval_mapping(eval_value, wrapper=None):
-    """
-    Args:
-            eval_value ([str]): [json fragment to evaluate]
-            wrapper ([str]): [values such as '[{}]' or '{{ {} }}']
-        Returns:
-            mapping ([list or dict]): converted data
-    """
-    if not eval_value:
-        return None
-
-    try:
-        if wrapper:
-            eval_value = wrapper.format(eval_value)
-
-        # Try converting input to a dict or array
-        result = literal_eval(eval_value)
-        # expecting the result to be a list or dictionary
-        if not isinstance(result, (list, dict)):
-            raise IndentationError("Unexpected result: %s", result)
-
-        return result
-
-    except Exception as err:
-        LOG.error(str(err))
-        LOG.error(traceback.format_exc())
-        LOG.error("""mapping eval_value must be a string representation of a (partial) array or dictionary e.g. "'value1', 'value2'" or "'key':'value'" """)
-
-    return None

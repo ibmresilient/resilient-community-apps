@@ -11,6 +11,7 @@ from resilient_lib import validate_fields
 from fn_qradar_enhanced_data.util.qradar_utils import QRadarClient, QRadarServers
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_qradar_enhanced_data.util.function_utils import get_servers_list
+import fn_qradar_enhanced_data.util.qradar_graphql_queries as qradar_graphql_queries
 
 #For a given Offense ID and QRadar Destination, get the offense summary.
 
@@ -68,6 +69,7 @@ class FunctionComponent(ResilientComponent):
             # Fetch the Offense Summary if function type is OFFENSE_SUMMARY
             if qradar_fn_type == qradar_constants.OFFENSE_SUMMARY:
 
+                # offense_summary = qradar_client.graphql_query({"id": qradar_offenseid}, qradar_graphql_queries.GRAPHQL_OFFENSEQUERY)
                 offense_summary = qradar_client.get_offense_summary_data(qradar_offenseid)
                 results["offense"] = offense_summary["content"]
 

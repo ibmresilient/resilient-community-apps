@@ -6,6 +6,7 @@
 
 # URL from https://qradar_instance/console/graphql
 
+# Get last updated time for an offense
 GRAPHQL_OPENOFFENSESLASTUPDATE = '''query getOpenOffensesUpdate($limit: Int!, $offset: Int!, $orderBy: OffensesOrderBy!, $filter: String){
                                         getOffenses(limit: $limit, offset: $offset, orderBy: $orderBy, filter: $filter){
                                             id
@@ -13,14 +14,6 @@ GRAPHQL_OPENOFFENSESLASTUPDATE = '''query getOpenOffensesUpdate($limit: Int!, $o
                                         }
                                  }
                                  '''
-
-# Get last updated time for an offense
-GRAPHQL_OFFENSEUPDATE = '''query offenseUpdate($id:ID!){
-                            getOffense(id: $id){
-                                lastUpdatedTime
-                            }
-                        }
-                        '''
 
 #  Basic offense data query to populate summmary fields.
 GRAPHQL_OFFENSEQUERY = '''query offenseQuery($id: ID!) {
