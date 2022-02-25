@@ -335,7 +335,8 @@ class QRadarClient(object):
     def graphql_query(variables, query_name):
         """
 
-        :param variables: Dictionary of variables 
+        :param variables: Dictionary of variables
+        :param query_name: Name of the query from qradar_graphql_queries.py
         """
         auth_info = AuthInfo.get_authInfo()
         headers = auth_info.headers.copy()
@@ -349,8 +350,6 @@ class QRadarClient(object):
         url = u"{}{}".format(auth_info.api_url.replace("api/",""), qradar_constants.GRAPHQL_URL)
         data = {"operationName":operationName,"variables":variables,"query":query_name}
         ret = {}
-
-        
 
         try:
             response = auth_info.make_call("POST", url, data=dumps(data), headers=headers)

@@ -76,7 +76,7 @@ def get_servers_list(opts):
 
     return servers_list
 
-def clear_table(res_rest_client, table_name, incident_id):
+def clear_table(rest_client, table_name, incident_id):
     """
     Clear data in given table on SOAR
     :param res_rest_client: SOAR rest client connection
@@ -85,7 +85,7 @@ def clear_table(res_rest_client, table_name, incident_id):
     """
 
     try:
-        res_rest_client.delete("/incidents/{}/table_data/{}/row_data?handle_format=names".format(incident_id, table_name))
+        rest_client.delete("/incidents/{}/table_data/{}/row_data?handle_format=names".format(incident_id, table_name))
 
     except Exception as err_msg:
         LOG.warning("Failed to clear table: {} error: {}".format(table_name, err_msg))

@@ -10,7 +10,6 @@ GRAPHQL_OPENOFFENSESLASTUPDATE = '''query getOpenOffensesUpdate($limit: Int!, $o
                                         getOffenses(limit: $limit, offset: $offset, orderBy: $orderBy, filter: $filter){
                                             id
                                             lastUpdatedTime
-                                            status
                                         }
                                  }
                                  '''
