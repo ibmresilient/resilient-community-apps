@@ -133,6 +133,8 @@ class PollerComponent(ResilientComponent):
             offenses_update_list = offenses["content"]
 
             payload = { "patches": {} }
+            changes = False
+            updated_cases = []
 
             # Iterate through list of offenses recieved from QRadar query
             for offense in offenses_update_list:
@@ -143,6 +145,8 @@ class PollerComponent(ResilientComponent):
                 case_ver = case['vers']
                 if offense_lastUpdatedTime != case_lastUpdatedTime:
                     # If time is different then update the case
+                    changes = True
+                    updated_cases.append(case_id)
                     patches = payload['patches']
                     patches[case_id] = {
                                             "version": case_ver+1,
@@ -152,15 +156,16 @@ class PollerComponent(ResilientComponent):
                                                 "field": { "name": "qr_offense_last_updated_time" }
                                             } ]
                                         },
-            payload_str = str(payload).replace('(','').replace(')','').replace(',,',',')
-            payload_str = payload_str[0:payload_str.rfind(",")]+payload_str[payload_str.rfind(",")+1:]
-            payload = ast.literal_eval(payload_str)
+            if changes == True:
+                payload_str = str(payload).replace('(','').replace(')','').replace(',,',',')
+                payload_str = payload_str[0:payload_str.rfind(",")]+payload_str[payload_str.rfind(",")+1:]
+                payload = ast.literal_eval(payload_str)
 
-            response = self.rest_client.put("/incidents/patch", payload)
-            if response['failures']:
-                raise IntegrationError(str(response))
+                response = self.rest_client.put("/incidents/patch", payload)
+                if response['failures']:
+                    raise IntegrationError(str(response))
 
-            LOG.info("Incident: {} updated field: qr_offense_last_updated_time with value: {}".format(case_id, offense_lastUpdatedTime))
+                LOG.info("Incident: {} updated field: qr_offense_last_updated_time".format(str(updated_cases)))
 
     def _get_last_poller_date(self, polling_lookback):
         """get the last poller datetime based on a lookback value
