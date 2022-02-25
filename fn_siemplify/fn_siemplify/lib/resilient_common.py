@@ -22,6 +22,8 @@ SIEMPLIFY_CASE_ID = "siemplify_case_id"
 
 TYPES_URI = "/types"
 
+CP4S_PREFIX = "cases-rest."
+
 class ResilientCommon():
 
     def __init__(self, rest_client):
@@ -412,4 +414,29 @@ def eval_mapping(value, wrapper=None):
         LOG.error(traceback.format_exc())
         LOG.error("""mapping value must be a string representation of a (partial) array or dictionary e.g. "['value1', 'value2']" or "{'key':'value'}" """)
 
+    return None
+
+def make_case_linkback_url(resilient_opts, incident_id):
+    """create the appropriate url back to the soar case
+
+    Args:
+        opts (dict): app.config settings
+        incident_id (int): incident id
+
+    Returns:
+        str: url back to SOAR case
+    """
+    if resilient_opts:
+        host = resilient_opts.get('host')
+        if host:
+            if "https://" not in host:
+                host = "https://{}:{}".format(host, resilient_opts.get('port', "443"))
+
+            if CP4S_PREFIX in host:
+                host = host.replace(CP4S_PREFIX, "")
+                url = "/".join([host, "app/respond/#cases", str(incident_id)])
+            else:
+                url = "/".join([host, "#incidents", str(incident_id)])
+
+            return "{}?orgid={}".format(url, resilient_opts.get("org"))
     return None

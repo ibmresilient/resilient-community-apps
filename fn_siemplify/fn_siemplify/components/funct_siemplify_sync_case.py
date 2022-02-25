@@ -5,8 +5,8 @@
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import IntegrationError, validate_fields, clean_html
-from fn_siemplify.lib.resilient_common import ResilientCommon, eval_mapping
-from fn_siemplify.lib.siemplify_common import SiemplifyCommon, PACKAGE_NAME, IBMSOAR_TAGS
+from fn_siemplify.lib.resilient_common import ResilientCommon, eval_mapping, make_case_linkback_url
+from fn_siemplify.lib.siemplify_common import SiemplifyCommon, PACKAGE_NAME, IBMSOAR_TAGS, CREATED_BY_SOAR
 
 FN_NAME = "siemplify_sync_case"
 SIEMPLIFY_CASE_URL = "{}/#/main/cases/classic-view/{}"
@@ -64,15 +64,14 @@ class FunctionComponent(AppFunctionComponent):
                                                                    eval_mapping(app_settings.get('playbook_mappings'), wrapper="{{ {} }}"),
                                                                    resilient_env.get_incident_types())
 
+        incident_info['soar_linkback_url'] = make_case_linkback_url(self.opts.get('resilient'), fn_inputs.siemplify_incident_id)
         self.LOG.debug(incident_info)
 
         siemplify_env = SiemplifyCommon(self.rc, self.app_configs)
         results, error_msg = siemplify_env.sync_case(incident_info)
 
         # get the results based on the data returned
-        if error_msg:
-            status = False
-        else:
+        if not error_msg:
             # get the full case information
             case_results, _error_msg = siemplify_env.get_case(results)
 
@@ -134,7 +133,7 @@ class FunctionComponent(AppFunctionComponent):
                 'siemplify_alert_id': fn_inputs['siemplify_alert_id'],
                 'siemplify_comment': comment['text']
             }
-            siemplify_env.sync_comment(inputs)
+            siemplify_env.sync_insight(inputs)
 
     def sync_artifacts(self, resilient_env, siemplify_env, fn_inputs):
         for artifact in resilient_env.get_incident_artifacts(fn_inputs['siemplify_incident_id']):
