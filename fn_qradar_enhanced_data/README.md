@@ -21,7 +21,7 @@
 - [Overview](#overview)
   - [Key Features](#key-features)
 - [Requirements](#requirements)
-  - [SOAR platform](#resilient-platform)
+  - [SOAR platform](#soar-platform)
   - [Cloud Pak for Security](#cloud-pak-for-security)
   - [Proxy Server](#proxy-server)
   - [QRadar Requirements](#qradar-requirements)
@@ -115,7 +115,7 @@ The following SOAR platform guides provide additional information:
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
 
-The above guides are available on the IBM Knowledge Center at [ibm.biz/resilient-docs](https://ibm.biz/resilient-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _App Host Deployment Guide_ or _Integration Server Guide_ by expanding **SOAR Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
+The above guides are available on the IBM Knowledge Center at [ibm.biz/soar-docs](https://ibm.biz/soar-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _App Host Deployment Guide_ or _Integration Server Guide_ by expanding **SOAR Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
 ### Cloud Pak for Security
 If you are deploying to IBM Cloud Pak for Security, the requirements are:
@@ -140,7 +140,7 @@ The app works with QRadar 7.4.0 or higher and requires the QRadar Analayst Workf
 ## Installation
 
 ### Install
-* To install or uninstall an App or Integration on the _SOAR platform_, see the documentation at [ibm.biz/resilient-docs](https://ibm.biz/resilient-docs).
+* To install or uninstall an App or Integration on the _SOAR platform_, see the documentation at [ibm.biz/soar-docs](https://ibm.biz/soar-docs).
 * To install or uninstall an App on _IBM Cloud Pak for Security_, see the documentation at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs) and follow the instructions above to navigate to Orchestration and Automation .
 
 ### App Configuration
@@ -439,7 +439,7 @@ Create artifact from Destination IP information for the selected row.
 ```python
 #
 # We create artifacts according to how they can be mapped to
-# Resilient default artifacts. If you have custom artifacts, and would like
+# SOAR default artifacts. If you have custom artifacts, and would like
 # to map them as well, please modify the following mapping dict.
 #
 
@@ -477,7 +477,7 @@ Create artifact from Source IP information for the selected row.
 ```python
 #
 # We create artifacts according to how they can be mapped to
-# Resilient default artifacts. If you have custom artifacts, and would like
+# SOAR default artifacts. If you have custom artifacts, and would like
 # to map them as well, please modify the following mapping dict.
 #
 
@@ -515,7 +515,7 @@ Create artifact from the Events information of the selected row.
 ```python
 #
 # We create artifacts according to how they can be mapped to
-# Resilient default artifacts. If you have custom artifacts, and would like
+# SOAR default artifacts. If you have custom artifacts, and would like
 # to map them as well, please modify the following mapping dict.
 #
 
@@ -558,7 +558,7 @@ Create artifact from Assets information for the selected row.
 ```python
 #
 # We create artifacts according to how they can be mapped to
-# Resilient default artifacts. If you have custom artifacts, and would like
+# SOAR default artifacts. If you have custom artifacts, and would like
 # to map them as well, please modify the following mapping dict.
 #
 
@@ -599,7 +599,7 @@ Create artifact from the Flows info of the selected row.
 ```python
 #
 # We create artifacts according to how they can be mapped to
-# Resilient default artifacts. If you have custom artifacts, and would like
+# SOAR default artifacts. If you have custom artifacts, and would like
 # to map them as well, please modify the following mapping dict.
 #
 
