@@ -60,7 +60,7 @@
 | 2.1.0 | Feb. 2021 | Additional functions for reference table mapping. |
 | 2.0.9 | Feb. 2021 | Bug fixes associated with require input field validation. |
 | 2.0.8 | Nov. 2020 | Fixed a bug failing search function when used with token. | 
-| 2.0.7 | July 2020 | Correct typos and describe optional Search activity field Update Resilient version. |
+| 2.0.7 | July 2020 | Correct typos and describe optional Search activity field Update SOAR version. |
 | 2.0.6 | May 2020 | Add option to return all results from Search. |
 | 2.0.4 | April 2020 | Additional configuration notes. |
 | 2.0 | March 2019 | Supports the 2.0 release. |
@@ -99,7 +99,7 @@ With the above functions, this package includes example workflows that demonstra
 <!--
   List any Requirements 
 -->
-This app supports the IBM Resilient SOAR Platform and the IBM Cloud Pak for Security.
+This app supports the IBM QRadar SOAR Platform and the IBM Cloud Pak for Security.
 
 ### SOAR platform
 The SOAR platform supports two app deployment mechanisms, App Host and integration server.
@@ -123,7 +123,7 @@ The following SOAR platform guides provide additional information:
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
 
-The above guides are available on the IBM Knowledge Center at [ibm.biz/resilient-docs](https://ibm.biz/resilient-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _App Host Deployment Guide_ or _Integration Server Guide_ by expanding **Resilient Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
+The above guides are available on the IBM Knowledge Center at [ibm.biz/soar-docs](https://ibm.biz/soar-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _App Host Deployment Guide_ or _Integration Server Guide_ by expanding **SOAR Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
 ### Cloud Pak for Security
 If you are deploying to IBM Cloud Pak for Security, the requirements are:
@@ -149,7 +149,7 @@ The app **does/does not** support a proxy server.
 ## Installation
 
 ### Install
-* To install or uninstall an App or Integration on the _SOAR platform_, see the documentation at [ibm.biz/resilient-docs](https://ibm.biz/resilient-docs).
+* To install or uninstall an App or Integration on the _SOAR platform_, see the documentation at [ibm.biz/soar-docs](https://ibm.biz/soar-docs).
 * To install or uninstall an App on _IBM Cloud Pak for Security_, see the documentation at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs) and follow the instructions above to navigate to Orchestration and Automation.
 
 ### App Configuration
@@ -1302,4 +1302,4 @@ qradar_reference_table
 Refer to the documentation listed in the Requirements section for troubleshooting information.
 
 ### For Support
-This is a IBM Community provided App. Please search the Community https://ibm.biz/resilientcommunity for assistance.
+This is a IBM Community provided App. Please search the Community https://ibm.biz/soarcommunity for assistance.
