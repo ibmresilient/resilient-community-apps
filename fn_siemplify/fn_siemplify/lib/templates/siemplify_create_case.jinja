@@ -1,7 +1,7 @@
 {
   "title": "IBM SOAR - {{ name|e }}",
   "assignedUser": {% if siemplify_assigned_user %} "{{ siemplify_assigned_user }}" {% else %} null {% endif %},
-  "reason": "IBM SOAR Incident {{ soar_linkback_url }}",
+  "reason": "IBM SOAR Incident {{ id }}",
   "priority": {{ severity | string | resilient_substitute('{"4": 25, "5": 50, "6": 75, "DEFAULT": 50}') }},
   "environment": "{{ siemplify_environment if siemplify_environment else 'Default Environment'}}",
   "isImportant": {{ confirmed | tojson }},

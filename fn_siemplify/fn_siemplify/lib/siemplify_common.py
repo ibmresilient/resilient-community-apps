@@ -197,7 +197,7 @@ class SiemplifyCommon():
         result, error_msg = self._make_call("POST", ADDUPDATE_CUSTOMLIST_URL, payload) # return blank if successful
         return payload if not error_msg else result, error_msg
 
-    def sync_comment(self, inputs):
+    def sync_comment(self, inputs, header=True):
         """[Sync SOAR incident note with siemplify as a wall comment]
 
         Args:
@@ -209,7 +209,7 @@ class SiemplifyCommon():
         payload = {
             "caseId": str(inputs['siemplify_case_id']),
             "alertIdentifier": inputs.get('siemplify_alert_id'),
-            "comment": "{}\n{}".format(SOAR_HEADER, inputs['siemplify_comment'])
+            "comment": "{}\n{}".format(SOAR_HEADER, inputs['siemplify_comment']) if header else inputs['siemplify_comment']
         }
 
         return self._make_call("POST", CREATE_COMMENT_URL, payload)

@@ -82,6 +82,10 @@ class FunctionComponent(AppFunctionComponent):
             case_results['siemplify_case_url'] = SIEMPLIFY_CASE_URL.format(self.app_configs.base_url, results)
             results = case_results
 
+            inputs['siemplify_comment'] = '<div><a href="{}" target="blank">SOAR CASE {}</a></div>'.format(incident_info['soar_linkback_url'],
+                                                                                  incident_info['id'])
+            siemplify_env.sync_comment(inputs)
+
             # S Y N C   A L L   O T H E R S
             # collect the incident comments
             if fn_inputs.siemplify_sync_comments:
