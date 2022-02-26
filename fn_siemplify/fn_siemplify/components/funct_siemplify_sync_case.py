@@ -4,9 +4,9 @@
 """AppFunction implementation"""
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from resilient_lib import IntegrationError, validate_fields, clean_html
+from resilient_lib import validate_fields, clean_html
 from fn_siemplify.lib.resilient_common import ResilientCommon, eval_mapping, make_case_linkback_url
-from fn_siemplify.lib.siemplify_common import SiemplifyCommon, PACKAGE_NAME, IBMSOAR_TAGS, CREATED_BY_SOAR
+from fn_siemplify.lib.siemplify_common import SiemplifyCommon, PACKAGE_NAME, IBMSOAR_TAGS
 
 FN_NAME = "siemplify_sync_case"
 SIEMPLIFY_CASE_URL = "{}/#/main/cases/classic-view/{}"

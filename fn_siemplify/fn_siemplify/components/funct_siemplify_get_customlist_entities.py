@@ -22,7 +22,7 @@ class FunctionComponent(AppFunctionComponent):
         Function: Get entities from Siemplify's Custom list
         Inputs:
             -   fn_inputs.siemplify_limit
-            -   fn_inputs.siemplify_search
+            -   fn_inputs.siemplify_environments
         """
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
@@ -37,7 +37,7 @@ class FunctionComponent(AppFunctionComponent):
         inputs = fn_inputs._asdict()
 
         siemplify_env = SiemplifyCommon(self.rc, self.app_configs)
-        results, error_msg = siemplify_env.get_customlist()
+        results, error_msg = siemplify_env.get_customlist(inputs)
 
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
 

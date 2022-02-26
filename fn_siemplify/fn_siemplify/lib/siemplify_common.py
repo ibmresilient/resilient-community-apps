@@ -22,6 +22,7 @@ All_BLOCKLIST_URL = "settings/GetAllModelBlackRecords"
 FILTERED_BLOCKLIST_URL = "settings/GetBlackListDetails"
 ADDUPDATE_BLOCKLIST_URL = "settings/AddOrUpdateModelBlackRecords"
 ALL_CUSTOMLIST_URL = "settings/GetTrackingListRecords"
+FILTERED_CUSTOMLIST_URL = "settings/GetTrackingListRecordsFiltered"
 ADDUPDATE_CUSTOMLIST_URL = "settings/AddOrUpdateTrackingListRecords"
 GET_VERSION_URL = "settings/GetSystemVersion"
 
@@ -147,11 +148,16 @@ class SiemplifyCommon():
             payload = {
                 "searchTerm": inputs.get("siemplify_search"),
                 "requestedPage": 0,
-                "pageSize": str(inputs.get("siemplify_limit", 100))
+                "pageSize": str(inputs.get("siemplify_limit", 1000))
             }
-            return self._make_call("POST", FILTERED_BLOCKLIST_URL, payload)
+            results, err_msg = self._make_call("POST", FILTERED_BLOCKLIST_URL, payload)
 
-        return self._make_call("GET", All_BLOCKLIST_URL)
+        results, err_msg = self._make_call("GET", All_BLOCKLIST_URL)
+
+        if not err_msg and inputs.get("siemplify_limit"):
+            results = results[:int(inputs.get("siemplify_limit"))]
+
+        return results, err_msg
 
     def add_update_blocklist(self, inputs):
         """[add a SOAR artifact to the block list]
@@ -172,9 +178,22 @@ class SiemplifyCommon():
         result, error_msg = self._make_call("POST", ADDUPDATE_BLOCKLIST_URL, payload) # return blank if successful
         return payload if not error_msg else result, error_msg
 
-    def get_customlist(self):
+    def get_customlist(self, inputs):
         # get the contents of the Siemlify custom list
-        return self._make_call("GET", ALL_CUSTOMLIST_URL)
+
+        if inputs.get("siemplify_environments"):
+            payload = {
+                "environments": [ env.strip() for env in inputs.get("siemplify_environments").split(",") ]
+            }
+
+            results, err_msg = self._make_call("POST", FILTERED_CUSTOMLIST_URL, payload=payload)
+        else:
+            results, err_msg = self._make_call("GET", ALL_CUSTOMLIST_URL)
+
+        if not err_msg and inputs.get("siemplify_limit"):
+            results = results[:int(inputs.get("siemplify_limit"))]
+
+        return results, err_msg
 
     def add_update_customlist(self, inputs):
         """[add a SOAR artifact to the custom list]

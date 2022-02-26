@@ -79,7 +79,7 @@ Bi-directional synchronization with Siemplify Cases from SOAR Incidents. Other S
 <!--
   List the Key Features of the Integration
 -->
-* Sync SOAR incidents with Siemplify cases
+* Sync SOAR incidents (including notes, artifacts, and attachments) with Siemplify cases
 * Sync Siemplify case close events with SOAR incidents
 * Sync Siemplify case changes with existing SOAR incidents
 * Flexible templates used allowing modification for your environment
@@ -98,11 +98,11 @@ This app supports the IBM QRadar SOAR Platform and the IBM Cloud Pak for Securit
 The SOAR platform supports two app deployment mechanisms, App Host and integration server.
 
 If deploying to a SOAR platform with an App Host, the requirements are:
-* SOAR platform >= `40.2.81`.
+* SOAR platform >= `41.2.51`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `40.2.81`.
+* SOAR platform >= `41.2.51`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient-circuits>=43.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions:
@@ -110,7 +110,8 @@ If deploying to a SOAR platform with an integration server, the requirements are
   | ---- | ----------- |
   | Org Data | Read |
   | Function | Read |
-  | Incident | Read all |
+  | Incident | Read all, edit fields, edit status |
+
 
 The following SOAR platform guides provide additional information:
 * _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
@@ -179,6 +180,7 @@ The following table provides the settings you need to configure the app. These s
 | **soar_close_case_template** | No | `/path/to/soar_close_case.jinja` | *Use when overriding the default template*  |
 | **soar_update_case_template** | No | `/path/to/soar_update_case_case.jinja` | *Use when overriding the default template*  |
 | **artifact_type_lookup** | No | `/path/to/artifact_type_lookup.json` | *Use to specify an override JSON file with a mapping between SOAR artifact types and Siemplify entities* |
+| **playbook_mappings** | No | `'<SOAR Incident Type>': 'playbook1,playbook2','Malware':'playbook3','DEFAULT':'playbook4'` | * Lookup key/value pairs to mapp a SOAR incident type to Siemplify playbook(s)* |
 
 ### Custom Layouts
 <!--

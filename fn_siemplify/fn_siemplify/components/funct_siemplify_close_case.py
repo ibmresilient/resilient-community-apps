@@ -4,9 +4,8 @@
 """AppFunction implementation"""
 
 from fn_siemplify.lib.siemplify_common import SiemplifyCommon, PACKAGE_NAME
-from fn_siemplify.lib.resilient_common import ResilientCommon, b_to_s
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from resilient_lib import IntegrationError, validate_fields, clean_html
+from resilient_lib import validate_fields, clean_html
 
 FN_NAME = "siemplify_close_case"
 

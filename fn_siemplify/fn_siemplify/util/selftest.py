@@ -1,23 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
-"""
-Function implementation test.
-Usage:
-    resilient-circuits selftest -l fn-siemplify
-    resilient-circuits selftest --print-env -l fn-siemplify
-
-Return examples:
-    return {
-        "state": "success",
-        "reason": "Successful connection to third party endpoint"
-    }
-
-    return {
-        "state": "failure",
-        "reason": "Failed to connect to third party endpoint"
-    }
-"""
 
 import logging
 from resilient_lib import RequestsCommon

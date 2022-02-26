@@ -18,8 +18,8 @@
 
 ### Pre-Processing Script
 ```python
-inputs.siemplify_limit = rule.properties.siemplify_limit_result if rule.properties.siemplify_limit_result else 100
-inputs.siemplify_search = rule.properties.siemplify_search_term 
+inputs.siemplify_limit = rule.properties.siemplify_limit_result if rule.properties.siemplify_limit_result else None
+inputs.siemplify_environments = rule.properties.siemplify_environments
 
 ```
 

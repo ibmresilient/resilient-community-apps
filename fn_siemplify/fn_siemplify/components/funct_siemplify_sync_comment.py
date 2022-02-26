@@ -5,7 +5,7 @@
 
 from fn_siemplify.lib.siemplify_common import SiemplifyCommon, PACKAGE_NAME
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from resilient_lib import IntegrationError, validate_fields
+from resilient_lib import validate_fields
 
 FN_NAME = "siemplify_sync_comment"
 
