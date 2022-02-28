@@ -13,8 +13,7 @@
 PACKAGE_NAME=$1
 BUILD_TYPE=$2
 PYPI_INDEX_TO_USE=$3
-DOCKERFILE_KEYWORD="RUN pip install --upgrade pip"
-DOCKERFILE_WORDS_TO_INSERT="[\"\\n\", \"RUN pip install resilient-circuits -i $ARTIFACTORY_PYPI_INDEX \\n\"]"
+
 
 ##################
 ## Check params ##
@@ -54,9 +53,7 @@ repo_login () {
 print_msg "\
 PACKAGE_NAME:\t\t$PACKAGE_NAME \n\
 BUILD_TYPE:\t\t$BUILD_TYPE \n\
-PYPI_INDEX_TO_USE:\t$PYPI_INDEX_TO_USE\n\
-DOCKERFILE_KEYWORD:\t$DOCKERFILE_KEYWORD\n\
-DOCKERFILE_WORDS_TO_INSERT:\t$DOCKERFILE_WORDS_TO_INSERT\
+PYPI_INDEX_TO_USE:\t$PYPI_INDEX_TO_USE\
 "
 
 ALLOW_IMAGE_NAMES=( $(<$PATH_ALLOW_IMAGE_NAMES) )
@@ -92,7 +89,6 @@ fi
 
 # Update setup.py with new version
 path_setup_py_file="$package_path/setup.py"
-path_dockerfile="$package_path/Dockerfile"
 current_version=$(python $path_setup_py_file --version)
 lib_version=$(echo $current_version | cut -d "." -f 1,2)
 version_to_use=$current_version
@@ -101,9 +97,6 @@ if [ "$BUILD_TYPE" == "DEV" ] ; then
     version_to_use=$lib_version.$TRAVIS_BUILD_NUMBER
     print_msg "Updating $path_setup_py_file to version '$version_to_use'"
     python $SCRIPTS_DIR/modify_attribute_in_setup_py_file.py "$package_path/setup.py" "version" "version=\"$version_to_use\","
-
-    print_msg "Overwriting $path_dockerfile with new PyPi index for resilient-circuits"
-    python $SCRIPTS_DIR/insert_into_Dockerfile.py $path_dockerfile "$DOCKERFILE_KEYWORD" "$DOCKERFILE_WORDS_TO_INSERT"
 fi
 
 docker_tag="$PACKAGE_NAME:$version_to_use"

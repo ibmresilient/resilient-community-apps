@@ -1,5 +1,5 @@
 language: python
-python: 3.9
+python: 3.6
 os: linux
 env:
   global:
@@ -93,18 +93,6 @@ matrix:
         - .scripts/run_tests.sh "ALL" "$PYPI_INDEX"
 
     - stage: run all tests
-      name: Python 3.9 Unit Tests - Main - PyPi
-      python: 3.9
-      env:
-        - RUN_TYPE=unit_test_main_pp TOXENV=py39
-      install:
-        - pip install -U -r "$PATH_PIP_REQ_MAIN"
-        - pip install -U -r "$PATH_PIP_REQ_TESTS"
-      script:
-        - echo "Starting Python 3.9 Unit Tests - Main - PyPi"
-        - .scripts/run_tests.sh "ALL" "$PYPI_INDEX"
-
-    - stage: run all tests
       name: Python 2.7 Unit Tests - Main - Artifactory
       python: 2.7
       env:
@@ -126,18 +114,6 @@ matrix:
         - pip install -U -r "$PATH_PIP_REQ_TESTS"
       script:
         - echo "Starting Python 3.6 Unit Tests - Main - Artifactory"
-        - .scripts/run_tests.sh "ALL" "$ARTIFACTORY_PYPI_INDEX"
-
-    - stage: run all tests
-      name: Python 3.9 Unit Tests - Main - Artifactory
-      python: 3.9
-      env:
-        - RUN_TYPE=unit_test_main_af TOXENV=py39
-      install:
-        - pip install -U -r "$PATH_PIP_REQ_MAIN"
-        - pip install -U -r "$PATH_PIP_REQ_TESTS"
-      script:
-        - echo "Starting Python 3.9 Unit Tests - Main - Artifactory"
         - .scripts/run_tests.sh "ALL" "$ARTIFACTORY_PYPI_INDEX"
 
     - stage: run package tests
@@ -165,18 +141,6 @@ matrix:
         - echo "Starting Python 3.6 Unit Tests - Package"
         - .scripts/run_tests.sh "$PACKAGE_NAME" "$PYPI_INDEX_TO_USE"
 
-    - stage: run package tests
-      name: Python 3.9 Unit Tests - Package
-      python: 3.9
-      env:
-        - RUN_TYPE=unit_test_package TOXENV=py39
-      install:
-        - pip install -U -r "$PATH_PIP_REQ_MAIN"
-        - pip install -U -r "$PATH_PIP_REQ_TESTS"
-      script:
-        - echo "Starting Python 3.9 Unit Tests - Package"
-        - .scripts/run_tests.sh "$PACKAGE_NAME" "$PYPI_INDEX_TO_USE"
-
     # Jobs that perform static analysis; code quality, security scans etc
     - stage: static analysis
       name: Py2.7 Bandit Security Scan
@@ -189,10 +153,10 @@ matrix:
         - .scripts/run_bandit_scan.sh "$PACKAGE_NAME"
 
     - stage: static analysis
-      name: Py3.9 Bandit Security Scan
-      python: 3.9
+      name: Py3.6 Bandit Security Scan
+      python: 3.6
       env:
-        - ANALYSIS_NAME="Py3.9 Bandit Security Scan"
+        - ANALYSIS_NAME="Py3.6 Bandit Security Scan"
       install:
         - pip install bandit
       script:
@@ -200,7 +164,7 @@ matrix:
 
     - stage: static analysis
       name: Pylint
-      python: 3.9
+      python: 3.6
       env:
         - ANALYSIS_NAME="Pylint"
       install:
@@ -210,7 +174,7 @@ matrix:
 
     - stage: static analysis
       name: Safety Checker
-      python: 3.9
+      python: 3.6
       env:
         - ANALYSIS_NAME="CVE Search against dependancies"
       install:
@@ -220,7 +184,7 @@ matrix:
 
     - stage: build image and app zip
       name: Build Image and App zip
-      python: 3.9
+      python: 3.6
       services:
         - docker
       install: skip
@@ -244,7 +208,7 @@ matrix:
         - .scripts/send_slack_notification.sh "Built $BUILD_TYPE version of [$PACKAGE_NAME] \n Artifactory App.zip - <$PATH_APP_ZIP|$FILE_NAME>" "success";
 
     - stage: rebuild all images
-      python: 3.9
+      python: 3.6
       services:
         - docker
       install:
