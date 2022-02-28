@@ -52,16 +52,16 @@ class ResilientCommon():
         }
 
         incidents = self._query_incidents(query)
-        # return dictionary of incidents indexed by siemplify case id
+        # return dictionary of incidents indexed by Siemplify case id
         return { incident['properties'][SIEMPLIFY_CASE_ID]: incident['id'] for incident in incidents }
 
 
     def find_incident(self, siemplify_case_id):
-        """Find a Resilient incident which contains a custom field associated with a siemplify
+        """Find a Resilient incident which contains a custom field associated with a Siemplify
              incident
 
         Args:
-            siemplify_case_id ([str]): [siemplify incident id]
+            siemplify_case_id ([str]): [Siemplify incident id]
 
         Returns:
             [dict]: [API results of the first incident found]
@@ -180,7 +180,7 @@ class ResilientCommon():
         """
         Add a comment to the specified SOAR Incident by ID
         :param incident_id:  SOAR Incident ID
-        :param siemplify_comment_id: siemplify comment id (or None)
+        :param siemplify_comment_id: Siemplify comment id (or None)
         :param note: Content to be added as note
         :return: Response from SOAR
         """
@@ -251,7 +251,7 @@ class ResilientCommon():
         return task_info, siemplify_task_id
 
     def get_siemplify_task_id(self, task_id):
-        """[get the siemplify task id assiocated witha given SOAR task]
+        """[get the Siemplify task id assiocated witha given SOAR task]
 
         Args:
             task_id ([int]): [SOAR task to search]
@@ -338,7 +338,7 @@ class ResilientCommon():
             incident_id ([str]): [resilient incident id]
             siemplify_comments ([list]): [description]
             soar_header ([str]): [title added to SOAR comment ]
-            sync_header ([str]): [title of siemplify comment already sync'd]
+            sync_header ([str]): [title of Siemplify comment already sync'd]
         Returns:
             new_comments ([list])
         """

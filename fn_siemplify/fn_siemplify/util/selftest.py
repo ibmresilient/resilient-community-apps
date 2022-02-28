@@ -22,11 +22,11 @@ def selftest_function(opts):
 
     try:
         sc = SiemplifyCommon(rc, app_configs)
-        result, error_msg = sc.get_version()
+        _result, error_msg = sc.get_version()
 
         return {
-            "state": "success",
-            "reason": None
+            "state": "success" if not error_msg else "failure",
+            "reason": error_msg
         }
     except Exception as err:
         return {

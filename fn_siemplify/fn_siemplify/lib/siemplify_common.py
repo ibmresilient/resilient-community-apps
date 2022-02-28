@@ -51,6 +51,8 @@ GENERICENTITY = "GENERICENTITY"
 ARTIFACT_TYPE_LOOKUPS_FILE = "artifact_type_lookup.json"
 
 class SiemplifyCommon():
+    # API functions for interacting with Siemply
+
     def __init__(self, rc, options):
         self.options = options._asdict() if isinstance(options, tuple) else options
         self.base_url = self.options.get('base_url')
@@ -110,7 +112,7 @@ class SiemplifyCommon():
         return self._make_call("GET", uri)
 
     def get_cases(self, case_list):
-        # API call get all siemplify cases associated with a list of SOAR incidents
+        # API call get all Siemplify cases associated with a list of SOAR incidents
         payload = {
             "tags": IBMSOAR_TAGS,
             "title": "Caseids:{}".format(",".join(case_list)),
@@ -217,7 +219,7 @@ class SiemplifyCommon():
         return payload if not error_msg else result, error_msg
 
     def sync_comment(self, inputs, header=True):
-        """[Sync SOAR incident note with siemplify as a wall comment]
+        """[Sync SOAR incident note with Siemplify as a wall comment]
 
         Args:
             inputs ([dict]): [data to create a comment]
@@ -234,7 +236,7 @@ class SiemplifyCommon():
         return self._make_call("POST", CREATE_COMMENT_URL, payload)
 
     def sync_insight(self, inputs):
-        """[Sync SOAR incident note with siemplify as an insight]
+        """[Sync SOAR incident note with Siemplify as an insight]
 
         Args:
             inputs ([dict]): [data to create an insight]

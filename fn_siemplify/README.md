@@ -46,7 +46,7 @@
 - [Custom Fields](#custom-fields)
 - [Rules](#rules)
 - [Troubleshooting & Support](#troubleshooting--support)
-- [Appendix](#appendix)
+- [Templates](#templates)
 ---
 
 ## Release Notes
@@ -1421,7 +1421,7 @@ Refer to the documentation listed in the Requirements section for troubleshootin
 ### For Support
 This is a IBM Supported App. Please search the Community [ibm.biz/soarcommunity](https://ibm.biz/soarcommunity) for assistance or open a case at [ibm.com/mysupport](https://ibm.com/mysupport).
 
-### Appendix
+### Templates
 These templates can be copied and modified to override the existing templates used for several synchronization operations.
 #### Siemplify Create Case Template
 Used in the `siemplify_create_case_template` app.config parameter.

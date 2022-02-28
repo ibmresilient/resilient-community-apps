@@ -1,8 +1,6 @@
 #
-import pytest
 import logging
 import os
-import json
 from fn_siemplify.lib.jinja_common import JinjaEnvironment
 
 SIEMPLIFY_CREATE_CASE = "../fn_siemplify/lib/templates/siemplify_create_case.jinja"

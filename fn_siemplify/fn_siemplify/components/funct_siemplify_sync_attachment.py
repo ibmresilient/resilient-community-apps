@@ -45,8 +45,8 @@ class FunctionComponent(AppFunctionComponent):
             fn_inputs._asdict())
 
         # get the contents of the attachment
-        res_common = ResilientCommon(self.rest_client())
-        file_name, file_content = res_common.get_incident_attachment(fn_inputs.siemplify_incident_id,
+        rest_common = ResilientCommon(self.rest_client())
+        file_name, file_content = rest_common.get_incident_attachment(fn_inputs.siemplify_incident_id,
                                                                    None,
                                                                    None,
                                                                    fn_inputs.siemplify_attachment_id)

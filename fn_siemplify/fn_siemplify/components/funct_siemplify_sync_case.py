@@ -48,10 +48,10 @@ class FunctionComponent(AppFunctionComponent):
         # set the default if the default isn't set
         inputs['siemplify_environment'] = inputs['siemplify_environment'] if inputs.get('siemplify_environment') else self.app_configs.default_environment
 
-        resilient_env = ResilientCommon(self.rest_client())
+        soar_env = ResilientCommon(self.rest_client())
 
         # collect the incident information
-        incident_info = resilient_env.get_incident(inputs['siemplify_incident_id'])
+        incident_info = soar_env.get_incident(inputs['siemplify_incident_id'])
         incident_info['description'] = clean_html(incident_info['description'])
 
         # assemble all the data for Siemplify incident creation
@@ -62,7 +62,7 @@ class FunctionComponent(AppFunctionComponent):
 
         incident_info['siemplify_playbooks'] = self._map_playbooks(incident_info['incident_type_ids'],
                                                                    eval_mapping(app_settings.get('playbook_mappings'), wrapper="{{ {} }}"),
-                                                                   resilient_env.get_incident_types())
+                                                                   soar_env.get_incident_types())
 
         incident_info['soar_linkback_url'] = make_case_linkback_url(self.opts.get('resilient'), fn_inputs.siemplify_incident_id)
         self.LOG.debug(incident_info)
@@ -73,33 +73,36 @@ class FunctionComponent(AppFunctionComponent):
         # get the results based on the data returned
         if not error_msg:
             # get the full case information
-            case_results, _error_msg = siemplify_env.get_case(results)
+            case_results, error_msg = siemplify_env.get_case(results)
 
-            # save the case_id and alert_id
-            inputs['siemplify_case_id'] = results
-            inputs['siemplify_alert_id'] = case_results['alerts'][0]['identifier']
+            if error_msg:
+                self.LOG.error("Unable to get newly created Siemplify case: %s, %s", results, error_msg)
+            elif case_results.get("alerts"):
+                # save the case_id and alert_id
+                inputs['siemplify_case_id'] = results
+                inputs['siemplify_alert_id'] = case_results['alerts'][0]['identifier']
 
-            case_results['siemplify_case_url'] = SIEMPLIFY_CASE_URL.format(self.app_configs.base_url, results)
-            results = case_results
+                case_results['siemplify_case_url'] = SIEMPLIFY_CASE_URL.format(self.app_configs.base_url, results)
+                results = case_results
 
-            inputs['siemplify_comment'] = '<div><a href="{}" target="blank">SOAR CASE {}</a></div>'.format(incident_info['soar_linkback_url'],
-                                                                                  incident_info['id'])
-            siemplify_env.sync_comment(inputs)
+                inputs['siemplify_comment'] = '<div><a href="{}" target="blank">SOAR CASE {}</a></div>'.format(incident_info['soar_linkback_url'],
+                                                                                    incident_info['id'])
+                siemplify_env.sync_comment(inputs)
 
-            # S Y N C   A L L   O T H E R S
-            # collect the incident comments
-            if fn_inputs.siemplify_sync_comments:
-                self.sync_comments(resilient_env, siemplify_env, inputs)
+                # S Y N C   A L L   O T H E R S
+                # collect the incident comments
+                if fn_inputs.siemplify_sync_comments:
+                    self.sync_comments(soar_env, siemplify_env, inputs)
 
-            # collect the incident artifacts
-            if fn_inputs.siemplify_sync_artifacts:
-                self.sync_artifacts(resilient_env, siemplify_env, inputs)
+                # collect the incident artifacts
+                if fn_inputs.siemplify_sync_artifacts:
+                    self.sync_artifacts(soar_env, siemplify_env, inputs)
 
-            # collect the incident attachments
-            if fn_inputs.siemplify_sync_attachments:
-                self.sync_attachments(resilient_env, siemplify_env, inputs)
+                # collect the incident attachments
+                if fn_inputs.siemplify_sync_attachments:
+                    self.sync_attachments(soar_env, siemplify_env, inputs)
 
-        yield self.status_message("Endpoint reached successfully and returning results for App Function: '{0}'".format(FN_NAME))
+                yield self.status_message("Endpoint reached successfully and returning results for App Function: '{0}'".format(FN_NAME))
         yield FunctionResult(results, success=isinstance(error_msg, type(None)), reason=error_msg)
 
 
@@ -130,8 +133,9 @@ class FunctionComponent(AppFunctionComponent):
 
         return siemplify_playbooks
 
-    def sync_comments(self, resilient_env, siemplify_env, fn_inputs):
-        for comment in resilient_env.get_incident_comments(fn_inputs['siemplify_incident_id']):
+    def sync_comments(self, soar_env, siemplify_env, fn_inputs):
+        # get all SOAR incident comments and sync each to Siemplify
+        for comment in soar_env.get_incident_comments(fn_inputs['siemplify_incident_id']):
             inputs = {
                 'siemplify_case_id': fn_inputs['siemplify_case_id'],
                 'siemplify_alert_id': fn_inputs['siemplify_alert_id'],
@@ -139,20 +143,22 @@ class FunctionComponent(AppFunctionComponent):
             }
             siemplify_env.sync_insight(inputs)
 
-    def sync_artifacts(self, resilient_env, siemplify_env, fn_inputs):
-        for artifact in resilient_env.get_incident_artifacts(fn_inputs['siemplify_incident_id']):
+    def sync_artifacts(self, soar_env, siemplify_env, fn_inputs):
+        # get all SOAR incident artifacts and sync each to Siemplify
+        for artifact in soar_env.get_incident_artifacts(fn_inputs['siemplify_incident_id']):
             if not artifact.get('attachment'):
                 inputs = {
                     'siemplify_case_id': fn_inputs['siemplify_case_id'],
                     'siemplify_alert_id': fn_inputs['siemplify_alert_id'],
-                    'siemplify_artifact_type': resilient_env.lookup_artifact_type(artifact['type']),
+                    'siemplify_artifact_type': soar_env.lookup_artifact_type(artifact['type']),
                     'siemplify_artifact_value': artifact['value'],
                     'siemplify_environment': fn_inputs['siemplify_environment'],
                 }
                 siemplify_env.sync_artifact(inputs)
 
-    def sync_attachments(self, resilient_env, siemplify_env, fn_inputs):
-        for attachment in resilient_env.get_incident_attachments(fn_inputs['siemplify_incident_id']):
+    def sync_attachments(self, soar_env, siemplify_env, fn_inputs):
+        # get all SOAR incident attachments and sync each to Siemplify
+        for attachment in soar_env.get_incident_attachments(fn_inputs['siemplify_incident_id']):
             siemplify_env.sync_attachment(fn_inputs['siemplify_case_id'],
                                           attachment['content'],
                                           attachment['name'])
