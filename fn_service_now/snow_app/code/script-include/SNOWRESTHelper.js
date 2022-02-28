@@ -125,18 +125,25 @@ SNOWRESTHelper.prototype = {
 
 	getResReferenceIdFromTaskParent: function(current, parentTableName){
 
-		var parent = null;
+		var parent, refID = null;
 
 		//Get the task's parent record so we can grab the res ID
 		//to properly link this new task with the resilient incident
 		parent = new GlideRecord(parentTableName);
 		parent.get(current.getValue("parent"));
 
-		//Return the value stored in the parent table
-		if (parent.isValidField(INC_RES_ID))
-			return parent.getValue(INC_RES_ID);
-		else {
-			return parent.getValue(SIR_RES_ID);
+		//Return the value stored in the parent table, if found
+		if (parent.isValidField(INC_RES_ID)){
+			refID = parent.getValue(INC_RES_ID);
 		}
+		else{
+			refID = parent.getValue(SIR_RES_ID);
+		}
+
+		if (!refID){
+			gs.warn("Task's parent SOAR Reference ID not found for Task: '" + current.getValue("number") + "'");
+		}
+
+		return refID;
 	}
 };
