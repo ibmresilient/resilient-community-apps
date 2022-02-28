@@ -80,7 +80,7 @@ SNOWRESTHelper.prototype = {
 
 			t = tableNamesArray[i];
 
-			if (t == TABLE_NAME_SIR || t == TABLE_NAME_SIR){
+			if (t == TABLE_NAME_INC || t == TABLE_NAME_SIR){
 				validTableFound = true;
 			}
 
