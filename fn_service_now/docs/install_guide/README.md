@@ -51,6 +51,7 @@
   * **Last Name:** SOAR
   * **Password:** #########
   * **Email:** `ibm_resilient_integration@example.com`
+  > Note: In San Diego or later the box "Password needs reset" is automatically checked. This must be unchecked for the connection from SOAR -> SNOW to properly work.
 * Set the **Timezone** to the same timezone of your SOAR Platform.
  ![screenshot](./screenshots/10.png)
 * Click **Submit.**
