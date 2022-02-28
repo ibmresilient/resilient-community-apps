@@ -69,14 +69,13 @@ class FunctionComponent(ResilientComponent):
             # Fetch the Offense Summary if function type is OFFENSE_SUMMARY
             if qradar_fn_type == qradar_constants.OFFENSE_SUMMARY:
 
-                # offense_summary = qradar_client.graphql_query({"id": qradar_offenseid}, qradar_graphql_queries.GRAPHQL_OFFENSEQUERY)
-                offense_summary = qradar_client.get_offense_summary_data(qradar_offenseid)
+                offense_summary = qradar_client.graphql_query({"id": qradar_offenseid}, qradar_graphql_queries.GRAPHQL_OFFENSEQUERY)
                 results["offense"] = offense_summary["content"]
 
             # Fetch the Contributing Rules if function type is OFFENSE_RULES
             elif qradar_fn_type == qradar_constants.OFFENSE_RULES:
 
-                rules_data = qradar_client.get_rules_data(qradar_offenseid)
+                rules_data = qradar_client.graphql_query({"id": qradar_offenseid}, qradar_graphql_queries.GRAPHQL_RULESQUERY)
                 rules_data = rules_data["content"]["rules"]
                 results["rules_data"] = rules_data
 

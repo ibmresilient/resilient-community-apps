@@ -364,61 +364,6 @@ class QRadarClient(object):
         return ret
 
     @staticmethod
-    def get_offense_summary_data(offenseid):
-        """
-        Get Offense summary for the given Offense
-        :param offenseid: Id of the QRadar Offense
-        :return:
-        """
-        auth_info = AuthInfo.get_authInfo()
-        headers = auth_info.headers.copy()
-        headers["Content-Type"] = "application/json"
-        headers["Cookie"] = QRadarClient.get_qr_sessionid(auth_info.api_url.replace("api/", ""))
-
-        url = u"{}{}".format(auth_info.api_url.replace("api/",""), qradar_constants.GRAPHQL_URL)
-        data = {"operationName":"offenseQuery","variables":{"id":offenseid},"query":qradar_graphql_queries.GRAPHQL_OFFENSEQUERY}
-        ret = {}
-        try:
-            response = auth_info.make_call("POST", url,data=dumps(data),headers=headers)
-
-            ret = {"status_code": response.status_code,
-                   "content": response.json()["data"]["getOffense"]}
-
-        except Exception as e:
-            LOG.error(str(e))
-            raise IntegrationError("Request to url [{}] throws exception. Error [get_offense_summary_data call failed with exception {}]".format(url, str(e)))
-
-        return ret
-
-    @staticmethod
-    def get_rules_data(offenseid):
-        """
-        Get the contributing rules for the Offense
-        :param offenseid: Id of the QRadar Offense
-        :return:
-        """
-        auth_info = AuthInfo.get_authInfo()
-        headers = auth_info.headers.copy()
-        headers["Content-Type"] = "application/json"
-        headers["Cookie"] = QRadarClient.get_qr_sessionid(auth_info.api_url.replace("api/", ""))
-
-        url = u"{}{}".format(auth_info.api_url.replace("/api",""), qradar_constants.GRAPHQL_URL)
-        data = {"operationName":"ruleQuery","variables":{"id":offenseid},"query":qradar_graphql_queries.GRAPHQL_RULESQUERY}
-        ret = {}
-        try:
-            response = auth_info.make_call("POST", url,data=dumps(data),headers=headers)
-            res = response.json()
-
-            ret = {"status_code": response.status_code,
-                   "content": res["data"]["getOffense"]}
-
-        except Exception as e:
-            LOG.error(str(e))
-            raise IntegrationError("Request to url [{}] throws exception. Error [get_rules_data call failed with exception {}]".format(url, str(e)))
-
-        return ret
-
-    @staticmethod
     def get_sourceip_data(event):
         """
         Get Source IP for the Offense
