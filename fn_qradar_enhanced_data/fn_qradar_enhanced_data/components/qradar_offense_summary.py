@@ -8,9 +8,9 @@
 import logging
 import fn_qradar_enhanced_data.util.qradar_constants as qradar_constants
 from resilient_lib import validate_fields
-from fn_qradar_enhanced_data.util.qradar_utils import QRadarClient, QRadarServers
+from fn_qradar_enhanced_data.util.qradar_utils import QRadarServers
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_qradar_enhanced_data.util.function_utils import get_servers_list
+from fn_qradar_enhanced_data.util.function_utils import get_servers_list, clear_table
 import fn_qradar_enhanced_data.util.qradar_graphql_queries as qradar_graphql_queries
 
 #For a given Offense ID and QRadar Destination, get the offense summary.
@@ -22,13 +22,13 @@ class FunctionComponent(ResilientComponent):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         self.opts = opts
-        self.servers_list = get_servers_list(opts)
+        # self.servers_list = get_servers_list(opts)
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
         self.opts = opts
-        self.servers_list = get_servers_list(opts)
+        # self.servers_list = get_servers_list(opts)
 
     @function("qradar_offense_summary")
     def _qradar_offense_summary(self, event, *args, **kwargs):
@@ -40,26 +40,18 @@ class FunctionComponent(ResilientComponent):
             qradar_offenseid = kwargs.get("qradar_offense_id")  # QRadar Offense ID
             qradar_fn_type = kwargs.get("qradar_query_type")  # Function type based on the datatable/fields to populate
             qradar_label = kwargs.get("qradar_label") # QRadar server to connect to
+            qradar_table_name = kwargs.get("qradar_table_name", None) # Name of data table
+            qradar_incident_id = kwargs.get("qradar_incident_id") # ID of incident
 
             log.info("qradar_offenseid: %s", qradar_offenseid)
             log.info("qradar_label: %s", qradar_label)
-
-            options = QRadarServers.qradar_label_test(qradar_label, self.servers_list)
-            qradar_verify_cert = False if options.get("verify_cert", "false").lower() == "false" else options.get("verify_cert")
-
-            log.debug("Connection to {} using {}".format(options.get("host"),
-                                                         options.get("username", None) or options.get("qradartoken", None)))
 
             # Get the wf_instance_id of the workflow this Function was called in, if not found return a backup string
             wf_instance_id = event.message.get("workflow_instance", {}).get("workflow_instance_id", "no instance id found")
             yield StatusMessage("Starting 'qradar_offense_summary' that was running in workflow '{0}'".format(wf_instance_id))
 
-            qradar_client = QRadarClient(host=options.get("host"),
-                                         username=options.get("username", None),
-                                         password=options.get("qradarpassword", None),
-                                         token=options.get("qradartoken", None),
-                                         cafile=qradar_verify_cert,
-                                         opts=self.opts, function_opts=options)
+            # Get qradar_client and options
+            qradar_client, options = QRadarServers.get_qradar_client(self.opts, qradar_label)
 
             results = {
                 "qrhost": options.get("host"),
@@ -83,12 +75,13 @@ class FunctionComponent(ResilientComponent):
             elif qradar_fn_type == qradar_constants.OFFENSE_ASSETS:
 
                 # Get all sources for the given Offense ID
-                offense_source = qradar_client.get_offense_source(qradar_offenseid)
+                offense_source = qradar_client.graphql_query({"id":qradar_offenseid}, qradar_graphql_queries.GRAPHQL_OFFENSESOURCE, "sourceAddresses")
                 results["assets"] = []
 
                 # Get Asset Info for each source
                 for source in offense_source["content"]:
-                    offense_assets = qradar_client.get_offense_asset_data(source)["content"]
+                    variables = {"domainId": source["domainId"], "ipAddress":  source["sourceIp"]}
+                    offense_assets = qradar_client.graphql_query(variables, qradar_graphql_queries.GRAPHQL_OFFENSEASSETS)["content"]
 
                     if offense_assets:
                         offense_assets["sourceip"] = source["sourceIp"]
@@ -105,6 +98,10 @@ class FunctionComponent(ResilientComponent):
                                                  offense_assets["properties"]))
                         offense_assets["name"] = asset_prop[0]["value"] if len(asset_prop) > 0 else ""
                         results["assets"].append(offense_assets)
+
+            if qradar_table_name:
+                clear_table(self.rest_client(), qradar_table_name, qradar_incident_id)
+                log.info("Data in table {} in incident {} has been cleared".format(qradar_table_name, qradar_incident_id))
 
             yield StatusMessage("Finished 'qradar_offense_summary' that was running in workflow '{0}'".format(wf_instance_id))
 

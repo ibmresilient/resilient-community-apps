@@ -8,7 +8,6 @@ from logging import getLogger
 from ast import literal_eval
 from threading import Thread
 from resilient_circuits import ResilientComponent
-from resilient import get_client
 from resilient_lib import IntegrationError
 from fn_qradar_enhanced_data.lib.poller_common import SOARCommon, poller
 from fn_qradar_enhanced_data.util.qradar_constants import PACKAGE_NAME, GLOBAL_SETTINGS
@@ -29,7 +28,7 @@ class PollerComponent(ResilientComponent):
         self.opts = opts
 
         # collect settings necessary and initialize libraries used by the poller
-        if not self._init_env(opts):
+        if not self._init_env():
             LOG.info(u"Poller interval is not configured.  Automated escalation is disabled.")
             return
 
@@ -37,7 +36,7 @@ class PollerComponent(ResilientComponent):
         poller_thread.daemon = True
         poller_thread.start()
 
-    def _init_env(self, opts):
+    def _init_env(self):
         """[initialize the environment based on app.config settings]
         Args:
             opts ([dict]): [all settings including SOAR settings]
@@ -53,8 +52,7 @@ class PollerComponent(ResilientComponent):
         LOG.info("Poller lookback: %s", self.last_poller_time)
 
         # rest_client is used to make IBM SOAR API calls
-        self.rest_client = get_client(opts)
-        self.soar_common = SOARCommon(self.rest_client)
+        self.soar_common = SOARCommon(self.rest_client())
 
         return True
 
@@ -101,7 +99,7 @@ class PollerComponent(ResilientComponent):
         # :End: QRadar servers dictionary
 
         for server in case_server_dict:
-            qradar_client = QRadarServers.get_qradar_client(self.opts, server)
+            qradar_client, options = QRadarServers.get_qradar_client(self.opts, server)
             # :Start: Create the filter string to filter for cases in SOAR
             filter_var = ""
             id_list = list(case_server_dict[server].keys())
@@ -150,7 +148,7 @@ class PollerComponent(ResilientComponent):
 
                 # Send put request to SOAR
                 # This will update all cases that need to be updated for the give QRadar server
-                response = self.rest_client.put("/incidents/patch", payload)
+                response = self.rest_client().put("/incidents/patch", payload)
                 # If failures dictionary is not empty then raise error
                 if response['failures']:
                     raise IntegrationError(str(response))

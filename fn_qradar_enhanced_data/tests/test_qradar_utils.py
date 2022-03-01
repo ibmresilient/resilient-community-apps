@@ -254,8 +254,7 @@ def test_get_sourceip_data(mocked_make_call, mocked_qr_call):
         "sourceip": "127.0.0.1",
         "domainid": 0
     }
-
-    ret = qradar_client.get_sourceip_data(test_source)
+    ret = qradar_client.graphql_query({"domainId":test_source["domainid"],"ipAddress":test_source["sourceip"]}, qradar_graphql_queries.GRAPHQL_SOURCEIP)
 
     assert ret["content"]["id"] == sourceip_data["data"]["getAsset"]["id"]
     assert ret["content"]["interfaces"][0]["macAddress"] == sourceip_data["data"]["getAsset"]["interfaces"][0]["macAddress"]
@@ -288,7 +287,7 @@ def test_get_offense_source(mocked_make_call, mocked_qr_call):
 
     mocked_make_call.return_value = _generateResponse(offense_source_data, 200)
 
-    ret = qradar_client.get_offense_source(1)
+    ret = qradar_client.graphql_query({"id":1}, qradar_graphql_queries.GRAPHQL_OFFENSESOURCE, "sourceAddresses")
 
     assert ret["content"][0]["id"] == offense_source_data["data"]["getOffense"]["sourceAddresses"][0]["id"]
     assert ret["content"][0]["sourceIp"] == offense_source_data["data"]["getOffense"]["sourceAddresses"][0]["sourceIp"]
