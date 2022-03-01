@@ -6,8 +6,8 @@
 
 from base64 import b64encode
 from json import dumps
-import logging
-import requests
+from logging import getLogger
+from requests import get, post
 from six import binary_type
 import fn_qradar_enhanced_data.util.qradar_constants as qradar_constants
 import fn_qradar_enhanced_data.util.function_utils as function_utils
@@ -16,7 +16,7 @@ from resilient_lib import RequestsCommon, IntegrationError
 from fn_qradar_enhanced_data.util.SearchWaitCommand import SearchWaitCommand, SearchFailure, SearchJobFailure
 from urllib.parse import quote as quote_func
 
-LOG = logging.getLogger(__name__)
+LOG = getLogger(__name__)
 
 def quote(input_v, safe=None):
     """
@@ -178,7 +178,7 @@ class ArielSearch(SearchWaitCommand):
         """
         auth_info = AuthInfo.get_authInfo()
 
-        url = auth_info.api_url + qradar_constants.ARIEL_SEARCHES_RESULT.format(search_id)
+        url = auth_info.api_url + "ariel/searches/{}/results".format(search_id)
 
         headers = auth_info.headers.copy()
         # if the # of returned items is big, this call will take a long time!
@@ -223,8 +223,8 @@ class ArielSearch(SearchWaitCommand):
                 if json_dict["status"] == qradar_constants.SEARCH_STATUS_COMPLETED:
                     status = SearchWaitCommand.SEARCH_STATUS_COMPLETED
                 elif json_dict["status"] == qradar_constants.SEARCH_STATUS_WAIT \
-                    or json_dict["status"] == qradar_constants.SEARCH_STATUS_SORTING \
-                        or json_dict["status"] == qradar_constants.SEARCH_STATUS_EXECUTE:
+                    or json_dict["status"] == "SORTING" \
+                        or json_dict["status"] == "EXECUTE":
                     status = SearchWaitCommand.SEARCH_STATUS_WAITING
 
         except Exception as e:
@@ -257,7 +257,7 @@ class QRadarClient(object):
         """
         auth_info = AuthInfo.get_authInfo()
 
-        url = auth_info.api_url + qradar_constants.HELP_VERSIONS
+        url = auth_info.api_url + "help/versions"
         response = auth_info.make_call("GET", url)
 
         return response
@@ -382,10 +382,10 @@ class QRadarClient(object):
             if not auth_info.username and not auth_info.password:
                 cookies = {"SEC":auth_info.qradar_token}
             else:
-                res = requests.get("{0}console/logon.jsp".format(host), verify=auth_info.cafile)
+                res = get("{0}console/logon.jsp".format(host), verify=auth_info.cafile)
                 cookies = res.cookies.get_dict()
 
-                res = requests.post("{0}{1}".format(host, qradar_constants.GRAPHQL_BASICAUTH), data={"j_username":auth_info.username,"j_password":auth_info.password,"LoginCSRF":requests.post("{0}{1}".format(host, qradar_constants.GRAPHQL_BASICAUTH), data={"get_csrf": ""}, headers={"Cookie": "JSESSIONID="+cookies["JSESSIONID"]}, verify=auth_info.cafile).text}, headers={"Cookie": "JSESSIONID="+cookies["JSESSIONID"]}, verify=auth_info.cafile)
+                res = post("{0}{1}".format(host, qradar_constants.GRAPHQL_BASICAUTH), data={"j_username":auth_info.username,"j_password":auth_info.password,"LoginCSRF":post("{0}{1}".format(host, qradar_constants.GRAPHQL_BASICAUTH), data={"get_csrf": ""}, headers={"Cookie": "JSESSIONID="+cookies["JSESSIONID"]}, verify=auth_info.cafile).text}, headers={"Cookie": "JSESSIONID="+cookies["JSESSIONID"]}, verify=auth_info.cafile)
                 cookies = res.cookies.get_dict()
         except Exception as e:
             LOG.error(str(e))

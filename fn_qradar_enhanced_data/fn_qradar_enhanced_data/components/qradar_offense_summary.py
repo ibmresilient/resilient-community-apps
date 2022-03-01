@@ -5,12 +5,11 @@
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
-import logging
-import fn_qradar_enhanced_data.util.qradar_constants as qradar_constants
+from logging import getLogger
 from resilient_lib import validate_fields
 from fn_qradar_enhanced_data.util.qradar_utils import QRadarServers
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_qradar_enhanced_data.util.function_utils import get_servers_list, clear_table
+from fn_qradar_enhanced_data.util.function_utils import clear_table
 import fn_qradar_enhanced_data.util.qradar_graphql_queries as qradar_graphql_queries
 
 #For a given Offense ID and QRadar Destination, get the offense summary.
@@ -22,18 +21,16 @@ class FunctionComponent(ResilientComponent):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         self.opts = opts
-        # self.servers_list = get_servers_list(opts)
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
         self.opts = opts
-        # self.servers_list = get_servers_list(opts)
 
     @function("qradar_offense_summary")
     def _qradar_offense_summary(self, event, *args, **kwargs):
         """Function: QRadar Offense "summary"""
-        log = logging.getLogger(__name__)
+        log = getLogger(__name__)
         try:
             validate_fields(["qradar_query_type","qradar_offense_id"], kwargs)
             # Get the function parameters:
@@ -59,20 +56,20 @@ class FunctionComponent(ResilientComponent):
             }
 
             # Fetch the Offense Summary if function type is OFFENSE_SUMMARY
-            if qradar_fn_type == qradar_constants.OFFENSE_SUMMARY:
+            if qradar_fn_type == "offensesummary":
 
                 offense_summary = qradar_client.graphql_query({"id": qradar_offenseid}, qradar_graphql_queries.GRAPHQL_OFFENSEQUERY)
                 results["offense"] = offense_summary["content"]
 
             # Fetch the Contributing Rules if function type is OFFENSE_RULES
-            elif qradar_fn_type == qradar_constants.OFFENSE_RULES:
+            elif qradar_fn_type == "offenserules":
 
                 rules_data = qradar_client.graphql_query({"id": qradar_offenseid}, qradar_graphql_queries.GRAPHQL_RULESQUERY)
                 rules_data = rules_data["content"]["rules"]
                 results["rules_data"] = rules_data
 
             # Fetch the Assets Info if function type is OFFENSE_ASSETS
-            elif qradar_fn_type == qradar_constants.OFFENSE_ASSETS:
+            elif qradar_fn_type == "offenseassets":
 
                 # Get all sources for the given Offense ID
                 offense_source = qradar_client.graphql_query({"id":qradar_offenseid}, qradar_graphql_queries.GRAPHQL_OFFENSESOURCE, "sourceAddresses")

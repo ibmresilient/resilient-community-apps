@@ -86,16 +86,13 @@ class PollerComponent(ResilientComponent):
         for case in case_list:
             qradar_id = case["properties"]["qradar_id"]
             qradar_destination = case["properties"]["qradar_destination"]
-            case_lastUpdatedTime = case["properties"]["qr_offense_last_updated_time"]
-            case_id = case['id']
-            case_ver = case['vers']
             if qradar_destination not in case_server_dict:
                 case_server_dict[qradar_destination] = {}
             case_server = case_server_dict[qradar_destination]
             # Add the case_id and case_lastUpdatedTime fields to the qradar_id dictionary
             # that is inside of the QRadar servers dictionary
             if qradar_id not in case_server:
-                case_server[qradar_id] = {"case_id": case_id, "case_lastUpdatedTime": case_lastUpdatedTime, "case_ver": case_ver}
+                case_server[qradar_id] = {"case_id": case['id'], "case_lastUpdatedTime": case["properties"]["qr_offense_last_updated_time"], "case_ver": case['vers']}
         # :End: QRadar servers dictionary
 
         for server in case_server_dict:
@@ -132,7 +129,7 @@ class PollerComponent(ResilientComponent):
                         updated_cases.append(case_id)
                         # Create payload to update cases
                         payload['patches'][case_id] = {
-                                                "version": case['vers']+1,
+                                                "version": case_dict['vers']+1,
                                                 "changes": [ {
                                                     "old_value": { "date": case_lastUpdatedTime },
                                                     "new_value": { "date": offense_lastUpdatedTime },

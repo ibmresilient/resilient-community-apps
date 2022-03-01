@@ -8,8 +8,8 @@
 from time import time
 from logging import getLogger
 from re import sub, search, IGNORECASE
-from fn_qradar_enhanced_data.util.qradar_constants import ARIEL_SEARCH_EVENTS, ARIEL_SEARCH_FLOWS, SOURCE_IP, GLOBAL_SETTINGS
-from fn_qradar_enhanced_data.util.function_utils import make_query_string, get_servers_list, clear_table
+from fn_qradar_enhanced_data.util.qradar_constants import ARIEL_SEARCH_EVENTS, ARIEL_SEARCH_FLOWS, GLOBAL_SETTINGS
+from fn_qradar_enhanced_data.util.function_utils import make_query_string, clear_table
 from fn_qradar_enhanced_data.util.qradar_utils import QRadarServers
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 import fn_qradar_enhanced_data.util.qradar_graphql_queries as qradar_graphql_queries
@@ -105,7 +105,7 @@ class FunctionComponent(ResilientComponent):
                                                         timeout=timeout)
 
             # Enrich sourceip data by getting additional props using a graphql call to QRadar
-            if qradar_fn_type == SOURCE_IP:
+            if qradar_fn_type == "sourceip":
 
                 offense_source = qradar_client.graphql_query({"id":qradar_search_param3}, qradar_graphql_queries.GRAPHQL_OFFENSESOURCE, "sourceAddresses")
 
