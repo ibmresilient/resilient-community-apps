@@ -77,7 +77,7 @@ note_text = None
 
 if results.success:
 
-  note_text = u"""<br>This Task has been CLOSED in <b>ServiceNow</b>
+  note_text = u"""<br>This Task has been updated in <b>ServiceNow</b>
               <br><b>ServiceNow ID:</b> {0}
               <br><b>ServiceNow Record State:</b> {1}
               <br><b>ServiceNow Closing Notes:</b> {2}

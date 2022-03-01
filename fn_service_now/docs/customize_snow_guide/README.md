@@ -1,6 +1,6 @@
 # IBM Security QRadar SOAR Platform App for ServiceNow - Customization Guide
 
-*This guide shows how to adapt the App to suit your Incident Response Workflow*
+*This guide shows how to adapt the App installed on your ServiceNow instance to suit your Incident Response Workflow*
 
 - [Prerequisites](#prerequisites)
 - [Architectural Diagram](#architectural-diagram)
@@ -24,7 +24,7 @@
 * SOAR Platform updated to at least `v31.0.0` or Cloud Pak for Security running at least `v1.9.0`.
 * App Host `>= 1.6.0` or an Integration Server setup with `resilient-circuits >= 31.0.0` installed.
 * All steps in the **[Installation Guide](../install_guide)** complete.
-* ServiceNow Instance with ITSM enabled and running a `Kingston` or later release (last updated on `Rome`).
+* ServiceNow Instance with ITSM enabled and running a `Kingston` or later release.
 * ServiceNow user with an `admin` role.
 * A basic understanding of **IBM SOAR Workflows**.
 * A basic understanding of **ServiceNow Workflows**.

@@ -224,15 +224,15 @@ ResilientAPI.prototype = {
 		
 		//Ensure all the required System Properties are available before continuing
 		try{
-			hostName = gs.getProperty("x_ibmrt_resilient.ResilientHost");
-			orgName = gs.getProperty("x_ibmrt_resilient.ResilientOrgName");
-			resAPIId = gs.getProperty("x_ibmrt_resilient.ResilientAPIId");
-			resAPISecret = gs.getProperty("x_ibmrt_resilient.ResilientAPISecret");
-			userEmail = gs.getProperty("x_ibmrt_resilient.ResilientUserEmail");
-			userPassword = gs.getProperty("x_ibmrt_resilient.ResilientUserPassword");
-			snUsername = gs.getProperty("x_ibmrt_resilient.ServiceNowUsername");
-			midServerName = gs.getProperty("x_ibmrt_resilient.ServiceNowMidServerName");
-			restEndpointCP4S = gs.getProperty("x_ibmrt_resilient.ResilientCP4SRestHost");
+			hostName = gs.getProperty("x_ibmrt_resilient.ResilientHost").trim();
+			orgName = gs.getProperty("x_ibmrt_resilient.ResilientOrgName").trim();
+			resAPIId = gs.getProperty("x_ibmrt_resilient.ResilientAPIId").trim();
+			resAPISecret = gs.getProperty("x_ibmrt_resilient.ResilientAPISecret").trim();
+			userEmail = gs.getProperty("x_ibmrt_resilient.ResilientUserEmail").trim();
+			userPassword = gs.getProperty("x_ibmrt_resilient.ResilientUserPassword").trim();
+			snUsername = gs.getProperty("x_ibmrt_resilient.ServiceNowUsername").trim();
+			midServerName = gs.getProperty("x_ibmrt_resilient.ServiceNowMidServerName").trim();
+			restEndpointCP4S = gs.getProperty("x_ibmrt_resilient.ResilientCP4SRestHost").trim();
 			if (gs.getProperty("x_ibmrt_resilient.ResilientIsCP4S").toLowerCase() == "yes") {
 				this.isCP4S = true;
 			} else {
@@ -503,7 +503,7 @@ ResilientAPI.prototype = {
 		}
 		
 		if(task_id){
-			link += "?task_id=" + String(task_id);
+			link += "?taskId=" + String(task_id);
 
 			//If is task AND is CP4S instance add extra filter to link
 			if (this.isCP4S){
