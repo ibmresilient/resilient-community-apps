@@ -20,6 +20,7 @@
 ```python
 inputs.abuseipdb_artifact_type = artifact.type
 inputs.abuseipdb_artifact_value = artifact.value
+inputs.abuseipdb_range_of_days = 30 # Change to see reports from within desired days. AbuseIPDB's site shows reports from the last 365 days.
 ```
 
 ### Post-Processing Script
@@ -65,6 +66,7 @@ if results.success:
           categories_list.extend(report["categories"])
       categories_set = set(categories_list)  # dedup list
       categories_names = u', '.join(CATEGORIES.get(item, 'unknown') for item in categories_set)
+
   
   # only return data if there's anything useful
   if number_of_reports or confidence_score:

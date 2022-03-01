@@ -56,7 +56,8 @@ class TestFnAbuseipdb:
 
     mock_inputs_1 = {
         "abuseipdb_artifact_type": "IP Address",
-        "abuseipdb_artifact_value": "8.8.8.8"
+        "abuseipdb_artifact_value": "8.8.8.8",
+        "abuseipdb_range_of_days": 30
     }
 
     expected_results = {"success": True}
@@ -73,7 +74,8 @@ class TestFnAbuseipdb:
 
     artifact = {
         "abuseipdb_artifact_type": "IP Address",
-        "abuseipdb_artifact_value": "8.8.8.8"
+        "abuseipdb_artifact_value": "8.8.8.8",
+        "abuseipdb_range_of_days": 30
     }
     @pytest.mark.parametrize("mock_inputs, expected_results", [ 
         (artifact, True)

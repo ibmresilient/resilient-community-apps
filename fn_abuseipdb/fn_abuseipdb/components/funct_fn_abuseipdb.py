@@ -31,6 +31,7 @@ class FunctionComponent(AppFunctionComponent):
         # event.artifact is a ThreatServiceArtifactDTO
         artifact_type = fn_inputs.abuseipdb_artifact_type
         artifact_value = fn_inputs.abuseipdb_artifact_value
+        rangeOfDays = fn_inputs.abuseipdb_range_of_days
 
         # Example validating app_configs
         validate_fields([
@@ -44,7 +45,8 @@ class FunctionComponent(AppFunctionComponent):
         params = {
                 'ipAddress': artifact_value,
                 'isWhitelisted': self.app_configs.ignore_white_listed,
-                'verbose': True
+                'verbose': True,
+                'maxAgeInDays': rangeOfDays
             }
 
         headers = HEADER_TEMPLATE.copy()

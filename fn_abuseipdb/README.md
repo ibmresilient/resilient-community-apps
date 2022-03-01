@@ -162,6 +162,7 @@ Pulls data from AbuseIPDB (www.abuseipdb.com) and checks if an IP artifact is bl
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `abuseipdb_artifact_type` | `text` | Yes | `-` | - |
+| `abuseipdb_range_of_days` | `number` | Yes | `-` | - |
 | `abuseipdb_artifact_value` | `text` | Yes | `-` | - |
 
 </p>
@@ -242,6 +243,7 @@ results = {
 ```python
 inputs.abuseipdb_artifact_type = artifact.type
 inputs.abuseipdb_artifact_value = artifact.value
+inputs.abuseipdb_range_of_days = 30 # Change to see reports from within desired days. AbuseIPDB's site shows reports from the last 365 days.
 ```
 
 </p>
