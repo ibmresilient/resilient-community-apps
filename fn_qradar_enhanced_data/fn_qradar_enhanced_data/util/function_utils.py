@@ -8,7 +8,7 @@ from six import string_types
 from logging import getLogger
 from resilient_lib import validate_fields, IntegrationError
 from fn_qradar_enhanced_data.util.qradar_constants import PACKAGE_NAME, GLOBAL_SETTINGS
-from fn_qradar_enhanced_data.util.qradar_utils import QRadarServers
+from fn_qradar_enhanced_data.util import qradar_utils
 
 LOG = getLogger(__name__)
 
@@ -59,7 +59,7 @@ def get_servers_list(opts):
     if options: # If no labels given [fn_qradar_integration]
         server_list = {PACKAGE_NAME}
     else: # If labels given [fn_qradar_integration:label]
-        servers = QRadarServers(opts, options)
+        servers = qradar_utils.QRadarServers(opts, options)
         server_list = servers.get_server_name_list()
         if GLOBAL_SETTINGS not in server_list:
             raise IntegrationError('Unable to find [{}]'.format(GLOBAL_SETTINGS))

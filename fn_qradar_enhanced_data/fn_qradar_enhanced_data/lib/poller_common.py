@@ -50,10 +50,8 @@ def poller(named_poller_interval, named_last_poller_time, package_name):
 
 class SOARCommon():
     """ common methods for accessing IBM SOAR cases and their entities: comment, attachments, etc. """
-    def __init__(self, rest_client):
-        self.rest_client = rest_client
 
-    def get_open_soar_cases(self, search_fields, open_cases=True):
+    def get_open_soar_cases(search_fields, rest_client, open_cases=True):
         """ find all IBM SOAR cases which are associated with the endpoint platform
         Args:
             search_fields [dict]: list of field(s) used to track the relationship with a SOAR case
@@ -64,11 +62,16 @@ class SOARCommon():
             soar_cases [list]: returned list of cases
             error_msg [str]: any error during the query or None
         """
-        query = self._build_search_query(search_fields, open_cases=open_cases)
+        query = SOARCommon._build_search_query(search_fields, open_cases=open_cases)
 
-        return self._query_cases(query)
+        try:
+            return rest_client.post('/incidents/query?return_level=normal', query), None
+        except SimpleHTTPException as err:
+            LOG.error(str(err))
+            LOG.error(query)
+            return None, str(err)
 
-    def _build_search_query(self, search_fields, open_cases=True):
+    def _build_search_query(search_fields, open_cases=True):
         """[Build the json structure needed to search for cases]
         Args:
             search_fields ([dict/list]): [key/value pairs to search custom fields with specific values. If
@@ -110,17 +113,3 @@ class SOARCommon():
                 query['filters'][0]['conditions'].append(field_search)
 
         return query
-
-    def _query_cases(self, query):
-        """ run a query to find case(s) which match the query string
-        Args:
-            query [str]: query string to find cases
-        Returns:
-            query_results [list]: List of query results
-        """
-        try:
-            return self.rest_client.post('/incidents/query?return_level=normal', query), None
-        except SimpleHTTPException as err:
-            LOG.error(str(err))
-            LOG.error(query)
-            return None, str(err)

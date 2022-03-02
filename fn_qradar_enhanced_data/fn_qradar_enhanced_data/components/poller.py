@@ -26,6 +26,7 @@ class PollerComponent(ResilientComponent):
         super(PollerComponent, self).__init__(opts)
         self.global_settings = opts.get(GLOBAL_SETTINGS, {})
         self.opts = opts
+        self.rest_client()
 
         # collect settings necessary and initialize libraries used by the poller
         if not self._init_env():
@@ -51,9 +52,6 @@ class PollerComponent(ResilientComponent):
         self.last_poller_time = datetime.now() - timedelta(minutes=int(self.global_settings.get('polling_lookback', 0)))
         LOG.info("Poller lookback: %s", self.last_poller_time)
 
-        # rest_client is used to make IBM SOAR API calls
-        self.soar_common = SOARCommon(self.rest_client())
-
         return True
 
     @poller('polling_interval', 'last_poller_time', PACKAGE_NAME)
@@ -67,7 +65,7 @@ class PollerComponent(ResilientComponent):
         Args:
             last_poller_time ([int]): [time in milliseconds when the last poller ran]
         """
-        case_list, error_msg = self.soar_common.get_open_soar_cases({"qradar_id": True, "qradar_destination": True})
+        case_list, error_msg = SOARCommon.get_open_soar_cases({"qradar_id": True, "qradar_destination": True}, self.rest_client())
 
         if error_msg:
             raise IntegrationError(error_msg)
@@ -125,7 +123,6 @@ class PollerComponent(ResilientComponent):
                     case_lastUpdatedTime = case_dict['case_lastUpdatedTime']
                     if offense_lastUpdatedTime != case_lastUpdatedTime:
                         # If time is different then update the case
-                        changes = True
                         updated_cases.append(case_id)
                         # Create payload to update cases
                         payload['patches'][case_id] = {
@@ -137,7 +134,7 @@ class PollerComponent(ResilientComponent):
                                                 } ]
                                             },
             # If there are changes then fix payload and send put request to SOAR
-            if changes == True:
+            if updated_cases:
                 # Removes characters added by python that are not needed
                 payload_str = str(payload).replace('(','').replace(')','').replace(',,',',')
                 payload_str = payload_str[0:payload_str.rfind(",")]+payload_str[payload_str.rfind(",")+1:]
