@@ -27,7 +27,7 @@ inputs.googlesafebrowsing_artifact_value = artifact.value
 # This link contains further information on the site status of the url that is being checked
 LINK_URL = "https://www.google.com/transparencyreport/safebrowsing/diagnostic/#url={}"
 if results.success:
-  if len(results.content) > 0:
+  if results.content:
     resp = results.content
     hit = []
     for match in resp.get("matches", []):

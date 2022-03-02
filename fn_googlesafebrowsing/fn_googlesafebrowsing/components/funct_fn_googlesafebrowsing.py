@@ -60,8 +60,9 @@ class FunctionComponent(AppFunctionComponent):
         LOG.debug(reqbody)
 
         response = self.rc.execute('post', '{}{}'.format(self.app_configs.googlesafebrowsing_url,
-        self.app_configs.googlesafebrowsing_api_key), headers={'Content-Type': 'application/json'},
-        data=json.dumps(reqbody))
+                                    self.app_configs.googlesafebrowsing_api_key), 
+                                    headers={'Content-Type': 'application/json'},
+                                    data=json.dumps(reqbody))
 
         results = response.json()
 
