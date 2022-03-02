@@ -20,7 +20,6 @@
 ```python
 inputs.abuseipdb_artifact_type = artifact.type
 inputs.abuseipdb_artifact_value = artifact.value
-inputs.abuseipdb_range_of_days = 30 # Change to see reports from within desired days. AbuseIPDB's site shows reports from the last 365 days.
 ```
 
 ### Post-Processing Script

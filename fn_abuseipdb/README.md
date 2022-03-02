@@ -152,7 +152,7 @@ The following table provides the settings you need to configure the app. These s
 ---
 
 ## Function - AbuseIPDB
-Pulls data from AbuseIPDB (www.abuseipdb.com) and checks if an IP artifact is blacklisted. Needs an AbuseIPDB account and an v2 api key to work.
+Pulls data from AbuseIPDB (www.abuseipdb.com) and checks if an IP artifact is blacklisted. Needs an AbuseIPDB account and an v2 api key to work. Default is reports from the last 30 days, but can be changed to as many as the last 365 days' reports.
 
  ![screenshot: fn-abuseipdb ](./doc/screenshots/fn-abuseipdb.png)
 
@@ -162,7 +162,7 @@ Pulls data from AbuseIPDB (www.abuseipdb.com) and checks if an IP artifact is bl
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `abuseipdb_artifact_type` | `text` | Yes | `-` | - |
-| `abuseipdb_range_of_days` | `number` | Yes | `-` | - |
+| `abuseipdb_range_of_days` | `number` | Yes | 30 | - |
 | `abuseipdb_artifact_value` | `text` | Yes | `-` | - |
 
 </p>
@@ -243,7 +243,6 @@ results = {
 ```python
 inputs.abuseipdb_artifact_type = artifact.type
 inputs.abuseipdb_artifact_value = artifact.value
-inputs.abuseipdb_range_of_days = 30 # Change to see reports from within desired days. AbuseIPDB's site shows reports from the last 365 days.
 ```
 
 </p>
