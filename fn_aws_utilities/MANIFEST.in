@@ -1,4 +1,6 @@
 include README.md
-include fn_aws_utilities/util/*
+include apikey_permissions.txt
+include entrypoint.sh
+recursive-include fn_aws_utilities/util *
 include fn_aws_utilities/LICENSE
-include doc/*
+include doc/screeshots/*

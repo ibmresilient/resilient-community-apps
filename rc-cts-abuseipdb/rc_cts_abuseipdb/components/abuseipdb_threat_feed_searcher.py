@@ -31,7 +31,6 @@ class AbuseIPDBThreatFeedSearcher(ResilientComponent):
 
         self.opts = opts
         self.options = opts.get("abuseipdb_cts", {})
-        LOG.debug(opts)
         # check https://www.abuseipdb.com/categories for more information
         self.abuseipdb_categories = {
             3: "Fraud Orders",

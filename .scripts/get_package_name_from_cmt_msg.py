@@ -45,4 +45,8 @@ else:
         # package_name could not be found in COMMIT_MSG
         exit(1)
 
-    print(package_name[0])
+    if package_name[0] == "rebuild":
+        print("ALL")
+
+    else:
+        print(package_name[0])

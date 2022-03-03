@@ -26,6 +26,7 @@ def codegen_reload_data():
         "actions": [u"Example: Send Incident Email HTML", u"Example: Send Incident Email Text", u"Example: Send Task Email HTML"],
         "incident_fields": [],
         "incident_artifact_types": [],
+        "incident_types": [],
         "datatables": [],
         "automatic_tasks": [],
         "scripts": []
@@ -37,7 +38,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM Resilient Platform Version: 37.0.5832
+    IBM Resilient Platform Version: 42.0.7058
 
     Contents:
     - Message Destinations:

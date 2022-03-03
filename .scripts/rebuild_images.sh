@@ -110,11 +110,19 @@ for image_name in "${IMAGE_NAMES[@]}"; do
         docker_build_pass=0
 
         package_path="$TRAVIS_BUILD_DIR/$image_name"
+        # Make available externally
+        export PACKAGE_PATH=$package_path
         path_current_requirements="$package_path/current_requirements.txt"
         path_new_requirements="$package_path/new_requirements.txt"
         path_dockerfile="$package_path/Dockerfile"
         int_version=$(python "$package_path/setup.py" --version)
         print_msg "package_path:\t\t\t$package_path\npath_current_requirements:\t$path_current_requirements\npath_new_requirements:\t\t$path_new_requirements\npath_dockerfile:\t\t$path_dockerfile\nint_version:\t\t\t$int_version"
+
+        # Check if package has extra travis script
+        if [ -f "$package_path/$FILE_NAME_EXTRA_SETUP" ] ; then
+            print_msg "Executing extra .sh travis setup file found at $package_path/$FILE_NAME_EXTRA_SETUP"
+            sh $package_path/$FILE_NAME_EXTRA_SETUP
+        fi
 
         docker_tag="$image_name:$int_version"
         quay_io_tag="$QUAY_URL/$QUAY_USERNAME/$docker_tag"
@@ -141,7 +149,7 @@ for image_name in "${IMAGE_NAMES[@]}"; do
         print_msg "$image_name:: New requirements:\n$(cat $path_new_requirements)"
 
         print_msg "$image_name:: Overwriting Dockerfile"
-        python $SCRIPTS_DIR/insert_into_Dockerfile.py $path_dockerfile $DOCKERFILE_KEYWORD "$DOCKERFILE_WORDS_TO_INSERT"
+        python $SCRIPTS_DIR/insert_into_Dockerfile.py $path_dockerfile "$DOCKERFILE_KEYWORD" "$DOCKERFILE_WORDS_TO_INSERT"
 
         print_msg "$image_name:: Packaging $image_name with resilient-sdk"
         resilient-sdk package -p $package_path || resilient_sdk_package_pass=$?

@@ -4,7 +4,7 @@
 FROM registry.access.redhat.com/ubi8/python-36:latest
 
 ARG APPLICATION=fn_qradar_integration
-ARG RESILIENT_CIRCUITS_VERSION=43.0.0
+ARG RESILIENT_CIRCUITS_VERSION=41.0.0
 ARG PATH_RESILIENT_CIRCUITS=rescircuits
 
 # Environment variable for any app to check if running in a container
