@@ -18,25 +18,26 @@ def snake_to_camel(word):
     return ''.join(x.capitalize() or '_' for x in word.split('_'))
 
 setup(
+    display_name='Scheduler',
     name='fn_scheduler',
-    version='1.1.0',
+    version='1.1.2',
     license='MIT',
-    author='Resilient Labs',
-    author_email='resil@gmail.com',
-    url='https://ibm.biz/resilientcommunity',
-    description="App Components for 'fn_scheduler'",
-    long_description="This package of functions allows an enterprise to schedule a rule to run in the future associated with a incident, task, artifact, and datatable." \
-"Functions available include:" \
-" 1) Scheduling a rule" \
-" 2) Listing scheduled rules" \
-" 3) Removing a scheduled rule",
+    author='IBM SOAR',
+    url='https://ibm.com/mysupport',
+    description="Functions to allow Rules to be scheduled",
+    long_description="""This package of functions allows an enterprise to schedule a rule to run in the future associated with a incident, task, artifact, and datatable.<br>
+        Functions available include:<br>
+            1) Scheduling a rule<br>
+            2) Listing scheduled rules<br>
+            3) Pause and resume scheduled rules<br>
+            4) Removing a scheduled rule""",
     install_requires=[
-        'resilient_circuits>=32.0.0',
-        'resilient_lib>=33.0.189',
+        'resilient_circuits>=42.0.0',
         'pytz',
-        'APScheduler>=3.6.1',
+        "APScheduler < 3.9;python_version < '3.6'",
+        "APScheduler >= 3.9;python_version >= '3.6'",
         'SQLAlchemy>=1.3.8',
-        'python-dateutil>=2.8.1',
+        'python-dateutil>=2.8.1'
     ],
     extras_require={
         'apphost': ['py-postgresql']

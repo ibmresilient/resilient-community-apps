@@ -1,17 +1,15 @@
-# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 
-
-import errno
-import os
-import smtplib
-import ssl
+from errno import ENOENT
+from os import path, strerror
+from smtplib import SMTP, SMTP_SSL
 import logging
 from email.mime.application import MIMEApplication
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-from ssl import Purpose
+from ssl import Purpose, create_default_context
 from jinja2 import Environment, select_autoescape
 from resilient_circuits import ResilientComponent
 from fn_outbound_email.lib.template_helper import TemplateHelper
@@ -19,9 +17,8 @@ from fn_outbound_email.lib.template_helper import TemplateHelper
 log = logging.getLogger(__name__)
 
 CONFIG_DATA_SECTION = 'fn_outbound_email'
-SMTP_DEFAULT_CONN_TIMEOUT = 15
+SMTP_DEFAULT_CONN_TIMEOUT = 20
 SMTP_DEFAULT_PORT = '25'
-
 
 class SendSMTPEmail(ResilientComponent):
 
@@ -108,14 +105,14 @@ class SendSMTPEmail(ResilientComponent):
         try:
             if self.smtp_config_section.get("smtp_ssl_mode") == "ssl":
                 log.info("Building SSL connection object")
-                smtp_connection = smtplib.SMTP_SSL(host=self.smtp_server,
+                smtp_connection = SMTP_SSL(host=self.smtp_server,
                                                    port=self.smtp_port,
                                                    certfile=self.smtp_cafile,
                                                    context=self.get_smtp_ssl_context(),
                                                    timeout=self.smtp_conn_timeout)
             else:
                 log.info("Building generic connection object")
-                smtp_connection = smtplib.SMTP(host=self.smtp_server,
+                smtp_connection = SMTP(host=self.smtp_server,
                                                port=self.smtp_port,
                                                timeout=self.smtp_conn_timeout)
 
@@ -124,7 +121,6 @@ class SendSMTPEmail(ResilientComponent):
                     smtp_connection.ehlo()
                     smtp_connection.starttls()
                     smtp_connection.ehlo()
-
 
             if self.smtp_user:
                 if not self.smtp_password:
@@ -155,27 +151,24 @@ class SendSMTPEmail(ResilientComponent):
     def process_attachments(attachment_list):
         attachment_result_list = []
         for attachment_path in attachment_list:
-            if not os.path.isfile(attachment_path):
-                continue
-
             with open(attachment_path, 'rb') as fp:
                 mime_object = MIMEApplication(fp.read())
 
             # Set the filename parameter
-            mime_object.add_header('Content-Disposition', 'attachment', filename=os.path.basename(attachment_path))
+            mime_object.add_header('Content-Disposition', 'attachment', filename=path.basename(attachment_path))
             attachment_result_list.append(mime_object)
         return attachment_result_list
 
     def get_smtp_ssl_context(self):
-        ssl_context = ssl.create_default_context(purpose=Purpose.SERVER_AUTH)
+        ssl_context = create_default_context(purpose=Purpose.SERVER_AUTH)
         ssl_context.check_hostname = self.smtp_config_section.get("smtp_ssl_cafile") not in ['False', 'false']
 
         # if True set to default context
         if self.smtp_config_section.get("smtp_ssl_cafile") in ['True', 'true']:
             return ssl_context
 
-        if not os.path.isfile(self.smtp_config_section.get("smtp_ssl_cafile")):
-            raise FileNotFoundError(errno.ENOENT, os.strerror(errno.ENOENT),
+        if not path.isfile(self.smtp_config_section.get("smtp_ssl_cafile")):
+            raise FileNotFoundError(ENOENT, strerror(ENOENT),
                                     self.smtp_config_section.get("smtp_ssl_cafile"))
 
         ssl_context.load_verify_locations(cafile=self.smtp_config_section.get("smtp_ssl_cafile"))
@@ -183,12 +176,11 @@ class SendSMTPEmail(ResilientComponent):
         return ssl_context
 
     def get_incident_data(self, mail_incident_id):
-        return self.rest_client().get("/incidents/{0}?handle_format=names".format(mail_incident_id))
+        return self.rest_client().get("/incidents/{}?handle_format=names".format(mail_incident_id))
 
     def render_template(self, template_string, incident_data, mail_data):
         template = self.jinja_env.from_string(template_string)
         return template.render(incident=incident_data, mail=mail_data)
-
 
 class SimpleSendEmailException(Exception):
     """Exception for Send Email errors"""

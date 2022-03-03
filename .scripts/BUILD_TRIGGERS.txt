@@ -1,2 +1,2 @@
 #
-# build fn_qradar_enhanced_data
+build fn_microsoft_defender

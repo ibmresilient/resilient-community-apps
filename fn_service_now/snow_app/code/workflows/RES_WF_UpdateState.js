@@ -14,11 +14,19 @@
 			"On Hold": "yellow",
 			"Resolved": "red",
 			"Closed": "red",
-			"Canceled": "red"
+			"Canceled": "red",
+
+			// colors for security incidents states
+			"Draft": "green",
+			"Analysis": "orange",
+			"Contain": "yellow",
+			"Eradicate": "yellow",
+			"Recover": "yellow",
+			"Review": "red"
 		};
 		
-		//Get the required values
-		res_reference_id = current.getValue("x_ibmrt_resilient_ibm_resilient_reference_id");
+		//Get resilient_reference_id depending on what Table the record is in
+		res_reference_id = resHelper.getResilientReferenceId(current);
 		snTicketState = current.state.getChoiceValue();
 		
 		// Try get the snTicketStateColor that matches the snTicketState
@@ -45,7 +53,7 @@
 		}
 	}
 	catch(errMsg){
-		current.work_notes = "Failed to update state in IBM Resilient.\nReason: " + errMsg;
+		current.work_notes = "Failed to update state in IBM SOAR.\nReason: " + errMsg;
 		gs.error(errMsg);
 	}
 })();

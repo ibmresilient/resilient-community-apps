@@ -1,5 +1,15 @@
 include README.md
+include Dockerfile
+include apikey_permissions.txt
+include entrypoint.sh
 recursive-include fn_outbound_email/util *
+recursive-include fn_outbound_email/lib *
 include fn_outbound_email/LICENSE
-include fn_outbound_email/doc/*
-include fn_outbound_email/data/*
+include doc/*.md
+include doc/screenshots/*
+include icons/*.png
+include tox.ini
+recursive-include tests/ *
+include fn_outbound_email/data/templates/*
+
+global-exclude *.bak
