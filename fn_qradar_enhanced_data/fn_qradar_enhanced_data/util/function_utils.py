@@ -65,8 +65,8 @@ def get_servers_list(opts):
             raise IntegrationError('Unable to find [{}]'.format(GLOBAL_SETTINGS))
         server_list.remove(GLOBAL_SETTINGS)
 
-    # Validate global_settings
-    validate_fields(["polling_interval", "polling_lookback"], opts.get(GLOBAL_SETTINGS, {}))
+        # Validate global_settings
+        validate_fields(["polling_interval", "polling_lookback"], opts.get(GLOBAL_SETTINGS, {}))
 
     # Creates a dictionary that is filled with the QRadar servers
     # and there configurations

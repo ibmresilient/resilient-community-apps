@@ -14,7 +14,7 @@ class QRadarTab(Tab):
     CONTAINS = [
         Field("qradar_id"),
         Field("qradar_destination"),
-        Field("qr_last_updated_time"),
+        Field("qr_offense_last_updated_time"),
         Field("qr_offense_index_type"),
         Field("qr_offense_index_value"),
         Field("qr_offense_source"),

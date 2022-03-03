@@ -65,7 +65,10 @@ class FunctionComponent(ResilientComponent):
             # Get qradar_client and options
             qradar_client, options = QRadarServers.get_qradar_client(self.opts, qradar_label)
 
-            timeout = float(self.global_settings.get("search_timeout",600))  # Default timeout to 10 minutes
+            if self.global_settings:
+                timeout = float(self.global_settings.get("search_timeout",600))  # Default timeout to 10 minutes
+            else:
+                timeout = float(options.get("search_timeout",600))  # Default timeout to 10 minutes
 
             temp_table = "offense-{0}-events-{1}-1000-{2}".format(qradar_search_param3, qradar_fn_type, str(time()))
 
