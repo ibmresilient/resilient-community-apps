@@ -126,7 +126,7 @@ class PollerComponent(ResilientComponent):
                         updated_cases.append(case_id)
                         # Create payload to update cases
                         payload['patches'][case_id] = {
-                                                "version": case_dict['vers']+1,
+                                                "version": case_dict['case_ver']+1,
                                                 "changes": [ {
                                                     "old_value": { "date": case_lastUpdatedTime },
                                                     "new_value": { "date": offense_lastUpdatedTime },
