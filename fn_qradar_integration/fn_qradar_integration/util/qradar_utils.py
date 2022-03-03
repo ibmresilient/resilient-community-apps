@@ -51,10 +51,16 @@ class QRadarServers():
         return servers, server_name_list
 
     def qradar_label_test(qradar_label, servers_list):
+        """
+        Check if the given qradar_label is in the app.config
+        :param qradar_label: User selected server
+        :param servers_list: list of qradar servers
+        :return: dictionary of options for choosen server
+        """
         label = qradar_constants.PACKAGE_NAME+":"+qradar_label
         if qradar_label and label in servers_list:
             options = servers_list[label]
-        elif (servers_list == 1 and qradar_label == qradar_constants.PACKAGE_NAME) or servers_list == 1:
+        elif (len(servers_list) == 1 and qradar_label == qradar_constants.PACKAGE_NAME) or len(servers_list) == 1:
             options = servers_list[list(servers_list.keys())[0]]
         else:
             raise IntegrationError("{} did not match labels given in the app.config".format(qradar_label))
@@ -63,7 +69,9 @@ class QRadarServers():
 
     def _get_server_name_list(self, opts):
         """
-        Return the list of QRadar server names defined in the app.config in fn_qradar_integration. 
+        Return the list of QRadar server names defined in the app.config in fn_qradar_integration.
+        :param opts: list of options
+        :return: list of servers
         """
         server_list = []
         for key in opts.keys():
