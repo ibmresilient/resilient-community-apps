@@ -1,3 +1,22 @@
 {
-    
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "success": true,
+    "reason:": null
+  },
+  "raw": null,
+  "inputs": {
+    "sdlp_note_text": "<b>Symantec DLP: Update Incident Status</b><br /> DLP incident 468 status set to: Resolved.",
+    "sdlp_incident_id": 468
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-symantec-dlp",
+    "package_version": "2.0.0",
+    "host": "my-laptop",
+    "execution_time_ms": 30032,
+    "timestamp": "2022-03-03 11:29:55"
+  }
 }

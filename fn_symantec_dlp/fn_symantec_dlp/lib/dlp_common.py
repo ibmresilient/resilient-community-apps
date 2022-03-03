@@ -2,7 +2,7 @@
 # pragma pylint: disable=unused-argument, no-self-use
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 import os
-from datetime import datetime
+import datetime
 import logging
 import base64
 import shutil
@@ -272,10 +272,11 @@ class SymantecDLPCommon():
             json : incident that was updated
         """
         url = u"{0}/incidents".format(self.base_url)
+        note_date_time = datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
         update_json = {
                         "incidentIds":[ incident_id ],
                         "incidentNotes":[{
-                            "dateTime": datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S"),
+                            "dateTime": note_date_time,
                             "note": note_text
                         }]
         }
