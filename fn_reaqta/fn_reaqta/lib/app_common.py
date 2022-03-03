@@ -121,8 +121,8 @@ class AppCommon():
 
         url = urljoin(ENDPOINT_URI.format(endpoint_id), "request-file")
         payload = {
-                "path": program_path,
-            }
+            "path": program_path,
+        }
 
         response, err_msg = self.api_call("POST", url, payload)
 
@@ -136,18 +136,24 @@ class AppCommon():
             for _ in range(0, 3):
                 time.sleep(DOWNLOAD_WAIT_SEC)
                 response, err_msg = self.api_call("GET", url, None)
-                if response.status_code == 200 and response.json().get("downloadId"):
+                if not response.status_code == 200:
+                    break
+
+                if response.json().get("downloadId"):
                     results = response.json()
                     download_id = results["downloadId"]
+                    break
+                if response.json().get("stage", {}).get("error"):
+                    err_msg = response.json().get("stage", {}).get("error")
                     break
 
             if download_id:
                 url = urljoin(ENDPOINT_FILE_URI.format(download_id), "download")
                 response, err_msg = self.api_call("GET", url, None)
 
-                return BytesIO(s_to_b(response.text))
+                return BytesIO(s_to_b(response.text)), None
 
-        return None
+        return None, err_msg
 
     def close_alert(self, alert_id, is_malicious):
         params = {

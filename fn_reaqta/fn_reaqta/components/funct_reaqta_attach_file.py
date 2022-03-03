@@ -34,11 +34,7 @@ class FunctionComponent(AppFunctionComponent):
                         "api_secret"],
                         self.app_configs)
 
-        validate_fields(["reaqta_endpoint_id", "reaqta_incident_id"], fn_inputs)
-
-        # Example getting access to self.get_fn_msg()
-        # fn_msg = self.get_fn_msg()
-        # self.LOG.info("fn_msg: %s", fn_msg)
+        validate_fields(["reaqta_endpoint_id", "reaqta_incident_id", "reaqta_program_path"], fn_inputs)
 
         app_common = AppCommon(self.rc, self.app_configs._asdict())
         file_contents = app_common.get_program_file(fn_inputs.reaqta_endpoint_id,

@@ -1,13 +1,18 @@
 # -*- coding: utf-8 -*-
 
 """AppFunction implementation"""
+import ntpath
 from fn_reaqta.lib.app_common import AppCommon
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from resilient_lib import IntegrationError, validate_fields
+from resilient_lib import validate_fields
 
 PACKAGE_NAME = "fn_reaqta"
 FN_NAME = "reaqta_create_artifact"
 
+ARTIFACT_TYPE_LOOKUP = {
+    "Malware Sample": 12,
+    "Other File": 16
+}
 
 class FunctionComponent(AppFunctionComponent):
     """Component that implements function 'reaqta_create_artifact'"""
@@ -35,26 +40,31 @@ class FunctionComponent(AppFunctionComponent):
                         "api_secret"],
                         self.app_configs)
 
-        validate_fields(["reaqta_endpoint_id", "reaqta_incident_id", "reaqta_program_path", "reaqta_artifact_types"], fn_inputs)
-
-        # Example getting access to self.get_fn_msg()
-        # fn_msg = self.get_fn_msg()
-        # self.LOG.info("fn_msg: %s", fn_msg)
+        validate_fields(["reaqta_endpoint_id", "reaqta_incident_id",
+                        "reaqta_program_path", "reaqta_artifact_type"], fn_inputs)
 
         app_common = AppCommon(self.rc, self.app_configs._asdict())
-        file_contents = app_common.get_program_file(fn_inputs.reaqta_endpoint_id,
-                                                  fn_inputs.reaqta_program_path)
+        file_contents, err_msg = app_common.get_program_file(fn_inputs.reaqta_endpoint_id,
+                                                           fn_inputs.reaqta_program_path)
 
-        # TODO - create artifact poller_common?
         results = None
-        if file_contents:
-            results = xxx(self.rest_client(), file_contents,
-                          fn_inputs.reaqta_artifact_types, fn_inputs.reaqta_incident_id)
+        if not err_msg:
+            # collect the file name
+            file_name = ntpath.basename(fn_inputs.reaqta_program_path)
+
+            attachment_uri = "/incidents/{0}/artifacts/files".format(fn_inputs.reaqta_incident_id)
+
+            artifact_type = ARTIFACT_TYPE_LOOKUP.get(fn_inputs.reaqta_artifact_type, 12)
+
+            results = self.rest_client().post_artifact_file(attachment_uri,
+                                                           artifact_type,
+                                                           None,
+                                                           bytes_handle=file_contents,
+                                                           description="Extracted from ReaQta",
+                                                           value=file_name)
 
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
 
-        yield FunctionResult(results)
-
-        yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
-
-        yield FunctionResult(results)
+        yield FunctionResult(results,
+                             success=True if results else False,
+                             reason=err_msg)
