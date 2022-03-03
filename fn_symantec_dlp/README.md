@@ -48,7 +48,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 2.0.0 | 2019 | REST API | 
+| 2.0.0 | 2022 | REST API | 
 | 1.0.0 | 2019 | Initial Release (SOAP-based)|
 
 ---
@@ -62,9 +62,7 @@
 
  ![screenshot: main](./doc/screenshots/main.png) <!-- ::CHANGE_ME:: -->
 
-This app allows bi-directional synchronization between IBM SOAR and Symantec DLP.
-
-    Symantec DLP incident are escalated to IBM SOAR as cases with the creation of artifacts and notes in SOAR from the incident.
+This app allows bi-directional synchronization between IBM SOAR and Symantec DLP.  Symantec DLP incident are escalated to IBM SOAR as cases with the creation of artifacts and notes in SOAR from the incident.
 
 ### Key Features
 <!--
@@ -199,7 +197,7 @@ The following table provides the settings you need to configure the app. These s
 ---
 
 ## Function - Symantec DLP: Get Incident Details
-Get the information on the Symantec DLP incident by calling the DLP REST API incident endpoints and return the information in JSON format.
+Get the information on the Symantec DLP incident by calling the DLP REST API incident endpoints for edittable, static and notes and return the information in JSON format.
 
  ![screenshot: fn-symantec-dlp-get-incident-details ](./doc/screenshots/fn-symantec-dlp-get-incident-details.png)
 
@@ -270,7 +268,7 @@ workflow.addProperty('convert_json_to_rich_text', json_note)
 
 ---
 ## Function - Symantec DLP: Send Note to DLP Incident
-Send a note from SOAR to the corresponding Symantec DLP incident.
+Send an case note from SOAR to the corresponding Symantec DLP incident.
 
  ![screenshot: fn-symantec-dlp-send-note-to-dlp-incident ](./doc/screenshots/fn-symantec-dlp-send-note-to-dlp-incident.png) <!-- ::CHANGE_ME:: -->
 

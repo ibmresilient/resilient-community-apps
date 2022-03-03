@@ -1,3 +1,291 @@
 {
-    
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "notes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "editableIncidentDetails": {
+          "type": "object",
+          "properties": {
+            "incidentId": {
+              "type": "integer"
+            },
+            "infoMap": {
+              "type": "object",
+              "properties": {
+                "detectedRemediationStatus": {
+                  "type": "integer"
+                },
+                "preventOrProtectStatusId": {
+                  "type": "integer"
+                },
+                "incidentStatusName": {
+                  "type": "string"
+                },
+                "isHidingNotAllowed": {
+                  "type": "boolean"
+                },
+                "severityId": {
+                  "type": "integer"
+                },
+                "incidentStatusId": {
+                  "type": "integer"
+                },
+                "isHidden": {
+                  "type": "boolean"
+                }
+              }
+            },
+            "customAttributeGroups": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "nameInternationalized": {
+                    "type": "boolean"
+                  },
+                  "customAttributes": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "index": {
+                          "type": "integer"
+                        },
+                        "displayOrder": {
+                          "type": "integer"
+                        },
+                        "value": {
+                          "type": "string"
+                        },
+                        "email": {
+                          "type": "boolean"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "staticIncidentDetails": {
+          "type": "object",
+          "properties": {
+            "incidentId": {
+              "type": "integer"
+            },
+            "infoMap": {
+              "type": "object",
+              "properties": {
+                "messageType": {
+                  "type": "string"
+                },
+                "discoverContentRootPath": {
+                  "type": "string"
+                },
+                "policyName": {
+                  "type": "string"
+                },
+                "discoverMillisSinceFirstSeen": {
+                  "type": "integer"
+                },
+                "detectionServerName": {
+                  "type": "string"
+                },
+                "discoverTargetId": {
+                  "type": "integer"
+                },
+                "discoverName": {
+                  "type": "string"
+                },
+                "fileOwner": {
+                  "type": "string"
+                },
+                "policyVersion": {
+                  "type": "integer"
+                },
+                "discoverServer": {
+                  "type": "string"
+                },
+                "discoverRepositoryLocation": {
+                  "type": "string"
+                },
+                "discoverScanId": {
+                  "type": "integer"
+                },
+                "endpointConnectionStatus": {
+                  "type": "string"
+                },
+                "policyId": {
+                  "type": "integer"
+                },
+                "detectionServerId": {
+                  "type": "integer"
+                },
+                "messageId": {
+                  "type": "integer"
+                },
+                "creationDate": {
+                  "type": "string"
+                },
+                "isBlockedStatusSuperseded": {
+                  "type": "boolean"
+                },
+                "detectionDate": {
+                  "type": "string"
+                },
+                "messageDate": {
+                  "type": "string"
+                },
+                "attachmentInfo": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "messageComponentName": {
+                        "type": "string"
+                      },
+                      "messageComponentId": {
+                        "type": "integer"
+                      },
+                      "wasCracked": {
+                        "type": "boolean"
+                      },
+                      "documentFormat": {
+                        "type": "string"
+                      },
+                      "messageComponentType": {
+                        "type": "integer"
+                      },
+                      "originalSize": {
+                        "type": "integer"
+                      }
+                    }
+                  }
+                },
+                "fileCreateDate": {
+                  "type": "string"
+                },
+                "fileAccessDate": {
+                  "type": "string"
+                },
+                "discoverTargetName": {
+                  "type": "string"
+                },
+                "policyGroupName": {
+                  "type": "string"
+                },
+                "policyGroupId": {
+                  "type": "integer"
+                },
+                "messageSource": {
+                  "type": "string"
+                },
+                "matchCount": {
+                  "type": "integer"
+                },
+                "messageAclEntries": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "cloudStorageCollaborator": {
+                        "type": "string"
+                      },
+                      "aclType": {
+                        "type": "string"
+                      },
+                      "sharepointPermission": {
+                        "type": "string"
+                      },
+                      "cloudstorageRole": {
+                        "type": "string"
+                      },
+                      "grantDeny": {
+                        "type": "string"
+                      },
+                      "sharePointACL": {
+                        "type": "string"
+                      },
+                      "readACLShare": {
+                        "type": "string"
+                      },
+                      "readACLFile": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "messageTypeId": {
+                  "type": "integer"
+                },
+                "discoverScanStartDate": {
+                  "type": "string"
+                },
+                "discoverUrl": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "sdlp_incident_url": {
+          "type": "string"
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "sdlp_incident_id": {
+          "type": "integer"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
 }
