@@ -62,7 +62,7 @@
 
  ![screenshot: main](./doc/screenshots/main.png)
 
-This app allows bi-directional synchronization between IBM SOAR and Symantec DLP.  Symantec DLP incident are escalated to IBM SOAR as cases with the creation of artifacts and notes in SOAR from the incident.
+This app allows bi-directional synchronization between IBM Security QRadar SOAR and Symantec DLP.  Symantec DLP incidents are escalated to IBM SOAR as cases with the creation of artifacts and notes in SOAR from the incident.
 
 ### Key Features
 <!--
@@ -76,6 +76,8 @@ The Symantec DLP app implements the following functionality in the IBM QRadar SO
 * Resolve a Symantec DLP incident when the corresponding IBM SOAR incident/case is closed.
 * Close an IBM SOAR incident/case when the corresponding Symantec DLP incident is resolved in Symantec DLP.
 * Get the Symantec DLP incident details and write the JSON in a formatted SOAR incident note.
+* Create a live link in the Symantec DLP incident to the corresponding SOAR case. 
+* Create a live link in the a SOAR case to the corresponding Symantec DLP incident. 
 ---
 
 ## Requirements
@@ -142,7 +144,7 @@ This app has been implemented using:
 <!--
 List any prerequisites that are needed to use with this endpoint solution. Remove any section that is unnecessary.
 -->
-* A Symantec DLP Enforce Server
+* Symantec DLP Enforce Server
 
 #### Configuration
 <!--
@@ -150,11 +152,18 @@ List any steps that are needed to configure the endpoint to use this app.
 -->
 ##### Configure Symantec DLP Custom Attributes
 
-2 Custom attributes are used by the DLP integration to hold relevant information from the Resilient platform. `ibm_soar_case_id` is used as a predicate for filtering out already imported incidents and avoiding duplication. Without this custom attribute in place, there is a potential for incident duplication. In Symantec DLP navigate to `System > Incident Attributes > Custom Attributes`
+Two DLP Custom Attributes are used by the DLP integration to hold relevant information from the IBM SOAR platform. 
+
+`ibm_soar_case_id` custom attribute is used for filtering out already imported to SOAR incidents and avoiding duplication. Without this custom attribute in place, there is a potential for incident duplication.  
+
+`ibm_soar_case_url` custom attribute is used to provide a live link from Symantec DLP to IBM SOAR.
+
+To create the custom attribute in Symantec DLP navigate to `System->Incident Attributes->Custom Attributes`
 
  ![screenshot: finding-attribute-page ](./doc/screenshots/finding-attributes-page.png)
 
- You will be given the option to configure settings such as status values for incidents and custom attributes. Select the option to add a new custom attribute and create a `ibm_soar_case_id` custom  attribute.
+Select the option to Add a new Custom Attribute and create an `ibm_soar_case_id` and an `ibm_soar_case_url` custom  attribute.
+
  ![screenshot: adding new attribute](./doc/screenshots/adding-an-attribute.png)
  ![screenshot: adding new attribute form](./doc/screenshots/new-attribute-form.png)
 
@@ -162,10 +171,7 @@ List any steps that are needed to configure the endpoint to use this app.
 <!--
 List any user permissions that are needed to use this endpoint. For example, list the API key permissions.
 -->
-* Permission A <!-- ::CHANGE_ME:: -->
-* Permission B <!-- ::CHANGE_ME:: -->
-* Permission C <!-- ::CHANGE_ME:: -->
-
+* Valid DLP user account created using the DLP Enforce Server administration console in order to access the REST API service.
 
 ---
 
