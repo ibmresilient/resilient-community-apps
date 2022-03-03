@@ -4,10 +4,10 @@
   "reason": null,
   "content": {
     "notes": [
-      "<b>From Symantec DLP</b>\n                        <br>\n                        <b>User: </b>Administrator added note at 2022-02-07T16:23:50.32\n                        <br>\n                        <b>Note detail</b>: <p>AnnMarie added a note 2/7/2022 4:23pm</p>\n                        ",
-      "<b>From Symantec DLP</b>\n                        <br>\n                        <b>User: </b>Administrator added note at 2022-02-08T08:31:12.158\n                        <br>\n                        <b>Note detail</b>: <p>annMarie added a second note 2/7/2022</p>\n                        ",
-      "<b>From Symantec DLP</b>\n                        <br>\n                        <b>User: </b>Administrator added note at 2022-02-10T20:49:58.47\n                        <br>\n                        <b>Note detail</b>: <p>AnnMarie added note to SOAR and will send it to DLP</p>\n                        ",
-      "<b>From Symantec DLP</b>\n                        <br>\n                        <b>User: </b>Administrator added note at 2022-02-10T20:49:58.47\n                        <br>\n                        <b>Note detail</b>: <p>AnnMarie added note to SOAR and will send it to DLP</p>\n                        "
+      "<b>From Symantec DLP</b>\n                        <br>\n                        <b>User: </b>Administrator added note at 2022-02-07T16:23:50.32\n                        <br>\n                        <b>Note detail</b>: <p>added a note 2/7/2022 4:23pm</p>\n                        ",
+      "<b>From Symantec DLP</b>\n                        <br>\n                        <b>User: </b>Administrator added note at 2022-02-08T08:31:12.158\n                        <br>\n                        <b>Note detail</b>: <p>added a second note 2/7/2022</p>\n                        ",
+      "<b>From Symantec DLP</b>\n                        <br>\n                        <b>User: </b>Administrator added note at 2022-02-10T20:49:58.47\n                        <br>\n                        <b>Note detail</b>: <p>added note to SOAR and will send it to DLP</p>\n                        ",
+      "<b>From Symantec DLP</b>\n                        <br>\n                        <b>User: </b>Administrator added note at 2022-02-10T20:49:58.47\n                        <br>\n                        <b>Note detail</b>: <p>added note to SOAR and will send it to DLP</p>\n                        "
     ],
     "editableIncidentDetails": {
       "incidentId": 468,

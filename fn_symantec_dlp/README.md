@@ -60,7 +60,7 @@
 -->
 **IBM QRadar SOAR app for Symantec DLP**
 
- ![screenshot: main](./doc/screenshots/main.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: main](./doc/screenshots/main.png)
 
 This app allows bi-directional synchronization between IBM SOAR and Symantec DLP.  Symantec DLP incident are escalated to IBM SOAR as cases with the creation of artifacts and notes in SOAR from the incident.
 
@@ -82,7 +82,6 @@ The Symantec DLP app implements the following functionality in the IBM QRadar SO
 <!--
   List any Requirements 
 --> 
-<!-- ::CHANGE_ME:: -->
 This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.
 
 ### SOAR platform
@@ -219,12 +218,285 @@ Get the information on the Symantec DLP incident by calling the DLP REST API inc
 <!-- ::CHANGE_ME:: -->
 ```python
 results = {
-    # TODO: Generate an example of the Function Output within this code block.
-    # To get the output of a Function:
-    #   1. Run resilient-circuits in DEBUG mode: $ resilient-circuits run --loglevel=DEBUG
-    #   2. Invoke the Function in SOAR
-    #   3. Gather the results using: $ resilient-sdk codegen -p fn_symantec_dlp --gather-results
-    #   4. Run docgen again: $ resilient-sdk docgen -p fn_symantec_dlp
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "notes": [
+      "<b>From Symantec DLP</b>\n                        <br>\n                        <b>User: </b>Administrator added note at 2022-02-07T16:23:50.32\n                        <br>\n                        <b>Note detail</b>: <p>added a note 2/7/2022 4:23pm</p>\n                        ",
+      "<b>From Symantec DLP</b>\n                        <br>\n                        <b>User: </b>Administrator added note at 2022-02-08T08:31:12.158\n                        <br>\n                        <b>Note detail</b>: <p>added a second note 2/7/2022</p>\n                        ",
+      "<b>From Symantec DLP</b>\n                        <br>\n                        <b>User: </b>Administrator added note at 2022-02-10T20:49:58.47\n                        <br>\n                        <b>Note detail</b>: <p>added note to SOAR and will send it to DLP</p>\n                        ",
+      "<b>From Symantec DLP</b>\n                        <br>\n                        <b>User: </b>Administrator added note at 2022-02-10T20:49:58.47\n                        <br>\n                        <b>Note detail</b>: <p>added note to SOAR and will send it to DLP</p>\n                        "
+    ],
+    "editableIncidentDetails": {
+      "incidentId": 468,
+      "infoMap": {
+        "detectedRemediationStatus": 0,
+        "preventOrProtectStatusId": 0,
+        "incidentStatusName": "Resolved",
+        "isHidingNotAllowed": false,
+        "severityId": 1,
+        "incidentStatusId": 3,
+        "isHidden": false
+      },
+      "customAttributeGroups": [
+        {
+          "name": "custom_attribute_group.default",
+          "nameInternationalized": true,
+          "customAttributes": [
+            {
+              "name": "ibm_soar_case_url",
+              "index": 17,
+              "displayOrder": 1,
+              "value": "https://mysoar.com:443/#incidents/3449",
+              "email": false
+            },
+            {
+              "name": "ibm_soar_case_id",
+              "index": 18,
+              "displayOrder": 2,
+              "value": "3449",
+              "email": false
+            }
+          ]
+        },
+        {
+          "name": "Predefined",
+          "nameInternationalized": false,
+          "customAttributes": [
+            {
+              "name": "Resolution",
+              "index": 1,
+              "displayOrder": 1,
+              "value": "Business Issue",
+              "email": false
+            },
+            {
+              "name": "Dismissal Reason",
+              "index": 2,
+              "displayOrder": 2,
+              "value": "Bus. Process Issue",
+              "email": false
+            },
+            {
+              "name": "Assigned To",
+              "index": 3,
+              "displayOrder": 3,
+              "email": false
+            },
+            {
+              "name": "Business Unit",
+              "index": 4,
+              "displayOrder": 4,
+              "email": false
+            },
+            {
+              "name": "Employee Code",
+              "index": 5,
+              "displayOrder": 5,
+              "email": false
+            },
+            {
+              "name": "First Name",
+              "index": 6,
+              "displayOrder": 6,
+              "email": false
+            },
+            {
+              "name": "Last Name",
+              "index": 7,
+              "displayOrder": 7,
+              "email": false
+            },
+            {
+              "name": "Phone",
+              "index": 8,
+              "displayOrder": 8,
+              "email": false
+            },
+            {
+              "name": "Sender Email",
+              "index": 9,
+              "displayOrder": 9,
+              "email": true
+            },
+            {
+              "name": "Manager First Name",
+              "index": 11,
+              "displayOrder": 10,
+              "email": false
+            },
+            {
+              "name": "Manager Last Name",
+              "index": 10,
+              "displayOrder": 11,
+              "email": false
+            },
+            {
+              "name": "Manager Phone",
+              "index": 12,
+              "displayOrder": 12,
+              "email": false
+            },
+            {
+              "name": "Manager Email",
+              "index": 13,
+              "displayOrder": 13,
+              "email": true
+            },
+            {
+              "name": "Region",
+              "index": 14,
+              "displayOrder": 14,
+              "email": false
+            },
+            {
+              "name": "Country",
+              "index": 15,
+              "displayOrder": 15,
+              "email": false
+            },
+            {
+              "name": "Postal Code",
+              "index": 16,
+              "displayOrder": 16,
+              "email": false
+            }
+          ]
+        }
+      ]
+    },
+    "staticIncidentDetails": {
+      "incidentId": 468,
+      "infoMap": {
+        "messageType": "EDAR",
+        "discoverContentRootPath": "DLP-WINDOWS10-8",
+        "policyName": "Customer Data Protection",
+        "discoverMillisSinceFirstSeen": 165799618,
+        "detectionServerName": "Single-tier Detection Server",
+        "discoverTargetId": 21,
+        "discoverName": "passwordpolicy.ini",
+        "fileOwner": "BUILTIN\\administrators",
+        "policyVersion": 2,
+        "discoverServer": "DLP-WINDOWS10-8",
+        "discoverRepositoryLocation": "DLP-WINDOWS10-8 - c:\\passwordpolicy.ini",
+        "discoverScanId": 41,
+        "endpointConnectionStatus": "CONNECTED",
+        "policyId": 16,
+        "detectionServerId": 1,
+        "messageId": 468,
+        "creationDate": "2022-02-04T16:08:48.678",
+        "isBlockedStatusSuperseded": false,
+        "detectionDate": "2022-02-04T16:08:43.08",
+        "messageDate": "2022-02-03T22:40:43",
+        "attachmentInfo": [
+          {
+            "messageComponentName": "c:\\passwordpolicy.ini",
+            "messageComponentId": 981,
+            "wasCracked": false,
+            "documentFormat": "unicode",
+            "messageComponentType": 3,
+            "originalSize": 16482
+          }
+        ],
+        "fileCreateDate": "2021-02-12T09:50:16.39",
+        "fileAccessDate": "2022-02-04T16:01:06.431",
+        "discoverTargetName": "SS number on 9.30.94.38",
+        "policyGroupName": "Customer Data Protection",
+        "policyGroupId": 5,
+        "messageSource": "DISCOVER",
+        "matchCount": 2,
+        "messageAclEntries": [
+          {
+            "cloudStorageCollaborator": "BUILTIN\\administrators",
+            "aclType": "FILE",
+            "sharepointPermission": "WRITE",
+            "cloudstorageRole": "WRITE",
+            "grantDeny": "GRANT",
+            "sharePointACL": "BUILTIN\\administrators",
+            "readACLShare": "BUILTIN\\administrators",
+            "readACLFile": "BUILTIN\\administrators"
+          },
+          {
+            "cloudStorageCollaborator": "BUILTIN\\administrators",
+            "aclType": "FILE",
+            "sharepointPermission": "READ",
+            "cloudstorageRole": "READ",
+            "grantDeny": "GRANT",
+            "sharePointACL": "BUILTIN\\administrators",
+            "readACLShare": "BUILTIN\\administrators",
+            "readACLFile": "BUILTIN\\administrators"
+          },
+          {
+            "cloudStorageCollaborator": "NT AUTHORITY\\system",
+            "aclType": "FILE",
+            "sharepointPermission": "WRITE",
+            "cloudstorageRole": "WRITE",
+            "grantDeny": "GRANT",
+            "sharePointACL": "NT AUTHORITY\\system",
+            "readACLShare": "NT AUTHORITY\\system",
+            "readACLFile": "NT AUTHORITY\\system"
+          },
+          {
+            "cloudStorageCollaborator": "NT AUTHORITY\\system",
+            "aclType": "FILE",
+            "sharepointPermission": "READ",
+            "cloudstorageRole": "READ",
+            "grantDeny": "GRANT",
+            "sharePointACL": "NT AUTHORITY\\system",
+            "readACLShare": "NT AUTHORITY\\system",
+            "readACLFile": "NT AUTHORITY\\system"
+          },
+          {
+            "cloudStorageCollaborator": "BUILTIN\\users",
+            "aclType": "FILE",
+            "sharepointPermission": "READ",
+            "cloudstorageRole": "READ",
+            "grantDeny": "GRANT",
+            "sharePointACL": "BUILTIN\\users",
+            "readACLShare": "BUILTIN\\users",
+            "readACLFile": "BUILTIN\\users"
+          },
+          {
+            "cloudStorageCollaborator": "NT AUTHORITY\\authenticated users",
+            "aclType": "FILE",
+            "sharepointPermission": "WRITE",
+            "cloudstorageRole": "WRITE",
+            "grantDeny": "GRANT",
+            "sharePointACL": "NT AUTHORITY\\authenticated users",
+            "readACLShare": "NT AUTHORITY\\authenticated users",
+            "readACLFile": "NT AUTHORITY\\authenticated users"
+          },
+          {
+            "cloudStorageCollaborator": "NT AUTHORITY\\authenticated users",
+            "aclType": "FILE",
+            "sharepointPermission": "READ",
+            "cloudstorageRole": "READ",
+            "grantDeny": "GRANT",
+            "sharePointACL": "NT AUTHORITY\\authenticated users",
+            "readACLShare": "NT AUTHORITY\\authenticated users",
+            "readACLFile": "NT AUTHORITY\\authenticated users"
+          }
+        ],
+        "messageTypeId": 15,
+        "discoverScanStartDate": "2022-02-04T15:39:28",
+        "discoverUrl": "DLP-WINDOWS10-8 - c:\\passwordpolicy.ini"
+      }
+    },
+    "sdlp_incident_url": "https://my-IP/ProtectManager/IncidentDetail.do?value(variable_1)=incident.id&value(operator_1)=incident.id_in&value(operand_1)=468"
+  },
+  "raw": null,
+  "inputs": {
+    "sdlp_incident_id": 468
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-symantec-dlp",
+    "package_version": "2.0.0",
+    "host": "my-laptop",
+    "execution_time_ms": 7312,
+    "timestamp": "2022-03-03 10:53:00"
+  }
 } 
 ```
 
@@ -288,15 +560,28 @@ Send an case note from SOAR to the corresponding Symantec DLP incident.
 
 > **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
 
-<!-- ::CHANGE_ME:: -->
 ```python
 results = {
-    # TODO: Generate an example of the Function Output within this code block.
-    # To get the output of a Function:
-    #   1. Run resilient-circuits in DEBUG mode: $ resilient-circuits run --loglevel=DEBUG
-    #   2. Invoke the Function in SOAR
-    #   3. Gather the results using: $ resilient-sdk codegen -p fn_symantec_dlp --gather-results
-    #   4. Run docgen again: $ resilient-sdk docgen -p fn_symantec_dlp
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "success": true,
+    "reason:": null
+  },
+  "raw": null,
+  "inputs": {
+    "sdlp_note_text": "<b>Symantec DLP: Update Incident Status</b><br /> DLP incident 468 status set to: Resolved.",
+    "sdlp_incident_id": 468
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-symantec-dlp",
+    "package_version": "2.0.0",
+    "host": "my-laptop",
+    "execution_time_ms": 30032,
+    "timestamp": "2022-03-03 11:29:55"
+  }
 } 
 ```
 
@@ -335,7 +620,7 @@ if results.success:
 ## Function - Symantec DLP: Update Incident Status in DLP
 Update the incident status of the Symantec DLP incident in DLP.
 
- ![screenshot: fn-symantec-dlp-update-incident-status-in-dlp ](./doc/screenshots/fn-symantec-dlp-update-incident-status-in-dlp.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-symantec-dlp-update-incident-status-in-dlp ](./doc/screenshots/fn-symantec-dlp-update-incident-status-in-dlp.png) 
 
 <details><summary>Inputs:</summary>
 <p>
@@ -353,15 +638,29 @@ Update the incident status of the Symantec DLP incident in DLP.
 
 > **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
 
-<!-- ::CHANGE_ME:: -->
 ```python
 results = {
-    # TODO: Generate an example of the Function Output within this code block.
-    # To get the output of a Function:
-    #   1. Run resilient-circuits in DEBUG mode: $ resilient-circuits run --loglevel=DEBUG
-    #   2. Invoke the Function in SOAR
-    #   3. Gather the results using: $ resilient-sdk codegen -p fn_symantec_dlp --gather-results
-    #   4. Run docgen again: $ resilient-sdk docgen -p fn_symantec_dlp
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "success": true,
+    "sdlp_incident_id": 468,
+    "sdlp_incident_status": "Resolved"
+  },
+  "raw": null,
+  "inputs": {
+    "incident_id": 3449,
+    "sdlp_incident_status": "Resolved"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-symantec-dlp",
+    "package_version": "2.0.0",
+    "host": "MacBook-Pro.local",
+    "execution_time_ms": 16146,
+    "timestamp": "2022-03-03 10:53:44"
+  }
 } 
 ```
 
@@ -402,7 +701,7 @@ incident.addNote(noteText)
 ## Function - Symantec DLP: Upload Binaries
 Upload the Symantec DLP Component binary files and add as artifact files.
 
- ![screenshot: fn-symantec-dlp-upload-binaries ](./doc/screenshots/fn-symantec-dlp-upload-binaries.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-symantec-dlp-upload-binaries ](./doc/screenshots/fn-symantec-dlp-upload-binaries.png) 
 
 <details><summary>Inputs:</summary>
 <p>
@@ -420,7 +719,6 @@ Upload the Symantec DLP Component binary files and add as artifact files.
 
 > **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
 
-<!-- ::CHANGE_ME:: -->
 ```python
 results = {
     # TODO: Generate an example of the Function Output within this code block.
