@@ -169,7 +169,7 @@ class PollerComponent(ResilientComponent):
             # iterate over all the entities. Some apps have page the results
             while True:
                 self.process_entity_list(entity_list.get('result', []))
-                if not entity_list['nextPage']:
+                if not entity_list.get('nextPage'):
                     break
 
                 entity_list = self.app_common.get_next_page(entity_list['nextPage'])
