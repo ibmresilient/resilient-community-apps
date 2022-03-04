@@ -171,6 +171,7 @@ class AppCommon():
 
     def get_alert(self, alert_id):
         url = ALERT_URI.format(alert_id)
+        url = url[:-1] if url[-1] == '/' else url
         response, err_msg = self.api_call("GET", url, None)
 
         return (response.json(), err_msg) if not err_msg else (None, err_msg)
