@@ -1,4 +1,4 @@
-# (c) Copyright IBM Corp. 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 
 from ldap3 import Server, Connection, ALL, ALL_ATTRIBUTES, MOCK_SYNC
 from mock import Mock
@@ -13,7 +13,7 @@ class TestingHelper():
 
     if isSearch:
       self.MOCK_DATA_PATH = os.getcwd() + "/tests/mock_data/search_specific/"
-    
+
     # Create a fake LDAP server from the info and schema json files
     self.FAKE_SERVER = Server.from_definition('my_fake_server', self.MOCK_DATA_PATH + 'mock_server_info.json', self.MOCK_DATA_PATH + 'mock_server_schema.json')
 
@@ -30,7 +30,7 @@ class TestingHelper():
     """
     # Create a MockSyncStrategy connection to the fake server
     mocked_connection = Connection(self.FAKE_SERVER, user='cn=my_user,ou=test,o=lab', password='my_password', client_strategy=MOCK_SYNC)
-    
+
     # Populate the DIT of the fake server with mock entries
     mocked_connection.strategy.entries_from_json(self.MOCK_DATA_PATH + 'mock_server_entries.json')
 

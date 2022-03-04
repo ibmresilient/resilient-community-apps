@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
@@ -26,7 +26,7 @@ class FunctionComponent(ResilientComponent):
     def _ldap_utilities_update_function(self, event, *args, **kwargs):
         """Function: A function that updates the attribute of a DN with a new value"""
         log = logging.getLogger(__name__)
-        
+
         try:
             yield StatusMessage("Starting ldap_utilities_update")
 
@@ -64,7 +64,7 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage(msg)
 
             res = False
-            
+
             try:
               yield StatusMessage("Attempting to update {0}".format(input_ldap_attribute_name))
               # perform the Modify operation
@@ -72,7 +72,7 @@ class FunctionComponent(ResilientComponent):
 
             except Exception:
               raise ValueError("Failed to update. Ensure 'ldap_dn' is valid and the update meets your LDAP CONSTRAINTS")
-          
+
             finally:
               # Unbind connection
               c.unbind()

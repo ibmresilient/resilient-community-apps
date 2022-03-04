@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 """Tests using pytest_resilient_circuits"""
 
 from __future__ import print_function
@@ -53,7 +53,7 @@ class TestLdapUtilitiesSetPassword:
         (inputs["ldap_dn"], inputs["ldap_new_password"], outputs)])
     def test_success(self, circuits_app, ldap_dn, ldap_new_password, expected_results):
         """ Test calling with sample values for the parameters """
-        function_params = { 
+        function_params = {
             "ldap_dn": ldap_dn,
             "ldap_new_password": ldap_new_password
         }

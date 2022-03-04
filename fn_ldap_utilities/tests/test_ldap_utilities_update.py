@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 """Tests using pytest_resilient_circuits"""
 
 from __future__ import print_function
@@ -38,7 +38,7 @@ class TestLdapUtilitiesUpdate:
         """ Test that the package provides customization_data that defines the function """
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
-    
+
     inputs = {
       "ldap_dn": "CN=Test User8,CN=Users,DC=dev,DC=co3sys,DC=com",
       "ldap_attribute_name": "givenName",
@@ -54,11 +54,11 @@ class TestLdapUtilitiesUpdate:
 
     @patch('fn_ldap_utilities.util.helper.Connection', helper.mocked_connection())
     @patch('fn_ldap_utilities.util.helper.Server', helper.mocked_server())
-    @pytest.mark.parametrize("ldap_dn, ldap_attribute_name, ldap_attribute_values, expected_results", 
+    @pytest.mark.parametrize("ldap_dn, ldap_attribute_name, ldap_attribute_values, expected_results",
     [(inputs["ldap_dn"], inputs["ldap_attribute_name"], inputs["ldap_attribute_values"], outputs)])
     def test_success(self, circuits_app, ldap_dn, ldap_attribute_name, ldap_attribute_values, expected_results):
         """ Test calling with sample values for the parameters """
-        function_params = { 
+        function_params = {
             "ldap_dn": ldap_dn,
             "ldap_attribute_name": ldap_attribute_name,
             "ldap_attribute_values": ldap_attribute_values

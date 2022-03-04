@@ -1,4 +1,6 @@
-# (c) Copyright IBM Corp. 2018. All Rights Reserved.
+# -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# pragma pylint: disable=unused-argument, no-self-use, line-too-long
 import logging
 from ldap3 import Server, Connection, ALL, NTLM, MODIFY_REPLACE
 
@@ -45,7 +47,7 @@ class LDAPUtilitiesHelper:
     def get_ldap_connection(self):
         try:
             server = Server(self.LDAP_SERVER, port=self.LDAP_PORT, get_info=ALL, use_ssl=self.LDAP_USE_SSL, connect_timeout=self.LDAP_CONNECT_TIMEOUT)
-        
+
             if self.LDAP_AUTH_TYPE == "NTLM":
                 connection = Connection(
                     server=server,
@@ -68,7 +70,7 @@ class LDAPUtilitiesHelper:
 
         except Exception as err:
             raise ValueError("Cannot connect to LDAP Server. Ensure credentials are correct\n Error: {0}".format(err))
-  
+
     def __init__(self, app_configs):
         SUPPORTED_LDAP_AUTH_TYPE_TYPES = ["ANONYMOUS", "SIMPLE", "NTLM"]
 

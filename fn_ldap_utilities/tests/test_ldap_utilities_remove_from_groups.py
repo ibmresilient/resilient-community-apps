@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 """Tests using pytest_resilient_circuits"""
 
 from __future__ import print_function
@@ -57,7 +57,7 @@ class TestLdapUtilitiesRemoveFromGroups:
         (inputs["ldap_multiple_user_dn"], inputs["ldap_multiple_group_dn"], outputs)])
     def test_success(self, circuits_app, ldap_multiple_user_dn, ldap_multiple_group_dn, expected_results):
         """ Test calling with sample values for the parameters """
-        function_params = { 
+        function_params = {
             "ldap_multiple_user_dn": ldap_multiple_user_dn,
             "ldap_multiple_group_dn": ldap_multiple_group_dn
         }

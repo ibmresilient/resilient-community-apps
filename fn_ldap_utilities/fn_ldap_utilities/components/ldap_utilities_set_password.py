@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
@@ -34,7 +34,7 @@ class FunctionComponent(ResilientComponent):
             # Instansiate helper (which gets appconfigs from file)
             helper = LDAPUtilitiesHelper(self.options)
             yield StatusMessage("Appconfig Settings OK")
-            
+
             # Get function inputs
             input_ldap_dn = helper.get_function_input(kwargs, "ldap_dn") # text (required)
             input_ldap_new_password = helper.get_function_input(kwargs, "ldap_new_password") # text (required)
@@ -48,7 +48,7 @@ class FunctionComponent(ResilientComponent):
               c.bind()
             except Exception as err:
               raise ValueError("Cannot connect to LDAP Server. Ensure credentials are correct\n Error: {0}".format(err))
-            
+
             # Inform user
             msg = ""
             if helper.LDAP_IS_ACTIVE_DIRECTORY:
@@ -58,7 +58,7 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage(msg)
 
             res = False
-            
+
             try:
               yield StatusMessage("Attempting to change password")
               if helper.LDAP_IS_ACTIVE_DIRECTORY:

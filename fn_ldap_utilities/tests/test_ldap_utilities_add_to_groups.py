@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 """Tests using pytest_resilient_circuits"""
 
 from __future__ import print_function
@@ -50,14 +50,14 @@ class TestLdapUtilitiesAddToGroups:
       'success': True,
       'users_dn': ['CN=Test User8,CN=Users,DC=dev,DC=co3sys,DC=com','CN=Test User9,CN=Users,DC=dev,DC=co3sys,DC=com']
     }
-    
+
     @patch('fn_ldap_utilities.util.helper.Connection', helper.mocked_connection())
     @patch('fn_ldap_utilities.util.helper.Server', helper.mocked_server())
     @pytest.mark.parametrize("ldap_multiple_user_dn, ldap_multiple_group_dn, expected_results", [
         (inputs["ldap_multiple_user_dn"], inputs["ldap_multiple_group_dn"], outputs)])
     def test_success(self, circuits_app, ldap_multiple_user_dn, ldap_multiple_group_dn, expected_results):
         """ Test adding 2 users to a group """
-        function_params = { 
+        function_params = {
             "ldap_multiple_user_dn": ldap_multiple_user_dn,
             "ldap_multiple_group_dn": ldap_multiple_group_dn
         }

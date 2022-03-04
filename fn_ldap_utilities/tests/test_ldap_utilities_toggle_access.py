@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 """Tests using pytest_resilient_circuits"""
 
 from __future__ import print_function
@@ -50,7 +50,7 @@ class TestLdapUtilitiesToggleAccess:
       "user_dn": "CN=Test User8,CN=Users,DC=dev,DC=co3sys,DC=com",
       "user_status": "Enabled"
     }
-    
+
     inputs2 = {
       "ldap_dn": "CN=Test User8,CN=Users,DC=dev,DC=co3sys,DC=com",
       "ldap_toggle_access": {"name": "Disable"}
@@ -61,7 +61,7 @@ class TestLdapUtilitiesToggleAccess:
       "user_dn": "CN=Test User8,CN=Users,DC=dev,DC=co3sys,DC=com",
       "user_status": "Disabled"
     }
-    
+
     @patch('fn_ldap_utilities.util.helper.Connection', helper.mocked_connection())
     @patch('fn_ldap_utilities.util.helper.Server', helper.mocked_server())
     @pytest.mark.parametrize("ldap_dn, ldap_toggle_access, expected_results", [
@@ -69,7 +69,7 @@ class TestLdapUtilitiesToggleAccess:
         (inputs2["ldap_dn"], inputs2["ldap_toggle_access"], outputs2)])
     def test_enable(self, circuits_app, ldap_dn, ldap_toggle_access, expected_results):
         """ Test enabling/disabling a user """
-        function_params = { 
+        function_params = {
             "ldap_dn": ldap_dn,
             "ldap_toggle_access": ldap_toggle_access
         }

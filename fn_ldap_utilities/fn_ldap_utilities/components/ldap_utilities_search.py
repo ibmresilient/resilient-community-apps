@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use, line-too-long
 
 """ Resilient functions component to execute queries against an LDAP server """

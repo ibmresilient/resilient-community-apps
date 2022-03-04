@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 """Tests using pytest_resilient_circuits"""
 
 from __future__ import print_function
@@ -117,7 +117,7 @@ class TestLdapUtilitiesSearch:
           {'success': True, 'entries': [{'cn': ['Isaac Newton'], 'dn': 'uid=newton,dc=example,dc=com', 'uid': ['newton']}, {'cn': ['Albert Einstein'], 'dn': 'uid=einstein,dc=example,dc=com', 'uid': ['einstein']}]}
         )
     ])
-    
+
     def test_utilities_ldap_search(self, circuits_app, success_search_base, success_search_filter, success_search_attributes, success_param, success_expected_result):
         """ Test LDAP searches
 
