@@ -12,6 +12,8 @@ from cachetools import cached, LRUCache
 
 LOG = logging.getLogger(__name__)
 
+PACKAGE_NAME = "fn_reaqta"
+
 HEADER = { 'Content-Type': 'application/json' }
 
 ENDPOINT_URI = "endpoint/{}/"

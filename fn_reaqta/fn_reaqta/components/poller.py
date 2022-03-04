@@ -11,10 +11,10 @@ from resilient_circuits import ResilientComponent
 from resilient_lib import validate_fields, RequestsCommon, make_payload_from_template
 from resilient import get_client
 from fn_reaqta.lib.poller_common import SOARCommon, poller, get_template_dir
-from fn_reaqta.lib.app_common import AppCommon
+from fn_reaqta.lib.app_common import AppCommon, PACKAGE_NAME
+from fn_reaqta.lib.configure_tab import init_reaqta_tab
 
 
-PACKAGE_NAME = "fn_reaqta"
 ENTITY_ID = "id"  # name of field in the endpoint entity (alert, case, etc) with the ID value
 SOAR_ENTITY_ID_FIELD = "reaqta_id" # name of custom IBM SOAR case field to retain the endpoint entity_id
 ENTITY_COMMENT_HEADER = "Created by ReaQta" # header used to identify comments create by the endpoint entity
@@ -40,6 +40,9 @@ def init_app(rc, options):
     """
     # initialize the class for making API calls to your endpoint
     endpoint_class = AppCommon(rc, options)
+
+    # create the tab for ReaQta custom fields and datatables
+    init_reaqta_tab()
 
     return endpoint_class
 

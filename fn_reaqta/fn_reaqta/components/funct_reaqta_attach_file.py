@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
+# pragma pylint: disable=unused-argument, no-self-use
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 
 """AppFunction implementation"""
 import ntpath
-from fn_reaqta.lib.app_common import AppCommon
+from fn_reaqta.lib.app_common import AppCommon, PACKAGE_NAME
 from resilient_lib import write_file_attachment
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from resilient_lib import IntegrationError, validate_fields
+from resilient_lib import validate_fields
 
-PACKAGE_NAME = "fn_reaqta"
 FN_NAME = "reaqta_attach_file"
 
 

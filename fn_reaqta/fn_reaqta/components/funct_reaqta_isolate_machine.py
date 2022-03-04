@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
+# pragma pylint: disable=unused-argument, no-self-use
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 
 """AppFunction implementation"""
-from fn_reaqta.lib.app_common import AppCommon
+from fn_reaqta.lib.app_common import AppCommon, PACKAGE_NAME
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from resilient_lib import IntegrationError, validate_fields
+from resilient_lib import validate_fields
 
-PACKAGE_NAME = "fn_reaqta"
 FN_NAME = "reaqta_isolate_machine"
 
 
@@ -34,13 +35,9 @@ class FunctionComponent(AppFunctionComponent):
 
         validate_fields(["reaqta_endpoint_id"], fn_inputs)
 
-        # Example getting access to self.get_fn_msg()
-        # fn_msg = self.get_fn_msg()
-        # self.LOG.info("fn_msg: %s", fn_msg)
-
         app_common = AppCommon(self.rc, self.app_configs._asdict())
-        results = app_common.isolate_machine(fn_inputs.reaqta_endpoint_id)
+        results, err_msg = app_common.isolate_machine(fn_inputs.reaqta_endpoint_id)
 
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
 
-        yield FunctionResult(results)
+        yield FunctionResult(results, success=True if not err_msg else False, reason=err_msg)
