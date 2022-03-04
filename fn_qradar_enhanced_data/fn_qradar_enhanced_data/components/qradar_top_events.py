@@ -24,14 +24,12 @@ class FunctionComponent(ResilientComponent):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         self.opts = opts
-        # self.servers_list = get_servers_list(opts)
         self.global_settings = opts.get(GLOBAL_SETTINGS, {})
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
         self.opts = opts
-        # self.servers_list = get_servers_list(opts)
         self.global_settings = opts.get(GLOBAL_SETTINGS, {})
 
     @function("qradar_top_events")
