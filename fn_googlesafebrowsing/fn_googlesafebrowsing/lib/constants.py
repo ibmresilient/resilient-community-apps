@@ -1,0 +1,2 @@
+SB_CLIENT_ID = "SOAR"
+SB_CLIENT_VER = "0.0.3"
