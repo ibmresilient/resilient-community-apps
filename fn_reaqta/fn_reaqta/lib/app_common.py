@@ -93,8 +93,8 @@ class AppCommon():
         response = self.rc.execute("GET", next_url, headers=self.header, verify=self.verify)
         return response.json()
 
-    def isolate_machine(self, alert_id):
-        url = urljoin(ALERT_URI.format(alert_id), "isolate")
+    def isolate_machine(self, endpoint_id):
+        url = urljoin(ENDPOINT_URI.format(endpoint_id), "isolate")
 
         response, err_msg = self.api_call("POST", url, None)
         return response.json(), err_msg

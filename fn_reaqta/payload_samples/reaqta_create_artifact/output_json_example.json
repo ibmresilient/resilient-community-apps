@@ -1,3 +1,226 @@
 {
-    
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": [
+    {
+      "id": 2141,
+      "type": 12,
+      "value": "chrome.exe",
+      "description": "Extracted from ReaQta",
+      "attachment": null,
+      "parent_id": null,
+      "creator": {
+        "id": 3,
+        "fname": "Resilient",
+        "lname": "Sysadmin",
+        "display_name": "Resilient Sysadmin",
+        "status": "A",
+        "email": "a@example.com",
+        "locked": false,
+        "password_changed": false,
+        "is_external": false,
+        "ui_theme": "verydarkmode"
+      },
+      "inc_id": 2857,
+      "inc_name": "ReaQta Alert - Ransomware Behavior Detected, Endpoint: REAQTAWIN10-CSP",
+      "inc_owner": 2,
+      "hits": [],
+      "created": 1646339889974,
+      "last_modified_time": 1646398787005,
+      "last_modified_by": {
+        "id": 3,
+        "type": "user",
+        "name": "a@example.com",
+        "display_name": "Resilient Sysadmin"
+      },
+      "pending_sources": [],
+      "perms": null,
+      "properties": null,
+      "actions": [],
+      "hash": "cb702049ff10bce20e09e04024c6654a78c85d54ea71de07f328f76426a42ed5",
+      "relating": true,
+      "creator_principal": {
+        "id": 3,
+        "type": "user",
+        "name": "a@example.com",
+        "display_name": "Resilient Sysadmin"
+      },
+      "related_incident_count": null,
+      "pending_scan_result": false,
+      "ip": {
+        "source": null,
+        "destination": null
+      },
+      "global_artifact": []
+    },
+    {
+      "id": 2142,
+      "type": 13,
+      "value": "87d2ffd6a891119062b89decb05c89d8",
+      "description": "Extracted from ReaQta",
+      "attachment": null,
+      "parent_id": 2141,
+      "creator": {
+        "id": 3,
+        "fname": "Resilient",
+        "lname": "Sysadmin",
+        "display_name": "Resilient Sysadmin",
+        "status": "A",
+        "email": "a@example.com",
+        "locked": false,
+        "password_changed": false,
+        "is_external": false,
+        "ui_theme": "verydarkmode"
+      },
+      "inc_id": 2857,
+      "inc_name": "ReaQta Alert - Ransomware Behavior Detected, Endpoint: REAQTAWIN10-CSP",
+      "inc_owner": 2,
+      "hits": [],
+      "created": 1646339890099,
+      "last_modified_time": 1646398787006,
+      "last_modified_by": {
+        "id": 3,
+        "type": "user",
+        "name": "a@example.com",
+        "display_name": "Resilient Sysadmin"
+      },
+      "pending_sources": [],
+      "perms": null,
+      "properties": null,
+      "actions": [],
+      "hash": "881c60fa0d9f9fd6c9a568e65f1ab1061e7de130f4c2268b600b7c092e72470d",
+      "relating": true,
+      "creator_principal": {
+        "id": 3,
+        "type": "user",
+        "name": "a@example.com",
+        "display_name": "Resilient Sysadmin"
+      },
+      "related_incident_count": null,
+      "pending_scan_result": false,
+      "ip": {
+        "source": null,
+        "destination": null
+      },
+      "global_artifact": []
+    },
+    {
+      "id": 2143,
+      "type": 14,
+      "value": "4d224080d73d0e18a84e5eac43e52aba16161f23",
+      "description": "Extracted from ReaQta",
+      "attachment": null,
+      "parent_id": 2141,
+      "creator": {
+        "id": 3,
+        "fname": "Resilient",
+        "lname": "Sysadmin",
+        "display_name": "Resilient Sysadmin",
+        "status": "A",
+        "email": "a@example.com",
+        "locked": false,
+        "password_changed": false,
+        "is_external": false,
+        "ui_theme": "verydarkmode"
+      },
+      "inc_id": 2857,
+      "inc_name": "ReaQta Alert - Ransomware Behavior Detected, Endpoint: REAQTAWIN10-CSP",
+      "inc_owner": 2,
+      "hits": [],
+      "created": 1646339890117,
+      "last_modified_time": 1646398787005,
+      "last_modified_by": {
+        "id": 3,
+        "type": "user",
+        "name": "a@example.com",
+        "display_name": "Resilient Sysadmin"
+      },
+      "pending_sources": [],
+      "perms": null,
+      "properties": null,
+      "actions": [],
+      "hash": "b8ea66ed6adba64778a93233cd636a6978bb34f9d91924c6a1480d5dfcdf71ef",
+      "relating": true,
+      "creator_principal": {
+        "id": 3,
+        "type": "user",
+        "name": "a@example.com",
+        "display_name": "Resilient Sysadmin"
+      },
+      "related_incident_count": null,
+      "pending_scan_result": false,
+      "ip": {
+        "source": null,
+        "destination": null
+      },
+      "global_artifact": []
+    },
+    {
+      "id": 2144,
+      "type": 38,
+      "value": "93c68561a63428b1fe70b3d7b0e02af7c9cdcfefc1f6867ecb9ddcc05794bac9",
+      "description": "Extracted from ReaQta",
+      "attachment": null,
+      "parent_id": 2141,
+      "creator": {
+        "id": 3,
+        "fname": "Resilient",
+        "lname": "Sysadmin",
+        "display_name": "Resilient Sysadmin",
+        "status": "A",
+        "email": "a@example.com",
+        "locked": false,
+        "password_changed": false,
+        "is_external": false,
+        "ui_theme": "verydarkmode"
+      },
+      "inc_id": 2857,
+      "inc_name": "ReaQta Alert - Ransomware Behavior Detected, Endpoint: REAQTAWIN10-CSP",
+      "inc_owner": 2,
+      "hits": [],
+      "created": 1646339890136,
+      "last_modified_time": 1646398787005,
+      "last_modified_by": {
+        "id": 3,
+        "type": "user",
+        "name": "a@example.com",
+        "display_name": "Resilient Sysadmin"
+      },
+      "pending_sources": [],
+      "perms": null,
+      "properties": null,
+      "actions": [],
+      "hash": "95b8f0eafd6b31fba895dc7e517e1fac8b10a8a27a08c1d434d2e3ae4b6638be",
+      "relating": true,
+      "creator_principal": {
+        "id": 3,
+        "type": "user",
+        "name": "a@example.com",
+        "display_name": "Resilient Sysadmin"
+      },
+      "related_incident_count": null,
+      "pending_scan_result": false,
+      "ip": {
+        "source": null,
+        "destination": null
+      },
+      "global_artifact": []
+    }
+  ],
+  "raw": null,
+  "inputs": {
+    "reaqta_artifact_type": "Malware Sample",
+    "reaqta_program_path": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+    "reaqta_endpoint_id": "833847379160465408",
+    "reaqta_incident_id": 2857
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-reaqta",
+    "package_version": "1.0.0",
+    "host": "Marks-MacBook-Pro.local",
+    "execution_time_ms": 20461,
+    "timestamp": "2022-03-04 07:59:46"
+  }
 }

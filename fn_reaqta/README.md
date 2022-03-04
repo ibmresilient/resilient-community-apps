@@ -34,6 +34,7 @@
   - [Custom Layouts](#custom-layouts)
 - [Function - ReaQta: Attach File](#function---reaqta-attach-file)
 - [Function - ReaQta: Close Alert](#function---reaqta-close-alert)
+- [Function - ReaQta: Create Artifact](#function---reaqta-create-artifact)
 - [Function - ReaQta: Create Note](#function---reaqta-create-note)
 - [Function - ReaQta: Create Policy](#function---reaqta-create-policy)
 - [Function - ReaQta: Get Alert Information](#function---reaqta-get-alert-information)
@@ -179,6 +180,7 @@ The following table provides the settings you need to configure the app. These s
 | **soar_close_case_template** | No | `/path/to/template.jina` | *Override template used to close a SOAR case from the poller. See [Templates for SOAR Cases](#templates-for-soar-cases)* |
 | **https_proxy** | No | `https://xxx/` | *Proxy URL for HTTPS connections* |
 | **http_proxy** | No | `http://xxx/` | *Proxy URL for HTTP connections* |
+| **timeout** | No | `60` | *Seconds to wait for APIs calls back to ReaQta. Default is 30* |
 
 ### Custom Layouts
 <!--
@@ -488,6 +490,320 @@ None
 </details>
 
 ---
+
+## Function - ReaQta: Create Artifact
+Create an artifact from a process file
+
+ ![screenshot: fn-reaqta-create-note ](./doc/screenshots/fn-reaqta-create-artifact.png)
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `reaqta_incident_id` | `number` | Yes | `-` | - |
+| `reaqta_endpoint_id` | `text` | Yes | `-` | - |
+| `reaqta_program_path` | `text` | Yes | `c:\\path\\to\\malware.exe` | - |
+| `reaqta_artifact_type` | `text` | Yes | `Malware Sample` or `Other File` |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
+```python
+results = {
+  'version': 2.0,
+  'success': True,
+  'reason': None,
+  'content': [
+    {
+      'id': 2141,
+      'type': 12,
+      'value': 'chrome.exe',
+      'description': 'Extracted from ReaQta',
+      'attachment': None,
+      'parent_id': None,
+      'creator': {
+        'id': 3,
+        'fname': 'Resilient',
+        'lname': 'Sysadmin',
+        'display_name': 'Resilient Sysadmin',
+        'status': 'A',
+        'email': 'a@example.com',
+        'locked': False,
+        'password_changed': False,
+        'is_external': False,
+        'ui_theme': 'verydarkmode'
+      },
+      'inc_id': 2857,
+      'inc_name': 'ReaQta Alert - Ransomware Behavior Detected, Endpoint: REAQTAWIN10-CSP',
+      'inc_owner': 2,
+      'hits': [
+
+      ],
+      'created': 1646339889974,
+      'last_modified_time': 1646398787005,
+      'last_modified_by': {
+        'id': 3,
+        'type': 'user',
+        'name': 'a@example.com',
+        'display_name': 'Resilient Sysadmin'
+      },
+      'pending_sources': [
+
+      ],
+      'perms': None,
+      'properties': None,
+      'actions': [
+
+      ],
+      'hash': 'cb702049ff10bce20e09e04024c6654a78c85d54ea71de07f328f76426a42ed5',
+      'relating': True,
+      'creator_principal': {
+        'id': 3,
+        'type': 'user',
+        'name': 'a@example.com',
+        'display_name': 'Resilient Sysadmin'
+      },
+      'related_incident_count': None,
+      'pending_scan_result': False,
+      'ip': {
+        'source': None,
+        'destination': None
+      },
+      'global_artifact': [
+
+      ]
+    },
+    {
+      'id': 2142,
+      'type': 13,
+      'value': '87d2ffd6a891119062b89decb05c89d8',
+      'description': 'Extracted from ReaQta',
+      'attachment': None,
+      'parent_id': 2141,
+      'creator': {
+        'id': 3,
+        'fname': 'Resilient',
+        'lname': 'Sysadmin',
+        'display_name': 'Resilient Sysadmin',
+        'status': 'A',
+        'email': 'a@example.com',
+        'locked': False,
+        'password_changed': False,
+        'is_external': False,
+        'ui_theme': 'verydarkmode'
+      },
+      'inc_id': 2857,
+      'inc_name': 'ReaQta Alert - Ransomware Behavior Detected, Endpoint: REAQTAWIN10-CSP',
+      'inc_owner': 2,
+      'hits': [
+
+      ],
+      'created': 1646339890099,
+      'last_modified_time': 1646398787006,
+      'last_modified_by': {
+        'id': 3,
+        'type': 'user',
+        'name': 'a@example.com',
+        'display_name': 'Resilient Sysadmin'
+      },
+      'pending_sources': [
+
+      ],
+      'perms': None,
+      'properties': None,
+      'actions': [
+
+      ],
+      'hash': '881c60fa0d9f9fd6c9a568e65f1ab1061e7de130f4c2268b600b7c092e72470d',
+      'relating': True,
+      'creator_principal': {
+        'id': 3,
+        'type': 'user',
+        'name': 'a@example.com',
+        'display_name': 'Resilient Sysadmin'
+      },
+      'related_incident_count': None,
+      'pending_scan_result': False,
+      'ip': {
+        'source': None,
+        'destination': None
+      },
+      'global_artifact': [
+
+      ]
+    },
+    {
+      'id': 2143,
+      'type': 14,
+      'value': '4d224080d73d0e18a84e5eac43e52aba16161f23',
+      'description': 'Extracted from ReaQta',
+      'attachment': None,
+      'parent_id': 2141,
+      'creator': {
+        'id': 3,
+        'fname': 'Resilient',
+        'lname': 'Sysadmin',
+        'display_name': 'Resilient Sysadmin',
+        'status': 'A',
+        'email': 'a@example.com',
+        'locked': False,
+        'password_changed': False,
+        'is_external': False,
+        'ui_theme': 'verydarkmode'
+      },
+      'inc_id': 2857,
+      'inc_name': 'ReaQta Alert - Ransomware Behavior Detected, Endpoint: REAQTAWIN10-CSP',
+      'inc_owner': 2,
+      'hits': [
+
+      ],
+      'created': 1646339890117,
+      'last_modified_time': 1646398787005,
+      'last_modified_by': {
+        'id': 3,
+        'type': 'user',
+        'name': 'a@example.com',
+        'display_name': 'Resilient Sysadmin'
+      },
+      'pending_sources': [
+
+      ],
+      'perms': None,
+      'properties': None,
+      'actions': [
+
+      ],
+      'hash': 'b8ea66ed6adba64778a93233cd636a6978bb34f9d91924c6a1480d5dfcdf71ef',
+      'relating': True,
+      'creator_principal': {
+        'id': 3,
+        'type': 'user',
+        'name': 'a@example.com',
+        'display_name': 'Resilient Sysadmin'
+      },
+      'related_incident_count': None,
+      'pending_scan_result': False,
+      'ip': {
+        'source': None,
+        'destination': None
+      },
+      'global_artifact': [
+
+      ]
+    },
+    {
+      'id': 2144,
+      'type': 38,
+      'value': '93c68561a63428b1fe70b3d7b0e02af7c9cdcfefc1f6867ecb9ddcc05794bac9',
+      'description': 'Extracted from ReaQta',
+      'attachment': None,
+      'parent_id': 2141,
+      'creator': {
+        'id': 3,
+        'fname': 'Resilient',
+        'lname': 'Sysadmin',
+        'display_name': 'Resilient Sysadmin',
+        'status': 'A',
+        'email': 'a@example.com',
+        'locked': False,
+        'password_changed': False,
+        'is_external': False,
+        'ui_theme': 'verydarkmode'
+      },
+      'inc_id': 2857,
+      'inc_name': 'ReaQta Alert - Ransomware Behavior Detected, Endpoint: REAQTAWIN10-CSP',
+      'inc_owner': 2,
+      'hits': [
+
+      ],
+      'created': 1646339890136,
+      'last_modified_time': 1646398787005,
+      'last_modified_by': {
+        'id': 3,
+        'type': 'user',
+        'name': 'a@example.com',
+        'display_name': 'Resilient Sysadmin'
+      },
+      'pending_sources': [
+
+      ],
+      'perms': None,
+      'properties': None,
+      'actions': [
+
+      ],
+      'hash': '95b8f0eafd6b31fba895dc7e517e1fac8b10a8a27a08c1d434d2e3ae4b6638be',
+      'relating': True,
+      'creator_principal': {
+        'id': 3,
+        'type': 'user',
+        'name': 'a@example.com',
+        'display_name': 'Resilient Sysadmin'
+      },
+      'related_incident_count': None,
+      'pending_scan_result': False,
+      'ip': {
+        'source': None,
+        'destination': None
+      },
+      'global_artifact': [
+
+      ]
+    }
+  ],
+  'raw': None,
+  'inputs': {
+    'reaqta_artifact_type': 'Malware Sample',
+    'reaqta_program_path': 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
+    'reaqta_endpoint_id': '833847379160465408',
+    'reaqta_incident_id': 2857
+  },
+  'metrics': {
+    'version': '1.0',
+    'package': 'fn-reaqta',
+    'package_version': '1.0.0',
+    'host': 'local',
+    'execution_time_ms': 20461,
+    'timestamp': '2022-03-04 07:59:46'
+  }
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.reaqta_endpoint_id = incident.properties.reaqta_endpoint_id
+inputs.reaqta_incident_id = incident.id
+inputs.reaqta_artifact_type = "Malware Sample"
+inputs.reaqta_program_path = row['program_path']
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+if not results.success:
+  incident.addNote("ReaQta Create Artifact failed: {}".format(results.reason))
+```
+
+</p>
+</details>
+
+---
+
 ## Function - ReaQta: Create Note
 Append a note to the ReaQta notes. Notes will display in ReaQta with the 'IBM SOAR <date time> header.
 
@@ -1388,16 +1704,20 @@ reaqta_trigger_events
 | ReaQta Machine Info | `reaqta_machine_info` | `textarea` | `properties` | - | - |
 ---
 
-
 ## Rules
 | Rule Name | Object | Workflow Triggered |
 | --------- | ------ | ------------------ |
-| ReaQta: Attach File from Process List | reaqta_process_list | `reaqta_attach_file_from_process_list` |
-| ReaQta: Attach File from Triggered Events | reaqta_trigger_events | `reaqta_attach_file_from_triggered_events` |
+| ReaQta: Create Artifact from Process Path |  reaqta_process_list | `reaqta_attach_file_from_process_list` |
+| ReaQta: Create Artifact from Trigger Event |  reaqta_trigger_events | `reaqta_attach_file_from_trigger_envent` |
+| ReaQta: Create Attachment from Process List | reaqta_process_list | `reaqta_attach_file_from_process_list` |
+| ReaQta: Create Attachment from Triggered Events | reaqta_trigger_events | `reaqta_create_artifact_from_triggered_events` |
+| ReaQta: Create Policy on Triggered Event | reaqta_trigger_events | `reaqta_create_policy_on_triggered_events` |
 | ReaQta: Close Alert | incident | `reaqta_close_alert` |
 | ReaQta: Create Note | note | `reaqta_create_note` |
+| ReaQta: Get Alert Information | incident | `reaqta_get_alert_information` |
 | ReaQta: Get Processes | incident | `reaqta_get_processes` |
 | ReaQta: Isolate Endpoint | incident | `reaqta_isolate_endpoint` |
+| ReaQta: Kill Process | reaqta_process_list | `reaqta_kill_process` |
 
 ---
 ## Templates for SOAR Cases

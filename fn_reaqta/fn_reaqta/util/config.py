@@ -29,6 +29,7 @@ cafile=/path/to/cafile.crt or false
 # For AppHost, use the manageAppHost proxy capability.
 #http_proxy=
 #https_proxy=
-
+# specify a timeout value for access to ReaQta. Default is 30 seconds
+timeout=30
 """
     return config_data
