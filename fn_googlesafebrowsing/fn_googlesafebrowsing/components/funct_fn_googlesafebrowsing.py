@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# pragma pylint: disable=unused-argument, no-self-use
 
 """AppFunction implementation"""
 
@@ -60,7 +62,7 @@ class FunctionComponent(AppFunctionComponent):
         LOG.debug(reqbody)
 
         response = self.rc.execute('post', '{}{}'.format(self.app_configs.googlesafebrowsing_url,
-                                    self.app_configs.googlesafebrowsing_api_key), 
+                                    self.app_configs.googlesafebrowsing_api_key),
                                     headers={'Content-Type': 'application/json'},
                                     data=json.dumps(reqbody))
 

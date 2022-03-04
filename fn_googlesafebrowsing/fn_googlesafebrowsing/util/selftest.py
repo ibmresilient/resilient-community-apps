@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# pragma pylint: disable=unused-argument, no-self-use
 
 """
 Function implementation test.
@@ -52,7 +54,7 @@ def selftest_function(opts):
     try:
         req = RequestsCommon(opts, app_configs)
         req.execute('post', '{}{}'.format(app_configs['googlesafebrowsing_url'],
-        app_configs['googlesafebrowsing_api_key']), headers={'Content-Type': 'applciation/json'}, 
+        app_configs['googlesafebrowsing_api_key']), headers={'Content-Type': 'applciation/json'},
         data=json.dumps(reqbody))
         return {"state": "success"}
 
