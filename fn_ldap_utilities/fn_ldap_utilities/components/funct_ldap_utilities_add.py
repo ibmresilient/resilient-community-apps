@@ -27,7 +27,7 @@ class FunctionComponent(AppFunctionComponent):
         Inputs:
             -   fn_inputs.ldap_attribute_name_values
             -   fn_inputs.ldap_dn
-            -   fn_inputs.
+            -   fn_inputs.ldap_multiple_group_dn
         """
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
