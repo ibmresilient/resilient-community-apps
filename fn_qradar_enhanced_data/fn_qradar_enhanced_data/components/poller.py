@@ -7,18 +7,18 @@ from datetime import datetime, timedelta
 from logging import getLogger
 from ast import literal_eval
 from threading import Thread
+from urllib.parse import quote
 from resilient_circuits import ResilientComponent
 from resilient_lib import IntegrationError
 from fn_qradar_enhanced_data.lib.poller_common import SOARCommon, poller
 from fn_qradar_enhanced_data.util.qradar_constants import PACKAGE_NAME, GLOBAL_SETTINGS
-from fn_qradar_enhanced_data.util.qradar_utils import QRadarServers
-import fn_qradar_enhanced_data.util.qradar_graphql_queries as qradar_graphql_queries
+from fn_qradar_enhanced_data.util.qradar_utils import QRadarServers, AuthInfo
 
 LOG = getLogger(__name__)
 
 class PollerComponent(ResilientComponent):
     """
-    poller for escalating SOAR incidents and synchronizing changes
+    Poller to synchronize Offense and Case data
     """
 
     def __init__(self, opts):
@@ -30,7 +30,7 @@ class PollerComponent(ResilientComponent):
 
         # collect settings necessary and initialize libraries used by the poller
         if not self._init_env():
-            LOG.info(u"Poller interval is not configured.  Automated escalation is disabled.")
+            LOG.info(u"Poller interval is not configured, so poller will not run.")
             return
 
         poller_thread = Thread(target=self.run)
@@ -87,50 +87,54 @@ class PollerComponent(ResilientComponent):
             if qradar_destination not in case_server_dict:
                 case_server_dict[qradar_destination] = {}
             case_server = case_server_dict[qradar_destination]
-            # Add the case_id and case_lastUpdatedTime fields to the qradar_id dictionary
+            # Add the case_id and case_lastPersistedTime fields to the qradar_id dictionary
             # that is inside of the QRadar servers dictionary
             if qradar_id not in case_server:
-                case_server[qradar_id] = {"case_id": case['id'], "case_lastUpdatedTime": case["properties"]["qr_offense_last_updated_time"], "case_ver": case['vers']}
+                case_server[qradar_id] = {"case_id": case['id'], "case_lastPersistedTime": case["properties"]["qr_last_persisted_time"], "case_ver": case['vers']}
         # :End: QRadar servers dictionary
 
         for server in case_server_dict:
             qradar_client, options = QRadarServers.get_qradar_client(self.opts, server)
-            # :Start: Create the filter string to filter for cases in SOAR
-            filter_var = ""
+
+            # Create filter string
+            filters = ""
             id_list = list(case_server_dict[server].keys())
             for id in id_list:
-                filter_var = "{} id={}".format(filter_var, str(id))
+                filters = "{}id={}".format(filters, str(id))
                 if id_list.index(id) != len(id_list)-1:
-                    filter_var = "{} OR".format(filter_var)
-            # :End: Filter string creation
+                    filters = "{} or ".format(filters)
+            # Convert string to url encoding
+            filters = quote(filters)
+        
+            # Convert requested fields to url encoding
+            fields = quote("id, last_persisted_time")
 
-            # Set variables that will be in the QRadar query
-            variables = {"limit": 0, "offset": 0, "orderBy": "LAST_UPDATED_TIME_ASC", "filter": filter_var}
-            # Run the QRadar Query and recieve the returned dictionary
-            offenses = qradar_client.graphql_query(variables, qradar_graphql_queries.GRAPHQL_OPENOFFENSESLASTUPDATE)
-            offenses_update_list = offenses["content"]
+            auth_info = AuthInfo.get_authInfo()
+            # Create url to get all offenses in SOAR from the given QRadar server
+            url = auth_info.api_url + "siem/offenses?fields={}&filter={}".format(fields, filters)
+            response = auth_info.make_call("GET", url)
+            offenses_update_list = response.json()
 
             payload = { "patches": {} }
-            changes = False
             updated_cases = []
 
             if offenses_update_list:
                 # Iterate through list of offenses recieved from QRadar query
                 for offense in offenses_update_list:
-                    offense_lastUpdatedTime = int(offense['lastUpdatedTime'])
-                    case_dict = case_server_dict[server][offense['id']]
+                    offense_lastPersistedTime = int(offense['last_persisted_time'])
+                    case_dict = case_server_dict[server][str(offense['id'])]
                     case_id = case_dict['case_id']
-                    case_lastUpdatedTime = case_dict['case_lastUpdatedTime']
-                    if offense_lastUpdatedTime != case_lastUpdatedTime:
+                    case_lastPersistedTime = case_dict['case_lastPersistedTime']
+                    if offense_lastPersistedTime!= case_lastPersistedTime:
                         # If time is different then update the case
                         updated_cases.append(case_id)
                         # Create payload to update cases
                         payload['patches'][case_id] = {
                                                 "version": case_dict['case_ver']+1,
                                                 "changes": [ {
-                                                    "old_value": { "date": case_lastUpdatedTime },
-                                                    "new_value": { "date": offense_lastUpdatedTime },
-                                                    "field": { "name": "qr_offense_last_updated_time" }
+                                                    "old_value": { "date": case_lastPersistedTime },
+                                                    "new_value": { "date": offense_lastPersistedTime },
+                                                    "field": { "name": "qr_last_persisted_time" }
                                                 } ]
                                             },
             # If there are changes then fix payload and send put request to SOAR
@@ -147,4 +151,4 @@ class PollerComponent(ResilientComponent):
                 if response['failures']:
                     raise IntegrationError(str(response))
 
-                LOG.info("Incident: {} updated field: qr_offense_last_updated_time".format(str(updated_cases)))
+                LOG.info("Incident: {} updated field: qr_last_persisted_time".format(str(updated_cases)))
