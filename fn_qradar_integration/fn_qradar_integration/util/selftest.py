@@ -24,7 +24,7 @@ def selftest_function(opts):
         servers = QRadarServers(opts, options)
         server_list = servers.get_server_name_list()
     else:
-        server_list = {PACKAGE_NAME}
+        server_list = [PACKAGE_NAME]
 
     try:
         for server_name in server_list:

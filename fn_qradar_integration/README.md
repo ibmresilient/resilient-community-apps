@@ -55,7 +55,7 @@
 
 | Version | Publication | Notes |
 | ------- | ----------- | ----- |
-| 2.2.0 | July. 2021 | Allow multiple QRadar instances |
+| 2.2.0 | Sept. 2021 | Allow multiple QRadar instances |
 | 2.1.1 | July. 2021 | Fixed selftest failing when using cafile |
 | 2.1.0 | Feb. 2021 | Additional functions for reference table mapping. |
 | 2.0.9 | Feb. 2021 | Bug fixes associated with require input field validation. |

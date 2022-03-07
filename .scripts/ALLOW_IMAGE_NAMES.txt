@@ -28,6 +28,7 @@ fn_exchange
 fn_exchange_online
 fn_geocoding
 fn_google_cloud_dlp
+fn_googlesafebrowsing
 fn_greynoise
 fn_grpc_interface
 fn_hibp

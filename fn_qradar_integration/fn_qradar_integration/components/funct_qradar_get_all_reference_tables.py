@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2021. All Rights Reserved.
+# (c) Copyright IBM Corp. 2022. All Rights Reserved.
 """Function implementation"""
 
 import logging
@@ -42,6 +42,7 @@ class FunctionComponent(ResilientComponent):
 
             LOG.info("qradar_label: %s", qradar_label)
 
+            # Test to see if given label exists then return options for the server with that label
             options = QRadarServers.qradar_label_test(qradar_label, self.servers_list)
             qradar_verify_cert = False if options.get("verify_cert", "false").lower() == "false" else options.get("verify_cert")
 
