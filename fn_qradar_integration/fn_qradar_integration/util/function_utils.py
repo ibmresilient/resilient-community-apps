@@ -96,12 +96,18 @@ def update_qradar_servers_select_list(servers_list, res_rest_client, field_name)
 
         # Create payload 
         if server_name_list:
+
+            # Put payload with no values to delete old values
+            del payload["values"]
+            res_rest_client.put(UPDATE_FIELD.format(field_name), payload)
+
+            # Add values to the payload
             payload["values"] = [
                 {"label": str(value), "enabled": True, "hidden": False}
                 for value in server_name_list
             ]
-
-            res_rest_client.put(UPDATE_FIELD.format(field_name), payload, timeout=1000)
+            # Put payload with values to SOAR
+            res_rest_client.put(UPDATE_FIELD.format(field_name), payload)
 
     except Exception as err_msg:
         LOG.warning("Action failed: {} error: {}".format(field_name, err_msg))
