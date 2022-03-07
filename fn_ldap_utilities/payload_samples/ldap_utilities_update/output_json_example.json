@@ -1,0 +1,8 @@
+{
+  "success": true,
+  "attribute_name": "homePhone",
+  "attribute_values": [
+    "081111111"
+  ],
+  "user_dn": "cn=user1,ou=people,dc=example,dc=com"
+}

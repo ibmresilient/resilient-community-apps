@@ -1,0 +1,56 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "success": {
+      "type": "boolean"
+    },
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "dn": {
+            "type": "string"
+          },
+          "cn": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "description": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "mail": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "objectClass": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "sn": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "userPassword": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}

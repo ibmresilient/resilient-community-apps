@@ -50,7 +50,8 @@ inputs.ldap_search_param =  artifact.value
 # Once the LDAP Utilities: Search completes, get the DN of the first entry
 # which will be the DN of the account you want to set a Toggle Access for
 
-inputs.ldap_dn = workflow.properties.search_output["entries"][0]["dn"]
+if workflow.properties.search_output.get("entries"):
+  inputs.ldap_dn = workflow.properties.search_output["entries"][0]["dn"]
 ```
 
 ### Post-Processing Script

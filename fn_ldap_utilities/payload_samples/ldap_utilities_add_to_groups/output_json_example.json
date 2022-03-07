@@ -1,0 +1,9 @@
+{
+  "success": true,
+  "users_dn": [
+    "dn=user1,dc=example,dc=com"
+  ],
+  "groups_dn": [
+    "cn=mygroup,dc=example,dc=com"
+  ]
+}

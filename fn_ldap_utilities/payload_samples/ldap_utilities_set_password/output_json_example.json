@@ -1,0 +1,4 @@
+{
+  "success": true,
+  "user_dn": "cn=user1,ou=people,dc=example,dc=com"
+}

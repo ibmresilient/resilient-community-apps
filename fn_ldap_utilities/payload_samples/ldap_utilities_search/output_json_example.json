@@ -1,0 +1,29 @@
+{
+  "success": true,
+  "entries": [
+    {
+      "dn": "cn=user1,ou=people,dc=example,dc=com",
+      "cn": [
+        "user1"
+      ],
+      "description": [
+        "something here"
+      ],
+      "mail": [
+        "user1@example.com"
+      ],
+      "objectClass": [
+        "person",
+        "organizationalPerson",
+        "inetOrgPerson",
+        "top"
+      ],
+      "sn": [
+        "surname"
+      ],
+      "userPassword": [
+        "{SSHA}BM91ud8Y+aUPuPQ2uYb6Y5IEnAtgw3c3lnFrxQ=="
+      ]
+    }
+  ]
+}

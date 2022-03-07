@@ -41,11 +41,11 @@ def into_string_list_format(entries):
       entries_to_add += '"{0}",'.format(e)
     return string_list_to_return.format(entries_to_add)
 
-list_of_users_dn = ['dn=user1,dc=example,dc=com', 'dn=user2,dc=example,dc=com']
+list_of_users_dn = ['dn=user1,dc=example,dc=com']
 
 # Both inputs must be a string representation of a List
 inputs.ldap_multiple_user_dn = into_string_list_format(list_of_users_dn)
-inputs.ldap_multiple_group_dn = into_string_list_format('dn=Accounts Group,dc=example,dc=com')
+inputs.ldap_multiple_group_dn = into_string_list_format('cn=mygroup,dc=example,dc=com')
 
 ```
 
