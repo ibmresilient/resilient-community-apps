@@ -1055,3 +1055,128 @@ Refer to the documentation listed in the Requirements section for troubleshootin
 
 ### For Support
 This is an IBM supported app. Please search [ibm.com/mysupport](https://ibm.com/mysupport) for assistance.
+
+## Template Appendix
+Below are examples of templates for creating, updating, and closing IBM SOAR incidents. Customize these templates and refer to them in the app.config file.
+These default jinja templates map IBM SOAR fields to SentinelOne threat and agent fields.
+
+Each template should be reviewed for correctness in your enterprise.
+For instance, closing a SOAR incident may include additional custom fields which the default template
+does not include.
+
+<details><summary>incident_creation_template</summary>
+<pre>
+{%- set comma = joiner(",") -%}
+    "name": "Symantec DLP Incident Id {{ staticIncidentDetails.incidentId }}",
+    "description": "An incident imported using the Symantec DLP Integration",
+    "discovered_date": {{ staticIncidentDetails.infoMap.creationDate|soar_datetimeformat }},
+    "start_date": {{ staticIncidentDetails.infoMap.detectionDate|soar_datetimeformat }},
+    "incident_type_ids": [16],
+    "severity_code": "{{ editableIncidentDetails.infoMap.severityId|string|soar_substitute('{"1": "High", "2": "Medium", "3": "Low", "4": "Low"}')}}",
+
+    {#  Custom properties for DLP Attributes #}
+    "properties": {
+        "sdlp_incident_id": {{ staticIncidentDetails.incidentId }},
+        "sdlp_incident_status": "{{ editableIncidentDetails.infoMap.incidentStatusName }}",
+        "sdlp_incident_url": {"format" : "html", "content" : "<a target='blank' href='{{ sdlp_incident_url }}'>Symantec DLP Incident</a>"},
+        "sdlp_policy_name": "{{ staticIncidentDetails.infoMap.policyName }}",
+        "sdlp_policy_id": {{ staticIncidentDetails.infoMap.policyId }},
+        "sdlp_policy_group_id": {{ staticIncidentDetails.infoMap.policyGroupId }},
+        "sdlp_policy_group_name": "{{ staticIncidentDetails.infoMap.policyGroupName }}"
+    },
+    {# Artifacts which we will try to pull out of the Incident #}
+    "artifacts": [
+    {% if staticIncidentDetails.infoMap.get('discoverServer', False) %}
+      {{- comma() }}
+      {
+        "type": {"name": "System Name"},
+        "value": "{{ staticIncidentDetails.infoMap.discoverServer|replace('\\', '\\\\')|replace('"', '\\"') }}",
+        "description": {
+          "format": "text",
+          "content": "System Name of the machine that generated Symantec DLP Incident Id {{ staticIncidentDetails.incidentId }}"
+        }
+      }
+    {% endif %}
+    {% if staticIncidentDetails.infoMap.get('discoverContentRootPath', False) %}
+      {{- comma() }}
+      {
+        "type": { "name": "File Path"}, 
+        "value": "{{ staticIncidentDetails.infoMap.discoverContentRootPath|replace("\\", "\\\\") }}",
+        "description" : {
+            "format" : "html", 
+            "content" : "File Path of the file that generated Symantec DLP Incident Id {{ staticIncidentDetails.incidentId }}"
+        }
+      }
+    {%- endif -%}
+    {% if staticIncidentDetails.infoMap.get('discoverName', False) %}
+      {{- comma() }}
+      {
+        "type": { "name": "File Name"}, 
+        "value": "{{ staticIncidentDetails.infoMap.discoverName|replace("\\", "\\\\") }}",
+        "description" : {
+            "format" : "html", 
+            "content" : "File Name of the file that generated Symantec DLP Incident Id {{ staticIncidentDetails.incidentId }}"
+        }
+      }
+    {%- endif -%}
+    {% if staticIncidentDetails.infoMap.get('fileOwner', False) %}
+      {{- comma() }}
+      {
+        "type": { "name": "User Account"}, 
+        "value": "{{ staticIncidentDetails.infoMap.fileOwner|replace("\\", "\\\\") }}",
+        "description" : {
+            "format" : "html", 
+            "content" : "File Owner of the file that generated Symantec DLP Incident Id {{ staticIncidentDetails.incidentId }}"
+        }
+      }
+    {%- endif -%}
+    {% if staticIncidentDetails.infoMap.get('endpointMachineIpAddress', False) %}
+      {{- comma() }}
+      {
+        "type": {"name": "IP Address"},
+        "value": "{{ staticIncidentDetails.infoMap.endpointMachineIpAddress|replace('\\', '\\\\')|replace('"', '\\"') }}",
+        "description": {
+          "format": "text",
+          "content": "IP Address of the machine that generated Symantec DLP Incident Id {{ staticIncidentDetails.incidentId }}",
+          "properties": [{"name": "source", "value": true}]
+        }
+      }
+    {% endif %}
+    ],
+    "comments": [
+        {%- for note_text in notes -%}
+        {    
+            "text": {
+                "format": "html",
+                "content": "{{note_text|replace('\\', '\\\\')|replace('"', '\\"')}}"
+            }        
+        }
+        {{ "," if not loop.last else "" }}
+        {%- endfor -%}
+    ]
+}
+</pre>
+</details>
+<details><summary>incident_close_template</summary>
+<pre>
+{
+ {# JINJA template for closing a new SOAR case from a Symantec DLP incident. #}
+  "plan_status": "C",
+  "resolution_id": "Resolved",
+  "resolution_summary": "Closed from Symantec DLP."
+  {# additional fields may be needed. Add as necessary #}
+  {# "properties": { } #}
+}
+</pre>
+</details>
+<details><summary>incident_update_template</summary>
+<pre>
+{
+  {# JINJA template for updating a SOAR case from a Symantec DLP incident. #}
+  "severity_code": "{{ editableIncidentDetails.infoMap.severityId|string|soar_substitute('{"1": "High", "2": "Medium", "3": "Low", "4": "Low"}')}}",
+
+  "properties": {
+    "sdlp_incident_status": "{{ editableIncidentDetails.infoMap.incidentStatusName }}"
+  }
+}
+```

@@ -28,13 +28,14 @@ sdlp_inputs = results.get("inputs")
 sdlp_incident_id = sdlp_inputs.get("sdlp_incident_id")
 
 note = u"<b>Symantec DLP: Upload Binaries for incident Id {0}</b><br>".format(sdlp_incident_id)
-success = results.get("success")
+content = results.get("content")
+success = content.get("success")
 if success:
-  content = results.get('artifact_name_list')
-  num_artifacts = len(content)
+  artifact_list = content.get('artifact_name_list')
+  num_artifacts = len(artifact_list)
   note = u"{0} {1} artifact files added".format(note, num_artifacts)
-else
-  note = u"{0}artifact NOT added".format(note)
+else:
+  note = u"{0} artifact NOT added".format(note)
 incident.addNote(helper.createRichText(note))
 ```
 

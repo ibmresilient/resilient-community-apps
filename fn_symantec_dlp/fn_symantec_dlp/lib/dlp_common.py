@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+from difflib import restore
 import os
 import datetime
 import logging
 import base64
+from re import L
 import shutil
 import traceback
 
@@ -140,10 +142,10 @@ class SymantecDLPCommon():
         """
         url = u"{0}/incidents/{1}/components/{2}".format(self.base_url, incident_id, component_id)
 
-        response = self.rc.execute("GET", url, headers=self.headers,
-                                    verify=self.verify, proxies=self.rc.get_proxies())
-        r_json = response.json()
-        return r_json
+        response, error_msg = self.rc.execute("GET", url, headers=self.headers, verify=self.verify, 
+                                    proxies=self.rc.get_proxies(), callback=callback)
+         
+        return response, error_msg
 
     def get_sdlp_editable_attributes(self, incident_id):
         """[ Get the Symantec DLP incident editable attributes (for example "severity" is editable)]
@@ -406,25 +408,33 @@ class SymantecDLPCommon():
         r_json = response.json()
         return r_json
 
-    def upload_sdlp_binaries(self, soar_rest_client, sdlp_incident_id, soar_case_id):
+    def upload_sdlp_binaries(self, soar_common, sdlp_incident_id, soar_case_id):
         """upload_dlp_binaries takes an incident and a resilient incident ID and then attempts to query DLP for any incident_binaries
         Any returning binaries are then sent to Resilient as an Artifact, retaining its name and extension type.
         """
         # Upload remaining parts such as the Attachments
         components = self.get_sdlp_components(sdlp_incident_id)
+        soar_rest_client = soar_common.rest_client
+        artifact_type_id = soar_common.default_artifact_type_id
 
         artifact_name_list = []
         for component in components:
             if component.get('componentType') != 'Attachment':
                 continue
             component_id = component.get('componentId')
-            component_data = self.get_sdlp_component_data(sdlp_incident_id, component_id)
+            component_data, error_msg = self.get_sdlp_component_data(sdlp_incident_id, component_id)
+            if error_msg:
+                # 404 not found error would fall through here if the attachment is not uploaded to the enforce server.
+                LOG.info(error_msg)
+                continue
             try:
-                path_tmp_file, path_tmp_dir = write_to_tmp_file(component_data.get('content'))
-                    
+                # Write the data to a file
+                path_tmp_file, path_tmp_dir = write_to_tmp_file(component_data)
+                
+                # Post the file as an artifact
                 artifact_uri = "/incidents/{}/artifacts/files".format(soar_case_id)
                 soar_rest_client.post_artifact_file(artifact_uri,
-                                                    soar_rest_client.get('default_artifact_type_id'),
+                                                    artifact_type_id,
                                                     path_tmp_file,
                                                     value=component.get('name'),
                                                     description="Binary File imported from Symantec DLP")
@@ -437,7 +447,7 @@ class SymantecDLPCommon():
                 LOG.error(u"[Symantec DLP] Encountered an exception when uploading a Binary to Resilient.")
     
             finally:
-                # # Clean up the tmp_file 
+                # # Clean up the tmp file 
                 if path_tmp_dir and os.path.isdir(path_tmp_dir):
                     shutil.rmtree(path_tmp_dir)
 
@@ -504,3 +514,22 @@ class SymantecDLPCommon():
         """
 
         return "https://{0}/ProtectManager/IncidentDetail.do?value(variable_1)=incident.id&value(operator_1)=incident.id_in&value(operand_1)={1}".format(self.server, incident_id)
+
+def callback(response):
+    """
+    callback needed for main code to handle statuscodes
+    :param response:
+    :return: json result or None, error_msg
+    """
+    error_msg = None
+    if response.status_code >= 300:
+        resp = response.json()
+        msg = resp['message']
+        error_msg  = u"Symantec DLP Error: {0}: {1}".format(response.status_code, msg)
+
+    try:
+        content = response.content
+    except:
+        content = ""
+
+    return content, error_msg
