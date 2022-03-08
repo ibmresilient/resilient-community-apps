@@ -70,7 +70,7 @@
  ![screenshot: main](./doc/screenshots/main.png)
 
 Bi-directional synchronization with Siemplify Cases from SOAR Incidents. Other Siemplify case components synchronized are:
-* SOAR comments to Siempify case insights
+* SOAR comments to Siemplify case insights
 * SOAR attachments
 * SOAR case tasks
 * Siemplify closed cases will update IBM SOAR incidents
