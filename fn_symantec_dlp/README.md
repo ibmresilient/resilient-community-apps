@@ -705,7 +705,7 @@ incident.addNote(noteText)
 
 ---
 ## Function - Symantec DLP: Upload Binaries
-Upload the Symantec DLP Component binary files and add as artifact files.
+Upload the Symantec DLP Component binary files contained in a DLP incident and add as artifact files.   An automatic rule **Symantec DLP: Upload Binaries** is included in this package but disabled by default.  The automatic rule is triggered when an case is created and uploads the binary files at that time. However due to bandwidth considerations when uploading many files when the poller it escalating many incidents enabling this rule may not be advisable. A manual menu item rule **Symantec DLP: Upload Binaries as Artifact** the is run off a SOAR case is also included to allow the user to chose which binary files to upload to an incident. 
 
  ![screenshot: fn-symantec-dlp-upload-binaries ](./doc/screenshots/fn-symantec-dlp-upload-binaries.png) 
 
@@ -727,13 +727,30 @@ Upload the Symantec DLP Component binary files and add as artifact files.
 
 ```python
 results = {
-    # TODO: Generate an example of the Function Output within this code block.
-    # To get the output of a Function:
-    #   1. Run resilient-circuits in DEBUG mode: $ resilient-circuits run --loglevel=DEBUG
-    #   2. Invoke the Function in SOAR
-    #   3. Gather the results using: $ resilient-sdk codegen -p fn_symantec_dlp --gather-results
-    #   4. Run docgen again: $ resilient-sdk docgen -p fn_symantec_dlp
-} 
+  {
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "success": true,
+    "artifact_name_list": [
+      "c:\\Users\\Administrator\\Documents\\three-ss-one-cc.txt"
+    ]
+  },
+  "raw": null,
+  "inputs": {
+    "incident_id": 3456,
+    "sdlp_incident_id": 578
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-symantec-dlp",
+    "package_version": "2.0.0",
+    "host": "MacBook-Pro.local",
+    "execution_time_ms": 9905,
+    "timestamp": "2022-03-07 14:10:32"
+  }
+}
 ```
 
 </p>

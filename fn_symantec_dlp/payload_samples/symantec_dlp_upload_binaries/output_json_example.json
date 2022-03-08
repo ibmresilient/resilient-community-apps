@@ -1,3 +1,24 @@
 {
-    
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "success": true,
+    "artifact_name_list": [
+      "c:\\Users\\Administrator\\Documents\\three-ss-one-cc.txt"
+    ]
+  },
+  "raw": null,
+  "inputs": {
+    "incident_id": 3456,
+    "sdlp_incident_id": 578
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-symantec-dlp",
+    "package_version": "2.0.0",
+    "host": "MacBook-Pro.local",
+    "execution_time_ms": 9905,
+    "timestamp": "2022-03-07 14:10:32"
+  }
 }
