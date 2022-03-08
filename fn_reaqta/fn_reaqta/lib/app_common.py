@@ -63,16 +63,17 @@ class AppCommon():
         """get changed entities since last poller run
 
         Args:
-            query_field_name (str): field to use for
+            query_field_name (str): field to use for ReaQta field to query on
             timestamp (datetime): datetime when the last poller ran
             optional_filters (dict): name/value pairs for query criteria
 
         Returns:
             list: changed entity list
         """
-        query = {
-            query_field_name: readable_datetime(timestamp) # utc datetime format
-        }
+        query = { }
+
+        if query_field_name:
+            query[query_field_name] = readable_datetime(timestamp) # utc datetime format
 
         # add any additional query parameters
         if optional_filters:
