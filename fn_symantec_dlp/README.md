@@ -48,8 +48,8 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 2.0.0 | 2022 | REST API | 
-| 1.0.0 | 2019 | Initial Release (SOAP-based)|
+| 2.0.0 | 2022 | Support for Symantec DLP REST API | 
+| 1.0.0 | 2019 | Initial Release (SOAP API implementation)|
 
 ---
 
@@ -58,11 +58,11 @@
   Provide a high-level description of the function itself and its remote software or application.
   The text below is parsed from the "description" and "long_description" attributes in the setup.py file
 -->
-**IBM QRadar SOAR app for Symantec DLP**
+**IBM Security QRadar SOAR app for Symantec DLP**
 
  ![screenshot: main](./doc/screenshots/main.png)
 
-This app allows bi-directional synchronization between IBM Security QRadar SOAR and Symantec DLP.  Symantec DLP incidents are escalated to IBM SOAR as cases with the creation of artifacts and notes in SOAR from the incident.
+This app allows bi-directional synchronization between IBM Security QRadar SOAR and Symantec DLP.  Symantec DLP incidents are escalated to SOAR as cases with the creation of artifacts and notes in SOAR from the incident.
 
 ### Key Features
 <!--
@@ -70,11 +70,11 @@ This app allows bi-directional synchronization between IBM Security QRadar SOAR 
 -->
 The Symantec DLP app implements the following functionality in the IBM QRadar SOAR platform:
 
-* Poll Symantec DLP for incidents using a DLP saved report search filter and create a corresponding incident/case in the IBM SOAR platform.
-* Add Symantec DLP notes to corresponding IBM SOAR incident/case.
-* Create artifacts from the Symantec DLP incident in the IBM SOAR incident/case.
-* Resolve a Symantec DLP incident when the corresponding IBM SOAR incident/case is closed.
-* Close an IBM SOAR incident/case when the corresponding Symantec DLP incident is resolved in Symantec DLP.
+* Poll Symantec DLP for incidents using a DLP saved report search filter and create a corresponding incident/case in SOAR.
+* Add Symantec DLP notes to corresponding SOAR incident/case.
+* Create artifacts from the Symantec DLP incident in the SOAR incident/case.
+* Resolve a Symantec DLP incident when the corresponding SOAR incident/case is closed.
+* Close an SOAR incident/case when the corresponding Symantec DLP incident is resolved in Symantec DLP.
 * Get the Symantec DLP incident details and write the JSON in a formatted SOAR incident note.
 * Create a live link in the Symantec DLP incident to the corresponding SOAR case. 
 * Create a live link in the a SOAR case to the corresponding Symantec DLP incident. 
@@ -152,7 +152,7 @@ List any steps that are needed to configure the endpoint to use this app.
 -->
 ##### Configure Symantec DLP Custom Attributes
 
-Two DLP Custom Attributes are used by the DLP integration to hold relevant information from the IBM SOAR platform. 
+Two DLP Custom Attributes are used by the DLP integration to hold relevant information from SOAR. 
 
 `ibm_soar_case_id` custom attribute is used for filtering out already imported to SOAR incidents and avoiding duplication. Without this custom attribute in place, there is a potential for incident duplication.  
 
@@ -202,7 +202,7 @@ The following table provides the settings you need to configure the app. These s
 ---
 
 ## Function - Symantec DLP: Get Incident Details
-Get the information on the Symantec DLP incident by calling the DLP REST API incident endpoints for edittable, static and notes and return the information in JSON format.
+Get the information on the Symantec DLP incident by calling three DLP REST API incident endpoints to obtain **editableIncidentDetails**, **staticIncidentDetails**, and **notes** JSON objects which are combined into one JSON object which is returned by the function.
 
  ![screenshot: fn-symantec-dlp-get-incident-details ](./doc/screenshots/fn-symantec-dlp-get-incident-details.png)
 
@@ -546,7 +546,7 @@ workflow.addProperty('convert_json_to_rich_text', json_note)
 
 ---
 ## Function - Symantec DLP: Send Note to DLP Incident
-Send an case note from SOAR to the corresponding Symantec DLP incident.
+Send a case note from SOAR to the corresponding Symantec DLP incident.
 
  ![screenshot: fn-symantec-dlp-send-note-to-dlp-incident ](./doc/screenshots/fn-symantec-dlp-send-note-to-dlp-incident.png) <!-- ::CHANGE_ME:: -->
 
@@ -705,7 +705,7 @@ incident.addNote(noteText)
 
 ---
 ## Function - Symantec DLP: Upload Binaries
-Upload the Symantec DLP Component binary files contained in a DLP incident and add as artifact files.   An automatic rule **Symantec DLP: Upload Binaries** is included in this package but disabled by default.  The automatic rule is triggered when an case is created and uploads the binary files at that time. However due to bandwidth considerations when uploading many files when the poller it escalating many incidents enabling this rule may not be advisable. A manual menu item rule **Symantec DLP: Upload Binaries as Artifact** the is run off a SOAR case is also included to allow the user to chose which binary files to upload to an incident. 
+Upload the Symantec DLP Component binary files contained in a DLP incident and add as artifact files.   An automatic rule **Symantec DLP: Upload Binaries** is included in this package but disabled by default.  The automatic rule is triggered when a case is created and the function uploads the binary files at that time. However due to bandwidth considerations when uploading many files when the poller is escalating many incidents, enabling this rule may not be advisable. Also included is a manual menu item rule, **Symantec DLP: Upload Binaries as Artifact**, which allows users to choose the binary files to upload to a case or incident.
 
  ![screenshot: fn-symantec-dlp-upload-binaries ](./doc/screenshots/fn-symantec-dlp-upload-binaries.png) 
 
@@ -791,14 +791,14 @@ incident.addNote(helper.createRichText(note))
 ---
 
 ## Script - Convert JSON to rich text v1.1
-This script converts a json object into a hierarchical display of rich text and adds the rich text to an incident's rich text (custom) field or an incident note. A workflow property is used to share the json to convert and identify parameters used on how to perform the conversion.
+This script converts a json object into a hierarchical display of rich text and adds the rich text to a case or incidents rich text (custom) field or a case or incident note. A workflow property is used to share the json to convert and identify parameters used on how to perform the conversion.
 
 Typically, a function will create the workflow property 'convert_json_to_rich_text', and this script will run after that function to perform the conversion.
 
 Features:
 * Display the hierarchical nature of json, presenting the json keys (sorted if specified) as bold labels
 * Provide links to found URLs
-* Create either an incident note or add results to an incident (custom) rich text field.
+* Create either a case or incident note or add results to a case or incident(custom) rich text field.
 
 **Object:** incident
 
@@ -1075,7 +1075,7 @@ This is an IBM supported app. Please search [ibm.com/mysupport](https://ibm.com/
 
 ## Template Appendix
 Below are examples of templates for creating, updating, and closing IBM SOAR incidents. Customize these templates and refer to them in the app.config file.
-These default jinja templates map IBM SOAR fields to SentinelOne threat and agent fields.
+These default jinja templates map SOAR fields to Symantec DLP incident fields.
 
 Each template should be reviewed for correctness in your enterprise.
 For instance, closing a SOAR incident may include additional custom fields which the default template
