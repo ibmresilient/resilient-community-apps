@@ -23,7 +23,7 @@ DEFAULT_SOAR_UPDATE_CASE = "templates/dlp_update_case_template.jinja"
 LOG = logging.getLogger(__name__)
 
 def poller(named_poller_interval, named_last_poller_time):
-    """[summary]
+    """[ Main polling function for triggering a search for Symantec DLP incidents to escalate to SOAR. ]
     Args:
         named_poller_interval ([str]): [name of instance variable containing the poller interval in seconds]
         named_last_poller_time ([datetime]): [name of instance variable containing the lookback value in mseconds]
