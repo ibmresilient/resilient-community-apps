@@ -132,12 +132,14 @@ SNOWRESTHelper.prototype = {
 		parent = new GlideRecord(parentTableName);
 		parent.get(current.getValue("parent"));
 
-		//Return the value stored in the parent table, if found
-		if (parent.isValidField(INC_RES_ID)){
-			refID = parent.getValue(INC_RES_ID);
-		}
-		else{
-			refID = parent.getValue(SIR_RES_ID);
+		if (parent) {
+			//Return the value stored in the parent table, if found
+			if (parent.isValidField(INC_RES_ID)){
+				refID = parent.getValue(INC_RES_ID);
+			}
+			else{
+				refID = parent.getValue(SIR_RES_ID);
+			}
 		}
 
 		if (!refID){
