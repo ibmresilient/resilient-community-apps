@@ -3,6 +3,7 @@
 //Use to convert JavaScript JSON Object to JSON String and back
 var JSON_PARSER = new global.JSON();
 
+var DEFAULT_TIMEOUT = 60000;
 var RES_DATATABLE_NAME = "sn_records_dt";
 var RES_INTEGRATOR_ROLE = "x_ibmrt_resilient.integrator";
 
@@ -77,14 +78,18 @@ function checkSnUserHasResilientIntegratorRole(snUsername) {
 }
 
 //Function to execute a RESTMessage. Handles errors. Returns response if successful
-function executeRESTMessage(rm, midServerName, restURL){
+function executeRESTMessage(rm, midServerName, restURL, requestTimeout, sendRequestAsync){
 	var response, statusCode, responseBody, responseHeaders, errMsg = null;
 
-	//Set timeout to 60s
-	rm.setHttpTimeout(60000);
+	//Set timeout to the timeout property value
+	rm.setHttpTimeout(requestTimeout);
 
 	try{
-		response = rm.execute();
+		if (sendRequestAsync) {
+			response = rm.executeAsync();
+		} else {
+			response = rm.execute();
+		}
 
 		// If using a mid-server, wait max 60s for response
 		if(midServerName){
@@ -220,7 +225,7 @@ ResilientAPI.prototype = {
 	
 	initialize: function() {
 		
-		var hostName, orgName, resAPIId, resAPISecret, userEmail, userPassword, snUsername, midServerName, errMsg, APIKeysEnabled, restEndpointCP4S = null;
+		var hostName, orgName, resAPIId, resAPISecret, userEmail, userPassword, snUsername, midServerName, requestTimeout, errMsg, APIKeysEnabled, restEndpointCP4S = null;
 		
 		//Ensure all the required System Properties are available before continuing
 		try{
@@ -232,6 +237,7 @@ ResilientAPI.prototype = {
 			userPassword = gs.getProperty("x_ibmrt_resilient.ResilientUserPassword").trim();
 			snUsername = gs.getProperty("x_ibmrt_resilient.ServiceNowUsername").trim();
 			midServerName = gs.getProperty("x_ibmrt_resilient.ServiceNowMidServerName").trim();
+			requestTimeout = gs.getProperty("x_ibmrt_resilient.RequestTimeout").trim();
 			restEndpointCP4S = gs.getProperty("x_ibmrt_resilient.ResilientCP4SRestHost").trim();
 			if (gs.getProperty("x_ibmrt_resilient.ResilientIsCP4S").toLowerCase() == "yes") {
 				this.isCP4S = true;
@@ -286,6 +292,11 @@ ResilientAPI.prototype = {
 		this.orgName = orgName;
 		this.userEmail = userEmail;
 		this.APIKeysEnabled = APIKeysEnabled;
+		if (requestTimeout) {
+			this.requestTimeout = requestTimeout * 1000; // convert seconds to milliseconds
+		} else {
+			this.requestTimeout = DEFAULT_TIMEOUT;
+		}
 
 		//Initialise other class variables that will be set in the connect() method
 		this.XSESSID = null;
@@ -338,8 +349,8 @@ ResilientAPI.prototype = {
 			rm.setEccParameter("skip_sensor", true);
 		}
 
-		//Execute and get response
-		res = executeRESTMessage(rm, this.midServerName, this.restURL);
+		//Execute and get response - do not send async, thus last param is "false"
+		res = executeRESTMessage(rm, this.midServerName, this.restURL, this.requestTimeout, false);
 
 		//Get csrfToken and JSESSIONID if authenticating with email
 		if (!this.APIKeysEnabled) {
@@ -351,7 +362,7 @@ ResilientAPI.prototype = {
 		this.orgId = getOrgId(res.body.orgs, this.orgName);
 	},
 	
-	request: function(method, endpoint, dataAsJSONobj, headers){
+	request: function(method, endpoint, dataAsJSONobj, headers, sendAsync){
 		
 		//If headers is null, set to empty object
 		if(!headers){ headers = {}; }
@@ -376,6 +387,7 @@ ResilientAPI.prototype = {
 		
 		//Set the headers
 		headers["content-type"] = "application/json";
+		headers["User-Agent"] = "soar-app-1.0";
 
 		//Figure out how authentication will happen
 		//If using API key, set the ID and secret in header
@@ -396,7 +408,7 @@ ResilientAPI.prototype = {
 		}
 		
 		//Execute the request
-		var res = executeRESTMessage(rm, this.midServerName, this.restURL);
+		var res = executeRESTMessage(rm, this.midServerName, this.restURL, this.requestTimeout, sendAsync);
 		return res.body;
 	},
 	
@@ -422,7 +434,7 @@ ResilientAPI.prototype = {
 		var method = "get";
 		var endpoint = "/orgs/" + this.orgId + "/incidents/" + incidentId;
 		var headers = {"handle_format": "names"};
-		return this.request(method, endpoint, null, headers);
+		return this.request(method, endpoint, null, headers, true);
 	},
 	
 	closeIncident: function(incidentId, data){
@@ -437,14 +449,14 @@ ResilientAPI.prototype = {
 		var method = "get";
 		var endpoint = "/orgs/" + this.orgId + "/types/" + type + "/fields/" + fieldAPIName;
 		var headers = {"handle_format": "names"};
-		return this.request(method, endpoint, null, headers);
+		return this.request(method, endpoint, null, headers, true);
 	},
 	
 	getDatatable: function(incidentId){
 		var method = "get";
 		var endpoint = "/orgs/" + this.orgId + "/incidents/" + incidentId + "/table_data/" + RES_DATATABLE_NAME;
 		var headers = {"handle_format": "names"};
-		return this.request(method, endpoint, null, headers);
+		return this.request(method, endpoint, null, headers, true);
 	},
 
 	addDatatableRow: function(incidentId, formattedCells){
@@ -458,7 +470,7 @@ ResilientAPI.prototype = {
 		var method = "put";
 		var endpoint = "/orgs/" + this.orgId + "/incidents/" + incidentId + "/table_data/" + RES_DATATABLE_NAME + "/row_data/" + rowId;
 		var headers = {"handle_format": "names"};
-		return this.request(method, endpoint, formattedCells, headers);
+		return this.request(method, endpoint, formattedCells, headers, true);
 	},
 	
 	addNote: function(incidentId, taskId, noteText, noteFormat){
@@ -481,7 +493,7 @@ ResilientAPI.prototype = {
 			}
 		};
 		var method = "post";
-		return this.request(method, endpoint, data);
+		return this.request(method, endpoint, data, null, true);
 	},
 	
 	generateRESid: function(incident_id, task_id){
@@ -503,12 +515,7 @@ ResilientAPI.prototype = {
 		}
 		
 		if(task_id){
-			link += "?taskId=" + String(task_id);
-
-			//If is task AND is CP4S instance add extra filter to link
-			if (this.isCP4S){
-				link += "&tabName=details&orgId=" + String(this.orgId);
-			}
+			link += "?taskId=" + String(task_id) + "&tabName=details&orgId=" + String(this.orgId);
 		}
 		
 		return link;
