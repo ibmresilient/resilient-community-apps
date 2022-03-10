@@ -1,6 +1,7 @@
 #ALPHABETICAL-List-of-allowed-image-names
 
 #IBM_SOAR_Apps
+fn_abuseipdb
 fn_alienvault_otx
 fn_anomali_staxx
 fn_ansible
