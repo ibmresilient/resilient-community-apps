@@ -14,8 +14,10 @@ def config_section_data():
 #search_timeout=
 # Interval to poll QRadar for changes (in minutes)
 # To turn the poller off user value 0
-polling_interval = 120
-polling_lookback = 60
+polling_interval=120
+polling_lookback=60
+# If true then data tables given in the workflows will be cleared when incident is updated by poller
+clear_datatables=True
 
 # Note: If [fn_qradar_integration] is present without a label then all labeled servers will
 # be disregarded and only the server under [fn_qradar_integration] will be used

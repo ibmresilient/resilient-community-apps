@@ -63,6 +63,15 @@ class FunctionComponent(ResilientComponent):
             # Get qradar_client and options
             qradar_client, options = QRadarServers.get_qradar_client(self.opts, qradar_label)
 
+            if qradar_table_name:
+                if self.global_settings:
+                    # If clear_datatables in app.config equals True then clear given data table
+                    # If clear_datatables does not exist then it defaults to True
+                    if self.global_settings.get("clear_datatables", True) == True:
+                        clear_table(self.rest_client(), qradar_table_name, qradar_incident_id)
+                else: # If global_settings does not exist then clear given data table
+                    clear_table(self.rest_client(), qradar_table_name, qradar_incident_id)
+
             if self.global_settings:
                 timeout = float(self.global_settings.get("search_timeout",600))  # Default timeout to 10 minutes
             else:
@@ -126,10 +135,6 @@ class FunctionComponent(ResilientComponent):
                 "offenseid": qradar_search_param3,
                 "events": result["events"]
             }
-
-            if qradar_table_name:
-                clear_table(self.rest_client(), qradar_table_name, qradar_incident_id)
-                log.info("Data in table {} in incident {} has been cleared".format(qradar_table_name, qradar_incident_id))
 
             yield StatusMessage("Finished 'qradar_top_events' that was running in workflow '{0}'".format(wf_instance_id))
             yield FunctionResult(results)

@@ -7,10 +7,12 @@
 
 from logging import getLogger
 from resilient_lib import validate_fields
-from fn_qradar_enhanced_data.util.qradar_utils import QRadarServers
+from fn_qradar_enhanced_data.util.qradar_utils import QRadarServers, AuthInfo
+from fn_qradar_enhanced_data.util.qradar_constants import GLOBAL_SETTINGS
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_qradar_enhanced_data.util.function_utils import clear_table
 import fn_qradar_enhanced_data.util.qradar_graphql_queries as qradar_graphql_queries
+from urllib.parse import quote
 
 #For a given Offense ID and QRadar Destination, get the offense summary.
 
@@ -21,11 +23,13 @@ class FunctionComponent(ResilientComponent):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         self.opts = opts
+        self.global_settings = opts.get(GLOBAL_SETTINGS, {})
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
         self.opts = opts
+        self.global_settings = opts.get(GLOBAL_SETTINGS, {})
 
     @function("qradar_offense_summary")
     def _qradar_offense_summary(self, event, *args, **kwargs):
@@ -50,6 +54,15 @@ class FunctionComponent(ResilientComponent):
             # Get qradar_client and options
             qradar_client, options = QRadarServers.get_qradar_client(self.opts, qradar_label)
 
+            if qradar_table_name:
+                if self.global_settings:
+                    # If clear_datatables in app.config equals True then clear given data table
+                    # If clear_datatables does not exist then it defaults to True
+                    if self.global_settings.get("clear_datatables", True) == True:
+                        clear_table(self.rest_client(), qradar_table_name, qradar_incident_id)
+                else: # If global_settings does not exist then clear given data table
+                    clear_table(self.rest_client(), qradar_table_name, qradar_incident_id)
+
             results = {
                 "qrhost": options.get("host"),
                 "offenseid": qradar_offenseid
@@ -60,6 +73,16 @@ class FunctionComponent(ResilientComponent):
 
                 offense_summary = qradar_client.graphql_query({"id": qradar_offenseid}, qradar_graphql_queries.GRAPHQL_OFFENSEQUERY)
                 results["offense"] = offense_summary["content"]
+
+            elif qradar_fn_type == "offensetime":
+                fields = quote("id, last_persisted_time")
+                filters = quote("id={}".format(qradar_offenseid))
+                auth_info = AuthInfo.get_authInfo()
+                # Create url to get all offenses in SOAR from the given QRadar server
+                url = auth_info.api_url + "siem/offenses?fields={}&filter={}".format(fields, filters)
+                response = auth_info.make_call("GET", url)
+                for content in response.json():
+                    results["last_persisted_time"] = content["last_persisted_time"]
 
             # Fetch the Contributing Rules if function type is OFFENSE_RULES
             elif qradar_fn_type == "offenserules":

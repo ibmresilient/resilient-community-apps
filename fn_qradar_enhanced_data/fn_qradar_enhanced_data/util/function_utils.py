@@ -61,12 +61,10 @@ def get_servers_list(opts):
     else: # If labels given [fn_qradar_integration:label]
         servers = qradar_utils.QRadarServers(opts, options)
         server_list = servers.get_server_name_list()
-        if GLOBAL_SETTINGS not in server_list:
-            raise IntegrationError('Unable to find [{}]'.format(GLOBAL_SETTINGS))
-        server_list.remove(GLOBAL_SETTINGS)
-
-        # Validate global_settings
-        validate_fields(["polling_interval", "polling_lookback"], opts.get(GLOBAL_SETTINGS, {}))
+        # If GLOBAL_SETTINGS is in server_list then remove it from list and validate fields
+        if GLOBAL_SETTINGS in server_list:
+            server_list.remove(GLOBAL_SETTINGS)
+            validate_fields(["polling_interval", "polling_lookback"], opts.get(GLOBAL_SETTINGS, {}))
 
     # Creates a dictionary that is filled with the QRadar servers
     # and there configurations
@@ -86,6 +84,7 @@ def clear_table(rest_client, table_name, incident_id):
 
     try:
         rest_client.delete("/incidents/{}/table_data/{}/row_data?handle_format=names".format(incident_id, table_name))
+        LOG.info("Data in table {} in incident {} has been cleared".format(table_name, incident_id))
 
     except Exception as err_msg:
         LOG.warning("Failed to clear table: {} error: {}".format(table_name, err_msg))
