@@ -29,7 +29,7 @@ class RxClient():
             raise ValueError("The 'opts' parameter is not set correctly.")
         if not isinstance(fn_opts, dict) and not fn_opts:
             raise ValueError("The 'fn_opts' parameter is not set correctly.")
-        self.validate_settings(fn_opts)
+        validate_settings(fn_opts)
         self.host_url = fn_opts.get("extrahop_rx_host_url")
         self.api_version = fn_opts.get("extrahop_rx_api_version")
         self.key_id = fn_opts.get("extrahop_rx_key_id")
@@ -190,6 +190,7 @@ class RxClient():
         """
         uri = self._endpoints["search_detections"]
         data = {"filter": {}}
+        filter_data = {}
 
         if search_filter:
             try:
@@ -437,27 +438,29 @@ class RxClient():
 
         return r
 
-    def validate_settings(self, fn_opts):
-        """Validate app config settings.
+def validate_settings(fn_opts):
+    """Validate app config settings.
 
-        :param fn_opts: App settings dict.
-        """
-        validate_fields([
-            {"name": "extrahop_rx_host_url", "placeholder": "<EXTRAHOP_RX_HOST_URL>"},
-            {"name": "extrahop_rx_api_version"}],
+    :param fn_opts: App settings dict.
+    """
+    validate_fields([
+        {"name": "extrahop_rx_host_url", "placeholder": "<EXTRAHOP_RX_HOST_URL>"},
+        {"name": "polling_interval", "placeholder": "<POLLING_INTERVAL>"},
+        {"name": "polling_lookback", "placeholder": "<LOOKBACK_INTERVAL>"},
+        {"name": "extrahop_rx_api_version"}],
         fn_opts)
 
-        if fn_opts.get("extrahop_rx_key_id"):
-            validate_fields([
-                {"name": "extrahop_rx_key_id", "placeholder": "<EXTRAHOP_RX_API_KEY_ID>"},
-                {"name": "extrahop_rx_key_secret", "placeholder": "<EXTRAHOP_RX_API_KEY_SECRET>"}],
+    if fn_opts.get("extrahop_rx_key_id"):
+        validate_fields([
+            {"name": "extrahop_rx_key_id", "placeholder": "<EXTRAHOP_RX_API_KEY_ID>"},
+            {"name": "extrahop_rx_key_secret", "placeholder": "<EXTRAHOP_RX_API_KEY_SECRET>"}],
             fn_opts)
-        else:
-            validate_fields([
-                {"name": "extrahop_rx_api_key", "placeholder": "<EXTRAHOP_RX_API_KEY>"}],
+    else:
+        validate_fields([
+            {"name": "extrahop_rx_api_key", "placeholder": "<EXTRAHOP_RX_API_KEY>"}],
             fn_opts)
 
-        if fn_opts.get("extrahop_cafile") is not None:
-            validate_fields([
-                {"name": "extrahop_cafile", "placeholder": "<path to cert file>|false"}],
+    if fn_opts.get("extrahop_cafile") is not None:
+        validate_fields([
+            {"name": "extrahop_cafile", "placeholder": "<path to cert file>|false"}],
             fn_opts)
