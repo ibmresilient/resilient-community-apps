@@ -43,8 +43,6 @@ setup(
         * Functions get and set the watchlist.
         <br>
         * A function to get activitymaps.
-        <br>
-        * A function to search packets.
     """,
     install_requires=[
         "resilient-circuits>=42.0.0"
@@ -59,8 +57,9 @@ setup(
     entry_points={
         "resilient.circuits.components": [
             # When setup.py is executed, loop through the .py files in the components directory and create the entry points.
-            "{}FunctionComponent = fn_extrahop.components.{}:FunctionComponent".format(snake_to_camel(get_module_name(filename)), get_module_name(filename)) for filename in glob.glob("./fn_extrahop/components/[a-zA-Z]*.py")
-        ],
+            "{}FunctionComponent = fn_extrahop.components.{}:FunctionComponent".format(snake_to_camel(get_module_name(filename)), get_module_name(filename)) for filename in glob.glob("./fn_extrahop/components/funct_[a-zA-Z]*.py")
+        ] +
+        [ "PollerComponent = fn_extrahop.components.poller:PollerComponent" ],
         "resilient.circuits.configsection": ["gen_config = fn_extrahop.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_extrahop.util.customize:customization_data"],
         "resilient.circuits.selftest": ["selftest = fn_extrahop.util.selftest:selftest_function"]

@@ -20,6 +20,12 @@ extrahop_rx_key_id = <EXTRAHOP_RX_API_KEY_ID>
 extrahop_rx_key_secret = <EXTRAHOP_RX_API_KEY_SECRET>
 # Authentication setting for ExtraHop standalone sensor is a single api key
 extrahop_rx_api_key = <EXTRAHOP_RX_API_KEY>
+# Interval to poll ExtraHop for detections (in seconds).
+# To turn the poller off use value 0
+polling_interval = <POLLING_INTERVAL>
+# Lookback interval to check for findings at startup  (in seconds).
+# Used in criteria for filtering detections retrieval.
+polling_lookback = <LOOKBACK_INTERVAL>
 # If your ExtraHop server uses a self-signed TLS certificate, or some
 # other certificate that is not automatically trusted by your machine,
 # you can set the CA bundle using the extrahop_cafile setting.
