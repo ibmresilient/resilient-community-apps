@@ -27,7 +27,6 @@ inputs.qradar_incident_id = incident.id
 
 ### Post-Processing Script
 ```python
-
 for event in results.assets:
   qradar_event = incident.addRow("qr_assets")
   qradar_event.asset_id = event.id
@@ -38,7 +37,7 @@ for event in results.assets:
   qradar_event.vulnerabilities = str(event.vulnerabilityCount)
   qradar_event.last_user = event.users[0].username if len(event.users)>0 and event.users[0].username is not None else ""
   qradar_event.last_user_seen = int(event.users[0].lastSeenProfiler) if len(event.users)>0 and event.users[0].lastSeenProfiler is not None else ""
-  
+  qradar_event.date_added_to_table = results.received_time
 ```
 
 ---

@@ -39,6 +39,7 @@ for event in results.events:
   qradar_event.usernames = event.usernamecount
   qradar_event.event_count = link.format(results.offenseid,"sourceip",event.sourceip,event.eventcount)
   qradar_event.category_count = link.format(results.offenseid,"sourceip",event.sourceip,event.categorycount)
+  qradar_event.date_added_to_table = results.received_time
 ```
 
 ---
@@ -77,6 +78,7 @@ for event in results.events:
   qradar_event.usernames = event.usernamecount
   qradar_event.flow_count = event.flowcount
   qradar_event.category_count = event.categorycount
+  qradar_event.date_added_to_table = results.received_time
 ```
 
 ---

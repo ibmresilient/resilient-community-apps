@@ -37,7 +37,7 @@ for event in results.events:
   qradar_event.event_time =  int(event.eventtime)
   qradar_event.sourceip_count = link.format(results.offenseid,"category_name",event.categoryname,event.sourceipcount)
   qradar_event.destinationip_count =  link.format(results.offenseid,"category_name",event.categoryname,event.destinationipcount)
-  
+  qradar_event.date_added_to_table = results.received_time
 ```
 
 ---
@@ -73,7 +73,7 @@ for event in results.events:
   qradar_event.last_packet_time =  int(event.lastpackettime)
   qradar_event.sourceip_count = event.sourceipcount
   qradar_event.destinationip_count =  event.destinationipcount
-  
+  qradar_event.date_added_to_table = results.received_time
 ```
 
 ---

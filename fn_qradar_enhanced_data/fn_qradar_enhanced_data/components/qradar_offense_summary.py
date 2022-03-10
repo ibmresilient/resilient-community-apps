@@ -7,6 +7,7 @@
 
 from logging import getLogger
 from resilient_lib import validate_fields
+from time import time
 from fn_qradar_enhanced_data.util.qradar_utils import QRadarServers, AuthInfo
 from fn_qradar_enhanced_data.util.qradar_constants import GLOBAL_SETTINGS
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
@@ -65,7 +66,8 @@ class FunctionComponent(ResilientComponent):
 
             results = {
                 "qrhost": options.get("host"),
-                "offenseid": qradar_offenseid
+                "offenseid": qradar_offenseid,
+                "received_time": int(time())*1000
             }
 
             # Fetch the Offense Summary if function type is OFFENSE_SUMMARY
@@ -118,10 +120,6 @@ class FunctionComponent(ResilientComponent):
                                                  offense_assets["properties"]))
                         offense_assets["name"] = asset_prop[0]["value"] if len(asset_prop) > 0 else ""
                         results["assets"].append(offense_assets)
-
-            if qradar_table_name:
-                clear_table(self.rest_client(), qradar_table_name, qradar_incident_id)
-                log.info("Data in table {} in incident {} has been cleared".format(qradar_table_name, qradar_incident_id))
 
             yield StatusMessage("Finished 'qradar_offense_summary' that was running in workflow '{0}'".format(wf_instance_id))
 

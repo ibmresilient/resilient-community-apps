@@ -39,7 +39,6 @@ incident.qr_magnitude = link.format(results.offenseid,"",results.offense.magnitu
 incident.qr_credibility = link.format(results.offenseid,"",results.offense.credibility)
 incident.qr_severity = link.format(results.offenseid,"",results.offense.severity)
 incident.qr_relevance = link.format(results.offenseid,"",results.offense.relevance)
-
 ```
 
 ---

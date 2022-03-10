@@ -29,13 +29,12 @@ inputs.qradar_table_name = "qr_top_destination_ips"
 ```python
 link = "<a href=\"https://"+results.qrhost+"/console/ui/offenses/{0}/events?filter={1}%3B%3D%3B%3B{2}&page=1&pagesize=10\" target=\"_blank\">{3}</a>"
 
-
 for event in results.events:
   qradar_event = incident.addRow("qr_top_destination_ips")
   qradar_event.destination_ip = link.format(results.offenseid,"destinationip",event.destinationip,event.destinationip)
   qradar_event.event_count = link.format(results.offenseid,"destinationip",event.destinationip,event.eventcount)
   qradar_event.category_count = link.format(results.offenseid,"destinationip",event.destinationip,event.categorycount)
-  
+  qradar_event.date_added_to_table = results.received_time
 ```
 
 ---
@@ -64,13 +63,12 @@ inputs.qradar_table_name = "qr_top_destination_ips"
 ```python
 link = "<a href=\"https://"+results.qrhost+"/console/ui/offenses/{0}/events?filter={1}%3B%3D%3B%3B{2}&page=1&pagesize=10\" target=\"_blank\">{3}</a>"
 
-
 for event in results.events:
   qradar_event = incident.addRow("qr_top_destination_ips")
   qradar_event.destination_ip = event.destinationip
   qradar_event.flow_count = event.flowcount
   qradar_event.category_count = event.categorycount
-  
+  qradar_event.date_added_to_table = results.received_time
 ```
 
 ---

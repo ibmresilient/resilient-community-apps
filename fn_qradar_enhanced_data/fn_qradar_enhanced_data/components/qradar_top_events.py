@@ -110,9 +110,7 @@ class FunctionComponent(ResilientComponent):
             wf_instance_id = event.message.get("workflow_instance", {}).get("workflow_instance_id", "no instance id found")
             yield StatusMessage("Starting 'qradar_top_events' that was running in workflow '{0}'".format(wf_instance_id))
 
-            result = qradar_client.ariel_graphql_search(temp_query_string,
-                                                        search_query_string,
-                                                        timeout=timeout)
+            result = qradar_client.ariel_graphql_search(temp_query_string, search_query_string, timeout=timeout)
 
             # Enrich sourceip data by getting additional props using a graphql call to QRadar
             if qradar_fn_type == "sourceip":
@@ -133,7 +131,8 @@ class FunctionComponent(ResilientComponent):
             results = {
                 "qrhost": options.get("host"),
                 "offenseid": qradar_search_param3,
-                "events": result["events"]
+                "events": result["events"],
+                "received_time": int(time())*1000
             }
 
             yield StatusMessage("Finished 'qradar_top_events' that was running in workflow '{0}'".format(wf_instance_id))

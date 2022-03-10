@@ -40,7 +40,7 @@ for event in results.events:
   qradar_event.event_time = int(event.event_time)
   qradar_event.magnitude = event.magnitude
   qradar_event.username = event.username
-
+  qradar_event.date_added_to_table = results.received_time
 ```
 
 ---
