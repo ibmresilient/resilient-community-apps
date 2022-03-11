@@ -1714,6 +1714,7 @@ reaqta_trigger_events
 | ReaQta: Create Attachment from Process List | reaqta_process_list | `reaqta_attach_file_from_process_list` |
 | ReaQta: Create Attachment from Triggered Events | reaqta_trigger_events | `reaqta_create_artifact_from_triggered_events` |
 | ReaQta: Create Policy on Triggered Event | reaqta_trigger_events | `reaqta_create_policy_on_triggered_events` |
+| ReaQta: Create Policy on Artifact | artifact | `reaqta_create_policy_on_artifact` |
 | ReaQta: Close Alert | incident | `reaqta_close_alert` |
 | ReaQta: Create Note | note | `reaqta_create_note` |
 | ReaQta: Get Alert Information | incident | `reaqta_get_alert_information` |

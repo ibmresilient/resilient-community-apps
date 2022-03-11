@@ -22,8 +22,8 @@ def codegen_reload_data():
         "package": u"fn_reaqta",
         "message_destinations": [u"fn_reaqta"],
         "functions": [u"reaqta_attach_file", u"reaqta_close_alert", u"reaqta_create_artifact", u"reaqta_create_note", u"reaqta_create_policy", u"reaqta_get_alert_information", u"reaqta_get_processes", u"reaqta_isolate_machine", u"reaqta_kill_process"],
-        "workflows": [u"reaqta_attach_file_from_process_list", u"reaqta_attach_file_from_triggered_events", u"reaqta_close_alert", u"reaqta_create_artifact_from_process_path", u"reaqta_create_artifact_from_trigger_event", u"reaqta_create_note", u"reaqta_create_policy_on_triggered_event", u"reaqta_get_alert_information", u"reaqta_get_processes", u"reaqta_isolate_endpoint", u"reaqta_kill_process"],
-        "actions": [u"ReaQta: Close Alert", u"ReaQta: Create Artifact from Process Path", u"ReaQta: Create Artifact from Trigger Event", u"ReaQta: Create Attachment from Process List", u"ReaQta: Create Attachment from Triggered Event", u"ReaQta: Create Note", u"ReaQta: Create Policy on Triggered Event", u"ReaQta: Get Alert Information", u"ReaQta: Get Processes", u"ReaQta: Isolate Endpoint", u"ReaQta: Kill Process"],
+        "workflows": [u"reaqta_attach_file_from_process_list", u"reaqta_attach_file_from_triggered_events", u"reaqta_close_alert", u"reaqta_create_artifact_from_process_path", u"reaqta_create_artifact_from_trigger_event", u"reaqta_create_note", u"reaqta_create_policy_from_artifact", u"reaqta_create_policy_on_triggered_event", u"reaqta_get_alert_information", u"reaqta_get_processes", u"reaqta_isolate_endpoint", u"reaqta_kill_process"],
+        "actions": [u"ReaQta: Close Alert", u"ReaQta: Create Artifact from Process Path", u"ReaQta: Create Artifact from Trigger Event", u"ReaQta: Create Attachment from Process List", u"ReaQta: Create Attachment from Triggered Event", u"ReaQta: Create Note", u"ReaQta: Create Policy from Artifact", u"ReaQta: Create Policy on Triggered Event", u"ReaQta: Get Alert Information", u"ReaQta: Get Processes", u"ReaQta: Isolate Endpoint", u"ReaQta: Kill Process"],
         "incident_fields": [u"reaqta_alert_link", u"reaqta_endpoint_id", u"reaqta_groups", u"reaqta_id", u"reaqta_machine_info", u"reaqta_tags", u"reaqta_trigger_condition"],
         "incident_artifact_types": [],
         "incident_types": [],
@@ -60,6 +60,7 @@ def customization_data(client=None):
         - reaqta_create_artifact_from_process_path
         - reaqta_create_artifact_from_trigger_event
         - reaqta_create_note
+        - reaqta_create_policy_from_artifact
         - reaqta_create_policy_on_triggered_event
         - reaqta_get_alert_information
         - reaqta_get_processes
@@ -72,6 +73,7 @@ def customization_data(client=None):
         - ReaQta: Create Attachment from Process List
         - ReaQta: Create Attachment from Triggered Event
         - ReaQta: Create Note
+        - ReaQta: Create Policy from Artifact
         - ReaQta: Create Policy on Triggered Event
         - ReaQta: Get Alert Information
         - ReaQta: Get Processes
