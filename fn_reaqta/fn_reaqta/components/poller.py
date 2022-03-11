@@ -24,7 +24,6 @@ LOG = logging.getLogger(__name__)
 
 # Default Templates
 CREATE_INCIDENT_TEMPLATE = os.path.join(get_template_dir(), "soar_create_incident.jinja")
-UPDATE_INCIDENT_TEMPLATE = os.path.join(get_template_dir(), "soar_update_incident.jinja")
 CLOSE_INCIDENT_TEMPLATE = os.path.join(get_template_dir(), "soar_close_incident.jinja")
 TRIGGER_EVENTS_TEMPLATE = os.path.join(get_template_dir(), "soar_triggerevents_datatable.jinja")
 
