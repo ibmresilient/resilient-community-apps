@@ -14,7 +14,8 @@
     "10": "Privilege Escalated",
     "11": "External Trigger",
     "12": "Detection Strategy",
-    "13": "Antimalware Detection"
+    "13": "Antimalware Detection",
+    "DEFAULT": "Unknown"
   }'''
   %}
   "name": "ReaQta Alert - {{ triggerCondition | string | soar_substitute(triggercondition_lookup) }}, Endpoint: {{ endpoint.name }}",
@@ -33,7 +34,8 @@
     "reaqta_tags": "{{ tags | join(', ') }}",
     "reaqta_endpoint_id": "{{ endpoint.id }}",
     "reaqta_groups": "{{ endpoint.groups | map(attribute='name') | join(', ') }}",
-    "reaqta_machine_info": "Machine Name: {{ endpoint.name }}\nOS: {{ endpoint.os }}\nDomain: {{ endpoint.domain }}\nCPU: {{ endpoint.cpuDescr }}"
+    "reaqta_machine_info": "Machine Name: {{ endpoint.name }}\nOS: {{ endpoint.os }}\nDomain: {{ endpoint.domain }}\nCPU: {{ endpoint.cpuDescr }}",
+    "reaqta_trigger_condition": "{{ triggerCondition | string | soar_substitute(triggercondition_lookup)}}"
   },
   "comments": [
     {% if notes %}

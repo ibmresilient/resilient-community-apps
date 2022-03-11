@@ -185,7 +185,7 @@ class PollerComponent(ResilientComponent):
             entity_list (list): list of endpoint entities to check again SOAR cases
         """
         try:
-            cases_insert = cases_closed = cases_updated = 0
+            cases_insert = cases_closed = 0
             for entity in entity_list:
                 entity_id = get_entity_id(entity)
 
@@ -229,29 +229,11 @@ class PollerComponent(ResilientComponent):
                             cases_closed += 1
                             LOG.info("Closed SOAR case %s from %s %s", soar_case_id, ENTITY_LABEL, entity_id)
                     else:
-                        # perform an update operation on the existing SOAR case
-                        #soar_update_payload = make_payload_from_template(
-                        #                                self.soar_update_case_template,
-                        #                                UPDATE_INCIDENT_TEMPLATE,
-                        #                                soar_case
-                        #                            )
-                        # Update description, tags, priority, assignee, stage, important
-                        #_update_soar_case = self.soar_common.update_soar_case(
-                        #                                soar_case,
-                        #                                soar_update_payload
-                        #                            )
+                        # reaQta doesn't have a capability to collect updated fields. So update logic is unused.
+                        pass
 
-                        cases_updated += 1
-                        LOG.info("Updated SOAR case %s from %s %s", soar_case_id, ENTITY_LABEL, entity_id)
-
-                        # SYNC Comments
-                        #new_comments = self.res_common.filter_soar_comments(soar_case_id, case.get('insights', []))
-                        #LOG.info(new_comments)
-                        #for comment in new_comments:
-                        #    self.res_common.create_case_comment(soar_case_id, comment['title'], comment['content'])
-
-            LOG.info("IBM SOAR cases created: %s, cases closed: %s, cases updated: %s",
-                     cases_insert, cases_closed, cases_updated)
+            LOG.info("IBM SOAR cases created: %s, cases closed: %s",
+                     cases_insert, cases_closed)
         except Exception as err:
             LOG.error("%s poller run failed: %s", PACKAGE_NAME, str(err))
 
