@@ -4,10 +4,14 @@
 import datetime
 from io import BytesIO
 import logging
+import json
 import pytest
+import os
 from fn_reaqta.lib.app_common import AppCommon
 from resilient_lib import RequestsCommon, soar_datetimeformat
 from resilient_circuits.helpers import get_configs
+from jsonschema import validate
+from jsonschema.exceptions import ValidationError
 
 PACKAGE_NAME = "fn_reaqta"
 
@@ -95,11 +99,6 @@ class TestReaqtaAttachFile:
 
         assert isinstance(process_bytes, BytesIO)
 
-
-import os
-import json
-from jsonschema import validate
-from jsonschema.exceptions import ValidationError
 
 def get_data_directory():
     return os.path.join(os.path.dirname(__file__), "data")

@@ -3,7 +3,7 @@
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 
 """AppFunction implementation"""
-from fn_reaqta.lib.app_common import AppCommon, PACKAGE_NAME
+from fn_reaqta.lib.app_common import AppCommon, PACKAGE_NAME, POLICY_DETAILS
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import validate_fields
 
@@ -53,7 +53,7 @@ class FunctionComponent(AppFunctionComponent):
 
         if result:
             # create the url for the policy created
-            result['policy_url'] = app_common.make_linkback_url(result.get('id'), linkback_url="policies/details/{}")
+            result['policy_url'] = app_common.make_linkback_url(result.get('id'), linkback_url=POLICY_DETAILS)
 
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
 

@@ -20,6 +20,8 @@ ENDPOINT_URI = "endpoint/{}/"
 ENDPOINT_FILE_URI = "endpoint-file/{}/"
 ALERT_URI = "alert/{}/"
 POLICY_URI = "policy/"
+POLICIES_URI = "policies"
+POLICY_DETAILS = "policies/details/{}"
 ENDPOINT_GROUP_URI = "endpoint-groups"
 
 LINKBACK_URL = "alerts/{}"   # url to generate back to the entity (case, alert, etc.)
@@ -208,6 +210,18 @@ class AppCommon():
         Returns:
             (dict, str): API call results and an err_msg, if an error occured
         """
+
+        # determine if the policy is already in place
+        response, err_msg = self._get_policy_by_sha256(fn_inputs.get('reaqta_sha256'))
+        if err_msg:
+            return None, err_msg
+
+        policy_info = response.json()
+        if policy_info.get('result'):
+            return None, 'A policy already exists for this file hash: {0}. <a href="{1}" target="blank">{1}</a>'.format(
+                fn_inputs.get('reaqta_sha256'),
+                self.make_linkback_url(policy_info['result'][0]['id'], POLICY_DETAILS))
+
         params = {
             "sha256": fn_inputs.get('reaqta_sha256'),
             "title": fn_inputs.get('reaqta_policy_title', ''),
@@ -234,6 +248,23 @@ class AppCommon():
         LOG.debug("create_policy: %s", params)
         url = urljoin(POLICY_URI, "trigger-on-process-hash")
         return self.api_call("POST", url, params)
+
+    def _get_policy_by_sha256(self, sha256):
+        """find a policy based on it's sha256 value
+
+        Args:
+            sha256 (str): file sh256 value to check if a policy already exists
+
+        Returns:
+            dict/None, str: return the policy, if found and an error msg
+        """
+        params = {
+            "hash": [sha256],
+            "alg": [1]
+        }
+
+        LOG.debug("_get_policy_by_sha256: %s", params)
+        return self.api_call("GET", POLICIES_URI, params)
 
     def _get_uri(self, cmd):
         """build API url
@@ -292,10 +323,10 @@ class AppCommon():
                                    callback=callback)
 
         return self.rc.execute(method,
-                                self._get_uri(url),
-                                headers=self.header,
-                                verify=self.verify,
-                                callback=callback)
+                               self._get_uri(url),
+                               headers=self.header,
+                               verify=self.verify,
+                               callback=callback)
 
     def get_group_ids(self, group_name_list):
         group_id_list = []

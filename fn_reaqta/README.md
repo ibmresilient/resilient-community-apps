@@ -297,6 +297,8 @@ else:
 ## Function - ReaQta: Create Policy
 Create a policy based on a file hash
 
+Note: An error will occur if a policy with this file has already exists
+
 <details><summary>Inputs:</summary>
 <p>
 
