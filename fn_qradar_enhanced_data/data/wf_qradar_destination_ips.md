@@ -21,8 +21,8 @@
 inputs.qradar_search_param3 = incident.properties.qradar_id
 inputs.qradar_query_type = "destinationip"
 inputs.qradar_label = incident.properties.qradar_destination
-inputs.qradar_incident_id = incident.id
-inputs.qradar_table_name = "qr_top_destination_ips"
+inputs.soar_incident_id = incident.id
+inputs.soar_table_name = "qr_top_destination_ips"
 ```
 
 ### Post-Processing Script
@@ -34,7 +34,7 @@ for event in results.events:
   qradar_event.destination_ip = link.format(results.offenseid,"destinationip",event.destinationip,event.destinationip)
   qradar_event.event_count = link.format(results.offenseid,"destinationip",event.destinationip,event.eventcount)
   qradar_event.category_count = link.format(results.offenseid,"destinationip",event.destinationip,event.categorycount)
-  qradar_event.date_added_to_table = results.received_time
+  qradar_event.reported_time = results.current_time
 ```
 
 ---
@@ -55,8 +55,8 @@ for event in results.events:
 inputs.qradar_search_param3 = incident.properties.qradar_id
 inputs.qradar_query_type = "destinationip"
 inputs.qradar_label = incident.properties.qradar_destination
-inputs.qradar_incident_id = incident.id
-inputs.qradar_table_name = "qr_top_destination_ips"
+inputs.soar_incident_id = incident.id
+inputs.soar_table_name = "qr_top_destination_ips"
 ```
 
 ### Post-Processing Script
@@ -68,7 +68,7 @@ for event in results.events:
   qradar_event.destination_ip = event.destinationip
   qradar_event.flow_count = event.flowcount
   qradar_event.category_count = event.categorycount
-  qradar_event.date_added_to_table = results.received_time
+  qradar_event.reported_time = results.current_time
 ```
 
 ---

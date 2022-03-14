@@ -5,15 +5,15 @@
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
-from logging import getLogger
-from resilient_lib import validate_fields
 from time import time
-from fn_qradar_enhanced_data.util.qradar_utils import QRadarServers, AuthInfo
-from fn_qradar_enhanced_data.util.qradar_constants import GLOBAL_SETTINGS
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_qradar_enhanced_data.util.function_utils import clear_table
-import fn_qradar_enhanced_data.util.qradar_graphql_queries as qradar_graphql_queries
+from logging import getLogger
 from urllib.parse import quote
+from resilient_lib import validate_fields
+from fn_qradar_enhanced_data.util.function_utils import clear_table
+from fn_qradar_enhanced_data.util.qradar_constants import GLOBAL_SETTINGS
+from fn_qradar_enhanced_data.util.qradar_utils import QRadarServers, AuthInfo
+import fn_qradar_enhanced_data.util.qradar_graphql_queries as qradar_graphql_queries
+from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 
 #For a given Offense ID and QRadar Destination, get the offense summary.
 
@@ -42,8 +42,8 @@ class FunctionComponent(ResilientComponent):
             qradar_offenseid = kwargs.get("qradar_offense_id")  # QRadar Offense ID
             qradar_fn_type = kwargs.get("qradar_query_type")  # Function type based on the datatable/fields to populate
             qradar_label = kwargs.get("qradar_label") # QRadar server to connect to
-            qradar_table_name = kwargs.get("qradar_table_name", None) # Name of data table
-            qradar_incident_id = kwargs.get("qradar_incident_id") # ID of incident
+            soar_table_name = kwargs.get("soar_table_name", None) # Name of data table
+            soar_incident_id = kwargs.get("soar_incident_id") # ID of incident
 
             log.info("qradar_offenseid: %s", qradar_offenseid)
             log.info("qradar_label: %s", qradar_label)
@@ -55,14 +55,14 @@ class FunctionComponent(ResilientComponent):
             # Get qradar_client and options
             qradar_client, options = QRadarServers.get_qradar_client(self.opts, qradar_label)
 
-            if qradar_table_name:
+            if soar_table_name:
                 if self.global_settings:
                     # If clear_datatables in app.config equals True then clear given data table
                     # If clear_datatables does not exist then it defaults to True
                     if self.global_settings.get("clear_datatables", True) == True:
-                        clear_table(self.rest_client(), qradar_table_name, qradar_incident_id)
+                        clear_table(self.rest_client(), soar_table_name, soar_incident_id)
                 else: # If global_settings does not exist then clear given data table
-                    clear_table(self.rest_client(), qradar_table_name, qradar_incident_id)
+                    clear_table(self.rest_client(), soar_table_name, soar_incident_id)
 
             results = {
                 "qrhost": options.get("host"),

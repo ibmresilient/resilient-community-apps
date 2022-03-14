@@ -48,8 +48,8 @@ class FunctionComponent(ResilientComponent):
             qradar_search_param5 = kwargs.get("qradar_search_param5")  # text
             qradar_search_param6 = kwargs.get("qradar_search_param6")  # text
             qradar_label = kwargs.get("qradar_label") # QRadar server to connect to
-            qradar_table_name = kwargs.get("qradar_table_name", None) # Name of data table
-            qradar_incident_id = kwargs.get("qradar_incident_id") # ID of incident
+            soar_table_name = kwargs.get("soar_table_name", None) # Name of data table
+            soar_incident_id = kwargs.get("soar_incident_id") # ID of incident
 
             log.info("qradar_query: %s", qradar_query)
             log.info("qradar_search_param1: %s", qradar_search_param1)
@@ -63,14 +63,14 @@ class FunctionComponent(ResilientComponent):
             # Get qradar_client and options
             qradar_client, options = QRadarServers.get_qradar_client(self.opts, qradar_label)
 
-            if qradar_table_name:
+            if soar_table_name:
                 if self.global_settings:
                     # If clear_datatables in app.config equals True then clear given data table
                     # If clear_datatables does not exist then it defaults to True
                     if self.global_settings.get("clear_datatables", True) == True:
-                        clear_table(self.rest_client(), qradar_table_name, qradar_incident_id)
+                        clear_table(self.rest_client(), soar_table_name, soar_incident_id)
                 else: # If global_settings does not exist then clear given data table
-                    clear_table(self.rest_client(), qradar_table_name, qradar_incident_id)
+                    clear_table(self.rest_client(), soar_table_name, soar_incident_id)
 
             if self.global_settings:
                 timeout = float(self.global_settings.get("search_timeout",600))  # Default timeout to 10 minutes

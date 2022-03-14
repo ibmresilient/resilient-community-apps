@@ -21,8 +21,8 @@
 inputs.qradar_search_param3 = incident.properties.qradar_id
 inputs.qradar_query_type = "topevents"
 inputs.qradar_label = incident.properties.qradar_destination
-inputs.qradar_incident_id = incident.id
-inputs.qradar_table_name = "qr_offense_top_events"
+inputs.soar_incident_id = incident.id
+inputs.soar_table_name = "qr_offense_top_events"
 ```
 
 ### Post-Processing Script
@@ -40,7 +40,7 @@ for event in results.events:
   qradar_event.event_time = int(event.event_time)
   qradar_event.magnitude = event.magnitude
   qradar_event.username = event.username
-  qradar_event.date_added_to_table = results.received_time
+  qradar_event.reported_time = results.current_time
 ```
 
 ---

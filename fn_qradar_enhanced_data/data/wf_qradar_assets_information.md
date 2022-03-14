@@ -21,8 +21,8 @@
 inputs.qradar_query_type = "offenseassets"
 inputs.qradar_offense_id = incident.properties.qradar_id
 inputs.qradar_label = incident.properties.qradar_destination
-inputs.qradar_table_name = "qr_assets"
-inputs.qradar_incident_id = incident.id
+inputs.soar_table_name = "qr_assets"
+inputs.soar_incident_id = incident.id
 ```
 
 ### Post-Processing Script
@@ -37,7 +37,7 @@ for event in results.assets:
   qradar_event.vulnerabilities = str(event.vulnerabilityCount)
   qradar_event.last_user = event.users[0].username if len(event.users)>0 and event.users[0].username is not None else ""
   qradar_event.last_user_seen = int(event.users[0].lastSeenProfiler) if len(event.users)>0 and event.users[0].lastSeenProfiler is not None else ""
-  qradar_event.date_added_to_table = results.received_time
+  qradar_event.reported_time = results.current_time
 ```
 
 ---

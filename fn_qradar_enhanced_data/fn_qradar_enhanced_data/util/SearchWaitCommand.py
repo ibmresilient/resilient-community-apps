@@ -69,7 +69,7 @@ class SearchWaitCommand(object):
         """
         return {}
 
-    def perform_search(self, query,return_result=True):
+    def perform_search(self, query, return_result=True):
         """
         This is the skeleton for search and wait command
         :param query: query string to perform search
