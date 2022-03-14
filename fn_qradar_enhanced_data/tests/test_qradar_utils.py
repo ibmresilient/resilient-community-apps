@@ -9,6 +9,7 @@ from base64 import b64encode
 from mock import patch
 from six import string_types
 import pytest
+import fn_qradar_enhanced_data.util.qradar_graphql_queries as qradar_graphql_queries
 
 # Util function to generate simulated requests response
 def _generateResponse(content, status):
@@ -27,7 +28,7 @@ host = "qradar.instance.com"
 username = "admin"
 password = "my_password_fake"
 token = "FakeSecreteToken"
-cafile = True
+cafile = False
 search_id = "FakeSearch_id"
 
 @pytest.mark.parametrize("val", [ "test", u"test", "ç", u"ç" ])
@@ -184,7 +185,7 @@ def test_get_offense_summary_data(mocked_make_call, mocked_qr_call):
 
     mocked_make_call.return_value = _generateResponse(offense_summary, 200)
 
-    ret = qradar_client.get_offense_summary_data(1)
+    ret = qradar_client.graphql_query({"id": 1}, qradar_graphql_queries.GRAPHQL_OFFENSEQUERY)
 
     assert ret["content"]["id"] == offense_summary["data"]["getOffense"]["id"]
     assert ret["content"]["offenseType"]["name"] == offense_summary["data"]["getOffense"]["offenseType"]["name"]
@@ -216,7 +217,7 @@ def test_get_rules_data(mocked_make_call, mocked_qr_call):
 
     mocked_make_call.return_value = _generateResponse(rules_data, 200)
 
-    ret = qradar_client.get_rules_data(1)
+    ret = qradar_client.graphql_query({"id": 1}, qradar_graphql_queries.GRAPHQL_RULESQUERY)
 
     assert ret["content"]["rules"][0]["id"] == rules_data["data"]["getOffense"]["rules"][0]["id"]
     assert ret["content"]["rules"][0]["name"] == rules_data["data"]["getOffense"]["rules"][0]["name"]
@@ -253,8 +254,7 @@ def test_get_sourceip_data(mocked_make_call, mocked_qr_call):
         "sourceip": "127.0.0.1",
         "domainid": 0
     }
-
-    ret = qradar_client.get_sourceip_data(test_source)
+    ret = qradar_client.graphql_query({"domainId":test_source["domainid"],"ipAddress":test_source["sourceip"]}, qradar_graphql_queries.GRAPHQL_SOURCEIP)
 
     assert ret["content"]["id"] == sourceip_data["data"]["getAsset"]["id"]
     assert ret["content"]["interfaces"][0]["macAddress"] == sourceip_data["data"]["getAsset"]["interfaces"][0]["macAddress"]
@@ -287,7 +287,7 @@ def test_get_offense_source(mocked_make_call, mocked_qr_call):
 
     mocked_make_call.return_value = _generateResponse(offense_source_data, 200)
 
-    ret = qradar_client.get_offense_source(1)
+    ret = qradar_client.graphql_query({"id":1}, qradar_graphql_queries.GRAPHQL_OFFENSESOURCE, "sourceAddresses")
 
     assert ret["content"][0]["id"] == offense_source_data["data"]["getOffense"]["sourceAddresses"][0]["id"]
     assert ret["content"][0]["sourceIp"] == offense_source_data["data"]["getOffense"]["sourceAddresses"][0]["sourceIp"]

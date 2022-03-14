@@ -32,7 +32,7 @@ GRAPHQL_OFFENSEQUERY = '''query offenseQuery($id: ID!) {
                                 __typename
                             }
                         }
-                       '''
+                        '''
 
 # Contributing rules query to populate Rules table.
 GRAPHQL_RULESQUERY = '''query ruleQuery($id: ID!) {

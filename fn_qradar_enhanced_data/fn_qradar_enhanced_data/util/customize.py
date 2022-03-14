@@ -24,7 +24,7 @@ def codegen_reload_data():
         "functions": [u"qradar_offense_summary", u"qradar_top_events"],
         "workflows": [u"example_of_searching_qradar_flows_using_offense_id", u"example_of_searching_qradar_top_events_using_offense_id", u"qradar_assets_information", u"qradar_categories", u"qradar_destination_ips", u"qradar_offense_summary", u"qradar_source_ips", u"qradar_triggered_rules"],
         "actions": [u"Create Artifact from Assets info", u"Create artifact from Destination IP info", u"Create Artifact from Events info", u"Create artifact from Source IP info", u"Create Artifacts from Flows Info ", u"QRadar Enhanced Data"],
-        "incident_fields": [u"qr_assigned", u"qr_credibility", u"qr_destination_ip_count", u"qr_event_count", u"qr_flow_count", u"qr_magnitude", u"qr_offense_index_type", u"qr_offense_index_value", u"qr_offense_source", u"qr_relevance", u"qr_severity", u"qr_source_ip_count", u"qradar_destination", u"qradar_id"],
+        "incident_fields": [u"qr_assigned", u"qr_credibility", u"qr_destination_ip_count", u"qr_event_count", u"qr_flow_count", u"qr_magnitude", u"qr_offense_index_type", u"qr_offense_index_value", u"qr_last_persisted_time", u"qr_offense_source", u"qr_relevance", u"qr_severity", u"qr_source_ip_count", u"qradar_destination", u"qradar_id"],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [u"qr_assets", u"qr_categories", u"qr_flows", u"qr_offense_top_events", u"qr_top_destination_ips", u"qr_top_source_ips", u"qr_triggered_rules"],
@@ -71,6 +71,7 @@ def customization_data(client=None):
         - qr_magnitude
         - qr_offense_index_type
         - qr_offense_index_value
+        - qr_last_persisted_time
         - qr_offense_source
         - qr_relevance
         - qr_severity

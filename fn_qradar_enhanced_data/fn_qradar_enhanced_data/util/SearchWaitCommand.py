@@ -7,8 +7,8 @@
 # This file can be reused for composite commands.
 #
 from time import time, sleep
-import logging
-LOG = logging.getLogger(__name__)
+from logging import getLogger
+LOG = getLogger(__name__)
 
 class SearchTimeout(Exception):
     """ Query failed to complete in time specified """

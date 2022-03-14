@@ -3,6 +3,7 @@ include Dockerfile
 include apikey_permissions.txt
 include entrypoint.sh
 recursive-include fn_qradar_enhanced_data/util *
+recursive-include fn_qradar_enhanced_data/lib *
 include fn_qradar_enhanced_data/LICENSE
 include doc/*.md
 include doc/screenshots/*
