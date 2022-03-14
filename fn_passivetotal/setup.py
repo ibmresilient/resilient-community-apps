@@ -22,14 +22,14 @@ def snake_to_camel(word):
 
 setup(
     name="fn_passivetotal",
-    display_name="<<display name of your app here>>",
+    display_name="PassiveTotal Function for IBM SOAR",
     version="1.0.0",
-    license="<<insert here>>",
-    author="<<your name here>>",
-    author_email="you@example.com",
-    url="<<your company url>>",
-    description="Resilient Circuits Components for 'fn_passivetotal'",
-    long_description="""Resilient Circuits Components for 'fn_passivetotal'""",
+    license="MIT",
+    author="IBM SOAR",
+    author_email="",
+    url="https://github.com/ibmresilient/fn_passivetotal",
+    description="IBM Security SOAR app for 'fn_googlesafebrowsing'",
+    long_description="""This app uses RiskIQ PassiveTotal to check artifacts with the type DNS Name, URL, or IP address and adds a hit if the site is deemed compromised by your predefined definition.""",
     install_requires=[
         "resilient-circuits>=43.0.0"
     ],

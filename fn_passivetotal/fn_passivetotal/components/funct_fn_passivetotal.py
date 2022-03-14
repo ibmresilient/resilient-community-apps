@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2022. All Rights Reserved.
+# pragma pylint: disable=unused-argument, no-self-use
 
 """AppFunction implementation"""
 
@@ -18,7 +20,7 @@ class FunctionComponent(AppFunctionComponent):
         super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
 
     @app_function(FN_NAME)
-    def _query_passivetotal_api(self, fn_inputs):
+    def _lookup(self, fn_inputs):
         """
         Validate user account if API call quota has exceeded, verify if tags are match, and query RiskIQ PassiveTotal API
          for the given 'net.name' (domain name artifact), 'net.uri' (URL) or 'net.ip' (IP address).
@@ -192,4 +194,3 @@ class FunctionComponent(AppFunctionComponent):
 
         response = self.rc.execute("get", url, auth=auth, json=data)
         return response
-

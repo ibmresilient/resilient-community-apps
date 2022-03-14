@@ -2,14 +2,32 @@
 """Tests using pytest_resilient_circuits"""
 
 import pytest
-from resilient_circuits.util import get_config_data, get_function_definition
+import mock
+from .mock_artifact import MockedResponse
+from resilient_circuits.util import get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 
 PACKAGE_NAME = "fn_passivetotal"
 FUNCTION_NAME = "fn_passivetotal"
 
-# Read the default configuration-data section from the package
-config_data = get_config_data(PACKAGE_NAME)
+# Fill in and uncomment key to run livetests
+config_data = """[fn_passivetotal]
+# API credentials
+passivetotal_api_key=dummykeyforfirsttest
+passivetotal_username=dummyuserforfirsttest
+# passivetotal_api_key=$PASSIVETOTAL_KEY
+# passivetotal_username=$YOUR_USERNAME
+
+# API URLS
+passivetotal_base_url=https://api.passivetotal.org
+passivetotal_account_api_url=/v2/account
+passivetotal_actions_tags_api_url=/v2/actions/tags
+passivetotal_passive_dns_api_url=/v2/dns/passive
+passivetotal_actions_class_api_url=/v2/actions/classification
+passivetotal_enrich_subdom_api_url=/v2/enrichment/subdomains
+passivetotal_community_url=https://community.riskiq.com/search/
+passivetotal_tags=compromised,ransomware
+"""
 
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
@@ -48,25 +66,37 @@ class TestFnPassivetotal:
         assert func is not None
 
     mock_inputs_1 = {
-        "passivetotal_artifact_value": "sample text",
-        "passivetotal_artifact_type": "sample text"
+        "passivetotal_artifact_type": "IP Address",
+        "passivetotal_artifact_value": "45.146.165.37"
     }
 
-    expected_results_1 = {"value": "xyz"}
+    expected_results_1 = {"success": True}
 
-    mock_inputs_2 = {
-        "passivetotal_artifact_value": "sample text",
-        "passivetotal_artifact_type": "sample text"
-    }
-
-    expected_results_2 = {"value": "xyz"}
+    expected_results_2 = [
+                {'pdns_hit_number': 0},
+                {'pdns_first_seen': None},
+                {'pdns_last_seen': None},
+                {'subdomain_hits_number': None},
+                {'first_ten_subdomains': None},
+                {'tags_hits_str': 'ransomeware, compromised'},
+                {'classification_hit': None},
+                {'report_url': 'https://community.riskiq.com/search/45.146.165.37'}
+                ]
 
     @pytest.mark.parametrize("mock_inputs, expected_results", [
         (mock_inputs_1, expected_results_1),
-        (mock_inputs_2, expected_results_2)
     ])
     def test_success(self, circuits_app, mock_inputs, expected_results):
         """ Test calling with sample values for the parameters """
+        with mock.patch("resilient_circuits.app_function_component.RequestsCommon.execute") as mock_execute:
+            mock_execute.return_value = MockedResponse()
+            results = call_fn_passivetotal_function(circuits_app, mock_inputs)
+            assert(expected_results.get('success') == results.get('success'))
 
+    @pytest.mark.parametrize("mock_inputs, expected_results", [ 
+        (mock_inputs_1, expected_results_2)
+    ])
+    @pytest.mark.livetest
+    def test_live_apicall(self, circuits_app, mock_inputs, expected_results):
         results = call_fn_passivetotal_function(circuits_app, mock_inputs)
-        assert(expected_results == results)
+        assert results.get('content') == expected_results

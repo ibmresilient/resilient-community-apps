@@ -1,3 +1,70 @@
 {
-    
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "pdns_hit_number": {
+            "type": "integer"
+          },
+          "pdns_first_seen": {},
+          "pdns_last_seen": {},
+          "subdomain_hits_number": {},
+          "first_ten_subdomains": {},
+          "tags_hits_str": {
+            "type": "string"
+          },
+          "classification_hit": {},
+          "report_url": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "passivetotal_artifact_type": {
+          "type": "string"
+        },
+        "passivetotal_artifact_value": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
 }

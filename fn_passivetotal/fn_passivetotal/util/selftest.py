@@ -1,24 +1,9 @@
 # -*- coding: utf-8 -*-
-
-"""
-Function implementation test.
-Usage: 
-    resilient-circuits selftest -l fn-passivetotal
-    resilient-circuits selftest --print-env -l fn-passivetotal
-
-Return examples:
-    return {
-        "state": "success",
-        "reason": "Successful connection to third party endpoint"
-    }
-
-    return {
-        "state": "failure",
-        "reason": "Failed to connect to third party endpoint"
-    }
-"""
+# (c) Copyright IBM Corp. 2022. All Rights Reserved.
+# pragma pylint: disable=unused-argument, no-self-use
 
 import logging
+from resilient_lib import RequestsCommon
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
@@ -26,13 +11,22 @@ log.addHandler(logging.StreamHandler())
 
 
 def selftest_function(opts):
-    """
-    Placeholder for selftest function. An example use would be to test package api connectivity.
-    Suggested return values are be unimplemented, success, or failure.
-    """
+    
     app_configs = opts.get("fn_passivetotal", {})
 
-    return {
-        "state": "unimplemented",
-        "reason": None
-    }
+    print(app_configs)
+
+    url = app_configs["passivetotal_base_url"] + app_configs["passivetotal_passive_dns_api_url"]
+    data = {'query': '8.8.8.8'}
+    auth = (app_configs["passivetotal_username"], app_configs["passivetotal_api_key"])
+
+    try: 
+        req = RequestsCommon(opts, app_configs)
+        req.execute("get", url, auth=auth, json=data)
+        return {"state": "success"}
+
+    except Exception as error:
+        return {
+            "state": "failure",
+            "reason": error
+        }

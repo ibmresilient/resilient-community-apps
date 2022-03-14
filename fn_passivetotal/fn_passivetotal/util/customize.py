@@ -22,7 +22,7 @@ def codegen_reload_data():
         "package": u"fn_passivetotal",
         "message_destinations": [u"passivetotal"],
         "functions": [u"fn_passivetotal"],
-        "workflows": [u"passivetotal"],
+        "workflows": [u"passivetotal_site_lookup"],
         "actions": [u"RiskIQ PassiveTotal Query"],
         "incident_fields": [],
         "incident_artifact_types": [],
@@ -46,7 +46,7 @@ def customization_data(client=None):
     - Functions:
         - fn_passivetotal
     - Workflows:
-        - passivetotal
+        - passivetotal_site_lookup
     - Rules:
         - RiskIQ PassiveTotal Query
     """
