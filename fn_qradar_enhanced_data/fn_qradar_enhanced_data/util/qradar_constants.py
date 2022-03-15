@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# (c) Copyright IBM Corp. 2020. All Rights Reserved.
+# (c) Copyright IBM Corp. 2022. All Rights Reserved.
 #
 #   Qradar constants
 
@@ -15,6 +15,7 @@ OFFENSES_URL = "siem/offenses"
 RULES_EXPLORER_URL = "console/plugins/{}/app_proxy/api/rules_explorer"
 GRAPHQL_URL = "console/graphql"
 GRAPHQL_BASICAUTH = "console/login"
+PACKAGE_NAME = "fn_qradar_integration"
 
 SEARCH_STATUS_COMPLETED = "COMPLETED"
 SEARCH_STATUS_EXECUTE = "EXECUTE"
