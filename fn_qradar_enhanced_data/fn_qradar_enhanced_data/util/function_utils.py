@@ -7,7 +7,7 @@
 from six import string_types
 from logging import getLogger
 from resilient_lib import validate_fields, IntegrationError
-import fn_qradar_enhanced_data.util.qradar_utils as qradar_utils
+from fn_qradar_enhanced_data.util import qradar_utils
 from fn_qradar_enhanced_data.util.qradar_constants import PACKAGE_NAME, GLOBAL_SETTINGS
 
 LOG = getLogger(__name__)
