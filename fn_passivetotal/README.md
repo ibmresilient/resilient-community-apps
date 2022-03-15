@@ -52,7 +52,7 @@
   Provide a high-level description of the function itself and its remote software or application.
   The text below is parsed from the "description" and "long_description" attributes in the setup.py file
 -->
-**IBM Security SOAR app for 'fn_googlesafebrowsing'**
+**IBM Security SOAR app for 'fn_passivetotal'**
 
  ![screenshot: main](./doc/screenshots/main.png)
 
