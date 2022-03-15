@@ -32,6 +32,7 @@
   - [Install](#install)
   - [App Configuration](#app-configuration)
   - [Custom Layouts](#custom-layouts)
+- [Poller Considerations](#poller-considerations)
 - [Function - ReaQta: Attach File](#function---reaqta-attach-file)
 - [Function - ReaQta: Close Alert](#function---reaqta-close-alert)
 - [Function - ReaQta: Create Artifact](#function---reaqta-create-artifact)
@@ -175,7 +176,7 @@ The following table provides the settings you need to configure the app. These s
 | **cafile** | Yes | `/path/to/cafile.crt or false` | *Path to your ReaQta client certificate, if needed or false for no certificate verification*  |
 | **polling_interval** | Yes | `60` | *Number of seconds between polling queries for new alerts *  |
 | **polling_lookback** | Yes | `120` | *Number of minutes to look back for new alerts the first time the app starts or restarts*  |
-| **polling_filters** | No | `"alertStatus": "benign", "severity": ["low", "high"], "tag": ["hive"]` | *Name/value pairs specifying the criteria to filter incoming alerts for escalation* |
+| **polling_filters** | No | `"alertStatus": "benign", "severity": ["low", "high"], "tag": ["hive"]` | *Name/value pairs specifying the criteria to filter incoming alerts for escalation. Additional filters exist for endpoints associated with groups and alerts with impacts greater or equal a numeric value: "groups": ['groupA', 'groupB'], "impact": 70* |
 | **soar_create_case_template** | No | `/path/to/template.jina` | *Override template used to create a SOAR case from the poller. See [Templates for SOAR Cases](#templates-for-soar-cases)* |
 | **soar_close_case_template** | No | `/path/to/template.jina` | *Override template used to close a SOAR case from the poller. See [Templates for SOAR Cases](#templates-for-soar-cases)* |
 | **https_proxy** | No | `https://xxx/` | *Proxy URL for HTTPS connections* |
@@ -194,6 +195,14 @@ The following table provides the settings you need to configure the app. These s
 
 ---
 
+## Poller Considerations
+
+The poller is just one way to escalate ReaQta alerts to SOAR cases. It's also possible to send alert information to a SIEM, such as IBM QRadar, which would then coorelate alerts into Offenses. With the QRadar Plugin for SOAR, offenses can then be ecalated to SOAR cases. As long as the ReaQta alert ID is preserved in the custom case field `reaqta_id`, then all the remaining details about the alert will synchronize to the SOAR case. In the case of the QRadar Plugin for SOAR, you would modify the escalation templates to reference this custom field with the ReaQta Alert ID.
+
+When using another source of ReaQta Alert escalation to IBM SOAR, disable the poller by changing the app.config setting to `poller_interval=0`.
+
+---
+
 ## Function - ReaQta: Attach File
 Create a SOAR case attachment associated with a running process
 
@@ -208,6 +217,7 @@ Create a SOAR case attachment associated with a running process
 | `reaqta_incident_id` | `number` | Yes | `-` | - |
 | `reaqta_program_path` | `text` | Yes | `-` | typically taken from the reaqta_trigger_events or reaqta_process_list datatables |
 
+NOTE: Attachments are subject to the file-size limit. The default is 25mb. This can be increased at the system level using the `resutil` command tool.
 </p>
 </details>
 
@@ -508,6 +518,7 @@ Create an artifact from a process file
 | `reaqta_program_path` | `text` | Yes | `c:\\path\\to\\malware.exe` | - |
 | `reaqta_artifact_type` | `text` | Yes | `Malware Sample` or `Other File` |
 
+NOTE: Attachments are subject to the file-size limit. The default is 25mb. This can be increased at the system level using the `resutil` command tool.
 </p>
 </details>
 
@@ -1506,6 +1517,8 @@ Isolate a ReaQta controlled machine based on it's endpoint ID.
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `reaqta_endpoint_id` | `text` | Yes | `-` | - |
+
+NOTE: Restoring an isolated endpoint must be done through the ReaQta console.
 
 </p>
 </details>

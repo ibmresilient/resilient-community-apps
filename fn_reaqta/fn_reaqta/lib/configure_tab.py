@@ -19,10 +19,11 @@ class ReaQtaTab(Tab):
     UUID = "ac7d7838-5bf9-ec7f-e23a-b5337e661ee1"
     CONTAINS = [
         Field("reaqta_alert_link"),
+        Field("reaqta_machine_info"),
         Field("reaqta_trigger_condition"),
         Field("reaqta_groups"),
         Field("reaqta_tags"),
-        Field("reaqta_machine_info"),
+        Field("reaqta_impact"),
         Field("reaqta_id"),
         Field("reaqta_endpoint_id"),
         Datatable("reaqta_trigger_events"),

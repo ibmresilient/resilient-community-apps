@@ -48,6 +48,7 @@ else:
   incident.properties.reaqta_alert_link = helper.createRichText(alert_url)
   incident.properties.reaqta_endpoint_id = content.get("endpointId")
   incident.properties.reaqta_trigger_condition = TRIGGERCONDITION_LOOKUP.get(content.get("triggerCondition"))
+  incident.properties.reaqta_impact = content.get("impact")
   
   endpoint = content.get("endpoint", {})
   incident.properties.reaqta_tags = ", ".join(endpoint.get("tags", []))
@@ -68,9 +69,22 @@ else:
     
     process = event.get('process', {})
     program = process.get('program', {})
-    row['process_pid'] = process.get('pid')
-    row['program_path'] = program.get('path')
-    row['sha256_hash'] = program.get('sha256')
+    if program:
+      row['process_pid'] = process.get('pid')
+      row['program_path'] = program.get('path')
+      row['sha256_hash'] = program.get('sha256')
+    
+    if event.get('category') == "etw" and event.get('data'):
+      data = event.get('data')
+      row['windows_event_account'] = "{}\\{}".format(data.get('etwTargetDomainName'), data.get('etwTargetUserName'))
+      row['windows_event_workstation'] = data.get('etwWorkstationName')
+      row['windows_event_description'] = data.get('etwEventDescription')
+      row['windows_event_ipport'] = "{}/{}".format(data.get('etwIpAddress'), data.get('etwIpPort'))
+      
+    if event.get('category') == "policies" and event.get('data'):
+      data = event.get('data')
+      row['policy_match'] = data.get('matched', [])[0]['policyTitle']
+      
     
     # create artifacts from the trigger event
     if program:

@@ -78,13 +78,44 @@ class AppCommon():
             query[query_field_name] = readable_datetime(timestamp) # utc datetime format
 
         # add any additional query parameters
+        groups_filter = []
+        impact_filter = None
         if optional_filters:
+            # groups and relevance are managed after the api call is made
+            if "groups" in optional_filters:
+                groups_filter = optional_filters.pop('groups')
+            if "impact" in optional_filters:
+                impact_filter = int(optional_filters.pop('impact'))
+
             for k,v in optional_filters.items():
                 query[k] = v
 
         LOG.debug(query)
         response, err_msg = self.api_call("GET", 'alerts', query, refresh_authentication=True)
-        return response.json()
+
+        # trim results by optional filters
+        results = response.json()
+
+        if not err_msg:
+            filtered_results = []
+            for alert in results['result']:
+                accept_filtered = False
+                # both groups_filter and impact_filter need to succeed if both are specified
+                if groups_filter:
+                    # get the endpoint groups and test if list and filters intersect
+                    endpoint_groups = [group['name'] for group in alert.get("endpoint", {}).get("groups", [])]
+                    if list(set(groups_filter) & set(endpoint_groups)):
+                        accept_filtered = True
+
+                if impact_filter:
+                    accept_filtered = bool(alert.get("impact") >= impact_filter)
+
+                if accept_filtered:
+                    filtered_results.append(alert)
+
+            results = { "result": filtered_results }
+
+        return results
 
     def get_next_page(self, next_url):
         """This endpoint pages result size. This method is used for subsequent calls
