@@ -15,7 +15,7 @@
   notes of a previous release
 -->
 
-### v2.0.0
+### v2.0.9
 * Support added for ServiceNow Security Incident Response (SIR)
 * Support added for API Key authentication from ServiceNow to IBM SOAR
 * AppHost support for proxies
