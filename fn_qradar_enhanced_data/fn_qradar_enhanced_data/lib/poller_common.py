@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
-from datetime import datetime
 import functools
+from threading import Event
+from datetime import datetime
 from logging import getLogger
 from traceback import format_exc
-from threading import Event
 from resilient import SimpleHTTPException
 
 LOG = getLogger(__name__)

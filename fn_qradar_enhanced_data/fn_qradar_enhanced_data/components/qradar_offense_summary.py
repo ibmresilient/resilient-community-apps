@@ -7,13 +7,14 @@
 
 from time import time
 from logging import getLogger
-from urllib.parse import quote
 from resilient_lib import validate_fields
-from fn_qradar_enhanced_data.util.function_utils import clear_table
+from fn_qradar_enhanced_data.util.qradar_utils import AuthInfo
 from fn_qradar_enhanced_data.util.qradar_constants import GLOBAL_SETTINGS
-from fn_qradar_enhanced_data.util.qradar_utils import QRadarServers, AuthInfo
 import fn_qradar_enhanced_data.util.qradar_graphql_queries as qradar_graphql_queries
+from fn_qradar_enhanced_data.util.function_utils import clear_table, get_qradar_client, get_server_settings
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+
+LOG = getLogger(__name__)
 
 #For a given Offense ID and QRadar Destination, get the offense summary.
 
@@ -24,18 +25,16 @@ class FunctionComponent(ResilientComponent):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         self.opts = opts
-        self.global_settings = opts.get(GLOBAL_SETTINGS, {})
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
         self.opts = opts
-        self.global_settings = opts.get(GLOBAL_SETTINGS, {})
 
     @function("qradar_offense_summary")
     def _qradar_offense_summary(self, event, *args, **kwargs):
         """Function: QRadar Offense "summary"""
-        log = getLogger(__name__)
+        
         try:
             validate_fields(["qradar_query_type","qradar_offense_id"], kwargs)
             # Get the function parameters:
@@ -45,29 +44,26 @@ class FunctionComponent(ResilientComponent):
             soar_table_name = kwargs.get("soar_table_name", None) # Name of data table
             soar_incident_id = kwargs.get("soar_incident_id") # ID of incident
 
-            log.info("qradar_offenseid: %s", qradar_offenseid)
-            log.info("qradar_label: %s", qradar_label)
+            LOG.info("qradar_offenseid: %s", qradar_offenseid)
+            LOG.info("qradar_label: %s", qradar_label)
 
             # Get the wf_instance_id of the workflow this Function was called in, if not found return a backup string
             wf_instance_id = event.message.get("workflow_instance", {}).get("workflow_instance_id", "no instance id found")
             yield StatusMessage("Starting 'qradar_offense_summary' that was running in workflow '{0}'".format(wf_instance_id))
 
-            # Get qradar_client and options
-            qradar_client, options = QRadarServers.get_qradar_client(self.opts, qradar_label)
+            global_settings = self.opts.get(GLOBAL_SETTINGS, {})
 
-            if soar_table_name:
-                if self.global_settings:
-                    # If clear_datatables in app.config equals True then clear given data table
-                    # If clear_datatables does not exist then it defaults to True
-                    if self.global_settings.get("clear_datatables", True) == True:
-                        clear_table(self.rest_client(), soar_table_name, soar_incident_id)
-                else: # If global_settings does not exist then clear given data table
-                    clear_table(self.rest_client(), soar_table_name, soar_incident_id)
+            # Get configuration for QRadar server specified
+            options = get_server_settings(self.opts, qradar_label)
+
+            qradar_client = get_qradar_client(self.opts, options)
+
+            clear_table(self.rest_client(), soar_table_name, soar_incident_id, global_settings)
 
             results = {
                 "qrhost": options.get("host"),
                 "offenseid": qradar_offenseid,
-                "received_time": int(time())*1000
+                "current_time": int(time())*1000
             }
 
             # Fetch the Offense Summary if function type is OFFENSE_SUMMARY
@@ -77,11 +73,9 @@ class FunctionComponent(ResilientComponent):
                 results["offense"] = offense_summary["content"]
 
             elif qradar_fn_type == "offensetime":
-                fields = quote("id, last_persisted_time")
-                filters = quote("id={}".format(qradar_offenseid))
                 auth_info = AuthInfo.get_authInfo()
                 # Create url to get all offenses in SOAR from the given QRadar server
-                url = auth_info.api_url + "siem/offenses?fields={}&filter={}".format(fields, filters)
+                url = auth_info.api_url + "siem/offenses?fields={}&filter={}".format("id, last_persisted_time", "id={}".format(qradar_offenseid))
                 response = auth_info.make_call("GET", url)
                 for content in response.json():
                     results["last_persisted_time"] = content["last_persisted_time"]
@@ -113,7 +107,7 @@ class FunctionComponent(ResilientComponent):
                         # Get the Operating System ID for the Asset
                         asset_prop = list(filter(lambda x:x["propertyType"]["name"] == "Primary OS ID",
                                                  offense_assets["properties"]))
-                        offense_assets["osid"] = asset_prop[0]["value"] if len(asset_prop)>0 else ""
+                        offense_assets["osid"] = asset_prop[0]["value"] if len(asset_prop) > 0 else ""
 
                         # Get the Unified Name for the Asset
                         asset_prop = list(filter(lambda x: x["propertyType"]["name"] == "Unified Name",
@@ -126,5 +120,5 @@ class FunctionComponent(ResilientComponent):
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception as e:
-            log.error(str(e))
+            LOG.error(str(e))
             yield FunctionError()

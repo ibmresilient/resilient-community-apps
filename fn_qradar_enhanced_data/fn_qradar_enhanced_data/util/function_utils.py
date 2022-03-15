@@ -7,8 +7,8 @@
 from six import string_types
 from logging import getLogger
 from resilient_lib import validate_fields, IntegrationError
+import fn_qradar_enhanced_data.util.qradar_utils as qradar_utils
 from fn_qradar_enhanced_data.util.qradar_constants import PACKAGE_NAME, GLOBAL_SETTINGS
-from fn_qradar_enhanced_data.util import qradar_utils
 
 LOG = getLogger(__name__)
 
@@ -37,6 +37,7 @@ def fix_dict_value(events):
     :param events: list of dicts
     :return:
     """
+
     for event in events:
         # event is a dict
         if isinstance(event, dict):
@@ -46,11 +47,11 @@ def fix_dict_value(events):
 
     return events
 
-def get_servers_list(opts):
+def get_server_settings(opts, qradar_label):
     """
     Used for initilizing or reloading the options variable
     :param opts: list of options
-    :return: list of qradar servers
+    :return: QRadar server settings for specified server
     """
     servers_list = {}
 
@@ -72,20 +73,59 @@ def get_servers_list(opts):
         servers_list[server_name] = opts.get(server_name, {})
         validate_fields(["host", "verify_cert"], servers_list[server_name])
 
-    return servers_list
+    # Get configuration for QRadar server specified
+    options = qradar_utils.QRadarServers.qradar_label_test(qradar_label, servers_list)
+    LOG.debug("Connection to {} using {}".format(options.get("host"),
+                                                options.get("username", None) or options.get("qradartoken", None)))
 
-def clear_table(rest_client, table_name, incident_id):
+    return options
+
+def get_qradar_client(opts, options):
+    """
+    Returns the QRadarClient
+    :param opts: all settings including SOAR settings
+    :param options: settings for specified QRadar server
+    """
+    # Get Certificates for QRadar
+    qradar_verify_cert = False if options.get("verify_cert", "false").lower() == "false" else options.get("verify_cert")
+
+    return qradar_utils.QRadarClient(host=options.get("host"),
+                                    username=options.get("username", None),
+                                    password=options.get("qradarpassword", None),
+                                    token=options.get("qradartoken", None),
+                                    cafile=qradar_verify_cert,
+                                    opts=opts, function_opts=options)
+
+def clear(rest_client, table_name, incident_id):
     """
     Clear data in given table on SOAR
     :param res_rest_client: SOAR rest client connection
     :param table_name: API access name of the table to clear
+    :param incident_id: SOAR ID for the incident
     :return: None
     """
-
     try:
         rest_client.delete("/incidents/{}/table_data/{}/row_data?handle_format=names".format(incident_id, table_name))
         LOG.info("Data in table {} in incident {} has been cleared".format(table_name, incident_id))
 
     except Exception as err_msg:
-        LOG.warning("Failed to clear table: {} error: {}".format(table_name, err_msg))
+        LOG.error("Failed to clear table: {} error: {}".format(table_name, err_msg))
         raise IntegrationError("Error while clearing table: {}".format(table_name))
+
+def clear_table(rest_client, table_name, incident_id, global_settings):
+    """
+    Calls function to clear SOAR data table based on app.config
+    :param res_rest_client: SOAR rest client connection
+    :param table_name: API access name of the table to clear
+    :param incident_id: SOAR ID for the incident
+    :param global_settings: global settings for the integration
+    :return: None
+    """
+    if table_name:
+        if global_settings:
+            # If clear_datatables in app.config equals True then clear given data table
+            # If clear_datatables does not exist then it defaults to True
+            if bool(global_settings.get("clear_datatables", True)) == True:
+                clear(rest_client, table_name, incident_id)
+        else: # If global_settings does not exist then clear given data table
+            clear(rest_client, table_name, incident_id)
