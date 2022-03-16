@@ -4,17 +4,17 @@
 #
 #   Util classes for qradar
 
-from base64 import b64encode
 from json import dumps
+from six import binary_type
+from base64 import b64encode
 from logging import getLogger
 from requests import get, post
-from six import binary_type
-import fn_qradar_enhanced_data.util.qradar_constants as qradar_constants
-import fn_qradar_enhanced_data.util.function_utils as function_utils
-import fn_qradar_enhanced_data.util.qradar_graphql_queries as qradar_graphql_queries
-from resilient_lib import RequestsCommon, IntegrationError
-from fn_qradar_enhanced_data.util.SearchWaitCommand import SearchWaitCommand, SearchFailure, SearchJobFailure
 from urllib.parse import quote as quote_func
+from resilient_lib import RequestsCommon, IntegrationError
+from fn_qradar_enhanced_data.util.function_utils import fix_dict_value
+import fn_qradar_enhanced_data.util.qradar_constants as qradar_constants
+from fn_qradar_enhanced_data.util.qradar_graphql_queries import GRAPHQL_SYSTEMDATE
+from fn_qradar_enhanced_data.util.SearchWaitCommand import SearchWaitCommand, SearchFailure, SearchJobFailure
 
 LOG = getLogger(__name__)
 
@@ -201,7 +201,7 @@ class ArielSearch(SearchWaitCommand):
         if response.status_code == 200:
             res = response.json()
             events = res["events"] if "events" in res else res["flows"] if "flows" in res else res["other"]
-            events = function_utils.fix_dict_value(events)
+            events = fix_dict_value(events)
             ret = {"events": events}
 
         return ret
@@ -322,7 +322,7 @@ class QRadarClient(object):
         headers = auth_info.headers.copy()
         headers["Cookie"] = QRadarClient.get_qr_sessionid(auth_info.api_url.replace("api/", ""))
         headers["Content-Type"] = "application/json"
-        data = {"operationName":"getSystemDate","variables":{},"query":qradar_graphql_queries.GRAPHQL_SYSTEMDATE}
+        data = {"operationName":"getSystemDate","variables":{},"query":GRAPHQL_SYSTEMDATE}
 
         try:
             response = auth_info.make_call("POST", url, data=dumps(data), headers=headers)
@@ -395,27 +395,6 @@ class QRadarClient(object):
 class QRadarServers():
     def __init__(self, opts, options):
         self.servers, self.server_name_list = self._load_servers(opts, options)
-
-    def get_qradar_client(opts, qradar_label):
-        """
-        Returns the QRadarClient and options
-        :param opts: all settings including SOAR settings
-        :param qradar_label: label given to the QRadar server to use
-        """
-        # Get configuration for QRadar server specified
-        options = QRadarServers.qradar_label_test(qradar_label, function_utils.get_servers_list(opts))
-        # Get Certificates for QRadar
-        qradar_verify_cert = False if options.get("verify_cert", "false").lower() == "false" else options.get("verify_cert")
-
-        LOG.debug("Connection to {} using {}".format(options.get("host"),
-                                                         options.get("username", None) or options.get("qradartoken", None)))
-
-        return QRadarClient(host=options.get("host"),
-                            username=options.get("username", None),
-                            password=options.get("qradarpassword", None),
-                            token=options.get("qradartoken", None),
-                            cafile=qradar_verify_cert,
-                            opts=opts, function_opts=options), options
 
     def _load_servers(self, opts, options):
         servers = {}

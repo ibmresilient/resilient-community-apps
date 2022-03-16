@@ -3,16 +3,16 @@
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 """Function implementation"""
 
-from datetime import datetime, timedelta
-from logging import getLogger
 from ast import literal_eval
 from threading import Thread
-from urllib.parse import quote
-from resilient_circuits import ResilientComponent
+from logging import getLogger
+from datetime import datetime, timedelta
 from resilient_lib import IntegrationError
+from resilient_circuits import ResilientComponent
+from fn_qradar_enhanced_data.util.qradar_utils import AuthInfo
 from fn_qradar_enhanced_data.lib.poller_common import SOARCommon, poller
 from fn_qradar_enhanced_data.util.qradar_constants import PACKAGE_NAME, GLOBAL_SETTINGS
-from fn_qradar_enhanced_data.util.qradar_utils import QRadarServers, AuthInfo
+from fn_qradar_enhanced_data.util.function_utils import get_server_settings, get_qradar_client
 
 LOG = getLogger(__name__)
 
@@ -24,7 +24,6 @@ class PollerComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(PollerComponent, self).__init__(opts)
-        self.global_settings = opts.get(GLOBAL_SETTINGS, {})
         self.opts = opts
         self.rest_client()
 
@@ -44,12 +43,13 @@ class PollerComponent(ResilientComponent):
         Returns:
             [bool]: [True if poller is configured]
         """
-        self.polling_interval = int(self.global_settings.get("polling_interval", 0))
+        global_settings = self.opts.get(GLOBAL_SETTINGS, {})
+        self.polling_interval = int(global_settings.get("polling_interval", 0))
         if not self.polling_interval:
             return False
 
         LOG.info(u"Poller initiated, polling interval %s", self.polling_interval)
-        self.last_poller_time = datetime.now() - timedelta(minutes=int(self.global_settings.get('polling_lookback', 0)))
+        self.last_poller_time = datetime.now() - timedelta(minutes=int(global_settings.get('polling_lookback', 0)))
         LOG.info("Poller lookback: %s", self.last_poller_time)
 
         return True
@@ -94,7 +94,6 @@ class PollerComponent(ResilientComponent):
         # :End: QRadar servers dictionary
 
         for server in case_server_dict:
-            qradar_client, options = QRadarServers.get_qradar_client(self.opts, server)
 
             # Create filter string
             filters = ""
@@ -103,15 +102,15 @@ class PollerComponent(ResilientComponent):
                 filters = "{}id={}".format(filters, str(id))
                 if id_list.index(id) != len(id_list)-1:
                     filters = "{} or ".format(filters)
-            # Convert string to url encoding
-            filters = quote(filters)
-        
-            # Convert requested fields to url encoding
-            fields = quote("id, last_persisted_time")
+
+            # Get configuration for QRadar server specified
+            options = get_server_settings(self.opts, server)
+            # Create connection to QRadar server
+            qradar_client = get_qradar_client(self.opts, options)
 
             auth_info = AuthInfo.get_authInfo()
             # Create url to get all offenses in SOAR from the given QRadar server
-            url = auth_info.api_url + "siem/offenses?fields={}&filter={}".format(fields, filters)
+            url = auth_info.api_url + "siem/offenses?fields={}&filter={}".format("id, last_persisted_time", filters)
             response = auth_info.make_call("GET", url)
             offenses_update_list = response.json()
 
@@ -125,7 +124,7 @@ class PollerComponent(ResilientComponent):
                     case_dict = case_server_dict[server][str(offense['id'])]
                     case_id = case_dict['case_id']
                     case_lastPersistedTime = case_dict['case_lastPersistedTime']
-                    if offense_lastPersistedTime!= case_lastPersistedTime:
+                    if offense_lastPersistedTime != case_lastPersistedTime:
                         # If time is different then update the case
                         updated_cases.append(case_id)
                         # Create payload to update cases
