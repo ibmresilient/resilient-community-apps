@@ -23,7 +23,7 @@ class FunctionComponent(AppFunctionComponent):
     def _lookup(self, fn_inputs):
         """
         Validate user account if API call quota has exceeded, verify if tags are match, and query RiskIQ PassiveTotal API
-         for the given 'net.name' (domain name artifact), 'net.uri' (URL) or 'net.ip' (IP address).
+         for the given domain name artifact, URL or IP address.
         """
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
@@ -31,27 +31,32 @@ class FunctionComponent(AppFunctionComponent):
         artifact_type = fn_inputs.passivetotal_artifact_type
         artifact_value = fn_inputs.passivetotal_artifact_value
 
-         # Example validating app_configs
-        validate_fields([
-            {"name": "passivetotal_api_key"},
-            {"name": "passivetotal_username"},
-            {"name": "passivetotal_base_url"},
-            {"name": "passivetotal_account_api_url"},
-            {"name": "passivetotal_actions_tags_api_url"},
-            {"name": "passivetotal_passive_dns_api_url"},
-            {"name": "passivetotal_actions_class_api_url"},
-            {"name": "passivetotal_enrich_subdom_api_url"},
-            {"name": "passivetotal_community_url"},
-            {"name": "passivetotal_tags"}],
-            self.app_configs)
+        accepted_types = ["IP Address", "DNS Name", "URL"]
 
-        LOG.info("_lookup started for Artifact Type {0} - Artifact Value {1}".format(artifact_type, artifact_value))
+        if artifact_type not in accepted_types:
+            yield self.status_message("Artifact type not one of the expected values")
+        else:
+            # Example validating app_configs
+            validate_fields([
+                {"name": "passivetotal_api_key"},
+                {"name": "passivetotal_username"},
+                {"name": "passivetotal_base_url"},
+                {"name": "passivetotal_account_api_url"},
+                {"name": "passivetotal_actions_tags_api_url"},
+                {"name": "passivetotal_passive_dns_api_url"},
+                {"name": "passivetotal_actions_class_api_url"},
+                {"name": "passivetotal_enrich_subdom_api_url"},
+                {"name": "passivetotal_community_url"},
+                {"name": "passivetotal_tags"}],
+                self.app_configs)
 
-        results = self._query_passivetotal_api(artifact_value)
-        
-        yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
+            LOG.info("_lookup started for Artifact Type {0} - Artifact Value {1}".format(artifact_type, artifact_value))
 
-        yield FunctionResult(results)
+            results = self._query_passivetotal_api(artifact_value)
+            
+            yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
+
+            yield FunctionResult(results)
 
 
     def _query_passivetotal_api(self, artifact_value):
@@ -75,15 +80,8 @@ class FunctionComponent(AppFunctionComponent):
 
         pdns_results_response = self._passivetotal_get_response(self.app_configs.passivetotal_passive_dns_api_url,
                                                                 artifact_value)
-        pdns_hit_number, pdns_first_seen, pdns_last_seen = None, None, None
         if pdns_results_response.status_code == 200:
             pdns_results = pdns_results_response.json()
-            pdns_hit_number = pdns_results.get("totalRecords", None)
-            pdns_first_seen = pdns_results.get("firstSeen", None)
-            pdns_last_seen = pdns_results.get("lastSeen", None)
-            LOG.info(pdns_hit_number)
-            LOG.info(pdns_first_seen)
-            LOG.info(pdns_last_seen)
         else:
             LOG.info("No Passive DNS information found for artifact value: {0}".format(artifact_value))
             LOG.debug(pdns_results_response.text)
@@ -91,11 +89,8 @@ class FunctionComponent(AppFunctionComponent):
         # URL Classification - suspicious, malicious etc
         classification_results_response = self._passivetotal_get_response(self.app_configs.passivetotal_actions_class_api_url,
                                                                           artifact_value)
-        classification_hit = None
         if classification_results_response.status_code == 200:
             classification_results = classification_results_response.json()
-            classification_hit = classification_results.get("classification", None)
-            LOG.info(classification_hit)
         else:
             LOG.info("No URL classification found for artifact value: {0}".format(artifact_value))
             LOG.debug(classification_results_response.text)
@@ -103,14 +98,8 @@ class FunctionComponent(AppFunctionComponent):
         # Count of subdomains
         subdomain_results_response = self._passivetotal_get_response(self.app_configs.passivetotal_enrich_subdom_api_url,
                                                                      artifact_value)
-        subdomain_hits_number, first_ten_subdomains = None, None
         if subdomain_results_response.status_code == 200:
             subdomain_results = subdomain_results_response.json()
-            subdomain_hits = subdomain_results.get("subdomains", None)
-            subdomain_hits_number = len(subdomain_hits) if subdomain_hits else None
-            first_ten_subdomains = ', '.join(subdomain_hits[:10]) if subdomain_hits else None
-            LOG.info(subdomain_hits_number)
-            LOG.info(first_ten_subdomains)
         else:
             LOG.info("No subdomain information found for artifact value: {0}".format(artifact_value))
             LOG.debug(subdomain_results_response.text)
@@ -118,21 +107,23 @@ class FunctionComponent(AppFunctionComponent):
         # Convert tags hits list to str
         tags_hits_str = ", ".join(tags_hits) if tags_hits else None
 
-        # Construct url back to to PassiveThreat
+        # Construct url back to PassiveThreat
         report_url = self.app_configs.passivetotal_community_url + artifact_value
 
-        hits = [
-            {"pdns_hit_number": pdns_hit_number},
-            {"pdns_first_seen": pdns_first_seen},
-            {"pdns_last_seen": pdns_last_seen},
-            {"subdomain_hits_number": subdomain_hits_number},
-            {"first_ten_subdomains": first_ten_subdomains},
+        results = [
+            pdns_results,
+            classification_results,
+            subdomain_results,
             {"tags_hits_str": tags_hits_str},
-            {"classification_hit": classification_hit},
             {"report_url": report_url}
             ]
 
-        return hits
+        results_dict = {}
+
+        for dicitonary in results:
+            results_dict.update(dicitonary)
+
+        return results_dict
 
     def _validate_user_account_exceeded(self):
         """

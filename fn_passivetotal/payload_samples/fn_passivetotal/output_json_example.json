@@ -2,32 +2,21 @@
   "version": 2.0,
   "success": true,
   "reason": null,
-  "content": [
-    {
-      "pdns_hit_number": 0
-    },
-    {
-      "pdns_first_seen": null
-    },
-    {
-      "pdns_last_seen": null
-    },
-    {
-      "subdomain_hits_number": null
-    },
-    {
-      "first_ten_subdomains": null
-    },
-    {
-      "tags_hits_str": "ransomeware, compromised"
-    },
-    {
-      "classification_hit": null
-    },
-    {
-      "report_url": "https://community.riskiq.com/search/45.146.165.37"
-    }
-  ],
+  "content": {
+    "pager": null,
+    "queryValue": "45.146.165.37",
+    "queryType": "ip",
+    "firstSeen": null,
+    "lastSeen": null,
+    "totalRecords": 0,
+    "results": [],
+    "classification": null,
+    "primaryDomain": "45.146.165.37.null",
+    "success": true,
+    "subdomains": [],
+    "tags_hits_str": "ransomeware, compromised",
+    "report_url": "https://community.riskiq.com/search/45.146.165.37"
+  },
   "raw": null,
   "inputs": {
     "passivetotal_artifact_type": "IP Address",
@@ -38,7 +27,7 @@
     "package": "fn-passivetotal",
     "package_version": "1.0.0",
     "host": "My Host",
-    "execution_time_ms": 2062,
-    "timestamp": "2022-03-14 14:15:30"
+    "execution_time_ms": 2086,
+    "timestamp": "2022-03-16 13:16:50"
   }
 }

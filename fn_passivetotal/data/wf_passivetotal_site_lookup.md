@@ -24,63 +24,63 @@ inputs.passivetotal_artifact_value = artifact.value
 
 ### Post-Processing Script
 ```python
-if results.content:
-  data = {}
-  for dictionary in results.content:
-    data.update(dictionary)
-  pdns_hit_number = data["pdns_hit_number"]
-  pdns_first_seen = data["pdns_first_seen"]
-  pdns_last_seen = data["pdns_last_seen"]
-  subdomain_hits_number = data["subdomain_hits_number"]
-  first_ten_subdomains = data["first_ten_subdomains"]
-  tags_hits = data["tags_hits_str"]
-  classification_hit = data["classification_hit"]
-  report_url = data["report_url"]
-
-            
-  hit = [
-        {
-          "name": "Number of Passive DNS Records",
-          "type": "number",
-          "value": "{}".format(pdns_hit_number)
-        }, 
-        {
-          "name": "First Seen",
-          "type": "string",
-          "value": "{}".format(pdns_first_seen)
-        }, 
-        {
-          "name": "Last Seen",
-          "type": "string",
-          "value": "{}".format(pdns_last_seen)
-        },
-        {
-          "name": "Subdomains - All",
-          "type": "number",
-          "value": "{}".format(subdomain_hits_number)
-        },
-        {
-          "name": "Subdomains - First ten Hostnames",
-          "type": "string",
-          "value": "{}".format(first_ten_subdomains)
-        },
-        {
-          "name": "Tags",
-          "type": "string",
-          "value": "{}".format(tags_hits)
-        },
-        {
-          "name": "Classification",
-          "type": "string",
-          "value": "{}".format(classification_hit)
-        },
-        {
-          "name": "Report Link",
-          "type": "uri",
-          "value": "{}".format(report_url)
-        }
-        ]
-  artifact.addHit("PassiveTotal Function hits added", hit)
+if results.success:
+  if results.content:
+    data =results.content
+    pdns_hit_number = data["totalRecords"]
+    pdns_first_seen = data["firstSeen"]
+    pdns_last_seen = data["lastSeen"]
+    subdomain_hits = data["subdomains"]
+    subdomain_hits_number = len(subdomain_hits) if subdomain_hits else None
+    first_ten_subdomains = ', '.join(subdomain_hits[:10]) if subdomain_hits else None
+    tags_hits = data["tags_hits_str"]
+    classification_hit = data["classification"]
+    report_url = data["report_url"]
+  
+              
+    hit = [
+          {
+            "name": "Number of Passive DNS Records",
+            "type": "number",
+            "value": "{}".format(pdns_hit_number)
+          }, 
+          {
+            "name": "First Seen",
+            "type": "string",
+            "value": "{}".format(pdns_first_seen)
+          }, 
+          {
+            "name": "Last Seen",
+            "type": "string",
+            "value": "{}".format(pdns_last_seen)
+          },
+          {
+            "name": "Subdomains - All",
+            "type": "number",
+            "value": "{}".format(subdomain_hits_number)
+          },
+          {
+            "name": "Subdomains - First ten Hostnames",
+            "type": "string",
+            "value": "{}".format(first_ten_subdomains)
+          },
+          {
+            "name": "Tags",
+            "type": "string",
+            "value": "{}".format(tags_hits)
+          },
+          {
+            "name": "Classification",
+            "type": "string",
+            "value": "{}".format(classification_hit)
+          },
+          {
+            "name": "Report Link",
+            "type": "uri",
+            "value": "{}".format(report_url)
+          }
+          ]
+    artifact.addHit("PassiveTotal Function hits added", hit)
 else:
   incident.addNote("PassiveTotal Query failed: {}".format(results.reason))
 ```

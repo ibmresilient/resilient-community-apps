@@ -52,7 +52,7 @@
   Provide a high-level description of the function itself and its remote software or application.
   The text below is parsed from the "description" and "long_description" attributes in the setup.py file
 -->
-**IBM Security SOAR app for 'fn_passivetotal'**
+**IBM Security SOAR app for PassiveTotal**
 
  ![screenshot: main](./doc/screenshots/main.png)
 
@@ -116,7 +116,7 @@ These guides are available on the IBM Documentation website at [ibm.biz/cp4s-doc
 The app does support a proxy server.
 
 ### Python Environment
-Both Python 2.7 and Python 3.6 is supported.
+Python 3.6 is supported.
 Additional package dependencies may exist for each of these packages:
 * resilient-circuits>=43.0.0
 
@@ -125,7 +125,7 @@ Additional package dependencies may exist for each of these packages:
 This app has been implemented using:
 | Product Name | Product Version | API URL | API Version |
 | ------------ | --------------- | ------- | ----------- |
-| RiskIQ PassiveTotal | ------- | https://api.passivetotal.org/v2/account | ---------- |
+| RiskIQ PassiveTotal | ------- | https://api.passivetotal.org/v2/account | v2 |
 
 #### Prerequisites
 <!--
@@ -184,33 +184,38 @@ Queries PassiveTotal and checks if the site is compromised according to your def
 
 ```python
 result = {
-  'version': 2.0,
-  'success': True,
-  'reason': None,
-  'content':[
-    {'pdns_hit_number': 0},
-    {'pdns_first_seen': None},
-    {'pdns_last_seen': None},
-    {'subdomain_hits_number': None},
-    {'first_ten_subdomains': None},
-    {'tags_hits_str': 'ransomeware, compromised'},
-    {'classification_hit': None},
-    {'report_url': 'https://community.riskiq.com/search/45.146.165.37'}
-    ],
-    'raw': None,
-    'inputs': {
-      'passivetotal_artifact_type': 'IP Address', 'passivetotal_artifact_value': '45.146.165.37'
-    },
-    'metrics': {
-      'version': '1.0',
-      'package': 'fn-passivetotal',
-      'package_version': '1.0.0',
-      'host': 'My Host',
-      'execution_time_ms': 2062,
-      'timestamp': '2022-03-14 14:15:30'
-    }
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "pager": null,
+    "queryValue": "45.146.165.37",
+    "queryType": "ip",
+    "firstSeen": null,
+    "lastSeen": null,
+    "totalRecords": 0,
+    "results": [],
+    "classification": null,
+    "primaryDomain": "45.146.165.37.null",
+    "success": true,
+    "subdomains": [],
+    "tags_hits_str": "ransomeware, compromised",
+    "report_url": "https://community.riskiq.com/search/45.146.165.37"
+  },
+  "raw": null,
+  "inputs": {
+    "passivetotal_artifact_type": "IP Address",
+    "passivetotal_artifact_value": "45.146.165.37"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-passivetotal",
+    "package_version": "1.0.0",
+    "host": "My Host",
+    "execution_time_ms": 2086,
+    "timestamp": "2022-03-16 13:16:50"
   }
-} 
+}
 ```
 
 </p>
@@ -231,63 +236,63 @@ inputs.passivetotal_artifact_value = artifact.value
 <p>
 
 ```python
-if results.content:
-  data = {}
-  for dictionary in results.content:
-    data.update(dictionary)
-  pdns_hit_number = data["pdns_hit_number"]
-  pdns_first_seen = data["pdns_first_seen"]
-  pdns_last_seen = data["pdns_last_seen"]
-  subdomain_hits_number = data["subdomain_hits_number"]
-  first_ten_subdomains = data["first_ten_subdomains"]
-  tags_hits = data["tags_hits_str"]
-  classification_hit = data["classification_hit"]
-  report_url = data["report_url"]
-
-            
-  hit = [
-        {
-          "name": "Number of Passive DNS Records",
-          "type": "number",
-          "value": "{}".format(pdns_hit_number)
-        }, 
-        {
-          "name": "First Seen",
-          "type": "string",
-          "value": "{}".format(pdns_first_seen)
-        }, 
-        {
-          "name": "Last Seen",
-          "type": "string",
-          "value": "{}".format(pdns_last_seen)
-        },
-        {
-          "name": "Subdomains - All",
-          "type": "number",
-          "value": "{}".format(subdomain_hits_number)
-        },
-        {
-          "name": "Subdomains - First ten Hostnames",
-          "type": "string",
-          "value": "{}".format(first_ten_subdomains)
-        },
-        {
-          "name": "Tags",
-          "type": "string",
-          "value": "{}".format(tags_hits)
-        },
-        {
-          "name": "Classification",
-          "type": "string",
-          "value": "{}".format(classification_hit)
-        },
-        {
-          "name": "Report Link",
-          "type": "uri",
-          "value": "{}".format(report_url)
-        }
-        ]
-  artifact.addHit("PassiveTotal Function hits added", hit)
+if results.success:
+  if results.content:
+    data =results.content
+    pdns_hit_number = data["totalRecords"]
+    pdns_first_seen = data["firstSeen"]
+    pdns_last_seen = data["lastSeen"]
+    subdomain_hits = data["subdomains"]
+    subdomain_hits_number = len(subdomain_hits) if subdomain_hits else None
+    first_ten_subdomains = ', '.join(subdomain_hits[:10]) if subdomain_hits else None
+    tags_hits = data["tags_hits_str"]
+    classification_hit = data["classification"]
+    report_url = data["report_url"]
+  
+              
+    hit = [
+          {
+            "name": "Number of Passive DNS Records",
+            "type": "number",
+            "value": "{}".format(pdns_hit_number)
+          }, 
+          {
+            "name": "First Seen",
+            "type": "string",
+            "value": "{}".format(pdns_first_seen)
+          }, 
+          {
+            "name": "Last Seen",
+            "type": "string",
+            "value": "{}".format(pdns_last_seen)
+          },
+          {
+            "name": "Subdomains - All",
+            "type": "number",
+            "value": "{}".format(subdomain_hits_number)
+          },
+          {
+            "name": "Subdomains - First ten Hostnames",
+            "type": "string",
+            "value": "{}".format(first_ten_subdomains)
+          },
+          {
+            "name": "Tags",
+            "type": "string",
+            "value": "{}".format(tags_hits)
+          },
+          {
+            "name": "Classification",
+            "type": "string",
+            "value": "{}".format(classification_hit)
+          },
+          {
+            "name": "Report Link",
+            "type": "uri",
+            "value": "{}".format(report_url)
+          }
+          ]
+    artifact.addHit("PassiveTotal Function hits added", hit)
 else:
   incident.addNote("PassiveTotal Query failed: {}".format(results.reason))
 ```
@@ -304,7 +309,7 @@ else:
 ## Rules
 | Rule Name | Object | Workflow Triggered |
 | --------- | ------ | ------------------ |
-| RiskIQ PassiveTotal Query | artifact | `passivetotal` |
+| RiskIQ PassiveTotal Query | artifact | `passivetotal_site_lookup` |
 
 ---
 

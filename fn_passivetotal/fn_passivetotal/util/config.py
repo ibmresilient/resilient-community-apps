@@ -14,13 +14,13 @@ def config_section_data():
     config_data = u"""[fn_passivetotal]
     passivetotal_api_key=
     passivetotal_username=
-    passivetotal_base_url=
-    passivetotal_account_api_url=
-    passivetotal_actions_tags_api_url=
-    passivetotal_passive_dns_api_url=
-    passivetotal_actions_class_api_url=
-    passivetotal_enrich_subdom_api_url=
-    passivetotal_community_url=
+    passivetotal_base_url=https://api.passivetotal.org
+    passivetotal_account_api_url=/v2/account
+    passivetotal_actions_tags_api_url=/v2/actions/tags
+    passivetotal_passive_dns_api_url=/v2/dns/passive
+    passivetotal_actions_class_api_url=/v2/actions/classification
+    passivetotal_enrich_subdom_api_url=/v2/enrichment/subdomains
+    passivetotal_community_url=https://community.riskiq.com/search/
     passivetotal_tags=
     """
     return config_data
