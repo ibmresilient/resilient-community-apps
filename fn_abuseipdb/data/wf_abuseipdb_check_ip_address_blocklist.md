@@ -49,26 +49,27 @@ CATEGORIES= {
 }
 
 if results.success:
-  resp_data = results.content['data']
-  number_of_reports = resp_data['totalReports']
-  country_name = resp_data['countryName']
-  most_recent_report = resp_data['lastReportedAt']
-  confidence_score = resp_data.get("abuseConfidenceScore", 0)
+  if results.content:
+    resp_data = results.content['data']
+    number_of_reports = resp_data['totalReports']
+    country_name = resp_data['countryName']
+    most_recent_report = resp_data['lastReportedAt']
+    confidence_score = resp_data.get("abuseConfidenceScore", 0)
+    
+    hit = []
+    
+    # get clean list of de-duped categories
+    categories_names = ""
+    if resp_data.get('reports'):
+        categories_list = []
+        for report in resp_data['reports']:
+            categories_list.extend(report["categories"])
+        categories_set = set(categories_list)  # dedup list
+        categories_names = u', '.join(CATEGORIES.get(item, 'unknown') for item in categories_set)
   
-  hit = []
-  
-  # get clean list of de-duped categories
-  categories_names = ""
-  if resp_data.get('reports'):
-      categories_list = []
-      for report in resp_data['reports']:
-          categories_list.extend(report["categories"])
-      categories_set = set(categories_list)  # dedup list
-      categories_names = u', '.join(CATEGORIES.get(item, 'unknown') for item in categories_set)
-
-  
-  # only return data if there's anything useful
-  if number_of_reports or confidence_score:
+    
+    # only return data if there's anything useful
+    if number_of_reports or confidence_score:
       hit = [
         {
           "name": "Confidence Score",
@@ -96,7 +97,9 @@ if results.success:
           "value": "{}".format(categories_names)
         }
         ]
-  artifact.addHit("AbuseIPDB Function hits added", hit)
+      artifact.addHit("AbuseIPDB Function hits added", hit)
+    else:
+      incident.addNote("No reports or confidence score to return.")
 else:
   incident.addNote("AbuseIPDB Check IP Address Blocklist failed: {}".format(results.reason))
 
