@@ -17,7 +17,7 @@ class UrlScanIoSearcher(BaseComponent):
 
     Test using 'curl':
         curl -v -k --header "Content-Type: application/json" --data-binary '{"type":"net.uri","value":"http://example.org"}' 'http://127.0.0.1:9000/cts/usio'
-        curl -v 'http://127.0.0.1:9000/cts/example/f9acc1b7-6184-5746-873e-e385e6214261'
+        curl -v 'http://127.0.0.1:9000/cts/usio/{scan_id}'
 
     Test example of a potentially malicious url in urlscan.io search database is "http://detailsindia.in".
     Test example of a non-malicious url in urlscan.io search database is "www.bai.org"
@@ -130,11 +130,12 @@ class UrlScanIoSearcher(BaseComponent):
         if result_response.status_code == 200:
             result_content = result_response.json()
 
-            stats = result_content.get('stats', None)
-            if stats:
-                malicious_flag = stats.get('malicious', None)
+            verdict = result_content.get('verdicts', None)
 
-                if malicious_flag == 1:
+            if verdict:
+                malicious_flag = verdict.get('urlscan', None).get('malicious', None)
+
+                if malicious_flag == True:
 
                     # Some malicious scans show as failed, do not include those
                     if self._verify_for_scan_failed_flag(result_content):
@@ -142,6 +143,7 @@ class UrlScanIoSearcher(BaseComponent):
 
                     task = result_content.get('task', None)
                     page = result_content.get('page', None)
+                    stats = result_content.get('stats', None)
 
                     png_url = task.get('screenshotURL', None) if task else None
                     scan_time = task.get('time', None) if task else None
