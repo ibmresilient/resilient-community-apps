@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# (c) Copyright IBM Corp. 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 #
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
@@ -19,7 +19,7 @@ LOG = getLogger(__name__)
 #For a given Offense ID and QRadar Destination, get the offense summary.
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'qradar_offense_summary"""
+    """Component that implements SOAR function 'qradar_offense_summary"""
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""

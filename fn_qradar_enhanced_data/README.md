@@ -327,7 +327,7 @@ Search QRadar Top events for the given Offense ID.
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `qradar_label` | `text` | No | `-` | Name of QRadar server to use from the app.config |
-| `qradar_query` | `textarea` | No | `-` | AQRadar query string with parameters |
+| `qradar_query` | `textarea` | No | `-` | A QRadar query string with parameters |
 | `qradar_query_type` | `text` | No | `-` | - |
 | `qradar_search_param1` | `text` | No | `-` | - |
 | `qradar_search_param2` | `text` | No | `-` | - |
@@ -419,9 +419,9 @@ for event in results.events:
   qradar_event.category_name = link.format(results.offenseid,"category_name",event.categoryname,event.categoryname)
   qradar_event.magnitude = link.format(results.offenseid,"category_name",event.categoryname,event.magnitude)
   qradar_event.event_count = link.format(results.offenseid,"category_name",event.categoryname,event.eventcount)
-  qradar_event.event_time =  event.eventtime
+  qradar_event.event_time = event.eventtime
   qradar_event.sourceip_count = link.format(results.offenseid,"category_name",event.categoryname,event.sourceipcount)
-  qradar_event.destinationip_count =  link.format(results.offenseid,"category_name",event.categoryname,event.destinationipcount)
+  qradar_event.destinationip_count = link.format(results.offenseid,"category_name",event.categoryname,event.destinationipcount)
   
 ```
 
@@ -795,8 +795,8 @@ qr_flows
 | QR Magnitude | `qr_magnitude` | `textarea` | `properties` | - | Indicates the relative importance of the offense. This value is calculated based on the relevance, severity, and credibility ratings. |
 | QR Offense Index Type | `qr_offense_index_type` | `text` | `properties` | - | The type on which the QRadar Offense is indexed |
 | QR Offense Index Value | `qr_offense_index_value` | `text` | `properties` | - | The value by which QRadar Offense is indexed |
-| QR Offense Source  | `qr_offense_source` | `text` | `properties` | - | The source for the QRadar Offense |
-| QR Relevance | `qr_relevance` | `textarea` | `properties` | - | Indicates the importance of the destination.  QRadar determines the relevance by the weight that the administrator assigned to the networks and assets. |
+| QR Offense Source | `qr_offense_source` | `text` | `properties` | - | The source for the QRadar Offense |
+| QR Relevance | `qr_relevance` | `textarea` | `properties` | - | Indicates the importance of the destination. QRadar determines the relevance by the weight that the administrator assigned to the networks and assets. |
 | QR Severity | `qr_severity` | `textarea` | `properties` | - | Indicates the threat that an attack poses in relation to how prepared the destination is for the attack. |
 | QR Source IP Count | `qr_source_ip_count` | `textarea` | `properties` | - | The no. of Source IPs associated with the QRadar Offense |
 | qradar_destination | `qradar_destination` | `text` | `properties` | - | QRadar Destination to Sync With |

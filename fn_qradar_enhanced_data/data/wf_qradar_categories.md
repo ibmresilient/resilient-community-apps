@@ -34,9 +34,9 @@ for event in results.events:
   qradar_event.category_name = link.format(results.offenseid,"category_name",event.categoryname,event.categoryname)
   qradar_event.magnitude = link.format(results.offenseid,"category_name",event.categoryname,event.magnitude)
   qradar_event.event_count = link.format(results.offenseid,"category_name",event.categoryname,event.eventcount)
-  qradar_event.event_time =  int(event.eventtime)
+  qradar_event.event_time = int(event.eventtime)
   qradar_event.sourceip_count = link.format(results.offenseid,"category_name",event.categoryname,event.sourceipcount)
-  qradar_event.destinationip_count =  link.format(results.offenseid,"category_name",event.categoryname,event.destinationipcount)
+  qradar_event.destinationip_count = link.format(results.offenseid,"category_name",event.categoryname,event.destinationipcount)
   qradar_event.reported_time = results.current_time
 ```
 
@@ -70,9 +70,9 @@ for event in results.events:
   qradar_event = incident.addRow("qr_categories")
   qradar_event.category_name = event.categoryname
   qradar_event.flow_count = event.flowcount
-  qradar_event.last_packet_time =  int(event.lastpackettime)
+  qradar_event.last_packet_time = int(event.lastpackettime)
   qradar_event.sourceip_count = event.sourceipcount
-  qradar_event.destinationip_count =  event.destinationipcount
+  qradar_event.destinationip_count = event.destinationipcount
   qradar_event.reported_time = results.current_time
 ```
 

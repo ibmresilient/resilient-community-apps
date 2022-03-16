@@ -19,7 +19,7 @@ def selftest_function(opts):
     """
     try:
 
-        options = opts.get("fn_qradar_integration", {})
+        options = opts.get(PACKAGE_NAME, {})
 
         if not options:
             servers = QRadarServers(opts, options)

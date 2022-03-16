@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# (c) Copyright IBM Corp. 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 #
 #   Util classes for qradar
 
@@ -286,8 +286,8 @@ class QRadarClient(object):
 
         ariel_search.set_query_all(query_all)
 
-        response = ariel_search.perform_search(temp_query,False)  # Execute the query on a temp table
-        response = ariel_search.perform_search(search_query, True)  # Get the actual query results from temp table
+        response = ariel_search.perform_search(temp_query,False) # Execute the query on a temp table
+        response = ariel_search.perform_search(search_query, True) # Get the actual query results from temp table
 
         return response
 

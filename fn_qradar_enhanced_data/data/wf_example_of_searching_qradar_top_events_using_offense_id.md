@@ -36,7 +36,7 @@ for event in results.events:
   qradar_event.source_ip = link.format(results.offenseid,"sourceip",event.sourceip,event.sourceip)
   qradar_event.destination_ip = link.format(results.offenseid,"destinationip",event.destinationip,event.destinationip)
   qradar_event.log_source = link.format(results.offenseid,"log_source_name",event.logsourcename,event.logsourcename)
-  qradar_event.event_count =  link.format(results.offenseid,"event_name",event.event_name,event.eventcount)
+  qradar_event.event_count = link.format(results.offenseid,"event_name",event.event_name,event.eventcount)
   qradar_event.event_time = int(event.event_time)
   qradar_event.magnitude = event.magnitude
   qradar_event.username = event.username
