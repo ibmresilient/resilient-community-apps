@@ -83,10 +83,11 @@ Bidirectional synchronization of ReaQta Alerts to IBM SOAR.
 * Sync alerts to SOAR cases via user defined filter criteria
 * Sync SOAR case notes to ReaQta
 * ReaQta alert closing closes the SOAR case and SOAR case closing closes the ReaQta alert
-* Get running processing
+* Get running processes on a give endpoint
 * Download ReaQta endpoint process file to an attachment
-* Kill ReaQta endpoint process
+* Kill ReaQta endpoint processes
 * Isolate ReaQta endpoint
+* Create a new Alert or Blocking policy based on a file hash
 
 ---
 
