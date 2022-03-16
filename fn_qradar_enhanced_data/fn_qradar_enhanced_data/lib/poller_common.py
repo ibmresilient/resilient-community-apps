@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2022. All Rights Reserved.
 import functools
 from threading import Event
 from datetime import datetime
@@ -12,14 +12,14 @@ LOG = getLogger(__name__)
 
 # P O L L E R   L O G I C
 def poller(named_poller_interval, named_last_poller_time, package_name):
-    """[decorator for poller, manage poller time, calling the customized method for getting the next entities]
-    Args:
-        named_poller_interval ([str]): [name of instance variable containing the poller interval in seconds]
-        named_last_poller_time ([datetime]): [name of instance variable containing the lookback value in mseconds]
-        package_name ([str]: [name of package for loggging]
+    """
+    Decorator for poller, manage poller time, calling the customized method for getting the next entities
+    :param named_poller_interval: (str) Name of instance variable containing the poller interval in seconds
+    :param named_last_poller_time: (datetime) Name of instance variable containing the lookback value in mseconds
+    :param package_name: (str) Name of package for loggging
     """
     def poller_wrapper(func):
-        # decorator for running a function forever, passing the ms timestamp of
+        # Decorator for running a function forever, passing the ms timestamp of
         # when the last poller run to the function it's calling
         @functools.wraps(func)
         def wrapped(self):
@@ -30,7 +30,7 @@ def poller(named_poller_interval, named_last_poller_time, package_name):
                 try:
                     LOG.info(u"%s polling start.", package_name)
                     poller_start = datetime.now()
-                    # function execution with the last poller time in ms
+                    # Function execution with the last poller time in ms
                     func(self, last_poller_time=int(last_poller_time.timestamp()*1000))
 
                 except Exception as err:
@@ -38,29 +38,28 @@ def poller(named_poller_interval, named_last_poller_time, package_name):
                     LOG.error(format_exc())
                 finally:
                     LOG.info(u"%s polling complete.", package_name)
-                    # set the last poller time for next cycle
+                    # Set the last poller time for next cycle
                     last_poller_time = poller_start
 
-                    # sleep before the next poller execution
+                    # Sleep before the next poller execution
                     exit_event.wait(getattr(self, named_poller_interval)*60)
-            exit_event.set() # loop complete
+            exit_event.set() # Loop complete
 
         return wrapped
     return poller_wrapper
 
 class SOARCommon():
-    """ common methods for accessing IBM SOAR cases and their entities: comment, attachments, etc. """
+    """ Common methods for accessing IBM SOAR cases and their entities: comment, attachments, etc. """
 
     def get_open_soar_cases(search_fields, rest_client, open_cases=True):
-        """ find all IBM SOAR cases which are associated with the endpoint platform
-        Args:
-            search_fields [dict]: list of field(s) used to track the relationship with a SOAR case
+        """ 
+        Find all IBM SOAR cases which are associated with the endpoint platform
+        :param search_fields: (dict) List of field(s) used to track the relationship with a SOAR case
                                  field values can be True/False for 'has_a_value' or 'does_not_have_a_value'
                                  Otherwise a field will use 'equals' for the value
-            NOTE: search_fields only supports custom fields
-        Returns:
-            soar_cases [list]: returned list of cases
-            error_msg [str]: any error during the query or None
+        NOTE: search_fields only supports custom fields
+        :return soar_cases: (list) Returned list of cases
+        :return error_msg: (str) Any error during the query or None
         """
         query = SOARCommon._build_search_query(search_fields, open_cases=open_cases)
 
@@ -72,13 +71,12 @@ class SOARCommon():
             return None, str(err)
 
     def _build_search_query(search_fields, open_cases=True):
-        """[Build the json structure needed to search for cases]
-        Args:
-            search_fields ([dict/list]): [key/value pairs to search custom fields with specific values. If
-                                         a value contains "*" then a search is used with 'has_a_value']
-            NOTE: search_fields works on custom fields
-        Returns:
-            query_string ([dict]): [json stucture used for cases searching]
+        """
+        Build the json structure needed to search for cases
+        :param search_fields: (dict/list) Key/value pairs to search custom fields with specific values.
+                                        If a value contains "*" then a search is used with 'has_a_value'
+        NOTE: search_fields works on custom fields
+        :return query_string: (dict) json stucture used for cases searching
         """
         query = {
             "filters": [{

@@ -55,9 +55,9 @@ class FunctionComponent(ResilientComponent):
 
             # Get configuration for QRadar server specified
             options = get_server_settings(self.opts, qradar_label)
-
+            # Create connection to QRadar server
             qradar_client = get_qradar_client(self.opts, options)
-
+            # Clear specified data table in SOAR based on app.config settings
             clear_table(self.rest_client(), soar_table_name, soar_incident_id, global_settings)
 
             results = {
@@ -72,6 +72,7 @@ class FunctionComponent(ResilientComponent):
                 offense_summary = qradar_client.graphql_query({"id": qradar_offenseid}, qradar_graphql_queries.GRAPHQL_OFFENSEQUERY)
                 results["offense"] = offense_summary["content"]
 
+            # Fetch the last_persisted_time of the Offesne if function type is offensetime
             elif qradar_fn_type == "offensetime":
                 auth_info = AuthInfo.get_authInfo()
                 # Create url to get all offenses in SOAR from the given QRadar server

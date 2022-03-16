@@ -6,7 +6,7 @@
 
 # URL from https://qradar_instance/console/graphql
 
-#  Basic offense data query to populate summmary fields.
+# Basic offense data query to populate summmary fields.
 GRAPHQL_OFFENSEQUERY = '''query offenseQuery($id: ID!) {
                             getOffense(id: $id) {
                                 credibility

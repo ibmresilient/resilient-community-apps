@@ -56,14 +56,14 @@ class AuthInfo(object):
                opts=None, function_opts=None):
         """
         Create headers used for REST Api calls
-        :param host: qradar host
-        :param username: qradar user login
-        :param password: qradar password
+        :param host: QRadar host
+        :param username: QRadar user login
+        :param password: QRadar password
         :param token: Use token or username/password to auth
-        :param cafile:
+        :param cafile: Boolean or path to cafile
         :param opts: app.config options
-        :param function_opts: function parameters from app.config
-        :return:
+        :param function_opts: Function parameters from app.config
+        :return: None
         """
         self.headers = {'Accept': 'application/json'}
         if username and password:
@@ -112,7 +112,7 @@ class ArielSearch(SearchWaitCommand):
         """
         Set range start for ariel search
         :param start: int for range start
-        :return:
+        :return: None
         """
         self.range_start = start
 
@@ -120,30 +120,30 @@ class ArielSearch(SearchWaitCommand):
         """
         Set range end for ariel search
         :param end: int for range end
-        :return:
+        :return: None
         """
         self.range_end = end
 
     def set_timeout(self, timeout):
         """
         Set timeout
-        :param timeout:
-        :return:
+        :param timeout: Length to timeout in seconds
+        :return: None
         """
         self.search_timeout = timeout
 
     def set_query_all(self, query_all):
         """
         Set bool to determine if range header is necessary
-        :param query_all:
-        :return:
+        :param query_all: (boolean)
+        :return: None
         """
         self.query_all = query_all
 
     def get_search_id(self, query):
         """
         Get the search if associated with the search using query
-        :param query: input query string
+        :param query: Input query string
         :return: search_id returned from QRadar
         """
         auth_info = AuthInfo.get_authInfo()
@@ -173,15 +173,15 @@ class ArielSearch(SearchWaitCommand):
     def get_search_result(self, search_id):
         """
         Get search result associated with search_id
-        :param search_id:
-        :return: dict with events
+        :param search_id: ID
+        :return: Dict with events
         """
         auth_info = AuthInfo.get_authInfo()
 
         url = auth_info.api_url + "ariel/searches/{}/results".format(search_id)
 
         headers = auth_info.headers.copy()
-        # if the # of returned items is big, this call will take a long time!
+        # If the # of returned items is big, this call will take a long time!
         # Need to use Range to limit the # if query_all is False.
         # If query_all is True, the Range will not be used and all the results will be returned from the query.
         if not self.query_all:
@@ -209,8 +209,8 @@ class ArielSearch(SearchWaitCommand):
     def check_status(self, search_id):
         """
         Check the search status associated with search_id
-        :param search_id:
-        :return: search status
+        :param search_id: ID
+        :return: Search status
         """
         auth_info = AuthInfo.get_authInfo()
         url = "{}{}/{}".format(auth_info.api_url, qradar_constants.ARIEL_SEARCHES, search_id)
@@ -239,13 +239,14 @@ class QRadarClient(object):
                  opts=None, function_opts=None):
         """
         Init
-        :param host:  QRadar host
+        :param host: QRadar host
         :param username: QRadar user name
         :param password: QRadar password
         :param token: QRadar token
-        :param cafile: verify cert or not
+        :param cafile: Verify cert or not
         :param opts: app.config options dictionary
-        :param function_opts: function parameters from app.config
+        :param function_opts: Function parameters from app.config
+        :return: None
         """
         auth_info = AuthInfo.get_authInfo()
         auth_info.create(host, username, password, token, cafile, opts, function_opts)
@@ -253,7 +254,7 @@ class QRadarClient(object):
     def get_versions(self):
         """
         Util function used to test connectivity to QRadar
-        :return:
+        :return: 
         """
         auth_info = AuthInfo.get_authInfo()
 
@@ -266,12 +267,12 @@ class QRadarClient(object):
                              range_end=None, timeout=None):
         """
         Perform an Ariel search
-        :param query_all: bool used to decide if Range header is included in query
-        :param query: query string
-        :param range_start:
-        :param range_end:
-        :param timeout: timeout for search
-        :return: dict with events
+        :param query_all: Bool used to decide if Range header is included in query
+        :param query: Query string
+        :param range_start: Range start for ariel search
+        :param range_end: Range end for ariel search
+        :param timeout: Timeout for search
+        :return: Dict with events
         """
         ariel_search = ArielSearch(graphql=True)
         if range_start is not None:
@@ -317,6 +318,10 @@ class QRadarClient(object):
 
     @staticmethod
     def verify_graphql_connect():
+        """
+        Verify if a connection to graphql on the given QRadar server can be made
+        :return: (boolean) True if response.status_code equals 200 and False if it does not
+        """
         auth_info = AuthInfo.get_authInfo()
         url = u"{}{}".format(auth_info.api_url.replace("api/", ""), qradar_constants.GRAPHQL_URL)
         headers = auth_info.headers.copy()
@@ -338,6 +343,7 @@ class QRadarClient(object):
         :param variables: Dictionary of variables
         :param query_name: Name of the query from qradar_graphql_queries.py
         :param add_content_source: Additional location to content in ret variable
+        :return: Data received from running graphql query
         """
         auth_info = AuthInfo.get_authInfo()
         headers = auth_info.headers.copy()
@@ -372,7 +378,8 @@ class QRadarClient(object):
     def get_qr_sessionid(host):
         """
         Get QRadar Session Id
-        :return:
+        :param host: QRadar address (IP/URL)
+        :return: QRadar session ID
         """
         cookies = {}
 
@@ -413,8 +420,8 @@ class QRadarServers():
         """
         Check if the given qradar_label is in the app.config
         :param qradar_label: User selected server
-        :param servers_list: list of qradar servers
-        :return: dictionary of options for choosen server
+        :param servers_list: List ofQRadar servers
+        :return: Dictionary of options for choosen server
         """
         label = qradar_constants.PACKAGE_NAME+":"+qradar_label
         if qradar_label and label in servers_list:
@@ -429,8 +436,8 @@ class QRadarServers():
     def _get_server_name_list(self, opts):
         """
         Return the list of QRadar server names defined in the app.config in fn_qradar_integration.
-        :param opts: list of options
-        :return: list of servers
+        :param opts: List of options
+        :return: List of servers
         """
         server_list = []
         for key in opts.keys():

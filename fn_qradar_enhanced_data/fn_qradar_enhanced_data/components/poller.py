@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2022. All Rights Reserved.
 """Function implementation"""
 
 from ast import literal_eval
@@ -27,21 +27,21 @@ class PollerComponent(ResilientComponent):
         self.opts = opts
         self.rest_client()
 
-        # collect settings necessary and initialize libraries used by the poller
+        # Collect settings necessary and initialize libraries used by the poller
         if not self._init_env():
             LOG.info(u"Poller interval is not configured, so poller will not run.")
             return
 
+        # Create poller thread
         poller_thread = Thread(target=self.run)
         poller_thread.daemon = True
         poller_thread.start()
 
     def _init_env(self):
-        """[initialize the environment based on app.config settings]
-        Args:
-            opts ([dict]): [all settings including SOAR settings]
-        Returns:
-            [bool]: [True if poller is configured]
+        """
+        Initialize the environment based on app.config settings
+        :param opts: (dict) All settings including SOAR settings
+        :return: (bool) True if poller is configured
         """
         global_settings = self.opts.get(GLOBAL_SETTINGS, {})
         self.polling_interval = int(global_settings.get("polling_interval", 0))
@@ -56,14 +56,17 @@ class PollerComponent(ResilientComponent):
 
     @poller('polling_interval', 'last_poller_time', PACKAGE_NAME)
     def run(self, last_poller_time=None):
-        """[Process to query for changes in datasource entities and the cooresponding update SOAR case]
+        """
+        Process to query for changes in datasource entities and the cooresponding update SOAR case
            The steps taken are to
-           1) query SOAR for all open cases with qradar_id and qradar_destination fields
-           2) query QRadar offenses for lastUpdatedTime
-           3) Check if the lastUpdatedTime value from QRadar is different than the value on SOAR
-           4) If value different then update value on SOAR
-        Args:
-            last_poller_time ([int]): [time in milliseconds when the last poller ran]
+            1) Query SOAR for all open cases with qradar_id and qradar_destination fields
+            2) Create dictionary of QRadar servers that have incidents on SOAR, each QRadar server equals a list of the offense ID's to query
+            3) Query each QRadar server in the dictionary for each offense's, in the servers list, last_persisted_time
+            4) Check if the last_persisted_time value received from the QRadar offense is different than the last_persisted_time value in the corresponding SOAR incident
+            5) If the last_persistent_time is different between the offense on QRadar and the corresponding incident on SOAR then the last_persistent_time value on the SOAR incident is update
+            6) When the last_persistent_time value on SOAR is changed it triggers the QRadar Enhanced Data automatic rule on SOAR
+        :param last_poller_time: (int) Time in milliseconds when the last poller ran
+        :return: None
         """
         case_list, error_msg = SOARCommon.get_open_soar_cases({"qradar_id": True, "qradar_destination": True}, self.rest_client())
 
@@ -75,8 +78,8 @@ class PollerComponent(ResilientComponent):
     def process_case_list(self, case_list):
         """
         Process the open cases
-        :param case_list: list of open cases
-        :return:
+        :param case_list: List of open cases
+        :return: None
         """
         # :Start: Create dictionary of the QRadar servers to query
         # This is created, so that each QRadar server is only queried once
@@ -94,8 +97,7 @@ class PollerComponent(ResilientComponent):
         # :End: QRadar servers dictionary
 
         for server in case_server_dict:
-
-            # Create filter string
+            # Create filter string which contains the filters for the api call
             filters = ""
             id_list = list(case_server_dict[server].keys())
             for id in id_list:
@@ -111,6 +113,7 @@ class PollerComponent(ResilientComponent):
             auth_info = AuthInfo.get_authInfo()
             # Create url to get all offenses in SOAR from the given QRadar server
             url = auth_info.api_url + "siem/offenses?fields={}&filter={}".format("id, last_persisted_time", filters)
+            # Makes GET call to QRadar server using api
             response = auth_info.make_call("GET", url)
             offenses_update_list = response.json()
 

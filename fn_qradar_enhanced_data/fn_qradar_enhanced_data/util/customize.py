@@ -30,7 +30,6 @@ def codegen_reload_data():
         "datatables": [u"qr_assets", u"qr_categories", u"qr_flows", u"qr_offense_top_events", u"qr_top_destination_ips", u"qr_top_source_ips", u"qr_triggered_rules"],
         "automatic_tasks": [],
         "scripts": [u"Create Artifact from Assets info", u"Create Artifact from Destination IP info", u"Create Artifact from Events info", u"Create Artifact from Flows info", u"Create Artifact from Source IP info"],
-        "playbooks": []
     }
 
 
@@ -39,7 +38,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 42.0.7058
+    IBM Resilient Platform Version: 42.0.7058
 
     Contents:
     - Message Destinations:

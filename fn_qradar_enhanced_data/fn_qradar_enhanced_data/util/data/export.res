@@ -12,7 +12,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Create Artifact from Assets info",
-      "id": 126,
+      "id": 132,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Create Artifact from Assets info",
@@ -44,7 +44,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Create artifact from Destination IP info",
-      "id": 127,
+      "id": 133,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Create artifact from Destination IP info",
@@ -76,7 +76,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Create Artifact from Events info",
-      "id": 128,
+      "id": 134,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Create Artifact from Events info",
@@ -108,7 +108,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Create artifact from Source IP info",
-      "id": 129,
+      "id": 135,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Create artifact from Source IP info",
@@ -140,7 +140,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Create Artifacts from Flows Info ",
-      "id": 130,
+      "id": 136,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Create Artifacts from Flows Info ",
@@ -189,7 +189,7 @@
       "custom_condition": "1 AND 2 OR (1 AND 2 AND 3)",
       "enabled": true,
       "export_key": "QRadar Enhanced Data",
-      "id": 131,
+      "id": 137,
       "logic_type": "advanced",
       "message_destinations": [],
       "name": "QRadar Enhanced Data",
@@ -214,7 +214,7 @@
   ],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1647265434419,
+  "export_date": 1647442545279,
   "export_format_version": 2,
   "fields": [
     {
@@ -227,7 +227,7 @@
       "deprecated": false,
       "export_key": "__function/qradar_search_param2",
       "hide_notification": false,
-      "id": 724,
+      "id": 799,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -256,7 +256,7 @@
       "deprecated": false,
       "export_key": "__function/qradar_search_param3",
       "hide_notification": false,
-      "id": 725,
+      "id": 800,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -314,7 +314,7 @@
       "deprecated": false,
       "export_key": "__function/qradar_search_param6",
       "hide_notification": false,
-      "id": 726,
+      "id": 801,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -343,7 +343,7 @@
       "deprecated": false,
       "export_key": "__function/qradar_search_param4",
       "hide_notification": false,
-      "id": 727,
+      "id": 802,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -372,7 +372,7 @@
       "deprecated": false,
       "export_key": "__function/qradar_search_param1",
       "hide_notification": false,
-      "id": 728,
+      "id": 803,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -430,7 +430,7 @@
       "deprecated": false,
       "export_key": "__function/qradar_query",
       "hide_notification": false,
-      "id": 729,
+      "id": 804,
       "input_type": "textarea",
       "internal": false,
       "is_tracked": false,
@@ -444,16 +444,16 @@
       "tags": [],
       "templates": [
         {
-          "id": 25,
-          "name": "search events for offense_id",
+          "id": 28,
+          "name": "search ip address",
           "template": {
-            "content": "SELECT %param1% FROM events WHERE INOFFENSE(%param2%) LAST %param3% MINUTES",
+            "content": "SELECT %param1% FROM events WHERE sourceip=\u0027%param2%\u0027 LAST %param3% MINUTES",
             "format": "text"
           },
-          "uuid": "2b88eb5c-504a-4950-8674-0cf8f56f1a83"
+          "uuid": "dcbdb7c8-2068-4e97-8127-57131cbdccbf"
         },
         {
-          "id": 26,
+          "id": 29,
           "name": "search events for username",
           "template": {
             "content": "SELECT %param1% FROM events WHERE username=%param2% LAST %param3% MINUTES",
@@ -462,17 +462,17 @@
           "uuid": "34fa3300-c28c-4346-8d3b-745a1afa75dc"
         },
         {
-          "id": 27,
-          "name": "search ip address",
+          "id": 30,
+          "name": "search events for offense_id",
           "template": {
-            "content": "SELECT %param1% FROM events WHERE sourceip=\u0027%param2%\u0027 LAST %param3% MINUTES",
+            "content": "SELECT %param1% FROM events WHERE INOFFENSE(%param2%) LAST %param3% MINUTES",
             "format": "text"
           },
-          "uuid": "dcbdb7c8-2068-4e97-8127-57131cbdccbf"
+          "uuid": "2b88eb5c-504a-4950-8674-0cf8f56f1a83"
         }
       ],
       "text": "qradar_query",
-      "tooltip": "A qradar query string with parameters",
+      "tooltip": "AQRadar query string with parameters",
       "type_id": 11,
       "uuid": "048ba39a-ab94-4d1f-a0f8-2462de3c044c",
       "values": []
@@ -487,7 +487,7 @@
       "deprecated": false,
       "export_key": "__function/qradar_search_param5",
       "hide_notification": false,
-      "id": 730,
+      "id": 805,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -603,7 +603,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/select_to_create_artifact_from_flows_info",
       "hide_notification": false,
-      "id": 719,
+      "id": 794,
       "input_type": "multiselect",
       "internal": false,
       "is_tracked": false,
@@ -629,7 +629,7 @@
           "label": "Source IP",
           "properties": null,
           "uuid": "80b2cb3e-43f8-4f5c-a921-db78b04b2fb2",
-          "value": 266
+          "value": 278
         },
         {
           "default": false,
@@ -638,7 +638,7 @@
           "label": "Source Port",
           "properties": null,
           "uuid": "12b6be5c-847a-4ab3-9e50-3f9dd3bff126",
-          "value": 267
+          "value": 279
         },
         {
           "default": false,
@@ -647,7 +647,7 @@
           "label": "Destination IP",
           "properties": null,
           "uuid": "0cee1802-e437-4138-b48e-12d357d98d9f",
-          "value": 268
+          "value": 280
         },
         {
           "default": false,
@@ -656,7 +656,7 @@
           "label": "Destination Port",
           "properties": null,
           "uuid": "4ac9fe20-88fe-4c4c-b93c-b6071634c8ef",
-          "value": 269
+          "value": 281
         }
       ]
     },
@@ -670,7 +670,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/select_to_create_artifact",
       "hide_notification": false,
-      "id": 720,
+      "id": 795,
       "input_type": "multiselect",
       "internal": false,
       "is_tracked": false,
@@ -696,7 +696,7 @@
           "label": "Source IP",
           "properties": null,
           "uuid": "b7cef607-e4e0-482a-a4e1-dd353b045c7a",
-          "value": 270
+          "value": 282
         },
         {
           "default": false,
@@ -705,7 +705,7 @@
           "label": "Destination IP",
           "properties": null,
           "uuid": "0ff0d4ff-ac43-4853-9670-5db505e7053b",
-          "value": 271
+          "value": 283
         },
         {
           "default": false,
@@ -714,7 +714,7 @@
           "label": "Username",
           "properties": null,
           "uuid": "b0eb7729-5fde-43f2-ad7b-77acee1c0c5c",
-          "value": 272
+          "value": 284
         }
       ]
     },
@@ -728,7 +728,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/select_to_create_artifact_from_asset_info",
       "hide_notification": false,
-      "id": 721,
+      "id": 796,
       "input_type": "multiselect",
       "internal": false,
       "is_tracked": false,
@@ -753,7 +753,7 @@
           "label": "Name",
           "properties": null,
           "uuid": "222bd7e3-7492-4f88-ab70-f62eeb810e97",
-          "value": 273
+          "value": 285
         },
         {
           "default": false,
@@ -762,7 +762,7 @@
           "label": "IP Address",
           "properties": null,
           "uuid": "51619aff-045b-4991-bbeb-e6dee7efd662",
-          "value": 274
+          "value": 286
         }
       ]
     },
@@ -776,7 +776,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/select_to_create_artifact_from_sourceip",
       "hide_notification": false,
-      "id": 722,
+      "id": 797,
       "input_type": "multiselect",
       "internal": false,
       "is_tracked": false,
@@ -801,7 +801,7 @@
           "label": "Source IP",
           "properties": null,
           "uuid": "644132a1-25bc-4f04-8fc0-488a7af8872d",
-          "value": 275
+          "value": 287
         },
         {
           "default": false,
@@ -810,7 +810,7 @@
           "label": "MAC",
           "properties": null,
           "uuid": "35459b44-f439-4736-85c4-7f8052e3e732",
-          "value": 276
+          "value": 288
         }
       ]
     },
@@ -824,7 +824,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/select_to_create_artifact_from_destip",
       "hide_notification": false,
-      "id": 723,
+      "id": 798,
       "input_type": "multiselect",
       "internal": false,
       "is_tracked": false,
@@ -849,7 +849,7 @@
           "label": "Destination IP",
           "properties": null,
           "uuid": "753758b7-c2b2-4e58-b68a-dcf9051b36df",
-          "value": 277
+          "value": 289
         }
       ]
     },
@@ -1302,7 +1302,7 @@
   ],
   "functions": [
     {
-      "created_date": 1647013453296,
+      "created_date": 1647441718672,
       "creator": {
         "display_name": "Admin User",
         "id": 1,
@@ -1316,18 +1316,18 @@
       "destination_handle": "fn_qradar_enhanced_data",
       "display_name": "QRadar Offense Summary",
       "export_key": "qradar_offense_summary",
-      "id": 65,
+      "id": 68,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1647022870543,
+      "last_modified_time": 1647441718708,
       "name": "qradar_offense_summary",
       "tags": [],
       "uuid": "0aee36de-8719-4154-a1e7-6455f065bb94",
-      "version": 6,
+      "version": 1,
       "view_items": [
         {
           "content": "c6cac6bb-9718-40e9-8fb6-2cea26be7b5b",
@@ -1379,7 +1379,7 @@
           "programmatic_name": "qradar_triggered_rules",
           "tags": [],
           "uuid": null,
-          "workflow_id": 126
+          "workflow_id": 135
         },
         {
           "actions": [],
@@ -1389,7 +1389,7 @@
           "programmatic_name": "qradar_assets_information",
           "tags": [],
           "uuid": null,
-          "workflow_id": 125
+          "workflow_id": 133
         },
         {
           "actions": [],
@@ -1399,7 +1399,7 @@
           "programmatic_name": "qradar_offense_last_persisted_time",
           "tags": [],
           "uuid": null,
-          "workflow_id": 117
+          "workflow_id": 136
         },
         {
           "actions": [],
@@ -1409,12 +1409,12 @@
           "programmatic_name": "qradar_offense_summary",
           "tags": [],
           "uuid": null,
-          "workflow_id": 124
+          "workflow_id": 138
         }
       ]
     },
     {
-      "created_date": 1647022212524,
+      "created_date": 1647441718732,
       "creator": {
         "display_name": "Admin User",
         "id": 1,
@@ -1428,18 +1428,18 @@
       "destination_handle": "fn_qradar_enhanced_data",
       "display_name": "QRadar Top Events",
       "export_key": "qradar_top_events",
-      "id": 67,
+      "id": 69,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1647022870580,
+      "last_modified_time": 1647441718765,
       "name": "qradar_top_events",
       "tags": [],
       "uuid": "d8e63812-0b58-4ca1-991a-49255f3dd04e",
-      "version": 3,
+      "version": 1,
       "view_items": [
         {
           "content": "035f31c7-3bf8-4b5e-932f-4adb32198572",
@@ -1539,7 +1539,7 @@
           "programmatic_name": "qradar_categories",
           "tags": [],
           "uuid": null,
-          "workflow_id": 127
+          "workflow_id": 132
         },
         {
           "actions": [],
@@ -1549,7 +1549,7 @@
           "programmatic_name": "qradar_destination_ips",
           "tags": [],
           "uuid": null,
-          "workflow_id": 131
+          "workflow_id": 134
         },
         {
           "actions": [],
@@ -1559,7 +1559,7 @@
           "programmatic_name": "qradar_source_ips",
           "tags": [],
           "uuid": null,
-          "workflow_id": 130
+          "workflow_id": 137
         },
         {
           "actions": [],
@@ -1569,7 +1569,7 @@
           "programmatic_name": "example_of_searching_qradar_flows_using_offense_id",
           "tags": [],
           "uuid": null,
-          "workflow_id": 128
+          "workflow_id": 139
         },
         {
           "actions": [],
@@ -1579,20 +1579,20 @@
           "programmatic_name": "example_of_searching_qradar_top_events_using_offense_id",
           "tags": [],
           "uuid": null,
-          "workflow_id": 129
+          "workflow_id": 140
         }
       ]
     }
   ],
   "geos": null,
   "groups": null,
-  "id": 7,
+  "id": 8,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1647265433131,
+      "create_date": 1647442544136,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -1601,7 +1601,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1647265433131,
+      "update_date": 1647442544136,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -1631,15 +1631,15 @@
   "scripts": [
     {
       "actions": [],
-      "created_date": 1647022211781,
+      "created_date": 1647441718000,
       "creator_id": "admin@example.com",
       "description": "Create artifact from Assets info for the selected row",
       "enabled": false,
       "export_key": "Create Artifact from Assets info",
-      "id": 43,
+      "id": 48,
       "language": "python",
       "last_modified_by": "admin@example.com",
-      "last_modified_time": 1647022211798,
+      "last_modified_time": 1647441718018,
       "name": "Create Artifact from Assets info",
       "object_type": "qr_assets",
       "playbook_handle": null,
@@ -1650,15 +1650,15 @@
     },
     {
       "actions": [],
-      "created_date": 1647022211821,
+      "created_date": 1647441718044,
       "creator_id": "admin@example.com",
       "description": "Create artifact from Destination IP info for the selected row",
       "enabled": false,
       "export_key": "Create Artifact from Destination IP info",
-      "id": 44,
+      "id": 49,
       "language": "python",
       "last_modified_by": "admin@example.com",
-      "last_modified_time": 1647022211839,
+      "last_modified_time": 1647441718062,
       "name": "Create Artifact from Destination IP info",
       "object_type": "qr_top_destination_ips",
       "playbook_handle": null,
@@ -1669,15 +1669,15 @@
     },
     {
       "actions": [],
-      "created_date": 1647022211859,
+      "created_date": 1647441718082,
       "creator_id": "admin@example.com",
       "description": "Create artifact from the Events info of the selected row",
       "enabled": false,
       "export_key": "Create Artifact from Events info",
-      "id": 45,
+      "id": 50,
       "language": "python",
       "last_modified_by": "admin@example.com",
-      "last_modified_time": 1647022211878,
+      "last_modified_time": 1647441718099,
       "name": "Create Artifact from Events info",
       "object_type": "qr_offense_top_events",
       "playbook_handle": null,
@@ -1688,15 +1688,15 @@
     },
     {
       "actions": [],
-      "created_date": 1647022211899,
+      "created_date": 1647441718119,
       "creator_id": "admin@example.com",
       "description": "Create artifact from the Flows info of the selected row",
       "enabled": false,
       "export_key": "Create Artifact from Flows info",
-      "id": 46,
+      "id": 51,
       "language": "python",
       "last_modified_by": "admin@example.com",
-      "last_modified_time": 1647022211918,
+      "last_modified_time": 1647441718137,
       "name": "Create Artifact from Flows info",
       "object_type": "qr_flows",
       "playbook_handle": null,
@@ -1707,15 +1707,15 @@
     },
     {
       "actions": [],
-      "created_date": 1647022211938,
+      "created_date": 1647441718157,
       "creator_id": "admin@example.com",
       "description": "Create artifact from Source IP info for the selected row",
       "enabled": false,
       "export_key": "Create Artifact from Source IP info",
-      "id": 47,
+      "id": 52,
       "language": "python",
       "last_modified_by": "admin@example.com",
-      "last_modified_time": 1647022211955,
+      "last_modified_time": 1647441718174,
       "name": "Create Artifact from Source IP info",
       "object_type": "qr_top_source_ips",
       "playbook_handle": null,
@@ -1750,7 +1750,7 @@
           "deprecated": false,
           "export_key": "qr_assets/aggregated_cvss",
           "hide_notification": false,
-          "id": 644,
+          "id": 731,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -1766,7 +1766,7 @@
           "templates": [],
           "text": "Aggregated CVSS",
           "tooltip": "",
-          "type_id": 1018,
+          "type_id": 1025,
           "uuid": "be15635a-30b4-4691-bc27-e329350abc30",
           "values": [],
           "width": 126
@@ -1781,7 +1781,7 @@
           "deprecated": false,
           "export_key": "qr_assets/asset_id",
           "hide_notification": false,
-          "id": 645,
+          "id": 732,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -1797,7 +1797,7 @@
           "templates": [],
           "text": "ID",
           "tooltip": "",
-          "type_id": 1018,
+          "type_id": 1025,
           "uuid": "70698b55-f7b6-4f60-94a2-1498a289d946",
           "values": [],
           "width": 45
@@ -1812,7 +1812,7 @@
           "deprecated": false,
           "export_key": "qr_assets/asset_name",
           "hide_notification": false,
-          "id": 646,
+          "id": 733,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -1828,7 +1828,7 @@
           "templates": [],
           "text": "Name",
           "tooltip": "",
-          "type_id": 1018,
+          "type_id": 1025,
           "uuid": "b8fe29dc-e586-41c8-8e94-b37b79039c9a",
           "values": [],
           "width": 79
@@ -1843,7 +1843,7 @@
           "deprecated": false,
           "export_key": "qr_assets/ip_address",
           "hide_notification": false,
-          "id": 647,
+          "id": 734,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -1859,7 +1859,7 @@
           "templates": [],
           "text": "IP Address",
           "tooltip": "",
-          "type_id": 1018,
+          "type_id": 1025,
           "uuid": "0b010be5-cc51-45c0-b9c0-35ede0fc3824",
           "values": [],
           "width": 86
@@ -1874,7 +1874,7 @@
           "deprecated": false,
           "export_key": "qr_assets/last_user",
           "hide_notification": false,
-          "id": 648,
+          "id": 735,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -1890,7 +1890,7 @@
           "templates": [],
           "text": "Last User",
           "tooltip": "",
-          "type_id": 1018,
+          "type_id": 1025,
           "uuid": "9847f9a2-6558-4317-b587-7e66237fe75e",
           "values": [],
           "width": 76
@@ -1905,7 +1905,7 @@
           "deprecated": false,
           "export_key": "qr_assets/last_user_seen",
           "hide_notification": false,
-          "id": 649,
+          "id": 736,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -1921,7 +1921,7 @@
           "templates": [],
           "text": "Last User Seen",
           "tooltip": "",
-          "type_id": 1018,
+          "type_id": 1025,
           "uuid": "145809c5-d9b0-416c-9e96-a165d1166e05",
           "values": [],
           "width": 38
@@ -1936,7 +1936,7 @@
           "deprecated": false,
           "export_key": "qr_assets/operating_system",
           "hide_notification": false,
-          "id": 650,
+          "id": 737,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -1952,7 +1952,7 @@
           "templates": [],
           "text": "OS ID",
           "tooltip": "",
-          "type_id": 1018,
+          "type_id": 1025,
           "uuid": "917685ae-7b50-4644-a874-eda876771767",
           "values": [],
           "width": 134
@@ -1967,7 +1967,7 @@
           "deprecated": false,
           "export_key": "qr_assets/reported_time",
           "hide_notification": false,
-          "id": 651,
+          "id": 738,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -1983,7 +1983,7 @@
           "templates": [],
           "text": "Reported Time",
           "tooltip": "",
-          "type_id": 1018,
+          "type_id": 1025,
           "uuid": "b938fb36-8494-4c31-a27c-74b9f1afb125",
           "values": [],
           "width": 70
@@ -1998,7 +1998,7 @@
           "deprecated": false,
           "export_key": "qr_assets/vulnerabilities",
           "hide_notification": false,
-          "id": 652,
+          "id": 739,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -2014,7 +2014,7 @@
           "templates": [],
           "text": "Vulnerabilities",
           "tooltip": "",
-          "type_id": 1018,
+          "type_id": 1025,
           "uuid": "4ebea1ce-5d34-4c32-9db4-9a4c290a8e73",
           "values": [],
           "width": 112
@@ -2054,7 +2054,7 @@
           "deprecated": false,
           "export_key": "qr_categories/category_name",
           "hide_notification": false,
-          "id": 653,
+          "id": 740,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -2070,7 +2070,7 @@
           "templates": [],
           "text": "Category Name",
           "tooltip": "",
-          "type_id": 1019,
+          "type_id": 1026,
           "uuid": "d9477e59-fdf3-4df0-8037-a51da1407d7b",
           "values": [],
           "width": 133
@@ -2085,7 +2085,7 @@
           "deprecated": false,
           "export_key": "qr_categories/destinationip_count",
           "hide_notification": false,
-          "id": 654,
+          "id": 741,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -2101,7 +2101,7 @@
           "templates": [],
           "text": "Destination IP",
           "tooltip": "",
-          "type_id": 1019,
+          "type_id": 1026,
           "uuid": "9495b67a-31ff-4543-8bb3-613bf92c7fa3",
           "values": [],
           "width": 107
@@ -2116,7 +2116,7 @@
           "deprecated": false,
           "export_key": "qr_categories/event_count",
           "hide_notification": false,
-          "id": 655,
+          "id": 742,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -2132,7 +2132,7 @@
           "templates": [],
           "text": "Event Count",
           "tooltip": "",
-          "type_id": 1019,
+          "type_id": 1026,
           "uuid": "0dd8491f-4b7f-4fbc-b7c1-c0c466141dc0",
           "values": [],
           "width": 92
@@ -2147,7 +2147,7 @@
           "deprecated": false,
           "export_key": "qr_categories/event_time",
           "hide_notification": false,
-          "id": 656,
+          "id": 743,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -2163,7 +2163,7 @@
           "templates": [],
           "text": "Event Time",
           "tooltip": "",
-          "type_id": 1019,
+          "type_id": 1026,
           "uuid": "19531e88-f976-4068-9b60-7e957bf0315b",
           "values": [],
           "width": 116
@@ -2178,7 +2178,7 @@
           "deprecated": false,
           "export_key": "qr_categories/flow_count",
           "hide_notification": false,
-          "id": 657,
+          "id": 744,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -2194,7 +2194,7 @@
           "templates": [],
           "text": "Flow Count",
           "tooltip": "",
-          "type_id": 1019,
+          "type_id": 1026,
           "uuid": "ed9161b6-f730-4778-8e43-cd1ba49aa14f",
           "values": [],
           "width": 45
@@ -2209,7 +2209,7 @@
           "deprecated": false,
           "export_key": "qr_categories/last_packet_time",
           "hide_notification": false,
-          "id": 658,
+          "id": 745,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -2225,7 +2225,7 @@
           "templates": [],
           "text": "Last Packet Time",
           "tooltip": "",
-          "type_id": 1019,
+          "type_id": 1026,
           "uuid": "7242842a-0ed7-45bd-9801-dbe328b0126b",
           "values": [],
           "width": 52
@@ -2240,7 +2240,7 @@
           "deprecated": false,
           "export_key": "qr_categories/magnitude",
           "hide_notification": false,
-          "id": 659,
+          "id": 746,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -2256,7 +2256,7 @@
           "templates": [],
           "text": "Magnitude",
           "tooltip": "",
-          "type_id": 1019,
+          "type_id": 1026,
           "uuid": "98724adf-ef07-4acf-b9fd-da6cf3e827d0",
           "values": [],
           "width": 89
@@ -2271,7 +2271,7 @@
           "deprecated": false,
           "export_key": "qr_categories/reported_time",
           "hide_notification": false,
-          "id": 660,
+          "id": 747,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -2287,7 +2287,7 @@
           "templates": [],
           "text": "Reported Time",
           "tooltip": "",
-          "type_id": 1019,
+          "type_id": 1026,
           "uuid": "e80372ea-904d-48e7-b50f-cd1608dead47",
           "values": [],
           "width": 70
@@ -2302,7 +2302,7 @@
           "deprecated": false,
           "export_key": "qr_categories/sourceip_count",
           "hide_notification": false,
-          "id": 661,
+          "id": 748,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -2318,7 +2318,7 @@
           "templates": [],
           "text": "Source IP",
           "tooltip": "",
-          "type_id": 1019,
+          "type_id": 1026,
           "uuid": "44d3f83f-597c-4ecd-ab72-0d57269f591d",
           "values": [],
           "width": 94
@@ -2358,7 +2358,7 @@
           "deprecated": false,
           "export_key": "qr_flows/application",
           "hide_notification": false,
-          "id": 662,
+          "id": 749,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -2369,12 +2369,12 @@
           "placeholder": "",
           "prefix": null,
           "read_only": false,
-          "rich_text": false,
+          "rich_text": true,
           "tags": [],
           "templates": [],
           "text": "Application",
           "tooltip": "",
-          "type_id": 1020,
+          "type_id": 1027,
           "uuid": "55ebd534-30f5-472c-8692-7bd9a5a849d3",
           "values": [],
           "width": 88
@@ -2389,7 +2389,7 @@
           "deprecated": false,
           "export_key": "qr_flows/destination_bytes",
           "hide_notification": false,
-          "id": 663,
+          "id": 750,
           "input_type": "number",
           "internal": false,
           "is_tracked": false,
@@ -2405,7 +2405,7 @@
           "templates": [],
           "text": "Destination Bytes",
           "tooltip": "",
-          "type_id": 1020,
+          "type_id": 1027,
           "uuid": "d70568fe-21f6-4008-bab3-0f3fb1e89cf4",
           "values": [],
           "width": 88
@@ -2420,7 +2420,7 @@
           "deprecated": false,
           "export_key": "qr_flows/destination_ip",
           "hide_notification": false,
-          "id": 664,
+          "id": 751,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -2431,12 +2431,12 @@
           "placeholder": "",
           "prefix": null,
           "read_only": false,
-          "rich_text": false,
+          "rich_text": true,
           "tags": [],
           "templates": [],
           "text": "Destination IP",
           "tooltip": "",
-          "type_id": 1020,
+          "type_id": 1027,
           "uuid": "e9e41246-f362-418a-a0f1-e7e0d80e3572",
           "values": [],
           "width": 88
@@ -2451,7 +2451,7 @@
           "deprecated": false,
           "export_key": "qr_flows/destination_packets",
           "hide_notification": false,
-          "id": 665,
+          "id": 752,
           "input_type": "number",
           "internal": false,
           "is_tracked": false,
@@ -2467,7 +2467,7 @@
           "templates": [],
           "text": "Destination Packets",
           "tooltip": "",
-          "type_id": 1020,
+          "type_id": 1027,
           "uuid": "d7ca79dc-840d-4e0d-8be0-bb45c8be4494",
           "values": [],
           "width": 88
@@ -2482,7 +2482,7 @@
           "deprecated": false,
           "export_key": "qr_flows/destination_port",
           "hide_notification": false,
-          "id": 666,
+          "id": 753,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -2493,12 +2493,12 @@
           "placeholder": "",
           "prefix": null,
           "read_only": false,
-          "rich_text": false,
+          "rich_text": true,
           "tags": [],
           "templates": [],
           "text": "Destination Port",
           "tooltip": "",
-          "type_id": 1020,
+          "type_id": 1027,
           "uuid": "367cd2f3-1f57-48ad-b06e-ec6d6d884b8e",
           "values": [],
           "width": 88
@@ -2513,7 +2513,7 @@
           "deprecated": false,
           "export_key": "qr_flows/first_packet_time",
           "hide_notification": false,
-          "id": 667,
+          "id": 754,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -2529,7 +2529,7 @@
           "templates": [],
           "text": "First Packet Time",
           "tooltip": "",
-          "type_id": 1020,
+          "type_id": 1027,
           "uuid": "fbeaa822-58b2-4ffd-b56a-3309acb865cf",
           "values": [],
           "width": 52
@@ -2544,7 +2544,7 @@
           "deprecated": false,
           "export_key": "qr_flows/protocol",
           "hide_notification": false,
-          "id": 668,
+          "id": 755,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -2560,7 +2560,7 @@
           "templates": [],
           "text": "Protocol",
           "tooltip": "",
-          "type_id": 1020,
+          "type_id": 1027,
           "uuid": "942b9607-fe2c-400e-971d-982f64d00dd4",
           "values": [],
           "width": 64
@@ -2575,7 +2575,7 @@
           "deprecated": false,
           "export_key": "qr_flows/reported_time",
           "hide_notification": false,
-          "id": 669,
+          "id": 756,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -2591,7 +2591,7 @@
           "templates": [],
           "text": "Reported Time",
           "tooltip": "",
-          "type_id": 1020,
+          "type_id": 1027,
           "uuid": "8120eaab-790e-4c45-80c4-95135d737818",
           "values": [],
           "width": 70
@@ -2606,7 +2606,7 @@
           "deprecated": false,
           "export_key": "qr_flows/source_bytes",
           "hide_notification": false,
-          "id": 670,
+          "id": 757,
           "input_type": "number",
           "internal": false,
           "is_tracked": false,
@@ -2622,7 +2622,7 @@
           "templates": [],
           "text": "Source Bytes",
           "tooltip": "",
-          "type_id": 1020,
+          "type_id": 1027,
           "uuid": "e6db7fbe-9a3e-416a-96af-b7637634519d",
           "values": [],
           "width": 53
@@ -2637,7 +2637,7 @@
           "deprecated": false,
           "export_key": "qr_flows/source_ip",
           "hide_notification": false,
-          "id": 671,
+          "id": 758,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -2648,12 +2648,12 @@
           "placeholder": "",
           "prefix": null,
           "read_only": false,
-          "rich_text": false,
+          "rich_text": true,
           "tags": [],
           "templates": [],
           "text": "Source IP",
           "tooltip": "",
-          "type_id": 1020,
+          "type_id": 1027,
           "uuid": "a949ff96-e8d1-470f-b2ec-1e6168d32165",
           "values": [],
           "width": 53
@@ -2668,7 +2668,7 @@
           "deprecated": false,
           "export_key": "qr_flows/source_packets",
           "hide_notification": false,
-          "id": 672,
+          "id": 759,
           "input_type": "number",
           "internal": false,
           "is_tracked": false,
@@ -2684,7 +2684,7 @@
           "templates": [],
           "text": "Source Packets",
           "tooltip": "",
-          "type_id": 1020,
+          "type_id": 1027,
           "uuid": "ddc62352-55d4-4d7d-adeb-9b7283b2448f",
           "values": [],
           "width": 60
@@ -2699,7 +2699,7 @@
           "deprecated": false,
           "export_key": "qr_flows/source_port",
           "hide_notification": false,
-          "id": 673,
+          "id": 760,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -2710,12 +2710,12 @@
           "placeholder": "",
           "prefix": null,
           "read_only": false,
-          "rich_text": false,
+          "rich_text": true,
           "tags": [],
           "templates": [],
           "text": "Source Port",
           "tooltip": "",
-          "type_id": 1020,
+          "type_id": 1027,
           "uuid": "c90c239d-e1da-4429-a32a-9323fc3ca16d",
           "values": [],
           "width": 53
@@ -2755,7 +2755,7 @@
           "deprecated": false,
           "export_key": "qr_offense_top_events/category",
           "hide_notification": false,
-          "id": 674,
+          "id": 761,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -2771,7 +2771,7 @@
           "templates": [],
           "text": "Category",
           "tooltip": "",
-          "type_id": 1021,
+          "type_id": 1028,
           "uuid": "2ab36024-0e8a-4962-8f2f-f05b4b62fcdf",
           "values": [],
           "width": 142
@@ -2786,7 +2786,7 @@
           "deprecated": false,
           "export_key": "qr_offense_top_events/destination_ip",
           "hide_notification": false,
-          "id": 675,
+          "id": 762,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -2802,7 +2802,7 @@
           "templates": [],
           "text": "Destination IP",
           "tooltip": "",
-          "type_id": 1021,
+          "type_id": 1028,
           "uuid": "c335a25f-91a9-4119-8a72-affe0ee09528",
           "values": [],
           "width": 155
@@ -2817,7 +2817,7 @@
           "deprecated": false,
           "export_key": "qr_offense_top_events/event_count",
           "hide_notification": false,
-          "id": 676,
+          "id": 763,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -2833,7 +2833,7 @@
           "templates": [],
           "text": "Event Count",
           "tooltip": "",
-          "type_id": 1021,
+          "type_id": 1028,
           "uuid": "8eeb2a3b-50c8-42e7-907a-1ba44901bc61",
           "values": [],
           "width": 80
@@ -2848,7 +2848,7 @@
           "deprecated": false,
           "export_key": "qr_offense_top_events/event_name",
           "hide_notification": false,
-          "id": 677,
+          "id": 764,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -2864,7 +2864,7 @@
           "templates": [],
           "text": "Event Name",
           "tooltip": "",
-          "type_id": 1021,
+          "type_id": 1028,
           "uuid": "c45d91a0-373b-4386-8866-cf61558e782e",
           "values": [],
           "width": 248
@@ -2879,7 +2879,7 @@
           "deprecated": false,
           "export_key": "qr_offense_top_events/event_time",
           "hide_notification": false,
-          "id": 678,
+          "id": 765,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -2895,7 +2895,7 @@
           "templates": [],
           "text": "Event Time",
           "tooltip": "",
-          "type_id": 1021,
+          "type_id": 1028,
           "uuid": "d0a29a03-f140-495f-94c8-e86cc0d4b8c5",
           "values": [],
           "width": 43
@@ -2910,7 +2910,7 @@
           "deprecated": false,
           "export_key": "qr_offense_top_events/log_source",
           "hide_notification": false,
-          "id": 679,
+          "id": 766,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -2926,7 +2926,7 @@
           "templates": [],
           "text": "Log Source",
           "tooltip": "",
-          "type_id": 1021,
+          "type_id": 1028,
           "uuid": "c3b2de7d-16b0-4db3-9c57-8cf9c5968e62",
           "values": [],
           "width": 228
@@ -2941,7 +2941,7 @@
           "deprecated": false,
           "export_key": "qr_offense_top_events/magnitude",
           "hide_notification": false,
-          "id": 680,
+          "id": 767,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -2957,7 +2957,7 @@
           "templates": [],
           "text": "Magnitude",
           "tooltip": "",
-          "type_id": 1021,
+          "type_id": 1028,
           "uuid": "cfb099aa-be4c-4e58-9dbe-6526957ee3a4",
           "values": [],
           "width": 81
@@ -2972,7 +2972,7 @@
           "deprecated": false,
           "export_key": "qr_offense_top_events/reported_time",
           "hide_notification": false,
-          "id": 681,
+          "id": 768,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -2988,7 +2988,7 @@
           "templates": [],
           "text": "Reported Time",
           "tooltip": "",
-          "type_id": 1021,
+          "type_id": 1028,
           "uuid": "09f90681-325f-45e3-b1b2-6d0fa3b7312d",
           "values": [],
           "width": 70
@@ -3003,7 +3003,7 @@
           "deprecated": false,
           "export_key": "qr_offense_top_events/source_ip",
           "hide_notification": false,
-          "id": 682,
+          "id": 769,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -3019,7 +3019,7 @@
           "templates": [],
           "text": "Source IP",
           "tooltip": "",
-          "type_id": 1021,
+          "type_id": 1028,
           "uuid": "7ff661a9-2b89-4f5b-bc55-e91df4aeaea3",
           "values": [],
           "width": 146
@@ -3034,7 +3034,7 @@
           "deprecated": false,
           "export_key": "qr_offense_top_events/username",
           "hide_notification": false,
-          "id": 683,
+          "id": 770,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3050,7 +3050,7 @@
           "templates": [],
           "text": "Username",
           "tooltip": "",
-          "type_id": 1021,
+          "type_id": 1028,
           "uuid": "670ee674-e080-44ae-876c-4991fdaf2e27",
           "values": [],
           "width": 105
@@ -3090,7 +3090,7 @@
           "deprecated": false,
           "export_key": "qr_top_destination_ips/category_count",
           "hide_notification": false,
-          "id": 684,
+          "id": 771,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -3106,7 +3106,7 @@
           "templates": [],
           "text": "Category Count",
           "tooltip": "",
-          "type_id": 1022,
+          "type_id": 1029,
           "uuid": "d7fe1951-6136-46b2-8389-62525ada5c40",
           "values": [],
           "width": 108
@@ -3121,7 +3121,7 @@
           "deprecated": false,
           "export_key": "qr_top_destination_ips/destination_ip",
           "hide_notification": false,
-          "id": 685,
+          "id": 772,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -3137,7 +3137,7 @@
           "templates": [],
           "text": "Destination IP",
           "tooltip": "",
-          "type_id": 1022,
+          "type_id": 1029,
           "uuid": "2bb02d45-dd54-4d55-be57-c96bf74dda27",
           "values": [],
           "width": 122
@@ -3152,7 +3152,7 @@
           "deprecated": false,
           "export_key": "qr_top_destination_ips/event_count",
           "hide_notification": false,
-          "id": 686,
+          "id": 773,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -3168,7 +3168,7 @@
           "templates": [],
           "text": "Event Count",
           "tooltip": "",
-          "type_id": 1022,
+          "type_id": 1029,
           "uuid": "7bbc0dcc-82a7-4907-82b1-1e6f6cedcf73",
           "values": [],
           "width": 82
@@ -3183,7 +3183,7 @@
           "deprecated": false,
           "export_key": "qr_top_destination_ips/flow_count",
           "hide_notification": false,
-          "id": 687,
+          "id": 774,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -3199,7 +3199,7 @@
           "templates": [],
           "text": "Flow Count",
           "tooltip": "",
-          "type_id": 1022,
+          "type_id": 1029,
           "uuid": "312615da-c065-4a0b-9e59-d3ac344fb32e",
           "values": [],
           "width": 374
@@ -3214,7 +3214,7 @@
           "deprecated": false,
           "export_key": "qr_top_destination_ips/reported_time",
           "hide_notification": false,
-          "id": 688,
+          "id": 775,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -3230,7 +3230,7 @@
           "templates": [],
           "text": "Reported Time",
           "tooltip": "",
-          "type_id": 1022,
+          "type_id": 1029,
           "uuid": "ae412689-6c07-47ab-8750-03c468692882",
           "values": [],
           "width": 70
@@ -3270,7 +3270,7 @@
           "deprecated": false,
           "export_key": "qr_top_source_ips/category_count",
           "hide_notification": false,
-          "id": 689,
+          "id": 776,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -3286,7 +3286,7 @@
           "templates": [],
           "text": "Category Count",
           "tooltip": "",
-          "type_id": 1023,
+          "type_id": 1030,
           "uuid": "ec8d00a0-ab2b-4f08-bdf3-717c5b1ba908",
           "values": [],
           "width": 109
@@ -3301,7 +3301,7 @@
           "deprecated": false,
           "export_key": "qr_top_source_ips/domain",
           "hide_notification": false,
-          "id": 690,
+          "id": 777,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3317,7 +3317,7 @@
           "templates": [],
           "text": "Domain",
           "tooltip": "",
-          "type_id": 1023,
+          "type_id": 1030,
           "uuid": "2d51d52d-ad65-4263-909e-68242d4befd1",
           "values": [],
           "width": 78
@@ -3332,7 +3332,7 @@
           "deprecated": false,
           "export_key": "qr_top_source_ips/event_count",
           "hide_notification": false,
-          "id": 691,
+          "id": 778,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -3348,7 +3348,7 @@
           "templates": [],
           "text": "Event Count",
           "tooltip": "",
-          "type_id": 1023,
+          "type_id": 1030,
           "uuid": "7a6917ee-041e-45a8-a6f3-4d9fa7d46621",
           "values": [],
           "width": 106
@@ -3363,7 +3363,7 @@
           "deprecated": false,
           "export_key": "qr_top_source_ips/flow_count",
           "hide_notification": false,
-          "id": 692,
+          "id": 779,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -3379,7 +3379,7 @@
           "templates": [],
           "text": "Flow Count",
           "tooltip": "",
-          "type_id": 1023,
+          "type_id": 1030,
           "uuid": "d6aa26ad-5d57-4aa3-9c5d-84d4a9fc48f8",
           "values": [],
           "width": 45
@@ -3394,7 +3394,7 @@
           "deprecated": false,
           "export_key": "qr_top_source_ips/mac",
           "hide_notification": false,
-          "id": 693,
+          "id": 780,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3410,7 +3410,7 @@
           "templates": [],
           "text": "MAC",
           "tooltip": "",
-          "type_id": 1023,
+          "type_id": 1030,
           "uuid": "ad4d32ee-0900-41d0-a86c-95b82d8f8cdf",
           "values": [],
           "width": 77
@@ -3425,7 +3425,7 @@
           "deprecated": false,
           "export_key": "qr_top_source_ips/network",
           "hide_notification": false,
-          "id": 694,
+          "id": 781,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3441,7 +3441,7 @@
           "templates": [],
           "text": "Network",
           "tooltip": "",
-          "type_id": 1023,
+          "type_id": 1030,
           "uuid": "899cf2a4-c347-46bc-8b00-a3721c537def",
           "values": [],
           "width": 65
@@ -3456,7 +3456,7 @@
           "deprecated": false,
           "export_key": "qr_top_source_ips/reported_time",
           "hide_notification": false,
-          "id": 695,
+          "id": 782,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -3472,7 +3472,7 @@
           "templates": [],
           "text": "Reported Time",
           "tooltip": "",
-          "type_id": 1023,
+          "type_id": 1030,
           "uuid": "95e4152a-c0ee-4827-a055-f29144ad1a62",
           "values": [],
           "width": 70
@@ -3487,7 +3487,7 @@
           "deprecated": false,
           "export_key": "qr_top_source_ips/source_ip",
           "hide_notification": false,
-          "id": 696,
+          "id": 783,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -3503,7 +3503,7 @@
           "templates": [],
           "text": "Source IP",
           "tooltip": "",
-          "type_id": 1023,
+          "type_id": 1030,
           "uuid": "8e61b967-7937-4038-ae97-1d3682735173",
           "values": [],
           "width": 113
@@ -3518,7 +3518,7 @@
           "deprecated": false,
           "export_key": "qr_top_source_ips/usernames",
           "hide_notification": false,
-          "id": 697,
+          "id": 784,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -3534,7 +3534,7 @@
           "templates": [],
           "text": "Usernames",
           "tooltip": "",
-          "type_id": 1023,
+          "type_id": 1030,
           "uuid": "3d8c9e6c-c5c9-48c6-84d5-b3a8905e3a03",
           "values": [],
           "width": 99
@@ -3549,7 +3549,7 @@
           "deprecated": false,
           "export_key": "qr_top_source_ips/vulnerability_count",
           "hide_notification": false,
-          "id": 698,
+          "id": 785,
           "input_type": "number",
           "internal": false,
           "is_tracked": false,
@@ -3565,7 +3565,7 @@
           "templates": [],
           "text": "Vulnerability Count",
           "tooltip": "",
-          "type_id": 1023,
+          "type_id": 1030,
           "uuid": "a6f51997-4742-4093-b7f6-a2f7650076f4",
           "values": [],
           "width": 131
@@ -3605,7 +3605,7 @@
           "deprecated": false,
           "export_key": "qr_triggered_rules/date_created",
           "hide_notification": false,
-          "id": 699,
+          "id": 786,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -3621,7 +3621,7 @@
           "templates": [],
           "text": "Date Created",
           "tooltip": "",
-          "type_id": 1024,
+          "type_id": 1031,
           "uuid": "10916f01-0d40-49d4-aa23-ee292a881abd",
           "values": [],
           "width": 60
@@ -3636,7 +3636,7 @@
           "deprecated": false,
           "export_key": "qr_triggered_rules/enabled",
           "hide_notification": false,
-          "id": 700,
+          "id": 787,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3652,7 +3652,7 @@
           "templates": [],
           "text": "Enabled",
           "tooltip": "",
-          "type_id": 1024,
+          "type_id": 1031,
           "uuid": "51cd6776-43b2-4845-bcdb-aea84ffccd18",
           "values": [],
           "width": 62
@@ -3667,7 +3667,7 @@
           "deprecated": false,
           "export_key": "qr_triggered_rules/last_modified",
           "hide_notification": false,
-          "id": 701,
+          "id": 788,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -3683,7 +3683,7 @@
           "templates": [],
           "text": "Last Modified",
           "tooltip": "",
-          "type_id": 1024,
+          "type_id": 1031,
           "uuid": "f1bac767-7798-4572-a86b-2f0bc0a851a1",
           "values": [],
           "width": 67
@@ -3698,7 +3698,7 @@
           "deprecated": false,
           "export_key": "qr_triggered_rules/reported_time",
           "hide_notification": false,
-          "id": 702,
+          "id": 789,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -3714,7 +3714,7 @@
           "templates": [],
           "text": "Reported Time",
           "tooltip": "",
-          "type_id": 1024,
+          "type_id": 1031,
           "uuid": "bd13ffd1-b303-4b86-9eef-b8a44702cd80",
           "values": [],
           "width": 70
@@ -3729,7 +3729,7 @@
           "deprecated": false,
           "export_key": "qr_triggered_rules/response",
           "hide_notification": false,
-          "id": 703,
+          "id": 790,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3745,7 +3745,7 @@
           "templates": [],
           "text": "Response",
           "tooltip": "",
-          "type_id": 1024,
+          "type_id": 1031,
           "uuid": "34ff5942-6417-424e-bbdb-a6fa3f32774e",
           "values": [],
           "width": 74
@@ -3760,7 +3760,7 @@
           "deprecated": false,
           "export_key": "qr_triggered_rules/rule_group",
           "hide_notification": false,
-          "id": 704,
+          "id": 791,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3776,7 +3776,7 @@
           "templates": [],
           "text": "Rule Group",
           "tooltip": "",
-          "type_id": 1024,
+          "type_id": 1031,
           "uuid": "71634383-1e15-4f00-9f74-adeb79d5f1e9",
           "values": [],
           "width": 47
@@ -3791,7 +3791,7 @@
           "deprecated": false,
           "export_key": "qr_triggered_rules/rule_name",
           "hide_notification": false,
-          "id": 705,
+          "id": 792,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -3807,7 +3807,7 @@
           "templates": [],
           "text": "Rule Name",
           "tooltip": "",
-          "type_id": 1024,
+          "type_id": 1031,
           "uuid": "c516c54d-af5f-47f5-a82f-16d0ac196323",
           "values": [],
           "width": 286
@@ -3822,7 +3822,7 @@
           "deprecated": false,
           "export_key": "qr_triggered_rules/rule_type",
           "hide_notification": false,
-          "id": 706,
+          "id": 793,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3838,7 +3838,7 @@
           "templates": [],
           "text": "Rule Type",
           "tooltip": "",
-          "type_id": 1024,
+          "type_id": 1031,
           "uuid": "2cc90f9c-3579-48d0-8445-e93090d0e48a",
           "values": [],
           "width": 71
@@ -3868,182 +3868,182 @@
     {
       "actions": [],
       "content": {
-        "version": 30,
-        "workflow_id": "qradar_categories",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"qradar_categories\" isExecutable=\"true\" name=\"Example of searching and returning Categories\"\u003e\u003cdocumentation\u003eReturns event categories for the QRadar Offense\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0cg7aq8\u003c/outgoing\u003e\u003coutgoing\u003eSequenceFlow_16sbi3h\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_193h79o\" name=\"QRadar Top Events\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d8e63812-0b58-4ca1-991a-49255f3dd04e\"\u003e{\"inputs\":{\"048ba39a-ab94-4d1f-a0f8-2462de3c044c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_content_value\":{\"format\":\"text\",\"content\":\"SELECT %param1% FROM events %param2% %param4% %param5% %param6% LAST 36 days PARAMETERS PROGRESSDETAILSRESOLUTION=60\"}}},\"01ed4652-fe61-4dbf-bc83-f81c62c5563c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"CATEGORYNAME(category) as categoryname,magnitude as magnitude,SUM(eventcount) as eventcount,max(starttime) as eventtime,UNIQUECOUNT(sourceip) as sourceipcount,UNIQUECOUNT(destinationip) as destinationipcount \"}},\"9d8fc645-5067-4ab0-b151-1d106dad91d6\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"WHERE INOFFENSE(%param3%)\"}},\"eefc9e56-2806-4534-b409-42e25154ecc9\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"GROUP BY category,magnitude\"}},\"19778fc0-9a30-4b8b-9c21-642495f9eebc\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"ORDER BY max(starttime)  DESC\"}},\"ca2d7d7f-fe6d-4a21-b011-7953494c350c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"LIMIT 10\"}}},\"post_processing_script\":\"link = \\\"\u0026lt;a href=\\\\\\\"https://\\\"+results.qrhost+\\\"/console/ui/offenses/{0}/events?filter={1}%3B%3D%3B%3B{2}\u0026amp;page=1\u0026amp;pagesize=10\\\\\\\" target=\\\\\\\"_blank\\\\\\\"\u0026gt;{3}\u0026lt;/a\u0026gt;\\\"\\n\\nfor event in results.events:\\n  qradar_event = incident.addRow(\\\"qr_categories\\\")\\n  qradar_event.category_name = link.format(results.offenseid,\\\"category_name\\\",event.categoryname,event.categoryname)\\n  qradar_event.magnitude = link.format(results.offenseid,\\\"category_name\\\",event.categoryname,event.magnitude)\\n  qradar_event.event_count = link.format(results.offenseid,\\\"category_name\\\",event.categoryname,event.eventcount)\\n  qradar_event.event_time =  int(event.eventtime)\\n  qradar_event.sourceip_count = link.format(results.offenseid,\\\"category_name\\\",event.categoryname,event.sourceipcount)\\n  qradar_event.destinationip_count =  link.format(results.offenseid,\\\"category_name\\\",event.categoryname,event.destinationipcount)\\n  qradar_event.reported_time = results.current_time\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.qradar_search_param3 = incident.properties.qradar_id\\ninputs.qradar_query_type = \\\"categories\\\"\\ninputs.qradar_label = incident.properties.qradar_destination\\ninputs.soar_table_name = \\\"qr_categories\\\"\\ninputs.soar_incident_id = incident.id\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0cg7aq8\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_08d3uem\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_0zz07yv\"\u003e\u003cincoming\u003eSequenceFlow_08d3uem\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_08d3uem\" sourceRef=\"ServiceTask_193h79o\" targetRef=\"EndEvent_0zz07yv\"/\u003e\u003csequenceFlow id=\"SequenceFlow_0cg7aq8\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_193h79o\"/\u003e\u003cserviceTask id=\"ServiceTask_0psm0xv\" name=\"QRadar Top Events\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d8e63812-0b58-4ca1-991a-49255f3dd04e\"\u003e{\"inputs\":{\"048ba39a-ab94-4d1f-a0f8-2462de3c044c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_content_value\":{\"format\":\"text\",\"content\":\"SELECT %param1% FROM flows %param2% %param4% %param5% %param6% LAST 36 days PARAMETERS PROGRESSDETAILSRESOLUTION=60\"}}},\"01ed4652-fe61-4dbf-bc83-f81c62c5563c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"CATEGORYNAME(category) as categoryname,COUNT(*) as flowcount,max(lastpackettime) as lastpackettime,UNIQUECOUNT(sourceip) as sourceipcount,UNIQUECOUNT(destinationip) as destinationipcount \"}},\"9d8fc645-5067-4ab0-b151-1d106dad91d6\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"WHERE INOFFENSE(%param3%)\"}},\"eefc9e56-2806-4534-b409-42e25154ecc9\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"GROUP BY category\"}},\"19778fc0-9a30-4b8b-9c21-642495f9eebc\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"ORDER BY lastpackettime  DESC\"}},\"ca2d7d7f-fe6d-4a21-b011-7953494c350c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"LIMIT 10\"}}},\"post_processing_script\":\"link = \\\"\u0026lt;a href=\\\\\\\"https://\\\"+results.qrhost+\\\"/console/ui/offenses/{0}/events?filter={1}%3B%3D%3B%3B{2}\u0026amp;page=1\u0026amp;pagesize=10\\\\\\\" target=\\\\\\\"_blank\\\\\\\"\u0026gt;{3}\u0026lt;/a\u0026gt;\\\"\\n\\nfor event in results.events:\\n  qradar_event = incident.addRow(\\\"qr_categories\\\")\\n  qradar_event.category_name = event.categoryname\\n  qradar_event.flow_count = event.flowcount\\n  qradar_event.last_packet_time =  int(event.lastpackettime)\\n  qradar_event.sourceip_count = event.sourceipcount\\n  qradar_event.destinationip_count =  event.destinationipcount\\n  qradar_event.reported_time = results.current_time\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.qradar_search_param3 = incident.properties.qradar_id\\ninputs.qradar_query_type = \\\"categories\\\"\\ninputs.qradar_label = incident.properties.qradar_destination\\ninputs.soar_table_name = \\\"qr_categories\\\"\\ninputs.soar_incident_id = incident.id\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_16sbi3h\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_17dxnd1\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_16sbi3h\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0psm0xv\"/\u003e\u003cendEvent id=\"EndEvent_1ar2znf\"\u003e\u003cincoming\u003eSequenceFlow_17dxnd1\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_17dxnd1\" sourceRef=\"ServiceTask_0psm0xv\" targetRef=\"EndEvent_1ar2znf\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_193h79o\" id=\"ServiceTask_193h79o_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"345\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0zz07yv\" id=\"EndEvent_0zz07yv_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"601\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"619\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_08d3uem\" id=\"SequenceFlow_08d3uem_di\"\u003e\u003comgdi:waypoint x=\"445\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"601\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"523\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0cg7aq8\" id=\"SequenceFlow_0cg7aq8_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"345\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"271.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0psm0xv\" id=\"ServiceTask_0psm0xv_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"345\" y=\"297\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_16sbi3h\" id=\"SequenceFlow_16sbi3h_di\"\u003e\u003comgdi:waypoint x=\"188\" xsi:type=\"omgdc:Point\" y=\"222\"/\u003e\u003comgdi:waypoint x=\"272\" xsi:type=\"omgdc:Point\" y=\"337\"/\u003e\u003comgdi:waypoint x=\"345\" xsi:type=\"omgdc:Point\" y=\"337\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"230\" y=\"257.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1ar2znf\" id=\"EndEvent_1ar2znf_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"611.4709897610921\" y=\"318.86120591581346\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"629.4709897610921\" y=\"357.86120591581346\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_17dxnd1\" id=\"SequenceFlow_17dxnd1_di\"\u003e\u003comgdi:waypoint x=\"445\" xsi:type=\"omgdc:Point\" y=\"337\"/\u003e\u003comgdi:waypoint x=\"530\" xsi:type=\"omgdc:Point\" y=\"337\"/\u003e\u003comgdi:waypoint x=\"530\" xsi:type=\"omgdc:Point\" y=\"337\"/\u003e\u003comgdi:waypoint x=\"611\" xsi:type=\"omgdc:Point\" y=\"337\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"545\" y=\"330\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 30,
-      "creator_id": "admin@example.com",
-      "description": "Returns event categories for the QRadar Offense",
-      "export_key": "qradar_categories",
-      "last_modified_by": "admin@example.com",
-      "last_modified_time": 1647022871297,
-      "name": "Example of searching and returning Categories",
-      "object_type": "incident",
-      "programmatic_name": "qradar_categories",
-      "tags": [],
-      "uuid": "0bf4dc61-c103-4805-88bd-91e1c2304538",
-      "workflow_id": 127
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 26,
-        "workflow_id": "qradar_assets_information",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"qradar_assets_information\" isExecutable=\"true\" name=\"Example of searching and returning Assets information\"\u003e\u003cdocumentation\u003eReturns the information on the Assets associated with the QRadar Offense ID\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0jajzph\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0w4xfyt\" name=\"QRadar Offense Summary\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"0aee36de-8719-4154-a1e7-6455f065bb94\"\u003e{\"inputs\":{},\"post_processing_script\":\"for event in results.assets:\\n  qradar_event = incident.addRow(\\\"qr_assets\\\")\\n  qradar_event.asset_id = event.id\\n  qradar_event.asset_name = event.name\\n  qradar_event.ip_address = event.sourceip\\n  qradar_event.operating_system = event.osid\\n  qradar_event.aggregated_cvss = event.riskScoreSum\\n  qradar_event.vulnerabilities = str(event.vulnerabilityCount)\\n  qradar_event.last_user = event.users[0].username if len(event.users)\u0026gt;0 and event.users[0].username is not None else \\\"\\\"\\n  qradar_event.last_user_seen = int(event.users[0].lastSeenProfiler) if len(event.users)\u0026gt;0 and event.users[0].lastSeenProfiler is not None else \\\"\\\"\\n  qradar_event.reported_time = results.current_time\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.qradar_query_type = \\\"offenseassets\\\"\\ninputs.qradar_offense_id = incident.properties.qradar_id\\ninputs.qradar_label = incident.properties.qradar_destination\\ninputs.soar_table_name = \\\"qr_assets\\\"\\ninputs.soar_incident_id = incident.id\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0jajzph\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_03x7why\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_00nirf1\"\u003e\u003cincoming\u003eSequenceFlow_03x7why\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_03x7why\" sourceRef=\"ServiceTask_0w4xfyt\" targetRef=\"EndEvent_00nirf1\"/\u003e\u003csequenceFlow id=\"SequenceFlow_0jajzph\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0w4xfyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"164\" y=\"158\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"159\" y=\"193\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"173\" xsi:type=\"omgdc:Point\" y=\"191\"/\u003e\u003comgdi:waypoint x=\"151\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0w4xfyt\" id=\"ServiceTask_0w4xfyt_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"340\" y=\"136\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_00nirf1\" id=\"EndEvent_00nirf1_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"629\" y=\"158\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"647\" y=\"197\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_03x7why\" id=\"SequenceFlow_03x7why_di\"\u003e\u003comgdi:waypoint x=\"440\" xsi:type=\"omgdc:Point\" y=\"176\"/\u003e\u003comgdi:waypoint x=\"629\" xsi:type=\"omgdc:Point\" y=\"176\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"534.5\" y=\"154\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0jajzph\" id=\"SequenceFlow_0jajzph_di\"\u003e\u003comgdi:waypoint x=\"200\" xsi:type=\"omgdc:Point\" y=\"176\"/\u003e\u003comgdi:waypoint x=\"269\" xsi:type=\"omgdc:Point\" y=\"176\"/\u003e\u003comgdi:waypoint x=\"269\" xsi:type=\"omgdc:Point\" y=\"176\"/\u003e\u003comgdi:waypoint x=\"340\" xsi:type=\"omgdc:Point\" y=\"176\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"284\" y=\"169.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 26,
-      "creator_id": "admin@example.com",
-      "description": "Returns the information on the Assets associated with the QRadar Offense ID",
-      "export_key": "qradar_assets_information",
-      "last_modified_by": "admin@example.com",
-      "last_modified_time": 1647022870935,
-      "name": "Example of searching and returning Assets information",
-      "object_type": "incident",
-      "programmatic_name": "qradar_assets_information",
-      "tags": [],
-      "uuid": "a617ff13-51d0-4697-b729-7590252740bd",
-      "workflow_id": 125
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 29,
-        "workflow_id": "qradar_destination_ips",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"qradar_destination_ips\" isExecutable=\"true\" name=\"Example of searching and returning Destination IPs information\"\u003e\u003cdocumentation\u003eReturns the information on the Destination IPS associated with the QRadar Offense ID\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1ie3uhp\u003c/outgoing\u003e\u003coutgoing\u003eSequenceFlow_1uuhodb\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0wa32wd\" name=\"QRadar Top Events\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d8e63812-0b58-4ca1-991a-49255f3dd04e\"\u003e{\"inputs\":{\"048ba39a-ab94-4d1f-a0f8-2462de3c044c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_content_value\":{\"format\":\"text\",\"content\":\"SELECT %param1% FROM events %param2% %param4% %param5% %param6% LAST 36 days PARAMETERS PROGRESSDETAILSRESOLUTION=60\"}}},\"01ed4652-fe61-4dbf-bc83-f81c62c5563c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"destinationip as destinationip,UNIQUECOUNT(category) as categorycount,SUM(eventcount) as eventcount,max(starttime)\"}},\"9d8fc645-5067-4ab0-b151-1d106dad91d6\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"WHERE INOFFENSE(%param3%)\"}},\"eefc9e56-2806-4534-b409-42e25154ecc9\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"GROUP BY destinationip \"}},\"19778fc0-9a30-4b8b-9c21-642495f9eebc\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"ORDER BY max(starttime) DESC\"}},\"ca2d7d7f-fe6d-4a21-b011-7953494c350c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"LIMIT 10\"}}},\"post_processing_script\":\"link = \\\"\u0026lt;a href=\\\\\\\"https://\\\"+results.qrhost+\\\"/console/ui/offenses/{0}/events?filter={1}%3B%3D%3B%3B{2}\u0026amp;page=1\u0026amp;pagesize=10\\\\\\\" target=\\\\\\\"_blank\\\\\\\"\u0026gt;{3}\u0026lt;/a\u0026gt;\\\"\\n\\nfor event in results.events:\\n  qradar_event = incident.addRow(\\\"qr_top_destination_ips\\\")\\n  qradar_event.destination_ip = link.format(results.offenseid,\\\"destinationip\\\",event.destinationip,event.destinationip)\\n  qradar_event.event_count = link.format(results.offenseid,\\\"destinationip\\\",event.destinationip,event.eventcount)\\n  qradar_event.category_count = link.format(results.offenseid,\\\"destinationip\\\",event.destinationip,event.categorycount)\\n  qradar_event.reported_time = results.current_time\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.qradar_search_param3 = incident.properties.qradar_id\\ninputs.qradar_query_type = \\\"destinationip\\\"\\ninputs.qradar_label = incident.properties.qradar_destination\\ninputs.soar_incident_id = incident.id\\ninputs.soar_table_name = \\\"qr_top_destination_ips\\\"\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1ie3uhp\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1ge3qyy\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1ie3uhp\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0wa32wd\"/\u003e\u003cendEvent id=\"EndEvent_0tf1zg5\"\u003e\u003cincoming\u003eSequenceFlow_1ge3qyy\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1ge3qyy\" sourceRef=\"ServiceTask_0wa32wd\" targetRef=\"EndEvent_0tf1zg5\"/\u003e\u003cserviceTask id=\"ServiceTask_164pxep\" name=\"QRadar Top Events\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d8e63812-0b58-4ca1-991a-49255f3dd04e\"\u003e{\"inputs\":{\"048ba39a-ab94-4d1f-a0f8-2462de3c044c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_content_value\":{\"format\":\"text\",\"content\":\"SELECT %param1% FROM flows %param2% %param4% %param5% %param6% LAST 36 days PARAMETERS PROGRESSDETAILSRESOLUTION=60\"}}},\"01ed4652-fe61-4dbf-bc83-f81c62c5563c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"destinationip as destinationip,UNIQUECOUNT(category) as categorycount,COUNT(*) as flowcount,max(lastpackettime)\"}},\"9d8fc645-5067-4ab0-b151-1d106dad91d6\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"WHERE INOFFENSE(%param3%)\"}},\"eefc9e56-2806-4534-b409-42e25154ecc9\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"GROUP BY destinationip \"}},\"19778fc0-9a30-4b8b-9c21-642495f9eebc\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"ORDER BY max(lastpackettime) DESC\"}},\"ca2d7d7f-fe6d-4a21-b011-7953494c350c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"LIMIT 10\"}}},\"post_processing_script\":\"link = \\\"\u0026lt;a href=\\\\\\\"https://\\\"+results.qrhost+\\\"/console/ui/offenses/{0}/events?filter={1}%3B%3D%3B%3B{2}\u0026amp;page=1\u0026amp;pagesize=10\\\\\\\" target=\\\\\\\"_blank\\\\\\\"\u0026gt;{3}\u0026lt;/a\u0026gt;\\\"\\n\\nfor event in results.events:\\n  qradar_event = incident.addRow(\\\"qr_top_destination_ips\\\")\\n  qradar_event.destination_ip = event.destinationip\\n  qradar_event.flow_count = event.flowcount\\n  qradar_event.category_count = event.categorycount\\n  qradar_event.reported_time = results.current_time\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.qradar_search_param3 = incident.properties.qradar_id\\ninputs.qradar_query_type = \\\"destinationip\\\"\\ninputs.qradar_label = incident.properties.qradar_destination\\ninputs.soar_incident_id = incident.id\\ninputs.soar_table_name = \\\"qr_top_destination_ips\\\"\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1uuhodb\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_16irdjm\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1uuhodb\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_164pxep\"/\u003e\u003cendEvent id=\"EndEvent_1707dmc\"\u003e\u003cincoming\u003eSequenceFlow_16irdjm\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_16irdjm\" sourceRef=\"ServiceTask_164pxep\" targetRef=\"EndEvent_1707dmc\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0wa32wd\" id=\"ServiceTask_0wa32wd_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"326\" y=\"152\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1ie3uhp\" id=\"SequenceFlow_1ie3uhp_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"262\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"262\" xsi:type=\"omgdc:Point\" y=\"192\"/\u003e\u003comgdi:waypoint x=\"326\" xsi:type=\"omgdc:Point\" y=\"192\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"277\" y=\"192\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0tf1zg5\" id=\"EndEvent_0tf1zg5_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"559\" y=\"174\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"577\" y=\"213\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1ge3qyy\" id=\"SequenceFlow_1ge3qyy_di\"\u003e\u003comgdi:waypoint x=\"426\" xsi:type=\"omgdc:Point\" y=\"192\"/\u003e\u003comgdi:waypoint x=\"559\" xsi:type=\"omgdc:Point\" y=\"192\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"492.5\" y=\"170\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_164pxep\" id=\"ServiceTask_164pxep_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"326\" y=\"268\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1uuhodb\" id=\"SequenceFlow_1uuhodb_di\"\u003e\u003comgdi:waypoint x=\"189\" xsi:type=\"omgdc:Point\" y=\"222\"/\u003e\u003comgdi:waypoint x=\"262\" xsi:type=\"omgdc:Point\" y=\"308\"/\u003e\u003comgdi:waypoint x=\"326\" xsi:type=\"omgdc:Point\" y=\"308\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"225.5\" y=\"243\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1707dmc\" id=\"EndEvent_1707dmc_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"559\" y=\"290\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"577\" y=\"329\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_16irdjm\" id=\"SequenceFlow_16irdjm_di\"\u003e\u003comgdi:waypoint x=\"426\" xsi:type=\"omgdc:Point\" y=\"308\"/\u003e\u003comgdi:waypoint x=\"559\" xsi:type=\"omgdc:Point\" y=\"308\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"492.5\" y=\"286\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 29,
-      "creator_id": "admin@example.com",
-      "description": "Returns the information on the Destination IPS associated with the QRadar Offense ID",
-      "export_key": "qradar_destination_ips",
-      "last_modified_by": "admin@example.com",
-      "last_modified_time": 1647022871415,
-      "name": "Example of searching and returning Destination IPs information",
-      "object_type": "incident",
-      "programmatic_name": "qradar_destination_ips",
-      "tags": [],
-      "uuid": "c2c032ad-3789-49cd-892c-81112eabc81c",
-      "workflow_id": 131
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 28,
-        "workflow_id": "qradar_triggered_rules",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"qradar_triggered_rules\" isExecutable=\"true\" name=\"Example of fetching contributing rules for Offense\"\u003e\u003cdocumentation\u003eReturns the contributing rules for the Offense\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0j7w99n\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0j6nll2\" name=\"QRadar Offense Summary\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"0aee36de-8719-4154-a1e7-6455f065bb94\"\u003e{\"inputs\":{},\"post_processing_script\":\"link = \\\"\u0026lt;a href=\\\\\\\"https://\\\"+results.qrhost+\\\"/console/ui/offenses?filter={0}%3B%3D%3B%3B{1}\u0026amp;page=1\u0026amp;pagesize=10\\\\\\\" target=\\\\\\\"_blank\\\\\\\"\u0026gt;{2}\u0026lt;/a\u0026gt;\\\"\\n\\nfor event in results.rules_data:\\n  qradar_event = incident.addRow(\\\"qr_triggered_rules\\\")\\n  qradar_event.rule_name = link.format(\\\"rules\\\",event.id,event.name)\\n  qradar_event.rule_group = \\\", \\\".join(list(map(lambda x:x.name,list(filter(lambda x:x.name is not None,event.groups))))) if len(event.groups)\u0026gt;0 else \\\"\\\"\\n  qradar_event.rule_type = event.type\\n  qradar_event.enabled = \\\"True\\\" if event.enabled else \\\"False\\\"\\n  qradar_event.response = \\\"Yes\\\" if event.responses.newEvents or event.responses.email or event.responses.log or event.responses.addToReferenceData or event.responses.addToReferenceSet or event.responses.removeFromReferenceData or event.responses.removeFromReferenceSet or event.responses.notify or event.responses.notifySeverityOverride or event.responses.selectiveForwardingResponse or event.responses.customAction else \\\"No\\\"\\n  qradar_event.date_created = int(event.creationDate)\\n  qradar_event.last_modified = int(event.modificationDate)\\n  qradar_event.reported_time = results.current_time\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.qradar_offense_id= incident.properties.qradar_id\\ninputs.qradar_query_type = \\\"offenserules\\\"\\ninputs.qradar_label = incident.properties.qradar_destination\\ninputs.soar_table_name = \\\"qr_triggered_rules\\\"\\ninputs.soar_incident_id = incident.id\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0j7w99n\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1emdbk1\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0j7w99n\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0j6nll2\"/\u003e\u003cendEvent id=\"EndEvent_1njimqc\"\u003e\u003cincoming\u003eSequenceFlow_1emdbk1\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1emdbk1\" sourceRef=\"ServiceTask_0j6nll2\" targetRef=\"EndEvent_1njimqc\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0j6nll2\" id=\"ServiceTask_0j6nll2_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"365\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0j7w99n\" id=\"SequenceFlow_0j7w99n_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"365\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"281.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1njimqc\" id=\"EndEvent_1njimqc_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"678.7668269230769\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"696.7668269230769\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1emdbk1\" id=\"SequenceFlow_1emdbk1_di\"\u003e\u003comgdi:waypoint x=\"465\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"679\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"572\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 28,
-      "creator_id": "admin@example.com",
-      "description": "Returns the contributing rules for the Offense",
-      "export_key": "qradar_triggered_rules",
-      "last_modified_by": "admin@example.com",
-      "last_modified_time": 1647265373018,
-      "name": "Example of fetching contributing rules for Offense",
-      "object_type": "incident",
-      "programmatic_name": "qradar_triggered_rules",
-      "tags": [],
-      "uuid": "6b47dac2-3b5e-4916-a57b-59c5a6dbed0e",
-      "workflow_id": 126
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 1,
-        "workflow_id": "qradar_offense_last_persisted_time",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"qradar_offense_last_persisted_time\" isExecutable=\"true\" name=\"QRadar Offense Last Persisted Time\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_03zeyb7\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_13cvje3\" name=\"QRadar Offense Summary\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"0aee36de-8719-4154-a1e7-6455f065bb94\"\u003e{\"inputs\":{},\"post_processing_script\":\"incident.qr_last_persisted_time = results.last_persisted_time\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.qradar_offense_id= incident.properties.qradar_id\\ninputs.qradar_query_type = \\\"offensetime\\\"\\ninputs.qradar_label = incident.properties.qradar_destination\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_03zeyb7\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_05aww8g\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_03zeyb7\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_13cvje3\"/\u003e\u003cendEvent id=\"EndEvent_01nu2kt\"\u003e\u003cincoming\u003eSequenceFlow_05aww8g\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_05aww8g\" sourceRef=\"ServiceTask_13cvje3\" targetRef=\"EndEvent_01nu2kt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_13cvje3\" id=\"ServiceTask_13cvje3_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"255\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_03zeyb7\" id=\"SequenceFlow_03zeyb7_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"255\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"226.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_01nu2kt\" id=\"EndEvent_01nu2kt_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"454\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"472\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_05aww8g\" id=\"SequenceFlow_05aww8g_di\"\u003e\u003comgdi:waypoint x=\"355\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"454\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"404.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 1,
-      "creator_id": "admin@example.com",
-      "description": "",
-      "export_key": "qradar_offense_last_persisted_time",
-      "last_modified_by": "admin@example.com",
-      "last_modified_time": 1647013453968,
-      "name": "QRadar Offense Last Persisted Time",
-      "object_type": "incident",
-      "programmatic_name": "qradar_offense_last_persisted_time",
-      "tags": [],
-      "uuid": "2ffa3298-5bd3-4797-9a4d-46cc55c781c5",
-      "workflow_id": 117
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 33,
+        "version": 36,
         "workflow_id": "qradar_source_ips",
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"qradar_source_ips\" isExecutable=\"true\" name=\"Example of searching and returning Source IPs information\"\u003e\u003cdocumentation\u003eReturns the information about the source IPs associated with the QRadar Offense ID\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1ykiehr\u003c/outgoing\u003e\u003coutgoing\u003eSequenceFlow_1bpm9fv\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0llgtav\" name=\"QRadar Top Events\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d8e63812-0b58-4ca1-991a-49255f3dd04e\"\u003e{\"inputs\":{\"048ba39a-ab94-4d1f-a0f8-2462de3c044c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_content_value\":{\"format\":\"text\",\"content\":\"SELECT %param1% FROM events %param2% %param4% %param5% %param6% LAST 36 days PARAMETERS PROGRESSDETAILSRESOLUTION=60\"}}},\"01ed4652-fe61-4dbf-bc83-f81c62c5563c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"sourceip as sourceip,SUM(eventcount) as eventcount,UNIQUECOUNT(category) as categorycount,UNIQUECOUNT(username) as usernamecount,max(starttime)\"}},\"9d8fc645-5067-4ab0-b151-1d106dad91d6\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"WHERE INOFFENSE(%param3%)\"}},\"eefc9e56-2806-4534-b409-42e25154ecc9\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"GROUP BY sourceip\"}},\"19778fc0-9a30-4b8b-9c21-642495f9eebc\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"ORDER BY max(starttime) DESC\"}},\"ca2d7d7f-fe6d-4a21-b011-7953494c350c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"LIMIT 10\"}}},\"post_processing_script\":\"link = \\\"\u0026lt;a href=\\\\\\\"https://\\\"+results.qrhost+\\\"/console/ui/offenses/{0}/events?filter={1}%3B%3D%3B%3B{2}\u0026amp;page=1\u0026amp;pagesize=10\\\\\\\" target=\\\\\\\"_blank\\\\\\\"\u0026gt;{3}\u0026lt;/a\u0026gt;\\\"\\n\\nfor event in results.events:\\n  qradar_event = incident.addRow(\\\"qr_top_source_ips\\\")\\n  qradar_event.source_ip = link.format(results.offenseid,\\\"sourceip\\\",event.sourceip,event.sourceip)\\n  qradar_event.vulnerability_count = event.vulnerabilityCount\\n  qradar_event.mac = event.macAddress\\n  qradar_event.network = event.network\\n  qradar_event.domain = event.domain\\n  qradar_event.usernames = event.usernamecount\\n  qradar_event.event_count = link.format(results.offenseid,\\\"sourceip\\\",event.sourceip,event.eventcount)\\n  qradar_event.category_count = link.format(results.offenseid,\\\"sourceip\\\",event.sourceip,event.categorycount)\\n  qradar_event.reported_time = results.current_time\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.qradar_search_param3 = incident.properties.qradar_id\\ninputs.qradar_query_type = \\\"sourceip\\\"\\ninputs.qradar_label = incident.properties.qradar_destination\\ninputs.soar_incident_id = incident.id\\ninputs.soar_table_name = \\\"qr_top_source_ips\\\"\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1ykiehr\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1xf36er\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_0dfgyrw\"\u003e\u003cincoming\u003eSequenceFlow_0ebhn0g\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1bpm9fv\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_01babo2\"/\u003e\u003csequenceFlow id=\"SequenceFlow_1ykiehr\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0llgtav\"/\u003e\u003cserviceTask id=\"ServiceTask_01babo2\" name=\"QRadar Top Events\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d8e63812-0b58-4ca1-991a-49255f3dd04e\"\u003e{\"inputs\":{\"048ba39a-ab94-4d1f-a0f8-2462de3c044c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_content_value\":{\"format\":\"text\",\"content\":\"SELECT %param1% FROM flows %param2% %param4% %param5% %param6% LAST 36 days PARAMETERS PROGRESSDETAILSRESOLUTION=60\"}}},\"01ed4652-fe61-4dbf-bc83-f81c62c5563c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"sourceip as sourceip,COUNT(*) as flowcount,UNIQUECOUNT(category) as categorycount,max(lastpackettime)\"}},\"9d8fc645-5067-4ab0-b151-1d106dad91d6\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"WHERE INOFFENSE(%param3%)\"}},\"eefc9e56-2806-4534-b409-42e25154ecc9\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"GROUP BY sourceip\"}},\"19778fc0-9a30-4b8b-9c21-642495f9eebc\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"ORDER BY max(lastpackettime) DESC\"}},\"ca2d7d7f-fe6d-4a21-b011-7953494c350c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"LIMIT 10\"}}},\"post_processing_script\":\"link = \\\"\u0026lt;a href=\\\\\\\"https://\\\"+results.qrhost+\\\"/console/ui/offenses/{0}/events?filter={1}%3B%3D%3B%3B{2}\u0026amp;page=1\u0026amp;pagesize=10\\\\\\\" target=\\\\\\\"_blank\\\\\\\"\u0026gt;{3}\u0026lt;/a\u0026gt;\\\"\\n\\nfor event in results.events:\\n  qradar_event = incident.addRow(\\\"qr_top_source_ips\\\")\\n  qradar_event.source_ip = event.sourceip\\n  qradar_event.vulnerability_count = event.vulnerabilityCount\\n  qradar_event.mac = event.macAddress\\n  qradar_event.network = event.network\\n  qradar_event.domain = event.domain\\n  qradar_event.usernames = event.usernamecount\\n  qradar_event.flow_count = event.flowcount\\n  qradar_event.category_count = event.categorycount\\n  qradar_event.reported_time = results.current_time\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.qradar_search_param3 = incident.properties.qradar_id\\ninputs.qradar_query_type = \\\"sourceip\\\"\\ninputs.qradar_label = incident.properties.qradar_destination\\ninputs.soar_incident_id = incident.id\\ninputs.soar_table_name = \\\"qr_top_source_ips\\\"\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1bpm9fv\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0ebhn0g\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0ebhn0g\" sourceRef=\"ServiceTask_01babo2\" targetRef=\"EndEvent_0dfgyrw\"/\u003e\u003cendEvent id=\"EndEvent_1hcovth\"\u003e\u003cincoming\u003eSequenceFlow_1xf36er\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1xf36er\" sourceRef=\"ServiceTask_0llgtav\" targetRef=\"EndEvent_1hcovth\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0llgtav\" id=\"ServiceTask_0llgtav_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"324\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0dfgyrw\" id=\"EndEvent_0dfgyrw_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"521\" y=\"315\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"494\" y=\"354\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1bpm9fv\" id=\"SequenceFlow_1bpm9fv_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"225\"/\u003e\u003comgdi:waypoint x=\"228\" xsi:type=\"omgdc:Point\" y=\"225\"/\u003e\u003comgdi:waypoint x=\"228\" xsi:type=\"omgdc:Point\" y=\"333\"/\u003e\u003comgdi:waypoint x=\"324\" xsi:type=\"omgdc:Point\" y=\"333\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"198\" y=\"272.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1ykiehr\" id=\"SequenceFlow_1ykiehr_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"324\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"261\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_01babo2\" id=\"ServiceTask_01babo2_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"324\" y=\"293\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0ebhn0g\" id=\"SequenceFlow_0ebhn0g_di\"\u003e\u003comgdi:waypoint x=\"424\" xsi:type=\"omgdc:Point\" y=\"333\"/\u003e\u003comgdi:waypoint x=\"521\" xsi:type=\"omgdc:Point\" y=\"333\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"90\" x=\"427.5\" y=\"311\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1hcovth\" id=\"EndEvent_1hcovth_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"521\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"539\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1xf36er\" id=\"SequenceFlow_1xf36er_di\"\u003e\u003comgdi:waypoint x=\"424\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"472\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"472\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"521\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"487\" y=\"199\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 33,
+      "content_version": 36,
       "creator_id": "admin@example.com",
       "description": "Returns the information about the source IPs associated with the QRadar Offense ID",
       "export_key": "qradar_source_ips",
       "last_modified_by": "admin@example.com",
-      "last_modified_time": 1647022871054,
+      "last_modified_time": 1647441719764,
       "name": "Example of searching and returning Source IPs information",
       "object_type": "incident",
       "programmatic_name": "qradar_source_ips",
       "tags": [],
       "uuid": "7f26897c-eeda-45ea-8c8a-55045f91c4fa",
-      "workflow_id": 130
+      "workflow_id": 137
     },
     {
       "actions": [],
       "content": {
-        "version": 30,
+        "version": 32,
+        "workflow_id": "qradar_destination_ips",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"qradar_destination_ips\" isExecutable=\"true\" name=\"Example of searching and returning Destination IPs information\"\u003e\u003cdocumentation\u003eReturns the information on the Destination IPS associated with the QRadar Offense ID\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1ie3uhp\u003c/outgoing\u003e\u003coutgoing\u003eSequenceFlow_1uuhodb\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0wa32wd\" name=\"QRadar Top Events\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d8e63812-0b58-4ca1-991a-49255f3dd04e\"\u003e{\"inputs\":{\"048ba39a-ab94-4d1f-a0f8-2462de3c044c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_content_value\":{\"format\":\"text\",\"content\":\"SELECT %param1% FROM events %param2% %param4% %param5% %param6% LAST 36 days PARAMETERS PROGRESSDETAILSRESOLUTION=60\"}}},\"01ed4652-fe61-4dbf-bc83-f81c62c5563c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"destinationip as destinationip,UNIQUECOUNT(category) as categorycount,SUM(eventcount) as eventcount,max(starttime)\"}},\"9d8fc645-5067-4ab0-b151-1d106dad91d6\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"WHERE INOFFENSE(%param3%)\"}},\"eefc9e56-2806-4534-b409-42e25154ecc9\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"GROUP BY destinationip \"}},\"19778fc0-9a30-4b8b-9c21-642495f9eebc\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"ORDER BY max(starttime) DESC\"}},\"ca2d7d7f-fe6d-4a21-b011-7953494c350c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"LIMIT 10\"}}},\"post_processing_script\":\"link = \\\"\u0026lt;a href=\\\\\\\"https://\\\"+results.qrhost+\\\"/console/ui/offenses/{0}/events?filter={1}%3B%3D%3B%3B{2}\u0026amp;page=1\u0026amp;pagesize=10\\\\\\\" target=\\\\\\\"_blank\\\\\\\"\u0026gt;{3}\u0026lt;/a\u0026gt;\\\"\\n\\nfor event in results.events:\\n  qradar_event = incident.addRow(\\\"qr_top_destination_ips\\\")\\n  qradar_event.destination_ip = link.format(results.offenseid,\\\"destinationip\\\",event.destinationip,event.destinationip)\\n  qradar_event.event_count = link.format(results.offenseid,\\\"destinationip\\\",event.destinationip,event.eventcount)\\n  qradar_event.category_count = link.format(results.offenseid,\\\"destinationip\\\",event.destinationip,event.categorycount)\\n  qradar_event.reported_time = results.current_time\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.qradar_search_param3 = incident.properties.qradar_id\\ninputs.qradar_query_type = \\\"destinationip\\\"\\ninputs.qradar_label = incident.properties.qradar_destination\\ninputs.soar_incident_id = incident.id\\ninputs.soar_table_name = \\\"qr_top_destination_ips\\\"\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1ie3uhp\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1ge3qyy\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1ie3uhp\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0wa32wd\"/\u003e\u003cendEvent id=\"EndEvent_0tf1zg5\"\u003e\u003cincoming\u003eSequenceFlow_1ge3qyy\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1ge3qyy\" sourceRef=\"ServiceTask_0wa32wd\" targetRef=\"EndEvent_0tf1zg5\"/\u003e\u003cserviceTask id=\"ServiceTask_164pxep\" name=\"QRadar Top Events\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d8e63812-0b58-4ca1-991a-49255f3dd04e\"\u003e{\"inputs\":{\"048ba39a-ab94-4d1f-a0f8-2462de3c044c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_content_value\":{\"format\":\"text\",\"content\":\"SELECT %param1% FROM flows %param2% %param4% %param5% %param6% LAST 36 days PARAMETERS PROGRESSDETAILSRESOLUTION=60\"}}},\"01ed4652-fe61-4dbf-bc83-f81c62c5563c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"destinationip as destinationip,UNIQUECOUNT(category) as categorycount,COUNT(*) as flowcount,max(lastpackettime)\"}},\"9d8fc645-5067-4ab0-b151-1d106dad91d6\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"WHERE INOFFENSE(%param3%)\"}},\"eefc9e56-2806-4534-b409-42e25154ecc9\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"GROUP BY destinationip \"}},\"19778fc0-9a30-4b8b-9c21-642495f9eebc\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"ORDER BY max(lastpackettime) DESC\"}},\"ca2d7d7f-fe6d-4a21-b011-7953494c350c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"LIMIT 10\"}}},\"post_processing_script\":\"link = \\\"\u0026lt;a href=\\\\\\\"https://\\\"+results.qrhost+\\\"/console/ui/offenses/{0}/events?filter={1}%3B%3D%3B%3B{2}\u0026amp;page=1\u0026amp;pagesize=10\\\\\\\" target=\\\\\\\"_blank\\\\\\\"\u0026gt;{3}\u0026lt;/a\u0026gt;\\\"\\n\\nfor event in results.events:\\n  qradar_event = incident.addRow(\\\"qr_top_destination_ips\\\")\\n  qradar_event.destination_ip = event.destinationip\\n  qradar_event.flow_count = event.flowcount\\n  qradar_event.category_count = event.categorycount\\n  qradar_event.reported_time = results.current_time\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.qradar_search_param3 = incident.properties.qradar_id\\ninputs.qradar_query_type = \\\"destinationip\\\"\\ninputs.qradar_label = incident.properties.qradar_destination\\ninputs.soar_incident_id = incident.id\\ninputs.soar_table_name = \\\"qr_top_destination_ips\\\"\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1uuhodb\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_16irdjm\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1uuhodb\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_164pxep\"/\u003e\u003cendEvent id=\"EndEvent_1707dmc\"\u003e\u003cincoming\u003eSequenceFlow_16irdjm\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_16irdjm\" sourceRef=\"ServiceTask_164pxep\" targetRef=\"EndEvent_1707dmc\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0wa32wd\" id=\"ServiceTask_0wa32wd_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"326\" y=\"152\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1ie3uhp\" id=\"SequenceFlow_1ie3uhp_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"262\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"262\" xsi:type=\"omgdc:Point\" y=\"192\"/\u003e\u003comgdi:waypoint x=\"326\" xsi:type=\"omgdc:Point\" y=\"192\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"277\" y=\"192\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0tf1zg5\" id=\"EndEvent_0tf1zg5_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"559\" y=\"174\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"577\" y=\"213\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1ge3qyy\" id=\"SequenceFlow_1ge3qyy_di\"\u003e\u003comgdi:waypoint x=\"426\" xsi:type=\"omgdc:Point\" y=\"192\"/\u003e\u003comgdi:waypoint x=\"559\" xsi:type=\"omgdc:Point\" y=\"192\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"492.5\" y=\"170\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_164pxep\" id=\"ServiceTask_164pxep_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"326\" y=\"268\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1uuhodb\" id=\"SequenceFlow_1uuhodb_di\"\u003e\u003comgdi:waypoint x=\"189\" xsi:type=\"omgdc:Point\" y=\"222\"/\u003e\u003comgdi:waypoint x=\"262\" xsi:type=\"omgdc:Point\" y=\"308\"/\u003e\u003comgdi:waypoint x=\"326\" xsi:type=\"omgdc:Point\" y=\"308\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"225.5\" y=\"243\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1707dmc\" id=\"EndEvent_1707dmc_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"559\" y=\"290\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"577\" y=\"329\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_16irdjm\" id=\"SequenceFlow_16irdjm_di\"\u003e\u003comgdi:waypoint x=\"426\" xsi:type=\"omgdc:Point\" y=\"308\"/\u003e\u003comgdi:waypoint x=\"559\" xsi:type=\"omgdc:Point\" y=\"308\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"492.5\" y=\"286\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 32,
+      "creator_id": "admin@example.com",
+      "description": "Returns the information on the Destination IPS associated with the QRadar Offense ID",
+      "export_key": "qradar_destination_ips",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1647441719329,
+      "name": "Example of searching and returning Destination IPs information",
+      "object_type": "incident",
+      "programmatic_name": "qradar_destination_ips",
+      "tags": [],
+      "uuid": "c2c032ad-3789-49cd-892c-81112eabc81c",
+      "workflow_id": 134
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 32,
         "workflow_id": "qradar_offense_summary",
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"qradar_offense_summary\" isExecutable=\"true\" name=\"QRadar Offense Summary\"\u003e\u003cdocumentation\u003eReturns information about the Offense\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_05iwsyi\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1apebpb\" name=\"QRadar Offense Summary\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"0aee36de-8719-4154-a1e7-6455f065bb94\"\u003e{\"inputs\":{},\"post_processing_script\":\"link = \\\"\u0026lt;a href=\\\\\\\"https://\\\"+results.qrhost+\\\"/console/ui/offenses/{0}{1}\\\\\\\" target=\\\\\\\"_blank\\\\\\\"\u0026gt;{2}\u0026lt;/a\u0026gt;\\\"\\n\\n  \\nincident.qr_offense_index_type = results.offense.offenseType.name\\nincident.qr_offense_index_value = results.offense.offenseSource\\nincident.qr_offense_source = results.offense.offenseSource\\nincident.qr_source_ip_count = link.format(results.offenseid,\\\"\\\",results.offense.sourceCount)\\nincident.qr_destination_ip_count = link.format(results.offenseid,\\\"\\\",results.offense.remoteDestinationCount+results.offense.localDestinationCount)\\nincident.qr_event_count = link.format(results.offenseid,\\\"/events?page=1\u0026amp;pagesize=10\\\",results.offense.eventCount)\\nincident.qr_flow_count =  link.format(results.offenseid,\\\"\\\",results.offense.flowCount)\\nincident.qr_assigned = link.format(\\\"\\\",\\\"?filter=status%3B%3D%3BOpen%3BOPEN\u0026amp;filter=assignedTo%3B%3D%3B%3B\\\"+(results.offense.assignedTo if results.offense.assignedTo is not None else \\\"\\\")+\\\"\u0026amp;page=1\u0026amp;pagesize=10\\\",results.offense.assignedTo) if results.offense.assignedTo else \\\"Unassigned\\\"\\nincident.qr_magnitude = link.format(results.offenseid,\\\"\\\",results.offense.magnitude)\\nincident.qr_credibility = link.format(results.offenseid,\\\"\\\",results.offense.credibility)\\nincident.qr_severity = link.format(results.offenseid,\\\"\\\",results.offense.severity)\\nincident.qr_relevance = link.format(results.offenseid,\\\"\\\",results.offense.relevance)\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.qradar_offense_id= incident.properties.qradar_id\\ninputs.qradar_query_type = \\\"offensesummary\\\"\\ninputs.qradar_label = incident.properties.qradar_destination\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_05iwsyi\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1ajef8g\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_05iwsyi\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1apebpb\"/\u003e\u003cendEvent id=\"EndEvent_0l7mn1m\"\u003e\u003cincoming\u003eSequenceFlow_1ajef8g\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1ajef8g\" sourceRef=\"ServiceTask_1apebpb\" targetRef=\"EndEvent_0l7mn1m\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1apebpb\" id=\"ServiceTask_1apebpb_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"331\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_05iwsyi\" id=\"SequenceFlow_05iwsyi_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"331\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"264.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0l7mn1m\" id=\"EndEvent_0l7mn1m_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"587\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"605\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1ajef8g\" id=\"SequenceFlow_1ajef8g_di\"\u003e\u003comgdi:waypoint x=\"431\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"587\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"509\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 30,
+      "content_version": 32,
       "creator_id": "admin@example.com",
       "description": "Returns information about the Offense",
       "export_key": "qradar_offense_summary",
       "last_modified_by": "admin@example.com",
-      "last_modified_time": 1647022212833,
+      "last_modified_time": 1647441719910,
       "name": "QRadar Offense Summary",
       "object_type": "incident",
       "programmatic_name": "qradar_offense_summary",
       "tags": [],
       "uuid": "c136a786-5d9f-4a80-bf1d-dda574ea75ba",
-      "workflow_id": 124
+      "workflow_id": 138
     },
     {
       "actions": [],
       "content": {
-        "version": 26,
+        "version": 31,
         "workflow_id": "example_of_searching_qradar_flows_using_offense_id",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_of_searching_qradar_flows_using_offense_id\" isExecutable=\"true\" name=\"Example of searching QRadar Flows using offense id\"\u003e\u003cdocumentation\u003eUse the qradar_id field of the incident to search qradar events, and update the data table, qr_offense_top_events, with the top 10 events.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1f2h23f\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0zpihlh\" name=\"QRadar Top Events\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d8e63812-0b58-4ca1-991a-49255f3dd04e\"\u003e{\"inputs\":{\"048ba39a-ab94-4d1f-a0f8-2462de3c044c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_content_value\":{\"format\":\"text\",\"content\":\"SELECT %param1% FROM flows %param2% %param4%   LAST 36 days PARAMETERS PROGRESSDETAILSRESOLUTION=60\"}}},\"01ed4652-fe61-4dbf-bc83-f81c62c5563c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"APPLICATIONNAME(applicationid) as \u0027Application\u0027, sourceip, sourceport, destinationip, destinationport, PROTOCOLNAME(protocolid) as \u0027Protocol\u0027, firstpackettime AS \u0027FirstPacketTime\u0027, sourcebytes, sourcepackets, destinationbytes, destinationpackets\"}},\"9d8fc645-5067-4ab0-b151-1d106dad91d6\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"WHERE INOFFENSE(%param3%)\"}},\"eefc9e56-2806-4534-b409-42e25154ecc9\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"LIMIT 10\"}}},\"post_processing_script\":\"for flow in results.events:\\n  qradar_event = incident.addRow(\\\"qr_flows\\\")\\n  qradar_event.application = flow.Application\\n  qradar_event.source_ip = flow.sourceip\\n  qradar_event.source_port = flow.sourceport\\n  qradar_event.destination_ip = flow.destinationip\\n  qradar_event.destination_port = flow.destinationport\\n  qradar_event.protocol = flow.Protocol\\n  qradar_event.first_packet_time = int(flow.FirstPacketTime)\\n  qradar_event.source_bytes = int(flow.sourcebytes)\\n  qradar_event.source_packets = int(flow.sourcepackets)\\n  qradar_event.destination_bytes = int(flow.destinationbytes)\\n  qradar_event.destination_packets = int(flow.destinationpackets)\\n  qradar_event.reported_time = results.current_time\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.qradar_search_param3 = incident.properties.qradar_id\\ninputs.qradar_query_type = \\\"flows\\\"\\ninputs.qradar_label = incident.properties.qradar_destination\\ninputs.soar_incident_id = incident.id\\ninputs.soar_table_name = \\\"qr_flows\\\"\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1f2h23f\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_05ysyi1\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1f2h23f\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0zpihlh\"/\u003e\u003cendEvent id=\"EndEvent_0om05cp\"\u003e\u003cincoming\u003eSequenceFlow_05ysyi1\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_05ysyi1\" sourceRef=\"ServiceTask_0zpihlh\" targetRef=\"EndEvent_0om05cp\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0zpihlh\" id=\"ServiceTask_0zpihlh_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"339\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1f2h23f\" id=\"SequenceFlow_1f2h23f_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"339\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"268.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0om05cp\" id=\"EndEvent_0om05cp_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"653\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"671\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_05ysyi1\" id=\"SequenceFlow_05ysyi1_di\"\u003e\u003comgdi:waypoint x=\"439\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"653\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"546\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_of_searching_qradar_flows_using_offense_id\" isExecutable=\"true\" name=\"Example of searching QRadar Flows using offense id\"\u003e\u003cdocumentation\u003eUse the qradar_id field of the incident to searchQRadar events, and update the data table, qr_offense_top_events, with the top 10 events.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1f2h23f\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0zpihlh\" name=\"QRadar Top Events\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d8e63812-0b58-4ca1-991a-49255f3dd04e\"\u003e{\"inputs\":{\"048ba39a-ab94-4d1f-a0f8-2462de3c044c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_content_value\":{\"format\":\"text\",\"content\":\"SELECT %param1% FROM flows %param2% %param4%   LAST 36 days PARAMETERS PROGRESSDETAILSRESOLUTION=60\"}}},\"01ed4652-fe61-4dbf-bc83-f81c62c5563c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"APPLICATIONNAME(applicationid) as \u0027Application\u0027, sourceip, sourceport, destinationip, destinationport, PROTOCOLNAME(protocolid) as \u0027Protocol\u0027, firstpackettime AS \u0027FirstPacketTime\u0027, sourcebytes, sourcepackets, destinationbytes, destinationpackets\"}},\"9d8fc645-5067-4ab0-b151-1d106dad91d6\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"WHERE INOFFENSE(%param3%)\"}},\"eefc9e56-2806-4534-b409-42e25154ecc9\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"LIMIT 10\"}}},\"post_processing_script\":\"link = \\\"\u0026lt;a href=\\\\\\\"https://\\\"+results.qrhost+\\\"/console/ui/offenses/{0}/flows?filter={1}%3B%3D%3B%3B{2}\u0026amp;page=1\u0026amp;pagesize=10\\\\\\\" target=\\\\\\\"_blank\\\\\\\"\u0026gt;{3}\u0026lt;/a\u0026gt;\\\"\\n\\nfor flow in results.events:\\n  qradar_event = incident.addRow(\\\"qr_flows\\\")\\n  qradar_event.application = link.format(results.offenseid,\\\"application_name\\\",flow.Application,flow.Application)\\n  qradar_event.source_ip = link.format(results.offenseid,\\\"sourceip\\\",flow.sourceip,flow.sourceip)\\n  qradar_event.source_port = link.format(results.offenseid,\\\"sourceport\\\",flow.sourceport,flow.sourceport)\\n  qradar_event.destination_ip = link.format(results.offenseid,\\\"destinationip\\\",flow.destinationip,flow.destinationip)\\n  qradar_event.destination_port = link.format(results.offenseid,\\\"destinationport\\\",flow.destinationport,flow.destinationport)\\n  qradar_event.protocol = flow.Protocol\\n  qradar_event.first_packet_time = int(flow.FirstPacketTime)\\n  qradar_event.source_bytes = int(flow.sourcebytes)\\n  qradar_event.source_packets = int(flow.sourcepackets)\\n  qradar_event.destination_bytes = int(flow.destinationbytes)\\n  qradar_event.destination_packets = int(flow.destinationpackets)\\n  qradar_event.reported_time = results.current_time\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.qradar_search_param3 = incident.properties.qradar_id\\ninputs.qradar_query_type = \\\"flows\\\"\\ninputs.qradar_label = incident.properties.qradar_destination\\ninputs.soar_incident_id = incident.id\\ninputs.soar_table_name = \\\"qr_flows\\\"\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1f2h23f\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_05ysyi1\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1f2h23f\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0zpihlh\"/\u003e\u003cendEvent id=\"EndEvent_0om05cp\"\u003e\u003cincoming\u003eSequenceFlow_05ysyi1\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_05ysyi1\" sourceRef=\"ServiceTask_0zpihlh\" targetRef=\"EndEvent_0om05cp\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0zpihlh\" id=\"ServiceTask_0zpihlh_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"339\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1f2h23f\" id=\"SequenceFlow_1f2h23f_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"339\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"268.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0om05cp\" id=\"EndEvent_0om05cp_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"653\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"671\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_05ysyi1\" id=\"SequenceFlow_05ysyi1_di\"\u003e\u003comgdi:waypoint x=\"439\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"653\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"546\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 26,
+      "content_version": 31,
       "creator_id": "admin@example.com",
-      "description": "Use the qradar_id field of the incident to search qradar events, and update the data table, qr_offense_top_events, with the top 10 events.",
+      "description": "Use the qradar_id field of the incident to searchQRadar events, and update the data table, qr_offense_top_events, with the top 10 events.",
       "export_key": "example_of_searching_qradar_flows_using_offense_id",
       "last_modified_by": "admin@example.com",
-      "last_modified_time": 1647022871177,
+      "last_modified_time": 1647442406381,
       "name": "Example of searching QRadar Flows using offense id",
       "object_type": "incident",
       "programmatic_name": "example_of_searching_qradar_flows_using_offense_id",
       "tags": [],
       "uuid": "248ce036-9d02-4982-b4bd-541d17c23a3d",
-      "workflow_id": 128
+      "workflow_id": 139
     },
     {
       "actions": [],
       "content": {
-        "version": 25,
-        "workflow_id": "example_of_searching_qradar_top_events_using_offense_id",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_of_searching_qradar_top_events_using_offense_id\" isExecutable=\"true\" name=\"Example of searching QRadar Top Events using offense id\"\u003e\u003cdocumentation\u003eUse the qradar_id field of the incident to search qradar events, and update the data table, qr_offense_top_events, with the top 10 events.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1rcy3j4\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0ulfeez\" name=\"QRadar Top Events\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d8e63812-0b58-4ca1-991a-49255f3dd04e\"\u003e{\"inputs\":{\"048ba39a-ab94-4d1f-a0f8-2462de3c044c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_content_value\":{\"format\":\"text\",\"content\":\"SELECT %param1% FROM events %param2% %param4% %param5% %param6% LAST 36 days PARAMETERS PROGRESSDETAILSRESOLUTION=60\"}}},\"01ed4652-fe61-4dbf-bc83-f81c62c5563c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"QIDNAME(qid) as event_name,categoryname(category) as category_name,logsourcename(logsourceid) as logsourcename,username,magnitude,destinationip,sourceip,eventcount,starttime as event_time \"}},\"9d8fc645-5067-4ab0-b151-1d106dad91d6\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"WHERE INOFFENSE(%param3%)\"}},\"19778fc0-9a30-4b8b-9c21-642495f9eebc\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"ORDER BY starttime\"}},\"ca2d7d7f-fe6d-4a21-b011-7953494c350c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"LIMIT 10\"}}},\"post_processing_script\":\"link = \\\"\u0026lt;a href=\\\\\\\"https://\\\"+results.qrhost+\\\"/console/ui/offenses/{0}/events?filter={1}%3B%3D%3B%3B{2}\u0026amp;page=1\u0026amp;pagesize=10\\\\\\\" target=\\\\\\\"_blank\\\\\\\"\u0026gt;{3}\u0026lt;/a\u0026gt;\\\"\\n\\nfor event in results.events:\\n  qradar_event = incident.addRow(\\\"qr_offense_top_events\\\")\\n  qradar_event.event_name = link.format(results.offenseid,\\\"event_name\\\",event.event_name,event.event_name)\\n  qradar_event.category = link.format(results.offenseid,\\\"category_name\\\",event.category_name,event.category_name)\\n  qradar_event.source_ip = link.format(results.offenseid,\\\"sourceip\\\",event.sourceip,event.sourceip)\\n  qradar_event.destination_ip = link.format(results.offenseid,\\\"destinationip\\\",event.destinationip,event.destinationip)\\n  qradar_event.log_source = link.format(results.offenseid,\\\"log_source_name\\\",event.logsourcename,event.logsourcename)\\n  qradar_event.event_count =  link.format(results.offenseid,\\\"event_name\\\",event.event_name,event.eventcount)\\n  qradar_event.event_time = int(event.event_time)\\n  qradar_event.magnitude = event.magnitude\\n  qradar_event.username = event.username\\n  qradar_event.reported_time = results.current_time\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.qradar_search_param3 = incident.properties.qradar_id\\ninputs.qradar_query_type = \\\"topevents\\\"\\ninputs.qradar_label = incident.properties.qradar_destination\\ninputs.soar_incident_id = incident.id\\ninputs.soar_table_name = \\\"qr_offense_top_events\\\"\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1rcy3j4\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0bwc288\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1rcy3j4\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0ulfeez\"/\u003e\u003cendEvent id=\"EndEvent_031o32j\"\u003e\u003cincoming\u003eSequenceFlow_0bwc288\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0bwc288\" sourceRef=\"ServiceTask_0ulfeez\" targetRef=\"EndEvent_031o32j\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1bqz36v\"\u003e\u003ctext\u003eReturn results in qradar_offense_top_events datatable\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0cmw5gy\" sourceRef=\"ServiceTask_0ulfeez\" targetRef=\"TextAnnotation_1bqz36v\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"164\" y=\"96\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"159\" y=\"131\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"-28\" y=\"99\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"164\" xsi:type=\"omgdc:Point\" y=\"114\"/\u003e\u003comgdi:waypoint x=\"72\" xsi:type=\"omgdc:Point\" y=\"114\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0ulfeez\" id=\"ServiceTask_0ulfeez_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"348\" y=\"74\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1rcy3j4\" id=\"SequenceFlow_1rcy3j4_di\"\u003e\u003comgdi:waypoint x=\"200\" xsi:type=\"omgdc:Point\" y=\"114\"/\u003e\u003comgdi:waypoint x=\"348\" xsi:type=\"omgdc:Point\" y=\"114\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"274\" y=\"92.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_031o32j\" id=\"EndEvent_031o32j_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"597.0289855072464\" y=\"96\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"615.0289855072464\" y=\"135\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0bwc288\" id=\"SequenceFlow_0bwc288_di\"\u003e\u003comgdi:waypoint x=\"448\" xsi:type=\"omgdc:Point\" y=\"114\"/\u003e\u003comgdi:waypoint x=\"597\" xsi:type=\"omgdc:Point\" y=\"114\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"522.5\" y=\"92.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1bqz36v\" id=\"TextAnnotation_1bqz36v_di\"\u003e\u003comgdc:Bounds height=\"64\" width=\"137\" x=\"440\" y=\"-4\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0cmw5gy\" id=\"Association_0cmw5gy_di\"\u003e\u003comgdi:waypoint x=\"443\" xsi:type=\"omgdc:Point\" y=\"79\"/\u003e\u003comgdi:waypoint x=\"467\" xsi:type=\"omgdc:Point\" y=\"60\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "version": 2,
+        "workflow_id": "qradar_offense_last_persisted_time",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"qradar_offense_last_persisted_time\" isExecutable=\"true\" name=\"QRadar Offense Last Persisted Time\"\u003e\u003cdocumentation\u003eGet the last_persisted_time of offense from QRadar server\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_03zeyb7\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_13cvje3\" name=\"QRadar Offense Summary\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"0aee36de-8719-4154-a1e7-6455f065bb94\"\u003e{\"inputs\":{},\"post_processing_script\":\"incident.qr_last_persisted_time = results.last_persisted_time\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.qradar_offense_id= incident.properties.qradar_id\\ninputs.qradar_query_type = \\\"offensetime\\\"\\ninputs.qradar_label = incident.properties.qradar_destination\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_03zeyb7\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_05aww8g\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_03zeyb7\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_13cvje3\"/\u003e\u003cendEvent id=\"EndEvent_01nu2kt\"\u003e\u003cincoming\u003eSequenceFlow_05aww8g\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_05aww8g\" sourceRef=\"ServiceTask_13cvje3\" targetRef=\"EndEvent_01nu2kt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_13cvje3\" id=\"ServiceTask_13cvje3_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"255\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_03zeyb7\" id=\"SequenceFlow_03zeyb7_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"255\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"226.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_01nu2kt\" id=\"EndEvent_01nu2kt_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"454\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"472\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_05aww8g\" id=\"SequenceFlow_05aww8g_di\"\u003e\u003comgdi:waypoint x=\"355\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"454\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"404.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 25,
+      "content_version": 2,
       "creator_id": "admin@example.com",
-      "description": "Use the qradar_id field of the incident to search qradar events, and update the data table, qr_offense_top_events, with the top 10 events.",
+      "description": "Get the last_persisted_time of offense from QRadar server",
+      "export_key": "qradar_offense_last_persisted_time",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1647441918270,
+      "name": "QRadar Offense Last Persisted Time",
+      "object_type": "incident",
+      "programmatic_name": "qradar_offense_last_persisted_time",
+      "tags": [],
+      "uuid": "2ffa3298-5bd3-4797-9a4d-46cc55c781c5",
+      "workflow_id": 136
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 31,
+        "workflow_id": "qradar_triggered_rules",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"qradar_triggered_rules\" isExecutable=\"true\" name=\"Example of fetching contributing rules for Offense\"\u003e\u003cdocumentation\u003eReturns the contributing rules for the Offense\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0j7w99n\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0j6nll2\" name=\"QRadar Offense Summary\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"0aee36de-8719-4154-a1e7-6455f065bb94\"\u003e{\"inputs\":{},\"post_processing_script\":\"link = \\\"\u0026lt;a href=\\\\\\\"https://\\\"+results.qrhost+\\\"/console/ui/offenses?filter={0}%3B%3D%3B%3B{1}\u0026amp;page=1\u0026amp;pagesize=10\\\\\\\" target=\\\\\\\"_blank\\\\\\\"\u0026gt;{2}\u0026lt;/a\u0026gt;\\\"\\n\\nfor event in results.rules_data:\\n  qradar_event = incident.addRow(\\\"qr_triggered_rules\\\")\\n  qradar_event.rule_name = link.format(\\\"rules\\\",event.id,event.name)\\n  qradar_event.rule_group = \\\", \\\".join(list(map(lambda x:x.name,list(filter(lambda x:x.name is not None,event.groups))))) if len(event.groups)\u0026gt;0 else \\\"\\\"\\n  qradar_event.rule_type = event.type\\n  qradar_event.enabled = \\\"True\\\" if event.enabled else \\\"False\\\"\\n  qradar_event.response = \\\"Yes\\\" if event.responses.newEvents or event.responses.email or event.responses.log or event.responses.addToReferenceData or event.responses.addToReferenceSet or event.responses.removeFromReferenceData or event.responses.removeFromReferenceSet or event.responses.notify or event.responses.notifySeverityOverride or event.responses.selectiveForwardingResponse or event.responses.customAction else \\\"No\\\"\\n  qradar_event.date_created = int(event.creationDate)\\n  qradar_event.last_modified = int(event.modificationDate)\\n  qradar_event.reported_time = results.current_time\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.qradar_offense_id= incident.properties.qradar_id\\ninputs.qradar_query_type = \\\"offenserules\\\"\\ninputs.qradar_label = incident.properties.qradar_destination\\ninputs.soar_table_name = \\\"qr_triggered_rules\\\"\\ninputs.soar_incident_id = incident.id\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0j7w99n\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1emdbk1\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0j7w99n\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0j6nll2\"/\u003e\u003cendEvent id=\"EndEvent_1njimqc\"\u003e\u003cincoming\u003eSequenceFlow_1emdbk1\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1emdbk1\" sourceRef=\"ServiceTask_0j6nll2\" targetRef=\"EndEvent_1njimqc\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0j6nll2\" id=\"ServiceTask_0j6nll2_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"365\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0j7w99n\" id=\"SequenceFlow_0j7w99n_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"365\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"281.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1njimqc\" id=\"EndEvent_1njimqc_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"678.7668269230769\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"696.7668269230769\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1emdbk1\" id=\"SequenceFlow_1emdbk1_di\"\u003e\u003comgdi:waypoint x=\"465\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"679\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"572\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 31,
+      "creator_id": "admin@example.com",
+      "description": "Returns the contributing rules for the Offense",
+      "export_key": "qradar_triggered_rules",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1647441719472,
+      "name": "Example of fetching contributing rules for Offense",
+      "object_type": "incident",
+      "programmatic_name": "qradar_triggered_rules",
+      "tags": [],
+      "uuid": "6b47dac2-3b5e-4916-a57b-59c5a6dbed0e",
+      "workflow_id": 135
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 29,
+        "workflow_id": "qradar_assets_information",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"qradar_assets_information\" isExecutable=\"true\" name=\"Example of searching and returning Assets information\"\u003e\u003cdocumentation\u003eReturns the information on the Assets associated with the QRadar Offense ID\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0jajzph\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0w4xfyt\" name=\"QRadar Offense Summary\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"0aee36de-8719-4154-a1e7-6455f065bb94\"\u003e{\"inputs\":{},\"post_processing_script\":\"for event in results.assets:\\n  qradar_event = incident.addRow(\\\"qr_assets\\\")\\n  qradar_event.asset_id = event.id\\n  qradar_event.asset_name = event.name\\n  qradar_event.ip_address = event.sourceip\\n  qradar_event.operating_system = event.osid\\n  qradar_event.aggregated_cvss = event.riskScoreSum\\n  qradar_event.vulnerabilities = str(event.vulnerabilityCount)\\n  qradar_event.last_user = event.users[0].username if len(event.users)\u0026gt;0 and event.users[0].username is not None else \\\"\\\"\\n  qradar_event.last_user_seen = int(event.users[0].lastSeenProfiler) if len(event.users)\u0026gt;0 and event.users[0].lastSeenProfiler is not None else \\\"\\\"\\n  qradar_event.reported_time = results.current_time\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.qradar_query_type = \\\"offenseassets\\\"\\ninputs.qradar_offense_id = incident.properties.qradar_id\\ninputs.qradar_label = incident.properties.qradar_destination\\ninputs.soar_table_name = \\\"qr_assets\\\"\\ninputs.soar_incident_id = incident.id\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0jajzph\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_03x7why\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_00nirf1\"\u003e\u003cincoming\u003eSequenceFlow_03x7why\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_03x7why\" sourceRef=\"ServiceTask_0w4xfyt\" targetRef=\"EndEvent_00nirf1\"/\u003e\u003csequenceFlow id=\"SequenceFlow_0jajzph\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0w4xfyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"164\" y=\"158\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"159\" y=\"193\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"173\" xsi:type=\"omgdc:Point\" y=\"191\"/\u003e\u003comgdi:waypoint x=\"151\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0w4xfyt\" id=\"ServiceTask_0w4xfyt_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"340\" y=\"136\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_00nirf1\" id=\"EndEvent_00nirf1_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"629\" y=\"158\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"647\" y=\"197\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_03x7why\" id=\"SequenceFlow_03x7why_di\"\u003e\u003comgdi:waypoint x=\"440\" xsi:type=\"omgdc:Point\" y=\"176\"/\u003e\u003comgdi:waypoint x=\"629\" xsi:type=\"omgdc:Point\" y=\"176\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"534.5\" y=\"154\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0jajzph\" id=\"SequenceFlow_0jajzph_di\"\u003e\u003comgdi:waypoint x=\"200\" xsi:type=\"omgdc:Point\" y=\"176\"/\u003e\u003comgdi:waypoint x=\"269\" xsi:type=\"omgdc:Point\" y=\"176\"/\u003e\u003comgdi:waypoint x=\"269\" xsi:type=\"omgdc:Point\" y=\"176\"/\u003e\u003comgdi:waypoint x=\"340\" xsi:type=\"omgdc:Point\" y=\"176\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"284\" y=\"169.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 29,
+      "creator_id": "admin@example.com",
+      "description": "Returns the information on the Assets associated with the QRadar Offense ID",
+      "export_key": "qradar_assets_information",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1647441719187,
+      "name": "Example of searching and returning Assets information",
+      "object_type": "incident",
+      "programmatic_name": "qradar_assets_information",
+      "tags": [],
+      "uuid": "a617ff13-51d0-4697-b729-7590252740bd",
+      "workflow_id": 133
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 28,
+        "workflow_id": "example_of_searching_qradar_top_events_using_offense_id",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_of_searching_qradar_top_events_using_offense_id\" isExecutable=\"true\" name=\"Example of searching QRadar Top Events using offense id\"\u003e\u003cdocumentation\u003eUse the qradar_id field of the incident to searchQRadar events, and update the data table, qr_offense_top_events, with the top 10 events.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1rcy3j4\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0ulfeez\" name=\"QRadar Top Events\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d8e63812-0b58-4ca1-991a-49255f3dd04e\"\u003e{\"inputs\":{\"048ba39a-ab94-4d1f-a0f8-2462de3c044c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_content_value\":{\"format\":\"text\",\"content\":\"SELECT %param1% FROM events %param2% %param4% %param5% %param6% LAST 36 days PARAMETERS PROGRESSDETAILSRESOLUTION=60\"}}},\"01ed4652-fe61-4dbf-bc83-f81c62c5563c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"QIDNAME(qid) as event_name,categoryname(category) as category_name,logsourcename(logsourceid) as logsourcename,username,magnitude,destinationip,sourceip,eventcount,starttime as event_time \"}},\"9d8fc645-5067-4ab0-b151-1d106dad91d6\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"WHERE INOFFENSE(%param3%)\"}},\"19778fc0-9a30-4b8b-9c21-642495f9eebc\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"ORDER BY starttime\"}},\"ca2d7d7f-fe6d-4a21-b011-7953494c350c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"LIMIT 10\"}}},\"post_processing_script\":\"link = \\\"\u0026lt;a href=\\\\\\\"https://\\\"+results.qrhost+\\\"/console/ui/offenses/{0}/events?filter={1}%3B%3D%3B%3B{2}\u0026amp;page=1\u0026amp;pagesize=10\\\\\\\" target=\\\\\\\"_blank\\\\\\\"\u0026gt;{3}\u0026lt;/a\u0026gt;\\\"\\n\\nfor event in results.events:\\n  qradar_event = incident.addRow(\\\"qr_offense_top_events\\\")\\n  qradar_event.event_name = link.format(results.offenseid,\\\"event_name\\\",event.event_name,event.event_name)\\n  qradar_event.category = link.format(results.offenseid,\\\"category_name\\\",event.category_name,event.category_name)\\n  qradar_event.source_ip = link.format(results.offenseid,\\\"sourceip\\\",event.sourceip,event.sourceip)\\n  qradar_event.destination_ip = link.format(results.offenseid,\\\"destinationip\\\",event.destinationip,event.destinationip)\\n  qradar_event.log_source = link.format(results.offenseid,\\\"log_source_name\\\",event.logsourcename,event.logsourcename)\\n  qradar_event.event_count =  link.format(results.offenseid,\\\"event_name\\\",event.event_name,event.eventcount)\\n  qradar_event.event_time = int(event.event_time)\\n  qradar_event.magnitude = event.magnitude\\n  qradar_event.username = event.username\\n  qradar_event.reported_time = results.current_time\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.qradar_search_param3 = incident.properties.qradar_id\\ninputs.qradar_query_type = \\\"topevents\\\"\\ninputs.qradar_label = incident.properties.qradar_destination\\ninputs.soar_incident_id = incident.id\\ninputs.soar_table_name = \\\"qr_offense_top_events\\\"\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1rcy3j4\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0bwc288\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1rcy3j4\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0ulfeez\"/\u003e\u003cendEvent id=\"EndEvent_031o32j\"\u003e\u003cincoming\u003eSequenceFlow_0bwc288\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0bwc288\" sourceRef=\"ServiceTask_0ulfeez\" targetRef=\"EndEvent_031o32j\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1bqz36v\"\u003e\u003ctext\u003eReturn results in qradar_offense_top_events datatable\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0cmw5gy\" sourceRef=\"ServiceTask_0ulfeez\" targetRef=\"TextAnnotation_1bqz36v\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"164\" y=\"96\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"159\" y=\"131\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"-28\" y=\"99\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"164\" xsi:type=\"omgdc:Point\" y=\"114\"/\u003e\u003comgdi:waypoint x=\"72\" xsi:type=\"omgdc:Point\" y=\"114\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0ulfeez\" id=\"ServiceTask_0ulfeez_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"348\" y=\"74\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1rcy3j4\" id=\"SequenceFlow_1rcy3j4_di\"\u003e\u003comgdi:waypoint x=\"200\" xsi:type=\"omgdc:Point\" y=\"114\"/\u003e\u003comgdi:waypoint x=\"348\" xsi:type=\"omgdc:Point\" y=\"114\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"274\" y=\"92.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_031o32j\" id=\"EndEvent_031o32j_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"597.0289855072464\" y=\"96\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"615.0289855072464\" y=\"135\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0bwc288\" id=\"SequenceFlow_0bwc288_di\"\u003e\u003comgdi:waypoint x=\"448\" xsi:type=\"omgdc:Point\" y=\"114\"/\u003e\u003comgdi:waypoint x=\"597\" xsi:type=\"omgdc:Point\" y=\"114\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"522.5\" y=\"92.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1bqz36v\" id=\"TextAnnotation_1bqz36v_di\"\u003e\u003comgdc:Bounds height=\"64\" width=\"137\" x=\"440\" y=\"-4\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0cmw5gy\" id=\"Association_0cmw5gy_di\"\u003e\u003comgdi:waypoint x=\"443\" xsi:type=\"omgdc:Point\" y=\"79\"/\u003e\u003comgdi:waypoint x=\"467\" xsi:type=\"omgdc:Point\" y=\"60\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 28,
+      "creator_id": "admin@example.com",
+      "description": "Use the qradar_id field of the incident to searchQRadar events, and update the data table, qr_offense_top_events, with the top 10 events.",
       "export_key": "example_of_searching_qradar_top_events_using_offense_id",
       "last_modified_by": "admin@example.com",
-      "last_modified_time": 1647022871497,
+      "last_modified_time": 1647441720175,
       "name": "Example of searching QRadar Top Events using offense id",
       "object_type": "incident",
       "programmatic_name": "example_of_searching_qradar_top_events_using_offense_id",
       "tags": [],
       "uuid": "0bd5327c-9ff5-4f70-9392-6eac92cb3304",
-      "workflow_id": 129
+      "workflow_id": 140
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 33,
+        "workflow_id": "qradar_categories",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"qradar_categories\" isExecutable=\"true\" name=\"Example of searching and returning Categories\"\u003e\u003cdocumentation\u003eReturns event categories for the QRadar Offense\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0cg7aq8\u003c/outgoing\u003e\u003coutgoing\u003eSequenceFlow_16sbi3h\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_193h79o\" name=\"QRadar Top Events\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d8e63812-0b58-4ca1-991a-49255f3dd04e\"\u003e{\"inputs\":{\"048ba39a-ab94-4d1f-a0f8-2462de3c044c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_content_value\":{\"format\":\"text\",\"content\":\"SELECT %param1% FROM events %param2% %param4% %param5% %param6% LAST 36 days PARAMETERS PROGRESSDETAILSRESOLUTION=60\"}}},\"01ed4652-fe61-4dbf-bc83-f81c62c5563c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"CATEGORYNAME(category) as categoryname,magnitude as magnitude,SUM(eventcount) as eventcount,max(starttime) as eventtime,UNIQUECOUNT(sourceip) as sourceipcount,UNIQUECOUNT(destinationip) as destinationipcount \"}},\"9d8fc645-5067-4ab0-b151-1d106dad91d6\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"WHERE INOFFENSE(%param3%)\"}},\"eefc9e56-2806-4534-b409-42e25154ecc9\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"GROUP BY category,magnitude\"}},\"19778fc0-9a30-4b8b-9c21-642495f9eebc\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"ORDER BY max(starttime)  DESC\"}},\"ca2d7d7f-fe6d-4a21-b011-7953494c350c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"LIMIT 10\"}}},\"post_processing_script\":\"link = \\\"\u0026lt;a href=\\\\\\\"https://\\\"+results.qrhost+\\\"/console/ui/offenses/{0}/events?filter={1}%3B%3D%3B%3B{2}\u0026amp;page=1\u0026amp;pagesize=10\\\\\\\" target=\\\\\\\"_blank\\\\\\\"\u0026gt;{3}\u0026lt;/a\u0026gt;\\\"\\n\\nfor event in results.events:\\n  qradar_event = incident.addRow(\\\"qr_categories\\\")\\n  qradar_event.category_name = link.format(results.offenseid,\\\"category_name\\\",event.categoryname,event.categoryname)\\n  qradar_event.magnitude = link.format(results.offenseid,\\\"category_name\\\",event.categoryname,event.magnitude)\\n  qradar_event.event_count = link.format(results.offenseid,\\\"category_name\\\",event.categoryname,event.eventcount)\\n  qradar_event.event_time =  int(event.eventtime)\\n  qradar_event.sourceip_count = link.format(results.offenseid,\\\"category_name\\\",event.categoryname,event.sourceipcount)\\n  qradar_event.destinationip_count =  link.format(results.offenseid,\\\"category_name\\\",event.categoryname,event.destinationipcount)\\n  qradar_event.reported_time = results.current_time\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.qradar_search_param3 = incident.properties.qradar_id\\ninputs.qradar_query_type = \\\"categories\\\"\\ninputs.qradar_label = incident.properties.qradar_destination\\ninputs.soar_table_name = \\\"qr_categories\\\"\\ninputs.soar_incident_id = incident.id\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0cg7aq8\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_08d3uem\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_0zz07yv\"\u003e\u003cincoming\u003eSequenceFlow_08d3uem\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_08d3uem\" sourceRef=\"ServiceTask_193h79o\" targetRef=\"EndEvent_0zz07yv\"/\u003e\u003csequenceFlow id=\"SequenceFlow_0cg7aq8\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_193h79o\"/\u003e\u003cserviceTask id=\"ServiceTask_0psm0xv\" name=\"QRadar Top Events\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d8e63812-0b58-4ca1-991a-49255f3dd04e\"\u003e{\"inputs\":{\"048ba39a-ab94-4d1f-a0f8-2462de3c044c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_content_value\":{\"format\":\"text\",\"content\":\"SELECT %param1% FROM flows %param2% %param4% %param5% %param6% LAST 36 days PARAMETERS PROGRESSDETAILSRESOLUTION=60\"}}},\"01ed4652-fe61-4dbf-bc83-f81c62c5563c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"CATEGORYNAME(category) as categoryname,COUNT(*) as flowcount,max(lastpackettime) as lastpackettime,UNIQUECOUNT(sourceip) as sourceipcount,UNIQUECOUNT(destinationip) as destinationipcount \"}},\"9d8fc645-5067-4ab0-b151-1d106dad91d6\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"WHERE INOFFENSE(%param3%)\"}},\"eefc9e56-2806-4534-b409-42e25154ecc9\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"GROUP BY category\"}},\"19778fc0-9a30-4b8b-9c21-642495f9eebc\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"ORDER BY lastpackettime  DESC\"}},\"ca2d7d7f-fe6d-4a21-b011-7953494c350c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"LIMIT 10\"}}},\"post_processing_script\":\"link = \\\"\u0026lt;a href=\\\\\\\"https://\\\"+results.qrhost+\\\"/console/ui/offenses/{0}/events?filter={1}%3B%3D%3B%3B{2}\u0026amp;page=1\u0026amp;pagesize=10\\\\\\\" target=\\\\\\\"_blank\\\\\\\"\u0026gt;{3}\u0026lt;/a\u0026gt;\\\"\\n\\nfor event in results.events:\\n  qradar_event = incident.addRow(\\\"qr_categories\\\")\\n  qradar_event.category_name = event.categoryname\\n  qradar_event.flow_count = event.flowcount\\n  qradar_event.last_packet_time =  int(event.lastpackettime)\\n  qradar_event.sourceip_count = event.sourceipcount\\n  qradar_event.destinationip_count =  event.destinationipcount\\n  qradar_event.reported_time = results.current_time\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.qradar_search_param3 = incident.properties.qradar_id\\ninputs.qradar_query_type = \\\"categories\\\"\\ninputs.qradar_label = incident.properties.qradar_destination\\ninputs.soar_table_name = \\\"qr_categories\\\"\\ninputs.soar_incident_id = incident.id\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_16sbi3h\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_17dxnd1\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_16sbi3h\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0psm0xv\"/\u003e\u003cendEvent id=\"EndEvent_1ar2znf\"\u003e\u003cincoming\u003eSequenceFlow_17dxnd1\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_17dxnd1\" sourceRef=\"ServiceTask_0psm0xv\" targetRef=\"EndEvent_1ar2znf\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_193h79o\" id=\"ServiceTask_193h79o_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"345\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0zz07yv\" id=\"EndEvent_0zz07yv_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"601\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"619\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_08d3uem\" id=\"SequenceFlow_08d3uem_di\"\u003e\u003comgdi:waypoint x=\"445\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"601\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"523\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0cg7aq8\" id=\"SequenceFlow_0cg7aq8_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"345\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"271.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0psm0xv\" id=\"ServiceTask_0psm0xv_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"345\" y=\"297\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_16sbi3h\" id=\"SequenceFlow_16sbi3h_di\"\u003e\u003comgdi:waypoint x=\"188\" xsi:type=\"omgdc:Point\" y=\"222\"/\u003e\u003comgdi:waypoint x=\"272\" xsi:type=\"omgdc:Point\" y=\"337\"/\u003e\u003comgdi:waypoint x=\"345\" xsi:type=\"omgdc:Point\" y=\"337\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"230\" y=\"257.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1ar2znf\" id=\"EndEvent_1ar2znf_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"611.4709897610921\" y=\"318.86120591581346\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"629.4709897610921\" y=\"357.86120591581346\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_17dxnd1\" id=\"SequenceFlow_17dxnd1_di\"\u003e\u003comgdi:waypoint x=\"445\" xsi:type=\"omgdc:Point\" y=\"337\"/\u003e\u003comgdi:waypoint x=\"530\" xsi:type=\"omgdc:Point\" y=\"337\"/\u003e\u003comgdi:waypoint x=\"530\" xsi:type=\"omgdc:Point\" y=\"337\"/\u003e\u003comgdi:waypoint x=\"611\" xsi:type=\"omgdc:Point\" y=\"337\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"545\" y=\"330\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 33,
+      "creator_id": "admin@example.com",
+      "description": "Returns event categories for the QRadar Offense",
+      "export_key": "qradar_categories",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1647441719038,
+      "name": "Example of searching and returning Categories",
+      "object_type": "incident",
+      "programmatic_name": "qradar_categories",
+      "tags": [],
+      "uuid": "0bf4dc61-c103-4805-88bd-91e1c2304538",
+      "workflow_id": 132
     }
   ],
   "workspaces": []

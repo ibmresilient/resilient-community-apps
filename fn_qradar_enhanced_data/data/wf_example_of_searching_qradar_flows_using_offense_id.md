@@ -27,13 +27,15 @@ inputs.soar_table_name = "qr_flows"
 
 ### Post-Processing Script
 ```python
+link = "<a href=\"https://"+results.qrhost+"/console/ui/offenses/{0}/flows?filter={1}%3B%3D%3B%3B{2}&page=1&pagesize=10\" target=\"_blank\">{3}</a>"
+
 for flow in results.events:
   qradar_event = incident.addRow("qr_flows")
-  qradar_event.application = flow.Application
-  qradar_event.source_ip = flow.sourceip
-  qradar_event.source_port = flow.sourceport
-  qradar_event.destination_ip = flow.destinationip
-  qradar_event.destination_port = flow.destinationport
+  qradar_event.application = link.format(results.offenseid,"application_name",flow.Application,flow.Application)
+  qradar_event.source_ip = link.format(results.offenseid,"sourceip",flow.sourceip,flow.sourceip)
+  qradar_event.source_port = link.format(results.offenseid,"sourceport",flow.sourceport,flow.sourceport)
+  qradar_event.destination_ip = link.format(results.offenseid,"destinationip",flow.destinationip,flow.destinationip)
+  qradar_event.destination_port = link.format(results.offenseid,"destinationport",flow.destinationport,flow.destinationport)
   qradar_event.protocol = flow.Protocol
   qradar_event.first_packet_time = int(flow.FirstPacketTime)
   qradar_event.source_bytes = int(flow.sourcebytes)

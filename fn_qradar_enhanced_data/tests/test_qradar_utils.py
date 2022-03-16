@@ -2,14 +2,14 @@
 #
 # Unit tests for fn_qradar_enhanced_data/util/py
 #
-from fn_qradar_enhanced_data.util.qradar_constants import ARIEL_SEARCHES, SEARCH_STATUS_COMPLETED, SEARCH_STATUS_WAIT
-from fn_qradar_enhanced_data.util import qradar_utils
-from fn_qradar_enhanced_data.util.SearchWaitCommand import SearchWaitCommand, SearchFailure, SearchJobFailure
-from base64 import b64encode
-from mock import patch
-from six import string_types
 import pytest
+from mock import patch
+from base64 import b64encode
+from six import string_types
+from fn_qradar_enhanced_data.util import qradar_utils
 import fn_qradar_enhanced_data.util.qradar_graphql_queries as qradar_graphql_queries
+from fn_qradar_enhanced_data.util.SearchWaitCommand import SearchWaitCommand, SearchFailure, SearchJobFailure
+from fn_qradar_enhanced_data.util.qradar_constants import ARIEL_SEARCHES, SEARCH_STATUS_COMPLETED, SEARCH_STATUS_WAIT
 
 # Util function to generate simulated requests response
 def _generateResponse(content, status):
@@ -47,7 +47,7 @@ def test_quote_passing_args(mocked_func):
 def test_auth_info():
     """
     Test singleton AuthInfo
-    :return:
+    :return: None
     """
 
     auth_info = qradar_utils.AuthInfo.get_authInfo()
@@ -146,7 +146,7 @@ def test_ariel_graphql_search():
             assert True
 
         # 4. Test get_search_result
-        # 4.1 normal return
+        # 4.1 Normal return
         mocked_get_call.return_value = _generateResponse({"events": []}, 200)
         mocked_get_call.side_effect = None
         results = search_cmd.get_search_result(search_id)

@@ -6,7 +6,7 @@
 
 import logging
 from fn_qradar_enhanced_data.util.qradar_utils import QRadarClient, QRadarServers
-from fn_qradar_enhanced_data.util.qradar_constants import PACKAGE_NAME
+from fn_qradar_enhanced_data.util.qradar_constants import PACKAGE_NAME, GLOBAL_SETTINGS
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
@@ -26,6 +26,9 @@ def selftest_function(opts):
             server_list = servers.get_server_name_list()
         else:
             server_list = {PACKAGE_NAME}
+        
+        if GLOBAL_SETTINGS in server_list:
+            server_list.remove(GLOBAL_SETTINGS)
 
         for server_name in server_list:
             server = opts.get(server_name, {})

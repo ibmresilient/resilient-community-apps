@@ -327,7 +327,7 @@ Search QRadar Top events for the given Offense ID.
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `qradar_label` | `text` | No | `-` | Name of QRadar server to use from the app.config |
-| `qradar_query` | `textarea` | No | `-` | A qradar query string with parameters |
+| `qradar_query` | `textarea` | No | `-` | AQRadar query string with parameters |
 | `qradar_query_type` | `text` | No | `-` | - |
 | `qradar_search_param1` | `text` | No | `-` | - |
 | `qradar_search_param2` | `text` | No | `-` | - |

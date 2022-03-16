@@ -12,14 +12,13 @@ from fn_qradar_enhanced_data.util.qradar_constants import PACKAGE_NAME, GLOBAL_S
 
 LOG = getLogger(__name__)
 
-def make_query_string(query, params):
+def make_query_string(query_string, params):
     """
     Substitute parameters into the query
-    :param query: input query with params
-    :param params: values used to substitute
-    :return:
+    :param query_string: Input query with params
+    :param params: Values used to substitute
+    :return: (str) Query with params substitued
     """
-    query_string = query
 
     index = 1
     for param in params:
@@ -34,8 +33,8 @@ def fix_dict_value(events):
     """
     When the returned data from QRadar is used to update a datatable, we need to
     convert types like dict/list into strings
-    :param events: list of dicts
-    :return:
+    :param events: List of dicts
+    :return: (list) List of dicts
     """
 
     for event in events:
@@ -50,16 +49,16 @@ def fix_dict_value(events):
 def get_server_settings(opts, qradar_label):
     """
     Used for initilizing or reloading the options variable
-    :param opts: list of options
+    :param opts: List of options
     :return: QRadar server settings for specified server
     """
     servers_list = {}
 
     options = opts.get(PACKAGE_NAME, {})
 
-    if options: # If no labels given [fn_qradar_integration]
+    if options: # If no label given [fn_qradar_integration]
         server_list = {PACKAGE_NAME}
-    else: # If labels given [fn_qradar_integration:label]
+    else: # If label given [fn_qradar_integration:label]
         servers = qradar_utils.QRadarServers(opts, options)
         server_list = servers.get_server_name_list()
         # If GLOBAL_SETTINGS is in server_list then remove it from list and validate fields
@@ -82,9 +81,10 @@ def get_server_settings(opts, qradar_label):
 
 def get_qradar_client(opts, options):
     """
-    Returns the QRadarClient
-    :param opts: all settings including SOAR settings
-    :param options: settings for specified QRadar server
+    Connects to given QRadar server
+    :param opts: All settings including SOAR settings
+    :param options: Settings for specified QRadar server
+    :return: Client connection to QRadar server
     """
     # Get Certificates for QRadar
     qradar_verify_cert = False if options.get("verify_cert", "false").lower() == "false" else options.get("verify_cert")
@@ -118,7 +118,7 @@ def clear_table(rest_client, table_name, incident_id, global_settings):
     :param res_rest_client: SOAR rest client connection
     :param table_name: API access name of the table to clear
     :param incident_id: SOAR ID for the incident
-    :param global_settings: global settings for the integration
+    :param global_settings: Global settings for the integration
     :return: None
     """
     if table_name:

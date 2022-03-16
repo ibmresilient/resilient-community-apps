@@ -1,12 +1,12 @@
 #
-#   Unit test for SearchWaitCommand.py
+# Unit test for SearchWaitCommand.py
 #
-#   This is common code, just need to be test in one function
+# This is common code, just need to be test in one function
 #
-#   100% coverage
+# 100% coverage
 #
-from mock import patch
 import time
+from mock import patch
 from fn_qradar_enhanced_data.util.qradar_utils import ArielSearch
 import fn_qradar_enhanced_data.util.SearchWaitCommand as SearchWaitCommand
 

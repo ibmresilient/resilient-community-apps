@@ -61,15 +61,18 @@ class FunctionComponent(ResilientComponent):
 
             # Get configuration for QRadar server specified
             options = get_server_settings(self.opts, qradar_label)
-
+            # Create connection to QRadar server
             qradar_client = get_qradar_client(self.opts, options)
-
+            # Clear specified data table in SOAR based on app.config settings
             clear_table(self.rest_client(), soar_table_name, soar_incident_id, global_settings)
 
-            if global_settings:
-                timeout = float(global_settings.get("search_timeout", 600))  # Default timeout to 10 minutes
-            else:
-                timeout = float(options.get("search_timeout", 600))  # Default timeout to 10 minutes
+            timeout = 600 # Default timeout to 10 minutes
+            # Check if search_timeout setting is configured in edm_global_settings
+            if global_settings and global_settings.get("search_timeout"):
+                timeout = float(global_settings.get("search_timeout"))
+            # Check if search_timeout setting is configured for given QRadar server
+            elif options.get("search_timeout"):
+                timeout = float(options.get("search_timeout"))
 
             temp_table = "offense-{0}-events-{1}-1000-{2}".format(qradar_search_param3, qradar_fn_type, str(time()))
 
