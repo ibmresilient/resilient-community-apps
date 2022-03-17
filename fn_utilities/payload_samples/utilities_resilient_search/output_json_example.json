@@ -1,0 +1,208 @@
+{
+    "results": [{
+      "match_field_value": "application/<ResilientHighlight>pdf</ResilientHighlight>",
+      "inc_name": "incident with same attachment 2",
+      "task_id": null,
+      "type_id": "attachment",
+      "obj_creator_id": 71,
+      "inc_owner_id": 71,
+      "obj_id": 12,
+      "org_id": 201,
+      "task_name": null,
+      "score": 2.1267257,
+      "match_highlights": [{
+        "match_field_name": "Content Type",
+        "match_field_value": "application/<ResilientHighlight>pdf</ResilientHighlight>"
+      }, {
+        "match_field_name": "Name",
+        "match_field_value": "<ResilientHighlight>sample_ioc_1</ResilientHighlight>.<ResilientHighlight>pdf</ResilientHighlight>"
+      }],
+      "obj_create_date": 1563445289222,
+      "obj_name": "sample_ioc_1.pdf",
+      "match_field_name": "Content Type",
+      "inc_id": 2097,
+      "result": {
+        "task_at_id": null,
+        "uuid": "ffb6bee8-7cef-47fa-a2cc-2daf57bd28a2",
+        "vers": 4,
+        "inc_name": "incident with same attachment 2",
+        "task_id": null,
+        "created": 1563445289222,
+        "task_members": null,
+        "task_custom": null,
+        "task_name": null,
+        "actions": [],
+        "inc_owner": {
+          "type": "user",
+          "display_name": "Admin User",
+          "id": 71,
+          "name": "admin@example.com"
+        },
+        "creator_id": {
+          "type": "user",
+          "display_name": "Admin User",
+          "id": 71,
+          "name": "admin@example.com"
+        },
+        "content_type": "application/pdf",
+        "inc_id": 2097,
+        "size": 123852,
+        "type": "incident",
+        "id": 12,
+        "name": "sample_ioc_1.pdf"
+      }
+    }, {
+      "match_field_value": "application/<ResilientHighlight>pdf</ResilientHighlight>",
+      "inc_name": "Get example outputs fn-utilities",
+      "task_id": null,
+      "type_id": "attachment",
+      "obj_creator_id": 71,
+      "inc_owner_id": 71,
+      "obj_id": 13,
+      "org_id": 201,
+      "task_name": null,
+      "score": 1.7914013,
+      "match_highlights": [{
+        "match_field_name": "Content Type",
+        "match_field_value": "application/<ResilientHighlight>pdf</ResilientHighlight>"
+      }, {
+        "match_field_name": "Name",
+        "match_field_value": "<ResilientHighlight>sample_ioc_1</ResilientHighlight>.<ResilientHighlight>pdf</ResilientHighlight>"
+      }],
+      "obj_create_date": 1563445301367,
+      "obj_name": "sample_ioc_1.pdf",
+      "match_field_name": "Content Type",
+      "inc_id": 2095,
+      "result": {
+        "task_at_id": null,
+        "uuid": "e8537737-1887-486f-92f5-76ea5091e970",
+        "vers": 14,
+        "inc_name": "Get example outputs fn-utilities",
+        "task_id": null,
+        "created": 1563445301367,
+        "task_members": null,
+        "task_custom": null,
+        "task_name": null,
+        "actions": [],
+        "inc_owner": {
+          "type": "user",
+          "display_name": "Admin User",
+          "id": 71,
+          "name": "admin@example.com"
+        },
+        "creator_id": {
+          "type": "user",
+          "display_name": "Admin User",
+          "id": 71,
+          "name": "admin@example.com"
+        },
+        "content_type": "application/pdf",
+        "inc_id": 2095,
+        "size": 123852,
+        "type": "incident",
+        "id": 13,
+        "name": "sample_ioc_1.pdf"
+      }
+    }, {
+      "match_field_value": "application/<ResilientHighlight>pdf</ResilientHighlight>",
+      "inc_name": "incident with same attachment 1",
+      "task_id": null,
+      "type_id": "attachment",
+      "obj_creator_id": 71,
+      "inc_owner_id": 71,
+      "obj_id": 11,
+      "org_id": 201,
+      "task_name": null,
+      "score": 1.3419329,
+      "match_highlights": [{
+        "match_field_name": "Content Type",
+        "match_field_value": "application/<ResilientHighlight>pdf</ResilientHighlight>"
+      }, {
+        "match_field_name": "Name",
+        "match_field_value": "<ResilientHighlight>sample_ioc_1</ResilientHighlight>.<ResilientHighlight>pdf</ResilientHighlight>"
+      }],
+      "obj_create_date": 1563445261781,
+      "obj_name": "sample_ioc_1.pdf",
+      "match_field_name": "Content Type",
+      "inc_id": 2096,
+      "result": {
+        "task_at_id": null,
+        "uuid": "034199ca-f3d2-4e4f-8542-886753bd859e",
+        "vers": 4,
+        "inc_name": "incident with same attachment 1",
+        "task_id": null,
+        "created": 1563445261781,
+        "task_members": null,
+        "task_custom": null,
+        "task_name": null,
+        "actions": [],
+        "inc_owner": {
+          "type": "user",
+          "display_name": "Admin User",
+          "id": 71,
+          "name": "admin@example.com"
+        },
+        "creator_id": {
+          "type": "user",
+          "display_name": "Admin User",
+          "id": 71,
+          "name": "admin@example.com"
+        },
+        "content_type": "application/pdf",
+        "inc_id": 2096,
+        "size": 123852,
+        "type": "incident",
+        "id": 11,
+        "name": "sample_ioc_1.pdf"
+      }
+    }, {
+      "match_field_value": "application/<ResilientHighlight>pdf</ResilientHighlight>",
+      "inc_name": "Get example outputs fn-utilities",
+      "task_id": null,
+      "type_id": "attachment",
+      "obj_creator_id": 71,
+      "inc_owner_id": 71,
+      "obj_id": 1,
+      "org_id": 201,
+      "task_name": null,
+      "score": 0.517004,
+      "match_highlights": [{
+        "match_field_name": "Content Type",
+        "match_field_value": "application/<ResilientHighlight>pdf</ResilientHighlight>"
+      }],
+      "obj_create_date": 1563376076661,
+      "obj_name": "sample_ioc.pdf",
+      "match_field_name": "Content Type",
+      "inc_id": 2095,
+      "result": {
+        "task_at_id": null,
+        "uuid": "3fc6114e-6465-4fc0-a150-1e961869d34b",
+        "vers": 13,
+        "inc_name": "Get example outputs fn-utilities",
+        "task_id": null,
+        "created": 1563376076661,
+        "task_members": null,
+        "task_custom": null,
+        "task_name": null,
+        "actions": [],
+        "inc_owner": {
+          "type": "user",
+          "display_name": "Admin User",
+          "id": 71,
+          "name": "admin@example.com"
+        },
+        "creator_id": {
+          "type": "user",
+          "display_name": "Admin User",
+          "id": 71,
+          "name": "admin@example.com"
+        },
+        "content_type": "application/pdf",
+        "inc_id": 2095,
+        "size": 123852,
+        "type": "incident",
+        "id": 1,
+        "name": "sample_ioc.pdf"
+      }
+    }]
+}

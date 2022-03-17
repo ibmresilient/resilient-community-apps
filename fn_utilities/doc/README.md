@@ -575,7 +575,7 @@ None
 
 ---
 ## Function - Utilities: Call REST API
-This function calls a REST web service. It supports the standard REST methods: GET, HEAD, POST, PUT, DELETE and OPTIONS.
+This function calls a REST web service. It supports the standard REST methods: GET, HEAD, POST, PUT, DELETE, OPTIONS and PATCH.
 
 The function parameters determine the type of call, the URL, and optionally the headers, cookies and body. The results include the text or structured (JSON) result from the web service, and additional information including the elapsed time.
 

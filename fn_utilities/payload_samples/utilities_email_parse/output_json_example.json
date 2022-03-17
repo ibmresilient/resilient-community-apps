@@ -1,0 +1,74 @@
+{
+    "inputs": {
+        "incident_id": 2095,
+        "attachment_id": 8,
+        "utilities_parse_email_attachments": true
+    },
+    "metrics": {
+        "package": "unknown",
+        "timestamp": "2019-07-17 16:38:18",
+        "package_version": "unknown",
+        "host": "xxx.ie.ibm.com",
+        "version": "1.0",
+        "execution_time_ms": 2132
+    },
+    "success": true,
+    "content": {
+        "body": "After reviewing your profile with our management, we are pleased to...",
+        "received": [{
+            "from": "info@example.com",
+            "by": "exmaple.com Postfix",
+            "delay": 0,
+            "date_utc": "2017-11-16T05:48:58",
+            "hop": 1,
+            "date": "Thu, 16 Nov 2017 13:48:58 +0800 SGT",
+            "with": "ESMTPSA",
+            "id": "80EABD601B2"
+        }, {
+            "from": "example.com unknown x.x.x.x",
+            "by": "secure1.example.com Postfix",
+            "delay": 78.0,
+            "date_utc": "2017-11-16T05:50:16",
+            "hop": 2,
+            "date": "Thu, 16 Nov 2017 13:50:16 +0800 SGT",
+            "with": "ESMTP",
+            "id": "4A2A41561A55"
+        }, {
+            "from": "103.15.233.228",
+            "delay": 474.0,
+            "date_utc": "2017-11-16T05:58:10",
+            "hop": 3,
+            "date": "Thu, 16 Nov 2017 05:58:10 +0000",
+            "by": "removed"
+        }],
+        "from": [
+            ["Monika Bakun", "admin@example.com"]
+        ],
+        "attachments": [{
+            "binary": true,
+            "mail_content_type": "application/msword",
+            "charset": null,
+            "filename": "SKMBT_C201711xxxx.doc",
+            "content-id": "",
+            "content_transfer_encoding": "base64",
+            "payload": "e1xydGZIMigxMS0xMyksSHVhbm..."
+        }],
+        "plain_body": "['After reviewing your profile with our management, we are pleased to...']",
+        "content-type": "multipart/mixed; boundary='===============1876313359=='",
+        "x-sf-rx-return-path": "<admin@example.com>",
+        "to_domains": ["ibm.com"],
+        "to": [
+            ["Recipients", "joe.bloggs@ibm.com"]
+        ],
+        "html_body": "['<HTML><head><meta charset=iso-8859-1\\'/></head><BODY><P>After reviewing your profile with our management, we are pleased to ...</BODY></HTML>']",
+        "x-sf-helo-domain": "secure1.example.com",
+        "x-sf-originating-ip": "0.0.0.0",
+        "date": "2017-11-16T05:49:54",
+        "timezone": "+0",
+        "mime-version": "1.0",
+        "has_defects": false,
+        "subject": "Request For Quotation"
+    },
+    "reason": null,
+    "version": "1.0"
+}
