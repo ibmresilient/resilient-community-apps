@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 
 """Function implementation"""
@@ -21,7 +21,7 @@ from resilient_circuits.template_functions import render
 LOG = logging.getLogger(__name__)
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'shell_command"""
+    """Component that implements SOAR function 'shell_command"""
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""

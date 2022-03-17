@@ -1,4 +1,4 @@
-# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
@@ -11,7 +11,7 @@ from resilient_circuits import ResilientComponent, function, handler, StatusMess
 
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'utilities_xml_transformation"""
+    """Component that implements SOAR function 'utilities_xml_transformation"""
 
     XML_DIR = "xml_stylesheet_dir"
 

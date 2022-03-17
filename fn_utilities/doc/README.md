@@ -46,11 +46,12 @@
 
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 2.0.6   | 7/2021 | pin dependency 'chardet' at v4.0.0 |
-| 2.0.3   | 2/2021 | bug fix for email parser |
-| 2.0.2   | 2/2021 | bug fixes for Shell Command |
-| 2.0.1   | 9/2020 | bug fixes|
-| 2.0.0   | 7/2020 | Numerous fixes, improved Rules and workflows and only Python 3 supported |
+| 2.1.0 | 3/2022 | Support for PATCH method |
+| 2.0.6 | 7/2021 | pin dependency 'chardet' at v4.0.0 |
+| 2.0.3 | 2/2021 | bug fix for email parser |
+| 2.0.2 | 2/2021 | bug fixes for Shell Command |
+| 2.0.1 | 9/2020 | bug fixes |
+| 2.0.0  | 7/2020 | Numerous fixes, improved Rules and workflows and only Python 3 supported |
 | 1.0.15 | 5/2020 | Bug fixes |
 | 1.0.14  | 5/2020 | Shell Command support for Remote Linux Execution |
 
@@ -708,7 +709,7 @@ For example, www.ibm.com and www.1bm.com would have a low distance. This can use
 ```python
 results = {
   'distances': {
-    'resilientsystems.com': 6,
+    'soarsystems.com': 6,
     'ibmcloud.com': 11,
     'ibm.com': 9,
     'bluemix.com': 9
@@ -716,7 +717,7 @@ results = {
   'domain_name': 'ressystems.com',
   'closest': {
     'distance': 6,
-    'name': 'resilientsystems.com'
+    'name': 'soarsystems.com'
   }
 }
 ```
@@ -740,7 +741,7 @@ else:
   inputs.domain_name = artifact.value
 
 # The list of domains to test against
-inputs.domain_list = "ibm.com, resilientsystems.com, ibmcloud.com, bluemix.com"
+inputs.domain_list = "ibm.com, soarsystems.com, ibmcloud.com, bluemix.com"
 ```
 
 </p>
@@ -1240,8 +1241,8 @@ inputs.incident_id = incident.id
 <p>
 
 ```python
-# {'owner': {'fname': 'Resilient', 'lname': 'Sysadmin', 'title': '', 'display_name': 'Resilient Sysadmin', 'email': 'b@a.com', 'phone': '781 838 4848', 'cell': '978 373 2839'}, 'members': []}
-# {'owner': None, 'members': [{'fname': 'Resilient', 'lname': 'Sysadmin', 'title': '', 'display_name': 'Resilient Sysadmin', 'email': 'b@a.com', 'phone': '781 838 4848', 'cell': '978 373 2839'}]}
+# {'owner': {'fname': 'SOAR', 'lname': 'Sysadmin', 'title': '', 'display_name': 'SOAR Sysadmin', 'email': 'b@a.com', 'phone': '781 838 4848', 'cell': '978 373 2839'}, 'members': []}
+# {'owner': None, 'members': [{'fname': 'SOAR', 'lname': 'Sysadmin', 'title': '', 'display_name': 'SOAR Sysadmin', 'email': 'b@a.com', 'phone': '781 838 4848', 'cell': '978 373 2839'}]}
 
 ```
 
@@ -1493,10 +1494,10 @@ else:
 
 ---
 ## Function - Utilities: Resilient Search
-This function searches the Resilient platform for incident data according to the criteria specified, and returns the results to your workflow. 
+This function searches the SOAR platform for incident data according to the criteria specified, and returns the results to your workflow. 
 It can be used to find incidents containing data that matches any string, incidents currently assigned to a given user, or a very wide range of other search conditions.
 
-**NOTE:** The search results may include data from incidents that the current Resilient user (the person who triggered the workflow) cannot access. Often your Resilient users have the `Default` role that allows them to only see incidents where they are members. This function runs with the permissions of your app account, which typically may have much wider access privileges. **Use with caution, to avoid information disclosure.**
+**NOTE:** The search results may include data from incidents that the current SOAR user (the person who triggered the workflow) cannot access. Often your SOAR users have the `Default` role that allows them to only see incidents where they are members. This function runs with the permissions of your app account, which typically may have much wider access privileges. **Use with caution, to avoid information disclosure.**
 
  ![screenshot: fn-utilities-resilient-search ](./screenshots/fn-utilities-resilient-search.png)
 
@@ -1732,7 +1733,7 @@ results = {
 <p>
 
 ```python
-# Search for other occurrences of the same file attachment in Resilient.
+# Search for other occurrences of the same file attachment in SOAR.
 
 # The search template determines the type(s) of object to search, and the filter conditions.
 # This can be used to search within a specific incident field, or to search only incidents that meet other criteria.
@@ -2202,7 +2203,7 @@ incident.addNote(content)
 ---
 
 <!--
-## Inform Resilient Users
-  Use this section to optionally provide additional information so that Resilient playbook 
+## Inform SOAR Users
+  Use this section to optionally provide additional information so that SOAR playbook 
   designer can get the maximum benefit of your app.
 -->

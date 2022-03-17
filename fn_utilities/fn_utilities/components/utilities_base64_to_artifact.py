@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2018, 2022. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 
 """Function implementation"""
@@ -15,7 +15,7 @@ from resilient_circuits import ResilientComponent, function, StatusMessage, Func
 
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'base64_to_artifact' """
+    """Component that implements SOAR function 'base64_to_artifact' """
 
     @function("utilities_base64_to_artifact")
     def _base64_to_artifact_function(self, event, *args, **kwargs):

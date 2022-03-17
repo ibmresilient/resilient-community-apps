@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2018, 2022. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 
 """Function implementation"""
@@ -14,7 +14,7 @@ from resilient import ensure_unicode
 
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'domain_distance"""
+    """Component that implements SOAR function 'domain_distance"""
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""

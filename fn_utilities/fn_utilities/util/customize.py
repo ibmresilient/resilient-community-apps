@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""Generate the Resilient customizations required for fn_utilities"""
+"""Generate the SOAR customizations required for fn_utilities"""
 
 try:
     from resilient import ImportDefinition

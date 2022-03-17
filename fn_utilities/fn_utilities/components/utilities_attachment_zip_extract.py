@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2018, 2022. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 
 """Function implementation"""
@@ -23,7 +23,7 @@ def epoch_millis(zipdate):
 
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'attachment_zip_extract"""
+    """Component that implements SOAR function 'attachment_zip_extract"""
 
     @function("utilities_attachment_zip_extract")
     def _attachment_zip_extract_function(self, event, *args, **kwargs):
