@@ -23,7 +23,7 @@ setup(
     display_name="Symantec DLP",
     version='2.0.0',
     license='MIT',
-    author='IBM QRadar SOAR',
+    author='IBM SOAR',
     author_email='',
     url='https://ibm.com/mysupport',
     description="IBM QRadar SOAR app for Symantec DLP",
