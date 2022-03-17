@@ -43,8 +43,8 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 1.0.1 | 03/2022 | Documentation now accurately reflects supported Python version |
 | 1.0.0 | 02/2022 | Initial Release |
-| 1.0.1 | 03/2022 | Update Workflow Post-Processing Script |
 
 ---
 
