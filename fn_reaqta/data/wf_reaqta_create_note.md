@@ -20,6 +20,7 @@
 ```python
 inputs.reaqta_alert_id = incident.properties.reaqta_id
 inputs.reaqta_note = note.text.content
+inputs.reaqta_hive = incident.properties.reaqta_hive
 ```
 
 ### Post-Processing Script

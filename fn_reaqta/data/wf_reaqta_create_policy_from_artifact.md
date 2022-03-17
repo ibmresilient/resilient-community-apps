@@ -25,13 +25,16 @@ inputs.reaqta_policy_included_groups = rule.properties.reaqta_policy_included_gr
 inputs.reaqta_policy_excluded_groups = rule.properties.reaqta_policy_excluded_groups
 inputs.reaqta_policy_enabled = rule.properties.reaqta_policy_enabled
 inputs.reaqta_policy_block = rule.properties.reaqta_policy_block_when_triggered
+inputs.reaqta_hive = rule.properties.reaqta_hive if rule.properties.reaqta_hive else incident.properties.reaqta_hive 
 ```
 
 ### Post-Processing Script
 ```python
 if results.success:
-  policy_url = '<a href="{0}" target="blank">{0}</a>'.format(results.content.get("policy_url"))
-  incident.addNote(helper.createRichText("ReaQta Create Policy successful: {}".format(policy_url)))
+  policies = []
+  for policy in results.content:
+    policies.append( '<a href="{0}" target="blank">{0}</a>'.format(policy.get("policy_url")))
+  incident.addNote(helper.createRichText("ReaQta Create Policies successful: {}".format("<br>".join(policies))))
 else:
   incident.addNote(helper.createRichText("ReaQta Create Policy failed: {}".format(results.reason)))
 

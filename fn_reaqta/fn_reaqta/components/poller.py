@@ -11,7 +11,7 @@ from resilient_circuits import ResilientComponent
 from resilient_lib import validate_fields, RequestsCommon, make_payload_from_template
 from resilient import get_client
 from fn_reaqta.lib.poller_common import SOARCommon, poller, get_template_dir
-from fn_reaqta.lib.app_common import AppCommon, PACKAGE_NAME
+from fn_reaqta.lib.app_common import AppCommon, PACKAGE_NAME, get_hive_options
 from fn_reaqta.lib.configure_tab import init_reaqta_tab
 
 
@@ -25,7 +25,6 @@ LOG = logging.getLogger(__name__)
 # Default Templates
 CREATE_INCIDENT_TEMPLATE = os.path.join(get_template_dir(), "soar_create_incident.jinja")
 CLOSE_INCIDENT_TEMPLATE = os.path.join(get_template_dir(), "soar_close_incident.jinja")
-TRIGGER_EVENTS_TEMPLATE = os.path.join(get_template_dir(), "soar_triggerevents_datatable.jinja")
 
 def init_app(rc, options):
     """ intialize settings used for your app
@@ -45,14 +44,14 @@ def init_app(rc, options):
 
     return endpoint_class
 
-def get_entities(app_common, query_field_name, last_poller_time):
+def get_entities(app_common, query_field_name, last_poller_time, refresh_authentication=False):
     """[method call to query the endpoint solution for newly created or modified entities for
         synchronization with IBM SOAR]
 
     Args:
         app_common ([obj]): [class for app API calls]
         last_poller_time ([int]): [timestamp in milliseconds to collect the changed entities (alerts, cases, etc.)]
-
+        refresh_authentication (bool): True if need to reauthenticate
     Returns:
         [list]: [list of entities to synchronize with SOAR]
     """
@@ -64,7 +63,8 @@ def get_entities(app_common, query_field_name, last_poller_time):
     # use rc.execute() to call your endpoint with your query to return entities changes since the last_poller_time
     entity_list = app_common.get_entities_since_ts(query_field_name,
                                                    last_poller_time,
-                                                   app_common.get_filters())
+                                                   app_common.get_filters(),
+                                                   refresh_authentication=refresh_authentication)
 
     return entity_list
 
@@ -102,13 +102,10 @@ class PollerComponent(ResilientComponent):
         self.options = opts.get(PACKAGE_NAME, {})
 
         # Validate required fields in app.config are set
-        validate_fields(["polling_interval",
-                        "polling_lookback",
-                        "reaqta_url",
-                        "api_version",
-                        "cafile",
-                        "api_key",
-                        "api_secret"],
+        validate_fields([
+                            "polling_interval",
+                            "polling_lookback",
+                        ],
                         self.options)
 
         # collect settings necessary and initialize libraries used by the poller
@@ -140,14 +137,19 @@ class PollerComponent(ResilientComponent):
 
         # collect the override templates to use when creating, updating and closing cases
         self.soar_create_case_template = options.get("soar_create_case_template")
-        self.soar_update_case_template = options.get("soar_update_case_template")
         self.soar_close_case_template = options.get("soar_close_case_template")
 
         # rest_client is used to make IBM SOAR API calls
         self.rest_client = get_client(opts)
         self.rc = RequestsCommon(opts, options)
         self.soar_common = SOARCommon(self.rest_client)
-        self.app_common = init_app(self.rc, options)
+
+        # initialize the hives
+        self.hives_list = {}
+        for hive in [hive_name.strip() for hive_name in options.get('polling_hives', []).split(",")]:
+            hive_settings = get_hive_options(hive, opts)
+            if hive_settings:
+                self.hives_list[hive] = init_app(self.rc, hive_settings)
 
         return True
 
@@ -163,33 +165,47 @@ class PollerComponent(ResilientComponent):
             last_poller_time ([int]): [time in milliseconds when the last poller ran]
         """
 
-        # query for both new and closed alerts
-        for query_field_name in ["receivedAfter", "closedAfter"]:
-            # get the list of entities (alerts, cases, etc.) to insert, update or close as cases in IBM SOAR
-            entity_list = get_entities(self.app_common, query_field_name, kwargs['last_poller_time'])
+        try:
+            refresh_authentication = True # first time reauthenicate
+            for hive_label, app_common in self.hives_list.items():
+                LOG.info("%s Polling hive: %s", PACKAGE_NAME, hive_label)
+                # query for both new and closed alerts
+                for query_field_name in ["receivedAfter", "closedAfter"]:
+                    # get the list of entities (alerts, cases, etc.) to insert, update or close as cases in IBM SOAR
+                    entity_list = get_entities(app_common,
+                                               query_field_name,
+                                               kwargs['last_poller_time'],
+                                               refresh_authentication=refresh_authentication)
+                    refresh_authentication = False # multiple times times through don't need to reauthenticate
 
-            # iterate over all the entities. Some apps have page the results
-            while True:
-                self.process_entity_list(entity_list.get('result', []))
-                if not entity_list.get('nextPage'):
-                    break
+                    # iterate over all the entities. Some apps have paged results
+                    while True:
+                        self.process_entity_list(entity_list.get('result', []), hive_label, app_common)
+                        if not entity_list.get('nextPage') or not entity_list.get('remainingItems'):
+                            break
 
-                entity_list = self.app_common.get_next_page(entity_list['nextPage'])
+                        entity_list = app_common.get_next_page(entity_list['nextPage'])
+        except Exception as err:
+            LOG.error("Failure in poller for hive: %s. %s", hive_label, str(err))
 
-    def process_entity_list(self, entity_list):
+    def process_entity_list(self, entity_list, hive_label, app_common):
         """Perform all the processing on the entity list, creating, updating and closing SOAR
            cases based on the states of the endpoint entities
 
         Args:
+            hive_label: (str): name of hive to include when creating a new case
             entity_list (list): list of endpoint entities to check again SOAR cases
+            app_common (class object): functions used for communication with the specific hive
         """
         try:
-            cases_insert = cases_closed = 0
+            alerts_processed = cases_insert = cases_closed = 0
+            LOG.debug(entity_list)
             for entity in entity_list:
                 entity_id = get_entity_id(entity)
 
                 # create linkback url
-                entity['alert_url'] = self.app_common.make_linkback_url(entity_id)
+                entity['alert_url'] = app_common.make_linkback_url(entity_id)
+                entity['hive_label'] = hive_label
 
                 # determine if this is an existing SOAR case
                 soar_case, error_msg = self.soar_common.get_soar_case({ SOAR_ENTITY_ID_FIELD: entity_id }, open_cases=False)
@@ -231,8 +247,12 @@ class PollerComponent(ResilientComponent):
                         # reaQta doesn't have a capability to collect updated fields. So update logic is unused.
                         pass
 
-            LOG.info("IBM SOAR cases created: %s, cases closed: %s",
-                     cases_insert, cases_closed)
+                alerts_processed += 1
+
+            LOG.info("Alerts processed: %s, IBM SOAR cases created: %s, cases closed: %s",
+                     alerts_processed,
+                     cases_insert,
+                     cases_closed)
         except Exception as err:
             LOG.error("%s poller run failed: %s", PACKAGE_NAME, str(err))
 

@@ -4,7 +4,7 @@
 
 """AppFunction implementation"""
 import ntpath
-from fn_reaqta.lib.app_common import AppCommon, PACKAGE_NAME
+from fn_reaqta.lib.app_common import AppCommon, PACKAGE_NAME, get_hive_options
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import validate_fields
 
@@ -30,39 +30,38 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.reaqta_artifact_type
             -   fn_inputs.reaqta_program_path
             -   fn_inputs.reaqta_incident_id
+            -   fn_inputs.reaqta_hive
         """
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
 
-        validate_fields(["reaqta_url",
-                        "api_version",
-                        "cafile",
-                        "api_key",
-                        "api_secret"],
-                        self.app_configs)
-
-        validate_fields(["reaqta_endpoint_id", "reaqta_incident_id",
+        validate_fields(["reaqta_hive", "reaqta_endpoint_id", "reaqta_incident_id",
                         "reaqta_program_path", "reaqta_artifact_type"], fn_inputs)
 
-        app_common = AppCommon(self.rc, self.app_configs._asdict())
-        file_contents, err_msg = app_common.get_program_file(fn_inputs.reaqta_endpoint_id,
-                                                           fn_inputs.reaqta_program_path)
+        hive_settings = get_hive_options(fn_inputs.reaqta_hive, self.opts)
+        if not hive_settings:
+            results = None
+            err_msg = "Hive section not found: {}".format(fn_inputs.reaqta_hive)
+        else:
+            app_common = AppCommon(self.rc, hive_settings)
+            file_contents, err_msg = app_common.get_program_file(fn_inputs.reaqta_endpoint_id,
+                                                            fn_inputs.reaqta_program_path)
 
-        results = None
-        if not err_msg:
-            # collect the file name
-            file_name = ntpath.basename(fn_inputs.reaqta_program_path)
+            results = None
+            if not err_msg:
+                # collect the file name
+                file_name = ntpath.basename(fn_inputs.reaqta_program_path)
 
-            attachment_uri = "/incidents/{0}/artifacts/files".format(fn_inputs.reaqta_incident_id)
+                attachment_uri = "/incidents/{0}/artifacts/files".format(fn_inputs.reaqta_incident_id)
 
-            artifact_type = ARTIFACT_TYPE_LOOKUP.get(fn_inputs.reaqta_artifact_type, 12)
+                artifact_type = ARTIFACT_TYPE_LOOKUP.get(fn_inputs.reaqta_artifact_type, 12)
 
-            results = self.rest_client().post_artifact_file(attachment_uri,
-                                                           artifact_type,
-                                                           None,
-                                                           bytes_handle=file_contents,
-                                                           description="Extracted from ReaQta",
-                                                           value=file_name)
+                results = self.rest_client().post_artifact_file(attachment_uri,
+                                                            artifact_type,
+                                                            None,
+                                                            bytes_handle=file_contents,
+                                                            description="Extracted from ReaQta",
+                                                            value=file_name)
 
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
 

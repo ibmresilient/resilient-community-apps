@@ -19,6 +19,7 @@
 ### Pre-Processing Script
 ```python
 inputs.reaqta_endpoint_id = incident.properties.reaqta_endpoint_id
+inputs.reaqta_hive = incident.properties.reaqta_hive
 ```
 
 ### Post-Processing Script

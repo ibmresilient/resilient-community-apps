@@ -7,7 +7,7 @@ from datetime import datetime
 from io import BytesIO
 from urllib.parse import urljoin
 from fn_reaqta.lib.poller_common import IBM_SOAR, eval_mapping, s_to_b
-from resilient_lib import str_to_bool, readable_datetime, clean_html
+from resilient_lib import validate_fields, str_to_bool, readable_datetime, clean_html
 from cachetools import cached, LRUCache
 
 LOG = logging.getLogger(__name__)
@@ -30,6 +30,14 @@ DOWNLOAD_WAIT_SEC = 15  # number of seconds to wait between status checks for a 
 
 class AppCommon():
     def __init__(self, rc, options):
+        validate_fields([
+                            "reaqta_url",
+                            "api_version",
+                            "cafile",
+                            "api_key",
+                            "api_secret"
+                        ],
+                        options)
         self.api_key = options['api_key']
         self.api_secret = options['api_secret']
         self.reaqta_url = options['reaqta_url']
@@ -52,7 +60,7 @@ class AppCommon():
                 "id": self.api_key
             }
 
-            response, err_msg = self.api_call("POST", 'authenticate', params, refresh_authentication=None)
+            response, err_msg = self.api_call("POST", 'authenticate', params)
             if not err_msg:
                 self.token = response.json()['token']
                 self.header = self._make_header(self.token)
@@ -61,7 +69,7 @@ class AppCommon():
 
         return None
 
-    def get_entities_since_ts(self, query_field_name, timestamp, optional_filters):
+    def get_entities_since_ts(self, query_field_name, timestamp, optional_filters, refresh_authentication=False):
         """get changed entities since last poller run
 
         Args:
@@ -91,12 +99,12 @@ class AppCommon():
                 query[k] = v
 
         LOG.debug(query)
-        response, err_msg = self.api_call("GET", 'alerts', query, refresh_authentication=True)
+        response, err_msg = self.api_call("GET", 'alerts', query, refresh_authentication=refresh_authentication)
 
         # trim results by optional filters
         results = response.json()
 
-        if not err_msg:
+        if not err_msg and (groups_filter or impact_filter):
             filtered_results = []
             for alert in results['result']:
                 accept_filtered = False
@@ -113,6 +121,7 @@ class AppCommon():
                 if accept_filtered:
                     filtered_results.append(alert)
 
+            LOG.info("Original List: %s. Filtered List: %s", len(results), len(filtered_results))
             results = { "result": filtered_results }
 
         return results
@@ -335,8 +344,8 @@ class AppCommon():
         return urljoin(self.reaqta_url, linkback_url.format(entity_id))
 
     def api_call(self, method, url, payload, refresh_authentication=False):
-        if refresh_authentication is not None:
-            self.authenticate(refresh=refresh_authentication)
+        if refresh_authentication:
+            self.authenticate(refresh=True)
 
         if method in ["PUT", "POST"]:
             return self.rc.execute(method,
@@ -415,3 +424,20 @@ def callback(response):
             details)
 
     return response, error_msg
+
+def get_hive_options(hive_label, opts):
+    """Return app.config section parameters
+
+    Args:
+        hive_label (str): label used in app.config as: [fn_reaqta:hive_label]
+        opts (dict): all app.config section information
+
+    Returns:
+        dict: section settings found or None
+    """
+    section_header = "{}:{}".format(PACKAGE_NAME, hive_label)
+    if not opts.get(section_header):
+        LOG.warning("Unable to find section header: %s", section_header)
+        return None
+
+    return opts.get(section_header)

@@ -29,6 +29,7 @@ IS_MALICIOUS_LOOKUP = {
 inputs.reaqta_alert_id = incident.properties.reaqta_id
 inputs.reaqta_note = incident.resolution_summary.content
 inputs.reaqta_is_malicious = IS_MALICIOUS_LOOKUP.get(incident.resolution_id, False) # if resolution_id is not found, set to not malicious
+inputs.reaqta_hive = incident.properties.reaqta_hive
 ```
 
 ### Post-Processing Script

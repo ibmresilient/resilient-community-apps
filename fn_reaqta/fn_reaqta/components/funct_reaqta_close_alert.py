@@ -3,7 +3,7 @@
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 
 """AppFunction implementation"""
-from fn_reaqta.lib.app_common import AppCommon, PACKAGE_NAME
+from fn_reaqta.lib.app_common import AppCommon, PACKAGE_NAME, get_hive_options
 from fn_reaqta.lib.poller_common import IBM_SOAR
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import validate_fields
@@ -25,29 +25,28 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.reaqta_alert_id
             -   fn_inputs.reaqta_note
             -   fn_inputs.reaqta_is_malicious
+            -   fn_inputs.reaqta_hive
         """
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
 
-        validate_fields(["reaqta_url",
-                        "api_version",
-                        "cafile",
-                        "api_key",
-                        "api_secret"],
-                        self.app_configs)
+        validate_fields(["reaqta_hive", "reaqta_alert_id", "reaqta_is_malicious"], fn_inputs)
 
-        validate_fields(["reaqta_alert_id", "reaqta_is_malicious"], fn_inputs)
+        hive_settings = get_hive_options(fn_inputs.reaqta_hive, self.opts)
+        if not hive_settings:
+            results = None
+            err_msg = "Hive section not found: {}".format(fn_inputs.reaqta_hive)
+        else:
+            app_common = AppCommon(self.rc, hive_settings)
 
-        app_common = AppCommon(self.rc, self.app_configs._asdict())
+            # write a note if one present
+            inputs_dict = fn_inputs._asdict()
+            if inputs_dict.get('reaqta_note'):
+                results, err_msg = app_common.create_note(fn_inputs.reaqta_alert_id, fn_inputs.reaqta_note)
+                if err_msg:
+                    self.LOG.error("create note failed: %s", err_msg)
 
-        # write a note if one present
-        inputs_dict = fn_inputs._asdict()
-        if inputs_dict.get('reaqta_note'):
-            results, err_msg = app_common.create_note(fn_inputs.reaqta_alert_id, fn_inputs.reaqta_note)
-            if err_msg:
-                self.LOG.error("create note failed: %s", err_msg)
-
-        results, err_msg = app_common.close_alert(fn_inputs.reaqta_alert_id, fn_inputs.reaqta_is_malicious)
+            results, err_msg = app_common.close_alert(fn_inputs.reaqta_alert_id, fn_inputs.reaqta_is_malicious)
 
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
 

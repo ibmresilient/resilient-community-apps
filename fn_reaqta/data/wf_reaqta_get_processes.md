@@ -21,6 +21,7 @@
 inputs.reaqta_endpoint_id = incident.properties.reaqta_endpoint_id
 inputs.reaqta_has_incident = rule.properties.reaqta_has_incident
 inputs.reaqta_suspended = rule.properties.reaqta_suspended
+inputs.reaqta_hive = incident.properties.reaqta_hive
 ```
 
 ### Post-Processing Script

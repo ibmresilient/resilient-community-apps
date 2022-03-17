@@ -26,6 +26,7 @@ class ReaQtaTab(Tab):
         Field("reaqta_impact"),
         Field("reaqta_id"),
         Field("reaqta_endpoint_id"),
+        Field("reaqta_hive"),
         Datatable("reaqta_trigger_events"),
         Datatable("reaqta_process_list")
     ]

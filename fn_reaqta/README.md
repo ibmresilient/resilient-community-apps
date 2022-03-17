@@ -168,6 +168,25 @@ In order to make API calls to ReaQta, create an API Application, prodiving the e
 ### App Configuration
 The following table provides the settings you need to configure the app. These settings are made in the app.config file. See the documentation discussed in the Requirements section for the procedure.
 
+#### [fn_reaqta]
+This section defines the global settings, including the poller configuration.
+For each hive, use the section definition below
+
+| Config | Required | Example | Description |
+| ------ | :------: | ------- | ----------- |
+| **polling_interval** | Yes | `60` | *Number of seconds between polling queries for new alerts *  |
+| **polling_lookback** | Yes | `120` | *Number of minutes to look back for new alerts the first time the app starts or restarts*  |
+| **soar_create_case_template** | No | `/path/to/template.jina` | *Override template used to create a SOAR case from the poller. See [Templates for SOAR Cases](#templates-for-soar-cases)* |
+| **soar_close_case_template** | No | `/path/to/template.jina` | *Override template used to close a SOAR case from the poller. See [Templates for SOAR Cases](#templates-for-soar-cases)* |
+| **https_proxy** | No | `https://xxx/` | *Proxy URL for HTTPS connections* |
+| **http_proxy** | No | `http://xxx/` | *Proxy URL for HTTP connections* |
+| **timeout** | No | `60` | *Seconds to wait for APIs calls back to ReaQta. Default is 30* |
+| **polling_hives** | Yes | hive_label1, hive_label2 | *Comma separated list of hives to poll.* |
+| **policy_hives** | Yes |  hive_label1, hive_label2 | *Comma separated list of hives to set a policy if not specified from the SOAR function call* |
+
+#### [fn_reaqta:hive_label]
+Repeat this section for each ReaQta hive. Add the `hive_label` used in the `polling_hives` parameter above.
+
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
 | **reaqta_url** | Yes | `https://xxx/` | *Base URL to ReaQta instance ending in slash '/'*  |
@@ -175,14 +194,7 @@ The following table provides the settings you need to configure the app. These s
 | **api_secret** | Yes | `P9zPLkcb-...` | *API Key secret from your configured ReaQta API application*  |
 | **api_version** | Yes | `rqt_api/1/` | *URL path information ending in slash '/'*  |
 | **cafile** | Yes | `/path/to/cafile.crt or false` | *Path to your ReaQta client certificate, if needed or false for no certificate verification*  |
-| **polling_interval** | Yes | `60` | *Number of seconds between polling queries for new alerts *  |
-| **polling_lookback** | Yes | `120` | *Number of minutes to look back for new alerts the first time the app starts or restarts*  |
-| **polling_filters** | No | `"alertStatus": "benign", "severity": ["low", "high"], "tag": ["hive"]` | *Name/value pairs specifying the criteria to filter incoming alerts for escalation. Additional filters exist for endpoints associated with groups and alerts with impacts greater or equal a numeric value: "groups": ['groupA', 'groupB'], "impact": 70* |
-| **soar_create_case_template** | No | `/path/to/template.jina` | *Override template used to create a SOAR case from the poller. See [Templates for SOAR Cases](#templates-for-soar-cases)* |
-| **soar_close_case_template** | No | `/path/to/template.jina` | *Override template used to close a SOAR case from the poller. See [Templates for SOAR Cases](#templates-for-soar-cases)* |
-| **https_proxy** | No | `https://xxx/` | *Proxy URL for HTTPS connections* |
-| **http_proxy** | No | `http://xxx/` | *Proxy URL for HTTP connections* |
-| **timeout** | No | `60` | *Seconds to wait for APIs calls back to ReaQta. Default is 30* |
+| **polling_filters** | No | "alertStatus": "malicious", "severity": ["medium", "high"], "tag": ["hive"], "groups": ["groupA", "groupB"], "impact": 70 | *Set filters for the poller. Groups are either Client or Group names. Impact compares alerts greater or equal to this value* |
 
 ### Custom Layouts
 <!--
@@ -198,7 +210,7 @@ The following table provides the settings you need to configure the app. These s
 
 ## Poller Considerations
 
-The poller is just one way to escalate ReaQta alerts to SOAR cases. It's also possible to send alert information to a SIEM, such as IBM QRadar, which would then coorelate alerts into Offenses. With the QRadar Plugin for SOAR, offenses can then be ecalated to SOAR cases. As long as the ReaQta alert ID is preserved in the custom case field `reaqta_id`, then all the remaining details about the alert will synchronize to the SOAR case. In the case of the QRadar Plugin for SOAR, you would modify the escalation templates to reference this custom field with the ReaQta Alert ID.
+The poller is just one way to escalate ReaQta alerts to SOAR cases. It's also possible to send alert information to a SIEM, such as IBM QRadar, which would then coorelate alerts into Offenses. With the QRadar Plugin for SOAR, offenses can then be ecalated to SOAR cases. As long as the ReaQta alert ID is preserved in the custom case field `reaqta_id` and `reaqta_hive`, then all the remaining details about the alert will synchronize to the SOAR case. In the case of the QRadar Plugin for SOAR, you would modify the escalation templates to reference this custom field with the ReaQta Alert ID.
 
 When using another source of ReaQta Alert escalation to IBM SOAR, disable the poller by changing the app.config setting to `poller_interval=0`.
 
@@ -217,6 +229,7 @@ Create a SOAR case attachment associated with a running process
 | `reaqta_endpoint_id` | `text` | Yes | `-` | - |
 | `reaqta_incident_id` | `number` | Yes | `-` | - |
 | `reaqta_program_path` | `text` | Yes | `-` | typically taken from the reaqta_trigger_events or reaqta_process_list datatables |
+| `reaqta_hive` | `text` | Yes | `hive_label` | Label used in app.config to identify which ReaQta hive to access |
 
 NOTE: Attachments are subject to the file-size limit. The default is 25mb. This can be increased at the system level using the `resutil` command tool.
 </p>
@@ -285,6 +298,7 @@ results = {
 inputs.reaqta_program_path = row['process_path'].replace("\\\\", "\\")
 inputs.reaqta_endpoint_id = incident.properties.reaqta_endpoint_id
 inputs.reaqta_incident_id = incident.id
+inputs.reaqta_hive = incident.properties.reaqta_hive
 ```
 
 </p>
@@ -320,6 +334,7 @@ Note: An error will occur if a policy with this file has already exists
 | `reaqta_policy_description` | `text` | No | `-` | Policy description |
 | `reaqta_policy_included_groups` | `text` | No | `groupA,groupB` | Apply policy to these groups. Use either reaqta_policy_included_groups or reaqta_policy_excluded_groups |
 | `reaqta_policy_excluded_groups` | `text` | No | `groupC,groupD` | Bypass policy to these groups. Use either reaqta_policy_included_groups or reaqta_policy_excluded_groups |
+| `reaqta_hive` | `text` | Yes | `hive_label` | Label used in app.config to identify which ReaQta hive to access |
 
 </p>
 </details>
@@ -330,7 +345,7 @@ Note: An error will occur if a policy with this file has already exists
 > **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
 
 ```python
-results = {
+results = [{
   "version": 2.0,
   "success": true,
   "reason": null,
@@ -384,7 +399,7 @@ results = {
     "execution_time_ms": 1283,
     "timestamp": "2022-02-23 21:00:29"
   }
-}
+}]
 ```
 
 </p>
@@ -401,6 +416,7 @@ inputs.reaqta_policy_included_groups = rule.properties.reaqta_policy_included_gr
 inputs.reaqta_policy_excluded_groups = rule.properties.reaqta_policy_excluded_groups
 inputs.reaqta_policy_enabled = rule.properties.reaqta_policy_enabled
 inputs.reaqta_policy_block = rule.properties.reaqta_policy_block_when_triggered
+inputs.reaqta_hive = incident.properties.reaqta_hive
 ```
 
 </p>
@@ -411,10 +427,12 @@ inputs.reaqta_policy_block = rule.properties.reaqta_policy_block_when_triggered
 
 ```python
 if results.success:
-  policy_url = '<a href="{0}" target="blank">{0}</a>'.format(results.content.get("policy_url"))
-  incident.addNote(helper.createRichText("ReaQta Create Policy successful: {}".format(policy_url)))
+  policies = []
+  for policy in results.content:
+    policies.append( '<a href="{0}" target="blank">{0}</a>'.format(policy.get("policy_url")))
+  incident.addNote(helper.createRichText("ReaQta Create Policies successful: {}".format("<br>".join(policies))))
 else:
-  incident.addNote("ReaQta Create Policy failed: {}".format(results.reason))
+  incident.addNote(helper.createRichText("ReaQta Create Policy failed: {}".format(results.reason)))
 ```
 
 </p>
@@ -434,6 +452,7 @@ Close a ReaQta alert. This can be triggered when the SOAR case is closed.
 | `reaqta_alert_id` | `text` | Yes | `-` | - |
 | `reaqta_is_malicious` | `boolean` | Yes | False | true/ false for malicious/benign |
 | `reaqta_note` | `text` | No | `-` | - |
+| `reaqta_hive` | `text` | Yes | `hive_label` | Label used in app.config to identify which ReaQta hive to access |
 
 </p>
 </details>
@@ -487,6 +506,7 @@ IS_MALICIOUS_LOOKUP = {
 inputs.reaqta_alert_id = incident.properties.reaqta_id
 inputs.reaqta_note = incident.resolution_summary.content
 inputs.reaqta_is_malicious = IS_MALICIOUS_LOOKUP.get(incident.resolution_id, False) # if resolution_id is not found, set to not malicious
+inputs.reaqta_hive = incident.properties.reaqta_hive
 ```
 
 </p>
@@ -518,6 +538,7 @@ Create an artifact from a process file
 | `reaqta_endpoint_id` | `text` | Yes | `-` | - |
 | `reaqta_program_path` | `text` | Yes | `c:\\path\\to\\malware.exe` | - |
 | `reaqta_artifact_type` | `text` | Yes | `Malware Sample` or `Other File` |
+| `reaqta_hive` | `text` | Yes | `hive_label` | Label used in app.config to identify which ReaQta hive to access |
 
 NOTE: Attachments are subject to the file-size limit. The default is 25mb. This can be increased at the system level using the `resutil` command tool.
 </p>
@@ -800,6 +821,7 @@ inputs.reaqta_endpoint_id = incident.properties.reaqta_endpoint_id
 inputs.reaqta_incident_id = incident.id
 inputs.reaqta_artifact_type = "Malware Sample"
 inputs.reaqta_program_path = row['program_path']
+inputs.reaqta_hive = incident.properties.reaqta_hive
 ```
 
 </p>
@@ -830,6 +852,7 @@ Append a note to the ReaQta notes. Notes will display in ReaQta with the 'IBM SO
 | ---- | :--: | :------: | ------- | ------- |
 | `reaqta_alert_id` | `text` | Yes | `-` | - |
 | `reaqta_note` | `text` | No | `-` | - |
+| `reaqta_hive` | `text` | Yes | `hive_label` | Label used in app.config to identify which ReaQta hive to access |
 
 </p>
 </details>
@@ -870,6 +893,7 @@ results = {
 ```python
 inputs.reaqta_alert_id = incident.properties.reaqta_id
 inputs.reaqta_note = note.text.content
+inputs.reaqta_hive = incident.properties.reaqta_hive
 ```
 
 </p>
@@ -901,6 +925,7 @@ Return details for a ReaQta alert
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `reaqta_alert_id` | `text` | Yes | `-` | - |
+| `reaqta_hive` | `text` | Yes | `hive_label` | Label used in app.config to identify which ReaQta hive to access |
 
 </p>
 </details>
@@ -1240,6 +1265,7 @@ results = {
 
 ```python
 inputs.reaqta_alert_id = incident.properties.reaqta_id
+inputs.reaqta_hive = incident.properties.reaqta_hive
 ```
 
 </p>
@@ -1330,6 +1356,7 @@ Get active processes from a given endpoint and present in the reaqta_process_lis
 | `reaqta_endpoint_id` | `text` | Yes | `-` | - |
 | `reaqta_has_incident` | `boolean` | No | `true` | Select only processes associated with an alert |
 | `reaqta_suspended` | `boolean` | No | `-` | Select only processes which are suspended |
+| `reaqta_hive` | `text` | Yes | `hive_label` | Label used in app.config to identify which ReaQta hive to access |
 
 </p>
 </details>
@@ -1476,6 +1503,7 @@ results = {
 inputs.reaqta_endpoint_id = incident.properties.reaqta_endpoint_id
 inputs.reaqta_has_incident = rule.properties.reaqta_has_incident
 inputs.reaqta_suspended = rule.properties.reaqta_suspended
+inputs.reaqta_hive = incident.properties.reaqta_hive
 ```
 
 </p>
@@ -1518,6 +1546,7 @@ Isolate a ReaQta controlled machine based on it's endpoint ID.
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `reaqta_endpoint_id` | `text` | Yes | `-` | - |
+| `reaqta_hive` | `text` | Yes | `hive_label` | Label used in app.config to identify which ReaQta hive to access |
 
 NOTE: Restoring an isolated endpoint must be done through the ReaQta console.
 
@@ -1564,6 +1593,7 @@ results = {
 
 ```python
 inputs.reaqta_endpoint_id = incident.properties.reaqta_endpoint_id
+inputs.reaqta_hive = incident.properties.reaqta_hive
 ```
 
 </p>
@@ -1601,6 +1631,7 @@ Kill a process on a machine by the process PID. The process list datatable row i
 | `reaqta_endpoint_id` | `text` | Yes | `-` | - |
 | `reaqta_process_pid` | `number` | Yes | `-` | Collected from the reaQta_process_list datatable. |
 | `reaqta_starttime` | `number` | Yes | `-` | Collected from the reaQta_process_list datatable. |
+| `reaqta_hive` | `text` | Yes | `hive_label` | Label used in app.config to identify which ReaQta hive to access |
 
 </p>
 </details>
@@ -1648,7 +1679,7 @@ results = {
 <p>
 
 ```python
-None
+inputs.reaqta_hive = incident.properties.reaqta_hive
 ```
 
 </p>

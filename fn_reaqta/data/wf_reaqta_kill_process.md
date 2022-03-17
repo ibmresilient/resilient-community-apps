@@ -21,6 +21,7 @@
 inputs.reaqta_endpoint_id = incident.properties.reaqta_endpoint_id
 inputs.reaqta_process_pid = row['pid']
 inputs.reaqta_starttime = row['start_time']
+inputs.reaqta_hive = incident.properties.reaqta_hive
 ```
 
 ### Post-Processing Script

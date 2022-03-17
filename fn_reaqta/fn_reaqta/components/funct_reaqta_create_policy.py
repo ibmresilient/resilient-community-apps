@@ -3,7 +3,8 @@
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 
 """AppFunction implementation"""
-from fn_reaqta.lib.app_common import AppCommon, PACKAGE_NAME, POLICY_DETAILS
+from pickletools import read_bytes4
+from fn_reaqta.lib.app_common import AppCommon, PACKAGE_NAME, POLICY_DETAILS, get_hive_options
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import validate_fields
 
@@ -28,33 +29,42 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.reaqta_sha256
             -   fn_inputs.reaqta_policy_description
             -   fn_inputs.reaqta_policy_enabled
+            -   fn_inputs.reaqta_hive
         """
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
 
-        validate_fields(["reaqta_url",
-                        "api_version",
-                        "cafile",
-                        "api_key",
-                        "api_secret"],
-                        self.app_configs)
-
-        validate_fields(["reaqta_policy_title",
+        validate_fields([
+                        "reaqta_policy_title",
                         "reaqta_sha256",
                         "reaqta_policy_enabled",
                         "reaqta_policy_block"
                        ],
                        fn_inputs)
 
-        app_common = AppCommon(self.rc, self.app_configs._asdict())
-        response, err_msg = app_common.create_policy(fn_inputs._asdict())
+        # collect the hives to set this policy
+        inputs_dict = fn_inputs._asdict()
+        if inputs_dict.get("reaqta_hive"):
+            hives = [inputs_dict.get("reaqta_hive")]
+        elif self.options.get("policy_hives"):
+            hives = [hive.strip() for hive in self.options.get("policy_hives").strip(",")]
 
-        result = response.json() if not err_msg else None
+        results = []
+        for hive in hives:
+            hive_settings = get_hive_options(hive, self.opts)
+            if not hive_settings:
+                yield self.status_message("Hive section not found: {}".format(hive))
+            else:
+                app_common = AppCommon(self.rc, hive_settings)
+                response, err_msg = app_common.create_policy(inputs_dict)
 
-        if result:
-            # create the url for the policy created
-            result['policy_url'] = app_common.make_linkback_url(result.get('id'), linkback_url=POLICY_DETAILS)
+                result = response.json() if not err_msg else None
+                if result:
+                    # create the url for the policy created
+                    result['policy_url'] = app_common.make_linkback_url(result.get('id'),
+                                                                        linkback_url=POLICY_DETAILS)
+                    results.append(result)
 
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
 
-        yield FunctionResult(result, success=True if not err_msg else False, reason=err_msg)
+        yield FunctionResult(results, success=True if not err_msg else False, reason=err_msg)

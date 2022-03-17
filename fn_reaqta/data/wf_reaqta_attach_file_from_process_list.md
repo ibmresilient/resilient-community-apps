@@ -21,6 +21,7 @@
 inputs.reaqta_program_path = row['process_path'].replace("\\\\", "\\")
 inputs.reaqta_endpoint_id = incident.properties.reaqta_endpoint_id
 inputs.reaqta_incident_id = incident.id
+inputs.reaqta_hive = incident.properties.reaqta_hive
 ```
 
 ### Post-Processing Script

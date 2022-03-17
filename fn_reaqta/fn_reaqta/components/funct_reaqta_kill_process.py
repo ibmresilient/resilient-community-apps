@@ -4,7 +4,7 @@
 
 """AppFunction implementation"""
 
-from fn_reaqta.lib.app_common import AppCommon, PACKAGE_NAME
+from fn_reaqta.lib.app_common import AppCommon, PACKAGE_NAME, get_hive_options
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import validate_fields
 
@@ -24,28 +24,32 @@ class FunctionComponent(AppFunctionComponent):
         Inputs:
             -   fn_inputs.reaqta_process_pid
             -   fn_inputs.reaqta_endpoint_id
+            -   fn_inputs.reaqta_hive
         """
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
 
-        validate_fields(["reaqta_url",
-                        "api_version",
-                        "cafile",
-                        "api_key",
-                        "api_secret"],
-                        self.app_configs)
+        validate_fields([
+            "reaqta_hive",
+            "reaqta_endpoint_id",
+            "reaqta_process_pid",
+            "reaqta_starttime"
+            ],
+            fn_inputs)
 
-        validate_fields(["reaqta_endpoint_id", "reaqta_process_pid", "reaqta_starttime"], fn_inputs)
-
-        # Example getting access to self.get_fn_msg()
-        # fn_msg = self.get_fn_msg()
-        # self.LOG.info("fn_msg: %s", fn_msg)
-
-        app_common = AppCommon(self.rc, self.app_configs._asdict())
-        results = app_common.kill_process(fn_inputs.reaqta_endpoint_id,
-                                          fn_inputs.reaqta_process_pid,
-                                          fn_inputs.reaqta_starttime)
+        hive_settings = get_hive_options(fn_inputs.reaqta_hive, self.opts)
+        if not hive_settings:
+            results = None
+            err_msg = "Hive section not found: {}".format(fn_inputs.reaqta_hive)
+        else:
+            app_common = AppCommon(self.rc, hive_settings)
+            results = app_common.kill_process(
+                                            fn_inputs.reaqta_hive,
+                                            fn_inputs.reaqta_endpoint_id,
+                                            fn_inputs.reaqta_process_pid,
+                                            fn_inputs.reaqta_starttime)
+            err_msg = None
 
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
 
-        yield FunctionResult(results)
+        yield FunctionResult(results, success=True if not err_msg else False, reason=err_msg)
