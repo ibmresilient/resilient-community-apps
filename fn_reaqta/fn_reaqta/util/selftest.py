@@ -21,7 +21,7 @@ Return examples:
 
 import logging
 from resilient_lib import RequestsCommon
-from fn_reaqta.lib.app_common import AppCommon
+from fn_reaqta.lib.app_common import AppCommon, PACKAGE_NAME, get_hive_options
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
@@ -33,11 +33,20 @@ def selftest_function(opts):
     Suggested return values are be unimplemented, success, or failure.
     """
     try:
-        app_configs = opts.get("fn_reaqta", {})
+        app_configs = opts.get(PACKAGE_NAME, {})
         rc = RequestsCommon(opts, app_configs)
-        app_common = AppCommon(rc, app_configs)
 
-        _token = app_common.authenticate()
+        # test each hive setting
+        for hive in [hive_name.strip() for hive_name in app_configs.get('polling_hives', "").split(",")]:
+            hive_settings = get_hive_options(hive, opts)
+            if hive_settings:
+                app_common = AppCommon(rc, hive_settings)
+                err_msg = app_common.authenticate()
+            else:
+                return {
+                    "state": "failure",
+                    "reason": "Hive setting not found: {}".format(hive)
+                }
 
         return {
             "state": "success",

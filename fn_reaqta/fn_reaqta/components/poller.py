@@ -146,7 +146,7 @@ class PollerComponent(ResilientComponent):
 
         # initialize the hives
         self.hives_list = {}
-        for hive in [hive_name.strip() for hive_name in options.get('polling_hives', []).split(",")]:
+        for hive in [hive_name.strip() for hive_name in options.get('polling_hives', "").split(",")]:
             hive_settings = get_hive_options(hive, opts)
             if hive_settings:
                 self.hives_list[hive] = init_app(self.rc, hive_settings)

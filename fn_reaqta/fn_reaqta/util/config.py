@@ -31,7 +31,7 @@ timeout=60
 api_key=xxx
 api_secret=xxx
 reaqta_url=https://xxx/
-api_version=rqt_api/1/
+api_version=rqt-api/1/
 cafile=/path/to/cafile.crt or false
 #
 # set filters for the poller. Ex: "alertStatus": "malicious", "severity": ["medium", "high"], "tag": ["hive"]

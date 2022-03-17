@@ -47,7 +47,7 @@ class FunctionComponent(AppFunctionComponent):
         if inputs_dict.get("reaqta_hive"):
             hives = [inputs_dict.get("reaqta_hive")]
         elif self.options.get("policy_hives"):
-            hives = [hive.strip() for hive in self.options.get("policy_hives").strip(",")]
+            hives = [hive.strip() for hive in self.options.get("policy_hives", "").split(",")]
 
         results = []
         for hive in hives:

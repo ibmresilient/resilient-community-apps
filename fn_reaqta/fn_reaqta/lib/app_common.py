@@ -43,7 +43,7 @@ class AppCommon():
         self.reaqta_url = options['reaqta_url']
         self.api_version = options['api_version']
         self.rc = rc
-        self.verify = str_to_bool(options.get("cafile", "false"))
+        self.verify = str_to_bool(options.get('cafile', 'false'))
 
         # set any additional filters to include for alert query
         self.filters = eval_mapping(options.get('polling_filters', ''), wrapper='{{ {} }}')
@@ -53,19 +53,28 @@ class AppCommon():
     def get_filters(self):
         return self.filters
 
-    def authenticate(self, refresh=False):
-        if refresh or not self.token:
-            params = {
-                "secret": self.api_secret,
-                "id": self.api_key
-            }
+    def authenticate(self):
+        """authenicate to ReaQta
 
-            response, err_msg = self.api_call("POST", 'authenticate', params)
-            if not err_msg:
-                self.token = response.json()['token']
-                self.header = self._make_header(self.token)
+        Args:
+            api_call (bool, optional): bypass if called from the api_call function. Defaults to False.
 
+        Returns:
+            str: err_msg or None
+        """
+        self.token = "pending" # needed to avoid infinite loop with api_call()
+
+        params = {
+            "secret": self.api_secret,
+            "id": self.api_key
+        }
+
+        response, err_msg = self.api_call("POST", 'authenticate', params)
+        if err_msg:
             return err_msg
+
+        self.token = response.json()['token']
+        self.header = self._make_header(self.token)
 
         return None
 
@@ -274,13 +283,13 @@ class AppCommon():
 
         # collect all the group names and find the groupIds
         if fn_inputs.get('reaqta_policy_included_groups'):
-            group_name_list = [ group.strip() for group in fn_inputs.get('reaqta_policy_included_groups').split(',') ]
+            group_name_list = [ group.strip() for group in fn_inputs.get('reaqta_policy_included_groups', "").split(',') ]
             group_id_list = self.get_group_ids(group_name_list)
             if group_id_list:
                 params['enabledGroups'] = group_id_list
 
         if fn_inputs.get('reaqta_policy_excluded_groups'):
-            group_name_list = [ group.strip() for group in fn_inputs.get('reaqta_policy_excluded_groups').split(',') ]
+            group_name_list = [ group.strip() for group in fn_inputs.get('reaqta_policy_excluded_groups', "").split(',') ]
             group_id_list = self.get_group_ids(group_name_list)
             if group_id_list:
                 params['disabledGroups'] = group_id_list
@@ -344,8 +353,8 @@ class AppCommon():
         return urljoin(self.reaqta_url, linkback_url.format(entity_id))
 
     def api_call(self, method, url, payload, refresh_authentication=False):
-        if refresh_authentication:
-            self.authenticate(refresh=True)
+        if not self.token or refresh_authentication:
+            self.authenticate()
 
         if method in ["PUT", "POST"]:
             return self.rc.execute(method,
