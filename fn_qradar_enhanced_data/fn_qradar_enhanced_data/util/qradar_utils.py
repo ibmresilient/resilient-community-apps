@@ -420,7 +420,7 @@ class QRadarServers():
         """
         Check if the given qradar_label is in the app.config
         :param qradar_label: User selected server
-        :param servers_list: List ofQRadar servers
+        :param servers_list: List of QRadar servers
         :return: Dictionary of options for choosen server
         """
         label = qradar_constants.PACKAGE_NAME+":"+qradar_label
