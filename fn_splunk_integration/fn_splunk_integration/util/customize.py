@@ -29,7 +29,8 @@ def codegen_reload_data():
         "incident_types": [],
         "datatables": [u"splunk_intel_results"],
         "automatic_tasks": [],
-        "scripts": []
+        "scripts": [],
+        "playbooks": []
     }
 
 
@@ -38,7 +39,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 40.0.6554
+    IBM SOAR Platform Version: 42.0.7058
 
     Contents:
     - Message Destinations:
