@@ -81,8 +81,8 @@ if results.get("content", None):
     result_row.intel_key = event.pop("_key")
     result_row.splunk_server = rule.properties.splunk_servers
     result_row.status = "Active"
-    event.pop("item_key") # not presented
-    # what's left is the artifact value
+    event.pop("item_key") # Not presented
+    # What's left is the artifact value
     for k, v in event.items():
       result_row.intel_field = k
       result_row.intel_value = v
@@ -92,7 +92,6 @@ else:
   result_row.intel_value = artifact.value
   result_row.status = "Not Found"
   result_row.splunk_server = rule.properties.splunk_servers
-  
 
 ```
 

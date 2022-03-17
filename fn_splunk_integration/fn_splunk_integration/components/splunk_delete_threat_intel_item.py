@@ -1,24 +1,24 @@
 # -*- coding: utf-8 -*-
 #
-# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 #
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
-import logging
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from logging import getLogger
 from resilient_lib import ResultPayload
-from fn_splunk_integration.util.function_utils import get_servers_list
 from fn_splunk_integration.util.splunk_constants import PACKAGE_NAME
+from fn_splunk_integration.util.function_utils import get_servers_list
 from fn_splunk_integration.util.splunk_utils import SplunkServers, SplunkUtils
+from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 
-log = logging.getLogger(__name__)
+log = getLogger(__name__)
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'splunk_delete_threat_intel_item"""
+    """Component that implements SOAR function 'splunk_delete_threat_intel_item"""
 
     def __init__(self, opts):
-        """constructor provides access to the configuration options"""
+        """Constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         self.servers_list = get_servers_list(opts)
 

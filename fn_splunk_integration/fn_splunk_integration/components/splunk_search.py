@@ -1,24 +1,24 @@
 # -*- coding: utf-8 -*-
 #
-# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 #
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
-import logging
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from logging import getLogger
 from resilient_lib import ResultPayload
-from fn_splunk_integration.util.function_utils import make_query_string, get_servers_list
-from fn_splunk_integration.util.splunk_constants import QUERY_PARAM, PACKAGE_NAME
 from fn_splunk_integration.util.splunk_utils import SplunkServers, SplunkClient
+from fn_splunk_integration.util.splunk_constants import QUERY_PARAM, PACKAGE_NAME
+from fn_splunk_integration.util.function_utils import make_query_string, get_servers_list
+from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 
-log = logging.getLogger(__name__)
+log = getLogger(__name__)
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'splunk_search"""
+    """Component that implements SOAR function 'splunk_search"""
 
     def __init__(self, opts):
-        """constructor provides access to the configuration options"""
+        """Constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         self.servers_list = get_servers_list(opts)
 
@@ -29,27 +29,27 @@ class FunctionComponent(ResilientComponent):
 
     @function("splunk_search")
     def _splunk_search_function(self, event, *args, **kwargs):
-        """Function: """
+        """Function: Search"""
         try:
             splunk_query_param = []
             # Get the function parameters:
             splunk_query = self.get_textarea_param(kwargs.get("splunk_query"))  # textarea
+            splunk_max_return = kwargs.get("splunk_max_return")                 # number
+            splunk_label = kwargs.get("splunk_label")                           # text
             # splunk_query_param1-10
             for i in range(1,11):
                 locals()[f'{QUERY_PARAM}{i}'] = kwargs.get(QUERY_PARAM+str(i))
                 splunk_query_param.append(locals()[f'{QUERY_PARAM}{i}'])
-            splunk_max_return = kwargs.get("splunk_max_return")      # number
-            splunk_label = kwargs.get("splunk_label")                # text
 
             options = SplunkServers.splunk_label_test(splunk_label, self.servers_list)
 
             # Log all the info
             log.info("splunk_query: %s", splunk_query)
+            log.info("splunk_max_return: %d", splunk_max_return)
+            log.info("splunk_label: %s", splunk_label)
             # Log splunk_query_param1-10
             for i in range(1,11):
                 log.info("{}{}: {}".format(QUERY_PARAM, str(i), locals().get(QUERY_PARAM+str(i))))
-            log.info("splunk_max_return: %d", splunk_max_return)
-            log.info("splunk_label: %s", splunk_label)
 
             result_payload = ResultPayload(PACKAGE_NAME, **kwargs)
 

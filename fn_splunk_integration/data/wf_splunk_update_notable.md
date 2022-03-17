@@ -22,10 +22,10 @@ if incident.properties.splunk_notable_event_id:
   inputs.event_id = incident.properties.splunk_notable_event_id
   if incident.plan_status == "C":
       inputs.notable_event_status = 5
-      inputs.comment = "Resilient incident is closed"
+      inputs.comment = "SOAR incident is closed"
   else:
       inputs.notable_event_status = 2
-      inputs.comment = "Resilient incident is active"
+      inputs.comment = "SOAR incident is active"
   inputs.splunk_label = rule.properties.splunk_servers
 else:
   helper.fail("Ensure that the incident custom field is set: splunk_notable_event_id")

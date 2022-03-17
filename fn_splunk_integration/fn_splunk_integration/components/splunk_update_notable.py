@@ -1,24 +1,24 @@
 # -*- coding: utf-8 -*-
 #
-# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 #
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
-import logging
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from logging import getLogger
 from resilient_lib import ResultPayload
-from fn_splunk_integration.util.function_utils import get_servers_list
 from fn_splunk_integration.util.splunk_constants import PACKAGE_NAME
+from fn_splunk_integration.util.function_utils import get_servers_list
 from fn_splunk_integration.util.splunk_utils import SplunkServers, SplunkUtils
+from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 
-log = logging.getLogger(__name__)
+log = getLogger(__name__)
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'splunk_update_notable"""
+    """Component that implements SOAR function 'splunk_update_notable"""
 
     def __init__(self, opts):
-        """constructor provides access to the configuration options"""
+        """Constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         self.servers_list = get_servers_list(opts)
 
@@ -30,7 +30,6 @@ class FunctionComponent(ResilientComponent):
     @function("splunk_update_notable")
     def _splunk_update_notable_function(self, event, *args, **kwargs):
         """Function: Update notable events according to the status of the corresponding incident.
-
         Inputs:
             event_id:   the notable event id in the splunk_notable_event_id field
             comment:    add a note to the notable event
@@ -41,7 +40,7 @@ class FunctionComponent(ResilientComponent):
             event_id = kwargs.get("event_id")                          # text
             comment = kwargs.get("comment")                            # text
             notable_event_status = kwargs.get("notable_event_status")  # number
-            splunk_label = kwargs.get("splunk_label")                        # text
+            splunk_label = kwargs.get("splunk_label")                  # text
 
             options = SplunkServers.splunk_label_test(splunk_label, self.servers_list)
 

@@ -1,25 +1,25 @@
 # -*- coding: utf-8 -*-
 #
-# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 #
 #   Util classes for Splunk
 #
-import splunklib.client as splunk_client
-import splunklib.results as splunk_results
-from time import time, sleep
 import requests
 from json import dumps
-from fn_splunk_integration.util.splunk_constants import PACKAGE_NAME
-from resilient_lib import IntegrationError
+from time import time, sleep
+from logging import getLogger
 import urllib.parse as urlparse
-import logging
+import splunklib.client as splunk_client
+import splunklib.results as splunk_results
+from resilient_lib import IntegrationError
+from fn_splunk_integration.util.splunk_constants import PACKAGE_NAME
 
-LOG = logging.getLogger(__name__)
+LOG = getLogger(__name__)
 
 class SplunkClient(object):
     """ Wrapper of splunklib.client"""
 
-    # member variables
+    # Member variables
     splunk_service = None
     time_out = 600
     polling_interval = 5
@@ -33,12 +33,12 @@ class SplunkClient(object):
     def connect(host, port, username, password, verify):
         """
         Connect to Splunk
-        :param host: hostname for splunk
-        :param port: port for splunk
-        :param username: user name to login
-        :param password: password to login
+        :param host: Hostname for splunk
+        :param port: Port for splunk
+        :param username: Username to login
+        :param password: Password to login
         :param verify: True to validate the SSL cert
-        :return:
+        :return: Connection to splunk
         """
         LOG.info("Splunk SDK verify flag is {}".format(verify))
         return splunk_client.connect(host=host,
@@ -64,7 +64,6 @@ class SplunkClient(object):
         if self.max_return:
             query_args["max_count"] = self.max_return
 
-        job = None
         try:
             job = self.splunk_service.jobs.create(query, **query_args)
             if job_ttl:
@@ -79,10 +78,9 @@ class SplunkClient(object):
     def execute_query(self, query):
         """
         Execute splunk query
-        :param query: query string
-        :return:
+        :param query: Query string
+        :return: Results of the query
         """
-        result = dict()
 
         LOG.debug(u"Query: {}" .format(query))
 
@@ -93,9 +91,7 @@ class SplunkClient(object):
         done = False
 
         while not done:
-            if not splunk_job.is_ready():
-                pass
-            else:
+            if splunk_job.is_ready():
                 splunk_job.refresh()
                 done = splunk_job["dispatchState"] in ("FAILED", "DONE")
 
@@ -112,7 +108,7 @@ class SplunkClient(object):
                 LOG.debug(status)
 
             if not done:
-                if self.time_out!= 0:
+                if self.time_out != 0:
                     if time() - start_time > self.time_out:
                         splunk_job.cancel()
                         raise IntegrationError("Query [{}] timed out. Final Status was [{}]".format(splunk_job.name, splunk_job["dispatchState"]))
@@ -144,14 +140,13 @@ class SplunkUtils(object):
     def get_session_key(self, username, password, verify):
         """
         Get session_key from Splunk server
-        :param username: user name for splunk login
-        :param password: password for splunk login
-        :param verify: verify HTTPS cert or not
-        :return:
+        :param username: Username for splunk login
+        :param password: Password for splunk login
+        :param verify: Verify HTTPS cert or not
+        :return: None
         """
 
-        headers = dict()
-        headers["Accept"] = "application/html"
+        headers = {"Accept": "application/html"}
         url = self.base_url + "/services/auth/login"
         try:
             resp = requests.post(url,
@@ -170,27 +165,22 @@ class SplunkUtils(object):
         except Exception as e:
             raise e
 
-        return
-
     def update_notable(self, event_id, comment, status, cafile):
         """
         Update notable event
         :param event_id: event_id for notable event to be updated
-        :param comment: comment to add to the notable event
-        :param status: status of the notable event to change to
+        :param comment: Comment to add to the notable event
+        :param status: Status of the notable event to change to
         :param cafile: Verify HTTPS cert or not
-        :return:
+        :return: Response in json
         """
 
-        headers = dict()
-        headers["Authorization"] = "Splunk {}".format(self.session_key)
+        headers = {"Authorization": "Splunk {}".format(self.session_key)}
 
-        args = dict()
-        args["comment"] = comment
-        args["status"] = status
-        args["ruleUIDs"] = [event_id]
+        args = {"comment": comment,
+                "status": status,
+                "ruleUIDs": [event_id]}
 
-        ret = None
         url = self.base_url + "/services/notable_update"
 
         try:
@@ -210,6 +200,7 @@ class SplunkUtils(object):
             raise IntegrationError("Request to url [{}] throws exception. Error [Too many redirects]".format(url))
         except requests.RequestException as e:
             raise IntegrationError("Request to url [{}] throws exception. Error [Ambiguous exception when handling request. {}]".format(url, str(e)))
+
         return ret
 
     def delete_threat_intel_item(self, threat_type, item_key, cafile):
@@ -217,19 +208,17 @@ class SplunkUtils(object):
         Delete an item from the threat_intel collections.
         :param threat_type: ip_intel, file_intel, user_intel, http_intel, email_intel, service_intel
                             process_intel, registry_intel, or certificate_intel
-        :param item_key:    the _key for ite to delete
-        :param cafile:      CA cert or False to skip cert verification
-        :return:
+        :param item_key: The _key for ite to delete
+        :param cafile: CA cert or False to skip cert verification
+        :return: Response in json
         """
 
-        headers = dict()
-        headers["Authorization"] = "Splunk {}".format(self.session_key)
+        headers = {"Authorization": "Splunk {}".format(self.session_key)}
         url = "{0}/services/data/threat_intel/item/{1}/{2}".format(self.base_url, threat_type, item_key)
 
         if threat_type not in self.SUPPORTED_THREAT_TYPE:
             raise IntegrationError("Request to url [{}] throws exception. Error [{}]".format(url, "{} is not supported"))
 
-        ret = {}
         try:
             resp = requests.delete(url, headers=headers, verify=cafile)
             # We shall just return the response in json and let the post process
@@ -248,8 +237,8 @@ class SplunkUtils(object):
         :param threat_type: ip_intel, file_intel, user_intel, http_intel, email_intel, service_intel
                          process_intel, registry_intel, or certificate_intel
         :param threat_dict:
-        :param cafile:
-        :return:
+        :param cafile: CA cert or False to skip cert verification
+        :return: Response in json
         """
         headers = {"Authorization": "Splunk {}".format(self.session_key)}
 
@@ -277,6 +266,7 @@ class SplunkUtils(object):
             raise IntegrationError("Request to url [{}] throws exception. Error [Too many redirects]".format(url))
         except requests.RequestException as e:
             raise IntegrationError("Request to url [{}] throws exception. Error [Ambiguous exception when handling request. {}]".format(url, str(e)))
+
         return ret
 
 class SplunkServers():
@@ -291,19 +281,22 @@ class SplunkServers():
             server_data = opts.get(server_name)
             if not server_data:
                 raise KeyError(u"Unable to find Splunk server: {}".format(server_name))
-            
+
             servers[server] = server_data
-        
+
         return servers, server_name_list
 
     def splunk_label_test(splunk_label, servers_list):
         """
         Check if the given splunk_label is in the app.config
+        :param splunk_label: User selected server
+        :param servers_list: List of Splunk servers
+        :return: Dictionary of options for choosen server
         """
         label = PACKAGE_NAME+":"+splunk_label
         if splunk_label and label in servers_list:
             options = servers_list[label]
-        elif (len(servers_list) == 1 and splunk_label == PACKAGE_NAME) or len(servers_list) == 1:
+        elif len(servers_list) == 1:
             options = servers_list[list(servers_list.keys())[0]]
         else:
             raise IntegrationError("{} did not match labels given in the app.config".format(splunk_label))
@@ -312,7 +305,9 @@ class SplunkServers():
 
     def _get_server_name_list(self, opts):
         """
-        Return the list of Splunk server names defined in the app.config in fn_splunk_integration. 
+        Return the list of Splunk server names defined in the app.config in fn_splunk_integration.
+        :param opts: List of options
+        :return: List of servers
         """
         server_list = []
         for key in opts.keys():

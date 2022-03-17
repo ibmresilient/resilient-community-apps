@@ -1,4 +1,4 @@
-# Resilient Function for Splunk integration
+# SOAR Function for Splunk integration
 
 ## Description
 
@@ -10,10 +10,10 @@ This function package provides the following features to be used in a workflow:
 4. Update a Splunk ES notable event
 
 ## System Requirements
-- Resilient Server version 40 or later
+- SOAR Server version 40 or later
 - Splunk version 7.0 or later, or Splunk Cloud
 - Splunk ES 4.7.2 or later, or Splunk ES Cloud
-- Ability to connect to Resilient server with HTTPS on port 443 and 65001
+- Ability to connect to SOAR server with HTTPS on port 443 and 65001
 - Ability to connect to Splunk server with HTTPS on port 8089
 
 ## Package Dependencies
@@ -45,7 +45,7 @@ To install,
 ### Setup
 Create app.config by running `resilient-circuits config -c -l fn-splunk-integration` or `resilient-circuits config -u -l fn-splunk-integration` .
 
-The app.config needs the following configuration values, in addition to the appropriate [resilient] section for connecting to your Resilient platform:  
+The app.config needs the following configuration values, in addition to the appropriate [SOAR] section for connecting to your SOAR platform:  
 
 ```
 [fn_splunk_integration]  
@@ -56,7 +56,7 @@ splunkpassword = splunk-password-keyring-protection-recommended
 verify_cert = [true, false] for verify https certtificate or not
 ```
 ### Customize
-Run with: `resilient-circuits customize -l fn-splunk-integration` to install function definitions and sample workflows to the Resilient server.
+Run with: `resilient-circuits customize -l fn-splunk-integration` to install function definitions and sample workflows to the SOAR server.
 
 ### Start
 Start this function app with: `resilient-circuits run`

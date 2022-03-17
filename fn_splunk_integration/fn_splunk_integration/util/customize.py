@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""Generate the Resilient customizations required for fn_splunk_integration"""
+"""Generate the SOAR customizations required for fn_splunk_integration"""
 
 import base64
 import os
@@ -38,7 +38,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM Resilient Platform Version: 40.0.6554
+    IBM SOAR Platform Version: 40.0.6554
 
     Contents:
     - Message Destinations:

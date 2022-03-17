@@ -1,22 +1,21 @@
 # -*- coding: utf-8 -*-
 #
-# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 #
-import logging
-from fn_splunk_integration.util.splunk_constants import PACKAGE_NAME, GET_FIELD, UPDATE_FIELD
+from logging import getLogger
 from resilient_lib import validate_fields, IntegrationError
 from fn_splunk_integration.util.splunk_utils import SplunkServers
+from fn_splunk_integration.util.splunk_constants import PACKAGE_NAME, GET_FIELD, UPDATE_FIELD
 
-LOG = logging.getLogger(__name__)
+LOG = getLogger(__name__)
 
-def make_query_string(query, params):
+def make_query_string(query_string, params):
     """
     Substitute parameters into the query
-    :param query: input query with params
-    :param params: values used to substitute
-    :return:
+    :param query: Input query with params
+    :param params: Values used to substitute
+    :return: (str) Query with params substitued
     """
-    query_string = query
 
     index = 1
     for param in params:
@@ -29,8 +28,8 @@ def make_query_string(query, params):
 
 def make_item_dict(params):
     """
-    Use the params list to build a dict
-    :param params: parameter list
+    Use the params List to build a dict
+    :param params: Parameter list
     :return: dict
     """
     ret = {}
@@ -55,17 +54,16 @@ def make_item_dict(params):
 def get_servers_list(opts):
     """
     Used for initilizing or reloading the options variable
-    :param opts: list of options
-    :param choose: either init or reload
-    :return: list of splunk servers
+    :param opts: List of options
+    :return: List of splunk servers
     """
     servers_list = {}
 
     options = opts.get(PACKAGE_NAME, {})
 
-    if options: # If no labels given [fn_splunk_integration]
+    if options: # If no label given [fn_splunk_integration]
         server_list = {PACKAGE_NAME}
-    else: # If labels given [fn_splunk_integration:label]
+    else: # If label given [fn_splunk_integration:label]
         servers = SplunkServers(opts, options)
         server_list = servers.get_server_name_list()
 
@@ -80,9 +78,9 @@ def get_servers_list(opts):
 def update_splunk_servers_select_list(servers_list, res_rest_client, field_name):
     """
     Update values in splunk_servers select field
-    :param servers_list: list of splunk servers in app.config
-    :param res_rest_client: resilient rest client connection
-    :param field_name: activity field name
+    :param servers_list: List of splunk servers in app.config
+    :param res_rest_client: SOAR rest client connection
+    :param field_name: Activity field name
     :return: None
     """
 
@@ -100,20 +98,20 @@ def update_splunk_servers_select_list(servers_list, res_rest_client, field_name)
         if type(payload) == list or payload.get("input_type") != "select":
             return None
 
-        # Create list of servers to add to the Splunk Servers select list
-        if payload.get("values"):
-            for each_value in payload.get("values"):
-                if each_value.get("label") in server_name_list:
-                    server_name_list.remove(each_value.get("label"))
-
         # Create payload 
         if server_name_list:
+
+            # Put payload with no values to delete old values
+            del payload["values"]
+            res_rest_client.put(UPDATE_FIELD.format(field_name), payload)
+
+            # Add values to the payload
             payload["values"] = [
                 {"label": str(value), "enabled": True, "hidden": False}
                 for value in server_name_list
             ]
-
-            res_rest_client.put(UPDATE_FIELD.format(field_name), payload, timeout=1000)
+            # Put payload with values to SOAR
+            res_rest_client.put(UPDATE_FIELD.format(field_name), payload)
 
     except Exception as err_msg:
         LOG.warning("Action failed: {} error: {}".format(field_name, err_msg))

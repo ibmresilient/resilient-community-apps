@@ -78,7 +78,7 @@ now = Date().time
 
 result_note = u"""<b>Artifact</b>: {}<br><br>
 <b>Splunk Add Status</b>: {}<br>
-<b>Message</b>: {}""".format(artifact.value, 
+<b>Message</b>: {}""".format(artifact.value,
                              "Successful" if results.get("content", {}).get("status", False) else "Unsuccessful",
                              results.get("content", {}).get("message", "None"))
 

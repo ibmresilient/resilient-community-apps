@@ -1,8 +1,8 @@
-# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation
-   test with: resilient-circuits selftest -l fn_service_now
+   Test with: resilient-circuits selftest -l fn_splunk_integration
 """
 
 import logging
@@ -16,13 +16,13 @@ LOG.addHandler(logging.StreamHandler())
 def selftest_function(opts):
     """
     This test uses configs in the app.config file to call attempt a splunk connect
-    To try and get a status_code=200, else its a failure
+    To try and get a status_code = 200, else its a failure
     """
     options = opts.get(PACKAGE_NAME, {})
 
-    if options: # If no labels given [fn_splunk_integration]
+    if options: # If no label given [fn_splunk_integration]
         server_list = {PACKAGE_NAME}
-    else: # If labels given [fn_splunk_integration:label]
+    else: # If label given [fn_splunk_integration:label]
         servers = SplunkServers(opts, options)
         server_list = servers.get_server_name_list()
 
