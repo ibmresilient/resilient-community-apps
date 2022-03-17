@@ -69,4 +69,5 @@ read_function
 #edit_privacy_data
 #read_stats
 #edit_workflow
-#read_all_action_invocations
+read_all_action_invocations
+edit_data
