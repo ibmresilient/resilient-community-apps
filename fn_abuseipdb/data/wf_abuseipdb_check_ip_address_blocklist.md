@@ -99,7 +99,7 @@ if results.success:
         ]
       artifact.addHit("AbuseIPDB Function hits added", hit)
     else:
-      incident.addNote("No reports or confidence score to return.")
+      incident.addNote("{} has no reports or confidence score to return or is not in AbuseIPDB's database.".format(resp_data["ipAddress"]))
 else:
   incident.addNote("AbuseIPDB Check IP Address Blocklist failed: {}".format(results.reason))
 
