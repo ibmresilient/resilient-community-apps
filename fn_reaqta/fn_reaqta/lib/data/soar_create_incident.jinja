@@ -42,7 +42,7 @@
     {
       "text": {
           "format": "text",
-          "content": "Created by ReaQta:\n{{ notes|replace('"', '\\"') }}"
+          "content": "Created by ReaQta:\n{{ notes|replace("\\", "\\\\") |replace('"', '\\"') }}"
       }
     }
     {% else %}
