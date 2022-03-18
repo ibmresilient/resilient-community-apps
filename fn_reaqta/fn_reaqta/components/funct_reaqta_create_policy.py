@@ -29,7 +29,7 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.reaqta_sha256
             -   fn_inputs.reaqta_policy_description
             -   fn_inputs.reaqta_policy_enabled
-            -   fn_inputs.reaqta_hive
+            -   fn_inputs.reaqta_hives
         """
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
@@ -44,16 +44,21 @@ class FunctionComponent(AppFunctionComponent):
 
         # collect the hives to set this policy
         inputs_dict = fn_inputs._asdict()
-        if inputs_dict.get("reaqta_hive"):
-            hives = [inputs_dict.get("reaqta_hive")]
+        hives = []
+        if inputs_dict.get("reaqta_hives"):
+            hives = [hive.strip() for hive in inputs_dict.get("reaqta_hives", "").split(",")]
         elif self.options.get("policy_hives"):
             hives = [hive.strip() for hive in self.options.get("policy_hives", "").split(",")]
+        else:
+            err_msg = "No hive information specified"
+
 
         results = []
         for hive in hives:
             hive_settings = get_hive_options(hive, self.opts)
             if not hive_settings:
-                yield self.status_message("Hive section not found: {}".format(hive))
+                err_msg = "Hive section not found: {}".format(hive)
+                yield self.status_message(err_msg)
             else:
                 app_common = AppCommon(self.rc, hive_settings)
                 response, err_msg = app_common.create_policy(inputs_dict)

@@ -322,13 +322,16 @@ else:
 ## Function - ReaQta: Create Policy
 Create a policy based on a file hash
 
-Note: An error will occur if a policy with this file has already exists
+Notes:
+* An error will occur if a policy with this file already exists
+* Use `reaqta_hives` to specify the Hive label defined in the app.config file. The default will be the case's `reaqta_hives` custom field and then the `pollicy_hives` app.config setting.
 
 <details><summary>Inputs:</summary>
 <p>
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
+| `reaqta_hives` | `text` | No | `hive_label1,hive_label2` | **Needed for cases which don't originate from ReaQta. Defaults are defined in the reaqta_hive custom incident field and app.config policy_hives setting.**
 | `reaqta_sha256` | `text` | Yes | `cf8c1b234ad4d72d...` | - |
 | `reaqta_policy_title` | `text` | No | `-` | Title for policy |
 | `reaqta_policy_description` | `text` | No | `-` | Policy description |
