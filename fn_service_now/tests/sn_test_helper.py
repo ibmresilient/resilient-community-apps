@@ -118,7 +118,7 @@ class SNResilientMock(BasicResilientMock):
         "sn_records_dt_sn_ref_id": "INC123456",
         "sn_records_dt_res_status": """<div style="color: rgb(0,179,60);">Active</div>""",
         "sn_records_dt_snow_status": """<div style="color: rgb(230,0,0);">Resolved</div>""",
-        "sn_records_dt_links": """<a href="https://0.0.0.0/#incidents/2105?task_id=2251401">RES</a> <a href="https://test.service-now.com/nav_to.do?uri=incident.do?sysparm_query=number=INC0010459">SN</a>"""
+        "sn_records_dt_links": """<a href="https://0.0.0.0/#incidents/2105?task_id=2251401">SOAR</a> &nbsp;&nbsp; <a href="https://test.service-now.com/nav_to.do?uri=incident.do?sysparm_query=number=INC0010459">SN</a>"""
       },
       {
         "sn_records_dt_time": 1543333316605,
@@ -128,7 +128,7 @@ class SNResilientMock(BasicResilientMock):
         "sn_records_dt_sn_ref_id": "INC123457",
         "sn_records_dt_res_status": """<div style="color: rgb(0,179,60);">Active</div>""",
         "sn_records_dt_snow_status": """<div style="color: rgb(230,0,0);">Resolved</div>""",
-        "sn_records_dt_links": """<a href="https://0.0.0.0/#incidents/2105?task_id=2251401">RES</a> <a href="https://test.service-now.com/nav_to.do?uri=incident.do?sysparm_query=number=INC0010459">SN</a>"""
+        "sn_records_dt_links": """<a href="https://0.0.0.0/#incidents/2105?task_id=2251401">SOAR</a> &nbsp;&nbsp; <a href="https://test.service-now.com/nav_to.do?uri=incident.do?sysparm_query=number=INC0010459">SN</a>"""
       }
     ]
 
@@ -141,7 +141,7 @@ class SNResilientMock(BasicResilientMock):
             "sn_records_dt_type": "Task",
             "sn_records_dt_res_status": """<div style="color: rgb(0,179,60);">Active</div>""",
             "sn_records_dt_snow_status": """<div style="color: rgb(230,0,0);">Resolved</div>""",
-            "sn_records_dt_links": """<a href="https://0.0.0.0/#incidents/2105?task_id=2251401">RES</a> <a href="https://test.service-now.com/nav_to.do?uri=incident.do?sysparm_query=number=INC0010459">SN</a>"""
+            "sn_records_dt_links": """<a href="https://0.0.0.0/#incidents/2105?task_id=2251401">SOAR</a> &nbsp;&nbsp; <a href="https://test.service-now.com/nav_to.do?uri=incident.do?sysparm_query=number=INC0010459">SN</a>"""
         },
         {
             "sn_records_dt_time": 1543333316605,
@@ -151,7 +151,7 @@ class SNResilientMock(BasicResilientMock):
             "sn_records_dt_sn_ref_id": "INC123457",
             "sn_records_dt_res_status": """<div style="color: rgb(0,179,60);">Closed</div>""",
             "sn_records_dt_snow_status": """<div style="color: rgb(230,0,0);">Resolved</div>""",
-            "sn_records_dt_links": """<a href="https://0.0.0.0/#incidents/2105?task_id=2251401">RES</a> <a href="https://test.service-now.com/nav_to.do?uri=incident.do?sysparm_query=number=INC0010459">SN</a>"""
+            "sn_records_dt_links": """<a href="https://0.0.0.0/#incidents/2105?task_id=2251401">SOAR</a> &nbsp;&nbsp; <a href="https://test.service-now.com/nav_to.do?uri=incident.do?sysparm_query=number=INC0010459">SN</a>"""
       }
     ]
 

@@ -1,6 +1,7 @@
 #ALPHABETICAL-List-of-allowed-image-names
 
 #IBM_SOAR_Apps
+fn_abuseipdb
 fn_alienvault_otx
 fn_anomali_staxx
 fn_ansible
@@ -28,6 +29,7 @@ fn_exchange
 fn_exchange_online
 fn_geocoding
 fn_google_cloud_dlp
+fn_googlesafebrowsing
 fn_greynoise
 fn_grpc_interface
 fn_hibp
@@ -104,7 +106,7 @@ fn_zia
 rc_data_feed
 #rc-data-feed-plugin-elasticfeed
 #rc-data-feed-plugin-kafkafeed
-#rc-data-feed-plugin-odbcfeed
+rc_data_feed_plugin_odbcfeed
 #rc-data-feed-plugin-resilientfeed
 #rc-data-feed-plugin-splunkfeed
 rc-cts-abuseipdb

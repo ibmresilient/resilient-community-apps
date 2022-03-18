@@ -14,7 +14,7 @@
 		
 		//Initialize options
 		options = {
-			initSnNote: "Task created in IBM Resilient",
+			initSnNote: "Task created in IBM SOAR",
 			incidentId: incidentId,
 			optionalFields: {
 				"instr_text": record.getValue("description")
@@ -47,7 +47,7 @@
 		}
 	}
 	catch (errMsg){
-		current.work_notes = "Failed to create a Task in IBM Resilient for Incident "+incidentId+".\nReason: " + errMsg;
+		current.work_notes = "Failed to create a Task in IBM SOAR for Incident "+incidentId+".\nReason: " + errMsg;
 		gs.error(errMsg);
 	}
 })();
