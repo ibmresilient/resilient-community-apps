@@ -163,8 +163,8 @@ class PollerComponent(ResilientComponent):
             last_poller_time ([int]): [time in milliseconds when the last poller ran]
         """
 
-        refresh_authentication = True # first time reauthenicate
         for hive_label, app_common in self.hives_list.items():
+            refresh_authentication = True # first time reauthenicate
             try:
                 LOG.info("%s Polling hive: %s", PACKAGE_NAME, hive_label)
                 # query for both new and closed alerts
