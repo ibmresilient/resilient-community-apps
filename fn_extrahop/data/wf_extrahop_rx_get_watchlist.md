@@ -31,6 +31,7 @@ CONTENT = results.content
 INPUTS = results.inputs
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
 # Display subset of fields
+DATA_TABLE = "extrahop_watchlist"
 DATA_TBL_FIELDS = ["display_name", "ipaddr4", "ipaddr6", "macaddr", "extrahop_id"]
 
 # Processing
@@ -42,7 +43,7 @@ def main():
                     u" for SOAR function <b>{2}</b>.".format(WF_NAME, len(devs), FN_NAME)
         if devs:
             for dev in devs:
-                newrow = incident.addRow("extrahops_watchlist")
+                newrow = incident.addRow("extrahop_watchlist")
                 newrow.query_execution_date = QUERY_EXECUTION_DATE
                 for f1 in DATA_TBL_FIELDS:
                   f2 = f1

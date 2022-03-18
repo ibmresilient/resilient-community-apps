@@ -24,10 +24,10 @@ inputs.extrahop_limit = rule.properties.extrahop_limit
 
 ### Post-Processing Script
 ```python
-##  ExtraHop - wf_extrahop_rx_search_detections post processing script ##
+##  ExtraHop - wf_extrahop_rx_get_detections post processing script ##
 #  Globals
-FN_NAME = "funct_extrahop_rx_search_detections"
-WF_NAME = "Example: Extrahop revealx search detections"
+FN_NAME = "funct_extrahop_rx_get_detections"
+WF_NAME = "Example: Extrahop revealx get detections"
 CONTENT = results.content
 INPUTS = results.inputs
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
