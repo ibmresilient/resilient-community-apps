@@ -38,7 +38,7 @@ class FunctionComponent(AppFunctionComponent):
 
         hive_settings = get_hive_options(fn_inputs.reaqta_hive, self.opts)
         if not hive_settings:
-            results = None
+            results = {}
             err_msg = "Hive section not found: {}".format(fn_inputs.reaqta_hive)
         else:
             app_common = AppCommon(self.rc, hive_settings)
@@ -54,7 +54,7 @@ class FunctionComponent(AppFunctionComponent):
                                                 fn_inputs.reaqta_incident_id)
                 err_msg = None  # write_file_attachment will raise an exception if an error occurs
             else:
-                results = None
+                results = {}
                 err_msg = "Unable to get contents of file attachment from SOAR"
 
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))

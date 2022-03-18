@@ -31,6 +31,8 @@ if results.success:
   # Get the current time
   dt_now = Date()
   note.text = u"<b>Sent to ReaQta at {0}</b><br>{1}".format(dt_now, unicode(note.text.content))
+else:
+  incident.addNote("Sent Note to ReaQta failed: {}".format(results.reason))
 ```
 
 ---

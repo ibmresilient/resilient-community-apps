@@ -40,14 +40,14 @@ class FunctionComponent(AppFunctionComponent):
 
         hive_settings = get_hive_options(fn_inputs.reaqta_hive, self.opts)
         if not hive_settings:
-            results = None
+            results = {}
             err_msg = "Hive section not found: {}".format(fn_inputs.reaqta_hive)
         else:
             app_common = AppCommon(self.rc, hive_settings)
             file_contents, err_msg = app_common.get_program_file(fn_inputs.reaqta_endpoint_id,
                                                             fn_inputs.reaqta_program_path)
 
-            results = None
+            results = {}
             if not err_msg:
                 # collect the file name
                 file_name = ntpath.basename(fn_inputs.reaqta_program_path)

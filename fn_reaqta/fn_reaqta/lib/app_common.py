@@ -73,9 +73,13 @@ class AppCommon():
         if err_msg:
             return err_msg
 
-        self.token = response.json()['token']
-        self.header = self._make_header(self.token)
+        # determine if response is successful
+        result = response.json()
+        if not result.get('token'):
+            return result.get('message') if result.get('message') else result
 
+        self.token = result.get('token')
+        self.header = self._make_header(self.token)
         return None
 
     def get_entities_since_ts(self, query_field_name, timestamp, optional_filters, refresh_authentication=False):
@@ -110,9 +114,9 @@ class AppCommon():
         LOG.debug(query)
         response, err_msg = self.api_call("GET", 'alerts', query, refresh_authentication=refresh_authentication)
 
-        # trim results by optional filters
-        results = response.json()
+        results = response if isinstance(response, dict) else response.json()
 
+        # trim results by optional filters
         if not err_msg and (groups_filter or impact_filter):
             filtered_results = []
             for alert in results['result']:
@@ -133,7 +137,7 @@ class AppCommon():
             LOG.info("Original List: %s. Filtered List: %s", len(results), len(filtered_results))
             results = { "result": filtered_results }
 
-        return results
+        return results, err_msg
 
     def get_next_page(self, next_url):
         """This endpoint pages result size. This method is used for subsequent calls
@@ -207,7 +211,7 @@ class AppCommon():
 
                 return BytesIO(s_to_b(response.text)), None
 
-        return None, err_msg
+        return {}, err_msg
 
     def close_alert(self, alert_id, is_malicious):
         params = {
@@ -219,14 +223,14 @@ class AppCommon():
         url = urljoin(ALERT_URI.format(alert_id), "close")
         response, err_msg = self.api_call("POST", url, params)
 
-        return (response.json(), err_msg) if not err_msg else (None, err_msg)
+        return (response.json(), err_msg) if not err_msg else ({}, err_msg)
 
     def get_alert(self, alert_id):
         url = ALERT_URI.format(alert_id)
         url = url[:-1] if url[-1] == '/' else url
         response, err_msg = self.api_call("GET", url, None)
 
-        return (response.json(), err_msg) if not err_msg else (None, err_msg)
+        return (response.json(), err_msg) if not err_msg else ({}, err_msg)
 
     def create_note(self, alert_id, note, header=IBM_SOAR):
         # get the existing note so we can append the new content
@@ -241,7 +245,7 @@ class AppCommon():
             url = urljoin(ALERT_URI.format(alert_id), "notes")
             response, err_msg = self.api_call("PUT", url, params)
 
-        return (response.text, err_msg) if not err_msg else (None, err_msg)
+        return (response.text, err_msg) if not err_msg else ({}, err_msg)
 
     def create_policy(self, fn_inputs):
         """create a policy based on a file hash
@@ -263,11 +267,11 @@ class AppCommon():
         # determine if the policy is already in place
         response, err_msg = self._get_policy_by_sha256(fn_inputs.get('reaqta_sha256'))
         if err_msg:
-            return None, err_msg
+            return {}, err_msg
 
         policy_info = response.json()
         if policy_info.get('result'):
-            return None, 'A policy already exists for this file hash: {0}. <a href="{1}" target="blank">{1}</a>'.format(
+            return {}, 'A policy already exists for this file hash: {0}. <a href="{1}" target="blank">{1}</a>'.format(
                 fn_inputs.get('reaqta_sha256'),
                 self.make_linkback_url(policy_info['result'][0]['id'], POLICY_DETAILS))
 
@@ -354,7 +358,9 @@ class AppCommon():
 
     def api_call(self, method, url, payload, refresh_authentication=False):
         if not self.token or refresh_authentication:
-            self.authenticate()
+            err_msg = self.authenticate()
+            if err_msg:
+                return {}, err_msg
 
         if method in ["PUT", "POST"]:
             return self.rc.execute(method,

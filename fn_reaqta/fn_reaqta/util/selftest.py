@@ -42,6 +42,11 @@ def selftest_function(opts):
             if hive_settings:
                 app_common = AppCommon(rc, hive_settings)
                 err_msg = app_common.authenticate()
+                if err_msg:
+                    return {
+                        "state": "failure",
+                        "reason": "Authentication error for hive: {}. {}".format(hive, err_msg)
+                    }
             else:
                 return {
                     "state": "failure",

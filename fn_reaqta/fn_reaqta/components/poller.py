@@ -54,19 +54,17 @@ def get_entities(app_common, query_field_name, last_poller_time, refresh_authent
         refresh_authentication (bool): True if need to reauthenticate
     Returns:
         [list]: [list of entities to synchronize with SOAR]
+        [str]: [error message or None]
     """
-    entity_list = []
 
     # enter the code needed to perform a query to the endpoint platform, using the last_poller_time to
     # identify entities changed since that timestamp.
     # use options to collect urls, api_keys, etc. needed for the API call.
     # use rc.execute() to call your endpoint with your query to return entities changes since the last_poller_time
-    entity_list = app_common.get_entities_since_ts(query_field_name,
-                                                   last_poller_time,
-                                                   app_common.get_filters(),
-                                                   refresh_authentication=refresh_authentication)
-
-    return entity_list
+    return app_common.get_entities_since_ts(query_field_name,
+                                            last_poller_time,
+                                            app_common.get_filters(),
+                                            refresh_authentication=refresh_authentication)
 
 
 def get_entity_id(entity):
@@ -165,18 +163,23 @@ class PollerComponent(ResilientComponent):
             last_poller_time ([int]): [time in milliseconds when the last poller ran]
         """
 
-        try:
-            refresh_authentication = True # first time reauthenicate
-            for hive_label, app_common in self.hives_list.items():
+        refresh_authentication = True # first time reauthenicate
+        for hive_label, app_common in self.hives_list.items():
+            try:
                 LOG.info("%s Polling hive: %s", PACKAGE_NAME, hive_label)
                 # query for both new and closed alerts
                 for query_field_name in ["receivedAfter", "closedAfter"]:
                     # get the list of entities (alerts, cases, etc.) to insert, update or close as cases in IBM SOAR
-                    entity_list = get_entities(app_common,
-                                               query_field_name,
-                                               kwargs['last_poller_time'],
-                                               refresh_authentication=refresh_authentication)
-                    refresh_authentication = False # multiple times times through don't need to reauthenticate
+                    entity_list, err_msg = get_entities(app_common,
+                                                        query_field_name,
+                                                        kwargs['last_poller_time'],
+                                                        refresh_authentication=refresh_authentication)
+
+                    if err_msg:
+                        LOG.error("Failure in get_entities for hive: %s. %s", hive_label, err_msg)
+                        break
+
+                    refresh_authentication = False # multiple times through don't need to reauthenticate
 
                     # iterate over all the entities. Some apps have paged results
                     while True:
@@ -185,8 +188,8 @@ class PollerComponent(ResilientComponent):
                             break
 
                         entity_list = app_common.get_next_page(entity_list['nextPage'])
-        except Exception as err:
-            LOG.error("Failure in poller for hive: %s. %s", hive_label, str(err))
+            except Exception as err:
+                LOG.error("Failure in poller for hive: %s. %s", hive_label, str(err))
 
     def process_entity_list(self, entity_list, hive_label, app_common):
         """Perform all the processing on the entity list, creating, updating and closing SOAR
