@@ -42,7 +42,7 @@ def poller(named_poller_interval, named_last_poller_time, package_name):
                     last_poller_time = poller_start
 
                     # Sleep before the next poller execution
-                    exit_event.wait(getattr(self, named_poller_interval)*60)
+                    exit_event.wait(getattr(self, named_poller_interval))
             exit_event.set() # Loop complete
 
         return wrapped

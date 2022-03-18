@@ -12,9 +12,9 @@ def config_section_data():
 #Settings that apply to all QRadar servers
 [fn_qradar_integration:edm_global_settings]
 #search_timeout=
-# Interval to poll QRadar for changes (in minutes)
-# To turn the poller off user value 0
-polling_interval=120
+# Interval to poll QRadar for changes (in seconds)
+# When polling_interval equals 0 the poller is off
+polling_interval=0
 polling_lookback=60
 # If true then data tables given in the workflows will be cleared when incident is updated by poller
 clear_datatables=True

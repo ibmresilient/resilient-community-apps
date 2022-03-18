@@ -817,6 +817,11 @@ The rule, QRadar Enhanced Data, is an automatic rule that triggers when a new in
 
 ---
 
+## Configuring Real time update to Offenses
+Real time updates to offenses is disabled by default.
+To enable this feature edit the polling_interval setting under [fn_qradar_integration:edm_global_settings] in the app.config for this package.
+The value of the polling_interval setting should be an integer of the amount of time in seconds to wait between checking for updates to offenses.
+
 ## For Customers who do not use the QRadar-Plugin
 Make sure at the time of escalation the field qradar_destination is mapped to have the appropriate value ( same as label in app.config).
 If value not present at the time of case creation - have a rule on Incident creation that runs a script to populate the qradar_destination value.
