@@ -22,9 +22,9 @@ def codegen_reload_data():
         "package": u"fn_extrahop",
         "message_destinations": [u"extrahop"],
         "functions": [u"funct_extrahop_rx_assign_tag", u"funct_extrahop_rx_create_tag", u"funct_extrahop_rx_get_activitymaps", u"funct_extrahop_rx_get_detections", u"funct_extrahop_rx_get_devices", u"funct_extrahop_rx_get_tags", u"funct_extrahop_rx_get_watchlist", u"funct_extrahop_rx_search_detections", u"funct_extrahop_rx_search_devices", u"funct_extrahop_rx_search_packets", u"funct_extrahop_rx_update_detection", u"funct_extrahop_rx_update_watchlist"],
-        "workflows": [u"wf_extrahop_rx_assign_tag", u"wf_extrahop_rx_create_tag", u"wf_extrahop_rx_get_activitymaps", u"wf_extrahop_rx_get_detections", u"wf_extrahop_rx_get_devices", u"wf_extrahop_rx_get_tags", u"wf_extrahop_rx_get_watchlist", u"wf_extrahop_rx_search_detections", u"wf_extrahop_rx_search_devices", u"wf_extrahop_rx_search_packets", u"wf_extrahop_rx_update_detection", u"wf_extrahop_rx_update_watchlist"],
-        "actions": [u"Example: Extrahop revealx assign tag", u"Example: Extrahop revealx create tag", u"Example: Extrahop revealx get activitymaps", u"Example: Extrahop revealx get detections", u"Example: Extrahop revealx get devices", u"Example: Extrahop revealx get tags", u"Example: Extrahop revealx get watchlist", u"Example: Extrahop revealx search detections", u"Example: Extrahop revealx search devices", u"Example: Extrahop revealx search packets", u"Example: Extrahop revealx update detection", u"Example: Extrahop revealx update watchlist"],
-        "incident_fields": [u"extrahop_detection_id"],
+        "workflows": [u"wf_extrahop_rx_assign_tag", u"wf_extrahop_rx_create_tag", u"wf_extrahop_rx_get_activitymaps", u"wf_extrahop_rx_get_detections", u"wf_extrahop_rx_get_devices", u"wf_extrahop_rx_get_tags", u"wf_extrahop_rx_get_watchlist", u"wf_extrahop_rx_search_detections", u"wf_extrahop_rx_search_devices", u"wf_extrahop_rx_update_watchlist"],
+        "actions": [u"Example: Extrahop revealx assign tag", u"Example: Extrahop revealx create tag", u"Example: Extrahop revealx get activitymaps", u"Example: Extrahop revealx get detections", u"Example: Extrahop revealx get devices", u"Example: Extrahop revealx get tags", u"Example: Extrahop revealx get watchlist", u"Example: Extrahop revealx search detections", u"Example: Extrahop revealx search devices", u"Example: Extrahop revealx update watchlist"],
+        "incident_fields": [u"extrahop_detection_id", u"extrahop_detection_link"],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [u"extrahop_activitymaps", u"extrahop_detections", u"extrahop_devices", u"extrahop_tags", u"extrahop_watchlist"],
@@ -66,8 +66,6 @@ def customization_data(client=None):
         - wf_extrahop_rx_get_watchlist
         - wf_extrahop_rx_search_detections
         - wf_extrahop_rx_search_devices
-        - wf_extrahop_rx_search_packets
-        - wf_extrahop_rx_update_detection
         - wf_extrahop_rx_update_watchlist
     - Rules:
         - Example: Extrahop revealx assign tag
@@ -79,11 +77,10 @@ def customization_data(client=None):
         - Example: Extrahop revealx get watchlist
         - Example: Extrahop revealx search detections
         - Example: Extrahop revealx search devices
-        - Example: Extrahop revealx search packets
-        - Example: Extrahop revealx update detection
         - Example: Extrahop revealx update watchlist
     - Incident Fields:
         - extrahop_detection_id
+        - extrahop_detection_link
     - Data Tables:
         - extrahop_activitymaps
         - extrahop_detections
