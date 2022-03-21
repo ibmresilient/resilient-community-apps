@@ -46,7 +46,7 @@
 
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 2.1.0 | 3/2022 | Support for PATCH method |
+| 2.1.0 | 3/2022 | Multi updates: Support for PATCH method, Add rule to get owner contact info for Tasks, Bug fix for utilities_pdfid |
 | 2.0.6 | 7/2021 | pin dependency 'chardet' at v4.0.0 |
 | 2.0.3 | 2/2021 | bug fix for email parser |
 | 2.0.2 | 2/2021 | bug fixes for Shell Command |
