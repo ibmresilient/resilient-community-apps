@@ -56,7 +56,7 @@
 
  ![screenshot: main](./doc/screenshots/main.png)
 
-This app uses [RiskIQ PassiveTotal](https://community.riskiq.com/home) to check artifacts with the type DNS Name, URL, or IP address and adds a hit if the site is deemed compromised by your predefined definition.
+This app uses [RiskIQ PassiveTotal](https://community.riskiq.com/home) to check artifacts with the type DNS Name or IP address and adds a hit if the site is deemed compromised by your predefined definition.
 
 ### Key Features
 <!--

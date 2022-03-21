@@ -23,7 +23,7 @@ class FunctionComponent(AppFunctionComponent):
     def _lookup(self, fn_inputs):
         """
         Validate user account if API call quota has exceeded, verify if tags are match, and query RiskIQ PassiveTotal API
-         for the given domain name artifact, URL or IP address.
+         for the given domain name artifact or IP address.
         """
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
@@ -31,7 +31,7 @@ class FunctionComponent(AppFunctionComponent):
         artifact_type = fn_inputs.passivetotal_artifact_type
         artifact_value = fn_inputs.passivetotal_artifact_value
 
-        accepted_types = ["IP Address", "DNS Name", "URL"]
+        accepted_types = ["IP Address", "DNS Name"]
 
         if artifact_type not in accepted_types:
             yield self.status_message("Artifact type not one of the expected values")
@@ -62,7 +62,7 @@ class FunctionComponent(AppFunctionComponent):
     def _query_passivetotal_api(self, artifact_value):
         """
         Validate user account if API call quota has exceeded, verify if tags are match, query RiskIQ PassiveTotal API
-         for the given 'net.name' (domain name artifact), 'net.uri' (URL) or 'net.ip' (IP address) and generate Hits.
+         for the given domain name artifact, or IP address and generate Hits.
         :param artifact_value
         """
         hits = []
