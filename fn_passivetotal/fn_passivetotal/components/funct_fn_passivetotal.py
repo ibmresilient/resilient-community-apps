@@ -62,19 +62,20 @@ class FunctionComponent(AppFunctionComponent):
     def _query_passivetotal_api(self, artifact_value):
         """
         Validate user account if API call quota has exceeded, verify if tags are match, query RiskIQ PassiveTotal API
-         for the given domain name artifact, or IP address and generate Hits.
+         for the given domain name artifact, or IP address and gather info needed to create hits.
         :param artifact_value
         """
-        hits = []
+        results = []
 
+        # If the api quota has been exceeded or there is no account found, return empty list and log a warning
         if self._validate_user_account_exceeded():
-            return hits
+            return results
 
         validate_tags_match, tags_hits = self._validate_tag_match(artifact_value)
         if not validate_tags_match:
             # failure condition if the site doesn't match your definition
             LOG.info("The site isn't currently listed as compromised according to your definition.")
-            return hits
+            return results
 
         LOG.info("Positive Threat Intel for %s", artifact_value)
 
@@ -120,6 +121,8 @@ class FunctionComponent(AppFunctionComponent):
 
         results_dict = {}
 
+        # Change results from a list of dicitonaries into results_dict which is a dictionary of dictionaries 
+        # to be easily handled by the workflow post-processing script
         for dicitonary in results:
             results_dict.update(dicitonary)
 
@@ -135,13 +138,13 @@ class FunctionComponent(AppFunctionComponent):
         if account_metadata_response.status_code == 200:
             account = account_metadata_response.json()
         else:
-            LOG.info("No Account information found for username: {0}".format(self.app_configs.passivetotal_username))
+            LOG.warning("No Account information found for username: {0}".format(self.app_configs.passivetotal_username))
             LOG.debug(account_metadata_response.text)
             return True
 
         account_quota_exceeded = account.get("searchApiQuotaExceeded", None)
         if account_quota_exceeded:
-            LOG.info("Your PassiveTotal Account has no API queries left.")
+            LOG.warning("Your PassiveTotal Account has no API queries left.")
             LOG.debug(account_metadata_response)
             return True
 
