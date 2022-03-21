@@ -33,6 +33,7 @@
 
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 2.2.1 | 3/2022 | Bug fix for utilities_pdfid |
 | 2.2.0 | 3/2022 | Add rule to get owner contact info for Tasks |
 | 2.1.0 | 3/2022 | Support for PATCH method |
 | 2.0.6 | 7/2021 | pin dependency 'chardet' at v4.0.0 |
