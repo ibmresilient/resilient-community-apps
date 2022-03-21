@@ -12,7 +12,7 @@
   ![screenshot: screenshot_1](./screenshots/screenshot_1.png)
 -->
 
-# **User Guide:** fn_utilities_v2.2.0
+# **User Guide:** fn_utilities_v2.1.0
 
 ## Table of Contents
 - [App Host Setup](#app-host-setup)
@@ -46,8 +46,7 @@
 
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 2.2.0 | 3/2022 | Add rule to get owner contact info for Tasks |
-| 2.1.0 | 3/2022 | Support for PATCH method |
+| 2.1.0 | 3/2022 | Multi updates: Support for PATCH method, Add rule to get owner contact info for Tasks, Bug fix for utilities_pdfid |
 | 2.0.6 | 7/2021 | pin dependency 'chardet' at v4.0.0 |
 | 2.0.3 | 2/2021 | bug fix for email parser |
 | 2.0.2 | 2/2021 | bug fixes for Shell Command |
