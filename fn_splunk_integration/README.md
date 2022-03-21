@@ -73,7 +73,7 @@ Several functions to operate with Splunk ES intel collections, including updates
 ---
 
 ## Requirements
-- SOAR Server version 40 or later
+- SOAR Server version 42 or later
 - Splunk version 7.0 or later, or Splunk Cloud
 - Splunk ES 4.7.2 or later, or Splunk ES Cloud
 - Ability to connect to SOAR server with HTTPS on port 443 and 65001
