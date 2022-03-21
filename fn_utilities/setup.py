@@ -26,6 +26,7 @@ setup(
     version='2.1.0',
     license='MIT',
     author='IBM SOAR',
+    author_email='support@resilientsystems.com',
     url="http://ibm.biz/soarcommunity",
     description="Useful workflow functions for common automation and integration activities in the SOAR platform.",
     long_description="""SOAR functions simplify development of integrations by wrapping each external activity
