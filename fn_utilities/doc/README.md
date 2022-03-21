@@ -2188,6 +2188,7 @@ incident.addNote(content)
 | Example: Expand URL | artifact | `utilities_expand_url` |
 | Example: Extract SSL Certificate | artifact | `example_extract_ssl_cert_from_url` |
 | Example: Get Incident Contact Info | incident | `example_get_incident_contact_info` |
+| Example: Get Task Contact Info | task | `example_get_task_contact_info` |
 | Example: JSON2HTML | artifact | `example_json2html` |
 | Example: Parse SSL Certificate | artifact | `example_parse_ssl_certificate` |
 | Example: PDFiD | attachment | `example_pdfid` |
