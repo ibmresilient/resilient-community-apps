@@ -12,7 +12,7 @@
   ![screenshot: screenshot_1](./screenshots/screenshot_1.png)
 -->
 
-# **User Guide:** fn_utilities_v2.0.6
+# **User Guide:** fn_utilities_v2.1.0
 
 ## Table of Contents
 - [App Host Setup](#app-host-setup)
@@ -649,13 +649,13 @@ results = {
 <p>
 
 ```python
-inputs.rest_method = "POST"
+inputs.rest_method = "PATCH"
 
-# Let's post a URL that includes the artifact value
-inputs.rest_url = u"http://httpbin.org/post?value={}".format(artifact.value)
+# Let's patch a URL that includes the artifact value
+inputs.rest_url = u"http://httpbin.org/patch"
 
-# For POST requests, the body is text
-inputs.rest_body = '{"and": "json can be written as a string"}'
+# For PATCH requests, the body is text
+inputs.rest_body = '{"key": "'+artifact.value+'"}'
 
 # HTTP headers can be specified as a multi-line string
 inputs.rest_headers = """
@@ -666,7 +666,6 @@ X-Frooble: Baz
 # The 'rest_verify' parameter (Boolean) indicates whether to verify SSL certificates.
 # This should be True unless you need to connect to a self-signed or other invalid cert.
 inputs.rest_verify = True
-
 ```
 
 </p>
