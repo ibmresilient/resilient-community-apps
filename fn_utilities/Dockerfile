@@ -28,8 +28,8 @@ RUN pip install --upgrade cryptography
 ## ---- section for changes ----
 # uncomment and replicate if additional os libraries are needed
 RUN yum -y update && yum clean all
-# whois, traceroute, dig and nsloookup
-RUN yum install -y bind-utils net-tools whois traceroute
+# dig and nsloookup
+RUN yum install -y bind-utils net-tools
 # changes for mail parsing of Outlook emails
 RUN yum install -y perl cpan
 RUN cpan -fTi Email::Outlook::Message
