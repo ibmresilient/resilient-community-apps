@@ -1,80 +1,81 @@
 # -*- coding: utf-8 -*-
 #
-# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 #
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
-import logging
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from logging import getLogger
 from resilient_lib import ResultPayload
-from fn_splunk_integration.util.function_utils import make_query_string as make_query_string
-from fn_splunk_integration.util import splunk_utils
+from fn_splunk_integration.util.splunk_utils import SplunkServers, SplunkClient
+from fn_splunk_integration.util.splunk_constants import QUERY_PARAM, PACKAGE_NAME
+from fn_splunk_integration.util.function_utils import make_query_string, get_servers_list
+from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 
-SECTION_HDR = "fn_splunk_integration"
+log = getLogger(__name__)
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'splunk_search"""
+    """Component that implements SOAR function 'splunk_search"""
 
     def __init__(self, opts):
-        """constructor provides access to the configuration options"""
+        """Constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get(SECTION_HDR, {})
+        self.servers_list = get_servers_list(opts)
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
-        self.options = opts.get(SECTION_HDR, {})
+        self.servers_list = get_servers_list(opts)
 
     @function("splunk_search")
     def _splunk_search_function(self, event, *args, **kwargs):
-        """Function: """
+        """Function: Search"""
         try:
+            splunk_query_param = []
             # Get the function parameters:
             splunk_query = self.get_textarea_param(kwargs.get("splunk_query"))  # textarea
-            splunk_query_param1 = kwargs.get("splunk_query_param1")  # text
-            splunk_query_param2 = kwargs.get("splunk_query_param2")  # text
-            splunk_query_param3 = kwargs.get("splunk_query_param3")  # text
-            splunk_query_param4 = kwargs.get("splunk_query_param4")  # text
-            splunk_query_param5 = kwargs.get("splunk_query_param5")  # text
-            splunk_max_return = kwargs.get("splunk_max_return")      # number
+            splunk_max_return = kwargs.get("splunk_max_return")                 # number
+            splunk_label = kwargs.get("splunk_label")                           # text
+            # splunk_query_param1-10
+            for i in range(1,11):
+                locals()[f'{QUERY_PARAM}{i}'] = kwargs.get(QUERY_PARAM+str(i))
+                splunk_query_param.append(locals()[f'{QUERY_PARAM}{i}'])
 
-            log = logging.getLogger(__name__)
+            options = SplunkServers.splunk_label_test(splunk_label, self.servers_list)
+
+            # Log all the info
             log.info("splunk_query: %s", splunk_query)
-            log.info("splunk_query_param1: %s", splunk_query_param1)
-            log.info("splunk_query_param2: %s", splunk_query_param2)
-            log.info("splunk_query_param3: %s", splunk_query_param3)
-            log.info("splunk_query_param4: %s", splunk_query_param4)
-            log.info("splunk_query_param5: %s", splunk_query_param5)
             log.info("splunk_max_return: %d", splunk_max_return)
+            log.info("splunk_label: %s", splunk_label)
+            # Log splunk_query_param1-10
+            for i in range(1,11):
+                log.info("{}{}: {}".format(QUERY_PARAM, str(i), locals().get(QUERY_PARAM+str(i))))
 
-            result_payload = ResultPayload(SECTION_HDR, **kwargs)
+            result_payload = ResultPayload(PACKAGE_NAME, **kwargs)
 
-            splunk_verify_cert = True
-            if "verify_cert" in self.options and self.options["verify_cert"] == "false":
-                splunk_verify_cert = False
+            splunk_verify_cert = False if options.get("verify_cert", "").lower() != "true" else True
 
-            splunk_query_param = [splunk_query_param1, splunk_query_param2, splunk_query_param3,
-                                  splunk_query_param4, splunk_query_param5]
             query_string = make_query_string(splunk_query, splunk_query_param)
 
             log.info("Splunk query to be executed: %s" % query_string)
             log.info("Splunk host: %s, port: %s, username: %s",
-                     self.options["host"], self.options["port"], self.options["username"])
+                     options.get("host"), options.get("port"), options.get("username"))
 
-            yield StatusMessage("starting...")
-            splunk_client = splunk_utils.SplunkClient(self.options["host"],
-                                                      port=int(self.options["port"]),
-                                                      username=self.options["username"],
-                                                      password=self.options["splunkpassword"],
-                                                      verify=splunk_verify_cert)
+            wf_instance_id = event.message.get("workflow_instance", {}).get("workflow_instance_id", "no instance id found")
+            yield StatusMessage("Starting 'splunk_search' that was running in workflow '{}'".format(wf_instance_id))
+
+            splunk_client = SplunkClient(options.get("host"),
+                                         port=options.get("port"),
+                                         username=options.get("username"),
+                                         password=options.get("splunkpassword"),
+                                         verify=splunk_verify_cert)
             if splunk_max_return:
                 splunk_client.set_max_return(splunk_max_return)
 
             splunk_result = splunk_client.execute_query(query_string)
             log.debug(splunk_result)
 
-            yield StatusMessage("done...")
+            yield StatusMessage("Finished 'splunk_search' that was running in workflow '{}'".format(wf_instance_id))
 
             # Produce a FunctionResult with the return value
             yield FunctionResult(result_payload.done(True, splunk_result.get('events', {})))
