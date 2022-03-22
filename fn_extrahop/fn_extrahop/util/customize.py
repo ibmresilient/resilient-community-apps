@@ -20,7 +20,7 @@ def codegen_reload_data():
     """
     return {
         "package": u"fn_extrahop",
-        "message_destinations": [u"extrahop"],
+        "message_destinations": [u"fn_extrahop"],
         "functions": [u"funct_extrahop_rx_assign_tag", u"funct_extrahop_rx_create_tag", u"funct_extrahop_rx_get_activitymaps", u"funct_extrahop_rx_get_detections", u"funct_extrahop_rx_get_devices", u"funct_extrahop_rx_get_tags", u"funct_extrahop_rx_get_watchlist", u"funct_extrahop_rx_search_detections", u"funct_extrahop_rx_search_devices", u"funct_extrahop_rx_search_packets", u"funct_extrahop_rx_update_detection", u"funct_extrahop_rx_update_watchlist"],
         "workflows": [u"wf_extrahop_rx_assign_tag", u"wf_extrahop_rx_create_tag", u"wf_extrahop_rx_get_activitymaps", u"wf_extrahop_rx_get_detections", u"wf_extrahop_rx_get_devices", u"wf_extrahop_rx_get_tags", u"wf_extrahop_rx_get_watchlist", u"wf_extrahop_rx_search_detections", u"wf_extrahop_rx_search_devices", u"wf_extrahop_rx_update_watchlist"],
         "actions": [u"Example: Extrahop Reveal(x) assign tag", u"Example: Extrahop Reveal(x) create tag", u"Example: Extrahop Reveal(x) get activitymaps", u"Example: Extrahop Reveal(x) get detections", u"Example: Extrahop Reveal(x) get devices", u"Example: Extrahop Reveal(x) get tags", u"Example: Extrahop Reveal(x) get watchlist", u"Example: Extrahop Reveal(x) search detections", u"Example: Extrahop Reveal(x) search devices", u"Example: Extrahop Reveal(x) update watchlist"],
@@ -38,11 +38,11 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM Resilient Platform Version: 41.2.41
+    IBM Resilient Platform Version: 41.2.35
 
     Contents:
     - Message Destinations:
-        - extrahop
+        - fn_extrahop
     - Functions:
         - funct_extrahop_rx_assign_tag
         - funct_extrahop_rx_create_tag
