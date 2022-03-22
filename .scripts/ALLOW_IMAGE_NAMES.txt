@@ -60,6 +60,7 @@ fn_odbc_query
 fn_outbound_email
 fn_pa_panorama
 fn_pagerduty
+fn_passivetotal
 fn_pastebin
 fn_phish_ai
 fn_phish_tank
