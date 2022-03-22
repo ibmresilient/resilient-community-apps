@@ -8,7 +8,7 @@ import os
 from threading import Thread
 from resilient_circuits import ResilientComponent
 from resilient import get_client
-from fn_extrahop.lib.poller_common import SOARCommon, poller, get_template_dir, get_last_poller_date
+from fn_extrahop.lib.poller_common import SOARCommon, poller, get_template_dir, get_last_poller_date, eval_mapping
 from fn_extrahop.lib.app_common import AppCommon
 from fn_extrahop.lib.rx_client import validate_settings
 from fn_extrahop.lib.templates_common import make_payload_from_template
@@ -40,14 +40,14 @@ def init_app(opts, options):
 
     return endpoint_class
 
-def get_entities(app_common, last_poller_time):
+def get_entities(app_common, last_poller_time, search_filters):
     """Method call to query the endpoint solution for newly created or modified entities for
         synchronization with IBM SOAR
 
     Args:
         app_common ([obj]): [class for app API calls]
         last_poller_time ([int]): [timestamp in milliseconds to collect the changed entities (alerts, cases, etc.)]
-
+        search_filters (dict): [name value pairs of filter settings for polling detections]
     Returns:
         [list]: [list of entities to synchronize with SOAR]
     """
@@ -57,7 +57,7 @@ def get_entities(app_common, last_poller_time):
     # identify entities changed since that timestamp.
     # Use options to collect urls, api_keys, etc. needed for the API call.
     # use rc.execute() to call your endpoint with your query to return entities changes since the last_poller_time
-    entity_list = app_common.get_entities_since_ts(last_poller_time)
+    entity_list = app_common.get_entities_since_ts(last_poller_time, search_filters)
 
     return entity_list
 
@@ -130,6 +130,11 @@ class PollerComponent(ResilientComponent):
         self.soar_update_case_template = options.get("soar_update_case_template")
         self.soar_close_case_template = options.get("soar_close_case_template")
 
+        # get the polling filters
+        self.polling_filters = {}
+        if options.get("polling_filters"):
+            self.polling_filterslters = eval_mapping(options.get("polling_filters"), wrapper="{{ {} }}")
+
         # rest_client is used to make IBM SOAR API calls
         self.rest_client = get_client(opts)
         self.soar_common = SOARCommon(self.rest_client)
@@ -150,7 +155,7 @@ class PollerComponent(ResilientComponent):
         """
 
         # get the list of entities (alerts, cases, etc.) to insert, update or close as cases in IBM SOAR
-        entity_list = get_entities(self.app_common, kwargs['last_poller_time'])
+        entity_list = get_entities(self.app_common, kwargs['last_poller_time'], self.polling_filters)
 
         # iterate over all the entities.
         self.process_entity_list(entity_list)

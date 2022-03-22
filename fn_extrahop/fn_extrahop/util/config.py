@@ -30,6 +30,8 @@ polling_lookback = <LOOKBACK_INTERVAL>
 # other certificate that is not automatically trusted by your machine,
 # you can set the CA bundle using the extrahop_cafile setting.
 # If you don't want to use a cert you can set extrahop_cafile=false.
+#
+polling_filters=
 #extrahop_cafile=<path to cert file>|false
 #http_proxy=http://proxy:80
 #https_proxy=https://proxy:443

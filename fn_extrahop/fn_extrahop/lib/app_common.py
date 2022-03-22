@@ -25,7 +25,7 @@ class AppCommon():
         self.endpoint_url = options['extrahop_rx_host_url']
         self.rx_cli = RxClient(opts, options)
 
-    def get_entities_since_ts(self, timestamp):
+    def get_entities_since_ts(self, timestamp, search_filter):
         """Get changed entities since last poller run
 
         Args:
@@ -35,7 +35,7 @@ class AppCommon():
             list: changed entity list
         """
 
-        response = self.rx_cli.search_detections(active_from=timestamp)
+        response = self.rx_cli.search_detections(active_from=timestamp, search_filter=search_filter)
 
         result = response.json()
 
