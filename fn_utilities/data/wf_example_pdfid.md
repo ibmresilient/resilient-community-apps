@@ -79,7 +79,7 @@ else:
   note_data = ["PDFiD report for {} ({}):".format(attachment.name, results.header)]
 
   for section in interesting_sections:
-    value = results.getValue(section)
+    value = results.get(section)
     if value is not None:
       note_data.append("{}: {}".format(section, value))
 
