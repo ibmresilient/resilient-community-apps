@@ -24,7 +24,7 @@ def codegen_reload_data():
         "functions": [u"symantec_dlp_get_incident_details", u"symantec_dlp_send_note_to_dlp_incident", u"symantec_dlp_update_incident_status", u"symantec_dlp_upload_binaries"],
         "workflows": [u"sdlp_send_soar_note_to_dlp", u"sdlp_update_incident_status", u"sdlp_upload_binaries", u"sdlp_write_incident_details_to_note"],
         "actions": [u"Symantec DLP: Send SOAR Note to DLP", u"Symantec DLP: Update DLP Incident Status", u"Symantec DLP: Upload Binaries", u"Symantec DLP: Upload Binaries as Artifact", u"Symantec DLP: Write DLP Incident Details to Note"],
-        "incident_fields": [u"sdlp_incident_id", u"sdlp_incident_status", u"sdlp_incident_url"],
+        "incident_fields": [u"sdlp_incident_id", u"sdlp_incident_status", u"sdlp_incident_url", u"sdlp_policy_group_id", u"sdlp_policy_group_name", u"sdlp_policy_id", u"sdlp_policy_name"],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [],
@@ -64,6 +64,10 @@ def customization_data(client=None):
         - sdlp_incident_id
         - sdlp_incident_status
         - sdlp_incident_url
+        - sdlp_policy_group_id
+        - sdlp_policy_group_name
+        - sdlp_policy_id
+        - sdlp_policy_name
     - Scripts:
         - Convert JSON to rich text v1.1
     """
