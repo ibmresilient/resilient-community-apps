@@ -22,12 +22,7 @@
       "message_destinations": [],
       "name": "RiskIQ PassiveTotal Query",
       "object_type": "artifact",
-      "tags": [
-        {
-          "tag_handle": "fn_passivetotal",
-          "value": null
-        }
-      ],
+      "tags": [],
       "timeout_seconds": 86400,
       "type": 0,
       "uuid": "57eb44d2-e20d-42b3-abc8-a3b57368e736",
@@ -39,7 +34,7 @@
   ],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1647889577441,
+  "export_date": 1647957612311,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -65,12 +60,7 @@
       "read_only": false,
       "required": "always",
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_passivetotal",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "passivetotal_artifact_value",
       "tooltip": "",
@@ -100,12 +90,7 @@
       "read_only": false,
       "required": "always",
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_passivetotal",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "passivetotal_artifact_type",
       "tooltip": "",
@@ -152,12 +137,7 @@
       "name": "fn_passivetotal",
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"pager\": null, \"queryValue\": \"45.146.165.37\", \"queryType\": \"ip\", \"firstSeen\": null, \"lastSeen\": null, \"totalRecords\": 0, \"results\": [], \"classification\": null, \"primaryDomain\": \"45.146.165.37.null\", \"success\": true, \"subdomains\": [], \"tags_hits_str\": \"ransomeware, compromised\", \"report_url\": \"https://community.riskiq.com/search/45.146.165.37\"}, \"raw\": null, \"inputs\": {\"passivetotal_artifact_type\": \"IP Address\", \"passivetotal_artifact_value\": \"45.146.165.37\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-passivetotal\", \"package_version\": \"1.0.0\", \"host\": \"My Host\", \"execution_time_ms\": 2086, \"timestamp\": \"2022-03-16 13:16:50\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"pager\": {}, \"queryValue\": {\"type\": \"string\"}, \"queryType\": {\"type\": \"string\"}, \"firstSeen\": {}, \"lastSeen\": {}, \"totalRecords\": {\"type\": \"integer\"}, \"results\": {\"type\": \"array\"}, \"classification\": {}, \"primaryDomain\": {\"type\": \"string\"}, \"success\": {\"type\": \"boolean\"}, \"subdomains\": {\"type\": \"array\"}, \"tags_hits_str\": {\"type\": \"string\"}, \"report_url\": {\"type\": \"string\"}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"passivetotal_artifact_type\": {\"type\": \"string\"}, \"passivetotal_artifact_value\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
-      "tags": [
-        {
-          "tag_handle": "fn_passivetotal",
-          "value": null
-        }
-      ],
+      "tags": [],
       "uuid": "490b5e45-2e1f-4909-b905-a009e9a7255b",
       "version": 5,
       "view_items": [
@@ -185,12 +165,7 @@
           "name": "PassiveTotal Site Lookup",
           "object_type": "artifact",
           "programmatic_name": "passivetotal_site_lookup",
-          "tags": [
-            {
-              "tag_handle": "fn_passivetotal",
-              "value": null
-            }
-          ],
+          "tags": [],
           "uuid": null,
           "workflow_id": 11
         }
@@ -199,13 +174,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 63,
+  "id": 64,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1647889575560,
+      "create_date": 1647957610481,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -214,7 +189,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1647889575560,
+      "update_date": 1647957610481,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -232,12 +207,7 @@
       "export_key": "passivetotal",
       "name": "PassiveTotal",
       "programmatic_name": "passivetotal",
-      "tags": [
-        {
-          "tag_handle": "fn_passivetotal",
-          "value": null
-        }
-      ],
+      "tags": [],
       "users": [],
       "uuid": "31c7de9b-5d7f-4660-bd17-07d5bb879fd8"
     }
@@ -276,12 +246,7 @@
       "name": "PassiveTotal Site Lookup",
       "object_type": "artifact",
       "programmatic_name": "passivetotal_site_lookup",
-      "tags": [
-        {
-          "tag_handle": "fn_passivetotal",
-          "value": null
-        }
-      ],
+      "tags": [],
       "uuid": "585ce4d0-f664-43a6-bca5-f3754f296d9c",
       "workflow_id": 11
     }
