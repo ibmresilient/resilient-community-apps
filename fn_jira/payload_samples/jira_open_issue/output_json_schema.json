@@ -1,0 +1,446 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "issue_url": {
+          "type": "string"
+        },
+        "issue_url_internal": {
+          "type": "string"
+        },
+        "issue_key": {
+          "type": "string"
+        },
+        "issue": {
+          "type": "object",
+          "properties": {
+            "expand": {
+              "type": "string"
+            },
+            "id": {
+              "type": "string"
+            },
+            "self": {
+              "type": "string"
+            },
+            "key": {
+              "type": "string"
+            },
+            "fields": {
+              "type": "object",
+              "properties": {
+                "fixVersions": {
+                  "type": "array"
+                },
+                "resolution": {},
+                "lastViewed": {},
+                "priority": {
+                  "type": "object",
+                  "properties": {
+                    "self": {
+                      "type": "string"
+                    },
+                    "iconUrl": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "labels": {
+                  "type": "array"
+                },
+                "aggregatetimeoriginalestimate": {},
+                "timeestimate": {},
+                "versions": {
+                  "type": "array"
+                },
+                "issuelinks": {
+                  "type": "array"
+                },
+                "assignee": {},
+                "status": {
+                  "type": "object",
+                  "properties": {
+                    "self": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "iconUrl": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "statusCategory": {
+                      "type": "object",
+                      "properties": {
+                        "self": {
+                          "type": "string"
+                        },
+                        "id": {
+                          "type": "integer"
+                        },
+                        "key": {
+                          "type": "string"
+                        },
+                        "colorName": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "components": {
+                  "type": "array"
+                },
+                "archiveddate": {},
+                "aggregatetimeestimate": {},
+                "creator": {
+                  "type": "object",
+                  "properties": {
+                    "self": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "key": {
+                      "type": "string"
+                    },
+                    "emailAddress": {
+                      "type": "string"
+                    },
+                    "avatarUrls": {
+                      "type": "object",
+                      "properties": {
+                        "48x48": {
+                          "type": "string"
+                        },
+                        "24x24": {
+                          "type": "string"
+                        },
+                        "16x16": {
+                          "type": "string"
+                        },
+                        "32x32": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "displayName": {
+                      "type": "string"
+                    },
+                    "active": {
+                      "type": "boolean"
+                    },
+                    "timeZone": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "subtasks": {
+                  "type": "array"
+                },
+                "reporter": {
+                  "type": "object",
+                  "properties": {
+                    "self": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "key": {
+                      "type": "string"
+                    },
+                    "emailAddress": {
+                      "type": "string"
+                    },
+                    "avatarUrls": {
+                      "type": "object",
+                      "properties": {
+                        "48x48": {
+                          "type": "string"
+                        },
+                        "24x24": {
+                          "type": "string"
+                        },
+                        "16x16": {
+                          "type": "string"
+                        },
+                        "32x32": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "displayName": {
+                      "type": "string"
+                    },
+                    "active": {
+                      "type": "boolean"
+                    },
+                    "timeZone": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "aggregateprogress": {
+                  "type": "object",
+                  "properties": {
+                    "progress": {
+                      "type": "integer"
+                    },
+                    "total": {
+                      "type": "integer"
+                    }
+                  }
+                },
+                "progress": {
+                  "type": "object",
+                  "properties": {
+                    "progress": {
+                      "type": "integer"
+                    },
+                    "total": {
+                      "type": "integer"
+                    }
+                  }
+                },
+                "votes": {
+                  "type": "object",
+                  "properties": {
+                    "self": {
+                      "type": "string"
+                    },
+                    "votes": {
+                      "type": "integer"
+                    },
+                    "hasVoted": {
+                      "type": "boolean"
+                    }
+                  }
+                },
+                "worklog": {
+                  "type": "object",
+                  "properties": {
+                    "startAt": {
+                      "type": "integer"
+                    },
+                    "maxResults": {
+                      "type": "integer"
+                    },
+                    "total": {
+                      "type": "integer"
+                    },
+                    "worklogs": {
+                      "type": "array"
+                    }
+                  }
+                },
+                "archivedby": {},
+                "issuetype": {
+                  "type": "object",
+                  "properties": {
+                    "self": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "iconUrl": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "subtask": {
+                      "type": "boolean"
+                    },
+                    "avatarId": {
+                      "type": "integer"
+                    }
+                  }
+                },
+                "timespent": {},
+                "project": {
+                  "type": "object",
+                  "properties": {
+                    "self": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "key": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "projectTypeKey": {
+                      "type": "string"
+                    },
+                    "avatarUrls": {
+                      "type": "object",
+                      "properties": {
+                        "48x48": {
+                          "type": "string"
+                        },
+                        "24x24": {
+                          "type": "string"
+                        },
+                        "16x16": {
+                          "type": "string"
+                        },
+                        "32x32": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "projectCategory": {
+                      "type": "object",
+                      "properties": {
+                        "self": {
+                          "type": "string"
+                        },
+                        "id": {
+                          "type": "string"
+                        },
+                        "description": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "aggregatetimespent": {},
+                "resolutiondate": {},
+                "workratio": {
+                  "type": "integer"
+                },
+                "watches": {
+                  "type": "object",
+                  "properties": {
+                    "self": {
+                      "type": "string"
+                    },
+                    "watchCount": {
+                      "type": "integer"
+                    },
+                    "isWatching": {
+                      "type": "boolean"
+                    }
+                  }
+                },
+                "created": {
+                  "type": "string"
+                },
+                "updated": {
+                  "type": "string"
+                },
+                "timeoriginalestimate": {},
+                "description": {
+                  "type": "string"
+                },
+                "timetracking": {
+                  "type": "object"
+                },
+                "attachment": {
+                  "type": "array"
+                },
+                "summary": {
+                  "type": "string"
+                },
+                "environment": {},
+                "duedate": {},
+                "comment": {
+                  "type": "object",
+                  "properties": {
+                    "comments": {
+                      "type": "array"
+                    },
+                    "maxResults": {
+                      "type": "integer"
+                    },
+                    "total": {
+                      "type": "integer"
+                    },
+                    "startAt": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "raw": {
+      "type": "string"
+    },
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "incident_id": {
+          "type": "integer"
+        },
+        "jira_fields": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

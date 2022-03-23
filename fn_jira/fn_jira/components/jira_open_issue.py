@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 
-"""Create an issue in Jira from IBM Resilient"""
+"""Create an issue in Jira from IBM SOAR"""
 
 import logging
 import json
@@ -53,10 +53,10 @@ class FunctionComponent(ResilientComponent):
 
             jira_client = get_jira_client(app_configs, rc)
 
-            # Build the URL to Resilient
+            # Build the URL to SOAR
             resilient_url = build_url_to_resilient(self.res_params.get("host"), self.res_params.get("port"), fn_inputs.get("incident_id"), fn_inputs.get("task_id"))
 
-            jira_fields["description"] = prepend_text("IBM Resilient Link: {0}".format(resilient_url), to_markdown(jira_fields.get("description", "")))
+            jira_fields["description"] = prepend_text("IBM SOAR Link: {0}".format(resilient_url), to_markdown(jira_fields.get("description", "")))
 
             yield StatusMessage("Creating JIRA issue")
 

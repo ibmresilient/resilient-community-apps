@@ -1,15 +1,20 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 
 """Add a comment to a Jira Issue"""
 
 import logging
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import validate_fields, MarkdownParser, ResultPayload, RequestsCommon
-from fn_jira.util.helper import CONFIG_DATA_SECTION, validate_app_configs, get_jira_client, to_markdown
 
-PACKAGE_NAME = CONFIG_DATA_SECTION
+from fn_jira.util import helper
+from resilient_circuits import (FunctionError, FunctionResult,
+                                ResilientComponent, StatusMessage, function,
+                                handler)
+from resilient_lib import (MarkdownParser, RequestsCommon, ResultPayload,
+                           validate_fields)
+
+PACKAGE_NAME = helper.CONFIG_DATA_SECTION
+FUNCT_NAME = "jira_create_comment"
 
 
 class FunctionComponent(ResilientComponent):
@@ -25,7 +30,7 @@ class FunctionComponent(ResilientComponent):
         """Configuration options have changed, save new values"""
         self.options = opts.get(PACKAGE_NAME, {})
 
-    @function("jira_create_comment")
+    @function(FUNCT_NAME)
     def _jira_create_comment_function(self, event, *args, **kwargs):
         """Function: Create a jira comment."""
         try:
@@ -35,27 +40,63 @@ class FunctionComponent(ResilientComponent):
 
             # Get + validate the app.config parameters:
             log.info("Validating app configs")
-            app_configs = validate_app_configs(self.options)
+            app_configs = helper.validate_app_configs(self.options)
 
             # Get + validate the function parameters:
             log.info("Validating function inputs")
-            fn_inputs = validate_fields(["jira_issue_id", "jira_comment"], kwargs)
+            fn_inputs = validate_fields([helper.JIRA_ISSUE_ID_FUNCT_INPUT_NAME, 
+                helper.JIRA_COMMENT_FUNCT_INPUT_NAME, helper.INCIDENT_ID_FUNCT_INPUT_NAME], kwargs)
+
+            # if this note is coming from a task
+            if kwargs.get(helper.TASK_ID_FUNCT_INPUT_NAME):
+
+                # check if the task is synced to Jira already using datatable row with associated task_id
+                # if so, fn_inputs will be updated with the jira id and jira url
+                if not helper.validate_task_id_for_jira_issue_id(self.rest_client(),
+                        kwargs.get(helper.INCIDENT_ID_FUNCT_INPUT_NAME), kwargs.get(helper.TASK_ID_FUNCT_INPUT_NAME), fn_inputs):
+                    # gracefully exit if task_id wasn't found in datatable -- i.e. task isn't liked to Jira yet
+                    log.debug("Skipped function '{0}' for task note because task was not synced to Jira.".format(FUNCT_NAME))
+
+                    yield FunctionResult({}, success=False)
+                    return
+                else:
+                    log.info("Found Jira ID {0} for task {1} in datatable".format(fn_inputs[helper.JIRA_ISSUE_ID_FUNCT_INPUT_NAME], fn_inputs[helper.JIRA_ISSUE_LINK]))
+
             log.info("Validated function inputs: %s", fn_inputs)
 
-            jira_comment = to_markdown(fn_inputs.get("jira_comment"))
+            # first extract any image info and get the (src, alt) images tuple
+            # also replaces the images with the appropriate Jira style markdown for including them
+            imgs, jira_comment = helper.extract_images(fn_inputs.get("jira_comment"))
+
+            jira_comment = helper.to_markdown(jira_comment)
 
             if jira_comment is None or not jira_comment.strip():
                 raise FunctionError("Note is empty after rich text is removed")
 
             yield StatusMessage("Connecting to JIRA")
 
-            jira_client = get_jira_client(app_configs, rc)
+            jira_client = helper.get_jira_client(app_configs, rc)
 
-            yield StatusMessage("Adding comment to {0} in JIRA".format(fn_inputs.get("jira_issue_id")))
+            # loop through any linked images in the note and add them as attachments on Jira
+            for src, alt in imgs:
+                img_data = helper.read_img(src)
+                if img_data:
+                    yield StatusMessage("Adding attachment '{0}' to {1} in JIRA".format(alt, fn_inputs.get(helper.JIRA_ISSUE_ID_FUNCT_INPUT_NAME)))
+                    jira_client.add_attachment(fn_inputs.get(helper.JIRA_ISSUE_ID_FUNCT_INPUT_NAME), attachment=img_data, filename=alt)
+                else:
+                    yield StatusMessage("Attachment '{0}' could not be loaded".format(alt))
 
-            comment = jira_client.add_comment(fn_inputs.get("jira_issue_id"), jira_comment)
+            yield StatusMessage("Adding comment to {0} in JIRA".format(fn_inputs.get(helper.JIRA_ISSUE_ID_FUNCT_INPUT_NAME)))
 
-            results = rp.done(success=True, content=comment.raw)
+            comment = jira_client.add_comment(fn_inputs.get(helper.JIRA_ISSUE_ID_FUNCT_INPUT_NAME), jira_comment)
+
+            results = comment.raw
+
+            # for tasks we'll return the link here:
+            if fn_inputs.get(helper.JIRA_ISSUE_LINK):
+                results[helper.JIRA_ISSUE_LINK] = fn_inputs[helper.JIRA_ISSUE_LINK]
+
+            results = rp.done(success=True, content=results)
 
             log.info("Complete")
 

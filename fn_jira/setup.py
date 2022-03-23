@@ -2,17 +2,33 @@
 # -*- coding: utf-8 -*-
 
 from setuptools import setup, find_packages
+import glob
+import ntpath
+
+def get_module_name(module_path):
+    """
+    Return the module name of the module path
+    """
+    return ntpath.split(module_path)[1].split(".")[0]
+
+
+def snake_to_camel(word):
+    """
+    Convert a word from snake_case to CamelCase
+    """
+    return ''.join(x.capitalize() or '_' for x in word.split('_'))
 
 setup(
     name='fn_jira',
-    version='2.0.0',
+    display_name='Jira App for IBM SOAR',
+    version='2.1.0',
     license='MIT',
-    author='IBM Resilient',
+    author='IBM SOAR',
     url='https://ibm.com/mysupport',
     description="Provides integration with JIRA for Issue Creation, Issue Transition and Comment Creation",
-    long_description="""This app allows for the tracking of Resilient Incidents and Tasks as Jira Issues. Bidirectional links are saved to allow for easy navigation between the applications.
+    long_description="""This app allows for the tracking of SOAR Incidents and Tasks as Jira Issues. Bidirectional links are saved to allow for easy navigation between the applications.
 
-It also allows for the transitioning of Jira issues when the corresponding incident is closed and adds comments to the Jira issue when a Note is created in Resilient.
+It also allows for the transitioning of Jira issues when the corresponding incident is closed and adds comments to the Jira issue when a Note is created in SOAR.
 
 Example rules and workflows can used used or modified to meet your business processes.
 """,
@@ -29,9 +45,7 @@ Example rules and workflows can used used or modified to meet your business proc
     ],
     entry_points={
         "resilient.circuits.components": [
-            "JiraOpenIssueFunctionComponent = fn_jira.components.jira_open_issue:FunctionComponent",
-            "JiraTransitionIssueFunctionComponent = fn_jira.components.jira_transition_issue:FunctionComponent",
-            "JiraCreateCommentFunctionComponent = fn_jira.components.jira_create_comment:FunctionComponent"
+            "{}FunctionComponent = fn_jira.components.{}:FunctionComponent".format(snake_to_camel(get_module_name(filename)), get_module_name(filename)) for filename in glob.glob("./fn_jira/components/[a-zA-Z]*.py")
         ],
         "resilient.circuits.configsection": ["gen_config = fn_jira.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_jira.util.customize:customization_data"],

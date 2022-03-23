@@ -1,11 +1,29 @@
-# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 # -*- coding: utf-8 -*-
 
+import re
+
+import requests
+
 from jira import JIRA
-from resilient_lib import IntegrationError, validate_fields, str_to_bool, build_incident_url, build_resilient_url, MarkdownParser
+from resilient_lib import (IntegrationError, MarkdownParser,
+                           build_incident_url, build_resilient_url,
+                           str_to_bool, validate_fields)
 
 CONFIG_DATA_SECTION = "fn_jira"
 SUPPORTED_AUTH_METHODS = ("AUTH", "BASIC")
+
+# Jira datatable constants
+JIRA_DT_NAME = "jira_task_references"
+JIRA_DT_ISSUE_ID_COL_NAME = "jira_issue_id_col"
+JIRA_DT_ISSUE_LINK_COL_NAME = "jira_link"
+
+# Other Jira SOAR variable constants
+JIRA_ISSUE_ID_FUNCT_INPUT_NAME = "jira_issue_id"
+JIRA_COMMENT_FUNCT_INPUT_NAME = "jira_comment"
+JIRA_ISSUE_LINK = "jira_url"
+INCIDENT_ID_FUNCT_INPUT_NAME = "incident_id"
+TASK_ID_FUNCT_INPUT_NAME = "task_id"
 
 # Markdown Constants
 STRIKEOUT_CHAR = "-"
@@ -86,7 +104,7 @@ def prepend_text(a, b=None):
 
 
 def build_url_to_resilient(host, port, incident_id, task_id=None):
-    """Builds the URL to resilient. If a task_id is provided builds
+    """Builds the URL to SOAR. If a task_id is provided builds
     the URL to include the task"""
     url = build_incident_url(build_resilient_url(host, port), incident_id)
 
@@ -105,6 +123,32 @@ def to_markdown(html):
                             italic=ITALIC_CHAR)
 
     return parser.convert(html)
+
+
+def extract_images(html):
+    """Takes a string of HTML text from a SOAR note and extracts a list of 
+    images as src links with associated alt text.
+    Also modifies the html to fit the Jira-style image syntax (ex: !my_pic.png!)"""
+
+    # extract src values and alt values from SOAR's image tags
+    # ex: <img src='https://ibm.com/some_pic.jpg' alt='some_pic.jpg' />
+    srcs = re.findall(r'<img[^>]+src="([^">]+)', html)
+    alts = re.findall(r'<img[^>]+alt="([^">]+)', html)
+
+    # sub in Jira image syntax for each image tag
+    for alt in alts:
+        html = re.subn(r'<img.*?>', "!{0}!".format(alt), html, count=1)[0]
+
+    # zip together the src and alts and return that as well as the adjusted html
+    return tuple(zip(srcs, alts)), html
+
+
+def read_img(img_url):
+    """Reads a url image to a filestream"""
+    try:
+        return requests.get(img_url).content
+    except Exception as e:
+        return None
 
 
 def format_dict(dict_to_format):
@@ -129,3 +173,59 @@ def format_dict(dict_to_format):
     str_to_rtn += "-----------------\n"
 
     return str_to_rtn
+
+def validate_task_id_for_jira_issue_id(res_client, incident_id, task_id, fn_inputs):
+    """Validates the input for task_id and sets the value of the task's associated Jira ID
+    by searching for the value in the Jira Datatable
+    
+    :param res_client: the rest client object to communicate to SOAR platform
+    :type res_client: resilient.SimpleClient <resilient.co3.SimpleClient>
+    :param incident_id: ID of the incident within SOAR
+    :type incident_id: string
+    :param task_id: ID of the task within SOAR (note this function is only necessary for tasks)
+    :type task_id: string
+    :param fn_inputs: current set of inputs to the function being called
+    :type fn_inputs: dict
+    :return: Whether the task was a valid task with an associated Jira ID. 
+             if so, modifies fn_inputs obj to store correct jira_issue_id and jira_url
+    :rtype: bool
+    """
+
+    # using datatable in SOAR, grab the jira id and jira url from the correct row in the table
+    # if the table row associated with this task id doesn't exist, returns (None, None)
+    jira_issue_id, jira_link = _get_jira_issue_id(res_client, incident_id, task_id)
+
+    if not jira_issue_id:
+        # task not yet synced to Jira
+        return False
+
+    # success
+    # set the jira_issue_id in fn_inputs to overwrite the value of the parent incident
+    fn_inputs[JIRA_ISSUE_ID_FUNCT_INPUT_NAME] = jira_issue_id
+    fn_inputs[JIRA_ISSUE_LINK] = jira_link
+    return True
+
+def _get_jira_issue_id(res_client, incident_id, task_id):
+    """Returns the jira_issue_id and jira_url that relates to the task_id"""
+    row = _get_row(res_client, incident_id, "task_id", task_id)
+
+    if row is not None:
+        cells = row["cells"]
+        return str(cells[JIRA_DT_ISSUE_ID_COL_NAME]["value"]), str(cells[JIRA_DT_ISSUE_LINK_COL_NAME]["value"])
+    else:
+        return None, None
+
+def _get_row(res_client, incident_id, cell_name, cell_value):
+    """Returns the row with a matching value to cell_name and cell_value if found. Returns None if no matching row found"""
+    uri = "/incidents/{0}/table_data/{1}?handle_format=names".format(incident_id, JIRA_DT_NAME)
+    try:
+        data = res_client.get(uri)
+        rows = data["rows"]
+    except Exception as err:
+        raise ValueError("Failed to get '{0}' Datatable. This is required to send task notes to Jira".format(JIRA_DT_NAME), err)
+
+    for row in rows:
+        cells = row["cells"]
+        if cells.get(cell_name) and cells[cell_name].get("value") and str(cells[cell_name].get("value")) == str(cell_value):
+            return row
+    return None

@@ -3,7 +3,12 @@
 # (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 
 from collections import OrderedDict
-from fn_jira.util.helper import validate_app_configs, prepend_text, build_url_to_resilient, format_dict
+import mock
+
+from fn_jira.util.helper import (build_url_to_resilient, extract_images,
+                                 format_dict, prepend_text,
+                                 validate_app_configs,
+                                 validate_task_id_for_jira_issue_id)
 
 
 def test_validate_app_configs():
@@ -37,3 +42,30 @@ def test_format_dict():
     actual_result = """\n-----------------\nkey1: value Ü Ý Þ ß1\nkey2: value2\n-----------------\n"""
 
     assert formatted_dict == actual_result
+
+def test_extract_images():
+    mock_html = "<div>Text! <img src=\"https://img.com/img.jpg\" alt=\"img.jpg\" /> middle text! <img src=\"https://test.org/my_pic\" alt=\"my_pic\" /> </div>"
+    expected_imgs = (("https://img.com/img.jpg", "img.jpg"), ("https://test.org/my_pic", "my_pic"))
+    expected_formatted_html = "<div>Text! !img.jpg! middle text! !my_pic! </div>"
+
+    assert extract_images(mock_html)[0] == expected_imgs
+    assert extract_images(mock_html)[1] == expected_formatted_html
+
+def test_validate_task_id_for_jira_issue_id():
+    mock_fn_inputs = {"jira_issue_id": "INT-9"}
+    with mock.patch("fn_jira.util.helper._get_jira_issue_id") as mock_dt_call:
+        mock_dt_call.return_value = ("INT-10", "https://jira.test/INT-10")
+
+        valid = validate_task_id_for_jira_issue_id(None, "100", "101", mock_fn_inputs)
+
+        assert valid
+        assert mock_fn_inputs["jira_issue_id"] == "INT-10"
+
+def test_invalid_validate_task_id_for_jira_issue_id():
+    mock_fn_inputs = {"jira_issue_id": "INT-9"}
+    with mock.patch("fn_jira.util.helper._get_jira_issue_id") as mock_dt_call:
+        mock_dt_call.return_value = (None, None)
+
+        valid = validate_task_id_for_jira_issue_id(None, "100", "101", mock_fn_inputs)
+
+        assert not valid
