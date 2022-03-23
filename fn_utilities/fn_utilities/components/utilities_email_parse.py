@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2018, 2022. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 
 """Function implementation"""
@@ -26,7 +26,7 @@ RE_START_BASE64 = re.compile("\n\n")
 LOG = logging.getLogger(__name__)
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'email_message_parts"""
+    """Component that implements SOAR function 'email_message_parts"""
 
     @function("utilities_email_parse")
     def _email_parse_function(self, event, *args, **kwargs):
@@ -56,7 +56,7 @@ class FunctionComponent(ResilientComponent):
                    not (fn_inputs.get("task_id") and fn_inputs.get("attachment_id")):
                     raise FunctionError("You must define either: (incident_id AND attachment_id OR artifact_id) OR (task_id AND attachment_id)")
 
-                # Instansiate new Resilient API object
+                # Instansiate new SOAR API object
                 res_client = self.rest_client()
 
                 # Get attachment metadata
@@ -138,7 +138,7 @@ class FunctionComponent(ResilientComponent):
 
                             artifact_description = u"This email attachment was found in the parsed email message from: '{0}'".format(u"provided base64content" if fn_inputs.get("base64content") else attachment_metadata.get("name"))
 
-                            # POST the artifact to Resilient as an 'Email Attachment' Artifact
+                            # POST the artifact to SOAR as an 'Email Attachment' Artifact
                             res_client.post_artifact_file(uri=ARTIFACT_URI.format(fn_inputs.get("incident_id")),
                                                           artifact_type=EMAIL_ATTACHMENT_ARTIFACT_ID,
                                                           artifact_filepath=path_tmp_file,

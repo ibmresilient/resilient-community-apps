@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2021. All Rights Reserved.
+# (c) Copyright IBM Corp. 2021, 2022. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 
 """Function implementation"""
@@ -14,7 +14,7 @@ from resilient_circuits import ResilientComponent, function, StatusMessage, Func
 from resilient_lib import write_file_attachment
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'base64_to_attachment'"""
+    """Component that implements SOAR function 'base64_to_attachment'"""
 
     @function("utilities_base64_to_attachment")
     def _base64_to_attachment_function(self, event, *args, **kwargs):

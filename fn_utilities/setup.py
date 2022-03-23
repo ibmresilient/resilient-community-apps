@@ -22,15 +22,16 @@ def snake_to_camel(word):
 
 setup(
     name='fn_utilities',
-    version='2.0.6',
+    display_name='Utility Functions for SOAR',
+    version='2.1.0',
     license='MIT',
-    author='IBM Resilient',
-    author_email='support@resilientsystems.com',
-    url="http://ibm.biz/resilientcommunity",
-    description="Useful workflow functions for common automation and integration activities in the Resilient platform.",
-    long_description="""Resilient functions simplify development of integrations by wrapping each external activity
-    into an individual workflow component. These components can be easily installed, then used and combined in Resilient
-    workflows. The Resilient platform sends data to the function component that performs an activity then returns the results
+    author='IBM SOAR',
+    url="http://ibm.biz/soarcommunity",
+    url="http://ibm.biz/soarcommunity",
+    description="Useful workflow functions for common automation and integration activities in the SOAR platform.",
+    long_description="""SOAR functions simplify development of integrations by wrapping each external activity
+    into an individual workflow component. These components can be easily installed, then used and combined in SOAR
+    workflows. The SOAR platform sends data to the function component that performs an activity then returns the results
     to the workflow. The results can be acted upon by scripts, rules, and workflow decision points to dynamically orchestrate
     the security incident response activities.""",
     setup_requires=['six==1.14.0'],

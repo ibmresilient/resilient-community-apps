@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2018, 2022. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
@@ -10,7 +10,7 @@ from resilient_circuits import ResilientComponent, function, FunctionResult, Fun
 
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'utilities_json2html"""
+    """Component that implements SOAR function 'utilities_json2html"""
 
     @function("utilities_json2html")
     def _utilities_json2html_function(self, event, *args, **kwargs):

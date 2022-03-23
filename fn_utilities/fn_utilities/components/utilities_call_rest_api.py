@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 
 """Function implementation"""
@@ -12,7 +12,7 @@ CONTENT_TYPE = "Content-type"
 CONTENT_TYPE_JSON = "application/json"
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'call_rest_api"""
+    """Component that implements SOAR function 'call_rest_api"""
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""

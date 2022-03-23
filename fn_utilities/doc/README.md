@@ -12,7 +12,7 @@
   ![screenshot: screenshot_1](./screenshots/screenshot_1.png)
 -->
 
-# **User Guide:** fn_utilities_v2.0.6
+# **User Guide:** fn_utilities_v2.1.0
 
 ## Table of Contents
 - [App Host Setup](#app-host-setup)
@@ -44,14 +44,13 @@
 
 ### Release History
 
-| Version | Date | Notes |
-| ------- | ---- | ----- |
+| Version | Date   | Notes |
+| ------- | ------ |:----- |
 | 2.0.6   | 7/2021 | pin dependency 'chardet' at v4.0.0 |
-| 2.0.3   | 2/2021 | bug fix for email parser |
 | 2.0.2   | 2/2021 | bug fixes for Shell Command |
-| 2.0.1   | 9/2020 | bug fixes|
+| 2.0.1   | 9/2020 | bug fixes |
 | 2.0.0   | 7/2020 | Numerous fixes, improved Rules and workflows and only Python 3 supported |
-| 1.0.15 | 5/2020 | Bug fixes |
+| 1.0.15  | 5/2020 | Bug fixes, App Host Support |
 | 1.0.14  | 5/2020 | Shell Command support for Remote Linux Execution |
 
 ## App Host Setup
@@ -574,7 +573,7 @@ None
 
 ---
 ## Function - Utilities: Call REST API
-This function calls a REST web service. It supports the standard REST methods: GET, HEAD, POST, PUT, DELETE and OPTIONS.
+This function calls a REST web service. It supports the standard REST methods: GET, HEAD, POST, PUT, DELETE, OPTIONS and PATCH.
 
 The function parameters determine the type of call, the URL, and optionally the headers, cookies and body. The results include the text or structured (JSON) result from the web service, and additional information including the elapsed time.
 
@@ -648,13 +647,13 @@ results = {
 <p>
 
 ```python
-inputs.rest_method = "POST"
+inputs.rest_method = "PATCH"
 
-# Let's post a URL that includes the artifact value
-inputs.rest_url = u"http://httpbin.org/post?value={}".format(artifact.value)
+# Let's patch a URL that includes the artifact value
+inputs.rest_url = u"http://httpbin.org/patch"
 
-# For POST requests, the body is text
-inputs.rest_body = '{"and": "json can be written as a string"}'
+# For PATCH requests, the body is text
+inputs.rest_body = '{"key": "'+artifact.value+'"}'
 
 # HTTP headers can be specified as a multi-line string
 inputs.rest_headers = """
@@ -665,7 +664,6 @@ X-Frooble: Baz
 # The 'rest_verify' parameter (Boolean) indicates whether to verify SSL certificates.
 # This should be True unless you need to connect to a self-signed or other invalid cert.
 inputs.rest_verify = True
-
 ```
 
 </p>
@@ -708,7 +706,7 @@ For example, www.ibm.com and www.1bm.com would have a low distance. This can use
 ```python
 results = {
   'distances': {
-    'resilientsystems.com': 6,
+    'soarsystems.com': 6,
     'ibmcloud.com': 11,
     'ibm.com': 9,
     'bluemix.com': 9
@@ -716,7 +714,7 @@ results = {
   'domain_name': 'ressystems.com',
   'closest': {
     'distance': 6,
-    'name': 'resilientsystems.com'
+    'name': 'soarsystems.com'
   }
 }
 ```
@@ -740,7 +738,7 @@ else:
   inputs.domain_name = artifact.value
 
 # The list of domains to test against
-inputs.domain_list = "ibm.com, resilientsystems.com, ibmcloud.com, bluemix.com"
+inputs.domain_list = "ibm.com, soarsystems.com, ibmcloud.com, bluemix.com"
 ```
 
 </p>
@@ -1240,8 +1238,8 @@ inputs.incident_id = incident.id
 <p>
 
 ```python
-# {'owner': {'fname': 'Resilient', 'lname': 'Sysadmin', 'title': '', 'display_name': 'Resilient Sysadmin', 'email': 'b@a.com', 'phone': '781 838 4848', 'cell': '978 373 2839'}, 'members': []}
-# {'owner': None, 'members': [{'fname': 'Resilient', 'lname': 'Sysadmin', 'title': '', 'display_name': 'Resilient Sysadmin', 'email': 'b@a.com', 'phone': '781 838 4848', 'cell': '978 373 2839'}]}
+# {'owner': {'fname': 'SOAR', 'lname': 'Sysadmin', 'title': '', 'display_name': 'SOAR Sysadmin', 'email': 'b@a.com', 'phone': '781 838 4848', 'cell': '978 373 2839'}, 'members': []}
+# {'owner': None, 'members': [{'fname': 'SOAR', 'lname': 'Sysadmin', 'title': '', 'display_name': 'SOAR Sysadmin', 'email': 'b@a.com', 'phone': '781 838 4848', 'cell': '978 373 2839'}]}
 
 ```
 
@@ -1493,10 +1491,10 @@ else:
 
 ---
 ## Function - Utilities: Resilient Search
-This function searches the Resilient platform for incident data according to the criteria specified, and returns the results to your workflow. 
+This function searches the SOAR platform for incident data according to the criteria specified, and returns the results to your workflow. 
 It can be used to find incidents containing data that matches any string, incidents currently assigned to a given user, or a very wide range of other search conditions.
 
-**NOTE:** The search results may include data from incidents that the current Resilient user (the person who triggered the workflow) cannot access. Often your Resilient users have the `Default` role that allows them to only see incidents where they are members. This function runs with the permissions of your app account, which typically may have much wider access privileges. **Use with caution, to avoid information disclosure.**
+**NOTE:** The search results may include data from incidents that the current SOAR user (the person who triggered the workflow) cannot access. Often your SOAR users have the `Default` role that allows them to only see incidents where they are members. This function runs with the permissions of your app account, which typically may have much wider access privileges. **Use with caution, to avoid information disclosure.**
 
  ![screenshot: fn-utilities-resilient-search ](./screenshots/fn-utilities-resilient-search.png)
 
@@ -1732,7 +1730,7 @@ results = {
 <p>
 
 ```python
-# Search for other occurrences of the same file attachment in Resilient.
+# Search for other occurrences of the same file attachment in SOAR.
 
 # The search template determines the type(s) of object to search, and the filter conditions.
 # This can be used to search within a specific incident field, or to search only incidents that meet other criteria.
@@ -2186,6 +2184,7 @@ incident.addNote(content)
 | Example: Expand URL | artifact | `utilities_expand_url` |
 | Example: Extract SSL Certificate | artifact | `example_extract_ssl_cert_from_url` |
 | Example: Get Incident Contact Info | incident | `example_get_incident_contact_info` |
+| Example: Get Task Contact Info | task | `example_get_task_contact_info` |
 | Example: JSON2HTML | artifact | `example_json2html` |
 | Example: Parse SSL Certificate | artifact | `example_parse_ssl_certificate` |
 | Example: PDFiD | attachment | `example_pdfid` |
@@ -2202,7 +2201,7 @@ incident.addNote(content)
 ---
 
 <!--
-## Inform Resilient Users
-  Use this section to optionally provide additional information so that Resilient playbook 
+## Inform SOAR Users
+  Use this section to optionally provide additional information so that SOAR playbook 
   designer can get the maximum benefit of your app.
 -->

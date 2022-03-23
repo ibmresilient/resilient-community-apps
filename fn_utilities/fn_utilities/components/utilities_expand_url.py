@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2018, 2022. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 
 """Function implementation"""
@@ -30,7 +30,7 @@ SOCKET_TIMEOUT = 10 # number of seconds to wait for request to complete - this i
 SECTION_HDR = "fn_utilities"
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'utilities_expand_url.
+    """Component that implements SOAR function 'utilities_expand_url.
         Given any URL, it will continue to follow it through redirects to it's destinations. This is intended for shortened URLs but
         will work on any URL.
     """

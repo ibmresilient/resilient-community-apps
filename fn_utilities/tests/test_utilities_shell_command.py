@@ -37,7 +37,7 @@ missing_brackets=missing_brackets
 good_remote=[good_remote.ps1]
 """
 
-# Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
+# Provide a simulation of the SOAR REST API (uncomment to connect to a real appliance)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
 
 

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2018, 2022. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 
 """Function implementation"""
@@ -12,7 +12,7 @@ from resilient_circuits import ResilientComponent, function, StatusMessage, Func
 from resilient_lib import get_file_attachment, get_file_attachment_metadata
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'attachment_hash"""
+    """Component that implements SOAR function 'attachment_hash"""
 
     @function("utilities_attachment_hash")
     def _attachment_hash_function(self, event, *args, **kwargs):

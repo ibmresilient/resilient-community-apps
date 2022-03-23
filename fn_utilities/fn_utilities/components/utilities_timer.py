@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 import time
@@ -13,7 +14,7 @@ SECONDS_IN_HOUR = 3600
 SECONDS_IN_DAY = 86400
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'utilities_timer"""
+    """Component that implements SOAR function 'utilities_timer"""
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""

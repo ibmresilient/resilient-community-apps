@@ -17,7 +17,7 @@ LOG = logging.getLogger(__name__)
 # Read the default configuration-data section from the package
 config_data = get_config_data(PACKAGE_NAME)
 
-# Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
+# Provide a simulation of the SOAR REST API (uncomment to connect to a real appliance)
 resilient_mock = ArtifactMock
 
 
