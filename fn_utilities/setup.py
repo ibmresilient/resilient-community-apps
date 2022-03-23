@@ -27,7 +27,6 @@ setup(
     license='MIT',
     author='IBM SOAR',
     url="http://ibm.biz/soarcommunity",
-    url="http://ibm.biz/soarcommunity",
     description="Useful workflow functions for common automation and integration activities in the SOAR platform.",
     long_description="""SOAR functions simplify development of integrations by wrapping each external activity
     into an individual workflow component. These components can be easily installed, then used and combined in SOAR
