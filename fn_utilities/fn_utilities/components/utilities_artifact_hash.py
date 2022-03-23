@@ -10,6 +10,8 @@ from hashlib import algorithms_guaranteed, new
 from resilient_lib import get_file_attachment, get_file_attachment_metadata, validate_fields
 from resilient_circuits import ResilientComponent, function, StatusMessage, FunctionResult, FunctionError
 
+LOG = getLogger(__name__)
+
 class FunctionComponent(ResilientComponent):
     """Component that implements SOAR function 'artifact_hash"""
 
@@ -17,7 +19,6 @@ class FunctionComponent(ResilientComponent):
     def _artifact_hash_function(self, event, *args, **kwargs):
         """Function: Calculate hashes for a file artifact."""
         try:
-            log = getLogger(__name__)
             # Validate required inputs
             validate_fields(["incident_id", "artifact_id"], kwargs)
 
@@ -25,8 +26,8 @@ class FunctionComponent(ResilientComponent):
             incident_id = kwargs.get("incident_id")  # number
             artifact_id = kwargs.get("artifact_id")  # number
 
-            log.info("incident_id: %s", incident_id)
-            log.info("artifact_id: %s", artifact_id)
+            LOG.info("incident_id: %s", incident_id)
+            LOG.info("artifact_id: %s", artifact_id)
 
             yield StatusMessage("Reading artifact...")
 
@@ -52,10 +53,10 @@ class FunctionComponent(ResilientComponent):
                 else:
                     results[algo] = impl.hexdigest()
 
-            log.info(u"{} sha1={}".format(metadata["name"], results["sha1"]))
+            LOG.info(u"%s sha1=%s", metadata["name"], results["sha1"])
 
             # Produce a FunctionResult with the return value
-            log.debug(dumps(results))
+            LOG.debug(dumps(results))
             yield FunctionResult(results)
         except Exception:
             yield FunctionError()
