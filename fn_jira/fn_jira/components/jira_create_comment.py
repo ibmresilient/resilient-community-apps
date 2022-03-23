@@ -55,12 +55,12 @@ class FunctionComponent(ResilientComponent):
                 if not helper.validate_task_id_for_jira_issue_id(self.rest_client(),
                         kwargs.get(helper.INCIDENT_ID_FUNCT_INPUT_NAME), kwargs.get(helper.TASK_ID_FUNCT_INPUT_NAME), fn_inputs):
                     # gracefully exit if task_id wasn't found in datatable -- i.e. task isn't liked to Jira yet
-                    log.debug("Skipped function '{0}' for task note because task was not synced to Jira.".format(FUNCT_NAME))
+                    log.debug("Skipped function %s for task note because task was not synced to Jira.", FUNCT_NAME)
 
                     yield FunctionResult({}, success=False)
                     return
                 else:
-                    log.info("Found Jira ID {0} for task {1} in datatable".format(fn_inputs[helper.JIRA_ISSUE_ID_FUNCT_INPUT_NAME], fn_inputs[helper.JIRA_ISSUE_LINK]))
+                    log.info("Found Jira ID %s for task %s in datatable", fn_inputs[helper.JIRA_ISSUE_ID_FUNCT_INPUT_NAME], fn_inputs[helper.JIRA_ISSUE_LINK])
 
             log.info("Validated function inputs: %s", fn_inputs)
 
