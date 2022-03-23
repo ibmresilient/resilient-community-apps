@@ -48,7 +48,7 @@ class FunctionComponent(ResilientComponent):
                 impl.update(data)
                 # shake algorithms require a 'length' parameter
                 if algo.startswith("shake_"):
-                    results[algo] = impl.hexdigest(length=int(algo.split('_')[-1]))
+                    results[algo] = impl.hexdigest(int(algo.split('_')[-1]))
                 else:
                     results[algo] = impl.hexdigest()
 
