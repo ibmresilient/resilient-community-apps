@@ -4,11 +4,17 @@
 
 """Create an issue in Jira from IBM SOAR"""
 
-import logging
 import json
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import validate_fields, ResultPayload, RequestsCommon
-from fn_jira.util.helper import CONFIG_DATA_SECTION, validate_app_configs, build_url_to_resilient, prepend_text, get_jira_client, to_markdown
+import logging
+
+from fn_jira.util.helper import (CONFIG_DATA_SECTION, DEFAULT_JIRA_DT_NAME,
+                                 build_url_to_resilient, get_jira_client,
+                                 prepend_text, to_markdown,
+                                 validate_app_configs)
+from resilient_circuits import (FunctionError, FunctionResult,
+                                ResilientComponent, StatusMessage, function,
+                                handler)
+from resilient_lib import RequestsCommon, ResultPayload, validate_fields
 
 PACKAGE_NAME = CONFIG_DATA_SECTION
 
@@ -66,7 +72,8 @@ class FunctionComponent(ResilientComponent):
                 "issue_url": jira_issue.permalink(),
                 "issue_url_internal": jira_issue.self,
                 "issue_key": jira_issue.key,
-                "issue": jira_issue.raw
+                "issue": jira_issue.raw,
+                "jira_dt_name": app_configs.get("jira_dt_name", DEFAULT_JIRA_DT_NAME)
             }
 
             yield StatusMessage(u"JIRA issue {0} created".format(jira_issue.key))

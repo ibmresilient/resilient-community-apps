@@ -147,8 +147,9 @@ if results.success:
   note = "Added Jira Issue: {0}".format(url)
   task.addNote(helper.createRichText(note))
   
-  # Add Row to jira_task_references Data Table
-  row = incident.addRow('jira_task_references')
+  # Add Row to Jira Data Table
+  # default is jira_task_references but can be changed by changing 'jira_dt_name' in app.config
+  row = incident.addRow(results_content.get("jira_dt_name")) 
   row['date'] = time_now
   row['task_id'] = task.id
   row['task'] = task.name

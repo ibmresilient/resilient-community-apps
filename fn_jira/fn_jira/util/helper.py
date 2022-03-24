@@ -14,7 +14,7 @@ CONFIG_DATA_SECTION = "fn_jira"
 SUPPORTED_AUTH_METHODS = ("AUTH", "BASIC")
 
 # Jira datatable constants
-JIRA_DT_NAME = "jira_task_references"
+DEFAULT_JIRA_DT_NAME = "jira_task_references" # can be overridden with app.config jira_dt_name value
 JIRA_DT_ISSUE_ID_COL_NAME = "jira_issue_id_col"
 JIRA_DT_ISSUE_LINK_COL_NAME = "jira_link"
 
@@ -174,7 +174,7 @@ def format_dict(dict_to_format):
 
     return str_to_rtn
 
-def validate_task_id_for_jira_issue_id(res_client, incident_id, task_id, fn_inputs):
+def validate_task_id_for_jira_issue_id(res_client, app_configs, incident_id, task_id, fn_inputs):
     """Validates the input for task_id and sets the value of the task's associated Jira ID
     by searching for the value in the Jira Datatable
     
@@ -193,7 +193,7 @@ def validate_task_id_for_jira_issue_id(res_client, incident_id, task_id, fn_inpu
 
     # using datatable in SOAR, grab the jira id and jira url from the correct row in the table
     # if the table row associated with this task id doesn't exist, returns (None, None)
-    jira_issue_id, jira_link = _get_jira_issue_id(res_client, incident_id, task_id)
+    jira_issue_id, jira_link = _get_jira_issue_id(res_client, app_configs.get("jira_dt_name", DEFAULT_JIRA_DT_NAME), incident_id, task_id)
 
     if not jira_issue_id:
         # task not yet synced to Jira
@@ -205,9 +205,9 @@ def validate_task_id_for_jira_issue_id(res_client, incident_id, task_id, fn_inpu
     fn_inputs[JIRA_ISSUE_LINK] = jira_link
     return True
 
-def _get_jira_issue_id(res_client, incident_id, task_id):
+def _get_jira_issue_id(res_client, dt_name, incident_id, task_id):
     """Returns the jira_issue_id and jira_url that relates to the task_id"""
-    row = _get_row(res_client, incident_id, "task_id", task_id)
+    row = _get_row(res_client, dt_name, incident_id, "task_id", task_id)
 
     if row is not None:
         cells = row["cells"]
@@ -215,14 +215,14 @@ def _get_jira_issue_id(res_client, incident_id, task_id):
     else:
         return None, None
 
-def _get_row(res_client, incident_id, cell_name, cell_value):
+def _get_row(res_client, dt_name, incident_id, cell_name, cell_value):
     """Returns the row with a matching value to cell_name and cell_value if found. Returns None if no matching row found"""
-    uri = "/incidents/{0}/table_data/{1}?handle_format=names".format(incident_id, JIRA_DT_NAME)
+    uri = "/incidents/{0}/table_data/{1}?handle_format=names".format(incident_id, dt_name)
     try:
         data = res_client.get(uri)
         rows = data["rows"]
     except Exception as err:
-        raise ValueError("Failed to get '{0}' Datatable. This is required to send task notes to Jira".format(JIRA_DT_NAME), err)
+        raise IntegrationError("Failed to get '{0}' Datatable. This is required to send task notes to Jira".format(dt_name), err)
 
     for row in rows:
         cells = row["cells"]

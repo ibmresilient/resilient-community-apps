@@ -52,7 +52,7 @@ class FunctionComponent(ResilientComponent):
 
                 # check if the task is synced to Jira already using datatable row with associated task_id
                 # if so, fn_inputs will be updated with the jira id and jira url
-                if not helper.validate_task_id_for_jira_issue_id(self.rest_client(),
+                if not helper.validate_task_id_for_jira_issue_id(self.rest_client(), app_configs,
                         kwargs.get(helper.INCIDENT_ID_FUNCT_INPUT_NAME), kwargs.get(helper.TASK_ID_FUNCT_INPUT_NAME), fn_inputs):
                     # gracefully exit if task_id wasn't found in datatable -- i.e. task isn't liked to Jira yet
                     log.debug("Skipped function %s for task note because task was not synced to Jira.", FUNCT_NAME)

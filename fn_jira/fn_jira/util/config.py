@@ -15,6 +15,9 @@ auth_method=AUTH
 user=<jira user>
 password=<jira user password>
 timeout=10
+# data Table name to hold data for tasks synced to Jira
+# default is 'jira_task_references' but if using a custom value change here:
+jira_dt_name=jira_task_references 
 # use verify_cert to disable untrusted certificate verification
 verify_cert=True
 #http_proxy=
