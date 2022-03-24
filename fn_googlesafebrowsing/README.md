@@ -43,6 +43,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 1.0.1 | 03/2022 | Documentation now accurately reflects supported Python version |
 | 1.0.0 | 02/2022 | Initial Release |
 
 ---
@@ -113,7 +114,7 @@ These guides are available on the IBM Documentation website at [ibm.biz/cp4s-doc
 The app does support a proxy server.
 
 ### Python Environment
-Both Python 2.7 and Python 3.6 are supported.
+Python 3.6 is supported.
 Additional package dependencies may exist for each of these packages:
 * resilient-circuits>=43.0.0
 
@@ -232,7 +233,7 @@ inputs.googlesafebrowsing_artifact_value = artifact.value
 # This link contains further information on the site status of the url that is being checked
 LINK_URL = "https://www.google.com/transparencyreport/safebrowsing/diagnostic/#url={}"
 if results.success:
-  if len(results.content) > 0:
+  if results.content:
     resp = results.content
     hit = []
     for match in resp.get("matches", []):
