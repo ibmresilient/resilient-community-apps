@@ -17,7 +17,7 @@
       ],
       "enabled": true,
       "export_key": "Example: (Artifact) Attachment to Base64",
-      "id": 14,
+      "id": 45,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: (Artifact) Attachment to Base64",
@@ -33,10 +33,40 @@
     },
     {
       "automations": [],
+      "conditions": [
+        {
+          "evaluation_id": null,
+          "field_name": "artifact.type",
+          "method": "in",
+          "type": null,
+          "value": [
+            "Log File",
+            "Other File"
+          ]
+        }
+      ],
+      "enabled": true,
+      "export_key": "Example: Artifact Hash",
+      "id": 68,
+      "logic_type": "all",
+      "message_destinations": [],
+      "name": "Example: Artifact Hash",
+      "object_type": "artifact",
+      "tags": [],
+      "timeout_seconds": 86400,
+      "type": 1,
+      "uuid": "00ea04ef-6a78-48b7-8f9b-e8aa3a984f1e",
+      "view_items": [],
+      "workflows": [
+        "example_artifact_hash"
+      ]
+    },
+    {
+      "automations": [],
       "conditions": [],
       "enabled": true,
       "export_key": "Example: Attachment Hash",
-      "id": 15,
+      "id": 46,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: Attachment Hash",
@@ -55,7 +85,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Example: Attachment to Base64",
-      "id": 16,
+      "id": 47,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: Attachment to Base64",
@@ -74,7 +104,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Example: Call REST API",
-      "id": 37,
+      "id": 48,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: Call REST API",
@@ -109,7 +139,7 @@
       ],
       "enabled": true,
       "export_key": "Example: Domain Distance",
-      "id": 18,
+      "id": 49,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: Domain Distance",
@@ -140,7 +170,7 @@
       ],
       "enabled": true,
       "export_key": "Example: Email Parsing (Artifact)",
-      "id": 19,
+      "id": 50,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: Email Parsing (Artifact)",
@@ -159,7 +189,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Example: Email Parsing (Attachment)",
-      "id": 20,
+      "id": 51,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: Email Parsing (Attachment)",
@@ -186,7 +216,7 @@
       ],
       "enabled": true,
       "export_key": "Example: Expand URL",
-      "id": 21,
+      "id": 52,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: Expand URL",
@@ -217,7 +247,7 @@
       ],
       "enabled": true,
       "export_key": "Example: Extract SSL Certificate",
-      "id": 22,
+      "id": 53,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: Extract SSL Certificate",
@@ -236,7 +266,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Example: Get Incident Contact Info",
-      "id": 23,
+      "id": 54,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: Get Incident Contact Info",
@@ -274,7 +304,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Example: JSON2HTML",
-      "id": 24,
+      "id": 55,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: JSON2HTML",
@@ -301,7 +331,7 @@
       ],
       "enabled": true,
       "export_key": "Example: Parse SSL Certificate",
-      "id": 25,
+      "id": 56,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: Parse SSL Certificate",
@@ -320,7 +350,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Example: PDFiD",
-      "id": 26,
+      "id": 57,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: PDFiD",
@@ -339,7 +369,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Example: Resilient Search",
-      "id": 27,
+      "id": 58,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: Resilient Search",
@@ -370,7 +400,7 @@
       ],
       "enabled": true,
       "export_key": "Example: Shell Command",
-      "id": 28,
+      "id": 59,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: Shell Command",
@@ -389,7 +419,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Example: String to Attachment",
-      "id": 29,
+      "id": 60,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: String to Attachment",
@@ -408,7 +438,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Example: Timer Epoch",
-      "id": 30,
+      "id": 61,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: Timer Epoch",
@@ -436,7 +466,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Example: Timers in Parallel",
-      "id": 31,
+      "id": 62,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: Timers in Parallel",
@@ -472,7 +502,7 @@
       ],
       "enabled": true,
       "export_key": "Example: Use Excel Data",
-      "id": 32,
+      "id": 63,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: Use Excel Data",
@@ -521,7 +551,7 @@
       ],
       "enabled": true,
       "export_key": "Example: XML Transformation",
-      "id": 33,
+      "id": 64,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: XML Transformation",
@@ -569,7 +599,7 @@
       ],
       "enabled": true,
       "export_key": "Example: Zip Extract",
-      "id": 34,
+      "id": 65,
       "logic_type": "any",
       "message_destinations": [],
       "name": "Example: Zip Extract",
@@ -634,7 +664,7 @@
       ],
       "enabled": true,
       "export_key": "Example: Zip List",
-      "id": 35,
+      "id": 66,
       "logic_type": "any",
       "message_destinations": [],
       "name": "Example: Zip List",
@@ -664,7 +694,7 @@
       "deprecated": false,
       "export_key": "__function/utilities_parse_email_attachments",
       "hide_notification": false,
-      "id": 260,
+      "id": 306,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -693,7 +723,7 @@
       "deprecated": false,
       "export_key": "__function/incident_id",
       "hide_notification": false,
-      "id": 261,
+      "id": 307,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -723,7 +753,7 @@
       "deprecated": false,
       "export_key": "__function/rest_headers",
       "hide_notification": false,
-      "id": 262,
+      "id": 308,
       "input_type": "textarea",
       "internal": false,
       "is_tracked": false,
@@ -752,7 +782,7 @@
       "deprecated": false,
       "export_key": "__function/shell_command",
       "hide_notification": false,
-      "id": 263,
+      "id": 309,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -782,7 +812,7 @@
       "deprecated": false,
       "export_key": "__function/domain_name",
       "hide_notification": false,
-      "id": 264,
+      "id": 310,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -811,7 +841,7 @@
       "deprecated": false,
       "export_key": "__function/https_url",
       "hide_notification": false,
-      "id": 265,
+      "id": 311,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -841,7 +871,7 @@
       "deprecated": false,
       "export_key": "__function/zipfile_password",
       "hide_notification": false,
-      "id": 266,
+      "id": 312,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -870,7 +900,7 @@
       "deprecated": false,
       "export_key": "__function/rest_verify",
       "hide_notification": false,
-      "id": 267,
+      "id": 313,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -900,7 +930,7 @@
       "deprecated": false,
       "export_key": "__function/resilient_url",
       "hide_notification": false,
-      "id": 268,
+      "id": 314,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -929,7 +959,7 @@
       "deprecated": false,
       "export_key": "__function/content_type",
       "hide_notification": false,
-      "id": 269,
+      "id": 315,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -958,7 +988,7 @@
       "deprecated": false,
       "export_key": "__function/excel_ranges",
       "hide_notification": false,
-      "id": 270,
+      "id": 316,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -987,7 +1017,7 @@
       "deprecated": false,
       "export_key": "__function/rest_url",
       "hide_notification": false,
-      "id": 271,
+      "id": 317,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1016,7 +1046,7 @@
       "deprecated": false,
       "export_key": "__function/xml_stylesheet",
       "hide_notification": false,
-      "id": 272,
+      "id": 318,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1046,7 +1076,7 @@
       "deprecated": false,
       "export_key": "__function/utilities_certificate",
       "hide_notification": false,
-      "id": 273,
+      "id": 319,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1075,7 +1105,7 @@
       "deprecated": false,
       "export_key": "__function/resilient_search_query",
       "hide_notification": false,
-      "id": 274,
+      "id": 320,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1104,7 +1134,7 @@
       "deprecated": false,
       "export_key": "__function/artifact_id",
       "hide_notification": false,
-      "id": 275,
+      "id": 321,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -1133,7 +1163,7 @@
       "deprecated": false,
       "export_key": "__function/resilient_search_template",
       "hide_notification": false,
-      "id": 276,
+      "id": 322,
       "input_type": "textarea",
       "internal": false,
       "is_tracked": false,
@@ -1147,8 +1177,8 @@
       "tags": [],
       "templates": [
         {
-          "id": 1,
-          "name": "Attachments",
+          "id": 4,
+          "name": "Artifacts",
           "template": {
             "content": "{\n  \"types\": [\"attachment\"],\n  \"filters\": {\n    \"incident\": [{\n        \"conditions\": [{\"field_name\": \"plan_status\", \"method\": \"in\", \"value\": [\"A\"]}]\n      }]\n  }\n}",
             "format": "text"
@@ -1156,8 +1186,8 @@
           "uuid": "c680551e-0d18-4176-a9c5-10381701c848"
         },
         {
-          "id": 2,
-          "name": "Artifacts",
+          "id": 5,
+          "name": "Attachments",
           "template": {
             "content": "{\n  \"types\": [\"artifact\"],\n  \"filters\": {\n    \"incident\": [{\n        \"conditions\": [{\"field_name\": \"plan_status\", \"method\": \"in\", \"value\": [\"A\"]}]\n      }]\n  }\n}",
             "format": "text"
@@ -1181,7 +1211,7 @@
       "deprecated": false,
       "export_key": "__function/base64content",
       "hide_notification": false,
-      "id": 277,
+      "id": 323,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1210,7 +1240,7 @@
       "deprecated": false,
       "export_key": "__function/shell_param2",
       "hide_notification": false,
-      "id": 278,
+      "id": 324,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1239,7 +1269,7 @@
       "deprecated": false,
       "export_key": "__function/shell_remote",
       "hide_notification": false,
-      "id": 279,
+      "id": 325,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -1269,7 +1299,7 @@
       "deprecated": false,
       "export_key": "__function/xml_source",
       "hide_notification": false,
-      "id": 280,
+      "id": 326,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1298,7 +1328,7 @@
       "deprecated": false,
       "export_key": "__function/task_id",
       "hide_notification": false,
-      "id": 281,
+      "id": 327,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -1327,7 +1357,7 @@
       "deprecated": false,
       "export_key": "__function/file_path",
       "hide_notification": false,
-      "id": 282,
+      "id": 328,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1356,7 +1386,7 @@
       "deprecated": false,
       "export_key": "__function/attachment_name",
       "hide_notification": false,
-      "id": 283,
+      "id": 329,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1386,7 +1416,7 @@
       "deprecated": false,
       "export_key": "__function/file_name",
       "hide_notification": false,
-      "id": 284,
+      "id": 330,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1415,7 +1445,7 @@
       "deprecated": false,
       "export_key": "__function/attachment_id",
       "hide_notification": false,
-      "id": 285,
+      "id": 331,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -1444,7 +1474,7 @@
       "deprecated": false,
       "export_key": "__function/artifact_file_type",
       "hide_notification": false,
-      "id": 286,
+      "id": 332,
       "input_type": "select",
       "internal": false,
       "is_tracked": false,
@@ -1469,7 +1499,7 @@
           "label": "Email Attachment",
           "properties": null,
           "uuid": "930b255d-468c-4f45-95db-12b7e690ca7d",
-          "value": 52
+          "value": 65
         },
         {
           "default": false,
@@ -1478,7 +1508,7 @@
           "label": "Malware Sample",
           "properties": null,
           "uuid": "ae1cf279-942b-4609-b2e1-806162e1b151",
-          "value": 53
+          "value": 66
         },
         {
           "default": false,
@@ -1487,7 +1517,7 @@
           "label": "Log File",
           "properties": null,
           "uuid": "c326aaeb-f779-4938-8133-7526f188c006",
-          "value": 54
+          "value": 67
         },
         {
           "default": false,
@@ -1496,7 +1526,7 @@
           "label": "X509 Certificate File",
           "properties": null,
           "uuid": "e029ee34-9dc5-471b-90a8-40de17776ea7",
-          "value": 55
+          "value": 68
         },
         {
           "default": false,
@@ -1505,7 +1535,7 @@
           "label": "RFC 822 Email Message File",
           "properties": null,
           "uuid": "6720a846-a4b1-46ec-b0c8-d8900f0a92a1",
-          "value": 56
+          "value": 69
         },
         {
           "default": false,
@@ -1514,7 +1544,7 @@
           "label": "Other File",
           "properties": null,
           "uuid": "ff9f511e-8b6f-441c-8c0c-dd092893575f",
-          "value": 57
+          "value": 70
         }
       ]
     },
@@ -1528,7 +1558,7 @@
       "deprecated": false,
       "export_key": "__function/json2html_data",
       "hide_notification": false,
-      "id": 287,
+      "id": 333,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1558,7 +1588,7 @@
       "deprecated": false,
       "export_key": "__function/domain_list",
       "hide_notification": false,
-      "id": 288,
+      "id": 334,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1587,7 +1617,7 @@
       "deprecated": false,
       "export_key": "__function/shell_param1",
       "hide_notification": false,
-      "id": 289,
+      "id": 335,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1616,7 +1646,7 @@
       "deprecated": false,
       "export_key": "__function/utilities_time",
       "hide_notification": false,
-      "id": 290,
+      "id": 336,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1645,7 +1675,7 @@
       "deprecated": false,
       "export_key": "__function/utilities_epoch",
       "hide_notification": false,
-      "id": 291,
+      "id": 337,
       "input_type": "datetimepicker",
       "internal": false,
       "is_tracked": false,
@@ -1674,7 +1704,7 @@
       "deprecated": false,
       "export_key": "__function/description",
       "hide_notification": false,
-      "id": 292,
+      "id": 338,
       "input_type": "textarea",
       "internal": false,
       "is_tracked": false,
@@ -1703,7 +1733,7 @@
       "deprecated": false,
       "export_key": "__function/rest_method",
       "hide_notification": false,
-      "id": 293,
+      "id": 339,
       "input_type": "select",
       "internal": false,
       "is_tracked": false,
@@ -1728,7 +1758,7 @@
           "label": "GET",
           "properties": null,
           "uuid": "660ae4ba-3a9d-45e5-9b08-10c5722ba780",
-          "value": 58
+          "value": 71
         },
         {
           "default": false,
@@ -1737,7 +1767,7 @@
           "label": "HEAD",
           "properties": null,
           "uuid": "5e2ff102-1222-47b4-8a71-83a90b4c8e81",
-          "value": 59
+          "value": 72
         },
         {
           "default": false,
@@ -1746,7 +1776,7 @@
           "label": "POST",
           "properties": null,
           "uuid": "1ddb515c-5ab5-4dc2-8ca0-c37b8a72eedd",
-          "value": 60
+          "value": 73
         },
         {
           "default": false,
@@ -1755,7 +1785,7 @@
           "label": "PUT",
           "properties": null,
           "uuid": "91968afb-e4d5-4a2e-8e37-ac6a26e1569f",
-          "value": 61
+          "value": 74
         },
         {
           "default": false,
@@ -1764,7 +1794,7 @@
           "label": "DELETE",
           "properties": null,
           "uuid": "8af9df69-0c74-4708-bc4f-ea9bcc8fa01c",
-          "value": 62
+          "value": 75
         },
         {
           "default": false,
@@ -1773,7 +1803,7 @@
           "label": "OPTIONS",
           "properties": null,
           "uuid": "67db4b2f-6da8-4f8a-a5df-e30817be8bf3",
-          "value": 63
+          "value": 76
         },
         {
           "default": false,
@@ -1782,7 +1812,7 @@
           "label": "PATCH",
           "properties": null,
           "uuid": "94486df3-4ab1-44df-8ad9-b160a095652d",
-          "value": 64
+          "value": 77
         }
       ]
     },
@@ -1796,7 +1826,7 @@
       "deprecated": false,
       "export_key": "__function/string_to_convert_to_attachment",
       "hide_notification": false,
-      "id": 294,
+      "id": 340,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1826,7 +1856,7 @@
       "deprecated": false,
       "export_key": "__function/shell_param3",
       "hide_notification": false,
-      "id": 295,
+      "id": 341,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1855,7 +1885,7 @@
       "deprecated": false,
       "export_key": "__function/json2html_keys",
       "hide_notification": false,
-      "id": 296,
+      "id": 342,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1884,7 +1914,7 @@
       "deprecated": false,
       "export_key": "__function/rest_cookies",
       "hide_notification": false,
-      "id": 297,
+      "id": 343,
       "input_type": "textarea",
       "internal": false,
       "is_tracked": false,
@@ -1898,7 +1928,7 @@
       "tags": [],
       "templates": [
         {
-          "id": 3,
+          "id": 6,
           "name": "rest_cookies_example",
           "template": {
             "content": "cookie1: one\ncookie2: two",
@@ -1923,7 +1953,7 @@
       "deprecated": false,
       "export_key": "__function/rest_body",
       "hide_notification": false,
-      "id": 298,
+      "id": 344,
       "input_type": "textarea",
       "internal": false,
       "is_tracked": false,
@@ -1952,7 +1982,7 @@
       "deprecated": false,
       "export_key": "__function/excel_defined_names",
       "hide_notification": false,
-      "id": 299,
+      "id": 345,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1981,7 +2011,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/utilities_timer_end_time",
       "hide_notification": false,
-      "id": 254,
+      "id": 300,
       "input_type": "datetimepicker",
       "internal": false,
       "is_tracked": false,
@@ -2011,7 +2041,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/zip_password",
       "hide_notification": false,
-      "id": 255,
+      "id": 301,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -2040,7 +2070,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/extract_file_path",
       "hide_notification": false,
-      "id": 256,
+      "id": 302,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -2070,7 +2100,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/excel_named_range",
       "hide_notification": false,
-      "id": 257,
+      "id": 303,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -2099,7 +2129,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/parallel_timers",
       "hide_notification": false,
-      "id": 258,
+      "id": 304,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -2129,7 +2159,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/excel_range",
       "hide_notification": false,
-      "id": 259,
+      "id": 305,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -2162,7 +2192,65 @@
   ],
   "functions": [
     {
-      "created_date": 1647872649609,
+      "created_date": 1647970845918,
+      "creator": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "description": {
+        "content": null,
+        "format": "text"
+      },
+      "destination_handle": "fn_utilities",
+      "display_name": "Utilities: Artifact Hash",
+      "export_key": "utilities_artifact_hash",
+      "id": 43,
+      "last_modified_by": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1647974277781,
+      "name": "utilities_artifact_hash",
+      "tags": [],
+      "uuid": "d229a61a-4adb-4bf7-b67c-25dd7be470d9",
+      "version": 3,
+      "view_items": [
+        {
+          "content": "811e99d7-d194-4ce8-86cc-aff5e01ab85c",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "da8b8ba4-28a3-4ad0-b35a-354b1bc59fd6",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        }
+      ],
+      "workflows": [
+        {
+          "actions": [],
+          "description": null,
+          "name": "Example: Artifact Hash",
+          "object_type": "artifact",
+          "programmatic_name": "example_artifact_hash",
+          "tags": [],
+          "uuid": null,
+          "workflow_id": 51
+        }
+      ]
+    },
+    {
+      "created_date": 1647959845272,
       "creator": {
         "display_name": "Admin User",
         "id": 1,
@@ -2176,14 +2264,14 @@
       "destination_handle": "fn_utilities",
       "display_name": "Utilities: Attachment Hash",
       "export_key": "utilities_attachment_hash",
-      "id": 1,
+      "id": 22,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1647872649660,
+      "last_modified_time": 1647959845307,
       "name": "utilities_attachment_hash",
       "tags": [],
       "uuid": "9e0f46f4-ae8c-4aa6-a296-3a0662a53386",
@@ -2223,12 +2311,12 @@
           "programmatic_name": "example_attachment_hash",
           "tags": [],
           "uuid": null,
-          "workflow_id": 4
+          "workflow_id": 31
         }
       ]
     },
     {
-      "created_date": 1647872649698,
+      "created_date": 1647959845336,
       "creator": {
         "display_name": "Admin User",
         "id": 1,
@@ -2242,14 +2330,14 @@
       "destination_handle": "fn_utilities",
       "display_name": "Utilities: Attachment to Base64",
       "export_key": "utilities_attachment_to_base64",
-      "id": 2,
+      "id": 23,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1647872649756,
+      "last_modified_time": 1647959845384,
       "name": "utilities_attachment_to_base64",
       "tags": [],
       "uuid": "3a4b66c4-0465-4960-8bbf-fa3ebdc58c5a",
@@ -2297,7 +2385,7 @@
           "programmatic_name": "example_artifact_attachment_to_base64",
           "tags": [],
           "uuid": null,
-          "workflow_id": 3
+          "workflow_id": 30
         },
         {
           "actions": [],
@@ -2307,7 +2395,7 @@
           "programmatic_name": "example_attachment_to_base64",
           "tags": [],
           "uuid": null,
-          "workflow_id": 12
+          "workflow_id": 39
         },
         {
           "actions": [],
@@ -2317,12 +2405,12 @@
           "programmatic_name": "example_pdfid",
           "tags": [],
           "uuid": null,
-          "workflow_id": 17
+          "workflow_id": 44
         }
       ]
     },
     {
-      "created_date": 1647872649794,
+      "created_date": 1647959845409,
       "creator": {
         "display_name": "Admin User",
         "id": 1,
@@ -2336,14 +2424,14 @@
       "destination_handle": "fn_utilities",
       "display_name": "Utilities: Attachment Zip Extract",
       "export_key": "utilities_attachment_zip_extract",
-      "id": 3,
+      "id": 24,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1647872649844,
+      "last_modified_time": 1647959845444,
       "name": "utilities_attachment_zip_extract",
       "tags": [],
       "uuid": "4d9fb1df-1eab-494b-8375-c4feb0525429",
@@ -2399,12 +2487,12 @@
           "programmatic_name": "example_zip_to_artifact",
           "tags": [],
           "uuid": null,
-          "workflow_id": 18
+          "workflow_id": 45
         }
       ]
     },
     {
-      "created_date": 1647872649874,
+      "created_date": 1647959845467,
       "creator": {
         "display_name": "Admin User",
         "id": 1,
@@ -2418,14 +2506,14 @@
       "destination_handle": "fn_utilities",
       "display_name": "Utilities: Attachment Zip List",
       "export_key": "utilities_attachment_zip_list",
-      "id": 4,
+      "id": 25,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1647872649920,
+      "last_modified_time": 1647959845505,
       "name": "utilities_attachment_zip_list",
       "tags": [],
       "uuid": "c28c15ac-ecd2-4cd8-ba85-8f8c2bb307d2",
@@ -2465,12 +2553,12 @@
           "programmatic_name": "example_zip_list",
           "tags": [],
           "uuid": null,
-          "workflow_id": 16
+          "workflow_id": 43
         }
       ]
     },
     {
-      "created_date": 1647872649950,
+      "created_date": 1647959845528,
       "creator": {
         "display_name": "Admin User",
         "id": 1,
@@ -2484,14 +2572,14 @@
       "destination_handle": "fn_utilities",
       "display_name": "Utilities: Base64 to Artifact",
       "export_key": "utilities_base64_to_artifact",
-      "id": 5,
+      "id": 26,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1647872649997,
+      "last_modified_time": 1647959845564,
       "name": "utilities_base64_to_artifact",
       "tags": [],
       "uuid": "e82fa06a-584c-4f8d-9429-448ddc3d8bc4",
@@ -2549,7 +2637,7 @@
       "workflows": []
     },
     {
-      "created_date": 1647872650026,
+      "created_date": 1647959845587,
       "creator": {
         "display_name": "Admin User",
         "id": 1,
@@ -2563,14 +2651,14 @@
       "destination_handle": "fn_utilities",
       "display_name": "Utilities: Base64 to Attachment",
       "export_key": "utilities_base64_to_attachment",
-      "id": 6,
+      "id": 27,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1647872650074,
+      "last_modified_time": 1647959845624,
       "name": "utilities_base64_to_attachment",
       "tags": [],
       "uuid": "11349159-153e-49b7-9a9b-e22676c03687",
@@ -2626,12 +2714,12 @@
           "programmatic_name": "example_zip_to_artifact",
           "tags": [],
           "uuid": null,
-          "workflow_id": 18
+          "workflow_id": 45
         }
       ]
     },
     {
-      "created_date": 1647872650105,
+      "created_date": 1647959845648,
       "creator": {
         "display_name": "Admin User",
         "id": 1,
@@ -2645,14 +2733,14 @@
       "destination_handle": "fn_utilities",
       "display_name": "Utilities: Call REST API",
       "export_key": "utilities_call_rest_api",
-      "id": 7,
+      "id": 28,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1647872650158,
+      "last_modified_time": 1647959845683,
       "name": "utilities_call_rest_api",
       "tags": [],
       "uuid": "47ca08b2-bc06-4ad0-a5ed-d8df6d33045b",
@@ -2716,12 +2804,12 @@
           "programmatic_name": "example_call_rest_api",
           "tags": [],
           "uuid": null,
-          "workflow_id": 9
+          "workflow_id": 36
         }
       ]
     },
     {
-      "created_date": 1647872650191,
+      "created_date": 1647959845707,
       "creator": {
         "display_name": "Admin User",
         "id": 1,
@@ -2735,14 +2823,14 @@
       "destination_handle": "fn_utilities",
       "display_name": "Utilities: Domain Distance",
       "export_key": "utilities_domain_distance",
-      "id": 8,
+      "id": 29,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1647872650238,
+      "last_modified_time": 1647959845743,
       "name": "utilities_domain_distance",
       "tags": [],
       "uuid": "6fd01564-96de-4482-bceb-cf396df6c758",
@@ -2774,12 +2862,12 @@
           "programmatic_name": "example_domain_distance",
           "tags": [],
           "uuid": null,
-          "workflow_id": 13
+          "workflow_id": 40
         }
       ]
     },
     {
-      "created_date": 1647872650269,
+      "created_date": 1647959845768,
       "creator": {
         "display_name": "Admin User",
         "id": 1,
@@ -2793,14 +2881,14 @@
       "destination_handle": "fn_utilities",
       "display_name": "Utilities: Email Parse",
       "export_key": "utilities_email_parse",
-      "id": 9,
+      "id": 30,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1647872650315,
+      "last_modified_time": 1647959845802,
       "name": "utilities_email_parse",
       "tags": [],
       "uuid": "d83f571e-8904-4123-9c2c-3f404b00cc5e",
@@ -2864,7 +2952,7 @@
           "programmatic_name": "example_email_parsing_artifact",
           "tags": [],
           "uuid": null,
-          "workflow_id": 8
+          "workflow_id": 35
         },
         {
           "actions": [],
@@ -2874,12 +2962,12 @@
           "programmatic_name": "example_email_parsing_attachment",
           "tags": [],
           "uuid": null,
-          "workflow_id": 1
+          "workflow_id": 28
         }
       ]
     },
     {
-      "created_date": 1647872650346,
+      "created_date": 1647959845823,
       "creator": {
         "display_name": "Admin User",
         "id": 1,
@@ -2893,14 +2981,14 @@
       "destination_handle": "fn_utilities",
       "display_name": "Utilities: Excel Query",
       "export_key": "utilities_excel_query",
-      "id": 10,
+      "id": 31,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1647872650391,
+      "last_modified_time": 1647959845856,
       "name": "utilities_excel_query",
       "tags": [],
       "uuid": "118bd2c6-f367-4342-93b8-50257121ccf2",
@@ -2956,12 +3044,12 @@
           "programmatic_name": "example_create_artifacts_from_excel_data",
           "tags": [],
           "uuid": null,
-          "workflow_id": 6
+          "workflow_id": 33
         }
       ]
     },
     {
-      "created_date": 1647872650421,
+      "created_date": 1647959845878,
       "creator": {
         "display_name": "Admin User",
         "id": 1,
@@ -2975,14 +3063,14 @@
       "destination_handle": "fn_utilities",
       "display_name": "Utilities: Expand URL",
       "export_key": "utilities_expand_url",
-      "id": 11,
+      "id": 32,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1647872650466,
+      "last_modified_time": 1647959845912,
       "name": "utilities_expand_url",
       "tags": [],
       "uuid": "173d3d51-3263-4f26-b927-ecd1e2bf6344",
@@ -3006,12 +3094,12 @@
           "programmatic_name": "utilities_expand_url",
           "tags": [],
           "uuid": null,
-          "workflow_id": 5
+          "workflow_id": 32
         }
       ]
     },
     {
-      "created_date": 1647872650495,
+      "created_date": 1647959845933,
       "creator": {
         "display_name": "Admin User",
         "id": 1,
@@ -3025,14 +3113,14 @@
       "destination_handle": "fn_utilities",
       "display_name": "Utilities: Extract SSL Cert From Url",
       "export_key": "utilities_extract_ssl_cert_from_url",
-      "id": 12,
+      "id": 33,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1647872650540,
+      "last_modified_time": 1647959845967,
       "name": "utilities_extract_ssl_cert_from_url",
       "tags": [],
       "uuid": "69123885-b3b9-4df9-a241-aaa29ba9d7d6",
@@ -3056,12 +3144,12 @@
           "programmatic_name": "example_extract_ssl_cert_from_url",
           "tags": [],
           "uuid": null,
-          "workflow_id": 21
+          "workflow_id": 48
         }
       ]
     },
     {
-      "created_date": 1647872650574,
+      "created_date": 1647959845993,
       "creator": {
         "display_name": "Admin User",
         "id": 1,
@@ -3075,14 +3163,14 @@
       "destination_handle": "fn_utilities",
       "display_name": "Utilities: Get Contact Info",
       "export_key": "utilities_get_contact_info",
-      "id": 13,
+      "id": 34,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1647872650627,
+      "last_modified_time": 1647959846028,
       "name": "utilities_get_contact_info",
       "tags": [],
       "uuid": "011e399a-4508-4684-986a-e49a8be0b20b",
@@ -3114,22 +3202,12 @@
           "programmatic_name": "example_get_incident_contact_info",
           "tags": [],
           "uuid": null,
-          "workflow_id": 20
-        },
-        {
-          "actions": [],
-          "description": null,
-          "name": "Example: Get Task Contact Info",
-          "object_type": "task",
-          "programmatic_name": "example_get_task_contact_info",
-          "tags": [],
-          "uuid": null,
-          "workflow_id": 24
+          "workflow_id": 47
         }
       ]
     },
     {
-      "created_date": 1647872650656,
+      "created_date": 1647959846049,
       "creator": {
         "display_name": "Admin User",
         "id": 1,
@@ -3143,14 +3221,14 @@
       "destination_handle": "fn_utilities",
       "display_name": "Utilities: JSON2HTML",
       "export_key": "utilities_json2html",
-      "id": 14,
+      "id": 35,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1647872650709,
+      "last_modified_time": 1647959846085,
       "name": "utilities_json2html",
       "tags": [],
       "uuid": "7460c6a9-8c2a-42fb-a871-bef9b37c9e9a",
@@ -3182,12 +3260,12 @@
           "programmatic_name": "example_json2html",
           "tags": [],
           "uuid": null,
-          "workflow_id": 10
+          "workflow_id": 37
         }
       ]
     },
     {
-      "created_date": 1647872650739,
+      "created_date": 1647959846107,
       "creator": {
         "display_name": "Admin User",
         "id": 1,
@@ -3201,14 +3279,14 @@
       "destination_handle": "fn_utilities",
       "display_name": "Utilities: Parse SSL Certificate",
       "export_key": "utilities_parse_ssl_certificate",
-      "id": 15,
+      "id": 36,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1647872650815,
+      "last_modified_time": 1647959846147,
       "name": "utilities_parse_ssl_certificate",
       "tags": [],
       "uuid": "029f623a-ae74-406e-91a5-366a7005d1b0",
@@ -3248,12 +3326,12 @@
           "programmatic_name": "example_parse_ssl_certificate",
           "tags": [],
           "uuid": null,
-          "workflow_id": 14
+          "workflow_id": 41
         }
       ]
     },
     {
-      "created_date": 1647872650849,
+      "created_date": 1647959846167,
       "creator": {
         "display_name": "Admin User",
         "id": 1,
@@ -3267,7 +3345,7 @@
       "destination_handle": "fn_utilities",
       "display_name": "Utilities: PDFiD",
       "export_key": "utilities_pdfid",
-      "id": 16,
+      "id": 37,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
@@ -3298,12 +3376,12 @@
           "programmatic_name": "example_pdfid",
           "tags": [],
           "uuid": null,
-          "workflow_id": 17
+          "workflow_id": 44
         }
       ]
     },
     {
-      "created_date": 1647872650924,
+      "created_date": 1647959846220,
       "creator": {
         "display_name": "Admin User",
         "id": 1,
@@ -3317,14 +3395,14 @@
       "destination_handle": "fn_utilities",
       "display_name": "Utilities: Resilient Search",
       "export_key": "utilities_resilient_search",
-      "id": 17,
+      "id": 38,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1647872650962,
+      "last_modified_time": 1647959846256,
       "name": "utilities_resilient_search",
       "tags": [],
       "uuid": "213720b5-fc4b-4134-8d40-09c157608600",
@@ -3356,12 +3434,12 @@
           "programmatic_name": "example_resilient_search",
           "tags": [],
           "uuid": null,
-          "workflow_id": 7
+          "workflow_id": 34
         }
       ]
     },
     {
-      "created_date": 1647872650986,
+      "created_date": 1647959846280,
       "creator": {
         "display_name": "Admin User",
         "id": 1,
@@ -3375,14 +3453,14 @@
       "destination_handle": "fn_utilities",
       "display_name": "Utilities: Shell Command",
       "export_key": "utilities_shell_command",
-      "id": 18,
+      "id": 39,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1647872651023,
+      "last_modified_time": 1647959846315,
       "name": "utilities_shell_command",
       "tags": [],
       "uuid": "0ecc7cb7-f448-4e9d-a38e-100ddbe7fd18",
@@ -3438,12 +3516,12 @@
           "programmatic_name": "example_shell_command",
           "tags": [],
           "uuid": null,
-          "workflow_id": 22
+          "workflow_id": 49
         }
       ]
     },
     {
-      "created_date": 1647872651046,
+      "created_date": 1647959846340,
       "creator": {
         "display_name": "Admin User",
         "id": 1,
@@ -3457,14 +3535,14 @@
       "destination_handle": "fn_utilities",
       "display_name": "Utilities: String to Attachment",
       "export_key": "utilities_string_to_attachment",
-      "id": 19,
+      "id": 40,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1647872651090,
+      "last_modified_time": 1647959846381,
       "name": "utilities_string_to_attachment",
       "tags": [],
       "uuid": "cd8a23ce-63ba-42cf-8eba-8b63d5e7c872",
@@ -3512,12 +3590,12 @@
           "programmatic_name": "example_string_to_attachment",
           "tags": [],
           "uuid": null,
-          "workflow_id": 11
+          "workflow_id": 38
         }
       ]
     },
     {
-      "created_date": 1647872651117,
+      "created_date": 1647959846408,
       "creator": {
         "display_name": "Admin User",
         "id": 1,
@@ -3531,14 +3609,14 @@
       "destination_handle": "fn_utilities",
       "display_name": "Utilities: Timer",
       "export_key": "utilities_timer",
-      "id": 20,
+      "id": 41,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1647872651173,
+      "last_modified_time": 1647959846443,
       "name": "utilities_timer",
       "tags": [],
       "uuid": "0aa9d601-0a7f-4741-999e-27d3bf6de4a8",
@@ -3570,7 +3648,7 @@
           "programmatic_name": "example_timer",
           "tags": [],
           "uuid": null,
-          "workflow_id": 2
+          "workflow_id": 29
         },
         {
           "actions": [],
@@ -3580,12 +3658,12 @@
           "programmatic_name": "example_timer_parallel",
           "tags": [],
           "uuid": null,
-          "workflow_id": 15
+          "workflow_id": 42
         }
       ]
     },
     {
-      "created_date": 1647872651202,
+      "created_date": 1647959846465,
       "creator": {
         "display_name": "Admin User",
         "id": 1,
@@ -3599,14 +3677,14 @@
       "destination_handle": "fn_utilities",
       "display_name": "Utilities: XML Transformation",
       "export_key": "utilities_xml_transformation",
-      "id": 21,
+      "id": 42,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1647872651245,
+      "last_modified_time": 1647959846499,
       "name": "utilities_xml_transformation",
       "tags": [],
       "uuid": "b97af810-b808-46d2-90ea-bc5cef1e2fab",
@@ -3638,7 +3716,7 @@
           "programmatic_name": "example_xml_transformation",
           "tags": [],
           "uuid": null,
-          "workflow_id": 19
+          "workflow_id": 46
         }
       ]
     }
@@ -3690,15 +3768,15 @@
   "scripts": [
     {
       "actions": [],
-      "created_date": 1647872647787,
+      "created_date": 1647959843961,
       "creator_id": "admin@example.com",
       "description": "This script converts a json object into a hierarchical display of rich text and adds the rich text to an incident\u0027s rich text (custom) field or an incident note. A workflow property is used to share the json to convert and identify parameters used on how to perform the conversion.\nTypically, a function will create workflow property and this script will run after that function to perform the conversion.\n  Features:\n    * Display the hierarchical nature of json, presenting the json keys (sorted if specified) as bold labels\n    * Provide links to found URLs\n    * Create either an incident note or add results to an incident (custom) rich text field.",
       "enabled": false,
       "export_key": "Convert JSON to rich text v1.0",
-      "id": 2,
+      "id": 3,
       "language": "python",
       "last_modified_by": "admin@example.com",
-      "last_modified_time": 1647872647812,
+      "last_modified_time": 1647959843981,
       "name": "Convert JSON to rich text v1.0",
       "object_type": "incident",
       "playbook_handle": null,
@@ -3748,36 +3826,16 @@
       },
       "content_version": 1,
       "creator_id": "admin@example.com",
-      "description": "Example Workflow showing to parse an Email File (.eml or .msg) from an Artifact File. Sender and recipient email addresses are added as Artifacts. URLs and IPs found in the email headers or body are also added as Artifacts. The body of the email is added as a Note to the Incident. If attachments are found in the parsed email message, they are added as Email Attachment Artifacts.",
-      "export_key": "example_email_parsing_artifact",
+      "description": "This workflow takes in a HTTPS URL and attempts to acquire its Certificate, saving it as an artifact.\nThe workflow runs at the artifact level",
+      "export_key": "example_extract_ssl_cert_from_url",
       "last_modified_by": "admin@example.com",
-      "last_modified_time": 1647872653580,
-      "name": "Example: Email Parsing (Artifact)",
+      "last_modified_time": 1647959850279,
+      "name": "Example: Extract SSL Cert from URL",
       "object_type": "artifact",
-      "programmatic_name": "example_email_parsing_artifact",
+      "programmatic_name": "example_extract_ssl_cert_from_url",
       "tags": [],
-      "uuid": "3422a9e6-ab15-4637-a70d-f3c874088f83",
-      "workflow_id": 8
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 1,
-        "workflow_id": "example_zip_to_artifact",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_zip_to_artifact\" isExecutable=\"true\" name=\"Example: Zip Extract\"\u003e\u003cdocumentation\u003eAn example showing how to extract a file from a ZIP file attachment.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_06xspzk\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0eabem4\" name=\"Utilities: Attachment Zip Extract\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"4d9fb1df-1eab-494b-8375-c4feb0525429\"\u003e{\"inputs\":{},\"pre_processing_script\":\"# Required inputs are: the incident id and attachment id\\ninputs.incident_id = incident.id\\ninputs.attachment_id = attachment.id\\n\\n# If this is a \\\"task attachment\\\" then we will additionally have a task-id\\nif task is not None:\\n  inputs.task_id = task.id\\n\\n# The path within the zip that we want to extract\\ninputs.file_path = rule.properties.extract_file_path\\n\\n# If the zipfile is password protected, specify here\\n# inputs.zipfile_password = \\nif rule.properties.zip_password:\\n  inputs.zipfile_password = rule.properties.zip_password\",\"result_name\":\"extracted_file\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_06xspzk\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1xwwmdf\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_06xspzk\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0eabem4\"/\u003e\u003cserviceTask id=\"ServiceTask_1tdad17\" name=\"Utilities: Base64 to Attachment\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"11349159-153e-49b7-9a9b-e22676c03687\"\u003e{\"inputs\":{},\"pre_processing_script\":\"#\\ninputs.base64content = workflow.properties.extracted_file.content\\nfile_name = rule.properties.extract_file_path.split(\u0027/\u0027)[-1]\\n\\ninputs.incident_id = incident.id\\ninputs.file_name = file_name + \\\".b64\\\"\\ninputs.content_type = \\\"image/jpeg\\\"\\n\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1xwwmdf\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0jm5nn7\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1xwwmdf\" sourceRef=\"ServiceTask_0eabem4\" targetRef=\"ServiceTask_1tdad17\"/\u003e\u003cendEvent id=\"EndEvent_0c81k5c\"\u003e\u003cincoming\u003eSequenceFlow_0jm5nn7\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0jm5nn7\" sourceRef=\"ServiceTask_1tdad17\" targetRef=\"EndEvent_0c81k5c\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0w0xpq6\"\u003e\u003ctext\u003e\u003c![CDATA[In this example we assume that the file attachment is a Word, Excel or Powerpoint document (docx, xlsx, pptx).\u00a0 These are zipfiles, and may contain a thumbnail image (\"docProps/thumbnail.jpeg\").\n\n\nThe \"zip extract\" function produces base64-encoded contents of the extracted file.\u00a0 In the \"output\", we give that a name so it can be used downstream.]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1od1xot\" sourceRef=\"ServiceTask_0eabem4\" targetRef=\"TextAnnotation_0w0xpq6\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_177jonc\"\u003e\u003ctext\u003eFrom the output of the first function, create a new file attachment.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0hx0bem\" sourceRef=\"ServiceTask_1tdad17\" targetRef=\"TextAnnotation_177jonc\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0eabem4\" id=\"ServiceTask_0eabem4_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"308\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_06xspzk\" id=\"SequenceFlow_06xspzk_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"308\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"253\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1tdad17\" id=\"ServiceTask_1tdad17_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"546\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1xwwmdf\" id=\"SequenceFlow_1xwwmdf_di\"\u003e\u003comgdi:waypoint x=\"408\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"494\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"494\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"546\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"464\" y=\"199.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0c81k5c\" id=\"EndEvent_0c81k5c_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"730\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"748\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0jm5nn7\" id=\"SequenceFlow_0jm5nn7_di\"\u003e\u003comgdi:waypoint x=\"646\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"705\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"705\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"730\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"675\" y=\"199.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0w0xpq6\" id=\"TextAnnotation_0w0xpq6_di\"\u003e\u003comgdc:Bounds height=\"128\" width=\"376\" x=\"128\" y=\"-20\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1od1xot\" id=\"Association_1od1xot_di\"\u003e\u003comgdi:waypoint x=\"348\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"333\" xsi:type=\"omgdc:Point\" y=\"108\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_177jonc\" id=\"TextAnnotation_177jonc_di\"\u003e\u003comgdc:Bounds height=\"65\" width=\"147\" x=\"600\" y=\"42\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0hx0bem\" id=\"Association_0hx0bem_di\"\u003e\u003comgdi:waypoint x=\"620\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"654\" xsi:type=\"omgdc:Point\" y=\"107\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 1,
-      "creator_id": "admin@example.com",
-      "description": "An example showing how to extract a file from a ZIP file attachment.",
-      "export_key": "example_zip_to_artifact",
-      "last_modified_by": "admin@example.com",
-      "last_modified_time": 1647872655849,
-      "name": "Example: Zip Extract",
-      "object_type": "attachment",
-      "programmatic_name": "example_zip_to_artifact",
-      "tags": [],
-      "uuid": "d1f7b3b6-1aa9-484f-9648-11cb0d16e4ac",
-      "workflow_id": 18
+      "uuid": "663fd8b8-315f-41a5-a0d5-005758fabcc1",
+      "workflow_id": 48
     },
     {
       "actions": [],
@@ -3786,7 +3844,7 @@
         "workflow_id": "example_zip_list",
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_zip_list\" isExecutable=\"true\" name=\"Example: Zip List\"\u003e\u003cdocumentation\u003eAn example showing how to list the contents of a ZIP file attachment.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_19qjaxi\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1jqt9h0\" name=\"Utilities: Attachment Zip List\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"c28c15ac-ecd2-4cd8-ba85-8f8c2bb307d2\"\u003e{\"inputs\":{},\"post_processing_script\":\"# The output contains two lists:\\n# - \\\"namelist\\\", which is just a list of the filenames (paths) within the zip file,\\n# - \\\"infolist\\\", which has full information for each file, including its name, size, and so on.\\n\\n# For this example, let\u0027s create two notes\\n\\n# One with a list of the namelist\\nhtml = u\\\"\u0026lt;div\u0026gt;\u0026lt;p\u0026gt;Contents of {}:\u0026lt;/p\u0026gt;\\\".format(attachment.name)\\nfor filename in results.namelist:\\n  html = html + u\\\"{}\u0026lt;br\u0026gt;\\\".format(filename)\\nhtml = html + \\\"\u0026lt;/div\u0026gt;\\\"\\nincident.addNote(helper.createRichText(html))\\n\\n# Another with more detailed information\\nhtml = u\\\"\u0026lt;div\u0026gt;\u0026lt;p\u0026gt;Contents of {}:\u0026lt;/p\u0026gt;\\\".format(attachment.name)\\nfor fileinfo in results.infolist:\\n  html = html + u\\\"{} ({} bytes, {} compressed) {}\u0026lt;br\u0026gt;\\\".format(fileinfo.filename, fileinfo.file_size, fileinfo.compress_size, fileinfo.comment)\\nhtml = html + \\\"\u0026lt;/div\u0026gt;\\\"\\nincident.addNote(helper.createRichText(html))\\n\",\"pre_processing_script\":\"# Required inputs are: the incident id and attachment id\\ninputs.incident_id = incident.id\\ninputs.attachment_id = attachment.id\\n\\n# If this is a \\\"task attachment\\\" then we will additionally have a task-id\\nif task is not None:\\n  inputs.task_id = task.id\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_19qjaxi\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_16qgouz\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_19qjaxi\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1jqt9h0\"/\u003e\u003cendEvent id=\"EndEvent_1khrp1p\"\u003e\u003cincoming\u003eSequenceFlow_16qgouz\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_16qgouz\" sourceRef=\"ServiceTask_1jqt9h0\" targetRef=\"EndEvent_1khrp1p\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1o48uch\"\u003e\u003ctext\u003eFunction reads the attachment (by id) then produces a list of its contents, in a structured data format.\u00a0 The post-processing script writes these results into a note on the incident.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_01ubqgv\" sourceRef=\"ServiceTask_1jqt9h0\" targetRef=\"TextAnnotation_1o48uch\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1jqt9h0\" id=\"ServiceTask_1jqt9h0_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"311\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_19qjaxi\" id=\"SequenceFlow_19qjaxi_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"311\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"254.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1khrp1p\" id=\"EndEvent_1khrp1p_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"545\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"563\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_16qgouz\" id=\"SequenceFlow_16qgouz_di\"\u003e\u003comgdi:waypoint x=\"411\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"545\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"478\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1o48uch\" id=\"TextAnnotation_1o48uch_di\"\u003e\u003comgdc:Bounds height=\"103\" width=\"310\" x=\"391\" y=\"24\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_01ubqgv\" id=\"Association_01ubqgv_di\"\u003e\u003comgdi:waypoint x=\"408\" xsi:type=\"omgdc:Point\" y=\"173\"/\u003e\u003comgdi:waypoint x=\"473\" xsi:type=\"omgdc:Point\" y=\"127\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 1,
+      "content_version": 2,
       "creator_id": "admin@example.com",
       "description": "An example showing how to list the contents of a ZIP file attachment.",
       "export_key": "example_zip_list",
@@ -3902,22 +3960,22 @@
     {
       "actions": [],
       "content": {
-        "version": 1,
-        "workflow_id": "example_call_rest_api",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_call_rest_api\" isExecutable=\"true\" name=\"Example: Call REST API\"\u003e\u003cdocumentation\u003eThis is a general-purpose function to call any REST API or other HTTP service.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1f2kk5d\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_127hp8b\" name=\"Utilities: Call REST API\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"47ca08b2-bc06-4ad0-a5ed-d8df6d33045b\"\u003e{\"inputs\":{\"4c1c5d09-87f0-4fb5-a236-00690b66db92\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"94486df3-4ab1-44df-8ad9-b160a095652d\"}},\"9c32f347-a610-4f0f-8cf7-fad03be630ea\":{\"input_type\":\"static\",\"static_input\":{\"boolean_value\":true,\"multiselect_value\":[]}}},\"post_processing_script\":\"# Set the artifact description to the Response (in plain text) of the REST call\\n\\nif artifact.description:\\n  artifact.description = u\\\"{}\\\\n\\\\n{}\\\".format(artifact.description.content, results.text)\\nelse:\\n  artifact.description = results.text\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.rest_method = \\\"PATCH\\\"\\n\\n# Let\u0027s patch a URL that includes the artifact value\\ninputs.rest_url = u\\\"http://httpbin.org/patch\\\"\\n\\n# For PATCH requests, the body is text\\ninputs.rest_body = \u0027{\\\"key\\\": \\\"\u0027+artifact.value+\u0027\\\"}\u0027\\n\\n# HTTP headers can be specified as a multi-line string\\ninputs.rest_headers = \\\"\\\"\\\"\\nContent-Type: application/json\\nX-Frooble: Baz\\n\\\"\\\"\\\"\\n\\n# The \u0027rest_verify\u0027 parameter (Boolean) indicates whether to verify SSL certificates.\\n# This should be True unless you need to connect to a self-signed or other invalid cert.\\ninputs.rest_verify = True\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1f2kk5d\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_177aeon\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_1jrtwdz\"\u003e\u003cincoming\u003eSequenceFlow_177aeon\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_177aeon\" sourceRef=\"ServiceTask_127hp8b\" targetRef=\"EndEvent_1jrtwdz\"/\u003e\u003csequenceFlow id=\"SequenceFlow_1f2kk5d\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_127hp8b\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eCall from an artifact\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1o1jwta\"\u003e\u003ctext\u003e\u003c![CDATA[Results are appended to the artifact description.\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0uwb073\" sourceRef=\"ServiceTask_127hp8b\" targetRef=\"TextAnnotation_1o1jwta\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"161\" y=\"178\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"156\" y=\"213\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"84\" y=\"247\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"167\" xsi:type=\"omgdc:Point\" y=\"208\"/\u003e\u003comgdi:waypoint x=\"141\" xsi:type=\"omgdc:Point\" y=\"247\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_127hp8b\" id=\"ServiceTask_127hp8b_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"270\" y=\"156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1jrtwdz\" id=\"EndEvent_1jrtwdz_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"432\" y=\"178\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"405\" y=\"217\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_177aeon\" id=\"SequenceFlow_177aeon_di\"\u003e\u003comgdi:waypoint x=\"370\" xsi:type=\"omgdc:Point\" y=\"196\"/\u003e\u003comgdi:waypoint x=\"432\" xsi:type=\"omgdc:Point\" y=\"196\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"356\" y=\"174.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1f2kk5d\" id=\"SequenceFlow_1f2kk5d_di\"\u003e\u003comgdi:waypoint x=\"197\" xsi:type=\"omgdc:Point\" y=\"196\"/\u003e\u003comgdi:waypoint x=\"234\" xsi:type=\"omgdc:Point\" y=\"196\"/\u003e\u003comgdi:waypoint x=\"234\" xsi:type=\"omgdc:Point\" y=\"196\"/\u003e\u003comgdi:waypoint x=\"270\" xsi:type=\"omgdc:Point\" y=\"196\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"204\" y=\"189.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1o1jwta\" id=\"TextAnnotation_1o1jwta_di\"\u003e\u003comgdc:Bounds height=\"46\" width=\"212\" x=\"357\" y=\"79\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0uwb073\" id=\"Association_0uwb073_di\"\u003e\u003comgdi:waypoint x=\"369\" xsi:type=\"omgdc:Point\" y=\"165\"/\u003e\u003comgdi:waypoint x=\"428\" xsi:type=\"omgdc:Point\" y=\"125\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "version": 2,
+        "workflow_id": "example_artifact_attachment_to_base64",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_artifact_attachment_to_base64\" isExecutable=\"true\" name=\"Example: (Artifact) Attachment to Base64\"\u003e\u003cdocumentation\u003eAn example converting an Artifact of type File to a Base64 Encoded string\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1j5vc4b\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0rxzx0p\" name=\"Utilities: Attachment to Base64\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"3a4b66c4-0465-4960-8bbf-fa3ebdc58c5a\"\u003e{\"inputs\":{},\"post_processing_script\":\"if results.get(\\\"content\\\", None) is not None:\\n  \\n  file_name = unicode(results.get(\\\"filename\\\", \\\"\\\"))\\n  note_text = u\\\"File {0} converted to base64 format: {1}...\\\".format(file_name, results.get(\\\"content\\\", \\\"\\\")[1:20] )\\n\\n  incident.addNote(note_text)\",\"pre_processing_script\":\"# Required inputs are: incident_id artifact_id\\ninputs.incident_id = incident.id\\ninputs.artifact_id = artifact.id\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1j5vc4b\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_121ajs6\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1j5vc4b\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0rxzx0p\"/\u003e\u003cendEvent id=\"EndEvent_0478px6\"\u003e\u003cincoming\u003eSequenceFlow_121ajs6\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_121ajs6\" sourceRef=\"ServiceTask_0rxzx0p\" targetRef=\"EndEvent_0478px6\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0ifa9oc\"\u003e\u003ctext\u003eConvert a file attachment attachment to Base64 string and returns the encoded string.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1ou0yhu\" sourceRef=\"ServiceTask_0rxzx0p\" targetRef=\"TextAnnotation_0ifa9oc\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0rxzx0p\" id=\"ServiceTask_0rxzx0p_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"275\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1j5vc4b\" id=\"SequenceFlow_1j5vc4b_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"275\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"12\" width=\"90\" x=\"191.5\" y=\"185\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0478px6\" id=\"EndEvent_0478px6_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"440\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"12\" width=\"90\" x=\"413\" y=\"228\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_121ajs6\" id=\"SequenceFlow_121ajs6_di\"\u003e\u003comgdi:waypoint x=\"375\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"440\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"12\" width=\"90\" x=\"362.5\" y=\"185\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0ifa9oc\" id=\"TextAnnotation_0ifa9oc_di\"\u003e\u003comgdc:Bounds height=\"53\" width=\"209\" x=\"408\" y=\"60\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1ou0yhu\" id=\"Association_1ou0yhu_di\"\u003e\u003comgdi:waypoint x=\"374\" xsi:type=\"omgdc:Point\" y=\"175\"/\u003e\u003comgdi:waypoint x=\"472\" xsi:type=\"omgdc:Point\" y=\"113\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 1,
+      "content_version": 2,
       "creator_id": "admin@example.com",
-      "description": "This is a general-purpose function to call any REST API or other HTTP service.",
-      "export_key": "example_call_rest_api",
+      "description": "An example converting an Artifact of type File to a Base64 Encoded string",
+      "export_key": "example_artifact_attachment_to_base64",
       "last_modified_by": "admin@example.com",
-      "last_modified_time": 1647872653825,
-      "name": "Example: Call REST API",
+      "last_modified_time": 1647959847129,
+      "name": "Example: (Artifact) Attachment to Base64",
       "object_type": "artifact",
-      "programmatic_name": "example_call_rest_api",
+      "programmatic_name": "example_artifact_attachment_to_base64",
       "tags": [],
-      "uuid": "f6626e9b-1850-41a4-a36d-b59a83286941",
-      "workflow_id": 9
+      "uuid": "33d30954-a9ab-4067-80e7-52a69567da64",
+      "workflow_id": 30
     },
     {
       "actions": [],
@@ -4126,7 +4184,7 @@
         "workflow_id": "example_timer_parallel",
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_timer_parallel\" isExecutable=\"true\" name=\"Example: Timers in Parallel\"\u003e\u003cdocumentation\u003eThis example workflow shows how to use the Utilities Timer function to pause a workflow.  The Timer function is called twice in parallel.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0ys9gau\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0tzqwcu\" name=\"Utilities: Timer\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"0aa9d601-0a7f-4741-999e-27d3bf6de4a8\"\u003e{\"inputs\":{\"2e1b9634-f5bc-475e-926b-808493e286b7\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"30s\"}}},\"pre_processing_script\":\"# Get the timer values from the rule properties custom field\\nlist_time_values = rule.properties.parallel_timers\\n\\n# Get the list of 2 timer values\\ntime_list = list_time_values.split(\u0027,\u0027)\\n\\n# Use the first timer for this function\\ninputs.utilities_time = time_list[0]\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1mper68\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1c2sw10\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cparallelGateway id=\"ParallelGateway_0jhjvf7\"\u003e\u003cincoming\u003eSequenceFlow_0ys9gau\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1mper68\u003c/outgoing\u003e\u003coutgoing\u003eSequenceFlow_10m6syb\u003c/outgoing\u003e\u003c/parallelGateway\u003e\u003csequenceFlow id=\"SequenceFlow_0ys9gau\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ParallelGateway_0jhjvf7\"/\u003e\u003csequenceFlow id=\"SequenceFlow_1mper68\" sourceRef=\"ParallelGateway_0jhjvf7\" targetRef=\"ServiceTask_0tzqwcu\"/\u003e\u003cserviceTask id=\"ServiceTask_129kmr7\" name=\"Utilities: Timer\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"0aa9d601-0a7f-4741-999e-27d3bf6de4a8\"\u003e{\"inputs\":{\"2e1b9634-f5bc-475e-926b-808493e286b7\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"1m\"}}},\"pre_processing_script\":\"# Get the timer values from the rule properties custom field\\nlist_time_values = rule.properties.parallel_timers\\n\\n# Get the list of 2 timer values\\ntime_list = list_time_values.split(\u0027,\u0027)\\n\\n# Use the second timer for this function\\ninputs.utilities_time = time_list[1]\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_10m6syb\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1god5ve\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_10m6syb\" sourceRef=\"ParallelGateway_0jhjvf7\" targetRef=\"ServiceTask_129kmr7\"/\u003e\u003cendEvent id=\"EndEvent_1v4h851\"\u003e\u003cincoming\u003eSequenceFlow_0ubh5so\u003c/incoming\u003e\u003c/endEvent\u003e\u003cparallelGateway id=\"ParallelGateway_16jfah3\"\u003e\u003cincoming\u003eSequenceFlow_1c2sw10\u003c/incoming\u003e\u003cincoming\u003eSequenceFlow_1god5ve\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0ubh5so\u003c/outgoing\u003e\u003c/parallelGateway\u003e\u003csequenceFlow id=\"SequenceFlow_0ubh5so\" sourceRef=\"ParallelGateway_16jfah3\" targetRef=\"EndEvent_1v4h851\"/\u003e\u003csequenceFlow id=\"SequenceFlow_1c2sw10\" sourceRef=\"ServiceTask_0tzqwcu\" targetRef=\"ParallelGateway_16jfah3\"/\u003e\u003csequenceFlow id=\"SequenceFlow_1god5ve\" sourceRef=\"ServiceTask_129kmr7\" targetRef=\"ParallelGateway_16jfah3\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0tzqwcu\" id=\"ServiceTask_0tzqwcu_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"412\" y=\"74\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ParallelGateway_0jhjvf7\" id=\"ParallelGateway_0jhjvf7_di\"\u003e\u003comgdc:Bounds height=\"50\" width=\"50\" x=\"298\" y=\"181\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"323\" y=\"234\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0ys9gau\" id=\"SequenceFlow_0ys9gau_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"298\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"248\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1mper68\" id=\"SequenceFlow_1mper68_di\"\u003e\u003comgdi:waypoint x=\"323\" xsi:type=\"omgdc:Point\" y=\"181\"/\u003e\u003comgdi:waypoint x=\"323\" xsi:type=\"omgdc:Point\" y=\"114\"/\u003e\u003comgdi:waypoint x=\"412\" xsi:type=\"omgdc:Point\" y=\"114\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"338\" y=\"140.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_129kmr7\" id=\"ServiceTask_129kmr7_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"412\" y=\"265\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_10m6syb\" id=\"SequenceFlow_10m6syb_di\"\u003e\u003comgdi:waypoint x=\"323\" xsi:type=\"omgdc:Point\" y=\"231\"/\u003e\u003comgdi:waypoint x=\"323\" xsi:type=\"omgdc:Point\" y=\"305\"/\u003e\u003comgdi:waypoint x=\"412\" xsi:type=\"omgdc:Point\" y=\"305\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"338\" y=\"261\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1v4h851\" id=\"EndEvent_1v4h851_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"697\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"670\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ParallelGateway_16jfah3\" id=\"ParallelGateway_16jfah3_di\"\u003e\u003comgdc:Bounds height=\"50\" width=\"50\" x=\"564\" y=\"181\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"544\" y=\"234\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0ubh5so\" id=\"SequenceFlow_0ubh5so_di\"\u003e\u003comgdi:waypoint x=\"614\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"655\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"655\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"697\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"625\" y=\"199.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1c2sw10\" id=\"SequenceFlow_1c2sw10_di\"\u003e\u003comgdi:waypoint x=\"512\" xsi:type=\"omgdc:Point\" y=\"114\"/\u003e\u003comgdi:waypoint x=\"589\" xsi:type=\"omgdc:Point\" y=\"114\"/\u003e\u003comgdi:waypoint x=\"589\" xsi:type=\"omgdc:Point\" y=\"181\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"505.5\" y=\"92.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1god5ve\" id=\"SequenceFlow_1god5ve_di\"\u003e\u003comgdi:waypoint x=\"512\" xsi:type=\"omgdc:Point\" y=\"305\"/\u003e\u003comgdi:waypoint x=\"589\" xsi:type=\"omgdc:Point\" y=\"305\"/\u003e\u003comgdi:waypoint x=\"589\" xsi:type=\"omgdc:Point\" y=\"231\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"505.5\" y=\"283.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 1,
+      "content_version": 3,
       "creator_id": "admin@example.com",
       "description": "This example workflow shows how to use the Utilities Timer function to pause a workflow.  The Timer function is called twice in parallel.",
       "export_key": "example_timer_parallel",

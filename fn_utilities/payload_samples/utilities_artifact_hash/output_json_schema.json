@@ -1,0 +1,60 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "filename": {
+      "type": "string"
+    },
+    "content_type": {
+      "type": "string"
+    },
+    "size": {
+      "type": "integer"
+    },
+    "created": {
+      "type": "integer"
+    },
+    "sha3_512": {
+      "type": "string"
+    },
+    "shake_128": {
+      "type": "string"
+    },
+    "sha256": {
+      "type": "string"
+    },
+    "blake2b": {
+      "type": "string"
+    },
+    "sha3_224": {
+      "type": "string"
+    },
+    "blake2s": {
+      "type": "string"
+    },
+    "md5": {
+      "type": "string"
+    },
+    "sha1": {
+      "type": "string"
+    },
+    "sha224": {
+      "type": "string"
+    },
+    "sha512": {
+      "type": "string"
+    },
+    "shake_256": {
+      "type": "string"
+    },
+    "sha384": {
+      "type": "string"
+    },
+    "sha3_256": {
+      "type": "string"
+    },
+    "sha3_384": {
+      "type": "string"
+    }
+  }
+}

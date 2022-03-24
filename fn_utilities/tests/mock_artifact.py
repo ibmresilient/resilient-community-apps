@@ -53,6 +53,20 @@ class ArtifactMock(BasicResilientMock):
             "value": "ssl_certs/ssl_expired.cert",
             "type": "X509 Certificate File",
             "id": 7
+        },
+        "8": {
+            "description": None,
+            "value": "email_sample_1.eml",
+            "type": "RFC 822 Email Message File",
+            "id": 8,
+            "attachment": {
+                "type": "artifact",
+                "id": 16,
+                "name": "email_sample_1.eml",
+                "created": 1519264285530,
+                "content_type": "text/plain",
+                "size": 984,
+            }
         }
     }
 
