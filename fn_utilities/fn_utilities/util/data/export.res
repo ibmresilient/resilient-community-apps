@@ -33,6 +33,36 @@
     },
     {
       "automations": [],
+      "conditions": [
+        {
+          "evaluation_id": null,
+          "field_name": "artifact.type",
+          "method": "in",
+          "type": null,
+          "value": [
+            "Log File",
+            "Other File"
+          ]
+        }
+      ],
+      "enabled": true,
+      "export_key": "Example: Artifact Hash",
+      "id": 68,
+      "logic_type": "all",
+      "message_destinations": [],
+      "name": "Example: Artifact Hash",
+      "object_type": "artifact",
+      "tags": [],
+      "timeout_seconds": 86400,
+      "type": 1,
+      "uuid": "00ea04ef-6a78-48b7-8f9b-e8aa3a984f1e",
+      "view_items": [],
+      "workflows": [
+        "example_artifact_hash"
+      ]
+    },
+    {
+      "automations": [],
       "conditions": [],
       "enabled": true,
       "export_key": "Example: Attachment Hash",
@@ -3905,13 +3935,13 @@
       },
       "content_version": 5,
       "creator_id": "admin@example.com",
-      "description": "An example of searching Resilient.",
-      "export_key": "example_resilient_search",
+      "description": "An example showing how to extract a file from a ZIP file attachment.",
+      "export_key": "example_zip_to_artifact",
       "last_modified_by": "admin@example.com",
       "last_modified_time": 1648131113515,
       "name": "Example: Resilient Search",
       "object_type": "attachment",
-      "programmatic_name": "example_resilient_search",
+      "programmatic_name": "example_zip_to_artifact",
       "tags": [],
       "uuid": "5c9feedf-9687-4178-8fea-12d44299e95a",
       "workflow_id": 59
@@ -3925,13 +3955,13 @@
       },
       "content_version": 5,
       "creator_id": "admin@example.com",
-      "description": "This is a general-purpose function to call any REST API or other HTTP service.",
-      "export_key": "example_call_rest_api",
+      "description": "An example converting an Artifact of type File to a Base64 Encoded string",
+      "export_key": "example_artifact_attachment_to_base64",
       "last_modified_by": "admin@example.com",
       "last_modified_time": 1648131854176,
       "name": "Example: Call REST API",
       "object_type": "artifact",
-      "programmatic_name": "example_call_rest_api",
+      "programmatic_name": "example_artifact_attachment_to_base64",
       "tags": [],
       "uuid": "f6626e9b-1850-41a4-a36d-b59a83286941",
       "workflow_id": 61

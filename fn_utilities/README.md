@@ -33,7 +33,7 @@
 
 | Version | Date   | Notes |
 | ------- | ------ |:----- |
-| 2.1.0   | 3/2022 | <ul><li>Support for PATCH method</li><li>Add rule to get owner contact info for Tasks</li><li>Bug fix for utilities_pdfid</li><li>Add a timeout parameter to call_rest_api function</li></ul> |
+| 2.1.0   | 3/2022 | <ul><li>Support for PATCH method</li><li>Add rule to get owner contact info for Tasks</li><li>Bug fix for utilities_pdfid</li><li>Add new utilities_artifact_hash function</li><li>Add a timeout parameter to call_rest_api function</li></ul> |
 | 2.0.6   | 7/2021 | pin dependency 'chardet' at v4.0.0 |
 | 2.0.2   | 2/2021 | bug fixes for Shell Command |
 | 2.0.1   | 9/2020 | bug fixes |

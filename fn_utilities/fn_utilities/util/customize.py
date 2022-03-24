@@ -45,6 +45,7 @@ def customization_data(client=None):
     - Message Destinations:
         - fn_utilities
     - Functions:
+        - utilities_artifact_hash
         - utilities_attachment_hash
         - utilities_attachment_to_base64
         - utilities_attachment_zip_extract
@@ -68,6 +69,7 @@ def customization_data(client=None):
         - utilities_xml_transformation
     - Workflows:
         - example_artifact_attachment_to_base64
+        - example_artifact_hash
         - example_attachment_hash
         - example_attachment_to_base64
         - example_call_rest_api
@@ -92,6 +94,7 @@ def customization_data(client=None):
         - utilities_expand_url
     - Rules:
         - Example: (Artifact) Attachment to Base64
+        - Example: Artifact Hash
         - Example: Attachment Hash
         - Example: Attachment to Base64
         - Example: Call REST API
