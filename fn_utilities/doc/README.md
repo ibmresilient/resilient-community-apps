@@ -44,15 +44,14 @@
 
 ### Release History
 
-| Version | Date | Notes |
-| ------- | ---- | ----- |
-| 2.1.0 | 3/2022 | Multiple updates: Support for PATCH method, Add rule to get owner contact info for Tasks, Bug fix for utilities_pdfid, add new utilities_artifact_hash function |
-| 2.0.6 | 7/2021 | pin dependency 'chardet' at v4.0.0 |
-| 2.0.3 | 2/2021 | bug fix for email parser |
-| 2.0.2 | 2/2021 | bug fixes for Shell Command |
-| 2.0.1 | 9/2020 | bug fixes |
-| 2.0.0  | 7/2020 | Numerous fixes, improved Rules and workflows and only Python 3 supported |
-| 1.0.15 | 5/2020 | Bug fixes |
+| Version | Date   | Notes |
+| ------- | ------ |:----- |
+| 2.1.0   | 3/2022 | <ul><li>Support for PATCH method</li><li>Add rule to get owner contact info for Tasks</li><li>Bug fix for utilities_pdfid</li><li>Add new utilities_artifact_hash function</li></ul> |
+| 2.0.6   | 7/2021 | pin dependency 'chardet' at v4.0.0 |
+| 2.0.2   | 2/2021 | bug fixes for Shell Command |
+| 2.0.1   | 9/2020 | bug fixes |
+| 2.0.0   | 7/2020 | Numerous fixes, improved Rules and workflows and only Python 3 supported |
+| 1.0.15  | 5/2020 | Bug fixes, App Host Support |
 | 1.0.14  | 5/2020 | Shell Command support for Remote Linux Execution |
 
 ## App Host Setup
