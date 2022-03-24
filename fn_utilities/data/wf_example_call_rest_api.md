@@ -18,13 +18,13 @@
 
 ### Pre-Processing Script
 ```python
-inputs.rest_method = "POST"
+inputs.rest_method = "PATCH"
 
-# Let's post a URL that includes the artifact value
-inputs.rest_url = u"http://httpbin.org/post?value={}".format(artifact.value)
+# Let's patch a URL that includes the artifact value
+inputs.rest_url = u"http://httpbin.org/patch"
 
-# For POST requests, the body is text
-inputs.rest_body = '{"key": "value"}'
+# For PATCH requests, the body is text
+inputs.rest_body = '{"key": "'+artifact.value+'"}'
 
 # HTTP headers can be specified as a multi-line string
 inputs.rest_headers = """

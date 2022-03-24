@@ -27,7 +27,7 @@ class FunctionComponent(ResilientComponent):
            the URL, and optionally the headers and body."""
         try:
             # Get the function parameters:
-            rest_method = self.get_select_param(kwargs.get("rest_method"))  # select, values: "GET", "HEAD", "POST", "PUT", "DELETE", "OPTIONS"
+            rest_method = self.get_select_param(kwargs.get("rest_method"))  # select, values: "GET", "HEAD", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"
             rest_url = kwargs.get("rest_url")  # text
             rest_headers = self.get_textarea_param(kwargs.get("rest_headers"))  # textarea
             rest_cookies = self.get_textarea_param(kwargs.get("rest_cookies"))  # textarea
