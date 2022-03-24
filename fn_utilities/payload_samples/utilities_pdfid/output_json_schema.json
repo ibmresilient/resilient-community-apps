@@ -1,0 +1,75 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "header": {
+      "type": "string"
+    },
+    "isPdf": {
+      "type": "string"
+    },
+    "obj": {
+      "type": "integer"
+    },
+    "endobj": {
+      "type": "integer"
+    },
+    "stream": {
+      "type": "integer"
+    },
+    "endstream": {
+      "type": "integer"
+    },
+    "xref": {
+      "type": "integer"
+    },
+    "trailer": {
+      "type": "integer"
+    },
+    "startxref": {
+      "type": "integer"
+    },
+    "/Page": {
+      "type": "integer"
+    },
+    "/Encrypt": {
+      "type": "integer"
+    },
+    "/ObjStm": {
+      "type": "integer"
+    },
+    "/JS": {
+      "type": "integer"
+    },
+    "/JavaScript": {
+      "type": "integer"
+    },
+    "/AA": {
+      "type": "integer"
+    },
+    "/OpenAction": {
+      "type": "integer"
+    },
+    "/AcroForm": {
+      "type": "integer"
+    },
+    "/JBIG2Decode": {
+      "type": "integer"
+    },
+    "/RichMedia": {
+      "type": "integer"
+    },
+    "/Launch": {
+      "type": "integer"
+    },
+    "/EmbeddedFile": {
+      "type": "integer"
+    },
+    "/XFA": {
+      "type": "integer"
+    },
+    "/Colors > 2^24": {
+      "type": "integer"
+    }
+  }
+}
