@@ -28,8 +28,11 @@ RUN pip install --upgrade cryptography
 ## ---- section for changes ----
 # uncomment and replicate if additional os libraries are needed
 RUN yum -y update && yum clean all
-# dig and nsloookup
+# whois, traceroute, dig and nsloookup
 RUN yum install -y bind-utils net-tools
+RUN yum install -y http://mirror.centos.org/centos/8-stream/AppStream/x86_64/os/Packages/whois-nls-5.5.1-2.el8.noarch.rpm
+RUN yum install -y http://mirror.centos.org/centos/8-stream/AppStream/x86_64/os/Packages/whois-5.5.1-2.el8.x86_64.rpm
+RUN yum install -y http://mirror.centos.org/centos/8-stream/BaseOS/x86_64/os/Packages/traceroute-2.1.0-6.el8.x86_64.rpm
 # changes for mail parsing of Outlook emails
 RUN yum install -y perl cpan
 RUN cpan -fTi Email::Outlook::Message
