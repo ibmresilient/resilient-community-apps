@@ -402,6 +402,9 @@
               }
             }
           }
+        },
+        "jira_dt_name": {
+          "type": "string"
         }
       }
     },
