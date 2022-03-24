@@ -44,15 +44,14 @@
 
 ### Release History
 
-| Version | Date | Notes |
-| ------- | ---- | ----- |
-| 2.1.0 | 3/2022 | Multi updates: Support for PATCH method, Add rule to get owner contact info for Tasks, Bug fix for utilities_pdfid |
-| 2.0.6 | 7/2021 | pin dependency 'chardet' at v4.0.0 |
-| 2.0.3 | 2/2021 | bug fix for email parser |
-| 2.0.2 | 2/2021 | bug fixes for Shell Command |
-| 2.0.1 | 9/2020 | bug fixes |
-| 2.0.0  | 7/2020 | Numerous fixes, improved Rules and workflows and only Python 3 supported |
-| 1.0.15 | 5/2020 | Bug fixes |
+| Version | Date   | Notes |
+| ------- | ------ |:----- |
+| 2.1.0   | 3/2022 | <ul><li>Support for PATCH method</li><li>Add rule to get owner contact info for Tasks</li><li>Bug fix for utilities_pdfid</li></ul> |
+| 2.0.6   | 7/2021 | pin dependency 'chardet' at v4.0.0 |
+| 2.0.2   | 2/2021 | bug fixes for Shell Command |
+| 2.0.1   | 9/2020 | bug fixes |
+| 2.0.0   | 7/2020 | Numerous fixes, improved Rules and workflows and only Python 3 supported |
+| 1.0.15  | 5/2020 | Bug fixes, App Host Support |
 | 1.0.14  | 5/2020 | Shell Command support for Remote Linux Execution |
 
 ## App Host Setup
@@ -2186,6 +2185,7 @@ incident.addNote(content)
 | Example: Expand URL | artifact | `utilities_expand_url` |
 | Example: Extract SSL Certificate | artifact | `example_extract_ssl_cert_from_url` |
 | Example: Get Incident Contact Info | incident | `example_get_incident_contact_info` |
+| Example: Get Task Contact Info | task | `example_get_task_contact_info` |
 | Example: JSON2HTML | artifact | `example_json2html` |
 | Example: Parse SSL Certificate | artifact | `example_parse_ssl_certificate` |
 | Example: PDFiD | attachment | `example_pdfid` |
