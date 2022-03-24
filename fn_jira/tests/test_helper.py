@@ -53,19 +53,21 @@ def test_extract_images():
 
 def test_validate_task_id_for_jira_issue_id():
     mock_fn_inputs = {"jira_issue_id": "INT-9"}
+    mock_app_config = {"jira_dt_name": "jira_task_references"}
     with mock.patch("fn_jira.util.helper._get_jira_issue_id") as mock_dt_call:
         mock_dt_call.return_value = ("INT-10", "https://jira.test/INT-10")
 
-        valid = validate_task_id_for_jira_issue_id(None, "100", "101", mock_fn_inputs)
+        valid = validate_task_id_for_jira_issue_id(None, mock_app_config, "100", "101", mock_fn_inputs)
 
         assert valid
         assert mock_fn_inputs["jira_issue_id"] == "INT-10"
 
 def test_invalid_validate_task_id_for_jira_issue_id():
     mock_fn_inputs = {"jira_issue_id": "INT-9"}
+    mock_app_config = {"jira_dt_name": "jira_task_references"}
     with mock.patch("fn_jira.util.helper._get_jira_issue_id") as mock_dt_call:
         mock_dt_call.return_value = (None, None)
 
-        valid = validate_task_id_for_jira_issue_id(None, "100", "101", mock_fn_inputs)
+        valid = validate_task_id_for_jira_issue_id(None, mock_app_config, "100", "101", mock_fn_inputs)
 
         assert not valid
