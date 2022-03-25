@@ -1,0 +1,98 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "application_type": {
+          "type": "string"
+        },
+        "mfg_name": {
+          "type": "string"
+        },
+        "os_mfg": {
+          "type": "string"
+        },
+        "filename": {
+          "type": "string"
+        },
+        "md5": {
+          "type": "string"
+        },
+        "os_name": {
+          "type": "string"
+        },
+        "sha1": {
+          "type": "string"
+        },
+        "filesize": {
+          "type": "string"
+        },
+        "os_version": {
+          "type": "string"
+        },
+        "product_name": {
+          "type": "string"
+        },
+        "crc32": {
+          "type": "string"
+        },
+        "product_version": {
+          "type": "string"
+        },
+        "source_version": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string"
+        },
+        "language": {
+          "type": "string"
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "shadowserver_artifact_type": {
+          "type": "string"
+        },
+        "shadowserver_artifact_value": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "application_type": "Graphic/Drawing",
+    "mfg_name": "Corel Corporation",
+    "os_mfg": "Microsoft",
+    "filename": "00br2026.gif",
+    "md5": "0E53C14A3E48D94FF596A2824307B492",
+    "os_name": "Windows NT",
+    "sha1": "0000004DA6391F7F5D2F7FCCF36CEBDA60C6EA02",
+    "filesize": "2226",
+    "os_version": "Generic",
+    "product_name": "Gallery",
+    "crc32": "AA6A7B16",
+    "product_version": "750,000",
+    "source_version": "$version",
+    "source": "NIST",
+    "language": "English"
+  },
+  "raw": null,
+  "inputs": {
+    "shadowserver_artifact_type": "Malware MD5 Hash",
+    "shadowserver_artifact_value": "0E53C14A3E48D94FF596A2824307B492"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-shadowserver",
+    "package_version": "1.0.0",
+    "host": "My Host",
+    "execution_time_ms": 210,
+    "timestamp": "2022-03-23 16:37:34"
+  }
+}
