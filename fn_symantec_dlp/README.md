@@ -221,7 +221,6 @@ Get the information on the Symantec DLP incident by calling three DLP REST API i
 
 > **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
 
-<!-- ::CHANGE_ME:: -->
 ```python
 results = {
   "version": 2.0,
@@ -1051,13 +1050,17 @@ if 'workflow' in globals():
 | Symantec DLP Incident ID | `sdlp_incident_id` | `number` | `properties` | - | - |
 | Symantec DLP Incident Status | `sdlp_incident_status` | `text` | `properties` | - | - |
 | Symantec DLP Incident URL  | `sdlp_incident_url` | `textarea` | `properties` | - | - |
-
+| Symantec DLP Policy Group ID  | `sdlp_policy_group_id` | `number` | `properties` | - | - |
+| Symantec DLP Policy Group Name  | `sdlp_policy_group_name` | `textarea` | `properties` | - | - |
+| Symantec DLP Policy ID  | `sdlp_policy_id` | `number` | `properties` | - | - |
+| Symantec DLP Policy Name  | `sdlp_policy_name` | `textarea` | `properties` | - | - |
 ---
 
 
 ## Rules
 | Rule Name | Object | Workflow Triggered |
 | --------- | ------ | ------------------ |
+| Symantec DLP: Resolve Incident in DLP | incident | `sdlp_resolve_incident_in_dlp` |
 | Symantec DLP: Send SOAR Note to DLP | note | `sdlp_send_soar_note_to_dlp` |
 | Symantec DLP: Update DLP Incident Status | incident | `sdlp_update_incident_status` |
 | Symantec DLP: Upload Binaries | incident | `sdlp_upload_binaries` |

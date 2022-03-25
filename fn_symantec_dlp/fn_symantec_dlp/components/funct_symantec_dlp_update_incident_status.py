@@ -4,8 +4,11 @@
 
 """AppFunction implementation"""
 import logging
+from unittest.mock import patch
+from resilient import get_client
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import IntegrationError
+from fn_symantec_dlp.lib.resilient_common import ResilientCommon
 from fn_symantec_dlp.lib.dlp_common import SymantecDLPCommon
 
 PACKAGE_NAME = "fn_symantec_dlp"
@@ -30,6 +33,8 @@ class FunctionComponent(AppFunctionComponent):
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
 
+        rest_client = get_client(self.opts)
+        res_common = ResilientCommon(rest_client)
         sdlp_client = SymantecDLPCommon(self.rc, self.options)
 
         incident_id = fn_inputs.incident_id
@@ -54,7 +59,10 @@ class FunctionComponent(AppFunctionComponent):
         # is not truely set. Both incident status name and status id need to be set to change the incident status but 
         # no matter what you send it still comes back with 200.
         if sdlp_incident_id in status_response.get("updatedIncidentIds", []):
-            success = True
+            # If the status was updated in DLP, then update the status in the custom field in SOAR.
+            fields = {"properties": { "sdlp_incident_status": sdlp_incident_status}}
+            patch_result = res_common.update_incident(incident_id, fields)
+            success = patch_result.get("success")
 
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
 
