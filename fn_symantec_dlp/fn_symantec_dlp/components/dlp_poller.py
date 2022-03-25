@@ -150,6 +150,13 @@ class SymantecDLPPollerComponent(ResilientComponent):
                 status = self.sdlp_env.patch_sdlp_incident_custom_attribute(sdlp_incident_id,
                                                                             soar_case_id,
                                                                             soar_case_url)
+                # Send a note to DLP incident to have creation in the history
+                sdlp_note_text = u"""IBM SOAR case created: {0}""".format(soar_case_url)                
+                response = self.sdlp_env.send_note_to_sdlp(sdlp_incident_id, sdlp_note_text)
+
+                if sdlp_incident_id not in response.get("updatedIncidentIds"):
+                    LOG.error("Unable to send note to Symantec DLP incident %s", sdlp_incident_id)
+
                 LOG.info("IBM SOAR case created %s for DLP incident %s", soar_case_id, sdlp_incident_id)
             else: 
                 soar_case_id = soar_case.get("id")
