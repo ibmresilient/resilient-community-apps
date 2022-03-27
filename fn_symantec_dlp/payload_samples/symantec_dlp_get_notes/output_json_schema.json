@@ -10,22 +10,13 @@
     },
     "reason": {},
     "content": {
-      "type": "object",
-      "properties": {
-        "success": {
-          "type": "boolean"
-        },
-        "reason:": {}
-      }
+      "type": "object"
     },
     "raw": {},
     "inputs": {
       "type": "object",
       "properties": {
-        "sdlp_note_text": {
-          "type": "string"
-        },
-        "sdlp_incident_id": {
+        "incident_id": {
           "type": "integer"
         }
       }

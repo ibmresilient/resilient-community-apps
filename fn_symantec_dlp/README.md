@@ -1060,6 +1060,7 @@ if 'workflow' in globals():
 ## Rules
 | Rule Name | Object | Workflow Triggered |
 | --------- | ------ | ------------------ |
+| Symantec DLP: Get DLP Notes | incident| `sdlp_get_dlp_notes` |
 | Symantec DLP: Resolve Incident in DLP | incident | `sdlp_resolve_incident_in_dlp` |
 | Symantec DLP: Send SOAR Note to DLP | note | `sdlp_send_soar_note_to_dlp` |
 | Symantec DLP: Update DLP Incident Status | incident | `sdlp_update_incident_status` |

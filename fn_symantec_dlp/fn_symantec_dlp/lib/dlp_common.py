@@ -247,11 +247,11 @@ class SymantecDLPCommon():
         notes = []
         for history_item in history_list:
             if history_item.get('incidentHistoryAction') == 'ADD_COMMENT':
-                note = u"""<b>{comment_header}</b>
+                note = u"""<b>{comment_header} ({time})</b>
                         <br>
-                        <b>User: </b>{user} added note at {time}
+                        User: {user}
                         <br>
-                        <b>Note detail</b>: <p>{detail}</p>
+                        Note detail: <p>{detail}</p>
                         """.format(
                             comment_header=FROM_SYMANTEC_DLP_COMMENT_HDR,
                             user=history_item['dlpUserName'],

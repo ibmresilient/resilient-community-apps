@@ -176,7 +176,7 @@ class SymantecDLPPollerComponent(ResilientComponent):
                                                     incident_close_payload)
                     msg = "Closed SOAR incident {0} from Symantec DLP incident {1}".format(soar_case_id, sdlp_incident_id)
                     LOG.info(msg)
-                    self.res_common.create_incident_comment(soar_case_id, None, msg)                
+                    self.res_common.create_incident_comment(soar_case_id, msg)                
                 
                 else:
                     # Update the case in SOAR
@@ -195,7 +195,7 @@ class SymantecDLPPollerComponent(ResilientComponent):
                     LOG.info(new_comments)
 
                     for comment in new_comments:
-                        self.res_common.create_incident_comment(soar_case_id, comment['title'], comment['content'])
+                        self.res_common.create_incident_comment(soar_case_id, comment)
 
                     LOG.info("IBM SOAR case updated %s for DLP incident %s", soar_case_id, sdlp_incident_id)
 

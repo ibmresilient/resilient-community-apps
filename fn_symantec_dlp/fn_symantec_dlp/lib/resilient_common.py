@@ -159,7 +159,7 @@ class ResilientCommon():
         except Exception as err:
             raise IntegrationError(err)
 
-    def create_incident_comment(self, incident_id, sdlp_comment_id, note):
+    def create_incident_comment(self, incident_id, note_text):
         """
         Add a comment to the specified SOAR Incident by ID
         :param incident_id:  SOAR Incident ID
@@ -169,11 +169,10 @@ class ResilientCommon():
         """
         try:
             uri = u'/incidents/{0}/comments'.format(incident_id)
-            comment = "<b>{} ({}):</b><br>{}".format(FROM_SYMANTEC_DLP_COMMENT_HDR, sdlp_comment_id, note)
 
             note_json = {
                 'format': 'html',
-                'content': comment
+                'content': note_text
             }
             payload = {'text': note_json}
 
@@ -208,14 +207,29 @@ class ResilientCommon():
         soar_comment_list = [comment['text'] for comment in soar_comments]
 
         # filter comments with our SOAR header
-        new_comments = [comment for comment in sdlp_comments if not FROM_SOAR_COMMENT_HDR in comment['text']]
+        new_comments = [comment for comment in sdlp_comments if not FROM_SOAR_COMMENT_HDR in comment]
 
         # filter out the comments already sync'd
         if soar_comment_list:
-            new_comments = [comment for comment in new_comments \
-                if not any([comment['id'] in already_syncd for already_syncd in soar_comment_list])]
+            for comment in new_comments:
+                # Get the timestamp in the note and compare to see if it should be added in SOAR.
+                sdlp_timestamp = self.get_sdlp_timestamp_from_note(comment)
+                for soar_comment in soar_comment_list:
+                    soar_timestamp = self.get_sdlp_timestamp_from_note(soar_comment)
+                    if sdlp_timestamp and (sdlp_timestamp == soar_timestamp):
+                        # Match is found so remove from list of new comments to post.
+                        new_comments.remove(comment)
 
         return new_comments
+
+    def get_sdlp_timestamp_from_note(self, note_text):
+        note_header = "{0} (".format(FROM_SYMANTEC_DLP_COMMENT_HDR)
+        if note_header in note_text:
+            split_note = note_text.split(note_header)
+            timestamp = split_note[1].split(")")
+            return timestamp[0]
+        return None
+
 
     def _chk_status(self, resp, rc=200):
         """

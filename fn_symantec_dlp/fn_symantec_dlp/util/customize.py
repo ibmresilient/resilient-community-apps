@@ -21,9 +21,9 @@ def codegen_reload_data():
     return {
         "package": u"fn_symantec_dlp",
         "message_destinations": [u"fn_symantec_dlp"],
-        "functions": [u"symantec_dlp_get_incident_details", u"symantec_dlp_send_note_to_dlp_incident", u"symantec_dlp_update_incident_status", u"symantec_dlp_upload_binaries"],
-        "workflows": [u"sdlp_resolve_incident_in_dlp", u"sdlp_send_soar_note_to_dlp", u"sdlp_update_incident_status", u"sdlp_upload_binaries", u"sdlp_write_incident_details_to_note"],
-        "actions": [u"Symantec DLP: Resolve Incident in DLP", u"Symantec DLP: Send SOAR Note to DLP", u"Symantec DLP: Update DLP Incident Status", u"Symantec DLP: Upload Binaries", u"Symantec DLP: Upload Binaries as Artifact", u"Symantec DLP: Write DLP Incident Details to Note"],
+        "functions": [u"symantec_dlp_get_incident_details", u"symantec_dlp_get_notes", u"symantec_dlp_send_note_to_dlp_incident", u"symantec_dlp_update_incident_status", u"symantec_dlp_upload_binaries"],
+        "workflows": [u"sdlp_get_notes", u"sdlp_resolve_incident_in_dlp", u"sdlp_send_soar_note_to_dlp", u"sdlp_update_incident_status", u"sdlp_upload_binaries", u"sdlp_write_incident_details_to_note"],
+        "actions": [u"Symantec DLP: Get DLP Notes", u"Symantec DLP: Resolve Incident in DLP", u"Symantec DLP: Send SOAR Note to DLP", u"Symantec DLP: Update DLP Incident Status", u"Symantec DLP: Upload Binaries", u"Symantec DLP: Upload Binaries as Artifact", u"Symantec DLP: Write DLP Incident Details to Note"],
         "incident_fields": [u"sdlp_incident_id", u"sdlp_incident_status", u"sdlp_incident_url", u"sdlp_policy_group_id", u"sdlp_policy_group_name", u"sdlp_policy_id", u"sdlp_policy_name"],
         "incident_artifact_types": [],
         "incident_types": [],
@@ -46,16 +46,19 @@ def customization_data(client=None):
         - fn_symantec_dlp
     - Functions:
         - symantec_dlp_get_incident_details
+        - symantec_dlp_get_notes
         - symantec_dlp_send_note_to_dlp_incident
         - symantec_dlp_update_incident_status
         - symantec_dlp_upload_binaries
     - Workflows:
+        - sdlp_get_notes
         - sdlp_resolve_incident_in_dlp
         - sdlp_send_soar_note_to_dlp
         - sdlp_update_incident_status
         - sdlp_upload_binaries
         - sdlp_write_incident_details_to_note
     - Rules:
+        - Symantec DLP: Get DLP Notes
         - Symantec DLP: Resolve Incident in DLP
         - Symantec DLP: Send SOAR Note to DLP
         - Symantec DLP: Update DLP Incident Status
