@@ -177,7 +177,7 @@ class ArielSearch(SearchWaitCommand):
         """
         auth_info = AuthInfo.get_authInfo()
 
-        url = auth_info.api_url + qradar_constants.ARIEL_SEARCHES_RESULT.format(search_id)
+        url = auth_info.api_url + qradar_constants.ARIEL_SEARCHES_DELETE.format(search_id)
 
         headers = auth_info.headers.copy()
 
