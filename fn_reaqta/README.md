@@ -1766,6 +1766,7 @@ reaqta_trigger_events
 | ReaQta: Close Alert | incident | `reaqta_close_alert` |
 | ReaQta: Create Note | note | `reaqta_create_note` |
 | ReaQta: Get Alert Information | incident | `reaqta_get_alert_information` |
+| ReaQta: Refresh Alert Information |  incident | `reaqta_refresh_alert_information` |
 | ReaQta: Get Processes | incident | `reaqta_get_processes` |
 | ReaQta: Isolate Endpoint | incident | `reaqta_isolate_endpoint` |
 | ReaQta: Kill Process | reaqta_process_list | `reaqta_kill_process` |
