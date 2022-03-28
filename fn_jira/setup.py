@@ -35,8 +35,8 @@ Example rules and workflows can used used or modified to meet your business proc
     install_requires=[
         'resilient_circuits>=44.0.0',
         'jira~=2.0',
-        'pyjwt~=2.3',
-        'cryptography~=36.0'
+        'pyjwt~=2.3; python_version>="3.0"',
+        'pyjwt~=0.5; python_version<"3.0"'
     ],
     packages=find_packages(),
     include_package_data=True,
