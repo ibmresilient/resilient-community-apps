@@ -44,6 +44,7 @@ class FunctionComponent(ResilientComponent):
             qradar_search_param4 = kwargs.get("qradar_search_param4")  # text
             qradar_search_param5 = kwargs.get("qradar_search_param5")  # text
             qradar_search_param6 = kwargs.get("qradar_search_param6")  # text
+            qradar_search_time = kwargs.get("qradar_search_param7")  # text, time to search example: 36 Days
             qradar_label = kwargs.get("qradar_label") # QRadar server to connect to
             soar_table_name = kwargs.get("soar_table_name", None) # Name of data table
             soar_incident_id = kwargs.get("soar_incident_id") # ID of incident
@@ -55,6 +56,7 @@ class FunctionComponent(ResilientComponent):
             LOG.info("qradar_search_param4: %s", qradar_search_param4)
             LOG.info("qradar_search_param5: %s", qradar_search_param5)
             LOG.info("qradar_search_param6: %s", qradar_search_param6)
+            LOG.info("qradar_search_time: %s", qradar_search_time)
             LOG.info("qradar_label: %s", qradar_label)
 
             global_settings = self.opts.get(GLOBAL_SETTINGS, {})
@@ -90,7 +92,8 @@ class FunctionComponent(ResilientComponent):
                                                                   qradar_search_param3,
                                                                   " ",
                                                                   " ",
-                                                                  " "])
+                                                                  " ",
+                                                                  qradar_search_time])
 
             search_query_string = make_query_string(qradar_search_query,
                                                                    [qradar_search_param1,
@@ -98,7 +101,8 @@ class FunctionComponent(ResilientComponent):
                                                                     " ",
                                                                     qradar_search_param4 or " ",
                                                                     qradar_search_param5,
-                                                                    qradar_search_param6
+                                                                    qradar_search_param6,
+                                                                    qradar_search_time
                                                                     ])
 
             LOG.info("Running query: " + temp_query_string)

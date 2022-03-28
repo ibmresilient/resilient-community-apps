@@ -22,14 +22,15 @@ def codegen_reload_data():
         "package": u"fn_qradar_enhanced_data",
         "message_destinations": [u"fn_qradar_enhanced_data"],
         "functions": [u"qradar_offense_summary", u"qradar_top_events"],
-        "workflows": [u"example_of_searching_qradar_flows_using_offense_id", u"example_of_searching_qradar_top_events_using_offense_id", u"qradar_assets_information", u"qradar_categories", u"qradar_destination_ips", u"qradar_offense_last_persisted_time", u"qradar_offense_summary", u"qradar_source_ips", u"qradar_triggered_rules"],
-        "actions": [u"Create Artifact from Assets info", u"Create artifact from Destination IP info", u"Create Artifact from Events info", u"Create artifact from Source IP info", u"Create Artifacts from Flows Info ", u"QRadar Enhanced Data"],
+        "workflows": [u"example_of_searching_qradar_flows_using_offense_id", u"example_of_searching_qradar_top_events_using_offense_id", u"qradar_assets_information", u"qradar_categories", u"qradar_destination_ips", u"qradar_offense_summary", u"qradar_source_ips", u"qradar_triggered_rules"],
+        "actions": [u"Create Artifact from Assets info", u"Create artifact from Destination IP info", u"Create Artifact from Events info", u"Create artifact from Source IP info", u"Create Artifacts from Flows Info ", u"QRadar Enhanced Data", u"QRadar Enhanced Data Poller", u"QRadar Enhanced Data Update"],
         "incident_fields": [u"qr_assigned", u"qr_credibility", u"qr_destination_ip_count", u"qr_event_count", u"qr_flow_count", u"qr_last_persisted_time", u"qr_magnitude", u"qr_offense_index_type", u"qr_offense_index_value", u"qr_offense_source", u"qr_relevance", u"qr_severity", u"qr_source_ip_count", u"qradar_destination", u"qradar_id"],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [u"qr_assets", u"qr_categories", u"qr_flows", u"qr_offense_top_events", u"qr_top_destination_ips", u"qr_top_source_ips", u"qr_triggered_rules"],
         "automatic_tasks": [],
-        "scripts": [u"Create Artifact from Assets info", u"Create Artifact from Destination IP info", u"Create Artifact from Events info", u"Create Artifact from Flows info", u"Create Artifact from Source IP info"],
+        "scripts": [u"Create Artifact from Assets info", u"Create Artifact from Destination IP info", u"Create Artifact from Events info", u"Create Artifact from Flows info", u"Create Artifact from Source IP info", u"Set Last Persisted Time to Case Creation time"],
+        "playbooks": []
     }
 
 
@@ -38,7 +39,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM QRadar SOAR Platform Version: 42.0.7058
+    IBM SOAR Platform Version: 42.0.7058
 
     Contents:
     - Message Destinations:
@@ -52,7 +53,6 @@ def customization_data(client=None):
         - qradar_assets_information
         - qradar_categories
         - qradar_destination_ips
-        - qradar_offense_last_persisted_time
         - qradar_offense_summary
         - qradar_source_ips
         - qradar_triggered_rules
@@ -63,6 +63,8 @@ def customization_data(client=None):
         - Create artifact from Source IP info
         - Create Artifacts from Flows Info 
         - QRadar Enhanced Data
+        - QRadar Enhanced Data Poller
+        - QRadar Enhanced Data Update
     - Incident Fields:
         - qr_assigned
         - qr_credibility
@@ -93,6 +95,7 @@ def customization_data(client=None):
         - Create Artifact from Events info
         - Create Artifact from Flows info
         - Create Artifact from Source IP info
+        - Set Last Persisted Time to Case Creation time
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)

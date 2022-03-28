@@ -8,7 +8,6 @@
 from time import time
 from logging import getLogger
 from resilient_lib import validate_fields
-from fn_qradar_enhanced_data.util.qradar_utils import AuthInfo
 from fn_qradar_enhanced_data.util.qradar_constants import GLOBAL_SETTINGS
 import fn_qradar_enhanced_data.util.qradar_graphql_queries as qradar_graphql_queries
 from fn_qradar_enhanced_data.util.function_utils import clear_table, get_qradar_client, get_server_settings
@@ -71,15 +70,6 @@ class FunctionComponent(ResilientComponent):
 
                 offense_summary = qradar_client.graphql_query({"id": qradar_offenseid}, qradar_graphql_queries.GRAPHQL_OFFENSEQUERY)
                 results["offense"] = offense_summary["content"]
-
-            # Fetch the last_persisted_time of the Offesne if function type is offensetime
-            elif qradar_fn_type == "offensetime":
-                auth_info = AuthInfo.get_authInfo()
-                # Create url to get all offenses in SOAR from the given QRadar server
-                url = auth_info.api_url + "siem/offenses?fields={}&filter={}".format("id, last_persisted_time", "id={}".format(qradar_offenseid))
-                response = auth_info.make_call("GET", url)
-                for content in response.json():
-                    results["last_persisted_time"] = content["last_persisted_time"]
 
             # Fetch the Contributing Rules if function type is OFFENSE_RULES
             elif qradar_fn_type == "offenserules":

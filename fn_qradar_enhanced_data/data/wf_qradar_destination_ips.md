@@ -23,6 +23,9 @@ inputs.qradar_query_type = "destinationip"
 inputs.qradar_label = incident.properties.qradar_destination
 inputs.soar_incident_id = incident.id
 inputs.soar_table_name = "qr_top_destination_ips"
+
+if incident.properties.qr_last_persisted_time != incident.create_date:
+  inputs.qradar_search_param7 = "1 days"
 ```
 
 ### Post-Processing Script
@@ -57,6 +60,9 @@ inputs.qradar_query_type = "destinationip"
 inputs.qradar_label = incident.properties.qradar_destination
 inputs.soar_incident_id = incident.id
 inputs.soar_table_name = "qr_top_destination_ips"
+
+if incident.properties.qr_last_persisted_time != incident.create_date:
+  inputs.qradar_search_param7 = "1 days"
 ```
 
 ### Post-Processing Script

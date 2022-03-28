@@ -26,19 +26,20 @@ inputs.qradar_label = incident.properties.qradar_destination
 ### Post-Processing Script
 ```python
 link = "<a href=\"https://"+results.qrhost+"/console/ui/offenses/{0}{1}\" target=\"_blank\">{2}</a>"
-
+  
 incident.qr_offense_index_type = results.offense.offenseType.name
 incident.qr_offense_index_value = results.offense.offenseSource
 incident.qr_offense_source = results.offense.offenseSource
 incident.qr_source_ip_count = link.format(results.offenseid,"",results.offense.sourceCount)
 incident.qr_destination_ip_count = link.format(results.offenseid,"",results.offense.remoteDestinationCount+results.offense.localDestinationCount)
 incident.qr_event_count = link.format(results.offenseid,"/events?page=1&pagesize=10",results.offense.eventCount)
-incident.qr_flow_count = link.format(results.offenseid,"",results.offense.flowCount)
+incident.qr_flow_count =  link.format(results.offenseid,"",results.offense.flowCount)
 incident.qr_assigned = link.format("","?filter=status%3B%3D%3BOpen%3BOPEN&filter=assignedTo%3B%3D%3B%3B"+(results.offense.assignedTo if results.offense.assignedTo is not None else "")+"&page=1&pagesize=10",results.offense.assignedTo) if results.offense.assignedTo else "Unassigned"
 incident.qr_magnitude = link.format(results.offenseid,"",results.offense.magnitude)
 incident.qr_credibility = link.format(results.offenseid,"",results.offense.credibility)
 incident.qr_severity = link.format(results.offenseid,"",results.offense.severity)
 incident.qr_relevance = link.format(results.offenseid,"",results.offense.relevance)
+
 ```
 
 ---
