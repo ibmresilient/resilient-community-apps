@@ -8,7 +8,7 @@ import logging
 import os
 from threading import Thread
 from resilient_circuits import ResilientComponent
-from resilient_lib import validate_fields, RequestsCommon, make_payload_from_template
+from resilient_lib import validate_fields, RequestsCommon, make_payload_from_template, build_incident_url, build_resilient_url
 from resilient import get_client
 from fn_reaqta.lib.poller_common import SOARCommon, poller, get_template_dir
 from fn_reaqta.lib.app_common import AppCommon, PACKAGE_NAME, get_hive_options
@@ -228,6 +228,17 @@ class PollerComponent(ResilientComponent):
 
                     cases_insert += 1
                     LOG.info("Created SOAR case %s from %s %s", create_soar_case['id'], ENTITY_LABEL, entity_id)
+
+                    # build a url to the SOAR incident and update ReaQta with the note
+                    soar_link = build_incident_url(
+                        build_resilient_url(self.opts.get('host'), self.opts.get("port", 443)),
+                        soar_case_id)
+
+                    soar_link_markdown = "[SOAR Case]({})".format(soar_link)
+                    results, err_msg = app_common.create_note(
+                        entity_id,
+                        "{}\n\n{}".format(entity.get("notes"), soar_link_markdown)
+                    )
                 else:
                     soar_case_id = soar_case['id']
 

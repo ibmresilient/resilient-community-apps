@@ -52,7 +52,7 @@ else:
   incident.properties.reaqta_impact = content.get("impact")
   
   endpoint = content.get("endpoint", {})
-  incident.properties.reaqta_tags = ", ".join(endpoint.get("tags", []))
+  incident.properties.reaqta_tags = ", ".join(content.get("tags", []))
   incident.properties.reaqta_groups = ", ".join([ group.get("name") for group in endpoint.get("groups", []) ])
   incident.properties.reaqta_machine_info = "Machine Name: {}\nOS: {}\nDomain: {}\nCPU: {}"\
                           .format(endpoint.get('name'),
