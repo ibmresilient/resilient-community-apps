@@ -14,9 +14,13 @@ url=https://<jira url>
 auth_method=AUTH
 user=<jira user>
 password=<jira user password>
+# For OAUTH1 connections use the parameters below and leave user/password blank
+#access_token = <oauth access token>
+#access_token_secret = <oauth access token secret>
+#consumer_key_name = <oauth consumer key - from Jira incoming link settings>
+#private_rsa_key_file_path = <private RSA key matched with public key on Jira>
 timeout=10
 # data Table name to hold data for tasks synced to Jira
-# default is 'jira_task_references' but if using a custom value change here:
 jira_dt_name=jira_task_references 
 # use verify_cert to disable untrusted certificate verification
 verify_cert=True

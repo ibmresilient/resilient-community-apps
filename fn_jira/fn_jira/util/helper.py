@@ -11,7 +11,7 @@ from resilient_lib import (IntegrationError, MarkdownParser,
                            str_to_bool, validate_fields)
 
 CONFIG_DATA_SECTION = "fn_jira"
-SUPPORTED_AUTH_METHODS = ("AUTH", "BASIC")
+SUPPORTED_AUTH_METHODS = ("AUTH", "BASIC", "OAUTH")
 
 # Jira datatable constants
 DEFAULT_JIRA_DT_NAME = "jira_task_references" # can be overridden with app.config jira_dt_name value
@@ -43,8 +43,7 @@ def validate_app_configs(app_configs):
     """
     valid_app_configs = validate_fields([
         {"name": "url", "placeholder": "https://<jira url>"},
-        {"name": "user", "placeholder": "<jira user>"},
-        {"name": "password", "placeholder": "<jira user password>"},
+        {"name": "auth_method"},
         {"name": "verify_cert"}
     ], app_configs)
 
@@ -86,6 +85,33 @@ def get_jira_client(app_configs, rc):
     elif auth_method == SUPPORTED_AUTH_METHODS[1]:
         return JIRA(
             basic_auth=(app_configs.get("user"), app_configs.get("password")),
+            options={"server": server, "verify": verify},
+            proxies=proxies,
+            timeout=timeout,
+        )
+
+    elif auth_method == SUPPORTED_AUTH_METHODS[2]:
+        key_cert_data = None
+        try:
+            with open(app_configs.get("private_rsa_key_file_path", "r")) as private_rsa_key:
+                key_cert_data = private_rsa_key.read()
+        except FileNotFoundError as e:
+            raise IntegrationError("Private Key file not valid: {0}".format(str(e)))
+
+        oauth_dict = {
+            "access_token": app_configs.get("access_token"),
+            "access_token_secret": app_configs.get("access_token_secret"),
+            "consumer_key": app_configs.get("consumer_key_name"),
+            "key_cert": key_cert_data
+        }
+
+        # check for missing configs:
+        for key in oauth_dict:
+            if not oauth_dict[key]:
+                raise IntegrationError("app.config is missing {0} which is a required configration for auth_method={1}.".format(key, auth_method))
+
+        return JIRA(
+            oauth=oauth_dict,
             options={"server": server, "verify": verify},
             proxies=proxies,
             timeout=timeout,

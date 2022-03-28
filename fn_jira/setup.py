@@ -33,9 +33,10 @@ It also allows for the transitioning of Jira issues when the corresponding incid
 Example rules and workflows can used used or modified to meet your business processes.
 """,
     install_requires=[
-        'resilient_circuits>=32.0.0',
-        'resilient-lib>=38.0.0',
-        'jira>=2.0.0'
+        'resilient_circuits>=44.0.0',
+        'jira~=2.0',
+        'pyjwt~=2.3',
+        'cryptography~=36.0'
     ],
     packages=find_packages(),
     include_package_data=True,

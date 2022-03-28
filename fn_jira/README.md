@@ -22,6 +22,7 @@
   - [Requirements](#requirements)
   - [Install](#install)
   - [App Configuration](#app-configuration)
+  - [Configuring OAuth](#configuring-oauth)
   - [Custom Layouts](#custom-layouts)
 - [Function - Jira Transition Issue](#function---jira-transition-issue)
 - [Function - Jira Open Issue](#function---jira-open-issue)
@@ -37,6 +38,13 @@
   Specify all changes in this release. Do not remove the release 
   notes of a previous release
 -->
+### v2.1.0
+* Added support for authentication with OAuth
+  * Includes new configs: `access_token`, `access_token_secret`, `consumer_key_name`, `private_rsa_key_file_path`
+* Added support for sending SOAR task notes to Jira
+* Added support for images in notes synchronizing to Jira
+* Added config `jira_task_references` for custom datatables
+
 ### v2.0.0
 * Added App Host support
 * Added proxy support
@@ -120,14 +128,50 @@ The following table describes the settings you need to configure in the app.conf
 
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
-| **url** | Yes | `https://<jira url>` | The URL of your Jira platform |
-| **auth_method** | Yes | `AUTH` | The method of authentication to use when connecting to your Jira platform. Supported methods are `AUTH` and `BASIC`. For more information on authentication see: https://jira.readthedocs.io/en/latest/examples.html#authentication |
-| **user** | Yes | `<jira user>` | The username of the Jira account to use with this integration. They must be a user on the Jira platform with the correct permissions |
-| **password** | Yes | `<jira user password>` | The password for the Jira account to use with this integration |
-| **timeout** | No | `10` | The number of seconds to timeout after when making a request to the Jira platform |
-| **verify_cert** | No | `True` | A boolean value. Set to `True` if you want ti verify SSL certificates on each request |
-| **http_proxy** | No | `http://localhost:3128` |  Your HTTP Proxy |
-| **https_proxy** | No | `https://localhost:3128` |  Your HTTPS Proxy |
+| **url** | Yes | `https://<jira url>` | The URL of your Jira platform. |
+| **auth_method** | Yes | `AUTH` | The method of authentication to use when connecting to your Jira platform. Supported methods are `AUTH`, `BASIC`, and `OAUTH`. For more information on authentication see: https://jira.readthedocs.io/en/latest/examples.html#authentication |
+| **user** | Required for `AUTH` or `BASIC` | `<jira user>` | The username of the Jira account to use with this integration. They must be a user on the Jira platform with the correct permissions.  |
+| **password** | Required for `AUTH` or `BASIC` | `<jira user password>` | The password or API Key for the Jira account to use with this integration. |
+| **access_token** | Required for `OAUTH` | `<oauth access token>` | Access token created through Jira OAuth 1.0a 3LO. Details below. |
+| **access_token_secret** | Required for `OAUTH` | `<oauth access secret>` | Access token secret created through Jira OAuth 1.0a 3LO. Details below. |
+| **consumer_key_name** | Required for `OAUTH` | `<oauth consumer key>` | Consumer Key name created through Jira UI. Details below. |
+| **private_rsa_key_file_path** | Required for `OAUTH` | `/etc/jira_privatekey.pem` | Path to file containing private RSA key associated with the public key that was uploaded in the UI. Details below. |
+| **timeout** | No | `10` | The number of seconds to timeout after when making a request to the Jira platform. |
+| **jira_dt_name** | No | `jira_task_references` | The datatable in which to store the data for synced SOAR tasks. Default is `jira_task_references`. If using a custom Datatable, this table *must* include the `task_id`, `jira_issue_id_col`, and `jira_link` columns. |
+| **verify_cert** | No | `True` | A boolean value. Set to `True` if you want ti verify SSL certificates on each request. |
+| **http_proxy** | No | `http://localhost:3128` |  Your HTTP Proxy. |
+| **https_proxy** | No | `https://localhost:3128` |  Your HTTPS Proxy. |
+
+### Configuring OAuth
+OAuth authentication is supported with OAuth 1.0a protocol on Jira Server and Jira Cloud. This requires setting some configurations through the Jira UI followed by the 3 legged-dance described in the docs linked below. The main goal of this process is to generate a public and private RSA key, as well as a `access_token` and `access_token_secret`. Follow the steps at the appropriate links to setup the RSA keys and generate an access token. Then set the values as appropriate in your app.config. It is recommended to use App Host secrets to store the tokens if deploying on App Host.
+
+Follow the instructions at the appropriate link:
+
+* [OAuth on Jira Server](https://developer.atlassian.com/server/jira/platform/oauth/#step-1--configure-jira) (only step 1)
+* [OAuth 1.0a on Jira Cloud](https://developer.atlassian.com/cloud/jira/platform/jira-rest-api-oauth-authentication/#step-2--configure-the-client-application-as-an-oauth-consumer) (only step 2)
+
+> As of v2.1.0, this app only supports OAuth 1.0a authentication to Jira.
+
+Once you've completed the linked step above, you can continue with the rest of Jira's guide (in Java) or you can follow the Python steps below.
+> Note: these steps have been verified on Python 3.6. No matter the environment that you run the app in, it is recommended to run these steps with Python 3.6.
+
+1. Create a python environment on a machine that has internet access to your Jira server. Install `jira` in the python environment and the required associated dependencies
+
+    ```
+    $ pip install jira cryptography pyjwt
+    ```
+
+    This will also install the `jirashell` utility which will be used in the next step.
+
+1. Use the `jirashell` utility to preform the OAuth dance:
+
+    ```
+    $ jirashell --oauthdance --consumer-key <name_of_consumer_key_in_jira_ui> --key-cert <path_to_private_rsa_key> --print-tokens
+    ```
+
+    This will prompt you at a point to follow a link to sign-in and authorize the OAuth tokens. Click "Allow" and return to the shell. Type `y` and hit enter. The Access Token and Access Token Secret will be printed to your terminal. You can now exit the `jirashell` prompt.
+
+1. Use the token and secret printed to your terminal to provide access to Jira for this app. If running in App Host, it is recommended to enter the values of the tokens as secrets in the app's **Configuration** tab by clicking **Add Secret** and upload the private key as a file by clicking **New File**.
 
 ---
 
