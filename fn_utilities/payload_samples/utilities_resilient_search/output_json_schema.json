@@ -1,0 +1,143 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "results": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "match_highlights": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "match_field_name": {
+                  "type": "string"
+                },
+                "match_field_value": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "score": {
+            "type": "number"
+          },
+          "result": {
+            "type": "object",
+            "properties": {
+              "actions": {
+                "type": "array"
+              },
+              "content_type": {
+                "type": "string"
+              },
+              "created": {
+                "type": "integer"
+              },
+              "creator_id": {
+                "type": "object",
+                "properties": {
+                  "display_name": {
+                    "type": "string"
+                  },
+                  "id": {
+                    "type": "integer"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  }
+                }
+              },
+              "id": {
+                "type": "integer"
+              },
+              "inc_id": {
+                "type": "integer"
+              },
+              "inc_name": {
+                "type": "string"
+              },
+              "inc_owner": {
+                "type": "object",
+                "properties": {
+                  "display_name": {
+                    "type": "string"
+                  },
+                  "id": {
+                    "type": "integer"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  }
+                }
+              },
+              "name": {
+                "type": "string"
+              },
+              "size": {
+                "type": "integer"
+              },
+              "task_at_id": {},
+              "task_custom": {},
+              "task_id": {},
+              "task_members": {},
+              "task_name": {},
+              "type": {
+                "type": "string"
+              },
+              "uuid": {
+                "type": "string"
+              },
+              "vers": {
+                "type": "integer"
+              }
+            }
+          },
+          "type_id": {
+            "type": "string"
+          },
+          "org_id": {
+            "type": "integer"
+          },
+          "obj_id": {
+            "type": "integer"
+          },
+          "obj_name": {
+            "type": "string"
+          },
+          "obj_creator_id": {
+            "type": "integer"
+          },
+          "obj_create_date": {
+            "type": "integer"
+          },
+          "inc_id": {
+            "type": "integer"
+          },
+          "inc_name": {
+            "type": "string"
+          },
+          "inc_owner_id": {
+            "type": "integer"
+          },
+          "task_id": {},
+          "task_name": {},
+          "match_field_name": {
+            "type": "string"
+          },
+          "match_field_value": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
