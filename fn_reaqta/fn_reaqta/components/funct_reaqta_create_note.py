@@ -38,6 +38,7 @@ class FunctionComponent(AppFunctionComponent):
             app_common = AppCommon(self.rc, hive_settings)
 
             results, err_msg = app_common.create_note(fn_inputs.reaqta_alert_id, fn_inputs.reaqta_note)
+            results = { "note": results } if not err_msg else results
 
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
 

@@ -10,7 +10,9 @@ def config_section_data():
     """
 
     config_data = u"""[fn_reaqta]
+# time in seconds between poller runs
 polling_interval=60
+# time in minutes to lookback first time the poller runs or is restarted
 polling_lookback=120
 # comma separated list of hives to poll: poller_hives = hive_label1, hive_label2
 polling_hives=
@@ -34,9 +36,9 @@ reaqta_url=https://xxx/
 api_version=rqt-api/1/
 cafile=/path/to/cafile.crt or false
 #
-# set filters for the poller. Ex: "alertStatus": "malicious", "severity": ["medium", "high"], "tag": ["hive"]
+# set filters for the poller. Ex: "severity": ["medium", "high"], "tag": ["hive"]
 #   additional filtering can be done by groups and impact (greater or equal to numeric value):
-#      poller_filters="groups": ["groupA", "groupB"], "impact": 70
-#polling_filters="alertStatus": "benign", "severity": ["low", "high"], "tag": ["hive"]
+#      polling_filters="groups": ["groupA", "groupB"], "impact": 70
+#polling_filters="severity": ["low", "high"], "tag": ["hive"]
 """
     return config_data

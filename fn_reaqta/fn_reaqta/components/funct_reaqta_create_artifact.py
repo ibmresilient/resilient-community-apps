@@ -7,6 +7,8 @@ import ntpath
 from fn_reaqta.lib.app_common import AppCommon, PACKAGE_NAME, get_hive_options
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import validate_fields
+from resilient.co3 import SimpleHTTPException
+from retry import retry
 
 FN_NAME = "reaqta_create_artifact"
 
@@ -52,19 +54,26 @@ class FunctionComponent(AppFunctionComponent):
                 # collect the file name
                 file_name = ntpath.basename(fn_inputs.reaqta_program_path)
 
-                attachment_uri = "/incidents/{0}/artifacts/files".format(fn_inputs.reaqta_incident_id)
+                artifact_uri = "/incidents/{0}/artifacts/files".format(fn_inputs.reaqta_incident_id)
 
                 artifact_type = ARTIFACT_TYPE_LOOKUP.get(fn_inputs.reaqta_artifact_type, 12)
 
-                results = self.rest_client().post_artifact_file(attachment_uri,
-                                                            artifact_type,
-                                                            None,
-                                                            bytes_handle=file_contents,
-                                                            description="Extracted from ReaQta",
-                                                            value=file_name)
+                results = self.create_artifact(artifact_uri,
+                                               artifact_type,
+                                               file_contents,
+                                               file_name)
 
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
 
         yield FunctionResult(results,
                              success=True if results else False,
                              reason=err_msg)
+
+    @retry(SimpleHTTPException, tries=3, delay=2, backoff=1)
+    def create_artifact(self, artifact_uri, artifact_type, file_contents, file_name):
+        return self.rest_client().post_artifact_file(artifact_uri,
+                                                     artifact_type,
+                                                     None,
+                                                     bytes_handle=file_contents,
+                                                     description="Extracted from ReaQta",
+                                                     value=file_name)

@@ -33,7 +33,8 @@ setup(
     Additional functions exists to list and kill endpoint processes, isolate the endpiont and synchronize notes and close events.""",
     install_requires=[
         "resilient-circuits>=43.0.0",
-        "cachetools"
+        "cachetools ~= 2.1",
+        "retry2 ~= 0.9"
     ],
     python_requires='>=3.6',
     packages=find_packages(),

@@ -194,7 +194,7 @@ Repeat this section for each ReaQta hive. Add the `hive_label` used in the `poll
 | **api_secret** | Yes | `P9zPLkcb-...` | *API Key secret from your configured ReaQta API application*  |
 | **api_version** | Yes | `rqt_api/1/` | *URL path information ending in slash '/'*  |
 | **cafile** | Yes | `/path/to/cafile.crt or false` | *Path to your ReaQta client certificate, if needed or false for no certificate verification*  |
-| **polling_filters** | No | "alertStatus": "malicious", "severity": ["medium", "high"], "tag": ["hive"], "groups": ["groupA", "groupB"], "impact": 70 | *Set filters for the poller. Groups are either Client or Group names. Impact compares alerts greater or equal to this value* |
+| **polling_filters** | No | "severity": ["medium", "high"], "tag": ["hive"], "groups": ["groupA", "groupB"], "impact": 70 | *Set filters for the poller. Groups are either Client or Group names. Impact compares alerts greater or equal to this value* |
 
 ### Custom Layouts
 <!--

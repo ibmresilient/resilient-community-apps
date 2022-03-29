@@ -234,7 +234,7 @@ class PollerComponent(ResilientComponent):
                         build_resilient_url(self.opts.get('host'), self.opts.get("port", 443)),
                         soar_case_id)
 
-                    soar_link_markdown = "[SOAR Case]({})".format(soar_link)
+                    soar_link_markdown = "[SOAR Case - {}]({})".format(soar_case_id, soar_link)
                     results, err_msg = app_common.create_note(
                         entity_id,
                         "{}\n\n{}".format(entity.get("notes"), soar_link_markdown)
