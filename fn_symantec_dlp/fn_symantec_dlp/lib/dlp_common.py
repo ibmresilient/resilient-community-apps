@@ -12,7 +12,7 @@ import shutil
 import traceback
 
 from resilient_lib import IntegrationError, validate_fields, write_to_tmp_file, readable_datetime, str_to_bool
-from fn_symantec_dlp.lib.constants import FROM_SYMANTEC_DLP_COMMENT_HDR
+from fn_symantec_dlp.lib.constants import FROM_SYMANTEC_DLP_COMMENT_HDR, FROM_SOAR_COMMENT_HDR
 from .jinja_common import JinjaEnvironment
 
 LOG = logging.getLogger(__name__)
@@ -275,12 +275,13 @@ class SymantecDLPCommon():
             json : incident that was updated
         """
         url = u"{0}/incidents".format(self.base_url)
+        soar_note = u"{}:\n{}".format(FROM_SOAR_COMMENT_HDR, note_text)
         note_date_time = datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
         update_json = {
                         "incidentIds":[ incident_id ],
                         "incidentNotes":[{
                             "dateTime": note_date_time,
-                            "note": note_text
+                            "note": soar_note
                         }]
         }
         response = self.rc.execute("PATCH", url, headers=self.headers, json=update_json,
@@ -544,4 +545,3 @@ def get_module_name(module_path):
     Return the module name of the module path
     """
     return ntpath.split(module_path)[1].split(".")[0]
-    
