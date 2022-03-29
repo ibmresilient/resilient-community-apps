@@ -25,7 +25,7 @@ inputs.qradar_label = incident.properties.qradar_destination
 
 ### Post-Processing Script
 ```python
-incident.qr_last_persisted_time = results.last_persisted_time
+incident.qr_last_updated_time = results.last_persisted_time
 ```
 
 ---

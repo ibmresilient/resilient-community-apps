@@ -11,7 +11,7 @@
 `qradar_offense_summary`
 
 ### Output Name
-`None`
+``
 
 ### Message Destination
 `fn_qradar_enhanced_data`

@@ -93,7 +93,7 @@ class PollerComponent(ResilientComponent):
             # Add the case_id and case_lastPersistedTime fields to the qradar_id dictionary
             # that is inside of the QRadar servers dictionary
             if qradar_id not in case_server:
-                case_server[qradar_id] = {"case_id": case['id'], "case_lastPersistedTime": case["properties"]["qr_last_persisted_time"], "case_ver": case['vers']}
+                case_server[qradar_id] = {"case_id": case['id'], "case_lastPersistedTime": case["properties"]["qr_last_updated_time"], "case_ver": case['vers']}
         # :End: QRadar servers dictionary
 
         for server in case_server_dict:
@@ -136,7 +136,7 @@ class PollerComponent(ResilientComponent):
                                                 "changes": [ {
                                                     "old_value": { "date": case_lastPersistedTime },
                                                     "new_value": { "date": offense_lastPersistedTime },
-                                                    "field": { "name": "qr_last_persisted_time" }
+                                                    "field": { "name": "qr_last_updated_time" }
                                                 } ]
                                             },
             # If there are changes then fix payload and send put request to SOAR
@@ -153,4 +153,4 @@ class PollerComponent(ResilientComponent):
                 if response['failures']:
                     raise IntegrationError(str(response))
 
-                LOG.info("Incident: {} updated field: qr_last_persisted_time".format(str(updated_cases)))
+                LOG.info("Incident: {} updated field: qr_last_updated_time".format(str(updated_cases)))
