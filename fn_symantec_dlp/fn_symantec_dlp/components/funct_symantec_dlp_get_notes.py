@@ -58,6 +58,8 @@ class FunctionComponent(AppFunctionComponent):
 
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
 
-        results = {}
+        results = {"success": True,
+                   "new_notes": new_comments}
+                   
         yield FunctionResult(results)
 

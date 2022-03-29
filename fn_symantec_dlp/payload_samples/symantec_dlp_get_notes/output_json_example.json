@@ -2,17 +2,22 @@
   "version": 2.0,
   "success": true,
   "reason": null,
-  "content": {},
+  "content": {
+    "success": true,
+    "new_notes": [
+      "<b>From Symantec DLP (2022-03-27T12:37:33)</b>\n                        <br>\n                        User: Administrator\n                        <br>\n                        Note detail: <p>My note written in SOAR</p>\n                        ",
+     ]
+  },
   "raw": null,
   "inputs": {
-    "incident_id": 3597
+    "incident_id": 3595
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-symantec-dlp",
     "package_version": "2.0.0",
-    "host": "MacBook-Pro.local",
-    "execution_time_ms": 5567,
-    "timestamp": "2022-03-27 13:31:50"
+    "host": "MacBook-Pro",
+    "execution_time_ms": 45486,
+    "timestamp": "2022-03-28 13:38:15"
   }
 }

@@ -219,6 +219,7 @@ class ResilientCommon():
                     if sdlp_timestamp and (sdlp_timestamp == soar_timestamp):
                         # Match is found so remove from list of new comments to post.
                         new_comments.remove(comment)
+                        break
 
         return new_comments
 

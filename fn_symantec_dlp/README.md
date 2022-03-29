@@ -32,6 +32,7 @@
   - [Install](#install)
   - [App Configuration](#app-configuration)
 - [Function - Symantec DLP: Get Incident Details](#function---symantec-dlp-get-incident-details)
+- [Function - Symantec DLP: Get DLP Notes](#function---symantec-dlp-get-dlp-notes)
 - [Function - Symantec DLP: Send Note to DLP Incident](#function---symantec-dlp-send-note-to-dlp-incident)
 - [Function - Symantec DLP: Update Incident Status in DLP](#function---symantec-dlp-update-incident-status-in-dlp)
 - [Function - Symantec DLP: Upload Binaries](#function---symantec-dlp-upload-binaries)
@@ -538,6 +539,83 @@ json_note = {
             }
 
 workflow.addProperty('convert_json_to_rich_text', json_note)
+```
+
+</p>
+</details>
+
+---
+## Function - Symantec DLP: Get DLP Notes
+The get Symantec DLP notes and add to the corresponding SOAR case/incident.
+
+ ![screenshot: fn-symantec-dlp-get-dlp-notes ](./doc/screenshots/fn-symantec-dlp-get-dlp-notes.png) 
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `incident_id` | `number` | Yes | `-` | the id of the incident |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
+```python
+results = {
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "success": true,
+    "sdlp_incident_id": 468,
+    "sdlp_incident_status": "Resolved"
+  },
+  "raw": null,
+  "inputs": {
+    "incident_id": 3449,
+    "sdlp_incident_status": "Resolved"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-symantec-dlp",
+    "package_version": "2.0.0",
+    "host": "MacBook-Pro.local",
+    "execution_time_ms": 16146,
+    "timestamp": "2022-03-03 10:53:44"
+  }
+} 
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.incident_id = incident.id
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+if results.success:
+  content = results.get("content")
+  number_dlp_notes = len(content.get("new_notes"))
+else:
+  number_dlp_notes = 0
+  
+note_text = u"<b>Symantec DLP: Get DLP Notes</b> added {0} to SOAR case".format(number_dlp_notes)
+incident.addNote(note_text)
 ```
 
 </p>

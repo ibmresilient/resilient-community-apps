@@ -10,7 +10,18 @@
     },
     "reason": {},
     "content": {
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "new_notes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
     },
     "raw": {},
     "inputs": {
