@@ -41,7 +41,7 @@
 ### v2.1.0
 * Added support for authentication with OAuth
   * Includes new configs: `access_token`, `access_token_secret`, `consumer_key_name`, `private_rsa_key_file_path`
-* Added support for sending SOAR task notes to Jira
+* Added support for sending SOAR task notes to Jira -- see updated example workflow
 * Added support for images in notes synchronizing to Jira
 * Added config `jira_task_references` for custom datatables
 
@@ -158,7 +158,7 @@ Once you've completed the linked step above, you can continue with the rest of J
 1. Create a python environment on a machine that has internet access to your Jira server. Install `jira` in the python environment and the required associated dependencies
 
     ```
-    $ pip install jira cryptography pyjwt
+    $ pip install jira cryptography pyjwt IPython
     ```
 
     This will also install the `jirashell` utility which will be used in the next step.
@@ -746,10 +746,16 @@ results = {
   <p>
 
   ```python
-  # Example: Jira Create Comment pre-processing script
+# Example: Jira Create Comment pre-processing script
 
 inputs.jira_issue_id = incident.properties.jira_issue_id
 inputs.jira_comment = note.text.content
+inputs.incident_id = incident.id
+
+# If this is a task note, get the taskId
+if note.type == 'task':
+    # Set the task_id
+    inputs.task_id = task.id
   ```
 
   </p>
@@ -759,18 +765,22 @@ inputs.jira_comment = note.text.content
   <p>
 
   ```python
-  # Example: Jira Create Comment post-process script
+# Example: Jira Create Comment post-process script
 
 # Import Date
 from java.util import Date
 
-# Get the current time
-dt_now = Date()
-
-issue_id = results.get("inputs", {}).get("jira_issue_id")
-
-# Prepend message and time to the note
-note.text = u"<b>Sent to the Jira issue {0} at {1}</b><br>{2}".format(issue_id, dt_now, unicode(note.text.content))
+if results.success:
+    # Get the current time
+    dt_now = Date()
+    
+    if results.get("content", {}).get("jira_url"):
+        jira_url = results.get("content", {}).get("jira_url")
+    else:
+        jira_url = incident.properties.jira_url.content
+    
+    # Prepend message and time to the note
+    note.text = u"<b>Sent to the Jira issue {0} at {1}</b><br>{2}".format(jira_url, dt_now, unicode(note.text.content))
   ```
 
   </p>

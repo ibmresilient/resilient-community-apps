@@ -93,7 +93,7 @@ def get_jira_client(app_configs, rc):
     elif auth_method == SUPPORTED_AUTH_METHODS[2]:
         key_cert_data = None
         try:
-            with open(app_configs.get("private_rsa_key_file_path", "r")) as private_rsa_key:
+            with open(app_configs.get("private_rsa_key_file_path"), "r") as private_rsa_key:
                 key_cert_data = private_rsa_key.read()
         except FileNotFoundError as e:
             raise IntegrationError("Private Key file not valid: {0}".format(str(e)))
