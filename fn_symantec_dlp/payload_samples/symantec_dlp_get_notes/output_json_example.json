@@ -5,7 +5,7 @@
   "content": {
     "success": true,
     "new_notes": [
-      "<b>From Symantec DLP (2022-03-27T12:37:33)</b>\n                        <br>\n                        User: Administrator\n                        <br>\n                        Note detail: <p>My note written in SOAR</p>\n                        ",
+      "<b>From Symantec DLP (2022-03-27T12:37:33)</b>User: Administrator\nNote detail: <p>My note written in SOAR</p>"
      ]
   },
   "raw": null,
