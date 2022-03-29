@@ -45,8 +45,6 @@ if not results.success:
   incident.addNote("ReaQta: Get Alert Information failed: {}".format(results.reason))
 else:
   content = results.content
-  alert_url = '<a href="{0}" target="blank">{0}</a>'.format(content.get("alert_url"))
-  incident.properties.reaqta_alert_link = helper.createRichText(alert_url)
   incident.properties.reaqta_endpoint_id = content.get("endpointId")
   incident.properties.reaqta_trigger_condition = TRIGGERCONDITION_LOOKUP.get(content.get("triggerCondition"))
   incident.properties.reaqta_impact = content.get("impact")
