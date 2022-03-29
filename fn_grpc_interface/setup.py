@@ -32,9 +32,13 @@ setup(
     long_description="""This Function provides a general wrapper that allows you to call gRPC services from within IBM Resilient,
                     making it easier for you create distributed application and services with IBM Resilient.""",
     install_requires=[
-        'resilient_circuits>=30.0.0',
-        'grpcio==1.44.0',
-        'grpcio-tools==1.44.0'
+        "resilient_circuits>=30.0.0",
+
+        "grpcio ~= 1.41;python_version<'3.6'",
+        "grpcio == 1.44.0;python_version>='3.6'",
+
+        "grpcio-tools ~= 1.41;python_version<'3.6'",
+        "grpcio-tools == 1.44.0;python_version>='3.6'"
     ],
     packages=find_packages(),
     include_package_data=True,
