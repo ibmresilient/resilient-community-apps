@@ -23,7 +23,7 @@ def snake_to_camel(word):
 
 setup(
     name='fn_grpc_interface',
-    version='1.1.0',
+    version='1.1.1',
     license='MIT',
     author='IBM SOAR',
     author_email='',
@@ -33,8 +33,8 @@ setup(
                     making it easier for you create distributed application and services with IBM Resilient.""",
     install_requires=[
         'resilient_circuits>=30.0.0',
-        'grpcio>=1.19.0',
-        'grpcio-tools>=1.19.0'
+        'grpcio==1.44.0',
+        'grpcio-tools==1.44.0'
     ],
     packages=find_packages(),
     include_package_data=True,
