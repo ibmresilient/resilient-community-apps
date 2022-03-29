@@ -3,6 +3,7 @@
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 from difflib import restore
 import os
+import ntpath
 import datetime
 import logging
 import base64
@@ -433,12 +434,15 @@ class SymantecDLPCommon():
                 
                 # Post the file as an artifact
                 artifact_uri = "/incidents/{}/artifacts/files".format(soar_case_id)
+                binary_filepath = component.get('name')
+                binary_filename = get_module_name(binary_filepath)
+                description = u"Binary File imported from Symantec DLP:\n {0}".format(binary_filepath)
                 soar_rest_client.post_artifact_file(artifact_uri,
                                                     artifact_type_id,
                                                     path_tmp_file,
-                                                    value=component.get('name'),
-                                                    description="Binary File imported from Symantec DLP")
-                artifact_name_list.append(component.get('name'))
+                                                    value=binary_filename,
+                                                    description=description)
+                artifact_name_list.append(binary_filename)
 
             except Exception as upload_ex:
                 LOG.debug(traceback.format_exc())
@@ -470,6 +474,7 @@ class SymantecDLPCommon():
 
         # Add the link back to the Symantec DLP incident URL
         sdlp_payload['sdlp_incident_url'] = self.get_sdlp_incident_url(incident_id)
+        LOG.debug(sdlp_payload)
         return sdlp_payload
 
     def get_sdlp_incident_editable_detail_payload(self, incident_id):
@@ -533,3 +538,10 @@ def callback(response):
         content = ""
 
     return content, error_msg
+
+def get_module_name(module_path):
+    """
+    Return the module name of the module path
+    """
+    return ntpath.split(module_path)[1].split(".")[0]
+    
