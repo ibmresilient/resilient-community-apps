@@ -547,6 +547,9 @@ workflow.addProperty('convert_json_to_rich_text', json_note)
 ---
 ## Function - Symantec DLP: Get DLP Notes
 The get Symantec DLP notes and add to the corresponding SOAR case/incident.
+<p>
+
+**NOTE:** Notes that are sent to DLP from SOAR that contain the header text **From IBM SOAR** will not be brought into SOAR Notes to avoid duplication of notes.
 
  ![screenshot: fn-symantec-dlp-get-dlp-notes ](./doc/screenshots/fn-symantec-dlp-get-dlp-notes.png) 
 
@@ -625,7 +628,7 @@ incident.addNote(note_text)
 ## Function - Symantec DLP: Send Note to DLP Incident
 Send a case note from SOAR to the corresponding Symantec DLP incident.
 
- ![screenshot: fn-symantec-dlp-send-note-to-dlp-incident ](./doc/screenshots/fn-symantec-dlp-send-note-to-dlp-incident.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-symantec-dlp-send-note-to-dlp-incident ](./doc/screenshots/fn-symantec-dlp-send-note-to-dlp-incident.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -1168,8 +1171,13 @@ does not include.
 {%- set comma = joiner(",") -%}
     "name": "Symantec DLP Incident Id {{ staticIncidentDetails.incidentId }}",
     "description": "An incident imported using the Symantec DLP Integration",
-    "discovered_date": {{ staticIncidentDetails.infoMap.creationDate|soar_datetimeformat }},
-    "start_date": {{ staticIncidentDetails.infoMap.detectionDate|soar_datetimeformat }},
+    {% if staticIncidentDetails.infoMap.creationDate|soar_datetimeformat > staticIncidentDetails.infoMap.detectionDate|soar_datetimeformat %}
+      "discovered_date": {{ staticIncidentDetails.infoMap.creationDate|soar_datetimeformat }},
+      "start_date": {{ staticIncidentDetails.infoMap.detectionDate|soar_datetimeformat }},
+    {% else %}
+      "discovered_date": {{ staticIncidentDetails.infoMap.detectionDate|soar_datetimeformat }},
+      "start_date": {{ staticIncidentDetails.infoMap.creationDate|soar_datetimeformat }},
+    {% endif %}
     "incident_type_ids": [16],
     "severity_code": "{{ editableIncidentDetails.infoMap.severityId|string|soar_substitute('{"1": "High", "2": "Medium", "3": "Low", "4": "Low"}')}}",
 
@@ -1259,13 +1267,17 @@ does not include.
 <details><summary>incident_close_template</summary>
 <pre>
 {
- {# JINJA template for closing a new SOAR case from a Symantec DLP incident. #}
+  {# JINJA template for closing a SOAR case from a Symantec DLP incident. #}
   "plan_status": "C",
   "resolution_id": "Resolved",
-  "resolution_summary": "Closed from Symantec DLP."
+  "resolution_summary": {
+    "format": "text",
+    "content": "Symantec DLP Incident closed from IBM SOAR."
+  },
   {# additional fields may be needed. Add as necessary #}
-  {# "properties": { } #}
-}
+  "properties": { 
+      "sdlp_incident_status": "{{ "Resolved" }}"
+  }
 </pre>
 </details>
 <details><summary>incident_update_template</summary>

@@ -1,0 +1,20 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "success": true
+  },
+  "raw": null,
+  "inputs": {
+    "incident_id": 3601
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-symantec-dlp",
+    "package_version": "2.0.0",
+    "host": "MacBook-Pro.local",
+    "execution_time_ms": 10029,
+    "timestamp": "2022-03-29 15:02:42"
+  }
+}
