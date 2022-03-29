@@ -1,13 +1,13 @@
 {
-    "distances": {
-      "soarsystems.com": 6,
-      "ibmcloud.com": 11,
-      "ibm.com": 9,
-      "bluemix.com": 9
-    },
-    "domain_name": "ressystems.com",
-    "closest": {
-      "distance": 6,
-      "name": "soarsystems.com"
-    }
+  "domain_name": "@fds$gfe^",
+  "distances": {
+    "ibm.com": 9,
+    "resilientsystems.com": 20,
+    "ibmcloud.com": 14,
+    "bluemix.com": 13
+  },
+  "closest": {
+    "name": "ibm.com",
+    "distance": 9
+  }
 }

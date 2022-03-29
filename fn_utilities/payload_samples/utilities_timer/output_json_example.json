@@ -1,25 +1,25 @@
 {
-    "inputs": {
-      "utilities_epoch": 1563446488000
-    },
-    "metrics": {
-      "package": "fn-utilities",
-      "timestamp": "2019-07-18 11:41:27",
-      "package_version": "1.0.10",
-      "host": "xxx.ibm.com",
-      "version": "1.0",
-      "execution_time_ms": 105319
-    },
-    "success": false,
-    "content": {
-      "status": "running",
-      "end_date": null,
-      "is_terminated": false,
-      "instance_id": 33,
-      "reason": null,
-      "start_date": 1563446381032
-    },
-    "raw": "{'status': 'running', 'end_date': null, 'is_terminated': false, 'instance_id': 33, 'reason': null, 'start_date': 1563446381032}",
+  "version": "1.0",
+  "success": false,
+  "reason": null,
+  "content": {
+    "instance_id": 124,
+    "status": "running",
+    "start_date": 1648133974233,
+    "end_date": null,
     "reason": null,
-    "version": "1.0"
+    "is_terminated": false
+  },
+  "raw": "{\"instance_id\": 124, \"status\": \"running\", \"start_date\": 1648133974233, \"end_date\": null, \"reason\": null, \"is_terminated\": false}",
+  "inputs": {
+    "utilities_time": "1m"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-utilities",
+    "package_version": "2.1.0",
+    "host": "local",
+    "execution_time_ms": 60921,
+    "timestamp": "2022-03-24 11:15:53"
   }
+}
